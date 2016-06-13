@@ -1,0 +1,281 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1027" measuredH="1311" mockupW="857" mockupH="1292">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="170" y="19" w="857" h="1292" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>HPFB%20Dossier%0Ahttp%3A//www.hpfb.ca/en/EnrolDossier.html</text>
+      </controlProperties>
+    </control>
+    <control controlID="148" controlTypeID="com.balsamiq.mockups::TabBar" x="177" y="157" w="843" h="1111" measuredW="588" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>enrolDossier2%26bm%3BenrolDossier2.bmml%26bm%3BenrolDossier2.bmml%26bm%3BenrolDossier2.bmml%2C%2CenrolDossierFormulation%26bm%3BenrolDossierFormulation.bmml%26bm%3BenrolDossierFormulation.bmml%26bm%3BenrolDossierFormulation.bmml%2CformulationDetails_consolidated%26bm%3BformulationDetails_consolidated.bmml%26bm%3BformulationDetails_consolidated.bmml%26bm%3BformulationDetails_consolidated.bmml%2CenrolDossierContainer%26bm%3BenrolDossierContainer.bmml%26bm%3BenrolDossierContainer.bmml%26bm%3BenrolDossierContainer.bmml%2CenrolDossierROA%26bm%3BenrolDossierROA.bmml%26bm%3BenrolDossierROA.bmml%26bm%3BenrolDossierROA.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2227%2C138%2C90%2C184%22%20href%3D%22enrolDossier2.bmml%22%20alt%3D%22enrolDossier2%22%20id%3D%22148_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22175%2C138%2C272%2C184%22%20href%3D%22enrolDossierFormulation.bmml%22%20alt%3D%22enrolDossierFormulation%22%20id%3D%22148_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22272%2C138%2C410%2C184%22%20href%3D%22formulationDetails_consolidated.bmml%22%20alt%3D%22formulationDetails_consolidated%22%20id%3D%22148_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22410%2C138%2C487%2C184%22%20href%3D%22enrolDossierContainer.bmml%22%20alt%3D%22enrolDossierContainer%22%20id%3D%22148_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22487%2C138%2C581%2C184%22%20href%3D%22enrolDossierROA.bmml%22%20alt%3D%22enrolDossierROA%22%20id%3D%22148_4%22/%3E%0A</map>
+        <selectedIndex>1</selectedIndex>
+        <text>Drug%20%5CrProduct%2CIngredients%2CFormulations%2C%20Formulation%20Details%2CContainer%2CCountry%20of%5CrManufacture</text>
+      </controlProperties>
+    </control>
+    <control controlID="155" controlTypeID="com.balsamiq.mockups::Label" x="185" y="118" w="737" h="27" measuredW="633" measuredH="24" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Health%20Products%20and%20Food%20Branch%20Regulatory%20Enrolment%20Process.%20Pharmaceutical%20Dossier%20Enrolment</text>
+      </controlProperties>
+    </control>
+    <control controlID="160" controlTypeID="com.balsamiq.mockups::Button" x="872" y="1219" w="110" h="26" measuredW="90" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save%20Draft</text>
+      </controlProperties>
+    </control>
+    <control controlID="193" controlTypeID="com.balsamiq.mockups::Button" x="466" y="483" w="201" h="26" measuredW="194" measuredH="27" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Delete%20Selected%20Ingredient</text>
+      </controlProperties>
+    </control>
+    <control controlID="195" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="185" y="91" w="-1" h="-1" measuredW="209" measuredH="27" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2Cproduct_line%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2274%2C73%2C163%2C97%22%20href%3D%22product_line.bmml%22%20alt%3D%22product_line%22%20id%3D%22195_0%22/%3E%0A</map>
+        <text>Home%2CProduct%20Line%2CDossier</text>
+      </controlProperties>
+    </control>
+    <control controlID="201" controlTypeID="com.balsamiq.mockups::DataGrid" x="226" y="270" w="607" h="207" measuredW="603" measuredH="116" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>1</selectedIndex>
+        <text>Ingredient%20Name%20%5E%2C%20Role%20%5E%2C%20CAS%2C%20Human%20or%20Animal%20Sourced%3F%0AWater%2C%20Non-Medicinal%20Ingredient%2C%20%207732-18-5%2C%20No%0AIngred%202%2C%20Active%2C%2CYes%0A%20%0A%7B65L%2C%2045L%2C%2025%2C%2055%7D</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="202" controlTypeID="com.balsamiq.mockups::TextArea" x="222" y="518" w="611" h="30" measuredW="200" measuredH="140" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ingred%202</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="203" controlTypeID="com.balsamiq.mockups::Label" x="222" y="498" w="152" h="22" measuredW="112" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ingredient%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="204" controlTypeID="__group__" x="455" y="563" w="223" h="50" measuredW="223" measuredH="50" zOrder="7" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextArea" x="0" y="20" w="223" h="30" measuredW="200" measuredH="140" zOrder="0" locked="false" isInGroup="204">
+          <controlProperties>
+            <text/>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="223" h="22" measuredW="229" measuredH="24" zOrder="1" locked="false" isInGroup="204">
+          <controlProperties>
+            <text>Chemical%20Services%20Abstract%20Number</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="205" controlTypeID="__group__" x="747" y="566" w="86" h="45" measuredW="86" measuredH="45" zOrder="8" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::TextArea" x="0" y="18" w="86" h="27" measuredW="200" measuredH="140" zOrder="0" locked="false" isInGroup="205">
+          <controlProperties>
+            <text/>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="86" h="20" measuredW="64" measuredH="24" zOrder="1" locked="false" isInGroup="205">
+          <controlProperties>
+            <text>Standard</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="206" controlTypeID="__group__" x="440" y="668" w="211" h="46" measuredW="211" measuredH="46" zOrder="9" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="203" h="20" measuredW="181" measuredH="24" zOrder="0" locked="false" isInGroup="206">
+          <controlProperties>
+            <text>Animal%20or%20Human%20Sourced%3F</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="20" w="211" h="-1" measuredW="55" measuredH="26" zOrder="1" locked="false" isInGroup="206">
+          <controlProperties>
+            <state>closed</state>
+            <text>Yes%0ANo</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="207" controlTypeID="__group__" x="218" y="668" w="203" h="46" measuredW="203" measuredH="46" zOrder="10" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="203" h="20" measuredW="125" measuredH="24" zOrder="0" locked="false" isInGroup="207">
+          <controlProperties>
+            <text>Is%20a%20NanoMaterial%3F</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="20" w="203" h="-1" measuredW="155" measuredH="26" zOrder="1" locked="false" isInGroup="207">
+          <controlProperties>
+            <text>Not%20a%20Nanomaterial</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="208" controlTypeID="__group__" x="218" y="566" w="203" h="92" measuredW="203" measuredH="92" zOrder="11" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="203" h="20" measuredW="104" measuredH="24" zOrder="0" locked="false" isInGroup="208">
+          <controlProperties>
+            <text>Ingredient%20Role</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="20" w="203" h="-1" measuredW="71" measuredH="72" zOrder="1" locked="false" isInGroup="208">
+          <controlProperties>
+            <text>Active%0ANon-Medicinal%20Ingredient%0AMaterial%20used%20in%20Manufacture</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="209" controlTypeID="__group__" x="210" y="748" w="751" h="442" measuredW="751" measuredH="442" zOrder="12" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="743" h="22" measuredW="289" measuredH="23" zOrder="0" locked="false" isInGroup="209">
+          <controlProperties>
+            <bold>true</bold>
+            <text>Animal%20and%20/%20or%20Human%20sourced%20Ingredients</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="8" y="31" w="286" h="27" measuredW="286" measuredH="27" zOrder="1" locked="false" isInGroup="209">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="103" y="0" w="75" h="27" measuredW="72" measuredH="25" zOrder="0" locked="false" isInGroup="1">
+              <controlProperties>
+                <state>selected</state>
+                <text>Human</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::CheckBox" x="178" y="0" w="108" h="27" measuredW="72" measuredH="25" zOrder="1" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Animal</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="2" w="97" h="22" measuredW="102" measuredH="24" zOrder="2" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Sourced%20From%3A%20</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="118" w="193" h="27" measuredW="125" measuredH="25" zOrder="2" locked="false" isInGroup="209">
+          <controlProperties>
+            <state>selected</state>
+            <text>Nervous%20System</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="8" y="95" w="743" h="22" measuredW="178" measuredH="23" zOrder="3" locked="false" isInGroup="209">
+          <controlProperties>
+            <bold>true</bold>
+            <text>Tissues%20or%20Fluids%20of%20Origin</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="266" w="301" h="27" measuredW="240" measuredH="25" zOrder="4" locked="false" isInGroup="209">
+          <controlProperties>
+            <text>Reproductive%20and%20Urinary%20Systems</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="301" w="249" h="27" measuredW="196" measuredH="25" zOrder="5" locked="false" isInGroup="209">
+          <controlProperties>
+            <text>Cardio-Respiratory%20Systems</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="382" w="329" h="27" measuredW="182" measuredH="25" zOrder="6" locked="false" isInGroup="209">
+          <controlProperties>
+            <text>Musculo-Skeletal%20System</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="355" w="301" h="27" measuredW="202" measuredH="25" zOrder="7" locked="false" isInGroup="209">
+          <controlProperties>
+            <text>Skin%20and%20Glandular%20Systems</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="415" w="193" h="27" measuredW="168" measuredH="25" zOrder="8" locked="false" isInGroup="209">
+          <controlProperties>
+            <text>Other%20Tissues%20or%20Fluids</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::CheckBox" x="15" y="328" w="193" h="27" measuredW="132" measuredH="25" zOrder="9" locked="false" isInGroup="209">
+          <controlProperties>
+            <text>Immune%20%20System</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="__group__" x="23" y="153" w="635" h="27" measuredW="635" measuredH="27" zOrder="10" locked="false" isInGroup="209">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="56" h="27" measuredW="58" measuredH="25" zOrder="0" locked="false" isInGroup="10">
+              <controlProperties>
+                <state>selected</state>
+                <text>brain</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::CheckBox" x="97" y="0" w="88" h="27" measuredW="92" measuredH="25" zOrder="1" locked="false" isInGroup="10">
+              <controlProperties>
+                <state>selected</state>
+                <text>brain%20stem</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::CheckBox" x="203" y="0" w="90" h="27" measuredW="97" measuredH="25" zOrder="2" locked="false" isInGroup="10">
+              <controlProperties>
+                <state>up</state>
+                <text>cerebellum</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::CheckBox" x="348" y="0" w="130" h="27" measuredW="142" measuredH="25" zOrder="3" locked="false" isInGroup="10">
+              <controlProperties>
+                <state>up</state>
+                <text>cerebrospinal%20fluid</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::CheckBox" x="500" y="0" w="135" h="27" measuredW="144" measuredH="25" zOrder="4" locked="false" isInGroup="10">
+              <controlProperties>
+                <state>up</state>
+                <text>dorsal%20root%20ganglia</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="11" controlTypeID="__group__" x="23" y="187" w="630" h="32" measuredW="630" measuredH="32" zOrder="11" locked="false" isInGroup="209">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="88" h="32" measuredW="94" measuredH="25" zOrder="0" locked="false" isInGroup="11">
+              <controlProperties>
+                <state>up</state>
+                <text>dura%20mater</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::CheckBox" x="97" y="0" w="100" h="32" measuredW="106" measuredH="25" zOrder="1" locked="false" isInGroup="11">
+              <controlProperties>
+                <state>selected</state>
+                <text>hypothalmus</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::CheckBox" x="202" y="0" w="131" h="32" measuredW="144" measuredH="25" zOrder="2" locked="false" isInGroup="11">
+              <controlProperties>
+                <state>up</state>
+                <text>retina%20/%20optic%20nerve</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::CheckBox" x="348" y="0" w="89" h="32" measuredW="94" measuredH="25" zOrder="3" locked="false" isInGroup="11">
+              <controlProperties>
+                <state>up</state>
+                <text>spinal%20cord</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::CheckBox" x="500" y="0" w="130" h="32" measuredW="146" measuredH="25" zOrder="4" locked="false" isInGroup="11">
+              <controlProperties>
+                <state>up</state>
+                <text>trigerminal%20ganglia</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::CheckBox" x="23" y="219" w="152" h="32" measuredW="58" measuredH="25" zOrder="12" locked="false" isInGroup="209">
+          <controlProperties>
+            <state>up</state>
+            <text>other</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="210" controlTypeID="com.balsamiq.mockups::Button" x="678" y="483" w="155" h="27" measuredW="118" measuredH="27" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add%20Ingredient</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

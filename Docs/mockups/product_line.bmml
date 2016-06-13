@@ -1,0 +1,72 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="955" measuredH="515" mockupW="923" mockupH="498">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="32" y="17" w="923" h="498" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www.hpfb.ca/en/type.html</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="107" y="105" w="413" h="48" measuredW="383" measuredH="22" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Health%20Products%20and%20Food%20Branch%20Regulatory%20Enrolment%20Process</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="118" y="191" w="-1" h="-1" measuredW="232" measuredH="66" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28o%29%20Pharmaceutical%20or%20Biologic%20Product%0A%28%20%29%20Medical%20Device%0A%28%29%20Drug%20Master%20File</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="107" y="174" w="413" h="28" measuredW="384" measuredH="22" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20the%20product%20line%20you%20want%20to%20create%20or%20modift%20an%20enrolment%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="__group__" x="107" y="263" w="414" h="216" measuredW="414" measuredH="216" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Link" x="0" y="76" w="-1" h="-1" measuredW="180" measuredH="22" zOrder="0" locked="false" isInGroup="14">
+          <controlProperties>
+            <href>intiationDossier%26bm%3BintiationDossier.bmml%26bm%3BintiationDossier.bmml%26bm%3BintiationDossier.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2275%2C322%2C255%2C344%22%20href%3D%22intiationDossier.bmml%22%20alt%3D%22intiationDossier%22%20id%3D%220%22/%3E</map>
+            <text>Dossier%20Information%20Enrolment</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Link" x="0" y="43" w="-1" h="-1" measuredW="191" measuredH="22" zOrder="1" locked="false" isInGroup="14">
+          <controlProperties>
+            <href>initateCompany%26bm%3BinitateCompany.bmml%26bm%3BinitateCompany.bmml%26bm%3BinitateCompany.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2275%2C289%2C266%2C311%22%20href%3D%22initateCompany.bmml%22%20alt%3D%22initateCompany%22%20id%3D%221%22/%3E</map>
+            <text>Company%20Information%20Enrolment</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="1" y="0" w="413" h="28" measuredW="112" measuredH="22" zOrder="2" locked="false" isInGroup="14">
+          <controlProperties>
+            <bold>true</bold>
+            <text>Enrolment%20Types</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Link" x="0" y="106" w="-1" h="-1" measuredW="244" measuredH="22" zOrder="3" locked="false" isInGroup="14">
+          <controlProperties>
+            <href>initiateRegulatoryActivity%26bm%3BinitiateRegulatoryActivity.bmml%26bm%3BinitiateRegulatoryActivity.bmml%26bm%3BinitiateRegulatoryActivity.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2275%2C352%2C319%2C374%22%20href%3D%22initiateRegulatoryActivity.bmml%22%20alt%3D%22initiateRegulatoryActivity%22%20id%3D%223%22/%3E</map>
+            <text>Regulatory%20Activity%20Information%20Enrolment</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Link" x="0" y="135" w="-1" h="-1" measuredW="202" measuredH="22" zOrder="4" locked="false" isInGroup="14">
+          <controlProperties>
+            <href>initiateTransaction2%26bm%3BinitiateTransaction2.bmml%26bm%3BinitiateTransaction2.bmml%26bm%3BinitiateTransaction2.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2275%2C381%2C277%2C403%22%20href%3D%22initiateTransaction2.bmml%22%20alt%3D%22initiateTransaction2%22%20id%3D%224%22/%3E</map>
+            <text>Regulatory%20Transaction%20Enrolment</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="0" y="168" w="413" h="48" measuredW="788" measuredH="22" zOrder="5" locked="false" isInGroup="14">
+          <controlProperties>
+            <text>Note%3A%20To%20complete%20a%20Regulatory%20Transaction%2C%20you%20need%20to%20a%20have%20HPFB%20approved%20Dossier%2C%20Company%2C%20and%20Regulatory%20Activity%20XML%20Files%20</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Link" x="854" y="105" w="-1" h="-1" measuredW="56" measuredH="22" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Fran%E7ais</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

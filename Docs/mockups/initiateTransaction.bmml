@@ -1,0 +1,108 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1005" measuredH="1165" mockupW="854" mockupH="1152">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="151" y="13" w="854" h="1152" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www.hpfb.ca/en/regulatoryActivity.html</text>
+      </controlProperties>
+    </control>
+    <control controlID="35" controlTypeID="com.balsamiq.mockups::Button" x="796" y="1090" w="182" h="26" measuredW="161" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>enrolTransaction%26bm%3BenrolTransaction.bmml%26bm%3BenrolTransaction.bmml%26bm%3BenrolTransaction.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22645%2C1077%2C827%2C1103%22%20href%3D%22enrolTransaction.bmml%22%20alt%3D%22enrolTransaction%22%20id%3D%2235%22/%3E</map>
+        <text>Proceeed%20to%20Step%202%20of%203</text>
+      </controlProperties>
+    </control>
+    <control controlID="37" controlTypeID="com.balsamiq.mockups::RadioButtonGroup" x="173" y="237" w="281" h="57" measuredW="273" measuredH="44" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%28%29%20The%20transaction%20is%20an%20%20initial%20sequence%0A%28o%29%20The%20transaction%20is%20a%20subsequent%20sequence</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Label" x="173" y="117" w="402" h="50" measuredW="713" measuredH="22" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Health%20Products%20and%20Food%20Branch%20Regulatory%20Enrolment%20Process%20Step%201%3A%20Intiate%20Pharmaceuatical%20Regulatory%20Transactions</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="173" y="85" w="-1" h="-1" measuredW="287" measuredH="25" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2Cproduct_line%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2277%2C73%2C159%2C95%22%20href%3D%22product_line.bmml%22%20alt%3D%22product_line%22%20id%3D%2259_0%22/%3E%0A</map>
+        <text>Home%2CProduct%20Line%2CRegulatory%20Transaction</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="__group__" x="165" y="437" w="762" h="186" measuredW="762" measuredH="186" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="762" h="186" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="63">
+          <controlProperties>
+            <text>Enrolment%20File%20Verification</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="11" y="24" w="151" h="24" measuredW="67" measuredH="27" zOrder="1" locked="false" isInGroup="63">
+          <controlProperties>
+            <href>open_file%26bm%3Bopen_file.bmml%26bm%3Bopen_file.bmml%26bm%3Bopen_file.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2225%2C448%2C176%2C472%22%20href%3D%22open_file.bmml%22%20alt%3D%22open_file%22%20id%3D%221%22/%3E</map>
+            <text>Browse%20</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="11" y="55" w="715" h="49" measuredW="273" measuredH="22" zOrder="2" locked="false" isInGroup="63">
+          <controlProperties>
+            <text>The%20company%20file%20has%20been%20sucessfully%20verified</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBox" x="26" y="118" w="280" h="20" measuredW="214" measuredH="23" zOrder="3" locked="false" isInGroup="63">
+          <controlProperties>
+            <state>disabledSelected</state>
+            <text>%20Approved%20Company%20File%20Verified</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::CheckBox" x="26" y="138" w="262" h="20" measuredW="199" measuredH="23" zOrder="4" locked="false" isInGroup="63">
+          <controlProperties>
+            <state>disabled</state>
+            <text>Approved%20Dossier%20File%20Verified</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::CheckBox" x="26" y="158" w="343" h="20" measuredW="263" measuredH="23" zOrder="5" locked="false" isInGroup="63">
+          <controlProperties>
+            <state>disabled</state>
+            <text>Approved%20Regulatory%20Activity%20File%20Verified</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="64" controlTypeID="__group__" x="173" y="169" w="256" h="44" measuredW="256" measuredH="44" zOrder="6" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="256" h="22" measuredW="238" measuredH="22" zOrder="0" locked="false" isInGroup="64">
+          <controlProperties>
+            <text>Is%20this%20an%20eCTD%20%28full%20name%29%20transaction%3F%20</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="20" w="256" h="-1" measuredW="55" measuredH="24" zOrder="1" locked="false" isInGroup="64">
+          <controlProperties>
+            <text>Yes</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::FieldSet" x="180" y="322" w="748" h="98" measuredW="200" measuredH="170" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Load%20previous%20transaction</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Button" x="195" y="345" w="109" h="21" measuredW="67" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>open_file_company%26bm%3Bopen_file_company.bmml%26bm%3Bopen_file_company.bmml%26bm%3Bopen_file_company.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2244%2C332%2C153%2C353%22%20href%3D%22open_file_company.bmml%22%20alt%3D%22open_file_company%22%20id%3D%2267%22/%3E</map>
+        <text>Browse</text>
+      </controlProperties>
+    </control>
+    <control controlID="71" controlTypeID="com.balsamiq.mockups::StickyNote" x="532" y="167" w="428" h="123" measuredW="109" measuredH="123" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ask%20first%20if%20eCTD%0Aif%20Yes%20show%20initial%20vs%20subsequent%0Aif%20Subsequent%2C%20allow%20user%20to%20import%20previous%20data-%20clears%20approved%20verifications%20on%20import%20populates%20all%20other%20data%0A%20%0ANon%20-CTD%20should%20be%20allowed%20to%20load%20previous%20file%20as%20well%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::StickyNote" x="311" y="688" w="396" h="123" measuredW="109" measuredH="123" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Company%20Representative%20here%3F%20%0AInline%20with%20Initiate%20in%20other%20forms</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

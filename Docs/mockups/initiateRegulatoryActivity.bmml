@@ -1,0 +1,82 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1012" measuredH="441" mockupW="854" mockupH="439">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="158" y="2" w="854" h="439" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20Web%20Page%0Ahttp%3A//www.hpfb.ca/en/InitateDossier.html</text>
+      </controlProperties>
+    </control>
+    <control controlID="36" controlTypeID="com.balsamiq.mockups::Button" x="681" y="350" w="110" h="26" measuredW="83" measuredH="27" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save%20Draft</text>
+      </controlProperties>
+    </control>
+    <control controlID="38" controlTypeID="com.balsamiq.mockups::Label" x="173" y="117" w="737" h="27" measuredW="639" measuredH="22" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Health%20Products%20and%20Food%20Branch%20Regulatory%20Enrolment%20Process.%20Intiate%20Pharmaceuatical%20Regulatory%20Activity</text>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="173" y="85" w="-1" h="-1" measuredW="262" measuredH="25" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2Cproduct_line%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2270%2C84%2C152%2C106%22%20href%3D%22product_line.bmml%22%20alt%3D%22product_line%22%20id%3D%2259_0%22/%3E%0A</map>
+        <text>Home%2CProduct%20Line%2CRegulatory%20Activity</text>
+      </controlProperties>
+    </control>
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::FieldSet" x="174" y="144" w="762" h="98" measuredW="200" measuredH="170" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Load%20a%20Draft%20or%20Completed%20file</text>
+      </controlProperties>
+    </control>
+    <control controlID="64" controlTypeID="__group__" x="173" y="263" w="203" h="45" measuredW="203" measuredH="45" zOrder="5" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="21" w="203" h="-1" measuredW="120" measuredH="24" zOrder="0" locked="false" isInGroup="64">
+          <controlProperties>
+            <state>disabled</state>
+            <text>New%20Enrolment</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="203" h="21" measuredW="97" measuredH="22" zOrder="1" locked="false" isInGroup="64">
+          <controlProperties>
+            <text>Enrolment%20Type</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="65" controlTypeID="__group__" x="385" y="261" w="161" h="49" measuredW="161" measuredH="49" zOrder="6" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="161" h="21" measuredW="113" measuredH="22" zOrder="0" locked="false" isInGroup="65">
+          <controlProperties>
+            <text>Enrolment%20Version</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="21" w="109" h="-1" measuredW="32" measuredH="28" zOrder="1" locked="false" isInGroup="65">
+          <controlProperties>
+            <align>center</align>
+            <state>disabled</state>
+            <text>1.0</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="66" controlTypeID="com.balsamiq.mockups::Button" x="522" y="282" w="144" h="27" measuredW="131" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>disabled</state>
+        <text>Amend%20Enroilment</text>
+      </controlProperties>
+    </control>
+    <control controlID="67" controlTypeID="com.balsamiq.mockups::Button" x="179" y="164" w="111" h="21" measuredW="67" measuredH="27" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>open_file%26bm%3Bopen_file.bmml%26bm%3Bopen_file.bmml%26bm%3Bopen_file.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2221%2C162%2C132%2C183%22%20href%3D%22open_file.bmml%22%20alt%3D%22open_file%22%20id%3D%2267%22/%3E</map>
+        <text>Browse</text>
+      </controlProperties>
+    </control>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Button" x="802" y="350" w="182" h="26" measuredW="152" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>enrolRegulatoryActivity%26bm%3BenrolRegulatoryActivity.bmml%26bm%3BenrolRegulatoryActivity.bmml%26bm%3BenrolRegulatoryActivity.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22644%2C348%2C826%2C374%22%20href%3D%22enrolRegulatoryActivity.bmml%22%20alt%3D%22enrolRegulatoryActivity%22%20id%3D%2268%22/%3E</map>
+        <text>Proceed%20to%20step%202%20of%202</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
