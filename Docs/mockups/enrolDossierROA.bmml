@@ -1,0 +1,115 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1027" measuredH="709" mockupW="857" mockupH="690">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="170" y="19" w="857" h="690" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>HPFB%20Dossier%0Ahttp%3A//www.hpfb.ca/en/EnrolDossier.html</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Label" x="188" y="114" w="737" h="27" measuredW="592" measuredH="22" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Health%20Products%20and%20Food%20Branch%20Regulatory%20Enrolment%20Process.%20Pharmaceutical%20Dossier%20Enrolment</text>
+      </controlProperties>
+    </control>
+    <control controlID="158" controlTypeID="com.balsamiq.mockups::TabBar" x="177" y="141" w="843" h="522" measuredW="640" measuredH="100" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>enrolDossier2%26bm%3BenrolDossier2.bmml%26bm%3BenrolDossier2.bmml%26bm%3BenrolDossier2.bmml%2CenrolDossierIngredients%26bm%3BenrolDossierIngredients.bmml%26bm%3BenrolDossierIngredients.bmml%26bm%3BenrolDossierIngredients.bmml%2CenrolDossierFormulation%26bm%3BenrolDossierFormulation.bmml%26bm%3BenrolDossierFormulation.bmml%26bm%3BenrolDossierFormulation.bmml%2CformulationDetails_consolidated%26bm%3BformulationDetails_consolidated.bmml%26bm%3BformulationDetails_consolidated.bmml%26bm%3BformulationDetails_consolidated.bmml%2CenrolDossierContainer%26bm%3BenrolDossierContainer.bmml%26bm%3BenrolDossierContainer.bmml%26bm%3BenrolDossierContainer.bmml%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2227%2C122%2C118%2C164%22%20href%3D%22enrolDossier2.bmml%22%20alt%3D%22enrolDossier2%22%20id%3D%22158_0%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22118%2C122%2C196%2C164%22%20href%3D%22enrolDossierIngredients.bmml%22%20alt%3D%22enrolDossierIngredients%22%20id%3D%22158_1%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22196%2C122%2C286%2C164%22%20href%3D%22enrolDossierFormulation.bmml%22%20alt%3D%22enrolDossierFormulation%22%20id%3D%22158_2%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22286%2C122%2C413%2C164%22%20href%3D%22formulationDetails_consolidated.bmml%22%20alt%3D%22formulationDetails_consolidated%22%20id%3D%22158_3%22/%3E%0A%3Carea%20shape%3D%22rect%22%20coords%3D%22413%2C122%2C483%2C164%22%20href%3D%22enrolDossierContainer.bmml%22%20alt%3D%22enrolDossierContainer%22%20id%3D%22158_4%22/%3E%0A</map>
+        <selectedIndex>7</selectedIndex>
+        <text>Drug%20Product%2CIngredients%2CFormulations%2C%20Formulation%20Details%2C%20Container%2CCountry%20and%20%5CrRoute%20of%20Administration</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="164" controlTypeID="com.balsamiq.mockups::Label" x="203" y="193" w="-1" h="-1" measuredW="126" measuredH="24" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>16</size>
+        <text>Main%20Formulation</text>
+      </controlProperties>
+    </control>
+    <control controlID="167" controlTypeID="com.balsamiq.mockups::Button" x="474" y="336" w="130" h="27" measuredW="107" measuredH="27" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add%20a%20Country</text>
+      </controlProperties>
+    </control>
+    <control controlID="172" controlTypeID="com.balsamiq.mockups::Button" x="888" y="622" w="107" h="24" measuredW="83" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save%20Draft</text>
+      </controlProperties>
+    </control>
+    <control controlID="173" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="181" y="91" w="-1" h="-1" measuredW="198" measuredH="25" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <hrefs>%2Cproduct_line%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%26bm%3Bproduct_line.bmml%2C</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2266%2C73%2C148%2C95%22%20href%3D%22product_line.bmml%22%20alt%3D%22product_line%22%20id%3D%22173_0%22/%3E%0A</map>
+        <text>Home%2CProduct%20Line%2CDossier</text>
+      </controlProperties>
+    </control>
+    <control controlID="178" controlTypeID="__group__" x="191" y="553" w="755" h="46" measuredW="755" measuredH="46" zOrder="9" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="2" controlTypeID="__group__" x="0" y="0" w="755" h="46" measuredW="755" measuredH="46" zOrder="0" locked="false" isInGroup="178">
+          <groupChildrenDescriptors>
+            <control controlID="2" controlTypeID="__group__" x="0" y="0" w="755" h="46" measuredW="755" measuredH="46" zOrder="0" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="22" w="755" h="-1" measuredW="103" measuredH="24" zOrder="0" locked="false" isInGroup="2">
+                  <controlProperties>
+                    <text>Transdermal</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="755" h="22" measuredW="141" measuredH="22" zOrder="1" locked="false" isInGroup="2">
+                  <controlProperties>
+                    <text>Route%20of%20Administration</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="179" controlTypeID="com.balsamiq.mockups::DataGrid" x="211" y="232" w="546" h="97" measuredW="172" measuredH="54" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Country%20of%20%20Manufacture%0ACanada%0A%7B65L%7D</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="180" controlTypeID="__group__" x="191" y="439" w="769" h="121" measuredW="769" measuredH="121" zOrder="11" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::DataGrid" x="0" y="0" w="769" h="97" measuredW="169" measuredH="54" zOrder="0" locked="false" isInGroup="180">
+          <controlProperties>
+            <selectedIndex>0</selectedIndex>
+            <text>Route%20of%20Administration%0ATransdermal%0A%7B65L%7D</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Button" x="642" y="97" w="51" h="24" measuredW="47" measuredH="27" zOrder="1" locked="false" isInGroup="180">
+          <controlProperties>
+            <text>Add</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="701" y="97" w="68" h="24" measuredW="61" measuredH="27" zOrder="2" locked="false" isInGroup="180">
+          <controlProperties>
+            <text>Delete</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="181" controlTypeID="__group__" x="211" y="372" w="751" h="46" measuredW="751" measuredH="46" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::ComboBox" x="0" y="22" w="310" h="-1" measuredW="76" measuredH="24" zOrder="0" locked="false" isInGroup="181">
+          <controlProperties>
+            <text>Canada</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="751" h="22" measuredW="140" measuredH="22" zOrder="1" locked="false" isInGroup="181">
+          <controlProperties>
+            <text>Country%20of%20Manufacture</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="182" controlTypeID="com.balsamiq.mockups::Button" x="613" y="336" w="144" h="26" measuredW="119" measuredH="27" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Remove%20Country</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
