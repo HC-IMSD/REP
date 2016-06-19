@@ -1,4 +1,10 @@
-<div class="form-group">
-    <label for="fileBrowser" ><span class="field-name">{{"FILE" |translate}}</span></label>
-    <input id="fileBrowser" name="fileBrowser" type="file" accept=".json, .xml"/>
+<section class="wb-inview">
+    <div class="form-group ">
+        <label for="fileBrowser"><span class="field-name">{{"FILE" |translate}}</span></label>
+        <input id="fileBrowser" name="fileBrowser" type="file" accept={{vm.fileTypes}} size="60"/>
+
+        <div aria-live='polite'>
+            <p><br/><span>{{vm.fileMessage |translate}}</span></p>
+        </div>
 </div>
+</section>
