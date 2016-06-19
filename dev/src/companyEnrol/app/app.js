@@ -491,8 +491,11 @@
                     {
                         prefix: 'app/resources/general-',
                         suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/fileIO-',
+                        suffix: '.json'
                     }
-
                 ]
             })
             $translateProvider.preferredLanguage('en');
