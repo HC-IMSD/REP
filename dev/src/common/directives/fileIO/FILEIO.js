@@ -11,18 +11,17 @@
 
 (function () {
     'use strict';
-
     angular
         .module('fileIO')
         .directive('hpfbFileReader2', hpfbFileReader2);
 
-    hpfbFileReader2.$inject = ['$parse'];
+   // hpfbFileReader2.$inject = ['$parse'];
 
     /* @ngInject */
-    function hpfbFileReader2($parse) {
+    function hpfbFileReader2() {
         var directive = {
             bindToController: true,
-            controller: FileReaderController,
+            controller: FileReaderCtrl,
             controllerAs: 'vm',
             replace: true,
             link: link,
@@ -44,7 +43,7 @@
                     var result={
                             fileType:fileType,
                             fileContents:fileContent
-                    }
+                    };
                     scope.$emit('fileLoadFinished', result);
                 };
                 var file=onChangeEvent.srcElement || onChangeEvent.target;
@@ -59,47 +58,94 @@
         }
     }
 
-     FileReaderController.$inject = ['$scope'];
-    /* @ngInject */
-    function FileReaderController($scope) {
+    FileReaderCtrl.$inject = ['$scope'];
+    /**
+     * @ngdoc controller
+     * @name FILEIO.controller:FileReaderController
+     * @param $scope
+     *
+     */
+    function FileReaderCtrl($scope) {
         var vm = this;
+        vm.fileMessage = "FILE_NOLOAD";
+        vm.fileTypes = ".json, .xml";
         $scope.$on('fileLoadFinished', function (evt, value) {
             //process the file. if JSON create JSON file
-            var fileContents={};
+            var fileParseResult = {};
             var result=false;
             if((value.fileType.toLowerCase())=="json"){
-                result=convertToJSONObjects(value.fileContents,fileContents);
-                console.debug(fileContents)
+                result = convertToJSONObjects(value.fileContents, fileParseResult)
             }else if((value.fileType.toLowerCase()==="xml")){
-                 console.log("xml convert")
-                result=convertXMLToJSONObjects(value.fileContents,fileContents);
-                console.debug(fileContents)
+                result = convertXMLToJSONObjects(value.fileContents, fileParseResult);
             }
-            $scope.$emit('fileReadComplete',result,fileContents);
+            if (result) {
+                vm.fileMessage = "FILE_LOADSUCCESS"
+            } else {
+                vm.fileMessage = "FILE_LOADERR"
+            }
+            $scope.$emit('fileReadComplete', result, fileParseResult);
         });
     }
+
+
+    /**
+     * @ngdoc method
+     * @methodName convertToJSONObjects
+     * @param jsonString -the string representing a json object to convert
+     * @param fileResult -an empty json object that is populated by the function
+     * @returns {boolean}
+     */
     function convertToJSONObjects(jsonString, fileResult){
         try {
              fileResult.contents= JSON.parse(jsonString);
             return true;
         }catch(e){
-            fileResult.contents="Not a valid JSON file. "+e;
+            fileResult.contents = null;
         }
         return false;
     }
     function convertXMLToJSONObjects(inputXML, fileResult){
-        console.log("Starting the parse"+inputXML)
-       // inputXML= "<root>Hello xml2js!</root>";
-        //var res2=testme.test(inputXML);
-        //console.log(res2)
-        var newres=repConv.convertxml2js(inputXML);
-        console.log(newres);
-        //var parseResult=repXMLParse.convertXML(inputXML);
-        //var res2=repXMLParse.convertXML(test);
-        //console.log("This is the parse "+parseResult);
-        //fileResult.contents=parseResult;
+
+        var xmlConfig = {
+            attributePrefix: "$",
+            escapeMode: "true",
+            emptyNodeForm: "text"
+        };
+        var xmlConverter = new X2JS(xmlConfig);
+        //converts XML as a string to a json
+        fileResult.contents = xmlConverter.xml_str2json(inputXML);
+        if (fileResult.contents === null) {
+            return false;
+        }
         return true;
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('fileIO')
+        .factory('fileCheckFactory', fileCheck);
+
+    //factoryName.$inject = ['dependency'];
+    var expectedRootName;
+    /* @ngInject */
+    function fileCheck() {
+        var service = {
+            functionName: setExpectedRoot
+        };
+        return service;
+
+
+        function setExpectedRoot(value) {
+            expectedRootName = value;
+        }
     }
 
 })();
+
+
+
+
 
