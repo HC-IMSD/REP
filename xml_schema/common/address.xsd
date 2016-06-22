@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" 	
+			elementFormDefault="qualified" >
+	 <hpfb:include schemaLocation="./data_types.xsd"/>
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<hpfb:element name="street_address" type="char_1_100_content"/>
+	<hpfb:element name="city" type="char_1_60_content"/>
+	<hpfb:element name="province_lov"/>
+	<hpfb:element name="province_text"  type="char_1_40_content"/>
+	<hpfb:element name="country"/>
+	<hpfb:element name="postal_code"  type="char_1_20_content"/>
+
+	<!-- ****************************** -->
+	<!-- ELEMENT TYPE DECLARATIONS -->
+	<!-- ****************************** -->
+		<!-- main xml structure-->
+	<hpfb:complexType name="international_address_content">
+		<hpfb:sequence>
+			<hpfb:element ref="street_address"  />
+			<hpfb:element ref="city"/>
+			<hpfb:element ref="province_lov"/>
+			<hpfb:element ref="province_text"/>
+			<hpfb:element ref="country"/>
+			<hpfb:element ref="postal_code"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+</hpfb:schema>
