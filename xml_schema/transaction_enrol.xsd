@@ -36,7 +36,9 @@
 	<hpfb:element name="regulatory_activity_address" type="international_address_content"/>
 	<hpfb:element name="same_regulatory_contact" type="required_yes_no_content"/>
 	<hpfb:element name="regulatory_activity_contact" type="contact_content"/>
+	<hpfb:element name="rep_submission_contact_role" type="rep_contact_role_list"/>
 	<hpfb:element name="rep_submission_contact" type="contact_content"/>
+	<hpfb:element name="rep_submission_contact_record" type="rep_submission_contact_record_content"/>
 
 
 	<hpfb:complexType name="transaction_enrol_content">
@@ -59,7 +61,7 @@
 			<hpfb:element ref="regulatory_activity_address" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="same_regulatory_contact"/>
 			<hpfb:element ref="regulatory_activity_contact" minOccurs="0" maxOccurs="1" />
-			<hpfb:element ref="rep_submission_contact" minOccurs="1" maxOccurs="3"/>
+			<hpfb:element ref="rep_submission_contact_record" minOccurs="1" maxOccurs="3"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -76,4 +78,13 @@
 			<hpfb:element ref="sequence_version"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
+	
+	<hpfb:complexType name="rep_submission_contact_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="rep_submission_contact_role"/>
+			<hpfb:element ref="rep_submission_contact"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
 </hpfb:schema>
