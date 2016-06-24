@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!-- ****************************** -->
+<!-- Company Enrolment version 0.1 -->
+<!-- ****************************** -->
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<hpfb:include schemaLocation="./common/data_types.xsd"/>
+	<hpfb:include schemaLocation="./common/contact.xsd"/>
+	<hpfb:include schemaLocation="./common/address.xsd"/>
+	<hpfb:include schemaLocation="./common/sequence_descriptions.xsd"/>
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<!-- ACTIVITY_ENROL is the root element-->
+	<hpfb:element name="ACTIVITY_ENROL" type="activity_enrol_content"/>
+	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
+	<hpfb:element name="application_type" type="rep_type"/>
+	<hpfb:element name="software_version" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
+	<hpfb:element name="dossier_id_prefix"/>
+	<hpfb:element name="dossier_id" type="char_1_10_content"/>
+	<hpfb:element name="reg_activity_lead"/>
+	<hpfb:element name="reg_activity_type"/>
+	<hpfb:element name="fee_class"/>
+	<hpfb:element name="not_lasa"/>
+	<hpfb:element name="reason_filing" type="char_1_1024_content"/>
+	<hpfb:element name="is_third_party"/>
+	<hpfb:element name="related_reg_activity"/>
+	<hpfb:element name="date_cleared"/>
+	<hpfb:element name="control_number" type="control_number_content"/>
+	<hpfb:element name="manufacturer_name" type="char_1_80_content"/>
+	<hpfb:element name="assoc_dins" type="assoc_dins_content"/>
+	<hpfb:element name="din_number" type="din_content"/>
+	<hpfb:element name="new_roa" type="required_yes_no_content"/>
+	<hpfb:element name="new_claims" type="required_yes_no_content"/>
+	<hpfb:element name="change_formulation" type="required_yes_no_content"/>
+	<hpfb:element name="change_drug_substance" type="required_yes_no_content"/>
+	<hpfb:element name="replace_sterility" type="required_yes_no_content"/>
+	<hpfb:element name="confirmitory_studies" type="required_yes_no_content"/>
+	<hpfb:element name="other_rationale" type="required_yes_no_content"/>
+	<hpfb:element name="other_rationale_details" type="char_0_80_content"/>
+	<hpfb:element name="text_label_change" type="required_yes_no_content"/>
+	<hpfb:element name="drug_substance_change" type="required_yes_no_content"/>
+	<hpfb:element name="formulation_change" type="required_yes_no_content"/>
+	<hpfb:element name="specification_change" type="required_yes_no_content"/>
+	<hpfb:element name="expiry_storage_change" type="required_yes_no_content"/>
+	<hpfb:element name="manufact_method_change" type="required_yes_no_content"/>
+	<hpfb:element name="manufact_site_change" type="required_yes_no_content"/>
+	<hpfb:element name="container_size_change" type="required_yes_no_content"/>
+	<hpfb:element name="packaging_spec_change" type="required_yes_no_content"/>
+	<hpfb:element name="packaging_materials_change" type="required_yes_no_content"/>
+	<hpfb:element name="other_change" type="required_yes_no_content"/>
+	<hpfb:element name="other_change_details" type="char_0_80_content"/>
+	<hpfb:element name="notifiable_change_types" type="change_types_content"/>
+	<hpfb:element name="rationale_types" type="rationale_content"/>
+
+	<hpfb:complexType name="activity_enrol_content">
+		<hpfb:sequence>
+			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="enrolment_version"/>
+			<hpfb:element ref="date_saved"/>
+			<hpfb:element ref="application_type"/>
+			<hpfb:element ref="software_version"/>
+			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="dossier_id_prefix"/>
+			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="reg_activity_lead"/>
+			<hpfb:element ref="reg_activity_type"/>
+			<hpfb:element ref="fee_class"/>
+			<hpfb:element ref="not_lasa"/>
+			<hpfb:element ref="reason_filing"/>
+			<hpfb:element ref="is_third_party"/>
+			<hpfb:element ref="notifiable_change_types"/>
+			<hpfb:element ref="rationale_types"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="change_types_content">
+		<hpfb:all>
+			<hpfb:element ref="text_label_change"/>
+			<hpfb:element ref="drug_substance_change"/>
+			<hpfb:element ref="formulation_change"/>
+			<hpfb:element ref="specification_change"/>
+			<hpfb:element ref="expiry_storage_change"/>
+			<hpfb:element ref="manufact_method_change"/>
+			<hpfb:element ref="manufact_site_change"/>
+			<hpfb:element ref="container_size_change"/>
+			<hpfb:element ref="packaging_spec_change"/>
+			<hpfb:element ref="packaging_materials_change"/>
+			<hpfb:element ref="other_change"/>
+			<hpfb:element ref="other_change_details"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="rationale_content">
+		<hpfb:all>
+			<hpfb:element ref="new_roa"/>
+			<hpfb:element ref="new_claims"/>
+			<hpfb:element ref="change_formulation"/>
+			<hpfb:element ref="change_drug_substance"/>
+			<hpfb:element ref="replace_sterility"/>
+			<hpfb:element ref="confirmitory_studies"/>
+			<hpfb:element ref="other_rationale"/>
+			<hpfb:element ref="other_rationale_details"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="related_reg_activity_content">
+		<hpfb:sequence>
+			<hpfb:element ref="date_cleared"/>
+			<hpfb:element ref="control_number" />
+			<hpfb:element ref="dossier_id" />
+			<hpfb:element ref="manufacturer_name" />
+			<hpfb:element ref="reason_filing" />
+			<hpfb:element ref="assoc_dins" />
+		</hpfb:sequence>
+	</hpfb:complexType>
+	
+		<hpfb:complexType name="assoc_dins_content">
+			<hpfb:sequence>
+			<hpfb:element ref="din_number" minOccurs="0" maxOccurs="unbounded"/>
+			</hpfb:sequence>
+			</hpfb:complexType>
+	
+</hpfb:schema>
