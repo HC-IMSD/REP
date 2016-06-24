@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+	<!-- ****************************** -->
+	<!-- Company Enrolment version 0.1 -->
+	<!-- ****************************** -->
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<hpfb:include schemaLocation="./common/data_types.xsd"/>
+	<hpfb:include schemaLocation="./common/contact.xsd"/>
+	<hpfb:include schemaLocation="./common/address.xsd"/>
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<!-- COMPANY_ENROL is the root element-->
+	<hpfb:element name="DOSSIER_ENROL" type="dossier_enrol_content" />	
+
+	
+
+	<hpfb:complexType name="dossier_enrol_content" >
+		<hpfb:sequence>
+		</hpfb:sequence>
+		</hpfb:complexType>
+
+	<hpfb:complexType name="contact_record_content" >
+		<hpfb:all>
+			<hpfb:element ref="amend_record"/>
+			<hpfb:element ref="manufacturer"/>
+			<hpfb:element ref="mailing"/>
+			<hpfb:element ref="billing"/>
+			<hpfb:element ref="importer"/>
+			<hpfb:element ref="rep_contact_role"/>
+			<hpfb:element ref="company_contact_details"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+</hpfb:schema>

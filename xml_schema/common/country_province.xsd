@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
 
-	<hpfb:simpleType name="country">
+	<hpfb:simpleType name="country_list">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="CAN"/>
 			<hpfb:enumeration value="USA"/>
@@ -243,7 +243,7 @@
 	</hpfb:simpleType>
 
 	<!-- USA and Canada states or provinces-->
-	<hpfb:simpleType name="prov_state">
+	<hpfb:simpleType name="prov_state_list">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="AL"/>
 			<hpfb:enumeration value="AK"/>
