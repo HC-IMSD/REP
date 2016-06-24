@@ -12,6 +12,10 @@
 	<!-- ****************************** -->
 	<!-- COMPANY_ENROL is the root element-->
 	<hpfb:element name="TRANSACTION_ENROL" type="transaction_enrol_content"/>
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
+	<hpfb:element name="application_type" type="rep_type"/>
+	<hpfb:element name="software_version" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="is_ectd" type="required_yes_no_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="dossier_name" type="char_1_256_content"/>
@@ -43,6 +47,10 @@
 
 	<hpfb:complexType name="transaction_enrol_content">
 		<hpfb:sequence>
+			<hpfb:element ref="date_saved"/>
+			<hpfb:element ref="application_type"/>
+			<hpfb:element ref="software_version"/>
+			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="is_ectd"/>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_name"/>
