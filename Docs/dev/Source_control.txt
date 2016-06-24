@@ -1,0 +1,11 @@
+Steps to Check-in
+
+Select the version control window
+From your branch:
+Select the changeset you want to check-in. Files can be moved to a different changeset if you do not want to check them in at this time
+Click the Commit Changes button. This should stage the files to your branch
+In the VCDS menu select Git Push. Select the remote branch corresponding to your current branch.
+This will check-in in the files to the remote branch (i.e in Github).
+
+To update the master branch
+In VCS-->Git select create Pull request. Create the pull request from the branch to master. After sucessful creation, merge the changes in Github (webpage interface).
