@@ -32,6 +32,13 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	
+	<hpfb:simpleType name="char_1_10_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{1,10}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 	<hpfb:simpleType name="char_0_20_content">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:pattern value=".{0,20}"/>
@@ -86,7 +93,17 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	<hpfb:simpleType name="char_0_80_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{0,80}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 
+	<hpfb:simpleType name="char_1_80_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{1,80}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 
 	<hpfb:simpleType name="char_1_100_content">
 		<hpfb:restriction base="hpfb:string">
@@ -106,9 +123,15 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	<hpfb:simpleType name="char_1_1024_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{1,1024}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 	<hpfb:simpleType name="rep_contact_role_list">
 		<hpfb:restriction base="hpfb:string">
-		<hpfb:enumeration value=""/>
+			<hpfb:enumeration value=""/>
 			<hpfb:enumeration value="PRIMARY"/>
 			<hpfb:enumeration value="SECONDARY"/>
 			<hpfb:enumeration value="TERTIARY"/>
@@ -149,11 +172,15 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
-		<hpfb:simpleType name="number_0_5_Content">
-	<hpfb:restriction base="hpfb:string">
-	<hpfb:pattern value="[0-9]{0,3}|[0-9.0-9]{0,5}"/>
-	</hpfb:restriction>
+	<hpfb:simpleType name="number_0_5_Content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value="[0-9]{0,3}|[0-9.0-9]{0,5}"/>
+		</hpfb:restriction>
 	</hpfb:simpleType>
-
+	<hpfb:simpleType name="din_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value="[0-9]{8}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 
 </hpfb:schema>
