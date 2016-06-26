@@ -54,7 +54,12 @@
 	<hpfb:element name="other_change_details" type="char_0_80_content"/>
 	<hpfb:element name="notifiable_change_types" type="change_types_content"/>
 	<hpfb:element name="rationale_types" type="rationale_content"/>
-
+	<hpfb:element name="contact_record" type="contact_record_content" />
+	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"/>
+	<hpfb:element name="rep_contact_details" type="contact_content"/>
+	<!-- ****************************** -->
+	<!-- Main Content Element -->
+	<!-- ****************************** -->
 	<hpfb:complexType name="activity_enrol_content">
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
@@ -73,8 +78,10 @@
 			<hpfb:element ref="is_third_party"/>
 			<hpfb:element ref="notifiable_change_types"/>
 			<hpfb:element ref="rationale_types"/>
+			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="3"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
+
 
 	<hpfb:complexType name="change_types_content">
 		<hpfb:all>
@@ -93,6 +100,13 @@
 		</hpfb:all>
 	</hpfb:complexType>
 
+	<hpfb:complexType name="contact_record_content">
+		<hpfb:all>
+			<hpfb:element ref="rep_contact_role"/>
+			<hpfb:element ref="rep_contact_details"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
 	<hpfb:complexType name="rationale_content">
 		<hpfb:all>
 			<hpfb:element ref="new_roa"/>
@@ -108,6 +122,7 @@
 
 	<hpfb:complexType name="related_reg_activity_content">
 		<hpfb:sequence>
+			<hpfb:element ref="reg_activity_type"/>
 			<hpfb:element ref="date_cleared"/>
 			<hpfb:element ref="control_number" />
 			<hpfb:element ref="dossier_id" />
