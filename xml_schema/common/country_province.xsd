@@ -242,10 +242,39 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
-	<!-- USA and Canada states or provinces-->
-	<hpfb:simpleType name="prov_state_list">
+	
+	<hpfb:simpleType name="unknown_list">
+	<hpfb:restriction base="hpfb:string">
+	<hpfb:enumeration value="UNKNOWN"/>
+	</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="country_unknown_list">	
+		<hpfb:union memberTypes="country_list unknown_list"/>
+		</hpfb:simpleType>
+	
+
+	<hpfb:simpleType name="prov_list">
 		<hpfb:restriction base="hpfb:string">
-			<hpfb:enumeration value="AL"/>
+		<hpfb:enumeration value="AB"/>
+			<hpfb:enumeration value="BC"/>
+			<hpfb:enumeration value="MB"/>
+			<hpfb:enumeration value="NB"/>
+			<hpfb:enumeration value="NL"/>
+			<hpfb:enumeration value="NT"/>
+			<hpfb:enumeration value="NS"/>
+			<hpfb:enumeration value="NU"/>
+			<hpfb:enumeration value="ON"/>
+			<hpfb:enumeration value="PE"/>
+			<hpfb:enumeration value="QC"/>
+			<hpfb:enumeration value="SK"/>
+			<hpfb:enumeration value="YT"/>
+		</hpfb:restriction>
+		</hpfb:simpleType>
+
+		<hpfb:simpleType name="usa_state_list">
+		<hpfb:restriction base="hpfb:string">
+		<hpfb:enumeration value="AL"/>
 			<hpfb:enumeration value="AK"/>
 			<hpfb:enumeration value="AZ"/>
 			<hpfb:enumeration value="AR"/>
@@ -296,19 +325,11 @@
 			<hpfb:enumeration value="WV"/>
 			<hpfb:enumeration value="WI"/>
 			<hpfb:enumeration value="WY"/>
-			<hpfb:enumeration value="AB"/>
-			<hpfb:enumeration value="BC"/>
-			<hpfb:enumeration value="MB"/>
-			<hpfb:enumeration value="NB"/>
-			<hpfb:enumeration value="NL"/>
-			<hpfb:enumeration value="NT"/>
-			<hpfb:enumeration value="NS"/>
-			<hpfb:enumeration value="NU"/>
-			<hpfb:enumeration value="ON"/>
-			<hpfb:enumeration value="PE"/>
-			<hpfb:enumeration value="QC"/>
-			<hpfb:enumeration value="SK"/>
-			<hpfb:enumeration value="YT"/>
 		</hpfb:restriction>
+		</hpfb:simpleType>
+	
+	<!-- USA and Canada states or provinces-->
+	<hpfb:simpleType name="prov_state_list">
+		<hpfb:union memberTypes="usa_state_list prov_list"/>
 	</hpfb:simpleType>
 </hpfb:schema>
