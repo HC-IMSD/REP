@@ -1,0 +1,6 @@
+{
+  "FILE": "Choose a file to load data",
+  "FILE_LOADSUCCESS": "The File loaded successfully",
+  "FILE_LOADERR": "There was an error loading this file",
+  "FILE_NOLOAD": "No file has been Loaded"
+}

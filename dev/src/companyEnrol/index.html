@@ -1,0 +1,240 @@
+<!DOCTYPE html><!--[if lt IE 9]>
+<html class="no-js lt-ie9" lang="en" dir="ltr"><![endif]--><!--[if gt IE 8]><!-->
+<html class="no-js" lang="en" dir="ltr">
+<!--<![endif]-->
+<head>
+    <base href="/CompanyenrolmentTheme/">
+    <meta charset="utf-8">
+    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+    wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+    <title>Content page - No site menu or breadcrumb trail - Working examples - Web Experience Toolkit
+    </title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <!-- Meta data -->
+    <meta name="description"
+          content="Web Experience Toolkit (WET) includes reusable components for building and maintaining innovative Web sites that are accessible, usable, and interoperable. These reusable components are open source software and free for use by departments and external Web communities">
+    <meta name="dcterms.title" content="Content page - No site menu or breadcrumb trail - Web Experience Toolkit">
+    <meta name="dcterms.creator" content="French name of the content author / Nom en français de l'auteur du contenu">
+    <meta name="dcterms.issued" title="W3CDTF" content="Date published (YYYY-MM-DD) / Date de publication (AAAA-MM-JJ)">
+    <meta name="dcterms.modified" title="W3CDTF"
+          content="Date modified (YYYY-MM-DD) / Date de modification (AAAA-MM-JJ)">
+    <meta name="dcterms.subject" title="scheme" content="French subject terms / Termes de sujet en français">
+    <meta name="dcterms.language" title="ISO639-2" content="eng">
+    <!-- Meta data-->
+    <!--[if gte IE 9 | !IE ]><!-->
+    <link href="./theme-gcwu-fegc/assets/favicon.ico" rel="icon" type="image/x-icon">
+    <link rel="stylesheet" href="./theme-gcwu-fegc/css/theme.min.css">
+    <!--<![endif]-->
+    <!--[if lt IE 9]>
+    <link href="./theme-gcwu-fegc/assets/favicon.ico" rel="shortcut icon"/>
+    <link rel="stylesheet" href="./theme-gcwu-fegc/css/ie8-theme.min.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./wet-boew/js/ie8-wet-boew.min.js"></script>
+    <![endif]-->
+    <noscript>
+        <link rel="stylesheet" href="./wet-boew/css/noscript.min.css"/>
+    </noscript>
+</head>
+<body vocab="http://schema.org/" typeof="WebPage" ng-app="myApp">
+<ul id="wb-tphp">
+    <li class="wb-slc">
+        <a class="wb-sl" href="#wb-cont">Skip to main content</a>
+    </li>
+    <li class="wb-slc visible-sm visible-md visible-lg">
+        <a class="wb-sl" href="#wb-info">Skip to "About this site"</a>
+    </li>
+</ul>
+<header role="banner">
+    <div id="wb-bnr">
+        <div id="wb-bar">
+            <div class="container">
+                <div class="row">
+                    <object id="gcwu-sig" type="image/svg+xml" tabindex="-1" role="img"
+                            data="./theme-gcwu-fegc/assets/sig-en.svg" aria-label="Government of Canada"></object>
+                    <ul id="gc-bar" class="list-inline">
+                        <li><a href="http://www.canada.ca/en/index.html" rel="external">Canada.ca</a></li>
+                        <li><a href="http://www.canada.ca/en/services/index.html" rel="external">Services</a></li>
+                        <li><a href="http://www.canada.ca/en/gov/dept/index.html" rel="external">Departments</a></li>
+                        <li id="wb-lng"><h2>Language selection</h2>
+                            <ul class="list-inline">
+                                <li><a lang="fr" href="content-nositemenubc-fr.html">Français</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <section class="wb-mb-links col-xs-12 visible-sm visible-xs" id="wb-glb-mn">
+                        <h2>Search and menus</h2>
+                        <ul class="pnl-btn list-inline text-right">
+                            <li><a href="#mb-pnl" title="Search and menus" aria-controls="mb-pnl"
+                                   class="overlay-lnk btn btn-sm btn-default" role="button"><span
+                                    class="glyphicon glyphicon-search"><span class="glyphicon glyphicon-th-list"><span
+                                    class="wb-inv">Search and menus</span></span></span></a></li>
+                        </ul>
+                        <div id="mb-pnl"></div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div id="wb-sttl" class="col-md-5">
+                    <a href="http://wet-boew.github.io/v4.0-ci/index-en.html">
+                        <span>Web Experience Toolkit</span>
+                    </a>
+                </div>
+                <object id="wmms" type="image/svg+xml" tabindex="-1" role="img" data="./theme-gcwu-fegc/assets/wmms.svg"
+                        aria-label="Symbol of the Government of Canada"></object>
+                <section id="wb-srch" class="visible-md visible-lg">
+                    <h2>Search</h2>
+
+                    <form action="https://google.ca/search" method="get" role="search" class="form-inline">
+                        <div class="form-group">
+                            <label for="wb-srch-q">Search website</label>
+                            <input id="wb-srch-q" class="form-control" name="q" type="search" value="" size="27"
+                                   maxlength="150">
+                            <input type="hidden" name="q" value="site:wet-boew.github.io OR site:github.com/wet-boew/">
+                        </div>
+                        <button type="submit" id="wb-srch-sub" class="btn btn-default">Search</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+    <span data-trgt="mb-pnl" class="wb-menu hide"></span>
+</header>
+<main role="main" property="mainContentOfPage" class="container">
+
+    <!-- start of Code-->
+    <div ng-controller="CompanyEnrolCtrl as main">
+        <table ng-table="main.tableParams" class="table  dataTable">
+            <caption>Company Addresses Summary</caption>
+            <colgroup>
+                <col width="5%"/>
+                <col width="15%"/>
+                <col width="25%"/>
+                <col width="55%"/>
+            </colgroup>
+
+            <tr ng-repeat="row in $data" aria-selected="{{row===main.idSelected}}"
+                ng-class="{selected:row===main.idSelected}" ng-click="main.changeSelection(row)">
+                <td data-title="'SELECTEDROW'| translate">
+                    <input type="checkbox" name="selectedRow" value="{{row.$$hashKey==main.test}}"
+                           ng-click="main.changeSelection(row)">
+                </td>
+                <td data-title="'COMPANYNAME'| translate">
+                    <!--  <label name="company">{{row.companyRecord.company.name}}</label>-->
+                    {{row.companyRecord.company.name}}
+                </td>
+                <td data-title="'COUNTRY'| translate">
+                    <!-- <label name="country">{{row.companyRecord.company.address.country |translate}}</label>-->
+                    {{row.companyRecord.company.address.country |translate}}
+                </td>
+                <td data-title="'STREET'| translate">
+                    <!-- <label name="street" ng-model="row.companyRecord.company.address.street">{{row.companyRecord.company.address.street}}</label>-->
+                    {{row.companyRecord.company.address.street}}
+                </td>
+                <td data-title="'DELETEROW'| translate">
+                    <button class="btn btn-danger btn-sm ng-scope" ng-click="main.deleteRow(row,$index)"
+                            ng-disabled="main.numberAddresses()<2"><span
+                            class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+        </table>
+        <button ng-click="main.addRow()" class="btn btn-primary" ng-class=" {disabled:main.numberAddresses()>3}"> Add an
+            Address
+        </button>
+        <div>
+
+            <!-- <h2> Selected Address Details</h2>-->
+
+            <div>
+                <div class='arialiveREP' aria-live='polite' aria-relevant='all'></div>
+                <form action="#" method="get" name="formAddressDetails" id="form"
+                      ng-submit="main.register(formAddressDetails)"
+                      ng-validate="main.validationOptions" novalidate>
+                    <fieldSet>
+                        <legend>Selected Address Details</legend>
+                        <div class="form-group">
+                            <label for="companyName" class="required"><span class="field-name">{{'COMPANYNAME_FULL'|translate}}</span>
+                                <strong class="required">(required)</strong></label>
+                            <input type="text" id="companyName" ng-model="main.preSelection.companyRecord.company.name"
+                                   class="form-control" name="text" ng-required="true" maxlength="60" size="60"/>
+                        </div>
+                        <label>My Test checkbox Mailin</label>
+                        <input type="checkbox" ng-click="main.setMailing(main.preSelection.companyRecord,'mail')"/>
+
+                        <div>
+                            <hpfb-address address-record="main.preSelection.companyRecord.company.address"></hpfb-address>
+                        </div>
+                        <div>
+                            <input type="button" class="btn btn-default" Value="Validate"
+                                   ng-click="main.register(formAddressDetails)"
+                                   ng-class="{disabled:!main.preSelection} ">
+                        </div>
+
+                    </fieldSet>
+                </form>
+            </div>
+
+        </div>
+        <!--<input type="file" hpfb-file-reader="main.content" value="TEST" />-->
+        <div>
+            <hpfb-file-reader2 file-results="main.content"></hpfb-file-reader2>
+            <div>
+                <h2>File content is:</h2>
+                <pre>{{main.content}}</pre>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div>
+         <p>
+             JSON file:
+             <input type="file" id="jsonfile" />
+         </p>
+         <output id="jsonfile_list">
+             <ul>
+             </ul>
+         </output>
+     </div>-->
+
+    <dl id="wb-dtmd">
+        <dt>Date modified:&#32;</dt>
+        <dd>
+            <time property="dateModified">2014-08-13</time>
+        </dd>
+    </dl>
+</main>
+
+<!--[if gte IE 9 | !IE ]><!-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script src="./wet-boew/js/wet-boew.min.js"></script>
+<!--<![endif]-->
+<!--[if lt IE 9]>
+<script src="./wet-boew/js/ie8-wet-boew2.min.js"></script>
+
+<![endif]-->
+<script src="./theme-gcwu-fegc/js/theme.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+<script src="js/deps/jquery.validate.min.js"></script>
+<script src="app/lib/angular.js"></script>
+<script src="app/lib/angular-validate.js"></script>
+<script src="app/lib/angular-aria.min.js"></script>
+<script src="app/app.js"></script>
+<script src="app/common/directives/country/countrySelect.js"></script>
+<script src="app/common/directives/address/address.js"></script>
+<script src="app/common/model/companyAddressModel.js"></script>
+<script src="app/lib/ng-table.js"></script>
+<script src="app/lib/angular-translate.js"></script>
+<script src="app/lib/angular-translate-loader-static-files.js"></script>
+<script src="app/common/services/dataLists.js"></script>
+<script src="app/common/services/filterLists.js"></script>
+<script src="app/common/services/hpfbConstants.js"></script>
+<!--<script src="app/common/directives/fileIO/FILEIO.js"></script>-->
+<script src="app/common/directives/fileIO/parseXML.js"></script>
+<script src="app/common/directives/fileIO/testresult.js"></script>
+<!--<script src="app/common/directives/fileIO/convertxml2js.js"></script>-->
+<script src="app/common/directives/fileIO/vendor/xml2json.js"></script>
+<script src="app/common/directives/fileIO/FILEIO.js"></script>
+</body>
+</html>
