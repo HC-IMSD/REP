@@ -1,6 +1,7 @@
 1. Depends on the library: https://github.com/abdmob/x2js
 
 To use:
+requires xml2json.js. This has been moved to vendor files
 Since the file read is asynchronous, need to capture the emit 'fileReadComplete' message:
 
  $scope.$on('fileReadComplete',function(evt,result,value){

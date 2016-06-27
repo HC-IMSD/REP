@@ -203,6 +203,9 @@
 	<hpfb:element name="roa_details" type="roa_details_content"/>
 	<hpfb:element name="roa" type="dosage_form_list"/>
 	<hpfb:element name="roa_other" type="char_0_40_content"/>
+
+	<hpfb:element name="country_group" type="country_group_content"/>
+	<hpfb:element name="country_manufacturer" type="country_list"/>
 	<hpfb:element name="container_group" type="container_group_content"/>
 	<hpfb:element name="container_details" type="container_details_content"/>
 	<hpfb:element name="container_type" type="char_1_256_content"/>
@@ -270,6 +273,7 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
+
 	<hpfb:complexType name="ref_product_list_content">
 		<hpfb:sequence>
 			<hpfb:element ref="cdn_ref_product" minOccurs="0" maxOccurs="unbounded"/>
@@ -310,7 +314,13 @@
 			<hpfb:element ref="sched_a_claims_ind"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-
+	
+	<hpfb:complexType name="country_group_content">
+		<hpfb:sequence>
+			<hpfb:element ref="country_manufacturer" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	
 
 	<hpfb:complexType name="ingredient_group_content">
 		<hpfb:sequence>
@@ -472,6 +482,7 @@
 			<hpfb:element ref="dosage_form"/>
 			<hpfb:element ref="dosage_form_other"/>
 			<hpfb:element ref="roa_group"/>
+			<hpfb:element ref="country_group"/>
 			<hpfb:element ref="container_group"/>
 			<hpfb:element ref="active_ingredient" minOccurs="1" maxOccurs="unbounded"/>
 			<hpfb:element ref="nonmedicinal_ingredient" minOccurs="0" maxOccurs="unbounded" />
@@ -494,9 +505,9 @@
 	
 	
 	<hpfb:complexType name="container_group_content">
-		<hpfb:all>
+		<hpfb:sequence>
 		<hpfb:element ref="container_details" minOccurs="1" maxOccurs="unbounded"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 
 	<hpfb:complexType name="container_details_content">
