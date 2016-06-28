@@ -34,6 +34,7 @@
 	<hpfb:element name="cdn_ref_product" type="cdn_ref_product_content"/>
 	<hpfb:element name="amend_ref_product" type="required_yes_no_content"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
+	<hpfb:element name="dosage_form_group" type="dosage_form_group_content"/>
 	<hpfb:element name="dosage_form" type="dosage_form_list"/>
 	<hpfb:element name="dosage_form_other" type="char_0_100_content"/>
 	<hpfb:element name="strengths" type="char_1_256_content"/>
@@ -314,13 +315,13 @@
 			<hpfb:element ref="sched_a_claims_ind"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-	
+
 	<hpfb:complexType name="country_group_content">
 		<hpfb:sequence>
 			<hpfb:element ref="country_manufacturer" minOccurs="1" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-	
+
 
 	<hpfb:complexType name="ingredient_group_content">
 		<hpfb:sequence>
@@ -479,14 +480,20 @@
 
 	<hpfb:complexType name="formulation_content">
 		<hpfb:sequence>
-			<hpfb:element ref="dosage_form"/>
-			<hpfb:element ref="dosage_form_other"/>
+			<hpfb:element ref="dosage_form_group"/>
 			<hpfb:element ref="roa_group"/>
 			<hpfb:element ref="country_group"/>
 			<hpfb:element ref="container_group"/>
 			<hpfb:element ref="active_ingredient" minOccurs="1" maxOccurs="unbounded"/>
-			<hpfb:element ref="nonmedicinal_ingredient" minOccurs="0" maxOccurs="unbounded" />
+			<hpfb:element ref="nonmedicinal_ingredient" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="material_ingredient" minOccurs="0" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="dosage_form_group_content">
+		<hpfb:sequence>
+			<hpfb:element ref="dosage_form"/>
+			<hpfb:element ref="dosage_form_other"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -502,11 +509,11 @@
 			<hpfb:element ref="roa_other"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-	
-	
+
+
 	<hpfb:complexType name="container_group_content">
 		<hpfb:sequence>
-		<hpfb:element ref="container_details" minOccurs="1" maxOccurs="unbounded"/>
+			<hpfb:element ref="container_details" minOccurs="1" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -543,11 +550,10 @@
 			<hpfb:element ref="nanomaterial_details"/>
 		</hpfb:all>
 	</hpfb:complexType>
-		<hpfb:complexType name="material_group_content">
+	<hpfb:complexType name="material_group_content">
 		<hpfb:all>
 			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="in_final_container"/>
 		</hpfb:all>
 	</hpfb:complexType>
-
 </hpfb:schema>

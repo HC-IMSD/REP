@@ -3,7 +3,6 @@
  * @ngdoc service
  */
 
-
 (function () {
     'use strict';
 
@@ -15,15 +14,12 @@
 })();
 
 
-
 (function () {
     'use strict';
 
     angular
         .module('model.companies')
         .factory('CompanyAddresses', addresses);
-
-    //factoryName.$inject = ['$parse'];
 
     /* @ngInject */
 
@@ -81,7 +77,6 @@
 
         function setAddresses(newAddressList){
                 addresses=newAddressList;
-            console.log("this is addresses "+addresses)
         }
 
         function getAddresses(){
@@ -98,7 +93,6 @@
                 companyRecord.roles=new Array()
             }
             companyRecord.roles.push(newRole);
-            console.debug(companyRecord);
         }
         /*
             @ngdoc
@@ -117,14 +111,11 @@
             }
             return false
         }
-
-
         function addAddress(){
 
             var company= {
                 companyRecord: {
                     roles: [
-
                     ],
                     company: {
                         name: "NEW Test 3",
@@ -139,9 +130,7 @@
                     }
                 }
             }
-           // var obj = JSON.parse(company);
             addresses.push(company);
-            console.debug(addresses);
         }
         function loadAddresses(jsonAddressList){
            //todo some kind of checking?
