@@ -1,28 +1,31 @@
 <?xml version="1.0"?>
 	<!-- ****************************** -->
-	<!-- Company Enrolment version 0.1 -->
+	<!-- Company Enrolment version 1.0 -->
 	<!-- ****************************** -->
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<hpfb:include schemaLocation="./common/data_types.xsd"/>
 	<hpfb:include schemaLocation="./common/contact.xsd"/>
 	<hpfb:include schemaLocation="./common/address.xsd"/>
+
 	<!-- ****************************** -->
 	<!-- ELEMENT DECLARATIONS -->
 	<!-- ****************************** -->
-	<!-- COMPANY_ENROL is the root element-->
+	<!-- COMPANY_ENROL = root element-->
 	<hpfb:element name="COMPANY_ENROL" type="company_enrol_content" />	
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="application_type" type="rep_type"/>
-	<hpfb:element name="software_version" type="hpfb:string"/>
-	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="software_version" type="char_0_40_content"/>
+	<hpfb:element name="company_id" type="char_0_6_content" />
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="amend_record" type="required_yes_no_content"/>
 	<hpfb:element name="manufacturer" type="required_yes_no_content"/>
 	<hpfb:element name="mailing" type="required_yes_no_content"/>
 	<hpfb:element name="billing" type="required_yes_no_content"/>
 	<hpfb:element name="importer" type="required_yes_no_content"/>
-	<hpfb:element name="company_name" type="char_1_256_content"/>
+	<hpfb:element name="primary_rep" type="required_yes_no_content"/>
+	<hpfb:element name="secondary_rep" type="required_yes_no_content"/>
+	<hpfb:element name="company_name" type="char_1_80_content"/>
 	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"  nillable="true"/>
 	<hpfb:element name="company_contact_details" type="contact_content"/>
 	<hpfb:element name="contact_record" type="contact_record_content" />
@@ -38,7 +41,7 @@
 		<hpfb:element ref="software_version"/>
 		<hpfb:element ref="company_id"/>
 		<hpfb:element ref="address_record" minOccurs="1" maxOccurs="4"/>
-		<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="7"/>
+		<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="6"/>
 		</hpfb:sequence>
 		</hpfb:complexType>
 

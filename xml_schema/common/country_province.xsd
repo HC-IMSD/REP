@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
-
+	<!-- ****************************** -->
+	<!-- country provinces version 1.0 -->
+	<!-- ****************************** -->
 	<hpfb:simpleType name="country_list">
+		<hpfb:annotation>
+			<hpfb:documentation xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">ISO 3166 Country 3 letter codes</hpfb:documentation>
+		</hpfb:annotation>
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="CAN"/>
 			<hpfb:enumeration value="USA"/>
@@ -242,21 +247,21 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
-	
+
 	<hpfb:simpleType name="unknown_list">
-	<hpfb:restriction base="hpfb:string">
-	<hpfb:enumeration value="UNKNOWN"/>
-	</hpfb:restriction>
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="UNKNOWN"/>
+		</hpfb:restriction>
 	</hpfb:simpleType>
 
-	<hpfb:simpleType name="country_unknown_list">	
+	<hpfb:simpleType name="country_unknown_list">
 		<hpfb:union memberTypes="country_list unknown_list"/>
-		</hpfb:simpleType>
-	
+	</hpfb:simpleType>
+
 
 	<hpfb:simpleType name="prov_list">
 		<hpfb:restriction base="hpfb:string">
-		<hpfb:enumeration value="AB"/>
+			<hpfb:enumeration value="AB"/>
 			<hpfb:enumeration value="BC"/>
 			<hpfb:enumeration value="MB"/>
 			<hpfb:enumeration value="NB"/>
@@ -270,11 +275,11 @@
 			<hpfb:enumeration value="SK"/>
 			<hpfb:enumeration value="YT"/>
 		</hpfb:restriction>
-		</hpfb:simpleType>
+	</hpfb:simpleType>
 
-		<hpfb:simpleType name="usa_state_list">
+	<hpfb:simpleType name="usa_state_list">
 		<hpfb:restriction base="hpfb:string">
-		<hpfb:enumeration value="AL"/>
+			<hpfb:enumeration value="AL"/>
 			<hpfb:enumeration value="AK"/>
 			<hpfb:enumeration value="AZ"/>
 			<hpfb:enumeration value="AR"/>
@@ -326,8 +331,8 @@
 			<hpfb:enumeration value="WI"/>
 			<hpfb:enumeration value="WY"/>
 		</hpfb:restriction>
-		</hpfb:simpleType>
-	
+	</hpfb:simpleType>
+
 	<!-- USA and Canada states or provinces-->
 	<hpfb:simpleType name="prov_state_list">
 		<hpfb:union memberTypes="usa_state_list prov_list"/>
