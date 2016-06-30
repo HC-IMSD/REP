@@ -32,7 +32,6 @@
 	<hpfb:element name="therapeutic_class" type="char_1_256_content"/>
 	<hpfb:element name="ref_product_list" type="ref_product_list_content"/>
 	<hpfb:element name="cdn_ref_product" type="cdn_ref_product_content"/>
-	<hpfb:element name="amend_ref_product" type="required_yes_no_content"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
 	<hpfb:element name="dosage_form_group" type="dosage_form_group_content"/>
 	<hpfb:element name="dosage_form" type="dosage_form_list"/>
@@ -46,6 +45,7 @@
 	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
 	<!-- Schedule A definitions-->
 	<hpfb:element name="schedule_a_group" type="schedule_a_content"/>
+	<hpfb:element name="din_number" type="din_content"/>	
 	<hpfb:element name="acute_alcohol" type="required_yes_no_content"/>
 	<hpfb:element name="acute_anxiety" type="required_yes_no_content"/>
 	<hpfb:element name="acute_infectious" type="required_yes_no_content"/>
@@ -59,7 +59,7 @@
 	<hpfb:element name="congest_heart_fail" type="required_yes_no_content"/>
 	<hpfb:element name="convulsions" type="required_yes_no_content"/>
 	<hpfb:element name="dementia" type="required_yes_no_content"/>
-	<hpfb:element name="depresssion" type="required_yes_no_content"/>
+	<hpfb:element name="depression" type="required_yes_no_content"/>
 	<hpfb:element name="diabetes" type="required_yes_no_content"/>
 	<hpfb:element name="gangrene" type="required_yes_no_content"/>
 	<hpfb:element name="glaucoma" type="required_yes_no_content"/>
@@ -75,7 +75,7 @@
 	<hpfb:element name="thrombotic_embolic_disorder" type="required_yes_no_content"/>
 	<hpfb:element name="thyroid_disease" type="required_yes_no_content"/>
 	<hpfb:element name="ulcer_gastro" type="required_yes_no_content"/>
-	<hpfb:element name="sched_a_claims_ind" type="char_1_256_content"/>
+	<hpfb:element name="sched_a_claims_ind_details" type="char_1_256_content"/>
 	<!-- ingredients-->
 	<hpfb:element name="drug_ingredients_group" type="ingredient_group_content"/>
 	<hpfb:element name="drug_ingredient" type="ingredient_content"/>
@@ -192,8 +192,8 @@
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
 	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
 	<hpfb:element name="animal_age" type="integer_1_999_content"/>
-	<hpfb:element name="country_origin_list" type="country_origin_list_content"/>
 	<hpfb:element name="country_with_unknown" type="country_unknown_list"/>
+	<hpfb:element name="country_origin_list" type="country_origin_list_content"/>
 	<hpfb:element name="unknown_country_details" type="char_0_100_content"/>
 	<hpfb:element name="country_origin" type="country_origin_content"/>
 
@@ -237,7 +237,7 @@
 			<hpfb:element ref="application_type"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
-			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="3"/>
+			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
 			<hpfb:element ref="ref_product_list"/>
 			<hpfb:element ref="human_drug_use"/>
 			<hpfb:element ref="radiopharm_drug_use"/>
@@ -251,11 +251,11 @@
 	</hpfb:complexType>
 
 	<hpfb:complexType name="contact_record_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="rep_contact_role"/>
 			<hpfb:element ref="rep_contact_details"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 	<hpfb:complexType name="therapeutic_class_content">
 		<hpfb:sequence>
@@ -265,7 +265,7 @@
 
 	<hpfb:complexType name="cdn_ref_product_content">
 		<hpfb:sequence>
-			<hpfb:element ref="amend_ref_product"/>
+			
 			<hpfb:element ref="medicinal_ingredient"/>
 			<hpfb:element ref="dosage_form"/>
 			<hpfb:element ref="dosage_form_other"/>
@@ -277,12 +277,14 @@
 
 	<hpfb:complexType name="ref_product_list_content">
 		<hpfb:sequence>
+			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="cdn_ref_product" minOccurs="0" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
 	<hpfb:complexType name="schedule_a_content">
 		<hpfb:sequence>
+			<hpfb:element ref="din_number"/>
 			<hpfb:element ref="acute_alcohol"/>
 			<hpfb:element ref="acute_anxiety"/>
 			<hpfb:element ref="acute_infectious"/>
@@ -296,7 +298,7 @@
 			<hpfb:element ref="congest_heart_fail"/>
 			<hpfb:element ref="convulsions"/>
 			<hpfb:element ref="dementia"/>
-			<hpfb:element ref="depresssion"/>
+			<hpfb:element ref="depression"/>
 			<hpfb:element ref="diabetes"/>
 			<hpfb:element ref="gangrene"/>
 			<hpfb:element ref="glaucoma"/>
@@ -312,7 +314,7 @@
 			<hpfb:element ref="thrombotic_embolic_disorder"/>
 			<hpfb:element ref="thyroid_disease"/>
 			<hpfb:element ref="ulcer_gastro"/>
-			<hpfb:element ref="sched_a_claims_ind"/>
+			<hpfb:element ref="sched_a_claims_ind_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -330,7 +332,7 @@
 	</hpfb:complexType>
 
 	<hpfb:complexType name="ingredient_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="ingredient_role"/>
@@ -341,12 +343,12 @@
 			<hpfb:element ref="human_sourced"/>
 			<hpfb:element ref="tissues_fluids_section" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="animal_sourced_section" minOccurs="0" maxOccurs="1"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 
 
 	<hpfb:complexType name="tissues_fluid_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="brain"/>
 			<hpfb:element ref="brain_stem"/>
 			<hpfb:element ref="cerebellum"/>
@@ -430,7 +432,7 @@
 			<hpfb:element ref="gall_bladder"/>
 			<hpfb:element ref="other_fluids_tissues"/>
 			<hpfb:element ref="other_fluids_tissues_details"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 
 
