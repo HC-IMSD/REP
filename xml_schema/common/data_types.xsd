@@ -14,6 +14,34 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	<hpfb:simpleType name="integer_1_999_content">
+		<hpfb:restriction base="hpfb:integer">
+			<hpfb:minInclusive value="1"/>
+			<hpfb:maxInclusive value="999"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="integer_0_9999_content">
+		<hpfb:restriction base="hpfb:integer">
+			<hpfb:minInclusive value="0"/>
+			<hpfb:maxInclusive value="9999"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="temp_integer_content">
+		<hpfb:restriction base="hpfb:integer">
+			<hpfb:minInclusive value="-274"/>
+			<hpfb:maxInclusive value="999"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="integer_0_99_content">
+		<hpfb:restriction base="hpfb:integer">
+			<hpfb:minInclusive value="0"/>
+			<hpfb:maxInclusive value="99"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 	<hpfb:simpleType name="char_0_3_content">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:pattern value=".{0,3}"/>
@@ -149,7 +177,6 @@
 			<hpfb:enumeration value="TERTIARY"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
-
 
 	<hpfb:simpleType name="language">
 		<hpfb:restriction base="hpfb:string">
