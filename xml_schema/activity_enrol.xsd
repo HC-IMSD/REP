@@ -13,21 +13,21 @@
 	<!-- ACTIVITY_ENROL is the root element-->
 	<hpfb:element name="ACTIVITY_ENROL" type="activity_enrol_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="dsts_control_number" type="char_1_6_content"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
-	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>-
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="application_type" type="rep_type"/>
 	<hpfb:element name="software_version" type="hpfb:string"/>
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
-	<hpfb:element name="dossier_id_prefix"/>
+	<hpfb:element name="dossier_id_prefix" fixed="HC6-024-"/>
 	<hpfb:element name="dossier_id" type="char_1_10_content"/>
-	<hpfb:element name="reg_activity_lead"/>
-	<hpfb:element name="reg_activity_type"/>
+	<hpfb:element name="reg_activity_lead" type="lead_types_list"/>
+	<hpfb:element name="reg_activity_type" type="activity_types_list"/>
 	<hpfb:element name="fee_class"/>
-	<hpfb:element name="not_lasa"/>
+	<hpfb:element name="not_lasa" type="required_yes_no_content"/>
 	<hpfb:element name="reason_filing" type="char_1_1024_content"/>
-	<hpfb:element name="is_third_party"/>
-	<hpfb:element name="related_reg_activity"/>
-	<hpfb:element name="date_cleared"/>
+	<hpfb:element name="is_third_party" type="required_yes_no_content"/>
+	<hpfb:element name="date_cleared" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content"/>
 	<hpfb:element name="manufacturer_name" type="char_1_80_content"/>
 	<hpfb:element name="assoc_dins" type="assoc_dins_content"/>
@@ -53,16 +53,17 @@
 	<hpfb:element name="other_change_details" type="char_0_80_content"/>
 	<hpfb:element name="notifiable_change_types" type="change_types_content"/>
 	<hpfb:element name="rationale_types" type="rationale_content"/>
-	<hpfb:element name="contact_record" type="contact_record_content" />
+	<hpfb:element name="contact_record" type="contact_record_content"/>
 	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"/>
 	<hpfb:element name="rep_contact_details" type="contact_content"/>
-	<hpfb:element ref="amend_record" type="required_yes_no_content"/>
+	<hpfb:element name="amend_record" type="required_yes_no_content"/>
 	<!-- ****************************** -->
 	<!-- Main Content Element -->
 	<!-- ****************************** -->
 	<hpfb:complexType name="activity_enrol_content">
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="dsts_control_number"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="application_type"/>
@@ -95,7 +96,6 @@
 			<hpfb:element ref="container_size_change"/>
 			<hpfb:element ref="packaging_spec_change"/>
 			<hpfb:element ref="packaging_materials_change"/>
-			<hpfb:element ref="other_change"/>
 			<hpfb:element ref="other_change_details"/>
 		</hpfb:all>
 	</hpfb:complexType>
@@ -125,18 +125,55 @@
 		<hpfb:sequence>
 			<hpfb:element ref="reg_activity_type"/>
 			<hpfb:element ref="date_cleared"/>
-			<hpfb:element ref="control_number" />
-			<hpfb:element ref="dossier_id" />
-			<hpfb:element ref="manufacturer_name" />
-			<hpfb:element ref="reason_filing" />
-			<hpfb:element ref="assoc_dins" />
+			<hpfb:element ref="control_number"/>
+			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="manufacturer_name"/>
+			<hpfb:element ref="reason_filing"/>
+			<hpfb:element ref="assoc_dins"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-	
-		<hpfb:complexType name="assoc_dins_content">
-			<hpfb:sequence>
+
+	<hpfb:complexType name="assoc_dins_content">
+		<hpfb:sequence>
 			<hpfb:element ref="din_number" minOccurs="0" maxOccurs="unbounded"/>
-			</hpfb:sequence>
-			</hpfb:complexType>
-	
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+	<hpfb:simpleType name="lead_types_list">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="BIOLOGIC"/>
+			<hpfb:enumeration value="CHP"/>
+			<hpfb:enumeration value="DMF"/>
+			<hpfb:enumeration value="PHARMA"/>
+			<hpfb:enumeration value="PMVIGILANCE"/>
+			<hpfb:enumeration value="MD"/>
+			<hpfb:enumeration value="VET"/>
+			<hpfb:enumeration value="UNASSIGNED"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="activity_types_list">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="CTA"/>
+			<hpfb:enumeration value="CTAA"/>
+			<hpfb:enumeration value="NDS"/>
+			<hpfb:enumeration value="SNDS"/>
+			<hpfb:enumeration value="ANDS"/>
+			<hpfb:enumeration value="SANDS"/>
+			<hpfb:enumeration value="NC"/>
+			<hpfb:enumeration value="DIN"/>
+			<hpfb:enumeration value="PDC"/>
+			<hpfb:enumeration value="ADMIN"/>
+			<hpfb:enumeration value="VIND"/>
+			<hpfb:enumeration value="VINDAM"/>
+			<hpfb:enumeration value="VNDS"/>
+			<hpfb:enumeration value="VANDS"/>
+			<hpfb:enumeration value="VSANDS"/>
+			<hpfb:enumeration value="VNC"/>
+			<hpfb:enumeration value="VDIN"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+
 </hpfb:schema>
