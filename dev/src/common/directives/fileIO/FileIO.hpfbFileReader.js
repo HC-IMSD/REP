@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     angular
-        .module('FileIO', []);
+        .module('fileIO', []);
 
 })();
 
@@ -17,7 +17,7 @@
      * the function will be called to update values
      */
     angular
-        .module('FileIO')
+        .module('fileIO')
         .directive('hpfbFileSelect', ngFileSelect);
 
     ngFileSelect.$inject = ['hpfbFileProcessing'];
@@ -52,8 +52,12 @@
 
 (function () {
     'use strict';
-
-    angular.module('FileIO').component('danFileSelect', {
+    /**
+     * @ngdoc component- fileSelect UI for loading files into a data model
+     * @param updateModelRoot- the function to call and pass the JSON model
+     * @param rootElem - the name of the root element. Used for comparing to the loaded file
+     */
+    angular.module('fileIO').component('hpfbFileSelect', {
         templateUrl: 'fileSelect.html',
         controller: FileSelectController,
         bindings: {
@@ -74,45 +78,74 @@
             }
             vm.updateModelRoot({fileContent: fileContent});
         };
-
     }
-
 })();
 
 (function () {
     'use strict';
 
-    angular.module('FileIO').component('hpfbFileSave', {
+    /**
+     * @ngdoc component - the UI component for saving a data model
+     * @param jsonToSave- the JSON data model to save
+     * @param  rootTag - the string name of the root tag. Needed for lookups
+     * @param saveType- valid values are 'json' or 'xml'
+     * @param buttonLabel -the label for the save button
+     */
+    angular.module('fileIO').component('hpfbFileSave', {
         templateUrl: 'fileSave.html',
         controller: FileWriteController,
         bindings: {
             jsonToSave: '<',
             rootTag: '@',
             saveType: '@',
-            buttonLabel: '@'
+            buttonLabel: '@',
+            buttonDisabled:'@'
         }
     });
 
-    /* @ngInject */
+
     FileWriteController.$inject = ['hpfbFileProcessing']
+    /**
+     * @ngdoc controller - controller for file writing
+     * @param hpfbFileProcessing - the service that does all the file creation and validation
+     * @constructer _init- initializes state as needed. Updates button disabled
+     */
     function FileWriteController(hpfbFileProcessing) {
+
         var vm = this;
-        vm.generate = function () {
+        vm.$onInit =_init;
+        vm.generate = _generateFile;
+
+        function _generateFile(){
             if (vm.saveType.toUpperCase() === "JSON") {
                 hpfbFileProcessing.writeAsJson(vm.jsonToSave, vm.fileName, vm.rootTag);
             } else if (vm.saveType.toUpperCase() === "XML") {
                 hpfbFileProcessing.writeAsXml(vm.jsonToSave, vm.fileName, vm.rootTag);
             }
         }
+        function _init(){
+           //disabled state
+            if(!vm.buttonDisabled){
+               vm.buttonDisabled=false;
+            }else if(vm.buttonDisabled.toLowerCase()==="true"){
+                vm.buttonDisabled=true
+            }else if(vm.buttonDisabled.toLowerCase()==="false"){
+                vm.buttonDisabled=false;
+            }else{
+                vm.buttonDisabled=false;
+            }
+        }
     }
-
 })();
 
 
 (function () {
     'use strict';
+    /**
+     * @ngdoc service- processes all files for load and writing
+     */
     angular
-        .module('FileIO')
+        .module('fileIO')
         .factory('hpfbFileProcessing', fileReader);
 
     fileReader.$inject = ['$q'];
@@ -149,9 +182,7 @@
                     var splitFile = file.name.split('.');
                     var fileType = splitFile[splitFile.length - 1];
                     if ((fileType.toLowerCase()) == "json") {
-                        console.log("loading json....")
                         convertToJSONObjects(reader);
-                        console.log("Json result " + reader.result)
                         checkRootTagMatch(reader, scope);
                         if (reader.parseResult.jsonResult) {
                             compareHashInJson(reader, scope.rootTag);
@@ -159,6 +190,10 @@
                     } else if ((fileType.toLowerCase() === "xml")) {
                         convertXMLToJSONObjects(reader);
                         checkRootTagMatch(reader, scope);
+                        if (reader.parseResult.jsonResult) {
+                            compareHashInXML(reader, scope)
+                        }
+
                     } else {
                         convertResult.parseResult = null;
                         convertResult.messages = msg_err_fileType;
@@ -256,30 +291,43 @@
             }
         }
 
+        /**
+         * @ngdoc method - inserts a hash value into a json object. Hash is calculated on the entire json
+         * @param jsonObj- the json object to hash
+         * @param rootTag- the root tag of the jsonObject. Used for lookups
+         */
         function insertHashInJson(jsonObj, rootTag) {
             jsonObj[rootTag].data_checksum = "";
             var hash = CryptoJS.SHA256(JSON.stringify(jsonObj));
             jsonObj[rootTag].data_checksum = hash.toString();
         }
-
+        /**
+         * @ngdoc method - compares the hash in the JSON to the calculated JSON hash
+         * @param reader- the reader extended object that contains the json
+         * @param rootTag- the root tag of the jsonObject. Used for lookups
+         */
         function compareHashInJson(reader, rootTag) {
             var currentTagValue = reader.parseResult.jsonResult[rootTag].data_checksum;
             reader.parseResult.jsonResult[rootTag].data_checksum = "";
-            console.log(JSON.stringify(reader.parseResult.jsonResult))
             var generatedHash = CryptoJS.SHA256(JSON.stringify(reader.parseResult.jsonResult));
-            console.log("Generated hash " + generatedHash.toString() + "file Hash " + currentTagValue);
             if (currentTagValue !== generatedHash.toString()) {
                 reader.parseResult.jsonResult = null;
                 reader.parseResult.messages = msg_err_checksum_compareFail;
             }
         }
-
+        /**
+         * @ngdoc method - compares the hash in the XML to the calculated XML hash
+         * @param reader- the reader extended object that contains the json
+         * @param rootTag- the root tag of the jsonObject. Used for lookups
+         */
         function compareHashInXML(reader, scope) {
             var currentTagValue = reader.parseResult.jsonResult[scope.rootTag].data_checksum;
-            reader.parseResult.jsonResult[scope.rootTag].data_checksum = "";
+            var convertedToJson= reader.parseResult.jsonResult;
+           //remove checksum
+            convertedToJson[scope.rootTag].data_checksum = "";
             //convert to xml
-            scope.hash = CryptoJS.SHA256("reader.result");
-            console.log(scope.hash.toString());
+            var xmlResult = convertJSONObjectsToXML(convertedToJson)
+            scope.hash = CryptoJS.SHA256(xmlResult);
             if (currentTagValue !== scope.hash.toString()) {
                 reader.parseResult.jsonResult = null;
                 reader.parseResult.messages = msg_err_checksum_compareFail;
@@ -301,8 +349,11 @@
 
         function xmlToFile(jsonObj, fileName, rootTag) {
             if (!jsonObj) return;
-            insertHashInJson(jsonObj, rootTag)
             var xmlResult = convertJSONObjectsToXML(jsonObj)
+            var hash = CryptoJS.SHA256(xmlResult);
+            jsonObj[rootTag].data_checksum = hash.toString();
+            //regenerate the xml
+            xmlResult = convertJSONObjectsToXML(jsonObj)
             var blob = new Blob([xmlResult], {type: "text/plain;charset=utf-8"});
             if (!fileName) {
                 fileName = "hpfbXML.xml"
