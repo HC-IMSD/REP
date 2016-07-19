@@ -54,7 +54,7 @@
     'use strict';
 
     angular.module('FileIO').component('danFileSelect', {
-        templateUrl: '../../../../../../FileReader3/fileSelect.html',
+        templateUrl: 'fileSelect.html',
         controller: FileSelectController,
         bindings: {
             updateModelRoot: '&',
@@ -83,7 +83,7 @@
     'use strict';
 
     angular.module('FileIO').component('hpfbFileSave', {
-        templateUrl: '../../../../../../FileReader3/fileSave.html',
+        templateUrl: 'fileSave.html',
         controller: FileWriteController,
         bindings: {
             jsonToSave: '<',
