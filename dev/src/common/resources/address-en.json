@@ -6,6 +6,5 @@
   "PROVSTATE": "Province or State",
   "STATE": "State",
   "STREET": "Street Address",
-  "ZIP": "Zip Code",
-  "FOO": "MY foo"
+  "ZIP": "Zip Code"
 }

@@ -36,14 +36,12 @@
             scope.rootTag = attrs.rootTag;
             element.bind("change", function (e) {
                 scope.file = (e.srcElement || e.target).files[0];
-                if (scope.file) {
+
                     hpfbFileReader.readAsDataText(scope.file, scope)
                         .then(function (result) {
-
                             scope.hpfbFileSelect({fileContent: result});
-
                         })
-                }
+
             })
         }
 
@@ -165,7 +163,7 @@
          */
         var convertResult = {
             jsonResult: "",
-            messages: msg_success
+            messages: ""
         }
         var service = {
             readAsDataText: readAsDataText,
@@ -178,28 +176,28 @@
         function onLoad(reader, deferred, scope, file) {
             return function () {
                 scope.$apply(function () {
-                    if (!file) return;
-                    var splitFile = file.name.split('.');
-                    var fileType = splitFile[splitFile.length - 1];
-                    if ((fileType.toLowerCase()) == "json") {
-                        convertToJSONObjects(reader);
-                        checkRootTagMatch(reader, scope);
-                        if (reader.parseResult.jsonResult) {
-                            compareHashInJson(reader, scope.rootTag);
-                        }
-                    } else if ((fileType.toLowerCase() === "xml")) {
-                        convertXMLToJSONObjects(reader);
-                        checkRootTagMatch(reader, scope);
-                        if (reader.parseResult.jsonResult) {
-                            compareHashInXML(reader, scope)
-                        }
+                    if (file) {
+                        var splitFile = file.name.split('.');
+                        var fileType = splitFile[splitFile.length - 1];
+                        if ((fileType.toLowerCase()) == "json") {
+                            convertToJSONObjects(reader);
+                            checkRootTagMatch(reader, scope);
+                            if (reader.parseResult.jsonResult) {
+                                compareHashInJson(reader, scope.rootTag);
+                            }
+                        } else if ((fileType.toLowerCase() === "xml")) {
+                            convertXMLToJSONObjects(reader);
+                            checkRootTagMatch(reader, scope);
+                            if (reader.parseResult.jsonResult) {
+                                compareHashInXML(reader, scope)
+                            }
 
-                    } else {
-                        convertResult.parseResult = null;
-                        convertResult.messages = msg_err_fileType;
-                        reader.parseResult = convertResult;
+                        } else {
+                            convertResult.parseResult = null;
+                            convertResult.messages = msg_err_fileType;
+                            reader.parseResult = convertResult;
+                        }
                     }
-
                     deferred.resolve(reader.parseResult);
                 });
             }
@@ -224,11 +222,16 @@
 
         function readAsDataText(file, scope) {
             var deferred = $q.defer();
-
             var reader = getReader(deferred, scope, file);
+
             if (file) {
-                //var result = null;
                 reader.readAsText(file);
+            } else {
+                reader.parseResult = convertResult;
+                reader.parseResult.messages = "";
+                reader.parseResult.jsonResult = null;
+                //case of clearing out the messages as no file was selected
+                deferred.resolve(reader.parseResult);
             }
             return deferred.promise;
         }
@@ -237,6 +240,7 @@
 
             try {
                 convertResult.jsonResult = JSON.parse(reader.result);
+                convertResult.messages = msg_success;
                 reader.parseResult = convertResult;
             } catch (e) {
                 convertResult.jsonResult = null;
@@ -259,8 +263,11 @@
             var xmlConverter = new X2JS(xmlConfig);
             //converts XML as a string to a json
             convertResult.jsonResult = xmlConverter.xml_str2json(reader.result);
+
             if (convertResult.jsonResult === null) {
                 convertResult.messages = msg_err_xmlparse;
+            } else {
+                convertResult.messages = msg_success;
             }
             reader.parseResult = convertResult;
         }
@@ -273,7 +280,6 @@
             xmlResult = jsonConverter.json2xml_str(jsonObj)
             return (xmlResult);
         }
-
 
         /**
          * @ngDoc method - checks if the root tag matches the expected. If it doesn't match, clears the data
@@ -349,6 +355,8 @@
 
         function xmlToFile(jsonObj, fileName, rootTag) {
             if (!jsonObj) return;
+            //clear out any previous value if it exists
+            jsonObj[rootTag].data_checksum = "";
             var xmlResult = convertJSONObjectsToXML(jsonObj)
             var hash = CryptoJS.SHA256(xmlResult);
             jsonObj[rootTag].data_checksum = hash.toString();
