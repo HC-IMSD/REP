@@ -4,7 +4,7 @@
 	<!-- USA and Canada states or provinces-->
 	<hpfb:simpleType name="sequence_description_list">
 		<hpfb:restriction base="hpfb:string">
-			<hpfb:enumeration value="ADMINISTRATIVE"/>
+			<hpfb:enumeration value="ADMINISTRATIVE"/> 
 			<hpfb:enumeration value="BENEFIT_RISK_ASSESS"/>
 			<hpfb:enumeration value="CANCEL_LETTER"/>
 			<hpfb:enumeration value="CHANGE_TO_DIN"/>

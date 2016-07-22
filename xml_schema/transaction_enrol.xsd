@@ -23,12 +23,13 @@
 	<hpfb:element name="sequence_number" type="sequence_content"/>
 	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
-	<hpfb:element name="sequence_activity_value" type="reg_activity_type_list"/>
+	<hpfb:element name="sequence_activity_type" type="reg_activity_type_list"/>
 	<hpfb:element name="sequence_description_value" type="sequence_description_list"/>
 	<hpfb:element name="sequence_from_date" type="yyyymmdd_date_content"/>
 	<hpfb:element name="sequence_to_date" type="yyyymmdd_date_content"/>
-	<hpfb:element name="sequence_version" type="number_0_5_Content"/>
+	<hpfb:element name="sequence_version" type="number_0_5_content"/>
 	<hpfb:element name="sequence_details" type="char_1_50_content"/>
+	<hpfb:element name="sequence_concat" type="hpfb:string"/>
 	<hpfb:element name="lifecycle_record" type="livecycle_record_content"/>
 	<hpfb:element name="is_solicited"  type="required_yes_no_content"/>
 	<hpfb:element name="solicited_requester" type="char_0_256_content"/>
@@ -78,7 +79,7 @@
 			<hpfb:element ref="sequence_number"/>
 			<hpfb:element ref="date_filed"/>
 			<hpfb:element ref="control_number"/>
-			<hpfb:element ref="sequence_activity_value"/>
+			<hpfb:element ref="sequence_activity_type"/>
 			<hpfb:element ref="sequence_description_value"/>
 			<hpfb:element ref="sequence_from_date"/>
 			<hpfb:element ref="sequence_to_date"/>

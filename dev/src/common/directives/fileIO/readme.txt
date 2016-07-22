@@ -2,6 +2,11 @@
 
 For FileIO.hpfbFileReader
 To use:
+<<<<<<< HEAD
+requires xml2json.js. This has been moved to vendor files
+Since the file read is asynchronous, need to capture the emit 'fileReadComplete' message:
+=======
+>>>>>>> dan_repBranch
 
 In the calling scope create a function that will process the json object model
 

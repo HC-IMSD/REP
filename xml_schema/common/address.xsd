@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+
+	<!-- ****************************** -->
+	<!-- address version 1.0 -->
+	<!-- ****************************** -->
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" 	
 			elementFormDefault="qualified" >
 	 <hpfb:include schemaLocation="./data_types.xsd"/>

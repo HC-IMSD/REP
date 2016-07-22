@@ -2,7 +2,7 @@
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
 	<hpfb:include schemaLocation="./data_types.xsd"/>
 	<!-- ****************************** -->
-	<!-- ELEMENT DECLARATIONS -->
+	<!-- Company Enrolment version 1.0 -->
 	<!-- ****************************** -->
 	<hpfb:element name="salutation" type="salutation_content"/>
 	<hpfb:element name="given_name" type="char_1_40_content"/>
@@ -15,9 +15,6 @@
 	<hpfb:element name="fax_num" type="char_0_10_content"/>
 	<hpfb:element name="email" type="char_1_50_content"/>
 
-	<!-- ****************************** -->
-	<!-- ELEMENT TYPE DECLARATIONS -->
-	<!-- ****************************** -->
 	<!-- main xml structure-->
 	<hpfb:complexType name="contact_content">
 		<hpfb:all>
