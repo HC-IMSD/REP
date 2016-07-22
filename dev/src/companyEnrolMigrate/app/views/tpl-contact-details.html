@@ -1,0 +1,115 @@
+<div class="container">
+
+   <!-- <fieldset>-->
+    <div>
+        <H3>Contact Details</H3>
+
+        <!--<div class="form-group">
+            <label class="form-checkbox" for="chk-amend-rec-contact" ng-hide="true">
+                <input type="checkbox" value="option1" id="chk-amend-rec-contact"> Amend Record </label>
+        </div>-->
+        <div>
+        <cmp-address-role record="$ctrl.contactModel.addressRole"></cmp-address-role>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="contact-role-list">REP Contact Role</label>
+                <select id="contact-role-list" data-ng-model="$ctrl.contactModel.contactRole" class="form-control full-width">
+                    <option></option>
+                    <option>Primary</option>
+                    <option>Secondary</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 form-group">
+                <label for="contact-salut">Salutation</label>
+                <select id="contact-salut" class="form-control full-width">
+                    <option>Mr</option>
+                    <option>Ms</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group">
+                <label for="first-name" class="required"><span class="field-name">{{'FIRST_NAME'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                <input type="text" id="first-name" data-ng-model="$ctrl.contactRecord.givenName"
+                       class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
+            </div>
+
+            <div class="col-md-2 form-group">
+                <label for="initials"><span class="field-name">{{'INITIALS'|translate}}</span></label>
+                <input type="text" id="initials" data-ng-model="$ctrl.contactRecord.initials"
+                       class="form-control full-width" name="text"/>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label for="last-name" class="required"><span class="field-name">{{'LAST_NAME'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                <input type="text" id="last-name" data-ng-model="$ctrl.contactRecord.surname"
+                       class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label for="lang-corresp"><span
+                        class="field-name">{{'LANGUAGE_CORRESPONDENCE'|translate}}</span></label>
+                <select id="lang-corresp" data-data-ng-model="$ctrl.contactRecord.language" class="form-control full-width">
+                    <option>En</option>
+                    <option>Fr</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label for="job-title" class="required"><span class="field-name">{{'JOB_TITLE'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                <input type="text" id="job-title" data-ng-model="$ctrl.contactRecord.title"
+                       class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4 form-group">
+                <label for="phone-number" class="required"><span class="field-name">{{'PHONE_NUMBER'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                <input type="text" id="phone-number" data-ng-model="$ctrl.contactRecord.phone"
+                       class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label for="phone-ext"><span class="field-name">{{'PHONE_EXT'|translate}}</span></label>
+                <input type="text" id="phone-ext" data-ng-model="$ctrl.contactRecord.phoneExt"
+                       class="form-control full-width" name="text"/>
+            </div>
+
+            <div class="col-md-4 form-group">
+                <label for="fax-number"><span class="field-name">{{'FAX_NUMBER'|translate}}</span></label>
+                <input type="text" id="fax-number" data-ng-model="$ctrl.contactRecord.fax"
+                       class="form-control full-width" name="text"/>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12 form-group">
+                <label for="contact-email" class="required"><span class="field-name">{{'EMAIL'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                <input type="text" id="contact-email" data-ng-model="$ctrl.contactRecord.email"
+                       class="form-control full-width" name="text"/>
+            </div>
+
+        </div>
+
+<!--    </fieldset>-->
+    </div>
+
+    <div class="row">
+
+        <div class="btn-group-sm col-xs-12 text-right">
+            <input type="submit" value="Delete" class="btn btn-danger" ng-click="$ctrl.delete()">
+        </div>
+    </div>
+</div>

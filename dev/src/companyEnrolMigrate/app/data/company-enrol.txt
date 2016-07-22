@@ -1,0 +1,128 @@
+{
+  "COMPANY_ENROL": {
+    "data_checksum": "string",
+    "enrolment_version": "1.23",
+    "date_saved": "1999-01-21",
+    "application_type": "APPROVED",
+    "software_version": "string",
+    "company_id": "string",
+    "address_record": [
+      {
+        "address_id": "0001",
+        "company_name": "NoName1",
+        "amend_record": "Y",
+        "manufacturer": "Y",
+        "mailing": "N",
+        "billing": "N",
+        "importer": "N",
+        "company_address_details": {
+          "street_address": "123 Main St",
+          "city": "Ottawa",
+          "province_lov": "ON",
+          "province_text": "",
+          "country": "CAN",
+          "postal_code": "K1A 3N1"
+        }
+      },
+      {
+        "address_id": "0002",
+        "company_name": "NoName2",
+        "amend_record": "N",
+        "manufacturer": "N",
+        "mailing": "Y",
+        "billing": "Y",
+        "importer": "N",
+        "company_address_details": {
+          "street_address": "44554 Younge St",
+          "city": "New York",
+          "province_lov": "NY",
+          "province_text": "",
+          "country": "USA",
+          "postal_code": "12345"
+        }
+      },
+      {
+        "address_id": "0003",
+        "company_name": "NoName3",
+        "amend_record": "N",
+        "manufacturer": "N",
+        "mailing": "N",
+        "billing": "N",
+        "importer": "Y",
+        "company_address_details": {
+          "street_address": "454 John St",
+          "city": "Vancouver",
+          "province_lov": "BC",
+          "province_text": "",
+          "country": "CAN",
+          "postal_code": "M3Z 3D3"
+        }
+      }
+    ],
+    "contact_record": [
+      {
+        "contact_id": "0001",
+        "amend_record": "N",
+        "manufacturer": "Y",
+        "mailing": "N",
+        "billing": "N",
+        "importer": "N",
+        "rep_contact_role": "PRIMARY",
+        "company_contact_details": {
+          "salutation": "DR",
+          "given_name": "John",
+          "initials": "",
+          "surname": "Smith",
+          "job_title": "Manager",
+          "language_correspondance": "fr",
+          "phone_num": "123-111-1111",
+          "phone_ext": "123",
+          "fax_num": "",
+          "email": "test@canada.ca"
+        }
+      },
+      {
+        "contact_id": "0002",
+        "amend_record": "N",
+        "manufacturer": "N",
+        "mailing": "Y",
+        "billing": "Y",
+        "importer": "Y",
+		"rep_contact_role": "",
+        "company_contact_details": {
+          "salutation": "MR",
+          "given_name": "Sam",
+          "initials": "A",
+          "surname": "Roberts",
+          "job_title": "CEO",
+          "language_correspondance": "en",
+          "phone_num": "111-323-2323",
+          "phone_ext": "",
+          "fax_num": "555-555-4343",
+          "email": "myemail@yahoo.com"
+        }
+      },
+	   {
+        "contact_id": "0003",
+        "amend_record": "N",
+        "manufacturer": "N",
+        "mailing": "N",
+        "billing": "N",
+        "importer": "N",
+		"rep_contact_role": "SECONDARY",
+        "company_contact_details": {
+          "salutation": "Ms",
+          "given_name": "Martha",
+          "initials": "A",
+          "surname": "Stewart",
+          "job_title": "CEO",
+          "language_correspondance": "en",
+          "phone_num": "415-323-2323",
+          "phone_ext": "",
+          "fax_num": "",
+          "email": "excon@marthastewart.com"
+        }
+      }
+    ]
+  }
+}
