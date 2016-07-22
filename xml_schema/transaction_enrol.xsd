@@ -70,7 +70,7 @@
 			<hpfb:element ref="regulatory_activity_address" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="same_regulatory_contact"/>
 			<hpfb:element ref="regulatory_activity_contact" minOccurs="0" maxOccurs="1" />
-			<hpfb:element ref="rep_submission_contact_record" minOccurs="1" maxOccurs="3"/>
+			<hpfb:element ref="rep_submission_contact_record" minOccurs="1" maxOccurs="2"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 

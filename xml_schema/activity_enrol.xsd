@@ -140,7 +140,7 @@
 	</hpfb:complexType>
 
 
-	<hpfb:simpleType name="lead_types_list">
+	<hpfb:simpleType name="lead_types_lists">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="BIOLOGIC"/>
 			<hpfb:enumeration value="CHP"/>
