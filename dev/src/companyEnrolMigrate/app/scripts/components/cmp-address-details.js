@@ -25,7 +25,6 @@
             selectedCountry: '<', // The current selected country
             onUpdate: '&',
             onDelete: '&'
-            // selectedCountryChanged: '&'
         }
     });
 
@@ -42,18 +41,11 @@
         }
 
         vm.onDiscardButtonClick = function(){
-
             vm.addressModel = angular.extend({},vm.addressRecord);
             $scope.addressForm.$setPristine();
-
         }
 
-
         vm.$onInit = function () {
-
-          //  if(vm.formName)
-
-          //  console.log("cmpAddress formName: " + vm.formName.$name);
 
             vm.addressModel = {
                 amendRecord: false,

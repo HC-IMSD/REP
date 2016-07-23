@@ -7,107 +7,141 @@
     angular
         .module('dossierApp')
         .factory('CompanyService', CompanyService)
-    CompanyService.$inject = ['$http', '$q'];
-    function CompanyService($http, $q) {
+
+    function CompanyService() {
         // Define the CompanyService function
         function CompanyService(companyData) {
             //construction logic
-            angular.extend(this._default, companyData);
+            var defaultAddress = {
+                addressID: 1,
+                companyName: "Test default",
+                amendRecord: false,
+                addressRole: {
+                    manufacturer: false,
+                    mailing: false,
+                    billing: false,
+                    importer: false
+                },
+                street: "",
+                city: "",
+                provLov: "",
+                provState: "",
+                province_text: "",
+                country: "",
+                postalCode: ""
+            };
+
+            var defaultContact = {
+                amendRecord: false,
+                manufacturer: false,
+                mailing: false,
+                billing: false,
+                importer: false,
+                contactRole: "",
+                salutation: "",
+                givenName: "Test defualt",
+                initials: "",
+                surname: "",
+                title: "",
+                language: "",
+                phone: "",
+                phoneExt: "",
+                fax: "",
+                email: ""
+            };
+
+            var defaultCompanyData = {
+                dataChecksum: "",
+                enrolmentVersion: "0.0",
+                dateSaved: "",
+                applicationType: "NEW",
+                softwareVersion: "1.0.0",
+                companyId: "test",
+                addressList: [
+                    defaultAddress
+                ],
+                contactList: [
+                    defaultContact
+                ]
+            };
+            angular.extend(this._default, defaultCompanyData);
         }
-
-        CompanyService.CanadianPostalCodePattern = function(){
-
-        }
-
-        CompanyService.company = {
-            dataChecksum: "",
-            enrolmentVersion: "0.1",
-            dateSaved: "",
-            applicationType: "NEW",
-            softwareVersion: "1.0.0",
-            companyId: "",
-            addressList: [],
-            contactList: []
-        };
 
         CompanyService.prototype = {
-
             _default: {},
 
-       /* dan    loadFromFile: function (url) {
-                var deferred = $q.defer();
-                // Fetch the player from Dribbble
-                // var url = 'http://api.dribbble.com/players/' + player + '?callback=JSON_CALLBACK';
-
-                var companyData = $http.get(url);
-                var self = this;
-
-                // When our $http promise resolves
-                // Use angular.extend to extend 'this'
-                // with the properties of the response
-                companyData.then(function successCallback(response) {
-                    // console.log('CompanyService success response: ' + JSON.stringify(response));
-                    deferred.resolve(response);
-                    // angular.extend(self.addressList, self.getAddressList(response.data));
-                }, function errorCallback(response) {
-                    deferred.reject('There was an error getting data');
-                    console.log('CompanyService error response: ' + JSON.stringify(response));
-                });
-
-                return deferred.promise;
+            transformFromFileObj: function (jsonObj) {
+                var companyInfo = this.getCompanyInfo(jsonObj);
+                var addressInfo = this.getAddressList(jsonObj.address_record);
+                var contactInfo = this.getContactList(jsonObj.contact_record);
+                //get rid of previous default
+                this.default = {};
+                angular.extend(this.default, companyInfo, addressInfo, contactInfo)
+                console.log("This is the transform " + JSON.stringify(this._default))
             },
-*/
+            transformToFileObj: function () {
+                //transform back to needed
+                var jsonObj = this._default
+                var resultJson =
+                {
+                    COMPANY_ENROL: {
+                        data_checksum: jsonObj.dataChecksum,
+                        enrolment_version: jsonObj.enrolmentVersion,
+                        date_saved: jsonObj.dateSaved,
+                        application_type: jsonObj.applicationType,
+                        software_version: jsonObj.softwareVersion,
+                        company_id: jsonObj.companyId,
+                        address_record: _mapAddressListToOutput(jsonObj.addressList),
+                        contact_record: _mapContactListToOutput(jsonObj.contactList)
+                    }
+                }
+                return (resultJson);
+            },
+            getModelInfo: function () {
+                return this._default;
+            },
+            //not sure why this is needed anymore
             getCompanyInfo: function (info) {
-
                 if (!info)
                     return this._default;
-
                 return {
                     dataChecksum: info.data_checksum,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
-                    applicationType: info.application_type.capitalize(),
+                    applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     companyId: info.company_id,
                     addressList: [],
                     contactList: []
                 }
-
             },
-
+            //not sure why this is needed anymore
             getAddressList: function (adrList) {
-
                 var list = [];
-
                 if (adrList) {
                     for (var i = 0; i < adrList.length; i++) {
                         var address = {};
                         address.addressID = adrList[i].address_id;
                         address.companyName = adrList[i].company_name;
-                        address.amendRecord = adrList[i].amend_record === 'Y' ? true : false;
+                        address.amendRecord = adrList[i].amend_record === 'Y';
                         address.addressRole = {};
-                        address.addressRole.manufacturer = adrList[i].manufacturer === 'Y' ? true : false;
-                        address.addressRole.mailing = adrList[i].mailing === 'Y' ? true : false;
-                        address.addressRole.billing = adrList[i].billing === 'Y' ? true : false;
-                        address.addressRole.importer = adrList[i].importer === 'Y' ? true : false;
+                        address.addressRole.manufacturer = adrList[i].manufacturer === 'Y';
+                        address.addressRole.mailing = adrList[i].mailing === 'Y';
+                        address.addressRole.billing = adrList[i].billing === 'Y';
+                        address.addressRole.importer = adrList[i].importer === 'Y';
                         address.street = adrList[i].company_address_details.street_address;
                         address.city = adrList[i].company_address_details.city;
                         address.provState = adrList[i].company_address_details.province_lov;
                         address.country = adrList[i].company_address_details.country;
                         address.postalCode = adrList[i].company_address_details.postal_code;
-
                         list.push(address);
                     }
                 }
-
-
                 return list;
-
             },
             //right side is original json left side is translation
             getContactList: function (contacts) {
                 var list = [];
-
                 if (contacts) {
                     for (var i = 0; i < contacts.length; i++) {
                         var contact = {};
@@ -128,25 +162,71 @@
                         contact.phoneExt = contacts[i].company_contact_details.phone_ext;
                         contact.fax = contacts[i].company_contact_details.fax_num;
                         contact.email = contacts[i].company_contact_details.email;
-
                         list.push(contact);
                     }
                 }
-
-
                 return list;
-
             }
         };
-
-        // Return a reference to the function
+        // Return a reference to the object
         return CompanyService;
     }
-
     String.prototype.capitalize = function () {
         return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
         //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
     };
 
+    function _mapAddressListToOutput(adrList) {
+        var addressList = [];
+        if (adrList) {
+            for (var i = 0; i < adrList.length; i++) {
+                var address = {};
+                address.address_id = adrList[i].addressID;
+                address.amend_record = adrList[i].amendRecord === true ? 'Y' : 'N';
+                address.manufacturer = adrList[i].manufacturer === true ? 'Y' : 'N';
+                address.mailing = adrList[i].mailing;
+                address.billing = adrList[i].billing;
+                address.importer = adrList[i].importer;
+                address.company_name = adrList[i].companyName;
+                address.company_address_details = {};
+                address.company_address_details.street_address = adrList[i].street;
+                address.company_address_details.city = adrList[i].city;
+                address.company_address_details.province_lov = adrList[i].provState;
+                address.company_address_details.province_text = "";
+                address.company_address_details.country = adrList[i].country;
+                address.company_address_details.postal_code = adrList[i].postalCode;
+                addressList.push(address);
+            }
+        }
+        return addressList;
+    }
 
+    function _mapContactListToOutput(contacts) {
+        var contactList = [];
+        if (contacts) {
+            for (var i = 0; i < contacts.length; i++) {
+                var contact = {};
+                contact.contact_id = contacts[i].contactID;
+                contact.amend_record = contacts[i].amendRecord === true ? 'Y' : 'N';
+                contact.manufacturer = contacts[i].manufacturer === true ? 'Y' : 'N';
+                contact.mailing = contacts[i].mailing === true ? 'Y' : 'N';
+                contact.billing = contacts[i].billing === true ? 'Y' : 'N';
+                contact.importer = contacts[i].importer === true ? 'Y' : 'N';
+                contact.rep_contact_role = contacts[i].contactRole;
+                contact.company_contact_details = {};
+                contact.company_contact_details.salutation = contacts[i].salutation;
+                contact.company_contact_details.given_name = contacts[i].givenName;
+                contact.company_contact_details.initials = contacts[i].initials;
+                contact.company_contact_details.surname = contacts[i].surname;
+                contact.company_contact_details.job_title = contacts[i].title;
+                contact.company_contact_details.language_correspondance = contacts[i].language;
+                contact.company_contact_details.phone_num = contacts[i].phone;
+                contact.company_contact_details.phone_ext = contacts[i].phoneExt;
+                contact.company_contact_details.fax_num = contacts[i].fax;
+                contact.company_contact_details.email = contacts[i].email;
+                contactList.push(contact);
+            }
+        }
+        return contactList;
+    }
 })();

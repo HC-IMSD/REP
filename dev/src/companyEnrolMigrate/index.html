@@ -93,6 +93,9 @@
             <hpfb-file-select update-model-root="main.showContent(fileContent) "root-elem="COMPANY_ENROL"/>
         </div>
         <div>
+           <hpfb-file-save></hpfb-file-save>
+        </div>
+        <div>
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
                     <h3 class="panel-title">Regulatory Company Enrolment</h3>
@@ -136,7 +139,7 @@
                                       on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
                 </div>
             </section>
-            <!---->
+            <pre>overall: {{main.company | json : spacing}}</pre>
         </div>
     </form>
 
