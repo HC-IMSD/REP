@@ -1,45 +1,52 @@
 <fieldset>
-    <legend class="required">
-
-            <span class="required">{{"Select one or more roles for this record" |translate}}</span>
-            <strong class="required"> ({"REQUIRED" |translate}) </strong>
+    <div class="row">
+        <legend class="required">
+            <span class="field-name">{{"Select one or more roles for this record" |translate}}</span>
+            <strong class="required" aria-required="true"> ({"REQUIRED" |translate}) </strong>
             <strong id="address-role-error" class="error" ng-if="ar.formName.addressRole.$invalid">
                         <span class="label label-danger" ng-messages="ar.formName.addressRole.$error">
-                            <span ng-message="required">Please select at least one option </span>
+                            <span ng-message="required">Please select at least one option</span>
                         </span>
             </strong>
-    </legend>
-    <!--<legend class="required"><span class="field-name">Favourite pets</span> <strong class="required">(required)</strong></legend-->
-
-    <div class="row col-md-12">
-        <div class="checkbox col-md-4">
-            <label for="chk-manufacturer">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.manufacturer" id="chk-manufacturer" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Manufacturer
-            </label>
-        </div>
-        <div class="checkbox col-md-4">
-            <label for="chk-mailing">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing" id="chk-mailing" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Mailing Address
-            </label>
-        </div>
-
+        </legend>
     </div>
-    <div class="row col-md-12">
-        <div class="checkbox col-md-4">
-            <label for="chk-billing">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing" id="chk-billing" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Billing Address
-            </label>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-manufacturer">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.manufacturer"
+                               id="chk-manufacturer" ng-change="ar.updateRoleModel()"
+                               ng-required="!ar.someSelected()"> Manufacturer
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-mailing">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing" id="chk-mailing"
+                               ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Mailing Address
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="checkbox col-md-4">
-            <label for="chk-importer">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer" id="chk-importer" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Importer Address
-            </label>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-billing">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing" id="chk-billing"
+                               ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Billing Address
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-importer">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer" id="chk-importer"
+                               ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Importer Address
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!--<pre>formName.addressRole: {{ar.formName.addressRole | json : spacing}}</pre>
-
-    <input type="hidden" ng-model="vm.roleModel" name="addressRole"  ng-change="ar.updateRoleModel()">-->
-
 </fieldset>
-
