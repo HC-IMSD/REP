@@ -71,19 +71,19 @@
             _default: {},
 
             transformFromFileObj: function (jsonObj) {
-                var companyInfo = this.getCompanyInfo(jsonObj);
-                var addressInfo = this.getAddressList(jsonObj.address_record);
-                var contactInfo = this.getContactList(jsonObj.contact_record);
+                var rootTag="COMPANY_ENROL"
+                var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);
+                var addressInfo = this.getAddressList(jsonObj[rootTag].address_record);
+                var contactInfo = this.getContactList(jsonObj[rootTag].contact_record);
                 //get rid of previous default
-                this.default = {};
-                angular.extend(this.default, companyInfo, addressInfo, contactInfo)
+                this._default = {};
+                angular.extend(this._default, companyInfo, addressInfo, contactInfo)
                 console.log("This is the transform " + JSON.stringify(this._default))
             },
             transformToFileObj: function () {
                 //transform back to needed
                 var jsonObj = this._default
-                var resultJson =
-                {
+                var resultJson = {
                     COMPANY_ENROL: {
                         data_checksum: jsonObj.dataChecksum,
                         enrolment_version: jsonObj.enrolmentVersion,
@@ -146,11 +146,11 @@
                     for (var i = 0; i < contacts.length; i++) {
                         var contact = {};
                         contact.contactID = contacts[i].contact_id;
-                        contact.amendRecord = contacts[i].amend_record;
-                        contact.manufacturer = contacts[i].manufacturer;
-                        contact.mailing = contacts[i].mailing;
-                        contact.billing = contacts[i].billing;
-                        contact.importer = contacts[i].importer;
+                        contact.amendRecord = contacts[i].amend_record=== 'Y';
+                        contact.manufacturer = contacts[i].manufacturer=== 'Y';
+                        contact.mailing = contacts[i].mailing=== 'Y';
+                        contact.billing = contacts[i].billing=== 'Y';
+                        contact.importer = contacts[i].importer=== 'Y';
                         contact.contactRole = contacts[i].company_contact_details.rep_contact_role;
                         contact.salutation = contacts[i].company_contact_details.salutation;
                         contact.givenName = contacts[i].company_contact_details.given_name;

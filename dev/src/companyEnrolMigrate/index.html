@@ -93,7 +93,8 @@
             <hpfb-file-select update-model-root="main.showContent(fileContent) "root-elem="COMPANY_ENROL"/>
         </div>
         <div>
-           <hpfb-file-save></hpfb-file-save>
+          <!--  <hpfb-file-save  json-to-Save="main.dd" save-type="json" root-tag="COMPANY_ENROL"></hpfb-file-save>-->
+            <button ng-click="main.saveJson()" >Save as JSon</button>
         </div>
         <div>
             <section class="panel panel-primary mrgn-tp-lg">

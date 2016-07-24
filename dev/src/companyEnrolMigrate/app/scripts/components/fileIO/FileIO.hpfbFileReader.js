@@ -90,7 +90,7 @@
      * @param buttonLabel -the label for the save button
      */
     angular.module('fileIO').component('hpfbFileSave', {
-        templateUrl: 'fileSave.html',
+        templateUrl: 'app/scripts/components/fileIO/fileSave.html',
         controller: FileWriteController,
         bindings: {
             jsonToSave: '<',
