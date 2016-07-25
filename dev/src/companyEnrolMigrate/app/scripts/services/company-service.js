@@ -10,7 +10,7 @@
 
     function CompanyService() {
         // Define the CompanyService function
-        function CompanyService(companyData) {
+        function CompanyService() {
             //construction logic
             var defaultAddress = {
                 addressID: 1,
@@ -171,9 +171,9 @@
         // Return a reference to the object
         return CompanyService;
     }
-    String.prototype.capitalize = function () {
+
+    String.prototype.capitalizeFirstLetter = function () {
         return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-        //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
     };
 
     function _mapAddressListToOutput(adrList) {
@@ -192,7 +192,7 @@
                 address.company_address_details.street_address = adrList[i].street;
                 address.company_address_details.city = adrList[i].city;
                 address.company_address_details.province_lov = adrList[i].provState;
-                address.company_address_details.province_text = "";
+                address.company_address_details.province_text = adrList[i].stateText;
                 address.company_address_details.country = adrList[i].country;
                 address.company_address_details.postal_code = adrList[i].postalCode;
                 addressList.push(address);

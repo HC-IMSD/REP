@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="./wet-boew/css/noscript.min.css"/>
     </noscript>
 </head>
-<body vocab="http://schema.org/" typeof="WebPage" ng-app="dossierApp" >
+<body vocab="http://schema.org/" typeof="WebPage" ng-app="dossierApp">
 <ul id="wb-tphp">
     <li class="wb-slc">
         <a class="wb-sl" href="#wb-cont">Skip to main content</a>
@@ -86,15 +86,12 @@
 </header>
 <main role="main" property="mainContentOfPage" class="container">
     <!--Company Enrol Content starts here -->
-
     <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate>
         <div>
-        <!--<hpfb-file-select update-model-root="main.showContent(fileContent)" root-elem="COMPANY_ENROL"></hpfb-file-select>-->
-            <hpfb-file-select update-model-root="main.showContent(fileContent) "root-elem="COMPANY_ENROL"/>
+            <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="COMPANY_ENROL"/>
         </div>
         <div>
-          <!--  <hpfb-file-save  json-to-Save="main.dd" save-type="json" root-tag="COMPANY_ENROL"></hpfb-file-save>-->
-            <button ng-click="main.saveJson()" >Save as JSon</button>
+            <button ng-click="main.saveJson()">Save as JSon</button>
         </div>
         <div>
             <section class="panel panel-primary mrgn-tp-lg">
@@ -105,155 +102,54 @@
                     <div class="row">
                         <div class="col-xs-4 form-group">
                             <label for="enr-version-text">Enrolment Version</label>
-                            <input type="text" class="form-control" id="enr-version-text"
+                            <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
                                    ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
+                            <button ng-click="main.setAmendState()" ng-readonly="main.isComplete">Amend Enrolment
+                            </button>
 
                         </div>
                         <div class="col-xs-4 form-group">
                             <label for="date-saved-text">Date Last Saved</label>
-                            <input type="text" class="form-control" id="date-saved-text" ng-model="main.company.dateSaved"
+                            <input type="text" class="form-control" id="date-saved-text"
+                                   ng-model="main.company.dateSaved"
                                    placeholder="Date Last Saved"/>
                         </div>
                         <div class="col-xs-4 form-group">
                             <label for="company-id-text">Company ID</label>
-                            <input type="text" class="form-control" id="company-id-text" ng-model="main.company.companyId"
+                            <input type="text" class="form-control" id="company-id-text"
+                                   ng-model="main.company.companyId"
                                    placeholder="Company ID"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-6 form-group">
                             <label for="application-type-list">Application Type</label>
-                            <select id="application-type-list" ng-model="company.applicationType"
-                                    class="form-control full-width">
+                            <select id="application-type-list" ng-options="value |translate for value in main.applTypes"
+                                    ng-model="company.applicationType"></select>
+                            <!--<select id="application-type-list" ng-model="company.applicationType" ng-readonly="true"
+                                    ng-required="true">
                                 <option>NEW</option>
                                 <option>APPROVED</option>
                                 <option>AMEND</option>
-                            </select>
+                            </select>-->
                         </div>
+
+
                     </div>
                     <!-- <pre>company.contactList: {{company.contactList}}</pre>-->
 
                     <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
                                       form-name="companyForm"
                                       on-update="main.onUpdateAddressList(newList)"></cmp-address-list>
-                    <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList" form-name="companyForm"
+                    <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
+                                      form-name="companyForm"
                                       on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
                 </div>
             </section>
             <pre>overall: {{main.company | json : spacing}}</pre>
         </div>
     </form>
-
-
-    <!--<h1 id="wb-cont" property="name">Content page - No search, language toggle, site menu or breadcrumb trail</h1>
-    <section>
-    <h2>Heading&#32;2&#32;(<code>h2</code>)</h2>
-    <section>
-    <h3>Heading&#32;3&#32;(<code>h3</code>)</h3>
-    <section>
-    <h4>Heading&#32;4&#32;(<code>h4</code>)</h4>
-    <section>
-    <h5>Heading&#32;5&#32;(<code>h5</code>)</h5>
-    <section>
-    <h6>Heading&#32;6&#32;(<code>h6</code>)</h6>
-    <p>Paragraph - default appearance</p>
-    </section>
-    </section>
-    </section>
-    </section>
-    </section>
-    <p><a href="#">Link</a></p>
-    <ul>
-    <li>unordered list&#32;(<code>ul</code>) - level&#32;1
-    <ul>
-    <li>unordered list&#32;(<code>ul</code>) - level&#32;2
-    <ul>
-    <li>unordered list&#32;(<code>ul</code>) - level&#32;3</li>
-    </ul>
-    </li>
-    </ul>
-    </li>
-    </ul>
-    <ol>
-    <li>ordered list&#32;(<code>ol</code>) - level&#32;1</li>
-    <li>ordered list&#32;(<code>ol</code>) - level&#32;1
-    <ol>
-    <li>ordered list&#32;(<code>ol</code>) - level&#32;2</li>
-    <li>ordered list&#32;(<code>ol</code>) - level&#32;2
-    <ol>
-    <li>ordered list&#32;(<code>ol</code>) - level&#32;3</li>
-    <li>ordered list&#32;(<code>ol</code>) - level&#32;3</li>
-    </ol>
-    </li>
-    </ol>
-    </li>
-    </ol>
-    <table class="table table-striped">
-    <caption>Table caption</caption>
-    <thead>
-    <tr>
-    <th scope="col">Table header&#32;(<code>th</code>)</th>
-    <th scope="col">Table header&#32;(<code>th</code>)</th>
-    <th scope="col">Table header&#32;(<code>th</code>)</th>
-    <th scope="col">Table header&#32;(<code>th</code>)</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    </tr>
-    <tr>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    </tr>
-    <tr>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    <td>Table data&#32;(<code>td</code>)</td>
-    </tr>
-    </tbody>
-    </table>
-    <form method="post" action="#" class="form-horizontal">
-    <div class="form-group">
-    <label for="data1" class="col-sm-3 control-label">Form&#32;<code>input</code></label>
-    <div class="col-sm-9">
-    <input type="text" id="data1" name="data1" class="form-control">
-    </div>
-    </div>
-    <div class="form-group">
-    <label for="data2" class="col-sm-3 control-label">Form&#32;<code>textarea</code></label>
-    <div class="col-sm-9">
-    <textarea id="data2" rows="3" cols="15" name="data2" class="form-control"></textarea>
-    </div>
-    </div>
-    <div class="form-group">
-    <label for="data4" class="col-sm-3 control-label">Form&#32;<code>select</code></label>
-    <div class="col-sm-9">
-    <select name="data4" id="data4" class="form-control">
-    <option value="1">Option&#32;1</option>
-    <option value="2">Option&#32;2</option>
-    <option value="3">Option&#32;3</option>
-    <option value="4">Option&#32;4</option>
-    </select>
-    </div>
-    </div>
-    <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    </div>
-    </form>
-    <blockquote>
-    <p>"<code>blockquote</code>"</p>
-    </blockquote>-->
-
-
+    <!-end content->
     <dl id="wb-dtmd">
         <dt>Date modified:&#32;</dt>
         <dd>
@@ -334,7 +230,7 @@
 <script src="app/lib/angular-translate.min.js"></script>
 <script src="app/lib/angular-translate-loader-static-files.min.js"></script>
 
-<!--<link rel="stylesheet" href="styles/main.css">-->
+<script src="app/lib/angular-aria.min.js"></script>
 <script src="app/scripts/app.js"></script>
 <script src="app/scripts/services/company-service.js"></script>
 <script src="app/scripts/services/data-lists.js"></script>

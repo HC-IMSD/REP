@@ -1,15 +1,13 @@
-<div class="container">
-
+<div class="container-fluid">
     <ng-form name="addressForm" novalidate>
-
         <fieldset>
             <legend>Company Details</legend>
             <div class="form-group">
-
-                <!--<label class="form-checkbox" for="chk-amend-rec">
+                <label class="form-checkbox" for="chk-amend-rec">
                     <input id="chk-amend-rec" type="checkbox" ng-model="adr.addressModel.amendRecord"> Amend Record
-                </label>-->
-            <div class="form-group" ng-class="{'has-error':addressForm.addressRole.$invalid}">
+                </label>
+
+                <div ng-class="{'has-error':addressForm.addressRole.$invalid}">
                 <cmp-address-role record="adr.addressModel.addressRole" form-name="addressForm" on-update="adr.onAddressRoleUpdate($event.roles)"></cmp-address-role>
             </div>
 
@@ -101,7 +99,7 @@
                            ng-pattern="adr.postalPattern"/>
                 </div>
 
-
+            </div>
             </div>
         </fieldset>
 
