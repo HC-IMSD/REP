@@ -6,5 +6,6 @@
   "PROVSTATE": "Province or State",
   "STATE": "State",
   "STREET": "Street Address",
-  "ZIP": "Zip Code"
+  "ZIP": "Zip Code",
+  "COMPANYNAME_FULL": "Full Company Name"
 }

@@ -25,7 +25,8 @@
         var url = "data/company-enrol.txt";
         //TODO magic number
         vm.rootTag='COMPANY_ENROL'
-        vm.isComplete = false;
+        vm.isIncomplete = true;
+
         vm.applTypes = ["NEW", "AMEND", "APPROVED"]
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
@@ -43,13 +44,20 @@
             var writeResult=_company.transformToFileObj();
             hpfbFileProcessing.writeAsJson(writeResult, "test.json", vm.rootTag);
         }
-
+        function _setComplete() {
+            if (vm.company.companyId) {
+                vm.isIncomplete = false;
+            } else {
+                vm.isIncomplete = true;
+            }
+        }
         function _loadFileContent(fileContent) {
             alert("Calling the content callback")
             var resultJson = fileContent.jsonResult;
             console.log("Result JSON is: " + resultJson)
             _company.transformFromFileObj(resultJson)
             vm.company = _company.getModelInfo()
+            _setComplete();
         };
         function _setApplTypeToAmend() {
             //TODO magic number

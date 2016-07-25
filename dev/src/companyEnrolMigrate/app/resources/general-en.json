@@ -1,5 +1,10 @@
  {
   "DELETEROW": "Delete Row",
   "SELECTEDROW": "Selected Row",
-  "REQUIRED": "(required)"
+   "REQUIRED": "(required)",
+   "APPL_TYPE": "Application Type",
+   "ROLES_SELECT": "Select one or more roles for this record",
+   "NEW": "New",
+   "AMEND": "Amend",
+   "APPROVED": "Approved"
  }

@@ -57,12 +57,8 @@
                 applicationType: "NEW",
                 softwareVersion: "1.0.0",
                 companyId: "test",
-                addressList: [
-                    defaultAddress
-                ],
-                contactList: [
-                    defaultContact
-                ]
+                addressList: [],
+                contactList: []
             };
             angular.extend(this._default, defaultCompanyData);
         }

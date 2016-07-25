@@ -4,10 +4,8 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
-    wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-    <title>Content page - No search, language toggle, site menu or breadcrumb trail - Working examples - Web Experience
-        Toolkit
+    <title>
+        Company Enrolment form for Health Products and Food Branch
     </title>
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <!-- Meta data -->
@@ -73,9 +71,10 @@
         <div class="container">
             <div class="row">
                 <div id="wb-sttl" class="col-md-5">
-                    <a href="http://wet-boew.github.io/v4.0-ci/index-en.html">
+                    <!--<a href="http://wet-boew.github.io/v4.0-ci/index-en.html">
                         <span>Web Experience Toolkit</span>
-                    </a>
+                    </a>-->
+                    <h1>Regulatory Enrolment Process (REP) Company Enrolment</h1>
                 </div>
                 <object id="wmms" type="image/svg+xml" tabindex="-1" role="img" data="./theme-gcwu-fegc/assets/wmms.svg"
                         aria-label="Symbol of the Government of Canada"></object>
@@ -89,8 +88,10 @@
     <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate>
         <div>
             <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="COMPANY_ENROL"/>
+
         </div>
         <div>
+            <label>{{"REQUIRED"|translate}}</label>
             <button ng-click="main.saveJson()">Save as JSon</button>
         </div>
         <div>
@@ -100,53 +101,63 @@
                 </header>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-4 form-group">
+                        <div class="col-xs-3 form-group">
+                            <label for="application-type">{{"APPL_TYPE"| translate}}</label>
+                            <select id="application-type"
+                                    ng-options="type |translate for type in main.applTypes"
+                                    ng-model="main.company.applicationType" ng-readonly="true" ng-disabled="true"
+                                    class="form-control full-width"></select>
+                        </div>
+                        <div class="col-xs-3 form-group">
                             <label for="enr-version-text">Enrolment Version</label>
                             <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
                                    ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
-                            <button ng-click="main.setAmendState()" ng-readonly="main.isComplete">Amend Enrolment
-                            </button>
-
                         </div>
-                        <div class="col-xs-4 form-group">
+                        <div class="col-xs-3 form-group">
                             <label for="date-saved-text">Date Last Saved</label>
                             <input type="text" class="form-control" id="date-saved-text"
-                                   ng-model="main.company.dateSaved"
-                                   placeholder="Date Last Saved"/>
+                                   ng-model="main.company.dateSaved" ng-readonly="true"/>
                         </div>
-                        <div class="col-xs-4 form-group">
+                        <div class="col-xs-3 form-group">
                             <label for="company-id-text">Company ID</label>
-                            <input type="text" class="form-control" id="company-id-text"
-                                   ng-model="main.company.companyId"
-                                   placeholder="Company ID"/>
+                            <input type="text" class="form-control" id="company-id-text" ng-readonly="true"
+                                   ng-model="main.company.companyId"/>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6 form-group">
-                            <label for="application-type-list">Application Type</label>
-                            <select id="application-type-list" ng-options="value |translate for value in main.applTypes"
-                                    ng-model="company.applicationType"></select>
-                            <!--<select id="application-type-list" ng-model="company.applicationType" ng-readonly="true"
-                                    ng-required="true">
-                                <option>NEW</option>
-                                <option>APPROVED</option>
-                                <option>AMEND</option>
-                            </select>-->
+                        <div class="col-xs-5 form-group">
+                            <button ng-click="main.setAmendState()" ng-disabled="main.isIncomplete">
+                                Amend Enrolment
+                            </button>
                         </div>
-
-
                     </div>
-                    <!-- <pre>company.contactList: {{company.contactList}}</pre>-->
-
-                    <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
-                                      form-name="companyForm"
-                                      on-update="main.onUpdateAddressList(newList)"></cmp-address-list>
-                    <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
-                                      form-name="companyForm"
-                                      on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
                 </div>
-            </section>
-            <pre>overall: {{main.company | json : spacing}}</pre>
+                <!-- <div class="row">
+                     <div class="col-xs-12 form-group">
+                         <label for="application-type">Application Type</label>
+                         <select id="application-type" ng-options="type |translate for type in main.applTypes"
+                                 ng-model="main.company.applicationType" ng-disabled="true"
+                                 class="form-control"></select>
+                         <button ng-click="main.setAmendState()" ng-readonly="main.isComplete">
+                             Amend Enrolment
+                         </button>
+                     </div>
+                     &lt;!&ndash; <div class="col-xs-5 form-group">
+                          <button ng-click="main.setAmendState()" ng-readonly="main.isComplete">
+                              Amend Enrolment</button>
+
+                      </div>&ndash;&gt;
+                 </div>-->
+
+                <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
+                                  form-name="companyForm"
+                                  on-update="main.onUpdateAddressList(newList)"></cmp-address-list>
+                <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
+                                  form-name="companyForm"
+                                  on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
+        </div>
+        </section>
+        <pre>overall: {{main.company | json : spacing}}</pre>
         </div>
     </form>
     <!-end content->
@@ -161,39 +172,39 @@
     <div class="container">
         <nav role="navigation">
             <h2>About this site</h2>
-            <ul id="gc-tctr" class="list-inline">
-                <li><a rel="license" href="http://wet-boew.github.io/wet-boew/License-en.html">Terms and conditions</a>
-                </li>
-                <li><a href="http://www.tbs-sct.gc.ca/tbs-sct/common/trans-eng.asp">Transparency</a></li>
-            </ul>
+            <!--  <ul id="gc-tctr" class="list-inline">
+                  <li><a rel="license" href="http://wet-boew.github.io/wet-boew/License-en.html">Terms and conditions</a>
+                  </li>
+                  <li><a href="http://www.tbs-sct.gc.ca/tbs-sct/common/trans-eng.asp">Transparency</a></li>
+              </ul>-->
             <div class="row">
-                <section class="col-sm-3">
-                    <h3>Contact us</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://github.com/wet-boew/wet-boew/issues/new">Questions or comments?</a></li>
-                    </ul>
-                </section>
-                <section class="col-sm-3">
-                    <h3>About</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="http://wet-boew.github.io/v4.0-ci/index-en.html#about">About the Web Experience
-                            Toolkit</a></li>
-                        <li><a href="http://www.tbs-sct.gc.ca/ws-nw/index-eng.asp">About the Web Standards</a></li>
-                    </ul>
-                </section>
-                <section class="col-sm-3">
-                    <h3>News</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://github.com/wet-boew/wet-boew/pulse">Recent project activity</a></li>
-                        <li><a href="https://github.com/wet-boew/wet-boew/graphs">Project statistics</a></li>
-                    </ul>
-                </section>
-                <section class="col-sm-3">
-                    <h3>Stay connected</h3>
-                    <ul class="list-unstyled">
-                        <li><a href="https://twitter.com/WebExpToolkit">Twitter</a></li>
-                    </ul>
-                </section>
+                <!-- <section class="col-sm-3">
+                     <h3>Contact us</h3>
+                     <ul class="list-unstyled">
+                         <li><a href="https://github.com/wet-boew/wet-boew/issues/new">Questions or comments?</a></li>
+                     </ul>
+                 </section>-->
+                <!-- <section class="col-sm-3">
+                     <h3>About</h3>
+                     <ul class="list-unstyled">
+                         <li><a href="http://wet-boew.github.io/v4.0-ci/index-en.html#about">About the Web Experience
+                             Toolkit</a></li>
+                         <li><a href="http://www.tbs-sct.gc.ca/ws-nw/index-eng.asp">About the Web Standards</a></li>
+                     </ul>
+                 </section>-->
+                <!-- <section class="col-sm-3">
+                     <h3>News</h3>
+                     <ul class="list-unstyled">
+                         <li><a href="https://github.com/wet-boew/wet-boew/pulse">Recent project activity</a></li>
+                         <li><a href="https://github.com/wet-boew/wet-boew/graphs">Project statistics</a></li>
+                     </ul>
+                 </section>-->
+                <!-- <section class="col-sm-3">
+                     <h3>Stay connected</h3>
+                     <ul class="list-unstyled">
+                         <li><a href="https://twitter.com/WebExpToolkit">Twitter</a></li>
+                     </ul>
+                 </section>-->
             </div>
         </nav>
     </div>
