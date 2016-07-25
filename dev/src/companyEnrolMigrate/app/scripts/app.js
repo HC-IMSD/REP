@@ -61,7 +61,7 @@
         };
         function _setApplTypeToAmend() {
             //TODO magic number
-            vm.company.applicationType = 'AMEND'
+            vm.company.applicationType = 'AMEND';
         }
 
         //used on update
