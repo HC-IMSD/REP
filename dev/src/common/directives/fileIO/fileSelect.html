@@ -1,11 +1,16 @@
 <section class="wb-inview">
     <div class="form-group">
-        <fieldset>
-            <legend>{{LOAD_FILE|translate}}</legend>
-            <input type="file" hpfb-file-select="$ctrl.modelCallback(fileContent)" root-tag="{{$ctrl.rootElem}}"/>
+        <div>
+            <label for="fileLoad">
+                <span class="field-name">{{'SELECT_LOAD'|translate}}</span>
+            </label>
+            <input id="fileLoad" type="file" hpfb-file-select="$ctrl.modelCallback(fileContent)"
+                   root-tag="{{$ctrl.rootElem}}"/>
+
             <div aria-live='polite'>
                 <p><br/><span>{{$ctrl.status|translate}}</span></p>
             </div>
-        </fieldset>
+        </div>
     </div>
 </section>
+
