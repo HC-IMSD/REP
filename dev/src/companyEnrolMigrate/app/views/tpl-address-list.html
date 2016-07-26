@@ -4,7 +4,6 @@
     </header>
     <div class="panel-body">
         <div class="row">
-
             <div class="col-xs-12">
 
                 <table class="table dataTable table-bordered table-hover table-condensed table-striped"
@@ -32,19 +31,22 @@
                     </tr>
                     <tr data-ng-show="!$ctrl.dayDataCollapse[$index]" data-ng-repeat-end>
                         <td colspan="5">
-                            <cmp-address-details my-index="$index" form-name="$ctrl.formName" selected-country="adr.selectedCountry" address-record="address" on-delete="" on-update="$ctrl.onUpdateAddressRecord($index, address)" ></cmp-address-details>
+                            <cmp-address-details my-index="$index" form-name="$ctrl.formName"
+                                                 selected-country="adr.selectedCountry" address-record="address"
+                                                 on-delete="$ctrl.deleteAddress(addressId)"
+                                                 on-update="$ctrl.onUpdateAddressRecord(address)"></cmp-address-details>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
 
-
         </div>
         <div class="row mrgn-tp-md mrgn-bttm-lg">
-            <cmp-address-details address-record="address" form-name="form1" data-ng-show="$ctrl.newAdrFormShow" on-update=""></cmp-address-details>
+            <!--<cmp-address-details address-record="address" form-name="form1" data-ng-show="$ctrl.newAdrFormShow" on-update=""></cmp-address-details>-->
             <div class="btn-group-sm col-md-12 text-right">
-                <input type="submit" value="Add Address" class="btn btn-primary" ng-click="$ctrl.newAdrFormShow = true">
+                <input type="submit" value="Add Address" class="btn btn-primary" ng-click="$ctrl.addAddress()"
+                       ng-disabled="!$ctrl.addressDetailsValid">
                 <input type="submit" value="Cancel" class="btn btn-default"  data-ng-show="$ctrl.newAdrFormShow" ng-click="$ctrl.newAdrFormShow = false">
             </div>
 

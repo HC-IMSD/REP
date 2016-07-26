@@ -149,15 +149,16 @@
 
                       </div>&ndash;&gt;
                  </div>-->
-
+                <div>
                 <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
                                   form-name="companyForm"
                                   on-update="main.onUpdateAddressList(newList)"></cmp-address-list>
                 <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
                                   form-name="companyForm"
                                   on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
-        </div>
-        </section>
+                </div>
+
+            </section>
         <pre>overall: {{main.company | json : spacing}}</pre>
         </div>
     </form>

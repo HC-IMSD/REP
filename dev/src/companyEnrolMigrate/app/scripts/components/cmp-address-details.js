@@ -34,9 +34,7 @@
 
         var vm = this;
         vm.onDeleteButtonClick = function () {
-
             console.log("delete button click: " + vm.addressModel.addressID);
-
             vm.onDelete({addressId: vm.addressModel.addressID});
         }
 
@@ -48,6 +46,7 @@
         vm.$onInit = function () {
 
             vm.addressModel = {
+                isDetailValid: false,
                 amendRecord: false,
                 addressRole: {
                     manufacturer: false,
@@ -70,6 +69,7 @@
             //"^([a-zA-Z]\d[a-zA-Z]( )?\d[a-zA-Z]\d)$"
 
             vm.hideProvinceText = false;
+            vm.countries = getCountriesISO3166.getCountryList3Letter();
             if (vm.addressRecord) {
 
                 vm.addressModel = angular.extend({},vm.addressRecord);
@@ -77,7 +77,7 @@
 
              // console.log('$onInit vm.addressModel:' + JSON.stringify(vm.addressModel));
 
-                vm.countries = getCountriesISO3166.getCountryList3Letter();
+
                // vm.addressModel.country = vm.addressRecord.company_address_details.country;
                // vm.amendRecord = vm.addressRecord.amend_record === 'Y' ? true : false;
                 // vm.provinceTextState();
@@ -111,6 +111,8 @@
             vm.hideProvinceText = getProvinceTextState();
             vm.postalPattern = getPostalPattern();
             vm.hideProvinceDdl = !vm.hideProvinceText;
+            //update the country value into the model
+            vm.updateAddressModel();
         }
 
         vm.onAddressRoleUpdate = function(newRole){
@@ -123,13 +125,15 @@
         }
 
         vm.updateAddressModel = function(){
-
+            //always update the model
           //  console.log('onAddressRoleUpdate: ' + vm.addressModel.companyName);
-            if(!$scope.addressForm.$valid)
+            //  if($scope.addressForm.$valid)
+
+            //console.log($scope.addressForm.$valid)
+            //update if the address details if valid
+            vm.addressModel.isDetailValid = $scope.addressForm.$valid;
                 vm.onUpdate({address:vm.addressModel});
-
         }
-
 
 
         var loadAddressModel = function(){
@@ -152,7 +156,6 @@
             };
 
         }
-
 
         var getProvinceTextState =  function() {
 
