@@ -77,11 +77,10 @@
 	<hpfb:element name="ulcer_gastro" type="required_yes_no_content"/>
 	<hpfb:element name="sched_a_claims_ind_details" type="char_1_256_content"/>
 	<!-- ingredients-->
-	<hpfb:element name="drug_ingredients_group" type="ingredient_group_content"/>
-	<hpfb:element name="drug_ingredient" type="ingredient_content"/>
-	<hpfb:element name="ingredient_id" type="char_1_40_content"/>
+	<hpfb:element name="appendix4_group" type="appendix4_content"/>
+	<!--<hpfb:element name="drug_ingredient" type="ingredient_content"/>-->
+	<hpfb:element name="ingredient_id" type="char_1_40_content" nillable="true"/>
 	<hpfb:element name="ingredient_name" type="char_1_100_content"/>
-	<hpfb:element name="ingredient_role" type="ingred_role_content"/>
 	<hpfb:element name="cas_number" type="cas_content"/>
 	<hpfb:element name="ingred_standard" type="char_0_40_content"/>
 	<hpfb:element name="is_human_animal_src" type="required_yes_no_content"/>
@@ -245,7 +244,7 @@
 			<hpfb:element ref="disinfectant_drug_use"/>
 			<hpfb:element ref="is_sched_a"/>
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
-			<hpfb:element ref="drug_ingredients_group"/>
+			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="formulation_group"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -324,21 +323,10 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-
-	<hpfb:complexType name="ingredient_group_content">
+	<hpfb:complexType name="appendix4_content">
 		<hpfb:sequence>
-			<hpfb:element ref="drug_ingredient" minOccurs="1" maxOccurs="unbounded"/>
-		</hpfb:sequence>
-	</hpfb:complexType>
-
-	<hpfb:complexType name="ingredient_content">
-		<hpfb:sequence>
-			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_id" />
 			<hpfb:element ref="ingredient_name"/>
-			<hpfb:element ref="ingredient_role"/>
-			<hpfb:element ref="cas_number"/>
-			<hpfb:element ref="ingred_standard"/>
-			<hpfb:element ref="is_human_animal_src"/>
 			<hpfb:element ref="animal_sourced"/>
 			<hpfb:element ref="human_sourced"/>
 			<hpfb:element ref="tissues_fluids_section" minOccurs="0" maxOccurs="1"/>
@@ -473,7 +461,6 @@
 	</hpfb:complexType>
 
 
-
 	<hpfb:complexType name="formulations_content">
 		<hpfb:sequence>
 			<hpfb:element ref="formulation_details" minOccurs="1" maxOccurs="unbounded"/>
@@ -532,6 +519,10 @@
 	<hpfb:complexType name="active_group_content">
 		<hpfb:all>
 			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
+			<hpfb:element ref="cas_number"/>
+			<hpfb:element ref="ingred_standard"/>
+			<hpfb:element ref="is_human_animal_src"/>
 			<hpfb:element ref="strength"/>
 			<hpfb:element ref="per"/>
 			<hpfb:element ref="units"/>
@@ -543,6 +534,10 @@
 	<hpfb:complexType name="nmi_group_content">
 		<hpfb:all>
 			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
+			<hpfb:element ref="cas_number"/>
+			<hpfb:element ref="ingred_standard"/>
+			<hpfb:element ref="is_human_animal_src"/>
 			<hpfb:element ref="variant_name"/>
 			<hpfb:element ref="strength"/>
 			<hpfb:element ref="per"/>
@@ -555,6 +550,9 @@
 	<hpfb:complexType name="material_group_content">
 		<hpfb:all>
 			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
+			<hpfb:element ref="cas_number"/>
+			<hpfb:element ref="ingred_standard"/>
 			<hpfb:element ref="in_final_container"/>
 		</hpfb:all>
 	</hpfb:complexType>
