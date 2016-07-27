@@ -5,7 +5,7 @@
     <div class="panel-body">
         <div class="row">
 
-            <div >
+            <div>
                 <table class="table dataTable table-bordered table-hover table-condensed table-striped"
                        data-ng-click="$ctrl.focussed=true">
                     <thead>
@@ -33,7 +33,9 @@
                     </tr>
                     <tr data-ng-show="!$ctrl.dayDataCollapse[$index]" data-ng-repeat-end>
                         <td colspan="6">
-                            <cmp-contact-details contact-record="contact" form-name="$ctrl.formName" on-update="$ctrl.onUpdateContactRecord(value)" on-delete="$ctrl.deleteContact(contactId)"></cmp-contact-details>
+                            <cmp-contact-details contact-record="contact" form-name="$ctrl.formName"
+                                                 on-update="$ctrl.onUpdateContactRecord(value)"
+                                                 on-delete="$ctrl.deleteContact(contactId)"></cmp-contact-details>
 
                         </td>
                     </tr>
@@ -44,10 +46,14 @@
 
         </div>
         <div class="row mrgn-tp-md mrgn-bttm-lg">
-            <cmp-contact-details selected-country="adr.selectedCountry" address-record="address" form-name="$ctrl.formName" class="animate-show" data-ng-show="$ctrl.newContactFormShow"></cmp-contact-details>
+            <cmp-contact-details selected-country="adr.selectedCountry" address-record="address"
+                                 form-name="$ctrl.formName" class="animate-show"
+                                 data-ng-show="$ctrl.newContactFormShow"></cmp-contact-details>
             <div class="btn-group-sm col-md-12 text-right">
-                <input type="submit" value="Add Contact" class="btn btn-primary" ng-click="$ctrl.newContactFormShow = true">
-                <input type="submit" value="Cancel" class="btn btn-default"  data-ng-show="$ctrl.newContactFormShow" ng-click="$ctrl.newContactFormShow = false">
+                <input type="submit" value="Add Contact" class="btn btn-primary"
+                       ng-click="$ctrl.newContactFormShow = true">
+                <input type="submit" value="Cancel" class="btn btn-default" data-ng-show="$ctrl.newContactFormShow"
+                       ng-click="$ctrl.newContactFormShow = false">
             </div>
 
         </div>

@@ -1,13 +1,12 @@
 <div class="container-fluid">
-   <!-- <fieldset>-->
     <div>
         <h2>Contact Details</h2>
         <div class="form-group">
             <label class="form-checkbox" for="chk-amend-rec-contact_{{$id}}" ng-hide="true">
-                <input type="checkbox" id="chk-amend-rec-contact_{{$id}}">Amend Record</label>
+                <input type="checkbox" id="chk-amend-rec-contact_{{$id}}">{{'AMEND_RECORD'|translate}}</label>
         </div>
         <div>
-        <cmp-address-role record="$ctrl.contactModel.addressRole"></cmp-address-role>
+            <cmp-address-role record="$ctrl.contactModel.addressRole"></cmp-address-role>
         </div>
         <div class="row">
             <div class="col-md-6 form-group">
@@ -104,8 +103,6 @@
             </div>
 
         </div>
-
-<!--    </fieldset>-->
     </div>
     <pre>contact model: {{$ctrl.contactRecord | json : spacing}}</pre>
     <div class="row">

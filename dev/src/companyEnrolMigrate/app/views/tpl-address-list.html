@@ -5,23 +5,22 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-12">
-
                 <table class="table dataTable table-bordered table-hover table-condensed table-striped"
                        data-ng-click="$ctrl.focussed=true">
                     <thead>
                     <tr>
-                        <th>Company</th>
-                        <th>City</th>
-                        <th>Province/State</th>
-                        <th>Country</th>
-                        <th>Postal Code</th>
+                        <th> {{'COMPANY'|translate}}</th>
+                        <th>{{'CITY'|translate}}</th>
+                        <th>{{'PROVSTATE'|translate}}</th>
+                        <th>{{'COUNTRY'|translate}}</th>
+                        <th>{{'POSTAL'|translate}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr id="tr-adr-{{$index}}" class="clickableRow"
                         data-ng-class="{'selected':$index == $ctrl.tableRowIndexCurrExpanded}" index="{{$index}}"
                         data-ng-repeat-start="address in $ctrl.addressList"
-                        title="Click to toggle collapse/expand details for this address."
+                        title="{{CLICK_TOGGLE|translate}}"
                         data-ng-click="$ctrl.selectTableRow($index)">
                         <td>{{address.companyName}}</td>
                         <td>{{address.city}}</td>
@@ -40,17 +39,14 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
         <div class="row mrgn-tp-md mrgn-bttm-lg">
-            <!--<cmp-address-details address-record="address" form-name="form1" data-ng-show="$ctrl.newAdrFormShow" on-update=""></cmp-address-details>-->
             <div class="btn-group-sm col-md-12 text-right">
                 <input type="submit" value="Add Address" class="btn btn-primary" ng-click="$ctrl.addAddress()"
                        ng-disabled="!$ctrl.addressDetailsValid">
-                <input type="submit" value="Cancel" class="btn btn-default"  data-ng-show="$ctrl.newAdrFormShow" ng-click="$ctrl.newAdrFormShow = false">
+                <input type="submit" value="Cancel" class="btn btn-default" data-ng-show="$ctrl.newAdrFormShow"
+                       ng-click="$ctrl.newAdrFormShow = false">
             </div>
-
         </div>
-
     </div>
 </section>

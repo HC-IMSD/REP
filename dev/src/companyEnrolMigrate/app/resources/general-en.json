@@ -6,5 +6,7 @@
    "ROLES_SELECT": "Select one or more roles for this record",
    "NEW": "New",
    "AMEND": "Amend",
-   "APPROVED": "Approved"
+   "APPROVED": "Approved",
+   "CLICK_TOGGLE":"Click to toggle the collapse or expand details for this address.",
+   "AMEND_RECORD":"Amend Record"
  }

@@ -7,5 +7,6 @@
   "STATE": "fr_State",
   "STREET": "fr_Street Address",
   "ZIP": "fr_Zip Code",
-  "COMPANYNAME_FULL": "Full Company Name"
+  "COMPANYNAME_FULL": "fr_Full Company Name",
+  "COMPANY": "fr_Company"
 }
