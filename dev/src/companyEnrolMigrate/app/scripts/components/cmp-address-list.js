@@ -68,7 +68,7 @@
 
             var defaultAddress = {
                 addressID: 145,
-                companyName: "Test default",
+                companyName: "",
                 amendRecord: false,
                 addressRole: {
                     manufacturer: false,

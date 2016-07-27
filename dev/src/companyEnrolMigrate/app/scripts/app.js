@@ -129,9 +129,15 @@
                     {
                      prefix: 'app/resources/fileIO-',
                      suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/messages-',
+                        suffix: '.json'
                     }
                 ]
             })
             $translateProvider.preferredLanguage('en');
+            //this prevents conflicts with ngMessage
+            $translateProvider.directivePriority(1);
         }]);
 })();

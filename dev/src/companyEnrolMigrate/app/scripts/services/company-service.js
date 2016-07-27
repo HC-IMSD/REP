@@ -14,7 +14,7 @@
             //construction logic
             var defaultAddress = {
                 addressID: 1,
-                companyName: "Test default",
+                companyName: "",
                 amendRecord: false,
                 addressRole: {
                     manufacturer: false,
@@ -61,11 +61,52 @@
                 contactList: []
             };
             angular.extend(this._default, defaultCompanyData);
+            var addressID=1;
+            var companyID=1;
         }
 
         CompanyService.prototype = {
             _default: {},
+            //TODO needed?
+            createNewAddress:function(){
+                var defaultAddress = {
+                    addressID: 1,
+                    companyName: "",
+                    amendRecord: false,
+                    addressRole: {
+                        manufacturer: false,
+                        mailing: false,
+                        billing: false,
+                        importer: false
+                    },
+                    street: "",
+                    city: "",
+                    provLov: "",
+                    provState: "",
+                    province_text: "",
+                    country: "",
+                    postalCode: ""
+                };
+                defaultAddress.addressID=this.getNextAddressID();
+                return(defaultAddress);
+            },
 
+            updateAddressID:function(value){
+                if(isNaN(value)) return;
+                if(value>addressID){
+                    addressID=value;
+                }
+            },
+            getNextAddressID:function(){
+              return (addressID++);
+            },
+            resetAddressID:function(value){
+              if(!value){
+                  addressID=1;
+              }else {
+                  addressID=value;
+              }
+            },
             transformFromFileObj: function (jsonObj) {
                 var rootTag="COMPANY_ENROL"
                 var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);
@@ -116,6 +157,7 @@
                 var list = [];
                 if (adrList) {
                     for (var i = 0; i < adrList.length; i++) {
+                        this.updateAddressID(parseInt(adrList[i].address_id))
                         var address = {};
                         address.addressID = adrList[i].address_id;
                         address.companyName = adrList[i].company_name;
