@@ -34,6 +34,7 @@
         var _company = new CompanyService();
         vm.company = _company.getModelInfo();
         vm.company.applicationType = "NEW";
+
         /*        var result2 = _company.transformToFileObj();
          console.log("ready to make file" + JSON.stringify(result2,null, 2));*/
 
@@ -67,6 +68,13 @@
         //used on update
         vm.onUpdateAddressList = function (newList) {
             vm.company.addressList = newList;
+        }
+
+        vm.tempTest=function(jsonRec){
+            console.log("This is hte temptest")
+            var temp={}
+           var result= _company.createAddressRecord(temp);
+            return result;
         }
 
         vm.onUpdateContactList = function (newList) {

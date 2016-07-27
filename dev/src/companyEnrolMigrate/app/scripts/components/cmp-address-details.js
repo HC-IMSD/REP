@@ -46,6 +46,7 @@
         vm.$onInit = function () {
 
             vm.addressModel = {
+                addressID:"",
                 isDetailValid: false,
                 amendRecord: false,
                 addressRole: {
@@ -62,7 +63,6 @@
                 postalCode: ""
 
             };
-
             vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 
             vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
@@ -73,14 +73,6 @@
             if (vm.addressRecord) {
 
                 vm.addressModel = angular.extend({},vm.addressRecord);
-                //"addressID":"0001","companyName":"NoName1","amendRecord":true,"manufacturer":true,"mailing":false,"billing":false,"importer":false,"street":"123 Main St","city":"Ottawa","province":"ON","country":"CAN","postalCode":"K1A 3N1","$$hashKey":"object:10"}
-
-             // console.log('$onInit vm.addressModel:' + JSON.stringify(vm.addressModel));
-
-
-               // vm.addressModel.country = vm.addressRecord.company_address_details.country;
-               // vm.amendRecord = vm.addressRecord.amend_record === 'Y' ? true : false;
-                // vm.provinceTextState();
                 vm.provListLabel = getProvinceListLabel();
                 vm.postalLabel = getPostalLabel();
                 vm.isPostalRequired = isPostalRequiredFn();
@@ -136,9 +128,10 @@
         }
 
 
-        var loadAddressModel = function(){
+       /* var loadAddressModel = function(){
 
             return {
+
                 amendRecord: vm.addressRecord.amendRecord,
                 addressRole: {
                     manufacturer: vm.addressRecord.manufacturer,
@@ -155,7 +148,7 @@
 
             };
 
-        }
+        }*/
 
         var getProvinceTextState =  function() {
 

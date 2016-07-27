@@ -19,7 +19,8 @@
             bindings: {
                 formName: '<',
                 addresses: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                getNewAddress:'&'
             },
             controller: addressListCtrl
         });
@@ -66,8 +67,8 @@
 
         vm.addAddress = function () {
 
-            var defaultAddress = {
-                addressID: 145,
+         /*   var defaultAddress = {
+                addressID: -1,
                 companyName: "",
                 amendRecord: false,
                 addressRole: {
@@ -84,6 +85,12 @@
                 country: "",
                 postalCode: ""
             };
+            vm.myVar=""*/
+            //vm.onUpdate({newList:vm.addressList});
+
+            var defaultAddress=vm.getNewAddress()
+
+            console.log("this is my var"+defaultAddress)
             //create a new address record and update the addresses
             vm.addressList.push(defaultAddress);
             vm.selectTableRow((vm.addressList.length - 1), "");

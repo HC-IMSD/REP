@@ -85,7 +85,8 @@
 </header>
 <main role="main" property="mainContentOfPage" class="container">
     <!--Company Enrol Content starts here -->
-    <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate>
+    <div >
+    <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate="novalidate" >
         <div>
             <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="COMPANY_ENROL"/>
 
@@ -152,16 +153,23 @@
                 <div>
                 <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
                                   form-name="companyForm"
-                                  on-update="main.onUpdateAddressList(newList)"></cmp-address-list>
+                                  on-update="main.onUpdateAddressList(newList)" get-new-address="main.tempTest()"></cmp-address-list>
                 <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
                                   form-name="companyForm"
                                   on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
                 </div>
-
             </section>
+            <div class="form-group has-error" style="display:inline-block;width:100%;font-size: 100%;white-space: normal;">
+                <label for="fname1" class="required" aria-required="true"><span class="field-name">First name</span> <strong class="required" aria-required="true">(required)</strong> <strong id="fname1-error" class="error"><span class="label label-danger"><span class="prefix">Error&nbsp;2: </span>This field is required.</span></strong></label>
+                <input class="form-control error" id="fname1" name="fname1" type="text" required="required" data-rule-minlength="2" aria-required="true">
+            </div>
+
+
         <pre>overall: {{main.company | json : spacing}}</pre>
         </div>
     </form>
+
+    </div>
     <!-end content->
     <dl id="wb-dtmd">
         <dt>Date modified:&#32;</dt>

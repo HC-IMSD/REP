@@ -12,7 +12,7 @@
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
-            var defaultAddress = {
+           /* var defaultAddress = {
                 addressID: 1,
                 companyName: "",
                 amendRecord: false,
@@ -48,7 +48,7 @@
                 phoneExt: "",
                 fax: "",
                 email: ""
-            };
+            };*/
 
             var defaultCompanyData = {
                 dataChecksum: "",
@@ -61,14 +61,15 @@
                 contactList: []
             };
             angular.extend(this._default, defaultCompanyData);
-            var addressID=1;
-            var companyID=1;
+            this.addressID=0;
+            this.companyID=0;
         }
 
         CompanyService.prototype = {
             _default: {},
             //TODO needed?
-            createNewAddress:function(){
+            createAddressRecord:function(jsonRec){
+                console.log("starting create recored")
                 var defaultAddress = {
                     addressID: 1,
                     companyName: "",
@@ -88,6 +89,7 @@
                     postalCode: ""
                 };
                 defaultAddress.addressID=this.getNextAddressID();
+               jsonRec=defaultAddress;
                 return(defaultAddress);
             },
 
@@ -98,7 +100,8 @@
                 }
             },
             getNextAddressID:function(){
-              return (addressID++);
+                this.addressID=this.addressID+1;
+              return (this.addressID);
             },
             resetAddressID:function(value){
               if(!value){
