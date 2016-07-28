@@ -2,6 +2,9 @@
  * Created by dkilty on 6/4/2016.
  */
 
+/**
+ * @ngdoc module declaration for datalists
+ */
 (function () {
     'use strict';
 
@@ -10,7 +13,10 @@
 
 })();
 
-
+/**
+ * getCountryAndProvinces services
+ * Returns Canada or US condes, canada provinces, us states
+ */
 (function () {
     'use strict';
 
@@ -23,20 +29,21 @@
         var service = {
             getCountries: getCountryValuesArray,
             getProvinces: getProvinceValuesArray,
-            getUSStates:   getUSStatesValueArray
+            getUSStates: getUSStatesValueArray
         };
         return service;
 
         ////////////////
 
-        function getCanada(){
-            return 'CAN';
-        }
-        function getUSA(){
+        function getCanada() {
             return 'CAN';
         }
 
-        var getCountryValuesArray = (function(){
+        function getUSA() {
+            return 'USA';
+        }
+
+        var getCountryValuesArray = (function () {
 
             return [
                 "CAN",
@@ -298,7 +305,8 @@
                 ]
             );
         }
-        function getUSStatesValueArray(){
+
+        function getUSStatesValueArray() {
             return (
                 [
                     'AL',
@@ -359,7 +367,10 @@
     }
 
 })();
-
+/**
+ * getCountryAndProvinces services
+ * Returns ISO3166 country 3 letter list,
+ */
 (function () {
     'use strict';
 
@@ -367,7 +378,7 @@
         .module('dataLists')
         .factory('getCountriesISO3166', getCountries);
 
-   // getCountries.$inject = ['dependency'];
+    // getCountries.$inject = ['dependency'];
 
     /* @ngInject */
     function getCountries() {
@@ -379,7 +390,7 @@
         ////////////////
 
         function getCountryList3Letter() {
-            return(
+            return (
                 [
                     'CAN',
                     'USA',
@@ -623,4 +634,80 @@
     }
 
 })();
+
+/**
+ * Contact List Service -salutation and language
+ */
+
+(function () {
+    'use strict';
+
+    angular
+        .module('dataLists')
+        .factory('getContactLists', getSalService);
+
+    /* @ngInject */
+    function getSalService() {
+        var service = {
+            getSalutationList: getSalValuesArray,
+            getLanguages: getLanguagesValuesArray,
+        };
+        return service;
+
+        ////////////////
+
+        function getSalValuesArray() {
+            return (
+                [
+                    'SALUT_DR',
+                    'SALUT_MR',
+                    'SALUT_MRS',
+                    'SALUT_MS'
+                ]);
+        }
+
+        function getLanguagesValuesArray() {
+            return (
+                [
+                    'en',
+                    'fr'
+                ]);
+        }
+    }
+})();
+
+
+/**
+ * Contact role list service
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('dataLists')
+        .factory('getRoleLists', getRolesService);
+
+    /* @ngInject */
+    function getRolesService() {
+        var service = {
+            getContactRoles: getRoleValuesArray,
+        };
+        return service;
+
+        ////////////////
+
+        function getRoleValuesArray() {
+            return (
+                [
+                    'ROLE_PRIMARY',
+                    'ROLE_SECONDARY',
+                ]);
+        }
+
+
+    }
+
+})();
+
+
 

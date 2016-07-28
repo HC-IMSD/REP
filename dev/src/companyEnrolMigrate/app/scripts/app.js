@@ -127,10 +127,6 @@
                         prefix: 'app/resources/address-',
                         suffix: '.json'
                     },
-                    /*  {
-                     prefix: 'app/resources/company-',
-                     suffix: '.json'
-                     },*/
                     {
                         prefix: 'app/resources/stateProvinces-',
                         suffix: '.json'
@@ -145,6 +141,10 @@
                     },
                     {
                         prefix: 'app/resources/messages-',
+                        suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/contact-',
                         suffix: '.json'
                     }
                 ]

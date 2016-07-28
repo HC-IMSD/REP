@@ -7,7 +7,8 @@
 
     angular
         .module('contactModule', [
-            'addressRole'
+            'addressRole',
+            'dataLists'
         ])
 })();
 
@@ -28,59 +29,69 @@
             }
     });
 
-    contactCtrl.$inject = ['$scope']
-    function contactCtrl($scope) {
-     var vm = this;
-     vm.$onInit = function(){
 
-         vm.contactModel = {
-             contactId: "",
-             amendRecord: false,
-             addressRole: {
-                 manufacturer: false,
-                 mailing: false,
-                 billing: false,
-                 importer: false
-             },
-             contactRole: "",
-             salutation: "",
-             givenName: "",
-             surname: "",
-             initials: "",
-             title: "",
-             phone: "",
-             PhoneExt: "",
-             fax: ""
-         };
-
-         if (vm.contactRecord) {
-             angular.extend(vm.contactModel, vm.contactRecord);
-         }
-     }
+    contactCtrl.$inject = ['$scope', 'getContactLists', 'getRoleLists']
+    function contactCtrl($scope, getContactLists, getRoleLists) {
+        var vm = this;
+        vm.salutationList = getContactLists.getSalutationList();
+        vm.contactRoleList = getRoleLists.getContactRoles();
+        vm.langCorrespondance = getContactLists.getLanguages();
+        vm.$onInit = function () {
+            vm.contactModel = {
+                contactId: "",
+                amendRecord: false,
+                addressRole: {
+                    manufacturer: false,
+                    mailing: false,
+                    billing: false,
+                    importer: false
+                },
+                contactRole: "",
+                salutation: "",
+                givenName: "",
+                surname: "",
+                initials: "",
+                title: "",
+                phone: "",
+                PhoneExt: "",
+                fax: ""
+            };
+            if (vm.contactRecord) {
+                angular.extend(vm.contactModel, vm.contactRecord);
+            }
+        }
         //TODO rename
-     vm.delete = function () {
-         vm.onDelete({contactId: vm.contactModel.contactId});
-     }
+        vm.delete = function () {
+            vm.onDelete({contactId: vm.contactModel.contactId});
+        }
         //TODO discard?
 
- }
 
-    vm.onContactRoleUpdate = function (newRole) {
-        vm.contactModel.addressRole = newRole
-        vm.updateAddressModel();
+        vm.onContactRoleUpdate = function (newRole) {
+            vm.contactModel.addressRole = newRole
+            vm.updateAddressModel();
+        }
+
+        /* vm.updateContactModel = function () {
+         //always update the model
+         //  console.log('onAddressRoleUpdate: ' + vm.addressModel.companyName);
+         //  if($scope.addressForm.$valid)
+
+         //console.log($scope.addressForm.$valid)
+         //update if the address details if valid
+         console.log("update Contact Model")
+         vm.contactModel.isDetailValid = $scope.contactForm.$valid;
+         vm.onUpdate({contact: vm.contactModel});
+         }*/
+        vm.showError = function (control) {
+            // contactForm.contactEmail.$invalid &&!contactForm.contactEmail.$pristine
+            //  console.log("state"+control.$invalid +control.$pristine);
+            if (control.$invalid && !control.$pristine) {
+                return true;
+            }
+        }
+
+
     }
-
-    vm.updateContactModel = function () {
-        //always update the model
-        //  console.log('onAddressRoleUpdate: ' + vm.addressModel.companyName);
-        //  if($scope.addressForm.$valid)
-
-        //console.log($scope.addressForm.$valid)
-        //update if the address details if valid
-        vm.contactModel.isDetailValid = $scope.contactForm.$valid;
-        vm.onUpdate({contact: vm.contactModel});
-    }
-
-
 
 })();

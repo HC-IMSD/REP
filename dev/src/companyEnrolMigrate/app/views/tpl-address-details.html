@@ -17,15 +17,14 @@
                 <div class="form-group" ng-class="{'has-error':addressForm.companyName.$invalid}">
                     <label for="companyName_{{$id}}" class="required">
                         <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
-                        <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
                         <strong id="companyName-error" class="error" ng-if="addressForm.companyName.$invalid">
                         <span class="label label-danger" ng-messages="addressForm.companyName.$error">
-                          <!--  <div ng-message="max"><span translate="FORM.MAXVALUE"></span></div>-->
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                         </strong>
                     </label>
-                    <input type="text" id="companyName_{{$id}}" name="companyName"
+                    <input type="email" id="companyName_{{$id}}" name="companyName"
                            ng-model="adr.addressModel.companyName"
                            class="form-control full-width" maxlength="80" size="60" tabindex="3" required/>
                 </div>

@@ -125,7 +125,14 @@
                 vm.onUpdate({address:vm.addressModel});
         }
 
-
+        vm.showError = function (control) {
+            // contactForm.contactEmail.$invalid &&!contactForm.contactEmail.$pristine
+            console.log("in showError")
+            //  console.log("state"+control.$invalid +control.$pristine);
+            if (control.$invalid && !control.$pristine) {
+                return true;
+            }
+        }
        /* var loadAddressModel = function(){
 
             return {

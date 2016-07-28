@@ -5,11 +5,10 @@
   "LANGUAGE_CORRESPONDENCE": "Language of Correspondance",
   "JOB_TITLE": "Job Title",
   "SALUTATION": "Salutation",
-  "SALUT_MR": "Mr.",
-  "SALUT_MS": "Ms.",
+  "SALUT_MR": "M.",
+  "SALUT_MS": "Mme",
   "SALUT_DR": "Dr.",
-  "SALUT_MRS": "Mrs.",
-  "ROLE_PRIMARY": "Primary",
-  "ROLE_SECONDARY": "Alternate"
-
+  "SALUT_MRS": "Mlle",
+  "ROLE_PRIMARY": "fr_Primary",
+  "ROLE_SECONDARY": "fr_Alternate"
 }

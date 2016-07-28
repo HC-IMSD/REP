@@ -40,7 +40,7 @@
             vm.dayDataCollapse = [true, true, true, true, true, true];
             vm.transactionShow = 0;
             vm.newAdrFormShow = false;
-            vm.contactList = vm.contacts;
+            vm.contactList = vm.contacts; //HERE Is how it is bound
 
         }
 
