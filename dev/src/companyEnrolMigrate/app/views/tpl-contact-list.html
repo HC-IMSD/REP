@@ -51,9 +51,9 @@
                                  data-ng-show="$ctrl.newContactFormShow"></cmp-contact-details>
             <div class="btn-group-sm col-md-12 text-right">
                 <input type="submit" value="Add Contact" class="btn btn-primary"
-                       ng-click="$ctrl.newContactFormShow = true">
+                       ng-click="$ctrl.addContact()" ng-disabled="!$ctrl.detailsValid">
                 <input type="submit" value="Cancel" class="btn btn-default" data-ng-show="$ctrl.newContactFormShow"
-                       ng-click="$ctrl.newContactFormShow = false">
+                       ng-click="$ctrl.newAdrFormShow=false">
             </div>
 
         </div>

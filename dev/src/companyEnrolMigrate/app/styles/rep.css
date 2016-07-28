@@ -1,0 +1,6 @@
+strong.error {
+    display: inline-block;
+    width: 100%;
+    font-size: 125%;
+/ / TODO what is being overridden in wet white-space: normal;
+}

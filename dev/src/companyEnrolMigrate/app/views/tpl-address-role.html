@@ -25,7 +25,7 @@
                 <div class="checkbox">
                     <label for="chk-mailing_{{$id}}">
                         <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing"
-                               id="chk-mailing_{{$id}}"
+                               id="chk-mailing_{{$id}}" tabindex="0"
                                ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Mailing Address
                     </label>
                 </div>
@@ -36,7 +36,7 @@
                 <div class="checkbox">
                     <label for="chk-billing_{{$id}}">
                         <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing"
-                               id="chk-billing_{{$id}}"
+                               id="chk-billing_{{$id}}" tabindex="0"
                                ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Billing Address
                     </label>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="checkbox">
                     <label for="chk-importer_{{$id}}">
                         <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer"
-                               id="chk-importer_{{$id}}"
+                               id="chk-importer_{{$id}}" tabindex="0"
                                ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Importer Address
                     </label>
                 </div>

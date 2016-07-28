@@ -20,7 +20,8 @@
             bindings: {
                 formName: '<',
                 contacts: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                getNewContact: '&'
             }
         });
 
@@ -28,66 +29,47 @@
 
     function contactListCtrl($filter){
         var vm = this;
-
+        vm.detailsValid = true; //TODO new
         vm.contactList = [];
-
         vm.$onInit = function () {
-
-
+            vm.detailsValid = true;
             vm.focused = false;
-
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
             vm.tableRowIndexPrevExpanded = "";
             vm.dayDataCollapse = [true, true, true, true, true, true];
-
             vm.transactionShow = 0;
-
             vm.newAdrFormShow = false;
             vm.contactList = vm.contacts;
-
-           // console.log("cmpContactList $onInit: contactList " + JSON.stringify(vm.contactList));
 
         }
 
         vm.deleteContact = function(cID){
 
             var idx = vm.contactList.indexOf(
-                $filter('contactFilter')(vm.contactList,{contactId: cID},true)[0]
+                $filter('filter')(vm.contactList, {contactId: cID}, true)[0]
             );
             vm.contactList.splice(idx,1);
             vm.onUpdate({newList:vm.contactList});
         }
 
 
-
-        vm.addContact = function (contact) {
-            vm.contactList.push(contact);
-            vm.onUpdate({newList:vm.contactList});
+        vm.addContact = function () {
+            var defaultContact = vm.getNewContact() //TODO new
+            vm.contactList.push(defaultContact);
+            vm.selectTableRow((vm.contactList.length - 1), ""); //TODO new
+            vm.detailsValid = false; //TODO new
+            vm.onUpdate({newList: vm.contactList});//TODO new
         }
 
         vm.onUpdateContactRecord = function(contact){
+            vm.detailsValid = contact.isDetailValid;
                 var idx = vm.contactList.indexOf(
-                    $filter('contactFilter')(vm.contactList,{contactId: contact.contactId},true)[0]
+                    $filter('filter')(vm.contactList, {contactId: contact.contactId}, true)[0]
                 );
-
                 vm.contactList[idx] = contact;
                 vm.onUpdate({newList:vm.contactList});
-
         }
-
-       /* var url = "data/company-enrol.txt";
-        $http.get(url)
-            .success(function (data, status, headers, config) {
-
-                vm.contactList = data.COMPANY_ENROL.contact_record;
-
-                // console.log("json success: " + JSON.stringify(data));
-            })
-            .error(function (data, status, headers, config) {
-                vm.statusval = status;
-                console.log("json error: " + status);
-            });*/
 
         vm.dayDataCollapseFn = function () {
             for (var i = 0; vm.contactList.length - 1; i += 1) {

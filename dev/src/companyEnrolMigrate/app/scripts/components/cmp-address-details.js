@@ -33,15 +33,6 @@
     function addressCtrl($scope, getCountryAndProvinces, getCountriesISO3166) {
 
         var vm = this;
-        vm.onDeleteButtonClick = function () {
-            console.log("delete button click: " + vm.addressModel.addressID);
-            vm.onDelete({addressId: vm.addressModel.addressID});
-        }
-
-        vm.onDiscardButtonClick = function(){
-            vm.addressModel = angular.extend({},vm.addressRecord);
-            $scope.addressForm.$setPristine();
-        }
 
         vm.$onInit = function () {
 
@@ -83,13 +74,23 @@
 
             }
         }
+        vm.onDeleteButtonClick = function () {
+            console.log("delete button click: " + vm.addressModel.addressID);
+            vm.onDelete({addressId: vm.addressModel.addressID});
+        }
+
+        vm.onDiscardButtonClick = function () {
+            vm.addressModel = angular.extend({}, vm.addressRecord);
+            $scope.addressForm.$setPristine();
+        }
 
 
-        this.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
             // this.user = changes.user.currentValue;
          //   loadAddressModel();
           //  console.log('cmpAddressDetails $onChanges :' + JSON.stringify(vm.addressRecord));
         };
+
         vm.onSelectedCountryChange = function (newValue) {
             vm.addressModel.country = newValue;
             vm.updateAddressModel();
@@ -108,9 +109,6 @@
         }
 
         vm.onAddressRoleUpdate = function(newRole){
-
-           // console.log('onAddressRoleUpdate: ' + JSON.stringify(newRole));
-
             vm.addressModel.addressRole = newRole;
             vm.updateAddressModel();
             

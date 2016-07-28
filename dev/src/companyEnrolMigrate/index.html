@@ -134,36 +134,16 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
-                     <div class="col-xs-12 form-group">
-                         <label for="application-type">Application Type</label>
-                         <select id="application-type" ng-options="type |translate for type in main.applTypes"
-                                 ng-model="main.company.applicationType" ng-disabled="true"
-                                 class="form-control"></select>
-                         <button ng-click="main.setAmendState()" ng-readonly="main.isComplete">
-                             Amend Enrolment
-                         </button>
-                     </div>
-                     &lt;!&ndash; <div class="col-xs-5 form-group">
-                          <button ng-click="main.setAmendState()" ng-readonly="main.isComplete">
-                              Amend Enrolment</button>
-
-                      </div>&ndash;&gt;
-                 </div>-->
                 <div>
                 <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
                                   form-name="companyForm"
-                                  on-update="main.onUpdateAddressList(newList)" get-new-address="main.tempTest()"></cmp-address-list>
+                                  on-update="main.onUpdateAddressList(newList)"
+                                  get-new-address="main.getNewAddress()"></cmp-address-list>
                 <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
-                                  form-name="companyForm"
+                                  form-name="companyForm" get-new-contact="main.getNewContact()"
                                   on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
                 </div>
             </section>
-            <div class="form-group has-error" style="display:inline-block;width:100%;font-size: 100%;white-space: normal;">
-                <label for="fname1" class="required" aria-required="true"><span class="field-name">First name</span> <strong class="required" aria-required="true">(required)</strong> <strong id="fname1-error" class="error"><span class="label label-danger"><span class="prefix">Error&nbsp;2: </span>This field is required.</span></strong></label>
-                <input class="form-control error" id="fname1" name="fname1" type="text" required="required" data-rule-minlength="2" aria-required="true">
-            </div>
-
 
         <pre>overall: {{main.company | json : spacing}}</pre>
         </div>
@@ -267,6 +247,6 @@
 <script src="app/scripts/components/fileIO/xml2json.js"></script>
 <script src="app/scripts/components/fileIO/sha256.js"></script>
 <script src="app/scripts/components/fileIO/FileSaver.min.js"></script>
-
+<link rel="stylesheet" href="./app/styles/rep.css ">
 </body>
 </html>

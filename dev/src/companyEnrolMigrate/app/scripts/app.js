@@ -70,10 +70,15 @@
             vm.company.addressList = newList;
         }
 
-        vm.tempTest=function(jsonRec){
+        vm.getNewAddress = function () {
             console.log("This is hte temptest")
-            var temp={}
-           var result= _company.createAddressRecord(temp);
+            var result = _company.createAddressRecord();
+            return result;
+        }
+
+        vm.getNewContact = function () {
+            console.log("This is hte contact gte")
+            var result = _company.createContactRecord();
             return result;
         }
 

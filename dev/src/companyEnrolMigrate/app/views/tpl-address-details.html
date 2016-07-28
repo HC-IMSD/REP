@@ -1,43 +1,53 @@
 <div class="container-fluid">
-    <ng-form name="addressForm" >
-        <fieldset>
-            <legend>Company Details</legend>
-            <div class="form-group">
-                <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
-                    <input id="chk-amend-rec_{{$id}}" type="checkbox" ng-model="adr.addressModel.amendRecord" ng-blur="adr.updateAddressModel()"/>
-                    {{'AMEND_RECORD'|translate}}</label>
-                <div >
-                <cmp-address-role record="adr.addressModel.addressRole" form-name="addressForm" on-update="adr.onAddressRoleUpdate($event.roles)"></cmp-address-role>
+    <ng-form name="addressForm">
+        <!-- <fieldset>-->
+        <h2>Company Details</h2>
+
+        <div>
+            <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
+                <input id="chk-amend-rec_{{$id}}" type="checkbox" ng-model="adr.addressModel.amendRecord"
+                       ng-blur="adr.updateAddressModel()" tabindex="1"/>
+                {{'AMEND_RECORD'|translate}}</label>
+
+            <div>
+                <cmp-address-role record="adr.addressModel.addressRole" form-name="addressForm"
+                                  on-update="adr.onAddressRoleUpdate($event.roles)" tabindex="2"></cmp-address-role>
             </div>
-            <div class="form-group" ng-class="{'has-error':addressForm.companyName.$invalid}" style="float:initial;margin-right:20px;">
-                <label for="companyName_{{$id}}" class="required">
-                    <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
-                    <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                    <strong id="companyName-error" class="error" ng-if="addressForm.companyName.$invalid" >
+            <div class="row">
+                <div class="form-group" ng-class="{'has-error':addressForm.companyName.$invalid}">
+                    <label for="companyName_{{$id}}" class="required">
+                        <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
+                        <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                        <strong id="companyName-error" class="error" ng-if="addressForm.companyName.$invalid">
                         <span class="label label-danger" ng-messages="addressForm.companyName.$error">
                           <!--  <div ng-message="max"><span translate="FORM.MAXVALUE"></span></div>-->
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
-                    </strong>
-                </label>
-                <input type="text" id="companyName_{{$id}}" name="companyName" ng-model="adr.addressModel.companyName"
-                       class="form-control full-width" maxlength="80" size="60" required/>
+                        </strong>
+                    </label>
+                    <input type="text" id="companyName_{{$id}}" name="companyName"
+                           ng-model="adr.addressModel.companyName"
+                           class="form-control full-width" maxlength="80" size="60" tabindex="3" required/>
+                </div>
             </div>
-            <div class="form-group" ng-class="{'has-error':addressForm.street.$invalid}">
-                <label for="street_{{$id}}" class="required">
-                    <span class="field-name">{{"STREET" |translate}}</span>
-                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <strong id="street-error" class="error" ng-if="addressForm.street.$invalid">
+            <div class="row">
+                <div class="form-group" ng-class="{'has-error':addressForm.street.$invalid}">
+                    <label for="street_{{$id}}" class="required">
+                        <span class="field-name">{{"STREET" |translate}}</span>
+                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                        <strong id="street-error" class="error" ng-if="addressForm.street.$invalid">
                         <span class="label label-danger" ng-messages="addressForm.street.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
-                    </strong>
-                </label>
-                <input type="text" class="form-control full-width" id="street_{{$id}}" name="street"
-                       data-ng-model="adr.addressModel.street"  ng-blur="adr.updateAddressModel()" required/>
+                        </strong>
+                    </label>
+                    <input type="text" class="form-control full-width" id="street_{{$id}}" name="street"
+                           data-ng-model="adr.addressModel.street" ng-blur="adr.updateAddressModel()" tabindex="4"
+                           required/>
+                </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-6" ng-class="{'has-error':addressForm.city.$invalid}">
+                <div class="form-group col-md-6 has-error" ng-class="{'has-error':addressForm.city.$invalid}">
                     <label for="city_{{$id}}" class="required">
                         <span class="field-name">{{"CITY_TOWN" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
@@ -48,11 +58,14 @@
                         </strong>
                     </label>
                     <input type="text" id="city_{{$id}}" name="city" data-ng-model="adr.addressModel.city"
-                           class="form-control  full-width" ng-blur="adr.updateAddressModel()" maxlength="60" required/>
+                           class="form-control  full-width" ng-blur="adr.updateAddressModel()" maxlength="60"
+                           tabindex="5" required/>
                 </div>
                 <div class="col-md-6">
-                    <cmp-country-select form-name="addressForm" selected-country="adr.addressModel.country" countries="adr.countries"
-                                        country-change="adr.onSelectedCountryChange($event.country)"></cmp-country-select>
+                    <cmp-country-select form-name="addressForm" selected-country="adr.addressModel.country"
+                                        countries="adr.countries"
+                                        country-change="adr.onSelectedCountryChange($event.country)"
+                                        tabindex="6"></cmp-country-select>
                 </div>
             </div>
             <div class="row">
@@ -68,14 +81,16 @@
                             </strong>
                         </label>
                         <select class="form-control full-width" data-ng-model="adr.addressModel.provState"
-                                id="provinceList_{{$id}}" name="provinceList"  ng-blur=" adr.updateAddressModel()"
-                                data-ng-options="province |translate for province in adr.provinces"></select>
+                                id="provinceList_{{$id}}" name="provinceList" ng-blur=" adr.updateAddressModel()"
+                                data-ng-options="province |translate for province in adr.provinces"
+                                tabindex="7"></select>
                     </div>
                     <div class="form-group " ng-if="adr.hideProvinceDdl">
                         <label for="stateText_{{$id}}">{{"PROVSTATE" |translate}}</label>
                         <input type="text" id="stateText_{{$id}}" name="provinceText"
                                data-ng-model="adr.addressModel.stateText" class="form-control full-width" maxlength="40"
-                               size="40" ng-blur=" adr.updateAddressModel()"  ng-blur="adr.updateAddressModel()"/>
+                               size="40" ng-blur=" adr.updateAddressModel()" ng-blur="adr.updateAddressModel()"
+                               tabindex="8"/>
                     </div>
                 </div>
                 <div class="form-group col-md-6">
@@ -91,12 +106,13 @@
                         </strong>
                     </label>
                     <input type="text" id="postal_{{$id}}" name="postal" data-ng-model="adr.addressModel.postalCode"
-                           class="form-control full-width" ng-maxlength="7" ng-required="adr.isPostalRequired" maxlength="7"
-                           ng-pattern="adr.postalPattern"  ng-blur="adr.updateAddressModel()"/>
+                           class="form-control full-width" ng-maxlength="7" ng-required="adr.isPostalRequired"
+                           maxlength="7"
+                           ng-pattern="adr.postalPattern" ng-blur="adr.updateAddressModel()" tabindex="9"/>
                 </div>
             </div>
-            </div>
-        </fieldset>
+        </div>
+        <!--  </fieldset>-->
         <div class="row">
             <!--<pre>Selected Country Changed: {{adr.addressModel.country}}</pre>
             <pre>Hide province list: {{adr.hideProvinceDdl}}</pre>

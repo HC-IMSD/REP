@@ -62,13 +62,12 @@
             };
             angular.extend(this._default, defaultCompanyData);
             this.addressID=0;
-            this.companyID=0;
+            this.contactID = 0;
         }
 
         CompanyService.prototype = {
             _default: {},
-            //TODO needed?
-            createAddressRecord:function(jsonRec){
+            createAddressRecord: function () {
                 console.log("starting create recored")
                 var defaultAddress = {
                     addressID: 1,
@@ -89,14 +88,36 @@
                     postalCode: ""
                 };
                 defaultAddress.addressID=this.getNextAddressID();
-               jsonRec=defaultAddress;
                 return(defaultAddress);
             },
-
+            createContactRecord: function () {
+                console.log("starting create recored")
+                var defaultContact = {
+                    contactID: "",
+                    amendRecord: false,
+                    addressRole: {
+                        manufacturer: false,
+                        mailing: false,
+                        billing: false,
+                        importer: false
+                    },
+                    contactRole: "",
+                    salutation: "",
+                    givenName: "",
+                    surname: "",
+                    initials: "",
+                    title: "",
+                    phone: "",
+                    phoneExt: "",
+                    fax: ""
+                };
+                defaultContact.contactID = this.getNextContactID();
+                return (defaultContact);
+            },
             updateAddressID:function(value){
                 if(isNaN(value)) return;
-                if(value>addressID){
-                    addressID=value;
+                if (value > this.addressID) {
+                    this.addressID = value;
                 }
             },
             getNextAddressID:function(){
@@ -105,11 +126,30 @@
             },
             resetAddressID:function(value){
               if(!value){
-                  addressID=1;
+                  this.addressID = 0;
               }else {
-                  addressID=value;
+                  this.addressID = value;
               }
             },
+            updateContactID: function (value) {
+                if (isNaN(value)) return;
+                if (value > this.contactID) {
+                    this.contactID = value;
+                }
+            },
+            getNextContactID: function () {
+                this.contactID = this.contactID + 1;
+                return (this.contactID);
+            },
+            resetContactID: function (value) {
+                if (!value) {
+                    this.contactID = 0;
+                } else {
+                    this.contactID = value;
+                }
+            },
+
+
             transformFromFileObj: function (jsonObj) {
                 var rootTag="COMPANY_ENROL"
                 var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);
