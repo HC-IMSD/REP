@@ -94,7 +94,7 @@
         //dan seledcts table row
         vm.selectTableRow = function (index, adrId) {
 
-            if (!vm.detailsValid) return;
+            if (!vm.detailsValid) return; //TODO activate error handling
 
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();

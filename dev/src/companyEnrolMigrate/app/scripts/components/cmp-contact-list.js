@@ -62,15 +62,15 @@
             vm.onUpdate({newList: vm.contactList});//TODO new
         }
 
-        /*  vm.onUpdateContactRecord = function(contact){
-         console.info("updating a contact record")
-         vm.detailsValid = contact.isDetailValid;
+        vm.onUpdateContactRecord = function (contact) {
+            console.info("addressList::onUpdateContactRecord:updating a contact record")
+            vm.detailsValid = contact.isDetailValid;
                 var idx = vm.contactList.indexOf(
                     $filter('filter')(vm.contactList, {contactId: contact.contactId}, true)[0]
                 );
                 vm.contactList[idx] = contact;
                 vm.onUpdate({newList:vm.contactList});
-         }*/
+        }
 
         vm.dayDataCollapseFn = function () {
             for (var i = 0; vm.contactList.length - 1; i += 1) {

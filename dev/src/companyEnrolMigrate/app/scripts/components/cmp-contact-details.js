@@ -33,6 +33,8 @@
     contactCtrl.$inject = ['$scope', 'getContactLists', 'getRoleLists']
     function contactCtrl($scope, getContactLists, getRoleLists) {
         var vm = this;
+
+        vm.ngModelOptSetting = {updateOn: 'blur'}
         vm.salutationList = getContactLists.getSalutationList();
         vm.contactRoleList = getRoleLists.getContactRoles();
         vm.langCorrespondance = getContactLists.getLanguages();

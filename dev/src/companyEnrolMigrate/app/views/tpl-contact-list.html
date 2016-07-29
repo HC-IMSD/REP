@@ -33,8 +33,8 @@
                     </tr>
                     <tr data-ng-show="!$ctrl.dayDataCollapse[$index]" data-ng-repeat-end>
                         <td colspan="6">
-                            <cmp-contact-details contact-record="contact" <!--form-name="$ctrl.formName"-->
-                            <!--on-update="$ctrl.onUpdateContactRecord(value)"-->
+                            <cmp-contact-details contact-record="contact"
+                                                 on-update="$ctrl.onUpdateContactRecord(contact)"
                                                  on-delete="$ctrl.deleteContact(contactId)"></cmp-contact-details>
 
                         </td>

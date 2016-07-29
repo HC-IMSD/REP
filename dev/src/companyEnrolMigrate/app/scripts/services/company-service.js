@@ -62,7 +62,7 @@
             };
             angular.extend(this._default, defaultCompanyData);
             this.addressID=0;
-            this.contactID = 0;
+            this.contactId = 0;
         }
 
         CompanyService.prototype = {
@@ -93,7 +93,7 @@
             createContactRecord: function () {
                 console.log("starting create recored")
                 var defaultContact = {
-                    contactID: "",
+                    contactId: "",
                     amendRecord: false,
                     addressRole: {
                         manufacturer: false,
@@ -111,7 +111,7 @@
                     phoneExt: "",
                     fax: ""
                 };
-                defaultContact.contactID = this.getNextContactID();
+                defaultContact.contactId = this.getNextContactID();
                 return (defaultContact);
             },
             updateAddressID:function(value){
@@ -133,19 +133,19 @@
             },
             updateContactID: function (value) {
                 if (isNaN(value)) return;
-                if (value > this.contactID) {
-                    this.contactID = value;
+                if (value > this.contactId) {
+                    this.contactId = value;
                 }
             },
             getNextContactID: function () {
-                this.contactID = this.contactID + 1;
-                return (this.contactID);
+                this.contactId = this.contactId + 1;
+                return (this.contactId);
             },
             resetContactID: function (value) {
                 if (!value) {
-                    this.contactID = 0;
+                    this.contactId = 0;
                 } else {
-                    this.contactID = value;
+                    this.contactId = value;
                 }
             },
 
@@ -226,7 +226,7 @@
                 if (contacts) {
                     for (var i = 0; i < contacts.length; i++) {
                         var contact = {};
-                        contact.contactID = contacts[i].contact_id;
+                        contact.contactId = contacts[i].contact_id;
                         contact.amendRecord = contacts[i].amend_record=== 'Y';
                         contact.manufacturer = contacts[i].manufacturer=== 'Y';
                         contact.mailing = contacts[i].mailing=== 'Y';
@@ -287,7 +287,7 @@
         if (contacts) {
             for (var i = 0; i < contacts.length; i++) {
                 var contact = {};
-                contact.contact_id = contacts[i].contactID;
+                contact.contact_id = contacts[i].contactId;
                 contact.amend_record = contacts[i].amendRecord === true ? 'Y' : 'N';
                 contact.manufacturer = contacts[i].manufacturer === true ? 'Y' : 'N';
                 contact.mailing = contacts[i].mailing === true ? 'Y' : 'N';
