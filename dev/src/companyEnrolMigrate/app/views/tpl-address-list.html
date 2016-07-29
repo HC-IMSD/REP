@@ -20,7 +20,7 @@
                     <tr id="tr-adr-{{$index}}" class="clickableRow"
                         data-ng-class="{'selected':$index == $ctrl.tableRowIndexCurrExpanded}" index="{{$index}}"
                         data-ng-repeat-start="address in $ctrl.addressList"
-                        title="{{CLICK_TOGGLE|translate}}"
+                        title="{{'CLICK_TOGGLE'|translate}}"
                         data-ng-click="$ctrl.selectTableRow($index)">
                         <td>{{address.companyName}}</td>
                         <td>{{address.city}}</td>

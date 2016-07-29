@@ -33,9 +33,10 @@
     function addressCtrl($scope, getCountryAndProvinces, getCountriesISO3166) {
 
         var vm = this;
+        //put model updates in ng-change but defer on blur. Now model updates on blur only if it changed
+        vm.ngModelOptSetting = {updateOn: 'blur'}
 
         vm.$onInit = function () {
-
             vm.addressModel = {
                 addressID:"",
                 isDetailValid: false,
@@ -93,7 +94,6 @@
 
         vm.onSelectedCountryChange = function (newValue) {
             vm.addressModel.country = newValue;
-            vm.updateAddressModel();
             //console.log("cmpAddress onSelectedCountryChange newValue: " + newValue);
             // setCountry(vm.addressModel.country);
             //vm.provinceTextState();
@@ -113,22 +113,15 @@
             vm.updateAddressModel();
             
         }
-
+        //update the data model for the main form
         vm.updateAddressModel = function(){
-            //always update the model
-          //  console.log('onAddressRoleUpdate: ' + vm.addressModel.companyName);
-            //  if($scope.addressForm.$valid)
-
-            //console.log($scope.addressForm.$valid)
-            //update if the address details if valid
+            console.info("calling address-details:updateAddressModel")
             vm.addressModel.isDetailValid = $scope.addressForm.$valid;
                 vm.onUpdate({address:vm.addressModel});
         }
 
+
         vm.showError = function (control) {
-            // contactForm.contactEmail.$invalid &&!contactForm.contactEmail.$pristine
-            console.log("in showError")
-            //  console.log("state"+control.$invalid +control.$pristine);
             if (control.$invalid && !control.$pristine) {
                 return true;
             }

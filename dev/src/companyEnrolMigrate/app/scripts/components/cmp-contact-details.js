@@ -1,7 +1,7 @@
 /**
  * Created by Abdessamad on 7/5/2016.
  */
-//TODO look at salutation hookup
+
 (function () {
     'use strict';
 
@@ -22,7 +22,7 @@
             controller: contactCtrl,
 
             bindings: {
-                formName: '<',
+                /*formName: '<',*/
                 contactRecord: '<',
                 onUpdate: '&',
                 onDelete: '&'
@@ -38,6 +38,7 @@
         vm.langCorrespondance = getContactLists.getLanguages();
         vm.$onInit = function () {
             vm.contactModel = {
+                isDetailValid: false,
                 contactId: "",
                 amendRecord: false,
                 addressRole: {
@@ -68,24 +69,17 @@
 
 
         vm.onContactRoleUpdate = function (newRole) {
+            console.info("updating Contact Role...")
             vm.contactModel.addressRole = newRole
-            vm.updateAddressModel();
+            vm.updateContactModel();
         }
 
-        /* vm.updateContactModel = function () {
-         //always update the model
-         //  console.log('onAddressRoleUpdate: ' + vm.addressModel.companyName);
-         //  if($scope.addressForm.$valid)
-
-         //console.log($scope.addressForm.$valid)
-         //update if the address details if valid
+        vm.updateContactModel = function () {
          console.log("update Contact Model")
          vm.contactModel.isDetailValid = $scope.contactForm.$valid;
          vm.onUpdate({contact: vm.contactModel});
-         }*/
+        }
         vm.showError = function (control) {
-            // contactForm.contactEmail.$invalid &&!contactForm.contactEmail.$pristine
-            //  console.log("state"+control.$invalid +control.$pristine);
             if (control.$invalid && !control.$pristine) {
                 return true;
             }

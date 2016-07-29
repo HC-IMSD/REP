@@ -57,14 +57,15 @@
                 <label for="last-name_{{$id}}" class="required">
                     <span class="field-name">{{'LAST_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
+                    <input type="text" id="last-name_{{$id}}" data-ng-model="$ctrl.contactRecord.surname"
+                           class="form-control full-width" name="lastName" ng-required="true" maxlength="60" size="60"/>
                     <strong id="lastName-error" class="error" ng-if="$ctrl.showError(contactForm.lastName)">
                         <span class="label label-danger" ng-messages="contactForm.lastName.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                     </strong>
                 </label>
-                <input type="text" id="last-name_{{$id}}" data-ng-model="$ctrl.contactRecord.surname"
-                       class="form-control full-width" name="lastName" ng-required="true" maxlength="60" size="60"/>
+
             </div>
         </div>
         <div class="row">

@@ -31,8 +31,7 @@
 
         var vm = this;
         vm.detailsValid = true;
-        //  vm.addressList = vm.addresses;
-        //angular.copy(vm.addresses, vm.addressList);
+
 
         vm.$onInit = function () {
 
@@ -56,6 +55,10 @@
             vm.detailsValid = true; //case that incomplete record is deleted
             if (vm.addressList.length == 0) {
                 vm.resetTableRow();
+            } else {
+                //deleted so this setting should be false
+                vm.tableRowExpanded = false;
+                vm.tableRowIndexCurrExpanded = "";
             }
         }
 

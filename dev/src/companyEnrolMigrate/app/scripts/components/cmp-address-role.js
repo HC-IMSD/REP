@@ -60,6 +60,11 @@
             self.onUpdate({$event: {roles: self.roleModel}});
 
         }
+        self.showError = function (control) {
+            if (control.$invalid && !control.$pristine) {
+                return true;
+            }
+        }
 
     }
 

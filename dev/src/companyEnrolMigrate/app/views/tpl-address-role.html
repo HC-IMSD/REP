@@ -3,8 +3,8 @@
         <legend class="required">
             <span class="field-name">{{"ROLES_SELECT" |translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-            <strong id="address-role-error" class="error" ng-if="ar.formName.addressRole.$invalid">
-                        <span class="label label-danger" ng-messages="ar.formName.addressRole.$error">
+            <strong id="address-role-error" class="error" ng-if="ar.showError(ar.formName.addressRole)">
+                        <span class="label label-danger" ng-messages="ar.showError(ar.formName.addressRole)">
                             <span ng-message="required">Please select at least one option</span>
                         </span>
             </strong>
