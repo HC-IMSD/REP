@@ -24,12 +24,11 @@
                         data-ng-repeat-start="contact in $ctrl.contactList"
                         title="Click to toggle collapse/expand details for this contact."
                         data-ng-click="$ctrl.selectTableRow($index)">
-                        <td>{{contact.salutation}}</td>
+                        <td>{{contact.salutation|translate}}</td>
                         <td>{{contact.givenName}}</td>
                         <td>{{contact.surname}}</td>
                         <td>{{contact.title}}</td>
                         <td>{{contact.contactRole|translate}}</td>
-                        <!--<td>{{contact.phoneExt}}</td>-->
                     </tr>
                     <tr data-ng-show="!$ctrl.dayDataCollapse[$index]" data-ng-repeat-end>
                         <td colspan="5">

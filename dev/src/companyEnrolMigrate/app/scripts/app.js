@@ -50,15 +50,26 @@
         vm.isAmend=function(){
             return(vm.company.applicationType==="AMEND")
         }
-        //converts the address list into something usable
+
         vm.saveJson=function(){
-            updateDate();
-            incrementMinorVersion();
-            //july company holds all the current
-            var writeResult=_company.transformToFileObj(vm.company);
+            var writeResult=_transformFile()
             console.log("this is the transform result:\n"+writeResult)
             hpfbFileProcessing.writeAsJson(writeResult, "test.json", vm.rootTag);
         }
+        vm.saveXML=function(){
+            var writeResult=_transformFile()
+            hpfbFileProcessing.writeAsXml(writeResult, "test.xml", vm.rootTag);
+        }
+        /**
+         * @ngdcc method updates data and increments version before creating json
+         */
+        function _transformFile(){
+            updateDate();
+            incrementMinorVersion();
+            var writeResult=_company.transformToFileObj(vm.company);
+            return writeResult;
+        }
+
         function _setComplete() {
             if (vm.company.companyId) {
                 vm.isIncomplete = false;

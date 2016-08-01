@@ -58,7 +58,7 @@
             vm.contactList.splice(idx,1);
             vm.onUpdate({newList:vm.contactList});
             vm.detailsValid = true; //case that incomplete record
-            if (vm.addressList.length == 0) {
+            if (vm.contactList.length == 0) {
                 vm.resetTableRow();
             } else {
                 //deleted so this setting should be false
@@ -66,6 +66,11 @@
                 vm.tableRowExpanded = false;
                 vm.tableRowIndexCurrExpanded = "";
             }
+        }
+        vm.resetTableRow = function () {
+            vm.tableRowIndexPrevExpanded = "";
+            vm.tableRowExpanded = false;
+            vm.tableRowIndexCurrExpanded = "";
         }
         vm.updateValid=function(detailValid){
             vm.detailsValid = detailValid;
