@@ -24,7 +24,9 @@
             addressRecord: '<',
             selectedCountry: '<', // The current selected country
             onUpdate: '&',
-            onDelete: '&'
+            onDelete: '&',
+            isAmend: '&',
+            updateValid:'&' //tells parent that the details are valid/not valid
         }
     });
 
@@ -34,11 +36,12 @@
 
         var vm = this;
         //put model updates in ng-change but defer on blur. Now model updates on blur only if it changed
-        vm.ngModelOptSetting = {updateOn: 'blur'}
 
         vm.$onInit = function () {
+            vm.ngModelOptSetting = {updateOn: 'blur'}
+            console.log("one init address details")
             vm.addressModel = {
-                addressID:"",
+                addressID: "",
                 isDetailValid: false,
                 amendRecord: false,
                 addressRole: {
@@ -51,7 +54,8 @@
                 street: "",
                 city: "",
                 country: "",
-                provState: "",
+                stateLov: "",
+                stateText:"",
                 postalCode: ""
 
             };
@@ -64,7 +68,8 @@
             vm.countries = getCountriesISO3166.getCountryList3Letter();
             if (vm.addressRecord) {
 
-                vm.addressModel = angular.extend({},vm.addressRecord);
+                //vm.addressModel = angular.extend({},vm.addressRecord); THIS causes focus grief
+                vm.addressModel = vm.addressRecord;
                 vm.provListLabel = getProvinceListLabel();
                 vm.postalLabel = getPostalLabel();
                 vm.isPostalRequired = isPostalRequiredFn();
@@ -87,9 +92,7 @@
 
 
         vm.$onChanges = function (changes) {
-            // this.user = changes.user.currentValue;
-         //   loadAddressModel();
-          //  console.log('cmpAddressDetails $onChanges :' + JSON.stringify(vm.addressRecord));
+            //console.log("AddressDetails onChanges being called")
         };
 
         vm.onSelectedCountryChange = function (newValue) {
@@ -108,47 +111,31 @@
             vm.updateAddressModel();
         }
 
-        vm.onAddressRoleUpdate = function(newRole){
+        vm.onAddressRoleUpdate = function (newRole) {
             vm.addressModel.addressRole = newRole;
             vm.updateAddressModel();
-            
+
         }
         //update the data model for the main form
-        vm.updateAddressModel = function(){
-            console.info("calling address-details:updateAddressModel")
+        vm.updateAddressModel = function () {
             vm.addressModel.isDetailValid = $scope.addressForm.$valid;
-                vm.onUpdate({address:vm.addressModel});
+            vm.updateValid({validState:vm.addressModel.isDetailValid});
+           // vm.onUpdate({address: vm.addressModel});
         }
 
+        vm.setNotEditable=function(){
+            if(vm.isAmend() &&!vm.addressModel.amendRecord){
+                return true;
+            }
+            return false
+        }
 
         vm.showError = function (control) {
-            if (control.$invalid && !control.$pristine) {
+            if (control.$invalid &&!control.$pristine) {
                 return true;
             }
         }
-       /* var loadAddressModel = function(){
-
-            return {
-
-                amendRecord: vm.addressRecord.amendRecord,
-                addressRole: {
-                    manufacturer: vm.addressRecord.manufacturer,
-                    mailing: vm.addressRecord.mailing,
-                    billing: vm.addressRecord.billing,
-                    importer: vm.addressRecord.manufacturer
-                },
-                companyName: vm.addressRecord.companyName,
-                street: vm.addressRecord.street,
-                city: vm.addressRecord.city,
-                country: vm.addressRecord.country,
-                provState: vm.addressRecord.province,
-                postalCode: vm.addressRecord.postalCode
-
-            };
-
-        }*/
-
-        var getProvinceTextState =  function() {
+        var getProvinceTextState = function () {
 
             var isCanOrUsa = isPostalRequiredFn();
 
@@ -162,12 +149,11 @@
             return isCanOrUsa;
         }
 
-        var isPostalRequiredFn = function() {
-            return (vm.addressModel.country ==='CAN' || vm.addressModel.country ==='USA');
+        var isPostalRequiredFn = function () {
+            return (vm.addressModel.country === 'CAN' || vm.addressModel.country === 'USA');
         }
 
-
-        var getProvinceStateList = function() {
+        var getProvinceStateList = function () {
 
             if (vm.addressModel.country === 'CAN') {
                 return getCountryAndProvinces.getProvinces();
@@ -178,22 +164,18 @@
             }
         }
 
-        var getProvinceListLabel = function() {
-
+        var getProvinceListLabel = function () {
             var label = (vm.addressModel.country === 'USA') ? "STATE" : "PROVINCE";
-
             return label;
         }
 
 
-        var  getPostalLabel = function() {
-
+        var getPostalLabel = function () {
             var label = (vm.addressModel.country === 'USA') ? "ZIP" : "POSTAL";
-
             return label;
         }
 
-        var getPostalPattern = function() {
+        var getPostalPattern = function () {
             var postalPtrn = null;
             if (vm.addressModel.country === 'USA') {
                 postalPtrn = /^[0-9]{5}(?:-[0-9]{4})?$/;
@@ -202,9 +184,7 @@
             }
 
             return postalPtrn;
-
         }
-
 
     }
 

@@ -20,7 +20,8 @@
                 formName: '<',
                 addresses: '<',
                 onUpdate: '&',
-                getNewAddress:'&'
+                getNewAddress:'&',
+                isAmend:'&'
             },
             controller: addressListCtrl
         });
@@ -32,12 +33,15 @@
         var vm = this;
         vm.detailsValid = true;
 
+        vm.$onChanges=function(changes){
+            console.log("*****on changes::addressList"+JSON.stringify(changes))
+            vm.addressList=changes.addresses.currentValue;
 
+        }
         vm.$onInit = function () {
-
+            console.log("Address list onInit")
             vm.detailsValid = true;
             vm.focused = false;
-
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
             vm.tableRowIndexPrevExpanded = "";
@@ -71,13 +75,17 @@
             vm.onUpdate({newList:vm.addressList});
         }
 
+        vm.updateValid=function(detailValid){
+            vm.detailsValid = detailValid;
+        }
         vm.onUpdateAddressRecord = function (address) {
+            console.log("AddressList: onUpdateAddressRecord")
             vm.detailsValid = address.isDetailValid;
             var idx = vm.addressList.indexOf(
                 $filter('filter')(vm.addressList, {addressID: address.addressID}, true)[0]
             );
             vm.addressList[idx] = address;
-            vm.onUpdate({newList: vm.addressList});
+          //  vm.onUpdate({address: address}); USED TO update a level up
         }
 
         vm.resetTableRow = function () {
@@ -91,11 +99,13 @@
                 vm.dayDataCollapse.append('true');
             }
         };
-        //dan seledcts table row
+        /**
+         * @ngdoc selectTableRow -select the table row to expand
+         * @param index
+         * @param adrId
+         */
         vm.selectTableRow = function (index, adrId) {
-
             if (!vm.detailsValid) return; //TODO activate error handling
-
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();
             } else {

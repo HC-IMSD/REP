@@ -17,9 +17,9 @@
         .module('dossierApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['CompanyService','hpfbFileProcessing']
+    MainController.$inject = ['CompanyService','hpfbFileProcessing','$filter']
 
-    function MainController(CompanyService,hpfbFileProcessing) {
+    function MainController(CompanyService,hpfbFileProcessing,$filter) {
 
         var vm = this;
         var url = "data/company-enrol.txt";
@@ -32,17 +32,31 @@
         vm.showContent = _loadFileContent;
 
         var _company = new CompanyService();
-        vm.company = _company.getModelInfo();
-        vm.company.applicationType = "NEW";
 
-        /*        var result2 = _company.transformToFileObj();
-         console.log("ready to make file" + JSON.stringify(result2,null, 2));*/
+       vm.company = {
+           dataChecksum: "",
+           enrolmentVersion: "1",
+           dateSaved: "1999-01-21",
+           applicationType: "APPROVED",
+           softwareVersion: "string",
+           companyId: "string",
+           addressList: [],
+           contactList: []
+       };
+       vm.company = _company.getModelInfo();
+       // angular.extend(vm.company,_company.getModelInfo())
+       // vm.company.applicationType = "AMEND";
 
+        vm.isAmend=function(){
+            return(vm.company.applicationType==="AMEND")
+        }
         //converts the address list into something usable
         vm.saveJson=function(){
             updateDate();
             incrementMinorVersion();
-            var writeResult=_company.transformToFileObj();
+            //july company holds all the current
+            var writeResult=_company.transformToFileObj(vm.company);
+            console.log("this is the transform result:\n"+writeResult)
             hpfbFileProcessing.writeAsJson(writeResult, "test.json", vm.rootTag);
         }
         function _setComplete() {
@@ -53,12 +67,20 @@
             }
         }
         function _loadFileContent(fileContent) {
-            alert("Calling the content callback")
-            var resultJson = fileContent.jsonResult;
-            console.log("Result JSON is: " + resultJson)
-            _company.transformFromFileObj(resultJson)
-            vm.company = _company.getModelInfo()
-            _setComplete();
+            console.log("Calling the content callback")
+            if(!fileContent)return;
+            _company = new CompanyService();
+            //used to do this way, caused focus issues
+           // vm.company = _company.getModelInfo();
+
+           var resultJson = fileContent.jsonResult;
+            console.log("Result JSON is: " + JSON.stringify(resultJson))
+            if(resultJson) {
+                _company.transformFromFileObj(resultJson)
+                vm.company={}
+                angular.extend(vm.company,_company.getModelInfo())
+                _setComplete();
+            }
         };
         function _setApplTypeToAmend() {
             //TODO magic number
@@ -67,6 +89,7 @@
 
         //used on update
         vm.onUpdateAddressList = function (newList) {
+            console.log("app update the address List")
             vm.company.addressList = newList;
         }
 
@@ -80,6 +103,19 @@
             console.log("This is hte contact gte")
             var result = _company.createContactRecord();
             return result;
+        }
+
+        vm.updateAddressRecord=function(address){
+            console.log("in app updateAddressRecord"+address)
+            if(!address) return;
+            var idx = vm.company.addressList.indexOf(
+                $filter('filter')(vm.company.addressList, {addressID: address.addressID}, true)[0]
+            );
+            console.log("found an entry "+idx)
+            vm.company.addressList[idx] = address
+            var temp=vm.company.addressList;
+            vm.company.addressList=[];
+            vm.company.addressList=temp;
         }
 
         vm.onUpdateContactList = function (newList) {

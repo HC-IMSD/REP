@@ -12,51 +12,13 @@
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
-           /* var defaultAddress = {
-                addressID: 1,
-                companyName: "",
-                amendRecord: false,
-                addressRole: {
-                    manufacturer: false,
-                    mailing: false,
-                    billing: false,
-                    importer: false
-                },
-                street: "",
-                city: "",
-                provLov: "",
-                provState: "",
-                province_text: "",
-                country: "",
-                postalCode: ""
-            };
-
-            var defaultContact = {
-                amendRecord: false,
-                manufacturer: false,
-                mailing: false,
-                billing: false,
-                importer: false,
-                contactRole: "",
-                salutation: "",
-                givenName: "Test defualt",
-                initials: "",
-                surname: "",
-                title: "",
-                language: "",
-                phone: "",
-                phoneExt: "",
-                fax: "",
-                email: ""
-            };*/
-
             var defaultCompanyData = {
                 dataChecksum: "",
                 enrolmentVersion: "0.0",
                 dateSaved: "",
                 applicationType: "NEW",
                 softwareVersion: "1.0.0",
-                companyId: "test",
+                companyId: "",
                 addressList: [],
                 contactList: []
             };
@@ -82,8 +44,8 @@
                     street: "",
                     city: "",
                     provLov: "",
-                    provState: "",
-                    province_text: "",
+                    stateList: "",
+                    stateText: "",
                     country: "",
                     postalCode: ""
                 };
@@ -153,16 +115,17 @@
             transformFromFileObj: function (jsonObj) {
                 var rootTag="COMPANY_ENROL"
                 var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);
-                var addressInfo = this.getAddressList(jsonObj[rootTag].address_record);
-                var contactInfo = this.getContactList(jsonObj[rootTag].contact_record);
+                var addressInfo = {addressList:this.getAddressList(jsonObj[rootTag].address_record)};
+                var contactInfo = {contactList:this.getContactList(jsonObj[rootTag].contact_record)};
                 //get rid of previous default
                 this._default = {};
-                angular.extend(this._default, companyInfo, addressInfo, contactInfo)
+
+                angular.extend(this._default, companyInfo,addressInfo, contactInfo)
                 console.log("This is the transform " + JSON.stringify(this._default))
             },
-            transformToFileObj: function () {
+            transformToFileObj: function (jsonObj) {
                 //transform back to needed
-                var jsonObj = this._default
+                //var jsonObj = this._default
                 var resultJson = {
                     COMPANY_ENROL: {
                         data_checksum: jsonObj.dataChecksum,
@@ -171,7 +134,7 @@
                         application_type: jsonObj.applicationType,
                         software_version: jsonObj.softwareVersion,
                         company_id: jsonObj.companyId,
-                        address_record: _mapAddressListToOutput(jsonObj.addressList),
+                        address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
                     }
                 }
@@ -195,6 +158,7 @@
                     contactList: []
                 }
             },
+
             //not sure why this is needed anymore
             getAddressList: function (adrList) {
                 var list = [];
@@ -212,7 +176,8 @@
                         address.addressRole.importer = adrList[i].importer === 'Y';
                         address.street = adrList[i].company_address_details.street_address;
                         address.city = adrList[i].company_address_details.city;
-                        address.provState = adrList[i].company_address_details.province_lov;
+                        address.stateList=adrList[i].company_address_details.province_lov;
+                        address.stateText = adrList[i].company_address_details.province_text;
                         address.country = adrList[i].company_address_details.country;
                         address.postalCode = adrList[i].company_address_details.postal_code;
                         list.push(address);
@@ -263,16 +228,16 @@
             for (var i = 0; i < adrList.length; i++) {
                 var address = {};
                 address.address_id = adrList[i].addressID;
-                address.amend_record = adrList[i].amendRecord === true ? 'Y' : 'N';
-                address.manufacturer = adrList[i].manufacturer === true ? 'Y' : 'N';
-                address.mailing = adrList[i].mailing;
-                address.billing = adrList[i].billing;
-                address.importer = adrList[i].importer;
+                address.amend_record = adrList[i].amendRecord == true ? 'Y' : 'N';
+                address.manufacturer = adrList[i].manufacturer == true ? 'Y' : 'N';
+                address.mailing = adrList[i].mailing== true ? 'Y' : 'N';;
+                address.billing = adrList[i].billing== true ? 'Y' : 'N';;
+                address.importer = adrList[i].importer== true ? 'Y' : 'N';;
                 address.company_name = adrList[i].companyName;
                 address.company_address_details = {};
                 address.company_address_details.street_address = adrList[i].street;
                 address.company_address_details.city = adrList[i].city;
-                address.company_address_details.province_lov = adrList[i].provState;
+                address.company_address_details.province_lov = adrList[i].stateList;
                 address.company_address_details.province_text = adrList[i].stateText;
                 address.company_address_details.country = adrList[i].country;
                 address.company_address_details.postal_code = adrList[i].postalCode;

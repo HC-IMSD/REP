@@ -85,69 +85,71 @@
 </header>
 <main role="main" property="mainContentOfPage" class="container">
     <!--Company Enrol Content starts here -->
-    <div >
-    <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate="novalidate" >
-        <div>
-            <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="COMPANY_ENROL"/>
+    <div>
+        <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate="novalidate">
+            <div>
+                <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="COMPANY_ENROL"/>
 
-        </div>
-        <div>
-            <label>{{"REQUIRED"|translate}}</label>
-            <button ng-click="main.saveJson()">Save as JSon</button>
-        </div>
-        <div>
-            <section class="panel panel-primary mrgn-tp-lg">
-                <header class="panel-heading">
-                    <h3 class="panel-title">Regulatory Company Enrolment</h3>
-                </header>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-xs-3 form-group">
-                            <label for="application-type">{{"APPL_TYPE"| translate}}</label>
-                            <select id="application-type"
-                                    ng-options="type |translate for type in main.applTypes"
-                                    ng-model="main.company.applicationType" ng-readonly="true" ng-disabled="true"
-                                    class="form-control full-width"></select>
+            </div>
+            <div>
+                <label>{{"REQUIRED"|translate}}</label>
+                <button ng-click="main.saveJson()">Save as JSon</button>
+            </div>
+            <div>
+                <section class="panel panel-primary mrgn-tp-lg">
+                    <header class="panel-heading">
+                        <h3 class="panel-title">Regulatory Company Enrolment</h3>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-xs-3 form-group">
+                                <label for="application-type">{{"APPL_TYPE"| translate}}</label>
+                                <select id="application-type"
+                                        ng-options="type |translate for type in main.applTypes"
+                                        ng-model="main.company.applicationType" ng-readonly="true" ng-disabled="true"
+                                        class="form-control full-width"></select>
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="enr-version-text">Enrolment Version</label>
+                                <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
+                                       ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="date-saved-text">Date Last Saved</label>
+                                <input type="text" class="form-control" id="date-saved-text"
+                                       ng-model="main.company.dateSaved" ng-readonly="true"/>
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="company-id-text">Company ID</label>
+                                <input type="text" class="form-control" id="company-id-text" ng-readonly="true"
+                                       ng-model="main.company.companyId"/>
+                            </div>
                         </div>
-                        <div class="col-xs-3 form-group">
-                            <label for="enr-version-text">Enrolment Version</label>
-                            <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
-                                   ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
-                        </div>
-                        <div class="col-xs-3 form-group">
-                            <label for="date-saved-text">Date Last Saved</label>
-                            <input type="text" class="form-control" id="date-saved-text"
-                                   ng-model="main.company.dateSaved" ng-readonly="true"/>
-                        </div>
-                        <div class="col-xs-3 form-group">
-                            <label for="company-id-text">Company ID</label>
-                            <input type="text" class="form-control" id="company-id-text" ng-readonly="true"
-                                   ng-model="main.company.companyId"/>
+                        <div class="row">
+                            <div class="col-xs-5 form-group">
+                                <button class="btn btn-default" ng-click="main.setAmendState()"
+                                        ng-disabled="main.isIncomplete">
+                                    Amend Enrolment
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-5 form-group">
-                            <button class="btn btn-default" ng-click="main.setAmendState()"
-                                    ng-disabled="main.isIncomplete">
-                                Amend Enrolment
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                <cmp-address-list ng-if="main.company.addressList" addresses="main.company.addressList"
-                                  form-name="companyForm"
-                                  on-update="main.onUpdateAddressList(newList)"
-                                  get-new-address="main.getNewAddress()"></cmp-address-list>
-                <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
-                                  form-name="companyForm" get-new-contact="main.getNewContact()"
-                                  on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
-                </div>
-            </section>
+                    <div>
+                        <cmp-address-list addresses="main.company.addressList"
+                                          form-name="companyForm"
+                                          on-update="main.updateAddressRecord(address)" is-amend="main.isAmend()"
 
-        <pre>overall: {{main.company | json : spacing}}</pre>
-        </div>
-    </form>
+                                          get-new-address="main.getNewAddress()"></cmp-address-list>
+                        <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
+                                          form-name="companyForm" get-new-contact="main.getNewContact()"
+                                          is-amend="main.isAmend()"
+                                          on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
+                    </div>
+                </section>
+
+                <pre>overall: {{main.company | json : spacing}}</pre>
+            </div>
+        </form>
 
     </div>
     <!-end content->

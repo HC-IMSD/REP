@@ -699,6 +699,7 @@
         function getRoleValuesArray() {
             return (
                 [
+                    '',
                     'ROLE_PRIMARY',
                     'ROLE_SECONDARY',
                 ]);

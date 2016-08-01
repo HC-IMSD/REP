@@ -22,10 +22,12 @@
             controller: contactCtrl,
 
             bindings: {
-                /*formName: '<',*/
                 contactRecord: '<',
                 onUpdate: '&',
-                onDelete: '&'
+                onDelete: '&',
+                isAmend: '&',
+                updateValid: '&',//tells parent that the details are valid/not valid
+                checkRoles: '&'
             }
     });
 
@@ -39,6 +41,10 @@
         vm.contactRoleList = getRoleLists.getContactRoles();
         vm.langCorrespondance = getContactLists.getLanguages();
         vm.$onInit = function () {
+            console.log("creating a contact "+vm.checkRoles({roleValue:'ff'}));
+
+            vm.disableRepRole=vm.checkRoles({roleValue:''})
+            ///vm.disableRepRole=true
             vm.contactModel = {
                 isDetailValid: false,
                 contactId: "",
@@ -60,34 +66,51 @@
                 fax: ""
             };
             if (vm.contactRecord) {
-                angular.extend(vm.contactModel, vm.contactRecord);
+                vm.contactModel = vm.contactRecord; //workaround
+                //angular.extend(vm.contactModel, vm.contactRecord);
             }
         }
         //TODO rename
+        vm.$onChanges=function(){
+             console.log("changes details")
+            vm.disableRepRole=vm.checkRoles({roleValue:''})
+        }
+
         vm.delete = function () {
             vm.onDelete({contactId: vm.contactModel.contactId});
         }
-        //TODO discard?
 
 
         vm.onContactRoleUpdate = function (newRole) {
-            console.info("updating Contact Role...")
             vm.contactModel.addressRole = newRole
             vm.updateContactModel();
         }
 
         vm.updateContactModel = function () {
-         console.log("update Contact Model")
          vm.contactModel.isDetailValid = $scope.contactForm.$valid;
-         vm.onUpdate({contact: vm.contactModel});
+            vm.updateValid({validState:vm.contactModel.isDetailValid});
+         //vm.onUpdate({contact: vm.contactModel});
         }
+        /**
+         * @ngdoc method condition by which to show an error
+         * @param control
+         * @returns {boolean}
+         */
         vm.showError = function (control) {
-            if (control.$invalid && !control.$pristine) {
+            if (control.$invalid&& !control.$pristine) {
                 return true;
             }
         }
-
-
+        /**
+         * @ngdoc method -determines if the fields should be readonly by default
+         * @returns {boolean}
+         */
+        vm.setNotEditable=function(){
+            if(vm.isAmend() &&!vm.contactModel.amendRecord){
+                return true;
+            }
+            return false
+        }
     }
 
 })();

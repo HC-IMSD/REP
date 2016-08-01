@@ -32,7 +32,8 @@
                         <td colspan="5">
                             <cmp-address-details my-index="$index" form-name="$ctrl.formName"
                                                  selected-country="adr.selectedCountry" address-record="address"
-                                                 on-delete="$ctrl.deleteAddress(addressId)"
+                                                 on-delete="$ctrl.deleteAddress(addressId)"  is-amend="$ctrl.isAmend()"
+                                                 update-valid="$ctrl.updateValid(validState)"
                                                  on-update="$ctrl.onUpdateAddressRecord(address)"></cmp-address-details>
                         </td>
                     </tr>
