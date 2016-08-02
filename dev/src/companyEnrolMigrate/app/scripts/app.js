@@ -22,12 +22,11 @@
     function MainController(CompanyService,hpfbFileProcessing,$filter) {
 
         var vm = this;
-        var url = "data/company-enrol.txt";
         //TODO magic number
         vm.rootTag='COMPANY_ENROL'
         vm.isIncomplete = true;
-
-        vm.applTypes = ["NEW", "AMEND", "APPROVED"]
+        vm.userType;
+        vm.applTypes = ["NEW", "AMEND", "APPROVED"] //TODO service ofor app types
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
 
@@ -44,9 +43,11 @@
            contactList: []
        };
        vm.company = _company.getModelInfo();
-       // angular.extend(vm.company,_company.getModelInfo())
-       // vm.company.applicationType = "AMEND";
 
+        vm.initUser=function(id){
+            if(!id) id='INT'
+            vm.userType=id;
+        }
         vm.isAmend=function(){
             return(vm.company.applicationType==="AMEND")
         }
@@ -65,7 +66,11 @@
          */
         function _transformFile(){
             updateDate();
-            incrementMinorVersion();
+            if(!vm.isExtern()) {
+                incrementMajorVersion();
+            }else {
+                incrementMinorVersion();
+            }
             var writeResult=_company.transformToFileObj(vm.company);
             return writeResult;
         }
@@ -100,12 +105,10 @@
 
         //used on update
         vm.onUpdateAddressList = function (newList) {
-            console.log("app update the address List")
             vm.company.addressList = newList;
         }
 
         vm.getNewAddress = function () {
-            console.log("This is hte temptest")
             var result = _company.createAddressRecord();
             return result;
         }
@@ -148,13 +151,32 @@
             if (!vm.company.enrolmentVersion) {
                 vm.company.enrolmentVersion = "0.1";
             } else {
-                //TODO convert to number?
                 var parts = vm.company.enrolmentVersion.split('.')
                 var dec = parseInt(parts[1]);
-                //var whole=parseInt(parts[0]);
                 var result = parts[0] + "." + (dec + 1);
                 vm.company.enrolmentVersion = result;
             }
+        }
+
+        /**
+         * Increments the major version. Sets the minor to false
+         */
+        function incrementMajorVersion(){
+            if (!vm.company.enrolmentVersion) {
+                vm.company.enrolmentVersion = "1.0";
+            } else {
+                var parts = vm.company.enrolmentVersion.split('.')
+                var whole = parseInt(parts[0]);
+                var result = (whole+1) + ".0"
+                vm.company.enrolmentVersion = result;
+            }
+        }
+
+        vm.isExtern=function(){
+            if(vm.userType=="EXT"){
+                return true;
+            }
+            return false;
         }
     }
 })();
