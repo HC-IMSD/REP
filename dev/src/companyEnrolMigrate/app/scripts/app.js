@@ -55,11 +55,11 @@
         vm.saveJson=function(){
             var writeResult=_transformFile()
             console.log("this is the transform result:\n"+writeResult)
-            hpfbFileProcessing.writeAsJson(writeResult, "test.json", vm.rootTag);
+            hpfbFileProcessing.writeAsJson(writeResult, "companyEnrol", vm.rootTag);
         }
         vm.saveXML=function(){
             var writeResult=_transformFile()
-            hpfbFileProcessing.writeAsXml(writeResult, "test.xml", vm.rootTag);
+            hpfbFileProcessing.writeAsXml(writeResult, "companyEnrol", vm.rootTag);
         }
         /**
          * @ngdcc method updates data and increments version before creating json
@@ -90,7 +90,7 @@
            // vm.company = _company.getModelInfo();
 
            var resultJson = fileContent.jsonResult;
-            console.log("Result JSON is: " + JSON.stringify(resultJson))
+
             if(resultJson) {
                 _company.transformFromFileObj(resultJson)
                 vm.company={}
@@ -137,13 +137,18 @@
         }
         function updateDate(){
             if(vm.company) {
-                var d=new Date();
-                var isoDate = d.getFullYear() + '-'
-                    + pad(d.getMonth() + 1) + '-'
-                    + pad(d.getDate())
-                vm.company.dateSaved=isoDate;
+
+                vm.company.dateSaved=getTodayDate();
 
             }
+        }
+
+        function getTodayDate(){
+            var d=new Date();
+            var isoDate = d.getFullYear() + '-'
+                + pad(d.getMonth() + 1) + '-'
+                + pad(d.getDate())
+            return(isoDate)
             function pad(n) {return n<10 ? '0'+n : n}
         }
 
