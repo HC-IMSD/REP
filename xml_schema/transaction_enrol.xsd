@@ -18,7 +18,6 @@
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="is_ectd" type="required_yes_no_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
-	<hpfb:element name="dossier_name" type="char_1_256_content"/>
 	<hpfb:element name="dossier_id" type="char_1_20_content"/>
 	<hpfb:element name="sequence_number" type="sequence_content"/>
 	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
@@ -54,11 +53,7 @@
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="is_ectd"/>
 			<hpfb:element ref="company_id"/>
-			<hpfb:element ref="dossier_name"/>
 			<hpfb:element ref="dossier_id"/>
-			<hpfb:element ref="sequence_number"/>
-			<hpfb:element ref="date_filed"/>
-			<hpfb:element ref="control_number"/>
 			<hpfb:element ref="lifecycle_record" minOccurs="1"/>
 			<hpfb:element ref="is_solicited"/>
 			<hpfb:element ref="solicited_requester"/>
@@ -85,6 +80,7 @@
 			<hpfb:element ref="sequence_to_date"/>
 			<hpfb:element ref="sequence_details"/>
 			<hpfb:element ref="sequence_version"/>
+			<hpfb:element ref="sequence_concat"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 	

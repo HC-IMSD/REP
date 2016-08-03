@@ -237,6 +237,8 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
+			<hpfb:element ref="brand_name" />
+			<hpfb:element ref="common_name"/>
 			<hpfb:element ref="ref_product_list"/>
 			<hpfb:element ref="human_drug_use"/>
 			<hpfb:element ref="radiopharm_drug_use"/>
