@@ -26,6 +26,7 @@
 	<hpfb:element name="fee_class"/>
 	<hpfb:element name="not_lasa" type="required_yes_no_content"/>
 	<hpfb:element name="reason_filing" type="char_1_1024_content"/>
+	<hpfb:element name="related_activity" type="related_reg_activity_content"/>
 	<hpfb:element name="is_third_party" type="required_yes_no_content"/>
 	<hpfb:element name="date_cleared" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content"/>
@@ -76,10 +77,11 @@
 			<hpfb:element ref="fee_class"/>
 			<hpfb:element ref="not_lasa"/>
 			<hpfb:element ref="reason_filing"/>
+			<hpfb:element ref="related_activity" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="is_third_party"/>
 			<hpfb:element ref="notifiable_change_types"/>
 			<hpfb:element ref="rationale_types"/>
-			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="3"/>
+			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -140,7 +142,7 @@
 	</hpfb:complexType>
 
 
-	<hpfb:simpleType name="lead_types_lists">
+	<hpfb:simpleType name="lead_types_list">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="BIOLOGIC"/>
 			<hpfb:enumeration value="CHP"/>
