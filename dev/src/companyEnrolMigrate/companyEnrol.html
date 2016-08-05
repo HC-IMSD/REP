@@ -86,9 +86,9 @@
 <main role="main" property="mainContentOfPage" class="container">
     <!--Company Enrol Content starts here -->
     <div>
-        <form id="reg-company-form" name="companyForm" ng-controller="MainController as main" novalidate="novalidate"
+        <ng-form id="reg-company-form" name="main.companyEnrolForm" ng-controller="MainController as main" novalidate="novalidate"
               ng-init="main.initUser('EXT')">
-
+            <button ng-click="main.getFormState()"> Form state</button>
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
                     <h2 class="panel-title">Load a Draft Company Enrolment File</h2>
@@ -160,12 +160,12 @@
                         <button ng-click="main.saveJson()">Save Working Copy</button>
                     </div>
                     <div class="form-group col-md-3">
-                        <button ng-click="main.saveXML()">Save Draft for submission</button>
+                        <button class="btn-default" id="btn_xmlSave" ng-click="main.saveXML()">Save Draft for submission</button>
                     </div>
                 </div>
-                <!--  <pre>overall: {{main.company | json : spacing}}</pre>-->
+                  <pre>overall: {{main.company | json : spacing}}</pre>
             </div>
-        </form>
+        </ng-form>
 
     </div>
     <!-end REP content->

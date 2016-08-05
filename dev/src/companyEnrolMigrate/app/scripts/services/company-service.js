@@ -61,7 +61,8 @@
                         manufacturer: false,
                         mailing: false,
                         billing: false,
-                        importer: false
+                        repPrimary:false,
+                        repSecondary:false
                     },
                     contactRole: "",
                     salutation: "",

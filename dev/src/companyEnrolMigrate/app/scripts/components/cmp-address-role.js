@@ -21,49 +21,107 @@
             bindings: {
                 formName: '<',
                 record: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                childShowError:'&',
+                isContact:'<'
             }
         });
 
+    addressRoleCtrl.$inject = ['$scope']
+    function addressRoleCtrl($scope) {
 
-    function addressRoleCtrl() {
+        var vm = this;
 
-        var self = this;
+        vm.$onInit = function () {
+            vm.isReq=true;
+            vm.roleModel = {
+                manufacturer: false,
+                mailing: false,
+                billing: false,
+                repPrimary: false,
+                repSecondary: false
+            };
+           /* if (vm.record) {
+                vm.roleModel = vm.record;
+            }*/
+        }
+        vm.$onChanges=function(changes){
 
-        self.$onInit = function () {
-
-            self.roleModel = {};
-
-            if (self.record) {
-                self.roleModel = self.record;
+            if (changes.record.isFirstChange()){
+                return
             }
+
+           if(changes.record.currentValue){
+              // angular.copy(vm.roleModel,changes.record.currentValue);
+               angular.extend(vm.roleModel,changes.record.currentValue);
+           }
         }
 
-        self.someSelected = function () {
-            var object = self.roleModel;
-
+        vm.noneSelected = function () {
+           /* var object = vm.roleModel;
             if (!object) return false;
-            return Object.keys(object).some(function (key) {
-              //console.log("cmpAddressRole someSelected: " + object[key]);
+            return (Object.keys(object).some(function (key) {
+                console.log("result os "+object[key])
                 return object[key];
-            });
-        }
+            }));*/
 
-        self.updateRoleModel = function () {
-
-            self.formName.addressRole.$dirty =
-                self.formName.addressRole.$touched = true;
-
-            self.formName.addressRole.$pristine = !self.formName.addressRole.$dirty;
-            self.formName.addressRole.$untouched = !self.formName.addressRole.$touched;
-
-            self.onUpdate({$event: {roles: self.roleModel}});
-
-        }
-        self.showError = function (control) {
-            if (control.$invalid && !control.$pristine) {
-                return true;
+            var obj=vm.roleModel;
+            for (var key in obj){
+                var attrName = key;
+                var attrValue = obj[key];
+                if(attrValue===true){
+                    vm.formName.addressRole.$setValidity("required", true);
+                    return false;
+                }
             }
+            vm.formName.addressRole.$setValidity("required", false);
+            return true
+        }
+
+        vm.showError=function(){
+            if((vm.childShowError() && vm.noneSelected()) || (vm.noneSelected() &&  vm.formName.addressRole.$touched) ){
+                return true
+            }
+        }
+
+
+        vm.updateRoleModel = function () {
+
+            //fix role model
+            var obj = {
+                manufacturer: false,
+                mailing: false,
+                billing: false,
+                repPrimary: false,
+                repSecondary: false
+            };
+
+            for (var key in obj){
+                var attrName = key;
+               console.log("Key in roleModel "+key +(key in  vm.roleModel))
+                if(!(key in vm.roleModel)|| vm.roleModel[key]==undefined ){
+                    console.log(attrName+" Not found");
+                   obj[key]=false;
+                }else{
+                    obj[key]=vm.roleModel[key]
+                    console.log("Value from rolemodel "+vm.roleModel[key])
+                }
+
+            }
+            console.log("Afterwareds "+JSON.stringify(obj))
+
+           // vm.formName.addressRole.$valid=isSelected;
+           /* if(isSelected) {
+                vm.formName.addressRole.$error = "";
+            }else{
+                vm.formName.addressRole.$error={required:true}
+            }*/
+            vm.formName.addressRole.$setDirty()
+            vm.formName.addressRole.$setTouched();
+            vm.isReq=vm.noneSelected();
+            vm.formName.addressRole.$validate()
+            vm.onUpdate({$event: {roles: obj}});
+
         }
 
     }
