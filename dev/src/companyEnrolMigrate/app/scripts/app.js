@@ -7,6 +7,9 @@
             'ngAria',
             'addressList',
             'contactList',
+            'contactRecord',
+            'contactList2',
+            'expandingTable',
             'fileIO'
         ])
 })();
@@ -59,6 +62,7 @@
          * @returns {boolean}
          */
         vm.isAmend=function(){
+            //return true
             return(vm.company.applicationType==="AMEND")
         }
 
@@ -88,6 +92,7 @@
                 incrementMinorVersion();
             }
             var writeResult=_company.transformToFileObj(vm.company);
+            console.log("Pre write "+JSON.stringify(vm.company))
             return writeResult;
         }
 

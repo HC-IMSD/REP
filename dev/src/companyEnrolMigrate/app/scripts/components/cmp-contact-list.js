@@ -31,6 +31,7 @@
         //vm.detailsValid = true; //TODO new
         vm.contactList = [];
         vm.$onInit = function () {
+            vm.temp=vm.countContacts();
             vm.detailsValid = true;
             vm.focused = false;
             vm.tableRowExpanded = false;
@@ -42,7 +43,9 @@
             vm.contactList = vm.contacts; //HERE Is how it is bound
         }
         vm.$onChanges = function (changes) {
-            vm.contactList = changes.contacts.currentValue;
+            if(changes.contacts) {
+                vm.contactList = changes.contacts.currentValue;
+            }
         }
         vm.isRecordsEmpty = function () {
             /*if(!vm.contactList||vm.contactList.length==0){
@@ -60,6 +63,7 @@
             vm.contactList.splice(idx, 1);
             vm.onUpdate({newList: vm.contactList});
             vm.detailsValid = true; //case that incomplete record
+            vm.temp=vm.countContacts()
             if (vm.contactList.length == 0) {
                 vm.resetTableRow();
             } else {
@@ -84,7 +88,17 @@
             vm.detailsValid = false;
             vm.onUpdate({newList: vm.contactList});
             vm.isREPRoleSelected();
+            vm.temp=vm.countContacts()
         }
+        vm.countContacts=function(){
+            if(!vm.contactList) return 0;
+            for(var i=0;i<vm.contactList.length; i++){
+                //todo account roles
+            }
+
+            return(vm.contactList.length)
+        }
+
         /**
          * @ngdoc method - checks if all the roles have been selected
          * @param roleToCheck (optional) returns if a role has been selected.
@@ -121,13 +135,12 @@
          * @ngdoc method updates the individual filed records
          * @param contact
          */
-        vm.onUpdateContactRecord = function () {
-            vm.detailsValid = $scope.contactForm.$valid;
-            //vm.updateValid({validState:vm.addressModel.isDetailValid});
-            /* var idx = vm.contactList.indexOf(
+        vm.onUpdateContactRecord = function (contact) {
+
+            var idx = vm.contactList.indexOf(
              $filter('filter')(vm.contactList, {contactId: contact.contactId}, true)[0]
              );
-             vm.contactList[idx] = contact;*/
+             vm.contactList[idx] = angular.copy(contact);
             //vm.onUpdate({newList:vm.contactList});
         }
 

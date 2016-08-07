@@ -1,19 +1,11 @@
 <div class="container-fluid">
     <ng-form name="contactForm">
-        <h2>Contact Details</h2>
-        <div class="row">
-            <div class="form-group" ng-show="$ctrl.isAmend()">
-                <input class="formControl" id="chk-amend-rec_{{$id}}" type="checkbox"
-                       ng-model="$ctrl.contactModel.amendRecord"/>
-                <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
-                    {{'AMEND_RECORD'|translate}}
-                </label>
-            </div>
-        </div>
+       <!-- <pre>{{contactForm.$error  | json : spacing}}</pre>-->
+
         <div class="row">
             <div class="col-md-12 form-group">
-            <cmp-address-role record="$ctrl.contactModel.addressRole" form-name="contactForm" is-contact="$ctrl.isContact"
-                              on-update="$ctrl.onContactRoleUpdate($event.roles)" child-show-error="$ctrl.showChildError()"></cmp-address-role>
+           <!-- <cmp-address-role record="$ctrl.contactModel.addressRole" form-name="contactForm" is-contact="$ctrl.isContact"
+                              on-update="$ctrl.onContactRoleUpdate($event.roles)" child-show-error="$ctrl.showChildError()"></cmp-address-role>-->
             </div>
         </div>
         <div class="row">
@@ -167,13 +159,7 @@
             </div>
         </div>
 </div>
-<pre>contact model: {{$ctrl.contactRecord | json : spacing}}</pre>
-<div class="row">
-    <div class="btn-group-sm col-xs-12 text-right">
-        <input type="submit" value="Save Contact" class="btn btn-primary"
-                      ng-click="$ctrl.save()"  ng-disabled="$ctrl.setNotEditable()">
-        <input type="submit" value="Delete Contact" class="btn btn-danger" ng-click="$ctrl.delete()">
-    </div>
-</div>
+<!--<pre>contact model: {{$ctrl.contactRecord | json : spacing}}</pre>-->
+
 </ng-form>
 </div>
