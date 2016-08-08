@@ -54,7 +54,7 @@
          */
         vm.$onInit = function () {
             vm.temp = vm.countContacts();
-            vm.detailsValid = true;
+            //vm.detailsValid = true;
             vm.focused = false;
             vm.contactList = vm.contacts; //HERE Is how it is bound
         }
@@ -62,6 +62,11 @@
             if(changes.contacts && changes.contacts.currentValue) {
                 vm.contactList = changes.contacts.currentValue;
             }
+        }
+
+        vm.setValid=function(value){
+            vm.isDetailValid=value; //this is a shared value
+
         }
 
         vm.onUpdateContactRecord = function (record) {
@@ -74,7 +79,7 @@
             console.log("copying the record in contact list"+JSON.stringify(record))
              vm.contactList[idx] = angular.copy(record);
 
-             vm.isDetailValid=record.isDetailValid;
+            // vm.isDetailValid=record.isDetailValid;
         }
 
         vm.deleteContact = function (cID) {
@@ -95,9 +100,6 @@
             }
         }
 
-       /* vm.updateValid = function (detailValid) {
-            vm.detailsValid = detailValid;
-        }*/
         /**
          * Adds a contact to the contact list
          */

@@ -124,22 +124,24 @@
                     <input type="text" id="phone-number_{{$id}}" data-ng-model="$ctrl.contactModel.phone"
                            ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                            class="form-control full-width" name="phoneNumber" ng-required="true" maxlength="25"
-                           size="25"   ng-readonly="$ctrl.setNotEditable()"
+                           size="25"   ng-readonly="$ctrl.setNotEditable()"  ng-pattern="$ctrl.phoneReg"
                            required/>
                     <strong id="phoneNum-error" class="error" ng-if="$ctrl.showError(contactForm.phoneNumber)">
                         <span class="label label-danger" ng-messages="contactForm.phoneNumber.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                             <span ng-message="pattern"><span translate="MSG_ERR_PHONE_FORMAT"></span></span>
                         </span>
                     </strong>
                 </label>
 
             </div>
             <div class="col-md-3 form-group">
-                <label for="phone-ext_{{$id}}"><span class="field-name">{{'PHONE_EXT'|translate}}</span></label>
+                <label for="phone-ext_{{$id}}"><span class="field-name">{{'PHONE_EXT'|translate}}</span>
                 <input type="text" id="phone-ext_{{$id}}" data-ng-model="$ctrl.contactModel.phoneExt"
                        ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                        ng-readonly="$ctrl.setNotEditable()"
                        class="form-control" name="phoneExt" maxlength="10"/>
+                </label>
             </div>
             <div class="col-md-6 form-group" ng-class="{'has-error':contactForm.contactEmail.$invalid}">
                 <label for="contact-email_{{$id}}" class="required">

@@ -32,7 +32,7 @@
 
         var vm = this;
         vm.isReq=true;
-       // vm.noneSelected=true
+        vm.isSelected="";
         vm.roleModel = {
             manufacturer: false,
             mailing: false,
@@ -46,36 +46,41 @@
             //vm.noneSelected=vm.isSelected();
             if (vm.record) {
                 //doesn't copy as this is a dumb component
-                console.log("from record role is "+JSON.stringify(vm.record));
-                vm.roleModel = vm.record;
-
+                console.log("from record is "+JSON.stringify(vm.record));
+                vm.roleModel = vm.record.addressRole;
+                console.log("from record role is "+JSON.stringify(vm.roleModel));
+                vm.oneSelected();
             }
         }
         vm.$onChanges=function(changes){
             console.log("role on changes event")
            if(changes.record){
                vm.roleModel=(changes.record.currentValue.addressRole);
+               vm.oneSelected();
            }
         }
 
-        vm.isSelected = function () {
+        vm.oneSelected = function () {
             var obj=vm.roleModel;
             for (var key in obj){
                 var attrName = key;
                 var attrValue = obj[key];
                 if(attrValue===true){
-                    return false;
+                    vm.isSelected=true;
+                    return true;
                 }
             }
-            return true
+            vm.isSelected=""
+            return false
         }
 
         vm.showError=function(){
-            if((vm.roleForm.addressRole.$touched && vm.roleForm.addressRole.$invalid) || (vm.showErrors()&&vm.roleForm.addressRole.$invalid)){
+            if((vm.roleForm.$touched && vm.roleForm.roleMissing.$invalid) || (vm.showErrors()&&vm.roleForm.roleMissing.$invalid)){
                 return true
             }
             return false
         }
+
 
 
     }

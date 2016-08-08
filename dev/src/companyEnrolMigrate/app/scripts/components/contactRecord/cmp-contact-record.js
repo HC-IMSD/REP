@@ -27,15 +27,15 @@
                 updateValid:'&',
                 checkRoles:'&',
                 onDelete:'&',
-                isAmend:'&'
+                isAmend:'&',
+                isDetailValid:'&'
             }
         });
-
-    function addressRecCtrl() {
+        addressRecCtrl.$inject=['$scope']
+    function addressRecCtrl($scope) {
         var vm = this;
         vm.savePressed=false;
         vm.isContact=true; //used to set the state of the role
-
        //TODO get role model from a servide
         vm.roleModel = {
             manufacturer: false,
@@ -45,7 +45,6 @@
             repSecondary: false
         };
         vm.contactModel={
-                isDetailValid: false,
                 roleConcat:"",
                 contactId: "",
                 amendRecord: false,
@@ -115,6 +114,8 @@
 
         }
 
+
+
         /**
          *  calls the delete function on the parent
          */
@@ -126,10 +127,12 @@
          */
         vm.discardChanges=function(){
             console.log("discarding the changes")
+            if(vm.contactRecForm.$pristine) return;
             var currRecord=vm.trackRecordCtrl.trackRecord()
             vm.contactModel =angular.copy(currRecord);
-            vm.contactRecForm.$setPristine();
-            vm.contactRecForm.$setUntouched();
+            //vm.contactRecForm.$setPristine();
+            //vm.contactRecForm.$setUntouched();
+            vm.isDetailValid({state:vm.contactRecForm.$valid});
             vm.savePressed=false;
         }
 
@@ -141,17 +144,37 @@
             vm.updateContactModel2();
         }
 
+        vm.updateValid=function(){
+            console.log("updating valid")
+           // vm.contactModel.isDetailValid=vm.contactRecForm.$valid && !vm.contactRecForm.$dirty ;
+            vm.isDetailValid({state:(vm.contactRecForm.$valid && !vm.contactRecForm.$dirty) });
+        }
+
+        $scope.$watch('contactRec.contactRecForm.$dirty', function() {
+            if(vm.contactRecForm.$dirty) {
+                console.log("@@@@@@@@@@@@Form is dirty")
+                //vm.contactModel.isDetailValid = false;
+                vm.isDetailValid({state:false})
+            }
+        }, true);
+
         /**
          * Updates the contact model used by the save button
          */
         vm.updateContactModel2 = function () {
             console.log("updating Contact model ::contactRecord")
             console.log("Is it valid"+ vm.contactRecForm.$valid)
-            vm.contactModel.isDetailValid=vm.contactRecForm.$valid;
+           // vm.contactModel.isDetailValid=vm.contactRecForm.$valid && !vm.contactRecForm.$dirty ;
             vm.contactModel.roleConcat=_getRolesConcat();
             console.log("concat "+vm.contactModel.roleConcat)
-          if(vm.contactModel.isDetailValid) {
+          if(vm.contactRecForm.$valid) {
+             // vm.contactModel.isDetailValid=true;
+              vm.isDetailValid({state:true})
+              vm.contactRecForm.$setPristine() ;
                 vm.onUpdate({rec: vm.contactModel});
+
+              console.log("@@@@@@@@@@@@Setting form to valid")
+
             }
             vm.savePressed=true;
         }
