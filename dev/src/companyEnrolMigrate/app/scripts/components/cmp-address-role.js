@@ -47,7 +47,7 @@
             if (vm.record) {
                 //doesn't copy as this is a dumb component
                 console.log("from record role is "+JSON.stringify(vm.record));
-                vm.roleModel = vm.record.addressRole;
+                vm.roleModel = vm.record;
 
             }
         }

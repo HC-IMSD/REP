@@ -46,6 +46,7 @@
         };
         vm.contactModel={
                 isDetailValid: false,
+                roleConcat:"",
                 contactId: "",
                 amendRecord: false,
                 addressRole: {
@@ -73,8 +74,32 @@
                 if(rec) {
                     console.log("contactRec init" +JSON.stringify(rec))
                     vm.contactModel = angular.copy(rec);
+                    vm.contactModel.roleConcat=_getRolesConcat();
                 }
         }
+
+        function _getRolesConcat(){
+            var addressRoles=vm.contactModel.addressRole;
+            var result="";
+
+            if(addressRoles.manufacturer){
+                result= result+" MAN"
+            }
+            if(addressRoles.billing){
+                result= result+" BILL"
+            }
+            if(addressRoles.mailing){
+                result= result+" MAIL"
+            }
+            if(addressRoles.repPrimary){
+                result= result+" REP 1"
+            }
+            if(addressRoles.repSecondary){
+                result= result+" REP 2"
+            }
+            return result
+        }
+
         /**
          * Due to binding with table expander this method does not get called
          * @param changes
@@ -123,6 +148,8 @@
             console.log("updating Contact model ::contactRecord")
             console.log("Is it valid"+ vm.contactRecForm.$valid)
             vm.contactModel.isDetailValid=vm.contactRecForm.$valid;
+            vm.contactModel.roleConcat=_getRolesConcat();
+            console.log("concat "+vm.contactModel.roleConcat)
           if(vm.contactModel.isDetailValid) {
                 vm.onUpdate({rec: vm.contactModel});
             }

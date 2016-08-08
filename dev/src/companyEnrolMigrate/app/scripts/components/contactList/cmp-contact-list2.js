@@ -46,7 +46,7 @@
             },
             {
                 label: "Role",
-                binding:"contactId"
+                binding:"roleConcat"
             },
         ]
         /**
