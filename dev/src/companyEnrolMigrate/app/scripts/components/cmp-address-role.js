@@ -19,52 +19,64 @@
             controller: addressRoleCtrl,
             controllerAs: 'ar',
             bindings: {
-                formName: '<',
+                //formName: '<',
                 record: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                showErrors:'&',
+                isContact:'<'
             }
         });
 
+    addressRoleCtrl.$inject = ['$scope']
+    function addressRoleCtrl($scope) {
 
-    function addressRoleCtrl() {
+        var vm = this;
+        vm.isReq=true;
+       // vm.noneSelected=true
+        vm.roleModel = {
+            manufacturer: false,
+            mailing: false,
+            billing: false,
+            repPrimary: false,
+            repSecondary: false
+        };
+        vm.$onInit = function () {
+            //after init
+            console.log("onInit role details");
+            //vm.noneSelected=vm.isSelected();
+            if (vm.record) {
+                //doesn't copy as this is a dumb component
+                console.log("from record role is "+JSON.stringify(vm.record));
+                vm.roleModel = vm.record;
 
-        var self = this;
-
-        self.$onInit = function () {
-
-            self.roleModel = {};
-
-            if (self.record) {
-                self.roleModel = self.record;
             }
         }
-
-        self.someSelected = function () {
-            var object = self.roleModel;
-
-            if (!object) return false;
-            return Object.keys(object).some(function (key) {
-              //console.log("cmpAddressRole someSelected: " + object[key]);
-                return object[key];
-            });
+        vm.$onChanges=function(changes){
+            console.log("role on changes event")
+           if(changes.record){
+               vm.roleModel=(changes.record.currentValue.addressRole);
+           }
         }
 
-        self.updateRoleModel = function () {
-
-            self.formName.addressRole.$dirty =
-                self.formName.addressRole.$touched = true;
-
-            self.formName.addressRole.$pristine = !self.formName.addressRole.$dirty;
-            self.formName.addressRole.$untouched = !self.formName.addressRole.$touched;
-
-            self.onUpdate({$event: {roles: self.roleModel}});
-
-        }
-        self.showError = function (control) {
-            if (control.$invalid && !control.$pristine) {
-                return true;
+        vm.isSelected = function () {
+            var obj=vm.roleModel;
+            for (var key in obj){
+                var attrName = key;
+                var attrValue = obj[key];
+                if(attrValue===true){
+                    return false;
+                }
             }
+            return true
         }
+
+        vm.showError=function(){
+            if((vm.roleForm.addressRole.$touched && vm.roleForm.addressRole.$invalid) || (vm.showErrors()&&vm.roleForm.addressRole.$invalid)){
+                return true
+            }
+            return false
+        }
+
 
     }
 

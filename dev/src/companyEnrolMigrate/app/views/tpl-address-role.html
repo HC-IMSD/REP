@@ -1,51 +1,99 @@
-<fieldset>
-    <legend class="required">
-        <span class="field-name">{{"ROLES_SELECT" |translate}}</span>
-        <strong class="required"> {{"REQUIRED" |translate}}</strong>
-        <strong id="address-role-error" class="error" ng-if="ar.showError(ar.formName.addressRole)">
-                        <span class="label label-danger" ng-messages="ar.formName.addressRole.$error">
+<ng-form name="ar.roleForm">
+    <fieldset>
+        <legend class="required">
+            <span class="field-name">{{"ROLES_SELECT" |translate}}</span>
+            <strong class="required"> {{"REQUIRED" |translate}}</strong>
+            <!--<input id="roleMissing_{{$id}}" name="roleMissing" ng-required="true" readonly="true" ng-show="false"
+                   ng-model="ar.noneSelected" required/>-->
+        <strong id=" address-role-error" class="error" ng-if="ar.showError()">
+                        <span class="label label-danger" ng-messages="ar.roleForm.addressRole.$error">
                             <span ng-message="required">{{"MSG_ERR_ROLE"|translate}}</span>
                         </span>
-        </strong>
-    </legend>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="checkbox">
-                <label for="chk-manufacturer_{{$id}}">
-                    <input type="checkbox" name="addressRole" ng-model="ar.roleModel.manufacturer"
-                           id="chk-manufacturer_{{$id}}" ng-change="ar.updateRoleModel()"
-                           ng-required="!ar.someSelected()"> Manufacturer
+            </strong>
+        </legend>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-manufacturer_{{$id}}">
+                        <input type="checkbox" ng-model="ar.roleModel.manufacturer"
+                               id="chk-manufacturer_{{$id}}"
+                               ng-required="ar.noneSelected(roleForm)"/>
+                        Manufacturer
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-mailing{{$id}}">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing"
+                               id="chk-mailing{{$id}}"
+                               ng-required="ar.noneSelected()"/> mail Address
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-billing_{{$id}}">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing"
+                               id="chk-billing_{{$id}}"
+                        /> Billing Address
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div ng-show="!ar.isContact" class="checkbox">
+                    <label for="chk-importer_{{$id}}">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer"
+                               id="chk-importer_{{$id}}"/> Importer Address
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-rep-primary_{{$id}}">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.repPrimary"
+                               id="chk-rep-primary_{{$id}}"/> Primary REP contact
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="checkbox">
+                    <label for="chk-rep-secondary_{{$id}}">
+                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.repSecondary"
+                               id="chk-rep-secondary_{{$id}}"/> Secondary REP contact
+                    </label>
+                </div>
                 </label>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="checkbox">
-                <label for="chk-mailing_{{$id}}">
-                    <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing"
-                           id="chk-mailing_{{$id}}" tabindex="0"
-                           ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Mailing Address
-                </label>
-            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="checkbox">
-                <label for="chk-billing_{{$id}}">
-                    <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing"
-                           id="chk-billing_{{$id}}" tabindex="0"
-                           ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Billing Address
-                </label>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="checkbox">
-                <label for="chk-importer_{{$id}}">
-                    <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer"
-                           id="chk-importer_{{$id}}" tabindex="0"
-                           ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Importer Address
-                </label>
-            </div>
-        </div>
-    </div>
-</fieldset>
+        <!--<div>
+            <input type="text" class="form-control full-width" id="listcon"
+                   name="listcon" data-ng-model="ar.temp" ng-show="true" ng-readonly="false" test-valid="1"/>
+            <strong id="street-error" class="error" ng-if="true">
+                <strong id="contactsList-error" class="error" ng-if="ar.formName.listcon.$invalid">
+                          <span class="label label-danger" ng-messages="ar.formName.listcon.$error">
+                              <span ng-message="integer"><span translate="MSG_ERR_CONTACT_NUM"></span></span>
+                          </span>
+                </strong>
+            </strong>
+        </div>-->
+        <!--    <div>
+                Size (integer 0 - 10):
+                <input type="number" ng-model="ar.roleModel.size" name="size"
+                        test-valid="foo" />{{ar.roleModel.size}}<br />
+
+            <span ng-show="ar.roleModel.size.$invalid">
+                   <span class="label label-danger" ng-messages="ar.size.$error">
+                                    <span ng-message="integer">{{"MSG_ERR_ROLE"|translate}}</span>
+                                </span>
+                </span>
+                <pre>{{ar.size}} {{ar.roleModel.size.$invalid}}</pre>
+            </div>-->
+
+    </fieldset>
+</ng-form>
