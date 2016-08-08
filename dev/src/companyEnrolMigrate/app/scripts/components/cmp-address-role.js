@@ -71,7 +71,7 @@
         }
 
         vm.showError=function(){
-            if((vm.roleForm.addressRole.$touched && vm.roleForm.addressRole.$invalid) || vm.showErrors()){
+            if((vm.roleForm.addressRole.$touched && vm.roleForm.addressRole.$invalid) || (vm.showErrors()&&vm.roleForm.addressRole.$invalid)){
                 return true
             }
             return false

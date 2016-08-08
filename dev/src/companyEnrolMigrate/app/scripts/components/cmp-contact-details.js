@@ -65,13 +65,13 @@
         vm.$onChanges=function(changes){
              console.log("changes details")
             if(changes.contactRecord){
-                vm.contactModel = vm.contactRecord.currentValue;
+                vm.contactModel = changes.contactRecord.currentValue;
                 console.log("showErrors"+vm.showErrors())
             }
 
         }
         vm.showError=function(ctrl){
-            if((ctrl.$invalid && ctrl.$touched) || vm.showErrors()){
+            if((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid )){
                 return true
             }
             return false

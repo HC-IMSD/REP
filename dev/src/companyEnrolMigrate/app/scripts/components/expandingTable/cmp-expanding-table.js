@@ -20,14 +20,9 @@
             transclude:true,
             bindings: {
                 listItems: '<',
-                updateList: '&',
-                rowDeleted:'&',
-                resetToCollapsed:'<',
                 columnDef:'<',
                 disableSelection:'<',
                 selectRecord:'<'
-                /*getNewContact: '&',
-                isAmend: '&'*/
             }
         });
     expandingTableCtrl.$inject = ['$filter']

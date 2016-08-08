@@ -11,30 +11,9 @@
                                      column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord" disable-selection="!contactListCtrl.detailsValid">
 
                     <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)" on-update="contactListCtrl.onUpdateContactRecord(rec)" is-amend="contactListCtrl.isAmend()">
-
                     </cmp-contact-record>
 
-                   <!-- listItems: '<',
-                    updateList: '&',
-                    rowDeleted:'&',
-                    resetToCollapsed:'<',
-                    columnDef:'<',
-                    disableSelection:'<',-->
-
-                    <!--<cmp-contact-record contact-record="contact" is-amend="$ctrl.isAmend()"
-                                        on-update="$ctrl.onUpdateContactRecord(contact)"
-                                        update-valid="$ctrl.updateValid(validState)"
-                                        check-roles="$ctrl.isREPRoleSelected(roleValue)"
-                                        on-delete="$ctrl.deleteContact(contactId)"></cmp-contact-record>
--->
-
                 </cmp-expanding-table>
-                <!--
-                                listItems: '<',
-                                updateList: '&',
-                                rowDeleted:'&',
-                                resetToCollapsed:'&',
-                                columnDef:'<'-->
 
                 <div class="row mrgn-tp-md mrgn-bttm-lg">
                     <div class="btn-group-sm col-md-12 text-right">
