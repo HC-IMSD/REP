@@ -29,6 +29,7 @@
     function expandingTableCtrl($filter) {
         var vm = this;
         vm.focused = false;
+        vm.disableExpand=false;
         vm.tableRowExpanded = false;
         vm.tableRowIndexCurrExpanded = "";
         vm.tableRowIndexPrevExpanded = "";
@@ -60,6 +61,9 @@
                 }else{
                     vm.resetTableRow()
                 }
+            }
+            if(changes.disableSelection){
+                vm.disableExpand=changes.disableSelection.currentValue;
             }
         }
         /**
@@ -106,7 +110,8 @@
         };
         vm.selectTableRow = function (index) {
             //if selection
-         if (vm.disableSelection) return;
+            console.log("Disable selection"+vm.disableExpand)
+         if (vm.disableExpand) return;
             console.log("selecting table row")
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();

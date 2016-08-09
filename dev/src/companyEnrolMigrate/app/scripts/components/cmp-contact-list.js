@@ -117,7 +117,6 @@
                     }
                 }
                 if (rolesSelected > 1) {
-                    console.log("roles are greater than")
                     return true
                 }
             } else {
@@ -127,7 +126,6 @@
                     }
                 }
             }
-            console.log("roles false")
             return false;
         }
 

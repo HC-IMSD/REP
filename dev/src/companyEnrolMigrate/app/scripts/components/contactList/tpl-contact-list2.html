@@ -6,11 +6,14 @@
         <div class="panel-body">
             <div class="row">
                 <!-- Place generic expander here-->
-                <h2>Contact List 2!!!!!!!!!!!!!!</h2>
                 <cmp-expanding-table list-items="contactListCtrl.contactList"
-                                     column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord" disable-selection="!contactListCtrl.detailsValid">
+                                     column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
+                                     disable-selection="!contactListCtrl.isDetailValid">
 
-                    <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)" on-update="contactListCtrl.onUpdateContactRecord(rec)" is-amend="contactListCtrl.isAmend()">
+                    <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
+                                        on-update="contactListCtrl.onUpdateContactRecord(rec)"
+                                        is-amend="contactListCtrl.isAmend()" is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
+                                        is-detail-valid="contactListCtrl.setValid(state)">
                     </cmp-contact-record>
 
                 </cmp-expanding-table>
@@ -23,9 +26,7 @@
                                data-ng-show="contactListCtrl.newContactFormShow"
                                ng-click="contactListCtrl.newAdrFormShow=false">
                     </div>
-
                 </div>
-
             </div>
     </section>
 </ng-form>

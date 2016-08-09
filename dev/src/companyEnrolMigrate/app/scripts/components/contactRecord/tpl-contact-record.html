@@ -15,11 +15,11 @@
                 </div>
             </div>
             <div>
-                <label>ID is  {{contactRec.contactModel.contactId}}</label>
-                <cmp-address-role record="contactRec.contactModel.addressRole"
+               <!-- <label>ID is  {{contactRec.contactModel.contactId}}</label>-->
+                <cmp-address-role record="contactRec.contactModel"
                                   is-contact="contactRec.isContact"
                                   on-update="contactRec.onContactRoleUpdate($event.roles)"
-                                  show-errors="contactRec.showErrors()"></cmp-address-role>
+                                  show-errors="contactRec.showErrors()" already-selected="contactRec.isOneSelected(roleName)"></cmp-address-role>
 
             </div>
             <div class="row">
@@ -37,6 +37,6 @@
             </div>
         </div>
     </ng-form>
-    <pre>contact record model: {{contactRec.contactModel | json : spacing}}</pre>
+  <!--  <pre>contact record model: {{contactRec.contactModel | json : spacing}}</pre>-->
 
 </div>
