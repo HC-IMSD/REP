@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div>
-                <label>ID is  {{contactRec.contactModel.contactId}}</label>
+               <!-- <label>ID is  {{contactRec.contactModel.contactId}}</label>-->
                 <cmp-address-role record="contactRec.contactModel"
                                   is-contact="contactRec.isContact"
                                   on-update="contactRec.onContactRoleUpdate($event.roles)"
@@ -37,6 +37,6 @@
             </div>
         </div>
     </ng-form>
-    <pre>contact record model: {{contactRec.contactModel | json : spacing}}</pre>
+  <!--  <pre>contact record model: {{contactRec.contactModel | json : spacing}}</pre>-->
 
 </div>

@@ -57,7 +57,7 @@
             fax: ""
         };
         vm.$onInit = function () {
-            console.log("onInit contact details");
+
            if (vm.contactRecord) {
                 //doesn't copy as this is a dumb component
                 vm.contactModel = vm.contactRecord;
@@ -65,10 +65,10 @@
         }
         //TODO rename
         vm.$onChanges=function(changes){
-             console.log("changes details")
+            // console.log("changes details")
             if(changes.contactRecord){
                 vm.contactModel = changes.contactRecord.currentValue;
-                console.log("showErrors"+vm.showErrors())
+
             }
 
         }
@@ -142,12 +142,10 @@
 
                 if (viewValue==theval) {
                     // it is valid
-                    console.log("it is valid")
                     return true;
                 }
 
                 // it is invalid
-               console.log("it is invalid")
                modelValue=viewValue
                 return false;
             };

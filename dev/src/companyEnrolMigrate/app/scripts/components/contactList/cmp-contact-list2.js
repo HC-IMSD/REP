@@ -71,12 +71,9 @@
 
         vm.onUpdateContactRecord = function (record) {
 
-            console.log("updating contact record in contactList ")
              var idx = vm.contactList.indexOf(
              $filter('filter')(vm.contactList, {contactId: record.contactId}, true)[0]
              ); //TODO fix filter
-            console.log("found index "+idx)
-            console.log("copying the record in contact list"+JSON.stringify(record))
              vm.contactList[idx] = angular.copy(record);
 
             // vm.isDetailValid=record.isDetailValid;
@@ -108,7 +105,6 @@
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
             vm.isDetailValid=true;
-            console.log("valid on select"+vm.isDetailValid);
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
         }
@@ -148,7 +144,6 @@
                     }
                 }
             }
-            console.log("roles selected from list is  false")
             return false;
         }
 
