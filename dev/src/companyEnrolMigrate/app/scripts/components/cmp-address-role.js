@@ -23,7 +23,8 @@
                 record: '<',
                 onUpdate: '&',
                 showErrors:'&',
-                isContact:'<'
+                isContact:'<',
+                alreadySelected:'&'
             }
         });
 
@@ -65,6 +66,9 @@
             for (var key in obj){
                 var attrName = key;
                 var attrValue = obj[key];
+                if(attrValue) {
+                    console.log("The role is selected?" + attrName + vm.alreadySelected({roleName: attrName}));
+                }
                 if(attrValue===true){
                     vm.isSelected=true;
                     return true;

@@ -19,7 +19,7 @@
                 <cmp-address-role record="contactRec.contactModel"
                                   is-contact="contactRec.isContact"
                                   on-update="contactRec.onContactRoleUpdate($event.roles)"
-                                  show-errors="contactRec.showErrors()"></cmp-address-role>
+                                  show-errors="contactRec.showErrors()" already-selected="contactRec.isOneSelected(roleName)"></cmp-address-role>
 
             </div>
             <div class="row">

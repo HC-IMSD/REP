@@ -28,7 +28,8 @@
                 checkRoles:'&',
                 onDelete:'&',
                 isAmend:'&',
-                isDetailValid:'&'
+                isDetailValid:'&',
+                isRoleSelected:'&'
             }
         });
         addressRecCtrl.$inject=['$scope']
@@ -64,7 +65,9 @@
                 PhoneExt: "",
                 fax: ""
             };
-
+        vm.isOneSelected=function(type){
+            return(vm.isRoleSelected({roleName:type,id:vm.contactModel.contactId}));
+        }
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
                 var rec=vm.trackRecordCtrl.trackRecord();

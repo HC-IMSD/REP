@@ -107,7 +107,8 @@
             var defaultContact = vm.getNewContact()
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
-
+            vm.isDetailValid=true;
+            console.log("valid on select"+vm.isDetailValid);
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
         }
@@ -132,29 +133,22 @@
          *                     If no value check if all roles have been selected
          * @returns {boolean}
          */
-        vm.isREPRoleSelected = function (roleToCheck) {
+        vm.isREPRoleSelected = function (roleToCheck,recordID) {
             var rolesSelected = 0;
             //if no role to check, see if all selected
             if (!vm.contactList) return false;
-            if (!roleToCheck) {
-                for (var i = 0; i < vm.contactList.length; i++) {
-                    if (vm.contactList[i].contactRole) {
-                        //TODO check for values?
+            for (var i = 0; i < vm.contactList.length; i++) {
+                if (vm.contactList[i].addressRole[roleToCheck] == true) {
+                    //don't count it if it is the existing record
+                    if(vm.contactList[i].contactId!==recordID) {
                         rolesSelected = rolesSelected + 1;
                     }
-                }
-                if (rolesSelected > 1) {
-                    console.log("roles are greater than")
-                    return true
-                }
-            } else {
-                for (var i = 0; i < vm.contactList; i++) {
-                    if (vm.contactList[i].contactRole == roleToCheck) {
+                    if(rolesSelected>0) {
                         return true;
                     }
                 }
             }
-            console.log("roles false")
+            console.log("roles selected from list is  false")
             return false;
         }
 

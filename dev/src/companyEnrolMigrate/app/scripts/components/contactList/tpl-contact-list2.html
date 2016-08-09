@@ -13,7 +13,7 @@
 
                     <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
                                         on-update="contactListCtrl.onUpdateContactRecord(rec)"
-                                        is-amend="contactListCtrl.isAmend()"
+                                        is-amend="contactListCtrl.isAmend()" is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                         is-detail-valid="contactListCtrl.setValid(state)">
                     </cmp-contact-record>
 
