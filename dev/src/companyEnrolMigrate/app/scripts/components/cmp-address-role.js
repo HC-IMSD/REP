@@ -77,6 +77,19 @@
             vm.isSelected=""
             return false
         }
+        vm.isDuplicateSelected=function(toCheck){
+            var obj=vm.roleModel;
+            for (var key in obj){
+                var attrName = key;
+                var attrValue = obj[key];
+                if(attrName==toCheck) {
+                    if(!attrValue) return false
+                    return(vm.alreadySelected({roleName: attrName}));
+                }
+            }
+            return false
+        }
+
 
         vm.showError=function(){
             if((vm.roleForm.$touched && vm.roleForm.roleMissing.$invalid) || (vm.showErrors()&&vm.roleForm.roleMissing.$invalid)){
