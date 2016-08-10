@@ -5,7 +5,7 @@
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
             <input id="roleMissing_{{$id}}" name="roleMissing" ng-required="true" ng-show="false"
                    ng-model="ar.isSelected" required/>
-        <strong id=" address-role-error" class="error" ng-if="ar.showError()">
+            <strong id=" address-role-error" class="error" ng-if="ar.showErrorMissing()">
                         <span class="label label-danger" ng-messages="ar.roleForm.roleMissing.$error">
                             <span ng-message="required">{{"MSG_ERR_ROLE"|translate}}</span>
                         </span>
@@ -15,37 +15,62 @@
             <div class="col-sm-3">
                 <div class="checkbox">
                     <label for="chk-manufacturer_{{$id}}">
-                        <input type="checkbox" ng-model="ar.roleModel.manufacturer" name="addressRole"
-                               ng-change="ar.oneSelected()";
+                        <input type="checkbox" ng-model="ar.roleModel.manufacturer" name="manufacturer"
+                               ng-change="ar.oneSelected(ar.roleForm.manufacturer,'manufacturer')"
                                id="chk-manufacturer_{{$id}}"/>
                         Manufacturer
+                        <strong id="manufacturer-role-error" class="error" ng-if="ar.roleForm.manufacturer.$invalid">
+                 <span class="label label-danger" ng-messages="ar.roleForm.manufacturer.$error">
+                            <span ng-message="duplicateRole">{{"Manufacturer Role already Selected"|translate}}</span>
+                        </span>
+                        </strong>
                     </label>
                 </div>
+
             </div>
             <div class="col-sm-3">
                 <div class="checkbox">
                     <label for="chk-mailing{{$id}}">
-                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing" name="addressRole"
-                               ng-change="ar.oneSelected()" id="chk-mailing{{$id}}"/> Mailing Address
+                        <input type="checkbox" name="mailing" ng-model="ar.roleModel.mailing" name="mailing"
+                               ng-change="ar.oneSelected(ar.roleForm.mailing,'mailing')" id="chk-mailing{{$id}}"/>
+                        Mailing Address
+                        <strong id="mailing-role-error" class="error" ng-if="ar.roleForm.mailing.$invalid">
+                 <span class="label label-danger" ng-messages="ar.roleForm.mailing.$error">
+                            <span ng-message="duplicateRole">{{"Mailing Role already Selected"|translate}}</span>
+                        </span>
+                        </strong>
                     </label>
                 </div>
+
             </div>
         </div>
         <div class="row">
             <div class="col-sm-3">
                 <div class="checkbox">
                     <label for="chk-billing_{{$id}}">
-                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing"
-                               ng-change="ar.oneSelected()" id="chk-billing_{{$id}}"
+                        <input type="checkbox" name="billing" ng-model="ar.roleModel.billing"
+                               ng-change="ar.oneSelected(ar.roleForm.billing,'billing')" id="chk-billing_{{$id}}"
                         /> Billing Address
+                        <strong id="billing-role-error" class="error" ng-if="ar.roleForm.billing.$invalid">
+                 <span class="label label-danger" ng-messages="ar.roleForm.billing.$error">
+                            <span ng-message="duplicateRole">{{"Billing Role already Selected"|translate}}</span>
+                        </span>
+                        </strong>
                     </label>
                 </div>
+
             </div>
             <div class="col-sm-3">
                 <div ng-show="!ar.isContact" class="checkbox">
                     <label for="chk-importer_{{$id}}">
-                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer"
-                               ng-change="ar.oneSelected()" id="chk-importer_{{$id}}"/> Importer Address
+                        <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
+                               ng-change="ar.oneSelected(ar.roleForm.importer,'importer')" id="chk-importer_{{$id}}"/>
+                        Importer Address
+                        <strong id="importer-role-error" class="error" ng-if="ar.roleForm.importer.$invalid">
+                 <span class="label label-danger" ng-messages="ar.roleForm.importer.$error">
+                            <span ng-message="duplicateRole">{{"Importer Role already Selected"|translate}}</span>
+                        </span>
+                        </strong>
                     </label>
                 </div>
             </div>
@@ -54,16 +79,28 @@
             <div class="col-sm-3">
                 <div class="checkbox">
                     <label for="chk-rep-primary_{{$id}}">
-                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.repPrimary"
-                               ng-change="ar.oneSelected()"  id="chk-rep-primary_{{$id}}"/> Primary REP contact
+                        <input type="checkbox" name="repPrimary" ng-model="ar.roleModel.repPrimary"
+                               ng-change="ar.oneSelected(ar.roleForm.repPrimary,'repPrimary')"
+                               id="chk-rep-primary_{{$id}}"/> Primary REP contact
+                        <strong id="repPrimmary-role-error" class="error" ng-if="ar.roleForm.repPrimary.$invalid">
+                 <span class="label label-danger" ng-messages="ar.roleForm.repPrimary.$error">
+                            <span ng-message="duplicateRole">{{"REP Primary Role already Selected"|translate}}</span>
+                        </span>
+                        </strong>
                     </label>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="checkbox">
                     <label for="chk-rep-secondary_{{$id}}">
-                        <input type="checkbox" name="addressRole" ng-model="ar.roleModel.repSecondary"
-                               ng-change="ar.oneSelected()"  id="chk-rep-secondary_{{$id}}"/> Secondary REP contact
+                        <input type="checkbox" name="repSecondary" ng-model="ar.roleModel.repSecondary"
+                               ng-change="ar.oneSelected(ar.roleForm.repSecondary,'repSecondary')"
+                               id="chk-rep-secondary_{{$id}}"/> Alternate REP contact
+                        <strong id="repSecondary-role-error" class="error" ng-if="ar.roleForm.repSecondary.$invalid">
+                 <span class="label label-danger" ng-messages="ar.roleForm.repSecondary.$error">
+                            <span ng-message="duplicateRole">{{"REP Secondary Role already Selected"|translate}}</span>
+                        </span>
+                        </strong>
                     </label>
                 </div>
                 </label>

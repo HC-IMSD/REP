@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRole', [])
+        .module('addressRole', ['hcValidation'])
 })();
 
 (function () {
@@ -61,14 +61,13 @@
            }
         }
 
-        vm.oneSelected = function () {
+        vm.oneSelected = function (ctrl, toCheck) {
             var obj=vm.roleModel;
+            vm.checkForDuplicates(ctrl, toCheck)
             for (var key in obj){
                 var attrName = key;
                 var attrValue = obj[key];
-                if(attrValue) {
-                    console.log("The role is selected?" + attrName + vm.alreadySelected({roleName: attrName}));
-                }
+
                 if(attrValue===true){
                     vm.isSelected=true;
                     return true;
@@ -77,7 +76,16 @@
             vm.isSelected=""
             return false
         }
-        vm.isDuplicateSelected=function(toCheck){
+
+        vm.checkForDuplicates = function (ctrl, toCheck) {
+            if (ctrl) {
+                var isDup = isDuplicateSelected(toCheck)
+                console.log("is Dupe" + isDup)
+                ctrl.$setValidity("duplicateRole", !isDup);
+            }
+        }
+
+        function isDuplicateSelected(toCheck) {
             var obj=vm.roleModel;
             for (var key in obj){
                 var attrName = key;
@@ -90,9 +98,20 @@
             return false
         }
 
-
-        vm.showError=function(){
+        /**
+         * Specical show error function as relying on a hiddend field
+         * @returns {boolean}
+         */
+        vm.showErrorMissing = function () {
             if((vm.roleForm.$touched && vm.roleForm.roleMissing.$invalid) || (vm.showErrors()&&vm.roleForm.roleMissing.$invalid)){
+                return true
+            }
+            return false
+        }
+        vm.showError = function (ctrl) {
+            console.log("Ctrl state" + ctrl.$invalid)
+            if ((ctrl.$invalid) || (vm.showErrors() && ctrl.$invalid)) {
+                console.log("show error true")
                 return true
             }
             return false
