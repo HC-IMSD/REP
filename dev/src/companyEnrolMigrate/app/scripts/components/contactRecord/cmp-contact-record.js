@@ -16,7 +16,7 @@
         .module('contactRecord')
         .component('cmpContactRecord', {
             templateUrl: 'app/scripts/components/contactRecord/tpl-contact-record.html',
-            controller: addressRecCtrl,
+            controller: contactRecCtrl,
             controllerAs: 'contactRec',
             require: {
                 trackRecordCtrl:    '^trackRecord'
@@ -32,19 +32,19 @@
                 isRoleSelected:'&'
             }
         });
-        addressRecCtrl.$inject=['$scope']
-    function addressRecCtrl($scope) {
+        contactRecCtrl.$inject=['$scope']
+    function contactRecCtrl($scope) {
         var vm = this;
         vm.savePressed=false;
         vm.isContact=true; //used to set the state of the role
        //TODO get role model from a servide
-        vm.roleModel = {
+        /*vm.roleModel = {
             manufacturer: false,
             mailing: false,
             billing: false,
             repPrimary: false,
             repSecondary: false
-        };
+        };*/
         vm.contactModel={
                 roleConcat:"",
                 contactId: "",
