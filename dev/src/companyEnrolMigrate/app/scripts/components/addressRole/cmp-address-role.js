@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRole', ['hcValidation'])
+        .module('addressRole', [])
 })();
 
 (function () {
@@ -15,7 +15,7 @@
     angular
         .module('addressRole')
         .component('cmpAddressRole', {
-            templateUrl: 'app/views/tpl-address-role.html',
+            templateUrl: 'app/scripts/components/addressRole/tpl-address-role.html',
             controller: addressRoleCtrl,
             controllerAs: 'ar',
             bindings: {
@@ -43,18 +43,14 @@
         };
         vm.$onInit = function () {
             //after init
-            console.log("onInit role details");
             //vm.noneSelected=vm.isSelected();
             if (vm.record) {
                 //doesn't copy as this is a dumb component
-                console.log("from record is "+JSON.stringify(vm.record));
                 vm.roleModel = vm.record.addressRole;
-                console.log("from record role is "+JSON.stringify(vm.roleModel));
                 vm.oneSelected();
             }
         }
         vm.$onChanges=function(changes){
-            console.log("role on changes event")
            if(changes.record){
                vm.roleModel=(changes.record.currentValue.addressRole);
                vm.oneSelected();
@@ -80,7 +76,6 @@
         vm.checkForDuplicates = function (ctrl, toCheck) {
             if (ctrl) {
                 var isDup = isDuplicateSelected(toCheck)
-                console.log("is Dupe" + isDup)
                 ctrl.$setValidity("duplicateRole", !isDup);
             }
         }
@@ -109,9 +104,7 @@
             return false
         }
         vm.showError = function (ctrl) {
-            console.log("Ctrl state" + ctrl.$invalid)
             if ((ctrl.$invalid) || (vm.showErrors() && ctrl.$invalid)) {
-                console.log("show error true")
                 return true
             }
             return false

@@ -14,7 +14,7 @@
 
     angular
         .module('contactList2')
-        .component('cmpContactList2', {
+        .component('cmpCompanyContactList', {
             templateUrl: 'app/scripts/components/contactList/tpl-contact-list2.html',
             controller: contactListCtrl,
             controllerAs: 'contactListCtrl',
