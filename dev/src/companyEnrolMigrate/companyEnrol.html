@@ -147,10 +147,11 @@
                     </div>
 
                     <div>
-                        <cmp-address-list addresses="main.company.addressList"
+                      <!--  <cmp-address-list addresses="main.company.addressList"
                                           form-name="companyForm"
                                           on-update="main.updateAddressRecord(address)" is-amend="main.isAmend()"
-                                          get-new-address="main.getNewAddress()"></cmp-address-list>
+                                          get-new-address="main.getNewAddress()"></cmp-address-list>-->
+                        <cmp-company-address-list addresses="main.company.addressList" get-new-contact="main.getNewAddress()" is-amend="main.isAmend()"></cmp-company-address-list>
                         <cmp-company-contact-list contacts="main.company.contactList" get-new-contact="main.getNewContact()" is-amend="main.isAmend()"></cmp-company-contact-list>
                     </div>
                 </section>
@@ -256,8 +257,12 @@
 <script src="app/scripts/components/addressRole/cmp-address-role.js"></script>
 <script src="app/scripts/components/cmp-address-details.js"></script>
 <script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
+//TODO remove
 <script src="app/scripts/components/cmp-address-list.js"></script>
 <script src="app/scripts/components/cmp-contact-list.js"></script>
+<script src="app/scripts/components/addressList/cmp-company-address-list.js"></script>
+<script src="app/scripts/components/addressRecord/cmp-address-record.js"></script>
+
 <script src="app/scripts/components/contactRecord/cmp-contact-record.js"></script>
 <script src="app/scripts/components/contactList/cmp-company-contact-list.js"></script>
 <script src="app/scripts/components/expandingTable/cmp-expanding-table.js"></script>

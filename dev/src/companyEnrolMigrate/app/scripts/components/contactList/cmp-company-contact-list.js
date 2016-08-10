@@ -33,21 +33,21 @@
         vm.contactList = [];
         vm.columnDef = [
             {
-                label: "First Name",
+                label: "FIRST_NAME",
                 binding:"givenName"
             },
             {
-                label: "Last Name",
+                label: "LAST_NAME",
                 binding:"surname"
             },
             {
-                label: "Title",
+                label: "JOB_TITLE",
                 binding:"title"
             },
             {
-                label: "Role",
+                label: "ROLES",
                 binding:"roleConcat"
-            },
+            }
         ]
         /**
          * using to get contact list
@@ -87,14 +87,7 @@
             vm.onUpdate({newList: vm.contactList});
             vm.isDetailValid = true; //case that incomplete record
             vm.temp = vm.countContacts()
-            if (vm.contactList.length == 0) {
-                /*vm.resetTableRow();*/
-            } else {
-                //deleted so this setting should be false
-                //TODO make generic
-                /*vm.tableRowExpanded = false;
-                 vm.tableRowIndexCurrExpanded = "";*/
-            }
+
         }
 
         /**
@@ -148,6 +141,5 @@
         }
 
     }
-
 
 })();

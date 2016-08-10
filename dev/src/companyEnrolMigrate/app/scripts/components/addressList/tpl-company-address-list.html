@@ -1,0 +1,28 @@
+<section class="panel  panel-default">
+    <header class="panel-heading">
+        <h3 class="panel-title">Company Address List</h3>
+    </header>
+    <div class="panel-body">
+        <div class="row">
+            <cmp-expanding-table list-items="addressListCtrl.contactList"
+                                 column-def="addressListCtrl.columnDef" select-record="addressListCtrl.selectRecord"
+                                 disable-selection="!addressListCtrl.isDetailValid">
+
+                <cmp-contact-record on-delete="addressListCtrl.deleteContact(contactId)"
+                                    on-update="addressListCtrl.onUpdateContactRecord(rec)"
+                                    is-amend="addressListCtrl.isAmend()" is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
+                                    is-detail-valid="addressListCtrl.setValid(state)">
+                </cmp-contact-record>
+
+            </cmp-expanding-table>
+        </div>
+        <div class="row mrgn-tp-md mrgn-bttm-lg">
+            <div class="btn-group-sm col-md-12 text-right">
+                <input type="submit" value="{{'ADD_ADDRESS'|translate}}" class="btn btn-primary" ng-click="contactListCtrl.addAddress()"
+                       ng-disabled="!addressListCtrl.detailsValid">
+                <input type="submit" value="Cancel" class="btn btn-default" data-ng-show="contactListCtrl.newAdrFormShow"
+                       ng-click="addressListCtrl.newAdrFormShow = false">
+            </div>
+        </div>
+    </div>
+</section>
