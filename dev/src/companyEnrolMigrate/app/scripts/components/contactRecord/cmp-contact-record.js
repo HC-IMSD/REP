@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactRecord', [])
+        .module('contactRecord', ['addressRole','contactModule'])
 })();
 
 (function () {
@@ -16,7 +16,7 @@
         .module('contactRecord')
         .component('cmpContactRecord', {
             templateUrl: 'app/scripts/components/contactRecord/tpl-contact-record.html',
-            controller: addressRecCtrl,
+            controller: contactRecCtrl,
             controllerAs: 'contactRec',
             require: {
                 trackRecordCtrl:    '^trackRecord'
@@ -32,19 +32,13 @@
                 isRoleSelected:'&'
             }
         });
-        addressRecCtrl.$inject=['$scope']
-    function addressRecCtrl($scope) {
+        contactRecCtrl.$inject=['$scope']
+    function contactRecCtrl($scope) {
         var vm = this;
         vm.savePressed=false;
         vm.isContact=true; //used to set the state of the role
        //TODO get role model from a servide
-        vm.roleModel = {
-            manufacturer: false,
-            mailing: false,
-            billing: false,
-            repPrimary: false,
-            repSecondary: false
-        };
+
         vm.contactModel={
                 roleConcat:"",
                 contactId: "",
@@ -160,7 +154,7 @@
              // vm.contactModel.isDetailValid=true;
               vm.isDetailValid({state:true})
               vm.contactRecForm.$setPristine() ;
-                vm.onUpdate({rec: vm.contactModel});
+                vm.onUpdate({contact: vm.contactModel});
             }
             vm.savePressed=true;
         }

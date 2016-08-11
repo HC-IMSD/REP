@@ -1,4 +1,4 @@
-<ng-form name="foo">
+<ng-form name="contactListCtrl.contactListForm">
     <section class="panel panel-default">
         <header class="panel-heading">
             <h3 class="panel-title">Company Contact List</h3>
@@ -6,12 +6,20 @@
         <div class="panel-body">
             <div class="row">
                 <!-- Place generic expander here-->
+                <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false" ng-model="contactListCtrl.allRolesSelected" required />
+                <label>
+                <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
+                        <span class="label label-danger" ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
+                            <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
+                        </span>
+                </strong>
+                </label>
                 <cmp-expanding-table list-items="contactListCtrl.contactList"
                                      column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
                                      disable-selection="!contactListCtrl.isDetailValid">
 
                     <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
-                                        on-update="contactListCtrl.onUpdateContactRecord(rec)"
+                                        on-update="contactListCtrl.onUpdateContactRecord(contact)"
                                         is-amend="contactListCtrl.isAmend()" is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                         is-detail-valid="contactListCtrl.setValid(state)">
                     </cmp-contact-record>

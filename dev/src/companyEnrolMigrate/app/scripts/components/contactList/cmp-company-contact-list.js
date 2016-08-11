@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactList2', [])
+        .module('contactList2', ['contactRecord','expandingTable'])
 })();
 
 (function () {
@@ -22,39 +22,39 @@
                 contacts: '<',
                 onUpdate: '&',
                 getNewContact: '&',
-                isAmend: '&'
+                isAmend: '&',
+                companyService:'<'
             }
         });
-    contactListCtrl.$inject = ['$filter']
-    function contactListCtrl($filter) {
+    contactListCtrl.$inject = ['$filter','CompanyService']
+    function contactListCtrl($filter,CompanyService) {
         var vm = this;
         vm.selectRecord=0; //the record to select
         vm.isDetailValid=true; //used to track if details valid. If they are  not do not allow expander collapse
+        vm.allRolesSelected=false;
         vm.contactList = [];
         vm.columnDef = [
             {
-                label: "First Name",
+                label: "FIRST_NAME",
                 binding:"givenName"
             },
             {
-                label: "Last Name",
+                label: "LAST_NAME",
                 binding:"surname"
             },
             {
-                label: "Title",
+                label: "JOB_TITLE",
                 binding:"title"
             },
             {
-                label: "Role",
+                label: "ROLES",
                 binding:"roleConcat"
-            },
+            }
         ]
         /**
          * using to get contact list
          */
         vm.$onInit = function () {
-            vm.temp = vm.countContacts();
-            //vm.detailsValid = true;
             vm.focused = false;
             vm.contactList = vm.contacts; //HERE Is how it is bound
         }
@@ -69,13 +69,22 @@
 
         }
 
+        vm.showError = function () {
+            console.log("form invalid"+vm.contactListForm.$invalid)
+            console.log("form touched"+vm.contactListForm.$touched)
+            if ((vm.contactListForm.$invalid )) {
+                return true
+            }
+            return false
+        }
+
         vm.onUpdateContactRecord = function (record) {
 
              var idx = vm.contactList.indexOf(
              $filter('filter')(vm.contactList, {contactId: record.contactId}, true)[0]
              ); //TODO fix filter
              vm.contactList[idx] = angular.copy(record);
-
+            vm.allRolesSelected= vm.isAllContactRolesSelected();
             // vm.isDetailValid=record.isDetailValid;
         }
 
@@ -86,15 +95,7 @@
             vm.contactList.splice(idx, 1);
             vm.onUpdate({newList: vm.contactList});
             vm.isDetailValid = true; //case that incomplete record
-            vm.temp = vm.countContacts()
-            if (vm.contactList.length == 0) {
-                /*vm.resetTableRow();*/
-            } else {
-                //deleted so this setting should be false
-                //TODO make generic
-                /*vm.tableRowExpanded = false;
-                 vm.tableRowIndexCurrExpanded = "";*/
-            }
+            vm.isAllContactRolesSelected()
         }
 
         /**
@@ -108,20 +109,6 @@
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
         }
-
-
-
-        vm.countContacts = function () {
-            if (!vm.contactList) return 0;
-            for (var i = 0; i < vm.contactList.length; i++) {
-                //todo account roles
-            }
-
-            return (vm.contactList.length)
-        }
-
-
-
 
         /**
          * @ngdoc method - checks if all the roles have been selected
@@ -146,8 +133,38 @@
             }
             return false;
         }
+        /**
+         * @ngdoc method checks if all the contact roles have been selected
+         * @returns {boolean}
+         */
+        vm.isAllContactRolesSelected=function(){
+            var rolesSelected = 0;
+            var repPrimarySelected=false;
+            var repSecondarySelected=false;
+            if (!vm.contactList) return false;
+          var companyRole= vm.companyService.createContactRole();
+            var numKeys=vm.companyService.getNumberKeys(companyRole);
 
+           for(var i=0;i<vm.contactList.length;i++) {
+               var obj = vm.contactList[i].addressRole;
+               for (var key in obj) {
+                   var attrName = key;
+                   var attrValue = obj[key];
+                   if (attrValue && companyRole.hasOwnProperty(attrName)) {
+                       rolesSelected++;
+                       if(key==="repPrimary") repPrimarySelected=true;
+                       if(key==="repSecondary") repSecondarySelected=true;
+                   }
+               }
+           }
+            if(rolesSelected===numKeys){
+                return true;
+            }
+            if(rolesSelected===(numKeys-1) &&(repPrimarySelected &&!repSecondarySelected)){
+                return true;
+            }
+            return false;
+        }
     }
-
 
 })();

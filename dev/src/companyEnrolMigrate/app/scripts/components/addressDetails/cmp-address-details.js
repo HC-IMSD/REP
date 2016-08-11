@@ -16,57 +16,54 @@
 
 (function () {
     'use strict';
-    angular.module('addressModule').component('cmpAddressDetails', {
-        templateUrl: 'app/views/tpl-address-details.html',
-        controller: addressCtrl,
-        controllerAs: 'adr',
-        bindings: {
-            addressRecord: '<',
-            selectedCountry: '<', // The current selected country
-            onUpdate: '&',
-            onDelete: '&',
-            isAmend: '&',
-            updateValid:'&' //tells parent that the details are valid/not valid
-        }
-    });
-
+    angular
+        .module('addressModule')
+        .component('cmpAddressDetails', {
+            templateUrl: 'app/scripts/components/addressDetails/tpl-address-details.html',
+            controller: addressCtrl,
+            controllerAs: 'adr',
+            bindings: {
+                addressRecord: '<',
+                onUpdate: '&',
+                showErrors: '&',
+                isAmend: '&'
+            }
+        });
     addressCtrl.$inject = ['$scope', 'getCountryAndProvinces', 'getCountriesISO3166'];
 
     function addressCtrl($scope, getCountryAndProvinces, getCountriesISO3166) {
 
         var vm = this;
         //put model updates in ng-change but defer on blur. Now model updates on blur only if it changed
+        vm.ngModelOptSetting = {updateOn: 'blur'};
 
+        vm.addressModel = {
+            addressID: "",
+            isDetailValid: false,
+            //amendRecord: false,
+            /*addressRole: {
+             manufacturer: false,
+             mailing: false,
+             billing: false,
+             importer: false
+             },*/
+            companyName: "",
+            street: "",
+            city: "",
+            country: "",
+            stateLov: "",
+            stateText: "",
+            postalCode: ""
+
+        };
+        vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
+
+        vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
+        vm.hideProvinceText = false;
+        vm.countries = getCountriesISO3166.getCountryList3Letter();
         vm.$onInit = function () {
-            vm.ngModelOptSetting = {updateOn: 'blur'}
-            vm.addressModel = {
-                addressID: "",
-                isDetailValid: false,
-                //amendRecord: false,
-                /*addressRole: {
-                    manufacturer: false,
-                    mailing: false,
-                    billing: false,
-                    importer: false
-                },*/
-                companyName: "",
-                street: "",
-                city: "",
-                country: "",
-                stateLov: "",
-                stateText:"",
-                postalCode: ""
 
-            };
-            vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
-
-            vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
-            //"^([a-zA-Z]\d[a-zA-Z]( )?\d[a-zA-Z]\d)$"
-
-            vm.hideProvinceText = false;
-            vm.countries = getCountriesISO3166.getCountryList3Letter();
             if (vm.addressRecord) {
-
                 //vm.addressModel = angular.extend({},vm.addressRecord); THIS causes focus grief
                 vm.addressModel = vm.addressRecord;
                 vm.provListLabel = getProvinceListLabel();
@@ -79,6 +76,22 @@
 
             }
         }
+        /**
+         * @ngdoc method updates if the model changes
+         * @param changes
+         */
+        vm.$onChanges = function (changes) {
+            if (changes.addressRecord) {
+                vm.addressModel = changes.addressRecord.currentValue;
+            }
+        };
+        vm.showError = function (ctrl) {
+            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
+                return true
+            }
+            return false
+        }
+
         vm.onDeleteButtonClick = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
         }
@@ -88,10 +101,6 @@
             $scope.addressForm.$setPristine();
         }
 
-
-        vm.$onChanges = function (changes) {
-            //console.log("AddressDetails onChanges being called")
-        };
 
         vm.onSelectedCountryChange = function (newValue) {
             vm.addressModel.country = newValue;
@@ -105,34 +114,29 @@
             vm.hideProvinceText = getProvinceTextState();
             vm.postalPattern = getPostalPattern();
             vm.hideProvinceDdl = !vm.hideProvinceText;
-            //update the country value into the model
-            vm.updateAddressModel();
+
         }
 
         vm.onAddressRoleUpdate = function (newRole) {
-          //  vm.addressModel.addressRole = newRole;
-           // vm.updateAddressModel();
+            //  vm.addressModel.addressRole = newRole;
+            // vm.updateAddressModel();
 
         }
         //update the data model for the main form
-        vm.updateAddressModel = function () {
+      /*  vm.updateAddressModel = function () {
             vm.addressModel.isDetailValid = $scope.addressForm.$valid;
-            vm.updateValid({validState:vm.addressModel.isDetailValid});
-           // vm.onUpdate({address: vm.addressModel});
-        }
+            vm.updateValid({validState: vm.addressModel.isDetailValid});
+            // vm.onUpdate({address: vm.addressModel});
+        }*/
 
-        vm.setNotEditable=function(){
-            if(vm.isAmend() &&!vm.addressModel.amendRecord){
+        vm.setNotEditable = function () {
+            if (vm.isAmend() && !vm.addressModel.amendRecord) {
                 return true;
             }
             return false
         }
 
-        vm.showError = function (control) {
-            if (control.$invalid &&!control.$pristine) {
-                return true;
-            }
-        }
+
         var getProvinceTextState = function () {
 
             var isCanOrUsa = isPostalRequiredFn();
