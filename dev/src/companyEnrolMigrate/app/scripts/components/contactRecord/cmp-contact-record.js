@@ -71,11 +71,12 @@
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
                 var rec=vm.trackRecordCtrl.trackRecord();
-
-                //only bind if there is a record. Should never happen
+                //only bind if there is a record. Should never happen that there is no record
                 if(rec) {
                     vm.contactModel = angular.copy(rec);
                     vm.contactModel.roleConcat=_getRolesConcat();
+                    //TODO check if empty, don't change focus
+                    angular.element(saveContact).trigger('focus');
                 }
         }
 
@@ -106,16 +107,12 @@
          * @param changes
          */
         vm.$onChanges=function(changes){
-
-            //how this is currently wire, this will never fire!
+            //how this is currently wired, this will never fire!
             if(changes.contactRecord.currentValue) {
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
 
             }
-
         }
-
-
 
         /**
          *  calls the delete function on the parent
@@ -130,8 +127,6 @@
             if(vm.contactRecForm.$pristine) return;
             var currRecord=vm.trackRecordCtrl.trackRecord()
             vm.contactModel =angular.copy(currRecord);
-            //vm.contactRecForm.$setPristine();
-            //vm.contactRecForm.$setUntouched();
             vm.isDetailValid({state:vm.contactRecForm.$valid});
             vm.savePressed=false;
         }
@@ -142,9 +137,10 @@
             vm.contactModel.addressRole = aRole;
             vm.updateContactModel2();
         }
-
+        /**
+         * @ngdoc method -Updates the parent on whether this record is valid or not
+         */
         vm.updateValid=function(){
-           // vm.contactModel.isDetailValid=vm.contactRecForm.$valid && !vm.contactRecForm.$dirty ;
             vm.isDetailValid({state:(vm.contactRecForm.$valid && !vm.contactRecForm.$dirty) });
         }
 
@@ -159,7 +155,6 @@
          * Updates the contact model used by the save button
          */
         vm.updateContactModel2 = function () {
-           // vm.contactModel.isDetailValid=vm.contactRecForm.$valid && !vm.contactRecForm.$dirty ;
             vm.contactModel.roleConcat=_getRolesConcat();
           if(vm.contactRecForm.$valid) {
              // vm.contactModel.isDetailValid=true;

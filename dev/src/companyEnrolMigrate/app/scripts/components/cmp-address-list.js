@@ -39,7 +39,6 @@
 
         }
         vm.$onInit = function () {
-            console.log("Address list onInit")
             vm.detailsValid = true;
             vm.focused = false;
             vm.tableRowExpanded = false;
@@ -79,7 +78,6 @@
             vm.detailsValid = detailValid;
         }
         vm.onUpdateAddressRecord = function (address) {
-            console.log("AddressList: onUpdateAddressRecord")
             vm.detailsValid = address.isDetailValid;
             var idx = vm.addressList.indexOf(
                 $filter('filter')(vm.addressList, {addressID: address.addressID}, true)[0]

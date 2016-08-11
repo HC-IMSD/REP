@@ -39,7 +39,6 @@
 
         vm.$onInit = function () {
             vm.ngModelOptSetting = {updateOn: 'blur'}
-            console.log("one init address details")
             vm.addressModel = {
                 addressID: "",
                 isDetailValid: false,
@@ -81,7 +80,6 @@
             }
         }
         vm.onDeleteButtonClick = function () {
-            console.log("delete button click: " + vm.addressModel.addressID);
             vm.onDelete({addressId: vm.addressModel.addressID});
         }
 

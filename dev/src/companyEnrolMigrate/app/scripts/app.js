@@ -32,12 +32,10 @@
         vm.applTypes = ["NEW", "AMEND", "APPROVED"] //TODO service ofor app types
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
-       /* if(!vm.companyForm){
-            vm.companyForm={}
-        }*/
-        vm.getFormState=function() {
+
+        /*vm.getFormState=function() {
             console.log("Is invalid"+vm.companyEnrolForm.$invalid)
-        }
+        }*/
         var _company = new CompanyService();
 
        vm.company = {
@@ -92,7 +90,6 @@
                 incrementMinorVersion();
             }
             var writeResult=_company.transformToFileObj(vm.company);
-            console.log("Pre write "+JSON.stringify(vm.company))
             return writeResult;
         }
 
@@ -104,7 +101,6 @@
             }
         }
         function _loadFileContent(fileContent) {
-            console.log("Calling the content callback")
             if(!fileContent)return;
             _company = new CompanyService();
             //used to do this way, caused focus issues
@@ -140,14 +136,12 @@
         }
 
         vm.getNewContact = function () {
-            console.log("This is hte contact gte")
             var result = _company.createContactRecord();
             return result;
         }
 
         //TODO remove?
         vm.updateAddressRecord=function(address){
-            console.log("in app updateAddressRecord"+address)
             if(!address) return;
             var idx = vm.company.addressList.indexOf(
                 $filter('filter')(vm.company.addressList, {addressID: address.addressID}, true)[0]

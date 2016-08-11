@@ -151,17 +151,8 @@
                                           form-name="companyForm"
                                           on-update="main.updateAddressRecord(address)" is-amend="main.isAmend()"
                                           get-new-address="main.getNewAddress()"></cmp-address-list>
-                        <cmp-contact-list2 contacts="main.company.contactList" get-new-contact="main.getNewContact()" is-amend="main.isAmend()"></cmp-contact-list2>
+                        <cmp-company-contact-list contacts="main.company.contactList" get-new-contact="main.getNewContact()" is-amend="main.isAmend()"></cmp-company-contact-list>
                     </div>
-                   <!-- <div>
-
-
-
-                        <cmp-contact-list ng-if="main.company.contactList" contacts="main.company.contactList"
-                                          form-name="companyForm" get-new-contact="main.getNewContact()"
-                                          is-amend="main.isAmend()"
-                                          on-update="main.onUpdateContactList(newList)"></cmp-contact-list>
-                    </div>-->
                 </section>
                 <div class="row">
                     <div class="form-group col-md-3">
@@ -262,13 +253,13 @@
 <script src="app/scripts/services/company-service.js"></script>
 <script src="app/scripts/services/data-lists.js"></script>
 <script src="app/scripts/components/cmp-country-select.js"></script>
-<script src="app/scripts/components/cmp-address-role.js"></script>
+<script src="app/scripts/components/addressRole/cmp-address-role.js"></script>
 <script src="app/scripts/components/cmp-address-details.js"></script>
-<script src="app/scripts/components/cmp-contact-details.js"></script>
+<script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
 <script src="app/scripts/components/cmp-address-list.js"></script>
 <script src="app/scripts/components/cmp-contact-list.js"></script>
 <script src="app/scripts/components/contactRecord/cmp-contact-record.js"></script>
-<script src="app/scripts/components/contactList/cmp-contact-list2.js"></script>
+<script src="app/scripts/components/contactList/cmp-company-contact-list.js"></script>
 <script src="app/scripts/components/expandingTable/cmp-expanding-table.js"></script>
 <script src="app/scripts/components/expandingTable/track-record.js"></script>
 <!-- <script> var app = angular.module('app', []); </script>-->
