@@ -16,8 +16,8 @@
     'use strict';
 
     angular
-        .module('contactModule').
-        component('cmpContactDetails',{
+        .module('contactModule')
+        .component('cmpContactDetails',{
             templateUrl: 'app/scripts/components/contactDetails/tpl-contact-details.html',
             controller: contactCtrl,
             bindings: {
@@ -79,18 +79,6 @@
             return false
         }
 
-        /**
-         * Updates the contact role
-         * @param newRole
-         */
-       /* vm.onContactRoleUpdate = function (newRole) {
-            var aRole={};
-            console.log("Inside contact role update"+JSON.stringify(newRole))
-            angular.extend(aRole,newRole)
-            vm.contactModel.addressRole = aRole;
-            console.log(JSON.stringify(vm.contactModel));
-            vm.updateContactModel();
-        }*/
 
         /**
          * @ngdoc method -determines if the fields should be readonly by default

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressList', ['addressModule'])
+        .module('addressList', ['addressModule','expandingTable'])
 })();
 
 (function () {

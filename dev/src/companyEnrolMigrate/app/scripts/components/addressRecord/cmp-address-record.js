@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRecord', [])
+        .module('addressRecord', ['addressModule','addressRole'])
 })();
 
 (function () {
@@ -25,18 +25,18 @@
                 addressRecord: '<',
                 onUpdate: '&',
                 updateValid:'&',
-                checkRoles:'&',
+               checkRoles:'&',
                 onDelete:'&',
                 isAmend:'&',
-                isDetailValid:'&',
+               isDetailValid:'&',
                 isRoleSelected:'&'
             }
         });
         addressRecCtrl.$inject=['$scope']
     function addressRecCtrl($scope) {
         var vm = this;
-        vm.savePressed = false;
-        vm.isContact = true; //used to set the state of the role
+       vm.savePressed = false;
+        vm.isContact=false;
         //TODO get  model from a servide
         vm.addressModel = {
             addressID: 1,
@@ -56,7 +56,7 @@
             country: "",
             postalCode: ""
         };
-        vm.isOneSelected = function (type) {
+       vm.isOneSelected = function (type) {
             return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressId}));
         };
         vm.$onInit = function () {
@@ -67,7 +67,7 @@
                 vm.addressModel = angular.copy(rec);
                 vm.addressModel.roleConcat = _getRolesConcat();
                 //TODO check if empty, don't change focus
-                angular.element(saveContact).trigger('focus');
+                //angular.element(saveContact).trigger('focus');
             }
         };
 
@@ -119,11 +119,11 @@
             vm.savePressed = false;
         };
 
-        vm.onContactRoleUpdate = function (newRole) {
+        vm.onAddressRoleUpdate = function (newRole) {
             var aRole = {};
             angular.extend(aRole, newRole);
             vm.addressModel.addressRole = aRole;
-            vm.updateContactModel2();
+            vm.updateAddressModel2();
         };
         /**
          * @ngdoc method -Updates the parent on whether this record is valid or not
@@ -141,7 +141,8 @@
         /**
          * Updates the contact model used by the save button
          */
-        vm.updateContactModel2 = function () {
+        vm.updateAddressModel2 = function () {
+            console.log("updating the address")
             vm.addressModel.roleConcat = _getRolesConcat();
             if (vm.addressRecForm.$valid) {
                 if (vm.addressRecForm.$valid) {
