@@ -87,22 +87,7 @@
                 //defaultContact.contactId = this.getNextContactID();
                 return (defaultContact);
             },
-            createLifeCycleRecord: function () {
-                var defaultRecord = {
-                    "sequence_number": "0000",
-                    "date_filed": "",
-                    "control_number": "",
-                    "sequence_activity_type": "",
-                    "sequence_description_value": "",
-                    "sequence_from_date": "1",
-                    "sequence_to_date": "",
-                    "sequence_details": "",
-                    "sequence_version": "",
-                    "sequence_concat": ""
-                }
-                //TODO get next sequence number
-                return defaultRecord;
-            },
+
 
             //TODO transaction relevant
             /**
@@ -142,7 +127,7 @@
                         company_name: "",
                         same_regulatory_address: "N", //this may no longer be needed
 
-                        regulatory_activity_address: _mapRegActivityAddressToOuput(jsonObj.activityAddress),
+                        regulatory_activity_address: _mapAddressToOuput(jsonObj.activityAddress),
 
                     }
                 }
@@ -157,6 +142,39 @@
         };
         // Return a reference to the object
         return CompanyService;
+    }
+
+
+    function _transformLifecycleRecFromFileObj(lifecycleObj) {
+        var lifecycleRec = _createLifeCycleRecord();
+
+        lifecycleRec.sequence = lifecycleObj.sequence_number;
+        lifecycleRec.dateFiled = lifecycleObj.date_filed;
+        lifecycleRec.controlNumber = lifecycleObj.control_number;
+        lifecycleRec.activityType = lifecycleObj.sequence_activity_type;
+        lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
+        lifecycleRec.startDate = lifecycleObj.sequence_from_date;
+        lifecycleRec.endDate = lifecycleObj.sequence_to_date;
+        lifecycleRec.details = lifecycleObj.sequence_details;
+        lifecycleRec.version = lifecycleObj.sequence_version;
+        lifecycleRec.sequenceConcat = lifecycleObj.sequence_concat;
+        return (lifecycleRec);
+    }
+
+    function _mapLifecycleRecToOutput(lifecycleObj) {
+        var lifecycleRec = {};
+
+        lifecycleRec.sequence_number = lifecycleObj.sequence;
+        lifecycleRec.date_filed = lifecycleObj.dateFiled;
+        lifecycleRec.control_number = lifecycleObj.controlNumber;
+        lifecycleRec.sequence_activity_type = lifecycleObj.activityType;
+        lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
+        lifecycleRec.sequence_from_dates = lifecycleObj.startDate;
+        lifecycleRec.sequence_to_date = lifecycleObj.endDate;
+        lifecycleRec.sequence_details = lifecycleObj.details;
+        lifecycleRec.sequence_version = lifecycleObj.version;
+        lifecycleRec.sequence_concat = lifecycleObj.sequenceConcat;
+        return (lifecycleRec);
     }
 
     function _transformRepContactFromFileObj(repObj) {
@@ -229,6 +247,23 @@
         address.country = address.country;
         address.postalCode = address.postal_code;
         return (address);
+    }
+
+    function _createLifeCycleRecord() {
+        var defaultRecord = {
+            "sequence": "0000",
+            "dateFiled": "",
+            "controlNumber": "",
+            "activityType": "",
+            "descriptionValue": "",
+            "startDate": "1",
+            "endDate": "",
+            "details": "",
+            "version": "",
+            "sequenceConcat": ""
+        }
+        //TODO get next sequence number
+        return defaultRecord;
     }
 
 
