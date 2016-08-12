@@ -5,47 +5,10 @@
         </label>
     </legend>
 
-    <div class="col-md-6 form-group" ng-repeat="item in chkl.listItems">
-        <label class="form-checkbox form-label-inline" for="chk-{{$index}}">
-            <input type="checkbox" name="addressRole" ng-model="ar.roleModel.manufacturer" id="chk-{{$index}}" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Manufacturer
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group" ng-repeat="item in chkl.listItems">
+        <label class="form-checkbox form-label-inline" for="chk-{{item.name}}-{{$index}}">
+            <input type="checkbox" name="item.commonName" ng-model="item.value" id="chk-{{item.name}}-{{$index}}"  ng-required="!chkl.someSelected()"> {{item.label}}
         </label>
     </div>
-
-    <div class="row">
-        <div class="col-md-6 form-group">
-            <label class="form-checkbox form-label-inline" for="chk-manufacturer">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.manufacturer" id="chk-manufacturer" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Manufacturer
-            </label>
-        </div>
-
-        <div class="col-md-6 form-group">
-            <label class="form-checkbox form-label-inline" for="chk-mailing">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.mailing" id="chk-mailing" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Mailing Address
-            </label>
-
-        </div>
-
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-6 form-group">
-            <label class="form-checkbox form-label-inline" for="chk-billing">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.billing" id="chk-billing" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Billing Address
-            </label>
-        </div>
-
-        <div class="col-md-6 form-group">
-            <label class="form-checkbox form-label-inline" for="chk-importer">
-                <input type="checkbox" name="addressRole" ng-model="ar.roleModel.importer" id="chk-importer" ng-change="ar.updateRoleModel()" ng-required="!ar.someSelected()"> Importer Address
-            </label>
-
-        </div>
-
-    </div>
-
-    <!--<pre>formName.addressRole: {{ar.formName.addressRole | json : spacing}}</pre>
-
-    <input type="hidden" ng-model="vm.roleModel" name="addressRole"  ng-change="ar.updateRoleModel()">-->
 
 </fieldset>
