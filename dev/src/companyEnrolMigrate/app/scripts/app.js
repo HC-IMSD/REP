@@ -5,11 +5,8 @@
             'pascalprecht.translate',
             'ngMessages',
             'ngAria',
-            'addressList',
-            'contactList',
-            'contactRecord',
+            'addressList2',
             'contactList2',
-            'expandingTable',
             'fileIO'
         ])
 })();
@@ -33,11 +30,9 @@
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
 
-        /*vm.getFormState=function() {
-            console.log("Is invalid"+vm.companyEnrolForm.$invalid)
-        }*/
         var _company = new CompanyService();
-
+        //TODO get rid of private variable
+        vm.companyService=_company;
        vm.company = {
            dataChecksum: "",
            enrolmentVersion: "1",
