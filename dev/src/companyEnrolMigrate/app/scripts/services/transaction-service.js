@@ -5,21 +5,13 @@
 (function () {
     'use strict';
     angular
-        .module('services', []);
-})();
-
-
-(function () {
-    'use strict';
-    angular
         .module('services')
         .factory('TransactionService', TransactionService)
 
     function TransactionService() {
-        // Define the CompanyService function
         function transactionService() {
             //construction logic
-            var defaultCompanyData = {
+            var defaultTransactionData = {
                 dataChecksum: "",
                 enrolmentVersion: "0.0",
                 dateSaved: "",
@@ -27,85 +19,47 @@
                 softwareVersion: "1.0.0",
                 companyId: "",
                 isEctd: "N",
-                "dossierId": "",
-                "dossierName": "",
-                "is_solicited": "",
-                "solicited_requester": "",
-                "regulatory_project_manager1": "",
-                "regulatory_project_manager2": "",
-                "same_regulatory_company": "N",
-                "company_name": "",
-                "same_regulatory_address": "N", //this may no longer be needed
-                "regulatory_activity_address": {
-                    "street_address": "",
-                    "city": "",
-                    "province_lov": "",
-                    "province_text": "",
-                    "country": "",
-                    "postal_code": ""
-                },
-
+                dossierId: "",
+                dossierName: "",
+                isSolicited: "",
+                solicitedRequester: "",
+                projectManager1: "",
+                projectManager2: "",
+                sameCompany: "N",
+                companyName: "",
+                sameAddress: "N", //this may no longer be needed
+                activityAddress: _getAddressModel(),
+                activityContact: _createContactModel(),
                 regulatorySubmissionContact: [],
                 lifecycleRecord: []
             };
-
-            /*
-             date_saved: jsonObj.dateSaved,
-             application_type: jsonObj.applicationType,
-             software_version: jsonObj.softwareVersion,
-             data_checksum: jsonObj.dataChecksum,
-             is_ectd:jsonObj.isEctd,
-             company_id: jsonObj.companyId,
-             dossier_id:jsonObj.dossierId,
-             dossier_name:jsonObj.dossierName
-
-             */
-
             angular.extend(this._default, defaultCompanyData);
-            this.contactId = 0;
             this.rootTag = "TRANSACTION_ENROL";
         }
 
         TransactionService.prototype = {
             _default: {},
             //TODO update
-            createSubContactRecord: function () {
-
-                var defaultContact = {
-                    contactRole: "PRIMARY",
-                    salutation: "",
-                    givenName: "",
-                    surname: "",
-                    initials: "",
-                    title: "",
-                    language: "",
-                    phone: "",
-                    phoneExt: "",
-                    fax: "",
-                    email: ""
-                };
-                //defaultContact.contactId = this.getNextContactID();
-                return (defaultContact);
-            },
-
 
             //TODO transaction relevant
             /**
              * ngDoc method- mapping from the transaction file json object to the internal representation
-             * @param jsonObj
+             * @param jsonObj the json object generated from the file
              */
             transformFromFileObj: function (jsonObj) {
 
                 var transactionInfo = this.getTransactionInfo(jsonObj[this.rootTag]);
-                // var addressInfo = {addressList: this.getAddressList(jsonObj[this.rootTag].address_record)};
-                //var contactInfo = {contactList: this.getContactList(jsonObj[this.rootTag].contact_record)};
                 //get rid of previous default if it exists
                 this._default = {};
-
-                angular.extend(this._default, companyInfo)
+                angular.extend(this._default, transactionInfo)
                 console.log("This is the transform " + JSON.stringify(this._default))
             },
             //TODO transaction relevant
+            /**
+             * @ngdoc transforms the object model to the compatible file JSON objecct
+             * @param jsonObj
+             * @returns json object compatible with the xml schema
+             * */
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
                 //var jsonObj = this._default
@@ -119,16 +73,17 @@
                         company_id: jsonObj.companyId,
                         dossier_id: jsonObj.dossierId,
                         dossier_name: jsonObj.dossierName,
-                        is_solicited: "",
-                        solicited_requester: "",
-                        regulatory_project_manager1: "",
-                        regulatory_project_manager2: "",
-                        same_regulatory_company: "N",
-                        company_name: "",
-                        same_regulatory_address: "N", //this may no longer be needed
-
+                        //lifecycle record here
+                        is_solicited: jsonObj.isSolicited,
+                        solicited_requester: jsonObj.requester,
+                        regulatory_project_manager1: jsonObj.projectManager1,
+                        regulatory_project_manager2: jsonObj.projectManager2,
+                        same_regulatory_company: jsonObj.sameCompany,
+                        company_name: jsonObj.companyName,
+                        same_regulatory_address: jsonObj.sameAddress, //this may no longer be needed
                         regulatory_activity_address: _mapAddressToOuput(jsonObj.activityAddress),
-
+                        same_regulatory_contact: jsonObj.sameCompany, //this may no longer be needed
+                        regulatory_activity_contact: _mapContactToOutput(jsonObj.activityContact)
                     }
                 }
                 return (resultJson);
@@ -136,7 +91,43 @@
             getModelInfo: function () {
                 return this._default;
             },
-            getTransactionInfo: function () {
+            /**
+             * @ngdoc method- transforms the file json to a model object
+             */
+            getTransactionInfo: function (jsonObj) {
+                if (!jsonObj)
+                    return this._default;
+
+                var model = this.default;
+                model.applicationType = jsonObj.application_type;
+                model.softwareVersion = jsonObj.software_version;
+                model.dataChecksum = jsonObj.data_checksum;
+                model.isEctd = jsonObj.is_ectd;
+                model.companyId = jsonObj.company_id;
+                model.dossierId = jsonObj.dossier_id;
+                model.dossierName = jsonObj.dossier_name;
+                model.isSolicited = jsonObj.is_solicited;
+                model.solicitedRequester = jsonObj.solicited_requester;
+
+                /* date_saved: jsonObj.dateSaved,
+                 application_type: jsonObj.applicationType,
+                 software_version: jsonObj.softwareVersion,
+                 data_checksum: jsonObj.dataChecksum,
+                 is_ectd: jsonObj.isEctd,
+                 company_id: jsonObj.companyId,
+                 dossier_id: jsonObj.dossierId,
+                 dossier_name: jsonObj.dossierName,
+                 //lifecycle record here
+                 is_solicited: "",
+                 solicited_requester: "",
+                 regulatory_project_manager1: "",
+                 regulatory_project_manager2: "",
+                 same_regulatory_company: "N",
+                 company_name: "",
+                 same_regulatory_address: "N", //this may no longer be needed
+                 regulatory_activity_address: _mapAddressToOuput(jsonObj.activityAddress),
+                 same_regulatory_contact:"Y", //this may no longer be needed
+                 regulatory_activity_contact: _mapContactToOutput(jsonObj.activityContact)*/
 
             }
         };
@@ -146,7 +137,7 @@
 
 
     function _transformLifecycleRecFromFileObj(lifecycleObj) {
-        var lifecycleRec = _createLifeCycleRecord();
+        var lifecycleRec = _createLifeCycleModel();
 
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
@@ -178,7 +169,6 @@
     }
 
     function _transformRepContactFromFileObj(repObj) {
-
         var repContact = _transformAddressFromFileObj(repObj.rep_submission_contact);
         repContact.repRole = repObj.rep_submission_contact_role;
     }
@@ -249,7 +239,7 @@
         return (address);
     }
 
-    function _createLifeCycleRecord() {
+    function _createLifeCycleModel() {
         var defaultRecord = {
             "sequence": "0000",
             "dateFiled": "",
@@ -264,6 +254,36 @@
         }
         //TODO get next sequence number
         return defaultRecord;
+    }
+
+    //TODO make a standard service
+    function _createAddressModel() {
+        return (
+        {
+            street: "",
+            city: "",
+            stateList: "",
+            stateText: "",
+            country: "",
+            "postalCode": ""
+        }
+        )
+    }
+
+    function _createContactModel() {
+        var contact = {};
+
+        contact.salutation = "";
+        contact.given_name = "";
+        contact.initials = "";
+        contact.surname = "";
+        contact.job_title = "";
+        contact.language_correspondance = "";
+        contact.phone_num = "";
+        contact.phone_ext = "";
+        contact.fax_num = "";
+        contact.email = "";
+        return contact;
     }
 
 
