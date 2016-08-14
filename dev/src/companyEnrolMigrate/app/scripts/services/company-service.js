@@ -142,7 +142,10 @@
                 }
             },
 
-
+            /**
+             * @ngdoc mehtod converts the file json to object model
+             * @param jsonObj
+             */
             transformFromFileObj: function (jsonObj) {
                 var rootTag = "COMPANY_ENROL"
                 var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);

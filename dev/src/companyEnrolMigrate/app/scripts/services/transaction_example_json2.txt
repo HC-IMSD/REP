@@ -16,7 +16,7 @@
       "sequence_description_value": "YEAR_LIST_OF_CHANGE",
       "sequence_from_date": "1999-01-21",
       "sequence_to_date": "1999-01-21",
-      "sequence_details": "A",
+      "sequence_details": "A"
       "sequence_version": "0",
       "sequence_concat": "string"
     },
@@ -82,3 +82,28 @@
     ]
   }
 }
+
+
+      dataChecksum: "",
+                enrolmentVersion: "0.0",
+                dateSaved: "",
+                applicationType: "NEW",
+                softwareVersion: "1.0.0",
+                companyId: "",
+                isEctd: "N",
+                dossierId: "",
+                dossierName: "",
+                isSolicited: "",
+                solicitedRequester: "",
+                projectManager1: "",
+                projectManager2: "",
+                sameCompany: "N",
+                companyName: "",
+                sameAddress: "N", //this may no longer be needed
+                activityAddress:_getAddressModel(),
+                activityContact:_createContactModel(),
+                regulatorySubmissionContact: [],
+                lifecycleRecord: []
+
+
+

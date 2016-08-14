@@ -29,6 +29,7 @@
                 companyName: "",
                 sameAddress: "N", //this may no longer be needed
                 activityAddress: _getAddressModel(),
+                sameContact: "N",
                 activityContact: _createContactModel(),
                 regulatorySubmissionContact: [],
                 lifecycleRecord: []
@@ -41,7 +42,10 @@
             _default: {},
             //TODO update
 
-            //TODO transaction relevant
+             getRootTag:function(){
+
+                 return("TRANSACTION_ENROL")
+             } ,
             /**
              * ngDoc method- mapping from the transaction file json object to the internal representation
              * @param jsonObj the json object generated from the file
@@ -99,6 +103,7 @@
                     return this._default;
 
                 var model = this.default;
+                model.dateSaved = jsonObj.date_saved;
                 model.applicationType = jsonObj.application_type;
                 model.softwareVersion = jsonObj.software_version;
                 model.dataChecksum = jsonObj.data_checksum;
@@ -108,33 +113,39 @@
                 model.dossierName = jsonObj.dossier_name;
                 model.isSolicited = jsonObj.is_solicited;
                 model.solicitedRequester = jsonObj.solicited_requester;
+                model.projectManager1 = jsonObj.regulatory_project_manager1;
+                model.projectManager2 = jsonObj.regulatory_project_manager2;
 
-                /* date_saved: jsonObj.dateSaved,
-                 application_type: jsonObj.applicationType,
-                 software_version: jsonObj.softwareVersion,
-                 data_checksum: jsonObj.dataChecksum,
-                 is_ectd: jsonObj.isEctd,
-                 company_id: jsonObj.companyId,
-                 dossier_id: jsonObj.dossierId,
-                 dossier_name: jsonObj.dossierName,
-                 //lifecycle record here
-                 is_solicited: "",
-                 solicited_requester: "",
-                 regulatory_project_manager1: "",
-                 regulatory_project_manager2: "",
-                 same_regulatory_company: "N",
-                 company_name: "",
-                 same_regulatory_address: "N", //this may no longer be needed
-                 regulatory_activity_address: _mapAddressToOuput(jsonObj.activityAddress),
-                 same_regulatory_contact:"Y", //this may no longer be needed
-                 regulatory_activity_contact: _mapContactToOutput(jsonObj.activityContact)*/
-
+                model.sameCompany = jsonObj.same_regulatory_company;
+                model.companyName = jsonObj.company_name;
+                model.sameAddress = jsonObj.same_regulatory_address;
+                //reg address
+                model.activityAddress = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
+                model.sameContact = jsonObj.same_regulatory_contact;
+                model.activityContact= _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
+                model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj);
+                model.lifecycleRecord=_mapLifecycleList(jsonObj);
             }
         };
         // Return a reference to the object
         return CompanyService;
     }
 
+    function _mapRegulatoryContactList(jsonObj) {
+        var result = [];
+        for (var i = 0; i < jsonObj.rep_submission_contact_record.length; i++) {
+            result.push(_transformRepContactFromFileObj(jsonObj.rep_submission_contact_record[i]));
+        }
+        return (result)
+    }
+
+    function _mapLifecycleList(jsonObj){
+        var result=[];
+        for(var i=0;i<jsonObj.lifecycle_record.length;i++) {
+            result.push(transformLifecycleRecFromFileObj(jsonObj.lifecycle_record[i]));
+        }
+        return result
+    }
 
     function _transformLifecycleRecFromFileObj(lifecycleObj) {
         var lifecycleRec = _createLifeCycleModel();
@@ -169,7 +180,8 @@
     }
 
     function _transformRepContactFromFileObj(repObj) {
-        var repContact = _transformAddressFromFileObj(repObj.rep_submission_contact);
+
+        var repContact = _transformContactFromFileObj(repObj.rep_submission_contact);
         repContact.repRole = repObj.rep_submission_contact_role;
     }
 
@@ -181,7 +193,7 @@
         return repContact;
     }
 
-    function _transformAddressFromFileObj(contactObj) {
+    function _transformContactFromFileObj(contactObj) {
         var contact = {};
         if (!contactObj) {
             console.error("There is no contact object")
@@ -200,6 +212,7 @@
         return contact;
     }
 
+
     function _mapContactToOutput(contactObj) {
 
         var contact = {};
@@ -216,7 +229,7 @@
         return contact;
     }
 
-    function _mapAddressToOuput(addressObj) {
+    function _mapAddressToOutput(addressObj) {
 
         var address = {};
         address.street_address = addressObj.street;

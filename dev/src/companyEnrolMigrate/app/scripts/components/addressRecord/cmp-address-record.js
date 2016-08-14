@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRecord', ['addressModule','addressRole'])
+        .module('addressRecord', ['addressModule', 'addressRole'])
 })();
 
 (function () {
@@ -19,24 +19,24 @@
             controller: addressRecCtrl,
             controllerAs: 'addressRec',
             require: {
-                trackRecordCtrl:    '^trackRecord'
+                trackRecordCtrl: '^trackRecord'
             },
             bindings: {
                 addressRecord: '<',
                 onUpdate: '&',
-                updateValid:'&',
-               checkRoles:'&',
-                onDelete:'&',
-                isAmend:'&',
-               isDetailValid:'&',
-                isRoleSelected:'&'
+                updateValid: '&',
+                checkRoles: '&',
+                onDelete: '&',
+                isAmend: '&',
+                isDetailValid: '&',
+                isRoleSelected: '&'
             }
         });
-        addressRecCtrl.$inject=['$scope']
+    addressRecCtrl.$inject = ['$scope']
     function addressRecCtrl($scope) {
         var vm = this;
-       vm.savePressed = false;
-        vm.isContact=false;
+        vm.savePressed = false;
+        vm.isContact = false;
         //TODO get  model from a servide
         vm.addressModel = {
             addressID: 1,
@@ -56,7 +56,7 @@
             country: "",
             postalCode: ""
         };
-       vm.isOneSelected = function (type) {
+        vm.isOneSelected = function (type) {
             return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressId}));
         };
         vm.$onInit = function () {
@@ -142,7 +142,6 @@
          * Updates the contact model used by the save button
          */
         vm.updateAddressModel2 = function () {
-            console.log("updating the address")
             vm.addressModel.roleConcat = _getRolesConcat();
             if (vm.addressRecForm.$valid) {
                 if (vm.addressRecForm.$valid) {
@@ -152,27 +151,28 @@
                 }
                 vm.savePressed = true;
             }
-            /**
-             * @ngdoc method toggles error state to make errors visible
-             * @returns {boolean}
-             */
-            vm.showErrors = function () {
+        };
+        /**
+         * @ngdoc method toggles error state to make errors visible
+         * @returns {boolean}
+         */
+        vm.showErrors = function () {
 
-                return (vm.savePressed)
-            };
-            /**
-             * @ngdoc method used to determine if record should be editable. Used for amend
-             * @returns {boolean}
-             */
-            vm.setNotEditable = function () {
+            return (vm.savePressed)
+        };
+        /**
+         * @ngdoc method used to determine if record should be editable. Used for amend
+         * @returns {boolean}
+         */
+        vm.setNotEditable = function () {
 
-                if (vm.isAmend() && !vm.addressModel.amendRecord) {
-                    return true;
-                }
-                return false;
+            if (vm.isAmend() && !vm.addressModel.amendRecord) {
+                return true;
             }
-
+            return false;
         }
+
     }
+
 
 })();
