@@ -83,7 +83,7 @@
                 $filter('filter')(vm.addressList, {addressID: address.addressID}, true)[0]
             );
             vm.addressList[idx] = address;
-          //  vm.onUpdate({address: address}); USED TO update a level up
+
         }
 
         vm.resetTableRow = function () {

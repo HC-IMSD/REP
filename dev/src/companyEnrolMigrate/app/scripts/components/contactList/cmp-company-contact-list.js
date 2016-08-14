@@ -70,9 +70,8 @@
         }
 
         vm.showError = function () {
-            console.log("form invalid"+vm.contactListForm.$invalid)
-            console.log("form touched"+vm.contactListForm.$touched)
-            if ((vm.contactListForm.$invalid )) {
+
+            if ((vm.contactListForm.$invalid && !vm.contactListForm.$pristine)) {
                 return true
             }
             return false
@@ -95,7 +94,8 @@
             vm.contactList.splice(idx, 1);
             vm.onUpdate({newList: vm.contactList});
             vm.isDetailValid = true; //case that incomplete record
-            vm.isAllContactRolesSelected()
+            vm.allRolesSelected= vm.isAllContactRolesSelected();
+
         }
 
         /**

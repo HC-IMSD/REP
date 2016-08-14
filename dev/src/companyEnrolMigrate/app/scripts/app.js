@@ -17,9 +17,9 @@
         .module('dossierApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['CompanyService','hpfbFileProcessing','$filter','$scope']
+    MainController.$inject = ['CompanyService','hpfbFileProcessing','$filter']
 
-    function MainController(CompanyService,hpfbFileProcessing,$filter,$scope) {
+    function MainController(CompanyService,hpfbFileProcessing,$filter) {
 
         var vm = this;
         //TODO magic number
@@ -29,7 +29,7 @@
         vm.applTypes = ["NEW", "AMEND", "APPROVED"] //TODO service ofor app types
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
-
+        vm.disableXML=true;
         var _company = new CompanyService();
         //TODO get rid of private variable
         vm.companyService=_company;
@@ -88,6 +88,14 @@
             return writeResult;
         }
 
+        function disableXMLSave(){
+            console.log("Is form invalid "+vm.companyEnrolForm.$invalid)
+            console.log("Is form pristine "+vm.companyEnrolForm.$pristine)
+            if(vm.companyEnrolForm.$invalid || vm.companyEnrolForm.$pristine){
+                return true;
+            }
+            return false;
+        }
         function _setComplete() {
             if (vm.company.companyId) {
                 vm.isIncomplete = false;
@@ -98,17 +106,15 @@
         function _loadFileContent(fileContent) {
             if(!fileContent)return;
             _company = new CompanyService();
-            //used to do this way, caused focus issues
-           // vm.company = _company.getModelInfo();
-
            var resultJson = fileContent.jsonResult;
-
             if(resultJson) {
                 _company.transformFromFileObj(resultJson)
                 vm.company={}
                 angular.extend(vm.company,_company.getModelInfo())
                 _setComplete();
+
             }
+            vm.disableXML=disableXMLSave();
         };
 
         /**

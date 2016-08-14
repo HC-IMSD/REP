@@ -87,10 +87,9 @@
     <!--Company Enrol Content starts here -->
 
     <div>
-        <ng-form id="reg-company-form" name="main.companyEnrolForm" ng-controller="MainController as main" novalidate="novalidate"
-              ng-init="main.initUser('EXT')">
-
-
+        <ng-form id="reg-company-form" name="main.companyEnrolForm" ng-controller="MainController as main"
+                 novalidate="novalidate"
+                 ng-init="main.initUser('EXT')">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
                     <h2 class="panel-title">Load a Draft Company Enrolment File</h2>
@@ -147,20 +146,27 @@
                     </div>
 
                     <div>
-                        <cmp-company-address-list addresses="main.company.addressList" get-new-address="main.getNewAddress()" is-amend="main.isAmend()"></cmp-company-address-list>
+                        <cmp-company-address-list addresses="main.company.addressList"
+                                                  get-new-address="main.getNewAddress()" is-amend="main.isAmend()"
+                                                  company-service="main.companyService"></cmp-company-address-list>
 
-                        <cmp-company-contact-list contacts="main.company.contactList" get-new-contact="main.getNewContact()" is-amend="main.isAmend()" company-service="main.companyService"></cmp-company-contact-list>
+                        <cmp-company-contact-list contacts="main.company.contactList"
+                                                  get-new-contact="main.getNewContact()" is-amend="main.isAmend()"
+                                                  company-service="main.companyService"></cmp-company-contact-list>
                     </div>
                 </section>
                 <div class="row">
                     <div class="form-group col-md-3">
-                        <button  class="btn-default" ng-click="main.saveJson()">Save Working Copy</button>
+                        <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()">Save Working Copy</button>
                     </div>
                     <div class="form-group col-md-3">
-                        <button class="btn-default" id="btn_xmlSave" ng-click="main.saveXML()">Save Draft for submission</button>
+                        <button class="btn btn-default btn-lg active" disabled="main.disableXML" id="btn_xmlSave"
+                                ng-click="main.saveXML()">Save Draft for
+                            submission
+                        </button>
                     </div>
                 </div>
-                  <pre>overall: {{main.company | json : spacing}}</pre>
+                <pre>overall: {{main.company | json : spacing}}</pre>
             </div>
         </ng-form>
 
@@ -169,7 +175,7 @@
     <dl id="wb-dtmd">
         <dt>Date modified:&#32;</dt>
         <dd>
-            <time property="dateModified">2016-08-13</time>
+            <time property="dateModified">2016-08-14</time>
         </dd>
     </dl>
 </main>

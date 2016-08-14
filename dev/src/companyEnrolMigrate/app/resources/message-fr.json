@@ -3,5 +3,6 @@
   "MSG_ERR_EMAIL_FORMAT": "Veuillez fournir une adresse électronique valide.",
   "MSG_ERR_CONTACT_NUM": "fr_All the roles have to be used for the company contacts",
   "MSG_ERR_PHONE_FORMAT": "fr_Please specify a valid phone number",
-  "MSG_ERR_ALLROLE": "FR_Across the contact records, the roles of  manufacturer, mailing, billing, and REP primary contact must be selected"
+  "MSG_ERR_ALLROLE": "FR_Across the contact records, the roles of  manufacturer, mailing, billing, and REP primary contact must be selected",
+  "MSG_ERR_ADDRESSSROLE":"The roles of manufacturer, mailing,  and billing have not all been selected in the address list"
 }

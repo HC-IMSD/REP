@@ -57,7 +57,7 @@
             postalCode: ""
         };
         vm.isOneSelected = function (type) {
-            return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressId}));
+            return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressID}));
         };
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
@@ -67,7 +67,7 @@
                 vm.addressModel = angular.copy(rec);
                 vm.addressModel.roleConcat = _getRolesConcat();
                 //TODO check if empty, don't change focus
-                //angular.element(saveContact).trigger('focus');
+                angular.element(saveAddress).trigger('focus');
             }
         };
 
@@ -84,7 +84,7 @@
             if (addressRoles.mailing) {
                 result = result + " MAIL"
             }
-            if (addressRoles.repPrimary) {
+            if (addressRoles.importer) {
                 result = result + " IMP"
             }
             return result
@@ -106,7 +106,7 @@
          *  calls the delete function on the parent
          */
         vm.delete = function () {
-            vm.onDelete({contactId: vm.addressModel.contactId});
+            vm.onDelete({addressId: vm.addressModel.addressID});
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *
@@ -144,13 +144,11 @@
         vm.updateAddressModel2 = function () {
             vm.addressModel.roleConcat = _getRolesConcat();
             if (vm.addressRecForm.$valid) {
-                if (vm.addressRecForm.$valid) {
-                    vm.isDetailValid({state: true});
+                     vm.isDetailValid({state: true});
                     vm.addressRecForm.$setPristine();
                     vm.onUpdate({rec: vm.addressModel});
-                }
-                vm.savePressed = true;
             }
+            vm.savePressed = true;
         };
         /**
          * @ngdoc method toggles error state to make errors visible

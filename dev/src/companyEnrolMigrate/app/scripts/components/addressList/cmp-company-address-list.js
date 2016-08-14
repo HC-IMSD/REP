@@ -20,19 +20,20 @@
                 addresses: '<',
                 onUpdate: '&',
                 getNewAddress:'&',
-                isAmend:'&'
+                isAmend:'&',
+                companyService:'<'
             },
             controller: addressListCtrl,
             controllerAs: 'addressListCtrl'
         });
 
-    addressListCtrl.$inject = ['$filter'];
+    addressListCtrl.$inject = ['$filter','CompanyService'];
 
-    function addressListCtrl($filter) {
+    function addressListCtrl($filter, CompanyService) {
 
         var vm = this;
         vm.selectRecord=0; //the record to select
-        vm.detailsValid = true;
+        vm.isDetailsValid=true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.addressList = [];
         vm.columnDef = [
             {
@@ -65,32 +66,32 @@
 
         }
 
+       /* vm.setValid=function(value){
+            vm.isDetailValid=value; //this is a shared value
+
+        }*/
 
         vm.deleteAddress = function (aID) {
             var idx = vm.addressList.indexOf(
                 $filter('filter')(vm.addressList, {addressID: aID}, true)[0]);
             vm.addressList.splice(idx, 1);
             vm.onUpdate({newList:vm.addressList});
-            vm.detailsValid = true; //case that incomplete record is deleted
-           /* if (vm.addressList.length == 0) {
-                vm.resetTableRow();
-            } else {
-                //deleted so this setting should be false
-                vm.tableRowExpanded = false;
-                vm.tableRowIndexCurrExpanded = "";
-            }*/
+            vm.isDetailsValid = true; //case that incomplete record is deleted
+            vm.allRolesSelected= vm.isAllRolesSelected();
+            console.log("delete contact roles status "+vm.allRolesSelected)
         }
 
         vm.addAddress = function () {
             var defaultAddress=vm.getNewAddress()
             vm.addressList.push(defaultAddress);
-            vm.detailsValid = true; //set to true to exapnd
+            vm.isDetailsValid = true; //set to true to exapnd
             vm.selectRecord=(vm.addressList.length - 1);
-          vm.detailsValid = false;
+            vm.isDetailsValid = false;
         }
 
         vm.updateValid=function(detailValid){
-            vm.detailsValid = detailValid;
+            vm.isDetailsValid = detailValid;
+            console.log("Address list detail valid"+detailValid)
         }
         vm.onUpdateAddressRecord = function (address) {
             //vm.detailsValid = address.isDetailValid;
@@ -98,6 +99,9 @@
                 $filter('filter')(vm.addressList, {addressID: address.addressID}, true)[0]
             );
             vm.addressList[idx] = angular.copy(address);
+            vm.allRolesSelected= vm.isAllRolesSelected();
+
+            vm.isDetailsValid = true;
         }
         vm.isREPRoleSelected = function (roleToCheck,recordID) {
             var rolesSelected = 0;
@@ -115,7 +119,48 @@
                 }
             }
             return false;
+        };
+        /**
+         * @ngdoc method determines the state of the list errors
+         *
+         * @returns {boolean}
+         */
+        vm.showError = function () {
+            if ((vm.addressListForm.$invalid && !vm.addressListForm.$pristine)) {
+                return true
+            }
+            return false
+        };
+
+        /**
+         * @ngdoc method determines if all the roles have been selected for the address
+         * @returns {boolean}
+         */
+        vm.isAllRolesSelected=function(){
+            var rolesSelected = 0;
+            //var repPrimarySelected=false;
+            //var repSecondarySelected=false;
+            if (!vm.addressList) return false;
+            var companyRole= vm.companyService.createAddressRole();
+            var numKeys=vm.companyService.getNumberKeys(companyRole);
+
+            for(var i=0;i<vm.addressList.length;i++) {
+                var obj = vm.addressList[i].addressRole;
+                for (var key in obj) {
+                    var attrName = key;
+                    var attrValue = obj[key];
+                    if (attrValue && companyRole.hasOwnProperty(attrName)) {
+                        rolesSelected++;
+                    }
+                }
+            }
+            if(rolesSelected===numKeys){
+                return true;
+            }
+            return false;
         }
+
+
 
     }
 })();

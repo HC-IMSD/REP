@@ -29,9 +29,9 @@
                 isAmend: '&'
             }
         });
-    addressCtrl.$inject = ['$scope', 'getCountryAndProvinces', 'getCountriesISO3166'];
+    addressCtrl.$inject = [ 'getCountryAndProvinces', 'getCountriesISO3166'];
 
-    function addressCtrl($scope, getCountryAndProvinces, getCountriesISO3166) {
+    function addressCtrl( getCountryAndProvinces, getCountriesISO3166) {
 
         var vm = this;
         //put model updates in ng-change but defer on blur. Now model updates on blur only if it changed
@@ -40,13 +40,6 @@
         vm.addressModel = {
             addressID: "",
             isDetailValid: false,
-            //amendRecord: false,
-            /*addressRole: {
-             manufacturer: false,
-             mailing: false,
-             billing: false,
-             importer: false
-             },*/
             companyName: "",
             street: "",
             city: "",
@@ -98,15 +91,12 @@
 
         vm.onDiscardButtonClick = function () {
             vm.addressModel = angular.extend({}, vm.addressRecord);
-            $scope.addressForm.$setPristine();
+            vm.addressForm.$setPristine();
         }
 
 
         vm.onSelectedCountryChange = function (newValue) {
             vm.addressModel.country = newValue;
-            //console.log("cmpAddress onSelectedCountryChange newValue: " + newValue);
-            // setCountry(vm.addressModel.country);
-            //vm.provinceTextState();
             vm.provListLabel = getProvinceListLabel();
             vm.postalLabel = getPostalLabel();
             vm.isPostalRequired = isPostalRequiredFn();
@@ -122,12 +112,6 @@
             // vm.updateAddressModel();
 
         }
-        //update the data model for the main form
-      /*  vm.updateAddressModel = function () {
-            vm.addressModel.isDetailValid = $scope.addressForm.$valid;
-            vm.updateValid({validState: vm.addressModel.isDetailValid});
-            // vm.onUpdate({address: vm.addressModel});
-        }*/
 
         vm.setNotEditable = function () {
             if (vm.isAmend() && !vm.addressModel.amendRecord) {
@@ -135,8 +119,18 @@
             }
             return false
         }
-
-
+        /**
+         * @ngdoc method formats canadian postal code to upper and space
+         */
+        vm.postalCodeChanged=function(){
+            var postal=vm.addressModel.postalCode;
+            if(!postal) return;
+            postal= postal.toUpperCase();
+            if(postal.length==6 && vm.addressModel.country === 'CAN'){
+                postal=postal.substring(0,3)+" "+postal.substring(3,postal.length)
+            }
+            vm.addressModel.postalCode=postal;
+        }
         var getProvinceTextState = function () {
 
             var isCanOrUsa = isPostalRequiredFn();

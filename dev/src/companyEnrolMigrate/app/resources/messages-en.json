@@ -4,5 +4,6 @@
  "MSG_ERR_ROLE":     "Please select at least one role",
  "MSG_ERR_CONTACT_NUM": "All the roles have to be used for the contacts",
  "MSG_ERR_PHONE_FORMAT": "Please specify a valid phone number",
- "MSG_ERR_ALLROLE": "The roles of manufacturer, mailing, billing, and primary REP contact  have not all been selected in the contact list"
+ "MSG_ERR_ALLROLE": "The roles of manufacturer, mailing, billing, and primary REP contact  have not all been selected among the list of contacts",
+ "MSG_ERR_ADDRESSSROLE":"The roles of manufacturer, mailing, billing, and importer have not all been selected among the list of addresses"
 }

@@ -47,7 +47,8 @@
                     manufacturer: false,
                     mailing: false,
                     billing: false,
-                    importer: false
+                    repPrimary:false,
+                    repSecondary:false
                 },
                 contactRole: "",
                 salutation: "",
@@ -141,7 +142,7 @@
         $scope.$watch('contactRec.contactRecForm.$dirty', function() {
             if(vm.contactRecForm.$dirty) {
                 //vm.contactModel.isDetailValid = false;
-                vm.isDetailValid({state:false})
+                vm.isDetailValid({state:vm.contactRecForm.$valid})
             }
         }, true);
 
