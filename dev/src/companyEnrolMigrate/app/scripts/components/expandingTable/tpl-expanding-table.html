@@ -21,7 +21,7 @@
                             data-ng-repeat-start="record in expandTblCtrl.listItems"
                             title="Click to toggle collapse/expand details for this contact."
                             data-ng-click="expandTblCtrl.selectTableRow($index)">
-                            <td ng-repeat="def in expandTblCtrl.columnDef">{{record[def.binding]}}</td>
+                            <td ng-repeat="def in expandTblCtrl.columnDef" width="{{def.width}}%">{{record[def.binding]|translate}}</td>
                         </tr>
                         <tr data-ng-show="!expandTblCtrl.dayDataCollapse[$index]" track-record=record data-ng-repeat-end>
                             <td colspan="{{expandTblCtrl.numberCols}}">

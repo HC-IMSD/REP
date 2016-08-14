@@ -89,10 +89,10 @@
                 result= result+" MAIL"
             }
             if(addressRoles.repPrimary){
-                result= result+" REP 1"
+                result= result+" REP1"
             }
             if(addressRoles.repSecondary){
-                result= result+" REP 2"
+                result= result+" REP2"
             }
             return result
         }
@@ -122,6 +122,8 @@
             if(vm.contactRecForm.$pristine) return;
             var currRecord=vm.trackRecordCtrl.trackRecord()
             vm.contactModel =angular.copy(currRecord);
+            //since we are reverting back to the last save should be pristine
+            vm.contactRecForm.$setPristine();
             vm.isDetailValid({state:vm.contactRecForm.$valid});
             vm.savePressed=false;
         }
@@ -138,11 +140,13 @@
         vm.updateValid=function(){
             vm.isDetailValid({state:(vm.contactRecForm.$valid && !vm.contactRecForm.$dirty) });
         }
-
+        /**
+         * If the form is dirty always set that it is not valid
+         */
         $scope.$watch('contactRec.contactRecForm.$dirty', function() {
+            //if statement redundant?
             if(vm.contactRecForm.$dirty) {
-                //vm.contactModel.isDetailValid = false;
-                vm.isDetailValid({state:vm.contactRecForm.$valid})
+                vm.isDetailValid({state:false})
             }
         }, true);
 

@@ -115,6 +115,7 @@
             if (vm.addressRecForm.$pristine) return;
             var currRecord = vm.trackRecordCtrl.trackRecord();
             vm.addressModel = angular.copy(currRecord);
+            vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
             vm.savePressed = false;
         };

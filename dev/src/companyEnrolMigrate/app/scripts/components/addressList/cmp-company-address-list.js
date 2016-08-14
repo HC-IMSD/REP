@@ -38,19 +38,23 @@
         vm.columnDef = [
             {
                 label: "COMPANY",
-                binding:"companyName"
+                binding:"companyName",
+                width:"30"
             },
             {
                 label: "CITY",
-                binding:"city"
+                binding:"city",
+                width:"25"
             },
             {
                 label: "COUNTRY",
-                binding:"country"
+                binding:"country",
+                width:"25"
             },
             {
-                label: "ROLE",
-                binding:"roleConcat"
+                label: "ROLES",
+                binding:"roleConcat",
+                width:"20"
             }
         ]
 

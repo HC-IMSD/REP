@@ -36,19 +36,23 @@
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
-                binding:"givenName"
+                binding:"givenName",
+                width:"25"
             },
             {
                 label: "LAST_NAME",
-                binding:"surname"
+                binding:"surname",
+                width:"30"
             },
             {
                 label: "JOB_TITLE",
-                binding:"title"
+                binding:"title",
+                width:"25"
             },
             {
                 label: "ROLES",
-                binding:"roleConcat"
+                binding:"roleConcat",
+                width:"20"
             }
         ]
         /**
@@ -65,6 +69,7 @@
         }
 
         vm.setValid=function(value){
+
             vm.isDetailValid=value; //this is a shared value
 
         }
