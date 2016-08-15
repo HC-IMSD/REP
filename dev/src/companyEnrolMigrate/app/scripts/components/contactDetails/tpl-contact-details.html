@@ -7,7 +7,7 @@
                 <span class="field-name">{{"SALUTATION"|translate}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                 <select id="contact-salut_{{$id}}" name="salutation" class="form-control"
-                        data-ng-model="$ctrl.contactModel.salutation"   ng-disabled="$ctrl.setNotEditable()"
+                        data-ng-model="$ctrl.contactModel.salutation" ng-disabled="$ctrl.isAmend"
                         ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                         ng-options="salut |translate for salut in $ctrl.salutationList" required>
                 </select>

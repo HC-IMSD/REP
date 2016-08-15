@@ -6,13 +6,15 @@
         <div class="panel-body">
             <div class="row">
                 <!-- Place generic expander here-->
-                <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false" ng-model="contactListCtrl.allRolesSelected" required />
+                <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false"
+                       ng-model="contactListCtrl.allRolesSelected" required/>
                 <label>
-                <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
-                        <span class="label label-danger" ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
+                    <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
+                        <span class="label label-danger"
+                              ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
                             <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
                         </span>
-                </strong>
+                    </strong>
                 </label>
                 <cmp-expanding-table list-items="contactListCtrl.contactList"
                                      column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
@@ -20,12 +22,13 @@
 
                     <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
                                         on-update="contactListCtrl.onUpdateContactRecord(contact)"
-                                        is-amend="contactListCtrl.isAmend()" is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
+                                        is-amend="contactListCtrl.isAmend()"
+                                        is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                         is-detail-valid="contactListCtrl.setValid(state)">
                     </cmp-contact-record>
 
                 </cmp-expanding-table>
-
+            </div>
                 <div class="row mrgn-tp-md mrgn-bttm-lg">
                     <div class="btn-group-sm col-md-12 text-right">
                         <input type="submit" value="Add Contact" class="btn btn-primary"
@@ -35,6 +38,7 @@
                                ng-click="contactListCtrl.newAdrFormShow=false">
                     </div>
                 </div>
-            </div>
+
+        </div>
     </section>
 </ng-form>

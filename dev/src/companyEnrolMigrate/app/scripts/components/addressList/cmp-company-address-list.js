@@ -32,7 +32,7 @@
     function addressListCtrl($filter, CompanyService) {
 
         var vm = this;
-        vm.selectRecord=0; //the record to select
+        vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailsValid=true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.addressList = [];
         vm.columnDef = [
@@ -61,28 +61,60 @@
         vm.$onInit = function () {
             //local var from binding
             vm.addressList = vm.addresses;
+            vm.allRolesSelected = vm.isAllRolesSelected();
+            updateRolesConcat();
         }
 
         vm.$onChanges=function(changes){
             if(changes.addresses && changes.addresses.currentValue) {
                 vm.addressList = changes.addresses.currentValue;
+                vm.allRolesSelected = vm.isAllRolesSelected();
+                updateRolesConcat();
             }
 
         }
 
-       /* vm.setValid=function(value){
-            vm.isDetailValid=value; //this is a shared value
+        function updateRolesConcat() {
+            if (!vm.addressList) return;
+            for (var i = 0; i < vm.addressList.length; i++) {
 
-        }*/
+                _setRolesConcat(vm.addressList[i]);
+            }
+
+        }
+
+        //this is needed on load. Bit of a hack
+
+        function _setRolesConcat(addressModel) {
+            var addressRoles = addressModel.addressRole;
+            var result = "";
+
+            if (addressRoles.manufacturer) {
+                result = result + " MAN"
+            }
+            if (addressRoles.billing) {
+                result = result + " BILL"
+            }
+            if (addressRoles.mailing) {
+                result = result + " MAIL"
+            }
+            if (addressRoles.importer) {
+                result = result + " IMP"
+            }
+            addressModel.roleConcat = result;
+        }
+
 
         vm.deleteAddress = function (aID) {
             var idx = vm.addressList.indexOf(
                 $filter('filter')(vm.addressList, {addressID: aID}, true)[0]);
             vm.addressList.splice(idx, 1);
             vm.onUpdate({newList:vm.addressList});
+            vm.selectRecord = -1;
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.allRolesSelected= vm.isAllRolesSelected();
-            console.log("delete contact roles status "+vm.allRolesSelected)
+            //select nothing
+
         }
 
         vm.addAddress = function () {

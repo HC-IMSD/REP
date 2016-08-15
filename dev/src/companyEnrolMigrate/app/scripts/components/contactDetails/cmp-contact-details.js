@@ -23,8 +23,8 @@
             bindings: {
                 contactRecord: '<',
                 onUpdate: '&',
-                isAmend: '&',
-                showErrors:'&'
+                isAmend: '<',
+                showErrors: '&',
             }
     });
 
@@ -82,9 +82,9 @@
          * @ngdoc method -determines if the fields should be readonly by default
          * @returns {boolean}
          */
-        //TODO valildated this is needed by the parent
+            //TODO refactor
         vm.setNotEditable=function(){
-            if(vm.isAmend() &&!vm.contactModel.amendRecord){
+            if (vm.isAmend) {
                 return true;
             }
             return false

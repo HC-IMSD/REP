@@ -37,6 +37,8 @@
         var vm = this;
         vm.savePressed=false;
         vm.isContact=true; //used to set the state of the role
+        vm.isNotEditable = false;
+
        //TODO get role model from a servide
 
         vm.contactModel={
@@ -69,7 +71,6 @@
                 //only bind if there is a record. Should never happen that there is no record
                 if(rec) {
                     vm.contactModel = angular.copy(rec);
-                    vm.contactModel.roleConcat=_getRolesConcat();
                     //TODO check if empty, don't change focus
                     angular.element(saveContact).trigger('focus');
                 }
@@ -122,6 +123,7 @@
             if(vm.contactRecForm.$pristine) return;
             var currRecord=vm.trackRecordCtrl.trackRecord()
             vm.contactModel =angular.copy(currRecord);
+            vm.setNotEditable()
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state:vm.contactRecForm.$valid});
@@ -172,15 +174,16 @@
             return(vm.savePressed)
         }
         /**
-         * @ngdoc method used to determine if record should be editable. Used for amend
+         * @ngdoc method used to determine if record should be editable. Used for amend button
          * @returns {boolean}
          */
         vm.setNotEditable=function(){
 
             if(vm.isAmend() &&!vm.contactModel.amendRecord){
-                return true;
+                vm.isNotEditable = true;
+            } else {
+                vm.isNotEditable = false
             }
-            return false
         }
 
     }

@@ -37,6 +37,7 @@
         var vm = this;
         vm.savePressed = false;
         vm.isContact = false;
+        vm.isNotEditable = false;
         //TODO get  model from a servide
         vm.addressModel = {
             addressID: 1,
@@ -64,6 +65,7 @@
             var rec = vm.trackRecordCtrl.trackRecord();
             //only bind if there is a record. Should never happen that there is no record
             if (rec) {
+
                 vm.addressModel = angular.copy(rec);
                 vm.addressModel.roleConcat = _getRolesConcat();
                 //TODO check if empty, don't change focus
@@ -98,7 +100,7 @@
             //how this is currently wired, this will never fire!
             if (changes.addressRecord.currentValue) {
                 vm.addressModel = angular.copy(changes.addressRecord.currentValue);
-
+                vm.addressModel.roleConcat = _getRolesConcat();
             }
         };
 
@@ -115,6 +117,7 @@
             if (vm.addressRecForm.$pristine) return;
             var currRecord = vm.trackRecordCtrl.trackRecord();
             vm.addressModel = angular.copy(currRecord);
+            vm.setNotEditable(); //case of amend
             vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
             vm.savePressed = false;
@@ -166,9 +169,10 @@
         vm.setNotEditable = function () {
 
             if (vm.isAmend() && !vm.addressModel.amendRecord) {
-                return true;
+                vm.isNotEditable = true;
+            } else {
+                vm.isNotEditable = false
             }
-            return false;
         }
 
     }

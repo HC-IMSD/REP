@@ -129,10 +129,18 @@
                                        ng-model="main.company.dateSaved" ng-readonly="true"/>
                             </div>
                             <div class="col-xs-3 form-group">
-                                <label for="company-id-text">Company ID</label>
-                                <input type="text" class="form-control" id="company-id-text"
-                                       ng-readonly="main.isExtern()" maxlength="6"
-                                       ng-model="main.company.companyId"/>
+                                <label for="company-id-text">Company ID
+                                    <input type="text" class="form-control" id="company-id-text"
+                                           ng-readonly="main.isExtern()" maxlength="6" name="companyID"
+                                           ng-model="main.company.companyId" ng-required="!main.isExtern()"/>
+                                    <strong id="code-error" class="error"
+                                    >
+                        <span class="label label-danger" ng-if="main.companyEnrolForm.companyID.$invalid"
+                              ng-messages="main.companyEnrolForm.companyID.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                                    </strong>
+                                </label>
                             </div>
                         </div>
                         <div class="row">
@@ -157,16 +165,17 @@
                 </section>
                 <div class="row">
                     <div class="form-group col-md-3">
-                        <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()">Save Working Copy</button>
+                        <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()"
+                        >Save Working Copy
+                        </button>
                     </div>
                     <div class="form-group col-md-3">
-                        <button class="btn btn-default btn-lg active" disabled="main.disableXML" id="btn_xmlSave"
-                                ng-click="main.saveXML()">Save Draft for
-                            submission
+                        <button class="btn btn-default btn-lg active" ng-disabled="main.disableXML" id="btn_xmlSave"
+                                ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
                         </button>
                     </div>
                 </div>
-                <pre>overall: {{main.company | json : spacing}}</pre>
+                <!--<pre>overall: {{main.company | json : spacing}}</pre>-->
             </div>
         </ng-form>
 

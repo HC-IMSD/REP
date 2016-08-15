@@ -25,7 +25,8 @@
                 formName: '<',
                 selectedCountry: '<',
                 countries: '<',
-                countryChange: '&'
+                countryChange: '&',
+                isDisabled: '<'
             }
         });
 

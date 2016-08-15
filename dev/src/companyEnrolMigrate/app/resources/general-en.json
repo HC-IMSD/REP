@@ -17,5 +17,7 @@
   "MAILING": "Mailing",
   "BILLING": "Billing",
   "MANUFACT": "Manufacturer",
-  "IMPORTER": "Importer"
+  "IMPORTER": "Importer",
+  "APPROVE_FINAL": "Approve Final XML",
+  "SAVE_DRAFT": "Save Draft for submission"
 }

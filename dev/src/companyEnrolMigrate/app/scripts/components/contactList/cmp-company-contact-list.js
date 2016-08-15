@@ -29,7 +29,7 @@
     contactListCtrl.$inject = ['$filter','CompanyService']
     function contactListCtrl($filter,CompanyService) {
         var vm = this;
-        vm.selectRecord=0; //the record to select
+        vm.selectRecord = -1; //the record to select
         vm.isDetailValid=true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.allRolesSelected=false;
         vm.contactList = [];
@@ -61,12 +61,50 @@
         vm.$onInit = function () {
             vm.focused = false;
             vm.contactList = vm.contacts; //HERE Is how it is bound
+            updateRolesConcat();
+            vm.allRolesSelected = vm.isAllContactRolesSelected();
         }
         vm.$onChanges = function (changes) {
             if(changes.contacts && changes.contacts.currentValue) {
                 vm.contactList = changes.contacts.currentValue;
+                updateRolesConcat();
+                vm.allRolesSelected = vm.isAllContactRolesSelected();
             }
         }
+
+        function updateRolesConcat() {
+            if (!vm.contactList) return;
+            for (var i = 0; i < vm.contactList.length; i++) {
+
+                _setRolesConcat(vm.contactList[i]);
+            }
+
+        }
+
+        //this is needed on load. Bit of a hack
+
+        function _setRolesConcat(contactModel) {
+            var roles = contactModel.addressRole;
+            var result = "";
+
+            if (roles.manufacturer) {
+                result = result + " MAN"
+            }
+            if (roles.billing) {
+                result = result + " BILL"
+            }
+            if (roles.mailing) {
+                result = result + " MAIL"
+            }
+            if (roles.repPrimary) {
+                result = result + " REP1"
+            }
+            if (roles.repSecondary) {
+                result = result + " REP2"
+            }
+            contactModel.roleConcat = result;
+        }
+
 
         vm.setValid=function(value){
 
@@ -99,6 +137,7 @@
             vm.onUpdate({newList: vm.contactList});
             vm.isDetailValid = true; //case that incomplete record
             vm.allRolesSelected= vm.isAllContactRolesSelected();
+            vm.selectRecord = -1
 
         }
 

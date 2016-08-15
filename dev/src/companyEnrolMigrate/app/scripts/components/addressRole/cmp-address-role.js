@@ -24,7 +24,8 @@
                 onUpdate: '&',
                 showErrors:'&',
                 isContact:'<',
-                alreadySelected:'&'
+                alreadySelected: '&',
+                isAmend: '<'
             }
         });
 
@@ -109,7 +110,6 @@
             }
             return false
         }
-
 
 
     }

@@ -8,7 +8,7 @@
                     <input type="text" id="companyName" name="companyName"
                            ng-model="adr.addressModel.companyName"
                            class="form-control full-width" maxlength="80" size="60"
-                           ng-readonly="adr.setNotEditable()"
+                           ng-readonly="adr.isAmend"
                            required/>
                     <strong id="companyName-error" class="error" ng-if="adr.showError(addressForm.companyName)">
                         <span class="label label-danger" ng-messages="addressForm.companyName.$error">
@@ -24,7 +24,7 @@
                     <span class="field-name">{{"STREET" |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                     <input type="text" class="form-control full-width" maxlength="120" id="street_{{$id}}"
-                           name="street" ng-readonly="adr.setNotEditable()"
+                           name="street" ng-readonly="adr.isAmend"
                            data-ng-model="adr.addressModel.street" required/>
                     <strong id="street-error" class="error" ng-if="adr.showError(addressForm.street)">
                         <span class="label label-danger" ng-messages="addressForm.street.$error">
@@ -41,7 +41,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="city_{{$id}}" name="city" data-ng-model="adr.addressModel.city"
                            class="form-control  full-width" maxlength="60"
-                           ng-readonly="adr.setNotEditable()" required/>
+                           ng-readonly="adr.isAmend" required/>
                     <strong id="city-error" class="error" ng-if="adr.showError(addressForm.city)">
                         <span class="label label-danger" ng-messages="addressForm.city.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-6">
                 <cmp-country-select form-name="addressForm" selected-country="adr.addressModel.country"
-                                    countries="adr.countries"
+                                    countries="adr.countries" is-disabled="adr.isAmend"
                                     country-change="adr.onSelectedCountryChange($event.country)"
                 ></cmp-country-select>
             </div>
@@ -63,14 +63,13 @@
                     <label for="provinceList_{{$id}}" class="required">
                         <span class="field-name">{{adr.provListLabel |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                        <select class="form-control full-width" data-ng-model="adr.addressModel.provState"
+                        <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
                                 id="provinceList_{{$id}}" name="provinceList"
                                 data-ng-options="province |translate for province in adr.provinces"
-                                ng-disabled="adr.setNotEditable()"></select>
+                                ng-disabled="adr.isAmend"></select>
                         <strong id="provinceList-error" class="error"
                                 ng-if="adr.showError(addressForm.provinceList)">
-                        <span class="label label-danger"
-                              ng-messages={'has-error':"adr.showError(addressForm.provinceList)}">
+                        <span class="label label-danger" ng-messages="addressForm.provinceList.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                         </strong>
@@ -80,7 +79,7 @@
                     <label for="stateText_{{$id}}">{{"PROVSTATE" |translate}}</label>
                     <input type="text" id="stateText_{{$id}}" name="provinceText"
                            data-ng-model="adr.addressModel.stateText" class="form-control full-width" maxlength="40"
-                           size="40" ng-readonly="adr.setNotEditable()"/>
+                           size="40" ng-readonly="adr.isAmend"/>
                 </div>
             </div>
             <div class="form-group col-md-6">
@@ -91,7 +90,7 @@
                     <input type="text" id="postal_{{$id}}" name="postal" data-ng-model="adr.addressModel.postalCode"
                            class="form-control full-width" ng-maxlength="7" ng-required="adr.isPostalRequired"
                            ng-change="adr.postalCodeChanged()" ng-model-options="adr.ngModelOptSetting"
-                           maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="adr.setNotEditable()"/>
+                           maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="adr.isAmend"/>
                     <strong id="postal-error" class="error" ng-if="adr.showError(addressForm.postal)">
                             <span class="label label-danger" ng-messages="addressForm.postal.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}} </span>

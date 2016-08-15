@@ -26,7 +26,7 @@
                 addressRecord: '<',
                 onUpdate: '&',
                 showErrors: '&',
-                isAmend: '&'
+                isAmend: '<'
             }
         });
     addressCtrl.$inject = [ 'getCountryAndProvinces', 'getCountriesISO3166'];
@@ -113,12 +113,6 @@
 
         }
 
-        vm.setNotEditable = function () {
-            if (vm.isAmend() && !vm.addressModel.amendRecord) {
-                return true;
-            }
-            return false
-        }
         /**
          * @ngdoc method formats canadian postal code to upper and space
          */
@@ -136,10 +130,10 @@
             var isCanOrUsa = isPostalRequiredFn();
 
             if (isCanOrUsa) {
-                vm.addressModel.stateText = null;
+                vm.addressModel.stateText = "";
 
             } else {
-                vm.addressModel.stateList = null;
+                vm.addressModel.stateList = "";
             }
 
             return isCanOrUsa;

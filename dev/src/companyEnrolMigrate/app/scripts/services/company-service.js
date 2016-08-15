@@ -30,33 +30,41 @@
         CompanyService.prototype = {
             _default: {},
 
-            getNumberKeys:function(obj){
-                var numKeys=0;
+            getNumberKeys: function (obj) {
+                var numKeys = 0;
                 //get the number of keys in the model
-                for(var prop in obj) {
+                for (var prop in obj) {
                     if (obj.hasOwnProperty(prop)) {
                         numKeys++;
                     }
                 }
                 return numKeys;
             },
-
-            createAddressRole: function() {
+            getApplicationTypes: function () {
+                return (["NEW", "AMEND", "APPROVED"])
+            },
+            getApprovedType: function () {
+                return "APPROVED";
+            },
+            getAmendType: function () {
+                return "AMEND";
+            },
+            createAddressRole: function () {
                 var defaultAddressRole = {
-                        manufacturer: false,
-                        mailing: false,
-                        billing: false,
-                        importer: false
+                    manufacturer: false,
+                    mailing: false,
+                    billing: false,
+                    importer: false
                 }
                 return (defaultAddressRole);
             },
-            createContactRole: function() {
+            createContactRole: function () {
                 var defaultContactRole = {
-                        manufacturer: false,
-                        mailing: false,
-                        billing: false,
-                        repPrimary: false,
-                        repSecondary: false
+                    manufacturer: false,
+                    mailing: false,
+                    billing: false,
+                    repPrimary: false,
+                    repSecondary: false
                 };
                 return (defaultContactRole);
             },
@@ -155,7 +163,6 @@
                 this._default = {};
 
                 angular.extend(this._default, companyInfo, addressInfo, contactInfo)
-                console.log("This is the transform " + JSON.stringify(this._default))
             },
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
@@ -268,13 +275,10 @@
                 var address = {};
                 address.address_id = adrList[i].addressID;
                 address.amend_record = adrList[i].amendRecord == true ? 'Y' : 'N';
-                address.manufacturer = adrList[i].manufacturer == true ? 'Y' : 'N';
-                address.mailing = adrList[i].mailing == true ? 'Y' : 'N';
-                ;
-                address.billing = adrList[i].billing == true ? 'Y' : 'N';
-                ;
-                address.importer = adrList[i].importer == true ? 'Y' : 'N';
-                ;
+                address.manufacturer = adrList[i].addressRole.manufacturer == true ? 'Y' : 'N';
+                address.mailing = adrList[i].addressRole.mailing == true ? 'Y' : 'N';
+                address.billing = adrList[i].addressRole.billing == true ? 'Y' : 'N';
+                address.importer = adrList[i].addressRole.importer == true ? 'Y' : 'N';
                 address.company_name = adrList[i].companyName;
                 address.company_address_details = {};
                 address.company_address_details.street_address = adrList[i].street;

@@ -17,5 +17,7 @@
   "MAILING": "fr_Mailing",
   "BILLING": "fr_Billing",
   "MANUFACT": "fr_Manufacturer",
-  "IMPORTER": "fr_Importer"
+  "IMPORTER": "fr_Importer",
+  "APPROVE_FINAL": "fr_Approve Final XML",
+  "SAVE_DRAFT": "fr_Save Draft for submission"
 }
