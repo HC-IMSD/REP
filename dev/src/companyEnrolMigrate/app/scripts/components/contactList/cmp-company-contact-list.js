@@ -71,7 +71,6 @@
         vm.setValid=function(value){
 
             vm.isDetailValid=value; //this is a shared value
-
         }
 
         vm.showError = function () {

@@ -15,6 +15,7 @@
   "FAX_NUMBER": "Fax Number",
   "PHONE_EXT": "Phone Extension",
   "ROLES": "Roles",
-  "PHONE_NUMBER":"Phone Number"
+  "PHONE_NUMBER": "Phone Number",
+  "CONTACT_INFO": "Contact Information"
 
 }

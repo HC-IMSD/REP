@@ -2,7 +2,7 @@
     <ng-form name="contactRec.contactRecForm">
         <div>
             <div>
-                <h2>Contact Record Details</h2>
+                <h3>Contact Details</h3>
 
                 <div class="row">
                     <div class="form-group" ng-show="contactRec.isAmend()">
@@ -15,7 +15,6 @@
                 </div>
             </div>
             <div>
-               <!-- <label>ID is  {{contactRec.contactModel.contactId}}</label>-->
                 <cmp-address-role record="contactRec.contactModel"
                                   is-contact="contactRec.isContact"
                                   on-update="contactRec.onContactRoleUpdate($event.roles)"

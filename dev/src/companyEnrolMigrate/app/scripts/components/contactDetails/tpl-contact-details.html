@@ -1,15 +1,7 @@
 <div class="container-fluid">
     <ng-form name="contactForm">
        <!-- <pre>{{contactForm.$error  | json : spacing}}</pre>-->
-
         <div class="row">
-            <div class="col-md-12 form-group">
-           <!-- <cmp-address-role record="$ctrl.contactModel.addressRole" form-name="contactForm" is-contact="$ctrl.isContact"
-                              on-update="$ctrl.onContactRoleUpdate($event.roles)" child-show-error="$ctrl.showChildError()"></cmp-address-role>-->
-            </div>
-        </div>
-        <div class="row">
-
             <div class="col-md-3 form-group" ng-class="{'has-error':contactForm.salutation.$invalid}">
             <label for="contact-salut_{{$id}}" class="required">
                 <span class="field-name">{{"SALUTATION"|translate}}</span>

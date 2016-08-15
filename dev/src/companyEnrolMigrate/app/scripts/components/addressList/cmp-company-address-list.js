@@ -95,7 +95,6 @@
 
         vm.updateValid=function(detailValid){
             vm.isDetailsValid = detailValid;
-            console.log("Address list detail valid"+detailValid)
         }
         vm.onUpdateAddressRecord = function (address) {
             //vm.detailsValid = address.isDetailValid;

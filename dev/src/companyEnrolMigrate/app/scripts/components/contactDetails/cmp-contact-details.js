@@ -35,7 +35,6 @@
         vm.salutationList = getContactLists.getSalutationList();
         vm.langCorrespondance = getContactLists.getLanguages();
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-        /* validate phoneNumber /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im*/
         vm.contactModel = {
             isDetailValid: false,
             contactId: "",
@@ -65,7 +64,6 @@
         }
         //TODO rename
         vm.$onChanges=function(changes){
-            // console.log("changes details")
             if(changes.contactRecord){
                 vm.contactModel = changes.contactRecord.currentValue;
 
@@ -91,60 +89,6 @@
             }
             return false
         }
-    }
-
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('contactModule')
-        .directive('testValid', testValid)
-
-    /* @ngInject */
-    function testValid() {
-        var directive = {
-            bindToController: true,
-            controller: foo,
-            controllerAs: 'vm',
-            require: 'ngModel',
-            link: link,
-            restrict: 'A',
-            scope: {
-                testValid:'='
-            }
-        };
-        return directive;
-
-       function link (scope, elm, attrs, ctrl) {
-
-            //new validation rule and name of the property
-           ctrl.$validators.integer = function(modelValue, viewValue) {
-                var INTEGER_REGEXP = /^\-?\d+$/;
-
-                if (ctrl.$isEmpty(modelValue)) {
-                    // consider empty models to be valid
-                    return true;
-                }
-
-                if (viewValue==theval) {
-                    // it is valid
-                    return true;
-                }
-
-                // it is invalid
-               modelValue=viewValue
-                return false;
-            };
-        }
-    }
-
-   // ControllerName.$inject = ['dependency'];
-
-    /* @ngInject */
-   function foo() {
-
     }
 
 })();

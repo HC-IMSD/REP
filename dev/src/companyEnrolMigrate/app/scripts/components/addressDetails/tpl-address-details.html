@@ -95,8 +95,8 @@
                     <strong id="postal-error" class="error" ng-if="adr.showError(addressForm.postal)">
                             <span class="label label-danger" ng-messages="addressForm.postal.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}} </span>
-                            <span ng-message="pattern" ng-if="(adr.addressModel.country === 'CAN')">Please specify a valid canadian postal code </span>
-                            <span ng-message="pattern" ng-if="(adr.addressModel.country === 'USA')">Please specify a valid american zip code </span>
+                            <span ng-message="pattern" ng-if="(adr.addressModel.country === 'CAN')">{{'MSG_ERR_POSTAL'|translate}} </span>
+                            <span ng-message="pattern" ng-if="(adr.addressModel.country === 'USA')">{{'MSG_ERR_ZIP'|translate}}  </span>
                         </span>
                     </strong>
                 </label>
