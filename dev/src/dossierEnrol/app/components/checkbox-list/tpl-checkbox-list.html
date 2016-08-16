@@ -1,11 +1,9 @@
 <fieldset>
-    <legend >
-        <label class="required">
+    <legend  class="required">
             <span class="field-name">{{chkl.title}}</span>
-        </label>
     </legend>
 
-    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 form-group" ng-repeat="item in chkl.currentModel">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group" ng-repeat="item in chkl.currentModel">
         <label class="form-checkbox form-label-inline" for="chk-{{item.name}}-{{$index}}">
             <input type="checkbox" name="chkl.commonName" ng-model="item.value" id="chk-{{item.name}}-{{$index}}"  ng-required="!chkl.someSelected()"> {{item.label}}
         </label>

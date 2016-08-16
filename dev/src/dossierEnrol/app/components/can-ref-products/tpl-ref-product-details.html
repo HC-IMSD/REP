@@ -1,8 +1,9 @@
-<div class="container">
+<div class="form-group">
 
     <fieldset>
         <legend>Product Details</legend>
-        <div class="row">
+
+
 
             <div class="col-md-4 form-group">
                 <label for="brand-name" class="required"><span class="field-name">{{'BRAND_NAME'|translate}}</span>
@@ -10,9 +11,9 @@
                 <input type="text" id="brand-name" data-ng-model="$ctrl.productModel.brandName"
                        class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
             </div>
-        </div>
 
-        <div class="row">
+
+
 
             <div class="col-md-4 form-group">
                 <label for="med-ingredient" class="required"><span class="field-name">{{'MEDICINAL_INGREDIENT'|translate}}</span>
@@ -20,9 +21,7 @@
                 <input type="text" id="med-ingredient" data-ng-model="$ctrl.productModel.medIngredient"
                        class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
             </div>
-        </div>
 
-        <div class="row">
 
             <div class="col-md-4 form-group">
                 <label for="strength" class="required"><span class="field-name">{{'STRENGTH'|translate}}</span>
@@ -30,10 +29,10 @@
                 <input type="text" id="strength" data-ng-model="$ctrl.productModel.strength"
                        class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
             </div>
-        </div>
 
 
-        <div class="row">
+
+
             <div class="col-md-6 form-group">
                 <label for="dosage-form-list">REP Contact Role</label>
                 <select id="dosage-form-list" data-ng-model="$ctrl.productModel.dosageForm" class="form-control full-width">
@@ -51,10 +50,7 @@
                        class="form-control full-width" ng-disabled="$ctrl.productModel.dosageForm !== 'Other'" name="text"
                        ng-required="$ctrl.productModel.dosageForm === 'Other'" maxlength="60" size="60"/>
             </div>
-        </div>
 
-
-        <div class="row">
             <div class="col-md-12 form-group">
                 <label for="company-name" class="required"><span class="field-name">{{'COMPANY_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong></label>
@@ -62,7 +58,7 @@
                        class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
             </div>
 
-        </div>
+
 
     </fieldset>
 
