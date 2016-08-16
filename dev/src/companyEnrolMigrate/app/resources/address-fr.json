@@ -13,5 +13,6 @@
   "CITY_TOWN": "City or Town",
   "SAVE_ADDR": "Save Address",
   "DELETE_ADDR": "Delete Address",
-  "ADDR_INFO": "fr_Address Information"
+  "ADDR_INFO": "fr_Address Information",
+  "ADDR_DETAILS": "fr_Address Details"
 }

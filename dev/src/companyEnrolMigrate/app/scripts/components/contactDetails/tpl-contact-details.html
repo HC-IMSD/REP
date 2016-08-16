@@ -8,7 +8,6 @@
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                 <select id="contact-salut_{{$id}}" name="salutation" class="form-control"
                         data-ng-model="$ctrl.contactModel.salutation" ng-disabled="$ctrl.isAmend"
-                        ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                         ng-options="salut |translate for salut in $ctrl.salutationList" required>
                 </select>
                 <strong id="salutation-error" class="error" ng-if="$ctrl.showError(contactForm.salutation)">
@@ -25,7 +24,6 @@
                     <span class="field-name">{{'FIRST_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="first-name_{{$id}}" data-ng-model="$ctrl.contactModel.givenName"
-                           ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                            class="form-control full-width" name="firstName" ng-required="true" maxlength="60"
                            size="60" ng-readonly="$ctrl.setNotEditable()" required/>
                         <strong id="firstName-error" class="error" ng-if="$ctrl.showError(contactForm.firstName)">
@@ -40,7 +38,6 @@
                 <label for="initials_{{$id}}">
                     <span class="field-name">{{'INITIALS'|translate}}</span>
                     <input type="text" id="initials_{{$id}}" data-ng-model="$ctrl.contactModel.initials"
-                           ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                            class="form-control full-width" name="contactIntials" maxlength="10" size="10"
                            ng-readonly="$ctrl.setNotEditable()"/>
                 </label>
@@ -50,7 +47,6 @@
                     <span class="field-name">{{'LAST_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="last-name_{{$id}}" data-ng-model="$ctrl.contactModel.surname"
-                           ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
                            ng-readonly="$ctrl.setNotEditable()"
                            class="form-control full-width" name="lastName" ng-required="true" maxlength="60" size="60"/>
                     <ng-messages for="contactForm.lastName.$error">
@@ -71,8 +67,8 @@
                     <span class="field-name">{{'LANGUAGE_CORRESPONDENCE'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <select id="lang-corresp_{{$id}}" name="langCorrespond" data-ng-model="$ctrl.contactModel.language"
-                            ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
-                            class="form-control"  ng-disabled="$ctrl.setNotEditable()"
+                            ng-model-options="$ctrl.ngModelOptSetting"
+                            class="form-control" ng-disabled="$ctrl.setNotEditable()"
                             ng-options="langCorr |translate for langCorr in $ctrl.langCorrespondance" required>
                     </select>
                     <strong id="langCorresp-error" class="error" ng-if="$ctrl.showError(contactForm.langCorrespond)">
@@ -88,7 +84,7 @@
                     <span class="field-name">{{'JOB_TITLE'|translate}}</span>
                     <strong class="required">{{"REQUIRED"|translate}}</strong>
                     <input type="text" id="job-title_{{$id}}" data-ng-model="$ctrl.contactModel.title"
-                           ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
+                           ng-model-options="$ctrl.ngModelOptSetting"
                            class="form-control full-width" name="jobTitle" ng-required="true" maxlength="40" size="40"
                            ng-readonly="$ctrl.setNotEditable()"
                            required/>
@@ -103,7 +99,7 @@
             <div class="col-md-3 form-group">
                 <label for="fax-number_{{$id}}"><span class="field-name">{{'FAX_NUMBER'|translate}}</span></label>
                 <input type="text" id="fax-number_{{$id}}" data-ng-model="$ctrl.contactModel.fax"
-                       ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
+                       ng-model-options="$ctrl.ngModelOptSetting"
                        ng-readonly="$ctrl.setNotEditable()"
                        class="form-control full-width" name="faxNumber" maxlength="25" size="25"/>
             </div>
@@ -114,9 +110,9 @@
                     <span class="field-name">{{'PHONE_NUMBER'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="phone-number_{{$id}}" data-ng-model="$ctrl.contactModel.phone"
-                           ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
+                           ng-model-options="$ctrl.ngModelOptSetting"
                            class="form-control full-width" name="phoneNumber" ng-required="true" maxlength="25"
-                           size="25"   ng-readonly="$ctrl.setNotEditable()"  ng-pattern="$ctrl.phoneReg"
+                           size="25" ng-readonly="$ctrl.setNotEditable()" ng-pattern="$ctrl.phoneReg"
                            required/>
                     <strong id="phoneNum-error" class="error" ng-if="$ctrl.showError(contactForm.phoneNumber)">
                         <span class="label label-danger" ng-messages="contactForm.phoneNumber.$error">
@@ -130,7 +126,7 @@
             <div class="col-md-3 form-group">
                 <label for="phone-ext_{{$id}}"><span class="field-name">{{'PHONE_EXT'|translate}}</span>
                 <input type="text" id="phone-ext_{{$id}}" data-ng-model="$ctrl.contactModel.phoneExt"
-                       ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
+                       ng-model-options="$ctrl.ngModelOptSetting"
                        ng-readonly="$ctrl.setNotEditable()"
                        class="form-control" name="phoneExt" maxlength="10"/>
                 </label>
@@ -140,7 +136,7 @@
                     <span class="field-name">{{'EMAIL'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="email" id="contact-email_{{$id}}" data-ng-model="$ctrl.contactModel.email"
-                           ng-model-options="$ctrl.ngModelOptSetting" ng-change="$ctrl.updateContactModel()"
+                           ng-model-options="$ctrl.ngModelOptSetting"
                            ng-readonly="$ctrl.setNotEditable()" maxlength="50" size="60"
                            class="form-control full-width" name="contactEmail" required/>
                     <strong id="contactEmail-error" class="error" ng-if="$ctrl.showError(contactForm.contactEmail)">

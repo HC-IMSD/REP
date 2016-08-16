@@ -100,9 +100,7 @@
         }
 
         $scope.$watch("main.companyEnrolForm.$valid", function () {
-            // if (vm.companyEnrolForm.$dirty) {
             disableXMLSave()
-            // }
         }, true);
 
         function disableXMLSave() {
