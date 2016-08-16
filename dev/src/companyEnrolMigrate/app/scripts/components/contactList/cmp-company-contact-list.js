@@ -126,7 +126,7 @@
              ); //TODO fix filter
              vm.contactList[idx] = angular.copy(record);
             vm.allRolesSelected= vm.isAllContactRolesSelected();
-            // vm.isDetailValid=record.isDetailValid;
+
         }
 
         vm.deleteContact = function (cID) {

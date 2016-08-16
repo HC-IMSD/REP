@@ -110,7 +110,7 @@
                 $filter('filter')(vm.addressList, {addressID: aID}, true)[0]);
             vm.addressList.splice(idx, 1);
             vm.onUpdate({newList:vm.addressList});
-            vm.selectRecord = -1;
+            vm.selectRecord = 0;
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.allRolesSelected= vm.isAllRolesSelected();
             //select nothing
@@ -125,7 +125,7 @@
             vm.isDetailsValid = false;
         }
 
-        vm.updateValid=function(detailValid){
+        vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;
         }
         vm.onUpdateAddressRecord = function (address) {

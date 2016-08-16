@@ -161,7 +161,6 @@
                 var contactInfo = {contactList: this.getContactList(jsonObj[rootTag].contact_record)};
                 //get rid of previous default
                 this._default = {};
-
                 angular.extend(this._default, companyInfo, addressInfo, contactInfo)
             },
             transformToFileObj: function (jsonObj) {
@@ -199,64 +198,74 @@
                     contactList: []
                 }
             },
-
             //not sure why this is needed anymore
             getAddressList: function (adrList) {
                 var list = [];
-                if (adrList) {
-                    for (var i = 0; i < adrList.length; i++) {
-                        this.updateAddressID(parseInt(adrList[i].address_id))
-                        var address = {};
-                        address.addressID = adrList[i].address_id;
-                        address.companyName = adrList[i].company_name;
-                        address.amendRecord = adrList[i].amend_record === 'Y';
-                        address.addressRole = {};
-                        address.addressRole.manufacturer = adrList[i].manufacturer === 'Y';
-                        address.addressRole.mailing = adrList[i].mailing === 'Y';
-                        address.addressRole.billing = adrList[i].billing === 'Y';
-                        address.addressRole.importer = adrList[i].importer === 'Y';
-                        address.street = adrList[i].company_address_details.street_address;
-                        address.city = adrList[i].company_address_details.city;
-                        address.stateList = adrList[i].company_address_details.province_lov;
-                        address.stateText = adrList[i].company_address_details.province_text;
-                        address.country = adrList[i].company_address_details.country;
-                        address.postalCode = adrList[i].company_address_details.postal_code;
-                        list.push(address);
-                    }
+                if (!adrList) return list;
+                if (!(adrList instanceof Array)) {
+                    //make it an array, case there is only one
+                    adrList = [adrList]
                 }
+
+
+                for (var i = 0; i < adrList.length; i++) {
+                    this.updateAddressID(parseInt(adrList[i].address_id))
+                    var address = {};
+                    address.addressID = adrList[i].address_id;
+                    address.companyName = adrList[i].company_name;
+                    address.amendRecord = adrList[i].amend_record === 'Y';
+                    address.addressRole = {};
+                    address.addressRole.manufacturer = adrList[i].manufacturer === 'Y';
+                    address.addressRole.mailing = adrList[i].mailing === 'Y';
+                    address.addressRole.billing = adrList[i].billing === 'Y';
+                    address.addressRole.importer = adrList[i].importer === 'Y';
+                    address.street = adrList[i].company_address_details.street_address;
+                    address.city = adrList[i].company_address_details.city;
+                    address.stateList = adrList[i].company_address_details.province_lov;
+                    address.stateText = adrList[i].company_address_details.province_text;
+                    address.country = adrList[i].company_address_details.country;
+                    address.postalCode = adrList[i].company_address_details.postal_code;
+                    list.push(address);
+                }
+
                 return list;
             },
             //right side is original json left side is translation ;oading
             getContactList: function (contacts) {
                 var list = [];
-                if (contacts) {
-                    for (var i = 0; i < contacts.length; i++) {
-                        var contact = {};
-                        var contact_rec_index = contacts[i].contact_id;
-                        contact.contactId = contact_rec_index;
-                        this.updateContactID(contact_rec_index);
-                        contact.amendRecord = contacts[i].amend_record === 'Y';
-                        contact.addressRole = {};
-                        contact.addressRole.manufacturer = contacts[i].manufacturer === 'Y';
-                        contact.addressRole.mailing = contacts[i].mailing === 'Y';
-                        contact.addressRole.billing = contacts[i].billing === 'Y';
-                        contact.addressRole.importer = contacts[i].importer === 'Y';
-                        contact.addressRole.repPrimary = contacts[i].rep_primary === 'Y';
-                        contact.addressRole.repSecondary = contacts[i].rep_secondary === 'Y';
-                        contact.contactRole = contacts[i].company_contact_details.rep_contact_role;
-                        contact.salutation = contacts[i].company_contact_details.salutation;
-                        contact.givenName = contacts[i].company_contact_details.given_name;
-                        contact.initials = contacts[i].company_contact_details.initials;
-                        contact.surname = contacts[i].company_contact_details.surname;
-                        contact.title = contacts[i].company_contact_details.job_title;
-                        contact.language = contacts[i].company_contact_details.language_correspondance;
-                        contact.phone = contacts[i].company_contact_details.phone_num;
-                        contact.phoneExt = contacts[i].company_contact_details.phone_ext;
-                        contact.fax = contacts[i].company_contact_details.fax_num;
-                        contact.email = contacts[i].company_contact_details.email;
-                        list.push(contact);
-                    }
+                if (!contacts) return list;
+                if (!(contacts instanceof Array)) {
+                    //make it an array, case there is only one
+                    contacts = [contacts]
                 }
+
+                for (var i = 0; i < contacts.length; i++) {
+                    var contact = {};
+                    var contact_rec_index = contacts[i].contact_id;
+                    contact.contactId = contact_rec_index;
+                    this.updateContactID(contact_rec_index);
+                    contact.amendRecord = contacts[i].amend_record === 'Y';
+                    contact.addressRole = {};
+                    contact.addressRole.manufacturer = contacts[i].manufacturer === 'Y';
+                    contact.addressRole.mailing = contacts[i].mailing === 'Y';
+                    contact.addressRole.billing = contacts[i].billing === 'Y';
+                    contact.addressRole.importer = contacts[i].importer === 'Y';
+                    contact.addressRole.repPrimary = contacts[i].rep_primary === 'Y';
+                    contact.addressRole.repSecondary = contacts[i].rep_secondary === 'Y';
+                    contact.contactRole = contacts[i].company_contact_details.rep_contact_role;
+                    contact.salutation = contacts[i].company_contact_details.salutation;
+                    contact.givenName = contacts[i].company_contact_details.given_name;
+                    contact.initials = contacts[i].company_contact_details.initials;
+                    contact.surname = contacts[i].company_contact_details.surname;
+                    contact.title = contacts[i].company_contact_details.job_title;
+                    contact.language = contacts[i].company_contact_details.language_correspondance;
+                    contact.phone = contacts[i].company_contact_details.phone_num;
+                    contact.phoneExt = contacts[i].company_contact_details.phone_ext;
+                    contact.fax = contacts[i].company_contact_details.fax_num;
+                    contact.email = contacts[i].company_contact_details.email;
+                    list.push(contact);
+                }
+
                 return list;
             }
         };
