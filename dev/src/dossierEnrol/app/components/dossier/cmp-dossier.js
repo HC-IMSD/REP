@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('dossierModule', ['expandingTable','tabsModule','contactList','refProductListModule','drugUseModule'])
+        .module('dossierModule', ['expandingTable','tabsModule','contactList','refProductListModule','drugUseModule','therapeuticClassModule'])
 })();
 
 (function () {

@@ -1,0 +1,28 @@
+<fieldset>
+    <legend>Therapeutic Classification</legend>
+
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-text active  col-md-12">Classification Name</li>
+        <li class="list-group-item  col-md-12" ng-repeat="item in $ctrl.model.classifications" ng-include="$ctrl.getTemplate(item)"></li>
+    </ul>
+
+    <script type="text/ng-template" id="display">
+        <div class="col-md-8">
+            <span class="field-name full-width">{{item.name}}</span>
+        </div>
+        <div class="btn-group-sm col-md-4 text-right">
+            <a href="" ng-click="$ctrl.editRecord(item)" class="btn btn-default btn-sm">Edit</a>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="edit">
+            <div class="col-md-8">
+                <input type="text" class="form-control full-width" ng-model="item.name"/>
+            </div>
+            <div class="btn-group-sm col-md-4 text-right">
+                <a href="" ng-click="$ctrl.saveRecord($index)" class="btn btn-default btn-sm">Save</a>
+                <a href="" ng-click="$ctrl.reset()" class="btn btn-default btn-sm">Reset</a>
+            </div>
+    </script>
+
+</fieldset>
