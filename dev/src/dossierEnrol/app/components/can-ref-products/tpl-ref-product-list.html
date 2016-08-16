@@ -1,0 +1,20 @@
+<fieldset>
+    <legend>Contact Details</legend>
+
+    <div class="col-xs-12 form-group">
+
+        <cmp-expanding-table title="Canadian Reference Product" list-items="crpl.productList"
+                             column-def="crpl.colNames" select-record="crlp.selectRecord"
+                             disable-selection="!crlp.isDetailValid">
+
+            <!--<cmp-contact-details contact-record="contactRec.contactModel" is-amend="contactRec.isAmend()"
+                                 on-update="contactRec.onUpdateContactRecord(contact)"
+                                 show-errors="contactRec.showErrors()"></cmp-contact-details>-->
+
+            <cmp-ref-product-details product-record="crpl.productModel"></cmp-ref-product-details>
+
+        </cmp-expanding-table>
+    </div>
+
+</fieldset>
+
