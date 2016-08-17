@@ -4,12 +4,20 @@
 
 (function () {
     'use strict';
+
+    angular
+        .module('services', [])
+})();
+
+
+(function () {
+    'use strict';
     angular
         .module('services')
         .factory('TransactionService', TransactionService)
 
     function TransactionService() {
-        function transactionService() {
+        function TransactionService() {
             //construction logic
             var defaultTransactionData = {
                 dataChecksum: "",
@@ -28,13 +36,13 @@
                 sameCompany: "N",
                 companyName: "",
                 sameAddress: "N", //this may no longer be needed
-                activityAddress: _getAddressModel(),
+                activityAddress: _createAddressModel(),
                 sameContact: "N",
                 activityContact: _createContactModel(),
                 regulatorySubmissionContact: [],
                 lifecycleRecord: []
             };
-            angular.extend(this._default, defaultCompanyData);
+            angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
         }
 
@@ -123,30 +131,53 @@
                 model.activityAddress = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact;
                 model.activityContact= _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
-                model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj);
-                model.lifecycleRecord=_mapLifecycleList(jsonObj);
+                model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj.rep_submission_contact_record);
+                model.lifecycleRecord = _mapLifecycleList(jsonObj.lifecycle_record);
             }
         };
         // Return a reference to the object
-        return CompanyService;
+        return TransactionService;
     }
 
+    /**
+     * Maps the file json object to the internal data model of the REP contacts
+     * @param jsonObj
+     * @returns an array of contacts. Empty if there are none
+     * @private
+     */
     function _mapRegulatoryContactList(jsonObj) {
         var result = [];
-        for (var i = 0; i < jsonObj.rep_submission_contact_record.length; i++) {
-            result.push(_transformRepContactFromFileObj(jsonObj.rep_submission_contact_record[i]));
+        if (!jsonObj) return list;
+        if (!(jsonObj instanceof Array)) {
+            //make it an array, case there is only one
+            jsonObj = [jsonObj]
+        }
+
+        for (var i = 0; i < jsonObj.length; i++) {
+            result.push(_transformRepContactFromFileObj(jsonObj[i]));
         }
         return (result)
     }
 
     function _mapLifecycleList(jsonObj){
         var result=[];
-        for(var i=0;i<jsonObj.lifecycle_record.length;i++) {
-            result.push(transformLifecycleRecFromFileObj(jsonObj.lifecycle_record[i]));
+        if (!jsonObj) return list;
+        if (!(jsonObj instanceof Array)) {
+            //make it an array, case there is only one record
+            jsonObj = [jsonObj]
+        }
+        for (var i = 0; i < jsonObj.length; i++) {
+            result.push(_transformLifecycleRecFromFileObj(jsonObj[i]));
         }
         return result
     }
 
+    /**
+     * @ngdoc method Maps a lifecycle record file object to the internal data model
+     * @param lifecycleObj- the json file object to map
+     * @returns {jsonObj}
+     * @private
+     */
     function _transformLifecycleRecFromFileObj(lifecycleObj) {
         var lifecycleRec = _createLifeCycleModel();
 

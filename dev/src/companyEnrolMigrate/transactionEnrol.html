@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="./wet-boew/css/noscript.min.css"/>
     </noscript>
 </head>
-<body vocab="http://schema.org/" typeof="WebPage" ng-app="dossierApp">
+<body vocab="http://schema.org/" typeof="WebPage" ng-app="transactionApp">
 <ul id="wb-tphp">
     <li class="wb-slc">
         <a class="wb-sl" href="#wb-cont">Skip to main content</a>
@@ -71,9 +71,6 @@
         <div class="container">
             <div class="row">
                 <div id="wb-sttl" class="col-md-10">
-                    <!--<a href="http://wet-boew.github.io/v4.0-ci/index-en.html">
-                        <span>Web Experience Toolkit</span>
-                    </a>-->
                     <h1 class="hd1rep">Company Regulatory Enrolment Process (REP)</h1>
                 </div>
                 <object id="wmms" type="image/svg+xml" tabindex="-1" role="img" data="./theme-gcwu-fegc/assets/wmms.svg"
@@ -87,8 +84,9 @@
     <!--Company Enrol Content starts here -->
 
     <div>
-        <ng-form id="reg-company-form" name="main.companyEnrolForm" ng-controller="MainController as main" novalidate="novalidate"
-              ng-init="main.initUser('EXT')">
+        <ng-form id="reg-transaction-form" name="main.transactionEnrolForm" ng-controller="MainController as main"
+                 novalidate="novalidate"
+                 ng-init="main.initUser('EXT')">
 
 
             <section class="panel panel-primary mrgn-tp-lg">
@@ -98,7 +96,7 @@
                 <div class="panel-body">
                     <div class="col-md-12">
 
-                        <hpfb-file-select update-model-root="main.showContent(fileContent) "root-elem="main.rootTag"/>
+                        <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="main.rootTag"/>
                     </div>
                 </div>
                 <div>
@@ -118,16 +116,21 @@
                                        ng-model="main.company.companyId"/>
                             </div>
                         </div>
+                    </div>
                 </section>
+
+                <cmp-transaction-info></cmp-transaction-info>
                 <div class="row">
                     <div class="form-group col-md-3">
-                        <button  class="btn-default" ng-click="main.saveJson()">Save Working Copy</button>
+                        <button class="btn-default" ng-click="main.saveJson()">Save Working Copy</button>
                     </div>
                     <div class="form-group col-md-3">
-                        <button class="btn-default" id="btn_xmlSave" ng-click="main.saveXML()">Save Draft for submission</button>
+                        <button class="btn-default" id="btn_xmlSave" ng-click="main.saveXML()">Save Draft for
+                            submission
+                        </button>
                     </div>
                 </div>
-                  <pre>overall: {{main.company | json : spacing}}</pre>
+                <pre>overall: {{main.company | json : spacing}}</pre>
             </div>
         </ng-form>
 
@@ -212,8 +215,12 @@
 <script src="app/lib/angular-messages.min.js"></script>
 <script src="app/lib/angular-translate.min.js"></script>
 <script src="app/lib/angular-translate-loader-static-files.min.js"></script>
-
 <script src="app/lib/angular-aria.min.js"></script>
+
+<script src="app/scripts/transactionApp.js"></script>
+<script src="app/scripts/services/transaction-service.js"></script>
+<script src="app/scripts/components/transactionInfo/cmp-transaction-info.js"></script>
+
 <!--<script src="app/scripts/app.js"></script>
 <script src="app/scripts/services/company-service.js"></script>
 <script src="app/scripts/services/data-lists.js"></script>

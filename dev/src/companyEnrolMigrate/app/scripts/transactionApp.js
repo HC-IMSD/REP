@@ -5,7 +5,9 @@
             'pascalprecht.translate',
             'ngMessages',
             'ngAria',
-            'fileIO'
+            'fileIO',
+            'services',
+            'transaction'
         ])
 })();
 
@@ -17,21 +19,20 @@
 
     MainController.$inject = ['TransactionService','hpfbFileProcessing','$filter']
 
-    function MainController(CompanyService,hpfbFileProcessing,$filter) {
+    function MainController(TransactionService, hpfbFileProcessing, $filter) {
 
         var vm = this;
         vm.isIncomplete = true;
         vm.userType;
-       // vm.showContent = _loadFileContent;
         var _transaction= new TransactionService();
-        vm.rootTag=_transaction.getRootTag();
-       vm.transaction=_transaction.getTransactionInfo();
+        // vm.rootTag=_transaction.getRootTag();
+        //vm.transaction=_transaction.getTransactionInfo();
 
         /**
          * Set the form Type
          * @param id
          */
-        vm.initUser=function(id){ //TODO needed?
+        vm.initUser = function (id) {
             if(!id) id='EXT'
             vm.userType=id;
         }
@@ -42,6 +43,7 @@
          */
         vm.saveJson=function(){
             var writeResult=_transformFile()
+            vm.rootTag = _transaction.getRootTag();
             hpfbFileProcessing.writeAsJson(writeResult, "transactionEnrol", vm.rootTag);
         }
         /**
@@ -74,15 +76,13 @@
         }*/
         function _loadFileContent(fileContent) {
             if(!fileContent)return;
-            _transaction = new CompanyService();
-
+            _transaction = new TransactionService();
            var resultJson = fileContent.jsonResult;
 
             if(resultJson) {
                 _transaction.transformFromFileObj(resultJson)
                 vm.transaction={}
                 angular.extend(vm.transaction,_transaction.getModelInfo())
-               // _setComplete();
             }
         };
 
@@ -164,3 +164,44 @@
             $translateProvider.directivePriority(1);
         }]);
 })();
+
+/*
+ "date_saved": "1999-01-21",
+ "application_type": "APPROVED",
+ "software_version": "string",
+ "data_checksum": "string",
+ "is_ectd": "Y",
+ "company_id": "A",
+ "dossier_id": "A",
+ "dossier_name": "A",
+
+ "is_solicited": "Y",
+ "solicited_requester": "A",
+ "regulatory_project_manager1": "A",
+ "regulatory_project_manager2": "A",
+ "same_regulatory_company": "Y",
+ "company_name": "A",
+ "same_regulatory_address": "Y",
+ "regulatory_activity_address": {
+ "street_address": "A",
+ "city": "A",
+ "province_lov": "WY",
+ "province_text": "A",
+ "country": "ZWE",
+ "postal_code": "A"
+ },
+ "same_regulatory_contact": "Y",
+ "regulatory_activity_contact": {
+ "salutation": "DR",
+ "given_name": "A",
+ "initials": "A",
+ "surname": "A",
+ "job_title": "A",
+ "language_correspondance": "fr",
+ "phone_num": "A",
+ "phone_ext": "A",
+ "fax_num": "A",
+ "email": "A"
+ },
+
+ */
