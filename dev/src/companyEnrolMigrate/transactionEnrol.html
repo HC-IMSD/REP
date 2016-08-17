@@ -118,8 +118,11 @@
                         </div>
                     </div>
                 </section>
+                <cmp-contact-details></cmp-contact-details>
+                <!--    <cmp-transaction-info></cmp-transaction-info>-->
 
-                <cmp-transaction-info></cmp-transaction-info>
+
+                <!-- <cmp-transaction-address-record address-record="transInfoCtrl.transactionModel"></cmp-transaction-address-record>-->
                 <div class="row">
                     <div class="form-group col-md-3">
                         <button class="btn-default" ng-click="main.saveJson()">Save Working Copy</button>
@@ -220,14 +223,20 @@
 <script src="app/scripts/transactionApp.js"></script>
 <script src="app/scripts/services/transaction-service.js"></script>
 <script src="app/scripts/components/transactionInfo/cmp-transaction-info.js"></script>
+<script src="app/scripts/components/transactionCompanyRecord/cmp-transaction-address-record.js"></script>
+<script src="app/scripts/components/addressDetails/cmp-address-details.js"></script>
+<script src="app/scripts/services/data-lists.js"></script>
+<script src="app/scripts/components/cmp-country-select.js"></script>
+<script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
+<script src="app/scripts/components/rep-contact-record/cmp-rep-contact-record.js"></script>
 
 <!--<script src="app/scripts/app.js"></script>
 <script src="app/scripts/services/company-service.js"></script>
-<script src="app/scripts/services/data-lists.js"></script>
-<script src="app/scripts/components/cmp-country-select.js"></script>
+
+TODO remove
 <script src="app/scripts/components/addressRole/cmp-address-role.js"></script>
-<script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
-//TODO remove
+
+
 &lt;!&ndash;<script src="app/scripts/components/cmp-address-list.js"></script>&ndash;&gt;
 <script src="app/scripts/components/cmp-contact-list.js"></script>
 <script src="app/scripts/components/addressList/cmp-company-address-list.js"></script>

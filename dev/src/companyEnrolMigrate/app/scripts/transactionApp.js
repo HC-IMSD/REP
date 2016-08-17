@@ -7,7 +7,10 @@
             'ngAria',
             'fileIO',
             'services',
-            'transaction'
+            'transaction',
+            'addressModule',
+            'contactModule'
+
         ])
 })();
 

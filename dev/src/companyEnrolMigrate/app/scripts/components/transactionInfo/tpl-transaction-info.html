@@ -53,8 +53,7 @@
 
 
         </div>
-        <div>
-            <!--   isEctd-->
+        <div class="row">
             <div class="form-group col-md-4"
                  ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.isEctd)}">
                 <label for="isEctd_{{$id}}" class="required full-width">
@@ -62,11 +61,67 @@
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                     <select id="isEctd_{{$id}}" name="isEctd"
                             ng-model="transInfoCtrl.transactionModel.isEctd"
-                            class="form-control full-width" maxlength="256" size="256"
+                            class="form-control full-width"
                             required></select>
                     <strong id="isEctd_-error" class="error"
-                            ng-if="transInfoCtrl.showError(transInfoForm.dossierName)">
-                        <span class="label label-danger" ng-messages="transInfoForm.companyId.$error">
+                            ng-if="transInfoCtrl.showError(transInfoForm.isEctd)">
+                        <span class="label label-danger" ng-messages="transInfoForm.isEctd.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.isSolicited)}">
+                <label for="isSolicited_{{$id}}" class="required full-width">
+                    <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                    <select id="isSolicited_{{$id}}" name="isSolicited"
+                            ng-model="transInfoCtrl.transactionModel.isSolicited"
+                            class="form-control full-width"
+                            required></select>
+                    <strong id="isSolicited-error" class="error"
+                            ng-if="transInfoCtrl.showError(transInfoForm.isSolicited)">
+                        <span class="label label-danger" ng-messages="transInfoForm.isSolicited.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12"
+                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.solicitedRequester)}">
+                <label for="solicitedRequester_{{$id}}" class="required full-width">
+                    <span class="field-name">{{"SOLICITED_RQ" |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                    <textarea maxlength="256" size="256" id="solicitedRequester_{{$id}}" name="solicitedRequester"
+                              ng-model="transInfoCtrl.transactionModel.solicitedRequester"
+                              class="form-control full-width"
+                              required/>
+                    <strong id="solicitedRequester-error" class="error"
+                            ng-if="transInfoCtrl.showError(transInfoForm.solicitedRequester)">
+                        <span class="label label-danger" ng-messages="transInfoForm.solicitedRequester.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.companyName)}">
+                <label for="companyName_{{$id}}" class="required full-width">
+                    <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                    <input type="text" maxlength="80" id="companyName_{{$id}}" name="companyName"
+                           ng-model="transInfoCtrl.transactionModel.isEctd"
+                           class="form-control full-width"
+                           required/>
+                    <strong id="companyName-error" class="error"
+                            ng-if="transInfoCtrl.showError(transInfoForm.companyName)">
+                        <span class="label label-danger" ng-messages="transInfoForm.companyName.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                     </strong>
@@ -76,9 +131,8 @@
 
         </div>
 
-
         <fieldset>
-            <legend>{{'Name of Regulatory Project Mananger, if known'|translate}}</legend>
+            <legend>{{'Name of Regulatory Project Manager, if known'|translate}}</legend>
             <div class="row">
                 <div class="form-group col-md-12">
                     <label for="projectManager1_{{$id}}" class="full-width">
@@ -100,6 +154,12 @@
                 </div>
             </div>
         </fieldset>
+        <cmp-transaction-address-record
+                address-record="transInfoCtrl.transactionModel.activityAddress"></cmp-transaction-address-record>
+        <h2>Main Contact Information</h2>
+
+
+        <!--     <cmp-rep-contact-record></cmp-rep-contact-record>-->
 
 
         <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>
