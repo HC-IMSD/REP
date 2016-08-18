@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('dossierModule', ['expandingTable','tabsModule','contactList','refProductListModule','drugUseModule','therapeuticClassModule'])
+        .module('dossierModule', ['expandingTable','tabsModule','contactList','refProductListModule','drugUseModule','therapeuticClassModule','scheduleAModule'])
 })();
 
 (function () {
@@ -54,6 +54,14 @@
                 dataChecksum: "kjsakdjas",
                 drugProduct:{
                     thirdPartySigned:false,
+                    humanDrugUse: false,
+                    radiopharmDrugUse: false,
+                    vetDrugUse: false,
+                    disinfectantDrugUse: false,
+                    isScheduleA: false,
+                    scheduleAGroup:{
+
+                    },
                     therapeutic: {//grid
                         listItems:[],
                         columnDef:[]
@@ -63,8 +71,8 @@
                     appendixFour:{}//tab + grid +
 
                 },
-                contactList: { //grid
-                    listItems:[],
+                contactInfo: { //grid
+                    contactList:[],
                     columnDef:[]
                 }
 

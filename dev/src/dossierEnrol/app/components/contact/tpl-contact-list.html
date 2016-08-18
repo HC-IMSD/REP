@@ -15,16 +15,16 @@
                 </strong>
             </label>
             <cmp-expanding-table title="Contact List" list-items="contactListCtrl.contactList"
-                                 column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
-                                 disable-selection="!contactListCtrl.isDetailValid">
+                                                        column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
+                                                        disable-selection="!contactListCtrl.isDetailValid">
 
-                <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
-                                    on-update="contactListCtrl.onUpdateContactRecord(contact)"
-                                    is-amend="contactListCtrl.isAmend()" is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
-                                    is-detail-valid="contactListCtrl.setValid(state)">
-                </cmp-contact-record>
+            <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
+                                on-update="contactListCtrl.onUpdateContactRecord(contact)"
+                                is-amend="contactListCtrl.isAmend()" is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
+                                is-detail-valid="contactListCtrl.setValid(state)">
+            </cmp-contact-record>
 
-            </cmp-expanding-table>
+        </cmp-expanding-table>
 
             <div class="row mrgn-tp-md mrgn-bttm-lg">
                 <div class="btn-group-sm col-md-12 text-right">
