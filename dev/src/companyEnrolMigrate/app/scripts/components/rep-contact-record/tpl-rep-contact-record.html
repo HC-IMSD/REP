@@ -2,7 +2,9 @@
     <ng-form name="contactRec.contactRecForm">
         <div>
             <div class="row">
-                <!--<select>Role </select>-->
+                <label>dsfsf</label>
+                <select ng-data-model="contactRec.contactModel.rep">
+                </select>
                 <cmp-contact-details contact-record="contactRec.contactModel" is-amend="false"
                                      on-update="contactRec.onUpdateContactRecord(contact)"
                                      show-errors="contactRec.showErrors()"></cmp-contact-details>

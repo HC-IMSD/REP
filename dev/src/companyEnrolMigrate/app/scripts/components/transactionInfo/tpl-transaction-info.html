@@ -154,14 +154,13 @@
                 </div>
             </div>
         </fieldset>
-        <cmp-transaction-address-record
-                address-record="transInfoCtrl.transactionModel.activityAddress"></cmp-transaction-address-record>
+        <!--<cmp-transaction-address-record
+                address-record="transInfoCtrl.transactionModel.activityAddress"></cmp-transaction-address-record>-->
         <h2>Main Contact Information</h2>
+        <label>REP Contact Type</label>
 
 
-        <!--     <cmp-rep-contact-record></cmp-rep-contact-record>-->
-
-
+        <cmp-rep-contact-record></cmp-rep-contact-record>
         <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>
 
         <!--<pre>contact model: {{$ctrl.contactRecord | json : spacing}}</pre>-->

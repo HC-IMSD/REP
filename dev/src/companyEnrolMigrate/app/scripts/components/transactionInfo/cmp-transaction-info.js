@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transaction', [])
+        .module('transaction', ['contactModule25'])
 })();
 
 (function () {
@@ -19,10 +19,10 @@
             controller: transactionInfoCtrl,
             controllerAs: 'transInfoCtrl',
             bindings: {
-                /* contactRecord: '<',
+                contactRecord: '<',
                  onUpdate: '&',
                  isAmend: '<',
-                 showErrors: '&',*/
+                showErrors: '&',
             }
         });
 

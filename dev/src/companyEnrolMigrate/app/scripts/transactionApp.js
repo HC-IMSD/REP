@@ -9,6 +9,7 @@
             'services',
             'transaction',
             'addressModule',
+            'contactModule25',
             'contactModule'
 
         ])

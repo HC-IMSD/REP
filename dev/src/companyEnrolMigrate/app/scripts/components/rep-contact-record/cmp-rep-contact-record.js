@@ -6,14 +6,14 @@
     'use strict';
 
     angular
-        .module('contactModule2', [])
+        .module('contactModule25', [])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('contactModule2')
+        .module('contactModule25')
         .component('cmpRepContactRecord', {
             templateUrl: 'app/scripts/components/rep-contact-record/tpl-rep-contact-record.html',
             controller: contactRecCtrl,
@@ -28,13 +28,15 @@
                 isRoleSelected: '&'
             }
         });
-    contactRecCtrl.$inject = ['$scope']
-    function contactRecCtrl($scope) {
+    //contactRecCtrl.$inject = ['$scope']
+    function contactRecCtrl() {
         var vm = this;
         vm.savePressed = false;
         vm.isContact = true; //used to set the state of the role
         vm.isNotEditable = false;
-
+        vm.repType = [
+            'SALUT_DR',
+            'SALUT_MR']
         //TODO get role model from a servide
 
         vm.contactModel = {};
