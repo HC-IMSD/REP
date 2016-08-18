@@ -10,8 +10,8 @@
             'transaction',
             'addressModule',
             'contactModule25',
+            'contactModule26',
             'contactModule'
-
         ])
 })();
 
@@ -32,14 +32,6 @@
         // vm.rootTag=_transaction.getRootTag();
         //vm.transaction=_transaction.getTransactionInfo();
 
-        /**
-         * Set the form Type
-         * @param id
-         */
-        vm.initUser = function (id) {
-            if(!id) id='EXT'
-            vm.userType=id;
-        }
 
         /**
          *

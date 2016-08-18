@@ -109,27 +109,6 @@
                 </label>
             </div>
         </div>
-        <div class="row">
-            <div class="form-group col-md-4"
-                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.companyName)}">
-                <label for="companyName_{{$id}}" class="required full-width">
-                    <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
-                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <input type="text" maxlength="80" id="companyName_{{$id}}" name="companyName"
-                           ng-model="transInfoCtrl.transactionModel.isEctd"
-                           class="form-control full-width"
-                           required/>
-                    <strong id="companyName-error" class="error"
-                            ng-if="transInfoCtrl.showError(transInfoForm.companyName)">
-                        <span class="label label-danger" ng-messages="transInfoForm.companyName.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                    </strong>
-                </label>
-            </div>
-
-
-        </div>
 
         <fieldset>
             <legend>{{'Name of Regulatory Project Manager, if known'|translate}}</legend>
@@ -154,13 +133,48 @@
                 </div>
             </div>
         </fieldset>
-        <!--<cmp-transaction-address-record
-                address-record="transInfoCtrl.transactionModel.activityAddress"></cmp-transaction-address-record>-->
+
+
+        <div>
+            <h2>Regulatory Activity contact for THIS Regulatory Activity</h2>
+            <div class="row">
+                <h3>Company Information</h3>
+                <div class="form-group col-md-12"
+                     ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.companyName)}">
+                    <label for="companyName_{{$id}}" class="required full-width">
+                        <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
+                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                        <input type="text" maxlength="80" id="companyName_{{$id}}" name="companyName"
+                               ng-model="transInfoCtrl.transactionModel.isEctd"
+                               class="form-control full-width"
+                               required/>
+                        <strong id="companyName-error" class="error"
+                                ng-if="transInfoCtrl.showError(transInfoForm.companyName)">
+                        <span class="label label-danger" ng-messages="transInfoForm.companyName.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <h3>Address Information</h3>
+                <cmp-address-details></cmp-address-details>
+            </div>
+            <div class="row">
+                <h3>Company Representative for THIS Regulatory Activity</h3>
+                <cmp-contact-details></cmp-contact-details>
+            </div>
+
+
+        </div>
+
+
         <h2>Main Contact Information</h2>
         <label>REP Contact Type</label>
+        <cmp-rep-contact-list></cmp-rep-contact-list>
 
-
-        <cmp-rep-contact-record></cmp-rep-contact-record>
+        <!-- <cmp-rep-contact-record></cmp-rep-contact-record>-->
         <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>
 
         <!--<pre>contact model: {{$ctrl.contactRecord | json : spacing}}</pre>-->

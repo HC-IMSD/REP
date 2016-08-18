@@ -85,17 +85,13 @@
 
     <div>
         <ng-form id="reg-transaction-form" name="main.transactionEnrolForm" ng-controller="MainController as main"
-                 novalidate="novalidate"
-                 ng-init="main.initUser('EXT')">
-
-
+                 novalidate="novalidate">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
                     <h2 class="panel-title">Load a Draft Transaction Enrolment File</h2>
                 </header>
                 <div class="panel-body">
                     <div class="col-md-12">
-
                         <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="main.rootTag"/>
                     </div>
                 </div>
@@ -108,17 +104,19 @@
                         <h3 class="panel-title">Regulatory Transaction Enrolment</h3>
                     </header>
                     <div class="panel-body">
-                        <div class="row">
+
+                        <cmp-transaction-info></cmp-transaction-info>
+                        <!--<div class="row">
                             <div class="col-xs-3 form-group">
                                 <label for="company-id-text">Company ID</label>
                                 <input type="text" class="form-control" id="company-id-text"
                                        ng-readonly="main.isExtern()" maxlength="6"
                                        ng-model="main.company.companyId"/>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </section>
-                <cmp-transaction-info></cmp-transaction-info>
+
 
 
                 <!-- <cmp-transaction-address-record address-record="transInfoCtrl.transactionModel"></cmp-transaction-address-record>-->
@@ -227,8 +225,11 @@
 <script src="app/scripts/services/data-lists.js"></script>
 <script src="app/scripts/components/cmp-country-select.js"></script>
 <script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
+<script src="app/scripts/components/repContactList/cmp-rep-contact-list.js"></script>
 <script src="app/scripts/components/rep-contact-record/cmp-rep-contact-record.js"></script>
-
+<script src="app/scripts/components/transactionInfo/cmp-transaction-info.js"></script>
+<script src="app/scripts/components/expandingTable/cmp-expanding-table.js"></script>
+<script src="app/scripts/components/expandingTable/track-record.js"></script>
 <!--<script src="app/scripts/app.js"></script>
 <script src="app/scripts/services/company-service.js"></script>
 
