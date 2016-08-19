@@ -6,8 +6,18 @@
 (function () {
     'use strict';
 
+    var dependencies = [
+        'expandingTable'
+        ,'tabsModule'
+        ,'contactList'
+        ,'refProductListModule'
+        ,'drugUseModule'
+        ,'therapeuticClassModule'
+        ,'scheduleAModule'
+    ];
+
     angular
-        .module('dossierModule', ['expandingTable','tabsModule','contactList','refProductListModule','drugUseModule','therapeuticClassModule','scheduleAModule'])
+        .module('dossierModule', dependencies);
 })();
 
 (function () {

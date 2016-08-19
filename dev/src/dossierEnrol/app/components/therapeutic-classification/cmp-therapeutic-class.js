@@ -24,7 +24,7 @@
         });
 
 
-    function therapeuticClassCtrl(){
+    function therapeuticClassCtrl($filter){
         var self = this;
 
         self.$onInit = function(){
@@ -46,18 +46,62 @@
             else return 'display';
         };
 
-        self.editRecord = function (item) {
-            self.model.selected = angular.copy(item);
+        self.addNew = function(){
+
+            var maxID = getListMaxID();
+
+            console.log("addNew maxID: " + JSON.stringify(maxID) );
+
+            var item = {"id":maxID + 1, "name":""};
+
+            self.model.classifications.push(item);
+            self.editRecord(item);
+
         };
 
-        self.saveRecord = function (idx) {
-            console.log("Saving item");
-            self.model.classifications[idx] = angular.copy(self.model.selected);
+        self.editRecord = function (item) {
+            self.model.selected = item;
+        };
+
+        self.saveRecord = function (_id) {
+            console.log("Saving item: "+_id);
+            var idx = self.model.classifications.indexOf(
+                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
+            );
+            self.model.classifications[idx] = self.model.selected;
             self.reset();
         };
 
-        self.reset = function () {
-            self.model.selected = {};
+        self.deleteRecord = function (_id) {
+            console.log("Deleting item: "+_id);
+
+            var idx = self.model.classifications.indexOf(
+                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
+            );
+            self.model.classifications.splice(idx,1);
         };
+
+
+
+        self.reset = function () {
+            var item = self.model.selected;
+            self.model.selected = {};
+
+        };
+
+        function getListMaxID(){
+
+            var out = 0;
+            var list = self.model.classifications;
+            if (list) {
+                for (var i = 0; i<list.length; i++) {
+                    if (list[i].id > out) {
+                        out = list[i].id;
+                    }
+                }
+            }
+            return out;
+
+        }
     }
 })();
