@@ -6,14 +6,14 @@
     'use strict';
 
     angular
-        .module('services', [])
+        .module('transactionService', [])
 })();
 
 
 (function () {
     'use strict';
     angular
-        .module('services')
+        .module('transactionService')
         .factory('TransactionService', TransactionService)
 
     function TransactionService() {

@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('lifecycleDetails', ['datalists'])
+        .module('lifecycleDetails', ['services'])
 })();
 
 (function () {
@@ -16,7 +16,7 @@
     angular
         .module('lifecycleDetails')
         .component('cmpLifecycleDetalis', {
-            templateUrl: 'app/scripts/lifecycleDetails/tpl-lifecycle-details.html',
+            templateUrl: 'app/scripts/components/lifecycleDetails/tpl-lifecycle-details.html',
             controller: lifecycleRecCtrl,
             controllerAs: 'lifecycleCtrl',
 
@@ -30,8 +30,9 @@
     function lifecycleRecCtrl(TransactionLists) {
         var vm = this;
         vm.savePressed = false;
-        vm.activityList = TransactionLists.getActivityArray()
-        vm.sequenceList = "";
+        vm.activityList = TransactionLists.getActivityTypes();
+        vm.sequenceList = [];
+        vm.descriptionList = [];
 
         vm.lifecycleModel = {
             sequence: '0001',
@@ -46,20 +47,110 @@
             sequenceConcat: ''
             }
 
-        vm.getSequenceList = function (value) {
+        vm.setSequenceList = function (value) {
+
+            value = vm.lifecycleModel.activityType;
+            /*
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             "",
+             " ",
+             "",
+             ""
+             ]);
+             */
 
             switch (value) {
-                case (value === 'ff'):
+                case ("PRESUB_MEETING"):
+                    vm.descriptionList = TransactionLists.getPresubTypes();
+                    break;
+                case ("ANDS"):
+                    vm.descriptionList = TransactionLists.getAndsType();
+                    break;
+                case ("DINA"):
+                    vm.descriptionList = TransactionLists.getDinaType();
+                    break;
+                case ("DINB"):
+                    vm.descriptionList = TransactionLists.getDinbType();
+                    break;
+                case ("EUNDS"):
+                    vm.descriptionList = TransactionLists.getEundsType()
                     break;
 
+                case ("EUSNDS"):
+                    vm.descriptionList = TransactionLists.getEusndsType();
+                    break;
+
+                case ("LEVEL_3"):
+                    vm.descriptionList = TransactionLists.getLevel3Type();
+                    break;
+
+                case ("NC_ACT"):
+                    vm.descriptionList = TransactionLists.getNcType();
+                    break;
+                case ("NDS"):
+                    vm.descriptionList = TransactionLists.getNdsType();
+                    break;
+                case ("PDC"):
+                    vm.descriptionList = TransactionLists.getPdcType();
+                    break;
+                case ("PDC_B"):
+                    vm.descriptionList = TransactionLists.getPdcBType();
+                    break;
+                case ("PSUR_C"):
+                    vm.descriptionList = TransactionLists.getpSurCType();
+                    break;
+                case ("PSUR_PV"):
+                    vm.descriptionList = TransactionLists.getpSurPvType();
+                    break;
+                case ("RMP_PV"):
+                    vm.descriptionList = TransactionLists.getRmpPvType();
+                    break;
+                case ("SANDS"):
+                    vm.descriptionList = TransactionLists.getSandsType();
+                    break;
+                case ("SNDS"):
+                    vm.descriptionList = TransactionLists.getSndsType();
+                    break;
+                case ("SNDS_C"):
+                    vm.descriptionList = TransactionLists.getSndsCArray();
+                    break;
+                /* case ("UD_PV"):
+                 vm.descriptionList= TransactionLists.getud
+                 break;*/
+                /* case ("UDRA"):
+                 vm.descriptionList= TransactionLists.getud
+                 /*       break;*!/
+                 case ("CONSULTATION"):
+                 vm.descriptionList= TransactionLists.getconsult
+                 break;*/
+
+                case ("YBPR"):
+                    vm.descriptionList = TransactionLists.getYBprType();
+                    break;
 
             }
 
-            }
+        };
         vm.setDetailsState = function () {
             var value = vm.lifecycleModel.descriptionValue
             if (!value) {
-                //clear the list
+                vm.descriptionList = [];
                 return;
             }
             switch (value) {

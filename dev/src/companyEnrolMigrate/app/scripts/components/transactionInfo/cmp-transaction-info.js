@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transaction', ['contactModule25'])
+        .module('transaction', ['contactModule25', 'lifecycleDetails'])
 })();
 
 (function () {

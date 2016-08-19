@@ -2,20 +2,47 @@
  * Created by dkilty on 12/08/2016.
  * @ngdoc module -gets the list of transaction activity tpyes
  */
+(function () {
+    'use strict';
+
+    angular
+        .module('services', []);
+
+})();
 
 
 (function () {
     'use strict';
 
     angular
-        .module('dataLists')
+        .module('services')
         .factory('TransactionLists', getTransactionSeq);
 
     /* @ngInject */
     function getTransactionSeq() {
         var service = {
             getTransactionDescriptions: getTransactionDescriptionsArray,
-            getActivityTypes: getActivityArray
+            getActivityTypes: getActivityArray,
+            getPresubTypes: getPresubArray,
+            getAndsType: getANDSArray,
+            getDinaType: getDINAArray,
+            getDinbType: getDINBArray,
+            getEundsType: getEUNDSArray,
+            getEusndsType: getEUSNDSArray,
+            getLevel3Type: getLevel3Array,
+            getNcType: getNCArray,
+            getNdsType: getNDSArray,
+            getPdcType: getPDCArray,
+            getPdcBType: getPDCBArray,
+            getPresubType: getPresubArray,
+            getpSurCType: getPSURCArray,
+            getpSurPvType: getPSURPVArray,
+            getRmpPvType: getRMPPVArray,
+            getSandsType: getSANDSArray,
+            getSndsType: getSNDSArray,
+            getSndsCArray: getSNDSCArray,
+            getUppvType: getUPPVArray,
+            getYBprType: getYBPRArray
         };
         return service;
 
@@ -82,7 +109,7 @@
                 "EUNDS",
                 "EUSNDS",
                 "LEVEL_3",
-                "NC",
+                "NC_ACT",
                 "NDS",
                 "PDC",
                 "PDC_B",
@@ -342,7 +369,7 @@
             ]);
         }
 
-        function getPSURPV() {
+        function getPSURPVArray() {
 
             return ([
                 "CANCEL_LETTER", //cancellation letter
@@ -353,7 +380,7 @@
             ]);
         }
 
-        function getRMPPV() {
+        function getRMPPVArray() {
             return ([
                 "CANCEL_LETTER", //cancellation letter
                 "EMAIL_RQ_RESPONSE",// response to email request
@@ -363,7 +390,7 @@
             ]);
         }
 
-        function getSANDS() {
+        function getSANDSArray() {
             return ([
                 "ADMINISTRATIVE", //administrative
                 "CANCEL_LETTER", //cancellation letter
@@ -390,7 +417,7 @@
             ]);
         }
 
-        function getSNDS() {
+        function getSNDSArray() {
             return ([
                 "ADMINISTRATIVE", //administrative
                 "CANCEL_LETTER", //cancellation letter
@@ -420,7 +447,7 @@
             ]);
         }
 
-        function getSNDSC() {
+        function getSNDSCArray() {
             return ([
 
                 "CANCEL_LETTER", //cancellation letter
@@ -441,7 +468,7 @@
 
         }
 
-        function getUPPV() {
+        function getUPPVArray() {
 
             return ([
                 "CANCEL_LETTER", //cancellation letter
@@ -463,7 +490,7 @@
 
         }
 
-        function getYBPR() {
+        function getYBPRArray() {
             return ([
                 "CANCEL_LETTER", //cancellation letter
                 "FOR_PERIOD", //for period of ....

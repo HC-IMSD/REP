@@ -11,7 +11,9 @@
             'addressModule',
             'contactModule25',
             'contactModule26',
-            'contactModule'
+            'contactModule',
+            'lifecycleDetails',
+            'transactionService'
         ])
 })();
 
