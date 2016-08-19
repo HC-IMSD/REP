@@ -46,35 +46,15 @@
             sequenceVersion: '',
             sequenceConcat: ''
             }
-
+        vm.endDateVisible = false;
+        vm.startDateVisible = false;
+        vm.descriptionVisible = false;
+        vm.versionVisible = false;
         vm.setSequenceList = function (value) {
 
             value = vm.lifecycleModel.activityType;
-            /*
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             "",
-             " ",
-             "",
-             ""
-             ]);
-             */
-
+            var temp = vm.lifecycleModel.descriptionValue;
+            vm.lifecycleModel.descriptionValue = "";
             switch (value) {
                 case ("PRESUB_MEETING"):
                     vm.descriptionList = TransactionLists.getPresubTypes();
@@ -130,22 +110,38 @@
                 case ("SNDS_C"):
                     vm.descriptionList = TransactionLists.getSndsCArray();
                     break;
-                /* case ("UD_PV"):
-                 vm.descriptionList= TransactionLists.getud
-                 break;*/
-                /* case ("UDRA"):
-                 vm.descriptionList= TransactionLists.getud
-                 /*       break;*!/
+                case ("UD_PV"):
+                    vm.descriptionList = TransactionLists.getUdpvType();
+                    break;
+                case ("UDRA"):
+                    vm.descriptionList = TransactionLists.getUdraType();
+                    break;
                  case ("CONSULTATION"):
-                 vm.descriptionList= TransactionLists.getconsult
-                 break;*/
+                     vm.descriptionList = TransactionLists.getConsultType();
+                     break;
 
                 case ("YBPR"):
-                    vm.descriptionList = TransactionLists.getYBprType();
+                    vm.descriptionList = TransactionLists.getYbprType()
                     break;
 
             }
 
+            function setDetailsAsNone() {
+
+                vm.endDateVisible = false;
+                vm.startDateVisible = false;
+                vm.descriptionVisible = false;
+                vm.versionVisible = false;
+                vm.lifecycleModel.startDate = "";
+                vm.lifecycleModel.endDate = "";
+                vm.lifecycleModel.details = "";
+                vm.lifecycleModel.version = "";
+            }
+
+            ///find if the value is in the list
+            if (vm.descriptionList.indexOf(temp) !== -1) {
+                vm.lifecycleModel.descriptionValue = temp;
+            }
         };
         vm.setDetailsState = function () {
             var value = vm.lifecycleModel.descriptionValue
@@ -176,6 +172,7 @@
                 case(value === 'SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
 
                     //nothing visible
+                    setDetailsAsNone();
                     break;
 
                 case(value === 'COMMENTS_NOC'):             /*FALLTHROUGH*/
@@ -212,49 +209,6 @@
                     //text
                     break;
 
-                /*"ADMINISTRATIVE", //administrative
-                 "BENEFIT_RISK_ASSESS", //benefit risk assessment
-                 "CANCEL_LETTER", //cancellation letter
-                 "CHANGE_TO_DIN", //changes to din
-                 "COMMENTS_NOC", // comments on notice of decision
-                 "COMMENTS_SUMMARY_BASIS", //commments on summary basis
-                 "DIN_DISCONTINUED", // din discontinued
-                 "DRUG_NOTIF_FORM", // drug notification form
-                 "FOR_PERIOD", //for period of ....
-                 "INITIAL", //Initial
-                 "MEETING_MINUTES", //minutes of meeting dated
-                 "NOTIFICATION_CHANGE", //notificaiton of change in benefit profile
-                 "PANDEMIC_APPL", //pandemic applicaiton
-                 "POST_CLEARANCE_DATA", //post clearance data
-                 "POST_MARKET_SURV", // post marketing surveillance
-                 "POST_NOC_CHANGE", //Post NOC change
-                 "POST_AUTH_DIV1_CHANGE", // Post autorization Division 1 change
-                 "PRESUB_MEETING_PKG", // presubmission meeting package
-                 "PRIORITY_REVIEW_RQ", // Priority rewiew request
-                 "PRISTINE_PM", // Pristine PM
-                 "PRISTINE_PM_2LANG", // pristine PM second language
-                 "ADVISEMENT_LETTER_RESPONSE", //REspose to Advisement Letter dated
-                 "CLIN_CLARIF_RESPONSE", //Response to clinical clarifiaction request
-                 "EMAIL_RQ_RESPONSE",// response to email request
-                 "LABEL_CLARIF_RESPONSE", //Response to labelling clarification request
-                 "MHPG_RQ_RESPONSE", //Response to MHPD requests
-                 "NOC_RESPONSE", //response to NOC/ c-Qn
-                 "NOD_RESPONSE", //Response to NOD
-                 "NOL_RESPONSE", //Response to NOL dated
-                 "NON_RESPONSE", //Response to NON
-                 "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
-                 "QUAL_CLIN_CLARIF_RESPONSE", //Response to quality and Clinical clarification REquest
-                 "QUAL_CLARIF_RESPONSE", //Response to Quality Clarification request
-                 "SCREENING_ACCEPT_RESPONSE", //response to screening acceptance letter
-                 "SCREENING_CLARIF_RESPONSE", // response to screening clarification request
-                 "SDN_RESPONSE", //response to SDN
-                 "PHONE_RQ_RESPONSE", //Response to telephone Request
-                 "RISK_COMMUN_DOC", //Risk communication document
-                 "RMP_VERSION_DATE", //RMP verison
-                 "SIGNAL_WORK_UP", //Signal Work up
-                 "UNSOLICITED_DATA", //Unsolicited Data
-                 "YEAR_LIST_OF_CHANGE", //Year, list of change number,
-                 "BE_CLARIF_RESPONSE" //Response to BE clarification request dated..*/
 
                 }
 

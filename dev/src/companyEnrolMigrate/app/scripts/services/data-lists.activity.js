@@ -41,8 +41,10 @@
             getSandsType: getSANDSArray,
             getSndsType: getSNDSArray,
             getSndsCArray: getSNDSCArray,
-            getUppvType: getUPPVArray,
-            getYBprType: getYBPRArray
+            getUdpvType: getUDPVArray,
+            getUdraType: getUDRAVArray,
+            getYbprType: getYBPRArray,
+            getConsultType: getConsultArray
         };
         return service;
 
@@ -79,7 +81,7 @@
                     "CLIN_CLARIF_RESPONSE", //Response to clinical clarifiaction request
                     "EMAIL_RQ_RESPONSE",// response to email request
                     "LABEL_CLARIF_RESPONSE", //Response to labelling clarification request
-                    "MHPG_RQ_RESPONSE", //Response to MHPD requests
+                    "MHPD_RQ_RESPONSE", //Response to MHPD requests
                     "NOC_RESPONSE", //response to NOC/ c-Qn
                     "NOD_RESPONSE", //Response to NOD
                     "NOL_RESPONSE", //Response to NOL dated
@@ -468,27 +470,48 @@
 
         }
 
-        function getUPPVArray() {
+        function getUDPVArray() {
 
             return ([
+
+                "BENEFIT_RISK_ASSESS", //benefit risk assessment
+                "CANCEL_LETTER", //cancellation letter
+                "NOTIFICATION_CHANGE", //notificaiton of change in benefit profile
+                "POST_MARKET_SURV", // post marketing surveillance
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "MHPD_RQ_RESPONSE", //Response to MHPD requests
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE", //Response to telephone Request
+                "RISK_COMMUN_DOC", //Risk communication document
+                "SIGNAL_WORK_UP" //Signal Work up
+            ])
+
+        }
+
+        function getUDRAVArray() {
+
+            return ([
+
                 "CANCEL_LETTER", //cancellation letter
                 "DIN_DISCONTINUED", // din discontinued
                 "ADVISEMENT_LETTER_RESPONSE", //REspose to Advisement Letter dated
                 "EMAIL_RQ_RESPONSE",// response to email request
                 "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
                 "PHONE_RQ_RESPONSE", //Response to telephone Request
-                "UNSOLICITED_DATA" //Unsolicited Data
+                "UNSOLICITED_DATA",
             ])
 
         }
 
-        function getConsult() {
+        function getConsultArray() {
 
             return ([
                 "PANDEMIC_APPL" //pandemic applicaiton,
             ])
-
         }
+
+
+        //udra
 
         function getYBPRArray() {
             return ([
@@ -496,7 +519,7 @@
                 "FOR_PERIOD", //for period of ....
                 "EMAIL_RQ_RESPONSE",// response to email request
                 "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
-                "PHONE_RQ_RESPONSE", //Response to telephone Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
             ]);
         }
 
