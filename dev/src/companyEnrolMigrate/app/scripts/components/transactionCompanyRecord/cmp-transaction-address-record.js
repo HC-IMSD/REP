@@ -67,6 +67,7 @@
 /**
  * Created by dkilty on 16/08/2016.
  */
+/*
 
 (function () {
     'use strict';
@@ -74,12 +75,13 @@
     angular
         .module('addressModule2', ['addressModule'])
 })();
+ */
 
 (function () {
     'use strict';
 
     angular
-        .module('transaction')
+        .module('addressModule2')
         .component('cmpTransactionAddressRecord', {
             templateUrl: 'app/scripts/components/transactionCompanyRecord/tpl-transaction-address-record.html',
             controller: transAddressRecCtrl,

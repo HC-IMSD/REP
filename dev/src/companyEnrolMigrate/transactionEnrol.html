@@ -104,22 +104,15 @@
                         <h3 class="panel-title">Regulatory Transaction Enrolment</h3>
                     </header>
                     <div class="panel-body">
+                        <!-- <cmp-lifecycle-details></cmp-lifecycle-details>-->
+                        <cmp-transaction-info transaction-root="main.transaction"
+                                              get-transaction="main.transactionService.getNewTransaction()"></cmp-transaction-info>
 
-                        <cmp-transaction-info></cmp-transaction-info>
-                        <!--<div class="row">
-                            <div class="col-xs-3 form-group">
-                                <label for="company-id-text">Company ID</label>
-                                <input type="text" class="form-control" id="company-id-text"
-                                       ng-readonly="main.isExtern()" maxlength="6"
-                                       ng-model="main.company.companyId"/>
-                            </div>
-                        </div>-->
                     </div>
                 </section>
 
 
 
-                <!-- <cmp-transaction-address-record address-record="transInfoCtrl.transactionModel"></cmp-transaction-address-record>-->
                 <div class="row">
                     <div class="form-group col-md-3">
                         <button class="btn-default" ng-click="main.saveJson()">Save Working Copy</button>
@@ -232,8 +225,10 @@
 <script src="app/scripts/components/transactionInfo/cmp-transaction-info.js"></script>
 <script src="app/scripts/components/expandingTable/cmp-expanding-table.js"></script>
 <script src="app/scripts/components/expandingTable/track-record.js"></script>
-<script src="app/scripts/components/lifecycleDetails/cmp-lifecycle-details.js"></script>
 <script src="app/scripts/services/data-lists.activity.js"></script>
+<script src="app/scripts/services/filter-lists.js"></script>
+<script src="app/scripts/components/lifecycleList/cmp-lifecycle-list.js"></script>
+<script src="app/scripts/components/lifecycleDetails/cmp-lifecycle-details.js"></script>
 <!--<script src="app/scripts/app.js"></script>
 <script src="app/scripts/services/company-service.js"></script>
 

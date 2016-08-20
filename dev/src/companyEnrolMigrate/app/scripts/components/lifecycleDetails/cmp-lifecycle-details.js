@@ -7,15 +7,15 @@
     'use strict';
 
     angular
-        .module('lifecycleDetails', ['services'])
+        .module('lcDetailsModule', [])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('lifecycleDetails')
-        .component('cmpLifecycleDetalis', {
+        .module('lcDetailsModule')
+        .component('cmpLifecycleDetails', {
             templateUrl: 'app/scripts/components/lifecycleDetails/tpl-lifecycle-details.html',
             controller: lifecycleRecCtrl,
             controllerAs: 'lifecycleCtrl',
@@ -26,8 +26,9 @@
                 showErrors: '&',
             }
         });
-    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate', '$scope'];
-    function lifecycleRecCtrl(TransactionLists, $translate, $scope) {
+    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
+
+    function lifecycleRecCtrl(TransactionLists, $translate) {
         var vm = this;
         vm.savePressed = false;
         vm.activityList = TransactionLists.getActivityTypes();
@@ -62,7 +63,8 @@
          */
         vm.$onChanges = function (changes) {
             if (changes.lifecycleRecord) {
-                // vm.lifecycleModel = changes.lifecycleRecord.currentValue;
+                console.log("changes to lifecycle record")
+                vm.lifecycleModel = angular.copy(changes.lifecycleRecord.currentValue);
             }
         };
 
@@ -161,7 +163,7 @@
                 vm.descriptionList = [];
                 return;
             }
-            translateToEnglish(value);
+
             switch (value) {
                 case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
                 case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
@@ -185,6 +187,7 @@
 
                     //nothing visible
                     setDetailsAsNone();
+                    vm.setConcatDetails();
                     break;
 
                 case('COMMENTS_NOC'):             /*FALLTHROUGH*/
@@ -206,27 +209,27 @@
                 case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
 
                     setAsStartDate();
-
+                    vm.setConcatDetails();
                     break;
                 case('RMP_VERSION_DATE'):
                     setVersionAndDate();
+                    vm.setConcatDetails();
                     break;
 
                 case('FOR_PERIOD'):
                     setAsDatePeriod();
+                    vm.setConcatDetails();
                     break;
 
                 case('UNSOLICITED_DATA'):
                 case('YEAR_LIST_OF_CHANGE'):
                     setAsDescription();
+                    vm.setConcatDetails();
                     break;
-
 
                 }
 
-
         }
-
 
         /**
          * @ngdoc method -sets the details fields to all hidden
@@ -288,7 +291,7 @@
             vm.lifecycleModel.version = "";
         }
 
-        function setAsVerisonDescrption() {
+        function setAsVersionDescription() {
             vm.endDateVisible = false;
             vm.startDateVisible = false;
             vm.descriptionVisible = true;
@@ -297,40 +300,38 @@
             vm.lifecycleModel.endDate = "";
         }
 
-        function setConcatDetails() {
-
-            //getDescription in English
-            //convert Date Nov 12, 2008
+        vm.setConcatDetails = function () {
             var startDate = "";
             var endDate = "";
             var concatText = ""
-            //translate.in
+            //translate value to english
+            var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
+            console.log("en de" + enDescription)
             if (vm.startDateVisible) {
                 startDate = convertDate(vm.lifecycleModel.startDate);
-                concatText = " dated " + startDate;
+                concatText = enDescription + " dated " + startDate;
             }
             if (vm.endDateVisible) {
+
                 endDate = convertDate(vm.lifecycleModel.endDate);
-                concatText = " For period of " + startDate + " to " + endDate;
+                concatText = enDescription + " of " + startDate + " to " + endDate;
+            }
+            if (vm.descriptionVisible) {
+
+                concatText = enDescription + "\n" + vm.lifecycleModel.details;
             }
             if (vm.versionVisible) {
-                concatText = "RMP version " + vm.lifecycleModel.version + concatText;
+                concatText = enDescription + vm.lifecycleModel.version + concatText;
             }
-
+            if (!concatText) concatText = enDescription;
+            vm.lifecycleModel.sequenceConcat = concatText;
         }
-
         function translateToEnglish(key) {
-
-            var currentLang = $translate.use();
-            $translate.use('en');
             var translateText = "";
-
-            $translate('key').then(function (translation) {
-                translateText = translation;
-            });
-
+            //note this is done whether loaded or not should be OK
+            translateText = $translate.instant(key, "", '', 'en')
             console.log("This is the translate " + translateText)
-
+            return translateText;
         }
 
         function convertDate(value) {
@@ -340,7 +341,7 @@
                 "Apr", "May", "Jun", "Jul", "Aug", "Sep",
                 "Oct", "Nov", "Dec"];
             var result = ""
-            result = m_names[date.getMonth()] + ", " + date.getDay() + ", " + date.getFullYear();
+            result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
             return result
         }
         /**
@@ -360,12 +361,6 @@
              vm.savePressed = false;*/
         };
 
-        vm.onAddressRoleUpdate = function (newRole) {
-            /* var aRole = {};
-             angular.extend(aRole, newRole);
-             vm.addressModel.addressRole = aRole;
-             vm.updateAddressModel2();*/
-        };
         /**
          * @ngdoc method -Updates the parent on whether this record is valid or not
          */
@@ -377,15 +372,16 @@
         /**
          * Updates the contact model used by the save button
          */
-        /* vm.updateAddressModel2 = function () {
-         if (vm.addressRecForm.$valid) {
+        vm.updateLivecycleModel = function () {
+
          if (vm.addressRecForm.$valid) {
          vm.isDetailValid({state: true});
          vm.addressRecForm.$setPristine();
-         vm.onUpdate({rec: vm.addressModel});
+             vm.onUpdate({rec: vm.lifecycleModel});
          }
          vm.savePressed = true;
          }
+        /*
          /!**
              * @ngdoc method toggles error state to make errors visible
              * @returns {boolean}

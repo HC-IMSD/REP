@@ -7,13 +7,14 @@
             'ngAria',
             'fileIO',
             'services',
-            'transaction',
+            'transactionInfo',
             'addressModule',
             'contactModule25',
             'contactModule26',
             'contactModule',
-            'lifecycleDetails',
-            'transactionService'
+            'transactionService',
+            'filterLists',
+            'lcDetailsModule'
         ])
 })();
 
@@ -30,18 +31,15 @@
         var vm = this;
         vm.isIncomplete = true;
         vm.userType;
-        var _transaction= new TransactionService();
-        // vm.rootTag=_transaction.getRootTag();
-        //vm.transaction=_transaction.getTransactionInfo();
-
-
+        vm.transactionService = new TransactionService();
+        vm.transaction = vm.transactionService.getModelInfo();
         /**
          *
          * @ngdoc method Saves the model content in JSON format
          */
         vm.saveJson=function(){
             var writeResult=_transformFile()
-            vm.rootTag = _transaction.getRootTag();
+            vm.rootTag = vm.transactionService.getRootTag();
             hpfbFileProcessing.writeAsJson(writeResult, "transactionEnrol", vm.rootTag);
         }
         /**
@@ -61,7 +59,7 @@
             }else {
                 incrementMinorVersion();
             }*/
-            var writeResult=_transaction.transformToFileObj(vm.transaction);
+            var writeResult = vm.transactionService.transformToFileObj(vm.transaction);
             return writeResult;
         }
 
@@ -74,13 +72,13 @@
         }*/
         function _loadFileContent(fileContent) {
             if(!fileContent)return;
-            _transaction = new TransactionService();
+            vm.transactionService = new TransactionService();
            var resultJson = fileContent.jsonResult;
 
             if(resultJson) {
-                _transaction.transformFromFileObj(resultJson)
+                vm.transactionService.transformFromFileObj(resultJson)
                 vm.transaction={}
-                angular.extend(vm.transaction,_transaction.getModelInfo())
+                angular.extend(vm.transaction, vm.transactionService.getModelInfo())
             }
         };
 
@@ -153,6 +151,10 @@
                     },
                     {
                         prefix: 'app/resources/contact-',
+                        suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/transaction-',
                         suffix: '.json'
                     }
                 ]

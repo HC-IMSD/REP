@@ -109,7 +109,12 @@
                 </label>
             </div>
         </div>
+        <div>
+            <h2>Test</h2>
+            <cmp-lifecycle-list records="transInfoCtrl.transactionModel.lifecycleRecord"
+                                get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
 
+        </div>
         <fieldset>
             <legend>{{'Name of Regulatory Project Manager, if known'|translate}}</legend>
             <div class="row">
@@ -175,7 +180,6 @@
         <cmp-rep-contact-list></cmp-rep-contact-list>
 
 
-        <cmp-lifecycle-detalis></cmp-lifecycle-detalis>
         <!-- <cmp-rep-contact-record></cmp-rep-contact-record>-->
         <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>
 

@@ -44,16 +44,17 @@
             };
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
+            this.currSequence = 0;
         }
 
         TransactionService.prototype = {
             _default: {},
             //TODO update
 
-             getRootTag:function(){
+            getRootTag: function () {
 
-                 return("TRANSACTION_ENROL")
-             } ,
+                return ("TRANSACTION_ENROL")
+            },
             /**
              * ngDoc method- mapping from the transaction file json object to the internal representation
              * @param jsonObj the json object generated from the file
@@ -93,7 +94,7 @@
                         same_regulatory_company: jsonObj.sameCompany,
                         company_name: jsonObj.companyName,
                         same_regulatory_address: jsonObj.sameAddress, //this may no longer be needed
-                        regulatory_activity_address: _mapAddressToOuput(jsonObj.activityAddress),
+                        regulatory_activity_address: _mapAddressToOutput(jsonObj.activityAddress),
                         same_regulatory_contact: jsonObj.sameCompany, //this may no longer be needed
                         regulatory_activity_contact: _mapContactToOutput(jsonObj.activityContact)
                     }
@@ -130,9 +131,47 @@
                 //reg address
                 model.activityAddress = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact;
-                model.activityContact= _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
+                model.activityContact = _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
                 model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj.rep_submission_contact_record);
-                model.lifecycleRecord = _mapLifecycleList(jsonObj.lifecycle_record);
+                model.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
+            },
+            getNewTransaction: function () {
+                var model = _createLifeCycleModel();
+                model.sequence = this.getNextSequenceNumber();
+                return model;
+            },
+            setSequenceNumber: function (value) {
+                if (!value)return;
+                var converted = Integer.parse(value)
+                if (converted > this.currSequence) {
+                    this.currSequence = converted;
+                }
+            },
+            getNextSequenceNumber: function () {
+                this.currSequence++;
+                var seqText = "" + this.currSequence;
+                var pad = 4 - seqText.length;
+                var padText = "";
+                for (var i = 0; i < pad; i++) {
+                    padText = padText + "0";
+                }
+                seqText = padText + seqText;
+                return (seqText);
+            },
+            _mapLifecycleList: function (jsonObj) {
+                var result = [];
+                if (!jsonObj) return list;
+                if (!(jsonObj instanceof Array)) {
+                    //make it an array, case there is only one record
+                    jsonObj = [jsonObj]
+                }
+                for (var i = 0; i < jsonObj.length; i++) {
+
+                    var record = _transformLifecycleRecFromFileObj(jsonObj[i])
+                    _setSequenceNumber(record.sequence);
+                    result.push(record);
+                }
+                return result
             }
         };
         // Return a reference to the object
@@ -159,18 +198,6 @@
         return (result)
     }
 
-    function _mapLifecycleList(jsonObj){
-        var result=[];
-        if (!jsonObj) return list;
-        if (!(jsonObj instanceof Array)) {
-            //make it an array, case there is only one record
-            jsonObj = [jsonObj]
-        }
-        for (var i = 0; i < jsonObj.length; i++) {
-            result.push(_transformLifecycleRecFromFileObj(jsonObj[i]));
-        }
-        return result
-    }
 
     /**
      * @ngdoc method Maps a lifecycle record file object to the internal data model
@@ -180,7 +207,6 @@
      */
     function _transformLifecycleRecFromFileObj(lifecycleObj) {
         var lifecycleRec = _createLifeCycleModel();
-
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
@@ -193,6 +219,7 @@
         lifecycleRec.sequenceConcat = lifecycleObj.sequence_concat;
         return (lifecycleRec);
     }
+
 
     function _mapLifecycleRecToOutput(lifecycleObj) {
         var lifecycleRec = {};

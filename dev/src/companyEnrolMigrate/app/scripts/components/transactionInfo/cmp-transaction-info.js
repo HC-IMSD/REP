@@ -6,23 +6,24 @@
     'use strict';
 
     angular
-        .module('transaction', ['contactModule25', 'lifecycleDetails'])
+        .module('transactionInfo', ['contactModule25', 'lifecycleList'])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('transaction')
+        .module('transactionInfo')
         .component('cmpTransactionInfo', {
             templateUrl: 'app/scripts/components/transactionInfo/tpl-transaction-info.html',
             controller: transactionInfoCtrl,
             controllerAs: 'transInfoCtrl',
             bindings: {
-                contactRecord: '<',
+                transactionRoot: '<',
                  onUpdate: '&',
                  isAmend: '<',
                 showErrors: '&',
+                getTransaction: '&'
             }
         });
 
@@ -30,17 +31,19 @@
     function transactionInfoCtrl(TransactionService) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'}
-        vm.transactionModel = {};
-        var _transactionService = new TransactionService();
-        vm.transactionModel = _transactionService.getModelInfo();
-        vm.$onInit = function () {
+        vm.transactionModel = vm.transactionRoot;
 
+
+        vm.$onInit = function () {
             console.log("default model" + JSON.stringify(vm.transactionModel))
+            console.log("The transaction service for info " + vm.transactionServiceInfo)
         }
         //TODO rename
         vm.$onChanges = function (changes) {
 
-
+        }
+        vm.getNewTransaction = function () {
+            return (vm.getTransaction());
         }
         vm.showError = function (ctrl) {
             /* if((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid )){

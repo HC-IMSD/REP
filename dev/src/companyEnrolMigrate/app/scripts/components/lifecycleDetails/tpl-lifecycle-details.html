@@ -37,7 +37,7 @@
                                         ng-model="lifecycleCtrl.lifecycleModel.activityType"
                                         data-ng-change="lifecycleCtrl.setSequenceList()"
                                         class="form-control"
-                                        ng-options="activity |translate for activity in  lifecycleCtrl.activityList">
+                                        ng-options="activity |translate for activity in  lifecycleCtrl.activityList | orderByTranslated">
                                 </select>
                             </label>
                         </div>
@@ -46,7 +46,7 @@
                                 <span class="field-name">{{"SEQUENCE_TYPE" |translate}}</span>
                                 <select id="seqDescription_{{$id}}" name="seqDescription"
                                         ng-model="lifecycleCtrl.lifecycleModel.descriptionValue"
-                                        ng-options="descript |translate for descript in  lifecycleCtrl.descriptionList"
+                                        ng-options="descript |translate for descript in  lifecycleCtrl.descriptionList| orderByTranslated"
                                         data-ng-change="lifecycleCtrl.setDetailsState()"
                                         class="form-control"></select>
                             </label>
@@ -61,6 +61,7 @@
                                 <span class="date-picker-format">(YYYY-MM-DD)</span>
                                 <input type="date" id="dateStart_{{$id}}" name="dateStart"
                                        ng-model="lifecycleCtrl.lifecycleModel.startDate"
+                                       data-ng-change="lifecycleCtrl.setConcatDetails()"
                                        class="form-control" min="2013-03-03">
                                 </input>
                             </label>
@@ -71,6 +72,7 @@
                                 <span class="field-name">{{"END_DATE" |translate}}</span>
                                 <input type="date" id="dateend_{{$id}}" name="dateEnd"
                                        ng-model="lifecycleCtrl.lifecycleModel.endDate"
+                                       ng-change="lifecycleCtrl.setConcatDetails()"
                                        class="form-control">
                                 </input>
                             </label>
@@ -83,6 +85,7 @@
                                 <span class="field-name">{{"BRIEF_DESC" |translate}}</span>
                                 <input type="text" id="details_{{$id}}" name="details"
                                        ng-model="lifecycleCtrl.lifecycleModel.details"
+                                       ng-change="lifecycleCtrl.setConcatDetails()"
                                        class="form-control">
                                 </input>
                             </label>
@@ -95,6 +98,7 @@
                                 <span class="field-name">{{"VERSION_NO" |translate}}</span>
                                 <input type="text" id="version_{{$id}}" name="version"
                                        ng-model="lifecycleCtrl.lifecycleModel.sequenceVersion"
+                                       ng-change="lifecycleCtrl.setConcatDetails()"
                                        class="form-control">
                                 </input>
                             </label>
