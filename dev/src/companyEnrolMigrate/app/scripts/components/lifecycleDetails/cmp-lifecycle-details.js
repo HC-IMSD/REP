@@ -26,8 +26,8 @@
                 showErrors: '&',
             }
         });
-    lifecycleRecCtrl.$inject = ['TransactionLists']
-    function lifecycleRecCtrl(TransactionLists) {
+    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate', '$scope'];
+    function lifecycleRecCtrl(TransactionLists, $translate, $scope) {
         var vm = this;
         vm.savePressed = false;
         vm.activityList = TransactionLists.getActivityTypes();
@@ -45,11 +45,31 @@
             details: '',
             sequenceVersion: '',
             sequenceConcat: ''
-            }
+        };
         vm.endDateVisible = false;
         vm.startDateVisible = false;
         vm.descriptionVisible = false;
         vm.versionVisible = false;
+
+        vm.$onInit = function () {
+
+        };
+
+
+        /**
+         *
+         * @param changes
+         */
+        vm.$onChanges = function (changes) {
+            if (changes.lifecycleRecord) {
+                // vm.lifecycleModel = changes.lifecycleRecord.currentValue;
+            }
+        };
+
+        /**
+         * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
+         * @param value
+         */
         vm.setSequenceList = function (value) {
 
             value = vm.lifecycleModel.activityType;
@@ -126,87 +146,79 @@
 
             }
 
-            function setDetailsAsNone() {
-
-                vm.endDateVisible = false;
-                vm.startDateVisible = false;
-                vm.descriptionVisible = false;
-                vm.versionVisible = false;
-                vm.lifecycleModel.startDate = "";
-                vm.lifecycleModel.endDate = "";
-                vm.lifecycleModel.details = "";
-                vm.lifecycleModel.version = "";
-            }
-
             ///find if the value is in the list
             if (vm.descriptionList.indexOf(temp) !== -1) {
                 vm.lifecycleModel.descriptionValue = temp;
             }
         };
+        /**
+         * @ngdoc method sets the state of the details field based on
+         * what was selected for the details description
+         */
         vm.setDetailsState = function () {
             var value = vm.lifecycleModel.descriptionValue
             if (!value) {
                 vm.descriptionList = [];
                 return;
             }
+            translateToEnglish(value);
             switch (value) {
-
-                case(value === 'ADMINISTRATIVE'):         /*FALLTHROUGH*/
-                case(value === 'BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
-                case(value === 'CANCEL_LETTER'):          /*FALLTHROUGH*/
-                case(value === 'CHANGE_TO_DIN'):          /*FALLTHROUGH*/
-                case(value === 'DIN_DISCONTINUED'):       /*FALLTHROUGH*/
-                case(value === 'DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
-                case(value === 'INITIAL'):                /*FALLTHROUGH*/
-                case(value === 'NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
-                case(value === 'PANDEMIC_APPL'):          /*FALLTHROUGH*/
-                case(value === 'POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
-                case(value === 'POST_MARKET_SURV'):       /*FALLTHROUGH*/
-                case(value === 'POST_NOC_CHANGE'):        /*FALLTHROUGH*/
-                case(value === 'POST_AUTH_DIV1_CHANGE'):  /*FALLTHROUGH*/
-                case(value === 'PRESUB_MEETING_PKG'):     /*FALLTHROUGH*/
-                case(value === 'PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
-                case(value === 'PRISTINE_PM'):            /*FALLTHROUGH*/
-                case(value === 'PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
-                case(value === 'RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
-                case(value === 'SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
+                case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
+                case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
+                case('CANCEL_LETTER'):          /*FALLTHROUGH*/
+                case('CHANGE_TO_DIN'):          /*FALLTHROUGH*/
+                case('DIN_DISCONTINUED'):       /*FALLTHROUGH*/
+                case('DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
+                case('INITIAL'):                /*FALLTHROUGH*/
+                case('NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
+                case('PANDEMIC_APPL'):          /*FALLTHROUGH*/
+                case('POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
+                case('POST_MARKET_SURV'):       /*FALLTHROUGH*/
+                case('POST_NOC_CHANGE'):        /*FALLTHROUGH*/
+                case('POST_AUTH_DIV1_CHANGE'):  /*FALLTHROUGH*/
+                case('PRESUB_MEETING_PKG'):     /*FALLTHROUGH*/
+                case('PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
+                case('PRISTINE_PM'):            /*FALLTHROUGH*/
+                case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
+                case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
+                case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
 
                     //nothing visible
                     setDetailsAsNone();
                     break;
 
-                case(value === 'COMMENTS_NOC'):             /*FALLTHROUGH*/
-                case(value === 'COMMENTS_SUMMARY_BASIS'):   /*FALLTHROUGH*/
-                case(value === 'MEETING_MINUTES'):            /*FALLTHROUGH*/
-                case(value === 'ADVISEMENT_LETTER_RESPONSE'):   /*FALLTHROUGH*/
-                case(value === 'CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case(value === 'EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
-                case(value === 'LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case(value === 'MHPG_RQ_RESPONSE'):             /*FALLTHROUGH*/
-                case(value === 'NOC_RESPONSE'):                  /*FALLTHROUGH*/
-                case(value === 'NOD_RESPONSE'):                  /*FALLTHROUGH*/
-                case(value === 'NON_RESPONSE'):                 /*FALLTHROUGH*/
-                case(value === 'PROCESSING_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case(value === 'QUAL_CLIN_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case(value === 'QUAL_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case(value === 'SDN_RESPONSE'):                 /*FALLTHROUGH*/
-                case(value === 'PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
-                case(value === 'BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
+                case('COMMENTS_NOC'):             /*FALLTHROUGH*/
+                case('COMMENTS_SUMMARY_BASIS'):   /*FALLTHROUGH*/
+                case('MEETING_MINUTES'):            /*FALLTHROUGH*/
+                case('ADVISEMENT_LETTER_RESPONSE'):   /*FALLTHROUGH*/
+                case('CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
+                case('EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
+                case('LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
+                case('MHPG_RQ_RESPONSE'):             /*FALLTHROUGH*/
+                case('NOC_RESPONSE'):                  /*FALLTHROUGH*/
+                case('NOD_RESPONSE'):                  /*FALLTHROUGH*/
+                case('NON_RESPONSE'):                 /*FALLTHROUGH*/
+                case('PROCESSING_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
+                case('QUAL_CLIN_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
+                case('QUAL_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
+                case('SDN_RESPONSE'):                 /*FALLTHROUGH*/
+                case('PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
+                case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
 
-                    //date start
+                    setAsStartDate();
 
                     break;
-                case(value === 'RMP_VERSION_DATE'):
-                    //version and date
+                case('RMP_VERSION_DATE'):
+                    setVersionAndDate();
                     break;
 
-                case(value === 'FOR_PERIOD'):
-                    //start and end date
+                case('FOR_PERIOD'):
+                    setAsDatePeriod();
                     break;
 
-                case(value === 'UNSOLICITED_DATA'):
-                case(value === 'YEAR_LIST_OF_CHANGE'):
-                    //text
+                case('UNSOLICITED_DATA'):
+                case('YEAR_LIST_OF_CHANGE'):
+                    setAsDescription();
                     break;
 
 
@@ -216,21 +228,121 @@
         }
 
 
-        vm.$onInit = function () {
-
-        };
-
-
         /**
-         *
-         * @param changes
+         * @ngdoc method -sets the details fields to all hidden
          */
-        vm.$onChanges = function (changes) {
-            if (changes.lifecycleRecord) {
-                vm.lifecycleModel = changes.lifecycleRecord.currentValue;
-            }
-        };
+        function setDetailsAsNone() {
 
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = false;
+            vm.versionVisible = false;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.version = "";
+        }
+
+        function setAsDescription() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = true;
+            vm.versionVisible = false;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.version = "";
+
+        }
+
+        function setAsStartDate() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = true;
+            vm.startDateLabel = "DATE"
+            vm.descriptionVisible = false;
+            vm.versionVisible = false;
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.version = "";
+        }
+
+        function setVersionAndDate() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = true;
+            vm.startDateLabel = "DATED"
+            vm.descriptionVisible = false;
+            vm.versionVisible = true;
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.details = "";
+
+        }
+
+        function setAsDatePeriod() {
+
+            vm.endDateVisible = true;
+            vm.startDateVisible = true;
+            vm.startDateLabel = "START_DATE"
+            vm.descriptionVisible = false;
+            vm.versionVisible = false;
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.version = "";
+        }
+
+        function setAsVerisonDescrption() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = true;
+            vm.versionVisible = true;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+        }
+
+        function setConcatDetails() {
+
+            //getDescription in English
+            //convert Date Nov 12, 2008
+            var startDate = "";
+            var endDate = "";
+            var concatText = ""
+            //translate.in
+            if (vm.startDateVisible) {
+                startDate = convertDate(vm.lifecycleModel.startDate);
+                concatText = " dated " + startDate;
+            }
+            if (vm.endDateVisible) {
+                endDate = convertDate(vm.lifecycleModel.endDate);
+                concatText = " For period of " + startDate + " to " + endDate;
+            }
+            if (vm.versionVisible) {
+                concatText = "RMP version " + vm.lifecycleModel.version + concatText;
+            }
+
+        }
+
+        function translateToEnglish(key) {
+
+            var currentLang = $translate.use();
+            $translate.use('en');
+            var translateText = "";
+
+            $translate('key').then(function (translation) {
+                translateText = translation;
+            });
+
+            console.log("This is the translate " + translateText)
+
+        }
+
+        function convertDate(value) {
+            if (!value) return "";
+            var date = new Date(value);
+            var m_names = ["Jan", "Feb", "Mar",
+                "Apr", "May", "Jun", "Jul", "Aug", "Sep",
+                "Oct", "Nov", "Dec"];
+            var result = ""
+            result = m_names[date.getMonth()] + ", " + date.getDay() + ", " + date.getFullYear();
+            return result
+        }
         /**
          *  calls the delete function on the parent
          */
