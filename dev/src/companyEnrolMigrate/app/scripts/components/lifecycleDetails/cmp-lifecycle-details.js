@@ -24,6 +24,7 @@
                 lifecycleRecord: '<',
                 onUpdate: '&',
                 showErrors: '&',
+                isDetailValid: '&'
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
@@ -53,7 +54,6 @@
         vm.versionVisible = false;
 
         vm.$onInit = function () {
-
         };
 
 
@@ -65,6 +65,9 @@
             if (changes.lifecycleRecord) {
                 console.log("changes to lifecycle record")
                 vm.lifecycleModel = angular.copy(changes.lifecycleRecord.currentValue);
+                convertToDate()
+                vm.setSequenceList();
+                vm.setDetailsState();
             }
         };
 
@@ -72,9 +75,10 @@
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
          * @param value
          */
-        vm.setSequenceList = function (value) {
+        vm.setSequenceList = function () {
 
-            value = vm.lifecycleModel.activityType;
+            var value = vm.lifecycleModel.activityType;
+            console.log("The activity Type is ")
             var temp = vm.lifecycleModel.descriptionValue;
             vm.lifecycleModel.descriptionValue = "";
             switch (value) {
@@ -147,7 +151,6 @@
                     break;
 
             }
-
             ///find if the value is in the list
             if (vm.descriptionList.indexOf(temp) !== -1) {
                 vm.lifecycleModel.descriptionValue = temp;
@@ -228,6 +231,79 @@
                     break;
 
                 }
+
+        }
+        vm.setDetailsState = function () {
+            var value = vm.lifecycleModel.descriptionValue
+            if (!value) {
+                vm.descriptionList = [];
+                return;
+            }
+
+            switch (value) {
+                case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
+                case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
+                case('CANCEL_LETTER'):          /*FALLTHROUGH*/
+                case('CHANGE_TO_DIN'):          /*FALLTHROUGH*/
+                case('DIN_DISCONTINUED'):       /*FALLTHROUGH*/
+                case('DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
+                case('INITIAL'):                /*FALLTHROUGH*/
+                case('NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
+                case('PANDEMIC_APPL'):          /*FALLTHROUGH*/
+                case('POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
+                case('POST_MARKET_SURV'):       /*FALLTHROUGH*/
+                case('POST_NOC_CHANGE'):        /*FALLTHROUGH*/
+                case('POST_AUTH_DIV1_CHANGE'):  /*FALLTHROUGH*/
+                case('PRESUB_MEETING_PKG'):     /*FALLTHROUGH*/
+                case('PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
+                case('PRISTINE_PM'):            /*FALLTHROUGH*/
+                case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
+                case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
+                case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
+
+                    //nothing visible
+                    setDetailsAsNone();
+                    vm.setConcatDetails();
+                    break;
+
+                case('COMMENTS_NOC'):             /*FALLTHROUGH*/
+                case('COMMENTS_SUMMARY_BASIS'):   /*FALLTHROUGH*/
+                case('MEETING_MINUTES'):            /*FALLTHROUGH*/
+                case('ADVISEMENT_LETTER_RESPONSE'):   /*FALLTHROUGH*/
+                case('CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
+                case('EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
+                case('LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
+                case('MHPG_RQ_RESPONSE'):             /*FALLTHROUGH*/
+                case('NOC_RESPONSE'):                  /*FALLTHROUGH*/
+                case('NOD_RESPONSE'):                  /*FALLTHROUGH*/
+                case('NON_RESPONSE'):                 /*FALLTHROUGH*/
+                case('PROCESSING_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
+                case('QUAL_CLIN_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
+                case('QUAL_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
+                case('SDN_RESPONSE'):                 /*FALLTHROUGH*/
+                case('PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
+                case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
+
+                    setAsStartDate();
+                    vm.setConcatDetails();
+                    break;
+                case('RMP_VERSION_DATE'):
+                    setVersionAndDate();
+                    vm.setConcatDetails();
+                    break;
+
+                case('FOR_PERIOD'):
+                    setAsDatePeriod();
+                    vm.setConcatDetails();
+                    break;
+
+                case('UNSOLICITED_DATA'):
+                case('YEAR_LIST_OF_CHANGE'):
+                    setAsDescription();
+                    vm.setConcatDetails();
+                    break;
+
+            }
 
         }
 
@@ -374,13 +450,28 @@
          */
         vm.updateLivecycleModel = function () {
 
-         if (vm.addressRecForm.$valid) {
+            if (vm.lifecycleDetailsForm.$valid) {
          vm.isDetailValid({state: true});
-         vm.addressRecForm.$setPristine();
-             vm.onUpdate({rec: vm.lifecycleModel});
+                vm.lifecycleDetailsForm.$setPristine();
+                vm.onUpdate({record: vm.lifecycleModel});
          }
          vm.savePressed = true;
          }
+        function convertToDate() {
+            //TODO parse string and convert
+            if (vm.lifecycleModel.dateFiled) {
+                console.log("Date filed" + vm.lifecycleModel.dateFiled + " " + new Date(vm.lifecycleModel.dateFiled))
+                vm.lifecycleModel.dateFiled = new Date(vm.lifecycleModel.dateFiled).toUTCString()
+
+            }
+            if (vm.lifecycleModel.startDate) {
+                vm.lifecycleModel.startDate = new Date(vm.lifecycleModel.startDate).toUTCString();
+            }
+            if (vm.lifecycleModel.endDate) {
+                vm.lifecycleModel.endDate = new Date(vm.lifecycleModel.endDate).toUTCString();
+            }
+        }
+
         /*
          /!**
              * @ngdoc method toggles error state to make errors visible

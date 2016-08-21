@@ -41,14 +41,19 @@
                 width: "15"
             },
             {
-                label: "REGULATORY_ACTIVITY",
-                binding: "activityType",
-                width: "25"
+                label: "CONTROL_NUMBER",
+                binding: "controlNumber",
+                width: "15"
+            },
+            {
+                label: "DATE_FILED",
+                binding: "dateFiled",
+                width: "15"
             },
             {
                 label: "SEQUENCE_DESCRIPT",
                 binding: "sequenceConcat",
-                width: "60"
+                width: "55"
             }
         ]
 
@@ -90,12 +95,16 @@
         vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;
         }
-        vm.onUpdateAddressRecord = function (address) {
-            //vm.detailsValid = address.isDetailValid;
+        vm.onUpdateLifecycleRecord = function (record) {
+
             var idx = vm.lifecycleList.indexOf(
-                $filter('filter')(vm.lifecycleList, {addressID: address.addressID}, true)[0]
+                $filter('filter')(vm.lifecycleList, {sequence: record.sequence}, true)[0]
             );
-            vm.lifecycleList[idx] = angular.copy(address);
+            console.log("This is the idx " + idx)
+            record.dateFiled = convertDate(record.dateFiled);
+            record.startDate = convertDate(record.startDate);
+            record.endDate = convertDate(record.endDate);
+            vm.lifecycleList[idx] = angular.copy(record);
             vm.isDetailsValid = true;
         }
         /**
@@ -109,7 +118,20 @@
             }
             return false
         };
-
+        function convertDate(value) {
+            if (!value) return value;
+            var aDate = new Date(value);
+            var month = +(aDate.getMonth() + 1)
+            if (month < 10) {
+                month = '0' + month;
+            }
+            var day = aDate.getDate()
+            if (day < 10) {
+                day = '0' + day;
+            }
+            var result = aDate.getFullYear() + '-' + month + '-' + day;
+            return result;
+        }
 
     }
 })();

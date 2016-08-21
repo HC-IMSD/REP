@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <ng-form name="lifecycleRec.lifecycleForm">
+    <ng-form name="lifecycleCtrl.lifecycleDetailsForm">
         <div>
             <div>
                 <h2>Lifecycle Transaction</h2>
@@ -10,7 +10,7 @@
                             <span class="field-name">{{"Sequence Number" |translate}}</span>
                             <input type="text" id="sequenceNumber_{{$id}}" name="sequenceNumber"
                                    ng-model="lifecycleCtrl.lifecycleModel.sequence"
-                                   class="form-control " maxlength="8" size="8" ng-readonly="true"/>
+                                   class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
                         </label>
                     </div>
                     <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
@@ -26,29 +26,29 @@
                             <span class="field-name">{{"Control Number" |translate}}</span>
                             <input type="text" id="controlNum_{{$id}}" name="controlNum"
                                    ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
-                                   class="form-control " maxlength="6" size="6"/>
+                                   class="form-control full-width" maxlength="6" size="6"/>
                         </label>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-6" ng-class="{'has-error':lifecycleCtrl.showError()}">
+                        <div class="form-group  col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
                             <label for="controlNum_{{$id}}">
                                 <span class="field-name">{{"REG_ACTIVITY" |translate}}</span>
                                 <select id="regActivity_{{$id}}" name="regActivity"
                                         ng-model="lifecycleCtrl.lifecycleModel.activityType"
                                         data-ng-change="lifecycleCtrl.setSequenceList()"
-                                        class="form-control"
+                                        class="form-control full-width"
                                         ng-options="activity |translate for activity in  lifecycleCtrl.activityList | orderByTranslated">
                                 </select>
                             </label>
                         </div>
-                        <div class="form-group col-md-6" ng-class="{'has-error':lifecycleCtrl.showError()}">
+                        <div class="form-group col-md-6 " ng-class="{'has-error':lifecycleCtrl.showError()}">
                             <label for="seqDescription_{{$id}}">
                                 <span class="field-name">{{"SEQUENCE_TYPE" |translate}}</span>
                                 <select id="seqDescription_{{$id}}" name="seqDescription"
                                         ng-model="lifecycleCtrl.lifecycleModel.descriptionValue"
                                         ng-options="descript |translate for descript in  lifecycleCtrl.descriptionList| orderByTranslated"
                                         data-ng-change="lifecycleCtrl.setDetailsState()"
-                                        class="form-control"></select>
+                                        class="form-control full-width"></select>
                             </label>
                         </div>
                     </div>
@@ -107,13 +107,15 @@
                 </div>
                 <div class="row">
                     <div class="btn-group-sm col-xs-12 text-right">
-                        <input type="submit" value="Save Address" class="btn btn-primary" name="saveContact"
+                        <input type="submit" value="{{'Save Transaction '| translate}}" class="btn btn-primary"
+                               name="saveContact"
                                id="saveContact"
-                               ng-click="addressRec.updateAddressModel2()" ng-disabled="addressRec.setNotEditable()">
+                               ng-click="lifecycleCtrl.updateLivecycleModel()"
+                               ng-disabled="lifecycleCtrl.setNotEditable()">
                         <input type="submit" value="Delete Record" class="btn btn-danger"
-                               ng-click="addressRec.delete()">
+                               ng-click="lifecycleCtrl.delete()">
                         <input type="submit" value="Discard Changes" class="btn btn-default"
-                               ng-click="addressRec.discardChanges()">
+                               ng-click="lifecycleCtrl.discardChanges()">
                     </div>
                 </div>
             </div>

@@ -317,7 +317,7 @@
             "controlNumber": "",
             "activityType": "",
             "descriptionValue": "",
-            "startDate": "1",
+            "startDate": "",
             "endDate": "",
             "details": "",
             "version": "",
