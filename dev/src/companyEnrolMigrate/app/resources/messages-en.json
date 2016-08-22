@@ -8,6 +8,7 @@
   "MSG_ERR_ADDRESSSROLE": "The roles of manufacturer, mailing, billing, and importer have not all been selected among the list of addresses",
   "MSG_ERR_POSTAL": "Please specify a valid postal code.",
   "MSG_ERR_ZIP": "Please specify a valid zip code.",
+  "MSG_ERR_DATE_FORMAT": "The date format is incorrect.",
   "MAILING_SEL": "Mailing Role already Selected",
   "MANUFACT_SEL": "Manufacturer Role already Selected",
   "MAIL_SEL": "Mailing Role already Selected",

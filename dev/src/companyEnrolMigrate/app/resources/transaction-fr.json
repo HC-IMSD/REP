@@ -1,4 +1,6 @@
 {
+  "NAME": "Nom",
+
   "COMPANY_ID": "fr_Company Id",
   "DOSSIER_ID": "fr_Dossier Id",
   "DOSSIER_NAME": "fr_Dossier Name",

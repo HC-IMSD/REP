@@ -32,7 +32,9 @@
         vm.isIncomplete = true;
         vm.userType;
         vm.transactionService = new TransactionService();
+        vm.rootTag = vm.transactionService.getRootTag();
         vm.transaction = vm.transactionService.getModelInfo();
+        vm.showContent = _loadFileContent;
         /**
          *
          * @ngdoc method Saves the model content in JSON format

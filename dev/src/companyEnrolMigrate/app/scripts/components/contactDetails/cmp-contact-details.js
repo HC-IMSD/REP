@@ -21,7 +21,7 @@
             controller: contactCtrl,
             bindings: {
                 contactRecord: '<',
-                onUpdate: '&',
+                onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
                 showErrors: '&',
             }

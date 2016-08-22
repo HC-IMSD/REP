@@ -36,23 +36,21 @@
         vm.transactionModel = vm.transactionRoot;
         vm.yesNoList = ['Y', 'N'];
         vm.showEctdSection = true;
+        vm.showSolicitedDetail = false;
 
         vm.$onInit = function () {
-            console.log("default model" + JSON.stringify(vm.transactionModel))
-            console.log("The transaction service for info " + vm.transactionServiceInfo)
             vm.updateEctdState()
         }
         //TODO rename
         vm.$onChanges = function (changes) {
             if (changes.transactionRoot) {
-                //  vm.updateEctdState();
+                vm.updateEctdState();
             }
         }
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
         }
         vm.getNewRepContact = function () {
-
             return (vm.getRepContact());
         }
 
@@ -72,11 +70,28 @@
             }
         }
         function isEctdValue() {
-            if (vm.transactionModel.isEctd === 'Y') {
-                return true
-            }
-            return false;
+            //TODO magic number
+            return vm.transactionModel.isEctd === 'Y';
         }
+
+        function isSolicitedValue() {
+            //TODO magic number
+            return vm.transactionModel.isSolicited === 'Y';
+        }
+
+        /**
+         * @ngdoc method sets the visibilty of the solicited requester field. Clears
+         * the data if the field is hidden
+         */
+        vm.setSolicitedState = function () {
+            if (isSolicitedValue()) {
+                vm.showSolicitedDetail = true;
+            } else {
+                vm.showSolicitedDetail = false;
+                vm.transactionModel.solicitedRequester = "";
+            }
+        }
+
     }
 
 })();
