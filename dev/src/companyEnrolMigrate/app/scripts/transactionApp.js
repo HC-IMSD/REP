@@ -83,15 +83,8 @@
         };
 
 
-
-
-        vm.getNewAddress = function () {
-            var result = _company.createAddressRecord();
-            return result;
-        }
-
-        vm.getNewContact = function () {
-            var result = _company.createContactRecord();
+        vm.getNewRepContact = function () {
+            var result = vm.transactionService.createRepContact();
             return result;
         }
 
@@ -164,44 +157,3 @@
             $translateProvider.directivePriority(1);
         }]);
 })();
-
-/*
- "date_saved": "1999-01-21",
- "application_type": "APPROVED",
- "software_version": "string",
- "data_checksum": "string",
- "is_ectd": "Y",
- "company_id": "A",
- "dossier_id": "A",
- "dossier_name": "A",
-
- "is_solicited": "Y",
- "solicited_requester": "A",
- "regulatory_project_manager1": "A",
- "regulatory_project_manager2": "A",
- "same_regulatory_company": "Y",
- "company_name": "A",
- "same_regulatory_address": "Y",
- "regulatory_activity_address": {
- "street_address": "A",
- "city": "A",
- "province_lov": "WY",
- "province_text": "A",
- "country": "ZWE",
- "postal_code": "A"
- },
- "same_regulatory_contact": "Y",
- "regulatory_activity_contact": {
- "salutation": "DR",
- "given_name": "A",
- "initials": "A",
- "surname": "A",
- "job_title": "A",
- "language_correspondance": "fr",
- "phone_num": "A",
- "phone_ext": "A",
- "fax_num": "A",
- "email": "A"
- },
-
- */

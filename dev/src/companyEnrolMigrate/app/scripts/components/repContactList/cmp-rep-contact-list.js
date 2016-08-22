@@ -24,7 +24,7 @@
                 contacts: '<',
                 onUpdate: '&',
                 getNewContact: '&',
-                isAmend: '&'
+                /* isAmend: '&'*/
                 /*companyService:'<'*/
             }
         });
@@ -33,27 +33,22 @@
         var vm = this;
         vm.selectRecord = -1; //the record to select
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
-        vm.allRolesSelected = false;
         vm.contactList = [];
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
                 binding: "givenName",
-                width: "25"
+                width: "40"
             },
+
             {
                 label: "LAST_NAME",
                 binding: "surname",
-                width: "30"
+                width: "40"
             },
             {
-                label: "JOB_TITLE",
-                binding: "title",
-                width: "25"
-            },
-            {
-                label: "ROLES",
-                binding: "roleConcat",
+                label: "ROLE",
+                binding: "repRole",
                 width: "20"
             }
         ]
@@ -65,15 +60,21 @@
             vm.contactList = vm.contacts; //HERE Is how it is bound
         }
         vm.$onChanges = function (changes) {
-            if (changes.contacts && changes.contacts.currentValue) {
+            if (changes.contacts) {
+                console.log("changes to contact List")
                 vm.contactList = changes.contacts.currentValue;
             }
 
         }
+        vm.isAddContact = function () {
+            if (vm.contactList.length > 1) {
 
+                return false;
+            }
+            return (vm.isDetailValid);
+        }
 
         vm.setValid = function (value) {
-
             vm.isDetailValid = value; //this is a shared value
         }
 
@@ -86,9 +87,8 @@
         }
 
         vm.onUpdateContactRecord = function (record) {
-
             var idx = vm.contactList.indexOf(
-                $filter('filter')(vm.contactList, {contactId: record.contactId}, true)[0]
+                $filter('filter')(vm.contactList, {repRole: record.repRole}, true)[0]
             ); //TODO fix filter
             vm.contactList[idx] = angular.copy(record);
 
@@ -96,15 +96,20 @@
 
         vm.deleteContact = function (cID) {
             var idx = vm.contactList.indexOf(
-                $filter('filter')(vm.contactList, {contactId: cID}, true)[0]
+                $filter('filter')(vm.contactList, {repRole: cID}, true)[0]
             );
             vm.contactList.splice(idx, 1);
+            //check if only one record
+            //todo get Alternate
+            if (vm.contactList.length === 1 && vm.contactList[0].repRole !== "PRIMARY") {
+                vm.contactList[0].repRole = "PRIMARY"
+            }
+
             vm.onUpdate({newList: vm.contactList});
-            vm.isDetailValid = true; //case that incomplete record
+            vm.setValid(true);
             vm.selectRecord = -1
 
         }
-
         /**
          * Adds a contact to the contact list
          */
@@ -112,12 +117,10 @@
             var defaultContact = vm.getNewContact()
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
-            vm.isDetailValid = true;
+            vm.setValid(true);
             vm.selectRecord = (vm.contactList.length - 1);
-            vm.isDetailValid = false;
+            vm.setValid(false);
         }
-
-
     }
 
 })();

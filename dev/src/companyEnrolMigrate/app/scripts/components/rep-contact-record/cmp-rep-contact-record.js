@@ -22,10 +22,8 @@
                 contactRecord: '<',
                 onUpdate: '&',
                 updateValid: '&',
-                checkRoles: '&',
                 onDelete: '&',
-                isDetailValid: '&',
-                isRoleSelected: '&'
+                isDetailValid: '&'
             }
         });
     //contactRecCtrl.$inject = ['$scope']
@@ -34,20 +32,13 @@
         vm.savePressed = false;
         vm.isContact = true; //used to set the state of the role
         vm.isNotEditable = false;
-        vm.repType = [
-            'SALUT_DR',
-            'SALUT_MR']
-        //TODO get role model from a servide
-
         vm.contactModel = {};
-        vm.isOneSelected = function (type) {
-            return (vm.isRoleSelected({roleName: type, id: vm.contactModel.contactId}));
-        }
+
+
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
 
         }
-
 
         /**
          * Due to binding with table expander this method does not get called
@@ -56,6 +47,7 @@
         vm.$onChanges = function (changes) {
             //how this is currently wired, this will never fire!
             if (changes.contactRecord) {
+                console.log("REP contact record has changed")
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
 
             }
@@ -65,14 +57,14 @@
          *  calls the delete function on the parent
          */
         vm.delete = function () {
-            vm.onDelete({contactId: vm.contactModel.contactId});
+            vm.onDelete({contactId: vm.contactModel.repRole});
         }
         /* @ngdoc method -discards the changes and reverts to the model
          *
          */
         vm.discardChanges = function () {
             if (vm.contactRecForm.$pristine) return;
-            var currRecord = vm.trackRecordCtrl.trackRecord()
+            var currRecord = vm.contactRecord;
             vm.contactModel = angular.copy(currRecord);
             vm.setNotEditable()
             //since we are reverting back to the last save should be pristine
@@ -101,9 +93,8 @@
          * Updates the contact model used by the save button
          */
         vm.updateContactModel = function () {
-            vm.contactModel.roleConcat = _getRolesConcat();
             if (vm.contactRecForm.$valid) {
-                // vm.contactModel.isDetailValid=true;
+                vm.contactModel.isDetailValid = true;
                 vm.isDetailValid({state: true})
                 vm.contactRecForm.$setPristine();
                 vm.onUpdate({contact: vm.contactModel});
@@ -115,7 +106,6 @@
          * @returns {boolean}
          */
         vm.showErrors = function () {
-
             return (vm.savePressed)
         }
 

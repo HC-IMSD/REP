@@ -1,4 +1,11 @@
 {
+  "COMPANY_ID": "Company Id",
+  "DOSSIER_ID": "Dossier Id",
+  "DOSSIER_NAME": "Dossier Name",
+  "IS_ECTD": "Is this an eCTD transaction?",
+  "IS_SOLICITED": "Is this solicited information",
+  "SOLICITED_RQ": "Requester of Solicited Information",
+  "REP_CONTACT_INFO": "Main Contact Information",
   "DATED": "Dated",
   "START_DATE": "Start Date",
   "END_DATE": "End Date",

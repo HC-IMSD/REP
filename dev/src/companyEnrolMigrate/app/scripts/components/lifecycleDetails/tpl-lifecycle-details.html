@@ -2,32 +2,33 @@
     <ng-form name="lifecycleCtrl.lifecycleDetailsForm">
         <div>
             <div>
-                <h2>Lifecycle Transaction</h2>
-
-                <div class="row">
-                    <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
-                        <label for="sequenceNumber_{{$id}}">
-                            <span class="field-name">{{"Sequence Number" |translate}}</span>
-                            <input type="text" id="sequenceNumber_{{$id}}" name="sequenceNumber"
-                                   ng-model="lifecycleCtrl.lifecycleModel.sequence"
-                                   class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
-                        </label>
-                    </div>
-                    <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
-                        <label for="dateFiled_{{$id}}">
-                            <span class="field-name">{{"Date Filed" |translate}}</span>
-                            <input type="date" id="dateFiled_{{$id}}" name="dateFiled"
-                                   ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
-                                   class="form-control "/>
-                        </label>
-                    </div>
-                    <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
-                        <label for="controlNum_{{$id}}">
-                            <span class="field-name">{{"Control Number" |translate}}</span>
-                            <input type="text" id="controlNum_{{$id}}" name="controlNum"
-                                   ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
-                                   class="form-control full-width" maxlength="6" size="6"/>
-                        </label>
+                <fieldset>
+                    <legend>Lifecycle Transaction</legend>
+                    <div class="row">
+                        <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
+                            <label for="sequenceNumber_{{$id}}">
+                                <span class="field-name">{{"Sequence Number" |translate}}</span>
+                                <input type="text" id="sequenceNumber_{{$id}}" name="sequenceNumber"
+                                       ng-model="lifecycleCtrl.lifecycleModel.sequence"
+                                       class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
+                            <label for="dateFiled_{{$id}}">
+                                <span class="field-name">{{"Date Filed" |translate}}</span>
+                                <input type="date" id="dateFiled_{{$id}}" name="dateFiled"
+                                       ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
+                                       class="form-control "/>
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
+                            <label for="controlNum_{{$id}}">
+                                <span class="field-name">{{"Control Number" |translate}}</span>
+                                <input type="text" id="controlNum_{{$id}}" name="controlNum"
+                                       ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
+                                       class="form-control full-width" maxlength="6" size="6"/>
+                            </label>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="form-group  col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}">
@@ -53,7 +54,6 @@
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="form-group col-md-4" ng-class="{'has-error':lifecycleCtrl.showError()}"
                              ng-show="lifecycleCtrl.startDateVisible">
                             <label for="dateStart_{{$id}}">
@@ -104,23 +104,22 @@
                             </label>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="btn-group-sm col-xs-12 text-right">
-                        <input type="submit" value="{{'Save Transaction '| translate}}" class="btn btn-primary"
-                               name="saveContact"
-                               id="saveContact"
-                               ng-click="lifecycleCtrl.updateLivecycleModel()"
-                               ng-disabled="lifecycleCtrl.setNotEditable()">
-                        <input type="submit" value="Delete Record" class="btn btn-danger"
-                               ng-click="lifecycleCtrl.delete()">
-                        <input type="submit" value="Discard Changes" class="btn btn-default"
-                               ng-click="lifecycleCtrl.discardChanges()">
+                    <div class="row">
+                        <div class="btn-group-sm col-xs-12 text-right">
+                            <input type="submit" value="{{'Save Transaction '| translate}}" class="btn btn-primary"
+                                   name="saveContact"
+                                   id="saveContact"
+                                   ng-click="lifecycleCtrl.updateLivecycleModel()"
+                                   ng-disabled="lifecycleCtrl.setNotEditable()">
+                            <input type="submit" value="Delete Record" class="btn btn-danger"
+                                   ng-click="lifecycleCtrl.delete()">
+                            <input type="submit" value="Discard Changes" class="btn btn-default"
+                                   ng-click="lifecycleCtrl.discardChanges()">
+                        </div>
                     </div>
-                </div>
+                </fieldset>
             </div>
-            <div>
+        </div>
     </ng-form>
     <pre>lifecycle record model: {{lifecycleCtrl.lifecycleModel | json : spacing}}</pre>
-
 </div>

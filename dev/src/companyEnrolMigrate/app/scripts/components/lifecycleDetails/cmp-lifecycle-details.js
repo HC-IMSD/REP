@@ -56,7 +56,6 @@
         vm.$onInit = function () {
         };
 
-
         /**
          *
          * @param changes
@@ -64,12 +63,17 @@
         vm.$onChanges = function (changes) {
             if (changes.lifecycleRecord) {
                 console.log("changes to lifecycle record")
-                vm.lifecycleModel = angular.copy(changes.lifecycleRecord.currentValue);
-                convertToDate()
-                vm.setSequenceList();
-                vm.setDetailsState();
+                _updateLocalModel(changes.lifecycleRecord.currentValue);
             }
         };
+
+        function _updateLocalModel(record) {
+            vm.lifecycleModel = angular.copy(record);
+            convertToDate()
+            vm.setSequenceList();
+            vm.setDetailsState();
+        }
+
 
         /**
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
@@ -430,11 +434,10 @@
          *
          */
         vm.discardChanges = function () {
-            /* if (vm.addressRecForm.$pristine) return;
-             var currRecord = vm.trackRecordCtrl.trackRecord();
-             vm.addressModel = angular.copy(currRecord);
-             vm.isDetailValid({state: vm.addressRecForm.$valid});
-             vm.savePressed = false;*/
+            if (vm.lifecycleDetailsForm.$pristine) return;
+            _updateLocalModel(vm.lifecycleRecord)
+            vm.isDetailValid({state: vm.lifecycleDetailsForm.$valid});
+            vm.savePressed = false;
         };
 
         /**
@@ -460,16 +463,23 @@
         function convertToDate() {
             //TODO parse string and convert
             if (vm.lifecycleModel.dateFiled) {
-                console.log("Date filed" + vm.lifecycleModel.dateFiled + " " + new Date(vm.lifecycleModel.dateFiled))
-                vm.lifecycleModel.dateFiled = new Date(vm.lifecycleModel.dateFiled).toUTCString()
-
+                vm.lifecycleModel.dateFiled = _parseDate(vm.lifecycleModel.dateFiled)
             }
             if (vm.lifecycleModel.startDate) {
-                vm.lifecycleModel.startDate = new Date(vm.lifecycleModel.startDate).toUTCString();
+                vm.lifecycleModel.startDate = _parseDate(vm.lifecycleModel.startDate)
             }
             if (vm.lifecycleModel.endDate) {
-                vm.lifecycleModel.endDate = new Date(vm.lifecycleModel.endDate).toUTCString();
+                vm.lifecycleModel.endDate = _parseDate(vm.lifecycleModel.endDate);
             }
+        }
+
+        function _parseDate(value) {
+            var dateArray = value.split('-');
+            if (dateArray.length != 3) {
+                console.error(("_parseDate error not 3"))
+            }
+            var aDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+            return aDate;
         }
 
         /*
