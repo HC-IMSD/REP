@@ -231,7 +231,7 @@
 	<hpfb:complexType name="dossier_enrol_content">
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
-			<hpfb:element ref="related_dossier_id"/
+			<hpfb:element ref="related_dossier_id"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="application_type"/>
@@ -245,6 +245,7 @@
 			<hpfb:element ref="radiopharm_drug_use"/>
 			<hpfb:element ref="vet_drug_use"/>
 			<hpfb:element ref="disinfectant_drug_use"/>
+			<hpfb:element ref="therapeutic_class_list"/>
 			<hpfb:element ref="is_sched_a"/>
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
@@ -267,7 +268,7 @@
 
 	<hpfb:complexType name="cdn_ref_product_content">
 		<hpfb:sequence>
-			
+			<hpfb:element ref="brand_name" />
 			<hpfb:element ref="medicinal_ingredient"/>
 			<hpfb:element ref="dosage_form"/>
 			<hpfb:element ref="dosage_form_other"/>

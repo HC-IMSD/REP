@@ -30,7 +30,7 @@
 	<hpfb:element name="sequence_version" type="number_0_5_content"/>
 	<hpfb:element name="sequence_details" type="char_1_50_content"/>
 	<hpfb:element name="sequence_concat" type="hpfb:string"/>
-	<hpfb:element name="lifecycle_record" type="livecycle_record_content"/>
+	<hpfb:element name="lifecycle_record" type="lifecycle_record_content"/>
 	<hpfb:element name="is_solicited"  type="required_yes_no_content"/>
 	<hpfb:element name="solicited_requester" type="char_0_256_content"/>
 	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
@@ -71,7 +71,7 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-	<hpfb:complexType name="livecycle_record_content">
+	<hpfb:complexType name="lifecycle_record_content">
 		<hpfb:sequence>
 			<hpfb:element ref="sequence_number"/>
 			<hpfb:element ref="date_filed"/>

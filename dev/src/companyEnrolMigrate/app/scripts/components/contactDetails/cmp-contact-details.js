@@ -7,7 +7,6 @@
 
     angular
         .module('contactModule', [
-            'addressRole',
             'dataLists'
         ])
 })();
@@ -56,7 +55,7 @@
             fax: ""
         };
         vm.$onInit = function () {
-
+            console.log("init contact details");
            if (vm.contactRecord) {
                 //doesn't copy as this is a dumb component
                 vm.contactModel = vm.contactRecord;

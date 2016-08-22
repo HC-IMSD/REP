@@ -1,4 +1,6 @@
 {
+  "Y": "Yes",
+  "N": "No",
   "DELETEROW": "Delete Row",
   "SELECTEDROW": "Selected Row",
   "REQUIRED": "(required)",
@@ -19,5 +21,7 @@
   "MANUFACT": "Manufacturer",
   "IMPORTER": "Importer",
   "APPROVE_FINAL": "Approve Final XML",
-  "SAVE_DRAFT": "Save Draft for submission"
+  "SAVE_DRAFT": "Save Draft for submission",
+  "PRIMARY": "Primary",
+  "SECONDARY": "Alternate"
 }
