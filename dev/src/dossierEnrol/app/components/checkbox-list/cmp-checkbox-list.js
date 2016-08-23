@@ -15,12 +15,13 @@
 
     angular
         .module('checkBoxListModule')
-        .component('cmpCheckBoxList', {
+        .component('cmpCheckboxList', {
             templateUrl: './components/checkbox-list/tpl-checkbox-list.html',
             controller: checkBoxListCtrl,
             controllerAs: 'chkl',
             bindings: {
                 title: '@',
+                commonName:'@',
                 listItems: '<' //array of objects
             }
         });
@@ -32,13 +33,17 @@
 
         self.$onInit = function(){
 
-            var  object= {};
+            if(self.listItems){
+                self.currentModel = self.listItems;
+            }
+
+           /* var  object= {};
 
             for(var item in self.listItems){
                 object[item.name] = item.value;
-            }
+            }*/
 
-            self.roleModel = JSON.stringify(object);
+
 
         }
 

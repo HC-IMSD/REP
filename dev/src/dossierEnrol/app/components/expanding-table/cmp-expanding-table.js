@@ -29,17 +29,15 @@
     expandingTableCtrl.$inject = ['$filter']
     function expandingTableCtrl($filter) {
         var vm = this;
-        vm.focused = false;
-        vm.tableRowExpanded = false;
-        vm.tableRowIndexCurrExpanded = "";
-        vm.tableRowIndexPrevExpanded = "";
-        // vm.dayDataCollapse = [true, true, true, true, true];
-        vm.numberCols=_getNumberKeys(vm.columnDef)
-        vm.dayDataCollapse=_createArray(vm.numberCols,true);
         vm.$onInit = function () {
-            //on init happens right after initialization
-            //vm.dayDataCollapse=_createArray(vm.numberCols,true);
-            console.log("This is the selected row"+vm.selectRecord)
+            vm.focused = false;
+            vm.disableExpand=false;
+            vm.tableRowExpanded = false;
+            vm.tableRowIndexCurrExpanded = "";
+            vm.tableRowIndexPrevExpanded = "";
+            // vm.dayDataCollapse = [true, true, true, true, true];
+            vm.numberCols=_getNumberKeys(vm.columnDef)
+            vm.dayDataCollapse=_createArray(vm.numberCols,true);
         }
         vm.$onChanges = function (changes) {
 
@@ -53,14 +51,15 @@
                 }
             }
             if(changes.selectRecord){
-                console.log("select record change expanding table")
                 var selectIndex=parseInt(changes.selectRecord.currentValue);
-                console.log("Selected index "+selectIndex)
                 if(selectIndex>=0) {
                     vm.selectTableRow(selectIndex);
                 }else{
                     vm.resetTableRow()
                 }
+            }
+            if(changes.disableSelection){
+                vm.disableExpand=changes.disableSelection.currentValue;
             }
         }
         /**
@@ -107,8 +106,9 @@
         };
         vm.selectTableRow = function (index) {
             //if selection
-            if (vm.disableSelection) return;
-            console.log("selecting table row")
+
+            if (vm.disableExpand) return;
+            //console.debug("selected row index: " + index);
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();
             } else {
@@ -133,6 +133,8 @@
                     }
                 }
             }
+
+
         }
 
 

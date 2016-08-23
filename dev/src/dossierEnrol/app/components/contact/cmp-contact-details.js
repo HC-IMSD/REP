@@ -7,7 +7,8 @@
 
     angular
         .module('contactModule', [
-            'addressRole'
+            'addressRole',
+            'dataLists'
         ])
 })();
 
@@ -15,60 +16,80 @@
     'use strict';
 
     angular
-        .module('contactModule').
-        component('cmpContactDetails',{
+        .module('contactModule')
+        .component('cmpContactDetails',{
             templateUrl: './components/contact/tpl-contact-details.html',
             controller: contactCtrl,
-
             bindings: {
-                formName: '<',
                 contactRecord: '<',
                 onUpdate: '&',
-                onDelete: '&'
+                isAmend: '&',
+                showErrors:'&'
             }
     });
 
- function contactCtrl(){
+    contactCtrl.$inject = ['getContactLists']
+    function contactCtrl( getContactLists) {
+        var vm = this;
+        vm.ngModelOptSetting = {updateOn: 'blur'}
+        vm.salutationList = getContactLists.getSalutationList();
+        vm.langCorrespondance = getContactLists.getLanguages();
+        vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+        vm.contactModel = {
+            isDetailValid: false,
+            contactId: "",
+            amendRecord: false,
+            addressRole: {
+                manufacturer: false,
+                mailing: false,
+                billing: false,
+                importer: false
+            },
+            contactRole: "",
+            salutation: "",
+            givenName: "",
+            surname: "",
+            initials: "",
+            title: "",
+            phone: "",
+            PhoneExt: "",
+            fax: ""
+        };
+        vm.$onInit = function () {
 
-     var vm = this;
-     vm.$onInit = function(){
+           if (vm.contactRecord) {
+                //doesn't copy as this is a dumb component
+                vm.contactModel = vm.contactRecord;
+            }
+        }
+        //TODO rename
+        vm.$onChanges=function(changes){
+            if(changes.contactRecord){
+                vm.contactModel = changes.contactRecord.currentValue;
 
-         vm.contactModel = {
-             contactId: "",
-             amendRecord: false,
-             addressRole: {
-                 manufacturer: false,
-                 mailing: false,
-                 billing: false,
-                 importer: false
-             },
-             contactRole: "",
-             salutation: "",
-             givenName: "",
-             surname: "",
-             initials: "",
-             title: "",
-             phone: "",
-             PhoneExt: "",
-             fax: ""
-         };
+            }
 
-         if (vm.contactRecord) {
-
-             angular.extend(vm.contactModel, vm.contactRecord);
-         }
-     }
+        }
+        vm.showError=function(ctrl){
+            if((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid )){
+                return true
+            }
+            return false
+        }
 
 
-
-     vm.delete = function () {
-
-         vm.onDelete({contactId: vm.contactModel.contactId});
-     }
-
-
- }
-
-
+        /**
+         * @ngdoc method -determines if the fields should be readonly by default
+         * @returns {boolean}
+         */
+        //TODO valildated this is needed by the parent
+        vm.setNotEditable=function(){
+            if(vm.isAmend() &&!vm.contactModel.amendRecord){
+                return true;
+            }
+            return false
+        }
+    }
 
 })();
+
