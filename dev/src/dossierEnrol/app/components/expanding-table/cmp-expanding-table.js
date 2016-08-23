@@ -29,15 +29,15 @@
     expandingTableCtrl.$inject = ['$filter']
     function expandingTableCtrl($filter) {
         var vm = this;
-        vm.focused = false;
-        vm.disableExpand=false;
-        vm.tableRowExpanded = false;
-        vm.tableRowIndexCurrExpanded = "";
-        vm.tableRowIndexPrevExpanded = "";
-        // vm.dayDataCollapse = [true, true, true, true, true];
-        vm.numberCols=_getNumberKeys(vm.columnDef)
-        vm.dayDataCollapse=_createArray(vm.numberCols,true);
         vm.$onInit = function () {
+            vm.focused = false;
+            vm.disableExpand=false;
+            vm.tableRowExpanded = false;
+            vm.tableRowIndexCurrExpanded = "";
+            vm.tableRowIndexPrevExpanded = "";
+            // vm.dayDataCollapse = [true, true, true, true, true];
+            vm.numberCols=_getNumberKeys(vm.columnDef)
+            vm.dayDataCollapse=_createArray(vm.numberCols,true);
         }
         vm.$onChanges = function (changes) {
 
@@ -106,7 +106,9 @@
         };
         vm.selectTableRow = function (index) {
             //if selection
+
             if (vm.disableExpand) return;
+            //console.debug("selected row index: " + index);
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();
             } else {
@@ -131,6 +133,8 @@
                     }
                 }
             }
+
+
         }
 
 

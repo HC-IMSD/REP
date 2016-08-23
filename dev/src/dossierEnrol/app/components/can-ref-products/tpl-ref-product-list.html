@@ -1,5 +1,4 @@
-<fieldset>
-    <legend>Contact Details</legend>
+
 
     <div class="col-xs-12 form-group">
 
@@ -11,10 +10,9 @@
                                  on-update="contactRec.onUpdateContactRecord(contact)"
                                  show-errors="contactRec.showErrors()"></cmp-contact-details>-->
 
-            <cmp-ref-product-details product-record="crpl.productModel"></cmp-ref-product-details>
+            <cmp-ref-product-details product-record="$parent.record"></cmp-ref-product-details>
 
         </cmp-expanding-table>
     </div>
 
-</fieldset>
 

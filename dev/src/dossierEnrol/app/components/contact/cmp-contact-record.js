@@ -18,9 +18,6 @@
             templateUrl: './components/contact/tpl-contact-record.html',
             controller: contactRecCtrl,
             controllerAs: 'contactRec',
-            require: {
-                trackRecordCtrl:    '^trackRecord'
-            },
             bindings: {
                 contactRecord: '<',
                 onUpdate: '&',
@@ -65,7 +62,7 @@
         }
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
-            var rec=vm.trackRecordCtrl.trackRecord();
+            var rec={};//vm.trackRecordCtrl.trackRecord();
             //only bind if there is a record. Should never happen that there is no record
             if(rec) {
                 vm.contactModel = angular.copy(rec);
@@ -120,7 +117,7 @@
          */
         vm.discardChanges=function(){
             if(vm.contactRecForm.$pristine) return;
-            var currRecord=vm.trackRecordCtrl.trackRecord()
+            var currRecord={};//vm.trackRecordCtrl.trackRecord()
             vm.contactModel =angular.copy(currRecord);
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();

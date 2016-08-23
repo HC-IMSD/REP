@@ -5,6 +5,16 @@
             <h3 class="panel-title">Regulatory Dossier Enrolment</h3>
         </header>
         <div class="panel-body">
+
+            <section class="panel  panel-default">
+                <header class="panel-heading">
+                    <h3 class="panel-title">Load a Draft Company Enrolment File</h3>
+                </header>
+                <div class="panel-body">
+                    <cmp-file-reader on-file-loaded=""></cmp-file-reader>
+                </div>
+            </section>
+
             <div class="row">
                 <div class="col-xs-6 form-group">
                     <label for="enrolment-type-list">Enrolment Type</label>
@@ -30,9 +40,11 @@
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <label for="third-party-signed">
-                                <input type="checkbox" name="thirdPartySigned" ng-model="dos.dossierModel.drugProduct.thirdPartySigned" id="third-party-signed" ng-change="dos.thirdPartySignedChanged()" > Will the submission be signed/filled by a third party on behalf of the manufacturer or sponsor?
+                                <input type="checkbox" name="thirdPartySigned" ng-model="dos.dossierModel.drugProduct.thirdPartySigned" id="third-party-signed" ng-change="dos.thirdPartySignedChanged()"> The
+                                submission will be signed/filled by a third party on behalf of the manufacturer or sponsor
                             </label>
-                            <label ng-if="dos.dossierModel.drugProduct.thirdPartySigned" class="label-info full-width">Please include the Third Party Authorization letter in the REP folder when submitting via the CESG</label>
+                            <label ng-if="dos.dossierModel.drugProduct.thirdPartySigned" class="label-info full-width">Please include the Third Party Authorization letter in the REP folder when submitting via
+                                the CESG</label>
 
                         </div>
                     </div>
@@ -70,19 +82,36 @@
                     <div class="row">
                         <div class="col-xs-12 form-group">
 
-                          <cmp-drug-use list-items=""></cmp-drug-use>
+                            <cmp-drug-use list-items=""></cmp-drug-use>
                         </div>
 
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <cmp-therapeutic-class list-items=""></cmp-therapeutic-class>
+
+                            <!--<cmp-expanding-table title="Therapeutic Classification" list-items="dos.dossierModel.therapeutic.listItems" column-def="dos.dossierModel.therapeutic.columnDef"></cmp-expanding-table>-->
+                        </div>
+
+                    </div>
 
                     <div class="row">
                         <div class="col-xs-12 form-group">
+                            <label for="third-party-signed">
+                                <input type="checkbox" name="isScheduleA" ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case" ng-change=""> This is a non-prescription drug to which one
+                                or more Schedule A claims apply
+                            </label>
 
-                            <cmp-expanding-table title="Therapeutic Classification" list-items="dos.dossierModel.therapeutic.listItems" column-def="dos.dossierModel.therapeutic.columnDef"></cmp-expanding-table>
+
                         </div>
+                    </div>
 
+                    <div class="row" ng-if="dos.dossierModel.drugProduct.isScheduleA">
+                        <div class="col-xs-12 form-group">
+                            <cmp-schedule-a schedule-group=""></cmp-schedule-a>
+                        </div>
                     </div>
 
                 </div>
