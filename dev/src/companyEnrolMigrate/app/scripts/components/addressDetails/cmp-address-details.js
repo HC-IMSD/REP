@@ -25,7 +25,7 @@
                 addressRecord: '<',
                 onUpdate: '&', //no longer used TBD should be removed
                 showErrors: '&',
-                isAmend: '<' //no longer used TBD should be removed
+                isAmend: '<'
             }
         });
     addressCtrl.$inject = [ 'getCountryAndProvinces', 'getCountriesISO3166'];

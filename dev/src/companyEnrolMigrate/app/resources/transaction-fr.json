@@ -1,6 +1,11 @@
 {
+  "ADD_TRANSACTION": "Add Record",
+  "SEQUENCE_NUM": "Sequence Number",
+  "CONTROL_NUMBER": "Control Number",
+  "DATE_FILED": "Date Filed",
+  "SEQUENCE_DESCRIPT": "Sequence Description",
+  "IS_ACTCHANGES": "Same as Regulatory Activity Contact for this Submission?",
   "NAME": "Nom",
-
   "COMPANY_ID": "fr_Company Id",
   "DOSSIER_ID": "fr_Dossier Id",
   "DOSSIER_NAME": "fr_Dossier Name",

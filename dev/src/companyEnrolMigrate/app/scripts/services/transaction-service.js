@@ -36,6 +36,7 @@
                 solicitedRequester: "",
                 projectManager1: "",
                 projectManager2: "",
+                isActivityChanges: "Y",
                 sameCompany: "N",
                 companyName: "",
                 sameAddress: "N", //this may no longer be needed
@@ -89,9 +90,10 @@
                     resultJson.TRANSACTION_ENROL.ectd = ectd;
                 }
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                resultJson.TRANSACTION_ENROL.solicited_requester = jsonObj.requester;
+                resultJson.TRANSACTION_ENROL.solicited_requester = jsonObj.solicitedRequester;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
+                resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
                 resultJson.TRANSACTION_ENROL.same_regulatory_company = jsonObj.sameCompany === true ? 'Y' : 'N';
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
                 resultJson.TRANSACTION_ENROL.same_regulatory_address = jsonObj.sameAddress === true ? 'Y' : 'N'; //this may no longer be needed
@@ -107,7 +109,7 @@
                 ectd.company_id = jsonObj.companyId;
                 ectd.dossier_id = jsonObj.dossierId;
                 ectd.dossier_name = jsonObj.dossierName;
-                ectd.lifecycle_record = this._mapLifecycleList(jsonObj.lifecycleRecord);
+                ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
                 return (ectd);
             },
             _transformEctdFromFile: function (model, jsonObj) {
@@ -139,7 +141,7 @@
                 model.solicitedRequester = jsonObj.solicited_requester;
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
                 model.projectManager2 = jsonObj.regulatory_project_manager2;
-
+                model.isActivityChanges = jsonObj.is_activity_changes;
                 model.sameCompany = jsonObj.same_regulatory_company === 'Y';
                 model.companyName = jsonObj.company_name;
                 model.sameAddress = jsonObj.same_regulatory_address === 'Y';
@@ -157,9 +159,9 @@
                 model.sequence = this.getNextSequenceNumber();
                 return model;
             },
-            setSequenceNumber: function (value) {
+            _setSequenceNumber: function (value) {
                 if (!value)return;
-                var converted = Integer.parse(value)
+                var converted = parseInt(value)
                 if (converted > this.currSequence) {
                     this.currSequence = converted;
                 }
@@ -184,31 +186,30 @@
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
                     var record = _transformLifecycleRecFromFileObj(jsonObj[i])
-                    _setSequenceNumber(record.sequence);
+                    this._setSequenceNumber(record.sequence);
+                    result.push(record);
+                }
+                return result
+            },
+            _mapLifecycleListToOutput: function (jsonObj) {
+                var result = [];
+                if (!jsonObj) return result;
+                if (!(jsonObj instanceof Array)) {
+                    //make it an array, case there is only one record
+                    jsonObj = [jsonObj]
+                }
+
+
+                for (var i = 0; i < jsonObj.length; i++) {
+                    var record = _mapLifecycleRecToOutput(jsonObj[i])
+                    if (jsonObj.length == 1) {
+                        return (record);
+                    }
                     result.push(record);
                 }
                 return result
             },
 
-            /* getNewRepContact: function () {
-             var repContact = _createRepContact();
-             //TODO magic numbers
-             var currList = this.getRepContactList();
-             var role = "PRIMARY"; //todo magic?
-             for (var i = 0; i < currList.length; i++) {
-             if (currList[i].repRole === role) {
-             role = "SECONDARY";
-             break;
-             }
-             }
-             repContact.repRole = role;
-             return repContact;
-             },*/
-            ///TODO deprectate
-            /* getRepContactList: function () {
-
-             return (this._default.regulatorySubmissionContact)
-             },*/
             resetEctdSection: function () {
 
                 if (this._default.hasOwnProperty('ectd')) {
@@ -406,7 +407,7 @@
         contact.languageCorrespondance = "";
         contact.phoneNum = "";
         contact.phoneExt = "";
-        contact.faxNum = "";
+        contact.fax = "";
         contact.email = "";
         return contact;
     }
