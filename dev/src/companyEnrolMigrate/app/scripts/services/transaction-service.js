@@ -177,6 +177,10 @@
                 seqText = padText + seqText;
                 return (seqText);
             },
+            deprecateSequenceNumber: function () {
+                console.log("deprecate")
+                this.currSequence--;
+            },
             _mapLifecycleList: function (jsonObj) {
                 var result = [];
                 if (!jsonObj) return result;

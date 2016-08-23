@@ -24,7 +24,8 @@
                 lifecycleRecord: '<',
                 onUpdate: '&',
                 showErrors: '&',
-                isDetailValid: '&'
+                isDetailValid: '&',
+                onDelete: '&'
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
@@ -82,7 +83,6 @@
         vm.setSequenceList = function () {
 
             var value = vm.lifecycleModel.activityType;
-            console.log("The activity Type is ")
             var temp = vm.lifecycleModel.descriptionValue;
             vm.lifecycleModel.descriptionValue = "";
             switch (value) {
@@ -427,7 +427,7 @@
          *  calls the delete function on the parent
          */
         vm.delete = function () {
-            // vm.onDelete({contactId: vm.addressModel.contactId});
+            vm.onDelete({id: vm.lifecycleModel.sequence});
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *

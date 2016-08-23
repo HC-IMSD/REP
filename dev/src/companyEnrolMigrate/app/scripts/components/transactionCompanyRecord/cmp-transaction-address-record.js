@@ -2,59 +2,6 @@
  * Created by dkilty on 8/5/2016.
  */
 
-/*
- (function () {
- 'use strict';
-
- angular
- .module('addressModule2', [])
- })();
-
- (function () {
- 'use strict';
- angular
- .module('addressModule2')
- .component('cmpFoo', {
- templateUrl: 'app/scripts/components/transactionCompanyRecord/tpl-transaction-address-record.html',
- controller: transAddressRecCtrl,
- controllerAs: 'addressRec',
- bindings: {
- addressRecord: '<'
- }
- });
-
-
- function transAddressRecCtrl() {
- var vm = this;
- vm.addressModel={}
-
- vm.$onInit = function () {
- console.log("init the transaction record")
- };
-
-
- vm.$onChanges = function (changes) {
- //how this is currently wired, this will never fire!
- if (changes.addressRecord.currentValue) {
- vm.addressModel = changes.addressRecord.currentValue;
- }
- };
-
-
-
- vm.showErrors = function () {
-
- return (true);
- };
-
-
- }
-
-
- })();
-
- */
-
 
 (function () {
     'use strict';
