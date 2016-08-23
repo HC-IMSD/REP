@@ -20,7 +20,8 @@
                 records: '<',
                 onUpdate: '&',
                 isAmend: '&',
-                getNewTransaction: '&'
+                getNewTransaction: '&',
+                deprecateSequence: '&' //bit of a hack
             },
             controller: lifecycleListCtrl,
             controllerAs: 'lifecycleListCtrl'
@@ -46,7 +47,7 @@
                 width: "15"
             },
             {
-                label: "DATE_FILED",
+                label: "DATE_SUBMITTED",
                 binding: "dateFiled",
                 width: "15"
             },
@@ -76,13 +77,14 @@
 
         }
 
-        vm.deleteAddress = function (aID) {
+        vm.deleteRecord = function (aID) {
             var idx = vm.lifecycleList.indexOf(
                 $filter('filter')(vm.lifecycleList, {sequence: aID}, true)[0]);
             vm.lifecycleList.splice(idx, 1);
             vm.onUpdate({newList: vm.lifecycleList});
             vm.selectRecord = 0;
             vm.isDetailsValid = true; //case that incomplete record is deleted
+            vm.deprecateSequence();
         }
 
         vm.addTransaction = function () {

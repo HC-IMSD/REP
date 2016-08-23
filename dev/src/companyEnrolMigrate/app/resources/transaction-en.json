@@ -2,7 +2,7 @@
   "ADD_TRANSACTION": "Add Record",
   "SEQUENCE_NUM": "Sequence Number",
   "CONTROL_NUMBER": "Control Number",
-  "DATE_FILED": "Date Filed",
+  "DATE_SUBMITTED": "Date Submitted",
   "SEQUENCE_DESCRIPT": "Sequence Description",
   "IS_ACTCHANGES": "Same as Regulatory Activity Contact for this Submission?",
   "COMPANY_ID": "Company ID",

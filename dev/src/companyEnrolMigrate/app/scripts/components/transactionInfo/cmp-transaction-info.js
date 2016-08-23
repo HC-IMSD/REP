@@ -25,7 +25,8 @@
                 showErrors: '&',
                 getTransaction: '&',
                 getRepContact: '&',
-                resetEctd: '&'
+                resetEctd: '&',
+                deprecateSequence: '&'
             }
         });
 
@@ -55,8 +56,13 @@
             return (vm.getRepContact());
         }
 
+        vm.subtractSequence = function () {
+            vm.deprecateSequence();
+        }
+
         vm.showError = function (ctrl) {
             if (!ctrl) return;
+
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
              return true
             }
