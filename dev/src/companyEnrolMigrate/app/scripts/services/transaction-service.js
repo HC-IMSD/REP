@@ -21,11 +21,11 @@
             //construction logic
             var defaultTransactionData = {
                 dataChecksum: "",
-                enrolmentVersion: "0.0",
+                // enrolmentVersion: "0.0",
                 dateSaved: "",
-                applicationType: "NEW",
+                //applicationType: "NEW",
                 softwareVersion: "1.0.0",
-                isEctd: "N",
+                isEctd: "",
                 ectd: {
                     companyId: "",
                     dossierId: "",
@@ -36,13 +36,14 @@
                 solicitedRequester: "",
                 projectManager1: "",
                 projectManager2: "",
+                isActivityChanges: "Y",
                 sameCompany: "N",
                 companyName: "",
                 sameAddress: "N", //this may no longer be needed
                 activityAddress: _createAddressModel(),
                 sameContact: "N",
                 activityContact: _createContactModel(),
-                regulatorySubmissionContact: [],
+                // regulatorySubmissionContact: [],
             };
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
@@ -67,7 +68,6 @@
                 //get rid of previous default if it exists
                 this._default = {};
                 angular.extend(this._default, transactionInfo)
-                console.log("This is the transform " + JSON.stringify(this._default))
             },
             //TODO transaction relevant
             /**
@@ -81,27 +81,45 @@
                 var resultJson = {
                     TRANSACTION_ENROL: {
                         date_saved: jsonObj.dateSaved,
-                        application_type: jsonObj.applicationType,
-                        software_version: jsonObj.softwareVersion,
                         data_checksum: jsonObj.dataChecksum,
                         is_ectd: jsonObj.isEctd
                     }
                 };
                 if (jsonObj.isEctd == 'Y') {
-                    var ectd = _transformEctdToFile(jsonObj);
+                    var ectd = this._transformEctdToFile(jsonObj.ectd);
                     resultJson.TRANSACTION_ENROL.ectd = ectd;
                 }
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                resultJson.TRANSACTION_ENROL.solicited_requester = jsonObj.requester;
+                resultJson.TRANSACTION_ENROL.solicited_requester = jsonObj.solicitedRequester;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
+                resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
                 resultJson.TRANSACTION_ENROL.same_regulatory_company = jsonObj.sameCompany === true ? 'Y' : 'N';
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
                 resultJson.TRANSACTION_ENROL.same_regulatory_address = jsonObj.sameAddress === true ? 'Y' : 'N'; //this may no longer be needed
-                resultJson.TRANSACTION_ENROL.regulatory_activity_address = mapAddressToOutput(jsonObj.activityAddress);
+                resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
                 resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameCompany === true ? 'Y' : 'N'; //this may no longer be needed
                 resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput(jsonObj.activityContact);
                 return (resultJson);
+            },
+
+            _transformEctdToFile: function (jsonObj) {
+
+                var ectd = {};
+                ectd.company_id = jsonObj.companyId;
+                ectd.dossier_id = jsonObj.dossierId;
+                ectd.dossier_name = jsonObj.dossierName;
+                ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
+                return (ectd);
+            },
+            _transformEctdFromFile: function (model, jsonObj) {
+                model.ectd = _getEmptyEctdSection();
+                if (model.isEctd) {
+                    model.ectd.companyId = jsonObj.company_id;
+                    model.ectd.dossierId = jsonObj.dossier_id;
+                    model.ectd.dossierName = jsonObj.dossier_name;
+                    model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
+                }
             },
 
             getModelInfo: function () {
@@ -111,38 +129,39 @@
              * @ngdoc method- transforms the file json to a model object
              */
             getTransactionInfo: function (jsonObj) {
-                if (!jsonObj)
+                if (!jsonObj) {
                     return this._default;
-
-                var model = this.default;
+                }
+                var model = this._default;
                 model.dateSaved = jsonObj.date_saved;
-                model.applicationType = jsonObj.application_type;
-                model.softwareVersion = jsonObj.software_version;
+
                 model.dataChecksum = jsonObj.data_checksum;
                 model.isEctd = jsonObj.is_ectd;
                 model.isSolicited = jsonObj.is_solicited;
                 model.solicitedRequester = jsonObj.solicited_requester;
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
                 model.projectManager2 = jsonObj.regulatory_project_manager2;
-
+                model.isActivityChanges = jsonObj.is_activity_changes;
                 model.sameCompany = jsonObj.same_regulatory_company === 'Y';
                 model.companyName = jsonObj.company_name;
                 model.sameAddress = jsonObj.same_regulatory_address === 'Y';
                 //reg address
-                model.activityAddress = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
+                model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact === 'Y';
-                model.activityContact = _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
-                model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj.rep_submission_contact_record);
-                _transformEctdFromFile(model, jsonObj);
+                model.activityAddress = _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
+                // model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj.rep_submission_contact_record);
+
+                this._transformEctdFromFile(model, jsonObj.ectd);
+                return model;
             },
             getNewTransaction: function () {
                 var model = _createLifeCycleModel();
                 model.sequence = this.getNextSequenceNumber();
                 return model;
             },
-            setSequenceNumber: function (value) {
+            _setSequenceNumber: function (value) {
                 if (!value)return;
-                var converted = Integer.parse(value)
+                var converted = parseInt(value)
                 if (converted > this.currSequence) {
                     this.currSequence = converted;
                 }
@@ -160,37 +179,37 @@
             },
             _mapLifecycleList: function (jsonObj) {
                 var result = [];
-                if (!jsonObj) return list;
+                if (!jsonObj) return result;
                 if (!(jsonObj instanceof Array)) {
                     //make it an array, case there is only one record
                     jsonObj = [jsonObj]
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
                     var record = _transformLifecycleRecFromFileObj(jsonObj[i])
-                    _setSequenceNumber(record.sequence);
+                    this._setSequenceNumber(record.sequence);
                     result.push(record);
                 }
                 return result
             },
-            getNewRepContact: function () {
-                var repContact = _createRepContact();
-                //TODO magic numbers
-                var currList = this.getRepContactList();
-                var role = "PRIMARY"; //todo magic?
-                for (var i = 0; i < currList.length; i++) {
-                    if (currList[i].repRole === role) {
-                        role = "SECONDARY";
-                        break;
-                    }
+            _mapLifecycleListToOutput: function (jsonObj) {
+                var result = [];
+                if (!jsonObj) return result;
+                if (!(jsonObj instanceof Array)) {
+                    //make it an array, case there is only one record
+                    jsonObj = [jsonObj]
                 }
-                repContact.repRole = role;
-                return repContact;
+
+
+                for (var i = 0; i < jsonObj.length; i++) {
+                    var record = _mapLifecycleRecToOutput(jsonObj[i])
+                    if (jsonObj.length == 1) {
+                        return (record);
+                    }
+                    result.push(record);
+                }
+                return result
             },
 
-            getRepContactList: function () {
-
-                return (this._default.regulatorySubmissionContact)
-            },
             resetEctdSection: function () {
 
                 if (this._default.hasOwnProperty('ectd')) {
@@ -203,7 +222,7 @@
     }
 
     /**
-     * Maps the file json object to the internal data model of the REP contacts
+     * TODO dprecated Maps the file json object to the internal data model of the REP contacts
      * @param jsonObj
      * @returns an array of contacts. Empty if there are none
      * @private
@@ -261,15 +280,6 @@
         return (lifecycleRec);
     }
 
-    function _transformEctdFromFile(model, jsonObj) {
-        // if (model.isEctd) {
-        model.ectd = _getEmptyEctdSection();
-        model.ectd.companyId = jsonObj.company_id;
-        model.ectd.dossierId = jsonObj.dossier_id;
-        model.ectd.dossierName = jsonObj.dossier_name;
-        model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
-        // }
-    }
 
     function _getEmptyEctdSection() {
         var ectd = {};
@@ -280,15 +290,6 @@
         return ectd;
     }
 
-    function _transformEctdToFile(jsonObj) {
-
-        var ectd = {};
-        ectd.companyId = jsonObj.company_id;
-        ectd.dossierId = jsonObj.dossier_id;
-        ectd.dossierName = jsonObj.dossier_name;
-        ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
-        return (ectd);
-    }
 
     function _transformRepContactFromFileObj(repObj) {
 
@@ -296,6 +297,7 @@
         repContact.repRole = repObj.rep_submission_contact_role;
     }
 
+    //TODO deprecated
     function _mapRepContactToOutput(repObj) {
         var repContact = {};
         repContact.rep_submission_contact_role = repObj.repRole;
@@ -405,11 +407,12 @@
         contact.languageCorrespondance = "";
         contact.phoneNum = "";
         contact.phoneExt = "";
-        contact.faxNum = "";
+        contact.fax = "";
         contact.email = "";
         return contact;
     }
 
+    //todo deprecated
     function _createRepContact() {
 
         var contact = _createContactModel()

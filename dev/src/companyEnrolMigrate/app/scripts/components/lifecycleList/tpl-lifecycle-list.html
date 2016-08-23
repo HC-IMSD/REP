@@ -9,7 +9,8 @@
                                  column-def="lifecycleListCtrl.columnDef" select-record="lifecycleListCtrl.selectRecord"
                                  disable-selection="!lifecycleListCtrl.isDetailsValid">
 
-                <cmp-lifecycle-details lifecycle-record="$parent.record" is-detail-valid="lifecycleListCtrl.setValid()"
+                <cmp-lifecycle-details lifecycle-record="$parent.record"
+                                       is-detail-valid="lifecycleListCtrl.setValid(state)"
                                        on-update="lifecycleListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
 
             </cmp-expanding-table>

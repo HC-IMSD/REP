@@ -146,9 +146,9 @@
                 case ("UDRA"):
                     vm.descriptionList = TransactionLists.getUdraType();
                     break;
-                 case ("CONSULTATION"):
-                     vm.descriptionList = TransactionLists.getConsultType();
-                     break;
+                case ("CONSULTATION"):
+                    vm.descriptionList = TransactionLists.getConsultType();
+                    break;
 
                 case ("YBPR"):
                     vm.descriptionList = TransactionLists.getYbprType()
@@ -234,7 +234,7 @@
                     vm.setConcatDetails();
                     break;
 
-                }
+            }
 
         }
         vm.setDetailsState = function () {
@@ -340,7 +340,7 @@
         function setAsStartDate() {
             vm.endDateVisible = false;
             vm.startDateVisible = true;
-            vm.startDateLabel = "DATE"
+            vm.startDateLabel = "DATED"
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.lifecycleModel.endDate = "";
@@ -386,7 +386,6 @@
             var concatText = ""
             //translate value to english
             var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
-            console.log("en de" + enDescription)
             if (vm.startDateVisible) {
                 startDate = convertDate(vm.lifecycleModel.startDate);
                 concatText = enDescription + " dated " + startDate;
@@ -454,12 +453,12 @@
         vm.updateLivecycleModel = function () {
 
             if (vm.lifecycleDetailsForm.$valid) {
-         vm.isDetailValid({state: true});
+                vm.isDetailValid({state: true});
                 vm.lifecycleDetailsForm.$setPristine();
                 vm.onUpdate({record: vm.lifecycleModel});
-         }
-         vm.savePressed = true;
-         }
+            }
+            vm.savePressed = true;
+        }
         function convertToDate() {
             //TODO parse string and convert
             if (vm.lifecycleModel.dateFiled) {
@@ -476,26 +475,29 @@
         function _parseDate(value) {
             var dateArray = value.split('-');
             if (dateArray.length != 3) {
-                console.error(("_parseDate error not 3"))
+                console.error(("_parseDate error not 3 parts"))
             }
             var aDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
             return aDate;
         }
 
-        /*
-         /!**
-             * @ngdoc method toggles error state to make errors visible
-             * @returns {boolean}
-             *!/
-         vm.showErrors = function () {
+        /**
+         * @ngdoc method toggles error state to make errors visible
+         * @returns {boolean}
+         */
+        vm.showError = function (isInvalid, isTouched) {
 
-         return (vm.savePressed)
-         };
-         /!**
-             * @ngdoc method used to determine if record should be editable. Used for amend
-             * @returns {boolean}
-             *!/
-         vm.setNotEditable = function () {
+            if ((isInvalid && isTouched) || (vm.savePressed && isInvalid )) {
+                return true
+            }
+            return (false);
+        }
+
+        /**
+         * @ngdoc method used to determine if record should be editable. Used for amend
+         * @returns {boolean}
+         */
+        /* vm.setNotEditable = function () {
 
          if (vm.isAmend() && !vm.addressModel.amendRecord) {
          return true;
@@ -504,6 +506,6 @@
          }
 
          }*/
-    }
 
+    }
 })();

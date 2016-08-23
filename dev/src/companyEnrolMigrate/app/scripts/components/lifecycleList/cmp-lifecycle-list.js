@@ -60,7 +60,7 @@
         vm.$onInit = function () {
             //local var from binding
             vm.lifecycleList = vm.records;
-            console.log("This is the records " + vm.records)
+
         }
 
         vm.$onChanges = function (changes) {
@@ -69,6 +69,9 @@
              }*/
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
+                if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
+                    vm.isDetailsValid = true;
+                }
             }
 
         }
