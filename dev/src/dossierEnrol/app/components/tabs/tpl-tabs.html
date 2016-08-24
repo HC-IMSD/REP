@@ -1,4 +1,23 @@
-<div class="wb-tabs">
+<div class="form-group">
+    <pre>tabs {{tabsCtrl.tabs | json}}</pre>
+
+  <ul class="nav nav-tabs">
+        <li  ng-repeat="tab in tabsCtrl.tabs" role="presentation" ng-click="tabsCtrl.selectTab($index)" ng-class="{'active':tab.selected}">
+            <a  href="#" role="tab">{{tab.label}}</a>
+        </li>
+
+    </ul>
+    <div id="formulations-panel"  ng-if="tabsCtrl.tabs[0].selected">
+        <p>
+            Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.
+        </p>
+    </div>
+
+    <div id="appendix4-panel" ng-if="tabsCtrl.tabs[1].selected">
+        <cmp-appendix-four></cmp-appendix-four>
+    </div>
+</div>
+<!--<div class="wb-tabsCtrl">
    <div class="tabpanels">
        <details id="formulations-panel"  open="open">
            <summary>Formulations</summary>
@@ -8,34 +27,9 @@
        </details>
        <details id="appendix4-panel">
            <summary>Appendix 4</summary>
-           <cmp-appendix-four></cmp-appendix-four>
+           <cmp-therapeutic-class></cmp-therapeutic-class>
+           &lt;!&ndash;<cmp-appendix-four></cmp-appendix-four>&ndash;&gt;
        </details>
    </div>
 
-</div>
-
-<!--<<div class="wet-boew-tabbedinterface tabs-style-2">
-    <ul class="tabs">
-        <li><a href="#tabs1_1">Tab 1</a></li>
-        <li class="default"><a href="#tabs1_2">Tab 2</a></li>
-        <li><a href="#tabs1_3">Tab3</a></li>
-    </ul>
-    <div class="tabs-panel">
-        <div id="tabs1_1">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-
-        </div>
-        <div id="tabs1_2">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
-        <div id="tabs1_3">
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
-    </div>
 </div>-->
