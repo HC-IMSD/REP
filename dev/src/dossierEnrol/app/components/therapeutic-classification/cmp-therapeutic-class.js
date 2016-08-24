@@ -50,7 +50,7 @@
 
             var maxID = getListMaxID();
 
-            console.log("addNew maxID: " + JSON.stringify(maxID) );
+            //console.log("addNew maxID: " + JSON.stringify(maxID) );
 
             var item = {"id":maxID + 1, "name":""};
 
@@ -64,7 +64,7 @@
         };
 
         self.saveRecord = function (_id) {
-            console.log("Saving item: "+_id);
+           // console.log("Saving item: "+_id);
             var idx = self.model.classifications.indexOf(
                 $filter('filter')(self.model.classifications, {id: _id}, true)[0]
             );
@@ -73,7 +73,7 @@
         };
 
         self.deleteRecord = function (_id) {
-            console.log("Deleting item: "+_id);
+            //console.log("Deleting item: "+_id);
 
             var idx = self.model.classifications.indexOf(
                 $filter('filter')(self.model.classifications, {id: _id}, true)[0]

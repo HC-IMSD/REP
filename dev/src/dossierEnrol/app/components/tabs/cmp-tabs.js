@@ -6,7 +6,7 @@
 
 
     //TODO: Lazy load modules
-    angular.module('tabsModule', []);
+    angular.module('tabsModule', ['appendixFourModule']);
 })();
 
 (function () {

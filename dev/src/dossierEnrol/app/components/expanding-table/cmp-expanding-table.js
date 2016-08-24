@@ -26,8 +26,8 @@
                 selectRecord:'<'
             }
         });
-    expandingTableCtrl.$inject = ['$filter']
-    function expandingTableCtrl($filter) {
+   //expandingTableCtrl.$inject = ['$element']
+    function expandingTableCtrl($element) {
         var vm = this;
         vm.$onInit = function () {
             vm.focused = false;
@@ -38,6 +38,7 @@
             // vm.dayDataCollapse = [true, true, true, true, true];
             vm.numberCols=_getNumberKeys(vm.columnDef)
             vm.dayDataCollapse=_createArray(vm.numberCols,true);
+
         }
         vm.$onChanges = function (changes) {
 
@@ -61,6 +62,16 @@
             if(changes.disableSelection){
                 vm.disableExpand=changes.disableSelection.currentValue;
             }
+        };
+
+        vm.$postLink = function(){
+
+            console.log('expandingTable $postLink element: ' + JSON.stringify($element));
+
+            $element.find('tr').on('click',function(){
+                console.log('expandingTable $postLink tr click');
+            });
+
         }
         /**
          * Utility function for determining the number of columns to create
@@ -107,8 +118,11 @@
         vm.selectTableRow = function (index) {
             //if selection
 
+
+            console.debug("selected row index: " + index);
+
             if (vm.disableExpand) return;
-            //console.debug("selected row index: " + index);
+            console.debug("expand not disabled  index: " + index);
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();
             } else {
