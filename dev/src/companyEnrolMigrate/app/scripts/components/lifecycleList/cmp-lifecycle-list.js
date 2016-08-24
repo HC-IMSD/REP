@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('lifecycleList', [])
+        .module('lifecycleList', ['filterLists'])
 })();
 
 (function () {
@@ -27,14 +27,15 @@
             controllerAs: 'lifecycleListCtrl'
         });
 
-    lifecycleListCtrl.$inject = ['$filter'];
+    lifecycleListCtrl.$inject = ['$filter', 'sequenceOrderDescendingFilter'];
 
-    function lifecycleListCtrl($filter) {
+    function lifecycleListCtrl($filter, sequenceOrderDescendingFilter) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailsValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.lifecycleList = [];
+        vm.setCollapsed = false;
         vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
@@ -70,6 +71,11 @@
              }*/
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
+
+                /*  var temp=sequenceOrderDescendingFilter(vm.lifecycleList,'sequence');
+                 vm.lifecycleList=temp;
+                 if(vm.lifecycleList) console.log(JSON.stringify(vm.lifecycleList))*/
+                //$scope.friends = orderBy(friends, $scope.propertyName, $scope.reverse);
                 if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
                     vm.isDetailsValid = true;
                 }
@@ -89,12 +95,15 @@
 
         vm.addTransaction = function () {
             var defaultTransaction = vm.getNewTransaction();
-            vm.lifecycleList.push(defaultTransaction);
+            vm.lifecycleList.unshift(defaultTransaction);
             vm.isDetailsValid = true; //set to true to exapnd
 
-            vm.selectRecord = (vm.lifecycleList.length - 1);
+            /*vm.selectRecord = (vm.lifecycleList.length - 1);*/
+            vm.setCollapsed = true;
+            vm.setCollapsed = false;
+            vm.selectRecord = 0;
             console.log("The select record is " + vm.selectRecord)
-            vm.isDetailsValid = false;
+            // vm.isDetailsValid = false;
         }
 
         vm.setValid = function (detailValid) {

@@ -17,3 +17,8 @@ label > select {
 .hd1rep {
     color:white;
 }
+
+/*
+.picker-overlay {
+    z-index: 1100 !important;
+}*/

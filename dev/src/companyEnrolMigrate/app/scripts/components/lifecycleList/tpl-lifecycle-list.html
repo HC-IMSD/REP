@@ -6,6 +6,7 @@
     <div class="panel-body">
         <div class="row">
             <cmp-expanding-table list-items="lifecycleListCtrl.lifecycleList"
+                                 reset-to-collapsed="lifecycleListCtrl.setCollapsed"
                                  column-def="lifecycleListCtrl.columnDef" select-record="lifecycleListCtrl.selectRecord"
                                  disable-selection="!lifecycleListCtrl.isDetailsValid">
 

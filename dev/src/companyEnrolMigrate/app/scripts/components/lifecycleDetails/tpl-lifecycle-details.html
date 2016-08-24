@@ -56,13 +56,13 @@
                     <div class="row">
                         <div class="form-group  col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.regActivity.$invalid}">
-                            <label for="controlNum_{{$id}}" class="required">
+                            <label for="regActivity_{{$id}}" class="required">
                                 <span class="field-name">{{"REG_ACTIVITY" |translate}}</span>
                                 <strong class="required">{{"REQUIRED" |translate}}</strong>
                                 <select id="regActivity_{{$id}}" name="regActivity"
                                         ng-model="lifecycleCtrl.lifecycleModel.activityType"
                                         data-ng-change="lifecycleCtrl.setSequenceList()"
-                                        class="form-control full-width" required
+                                        class="form-control full-width" ng-required="true"
                                         ng-options="activity |translate for activity in  lifecycleCtrl.activityList | orderByTranslated">
                                 </select>
                                 <strong id="activityType-error" class="error"

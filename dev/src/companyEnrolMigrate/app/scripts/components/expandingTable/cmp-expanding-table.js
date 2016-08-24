@@ -38,6 +38,14 @@
         vm.dayDataCollapse=_createArray(vm.numberCols,true);
         vm.$onInit = function () {
         }
+
+        vm.getExpandedState = function (row) {
+            if (row === vm.tableRowIndexCurrExpanded) {
+                return true;
+            }
+            return false
+        }
+
         vm.$onChanges = function (changes) {
 
             if(changes.listItems){}

@@ -23,5 +23,6 @@
   "APPROVE_FINAL": "Approve Final XML",
   "SAVE_DRAFT": "Save Draft for submission",
   "PRIMARY": "Primary",
-  "SECONDARY": "Alternate"
+  "SECONDARY": "Alternate",
+  "TOGGLE_EXPAND": "Click to toggle collapse or expand details of row"
 }
