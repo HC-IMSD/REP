@@ -129,12 +129,13 @@
                                 <label for="company-id-text">Company ID
                                     <input type="text" class="form-control" id="company-id-text"
                                            ng-readonly="main.isExtern()" maxlength="6" name="companyID"
+                                           ng-minlength="6"
                                            ng-model="main.company.companyId" ng-required="!main.isExtern()"/>
-                                    <strong id="code-error" class="error"
-                                    >
+                                    <strong id="code-error" class="error">
                         <span class="label label-danger" ng-if="main.companyEnrolForm.companyID.$invalid"
                               ng-messages="main.companyEnrolForm.companyID.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
                         </span>
                                     </strong>
                                 </label>
