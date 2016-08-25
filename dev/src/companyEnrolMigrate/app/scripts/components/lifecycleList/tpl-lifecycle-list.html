@@ -13,6 +13,7 @@
                 <cmp-lifecycle-details lifecycle-record="$parent.record"
                                        is-detail-valid="lifecycleListCtrl.setValid(state)"
                                        on-delete="lifecycleListCtrl.deleteRecord(id)"
+                                       enable-delete-index="lifecycleListCtrl.lastRecordSequence()"
                                        on-update="lifecycleListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
 
             </cmp-expanding-table>

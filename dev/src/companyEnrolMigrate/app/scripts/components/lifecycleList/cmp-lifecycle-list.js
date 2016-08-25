@@ -35,27 +35,33 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailsValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.lifecycleList = [];
-        vm.setCollapsed = false;
+        vm.setCollapsed = 0;
+        vm.deletableIndex = 0;
         vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
                 binding: "sequence",
-                width: "15"
+                width: "8"
             },
             {
                 label: "CONTROL_NUMBER",
                 binding: "controlNumber",
-                width: "15"
+                width: "8"
             },
             {
                 label: "DATE_SUBMITTED",
                 binding: "dateFiled",
-                width: "15"
+                width: "10"
+            },
+            {
+                label: "REG_ACTIVITY",
+                binding: "activityType",
+                width: "10"
             },
             {
                 label: "SEQUENCE_DESCRIPT",
                 binding: "sequenceConcat",
-                width: "55"
+                width: "70"
             }
         ]
 
@@ -66,21 +72,13 @@
         }
 
         vm.$onChanges = function (changes) {
-            /* if(changes.addresses && changes.addresses.currentValue) {
-             vm.lifecycleList = changes.addresses.currentValue;
-             }*/
+
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
-
-                /*  var temp=sequenceOrderDescendingFilter(vm.lifecycleList,'sequence');
-                 vm.lifecycleList=temp;
-                 if(vm.lifecycleList) console.log(JSON.stringify(vm.lifecycleList))*/
-                //$scope.friends = orderBy(friends, $scope.propertyName, $scope.reverse);
                 if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
                     vm.isDetailsValid = true;
                 }
             }
-
         }
 
         vm.deleteRecord = function (aID) {
@@ -93,17 +91,21 @@
             vm.deprecateSequence();
         }
 
+        vm.lastRecordSequence = function () {
+
+            if (!vm.lifecycleList) {
+                //this case should never happen, should always be empty array
+                return 0;
+            }
+            return (vm.lifecycleList.length - 1);
+        }
+
         vm.addTransaction = function () {
             var defaultTransaction = vm.getNewTransaction();
             vm.lifecycleList.unshift(defaultTransaction);
-            vm.isDetailsValid = true; //set to true to exapnd
-
-            /*vm.selectRecord = (vm.lifecycleList.length - 1);*/
-            vm.setCollapsed = true;
-            vm.setCollapsed = false;
-            vm.selectRecord = 0;
-            console.log("The select record is " + vm.selectRecord)
-            // vm.isDetailsValid = false;
+            vm.selectRecord = 0; //need to generate a change
+            vm.setCollapsed++;
+            vm.isDetailsValid = false;
         }
 
         vm.setValid = function (detailValid) {

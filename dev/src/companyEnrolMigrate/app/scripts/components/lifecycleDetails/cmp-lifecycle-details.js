@@ -25,7 +25,8 @@
                 onUpdate: '&',
                 showErrors: '&',
                 isDetailValid: '&',
-                onDelete: '&'
+                onDelete: '&',
+                enableDeleteIndex: '&'
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
@@ -75,6 +76,13 @@
             vm.setDetailsState();
         }
 
+        vm.disableDeleteState = function () {
+            var value = parseInt(vm.lifecycleModel.sequence);
+            if (value == vm.enableDeleteIndex()) {
+                return false;
+            }
+            return true;
+        }
 
         /**
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
@@ -154,9 +162,13 @@
                     vm.descriptionList = TransactionLists.getYbprType()
                     break;
 
+                default:
+                    vm.descriptionList = "";
+                    break;
+
             }
             ///find if the value is in the list
-            if (vm.descriptionList.indexOf(temp) !== -1) {
+            if (temp && vm.descriptionList.indexOf(temp) !== -1) {
                 vm.lifecycleModel.descriptionValue = temp;
             }
         };
