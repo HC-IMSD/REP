@@ -35,9 +35,9 @@
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
             vm.tableRowIndexPrevExpanded = "";
-            // vm.dayDataCollapse = [true, true, true, true, true];
-            vm.numberCols=_getNumberKeys(vm.columnDef)
-            vm.dayDataCollapse=_createArray(vm.numberCols,true);
+            vm.dayDataCollapse = [true, true, true, true, true];
+           // vm.numberCols=_getNumberKeys(vm.columnDef)
+            vm.dayDataCollapse=_createArray(vm.listItems.length,true);
 
         }
         vm.$onChanges = function (changes) {
@@ -66,10 +66,8 @@
 
         vm.$postLink = function(){
 
-            console.log('expandingTable $postLink element: ' + JSON.stringify($element));
 
             $element.find('tr').on('click',function(){
-                console.log('expandingTable $postLink tr click');
             });
 
         }
@@ -111,18 +109,15 @@
         }
 
         vm.dayDataCollapseFn = function () {
-            for (var i = 0; vm.listItems.length - 1; i += 1) {
-                vm.dayDataCollapse.append('true');
+            for (var i = 0; i< vm.listItems.length; i++) {
+                vm.dayDataCollapse.append(true);
             }
         };
         vm.selectTableRow = function (index) {
             //if selection
 
 
-            console.debug("selected row index: " + index);
-
             if (vm.disableExpand) return;
-            console.debug("expand not disabled  index: " + index);
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();
             } else {
