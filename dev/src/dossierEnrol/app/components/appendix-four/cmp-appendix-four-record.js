@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('appendix4RecordModule', ['tissuesFluidsOriginModule'])
+        .module('appendix4RecordModule', ['tissuesFluidsOriginModule', 'sourceAnimalModule'])
 })();
 
 (function () {

@@ -1,20 +1,22 @@
 <div class="form-group">
-    <pre>tabs {{tabsCtrl.tabs | json}}</pre>
+    <!-- <pre>tabs {{tabsCtrl.tabs | json}}</pre>-->
 
-  <ul class="nav nav-tabs">
-        <li  ng-repeat="tab in tabsCtrl.tabs" role="presentation" ng-click="tabsCtrl.selectTab($index)" ng-class="{'active':tab.selected}">
-            <a  href="#" role="tab">{{tab.label}}</a>
+    <ul class="nav nav-tabs">
+        <li ng-repeat="tab in tabsCtrl.tabs" role="presentation" ng-click="tabsCtrl.selectTab($index)" ng-class="{'active':tab.selected, 'disabled':!tab.selected}">
+            <a href="#" role="tab">{{tab.label}}</a>
         </li>
 
     </ul>
-    <div id="formulations-panel"  ng-if="tabsCtrl.tabs[0].selected">
-        <p>
-            Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.
-        </p>
-    </div>
+    <div class="tabpanels">
+        <div id="formulations-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[0].selected">
+            <p>
+                Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.
+            </p>
+        </div>
 
-    <div id="appendix4-panel" ng-if="tabsCtrl.tabs[1].selected">
-        <cmp-appendix-four></cmp-appendix-four>
+        <div id="appendix4-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[1].selected">
+            <cmp-appendix-four></cmp-appendix-four>
+        </div>
     </div>
 </div>
 <!--<div class="wb-tabsCtrl">

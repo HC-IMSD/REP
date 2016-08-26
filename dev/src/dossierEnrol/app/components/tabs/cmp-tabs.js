@@ -15,8 +15,7 @@
         templateUrl: './components/tabs/tpl-tabs.html',
         controller: tabsCtrl,
         controllerAs: 'tabsCtrl',
-        bindings: {
-        }
+        bindings: {}
     });
 
     tabsCtrl.$inject = ['$scope'];
@@ -26,36 +25,34 @@
 
         var self = this;
 
-        self.$onInit = function(){
-           self.tabs = [
-               {
-                   label:"Formulations",
-                   selected:false
-               },
-               {
-                   label:"Appendix 4",
-                   selected:true
-               }
-           ];
-        }
+        self.$onInit = function () {
+            self.tabs = [
+                {
+                    label: "Formulations",
+                    selected: false,
+                    disabled: true
+                },
+                {
+                    label: "Appendix 4",
+                    selected: true,
+                    disabled: false
+                }
+            ];
+        };
 
-        self.selectTab = function(idx){
+        self.selectTab = function (idx) {
 
-            angular.forEach(self.tabs, function(tab){
-              //  console.log('tabsModule item: ' + tab.toSource());
-                tab.selected = false;
-            });
+            if (!self.tabs[idx].disabled) {
 
-           /* for(var item in self.tabs){
+                angular.forEach(self.tabs, function (tab) {
+                    //  console.log('tabsModule item: ' + tab.toSource());
+                    tab.selected = false;
+                });
 
-                console.log('tabsModule item: ' + item);
+                self.tabs[idx].selected = true;
+            }
 
-              //  item.selected = false;
-            }*/
-
-            self.tabs[idx].selected = true;
-
-        }
+        };
     }
 
 })();
