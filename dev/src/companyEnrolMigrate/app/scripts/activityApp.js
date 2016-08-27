@@ -1,3 +1,6 @@
+/**
+ * Created by dkilty on 8/26/2016.
+ */
 (function () {
     'use strict';
     angular
@@ -5,8 +8,6 @@
             'pascalprecht.translate',
             'ngMessages',
             'ngAria',
-            'addressList2',
-            'contactList2',
             'fileIO',
             'ngSanitize'
         ])
@@ -15,43 +16,29 @@
 (function () {
     'use strict';
     angular
-        .module('dossierApp')
+        .module('activityApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['CompanyService', 'hpfbFileProcessing', '$filter', '$scope']
+    MainController.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope']
 
-    function MainController(CompanyService, hpfbFileProcessing, $filter, $scope) {
+    function MainController(ActivityService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope) {
 
         var vm = this;
         //TODO magic number
-        vm.rootTag = 'COMPANY_ENROL'
+
         vm.isIncomplete = true;
         vm.userType = "EXT";
         vm.saveXMLLabel = "SAVE_DRAFT"
         vm.updateValues = 0;
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
-        vm.disableXML;
-        var _company = new CompanyService();
+        vm.disableXML = true;
+        vm.activityService = new ActivityService();
+        vm.rootTag = vm.activityService.getRootTag();
 
+        vm.activityRoot = vm.activityService.getModelInfo();
 
-        //TODO get rid of private variable
-        vm.companyService = _company;
-        vm.applTypes = vm.companyService.getApplicationTypes()//TODO service ofor app types
-        vm.company = {
-            dataChecksum: "",
-            enrolmentVersion: "1",
-            dateSaved: "1999-01-21",
-            applicationType: "APPROVED",
-            softwareVersion: "string",
-            companyId: "string",
-            addressList: [],
-            contactList: []
-        };
-        vm.company = _company.getModelInfo();
-
-        vm.initUser = function (id) { //TODO needed?
-
+        vm.initUser = function (id) {
             if (!id) id = 'EXT'
             vm.userType = id;
             if (id == 'INT') {
@@ -67,7 +54,7 @@
          */
         vm.isAmend = function () {
             //return true
-            return (vm.company.applicationType === vm.companyService.getAmendType())
+            return (vm.activityRoot.applicationType === vm.ApplicationInfoService.getAmendType())
         }
 
         /**
@@ -91,13 +78,18 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                incrementMajorVersion();
+                ApplicationInfoService.incrementMajorVersion();
                 updateModelOnApproval();
             } else {
                 incrementMinorVersion();
             }
-            var writeResult = _company.transformToFileObj(vm.company);
+            _updateInfoValues();
+            var writeResult = _company.transformToFileObj(vm.activityRoot);
             return writeResult;
+        }
+
+        function _updateInfoValues() {
+            vm.updateValues++;
         }
 
         $scope.$watch("main.companyEnrolForm.$valid", function () {
@@ -106,16 +98,16 @@
 
         function disableXMLSave() {
 
-            vm.disableXML = vm.companyEnrolForm.$invalid || (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
+            vm.disableXML = vm.companyEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.ApplicationInfoService.getApprovedType() && vm.isExtern())
         }
 
         function disableJSONSave() {
 
-            vm.disableJson = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
+            vm.disableJson = (vm.activityRoot.applicationType == vm.ApplicationInfoService.getApprovedType() && vm.isExtern())
         }
 
         function _setComplete() {
-            if (vm.company.companyId) {
+            if (vm.activityRoot.companyId) {
                 vm.isIncomplete = false;
             } else {
                 vm.isIncomplete = true;
@@ -124,108 +116,32 @@
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
-            _company = new CompanyService();
+            vm.activityService = new ActivityService();
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
                 _company.transformFromFileObj(resultJson)
-                vm.company = {}
-                angular.extend(vm.company, _company.getModelInfo())
+                vm.activityRoot = {}
+                angular.extend(vm.activityRoot, vm.activityService.getModelInfo())
                 _setComplete();
-
             }
             disableXMLSave();
         };
-
         /**
          * ngdoc method to set the application type to amend
          * @private
          */
         function _setApplTypeToAmend() {
 
-            vm.company.applicationType = vm.companyService.getAmendType();
+            vm.activityRoot.applicationType = vm.ApplicationInfoService.getAmendType();
             disableXMLSave();
-        }
-
-        //used on update
-        vm.onUpdateAddressList = function (newList) {
-            vm.company.addressList = newList;
-        }
-
-        vm.getNewAddress = function () {
-            var result = _company.createAddressRecord();
-            return result;
-        }
-
-        vm.getNewContact = function () {
-            var result = _company.createContactRecord();
-            return result;
-        }
-
-        //TODO remove?
-        vm.updateAddressRecord = function (address) {
-            if (!address) return;
-            var idx = vm.company.addressList.indexOf(
-                $filter('filter')(vm.company.addressList, {addressID: address.addressID}, true)[0]
-            );
-            vm.company.addressList[idx] = address
-            var temp = vm.company.addressList;
-            vm.company.addressList = [];
-            vm.company.addressList = temp;
-        }
-
-        //TODO remove?
-        vm.onUpdateContactList = function (newList) {
-            vm.company.contactList = newList;
         }
 
         /**
          * @ngdoc method -updates the date field to the current date
          */
         function updateDate() {
-            if (vm.company) {
-                vm.company.dateSaved = _getTodayDate();
-            }
-        }
-
-        //TODO: move to a service
-        /**
-         * @ngdoc method gets the current date formatted as YYYY-MM-DD
-         * @returns {string}
-         * @private
-         */
-        function _getTodayDate() {
-            var d = new Date();
-            var isoDate = d.getFullYear() + '-'
-                + pad(d.getMonth() + 1) + '-'
-                + pad(d.getDate())
-            return (isoDate)
-            function pad(n) {
-                return n < 10 ? '0' + n : n
-            }
-        }
-
-        function incrementMinorVersion() {
-            if (!vm.company.enrolmentVersion) {
-                vm.company.enrolmentVersion = "0.1";
-            } else {
-                var parts = vm.company.enrolmentVersion.split('.')
-                var dec = parseInt(parts[1]);
-                var result = parts[0] + "." + (dec + 1);
-                vm.company.enrolmentVersion = result;
-            }
-        }
-
-        /**
-         * Increments the major version. Sets the minor to false
-         */
-        function incrementMajorVersion() {
-            if (!vm.company.enrolmentVersion) {
-                vm.company.enrolmentVersion = "1.0";
-            } else {
-                var parts = vm.company.enrolmentVersion.split('.')
-                var whole = parseInt(parts[0]);
-                var result = (whole + 1) + ".0"
-                vm.company.enrolmentVersion = result;
+            if (vm.activityRoot) {
+                vm.activityRoot.dateSaved = ApplicationInfoService.getTodayDate();
             }
         }
 
@@ -235,21 +151,6 @@
             }
             return false;
         }
-        /**
-         * @ngdoc method when a form gets approved
-         * remove any amendment checkboxes
-         */
-        function updateModelOnApproval() {
-            vm.company.applicationType = vm.companyService.getApprovedType();
-            //reset any amend selections
-            for (var i = 0; i < vm.company.addressList.length; i++) {
-                vm.company.addressList[i].amendRecord = 'N';
-            }
-            for (var j = 0; j < vm.company.contactList.length; j++) {
-                vm.company.contactList[j].amendRecord = 'N';
-            }
-        }
-
 
     }
 })();

@@ -1,35 +1,42 @@
-<div class="row">
-    <div class="col-xs-3 form-group">
-        <label for="application-type">{{"APPL_TYPE"| translate}}</label>
-        <select id="application-type"
-                ng-options="type |translate for type in main.applTypes"
-                ng-model="main.company.applicationType" ng-readonly="true"
-                ng-disabled="true"
-                class="form-control full-width"></select>
+<div>
+    <div class="row">
+        <div class="col-xs-2">
+            <label for="application-type_{{$id}}">{{"APPL_STATUS"| translate}}</label>
+        </div>
+        <div class="col-xs-2">
+        </div>
+        <div class="col-xs-2">
+            <label for="enr-version-texte_{{$id}}">{{"ENROL_VERSION"| translate}}</label>
+        </div>
+        <div class="col-xs-2">
+            <label for="date-saved-texte_{{$id}}">{{"DATE_SAVED"| translate}}</label>
+        </div>
     </div>
-    <div class="col-xs-3 form-group">
-        <label for="enr-version-text">Enrolment Version</label>
-        <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
-               ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
+    <div class="row">
+        <div class="col-xs-2 form-group">
+            <select id="application-type_{{$id}}"
+                    ng-options="type |translate for type in infoCtrl.applTypes"
+                    ng-model="infoCtrl.record.applicationType"
+                    ng-disabled="true" ;
+                    class="form-control full-width"></select>
+        </div>
+        <div class="col-xs-2 form-group">
+            <div>
+                <button class="btn btn-default form-control" name="amendSub" id="amendSub"
+                        ng-click="infoCtrl.setAmendState()"
+                        ng-disabled="infoCtrl.setAsIncomplete">
+                    Amend Enrolment
+                </button>
+            </div>
+        </div>
+        <div class="col-xs-2 form-group">
+            <input type="text" class="form-control full-width" id="enr-version-texte_{{$id}}" ng-readonly="true"
+                   ng-model="infoCtrl.infoModel.enrolmentVersion"/>
+        </div>
+        <div class="col-xs-2 form-group">
+            <input type="text" class="form-control full-width" id="date-saved-texte_{{$id}}"
+                   ng-model="infoCtrl.infoModel.dateSaved"
+                   ng-readonly="true"/>
+        </div>
     </div>
-    <div class="col-xs-3 form-group">
-        <label for="date-saved-text">Date Last Saved</label>
-        <input type="text" class="form-control" id="date-saved-text"
-               ng-model="main.company.dateSaved" ng-readonly="true"/>
-    </div>
-    <div class="col-xs-3 form-group">
-        <label for="company-id-text">Company ID</label>
-        <input type="text" class="form-control" id="company-id-text"
-               ng-readonly="main.isExtern()" maxlength="6"
-               ng-model="main.company.companyId"/>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-5 form-group">
-        <button class="btn btn-default" ng-click="main.setAmendState()"
-                ng-disabled="main.isIncomplete">
-            Amend Enrolment
-        </button>
-    </div>
-</div>
 </div>

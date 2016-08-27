@@ -108,7 +108,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-xs-3 form-group">
-                                <label for="application-type">{{"APPL_TYPE"| translate}}</label>
+                                <label for="application-type">{{"APPL_STATUS"| translate}}</label>
                                 <select id="application-type"
                                         ng-options="type |translate for type in main.applTypes"
                                         ng-model="main.company.applicationType" ng-readonly="true"
@@ -258,6 +258,7 @@
 <script src="app/lib/angular-messages.min.js"></script>
 <script src="app/lib/angular-translate.min.js"></script>
 <script src="app/lib/angular-translate-loader-static-files.min.js"></script>
+<script src="app/lib/angular-sanitize.min.js"></script>
 
 <script src="app/lib/angular-aria.min.js"></script>
 <script src="app/scripts/app.js"></script>
