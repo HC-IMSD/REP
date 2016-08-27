@@ -23,5 +23,7 @@
   "SAVE_DRAFT": "Save Draft for submission",
   "PRIMARY": "Primary",
   "SECONDARY": "Alternate",
-  "TOGGLE_EXPAND": "Click to toggle collapse or expand details of row"
+  "TOGGLE_EXPAND": "Click to toggle collapse or expand details of row",
+  "SAVE_DRAFT":   "Save Working Copy"
+
 }

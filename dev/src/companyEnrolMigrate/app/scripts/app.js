@@ -8,7 +8,8 @@
             'addressList2',
             'contactList2',
             'fileIO',
-            'ngSanitize'
+            'ngSanitize',
+            'applicationInfo'
         ])
 })();
 
@@ -33,6 +34,11 @@
         vm.showContent = _loadFileContent;
         vm.disableXML;
         var _company = new CompanyService();
+        vm.configCompany = {
+            "label": "COMPANY_ID",
+            "fieldLength": "6",
+            "tagName": "companyId"
+        }
 
 
         //TODO get rid of private variable

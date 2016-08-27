@@ -23,5 +23,7 @@
   "SAVE_DRAFT": "fr_Save Draft for submission",
   "PRIMARY": "fr_Primary",
   "SECONDARY": "fr_Alternate",
-  "TOGGLE_EXPAND": "fr_Click to toggle collapse or expand details of row"
+  "TOGGLE_EXPAND": "fr_Click to toggle collapse or expand details of row",
+  "SAVE_DRAFT":   "fr_Save Working Copy",
+  "AMEND_ENROL":  "fr_Amend Enrolment"
 }
