@@ -36,7 +36,7 @@
             vm.tableRowIndexCurrExpanded = "";
             vm.tableRowIndexPrevExpanded = "";
             vm.dayDataCollapse = [true, true, true, true, true];
-           // vm.numberCols=_getNumberKeys(vm.columnDef)
+            vm.numberCols= vm.columnDef.length;// _getNumberKeys(vm.columnDef)
             vm.dayDataCollapse=_createArray(vm.listItems.length,true);
 
         }

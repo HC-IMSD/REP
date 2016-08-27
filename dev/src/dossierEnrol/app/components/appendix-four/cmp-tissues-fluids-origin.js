@@ -41,7 +41,7 @@
                     {name: "dura-mater", label: "Dura Mater", value: false},
                     {name: "hypothalmus", label: "hypothalmus", value: false},
                     {name: "retina-optic", label: "Retina Optic", value: false},
-                    {name: "spinal-cord", label: "spinalCord", value: false},
+                    {name: "spinal-cord", label: "Spinal Cord", value: false},
                     {name: "trigerminal-ganglia", label: "Trigerminal Ganglia", value: false},
                     {name: "other-nervous", label: "Other Nervous", value: false, hasOtherDetails:true}
                 ]},

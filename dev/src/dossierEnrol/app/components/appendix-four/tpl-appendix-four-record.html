@@ -22,9 +22,16 @@
             </label>
         </div>
 
+    <section class="section">
+        <cmp-tissues-fluids-origin ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"></cmp-tissues-fluids-origin>
+    </section>
 
-    <cmp-tissues-fluids-origin ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"></cmp-tissues-fluids-origin>
-    <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"></cmp-source-animal>
+    <section class="section">
+        <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"></cmp-source-animal>
+    </section>
+
+
+
 
 
 </ng-form>

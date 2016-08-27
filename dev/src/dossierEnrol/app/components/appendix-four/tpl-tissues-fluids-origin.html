@@ -1,18 +1,9 @@
 <ng-form name="tfo-form">
-    <div class="col col-md-12">
     <fieldset>
         <legend>Tissues or fluids of Origin</legend>
+        <div class="col col-md-12">
         <cmp-checkbox-list ng-repeat="item in tfoCtrl.model" title="{{item.title}}"
                            common-name="{{item.groupName}}" list-items="item.list"></cmp-checkbox-list>
-        <!--<cmp-checkbox-list title="Nervous System" common-name="nervous-sys" list-items="tfoCtrl.model.nervousSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Digestive System" common-name="digestive-sys" list-items="tfoCtrl.model.digestiveSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Reproductive System" common-name="reproductive-sys" list-items="tfoCtrl.model.reproductiveSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Cardio System" common-name="cardio-sys" list-items="tfoCtrl.model.cardioSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Immune System" common-name="immune-sys" list-items="tfoCtrl.model.immuneSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Skin Gland System" common-name="skin-gland-sys" list-items="tfoCtrl.model.skinGlandSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Musculo Skeletal System" common-name="musculo-skeletal-sys" list-items="tfoCtrl.model.musculoSkeletalSystem"></cmp-checkbox-list>
-        <cmp-checkbox-list title="Other Tissues" common-name="other-tissues" list-items="tfoCtrl.model.otherTissues"></cmp-checkbox-list>-->
-
+        </div>
     </fieldset>
-    </div>
 </ng-form>
