@@ -1,7 +1,6 @@
 {
   "ADD_TRANSACTION": "fr_Add Record",
   "SEQUENCE_NUM": "fr_Sequence Number",
-  "CONTROL_NUMBER": "fr_Control Number",
   "DATE_SUBMITTED": "fr_Date Submitted",
   "SEQUENCE_DESCRIPT": "fr_Sequence Description",
   "IS_ACTCHANGES": "fr_Same as Regulatory Activity Contact for this Submission?",

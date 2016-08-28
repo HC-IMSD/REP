@@ -31,7 +31,7 @@
                 "applicationType": "NEW",
                 "softwareVersion": "",
                 "dataChecksum": "",
-                "dossierIdPrefix": "",
+                "dossierIdPrefix": "HC6-024-",
                 "dossierId": "",
                 "regActivityLead": "",
                 "regActivityType": "",
@@ -128,8 +128,46 @@
             //get rid of previous default if it exists
             this._default = {};
             angular.extend(this._default, transactionInfo)
-        }
+        };
+        ActivityService.prototype.getActivityLeadList = function (isPilot) {
 
+            var leadList = ["BIOLOGIC",
+                "CHP",
+                "DMF",
+                "PHARMA",
+                "PMVIGILANCE"];
+            if(!isPilot){
+                leadList.push("MD","VET","UNASSIGNED");
+            }
+               return leadList;
+
+        };
+        ActivityService.prototype.getActivityTypeList=function(isPilot){
+
+            var activityList=[
+            "CTA",
+            "CTAA",
+            "NDS",
+            "SNDS",
+            "ANDS",
+            "SANDS",
+            "NC",
+            "DIN",
+            "PDC",
+            "ADMIN"
+            ];
+            if(!isPilot){
+                activityList.push(
+                    "VIND",
+                    "VINDAM",
+                    "VNDS",
+                    "VANDS",
+                    "VSANDS",
+                    "VNC",
+                    "VDIN")
+            }
+            return activityList;
+        };
 
         // Return a reference to the object
         return ActivityService;

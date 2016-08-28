@@ -17,7 +17,7 @@
     'use strict';
     angular
         .module('applicationInfoService')
-        .factory('applicationInfoService', applicationInfoService)
+        .factory('ApplicationInfoService', ApplicationInfoService)
 
     function ApplicationInfoService() {
         function ApplicationInfoService() {

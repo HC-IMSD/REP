@@ -4,12 +4,16 @@
 (function () {
     'use strict';
     angular
-        .module('dossierApp', [
+        .module('activityApp', [
             'pascalprecht.translate',
             'ngMessages',
             'ngAria',
             'fileIO',
-            'ngSanitize'
+            'ngSanitize',
+            'activityService',
+            'applicationInfoService',
+            'applicationInfo',
+            'filterLists'
         ])
 })();
 
@@ -19,9 +23,9 @@
         .module('activityApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope']
+    MainController.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', '$location']
 
-    function MainController(ActivityService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope) {
+    function MainController(ActivityService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, $location) {
 
         var vm = this;
         //TODO magic number
@@ -34,9 +38,14 @@
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
         vm.activityService = new ActivityService();
+        vm.applicationInfoService = new ApplicationInfoService();
         vm.rootTag = vm.activityService.getRootTag();
-
         vm.activityRoot = vm.activityService.getModelInfo();
+        vm.configField = {
+            "label": "CONTROL_NUMBER",
+            "fieldLength": "6",
+            "tagName": "dstsControlNumber"
+        };
 
         vm.initUser = function (id) {
             if (!id) id = 'EXT'
@@ -46,6 +55,7 @@
             } else {
                 vm.saveXMLLabel = "SAVE_DRAFT"
             }
+            console.log("The path is: " + $location.path())
         }
 
         /**
@@ -54,7 +64,7 @@
          */
         vm.isAmend = function () {
             //return true
-            return (vm.activityRoot.applicationType === vm.ApplicationInfoService.getAmendType())
+            return (vm.activityRoot.applicationType ===  vm.applicationInfoService.getAmendType())
         }
 
         /**
@@ -63,14 +73,14 @@
          */
         vm.saveJson = function () {
             var writeResult = _transformFile()
-            hpfbFileProcessing.writeAsJson(writeResult, "companyEnrol", vm.rootTag);
+            hpfbFileProcessing.writeAsJson(writeResult, "activityEnrol", vm.rootTag);
         }
         /**
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
             var writeResult = _transformFile()
-            hpfbFileProcessing.writeAsXml(writeResult, "companyEnrol", vm.rootTag);
+            hpfbFileProcessing.writeAsXml(writeResult, "activityEnrol", vm.rootTag);
         }
         /**
          * @ngdcc method updates data and increments version before creating json
@@ -78,13 +88,13 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                ApplicationInfoService.incrementMajorVersion();
+                vm.applicationInfoService.incrementMajorVersion();
                 updateModelOnApproval();
             } else {
-                incrementMinorVersion();
+                vm.applicationInfoService.incrementMinorVersion();
             }
             _updateInfoValues();
-            var writeResult = _company.transformToFileObj(vm.activityRoot);
+            var writeResult = vm.activityService.transformToFileObj(vm.activityRoot);
             return writeResult;
         }
 
@@ -92,26 +102,22 @@
             vm.updateValues++;
         }
 
-        $scope.$watch("main.companyEnrolForm.$valid", function () {
+        $scope.$watch("main.actvityEnrolForm.$valid", function () {
             disableXMLSave()
         }, true);
 
         function disableXMLSave() {
 
-            vm.disableXML = vm.companyEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.ApplicationInfoService.getApprovedType() && vm.isExtern())
+            vm.disableXML = vm.actvityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
         }
 
         function disableJSONSave() {
 
-            vm.disableJson = (vm.activityRoot.applicationType == vm.ApplicationInfoService.getApprovedType() && vm.isExtern())
+            vm.disableJson = (vm.activityRoot.applicationType ==  vm.applicationInfoService.getApprovedType() && vm.isExtern())
         }
 
         function _setComplete() {
-            if (vm.activityRoot.companyId) {
-                vm.isIncomplete = false;
-            } else {
-                vm.isIncomplete = true;
-            }
+            vm.isIncomplete = !vm.activityRoot.dstsControlNumber;
         }
 
         function _loadFileContent(fileContent) {
@@ -119,8 +125,8 @@
             vm.activityService = new ActivityService();
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-                _company.transformFromFileObj(resultJson)
-                vm.activityRoot = {}
+                vm.activityService.transformFromFileObj(resultJson);
+                vm.activityRoot = {};
                 angular.extend(vm.activityRoot, vm.activityService.getModelInfo())
                 _setComplete();
             }
@@ -141,7 +147,7 @@
          */
         function updateDate() {
             if (vm.activityRoot) {
-                vm.activityRoot.dateSaved = ApplicationInfoService.getTodayDate();
+                vm.activityRoot.dateSaved =  vm.applicationInfoService.getTodayDate();
             }
         }
 
@@ -158,7 +164,7 @@
 (function () {
     'use strict';
     angular
-        .module('dossierApp')
+        .module('activityApp')
         .config(['$translateProvider', function ($translateProvider) {
             $translateProvider.useStaticFilesLoader({
                 files: [

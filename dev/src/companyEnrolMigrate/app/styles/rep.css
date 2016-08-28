@@ -17,7 +17,10 @@ label > select {
 .hd1rep {
     color:white;
 }
-
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
 /*
 .picker-overlay {
     z-index: 1100 !important;

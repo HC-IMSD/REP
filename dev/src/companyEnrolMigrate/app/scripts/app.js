@@ -12,7 +12,7 @@
             'applicationInfo'
         ])
 })();
-
+//TODO replace with service for incrememnting version
 (function () {
     'use strict';
     angular

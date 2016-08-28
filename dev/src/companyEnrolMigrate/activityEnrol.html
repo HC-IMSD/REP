@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        Company Enrolment form for Health Canada
+        Activity Enrolment form for Health Canada
     </title>
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <!-- Meta data -->
@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="./wet-boew/css/noscript.min.css"/>
     </noscript>
 </head>
-<body vocab="http://schema.org/" typeof="WebPage" ng-app="dossierApp">
+<body vocab="http://schema.org/" typeof="WebPage" ng-app="activityApp">
 <ul id="wb-tphp">
     <li class="wb-slc">
         <a class="wb-sl" href="#wb-cont">Skip to main content</a>
@@ -71,7 +71,7 @@
         <div class="container">
             <div class="row">
                 <div id="wb-sttl" class="col-md-10">
-                    <h1 class="hd1rep">Company Regulatory Enrolment Process (REP)</h1>
+                    <h1 class="hd1rep">Activity Regulatory Enrolment Process (REP)</h1>
                 </div>
                 <object id="wmms" type="image/svg+xml" tabindex="-1" role="img" data="./theme-gcwu-fegc/assets/wmms.svg"
                         aria-label="Symbol of the Government of Canada"></object>
@@ -84,12 +84,12 @@
     <!--Company Enrol Content starts here -->
 
     <div>
-        <ng-form id="reg-company-form" name="main.actvityEnrolForm" ng-controller="MainController as main"
+        <ng-form id="reg-activity-form" name="main.actvityEnrolForm" ng-controller="MainController as main"
                  novalidate="novalidate"
                  ng-init="main.initUser('EXT')">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
-                    <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}e</h2>
+                    <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <div class="col-md-12">
@@ -106,60 +106,154 @@
                         <h3 class="panel-title">{{'ACTIVE_ENROL' |translate}}</h3>
                     </header>
                     <div class="panel-body">
+                        <cmp-application-info record="main.activityRoot" user-type="main.userType"
+                                              is-incomplete="main.isIncomplete"
+                                              configure-id-field="main.configField"></cmp-application-info>
                         <div class="row">
                             <div class="col-xs-3 form-group">
-                                <label for="application-type">{{"APPL_STATUS"| translate}}</label>
-                                <select id="application-type"
-                                        ng-options="type |translate for type in main.applTypes"
-                                        ng-model="main.activity.applicationType" ng-readonly="true"
-                                        ng-disabled="true"
-                                        class="form-control full-width"></select>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="enr-version-text">Enrolment Version</label>
-                                <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
-                                       ng-model="main.activity.enrolmentVersion" placeholder="Enrolment Version"/>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="date-saved-text">Date Last Saved</label>
-                                <input type="text" class="form-control" id="date-saved-text"
-                                       ng-model="main.activity.dateSaved" ng-readonly="true"/>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="company-id-text">Company ID
-                                    <input type="text" class="form-control" id="company-id-text"
-                                           ng-readonly="main.isExtern()" maxlength="6" name="companyID"
-                                           ng-minlength="6"
-                                           ng-model="main.activity.companyId" ng-required="!main.isExtern()"/>
-                                    <strong id="code-error" class="error">
-                        <span class="label label-danger" ng-if="main.actvityEnrolForm.companyID.$invalid"
-                              ng-messages="main.actvityEnrolForm.companyID.$error">
+                                <label for="companyId_{{$id}}">{{'COMPANY_ID' |translate}}
+                                    <input type="text" class="form-control" id="companyId_{{$id}}"
+                                           maxlength="6" name="companyId" ng-minlength="6"
+                                           ng-model="main.activityRoot.companyId" ng-required="true"/>
+                                    <strong id="companyId-error" class="error">
+                        <span class="label label-danger" ng-if="main.actvityEnrolForm.companyId.$invalid"
+                              ng-messages="main.actvityEnrolForm.companyId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                               <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
                         </span>
                                     </strong>
                                 </label>
                             </div>
+                            <div class="col-xs-2 form-group">
+                                <label for="prefix_{{$id}}">{{'DOSSIER_PREFIX' |translate}}
+                                    <input type="text" class="form-control text-right" id="prefix_{{$id}}"
+                                           name="prefix" ng-readonly="true" size="9"
+                                           ng-model="main.activityRoot.dossierIdPrefix"/>
+                                </label>
+                            </div>
+                            <div class="col-xs-3 form-group">
+                                <label for="dossierId_{{$id}}">{{'DOSSIER_ID' |translate}}
+                                    <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
+                                           maxlength="6" name="dossierId" ng-minlength="6"
+                                           ng-model="main.activityRoot.dossierId" ng-required="true"/>
+                                    <strong id="dossierId-error" class="error">
+                        <span class="label label-danger" ng-if="main.actvityEnrolForm.dossierId.$invalid"
+                              ng-messages="main.actvityEnrolForm.dossierId.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                        </span>
+                                    </strong>
+                                </label>
+                            </div>
+
                         </div>
                         <div class="row">
-                            <div class="col-xs-5 form-group">
-                                <button class="btn btn-default" ng-click="main.setAmendState()"
-                                        ng-disabled="main.isIncomplete">
-                                    Amend Enrolment
-                                </button>
+                            <div class="col-xs-4" ng-class="{'has-error':main.actvityEnrolForm.activityLead.$invalid}">
+                                <div class="form-group">
+                                    <label for="activityLead_{{$id}}">{{'ACTIVITY_LEAD' |translate}}
+                                        <select class="form-control" id="activityLead_{{$id}}"
+                                                ng-options="lead |translate for lead in main.activityService.getActivityLeadList(1) | orderByTranslated"
+                                                name="activityLead"
+                                                ng-model="main.activityRoot.regActivityLead"
+                                                ng-required="true"></select>
+                                        <strong id="activityLead-error" class="error">
+                        <span class="label label-danger"
+                              ng-if="transInfoCtrl.showError(main.actvityEnrolForm.activityLead.$invalid,main.actvityEnrolForm.activityLead.$touched)"
+                              ng-messages="main.actvityEnrolForm.activityLead.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                                        </strong>
+                                    </label>
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-8"
+                                 ng-class="{'has-error':main.actvityEnrolForm.regActivityType.$invalid}">
+                                <div class="form-group">
+                                    <label for="regActivityType_{{$id}}">{{'ACTIVITY_TYPE' |translate}}
+                                        <select class="form-control" id="regActivityType_{{$id}}"
+                                                ng-options="activity |translate for activity in main.activityService.getActivityTypeList(1) | orderByTranslated"
+                                                name="activityLead" ng-model="main.activityRoot.regActivityType"
+                                                ng-required="true"></select>
+                                        <strong id="regActivityType-error" class="error">
+                        <span class="label label-danger"
+                              ng-if="transInfoCtrl.showError(main.actvityEnrolForm.regActivityType.$invalid,main.actvityEnrolForm.regActivityType.$touched)"
+                              ng-messages="main.actvityEnrolForm.regActivityType.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                                        </strong>
+                                    </label>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-xs-6"
+                                 ng-class="{'has-error':main.actvityEnrolForm.regActivityType.$invalid}">
+                                <div class="form-group">
+                                    <label for="feeClass_{{$id}}">{{'FEE_CLASS' |translate}}
+                                        <select class="form-control" id="feeClass_{{$id}}"
+                                                name="feeClass" ng-model="main.activityRoot.feeClass"
+                                                ng-required="true"></select>
+                                        <strong id="feeClass-error" class="error">
+                        <span class="label label-danger"
+                              ng-if="main.showError(main.actvityEnrolForm.feeClass.$invalid,main.actvityEnrolForm.feeClass.$touched)"
+                              ng-messages="main.actvityEnrolForm.feeClass.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                                        </strong>
+                                    </label>
 
-                    <!--   <div>
-                           <cmp-company-address-list addresses="main.company.addressList"
-                                                     get-new-address="main.getNewAddress()" is-amend="main.isAmend()"
-                                                     company-service="main.companyService"></cmp-company-address-list>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <div class="checkbox">
+                                    <label for="chk-lasa{{$id}}">
+                                        <input type="checkbox" ng-model="ar.roleModel.manufacturer" name="notlasa"
+                                               id="chk-lasa_{{$id}}" ng-required="true"/>{{"NOT_LASA"|translate}}
+                                        <strong id="notlasa-error" class="error"
+                                                ng-if="main.showError(main.actvityEnrolForm.notlasa.$invalid,main.actvityEnrolForm.notlasa.$touched)">
+                 <span class="label label-danger" ng-messages="main.actvityEnrolForm.notlasa.$error">
+                              <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                                        </strong>
+                                    </label>
+                                </div>
+                            </div>
 
-                           <cmp-company-contact-list contacts="main.company.contactList"
-                                                     get-new-contact="main.getNewContact()" is-amend="main.isAmend()"
-                                                     company-service="main.companyService"></cmp-company-contact-list>
-                       </div>-->
+                        </div>
+
+                        <!--  <div class="form-group col-md-4"
+                               ng-class="{'has-error':transInfoForm.isSolicited.$invalid}">
+                              <label for="isSolicited_{{$id}}" class="required full-width">
+                                  <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
+                                  <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                  <select id="isSolicited_{{$id}}" name="isSolicited"
+                                          ng-model="transInfoCtrl.transactionModel.isSolicited"
+                                          class="form-control"
+                                          ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
+                                          ng-change="transInfoCtrl.setSolicitedState()" required></select>
+                                  <strong id="isSolicited-error" class="error"
+                                          ng-if="transInfoCtrl.showError(transInfoForm.isSolicited)">
+                          <span class="label label-danger" ng-messages="transInfoForm.isSolicited.$error">
+                              <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                          </span>
+                                  </strong>
+                              </label>
+                          </div>-->
+
+                        <!--   <div>
+                               <cmp-company-address-list addresses="main.company.addressList"
+                                                         get-new-address="main.getNewAddress()" is-amend="main.isAmend()"
+                                                         company-service="main.companyService"></cmp-company-address-list>
+
+                               <cmp-company-contact-list contacts="main.company.contactList"
+                                                         get-new-contact="main.getNewContact()" is-amend="main.isAmend()"
+                                                         company-service="main.companyService"></cmp-company-contact-list>
+                           </div>-->
                 </section>
                 <div class="row">
                     <div class="form-group col-md-3">
@@ -173,7 +267,7 @@
                         </button>
                     </div>
                 </div>
-                <pre>overall: {{main.activity | json : spacing}}</pre>
+                <pre>overall: {{main.activityRoot | json : spacing}}</pre>
             </div>
         </ng-form>
 
@@ -261,11 +355,13 @@
 <script src="app/lib/angular-sanitize.min.js"></script>
 
 <script src="app/lib/angular-aria.min.js"></script>
-<script src="app/scripts/app.js"></script>
-<script src="app/scripts/services/company-service.js"></script>
+<script src="app/scripts/activityApp.js"></script>
+<script src="app/scripts/services/activity-service.js"></script>
+<script src="app/scripts/services/application-info-service.js"></script>
+<script src="app/scripts/components/applicationInfo/cmp-application-info.js"></script>
+<script src="app/scripts/services/filter-lists.js"></script>
+
 <script src="app/scripts/services/data-lists.js"></script>
-<script src="app/scripts/components/cmp-country-select.js"></script>
-<script src="app/scripts/components/addressRole/cmp-address-role.js"></script>
 <script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
 //TODO remove
 <!--<script src="app/scripts/components/cmp-address-list.js"></script>-->
