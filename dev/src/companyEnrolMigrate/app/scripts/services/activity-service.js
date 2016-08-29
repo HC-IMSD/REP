@@ -7,7 +7,6 @@
 
 (function () {
     'use strict';
-
     angular
         .module('activityService', [])
 })();
@@ -38,11 +37,10 @@
                 "feeClass": "",
                 "notLasa": "",
                 "reasonFiling": "",
-                "isThirdParty": ""
-                //activityAddress: _createAddressModel(),
-                // activityContact: _createContactModel()
-                // regulatorySubmissionContact: [],
+                "isThirdParty": "",
+                "relatedActivity":[]
             };
+
             angular.extend(this._default, defaultActivityData);
             this.rootTag = "ACTIVITY_ENROL";
             this.currSequence = 0;
@@ -117,8 +115,23 @@
             model.notLasa = jsonObj.not_lasa;
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
-            return model;
+            var relatedActivites = {relatedActivites: this.getRelatedActivityList(jsonObj[rootTag].related_activity)};
+            return  angular.extend(model, relatedActivites);
         };
+
+        ActivityService.prototype.getRelatedActivityList=function(activityList){
+            var listResult = [];
+            if (!activityList) return listResult;
+            if (!(activityList instanceof Array)) {
+                //make it an array, case there is only one
+                activityList = [adrLactivityListist]
+            }
+            for(var i=0;i<activityList.length;i++){
+                listResult.push(this._transformRelatedRegActivityFromFileObj(actvityList[i]));
+            }
+            return listResult;
+        };
+
         /**
          * ngDoc method- mapping from the transaction file json object to the internal representation
          * @param jsonObj the json object generated from the file
@@ -129,6 +142,21 @@
             this._default = {};
             angular.extend(this._default, transactionInfo)
         };
+
+        ActivityService.prototype.getNewActivity = function () {
+            var activity= {
+                activityId:"1",
+                "regActivityType": "",
+                "dateCleared": "",
+                "controlNumber":"",
+                "dossierId":"",
+                "manufacturerName":"",
+                "reasonFiling":"",
+                "assocDins" : []
+            };
+            return activity;
+        };
+
         ActivityService.prototype.getActivityLeadList = function (isPilot) {
 
             var leadList = ["BIOLOGIC",
@@ -142,6 +170,8 @@
                return leadList;
 
         };
+
+
         ActivityService.prototype.getActivityTypeList=function(isPilot){
 
             var activityList=[
@@ -447,6 +477,8 @@
         regActivityType.assocDins.dinNumber = dins; //should always be an array
         return regActivityType;
     }
+
+
 
     function _transformRelatedDinsListFromFileObj(jsonObj) {
         var result = [];

@@ -13,7 +13,8 @@
             'activityService',
             'applicationInfoService',
             'applicationInfo',
-            'filterLists'
+            'filterLists',
+            'relatedActivityList'
         ])
 })();
 

@@ -37,7 +37,7 @@
         vm.activityModel={};
 
         vm.$onInit = function () {
-
+           // vm.activityModel=vm.activityModel;
         };
 
         /**
@@ -46,8 +46,10 @@
          */
         vm.$onChanges = function (changes) {
             //how this is currently wired, this will never fire!
-            if (changes.activityRecord.currentValue) {
+            if (changes.activityRecord) {
                 vm.activityModel = angular.copy(changes.activityRecord.currentValue);
+                console.log("Activity model" +vm.activityModel)
+
             }
         };
         /**
@@ -64,7 +66,7 @@
             var currRecord = vm.trackRecordCtrl.trackRecord();
             vm.activityModel = angular.copy(currRecord);
             vm.setNotEditable(); //case of amend
-            vm.addressRecForm.$setPristine();
+           // vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
             vm.savePressed = false;
         };
@@ -73,19 +75,19 @@
          * @ngdoc method -Updates the parent on whether this record is valid or not
          */
         vm.updateValid = function () {
-            vm.isDetailValid({state: (vm.addressRecForm.$valid && !vm.addressRecForm.$dirty)});
+           // vm.isDetailValid({state: (vm.addressRecForm.$valid && !vm.addressRecForm.$dirty)});
         };
 
-        $scope.$watch('addressRec.addressRecForm.$dirty', function () {
+      /*  $scope.$watch('addressRec.addressRecForm.$dirty', function () {
             if (vm.addressRecForm.$dirty) {
                 vm.isDetailValid({state: false})
             }
-        }, true);
+        }, true);*/
 
         /**
          * Updates the contact model used by the save button
          */
-        vm.updateactivityModel2 = function () {
+        vm.updateActivityModel = function () {
             if (vm.addressRecForm.$valid) {
                 vm.isDetailValid({state: true});
                 vm.addressRecForm.$setPristine();

@@ -5,23 +5,38 @@
         </header>
         <div class="panel-body">
             <div class="row">
-                <cmp-expanding-table list-items="activityListCtrl.addressList"
-                                     column-def="activityListCtrl.columnDef" select-record="activityListCtrl.selectRecord"
+                <cmp-expanding-table list-items="activityListCtrl.activityList"
+                                     column-def="activityListCtrl.columnDef"
+                                     select-record="activityListCtrl.selectRecord"
                                      disable-selection="!activityListCtrl.isDetailsValid">
 
-                   <!-- <cmp-address-record on-delete="addressListCtrl.deleteAddress(addressId)"
-                                        on-update="addressListCtrl.onUpdateAddressRecord(rec)"
-                                        is-amend="addressListCtrl.isAmend()"
-                                        is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
-                                        is-detail-valid="addressListCtrl.setValid(state)">
-                    </cmp-address-record>-->
+                    <cmp-activity-record activity-record="$parent.record"
+                                          on-delete="activityListCtrl.deleteActivity(activityID)"
+                                          is-amend="activityListCtrl.isAmend()"
+                                          is-detail-valid="activityListCtrl.setDetailValid()"></cmp-activity-record>
 
                 </cmp-expanding-table>
+
+               <!-- <cmp-expanding-table list-items="lifecycleListCtrl.lifecycleList"
+                                     reset-to-collapsed="lifecycleListCtrl.setCollapsed"
+                                     column-def="lifecycleListCtrl.columnDef" select-record="lifecycleListCtrl.selectRecord"
+                                     disable-selection="!lifecycleListCtrl.isDetailsValid">
+
+                    <cmp-lifecycle-details lifecycle-record="$parent.record"
+                                           is-detail-valid="lifecycleListCtrl.setValid(state)"
+                                           on-delete="lifecycleListCtrl.deleteRecord(id)"
+                                           enable-delete-index="lifecycleListCtrl.lastRecordSequence()"
+                                           on-update="lifecycleListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
+
+                </cmp-expanding-table>
+-->
+
+
             </div>
             <div class="row mrgn-tp-md mrgn-bttm-lg">
                 <div class="btn-group-sm col-md-12 text-right">
                     <input type="submit" value="{{'ADD_ACTIVITY'|translate}}" class="btn btn-primary"
-                           ng-click="activityListCtrl.addAddress()" name="addAddressBtn" id="addAddressBtn"
+                           ng-click="activityListCtrl.addActivity()" name="addAddressBtn" id="addAddressBtn"
                            ng-disabled="!activityListCtrl.isDetailsValid">
                     <input type="submit" value="Cancel" class="btn btn-default"
                            data-ng-show="activityListCtrl.newAdrFormShow"

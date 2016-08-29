@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('relatedActivityList', [])
+        .module('relatedActivityList', ['activityRecord','expandingTable'])
 })();
 
 (function () {
@@ -15,20 +15,20 @@
     angular
         .module('relatedActivityList')
         .component('cmpRelatedActivityList', {
-            templateUrl: 'app/scripts/components/addressList/tpl-related-activity-list.html',
+            templateUrl: 'app/scripts/components/relatedActivityList/tpl-related-activity-list.html',
             bindings: {
                 activities: '<',
                 onUpdate: '&',
                 getNewActivity:'&',
                 isAmend:'&',
             },
-            controller: addressListCtrl,
-            controllerAs: 'addressListCtrl'
+            controller: activityListCtrl,
+            controllerAs: 'activityListCtrl'
         });
 
-    addressListCtrl.$inject = ['$filter'];
+    activityListCtrl.$inject = ['$filter'];
 
-    function addressListCtrl($filter) {
+    function activityListCtrl($filter) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
@@ -54,49 +54,53 @@
         ];
         vm.$onInit = function () {
             //local var from binding
-            vm.activityList = vm.addresses;
-        }
+           vm.activityList = vm.activities;
+        };
 
         vm.$onChanges=function(changes){
-            if(changes.addresses && changes.addresses.currentValue) {
-                vm.activityList = changes.addresses.currentValue;
-
+            if(changes.activities) {
+                    console.log("Onchanges "+changes.activities.currentValue)
+                if(changes.activities.currentValue) {
+                    vm.activityList = changes.activities.currentValue;
+                    console.log("changing" +JSON.stringify(vm.activityList))
+                }
             }
 
-        }
+        };
 
 
         vm.deleteActivity = function (aID) {
             var idx = vm.activityList.indexOf(
-                $filter('filter')(vm.activityList, {addressID: aID}, true)[0]);
+                $filter('filter')(vm.activityList, {actvityId: aID}, true)[0]);
             vm.activityList.splice(idx, 1);
             vm.onUpdate({newList:vm.activityList});
             vm.selectRecord = 0;
             vm.isDetailsValid = true; //case that incomplete record is deleted
 
-        }
+        };
 
         vm.addActivity = function () {
-            var defaultAddress=vm.getNewAddress()
-            vm.activityList.push(defaultAddress);
+            var defaultActivity=vm.getNewActivity();
+            console.log("new activity "+JSON.stringify(defaultActivity));
+            vm.activityList.push(defaultActivity);
+            console.log("the list "+JSON.stringify(vm.activityList))
             vm.isDetailsValid = true; //set to true to exapnd
             vm.selectRecord=(vm.activityList.length - 1);
-            vm.isDetailsValid = false;
-        }
+            console.log("selectrecord"+vm.selectRecord)
+           // vm.isDetailsValid = false;
+        };
 
         vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;
-        }
-        vm.onUpdateActivityRecord = function (address) {
-            //vm.detailsValid = address.isDetailValid;
-            var idx = vm.activityList.indexOf(
-                $filter('filter')(vm.activityList, {addressID: address.addressID}, true)[0]
-            );
-            vm.activityList[idx] = angular.copy(address);
-            vm.allRolesSelected= vm.isAllRolesSelected();
+        };
+        vm.onUpdateActivityRecord = function (activity) {
 
+            var idx = vm.activityList.indexOf(
+                $filter('filter')(vm.activityList, {activityId:activity.activityId}, true)[0]
+            );
+            vm.activityList[idx] = angular.copy(activity);
             vm.isDetailsValid = true;
-        }
+        };
 
         /**
          * @ngdoc method determines the state of the list errors
