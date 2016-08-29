@@ -38,7 +38,7 @@
                 "feeClass": "",
                 "notLasa": "",
                 "reasonFiling": "",
-                "isThirdParty": "Y"
+                "isThirdParty": ""
                 //activityAddress: _createAddressModel(),
                 // activityContact: _createContactModel()
                 // regulatorySubmissionContact: [],

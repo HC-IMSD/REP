@@ -46,7 +46,7 @@
             "fieldLength": "6",
             "tagName": "dstsControlNumber"
         };
-
+        vm.yesNoList=["Y","N"]
         vm.initUser = function (id) {
             if (!id) id = 'EXT'
             vm.userType = id;
@@ -198,6 +198,10 @@
                     },
                     {
                         prefix: 'app/resources/applicationInfo-',
+                        suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/activityInfo-',
                         suffix: '.json'
                     }
                 ]

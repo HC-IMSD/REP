@@ -211,9 +211,9 @@
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <div class="checkbox">
-                                    <label for="chk-lasa{{$id}}">
-                                        <input type="checkbox" ng-model="ar.roleModel.manufacturer" name="notlasa"
-                                               id="chk-lasa_{{$id}}" ng-required="true"/>{{"NOT_LASA"|translate}}
+                                    <label for="chk-lasa_{{$id}}">
+                                        <input type="checkbox" ng-model="main.activityRoot.notLasa" name="chk-lasa"
+                                               id="chk-lasa_{{$id}} ng-required=" true"/>{{"NOT_LASA"|translate}}
                                         <strong id="notlasa-error" class="error"
                                                 ng-if="main.showError(main.actvityEnrolForm.notlasa.$invalid,main.actvityEnrolForm.notlasa.$touched)">
                  <span class="label label-danger" ng-messages="main.actvityEnrolForm.notlasa.$error">
@@ -224,6 +224,54 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="reason-filing_{{$id}}">
+                                    {{"REASON_FILE"|translate}}
+                                    <strong id="reason-filing-error" class="error" size="1024"
+                                            ng-if="main.showError(main.actvityEnrolForm.reasonFiling.$invalid,main.actvityEnrolForm.reasonFiling.$touched)">
+                                <span class="label label-danger"
+                                      ng-messages="main.actvityEnrolForm.reasonFiling.$error">
+                                        <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                </span>
+                                    </strong>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <textarea ng-model="main.activityRoot.reasonFiling" name="reason-filing"
+                                          id="reason-filing_{{$id}}" ng-required="true" maxlength="1024"
+                                          style="min-width: 100%" rows="8"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12"
+                                 ng-class="{'has-error':main.actvityEnrolForm.isThirdParty.$invalid}">
+                                <div class="col-xs-10">
+                                    <label for="third-party_{{$id}}" class="required full-width">
+                                        <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                        <strong id="isSolicited-error" class="error"
+                                                ng-if="transInfoCtrl.showError(main.actvityEnrolForm.isThirdParty)">
+                         <span class="label label-danger" ng-messages="main.actvityEnrolForm.isThirdParty.$error">
+                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                         </span>
+                                        </strong>
+                                    </label>
+                                </div>
+                                <div class="col-xs-2">
+                                    <select id="third-party_{{$id}}" name="third-party"
+                                            ng-model="transInfoCtrl.transactionModel.isThirdParty"
+                                            class="form-control"
+                                            ng-options="choice |translate for choice in main.yesNoList"
+                                            ng-change="transInfoCtrl.setSolicitedState()" required></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h3>Please submit the authorization letter with this enrolment</h3>
                         </div>
 
                         <!--  <div class="form-group col-md-4"
