@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <ng-form name="lifecycleCtrl.lifecycleDetailsForm">
+    <ng-form name="lifecycleCtrl.lifecycleDetailsForm" novalidate="novalidate">
         <div>
             <div>
                 <fieldset>
@@ -16,7 +16,7 @@
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.dateFiled.$invalid}">
                             <label for="dateFiled_{{$id}}" class="required">
-                                <span class="field-name">{{"Date Filed" |translate}}</span>
+                                <span class="field-name">{{"DATE_SUBMITTED" |translate}}</span>
                                 <strong class="required">{{"REQUIRED" |translate}}</strong>
                                 <input type="date" id="dateFiled_{{$id}}" name="dateFiled"
                                        ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
@@ -121,7 +121,7 @@
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.dateEnd.$invalid}"
                              ng-show="lifecycleCtrl.endDateVisible">
-                            <label for="dateEnd_{{$id}}">
+                            <label for="dateEnd_{{$id}}" class="required">
                                 <span class="field-name">{{"END_DATE" |translate}}</span>
                                 <strong class="required">{{"REQUIRED" |translate}}</strong>
                                 <input type="date" id="dateend_{{$id}}" name="dateEnd"
@@ -145,15 +145,15 @@
                         <div class="form-group col-md-12"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.lifeDetails.$invalid}"
                              ng-show="lifecycleCtrl.descriptionVisible">
-                            <label for="details_{{$id}}">
+                            <label for="details_{{$id}}" class="required full-width">
                                 <span class="field-name">{{"BRIEF_DESC" |translate}}</span>
                                 <strong class="required">{{"REQUIRED" |translate}}</strong>
-                                <input type="text" id="details_{{$id}}" name="lifeDetails"
-                                       ng-model="lifecycleCtrl.lifecycleModel.details"
-                                       ng-change="lifecycleCtrl.setConcatDetails()"
-                                       ng-required="lifecycleCtrl.descriptionVisible"
-                                       class="form-control">
-                                </input>
+                                <textarea id="details_{{$id}}" name="lifeDetails"
+                                          ng-model="lifecycleCtrl.lifecycleModel.details"
+                                          ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200" size="256"
+                                          ng-required="lifecycleCtrl.descriptionVisible"
+                                          class="form-control full-width">
+                                </textarea>
                                 <strong id="lifeDescipt-error" class="error"
                                         ng-if="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm.lifeDetails.$invalid,lifecycleCtrl.lifecycleDetailsForm.lifeDetails.$touched)">
                         <span class="label label-danger"

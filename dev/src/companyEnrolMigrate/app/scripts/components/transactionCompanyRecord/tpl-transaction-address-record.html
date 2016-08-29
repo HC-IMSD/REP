@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <ng-form name="addressRec.addressRecForm">
+    <ng-form name="addressRec.addressRecForm" novalidate>
         <div>
             <div>
                 <h2>{{'ADDR_INFO'|translate}}</h2>
@@ -10,10 +10,10 @@
                     <label for="companyName_{{$id}}" class="required">
                         <span class="field-name">{{'COMPANYNAME_FULL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="email" id="companyName_{{$id}}"
+                        <input type="text" id="companyName_{{$id}}"
                                data-ng-model="addressRec.transactionModel.companyName"
                                maxlength="80" size="80"
-                               class="form-control full-width" name="companyName" required/>
+                               class="form-control full-width" name="companyName" ng-required="true"/>
                         <strong id="contactEmail-error" class="error"
                                 ng-if="$ctrl.showError(addressRec.addressRecForm.companyName)">
                         <span class="label label-danger" ng-messages="addressRec.addressRecForm.companyName.$error">

@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <ng-form name="transInfoForm" novalidate="novalidate">
-
         <div class="row">
             <div class="form-group col-md-4"
                  ng-class="{'has-error':transInfoForm.isEctd.$invalid}">
@@ -80,13 +79,14 @@
             </div>
             <div>
                 <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
+                                    deprecate-sequence="transInfoCtrl.subtractSequence()"
                                     get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
 
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.isSolicited)}">
+                 ng-class="{'has-error':transInfoForm.isSolicited.$invalid}">
                 <label for="isSolicited_{{$id}}" class="required full-width">
                     <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
@@ -105,7 +105,7 @@
         </div>
         <div class="row" ng-show="transInfoCtrl.showSolicitedDetail">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.solicitedRequester)}">
+                 ng-class="{'has-error':transInfoForm.solicitedRequester.$invalid}">
                 <label for="solicitedRequester_{{$id}}" class="required full-width">
                     <span class="field-name">{{"SOLICITED_RQ" |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
@@ -147,64 +147,60 @@
                 </div>
             </fieldset>
         </div>
-
-</div>
-<div>
-    <fieldset>
-        <legend>Regulatory Activity contact for THIS Regulatory Activity</legend>
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="isActivityChanges_{{$id}}" class=>
-                    <span class="field-name">{{"IS_ACTCHANGES" |translate}}</span>
-                    <select id="isActivityChanges_{{$id}}" name="isActivityChanges"
-                            ng-model="transInfoCtrl.transactionModel.isActivityChanges"
-                            class="form-control"
-                            ng-options="choice |translate for choice in transInfoCtrl.yesNoList"></select>
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <h3>Company Information</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-12"
-                 ng-class="{'has-error':transInfoCtrl.showError(transInfoForm.companyName)}">
-                <label for="companyName_{{$id}}" class="required full-width">
-                    <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
-                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <input type="text" maxlength="80" id="companyName_{{$id}}" name="companyName"
-                           ng-model="transInfoCtrl.transactionModel.companyName"
-                           class="form-control full-width"
-                           required/>
-                    <strong id="companyName-error" class="error"
-                            ng-if="transInfoCtrl.showError(transInfoForm.companyName)">
-                        <span class="label label-danger" ng-messages="transInfoForm.companyName.$error">
+        <div>
+            <fieldset>
+                <legend>Regulatory Activity contact for THIS Regulatory Activity</legend>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label for="isActivityChanges_{{$id}}" class=>
+                            <span class="field-name">{{"IS_ACTCHANGES" |translate}}</span>
+                            <select id="isActivityChanges_{{$id}}" name="isActivityChanges"
+                                    ng-model="transInfoCtrl.transactionModel.isActivityChanges"
+                                    class="form-control"
+                                    ng-options="choice |translate for choice in transInfoCtrl.yesNoList"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Company Information</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12" ng-class="{'has-error':transInfoForm.transCompanyName.$invalid}">
+                        <label for="companyName_{{$id}}" class="required full-width">
+                            <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
+                            <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                            <input type="text" maxlength="80" id="companyName_{{$id}}" name="transCompanyName"
+                                   ng-model="transInfoCtrl.transactionModel.companyName"
+                                   class="form-control full-width" ng-required="true"/>
+                            <strong id="companyName-error" class="error"
+                                    ng-if="transInfoCtrl.showError(transInfoForm.transCompanyName)">
+                        <span class="label label-danger" ng-messages="transInfoForm.transCompanyName.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
-                    </strong>
-                </label>
-            </div>
+                            </strong>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Address Information</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
+                                         show-errors="transInfoCtrl.showError()"></cmp-address-details>
+                </div>
+            </fieldset>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <h3>Address Information</h3>
-            </div>
+            <fieldset>
+                <legend>Company Representative for THIS Regulatory Activity</legend>
+                <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
+                                     show-errors="transInfoCtrl.showError()"></cmp-contact-details>
+            </fieldset>
         </div>
-        <div class="row">
-            <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
-                                 show-errors="transInfoCtrl.showError()"></cmp-address-details>
-        </div>
-    </fieldset>
-</div>
-<div class="row">
-    <fieldset>
-        <legend>Company Representative for THIS Regulatory Activity</legend>
-        <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
-                             show-errors="transInfoCtrl.showError()"></cmp-contact-details>
-    </fieldset>
-</div>
-<!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
-</ng-form>
+        <!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
+    </ng-form>
 </div>

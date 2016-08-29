@@ -5,17 +5,17 @@
     'use strict';
 
     angular
-        .module('therapeuticClassModule', [])
+        .module('countryListModule', ['dataLists'])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('therapeuticClassModule')
-        .component('cmpTherapeuticClass', {
-            templateUrl: './components/therapeutic-classification/tpl-therapeutic-class.html',
-            controller: therapeuticClassCtrl,
+        .module('countryListModule')
+        .component('cmpCountryList', {
+            templateUrl: './components/appendix-four/tpl-country-list.html',
+            controller: countryListCtrl,
             bindings: {
                 listItems: '<',
                 onUpdate: '&',
@@ -23,20 +23,23 @@
             }
         });
 
+    countryListCtrl.$inject = ['$filter','getCountriesISO3166'];
 
-    function therapeuticClassCtrl($filter){
+
+    function countryListCtrl($filter, getCountriesISO3166){
         var self = this;
 
         self.$onInit = function(){
             self.model={
-                classifications : [
-                    {"id":1, "name":"classification1"},
-                    {"id":2, "name":"classification2"},
-                    {"id":3, "name":"classification3"},
-                    {"id":4, "name":"classification4"},
-                    {"id":5, "name":"classification5"}
+                countries : ["UNKNOWN"].concat(getCountriesISO3166.getCountryList3Letter()),// angular.extend({}, ["UNKNOWN"], ) ,/**/
+                list : [
+                    {"id":1, "name":"ARG"},
+                    {"id":2, "name":"CAN"},
+                    {"id":3, "name":"USA"}
                 ],
-                selected:{}
+                selected:{},
+
+                unknownCountryDetails : "A"
             }
         }
 
@@ -54,7 +57,7 @@
 
             var item = {"id":maxID + 1, "name":""};
 
-            self.model.classifications.push(item);
+            self.model.list.push(item);
             self.editRecord(item);
 
         };
@@ -65,26 +68,33 @@
 
         self.saveRecord = function (_id) {
            // console.log("Saving item: "+_id);
-            var idx = self.model.classifications.indexOf(
-                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
+            var idx = self.model.list.indexOf(
+                $filter('filter')(self.model.list, {id: _id}, true)[0]
             );
-            self.model.classifications[idx] = self.model.selected;
+            self.model.list[idx] = self.model.selected;
             self.reset();
         };
 
         self.deleteRecord = function (_id) {
             //console.log("Deleting item: "+_id);
 
-            var idx = self.model.classifications.indexOf(
-                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
+            var idx = self.model.list.indexOf(
+                $filter('filter')(self.model.list, {id: _id}, true)[0]
             );
-            self.model.classifications.splice(idx,1);
+            if(idx < 0) return;
+
+            self.model.list.splice(idx,1);
         };
 
 
 
         self.reset = function () {
             var item = self.model.selected;
+            //console.log('reset selected: ' + item.toSource());
+            if(angular.isUndefined(item))
+                return;
+
+            self.deleteRecord(item.id)
             self.model.selected = {};
 
         };
@@ -92,7 +102,7 @@
         function getListMaxID(){
 
             var out = 0;
-            var list = self.model.classifications;
+            var list = self.model.list;
             if (list) {
                 for (var i = 0; i<list.length; i++) {
                     if (list[i].id > out) {

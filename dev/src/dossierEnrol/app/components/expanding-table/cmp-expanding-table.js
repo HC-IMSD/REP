@@ -26,8 +26,8 @@
                 selectRecord:'<'
             }
         });
-    expandingTableCtrl.$inject = ['$filter']
-    function expandingTableCtrl($filter) {
+   //expandingTableCtrl.$inject = ['$element']
+    function expandingTableCtrl($element) {
         var vm = this;
         vm.$onInit = function () {
             vm.focused = false;
@@ -35,9 +35,10 @@
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
             vm.tableRowIndexPrevExpanded = "";
-            // vm.dayDataCollapse = [true, true, true, true, true];
-            vm.numberCols=_getNumberKeys(vm.columnDef)
-            vm.dayDataCollapse=_createArray(vm.numberCols,true);
+            vm.dayDataCollapse = [true, true, true, true, true];
+            vm.numberCols= vm.columnDef.length;// _getNumberKeys(vm.columnDef)
+            vm.dayDataCollapse=_createArray(vm.listItems.length,true);
+
         }
         vm.$onChanges = function (changes) {
 
@@ -61,6 +62,14 @@
             if(changes.disableSelection){
                 vm.disableExpand=changes.disableSelection.currentValue;
             }
+        };
+
+        vm.$postLink = function(){
+
+
+            $element.find('tr').on('click',function(){
+            });
+
         }
         /**
          * Utility function for determining the number of columns to create
@@ -100,15 +109,15 @@
         }
 
         vm.dayDataCollapseFn = function () {
-            for (var i = 0; vm.listItems.length - 1; i += 1) {
-                vm.dayDataCollapse.append('true');
+            for (var i = 0; i< vm.listItems.length; i++) {
+                vm.dayDataCollapse.append(true);
             }
         };
         vm.selectTableRow = function (index) {
             //if selection
 
+
             if (vm.disableExpand) return;
-            //console.debug("selected row index: " + index);
             if (vm.dayDataCollapse === 'undefined') {
                 vm.dayDataCollapse = vm.dayDataCollapseFn();
             } else {

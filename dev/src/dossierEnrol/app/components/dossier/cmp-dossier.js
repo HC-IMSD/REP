@@ -22,7 +22,9 @@
 
 (function () {
     'use strict';
-    angular.module('dossierModule').component('cmpDossier', {
+    angular
+        .module('dossierModule')
+        .component('cmpDossier', {
         templateUrl: './components/dossier/tpl-dossier.html',
         controller: dossierCtrl,
         controllerAs: 'dos',

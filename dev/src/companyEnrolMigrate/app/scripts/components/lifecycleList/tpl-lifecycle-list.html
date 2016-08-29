@@ -1,4 +1,4 @@
-<ng-form name="lifecycleListCtrl.lifecycleListForm">
+<ng-form name="lifecycleListCtrl.lifecycleListForm" novalidate="novalidate">
 <section class="panel  panel-default">
     <header class="panel-heading">
         <h3 class="panel-title">Lifecycle Management Table</h3>
@@ -11,6 +11,7 @@
 
                 <cmp-lifecycle-details lifecycle-record="$parent.record"
                                        is-detail-valid="lifecycleListCtrl.setValid(state)"
+                                       on-delete="lifecycleListCtrl.deleteRecord(id)"
                                        on-update="lifecycleListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
 
             </cmp-expanding-table>

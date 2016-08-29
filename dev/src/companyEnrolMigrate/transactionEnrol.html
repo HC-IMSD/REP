@@ -84,7 +84,7 @@
     <!--Transaction Enrol Content starts here -->
     <div>
         <ng-form id="reg-transaction-form" name="main.transactionEnrolForm" ng-controller="MainController as main"
-                 novalidate="novalidate">
+                 novalidate>
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
                     <h2 class="panel-title">Load a Transaction Enrolment File</h2>
@@ -105,6 +105,7 @@
                     </header>
                     <div class="panel-body">
                         <cmp-transaction-info transaction-root="main.transaction"
+                                              deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
                                               reset-ectd="main.transactionService.resetEctdSection()"
                                               get-transaction="main.transactionService.getNewTransaction()"
                                               get-rep-contact="main.transactionService.getNewRepContact()"></cmp-transaction-info>
