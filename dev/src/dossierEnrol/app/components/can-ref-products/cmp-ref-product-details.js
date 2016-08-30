@@ -20,7 +20,7 @@
             bindings: {
                 productRecord: '<',
                 deleteBtn: '<',
-                onAddNew: '&',
+                onAddProduct: '&',
                 onUpdate: '&',
                 onDelete: '&'
             }
@@ -32,12 +32,12 @@
         self.$onInit = function(){
 
             self.productModel = {
-                brandName: "",
-                medIngredient: "",
-                dosageForm: "Other",
+                brandName: "A",
+                medIngredient: "A",
+                dosageForm: "3",
                 dosageFormOther: "",
-                strengths: "",
-                companyName: ""
+                strengths: "5454",
+                companyName: "B"
             };
 
             if (self.productRecord) {
@@ -53,7 +53,7 @@
                 self.onUpdate({product:self.productModel});
             }else{
                 console.log('add product');
-                self.onAddNew({product:self.productModel});
+                self.onAddProduct({product:self.productModel});
             }
 
         };
@@ -62,7 +62,7 @@
             if (self.productRecord) {
                 self.onDelete({id : self.productModel.productId});
             }else{
-                self.onDelete({product:self.productModel});
+                //TODO
             }
 
         };

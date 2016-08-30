@@ -16,37 +16,35 @@
             angular.extend(this._default, dossierData);
         }
 
-        DossierService.CanadianPostalCodePattern = function(){
+        DossierService.CanadianPostalCodePattern = function () {
 
         }
 
         DossierService.dossier = {
-            dossierID:"569522",
+            dossierID: "569522",
             enrolmentVersion: "1.23",
             dateSaved: "1999-01-21",
             applicationType: "New",
             softwareVersion: "1.0",
             dataChecksum: "kjsakdjas",
-            drugProduct:{
-                thirdPartySigned:false,
+            drugProduct: {
+                thirdPartySigned: false,
                 humanDrugUse: false,
                 radiopharmDrugUse: false,
                 vetDrugUse: false,
                 disinfectantDrugUse: false,
                 isScheduleA: false,
-                scheduleAGroup:{
-
-                },
+                scheduleAGroup: {},
                 therapeutic: {//grid
-                    listItems:[],
-                    columnDef:[]
+                    listItems: [],
+                    columnDef: []
                 },
-                canRefProducts:{},//grid
-                formulations:{},//tab + grid +
-                appendixFour:{}//tab + grid +
+                canRefProducts: {},//grid
+                formulations: {},//tab + grid +
+                appendixFour: {}//tab + grid +
 
             },
-            contactList:[]
+            contactList: []
 
         };
 
@@ -84,15 +82,85 @@
                     return this._default;
 
                 return {
-                    dataChecksum: info.data_checksum,
+                    dossierID: info.dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
                     applicationType: info.application_type.capitalize(),
                     softwareVersion: info.software_version,
-                    dossierId: info.dossier_id,
-                    addressList: [],
-                    contactList: []
-                }
+                    dataChecksum: info.data_checksum,
+                    drugProduct: {
+                        thirdPartySigned: false,
+                        drugUseList: [
+                            {"name": "human", "label": "Human", "value": info.human_drug_use},
+                            {"name": "radio-pharmaceutical", "label": "Radiopharmaceutical", "value": info.radiopharm_drug_use},
+                            {"name": "veterinary", "label": "Veterinary", "value": info.vet_drug_use},
+                            {"name": "disinfectant", "label": "Disinfectant", "value": info.disinfectant_drug_use}
+                        ],
+                        isScheduleA: info.is_sched_a,
+                        scheduleAGroup: {
+
+                            drugIdNumber: info.din_number,
+                            scheduleAClaimsIndDetails: info.sched_a_claims_ind_details,
+                            diseaseDisorderList: [
+
+                                {name: "acute-alcohol", label: "Acute Alcohol", value: info.acute_alcohol},
+                                {name: "acute-anxiety", label: "Acute Anxiety", value: info.acute_anxiety},
+                                {name: "acute-infectious", label: "Acute Infectious", value: info.acute_infectious},
+                                {name: "acute-inflammatory", label: "Acute Inflammatory", value: info.acute_inflammatory},
+                                {name: "acute-psychotic", label: "Acute Psychotic", value: info.acute_psychotic},
+                                {name: "addiction", label: "Addiction", value: info.addiction},
+                                {name: "ateriosclerosis", label: "Ateriosclerosis", value: info.ateriosclerosis},
+                                {name: "appendicitis", label: "Appendicitis", value: info.appendicitis},
+                                {name: "asthma", label: "Asthma", value: info.asthma},
+                                {name: "cancer", label: "Cancer", value: info.cancer},
+                                {name: "congest-heart-fail", label: "Congest Heart Fail", value: info.congest_heart_fail},
+                                {name: "convulsions", label: "Convulsions", value: info.convulsions},
+                                {name: "dementia", label: "Dementia", value: info.dementia},
+                                {name: "depression", label: "Depression", value: info.depression},
+                                {name: "diabetes", label: "Diabetes", value: info.diabetes},
+                                {name: "gangrene", label: "Gangrene", value: info.gangrene},
+                                {name: "glaucoma", label: "Glaucoma", value: info.glaucoma},
+                                {name: "haematologic-bleeding", label: "Haematologic Bleeding", value: info.haematologic_bleeding},
+                                {name: "hepatitis", label: "Hepatitis", value: info.hepatitis},
+                                {name: "hypertension", label: "Hypertension", value: info.hypertension},
+                                {name: "nausea-pregnancy", label: "Nausea Pregnancy", value: info.nausea_pregnancy},
+                                {name: "obesity", label: "Obesity", value: info.obesity},
+                                {name: "rheumatic-fever", label: "Rheumatic Fever", value: info.rheumatic_fever},
+                                {name: "septicemia", label: "Septicemia", value: info.septicemia},
+                                {name: "sex-transmit-disease", label: "Sex Transmit Disease", value: info.sex_transmit_disease},
+                                {name: "strangulated-hernia", label: "Strangulated Hernia", value: info.strangulated_hernia},
+                                {name: "thrombotic-embolic-disorder", label: "Thrombotic Embolic Disorder", value: info.thrombotic_embolic_disorder},
+                                {name: "thyroid-disease", label: "Thyroid Disease", value: info.thyroid_disease},
+                                {name: "ulcer-gastro", label: "Ulcer Gastro", value: info.ulcer_gastro},
+                                {name: "other", label: "Other", value: false, hasOtherDetails: true}
+                            ]
+
+                        },
+                        therapeutic: {//grid
+                            classifications : [ //hardcoded cauz missing in the json file
+                                {"id":1, "name":"classification1"},
+                                {"id":2, "name":"classification2"},
+                                {"id":3, "name":"classification3"},
+                                {"id":4, "name":"classification4"},
+                                {"id":5, "name":"classification5"}
+                            ]
+                        },
+                        canRefProducts: {
+                            productList : getCanRefProductList(info.ref_product_list.cdn_ref_product)
+                        },//grid
+                        formulations: {},//tab + grid +
+                        appendixFour: {
+                            ingredientList : getAppendix4IngredientList(info.appendix4_group)
+                        }//tab + grid +
+
+                    },
+                    contactInfo: { //grid
+                        contactList: [],
+                        columnDef: []
+                    }
+
+                };
+
 
             },
 
@@ -162,6 +230,53 @@
 
         // Return a reference to the function
         return DossierService;
+    }
+
+    function getCanRefProductList (info){
+        var list = [];
+
+        if (angular.isDefined(info)) {
+            for (var i = 0; i < info.length; i++) {
+                var product = {};
+                product.medIngredient = info[i].medicinal_ingredient;
+                product.dosageForm = info[i].dosage_form;
+                product.dosageFormOther = info[i].dosage_form_other;
+                product.strengths = info[i].strengths;
+                product.companyName = info[i].company_name;
+
+                list.push(product);
+            }
+        }
+
+
+        return list;
+
+
+    }
+
+    function getAppendix4IngredientList (info){
+        var list = [];
+
+        if (angular.isDefined(info)) {
+            for (var i = 0; i < info.length; i++) {
+                var ing = {};
+                ing.id = info[i].ingredient_id;
+                ing.name = info[i].ingredient_name;
+               // ing.role = info[i].dosage_form;
+              // ing.abstractNum = info[i].dosage_form_other;
+               // ing.standard = info[i].strengths;
+                ing.sourceHuman = info[i].human_sourced === 'Y' ? true:false;
+                ing.sourceAnimal = info[i].animal_sourced === 'Y' ? true:false;
+                ing.tissuesFluidsOrigin = {};
+                ing.sourceAnimalDetails = {};
+                list.push(ing);
+            }
+        }
+
+
+        return list;
+
+
     }
 
     String.prototype.capitalize = function () {
