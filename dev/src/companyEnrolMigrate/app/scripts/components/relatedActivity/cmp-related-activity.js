@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('activityRecord', [])
+        .module('activityRecord', ['dinModule'])
 })();
 
 (function () {
@@ -48,7 +48,7 @@
             //how this is currently wired, this will never fire!
             if (changes.activityRecord) {
                 vm.activityModel = angular.copy(changes.activityRecord.currentValue);
-                console.log("Activity model" +vm.activityModel)
+                console.log("Activity model" + JSON.stringify( vm.activityModel))
 
             }
         };
@@ -57,6 +57,13 @@
             vm.activityModel.assocDins.push({dinNumber:""})
 
         };
+        vm.deleteDin=function(index){
+            //using index in
+            if(index> vm.activityModel.assocDins.length-1){
+                return;
+            }
+            vm.activityModel.assocDins.splice(index, 1);
+        }
 
 
         /**
@@ -110,6 +117,13 @@
 
             return (vm.savePressed)
         };
+        vm.isDinInvalid=function(index){
+            console.log("in invalid "+index)
+            if(vm.activityModel.assocDins[index].dinNumber){
+                return false;
+            }
+            return true
+        }
 
         /**
          * Controls errors state of an individual UI control. Since cannot pass the control for some reason

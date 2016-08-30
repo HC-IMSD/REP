@@ -152,7 +152,10 @@
                 "dossierId":"",
                 "manufacturerName":"",
                 "reasonFiling":"",
-                "assocDins" : []
+                "assocDins" : [
+                    {dinNumber:"1234" },
+                    {dinNumber:"343334" }
+                ]
             };
             return activity;
         };

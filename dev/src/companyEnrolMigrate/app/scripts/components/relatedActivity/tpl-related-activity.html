@@ -126,30 +126,18 @@
                 </div>
             </div>
             <div class="row">
-                <fieldset>
-                    <legend>{{"ASSOC_DINS" |translate}}</legend>
-                    <div ng-show="activityCtrl.activityModel.assocDins.length>0">
-                        <!--<cmp-din-details></cmp-din-details>-->
-                        <div ng-start-repeat="dinDetail in activityCtrl.activityModel.assocDins track by $index">
-                            <div class="row input-group">
-                                <div class="col-xs-12">
-                                    <label>
-                                        {{'DIN'|translate}}{{$index}}
-                                        <input type="text" size="8" maxlength="8" ng-model="dinDetail.dinNumber"/>
-                                    </label>
-                                    <button class="btn btn-danger"><span class="fa fa-trash-o fa-lg"
-                                                                         aria-label="Delete DIN"></span> Delete
-                                    </button>
 
-                                </div>
-                            </div>
-                            <div ng-end-repeat class="row">
-                            </div>
-                        </div>
+                <div>
+                    <h3>{{"ASSOC_DINS" |translate}}</h3>
+
+                    <div ng-repeat="record in activityCtrl.activityModel.assocDins">
+                        <cmp-din-details din-record="record" din-index="$index" delete-din="activityCtrl.deleteDin(dinIndex)"></cmp-din-details>
                     </div>
-                    <button class="btn btn-primary" ng-click="activityCtrl.addDin()">Add DIN</button>
-                </fieldset>
 
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn btn-primary" ng-click="activityCtrl.addDin()">{{'Add_DIN'|translate}}</button>
             </div>
 
             <div class="row">
