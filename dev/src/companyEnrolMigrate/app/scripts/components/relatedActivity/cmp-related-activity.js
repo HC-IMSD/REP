@@ -52,6 +52,13 @@
 
             }
         };
+
+        vm.addDin=function(){
+            vm.activityModel.assocDins.push({dinNumber:""})
+
+        };
+
+
         /**
          *  calls the delete function on the parent
          */

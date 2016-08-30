@@ -107,8 +107,8 @@
          *
          * @returns {boolean}
          */
-        vm.showError = function () {
-            if ((vm.activityListForm.$invalid && !vm.activityListForm.$pristine)) {
+        vm.showError = function (isTouched, isInvalid) {
+            if ((isInvalid&& isTouched)) {
                 return true
             }
             return false

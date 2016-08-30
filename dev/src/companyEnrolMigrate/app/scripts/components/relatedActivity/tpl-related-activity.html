@@ -2,18 +2,18 @@
     <ng-form name="activityCtrl.activityRecForm">
         <div>
             <div>
-              <fieldset>
-                <legend>{{'RELATED_ACTIVITY' |translate}}</legend>
-                <div class="row">
-                    <!--<div class="form-group" ng-show="addressRec.isAmend()">
-                        <input class="formControl" id="chk-amend-rec_{{$id}}" type="checkbox"
-                               ng-change="addressRec.setNotEditable()"
-                               ng-model="addressRec.addressModel.amendRecord"/>
-                        <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
-                            {{'AMEND_RECORD'|translate}}
-                        </label>
-                    </div>-->
-                </div>
+                <fieldset>
+                    <legend>{{'RELATED_ACTIVITY' |translate}}</legend>
+                    <div class="row">
+                        <!--<div class="form-group" ng-show="addressRec.isAmend()">
+                            <input class="formControl" id="chk-amend-rec_{{$id}}" type="checkbox"
+                                   ng-change="addressRec.setNotEditable()"
+                                   ng-model="addressRec.addressModel.amendRecord"/>
+                            <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
+                                {{'AMEND_RECORD'|translate}}
+                            </label>
+                        </div>-->
+                    </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-12"
@@ -58,9 +58,9 @@
                         <span class="field-name">{{"CONTROL_NUM" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                         <input id="controlNum_{{$id}}" name="controlNum"
-                                ng-model="activityCtrl.activityModel.dstsControlNumber"
-                                maxlength="6" size="6"
-                                class="form-control full-width" ng-required="true"/>
+                               ng-model="activityCtrl.activityModel.dstsControlNumber"
+                               maxlength="6" size="6"
+                               class="form-control full-width" ng-required="true"/>
                         <strong id="controlNum-error" class="error"
                                 ng-if="activityCtrl.showError(activityCtrl.activityRecForm.controlNum.$touched,activityCtrl.activityRecForm.controlNum.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.controlNum.$error">
@@ -94,9 +94,9 @@
                         <span class="field-name">{{"MANUFACT_NAME" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                         <input type="text" id="manufactName_{{$id}}" name="manufactName"
-                                ng-model="activityCtrl.activityModel.manufacturerName"
-                                maxlength="80" size="80"
-                                class="form-control full-width" ng-required="true"/>
+                               ng-model="activityCtrl.activityModel.manufacturerName"
+                               maxlength="80" size="80"
+                               class="form-control full-width" ng-required="true"/>
                         <strong id="manufactName-error" class="error"
                                 ng-if="activityCtrl.showError(activityCtrl.activityRecForm.manufactName.$touched,activityCtrl.activityRecForm.manufactName.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.manufactName.$error">
@@ -113,9 +113,9 @@
                         <span class="field-name">{{"REASON_FILING" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                         <textarea id="reasonFiling_{{$id}}" name="reasonFiling"
-                                ng-model="activityCtrl.activityModel.reasonFiling"
-                                maxlength="1024" rows="8"
-                                class="form-control full-width" ng-required="true"></textarea>
+                                  ng-model="activityCtrl.activityModel.reasonFiling"
+                                  maxlength="1024" rows="8"
+                                  class="form-control full-width" ng-required="true"></textarea>
                         <strong id="reasonFiling-error" class="error"
                                 ng-if="activityCtrl.showError(activityCtrl.activityRecForm.reasonFiling.$touched,activityCtrl.activityRecForm.reasonFiling.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.reasonFiling.$error">
@@ -128,17 +128,34 @@
             <div class="row">
                 <fieldset>
                     <legend>{{"ASSOC_DINS" |translate}}</legend>
-                <div class="form-group col-md-12">
+                    <div ng-show="activityCtrl.activityModel.assocDins.length>0">
+                        <!--<cmp-din-details></cmp-din-details>-->
+                        <div ng-start-repeat="dinDetail in activityCtrl.activityModel.assocDins track by $index">
+                            <div class="row input-group">
+                                <div class="col-xs-12">
+                                    <label>
+                                        {{'DIN'|translate}}{{$index}}
+                                        <input type="text" size="8" maxlength="8" ng-model="dinDetail.dinNumber"/>
+                                    </label>
+                                    <button class="btn btn-danger"><span class="fa fa-trash-o fa-lg"
+                                                                         aria-label="Delete DIN"></span> Delete
+                                    </button>
 
-
-                </div>
+                                </div>
+                            </div>
+                            <div ng-end-repeat class="row">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="activityCtrl.addDin()">Add DIN</button>
                 </fieldset>
 
             </div>
 
             <div class="row">
                 <div class="btn-group-sm col-xs-12 text-right">
-                    <input type="submit" value="{{'SAVE_ACTIVITY'|translate}}" class="btn btn-primary" name="saveAddress"
+                    <input type="submit" value="{{'SAVE_ACTIVITY'|translate}}" class="btn btn-primary"
+                           name="saveAddress"
                            id="saveAddress"
                            ng-click="activityCtrl.updateAddressModel2()" ng-disabled="activityCtrl.setNotEditable()">
                     <input type="submit" value="{{'DELETE_ACTIVITY'|translate}}" class="btn btn-danger"
@@ -149,7 +166,8 @@
                 </fieldset>
             </div>
         </div>
+        <pre>activity record model: {{activityCtrl.activityModel | json : spacing}}</pre>
     </ng-form>
-    <!--  <pre>address record model: {{activityCtrl.activityModel | json : spacing}}</pre>-->
+
 
 </div>
