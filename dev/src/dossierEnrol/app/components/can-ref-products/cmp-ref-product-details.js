@@ -19,6 +19,8 @@
             controller: refProductDetailsCtrl,
             bindings: {
                 productRecord: '<',
+                deleteBtn: '<',
+                onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&'
             }
@@ -44,6 +46,26 @@
             }
 
         }
+
+        self.saveProduct = function(){
+            if (self.productRecord) {
+                console.log('update product');
+                self.onUpdate({product:self.productModel});
+            }else{
+                console.log('add product');
+                self.onAddNew({product:self.productModel});
+            }
+
+        };
+
+        self.delete = function(){
+            if (self.productRecord) {
+                self.onDelete({id : self.productModel.productId});
+            }else{
+                self.onDelete({product:self.productModel});
+            }
+
+        };
     }
 
 
