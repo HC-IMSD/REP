@@ -26,6 +26,11 @@ label > select {
     vertical-align: middle;
     float: none;
 }
+.col-center {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+}
 /*
 .picker-overlay {
     z-index: 1100 !important;
