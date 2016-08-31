@@ -14,7 +14,10 @@
             'applicationInfoService',
             'applicationInfo',
             'filterLists',
-            'relatedActivityList'
+            'relatedActivityList',
+            'activityChange',
+            'activityForm'
+
         ])
 })();
 

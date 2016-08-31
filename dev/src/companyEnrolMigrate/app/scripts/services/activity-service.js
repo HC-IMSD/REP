@@ -153,8 +153,7 @@
                 "manufacturerName":"",
                 "reasonFiling":"",
                 "assocDins" : [
-                    {dinNumber:"1234" },
-                    {dinNumber:"343334" }
+
                 ]
             };
             return activity;

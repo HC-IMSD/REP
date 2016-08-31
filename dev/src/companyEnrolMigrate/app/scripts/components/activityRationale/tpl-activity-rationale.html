@@ -1,0 +1,91 @@
+<ng-form name="activityTypeForm">
+    <fieldset>
+        <legend class="required">
+            <span class="field-name">{{"RATIONALE_SNDS" |translate}}</span>
+            <strong class="required"> {{"REQUIRED" |translate}}</strong>
+            <!--  <input id="roleMissing_{{$id}}" name="roleMissing" ng-required="true" ng-show="false"
+                     ng-model="ar.isSelected" required/>
+              <strong id=" address-role-error" class="error" ng-if="ar.showErrorMissing()">
+                          <span class="label label-danger" ng-messages="ar.roleForm.roleMissing.$error">
+                              <span ng-message="required">{{"MSG_ERR_ROLE"|translate}}</span>
+                          </span>
+              </strong>-->
+        </legend>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-roa_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-roa_{{$id}}"/>{{"NEW_ROA"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-replacesterl_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-replacesterl_{{$id}}"/>{{"REPLACE_STERIL"|translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-newclaim_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-newclaim_{{$id}}"/>{{"NEW_CLAIMS"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-confirmstudies_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-confirmstudies_{{$id}}"/>{{"CONFIRM_STUDY"|translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-changeform_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-changeform_{{$id}}"/>{{"CHANGE_FORM"|translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-changedrug_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-changedrug_{{$id}}"/>{{"CHANGE_SUBSTANCE"|translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-changeother_{{$id}}">
+                        <input type="checkbox" ng-model="" name="roa"
+                               id="chk-changeother_{{$id}}"/>{{"OTHER_SPECIFY"|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="checkbox">
+                    <label for="chk-otherdet_{{$id}}">
+                        <input type="text" ng-model="" name="otherdet"
+                               id="chk-otherdet_{{$id}}"/>{{"OTHER_DET"|translate}}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</ng-form>
+

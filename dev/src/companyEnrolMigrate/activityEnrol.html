@@ -282,6 +282,10 @@
                                                       get-new-activity="main.activityService.getNewActivity()"
                                                        is-amend=""></cmp-related-activity-list>
                         </div>
+                        <div>
+                            <cmp-activity-rationale></cmp-activity-rationale>
+                            <cmp-activity-change></cmp-activity-change>
+                        </div>
                         <pre>overall: {{main.activityRoot.relatedActivity | json : spacing}}</pre>
                         <!--  <div class="form-group col-md-4"
                                ng-class="{'has-error':transInfoForm.isSolicited.$invalid}">
@@ -424,12 +428,13 @@
 <script src="app/scripts/services/data-lists.js"></script>
 <script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
 //TODO remove
-<!--<script src="app/scripts/components/cmp-address-list.js"></script>-->
+
 <script src="app/scripts/components/cmp-contact-list.js"></script>
 <script src="app/scripts/components/addressList/cmp-company-address-list.js"></script>
 <script src="app/scripts/components/addressRecord/cmp-address-record.js"></script>
 <script src="app/scripts/components/addressDetails/cmp-address-details.js"></script>
-
+<script src="app/scripts/components/activityRationale/cmp-activity-rationale.js"></script>
+<script src="app/scripts/components/activityChangeType/cmp-activity-change.js"></script>
 
 <script src="app/scripts/components/contactRecord/cmp-contact-record.js"></script>
 <script src="app/scripts/components/contactList/cmp-company-contact-list.js"></script>

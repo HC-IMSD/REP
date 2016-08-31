@@ -1,7 +1,25 @@
 {
-  "LOAD_ACTIVITY":"fr_Load an Activity Enrolment File",
-  "ACTIVE_ENROL":"fr_Regulatory Activity Enrolment",
-  "AMEND_ENROL":  "fr_Amend Enrolment",
+  "LOAD_ACTIVITY": "fr_Load an Activity Enrolment File",
+  "ACTIVE_ENROL": "fr_Regulatory Activity Enrolment",
+  "AMEND_ENROL": "fr_Amend Enrolment",
   "IS_SOLICITED": "fr_Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?"
-
+  "RATIONALE_SNDS": "fr_Rationale for all SNDS, SANDS, (all human drug types); Veterinary Supplemental New Drug Submission (VSNDS), Veterinary Supplemental Abbreviated New Drug Submission( VSANDS) (All veterinary drug types); or for biological drug DIN submissions",
+  "NEW_ROA": "fr_New route of administration, dosage form and / or strength",
+  "REPLACE_STERIL": "fr_Replace sterility test with process parametric release",
+  "NEW_CLAIMS": "fr_New claims / use, indications, recommended administration or dosage regime",
+  "CONFIRM_STUDY": "fr_Confirmatory studies",
+  "CHANGE_FORM": "fr_Change in formulation or method of manufacturing with clinical / bio data",
+  "CHANGE_SUBSTANCE": "fr_Change in drug substance/product (site, method, equipment, process control",
+  "OTHER_SPECIFY": "fr_Other (please specify):",
+  "TYPE_VNC": "fr_Type of Notifiable Chance (NC) or Veterinary Notifiable Change (VNC) submission (if applicable)",
+  "CHANGE_LABEL": "fr_Change in text of labelling",
+  "CHANGE_DRUGSUB": "fr_Change in drug substance (source, synthesis)",
+  "CHANGE_FORM": "fr_Change in formulation",
+  "CHANGE_SPEC": "fr_Change in specifications (medicinal or non-medicinal ingredient, pharmaceutical form, analytical method)",
+  "CHANGE_EXPIRY": "fr_Change in expiry period/storage conditions",
+  "CHANGE_MANMETHOD": "fr_Change in manufacturing method",
+  "CHANGE_MANSITE": "fr_Change in manufacturing site",
+  "CHANGE_CONTAIN": "fr_Change in container size for parenteral drug",
+  "CHANGE_PACKAGE": "fr_Change in packaging specifications for parenteral / inhalation drug",
+  "CHANGE_MATERIAL": "fr_Change in packaging material composition"
 }
