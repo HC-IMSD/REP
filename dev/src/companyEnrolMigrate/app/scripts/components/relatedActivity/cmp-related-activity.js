@@ -24,6 +24,9 @@
                 onDelete: '&',
                 isAmend: '&',
                 isDetailValid: '&',
+                activityList: '<',
+                onUpdate: '&'
+
             }
         });
     activityRecCtrl.$inject = ['$scope']
@@ -38,6 +41,7 @@
 
         vm.$onInit = function () {
            // vm.activityModel=vm.activityModel;
+
         };
 
         /**
@@ -49,7 +53,10 @@
             if (changes.activityRecord) {
                 vm.activityModel = angular.copy(changes.activityRecord.currentValue);
                 console.log("Activity model" + JSON.stringify( vm.activityModel))
-
+            }
+            if (changes.activityList) {
+                console.log("Changes in the value" + changes.activityList.currentValue)
+                vm.activityTypesArray = changes.activityList.currentValue;
             }
         };
 
@@ -102,9 +109,9 @@
          * Updates the contact model used by the save button
          */
         vm.updateActivityModel = function () {
-            if (vm.addressRecForm.$valid) {
+            if (vm.activityRecForm.$valid) {
                 vm.isDetailValid({state: true});
-                vm.addressRecForm.$setPristine();
+                vm.activityRecForm.$setPristine();
                 vm.onUpdate({rec: vm.activityModel});
             }
             vm.savePressed = true;

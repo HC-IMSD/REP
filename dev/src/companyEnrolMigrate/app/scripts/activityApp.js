@@ -207,7 +207,12 @@
                     {
                         prefix: 'app/resources/activityInfo-',
                         suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/activityList-',
+                        suffix: '.json'
                     }
+
                 ]
             })
             $translateProvider.preferredLanguage('en');

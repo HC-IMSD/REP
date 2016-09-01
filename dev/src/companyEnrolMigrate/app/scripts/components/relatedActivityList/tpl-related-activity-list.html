@@ -11,26 +11,13 @@
                                      disable-selection="!activityListCtrl.isDetailsValid">
 
                     <cmp-activity-record activity-record="$parent.record"
-                                          on-delete="activityListCtrl.deleteActivity(activityID)"
-                                          is-amend="activityListCtrl.isAmend()"
-                                          is-detail-valid="activityListCtrl.setDetailValid()"></cmp-activity-record>
+                                         on-update="activityListCtrl.onUpdateActivityRecord(rec)"
+                                         on-delete="activityListCtrl.deleteActivity(activityID)"
+                                         is-amend="activityListCtrl.isAmend()"
+                                         activity-list="activityListCtrl.activityTypeList"
+                                         is-detail-valid="activityListCtrl.setDetailValid()"></cmp-activity-record>
 
                 </cmp-expanding-table>
-
-               <!-- <cmp-expanding-table list-items="lifecycleListCtrl.lifecycleList"
-                                     reset-to-collapsed="lifecycleListCtrl.setCollapsed"
-                                     column-def="lifecycleListCtrl.columnDef" select-record="lifecycleListCtrl.selectRecord"
-                                     disable-selection="!lifecycleListCtrl.isDetailsValid">
-
-                    <cmp-lifecycle-details lifecycle-record="$parent.record"
-                                           is-detail-valid="lifecycleListCtrl.setValid(state)"
-                                           on-delete="lifecycleListCtrl.deleteRecord(id)"
-                                           enable-delete-index="lifecycleListCtrl.lastRecordSequence()"
-                                           on-update="lifecycleListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
-
-                </cmp-expanding-table>
--->
-
 
             </div>
             <div class="row mrgn-tp-md mrgn-bttm-lg">

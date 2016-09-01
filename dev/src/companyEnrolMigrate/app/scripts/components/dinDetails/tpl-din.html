@@ -3,52 +3,34 @@
          ng-class="{'has-error':dinForm.dinValue.$invalid}">
         <div class="col-xs-3">
             <label for="dinValue_{{$id}}" class="required">
-                <span class="field-name">{{'DIN'|translate}}&nbsp;{{dinCtrl.detailsIndex+1}}</span>
+                <span class="field-name">{{'DIN_ABRREV'|translate}}&nbsp;{{dinCtrl.detailsIndex+1}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
-            <div class="row">
-                <div>
-                    <div class="input-group">
-                        <input type="text" size="8" maxlength="8" ng-model="dinCtrl.record.dinNumber"
-                               class="form-control"
-                               name="dinValue" id="dinValue_{{$id}}" ng-required="true"/>
-                        <strong id="dinValue-error" class="error"
-                                ng-if="dinCtrl.showError(dinForm.dinValue.$touched,dinForm.dinValue.$invalid)">
-                        <span class="label label-danger" ng-messages="dinForm.dinValue.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                        </strong>
+
+                <div class="row">
+                    <div>
+                        <div class="input-group">
+                            <input type="text" size="14" maxlength="8" ng-model="dinCtrl.record.dinNumber"
+                                   class="form-control"
+                                   name="dinValue" id="dinValue_{{$id}}" ng-required="true"/>
+
                       <span class="input-group-btn">
                         <button class="btn btn-danger" ng-click="dinCtrl.delete()">
                             <span aria-label="{{'DELETE_DIN'|translate }} {{dinCtrl.detailsIndex+1}}"></span>
                             {{'DELETE'|translate}}
                         </button>
                       </span>
+                        </div>
                     </div>
-                </div>
-            </label>
-                <!--<div class="col-xs-7">
-                    <div class="form-group">
-                        <input type="text" size="8" maxlength="8" ng-model="dinCtrl.record.dinNumber" class="form-control"
-                               name="dinValue" id="dinValue_{{$id}}" ng-required="true"/>
-                        <strong id="dinValue-error" class="error"
-                                ng-if="dinCtrl.showError(dinForm.dinValue.$touched,dinForm.dinValue.$invalid)">
+                    <strong id="dinValue-error" class="error"
+                            ng-show="dinCtrl.showError(dinForm.dinValue.$touched,dinForm.dinValue.$invalid)">
                         <span class="label label-danger" ng-messages="dinForm.dinValue.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
-                        </strong>
-                    </div>
+                    </strong>
                 </div>
-                <div class="col-xs-4 input-group-btn ">
-                    <div class="form-group">
-                        <button class="btn btn-danger" ng-click="dinCtrl.delete()">
-                            <span  aria-label="{{'DELETE_DIN'|translate }} {{dinCtrl.detailsIndex+1}}"></span>
-                            {{'DELETE'|translate}}
-                        </button>
-                    </div>
-                </div>-->
-
-            </div>
+            </label>
         </div>
+    </div>
     </div>
 
 </ng-form>

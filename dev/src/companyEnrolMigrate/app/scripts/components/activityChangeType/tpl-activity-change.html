@@ -111,11 +111,12 @@
                      </label>
                  </div>
              </div>-->
-            <div class="col-sm-6">
+            <div class="col-sm-8">
                 <div class="checkbox">
                     <label for="chk-chgeotherdet_{{$id}}">
+                        {{"OTHER_DETAILS"|translate}}
                         <input type="text" ng-model="actChangeCtrl.record.otherChangeDetails" name="chge-otherdet"
-                               id="chk-chgeotherdet_{{$id}}"/>{{"OTHER_DET"|translate}}
+                               id="chk-chgeotherdet_{{$id}}" maxlength="80" size="80"/>
                     </label>
                 </div>
             </div>

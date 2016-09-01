@@ -23,6 +23,7 @@
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                         <select id="activityType_{{$id}}" name="activityType"
                                 ng-model="activityCtrl.activityModel.regActivityType"
+                                ng-options="activity |translate for activity in activityCtrl.activityTypesArray | orderByTranslated"
                                 class="form-control full-width" ng-required="true"></select>
                         <strong id="activityType-error" class="error"
                                 ng-if="activityCtrl.showError(activityCtrl.activityRecForm.activityType.$touched,activityCtrl.activityRecForm.activityType.$invalid)">
@@ -59,12 +60,13 @@
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                         <input id="controlNum_{{$id}}" name="controlNum"
                                ng-model="activityCtrl.activityModel.dstsControlNumber"
-                               maxlength="6" size="6"
+                               maxlength="6" size="6" ng-minlength="6"
                                class="form-control full-width" ng-required="true"/>
                         <strong id="controlNum-error" class="error"
                                 ng-if="activityCtrl.showError(activityCtrl.activityRecForm.controlNum.$touched,activityCtrl.activityRecForm.controlNum.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.controlNum.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                            <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
                         </span>
                         </strong>
                     </label>
@@ -133,11 +135,10 @@
                     <div ng-repeat="record in activityCtrl.activityModel.assocDins">
                         <cmp-din-details din-record="record" din-index="$index" delete-din="activityCtrl.deleteDin(dinIndex)"></cmp-din-details>
                     </div>
-
                 </div>
             </div>
             <div class="row">
-                <button class="btn btn-primary" ng-click="activityCtrl.addDin()">{{'Add_DIN'|translate}}</button>
+                <button class="btn btn-primary" ng-click="activityCtrl.addDin()">{{'ADD_DIN'|translate}}</button>
             </div>
 
             <div class="row">
@@ -145,7 +146,7 @@
                     <input type="submit" value="{{'SAVE_ACTIVITY'|translate}}" class="btn btn-primary"
                            name="saveAddress"
                            id="saveAddress"
-                           ng-click="activityCtrl.updateAddressModel2()" ng-disabled="activityCtrl.setNotEditable()">
+                           ng-click="activityCtrl.updateActivityModel()" ng-disabled="activityCtrl.setNotEditable()">
                     <input type="submit" value="{{'DELETE_ACTIVITY'|translate}}" class="btn btn-danger"
                            ng-click="activityCtrl.delete()">
                     <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"

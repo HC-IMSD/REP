@@ -166,11 +166,13 @@
 
         ActivityService.prototype.getActivityLeadList = function (isPilot) {
 
-            var leadList = ["BIOLOGIC",
+            var leadList = [
+                "BIOLOGIC",
                 "CHP",
                 "DMF",
                 "PHARMA",
-                "PMVIGILANCE"];
+                "PMVIGILANCE"
+            ];
             if(!isPilot){
                 leadList.push("MD","VET","UNASSIGNED");
             }

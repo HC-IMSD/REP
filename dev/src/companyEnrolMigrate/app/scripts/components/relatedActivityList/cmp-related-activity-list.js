@@ -21,6 +21,7 @@
                 onUpdate: '&',
                 getNewActivity:'&',
                 isAmend:'&',
+                activityTypes: '&'
             },
             controller: activityListCtrl,
             controllerAs: 'activityListCtrl'
@@ -34,27 +35,30 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailsValid=true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.activityList = [];
+        vm.activityTypeList = [];
         vm.columnDef = [
             {
                 label: "ACTIVITY_TYPE",
-                binding:"companyName",
-                width:"30"
+                binding: "regActivityType",
+                width: "80"
             },
             {
-                label: "CITY",
-                binding:"city",
-                width:"25"
+                label: "CONTROL_NUM",
+                binding: "dstsControlNumber",
+                width: "10"
             },
             {
-                label: "COUNTRY",
-                binding:"country",
-                width:"25"
+                label: "DOSSIER_ID",
+                binding: "dossierId",
+                width: "10"
             }
 
         ];
         vm.$onInit = function () {
             //local var from binding
            vm.activityList = vm.activities;
+            vm.activityTypeList = vm.activityTypes({isPilot: true}); //is pilot
+
         };
 
         vm.$onChanges=function(changes){
@@ -81,13 +85,11 @@
 
         vm.addActivity = function () {
             var defaultActivity=vm.getNewActivity();
-            console.log("new activity "+JSON.stringify(defaultActivity));
             vm.activityList.push(defaultActivity);
-            console.log("the list "+JSON.stringify(vm.activityList))
             vm.isDetailsValid = true; //set to true to exapnd
             vm.selectRecord=(vm.activityList.length - 1);
-            console.log("selectrecord"+vm.selectRecord)
-           // vm.isDetailsValid = false;
+
+            vm.isDetailsValid = false;
         };
 
         vm.setValid = function (detailValid) {

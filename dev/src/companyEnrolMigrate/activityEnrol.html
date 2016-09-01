@@ -216,7 +216,7 @@
                                 <div class="checkbox">
                                     <label for="chk-lasa_{{$id}}">
                                         <input type="checkbox" ng-model="main.activityRoot.notLasa" name="chk-lasa"
-                                               id="chk-lasa_{{$id}} ng-required=" true"/>{{"NOT_LASA"|translate}}
+                                               id="chk-lasa_{{$id}}" ng-required=" true"/>{{"NOT_LASA"|translate}}
                                         <strong id="notlasa-error" class="error"
                                                 ng-if="main.showError(main.actvityEnrolForm.notlasa.$invalid,main.actvityEnrolForm.notlasa.$touched)">
                  <span class="label label-danger" ng-messages="main.actvityEnrolForm.notlasa.$error">
@@ -279,7 +279,8 @@
                         <div class="row">
 
                             <cmp-related-activity-list activities="main.activityRoot.relatedActivity" on-update=""
-                                                      get-new-activity="main.activityService.getNewActivity()"
+                                                       get-new-activity="main.activityService.getNewActivity()"
+                                                       activity-types="main.activityService.getActivityTypeList(isPilot)"
                                                        is-amend=""></cmp-related-activity-list>
                         </div>
                         <div>
@@ -339,7 +340,7 @@
     <dl id="wb-dtmd">
         <dt>Date modified:&#32;</dt>
         <dd>
-            <time property="dateModified">2016-08-14</time>
+            <time property="dateModified">2016-09-03</time>
         </dd>
     </dl>
 </main>
