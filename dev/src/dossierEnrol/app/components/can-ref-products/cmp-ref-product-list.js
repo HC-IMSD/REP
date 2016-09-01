@@ -59,11 +59,25 @@
                         "strengths": "A",
                         "companyName": "A"
                     }
-                ]
+                ];
+            self.newProductFormShown = false;
            // }
 
 
-        }
+        };
+
+        self.addProduct = function(product){
+            console.debug('productList addProduct: ' + product);
+            self.productList.push(product);
+        };
+
+        self.updateProduct = function(product){
+            var idx = self.productList.indexOf(
+                $filter('filter')(self.productList, {productId: product.contactId}, true)[0]
+            );
+            self.productList[idx] = angular.copy(product);
+        };
+
     }
 
 

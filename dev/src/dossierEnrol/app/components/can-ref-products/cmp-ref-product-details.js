@@ -19,6 +19,8 @@
             controller: refProductDetailsCtrl,
             bindings: {
                 productRecord: '<',
+                deleteBtn: '<',
+                onAddProduct: '&',
                 onUpdate: '&',
                 onDelete: '&'
             }
@@ -30,12 +32,12 @@
         self.$onInit = function(){
 
             self.productModel = {
-                brandName: "",
-                medIngredient: "",
-                dosageForm: "Other",
+                brandName: "A",
+                medIngredient: "A",
+                dosageForm: "3",
                 dosageFormOther: "",
-                strengths: "",
-                companyName: ""
+                strengths: "5454",
+                companyName: "B"
             };
 
             if (self.productRecord) {
@@ -44,6 +46,26 @@
             }
 
         }
+
+        self.saveProduct = function(){
+            if (self.productRecord) {
+                console.log('update product');
+                self.onUpdate({product:self.productModel});
+            }else{
+                console.log('add product');
+                self.onAddProduct({product:self.productModel});
+            }
+
+        };
+
+        self.delete = function(){
+            if (self.productRecord) {
+                self.onDelete({id : self.productModel.productId});
+            }else{
+                //TODO
+            }
+
+        };
     }
 
 

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!-- ****************************** -->
+<!-- Company Enrolment version 0.1 -->
+<!-- ****************************** -->
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<hpfb:include schemaLocation="./common/data_types.xsd"/>
+	<hpfb:include schemaLocation="./common/contact.xsd"/>
+	<hpfb:include schemaLocation="./common/address.xsd"/>
+	<hpfb:include schemaLocation="./common/sequence_descriptions.xsd"/>
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<!-- COMPANY_ENROL is the root element-->
+	<hpfb:element name="TRANSACTION_ENROL" type="transaction_enrol_content"/>
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
+	<hpfb:element name="application_type" type="rep_type"/>
+	<hpfb:element name="software_version" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
+	<hpfb:element name="is_ectd" type="required_yes_no_content"/>
+	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="dossier_name" type="char_1_256_content"/>
+	<hpfb:element name="dossier_id" type="char_1_20_content"/>
+	<hpfb:element name="sequence_number" type="sequence_content"/>
+	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
+	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
+	<hpfb:element name="sequence_activity_type" type="reg_activity_type_list"/>
+	<hpfb:element name="sequence_description_value" type="sequence_description_list"/>
+	<hpfb:element name="sequence_from_date" type="yyyymmdd_date_content"/>
+	<hpfb:element name="sequence_to_date" type="yyyymmdd_date_content"/>
+	<hpfb:element name="sequence_version" type="number_0_5_content"/>
+	<hpfb:element name="sequence_details" type="char_1_50_content"/>
+	<hpfb:element name="sequence_concat" type="hpfb:string"/>
+	<hpfb:element name="lifecycle_record" type="livecycle_record_content"/>
+	<hpfb:element name="is_solicited"  type="required_yes_no_content"/>
+	<hpfb:element name="solicited_requester" type="char_0_256_content"/>
+	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
+	<hpfb:element name="regulatory_project_manager2" type="char_0_256_content"/>
+	<hpfb:element name="same_regulatory_company" type="required_yes_no_content"/>
+	<hpfb:element name="company_name" type="char_0_80_content"/>
+	<hpfb:element name="same_regulatory_address" type="required_yes_no_content"/>
+	<hpfb:element name="regulatory_activity_address" type="international_address_content"/>
+	<hpfb:element name="same_regulatory_contact" type="required_yes_no_content"/>
+	<hpfb:element name="regulatory_activity_contact" type="contact_content"/>
+	<hpfb:element name="rep_submission_contact_role" type="rep_contact_role_list"/>
+	<hpfb:element name="rep_submission_contact" type="contact_content"/>
+	<hpfb:element name="rep_submission_contact_record" type="rep_submission_contact_record_content"/>
+
+
+	<hpfb:complexType name="transaction_enrol_content">
+		<hpfb:sequence>
+			<hpfb:element ref="date_saved"/>
+			<hpfb:element ref="application_type"/>
+			<hpfb:element ref="software_version"/>
+			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="is_ectd"/>
+			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="dossier_name"/>
+			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="sequence_number"/>
+			<hpfb:element ref="date_filed"/>
+			<hpfb:element ref="control_number"/>
+			<hpfb:element ref="lifecycle_record" minOccurs="1"/>
+			<hpfb:element ref="is_solicited"/>
+			<hpfb:element ref="solicited_requester"/>
+			<hpfb:element ref="regulatory_project_manager1"/>
+			<hpfb:element ref="regulatory_project_manager2"/>
+			<hpfb:element ref="same_regulatory_company"/>
+			<hpfb:element ref="company_name"/>
+			<hpfb:element ref="same_regulatory_address"/>
+			<hpfb:element ref="regulatory_activity_address" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="same_regulatory_contact"/>
+			<hpfb:element ref="regulatory_activity_contact" minOccurs="0" maxOccurs="1" />
+			<hpfb:element ref="rep_submission_contact_record" minOccurs="1" maxOccurs="3"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="livecycle_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="sequence_number"/>
+			<hpfb:element ref="date_filed"/>
+			<hpfb:element ref="control_number"/>
+			<hpfb:element ref="sequence_activity_type"/>
+			<hpfb:element ref="sequence_description_value"/>
+			<hpfb:element ref="sequence_from_date"/>
+			<hpfb:element ref="sequence_to_date"/>
+			<hpfb:element ref="sequence_details"/>
+			<hpfb:element ref="sequence_version"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	
+	<hpfb:complexType name="rep_submission_contact_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="rep_submission_contact_role"/>
+			<hpfb:element ref="rep_submission_contact"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+</hpfb:schema>
