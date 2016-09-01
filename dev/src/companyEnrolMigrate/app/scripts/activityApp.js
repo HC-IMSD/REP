@@ -16,7 +16,8 @@
             'filterLists',
             'relatedActivityList',
             'activityChange',
-            'activityForm'
+            'activityForm',
+            'numberFormat'
 
         ])
 })();

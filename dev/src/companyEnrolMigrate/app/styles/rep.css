@@ -41,6 +41,10 @@ label > select {
     padding-bottom: 99999px;
 }
 
+textarea.fullrep {
+    min-width: 100%
+}
+
 /*
 .picker-overlay {
     z-index: 1100 !important;

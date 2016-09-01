@@ -95,7 +95,8 @@
                 <div class="panel-body">
                     <div class="col-md-12">
 
-                        <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="main.rootTag"/>
+                        <hpfb-file-select update-model-root="main.showContent(fileContent) "
+                                          root-elem="{{main.rootTag}}"/>
                     </div>
                 </div>
                 <div>
@@ -232,7 +233,7 @@
                             <div class="col-xs-12">
                                 <label for="reason-filing_{{$id}}">
                                     {{"REASON_FILE"|translate}}
-                                    <strong id="reason-filing-error" class="error" size="1024"
+                                    <strong id="reason-filing-error" class="error"
                                             ng-if="main.showError(main.actvityEnrolForm.reasonFiling.$invalid,main.actvityEnrolForm.reasonFiling.$touched)">
                                 <span class="label label-danger"
                                       ng-messages="main.actvityEnrolForm.reasonFiling.$error">
@@ -246,7 +247,7 @@
                             <div class="form-group col-xs-12">
                                 <textarea ng-model="main.activityRoot.reasonFiling" name="reason-filing"
                                           id="reason-filing_{{$id}}" ng-required="true" maxlength="1024"
-                                          style="min-width: 100%" rows="8"></textarea>
+                                          class="fullrep" rows="8"></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -427,6 +428,7 @@
 <script src="app/scripts/components/relatedActivityList/cmp-related-activity-list.js"></script>
 <script src="app/scripts/components/relatedActivity/cmp-related-activity.js"></script>
 <script src="app/scripts/components/dinDetails/cmp-din-details.js"></script>
+<script src="app/scripts/directives/numberOnly/only-digits.js"></script>
 
 <script src="app/scripts/services/data-lists.js"></script>
 <script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>

@@ -42,6 +42,6 @@
   "REASON_FILING": "Reason for Submission",
   "OTHER_DETAILS": "Other (please specify)",
   "DIN_ABRREV": "DIN",
-  "DELETE_ACTIVITY": "Delete Activity"
-
+  "DELETE_ACTIVITY": "Delete Activity",
+  "ADD_ACTIVITY": "Add Activity"
 }

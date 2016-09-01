@@ -11,7 +11,6 @@
         .module('activityService', [])
 })();
 
-
 (function () {
     'use strict';
     angular
@@ -57,7 +56,7 @@
         };
 
         /**
-         * @ngdoc transforms the object model to the compatible file JSON objecct
+         * @ngdoc transforms the object model to the compatible file JSON objecct base transform call!!
          * @param jsonObj
          * @returns json object compatible with the xml schema
          * */
@@ -79,8 +78,9 @@
                     not_lasa: jsonObj.notLasa,
                     reason_filing: jsonObj.reasonFiling
                 }
-
             };
+
+            activity.ACTIVITY_ENROL.related_activity = this.tranformRelatedActivityToFileObj(jsonObj);
             //do other stuff
             if (jsonObj.dossierId) {
                 activity.ACTIVITY_ENROL.dossier_id_concat = (jsonObj.dossierIdPrefix + jsonObj.dossierId);
@@ -93,6 +93,20 @@
             return activity;
 
         };
+
+        ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
+            var activityList = jsonObj.relatedActivity;
+            var result = [];
+            //should never happpen, defensive!
+            if (!(activityList instanceof Array)) {
+                //make it an array, case there is only one
+                activityList = [activityList]
+            }
+            for (var i = 0; i < activityList.length; i++) {
+                result.push(_mapRelatedRegActivityToOutput(activityList[i]));
+            }
+            return result;
+        }
         ActivityService.prototype.getModelInfo = function () {
             return this._default;
         };
@@ -112,16 +126,20 @@
             model.softwareVersion = jsonObj.software_version;
             model.dataChecksum = jsonObj.software_version;
             model.dossierIdPrefix = jsonObj.dossier_id_prefix;
-            model.dossierId = json.dossier_id;
+            model.dossierId = jsonObj.dossier_id;
             model.regActivityLead = jsonObj.reg_activity_lead;
             model.regActivityType = jsonObj.reg_activity_type;
             model.feeClass = jsonObj.fee_class;
             model.notLasa = jsonObj.not_lasa;
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
-            var relatedActivites = {relatedActivites: this.getRelatedActivityList(jsonObj[rootTag].related_activity)};
 
-            return  angular.extend(model, relatedActivites);
+            if (jsonObj.related_activity) {
+                var relatedActivites = {relatedActivity: this.getRelatedActivityList(jsonObj.related_activity)};
+
+                return angular.extend(model, relatedActivites);
+            }
+            return (model);
         };
 
         ActivityService.prototype.getRelatedActivityList=function(activityList){
@@ -132,7 +150,7 @@
                 activityList = [adrLactivityListist]
             }
             for(var i=0;i<activityList.length;i++){
-                listResult.push(this._transformRelatedRegActivityFromFileObj(actvityList[i]));
+                listResult.push(_transformRelatedRegActivityFromFileObj(activityList[i]));
             }
             return listResult;
         };
@@ -145,7 +163,7 @@
             var activityInfo = this.getActivityInfo(jsonObj[this.rootTag]);
             //get rid of previous default if it exists
             this._default = {};
-            angular.extend(this._default, transactionInfo)
+            angular.extend(this._default, activityInfo)
         };
 
         ActivityService.prototype.getNewActivity = function () {
@@ -514,3 +532,4 @@
     }
 
 })();
+

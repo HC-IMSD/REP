@@ -82,28 +82,24 @@
         /* @ngdoc method -discards the changes and reverts to the model
          *
          */
-        vm.discardChanges = function () {
-            if (vm.addressRecForm.$pristine) return;
-            var currRecord = vm.trackRecordCtrl.trackRecord();
+        vm.discardChanges = function (form) {
+            if (vm.activityRecForm.$pristine) return;
+            var currRecord = vm.activityRecord;
             vm.activityModel = angular.copy(currRecord);
             vm.setNotEditable(); //case of amend
            // vm.addressRecForm.$setPristine();
-            vm.isDetailValid({state: vm.addressRecForm.$valid});
+            vm.isDetailValid({state: vm.activityRecForm.$valid});
             vm.savePressed = false;
         };
 
         /**
-         * @ngdoc method -Updates the parent on whether this record is valid or not
+         * Used to update the add button state by transmitting if valid or not
          */
-        vm.updateValid = function () {
-           // vm.isDetailValid({state: (vm.addressRecForm.$valid && !vm.addressRecForm.$dirty)});
-        };
-
-      /*  $scope.$watch('addressRec.addressRecForm.$dirty', function () {
-            if (vm.addressRecForm.$dirty) {
+        $scope.$watch('activityCtrl.activityRecForm.$dirty', function () {
+            if (vm.activityRecForm.$dirty) {
                 vm.isDetailValid({state: false})
             }
-        }, true);*/
+        }, true);
 
         /**
          * Updates the contact model used by the save button
