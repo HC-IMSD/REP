@@ -18,10 +18,10 @@
         .component('cmpActivityRationale', {
             templateUrl: 'app/scripts/components/activityRationale/tpl-activity-rationale.html',
             controller: activityRationaleCtrl,
-            controllerAs: 'actRationaleCtrl',
+            controllerAs: 'actRatCtrl',
 
             bindings: {
-                record: '<',
+                activityRecord: '<',
             }
         });
 
@@ -34,8 +34,8 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            if (changes.dinRecord) {
-                vm.record=changes.record.currentValue
+            if (changes.activityRecord) {
+                vm.record = changes.activityRecord.currentValue
             }
         };
         vm.showError=function(isTouched,isInvalid){

@@ -40,7 +40,8 @@
                 "isThirdParty": "",
                 "relatedActivity":[]
             };
-
+            defaultActivityData.rationaleTypes = _createRationalTypes();
+            defaultActivityData.notifiableChangeTypes = _createNotifiableChangeTypes();
             angular.extend(this._default, defaultActivityData);
             this.rootTag = "ACTIVITY_ENROL";
             this.currSequence = 0;
@@ -78,6 +79,7 @@
                     not_lasa: jsonObj.notLasa,
                     reason_filing: jsonObj.reasonFiling
                 }
+
             };
             //do other stuff
             if (jsonObj.dossierId) {
@@ -86,6 +88,8 @@
                 //if there is no id value just make this empty
                 activity.ACTIVITY_ENROL.dossier_id_concat = "";
             }
+
+
             return activity;
 
         };
@@ -116,6 +120,7 @@
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
             var relatedActivites = {relatedActivites: this.getRelatedActivityList(jsonObj[rootTag].related_activity)};
+
             return  angular.extend(model, relatedActivites);
         };
 
@@ -200,6 +205,7 @@
             }
             return activityList;
         };
+
 
         // Return a reference to the object
         return ActivityService;
@@ -340,34 +346,34 @@
 
     function _createRationalTypes() {
         return {
-            "rationaleTypes": {
-                "newRoa": "N",
-                "newClaims": "N",
-                "changeFormulation": "N",
-                "changeDrugSubstance": "N",
-                "replaceSterility": "N",
-                "confirmitoryStudies": "N",
-                "otherRationale": "N",
+            /*  "rationaleTypes": {*/
+            "newRoa": false,
+            "newClaims": false,
+            "changeFormulation": false,
+            "changeDrugSubstance": false,
+            "replaceSterility": false,
+            "confirmitoryStudies": false,
+            "otherRationale": false,
                 "otherRationaleDetails": ""
-            }
+            /* }*/
         };
     }
 
     function _createNotifiableChangeTypes() {
         return {
-            "notifiableChangeTypes": {
-                "textLabelChange": "N",
-                "drugSubstanceChange": "N",
-                "formulationChange": "N",
-                "specificationChange": "N",
-                "expiryStorageChange": "N",
-                "manufactMethodChange": "N",
-                "manufactSiteChange": "N",
-                "containerSizeChange": "N",
-                "packagingSpecChange": "N",
-                "packagingMaterialsChange": "N",
+            ///"notifiableChangeTypes": {
+            "textLabelChange": false,
+            "drugSubstanceChange": false,
+            "formulationChange": false,
+            "specificationChange": false,
+            "expiryStorageChange": false,
+            "manufactMethodChange": false,
+            "manufactSiteChange": false,
+            "containerSizeChange": false,
+            "packagingSpecChange": false,
+            "packagingMaterialsChange": false,
                 "otherChangeDetails": ""
-            }
+            //}
         };
     }
 

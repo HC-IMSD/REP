@@ -21,7 +21,7 @@
             controllerAs: 'actChangeCtrl',
 
             bindings: {
-                record: '<',
+                activityRecord: '<',
             }
         });
    // activityChangeCtrl.$inject = [];
@@ -35,8 +35,8 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            if (changes.dinRecord) {
-                vm.record=changes.record.currentValue
+            if (changes.activityRecord) {
+                vm.record = changes.activityRecord.currentValue
             }
         };
         vm.showError=function(isTouched,isInvalid){

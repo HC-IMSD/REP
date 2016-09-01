@@ -193,7 +193,7 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-6"
-                                 ng-class="{'has-error':main.actvityEnrolForm.regActivityType.$invalid}">
+                                 ng-class="{'has-error':main.actvityEnrolForm.feeClass.$invalid}">
                                 <div class="form-group">
                                     <label for="feeClass_{{$id}}">{{'FEE_CLASS' |translate}}
                                         <select class="form-control" id="feeClass_{{$id}}"
@@ -283,8 +283,10 @@
                                                        is-amend=""></cmp-related-activity-list>
                         </div>
                         <div>
-                            <cmp-activity-rationale></cmp-activity-rationale>
-                            <cmp-activity-change></cmp-activity-change>
+                            <cmp-activity-rationale
+                                    activity-record="main.activityRoot.rationaleTypes"></cmp-activity-rationale>
+                            <cmp-activity-change
+                                    activity-record="main.activityRoot.notifiableChangeTypes"></cmp-activity-change>
                         </div>
                         <pre>overall: {{main.activityRoot.relatedActivity | json : spacing}}</pre>
                         <!--  <div class="form-group col-md-4"

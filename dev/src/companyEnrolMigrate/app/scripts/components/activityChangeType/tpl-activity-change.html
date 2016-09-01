@@ -15,7 +15,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgelabel_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-label"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.textLabelChange" name="chge-label"
                                id="chk-chgelabel_{{$id}}"/>{{"CHANGE_LABEL"|translate}}
                     </label>
                 </div>
@@ -23,7 +23,8 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgeman_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-manmethod"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.manufactMethodChange"
+                               name="chge-manmethod"
                                id="chk-chgeman_{{$id}}"/>{{"CHANGE_MANMETHOD"|translate}}
                     </label>
                 </div>
@@ -33,7 +34,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chge-drug-sub_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-drugsub"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.drugSubstanceChange" name="chge-drugsub"
                                id="chk-chge-drug-sub_{{$id}}"/>{{"CHANGE_DRUGSUB"|translate}}
                     </label>
                 </div>
@@ -41,7 +42,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgemansite_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-mansite"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.manufactSiteChange" name="chge-mansite"
                                id="chk-chgemansite_{{$id}}"/>{{"CHANGE_MANSITE"|translate}}
                     </label>
                 </div>
@@ -51,7 +52,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgeform_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-form"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.formulationChange" name="chge-form"
                                id="chk-chgeform_{{$id}}"/>{{"CHANGE_FORM"|translate}}
                     </label>
                 </div>
@@ -59,7 +60,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgecontain_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-contain"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.containerSizeChange" name="chge-contain"
                                id="chk-chgecontain_{{$id}}"/>{{"CHANGE_CONTAIN"|translate}}
                     </label>
                 </div>
@@ -69,7 +70,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgespec_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-form"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.specificationChange" name="chge-form"
                                id="chk-chgespec_{{$id}}"/>{{"CHANGE_SPEC"|translate}}
                     </label>
                 </div>
@@ -77,7 +78,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgepackage_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-form"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.packagingSpecChange" name="chge-form"
                                id="chk-chgepackage_{{$id}}"/>{{"CHANGE_PACKAGE"|translate}}
                     </label>
                 </div>
@@ -87,7 +88,7 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgeexpiry_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-expiry"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.expiryStorageChange" name="chge-expiry"
                                id="chk-chgeexpiry_{{$id}}"/>{{"CHANGE_EXPIRY"|translate}}
                     </label>
                 </div>
@@ -95,32 +96,31 @@
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgemat_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-mat"
+                        <input type="checkbox" ng-model="actChangeCtrl.record.packagingMaterialsChange" name="chge-mat"
                                id="chk-chgemat_{{$id}}"/>{{"CHANGE_MATERIAL"|translate}}
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="checkbox">
-                    <label for="chk-chgeother_{{$id}}">
-                        <input type="checkbox" ng-model="" name="chge-other"
-                               id="chk-chgeother_{{$id}}"/>{{"OTHER_SPECIFY"|translate}}
-                    </label>
-                </div>
-            </div>
+            <!-- <div class="col-sm-6">
+                 <div class="checkbox">
+                     <label for="chk-chgeother_{{$id}}">
+                         <input type="checkbox" ng-model="actChangeCtrl.record.otherChange" name="chge-other"
+                                id="chk-chgeother_{{$id}}"/>{{"OTHER_SPECIFY"|translate}}
+                     </label>
+                 </div>
+             </div>-->
             <div class="col-sm-6">
                 <div class="checkbox">
                     <label for="chk-chgeotherdet_{{$id}}">
-                        <input type="text" ng-model="" name="chge-otherdet"
+                        <input type="text" ng-model="actChangeCtrl.record.otherChangeDetails" name="chge-otherdet"
                                id="chk-chgeotherdet_{{$id}}"/>{{"OTHER_DET"|translate}}
                     </label>
                 </div>
             </div>
         </div>
     </fieldset>
-
 
 </ng-form>
 
