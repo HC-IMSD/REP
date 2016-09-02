@@ -24,6 +24,6 @@
   "PRIMARY": "Primary",
   "SECONDARY": "Alternate",
   "TOGGLE_EXPAND": "Click to toggle collapse or expand details of row",
-  "SAVE_DRAFT":   "Save Working Copy",
+  "SAVE_WORK": "Save Working Copy",
   "CONTROL_NUMBER": "Control Number"
 }

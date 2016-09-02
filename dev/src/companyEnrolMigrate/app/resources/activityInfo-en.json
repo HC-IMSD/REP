@@ -43,5 +43,6 @@
   "OTHER_DETAILS": "Other (please specify)",
   "DIN_ABRREV": "DIN",
   "DELETE_ACTIVITY": "Delete Activity",
-  "ADD_ACTIVITY": "Add Activity"
+  "ADD_ACTIVITY": "Add Activity",
+  "AUT_LETTER": "Please submit the authorization letter with this enrolment"
 }

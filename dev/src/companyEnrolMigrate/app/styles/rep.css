@@ -45,6 +45,14 @@ textarea.fullrep {
     min-width: 100%
 }
 
+.rep-input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+    margin-top: 5px;
+}
+
+
 /*
 .picker-overlay {
     z-index: 1100 !important;
