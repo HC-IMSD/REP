@@ -42,5 +42,6 @@
   "REASON_FILING": "fr_Reason for Submission",
   "OTHER_DETAILS": "fr_Other Details",
   "DIN_ABRREV": "DIN",
-  "DELETE_ACTIVITY": "fr_Delete Activity"
+  "DELETE_ACTIVITY": "fr_Delete Activity",
+  "AUT_LETTER": "fr_Please submit the authorization letter with this enrolment"
 }

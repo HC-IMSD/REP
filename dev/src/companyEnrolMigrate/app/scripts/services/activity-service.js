@@ -27,21 +27,23 @@
                 "enrolmentVersion": "",
                 "dateSaved": "",
                 "applicationType": "NEW",
-                "softwareVersion": "",
+                "softwareVersion": "1.0.0",
                 "dataChecksum": "",
                 "dossierIdPrefix": "HC6-024-",
                 "dossierId": "",
                 "regActivityLead": "",
                 "regActivityType": "",
                 "feeClass": "",
-                "notLasa": "",
+                "notLasa": false,
                 "reasonFiling": "",
                 "isThirdParty": "",
-                "relatedActivity":[]
+                "relatedActivity": [],
+                "contactRecord": []
             };
             defaultActivityData.rationaleTypes = _createRationalTypes();
             defaultActivityData.notifiableChangeTypes = _createNotifiableChangeTypes();
             angular.extend(this._default, defaultActivityData);
+
             this.rootTag = "ACTIVITY_ENROL";
             this.currSequence = 0;
         }
@@ -54,6 +56,25 @@
         ActivityService.prototype.getRootTag = function () {
             return (this.rootTag)
         };
+
+        ActivityService.prototype.createRepContact = function () {
+            var contact = _createContactModel();
+            contact.repRole = "";
+            var currentContacts = this._default.contactRecord;
+            if (currentContacts.length == 0) {
+                contact.repRole = "PRIMARY";
+            } else {
+                contact.repRole = "PRIMARY";
+                for (var i = 0; i < currentContacts.length; i++) {
+                    if (currentContacts[i].repRole == "PRIMARY") {
+                        contact.repRole = "SECONDARY";
+                        break;
+                    }
+                }
+            }
+            return contact
+        };
+
 
         /**
          * @ngdoc transforms the object model to the compatible file JSON objecct base transform call!!
@@ -75,12 +96,13 @@
                     reg_activity_lead: jsonObj.regActivityLead,
                     reg_activity_type: jsonObj.regActivityType,
                     fee_class: jsonObj.feeClass,
-                    not_lasa: jsonObj.notLasa,
+                    not_lasa: jsonObj.notLasa == true ? 'Y' : 'N',
                     reason_filing: jsonObj.reasonFiling
                 }
             };
 
             activity.ACTIVITY_ENROL.related_activity = this.tranformRelatedActivityToFileObj(jsonObj);
+            activity.ACTIVITY_ENROL.contact_record = this.transformContactListToFileObj(jsonObj.contactRecord);
             //do other stuff
             if (jsonObj.dossierId) {
                 activity.ACTIVITY_ENROL.dossier_id_concat = (jsonObj.dossierIdPrefix + jsonObj.dossierId);
@@ -93,6 +115,17 @@
             return activity;
 
         };
+
+        ActivityService.prototype.mapContactList = function (jsonObj) {
+            var result = [];
+            result = _mapRegulatoryContactList(jsonObj);
+            return result;
+        }
+        ActivityService.prototype.transformContactListToFileObj = function (jsonObj) {
+            return _transformRegulatoryContactListToFileObj(jsonObj);
+        }
+
+
 
         ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
             var activityList = jsonObj.relatedActivity;
@@ -130,16 +163,19 @@
             model.regActivityLead = jsonObj.reg_activity_lead;
             model.regActivityType = jsonObj.reg_activity_type;
             model.feeClass = jsonObj.fee_class;
-            model.notLasa = jsonObj.not_lasa;
+            model.notLasa = jsonObj.not_lasa === 'Y';
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
 
+            var relatedActivities = {relatedActivity: []};
+            var repContacts = {contactRecord: []};
             if (jsonObj.related_activity) {
-                var relatedActivites = {relatedActivity: this.getRelatedActivityList(jsonObj.related_activity)};
-
-                return angular.extend(model, relatedActivites);
+                relatedActivities = {relatedActivity: this.getRelatedActivityList(jsonObj.related_activity)};
             }
-            return (model);
+            if (jsonObj.contact_record) {
+                repContacts = this.mapContactList(jsonObj.contact_record)
+            }
+            return angular.extend(model, relatedActivites, repContacts);
         };
 
         ActivityService.prototype.getRelatedActivityList=function(activityList){
@@ -154,6 +190,7 @@
             }
             return listResult;
         };
+
 
         /**
          * ngDoc method- mapping from the transaction file json object to the internal representation
@@ -232,14 +269,14 @@
     }//end of ActivityService Object definition
 
     /**
-     *
+     * transforms from a file object
      * @param jsonObj
      * @returns an array of contacts. Empty if there are none
      * @private
      */
     function _mapRegulatoryContactList(jsonObj) {
         var result = [];
-        if (!jsonObj) return list;
+        if (!jsonObj) return result;
         if (!(jsonObj instanceof Array)) {
             //make it an array, case there is only one
             jsonObj = [jsonObj]
@@ -249,6 +286,22 @@
             result.push(_transformRepContactFromFileObj(jsonObj[i]));
         }
         return (result)
+    }
+
+    function _transformRegulatoryContactListToFileObj(jsonObj) {
+        var result = [];
+        if (!jsonObj) return result;
+        if (!(jsonObj instanceof Array)) {
+            //make it an array, case there is only one
+            jsonObj = [jsonObj]
+        }
+
+        for (var i = 0; i < jsonObj.length; i++) {
+            result.push(_mapRepContactToOutput(repObj)(jsonObj[i]));
+        }
+        return (result)
+
+
     }
 
 
@@ -302,43 +355,10 @@
         return contact;
     }
 
-    function _mapAddressToOutput(addressObj) {
 
-        var address = {};
-        address.street_address = addressObj.street;
-        address.city = addressObj.city;
-        address.province_lov = addressObj.stateList;
-        address.province_text = addressObj.stateText;
-        address.country = addressObj.country;
-        address.postal_code = addressObj.postalCode;
-        return (address);
-    }
-
-    function _transformAddressFromFileObj(addressObj) {
-        var address = {};
-        address.street = addressObj.street_address;
-        address.city = addressObj.city;
-        address.stateList = addressObj.province_lov;
-        address.stateText = addressObj.province_text;
-        address.country = addressObj.country;
-        address.postalCode = addressObj.postal_code;
-        return (address);
-    }
 
 
     //TODO make a standard service
-    function _createAddressModel() {
-        return (
-        {
-            street: "",
-            city: "",
-            stateList: "",
-            stateText: "",
-            country: "",
-            "postalCode": ""
-        }
-        )
-    }
 
     function _createContactModel() {
         var contact = {};
@@ -357,12 +377,7 @@
     }
 
     //todo deprecated
-    function _createRepContact() {
 
-        var contact = _createContactModel();
-        contact.repRole = "";
-        return contact
-    }
 
     function _createRationalTypes() {
         return {

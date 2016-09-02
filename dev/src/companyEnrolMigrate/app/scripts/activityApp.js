@@ -17,7 +17,8 @@
             'relatedActivityList',
             'activityChange',
             'activityForm',
-            'numberFormat'
+            'numberFormat',
+            'contactModule26'
 
         ])
 })();
@@ -60,7 +61,7 @@
             } else {
                 vm.saveXMLLabel = "SAVE_DRAFT"
             }
-            console.log("The path is: " + $location.path())
+
         }
 
         /**
@@ -71,6 +72,7 @@
             //return true
             return (vm.activityRoot.applicationType ===  vm.applicationInfoService.getAmendType())
         }
+
 
         /**
          *
@@ -86,6 +88,30 @@
         vm.saveXML = function () {
             var writeResult = _transformFile()
             hpfbFileProcessing.writeAsXml(writeResult, "activityEnrol", vm.rootTag);
+        }
+
+        vm.showError = function (isTouched, isInvalid) {
+
+            if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )) {
+                return true
+            }
+            return false
+        }
+        vm.showErrorCheck = function (isTouched, value) {
+
+            if ((!value && isTouched) || (vm.showErrors() && !value )) {
+                return true
+            }
+            return false
+        }
+
+        //TODO handled save pressed?
+        vm.showErrors = function () {
+            return false;
+        }
+        vm.setThirdParty = function () {
+            console
+            vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
         }
         /**
          * @ngdcc method updates data and increments version before creating json
@@ -107,13 +133,13 @@
             vm.updateValues++;
         }
 
-        $scope.$watch("main.actvityEnrolForm.$valid", function () {
+        $scope.$watch("main.activityEnrolForm.$valid", function () {
             disableXMLSave()
         }, true);
 
         function disableXMLSave() {
 
-            vm.disableXML = vm.actvityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
+            vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
         }
 
         function disableJSONSave() {
@@ -131,6 +157,7 @@
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
                 vm.activityService.transformFromFileObj(resultJson);
+                vm.activityRoot = {};
                 vm.activityRoot = {};
                 angular.extend(vm.activityRoot, vm.activityService.getModelInfo())
                 _setComplete();
