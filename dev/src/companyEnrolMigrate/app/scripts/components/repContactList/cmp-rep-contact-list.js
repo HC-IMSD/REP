@@ -121,6 +121,15 @@
             vm.selectRecord = (vm.contactList.length - 1);
             vm.setValid(false);
         }
+
+        vm.disableAdd = function () {
+
+            if (vm.isDetailValid && vm.contactList.length < 2) {
+                return false;
+            }
+            return true;
+
+        }
     }
 
 })();

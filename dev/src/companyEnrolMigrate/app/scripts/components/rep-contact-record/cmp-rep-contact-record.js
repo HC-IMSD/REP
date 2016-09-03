@@ -26,7 +26,6 @@
                 isDetailValid: '&'
             }
         });
-    //contactRecCtrl.$inject = ['$scope']
     function contactRecCtrl() {
         var vm = this;
         vm.savePressed = false;
