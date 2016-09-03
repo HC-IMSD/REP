@@ -18,7 +18,10 @@
             'activityChange',
             'activityForm',
             'numberFormat',
-            'contactModule26'
+            'contactModule26',
+            'contactModule',
+            'contactModule25'
+
 
         ])
 })();

@@ -31,10 +31,7 @@
             <div class="row mrgn-tp-md mrgn-bttm-lg">
                 <div class="btn-group-sm col-md-12 text-right">
                     <input type="submit" value="Add Contact" class="btn btn-primary"
-                           ng-click="contactListCtrl.addContact()" ng-disabled="!contactListCtrl.isAddContact">
-                    <input type="submit" value="Cancel" class="btn btn-default"
-                           data-ng-show="contactListCtrl.newContactFormShow"
-                           ng-click="contactListCtrl.newAdrFormShow=false">
+                           ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAdd()">
                 </div>
             </div>
 

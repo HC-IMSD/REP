@@ -298,15 +298,16 @@
                             <cmp-activity-change
                                     activity-record="main.activityRoot.notifiableChangeTypes"></cmp-activity-change>
                         </div>
-                        <div>
-                            <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
-                                                  get-new-contact="main.activityService.createRepContact()"></cmp-rep-contact-list>
-                        </div>
+
 
                         <pre>overall: {{main.activityRoot.relatedActivity | json : spacing}}</pre>
 
                     </div>
                 </section>
+                <div>
+                    <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
+                                          get-new-contact="main.activityService.createRepContact()"></cmp-rep-contact-list>
+                </div>
                 <div class="row">
                     <div class="form-group col-md-3">
                         <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()">
