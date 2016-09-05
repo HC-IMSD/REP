@@ -3,6 +3,7 @@
     angular
         .module('dossierApp', [
             'pascalprecht.translate',
+            'companyService',
             'ngMessages',
             'ngAria',
             'addressList2',
