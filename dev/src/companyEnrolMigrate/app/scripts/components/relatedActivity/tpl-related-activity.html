@@ -75,7 +75,7 @@
                         <div class="form-group col-xs-3"
                              ng-class="{'has-error':activityCtrl.activityRecForm.dossierId.$invalid}">
                             <label for="dossierId_{{$id}}" class="required full-width">
-                                <span class="field-name">{{"DOSSIER_ID" |translate}}</span>
+                                <span class="field-name">{{"DOSSIER_ID_PREV" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="dossierId_{{$id}}" name="dossierId"
                                        ng-model="activityCtrl.activityModel.dossierId"
@@ -138,7 +138,7 @@
                             <h3>{{"ASSOC_DINS" |translate}}</h3>
 
                             <div ng-repeat="record in activityCtrl.activityModel.assocDins">
-                                <cmp-din-details din-record="record" din-index="$index"
+                                <cmp-din-details din-record="record" din-index="$index" show-errors="activityCtrl.showErrors()"
                                                  delete-din="activityCtrl.deleteDin(dinIndex)"></cmp-din-details>
                             </div>
                         </div>

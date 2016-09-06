@@ -23,7 +23,7 @@
                 dinRecord: '<',
                 dinIndex:'<',
                 deleteDin:'&',
-                showError:'&'
+                showErrors:'&'
             }
         });
    dinDetailsCtrl.$inject = [];
@@ -52,12 +52,12 @@
             vm.deleteDin({dinIndex:vm.detailsIndex})
         }
         vm.showError=function(isTouched,isInvalid){
-            if ((isInvalid && isTouched) ) {
-                //|| (vm.showErrors() && isInvalid )
+
+            console.log("Din is invalid"+isInvalid);
+            if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )){
                 return true
             }
             return false
         }
-
     }
 })();

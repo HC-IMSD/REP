@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        Activity Enrolment form for Health Canada
+        Activity Enrolment Form for Health Canada
     </title>
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <!-- Meta data -->
@@ -114,9 +114,11 @@
                                               is-incomplete="main.isIncomplete"
                                               configure-id-field="main.configField"></cmp-application-info>
                         <div class="row">
-                            <div class="col-xs-3">
+                            <div class="col-xs-3"   ng-class="{'has-error':main.activityEnrolForm.companyId.$invalid}">
                                 <div class="form-group">
-                                    <label for="companyId_{{$id}}">{{'COMPANY_ID' |translate}}
+                                    <label for="companyId_{{$id}}" class="required">
+                                        <span class="field-name">{{'COMPANY_ID' |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <input type="text" class="form-control" id="companyId_{{$id}}"
                                                maxlength="6" name="companyId" ng-minlength="6"
                                                ng-model="main.activityRoot.companyId" ng-required="true"/>
@@ -132,14 +134,15 @@
                                 </div>
                             </div>
                             <div class="col-md-3 form-group">
-                                <label for="dossierId_{{$id}}" class='text-left'>{{'DOSSIER_ID'|translate}}
+                                <label for="dossierId_{{$id}}" class="required">
+                                    <span class="field-name">{{'DOSSIER_ID'|translate}}</span>
+                                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                     <div class="rep-input-group">
                                         <span class="input-group-addon">HC6-024-</span>
-
                                         <div ng-class="{'has-error':main.activityEnrolForm.dossierId.$invalid}">
-                                            <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
-                                                   size="6"
-                                                   maxlength="6" name="dossierId" ng-minlength="6" name="dossierId"
+                                                <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
+                                                   size="7"
+                                                   maxlength="7" name="dossierId" ng-minlength="7" name="dossierId"
                                                    ng-model="main.activityRoot.dossierId" ng-required="true"/>
                                         </div>
                                     </div>
@@ -148,14 +151,16 @@
                               ng-if="main.showError(main.activityEnrolForm.dossierId.$touched, main.activityEnrolForm.dossierId.$invalid)"
                               ng-messages="main.activityEnrolForm.dossierId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                              <span ng-message="minlength"><span translate="MSG_LENGTH_7"></span></span>
                         </span>
                                     </strong>
                                 </label>
                             </div>
                             <div class="col-xs-4" ng-class="{'has-error':main.activityEnrolForm.activityLead.$invalid}">
                                 <div class="form-group">
-                                    <label for="activityLead_{{$id}}">{{'ACTIVITY_LEAD' |translate}}
+                                    <label for="activityLead_{{$id}}" class="required">
+                                        <span class="field-name"> {{'ACTIVITY_LEAD' |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="activityLead_{{$id}}"
                                                 ng-options="lead |translate for lead in main.activityService.getActivityLeadList(1) | orderByTranslated"
                                                 name="activityLead"
@@ -177,7 +182,9 @@
                             <div class="col-xs-8"
                                  ng-class="{'has-error':main.activityEnrolForm.activityType.$invalid}">
                                 <div class="form-group">
-                                    <label for="regActivityType_{{$id}}">{{'ACTIVITY_TYPE' |translate}}
+                                    <label for="regActivityType_{{$id}}" class="required">
+                                        <span class="field-name">{{'ACTIVITY_TYPE' |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="regActivityType_{{$id}}"
                                                 ng-options="activity |translate for activity in main.activityService.getActivityTypeList(1) | orderByTranslated"
                                                 name="activityType" ng-model="main.activityRoot.regActivityType"
@@ -198,7 +205,9 @@
                             <div class="col-xs-6"
                                  ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
                                 <div class="form-group">
-                                    <label for="feeClass_{{$id}}">{{'FEE_CLASS' |translate}}
+                                    <label for="feeClass_{{$id}}" class="required">
+                                        <span class="field-name">{{'FEE_CLASS' |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="feeClass_{{$id}}"
                                                 name="feeClass" ng-model="main.activityRoot.feeClass"
                                                 ng-required="true">
@@ -219,10 +228,12 @@
                         </div>
                         <div class="row" ng-class="{'has-error':main.activityEnrolForm.notlasa.$invalid}">
                             <div class="form-group col-xs-12">
-                                <div class="checkbox">
+                                <div class="checkbox required">
                                     <label for="chk-lasa_{{$id}}">
                                         <input type="checkbox" ng-model="main.activityRoot.notLasa" name="chkLasa"
-                                               id="chk-lasa_{{$id}}"/>{{"NOT_LASA"|translate}}
+                                               id="chk-lasa_{{$id}}"/>
+                                        {{"NOT_LASA"|translate}}
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <strong id="notlasa-error" class="error"
                                                 ng-if="main.showErrorCheck(main.activityEnrolForm.chkLasa.$touched,main.activityRoot.notLasa)">
                  <span class="label label-danger"
@@ -235,9 +246,11 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12">
-                                <label for="reason-filing_{{$id}}">
-                                    {{"REASON_FILE"|translate}}
+                            <div class="col-xs-12 form-group"
+                                 ng-class="{'has-error':main.activityEnrolForm.reasonFiling.$invalid}">
+                                <label for="reason-filing_{{$id}}" class="required">
+                                    <span class="field-name">{{"REASON_FILE"|translate}}</span>
+                                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                     <strong id="reason-filing-error" class="error"
                                             ng-if="main.showError(main.activityEnrolForm.reasonFiling.$invalid,main.activityEnrolForm.reasonFiling.$touched)">
                                 <span class="label label-danger"
@@ -286,7 +299,6 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <cmp-related-activity-list activities="main.activityRoot.relatedActivity" on-update=""
                                                        get-new-activity="main.activityService.getNewActivity()"
                                                        activity-types="main.activityService.getActivityTypeList(isPilot)"
