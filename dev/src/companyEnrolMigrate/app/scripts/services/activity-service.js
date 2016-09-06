@@ -97,18 +97,21 @@
                     reg_activity_type: jsonObj.regActivityType,
                     fee_class: jsonObj.feeClass,
                     not_lasa: jsonObj.notLasa == true ? 'Y' : 'N',
-                    reason_filing: jsonObj.reasonFiling
+                    reason_filing: jsonObj.reasonFiling,
+                    notifiable_change_types: {},
+                    rationale_types: {},
                 }
             };
-
-            activity.ACTIVITY_ENROL.related_activity = this.tranformRelatedActivityToFileObj(jsonObj);
-            activity.ACTIVITY_ENROL.contact_record = this.transformContactListToFileObj(jsonObj.contactRecord);
+            activity[this.rootTag].notifiable_change_types = _mapNotifiableChangeTypesToOutput(jsonObj.notifiableChangeTypes);
+            activity[this.rootTag].rationale_types = _mapRationaleTypeToOutput(jsonObj.rationaleTypes);
+            activity[this.rootTag].related_activity = this.tranformRelatedActivityToFileObj(jsonObj);
+            activity[this.rootTag].contact_record = this.transformContactListToFileObj(jsonObj.contactRecord);
             //do other stuff
             if (jsonObj.dossierId) {
-                activity.ACTIVITY_ENROL.dossier_id_concat = (jsonObj.dossierIdPrefix + jsonObj.dossierId);
+                activity[this.rootTag].dossier_id_concat = (jsonObj.dossierIdPrefix + jsonObj.dossierId);
             } else {
                 //if there is no id value just make this empty
-                activity.ACTIVITY_ENROL.dossier_id_concat = "";
+                activity[this.rootTag].dossier_id_concat = "";
             }
 
 
@@ -117,14 +120,13 @@
         };
 
         ActivityService.prototype.mapContactList = function (jsonObj) {
-            var result = [];
-            result = _mapRegulatoryContactList(jsonObj);
+
+            var result = _mapRegulatoryContactList(jsonObj);
             return result;
         }
         ActivityService.prototype.transformContactListToFileObj = function (jsonObj) {
             return _transformRegulatoryContactListToFileObj(jsonObj);
         }
-
 
 
         ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
@@ -167,25 +169,30 @@
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
 
+            model.notifiableChangeTypes = _transformNotifiableChangeTypeFromFileObj(jsonObj.notifiable_change_types);
+            model.rationaleTypes = _transformRationaleTypeFromFileObj(jsonObj.rationale_types);
+
+
             var relatedActivities = {relatedActivity: []};
             var repContacts = {contactRecord: []};
+
             if (jsonObj.related_activity) {
-                relatedActivities = {relatedActivity: this.getRelatedActivityList(jsonObj.related_activity)};
+                relatedActivities.relatedActivity = this.getRelatedActivityList(jsonObj.related_activity);
             }
             if (jsonObj.contact_record) {
-                repContacts = this.mapContactList(jsonObj.contact_record)
+                repContacts.contactRecord = this.mapContactList(jsonObj.contact_record)
             }
-            return angular.extend(model, relatedActivites, repContacts);
+            return angular.extend(model, relatedActivities, repContacts);
         };
 
-        ActivityService.prototype.getRelatedActivityList=function(activityList){
+        ActivityService.prototype.getRelatedActivityList = function (activityList) {
             var listResult = [];
             if (!activityList) return listResult;
             if (!(activityList instanceof Array)) {
                 //make it an array, case there is only one
                 activityList = [adrLactivityListist]
             }
-            for(var i=0;i<activityList.length;i++){
+            for (var i = 0; i < activityList.length; i++) {
                 listResult.push(_transformRelatedRegActivityFromFileObj(activityList[i]));
             }
             return listResult;
@@ -204,17 +211,15 @@
         };
 
         ActivityService.prototype.getNewActivity = function () {
-            var activity= {
-                activityId:"1",
+            var activity = {
+                activityId: "1",
                 "regActivityType": "",
                 "dateCleared": "",
-                "controlNumber":"",
-                "dossierId":"",
-                "manufacturerName":"",
-                "reasonFiling":"",
-                "assocDins" : [
-
-                ]
+                "dstsControlNumber": "",
+                "dossierId": "",
+                "manufacturerName": "",
+                "reasonFiling": "",
+                "assocDins": {}
             };
             return activity;
         };
@@ -228,29 +233,29 @@
                 "PHARMA",
                 "PMVIGILANCE"
             ];
-            if(!isPilot){
-                leadList.push("MD","VET","UNASSIGNED");
+            if (!isPilot) {
+                leadList.push("MD", "VET", "UNASSIGNED");
             }
-               return leadList;
+            return leadList;
 
         };
 
 
-        ActivityService.prototype.getActivityTypeList=function(isPilot){
+        ActivityService.prototype.getActivityTypeList = function (isPilot) {
 
-            var activityList=[
-            "CTA",
-            "CTAA",
-            "NDS",
-            "SNDS",
-            "ANDS",
-            "SANDS",
-            "NC",
-            "DIN",
-            "PDC",
-            "ADMIN"
+            var activityList = [
+                "CTA",
+                "CTAA",
+                "NDS",
+                "SNDS",
+                "ANDS",
+                "SANDS",
+                "NC",
+                "DIN",
+                "PDC",
+                "ADMIN"
             ];
-            if(!isPilot){
+            if (!isPilot) {
                 activityList.push(
                     "VIND",
                     "VINDAM",
@@ -297,7 +302,7 @@
         }
 
         for (var i = 0; i < jsonObj.length; i++) {
-            result.push(_mapRepContactToOutput(repObj)(jsonObj[i]));
+            result.push(_mapRepContactToOutput(jsonObj[i]));
         }
         return (result)
 
@@ -309,6 +314,8 @@
 
         var repContact = _transformContactFromFileObj(repObj.rep_submission_contact);
         repContact.repRole = repObj.rep_submission_contact_role;
+        console.log("Rep contact " + JSON.stringify(repContact));
+        return (repContact);
     }
 
     function _mapRepContactToOutput(repObj) {
@@ -356,8 +363,6 @@
     }
 
 
-
-
     //TODO make a standard service
 
     function _createContactModel() {
@@ -389,7 +394,7 @@
             "replaceSterility": false,
             "confirmitoryStudies": false,
             "otherRationale": false,
-                "otherRationaleDetails": ""
+            "otherRationaleDetails": ""
             /* }*/
         };
     }
@@ -407,7 +412,7 @@
             "containerSizeChange": false,
             "packagingSpecChange": false,
             "packagingMaterialsChange": false,
-                "otherChangeDetails": ""
+            "otherChangeDetails": ""
             //}
         };
     }
@@ -421,16 +426,16 @@
     function _mapNotifiableChangeTypesToOutput(jsonObj) {
         if (!jsonObj) return null;
         return {
-            "text_label_change": jsonObj.textLabelChange,
-            "drug_substance_change": jsonObj.drugSubstanceChange,
-            "formulation_change": jsonObj.formulationChange,
-            "specification_change": jsonObj.specificationChange,
-            "expiry_storage_change": jsonObj.expiryStorageChange,
-            "manufact_method_change": jsonObj.manufactMethodChange,
-            "manufact_site_change": jsonObj.manufactSiteChange,
-            "container_size_change": jsonObj.containerSizeChange,
-            "packaging_spec_change": jsonObj.packagingSpecChange,
-            "packaging_materials_change": jsonObj.packagingMaterialsChange,
+            "text_label_change": jsonObj.textLabelChange === true ? 'Y' : 'N',
+            "drug_substance_change": jsonObj.drugSubstanceChange === true ? 'Y' : 'N',
+            "formulation_change": jsonObj.formulationChange === true ? 'Y' : 'N',
+            "specification_change": jsonObj.specificationChange === true ? 'Y' : 'N',
+            "expiry_storage_change": jsonObj.expiryStorageChange === true ? 'Y' : 'N',
+            "manufact_method_change": jsonObj.manufactMethodChange === true ? 'Y' : 'N',
+            "manufact_site_change": jsonObj.manufactSiteChange === true ? 'Y' : 'N',
+            "container_size_change": jsonObj.containerSizeChange === true ? 'Y' : 'N',
+            "packaging_spec_change": jsonObj.packagingSpecChange === true ? 'Y' : 'N',
+            "packaging_materials_change": jsonObj.packagingMaterialsChange === true ? 'Y' : 'N',
             "other_change_details": jsonObj.otherChangeDetails
         };
     }
@@ -444,16 +449,16 @@
     function _transformNotifiableChangeTypeFromFileObj(jsonObj) {
         if (!jsonObj) return null;
         return {
-            "textLabelChange": jsonObj.text_label_change,
-            "drugSubstanceChange": jsonObj.drug_substance_change,
-            "formulationChange": jsonObj.formulation_change,
-            "specificationChange": jsonObj.specification_change,
-            "expiryStorageChange": jsonObj.expiry_storage_change,
-            "manufactMethodChange": jsonObj.manufact_method_change,
-            "manufactSiteChange": jsonObj.manufact_site_change,
-            "containerSizeChange": jsonObj.container_size_change,
-            "packagingSpecChange": jsonObj.packaging_spec_change,
-            "packagingMaterialsChange": jsonObj.packaging_materials_change,
+            "textLabelChange": jsonObj.text_label_change === 'Y',
+            "drugSubstanceChange": jsonObj.drug_substance_change === 'Y',
+            "formulationChange": jsonObj.formulation_change === 'Y',
+            "specificationChange": jsonObj.specification_change === 'Y',
+            "expiryStorageChange": jsonObj.expiry_storage_change === 'Y',
+            "manufactMethodChange": jsonObj.manufact_method_change === 'Y',
+            "manufactSiteChange": jsonObj.manufact_site_change === 'Y',
+            "containerSizeChange": jsonObj.container_size_change === 'Y',
+            "packagingSpecChange": jsonObj.packaging_spec_change === 'Y',
+            "packagingMaterialsChange": jsonObj.packaging_materials_change === 'Y',
             "otherChangeDetails": jsonObj.other_change_details
         };
     }
@@ -462,13 +467,13 @@
     function _transformRationaleTypeFromFileObj(jsonObj) {
         if (!jsonObj) return null;
         return {
-            "newRoa": jsonObj.new_roa,
-            "newClaims": jsonObj.new_claims,
-            "changeFormulation": jsonObj.change_formulation,
-            "changeDrugSubstance": jsonObj.change_drug_substance,
-            "replaceSterility": jsonObj.replace_sterility,
-            "confirmitoryStudies": jsonObj.confirmitory_studies,
-            "otherRationale": jsonObj.other_rationale,
+            "newRoa": jsonObj.new_roa === 'Y',
+            "newClaims": jsonObj.new_claims === 'Y',
+            "changeFormulation": jsonObj.change_formulation === 'Y',
+            "changeDrugSubstance": jsonObj.change_drug_substance === 'Y',
+            "replaceSterility": jsonObj.replace_sterility === 'Y',
+            "confirmitoryStudies": jsonObj.confirmitory_studies === 'Y',
+            "otherRationale": jsonObj.other_rationale === 'Y',
             "otherRationaleDetails": jsonObj.other_rationale_details
         };
     }
@@ -476,13 +481,13 @@
     function _mapRationaleTypeToOutput(jsonObj) {
         if (!jsonObj) return null;
         return {
-            "new_roa": jsonObj.newRoa,
-            "new_claims": jsonObj.newClaims,
-            "change_formulation": jsonObj.changeFormulation,
-            "change_drug_substance": jsonObj.changeDrugSubstance,
-            "replace_sterility": jsonObj.replaceSterility,
-            "confirmitory_studies": jsonObj.confirmitoryStudies,
-            "other_rationale": jsonObj.otherRationale,
+            "new_roa": jsonObj.newRoa === true ? 'Y' : 'N',
+            "new_claims": jsonObj.newClaims === true ? 'Y' : 'N',
+            "change_formulation": jsonObj.changeFormulation === true ? 'Y' : 'N',
+            "change_drug_substance": jsonObj.changeDrugSubstance === true ? 'Y' : 'N',
+            "replace_sterility": jsonObj.replaceSterility === true ? 'Y' : 'N',
+            "confirmitory_studies": jsonObj.confirmitoryStudies === true ? 'Y' : 'N',
+            "other_rationale": jsonObj.otherRationale === true ? 'Y' : 'N',
             "other_rationale_details": jsonObj.otherRationaleDetails
         };
     }
@@ -491,17 +496,22 @@
         if (!jsonObj) return null;
         var regActivityType = {
             "reg_activity_type": jsonObj.regActivityType,
-            "date_cleared": jsonObj.dateCleared,
-            "control_number": jsonObj.controlNumber,
+            "date_cleared": "",
+            "control_number": jsonObj.dstsControlNumber,
             "dossier_id": jsonObj.dossierId,
             "manufacturer_name": jsonObj.manufacturerName,
             "reason_filing": jsonObj.reasonFiling,
             "assoc_dins": {}
         };
-        var dins = _mapRelatedDinsToOutput(jsonObj);
-        if (dins) {
-            regActivityType.assoc_dins.din_number = dins;
+        var dateCleared = jsonObj.dateCleared;
+        if (dateCleared) {
+            console.log("cleared" + jsonObj.dateCleared)
+            regActivityType.date_cleared = dateCleared.getUTCFullYear() + '-' + (dateCleared.getUTCMonth() + 1) + '-' + dateCleared.getUTCDate();
         }
+        var dins = _mapRelatedDinsToOutput(jsonObj.assocDins);
+        // if (dins) {
+        regActivityType.assoc_dins = dins;
+        //}
         return regActivityType;
     }
 
@@ -509,42 +519,63 @@
         if (!jsonObj) return null;
         var regActivityType = {
             "regActivityType": jsonObj.reg_activity_type,
-            "dateCleared": jsonObj.date_cleared,
-            "controlNumber": jsonObj.control_number,
+            "dateCleared": "",
+            "dstsControlNumber": jsonObj.control_number,
             "dossierId": jsonObj.dossier_id,
             "manufacturerName": jsonObj.manufacturer_name,
             "reasonFiling": jsonObj.reason_filing
         };
-        var dins = _transformRelatedDinsListFromFileObj(jsonObj);
+        if (jsonObj.date_cleared) {
+            regActivityType.dateCleared = _parseDate(jsonObj.date_cleared);
+        }
+        var dins = _transformRelatedDinsListFromFileObj(jsonObj.assoc_dins);
         regActivityType.assocDins = {};
-        regActivityType.assocDins.dinNumber = dins; //should always be an array
+        if (dins) {
+            regActivityType.assocDins = dins; //should always be an array
+        }
         return regActivityType;
     }
-
 
 
     function _transformRelatedDinsListFromFileObj(jsonObj) {
         var result = [];
         if (!jsonObj) return result;
 
-        if (jsonObj.hasOwnProperty('din_number')) {
-            angular.forEach(jsonObj.din_number, function (value, key) {
-                this.push(value);
-            }, result);
+        if (!(jsonObj instanceof Array)) {
+            //make it an array, case there is only one
+            jsonObj = [jsonObj]
+        }
+        result = [];
+        for (var i = 0; i < jsonObj.length; i++) {
+            result.push({"dinNumber": jsonObj[i].din_number});
         }
         return result;
     }
 
     function _mapRelatedDinsToOutput(jsonObj) {
-        var result = [];
+        var result = "";
         if (!jsonObj) return result;
-        if (jsonObj.hasOwnProperty('dinNumber')) {
-            angular.forEach(jsonObj.dinNumber, function (value, key) {
-                this.push(value);
-            }, result);
+        if (!(jsonObj instanceof Array)) {
+            //make it an array, case there is only one
+            jsonObj = [jsonObj]
         }
+        result = [];
+        for (var i = 0; i < jsonObj.length; i++) {
+            result.push({"din_number": jsonObj[i].dinNumber});
+        }
+
         return result;
     }
+
+    function _parseDate(value) {
+        var dateArray = value.split('-');
+        if (dateArray.length != 3) {
+            console.error(("_parseDate error not 3 parts"))
+        }
+        var aDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+        return aDate;
+    }
+
 
 })();
 

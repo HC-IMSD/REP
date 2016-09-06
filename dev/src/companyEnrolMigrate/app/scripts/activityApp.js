@@ -143,6 +143,7 @@
         function disableXMLSave() {
 
             vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
+            //  vm.disableXML = vm.companyEnrolForm.$invalid || (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
         }
 
         function disableJSONSave() {

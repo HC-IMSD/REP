@@ -57,7 +57,7 @@
         vm.$onInit = function () {
             //local var from binding
            vm.activityList = vm.activities;
-            vm.activityTypeList = vm.activityTypes({isPilot: true}); //is pilot
+            vm.activityTypeList = vm.activityTypes({isPilot: false}); //is pilot
 
         };
 

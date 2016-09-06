@@ -34,6 +34,7 @@
         vm.selectRecord = -1; //the record to select
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.contactList = [];
+        vm.oneRecord = ""; //using required as the validaiton
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
@@ -61,8 +62,8 @@
         }
         vm.$onChanges = function (changes) {
             if (changes.contacts) {
-                console.log("changes to contact List")
                 vm.contactList = changes.contacts.currentValue;
+                vm.updateErrorState();
             }
 
         }
@@ -80,7 +81,8 @@
 
         vm.showError = function () {
 
-            if ((vm.contactListForm.$invalid && !vm.contactListForm.$pristine)) {
+            if ((vm.contactListForm.$invalid )) {
+                //&& !vm.contactListForm.$pristine
                 return true
             }
             return false
@@ -91,9 +93,17 @@
                 $filter('filter')(vm.contactList, {repRole: record.repRole}, true)[0]
             ); //TODO fix filter
             vm.contactList[idx] = angular.copy(record);
-
+            vm.updateErrorState();
         }
 
+        vm.updateErrorState = function () {
+            if (vm.contactList && vm.contactList.length > 0) {
+                vm.oneRecord = "is value";
+            } else {
+                vm.oneRecord = "";
+            }
+
+        }
         vm.deleteContact = function (cID) {
             var idx = vm.contactList.indexOf(
                 $filter('filter')(vm.contactList, {repRole: cID}, true)[0]
@@ -106,6 +116,7 @@
             }
 
             vm.onUpdate({newList: vm.contactList});
+            vm.updateErrorState();
             vm.setValid(true);
             vm.selectRecord = -1
 

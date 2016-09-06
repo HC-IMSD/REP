@@ -40,14 +40,16 @@
                             <label for="dossierId_{{$id}}" class="required full-width">
                                 <span class="field-name">{{"DATE_CLEARED" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                <input type=date" id="dateCleared_{{$id}}" name="dossierId"
+                                <span class="date-picker-format"></span>
+                                <input type="date" id="dateCleared_{{$id}}" name="dateCleared"
                                        ng-model="activityCtrl.activityModel.dateCleared"
-                                       maxlength="100" size="100"
+                                       ng-pattern="datePattern"
                                        class="form-control full-width" ng-required="true"/>
                                 <strong id="dateCleared-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dateCleared.$touched,activityCtrl.activityRecForm.dateCleared.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.dateCleared.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                               <span ng-message="date"><span translate="MSG_ERR_DATE_FORMAT"></span></span>
                         </span>
                                 </strong>
                             </label>
@@ -72,15 +74,15 @@
                                 </strong>
                             </label>
                         </div>
-                        <div class="form-group col-xs-3"
+                        <div class="form-group col-xs-6"
                              ng-class="{'has-error':activityCtrl.activityRecForm.dossierId.$invalid}">
-                            <label for="dossierId_{{$id}}" class="required full-width">
+                            <label for="dossierId_{{$id}}" class="required">
                                 <span class="field-name">{{"DOSSIER_ID_PREV" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="dossierId_{{$id}}" name="dossierId"
                                        ng-model="activityCtrl.activityModel.dossierId"
-                                       maxlength="100" size="100"
-                                       class="form-control full-width" ng-required="true"/>
+                                       maxlength="18" size="18"
+                                       class="form-control" ng-required="true"/>
                                 <strong id="dossierId-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dossierId.$touched,activityCtrl.activityRecForm.dossierId.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.dossierId.$error">
