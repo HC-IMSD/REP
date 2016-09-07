@@ -10,7 +10,6 @@
         .module('contactModule26', ['contactModule25', 'expandingTable'])
 })();
 
-
 (function () {
     'use strict';
 
@@ -24,6 +23,7 @@
                 contacts: '<',
                 onUpdate: '&',
                 getNewContact: '&',
+                showListErrors: '&'
                 /* isAmend: '&'*/
                 /*companyService:'<'*/
             }
@@ -81,8 +81,7 @@
 
         vm.showError = function () {
 
-            if ((vm.contactListForm.$invalid )) {
-                //&& !vm.contactListForm.$pristine
+            if ((vm.contactListForm.$invalid && !vm.contactListForm.$pristine) || (vm.contactListForm.$invalid && vm.showListErrors())) {
                 return true
             }
             return false

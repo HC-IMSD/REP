@@ -98,6 +98,7 @@
                     fee_class: jsonObj.feeClass,
                     not_lasa: jsonObj.notLasa == true ? 'Y' : 'N',
                     reason_filing: jsonObj.reasonFiling,
+                    is_third_party: jsonObj.isThirdParty ? 'Y' : 'N',
                     notifiable_change_types: {},
                     rationale_types: {},
                 }
@@ -190,7 +191,7 @@
             if (!activityList) return listResult;
             if (!(activityList instanceof Array)) {
                 //make it an array, case there is only one
-                activityList = [adrLactivityListist]
+                activityList = [activityList]
             }
             for (var i = 0; i < activityList.length; i++) {
                 listResult.push(_transformRelatedRegActivityFromFileObj(activityList[i]));
@@ -240,6 +241,14 @@
 
         };
 
+        ActivityService.prototype.isNotifiableChange = function (value) {
+
+            if (!value) return false;
+            if (value === 'NC' || value === 'VNC') {
+                return true;
+            }
+            return false;
+        }
 
         ActivityService.prototype.getActivityTypeList = function (isPilot) {
 
@@ -314,7 +323,7 @@
 
         var repContact = _transformContactFromFileObj(repObj.rep_submission_contact);
         repContact.repRole = repObj.rep_submission_contact_role;
-        console.log("Rep contact " + JSON.stringify(repContact));
+
         return (repContact);
     }
 
@@ -505,13 +514,19 @@
         };
         var dateCleared = jsonObj.dateCleared;
         if (dateCleared) {
-            console.log("cleared" + jsonObj.dateCleared)
+            var month = dateCleared.getUTCMonth() + 1
+            var day = dateCleared.getUTCDate();
+            if (month < 10) {
+                //todo hack
+                month = "0" + month;
+            }
+            if (day < 10) {
+                day = "0" + day;
+            }
             regActivityType.date_cleared = dateCleared.getUTCFullYear() + '-' + (dateCleared.getUTCMonth() + 1) + '-' + dateCleared.getUTCDate();
         }
         var dins = _mapRelatedDinsToOutput(jsonObj.assocDins);
-        // if (dins) {
         regActivityType.assoc_dins = dins;
-        //}
         return regActivityType;
     }
 

@@ -45,15 +45,12 @@
             }
             if(changes.dinIndex){
                 vm.detailsIndex=changes.dinIndex.currentValue;
-                console.log("This is the index "+changes.dinIndex.currentValue)
             }
         };
         vm.delete=function(){
             vm.deleteDin({dinIndex:vm.detailsIndex})
         }
         vm.showError=function(isTouched,isInvalid){
-
-            console.log("Din is invalid"+isInvalid);
             if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )){
                 return true
             }

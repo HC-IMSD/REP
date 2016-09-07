@@ -50,6 +50,8 @@
         vm.applicationInfoService = new ApplicationInfoService();
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
+        vm.showAllErrors = false;
+
         vm.configField = {
             "label": "CONTROL_NUMBER",
             "fieldLength": "6",
@@ -84,6 +86,7 @@
         vm.saveJson = function () {
             var writeResult = _transformFile()
             hpfbFileProcessing.writeAsJson(writeResult, "activityEnrol", vm.rootTag);
+            vm.showAllErrors = true;
         }
         /**
          * @ngdoc method - saves the data model as XML format
@@ -100,6 +103,7 @@
             }
             return false
         }
+        //TODO remove?
         vm.showErrorCheck = function (isTouched, value) {
 
             if ((!value && isTouched) || (vm.showErrors() && !value )) {
@@ -110,10 +114,9 @@
 
         //TODO handled save pressed?
         vm.showErrors = function () {
-            return false;
+            return vm.showAllErrors;
         }
         vm.setThirdParty = function () {
-            console
             vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
         }
         /**
@@ -122,10 +125,10 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                vm.applicationInfoService.incrementMajorVersion();
+                vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
                 updateModelOnApproval();
             } else {
-                vm.applicationInfoService.incrementMinorVersion();
+                vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
             }
             _updateInfoValues();
             var writeResult = vm.activityService.transformToFileObj(vm.activityRoot);
@@ -166,7 +169,9 @@
                 angular.extend(vm.activityRoot, vm.activityService.getModelInfo())
                 _setComplete();
             }
+            vm.showAllErrors = true;
             disableXMLSave();
+            vm.setThirdParty();
         };
         /**
          * ngdoc method to set the application type to amend
