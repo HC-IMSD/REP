@@ -106,49 +106,54 @@
                         <h3 class="panel-title">Regulatory Company Enrolment</h3>
                     </header>
                     <div class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-3 form-group">
-                                <label for="application-type">{{"APPL_TYPE"| translate}}</label>
-                                <select id="application-type"
-                                        ng-options="type |translate for type in main.applTypes"
-                                        ng-model="main.company.applicationType" ng-readonly="true"
-                                        ng-disabled="true"
-                                        class="form-control full-width"></select>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="enr-version-text">Enrolment Version</label>
-                                <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
-                                       ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="date-saved-text">Date Last Saved</label>
-                                <input type="text" class="form-control" id="date-saved-text"
-                                       ng-model="main.company.dateSaved" ng-readonly="true"/>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="company-id-text">Company ID
-                                    <input type="text" class="form-control" id="company-id-text"
-                                           ng-readonly="main.isExtern()" maxlength="6" name="companyID"
-                                           ng-minlength="6"
-                                           ng-model="main.company.companyId" ng-required="!main.isExtern()"/>
-                                    <strong id="code-error" class="error">
-                        <span class="label label-danger" ng-if="main.companyEnrolForm.companyID.$invalid"
-                              ng-messages="main.companyEnrolForm.companyID.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
-                        </span>
-                                    </strong>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-5 form-group">
-                                <button class="btn btn-default" ng-click="main.setAmendState()"
-                                        ng-disabled="main.isIncomplete">
-                                    Amend Enrolment
-                                </button>
-                            </div>
-                        </div>
+
+                        <cmp-application-info record="main.company" user-type="main.userType"
+                                              is-incomplete="main.isIncomplete"
+                                              configure-id-field="main.configCompany"></cmp-application-info>
+                        <!--  <div class="row">
+                              <div class="col-xs-3 form-group">
+                                  <label for="application-type">{{"APPL_STATUS"| translate}}</label>
+                                  <select id="application-type"
+                                          ng-options="type |translate for type in main.applTypes"
+                                          ng-model="main.company.applicationType" ng-readonly="true"
+                                          ng-disabled="true"
+                                          class="form-control full-width"></select>
+                              </div>
+                              <div class="col-xs-3 form-group">
+                                  <label for="enr-version-text">Enrolment Version</label>
+                                  <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
+                                         ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
+                              </div>
+                              <div class="col-xs-3 form-group">
+                                  <label for="date-saved-text">Date Last Saved</label>
+                                  <input type="text" class="form-control" id="date-saved-text"
+                                         ng-model="main.company.dateSaved" ng-readonly="true"/>
+                              </div>
+                              <div class="col-xs-3 form-group">
+                                  <label for="company-id-text">Company ID
+                                      <input type="text" class="form-control" id="company-id-text"
+                                             ng-readonly="main.isExtern()" maxlength="6" name="companyID"
+                                             ng-minlength="6"
+                                             ng-model="main.company.companyId" ng-required="!main.isExtern()"/>
+                                      <strong id="code-error" class="error">
+                          <span class="label label-danger" ng-if="main.companyEnrolForm.companyID.$invalid"
+                                ng-messages="main.companyEnrolForm.companyID.$error">
+                              <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                          </span>
+                                      </strong>
+                                  </label>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-xs-5 form-group">
+                                  <button class="btn btn-default" ng-click="main.setAmendState()"
+                                          ng-disabled="main.isIncomplete">
+                                      Amend Enrolment
+                                  </button>
+                              </div>
+                          </div>
+                          -->
                     </div>
 
                     <div>
@@ -258,6 +263,7 @@
 <script src="app/lib/angular-messages.min.js"></script>
 <script src="app/lib/angular-translate.min.js"></script>
 <script src="app/lib/angular-translate-loader-static-files.min.js"></script>
+<script src="app/lib/angular-sanitize.min.js"></script>
 
 <script src="app/lib/angular-aria.min.js"></script>
 <script src="app/scripts/app.js"></script>
@@ -272,7 +278,7 @@
 <script src="app/scripts/components/addressList/cmp-company-address-list.js"></script>
 <script src="app/scripts/components/addressRecord/cmp-address-record.js"></script>
 <script src="app/scripts/components/addressDetails/cmp-address-details.js"></script>
-
+<script src="app/scripts/components/applicationInfo/cmp-application-info.js"></script>
 
 <script src="app/scripts/components/contactRecord/cmp-contact-record.js"></script>
 <script src="app/scripts/components/contactList/cmp-company-contact-list.js"></script>
