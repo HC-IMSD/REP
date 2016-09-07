@@ -64,14 +64,18 @@
                 vm.activityModel.assocDins = [];
             }
             vm.activityModel.assocDins.push({dinNumber: ""})
+            ///form is invalid if adding a din
+            vm.isDetailValid({state: false});
 
         };
+
         vm.deleteDin=function(index){
             //using index in
             if(index> vm.activityModel.assocDins.length-1){
                 return;
             }
             vm.activityModel.assocDins.splice(index, 1);
+            vm.isDetailValid({state: false});
         }
 
 
@@ -123,8 +127,7 @@
             return (vm.savePressed)
         };
         vm.isDinInvalid=function(index){
-            console.log("in invalid "+index)
-            if(vm.activityModel.assocDins[index].dinNumber){
+            if (vm.activityModel.assocDins[index].dinNumber && vm.activityModel.assocDins[index].dinNumber.length === 8) {
                 return false;
             }
             return true
