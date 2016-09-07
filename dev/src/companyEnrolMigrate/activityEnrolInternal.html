@@ -87,7 +87,7 @@
     <div>
         <ng-form id="reg-activity-form" name="main.activityEnrolForm" ng-controller="MainController as main"
                  novalidate="novalidate"
-                 ng-init="main.initUser('EXT')">
+                 ng-init="main.initUser('INT')">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading">
                     <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
@@ -114,7 +114,7 @@
                                               is-incomplete="main.isIncomplete" set-type="main.setApplicationType(type)"
                                               configure-id-field="main.configField"></cmp-application-info>
                         <div class="row">
-                            <div class="col-xs-3"   ng-class="{'has-error':main.activityEnrolForm.companyId.$invalid}">
+                            <div class="col-xs-3" ng-class="{'has-error':main.activityEnrolForm.companyId.$invalid}">
                                 <div class="form-group">
                                     <label for="companyId_{{$id}}" class="required">
                                         <span class="field-name">{{'COMPANY_ID' |translate}}</span>
@@ -137,10 +137,12 @@
                                 <label for="dossierId_{{$id}}" class="required">
                                     <span class="field-name">{{'DOSSIER_ID'|translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
+
                                     <div class="rep-input-group">
                                         <span class="input-group-addon">HC6-024-</span>
+
                                         <div ng-class="{'has-error':main.activityEnrolForm.dossierId.$invalid}">
-                                                <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
+                                            <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
                                                    size="7"
                                                    maxlength="7" name="dossierId" ng-minlength="7" name="dossierId"
                                                    ng-model="main.activityRoot.dossierId" ng-required="true"/>

@@ -55,7 +55,8 @@
         vm.configField = {
             "label": "CONTROL_NUMBER",
             "fieldLength": "6",
-            "tagName": "dstsControlNumber"
+            "tagName": "dstsControlNumber",
+            "errorMsg": "MSG_LENGTH_6"
         };
         vm.yesNoList=["Y","N"]
         vm.initUser = function (id) {
@@ -84,9 +85,10 @@
          * @ngdoc method Saves the model content in JSON format
          */
         vm.saveJson = function () {
-            var writeResult = _transformFile()
+            var writeResult = _transformFile();
             hpfbFileProcessing.writeAsJson(writeResult, "activityEnrol", vm.rootTag);
             vm.showAllErrors = true;
+            _setComplete()
         }
         /**
          * @ngdoc method - saves the data model as XML format
@@ -94,6 +96,7 @@
         vm.saveXML = function () {
             var writeResult = _transformFile()
             hpfbFileProcessing.writeAsXml(writeResult, "activityEnrol", vm.rootTag);
+            _setComplete()
         }
 
         vm.showError = function (isTouched, isInvalid) {
@@ -119,6 +122,12 @@
         vm.setThirdParty = function () {
             vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
         }
+
+        vm.setApplicationType = function (value) {
+
+            vm.activityRoot.applicationType = value;
+            disableXMLSave();
+        }
         /**
          * @ngdcc method updates data and increments version before creating json
          */
@@ -126,7 +135,7 @@
             updateDate();
             if (!vm.isExtern()) {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
-                updateModelOnApproval();
+                vm.activityRoot.applicationType = ApplicationInfoService.prototype.getApprovedType();
             } else {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
             }
