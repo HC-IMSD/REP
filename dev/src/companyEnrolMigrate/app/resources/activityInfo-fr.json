@@ -1,8 +1,7 @@
 {
   "LOAD_ACTIVITY": "fr_Load an Activity Enrolment File",
   "ACTIVE_ENROL": "fr_Regulatory Activity Enrolment",
-  "AMEND_ENROL": "fr_Amend Enrolment",
-  "IS_SOLICITED": "fr_Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?"
+  "IS_SOLICITED": "fr_Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
   "RATIONALE_SNDS": "fr_Rationale for all SNDS, SANDS, (all human drug types); Veterinary Supplemental New Drug Submission (VSNDS), Veterinary Supplemental Abbreviated New Drug Submission( VSANDS) (All veterinary drug types); or for biological drug DIN submissions",
   "NEW_ROA": "fr_New route of administration, dosage form and / or strength",
   "REPLACE_STERIL": "fr_Replace sterility test with process parametric release",
@@ -43,5 +42,7 @@
   "OTHER_DETAILS": "fr_Other Details",
   "DIN_ABRREV": "DIN",
   "DELETE_ACTIVITY": "fr_Delete Activity",
-  "AUT_LETTER": "fr_Please submit the authorization letter with this enrolment"
+  "AUT_LETTER": "fr_Please submit the authorization letter with this enrolment",
+  "DOSSIER_ID_PREV": "fr_Dossier Id (Previously File Number)",
+  "RELATED_ACTIVITY": "fr_Related Activity"
 }

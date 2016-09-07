@@ -49,10 +49,9 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            //how this is currently wired, this will never fire!
             if (changes.activityRecord) {
                 vm.activityModel = angular.copy(changes.activityRecord.currentValue);
-                console.log("Activity model" + JSON.stringify( vm.activityModel))
+
             }
             if (changes.activityList) {
                 console.log("Changes in the value" + changes.activityList.currentValue)
@@ -61,7 +60,10 @@
         };
 
         vm.addDin=function(){
-            vm.activityModel.assocDins.push({dinNumber:""})
+            if (!(vm.activityModel.assocDins instanceof Array)) {
+                vm.activityModel.assocDins = [];
+            }
+            vm.activityModel.assocDins.push({dinNumber: ""})
 
         };
         vm.deleteDin=function(index){

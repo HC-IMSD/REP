@@ -50,10 +50,13 @@
         vm.applicationInfoService = new ApplicationInfoService();
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
+        vm.showAllErrors = false;
+
         vm.configField = {
             "label": "CONTROL_NUMBER",
             "fieldLength": "6",
-            "tagName": "dstsControlNumber"
+            "tagName": "dstsControlNumber",
+            "errorMsg": "MSG_LENGTH_6"
         };
         vm.yesNoList=["Y","N"]
         vm.initUser = function (id) {
@@ -82,8 +85,10 @@
          * @ngdoc method Saves the model content in JSON format
          */
         vm.saveJson = function () {
-            var writeResult = _transformFile()
+            var writeResult = _transformFile();
             hpfbFileProcessing.writeAsJson(writeResult, "activityEnrol", vm.rootTag);
+            vm.showAllErrors = true;
+            _setComplete()
         }
         /**
          * @ngdoc method - saves the data model as XML format
@@ -91,6 +96,7 @@
         vm.saveXML = function () {
             var writeResult = _transformFile()
             hpfbFileProcessing.writeAsXml(writeResult, "activityEnrol", vm.rootTag);
+            _setComplete()
         }
 
         vm.showError = function (isTouched, isInvalid) {
@@ -100,6 +106,7 @@
             }
             return false
         }
+        //TODO remove?
         vm.showErrorCheck = function (isTouched, value) {
 
             if ((!value && isTouched) || (vm.showErrors() && !value )) {
@@ -110,11 +117,16 @@
 
         //TODO handled save pressed?
         vm.showErrors = function () {
-            return false;
+            return vm.showAllErrors;
         }
         vm.setThirdParty = function () {
-            console
             vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
+        }
+
+        vm.setApplicationType = function (value) {
+
+            vm.activityRoot.applicationType = value;
+            disableXMLSave();
         }
         /**
          * @ngdcc method updates data and increments version before creating json
@@ -122,10 +134,10 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                vm.applicationInfoService.incrementMajorVersion();
-                updateModelOnApproval();
+                vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
+                vm.activityRoot.applicationType = ApplicationInfoService.prototype.getApprovedType();
             } else {
-                vm.applicationInfoService.incrementMinorVersion();
+                vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
             }
             _updateInfoValues();
             var writeResult = vm.activityService.transformToFileObj(vm.activityRoot);
@@ -143,6 +155,7 @@
         function disableXMLSave() {
 
             vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
+            //  vm.disableXML = vm.companyEnrolForm.$invalid || (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
         }
 
         function disableJSONSave() {
@@ -165,7 +178,9 @@
                 angular.extend(vm.activityRoot, vm.activityService.getModelInfo())
                 _setComplete();
             }
+            vm.showAllErrors = true;
             disableXMLSave();
+            vm.setThirdParty();
         };
         /**
          * ngdoc method to set the application type to amend

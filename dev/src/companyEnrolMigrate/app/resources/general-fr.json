@@ -25,6 +25,6 @@
   "SECONDARY": "fr_Alternate",
   "TOGGLE_EXPAND": "fr_Click to toggle collapse or expand details of row",
   "SAVE_DRAFT":   "fr_Save Working Copy",
-  "AMEND_ENROL":  "fr_Amend Enrolment",
-  "CONTROL_NUMBER": "fr_Control Number"
+  "CONTROL_NUMBER": "fr_Control Number",
+  "REP_CONTACT_INFO": "fr_Main Contact Information"
 }

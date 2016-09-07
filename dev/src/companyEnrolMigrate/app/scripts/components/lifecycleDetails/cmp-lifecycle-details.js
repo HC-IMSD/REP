@@ -174,6 +174,7 @@
         };
         /**
          * @ngdoc method sets the state of the details field based on
+         * @ngdoc method sets the state of the details field based on
          * what was selected for the details description
          */
         vm.setDetailsState = function () {
@@ -432,7 +433,7 @@
                 "Apr", "May", "Jun", "Jul", "Aug", "Sep",
                 "Oct", "Nov", "Dec"];
             var result = ""
-            result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
+            result = m_names[date.getUTCMonth()] + ". " + date.getUTCDate() + ", " + date.getUTCFullYear();
             return result
         }
         /**

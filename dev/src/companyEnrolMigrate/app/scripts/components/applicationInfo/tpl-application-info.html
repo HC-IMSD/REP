@@ -23,26 +23,25 @@
         <div class="col-xs-3 form-group">
             <label for="field-id-text_{{$id}}">{{infoCtrl.fieldIdLabel |translate}}
                 <input type="text" class="form-control" id="field-id-text_{{$id}}"
-                       ng-readonly="infoCtrl.isExtern()" maxlength="infoCtrl.fieldLength" name="fieldId"
-                       ng-minlength="6"
+                       ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="fieldId"
+                       ng-minlength="{{infoCtrl.fieldLength}}"
                        ng-model="infoCtrl.record[infoCtrl.tagName]" ng-required="!infoCtrl.isExtern()"/>
                 <strong id="code-error" class="error">
                         <span class="label label-danger" ng-if="infoCtrl.applInfoForm.fieldId.$invalid"
                               ng-messages="infoCtrl.applInfoForm.fieldId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                              <span ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
                         </span>
                 </strong>
             </label>
         </div>
     </div>
   <div class="row">
-      <div class="col-xs-3 form-group">
+      <div class="col-xs-6 form-group">
           <div>
               <button class="btn btn-default form-control" name="amendSub" id="amendSub"
-                      ng-click="infoCtrl.setAmendState()"
-                      ng-disabled="infoCtrl.setAsIncomplete">
-                 {{'AMEND_ENROL'||translate}}
+                      ng-click="infoCtrl.setAmendState()" ng-disabled="infoCtrl.setAsIncomplete">
+                  {{'AMEND_ENROL'|translate}}
               </button>
           </div>
       </div>

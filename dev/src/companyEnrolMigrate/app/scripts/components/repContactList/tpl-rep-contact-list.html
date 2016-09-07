@@ -5,17 +5,16 @@
         </header>
         <div class="panel-body">
             <div class="row">
-                <!-- Place generic expander here-->
-                <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false"
-                       ng-model="contactListCtrl.allRolesSelected" required/>
-                <!--     <label>
-                         <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
+                <input type="text" id="oneRecord_{{$id}}" name="oneRecord" ng-show="false"
+                       ng-model="contactListCtrl.oneRecord" required/>
+                <label>
+                    <strong id="contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
                              <span class="label label-danger"
-                                   ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
-                                 <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
+                                   ng-messages="contactListCtrl.contactListForm.oneRecord.$error">
+                                 <span ng-message="required">{{"MSG_ERR_ONE_REP"|translate}}</span>
                              </span>
                          </strong>
-                     </label>-->
+                </label>
                 <cmp-expanding-table list-items="contactListCtrl.contactList"
                                      column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
                                      disable-selection="!contactListCtrl.isDetailValid">

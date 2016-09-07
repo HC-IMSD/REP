@@ -20,7 +20,8 @@
                 record: '<',
                 userType: '<',
                 isIncomplete: '<',
-                configureIdField:'<'
+                configureIdField: '<',
+                setType: '&'
             }
         });
 
@@ -37,6 +38,7 @@
         vm.fieldLength="";
         vm.tagName="fieldId";
         vm.setAsIncomplete = true;
+        vm.errorMsg = "";
 
         vm.$onInit = function () {
             ///do init
@@ -57,11 +59,17 @@
         };
         function _setConfigItems(configJson){
           vm.fieldIdLabel=  configJson.label;
-          vm.fieldLength=  configJson.length;
+            vm.fieldLength = configJson.fieldLength;
           vm.tagName=configJson.tagName;
+            vm.errorMsg = configJson.errorMsg;
         }
         vm.isExtern = function () {
             return vm.formType == "EXT";
         };
+        vm.setAmendState = function () {
+            //TODO hardcode should be service
+            vm.setType({type: 'AMEND'});
+        }
+
     }
 })();
