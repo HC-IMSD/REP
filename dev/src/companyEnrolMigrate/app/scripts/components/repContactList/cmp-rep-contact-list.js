@@ -23,9 +23,8 @@
                 contacts: '<',
                 onUpdate: '&',
                 getNewContact: '&',
-                showListErrors: '&'
-                /* isAmend: '&'*/
-                /*companyService:'<'*/
+                showListErrors: '&',
+                parentDirty: '<'
             }
         });
     contactListCtrl.$inject = ['$filter']
@@ -35,6 +34,7 @@
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.contactList = [];
         vm.oneRecord = ""; //using required as the validaiton
+        vm.isParentDirty = false;
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
@@ -65,6 +65,10 @@
                 vm.contactList = changes.contacts.currentValue;
                 vm.updateErrorState();
             }
+            if (changes.parentDirty) {
+                vm.isParentDirty = changes.parentDirty.currentValue;
+            }
+
 
         }
         vm.isAddContact = function () {
@@ -75,16 +79,17 @@
             return (vm.isDetailValid);
         }
 
+        vm.showNoRecordError = function () {
+            return vm.isParentDirty || vm.showListErrors();
+        }
+
         vm.setValid = function (value) {
             vm.isDetailValid = value; //this is a shared value
         }
 
         vm.showError = function () {
 
-            if ((vm.contactListForm.$invalid && !vm.contactListForm.$pristine) || (vm.contactListForm.$invalid && vm.showListErrors())) {
-                return true
-            }
-            return false
+            return (vm.contactListForm.$invalid && !vm.contactListForm.$pristine) || (vm.contactListForm.$invalid && vm.showListErrors());
         }
 
         vm.onUpdateContactRecord = function (record) {
@@ -133,12 +138,7 @@
         }
 
         vm.disableAdd = function () {
-
-            if (vm.isDetailValid && vm.contactList.length < 2) {
-                return false;
-            }
-            return true;
-
+            return !(vm.isDetailValid && vm.contactList.length < 2);
         }
     }
 

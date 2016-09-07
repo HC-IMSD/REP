@@ -137,10 +137,8 @@
                                 <label for="dossierId_{{$id}}" class="required">
                                     <span class="field-name">{{'DOSSIER_ID'|translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-
                                     <div class="rep-input-group">
                                         <span class="input-group-addon">HC6-024-</span>
-
                                         <div ng-class="{'has-error':main.activityEnrolForm.dossierId.$invalid}">
                                             <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
                                                    size="7"
@@ -319,6 +317,7 @@
                 <div>
                     <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
                                           show-list-errors="main.showErrors()"
+                                          parent-dirty="main.activityEnrolForm.$dirty"
                                           get-new-contact="main.activityService.createRepContact()"></cmp-rep-contact-list>
                 </div>
                 <div class="row">

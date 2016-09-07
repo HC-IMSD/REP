@@ -140,7 +140,8 @@
                             <h3>{{"ASSOC_DINS" |translate}}</h3>
 
                             <div ng-repeat="record in activityCtrl.activityModel.assocDins">
-                                <cmp-din-details din-record="record" din-index="$index" show-errors="activityCtrl.showErrors()"
+                                <cmp-din-details din-record="record" din-index="$index"
+                                                 show-errors="activityCtrl.showErrors()"
                                                  delete-din="activityCtrl.deleteDin(dinIndex)"></cmp-din-details>
                             </div>
                         </div>

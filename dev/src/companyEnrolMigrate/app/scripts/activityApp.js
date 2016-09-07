@@ -99,20 +99,15 @@
             _setComplete()
         }
 
+
         vm.showError = function (isTouched, isInvalid) {
 
-            if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )) {
-                return true
-            }
-            return false
+            return (isInvalid && isTouched) || (vm.showErrors() && isInvalid );
         }
         //TODO remove?
         vm.showErrorCheck = function (isTouched, value) {
 
-            if ((!value && isTouched) || (vm.showErrors() && !value )) {
-                return true
-            }
-            return false
+            return (!value && isTouched) || (vm.showErrors() && !value );
         }
 
         //TODO handled save pressed?
