@@ -113,7 +113,7 @@
                                               is-incomplete="main.isIncomplete" set-type="main.setApplicationType(type)"
                                               configure-id-field="main.configField"></cmp-application-info>
                         <div class="row">
-                            <div class="col-xs-3"   ng-class="{'has-error':main.activityEnrolForm.companyId.$invalid}">
+                            <div class="col-xs-3" ng-class="{'has-error':main.activityEnrolForm.companyId.$invalid}">
                                 <div class="form-group">
                                     <label for="companyId_{{$id}}" class="required">
                                         <span class="field-name">{{'COMPANY_ID' |translate}}</span>
@@ -136,10 +136,12 @@
                                 <label for="dossierId_{{$id}}" class="required">
                                     <span class="field-name">{{'DOSSIER_ID'|translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
+
                                     <div class="rep-input-group">
                                         <span class="input-group-addon">HC6-024-</span>
+
                                         <div ng-class="{'has-error':main.activityEnrolForm.dossierId.$invalid}">
-                                                <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
+                                            <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
                                                    size="7"
                                                    maxlength="7" name="dossierId" ng-minlength="7" name="dossierId"
                                                    ng-model="main.activityRoot.dossierId" ng-required="true"/>
@@ -185,6 +187,7 @@
                                         <span class="field-name">{{'ACTIVITY_TYPE' |translate}}</span>
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="regActivityType_{{$id}}"
+                                                ng-change="main.updateActivityType()"
                                                 ng-options="activity |translate for activity in main.activityService.getActivityTypeList(1) | orderByTranslated"
                                                 name="activityType" ng-model="main.activityRoot.regActivityType"
                                                 ng-required="true"></select>
@@ -303,10 +306,14 @@
                                                        show-list-errrors=""></cmp-related-activity-list>
                         </div>
                         <div>
-                            <cmp-activity-rationale
-                                    activity-record="main.activityRoot.rationaleTypes"></cmp-activity-rationale>
-                            <cmp-activity-change
-                                    activity-record="main.activityRoot.notifiableChangeTypes"></cmp-activity-change>
+                            <div ng-hide="main.isNotifiable">
+                                <cmp-activity-rationale activity-record="main.activityRoot.rationaleTypes">
+                                </cmp-activity-rationale>
+                            </div>
+                            <div ng-show="main.isNotifiable">
+                                <cmp-activity-change activity-record="main.activityRoot.notifiableChangeTypes">
+                                </cmp-activity-change>
+                            </div>
                         </div>
 
 

@@ -52,6 +52,7 @@
         vm.activityRoot = vm.activityService.getModelInfo();
         vm.showAllErrors = false;
         vm.formAmend = false;
+        vm.isNotifiable = false;
 
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -137,6 +138,16 @@
             _updateInfoValues();
             var writeResult = vm.activityService.transformToFileObj(vm.activityRoot);
             return writeResult;
+        }
+
+        vm.updateActivityType = function () {
+            if (vm.activityService.isNotifiableChange(vm.activityRoot.regActivityType)) {
+                vm.activityService.resetRationale();
+                vm.isNotifiable = true;
+            } else {
+                vm.activityService.resetNotifiableChanges();
+                vm.isNotifiable = false;
+            }
         }
 
         function _updateInfoValues() {

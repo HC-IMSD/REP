@@ -35,6 +35,7 @@
         var vm = this;
         vm.savePressed = false;
         vm.formAmend = false;
+        vm.recordReadOnly = false; //needed for din
         //vm.isNotEditable = false;
         //TODO get  model from a servide
         vm.activityModel={};
@@ -58,6 +59,7 @@
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
+                vm.setNotEditable();
             }
         };
 
@@ -150,8 +152,8 @@
          * @returns {boolean}
          */
         vm.setNotEditable = function () {
-
-            return (vm.formAmend && !vm.activityModel.amendRecord);
+            vm.recordReadOnly = vm.formAmend && !vm.activityModel.amendRecord;
+            return (vm.recordReadOnly);
         }
 
     }

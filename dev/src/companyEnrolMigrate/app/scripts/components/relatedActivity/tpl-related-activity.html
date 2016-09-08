@@ -146,6 +146,7 @@
                             <div ng-repeat="record in activityCtrl.activityModel.assocDins">
                                 <cmp-din-details din-record="record" din-index="$index"
                                                  show-errors="activityCtrl.showErrors()"
+                                                 set-readonly="activityCtrl.setNotEditable()"
                                                  delete-din="activityCtrl.deleteDin(dinIndex)"></cmp-din-details>
                             </div>
                         </div>

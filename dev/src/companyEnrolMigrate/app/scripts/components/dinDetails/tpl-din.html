@@ -10,11 +10,11 @@
                     <div>
                         <div class="input-group">
                             <input type="text" size="14 " maxlength="8" only-digits="" ng-model="dinCtrl.record.dinNumber"
-                                   class="form-control"  ng-minlength="8"
+                                   class="form-control" ng-minlength="8" ng-readonly="dinCtrl.setReadonly()"
                                    name="dinValue" id="dinValue_{{$id}}" ng-required="true"/>
 
                       <span class="input-group-btn">
-                        <button class="btn btn-danger" ng-click="dinCtrl.delete()">
+                        <button class="btn btn-danger" ng-click="dinCtrl.delete()" ng-disabled="dinCtrl.setReadonly()">
                             <span aria-label="{{'DELETE_DIN'|translate }} {{dinCtrl.detailsIndex+1}}"></span>
                             {{'DELETE'|translate}}
                         </button>

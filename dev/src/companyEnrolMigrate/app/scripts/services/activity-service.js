@@ -206,6 +206,12 @@
             return listResult;
         };
 
+        ActivityService.prototype.resetRationale = function () {
+            this._default.rationaleTypes = _createRationalTypes();
+        };
+        ActivityService.prototype.resetNotifiableChanges = function () {
+            this._default.notifiableChangeTypes = _createNotifiableChangeTypes();
+        };
 
         /**
          * ngDoc method- mapping from the transaction file json object to the internal representation

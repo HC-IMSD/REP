@@ -23,7 +23,8 @@
                 dinRecord: '<',
                 dinIndex:'<',
                 deleteDin:'&',
-                showErrors:'&'
+                showErrors: '&',
+                setReadonly: '&'
             }
         });
    dinDetailsCtrl.$inject = [];
