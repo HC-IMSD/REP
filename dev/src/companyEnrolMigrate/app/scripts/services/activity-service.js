@@ -107,7 +107,12 @@
             };
             activity[this.rootTag].notifiable_change_types = _mapNotifiableChangeTypesToOutput(jsonObj.notifiableChangeTypes);
             activity[this.rootTag].rationale_types = _mapRationaleTypeToOutput(jsonObj.rationaleTypes);
-            activity[this.rootTag].related_activity = this.tranformRelatedActivityToFileObj(jsonObj);
+
+            var relatedActList = this.tranformRelatedActivityToFileObj(jsonObj);
+            if (relatedActList && relatedActList.length > 0) {
+                //the checksum doesn't like empty tags of format <tag/> and this is optional in the schema
+                activity[this.rootTag].related_activity = relatedActList;
+            }
             activity[this.rootTag].contact_record = this.transformContactListToFileObj(jsonObj.contactRecord);
             //do other stuff
             if (jsonObj.dossierId) {
