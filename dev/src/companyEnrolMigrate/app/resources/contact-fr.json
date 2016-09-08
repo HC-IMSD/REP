@@ -16,6 +16,7 @@
   "PHONE_EXT": "fr_Phone Extension",
   "ADDR_ROLES":"fr_Roles",
   "PHONE_NUMBER": "fr_Phone Number",
-  "CONTACT_INFO": "fr_Contact Information"
+  "CONTACT_INFO": "fr_Contact Information",
+  "AMEND": "fr_Amend"
 
 }

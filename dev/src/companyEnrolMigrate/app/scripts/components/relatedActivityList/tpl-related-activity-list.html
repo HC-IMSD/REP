@@ -13,7 +13,7 @@
                     <cmp-activity-record activity-record="$parent.record"
                                          on-update="activityListCtrl.onUpdateActivityRecord(rec)"
                                          on-delete="activityListCtrl.deleteActivity(activityID)"
-                                         is-amend="activityListCtrl.isAmend()"
+                                         is-amend="activityListCtrl.formAmend"
                                          activity-list="activityListCtrl.activityTypeList"
                                          is-detail-valid="activityListCtrl.setValid(state)"></cmp-activity-record>
 

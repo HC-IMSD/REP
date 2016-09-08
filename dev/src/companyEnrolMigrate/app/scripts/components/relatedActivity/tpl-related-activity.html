@@ -4,15 +4,16 @@
             <div>
                 <fieldset>
                     <legend>{{'RELATED_ACTIVITY' |translate}}</legend>
-                    <div class="row">
-                        <!--<div class="form-group" ng-show="addressRec.isAmend()">
-                            <input class="formControl" id="chk-amend-rec_{{$id}}" type="checkbox"
-                                   ng-change="addressRec.setNotEditable()"
-                                   ng-model="addressRec.addressModel.amendRecord"/>
-                            <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
-                                {{'AMEND_RECORD'|translate}}
-                            </label>
-                        </div>-->
+                    <div class="row" ng-show="activityCtrl.formAmend">
+                        <div class="col-sm-12 form-group">
+                            <div class="checkbox">
+                                <label for="chk-amend-rec_{{$id}}">
+                                    <input type="checkbox" id="chk-amend-rec_{{$id}}" name="amendRecord"
+                                           ng-model="activityCtrl.activityModel.amendRecord"/>
+                                    {{'AMEND_ACTIVITY'|translate}}
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -24,7 +25,8 @@
                                 <select id="activityType_{{$id}}" name="activityType"
                                         ng-model="activityCtrl.activityModel.regActivityType"
                                         ng-options="activity |translate for activity in activityCtrl.activityTypesArray | orderByTranslated"
-                                        class="form-control full-width" ng-required="true"></select>
+                                        class="form-control full-width" ng-required="true"
+                                        ng-disabled="activityCtrl.setNotEditable()"></select>
                                 <strong id="activityType-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.activityType.$touched,activityCtrl.activityRecForm.activityType.$invalid)">
                         <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.activityType.$error">
@@ -43,7 +45,7 @@
                                 <span class="date-picker-format"></span>
                                 <input type="date" id="dateCleared_{{$id}}" name="dateCleared"
                                        ng-model="activityCtrl.activityModel.dateCleared"
-                                       ng-pattern="datePattern"
+                                       ng-pattern="datePattern" ng-readonly="activityCtrl.setNotEditable()"
                                        class="form-control full-width" ng-required="true"/>
                                 <strong id="dateCleared-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dateCleared.$touched,activityCtrl.activityRecForm.dateCleared.$invalid)">
@@ -63,6 +65,7 @@
                                 <input type="text" id="controlNum_{{$id}}" name="controlNum"
                                        ng-model="activityCtrl.activityModel.dstsControlNumber"
                                        maxlength="6" size="6" ng-minlength="6" only-digits=""
+                                       ng-readonly="activityCtrl.setNotEditable()"
                                        class="form-control full-width" ng-required="true"/>
                                 <strong id="controlNum-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.controlNum.$touched,activityCtrl.activityRecForm.controlNum.$invalid)">
@@ -81,7 +84,7 @@
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="dossierId_{{$id}}" name="dossierId"
                                        ng-model="activityCtrl.activityModel.dossierId"
-                                       maxlength="18" size="18"
+                                       maxlength="18" size="18" ng-readonly="activityCtrl.setNotEditable()"
                                        class="form-control" ng-required="true"/>
                                 <strong id="dossierId-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dossierId.$touched,activityCtrl.activityRecForm.dossierId.$invalid)">
@@ -100,7 +103,7 @@
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="manufactName_{{$id}}" name="manufactName"
                                        ng-model="activityCtrl.activityModel.manufacturerName"
-                                       maxlength="80" size="80"
+                                       maxlength="80" size="80" ng-readonly="activityCtrl.setNotEditable()"
                                        class="form-control full-width" ng-required="true"/>
                                 <strong id="manufactName-error" class="error"
                                         ng-if="activityCtrl.showError(activityCtrl.activityRecForm.manufactName.$touched,activityCtrl.activityRecForm.manufactName.$invalid)">
@@ -128,9 +131,10 @@
                     <div class="row">
                         <div class="form-group col-xs-12"
                              ng-class="{'has-error':activityCtrl.activityRecForm.reasonFiling.$invalid}">
-                        <textarea id="reasonFiling_{{$id}}" name="reasonFiling"
+                        <textarea id="reasonFiling_{{$id}}" name="reasonFiling" class="form-control full-width"
                                   ng-model="activityCtrl.activityModel.reasonFiling"
-                                  maxlength="1024" rows="8" class="fullrep" ng-required="true"></textarea>
+                                  ng-readonly="activityCtrl.setNotEditable()"
+                                  maxlength="1024" rows="8" ng-required="true"></textarea>
                         </div>
                     </div>
 
@@ -147,7 +151,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button class="btn btn-primary" ng-click="activityCtrl.addDin()">{{'ADD_DIN'|translate}}
+                        <button class="btn btn-primary" ng-click="activityCtrl.addDin()"
+                                ng-disabled="activityCtrl.setNotEditable()">
+                            {{'ADD_DIN'|translate}}
                         </button>
                     </div>
                     <div class="row">
@@ -158,7 +164,7 @@
                                    ng-click="activityCtrl.updateActivityModel()"
                                    ng-disabled="activityCtrl.setNotEditable()">
                             <input type="submit" value="{{'DELETE_ACTIVITY'|translate}}" class="btn btn-danger"
-                                   ng-click="activityCtrl.delete()">
+                                   ng-click="activityCtrl.delete()" ng-disabled="activityCtrl.setNotEditable()">
                             <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
                                    ng-click="activityCtrl.discardChanges(activityCtrl.activityRecForm)">
                         </div>

@@ -512,6 +512,7 @@
     function _mapRelatedRegActivityToOutput(jsonObj) {
         if (!jsonObj) return null;
         var regActivityType = {
+            "amend_record": jsonObj.amendRecord,
             "reg_activity_type": jsonObj.regActivityType,
             "date_cleared": "",
             "control_number": jsonObj.dstsControlNumber,
@@ -541,6 +542,7 @@
     function _transformRelatedRegActivityFromFileObj(jsonObj) {
         if (!jsonObj) return null;
         var regActivityType = {
+            "amendRecord": jsonObj.amend_record,
             "regActivityType": jsonObj.reg_activity_type,
             "dateCleared": "",
             "dstsControlNumber": jsonObj.control_number,

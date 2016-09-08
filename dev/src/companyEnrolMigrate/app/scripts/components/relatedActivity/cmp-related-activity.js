@@ -22,7 +22,7 @@
                 activityRecord: '<',
                 updateValid: '&',
                 onDelete: '&',
-                isAmend: '&',
+                isAmend: '<',
                 isDetailValid: '&',
                 activityList: '<',
                 onUpdate: '&'
@@ -34,13 +34,12 @@
     function activityRecCtrl($scope) {
         var vm = this;
         vm.savePressed = false;
-
-        vm.isNotEditable = false;
+        vm.formAmend = false;
+        //vm.isNotEditable = false;
         //TODO get  model from a servide
         vm.activityModel={};
 
         vm.$onInit = function () {
-           // vm.activityModel=vm.activityModel;
 
         };
 
@@ -56,6 +55,9 @@
             if (changes.activityList) {
                 console.log("Changes in the value" + changes.activityList.currentValue)
                 vm.activityTypesArray = changes.activityList.currentValue;
+            }
+            if (changes.isAmend) {
+                vm.formAmend = changes.isAmend.currentValue;
             }
         };
 
@@ -127,10 +129,7 @@
             return (vm.savePressed)
         };
         vm.isDinInvalid=function(index){
-            if (vm.activityModel.assocDins[index].dinNumber && vm.activityModel.assocDins[index].dinNumber.length === 8) {
-                return false;
-            }
-            return true
+            return !(vm.activityModel.assocDins[index].dinNumber && vm.activityModel.assocDins[index].dinNumber.length === 8);
         }
 
         /**
@@ -142,10 +141,7 @@
          */
         vm.showError = function (isTouched, isInvalid) {
 
-            if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )) {
-                return true
-            }
-            return false
+            return (isInvalid && isTouched) || (vm.showErrors() && isInvalid );
         }
 
 
@@ -155,11 +151,7 @@
          */
         vm.setNotEditable = function () {
 
-            if (vm.isAmend() && !vm.activityModel.amendRecord) {
-                vm.isNotEditable = true;
-            } else {
-                vm.isNotEditable = false
-            }
+            return (vm.formAmend && !vm.activityModel.amendRecord);
         }
 
     }

@@ -24,7 +24,8 @@
                 onUpdate: '&',
                 getNewContact: '&',
                 showListErrors: '&',
-                parentDirty: '<'
+                parentDirty: '<',
+                isAmend: '<'
             }
         });
     contactListCtrl.$inject = ['$filter']
@@ -34,7 +35,8 @@
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.contactList = [];
         vm.oneRecord = ""; //using required as the validaiton
-        vm.isParentDirty = false;
+        vm.isParentDirty = false; //tracks whether the parent form has been dirtied
+        vm.formAmend = false; //
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
@@ -68,7 +70,9 @@
             if (changes.parentDirty) {
                 vm.isParentDirty = changes.parentDirty.currentValue;
             }
-
+            if (changes.isAmend) {
+                vm.formAmend = changes.isAmend.currentValue;
+            }
 
         }
         vm.isAddContact = function () {

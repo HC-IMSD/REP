@@ -32,7 +32,7 @@
         .module('activityApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', '$location']
+    MainController.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', '$location'];
 
     function MainController(ActivityService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, $location) {
 
@@ -41,7 +41,7 @@
 
         vm.isIncomplete = true;
         vm.userType = "EXT";
-        vm.saveXMLLabel = "SAVE_DRAFT"
+        vm.saveXMLLabel = "SAVE_DRAFT";
         vm.updateValues = 0;
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
@@ -51,6 +51,7 @@
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
         vm.showAllErrors = false;
+        vm.formAmend = false;
 
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -58,9 +59,9 @@
             "tagName": "dstsControlNumber",
             "errorMsg": "MSG_LENGTH_6"
         };
-        vm.yesNoList=["Y","N"]
+        vm.yesNoList = ["Y", "N"];
         vm.initUser = function (id) {
-            if (!id) id = 'EXT'
+            if (!id) id = 'EXT';
             vm.userType = id;
             if (id == 'INT') {
                 vm.saveXMLLabel = "APPROVE_FINAL"
@@ -68,16 +69,15 @@
                 vm.saveXMLLabel = "SAVE_DRAFT"
             }
 
-        }
+        };
 
         /**
          * @ngdoc method -returns whether this application is an amendment
          * @returns {boolean}
          */
         vm.isAmend = function () {
-            //return true
-            return (vm.activityRoot.applicationType ===  vm.applicationInfoService.getAmendType())
-        }
+            return (vm.formAmend);
+        };
 
 
         /**
@@ -89,40 +89,40 @@
             hpfbFileProcessing.writeAsJson(writeResult, "activityEnrol", vm.rootTag);
             vm.showAllErrors = true;
             _setComplete()
-        }
+        };
         /**
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            var writeResult = _transformFile()
+            var writeResult = _transformFile();
             hpfbFileProcessing.writeAsXml(writeResult, "activityEnrol", vm.rootTag);
             _setComplete()
-        }
+        };
 
 
         vm.showError = function (isTouched, isInvalid) {
 
             return (isInvalid && isTouched) || (vm.showErrors() && isInvalid );
-        }
+        };
         //TODO remove?
         vm.showErrorCheck = function (isTouched, value) {
 
             return (!value && isTouched) || (vm.showErrors() && !value );
-        }
+        };
 
         //TODO handled save pressed?
         vm.showErrors = function () {
             return vm.showAllErrors;
-        }
+        };
         vm.setThirdParty = function () {
             vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
-        }
+        };
 
         vm.setApplicationType = function (value) {
-
             vm.activityRoot.applicationType = value;
+            vm.formAmend = vm.activityRoot.applicationType === vm.applicationInfoService.getAmendType();
             disableXMLSave();
-        }
+        };
         /**
          * @ngdcc method updates data and increments version before creating json
          */
@@ -149,18 +149,18 @@
 
         function disableXMLSave() {
 
-            vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
+            vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern());
             //  vm.disableXML = vm.companyEnrolForm.$invalid || (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
-        }
+        };
 
         function disableJSONSave() {
 
             vm.disableJson = (vm.activityRoot.applicationType ==  vm.applicationInfoService.getApprovedType() && vm.isExtern())
-        }
+        };
 
         function _setComplete() {
             vm.isIncomplete = !vm.activityRoot.dstsControlNumber;
-        }
+        };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
@@ -170,13 +170,13 @@
                 vm.activityService.transformFromFileObj(resultJson);
                 vm.activityRoot = {};
                 vm.activityRoot = {};
-                angular.extend(vm.activityRoot, vm.activityService.getModelInfo())
+                angular.extend(vm.activityRoot, vm.activityService.getModelInfo());
                 _setComplete();
             }
             vm.showAllErrors = true;
             disableXMLSave();
             vm.setThirdParty();
-        };
+        }
         /**
          * ngdoc method to set the application type to amend
          * @private
@@ -255,7 +255,7 @@
                     }
 
                 ]
-            })
+            });
             $translateProvider.preferredLanguage('en');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);

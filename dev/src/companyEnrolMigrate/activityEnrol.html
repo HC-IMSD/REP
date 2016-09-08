@@ -109,7 +109,6 @@
                     </header>
                     <div class="panel-body">
 
-
                         <cmp-application-info record="main.activityRoot" user-type="main.userType"
                                               is-incomplete="main.isIncomplete" set-type="main.setApplicationType(type)"
                                               configure-id-field="main.configField"></cmp-application-info>
@@ -263,7 +262,7 @@
                             <div class="form-group col-xs-12">
                                 <textarea ng-model="main.activityRoot.reasonFiling" name="reasonFiling"
                                           id="reason-filing_{{$id}}" ng-required="true" maxlength="1024"
-                                          class="fullrep" rows="8"></textarea>
+                                          class="form-control full-width" rows="8"></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -300,7 +299,8 @@
                             <cmp-related-activity-list activities="main.activityRoot.relatedActivity" on-update=""
                                                        get-new-activity="main.activityService.getNewActivity()"
                                                        activity-types="main.activityService.getActivityTypeList(isPilot)"
-                                                       is-amend="" show-list-errrors=""></cmp-related-activity-list>
+                                                       is-amend="main.formAmend"
+                                                       show-list-errrors=""></cmp-related-activity-list>
                         </div>
                         <div>
                             <cmp-activity-rationale
@@ -316,7 +316,7 @@
                 </section>
                 <div>
                     <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
-                                          show-list-errors="main.showErrors()"
+                                          show-list-errors="main.showErrors()" is-amend="main.formAmend"
                                           parent-dirty="main.activityEnrolForm.$dirty"
                                           get-new-contact="main.activityService.createRepContact()"></cmp-rep-contact-list>
                 </div>

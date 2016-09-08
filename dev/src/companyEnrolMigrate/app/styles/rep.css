@@ -41,9 +41,6 @@ label > select {
     padding-bottom: 99999px;
 }
 
-textarea.fullrep {
-    min-width: 100%
-}
 
 .rep-input-group {
     position: relative;

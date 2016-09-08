@@ -20,7 +20,7 @@
                 activities: '<',
                 onUpdate: '&',
                 getNewActivity:'&',
-                isAmend:'&',
+                isAmend: '<',
                 activityTypes: '&'
             },
             controller: activityListCtrl,
@@ -34,6 +34,7 @@
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailsValid=true; //used to track if details valid. If they are  not do not allow expander collapse
+        vm.formAmend = false;
         vm.activityList = [];
         vm.activityTypeList = [];
         vm.columnDef = [
@@ -63,11 +64,12 @@
 
         vm.$onChanges=function(changes){
             if(changes.activities) {
-                    console.log("Onchanges "+changes.activities.currentValue)
                 if(changes.activities.currentValue) {
                     vm.activityList = changes.activities.currentValue;
-                    console.log("changing" +JSON.stringify(vm.activityList))
                 }
+            }
+            if (changes.isAmend) {
+                vm.formAmend = changes.isAmend.currentValue;
             }
 
         };
