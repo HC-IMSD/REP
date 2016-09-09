@@ -6,7 +6,8 @@ var bowerFiles = require('main-bower-files');
 var print = require('gulp-print');
 var Q = require('q');
 var angularTranslate = require('gulp-angular-translate');
-
+var inject = require('gulp-inject');
+var htmlreplace = require('gulp-html-replace');
 // == PATH STRINGS ========
 
 var paths = {
@@ -19,7 +20,8 @@ var paths = {
     distScriptsProd: './dist.prod/scripts',
     scriptsDevServer: 'devServer/**/*.js',
     translations: 'app/resources/*.json',
-    buildDev: 'build/dev'
+    buildDev: 'build/dev',
+    englishTemplate: '../../../wet_4_0_22_base/content-en.html'
 };
 
 // == PIPE SEGMENTS ========
@@ -332,8 +334,31 @@ gulp.task('watch-prod', ['clean-build-app-prod', 'validate-devserver-scripts'], 
 gulp.task('default', ['clean-build-app-prod']);
 
 
+// Dan added, TODO convert to pipes
 gulp.task('translate', function () {
     return gulp.src(paths.translations)
         .pipe(angularTranslate())
         .pipe(gulp.dest(paths.buildDev));
+});
+
+gulp.task('engActivity', function () {
+    //var target=gulp.src(paths.englishTemplate)
+
+    //var rootContent=gulp.src('dev/src/companyEnrolMigrate/rootContent/activityRoot.html')
+
+    var utc = new Date().toJSON().slice(0, 10);
+    gulp.src(paths.englishTemplate)
+        .pipe(htmlreplace({
+            'dateToday': utc
+        }))
+        .pipe(inject(gulp.src(['rootContent/activityRoot.html']), {
+            starttag: '<!-- inject:mainContent-->',
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(gulp.dest('./build'));
+
+
 });
