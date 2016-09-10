@@ -9,6 +9,7 @@ var angularTranslate = require('gulp-angular-translate');
 var inject = require('gulp-inject');
 var htmlreplace = require('gulp-html-replace');
 var rename = require("gulp-rename");
+var Promise = require('promise')
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -63,14 +64,38 @@ var jsComponentFiles = {
     lifecycleListCmp: paths.components + 'lifecycleList/cmp-lifecycle-list.js',
     relatedActivityCmp: paths.components + 'relatedActivity/cmp-related-activity.js',
     relatedActivityListCmp: paths.components + 'relatedActivityList/cmp-related-activity-list.js',
-    relatedContactRecordCmp: paths.components + 'rep-contact-record/cmp-rep-contact-record.js',
-    relatedContactListCmp: paths.components + 'repContactList/cmp-rep-contact-list.js',
     repContactListCmp: paths.components + 'repContactList/cmp-rep-contact-list.js',
     repContactRecordCmp: paths.components + 'rep-contact-record/cmp-rep-contact-record.js',
     trackRecordCmp: paths.components + 'trackRecord/cmp-track-record.js',
     transactionAddressRecordCmp: paths.components + 'transactionCompanyRecord/cmp-transaction-address-record.js',
     transactionInfoCmp: paths.components + 'transactionInfo/cmp-transaction-info.js',
     countrySelectCmp: paths.components + 'cmp-country-select.js'
+};
+var jsComponentPaths = {
+    activityChangePath: paths.components + 'activityChangeType/',
+    activityMainPath: paths.components + 'activityMain/',
+    activityRationalePath: paths.components + 'activityRationale/',
+    addressDetailsPath: paths.components + 'addressDetails/',
+    addressListPath: paths.components + 'addressList/',
+    addressRecordPath: paths.components + 'addressRecord/',
+    addressRolePath: paths.components + 'addressRole/',
+    applicationInfoPath: paths.components + 'applicationInfo/',
+    contactDetailsPath: paths.components + 'contactDetails/',
+    contactListPath: paths.components + 'contactList/',
+    contactRecordPath: paths.components + 'contactRecord/',
+    dinDetailsPath: paths.components + 'dinDetails/',
+    expandingTablePath: paths.components + 'expandingTable/',
+    fileIOComponentAndDepPath: paths.components + 'fileIO/',
+    lifecycleDetailsPath: paths.components + 'lifecycleDetails/',
+    lifecycleListPath: paths.components + 'lifecycleList/',
+    relatedActivityPath: paths.components + 'relatedActivity/',
+    relatedActivityListPath: paths.components + 'relatedActivityList/',
+    repContactListPath: paths.components + 'repContactList/',
+    repContactRecordPath: paths.components + 'rep-contact-record/',
+    trackRecordPath: paths.components + 'trackRecord/cmp-track-record.js',
+    transactionAddressRecordPath: paths.components + 'transactionCompanyRecord/',
+    transactionInfoPath: paths.components + 'transactionInfo/',
+    countrySelectPath: paths.components
 };
 
 var jsServiceFiles = {
@@ -412,63 +437,38 @@ gulp.task('translate', function () {
         .pipe(gulp.dest(paths.buildDev));
 });
 
-gulp.task('engActivity', function () {
-    //var target=gulp.src(paths.englishTemplate)
 
-    //var rootContent=gulp.src('dev/src/companyEnrolMigrate/rootContent/activityRoot.html')
+gulp.task('copyActivitySrcDev', function () {
+    var copySources = gulp.src([
+            jsComponentPaths.activityChangePath + '**/*',
+            jsComponentPaths.activityMainPath + '**/*',
+            jsComponentPaths.activityRationalePath + '**/*',
+            jsComponentPaths.applicationInfoPath + '**/*',
+            jsComponentPaths.countrySelectPath + 'cmp-country-select.js',
+            jsComponentPaths.dinDetailsPath + '**/*',
+            jsComponentPaths.expandingTablePath + '**/*',
+            jsComponentPaths.fileIOComponentAndDepPath + '**/*',
+            jsComponentPaths.relatedActivityListPath + '**/*',
+            jsComponentPaths.relatedActivityPath + '**/*',
+            jsComponentPaths.repContactListPath + '**/*',
+            jsComponentPaths.repContactRecordPath + '**/*',
+        ],
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildDev))
 
-    var utc = new Date().toJSON().slice(0, 10);
-    var fileReq=[paths.lib + '**/*.js',
-        jsComponentFiles.activityMainCmp,
-        jsComponentFiles.applicationInfoCmp,
-        jsComponentFiles.relatedActivityListCmp,
-        jsComponentFiles.relatedActivityCmp,
-        jsComponentFiles.dinDetailsCmp,
-        jsComponentFiles.repContactListCmp,
-        jsComponentFiles.repContactRecordCmp,
-        jsComponentFiles.activityRationaleCmp,
-        jsComponentFiles.activityChangeCmp,
-        jsComponentFiles.expandingTableCmp,
-        jsComponentFiles.fileIOComponentAndDep,
-        jsServiceFiles.activityService,
-        jsServiceFiles.applicationInfoService,
-        jsServiceFiles.filterLists,
-        jsServiceFiles.dataLists,
-        jsDirectiveFiles.numberOnly,
-        'app/scripts/components/expandingTable/track-record.js',
-        jsAppFiles.activityApp
-    ];
-
-
-    var copySources= gulp.src(fileReq, {read: true,base:'.'});
-    copySources.pipe(gulp.dest(paths.buildDev));
-
-    var sources=gulp.src(fileReq, {read: false});
-    var copySources= gulp.src(paths.englishTemplate, {read: true});
-    copySources.pipe(gulp.dest(paths.buildDev));
-    gulp.src(paths.buildDev+'content-en.html')
-
-        .pipe(htmlreplace({
-            'dateToday': utc
-        }))
-        .pipe(inject(gulp.src(paths.buildDev+'app/**/*.js', {read: false}),{relative:true}))
-        .pipe(rename("actvityEnrol-en.html"))
-        .pipe(gulp.dest(paths.buildDev));
-
-   /* gulp.src(paths.englishTemplate)
-        .pipe(htmlreplace({
-            'dateToday': utc
-        }))
-        .pipe(inject(gulp.src([paths.activityRoot]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-       // .pipe(inject(gulp.src('./src/!**!/!*.js', {read: false}), {ignorePath: 'src'}))
-        .pipe(inject(sources))
-        .pipe(rename("actvityEnrol-en.html"))
-        .pipe(gulp.dest(paths.buildDev));
-*/
 });
+
+gulp.task('injectActivityJS', ['copyActivitySrcDev'], function () {
+    var utc = new Date().toJSON().slice(0, 10);
+    gulp.src(paths.englishTemplate)
+        .pipe(htmlreplace({
+            'dateToday': utc
+        }))
+        .pipe(inject(gulp.src(paths.buildDev + 'app/**/*.js', {read: false}), {
+            ignorePath: '/build/dev/',
+            addRootSlash: false
+        }))
+        .pipe(rename("actvityEnrol-en.html"))
+        .pipe(gulp.dest(paths.buildDev))
+});
+
