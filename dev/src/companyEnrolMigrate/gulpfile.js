@@ -13,6 +13,7 @@ var angularFilesort = require('gulp-angular-filesort')
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
+var wetBase = './wet_4_0_22_base'
 var paths = {
     styles: ['./app/styles/*.css', './app/**/*.scss'],
     index: 'companyEnrol.html',
@@ -23,20 +24,22 @@ var paths = {
     scriptsDevServer: 'devServer/**/*.js',
     translations: 'app/resources/',
     buildDev: './build/dev/',
-    englishTemplate: '../../../wet_4_0_22_base/content-en.html',
+    englishTemplate: wetBase + '/content-en.html',
+    frenchTemplate: wetBase + '/content-fr.html',
     activityRoot: 'rootContent/activityRoot.html',
     lib: './app/lib/',
     scripts: baseScript,
     components: baseScript + '/components/',
     directives: baseScript + '/directives/',
     services: baseScript + '/services/',
-    rootActivity: './app/activityApp.js'
+    rootActivity: './app/activityApp.js',
+    wetBase: wetBase,
 
 };
 
 var placeholders = {
-    mainContent: '<!-- inject:mainContent-->'
-
+    mainContent: '<!-- inject:mainContent-->',
+    dateStamp: 'dateToday'
 };
 
 var jsComponentFiles = {
@@ -302,6 +305,18 @@ pipes.translateDev = function (translateList) {
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDev))
 }
+pipes.insertDateStamp = function (template) {
+
+    var utc = new Date().toJSON().slice(0, 10);
+    var datePH = placeholders.dateStamp
+    return (gulp.src(template)
+            .pipe(htmlreplace({
+                dateToday: utc
+            }))
+    );
+}
+
+
 
 // == TASKS ========
 
@@ -510,15 +525,26 @@ gulp.task('copyActivityAppRoot', function () {
 
 });
 
+gulp.task('copyWetDep', function () {
+    var copySources = gulp.src([paths.wetBase + '/**/*', '!' + paths.englishTemplate, '!' + paths.frenchTemplate],
+        {read: true, base: paths.wetBase});
+    return copySources.pipe(gulp.dest(paths.buildDev))
 
-gulp.task('injectActivityJS', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAppRoot', 'copyActivityTranslateDev'], function () {
+});
 
+gulp.task('clean-devBuild', function () {
+    return (paths.buildDev);
+});
 
-    var utc = new Date().toJSON().slice(0, 10);
-    gulp.src(paths.englishTemplate)
-        .pipe(htmlreplace({
-            'dateToday': utc
-        }))
+gulp.task('cleanBuildActDev', ['clean-devBuild', 'copyWetDep', 'frActivityHtml'], function () {
+    return
+
+});
+
+gulp.task('enActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAppRoot', 'copyActivityTranslateDev'], function () {
+
+    return (
+        pipes.insertDateStamp(paths.englishTemplate)
         .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
             starttag: placeholders.mainContent,
             transform: function (filePath, file) {
@@ -535,7 +561,33 @@ gulp.task('injectActivityJS', ['copyActivitySrcDev', 'copyLibDev', 'copyActivity
 
         .pipe(rename("actvityEnrol-en.html"))
         .pipe(gulp.dest(paths.buildDev))
+    )
 });
+gulp.task('frActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAppRoot', 'copyActivityTranslateDev'], function () {
+
+    return (
+        pipes.insertDateStamp(paths.frenchTemplate)
+            .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
+                starttag: placeholders.mainContent,
+                transform: function (filePath, file) {
+                    // return file contents as string
+                    return file.contents.toString('utf8')
+                }
+            }))
+            .pipe(inject(gulp.src([paths.buildDev + 'app/**/*.js'])
+                .pipe(angularFilesort())
+                , {
+                    ignorePath: '/build/dev/',
+                    addRootSlash: false
+                }))
+
+            .pipe(rename("actvityEnrol-fr.html"))
+            .pipe(gulp.dest(paths.buildDev))
+    )
+});
+
+
+
 
 gulp.task('copyActivityTranslateDev', function () {
     var translationList = [
