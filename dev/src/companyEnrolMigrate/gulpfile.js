@@ -9,12 +9,11 @@ var angularTranslate = require('gulp-angular-translate');
 var inject = require('gulp-inject');
 var htmlreplace = require('gulp-html-replace');
 var rename = require("gulp-rename");
-var Promise = require('promise')
+var angularFilesort = require('gulp-angular-filesort')
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
 var paths = {
-    scripts: ['./app/scripts/**/*.js', '!app/scripts/*.js'],
     styles: ['./app/styles/*.css', './app/**/*.scss'],
     index: 'companyEnrol.html',
     partials: ['app/**/*.html', '!app/index.html'],
@@ -22,7 +21,7 @@ var paths = {
     distProd: './dist/prod',
     distScriptsProd: './dist.prod/scripts',
     scriptsDevServer: 'devServer/**/*.js',
-    translations: 'app/resources/*.json',
+    translations: 'app/resources/',
     buildDev: './build/dev/',
     englishTemplate: '../../../wet_4_0_22_base/content-en.html',
     activityRoot: 'rootContent/activityRoot.html',
@@ -39,12 +38,7 @@ var placeholders = {
     mainContent: '<!-- inject:mainContent-->'
 
 };
-var jsLibFiles = {
-    angular: paths.lib + "angular.min.js",
-    angularMessages: paths.lib + "angular-messages.min.js",
-    angularMessages: paths.lib + "angular-translate.min.js",
-    angularMessages: paths.lib + "angular-translate.min.js"
-}
+
 var jsComponentFiles = {
     activityChangeCmp: paths.components + 'activityChangeType/cmp-activity-change.js',
     activityMainCmp: paths.components + 'activityMain/cmp-activity-main.js',
@@ -108,17 +102,36 @@ var jsServiceFiles = {
     hpfbConstants: paths.services + 'hpfb-constants.js',
     transactionService: paths.services + 'transaction-service.js',
 };
-
-var jsDirectiveFiles={
-    country: paths.directives +'country/country-select.js',
-    numberOnly:paths.directives +'numberOnly/only-digits.js'
+//TODO refactor
+var jsDirectiveFiles = {
+    country: paths.directives + 'country/country-select.js',
+    numberOnly: paths.directives + 'numberOnly/only-digits.js'
 }
 
-var jsAppFiles={
-    companyApp:'app/app.js',
-    activityApp:'app/activityApp.js',
-    transactionApp:'app/transactionApp.js'
+var jsAppFiles = {
+    companyApp: 'app/app.js',
+    activityApp: 'app/activityApp.js',
+    transactionApp: 'app/transactionApp.js'
 };
+
+var jsRootContent = {
+    partialActivityRoot: 'rootContent/activityRoot.html'
+}
+
+var translationBaseFiles = {
+
+    activityInfo: paths.translations + 'activityInfo',
+    activityList: paths.translations + 'activityList',
+    address: paths.translations + 'address',
+    applicationInfo: paths.translations + 'applicationInfo',
+    contact: paths.translations + 'contact',
+    countries: paths.translations + 'countries',
+    fileIO: paths.translations + 'fileIO',
+    general: paths.translations + 'general',
+    messages: paths.translations + 'messages',
+    stateProvinces: paths.translations + 'stateProvinces',
+    transaction: paths.translations + 'transaction'
+}
 
 // == PIPE SEGMENTS ========
 
@@ -273,6 +286,22 @@ pipes.builtAppDev = function () {
 pipes.builtAppProd = function () {
     return es.merge(pipes.builtIndexProd(), pipes.processedImagesProd());
 };
+
+pipes.fullTranslateList = function (translateList) {
+    var completeList = []
+    for (var i = 0; i < translateList.length; i++) {
+        completeList.push(translateList[i] + '-en.json')
+        completeList.push(translateList[i] + '-fr.json')
+    }
+    return completeList;
+}
+pipes.translateDev = function (translateList) {
+
+    var completeList = pipes.fullTranslateList(translateList);
+    var copySources = gulp.src(completeList,
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildDev))
+}
 
 // == TASKS ========
 
@@ -432,7 +461,7 @@ gulp.task('default', ['clean-build-app-prod']);
 
 // Dan added, TODO convert to pipes
 gulp.task('translate', function () {
-    return gulp.src(paths.translations)
+    return gulp.src(paths.translations + '*.json')
         .pipe(angularTranslate())
         .pipe(gulp.dest(paths.buildDev));
 });
@@ -444,6 +473,7 @@ gulp.task('copyActivitySrcDev', function () {
             jsComponentPaths.activityMainPath + '**/*',
             jsComponentPaths.activityRationalePath + '**/*',
             jsComponentPaths.applicationInfoPath + '**/*',
+            jsComponentPaths.contactDetailsPath + '**/*',
             jsComponentPaths.countrySelectPath + 'cmp-country-select.js',
             jsComponentPaths.dinDetailsPath + '**/*',
             jsComponentPaths.expandingTablePath + '**/*',
@@ -452,23 +482,70 @@ gulp.task('copyActivitySrcDev', function () {
             jsComponentPaths.relatedActivityPath + '**/*',
             jsComponentPaths.repContactListPath + '**/*',
             jsComponentPaths.repContactRecordPath + '**/*',
+            jsServiceFiles.activityService,
+            jsServiceFiles.applicationInfoService,
+            jsServiceFiles.filterLists,
+            jsServiceFiles.dataLists,
+            jsServiceFiles.dataListsActivity,
+            jsDirectiveFiles.numberOnly
         ],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDev))
 
 });
 
-gulp.task('injectActivityJS', ['copyActivitySrcDev'], function () {
+
+gulp.task('copyLibDev', function () {
+    var copySources = gulp.src([paths.lib + '**/*'],
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildDev))
+
+});
+
+
+gulp.task('copyActivityAppRoot', function () {
+    var copySources = gulp.src([paths.scripts + '/activityApp.js'],
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildDev))
+
+});
+
+
+gulp.task('injectActivityJS', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAppRoot', 'copyActivityTranslateDev'], function () {
+
+
     var utc = new Date().toJSON().slice(0, 10);
     gulp.src(paths.englishTemplate)
         .pipe(htmlreplace({
             'dateToday': utc
         }))
-        .pipe(inject(gulp.src(paths.buildDev + 'app/**/*.js', {read: false}), {
-            ignorePath: '/build/dev/',
-            addRootSlash: false
+        .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
+            starttag: placeholders.mainContent,
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
         }))
+        .pipe(inject(gulp.src([paths.buildDev + 'app/**/*.js'])
+            .pipe(angularFilesort())
+            , {
+                ignorePath: '/build/dev/',
+                addRootSlash: false
+            }))
+
         .pipe(rename("actvityEnrol-en.html"))
         .pipe(gulp.dest(paths.buildDev))
 });
 
+gulp.task('copyActivityTranslateDev', function () {
+    var translationList = [
+        translationBaseFiles.activityInfo,
+        translationBaseFiles.activityList,
+        translationBaseFiles.contact,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.general,
+        translationBaseFiles.messages
+    ];
+    pipes.translateDev(translationList)
+});

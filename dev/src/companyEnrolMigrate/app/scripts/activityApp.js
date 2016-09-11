@@ -33,18 +33,6 @@
             $translateProvider.useStaticFilesLoader({
                 files: [
                     {
-                        prefix: 'app/resources/countries-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/address-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/stateProvinces-',
-                        suffix: '.json'
-                    },
-                    {
                         prefix: 'app/resources/general-',
                         suffix: '.json'
                     },

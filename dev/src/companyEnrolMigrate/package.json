@@ -15,7 +15,7 @@
     "event-stream": "^3.2.2",
     "express": "^4.7.2",
     "gulp": "^3.9.1",
-    "gulp-angular-filesort": "^1.0.4",
+    "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-translate": "^0.1.4",
     "gulp-clean-css": "^2.0.0",
     "gulp-concat": "^2.4.3",
