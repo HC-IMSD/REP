@@ -20,8 +20,8 @@
 
 
     function MainController() {
-
         var vm = this;
+        vm.formType = '@@SET_FORM';
     }
 })();
 
@@ -63,7 +63,7 @@
 
                 ]
             });
-            $translateProvider.preferredLanguage('en');
+            $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             $translateProvider.useSanitizeValueStrategy('sanitize');

@@ -34,7 +34,10 @@
         .component('cmpActivityMain', {
             templateUrl: 'app/scripts/components/activityMain/tpl-activity-main.html',
             controller: activityMainCtrl,
-            controllerAs: 'main'
+            controllerAs: 'main',
+            bindings: {
+                formType: '@'
+            }
         });
 
     activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', '$location'];
@@ -78,15 +81,27 @@
         };
         vm.yesNoList = ["Y", "N"];
         vm.initUser = function (id) {
-            if (!id) id = 'EXT';
+            /* if (!id) id = 'EXT';
             vm.userType = id;
             if (id == 'INT') {
                 vm.saveXMLLabel = "APPROVE_FINAL"
             } else {
                 vm.saveXMLLabel = "SAVE_DRAFT"
-            }
+             }*/
 
         };
+
+        vm.$onChanges = function (changes) {
+            if (changes.formType) {
+                vm.userType = changes.formType.currentValue;
+                if (vm.userType == 'INT') {
+                    vm.saveXMLLabel = "APPROVE_FINAL"
+                } else {
+                    vm.saveXMLLabel = "SAVE_DRAFT"
+                }
+            }
+
+        }
 
         /**
          * @ngdoc method -returns whether this application is an amendment

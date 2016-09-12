@@ -10,10 +10,12 @@ var inject = require('gulp-inject');
 var htmlreplace = require('gulp-html-replace');
 var rename = require("gulp-rename");
 var angularFilesort = require('gulp-angular-filesort')
+var replace = require('gulp-replace-task');
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
-var wetBase = './wet_4_0_22_base'
+var wetBase = './wet_4_0_22_base';
+var buildDev = './build/dev/';
 var paths = {
     styles: ['./app/styles/*.css', './app/**/*.scss'],
     index: 'companyEnrol.html',
@@ -23,7 +25,9 @@ var paths = {
     distScriptsProd: './dist.prod/scripts',
     scriptsDevServer: 'devServer/**/*.js',
     translations: 'app/resources/',
-    buildDev: './build/dev/',
+    buildDev: buildDev,
+    buildDevActivity: buildDev + '/activity/',
+    buildDevCompany: buildDev + '/company/',
     englishTemplate: wetBase + '/content-en.html',
     frenchTemplate: wetBase + '/content-fr.html',
     activityRoot: 'rootContent/activityRoot.html',
@@ -303,19 +307,59 @@ pipes.translateDev = function (translateList) {
     var completeList = pipes.fullTranslateList(translateList);
     var copySources = gulp.src(completeList,
         {read: true, base: '.'});
-    return copySources.pipe(gulp.dest(paths.buildDev))
+    return copySources.pipe(gulp.dest(paths.buildDevActivity))
 }
 pipes.insertDateStamp = function (template) {
 
     var utc = new Date().toJSON().slice(0, 10);
-    var datePH = placeholders.dateStamp
+
+    var datePH = placeholders.dateStamp;
     return (gulp.src(template)
             .pipe(htmlreplace({
                 dateToday: utc
             }))
     );
+
+};
+pipes.copyWet = function (destDirectory) {
+    var copySources = gulp.src([paths.wetBase + '/**/*', '!' + paths.englishTemplate, '!' + paths.frenchTemplate],
+        {read: true, base: paths.wetBase});
+    return (copySources.pipe(gulp.dest(destDirectory)))
 }
 
+pipes.activityRootJS = function (lang, type) {
+    var actAppName = 'activityApp'
+    var copySources = gulp.src([paths.scripts + '/activityApp.js'],
+        {read: true, base: '.'});
+    return (
+        copySources
+            .pipe(replace({
+                patterns: [
+                    {
+                        match: 'prefLang',
+                        replacement: lang
+                    },
+                    {
+                        match: 'SET_FORM',
+                        replacement: type
+                    }
+                ]
+            }))
+            .pipe(rename("actvityApp-" + lang + '.js'))
+            .pipe(gulp.dest(paths.buildDevActivity + '/app/scripts/'))
+    )
+
+
+}
+
+pipes.cleanBuild = function (baseDir) {
+    var deferred = Q.defer();
+    del(baseDir, function () {
+        deferred.resolve();
+    });
+    return deferred.promise;
+    //return (del(paths.buildDev));
+}
 
 
 // == TASKS ========
@@ -504,69 +548,100 @@ gulp.task('copyActivitySrcDev', function () {
             jsServiceFiles.dataListsActivity,
             jsDirectiveFiles.numberOnly
         ],
-        {read: true, base: '.'});
-    return copySources.pipe(gulp.dest(paths.buildDev))
+        {read: true, base: './'});
+    return copySources.pipe(gulp.dest(paths.buildDevActivity))
 
 });
 
+gulp.task('copyActivityTranslateDev', function () {
+    var translationList = [
+        translationBaseFiles.activityInfo,
+        translationBaseFiles.activityList,
+        translationBaseFiles.contact,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.general,
+        translationBaseFiles.messages
+    ];
+    pipes.translateDev(translationList)
+});
 
 gulp.task('copyLibDev', function () {
     var copySources = gulp.src([paths.lib + '**/*'],
         {read: true, base: '.'});
-    return copySources.pipe(gulp.dest(paths.buildDev))
+    return copySources.pipe(gulp.dest(paths.buildDevActivity))
 
 });
 
-
 gulp.task('copyActivityAppRoot', function () {
+    var actAppName = 'activityApp';
     var copySources = gulp.src([paths.scripts + '/activityApp.js'],
         {read: true, base: '.'});
-    return copySources.pipe(gulp.dest(paths.buildDev))
-
+    return (
+        copySources
+            .pipe(replace({
+                patterns: [
+                    {
+                        match: 'prefLang',
+                        replacement: 'en'
+                    }
+                ]
+            }))
+            .pipe(gulp.dest(paths.buildDevActivity))
+    )
 });
 
 gulp.task('copyWetDep', function () {
-    var copySources = gulp.src([paths.wetBase + '/**/*', '!' + paths.englishTemplate, '!' + paths.frenchTemplate],
-        {read: true, base: paths.wetBase});
-    return copySources.pipe(gulp.dest(paths.buildDev))
-
+    return (pipes.copyWet(paths.buildDevActivity))
 });
 
 gulp.task('clean-devBuild', function () {
-    return (paths.buildDev);
+    return (pipes.cleanBuild(paths.buildDev));
 });
 
-gulp.task('cleanBuildActDev', ['clean-devBuild', 'copyWetDep', 'frActivityHtml'], function () {
-    return
 
+gulp.task('copyFrActivityRoot', function () {
+    var lang = 'fr';
+    return (
+        pipes.activityRootJS(lang, 'EXT')
+    );
+});
+gulp.task('copyEnActivityRoot', function () {
+    var lang = 'en';
+    return (
+        pipes.activityRootJS(lang, 'EXT')
+    );
 });
 
-gulp.task('enActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAppRoot', 'copyActivityTranslateDev'], function () {
+gulp.task('frActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyFrActivityRoot', 'copyActivityTranslateDev'], function () {
+
+    return (
+
+        pipes.insertDateStamp(paths.frenchTemplate)
+            .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
+                starttag: placeholders.mainContent,
+                transform: function (filePath, file) {
+                    // return file contents as string
+                    return file.contents.toString('utf8')
+                }
+            }))
+            .pipe(inject(gulp.src([paths.buildDevActivity + 'app/**/*.js'])
+                .pipe(angularFilesort())
+                , {
+                    ignorePath: '/build/dev/activity',
+                    addRootSlash: false
+                }))
+
+            .pipe(rename("actvityEnrol-fr.html"))
+            .pipe(gulp.dest(paths.buildDevActivity))
+    )
+});
+
+
+gulp.task('enActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyEnActivityRoot', 'copyActivityTranslateDev'], function () {
 
     return (
         pipes.insertDateStamp(paths.englishTemplate)
-        .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-        .pipe(inject(gulp.src([paths.buildDev + 'app/**/*.js'])
-            .pipe(angularFilesort())
-            , {
-                ignorePath: '/build/dev/',
-                addRootSlash: false
-            }))
-
-        .pipe(rename("actvityEnrol-en.html"))
-        .pipe(gulp.dest(paths.buildDev))
-    )
-});
-gulp.task('frActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAppRoot', 'copyActivityTranslateDev'], function () {
-
-    return (
-        pipes.insertDateStamp(paths.frenchTemplate)
             .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
                 starttag: placeholders.mainContent,
                 transform: function (filePath, file) {
@@ -581,23 +656,10 @@ gulp.task('frActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyActivityAp
                     addRootSlash: false
                 }))
 
-            .pipe(rename("actvityEnrol-fr.html"))
+            .pipe(rename("actvityEnrol-en.html"))
             .pipe(gulp.dest(paths.buildDev))
     )
 });
 
 
 
-
-gulp.task('copyActivityTranslateDev', function () {
-    var translationList = [
-        translationBaseFiles.activityInfo,
-        translationBaseFiles.activityList,
-        translationBaseFiles.contact,
-        translationBaseFiles.applicationInfo,
-        translationBaseFiles.fileIO,
-        translationBaseFiles.general,
-        translationBaseFiles.messages
-    ];
-    pipes.translateDev(translationList)
-});
