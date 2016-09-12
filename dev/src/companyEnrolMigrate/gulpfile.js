@@ -349,6 +349,31 @@ pipes.activityRootJS = function (lang, type) {
             .pipe(gulp.dest(paths.buildDevActivity + '/app/scripts/'))
     )
 
+};
+pipes.createActivityDev=function(templatePath,templateName,injectRootJs,partialRoot, buildDir, ignorePath){
+
+    pipes.insertDateStamp(templatePath)
+        .pipe(inject(gulp.src([partialRoot]), {
+            starttag: placeholders.mainContent,
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(inject(gulp.src([
+                buildDir + 'app/components/**/*.js',
+                buildDir + 'app/directives/**/*.js',
+                buildDir + 'app/services/**/*.js',
+                buildDiry +'app'+injectRootJs //START HERE
+        ])
+            .pipe(angularFilesort())
+            , {
+                ignorePath:ignorePath,
+                addRootSlash: false
+            }))
+
+        .pipe(rename(templateName))
+        .pipe(gulp.dest(buildDir))
 
 }
 
