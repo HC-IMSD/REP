@@ -18,7 +18,7 @@
     angular
         .module('countrySelect')
         .component('cmpCountrySelect', {
-            templateUrl: 'app/views/tpl-country.html',
+            templateUrl: 'app/scripts/components/countrySelect/tpl-country.html',
             controller: countrySelectCtrl,
            controllerAs: 'ctr',
             bindings: {

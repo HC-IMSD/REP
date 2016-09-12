@@ -15,11 +15,10 @@
         ])
 })();
 
-
 (function () {
     'use strict';
     angular
-        .module('activityMain')
+        .module('companyMain')
         .component('cmpCompanyMain', {
             templateUrl: 'app/scripts/components/companyMain/tpl-company-main.html',
             controller: companyMainCtrl,
@@ -29,16 +28,16 @@
             }
         });
 
-    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope']
+    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope'];
 
     function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope) {
 
         var vm = this;
         //TODO magic number
-        vm.rootTag = 'COMPANY_ENROL'
+        vm.rootTag = 'COMPANY_ENROL';
         vm.isIncomplete = true;
         vm.userType = "EXT";
-        vm.saveXMLLabel = "SAVE_DRAFT"
+        vm.saveXMLLabel = "SAVE_DRAFT";
         vm.updateValues = 0;
         vm.applicationInfoService = new ApplicationInfoService();
         vm.setAmendState = _setApplTypeToAmend;

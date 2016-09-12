@@ -5,7 +5,7 @@
 
 (function(){
     'use strict';
-    angular.module('dossierApp')
+    angular.module('companyApp')
         .directive('arrowSelector',['$document',function($document){
         return{
             restrict:'A',

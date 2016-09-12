@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="./wet-boew/css/noscript.min.css"/>
     </noscript>
 </head>
-<body vocab="http://schema.org/" typeof="WebPage" ng-app="dossierApp">
+<body vocab="http://schema.org/" typeof="WebPage">
 <ul id="wb-tphp">
     <li class="wb-slc">
         <a class="wb-sl" href="#wb-cont">Skip to main content</a>
@@ -83,105 +83,10 @@
 <main role="main" property="mainContentOfPage" class="container">
     <!--Company Enrol Content starts here -->
 
-    <div>
-        <ng-form id="reg-company-form" name="main.companyEnrolForm" ng-controller="MainController as main"
-                 novalidate="novalidate"
-                 ng-init="main.initUser('EXT')">
-            <section class="panel panel-primary mrgn-tp-lg">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Load a Draft Company Enrolment File</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="col-md-12">
-
-                        <hpfb-file-select update-model-root="main.showContent(fileContent) " root-elem="COMPANY_ENROL"/>
-                    </div>
-                </div>
-                <div>
-                </div>
-            </section>
-            <div>
-                <section class="panel panel-primary mrgn-tp-lg">
-                    <header class="panel-heading">
-                        <h3 class="panel-title">Regulatory Company Enrolment</h3>
-                    </header>
-                    <div class="panel-body">
-
-                        <cmp-application-info record="main.company" user-type="main.userType" is-incomplete="main.isIncomplete"
-                        configure-id-field="main.configCompany"></cmp-application-info>
-                      <!--  <div class="row">
-                            <div class="col-xs-3 form-group">
-                                <label for="application-type">{{"APPL_STATUS"| translate}}</label>
-                                <select id="application-type"
-                                        ng-options="type |translate for type in main.applTypes"
-                                        ng-model="main.company.applicationType" ng-readonly="true"
-                                        ng-disabled="true"
-                                        class="form-control full-width"></select>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="enr-version-text">Enrolment Version</label>
-                                <input type="text" class="form-control" id="enr-version-text" ng-readonly="true"
-                                       ng-model="main.company.enrolmentVersion" placeholder="Enrolment Version"/>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="date-saved-text">Date Last Saved</label>
-                                <input type="text" class="form-control" id="date-saved-text"
-                                       ng-model="main.company.dateSaved" ng-readonly="true"/>
-                            </div>
-                            <div class="col-xs-3 form-group">
-                                <label for="company-id-text">Company ID
-                                    <input type="text" class="form-control" id="company-id-text"
-                                           ng-readonly="main.isExtern()" maxlength="6" name="companyID"
-                                           ng-minlength="6"
-                                           ng-model="main.company.companyId" ng-required="!main.isExtern()"/>
-                                    <strong id="code-error" class="error">
-                        <span class="label label-danger" ng-if="main.companyEnrolForm.companyID.$invalid"
-                              ng-messages="main.companyEnrolForm.companyID.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
-                        </span>
-                                    </strong>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-5 form-group">
-                                <button class="btn btn-default" ng-click="main.setAmendState()"
-                                        ng-disabled="main.isIncomplete">
-                                    Amend Enrolment
-                                </button>
-                            </div>
-                        </div>
-                        -->
-                    </div>
-
-                    <div>
-                        <cmp-company-address-list addresses="main.company.addressList"
-                                                  get-new-address="main.getNewAddress()" is-amend="main.isAmend()"
-                                                  company-service="main.companyService"></cmp-company-address-list>
-
-                        <cmp-company-contact-list contacts="main.company.contactList"
-                                                  get-new-contact="main.getNewContact()" is-amend="main.isAmend()"
-                                                  company-service="main.companyService"></cmp-company-contact-list>
-                    </div>
-                </section>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()"
-                        >Save Working Copy
-                        </button>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <button class="btn btn-default btn-lg active" ng-disabled="main.disableXML" id="btn_xmlSave"
-                                ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
-                        </button>
-                    </div>
-                </div>
-                <!--<pre>overall: {{main.company | json : spacing}}</pre>-->
-            </div>
-        </ng-form>
-
+    <div ng-app="companyApp" ng-controller="MainController as ctrl">
+        <cmp-company-main form-type="{{ctrl.formType}}"></cmp-company-main>
     </div>
+
     <!-end REP content->
     <dl id="wb-dtmd">
         <dt>Date modified:&#32;</dt>
@@ -265,13 +170,14 @@
 <script src="app/lib/angular-sanitize.min.js"></script>
 
 <script src="app/lib/angular-aria.min.js"></script>
-<script src="app/scripts/app.js"></script>
+<script src="app/scripts/companyApp.js"></script>
+<script src="app/scripts/components/companyMain/cmp-company-main.js"></script>
+<script src="app/scripts/services/application-info-service.js"></script>
 <script src="app/scripts/services/company-service.js"></script>
 <script src="app/scripts/services/data-lists.js"></script>
-<script src="app/scripts/components/cmp-country-select.js"></script>
+<script src="app/scripts/components/countrySelect/cmp-country-select.js"></script>
 <script src="app/scripts/components/addressRole/cmp-address-role.js"></script>
 <script src="app/scripts/components/contactDetails/cmp-contact-details.js"></script>
-//TODO remove
 <!--<script src="app/scripts/components/cmp-address-list.js"></script>-->
 <script src="app/scripts/components/cmp-contact-list.js"></script>
 <script src="app/scripts/components/addressList/cmp-company-address-list.js"></script>
