@@ -15,7 +15,7 @@ var replace = require('gulp-replace-task');
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
 var wetBase = './wet_4_0_22_base';
-var buildDev = './build/dev/';
+var buildDev = './build/dev';
 var paths = {
     styles: ['./app/styles/*.css', './app/**/*.scss'],
     index: 'companyEnrol.html',
@@ -45,6 +45,19 @@ var placeholders = {
     mainContent: '<!-- inject:mainContent-->',
     dateStamp: 'dateToday'
 };
+
+var activityRootTitles_en={
+    mainHeading: "Activity Form for the Regulatory Enrolment Process (REP)",
+    title:'Health Canada Activity Form'
+
+};
+var activityRootTitles_fr={
+    mainHeading: "fr_Activity Form for the Regulatory Enrolment Process (REP)",
+    title:'fr_Health Canada Activity Form'
+
+};
+
+
 
 var jsComponentFiles = {
     activityChangeCmp: paths.components + 'activityChangeType/cmp-activity-change.js',
@@ -124,6 +137,8 @@ var jsAppFiles = {
 var jsRootContent = {
     partialActivityRoot: 'rootContent/activityRoot.html'
 }
+
+
 
 var translationBaseFiles = {
 
@@ -309,18 +324,35 @@ pipes.translateDev = function (translateList) {
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevActivity))
 }
-pipes.insertDateStamp = function (template) {
+pipes.insertDateStamp = function (template, valsObj) {
+
+    var utc = new Date().toJSON().slice(0, 10);
+
+   // var datePH = placeholders.dateStamp; doesnt work
+    return (gulp.src(template)
+            .pipe(htmlreplace({
+                dateToday: utc,
+                mainHeading:valsObj.mainHeading,
+                formTitle:valsObj.title
+            }))
+    );
+
+};
+pipes.insertTitleInfo = function (template,valsObj) {
 
     var utc = new Date().toJSON().slice(0, 10);
 
     var datePH = placeholders.dateStamp;
     return (gulp.src(template)
             .pipe(htmlreplace({
-                dateToday: utc
+                mainHeading: utc
             }))
     );
 
 };
+
+
+
 pipes.copyWet = function (destDirectory) {
     var copySources = gulp.src([paths.wetBase + '/**/*', '!' + paths.englishTemplate, '!' + paths.frenchTemplate],
         {read: true, base: paths.wetBase});
@@ -345,14 +377,15 @@ pipes.activityRootJS = function (lang, type) {
                     }
                 ]
             }))
-            .pipe(rename("actvityApp-" + lang + '.js'))
+            .pipe(rename("activityApp"+type+"-" + lang + '.js'))
             .pipe(gulp.dest(paths.buildDevActivity + '/app/scripts/'))
     )
 
 };
-pipes.createActivityDev=function(templatePath,templateName,injectRootJs,partialRoot, buildDir, ignorePath){
+pipes.createActivityDev = function (templatePath,valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType) {
 
-    pipes.insertDateStamp(templatePath)
+
+    pipes.insertDateStamp(templatePath,valsObj)
         .pipe(inject(gulp.src([partialRoot]), {
             starttag: placeholders.mainContent,
             transform: function (filePath, file) {
@@ -361,14 +394,17 @@ pipes.createActivityDev=function(templatePath,templateName,injectRootJs,partialR
             }
         }))
         .pipe(inject(gulp.src([
-                buildDir + 'app/components/**/*.js',
-                buildDir + 'app/directives/**/*.js',
-                buildDir + 'app/services/**/*.js',
-                buildDiry +'app'+injectRootJs //START HERE
-        ])
+
+                buildDir + 'app/scripts/components/**/*.js',
+                buildDir + 'app/scripts/directives/**/*.js',
+                buildDir + 'app/scripts/services/**/*.js',
+                buildDir + 'app/scripts/' + injectRootJs,
+                buildDir + 'app/lib/**/*.js',
+
+            ])
             .pipe(angularFilesort())
             , {
-                ignorePath:ignorePath,
+                ignorePath: ignorePath,
                 addRootSlash: false
             }))
 
@@ -574,6 +610,8 @@ gulp.task('copyActivitySrcDev', function () {
             jsDirectiveFiles.numberOnly
         ],
         {read: true, base: './'});
+
+
     return copySources.pipe(gulp.dest(paths.buildDevActivity))
 
 });
@@ -637,54 +675,32 @@ gulp.task('copyEnActivityRoot', function () {
         pipes.activityRootJS(lang, 'EXT')
     );
 });
-
-gulp.task('frActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyFrActivityRoot', 'copyActivityTranslateDev'], function () {
-
+gulp.task('copyFrActivityRootINT', function () {
+    var lang = 'fr';
     return (
-
-        pipes.insertDateStamp(paths.frenchTemplate)
-            .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
-                starttag: placeholders.mainContent,
-                transform: function (filePath, file) {
-                    // return file contents as string
-                    return file.contents.toString('utf8')
-                }
-            }))
-            .pipe(inject(gulp.src([paths.buildDevActivity + 'app/**/*.js'])
-                .pipe(angularFilesort())
-                , {
-                    ignorePath: '/build/dev/activity',
-                    addRootSlash: false
-                }))
-
-            .pipe(rename("actvityEnrol-fr.html"))
-            .pipe(gulp.dest(paths.buildDevActivity))
-    )
+        pipes.activityRootJS(lang, 'INT')
+    );
+});
+gulp.task('copyEnActivityRootINT', function () {
+    var lang = 'en';
+    return (
+        pipes.activityRootJS(lang, 'INT')
+    );
 });
 
 
-gulp.task('enActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyEnActivityRoot', 'copyActivityTranslateDev'], function () {
+gulp.task('ActivityHtml', ['copyActivitySrcDev', 'copyLibDev', 'copyFrActivityRoot','copyEnActivityRoot','copyFrActivityRootINT','copyEnActivityRootINT', 'copyActivityTranslateDev'], function () {
 
+
+    pipes.createActivityDev(paths.frenchTemplate,activityRootTitles_fr, 'actvityEnrolINT-fr.html', 'activityAppINT-fr.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
+    pipes.createActivityDev(paths.frenchTemplate,activityRootTitles_fr, 'actvityEnrolEXT-fr.html', 'activityAppEXT-fr.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'EXT');
+    pipes.createActivityDev(paths.englishTemplate,activityRootTitles_en, 'actvityEnrolEXT-en.html', 'activityAppEXT-en.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'EXT')
     return (
-        pipes.insertDateStamp(paths.englishTemplate)
-            .pipe(inject(gulp.src([jsRootContent.partialActivityRoot]), {
-                starttag: placeholders.mainContent,
-                transform: function (filePath, file) {
-                    // return file contents as string
-                    return file.contents.toString('utf8')
-                }
-            }))
-            .pipe(inject(gulp.src([paths.buildDev + 'app/**/*.js'])
-                .pipe(angularFilesort())
-                , {
-                    ignorePath: '/build/dev/',
-                    addRootSlash: false
-                }))
+    pipes.createActivityDev(paths.englishTemplate,activityRootTitles_en, 'actvityEnrolINT-en.html', 'activityAppINT-en.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'INT')
+    );
 
-            .pipe(rename("actvityEnrol-en.html"))
-            .pipe(gulp.dest(paths.buildDev))
-    )
 });
+
 
 
 
