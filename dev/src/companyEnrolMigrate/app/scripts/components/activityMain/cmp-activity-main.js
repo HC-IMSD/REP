@@ -51,9 +51,6 @@
          *
          * @param changes
          */
-        vm.$onChanges = function (changes) {
-
-        };
 
         var vm = this;
         //TODO magic number
