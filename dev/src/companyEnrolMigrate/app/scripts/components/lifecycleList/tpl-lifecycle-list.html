@@ -1,20 +1,26 @@
-<ng-form name="lifecycleListCtrl.lifecycleListForm" novalidate="novalidate">
-<section class="panel  panel-default">
-    <header class="panel-heading">
-        <h3 class="panel-title">Lifecycle Management Table</h3>
-    </header>
-    <div class="panel-body">
+<ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
         <div class="row">
-            <cmp-expanding-table list-items="lifecycleListCtrl.lifecycleList"
-                                 reset-to-collapsed="lifecycleListCtrl.setCollapsed"
-                                 column-def="lifecycleListCtrl.columnDef" select-record="lifecycleListCtrl.selectRecord"
-                                 disable-selection="!lifecycleListCtrl.isDetailsValid">
+
+            <input type="text" id="oneRec_{{$id}}" name="oneRec" ng-show="true"
+                   ng-model="lifeListCtrl.oneRecord" ng-required="true"/>
+            <label>
+                <strong id=" onerec-error" class="error" ng-if="lifeListCtrl.showError()">
+                        <span class="label label-danger"
+                              ng-messages="lifeListCtrl.lifecycleListForm.oneRec.$error">
+                            <span ng-message="required">{{"MSG_ERR_ONE_LIFE_REC"|translate}}</span>
+                        </span>
+                </strong>
+            </label>
+            <cmp-expanding-table list-items="lifeListCtrl.lifecycleList"
+                                 reset-to-collapsed="lifeListCtrl.setCollapsed"
+                                 column-def="lifeListCtrl.columnDef" select-record="lifeListCtrl.selectRecord"
+                                 disable-selection="!lifeListCtrl.isDetailsValid">
 
                 <cmp-lifecycle-details lifecycle-record="$parent.record"
-                                       is-detail-valid="lifecycleListCtrl.setValid(state)"
-                                       on-delete="lifecycleListCtrl.deleteRecord(id)"
-                                       enable-delete-index="lifecycleListCtrl.lastRecordSequence()"
-                                       on-update="lifecycleListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
+                                       is-detail-valid="lifeListCtrl.setValid(state)"
+                                       on-delete="lifeListCtrl.deleteRecord(id)"
+                                       enable-delete-index="lifeListCtrl.lastRecordSequence()"
+                                       on-update="lifeListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
 
             </cmp-expanding-table>
 
@@ -22,12 +28,12 @@
         <div class="row mrgn-tp-md mrgn-bttm-lg">
             <div class="btn-group-sm col-md-12 text-right">
                 <input type="submit" value="{{'ADD_TRANSACTION'|translate}}" class="btn btn-primary"
-                       ng-click="lifecycleListCtrl.addTransaction()"
-                       ng-disabled="!lifecycleListCtrl.isDetailsValid">
+                       ng-click="lifeListCtrl.addTransaction()"
+                       ng-disabled="!lifeListCtrl.isDetailsValid">
                 <input type="submit" value="Cancel" class="btn btn-default"
-                       data-ng-show="lifecycleListCtrl.newAdrFormShow"
-                       ng-click="lifecycleListCtrl.newAdrFormShow = false">
+                       data-ng-show="lifeListCtrl.newAdrFormShow"
+                       ng-click="lifeListCtrl.newAdrFormShow = false">
             </div>
         </div>
     </div>
-</section>
+</ng-form>

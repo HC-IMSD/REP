@@ -81,7 +81,6 @@ var transactionRootTitles_fr = {
 };
 
 
-
 var jsComponentFiles = {
     activityChangeCmp: paths.components + 'activityChangeType/cmp-activity-change.js',
     activityMainCmp: paths.components + 'activityMain/cmp-activity-main.js',
@@ -147,7 +146,7 @@ var jsServiceFiles = {
     dataLists: paths.services + 'data-lists.js',
     filterLists: paths.services + 'filter-lists.js',
     hpfbConstants: paths.services + 'hpfb-constants.js',
-    transactionService: paths.services + 'transaction-service.js',
+    transactionService: paths.services + 'transactionService.js',
 };
 //TODO refactor
 var jsDirectiveFiles = {
@@ -835,6 +834,7 @@ gulp.task('copyTransactionSrcDev', function () {
             jsComponentPaths.contactRecordPath + '**/*',
             jsComponentPaths.trackRecordPath,
             jsServiceFiles.transactionService,
+            jsServiceFiles.dataLists,
             jsServiceFiles.dataListsActivity,
             jsServiceFiles.applicationInfoService,
             jsServiceFiles.filterLists,
@@ -843,7 +843,15 @@ gulp.task('copyTransactionSrcDev', function () {
         {read: true, base: './'});
 
 
-    return copySources.pipe(gulp.dest(paths.buildDevTransaction))
+    var def = Q.defer();
+    copySources.pipe(gulp.dest(paths.buildDevTransaction))
+        .on('end', function() {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
+
+    //return copySources.pipe(gulp.dest(paths.buildDevTransaction))
 
 });
 gulp.task('copyEnTransactionRootEXT', function () {
@@ -888,11 +896,11 @@ gulp.task('copyWetDepTransaction', function () {
 });
 
 
-gulp.task('TransactionHtml', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'copyLibDevTransaction'], function () {
+gulp.task('build-transaction-dev', [ 'copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'copyTransactionTranslateDev'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot
-    pipes.createActivityDev(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-fr.html', 'transactionApp-fr.js', htmlPartial, buildDir, ignoreDir, 'fr', '')
+    pipes.createActivityDev(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionApp-fr.js', htmlPartial, buildDir, ignoreDir, 'fr', '')
 
 
     return (

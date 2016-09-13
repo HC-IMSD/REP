@@ -21,10 +21,11 @@
                 onUpdate: '&',
                 isAmend: '&',
                 getNewTransaction: '&',
-                deprecateSequence: '&' //bit of a hack
+                deprecateSequence: '&', //bit of a hack
+                showErrors:'&'
             },
             controller: lifecycleListCtrl,
-            controllerAs: 'lifecycleListCtrl'
+            controllerAs: 'lifeListCtrl'
         });
 
     lifecycleListCtrl.$inject = ['$filter', 'sequenceOrderDescendingFilter'];
@@ -37,6 +38,8 @@
         vm.lifecycleList = [];
         vm.setCollapsed = 0;
         vm.deletableIndex = 0;
+        vm.oneRecord="";
+
         vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
@@ -71,13 +74,16 @@
 
         }
 
+
         vm.$onChanges = function (changes) {
 
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
                 if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
+
                     vm.isDetailsValid = true;
                 }
+                vm.updateErrorState();
             }
         }
 
@@ -89,6 +95,7 @@
             vm.selectRecord = 0;
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.deprecateSequence();
+            vm.updateErrorState();
         }
 
         vm.lastRecordSequence = function () {
@@ -99,6 +106,15 @@
             }
             return (vm.lifecycleList.length - 1);
         }
+        vm.updateErrorState = function () {
+            if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
+                vm.oneRecord = "";
+            } else {
+                vm.oneRecord = "is value";
+
+            }
+
+        }
 
         vm.addTransaction = function () {
             var defaultTransaction = vm.getNewTransaction();
@@ -106,11 +122,13 @@
             vm.selectRecord = 0; //need to generate a change
             vm.setCollapsed++;
             vm.isDetailsValid = false;
+            vm.updateErrorState();
         }
 
         vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;
         }
+
         vm.onUpdateLifecycleRecord = function (record) {
 
             var idx = vm.lifecycleList.indexOf(
@@ -129,7 +147,10 @@
          * @returns {boolean}
          */
         vm.showError = function () {
-            if ((vm.lifecycleListForm.$invalid && !vm.lifecycleListForm.$pristine)) {
+
+            console.log("form toucbed "+ vm.lifecycleListForm.$touched)
+            console.log("form toucbed2 "+ vm.showErrors())
+            if ((vm.lifecycleListForm.$invalid && vm.lifecycleListForm.$touched) || (vm.showErrors()&&vm.lifecycleListForm.$invalid)) {
                 return true
             }
             return false

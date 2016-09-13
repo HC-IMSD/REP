@@ -11,7 +11,6 @@
   "AIA": "Anguilla",
   "ATA": "Antarctique",
   "ATG": "Antigua-et-Barbuda",
-  //"AR":"Antilles néerlandaises",
   "SAU": "Arabie saoudite",
   "ARG": "Argentine",
   "ARM": "Arménie",
@@ -67,7 +66,6 @@
   "FJI": "Fidji",
   "FIN": "Finlande",
   "FRA": "France",
-  //"ER":"France métropolitaine",
   "GAB": "Gabon",
   "GMB": "Gambie",
   "GEO": "Géorgie",
@@ -129,7 +127,6 @@
   "LVA": "Lettonie",
   "LBN": "Liban",
   "LBR": "Libéria",
-  //"LY":"Libye (Jamahiriya arabe libyenne)",
   "LIE": "Liechtenstein",
   "LTU": "Lituanie",
   "LUX": "Luxembourg",
@@ -236,7 +233,6 @@
   "VEN": "Vénézuéla",
   "VNM": "Vietnam",
   "YEM": "Yémen",
-  //"YU":"Yougoslavie",
   "ZMB": "Zambie",
   "ZWE": "Zimbabwe"
 }

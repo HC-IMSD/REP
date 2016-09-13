@@ -219,7 +219,15 @@
             resetEctdSection: function () {
 
                 if (this._default.hasOwnProperty('ectd')) {
-                    this._default.ectd = _getEmptyEctdSection();
+
+                    this._default.ectd.companyId = "";
+                    this._default.ectd.dossierId = "";
+                    this._default.ectd.dossierName = "";
+
+                    if(this._default.ectd.lifecycleRecord && this._default.ectd.lifecycleRecord>0){
+                        this._default.ectd.lifecycleRecord=[this._default.ectd.lifecycleRecord[0]];
+                    }
+                    //this._default.ectd = _getEmptyEctdSection();
                 }
             }
         };

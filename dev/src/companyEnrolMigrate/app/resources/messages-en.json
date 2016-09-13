@@ -20,5 +20,6 @@
   "MSG_LENGTH_6NUM": "Please enter 6 digits.",
   "MSG_LENGTH_8NUM": "Please enter 8 digits.",
   "MSG_LENGTH_7": "Please enter 7 characters.",
-  "MSG_ERR_ONE_REP": "At least one contact is required."
+  "MSG_ERR_ONE_REP": "At least one contact is required.",
+  "MSG_ERR_ONE_LIFE_REC": "One lifecycle record is required."
 }

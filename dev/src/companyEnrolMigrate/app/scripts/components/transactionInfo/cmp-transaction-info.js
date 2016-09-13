@@ -59,6 +59,10 @@
         vm.subtractSequence = function () {
             vm.deprecateSequence();
         }
+        vm.showFormErrors=function(){
+
+            return(vm.showErrors())
+        }
 
         vm.showError = function (ctrl) {
             if (!ctrl) return;

@@ -7,6 +7,7 @@
             'ngAria',
             'fileIO',
             'services',
+            'dataLists',
             'transactionInfo',
             'addressModule',
             'contactModule25',
