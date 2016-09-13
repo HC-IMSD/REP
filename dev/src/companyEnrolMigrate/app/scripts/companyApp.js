@@ -63,7 +63,7 @@
                     }
                 ]
             })
-            $translateProvider.preferredLanguage('en');
+            $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             $translateProvider.useSanitizeValueStrategy('sanitize');
