@@ -29,6 +29,8 @@
   "REP_CONTACT_INFO": "Main Contact Information",
   "REP_CONTACT":  "REP Contact",
   "SAVE_CONTACT":"Save Contact",
-  "DELETE_CONTACT":"Delete Contact"
+  "DELETE_CONTACT":"Delete Contact",
+  "COMPANY_ID": "Company Id",
+  "DOSSIER_ID": "Dossier Id"
 
 }

@@ -84,7 +84,7 @@
 
                     vm.isDetailsValid = true;
                  }*/
-                setValid(!vm.lifecycleList || vm.lifecycleList.length === 0)
+                vm.setValid(!vm.lifecycleList || vm.lifecycleList.length === 0)
                 vm.updateErrorState();
             }
         }
@@ -142,7 +142,7 @@
             var idx = vm.lifecycleList.indexOf(
                 $filter('filter')(vm.lifecycleList, {sequence: record.sequence}, true)[0]
             );
-            console.log("This is the idx " + idx)
+
             record.dateFiled = convertDate(record.dateFiled);
             record.startDate = convertDate(record.startDate);
             record.endDate = convertDate(record.endDate);
@@ -156,8 +156,6 @@
          */
         vm.showError = function (isTouched, isInvalid) {
 
-            console.log("form toucbed "+ vm.lifecycleListForm.$touched)
-            console.log("form toucbed2 "+ vm.showErrors())
             if ((isTouched && isInvalid) || (vm.showErrors() && isInvalid)) {
                 return true
             }

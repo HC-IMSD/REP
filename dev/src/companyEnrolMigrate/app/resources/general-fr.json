@@ -15,10 +15,10 @@
   "DISCARD_CHANGES": "fr_Discard Changes",
   "REP_ALT": "fr_Alternate REP contact",
   "REP_PRIM": "fr_Primary REP contact",
-  "MAILING": "fr_Mailing",
+  "MAILING": "Contact pour le courrier réglementaire",
   "BILLING": "fr_Billing",
   "MANUFACT": "fr_Manufacturer",
-  "IMPORTER": "fr_Importer",
+  "IMPORTER": "Importateur canadien",
   "APPROVE_FINAL": "fr_Approve Final XML",
   "PRIMARY": "fr_Primary",
   "SECONDARY": "fr_Alternate",
@@ -28,5 +28,7 @@
   "REP_CONTACT_INFO": "fr_Main Contact Information",
   "REP_CONTACT":  "fr_REP Contact",
   "SAVE_CONTACT":"fr_Save Contact",
-  "DELETE_CONTACT":"fr_Delete Contact"
+  "DELETE_CONTACT":"fr_Delete Contact",
+  "COMPANY_ID": "fr_Company Id",
+  "DOSSIER_ID": "fr_Dossier Id"
 }
