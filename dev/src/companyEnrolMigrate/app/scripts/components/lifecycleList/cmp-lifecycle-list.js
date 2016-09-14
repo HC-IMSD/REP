@@ -22,7 +22,8 @@
                 isAmend: '&',
                 getNewTransaction: '&',
                 deprecateSequence: '&', //bit of a hack
-                showErrors:'&'
+                showErrors: '&',
+                isEctd: '<'
             },
             controller: lifecycleListCtrl,
             controllerAs: 'lifeListCtrl'
@@ -70,7 +71,7 @@
 
         vm.$onInit = function () {
             //local var from binding
-            vm.lifecycleList = vm.records;
+            // vm.lifecycleList = vm.records;
 
         }
 
@@ -79,10 +80,11 @@
 
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
-                if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
+                /* if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
 
                     vm.isDetailsValid = true;
-                }
+                 }*/
+                setValid(!vm.lifecycleList || vm.lifecycleList.length === 0)
                 vm.updateErrorState();
             }
         }
@@ -125,6 +127,12 @@
             vm.updateErrorState();
         }
 
+
+        vm.isAddDisabled = function () {
+            return (!vm.isDetailsValid || (!vm.isEctd && vm.lifecycleList.length > 0))
+
+        }
+
         vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;
         }
@@ -146,11 +154,11 @@
          *
          * @returns {boolean}
          */
-        vm.showError = function () {
+        vm.showError = function (isTouched, isInvalid) {
 
             console.log("form toucbed "+ vm.lifecycleListForm.$touched)
             console.log("form toucbed2 "+ vm.showErrors())
-            if ((vm.lifecycleListForm.$invalid && vm.lifecycleListForm.$touched) || (vm.showErrors()&&vm.lifecycleListForm.$invalid)) {
+            if ((isTouched && isInvalid) || (vm.showErrors() && isInvalid)) {
                 return true
             }
             return false

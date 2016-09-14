@@ -1,10 +1,11 @@
 <ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
         <div class="row">
 
-            <input type="text" id="oneRec_{{$id}}" name="oneRec" ng-show="true"
+            <input type="text" id="oneRec_{{$id}}" name="oneRec" ng-show="false"
                    ng-model="lifeListCtrl.oneRecord" ng-required="true"/>
             <label>
-                <strong id=" onerec-error" class="error" ng-if="lifeListCtrl.showError()">
+                <strong id=" onerec-error" class="error"
+                        ng-if="lifeListCtrl.showError(lifeListCtrl.lifecycleListForm.oneRec.$touched,lifeListCtrl.lifecycleListForm.oneRec.$invalid)">
                         <span class="label label-danger"
                               ng-messages="lifeListCtrl.lifecycleListForm.oneRec.$error">
                             <span ng-message="required">{{"MSG_ERR_ONE_LIFE_REC"|translate}}</span>
@@ -29,7 +30,7 @@
             <div class="btn-group-sm col-md-12 text-right">
                 <input type="submit" value="{{'ADD_TRANSACTION'|translate}}" class="btn btn-primary"
                        ng-click="lifeListCtrl.addTransaction()"
-                       ng-disabled="!lifeListCtrl.isDetailsValid">
+                       ng-disabled="lifeListCtrl.isAddDisabled()">
                 <input type="submit" value="Cancel" class="btn btn-default"
                        data-ng-show="lifeListCtrl.newAdrFormShow"
                        ng-click="lifeListCtrl.newAdrFormShow = false">

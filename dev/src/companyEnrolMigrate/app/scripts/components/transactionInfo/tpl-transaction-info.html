@@ -86,6 +86,7 @@
                     </div>
                     <div>
                         <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
+                                            is-ectd="transInfoCtrl.isEctd"
                                             deprecate-sequence="transInfoCtrl.subtractSequence()" show-errors="transInfoCtrl.showFormErrors()"
                                             get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
 

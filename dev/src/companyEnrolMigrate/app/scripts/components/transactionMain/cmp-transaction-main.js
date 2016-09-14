@@ -13,7 +13,7 @@
     function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter) {
 
         var vm = this;
-        vm.isIncomplete = true;
+        vm.savePressed = false;
         vm.userType;
         vm.transactionService = new TransactionService();
         vm.rootTag = vm.transactionService.getRootTag();
@@ -26,7 +26,8 @@
         vm.saveJson = function () {
             var writeResult = _transformFile()
             vm.rootTag = vm.transactionService.getRootTag();
-            hpfbFileProcessing.writeAsJson(writeResult, "transactionEnrol", vm.rootTag);
+            hpfbFileProcessing.writeAsJson(writeResult, "transactionEnrol", vm.rootTag)
+            vm.savePressed = true;
         }
         /**
          * @ngdoc method - saves the data model as XML format
@@ -34,28 +35,16 @@
         vm.saveXML = function () {
             var writeResult = _transformFile()
             hpfbFileProcessing.writeAsXml(writeResult, "transactionEnrol", vm.rootTag);
+            vm.savePressed = true;
         }
         /**
          * @ngdcc method updates data and increments version before creating json
          */
         function _transformFile() {
-            /* updateDate();
-             if(!vm.isExtern()) {
-             incrementMajorVersion();
-             }else {
-             incrementMinorVersion();
-             }*/
             var writeResult = vm.transactionService.transformToFileObj(vm.transaction);
             return writeResult;
         }
 
-        /*function _setComplete() {
-         if (vm.company.companyId) {
-         vm.isIncomplete = false;
-         } else {
-         vm.isIncomplete = true;
-         }
-         }*/
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             vm.transactionService = new TransactionService();
@@ -92,6 +81,12 @@
             }
             return false;
         }
+        vm.showErrors = function () {
+            return (vm.transactionEnrolForm.$dirty && vm.transactionEnrolForm.$invalid && vm.savePressed)
+
+        }
+
+
     }
 })();
 

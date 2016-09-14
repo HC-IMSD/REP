@@ -20,7 +20,7 @@
                     <h2 class="panel-title">Regulatory Transaction Enrolment</h2>
                 </header>
                 <div class="panel-body">
-                    <cmp-transaction-info transaction-root="main.transaction"
+                    <cmp-transaction-info transaction-root="main.transaction" show-errors="main.showErrors()"
                                           deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
                                           reset-ectd="main.transactionService.resetEctdSection()"
                                           get-transaction="main.transactionService.getNewTransaction()"

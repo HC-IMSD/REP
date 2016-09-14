@@ -39,6 +39,7 @@
         vm.showEctdSection = true;
         vm.showSolicitedDetail = false;
         vm.activityEditable = true;
+        vm.isEctd = false;
         vm.$onInit = function () {
             vm.updateEctdState()
         }
@@ -49,6 +50,7 @@
                 vm.setSolicitedState();
             }
         }
+
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
         }
@@ -75,9 +77,11 @@
         vm.updateEctdState = function () {
             if (isEctdValue()) {
                 vm.showEctdSection = true;
+                vm.isEctd = true;
             } else {
                 //clear data
                 vm.resetEctd();
+                vm.isEctd = false;
                 vm.showEctdSection = false;
             }
         }
