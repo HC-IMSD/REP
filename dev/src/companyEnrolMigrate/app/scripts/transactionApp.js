@@ -15,7 +15,8 @@
             'contactModule',
             'transactionService',
             'filterLists',
-            'lcDetailsModule'
+            'lcDetailsModule',
+            'numberFormat'
         ])
 })();
 

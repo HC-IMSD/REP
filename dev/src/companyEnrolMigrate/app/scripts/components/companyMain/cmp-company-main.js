@@ -231,10 +231,10 @@
         function updateModelOnApproval() {
             //reset any amend selections
             for (var i = 0; i < vm.company.addressList.length; i++) {
-                vm.company.addressList[i].amendRecord = 'N';
+                vm.company.addressList[i].amendRecord = false;
             }
             for (var j = 0; j < vm.company.contactList.length; j++) {
-                vm.company.contactList[j].amendRecord = 'N';
+                vm.company.contactList[j].amendRecord = false;
             }
         }
 

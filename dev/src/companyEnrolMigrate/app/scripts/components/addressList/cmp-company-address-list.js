@@ -84,13 +84,13 @@
         }
 
         //this is needed on load. Bit of a hack
-
+        //TODO move to a service
         function _setRolesConcat(addressModel) {
             var addressRoles = addressModel.addressRole;
             var result = "";
 
             if (addressRoles.manufacturer) {
-                result = result + " MAN"
+                result = result + " MFR"
             }
             if (addressRoles.billing) {
                 result = result + " BILL"
@@ -102,6 +102,7 @@
                 result = result + " IMP"
             }
             addressModel.roleConcat = result;
+            console.log("THis is the concat" + result)
         }
 
 
@@ -171,10 +172,10 @@
          * @ngdoc method determines if all the roles have been selected for the address
          * @returns {boolean}
          */
+            //TODO move to a service
         vm.isAllRolesSelected=function(){
             var rolesSelected = 0;
-            //var repPrimarySelected=false;
-            //var repSecondarySelected=false;
+            var importerSelected = false;
             if (!vm.addressList) return false;
             var companyRole= vm.companyService.createAddressRole();
             var numKeys=vm.companyService.getNumberKeys(companyRole);
@@ -186,12 +187,20 @@
                     var attrValue = obj[key];
                     if (attrValue && companyRole.hasOwnProperty(attrName)) {
                         rolesSelected++;
+                        if (attrName === "importer") importerSelected = true;
                     }
+
                 }
             }
+            console.log("number of keys" + numKeys);
+            console.log("importer " + importerSelected)
             if(rolesSelected===numKeys){
                 return true;
             }
+            if ((rolesSelected === (numKeys - 1)) && (!importerSelected)) {
+                return true;
+            }
+
             return false;
         }
 

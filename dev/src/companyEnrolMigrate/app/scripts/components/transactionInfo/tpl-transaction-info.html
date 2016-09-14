@@ -87,7 +87,8 @@
                     <div>
                         <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
                                             is-ectd="transInfoCtrl.isEctd"
-                                            deprecate-sequence="transInfoCtrl.subtractSequence()" show-errors="transInfoCtrl.showFormErrors()"
+                                            deprecate-sequence="transInfoCtrl.subtractSequence()"
+                                            show-errors="transInfoCtrl.showFormErrors()"
                                             get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
 
                     </div>
@@ -123,7 +124,7 @@
                     <textarea maxlength="256" size="256" id="solicitedRequester_{{$id}}" name="solicitedRequester"
                               ng-model="transInfoCtrl.transactionModel.solicitedRequester"
                               class="form-control full-width"
-                              ng-required="transInfoCtrl.showSolicitedDetail"/>
+                              ng-required="transInfoCtrl.showSolicitedDetail"></textarea>
                     <strong id="solicitedRequester-error" class="error"
                             ng-if="transInfoCtrl.showError(transInfoForm.solicitedRequester)">
                         <span class="label label-danger" ng-messages="transInfoForm.solicitedRequester.$error">
@@ -158,60 +159,62 @@
                 </div>
             </fieldset>
         </div>
+
         <div>
-            <fieldset>
-                <legend>Regulatory Activity contact for THIS Regulatory Activity</legend>
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label for="isActivityChanges_{{$id}}" class=>
-                            <span class="field-name">{{"IS_ACTCHANGES" |translate}}</span>
-                            <select id="isActivityChanges_{{$id}}" name="isActivityChanges"
-                                    ng-model="transInfoCtrl.transactionModel.isActivityChanges"
-                                    class="form-control"
-                                    ng-options="choice |translate for choice in transInfoCtrl.yesNoList"></select>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Company Information</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-12"
-                         ng-class="{'has-error':transInfoForm.transCompanyName.$invalid}">
-                        <label for="companyName_{{$id}}" class="required full-width">
-                            <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
-                            <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                            <input type="text" maxlength="80" id="companyName_{{$id}}" name="transCompanyName"
-                                   ng-model="transInfoCtrl.transactionModel.companyName"
-                                   class="form-control full-width" ng-required="true"/>
-                            <strong id="companyName-error" class="error"
-                                    ng-if="transInfoCtrl.showError(transInfoForm.transCompanyName)">
+            <section class="panel  panel-primary">
+                <header class="panel-heading">
+                    <h3 class="panel-title">{{'REG_ACT_CONTACT' |translate}}</h3>
+                </header>
+                <div class="panel-body">
+                    <div>
+                        <fieldset>
+                            <legend>{{'REG_CONTACT_THIS'|translate}}</legend>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Company Information</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12"
+                                     ng-class="{'has-error':transInfoForm.transCompanyName.$invalid}">
+                                    <label for="companyName_{{$id}}" class="required full-width">
+                                        <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                        <input type="text" maxlength="80" id="companyName_{{$id}}"
+                                               name="transCompanyName"
+                                               ng-model="transInfoCtrl.transactionModel.companyName"
+                                               class="form-control full-width" ng-required="true"/>
+                                        <strong id="companyName-error" class="error"
+                                                ng-if="transInfoCtrl.showError(transInfoForm.transCompanyName)">
                         <span class="label label-danger" ng-messages="transInfoForm.transCompanyName.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
-                            </strong>
-                        </label>
+                                        </strong>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3>Address Information</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
+                                                     show-errors="transInfoCtrl.showError()"></cmp-address-details>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div>
+                        <fieldset>
+                            <legend>{{'COMPANY_REP_THIS'|translate}}</legend>
+                            <div class="row">
+                                <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
+                                                     show-errors="transInfoCtrl.showError()"></cmp-contact-details>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Address Information</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
-                                         show-errors="transInfoCtrl.showError()"></cmp-address-details>
-                </div>
-            </fieldset>
-        </div>
-        <div class="row">
-            <fieldset>
-                <legend>Company Representative for THIS Regulatory Activity</legend>
-                <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
-                                     show-errors="transInfoCtrl.showError()"></cmp-contact-details>
-            </fieldset>
+            </section>
         </div>
         <!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
     </ng-form>

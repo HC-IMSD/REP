@@ -179,7 +179,8 @@ var translationBaseFiles = {
     general: paths.translations + 'general',
     messages: paths.translations + 'messages',
     stateProvinces: paths.translations + 'stateProvinces',
-    transaction: paths.translations + 'transaction'
+    transaction: paths.translations + 'transaction',
+    companyInfo: paths.translations + 'companyInfo',
 }
 
 // == PIPE SEGMENTS ========
@@ -784,7 +785,8 @@ gulp.task('copyCompanyTranslateDev', function () {
         translationBaseFiles.applicationInfo,
         translationBaseFiles.fileIO,
         translationBaseFiles.general,
-        translationBaseFiles.messages
+        translationBaseFiles.messages,
+        translationBaseFiles.companyInfo
     ];
     pipes.translateDev(translationList, paths.buildDevCompany)
 });

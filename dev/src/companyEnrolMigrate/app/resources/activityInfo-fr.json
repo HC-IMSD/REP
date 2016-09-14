@@ -9,7 +9,7 @@
   "CONFIRM_STUDY": "fr_Confirmatory studies",
   "CHANGE_SUBSTANCE": "fr_Change in drug substance/product (site, method, equipment, process control",
   "OTHER_SPECIFY": "fr_Other (please specify):",
-  "TYPE_VNC": "fr_Type of Notifiable Chance (NC) or Veterinary Notifiable Change (VNC) submission (if applicable)",
+  "TYPE_VNC": "fr_Type of Notifiable Chance (NC) or Veterinary Notifiable Change (VNC) submission",
   "CHANGE_LABEL": "fr_Change in text of labelling",
   "CHANGE_DRUGSUB": "fr_Change in drug substance (source, synthesis)",
   "CHANGE_FORM": "fr_Change in formulation",

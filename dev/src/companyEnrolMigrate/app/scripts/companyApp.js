@@ -60,6 +60,10 @@
                     {
                         prefix: 'app/resources/applicationInfo-',
                         suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/companyInfo-',
+                        suffix: '.json'
                     }
                 ]
             })

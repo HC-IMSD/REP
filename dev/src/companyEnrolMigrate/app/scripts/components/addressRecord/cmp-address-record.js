@@ -73,13 +73,13 @@
                 angular.element(saveAddress).trigger('focus');
             }
         };
-
+        //TODO move to service
         function _getRolesConcat() {
             var addressRoles = vm.addressModel.addressRole;
             var result = "";
 
             if (addressRoles.manufacturer) {
-                result = result + " MAN"
+                result = result + " MFR"
             }
             if (addressRoles.billing) {
                 result = result + " BILL"

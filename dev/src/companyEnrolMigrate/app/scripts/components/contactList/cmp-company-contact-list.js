@@ -15,7 +15,7 @@
     angular
         .module('contactList2')
         .component('cmpCompanyContactList', {
-            templateUrl: 'app/scripts/components/contactList/tpl-contact-list2.html',
+            templateUrl: 'app/scripts/components/contactList/tpl-contact-list.html',
             controller: contactListCtrl,
             controllerAs: 'contactListCtrl',
             bindings: {
@@ -82,13 +82,13 @@
         }
 
         //this is needed on load. Bit of a hack
-
+        //TODO move to a service?
         function _setRolesConcat(contactModel) {
             var roles = contactModel.addressRole;
             var result = "";
 
             if (roles.manufacturer) {
-                result = result + " MAN"
+                result = result + " MFR"
             }
             if (roles.billing) {
                 result = result + " BILL"
@@ -180,14 +180,15 @@
          * @ngdoc method checks if all the contact roles have been selected
          * @returns {boolean}
          */
+            //TODDO move this to the service
         vm.isAllContactRolesSelected=function(){
             var rolesSelected = 0;
             var repPrimarySelected=false;
             var repSecondarySelected=false;
+
             if (!vm.contactList) return false;
           var companyRole= vm.companyService.createContactRole();
             var numKeys=vm.companyService.getNumberKeys(companyRole);
-
            for(var i=0;i<vm.contactList.length;i++) {
                var obj = vm.contactList[i].addressRole;
                for (var key in obj) {
@@ -197,15 +198,18 @@
                        rolesSelected++;
                        if(key==="repPrimary") repPrimarySelected=true;
                        if(key==="repSecondary") repSecondarySelected=true;
+
                    }
                }
            }
             if(rolesSelected===numKeys){
                 return true;
             }
-            if(rolesSelected===(numKeys-1) &&(repPrimarySelected &&!repSecondarySelected)){
+            //primary has to be selected at least
+            if (rolesSelected === (numKeys - 1) && (repPrimarySelected && !repSecondarySelected)) {
                 return true;
             }
+
             return false;
         }
     }

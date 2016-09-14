@@ -10,7 +10,7 @@
   "CHANGE_FORM":"Change in formulation or method of manufacturing with clinical / bio data",
   "CHANGE_SUBSTANCE": "Change in drug substance / product (site, method, equipment, process control)",
   "OTHER_SPECIFY": "Other (please specify):",
-  "TYPE_VNC":"Type of Notifiable Chance (NC) or Veterinary Notifiable Change (VNC) submission (if applicable)",
+  "TYPE_VNC": "Type of Notifiable Chance (NC) or Veterinary Notifiable Change (VNC) submission",
   "CHANGE_LABEL":"Change in text of labelling",
   "CHANGE_DRUGSUB":"Change in drug substance (source, synthesis)",
   "CHANGE_SPEC":"Change in specifications (medicinal or non-medicinal ingredient, pharmaceutical form, analytical method)",

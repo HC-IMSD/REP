@@ -3,8 +3,8 @@
   "MSG_ERR_EMAIL_FORMAT": "Veuillez fournir une adresse électronique valide.",
   "MSG_ERR_CONTACT_NUM": "fr_All the roles have to be used for the company contacts",
   "MSG_ERR_PHONE_FORMAT": "fr_Please specify a valid phone number",
-  "MSG_ERR_ALLROLE": "fr_Across the contact records, the roles of  manufacturer, mailing, billing, and REP primary contact must be selected",
-  "MSG_ERR_ADDRESSSROLE": "fr_The roles of manufacturer, mailing,  and billing have not all been selected in the address list",
+  "MSG_ERR_ALLROLE": "fr_Across the contact records, the roles of manufacturer, mailing, billing, and REP primary contact must be selected",
+  "MSG_ERR_ADDRESSSROLE": "fr_The roles of manufacturer, mailing, and billing have not all been selected among the list of addresses",
   "MSG_ERR_POSTAL": "fr_Please specify a valid postal code.",
   "MSG_ERR_ZIP": "fr_Please specify a valid zip code.",
   "MSG_ERR_DATE_FORMAT": "fr_The date format is incorrect.",
@@ -18,6 +18,7 @@
   "MSG_LENGTH_6NUM": "fr_Please enter 6 digits.",
   "MSG_LENGTH_8NUM": "fr_Please enter 8 digits.",
   "MSG_LENGTH_7": "fr_Please enter 7 characters.",
+  "MSG_LENGTH_7NUM": "fr_Please enter 7 digits.",
   "MSG_ERR_ONE_REP": "fr_At least one contact is required.",
   "MSG_ERR_ONE_LIFE_REC": "fr_One lifecycle record is required."
 }

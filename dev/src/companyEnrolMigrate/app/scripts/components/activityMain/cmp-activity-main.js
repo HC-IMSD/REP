@@ -160,6 +160,7 @@
             if (!vm.isExtern()) {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
                 vm.activityRoot.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                updateModelOnApproval(); //updates all the amend
             } else {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
             }
@@ -189,7 +190,6 @@
         function disableXMLSave() {
 
             vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern());
-            //  vm.disableXML = vm.companyEnrolForm.$invalid || (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
         };
 
         function disableJSONSave() {
@@ -241,6 +241,32 @@
                 return true;
             }
             return false;
+        }
+
+        /**
+         * @ngdoc method when a form gets approved
+         * remove any amendment checkboxes
+         */
+        function updateModelOnApproval() {
+            //reset any amend selections
+
+            if (activityRoot.relatedActivity) {
+                for (var i = 0; i < activityRoot.relatedActivity.length; i++) {
+                    activityRoot.relatedActivity[i].amendRecord = false;
+                }
+            }
+            if (activityRoot.contactRecord) {
+                for (var j = 0; i < activityRoot.contactRecord.length; j++) {
+                    activityRoot.contactRecord[j].amend = false;
+                }
+            }
+            /*
+             for (var i = 0; i < vm.company.addressList.length; i++) {
+             vm.company.addressList[i].amendRecord = 'N';
+             }
+             for (var j = 0; j < vm.company.contactList.length; j++) {
+             vm.company.contactList[j].amendRecord = 'N';
+             }*/
         }
 
 

@@ -116,33 +116,35 @@
 
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6"
-                             ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
-                            <div class="form-group">
-                                <label for="feeClass_{{$id}}" class="required">
-                                    <span class="field-name">{{'FEE_CLASS' |translate}}</span>
-                                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                    <select class="form-control" id="feeClass_{{$id}}"
-                                            name="feeClass" ng-model="main.activityRoot.feeClass"
-                                            ng-required="true">
-                                        <option>Test 1</option>
-                                        <option>Test 2</option>
-                                    </select>
-                                    <strong id="feeClass-error" class="error">
+                        <div>
+                            <div class="col-xs-4"
+                                 ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
+                                <div class="form-group">
+                                    <label for="feeClass_{{$id}}" class="required">
+                                        <span class="field-name">{{'FEE_CLASS' |translate}}</span>
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                        <select class="form-control" id="feeClass_{{$id}}"
+                                                name="feeClass" ng-model="main.activityRoot.feeClass"
+                                                ng-required="true">
+                                            <option>Test 1</option>
+                                            <option>Test 2</option>
+                                        </select>
+                                        <strong id="feeClass-error" class="error">
                         <span class="label label-danger"
                               ng-if="main.showError(main.activityEnrolForm.feeClass.$touched,main.activityEnrolForm.feeClass.$invalid)"
                               ng-messages="main.activityEnrolForm.feeClass.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
-                                    </strong>
-                                </label>
+                                        </strong>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" ng-class="{'has-error':main.activityEnrolForm.notlasa.$invalid}">
-                        <div class="form-group col-xs-12">
+
+                    <div class="row">
+                        <div class="form-group col-xs-12"
+                             ng-class="{'has-error':main.activityEnrolForm.notlasa.$invalid}">
                             <div class="checkbox required">
                                 <label for="chk-lasa_{{$id}}">
                                     <input type="checkbox" ng-model="main.activityRoot.notLasa" name="chkLasa"
@@ -183,32 +185,33 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-xs-12"
-                             ng-class="{'has-error':main.activityEnrolForm.isThirdParty.$invalid}">
-                            <div class="col-xs-10">
-                                <label for="third-party_{{$id}}" class="required full-width">
-                                    <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
-                                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                    <strong id="isSolicited-error" class="error"
-                                            ng-if="main.showError(main.activityEnrolForm.thirdParty.$touched,main.activityEnrolForm.thirdParty.$invalid)">
+                        <!--<div class="col-xs-11 form-group"
+                             ng-class="{'has-error':main.activityEnrolForm.isThirdParty.$invalid}">-->
+                        <div class="col-xs-9 form-group">
+                            <label for="third-party_{{$id}}" class="required">
+                                <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
+                                <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                <strong id="isSolicited-error" class="error"
+                                        ng-if="main.showError(main.activityEnrolForm.thirdParty.$touched,main.activityEnrolForm.thirdParty.$invalid)">
                          <span class="label label-danger" ng-messages="main.activityEnrolForm.thirdParty.$error">
                              <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                          </span>
-                                    </strong>
-                                </label>
-                            </div>
-                            <div class="col-xs-2">
-                                <select id="third-party_{{$id}}" name="thirdParty"
-                                        ng-model="main.activityRoot.isThirdParty"
-                                        class="form-control"
-                                        ng-change="main.setThirdParty()"
-                                        ng-options="choice |translate for choice in main.yesNoList"
-                                        required></select>
-                            </div>
+                                </strong>
+                            </label>
                         </div>
+                        <div class="col-xs-2 form-group"
+                             ng-class="{'has-error':main.activityEnrolForm.isThirdParty.$invalid}">
+                            <select id="third-party_{{$id}}" name="thirdParty"
+                                    ng-model="main.activityRoot.isThirdParty"
+                                    class="form-control"
+                                    ng-change="main.setThirdParty()"
+                                    ng-options="choice |translate for choice in main.yesNoList"
+                                    required></select>
+                        </div>
+                        <!--  </div>-->
                     </div>
-                    <div class="row" ng-show="main.thirdPartyState">
-                        <div class="alert alert-info" role="alert" aria-live="polite">
+                    <div class="row">
+                        <div ng-show="main.thirdPartyState" class="alert alert-info" role="alert" aria-live="polite">
                             {{'AUT_LETTER'|translate}}
                         </div>
                     </div>
@@ -219,13 +222,16 @@
                                                    is-amend="main.formAmend"
                                                    show-list-errrors=""></cmp-related-activity-list>
                     </div>
-                    <div>
-                        <div ng-hide="main.isNotifiable">
-                            <cmp-activity-rationale activity-record="main.activityRoot.rationaleTypes">
+                    <div class="brdr-tp brdr-rght brdr-bttm brdr-lft">
+                        <div ng-hide="main.isNotifiable" class="mrgn-lft-sm">
+                            <cmp-activity-rationale activity-record="main.activityRoot.rationaleTypes"
+                                                    is-required="main.isNotifiable" show-errors="main.showErrors()"
+                            >
                             </cmp-activity-rationale>
                         </div>
-                        <div ng-show="main.isNotifiable">
-                            <cmp-activity-change activity-record="main.activityRoot.notifiableChangeTypes">
+                        <div ng-show="main.isNotifiable" class="mrgn-lft-sm">
+                            <cmp-activity-change activity-record="main.activityRoot.notifiableChangeTypes"
+                                                 is-required="main.isNotifiable" show-errors="main.showErrors()">
                             </cmp-activity-change>
                         </div>
                     </div>

@@ -1,8 +1,18 @@
-<ng-form name="activityTypeForm">
+<ng-form name="actRatCtrl.activityTypeForm">
     <fieldset>
         <legend>
             <span class="field-name">{{"RATIONALE_SNDS" |translate}}</span>
+            <strong class="required"> {{"REQUIRED" |translate}}</strong>
+            <input id="rationaleMissing_{{$id}}" name="rationaleMissing" ng-required="true" ng-show="false"
+                   ng-model="ar.isSelected" ng-required="actRatCtrl.requiredState"/>
+            <strong id=" address-role-error" class="error" ng-if="actRatCtrl.showErrorMissing()">
+                        <span class="label label-danger"
+                              ng-messages="actRatCtrl.activityTypeForm.rationaleMissing.$error">
+                            <span ng-message="required">{{"MSG_ERR_RATIONALE_SEL"|translate}}</span>
+                        </span>
+            </strong>
         </legend>
+
         <div class="row">
             <div class="col-sm-7">
                 <div class="checkbox">

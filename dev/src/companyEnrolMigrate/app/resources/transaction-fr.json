@@ -82,5 +82,8 @@
   "UDRA": "fr_UDRA",
   "CONSULTATION": "fr_Upon Consultation",
   "YBPR": "fr_YBPR",
-  "LIFECYCLE_TITLE":"fr_Lifecycle Management Table"
+  "LIFECYCLE_TITLE": "fr_Lifecycle Management Table",
+  "REG_CONTACT_THIS": "fr_Regulatory Activity contact for THIS Regulatory Activity",
+  "REG_ACT_CONTACT": "fr_Regulatory Activity Contact",
+  "COMPANY_REP_THIS": "fr_Company Representative for THIS Regulatory Activity"
 }
