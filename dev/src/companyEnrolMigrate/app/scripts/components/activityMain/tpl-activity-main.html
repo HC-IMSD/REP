@@ -219,14 +219,12 @@
                         <cmp-related-activity-list activities="main.activityRoot.relatedActivity" on-update=""
                                                    get-new-activity="main.activityService.getNewActivity()"
                                                    activity-types="main.activityService.getActivityTypeList(isPilot)"
-                                                   is-amend="main.formAmend"
-                                                   show-list-errrors=""></cmp-related-activity-list>
+                                                   is-amend="main.formAmend"></cmp-related-activity-list>
                     </div>
                     <div class="brdr-tp brdr-rght brdr-bttm brdr-lft">
                         <div ng-hide="main.isNotifiable" class="mrgn-lft-sm">
                             <cmp-activity-rationale activity-record="main.activityRoot.rationaleTypes"
-                                                    is-required="main.isNotifiable" show-errors="main.showErrors()"
-                            >
+                                                    is-required="!main.isNotifiable" show-errors="main.showErrors()">
                             </cmp-activity-rationale>
                         </div>
                         <div ng-show="main.isNotifiable" class="mrgn-lft-sm">
