@@ -22,6 +22,7 @@
                     <cmp-address-record on-delete="addressListCtrl.deleteAddress(addressId)"
                                         on-update="addressListCtrl.onUpdateAddressRecord(rec)"
                                         is-amend="addressListCtrl.isAmend()"
+                                        address-record="$parent.record"
                                         is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
                                         is-detail-valid="addressListCtrl.setValid(state)">
                     </cmp-address-record>

@@ -18,9 +18,9 @@
             templateUrl: 'app/scripts/components/addressRecord/tpl-address-record.html',
             controller: addressRecCtrl,
             controllerAs: 'addressRec',
-            require: {
+            /*require: {
                 trackRecordCtrl: '^trackRecord'
-            },
+             },*/
             bindings: {
                 addressRecord: '<',
                 onUpdate: '&',
@@ -62,16 +62,6 @@
             return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressID}));
         };
         vm.$onInit = function () {
-            //after init do not initialise variables here onchanges is called first
-            var rec = vm.trackRecordCtrl.trackRecord();
-            //only bind if there is a record. Should never happen that there is no record
-            if (rec) {
-
-                vm.addressModel = angular.copy(rec);
-                vm.addressModel.roleConcat = _getRolesConcat();
-                //TODO check if empty, don't change focus
-                angular.element(saveAddress).trigger('focus');
-            }
         };
         //TODO move to service
         function _getRolesConcat() {
@@ -99,9 +89,13 @@
          */
         vm.$onChanges = function (changes) {
             //how this is currently wired, this will never fire!
-            if (changes.addressRecord.currentValue) {
+            if (changes.addressRecord) {
                 vm.addressModel = angular.copy(changes.addressRecord.currentValue);
                 vm.addressModel.roleConcat = _getRolesConcat();
+
+                //TODO check if empty
+                //angular.element(saveAddress).trigger('focus');
+
             }
         };
 

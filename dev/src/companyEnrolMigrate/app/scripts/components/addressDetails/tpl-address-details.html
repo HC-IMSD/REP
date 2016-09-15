@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-6">
                 <cmp-country-select form-name="addressForm" selected-country="adr.addressModel.country"
-                                    countries="adr.countries" is-disabled="adr.isAmend"
+                                    countries="adr.countries" is-disabled="adr.isAmend" show-errors="adr.showErrors()"
                                     country-change="adr.onSelectedCountryChange($event.country)"
                 ></cmp-country-select>
             </div>

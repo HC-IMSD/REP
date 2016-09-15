@@ -18,9 +18,6 @@
             templateUrl: 'app/scripts/components/contactRecord/tpl-contact-record.html',
             controller: contactRecCtrl,
             controllerAs: 'contactRec',
-            require: {
-                trackRecordCtrl:    '^trackRecord'
-            },
             bindings: {
                 contactRecord: '<',
                 onUpdate: '&',
@@ -66,14 +63,14 @@
             return(vm.isRoleSelected({roleName:type,id:vm.contactModel.contactId}));
         }
         vm.$onInit = function () {
-            //after init do not initialise variables here onchanges is called first
+            /*//after init do not initialise variables here onchanges is called first
                 var rec=vm.trackRecordCtrl.trackRecord();
                 //only bind if there is a record. Should never happen that there is no record
                 if(rec) {
                     vm.contactModel = angular.copy(rec);
-                    //TODO check if empty, don't change focus
+
                     angular.element(saveContact).trigger('focus');
-                }
+             }*/
         }
         //todo move to service
         function _getRolesConcat(){
@@ -106,7 +103,8 @@
             //how this is currently wired, this will never fire!
             if (changes.contactRecord) {
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
-
+                vm.contactModel.roleConcat = _getRolesConcat();
+                //angular.element(saveContact).trigger('focus');
             }
         }
 
