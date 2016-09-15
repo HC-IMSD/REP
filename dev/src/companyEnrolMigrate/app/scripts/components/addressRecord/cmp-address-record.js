@@ -18,16 +18,14 @@
             templateUrl: 'app/scripts/components/addressRecord/tpl-address-record.html',
             controller: addressRecCtrl,
             controllerAs: 'addressRec',
-            /*require: {
-                trackRecordCtrl: '^trackRecord'
-             },*/
+
             bindings: {
                 addressRecord: '<',
                 onUpdate: '&',
                 updateValid: '&',
                 checkRoles: '&',
                 onDelete: '&',
-                isAmend: '&',
+                isAmend: '<',
                 isDetailValid: '&',
                 isRoleSelected: '&'
             }
@@ -37,7 +35,8 @@
         var vm = this;
         vm.savePressed = false;
         vm.isContact = false;
-        vm.isNotEditable = false;
+        vm.isEditable = true;
+        vm.formAmend = false;
         vm.addressRecForm = "";
         //TODO get  model from a servide
         vm.addressModel = {
@@ -92,10 +91,13 @@
             if (changes.addressRecord) {
                 vm.addressModel = angular.copy(changes.addressRecord.currentValue);
                 vm.addressModel.roleConcat = _getRolesConcat();
-
-                //TODO check if empty
+                vm.setEditable();
                 //angular.element(saveAddress).trigger('focus');
 
+            }
+            if (changes.isAmend) {
+                vm.formAmend = changes.isAmend.currentValue;
+                vm.setEditable();
             }
         };
 
@@ -110,9 +112,9 @@
          */
         vm.discardChanges = function () {
             if (vm.addressRecForm.$pristine) return;
-            var currRecord = vm.trackRecordCtrl.trackRecord();
+            var currRecord = vm.addressRecord;
             vm.addressModel = angular.copy(currRecord);
-            vm.setNotEditable(); //case of amend
+            vm.setEditable(); //case of amend
             vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
             vm.savePressed = false;
@@ -179,12 +181,12 @@
          * @ngdoc method used to determine if record should be editable. Used for amend
          * @returns {boolean}
          */
-        vm.setNotEditable = function () {
+        vm.setEditable = function () {
 
-            if (vm.isAmend() && !vm.addressModel.amendRecord) {
-                vm.isNotEditable = true;
+            if (vm.formAmend && !vm.addressModel.amendRecord) {
+                vm.isEditable = false;
             } else {
-                vm.isNotEditable = false
+                vm.isEditable = true;
             }
         }
 

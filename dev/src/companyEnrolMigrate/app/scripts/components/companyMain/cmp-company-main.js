@@ -36,11 +36,11 @@
         //TODO magic number
         vm.rootTag = 'COMPANY_ENROL';
         vm.isIncomplete = true;
+        vm.formAmendType = false;
         vm.userType = "EXT";
         vm.saveXMLLabel = "SAVE_DRAFT";
         vm.updateValues = 0;
         vm.applicationInfoService = new ApplicationInfoService();
-        vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
         var _company = new CompanyService();
@@ -92,9 +92,9 @@
          * @ngdoc method -returns whether this application is an amendment
          * @returns {boolean}
          */
-        vm.isAmend = function () {
+        vm.setAmend = function () {
 
-            return (vm.company.applicationType === vm.applicationInfoService.getAmendType())
+            vm.formAmendType = (vm.company.applicationType === vm.applicationInfoService.getAmendType())
         };
 
         /**
@@ -165,6 +165,7 @@
                 vm.company = {};
                 angular.extend(vm.company, _company.getModelInfo());
                 _setComplete();
+                vm.setAmend();
 
             }
             disableXMLSave();
@@ -173,10 +174,11 @@
          * ngdoc method to set the application type to amend
          * @private
          */
-        function _setApplTypeToAmend() {
+        vm.setApplType = function (type) {
 
-            vm.company.applicationType = vm.companyService.getAmendType();
+            vm.company.applicationType = type;
             disableXMLSave();
+            vm.setAmend();
         }
 
         //used on update

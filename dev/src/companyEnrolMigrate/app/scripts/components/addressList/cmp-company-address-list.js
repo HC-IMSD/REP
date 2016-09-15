@@ -20,7 +20,7 @@
                 addresses: '<',
                 onUpdate: '&',
                 getNewAddress:'&',
-                isAmend:'&',
+                isAmend: '<',
                 companyService:'<'
             },
             controller: addressListCtrl,

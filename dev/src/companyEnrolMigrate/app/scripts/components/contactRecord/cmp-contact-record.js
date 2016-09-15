@@ -24,7 +24,7 @@
                 updateValid:'&',
                 checkRoles:'&',
                 onDelete:'&',
-                isAmend:'&',
+                isAmend: '<',
                 isDetailValid:'&',
                 isRoleSelected:'&'
             }
@@ -34,8 +34,8 @@
         var vm = this;
         vm.savePressed=false;
         vm.isContact=true; //used to set the state of the role
-        vm.isNotEditable = false;
-
+        vm.isEditable = false;
+        vm.formAmend = false;
        //TODO get role model from a servide
 
         vm.contactModel={
@@ -104,7 +104,12 @@
             if (changes.contactRecord) {
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
                 vm.contactModel.roleConcat = _getRolesConcat();
+                vm.setEditable();
                 //angular.element(saveContact).trigger('focus');
+            }
+            if (changes.isAmend) {
+                vm.formAmend = changes.isAmend.currentValue;
+                vm.setEditable();
             }
         }
 
@@ -119,9 +124,9 @@
          */
         vm.discardChanges=function(){
             if(vm.contactRecForm.$pristine) return;
-            var currRecord=vm.trackRecordCtrl.trackRecord()
+            var currRecord = vm.contactRecord;
             vm.contactModel =angular.copy(currRecord);
-            vm.setNotEditable()
+            vm.setEditable()
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state:vm.contactRecForm.$valid});
@@ -133,6 +138,7 @@
             angular.extend(aRole,newRole)
             vm.contactModel.addressRole = aRole;
             vm.updateContactModel2();
+            vm.setEditable();
         }
         /**
          * @ngdoc method -Updates the parent on whether this record is valid or not
@@ -175,12 +181,14 @@
          * @ngdoc method used to determine if record should be editable. Used for amend button
          * @returns {boolean}
          */
-        vm.setNotEditable=function(){
+        vm.setEditable = function () {
 
-            if(vm.isAmend() &&!vm.contactModel.amendRecord){
-                vm.isNotEditable = true;
+            if (!vm.formAmend) {
+                vm.isEditable = true
+            } else if (vm.formAmend && vm.contactModel.amendRecord) {
+                vm.isEditable = true;
             } else {
-                vm.isNotEditable = false
+                vm.isEditable = false;
             }
         }
 
