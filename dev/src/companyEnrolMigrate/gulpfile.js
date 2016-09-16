@@ -448,6 +448,37 @@ pipes.cleanBuild = function (baseDir) {
     return deferred.promise;
     //return (del(paths.buildDev));
 }
+pipes.copyAllSrc = function () {
+    var dest = './build/demo/'
+    var copySources = gulp.src(['./app/**/*', '!./app/views/**/*', '!./app/spec/**/*',
+            '!./app/scripts/*'],
+        {read: true, base: '.'});
+    return (copySources.pipe(gulp.dest(dest)))
+}
+pipes.copyDemoActivity = function () {
+    var dest = './build/demo/'
+    var copySources = gulp.src([
+        paths.buildDevActivity + '/*.html',
+        paths.buildDevActivity + '/app/scripts/*.js'
+    ], {read: true, base: paths.buildDevActivity});
+    return (copySources.pipe(gulp.dest(dest)))
+}
+pipes.copyDemoTransaction = function () {
+    var dest = './build/demo/'
+    var copySources = gulp.src([
+        paths.buildDevTransaction + '/*.html',
+        paths.buildDevTransaction + '/app/scripts/*.js'
+    ], {read: true, base: paths.buildDevTransaction});
+    return (copySources.pipe(gulp.dest(dest)))
+}
+pipes.copyDemoCompany = function () {
+    var dest = './build/demo/'
+    var copySources = gulp.src([
+        paths.buildDevCompany + '/*.html',
+        paths.buildDevCompany + '/app/scripts/*.js'
+    ], {read: true, base: paths.buildDevCompany});
+    return (copySources.pipe(gulp.dest(dest)))
+}
 
 
 // == TASKS ========
@@ -905,4 +936,12 @@ gulp.task('TransactionHtml', [ 'copyTransactionSrcDev', 'copyLibDevTransaction',
         pipes.createActivityDev(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionApp-en.js', htmlPartial, buildDir, ignoreDir, 'en', '')
     );
 
+});
+
+
+gulp.task('demo-deploy', function () {
+    pipes.copyAllSrc();
+    pipes.copyDemoCompany();
+    pipes.copyDemoActivity();
+    pipes.copyDemoTransaction();
 });

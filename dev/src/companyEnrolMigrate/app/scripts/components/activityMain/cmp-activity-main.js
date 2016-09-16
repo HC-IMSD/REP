@@ -40,8 +40,8 @@
             }
         });
 
-    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope'];
-    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope) {
+    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope', '$window'];
+    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $window) {
         var vm = this;
         vm.isIncomplete = true;
         vm.userType = "EXT";
@@ -146,6 +146,17 @@
             vm.formAmend = vm.activityRoot.applicationType === vm.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+
+        vm.openHelp = function (type) {
+            switch (type) {
+                case'file':
+                    $window.open('//facebook.com');
+                    break;
+
+            }
+
+        }
+
 
         /**
          * @ngdoc -creates a filename for activity file. If it exists,adds control number
