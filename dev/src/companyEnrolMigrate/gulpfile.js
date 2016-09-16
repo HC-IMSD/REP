@@ -16,6 +16,7 @@ var replace = require('gulp-replace-task');
 var baseScript = './app/scripts';
 var wetBase = './wet_4_0_22_base';
 var buildDev = './build/dev';
+
 var paths = {
     styles: './app/styles/',
     index: 'companyEnrol.html',
@@ -25,6 +26,7 @@ var paths = {
     distScriptsProd: './dist.prod/scripts',
     scriptsDevServer: 'devServer/**/*.js',
     translations: 'app/resources/',
+    helpTemplates: 'app/help/',
     buildDev: buildDev,
     buildDevActivity: buildDev + '/activity/',
     buildDevCompany: buildDev + '/company/',
@@ -180,6 +182,7 @@ var translationBaseFiles = {
     transaction: paths.translations + 'transaction',
     companyInfo: paths.translations + 'companyInfo',
 }
+
 
 // == PIPE SEGMENTS ========
 
@@ -353,7 +356,7 @@ pipes.translateDev = function (translateList, destPath) {
 pipes.insertDateStamp = function (template, valsObj) {
 
     var utc = new Date().toJSON().slice(0, 10);
-
+    console.log("date" + utc)
     // var datePH = placeholders.dateStamp; doesnt work
     return (gulp.src(template)
             .pipe(htmlreplace({
@@ -480,6 +483,21 @@ pipes.copyDemoCompany = function () {
     return (copySources.pipe(gulp.dest(dest)))
 }
 
+pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, destName) {
+
+    pipes.insertDateStamp(templatePath, valsObj)
+        .pipe(inject(gulp.src([partialRoot]), {
+            starttag: placeholders.mainContent,
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(rename(destName))
+        .pipe(gulp.dest(destDir))
+    // }
+
+}
 
 // == TASKS ========
 
@@ -938,10 +956,50 @@ gulp.task('TransactionHtml', [ 'copyTransactionSrcDev', 'copyLibDevTransaction',
 
 });
 
+gulp.task('copyWetDepDemo', function () {
+    var dest = './build/demo/'
+    return (pipes.copyWet(dest))
+});
 
 gulp.task('demo-deploy', function () {
     pipes.copyAllSrc();
     pipes.copyDemoCompany();
     pipes.copyDemoActivity();
     pipes.copyDemoTransaction();
+});
+
+gulp.task('dev-activity-help', function () {
+    var dest = paths.buildDevActivity;
+    var ActLoadEn = {
+        mainHeading: "REP Activity Form Load File Help",
+        title: 'Health Canada Activity Form Help'
+
+    };
+    var ActMainEn = {
+        mainHeading: "REP Activity Form Main Help",
+        title: 'Health Canada Activity Form Help'
+
+    };
+    var ActcontactEn = {
+        mainHeading: "REP Activity Form Rep Contact Help",
+        title: 'Health Canada Activity Form Help'
+
+    };
+
+    var destName = "help-activity-load-en.html"
+    pipes.createHelpFile(paths.englishTemplate, ActLoadEn, (paths.helpTemplates + destName), dest, destName)
+    destName = "help-activity-main-en.html"
+    pipes.createHelpFile(paths.englishTemplate, ActMainEn, (paths.helpTemplates + destName), dest, destName)
+    destName = "help-activity-rep-en.html"
+    pipes.createHelpFile(paths.englishTemplate, ActcontactEn, (paths.helpTemplates + destName), dest, destName)
+
+    //french
+    destName = "help-activity-load-fr.html"
+    pipes.createHelpFile(paths.englishTemplate, ActLoadEn, (paths.helpTemplates + destName), dest, destName)
+    destName = "help-activity-main-fr.html"
+    pipes.createHelpFile(paths.englishTemplate, ActMainEn, (paths.helpTemplates + destName), dest, destName)
+    destName = "help-activity-rep-fr.html"
+    pipes.createHelpFile(paths.englishTemplate, ActcontactEn, (paths.helpTemplates + destName), dest, destName)
+
+
 });
