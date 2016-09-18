@@ -334,18 +334,18 @@
 
     function _transformRepContactFromFileObj(repObj) {
 
-        var repContact = _transformContactFromFileObj(repObj.rep_submission_contact);
-        repContact.repRole = repObj.rep_submission_contact_role;
-        repContact.amend= repObj.amend==='Y' ;
+        var repContact = _transformContactFromFileObj(repObj.rep_contact_details);
+        repContact.repRole = repObj.rep_contact_role;
+        repContact.amend = repObj.amend_record === 'Y';
         return (repContact);
     }
 
     function _mapRepContactToOutput(repObj) {
         var repContact = {};
-        repContact.rep_submission_contact_role = repObj.repRole;
-        repContact.amend= repObj.amend=== true ? 'Y' : 'N';
+        repContact.rep_contact_role = repObj.repRole;
+        repContact.amend_record = repObj.amend === true ? 'Y' : 'N';
         //deflatten the object
-        repContact.rep_submission_contact = _mapContactToOutput(repObj);
+        repContact.rep_contact_details = _mapContactToOutput(repObj);
         return repContact;
     }
 

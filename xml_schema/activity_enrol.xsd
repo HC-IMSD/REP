@@ -21,6 +21,7 @@
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="dossier_id_prefix" fixed="HC6-024-"/>
 	<hpfb:element name="dossier_id" type="char_1_10_content"/>
+	<hpfb:element name="dossier_id_concat" type="char_1_20_content"/>
 	<hpfb:element name="reg_activity_lead" type="lead_types_list"/>
 	<hpfb:element name="reg_activity_type" type="activity_types_list"/>
 	<hpfb:element name="fee_class"/>
@@ -71,6 +72,7 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="dossier_id_prefix"/>
+			<hpfb:element ref="dossier_id_concat"/>
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="reg_activity_lead"/>
 			<hpfb:element ref="reg_activity_type"/>

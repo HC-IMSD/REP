@@ -188,9 +188,6 @@ var translationBaseFiles = {
 
 var pipes = {};
 
-pipes.orderedVendorScripts = function () {
-    return plugins.order(['jquery.js', 'angular.js']);
-};
 
 pipes.orderedAppScripts = function () {
     return plugins.angularFilesort();
@@ -200,12 +197,6 @@ pipes.minifiedFileName = function () {
     return plugins.rename(function (path) {
         path.extname = '.min' + path.extname;
     });
-};
-
-pipes.validatedAppScripts = function () {
-    return gulp.src(paths.scripts)
-        .pipe(plugins.jshint())
-        .pipe(plugins.jshint.reporter('jshint-stylish'));
 };
 
 pipes.builtAppScriptsDev = function () {
@@ -226,10 +217,6 @@ pipes.builtAppScriptsProd = function () {
         .pipe(gulp.dest(paths.distScriptsProd));
 };
 
-pipes.builtVendorScriptsDev = function () {
-    return gulp.src(bowerFiles())
-        .pipe(gulp.dest('dist.dev/bower_components'));
-};
 
 pipes.builtVendorScriptsProd = function () {
     return gulp.src(bowerFiles('**/*.js'))
@@ -239,11 +226,7 @@ pipes.builtVendorScriptsProd = function () {
         .pipe(gulp.dest(paths.distScriptsProd));
 };
 
-pipes.validatedDevServerScripts = function () {
-    return gulp.src(paths.scriptsDevServer)
-        .pipe(plugins.jshint())
-        .pipe(plugins.jshint.reporter('jshint-stylish'));
-};
+
 
 pipes.validatedPartials = function () {
     return gulp.src(paths.partials)
@@ -968,6 +951,9 @@ gulp.task('demo-deploy', function () {
     pipes.copyDemoTransaction();
 });
 
+/**
+ * Creates the help files and places in base folder of buld
+ */
 gulp.task('dev-activity-help', function () {
     var dest = paths.buildDevActivity;
     var ActLoadEn = {
@@ -985,7 +971,6 @@ gulp.task('dev-activity-help', function () {
         title: 'Health Canada Activity Form Help'
 
     };
-
     var destName = "help-activity-load-en.html"
     pipes.createHelpFile(paths.englishTemplate, ActLoadEn, (paths.helpTemplates + destName), dest, destName)
     destName = "help-activity-main-en.html"

@@ -33,10 +33,10 @@
 
 	<hpfb:simpleType name="salutation_content">
 		<hpfb:restriction base="hpfb:string">
-			<hpfb:enumeration value="MR"/>
-			<hpfb:enumeration value="MRS"/>
-			<hpfb:enumeration value="MS"/>
-			<hpfb:enumeration value="DR"/>
+			<hpfb:enumeration value="SALUT_MR"/>
+			<hpfb:enumeration value="SALUT_MRS"/>
+			<hpfb:enumeration value="SALUT_MS"/>
+			<hpfb:enumeration value="SALUT_DR"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
