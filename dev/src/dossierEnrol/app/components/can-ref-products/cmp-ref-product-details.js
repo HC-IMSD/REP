@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('refProductDetailsModule', ['expandingTable'])
+        .module('refProductDetailsModule', ['expandingTable','dossierDataLists','filterLists'])
 })();
 
 (function () {
@@ -25,9 +25,10 @@
                 onDelete: '&'
             }
         });
-
-    function refProductDetailsCtrl(){
+    refProductDetailsCtrl.$inject=['DossierLists'];
+    function refProductDetailsCtrl(DossierLists){
         var self = this;
+        self.dosageFormList= DossierLists.getDosageFormList();
 
         self.$onInit = function(){
 

@@ -13,7 +13,10 @@
         ,'refProductListModule'
         ,'drugUseModule'
         ,'therapeuticClassModule'
-        ,'scheduleAModule'
+        ,'scheduleAModule',
+        'dossierDataLists',
+        'filterLists',
+        'fileIO'
     ];
 
     angular
@@ -36,13 +39,13 @@
         }
     });
 
-    dossierCtrl.$inject = ['$scope'];
+    dossierCtrl.$inject = ['$scope','hpfbFileProcessing'];
 
 
     function dossierCtrl($scope) {
 
         var self = this;
-
+        self.showContent = _loadFileContent; //binds the component to the function
 
 
         /*
@@ -92,6 +95,15 @@
 
 
         }
+        function _loadFileContent(fileContent) {
+            if (!fileContent)return;
+            var resultJson = fileContent.jsonResult;
+            if (resultJson) {
+             //process file load results
+                //load into data model
+            }
+        }
+
     }
 
 })();

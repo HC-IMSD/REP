@@ -1,19 +1,22 @@
 <form id="dossier-form" name="dossierForm" novalidate>
 
+    <section class="panel  panel-primary mrgn-tp-lg">
+        <header class="panel-heading">
+            <h3 class="panel-title">{{'LOAD_DOSSIER'|translate}}</h3>
+        </header>
+        <div class="panel-body">
+            <hpfb-file-select update-model-root=""
+                              root-elem="{{dos.dossierModel}}"/>
+        </div>
+    </section>
+
     <section class="panel panel-primary mrgn-tp-lg">
         <header class="panel-heading">
-            <h3 class="panel-title">Regulatory Dossier Enrolment</h3>
+            <h3 class="panel-title">{{'DOSSIER_HDING'|translate}}</h3>
         </header>
         <div class="panel-body">
 
-            <section class="panel  panel-default">
-                <header class="panel-heading">
-                    <h3 class="panel-title">Load a Draft Company Enrolment File</h3>
-                </header>
-                <div class="panel-body">
-                    <cmp-file-reader on-file-loaded=""></cmp-file-reader>
-                </div>
-            </section>
+
 
             <div class="row">
                 <div class="col-xs-6 form-group">
