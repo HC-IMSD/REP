@@ -11,6 +11,7 @@ var htmlreplace = require('gulp-html-replace');
 var rename = require("gulp-rename");
 var angularFilesort = require('gulp-angular-filesort')
 var replace = require('gulp-replace-task');
+var stringReplace=require('gulp-string-replace')
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -19,12 +20,6 @@ var buildDev = './build/dev';
 
 var paths = {
     styles: './app/styles/',
-    index: 'companyEnrol.html',
-    partials: ['app/**/*.html', '!app/index.html'],
-    distDev: './dist/dev',
-    distProd: './dist/prod',
-    distScriptsProd: './dist.prod/scripts',
-    scriptsDevServer: 'devServer/**/*.js',
     translations: 'app/resources/',
     helpTemplates: 'app/help/',
     buildDev: buildDev,
@@ -33,7 +28,6 @@ var paths = {
     buildDevTransaction: buildDev + '/transaction/',
     englishTemplate: wetBase + '/content-en.html',
     frenchTemplate: wetBase + '/content-fr.html',
-    activityRoot: 'rootContent/activityRoot.html',
     lib: './app/lib/',
     scripts: baseScript,
     components: baseScript + '/components/',
@@ -43,6 +37,17 @@ var paths = {
     wetBase: wetBase,
 
 };
+
+var baseDossier = '../dossierEnrol';
+var dossierPaths = {
+    lib: './app/lib/', //going to use the same as transaction paths
+    translations: baseDossier + '/app/resources/',
+    buildDevDossier: buildDev + '/dossier/',
+    services: baseDossier + '/app/services/',
+    components: baseDossier + '/app/components/',
+    dossierApp: baseDossier + '/app/dossierApp.js'
+}
+
 
 var placeholders = {
     mainContent: '<!-- inject:mainContent-->',
@@ -163,7 +168,8 @@ var jsAppFiles = {
 var jsRootContent = {
     partialActivityRoot: 'rootContent/activityRoot.html',
     partialCompanyRoot: 'rootContent/companyRoot.html',
-    partialTransactionRoot: 'rootContent/transactionRoot.html'
+    partialTransactionRoot: 'rootContent/transactionRoot.html',
+    partialDossierRoot: 'rootContent/dossierRoot.html'
 }
 
 
@@ -182,6 +188,29 @@ var translationBaseFiles = {
     transaction: paths.translations + 'transaction',
     companyInfo: paths.translations + 'companyInfo',
 }
+/** Dossier stuff */
+var dossierTranslationBaseFiles = {
+
+    dosageForm: dossierPaths.translations + 'dossier-dosageform',
+    dossier: dossierPaths.translations + 'dossier',
+    dossierGeneral: dossierPaths.translations + 'dossier-general',
+    fileIO: dossierPaths.translations + 'fileIO'
+
+}
+
+var jsDossierComponentPaths = {
+    appendix4: dossierPaths.components + 'appendix-four/',
+    canRefProducts: dossierPaths.components + 'can-ref-products/',
+    checkboxList: dossierPaths.components + 'checkbox-list/',
+    contact: dossierPaths.components + 'contact/',
+    dossier: dossierPaths.components + 'dossier/',
+    drugUse: dossierPaths.components + 'drug-use/',
+    expandingTable: dossierPaths.components + 'expanding-table/',
+    fileIO: dossierPaths.components + 'fileIO/',
+    scheduleA: dossierPaths.components + 'schedule-a/',
+    tabs: dossierPaths.components + 'tabs/',
+    theraClass: dossierPaths.components + 'therapeutic-classification/'
+};
 
 
 // == PIPE SEGMENTS ========
@@ -225,7 +254,6 @@ pipes.builtVendorScriptsProd = function () {
         .pipe(plugins.uglify())
         .pipe(gulp.dest(paths.distScriptsProd));
 };
-
 
 
 pipes.validatedPartials = function () {
@@ -329,11 +357,12 @@ pipes.fullTranslateList = function (translateList) {
     }
     return completeList;
 }
-pipes.translateDev = function (translateList, destPath) {
+pipes.translateDev = function (translateList, destPath, baseIgnore) {
 
+    if (!baseIgnore) baseIgnore = ".";
     var completeList = pipes.fullTranslateList(translateList);
     var copySources = gulp.src(completeList,
-        {read: true, base: '.'});
+        {read: true, base: baseIgnore});
     return copySources.pipe(gulp.dest(destPath))
 }
 pipes.insertDateStamp = function (template, valsObj) {
@@ -370,12 +399,14 @@ pipes.copyWet = function (destDirectory) {
     return (copySources.pipe(gulp.dest(destDirectory)))
 }
 
-pipes.activityRootJS = function (lang, type, rootFile, destPath) {
+//creates ALL the root files js TODO rename
+pipes.activityRootJS = function (lang, type, rootFile, destPath, ignorePath) {
+    if (!ignorePath) ignorePath = "."
     var rootName = rootFile.split("/");
     rootName = rootName[rootName.length - 1]
     rootName = rootName.substring(0, rootName.length - 3);
-    var copySources = gulp.src([paths.scripts + rootFile],
-        {read: true, base: '.'});
+    var copySources = gulp.src([rootFile],
+        {read: true, base: ignorePath});
     return (
         copySources
             .pipe(replace({
@@ -425,6 +456,39 @@ pipes.createActivityDev = function (templatePath, valsObj, templateName, injectR
         .pipe(gulp.dest(buildDir))
 
 }
+
+//dosssier is special
+pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType) {
+
+
+    pipes.insertDateStamp(templatePath, valsObj)
+        .pipe(inject(gulp.src([partialRoot]), {
+            starttag: placeholders.mainContent,
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(inject(gulp.src([
+
+                buildDir + 'app/components/**/*.js',
+                buildDir + 'app/directives/**/*.js',
+                buildDir + 'app/services/**/*.js',
+                buildDir + 'app/' + injectRootJs,
+                buildDir + 'app/lib/**/*.js',
+
+            ])
+            .pipe(angularFilesort())
+            , {
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }))
+
+        .pipe(rename(templateName))
+        .pipe(gulp.dest(buildDir))
+
+}
+
 
 pipes.cleanBuild = function (baseDir) {
     var deferred = Q.defer();
@@ -483,159 +547,6 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
 }
 
 // == TASKS ========
-
-// removes all compiled dev files
-gulp.task('clean-dev', function () {
-    var deferred = Q.defer();
-    del(paths.distDev, function () {
-        deferred.resolve();
-    });
-    return deferred.promise;
-});
-
-// removes all compiled production files
-gulp.task('clean-prod', function () {
-    var deferred = Q.defer();
-    del(paths.distProd, function () {
-        deferred.resolve();
-    });
-    return deferred.promise;
-});
-
-// checks html source files for syntax errors
-gulp.task('validate-partials', pipes.validatedPartials);
-
-// checks index.html for syntax errors
-gulp.task('validate-index', pipes.validatedIndex);
-
-// moves html source files into the dev environment
-gulp.task('build-partials-dev', pipes.builtPartialsDev);
-
-// converts partials to javascript using html2js
-gulp.task('convert-partials-to-js', pipes.scriptedPartials);
-
-// runs jshint on the dev server scripts
-gulp.task('validate-devserver-scripts', pipes.validatedDevServerScripts);
-
-// runs jshint on the app scripts
-gulp.task('validate-app-scripts', pipes.validatedAppScripts);
-
-// moves app scripts into the dev environment
-gulp.task('build-app-scripts-dev', pipes.builtAppScriptsDev);
-
-// concatenates, uglifies, and moves app scripts and partials into the prod environment
-gulp.task('build-app-scripts-prod', pipes.builtAppScriptsProd);
-
-// compiles app sass and moves to the dev environment
-gulp.task('build-styles-dev', pipes.builtStylesDev);
-
-// compiles and minifies app sass to css and moves to the prod environment
-gulp.task('build-styles-prod', pipes.builtStylesProd);
-
-// moves vendor scripts into the dev environment
-gulp.task('build-vendor-scripts-dev', pipes.builtVendorScriptsDev);
-
-// concatenates, uglifies, and moves vendor scripts into the prod environment
-gulp.task('build-vendor-scripts-prod', pipes.builtVendorScriptsProd);
-
-// validates and injects sources into index.html and moves it to the dev environment
-gulp.task('build-index-dev', pipes.builtIndexDev);
-
-// validates and injects sources into index.html, minifies and moves it to the dev environment
-gulp.task('build-index-prod', pipes.builtIndexProd);
-
-// builds a complete dev environment
-gulp.task('build-app-dev', pipes.builtAppDev);
-
-// builds a complete prod environment
-gulp.task('build-app-prod', pipes.builtAppProd);
-
-// cleans and builds a complete dev environment
-gulp.task('clean-build-app-dev', ['clean-dev'], pipes.builtAppDev);
-
-// cleans and builds a complete prod environment
-gulp.task('clean-build-app-prod', ['clean-prod'], pipes.builtAppProd);
-
-// clean, build, and watch live changes to the dev environment
-gulp.task('watch-dev', ['clean-build-app-dev', 'validate-devserver-scripts'], function () {
-
-    // start nodemon to auto-reload the dev server
-    plugins.nodemon({script: 'server.js', ext: 'js', watch: ['devServer/'], env: {NODE_ENV: 'development'}})
-        .on('change', ['validate-devserver-scripts'])
-        .on('restart', function () {
-            console.log('[nodemon] restarted dev server');
-        });
-
-    // start live-reload server
-    plugins.livereload.listen({start: true});
-
-    // watch index
-    gulp.watch(paths.index, function () {
-        return pipes.builtIndexDev()
-            .pipe(plugins.livereload());
-    });
-
-    // watch app scripts
-    gulp.watch(paths.scripts, function () {
-        return pipes.builtAppScriptsDev()
-            .pipe(plugins.livereload());
-    });
-
-    // watch html partials
-    gulp.watch(paths.partials, function () {
-        return pipes.builtPartialsDev()
-            .pipe(plugins.livereload());
-    });
-
-    // watch styles
-    gulp.watch(paths.styles, function () {
-        return pipes.builtStylesDev()
-            .pipe(plugins.livereload());
-    });
-
-});
-
-// clean, build, and watch live changes to the prod environment
-gulp.task('watch-prod', ['clean-build-app-prod', 'validate-devserver-scripts'], function () {
-
-    // start nodemon to auto-reload the dev server
-    plugins.nodemon({script: 'server.js', ext: 'js', watch: ['devServer/'], env: {NODE_ENV: 'production'}})
-        .on('change', ['validate-devserver-scripts'])
-        .on('restart', function () {
-            console.log('[nodemon] restarted dev server');
-        });
-
-    // start live-reload server
-    plugins.livereload.listen({start: true});
-
-    // watch index
-    gulp.watch(paths.index, function () {
-        return pipes.builtIndexProd()
-            .pipe(plugins.livereload());
-    });
-
-    // watch app scripts
-    gulp.watch(paths.scripts, function () {
-        return pipes.builtAppScriptsProd()
-            .pipe(plugins.livereload());
-    });
-
-    // watch hhtml partials
-    gulp.watch(paths.partials, function () {
-        return pipes.builtAppScriptsProd()
-            .pipe(plugins.livereload());
-    });
-
-    // watch styles
-    gulp.watch(paths.styles, function () {
-        return pipes.builtStylesProd()
-            .pipe(plugins.livereload());
-    });
-
-});
-
-// default task builds for prod
-gulp.task('default', ['clean-build-app-prod']);
 
 
 // Dan added, TODO convert to pipes
@@ -707,28 +618,28 @@ gulp.task('copyFrActivityRoot', function () {
     var lang = 'fr';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'EXT', '/activityApp.js', dest)
+        pipes.activityRootJS(lang, 'EXT', paths.scripts + '/activityApp.js', dest)
     );
 });
 gulp.task('copyEnActivityRoot', function () {
     var lang = 'en';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'EXT', '/activityApp.js', dest)
+        pipes.activityRootJS(lang, 'EXT', paths.scripts + '/activityApp.js', dest)
     );
 });
 gulp.task('copyFrActivityRootINT', function () {
     var lang = 'fr';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'INT', '/activityApp.js', dest)
+        pipes.activityRootJS(lang, 'INT', paths.scripts + '/activityApp.js', dest)
     );
 });
 gulp.task('copyEnActivityRootINT', function () {
     var lang = 'en';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'INT', '/activityApp.js', dest)
+        pipes.activityRootJS(lang, 'INT', paths.scripts + '/activityApp.js', dest)
     );
 });
 
@@ -780,28 +691,28 @@ gulp.task('copyEnCompanyRootINT', function () {
     var lang = 'en';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'INT', '/companyApp.js', dest)
+        pipes.activityRootJS(lang, 'INT', paths.scripts + '/companyApp.js', dest)
     );
 });
 gulp.task('copyEnCompanyRootEXT', function () {
     var lang = 'en';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'EXT', '/companyApp.js', dest)
+        pipes.activityRootJS(lang, 'EXT', paths.scripts + '/companyApp.js', dest)
     );
 });
 gulp.task('copyFrCompanyRootINT', function () {
     var lang = 'fr';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'INT', '/companyApp.js', dest)
+        pipes.activityRootJS(lang, 'INT', paths.scripts + '/companyApp.js', dest)
     );
 });
 gulp.task('copyFrCompanyRootExt', function () {
     var lang = 'fr';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
-        pipes.activityRootJS(lang, 'EXT', '/companyApp.js', dest)
+        pipes.activityRootJS(lang, 'EXT', paths.scripts + '/companyApp.js', dest)
     );
 });
 
@@ -875,7 +786,7 @@ gulp.task('copyTransactionSrcDev', function () {
 
     var def = Q.defer();
     copySources.pipe(gulp.dest(paths.buildDevTransaction))
-        .on('end', function() {
+        .on('end', function () {
             def.resolve();
         })
         .on('error', def.reject);
@@ -889,7 +800,7 @@ gulp.task('copyEnTransactionRootEXT', function () {
     var dest = paths.buildDevTransaction + '/app/scripts/';
     //formType not needed
     return (
-        pipes.activityRootJS(lang, '', '/transactionApp.js', dest)
+        pipes.activityRootJS(lang, '', paths.scripts + '/transactionApp.js', dest)
     );
 });
 gulp.task('copyFrTransactionRootEXT', function () {
@@ -897,7 +808,7 @@ gulp.task('copyFrTransactionRootEXT', function () {
     var dest = paths.buildDevTransaction + '/app/scripts/';
     //formType not needed
     return (
-        pipes.activityRootJS(lang, '', '/transactionApp.js', dest)
+        pipes.activityRootJS(lang, '', paths.scripts + '/transactionApp.js', dest)
     );
 });
 gulp.task('copyTransactionTranslateDev', function () {
@@ -926,7 +837,7 @@ gulp.task('copyWetDepTransaction', function () {
 });
 
 
-gulp.task('TransactionHtml', [ 'copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'copyTransactionTranslateDev'], function () {
+gulp.task('TransactionHtml', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'copyTransactionTranslateDev'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot
@@ -988,3 +899,97 @@ gulp.task('dev-activity-help', function () {
 
 
 });
+
+/******** Dossier Related  tasks  *****************/
+
+gulp.task('copyWetDevDossier', function () {
+    return (pipes.copyWet(dossierPaths.buildDevDossier))
+});
+gulp.task('copyLibDevDossier', function () {
+    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(dossierPaths.buildDevDossier))
+
+});
+
+gulp.task('copyDossierTranslateDev', function () {
+    var translationList = [
+        dossierTranslationBaseFiles.dosageForm,
+        dossierTranslationBaseFiles.dossier,
+        dossierTranslationBaseFiles.dossierGeneral,
+        dossierTranslationBaseFiles.fileIO
+    ];
+    var baseIgnore = "../dossierEnrol"
+
+    pipes.translateDev(translationList, dossierPaths.buildDevDossier, baseIgnore)
+});
+
+gulp.task('copyDossierSrcDev', function () {
+    var copySources = gulp.src([
+
+            jsDossierComponentPaths.appendix4 + '**/*',
+            jsDossierComponentPaths.canRefProducts + '**/*',
+            jsDossierComponentPaths.checkboxList + '**/*',
+            jsDossierComponentPaths.contact + '**/*',
+            jsDossierComponentPaths.dossier + '**/*',
+            jsDossierComponentPaths.drugUse + '**/*',
+            jsDossierComponentPaths.expandingTable + '**/*',
+            jsDossierComponentPaths.fileIO + '**/*',
+            jsDossierComponentPaths.scheduleA + '**/*',
+            jsDossierComponentPaths.tabs + '**/*',
+            jsDossierComponentPaths.theraClass + '**/*',
+            dossierPaths.services+'**/*'
+        ],
+        {read: true, base: '../dossierEnrol'});
+
+
+    var def = Q.defer();
+    copySources.pipe(stringReplace('./components/', './app/components/'))
+        .pipe(gulp.dest(dossierPaths.buildDevDossier))
+        .on('end', function () {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
+
+});
+
+gulp.task('copyEnDossierRootEXT', function () {
+    var lang = 'en';
+    var dest = dossierPaths.buildDevDossier + 'app/';
+    //formType not needed
+    return (
+        pipes.activityRootJS(lang, 'EXT', dossierPaths.dossierApp, dest)
+    );
+});
+
+
+gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossierRootEXT', 'copyDossierTranslateDev'], function () {
+    var ignoreDir = '/build/dev/dossier';
+    var buildDir = dossierPaths.buildDevDossier
+    var htmlPartial = jsRootContent.partialDossierRoot
+    var rootTitles_en = {
+        mainHeading: "Dossier Form for the Regulatory Enrolment Process (REP)",
+        title: 'Health Canada Dossier Form'
+
+    };
+
+    // pipes.createActivityDev(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionApp-en.js', htmlPartial, buildDir, ignoreDir, 'en', '')
+
+    return (
+        pipes.createDossierDev(paths.englishTemplate, rootTitles_en, 'dossierEnrol-en.html', 'dossierAppEXT-en.js', htmlPartial, buildDir, ignoreDir, 'en', '')
+
+    );
+
+});
+/*
+gulp.task ('DossierUpdateComponent',function(){
+
+        gulp.src([dossierPaths.components+"**!/!*.js"])
+            .pipe(replace('./components', './app/components'))
+            .pipe(gulp.dest('build/file.txt'));
+    });
+
+})
+*/
+
