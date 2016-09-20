@@ -28,14 +28,20 @@
     /* @ngInject */
     function getService() {
         var service = {
-            getDosageFormList: getDosageFormsArray
+            getDosageFormList: getDosageFormsArray,
+            getDosageOther: getDoseOtherValue
         };
         return service;
 
+
         ////////////////
+        function getDoseOtherValue() {
+            return "OTHER";
+        }
+
 
         function getDosageFormsArray() {
-            return([
+            return ([
                 "AEROSOL",
                 "BOLUS",
                 "CAPSULE",

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('refProductDetailsModule', ['expandingTable','dossierDataLists','filterLists'])
+        .module('refProductDetailsModule', ['expandingTable', 'dossierDataLists', 'filterLists'])
 })();
 
 (function () {
@@ -25,12 +25,13 @@
                 onDelete: '&'
             }
         });
-    refProductDetailsCtrl.$inject=['DossierLists'];
-    function refProductDetailsCtrl(DossierLists){
+    refProductDetailsCtrl.$inject = ['DossierLists'];
+    function refProductDetailsCtrl(DossierLists) {
         var self = this;
-        self.dosageFormList= DossierLists.getDosageFormList();
+        self.dosageFormList = DossierLists.getDosageFormList();
+        self.otherValue = DossierLists.getDosageOther();
 
-        self.$onInit = function(){
+        self.$onInit = function () {
 
             self.productModel = {
                 brandName: "A",
@@ -48,21 +49,43 @@
 
         }
 
-        self.saveProduct = function(){
+
+        /**
+         * @ngDoc determines if dosage Other should be readonky
+         * @returns {boolean}
+         */
+        self.isDosageOther = function () {
+            if (self.productModel.dosageForm === self.otherValue) {
+                return true;
+            } else {
+                self.productModel.dosageFormOther = ""
+                return false;
+            }
+        }
+        /**
+         * @ngdoc show an error on an individual control
+         * @param ctrl -control
+         * @returns {true if ctrl in error}
+         */
+        self.showError = function (ctrl) {
+            return ((ctrl.$touched && ctrl.$invalid) /**||(TODO invalid and showErrors)*/);
+        }
+
+        self.saveProduct = function () {
             if (self.productRecord) {
                 console.log('update product');
-                self.onUpdate({product:self.productModel});
-            }else{
+                self.onUpdate({product: self.productModel});
+            } else {
                 console.log('add product');
-                self.onAddProduct({product:self.productModel});
+                self.onAddProduct({product: self.productModel});
             }
 
         };
 
-        self.delete = function(){
+        self.delete = function () {
             if (self.productRecord) {
-                self.onDelete({id : self.productModel.productId});
-            }else{
+                self.onDelete({id: self.productModel.productId});
+            } else {
                 //TODO
             }
 
