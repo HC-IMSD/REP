@@ -16,9 +16,15 @@
         </header>
         <div class="panel-body">
 
+        <div>
+            <cmp-application-info record="dos.dossierModel"></cmp-application-info>
+            <!--userType: '<',
+            isIncomplete: '<',
+            configureIdField: '<',
+            setType: '&'-->
+        </div>
 
-
-            <div class="row">
+          <!--  <div class="row">
                 <div class="col-xs-6 form-group">
                     <label for="enrolment-type-list">Enrolment Type</label>
                     <select id="enrolment-type-list" ng-model="dos.dossierModel.applicationType" class="form-control full-width">
@@ -33,7 +39,7 @@
                     <input type="text" class="form-control" id="enr-version-text" ng-model="dos.dossierModel.enrolmentVersion" placeholder="Enrolment Version"/>
 
                 </div>
-            </div>
+            </div>-->
             <section class="panel  panel-default">
                 <header class="panel-heading">
                     <h3 class="panel-title">Drug Product</h3>
@@ -125,8 +131,16 @@
            <cmp-tabs></cmp-tabs>
             <!--<cmp-appendix-four></cmp-appendix-four>-->
 
-           <cmp-contact-list ng-if="dos.dossierModel.contactList" contacts="dos.dossierModel.contactList" on-update="dos.onUpdateContactList(newList)"></cmp-contact-list>
+           <!--<cmp-contact-list ng-if="dos.dossierModel.contactList" contacts="dos.dossierModel.contactList" on-update="dos.onUpdateContactList(newList)"></cmp-contact-list>-->
+            <div>
+                <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"></cmp-rep-contact-list>
+               <!-- <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
+                                      show-list-errors="main.showErrors()" is-amend="main.formAmend"
+                                      parent-dirty="main.activityEnrolForm.$dirty"
+                                      get-new-contact="main.activityService.createRepContact()"></cmp-rep-contact-list>-->
 
+
+            </div>
 
        </div>
 

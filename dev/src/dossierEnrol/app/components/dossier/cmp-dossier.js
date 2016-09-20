@@ -16,7 +16,9 @@
         ,'scheduleAModule',
         'dossierDataLists',
         'filterLists',
-        'fileIO'
+        'fileIO',
+        'contactModule25',
+        'contactModule26'
     ];
 
     angular

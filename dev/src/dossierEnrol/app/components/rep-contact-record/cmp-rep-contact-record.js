@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactModule25', ['contactModule'])
+        .module('contactModule25', [])
 })();
 
 (function () {
@@ -15,7 +15,7 @@
     angular
         .module('contactModule25')
         .component('cmpRepContactRecord', {
-            templateUrl: 'app/scripts/components/rep-contact-record/tpl-rep-contact-record.html',
+            templateUrl: './components/rep-contact-record/tpl-rep-contact-record.html',
             controller: contactRecCtrl,
             controllerAs: 'contactRec',
             bindings: {
