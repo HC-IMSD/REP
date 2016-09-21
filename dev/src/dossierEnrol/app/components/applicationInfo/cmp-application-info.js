@@ -13,7 +13,7 @@
     angular
         .module('applicationInfo')
         .component('cmpApplicationInfo', {
-            templateUrl: 'app/scripts/components/applicationInfo/tpl-application-info.html',
+            templateUrl: './components/applicationInfo/tpl-application-info.html',
             controller: ApplInfoCtrl,
             controllerAs: 'infoCtrl',
             bindings: {

@@ -225,7 +225,8 @@ var jsDossierComponentPaths = {
     tabs: dossierPaths.components + 'tabs/',
     theraClass: dossierPaths.components + 'therapeutic-classification/',
     repContactList: dossierPaths.components + 'repContactList/',
-    repContactRecord: dossierPaths.components + 'rep-contact-record/'
+    repContactRecord: dossierPaths.components + 'rep-contact-record/',
+    applicationInfo: dossierPaths.components + 'applicationInfo/',
 };
 
 
@@ -965,6 +966,7 @@ gulp.task('copyDossierSrcDev', function () {
             jsDossierComponentPaths.theraClass + '**/*',
             jsDossierComponentPaths.repContactList + '**/*',
             jsDossierComponentPaths.repContactRecord + '**/*',
+            jsDossierComponentPaths.applicationInfo + '**/*',
             dossierPaths.services + '**/*'
 
         ],

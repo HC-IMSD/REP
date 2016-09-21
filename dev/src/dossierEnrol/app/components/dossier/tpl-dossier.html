@@ -17,29 +17,10 @@
         <div class="panel-body">
 
         <div>
-            <cmp-application-info record="dos.dossierModel"></cmp-application-info>
-            <!--userType: '<',
-            isIncomplete: '<',
-            configureIdField: '<',
-            setType: '&'-->
+            <cmp-application-info record="dos.dossierModel" user-type="dos.formUserType" set-type="dos.setApplicationType(type)"
+                                  configure-id-field="dos.configField" is-incomplete="dos.isIncomplete"></cmp-application-info>
+
         </div>
-
-          <!--  <div class="row">
-                <div class="col-xs-6 form-group">
-                    <label for="enrolment-type-list">Enrolment Type</label>
-                    <select id="enrolment-type-list" ng-model="dos.dossierModel.applicationType" class="form-control full-width">
-                        <option>New</option>
-                        <option>Approved</option>
-                        <option>Amend</option>
-                    </select>
-                </div>
-
-                <div class="col-xs-4 form-group">
-                    <label for="enr-version-text">Enrolment Version</label>
-                    <input type="text" class="form-control" id="enr-version-text" ng-model="dos.dossierModel.enrolmentVersion" placeholder="Enrolment Version"/>
-
-                </div>
-            </div>-->
             <section class="panel  panel-default">
                 <header class="panel-heading">
                     <h3 class="panel-title">Drug Product</h3>

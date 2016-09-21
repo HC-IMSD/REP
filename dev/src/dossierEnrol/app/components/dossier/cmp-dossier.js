@@ -18,7 +18,9 @@
         'filterLists',
         'fileIO',
         'contactModule25',
-        'contactModule26'
+        'contactModule26',
+        'applicationInfoService',
+        'applicationInfo'
     ];
 
     angular
@@ -36,19 +38,28 @@
         bindings: {
             dossierRecordInput: '<',
             onUpdateDossier: '&',
-            onDeleteDossier: '&'
+            onDeleteDossier: '&',
+            formType:'@'
             // selectedCountryChanged: '&'
         }
     });
 
-    dossierCtrl.$inject = ['$scope','hpfbFileProcessing'];
+    dossierCtrl.$inject = ['$scope','hpfbFileProcessing', 'ApplicationInfoService'];
 
 
-    function dossierCtrl($scope) {
+    function dossierCtrl($scope, hpfbFileProcessing,ApplicationInfoService) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
-
+        self.formUserType='EXT'; //set default to external type
+        self.applicationInfoService = new ApplicationInfoService();
+        self.configField = {
+            "label": "DOSSIER_NUMBER",
+            "fieldLength": "7",
+            "tagName": "dossierID",
+            "errorMsg": "MSG_LENGTH_7"
+        };
+        self.isIncomplete=true;
 
         /*
 
@@ -63,7 +74,7 @@
 
         self.$onInit = function(){
             self.dossierModel = {
-                dossierID:"569522",
+                dossierID:"",
                 enrolmentVersion: "1.23",
                 dateSaved: "1999-01-21",
                 applicationType: "New",
@@ -95,8 +106,17 @@
 
             };
 
-
         }
+        /**
+         * @ngdoc captures any change events from variable bindings
+         * @param changes
+         */
+        self.$onChanges=function(changes){
+            if(changes.formType){
+                self.userFormType=changes.formType.currentValue;
+            }
+        }
+
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
@@ -104,6 +124,24 @@
              //process file load results
                 //load into data model
             }
+        }
+
+        self.setApplicationType = function (value) {
+            self.dossierModel.applicationType = value;
+            self.formAmend= self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
+            disableXMLSave();
+        };
+        function _setComplete() {
+            self.isIncomplete = !self.activityRoot.dossierID;
+        }
+
+
+        /**
+         * @ngdoc disables the XML save button
+         */
+        function disableXMLSave(){
+
+
         }
 
     }
