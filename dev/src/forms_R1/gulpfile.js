@@ -208,7 +208,8 @@ var dossierTranslationBaseFiles = {
     dosageForm: dossierPaths.translations + 'dossier-dosageform',
     dossier: dossierPaths.translations + 'dossier',
     dossierGeneral: dossierPaths.translations + 'dossier-general',
-    fileIO: dossierPaths.translations + 'fileIO'
+    fileIO: dossierPaths.translations + 'fileIO',
+    applInfo: dossierPaths.translations + 'applicationInfo'
 
 }
 
@@ -619,7 +620,7 @@ gulp.task('copyActivityTranslateDev', function () {
         translationBaseFiles.applicationInfo,
         translationBaseFiles.fileIO,
         translationBaseFiles.general,
-        translationBaseFiles.messages
+        translationBaseFiles.messages,
     ];
     pipes.translateDev(translationList, paths.buildDevActivity)
 });
@@ -943,7 +944,8 @@ gulp.task('copyDossierTranslateDev', function () {
         dossierTranslationBaseFiles.dosageForm,
         dossierTranslationBaseFiles.dossier,
         dossierTranslationBaseFiles.dossierGeneral,
-        dossierTranslationBaseFiles.fileIO
+        dossierTranslationBaseFiles.fileIO,
+        dossierTranslationBaseFiles.applInfo
     ];
     var baseIgnore = "../dossierEnrol"
 

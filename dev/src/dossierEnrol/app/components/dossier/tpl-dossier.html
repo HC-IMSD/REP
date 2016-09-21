@@ -1,4 +1,4 @@
-<form id="dossier-form" name="dossierForm" novalidate>
+<form id="dossier-form" name="dos.dossierForm" novalidate>
 
     <section class="panel  panel-primary mrgn-tp-lg">
         <header class="panel-heading">
@@ -23,7 +23,7 @@
         </div>
             <section class="panel  panel-default">
                 <header class="panel-heading">
-                    <h3 class="panel-title">Drug Product</h3>
+                    <h2 class="panel-title">Drug Product</h2>
                 </header>
                 <div class="panel-body">
 
@@ -49,7 +49,7 @@
 
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label for="product-name">Brand or Proprietary or Product Name</label>
+                            <label for="product-name">{{'PROPNAME' |translate}}</label>
                             <input type="text" class="form-control full-width" id="product-name" ng-model="dos.dossierModel.productName" placeholder="Brand or Proprietary or Product Name"/>
                         </div>
                     </div>
@@ -114,11 +114,11 @@
 
            <!--<cmp-contact-list ng-if="dos.dossierModel.contactList" contacts="dos.dossierModel.contactList" on-update="dos.onUpdateContactList(newList)"></cmp-contact-list>-->
             <div>
-                <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"></cmp-rep-contact-list>
-               <!-- <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
-                                      show-list-errors="main.showErrors()" is-amend="main.formAmend"
-                                      parent-dirty="main.activityEnrolForm.$dirty"
-                                      get-new-contact="main.activityService.createRepContact()"></cmp-rep-contact-list>-->
+                <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"
+                                      parent-dirty="dos.dossierForm.$dirty" get-new-contact="TODO"
+                                      show-list-errors="dos.showErrors()" is-amend="dos.formAmend"
+                ></cmp-rep-contact-list>
+
 
 
             </div>
@@ -127,5 +127,5 @@
 
 
    </section>
-
+    <pre>{{dos.dossierModel | json }}</pre>
 </form>

@@ -22,5 +22,8 @@
   "CANCEL":"Cancel",
   "DELETE": "Delete",
   "SCHED_A":"Schedule A Claims",
-  "DIN_FULL":"Drug Identification Number (DIN)"
+  "DIN_FULL":"Drug Identification Number (DIN)",
+  "THERA_CLASS":"Therapeutic Classification",
+  "THERA_CLASS_ADD":"Add Therapeutic Classification",
+  "PROPNAME":"Brand or Proprietary or Product Name (should be the same as the brand name on the product label)"
 }

@@ -53,14 +53,16 @@
         self.showContent = _loadFileContent; //binds the component to the function
         self.formUserType='EXT'; //set default to external type
         self.applicationInfoService = new ApplicationInfoService();
+        //config for applicationInfoCompoenent
         self.configField = {
-            "label": "DOSSIER_NUMBER",
+            "label": "DOSSIER_ID",
             "fieldLength": "7",
             "tagName": "dossierID",
             "errorMsg": "MSG_LENGTH_7"
         };
         self.isIncomplete=true;
-
+        self.formAmend=false;
+        self.showAllErrors = false;
         /*
 
          "company_id": "A",
@@ -123,7 +125,11 @@
             if (resultJson) {
              //process file load results
                 //load into data model
+
             }
+            //if content is attempted to be loaded show all the errors
+            self.showAllErrors=true;
+            disableXMLSave();
         }
 
         self.setApplicationType = function (value) {
@@ -131,6 +137,13 @@
             self.formAmend= self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+
+        /**
+         * @ngdoc Used to determine if the form is incomplete
+         *
+         * @private
+         * @return true if the form is incomplete
+         */
         function _setComplete() {
             self.isIncomplete = !self.activityRoot.dossierID;
         }
@@ -140,9 +153,22 @@
          * @ngdoc disables the XML save button
          */
         function disableXMLSave(){
-
+            self.disableXML = self.activityEnrolForm.$invalid || (self.dossierModel.applicationType== self.applicationInfoService.getApprovedType() && self.isExtern());
 
         }
+
+        /**
+         * @ngdoc - determines if the form is the internal or the external version
+         * @returns {boolean}
+         */
+        self.isExtern = function () {
+            return self.userType == "EXT";
+
+        };
+        self.showErrors=function(){
+            return(self.showAllErrors);
+        }
+
 
     }
 

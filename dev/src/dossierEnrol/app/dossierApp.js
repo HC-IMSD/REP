@@ -41,8 +41,10 @@ angular.module('dossierApp', ['pascalprecht.translate','ngSanitize', 'dossierMod
                         prefix: 'app/resources/dossier-general-',
                         suffix: '.json'
                     },
-
-
+                    {
+                        prefix: 'app/resources/applicationInfo-',
+                        suffix: '.json'
+                    },
 
                 ]
             });
