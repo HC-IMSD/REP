@@ -170,6 +170,14 @@
         }
 
 
+        /* [
+         {"name": "human", "label": "Human", "value": info.human_drug_use},
+         {"name": "radio-pharmaceutical", "label": "Radiopharmaceutical", "value": info.radiopharm_drug_use},
+         {"name": "veterinary", "label": "Veterinary", "value": info.vet_drug_use},
+         {"name": "disinfectant", "label": "Disinfectant", "value": info.disinfectant_drug_use}*/
+
+
+
     }
 
 })();
