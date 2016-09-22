@@ -20,7 +20,7 @@
         'contactModule25',
         'contactModule26',
         'applicationInfoService',
-        'applicationInfo'
+        'applicationInfo',
     ];
 
     angular

@@ -166,6 +166,7 @@ var jsServiceFiles = {
     filterLists: paths.services + 'filter-lists.js',
     hpfbConstants: paths.services + 'hpfb-constants.js',
     transactionService: paths.services + 'transactionService.js',
+    repContactService:paths.services+'rep-contact-service.js'
 };
 //TODO refactor
 var jsDirectiveFiles = {
@@ -209,7 +210,8 @@ var dossierTranslationBaseFiles = {
     dossier: dossierPaths.translations + 'dossier',
     dossierGeneral: dossierPaths.translations + 'dossier-general',
     fileIO: dossierPaths.translations + 'fileIO',
-    applInfo: dossierPaths.translations + 'applicationInfo'
+    applInfo: dossierPaths.translations + 'applicationInfo',
+    contact: dossierPaths.translations + 'contact'
 
 }
 
@@ -600,6 +602,7 @@ gulp.task('copyActivitySrcDev', function () {
             jsComponentPaths.repContactRecordPath + '**/*',
             jsServiceFiles.activityService,
             jsServiceFiles.applicationInfoService,
+            jsServiceFiles.repContactService,
             jsServiceFiles.filterLists,
             jsServiceFiles.dataLists,
             jsServiceFiles.dataListsActivity,
@@ -945,7 +948,8 @@ gulp.task('copyDossierTranslateDev', function () {
         dossierTranslationBaseFiles.dossier,
         dossierTranslationBaseFiles.dossierGeneral,
         dossierTranslationBaseFiles.fileIO,
-        dossierTranslationBaseFiles.applInfo
+        dossierTranslationBaseFiles.applInfo,
+        dossierTranslationBaseFiles.contact
     ];
     var baseIgnore = "../dossierEnrol"
 

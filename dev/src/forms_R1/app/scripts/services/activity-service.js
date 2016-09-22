@@ -57,26 +57,6 @@
             return (this.rootTag)
         };
 
-        ActivityService.prototype.createRepContact = function () {
-            var contact = _createContactModel();
-            contact.repRole = "";
-            contact.amend=false;
-            var currentContacts = this._default.contactRecord;
-            if (currentContacts.length == 0) {
-                contact.repRole = "PRIMARY";
-            } else {
-                contact.repRole = "PRIMARY";
-                for (var i = 0; i < currentContacts.length; i++) {
-                    if (currentContacts[i].repRole == "PRIMARY") {
-                        contact.repRole = "SECONDARY";
-                        break;
-                    }
-                }
-            }
-            return contact
-        };
-
-
         /**
          * @ngdoc transforms the object model to the compatible file JSON objecct base transform call!!
          * @param jsonObj
