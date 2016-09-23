@@ -19,7 +19,8 @@
             controllerAs: 'ap4RecCtrl',
             controller: app4RecCtrl,
             bindings: {
-                record:'<'
+                record: '<',
+                showListErrors: '&'
             }
 
         });
@@ -39,13 +40,20 @@
 
                 animalSourcedInfo : {}
             }
-
-            if(self.record){
-                self.model = angular.copy(self.record);
-
-               // console.log('appendix4RecordModule record: ' + JSON.stringify(self.record) );
-
+        }
+        self.$onChanges = function (changes) {
+            if (changes.record) {
+                self.model = angular.copy(changes.record.currentValue());
             }
+
+        }
+        self.isSourcedSelected = function () {
+            return (self.model.humanSource || self.model.animalSourced)
+
+        }
+
+        self.noSelectionError = function () {
+            return ((self.appendix4RecForm.$dirty && !self.isSourcedSelected() ) || (self.showListErrors() && !self.isSourcedSelected()));
         }
 
     }

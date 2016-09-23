@@ -166,7 +166,7 @@ var jsServiceFiles = {
     filterLists: paths.services + 'filter-lists.js',
     hpfbConstants: paths.services + 'hpfb-constants.js',
     transactionService: paths.services + 'transactionService.js',
-    repContactService:paths.services+'rep-contact-service.js'
+    repContactService: paths.services + 'rep-contact-service.js'
 };
 //TODO refactor
 var jsDirectiveFiles = {
@@ -231,6 +231,11 @@ var jsDossierComponentPaths = {
     repContactRecord: dossierPaths.components + 'rep-contact-record/',
     applicationInfo: dossierPaths.components + 'applicationInfo/',
 };
+
+var jsDossierServicePaths = {
+    dossierService: dossierPaths.services + "dossier-service.js",
+    dossierDataList: dossierPaths.services + "dossier-data-list.js"
+}
 
 
 // == PIPE SEGMENTS ========
@@ -787,7 +792,6 @@ gulp.task('copyLibDevCompany', function () {
 //copy all the needed files for company
 gulp.task('copyTransactionSrcDev', function () {
     var copySources = gulp.src([
-
             jsComponentPaths.transactionMainPath + '**/*',
             jsComponentPaths.contactDetailsPath + '**/*',
             jsComponentPaths.countrySelectPath + '**/*',
@@ -927,7 +931,6 @@ gulp.task('dev-activity-help', function () {
     destName = "help-activity-rep-fr.html"
     pipes.createHelpFile(paths.englishTemplate, ActcontactEn, (paths.helpTemplates + destName), dest, destName)
 
-
 });
 
 /******** Dossier Related  tasks  *****************/
@@ -956,25 +959,18 @@ gulp.task('copyDossierTranslateDev', function () {
     pipes.translateDev(translationList, dossierPaths.buildDevDossier, baseIgnore)
 });
 
-gulp.task('copyDossierSrcDev', function () {
+gulp.task('copyDossierSrcDev', ['copyDossierServicesDev', 'copyDossierCommonSrcDev'], function () {
     var copySources = gulp.src([
 
             jsDossierComponentPaths.appendix4 + '**/*',
             jsDossierComponentPaths.canRefProducts + '**/*',
             jsDossierComponentPaths.checkboxList + '**/*',
-            jsDossierComponentPaths.contact + '**/*',
             jsDossierComponentPaths.dossier + '**/*',
             jsDossierComponentPaths.drugUse + '**/*',
             jsDossierComponentPaths.expandingTable + '**/*',
-            jsDossierComponentPaths.fileIO + '**/*',
             jsDossierComponentPaths.scheduleA + '**/*',
             jsDossierComponentPaths.tabs + '**/*',
-            jsDossierComponentPaths.theraClass + '**/*',
-            jsDossierComponentPaths.repContactList + '**/*',
-            jsDossierComponentPaths.repContactRecord + '**/*',
-            jsDossierComponentPaths.applicationInfo + '**/*',
-            dossierPaths.services + '**/*'
-
+            jsDossierComponentPaths.theraClass + '**/*'
         ],
         {read: true, base: '../dossierEnrol'});
 
@@ -982,6 +978,71 @@ gulp.task('copyDossierSrcDev', function () {
     var def = Q.defer();
     copySources.pipe(stringReplace('./components/', './app/components/'))
         .pipe(gulp.dest(dossierPaths.buildDevDossier))
+        .on('end', function () {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
+
+});
+/**
+ * Copies the common components from the release 1 directory to the dossier build
+ * */
+gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev'], function () {
+    var copySources = gulp.src([
+            jsComponentPaths.fileIOComponentAndDepPath + '**/*',
+            jsComponentPaths.repContactListPath + '**/*',
+            jsComponentPaths.repContactRecordPath + '**/*',
+            jsComponentPaths.contactDetailsPath + '**/*',
+            jsComponentPaths.applicationInfoPath + '**/*'
+        ],
+        {read: true, base: './app/scripts'});
+
+    var def = Q.defer();
+    copySources.pipe(stringReplace('app/scripts/components/', './app/components/'))
+        .pipe(gulp.dest(dossierPaths.buildDevDossier + 'app/'))
+        .on('end', function () {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
+
+});
+/* Copies the common services dossier uses to the dev build folder
+ **
+ */
+gulp.task('copyDossierCommonServicesDev', function () {
+    var copySources = gulp.src([
+            jsServiceFiles.applicationInfoService,
+            jsServiceFiles.dataLists,
+            jsServiceFiles.filterLists,
+            jsServiceFiles.repContactService,
+            jsServiceFiles.filterLists
+        ],
+        {read: true, base: './app/scripts'});
+
+    var def = Q.defer();
+    copySources.pipe(gulp.dest(dossierPaths.buildDevDossier + 'app/'))
+        .on('end', function () {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
+
+});
+
+
+/**
+ * Copies Dossier service files from the dossier github folder to the build folder
+ */
+gulp.task('copyDossierServicesDev', function () {
+    var copySources = gulp.src([
+            jsDossierServicePaths.dossierDataList,
+            jsDossierServicePaths.dossierService
+        ],
+        {read: true, base: '../dossierEnrol'});
+    var def = Q.defer();
+    copySources.pipe(gulp.dest(dossierPaths.buildDevDossier))
         .on('end', function () {
             def.resolve();
         })

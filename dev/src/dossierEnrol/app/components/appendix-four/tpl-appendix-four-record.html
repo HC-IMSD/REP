@@ -1,4 +1,4 @@
-<ng-form name="appendix4-rec-form">
+<ng-form name="ap4RecCtrl.appendix4RecForm">
     <div class="row">
         <div class="col-xs-12 form-group">
             <label for="ing-name">{{'INGRED_NAME'|translate}}</label>
@@ -12,12 +12,11 @@
         <legend class="required">
             <span class="field-name">{{'SOURCED'|translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-            <input id="roleMissing_{{$id}}" name="roleMissing" ng-required="true" ng-show="false"
-                   ng-model="ap4RecCtrl.isSelected" required/>
-            <strong id=" address-role-error" class="error" ng-if="false">
-                        <span class="label label-danger" ng-messages="appendix4-rec-form.roleMissing.$error">
-                            <span ng-message="required">{{"MSG_APP4_TYPE"|translate}}</span>
-                        </span>
+            <strong id="contactNum-role-error" class="error"
+                    ng-if="ap4RecCtrl.noSelectionError()">
+                             <span class="label label-danger" aria-live="polite">
+                                 <span>{{"MSG_APP4_TYPE"|translate}}</span>
+                             </span>
             </strong>
         </legend>
         <div class="row">

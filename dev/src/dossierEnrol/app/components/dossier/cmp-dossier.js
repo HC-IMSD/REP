@@ -9,7 +9,6 @@
     var dependencies = [
         'expandingTable'
         ,'tabsModule'
-        ,'contactList'
         ,'refProductListModule'
         ,'drugUseModule'
         ,'therapeuticClassModule'
@@ -124,8 +123,7 @@
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
              //process file load results
-                //load into data model
-
+                //load into data model as result json is not null
             }
             //if content is attempted to be loaded show all the errors
             self.showAllErrors=true;
