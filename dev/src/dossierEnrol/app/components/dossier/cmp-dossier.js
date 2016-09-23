@@ -78,7 +78,7 @@
                 dossierID:"",
                 enrolmentVersion: "1.23",
                 dateSaved: "1999-01-21",
-                applicationType: "New",
+                applicationType: "NEW",
                 softwareVersion: "1.0",
                 dataChecksum: "kjsakdjas",
                 drugProduct:{
@@ -163,10 +163,16 @@
             return self.userType == "EXT";
 
         };
+        /**
+         * Used to show all the fields in an error state. Can be activated by a parent component
+         * @returns {boolean}
+         */
         self.showErrors=function(){
             return(self.showAllErrors);
         }
-
+        self.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (self.showErrors && isInvalid))
+        }
 
         /* [
          {"name": "human", "label": "Human", "value": info.human_drug_use},

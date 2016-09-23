@@ -2,7 +2,7 @@
     <legend>{{'THERA_CLASS'|translate}}</legend>
 
     <ul class="list-group">
-        <li class="list-group-item list-group-item-text active  col-md-12">Classification Name</li>
+        <li class="list-group-item list-group-item-text active  col-md-12">{{'THERA_CLASS_NAME'|translate}}</li>
         <li class="list-group-item  col-md-12" ng-repeat="item in $ctrl.model.classifications" ng-include="$ctrl.getTemplate(item)"></li>
     </ul>
 
@@ -16,15 +16,16 @@
         </div>
     </script>
 
-    <script type="text/ng-template" id="edit">
+    <script type="text/ng-template" id="edit_{{$id}}" ng-class="{'has-error':dos.dossierForm.properName.$invalid}">
             <div class="col-md-8">
                 <textarea type="text" class="form-control full-width" maxlength="256" ng-model="item.name">
                     </textarea>
             </div>
             <div class="btn-group-sm col-md-4 text-right">
-                <a href="" ng-click="$ctrl.saveRecord(item.id)" class="btn btn-primary btn-sm">Save</a>
-                <a href="" ng-click="$ctrl.reset()" class="btn btn-default btn-sm">Cancel</a>
-                <a href="" ng-click="$ctrl.deleteRecord(item.id)" class="btn btn-danger btn-sm">Delete</a>
+                <a href="" ng-click="$ctrl.saveRecord(item.id)" class="btn btn-primary btn-sm">{{'SAVE'|translate}}</a>
+                <a href="" ng-click="$ctrl.reset()" class="btn btn-default btn-sm">{{'CANCEL'|translate}}</a>
+                <a href="" ng-click="$ctrl.deleteRecord(item.id)"
+                   class="btn btn-danger btn-sm">{{'DELETE'|translate}}</a>
             </div>
     </script>
 

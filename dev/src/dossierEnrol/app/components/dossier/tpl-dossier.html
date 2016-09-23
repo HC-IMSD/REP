@@ -16,11 +16,13 @@
         </header>
         <div class="panel-body">
 
-        <div>
-            <cmp-application-info record="dos.dossierModel" user-type="dos.formUserType" set-type="dos.setApplicationType(type)"
-                                  configure-id-field="dos.configField" is-incomplete="dos.isIncomplete"></cmp-application-info>
+            <div>
+                <cmp-application-info record="dos.dossierModel" user-type="dos.formUserType"
+                                      set-type="dos.setApplicationType(type)"
+                                      configure-id-field="dos.configField"
+                                      is-incomplete="dos.isIncomplete"></cmp-application-info>
 
-        </div>
+            </div>
             <section class="panel  panel-default">
                 <header class="panel-heading">
                     <h2 class="panel-title">{{'DRUG_PRODUCT' |translate}}</h2>
@@ -51,23 +53,45 @@
 
 
                     <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label for="product-name">{{'PROPNAME' |translate}}</label>
-                            <input type="text" class="form-control full-width" id="product-name"
-                                   ng-model="dos.dossierModel.productName"/>
+                        <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm.productName.$invalid}">
+
+                            <label for="product-name" class="required">
+                                <span class="field-name">{{'PROPNAME' |translate}}</span>
+                                <strong class="required">{{"REQUIRED" |translate}}</strong>
+                                <strong id="productName-error" class="error"
+                                        ng-if="dos.showError(dos.dossierForm.productName.$invalid,dos.dossierForm.productName.$touched)">
+                                    <span class="label label-danger"
+                                          ng-messages="dos.dossierForm.productName.$error">
+                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                    </span>
+                                </strong>
+                            </label>
+                            <textarea type="text" class="form-control full-width" id="product-name" rows="2"
+                                      name="productName"
+                                      maxlength="200" ng-model="dos.dossierModel.productName"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm.properName.$invalid}">
+                            <label for="proper-name" class="required">
+                                <span class="field-name"> {{'PROPER_NAME' |translate}}</span>
+                                <strong class="required">{{"REQUIRED" |translate}}</strong>
+                                <strong id="properName-error" class="error"
+                                        ng-if="dos.showError(dos.dossierForm.properName.$invalid,dos.dossierForm.properName.$touched)">
+                                    <span class="label label-danger"
+                                          ng-messages="dos.dossierForm.properName.$error">
+                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                    </span>
+                                </strong>
+                            </label>
+                            <textarea type="text" class="form-control full-width" id="proper-name" name="properName"
+                                      ng-model="dos.dossierModel.properName" maxlength="256"> </textarea>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <label for="proper-name">{{'PROPER_NAME' |translate}}</label>
-                            <input type="text" class="form-control full-width" id="proper-name" ng-model="dos.dossierModel.properName" placeholder="Proper, Common or Non-Proprietary Name"/>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-xs-12 form-group">
-
                             <cmp-ref-product-list products="dos.dossierModel.canRefProducts"></cmp-ref-product-list>
                         </div>
 
@@ -95,10 +119,10 @@
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <label for="third-party-signed">
-                                <input type="checkbox" name="isScheduleA" ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case" ng-change=""> This is a non-prescription drug to which one
-                                or more Schedule A claims apply
+                                <input type="checkbox" name="isScheduleA"
+                                       ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case"
+                                       ng-change=""> {{'SCHED_A'|translate}}
                             </label>
-
 
                         </div>
                     </div>
@@ -114,10 +138,10 @@
             </section>
 
 
-           <cmp-tabs></cmp-tabs>
+            <cmp-tabs></cmp-tabs>
             <!--<cmp-appendix-four></cmp-appendix-four>-->
 
-           <!--<cmp-contact-list ng-if="dos.dossierModel.contactList" contacts="dos.dossierModel.contactList" on-update="dos.onUpdateContactList(newList)"></cmp-contact-list>-->
+            <!--<cmp-contact-list ng-if="dos.dossierModel.contactList" contacts="dos.dossierModel.contactList" on-update="dos.onUpdateContactList(newList)"></cmp-contact-list>-->
             <div>
                 <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"
                                       parent-dirty="dos.dossierForm.$dirty"
@@ -125,12 +149,11 @@
                 ></cmp-rep-contact-list>
 
 
-
             </div>
 
-       </div>
+        </div>
 
 
-   </section>
+    </section>
     <pre>{{dos.dossierModel | json }}</pre>
 </form>

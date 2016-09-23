@@ -4,5 +4,8 @@
   "UNK":"Unknown",
   "REQUIRED":"(required)",
   "OTHER":"Other",
-  "DOSSIER_NUMBER": "Dossier ID"
+  "DOSSIER_NUMBER": "Dossier ID",
+  "SAVE": "Save",
+  "CANCEL": "Cancel",
+  "DELETE": "Delete"
 }
