@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('formulationRecordModule', ['activeIngListModule','nonMedIngListModule','containerTypeListModule'])
+        .module('formulationRecordModule', ['activeIngListModule','nonMedIngListModule','containerTypeListModule', 'materialIngListModule', 'roaModule'])
 })();
 
 (function () {

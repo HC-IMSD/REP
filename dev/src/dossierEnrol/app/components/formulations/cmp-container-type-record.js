@@ -37,6 +37,10 @@
                 "shelfLifeMonths": "99",
                 "tempMin": "999",
                 "tempMax": "999"
+            };
+
+            if(self.record){
+                self.ctModel = self.record;
             }
         }
 

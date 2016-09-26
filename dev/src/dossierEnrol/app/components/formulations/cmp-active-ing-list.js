@@ -37,7 +37,7 @@
             self.ingList = [
                 {
                     "ingName": "ing1",
-                    "cas": "Active",
+                    "cas": "00-00-1",
                     "humanAnimalSourced": "No",
                     "standard": "A",
                     "strength": "A",
@@ -50,7 +50,7 @@
                 },
                 {
                     "ingName": "ing2",
-                    "cas": "Active",
+                    "cas": "00-00-2",
                     "humanAnimalSourced": "Yes",
                     "standard": "A",
                     "strength": "A",
@@ -63,7 +63,7 @@
                 },
                 {
                     "ingName": "ing3",
-                    "cas": "Active",
+                    "cas": "00-00-3",
                     "humanAnimalSourced": "Yes",
                     "standard": "A",
                     "strength": "A",

@@ -40,7 +40,7 @@
                 {
                     "varId": "Var1",
                     "ingName": "ing1",
-                    "cas": "Active",
+                    "cas": "00-00-1",
                     "type": "A",
                     "humanAnimalSourced": "No",
                     "standard": "A",
@@ -55,7 +55,7 @@
                 {
                     "varId": "Var2",
                     "ingName": "ing2",
-                    "cas": "Active",
+                    "cas": "00-00-2",
                     "type": "A",
                     "humanAnimalSourced": "Yes",
                     "standard": "A",
@@ -70,7 +70,7 @@
                 {
                     "varId": "Var3",
                     "ingName": "ing3",
-                    "cas": "Active",
+                    "cas": "00-00-3",
                     "type": "A",
                     "humanAnimalSourced": "Yes",
                     "standard": "A",
