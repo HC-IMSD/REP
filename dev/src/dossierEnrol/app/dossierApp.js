@@ -3,7 +3,7 @@
 
 
     //TODO: Lazy load modules
-angular.module('dossierApp', ['pascalprecht.translate','ngSanitize', 'dossierModule'])
+angular.module('dossierApp', ['pascalprecht.translate', 'dossierModule'])
     .controller('MainController', MainController);
 
     angular.element(document).ready(function() {
@@ -17,6 +17,7 @@ angular.module('dossierApp', ['pascalprecht.translate','ngSanitize', 'dossierMod
 
 
 })();
+/*
 
 (function () {
     'use strict';
@@ -51,4 +52,4 @@ angular.module('dossierApp', ['pascalprecht.translate','ngSanitize', 'dossierMod
             $translateProvider.directivePriority(1);
             $translateProvider.useSanitizeValueStrategy('sanitize');
         }]);
-})();
+})();*/
