@@ -231,6 +231,7 @@ var jsDossierComponentPaths = {
     repContactList: dossierPaths.components + 'repContactList/',
     repContactRecord: dossierPaths.components + 'rep-contact-record/',
     applicationInfo: dossierPaths.components + 'applicationInfo/'
+
 };
 
 var jsDossierServicePaths = {
@@ -830,6 +831,7 @@ gulp.task('copyTransactionSrcDev', function () {
             jsComponentPaths.addressRecordPath + '**/*',
             jsComponentPaths.contactRecordPath + '**/*',
             jsServiceFiles.transactionService,
+            jsServiceFiles.repContactService,
             jsServiceFiles.dataLists,
             jsServiceFiles.dataListsActivity,
             jsServiceFiles.applicationInfoService,
@@ -1134,7 +1136,7 @@ gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossi
     );
 });
 
-gulp.task('cleanProd',function(){
+gulp.task('cleanProd', function () {
     pipes.cleanBuild(paths.buildProd)
 
 });
@@ -1143,19 +1145,18 @@ gulp.task('compileProdSrc', function () {
     var outName = 'activityEXT-en.min.js';
 
 
-   return(pipes.builtAppCmpScriptsProd([baseActivityPath + 'activityAppEXT-en.js', baseActivityPath + 'components/**/*.js', baseActivityPath + 'directives/**/*.js', baseActivityPath + 'services/**/*.js']
+    return (pipes.builtAppCmpScriptsProd([baseActivityPath + 'activityAppEXT-en.js', baseActivityPath + 'components/**/*.js', baseActivityPath + 'directives/**/*.js', baseActivityPath + 'services/**/*.js']
         , outName, paths.buildProd + '/app/scripts'))
 })
 
 
-
-gulp.task('testProd',['compileProdSrc'], function () {
+gulp.task('testProd', ['compileProdSrc'], function () {
     var baseActivityPath = paths.buildDevActivity + 'app/scripts/';
     var outName = 'activityEXT-en.min.js';
 
     /*
-    pipes.builtAppCmpScriptsProd([paths.buildDevActivity + 'activityAppEXT-en.js', baseActivityPath + 'components/!**!/!*.js', baseActivityPath + 'directives/!**!/!*.js', baseActivityPath + 'services/!**!/!*.js']
-        , outName, paths.buildProd + '/app/scripts')*/
+     pipes.builtAppCmpScriptsProd([paths.buildDevActivity + 'activityAppEXT-en.js', baseActivityPath + 'components/!**!/!*.js', baseActivityPath + 'directives/!**!/!*.js', baseActivityPath + 'services/!**!/!*.js']
+     , outName, paths.buildProd + '/app/scripts')*/
 
     var srcs = [
         baseActivityPath + 'components/**/*.html',
@@ -1166,14 +1167,14 @@ gulp.task('testProd',['compileProdSrc'], function () {
     var srcJs = [
         paths.buildProd + '/app/scripts/' + 'activityEXT-en.min.js',
         paths.buildProd + '/app/lib/**/*.js']
-   pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJs, '/build/prod/', 'indexActivityEXT-en.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJs, '/build/prod/', 'indexActivityEXT-en.html', paths.buildProd);
 
 });
 
 
-gulp.task('copyWetProd',function(){
-        var dest = './build/prod/';
-        return (pipes.copyWet(dest))
+gulp.task('copyWetProd', function () {
+    var dest = './build/prod/';
+    return (pipes.copyWet(dest))
 });
 
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
@@ -1191,8 +1192,8 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
                 ignorePath: ignorePath,
                 addRootSlash: false
             }))
-            .pipe(rename(outName))
-            .pipe(gulp.dest(destDir))
+        .pipe(rename(outName))
+        .pipe(gulp.dest(destDir))
 
 };
 
