@@ -1134,14 +1134,28 @@ gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossi
     );
 });
 
+gulp.task('cleanProd',function(){
+    pipes.cleanBuild(paths.buildProd)
 
-gulp.task('testProd', function () {
+});
+gulp.task('compileProdSrc', function () {
     var baseActivityPath = paths.buildDevActivity + 'app/scripts/';
     var outName = 'activityEXT-en.min.js';
 
 
-    pipes.builtAppCmpScriptsProd([paths.buildDevActivity + 'activityAppEXT-en.js', baseActivityPath + 'components/**/*.js', baseActivityPath + 'directives/**/*.js', baseActivityPath + 'services/**/*.js']
-        , outName, paths.buildProd + '/app/scripts');
+   return(pipes.builtAppCmpScriptsProd([baseActivityPath + 'activityAppEXT-en.js', baseActivityPath + 'components/**/*.js', baseActivityPath + 'directives/**/*.js', baseActivityPath + 'services/**/*.js']
+        , outName, paths.buildProd + '/app/scripts'))
+})
+
+
+
+gulp.task('testProd',['compileProdSrc'], function () {
+    var baseActivityPath = paths.buildDevActivity + 'app/scripts/';
+    var outName = 'activityEXT-en.min.js';
+
+    /*
+    pipes.builtAppCmpScriptsProd([paths.buildDevActivity + 'activityAppEXT-en.js', baseActivityPath + 'components/!**!/!*.js', baseActivityPath + 'directives/!**!/!*.js', baseActivityPath + 'services/!**!/!*.js']
+        , outName, paths.buildProd + '/app/scripts')*/
 
     var srcs = [
         baseActivityPath + 'components/**/*.html',
@@ -1149,14 +1163,22 @@ gulp.task('testProd', function () {
     ];
     pipes.copySrcProd(srcs, './build/dev/activity', paths.buildProd);
     var htmlPartial = jsRootContent.partialActivityRoot;
-    var srcJs = [paths.buildProd + '/app/scripts' + 'activityEXT-en.min.js']
-    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJs, '.', 'indexEXT-en.js', paths.buildProd);
+    var srcJs = [
+        paths.buildProd + '/app/scripts/' + 'activityEXT-en.min.js',
+        paths.buildProd + '/app/lib/**/*.js']
+   pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJs, '/build/prod/', 'indexActivityEXT-en.html', paths.buildProd);
 
 });
 
-pipes.createRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
+
+gulp.task('copyWetProd',function(){
+        var dest = './build/prod/';
+        return (pipes.copyWet(dest))
+});
+
+pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
     pipes.insertDateStamp(templatePath, metaObj)
-        .pipe(inject(gulp.src([partialRoot]), {
+        .pipe(inject(gulp.src([htmlPartial]), {
             starttag: placeholders.mainContent,
             transform: function (filePath, file) {
                 // return file contents as string
@@ -1164,7 +1186,19 @@ pipes.createRootHtml = function (templatePath, metaObj, htmlPartial, src, ignore
             }
         }))
         .pipe(inject(gulp.src(src)
+            .pipe(angularFilesort())
+            , {
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }))
             .pipe(rename(outName))
-            .pipe(gulp.dest(destDir))))
+            .pipe(gulp.dest(destDir))
 
 };
+
+gulp.task('copyLibProd', function () {
+    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
+        {read: true, base: ''});
+    return copySources.pipe(gulp.dest(paths.buildProd))
+
+});
