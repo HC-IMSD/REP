@@ -1,21 +1,23 @@
 /**
- * Created by Abdessamad on 8/16/2016.
+ * Created by Abdessamad on 9/26/2016.
  */
+
 (function () {
     'use strict';
 
     angular
-        .module('therapeuticClassModule', [])
+        .module('roaModule', [])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('therapeuticClassModule')
-        .component('cmpTherapeuticClass', {
-            templateUrl: './components/therapeutic-classification/tpl-therapeutic-class.html',
-            controller: therapeuticClassCtrl,
+        .module('roaModule')
+        .component('cmpRoa', {
+            templateUrl: './components/formulations/tpl-route-of-admin.html',
+            controller: roaCtrl,
+            controllerAs: 'roaCtrl',
             bindings: {
                 listItems: '<',
                 onUpdate: '&',
@@ -24,27 +26,30 @@
         });
 
 
-    function therapeuticClassCtrl($filter){
+
+    function roaCtrl($filter){
         var self = this;
 
         self.$onInit = function(){
+
             self.model={
-                classifications : [
-                    {"id":1, "name":"classification1"},
-                    {"id":2, "name":"classification2"},
-                    {"id":3, "name":"classification3"},
-                    {"id":4, "name":"classification4"},
-                    {"id":5, "name":"classification5"}
+                list : [
+                    {"id":1, "name":"Transdermal1"},
+                    {"id":2, "name":"Transdermal2"},
+                    {"id":3, "name":"Transdermal3"}
                 ],
+
+                roa :["Transdermal1", "Transdermal2", "Transdermal3", "Transdermal4", "OTHER"],
                 selected:{}
             }
-        }
-
-        // gets the template to ng-include for a table row / item
-        self.getTemplate = function (item) {
-            if (item.id === self.model.selected.id) return 'editClass';
-            else return 'displayClass';
         };
+
+        self.getTemplate = function (item) {
+            if (item.id === self.model.selected.id) return 'editRoa';
+            else return 'displayRoa';
+        };
+
+
 
         self.addNew = function(){
 
@@ -54,37 +59,46 @@
 
             var item = {"id":maxID + 1, "name":""};
 
-            self.model.classifications.push(item);
+            self.model.list.push(item);
             self.editRecord(item);
 
         };
+
+
 
         self.editRecord = function (item) {
             self.model.selected = item;
         };
 
         self.saveRecord = function (_id) {
-           // console.log("Saving item: "+_id);
-            var idx = self.model.classifications.indexOf(
-                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
+            // console.log("Saving item: "+_id);
+            var idx = self.model.list.indexOf(
+                $filter('filter')(self.model.list, {id: _id}, true)[0]
             );
-            self.model.classifications[idx] = self.model.selected;
+            self.model.list[idx] = self.model.selected;
             self.reset();
         };
 
         self.deleteRecord = function (_id) {
             //console.log("Deleting item: "+_id);
 
-            var idx = self.model.classifications.indexOf(
-                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
+            var idx = self.model.list.indexOf(
+                $filter('filter')(self.model.list, {id: _id}, true)[0]
             );
-            self.model.classifications.splice(idx,1);
+            if(idx < 0) return;
+
+            self.model.list.splice(idx,1);
         };
 
 
 
         self.reset = function () {
             var item = self.model.selected;
+            //console.log('reset selected: ' + item.toSource());
+            if(angular.isUndefined(item))
+                return;
+
+           // self.deleteRecord(item.id)
             self.model.selected = {};
 
         };
@@ -92,7 +106,7 @@
         function getListMaxID(){
 
             var out = 0;
-            var list = self.model.classifications;
+            var list = self.model.list;
             if (list) {
                 for (var i = 0; i<list.length; i++) {
                     if (list[i].id > out) {
@@ -103,5 +117,9 @@
             return out;
 
         }
+
+
+
     }
 })();
+
