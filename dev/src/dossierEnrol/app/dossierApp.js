@@ -6,9 +6,9 @@
     angular.module('dossierApp', ['pascalprecht.translate', 'dossierModule'])
     .controller('MainController', MainController);
 
-   /* angular.element(document).ready(function() {
+    angular.element(document).ready(function () {
         angular.bootstrap(document, ['dossierApp']);
-    })*/
+    })
 
     function MainController() {
             var vm = this;
