@@ -3,7 +3,7 @@
 
 
     //TODO: Lazy load modules
-angular.module('dossierApp', ['pascalprecht.translate','ngSanitize', 'dossierModule'])
+    angular.module('dossierApp', ['pascalprecht.translate', 'dossierModule'])
     .controller('MainController', MainController);
 
    /* angular.element(document).ready(function() {
@@ -49,12 +49,16 @@ angular.module('dossierApp', ['pascalprecht.translate','ngSanitize', 'dossierMod
                         prefix: 'app/resources/contact-',
                         suffix: '.json'
                     },
+                    {
+                        prefix: 'app/resources/countries-',
+                        suffix: '.json'
+                    }
 
                 ]
             });
             $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
-            $translateProvider.useSanitizeValueStrategy('sanitize');
+            //  $translateProvider.useSanitizeValueStrategy('sanitize');
         }]);
 })();
