@@ -1,11 +1,94 @@
 <ng-form name="tfo-form">
     <fieldset>
-        <legend class="required">{{'TISSUES_ORIGIN'|translate}}</legend>
-        <h3>{{tfoCtrl.model.nervousSystem.title |translate}}</h3>
-        <div class="col col-md-12">
-        <cmp-checkbox-list
-                           common-name="{{tfoCtrl.model.nervousSystem.groupName}}" list-items="tfoCtrl.model.nervousSystem.list"></cmp-checkbox-list>
+        <legend class="required">
+            <span class="field-name">{{'TISSUES_ORIGIN'| translate}}</span>
+            <strong class="required"> {{"REQUIRED" |translate}}</strong>
+        </legend>
+        <div>
+
+            <h3>{{'NERVOUSYSTEM' |translate}}</h3>
+
         </div>
+        <div class="col col-md-12">
+            <cmp-checkbox-list
+                    common-name="{{tfoCtrl.model.nervousSystem.groupName}}"
+                    list-items="tfoCtrl.model.nervousSystem.list"></cmp-checkbox-list>
+        </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{'DIGESTIVESYSTEM' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.digestiveSystem.groupName}}"
+                        list-items="tfoCtrl.model.digestiveSystem.list"></cmp-checkbox-list>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{'REPRODUCTSYSTEM' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.reproductiveSystem.groupName}}"
+                        list-items="tfoCtrl.model.reproductiveSystem.list"></cmp-checkbox-list>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{'CARDIOSYSTEM' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.cardioSystem.groupName}}"
+                        list-items="tfoCtrl.model.cardioSystem.list"></cmp-checkbox-list>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{'IMMUNESYSTEM' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.immuneSystem.groupName}}"
+                        list-items="tfoCtrl.model.immuneSystem.list"></cmp-checkbox-list>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{'SKINGLANDSYSTEM' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.skinGlandSystem.groupName}}"
+                        list-items="tfoCtrl.model.skinGlandSystem.list"></cmp-checkbox-list>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h3>{{'MUSCULOSYSTEM' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.musculoSkeletalSystem.groupName}}"
+                        list-items="tfoCtrl.model.musculoSkeletalSystem.list"></cmp-checkbox-list>
+            </div>
+        </div>
+
+
+        <div>
+            <div>
+                <h3>{{'OTHERTISSUE' |translate}}</h3>
+            </div>
+            <div class="col col-md-12">
+                <cmp-checkbox-list
+                        common-name="{{tfoCtrl.model.otherTissues.groupName}}"
+                        list-items="tfoCtrl.model.otherTissues.list"></cmp-checkbox-list>
+            </div>
+        </div>
+
+
     </fieldset>
 </ng-form>
 
