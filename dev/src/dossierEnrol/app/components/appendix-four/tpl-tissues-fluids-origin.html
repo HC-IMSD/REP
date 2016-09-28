@@ -1,9 +1,13 @@
 <ng-form name="tfo-form">
     <fieldset>
         <legend class="required">{{'TISSUES_ORIGIN'|translate}}</legend>
+        <h3>{{tfoCtrl.model.nervousSystem.title |translate}}</h3>
         <div class="col col-md-12">
-        <cmp-checkbox-list ng-repeat="item in tfoCtrl.model" title="{{item.title}}"
-                           common-name="{{item.groupName}}" list-items="item.list"></cmp-checkbox-list>
+        <cmp-checkbox-list
+                           common-name="{{tfoCtrl.model.nervousSystem.groupName}}" list-items="tfoCtrl.model.nervousSystem.list"></cmp-checkbox-list>
         </div>
     </fieldset>
 </ng-form>
+
+<!--
+ng-repeat="item in tfoCtrl.model.nervousSystem"-->
