@@ -33,5 +33,6 @@
   "RELATED_DOSSIER": "fr_Related Dossier ID [if applicable]",
   "PROPER_NAME": "fr_Proper, Common or Non-Proprietary Name",
   "DRUG_USE": "fr_Drug Use",
-  "SCHED_A": "fr_This is a non-prescription drug to which one or more Schedule A claims apply"
+  "SCHED_A": "fr_This is a non-prescription drug to which one or more Schedule A claims apply",
+  "SOURCED_ANIMAL": "fr_Source From Animal"
 }

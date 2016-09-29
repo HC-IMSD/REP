@@ -1,54 +1,55 @@
-<ng-form name="ap4RecCtrl.appendix4RecForm">
-    <div class="row">
-        <div class="col-xs-12 form-group">
-            <label for="ing-name">{{'INGRED_NAME'|translate}}</label>
-            <input type="text" class="form-control full-width" id="ing-name" ng-model="ap4RecCtrl.model.ingredientName"
-                   placeholder={{'INGRED_NAME'|translate}}/>
+<div class="container-fluid">
+    <ng-form name="ap4RecCtrl.appendix4RecForm">
+        <div class="row">
+            <div class="col-xs-12 form-group">
+                <label for="ing-name">{{'INGRED_NAME'|translate}}</label>
+                <input type="text" class="form-control full-width" id="ing-name"
+                       ng-model="ap4RecCtrl.model.ingredientName"
+                       placeholder={{'INGRED_NAME'|translate}}/>
+            </div>
         </div>
-    </div>
 
-    <fieldset>
-       <!-- TODO: hookup error handling-->
-        <legend class="required">
-            <span class="field-name">{{'SOURCED'|translate}}</span>
-            <strong class="required"> {{"REQUIRED" |translate}}</strong>
-            <strong id="contactNum-role-error" class="error"
-                    ng-if="ap4RecCtrl.noSelectionError()">
+        <fieldset>
+            <!-- TODO: hookup error handling-->
+            <legend class="required">
+                <span class="field-name">{{'SOURCED'|translate}}</span>
+                <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                <strong id="contactNum-role-error" class="error"
+                        ng-if="ap4RecCtrl.noSelectionError()">
                              <span class="label label-danger" aria-live="polite">
                                  <span>{{"MSG_APP4_TYPE"|translate}}</span>
                              </span>
-            </strong>
-        </legend>
-        <div class="row">
-            <div class="col-xs-2">
-                <div class="checkbox">
-                <label for="sourced-human_{{$id}}">
-                    <input type="checkbox" name="sourced-human" ng-model="ap4RecCtrl.model.humanSourced"
-                           id="sourced-human_{{$id}}"
-                           ng-change=""> {{'HUMAN'|translate}}
-                </label>
+                </strong>
+            </legend>
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="checkbox">
+                        <label for="sourced-human_{{$id}}">
+                            <input type="checkbox" name="sourced-human" ng-model="ap4RecCtrl.model.humanSourced"
+                                   id="sourced-human_{{$id}}"
+                                   ng-change=""> {{'HUMAN'|translate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    <div class="checkbox">
+                        <label for="sourced-animal">
+                            <input type="checkbox" name="sourced-animal" ng-model="ap4RecCtrl.model.animalSourced"
+                                   id="sourced-animal"
+                                   ng-change="">{{'ANIMAL'|translate}}
+                        </label>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-2">
-                <div class="checkbox">
-                <label for="sourced-animal">
-                    <input type="checkbox" name="sourced-animal" ng-model="ap4RecCtrl.model.animalSourced"
-                           id="sourced-animal"
-                           ng-change="">{{'ANIMAL'|translate}}
-                </label>
-                </div>
-            </div>
-        </div>
-    </fieldset>
+        </fieldset>
 
-    <section class="section">
-        <cmp-tissues-fluids-origin
-                ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"></cmp-tissues-fluids-origin>
-    </section>
+        <section class="section">
+            <cmp-tissues-fluids-origin
+                    ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"></cmp-tissues-fluids-origin>
+        </section>
 
-    <section class="section">
-        <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"></cmp-source-animal>
-    </section>
-
-
-</ng-form>
+        <section class="section">
+            <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"></cmp-source-animal>
+        </section>
+    </ng-form>
+</div>

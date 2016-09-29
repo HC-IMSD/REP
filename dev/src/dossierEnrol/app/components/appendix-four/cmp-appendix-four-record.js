@@ -48,7 +48,7 @@
 
         }
         self.isSourcedSelected = function () {
-            return (self.model.humanSource || self.model.animalSourced)
+            return (self.model.humanSourced || self.model.animalSourced)
 
         }
 

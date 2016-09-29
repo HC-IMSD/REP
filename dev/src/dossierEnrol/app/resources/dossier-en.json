@@ -35,5 +35,6 @@
   "SCHED_A": "This is a non-prescription drug to which one or more Schedule A claims apply",
   "SAVE": "fr_Save",
   "CANCEL": "fr_Cancel",
-  "DELETE": "fr_Delete"
+  "DELETE": "fr_Delete",
+  "SOURCED_ANIMAL": "Source From Animal"
 }

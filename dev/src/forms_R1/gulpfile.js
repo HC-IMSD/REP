@@ -210,10 +210,8 @@ var dossierTranslationBaseFiles = {
     dosageForm: dossierPaths.translations + 'dossier-dosageform',
     dossier: dossierPaths.translations + 'dossier',
     dossierGeneral: dossierPaths.translations + 'dossier-general',
-    fileIO: dossierPaths.translations + 'fileIO',
-    applInfo: dossierPaths.translations + 'applicationInfo',
-    contact: dossierPaths.translations + 'contact'
-
+    appendix4: dossierPaths.translations + 'appendix4',
+    msg: dossierPaths.translations + 'dossier-msg',
 };
 
 var jsDossierComponentPaths = {
@@ -402,8 +400,6 @@ pipes.translateDev = function (translateList, destPath, baseIgnore) {
 pipes.insertDateStamp = function (template, valsObj) {
 
     var utc = new Date().toJSON().slice(0, 10);
-    console.log("date" + utc);
-    // var datePH = placeholders.dateStamp; doesnt work
     return (gulp.src(template)
             .pipe(htmlreplace({
                 dateToday: utc,
@@ -411,18 +407,14 @@ pipes.insertDateStamp = function (template, valsObj) {
                 formTitle: valsObj.title
             }))
     );
-
 };
 pipes.insertTitleInfo = function (template) {
 
     var utc = new Date().toJSON().slice(0, 10);
-
-
     return gulp.src(template)
         .pipe(htmlreplace({
             mainHeading: utc
         }));
-
 };
 
 pipes.copySrcProd = function (srcPath, basePath, destPath) {
@@ -973,9 +965,8 @@ gulp.task('copyDossierTranslateDev', function () {
         dossierTranslationBaseFiles.dosageForm,
         dossierTranslationBaseFiles.dossier,
         dossierTranslationBaseFiles.dossierGeneral,
-        dossierTranslationBaseFiles.fileIO,
-        dossierTranslationBaseFiles.applInfo,
-        dossierTranslationBaseFiles.contact
+        dossierTranslationBaseFiles.appendix4,
+        dossierTranslationBaseFiles.msg
     ];
     var baseIgnore = "../dossierEnrol";
 
@@ -1011,7 +1002,7 @@ gulp.task('copyDossierSrcDev', ['copyDossierServicesDev', 'copyDossierCommonSrcD
 /**
  * Copies the common components from the release 1 directory to the dossier build
  * */
-gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev'], function () {
+gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev', 'copyDossierCommonTranslateDev'], function () {
     var copySources = gulp.src([
             jsComponentPaths.fileIOComponentAndDepPath + '**/*',
             jsComponentPaths.repContactListPath + '**/*',
@@ -1029,8 +1020,21 @@ gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev'], function 
         })
         .on('error', def.reject);
     return def.promise;
+});
+gulp.task('copyDossierCommonTranslateDev', function () {
+    var translationList = [
+        jsComponentPaths.fileIOComponentAndDepPath + '**/*',
+        translationBaseFiles.general,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.general,
+        translationBaseFiles.countries
+
+    ];
+    pipes.translateDev(translationList, dossierPaths.buildDevDossier)
 
 });
+
+
 /* Copies the common services dossier uses to the dev build folder
  **
  */

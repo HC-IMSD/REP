@@ -75,5 +75,25 @@
   "BONEMARROW": "bone marrow",
   "EYESCORNEA": "eyes or cornea",
   "GALL": "gall bladder",
-  "OTHERFLUIDDETAILS":	"Please specify the other types of tissues or fluids"
+  "OTHERFLUIDDETAILS": "Please specify the other types of tissues or fluids",
+  "NONHUMANPRIMATE": "Non-human primate type",
+  "AQUATICTYPE": "Aquatic species such as fish, molluscs and crustacean",
+  "AVIANTYPE": "Avian such as chicken, turkey and duck",
+  "BOVINETYPE": "Bovine such as cattle, bison type",
+  "CANINETYPE": "Canine type",
+  "CAPRINETYPE": "Caprine such as goat type",
+  "CERVIDAETYPE": "Cervidae such as deer, elk(wapiti) and moose type",
+  "EQUINETYPE": "Equine such as horse type",
+  "FELINETYPE": "Feline such as cat type",
+  "OVINETYPE": "Ovine type",
+  "PORCINETYPE": "Porcine such as pig type",
+  "RODENTTYPE": "Rodents such as mouse, hamster, rat and rabbit type",
+  "OTHERANIMALTYPE": "Other animal type",
+  "CONTROLLEDPOP": "Controlled Population",
+  "BIOTECHDERIVED": "Biotechnology Derived Animal",
+  "CELLLINE": "Cell line",
+  "AGEANIMALS": "Age of animals in months",
+  "COUNTRYORIGIN": "Country of origin",
+  "SPECIFY": "Please specify"
+
 }

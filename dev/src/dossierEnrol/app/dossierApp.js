@@ -26,37 +26,41 @@
             $translateProvider.useStaticFilesLoader({
                 files: [
                     {
-                        prefix: 'resources/dossier-dosageform-',
+                        prefix: 'app/resources/dossier-dosageform-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'resources/fileIO-',
+                        prefix: 'app/resources/fileIO-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'resources/dossier-',
+                        prefix: 'app/resources/dossier-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'resources/dossier-general-',
+                        prefix: 'app/resources/dossier-general-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'resources/applicationInfo-',
+                        prefix: 'app/resources/applicationInfo-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'resources/contact-',
+                        prefix: 'app/resources/contact-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'resources/appendix4-',
+                        prefix: 'app/resources/appendix4-',
+                        suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/dossier-msg-',
                         suffix: '.json'
                     }
 
                 ]
             });
-            $translateProvider.preferredLanguage('en');
+            $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             //  $translateProvider.useSanitizeValueStrategy('sanitize');

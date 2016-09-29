@@ -11,7 +11,6 @@
 
 (function () {
     'use strict';
-
     angular
         .module('appendixFourModule')
         .component('cmpAppendixFour',{
