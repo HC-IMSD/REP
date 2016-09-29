@@ -14,19 +14,19 @@
 
     angular
         .module('sourceAnimalModule')
-        .component('cmpSourceAnimal',{
-            templateUrl : "./components/appendix-four/tpl-source-animal.html",
-            controller : sourceAnimalCtrl,
-            controllerAs : 'saCtrl',
-            bindings :{}
+        .component('cmpSourceAnimal', {
+            templateUrl: "./components/appendix-four/tpl-source-animal.html",
+            controller: sourceAnimalCtrl,
+            controllerAs: 'saCtrl',
+            bindings: {}
         });
 
-    function sourceAnimalCtrl(){
+    function sourceAnimalCtrl() {
         var self = this;
         self.animalType = "";
-        self.$onInit = function(){
+        self.$onInit = function () {
             self.model = {
-                primateTypeList : [
+                primateTypeList: [
                     {label: "NONHUMANPRIMATE", type: "text", name: "nhp-type", required: false, value: ""},
                     {label: "AQUATICTYPE", type: "text", name: "aqua-type", required: false, value: ""},
                     {label: "AVIANTYPE", type: "text", name: "avian-type", required: false, value: ""},
@@ -44,7 +44,7 @@
                     {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: ""},
                     {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: ""},
                     {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: ""}/*,
-                    {label : "SPECIFY", type: "text", name : "specify", required : false, value : "A"}*/
+                     {label : "SPECIFY", type: "text", name : "specify", required : false, value : "A"}*/
                 ],
 
                 countryList: []
@@ -70,6 +70,16 @@
         self.showAnimalError = function () {
             return (!_oneAnimalTypeSelected());
         };
+
+        self.showListError = function (isInvalid, isTouched, isRequired) {
+            if (isRequired === true) {
+
+                if (isInvalid && isTouched) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }
 })();
