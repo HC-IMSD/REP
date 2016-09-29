@@ -26,37 +26,37 @@
             $translateProvider.useStaticFilesLoader({
                 files: [
                     {
-                        prefix: 'app/resources/dossier-dosageform-',
+                        prefix: 'resources/dossier-dosageform-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/fileIO-',
+                        prefix: 'resources/fileIO-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/dossier-',
+                        prefix: 'resources/dossier-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/dossier-general-',
+                        prefix: 'resources/dossier-general-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/applicationInfo-',
+                        prefix: 'resources/applicationInfo-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/contact-',
+                        prefix: 'resources/contact-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/countries-',
+                        prefix: 'resources/appendix4-',
                         suffix: '.json'
                     }
 
                 ]
             });
-            $translateProvider.preferredLanguage('@@prefLang');
+            $translateProvider.preferredLanguage('en');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             //  $translateProvider.useSanitizeValueStrategy('sanitize');

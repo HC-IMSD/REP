@@ -198,6 +198,8 @@
 
 	<!-- Formulation Information-->
 	<hpfb:element name="formulation_group" type="formulations_content"/>
+	<hpfb:element name="formulation_name" type="char_0_100_content"/>
+	<hpfb:element name="formulation_id" type="char_0_100_content"/>
 	<hpfb:element name="formulation_details" type="formulation_content"/>
 	<hpfb:element name="roa_group" type="roa_content"/>
 	<hpfb:element name="roa_details" type="roa_details_content"/>
@@ -473,6 +475,8 @@
 
 	<hpfb:complexType name="formulation_content">
 		<hpfb:sequence>
+			<hpfb:element ref="formulation_name"/>
+			<hpfb:element ref="formulation_id"/>
 			<hpfb:element ref="dosage_form_group"/>
 			<hpfb:element ref="roa_group"/>
 			<hpfb:element ref="country_group"/>
