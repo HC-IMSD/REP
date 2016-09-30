@@ -16,87 +16,125 @@
                     </span>
             </legend>
 
+            <uib-accordion close-others="true">
+                <accordion-group heading="Custom template" template-url="test.html">
+                    Hello
+                </accordion-group>
 
-            <div>
-                <div>
-                    <h3>{{'NERVOUSYSTEM' |translate}}</h3>
+                <div uib-accordion-group heading="{{'NERVOUSYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!--  <div >
+                          <h3>{{'NERVOUSYSTEM' |translate}}</h3>
+                      </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.nervousSystem.groupName}}"
+                                list-items="tfoCtrl.model.nervousSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.nervousSystem.groupName}}"
-                            list-items="tfoCtrl.model.nervousSystem.list"></cmp-checkbox-list>
+
+                <div uib-accordion-group heading="{{'DIGESTIVESYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!--<div>
+                        <h3>{{'DIGESTIVESYSTEM' |translate}}</h3>
+                    </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.digestiveSystem.groupName}}"
+                                list-items="tfoCtrl.model.digestiveSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'DIGESTIVESYSTEM' |translate}}</h3>
+                <div uib-accordion-group heading="{{'REPRODUCTSYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!-- <div>
+                         <h3>{{'REPRODUCTSYSTEM' |translate}}</h3>
+                     </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.reproductiveSystem.groupName}}"
+                                list-items="tfoCtrl.model.reproductiveSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.digestiveSystem.groupName}}"
-                            list-items="tfoCtrl.model.digestiveSystem.list"></cmp-checkbox-list>
+                <div uib-accordion-group heading="{{'CARDIOSYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!--<div>
+                        <h3>{{'CARDIOSYSTEM' |translate}}</h3>
+                    </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.cardioSystem.groupName}}"
+                                list-items="tfoCtrl.model.cardioSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'REPRODUCTSYSTEM' |translate}}</h3>
+                <div uib-accordion-group heading="{{'IMMUNESYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!-- <div>
+                         <h3>{{'IMMUNESYSTEM' |translate}}</h3>
+                     </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.immuneSystem.groupName}}"
+                                list-items="tfoCtrl.model.immuneSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.reproductiveSystem.groupName}}"
-                            list-items="tfoCtrl.model.reproductiveSystem.list"></cmp-checkbox-list>
+                <div uib-accordion-group heading="{{'SKINGLANDSYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!--<div>
+                        <h3>{{'SKINGLANDSYSTEM' |translate}}</h3>
+                    </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.skinGlandSystem.groupName}}"
+                                list-items="tfoCtrl.model.skinGlandSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'CARDIOSYSTEM' |translate}}</h3>
+                <div uib-accordion-group heading="{{'MUSCULOSYSTEM' |translate}}" is-open="false" is-disabled="false">
+                    <!-- <div>
+                         <h3>{{'MUSCULOSYSTEM' |translate}}</h3>
+                     </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.musculoSkeletalSystem.groupName}}"
+                                list-items="tfoCtrl.model.musculoSkeletalSystem.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.cardioSystem.groupName}}"
-                            list-items="tfoCtrl.model.cardioSystem.list"></cmp-checkbox-list>
+                <div uib-accordion-group heading="{{'OTHERTISSUE' |translate}}" is-open="false" is-disabled="false">
+                    <!--<div>
+                        <h3>{{'OTHERTISSUE' |translate}}</h3>
+                    </div>-->
+                    <div class="col col-md-12">
+                        <cmp-checkbox-list
+                                common-name="{{tfoCtrl.model.otherTissues.groupName}}"
+                                list-items="tfoCtrl.model.otherTissues.list"></cmp-checkbox-list>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'IMMUNESYSTEM' |translate}}</h3>
-                </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.immuneSystem.groupName}}"
-                            list-items="tfoCtrl.model.immuneSystem.list"></cmp-checkbox-list>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'SKINGLANDSYSTEM' |translate}}</h3>
-                </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.skinGlandSystem.groupName}}"
-                            list-items="tfoCtrl.model.skinGlandSystem.list"></cmp-checkbox-list>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'MUSCULOSYSTEM' |translate}}</h3>
-                </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.musculoSkeletalSystem.groupName}}"
-                            list-items="tfoCtrl.model.musculoSkeletalSystem.list"></cmp-checkbox-list>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <h3>{{'OTHERTISSUE' |translate}}</h3>
-                </div>
-                <div class="col col-md-12">
-                    <cmp-checkbox-list
-                            common-name="{{tfoCtrl.model.otherTissues.groupName}}"
-                            list-items="tfoCtrl.model.otherTissues.list"></cmp-checkbox-list>
-                </div>
-            </div>
         </fieldset>
     </ng-form>
 </div>
+
+
+<!--
+<script type="text/ng-template" id="group-template.html">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+            <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+              {{heading}}
+            </span>
+                </a>
+            </h4>
+        </div>
+        <div class="panel-collapse collapse" uib-collapse="!isOpen">
+            <div class="panel-body" style="text-align: right" ng-transclude></div>
+        </div>
+    </div>
+</script>
+
+<div role="tab" id="{{::headingId}}" aria-selected="{{isOpen}}" class="panel-heading" ng-keypress="toggleOpen($event)">
+  <h4 class="panel-title">
+    <a role="button" data-toggle="collapse" href aria-expanded="{{isOpen}}" aria-controls="{{::panelId}}" tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading" ng-disabled="isDisabled" uib-tabindex-toggle><span uib-accordion-header ng-class="{'text-muted': isDisabled}">{{heading}}</span></a>
+  </h4>
+</div>
+<div id="{{::panelId}}" aria-labelledby="{{::headingId}}" aria-hidden="{{!isOpen}}" role="tabpanel" class="panel-collapse collapse" uib-collapse="!isOpen">
+  <div class="panel-body" ng-transclude></div>
+</div>
+
+
+
+
+-->

@@ -28,7 +28,7 @@
   "PROPNAME": "Brand or Proprietary or Product Name (should be the same as the brand name on the product label)",
   "DRUG_PRODUCT": "Drug Product",
   "SIGNED_THIRD": "The submission will be signed or filled by a third party on behalf of the manufacturer or sponsor",
-  "INCLUDE_AUTH": "Please include the Third Party Authorization letter in the REP folder when submitting via the CESG",
+  "INCLUDE_AUTH": "Please include the Third Party Authorization letter in the REP folder when submitting via the  Common Electonic Submissions Gateway (CESG)",
   "RELATED_DOSSIER": "Related Dossier ID [if applicable]",
   "PROPER_NAME": "Proper, Common or Non-Proprietary Name",
   "DRUG_USE": "Drug Use",

@@ -1,7 +1,7 @@
 {
-  "name": "company_enrol",
+  "name": "rep_forms_R1",
   "version": "1.0.0",
-  "description": "REP company enrolment",
+  "description": "REP forms enrolment",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,7 @@
   "author": "dkilty",
   "license": "MIT",
   "devDependencies": {
+    "angular-ui-bootstrap": "^2.1.4",
     "body-parser": "^1.5.2",
     "bower": "^1.3.1",
     "del": "^1.1.1",

@@ -20,6 +20,7 @@
         'contactModule26',
         'applicationInfoService',
         'applicationInfo',
+        'ui.bootstrap'
     ];
 
     angular

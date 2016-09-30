@@ -465,6 +465,19 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath)
     )
 
 };
+
+/**
+ *  Creates the root Html file  for the forms.
+ *  @param templatePath- the path to the WET template to inject data into
+ *  @param valsObj- the metadata elements to insert into the web page. Currently Title and  formname
+ *  @param templateName- the destination name of the html template
+ *  @param injectRootJs - the name of rootJS file (i.e. app.js). Assumed to be under app/scripts
+ *  @param partialRoot- the html fragment to be injected into the template. This is the root content
+ *  @param buildDir- the destination build directory
+ *  @param ingorePath- the folder parh to ignore from the source files
+ *  @param lang- the language to generate. For angular translate
+ *  @param formType- the type of form to generate, either external (EXT) or internal (INT)
+ * */
 pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType) {
 
 
@@ -477,24 +490,36 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
             }
         }))
         .pipe(inject(gulp.src([
+                'app/lib/**/*.js',
+                '!app/lib/**/angular*.js'
+            ]),
+            {
+                name: 'thirdParty',
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }))
+        .pipe(inject(gulp.src([
 
                 buildDir + 'app/scripts/components/**/*.js',
                 buildDir + 'app/scripts/directives/**/*.js',
                 buildDir + 'app/scripts/services/**/*.js',
                 buildDir + 'app/scripts/' + injectRootJs,
-                buildDir + 'app/lib/**/*.js'
+                buildDir + 'app/lib/**/angular*.js'
 
             ])
             .pipe(angularFilesort())
             , {
                 ignorePath: ignorePath,
-                addRootSlash: false
+                addRootSlash: false,
+                read: false
             }))
+        // .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower'})
 
         .pipe(rename(templateName))
         .pipe(gulp.dest(buildDir))
 
 };
+
 
 //dosssier is special
 pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath) {
@@ -509,13 +534,20 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
             }
         }))
         .pipe(inject(gulp.src([
-
+                'app/lib/**/*.js',
+                '!app/lib/**/angular*.js'
+            ]),
+            {
+                name: 'thirdParty',
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }))
+        .pipe(inject(gulp.src([
                 buildDir + 'app/components/**/*.js',
                 buildDir + 'app/directives/**/*.js',
                 buildDir + 'app/services/**/*.js',
                 buildDir + 'app/' + injectRootJs,
-                buildDir + 'app/lib/**/*.js'
-
+                buildDir + 'app/lib/**/angular*.js'
             ])
             .pipe(angularFilesort())
             , {
