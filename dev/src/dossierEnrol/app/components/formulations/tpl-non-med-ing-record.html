@@ -1,5 +1,13 @@
 <ng-form name="non-med-ing-form">
 
+    <div class="form-group col-md-6">
+        <label for="variant-id" class="required"><span class="field-name">{{'VARIANT_ID'|translate}}</span>
+            <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+        <input type="text" id="variant-id" data-ng-model="ingRecCtrl.ingModel.varId"
+               class="form-control full-width" name="text" ng-required="true" maxlength="60" size="60"/>
+
+    </div>
+
     <div class="form-group col-md-12">
         <label for="ing-name" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
             <strong class="required">{{"REQUIRED" |translate}}</strong></label>

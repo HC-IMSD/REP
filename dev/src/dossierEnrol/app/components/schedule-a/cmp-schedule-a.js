@@ -64,7 +64,7 @@
                     {name: "thrombotic-embolic-disorder", label: "Thrombotic Embolic Disorder", value: false},
                     {name: "thyroid-disease", label: "Thyroid Disease", value: false},
                     {name: "ulcer-gastro", label: "Ulcer Gastro", value: false},
-                    {name: "other", label: "Other", value: false, hasOtherDetails:true}
+                    {name: "other", label: "Other", value: false, hasOtherDetails:true, otherText:"A"}
                 ]
 
 
