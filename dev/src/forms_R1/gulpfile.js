@@ -1026,9 +1026,10 @@ gulp.task('copyDossierCommonTranslateDev', function () {
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
         translationBaseFiles.general,
         translationBaseFiles.fileIO,
-        translationBaseFiles.general,
-        translationBaseFiles.countries
-
+        translationBaseFiles.countries,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.messages,
+        translationBaseFiles.contact
     ];
     pipes.translateDev(translationList, dossierPaths.buildDevDossier)
 

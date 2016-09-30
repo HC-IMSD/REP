@@ -13,6 +13,7 @@
     function MainController() {
             var vm = this;
             vm.formType = '@@SET_FORM';
+
         }
 
 
@@ -55,6 +56,14 @@
                     },
                     {
                         prefix: 'app/resources/dossier-msg-',
+                        suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/messages-',
+                        suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/general-',
                         suffix: '.json'
                     }
 

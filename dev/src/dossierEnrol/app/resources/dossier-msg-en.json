@@ -2,6 +2,6 @@
   "MSG_APP4_TYPE": "At least one source must be selected",
   "MSG_ERR_ONE_SYSTEM": "At least one tissue or fluid of origin must be selected",
   "MSG_ERR_ONE_ANIMAL": "At least one animal source must be selected.",
-  "MSG_ERR_ONE_ANIMAL_TYPE": "At least one animal type must be selected."
-
+  "MSG_ERR_ONE_ANIMAL_TYPE": "At least one animal type must be selected.",
+  "MSG_ERR_DRUG_USE": "At least one drug use must be selected."
 }

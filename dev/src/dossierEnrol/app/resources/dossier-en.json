@@ -36,5 +36,6 @@
   "SAVE": "fr_Save",
   "CANCEL": "fr_Cancel",
   "DELETE": "fr_Delete",
-  "SOURCED_ANIMAL": "Source From Animal"
+  "SOURCED_ANIMAL": "Source From Animal",
+  "SPECIFY": "Please specify"
 }

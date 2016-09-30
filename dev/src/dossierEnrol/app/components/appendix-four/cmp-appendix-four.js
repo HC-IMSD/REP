@@ -27,11 +27,11 @@
         self.$onInit = function(){
             self.ingredients = [];
             self.colNames = [
-                {"label":"Ingredient Name", "binding":"name"}
+                {"label": "Ingredient Name", "binding": "ingredientName"}
             ];
             self.ingredientList = [
                 {
-                    "name": "ing1",
+                    "ingredientName": "ing1",
                     "role": "role1",
                     "abstractNum": "44",
                     "standard": "A",
@@ -42,7 +42,7 @@
 
                 },
                 {
-                    "name": "ing2",
+                    "ingredientName": "ing2",
                     "role": "role1",
                     "abstractNum": "655",
                     "standard": "A",
@@ -52,7 +52,7 @@
                     "sourceAnimalDetails":{}
                 },
                 {
-                    "name": "ing3",
+                    "ingredientName": "ing3",
                     "role": "role2",
                     "abstractNum": "54545",
                     "standard": "A",

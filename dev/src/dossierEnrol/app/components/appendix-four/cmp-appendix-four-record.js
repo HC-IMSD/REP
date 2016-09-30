@@ -28,18 +28,9 @@
     function app4RecCtrl(){
 
         var self = this;
-
+        self.model = {}
         self.$onInit = function(){
 
-            self.model = {
-                ingredientName : "zcdcsdc",
-                humanSourced : false,
-                animalSourced : false,
-
-                tissuesFluidsOrigin : {},
-
-                animalSourcedInfo : {}
-            }
         }
         self.$onChanges = function (changes) {
             if (changes.record) {
@@ -54,6 +45,15 @@
 
         self.noSelectionError = function () {
             return ((self.appendix4RecForm.$dirty && !self.isSourcedSelected() ) || (self.showListErrors() && !self.isSourcedSelected()));
+        }
+        /**
+         * Used to show field level errors
+         * @param isInvalid
+         * @param isTouched
+         * @returns {boolean}  true if you should show error
+         */
+        self.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (isInvalid && self.showListErrors()))
         }
 
     }

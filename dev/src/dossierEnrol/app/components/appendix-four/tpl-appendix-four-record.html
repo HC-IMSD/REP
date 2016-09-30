@@ -1,14 +1,24 @@
 <div class="container-fluid">
-    <ng-form name="ap4RecCtrl.appendix4RecForm">
+    <ng-form name="ap4RecCtrl.appendix4RecForm" novalidate>
         <div class="row">
-            <div class="col-xs-12 form-group">
-                <label for="ing-name">{{'INGRED_NAME'|translate}}</label>
-                <input type="text" class="form-control full-width" id="ing-name"
-                       ng-model="ap4RecCtrl.model.ingredientName"
-                       placeholder={{'INGRED_NAME'|translate}}/>
+            <div class="col-xs-12 form-group"
+                 ng-class="{'has-error':ap4RecCtrl.appendix4RecForm.ingedientName.$invalid}">
+                <label for="ing-name" class="required">
+                    {{'INGRED_NAME'|translate}}
+                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                    <input type="text" class="form-control full-width" id="ing-name"
+                           ng-model="ap4RecCtrl.model.ingredientName" name="ingredientName" ng-required="true"
+                           maxlength="100" size="100"/>
+                    <strong id="ingred-name-error" class="error"
+                            ng-if="ap4RecCtrl.showError(ap4RecCtrl.appendix4RecForm.ingredientName.$invalid,ap4RecCtrl.appendix4RecForm.ingredientName.$touched)">
+                             <span class="label label-danger"
+                                   ng-messages="ap4RecCtrl.appendix4RecForm.ingedientName.$error">
+                                <span ng-message="required">{{"MSG_ERR_MAND"|translate}}</span>
+                             </span>
+                    </strong>
+                </label>
             </div>
         </div>
-
         <fieldset>
             <!-- TODO: hookup error handling-->
             <legend class="required">

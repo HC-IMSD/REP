@@ -1,8 +1,8 @@
-<form id="dossier-form" name="dos.dossierForm" novalidate>
+<ng-form id="dossier-form" name="dos.dossierForm" novalidate>
 
     <section class="panel  panel-primary mrgn-tp-lg">
         <header class="panel-heading">
-            <h3 class="panel-title">{{'LOAD_DOSSIER'|translate}}</h3>
+            <h2 class="panel-title">{{'LOAD_DOSSIER'|translate}}</h2>
         </header>
         <div class="panel-body">
             <hpfb-file-select update-model-root="dos.showContent(fileContent)"
@@ -12,7 +12,7 @@
 
     <section class="panel panel-primary mrgn-tp-lg">
         <header class="panel-heading">
-            <h3 class="panel-title">{{'DOSSIER_HDING'|translate}}</h3>
+            <h2 class="panel-title">{{'DOSSIER_HDING'|translate}}</h2>
         </header>
         <div class="panel-body">
 
@@ -142,18 +142,24 @@
             <!--<cmp-appendix-four></cmp-appendix-four>-->
 
             <!--<cmp-contact-list ng-if="dos.dossierModel.contactList" contacts="dos.dossierModel.contactList" on-update="dos.onUpdateContactList(newList)"></cmp-contact-list>-->
-            <div>
-                <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"
-                                      parent-dirty="dos.dossierForm.$dirty"
-                                      show-list-errors="dos.showErrors()" is-amend="dos.formAmend"
-                ></cmp-rep-contact-list>
-
-
-            </div>
 
         </div>
 
-
     </section>
+
+    <div>
+        <section class="panel panel-primary mrgn-tp-lg">
+            <header class="panel-heading">
+                <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
+            </header>
+            <div class="panel-body">
+                <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"
+                                      parent-dirty="dos.dossierForm.$dirty"
+                                      show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
+
+                </cmp-rep-contact-list>
+            </div>
+        </section>
+    </div>
     <pre>{{dos.dossierModel | json }}</pre>
-</form>
+</ng-form>
