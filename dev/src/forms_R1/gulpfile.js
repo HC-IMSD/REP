@@ -228,7 +228,8 @@ var jsDossierComponentPaths = {
     theraClass: dossierPaths.components + 'therapeutic-classification/',
     repContactList: dossierPaths.components + 'repContactList/',
     repContactRecord: dossierPaths.components + 'rep-contact-record/',
-    applicationInfo: dossierPaths.components + 'applicationInfo/'
+    applicationInfo: dossierPaths.components + 'applicationInfo/',
+    formulations: dossierPaths.components + 'formulations/'
 
 };
 
@@ -1016,8 +1017,10 @@ gulp.task('copyDossierSrcDev', ['copyDossierServicesDev', 'copyDossierCommonSrcD
             jsDossierComponentPaths.expandingTable + '**/*',
             jsDossierComponentPaths.scheduleA + '**/*',
             jsDossierComponentPaths.tabs + '**/*',
-            jsDossierComponentPaths.theraClass + '**/*'
+            jsDossierComponentPaths.theraClass + '**/*',
+            jsDossierComponentPaths.formulations + '**/*'
         ],
+
         {read: true, base: '../dossierEnrol'});
 
 
