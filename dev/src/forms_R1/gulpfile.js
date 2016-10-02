@@ -987,10 +987,10 @@ gulp.task('copyWetDevDossier', function () {
     return (pipes.copyWet(dossierPaths.buildDevDossier))
 });
 gulp.task('copyLibDevDossier', function () {
+    var def = Q.defer();
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
-    return copySources.pipe(gulp.dest(dossierPaths.buildDevDossier))
-
+   return(copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
 });
 
 gulp.task('copyDossierTranslateDev', function () {
@@ -1023,9 +1023,10 @@ gulp.task('copyDossierSrcDev', ['copyDossierServicesDev', 'copyDossierCommonSrcD
 
         {read: true, base: '../dossierEnrol'});
 
-
     var def = Q.defer();
+    //TODO inefficient
     copySources.pipe(stringReplace('./components/', './app/components/'))
+    .pipe(stringReplace('../lib/uib-templates/tpl-accordian-group-caret.html', 'app/lib/uib-templates/tpl-accordian-group-caret.html'))
         .pipe(gulp.dest(dossierPaths.buildDevDossier))
         .on('end', function () {
             def.resolve();

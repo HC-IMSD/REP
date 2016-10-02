@@ -28,7 +28,7 @@
 
     function scheduleACtrl() {
         var self = this;
-
+        self.claimSelected=false;
         self.$onInit = function () {
             self.scheduleAModel = {
                 drugIdNumber: "00000000",
@@ -79,6 +79,30 @@
              });
 
              cons*/
+        }
+        /**
+         * Updates the bindings
+         * @param changes
+         */
+        self.$onChanges=function(changes){
+            if(changes.scheduleGroup){
+                self.scheduleAModel = self.scheduleGroup.currentValue;
+            }
+        };
+
+        /**
+         * Checks to see if at least one claim has been selected
+         */
+        self.claimSelected=function(){
+            for (var i=0;i<self.scheduleAModel.diseaseDisorderList.length;i++){
+                if(self.scheduleAModel.diseaseDisorderList[i].value){
+                    return true;
+                }
+            }
+            return false;
+        };
+        self.noClaimSelected=function(){
+            return(!self.claimSelected());
         }
     }
 

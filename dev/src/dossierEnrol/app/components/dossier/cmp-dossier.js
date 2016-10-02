@@ -171,8 +171,14 @@
         self.showErrors=function(){
             return(self.showAllErrors);
         }
+        /**
+         * For individual controls, whether to show the error for a fiedl
+         * @param isInvalid - control $invalid flag
+         * @param isTouched -control $touched flag
+         * @returns {*|dossierCtrl.showErrors}
+         */
         self.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (self.showErrors && isInvalid))
+            return ((isInvalid && isTouched) || (self.showErrors() && isInvalid))
         }
 
         /* [

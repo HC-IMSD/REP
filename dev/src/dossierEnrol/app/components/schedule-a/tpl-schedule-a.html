@@ -1,36 +1,59 @@
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="col-md-12">
-            <fieldset>
-                <legend class="required">
-                    <span class="field-name">{{'SCHED_A'|translate}}</span>
-                </legend>
+<ng-form name="$ctrl.schedAForm">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-12">
+                <fieldset>
+                    <legend class="required">
+                        <span class="field-name">{{'SCHED_A'|translate}}</span>
+                    </legend>
 
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="proper-name">{{'DIN_FULL'|translate}}</label>
-                        <input type="text" class="form-control full-width" id="proper-name" ng-model="$ctrl.scheduleAModel.drugIdNumber" placeholder="Drug Identification Number"/>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <label for="proper-name">{{'DIN_FULL'|translate}}</label>
+                            <input type="text" class="form-control full-width" id="proper-name"
+                                   ng-model="$ctrl.scheduleAModel.drugIdNumber"/>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <fieldset>
+                                <legend class="required">
+                                    <span class="field-name">{{'SCHEDA_CLAIMS'|translate}}</span>
+                                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                 <span>
+                 <input id="oneSelected_{{$id}}" name="oneSelected" ng-show="false"
+                        ng-model="$ctrl.isSelected" ng-required="true"/>
+                <strong id="claim-select-error" class="error" ng-if="$ctrl.noClaimSelected()">
+                             <span class="label label-danger" aria-live="polite"
+                                   ng-messages="$ctrl.oneSelected.$error">
+                                <span ng-message="required">{{"MSG_ONE_SCHEDA"|translate}}</span>
+                             </span>
+                </strong>
+                    </span>
+                                </legend>
+                                <cmp-checkbox-list
+                                        title="Please check the diseases and disorders that apply to the claims made (select at least one)"
+                                        common-name="sa-disease-disorder"
+                                        list-items="$ctrl.scheduleAModel.diseaseDisorderList"></cmp-checkbox-list>
 
-                <div class="row">
-
-                    <div class="col-xs-12 form-group">
-                        <cmp-checkbox-list title="Please check the diseases and disorders that apply to the claims made (select at least one)"
-                                           common-name="sa-disease-disorder" list-items="$ctrl.scheduleAModel.diseaseDisorderList"></cmp-checkbox-list>
+                            </fieldset>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <label for="proper-name">Please list the schedule A Claims and Indications associated with this product</label>
-                        <textarea class="form-control full-width" rows="3" ng-model="$ctrl.scheduleAModel.scheduleAClaimsIndDetails"></textarea>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <label for="proper-name">Please list the schedule A Claims and Indications associated with
+                                this
+                                product</label>
+                        <textarea class="form-control full-width" rows="3"
+                                  ng-model="$ctrl.scheduleAModel.scheduleAClaimsIndDetails"></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <!--<pre>currentModel: {{chkl.listItems | json : spacing}}</pre>-->
+                    <!--<pre>currentModel: {{chkl.listItems | json : spacing}}</pre>-->
 
-            </fieldset>
+                </fieldset>
+            </div>
         </div>
     </div>
-</div>
+</ng-form>
