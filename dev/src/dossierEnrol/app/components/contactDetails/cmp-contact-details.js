@@ -23,7 +23,7 @@
                 contactRecord: '<',
                 onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
-                showErrors: '&',
+                showErrors: '&'
             }
     });
 
