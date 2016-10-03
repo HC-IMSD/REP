@@ -14,9 +14,10 @@
     angular
         .module('countryListModule')
         .component('cmpCountryList', {
-            templateUrl: './components/appendix-four/tpl-country-list.html',
+            templateUrl: './components/country-list/tpl-country-list.html',
             controller: countryListCtrl,
             bindings: {
+                withUnknown:'<',
                 listItems: '<',
                 onUpdate: '&',
                 onDelete: '&'
@@ -30,16 +31,22 @@
         var self = this;
 
         self.$onInit = function(){
+
+            var _countries = self.withUnknown?["UNKNOWN"].concat(getCountriesISO3166.getCountryList3Letter()):getCountriesISO3166.getCountryList3Letter();
             self.model={
-                countries : ["UNKNOWN"].concat(getCountriesISO3166.getCountryList3Letter()),// angular.extend({}, ["UNKNOWN"], ) ,/**/
+                countries : _countries,
                 list : [
                     {"id":1, "name":"ARG"},
                     {"id":2, "name":"CAN"},
                     {"id":3, "name":"USA"}
                 ],
-                selected:{},
+                selected:{}
 
-                unknownCountryDetails : "A"
+
+            }
+
+            if(self.listItems){
+                self.model.list = self.listItems;
             }
         }
 
