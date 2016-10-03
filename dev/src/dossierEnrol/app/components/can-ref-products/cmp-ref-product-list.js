@@ -34,8 +34,7 @@
 
                 self.colNames = [
                     {"label":"Brand Name", "binding":"companyName"},
-                    {"label":"Medicinal Ingredients", "binding":"medIngredient"},
-                    {"label":"Errors", "binding":"errors"}
+                    {"label":"Medicinal Ingredients", "binding":"medIngredient"}
                 ];
                 self.productList = [
                     {
@@ -71,12 +70,14 @@
             self.productList.push(product);
         };
 
-        self.updateProduct = function(product){
-            var idx = self.productList.indexOf(
-                $filter('filter')(self.productList, {productId: product.contactId}, true)[0]
-            );
+        self.updateProduct = function(idx, product){
             self.productList[idx] = angular.copy(product);
         };
+
+        self.deleteProduct = function(idx){
+           // console.debug('productList deleteProduct: ' + idx);
+            self.productList.splice(idx,1);
+        }
 
     }
 
