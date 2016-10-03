@@ -37,11 +37,14 @@
                                        ng-change="dos.thirdPartySignedChanged()">
                                 {{'SIGNED_THIRD'|translate}}
                             </label>
-                            <label ng-if="dos.dossierModel.drugProduct.thirdPartySigned" class="label-info full-width">{{'INCLUDE_AUTH'|translate}}</label>
-
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div ng-if="dos.dossierModel.drugProduct.thirdPartySigned" class="alert alert-info" role="alert"
+                             aria-live="polite">
+                            {{'INCLUDE_AUTH'|translate}}
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <label for="related-dossier-id"></label>
@@ -68,6 +71,7 @@
                             </label>
                             <textarea type="text" class="form-control full-width" id="product-name" rows="2"
                                       name="productName" required="true"
+                                      data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase();"
                                       maxlength="200" ng-model="dos.dossierModel.productName"></textarea>
                         </div>
                     </div>
@@ -86,7 +90,9 @@
                                 </strong>
                             </label>
                             <textarea type="text" class="form-control full-width" id="proper-name" name="properName"
-                                     required="true" ng-model="dos.dossierModel.properName" maxlength="256"> </textarea>
+                                      required="true" ng-model="dos.dossierModel.properName" maxlength="256"
+                                      data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase();">
+                            </textarea>
                         </div>
                     </div>
 

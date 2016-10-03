@@ -1,0 +1,13 @@
+{
+  "ING_NAME": "Nom de l’ingrédient",
+  "CAS_NUM": "CAS",
+  "CAS_FULL": "Numéro Chemical Abstracts Service",
+  "STANDARD": "Norme",
+  "STRENGTH": "Concentration",
+  "UNITS": "Unités",
+  "PER": "Par",
+  "ISBASE": "Calculé sous forme de base?",
+  "NANO_MATERIAL": "Nanomatériau?",
+  "NANO_MATERIAL_OTHER": "Veuillez indiquer le type de nanomatériau",
+  "ANIMAL_HUMAN_SOURCED": "fr_Animal or Human Sourced?"
+}
