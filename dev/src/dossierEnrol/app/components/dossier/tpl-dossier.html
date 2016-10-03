@@ -110,20 +110,15 @@
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <cmp-therapeutic-class list-items=""></cmp-therapeutic-class>
-
-                            <!--<cmp-expanding-table title="Therapeutic Classification" list-items="dos.dossierModel.therapeutic.listItems" column-def="dos.dossierModel.therapeutic.columnDef"></cmp-expanding-table>-->
                         </div>
-
                     </div>
-
                     <div class="row">
-                        <div class="col-xs-12 form-group">
-                            <label for="third-party-signed">
+                        <div class="col-xs-12 checkbox">
+                            <label for="is-schedule-case">
                                 <input type="checkbox" name="isScheduleA"
-                                       ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case"
-                                       ng-change=""> {{'SCHED_A'|translate}}
+                                       ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case">
+                                {{'ISSCHEDA'|translate}}
                             </label>
-
                         </div>
                     </div>
 

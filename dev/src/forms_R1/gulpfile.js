@@ -212,6 +212,7 @@ var dossierTranslationBaseFiles = {
     dossierGeneral: dossierPaths.translations + 'dossier-general',
     appendix4: dossierPaths.translations + 'appendix4',
     msg: dossierPaths.translations + 'dossier-msg',
+    scheduleA: dossierPaths.translations + 'scheduleA',
 };
 
 var jsDossierComponentPaths = {
@@ -999,7 +1000,8 @@ gulp.task('copyDossierTranslateDev', function () {
         dossierTranslationBaseFiles.dossier,
         dossierTranslationBaseFiles.dossierGeneral,
         dossierTranslationBaseFiles.appendix4,
-        dossierTranslationBaseFiles.msg
+        dossierTranslationBaseFiles.msg,
+        dossierTranslationBaseFiles.scheduleA
     ];
     var baseIgnore = "../dossierEnrol";
 
@@ -1044,7 +1046,8 @@ gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev', 'copyDossi
             jsComponentPaths.repContactListPath + '**/*',
             jsComponentPaths.repContactRecordPath + '**/*',
             jsComponentPaths.contactDetailsPath + '**/*',
-            jsComponentPaths.applicationInfoPath + '**/*'
+            jsComponentPaths.applicationInfoPath + '**/*',
+            jsDirectiveFiles.numberOnly
         ],
         {read: true, base: './app/scripts'});
 

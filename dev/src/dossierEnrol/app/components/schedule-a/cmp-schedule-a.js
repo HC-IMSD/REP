@@ -21,7 +21,8 @@
             bindings: {
                 scheduleGroup: '<',
                 onUpdate: '&',
-                onDelete: '&'
+                onDelete: '&',
+                showErrors: '&'
             }
 
         });
@@ -86,7 +87,7 @@
          */
         self.$onChanges=function(changes){
             if(changes.scheduleGroup){
-                self.scheduleAModel = self.scheduleGroup.currentValue;
+                self.scheduleAModel = changes.scheduleGroup.currentValue;
             }
         };
 
@@ -103,6 +104,10 @@
         };
         self.noClaimSelected=function(){
             return(!self.claimSelected());
+        }
+        self.showError = function (isInvalid, isTouched) {
+
+            return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
         }
     }
 

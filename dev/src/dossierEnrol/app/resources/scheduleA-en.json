@@ -27,6 +27,7 @@
   "THROMBOTICDISORDER":"Thrombotic and Embolic Disorder",
   "THYROIDDISEASE":"Thyroid disease",
   "UCLERGASTRO":"Ulcer of gastro-intestinal tract",
-  "SCHEDA_CLAIMS":"Please list the schedule A Claims and Indications associated with this product"
-
+  "SCHEDA_CLAIMS": "Please list the schedule A Claims and Indications associated with this product",
+  "SCHEDA_DISEASE": "Please check the diseases and disorders that apply to the claims made (select at least one)",
+  "ISSCHEDA": "This a non-prescription drug to which one or more Schedule A claims apply"
 }

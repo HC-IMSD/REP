@@ -65,6 +65,10 @@
                     {
                         prefix: 'app/resources/general-',
                         suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/scheduleA-',
+                        suffix: '.json'
                     }
 
                 ]

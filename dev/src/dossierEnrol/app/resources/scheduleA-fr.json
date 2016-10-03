@@ -28,6 +28,7 @@
   "THYROIDDISEASE":"Maladie thyroïdienne",
   "UCLERGASTRO":"Ulcères des voies gastro-intestinales",
   "SCHEDA_CLAIMS":"Indiquer les allégations et indications de l’annexe A associées avec ce produit",
-
+  "SCHEDA_DISEASE": "fr_Please check the diseases and disorders that apply to the claims made (select at least one)",
+  "ISSCHEDA": "Ce médicament en vente libre auquel une ou plusieurs allégations de l’annexe A s’appliquent"
 
 }

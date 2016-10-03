@@ -20,7 +20,8 @@
         'contactModule26',
         'applicationInfoService',
         'applicationInfo',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'numberFormat'
     ];
 
     angular
