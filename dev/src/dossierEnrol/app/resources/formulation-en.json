@@ -9,5 +9,17 @@
   "ISBASE": "Calculated as Base?",
   "NANO_MATERIAL": "Nanomaterial?",
   "NANO_MATERIAL_OTHER": "Please indicate the type of nanomaterial",
-  "ANIMAL_HUMAN_SOURCED": "Animal or Human Sourced?"
+  "ANIMAL_HUMAN_SOURCED": "Animal or Human Sourced?",
+  "ACTIVE_LIST":"Active Ingredient List",
+  "NOTNANO":"Not a Nanomaterial",
+  "NANOPARTICLE":"Nanoparticle",
+  "DENDRIMER":"Dendrimer",
+  "LIPOSOMES":"Liposomes",
+  "MICELLES":"Micelles",
+  "NANOEMULSIONS":"Nanoemulsions",
+  "NANOCRYSTAL":"Nanocrystal",
+  "METALCOLLOIDS":"Metal Colloids",
+  "OTHER":"Other"
+
+
 }

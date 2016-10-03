@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('activeIngRecordModule', [])
+        .module('activeIngRecordModule', ['dossierDataLists'])
 })();
 
 (function () {
@@ -19,15 +19,16 @@
             controllerAs: 'ingRecCtrl',
             controller: activeIngRecCtrl,
             bindings: {
-                record: '<'
+                record: '<',
+                showErrors:'&'
             }
 
         });
-
-    function activeIngRecCtrl() {
+    activeIngRecCtrl.$inject = ['DossierLists'];
+    function activeIngRecCtrl(DossierLists) {
 
         var self = this;
-
+        self.nanoMaterialList=DossierLists.getNanoMaterials();
         self.$onInit = function () {
 
             self.ingModel = {
@@ -48,7 +49,15 @@
                 self.ingModel = self.record;
             }
         }
+        self.$onChanges=function(changes){
+            if(changes.record){
+                self.ingModel = self.record.currentValue;
+            }
+        }
 
+        self.showError=function(isInvalid,isTouched){
+            return((isInvalid &&isTouched)|| (isInvalid && self.showErrors()))
+        }
     }
 
 })();
