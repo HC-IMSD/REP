@@ -59,3 +59,7 @@ label > select {
 .picker-overlay {
     z-index: 1100 !important;
 }*/
+.rep-expander{
+    cursor:pointer;
+    color:#295376;
+}
