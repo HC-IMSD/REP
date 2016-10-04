@@ -213,6 +213,7 @@ var dossierTranslationBaseFiles = {
     appendix4: dossierPaths.translations + 'appendix4',
     msg: dossierPaths.translations + 'dossier-msg',
     scheduleA: dossierPaths.translations + 'scheduleA',
+    formulation: dossierPaths.translations + 'formulation',
 };
 
 var jsDossierComponentPaths = {
@@ -1001,7 +1002,8 @@ gulp.task('copyDossierTranslateDev', function () {
         dossierTranslationBaseFiles.dossierGeneral,
         dossierTranslationBaseFiles.appendix4,
         dossierTranslationBaseFiles.msg,
-        dossierTranslationBaseFiles.scheduleA
+        dossierTranslationBaseFiles.scheduleA,
+        dossierTranslationBaseFiles.formulation
     ];
     var baseIgnore = "../dossierEnrol";
 

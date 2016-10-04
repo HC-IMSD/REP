@@ -31,7 +31,8 @@
             getDosageFormList: getDosageFormsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
-            getRoa:getRoaArray
+            getRoa: getRoaArray,
+            getOtherValue: getOtherValue
         };
         return service;
 
@@ -41,6 +42,9 @@
             return "OTHER";
         }
 
+        function getOtherValue() {
+            return getDoseOtherValue();
+        }
 
         function getDosageFormsArray() {
             return ([

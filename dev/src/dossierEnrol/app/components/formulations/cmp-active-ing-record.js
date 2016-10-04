@@ -58,6 +58,22 @@
         self.showError=function(isInvalid,isTouched){
             return((isInvalid &&isTouched)|| (isInvalid && self.showErrors()))
         }
+
+        /**
+         * Sets the state of the nanomaterial other field
+         * @returns {boolean} true if other is the value
+         */
+        self.isNanoOther = function () {
+
+            if (self.ingModel.nanoMaterial === DossierLists.getOtherValue()) {
+                return true;
+            } else {
+                self.ingModel.nanoMaterialOther = "";
+                return false;
+            }
+        }
+
+
     }
 
 })();
