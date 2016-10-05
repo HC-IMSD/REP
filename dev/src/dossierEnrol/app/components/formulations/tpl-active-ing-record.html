@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <ng-form name="ingRecCtrl.activeIngForm">
-
+        <fieldset>
+            <legend>Active Ingredient Details</legend>
         <div class="row">
             <div class="form-group col-md-12" ng-class="{'has-error':ingRecCtrl.activeIngForm.ingredName.$invalid}">
                 <label for="ing-name" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
@@ -130,6 +131,15 @@
                 </div>
             </div>
         </div>
+        <div class="row">
 
+            <div class="btn-group-sm col-xs-12 text-right">
+                <input type="submit" value="Save" class="btn btn-primary"
+                       ng-click="ingRecCtrl.saveIng()"/>
+                <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger" ng-click="ingRecCtrl.delete()"/>
+                <input type="submit" value="Discard Changes" class="btn btn-default" ng-click="ingRecCtrl.discardChanges()">
+            </div>
+        </div>
+        </fieldset>
     </ng-form>
 </div>
