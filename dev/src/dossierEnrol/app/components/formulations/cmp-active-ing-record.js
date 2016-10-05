@@ -35,19 +35,7 @@
 
         self.$onInit = function () {
 
-            self.ingModel = {
-                ingId: "001",
-                ingName: "",
-                cas: "",
-                standard: "",
-                strength: "",
-                units: "",
-                per: "",
-                calcAsBase: false,
-                animalHumanSourced: false,
-                nanoMaterial: "",
-                nanoMaterialOther: ""
-            };
+            self.ingModel = {};
 
             if (self.record) {
                 self.ingModel = self.record;
@@ -76,7 +64,7 @@
                 //  console.log('product details delete product');
                 self.onDelete();
             }else{
-                //TODO
+
             }
 
         };
