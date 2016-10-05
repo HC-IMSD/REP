@@ -34,14 +34,7 @@
 
         self.$onInit = function () {
 
-            self.productModel = {
-               /* brandName: "A",
-                medIngredient: "A",
-                dosageForm: "3",
-                dosageFormOther: "",
-                strengths: "5454",
-                companyName: "B"*/
-            };
+            self.productModel = {};
 
             if (self.productRecord) {
 

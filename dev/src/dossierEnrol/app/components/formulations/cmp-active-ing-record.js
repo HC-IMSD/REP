@@ -19,7 +19,12 @@
             controllerAs: 'ingRecCtrl',
             controller: activeIngRecCtrl,
             bindings: {
-                record: '<',
+                deleteBtn: '<',
+                record:'<',
+                onAddIng: '&',
+                onUpdate: '&',
+                onDelete: '&',
+                onCancel: '&'
                 showErrors:'&'
             }
 
@@ -31,23 +36,28 @@
         self.nanoMaterialList=DossierLists.getNanoMaterials();
         self.$onInit = function () {
 
-            self.ingModel = {
-                ingId: "001",
-                ingName: "",
-                cas: "",
-                standard: "",
-                strength: "",
-                units: "",
-                per: "",
-                calcAsBase: false,
-                animalHumanSourced: false,
-                nanoMaterial: "",
-                nanoMaterialOther: ""
-            };
+            self.ingModel = {};
 
             if (self.record) {
                 self.ingModel = self.record;
             }
+        };
+
+        self.saveIng = function () {
+            if (self.record) {
+                // console.log('product details update product');
+                self.onUpdate({ing:self.ingModel});
+            }else{
+                //  console.log('product details add product');
+                self.onAddIng({ing:self.ingModel});
+            }
+
+        };
+
+        self.discardChanges = function(){
+            self.ingModel = {};
+            //self.productDetailsForm.$setPristine();
+            self.onCancel();
         }
         self.$onChanges=function(changes){
             if(changes.record){
@@ -72,6 +82,16 @@
                 return false;
             }
         }
+
+        self.delete = function(){
+            if (self.record) {
+                //  console.log('product details delete product');
+                self.onDelete();
+            }else{
+
+            }
+
+        };
 
 
     }
