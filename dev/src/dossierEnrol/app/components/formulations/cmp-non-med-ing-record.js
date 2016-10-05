@@ -20,7 +20,7 @@
             controller: nonMedIngRecCtrl,
             bindings: {
                 deleteBtn: '<',
-                record:'<',
+                record: '<',
                 onAddIng: '&',
                 onUpdate: '&',
                 onDelete: '&',
@@ -37,36 +37,37 @@
 
             self.ingModel = {};
 
-            if(self.record){
+            if (self.record) {
                 self.ingModel = self.record;
             }
         };
 
         self.saveIng = function () {
-           // self.ingModel.animalHumanSourced = self.ingModel.animalHumanSourced == true ? "Yes" : "No";
+            // self.ingModel.animalHumanSourced = self.ingModel.animalHumanSourced == true ? "Yes" : "No";
             if (self.record) {
                 // console.log('product details update product');
-                self.onUpdate({ing:self.ingModel});
-            }else{
+                self.onUpdate({ing: self.ingModel});
+            } else {
                 //  console.log('product details add product');
-                self.onAddIng({ing:self.ingModel});
+                self.onAddIng({ing: self.ingModel});
             }
 
         };
 
-        self.discardChanges = function(){
+        self.discardChanges = function () {
             self.ingModel = {};
             //self.productDetailsForm.$setPristine();
             self.onCancel();
         };
 
-        self.delete = function(){
+        self.delete = function () {
             if (self.record) {
                 //  console.log('product details delete product');
                 self.onDelete();
-            }else{
+            } else {
 
             }
+        }
 
     }
 

@@ -29,7 +29,7 @@
 
         var self = this;
 
-        self.$onInit = function(){
+        self.$onInit = function () {
 
             self.newIngFormShown = false;
 
@@ -88,24 +88,24 @@
 
             ];
 
-            if(self.ingredients){
+            if (self.ingredients) {
                 self.ingList = self.ingredients;
             }
         };
 
-        self.addIng = function(ing){
+        self.addIng = function (ing) {
             //console.debug('ingList addIng: ' + ing);
             self.ingList.push(ing);
             self.newIngFormShown = false;
         };
 
-        self.updateIng = function(idx, ing){
+        self.updateIng = function (idx, ing) {
             self.ingList[idx] = angular.copy(ing);
         };
 
-        self.deleteIng = function(idx){
+        self.deleteIng = function (idx) {
             // console.debug('ingList deleteIng: ' + idx);
-            self.ingList.splice(idx,1);
+            self.ingList.splice(idx, 1);
         }
 
     }
