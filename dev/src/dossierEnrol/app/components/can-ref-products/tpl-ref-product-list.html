@@ -3,8 +3,7 @@
     <div class="col-xs-12 form-group">
 
         <!--<pre>crpl.productList : {{crpl.productList | json}}</pre>-->
-
-        <cmp-expanding-table title="Canadian Reference Product" list-items="crpl.productList"
+        <cmp-expanding-table title="{{'REF_PRODUCTS'|translate}}" list-items="crpl.productList"
                              column-def="crpl.colNames" select-record="crpl.selectRecord"
                              disable-selection="!crpl.isDetailValid">
             <cmp-ref-product-details product-record="$parent.record" on-update="crpl.updateProduct($parent.$index,product)" on-delete="crpl.deleteProduct($parent.$index)" delete-btn="true" ></cmp-ref-product-details>
