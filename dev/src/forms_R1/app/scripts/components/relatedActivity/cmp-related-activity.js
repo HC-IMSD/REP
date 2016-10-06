@@ -54,7 +54,6 @@
 
             }
             if (changes.activityList) {
-                console.log("Changes in the value" + changes.activityList.currentValue)
                 vm.activityTypesArray = changes.activityList.currentValue;
             }
             if (changes.isAmend) {
@@ -87,7 +86,7 @@
          *  calls the delete function on the parent
          */
         vm.delete = function () {
-            vm.onDelete({addressId: vm.activityModel.addressID});
+            vm.onDelete({activityId: vm.activityModel.activityId});
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *

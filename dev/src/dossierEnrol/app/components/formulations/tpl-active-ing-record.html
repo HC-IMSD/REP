@@ -1,7 +1,6 @@
-<div class="container-fluid">
-    <ng-form name="ingRecCtrl.activeIngForm">
-
-        <div class="row">
+<ng-form name="ingRecCtrl.activeIngForm">
+    <fieldset>
+        <legend>Active Ingredient Details</legend>
             <div class="form-group col-md-12" ng-class="{'has-error':ingRecCtrl.activeIngForm.ingredName.$invalid}">
                 <label for="ing-name" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -16,8 +15,6 @@
                     </strong>
                 </label>
             </div>
-        </div>
-        <div class="row">
             <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm.casNum.$invalid}">
                 <label for="cas" class="required">
                     <span class="field-name">{{'CAS_NUM'|translate}}</span>
@@ -70,16 +67,15 @@
                         </span>
                 </strong>
             </div>
-        </div>
-        <div class="row">
+
             <div class="form-group col-md-12">
                 <label for="per"><span class="field-name">{{'PER'|translate}}</span></label>
                 <input type="text" id="per" data-ng-model="ingRecCtrl.ingModel.per" size="15" maxlength="15"
                        class="form-control full-width" name="text"/>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6" ng-class="{'has-error':ingRecCtrl.activeIngForm.nanoFld.$invalid}">
+
+
+        <div class="form-group col-md-6" ng-class="{'has-error':ingRecCtrl.activeIngForm.nanoFld.$invalid}">
                 <label for="nanoMaterial" class="required">
                     <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong></label>
@@ -111,8 +107,6 @@
                         </span>
                 </strong>
             </div>
-        </div>
-        <div class="row">
             <div class="form-group col-md-12">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <label class="form-checkbox form-label-inline" for="asBase">
@@ -129,7 +123,15 @@
 
                 </div>
             </div>
-        </div>
 
-    </ng-form>
-</div>
+
+        <div class="btn-group-sm col-xs-12 text-right">
+            <input type="submit" value="Save" class="btn btn-primary"
+                   ng-click="ingRecCtrl.saveIng()"/>
+            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
+                   ng-click="ingRecCtrl.delete()"/>
+            <input type="submit" value="Discard Changes" class="btn btn-default"
+                   ng-click="ingRecCtrl.discardChanges()">
+        </div>
+    </fieldset>
+</ng-form>

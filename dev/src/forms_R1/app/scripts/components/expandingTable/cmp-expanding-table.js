@@ -34,9 +34,9 @@
         vm.tableRowExpanded = false;
         vm.tableRowIndexCurrExpanded = "";
         vm.tableRowIndexPrevExpanded = "";
-       // vm.dayDataCollapse = [true, true, true, true, true];
         vm.numberCols=_getNumberKeys(vm.columnDef)
-        vm.dayDataCollapse=_createArray(vm.numberCols,true);
+        vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+
         vm.$onInit = function () {
         }
 
@@ -50,7 +50,8 @@
         vm.$onChanges = function (changes) {
 
             if (changes.listItems) {
-                vm.listItems = changes.listItems.currentValue;
+                vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+                vm.resetTableRow();
             }
 
             /**
@@ -126,7 +127,7 @@
             vm.tableRowIndexPrevExpanded = "";
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
-            vm.dayDataCollapse = _createArray(vm.numberCols, true);
+            vm.dayDataCollapse = _createArray(vm.listItems.length, true);
 
         }
 

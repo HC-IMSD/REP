@@ -16,10 +16,15 @@
         .module('nonMedIngRecordModule')
         .component('cmpNonMedIngRecord', {
             templateUrl: './components/formulations/tpl-non-med-ing-record.html',
-            controllerAs: 'ingRecCtrl',
+            controllerAs: 'nIngRecCtrl',
             controller: nonMedIngRecCtrl,
             bindings: {
-                record: '<'
+                deleteBtn: '<',
+                record: '<',
+                onAddIng: '&',
+                onUpdate: '&',
+                onDelete: '&',
+                onCancel: '&'
             }
 
         });
@@ -30,23 +35,37 @@
 
         self.$onInit = function () {
 
-            self.ingModel = {
-                varId: "001",
-                ingName: "",
-                cas: "",
-                type: "",
-                standard: "",
-                strength: "",
-                units: "",
-                per: "",
-                calcAsBase: false,
-                animalHumanSourced: false,
-                nanoMaterial: "",
-                nanoMaterialOther: ""
-            };
+            self.ingModel = {};
 
             if (self.record) {
                 self.ingModel = self.record;
+            }
+        };
+
+        self.saveIng = function () {
+            // self.ingModel.animalHumanSourced = self.ingModel.animalHumanSourced == true ? "Yes" : "No";
+            if (self.record) {
+                // console.log('product details update product');
+                self.onUpdate({ing: self.ingModel});
+            } else {
+                //  console.log('product details add product');
+                self.onAddIng({ing: self.ingModel});
+            }
+
+        };
+
+        self.discardChanges = function () {
+            self.ingModel = {};
+            //self.productDetailsForm.$setPristine();
+            self.onCancel();
+        };
+
+        self.delete = function () {
+            if (self.record) {
+                //  console.log('product details delete product');
+                self.onDelete();
+            } else {
+
             }
         }
 

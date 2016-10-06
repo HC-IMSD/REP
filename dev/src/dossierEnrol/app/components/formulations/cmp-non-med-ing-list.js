@@ -30,6 +30,9 @@
         var self = this;
 
         self.$onInit = function () {
+
+            self.newIngFormShown = false;
+
             self.colNames = [
                 {"label": "Variant ID", "binding": "varId"},
                 {"label": "Active Ingredient Name", "binding": "ingName"},
@@ -84,6 +87,25 @@
                 },
 
             ];
+
+            if (self.ingredients) {
+                self.ingList = self.ingredients;
+            }
+        };
+
+        self.addIng = function (ing) {
+            //console.debug('ingList addIng: ' + ing);
+            self.ingList.push(ing);
+            self.newIngFormShown = false;
+        };
+
+        self.updateIng = function (idx, ing) {
+            self.ingList[idx] = angular.copy(ing);
+        };
+
+        self.deleteIng = function (idx) {
+            // console.debug('ingList deleteIng: ' + idx);
+            self.ingList.splice(idx, 1);
         }
 
     }
