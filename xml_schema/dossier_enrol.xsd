@@ -248,6 +248,7 @@
 			<hpfb:element ref="vet_drug_use"/>
 			<hpfb:element ref="disinfectant_drug_use"/>
 			<hpfb:element ref="therapeutic_class_list"/>
+			<hpfb:element ref="country_group"/>
 			<hpfb:element ref="is_sched_a"/>
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
@@ -479,7 +480,6 @@
 			<hpfb:element ref="formulation_id"/>
 			<hpfb:element ref="dosage_form_group"/>
 			<hpfb:element ref="roa_group"/>
-			<hpfb:element ref="country_group"/>
 			<hpfb:element ref="container_group"/>
 			<hpfb:element ref="active_ingredient" minOccurs="1" maxOccurs="unbounded"/>
 			<hpfb:element ref="nonmedicinal_ingredient" minOccurs="0" maxOccurs="unbounded"/>
