@@ -28,16 +28,16 @@
     function nonMedIngListCtrl() {
 
         var self = this;
-
+        self.isDetailValid = true; //TODO: Need to manage for Add and Delete
         self.$onInit = function () {
 
             self.newIngFormShown = false;
 
             self.colNames = [
-                {"label": "Variant ID", "binding": "varId"},
-                {"label": "Active Ingredient Name", "binding": "ingName"},
-                {"label": "CAS", "binding": "cas"},
-                {"label": "Human/Animal Sourced ?", "binding": "humanAnimalSourced"}
+                {label: "VARIANT_NAME", binding: "varId", width: "15"},
+                {label: "NONMEDICINAL_INGREDIENT", binding: "ingName", width: "65"},
+                {label: "CAS_NUM", binding: "cas", width: "15"},
+                {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "10"}
             ];
             self.ingList = [
                 {

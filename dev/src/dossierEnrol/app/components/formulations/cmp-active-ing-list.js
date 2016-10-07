@@ -31,11 +31,11 @@
         self.$onInit = function () {
 
             self.newIngFormShown = false;
-            
+            self.isDetailValid = true; //TODO needs to be managed for save and add
             self.colNames = [
-                {"label": "Active Ingredient Name", "binding": "ingName"},
-                {"label": "CAS", "binding": "cas"},
-                {"label": "Human/Animal Sourced ?", "binding": "humanAnimalSourced"}
+                {label: "MEDICINAL_INGREDIENT", binding: "ingName", width: "70"},
+                {label: "CAS_NUM", "binding": "cas", width: "15"},
+                {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
             ];
             self.ingList = [
                 {

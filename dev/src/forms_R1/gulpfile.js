@@ -1051,6 +1051,7 @@ gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev', 'copyDossi
             jsComponentPaths.repContactRecordPath + '**/*',
             jsComponentPaths.contactDetailsPath + '**/*',
             jsComponentPaths.applicationInfoPath + '**/*',
+            jsComponentPaths.expandingTablePath + '**/*',
             jsDirectiveFiles.numberOnly
         ],
         {read: true, base: './app/scripts'});

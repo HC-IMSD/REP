@@ -19,7 +19,8 @@
   "NANOEMULSIONS":"Nanoemulsions",
   "NANOCRYSTAL":"Nanocrystal",
   "METALCOLLOIDS":"Metal Colloids",
-  "OTHER":"Other"
+  "NONMEDICINAL_INGREDIENT": " NonMedicinal Ingredient",
+  "VARIANT_NAME": "Variant Name"
 
 
 }
