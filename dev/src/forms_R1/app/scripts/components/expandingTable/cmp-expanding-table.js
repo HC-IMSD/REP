@@ -19,6 +19,7 @@
             controllerAs: 'expandTblCtrl',
             transclude:true,
             bindings: {
+                title: '@', /*deprecated*/
                 listItems: '<',
                 columnDef:'<',
                 disableSelection:'<',
