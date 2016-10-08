@@ -27,14 +27,15 @@
     function materialIngListCtrl() {
 
         var self = this;
+        self.isDetailValid = true; //TODO manage detail state in add and delete
+        self.colNames = [
+            {label: "MATERIAL_NAME", binding: "ingredientName", width: "70"},
+            {label: "CAS_NUM", binding: "cas", width: "15"},
+            {label: "PRESENT_IN_FINAL", binding: "inFinalContainer", width: "15"}
+        ];
 
         self.$onInit = function () {
 
-            self.colNames = [
-                {"label": "Material Name", "binding": "ingredientName"},
-                {"label": "CAS", "binding": "cas"},
-                {"label": "Present In Final", "binding": "inFinalContainer"}
-            ];
 
             self.ingList = [
                 {

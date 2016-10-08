@@ -12,5 +12,10 @@
   "ANIMAL_HUMAN_SOURCED": "fr_Animal or Human Sourced?",
   "ACTIVE_LIST": "fr_Active Ingredient List",
   "NONMEDICINAL_INGREDIENT": " fr_NonMedicinal Ingredient",
-  "VARIANT_NAME": "fr_Variant Name"
+  "VARIANT_NAME": "fr_Variant Name",
+  "CONTAINER_TYPE": "fr_Container Type",
+  "PACKAGE_SIZE": "fr_Package Size",
+  "MATERIAL_NAME": "fr_Material Name",
+  "PRESENT_IN_FINAL": "fr_Present in final Container"
+
 }

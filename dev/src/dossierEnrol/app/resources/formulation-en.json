@@ -20,7 +20,11 @@
   "NANOCRYSTAL":"Nanocrystal",
   "METALCOLLOIDS":"Metal Colloids",
   "NONMEDICINAL_INGREDIENT": " NonMedicinal Ingredient",
-  "VARIANT_NAME": "Variant Name"
+  "VARIANT_NAME": "Variant Name",
+  "CONTAINER_TYPE": "Container Type",
+  "PACKAGE_SIZE": "Package Size",
+  "MATERIAL_NAME": "Material Name",
+  "PRESENT_IN_FINAL": "Present in final Container"
 
 
 }
