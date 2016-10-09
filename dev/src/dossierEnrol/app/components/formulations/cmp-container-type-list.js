@@ -44,8 +44,8 @@
                     "packageSize": "A",
                     "shelfLifeYears": "9999",
                     "shelfLifeMonths": "99",
-                    "tempMin": "999",
-                    "tempMax": "999"
+                    "tempMin": 999,
+                    "tempMax": 999
                 },
 
                 {
@@ -53,8 +53,8 @@
                     "packageSize": "A",
                     "shelfLifeYears": "9999",
                     "shelfLifeMonths": "99",
-                    "tempMin": "999",
-                    "tempMax": "999"
+                    "tempMin": 999,
+                    "tempMax": 999
                 },
 
                 {
@@ -62,8 +62,8 @@
                     "packageSize": "A",
                     "shelfLifeYears": "9999",
                     "shelfLifeMonths": "99",
-                    "tempMin": "999",
-                    "tempMax": "999"
+                    "tempMin": 999,
+                    "tempMax": 999
                 },
 
             ]

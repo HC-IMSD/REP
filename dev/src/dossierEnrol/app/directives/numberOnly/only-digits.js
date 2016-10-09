@@ -37,16 +37,29 @@
         function link(scope, element, attrs, modelCtrl) {
             modelCtrl.$parsers.push(function (inputValue) {
                 if (inputValue == undefined) return '';
-                var transformedInput = inputValue.replace(/[^0-9]/g, '');
+                var regexDecimalNeg = /^-?[0-9]\d*(\.\d+)?$/;
+                var regexDecimalPos = /^?[0-9]\d*(\.\d+)?$/;
+                var integerReg = /[^0-9]/g; //default
+                var regexValue = '';
+                //attrs.username;
+                if (attrs['onlyDigits'] == 'decNeg') {
+                    regexValue = regexDecimalNeg;
+                } else if (attrs.onlyDigits === "decPos") {
+                    regexValue = regexDecimalPos;
+                } else {
+                    regexValue = integerReg
+                }
+                var transformedInput = inputValue.replace(regexValue, '');
                 if (transformedInput !== inputValue) {
                     modelCtrl.$setViewValue(transformedInput);
                     modelCtrl.$render();
                 }
                 return transformedInput;
             });
-        }
+                }
     }
 
 })();
+
 
 

@@ -1,36 +1,47 @@
 <ng-form name="container-type-form">
-    <fieldset>
-        <legend>{{'CONTAINER_TYPE_DETAILS'|translate}}</legend>
-    <div class="form-group col-md-3">
-        <label for="containerType"><span class="field-name">{{'CONTAINER_TYPE'|translate}}</span></label>
-        <input type="text" id="containerType" data-ng-model="ctrCtrl.ctModel.containerType"
-               class="form-control full-width" name="text" ng-required="true"/>
+    <div class="container-fluid">
+        <fieldset>
+            <legend>{{'CONTAINER_TYPE_DETAILS'|translate}}</legend>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="containerType"><span class="field-name">{{'CONTAINER_TYPE'|translate}}</span></label>
+                     <textarea id="containerType" data-ng-model="ctrCtrl.ctModel.containerType" maxlength="256" rows="3"
+                               class="form-control full-width" name="text" ng-required="true"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="pckSize">
+                        <span class="field-name">{{'PACKAGE_SIZE'|translate}}</span>
+                    </label>
+                    <textarea id="pckSize" data-ng-model="ctrCtrl.ctModel.packageSize" maxlength="256" rows="3"
+                              class="form-control full-width" name="text" ng-required="true"></textarea>
+                </div>
+            </div>
+            <div clas="row">
+                <div class="form-group col-md-3">
+                    <label for="shelfLifeYears"><span class="field-name">{{'SHELF_LIFE_YEARS'|translate}}</span></label>
+                    <input type="text" id="shelfLifeYears" data-ng-model="ctrCtrl.ctModel.shelfLifeYears"
+                           class="form-control full-width" name="text" ng-required="true"/>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="shelfLifeMonths"><span
+                            class="field-name">{{'SHELF_LIFE_MONTHS'|translate}}</span></label>
+                    <input type="text" id="shelfLifeMonths" data-ng-model="ctrCtrl.ctModel.shelfLifeMonths"
+                           class="form-control full-width" name="shelfMonths"/>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="tempMin"><span class="field-name">{{'MIN_TEMP'|translate}}</span></label>
+                    <input type="text" id="tempMin" data-ng-model="ctrCtrl.ctModel.tempMin" min="-999" max="999"
+                           only-digits="intNeg" only-max="4"
+                           class="form-control full-width" name="text"/>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="tempMax"><span class="field-name">{{'MAX_TEMP'|translate}}</span></label>
+                    <input type="number" min="-999.99" max="999.99" id="tempMax" data-ng-model="ctrCtrl.ctModel.tempMax"
+                           class="form-control full-width" name="text"/>
+                </div>
+            </div>
+        </fieldset>
     </div>
-    <div class="form-group col-md-3">
-        <label for="pckSize"><span class="field-name">{{'PACKAGE_SIZE'|translate}}</span></label>
-        <input type="text" id="pckSize" data-ng-model="ctrCtrl.ctModel.packageSize"
-               class="form-control full-width" name="text" ng-required="true"/>
-    </div>
-    <div class="form-group col-md-3">
-        <label for="shelfLifeYears"><span class="field-name">{{'SHELF_LIFE_YEARS'|translate}}</span></label>
-        <input type="text" id="shelfLifeYears" data-ng-model="ctrCtrl.ctModel.shelfLifeYears"
-               class="form-control full-width" name="text" ng-required="true"/>
-    </div>
-    <div class="form-group col-md-3">
-        <label for="shelfLifeMonths"><span class="field-name">{{'SHELF_LIFE_MONTHS'|translate}}</span></label>
-        <input type="text" id="shelfLifeMonths" data-ng-model="ctrCtrl.ctModel.shelfLifeMonths"
-               class="form-control full-width" name="text" ng-required="true"/>
-    </div>
-
-    <div class="form-group col-md-6">
-        <label for="tempMin"><span class="field-name">{{'MIN_TEMP'|translate}}</span></label>
-        <input type="text" id="tempMin" data-ng-model="ctrCtrl.ctModel.tempMin"
-               class="form-control full-width" name="text" ng-required="true"/>
-    </div>
-    <div class="form-group col-md-6">
-        <label for="tempMax"><span class="field-name">{{'MAX_TEMP'|translate}}</span></label>
-        <input type="text" id="tempMax" data-ng-model="ctrCtrl.ctModel.tempMax"
-               class="form-control full-width" name="text" ng-required="true"/>
-    </div>
-    </fieldset>
 </ng-form>
