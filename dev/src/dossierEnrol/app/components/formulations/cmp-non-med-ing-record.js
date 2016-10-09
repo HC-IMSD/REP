@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('nonMedIngRecordModule', [])
+        .module('nonMedIngRecordModule', ['dossierDataLists'])
 })();
 
 (function () {
@@ -21,6 +21,7 @@
             bindings: {
                 deleteBtn: '<',
                 record: '<',
+                showErrors: '&',
                 onAddIng: '&',
                 onUpdate: '&',
                 onDelete: '&',
@@ -28,11 +29,12 @@
             }
 
         });
-
-    function nonMedIngRecCtrl() {
+    nonMedIngRecCtrl.$inject = ['DossierLists'];
+    function nonMedIngRecCtrl(DossierLists) {
 
         var self = this;
-
+        self.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
+        self.yesNoList = DossierLists.getYesNoList(); //yes-no lists
         self.$onInit = function () {
 
             self.ingModel = {};
@@ -67,7 +69,29 @@
             } else {
 
             }
-        }
+        };
+        /**
+         * Controls showing errors for a field
+         * @param isInvalid
+         * @param isTouched
+         * @returns {*}
+         */
+        self.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
+        };
+
+        /**
+         * Sets the state of the nanomaterial other field
+         * @returns {boolean} true if other is the value
+         */
+        self.isNanoOther = function () {
+            if (self.ingModel.nanoMaterial === DossierLists.getOtherValue()) {
+                return true;
+            } else {
+                self.ingModel.nanoMaterialOther = "";
+                return false;
+            }
+        };
 
     }
 

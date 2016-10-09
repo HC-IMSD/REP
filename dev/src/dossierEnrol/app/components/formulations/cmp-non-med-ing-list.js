@@ -45,30 +45,28 @@
                     "ingName": "ing1",
                     "cas": "00-00-1",
                     "type": "A",
-                    "humanAnimalSourced": "No",
                     "standard": "A",
                     "strength": "A",
                     "per": "A",
                     "units": "A",
-                    "calcAsBase": true,
-                    "animalHumanSourced": true,
-                    "nanoMaterial": "Yes",
-                    "nanoMaterialOther": "A"
+                    "calcAsBase": "",
+                    "animalHumanSourced": "",
+                    "nanoMaterial": "",
+                    "nanoMaterialOther": ""
                 },
                 {
                     "varId": "Var2",
                     "ingName": "ing2",
                     "cas": "00-00-2",
                     "type": "A",
-                    "humanAnimalSourced": "Yes",
                     "standard": "A",
                     "strength": "A",
                     "per": "A",
                     "units": "A",
-                    "calcAsBase": true,
-                    "animalHumanSourced": false,
-                    "nanoMaterial": "Yes",
-                    "nanoMaterialOther": "A"
+                    "calcAsBase": "",
+                    "animalHumanSourced": "",
+                    "nanoMaterial": "",
+                    "nanoMaterialOther": ""
                 },
                 {
                     "varId": "Var3",
@@ -80,10 +78,10 @@
                     "strength": "A",
                     "per": "A",
                     "units": "A",
-                    "calcAsBase": false,
-                    "animalHumanSourced": true,
-                    "nanoMaterial": "Other",
-                    "nanoMaterialOther": "A"
+                    "calcAsBase": "",
+                    "animalHumanSourced": "",
+                    "nanoMaterial": "",
+                    "nanoMaterialOther": ""
                 },
 
             ];

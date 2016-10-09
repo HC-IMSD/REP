@@ -85,4 +85,18 @@
 			<hpfb:enumeration value="OTHER"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+
+	<hpfb:simpleType name="nano_list">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="NOTNANO"/>
+			<hpfb:enumeration value="NANOPARTICLE"/>
+			<hpfb:enumeration value="DENDRIMER"/>
+			<hpfb:enumeration value="LIPOSOMES"/>
+			<hpfb:enumeration value="MICELLES"/>
+			<hpfb:enumeration value="NANOEMULSIONS"/>
+			<hpfb:enumeration value="NANOCRYSTAL"/>
+			<hpfb:enumeration value="METALCOLLOIDS"/>
+			<hpfb:enumeration value="OTHER"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 </hpfb:schema>

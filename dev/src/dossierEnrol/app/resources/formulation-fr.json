@@ -16,6 +16,14 @@
   "CONTAINER_TYPE": "fr_Container Type",
   "PACKAGE_SIZE": "fr_Package Size",
   "MATERIAL_NAME": "fr_Material Name",
-  "PRESENT_IN_FINAL": "fr_Present in final Container"
+  "PRESENT_IN_FINAL": "fr_Present in final Container",
+  "MEDICINAL_INGRED_DETAILS": "fr_Medicinal (Active) Ingredient Details",
+  "MEDICINAL_INGRED": "fr_Medicinal (Active) Ingredients",
+  "NONMEDICINAL_INGRED": "fr_Non-Medicinal Ingredients",
+  "CONTAINER_TYPES": "fr_Container Types",
+  "NONMEDICINAL_INGRED_DETAILS": "Non-Medicinal Ingredient Details",
+  "CONTAINER_TYPE_DETAILS": "Container Type Details",
+  "MATERIAL_DETAILS": "Animal and / or Human Sourced Materials Details",
+  "CALCULATED_AS_BASE": "fr_Calculated as Base?"
 
 }

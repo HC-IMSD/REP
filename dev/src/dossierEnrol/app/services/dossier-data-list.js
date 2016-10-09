@@ -32,7 +32,8 @@
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
-            getOtherValue: getOtherValue
+            getOtherValue: getOtherValue,
+            getYesNoList: yesNoArray
         };
         return service;
 
@@ -138,6 +139,13 @@
             ]);
         }
 
+        function yesNoArray() {
+
+            return ([
+                "Y",
+                "N"
+            ]);
+        }
     }
 
 

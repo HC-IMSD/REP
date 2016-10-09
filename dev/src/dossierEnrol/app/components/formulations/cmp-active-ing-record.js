@@ -34,6 +34,7 @@
 
         var self = this;
         self.nanoMaterialList=DossierLists.getNanoMaterials();
+        self.yesNoList = DossierLists.getYesNoList();
         self.$onInit = function () {
 
             self.ingModel = {};
@@ -51,7 +52,6 @@
                 //  console.log('product details add product');
                 self.onAddIng({ing: self.ingModel});
             }
-
         };
 
         self.discardChanges = function () {
@@ -74,8 +74,15 @@
             if(changes.record){
                 self.ingModel = self.record.currentValue;
             }
-        }
+        };
 
+
+        /**
+         * Controls showing errors for a field
+         * @param isInvalid
+         * @param isTouched
+         * @returns {*}
+         */
         self.showError=function(isInvalid,isTouched){
             return((isInvalid &&isTouched)|| (isInvalid && self.showErrors()))
         }
