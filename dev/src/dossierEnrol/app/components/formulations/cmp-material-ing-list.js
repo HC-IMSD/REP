@@ -43,21 +43,21 @@
                     "ingredientName": "A",
                     "cas": "00-00-0",
                     "ingredientStandard": "A",
-                    "inFinalContainer": true
+                    "inFinalContainer": "Y"
                 },
                 {
                     "ingredientId": "B",
                     "ingredientName": "A",
                     "cas": "00-00-1",
                     "ingredientStandard": "A",
-                    "inFinalContainer": true
+                    "inFinalContainer": "Y"
                 },
                 {
                     "ingredientId": "C",
                     "ingredientName": "A",
                     "cas": "00-00-2",
                     "ingredientStandard": "A",
-                    "inFinalContainer": true
+                    "inFinalContainer": "Y"
                 }
             ];
 

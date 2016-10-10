@@ -33,5 +33,12 @@
   "NONMEDICINAL_INGRED_DETAILS": "Non-Medicinal Ingredient Details",
   "CONTAINER_TYPE_DETAILS": "Container Type Details",
   "MATERIAL_DETAILS": "Animal and / or Human Sourced Materials Details",
-  "CALCULATED_AS_BASE": "Calculated as Base?"
+  "CALCULATED_AS_BASE": "Calculated as Base?",
+  "SHELF_LIFE_YEARS": "Years",
+  "SHELF_LIFE_MONTHS": "Months",
+  "MIN_TEMP": "Minimum, Celsius",
+  "MAX_TEMP": "Maximum, Celsius",
+  "TEMP_RANGE": "Temperature Range",
+  "SHELF_LIFE": "Shelf Life",
+  "IN_FINAL_CONTAINER": "Present in Final Container?"
 }

@@ -42,8 +42,8 @@
                 {
                     "containerType": "A",
                     "packageSize": "A",
-                    "shelfLifeYears": "9999",
-                    "shelfLifeMonths": "99",
+                    "shelfLifeYears": 9999,
+                    "shelfLifeMonths": 99,
                     "tempMin": 999,
                     "tempMax": 999
                 },
@@ -51,8 +51,8 @@
                 {
                     "containerType": "B",
                     "packageSize": "A",
-                    "shelfLifeYears": "9999",
-                    "shelfLifeMonths": "99",
+                    "shelfLifeYears": 9999,
+                    "shelfLifeMonths": 99,
                     "tempMin": 999,
                     "tempMax": 999
                 },
@@ -60,8 +60,8 @@
                 {
                     "containerType": "C",
                     "packageSize": "A",
-                    "shelfLifeYears": "9999",
-                    "shelfLifeMonths": "99",
+                    "shelfLifeYears": 9999,
+                    "shelfLifeMonths": 99,
                     "tempMin": 999,
                     "tempMax": 999
                 },

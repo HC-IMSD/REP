@@ -18,7 +18,6 @@
         .module('numberFormat')
         .directive('onlyDigits', digitsCtrl);
 
-
     function digitsCtrl() {
         var directive = {
 
@@ -28,32 +27,35 @@
         };
         return directive;
 
-
         function link(scope, element, attrs, modelCtrl) {
             modelCtrl.$parsers.push(function (inputValue) {
                 if (inputValue == undefined) return '';
+                var isNumber = false;
                 var max = -1;
+                var tempVal = "" + inputValue;
+                if (attrs['type'] && attrs['type'] === 'number') {
+                    isNumber = true;
+                }
+
                 if (attrs['onlyMax']) {
                     max = parseInt(attrs['onlyMax']);
                 }
                 var regexIntNeg = /[^0-9-]/g;
-                var regexIntPos = /[^0-9]/g;
                 var integerReg = /[^0-9]/g; //default
                 var regexValue = integerReg;
                 if (attrs['onlyDigits'] == 'intNeg') {
                     regexValue = regexIntNeg;
-                } else if (attrs['onlyDigits'] === 'intPos') {
-                    regexValue = regexIntPos;
                 } else {
                     regexValue = integerReg
                 }
-                var transformedInput = inputValue.replace(regexValue, '');
-                console.log(transformedInput);
-                console.log(max)
+                var transformedInput = tempVal.replace(regexValue, '');
                 if (max > 0) {
                     transformedInput = transformedInput.substring(0, max);
                 }
-                if (transformedInput !== inputValue) {
+                if (transformedInput !== tempVal) {
+                    if (isNumber && transformedInput) {
+                        transformedInput = parseFloat(transformedInput)
+                    }
                     modelCtrl.$setViewValue(transformedInput);
                     modelCtrl.$render();
                 }
