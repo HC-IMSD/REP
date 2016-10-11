@@ -42,6 +42,7 @@
   "SHELF_LIFE": "Shelf Life",
   "IN_FINAL_CONTAINER": "Present in Final Container?",
   "OTHER_ROA_DETAILS": "Other Route of Administration Details",
-  "ROA_LBL": "Route of Administration",
-  "ROA_TITLE": "Routes of Administration"
+  "ROA_LBL": "Route of Administration (ROA)",
+  "ROA_TITLE": "Routes of Administration",
+  "ROA_ABREV": "ROA"
 }

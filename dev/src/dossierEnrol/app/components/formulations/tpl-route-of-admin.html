@@ -5,7 +5,7 @@
     <ng-form name="roaCtrl.roaForm">
         <ul class="list-group">
             <li class="list-group-item  col-md-12" ng-repeat="item in roaCtrl.model.list">
-                <div class="col-md-4 form-group" ng-class="{'has-error':roaCtrl.roaForm['roaVal'+$index].$invalid}">
+                <div class="col-md-5 form-group" ng-class="{'has-error':roaCtrl.roaForm['roaVal'+$index].$invalid}">
                     <label for="roa{{$index}}" class="required">
                         <span class="field-name">{{'ROA_LBL'|translate}}&nbsp;{{$index+1}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -39,9 +39,9 @@
                         </strong>
                     </label>
                 </div>
-                <div class="col-sm-3 center-block">
+                <div class="col-sm-2 center-block">
                     <button ng-click="roaCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm rep-center">
-                        {{'DELETE'|translate}}&nbsp;{{'ROA_LBL'|translate}}&nbsp;{{$index+1}}
+                        {{'DELETE'|translate}}&nbsp;{{'ROA_ABREV'|translate}}&nbsp;{{$index+1}}
                     </button>
                 </div>
             </li>
