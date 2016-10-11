@@ -73,6 +73,10 @@
                     {
                         prefix: 'app/resources/formulation-',
                         suffix: '.json'
+                    },
+                    {
+                        prefix: 'app/resources/roa-',
+                        suffix: '.json'
                     }
 
                 ]

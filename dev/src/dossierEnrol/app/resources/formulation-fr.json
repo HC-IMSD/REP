@@ -31,6 +31,7 @@
   "MAX_TEMP": "fr_Maximum, Celsius",
   "TEMP_RANGE": "fr_Temperature Range",
   "SHELF_LIFE": "fr_Shelf Life",
-  "IN_FINAL_CONTAINER": "fr_Present in Final Container?"
-
+  "IN_FINAL_CONTAINER": "fr_Present in Final Container?",
+  "OTHER_ROA_DETAILS": "fr_Other Route of Administration Details",
+  "ROA_TITLE": "fr_Route of Administration"
 }
