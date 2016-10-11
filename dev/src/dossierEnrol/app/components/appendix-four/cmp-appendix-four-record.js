@@ -28,6 +28,7 @@
     function app4RecCtrl(){
 
         var self = this;
+        self.isSourced = ""; //determines if at least one source is selected
         self.model = {}
         self.$onInit = function(){
 
@@ -39,7 +40,13 @@
 
         }
         self.isSourcedSelected = function () {
-            return (self.model.humanSourced || self.model.animalSourced)
+            var result = (self.model.humanSourced || self.model.animalSourced)
+            if (result) {
+                self.isSourced = result;
+            } else {
+                self.isSourced = "";
+            }
+            return (result);
 
         }
 
