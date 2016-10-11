@@ -110,13 +110,10 @@
          * Sets the state of the other Roa details text box
          */
         self.isRoaOther = function (index) {
-            console.log("This is " + index);
-            console.warn("This is model " + JSON.stringify(self.model.list));
             var idx = self.model.list.indexOf(
                 $filter('filter')(self.model.list, {id: index}, true)[0]
             );
             if (!idx) return false;
-            console.log("found an id" + self.model.list[idx].roa)
             if (self.model.list[idx].roa === DossierLists.getOtherValue()) {
                 return true;
             } else {
