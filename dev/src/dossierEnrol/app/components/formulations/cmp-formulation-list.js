@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('formulationsModule', ['expandingTable', 'formulationRecordModule'])
+        .module('formulationsModule', ['expandingTable','formulationRecordModule'])
 })();
 
 (function () {
@@ -14,23 +14,27 @@
 
     angular
         .module('formulationsModule')
-        .component('cmpFormulations', {
-            templateUrl: './components/formulations/tpl-formulations.html',
+        .component('cmpFormulations',{
+            templateUrl: './components/formulations/tpl-formulation-list.html',
             controller: formulationsCtrl,
             controllerAs: 'formulCtrl',
-            bindings: {}
+            bindings: {
+                formulations : '<'
+            }
         });
 
-    function formulationsCtrl() {
+    function formulationsCtrl(){
 
-        var self = this;
+        var self=this;
         self.isDetailValid = true //TODO this must be managed
-        self.$onInit = function () {
+        self.$onInit = function() {
+
+            self.newFormShown = false;
+
             self.colNames = [
                 {label: "Formulation", binding: "formulation", width: "15"},
                 {label: "Formulation Name", binding: "formulationName", width: "85"}
             ];
-
             self.formulationList = [
                 {
                     "formulation": "1",
@@ -67,7 +71,29 @@
                 }
 
             ];
+
+            if(self.formulations){
+                self.formulationList = self.formulations;
+            }
+        };
+
+
+
+        self.addNew = function(frm){
+            //console.debug('frmList addIng: ' + frm);
+            self.formulationList.push(frm);
+            self.newFormShown = false;
+        };
+
+        self.update = function(idx, frm){
+            self.formulationList[idx] = angular.copy(frm);
+        };
+
+        self.delete = function(idx){
+            // console.debug('frmList deleteIng: ' + idx);
+            self.formulationList.splice(idx,1);
         }
+
 
     }
 
