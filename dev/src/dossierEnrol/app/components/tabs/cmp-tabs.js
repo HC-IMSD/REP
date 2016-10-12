@@ -26,14 +26,14 @@
         var self = this;
         self.tabs = [
             {
-                label: "Formulations",
+                label: "FORMULATIONS",
                 selected: true,
                 disabled: false,
                 errors: true,
                 form: {}
             },
             {
-                label: "Appendix 4",
+                label: "APPENDIX4",
                 selected: false,
                 disabled: false,
                 errors: false,

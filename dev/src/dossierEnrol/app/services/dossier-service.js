@@ -80,7 +80,7 @@
 
                 if (!info)
                     return this._default;
-
+                //TODO translations
                 return {
                     dossierID: info.dossier_id,
                     enrolmentVersion: info.enrolment_version,
@@ -132,7 +132,7 @@
                                 {name: "thrombotic-embolic-disorder", label: "Thrombotic Embolic Disorder", value: info.thrombotic_embolic_disorder},
                                 {name: "thyroid-disease", label: "Thyroid Disease", value: info.thyroid_disease},
                                 {name: "ulcer-gastro", label: "Ulcer Gastro", value: info.ulcer_gastro},
-                                {name: "other", label: "Other", value: false, hasOtherDetails: true}
+                                {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO val
                             ]
 
                         },
@@ -164,7 +164,8 @@
 
             },
 
-            getAddressList: function (adrList) {
+           /*  TODO: remove no addressses
+           getAddressList: function (adrList) {
 
                 var list = [];
 
@@ -188,11 +189,8 @@
                         list.push(address);
                     }
                 }
-
-
                 return list;
-
-            },
+            },*/
 
             getContactList: function (contacts) {
                 var list = [];
@@ -202,10 +200,10 @@
                         var contact = {};
                         contact.contactID = contacts[i].contact_id;
                         contact.amendRecord = contacts[i].amend_record;
-                        contact.manufacturer = contacts[i].manufacturer;
+                      /*  contact.manufacturer = contacts[i].manufacturer;
                         contact.mailing = contacts[i].mailing;
                         contact.billing = contacts[i].billing;
-                        contact.importer = contacts[i].importer;
+                        contact.importer = contacts[i].importer;*/
                         contact.contactRole = contacts[i].dossier_contact_details.rep_contact_role;
                         contact.salutation = contacts[i].dossier_contact_details.salutation;
                         contact.givenName = contacts[i].dossier_contact_details.given_name;
@@ -221,13 +219,66 @@
                         list.push(contact);
                     }
                 }
-
-
                 return list;
-
             }
         };
 
+
+        /**
+         * Determines if any of the appendices have a data error
+         */
+        DossierService.prototype.isAppendixesComplete = function () {
+            var dossierModel=this.getDossierInfo();
+            var isError=false;
+            //iterate through the appendices. If one is error report the error.
+            var appendixList=dossierModel.drugProduct.appendixFour.ingredientList;
+            for(var i=0;i<appendixList.length;i++){
+                var appendix=appendixList[i];
+
+                if(!appendix.name) return(true);
+                if(!appendix.sourceHuman && !appendix.sourceAnimal) return(true);
+                if(appendix.tissuesFluidsOrigin){
+                    var tissuesArray = [
+                        appendix.tissuesFluidsOrigin.nervousSystem,
+                        appendix.tissuesFluidsOrigin.digestiveSystem,
+                        appendix.tissuesFluidsOrigin.reproductiveSystem,
+                        appendix.tissuesFluidsOrigin.immuneSystem,
+                        appendix.tissuesFluidsOrigin.cardioSystem,
+                        appendix.tissuesFluidsOrigin.musculoSkeletalSystem,
+                        appendix.tissuesFluidsOrigin.otherTissues,
+                        appendix.tissuesFluidsOrigin.skinGlandSystem
+                    ];
+                    var isSelected=false;
+                    for (var i = 0; i < tissuesArray.length; i++) {
+                        for (var j = 0; j < tissuesArray[i].list.length; j++) {
+                            if (tissuesArray[i].list[j].value === true) {
+                                //if has otherText property, check that it is filled in
+                                if (tissuesArray[i].list[j].hasOwnProperty('otherText')) {
+                                    if (!tissuesArray[i].list[j].otherText) {
+                                        return(true);
+                                    }
+                                }else{
+                                    isSelected=true;
+                                }
+                            }
+                        }
+                    }
+                    if(!isSelected) return true; //none have been selected
+                }
+                if(appendix.sourceAnimalDetails){
+                    //for(vari )
+
+
+
+                }
+
+                    sourceAnimalDetails
+                value
+                required
+
+            }
+
+        }
         // Return a reference to the function
         return DossierService;
     }
@@ -269,7 +320,7 @@
                 ing.sourceAnimal = info[i].animal_sourced === 'Y' ? true:false;
                 var tissues = info[i].tissues_fluids_section;
                 var srcAnimal = info[i].animal_sourced_section;
-
+                //TODO fix the hasOtherDetials
                 ing.tissuesFluidsOrigin = {
                     nervousSystem:{
                         title: "Nervous System", //the legend for checkbox list

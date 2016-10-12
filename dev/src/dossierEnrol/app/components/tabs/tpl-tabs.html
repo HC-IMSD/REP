@@ -4,7 +4,7 @@
     <ul class="nav nav-tabs">
         <li ng-repeat="tab in tabsCtrl.tabs" role="presentation" ng-click="tabsCtrl.selectTab($index)"
             ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">
-            <a href="#" role="tab">{{tab.label}}</a>
+            <a href="#" role="tab">{{tab.label |translate}}</a>
 
             <p>Value:{{tabsCtrl.tabs[$index].errors}}</p>
         </li>
