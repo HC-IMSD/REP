@@ -6,5 +6,5 @@
   "MSG_ERR_DRUG_USE": "At least one drug use must be selected.",
   "MSG_ONE_SCHEDA": "At least one schedule A claim must be selected.",
   "MSG_IS_REQUIRED": "is a required field.",
-  "MSG_ERR_INVALID_NUM": "Veuillez fournir un numéro valide."
+  "MSG_ERR_INVALID_NUM": "This is not a valid number."
 }
