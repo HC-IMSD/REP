@@ -14,8 +14,8 @@
     "oclazyload": "^1.0.9",
     "modernizr": "^3.3.1",
     "wet-boew": "wet-boew/wet-boew-cdn#v4.0.21",
-    "theme-gcwu-fegc": "wet-boew/themes-cdn#v4.0.21-theme-gcwu-fegc"
-
+    "theme-gcwu-fegc": "wet-boew/themes-cdn#v4.0.21-theme-gcwu-fegc",
+    "font-awesome": "^4.6.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0",
