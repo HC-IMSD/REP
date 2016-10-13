@@ -737,20 +737,20 @@
     }
 
 
-    function appendix4IngredientListToOutput(info){
+    function appendix4IngredientListToOutput(info) {
         var list = [];
 
         if (angular.isDefined(info)) {
             for (var i = 0; i < info.length; i++) {
                 var ing = {};
-                ing.ingredient_id= info[i].id ;
+                ing.ingredient_id = info[i].id;
                 ing.ingredient_name = info[i].name;
                 ing.human_sourced = info[i].sourceHuman === true ? 'Y' : 'N';
-                ing.animal_sourced = info[i].sourceAnimal  === true ? 'Y' : 'N';
+                ing.animal_sourced = info[i].sourceAnimal === true ? 'Y' : 'N';
 
-                if( info.tissuesFluidsOrigin){
-                 ing.tissues_fluids_section={};
-                 //TODO do a for loop
+                if (info.tissuesFluidsOrigin) {
+                    ing.tissues_fluids_section = {};
+                    //TODO do a for loop
                     var tissuesArray = [
                         info.tissuesFluidsOrigin.nervousSystem,
                         info.tissuesFluidsOrigin.digestiveSystem,
@@ -761,433 +761,450 @@
                         info.tissuesFluidsOrigin.otherTissues,
                         info.tissuesFluidsOrigin.skinGlandSystem
                     ];
-                    for(var d=0;d<tissueArray.length; d++){
-                        var oneRecord=tissueArray[d];
-                        for(var g=0;g<oneRecord.list.length;g++){
-                            switch(oneRecord.list[g].name){
-                                case"brain":
-                                    ing.tissues_fluids_section.brain=oneRecord.list[g].value===true ?'Y' :'N';
-                                    break;
-                                case"brain-stem":
-                                    ing.tissues_fluids_section.brain_stem=oneRecord.list[g].value===true ?'Y' :'N';
-                                    break;
-                                //TODO complete
-                            }
+                    // for(var d=0;d<tissueArray.length; d++){
+                    var oneRecord = info.tissuesFluidsOrigin.nervousSystem;
+                    for (var g = 0; g < oneRecord.list.length; g++) {
+                        switch (oneRecord.list[g].name) {
+                            case "brain":
+                                ing.tissues_fluids_section.brain = oneRecord.list[g].value === true ? 'Y' : 'N';
+                                break;
+                            case "brain-stem":
+                                ing.tissues_fluids_section.brain_stem = oneRecord.list[g].value === true ? 'Y' : 'N';
+                                break;
 
-
+                            case "cerebellum":
+                                ing.tissues_fluids_section.cerebellum = oneRecord.list[g].value === true ? 'Y' : 'N';
+                                break;
+                            case "cerebrospinal-fluid":
+                                ing.tissues_fluids_section.cerebrospinal_fluid = oneRecord.list[g].value === true ? 'Y' : 'N';
+                                break;
+                            case "dorsal-root-ganglia":
+                                break;
+                            case "dura-mater":
+                                break;
+                            case "hypothalmus":
+                                break;
+                            case "retina-optic":
+                                break;
+                            case "spinal-cord":
+                                break;
+                            case "other-nervous":
+                                break;
+                            //TODO complete
                         }
-
                     }
 
-                   /// ing.tissues_fluids_section.brain_stem=info.tissuesFluidsOrigin.nervousSystem.list
+                    // }
+
+                    /// ing.tissues_fluids_section.brain_stem=info.tissuesFluidsOrigin.nervousSystem.list
 
                 }
                 //TODO fix the hasOtherDetials
-             /*   ing.tissuesFluidsOrigin = {
-                    nervousSystem: {
-                        title: "Nervous System", //the legend for checkbox list
-                        groupName: "nervous-sys", // the group name for checkboxlist
-                        list: [
-                            {name: "brain", label: "Brain", value: tissues.brain === 'Y' ? true : false},
-                            {name: "brain-stem", label: "Brain Stem", value: tissues.brain_stem === 'Y' ? true : false},
-                            {name: "cerebellum", label: "Cerebellum", value: tissues.cerebellum === 'Y' ? true : false},
-                            {
-                                name: "cerebrospinal-fluid",
-                                label: "Cerebrospinal Fluid",
-                                value: tissues.cerebrospinal_fluid === 'Y' ? true : false
-                            },
-                            {
-                                name: "dorsal-root-ganglia",
-                                label: "Dorsal Root Ganglia",
-                                value: tissues.dorsal_root_ganglia === 'Y' ? true : false
-                            },
-                            {name: "dura-mater", label: "Dura Mater", value: tissues.dura_mater === 'Y' ? true : false},
-                            {
-                                name: "hypothalmus",
-                                label: "hypothalmus",
-                                value: tissues.hypothalmus === 'Y' ? true : false
-                            },
-                            {
-                                name: "retina-optic",
-                                label: "Retina Optic",
-                                value: tissues.retina_optic === 'Y' ? true : false
-                            },
-                            {
-                                name: "spinal-cord",
-                                label: "Spinal Cord",
-                                value: tissues.spinal_cord === 'Y' ? true : false
-                            },
-                            {
-                                name: "trigerminal-ganglia",
-                                label: "Trigerminal Ganglia",
-                                value: tissues.trigerminal_ganglia === 'Y' ? true : false
-                            },
-                            {
-                                name: "other-nervous",
-                                label: "Other Nervous",
-                                value: tissues.other_nervous === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_nervous_details
-                            }
-                        ]
-                    },
-                    digestiveSystem: {
-                        title: "Digestive System",
-                        groupName: "digestive-sys",
-                        list: [
-                            {name: "appendix", label: "appendix", value: tissues.appendix === 'Y' ? true : false},
-                            {name: "bile", label: "bile", value: tissues.bile === 'Y' ? true : false},
-                            {
-                                name: "distal-ileum",
-                                label: "Distal Ileum",
-                                value: tissues.distal_ileum === 'Y' ? true : false
-                            },
-                            {
-                                name: "large-intestine",
-                                label: "Large Intestine",
-                                value: tissues.large_intestine === 'Y' ? true : false
-                            },
-                            {
-                                name: "saliva-salivary",
-                                label: "Saliva Salivary",
-                                value: tissues.saliva_salivary === 'Y' ? true : false
-                            },
-                            {
-                                name: "small-intestine",
-                                label: "Small Intestine",
-                                value: tissues.small_intestine === 'Y' ? true : false
-                            },
-                            {name: "stomach", label: "stomach", value: tissues.stomach === 'Y' ? true : false},
-                            {
-                                name: "other-digestive",
-                                label: "Other Digestive",
-                                value: tissues.other_digestive === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_digestive_details
-                            }
-                        ]
-                    },
-                    reproductiveSystem: {
-                        title: "Reproductive System",
-                        groupName: "reproductive-sys",
-                        list: [
-                            {
-                                name: "milk-products",
-                                label: "Milk Products",
-                                value: tissues.milk_products === 'Y' ? true : false
-                            },
-                            {name: "kidney", label: "kidney", value: tissues.kidney === 'Y' ? true : false},
-                            {name: "colostrum", label: "colostrum", value: tissues.colostrum === 'Y' ? true : false},
-                            {
-                                name: "mammary-glands",
-                                label: "Mammary Glands",
-                                value: tissues.mammary_glands === 'Y' ? true : false
-                            },
-                            {name: "ovaries", label: "ovaries", value: tissues.ovaries === 'Y' ? true : false},
-                            {name: "placenta", label: "placenta", value: tissues.placenta === 'Y' ? true : false},
-                            {
-                                name: "placental-fluid",
-                                label: "Placental Fluid",
-                                value: tissues.placental_fluid === 'Y' ? true : false
-                            },
-                            {name: "semen", label: "semen", value: tissues.semen === 'Y' ? true : false},
-                            {name: "testes", label: "testes", value: tissues.testes === 'Y' ? true : false},
-                            {name: "urine", label: "urine", value: tissues.urine === 'Y' ? true : false},
-                            {
-                                name: "other-reproductive",
-                                label: "Other Reproductive",
-                                value: tissues.other_reproductive === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_reproductive_details
-                            }
-                        ]
-                    },
-                    cardioSystem: {
-                        title: "Cardio System",
-                        groupName: "cardio-sys",
-                        list: [
-                            {
-                                name: "heart-pericardium",
-                                label: "Heart Pericardium",
-                                value: tissues.heart_pericardium === 'Y' ? true : false
-                            },
-                            {name: "lung", label: "lung", value: tissues.lung === 'Y' ? true : false},
-                            {
-                                name: "nasal-fluid",
-                                label: "Nasal Fluid",
-                                value: tissues.nasal_fluid === 'Y' ? true : false
-                            },
-                            {name: "trachea", label: "trachea", value: tissues.trachea === 'Y' ? true : false},
-                            {
-                                name: "other-cardio-respiratory",
-                                label: "Other Cardio Respiratory",
-                                value: tissues.other_cardio_respiratory === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_cardio_respiratory_details
-                            }
-                        ]
-                    },
-                    immuneSystem: {
-                        title: "Immune System",
-                        groupName: "immune-sys",
-                        list: [
-                            {
-                                name: "lymph-nodes",
-                                label: "Lymph Nodes",
-                                value: tissues.lymph_nodes === 'Y' ? true : false
-                            },
-                            {name: "spleen", label: "spleen", value: tissues.spleen === 'Y' ? true : false},
-                            {name: "thymus", label: "thymus", value: tissues.thymus === 'Y' ? true : false},
-                            {name: "tonsils", label: "tonsils", value: tissues.tonsils === 'Y' ? true : false},
-                            {
-                                name: "other-immune",
-                                label: "Other Immune",
-                                value: tissues.other_immune === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_immune_details
-                            }
-                        ]
-                    },
-                    skinGlandSystem: {
-                        title: "Skin Gland System",
-                        groupName: "skin-gland-sys",
-                        list: [
-                            {
-                                name: "adrenal-gland",
-                                label: "Adrenal Gland",
-                                value: tissues.adrenal_gland === 'Y' ? true : false
-                            },
-                            {
-                                name: "hair-hooves-feathers",
-                                label: "Hair Hooves Feathers",
-                                value: tissues.hair_hooves_feathers === 'Y' ? true : false
-                            },
-                            {name: "liver", label: "liver", value: tissues.liver === 'Y' ? true : false},
-                            {name: "pancreas", label: "pancreas", value: tissues.pancreas === 'Y' ? true : false},
-                            {name: "pituitary", label: "pituitary", value: tissues.pituitary === 'Y' ? true : false},
-                            {name: "skin-hides", label: "skinHides", value: tissues.skin_hides === 'Y' ? true : false},
-                            {
-                                name: "thyroid-parathyroid",
-                                label: "Thyroid Parathyroid",
-                                value: tissues.thyroid_parathyroid === 'Y' ? true : false
-                            },
-                            {
-                                name: "other-skin-glandular",
-                                label: "Other Skin Glandular",
-                                value: tissues.other_skin_glandular === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_skin_glandular_details
-                            }
-                        ]
-                    },
-                    musculoSkeletalSystem: {
-                        title: "Musculo Skeletal System",
-                        groupName: "musculo-skeletal-sys",
-                        list: [
-                            {name: "abdomen", label: "abdomen", value: tissues.abdomen === 'Y' ? true : false},
-                            {name: "skull", label: "skull", value: tissues.skull === 'Y' ? true : false},
-                            {name: "bones", label: "bones", value: tissues.bones === 'Y' ? true : false},
-                            {name: "collagen", label: "collagen", value: tissues.collagen === 'Y' ? true : false},
-                            {
-                                name: "tendons-ligaments",
-                                label: "Tendons Ligaments",
-                                value: tissues.tendons_ligaments === 'Y' ? true : false
-                            },
-                            {
-                                name: "vertebral-column",
-                                label: "Vertebral Column",
-                                value: tissues.vertebral_column === 'Y' ? true : false
-                            },
-                            {name: "muscle", label: "muscle", value: tissues.muscle === 'Y' ? true : false},
-                            {
-                                name: "other-musculo-skeletal",
-                                label: "Other Musculo Skeletal",
-                                value: tissues.other_musculo_skeletal === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_musculo_skeletal_details
-                            }
-                        ]
-                    },
-                    otherTissues: {
-                        title: "Other Tissues",
-                        groupName: "other-tissues",
-                        list: [
-                            {name: "adipose", label: "adipose", value: tissues.adipose === 'Y' ? true : false},
-                            {name: "ascites", label: "ascites", value: tissues.ascites === 'Y' ? true : false},
-                            {
-                                name: "antler-velvet",
-                                label: "Antler Velvet",
-                                value: tissues.antler_velvet === 'Y' ? true : false
-                            },
-                            {name: "serum", label: "serum", value: tissues.serum === 'Y' ? true : false},
-                            {
-                                name: "whole-blood",
-                                label: "Whole Blood",
-                                value: tissues.whole_blood === 'Y' ? true : false
-                            },
-                            {name: "plasma", label: "plasma", value: tissues.plasma === 'Y' ? true : false},
-                            {
-                                name: "embryonic-tissue",
-                                label: "Embryonic Tissue",
-                                value: tissues.embryonic_tissue === 'Y' ? true : false
-                            },
-                            {
-                                name: "fetal-tissue",
-                                label: "Fetal Tissue",
-                                value: tissues.fetal_tissue === 'Y' ? true : false
-                            },
-                            {
-                                name: "bone-marrow",
-                                label: "Bone Marrow",
-                                value: tissues.bone_marrow === 'Y' ? true : false
-                            },
-                            {
-                                name: "eyes-cornea",
-                                label: "Eyes Cornea",
-                                value: tissues.eyes_cornea === 'Y' ? true : false
-                            },
-                            {
-                                name: "gall-bladder",
-                                label: "Gall Bladder",
-                                value: tissues.gall_bladder === 'Y' ? true : false
-                            },
-                            {
-                                name: "other-fluids-tissues",
-                                label: "Other Fluids Tissues",
-                                value: tissues.other_fluids_tissues === 'Y' ? true : false,
-                                hasOtherDetails: true,
-                                otherText: tissues.other_fluids_tissues_details
-                            }
-                        ]
-                    }
-                };
-                ing.sourceAnimalDetails = {
+                /*   ing.tissuesFluidsOrigin = {
+                 nervousSystem: {
+                 title: "Nervous System", //the legend for checkbox list
+                 groupName: "nervous-sys", // the group name for checkboxlist
+                 list: [
+                 {name: "brain", label: "Brain", value: tissues.brain === 'Y' ? true : false},
+                 {name: "brain-stem", label: "Brain Stem", value: tissues.brain_stem === 'Y' ? true : false},
+                 {name: "cerebellum", label: "Cerebellum", value: tissues.cerebellum === 'Y' ? true : false},
+                 {
+                 name: "cerebrospinal-fluid",
+                 label: "Cerebrospinal Fluid",
+                 value: tissues.cerebrospinal_fluid === 'Y' ? true : false
+                 },
+                 {
+                 name: "dorsal-root-ganglia",
+                 label: "Dorsal Root Ganglia",
+                 value: tissues.dorsal_root_ganglia === 'Y' ? true : false
+                 },
+                 {name: "dura-mater", label: "Dura Mater", value: tissues.dura_mater === 'Y' ? true : false},
+                 {
+                 name: "hypothalmus",
+                 label: "hypothalmus",
+                 value: tissues.hypothalmus === 'Y' ? true : false
+                 },
+                 {
+                 name: "retina-optic",
+                 label: "Retina Optic",
+                 value: tissues.retina_optic === 'Y' ? true : false
+                 },
+                 {
+                 name: "spinal-cord",
+                 label: "Spinal Cord",
+                 value: tissues.spinal_cord === 'Y' ? true : false
+                 },
+                 {
+                 name: "trigerminal-ganglia",
+                 label: "Trigerminal Ganglia",
+                 value: tissues.trigerminal_ganglia === 'Y' ? true : false
+                 },
+                 {
+                 name: "other-nervous",
+                 label: "Other Nervous",
+                 value: tissues.other_nervous === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_nervous_details
+                 }
+                 ]
+                 },
+                 digestiveSystem: {
+                 title: "Digestive System",
+                 groupName: "digestive-sys",
+                 list: [
+                 {name: "appendix", label: "appendix", value: tissues.appendix === 'Y' ? true : false},
+                 {name: "bile", label: "bile", value: tissues.bile === 'Y' ? true : false},
+                 {
+                 name: "distal-ileum",
+                 label: "Distal Ileum",
+                 value: tissues.distal_ileum === 'Y' ? true : false
+                 },
+                 {
+                 name: "large-intestine",
+                 label: "Large Intestine",
+                 value: tissues.large_intestine === 'Y' ? true : false
+                 },
+                 {
+                 name: "saliva-salivary",
+                 label: "Saliva Salivary",
+                 value: tissues.saliva_salivary === 'Y' ? true : false
+                 },
+                 {
+                 name: "small-intestine",
+                 label: "Small Intestine",
+                 value: tissues.small_intestine === 'Y' ? true : false
+                 },
+                 {name: "stomach", label: "stomach", value: tissues.stomach === 'Y' ? true : false},
+                 {
+                 name: "other-digestive",
+                 label: "Other Digestive",
+                 value: tissues.other_digestive === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_digestive_details
+                 }
+                 ]
+                 },
+                 reproductiveSystem: {
+                 title: "Reproductive System",
+                 groupName: "reproductive-sys",
+                 list: [
+                 {
+                 name: "milk-products",
+                 label: "Milk Products",
+                 value: tissues.milk_products === 'Y' ? true : false
+                 },
+                 {name: "kidney", label: "kidney", value: tissues.kidney === 'Y' ? true : false},
+                 {name: "colostrum", label: "colostrum", value: tissues.colostrum === 'Y' ? true : false},
+                 {
+                 name: "mammary-glands",
+                 label: "Mammary Glands",
+                 value: tissues.mammary_glands === 'Y' ? true : false
+                 },
+                 {name: "ovaries", label: "ovaries", value: tissues.ovaries === 'Y' ? true : false},
+                 {name: "placenta", label: "placenta", value: tissues.placenta === 'Y' ? true : false},
+                 {
+                 name: "placental-fluid",
+                 label: "Placental Fluid",
+                 value: tissues.placental_fluid === 'Y' ? true : false
+                 },
+                 {name: "semen", label: "semen", value: tissues.semen === 'Y' ? true : false},
+                 {name: "testes", label: "testes", value: tissues.testes === 'Y' ? true : false},
+                 {name: "urine", label: "urine", value: tissues.urine === 'Y' ? true : false},
+                 {
+                 name: "other-reproductive",
+                 label: "Other Reproductive",
+                 value: tissues.other_reproductive === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_reproductive_details
+                 }
+                 ]
+                 },
+                 cardioSystem: {
+                 title: "Cardio System",
+                 groupName: "cardio-sys",
+                 list: [
+                 {
+                 name: "heart-pericardium",
+                 label: "Heart Pericardium",
+                 value: tissues.heart_pericardium === 'Y' ? true : false
+                 },
+                 {name: "lung", label: "lung", value: tissues.lung === 'Y' ? true : false},
+                 {
+                 name: "nasal-fluid",
+                 label: "Nasal Fluid",
+                 value: tissues.nasal_fluid === 'Y' ? true : false
+                 },
+                 {name: "trachea", label: "trachea", value: tissues.trachea === 'Y' ? true : false},
+                 {
+                 name: "other-cardio-respiratory",
+                 label: "Other Cardio Respiratory",
+                 value: tissues.other_cardio_respiratory === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_cardio_respiratory_details
+                 }
+                 ]
+                 },
+                 immuneSystem: {
+                 title: "Immune System",
+                 groupName: "immune-sys",
+                 list: [
+                 {
+                 name: "lymph-nodes",
+                 label: "Lymph Nodes",
+                 value: tissues.lymph_nodes === 'Y' ? true : false
+                 },
+                 {name: "spleen", label: "spleen", value: tissues.spleen === 'Y' ? true : false},
+                 {name: "thymus", label: "thymus", value: tissues.thymus === 'Y' ? true : false},
+                 {name: "tonsils", label: "tonsils", value: tissues.tonsils === 'Y' ? true : false},
+                 {
+                 name: "other-immune",
+                 label: "Other Immune",
+                 value: tissues.other_immune === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_immune_details
+                 }
+                 ]
+                 },
+                 skinGlandSystem: {
+                 title: "Skin Gland System",
+                 groupName: "skin-gland-sys",
+                 list: [
+                 {
+                 name: "adrenal-gland",
+                 label: "Adrenal Gland",
+                 value: tissues.adrenal_gland === 'Y' ? true : false
+                 },
+                 {
+                 name: "hair-hooves-feathers",
+                 label: "Hair Hooves Feathers",
+                 value: tissues.hair_hooves_feathers === 'Y' ? true : false
+                 },
+                 {name: "liver", label: "liver", value: tissues.liver === 'Y' ? true : false},
+                 {name: "pancreas", label: "pancreas", value: tissues.pancreas === 'Y' ? true : false},
+                 {name: "pituitary", label: "pituitary", value: tissues.pituitary === 'Y' ? true : false},
+                 {name: "skin-hides", label: "skinHides", value: tissues.skin_hides === 'Y' ? true : false},
+                 {
+                 name: "thyroid-parathyroid",
+                 label: "Thyroid Parathyroid",
+                 value: tissues.thyroid_parathyroid === 'Y' ? true : false
+                 },
+                 {
+                 name: "other-skin-glandular",
+                 label: "Other Skin Glandular",
+                 value: tissues.other_skin_glandular === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_skin_glandular_details
+                 }
+                 ]
+                 },
+                 musculoSkeletalSystem: {
+                 title: "Musculo Skeletal System",
+                 groupName: "musculo-skeletal-sys",
+                 list: [
+                 {name: "abdomen", label: "abdomen", value: tissues.abdomen === 'Y' ? true : false},
+                 {name: "skull", label: "skull", value: tissues.skull === 'Y' ? true : false},
+                 {name: "bones", label: "bones", value: tissues.bones === 'Y' ? true : false},
+                 {name: "collagen", label: "collagen", value: tissues.collagen === 'Y' ? true : false},
+                 {
+                 name: "tendons-ligaments",
+                 label: "Tendons Ligaments",
+                 value: tissues.tendons_ligaments === 'Y' ? true : false
+                 },
+                 {
+                 name: "vertebral-column",
+                 label: "Vertebral Column",
+                 value: tissues.vertebral_column === 'Y' ? true : false
+                 },
+                 {name: "muscle", label: "muscle", value: tissues.muscle === 'Y' ? true : false},
+                 {
+                 name: "other-musculo-skeletal",
+                 label: "Other Musculo Skeletal",
+                 value: tissues.other_musculo_skeletal === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_musculo_skeletal_details
+                 }
+                 ]
+                 },
+                 otherTissues: {
+                 title: "Other Tissues",
+                 groupName: "other-tissues",
+                 list: [
+                 {name: "adipose", label: "adipose", value: tissues.adipose === 'Y' ? true : false},
+                 {name: "ascites", label: "ascites", value: tissues.ascites === 'Y' ? true : false},
+                 {
+                 name: "antler-velvet",
+                 label: "Antler Velvet",
+                 value: tissues.antler_velvet === 'Y' ? true : false
+                 },
+                 {name: "serum", label: "serum", value: tissues.serum === 'Y' ? true : false},
+                 {
+                 name: "whole-blood",
+                 label: "Whole Blood",
+                 value: tissues.whole_blood === 'Y' ? true : false
+                 },
+                 {name: "plasma", label: "plasma", value: tissues.plasma === 'Y' ? true : false},
+                 {
+                 name: "embryonic-tissue",
+                 label: "Embryonic Tissue",
+                 value: tissues.embryonic_tissue === 'Y' ? true : false
+                 },
+                 {
+                 name: "fetal-tissue",
+                 label: "Fetal Tissue",
+                 value: tissues.fetal_tissue === 'Y' ? true : false
+                 },
+                 {
+                 name: "bone-marrow",
+                 label: "Bone Marrow",
+                 value: tissues.bone_marrow === 'Y' ? true : false
+                 },
+                 {
+                 name: "eyes-cornea",
+                 label: "Eyes Cornea",
+                 value: tissues.eyes_cornea === 'Y' ? true : false
+                 },
+                 {
+                 name: "gall-bladder",
+                 label: "Gall Bladder",
+                 value: tissues.gall_bladder === 'Y' ? true : false
+                 },
+                 {
+                 name: "other-fluids-tissues",
+                 label: "Other Fluids Tissues",
+                 value: tissues.other_fluids_tissues === 'Y' ? true : false,
+                 hasOtherDetails: true,
+                 otherText: tissues.other_fluids_tissues_details
+                 }
+                 ]
+                 }
+                 };
+                 ing.sourceAnimalDetails = {
 
-                    primateTypeList: [
-                        {
-                            label: "NONHUMANPRIMATE",
-                            type: "text",
-                            name: "nhp-type",
-                            required: false,
-                            value: srcAnimal.nonhuman_primate_type
-                        },
-                        {
-                            label: "AQUATICTYPE",
-                            type: "text",
-                            name: "aqua-type",
-                            required: false,
-                            value: srcAnimal.aquatic_type
-                        },
-                        {
-                            label: "AVIANTYPE",
-                            type: "text",
-                            name: "avian-type",
-                            required: false,
-                            value: srcAnimal.avian_type
-                        },
-                        {
-                            label: "BOVINETYPE",
-                            type: "text",
-                            name: "bovine-type",
-                            required: false,
-                            value: srcAnimal.bovine_type
-                        },
-                        {
-                            label: "CANINETYPE",
-                            type: "text",
-                            name: "canine-type",
-                            required: false,
-                            value: srcAnimal.canine_type
-                        },
-                        {
-                            label: "CAPRINETYPE",
-                            type: "text",
-                            name: "caprine-type",
-                            required: false,
-                            value: srcAnimal.caprine_type
-                        },
-                        {
-                            label: "CERVIDAETYPE",
-                            type: "text",
-                            name: "cervidae-type",
-                            required: false,
-                            value: srcAnimal.cervidae_type
-                        },
-                        {
-                            label: "EQUINETYPE",
-                            type: "text",
-                            name: "equine-type",
-                            required: false,
-                            value: srcAnimal.equine_type
-                        },
-                        {
-                            label: "FELINETYPE",
-                            type: "text",
-                            name: "feline-type",
-                            required: false,
-                            value: srcAnimal.feline_type
-                        },
-                        {
-                            label: "OVINETYPE",
-                            type: "text",
-                            name: "ovine-type",
-                            required: false,
-                            value: srcAnimal.ovine_type
-                        },
-                        {
-                            label: "PORCINETYPE",
-                            type: "text",
-                            name: "porcine-type",
-                            required: false,
-                            value: srcAnimal.porcine_type
-                        },
-                        {
-                            label: "RODENTTYPE",
-                            type: "text",
-                            name: "rodent-type",
-                            required: false,
-                            value: srcAnimal.rodent_type
-                        },
-                        {
-                            label: "OTHERANIMALTYPE",
-                            type: "text",
-                            name: "other-animal-type",
-                            required: false,
-                            value: srcAnimal.other_type
-                        },
-                        {
-                            label: "CONTROLLEDPOP",
-                            type: "select",
-                            name: "controlled-pop",
-                            required: true,
-                            value: srcAnimal.is_controlled_pop
-                        },
-                        {
-                            label: "BIOTECHDERIVED",
-                            type: "select",
-                            name: "biotech-derived",
-                            required: true,
-                            value: srcAnimal.is_biotech_derived
-                        },
-                        {
-                            label: "CELLLINE",
-                            type: "select",
-                            name: "cell-line",
-                            required: true,
-                            value: srcAnimal.is_cell_line
-                        },
-                        {
-                            label: "AGEANIMALS",
-                            type: "number",
-                            name: "age-animals",
-                            required: true,
-                            value: srcAnimal.animal_age
-                        }/!*,
-                         {label : "SPECIFY", type: "text", name : "specify", required : false, value : srcAnimal.nonhuman_primate_type}*!/
-                    ],
+                 primateTypeList: [
+                 {
+                 label: "NONHUMANPRIMATE",
+                 type: "text",
+                 name: "nhp-type",
+                 required: false,
+                 value: srcAnimal.nonhuman_primate_type
+                 },
+                 {
+                 label: "AQUATICTYPE",
+                 type: "text",
+                 name: "aqua-type",
+                 required: false,
+                 value: srcAnimal.aquatic_type
+                 },
+                 {
+                 label: "AVIANTYPE",
+                 type: "text",
+                 name: "avian-type",
+                 required: false,
+                 value: srcAnimal.avian_type
+                 },
+                 {
+                 label: "BOVINETYPE",
+                 type: "text",
+                 name: "bovine-type",
+                 required: false,
+                 value: srcAnimal.bovine_type
+                 },
+                 {
+                 label: "CANINETYPE",
+                 type: "text",
+                 name: "canine-type",
+                 required: false,
+                 value: srcAnimal.canine_type
+                 },
+                 {
+                 label: "CAPRINETYPE",
+                 type: "text",
+                 name: "caprine-type",
+                 required: false,
+                 value: srcAnimal.caprine_type
+                 },
+                 {
+                 label: "CERVIDAETYPE",
+                 type: "text",
+                 name: "cervidae-type",
+                 required: false,
+                 value: srcAnimal.cervidae_type
+                 },
+                 {
+                 label: "EQUINETYPE",
+                 type: "text",
+                 name: "equine-type",
+                 required: false,
+                 value: srcAnimal.equine_type
+                 },
+                 {
+                 label: "FELINETYPE",
+                 type: "text",
+                 name: "feline-type",
+                 required: false,
+                 value: srcAnimal.feline_type
+                 },
+                 {
+                 label: "OVINETYPE",
+                 type: "text",
+                 name: "ovine-type",
+                 required: false,
+                 value: srcAnimal.ovine_type
+                 },
+                 {
+                 label: "PORCINETYPE",
+                 type: "text",
+                 name: "porcine-type",
+                 required: false,
+                 value: srcAnimal.porcine_type
+                 },
+                 {
+                 label: "RODENTTYPE",
+                 type: "text",
+                 name: "rodent-type",
+                 required: false,
+                 value: srcAnimal.rodent_type
+                 },
+                 {
+                 label: "OTHERANIMALTYPE",
+                 type: "text",
+                 name: "other-animal-type",
+                 required: false,
+                 value: srcAnimal.other_type
+                 },
+                 {
+                 label: "CONTROLLEDPOP",
+                 type: "select",
+                 name: "controlled-pop",
+                 required: true,
+                 value: srcAnimal.is_controlled_pop
+                 },
+                 {
+                 label: "BIOTECHDERIVED",
+                 type: "select",
+                 name: "biotech-derived",
+                 required: true,
+                 value: srcAnimal.is_biotech_derived
+                 },
+                 {
+                 label: "CELLLINE",
+                 type: "select",
+                 name: "cell-line",
+                 required: true,
+                 value: srcAnimal.is_cell_line
+                 },
+                 {
+                 label: "AGEANIMALS",
+                 type: "number",
+                 name: "age-animals",
+                 required: true,
+                 value: srcAnimal.animal_age
+                 }/!*,
+                 {label : "SPECIFY", type: "text", name : "specify", required : false, value : srcAnimal.nonhuman_primate_type}*!/
+                 ],
 
-                    countryList: []
-                };*/
+                 countryList: []
+                 };*/
                 list.push(ing);
             }
         }
@@ -1248,11 +1265,11 @@
                 "roa_group": {
                     "roa_details": getRouteAdminList(item.routeAdmins)
                 },
-                "country_group":{
+                "country_group": {
                     "country_manufacturer": getFormulationCountryList(item.countryList)
                 }
             };
-                formulationList.push(obj);
+            formulationList.push(obj);
         });
         return formulationList;
     }
