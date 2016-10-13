@@ -10,6 +10,8 @@
     DossierService.$inject = ['$http', '$q'];
     function DossierService($http, $q) {
         // Define the DossierService function
+        function DossierService() {}
+
         function DossierService(dossierData) {
             //construction logic
 
@@ -20,7 +22,7 @@
 
         }
 
-        DossierService.dossier = {
+        DossierService.dossierDefault = {
             dossierID: "569522",
             enrolmentVersion: "1.23",
             dateSaved: "1999-01-21",
@@ -51,9 +53,9 @@
 
         DossierService.prototype = {
 
-            _default: {},
+            _default: DossierService.dossierDefault,
 
-            loadFromFile: function (url) {
+           /* loadFromFile: function (url) {
                 var deferred = $q.defer();
                 // Fetch the player from Dribbble
                 // var url = 'http://api.dribbble.com/players/' + player + '?callback=JSON_CALLBACK';
@@ -74,15 +76,21 @@
                 });
 
                 return deferred.promise;
-            },
+            },*/
 
-            getDossierInfo: function (info) {
+            loadFromFile: function (info) {
 
                 if (!info)
                     return this._default;
 
+                if(!info['DOSSIER_ENROL'])
+                    return this._default;
+
+                info = info['DOSSIER_ENROL'];
+
                 return {
                     dossierID: info.dossier_id,
+                    relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
                     applicationType: info.application_type.capitalize(),
@@ -136,15 +144,7 @@
                             ]
 
                         },
-                        therapeutic: {//grid
-                            classifications : [ //hardcoded cauz missing in the json file
-                                {"id":1, "name":"classification1"},
-                                {"id":2, "name":"classification2"},
-                                {"id":3, "name":"classification3"},
-                                {"id":4, "name":"classification4"},
-                                {"id":5, "name":"classification5"}
-                            ]
-                        },
+                        therapeutic: info.therapeutic_class_list.therapeutic_class,
                         canRefProducts: {
                             productList : getCanRefProductList(info.ref_product_list.cdn_ref_product)
                         },//grid
@@ -154,10 +154,7 @@
                         }//tab + grid +
 
                     },
-                    contactInfo: { //grid
-                        contactList: [],
-                        columnDef: []
-                    }
+                   contactList: getContactList(info.contact_record)
 
                 };
 
@@ -192,44 +189,44 @@
 
                 return list;
 
-            },
-
-            getContactList: function (contacts) {
-                var list = [];
-
-                if (contacts) {
-                    for (var i = 0; i < contacts.length; i++) {
-                        var contact = {};
-                        contact.contactID = contacts[i].contact_id;
-                        contact.amendRecord = contacts[i].amend_record;
-                        contact.manufacturer = contacts[i].manufacturer;
-                        contact.mailing = contacts[i].mailing;
-                        contact.billing = contacts[i].billing;
-                        contact.importer = contacts[i].importer;
-                        contact.contactRole = contacts[i].dossier_contact_details.rep_contact_role;
-                        contact.salutation = contacts[i].dossier_contact_details.salutation;
-                        contact.givenName = contacts[i].dossier_contact_details.given_name;
-                        contact.initials = contacts[i].dossier_contact_details.initials;
-                        contact.surname = contacts[i].dossier_contact_details.surname;
-                        contact.title = contacts[i].dossier_contact_details.job_title;
-                        contact.language = contacts[i].dossier_contact_details.language_correspondance;
-                        contact.phone = contacts[i].dossier_contact_details.phone_num;
-                        contact.phoneExt = contacts[i].dossier_contact_details.phone_ext;
-                        contact.fax = contacts[i].dossier_contact_details.fax_num;
-                        contact.email = contacts[i].dossier_contact_details.email;
-
-                        list.push(contact);
-                    }
-                }
-
-
-                return list;
-
             }
+
+
         };
 
         // Return a reference to the function
         return DossierService;
+    }
+
+    function getContactList(contacts){
+
+        var list = [];
+
+        if (angular.isDefined(contacts)) {
+
+            for(var i = 0; i < contacts.length; i++){
+                var contact = {};
+                contact.amend = contacts[i].amend_record === 'Y' ? true:false;
+                contact.repRole = contacts[i].rep_contact_role;
+                contact.salutation = contacts[i].rep_contact_details.salutation;
+                contact.givenName = contacts[i].rep_contact_details.given_name;
+                contact.surname =  contacts[i].rep_contact_details.surname;
+                contact.initials = contacts[i].rep_contact_details.initials;
+                contact.title = contacts[i].rep_contact_details.job_title;
+                contact.phone = contacts[i].rep_contact_details.phone_num;
+                contact.PhoneExt = contacts[i].rep_contact_details.phone_ext;
+                contact.fax = contacts[i].rep_contact_details.fax_num;
+                contact.email = contacts[i].rep_contact_details.email;
+                contact.language = contacts[i].rep_contact_details.language_correspondance;
+
+                list.push(contact);
+
+            }
+
+        }
+
+        return list;
+
     }
 
     function getCanRefProductList (info){

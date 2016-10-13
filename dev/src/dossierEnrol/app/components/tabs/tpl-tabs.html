@@ -10,14 +10,14 @@
     </ul>
     <div class="tabpanels">
         <div id="formulations-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[0].selected">
-            <cmp-formulations></cmp-formulations>
+            <cmp-formulations formulations="tabsCtrl.formulationList"></cmp-formulations>
             <!--<p>
                 Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.
             </p>-->
         </div>
 
         <div id="appendix4-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[1].selected">
-            <cmp-appendix-four></cmp-appendix-four>
+            <cmp-appendix-four ingredients="tabsCtrl.appendix4List"></cmp-appendix-four>
         </div>
     </div>
 </div>

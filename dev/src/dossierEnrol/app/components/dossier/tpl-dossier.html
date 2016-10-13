@@ -6,7 +6,7 @@
         </header>
         <div class="panel-body">
             <hpfb-file-select update-model-root="dos.showContent(fileContent)"
-                              root-elem="{{dos.dossierModel}}"></hpfb-file-select>
+                              root-elem="DOSSIER_ENROL"></hpfb-file-select>
         </div>
     </section>
 
@@ -43,7 +43,7 @@
                 <div class="col-xs-12 form-group"
                      ng-class="{'has-error':dos.dossierForm.productName.$invalid}">
                     <label for="product-name" class="required">
-                        <span class="field-name">{{'PROPNAME' |translate}}</span>
+                        <span class="field-name">{{'PROD_NAME' |translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <strong id="productName-error" class="error"
                                 ng-if="dos.showError(dos.dossierForm.productName.$invalid,dos.dossierForm.productName.$touched)">
@@ -95,7 +95,7 @@
                         <h2 class="panel-title">{{'THERA_CLASS'|translate}}</h2>
                     </header>
                     <div class="panel-body">
-                        <cmp-therapeutic-class list-items=""></cmp-therapeutic-class>
+                        <cmp-therapeutic-class list-items="dos.dossierModel"></cmp-therapeutic-class>
                     </div>
                 </section>
             </div>
@@ -140,7 +140,8 @@
                 </div>
             </div>
             <div>
-                <cmp-tabs></cmp-tabs>
+                <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations"
+                          appendix4-list="dos.dossierModel.drugProduct.appendixFour"></cmp-tabs>
             </div>
         </div>
 
@@ -158,7 +159,7 @@
                 <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <cmp-rep-contact-list contacts="dos.dossierModel.contactInfo.contactList"
+                <cmp-rep-contact-list contacts="dos.dossierModel.contactList"
                                       parent-dirty="dos.dossierForm.$dirty"
                                       show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
 

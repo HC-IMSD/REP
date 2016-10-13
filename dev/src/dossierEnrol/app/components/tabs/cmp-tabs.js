@@ -15,7 +15,10 @@
         templateUrl: './components/tabs/tpl-tabs.html',
         controller: tabsCtrl,
         controllerAs: 'tabsCtrl',
-        bindings: {}
+        bindings: {
+            formulationList : '<',
+            appendix4List : '<'
+        }
     });
 
     tabsCtrl.$inject = ['$scope'];

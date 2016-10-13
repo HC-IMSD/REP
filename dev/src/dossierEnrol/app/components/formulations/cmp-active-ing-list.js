@@ -37,48 +37,7 @@
                 {label: "CAS_NUM", "binding": "cas", width: "15"},
                 {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
             ];
-            self.ingList = [
-                {
-                    "ingName": "ing1",
-                    "cas": "00-00-1",
-                    "humanAnimalSourced": "No",
-                    "standard": "A",
-                    "strength": "A",
-                    "per": "A",
-                    "units": "A",
-                    "calcAsBase": true,
-                    "animalHumanSourced": true,
-                    "nanoMaterial": "Yes",
-                    "nanoMaterialOther": "A"
-                },
-                {
-                    "ingName": "ing2",
-                    "cas": "00-00-2",
-                    "humanAnimalSourced": "Yes",
-                    "standard": "A",
-                    "strength": "A",
-                    "per": "A",
-                    "units": "A",
-                    "calcAsBase": true,
-                    "animalHumanSourced": false,
-                    "nanoMaterial": "Yes",
-                    "nanoMaterialOther": "A"
-                },
-                {
-                    "ingName": "ing3",
-                    "cas": "00-00-3",
-                    "humanAnimalSourced": "Yes",
-                    "standard": "A",
-                    "strength": "A",
-                    "per": "A",
-                    "units": "A",
-                    "calcAsBase": false,
-                    "animalHumanSourced": true,
-                    "nanoMaterial": "Other",
-                    "nanoMaterialOther": "A"
-                },
-
-            ];
+            self.ingList = [];
 
             if (self.ingredients) {
                 self.ingList = self.ingredients;

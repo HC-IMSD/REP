@@ -35,11 +35,7 @@
             var _countries = self.withUnknown?["UNKNOWN"].concat(getCountriesISO3166.getCountryList3Letter()):getCountriesISO3166.getCountryList3Letter();
             self.model={
                 countries : _countries,
-                list : [
-                    {"id":1, "name":"ARG"},
-                    {"id":2, "name":"CAN"},
-                    {"id":3, "name":"USA"}
-                ],
+                list : [],
                 selected:{}
 
 

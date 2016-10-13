@@ -34,11 +34,11 @@
         self.$onInit = function () {
 
             self.model = {
-                list: [
-                    {"id": 1, "roa": "DENTAL", "otherRoaDetails": ""},
-                    {"id": 2, "roa": "BUCCAL", "otherRoaDetails": ""},
-                    {"id": 3, "roa": "BUCCAL", "otherRoaDetails": ""}
-                ]
+                list: []
+            }
+
+            if(self.listItems){
+                self.model.list = self.listItems;
             }
         };
 
