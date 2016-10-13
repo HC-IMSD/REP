@@ -153,7 +153,7 @@
          * @ngdoc disables the XML save button
          */
         function disableXMLSave(){
-            self.disableXML = self.activityEnrolForm.$invalid || (self.dossierModel.applicationType== self.applicationInfoService.getApprovedType() && self.isExtern());
+            self.disableXML = self.dossierForm.$invalid || (self.dossierModel.applicationType== self.applicationInfoService.getApprovedType() && self.isExtern());
 
         }
 

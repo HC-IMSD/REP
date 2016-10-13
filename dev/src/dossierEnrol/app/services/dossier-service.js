@@ -160,7 +160,7 @@
                                 },
                                 {name: "thyroid-disease", label: "Thyroid Disease", value: info.thyroid_disease},
                                 {name: "ulcer-gastro", label: "Ulcer Gastro", value: info.ulcer_gastro},
-                                {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO val
+                               // {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO remove, not in model
                             ]
 
                         },
@@ -192,7 +192,6 @@
 
             },
 
-
             getContactList: function (contacts) {
                 var list = [];
 
@@ -220,6 +219,55 @@
             }
         };
 
+
+        DossierService.prototype.dossierToOutput = function (jsonObj) {
+            if (!jsonObj) return null;
+            var baseDossier = {};
+            //order is important!!! Must match schema
+            baseDossier.company_id = jsonObj.companyId; //TODO missing from model
+            baseDossier.dossier_id = jsonObj.dossierId; //TODO missing from model and XML! Net New
+            baseDossier.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
+            baseDossier.date_saved = jsonObj.dateSaved;
+            baseDossier.application_type = jsonObj.applicationType;
+            baseDossier.software_version = "1.0"; //TODO: hard code or make a function, should be central
+            baseDossier.data_checksum = "";
+            if (jsonObj.contactList) { //TODO skip if empty list?
+                baseDossier.is_sched_a = repContactToOutput(jsonObj.contactList);
+            }
+            baseDossier.brand_name = jsonObj.drugProduct.brandName; //TODO confirm model
+            baseDossier.common_name = jsonObj.drugProduct.common_name;
+            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
+            baseDossier.ref_product_list = {};
+            baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
+            if (jsonObj.canRefProducts && jsonObj.canRefProducts.productList) {
+                baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.canRefProducts.productList)
+            }
+            baseDossier.human_drug_use = jsonObj.humanDrugUse;
+            baseDossier.radiopharm_drug_use = jsonObj.radiopharmDrugUse;
+            baseDossier.vet_drug_use = jsonObj.vetDrugUse;
+            baseDossier.disinfectant_drug_use = jsonObj.disinfectantDrugUse;
+            baseDossier.therapeutic_class_list = {};
+            if (jsonObj.therapeutic) {
+                baseDossier.therapeutic_class_list.classification = therapeuticClassToOutput(jsonObj.therapeutic.classifications);
+            }
+            ;
+            baseDossier.is_sched_a = jsonObj.isScheduleA;
+            if (jsonObj.contactList && jsonObj.contactList) {
+                repContactToOutput(jsonObj.contactList)
+            }
+            //TODO schedule_a_group  (jsonObj.scheduleAGroup)
+            if (jsonObj.drugProduct) {
+                var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFour)
+                if (appendix4) {
+                    outDossier.appendix4_group = appendix4;
+                }
+                var formulations = formulationListToOutput(jsonObj.drugProduct.formulations)
+                if (formulations) {
+                    outDossier.formulation_group.formulation_details = formulations;
+                }
+            }
+            return (baseDossier);
+        }
 
         /**
          * Determines if any of the appendices have a data error
@@ -303,6 +351,23 @@
         }
         return list;
 
+    }
+
+    function canRefProductListToOutput(info) {
+        var resultList = [];
+
+        if (angular.isDefined(info)) {
+            for (var i = 0; i < info.length; i++) {
+                var product = {};
+                product.medicinal_ingredient = info[i].medIngredient;
+                product.dosage_form = info[i].dosageForm;
+                product.dosage_form_other = info[i].dosageFormOther;
+                product.strengths = info[i].strengths;
+                product.company_name = info[i].companyName;
+                resultList.push(product);
+            }
+        }
+        return resultList;
     }
 
     function getAppendix4IngredientList(info) {
@@ -736,480 +801,370 @@
 
     }
 
-
     function appendix4IngredientListToOutput(info) {
-        var list = [];
+        var appendices = []; //TODO may need better error checking
 
-        if (angular.isDefined(info)) {
-            for (var i = 0; i < info.length; i++) {
-                var ing = {};
-                ing.ingredient_id = info[i].id;
-                ing.ingredient_name = info[i].name;
-                ing.human_sourced = info[i].sourceHuman === true ? 'Y' : 'N';
-                ing.animal_sourced = info[i].sourceAnimal === true ? 'Y' : 'N';
+        if (!angular.isDefined(info)) {
+            return null;
+        }
+        for (var i = 0; i < info.length; i++) {
+            var ing = {};
+            ing.ingredient_id = info[i].id;
+            ing.ingredient_name = info[i].name;
+            ing.human_sourced = info[i].sourceHuman === true ? 'Y' : 'N';
+            ing.animal_sourced = info[i].sourceAnimal === true ? 'Y' : 'N';
 
-                if (info.tissuesFluidsOrigin) {
-                    ing.tissues_fluids_section = {};
-                    //TODO do a for loop
-                    var tissuesArray = [
-                        info.tissuesFluidsOrigin.nervousSystem,
-                        info.tissuesFluidsOrigin.digestiveSystem,
-                        info.tissuesFluidsOrigin.reproductiveSystem,
-                        info.tissuesFluidsOrigin.immuneSystem,
-                        info.tissuesFluidsOrigin.cardioSystem,
-                        info.tissuesFluidsOrigin.musculoSkeletalSystem,
-                        info.tissuesFluidsOrigin.otherTissues,
-                        info.tissuesFluidsOrigin.skinGlandSystem
-                    ];
-                    // for(var d=0;d<tissueArray.length; d++){
-                    var oneRecord = info.tissuesFluidsOrigin.nervousSystem;
-                    for (var g = 0; g < oneRecord.list.length; g++) {
-                        switch (oneRecord.list[g].name) {
-                            case "brain":
-                                ing.tissues_fluids_section.brain = oneRecord.list[g].value === true ? 'Y' : 'N';
-                                break;
-                            case "brain-stem":
-                                ing.tissues_fluids_section.brain_stem = oneRecord.list[g].value === true ? 'Y' : 'N';
-                                break;
+            if (info.tissuesFluidsOrigin) {
+                ing.tissues_fluids_section = {};
+                var oneRecord = info.tissuesFluidsOrigin.nervousSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+                        case "brain":
+                            ing.tissues_fluids_section.brain = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "brain-stem":
+                            ing.tissues_fluids_section.brain_stem = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
 
-                            case "cerebellum":
-                                ing.tissues_fluids_section.cerebellum = oneRecord.list[g].value === true ? 'Y' : 'N';
-                                break;
-                            case "cerebrospinal-fluid":
-                                ing.tissues_fluids_section.cerebrospinal_fluid = oneRecord.list[g].value === true ? 'Y' : 'N';
-                                break;
-                            case "dorsal-root-ganglia":
-                                break;
-                            case "dura-mater":
-                                break;
-                            case "hypothalmus":
-                                break;
-                            case "retina-optic":
-                                break;
-                            case "spinal-cord":
-                                break;
-                            case "other-nervous":
-                                break;
-                            //TODO complete
-                        }
+                        case "cerebellum":
+                            ing.tissues_fluids_section.cerebellum = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "cerebrospinal-fluid":
+                            ing.tissues_fluids_section.cerebrospinal_fluid = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "dorsal-root-ganglia":
+                            ing.dorsal_root_ganglia = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "dura-mater":
+                            ing.dura_mater = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "hypothalmus":
+                            ing.hypothalmus = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "retina-optic":
+                            ing.retina_optic = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "spinal-cord":
+                            ing.spinal_cord = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "trigerminal-ganglia":
+                            ing.trigerminal_ganglia = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "other-nervous":
+                            ing.other_nervous = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_nervous_details = oneRecord.list[g].otherText;
+                            break;
+                        //TODO complete
                     }
-
-                    // }
-
-                    /// ing.tissues_fluids_section.brain_stem=info.tissuesFluidsOrigin.nervousSystem.list
-
                 }
-                //TODO fix the hasOtherDetials
-                /*   ing.tissuesFluidsOrigin = {
-                 nervousSystem: {
-                 title: "Nervous System", //the legend for checkbox list
-                 groupName: "nervous-sys", // the group name for checkboxlist
-                 list: [
-                 {name: "brain", label: "Brain", value: tissues.brain === 'Y' ? true : false},
-                 {name: "brain-stem", label: "Brain Stem", value: tissues.brain_stem === 'Y' ? true : false},
-                 {name: "cerebellum", label: "Cerebellum", value: tissues.cerebellum === 'Y' ? true : false},
-                 {
-                 name: "cerebrospinal-fluid",
-                 label: "Cerebrospinal Fluid",
-                 value: tissues.cerebrospinal_fluid === 'Y' ? true : false
-                 },
-                 {
-                 name: "dorsal-root-ganglia",
-                 label: "Dorsal Root Ganglia",
-                 value: tissues.dorsal_root_ganglia === 'Y' ? true : false
-                 },
-                 {name: "dura-mater", label: "Dura Mater", value: tissues.dura_mater === 'Y' ? true : false},
-                 {
-                 name: "hypothalmus",
-                 label: "hypothalmus",
-                 value: tissues.hypothalmus === 'Y' ? true : false
-                 },
-                 {
-                 name: "retina-optic",
-                 label: "Retina Optic",
-                 value: tissues.retina_optic === 'Y' ? true : false
-                 },
-                 {
-                 name: "spinal-cord",
-                 label: "Spinal Cord",
-                 value: tissues.spinal_cord === 'Y' ? true : false
-                 },
-                 {
-                 name: "trigerminal-ganglia",
-                 label: "Trigerminal Ganglia",
-                 value: tissues.trigerminal_ganglia === 'Y' ? true : false
-                 },
-                 {
-                 name: "other-nervous",
-                 label: "Other Nervous",
-                 value: tissues.other_nervous === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_nervous_details
-                 }
-                 ]
-                 },
-                 digestiveSystem: {
-                 title: "Digestive System",
-                 groupName: "digestive-sys",
-                 list: [
-                 {name: "appendix", label: "appendix", value: tissues.appendix === 'Y' ? true : false},
-                 {name: "bile", label: "bile", value: tissues.bile === 'Y' ? true : false},
-                 {
-                 name: "distal-ileum",
-                 label: "Distal Ileum",
-                 value: tissues.distal_ileum === 'Y' ? true : false
-                 },
-                 {
-                 name: "large-intestine",
-                 label: "Large Intestine",
-                 value: tissues.large_intestine === 'Y' ? true : false
-                 },
-                 {
-                 name: "saliva-salivary",
-                 label: "Saliva Salivary",
-                 value: tissues.saliva_salivary === 'Y' ? true : false
-                 },
-                 {
-                 name: "small-intestine",
-                 label: "Small Intestine",
-                 value: tissues.small_intestine === 'Y' ? true : false
-                 },
-                 {name: "stomach", label: "stomach", value: tissues.stomach === 'Y' ? true : false},
-                 {
-                 name: "other-digestive",
-                 label: "Other Digestive",
-                 value: tissues.other_digestive === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_digestive_details
-                 }
-                 ]
-                 },
-                 reproductiveSystem: {
-                 title: "Reproductive System",
-                 groupName: "reproductive-sys",
-                 list: [
-                 {
-                 name: "milk-products",
-                 label: "Milk Products",
-                 value: tissues.milk_products === 'Y' ? true : false
-                 },
-                 {name: "kidney", label: "kidney", value: tissues.kidney === 'Y' ? true : false},
-                 {name: "colostrum", label: "colostrum", value: tissues.colostrum === 'Y' ? true : false},
-                 {
-                 name: "mammary-glands",
-                 label: "Mammary Glands",
-                 value: tissues.mammary_glands === 'Y' ? true : false
-                 },
-                 {name: "ovaries", label: "ovaries", value: tissues.ovaries === 'Y' ? true : false},
-                 {name: "placenta", label: "placenta", value: tissues.placenta === 'Y' ? true : false},
-                 {
-                 name: "placental-fluid",
-                 label: "Placental Fluid",
-                 value: tissues.placental_fluid === 'Y' ? true : false
-                 },
-                 {name: "semen", label: "semen", value: tissues.semen === 'Y' ? true : false},
-                 {name: "testes", label: "testes", value: tissues.testes === 'Y' ? true : false},
-                 {name: "urine", label: "urine", value: tissues.urine === 'Y' ? true : false},
-                 {
-                 name: "other-reproductive",
-                 label: "Other Reproductive",
-                 value: tissues.other_reproductive === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_reproductive_details
-                 }
-                 ]
-                 },
-                 cardioSystem: {
-                 title: "Cardio System",
-                 groupName: "cardio-sys",
-                 list: [
-                 {
-                 name: "heart-pericardium",
-                 label: "Heart Pericardium",
-                 value: tissues.heart_pericardium === 'Y' ? true : false
-                 },
-                 {name: "lung", label: "lung", value: tissues.lung === 'Y' ? true : false},
-                 {
-                 name: "nasal-fluid",
-                 label: "Nasal Fluid",
-                 value: tissues.nasal_fluid === 'Y' ? true : false
-                 },
-                 {name: "trachea", label: "trachea", value: tissues.trachea === 'Y' ? true : false},
-                 {
-                 name: "other-cardio-respiratory",
-                 label: "Other Cardio Respiratory",
-                 value: tissues.other_cardio_respiratory === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_cardio_respiratory_details
-                 }
-                 ]
-                 },
-                 immuneSystem: {
-                 title: "Immune System",
-                 groupName: "immune-sys",
-                 list: [
-                 {
-                 name: "lymph-nodes",
-                 label: "Lymph Nodes",
-                 value: tissues.lymph_nodes === 'Y' ? true : false
-                 },
-                 {name: "spleen", label: "spleen", value: tissues.spleen === 'Y' ? true : false},
-                 {name: "thymus", label: "thymus", value: tissues.thymus === 'Y' ? true : false},
-                 {name: "tonsils", label: "tonsils", value: tissues.tonsils === 'Y' ? true : false},
-                 {
-                 name: "other-immune",
-                 label: "Other Immune",
-                 value: tissues.other_immune === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_immune_details
-                 }
-                 ]
-                 },
-                 skinGlandSystem: {
-                 title: "Skin Gland System",
-                 groupName: "skin-gland-sys",
-                 list: [
-                 {
-                 name: "adrenal-gland",
-                 label: "Adrenal Gland",
-                 value: tissues.adrenal_gland === 'Y' ? true : false
-                 },
-                 {
-                 name: "hair-hooves-feathers",
-                 label: "Hair Hooves Feathers",
-                 value: tissues.hair_hooves_feathers === 'Y' ? true : false
-                 },
-                 {name: "liver", label: "liver", value: tissues.liver === 'Y' ? true : false},
-                 {name: "pancreas", label: "pancreas", value: tissues.pancreas === 'Y' ? true : false},
-                 {name: "pituitary", label: "pituitary", value: tissues.pituitary === 'Y' ? true : false},
-                 {name: "skin-hides", label: "skinHides", value: tissues.skin_hides === 'Y' ? true : false},
-                 {
-                 name: "thyroid-parathyroid",
-                 label: "Thyroid Parathyroid",
-                 value: tissues.thyroid_parathyroid === 'Y' ? true : false
-                 },
-                 {
-                 name: "other-skin-glandular",
-                 label: "Other Skin Glandular",
-                 value: tissues.other_skin_glandular === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_skin_glandular_details
-                 }
-                 ]
-                 },
-                 musculoSkeletalSystem: {
-                 title: "Musculo Skeletal System",
-                 groupName: "musculo-skeletal-sys",
-                 list: [
-                 {name: "abdomen", label: "abdomen", value: tissues.abdomen === 'Y' ? true : false},
-                 {name: "skull", label: "skull", value: tissues.skull === 'Y' ? true : false},
-                 {name: "bones", label: "bones", value: tissues.bones === 'Y' ? true : false},
-                 {name: "collagen", label: "collagen", value: tissues.collagen === 'Y' ? true : false},
-                 {
-                 name: "tendons-ligaments",
-                 label: "Tendons Ligaments",
-                 value: tissues.tendons_ligaments === 'Y' ? true : false
-                 },
-                 {
-                 name: "vertebral-column",
-                 label: "Vertebral Column",
-                 value: tissues.vertebral_column === 'Y' ? true : false
-                 },
-                 {name: "muscle", label: "muscle", value: tissues.muscle === 'Y' ? true : false},
-                 {
-                 name: "other-musculo-skeletal",
-                 label: "Other Musculo Skeletal",
-                 value: tissues.other_musculo_skeletal === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_musculo_skeletal_details
-                 }
-                 ]
-                 },
-                 otherTissues: {
-                 title: "Other Tissues",
-                 groupName: "other-tissues",
-                 list: [
-                 {name: "adipose", label: "adipose", value: tissues.adipose === 'Y' ? true : false},
-                 {name: "ascites", label: "ascites", value: tissues.ascites === 'Y' ? true : false},
-                 {
-                 name: "antler-velvet",
-                 label: "Antler Velvet",
-                 value: tissues.antler_velvet === 'Y' ? true : false
-                 },
-                 {name: "serum", label: "serum", value: tissues.serum === 'Y' ? true : false},
-                 {
-                 name: "whole-blood",
-                 label: "Whole Blood",
-                 value: tissues.whole_blood === 'Y' ? true : false
-                 },
-                 {name: "plasma", label: "plasma", value: tissues.plasma === 'Y' ? true : false},
-                 {
-                 name: "embryonic-tissue",
-                 label: "Embryonic Tissue",
-                 value: tissues.embryonic_tissue === 'Y' ? true : false
-                 },
-                 {
-                 name: "fetal-tissue",
-                 label: "Fetal Tissue",
-                 value: tissues.fetal_tissue === 'Y' ? true : false
-                 },
-                 {
-                 name: "bone-marrow",
-                 label: "Bone Marrow",
-                 value: tissues.bone_marrow === 'Y' ? true : false
-                 },
-                 {
-                 name: "eyes-cornea",
-                 label: "Eyes Cornea",
-                 value: tissues.eyes_cornea === 'Y' ? true : false
-                 },
-                 {
-                 name: "gall-bladder",
-                 label: "Gall Bladder",
-                 value: tissues.gall_bladder === 'Y' ? true : false
-                 },
-                 {
-                 name: "other-fluids-tissues",
-                 label: "Other Fluids Tissues",
-                 value: tissues.other_fluids_tissues === 'Y' ? true : false,
-                 hasOtherDetails: true,
-                 otherText: tissues.other_fluids_tissues_details
-                 }
-                 ]
-                 }
-                 };
-                 ing.sourceAnimalDetails = {
+                var oneRecord = info.tissuesFluidsOrigin.digestiveSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+                        case "appendix":
+                            ing.appendix = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "bile":
+                            ing.bile = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "distal-ileum":
+                            ing.distal_ileum = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "large-intestine":
+                            ing.large_intestine = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "saliva-salivary":
+                            ing.saliva_salivary = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "stomach":
+                            ing.small_intestine = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "stomach":
+                            ing.stomach = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
 
-                 primateTypeList: [
-                 {
-                 label: "NONHUMANPRIMATE",
-                 type: "text",
-                 name: "nhp-type",
-                 required: false,
-                 value: srcAnimal.nonhuman_primate_type
-                 },
-                 {
-                 label: "AQUATICTYPE",
-                 type: "text",
-                 name: "aqua-type",
-                 required: false,
-                 value: srcAnimal.aquatic_type
-                 },
-                 {
-                 label: "AVIANTYPE",
-                 type: "text",
-                 name: "avian-type",
-                 required: false,
-                 value: srcAnimal.avian_type
-                 },
-                 {
-                 label: "BOVINETYPE",
-                 type: "text",
-                 name: "bovine-type",
-                 required: false,
-                 value: srcAnimal.bovine_type
-                 },
-                 {
-                 label: "CANINETYPE",
-                 type: "text",
-                 name: "canine-type",
-                 required: false,
-                 value: srcAnimal.canine_type
-                 },
-                 {
-                 label: "CAPRINETYPE",
-                 type: "text",
-                 name: "caprine-type",
-                 required: false,
-                 value: srcAnimal.caprine_type
-                 },
-                 {
-                 label: "CERVIDAETYPE",
-                 type: "text",
-                 name: "cervidae-type",
-                 required: false,
-                 value: srcAnimal.cervidae_type
-                 },
-                 {
-                 label: "EQUINETYPE",
-                 type: "text",
-                 name: "equine-type",
-                 required: false,
-                 value: srcAnimal.equine_type
-                 },
-                 {
-                 label: "FELINETYPE",
-                 type: "text",
-                 name: "feline-type",
-                 required: false,
-                 value: srcAnimal.feline_type
-                 },
-                 {
-                 label: "OVINETYPE",
-                 type: "text",
-                 name: "ovine-type",
-                 required: false,
-                 value: srcAnimal.ovine_type
-                 },
-                 {
-                 label: "PORCINETYPE",
-                 type: "text",
-                 name: "porcine-type",
-                 required: false,
-                 value: srcAnimal.porcine_type
-                 },
-                 {
-                 label: "RODENTTYPE",
-                 type: "text",
-                 name: "rodent-type",
-                 required: false,
-                 value: srcAnimal.rodent_type
-                 },
-                 {
-                 label: "OTHERANIMALTYPE",
-                 type: "text",
-                 name: "other-animal-type",
-                 required: false,
-                 value: srcAnimal.other_type
-                 },
-                 {
-                 label: "CONTROLLEDPOP",
-                 type: "select",
-                 name: "controlled-pop",
-                 required: true,
-                 value: srcAnimal.is_controlled_pop
-                 },
-                 {
-                 label: "BIOTECHDERIVED",
-                 type: "select",
-                 name: "biotech-derived",
-                 required: true,
-                 value: srcAnimal.is_biotech_derived
-                 },
-                 {
-                 label: "CELLLINE",
-                 type: "select",
-                 name: "cell-line",
-                 required: true,
-                 value: srcAnimal.is_cell_line
-                 },
-                 {
-                 label: "AGEANIMALS",
-                 type: "number",
-                 name: "age-animals",
-                 required: true,
-                 value: srcAnimal.animal_age
-                 }/!*,
-                 {label : "SPECIFY", type: "text", name : "specify", required : false, value : srcAnimal.nonhuman_primate_type}*!/
-                 ],
+                        case "other-digestive":
+                            ing.other_digestive = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.tissues.other_digestive_details = oneRecord.list[g].otherText;
+                            break;
+                    }
+                }
+                var oneRecord = info.tissuesFluidsOrigin.reproductiveSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
 
-                 countryList: []
-                 };*/
-                list.push(ing);
+                        case "milk-products":
+                            ing.milk_products = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "kidney":
+                            ing.kidney = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "mammary-glands":
+                            ing.mammary_glands = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "ovaries":
+                            ing.ovaries = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "placental-fluid":
+                            ing.placental_fluid = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "semen":
+                            ing.semen = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "testes":
+                            ing.testes = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "urine":
+                            ing.urine = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "urine":
+                            ing.urine = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "other-reproductive":
+                            ing.other_reproductive = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_reproductive_details = oneRecord.list[g].otherText;
+                            break;
+
+                    }
+                }
+                var oneRecord = info.tissuesFluidsOrigin.cardioSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+
+                        case "heart-pericardium":
+                            ing.heart_pericardium = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "nasal-fluid":
+                            ing.nasal_fluid = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "lung":
+                            ing.lung = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "trachea":
+                            ing.trachea = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "other-cardio-respiratory":
+                            ing.other_cardio_respiratory = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_cardio_respiratory_details = oneRecord.list[g].otherText;
+                            break;
+
+                    }
+                }
+                var oneRecord = info.tissuesFluidsOrigin.immuneSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+
+                        case "lymph-nodes":
+                            ing.lymph_nodes = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "spleen":
+                            ing.spleen = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "thymus":
+                            ing.thymus = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "tonsils":
+                            ing.tonsils = oneRecord.list[g].value === true ? 'Y' : 'N';
+
+                        case "other-immune":
+                            ing.other_immune = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_immune_details = oneRecord.list[g].otherText;
+                            break;
+                    }
+                }
+                var oneRecord = info.tissuesFluidsOrigin.skinGlandSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+
+                        case "adrenal-gland":
+                            ing.adrenal_gland = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "hair-hooves-feathers":
+                            ing.hair_hooves_feathers = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "liver":
+                            ing.liver = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "pancreas":
+                            ing.pancreas = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "pituitary":
+                            ing.pituitary = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "skin-hides":
+                            ing.skin_hides = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "thyroid-parathyroid":
+                            ing.thyroid_parathyroid = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "other-skin-glandular":
+                            ing.other_skin_glandular = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_skin_glandular_details = oneRecord.list[g].otherText;
+                            break;
+                    }
+                }
+                var oneRecord = info.tissuesFluidsOrigin.musculoSkeletalSystem;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+
+                        case "abdomen":
+                            ing.abdomen = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "skull":
+                            ing.skull = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "bones":
+                            ing.bones = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "collagen":
+                            ing.collagen = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "tendons-ligaments":
+                            ing.tendons_ligaments = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "vertebral-column":
+                            ing.vertebral_column = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "muscle":
+                            ing.muscle = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "other-musculo-skeletal":
+                            ing.other_musculo_skeletal = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_musculo_skeletal_details = oneRecord.list[g].otherText;
+                            break;
+                    }
+                }
+                var oneRecord = info.tissuesFluidsOrigin.otherTissues;
+                for (var g = 0; g < oneRecord.list.length; g++) {
+                    switch (oneRecord.list[g].name) {
+
+                        case "adipose":
+                            ing.adipose = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "ascites":
+                            ing.ascites = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "antler-velvet":
+                            ing.antler_velvet = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "serum":
+                            ing.serum = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "whole-blood":
+                            ing.whole_blood = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "plasma":
+                            ing.plasma = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "embryonic-tissue":
+                            ing.embryonic_tissue = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "fetal-tissue":
+                            ing.fetal_tissue = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "bone-marrow":
+                            ing.bone_marrow = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "eyes-cornea":
+                            ing.eyes_cornea = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+                        case "gall-bladder":
+                            ing.gall_bladder = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
+                        case "other-fluids-tissues":
+                            ing.other_fluids_tissues = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            ing.other_fluids_tissues_details = oneRecord.list[g].otherText;
+                            break;
+                    }
+                }
+
             }
+
+
+            if (info.sourceAnimalDetails) {
+                var animalRecords = info.sourceAnimalDetails.primateTypeList;
+                for (var j = 0; j < info.animalRecords.length; i++) {
+                    switch (info.animalRecords[j].name) {
+                        case "nhp-type":
+                            ing.nonhuman_primate_type = animalRecords.list[g].value;
+                            break;
+                        case "aqua-type":
+                            ing.aquatic_type = animalRecords.list[g].value;
+                            break;
+                        case "avian-type":
+                            ing.avian_type = animalRecords.list[g].value;
+                            break;
+                        case "bovine-type":
+                            ing.bovine_type = animalRecords.list[g].value;
+                            break;
+                        case "canine-type":
+                            ing.canine_type = animalRecords.list[g].value;
+                            break;
+                        case "caprine-type":
+                            ing.caprine_type = animalRecords.list[g].value;
+                            break;
+                        case "cervidae-type":
+                            ing.cervidae_type = animalRecords.list[g].value;
+                            break;
+                        case "equine-type":
+                            ing.equine_type = animalRecords.list[g].value;
+                            break;
+                        case "feline-type":
+                            ing.feline_type = animalRecords.list[g].value;
+                            break;
+                        case "ovine-type":
+                            ing.ovine_type = animalRecords.list[g].value;
+                            break;
+                        case "porcine-type":
+                            ing.porcine_type = animalRecords.list[g].value;
+                            break;
+
+                        case "rodent-type":
+                            ing.rodent_type = animalRecords.list[g].value;
+                            break;
+
+                        case "other-animal-type":
+                            ing.other_type = animalRecords.list[g].value;
+                            break;
+                        case "controlled-pop":
+                            ing.is_controlled_pop = animalRecords.list[g].value;
+                            break;
+
+                        case "biotech-derived":
+                            ing.is_biotech_derived = animalRecords.list[g].value;
+                            break;
+
+                        case "cell-line":
+                            ing.is_cell_line = animalRecords.list[g].value;
+                            break;
+
+                        case "age-animals":
+                            ing.animal_age = animalRecords.list[g].value;
+                            break;
+
+                    }
+                }
+            }
+
+            appendices.push(ing);
         }
 
-        return list;
+
+        return appendices;
 
     }
 
@@ -1243,6 +1198,7 @@
         return formulationList;
     }
 
+
     /**
      * Creates the formulation list for output
      * @param list
@@ -1257,11 +1213,14 @@
                 "formulation_id": item.formulation,
                 "formulation_name": item.formulationName,
                 "active_ingredient": getActiveIngList(item.activeIngList),
+                //TODO optional
                 "nonmedicinal_ingredient": getNonMedIngList(item.nMedIngList),
                 container_group: {
                     "container_details": getContainerTypeList(item.containerTypes)
                 },
+                //TODO optional
                 "material_ingredient": getMaterialList(item.animalHumanMaterials),
+                //TODO optional
                 "roa_group": {
                     "roa_details": getRouteAdminList(item.routeAdmins)
                 },
@@ -1573,6 +1532,252 @@
             resultList.push(obj);
         });
         return resultList;
+    }
+
+    function repContactToOutput(contactList) {
+        var resultList = [];
+        angular.forEach(contactList, function (item) {
+            var obj = {};
+            obj.amend = item.amend;
+            obj.salutation = item.salutation;
+            obj.rep_role = item.repRole; //TODO XML needs to be updated!
+            obj.given_name = item.givenName;
+            obj.initials = item.initials;
+            obj.surname = item.surname;
+            obj.job_title = item.jobTitle;
+            obj.language_correspondance = item.languageCorrespondance;
+            obj.phone_num = item.phoneNum;
+            obj.phone_ext = item.phoneExt;
+            obj.fax_num = item.fax;
+            obj.email = item.email;
+            resultList.push(obj);
+        });
+    }
+
+    /***
+     * Converts the therapeutic classification to output format
+     * @param jsonObj
+     * @returns {Array}
+     */
+    function therapeuticClassToOutput(jsonObj) {
+
+        var resultList = [];
+
+        for (var i = 0; i < jsonObj.length; i++) {
+            //TODO save the ids??
+            resultList.push(jsonObj[i].name);
+        }
+        return (resultList);
+    };
+    function scheduleAToOutput(jsonObj) {
+        var result = {};
+        //enforcing order
+        result.din_number = jsonObj.drugIdNumber;
+        result.acute_alcohol = 'N';
+        result.acute_anxiety = 'N';
+        result.acute_infectious = 'N';
+        result.acute_inflammatory = 'N';
+        result.acute_psychotic = 'N';
+        result.addiction = 'N';
+        result.ateriosclerosis = 'N';
+        result.appendicitis = 'N';
+        result.asthma = 'N';
+        result.cancer = 'N';
+        result.congest_heart_fail = 'N';
+        result.convulsions = 'N';
+        result.dementia = 'N';
+        result.depression = 'N';
+        result.diabetes = 'N';
+        result.gangrene = 'N';
+        result.glaucoma = 'N';
+        result.haematologic_bleeding = 'N';
+        result.hepatitis = 'N';
+        result.hypertension = 'N';
+        result.nausea_pregnancy = 'N';
+        result.obesity = 'N';
+        result.rheumatic_fever = 'N';
+        result.septicemia = 'N';
+        result.sex_transmit_disease = 'N';
+        result.strangulated_hernia = 'N';
+        result.thrombotic_embolic_disorder = 'N';
+        result.thyroid_disease = 'N';
+        result.ulcer_gastro = 'N';
+        var disorderList = jsonObj.diseaseDisorderList
+        for (var i = 0; i < disorderList.length; i++) {
+            switch (disorderList[i].name) {
+                case "acute-alcohol":
+                    result.acute_alcohol = disorderList[i].value;
+                    break;
+                case "acute-anxiety":
+                    result.acute_anxiety = disorderList[i].value;
+                    break;
+                case "acute-infectious":
+                    result.acute_infectious = disorderList[i].value;
+                    break;
+                case "acute-inflammatory":
+                    result.acute_inflammatory = disorderList[i].value;
+                    break;
+                case "acute-psychotic":
+                    result.acute_psychotic = disorderList[i].value;
+                    break;
+                case "addiction":
+                    result.addiction = disorderList[i].value;
+                    break;
+                case "ateriosclerosis":
+                    result.ateriosclerosis = disorderList[i].value;
+                    break;
+                case "appendicitis":
+                    result.appendicitis = disorderList[i].value;
+                    break;
+                case "asthma":
+                    result.asthma = disorderList[i].value;
+                    break;
+                case "cancer":
+                    result.cancer = disorderList[i].value;
+                    break;
+                case "congest-heart-fail":
+                    result.congest_heart_fail = disorderList[i].value;
+                    break;
+                case "convulsions":
+                    result.convulsions = disorderList[i].value;
+                    break;
+                case "dementia":
+                    result.dementia = disorderList[i].value;
+                    break;
+                case "depression":
+                    result.depression = disorderList[i].value;
+                    break;
+                case "diabetes":
+                    result.diabetes = disorderList[i].value;
+                    break;
+
+                case "gangrene":
+                    result.gangrene = disorderList[i].value;
+                    break;
+                case "glaucoma":
+                    result.glaucoma = disorderList[i].value;
+                    break;
+
+                case "haematologic-bleeding":
+                    result.haematologic_bleeding = disorderList[i].value;
+                    break;
+
+                case "hepatitis":
+                    result.hepatitis = disorderList[i].value;
+                    break;
+
+                case "hypertension":
+                    result.hypertension = disorderList[i].value;
+                    break;
+
+                case "nausea-pregnancy":
+                    result.nausea_pregnancy = disorderList[i].value;
+                    break;
+
+                case "obesity":
+                    result.obesity = disorderList[i].value;
+                    break;
+
+                case "rheumatic-fever":
+                    result.rheumatic_fever = disorderList[i].value;
+                    break;
+
+                case "septicemia":
+                    result.septicemia = disorderList[i].value;
+                    break;
+
+                case "sex-transmit-disease":
+                    result.sex_transmit_disease = disorderList[i].value;
+                    break;
+
+                case "strangulated-hernia":
+                    result.strangulated_hernia = disorderList[i].value;
+                    break;
+
+                case "thrombotic-embolic-disorder":
+                    result.thrombotic_embolic_disorder = disorderList[i].value;
+                    break;
+                case "thyroid-disease":
+                    result.thyroid_disease = disorderList[i].value;
+                    break;
+
+                case "ulcer-gastro":
+                    result.ulcer_gastro = disorderList[i].value;
+                    break;
+
+
+
+
+
+            }
+        }
+
+
+        result.sched_a_claims_ind_details = jsonObj.scheduleAClaimsIndDetails;
+
+
+        /* scheduleAGroup: {
+
+         drugIdNumber: info.din_number,
+         scheduleAClaimsIndDetails: info.sched_a_claims_ind_details,
+         diseaseDisorderList: [
+
+         {name: "acute-alcohol", label: "Acute Alcohol", value: info.acute_alcohol},
+         {name: "acute-anxiety", label: "Acute Anxiety", value: info.acute_anxiety},
+         {name: "acute-infectious", label: "Acute Infectious", value: info.acute_infectious},
+         {
+         name: "acute-inflammatory",
+         label: "Acute Inflammatory",
+         value: info.acute_inflammatory
+         },
+         {name: "acute-psychotic", label: "Acute Psychotic", value: info.acute_psychotic},
+         {name: "addiction", label: "Addiction", value: info.addiction},
+         {name: "ateriosclerosis", label: "Ateriosclerosis", value: info.ateriosclerosis},
+         {name: "appendicitis", label: "Appendicitis", value: info.appendicitis},
+         {name: "asthma", label: "Asthma", value: info.asthma},
+         {name: "cancer", label: "Cancer", value: info.cancer},
+         {
+         name: "congest-heart-fail",
+         label: "Congest Heart Fail",
+         value: info.congest_heart_fail
+         },
+         {name: "convulsions", label: "Convulsions", value: info.convulsions},
+         {name: "dementia", label: "Dementia", value: info.dementia},
+         {name: "depression", label: "Depression", value: info.depression},
+         {name: "diabetes", label: "Diabetes", value: info.diabetes},
+         {name: "gangrene", label: "Gangrene", value: info.gangrene},
+         {name: "glaucoma", label: "Glaucoma", value: info.glaucoma},
+         {
+         name: "haematologic-bleeding",
+         label: "Haematologic Bleeding",
+         value: info.haematologic_bleeding
+         },
+         {name: "hepatitis", label: "Hepatitis", value: info.hepatitis},
+         {name: "hypertension", label: "Hypertension", value: info.hypertension},
+         {name: "nausea-pregnancy", label: "Nausea Pregnancy", value: info.nausea_pregnancy},
+         {name: "obesity", label: "Obesity", value: info.obesity},
+         {name: "rheumatic-fever", label: "Rheumatic Fever", value: info.rheumatic_fever},
+         {name: "septicemia", label: "Septicemia", value: info.septicemia},
+         {
+         name: "sex-transmit-disease",
+         label: "Sex Transmit Disease",
+         value: info.sex_transmit_disease
+         },
+         {
+         name: "strangulated-hernia",
+         label: "Strangulated Hernia",
+         value: info.strangulated_hernia
+         },
+         {
+         name: "thrombotic-embolic-disorder",
+         label: "Thrombotic Embolic Disorder",
+         value: info.thrombotic_embolic_disorder
+         },
+         {name: "thyroid-disease", label: "Thyroid Disease", value: info.thyroid_disease},
+         {name: "ulcer-gastro", label: "Ulcer Gastro", value: info.ulcer_gastro},
+         {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO val
+         ]*/
+
     }
 
 

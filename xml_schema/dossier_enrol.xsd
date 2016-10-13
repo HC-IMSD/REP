@@ -28,6 +28,7 @@
 	<!-- Drug Product element definitions-->
 	<hpfb:element name="brand_name" type="char_1_200_content"/>
 	<hpfb:element name="common_name" type="char_1_256_content"/>
+	<hpfb:element name="third_party_signed" type="required_yes_no_content"/>
 	<hpfb:element name="therapeutic_class_list" type="therapeutic_class_content"/>
 	<hpfb:element name="therapeutic_class" type="char_1_256_content"/>
 	<hpfb:element name="ref_product_list" type="ref_product_list_content"/>
@@ -242,6 +243,7 @@
 			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
 			<hpfb:element ref="brand_name" />
 			<hpfb:element ref="common_name"/>
+			<hpfb:element ref="third_party_signed"/>
 			<hpfb:element ref="ref_product_list"/>
 			<hpfb:element ref="human_drug_use"/>
 			<hpfb:element ref="radiopharm_drug_use"/>
