@@ -143,6 +143,7 @@
         }
 
         vm.disableAdd = function () {
+            if(!vm.contactList) return false;
             return !(vm.isDetailValid && vm.contactList.length < 2);
         }
 
