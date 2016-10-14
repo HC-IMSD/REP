@@ -160,7 +160,7 @@
                                 },
                                 {name: "thyroid-disease", label: "Thyroid Disease", value: info.thyroid_disease},
                                 {name: "ulcer-gastro", label: "Ulcer Gastro", value: info.ulcer_gastro},
-                               // {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO remove, not in model
+                                // {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO remove, not in model
                             ]
 
                         },
@@ -219,17 +219,21 @@
             }
         };
 
-
+        /**
+         * @ngdoc Main entry point for converting the internal data model to a compatible output for writing
+         * @param jsonObj
+         * @returns {*}
+         */
         DossierService.prototype.dossierToOutput = function (jsonObj) {
             if (!jsonObj) return null;
             var baseDossier = {};
             //order is important!!! Must match schema
-            baseDossier.company_id = jsonObj.companyId; //TODO missing from model
-            baseDossier.dossier_id = jsonObj.dossierId; //TODO missing from model and XML! Net New
+            baseDossier.company_id = jsonObj.companyId; //TODO missing from internal model
+            baseDossier.dossier_id = jsonObj.dossierId; //TODO missing from  internal model and XML! Net New
             baseDossier.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
             baseDossier.date_saved = jsonObj.dateSaved;
             baseDossier.application_type = jsonObj.applicationType;
-            baseDossier.software_version = "1.0"; //TODO: hard code or make a function, should be central
+            baseDossier.software_version = "1.0"; //TODO: hard code or make a function, should be centrally available
             baseDossier.data_checksum = "";
             if (jsonObj.contactList) { //TODO skip if empty list?
                 baseDossier.is_sched_a = repContactToOutput(jsonObj.contactList);
@@ -250,12 +254,11 @@
             if (jsonObj.therapeutic) {
                 baseDossier.therapeutic_class_list.classification = therapeuticClassToOutput(jsonObj.therapeutic.classifications);
             }
-            ;
             baseDossier.is_sched_a = jsonObj.isScheduleA;
-            if (jsonObj.contactList && jsonObj.contactList) {
-                repContactToOutput(jsonObj.contactList)
-            }
             //TODO schedule_a_group  (jsonObj.scheduleAGroup)
+            if (jsonObj.isScheduleA) {
+                baseDossier.schedule_a_group=scheduleAToOutput(jsonObj.scheduleAGroup);
+            }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFour)
                 if (appendix4) {
@@ -801,9 +804,14 @@
 
     }
 
+    /**
+     * Converts all the appendix 4 data to output
+     * @param info
+     * @returns {*}
+     */
     function appendix4IngredientListToOutput(info) {
         var appendices = []; //TODO may need better error checking
-
+        //Note order of elements must match schema for validation
         if (!angular.isDefined(info)) {
             return null;
         }
@@ -811,11 +819,11 @@
             var ing = {};
             ing.ingredient_id = info[i].id;
             ing.ingredient_name = info[i].name;
-            ing.human_sourced = info[i].sourceHuman === true ? 'Y' : 'N';
             ing.animal_sourced = info[i].sourceAnimal === true ? 'Y' : 'N';
+            ing.human_sourced = info[i].sourceHuman === true ? 'Y' : 'N';
 
             if (info.tissuesFluidsOrigin) {
-                ing.tissues_fluids_section = {};
+                ing.tissues_fluids_section = createEmptyTissuesFluidsForOutput();
                 var oneRecord = info.tissuesFluidsOrigin.nervousSystem;
                 for (var g = 0; g < oneRecord.list.length; g++) {
                     switch (oneRecord.list[g].name) {
@@ -899,12 +907,19 @@
                         case "kidney":
                             ing.kidney = oneRecord.list[g].value === true ? 'Y' : 'N';
                             break;
+                        case "colostrum":
+                            ing.colostrum = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
                         case "mammary-glands":
                             ing.mammary_glands = oneRecord.list[g].value === true ? 'Y' : 'N';
                             break;
                         case "ovaries":
                             ing.ovaries = oneRecord.list[g].value === true ? 'Y' : 'N';
                             break;
+                        case "placenta":
+                            ing.placenta = oneRecord.list[g].value === true ? 'Y' : 'N';
+                            break;
+
                         case "placental-fluid":
                             ing.placental_fluid = oneRecord.list[g].value === true ? 'Y' : 'N';
                             break;
@@ -913,9 +928,6 @@
                             break;
                         case "testes":
                             ing.testes = oneRecord.list[g].value === true ? 'Y' : 'N';
-                            break;
-                        case "urine":
-                            ing.urine = oneRecord.list[g].value === true ? 'Y' : 'N';
                             break;
                         case "urine":
                             ing.urine = oneRecord.list[g].value === true ? 'Y' : 'N';
@@ -1096,67 +1108,73 @@
 
 
             if (info.sourceAnimalDetails) {
+                ing.animal_sourced_section = createEmptyAnimalSourceForOutput();
                 var animalRecords = info.sourceAnimalDetails.primateTypeList;
                 for (var j = 0; j < info.animalRecords.length; i++) {
                     switch (info.animalRecords[j].name) {
                         case "nhp-type":
-                            ing.nonhuman_primate_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.nonhuman_primate_type = animalRecords.list[g].value;
                             break;
                         case "aqua-type":
-                            ing.aquatic_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.aquatic_type = animalRecords.list[g].value;
                             break;
                         case "avian-type":
-                            ing.avian_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.avian_type = animalRecords.list[g].value;
                             break;
                         case "bovine-type":
-                            ing.bovine_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.bovine_type = animalRecords.list[g].value;
                             break;
                         case "canine-type":
-                            ing.canine_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.canine_type = animalRecords.list[g].value;
                             break;
                         case "caprine-type":
-                            ing.caprine_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.caprine_type = animalRecords.list[g].value;
                             break;
                         case "cervidae-type":
-                            ing.cervidae_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.cervidae_type = animalRecords.list[g].value;
                             break;
                         case "equine-type":
-                            ing.equine_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.equine_type = animalRecords.list[g].value;
                             break;
                         case "feline-type":
-                            ing.feline_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.feline_type = animalRecords.list[g].value;
                             break;
                         case "ovine-type":
-                            ing.ovine_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.ovine_type = animalRecords.list[g].value;
                             break;
                         case "porcine-type":
-                            ing.porcine_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.porcine_type = animalRecords.list[g].value;
                             break;
 
                         case "rodent-type":
-                            ing.rodent_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.rodent_type = animalRecords.list[g].value;
                             break;
 
                         case "other-animal-type":
-                            ing.other_type = animalRecords.list[g].value;
+                            ing.animal_sourced_section.other_type = animalRecords.list[g].value;
                             break;
                         case "controlled-pop":
-                            ing.is_controlled_pop = animalRecords.list[g].value;
+                            ing.animal_sourced_section.is_controlled_pop = animalRecords.list[g].value;
                             break;
 
                         case "biotech-derived":
-                            ing.is_biotech_derived = animalRecords.list[g].value;
+                            ing.animal_sourced_section.is_biotech_derived = animalRecords.list[g].value;
                             break;
 
                         case "cell-line":
-                            ing.is_cell_line = animalRecords.list[g].value;
+                            ing.animal_sourced_section.is_cell_line = animalRecords.list[g].value;
                             break;
 
                         case "age-animals":
-                            ing.animal_age = animalRecords.list[g].value;
+                            ing.animal_sourced_section.animal_age = animalRecords.list[g].value;
                             break;
 
                     }
+                }
+
+                var countries = info.sourceAnimalDetails.countryList;
+                for (var j = 0; j < countries.length; j++) {
+                    ing.animal_sourced_section.country_origin_list.country_origin.push(countries[j]); //TODO is this data structure correct?
                 }
             }
 
@@ -1168,6 +1186,120 @@
 
     }
 
+
+    /**
+     * Creates an empty data structure for tissues and fluids XML
+     */
+    function createEmptyTissuesFluidsForOutput() {
+        var tissues = {};
+        var noValue = 'N'; //TODO should be part of  a service
+        tissues.brain = noValue;
+        tissues.brain_stem = noValue;
+        tissues.cerebellum = noValue;
+        tissues.cerebrospinal_fluid = noValue;
+        tissues.dorsal_root_ganglia = noValue;
+        tissues.dura_mater = noValue;
+        tissues.hypothalmus = noValue;
+        tissues.retina_optic = noValue;
+        tissues.spinal_cord = noValue;
+        tissues.trigerminal_ganglia = noValue;
+        tissues.other_nervous = noValue;
+        tissues.other_nervous_details = "";
+        tissues.appendix = noValue;
+        tissues.bile = noValue;
+        tissues.distal_ileum = noValue;
+        tissues.large_intestine = noValue;
+        tissues.saliva_salivary = noValue;
+        tissues.small_intestine = noValue;
+        tissues.stomach = noValue;
+        tissues.other_digestive = noValue;
+        tissues.other_digestive_details = "";
+        tissues.milk_products = noValue;
+        tissues.kidney = noValue;
+        tissues.colostrum = noValue;
+        tissues.mammary_glands = noValue;
+        tissues.ovaries = noValue;
+        tissues.placenta = noValue;
+        tissues.placental_fluid = noValue;
+        tissues.semen = noValue;
+        tissues.testes = noValue;
+        tissues.urine = noValue;
+        tissues.other_reproductive = noValue;
+        tissues.other_reproductive_details = "";
+        tissues.heart_pericardium = noValue;
+        tissues.lung = noValue;
+        tissues.nasal_fluid = noValue;
+        tissues.trachea = noValue;
+        tissues.other_cardio_respiratory = noValue;
+        tissues.other_cardio_respiratory_details = "";
+        tissues.lymph_nodes = noValue;
+        tissues.spleen = noValue;
+        tissues.thymus = noValue;
+        tissues.tonsils = noValue;
+        tissues.other_immune = noValue;
+        tissues.other_immune_details = "";
+        tissues.adrenal_gland = noValue;
+        tissues.hair_hooves_feathers = noValue;
+        tissues.liver = noValue;
+        tissues.pancreas = noValue;
+        tissues.pituitary = noValue;
+        tissues.skin_hides = noValue;
+        tissues.thyroid_parathyroid = noValue;
+        tissues.other_skin_glandular = noValue;
+        tissues.other_skin_glandular_details = "";
+        tissues.abdomen = noValue;
+        tissues.skull = noValue;
+        tissues.bones = noValue;
+        tissues.collagen = noValue;
+        tissues.tendons_ligaments = noValue;
+        tissues.vertebral_column = noValue;
+        tissues.muscle = noValue;
+        tissues.other_musculo_skeletal = noValue;
+        tissues.other_musculo_skeletal_details = "";
+        tissues.adipose = noValue;
+        tissues.ascites = noValue;
+        tissues.antler_velvet = noValue;
+        tissues.serum = noValue;
+        tissues.whole_blood = noValue;
+        tissues.plasma = noValue;
+        tissues.embryonic_tissue = noValue;
+        tissues.fetal_tissue = noValue;
+        tissues.bone_marrow = noValue;
+        tissues.eyes_cornea = noValue;
+        tissues.gall_bladder = noValue;
+        tissues.other_fluids_tissues = noValue;
+        tissues.other_fluids_tissues_details = "";
+        return (tissues);
+    }
+
+    /**
+     * Creates an empty structure for animals XML
+     */
+    function createEmptyAnimalSourceForOutput() {
+        var animals = {};
+        //Order is important
+        animals.nonhuman_primate_type = "";
+        animals.aquatic_type = "";
+        animals.avian_type = "";
+        animals.bovine_type = "";
+        animals.canine_type = "";
+        animals.caprine_type = "";
+        animals.cervidae_type = "";
+        animals.equine_type = "";
+        animals.feline_type = "";
+        animals.ovine_type = "";
+        animals.porcine_type = "";
+        animals.rodent_type = "";
+        animals.other_type = "";
+        animals.is_controlled_pop = "";
+        animals.is_biotech_derived = "";
+        animals.is_cell_line = "";
+        animals.animal_age = "";
+        animals.animal_age = "";
+        animals.country_origin_list = {};
+        animals.country_origin_list.country_origin = []; //TODO verify this is correct
+        return (animals);
+    }
 
     function getFormulationList(list) {
 
@@ -1570,38 +1702,8 @@
         return (resultList);
     };
     function scheduleAToOutput(jsonObj) {
-        var result = {};
-        //enforcing order
+        var result = createEmptyScheduleAForOutput();
         result.din_number = jsonObj.drugIdNumber;
-        result.acute_alcohol = 'N';
-        result.acute_anxiety = 'N';
-        result.acute_infectious = 'N';
-        result.acute_inflammatory = 'N';
-        result.acute_psychotic = 'N';
-        result.addiction = 'N';
-        result.ateriosclerosis = 'N';
-        result.appendicitis = 'N';
-        result.asthma = 'N';
-        result.cancer = 'N';
-        result.congest_heart_fail = 'N';
-        result.convulsions = 'N';
-        result.dementia = 'N';
-        result.depression = 'N';
-        result.diabetes = 'N';
-        result.gangrene = 'N';
-        result.glaucoma = 'N';
-        result.haematologic_bleeding = 'N';
-        result.hepatitis = 'N';
-        result.hypertension = 'N';
-        result.nausea_pregnancy = 'N';
-        result.obesity = 'N';
-        result.rheumatic_fever = 'N';
-        result.septicemia = 'N';
-        result.sex_transmit_disease = 'N';
-        result.strangulated_hernia = 'N';
-        result.thrombotic_embolic_disorder = 'N';
-        result.thyroid_disease = 'N';
-        result.ulcer_gastro = 'N';
         var disorderList = jsonObj.diseaseDisorderList
         for (var i = 0; i < disorderList.length; i++) {
             switch (disorderList[i].name) {
@@ -1705,79 +1807,52 @@
                     result.ulcer_gastro = disorderList[i].value;
                     break;
 
-
-
-
-
             }
         }
 
-
         result.sched_a_claims_ind_details = jsonObj.scheduleAClaimsIndDetails;
 
+    }
 
-        /* scheduleAGroup: {
-
-         drugIdNumber: info.din_number,
-         scheduleAClaimsIndDetails: info.sched_a_claims_ind_details,
-         diseaseDisorderList: [
-
-         {name: "acute-alcohol", label: "Acute Alcohol", value: info.acute_alcohol},
-         {name: "acute-anxiety", label: "Acute Anxiety", value: info.acute_anxiety},
-         {name: "acute-infectious", label: "Acute Infectious", value: info.acute_infectious},
-         {
-         name: "acute-inflammatory",
-         label: "Acute Inflammatory",
-         value: info.acute_inflammatory
-         },
-         {name: "acute-psychotic", label: "Acute Psychotic", value: info.acute_psychotic},
-         {name: "addiction", label: "Addiction", value: info.addiction},
-         {name: "ateriosclerosis", label: "Ateriosclerosis", value: info.ateriosclerosis},
-         {name: "appendicitis", label: "Appendicitis", value: info.appendicitis},
-         {name: "asthma", label: "Asthma", value: info.asthma},
-         {name: "cancer", label: "Cancer", value: info.cancer},
-         {
-         name: "congest-heart-fail",
-         label: "Congest Heart Fail",
-         value: info.congest_heart_fail
-         },
-         {name: "convulsions", label: "Convulsions", value: info.convulsions},
-         {name: "dementia", label: "Dementia", value: info.dementia},
-         {name: "depression", label: "Depression", value: info.depression},
-         {name: "diabetes", label: "Diabetes", value: info.diabetes},
-         {name: "gangrene", label: "Gangrene", value: info.gangrene},
-         {name: "glaucoma", label: "Glaucoma", value: info.glaucoma},
-         {
-         name: "haematologic-bleeding",
-         label: "Haematologic Bleeding",
-         value: info.haematologic_bleeding
-         },
-         {name: "hepatitis", label: "Hepatitis", value: info.hepatitis},
-         {name: "hypertension", label: "Hypertension", value: info.hypertension},
-         {name: "nausea-pregnancy", label: "Nausea Pregnancy", value: info.nausea_pregnancy},
-         {name: "obesity", label: "Obesity", value: info.obesity},
-         {name: "rheumatic-fever", label: "Rheumatic Fever", value: info.rheumatic_fever},
-         {name: "septicemia", label: "Septicemia", value: info.septicemia},
-         {
-         name: "sex-transmit-disease",
-         label: "Sex Transmit Disease",
-         value: info.sex_transmit_disease
-         },
-         {
-         name: "strangulated-hernia",
-         label: "Strangulated Hernia",
-         value: info.strangulated_hernia
-         },
-         {
-         name: "thrombotic-embolic-disorder",
-         label: "Thrombotic Embolic Disorder",
-         value: info.thrombotic_embolic_disorder
-         },
-         {name: "thyroid-disease", label: "Thyroid Disease", value: info.thyroid_disease},
-         {name: "ulcer-gastro", label: "Ulcer Gastro", value: info.ulcer_gastro},
-         {name: "other", label: "Other", value: false, hasOtherDetails: true} //TODO val
-         ]*/
-
+    /**
+     * Creates the empty output data structure for schedule A
+     * @returns json Object
+     */
+    function createEmptyScheduleAForOutput() {
+        var result = {};
+        //enforcing order for output
+        result.din_number = "";
+        result.acute_alcohol = 'N';
+        result.acute_anxiety = 'N';
+        result.acute_infectious = 'N';
+        result.acute_inflammatory = 'N';
+        result.acute_psychotic = 'N';
+        result.addiction = 'N';
+        result.ateriosclerosis = 'N';
+        result.appendicitis = 'N';
+        result.asthma = 'N';
+        result.cancer = 'N';
+        result.congest_heart_fail = 'N';
+        result.convulsions = 'N';
+        result.dementia = 'N';
+        result.depression = 'N';
+        result.diabetes = 'N';
+        result.gangrene = 'N';
+        result.glaucoma = 'N';
+        result.haematologic_bleeding = 'N';
+        result.hepatitis = 'N';
+        result.hypertension = 'N';
+        result.nausea_pregnancy = 'N';
+        result.obesity = 'N';
+        result.rheumatic_fever = 'N';
+        result.septicemia = 'N';
+        result.sex_transmit_disease = 'N';
+        result.strangulated_hernia = 'N';
+        result.thrombotic_embolic_disorder = 'N';
+        result.thyroid_disease = 'N';
+        result.ulcer_gastro = 'N';
+        result.sched_a_claims_ind_details = "";
+        return (result);
     }
 
 
