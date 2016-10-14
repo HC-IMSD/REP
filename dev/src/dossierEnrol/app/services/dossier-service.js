@@ -310,6 +310,16 @@
         }
         // Return a reference to the function
 
+        DossierService.prototype.getMissingAppendix4=function(dossierModel){
+            var missingAppendices=[];
+            // Step 1Get all the appendices that exist (assunes
+            var appendices=getAppendiceData(dossierModel.drugProduct.appendixFour);
+            //Step 2 get a unique list of ingredients
+
+            //Step 3 Compare. Determine if there are missing ingredients
+
+        }
+
         return DossierService;
     }
 
@@ -359,10 +369,7 @@
             }
         }
 
-
         return list;
-
-
     }
 
     function getAppendix4IngredientList (info){
@@ -1596,6 +1603,21 @@
         result.ulcer_gastro = 'N';
         result.sched_a_claims_ind_details = "";
         return (result);
+    }
+
+
+    function getAppendiceData(appendices){
+        var result=[];
+        if(!appendices.ingredientList) return result;
+        var appendixArray=appendices.ingredientList;
+        for(var i=0;i<appendixArray.length;i++){
+            var rec={};
+            rec.id= ing.id;
+            rec.name= ing.name;
+            result.push(rec);
+
+        }
+        return result
     }
 
 })();
