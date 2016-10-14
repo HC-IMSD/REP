@@ -356,23 +356,6 @@
 
     }
 
-    function canRefProductListToOutput(info) {
-        var resultList = [];
-
-        if (angular.isDefined(info)) {
-            for (var i = 0; i < info.length; i++) {
-                var product = {};
-                product.medicinal_ingredient = info[i].medIngredient;
-                product.dosage_form = info[i].dosageForm;
-                product.dosage_form_other = info[i].dosageFormOther;
-                product.strengths = info[i].strengths;
-                product.company_name = info[i].companyName;
-                resultList.push(product);
-            }
-        }
-        return resultList;
-    }
-
     function getAppendix4IngredientList(info) {
         var list = [];
 
@@ -804,6 +787,222 @@
 
     }
 
+    function getFormulationList(list) {
+
+        var formulationList = [];
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+        angular.forEach(list, function (item) {
+
+            var obj = {
+                "formulation": item.formulation_id,
+                "formulationName": item.formulation_name,
+                "activeIngList": getActiveIngList(item.active_ingredient),
+                "nMedIngList": getNonMedIngList(item.nonmedicinal_ingredient),
+                "containerTypes": getContainerTypeList(item.container_group.container_details),
+                "animalHumanMaterials": getMaterialList(item.material_ingredient),
+                "routeAdmins": getRouteAdminList(item.roa_group.roa_details),
+                "countryList": getFormulationCountryList(item.country_group.country_manufacturer)
+
+            }
+
+            formulationList.push(obj);
+
+
+        });
+
+        return formulationList;
+    }
+
+
+    function getActiveIngList(list) {
+
+        var resultList = [];
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+        angular.forEach(list, function (item) {
+
+            var obj = {
+                "ingId": item.ingredient_id,
+                "ingName": item.ingredient_name,
+                "cas": item.cas_number,
+                "humanAnimalSourced": item.is_human_animal_src,
+                "standard": item.ingred_standard,
+                "strength": item.strength,
+                "per": item.per,
+                "units": item.units,
+                "calcAsBase": item.is_base_calc,
+                "nanoMaterial": item.is_nanomaterial,
+                "nanoMaterialOther": item.nanomaterial_details
+            };
+
+            resultList.push(obj);
+
+        });
+
+        return resultList;
+
+    }
+
+
+
+
+    function getNonMedIngList(list) {
+
+        var resultList = [];
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+        angular.forEach(list, function (item) {
+            var obj = {
+                "ingId": item.ingredient_id,
+                "varId": item.variant_name,
+                "ingName": item.ingredient_name,
+                "cas": item.cas_number,
+                "humanAnimalSourced": item.is_human_animal_src,
+                "standard": item.ingred_standard,
+                "strength": item.strength,
+                "per": item.per,
+                "units": item.units,
+                "calcAsBase": item.is_base_calc,
+                "nanoMaterial": item.is_nanomaterial,
+                "nanoMaterialOther": item.nanomaterial_details
+            };
+            resultList.push(obj);
+        });
+
+        return resultList;
+    }
+
+
+    function getContainerTypeList(list) {
+
+        var resultList = [];
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+
+        angular.forEach(list, function (item) {
+
+            var obj = {
+                "containerType": item.container_type,
+                "packageSize": item.package_size,
+                "shelfLifeYears": item.shelf_life_years,
+                "shelfLifeMonths": item.shelf_life_months,
+                "tempMin": item.temperature_min,
+                "tempMax": item.temperature_max
+            };
+
+            resultList.push(obj);
+
+        });
+
+        return resultList;
+    }
+
+
+    function getMaterialList(list) {
+
+        var resultList = [];
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+        angular.forEach(list, function (item) {
+            var obj = {
+                "ingredientId": item.ingredient_id,
+                "ingredientName": item.ingredient_name,
+                "cas": item.cas_number,
+                "ingredientStandard": item.ingred_standard,
+                "inFinalContainer": item.in_final_container
+            };
+            resultList.push(obj);
+        });
+        return resultList;
+    };
+
+
+    function getRouteAdminList(list) {
+
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+
+        var resultList = [];
+
+        var _id = 0;
+
+        angular.forEach(list, function (item) {
+
+            _id = _id + 1;
+            var obj = {
+                "id": _id,
+                "roa": item.roa,
+                "otherRoaDetails": item.roa_other
+            };
+
+            resultList.push(obj);
+
+        });
+
+        return resultList;
+    }
+
+    function getFormulationCountryList(list) {
+
+        var resultList = [];
+
+        var _id = 0;
+
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+
+        angular.forEach(list, function (item) {
+
+            _id = _id + 1;
+            var obj = {
+                "id": _id,
+                "name": item.country_origin
+            };
+
+            resultList.push(obj);
+
+        });
+
+        return resultList;
+    }
+
+    String.prototype.capitalize = function () {
+        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+        //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
+    };
+
+    function canRefProductListToOutput(info) {
+        var resultList = [];
+
+        if (angular.isDefined(info)) {
+            for (var i = 0; i < info.length; i++) {
+                var product = {};
+                product.medicinal_ingredient = info[i].medIngredient;
+                product.dosage_form = info[i].dosageForm;
+                product.dosage_form_other = info[i].dosageFormOther;
+                product.strengths = info[i].strengths;
+                product.company_name = info[i].companyName;
+                resultList.push(product);
+            }
+        }
+        return resultList;
+    }
+
     /**
      * Converts all the appendix 4 data to output
      * @param info
@@ -1186,7 +1385,6 @@
 
     }
 
-
     /**
      * Creates an empty data structure for tissues and fluids XML
      */
@@ -1301,36 +1499,6 @@
         return (animals);
     }
 
-    function getFormulationList(list) {
-
-        var formulationList = [];
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-        angular.forEach(list, function (item) {
-
-            var obj = {
-                "formulation": item.formulation_id,
-                "formulationName": item.formulation_name,
-                "activeIngList": getActiveIngList(item.active_ingredient),
-                "nMedIngList": getNonMedIngList(item.nonmedicinal_ingredient),
-                "containerTypes": getContainerTypeList(item.container_group.container_details),
-                "animalHumanMaterials": getMaterialList(item.material_ingredient),
-                "routeAdmins": getRouteAdminList(item.roa_group.roa_details),
-                "countryList": getFormulationCountryList(item.country_group.country_manufacturer)
-
-            }
-
-            formulationList.push(obj);
-
-
-        });
-
-        return formulationList;
-    }
-
-
     /**
      * Creates the formulation list for output
      * @param list
@@ -1365,38 +1533,6 @@
         return formulationList;
     }
 
-
-    function getActiveIngList(list) {
-
-        var resultList = [];
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-        angular.forEach(list, function (item) {
-
-            var obj = {
-                "ingId": item.ingredient_id,
-                "ingName": item.ingredient_name,
-                "cas": item.cas_number,
-                "humanAnimalSourced": item.is_human_animal_src,
-                "standard": item.ingred_standard,
-                "strength": item.strength,
-                "per": item.per,
-                "units": item.units,
-                "calcAsBase": item.is_base_calc,
-                "nanoMaterial": item.is_nanomaterial,
-                "nanoMaterialOther": item.nanomaterial_details
-            };
-
-            resultList.push(obj);
-
-        });
-
-        return resultList;
-
-    }
-
     /***
      * Maps the active ingredient list to the output Json
      * @param activeList
@@ -1423,38 +1559,7 @@
 
             resultList.push(obj);
         });
-
     }
-
-
-    function getNonMedIngList(list) {
-
-        var resultList = [];
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-        angular.forEach(list, function (item) {
-            var obj = {
-                "ingId": item.ingredient_id,
-                "varId": item.variant_name,
-                "ingName": item.ingredient_name,
-                "cas": item.cas_number,
-                "humanAnimalSourced": item.is_human_animal_src,
-                "standard": item.ingred_standard,
-                "strength": item.strength,
-                "per": item.per,
-                "units": item.units,
-                "calcAsBase": item.is_base_calc,
-                "nanoMaterial": item.is_nanomaterial,
-                "nanoMaterialOther": item.nanomaterial_details
-            };
-            resultList.push(obj);
-        });
-
-        return resultList;
-    }
-
     /**
      * Convertes nonMedicinal Ingredient to a the output json object
      * @param nonMedList
@@ -1485,33 +1590,6 @@
         return resultList;
     }
 
-
-    function getContainerTypeList(list) {
-
-        var resultList = [];
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-
-        angular.forEach(list, function (item) {
-
-            var obj = {
-                "containerType": item.container_type,
-                "packageSize": item.package_size,
-                "shelfLifeYears": item.shelf_life_years,
-                "shelfLifeMonths": item.shelf_life_months,
-                "tempMin": item.temperature_min,
-                "tempMax": item.temperature_max
-            };
-
-            resultList.push(obj);
-
-        });
-
-        return resultList;
-    }
-
     /**
      * Converts container type to output json
      * @param containerList
@@ -1535,26 +1613,6 @@
         return resultList
     }
 
-
-    function getMaterialList(list) {
-
-        var resultList = [];
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-        angular.forEach(list, function (item) {
-            var obj = {
-                "ingredientId": item.ingredient_id,
-                "ingredientName": item.ingredient_name,
-                "cas": item.cas_number,
-                "ingredientStandard": item.ingred_standard,
-                "inFinalContainer": item.in_final_container
-            };
-            resultList.push(obj);
-        });
-        return resultList;
-    };
     /**
      * @ngdoc Maps material records to output json
      * @param list
@@ -1575,34 +1633,6 @@
         return resultList;
     };
 
-
-    function getRouteAdminList(list) {
-
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-
-        var resultList = [];
-
-        var _id = 0;
-
-        angular.forEach(list, function (item) {
-
-            _id = _id + 1;
-            var obj = {
-                "id": _id,
-                "roa": item.roa,
-                "otherRoaDetails": item.roa_other
-            };
-
-            resultList.push(obj);
-
-        });
-
-        return resultList;
-    }
-
     /**
      * converts route of admin to output json format
      * @param list
@@ -1619,32 +1649,6 @@
 
         });
         return resultList
-    }
-
-    function getFormulationCountryList(list) {
-
-        var resultList = [];
-
-        var _id = 0;
-
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-
-        angular.forEach(list, function (item) {
-
-            _id = _id + 1;
-            var obj = {
-                "id": _id,
-                "name": item.country_origin
-            };
-
-            resultList.push(obj);
-
-        });
-
-        return resultList;
     }
 
     /**
@@ -1854,12 +1858,5 @@
         result.sched_a_claims_ind_details = "";
         return (result);
     }
-
-
-    String.prototype.capitalize = function () {
-        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-        //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
-    };
-
 
 })();
