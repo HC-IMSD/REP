@@ -194,46 +194,6 @@
 
         };
 
-        // Return a reference to the function
-        return DossierService;
-    }
-
-    function getContactList(contacts){
-
-        var list = [];
-
-        if (angular.isDefined(contacts)) {
-
-            for(var i = 0; i < contacts.length; i++){
-                var contact = {};
-                contact.amend = contacts[i].amend_record === 'Y' ? true:false;
-                contact.repRole = contacts[i].rep_contact_role;
-                contact.salutation = contacts[i].rep_contact_details.salutation;
-                contact.givenName = contacts[i].rep_contact_details.given_name;
-                contact.surname =  contacts[i].rep_contact_details.surname;
-                contact.initials = contacts[i].rep_contact_details.initials;
-                contact.title = contacts[i].rep_contact_details.job_title;
-                contact.phone = contacts[i].rep_contact_details.phone_num;
-                contact.PhoneExt = contacts[i].rep_contact_details.phone_ext;
-                contact.fax = contacts[i].rep_contact_details.fax_num;
-                contact.email = contacts[i].rep_contact_details.email;
-                contact.language = contacts[i].rep_contact_details.language_correspondance;
-
-                list.push(contact);
-
-            }
-
-        }
-
-        return list;
-
-                        list.push(contact);
-                    }
-                }
-                return list;
-            }
-        };
-
         /**
          * @ngdoc Main entry point for converting the internal data model to a compatible output for writing
          * @param jsonObj
@@ -349,8 +309,39 @@
             return false;
         }
         // Return a reference to the function
+
         return DossierService;
     }
+
+    function getContactList(contacts){
+
+        var list = [];
+
+        if (angular.isDefined(contacts)) {
+
+            for(var i = 0; i < contacts.length; i++){
+                var contact = {};
+                contact.amend = contacts[i].amend_record === 'Y' ? true:false;
+                contact.repRole = contacts[i].rep_contact_role;
+                contact.salutation = contacts[i].rep_contact_details.salutation;
+                contact.givenName = contacts[i].rep_contact_details.given_name;
+                contact.surname =  contacts[i].rep_contact_details.surname;
+                contact.initials = contacts[i].rep_contact_details.initials;
+                contact.title = contacts[i].rep_contact_details.job_title;
+                contact.phone = contacts[i].rep_contact_details.phone_num;
+                contact.PhoneExt = contacts[i].rep_contact_details.phone_ext;
+                contact.fax = contacts[i].rep_contact_details.fax_num;
+                contact.email = contacts[i].rep_contact_details.email;
+                contact.language = contacts[i].rep_contact_details.language_correspondance;
+
+                list.push(contact);
+
+            }
+
+        }
+
+        return list;
+    };
 
     function getCanRefProductList(info) {
         var list = [];
@@ -405,7 +396,7 @@
                             {name: "retina-optic", label: "Retina Optic", value: tissues.retina_optic === 'Y' ? true:false},
                             {name: "spinal-cord", label: "Spinal Cord", value: tissues.spinal_cord === 'Y' ? true:false},
                             {name: "trigerminal-ganglia", label: "Trigerminal Ganglia", value: tissues.trigerminal_ganglia === 'Y' ? true:false},
-                            {name: "other-nervous", label: "Other Nervous", value: tissues.other_nervous === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-nervous", label: "Other Nervous", value: tissues.other_nervous === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_nervous_details}
                         ]},
                     digestiveSystem:{
                         title: "Digestive System",
@@ -418,7 +409,7 @@
                             {name: "saliva-salivary", label: "Saliva Salivary", value:tissues.saliva_salivary === 'Y' ? true:false},
                             {name: "small-intestine", label: "Small Intestine", value:tissues.small_intestine === 'Y' ? true:false},
                             {name: "stomach", label: "stomach", value:tissues.stomach === 'Y' ? true:false},
-                            {name: "other-digestive", label: "Other Digestive", value:tissues.other_digestive === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-digestive", label: "Other Digestive", value:tissues.other_digestive === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_digestive_details}
                         ]},
                     reproductiveSystem:{
                         title: "Reproductive System",
@@ -434,7 +425,7 @@
                             {name: "semen", label: "semen", value:tissues.semen === 'Y' ? true:false},
                             {name: "testes", label: "testes", value:tissues.testes === 'Y' ? true:false},
                             {name: "urine", label: "urine", value:tissues.urine === 'Y' ? true:false},
-                            {name: "other-reproductive", label: "Other Reproductive", value:tissues.other_reproductive === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-reproductive", label: "Other Reproductive", value:tissues.other_reproductive === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_reproductive_details}
                         ]},
                     cardioSystem:{
                         title: "Cardio System",
@@ -444,7 +435,7 @@
                             {name: "lung", label: "lung", value:tissues.lung === 'Y' ? true:false},
                             {name: "nasal-fluid", label: "Nasal Fluid", value:tissues.nasal_fluid === 'Y' ? true:false},
                             {name: "trachea", label: "trachea", value:tissues.trachea === 'Y' ? true:false},
-                            {name: "other-cardio-respiratory", label: "Other Cardio Respiratory", value:tissues.other_cardio_respiratory === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-cardio-respiratory", label: "Other Cardio Respiratory", value:tissues.other_cardio_respiratory === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_cardio_respiratory_details}
                         ]},
                     immuneSystem:{
                         title: "Immune System",
@@ -454,7 +445,7 @@
                             {name: "spleen", label: "spleen", value:tissues.spleen === 'Y' ? true:false},
                             {name: "thymus", label: "thymus", value:tissues.thymus === 'Y' ? true:false},
                             {name: "tonsils", label: "tonsils", value:tissues.tonsils === 'Y' ? true:false},
-                            {name: "other-immune", label: "Other Immune", value:tissues.other_immune === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-immune", label: "Other Immune", value:tissues.other_immune === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_immune_details}
                         ]},
                     skinGlandSystem:{
                         title: "Skin Gland System",
@@ -467,7 +458,7 @@
                             {name: "pituitary", label: "pituitary", value:tissues.pituitary === 'Y' ? true:false},
                             {name: "skin-hides", label: "skinHides", value:tissues.skin_hides === 'Y' ? true:false},
                             {name: "thyroid-parathyroid", label: "Thyroid Parathyroid", value:tissues.thyroid_parathyroid === 'Y' ? true:false},
-                            {name: "other-skin-glandular", label: "Other Skin Glandular", value:tissues.other_skin_glandular === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-skin-glandular", label: "Other Skin Glandular", value:tissues.other_skin_glandular === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_skin_glandular_details}
                         ]},
                     musculoSkeletalSystem:{
                         title: "Musculo Skeletal System",
@@ -480,7 +471,7 @@
                             {name: "tendons-ligaments", label: "Tendons Ligaments", value:tissues.tendons_ligaments === 'Y' ? true:false},
                             {name: "vertebral-column", label: "Vertebral Column", value:tissues.vertebral_column === 'Y' ? true:false},
                             {name: "muscle", label: "muscle", value:tissues.muscle === 'Y' ? true:false},
-                            {name: "other-musculo-skeletal", label: "Other Musculo Skeletal", value:tissues.other_musculo_skeletal === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-musculo-skeletal", label: "Other Musculo Skeletal", value:tissues.other_musculo_skeletal === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_musculo_skeletal_details}
                         ]},
                     otherTissues:{
                         title: "Other Tissues",
@@ -497,7 +488,7 @@
                             {name: "bone-marrow", label: "Bone Marrow", value:tissues.bone_marrow === 'Y' ? true:false},
                             {name: "eyes-cornea", label: "Eyes Cornea", value:tissues.eyes_cornea === 'Y' ? true:false},
                             {name: "gall-bladder", label: "Gall Bladder", value:tissues.gall_bladder === 'Y' ? true:false},
-                            {name: "other-fluids-tissues", label: "Other Fluids Tissues", value:tissues.other_fluids_tissues === 'Y' ? true:false, hasOtherDetails:true}
+                            {name: "other-fluids-tissues", label: "Other Fluids Tissues", value:tissues.other_fluids_tissues === 'Y' ? true:false, hasOtherDetails:true,otherText:tissues.other_fluids_tissues_details}
                         ]
                     }};
                 ing.sourceAnimalDetails = {
