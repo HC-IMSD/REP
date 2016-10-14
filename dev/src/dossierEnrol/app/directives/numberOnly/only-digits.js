@@ -12,7 +12,7 @@
     'use strict';
 
     angular
-        .module('numberFormat', []);
+        .module('numberFormatModule', []);
 
 })();
 
@@ -20,7 +20,7 @@
     'use strict';
 
     angular
-        .module('numberFormat')
+        .module('numberFormatModule')
         .directive('onlyDigits', digitsCtrl);
 
 

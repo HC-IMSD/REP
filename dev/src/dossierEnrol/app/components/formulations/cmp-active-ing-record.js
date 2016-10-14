@@ -72,7 +72,7 @@
 
         self.$onChanges=function(changes){
             if(changes.record){
-                self.ingModel = self.record.currentValue;
+                self.ingModel = changes.record.currentValue;
             }
         };
 

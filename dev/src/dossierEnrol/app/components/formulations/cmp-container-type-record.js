@@ -19,7 +19,12 @@
             controllerAs: 'ctrCtrl',
             controller: containerTypeRecCtrl,
             bindings: {
-                record: '<'
+                deleteBtn: '<',
+                record:'<',
+                onAddIng: '&',
+                onUpdate: '&',
+                onDelete: '&',
+                onCancel: '&'
             }
 
         });
@@ -30,19 +35,40 @@
 
         self.$onInit = function () {
 
-            self.ctModel = {
-                "containerType": "A",
-                "packageSize": "A",
-                "shelfLifeYears": "9999",
-                "shelfLifeMonths": "99",
-                "tempMin": "999",
-                "tempMax": "999"
-            };
+            self.ctModel = {};
 
-            if (self.record) {
+            if(self.record){
                 self.ctModel = self.record;
             }
+        };
+
+        self.save = function () {
+            if (self.record) {
+                // console.log('product details update product');
+                self.onUpdate({ing:self.ctModel});
+            }else{
+                //  console.log('product details add product');
+                self.onAddIng({ing:self.ctModel});
+            }
+
+        };
+
+        self.discardChanges = function(){
+            self.ctModel = {};
+            //self.productDetailsForm.$setPristine();
+            self.onCancel();
         }
+
+        self.delete = function(){
+            if (self.record) {
+                //  console.log('product details delete product');
+                self.onDelete();
+            }else{
+
+            }
+
+        };
+
 
     }
 

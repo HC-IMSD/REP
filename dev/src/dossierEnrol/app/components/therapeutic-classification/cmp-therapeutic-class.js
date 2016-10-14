@@ -30,14 +30,12 @@
 
         self.$onInit = function(){
             self.model={
-                classifications : [
-                    {"id":1, "name":"classification1"},
-                    {"id":2, "name":"classification2"},
-                    {"id":3, "name":"classification3"},
-                    {"id":4, "name":"classification4"},
-                    {"id":5, "name":"classification5"}
-                ],
+                classifications : [],
                 selected:{}
+            };
+
+            if(self.listItems){
+                self.model.classifications = self.listItems;
             }
         }
 
@@ -73,13 +71,7 @@
             self.reset();
         };
 
-        self.deleteRecord = function (_id) {
-            if (self.model.classifications.length == 1) {
-                return;
-            }
-            var idx = self.model.classifications.indexOf(
-                $filter('filter')(self.model.classifications, {id: _id}, true)[0]
-            );
+        self.deleteRecord = function (idx) {
             self.model.classifications.splice(idx,1);
         };
 

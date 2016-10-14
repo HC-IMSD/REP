@@ -5,17 +5,13 @@
         <li ng-repeat="tab in tabsCtrl.tabs" role="presentation" ng-click="tabsCtrl.selectTab($index)"
             ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">
             <a href="#" role="tab">{{tab.label |translate}}</a>
-
-            <p>Value:{{tabsCtrl.tabs[$index].errors}}</p>
         </li>
 
     </ul>
     <div class="tabpanels">
         <ng-form name="tabsCtrl.tabs[0].form">
         <div id="formulations-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[0].selected">
-
-            <cmp-formulations></cmp-formulations>
-
+            <cmp-formulations formulations="tabsCtrl.formulationList"></cmp-formulations>
             <!--<p>
                 Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.
             </p>-->
@@ -23,9 +19,7 @@
         </ng-form>
         <ng-form name="tabsCtrl.tabs[1].form">
         <div id="appendix4-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[1].selected">
-
-            <cmp-appendix-four></cmp-appendix-four>
-
+            <cmp-appendix-four ingredients="tabsCtrl.appendix4List"></cmp-appendix-four>
         </div>
         </ng-form>
     </div>

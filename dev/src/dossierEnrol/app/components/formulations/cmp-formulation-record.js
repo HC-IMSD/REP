@@ -19,12 +19,54 @@
             controllerAs: 'formulRecCtrl',
             controller: formulationRecCtrl,
             bindings: {
-                record: '<'
+                deleteBtn: '<',
+                record:'<',
+                onAddNew: '&',
+                onUpdate: '&',
+                onDelete: '&',
+                onCancel: '&'
             }
 
         });
 
     function formulationRecCtrl() {
+
+        var self = this;
+
+        self.$onInit = function () {
+
+            self.frmModel = {};
+
+
+            if(self.record){
+                self.frmModel = self.record;
+            }
+        };
+
+        self.save = function () {
+            if (self.record) {
+                // console.log('product details update product');
+                self.onUpdate({record:self.frmModel});
+            }else{
+                //  console.log('product details add product');
+                self.onAddNew({record:self.frmModel});
+            }
+
+        };
+
+        self.discardChanges = function(){
+            self.frmModel = {};
+            //self.productDetailsForm.$setPristine();
+            self.onCancel();
+        }
+
+        self.delete = function(){
+            if (self.record) {
+                //  console.log('product details delete product');
+                self.onDelete();
+            }
+
+        };
 
     }
 })();

@@ -21,7 +21,7 @@
         'applicationInfoService',
         'applicationInfo',
         'ui.bootstrap',
-        'numberFormat'
+       // 'numberFormatModule'
     ];
 
     angular
@@ -45,10 +45,10 @@
         }
     });
 
-    dossierCtrl.$inject = ['$scope','hpfbFileProcessing', 'ApplicationInfoService'];
+    dossierCtrl.$inject = ['$scope','hpfbFileProcessing', 'ApplicationInfoService','DossierService'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing,ApplicationInfoService) {
+    function dossierCtrl($scope, hpfbFileProcessing,ApplicationInfoService,DossierService) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
@@ -76,6 +76,11 @@
          */
 
         self.$onInit = function(){
+
+            self.dossierService = new DossierService();
+
+
+
             self.dossierModel = {
                 dossierID:"",
                 enrolmentVersion: "1.23",
@@ -93,13 +98,132 @@
                     scheduleAGroup:{
 
                     },
-                    therapeutic: {//grid
-                        listItems:[],
-                        columnDef:[]
-                    },
+                    therapeutic: [],
                     canRefProducts:{},//grid
-                    formulations:{},//tab + grid +
-                    appendixFour:{}//tab + grid +
+                    formulations:[
+                        {
+                            "formulationId": "1",
+                            "formulationName": "Main Formulation",
+                            "activeIngList": [
+                                {
+                                    "ingName": "ing1",
+                                    "cas": "00-00-1",
+                                    "humanAnimalSourced": "No",
+                                    "standard": "A",
+                                    "strength": "A",
+                                    "per": "A",
+                                    "units": "A",
+                                    "calcAsBase": true,
+                                    "animalHumanSourced": true,
+                                    "nanoMaterial": "Yes",
+                                    "nanoMaterialOther": "A"
+                                }],
+                            "nMedIngList": [
+                                {
+                                    "varId": "Var1",
+                                    "ingName": "ing1",
+                                    "cas": "00-00-1",
+                                    "type": "A",
+                                    "humanAnimalSourced": "No",
+                                    "standard": "A",
+                                    "strength": "A",
+                                    "per": "A",
+                                    "units": "A",
+                                    "calcAsBase": true,
+                                    "animalHumanSourced": true,
+                                    "nanoMaterial": "Yes",
+                                    "nanoMaterialOther": "A"
+                                }
+                            ],
+                            "containerTypes": [
+
+                                {
+                                    "containerType": "A",
+                                    "packageSize": "A",
+                                    "shelfLifeYears": "9999",
+                                    "shelfLifeMonths": "99",
+                                    "tempMin": "999",
+                                    "tempMax": "999"
+                                }
+                            ],
+                            "animalHumanMaterials": [
+                                {
+                                    "ingredientId": "A",
+                                    "ingredientName": "A",
+                                    "cas": "00-00-0",
+                                    "ingredientStandard": "A",
+                                    "inFinalContainer": true
+                                }
+                            ],
+                            "routeAdmins": [
+                                {"id": 1, "roa": "DENTAL", "otherRoaDetails": ""},
+                                {"id": 2, "roa": "BUCCAL", "otherRoaDetails": ""},
+                                {"id": 3, "roa": "BUCCAL", "otherRoaDetails": ""}
+                            ],
+                            "countryList": [
+                                {"id":1, "name":"ARG"},
+                                {"id":2, "name":"CAN"},
+                                {"id":3, "name":"USA"}
+                            ]
+
+                        },
+                        {
+                            "formulationId": "2",
+                            "formulationName": "Alternate 1",
+                            "activeIngList": [],
+                            "nMedIngList": [],
+                            "containerTypes": [],
+                            "animalHumanMaterials": [],
+                            "routeAdmins": [],
+                            "countryList": []
+
+                        },
+                        {
+                            "formulationId": "3",
+                            "formulationName": "Alternate 2",
+                            "activeIngList": [],
+                            "nMedIngList": [],
+                            "containerTypes": [],
+                            "animalHumanMaterials": [],
+                            "routeAdmins": [],
+                            "countryList": []
+
+                        }
+
+                    ],
+                    appendixFour:[
+                        {
+                            "ingredientName": "ing1",
+                            "role": "role1",
+                            "abstractNum": "44",
+                            "standard": "A",
+                            "sourceHuman": false,
+                            "sourceAnimal": false,
+                            "tissuesFluidsOrigin":{},
+                            "sourceAnimalDetails":{}
+
+                        },
+                        {
+                            "ingredientName": "ing2",
+                            "role": "role1",
+                            "abstractNum": "655",
+                            "standard": "A",
+                            "sourceHuman": false,
+                            "sourceAnimal": false,
+                            "tissuesFluidsOrigin":{},
+                            "sourceAnimalDetails":{}
+                        },
+                        {
+                            "ingredientName": "ing3",
+                            "role": "role2",
+                            "abstractNum": "54545",
+                            "standard": "A",
+                            "sourceHuman": false,
+                            "sourceAnimal": false,
+                            "tissuesFluidsOrigin":{},
+                            "sourceAnimalDetails":{}
+                        }
+                    ]
 
                 },
                 contactInfo: { //grid
@@ -108,6 +232,12 @@
                 }
 
             };
+
+            self.dossierModel = {};
+
+
+
+
 
         }
         /**
@@ -124,6 +254,12 @@
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
+
+                   // console.info('file loaded ... ' + JSON.stringify(resultJson));
+                    self.dossierModel = self.dossierService.loadFromFile(resultJson);
+
+
+
              //process file load results
                 //load into data model as result json is not null
             }

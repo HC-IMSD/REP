@@ -18,13 +18,13 @@
 
             <textarea type="text" name="therapeuticName{{$index}}" id="theraName{{$index}}"
                       class="form-control full-width"
-                      required rows="2" maxlength="256" ng-model="item.name">
+                      required rows="2" maxlength="256" ng-model="item">
                     </textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-right">
-                    <button ng-click="$ctrl.deleteRecord(item.id)" name="addThera"
+                    <button ng-click="$ctrl.deleteRecord($index)" name="addThera"
                             class="btn btn-danger btn-sm">{{'DELETE_CLASS'|translate}}&nbsp;{{$index+1}}
                     </button>
                     </div>

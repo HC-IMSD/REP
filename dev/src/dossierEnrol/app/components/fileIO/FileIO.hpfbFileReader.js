@@ -27,8 +27,8 @@
             link: link,
             restrict: 'A',
             scope: {
-                hpfbFileSelect: "&",
-            },
+                hpfbFileSelect: "&"
+            }
         };
         return directive;
 
@@ -60,7 +60,7 @@
         controller: FileSelectController,
         bindings: {
             updateModelRoot: '&',
-            rootElem: '@',
+            rootElem: '@'
         }
     });
 
@@ -186,7 +186,7 @@
                             convertToJSONObjects(reader);
                             checkRootTagMatch(reader, scope);
                             if (reader.parseResult.jsonResult) {
-                                compareHashInJson(reader, scope.rootTag);
+                               // compareHashInJson(reader, scope.rootTag);
                             }
                         } else if ((fileType.toLowerCase() === "xml")) {
                             convertXMLToJSONObjects(reader);
@@ -261,7 +261,7 @@
             var xmlConfig = {
                 attributePrefix: "$",
                 escapeMode: "true",
-                emptyNodeForm: "text",
+                emptyNodeForm: "text"
             }
             var xmlConverter = new X2JS(xmlConfig);
             //converts XML as a string to a json
