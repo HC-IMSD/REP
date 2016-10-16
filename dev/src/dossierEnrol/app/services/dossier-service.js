@@ -315,7 +315,7 @@
             // Step 1Get all the appendices that exist (assunes
             var appendices=getAppendiceData(dossierModel.drugProduct.appendixFour);
             //Step 2 get a unique list of ingredients
-
+            var ingredients=getAnimalIngredients(dossierModel.drugProduct.formulations)
             //Step 3 Compare. Determine if there are missing ingredients
 
         }
@@ -1617,7 +1617,52 @@
             result.push(rec);
 
         }
-        return result
+        return result;
     }
+
+    function getAnimalIngredients(formulations){
+        var yesValue= 'Y';
+        var allAnimalSourcedNames=[];
+        var uniqueList={};
+        for(var i=0;i<formulations.length;i++){
+            //Step 1 get active ingredients
+            var oneFormulation=formulations[i];
+            for(var j=0;j<(oneFormulation.activeIngList.length); j++){
+                var oneActive=oneFormulation.activeIngList[j];
+                if(oneActive.humanAnimalSourced===yesValue){
+                    allAnimalSourcedNames.push(oneActive.ingName);
+                }
+            }
+            //step 2 get nmi flagged
+            for(var j=0;j<(oneFormulation.nMedIngList.length); j++){
+                var oneActive=oneFormulation.nMedIngList[j];
+                if(oneActive.humanAnimalSourced===yesValue){
+                    allAnimalSourcedNames.push(oneActive.ingName);
+                }
+            }
+            //step 3  all materials
+            for(var j=0;j<(oneFormulation.animalHumanMaterials.length); j++){
+                var oneActive=oneFormulation.animalHumanMaterials[j];
+                    allAnimalSourcedNames.push(oneActive.ingredientName);
+            }
+        }
+        uniqueList=getUniqueList(allAnimalSourcedNames);
+        return (uniqueList);
+    }
+
+    function getUniqueList(arr){
+            var u = {}, a = [];
+            for(var i = 0, l = arr.length; i < l; ++i){
+                if(!u.hasOwnProperty(arr[i])) {
+                    a.push(arr[i]);
+                    u[arr[i]] = 1;
+                }else{
+
+                    u[arr[i]]++;
+                }
+            }
+            return a;
+    }
+
 
 })();
