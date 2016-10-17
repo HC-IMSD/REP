@@ -1022,7 +1022,7 @@ gulp.task('copyDossierSrcDev', ['copyDossierServicesDev', 'copyDossierCommonSrcD
             jsDossierComponentPaths.countryList + '**/*',
             jsDossierComponentPaths.dossier + '**/*',
             jsDossierComponentPaths.drugUse + '**/*',
-            jsDossierComponentPaths.expandingTable + '**/*',
+            //jsDossierComponentPaths.expandingTable + '**/*',
             jsDossierComponentPaths.scheduleA + '**/*',
             jsDossierComponentPaths.tabs + '**/*',
             jsDossierComponentPaths.theraClass + '**/*',

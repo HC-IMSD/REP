@@ -39,9 +39,12 @@
         vm.tableRowIndexPrevExpanded = "";
         vm.numberCols=vm.columnDef.length+2;
         vm.disableErrorCol=false;
-        vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+        vm.dayDataCollapse = _createArray(0, true);
 
         vm.$onInit = function () {
+            if(vm.listItems) {
+                vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+            }
         }
 
         vm.getExpandedState = function (row) {
@@ -54,7 +57,12 @@
         vm.$onChanges = function (changes) {
 
             if (changes.listItems) {
-                vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+                if(vm.listItems) {
+                    vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+                }else{
+                    //should never happen
+                    vm.dayDataCollapse = _createArray(0, true);
+                }
                 vm.resetTableRow();
             }
 
@@ -189,7 +197,11 @@
             vm.tableRowIndexPrevExpanded = "";
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
-            vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+            if(vm.listItems) {
+                vm.dayDataCollapse = _createArray(vm.listItems.length, true);
+            }else{
+                _createArray(0, true);
+            }
 
         }
 
