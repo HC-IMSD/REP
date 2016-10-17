@@ -27,55 +27,55 @@
             $translateProvider.useStaticFilesLoader({
                 files: [
                     {
-                        prefix: 'app/resources/dossier-dosageform-',
+                        prefix: './resources/dossier-dosageform-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/fileIO-',
+                        prefix: './resources/fileIO-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/dossier-',
+                        prefix: './resources/dossier-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/dossier-general-',
+                        prefix: './resources/dossier-general-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/applicationInfo-',
+                        prefix: './resources/applicationInfo-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/contact-',
+                        prefix: './resources/contact-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/appendix4-',
+                        prefix: './resources/appendix4-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/dossier-msg-',
+                        prefix: './resources/dossier-msg-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/messages-',
+                        prefix: './resources/messages-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/general-',
+                        prefix: './resources/general-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/scheduleA-',
+                        prefix: './resources/scheduleA-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/formulation-',
+                        prefix: './resources/formulation-',
                         suffix: '.json'
                     },
                     {
-                        prefix: 'app/resources/roa-',
+                        prefix: './resources/roa-',
                         suffix: '.json'
                     }
 

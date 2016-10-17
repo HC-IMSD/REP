@@ -45,5 +45,6 @@
   "ROA_LBL": "Route of Administration (ROA)",
   "ROA_TITLE": "Routes of Administration",
   "ROA_ABREV": "ROA",
-  "FORMULATIONS":"Formulations"
+  "FORMULATIONS":"Formulations",
+  "FORMULATION_DETAILS":"Formulation Details"
 }

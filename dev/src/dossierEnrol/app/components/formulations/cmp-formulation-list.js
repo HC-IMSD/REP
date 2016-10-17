@@ -27,6 +27,7 @@
 
         var self=this;
         self.isDetailValid = true //TODO this must be managed
+        self.noFormulations="";
         self.$onInit = function() {
 
             self.newFormShown = false;
@@ -40,6 +41,7 @@
             if(self.formulations){
                 self.formulationList = self.formulations;
             }
+            self.updateFormulationsError();
         };
 
 
@@ -58,6 +60,7 @@
             self.formulationList.push(frm);
             self.newFormShown = false;
             self.resetToCollapsed = true;
+            self.updateFormulationsError();
         };
 
         self.update = function(idx, frm){
@@ -68,6 +71,22 @@
             //console.debug('frmList delete: ' + idx);
             if(self.formulationList.splice(idx,1))
                 self.resetToCollapsed = true;
+
+            self.updateFormulationsError();
+
+        }
+
+        /**
+         * Used for error messaging that there are no active ingredients
+         * @returns {string} string is empty if not empty
+         */
+        self.updateFormulationsError = function () {
+            if (self.formulationList && self.formulationList.length > 0) {
+                self.noFormulations = self.formulationList.length;
+                return false;
+            }
+            self.noFormulations = "";
+            return true;
 
         }
 

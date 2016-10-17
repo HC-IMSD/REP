@@ -35,5 +35,7 @@
   "OTHER_ROA_DETAILS": "fr_Other Route of Administration Details",
   "ROA_TITLE": "fr_Route of Administration",
   "FORMULATIONS":"Formulations",
-  "APPENDIX4": "Annexe 4"
+  "APPENDIX4": "Annexe 4",
+  "FORMULATION_DETAILS":"fr_Formulation Details",
+  "FORMULATION_NAME":"Formulation Name"
 }

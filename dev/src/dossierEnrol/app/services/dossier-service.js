@@ -43,7 +43,7 @@
                 },
                 canRefProducts: {},//grid
                 formulations: {},//tab + grid +
-                appendixFour: {}//tab + grid +
+                appendixFour: {ingredientList:[]}//tab + grid +
 
             },
             contactList: []
@@ -280,12 +280,18 @@
 
         DossierService.prototype.getMissingAppendix4=function(dossierModel){
             var missingAppendices=[];
-            // Step 1Get all the appendices that exist (assunes
+
+            if(!dossierModel || !dossierModel.drugProduct){
+                return missingAppendices;
+            }
+            // Step 1 Get all the appendices that exist
             var appendices=getAppendiceData(dossierModel.drugProduct.appendixFour);
             //Step 2 get a unique list of ingredients
             var ingredients=getAnimalIngredients(dossierModel.drugProduct.formulations)
             //Step 3 Compare. Determine if there are missing ingredients
+            missingAppendices=getMissingAppendices(appendices,ingredients);
 
+            return missingAppendices;
         }
 
         return DossierService;
@@ -1734,15 +1740,13 @@
 
 
     function getAppendiceData(appendices){
-        var result=[];
+        var result={};
         if(!appendices.ingredientList) return result;
         var appendixArray=appendices.ingredientList;
         for(var i=0;i<appendixArray.length;i++){
             var rec={};
-            rec.id= ing.id;
-            rec.name= ing.name;
+            rec[ing.name] = ing.id;
             result.push(rec);
-
         }
         return result;
     }
@@ -1777,15 +1781,28 @@
         return (uniqueList);
     }
 
+    /**
+     * Create a list of missing appendices
+     * @param appendiceList
+     * @param ingredientList
+     */
+    function getMissingAppendices(appendiceList,ingredientJsonList) {
+        var missingList = [];
+        for (var i = 0; i < ingredientJsonList.length; i++) {
+                if(!appendiceList.hasOwnProperty(ingredientJsonList[i])){
+                    missingList.push(ingredientJsonList[i]);
+                }
+        }
+        return missingList;
+    }
+
+
     function getUniqueList(arr){
             var u = {}, a = [];
             for(var i = 0, l = arr.length; i < l; ++i){
                 if(!u.hasOwnProperty(arr[i])) {
                     a.push(arr[i]);
                     u[arr[i]] = 1;
-                }else{
-
-                    u[arr[i]]++;
                 }
             }
             return a;

@@ -27,7 +27,7 @@
     function activeIngListCtrl() {
 
         var self = this;
-
+        self.noActives = "";
         self.$onInit = function () {
 
             self.newIngFormShown = false;
@@ -42,6 +42,7 @@
             if (self.ingredients) {
                 self.ingList = self.ingredients;
             }
+            self.updateActiveError();
         };
 
 
@@ -49,6 +50,7 @@
             //console.debug('ingList addIng: ' + ing);
             self.ingList.push(ing);
             self.newIngFormShown = false;
+            self.updateActiveError();
         };
 
         self.updateIng = function (idx, ing) {
@@ -58,7 +60,20 @@
         self.deleteIng = function (idx) {
             // console.debug('ingList deleteIng: ' + idx);
             self.ingList.splice(idx, 1);
+            self.updateActiveError();
         }
+        /**
+         * Used for error messaging that there are no active ingredients
+         * @returns {string} string is empty if not empty
+         */
+        self.updateActiveError = function () {
+            if (self.ingList && self.ingList.length > 0) {
+                self.noActives = self.ingList.length;
+                return false;
+            }
+            self.noActives = "";
+            return true;
 
+        }
     }
 })();

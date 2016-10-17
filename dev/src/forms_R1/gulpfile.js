@@ -465,6 +465,7 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath)
                     }
                 ]
             }))
+            .pipe(stringReplace("\\./resources/", "app/resources/"))
             .pipe(rename(rootName + type + "-" + lang + '.js'))
             .pipe(gulp.dest(destPath))
     )

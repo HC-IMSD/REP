@@ -1,4 +1,13 @@
-<ng-form name="formulations-form">
+<ng-form name="formulationsForm">
+    <input type="textbox" required="true" ng-show="false" name="noFormulation" id="noFormulation{{$id}}"
+           data-ng-model="formulCtrl.noFormulations"/>
+    <label for="noFormulation{{$id}}" ng-if="formulationsForm.noFormulation.$invalid">
+        <strong id="active-error" class="error" >
+        <span class="label label-danger" ng-messages="formulationsForm.noActive.$error">
+            <span ng-message="required"><span translate="MSG_ERR_ONE_FORMULATION"></span></span>
+        </span>
+        </strong>
+    </label>
     <cmp-expanding-table title="Formulations List" reset-to-collapsed="formulCtrl.resetToCollapsed" list-items="formulCtrl.formulationList"
                          column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord"
                          disable-selection="!formulCtrl.isDetailValid">
