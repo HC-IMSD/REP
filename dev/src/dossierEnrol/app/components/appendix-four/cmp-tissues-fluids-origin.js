@@ -18,7 +18,9 @@
             templateUrl: './components/appendix-four/tpl-tissues-fluids-origin.html',
             controller: tissuesFluidsOriginCtrl,
             controllerAs: 'tfoCtrl',
-            bindings:{}
+            bindings:{
+                tissuesModel : '<'
+            }
 
         });
 
@@ -186,24 +188,21 @@
                             otherText: ""
                         }
                 ]
-            }};
-
-            /*self.bodySystems = [];
-
-            for(var item in self.model){
-                console.log('tissuesFluidsOriginModule model key: ' + item);
             }
 
-           angular.forEach(self.model, function(value, key) {
-                //console.log('tissuesFluidsOriginModule model key: ' + key);
-                self.bodySystems.push(key);
-            });*/
+            };
+
+            if(self.tissuesModel){
+                self.model = self.tissuesModel;
+            }
 
         }
 
 
         self.$onChanges = function (changes) {
-            //TODO model changes?
+            if(changes.tissuesModel){
+                self.model = changes.tissuesModel.currentValue;
+            }
         }
         /**
          * Checks that at least one tissue has been selected
