@@ -64,6 +64,8 @@
         self.isIncomplete=true;
         self.formAmend=false;
         self.showAllErrors = false;
+        self.errorAppendix=[];
+
         /*
 
          "company_id": "A",
@@ -78,7 +80,7 @@
         self.$onInit = function(){
 
             self.dossierService = new DossierService();
-
+            self.errorAppendix=self.dossierService.getMissingAppendix4();
 
 
             self.dossierModel = {
@@ -191,39 +193,41 @@
                         }
 
                     ],
-                    appendixFour:[
-                        {
-                            "ingredientName": "ing1",
-                            "role": "role1",
-                            "abstractNum": "44",
-                            "standard": "A",
-                            "sourceHuman": false,
-                            "sourceAnimal": false,
-                            "tissuesFluidsOrigin":{},
-                            "sourceAnimalDetails":{}
+                    appendixFour: {
+                        ingredientList: [
+                            {
+                                "ingredientName": "ing1",
+                                "role": "role1",
+                                "abstractNum": "44",
+                                "standard": "A",
+                                "sourceHuman": false,
+                                "sourceAnimal": false,
+                                "tissuesFluidsOrigin": {},
+                                "sourceAnimalDetails": {}
 
-                        },
-                        {
-                            "ingredientName": "ing2",
-                            "role": "role1",
-                            "abstractNum": "655",
-                            "standard": "A",
-                            "sourceHuman": false,
-                            "sourceAnimal": false,
-                            "tissuesFluidsOrigin":{},
-                            "sourceAnimalDetails":{}
-                        },
-                        {
-                            "ingredientName": "ing3",
-                            "role": "role2",
-                            "abstractNum": "54545",
-                            "standard": "A",
-                            "sourceHuman": false,
-                            "sourceAnimal": false,
-                            "tissuesFluidsOrigin":{},
-                            "sourceAnimalDetails":{}
-                        }
-                    ]
+                            },
+                            {
+                                "ingredientName": "ing2",
+                                "role": "role1",
+                                "abstractNum": "655",
+                                "standard": "A",
+                                "sourceHuman": false,
+                                "sourceAnimal": false,
+                                "tissuesFluidsOrigin": {},
+                                "sourceAnimalDetails": {}
+                            },
+                            {
+                                "ingredientName": "ing3",
+                                "role": "role2",
+                                "abstractNum": "54545",
+                                "standard": "A",
+                                "sourceHuman": false,
+                                "sourceAnimal": false,
+                                "tissuesFluidsOrigin": {},
+                                "sourceAnimalDetails": {}
+                            }
+                        ]
+                    }
 
                 },
                 contactInfo: { //grid
@@ -248,7 +252,12 @@
             if(changes.formType){
                 self.userFormType=changes.formType.currentValue;
             }
-        }
+        };
+
+        self.appendixMissingError=function(){
+            return(self.errorAppendix &&self.errorAppendix.length>0);
+
+        };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;

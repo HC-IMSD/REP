@@ -45,7 +45,7 @@
         ];
         self.$onInit = function () {
 
-            console.log(self.tabs[0].form.$invalid)
+            //console.log(self.tabs[0].form.$invalid)
         };
 
         self.selectTab = function (idx) {

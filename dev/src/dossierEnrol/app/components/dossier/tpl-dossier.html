@@ -140,6 +140,20 @@
                 </div>
             </div>
             <div>
+
+                <section ng-if="dos.appendixMissingError()">
+                    <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixMissingError()"/>
+                    <details class="alert alert-danger" id="alert-en" open="open">
+                        <summary class="h3">
+                            <h2>{{'MISSING_APPENDIX'|translate}}</h2>
+                        </summary>
+                        <ul>
+                            <li ng-repeat="ingred in dos.errorAppendix">{{ingred}}</li>
+                        </ul>
+                    </details>
+                </section>
+            </div>
+            <div>
                 <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations"
                           appendix4-list="dos.dossierModel.drugProduct.appendixFour"></cmp-tabs>
             </div>
