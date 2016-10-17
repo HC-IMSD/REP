@@ -68,11 +68,11 @@
 
         <section class="section">
             <cmp-tissues-fluids-origin
-                    ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"></cmp-tissues-fluids-origin>
+                    ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced" tissues-model="ap4RecCtrl.model.tissuesFluidsOrigin"></cmp-tissues-fluids-origin>
         </section>
 
         <section class="section">
-            <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"></cmp-source-animal>
+            <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced" primate-types="ap4RecCtrl.model.sourceAnimalDetails"></cmp-source-animal>
         </section>
     </ng-form>
 </div>

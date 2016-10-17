@@ -35,12 +35,17 @@
             self.isDetailValid = true; //TODO needs to be managed in ADD and delete
             self.ingredientList = [];
 
-
-
             if(self.ingredients){
-                self.ingredientList = self.ingredients;
+                self.ingredientList = self.ingredients.ingredientList;
             }
-        }
+        };
+
+        self.$onChanges = function (changes) {
+
+            if (changes.ingredients) {
+                self.ingredientList = changes.ingredients.currentValue.ingredientList;
+            }
+        };
 
     }
 })();

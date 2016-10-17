@@ -44,6 +44,15 @@
 
 
 
+        self.$onChanges = function (changes) {
+
+            if (changes.formulations) {
+                self.formulationList = changes.formulations.currentValue;
+            }
+        };
+
+
+
         self.addNew = function(frm){
             //console.debug('frmList add new: ' + frm);
             self.formulationList.push(frm);

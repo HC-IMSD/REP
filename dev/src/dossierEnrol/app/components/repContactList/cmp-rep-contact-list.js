@@ -31,37 +31,26 @@
     contactListCtrl.$inject = ['$filter','RepContactService']
     function contactListCtrl($filter, RepContactService) {
         var vm = this;
-        vm.selectRecord = -1; //the record to select
-        vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
-        vm.contactList = [];
-        vm.oneRecord = ""; //using required as the validaiton
-        vm.isParentDirty = false; //tracks whether the parent form has been dirtied
-        vm.formAmend = false; //
         var repContactService=new RepContactService();
-        vm.columnDef = [
-            {
-                label: "FIRST_NAME",
-                binding: "givenName",
-                width: "40"
-            },
-
-            {
-                label: "LAST_NAME",
-                binding: "surname",
-                width: "40"
-            },
-            {
-                label: "ONE_ROLE",
-                binding: "repRole",
-                width: "20"
-            }
-        ]
         /**
          * using to get contact list
          */
         vm.$onInit = function () {
             vm.focused = false;
-            // vm.contactList = vm.contacts;
+            vm.selectRecord = -1; //the record to select
+            vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
+            vm.contactList = [];
+            vm.oneRecord = ""; //using required as the validaiton
+            vm.isParentDirty = false; //tracks whether the parent form has been dirtied
+            vm.formAmend = false; //
+            vm.columnDef = [
+                {label: "FIRST_NAME", binding: "givenName", width: "40"},
+                {label: "LAST_NAME", binding: "surname", width: "40"},
+                {label: "ONE_ROLE", binding: "repRole", width: "20"}
+            ];
+            if (vm.contacts) {
+                vm.contactList = vm.contacts;
+            }
         }
         vm.$onChanges = function (changes) {
             if (changes.contacts) {

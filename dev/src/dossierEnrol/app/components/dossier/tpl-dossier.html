@@ -101,7 +101,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
-                    <cmp-ref-product-list products="dos.dossierModel.canRefProducts"></cmp-ref-product-list>
+                    <cmp-ref-product-list products="dos.dossierModel.drugProduct.canRefProducts"></cmp-ref-product-list>
                 </div>
 
             </div>
@@ -136,7 +136,7 @@
 
             <div class="row" ng-if="dos.dossierModel.drugProduct.isScheduleA">
                 <div class="col-xs-12 form-group">
-                    <cmp-schedule-a schedule-group=""></cmp-schedule-a>
+                    <cmp-schedule-a schedule-group="dos.dossierModel.drugProduct.scheduleAGroup"></cmp-schedule-a>
                 </div>
             </div>
             <div>
@@ -167,5 +167,5 @@
             </div>
         </section>
     </div>
-    <pre>{{dos.dossierModel | json }}</pre>
+    <!--<pre>{{dos.dossierModel | json }}</pre>-->
 </ng-form>
