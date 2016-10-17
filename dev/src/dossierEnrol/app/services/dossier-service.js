@@ -435,6 +435,22 @@
             return array;
 
         };*/
+
+
+        var getCountries = function(input){
+            var list = [];
+
+            for(var i=0; i< input.length; i++){
+
+                list.push({
+                    "name":input[i].country_with_unknown,
+                    "unknownCountryDetails":input[i].unknown_country_details
+                });
+
+            }
+            return list;
+        };
+
         if (angular.isDefined(info)) {
             for (var i = 0; i < info.length; i++) {
                 var ing = {};
@@ -635,8 +651,8 @@
                         {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: srcAnimal.is_cell_line},
                         {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: srcAnimal.animal_age}
                     ],
+                countryList: getCountries(srcAnimal.country_origin_list.country_origin)
 
-                    countryList: srcAnimal.country_origin_list.country_origin
                 };
 
 
