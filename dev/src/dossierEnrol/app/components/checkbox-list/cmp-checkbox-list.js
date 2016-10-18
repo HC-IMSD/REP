@@ -37,7 +37,7 @@
         self.$onChanges = function (changes) {
 
             if (changes.listItems) {
-                self.currentModel = self.listItems.currentValue;
+                self.currentModel = changes.listItems.currentValue;
             }
         }
         //TODO remove?
