@@ -39,57 +39,13 @@
                 {label: "CAS_NUM", binding: "cas", width: "15"},
                 {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "10"}
             ];
-            self.ingList = [
-                {
-                    "varId": "Var1",
-                    "ingName": "ing1",
-                    "cas": "00-00-1",
-                    "type": "A",
-                    "standard": "A",
-                    "strength": "A",
-                    "per": "A",
-                    "units": "A",
-                    "calcAsBase": "",
-                    "animalHumanSourced": "",
-                    "nanoMaterial": "",
-                    "nanoMaterialOther": ""
-                },
-                {
-                    "varId": "Var2",
-                    "ingName": "ing2",
-                    "cas": "00-00-2",
-                    "type": "A",
-                    "standard": "A",
-                    "strength": "A",
-                    "per": "A",
-                    "units": "A",
-                    "calcAsBase": "",
-                    "animalHumanSourced": "",
-                    "nanoMaterial": "",
-                    "nanoMaterialOther": ""
-                },
-                {
-                    "varId": "Var3",
-                    "ingName": "ing3",
-                    "cas": "00-00-3",
-                    "type": "A",
-                    "humanAnimalSourced": "Yes",
-                    "standard": "A",
-                    "strength": "A",
-                    "per": "A",
-                    "units": "A",
-                    "calcAsBase": "",
-                    "animalHumanSourced": "",
-                    "nanoMaterial": "",
-                    "nanoMaterialOther": ""
-                },
-
-            ];
+            self.ingList = [];
 
             if (self.ingredients) {
                 self.ingList = self.ingredients;
             }
         };
+
 
         self.addIng = function (ing) {
             //console.debug('ingList addIng: ' + ing);

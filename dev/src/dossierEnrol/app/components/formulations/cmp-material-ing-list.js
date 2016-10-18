@@ -37,34 +37,35 @@
         self.$onInit = function () {
 
 
-            self.ingList = [
-                {
-                    "ingredientId": "A",
-                    "ingredientName": "A",
-                    "cas": "00-00-0",
-                    "ingredientStandard": "A",
-                    "inFinalContainer": "Y"
-                },
-                {
-                    "ingredientId": "B",
-                    "ingredientName": "A",
-                    "cas": "00-00-1",
-                    "ingredientStandard": "A",
-                    "inFinalContainer": "Y"
-                },
-                {
-                    "ingredientId": "C",
-                    "ingredientName": "A",
-                    "cas": "00-00-2",
-                    "ingredientStandard": "A",
-                    "inFinalContainer": "Y"
-                }
-            ];
+            self.ingList = [];
 
             if (self.ingredients) {
                 self.ingList = self.ingredients;
             }
 
+        };
+
+        self.$onChanges = function (changes) {
+
+            if (changes.ingredients) {
+                self.ingList = changes.ingredients.currentValue;
+            }
+        };
+
+        self.addNew = function(ing){
+            self.ingList.push(ing);
+            self.newFormShown = false;
+            self.resetToCollapsed = true;
+        };
+
+        self.updateIng = function(idx, ing){
+            self.ingList[idx] = angular.copy(ing);
+        };
+
+        self.deleteIng = function(idx){
+            // console.debug('containerList deleteIng: ' + idx);
+            self.ingList.splice(idx,1);
+            self.resetToCollapsed = true;
         }
 
     }

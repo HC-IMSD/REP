@@ -55,8 +55,7 @@
         };
 
         self.discardChanges = function () {
-            self.ingModel = {};
-            //self.productDetailsForm.$setPristine();
+            self.ingModel = self.record ? self.record : {};
             self.onCancel();
         }
 

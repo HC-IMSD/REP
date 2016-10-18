@@ -45,17 +45,16 @@
         self.save = function () {
             if (self.record) {
                 // console.log('product details update product');
-                self.onUpdate({ing:self.ctModel});
+                self.onUpdate({cType:self.ctModel});
             }else{
                 //  console.log('product details add product');
-                self.onAddIng({ing:self.ctModel});
+                self.onAddIng({cType:self.ctModel});
             }
 
         };
 
         self.discardChanges = function(){
-            self.ctModel = {};
-            //self.productDetailsForm.$setPristine();
+            self.ctModel = self.record ? self.record : {};
             self.onCancel();
         }
 
@@ -63,8 +62,6 @@
             if (self.record) {
                 //  console.log('product details delete product');
                 self.onDelete();
-            }else{
-
             }
 
         };
