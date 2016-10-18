@@ -37,7 +37,14 @@
             if(self.listItems){
                 self.model.classifications = self.listItems;
             }
-        }
+        };
+
+        self.$onChanges = function (changes) {
+
+            if (angular.isDefined(changes.listItems) && angular.isDefined(changes.listItems.currentValue)) {
+                self.model.classifications = changes.listItems.currentValue;
+            }
+        };
 
         // gets the template to ng-include for a table row / item
         self.getTemplate = function (item) {

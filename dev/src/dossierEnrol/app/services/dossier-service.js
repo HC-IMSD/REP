@@ -772,10 +772,10 @@
             var obj = {
                 "containerType": item.container_type,
                 "packageSize": item.package_size,
-                "shelfLifeYears": item.shelf_life_years,
-                "shelfLifeMonths": item.shelf_life_months,
-                "tempMin": item.temperature_min,
-                "tempMax": item.temperature_max
+                "shelfLifeYears": Number(item.shelf_life_years),
+                "shelfLifeMonths": Number(item.shelf_life_months),
+                "tempMin": Number(item.temperature_min),
+                "tempMax": Number(item.temperature_max)
             };
 
             resultList.push(obj);
