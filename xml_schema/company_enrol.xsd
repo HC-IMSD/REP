@@ -23,14 +23,16 @@
 	<hpfb:element name="mailing" type="required_yes_no_content"/>
 	<hpfb:element name="billing" type="required_yes_no_content"/>
 	<hpfb:element name="importer" type="required_yes_no_content"/>
-	<hpfb:element name="primary_rep" type="required_yes_no_content"/>
-	<hpfb:element name="secondary_rep" type="required_yes_no_content"/>
+	<hpfb:element name="rep_primary" type="required_yes_no_content"/>
+	<hpfb:element name="rep_secondary" type="required_yes_no_content"/>
 	<hpfb:element name="company_name" type="char_1_80_content"/>
 	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"  nillable="true"/>
 	<hpfb:element name="company_contact_details" type="contact_content"/>
 	<hpfb:element name="contact_record" type="contact_record_content" />
 	<hpfb:element name="company_address_details" type="international_address_content"/>
 	<hpfb:element name="address_record" type="address_record_content"/>
+	<hpfb:element name="address_id" type="hpfb:string"/>
+	<hpfb:element name="contact_id" type="hpfb:string"/>
 
 	<hpfb:complexType name="company_enrol_content" >
 		<hpfb:sequence>
@@ -45,20 +47,22 @@
 		</hpfb:sequence>
 		</hpfb:complexType>
 
-	<hpfb:complexType name="contact_record_content" >
+	<hpfb:complexType name="contact_record_content">
 		<hpfb:all>
+			<hpfb:element ref="contact_id"/>
 			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>
 			<hpfb:element ref="billing"/>
-			<hpfb:element ref="importer"/>
-			<hpfb:element ref="rep_contact_role"/>
+			<hpfb:element ref="rep_primary"/>
+			<hpfb:element ref="rep_secondary"/>
 			<hpfb:element ref="company_contact_details"/>
 		</hpfb:all>
 	</hpfb:complexType>
 
 	<hpfb:complexType name="address_record_content" >
 		<hpfb:all>
+			<hpfb:element ref="address_id" />
 			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>

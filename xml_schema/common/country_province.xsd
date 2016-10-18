@@ -279,6 +279,7 @@
 
 	<hpfb:simpleType name="usa_state_list">
 		<hpfb:restriction base="hpfb:string">
+
 			<hpfb:enumeration value="AL"/>
 			<hpfb:enumeration value="AK"/>
 			<hpfb:enumeration value="AZ"/>
@@ -333,8 +334,14 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	<hpfb:simpleType name="empty_list">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value=""/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+	
 	<!-- USA and Canada states or provinces-->
 	<hpfb:simpleType name="prov_state_list">
-		<hpfb:union memberTypes="usa_state_list prov_list"/>
+		<hpfb:union memberTypes="usa_state_list prov_list empty_list"/>
 	</hpfb:simpleType>
 </hpfb:schema>

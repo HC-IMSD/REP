@@ -13,7 +13,7 @@
 	<!-- ACTIVITY_ENROL is the root element-->
 	<hpfb:element name="ACTIVITY_ENROL" type="activity_enrol_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
-	<hpfb:element name="dsts_control_number" type="char_1_6_content"/>
+	<hpfb:element name="dsts_control_number" type="char_0_6_content"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="application_type" type="rep_type"/>
@@ -23,6 +23,7 @@
 	<hpfb:element name="dossier_id" type="char_1_10_content"/>
 	<hpfb:element name="dossier_id_concat" type="char_1_20_content"/>
 	<hpfb:element name="reg_activity_lead" type="lead_types_list"/>
+	<hpfb:element name="activity_id" type="hpfb:string"/>
 	<hpfb:element name="reg_activity_type" type="activity_types_list"/>
 	<hpfb:element name="fee_class"/>
 	<hpfb:element name="not_lasa" type="required_yes_no_content"/>
@@ -72,17 +73,17 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="dossier_id_prefix"/>
-			<hpfb:element ref="dossier_id_concat"/>
 			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="dossier_id_concat"/>
 			<hpfb:element ref="reg_activity_lead"/>
 			<hpfb:element ref="reg_activity_type"/>
 			<hpfb:element ref="fee_class"/>
 			<hpfb:element ref="not_lasa"/>
 			<hpfb:element ref="reason_filing"/>
-			<hpfb:element ref="related_activity" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="is_third_party"/>
 			<hpfb:element ref="notifiable_change_types"/>
 			<hpfb:element ref="rationale_types"/>
+			<hpfb:element ref="related_activity" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -127,6 +128,8 @@
 
 	<hpfb:complexType name="related_reg_activity_content">
 		<hpfb:sequence>
+			<hpfb:element ref="activity_id"/>
+			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="reg_activity_type"/>
 			<hpfb:element ref="date_cleared"/>
 			<hpfb:element ref="control_number"/>
