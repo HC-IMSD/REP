@@ -35,13 +35,15 @@
         self.$onInit = function () {
 
             if(self.primateTypes){
-                self.model.primateTypeList = self.primateTypes;
+                self.model.primateTypeList = self.primateTypes.primateTypeList;
+                self.model.countryList = self.primateTypes.countryList;
             }
         };
 
         self.$onChanges=function(changes){
             if(changes.primateTypes){
-                self.model.primateTypeList = changes.primateTypes.currentValue;
+                self.model.primateTypeList = changes.primateTypes.currentValue.primateTypeList;
+                self.model.countryList = changes.primateTypes.currentValue.countryList;
             }
         };
         /**
@@ -49,6 +51,9 @@
          * @returns {boolean}
          */
         function _oneAnimalTypeSelected() {
+            if(angular.isUndefined(self.model.primateTypeList))
+            return false;
+
             for (var i = 0; i < self.model.primateTypeList.length; i++) {
                 //only test the text boxes
                 if (self.model.primateTypeList[i].type === "text") {

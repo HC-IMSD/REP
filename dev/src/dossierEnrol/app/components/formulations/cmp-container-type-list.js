@@ -66,8 +66,20 @@
                     "tempMax": 999
                 },
 
-            ]
-        }
+            ];
+
+            if(self.containers){
+                self.containerList = self.containers;
+            }
+
+        };
+
+        self.$onChanges = function (changes) {
+
+            if (changes.containers) {
+                self.containerList = changes.containers.currentValue;
+            }
+        };
 
     }
 
