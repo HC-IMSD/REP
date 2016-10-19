@@ -52,19 +52,19 @@
             }
         };
 
-        self.addNew = function(ing){
+        self.addNew = function (ing) {
             self.ingList.push(ing);
             self.newFormShown = false;
             self.resetToCollapsed = true;
         };
 
-        self.updateIng = function(idx, ing){
+        self.updateIng = function (idx, ing) {
             self.ingList[idx] = angular.copy(ing);
         };
 
-        self.deleteIng = function(idx){
+        self.deleteIng = function (idx) {
             // console.debug('containerList deleteIng: ' + idx);
-            self.ingList.splice(idx,1);
+            self.ingList.splice(idx, 1);
             self.resetToCollapsed = true;
         }
 

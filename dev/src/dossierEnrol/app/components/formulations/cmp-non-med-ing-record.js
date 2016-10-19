@@ -70,8 +70,8 @@
             }
         };
 
-        self.$onChanges=function(changes){
-            if(changes.record){
+        self.$onChanges = function (changes) {
+            if (changes.record) {
                 self.ingModel = changes.record.currentValue;
             }
         };

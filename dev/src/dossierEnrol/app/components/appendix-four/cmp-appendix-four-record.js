@@ -69,21 +69,21 @@
         self.save = function () {
             if (self.record) {
                 // console.log('product details update product');
-                self.onUpdate({record:self.model});
-            }else{
+                self.onUpdate({record: self.model});
+            } else {
                 //  console.log('product details add product');
-                self.onAddNew({record:self.model});
+                self.onAddNew({record: self.model});
             }
 
         };
 
-        self.discardChanges = function(){
+        self.discardChanges = function () {
             self.model = {};
             //self.productDetailsForm.$setPristine();
             self.onCancel();
         }
 
-        self.delete = function(){
+        self.delete = function () {
             if (self.record) {
                 //  console.log('product details delete product');
                 self.onDelete();

@@ -46,10 +46,10 @@
         self.save = function () {
             if (self.record) {
                 // console.log('product details update product');
-                self.onUpdate({cType:self.ctModel});
+                self.onUpdate({cType: self.ctModel});
             }else{
                 //  console.log('product details add product');
-                self.onAddIng({cType:self.ctModel});
+                self.onAddIng({cType: self.ctModel});
             }
 
         };

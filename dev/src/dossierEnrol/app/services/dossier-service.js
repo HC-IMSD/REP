@@ -22,18 +22,18 @@
 
         }
 
-       // DossierService.dossierDefault = ;
+        // DossierService.dossierDefault = ;
 
 
         DossierService.prototype = {
 
             _default: {
-                dossierID: "000569522",
-                enrolmentVersion: "1.23",
-                dateSaved: "1999-01-21",
-                applicationType: "New",
-                softwareVersion: "1.0",
-                dataChecksum: "kjsakdjas",
+                dossierID: "",
+                enrolmentVersion: "0.00",
+                dateSaved: "",
+                applicationType: "NEW",
+                softwareVersion: "1.0.0",
+                dataChecksum: "",
                 drugProduct: {
                     thirdPartySigned: false,
                     humanDrugUse: false,
@@ -41,12 +41,12 @@
                     vetDrugUse: false,
                     disinfectantDrugUse: false,
                     isScheduleA: false,
-                    scheduleAGroup: this.isScheduleA ? {}:'Undefined',
+                    scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
                     canRefProducts: [],//grid
                     formulations: {},//tab + grid +
                     appendixFour: {
-                        ingredientList:[]
+                        ingredientList: []
                     }//tab + grid +
 
                 },
@@ -55,8 +55,7 @@
             },
 
 
-
-            getDefaultObject : function(){
+            getDefaultObject: function () {
 
                 return this._default;
 
@@ -74,7 +73,7 @@
 
                 info = info['DOSSIER_ENROL'];
 
-                return {
+                var dossierModel = {
                     dossierID: info.dossier_id,
                     relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
@@ -93,13 +92,6 @@
                             {"name": "disinfectant", "label": "Disinfectant", "value": info.disinfectant_drug_use === 'Y' ? true:false }
                         ],
                         isScheduleA: info.is_sched_a === 'Y' ? true:false ,
-                        scheduleAGroup: {
-
-                            drugIdNumber: info.schedule_a_group.din_number,
-                            scheduleAClaimsIndDetails: info.schedule_a_group.sched_a_claims_ind_details,
-                            diseaseDisorderList: getDiseaseDisorderList(info.schedule_a_group)
-
-                        },
                         therapeutic: info.therapeutic_class_list.therapeutic_class,
                         canRefProducts:  getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
@@ -111,7 +103,14 @@
                    contactList: getContactList(info.contact_record)
 
                 };
+                dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
+                if (info.schedule_a_group) {
+                    dossierModel.drugProduct.scheduleAGroup.drugIdNumber = info.schedule_a_group.din_number;
+                    dossierModel.drugProduct.scheduleAGroup.scheduleAClaimsIndDetails = info.schedule_a_group.sched_a_claims_ind_details;
+                    getDiseaseDisorderList(info.schedule_a_group, dossierModel.drugProduct.scheduleAGroup.diseaseDisorderList);
+                }
 
+                return dossierModel;
 
             },
 
@@ -165,7 +164,7 @@
             baseDossier.software_version = "1.0"; //TODO: hard code or make a function, should be centrally available
             baseDossier.data_checksum = "";
             if (jsonObj.contactList) { //TODO skip if empty list?
-                baseDossier.is_sched_a = repContactToOutput(jsonObj.contactList);
+                baseDossier.contact_record = repContactToOutput(jsonObj.contactList);
             }
             baseDossier.brand_name = jsonObj.drugProduct.brandName; //TODO confirm model
             baseDossier.common_name = jsonObj.drugProduct.common_name;
@@ -279,11 +278,20 @@
 
             return missingAppendices;
         }
+
+        DossierService.prototype.getDefaultSchedA = function () {
+
+            var schedA = {};
+            schedA.drugIdNumber = "";
+            schedA.scheduleAClaimsIndDetails = "";
+            schedA.diseaseDisorderList = this.getDefaultDiseaseDisorderList();
+
+        }
         /**
          * Gets an empty disease disorder list with values set to No
          * @returns {*[]}
          */
-        DossierService.prototype.getEmptyDiseaseDisorderList=function(){
+        DossierService.prototype.getDefaultDiseaseDisorderList = function () {
             var noValue='N';
             return [
                 {name: "acute-alcohol", label: "ACUTEALCOHOL", value:noValue },
@@ -320,6 +328,11 @@
         }
 
 
+        DossierService.prototype.getDefaultScheduleA = function () {
+            return (getDefaultSchedA());
+        }
+
+
         return DossierService;
     }
 
@@ -352,11 +365,15 @@
 
         return list;
     };
-
-    function getDiseaseDisorderList(info,service){
+    /**
+     * Get diseaseDisorderList
+     * @param info
+     * @param diseaseList
+     * @returns {*}
+     */
+    function getDiseaseDisorderList(info, diseaseList) {
 
         if(!info || !service) return;
-        var diseaseList= service.getEmptyDiseaseDisorderList();
             for(var i=0;i<diseaseList.length;i++){
                 var checkboxRec=diseaseList[i];
                 switch(checkboxRec.name){
@@ -496,14 +513,14 @@
 
     function getAppendix4IngredientList (info){ //info = dossier.appendixFour.ingredientList
         var list = [];
-        var getCountries = function(input){
+        var getCountries = function (input) {
             var list = [];
 
-            for(var i=0; i< input.length; i++){
+            for (var i = 0; i < input.length; i++) {
 
                 list.push({
-                    "name":input[i].country_with_unknown,
-                    "unknownCountryDetails":input[i].unknown_country_details
+                    "name": input[i].country_with_unknown,
+                    "unknownCountryDetails": input[i].unknown_country_details
                 });
 
             }
@@ -708,9 +725,15 @@
                         {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: srcAnimal.is_controlled_pop},
                         {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: srcAnimal.is_biotech_derived},
                         {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: srcAnimal.is_cell_line},
-                        {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: Number(srcAnimal.animal_age)}
+                        {
+                            label: "AGEANIMALS",
+                            type: "number",
+                            name: "age-animals",
+                            required: true,
+                            value: Number(srcAnimal.animal_age)
+                        }
                     ],
-                countryList: getCountries(srcAnimal.country_origin_list.country_origin)
+                    countryList: getCountries(srcAnimal.country_origin_list.country_origin)
 
                 };
 
@@ -1865,6 +1888,55 @@
                 }
             }
             return a;
+    }
+
+    function getDefaultSchedA() {
+
+        var schedA = {};
+        schedA.drugIdNumber = "";
+        schedA.scheduleAClaimsIndDetails = "";
+        schedA.diseaseDisorderList = getDefaultDiseaseDisorderList();
+        return schedA;
+    }
+
+    /**
+     * Gets an empty disease disorder list with values set to No
+     * @returns {*[]}
+     */
+    function getDefaultDiseaseDisorderList() {
+        var noValue = 'N';
+        return [
+            {name: "acute-alcohol", label: "ACUTEALCOHOL", value: noValue},
+            {name: "acute-anxiety", label: "ACUTEANXIETY", value: noValue},
+            {name: "acute-infectious", label: "ACUTERESP", value: noValue},
+            {name: "acute-inflammatory", label: "ACUTEINFLAM", value: noValue},
+            {name: "acute-psychotic", label: "ACUTEPSYCHOTIC", value: noValue},
+            {name: "addiction", label: "ADDICTION", value: noValue},
+            {name: "ateriosclerosis", label: "ATERIOSCLEROSIS", value: noValue},
+            {name: "appendicitis", label: "APPENDICITIS", value: noValue},
+            {name: "asthma", label: "ASTHMA", value: noValue},
+            {name: "cancer", label: "CANCER", value: noValue},
+            {name: "congest-heart-fail", label: "HEARTCONGEST", value: noValue},
+            {name: "convulsions", label: "CONVULSIONS", value: noValue},
+            {name: "dementia", label: "DEMENTIA", value: noValue},
+            {name: "depression", label: "DEPRESSION", value: noValue},
+            {name: "diabetes", label: "DIABETES", value: noValue},
+            {name: "gangrene", label: "GANGRENE", value: noValue},
+            {name: "glaucoma", label: "GLAUCOMA", value: noValue},
+            {name: "haematologic-bleeding", label: "BLEEDINGDISORDERS", value: noValue},
+            {name: "hepatitis", label: "HEPATITIS", value: noValue},
+            {name: "hypertension", label: "HYPERTENSION", value: noValue},
+            {name: "nausea-pregnancy", label: "NAUSEAPREG", value: noValue},
+            {name: "obesity", label: "OBESITY", value: noValue},
+            {name: "rheumatic-fever", label: "RHEUMATICFEVER", value: noValue},
+            {name: "septicemia", label: "SEPTICEMIA", value: noValue},
+            {name: "sex-transmit-disease", label: "SEXDISEASE", value: noValue},
+            {name: "strangulated-hernia", label: "STRANGHERNIA", value: noValue},
+            {name: "thrombotic-embolic-disorder", label: "THROMBOTICDISORDER", value: noValue},
+            {name: "thyroid-disease", label: "THYROIDDISEASE", value: noValue},
+            {name: "ulcer-gastro", label: "UCLERGASTRO", value: noValue},
+        ];
+
     }
 
 

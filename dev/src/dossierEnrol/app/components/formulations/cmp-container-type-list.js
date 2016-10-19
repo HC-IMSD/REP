@@ -41,7 +41,7 @@
 
             self.containerList = [];
 
-            if(self.containers){
+            if (self.containers) {
                 self.containerList = self.containers;
             }
 
@@ -54,19 +54,19 @@
             }
         };
 
-        self.addNew = function(ing){
+        self.addNew = function (ing) {
             self.containerList.push(ing);
             self.newFormShown = false;
             self.resetToCollapsed = true;
         };
 
-        self.updateRec = function(idx, ing){
+        self.updateRec = function (idx, ing) {
             self.containerList[idx] = angular.copy(ing);
         };
 
-        self.deleteRec = function(idx){
+        self.deleteRec = function (idx) {
             // console.debug('containerList deleteIng: ' + idx);
-            self.containerList.splice(idx,1);
+            self.containerList.splice(idx, 1);
             self.resetToCollapsed = true;
         }
     }

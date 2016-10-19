@@ -53,20 +53,20 @@
         self.save = function () {
             if (self.record) {
                 // console.log('product details update product');
-                self.onUpdate({ing:self.mirModel});
-            }else{
+                self.onUpdate({ing: self.mirModel});
+            } else {
                 //  console.log('product details add product');
-                self.onAddNew({ing:self.mirModel});
+                self.onAddNew({ing: self.mirModel});
             }
 
         };
 
-        self.discardChanges = function(){
+        self.discardChanges = function () {
             self.mirModel = self.record ? self.record : {};
             self.onCancel();
         }
 
-        self.delete = function(){
+        self.delete = function () {
             if (self.record) {
                 //  console.log('product details delete product');
                 self.onDelete();

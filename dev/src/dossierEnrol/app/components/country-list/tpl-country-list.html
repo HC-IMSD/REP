@@ -7,7 +7,7 @@
         <li class="list-group-item list-group-item-text active  col-md-12">{{'COUNTRY_NAME'|translate}}</li>
         <li class="list-group-item  col-md-12" ng-repeat="item in $ctrl.model.list">
             <div class="col-md-8">
-                <select ng-model="item.name"  class="form-control full-width" >
+                <select ng-model="item.name" class="form-control full-width">
                     <option ng-repeat="ctr in $ctrl.model.countries">{{ctr}}</option>
                 </select>
                 <!--<input type="text" class="form-control full-width" ng-model="item.name"/>-->
@@ -15,7 +15,8 @@
             <div class="btn-group-sm col-md-4 text-right">
                 <!--<a href="" ng-click="$ctrl.saveRecord(item.id)" class="btn btn-primary btn-sm">{{'SAVE'|translate}}</a>
                 <a href="" ng-click="$ctrl.reset()" class="btn btn-default btn-sm">{{'CANCEL'|translate}}</a>-->
-                <a href="" ng-click="$ctrl.deleteRecord(item.id)" class="btn btn-danger btn-sm">{{'DELETE'|translate}}</a>
+                <a href="" ng-click="$ctrl.deleteRecord(item.id)"
+                   class="btn btn-danger btn-sm">{{'DELETE'|translate}}</a>
             </div>
             <div class="form-group col-md-8 mrgn-tp-lg has-error" ng-if="item.name === 'UNKNOWN' ">
                 <!--<label for="unknown-country-details">Please specify the unknown details</label>-->
@@ -25,7 +26,8 @@
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                 </label>
 
-                <textarea  id="unknown-country-details" class="form-control full-width" ng-model="item.unknownCountryDetails"></textarea>
+                <textarea id="unknown-country-details" class="form-control full-width"
+                          ng-model="item.unknownCountryDetails"></textarea>
             </div>
         </li>
     </ul>
@@ -68,6 +70,6 @@
 
 <div class="row mrgn-tp-md mrgn-bttm-lg">
     <div class="btn-group-sm col-md-12 text-right">
-        <input type="submit" value="Add New Country" class="btn btn-primary" ng-click="$ctrl.addNew()" />
+        <input type="submit" value="Add New Country" class="btn btn-primary" ng-click="$ctrl.addNew()"/>
     </div>
 </div>

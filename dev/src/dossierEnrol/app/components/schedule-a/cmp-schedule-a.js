@@ -31,7 +31,7 @@
         var self = this;
         self.claimSelected=false;
         self.$onInit = function () {
-            self.scheduleAModel = {
+            /* self.scheduleAModel = {
                 drugIdNumber: "00000000",
                 scheduleAClaimsIndDetails: "AAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                 diseaseDisorderList: [
@@ -73,7 +73,7 @@
 
             if (self.scheduleGroup) {
                 self.scheduleAModel = self.scheduleGroup;
-            }
+             }*/
 
             /*  var test = self.scheduleAModel.diseaseDisorder.replace(/_\w/g, function(m) {
              return m[1].toUpperCase();

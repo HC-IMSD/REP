@@ -33,7 +33,7 @@
             self.commonName = "drugUse";
             self.myList = [];
 
-            if(self.listItems){
+            if (self.listItems) {
                 self.myList = self.listItems;
             }
         };

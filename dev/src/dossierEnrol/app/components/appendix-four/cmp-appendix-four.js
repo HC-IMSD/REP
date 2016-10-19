@@ -49,21 +49,20 @@
         };
 
 
-
-        self.addNew = function(ing){
+        self.addNew = function (ing) {
             //console.debug('frmList add new: ' + frm);
             self.ingredientList.push(ing);
             self.newFormShown = false;
             self.resetToCollapsed = true;
         };
 
-        self.update = function(idx, ing){
+        self.update = function (idx, ing) {
             self.ingredientList[idx] = angular.copy(ing);
         };
 
-        self.delete = function(idx){
+        self.delete = function (idx) {
             //console.debug('frmList delete: ' + idx);
-            if(self.ingredientList.splice(idx,1))
+            if (self.ingredientList.splice(idx, 1))
                 self.resetToCollapsed = true;
 
         }

@@ -28,9 +28,9 @@
     function therapeuticClassCtrl($filter){
         var self = this;
 
-        self.model={
-            classifications : [],
-            selected:{}
+        self.model = {
+            classifications: [],
+            selected: {}
         };
 
         self.$onInit = function(){

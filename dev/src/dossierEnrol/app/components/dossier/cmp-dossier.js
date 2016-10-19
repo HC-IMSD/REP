@@ -168,25 +168,19 @@
             return ((isInvalid && isTouched) || (self.showErrors() && isInvalid))
         }
 
-        self.isScheduleA=function(){
-            console.log("Is schedule A"+self.dossierModel.drugProduct.isScheduleA)
+        /***
+         * Manages the schedule A details since the fields are always in the model
+         */
+        self.isSchedA = function () {
+            if (!self.dossierModel || !self.dossierModel.drugProduct || !self.dossierService) return false; //never happen case;
             if(self.dossierModel.drugProduct.isScheduleA){
 
-              //  self.dossierModel.drugProduct.scheduleAGroup= dvxv.xvxcv kself.dossierService.getEmptyDiseaseDisorderList();
+                return true;
             }else{
-                self.dossierModel.drugProduct.scheduleAGroup={};
+                self.dossierModel.drugProduct.scheduleAGroup = self.dossierService.getDefaultScheduleA();
             }
-            return(self.dossierModel.drugProduct.isScheduleA);
+            return false;
         }
-
-
-        /* [
-         {"name": "human", "label": "Human", "value": info.human_drug_use},
-         {"name": "radio-pharmaceutical", "label": "Radiopharmaceutical", "value": info.radiopharm_drug_use},
-         {"name": "veterinary", "label": "Veterinary", "value": info.vet_drug_use},
-         {"name": "disinfectant", "label": "Disinfectant", "value": info.disinfectant_drug_use}*/
-
-
 
     }
 
