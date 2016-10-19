@@ -22,61 +22,47 @@
 
         }
 
-        DossierService.dossierDefault = {
-            dossierID: "569522",
-            enrolmentVersion: "1.23",
-            dateSaved: "1999-01-21",
-            applicationType: "New",
-            softwareVersion: "1.0",
-            dataChecksum: "kjsakdjas",
-            drugProduct: {
-                thirdPartySigned: false,
-                humanDrugUse: false,
-                radiopharmDrugUse: false,
-                vetDrugUse: false,
-                disinfectantDrugUse: false,
-                isScheduleA: false,
-                scheduleAGroup: {},
-                therapeutic: {//grid
-                    listItems: [],
-                    columnDef: []
-                },
-                canRefProducts: {},//grid
-                formulations: {},//tab + grid +
-                appendixFour: {ingredientList:[]}//tab + grid +
-
-            },
-            contactList: []
-
-        };
+       // DossierService.dossierDefault = ;
 
 
         DossierService.prototype = {
 
-            _default: DossierService.dossierDefault,
+            _default: {
+                dossierID: "000569522",
+                enrolmentVersion: "1.23",
+                dateSaved: "1999-01-21",
+                applicationType: "New",
+                softwareVersion: "1.0",
+                dataChecksum: "kjsakdjas",
+                drugProduct: {
+                    thirdPartySigned: false,
+                    humanDrugUse: false,
+                    radiopharmDrugUse: false,
+                    vetDrugUse: false,
+                    disinfectantDrugUse: false,
+                    isScheduleA: false,
+                    scheduleAGroup: this.isScheduleA ? {}:'Undefined',
+                    therapeutic: [],
+                    canRefProducts: [],//grid
+                    formulations: {},//tab + grid +
+                    appendixFour: {
+                        ingredientList:[]
+                    }//tab + grid +
 
-           /* loadFromFile: function (url) {
-                var deferred = $q.defer();
-                // Fetch the player from Dribbble
-                // var url = 'http://api.dribbble.com/players/' + player + '?callback=JSON_CALLBACK';
+                },
+                contactList: []
 
-                var dossierData = $http.get(url);
-                var self = this;
+            },
 
-                // When our $http promise resolves
-                // Use angular.extend to extend 'this'
-                // with the properties of the response
-                dossierData.then(function successCallback(response) {
-                    // console.log('DossierService success response: ' + JSON.stringify(response));
-                    deferred.resolve(response);
-                    // angular.extend(self.addressList, self.getAddressList(response.data));
-                }, function errorCallback(response) {
-                    deffered.reject('There was an error getting data');
-                    console.log('DossierService error response: ' + JSON.stringify(response));
-                });
 
-                return deferred.promise;
-            },*/
+
+            getDefaultObject : function(){
+
+                return this._default;
+
+            },
+
+
 
             loadFromFile: function (info) {
 
@@ -510,46 +496,20 @@
 
     function getAppendix4IngredientList (info){ //info = dossier.appendixFour.ingredientList
         var list = [];
+        var getCountries = function(input){
+            var list = [];
 
-        /*var getTissuesFluidsOriginList = function (data) {
-            var array = [];
-            for (var i = 0; i < data.length; i++){
-                var record = {};
+            for(var i=0; i< input.length; i++){
 
-                record.name =  data[i].name;
-                record.label = data[i].label;
-                record.value = data[i].value;
-                if(angular.isDefined(data[i].hasOtherDetails)){
-                    record.hasOtherDetails = data[i].hasOtherDetails;
-                    record.otherText = data[i].otherText;
-                }
-
-                array.push(record);
+                list.push({
+                    "name":input[i].country_with_unknown,
+                    "unknownCountryDetails":input[i].unknown_country_details
+                });
 
             }
-
-            return array;
-
+            return list;
         };
 
-        var getPrimateTypeList = function (data) {
-            var array = [];
-            for (var i = 0; i < data.length; i++){
-
-                var record = {};
-                record.name =  data[i].name;
-                record.label = data[i].label;
-                record.type = data[i].type;
-                record.value = data[i].value;
-                record.required = data[i].required;
-
-                array.push(record);
-
-            }
-
-            return array;
-
-        };*/
         if (angular.isDefined(info)) {
             for (var i = 0; i < info.length; i++) {
                 var ing = {};
@@ -748,10 +708,10 @@
                         {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: srcAnimal.is_controlled_pop},
                         {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: srcAnimal.is_biotech_derived},
                         {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: srcAnimal.is_cell_line},
-                        {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: srcAnimal.animal_age}
+                        {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: Number(srcAnimal.animal_age)}
                     ],
+                countryList: getCountries(srcAnimal.country_origin_list.country_origin)
 
-                    countryList: srcAnimal.country_origin_list.country_origin
                 };
 
 
@@ -871,10 +831,10 @@
             var obj = {
                 "containerType": item.container_type,
                 "packageSize": item.package_size,
-                "shelfLifeYears": item.shelf_life_years,
-                "shelfLifeMonths": item.shelf_life_months,
-                "tempMin": item.temperature_min,
-                "tempMax": item.temperature_max
+                "shelfLifeYears": Number(item.shelf_life_years),
+                "shelfLifeMonths": Number(item.shelf_life_months),
+                "tempMin": Number(item.temperature_min),
+                "tempMax": Number(item.temperature_max)
             };
 
             resultList.push(obj);

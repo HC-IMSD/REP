@@ -20,7 +20,11 @@
             controller: app4RecCtrl,
             bindings: {
                 record: '<',
-                showListErrors: '&'
+                showListErrors: '&',
+                onAddNew: '&',
+                onUpdate: '&',
+                onDelete: '&',
+                onCancel: '&'
             }
 
         });
@@ -61,7 +65,31 @@
          */
         self.showError = function (isInvalid, isTouched) {
             return ((isInvalid && isTouched) || (isInvalid && self.showListErrors()))
+        };
+        self.save = function () {
+            if (self.record) {
+                // console.log('product details update product');
+                self.onUpdate({record:self.model});
+            }else{
+                //  console.log('product details add product');
+                self.onAddNew({record:self.model});
+            }
+
+        };
+
+        self.discardChanges = function(){
+            self.model = {};
+            //self.productDetailsForm.$setPristine();
+            self.onCancel();
         }
+
+        self.delete = function(){
+            if (self.record) {
+                //  console.log('product details delete product');
+                self.onDelete();
+            }
+
+        };
 
     }
 })();

@@ -57,8 +57,7 @@
         };
 
         self.discardChanges = function () {
-            self.ingModel = {};
-            //self.productDetailsForm.$setPristine();
+            self.ingModel = self.record ? self.record : {};
             self.onCancel();
         };
 
@@ -70,6 +69,14 @@
 
             }
         };
+
+        self.$onChanges=function(changes){
+            if(changes.record){
+                self.ingModel = changes.record.currentValue;
+            }
+        };
+
+
         /**
          * Controls showing errors for a field
          * @param isInvalid

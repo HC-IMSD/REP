@@ -80,47 +80,8 @@
         self.$onInit = function(){
 
             self.dossierService = new DossierService();
-            self.errorAppendix=self.dossierService.getMissingAppendix4();
 
-
-            self.dossierModel = {
-                dossierID:"",
-                enrolmentVersion: "0.00",
-                dateSaved: "",
-                applicationType: "NEW",
-                softwareVersion: "1.0.0",
-                dataChecksum: "",
-                drugProduct:{
-                    thirdPartySigned:false,
-                    humanDrugUse: false,
-                    radiopharmDrugUse: false,
-                    vetDrugUse: false,
-                    disinfectantDrugUse: false,
-                    isScheduleA: false,
-                    scheduleAGroup:{
-                    },
-                    therapeutic: [],
-                    canRefProducts:{},//grid
-                    formulations:[
-                    ],
-                    appendixFour: {
-                        ingredientList: []
-                    }
-
-                },
-                contactInfo: { //grid
-                    contactList:[],
-                    columnDef:[]
-                }
-
-            };
-
-            //self.dossierModel = {};
-
-
-
-
-
+            self.dossierModel = self.dossierService.getDefaultObject();
         }
         /**
          * @ngdoc captures any change events from variable bindings

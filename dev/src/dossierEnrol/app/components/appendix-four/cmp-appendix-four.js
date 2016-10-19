@@ -29,6 +29,7 @@
         var self=this;
 
         self.$onInit = function(){
+            self.newFormShown = false;
             self.colNames = [
                 {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
             ];
@@ -36,16 +37,37 @@
             self.ingredientList = [];
 
             if(self.ingredients){
-                self.ingredientList = self.ingredients.ingredientList;
+                self.ingredientList = self.ingredients;
             }
         };
 
         self.$onChanges = function (changes) {
 
             if (changes.ingredients) {
-                self.ingredientList = changes.ingredients.currentValue.ingredientList;
+                self.ingredientList = changes.ingredients.currentValue;
             }
         };
+
+
+
+        self.addNew = function(ing){
+            //console.debug('frmList add new: ' + frm);
+            self.ingredientList.push(ing);
+            self.newFormShown = false;
+            self.resetToCollapsed = true;
+        };
+
+        self.update = function(idx, ing){
+            self.ingredientList[idx] = angular.copy(ing);
+        };
+
+        self.delete = function(idx){
+            //console.debug('frmList delete: ' + idx);
+            if(self.ingredientList.splice(idx,1))
+                self.resetToCollapsed = true;
+
+        }
+
 
     }
 })();
