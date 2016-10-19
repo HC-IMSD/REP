@@ -381,48 +381,6 @@
 
     function getAppendix4IngredientList (info){ //info = dossier.appendixFour.ingredientList
         var list = [];
-
-        /*var getTissuesFluidsOriginList = function (data) {
-            var array = [];
-            for (var i = 0; i < data.length; i++){
-                var record = {};
-
-                record.name =  data[i].name;
-                record.label = data[i].label;
-                record.value = data[i].value;
-                if(angular.isDefined(data[i].hasOtherDetails)){
-                    record.hasOtherDetails = data[i].hasOtherDetails;
-                    record.otherText = data[i].otherText;
-                }
-
-                array.push(record);
-
-            }
-
-            return array;
-
-        };
-
-        var getPrimateTypeList = function (data) {
-            var array = [];
-            for (var i = 0; i < data.length; i++){
-
-                var record = {};
-                record.name =  data[i].name;
-                record.label = data[i].label;
-                record.type = data[i].type;
-                record.value = data[i].value;
-                record.required = data[i].required;
-
-                array.push(record);
-
-            }
-
-            return array;
-
-        };*/
-
-
         var getCountries = function(input){
             var list = [];
 
@@ -635,7 +593,7 @@
                         {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: srcAnimal.is_controlled_pop},
                         {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: srcAnimal.is_biotech_derived},
                         {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: srcAnimal.is_cell_line},
-                        {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: srcAnimal.animal_age}
+                        {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: Number(srcAnimal.animal_age)}
                     ],
                 countryList: getCountries(srcAnimal.country_origin_list.country_origin)
 
