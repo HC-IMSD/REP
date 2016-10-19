@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('checkBoxListModule', [])
+        .module('checkBoxListModule', ['angular.filter'])
 })();
 
 (function () {
@@ -22,13 +22,16 @@
             bindings: {
                 title: '@',
                 commonName:'@',
-                listItems: '<' //array of objects
+                listItems: '<', //array of objects
+                numberCols: '@'
             }
         });
 
-    function checkBoxListCtrl(){
+    function checkBoxListCtrl($filter) {
 
         var self = this;
+        self.numberColumns = 4; //default to 4
+        self.colWidth = 3;
         self.$onInit = function(){
             //init items after change
             //temp as not hooked up
@@ -38,6 +41,11 @@
 
             if (changes.listItems) {
                 self.currentModel = changes.listItems.currentValue;
+            }
+            if (changes.numberCols && changes.numberCols.currentValue) {
+                console.log("number cols" + changes.numberCols.currentValue)
+                self.numberColumns = changes.numberCols.currentValue;
+                self.colWidth = Math.ceil(12 / self.numberColumns);
             }
         }
         //TODO remove?
