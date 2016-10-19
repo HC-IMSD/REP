@@ -85,11 +85,11 @@
 
             self.dossierModel = {
                 dossierID:"",
-                enrolmentVersion: "1.23",
-                dateSaved: "1999-01-21",
+                enrolmentVersion: "0.00",
+                dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "1.0",
-                dataChecksum: "kjsakdjas",
+                softwareVersion: "1.0.0",
+                dataChecksum: "",
                 drugProduct:{
                     thirdPartySigned:false,
                     humanDrugUse: false,
@@ -98,135 +98,13 @@
                     disinfectantDrugUse: false,
                     isScheduleA: false,
                     scheduleAGroup:{
-
                     },
                     therapeutic: [],
                     canRefProducts:{},//grid
                     formulations:[
-                        {
-                            "formulationId": "1",
-                            "formulationName": "Main Formulation",
-                            "activeIngList": [
-                                {
-                                    "ingName": "ing1",
-                                    "cas": "00-00-1",
-                                    "humanAnimalSourced": "No",
-                                    "standard": "A",
-                                    "strength": "A",
-                                    "per": "A",
-                                    "units": "A",
-                                    "calcAsBase": true,
-                                    "animalHumanSourced": true,
-                                    "nanoMaterial": "Yes",
-                                    "nanoMaterialOther": "A"
-                                }],
-                            "nMedIngList": [
-                                {
-                                    "varId": "Var1",
-                                    "ingName": "ing1",
-                                    "cas": "00-00-1",
-                                    "type": "A",
-                                    "humanAnimalSourced": "No",
-                                    "standard": "A",
-                                    "strength": "A",
-                                    "per": "A",
-                                    "units": "A",
-                                    "calcAsBase": true,
-                                    "animalHumanSourced": true,
-                                    "nanoMaterial": "Yes",
-                                    "nanoMaterialOther": "A"
-                                }
-                            ],
-                            "containerTypes": [
-
-                                {
-                                    "containerType": "A",
-                                    "packageSize": "A",
-                                    "shelfLifeYears": "9999",
-                                    "shelfLifeMonths": "99",
-                                    "tempMin": "999",
-                                    "tempMax": "999"
-                                }
-                            ],
-                            "animalHumanMaterials": [
-                                {
-                                    "ingredientId": "A",
-                                    "ingredientName": "A",
-                                    "cas": "00-00-0",
-                                    "ingredientStandard": "A",
-                                    "inFinalContainer": true
-                                }
-                            ],
-                            "routeAdmins": [
-                                {"id": 1, "roa": "DENTAL", "otherRoaDetails": ""},
-                                {"id": 2, "roa": "BUCCAL", "otherRoaDetails": ""},
-                                {"id": 3, "roa": "BUCCAL", "otherRoaDetails": ""}
-                            ],
-                            "countryList": [
-                                {"id":1, "name":"ARG"},
-                                {"id":2, "name":"CAN"},
-                                {"id":3, "name":"USA"}
-                            ]
-
-                        },
-                        {
-                            "formulationId": "2",
-                            "formulationName": "Alternate 1",
-                            "activeIngList": [],
-                            "nMedIngList": [],
-                            "containerTypes": [],
-                            "animalHumanMaterials": [],
-                            "routeAdmins": [],
-                            "countryList": []
-
-                        },
-                        {
-                            "formulationId": "3",
-                            "formulationName": "Alternate 2",
-                            "activeIngList": [],
-                            "nMedIngList": [],
-                            "containerTypes": [],
-                            "animalHumanMaterials": [],
-                            "routeAdmins": [],
-                            "countryList": []
-
-                        }
-
                     ],
                     appendixFour: {
-                        ingredientList: [
-                            {
-                                "ingredientName": "ing1",
-                                "role": "role1",
-                                "abstractNum": "44",
-                                "standard": "A",
-                                "sourceHuman": false,
-                                "sourceAnimal": false,
-                                "tissuesFluidsOrigin": {},
-                                "sourceAnimalDetails": {}
-
-                            },
-                            {
-                                "ingredientName": "ing2",
-                                "role": "role1",
-                                "abstractNum": "655",
-                                "standard": "A",
-                                "sourceHuman": false,
-                                "sourceAnimal": false,
-                                "tissuesFluidsOrigin": {},
-                                "sourceAnimalDetails": {}
-                            },
-                            {
-                                "ingredientName": "ing3",
-                                "role": "role2",
-                                "abstractNum": "54545",
-                                "standard": "A",
-                                "sourceHuman": false,
-                                "sourceAnimal": false,
-                                "tissuesFluidsOrigin": {},
-                                "sourceAnimalDetails": {}
-                            }
-                        ]
+                        ingredientList: []
                     }
 
                 },
@@ -237,7 +115,7 @@
 
             };
 
-            self.dossierModel = {};
+            //self.dossierModel = {};
 
 
 
@@ -328,6 +206,18 @@
         self.showError = function (isInvalid, isTouched) {
             return ((isInvalid && isTouched) || (self.showErrors() && isInvalid))
         }
+
+        self.isScheduleA=function(){
+            console.log("Is schedule A"+self.dossierModel.drugProduct.isScheduleA)
+            if(self.dossierModel.drugProduct.isScheduleA){
+
+              //  self.dossierModel.drugProduct.scheduleAGroup= dvxv.xvxcv kself.dossierService.getEmptyDiseaseDisorderList();
+            }else{
+                self.dossierModel.drugProduct.scheduleAGroup={};
+            }
+            return(self.dossierModel.drugProduct.isScheduleA);
+        }
+
 
         /* [
          {"name": "human", "label": "Human", "value": info.human_drug_use},

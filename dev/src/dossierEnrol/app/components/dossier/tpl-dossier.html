@@ -95,7 +95,7 @@
                         <h2 class="panel-title">{{'THERA_CLASS'|translate}}</h2>
                     </header>
                     <div class="panel-body">
-                        <cmp-therapeutic-class list-items="dos.dossierModel"></cmp-therapeutic-class>
+                        <cmp-therapeutic-class list-items="dos.dossierModel.therapeutic"></cmp-therapeutic-class>
                     </div>
                 </section>
             </div>
@@ -134,7 +134,7 @@
                 </div>
             </div>
 
-            <div class="row" ng-if="dos.dossierModel.drugProduct.isScheduleA">
+            <div class="row" ng-if="dos.isScheduleA()">
                 <div class="col-xs-12 form-group">
                     <cmp-schedule-a schedule-group="dos.dossierModel.drugProduct.scheduleAGroup"></cmp-schedule-a>
                 </div>

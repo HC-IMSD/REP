@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('containerTypeRecordModule', [])
+        .module('containerTypeRecordModule', ['numberFormat'])
 })();
 
 (function () {
@@ -24,7 +24,8 @@
                 onAddIng: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                showErrors:'&'
             }
 
         });
@@ -68,6 +69,15 @@
             }
 
         };
+        /**
+         * Manages visibility of error messages for an indvidual control
+         * @param isInvalid
+         * @param isTouched
+         * @returns {*}
+         */
+        self.showError=function(isInvalid, isTouched){
+            return((isInvalid && isTouched) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
+        }
 
 
     }
