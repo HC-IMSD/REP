@@ -22,61 +22,47 @@
 
         }
 
-        DossierService.dossierDefault = {
-            dossierID: "569522",
-            enrolmentVersion: "1.23",
-            dateSaved: "1999-01-21",
-            applicationType: "New",
-            softwareVersion: "1.0",
-            dataChecksum: "kjsakdjas",
-            drugProduct: {
-                thirdPartySigned: false,
-                humanDrugUse: false,
-                radiopharmDrugUse: false,
-                vetDrugUse: false,
-                disinfectantDrugUse: false,
-                isScheduleA: false,
-                scheduleAGroup: {},
-                therapeutic: {//grid
-                    listItems: [],
-                    columnDef: []
-                },
-                canRefProducts: {},//grid
-                formulations: {},//tab + grid +
-                appendixFour: {}//tab + grid +
-
-            },
-            contactList: []
-
-        };
+       // DossierService.dossierDefault = ;
 
 
         DossierService.prototype = {
 
-            _default: DossierService.dossierDefault,
+            _default: {
+                dossierID: "000569522",
+                enrolmentVersion: "1.23",
+                dateSaved: "1999-01-21",
+                applicationType: "New",
+                softwareVersion: "1.0",
+                dataChecksum: "kjsakdjas",
+                drugProduct: {
+                    thirdPartySigned: false,
+                    humanDrugUse: false,
+                    radiopharmDrugUse: false,
+                    vetDrugUse: false,
+                    disinfectantDrugUse: false,
+                    isScheduleA: false,
+                    scheduleAGroup: this.isScheduleA ? {}:'Undefined',
+                    therapeutic: [],
+                    canRefProducts: [],//grid
+                    formulations: {},//tab + grid +
+                    appendixFour: {
+                        ingredientList:[]
+                    }//tab + grid +
 
-           /* loadFromFile: function (url) {
-                var deferred = $q.defer();
-                // Fetch the player from Dribbble
-                // var url = 'http://api.dribbble.com/players/' + player + '?callback=JSON_CALLBACK';
+                },
+                contactList: []
 
-                var dossierData = $http.get(url);
-                var self = this;
+            },
 
-                // When our $http promise resolves
-                // Use angular.extend to extend 'this'
-                // with the properties of the response
-                dossierData.then(function successCallback(response) {
-                    // console.log('DossierService success response: ' + JSON.stringify(response));
-                    deferred.resolve(response);
-                    // angular.extend(self.addressList, self.getAddressList(response.data));
-                }, function errorCallback(response) {
-                    deffered.reject('There was an error getting data');
-                    console.log('DossierService error response: ' + JSON.stringify(response));
-                });
 
-                return deferred.promise;
-            },*/
+
+            getDefaultObject : function(){
+
+                return this._default;
+
+            },
+
+
 
             loadFromFile: function (info) {
 

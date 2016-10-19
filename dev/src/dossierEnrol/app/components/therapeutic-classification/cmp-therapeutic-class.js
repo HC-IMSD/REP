@@ -28,11 +28,12 @@
     function therapeuticClassCtrl($filter){
         var self = this;
 
+        self.model={
+            classifications : [],
+            selected:{}
+        };
+
         self.$onInit = function(){
-            self.model={
-                classifications : [],
-                selected:{}
-            };
 
             if(self.listItems){
                 self.model.classifications = self.listItems;
@@ -41,7 +42,7 @@
 
         self.$onChanges = function (changes) {
 
-            if (angular.isDefined(changes.listItems) && angular.isDefined(changes.listItems.currentValue)) {
+            if (changes.listItems) {
                 self.model.classifications = changes.listItems.currentValue;
             }
         };
