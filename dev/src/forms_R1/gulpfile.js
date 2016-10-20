@@ -764,8 +764,11 @@ gulp.task('copyCompanySrcDev', function () {
             jsServiceFiles.companyService,
             jsServiceFiles.applicationInfoService,
             jsServiceFiles.filterLists,
+            jsServiceFiles.hpfbConstants,
             jsServiceFiles.dataLists,
-            jsDirectiveFiles.numberOnly
+            jsDirectiveFiles.numberOnly,
+
+
         ],
         {read: true, base: './'});
 
@@ -1014,6 +1017,9 @@ gulp.task('copyDossierTranslateDev', function () {
     pipes.translateDev(translationList, dossierPaths.buildDevDossier, baseIgnore)
 });
 
+
+
+
 gulp.task('copyDossierSrcDev', ['copyDossierServicesDev', 'copyDossierCommonSrcDev'], function () {
     var copySources = gulp.src([
 
@@ -1055,7 +1061,8 @@ gulp.task('copyDossierCommonSrcDev', ['copyDossierCommonServicesDev', 'copyDossi
             jsComponentPaths.contactDetailsPath + '**/*',
             jsComponentPaths.applicationInfoPath + '**/*',
             jsComponentPaths.expandingTablePath + '**/*',
-            jsDirectiveFiles.numberOnly
+            jsDirectiveFiles.numberOnly,
+
         ],
         {read: true, base: './app/scripts'});
 
@@ -1092,7 +1099,8 @@ gulp.task('copyDossierCommonServicesDev', function () {
             jsServiceFiles.dataLists,
             jsServiceFiles.filterLists,
             jsServiceFiles.repContactService,
-            jsServiceFiles.filterLists
+            jsServiceFiles.hpfbConstants
+
         ],
         {read: true, base: './app/scripts'});
 

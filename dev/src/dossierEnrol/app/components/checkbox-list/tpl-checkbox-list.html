@@ -1,18 +1,17 @@
 <ng-form name="chkl.checkList">
     <div ng-repeat="items in chkl.currentModel | chunkBy:chkl.numberColumns" class="row">
         <div class="col-lg-{{chkl.colWidth}} col-md-{{chkl.colWidth}} col-sm-{{chkl.colWidth}} col-xs-12"
-             ng-repeat="item in items">
+             ng-repeat-start="item in items">
             <div class="checkbox">
                 <label class="form-checkbox form-label-inline" for="chk-{{item.name}}-{{$index}}">
                     <input type="checkbox" name="{{chkl.commonName}}" ng-model="item.value"
                            ng-change="chkl.updateOtherState(item)"
-                           id="chk-{{item.name}}-{{$index}}" ng-required="!chkl.someSelected()"/>
+                           id="chk-{{item.name}}-{{$index}}"/>
                     {{item.label |translate}}
                 </label>
             </div>
         </div>
-
-        <div>
+        <div ng-repeat-end>
             <div class="col-xs-6 form-group" ng-if="item.value && item.hasOtherDetails"
                  ng-class="{'has-error':chkl.checkList.textOther.$invalid}">
                 <label for="{{chkl.commonName}}-other-text" class="required">
@@ -30,28 +29,7 @@
             </div>
         </div>
     </div>
-    <!--  <div class="row" ng-repeat="letters in alphabet | groupBy:4">
-          <div class="col-xs-3 letter-box" ng-repeat="letter in letters" >
-              <div>Letter {{$index + 1}} is: <b> {{letter}}</b></div>
-          </div>
-      </div>-->
-    <!--<pre>currentModel: {{chkl.listItems | json : spacing}}</pre>-->
-</ng-form>
-<!--
-<div class="col-md-4 form-group" ng-class="{'has-error':contactForm.jobTitle.$invalid}">
-    <label for="job-title_{{$id}}" class="required">
-        <span class="field-name">{{'JOB_TITLE'|translate}}</span>
-        <strong class="required">{{"REQUIRED"|translate}}</strong>
-        <input type="text" id="job-title_{{$id}}" data-ng-model="$ctrl.contactModel.title"
-               ng-model-options="$ctrl.ngModelOptSetting"
-               class="form-control full-width" name="jobTitle" ng-required="true" maxlength="40" size="40"
-               ng-readonly="!$ctrl.isEditable"
-               required/>
-        <strong id="jobTitle-error" class="error" ng-if="$ctrl.showError(contactForm.jobTitle)">
-                        <span class="label label-danger" ng-messages="contactForm.jobTitle.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-        </strong>
-    </label>
 
-</div>-->
+</ng-form>
+
+

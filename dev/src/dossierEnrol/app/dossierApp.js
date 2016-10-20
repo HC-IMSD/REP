@@ -77,11 +77,15 @@
                     {
                         prefix: './resources/roa-',
                         suffix: '.json'
+                    },
+                    {
+                        prefix: './resources/countries-',
+                        suffix: '.json'
                     }
 
                 ]
             });
-            $translateProvider.preferredLanguage('@@prefLang');
+            $translateProvider.preferredLanguage('en');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             //  $translateProvider.useSanitizeValueStrategy('sanitize');

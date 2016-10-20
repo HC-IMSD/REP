@@ -21,6 +21,7 @@
         'applicationInfoService',
         'applicationInfo',
         'ui.bootstrap',
+        'hpfbConstants'
        // 'numberFormatModule'
     ];
 

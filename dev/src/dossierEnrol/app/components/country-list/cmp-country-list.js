@@ -20,7 +20,9 @@
                 withUnknown:'<',
                 listItems: '<',
                 onUpdate: '&',
-                onDelete: '&'
+                onDelete: '&',
+                showErrors:'&',
+                fieldLabel:'@'
             }
         });
 
@@ -101,6 +103,15 @@
             self.model.selected = {};
 
         };
+        /***
+         * Shows a control error if touched and invalid or remote trigger
+         * @param isInvalid
+         * @param isTouched
+         * @returns {*}
+         */
+        self.showError=function(isInvalid,isTouched){
+            return((isInvalid && isTouched)||(isInvalid && self.showErrors()))
+        }
 
         function getListMaxID(){
 

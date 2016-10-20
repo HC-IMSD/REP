@@ -6,8 +6,8 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="formul-id"><span class="field-name">{{'FORMULATION_ID'|translate}}</span></label>
-                        <input type="text" id="formul-id" data-ng-model="formulRecCtrl.frmModel.formulationId"
-                               class="form-control full-width" name="text" maxlength="100" size="100"/>
+                    <input type="text" id="formul-id" data-ng-model="formulRecCtrl.frmModel.formulationId"
+                           class="form-control full-width" name="text" maxlength="100" size="100"/>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="formul-name"><span class="field-name">{{'FORMULATION_NAME'|translate}}</span></label>
@@ -15,24 +15,34 @@
                            class="form-control full-width" name="text" maxlength="100" size="100"/>
                 </div>
             </div>
-
             <div class="container-fluid">
-                <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList" on-update=""></cmp-active-ing-list>
+                <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
+                                     on-update=""></cmp-active-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList" on-update=""></cmp-non-med-ing-list>
+                <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList"
+                                      on-update=""></cmp-non-med-ing-list>
             </div>
             <div class="container-fluid">
                 <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"></cmp-container-type-list>
             </div>
             <div class="container-fluid">
-                <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials" on-update=""></cmp-material-ing-list>
+                <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials"
+                                       on-update=""></cmp-material-ing-list>
             </div>
             <div class="container-fluid">
                 <cmp-roa list-items="formulRecCtrl.frmModel.routeAdmins"></cmp-roa>
             </div>
             <div class="container-fluid">
-                <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"></cmp-country-list>
+                <section class="panel panel-default">
+                    <header class="panel-heading">
+                        <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
+                    </header>
+                    <div class="panel-body">
+                        <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
+                                          field-label="COUNTRY_MAN"></cmp-country-list>
+                    </div>
+                </section>
             </div>
 
             <div class="row">
@@ -40,8 +50,10 @@
                 <div class="btn-group-sm col-xs-12 text-right">
                     <input type="submit" value="Save Formulation" ng-if="!formulRecCtrl.record" class="btn btn-primary"
                            ng-click="formulRecCtrl.save()"/>
-                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Delete Formulation" class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>
-                    <input type="submit" value="Discard Changes" class="btn btn-default" ng-click="formulRecCtrl.discardChanges()">
+                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Delete Formulation"
+                           class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>
+                    <input type="submit" value="Discard Changes" class="btn btn-default"
+                           ng-click="formulRecCtrl.discardChanges()">
                 </div>
             </div>
         </fieldset>

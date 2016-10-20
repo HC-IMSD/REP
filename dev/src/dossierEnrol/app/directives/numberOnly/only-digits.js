@@ -3,16 +3,11 @@
  */
 
 
-/**
- * Created by hcuser on 20/05/2016.
- */
-
-
 (function () {
     'use strict';
 
     angular
-        .module('numberFormatModule', []);
+        .module('numberFormat', []);
 
 })();
 
@@ -20,9 +15,8 @@
     'use strict';
 
     angular
-        .module('numberFormatModule')
+        .module('numberFormat')
         .directive('onlyDigits', digitsCtrl);
-
 
     function digitsCtrl() {
         var directive = {
@@ -33,30 +27,41 @@
         };
         return directive;
 
-
         function link(scope, element, attrs, modelCtrl) {
             modelCtrl.$parsers.push(function (inputValue) {
                 if (inputValue == undefined) return '';
-                var regexDecimalNeg = /^-?[0-9]\d*(\.\d+)?$/;
-                var regexDecimalPos = /^?[0-9]\d*(\.\d+)?$/;
+                var isNumber = false;
+                var max = -1;
+                var tempVal = "" + inputValue;
+                if (attrs['type'] && attrs['type'] === 'number') {
+                    isNumber = true;
+                }
+
+                if (attrs['onlyMax']) {
+                    max = parseInt(attrs['onlyMax']);
+                }
+                var regexIntNeg = /[^0-9-]/g;
                 var integerReg = /[^0-9]/g; //default
-                var regexValue = '';
-                //attrs.username;
-                if (attrs['onlyDigits'] == 'decNeg') {
-                    regexValue = regexDecimalNeg;
-                } else if (attrs.onlyDigits === "decPos") {
-                    regexValue = regexDecimalPos;
+                var regexValue = integerReg;
+                if (attrs['onlyDigits'] == 'intNeg') {
+                    regexValue = regexIntNeg;
                 } else {
                     regexValue = integerReg
                 }
-                var transformedInput = inputValue.replace(regexValue, '');
-                if (transformedInput !== inputValue) {
+                var transformedInput = tempVal.replace(regexValue, '');
+                if (max > 0) {
+                    transformedInput = transformedInput.substring(0, max);
+                }
+                if (transformedInput !== tempVal) {
+                    if (isNumber && transformedInput) {
+                        transformedInput = parseFloat(transformedInput)
+                    }
                     modelCtrl.$setViewValue(transformedInput);
                     modelCtrl.$render();
                 }
                 return transformedInput;
             });
-                }
+        }
     }
 
 })();

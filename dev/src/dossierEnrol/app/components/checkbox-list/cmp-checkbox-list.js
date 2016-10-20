@@ -43,7 +43,6 @@
                 self.currentModel = changes.listItems.currentValue;
             }
             if (changes.numberCols && changes.numberCols.currentValue) {
-                console.log("number cols" + changes.numberCols.currentValue)
                 self.numberColumns = changes.numberCols.currentValue;
                 self.colWidth = Math.ceil(12 / self.numberColumns);
             }

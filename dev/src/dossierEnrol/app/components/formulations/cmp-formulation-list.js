@@ -50,6 +50,7 @@
 
             if (changes.formulations) {
                 self.formulationList = changes.formulations.currentValue;
+                self.updateFormulationsError();
             }
         };
 
