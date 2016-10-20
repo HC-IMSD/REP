@@ -57,6 +57,7 @@
 
         self.addNew = function(frm){
             //console.debug('frmList add new: ' + frm);
+            frm.formulationId = self.formulationList.length + 1;
             self.formulationList.push(frm);
             self.newFormShown = false;
             self.resetToCollapsed = true;

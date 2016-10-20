@@ -44,7 +44,7 @@
                     scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
                     canRefProducts: [],//grid
-                    formulations: {},//tab + grid +
+                    formulations: [],//tab + grid +
                     appendixFour: {
                         ingredientList: []
                     }//tab + grid +
