@@ -107,10 +107,6 @@
 
             self.model.sourceAnimalDetails = input;
 
-            /*if (self.record) {
-                self.onUpdate({record: self.model});
-            }*/
-
         };
 
     }

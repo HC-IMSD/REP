@@ -257,13 +257,60 @@
 
         self.updateNervousSystemList = function(list){
 
-            console.log('nervousSystem model changed');
-
             self.model.nervousSystem.list = list;
             self.onUpdate({model:self.model});
 
         };
 
+        self.updateDigestSystemList = function(list){
+
+            self.model.digestiveSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateRepSystemList = function(list){
+
+            self.model.reproductiveSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateCardioSystemList = function(list){
+
+            self.model.cardioSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateImmuneSystemList = function(list){
+
+            self.model.immuneSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateSkinGlandSystemList = function(list){
+
+            self.model.skinGlandSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateMusculoSystemList = function(list){
+
+            self.model.musculoSkeletalSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+
+        self.updateOtherSystemList = function(list){
+
+            self.model.otherTissues.list = list;
+            self.onUpdate({model:self.model});
+
+        };
         self.showNoRecordError = function (isDirty) {
             return (!self.oneTissueSourceSelected());
 

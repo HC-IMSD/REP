@@ -78,15 +78,12 @@
         self.updateState = function (item) {
             if (!item.value) {
 
-                item.value = false;
+                item.value = false; //explicit false value
 
                 if(item.hasOtherDetails){
                     item.otherText = "";
                 }
             }
-
-
-
 
            self.onUpdate({list:self.currentModel});
         }

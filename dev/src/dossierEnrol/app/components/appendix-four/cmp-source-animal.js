@@ -20,7 +20,8 @@
             controllerAs: 'saCtrl',
             bindings: {
                 primateTypes : '<',
-                countries : '<'
+                countries : '<',
+                onUpdate : '&'
             }
         });
 
@@ -64,6 +65,18 @@
                 self.model.primateTypeList = changes.primateTypes.currentValue.primateTypeList;
                 self.model.countryList = changes.primateTypes.currentValue.countryList;
             }
+        };
+
+        self.updateAnimalSourcedModel = function(){
+
+            self.onUpdate({model:self.model});
+        };
+
+        self.updateCountryList = function(list){
+
+            self.model.countryList = list;
+            self.onUpdate({model:self.model});
+
         };
         /**
          * Determines if at least one of the
