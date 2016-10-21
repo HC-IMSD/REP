@@ -21,15 +21,16 @@
             controllerAs: 'chkl',
             bindings: {
                 title: '@',
-                commonName:'@',
-                listItems: '<' //array of objects
+                commonName: '@',
+                listItems: '<', //array of objects
+                onUpdate:'&'
             }
         });
 
-    function checkBoxListCtrl(){
+    function checkBoxListCtrl() {
 
         var self = this;
-        self.$onInit = function(){
+        self.$onInit = function () {
             //init items after change
             //temp as not hooked up
             self.currentModel = self.listItems
@@ -39,7 +40,15 @@
             if (changes.listItems) {
                 self.currentModel = changes.listItems.currentValue;
             }
-        }
+        };
+
+
+        /*self.$doCheck = function () {
+            if (!angular.equals(self.currentModel, self.listItems)) {
+                console.log('checkboxlist currentModel: ' + self.currentModel.title);
+            }
+        }*/
+
         //TODO remove?
         self.someSelected = function () {
             var object = self.roleModel;
@@ -59,18 +68,27 @@
             self.formName.addressRole.$pristine = !self.formName.addressRole.$dirty;
             self.formName.addressRole.$untouched = !self.formName.addressRole.$touched;
 
-            self.onUpdate({$event: {roles: self.roleModel}});
+            //self.onUpdate({$event: {roles: self.roleModel}});
 
         }
         /**
          * Manages the state of the other field
          * @param item
          */
-        self.updateOtherState = function (item) {
-            if (!item.value && item.hasOtherDetails) {
+        self.updateState = function (item) {
+            if (!item.value) {
 
-                item.otherText = "";
+                item.value = false;
+
+                if(item.hasOtherDetails){
+                    item.otherText = "";
+                }
             }
+
+
+
+
+           self.onUpdate({list:self.currentModel});
         }
 
     }

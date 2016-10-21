@@ -45,9 +45,9 @@
                     therapeutic: [],
                     canRefProducts: [],//grid
                     formulations: [],//tab + grid +
-                    appendixFour: {
-                        ingredientList: []
-                    }//tab + grid +
+                    appendixFourList: []/*{
+                        ingredientList:
+                    }//tab + grid +*/
 
                 },
                 contactList: []
@@ -60,9 +60,6 @@
                 return this._default;
 
             },
-
-
-
             loadFromFile: function (info) {
 
                 if (!info)
@@ -92,12 +89,12 @@
                             {"name": "disinfectant", "label": "Disinfectant", "value": info.disinfectant_drug_use === 'Y' ? true:false }
                         ],
                         isScheduleA: info.is_sched_a === 'Y' ? true:false ,
-                        therapeutic: info.therapeutic_class_list.therapeutic_class,
+                        therapeutic: getTherapeuticList(info.therapeutic_class_list.therapeutic_class),
                         canRefProducts:  getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
-                        appendixFour: {
-                            ingredientList : getAppendix4IngredientList(info.appendix4_group)
-                        }//tab + grid +
+                        appendixFourList: getAppendix4IngredientList(info.appendix4_group)/*{
+                            ingredientList :
+                        }//tab + grid +*/
 
                     },
                    contactList: getContactList(info.contact_record)
@@ -373,7 +370,7 @@
      */
     function getDiseaseDisorderList(info, diseaseList) {
 
-        if(!info || !service) return;
+        if(!info || !diseaseList) return;
             for(var i=0;i<diseaseList.length;i++){
                 var checkboxRec=diseaseList[i];
                 switch(checkboxRec.name){
@@ -479,6 +476,31 @@
                 }
             }
         return diseaseList;
+    }
+
+
+
+
+    function getTherapeuticList(input) {
+        var list = [];
+
+        if (input) {
+            for (var i = 0; i < input.length; i++) {
+                var item = {
+                    "id" : "" + i+1,
+                    "name" : input[i]
+                };
+
+
+
+                list.push(item);
+            }
+        }
+
+
+        return list;
+
+
     }
 
 

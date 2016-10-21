@@ -55,7 +55,7 @@
 
         self.addNew = function(){
 
-            var maxID = getListMaxID();
+            var maxID = self.model.classifications.length;//getListMaxID();
 
             //console.log("addNew maxID: " + JSON.stringify(maxID) );
 

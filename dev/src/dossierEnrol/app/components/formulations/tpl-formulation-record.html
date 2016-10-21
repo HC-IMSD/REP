@@ -17,22 +17,22 @@
             </div>
 
             <div class="container-fluid">
-                <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList" on-update=""></cmp-active-ing-list>
+                <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList" on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList" on-update=""></cmp-non-med-ing-list>
+                <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList" on-update="formulRecCtrl.updateNonMedIngList(list)"></cmp-non-med-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"></cmp-container-type-list>
+                <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes" on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
             </div>
             <div class="container-fluid">
-                <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials" on-update=""></cmp-material-ing-list>
+                <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials" on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-roa list-items="formulRecCtrl.frmModel.routeAdmins"></cmp-roa>
+                <cmp-roa list-items="formulRecCtrl.frmModel.routeAdmins" on-update="formulRecCtrl.updateRoaList(list)"></cmp-roa>
             </div>
             <div class="container-fluid">
-                <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"></cmp-country-list>
+                <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" on-update="formulRecCtrl.updateCountryList(list)"></cmp-country-list>
             </div>
 
             <div class="row">

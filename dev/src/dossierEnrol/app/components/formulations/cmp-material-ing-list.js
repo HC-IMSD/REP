@@ -56,16 +56,19 @@
             self.ingList.push(ing);
             self.newFormShown = false;
             self.resetToCollapsed = true;
+            self.onUpdate({list:self.ingList});
         };
 
         self.updateIng = function (idx, ing) {
             self.ingList[idx] = angular.copy(ing);
+            self.onUpdate({list:self.ingList});
         };
 
         self.deleteIng = function (idx) {
             // console.debug('containerList deleteIng: ' + idx);
             self.ingList.splice(idx, 1);
             self.resetToCollapsed = true;
+            self.onUpdate({list:self.ingList});
         }
 
     }

@@ -71,18 +71,18 @@
             <section class="section">
                 <cmp-tissues-fluids-origin
                         ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"
-                        tissues-model="ap4RecCtrl.model.tissuesFluidsOrigin"></cmp-tissues-fluids-origin>
+                        tissues-model="ap4RecCtrl.model.tissuesFluidsOrigin" on-update="ap4RecCtrl.updateTissuesFluids(model)"></cmp-tissues-fluids-origin>
             </section>
 
             <section class="section">
                 <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"
-                                   primate-types="ap4RecCtrl.model.sourceAnimalDetails"></cmp-source-animal>
+                                   primate-types="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(list)"></cmp-source-animal>
             </section>
 
             <div class="row">
 
                 <div class="btn-group-sm col-xs-12 text-right">
-                    <input type="submit" value="Save Ingredient" ng-if="!ap4RecCtrl.record" class="btn btn-primary"
+                    <input type="submit" value="Save Ingredient" class="btn btn-primary"
                            ng-click="ap4RecCtrl.save()"/>
                     <input type="submit" ng-if="ap4RecCtrl.deleteBtn === true" value="Delete Formulation"
                            class="btn btn-danger" ng-click="ap4RecCtrl.delete()"/>
