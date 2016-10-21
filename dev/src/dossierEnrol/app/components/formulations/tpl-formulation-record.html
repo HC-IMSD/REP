@@ -1,4 +1,4 @@
-<ng-form name="formulation-rec-form">
+<ng-form name="formulationRecForm">
     <div class="container-fluid">
         <fieldset>
             <legend>{{'FORMULATION_DETAILS'|translate}}</legend>
@@ -39,6 +39,16 @@
                         <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
                     </header>
                     <div class="panel-body">
+                        <label for="noActive{{$id}}" ng-if="formulRecCtrl.noCountry()">
+                            <strong id="active-error" class="error">
+                                <span class="label label-danger" ng-messages="formulationRecForm.noCountry.$error">
+                                    <span ng-message="required"><span translate="MSG_ERR_ONE_MANCOUNTRY"></span></span>
+                                </span>
+                            </strong>
+                        </label>
+                        <input type="textbox" required="true" ng-show="false" name="noCountry" id="noActive{{$id}}"
+                               data-ng-model="formulRecCtrl.noCountries"/>
+
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
                                           field-label="COUNTRY_MAN"></cmp-country-list>
                     </div>
@@ -59,6 +69,6 @@
         </fieldset>
     </div>
 
-    <!--<pre>frmModel: {{formulRecCtrl.frmModel | json}}</pre>-->
+    <pre>frmModel: {{formulRecCtrl.frmModel | json}}</pre>
 
 </ng-form>

@@ -3,7 +3,7 @@
         <fieldset>
             <legend>{{'CONTAINER_TYPE_DETAILS'|translate}}</legend>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12"  ng-class="{'has-error':ctrCtrl.containerTypeForm.containerType.$invalid}">
                     <label for="containerType" class="required">
                         <span class="field-name">{{'CONTAINER_TYPE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>

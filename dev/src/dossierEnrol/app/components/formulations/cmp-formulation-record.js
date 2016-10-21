@@ -24,7 +24,8 @@
                 onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                showErrors:'&'
             }
 
         });
@@ -32,7 +33,7 @@
     function formulationRecCtrl() {
 
         var self = this;
-
+        self.noCountries="";
         self.$onInit = function () {
 
             self.frmModel = {};
@@ -67,6 +68,26 @@
             }
 
         };
+        self.showError=function(isInvalid,isTouched){
+           return(((isInvalid && isTouched)|| (isInvalid && self.showErrors())))
+        }
+        /***
+         * Shows the no country of manufacture errro
+         * TODO: Not show this until someone saves?
+         * @returns {boolean}
+         */
+        self.noCountry=function(){
+            if(!self.frmModel){
+                self.noCountries="";
+                return false;
+            }
+            if(!self.frmModel.countryList || self.frmModel.countryList.length===0){
+                self.noCountries="";
+                return true;
+            }
+            self.noCountries=self.frmModel.countryList.length;
+            return false;
+        }
 
     }
 })();

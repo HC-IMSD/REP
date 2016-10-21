@@ -5,7 +5,7 @@
   "STANDARD": "Standard",
   "STRENGTH": "Strength",
   "UNITS": "Units",
-  "PER": "Per",
+  "PER_STRENGTH": "Per",
   "ISBASE": "Calculated as Base?",
   "NANO_MATERIAL": "Nanomaterial?",
   "NANO_MATERIAL_OTHER": "Please indicate the type of nanomaterial",

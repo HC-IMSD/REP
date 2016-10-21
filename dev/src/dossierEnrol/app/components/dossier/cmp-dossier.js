@@ -21,7 +21,7 @@
         'applicationInfoService',
         'applicationInfo',
         'ui.bootstrap',
-        'hpfbConstants'
+        'filterLists'
        // 'numberFormatModule'
     ];
 

@@ -5,7 +5,7 @@
   "STANDARD": "Norme",
   "STRENGTH": "Concentration",
   "UNITS": "Unités",
-  "PER": "Par",
+  "PER_STRENGTH": "Par",
   "ISBASE": "Calculé sous forme de base?",
   "NANO_MATERIAL": "Nanomatériau?",
   "NANO_MATERIAL_OTHER": "Veuillez indiquer le type de nanomatériau",

@@ -1,7 +1,6 @@
 <ng-form name="chkl.checkList">
-    <div ng-repeat="items in chkl.currentModel | chunkBy:chkl.numberColumns" class="row">
         <div class="col-lg-{{chkl.colWidth}} col-md-{{chkl.colWidth}} col-sm-{{chkl.colWidth}} col-xs-12"
-             ng-repeat-start="item in items">
+             ng-repeat-start="item in chkl.currentModel">
             <div class="checkbox">
                 <label class="form-checkbox form-label-inline" for="chk-{{item.name}}-{{$index}}">
                     <input type="checkbox" name="{{chkl.commonName}}" ng-model="item.value"
@@ -28,8 +27,6 @@
                 </label>
             </div>
         </div>
-    </div>
-
 </ng-form>
 
 
