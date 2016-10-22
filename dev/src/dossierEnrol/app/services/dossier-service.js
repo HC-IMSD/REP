@@ -286,38 +286,7 @@
          * @returns {*[]}
          */
         DossierService.prototype.getDefaultDiseaseDisorderList = function () {
-            var noValue='N';
-            return [
-                {name: "acute-alcohol", label: "ACUTEALCOHOL", value:noValue },
-                {name: "acute-anxiety", label: "ACUTEANXIETY", value: noValue },
-                {name: "acute-infectious", label: "ACUTERESP", value: noValue},
-                {name: "acute-inflammatory", label: "ACUTEINFLAM", value: noValue },
-                {name: "acute-psychotic", label: "ACUTEPSYCHOTIC", value: noValue },
-                {name: "addiction", label: "ADDICTION", value: noValue},
-                {name: "ateriosclerosis", label: "ATERIOSCLEROSIS", value: noValue },
-                {name: "appendicitis", label: "APPENDICITIS", value: noValue},
-                {name: "asthma", label: "ASTHMA", value: noValue},
-                {name: "cancer", label: "CANCER", value: noValue},
-                {name: "congest-heart-fail", label: "HEARTCONGEST", value:noValue},
-                {name: "convulsions", label: "CONVULSIONS", value: noValue },
-                {name: "dementia", label: "DEMENTIA", value: noValue },
-                {name: "depression", label: "DEPRESSION", value: noValue},
-                {name: "diabetes", label: "DIABETES", value: noValue},
-                {name: "gangrene", label: "GANGRENE", value: noValue },
-                {name: "glaucoma", label: "GLAUCOMA", value: noValue},
-                {name: "haematologic-bleeding", label: "BLEEDINGDISORDERS", value: noValue},
-                {name: "hepatitis", label: "HEPATITIS", value: noValue },
-                {name: "hypertension", label: "HYPERTENSION", value: noValue },
-                {name: "nausea-pregnancy", label: "NAUSEAPREG", value: noValue },
-                {name: "obesity", label: "OBESITY", value: noValue },
-                {name: "rheumatic-fever", label: "RHEUMATICFEVER", value: noValue },
-                {name: "septicemia", label: "SEPTICEMIA", value: noValue},
-                {name: "sex-transmit-disease", label: "SEXDISEASE", value: noValue},
-                {name: "strangulated-hernia", label: "STRANGHERNIA", value: noValue},
-                {name: "thrombotic-embolic-disorder", label: "THROMBOTICDISORDER", value: noValue },
-                {name: "thyroid-disease", label: "THYROIDDISEASE", value: noValue},
-                {name: "ulcer-gastro", label: "UCLERGASTRO", value: noValue},
-            ];
+            return getDefaultDiseaseDisorderList();
 
         }
 
@@ -1788,103 +1757,103 @@
         for (var i = 0; i < disorderList.length; i++) {
             switch (disorderList[i].name) {
                 case "acute-alcohol":
-                    result.acute_alcohol = disorderList[i].value;
+                    result.acute_alcohol = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "acute-anxiety":
-                    result.acute_anxiety = disorderList[i].value;
+                    result.acute_anxiety = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "acute-infectious":
-                    result.acute_infectious = disorderList[i].value;
+                    result.acute_infectious = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "acute-inflammatory":
-                    result.acute_inflammatory = disorderList[i].value;
+                    result.acute_inflammatory = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "acute-psychotic":
-                    result.acute_psychotic = disorderList[i].value;
+                    result.acute_psychotic = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "addiction":
-                    result.addiction = disorderList[i].value;
+                    result.addiction = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "ateriosclerosis":
-                    result.ateriosclerosis = disorderList[i].value;
+                    result.ateriosclerosis = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "appendicitis":
-                    result.appendicitis = disorderList[i].value;
+                    result.appendicitis = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "asthma":
-                    result.asthma = disorderList[i].value;
+                    result.asthma = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "cancer":
-                    result.cancer = disorderList[i].value;
+                    result.cancer = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "congest-heart-fail":
-                    result.congest_heart_fail = disorderList[i].value;
+                    result.congest_heart_fail = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "convulsions":
-                    result.convulsions = disorderList[i].value;
+                    result.convulsions = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "dementia":
-                    result.dementia = disorderList[i].value;
+                    result.dementia = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "depression":
-                    result.depression = disorderList[i].value;
+                    result.depression = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "diabetes":
-                    result.diabetes = disorderList[i].value;
+                    result.diabetes = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "gangrene":
-                    result.gangrene = disorderList[i].value;
+                    result.gangrene = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "glaucoma":
-                    result.glaucoma = disorderList[i].value;
+                    result.glaucoma = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "haematologic-bleeding":
-                    result.haematologic_bleeding = disorderList[i].value;
+                    result.haematologic_bleeding = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "hepatitis":
-                    result.hepatitis = disorderList[i].value;
+                    result.hepatitis = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "hypertension":
-                    result.hypertension = disorderList[i].value;
+                    result.hypertension = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "nausea-pregnancy":
-                    result.nausea_pregnancy = disorderList[i].value;
+                    result.nausea_pregnancy = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "obesity":
-                    result.obesity = disorderList[i].value;
+                    result.obesity = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "rheumatic-fever":
-                    result.rheumatic_fever = disorderList[i].value;
+                    result.rheumatic_fever = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "septicemia":
-                    result.septicemia = disorderList[i].value;
+                    result.septicemia = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "sex-transmit-disease":
-                    result.sex_transmit_disease = disorderList[i].value;
+                    result.sex_transmit_disease = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "strangulated-hernia":
-                    result.strangulated_hernia = disorderList[i].value;
+                    result.strangulated_hernia = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "thrombotic-embolic-disorder":
-                    result.thrombotic_embolic_disorder = disorderList[i].value;
+                    result.thrombotic_embolic_disorder = disorderList[i].value===true ?'Y':'N';
                     break;
                 case "thyroid-disease":
-                    result.thyroid_disease = disorderList[i].value;
+                    result.thyroid_disease = disorderList[i].value===true ?'Y':'N';
                     break;
 
                 case "ulcer-gastro":
-                    result.ulcer_gastro = disorderList[i].value;
+                    result.ulcer_gastro = disorderList[i].value===true ?'Y':'N';
                     break;
 
             }
@@ -2020,7 +1989,7 @@
      * @returns {*[]}
      */
     function getDefaultDiseaseDisorderList() {
-        var noValue = 'N';
+        var noValue = false;
         return [
             {name: "acute-alcohol", label: "ACUTEALCOHOL", value: noValue},
             {name: "acute-anxiety", label: "ACUTEANXIETY", value: noValue},
