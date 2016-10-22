@@ -27,7 +27,7 @@
                 isAmend:'<'
             }
         });
-    contactRecCtrl.$inject['$scope'];
+    contactRecCtrl.$inject=['$scope'];
     function contactRecCtrl($scope) {
         var vm = this;
         vm.savePressed = false;

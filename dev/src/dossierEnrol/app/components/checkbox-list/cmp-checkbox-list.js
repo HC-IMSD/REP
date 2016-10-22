@@ -24,21 +24,24 @@
                 commonName:'@',
                 listItems: '<', //array of objects
                 numberCols: '@',
-                onUpdate:'&
+                onUpdate:'&'
             }
         });
 
     function checkBoxListCtrl() {
 
         var self = this;
-        self.$onInit = function () {
+
         self.numberColumns = 4; //default to 4
         self.colWidth = 3;
-        self.$onInit = function(){
+
+
+        self.$onInit = function () {
             //init items after change
             //temp as not hooked up
             self.currentModel = self.listItems
-        }
+        };
+
         self.$onChanges = function (changes) {
 
             if (changes.listItems) {
@@ -87,18 +90,8 @@
 
            self.onUpdate({list:self.currentModel});
         }
-        /*/!**
-         * Manages the state of the other field
-         * @param item old premerge
-         *!/
-        self.updateOtherState = function (item) {
-            if (!item.value && item.hasOtherDetails) {
-
-                item.otherText = "";
-            }
-        }*/
-
     }
+
 })();
 
 
