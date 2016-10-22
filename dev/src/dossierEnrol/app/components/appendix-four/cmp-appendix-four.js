@@ -57,6 +57,7 @@
         };
 
         self.update = function (idx, ing) {
+            console.log('apdx4 list update; ');
             self.ingredientList[idx] = angular.copy(ing);
         };
 

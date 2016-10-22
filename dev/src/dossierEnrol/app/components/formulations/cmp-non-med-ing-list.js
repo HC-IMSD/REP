@@ -51,15 +51,18 @@
             //console.debug('ingList addIng: ' + ing);
             self.ingList.push(ing);
             self.newIngFormShown = false;
+            self.onUpdate({list:self.ingList});
         };
 
         self.updateIng = function (idx, ing) {
             self.ingList[idx] = angular.copy(ing);
+            self.onUpdate({list:self.ingList});
         };
 
         self.deleteIng = function (idx) {
             // console.debug('ingList deleteIng: ' + idx);
             self.ingList.splice(idx, 1);
+            self.onUpdate({list:self.ingList});
         }
 
     }

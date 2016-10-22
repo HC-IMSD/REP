@@ -51,16 +51,19 @@
             self.ingList.push(ing);
             self.newIngFormShown = false;
             self.updateActiveError();
+            self.onUpdate({list:self.ingList});
         };
 
         self.updateIng = function (idx, ing) {
             self.ingList[idx] = angular.copy(ing);
+            self.onUpdate({list:self.ingList});
         };
 
         self.deleteIng = function (idx) {
             // console.debug('ingList deleteIng: ' + idx);
             self.ingList.splice(idx, 1);
             self.updateActiveError();
+            self.onUpdate({list:self.ingList});
         }
         /**
          * Used for error messaging that there are no active ingredients

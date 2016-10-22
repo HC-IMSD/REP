@@ -5,13 +5,13 @@
                          column-def="ap4Ctrl.colNames" select-record="ap4Ctrl.selectRecord"
                          disable-selection="!ap4Ctrl.isDetailValid">
 
-        <cmp-appendix-four-record record="$parent.record" on-update="ap4Ctrl.updateIng($parent.$index,ing)"
-                                  on-delete="ap4Ctrl.deleteIng($parent.$index)"
+        <cmp-appendix-four-record record="$parent.record" on-update="ap4Ctrl.update($parent.$index,record)"
+                                  on-delete="ap4Ctrl.delete($parent.$index)"
                                   delete-btn="true"></cmp-appendix-four-record>
 
     </cmp-expanding-table>
 
-    <cmp-appendix-four-record ng-if="ap4Ctrl.newFormShown === true" on-add-ing="ap4Ctrl.addIng(ing)"
+    <cmp-appendix-four-record ng-if="ap4Ctrl.newFormShown === true" on-add-new="ap4Ctrl.addNew(record)"
                               on-cancel="ap4Ctrl.newFormShown = false" delete-btn="false"></cmp-appendix-four-record>
 
 

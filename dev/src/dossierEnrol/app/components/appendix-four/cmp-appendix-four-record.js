@@ -91,5 +91,23 @@
 
         };
 
+        self.updateTissuesFluids = function(input){
+
+            //console.log('apdx4 record updateTissuesFluids : ' + JSON.stringify(input));
+
+            self.model.tissuesFluidsOrigin = input;
+
+           /* if (self.record) {
+                self.onUpdate({record: self.model});
+            }*/
+
+        };
+
+        self.updateAnimalSourced = function(input){
+
+            self.model.sourceAnimalDetails = input;
+
+        };
+
     }
 })();

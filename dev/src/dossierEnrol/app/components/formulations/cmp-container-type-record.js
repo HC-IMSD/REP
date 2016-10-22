@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('containerTypeRecordModule', ['numberFormat'])
+        .module('containerTypeRecordModule', [])
 })();
 
 (function () {

@@ -10,8 +10,7 @@
     DossierService.$inject = ['$http', '$q'];
     function DossierService($http, $q) {
         // Define the DossierService function
-        function DossierService() {
-        }
+        function DossierService() {}
 
         function DossierService(dossierData) {
             //construction logic
@@ -37,15 +36,18 @@
                 dataChecksum: "",
                 drugProduct: {
                     thirdPartySigned: false,
-                    drugUseList: getDefaultDrugUseList(),
+                    humanDrugUse: false,
+                    radiopharmDrugUse: false,
+                    vetDrugUse: false,
+                    disinfectantDrugUse: false,
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
                     canRefProducts: [],//grid
                     formulations: [],//tab + grid +
-                    appendixFour: {
-                        ingredientList: []
-                    }//tab + grid +
+                    appendixFourList: []/*{
+                        ingredientList:[]
+                    }//tab + grid +*/
 
                 },
                 contactList: []
@@ -58,13 +60,12 @@
                 return this._default;
 
             },
-
             loadFromFile: function (info) {
 
                 if (!info)
                     return this._default;
 
-                if (!info['DOSSIER_ENROL'])
+                if(!info['DOSSIER_ENROL'])
                     return this._default;
 
                 info = info['DOSSIER_ENROL'];
@@ -82,16 +83,16 @@
                     drugProduct: {
                         thirdPartySigned: false,
                         drugUseList: [],
-                        isScheduleA: info.is_sched_a === 'Y' ? true : false,
-                        therapeutic: info.therapeutic_class_list.therapeutic_class,
-                        canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
+                        isScheduleA: info.is_sched_a === 'Y' ? true:false ,
+                        therapeutic: getTherapeuticList(info.therapeutic_class_list.therapeutic_class),
+                        canRefProducts:  getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
-                        appendixFour: {
-                            ingredientList: getAppendix4IngredientList(info.appendix4_group)
-                        }//tab + grid +
+                        appendixFourList: getAppendix4IngredientList(info.appendix4_group)/*{
+                            ingredientList :
+                        }//tab + grid +*/
 
                     },
-                    contactList: getContactList(info.contact_record)
+                   contactList: getContactList(info.contact_record)
 
                 };
                 dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
@@ -178,7 +179,7 @@
             baseDossier.is_sched_a = jsonObj.isScheduleA;
             //TODO schedule_a_group  (jsonObj.scheduleAGroup)
             if (jsonObj.isScheduleA) {
-                baseDossier.schedule_a_group = scheduleAToOutput(jsonObj.scheduleAGroup);
+                baseDossier.schedule_a_group=scheduleAToOutput(jsonObj.scheduleAGroup);
             }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFour)
@@ -256,18 +257,18 @@
         }
         // Return a reference to the function
 
-        DossierService.prototype.getMissingAppendix4 = function (dossierModel) {
-            var missingAppendices = [];
+        DossierService.prototype.getMissingAppendix4=function(dossierModel){
+            var missingAppendices=[];
 
-            if (!dossierModel || !dossierModel.drugProduct) {
+            if(!dossierModel || !dossierModel.drugProduct){
                 return missingAppendices;
             }
             // Step 1 Get all the appendices that exist
-            var appendices = getAppendiceData(dossierModel.drugProduct.appendixFour);
+            var appendices=getAppendiceData(dossierModel.drugProduct.appendixFour);
             //Step 2 get a unique list of ingredients
-            var ingredients = getAnimalIngredients(dossierModel.drugProduct.formulations)
+            var ingredients=getAnimalIngredients(dossierModel.drugProduct.formulations)
             //Step 3 Compare. Determine if there are missing ingredients
-            missingAppendices = getMissingAppendices(appendices, ingredients);
+            missingAppendices=getMissingAppendices(appendices,ingredients);
 
             return missingAppendices;
         }
@@ -285,35 +286,35 @@
          * @returns {*[]}
          */
         DossierService.prototype.getDefaultDiseaseDisorderList = function () {
-            var noValue = 'N';
+            var noValue='N';
             return [
-                {name: "acute-alcohol", label: "ACUTEALCOHOL", value: noValue},
-                {name: "acute-anxiety", label: "ACUTEANXIETY", value: noValue},
+                {name: "acute-alcohol", label: "ACUTEALCOHOL", value:noValue },
+                {name: "acute-anxiety", label: "ACUTEANXIETY", value: noValue },
                 {name: "acute-infectious", label: "ACUTERESP", value: noValue},
-                {name: "acute-inflammatory", label: "ACUTEINFLAM", value: noValue},
-                {name: "acute-psychotic", label: "ACUTEPSYCHOTIC", value: noValue},
+                {name: "acute-inflammatory", label: "ACUTEINFLAM", value: noValue },
+                {name: "acute-psychotic", label: "ACUTEPSYCHOTIC", value: noValue },
                 {name: "addiction", label: "ADDICTION", value: noValue},
-                {name: "ateriosclerosis", label: "ATERIOSCLEROSIS", value: noValue},
+                {name: "ateriosclerosis", label: "ATERIOSCLEROSIS", value: noValue },
                 {name: "appendicitis", label: "APPENDICITIS", value: noValue},
                 {name: "asthma", label: "ASTHMA", value: noValue},
                 {name: "cancer", label: "CANCER", value: noValue},
-                {name: "congest-heart-fail", label: "HEARTCONGEST", value: noValue},
-                {name: "convulsions", label: "CONVULSIONS", value: noValue},
-                {name: "dementia", label: "DEMENTIA", value: noValue},
+                {name: "congest-heart-fail", label: "HEARTCONGEST", value:noValue},
+                {name: "convulsions", label: "CONVULSIONS", value: noValue },
+                {name: "dementia", label: "DEMENTIA", value: noValue },
                 {name: "depression", label: "DEPRESSION", value: noValue},
                 {name: "diabetes", label: "DIABETES", value: noValue},
-                {name: "gangrene", label: "GANGRENE", value: noValue},
+                {name: "gangrene", label: "GANGRENE", value: noValue },
                 {name: "glaucoma", label: "GLAUCOMA", value: noValue},
                 {name: "haematologic-bleeding", label: "BLEEDINGDISORDERS", value: noValue},
-                {name: "hepatitis", label: "HEPATITIS", value: noValue},
-                {name: "hypertension", label: "HYPERTENSION", value: noValue},
-                {name: "nausea-pregnancy", label: "NAUSEAPREG", value: noValue},
-                {name: "obesity", label: "OBESITY", value: noValue},
-                {name: "rheumatic-fever", label: "RHEUMATICFEVER", value: noValue},
+                {name: "hepatitis", label: "HEPATITIS", value: noValue },
+                {name: "hypertension", label: "HYPERTENSION", value: noValue },
+                {name: "nausea-pregnancy", label: "NAUSEAPREG", value: noValue },
+                {name: "obesity", label: "OBESITY", value: noValue },
+                {name: "rheumatic-fever", label: "RHEUMATICFEVER", value: noValue },
                 {name: "septicemia", label: "SEPTICEMIA", value: noValue},
                 {name: "sex-transmit-disease", label: "SEXDISEASE", value: noValue},
                 {name: "strangulated-hernia", label: "STRANGHERNIA", value: noValue},
-                {name: "thrombotic-embolic-disorder", label: "THROMBOTICDISORDER", value: noValue},
+                {name: "thrombotic-embolic-disorder", label: "THROMBOTICDISORDER", value: noValue },
                 {name: "thyroid-disease", label: "THYROIDDISEASE", value: noValue},
                 {name: "ulcer-gastro", label: "UCLERGASTRO", value: noValue},
             ];
@@ -329,19 +330,19 @@
         return DossierService;
     }
 
-    function getContactList(contacts) {
+    function getContactList(contacts){
 
         var list = [];
 
         if (angular.isDefined(contacts)) {
 
-            for (var i = 0; i < contacts.length; i++) {
+            for(var i = 0; i < contacts.length; i++){
                 var contact = {};
                 contact.amend = contacts[i].amend_record === 'Y';
                 contact.repRole = contacts[i].rep_contact_role;
                 contact.salutation = contacts[i].rep_contact_details.salutation;
                 contact.givenName = contacts[i].rep_contact_details.given_name;
-                contact.surname = contacts[i].rep_contact_details.surname;
+                contact.surname =  contacts[i].rep_contact_details.surname;
                 contact.initials = contacts[i].rep_contact_details.initials;
                 contact.title = contacts[i].rep_contact_details.job_title;
                 contact.phone = contacts[i].rep_contact_details.phone_num;
@@ -366,112 +367,137 @@
      */
     function getDiseaseDisorderList(info, diseaseList) {
 
-        if (!info || !diseaseList) return;
-        for (var i = 0; i < diseaseList.length; i++) {
-            var checkboxRec = diseaseList[i];
-            switch (checkboxRec.name) {
-                case "acute-alcohol":
-                    checkboxRec.value = info.acute_alcohol === 'Y';
-                    break;
-                case "acute-anxiety":
-                    checkboxRec.value = info.acute_anxiety === 'Y';
-                    break;
-                case "acute-infectious":
-                    checkboxRec.value = info.acute_infectious === 'Y';
-                    break;
-                case "acute-inflammatory":
-                    checkboxRec.value = info.acute_inflammatory === 'Y';
-                    break;
-                case "acute-psychotic":
-                    checkboxRec.value = info.acute_psychotic === 'Y';
-                    break;
-                case "addiction":
-                    checkboxRec.value = info.addiction === 'Y';
-                    break;
-                case "ateriosclerosis":
-                    checkboxRec.value = info.ateriosclerosis === 'Y';
-                    break;
-                case "appendicitis":
-                    checkboxRec.value = info.appendicitis === 'Y';
-                    break;
-                case "asthma":
-                    checkboxRec.value = info.asthma === 'Y';
-                    break;
+        if(!info || !diseaseList) return;
+            for(var i=0;i<diseaseList.length;i++){
+                var checkboxRec=diseaseList[i];
+                switch(checkboxRec.name){
+                    case "acute-alcohol":
+                        checkboxRec.value= info.acute_alcohol === 'Y';
+                        break;
+                    case "acute-anxiety":
+                        checkboxRec.value= info.acute_anxiety === 'Y';
+                        break;
+                    case "acute-infectious":
+                        checkboxRec.value= info.acute_infectious === 'Y';
+                        break;
+                    case "acute-inflammatory":
+                        checkboxRec.value=info.acute_inflammatory === 'Y';
+                        break;
+                    case "acute-psychotic":
+                        checkboxRec.value= info.acute_psychotic === 'Y';
+                        break;
+                    case "addiction":
+                        checkboxRec.value= info.addiction === 'Y';
+                        break;
+                    case "ateriosclerosis":
+                        checkboxRec.value= info.ateriosclerosis === 'Y';
+                        break;
+                    case "appendicitis":
+                        checkboxRec.value= info.appendicitis === 'Y';
+                        break;
+                    case "asthma":
+                        checkboxRec.value= info.asthma === 'Y';
+                        break;
 
-                case "cancer":
-                    checkboxRec.value = info.cancer === 'Y';
-                    break;
-                case "congest-heart-fail":
-                    checkboxRec.value = info.congest_heart_fail === 'Y';
-                    break;
-                case "convulsions":
-                    checkboxRec.value = info.convulsions === 'Y';
-                    break;
+                    case "cancer":
+                        checkboxRec.value= info.cancer === 'Y';
+                        break;
+                    case "congest-heart-fail":
+                        checkboxRec.value= info.congest_heart_fail === 'Y';
+                        break;
+                    case "convulsions":
+                        checkboxRec.value= info.convulsions === 'Y';
+                        break;
 
-                case "dementia":
-                    checkboxRec.value = info.dementia === 'Y';
-                    break;
+                    case "dementia":
+                        checkboxRec.value= info.dementia === 'Y';
+                        break;
 
-                case "depression":
-                    checkboxRec.value = info.depression === 'Y';
-                    break;
+                    case "depression":
+                        checkboxRec.value= info.depression === 'Y';
+                        break;
 
-                case "diabetes":
-                    checkboxRec.value = info.diabetes === 'Y';
-                    break;
+                    case "diabetes":
+                        checkboxRec.value= info.diabetes === 'Y';
+                        break;
 
-                case "gangrene":
-                    checkboxRec.value = info.gangrene === 'Y';
-                    break;
+                    case "gangrene":
+                        checkboxRec.value= info.gangrene === 'Y';
+                        break;
 
-                case "glaucoma":
-                    checkboxRec.value = info.glaucoma === 'Y';
-                    break;
+                    case "glaucoma":
+                        checkboxRec.value=info.glaucoma === 'Y';
+                        break;
 
-                case "haematologic-bleeding":
-                    checkboxRec.value = info.haematologic_bleeding === 'Y';
-                    break;
+                    case "haematologic-bleeding":
+                        checkboxRec.value=info.haematologic_bleeding  === 'Y';
+                        break;
 
-                case "hepatitis":
-                    checkboxRec.value = info.hepatitis === 'Y';
-                    break;
+                    case "hepatitis":
+                        checkboxRec.value=info.hepatitis  === 'Y';
+                        break;
 
-                case "hypertension":
-                    checkboxRec.value = info.hypertension === 'Y';
-                    break;
+                    case "hypertension":
+                        checkboxRec.value=info.hypertension  === 'Y';
+                        break;
 
-                case "nausea-pregnancy":
-                    checkboxRec.value = info.nausea_pregnancy === 'Y';
-                    break;
+                    case "nausea-pregnancy":
+                        checkboxRec.value=info.nausea_pregnancy  === 'Y';
+                        break;
 
-                case "obesity":
-                    checkboxRec.value = info.obesity === 'Y';
-                    break;
-                case "rheumatic-fever":
-                    checkboxRec.value = info.rheumatic_fever === 'Y';
-                    break;
-                case "septicemia":
-                    checkboxRec.value = info.septicemia === 'Y';
-                    break;
-                case "sex-transmit-disease":
-                    checkboxRec.value = info.sex_transmit_disease === 'Y';
-                    break;
-                case "strangulated-hernia":
-                    checkboxRec.value = info.strangulated_hernia === 'Y';
-                    break;
-                case "thrombotic-embolic-disorder":
-                    checkboxRec.value = info.thrombotic_embolic_disorder === 'Y';
-                    break;
-                case "thyroid-disease":
-                    checkboxRec.value = info.thyroid_disease === 'Y';
-                    break;
-                case "ulcer-gastro":
-                    checkboxRec.value = info.ulcer_gastro === 'Y';
-                    break;
+                    case "obesity":
+                        checkboxRec.value=info.obesity  === 'Y';
+                        break;
+                    case "rheumatic-fever":
+                        checkboxRec.value=info.rheumatic_fever   === 'Y';
+                        break;
+                    case "septicemia":
+                        checkboxRec.value=info.septicemia   === 'Y';
+                        break;
+                    case "sex-transmit-disease":
+                        checkboxRec.value=info.sex_transmit_disease  === 'Y';
+                        break;
+                    case "strangulated-hernia":
+                        checkboxRec.value=info.strangulated_hernia   === 'Y';
+                        break;
+                    case "thrombotic-embolic-disorder":
+                        checkboxRec.value=info.thrombotic_embolic_disorder  === 'Y';
+                        break;
+                    case "thyroid-disease":
+                        checkboxRec.value=info.thyroid_disease  === 'Y';
+                        break;
+                    case "ulcer-gastro":
+                        checkboxRec.value=info.ulcer_gastro  === 'Y';
+                        break;
 
+                }
+            }
+        return diseaseList;
+    }
+
+
+
+
+    function getTherapeuticList(input) {
+        var list = [];
+
+        if (input) {
+            for (var i = 0; i < input.length; i++) {
+                var item = {
+                    "id" : "" + i+1,
+                    "name" : input[i]
+                };
+
+
+
+                list.push(item);
             }
         }
-        return diseaseList;
+
+
+        return list;
+
+
     }
 
 
@@ -494,15 +520,17 @@
             }
         }
 
-        // console.log('getCanRefProductList : ' + JSON.stringify(list));
+       // console.log('getCanRefProductList : ' + JSON.stringify(list));
 
 
         return list;
 
+
     }
 
 
-    function getAppendix4IngredientList(info) { //info = dossier.appendixFour.ingredientList
+
+    function getAppendix4IngredientList (info){ //info = dossier.appendixFour.ingredientList
         var list = [];
         var getCountries = function (input) {
             var list = [];
@@ -513,6 +541,7 @@
                     "name": input[i].country_with_unknown,
                     "unknownCountryDetails": input[i].unknown_country_details
                 });
+
             }
             return list;
         };
@@ -522,11 +551,11 @@
                 var ing = {};
                 ing.id = info[i].ingredient_id;
                 ing.ingredientName = info[i].ingredient_name;
-                // ing.role = info[i].dosage_form;
-                // ing.abstractNum = info[i].dosage_form_other;
-                // ing.standard = info[i].strengths;
-                ing.humanSourced = info[i].human_sourced === 'Y' ? true : false;
-                ing.animalSourced = info[i].animal_sourced === 'Y' ? true : false;
+               // ing.role = info[i].dosage_form;
+              // ing.abstractNum = info[i].dosage_form_other;
+               // ing.standard = info[i].strengths;
+                ing.humanSourced = info[i].human_sourced === 'Y' ? true:false;
+                ing.animalSourced = info[i].animal_sourced === 'Y' ? true:false;
                 var tissues = info[i].tissues_fluids_section;
                 var srcAnimal = info[i].animal_sourced_section;
                 //TODO fix the hasOtherDetials
@@ -794,119 +823,23 @@
                 };
                 ing.sourceAnimalDetails = {
 
-                    primateTypeList: [
-                        {
-                            label: "NONHUMANPRIMATE",
-                            type: "text",
-                            name: "nhp-type",
-                            required: false,
-                            value: srcAnimal.nonhuman_primate_type
-                        },
-                        {
-                            label: "AQUATICTYPE",
-                            type: "text",
-                            name: "aqua-type",
-                            required: false,
-                            value: srcAnimal.aquatic_type
-                        },
-                        {
-                            label: "AVIANTYPE",
-                            type: "text",
-                            name: "avian-type",
-                            required: false,
-                            value: srcAnimal.avian_type
-                        },
-                        {
-                            label: "BOVINETYPE",
-                            type: "text",
-                            name: "bovine-type",
-                            required: false,
-                            value: srcAnimal.bovine_type
-                        },
-                        {
-                            label: "CANINETYPE",
-                            type: "text",
-                            name: "canine-type",
-                            required: false,
-                            value: srcAnimal.canine_type
-                        },
-                        {
-                            label: "CAPRINETYPE",
-                            type: "text",
-                            name: "caprine-type",
-                            required: false,
-                            value: srcAnimal.caprine_type
-                        },
-                        {
-                            label: "CERVIDAETYPE",
-                            type: "text",
-                            name: "cervidae-type",
-                            required: false,
-                            value: srcAnimal.cervidae_type
-                        },
-                        {
-                            label: "EQUINETYPE",
-                            type: "text",
-                            name: "equine-type",
-                            required: false,
-                            value: srcAnimal.equine_type
-                        },
-                        {
-                            label: "FELINETYPE",
-                            type: "text",
-                            name: "feline-type",
-                            required: false,
-                            value: srcAnimal.feline_type
-                        },
-                        {
-                            label: "OVINETYPE",
-                            type: "text",
-                            name: "ovine-type",
-                            required: false,
-                            value: srcAnimal.ovine_type
-                        },
-                        {
-                            label: "PORCINETYPE",
-                            type: "text",
-                            name: "porcine-type",
-                            required: false,
-                            value: srcAnimal.porcine_type
-                        },
-                        {
-                            label: "RODENTTYPE",
-                            type: "text",
-                            name: "rodent-type",
-                            required: false,
-                            value: srcAnimal.rodent_type
-                        },
-                        {
-                            label: "OTHERANIMALTYPE",
-                            type: "text",
-                            name: "other-animal-type",
-                            required: false,
-                            value: srcAnimal.other_type
-                        },
-                        {
-                            label: "CONTROLLEDPOP",
-                            type: "select",
-                            name: "controlled-pop",
-                            required: true,
-                            value: srcAnimal.is_controlled_pop
-                        },
-                        {
-                            label: "BIOTECHDERIVED",
-                            type: "select",
-                            name: "biotech-derived",
-                            required: true,
-                            value: srcAnimal.is_biotech_derived
-                        },
-                        {
-                            label: "CELLLINE",
-                            type: "select",
-                            name: "cell-line",
-                            required: true,
-                            value: srcAnimal.is_cell_line
-                        },
+                    primateTypeList :  [
+                        {label: "NONHUMANPRIMATE", type: "text", name: "nhp-type", required: false, value: srcAnimal.nonhuman_primate_type},
+                        {label: "AQUATICTYPE", type: "text", name: "aqua-type", required: false, value: srcAnimal.aquatic_type},
+                        {label: "AVIANTYPE", type: "text", name: "avian-type", required: false, value: srcAnimal.avian_type},
+                        {label: "BOVINETYPE", type: "text", name: "bovine-type", required: false, value: srcAnimal.bovine_type},
+                        {label: "CANINETYPE", type: "text", name: "canine-type", required: false, value: srcAnimal.canine_type},
+                        {label: "CAPRINETYPE", type: "text", name: "caprine-type", required: false, value: srcAnimal.caprine_type},
+                        {label: "CERVIDAETYPE", type: "text", name: "cervidae-type", required: false, value: srcAnimal.cervidae_type},
+                        {label: "EQUINETYPE", type: "text", name: "equine-type", required: false, value: srcAnimal.equine_type},
+                        {label: "FELINETYPE", type: "text", name: "feline-type", required: false, value: srcAnimal.feline_type},
+                        {label: "OVINETYPE", type: "text", name: "ovine-type", required: false, value: srcAnimal.ovine_type},
+                        {label: "PORCINETYPE", type: "text", name: "porcine-type", required: false, value: srcAnimal.porcine_type},
+                        {label: "RODENTTYPE", type: "text", name: "rodent-type", required: false, value: srcAnimal.rodent_type},
+                        {label: "OTHERANIMALTYPE", type: "text", name: "other-animal-type", required: false, value: srcAnimal.other_type},
+                        {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: srcAnimal.is_controlled_pop},
+                        {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: srcAnimal.is_biotech_derived},
+                        {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: srcAnimal.is_cell_line},
                         {
                             label: "AGEANIMALS",
                             type: "number",
@@ -930,7 +863,7 @@
 
     }
 
-    function getFormulationList(list) {
+    function getFormulationList(list){
 
         var formulationList = [];
         if (!(list instanceof Array)) {
@@ -960,7 +893,7 @@
 
     }
 
-    function getActiveIngList(list) {
+    function getActiveIngList(list){
 
         var resultList = [];
         if (!(list instanceof Array)) {
@@ -992,7 +925,9 @@
     }
 
 
-    function getNonMedIngList(list) {
+
+
+    function getNonMedIngList(list){
 
         var resultList = [];
         if (!(list instanceof Array)) {
@@ -1021,7 +956,7 @@
     }
 
 
-    function getContainerTypeList(list) {
+    function getContainerTypeList(list){
 
         var resultList = [];
         if (!(list instanceof Array)) {
@@ -1701,7 +1636,6 @@
             resultList.push(obj);
         });
     }
-
     /**
      * Convertes nonMedicinal Ingredient to a the output json object
      * @param nonMedList
@@ -2015,33 +1949,33 @@
         return result;
     }
 
-    function getAnimalIngredients(formulations) {
-        var yesValue = 'Y';
-        var allAnimalSourcedNames = [];
-        var uniqueList = {};
-        for (var i = 0; i < formulations.length; i++) {
+    function getAnimalIngredients(formulations){
+        var yesValue= 'Y';
+        var allAnimalSourcedNames=[];
+        var uniqueList={};
+        for(var i=0;i<formulations.length;i++){
             //Step 1 get active ingredients
-            var oneFormulation = formulations[i];
-            for (var j = 0; j < (oneFormulation.activeIngList.length); j++) {
-                var oneActive = oneFormulation.activeIngList[j];
-                if (oneActive.humanAnimalSourced === yesValue) {
+            var oneFormulation=formulations[i];
+            for(var j=0;j<(oneFormulation.activeIngList.length); j++){
+                var oneActive=oneFormulation.activeIngList[j];
+                if(oneActive.humanAnimalSourced===yesValue){
                     allAnimalSourcedNames.push(oneActive.ingName);
                 }
             }
             //step 2 get nmi flagged
-            for (var j = 0; j < (oneFormulation.nMedIngList.length); j++) {
-                var oneActive = oneFormulation.nMedIngList[j];
-                if (oneActive.humanAnimalSourced === yesValue) {
+            for(var j=0;j<(oneFormulation.nMedIngList.length); j++){
+                var oneActive=oneFormulation.nMedIngList[j];
+                if(oneActive.humanAnimalSourced===yesValue){
                     allAnimalSourcedNames.push(oneActive.ingName);
                 }
             }
             //step 3  all materials
-            for (var j = 0; j < (oneFormulation.animalHumanMaterials.length); j++) {
-                var oneActive = oneFormulation.animalHumanMaterials[j];
-                allAnimalSourcedNames.push(oneActive.ingredientName);
+            for(var j=0;j<(oneFormulation.animalHumanMaterials.length); j++){
+                var oneActive=oneFormulation.animalHumanMaterials[j];
+                    allAnimalSourcedNames.push(oneActive.ingredientName);
             }
         }
-        uniqueList = getUniqueList(allAnimalSourcedNames);
+        uniqueList=getUniqueList(allAnimalSourcedNames);
         return (uniqueList);
     }
 
@@ -2050,26 +1984,26 @@
      * @param appendiceList
      * @param ingredientList
      */
-    function getMissingAppendices(appendiceList, ingredientJsonList) {
+    function getMissingAppendices(appendiceList,ingredientJsonList) {
         var missingList = [];
         for (var i = 0; i < ingredientJsonList.length; i++) {
-            if (!appendiceList.hasOwnProperty(ingredientJsonList[i])) {
-                missingList.push(ingredientJsonList[i]);
-            }
+                if(!appendiceList.hasOwnProperty(ingredientJsonList[i])){
+                    missingList.push(ingredientJsonList[i]);
+                }
         }
         return missingList;
     }
 
 
-    function getUniqueList(arr) {
-        var u = {}, a = [];
-        for (var i = 0, l = arr.length; i < l; ++i) {
-            if (!u.hasOwnProperty(arr[i])) {
-                a.push(arr[i]);
-                u[arr[i]] = 1;
+    function getUniqueList(arr){
+            var u = {}, a = [];
+            for(var i = 0, l = arr.length; i < l; ++i){
+                if(!u.hasOwnProperty(arr[i])) {
+                    a.push(arr[i]);
+                    u[arr[i]] = 1;
+                }
             }
-        }
-        return a;
+            return a;
     }
 
     function getDefaultSchedA() {

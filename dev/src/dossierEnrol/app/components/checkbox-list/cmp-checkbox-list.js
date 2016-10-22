@@ -23,13 +23,15 @@
                 title: '@',
                 commonName:'@',
                 listItems: '<', //array of objects
-                numberCols: '@'
+                numberCols: '@',
+                onUpdate:'&
             }
         });
 
-    function checkBoxListCtrl($filter) {
+    function checkBoxListCtrl() {
 
         var self = this;
+        self.$onInit = function () {
         self.numberColumns = 4; //default to 4
         self.colWidth = 3;
         self.$onInit = function(){
@@ -66,19 +68,35 @@
             self.formName.addressRole.$pristine = !self.formName.addressRole.$dirty;
             self.formName.addressRole.$untouched = !self.formName.addressRole.$touched;
 
-            self.onUpdate({$event: {roles: self.roleModel}});
+            //self.onUpdate({$event: {roles: self.roleModel}});
 
         }
         /**
          * Manages the state of the other field
          * @param item
          */
+        self.updateState = function (item) {
+            if (!item.value) {
+
+                item.value = false; //explicit false value
+
+                if(item.hasOtherDetails){
+                    item.otherText = "";
+                }
+            }
+
+           self.onUpdate({list:self.currentModel});
+        }
+        /*/!**
+         * Manages the state of the other field
+         * @param item old premerge
+         *!/
         self.updateOtherState = function (item) {
             if (!item.value && item.hasOtherDetails) {
 
                 item.otherText = "";
             }
-        }
+        }*/
 
     }
 })();

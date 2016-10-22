@@ -19,7 +19,8 @@
             controller: tissuesFluidsOriginCtrl,
             controllerAs: 'tfoCtrl',
             bindings:{
-                tissuesModel : '<'
+                tissuesModel : '<',
+                onUpdate : '&'
             }
 
         });
@@ -203,7 +204,13 @@
             if(changes.tissuesModel){
                 self.model = changes.tissuesModel.currentValue;
             }
-        }
+        };
+
+        self.$doCheck = function () {
+            if (!angular.equals(self.model.nervousSystem.list, self.tissuesModel.nervousSystem.list)) {
+                console.log('tissues fluids nervousSystem model changed ');
+            }
+        };
         /**
          * Checks that at least one tissue has been selected
          * Checks if the other checkboz is selected with no other details
@@ -248,9 +255,65 @@
             return false;
         };
 
+        self.updateNervousSystemList = function(list){
+
+            self.model.nervousSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateDigestSystemList = function(list){
+
+            self.model.digestiveSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateRepSystemList = function(list){
+
+            self.model.reproductiveSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateCardioSystemList = function(list){
+
+            self.model.cardioSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateImmuneSystemList = function(list){
+
+            self.model.immuneSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateSkinGlandSystemList = function(list){
+
+            self.model.skinGlandSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+        self.updateMusculoSystemList = function(list){
+
+            self.model.musculoSkeletalSystem.list = list;
+            self.onUpdate({model:self.model});
+
+        };
+
+
+        self.updateOtherSystemList = function(list){
+
+            self.model.otherTissues.list = list;
+            self.onUpdate({model:self.model});
+
+        };
         self.showNoRecordError = function (isDirty) {
             return (!self.oneTissueSourceSelected());
 
-        }
+        };
     }
 })();

@@ -89,5 +89,41 @@
             return false;
         }
 
+        self.updateActiveIngList = function(list){
+            if(!list) return;
+
+            self.frmModel.activeIngList = list;
+        };
+
+        self.updateNonMedIngList = function(list){
+            if(!list) return;
+
+            self.frmModel.nMedIngList = list;
+        };
+
+        self.updateContainerTypeList = function(list){
+            if(!list) return;
+
+            self.frmModel.containerTypes = list;
+        };
+
+        self.updateMaterialList = function(list){
+            if(!list) return;
+
+            self.frmModel.animalHumanMaterials = list;
+        };
+
+        self.updateRoaList = function(list){
+            if(!list) return;
+
+            self.frmModel.routeAdmins = list;
+        };
+
+        self.updateCountryList = function(list){
+            if(!list) return;
+
+            self.frmModel.countryList = list;
+        };
+
     }
 })();
