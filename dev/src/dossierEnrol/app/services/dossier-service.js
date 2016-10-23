@@ -34,12 +34,11 @@
                 applicationType: "NEW",
                 softwareVersion: "1.0.0",
                 dataChecksum: "",
+                productName: "",
+                properName: "",
                 drugProduct: {
                     thirdPartySigned: false,
-                    humanDrugUse: false,
-                    radiopharmDrugUse: false,
-                    vetDrugUse: false,
-                    disinfectantDrugUse: false,
+                    drugUseList: getDefaultDrugUseList(),
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
@@ -152,46 +151,55 @@
             //order is important!!! Must match schema
             baseDossier.company_id = jsonObj.companyId; //TODO missing from internal model
             baseDossier.dossier_id = jsonObj.dossierId; //TODO missing from  internal model and XML! Net New
-            baseDossier.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
+            baseDossier.enrolment_version=jsonObj.enrolmentVersion;
             baseDossier.date_saved = jsonObj.dateSaved;
             baseDossier.application_type = jsonObj.applicationType;
-            baseDossier.software_version = "1.0"; //TODO: hard code or make a function, should be centrally available
+            baseDossier.software_version = "1.0.0"; //TODO: hard code or make a function, should be centrally available
             baseDossier.data_checksum = "";
             if (jsonObj.contactList) { //TODO skip if empty list?
                 baseDossier.contact_record = repContactToOutput(jsonObj.contactList);
             }
-            baseDossier.brand_name = jsonObj.drugProduct.brandName; //TODO confirm model
-            baseDossier.common_name = jsonObj.drugProduct.common_name;
-            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
+            baseDossier.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
+            baseDossier.brand_name = jsonObj.productName;
+            baseDossier.common_name = jsonObj.properName;
+            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned===true ?'Y':'N';
             baseDossier.ref_product_list = {};
             baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
-            if (jsonObj.canRefProducts && jsonObj.canRefProducts.productList) {
-                baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.canRefProducts.productList)
-            }
-            baseDossier.human_drug_use = jsonObj.humanDrugUse;
-            baseDossier.radiopharm_drug_use = jsonObj.radiopharmDrugUse;
-            baseDossier.vet_drug_use = jsonObj.vetDrugUse;
-            baseDossier.disinfectant_drug_use = jsonObj.disinfectantDrugUse;
+            //initialize values and order
+            baseDossier.human_drug_use ='N';
+            baseDossier.radiopharm_drug_use='N';
+            baseDossier.vet_drug_use ='N';
+            baseDossier.disinfectant_drug_use ='N';
+            drugUseValuesToOutput(jsonObj.drugProduct.drugUseList,baseDossier)
             baseDossier.therapeutic_class_list = {};
-            if (jsonObj.therapeutic) {
-                baseDossier.therapeutic_class_list.classification = therapeuticClassToOutput(jsonObj.therapeutic.classifications);
-            }
             baseDossier.is_sched_a = jsonObj.isScheduleA;
-            //TODO schedule_a_group  (jsonObj.scheduleAGroup)
-            if (jsonObj.isScheduleA) {
-                baseDossier.schedule_a_group=scheduleAToOutput(jsonObj.scheduleAGroup);
+            console.log("is thera")
+            console.log(jsonObj.therapeutic)
+            if (jsonObj.drugProduct.therapeutic && jsonObj.drugProduct.therapeutic.length>0) {
+                baseDossier.therapeutic_class_list.therapeutic_class = therapeuticClassToOutput(jsonObj.drugProduct.therapeutic);
+            }
+
+            if (jsonObj.drugProduct.canRefProducts && jsonObj.drugProduct.canRefProducts.length>0) {
+                baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.drugProduct.canRefProducts)
+            }
+            console.log("Is schedule A "+jsonObj.drugProduct.isScheduleA)
+            if (jsonObj.drugProduct.isScheduleA) {
+                baseDossier.schedule_a_group=scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
             }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFour)
                 if (appendix4) {
-                    outDossier.appendix4_group = appendix4;
+                    baseDossier.appendix4_group = appendix4;
                 }
                 var formulations = formulationListToOutput(jsonObj.drugProduct.formulations)
+                baseDossier.formulation_group={};
                 if (formulations) {
-                    outDossier.formulation_group.formulation_details = formulations;
+                    baseDossier.formulation_group.formulation_details = formulations;
                 }
             }
-            return (baseDossier);
+            //forgot to add root tag!
+            return{DOSSIER_ENROL:baseDossier};
+
         }
 
         /**
@@ -273,14 +281,7 @@
             return missingAppendices;
         }
 
-        DossierService.prototype.getDefaultSchedA = function () {
 
-            var schedA = {};
-            schedA.drugIdNumber = "";
-            schedA.scheduleAClaimsIndDetails = "";
-            schedA.diseaseDisorderList = this.getDefaultDiseaseDisorderList();
-
-        }
         /**
          * Gets an empty disease disorder list with values set to No
          * @returns {*[]}
@@ -290,9 +291,16 @@
 
         }
 
-
+        /**
+         * Gets an empty Schedule A Object
+         * @returns {*}
+         */
         DossierService.prototype.getDefaultScheduleA = function () {
             return (getDefaultSchedA());
+        }
+
+        DossierService.prototype.getRootTagName = function () {
+            return ("DOSSIER_ENROL");
         }
 
 
@@ -1037,6 +1045,7 @@
         if (angular.isDefined(info)) {
             for (var i = 0; i < info.length; i++) {
                 var product = {};
+                product.brand_name = info[i].brandName;
                 product.medicinal_ingredient = info[i].medIngredient;
                 product.dosage_form = info[i].dosageForm;
                 product.dosage_form_other = info[i].dosageFormOther;
@@ -1545,34 +1554,37 @@
     }
 
     /**
-     * Creates the formulation list for output
+     * Creates the formulation list for output file
      * @param list
      * @returns {Array}
      */
     function formulationListToOutput(list) {
         var formulationList = [];
-
-
+        //Order is important for the XML
         angular.forEach(list, function (item) {
             var obj = {
                 "formulation_id": item.formulation,
-                "formulation_name": item.formulationName,
-                "active_ingredient": getActiveIngList(item.activeIngList),
-                //TODO optional
-                "nonmedicinal_ingredient": getNonMedIngList(item.nMedIngList),
-                container_group: {
-                    "container_details": getContainerTypeList(item.containerTypes)
-                },
-                //TODO optional
-                "material_ingredient": getMaterialList(item.animalHumanMaterials),
-                //TODO optional
-                "roa_group": {
-                    "roa_details": getRouteAdminList(item.routeAdmins)
-                },
-                "country_group": {
-                    "country_manufacturer": getFormulationCountryList(item.countryList)
-                }
+                "formulation_name": item.formulationName
             };
+            if(item.activeIngList && item.activeIngList.length>0){
+
+                obj.active_ingredient= activeListToOutput(item.activeIngList);
+            }
+            if(item.nMedIngList && item.nMedIngList.length>0) {
+                obj.nonmedicinal_ingredient=nonMedIngListToOutput(item.nMedIngList);
+            }
+            if(item.containerTypes && item.containerTypes.length>0){
+                obj.container_details= containerTypeListToOutput(item.containerTypes);
+            }
+            if(item.animalHumanMaterials && item.animalHumanMaterials.length>0){
+                obj.material_ingredient=materialListToOutput(item.animalHumanMaterials);
+            }
+            if(item.routeAdmins && item.routeAdmins.length>0){
+                obj.roa_details=routeAdminToOutput(item.routeAdmins);
+            }
+            if(item.routeAdmins && item.routeAdmins.length>0){
+                obj.country_group=getFormulationCountryList(item.countryList);
+            }
             formulationList.push(obj);
         });
         return formulationList;
@@ -1743,7 +1755,6 @@
     function therapeuticClassToOutput(jsonObj) {
 
         var resultList = [];
-
         for (var i = 0; i < jsonObj.length; i++) {
             //TODO save the ids??
             resultList.push(jsonObj[i].name);
@@ -1858,9 +1869,8 @@
 
             }
         }
-
         result.sched_a_claims_ind_details = jsonObj.scheduleAClaimsIndDetails;
-
+        return (result);
     }
 
     /**
@@ -2065,6 +2075,36 @@
         }
         return (drugList);
     }
+
+    /**
+     * Adds the drug use properties to the output JSON
+     * @param drugUseArray
+     * @param outputJson
+     */
+    function drugUseValuesToOutput(drugUseArray,outputJson){
+
+        for(var i=0;i<drugUseArray.length;i++){
+            var rec=drugUseArray[i];
+
+            switch (rec.name) {
+                case "human":
+                    outputJson.human_drug_use=rec.value === true ?'Y':'N';
+                    break;
+                case "radio-pharmaceutical":
+                    outputJson.radiopharm_drug_use=rec.value === true ?'Y':'N';
+                    break;
+                case "disinfectant":
+                    outputJson.disinfectant_drug_use=rec.value === true ?'Y':'N';
+                    break;
+                case "veterinary":
+                    outputJson.vet_drug_use=rec.value === true ?'Y':'N';
+                    break;
+            }
+        }
+
+
+    }
+
 
 
 })();

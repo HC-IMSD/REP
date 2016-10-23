@@ -34,27 +34,30 @@
     angular
         .module('dossierModule')
         .component('cmpDossier', {
-        templateUrl: './components/dossier/tpl-dossier.html',
-        controller: dossierCtrl,
-        controllerAs: 'dos',
-        bindings: {
-            dossierRecordInput: '<',
-            onUpdateDossier: '&',
-            onDeleteDossier: '&',
-            formType:'@'
-            // selectedCountryChanged: '&'
-        }
-    });
+            templateUrl: './components/dossier/tpl-dossier.html',
+            controller: dossierCtrl,
+            controllerAs: 'dos',
+            bindings: {
+                dossierRecordInput: '<',
+                onUpdateDossier: '&',
+                onDeleteDossier: '&',
+                formType: '@'
+                // selectedCountryChanged: '&'
+            }
+        });
 
-    dossierCtrl.$inject = ['$scope','hpfbFileProcessing', 'ApplicationInfoService','DossierService'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing,ApplicationInfoService,DossierService) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
-        self.formUserType='EXT'; //set default to external type
+        self.formUserType = 'EXT'; //set default to external type
         self.applicationInfoService = new ApplicationInfoService();
+        self.userType = "EXT";
+        self.saveXMLLabel = "SAVE_DRAFT";
+
         //config for applicationInfoCompoenent
         self.configField = {
             "label": "DOSSIER_ID",
@@ -62,10 +65,10 @@
             "tagName": "dossierID",
             "errorMsg": "MSG_LENGTH_7"
         };
-        self.isIncomplete=true;
-        self.formAmend=false;
+        self.isIncomplete = true;
+        self.formAmend = false;
         self.showAllErrors = false;
-        self.errorAppendix=[];
+        self.errorAppendix = [];
 
         /*
 
@@ -78,7 +81,7 @@
 
          */
 
-        self.$onInit = function(){
+        self.$onInit = function () {
 
             self.dossierService = new DossierService();
 
@@ -88,14 +91,21 @@
          * @ngdoc captures any change events from variable bindings
          * @param changes
          */
-        self.$onChanges=function(changes){
-            if(changes.formType){
-                self.userFormType=changes.formType.currentValue;
+        self.$onChanges = function (changes) {
+
+            if (changes.formType) {
+                self.userType = changes.formType.currentValue;
+                self.userType='EXT';
+                if (self.userType == 'INT') {
+                    self.saveXMLLabel = "APPROVE_FINAL"
+                } else {
+                    self.saveXMLLabel = "SAVE_DRAFT"
+                }
             }
         };
 
-        self.appendixMissingError=function(){
-            return(self.errorAppendix &&self.errorAppendix.length>0);
+        self.appendixMissingError = function () {
+            return (self.errorAppendix && self.errorAppendix.length > 0);
 
         };
 
@@ -104,22 +114,21 @@
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
 
-                   // console.info('file loaded ... ' + JSON.stringify(resultJson));
-                    self.dossierModel = self.dossierService.loadFromFile(resultJson);
+                // console.info('file loaded ... ' + JSON.stringify(resultJson));
+                self.dossierModel = self.dossierService.loadFromFile(resultJson);
 
 
-
-             //process file load results
+                //process file load results
                 //load into data model as result json is not null
             }
             //if content is attempted to be loaded show all the errors
-            self.showAllErrors=true;
+            self.showAllErrors = true;
             disableXMLSave();
         }
 
         self.setApplicationType = function (value) {
             self.dossierModel.applicationType = value;
-            self.formAmend= self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
+            self.formAmend = self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
             disableXMLSave();
         };
 
@@ -137,8 +146,8 @@
         /**
          * @ngdoc disables the XML save button
          */
-        function disableXMLSave(){
-            self.disableXML = self.dossierForm.$invalid || (self.dossierModel.applicationType== self.applicationInfoService.getApprovedType() && self.isExtern());
+        function disableXMLSave() {
+            self.disableXML = self.dossierForm.$invalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern());
 
         }
 
@@ -151,13 +160,12 @@
 
         };
 
-
         /**
          * Used to show all the fields in an error state. Can be activated by a parent component
          * @returns {boolean}
          */
-        self.showErrors=function(){
-            return(self.showAllErrors);
+        self.showErrors = function () {
+            return (self.showAllErrors);
         }
         /**
          * For individual controls, whether to show the error for a fiedl
@@ -174,13 +182,60 @@
          */
         self.isSchedA = function () {
             if (!self.dossierModel || !self.dossierModel.drugProduct || !self.dossierService) return false; //never happen case;
-            if(self.dossierModel.drugProduct.isScheduleA){
+            if (self.dossierModel.drugProduct.isScheduleA) {
 
                 return true;
-            }else{
+            } else {
                 self.dossierModel.drugProduct.scheduleAGroup = self.dossierService.getDefaultScheduleA();
             }
             return false;
+        }
+        self.saveJson = function () {
+            var writeResult = _transformFile();
+            console.log(writeResult);
+           hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), self.dossierService.getRootTagName());
+            self.showAllErrors = true;
+            //_setComplete()
+        };
+
+        /**
+         * Takes the internal model and transforms to a json object compatible with the output
+         * @returns {*}
+         * @private
+         */
+        function _transformFile() {
+            updateDate();
+            if (!self.isExtern()) {
+                self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMajorVersion(self.dossierModel.enrolmentVersion);
+                self.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
+               // updateModelOnApproval(); //updates all the amend
+            } else {
+                console.log(self.dossierModel.enrolmentVersion);
+                self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMinorVersion(self.dossierModel.enrolmentVersion);
+            }
+            return  self.dossierService.dossierToOutput(self.dossierModel);
+        };
+
+        /**
+         * @ngdoc -creates a filename for dossier file. If it exists,adds control number
+         * @returns {string}
+         * @private
+         */
+        function _createFilename() {
+            var filename = "HC_DO_Enrolment";
+            /*if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
+                filename = filename + "_" + vm.activityRoot.dstsControlNumber;
+            }*/
+            return filename;
+        }
+
+        /**
+         * @ngdoc method -updates the date field to the current date
+         */
+        function updateDate() {
+            if (self.dossierModel) {
+                self.dossierModel.dateSaved = self.applicationInfoService.getTodayDate();
+            }
         }
 
     }
