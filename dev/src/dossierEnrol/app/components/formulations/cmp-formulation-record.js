@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaModule'])
+        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaModule', 'dossierDataLists'])
 })();
 
 (function () {
@@ -30,10 +30,13 @@
 
         });
 
-    function formulationRecCtrl() {
+    formulationRecCtrl.$inject = ['DossierLists'];
+    function formulationRecCtrl(DossierLists) {
 
         var self = this;
         self.noCountries="";
+        self.dosageFormList = DossierLists.getDosageFormList();
+        self.otherValue = DossierLists.getDosageOther();
         self.$onInit = function () {
 
             self.frmModel = {};
@@ -124,6 +127,17 @@
 
             self.frmModel.countryList = list;
         };
-
+        /**
+         * @ngDoc determines if dosage Other should be shown
+         * @returns {boolean}
+         */
+        self.isDosageOther = function () {
+            if (self.frmModel.dosageForm === self.otherValue) {
+                return true;
+            } else {
+                self.frmModel.dosageFormOther = ""
+                return false;
+            }
+        }
     }
 })();

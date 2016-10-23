@@ -47,6 +47,6 @@
   "ADD_A":"Add a ",
   "COUNTRY_MAN": "Country of Manufacture",
   "DELETE_COUNTRY":"Delete Country",
-  "COUNTRIES_MANUFACT":"Please indicate one or more countries of manufacture for this drug product"
+  "COUNTRIES_MANUFACT":"Countries of manufacture for this drug product"
 
 }

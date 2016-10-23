@@ -27,8 +27,8 @@
             link: link,
             restrict: 'A',
             scope: {
-                hpfbFileSelect: "&"
-            }
+                hpfbFileSelect: "&",
+            },
         };
         return directive;
 
@@ -60,7 +60,7 @@
         controller: FileSelectController,
         bindings: {
             updateModelRoot: '&',
-            rootElem: '@'
+            rootElem: '@',
         }
     });
 
@@ -92,7 +92,7 @@
      * @param buttonLabel -the label for the save button
      */
     angular.module('fileIO').component('hpfbFileSave', {
-        templateUrl: './components/fileIO/fileSave.html',
+        templateUrl: 'app/scripts/components/fileIO/fileSave.html',
         controller: FileWriteController,
         bindings: {
             jsonToSave: '<',
@@ -185,15 +185,17 @@
                         if ((fileType.toLowerCase()) == draft_file_type) {
                             convertToJSONObjects(reader);
                             checkRootTagMatch(reader, scope);
+                            /* As per meeting of oct 21
                             if (reader.parseResult.jsonResult) {
-                               // compareHashInJson(reader, scope.rootTag);
-                            }
+                                compareHashInJson(reader, scope.rootTag);
+                            }*/
                         } else if ((fileType.toLowerCase() === "xml")) {
                             convertXMLToJSONObjects(reader);
                             checkRootTagMatch(reader, scope);
+                            /* As per meeting of oct 21
                             if (reader.parseResult.jsonResult) {
                                 compareHashInXML(reader, scope)
-                            }
+                            }*/
 
                         } else {
                             convertResult.parseResult = null;
@@ -261,7 +263,7 @@
             var xmlConfig = {
                 attributePrefix: "$",
                 escapeMode: "true",
-                emptyNodeForm: "text"
+                emptyNodeForm: "text",
             }
             var xmlConverter = new X2JS(xmlConfig);
             //converts XML as a string to a json
@@ -345,7 +347,7 @@
 
         function jsonToFile(jsonObj, fileName, rootTag) {
             if (!jsonObj) return;
-            insertHashInJson(jsonObj, rootTag)
+            //insertHashInJson(jsonObj, rootTag) as per Oct 21 meeting no checksum
             var makeStrSave = JSON.stringify(jsonObj);
             var blob = new Blob([makeStrSave], {type: "text/plain;charset=utf-8"});
             if (!fileName) {
@@ -358,13 +360,14 @@
 
         function xmlToFile(jsonObj, fileName, rootTag) {
             if (!jsonObj) return;
+            //As per meeting of Oct 21, ignore checksum
             //clear out any previous value if it exists
-            jsonObj[rootTag].data_checksum = "";
+            //jsonObj[rootTag].data_checksum = "";
             var xmlResult = convertJSONObjectsToXML(jsonObj)
-            var hash = CryptoJS.SHA256(xmlResult);
-            jsonObj[rootTag].data_checksum = hash.toString();
+           // var hash = CryptoJS.SHA256(xmlResult);
+            //jsonObj[rootTag].data_checksum = hash.toString();
             //regenerate the xml
-            xmlResult = convertJSONObjectsToXML(jsonObj)
+            //xmlResult = convertJSONObjectsToXML(jsonObj)
             var blob = new Blob([xmlResult], {type: "text/plain;charset=utf-8"});
             if (!fileName) {
                 fileName = "hpfbXML.xml"

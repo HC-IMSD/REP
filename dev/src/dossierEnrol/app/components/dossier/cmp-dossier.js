@@ -21,8 +21,8 @@
         'applicationInfoService',
         'applicationInfo',
         'ui.bootstrap',
-        'filterLists'
-       // 'numberFormatModule'
+        'filterLists',
+       'numberFormat'
     ];
 
     angular

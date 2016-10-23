@@ -206,11 +206,11 @@
             }
         };
 
-        self.$doCheck = function () {
+      /*  self.$doCheck = function () {
             if (!angular.equals(self.model.nervousSystem.list, self.tissuesModel.nervousSystem.list)) {
                 console.log('tissues fluids nervousSystem model changed ');
             }
-        };
+        };*/
         /**
          * Checks that at least one tissue has been selected
          * Checks if the other checkboz is selected with no other details
