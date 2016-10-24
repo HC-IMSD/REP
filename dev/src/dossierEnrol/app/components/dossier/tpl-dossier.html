@@ -21,6 +21,24 @@
                                       configure-id-field="dos.configField"
                                       is-incomplete="dos.isIncomplete"></cmp-application-info>
             </div>
+            <div class="row">
+                <div class="col-xs-12 form-group"
+                     ng-class="{'has-error':dos.dossierForm.companyId.$invalid}">
+                    <label for="company-id" class="required">
+                        <span class="field-name">{{'COMPANY_ID' |translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="text" class="form-control full-width" id="company-id"
+                               name="companyId" required="true" maxlength="6" ng-model="dos.dossierModel.companyId"/>
+                        <strong id="company-id-error" class="error"
+                                ng-if="dos.showError(dos.dossierForm.companyId.$invalid,dos.dossierForm.companyId.$touched)">
+                                    <span class="label label-danger"
+                                          ng-messages="dos.dossierForm.companyId.$error">
+                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                    </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
             <div class="row margin-bottom-small">
                 <div class="col-xs-12 checkbox">
                     <label for="third-party-signed">
@@ -84,17 +102,23 @@
                     <label for="related-dossier-id"></label>
                     {{'RELATED_DOSSIER'|translate}}
                     <textarea class="form-control full-width" id="related-dossier-id"
-                           ng-model="dos.dossierModel.relatedDossierID" maxlength="256" rows="3"></textarea>
+                              ng-model="dos.dossierModel.relatedDossierID" maxlength="256" rows="3"></textarea>
                 </div>
             </div>
 
             <div>
-
                 <section class="panel panel-default mrgn-tp-lg">
                     <header class="panel-heading">
-                        <h2 class="panel-title">{{'THERA_CLASS'|translate}}</h2>
+                        <h3 class="panel-title">{{'THERA_CLASS'|translate}}</h3>
+                        <strong id="active-error" class="error"  ng-if="dos.noTheraRecs()">
+                            <span class="label label-danger" ng-messages="dos.noTheraVal.$error">
+                                <span ng-message="required"><span translate="MSG_ERR_ONE_THERA"></span></span>
+                            </span>
+                        </strong>
                     </header>
                     <div class="panel-body">
+                        <input type="textbox" required ng-show="false" name="noTheraVal" id="noThera" aria-hidden="true"
+                               data-ng-model="dos.noThera"/>
                         <cmp-therapeutic-class
                                 list-items="dos.dossierModel.drugProduct.therapeutic"></cmp-therapeutic-class>
                     </div>
@@ -196,5 +220,5 @@
             </button>
         </div>
     </div>
-    <pre>{{dos.dossierModel | json }}</pre>
+  <!--  <pre>{{dos.dossierModel | json }}</pre>-->
 </ng-form>

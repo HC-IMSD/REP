@@ -37,6 +37,7 @@
         self.noCountries="";
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
+        self.savePressed=false;
         self.$onInit = function () {
 
             self.frmModel = {};
@@ -72,7 +73,7 @@
 
         };
         self.showError=function(isInvalid,isTouched){
-           return(((isInvalid && isTouched)|| (isInvalid && self.showErrors())))
+           return(((isInvalid && isTouched)|| (isInvalid && self.showErrors()) ||(isInvalid && self.savePressed)))
         }
         /***
          * Shows the no country of manufacture errro

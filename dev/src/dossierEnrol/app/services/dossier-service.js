@@ -29,6 +29,7 @@
 
             _default: {
                 dossierID: "",
+                companyId:"",
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 applicationType: "NEW",
@@ -698,23 +699,34 @@
         }
         angular.forEach(list, function (item) {
 
-            var obj = {
+            //static fields
+            var obj={
                 "formulation": item.formulation_id,
                 "formulationName": item.formulation_name,
                 "dosageForm" : item.dosage_form_group.dosage_form,
-                "dosageFormOther": item.dosage_form_group.dosage_form_other,
-                "activeIngList": getActiveIngList(item.active_ingredient),
-                "nMedIngList": getNonMedIngList(item.nonmedicinal_ingredient),
-                "containerTypes": getContainerTypeList(item.container_group.container_details),
-                "animalHumanMaterials": getMaterialList(item.material_ingredient),
-                "routeAdmins": getRouteAdminList(item.roa_group.roa_details),
-                "countryList": getFormulationCountryList(item.country_group.country_manufacturer)
+                "dosageFormOther": item.dosage_form_group.dosage_form_other
+            };
 
+            if(item.nonmedicinal_ingredient) {
+                obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
             }
-
+            if(item.active_ingredient) {
+                obj.activeIngList = getActiveIngList(item.active_ingredient);
+            }
+            //container_group is static but do a check to be safe
+            if(item.container_group && item.container_group.container_details) {
+                obj.activeIngList = getContainerTypeList(item.container_group.container_details);
+            }
+            if(item.material_ingredient){
+                obj.animalHumanMaterials=getMaterialList(item.material_ingredient);
+            }
+            if(item.roa_group && item.roa_group.roa_details){
+               obj.routeAdmins=getRouteAdminList(item.roa_group.roa_details);
+            }
+            if(item.country_group && item.country_group.country_manufacturer){
+                obj.countryList=getFormulationCountryList(item.country_group.country_manufacturer);
+            }
             formulationList.push(obj);
-
-
         });
 
         return formulationList;
@@ -1466,7 +1478,6 @@
                 "per": item.per,
                 "units": item.units,
                 "is_base_calc": item.calcAsBase,
-                "calcAsBase": item.is_base_calc,
                 "is_nanomaterial": item.nanoMaterial,
                 "nanomaterial_details": item.nanoMaterialOther
             };
@@ -1475,6 +1486,31 @@
         });
         return (resultList);
     }
+
+    /**
+     * Creates an empty json object for output.
+     * Uses default values
+     * @returns json object
+     */
+    function createEmptyActiveForOutput(){
+        var obj = {
+            "ingredient_id": "",
+            "ingredient_name":"",
+            "cas_number":"",
+            "is_human_animal_src": "",
+            "ingred_standard": "",
+            "strength": "",
+            "per": "",
+            "units": "",
+            "is_base_calc": "",
+            "is_nanomaterial": "",
+            "nanomaterial_details": ""
+        };
+        return obj;
+    }
+
+
+
     /**
      * Convertes nonMedicinal Ingredient to a the output json object
      * @param nonMedList

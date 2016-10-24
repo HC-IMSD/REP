@@ -30,6 +30,7 @@
     roaController.$inject = ['$filter', 'DossierLists'];
     function roaController($filter, DossierLists) {
         var self = this;
+        self.noRoa="";
         self.roaList = DossierLists.getRoa();
         self.$onInit = function () {
 
@@ -40,6 +41,7 @@
             if(self.listItems){
                 self.model.list = self.listItems;
             }
+           self.noRoaRecs();
         };
 
         self.getTemplate = function (item) {
@@ -137,6 +139,25 @@
                 }
             }
             return out;
+
+        }
+
+        /***
+         * Shows the no ROA of error
+         * TODO: Not show this until someone saves?
+         * @returns {boolean}
+         */
+        self.noRoaRecs=function(){
+            if(!self.model){
+                self.noRoa="";
+                return false;
+            }
+            if(!self.model.list || self.model.list.length===0){
+                self.noRoa="";
+                return true;
+            }
+            self.noRoa= self.model.list.length;
+            return false;
 
         }
 

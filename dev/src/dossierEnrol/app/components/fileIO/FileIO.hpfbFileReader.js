@@ -56,7 +56,7 @@
      * @param rootElem - the name of the root element. Used for comparing to the loaded file
      */
     angular.module('fileIO').component('hpfbFileSelect', {
-        templateUrl: './components/fileIO/fileSelect.html',
+        templateUrl: 'app/scripts/components/fileIO/fileSelect.html',
         controller: FileSelectController,
         bindings: {
             updateModelRoot: '&',
@@ -364,6 +364,8 @@
             //clear out any previous value if it exists
             //jsonObj[rootTag].data_checksum = "";
             var xmlResult = convertJSONObjectsToXML(jsonObj)
+            //TODO this needs to be configurable
+           xmlResult= '<?xml version="1.0" encoding="UTF-8"?>'+ '<?xml-stylesheet href="REP_Combined.xsl" type="text/xsl"?>'+xmlResult;
            // var hash = CryptoJS.SHA256(xmlResult);
             //jsonObj[rootTag].data_checksum = hash.toString();
             //regenerate the xml

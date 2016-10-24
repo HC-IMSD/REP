@@ -23,6 +23,7 @@
 	<hpfb:element name="amend_record" type="required_yes_no_content"/>
 	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"/>
 	<hpfb:element name="rep_contact_details" type="contact_content"/>
+	<hpfb:element name="dossier_id" type="char_0_7_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="related_dossier_id" type="char_0_256_content"/>
 	<!-- Drug Product element definitions-->
@@ -234,6 +235,7 @@
 	<hpfb:complexType name="dossier_enrol_content">
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="related_dossier_id"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>

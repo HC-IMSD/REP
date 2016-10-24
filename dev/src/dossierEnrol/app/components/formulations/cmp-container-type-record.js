@@ -29,11 +29,10 @@
             }
 
         });
-
     function containerTypeRecCtrl() {
 
         var self = this;
-
+        self.savePressed=false;
         self.$onInit = function () {
 
             self.ctModel = {};
@@ -44,12 +43,18 @@
         };
 
         self.save = function () {
-            if (self.record) {
-                // console.log('product details update product');
-                self.onUpdate({cType: self.ctModel});
+            if(self.containerTypeForm.$valid) {
+                if (self.record) {
+                    // console.log('product details update product');
+                    self.onUpdate({cType: self.ctModel});
+                } else {
+                    //  console.log('product details add product');
+                    self.onAddIng({cType: self.ctModel});
+                }
+                self.savePressed=false;
+                self.containerTypeForm.$setPristine();
             }else{
-                //  console.log('product details add product');
-                self.onAddIng({cType: self.ctModel});
+                self.savePressed=true;
             }
 
         };
@@ -73,7 +78,7 @@
          * @returns {*}
          */
         self.showError=function(isInvalid, isTouched){
-            return((isInvalid && isTouched) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
+            return((isInvalid && isTouched)||(isInvalid && self.showErrors() ||(isInvalid &&self.savePressed)))
         }
 
 

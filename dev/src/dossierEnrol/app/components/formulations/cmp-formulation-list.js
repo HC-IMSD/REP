@@ -33,8 +33,8 @@
             self.newFormShown = false;
 
             self.colNames = [
-                {label: "Formulation", binding: "formulationId", width: "15"},
-                {label: "Formulation Name", binding: "formulationName", width: "85"}
+                {label: "FORM_ID", binding: "formulationId", width: "15"},
+                {label: "FORMULATION_NAME", binding: "formulationName", width: "85"}
             ];
             self.formulationList = [];
 
@@ -91,6 +91,7 @@
             return true;
 
         }
+
 
 
     }

@@ -35,6 +35,8 @@
         var self = this;
         self.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
         self.yesNoList = DossierLists.getYesNoList(); //yes-no lists
+        self.savePressed=false;
+
         self.$onInit = function () {
 
             self.ingModel = {};
@@ -46,12 +48,18 @@
 
         self.saveIng = function () {
             // self.ingModel.animalHumanSourced = self.ingModel.animalHumanSourced == true ? "Yes" : "No";
-            if (self.record) {
-                // console.log('product details update product');
-                self.onUpdate({ing: self.ingModel});
-            } else {
-                //  console.log('product details add product');
-                self.onAddIng({ing: self.ingModel});
+            if(self.nonMedIngForm.$valid) {
+
+                if (self.record) {
+                    // console.log('product details update product');
+                    self.onUpdate({ing: self.ingModel});
+                } else {
+                    //  console.log('product details add product');
+                    self.onAddIng({ing: self.ingModel});
+                }
+                self.nonMedIngForm.$setPristine();
+            }else{
+                self.savePressed=true;
             }
 
         };
@@ -84,7 +92,7 @@
          * @returns {*}
          */
         self.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
+            return ((isInvalid && isTouched) || (isInvalid && self.showErrors())|| (isInvalid && self.savePressed))
         };
 
         /**

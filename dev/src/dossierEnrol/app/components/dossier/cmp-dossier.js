@@ -62,25 +62,14 @@
         self.configField = {
             "label": "DOSSIER_ID",
             "fieldLength": "7",
-            "tagName": "dossierID",
+            "tagName": "dossierId",
             "errorMsg": "MSG_LENGTH_7"
         };
         self.isIncomplete = true;
         self.formAmend = false;
         self.showAllErrors = false;
         self.errorAppendix = [];
-
-        /*
-
-         "company_id": "A",
-         "enrolment_version": "1.23",
-         "date_saved": "1999-01-21",
-         "application_type": "APPROVED",
-         "software_version": "string",
-         "data_checksum": "string",
-
-         */
-
+        self.noThera="";
         self.$onInit = function () {
 
             self.dossierService = new DossierService();
@@ -236,6 +225,44 @@
             if (self.dossierModel) {
                 self.dossierModel.dateSaved = self.applicationInfoService.getTodayDate();
             }
+        }
+
+        /**
+         * @ngdoc method - updates if there are classifications
+         */
+        self.noTheraRecs=function(){
+            if(!self.model){
+                self.noRoa="";
+                console.log("false")
+                return false;
+            }
+            if(!self.model.list || self.model.list.length===0){
+                self.noRoa="";
+                console.log("true")
+                return true;
+            }
+            self.noRoa= self.model.list.length;
+            console.log("false2")
+            return false;
+
+        }
+
+        /**
+         * Manages errors for no ROA
+         * @returns {boolean}
+         */
+        self.noTheraRecs=function() {
+
+            if (!self.dossierModel ||! self.dossierModel.drugProduct) {
+                self.noThera = "";
+                return false;
+            }
+            if (!self.dossierModel.drugProduct.therapeutic || self.dossierModel.drugProduct.therapeutic.length === 0) {
+                self.noThera = "";
+                return true;
+            }
+            self.noThera =self.dossierModel.drugProduct.therapeutic.length;
+            return false;
         }
 
     }

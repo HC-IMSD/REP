@@ -21,7 +21,7 @@
             bindings: {
                 deleteBtn: '<',
                 record: '<',
-                showError: '&',
+                showErrors: '&',
                 onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
@@ -34,7 +34,7 @@
 
         var self = this;
         self.yesNoList = DossierLists.getYesNoList();
-
+        self.savePressed=false;
         self.$onInit = function () {
 
             self.mirModel = {};
@@ -46,17 +46,24 @@
 
         self.showError = function (isInvalid, isTouched) {
             //return ((isInvalid && isTouched) || (isInvalid && self.showErrors())); generates error
-            return ((isInvalid && isTouched));
+            return ((isInvalid && isTouched) ||(isInvalid && self.showErrors())||(self.savePressed && isInvalid));
 
         };
 
         self.save = function () {
-            if (self.record) {
-                // console.log('product details update product');
-                self.onUpdate({ing: self.mirModel});
-            } else {
-                //  console.log('product details add product');
-                self.onAddNew({ing: self.mirModel});
+
+            if(self.materialIngRecordForm.$valid) {
+                if (self.record) {
+                    // console.log('product details update product');
+                    self.onUpdate({ing: self.mirModel});
+                } else {
+                    //  console.log('product details add product');
+                    self.onAddNew({ing: self.mirModel});
+                }
+                self.savePressed=false;
+                self.materialIngRecordForm.$setPristine();
+            }else{
+                self.savePressed=true;
             }
 
         };

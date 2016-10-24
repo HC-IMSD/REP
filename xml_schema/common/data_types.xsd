@@ -64,6 +64,11 @@
 			<hpfb:pattern value=".{0,6}"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+	<hpfb:simpleType name="char_0_7_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{0,7}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 	<hpfb:simpleType name="char_0_10_content">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:pattern value=".{0,10}"/>
