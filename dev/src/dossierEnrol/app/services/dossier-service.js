@@ -172,9 +172,7 @@
             baseDossier.disinfectant_drug_use ='N';
             drugUseValuesToOutput(jsonObj.drugProduct.drugUseList,baseDossier)
             baseDossier.therapeutic_class_list = {};
-            baseDossier.is_sched_a = jsonObj.isScheduleA;
-            console.log("is thera")
-            console.log(jsonObj.therapeutic)
+            baseDossier.is_sched_a = jsonObj.drugProduct.isScheduleA===true ?'Y':'N';
             if (jsonObj.drugProduct.therapeutic && jsonObj.drugProduct.therapeutic.length>0) {
                 baseDossier.therapeutic_class_list.therapeutic_class = therapeuticClassToOutput(jsonObj.drugProduct.therapeutic);
             }
@@ -182,7 +180,6 @@
             if (jsonObj.drugProduct.canRefProducts && jsonObj.drugProduct.canRefProducts.length>0) {
                 baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.drugProduct.canRefProducts)
             }
-            console.log("Is schedule A "+jsonObj.drugProduct.isScheduleA)
             if (jsonObj.drugProduct.isScheduleA) {
                 baseDossier.schedule_a_group=scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
             }
@@ -1593,19 +1590,21 @@
         angular.forEach(contactList, function (item) {
             var obj = {};
             obj.amend = item.amend;
-            obj.salutation = item.salutation;
-            obj.rep_role = item.repRole; //TODO XML needs to be updated!
-            obj.given_name = item.givenName;
-            obj.initials = item.initials;
-            obj.surname = item.surname;
-            obj.job_title = item.jobTitle;
-            obj.language_correspondance = item.languageCorrespondance;
-            obj.phone_num = item.phoneNum;
-            obj.phone_ext = item.phoneExt;
-            obj.fax_num = item.fax;
-            obj.email = item.email;
+            obj.rep_contact_role = item.repRole; //TODO XML needs to be updated!
+            obj.rep_contact_details={};
+            obj.rep_contact_details.salutation = item.salutation;
+            obj.rep_contact_details.given_name = item.givenName;
+            obj.rep_contact_details.initials = item.initials;
+            obj.rep_contact_details.surname = item.surname;
+            obj.rep_contact_details.job_title = item.title;
+            obj.rep_contact_details.language_correspondance = item.language;
+            obj.rep_contact_details.phone_num = item.phone;
+            obj.rep_contact_details.phone_ext = item.phoneExt;
+            obj.rep_contact_details.fax_num = item.fax;
+            obj.rep_contact_details.email = item.email;
             resultList.push(obj);
         });
+        return resultList;
     }
 
     /***
