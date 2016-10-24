@@ -55,12 +55,16 @@
         };
 
         self.addProduct = function (product) {
-            console.debug('productList addProduct: ' + product);
+
             self.productList.push(product);
+
+            self.newProductFormShown = false;
         };
 
         self.updateProduct = function (idx, product) {
             self.productList[idx] = angular.copy(product);
+
+            self.newProductFormShown = false;
         };
 
         self.deleteProduct = function (idx) {

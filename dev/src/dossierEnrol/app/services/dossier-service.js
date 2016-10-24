@@ -29,6 +29,8 @@
 
             _default: {
                 dossierID: "",
+                companyID:"",
+                relatedDossierID: "",
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 applicationType: "NEW",
@@ -71,6 +73,7 @@
 
                 var dossierModel = {
                     dossierID: info.dossier_id,
+                    companyID: info.company_id,
                     relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
@@ -689,7 +692,7 @@
 
     }
 
-    function getFormulationList(list){
+    /*function getFormulationList(list){
 
         var formulationList = [];
         if (!(list instanceof Array)) {
@@ -715,6 +718,49 @@
             formulationList.push(obj);
 
 
+        });
+
+        return formulationList;
+
+    }*/
+
+    function getFormulationList(list){
+
+        var formulationList = [];
+        if (!(list instanceof Array)) {
+            //make it an array, case there is only one
+            list = [list]
+        }
+        angular.forEach(list, function (item) {
+
+            //static fields
+            var obj={
+                "formulation": item.formulation_id,
+                "formulationName": item.formulation_name,
+                "dosageForm" : item.dosage_form_group.dosage_form,
+                "dosageFormOther": item.dosage_form_group.dosage_form_other
+            };
+
+            if(item.nonmedicinal_ingredient) {
+                obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
+            }
+            if(item.active_ingredient) {
+                obj.activeIngList = getActiveIngList(item.active_ingredient);
+            }
+            //container_group is static but do a check to be safe
+            if(item.container_group && item.container_group.container_details) {
+                obj.activeIngList = getContainerTypeList(item.container_group.container_details);
+            }
+            if(item.material_ingredient){
+                obj.animalHumanMaterials=getMaterialList(item.material_ingredient);
+            }
+            if(item.roa_group && item.roa_group.roa_details){
+                obj.routeAdmins=getRouteAdminList(item.roa_group.roa_details);
+            }
+            if(item.country_group && item.country_group.country_manufacturer){
+                obj.countryList=getFormulationCountryList(item.country_group.country_manufacturer);
+            }
+            formulationList.push(obj);
         });
 
         return formulationList;
