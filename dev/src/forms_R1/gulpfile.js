@@ -659,6 +659,7 @@ gulp.task('copyActivitySrcDev', function () {
             jsComponentPaths.repContactRecordPath + '**/*',
             jsServiceFiles.activityService,
             jsServiceFiles.applicationInfoService,
+            jsServiceFiles.hpfbConstants,
             jsServiceFiles.repContactService,
             jsServiceFiles.filterLists,
             jsServiceFiles.dataLists,
@@ -869,6 +870,7 @@ gulp.task('copyTransactionSrcDev', function () {
             jsServiceFiles.dataListsActivity,
             jsServiceFiles.applicationInfoService,
             jsServiceFiles.filterLists,
+            jsServiceFiles.hpfbConstants,
             jsDirectiveFiles.numberOnly
         ],
         {read: true, base: './'});
