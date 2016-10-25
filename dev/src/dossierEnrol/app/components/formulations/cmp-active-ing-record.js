@@ -40,14 +40,18 @@
             self.ingModel = {};
 
             if (self.record) {
+
+                self.ingModel = angular.copy(self.record);
                 self.ingModel = self.record;
             }
+            self.backup = angular.copy(self.ingModel);
         };
 
         self.saveIng = function () {
             if (self.record) {
                 // console.log('product details update product');
                 self.onUpdate({ing: self.ingModel});
+                self.activeIngForm.$setPristine();
             } else {
                 //  console.log('product details add product');
                 self.onAddIng({ing: self.ingModel});
@@ -55,7 +59,8 @@
         };
 
         self.discardChanges = function () {
-            self.ingModel = self.record ? self.record : {};
+            self.ingModel = angular.copy(self.backup);
+            self.activeIngForm.$setPristine();
             self.onCancel();
         }
 

@@ -84,7 +84,7 @@
                     properName: info.common_name,
                     drugProduct: {
                         thirdPartySigned: false,
-                        drugUseList: [],
+                        drugUseList: loadDrugUseValues(info),
                         isScheduleA: info.is_sched_a === 'Y' ? true:false ,
                         therapeutic: getTherapeuticList(info.therapeutic_class_list.therapeutic_class),
                         canRefProducts:  getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
@@ -98,7 +98,7 @@
 
                 };
                 dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
-                dossierModel.drugProduct.drugUseList=loadDrugUseValues(info);
+                //dossierModel.drugProduct.drugUseList=loadDrugUseValues(info);
 
                 if (info.schedule_a_group) {
                     dossierModel.drugProduct.scheduleAGroup.drugIdNumber = info.schedule_a_group.din_number;
@@ -749,7 +749,7 @@
             }
             //container_group is static but do a check to be safe
             if(item.container_group && item.container_group.container_details) {
-                obj.activeIngList = getContainerTypeList(item.container_group.container_details);
+                obj.containerTypes = getContainerTypeList(item.container_group.container_details);
             }
             if(item.material_ingredient){
                 obj.animalHumanMaterials=getMaterialList(item.material_ingredient);
@@ -1962,20 +1962,20 @@
      */
     function loadDrugUseValues(info) {
         var drugList = getDefaultDrugUseList();
-        for (var i = 0; i < drugList; i++) {
+        for (var i = 0; i < drugList.length; i++) {
             var rec = drugList[i];
             switch (rec.name) {
                 case "human":
-                    rec.value = info.human_drug_use === 'Y'
+                    rec.value = info.human_drug_use === 'Y';
                     break;
                 case "radio-pharmaceutical":
-                    rec.value = info.radiopharm_drug_use === 'Y'
+                    rec.value = info.radiopharm_drug_use === 'Y';
                     break;
                 case "disinfectant":
-                    rec.value = info.disinfectant_drug_use === 'Y'
+                    rec.value = info.disinfectant_drug_use === 'Y';
                     break;
                 case "veterinary":
-                    rec.value = info.vet_drug_use === 'Y'
+                    rec.value = info.vet_drug_use === 'Y';
                     break;
             }
         }

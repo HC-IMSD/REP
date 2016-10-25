@@ -151,7 +151,7 @@
                        ng-click="ingRecCtrl.saveIng()"/>
                 <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
                        ng-click="ingRecCtrl.delete()"/>
-                <input type="submit" value="Discard Changes" class="btn btn-default"
+                <input type="submit" value="Discard Changes" class="btn btn-default" ng-disabled="!ingRecCtrl.activeIngForm.$dirty"
                        ng-click="ingRecCtrl.discardChanges()">
             </div>
         </fieldset>

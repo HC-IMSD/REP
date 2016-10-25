@@ -40,8 +40,9 @@
             self.ingModel = {};
 
             if (self.record) {
-                self.ingModel = self.record;
+                self.ingModel = angular.copy(self.record);
             }
+            self.backup = angular.copy(self.ingModel);
         };
 
         self.saveIng = function () {
@@ -57,7 +58,8 @@
         };
 
         self.discardChanges = function () {
-            self.ingModel = self.record ? self.record : {};
+            self.ingModel = angular.copy(self.backup);
+            self.nonMedIngForm.$setPristine();
             self.onCancel();
         };
 
