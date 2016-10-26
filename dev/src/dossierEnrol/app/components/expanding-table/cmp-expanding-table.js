@@ -14,7 +14,7 @@
     angular
         .module('expandingTable')
         .component('cmpExpandingTable', {
-            templateUrl: 'app/scripts/components/expandingTable/tpl-expanding-table.html',
+            templateUrl: './components/expandingTable/tpl-expanding-table.html',
             controller: expandingTableCtrl,
             controllerAs: 'expandTblCtrl',
             transclude:true,
