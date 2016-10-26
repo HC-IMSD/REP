@@ -58,12 +58,12 @@
 
         };
 
-        self.discardChanges = function(){
+        /*self.discardChanges = function(){
             self.frmModel = {};
             //self.productDetailsForm.$setPristine();
             self.onCancel();
         }
-
+*/
         self.delete = function(){
             if (self.record) {
                 //  console.log('product details delete product');

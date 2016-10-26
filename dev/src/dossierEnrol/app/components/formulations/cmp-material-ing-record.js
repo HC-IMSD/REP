@@ -42,6 +42,7 @@
             if (self.record) {
                 self.mirModel = self.record;
             }
+            self.backup = angular.copy(self.mirModel);
         };
 
         self.showError = function (isInvalid, isTouched) {
@@ -54,6 +55,7 @@
             if (self.record) {
                 // console.log('product details update product');
                 self.onUpdate({ing: self.mirModel});
+                self.materialIngRecordForm.$setPristine();
             } else {
                 //  console.log('product details add product');
                 self.onAddNew({ing: self.mirModel});
@@ -62,7 +64,8 @@
         };
 
         self.discardChanges = function () {
-            self.mirModel = self.record ? self.record : {};
+            self.mirModel = angular.copy(self.backup);
+            self.materialIngRecordForm.$setPristine();
             self.onCancel();
         }
 
