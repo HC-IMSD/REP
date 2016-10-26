@@ -19,7 +19,8 @@
             controller: formulationsCtrl,
             controllerAs: 'formulCtrl',
             bindings: {
-                formulations : '<'
+                formulations : '<',
+                recordChanged:'&'
             }
         });
 

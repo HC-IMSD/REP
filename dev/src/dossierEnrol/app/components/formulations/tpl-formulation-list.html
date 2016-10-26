@@ -13,7 +13,7 @@
                          column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord"
                          disable-selection="!formulCtrl.isDetailValid">
 
-        <cmp-formulation-record record="$parent.record" on-update="formulCtrl.update($parent.$index,record)" on-delete="formulCtrl.delete($parent.$index)" delete-btn="true"></cmp-formulation-record>
+        <cmp-formulation-record record="$parent.record" on-update="formulCtrl.update($parent.$index,record)" on-delete="formulCtrl.delete($parent.$index)"  delete-btn="true" record-changed="formulCtrl.recordChanged()"></cmp-formulation-record>
 
     </cmp-expanding-table>
 

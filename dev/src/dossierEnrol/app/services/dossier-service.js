@@ -272,7 +272,7 @@
                 return missingAppendices;
             }
             // Step 1 Get all the appendices that exist
-            var appendices=getAppendiceData(dossierModel.drugProduct.appendixFour);
+            var appendices=getAppendiceData(dossierModel.drugProduct.appendixFourList);
             //Step 2 get a unique list of ingredients
             var ingredients=getAnimalIngredients(dossierModel.drugProduct.formulations)
             //Step 3 Compare. Determine if there are missing ingredients
@@ -1582,12 +1582,13 @@
 
     function getAppendiceData(appendices) {
         var result = {};
-        if (!appendices.ingredientList) return result;
-        var appendixArray = appendices.ingredientList;
-        for (var i = 0; i < appendixArray.length; i++) {
-            var rec = {};
-            rec[ing.name] = ing.id;
-            result.push(rec);
+        if (!appendices ) return result;
+
+        for (var i = 0; i < appendices.length; i++) {
+            var appendix=appendices[i];
+           // var rec = {};
+            result[appendix.ingredientName] = i;
+            //result.push(rec);
         }
         return result;
     }
@@ -1599,23 +1600,29 @@
         for(var i=0;i<formulations.length;i++){
             //Step 1 get active ingredients
             var oneFormulation=formulations[i];
-            for(var j=0;j<(oneFormulation.activeIngList.length); j++){
-                var oneActive=oneFormulation.activeIngList[j];
-                if(oneActive.humanAnimalSourced===yesValue){
-                    allAnimalSourcedNames.push(oneActive.ingName);
+            if(oneFormulation.activeIngList) {
+                for (var j = 0; j < (oneFormulation.activeIngList.length); j++) {
+                    var oneActive = oneFormulation.activeIngList[j];
+                    if (oneActive.humanAnimalSourced === yesValue) {
+                        allAnimalSourcedNames.push(oneActive.ingName);
+                    }
                 }
             }
             //step 2 get nmi flagged
-            for(var j=0;j<(oneFormulation.nMedIngList.length); j++){
-                var oneActive=oneFormulation.nMedIngList[j];
-                if(oneActive.humanAnimalSourced===yesValue){
-                    allAnimalSourcedNames.push(oneActive.ingName);
+            if(oneFormulation.nMedIngList){
+                for (var j = 0; j < (oneFormulation.nMedIngList.length); j++) {
+                    var oneActive = oneFormulation.nMedIngList[j];
+                    if (oneActive.humanAnimalSourced === yesValue) {
+                        allAnimalSourcedNames.push(oneActive.ingName);
+                    }
                 }
             }
             //step 3  all materials
-            for(var j=0;j<(oneFormulation.animalHumanMaterials.length); j++){
-                var oneActive=oneFormulation.animalHumanMaterials[j];
+            if(oneFormulation.animalHumanMaterials) {
+                for (var j = 0; j < (oneFormulation.animalHumanMaterials.length); j++) {
+                    var oneActive = oneFormulation.animalHumanMaterials[j];
                     allAnimalSourcedNames.push(oneActive.ingredientName);
+                }
             }
         }
         uniqueList=getUniqueList(allAnimalSourcedNames);

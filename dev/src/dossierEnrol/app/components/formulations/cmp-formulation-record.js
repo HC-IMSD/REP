@@ -25,7 +25,8 @@
                 onUpdate: '&',
                 onDelete: '&',
                 onCancel: '&',
-                showErrors:'&'
+                showErrors:'&',
+                recordChanged:'&'
             }
 
         });
@@ -97,24 +98,28 @@
             if(!list) return;
 
             self.frmModel.activeIngList = list;
+            self.recordChanged();
         };
 
         self.updateNonMedIngList = function(list){
             if(!list) return;
 
             self.frmModel.nMedIngList = list;
+            self.recordChanged();
         };
 
         self.updateContainerTypeList = function(list){
             if(!list) return;
 
             self.frmModel.containerTypes = list;
+
         };
 
         self.updateMaterialList = function(list){
             if(!list) return;
 
             self.frmModel.animalHumanMaterials = list;
+            self.recordChanged();
         };
 
         self.updateRoaList = function(list){

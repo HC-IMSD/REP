@@ -118,6 +118,11 @@
             disableXMLSave();
         }
 
+        self.recordsChanged=function(){
+            console.log("calling records changed")
+            self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
+        }
+
         self.setApplicationType = function (value) {
             self.dossierModel.applicationType = value;
             self.formAmend = self.dossierModel.applicationType === self.applicationInfoService.getAmendType();

@@ -11,7 +11,7 @@
     <div class="tabpanels">
         <ng-form name="tabsCtrl.tabs[0].form">
         <div id="formulations-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[0].selected">
-            <cmp-formulations formulations="tabsCtrl.formulationList"></cmp-formulations>
+            <cmp-formulations formulations="tabsCtrl.formulationList" record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
             <!--<p>
                 Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.Formulations Section.
             </p>-->
@@ -19,7 +19,7 @@
         </ng-form>
         <ng-form name="tabsCtrl.tabs[1].form">
         <div id="appendix4-panel" role="tabpanel" class="out" ng-if="tabsCtrl.tabs[1].selected">
-            <cmp-appendix-four ingredients="tabsCtrl.appendix4List"></cmp-appendix-four>
+            <cmp-appendix-four ingredients="tabsCtrl.appendix4List" record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
         </div>
         </ng-form>
     </div>
