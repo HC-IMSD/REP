@@ -22,7 +22,9 @@
         'applicationInfo',
         'ui.bootstrap',
         'filterLists',
-       'numberFormat'
+       'numberFormat',
+        'ngMessages',
+        'ngAria'
     ];
 
     angular
@@ -111,6 +113,7 @@
                 //load into data model as result json is not null
             }
             //if content is attempted to be loaded show all the errors
+            self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
             self.showAllErrors = true;
             disableXMLSave();
         }

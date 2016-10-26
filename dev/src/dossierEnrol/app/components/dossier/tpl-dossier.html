@@ -111,7 +111,7 @@
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'THERA_CLASS'|translate}}</h3>
                         <strong id="active-error" class="error"  ng-if="dos.noTheraRecs()">
-                            <span class="label label-danger" ng-messages="dos.noTheraVal.$error">
+                            <span class="label label-danger" ng-messages="dos.dossierForm.noTheraVal.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_ONE_THERA"></span></span>
                             </span>
                         </strong>
@@ -134,7 +134,6 @@
         </div>
     </section>
 
-
     <section class="panel panel-primary mrgn-tp-lg">
         <header class="panel-heading">
             <h2 class="panel-title">{{'DRUG_PRODUCT'|translate}}</h2>
@@ -143,7 +142,6 @@
 
             <div class="row">
                 <div class="col-xs-12 form-group">
-
 
                     <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
                                   show-list-errors="dos.showErrors()"
@@ -200,7 +198,7 @@
                 <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <cmp-rep-contact-list contacts="dos.dossierModel.contactList"
+                <cmp-rep-contact-list contacts="dos.dossierModel.contactList"  on-update=""
                                       parent-dirty="dos.dossierForm.$dirty"
                                       show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
 
@@ -220,5 +218,5 @@
             </button>
         </div>
     </div>
-  <!--  <pre>{{dos.dossierModel | json }}</pre>-->
+    <pre>{{dos.dossierModel | json }}</pre>
 </ng-form>

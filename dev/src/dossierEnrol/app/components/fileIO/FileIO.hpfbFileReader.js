@@ -56,7 +56,7 @@
      * @param rootElem - the name of the root element. Used for comparing to the loaded file
      */
     angular.module('fileIO').component('hpfbFileSelect', {
-        templateUrl: 'app/scripts/components/fileIO/fileSelect.html',
+        templateUrl: './components/fileIO/fileSelect.html',
         controller: FileSelectController,
         bindings: {
             updateModelRoot: '&',

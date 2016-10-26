@@ -3,7 +3,7 @@
            data-ng-model="formulCtrl.noFormulations"/>
     <label for="noFormulation{{$id}}" ng-if="formulationsForm.noFormulation.$invalid">
         <strong id="active-error" class="error" >
-        <span class="label label-danger" ng-messages="formulationsForm.noActive.$error">
+        <span class="label label-danger" ng-messages="formulationsForm.noFormulation.$error">
             <span ng-message="required"><span translate="MSG_ERR_ONE_FORMULATION"></span></span>
         </span>
         </strong>
