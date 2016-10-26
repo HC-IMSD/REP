@@ -56,6 +56,10 @@
 
         vm.$onChanges = function (changes) {
 
+            if(changes.disableSelection){
+                vm.disableExpand=changes.disableSelection.currentValue;
+            }
+
             if (changes.listItems) {
                 if(vm.listItems) {
                     vm.dayDataCollapse = _createArray(vm.listItems.length, true);
@@ -88,9 +92,7 @@
                     vm.resetTableRow()
                 }
             }
-            if(changes.disableSelection){
-                vm.disableExpand=changes.disableSelection.currentValue;
-            }
+
             if(changes.columnDef) {
                 vm.numberCols=changes.columnDef.currentValue.length;
                 vm.columnDefinitions = _recalculateColumnDefs(changes.columnDef.currentValue, (vm.numberCols));
