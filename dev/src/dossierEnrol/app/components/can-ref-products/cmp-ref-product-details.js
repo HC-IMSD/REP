@@ -32,14 +32,18 @@
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
 
+        //var backup = {};
+
         self.$onInit = function () {
 
             self.productModel = {};
 
             if (self.productRecord) {
 
-                angular.extend(self.productModel, self.productRecord);
+                self.productModel = angular.copy(self.productRecord);
+               // self.backup = angular.copy(self.productModel);
             }
+            self.backup = angular.copy(self.productModel);
 
         }
 
@@ -69,6 +73,7 @@
             if (self.productRecord) {
                // console.log('product details update product');
                 self.onUpdate({product:self.productModel});
+                self.productDetailsForm.$setPristine();
             }else{
               //  console.log('product details add product');
                 self.onAddProduct({product:self.productModel});
@@ -77,7 +82,9 @@
         };
 
         self.discardChanges = function(){
-            self.productModel = {};
+            self.productModel = angular.copy(self.backup);
+           //self.productModel = backup;
+            self.productDetailsForm.$setPristine();
             //self.productDetailsForm.$setPristine();
             self.onCancel();
         }

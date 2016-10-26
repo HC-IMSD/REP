@@ -29,10 +29,11 @@
             }
 
         });
+
     function containerTypeRecCtrl() {
 
         var self = this;
-        self.savePressed=false;
+
         self.$onInit = function () {
 
             self.ctModel = {};
@@ -40,27 +41,24 @@
             if(self.record){
                 self.ctModel = self.record;
             }
+            self.backup = angular.copy(self.ctModel);
         };
 
         self.save = function () {
-            if(self.containerTypeForm.$valid) {
-                if (self.record) {
-                    // console.log('product details update product');
-                    self.onUpdate({cType: self.ctModel});
-                } else {
-                    //  console.log('product details add product');
-                    self.onAddIng({cType: self.ctModel});
-                }
-                self.savePressed=false;
+            if (self.record) {
+                // console.log('product details update product');
+                self.onUpdate({cType: self.ctModel});
                 self.containerTypeForm.$setPristine();
             }else{
-                self.savePressed=true;
+                //  console.log('product details add product');
+                self.onAddIng({cType: self.ctModel});
             }
 
         };
 
         self.discardChanges = function(){
-            self.ctModel = self.record ? self.record : {};
+            self.ctModel = angular.copy(self.backup);
+            self.containerTypeForm.$setPristine();
             self.onCancel();
         }
 
@@ -78,7 +76,7 @@
          * @returns {*}
          */
         self.showError=function(isInvalid, isTouched){
-            return((isInvalid && isTouched)||(isInvalid && self.showErrors() ||(isInvalid &&self.savePressed)))
+            return((isInvalid && isTouched) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
         }
 
 

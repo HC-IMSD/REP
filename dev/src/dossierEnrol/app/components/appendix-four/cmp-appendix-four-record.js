@@ -77,11 +77,11 @@
 
         };
 
-        self.discardChanges = function () {
+        /*self.discardChanges = function () {
             self.model = {};
             //self.productDetailsForm.$setPristine();
             self.onCancel();
-        }
+        }*/
 
         self.delete = function () {
             if (self.record) {
@@ -106,6 +106,7 @@
         self.updateAnimalSourced = function(input){
 
             self.model.sourceAnimalDetails = input;
+            self.onUpdate({record: self.model});
 
         };
 
