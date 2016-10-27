@@ -56,9 +56,7 @@
 
         vm.$onChanges = function (changes) {
 
-            if(changes.disableSelection){
-                vm.disableExpand=changes.disableSelection.currentValue;
-            }
+
 
             if (changes.listItems) {
                 if(vm.listItems) {
@@ -91,6 +89,10 @@
                 }else{
                     vm.resetTableRow()
                 }
+            }
+
+            if(changes.disableSelection){
+                vm.disableExpand=changes.disableSelection.currentValue;
             }
 
             if(changes.columnDef) {

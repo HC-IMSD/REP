@@ -11,7 +11,6 @@
         ,'tabsModule'
         ,'refProductListModule'
         ,'drugUseModule'
-        ,'therapeuticClassModule'
         ,'scheduleAModule',
         'dossierDataLists',
         'filterLists',
@@ -24,7 +23,8 @@
         'filterLists',
        'numberFormat',
         'ngMessages',
-        'ngAria'
+        'ngAria',
+        'theraClass'
     ];
 
     angular

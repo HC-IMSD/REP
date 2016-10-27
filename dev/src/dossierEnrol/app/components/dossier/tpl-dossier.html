@@ -28,7 +28,7 @@
                         <span class="field-name">{{'COMPANY_ID' |translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" class="form-control full-width" id="company-id"
-                               name="companyId" required="true" maxlength="6" ng-model="dos.dossierModel.companyId"/>
+                               name="companyId" required="true" maxlength="6" ng-model="dos.dossierModel.companyID"/>
                         <strong id="company-id-error" class="error"
                                 ng-if="dos.showError(dos.dossierForm.companyId.$invalid,dos.dossierForm.companyId.$touched)">
                                     <span class="label label-danger"
@@ -37,13 +37,6 @@
                                     </span>
                         </strong>
                     </label>
-                </div>
-            </div>
-            <div class="row margin-bottom-small">
-                <div class="col-md-6 form-group">
-                    <label for="companyId">{{"COMPANY_ID"| translate}}</label>
-                    <input type="text" class="form-control full-width" id="companyId"
-                           ng-model="dos.dossierModel.companyID"/>
                 </div>
             </div>
             <div class="row margin-bottom-small">
@@ -126,8 +119,7 @@
                     <div class="panel-body">
                         <input type="textbox" required ng-show="false" name="noTheraVal" id="noThera" aria-hidden="true"
                                data-ng-model="dos.noThera"/>
-                        <cmp-therapeutic-class
-                                list-items="dos.dossierModel.drugProduct.therapeutic"></cmp-therapeutic-class>
+                        <cmp-thera-list records="dos.dossierModel.drugProduct.therapeutic" show-errors="dos.showErrors()"></cmp-thera-list>
                     </div>
                 </section>
             </div>
