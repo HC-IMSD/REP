@@ -17,13 +17,12 @@
 
     </cmp-expanding-table>
 
-    <cmp-formulation-record ng-if="formulCtrl.newFormShown === true" on-add-new="formulCtrl.addNew(record)" on-cancel="formulCtrl.newFormShown = false" delete-btn="false"></cmp-formulation-record>
+    <!--<cmp-formulation-record ng-if="formulCtrl.newFormShown === true" on-add-new="formulCtrl.addNew(record)" on-cancel="formulCtrl.newFormShown = false" delete-btn="false"></cmp-formulation-record>-->
 
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
             <input type="submit" value="Add Formulation" class="btn btn-primary"
-                   data-ng-disabled="formulCtrl.newFormShown"
-                   ng-click="formulCtrl.newFormShown = true" />
+                   ng-click="formulCtrl.addNew()" />
         </div>
     </div>
     

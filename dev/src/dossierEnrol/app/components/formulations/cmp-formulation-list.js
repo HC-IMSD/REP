@@ -41,6 +41,18 @@
             if(self.formulations){
                 self.formulationList = self.formulations;
             }
+
+            self.newRecord =  {
+                "formulationName": "A",
+                "dosageForm" : "A",
+                "dosageFormOther": "A",
+                activeIngList: [],
+                nMedIngList : [],
+                containerTypes : [],
+                animalHumanMaterials : [],
+                routeAdmins : [],
+                countryList : []
+            };
             self.updateFormulationsError();
         };
 
@@ -54,16 +66,13 @@
             }
         };
 
-
-
-        self.addNew = function(frm){
+        self.addNew = function(){
             console.debug('self.formulationList.length add new: ' + self.formulationList.length);
-            frm.formulationId = self.formulationList.length + 1;
-            self.formulationList.push(frm);
-            self.newFormShown = false;
-            self.resetToCollapsed = true;
+            self.newRecord.formulationId = self.formulationList.length + 1;
+            self.formulationList.push(self.newRecord);
+           // self.resetToCollapsed = true;
             self.updateFormulationsError();
-        };
+        }
 
         self.update = function(idx, frm){
             self.formulationList[idx] = angular.copy(frm);
