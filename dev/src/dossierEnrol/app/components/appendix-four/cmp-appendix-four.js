@@ -49,15 +49,16 @@
         };
 
 
-        self.addNew = function (ing) {
-            //console.debug('frmList add new: ' + frm);
-            self.ingredientList.push(ing);
-            self.newFormShown = false;
-            self.resetToCollapsed = true;
+        self.addNew = function () {
+            var newRecord = {
+                "id":self.ingredientList.length + 1,
+                "ingredientName": "ing1"
+            };
+            self.ingredientList.push(newRecord);
         };
 
         self.update = function (idx, ing) {
-            console.log('apdx4 list update; ');
+            //console.log('apdx4 list update; ');
             self.ingredientList[idx] = angular.copy(ing);
         };
 

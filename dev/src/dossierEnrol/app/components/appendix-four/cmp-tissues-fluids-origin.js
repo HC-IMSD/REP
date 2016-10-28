@@ -194,7 +194,8 @@
             };
 
             if(self.tissuesModel){
-                self.model = self.tissuesModel;
+
+                self.model = angular.copy(self.tissuesModel);
             }
 
         }
@@ -217,7 +218,9 @@
          * @returns {boolean}
          */
         self.oneTissueSourceSelected = function () {
-            var tissuesArray = [
+
+
+            /*var tissuesArray = [
                 self.model.nervousSystem,
                 self.model.digestiveSystem,
                 self.model.reproductiveSystem,
@@ -226,13 +229,34 @@
                 self.model.musculoSkeletalSystem,
                 self.model.otherTissues,
                 self.model.skinGlandSystem
-            ];
+            ];*/
             //reset before looping
             self.isSelected = "";
             self.otherTextError = false
             //n2 not terribly efficient
             //go through the entire list looking for other text errors
-            for (var i = 0; i < tissuesArray.length; i++) {
+
+            angular.forEach(self.model, function(system, key){
+                //console.log('oneTissueSourceSelected: key ' + key);
+                for (var j = 0; j < system.list.length; j++) {
+                    if (system.list[j].value === true) {
+                        //if has otherText property, check that it is filled in
+                        if (system.list[j].hasOtherDetails) {
+                            if (system.list[j].otherText) {
+                                self.isSelected = true;
+                            } else {
+                                //set error flag for other text
+                                self.otherTextError = true;
+                            }
+                        } else {
+                            self.isSelected = true;
+                        }
+                    }
+                }
+                
+            });
+
+           /* for (var i = 0; i < tissuesArray.length; i++) {
                 for (var j = 0; j < tissuesArray[i].list.length; j++) {
                     if (tissuesArray[i].list[j].value === true) {
                         //if has otherText property, check that it is filled in
@@ -248,7 +272,7 @@
                         }
                     }
                 }
-            }
+            }*/
             if (self.isSelected) {
                 return true;
             }
@@ -256,6 +280,8 @@
         };
 
         self.updateNervousSystemList = function(list){
+
+            console.log('updateNervousSystemList: ');
 
             self.model.nervousSystem.list = list;
             self.onUpdate({model:self.model});

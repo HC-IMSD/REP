@@ -41,18 +41,6 @@
             if(self.formulations){
                 self.formulationList = self.formulations;
             }
-
-            self.newRecord =  {
-                "formulationName": "A",
-                "dosageForm" : "A",
-                "dosageFormOther": "A",
-                activeIngList: [],
-                nMedIngList : [],
-                containerTypes : [],
-                animalHumanMaterials : [],
-                routeAdmins : [],
-                countryList : []
-            };
             self.updateFormulationsError();
         };
 
@@ -67,9 +55,23 @@
         };
 
         self.addNew = function(){
-            console.debug('self.formulationList.length add new: ' + self.formulationList.length);
-            self.newRecord.formulationId = self.formulationList.length + 1;
-            self.formulationList.push(self.newRecord);
+
+
+           var newRecord =  {
+               "formulationId":self.formulationList.length + 1,
+                "formulationName": "A",
+                "dosageForm" : "A",
+                "dosageFormOther": "A",
+                activeIngList: [],
+                nMedIngList : [],
+                containerTypes : [],
+                animalHumanMaterials : [],
+                routeAdmins : [],
+                countryList : []
+            };
+           // console.debug('self.formulationList.length add new: ' + self.formulationList.length);
+          //  newRecord.formulationId = self.formulationList.length + 1;
+            self.formulationList.push(newRecord);
            // self.resetToCollapsed = true;
             self.updateFormulationsError();
         }
