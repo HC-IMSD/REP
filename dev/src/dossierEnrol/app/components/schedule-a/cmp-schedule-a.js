@@ -29,7 +29,7 @@
 
     function scheduleACtrl() {
         var self = this;
-        self.claimSelected=false;
+        self.isClaim="";
         self.$onInit = function () {
             var noValue=false;
              self.scheduleAModel = {
@@ -98,14 +98,16 @@
         self.claimSelected=function(){
             for (var i=0;i<self.scheduleAModel.diseaseDisorderList.length;i++){
                 if(self.scheduleAModel.diseaseDisorderList[i].value){
+                    self.isClaim="selected";//give mand field a value
                     return true;
                 }
             }
+            self.isClaim=""
             return false;
         };
         self.noClaimSelected=function(){
             return(!self.claimSelected());
-        }
+        };
         self.showError = function (isInvalid, isTouched) {
 
             return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
