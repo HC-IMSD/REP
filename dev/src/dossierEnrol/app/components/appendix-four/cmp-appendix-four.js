@@ -27,17 +27,19 @@
     function appendixFourCtrl(){
 
         var self=this;
+        self.colNames = [
+            {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
+        ];
+        self.ingredientList=[];
 
         self.$onInit = function(){
             self.newFormShown = false;
-            self.colNames = [
-                {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
-            ];
             self.isDetailValid = true; //TODO needs to be managed in ADD and delete
-            self.ingredientList = [];
 
-            if(self.ingredients){
-                self.ingredientList = self.ingredients;
+            if(!self.ingredientList){
+                console.log("init")
+                self.ingredientList = [];
+               // self.ingredientList = self.ingredients;
             }
         };
 
@@ -52,14 +54,14 @@
         self.addNew = function () {
             var newRecord = {
                 "id":self.ingredientList.length + 1,
-                "ingredientName": "ing1"
+                "ingredientName": "tretd"
             };
             self.ingredientList.push(newRecord);
         };
 
         self.update = function (idx, ing) {
-            //console.log('apdx4 list update; ');
-            self.ingredientList[idx] = angular.copy(ing);
+            console.log('apdx4 list update; ');
+            //self.ingredientList[idx] = angular.copy(ing);
         };
 
         self.delete = function (idx) {
@@ -68,7 +70,6 @@
                 self.resetToCollapsed = true;
 
         }
-
 
     }
 })();

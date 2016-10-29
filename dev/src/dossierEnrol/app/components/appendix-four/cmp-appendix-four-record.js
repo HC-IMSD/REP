@@ -39,7 +39,7 @@
         }
         self.$onChanges = function (changes) {
             if (changes.record) {
-                self.model = angular.copy(changes.record.currentValue);
+                self.model = (changes.record.currentValue);
             }
 
         }
