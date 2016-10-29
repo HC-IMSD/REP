@@ -11,15 +11,14 @@
 
     </cmp-expanding-table>
 
-    <cmp-appendix-four-record ng-if="ap4Ctrl.newFormShown === true" on-add-new="ap4Ctrl.addNew(record)"
-                              on-cancel="ap4Ctrl.newFormShown = false" delete-btn="false"></cmp-appendix-four-record>
+   <!-- <cmp-appendix-four-record ng-if="ap4Ctrl.newFormShown === true" on-add-new="ap4Ctrl.addNew(record)"
+                              on-cancel="ap4Ctrl.newFormShown = false" delete-btn="false"></cmp-appendix-four-record>-->
 
 
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
             <input type="submit" value="Add New Ingredient" class="btn btn-primary"
-                   data-ng-disabled="ap4Ctrl.newFormShown"
-                   ng-click="ap4Ctrl.newFormShown = true"/>
+                   ng-click="ap4Ctrl.addNew()"/>
         </div>
     </div>
 </ng-form>

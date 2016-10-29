@@ -96,10 +96,12 @@
             //console.log('apdx4 record updateTissuesFluids : ' + JSON.stringify(input));
 
             self.model.tissuesFluidsOrigin = input;
+            self.onUpdate({record: self.model});
 
-           /* if (self.record) {
-                self.onUpdate({record: self.model});
-            }*/
+
+            /* if (self.record) {
+                 self.onUpdate({record: self.model});
+             }*/
 
         };
 

@@ -21,7 +21,7 @@
             bindings: {
                 deleteBtn: '<',
                 record:'<',
-                onAddNew: '&',
+              //  onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
                 onCancel: '&',
@@ -48,7 +48,7 @@
                 self.frmModel = self.record;
             }
         };
-
+/*
         self.save = function () {
             if (self.record) {
                 // console.log('product details update product');
@@ -58,7 +58,7 @@
                 self.onAddNew({record:self.frmModel});
             }
 
-        };
+        };*/
 
         /*self.discardChanges = function(){
             self.frmModel = {};

@@ -55,16 +55,27 @@
             }
         };
 
+        self.addNew = function(){
 
 
-        self.addNew = function(frm){
-            console.debug('self.formulationList.length add new: ' + self.formulationList.length);
-            frm.formulationId = self.formulationList.length + 1;
-            self.formulationList.push(frm);
-            self.newFormShown = false;
-            self.resetToCollapsed = true;
+           var newRecord =  {
+               "formulationId":self.formulationList.length + 1,
+                "formulationName": "A",
+                "dosageForm" : "A",
+                "dosageFormOther": "A",
+                activeIngList: [],
+                nMedIngList : [],
+                containerTypes : [],
+                animalHumanMaterials : [],
+                routeAdmins : [],
+                countryList : []
+            };
+           // console.debug('self.formulationList.length add new: ' + self.formulationList.length);
+          //  newRecord.formulationId = self.formulationList.length + 1;
+            self.formulationList.push(newRecord);
+           // self.resetToCollapsed = true;
             self.updateFormulationsError();
-        };
+        }
 
         self.update = function(idx, frm){
             self.formulationList[idx] = angular.copy(frm);
