@@ -139,11 +139,15 @@
             self.isIncomplete = !self.activityRoot.dossierID;
         }
 
+        $scope.$watch("dos.dossierForm.$invalid", function () {
+            disableXMLSave()
+        }, true);
 
         /**
          * @ngdoc disables the XML save button
          */
         function disableXMLSave() {
+            console.log("IS IT INVALD"+self.dossierForm.$invalid )
             self.disableXML = self.dossierForm.$invalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern());
 
         }
@@ -187,13 +191,23 @@
             }
             return false;
         }
+
+        /**
+         * Save as a json file. Convert interal model to external model for output
+         */
         self.saveJson = function () {
             var writeResult = _transformFile();
-            console.log(writeResult);
            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), self.dossierService.getRootTagName());
             self.showAllErrors = true;
             //_setComplete()
         };
+
+        self.saveXML=function(){
+            var writeResult = _transformFile();
+            hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), self.dossierService.getRootTagName());
+            self.showAllErrors = false;
+        }
+
 
         /**
          * Takes the internal model and transforms to a json object compatible with the output
@@ -220,9 +234,6 @@
          */
         function _createFilename() {
             var filename = "HC_DO_Enrolment";
-            /*if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
-                filename = filename + "_" + vm.activityRoot.dstsControlNumber;
-            }*/
             return filename;
         }
 

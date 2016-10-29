@@ -41,7 +41,7 @@
                             <label for="sourced-human_{{$id}}">
                                 <input type="checkbox" name="sourced-human" ng-model="ap4RecCtrl.model.humanSourced"
                                        id="sourced-human_{{$id}}"
-                                       ng-change=""> {{'HUMAN'|translate}}
+                                       ng-change="ap4RecCtrl.showTissuesFluids()"> {{'HUMAN'|translate}}
                             </label>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                             <label for="sourced-animal">
                                 <input type="checkbox" name="sourced-animal" ng-model="ap4RecCtrl.model.animalSourced"
                                        id="sourced-animal"
-                                       ng-change="">{{'ANIMAL'|translate}}
+                                       ng-change="ap4RecCtrl.showTissuesFluids()">{{'ANIMAL'|translate}}
                             </label>
                         </div>
                     </div>

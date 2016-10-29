@@ -1,6 +1,6 @@
 <ng-form name="$ctrl.schedAForm">
     <uib-accordion close-others="false">
-        <div uib-accordion-group heading="{{'Schedule A Claim Details' |translate}}" is-open="true" is-disabled="$ctrl.schedAForm.$invalid"
+        <div uib-accordion-group heading="{{'Schedule A Claim Details' |translate}}" is-open="$ctrl.expanderOpenState" is-disabled="$ctrl.disableExpander"
              template-url="../lib/uib-templates/tpl-accordian-group-caret.html">
     <div >
         <div >

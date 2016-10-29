@@ -81,9 +81,9 @@
 	<!-- ingredients-->
 	<hpfb:element name="appendix4_group" type="appendix4_content"/>
 	<!--<hpfb:element name="drug_ingredient" type="ingredient_content"/>-->
-	<hpfb:element name="ingredient_id" type="char_1_40_content" nillable="true"/>
+	<hpfb:element name="ingredient_id" type="char_0_40_content" nillable="true"/>
 	<hpfb:element name="ingredient_name" type="char_1_100_content"/>
-	<hpfb:element name="cas_number" type="cas_content"/>
+	<hpfb:element name="cas_number" type="cas_content" nillable="true"/>
 	<hpfb:element name="ingred_standard" type="char_0_40_content"/>
 	<hpfb:element name="is_human_animal_src" type="required_yes_no_content"/>
 	<hpfb:element name="animal_sourced" type="required_yes_no_content"/>
@@ -205,7 +205,7 @@
 	<hpfb:element name="formulation_details" type="formulation_content"/>
 	<hpfb:element name="roa_group" type="roa_content"/>
 	<hpfb:element name="roa_details" type="roa_details_content"/>
-	<hpfb:element name="roa" type="dosage_form_list"/>
+	<hpfb:element name="roa" type="roa_list"/>
 	<hpfb:element name="roa_other" type="char_0_40_content"/>
 
 	<hpfb:element name="country_group" type="country_group_content"/>
