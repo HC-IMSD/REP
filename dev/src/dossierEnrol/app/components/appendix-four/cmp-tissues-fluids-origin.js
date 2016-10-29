@@ -193,9 +193,9 @@
         self.$onInit = function(){
 
             //if there is no model passed on changes create default one
-            //TODO this should be done when model object is created
+            //TODO this should be done when model object is created at a higher level component
             if(!self.model){
-                console.log("there is no model")
+                //create a default model and tell the parent since the parent was too dumb to pass one in
                 self.model = {
                     nervousSystem:{
                         title: "NERVOUSYSTEM", //the legend for checkbox list
@@ -356,7 +356,7 @@
                     }
 
                 };
-                //self.model = angular.copy(self.tissuesModel);
+                self.onUpdate({model:self.model});
             }
         }
 
@@ -392,13 +392,12 @@
             //go through the entire list looking for other text errors
 
             angular.forEach(self.model, function(system, key){
-                //console.log('oneTissueSourceSelected: key ' + key);
-                if(system.list) {
-                    for (var j = 0; j < system.list.length; j++) {
-                        if (system.list[j].value === true) {
+                for (var i = 0; i < tissuesArray.length; i++) {
+                    for (var j = 0; j < tissuesArray[i].list.length; j++) {
+                        if (tissuesArray[i].list[j].value === true) {
                             //if has otherText property, check that it is filled in
-                            if (system.list[j].hasOtherDetails) {
-                                if (system.list[j].otherText) {
+                            if (tissuesArray[i].list[j].hasOwnProperty('otherText')) {
+                                if (tissuesArray[i].list[j].otherText) {
                                     self.isSelected = true;
                                 } else {
                                     //set error flag for other text
@@ -411,38 +410,21 @@
                     }
                 }
             });
-           /* for (var i = 0; i < tissuesArray.length; i++) {
-                for (var j = 0; j < tissuesArray[i].list.length; j++) {
-                    if (tissuesArray[i].list[j].value === true) {
-                        //if has otherText property, check that it is filled in
-                        if (tissuesArray[i].list[j].hasOwnProperty('otherText')) {
-                            if (tissuesArray[i].list[j].otherText) {
-                                self.isSelected = true;
-                            } else {
-                                //set error flag for other text
-                                self.otherTextError = true;
-                            }
-                        } else {
-                            self.isSelected = true;
-                        }
-                    }
-                }
-            }*/
             if (self.isSelected) {
                 return true;
             }
             return false;
         };
 
+        //TODO remove, unneccesary
         self.updateNervousSystemList = function(list){
 
-            console.log('updateNervousSystemList: ');
            // console.log("list"+list);
            // self.model.nervousSystem.list = list;
-            self.onUpdate({model:self.model});
+            //self.onUpdate({model:self.model});
 
         };
-
+        //TODO remove, unneccesary
         self.updateDigestSystemList = function(list){
 
          /*   self.model.digestiveSystem.list = list;
@@ -450,7 +432,7 @@
             self.onUpdate({model:self.model});*/
 
         };
-
+        //TODO remove, unneccesary
         self.updateRepSystemList = function(list){
 
           /*  self.model.reproductiveSystem.list = list;
@@ -458,7 +440,7 @@
             self.onUpdate({model:self.model});*/
 
         };
-
+        //TODO remove, unneccesary
         self.updateCardioSystemList = function(list){
 
           /*  self.model.cardioSystem.list = list;
@@ -466,7 +448,7 @@
             self.onUpdate({model:self.model});*/
 
         };
-
+        //TODO remove, unneccesary
         self.updateImmuneSystemList = function(list){
 
            /* self.model.immuneSystem.list = list;
@@ -474,14 +456,14 @@
             self.onUpdate({model:self.model});*/
 
         };
-
+        //TODO remove, unneccesary
         self.updateSkinGlandSystemList = function(list){
 
           /*  self.model.skinGlandSystem.list = list;
             self.onUpdate({model:self.model});*/
 
         };
-
+        //TODO remove, unneccesary
         self.updateMusculoSystemList = function(list){
 
           /*  self.model.musculoSkeletalSystem.list = list;
@@ -489,13 +471,19 @@
 
         };
 
-
+        //TODO remove, unneccesary
         self.updateOtherSystemList = function(list){
 
          /*   self.model.otherTissues.list = list;
             self.onUpdate({model:self.model});*/
 
         };
+
+        /**
+         * Used to show/hide the error message when no value has been selected
+         * @param isDirty
+         * @returns {boolean}
+         */
         self.showNoRecordError = function (isDirty) {
             return (!self.oneTissueSourceSelected());
 
