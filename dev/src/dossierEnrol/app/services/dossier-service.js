@@ -627,14 +627,14 @@
                         title: "MUSCULOSYSTEM",
                         groupName: "musculo-skeletal-sys",
                         list: [
-                            {name: "abdomen", label: "ABDOMEN", value: tissues.abdomen === 'Y' ? true : false},
-                            {name: "skull", label: "SKULL", value: tissues.skull === 'Y' ? true : false},
-                            {name: "bones", label: "BONES", value: tissues.bones === 'Y' ? true : false},
-                            {name: "collagen", label: "COLLAGEN", value: tissues.collagen === 'Y' ? true : false},
-                            {name: "tendons-ligaments", label: "TENDONS",value: tissues.tendons_ligaments === 'Y' ? true : false},
-                            {name: "vertebral-column", label: "VERTEBRALCOLUMN", value: tissues.vertebral_column === 'Y' ? true : false},
-                            {name: "muscle", label: "MUSCLE", value: tissues.muscle === 'Y' ? true : false},
-                            {name: "other-musculo-skeletal", label: "MUSCLEOTHER", value: tissues.other_musculo_skeletal === 'Y' ? true : false, hasOtherDetails: true, otherText: tissues.other_musculo_skeletal_details}
+                            {name: "abdomen", label: "ABDOMEN", value: false},
+                            {name: "collagen", label: "COLLAGEN", value: false},
+                            {name: "muscle", label: "MUSCLE", value: false},
+                            {name: "skull", label: "SKULL", value: false},
+                            {name: "tendons-ligaments", label: "TENDONS",value: false},
+                            {name: "vertebral-column", label: "VERTEBRALCOLUMN", value: false},
+                            {name: "bones", label: "BONES", value:false},
+                            {name: "other-musculo-skeletal", label: "MUSCLEOTHER", value: false, hasOtherDetails: true, otherText: ""}
                         ]
                     },
                     otherTissues: {
@@ -689,44 +689,9 @@
             }
         }
 
-
         return list;
 
-
     }
-
-
-    /*function getFormulationList(list){
-
-        var formulationList = [];
-        if (!(list instanceof Array)) {
-            //make it an array, case there is only one
-            list = [list]
-        }
-        angular.forEach(list, function (item) {
-
-            var obj = {
-                "formulation": item.formulation_id,
-                "formulationName": item.formulation_name,
-                "dosageForm" : item.dosage_form_group.dosage_form,
-                "dosageFormOther": item.dosage_form_group.dosage_form_other,
-                "activeIngList": getActiveIngList(item.active_ingredient),
-                "nMedIngList": getNonMedIngList(item.nonmedicinal_ingredient),
-                "containerTypes": getContainerTypeList(item.container_group.container_details),
-                "animalHumanMaterials": getMaterialList(item.material_ingredient),
-                "routeAdmins": getRouteAdminList(item.roa_group.roa_details),
-                "countryList": getFormulationCountryList(item.country_group.country_manufacturer)
-
-            }
-
-            formulationList.push(obj);
-
-
-        });
-
-        return formulationList;
-
-    }*/
 
     function getFormulationList(list){
 

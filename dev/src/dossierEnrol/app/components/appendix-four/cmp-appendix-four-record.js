@@ -152,20 +152,14 @@
                 title: "Musculo Skeletal System",
                 groupName: "musculo-skeletal-sys",
                 list: [
-                    {name: "abdomen", label: "ABDOMEN", value:false},
-                    {name: "skull", label: "SKULL", value:false},
+                    {name: "abdomen", label: "ABDOMEN", value: false},
+                    {name: "collagen", label: "COLLAGEN", value: false},
+                    {name: "muscle", label: "MUSCLE", value: false},
+                    {name: "skull", label: "SKULL", value: false},
+                    {name: "tendons-ligaments", label: "TENDONS",value: false},
+                    {name: "vertebral-column", label: "VERTEBRALCOLUMN", value: false},
                     {name: "bones", label: "BONES", value:false},
-                    {name: "collagen", label: "COLLAGEN", value:false},
-                    {name: "tendons-ligaments", label: "TENDONS", value:false},
-                    {name: "vertebral-column", label: "VERTEBRALCOLUMN", value:false},
-                    {name: "muscle", label: "MUSCLE", value:false},
-                    {
-                        name: "other-musculo-skeletal",
-                        label: "MUSCLEOTHER",
-                        value: false,
-                        hasOtherDetails: true,
-                        otherText: ""
-                    }
+                    {name: "other-musculo-skeletal", label: "MUSCLEOTHER", value: false, hasOtherDetails: true, otherText: ""}
                 ]},
             otherTissues:{
                 title: "OTHERTISSUE",
@@ -211,8 +205,7 @@
                 {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: ""},
                 {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: ""},
                 {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: ""},
-                {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: 0}/*,
-                 {label : "SPECIFY", type: "text", name : "specify", required : false, value : ""}*/
+                {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value:""}
             ],
             countryList: []
         };

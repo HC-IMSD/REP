@@ -18,7 +18,7 @@
         <div class="col-xs-6 form-group" ng-repeat="item in saCtrl.model.primateTypeList">
             <label for="{{item.name}}" ng-class="{'required':item.required}"><span class="field-name">{{item.label|translate}}</span>
                 <strong class="required" ng-if="item.required">{{"REQUIRED" |translate}}</strong></label>
-            <input type="{{item.type}}" class="form-control full-width" id="{{item.name}}" name="{{item.name}}"
+            <input type="{{item.type}}" class="form-control full-width" id="{{item.name}}" name="{{item.name}}" maxlength="75"
                    ng-model="item.value" ng-if="item.type !== 'select'"/>
           <!-- TODO: Replace hard coding of values-->
             <select id="{{item.name}}" name="{{item.name}}" ng-model="item.value"  class="form-control full-width"

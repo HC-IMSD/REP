@@ -34,7 +34,7 @@
         vm.model = {};
         vm.countries=[];
         vm.$onInit = function(){
-            console.log("Fieldset "+self.fieldsetLabel)
+
         };
 
         vm.$onChanges = function (changes) {
@@ -63,7 +63,6 @@
                 return true;
             }
             return false;
-
         }
     }
 })();
