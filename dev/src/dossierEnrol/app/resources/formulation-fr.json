@@ -38,5 +38,6 @@
   "APPENDIX4": "Annexe 4",
   "FORMULATION_DETAILS":"fr_Formulation Details",
   "FORMULATION_NAME":"fr_Formulation Name",
-  "FORM_ID": "ID"
+  "FORM_ID": "ID",
+  "ANIMAL_CTRY_ORIGIN": "fr_Country of Origin of the Animals"
 }

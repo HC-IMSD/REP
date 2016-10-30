@@ -196,7 +196,6 @@
 
         self.$onChanges = function (changes) {
             if(changes.tissuesModel){
-                console.log("tissues model "+changes.tissuesModel.currentValue);
                 self.model = changes.tissuesModel.currentValue;
             }
         };

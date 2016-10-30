@@ -19,8 +19,7 @@
             controller: sourceAnimalCtrl,
             controllerAs: 'saCtrl',
             bindings: {
-                primateTypes : '<',
-                countries : '<',
+                record : '<',
                 onUpdate : '&'
             }
         });
@@ -28,34 +27,12 @@
     function sourceAnimalCtrl() {
         var self = this;
         self.animalType = "";
-        self.model = {
-            primateTypeList: [
-                {label: "NONHUMANPRIMATE", type: "text", name: "nhp-type", required: false, value: ""},
-                {label: "AQUATICTYPE", type: "text", name: "aqua-type", required: false, value: ""},
-                {label: "AVIANTYPE", type: "text", name: "avian-type", required: false, value: ""},
-                {label: "BOVINETYPE", type: "text", name: "bovine-type", required: false, value: ""},
-                {label: "CANINETYPE", type: "text", name: "canine-type", required: false, value: ""},
-                {label: "CAPRINETYPE", type: "text", name: "caprine-type", required: false, value: ""},
-                {label: "CERVIDAETYPE", type: "text", name: "cervidae-type", required: false, value: ""},
-                {label: "EQUINETYPE", type: "text", name: "equine-type", required: false, value: ""},
-                {label: "FELINETYPE", type: "text", name: "feline-type", required: false, value: ""},
-                {label: "OVINETYPE", type: "text", name: "ovine-type", required: false, value: ""},
-                {label: "PORCINETYPE", type: "text", name: "porcine-type", required: false, value: ""},
-                {label: "RODENTTYPE", type: "text", name: "rodent-type", required: false, value: ""},
-                {label: "OTHERANIMALTYPE", type: "text", name: "other-animal-type", required: false, value: ""},
-                {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: ""},
-                {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: ""},
-                {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: ""},
-                {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: 0}/*,
-                 {label : "SPECIFY", type: "text", name : "specify", required : false, value : ""}*/
-            ],
-
-            countryList: []
-        };
+        self.model = {};
         self.$onInit = function () {
 
-            //todo should be provided with a blank model
-            if(!self.model ||  !self.model.primateTypeList) {
+            //todo should be provided with a blank model this should never happen!
+            if(angular.isUndefined(self.model)) {
+                console.warn("The source animal is undefined");
                 self.model = {
                     primateTypeList: [
                         {label: "NONHUMANPRIMATE", type: "text", name: "nhp-type", required: false, value: ""},
@@ -77,22 +54,16 @@
                         {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: 0}/*,
                          {label : "SPECIFY", type: "text", name : "specify", required : false, value : ""}*/
                     ],
-
                     countryList: []
                 };
-                self.updateAnimalSourcedModel();
+               // self.updateAnimalSourcedModel();
             }
 
-           /* if(self.primateTypes){
-                self.model.primateTypeList = self.primateTypes.primateTypeList;
-                self.model.countryList = self.primateTypes.countryList;
-            }*/
         };
 
         self.$onChanges=function(changes){
-            if (changes.primateTypes && changes.primateTypes.currentValue) {
-                self.model.primateTypeList = changes.primateTypes.currentValue.primateTypeList;
-                self.model.countryList = changes.primateTypes.currentValue.countryList;
+            if (changes.record ) {
+                self.model = changes.record.currentValue;
             }
         };
 
@@ -129,6 +100,11 @@
         };
         self.showAnimalError = function () {
             return (!_oneAnimalTypeSelected());
+        };
+
+        self.showOneCountryError = function () {
+            if(angular.isUndefined(self.model)) return false;
+            return(self.model.countryList.length>0)
         };
 
         self.showListError = function (isInvalid, isTouched, isRequired) {

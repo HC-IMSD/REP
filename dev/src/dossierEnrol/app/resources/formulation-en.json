@@ -48,6 +48,7 @@
   "FORMULATIONS":"Formulations",
   "FORMULATION_DETAILS":"Formulation Details",
   "FORMULATION_NAME": "Formulation Name",
-  "FORM_ID": "ID"
+  "FORM_ID": "ID",
+  "ANIMAL_CTRY_ORIGIN": "Country of Origin of the Animals"
 
 }

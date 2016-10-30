@@ -37,7 +37,7 @@
   "CANCEL": "fr_Cancel",
   "DELETE": "fr_Delete",
   "DELETE_CLASS": "Delete Classification",
-  "SOURCED_ANIMAL": "Source From Animal",
+  "SOURCED_ANIMAL": "Provide the animal types used for this ingredient",
   "SPECIFY": "Please specify",
   "DETAILS": "Details",
   "REF_PRODUCTS": "Canadian Reference Product(s)",

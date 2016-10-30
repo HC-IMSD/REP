@@ -513,6 +513,7 @@
             for (var i = 0; i < input.length; i++) {
 
                 list.push({
+                    "id":(i+1),
                     "name": input[i].country_with_unknown,
                     "unknownCountryDetails": input[i].unknown_country_details
                 });
@@ -1293,7 +1294,7 @@
             if (info[i].sourceAnimalDetails) {
                 ing.animal_sourced_section = createEmptyAnimalSourceForOutput();
                 var animalRecords = info[i].sourceAnimalDetails.primateTypeList;
-                for (var t = 0; t < animalRecords.length; i++) {
+                for (var t = 0; t < animalRecords.length; t++) {
                     switch (animalRecords[t].name) {
                         case "nhp-type":
                             ing.animal_sourced_section.nonhuman_primate_type = animalRecords[t].value;
@@ -1351,20 +1352,20 @@
                         case "age-animals":
                             ing.animal_sourced_section.animal_age = animalRecords[t].value;
                             break;
-
                         default:
                             console.error("Unexpected animal src tag: "+info.animalRecords[t].name)
                             break;
-
                     }
                 }
 
-                var countries = info.sourceAnimalDetails.countryList;
+                var countries = info[i].sourceAnimalDetails.countryList;
                 for (var v = 0; v < countries.length; v++) {
-                    ing.animal_sourced_section.country_origin_list.country_origin.push(countries[v]); //TODO is this data structure correct?
+                    var countryRecord={};
+                    countryRecord.country_with_unknown=countries[v].name;
+                    countryRecord.unknown_country_details=countries[v].unknownCountryDetails;
+                    ing.animal_sourced_section.country_origin_list.country_origin.push(countryRecord);
                 }
             }
-
             appendices.push(ing);
         }
 

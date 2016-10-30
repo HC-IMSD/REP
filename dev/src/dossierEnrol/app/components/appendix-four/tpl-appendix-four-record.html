@@ -50,7 +50,7 @@
                             <label for="sourced-animal">
                                 <input type="checkbox" name="sourced-animal" ng-model="ap4RecCtrl.model.animalSourced"
                                        id="sourced-animal"
-                                       ng-change="ap4RecCtrl.showTissuesFluids()">{{'ANIMAL'|translate}}
+                                       ng-change="ap4RecCtrl.showAnimalSources()">{{'ANIMAL'|translate}}
                             </label>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
 
             <section class="section">
                 <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"
-                                   primate-types="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)"></cmp-source-animal>
+                                   record="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)"></cmp-source-animal>
             </section>
 
             <div class="row">
@@ -80,5 +80,6 @@
                 </div>
             </div>
         </fieldset>
+      <!--  <pre>record {{ap4RecCtrl.model |json}}</pre>-->
     </ng-form>
 </div>

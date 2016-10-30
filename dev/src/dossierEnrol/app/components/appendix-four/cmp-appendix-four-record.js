@@ -193,6 +193,29 @@
             }
 
         }; //TODO this should come from the service
+        var emptyAnimalSource= {
+            primateTypeList: [
+                {label: "NONHUMANPRIMATE", type: "text", name: "nhp-type", required: false, value: ""},
+                {label: "AQUATICTYPE", type: "text", name: "aqua-type", required: false, value: ""},
+                {label: "AVIANTYPE", type: "text", name: "avian-type", required: false, value: ""},
+                {label: "BOVINETYPE", type: "text", name: "bovine-type", required: false, value: ""},
+                {label: "CANINETYPE", type: "text", name: "canine-type", required: false, value: ""},
+                {label: "CAPRINETYPE", type: "text", name: "caprine-type", required: false, value: ""},
+                {label: "CERVIDAETYPE", type: "text", name: "cervidae-type", required: false, value: ""},
+                {label: "EQUINETYPE", type: "text", name: "equine-type", required: false, value: ""},
+                {label: "FELINETYPE", type: "text", name: "feline-type", required: false, value: ""},
+                {label: "OVINETYPE", type: "text", name: "ovine-type", required: false, value: ""},
+                {label: "PORCINETYPE", type: "text", name: "porcine-type", required: false, value: ""},
+                {label: "RODENTTYPE", type: "text", name: "rodent-type", required: false, value: ""},
+                {label: "OTHERANIMALTYPE", type: "text", name: "other-animal-type", required: false, value: ""},
+                {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: ""},
+                {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value: ""},
+                {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: ""},
+                {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: 0}/*,
+                 {label : "SPECIFY", type: "text", name : "specify", required : false, value : ""}*/
+            ],
+            countryList: []
+        };
 
 
         self.model = {}
@@ -281,13 +304,29 @@
         self.showTissuesFluids=function(){
             if(self.model.humanSourced || self.model.animalSourced) {
                 if(!self.model.tissuesFluidsOrigin) {
-                    self.model.tissuesFluidsOrigin = emptyFluidsTissues;
+                    self.model.tissuesFluidsOrigin = angular.copy(emptyFluidsTissues);
                 }
                 return true;
             }else{
                 self.model.tissuesFluidsOrigin=null;
             }
             return false;
+
+        }
+        self.showAnimalSources=function(){
+            self.showTissuesFluids();
+            if(self.model.animalSourced) {
+                if(!self.model.sourceAnimalDetails) {
+                    self.model.sourceAnimalDetails = angular.copy(emptyAnimalSource);
+                    console.log("animal sources function: adding animalSources")
+                }
+                return true;
+            }else{
+                self.model.animalSourced=null
+                console.log("animal sources function: deleting animalSources")
+            }
+            return false;
+
 
         }
 
