@@ -25,12 +25,13 @@
                 onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                isDetailValid: '&'
             }
 
         });
-    materialIngRecCtrl.$inject = ['DossierLists'];
-    function materialIngRecCtrl(DossierLists) {
+    materialIngRecCtrl.$inject = ['DossierLists','$scope'];
+    function materialIngRecCtrl(DossierLists, $scope) {
 
         var self = this;
         self.yesNoList = DossierLists.getYesNoList();
@@ -52,13 +53,19 @@
         };
 
         self.save = function () {
-            if (self.record) {
-                // console.log('product details update product');
-                self.onUpdate({ing: self.mirModel});
+            if(self.materialIngRecordForm.$valid) {
+                if (self.record) {
+                    // console.log('product details update product');
+                    self.onUpdate({ing: self.mirModel});
+                    self.materialIngRecordForm.$setPristine();
+                } else {
+                    //  console.log('product details add product');
+                    self.onAddNew({ing: self.mirModel});
+                }
                 self.materialIngRecordForm.$setPristine();
-            } else {
-                //  console.log('product details add product');
-                self.onAddNew({ing: self.mirModel});
+                self.savePressed=false;
+            }else{
+                self.savePressed=true;
             }
 
         };
@@ -76,6 +83,10 @@
             }
 
         };
+
+        $scope.$watch('mirCtrl.materialIngRecordForm.$dirty', function () {
+            self.isDetailValid({state: !self.materialIngRecordForm.$dirty});
+        }, true);
 
     }
 })();

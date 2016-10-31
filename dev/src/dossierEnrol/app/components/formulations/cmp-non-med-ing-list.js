@@ -28,7 +28,7 @@
     function nonMedIngListCtrl() {
 
         var self = this;
-        self.isDetailValid = true; //TODO: Need to manage for Add and Delete
+        self.isDetailValid = true;
         self.selectRecord = -1;
         self.resetToCollapsed = false;
         self.newIngFormShown = false;

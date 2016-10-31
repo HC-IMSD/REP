@@ -78,9 +78,12 @@
         };
 
         self.$onChanges=function(changes){
-            if(changes.record){
+           /*
+            //Commented out as none of the other details records do this
+            //TODO: move init code to changes event where it belongs
+           if(changes.record){
                 self.ingModel = changes.record.currentValue;
-            }
+            }*/
         };
 
 
