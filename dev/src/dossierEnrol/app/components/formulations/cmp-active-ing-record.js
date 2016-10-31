@@ -73,8 +73,6 @@
             if (self.record) {
                 //  console.log('product details delete product');
                 self.onDelete();
-            } else {
-
             }
 
         };

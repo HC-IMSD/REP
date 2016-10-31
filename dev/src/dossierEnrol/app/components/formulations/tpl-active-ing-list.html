@@ -21,13 +21,13 @@
     </cmp-expanding-table>
 
     <cmp-active-ing-record ng-if="ailCtrl.newIngFormShown === true" on-add-ing="ailCtrl.addIng(ing)"
-                           on-cancel="ailCtrl.newIngFormShown = false" delete-btn="false"></cmp-active-ing-record>
+                           on-cancel="ailCtrl.onNewCancel()" delete-btn="false"></cmp-active-ing-record>
 
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
             <input type="submit" value="Add Ingredient" class="btn btn-primary"
                    data-ng-disabled="ailCtrl.addNewDisabled()"
-                   ng-click="ailCtrl.newIngFormShown = true"/>
+                   ng-click="ailCtrl.addNewIngredientState()"/>
         </div>
     </div>
 </ng-form>

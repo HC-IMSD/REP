@@ -108,8 +108,7 @@
                        ng-click="ctrCtrl.save()"/>
                 <input type="submit" ng-if="ctrCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
                        ng-click="ctrCtrl.delete()"/>
-                <input type="submit" value="Discard Changes" class="btn btn-default"  ng-disabled="!ctrCtrl.containerTypeForm.$dirty"
-                       ng-click="ctrCtrl.discardChanges()">
+                <input type="submit" value="Discard Changes" class="btn btn-default" ng-click="ctrCtrl.discardChanges()"/>
             </div>
         </div>
 

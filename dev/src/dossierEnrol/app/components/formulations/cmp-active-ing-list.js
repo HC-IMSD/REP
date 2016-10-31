@@ -54,10 +54,8 @@
         self.addIng = function (ing) {
             //console.debug('ingList addIng: ' + ing);
             self.setValid(true);
-            console.log("add ingred")
             self.ingList.push(ing);
             self.newIngFormShown = false;
-            console.log("rest")
             self.resetToCollapsed = !self.resetToCollapsed;
             self.updateActiveError();
             self.onUpdate({list:self.ingList});
@@ -113,6 +111,22 @@
          */
         self.addNewDisabled=function(){
             return (self.newIngFormShown || !self.isDetailValid);
+        }
+        /**
+         * Sets the UI state for the add new template
+         */
+        self.addNewIngredientState=function(){
+            self.resetToCollapsed = !self.resetToCollapsed;
+            self.newIngFormShown = true;
+            self.setValid(false);
+            return(self.newIngFormShown);
+        }
+        /**
+         * When new record is cancelled, resets the state
+         */
+        self.onNewCancel=function(){
+            self.setValid(true);
+            self.newIngFormShown = false
         }
     }
 })();

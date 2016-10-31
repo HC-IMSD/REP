@@ -84,8 +84,7 @@
             self.resetToCollapsed = !self.resetToCollapsed;
             self.newIngFormShown = true;
             self.setValid(false);
-            console.log("yep")
-            return(self.newIngFormShow);
+            return(self.newIngFormShown);
         }
         self.addNewDisabled=function(){
             return ( self.newIngFormShown || !self.isDetailValid);
