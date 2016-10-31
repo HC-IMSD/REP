@@ -18,7 +18,7 @@
             templateUrl: './components/therapeutic-classification/tpl-thera-list.html',
             bindings: {
                 records: '<',
-                showErrors: '&',
+                showErrors: '&'
             },
             controller: theraListCtrl,
             controllerAs: 'theraCtrl'

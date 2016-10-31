@@ -1,23 +1,23 @@
 /**
- * Created by hcuser on 27/10/2016.
+ * Created by dkilty on 10/31/2016.
  */
 
 (function () {
     'use strict';
 
     angular
-        .module('theraClassRecord', [])
+        .module('roaRecord', [])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('theraClass')
-        .component('cmpTheraRecord', {
-            templateUrl: './components/therapeutic-classification/tpl-thera-record.html',
-            controller: therapeuticClassCtrl,
-            controllerAs:'theraRecCtrl',
+        .module('roaRecord')
+        .component('cmpRoaRecord', {
+            templateUrl: './components/route-admin/tpl-roa-record.html',
+            controller: roaRecordController,
+            controllerAs:'roaRecCtrl',
             bindings: {
                 record: '<',
                 onDelete: '&',
@@ -25,10 +25,11 @@
             }
         });
 
+    roaRecordController.$inject=['DossierLists'];
 
-    function therapeuticClassCtrl(){
+    function roaRecordController(DossierLists){
         var vm = this;
-
+        vm.roaList = DossierLists.getRoa();
         vm.model = {};
 
         vm.$onInit = function(){
@@ -44,15 +45,20 @@
 
 
         vm.deleteRecord = function()  {
-            console.log("deleting ....."+vm.model.id)
             vm.onDelete({id: vm.model.id})
         };
-
 
         vm.showError = function (isInvalid, isTouched) {
             return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()) )
         }
-
+        vm.isRoaOther = function () {
+           if(vm.model.roa==DossierLists.getOtherValue()){
+               return true;
+           }else{
+               vm.model.otherRoaDetails="";
+               return false;
+           }
+        };
 
     }
 })();

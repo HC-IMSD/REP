@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaModule', 'dossierDataLists'])
+        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaListModule', 'dossierDataLists'])
 })();
 
 (function () {
@@ -36,6 +36,7 @@
 
         var self = this;
         self.noCountries="";
+        self.noROAValues=""
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
         self.savePressed=false;
@@ -48,24 +49,7 @@
                 self.frmModel = self.record;
             }
         };
-/*
-        self.save = function () {
-            if (self.record) {
-                // console.log('product details update product');
-                self.onUpdate({record:self.frmModel});
-            }else{
-                //  console.log('product details add product');
-                self.onAddNew({record:self.frmModel});
-            }
 
-        };*/
-
-        /*self.discardChanges = function(){
-            self.frmModel = {};
-            //self.productDetailsForm.$setPristine();
-            self.onCancel();
-        }
-*/
         self.delete = function(){
             if (self.record) {
                 //  console.log('product details delete product');
@@ -93,6 +77,25 @@
             self.noCountries=self.frmModel.countryList.length;
             return false;
         }
+        /**
+         * Tracks for error handling if there are one or more ROA
+         * @returns {boolean}
+         */
+        self.noROA=function(){
+
+            if(!self.frmModel){
+                self.noROAValues="";
+                return false;
+            }
+            if(!self.frmModel.routeAdmins || self.frmModel.routeAdmins.length===0){
+                self.noROAValues="";
+                return true;
+            }
+            self.noROAValues="values";
+            return false;
+
+        }
+
 
         self.updateActiveIngList = function(list){
             if(!list) return;

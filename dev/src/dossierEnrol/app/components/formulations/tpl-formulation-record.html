@@ -20,7 +20,7 @@
                     <label for="dosage-form-listh_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <select id="dosage-form-listh_{{$id}}" data-ng-model="formulRecCtrl.frmModel.dosageForm"
-                                name="dosageForm" class="form-control full-width"  required
+                                name="dosageForm" class="form-control full-width" required
                                 ng-options="formType |translate for formType in formulRecCtrl.dosageFormList | orderByTranslated">
                         </select>
                         <strong id="dosageForm-error" class="error"
@@ -31,7 +31,7 @@
                         </strong>
                     </label>
                 </div>
-                <div class="col-md-6 form-group"  ng-class="{'has-error':formulationRecForm.dosageOther.$invalid}"
+                <div class="col-md-6 form-group" ng-class="{'has-error':formulationRecForm.dosageOther.$invalid}"
                      ng-show="formulRecCtrl.isDosageOther()">
                     <label for="dosage-form-other_(($id}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
@@ -53,41 +53,56 @@
 
 
             <div class="container-fluid">
-                <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList" on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
+                <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
+                                     on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList" on-update="formulRecCtrl.updateNonMedIngList(list)"></cmp-non-med-ing-list>
+                <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList"
+                                      on-update="formulRecCtrl.updateNonMedIngList(list)"></cmp-non-med-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes" on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
+                <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
+                                         on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
             </div>
             <div class="container-fluid">
-                <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials" on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
+                <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials"
+                                       on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
             </div>
             <div class="container-fluid">
-                <cmp-roa list-items="formulRecCtrl.frmModel.routeAdmins" on-update="formulRecCtrl.updateRoaList(list)"></cmp-roa>
+                <section class="panel panel-default">
+                    <header class="panel-heading">
+                        <h3 class="panel-title">{{'ROA_TITLE'|translate}}</h3>
+                        <strong id="active-error" class="error" ng-if="formulRecCtrl.noROA()">
+                                <span class="label label-danger" ng-messages="formulationRecForm.noROAFld.$error">
+                                    <span ng-message="required"><span translate="MSG_ERR_ONE_ROA"></span></span>
+                                </span>
+                        </strong>
+                    </header>
+                    <div class="panel-body">
+                        <input type="textbox" required="true" ng-show="false" name="noROAFld" id="noROA{{$id}}"
+                               aria-hidden="true"
+                               data-ng-model="formulRecCtrl.noROAValues"/>
+                        <cmp-roa-list records="formulRecCtrl.frmModel.routeAdmins" show-errors=""></cmp-roa-list>
+                    </div>
+                    </section>
             </div>
             <div class="container-fluid">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
-                        <strong id="active-error" class="error"  ng-if="formulRecCtrl.noCountry()">
+                        <strong id="country-error" class="error" ng-if="formulRecCtrl.noCountry()">
                                 <span class="label label-danger" ng-messages="formulationRecForm.noCountry.$error">
                                     <span ng-message="required"><span translate="MSG_ERR_ONE_MANCOUNTRY"></span></span>
                                 </span>
                         </strong>
                     </header>
                     <div class="panel-body">
-                       <!-- <label for="noActive{{$id}}" ng-if="formulRecCtrl.noCountry()">
-                            <strong id="active-error" class="error">
-                                <span class="label label-danger" ng-messages="formulationRecForm.noCountry.$error">
-                                    <span ng-message="required"><span translate="MSG_ERR_ONE_MANCOUNTRY"></span></span>
-                                </span>
-                            </strong>
-                        </label>-->
-                        <input type="textbox" required="true" ng-show="false" name="noCountry" id="noActive{{$id}}" aria-hidden="true"
+                        <input type="textbox" required="true" ng-show="false" name="noCountry" id="noCountry{{$id}}"
+                               aria-hidden="true"
                                data-ng-model="formulRecCtrl.noCountries"/>
-                        <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" on-update="formulRecCtrl.updateCountryList(list)" field-label="COUNTRY_MAN"></cmp-country-list>
+                        <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
+                                          on-update="formulRecCtrl.updateCountryList(list)"
+                                          field-label="COUNTRY_MAN"></cmp-country-list>
                     </div>
                 </section>
 
@@ -96,7 +111,8 @@
             <div class="row">
 
                 <div class="btn-group-sm col-xs-12 text-right">
-                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Delete Formulation" class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>
+                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Delete Formulation"
+                           class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>
                 </div>
             </div>
         </fieldset>
