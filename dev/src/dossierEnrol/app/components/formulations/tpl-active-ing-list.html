@@ -1,15 +1,4 @@
 <ng-form name="ailCtrl.activeIngListForm">
-    <h2>{{'MEDICINAL_INGRED'|translate}}</h2>
-    <input type="textbox" required="true" ng-show="false" name="noActive" id="noActive{{$id}}"
-           data-ng-model="ailCtrl.noActives"/>
-    <label for="noActive{{$id}}" ng-if="activeIngListForm.noActive.$invalid">
-        <strong id="active-error" class="error" >
-        <span class="label label-danger" ng-messages="activeIngListForm.noActive.$error">
-            <span ng-message="required"><span translate="MSG_ERR_ONE_ACTIVE"></span></span>
-        </span>
-        </strong>
-    </label>
-
 
     <cmp-expanding-table title="{{'ACTIVE_LIST'|translate}}" list-items="ailCtrl.ingList" reset-to-collapsed="ailCtrl.resetToCollapsed"
                          column-def="ailCtrl.colNames" select-record="ailCtrl.selectRecord"

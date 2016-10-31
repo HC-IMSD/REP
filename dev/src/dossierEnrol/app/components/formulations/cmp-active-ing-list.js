@@ -27,7 +27,6 @@
     function activeIngListCtrl() {
 
         var self = this;
-        self.noActives = "";
         self.selectRecord = -1;
         self.resetToCollapsed = false;
         self.isDetailValid = true;
@@ -77,19 +76,7 @@
             setRecord(-1);
             self.resetToCollapsed = !self.resetToCollapsed;
         }
-        /**
-         * Used for error messaging that there are no active ingredients
-         * @returns {string} string is empty if not empty
-         */
-        self.updateActiveError = function () {
-            if (self.ingList && self.ingList.length > 0) {
-                self.noActives = self.ingList.length;
-                return false;
-            }
-            self.noActives = "";
-            return true;
 
-        }
         /**
          * sets the record in the expanding table to select less than zero means none
          * @param value

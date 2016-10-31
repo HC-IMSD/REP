@@ -36,7 +36,8 @@
 
         var self = this;
         self.noCountries="";
-        self.noROAValues=""
+        self.noROAValues="";
+        self.noActiveValues=""
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
         self.savePressed=false;
@@ -92,6 +93,20 @@
                 return true;
             }
             self.noROAValues="values";
+            return false;
+
+        }
+        self.noActives=function(){
+
+            if(!self.frmModel){
+                self.noActiveValues="";
+                return false;
+            }
+            if(!self.frmModel.activeIngList || self.frmModel.activeIngList.length===0){
+                self.noActiveValues="";
+                return true;
+            }
+            self.noActiveValues="values";
             return false;
 
         }
