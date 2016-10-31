@@ -107,10 +107,10 @@
             </div>
 
             <div>
-                <section class="panel panel-default mrgn-tp-lg">
+                <section class="panel panel-default ">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'THERA_CLASS'|translate}}</h3>
-                        <strong id="active-error" class="error"  ng-if="dos.noTheraRecs()">
+                        <strong id="active-error" class="error" ng-if="dos.noTheraRecs()">
                             <span class="label label-danger" ng-messages="dos.dossierForm.noTheraVal.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_ONE_THERA"></span></span>
                             </span>
@@ -123,16 +123,20 @@
                     </div>
                 </section>
             </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <cmp-ref-product-list products="dos.dossierModel.drugProduct.canRefProducts"></cmp-ref-product-list>
+
+                <div >
+                    <section class="panel panel-default">
+                        <header class="panel-heading">
+                            <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
+                        </header>
+                        <div class="panel-body">
+                            <cmp-ref-product-list
+                                    products="dos.dossierModel.drugProduct.canRefProducts"></cmp-ref-product-list>
+                        </div>
+                    </section>
                 </div>
-
-            </div>
-
         </div>
     </section>
-
     <section class="panel panel-primary mrgn-tp-lg">
         <header class="panel-heading">
             <h2 class="panel-title">{{'DRUG_PRODUCT'|translate}}</h2>
@@ -178,7 +182,8 @@
                 </section>
             </div>
             <div>
-                <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations" record-changed="dos.recordsChanged()"
+                <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations"
+                          record-changed="dos.recordsChanged()"
                           appendix4-list="dos.dossierModel.drugProduct.appendixFourList"></cmp-tabs>
             </div>
         </div>
@@ -197,7 +202,7 @@
                 <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <cmp-rep-contact-list contacts="dos.dossierModel.contactList"  on-update=""
+                <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
                                       parent-dirty="dos.dossierForm.$dirty"
                                       show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
 
@@ -217,5 +222,5 @@
             </button>
         </div>
     </div>
- <!--   <pre>{{dos.dossierModel | json }}</pre>-->
+    <!--   <pre>{{dos.dossierModel | json }}</pre>-->
 </ng-form>
