@@ -39,7 +39,7 @@
         self.savePressed=false;
 
         self.$onInit = function () {
-
+            self.savePressed=false;
             self.ingModel = {};
 
             if (self.record) {
@@ -60,6 +60,7 @@
                     self.onAddIng({ing: self.ingModel});
                 }
                 self.nonMedIngForm.$setPristine();
+                self.savePressed=false;
             }else{
                 self.savePressed=true;
             }

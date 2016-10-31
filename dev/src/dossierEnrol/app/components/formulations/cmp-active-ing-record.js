@@ -25,36 +25,41 @@
                 onAddIng: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                isDetailValid: '&'
             }
 
         });
-    activeIngRecCtrl.$inject = ['DossierLists'];
-    function activeIngRecCtrl(DossierLists) {
+    activeIngRecCtrl.$inject = ['DossierLists','$scope'];
+    function activeIngRecCtrl(DossierLists, $scope) {
 
         var self = this;
         self.nanoMaterialList=DossierLists.getNanoMaterials();
         self.yesNoList = DossierLists.getYesNoList();
+        self.savePressed=false;
         self.$onInit = function () {
-
+            self.savePressed=false;
             self.ingModel = {};
 
             if (self.record) {
-
                 self.ingModel = angular.copy(self.record);
-                self.ingModel = self.record;
             }
             self.backup = angular.copy(self.ingModel);
         };
 
         self.saveIng = function () {
-            if (self.record) {
-                // console.log('product details update product');
-                self.onUpdate({ing: self.ingModel});
+            if(self.activeIngForm.$valid) {
+                if (self.record) {
+                    // console.log('product details update product');
+                    self.onUpdate({ing: self.ingModel});
+                } else {
+                    //  console.log('product details add product');
+                    self.onAddIng({ing: self.ingModel});
+                }
                 self.activeIngForm.$setPristine();
-            } else {
-                //  console.log('product details add product');
-                self.onAddIng({ing: self.ingModel});
+                self.savePressed=false;
+            }else{
+                self.savePressed=true;
             }
         };
 
@@ -88,7 +93,7 @@
          * @returns {*}
          */
         self.showError=function(isInvalid,isTouched){
-            return((isInvalid &&isTouched)|| (isInvalid && self.showErrors()))
+            return((isInvalid &&isTouched)|| (isInvalid && self.showErrors())|| (isInvalid && self.savePressed))
         }
 
         /**
@@ -104,6 +109,12 @@
                 return false;
             }
         }
+
+        $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {
+            self.isDetailValid({state: !self.activeIngForm.$dirty});
+        }, true);
+
+
 
     }
 

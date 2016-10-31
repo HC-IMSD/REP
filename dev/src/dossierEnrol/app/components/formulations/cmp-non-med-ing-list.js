@@ -35,7 +35,8 @@
         self.$onInit = function () {
 
             self.newIngFormShown = false;
-
+            self.isDetailValid = true;
+            self.selectRecord = -1;
             self.colNames = [
                 {label: "VARIANT_NAME", binding: "varId", width: "15"},
                 {label: "NONMEDICINAL_INGREDIENT", binding: "ingName", width: "65"},
@@ -87,7 +88,7 @@
             return(self.newIngFormShow);
         }
         self.addNewDisabled=function(){
-            return (self.nonMedListForm.$invalid || self.newIngFormShown || !self.isDetailValid);
+            return ( self.newIngFormShown || !self.isDetailValid);
         }
         self.setValid=function(value){
             self.isDetailValid=value;
