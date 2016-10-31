@@ -6,6 +6,7 @@
 
         <cmp-non-med-ing-record record="$parent.record" on-update="nmilCtrl.updateIng($parent.$index,ing)"
                                 on-delete="nmilCtrl.deleteIng($parent.$index)"
+                                is-detail-valid="nmilCtrl.setValid(state)"
                                 delete-btn="true"></cmp-non-med-ing-record>
 
     </cmp-expanding-table>

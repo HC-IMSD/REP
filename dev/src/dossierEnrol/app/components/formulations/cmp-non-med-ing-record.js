@@ -25,12 +25,13 @@
                 onAddIng: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                isDetailValid: '&'
             }
 
         });
-    nonMedIngRecCtrl.$inject = ['DossierLists'];
-    function nonMedIngRecCtrl(DossierLists) {
+    nonMedIngRecCtrl.$inject = ['DossierLists', '$scope'];
+    function nonMedIngRecCtrl(DossierLists, $scope) {
 
         var self = this;
         self.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
@@ -110,6 +111,9 @@
                 return false;
             }
         };
+        $scope.$watch('nIngRecCtrl.nonMedIngForm.$dirty', function () {
+            self.isDetailValid({state: !self.nonMedIngForm.$dirty});
+        }, true);
 
     }
 

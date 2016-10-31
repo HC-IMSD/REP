@@ -49,17 +49,13 @@
             }
         };
 
-
         self.addIng = function (ing) {
-            //console.debug('ingList addIng: ' + ing);
             self.setValid(true);
             self.ingList.push(ing);
             self.newIngFormShown = false;
-            //self.selectRecord=self.ingList.length-1;
-            console.log(self.ingList.length-1);
             self.resetToCollapsed = !self.resetToCollapsed;
             self.onUpdate({list:self.ingList});
-            console.log("dfatertretre")
+            setRecord(-1);
         };
 
         self.updateIng = function (idx, ing) {
@@ -84,7 +80,6 @@
          * Sets the UI state for the add new template
          */
         self.addNewIngredientState=function(){
-            setRecord(-1);
             self.resetToCollapsed = !self.resetToCollapsed;
             self.newIngFormShown = true;
             self.setValid(false);
@@ -92,11 +87,10 @@
             return(self.newIngFormShow);
         }
         self.addNewDisabled=function(){
-            return(self.nonMedListForm.$invalid || self.newIngFormShown);
+            return (self.nonMedListForm.$invalid || self.newIngFormShown || !self.isDetailValid);
         }
         self.setValid=function(value){
             self.isDetailValid=value;
-            console.log("set valid"+value)
         }
         self.onNewCancel=function(){
             self.setValid(true);
