@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('formulationsModule', ['expandingTable','formulationRecordModule'])
+        .module('formulationsModule', ['expandingTable', 'formulationRecordModule'])
 })();
 
 (function () {
@@ -14,22 +14,24 @@
 
     angular
         .module('formulationsModule')
-        .component('cmpFormulations',{
+        .component('cmpFormulations', {
             templateUrl: './components/formulations/tpl-formulation-list.html',
             controller: formulationsCtrl,
             controllerAs: 'formulCtrl',
             bindings: {
-                formulations : '<',
-                recordChanged:'&'
+                formulations: '<',
+                recordChanged: '&'
             }
         });
 
-    function formulationsCtrl(){
+    function formulationsCtrl() {
 
-        var self=this;
+        var self = this;
         self.isDetailValid = true //TODO this must be managed
-        self.noFormulations="";
-        self.$onInit = function() {
+        self.selectRecord = -1;
+        self.resetToCollapsed = false;
+        self.noFormulations = "";
+        self.$onInit = function () {
 
             self.newFormShown = false;
 
@@ -39,12 +41,11 @@
             ];
             self.formulationList = [];
 
-            if(self.formulations){
+            if (self.formulations) {
                 self.formulationList = self.formulations;
             }
             self.updateFormulationsError();
         };
-
 
 
         self.$onChanges = function (changes) {
@@ -55,40 +56,43 @@
             }
         };
 
-        self.addNew = function(){
+        self.addNew = function () {
 
 
-           var newRecord =  {
-               "formulationId":self.formulationList.length + 1,
-                "formulationName": "A",
-                "dosageForm" : "A",
-                "dosageFormOther": "A",
+            var newRecord = {
+                "formulationId": (getMaxFormulationId() + 1),
+                "formulationName": "",
+                "dosageForm": "",
+                "dosageFormOther": "",
                 activeIngList: [],
-                nMedIngList : [],
-                containerTypes : [],
-                animalHumanMaterials : [],
-                routeAdmins : [],
-                countryList : []
+                nMedIngList: [],
+                containerTypes: [],
+                animalHumanMaterials: [],
+                routeAdmins: [],
+                countryList: []
             };
-           // console.debug('self.formulationList.length add new: ' + self.formulationList.length);
-          //  newRecord.formulationId = self.formulationList.length + 1;
+
             self.formulationList.push(newRecord);
-           // self.resetToCollapsed = true;
+            //set the expanding table
+            setRecord(self.formulationList.length - 1);
+            self.resetToCollapsed = !self.resetToCollapsed;
             self.updateFormulationsError();
         }
 
-        self.update = function(idx, frm){
+        self.update = function (idx, frm) {
             self.formulationList[idx] = angular.copy(frm);
         };
 
-        self.delete = function(idx){
+        self.delete = function (idx) {
             //console.debug('frmList delete: ' + idx);
-            if(self.formulationList.splice(idx,1))
-                self.resetToCollapsed = true;
+            if (self.formulationList.splice(idx, 1))
+                setRecord(-1);
+                self.resetToCollapsed = !self.resetToCollapsed;
 
             self.updateFormulationsError();
 
         }
+
 
         /**
          * Used for error messaging that there are no active ingredients
@@ -104,6 +108,22 @@
 
         }
 
+        function setRecord(value){
+            self.selectRecord=value;
+
+        }
+        function getMaxFormulationId() {
+            var out = 0;
+            var list = self.formulationList;
+            if (list) {
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].formulationId > out) {
+                        out = list[i].formulationId;
+                    }
+                }
+            }
+            return out;
+        }
 
 
     }

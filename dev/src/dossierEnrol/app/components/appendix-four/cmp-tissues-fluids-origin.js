@@ -14,29 +14,30 @@
 
     angular
         .module('tissuesFluidsOriginModule')
-        .component('cmpTissuesFluidsOrigin',{
+        .component('cmpTissuesFluidsOrigin', {
             templateUrl: './components/appendix-four/tpl-tissues-fluids-origin.html',
             controller: tissuesFluidsOriginCtrl,
             controllerAs: 'tfoCtrl',
-            bindings:{
-            tissuesModel : '<',
-                onUpdate : '&'
-        }
+            bindings: {
+                tissuesModel: '<',
+                onUpdate: '&'
+            }
 
-    });
+        });
 
-    function tissuesFluidsOriginCtrl(){
+    function tissuesFluidsOriginCtrl() {
 
         var self = this;
         self.isSelected = "";
         self.otherTextError = false;
-        self.model={};
-        self.$onInit = function(){
+        self.closeOthers=true;
+        self.model = {};
+        self.$onInit = function () {
 
         }
 
         self.$onChanges = function (changes) {
-            if(changes.tissuesModel){
+            if (changes.tissuesModel) {
                 self.model = changes.tissuesModel.currentValue;
             }
         };
@@ -48,7 +49,7 @@
          */
         self.oneTissueSourceSelected = function () {
 
-            if(!self.model) return true;
+            if (!self.model) return true;
             var tissuesArray = [
                 self.model.nervousSystem,
                 self.model.digestiveSystem,
@@ -65,7 +66,7 @@
             //n2 not terribly efficient
             //go through the entire list looking for other text errors
 
-            angular.forEach(self.model, function(system, key){
+            angular.forEach(self.model, function (system, key) {
                 for (var i = 0; i < tissuesArray.length; i++) {
                     for (var j = 0; j < tissuesArray[i].list.length; j++) {
                         if (tissuesArray[i].list[j].value === true) {
@@ -89,67 +90,76 @@
             }
             return false;
         };
+        //TODO need to: detect error, open if in error, disable all if in error
+        self.tissuesDisabled = function (form) {
+            if (form.$invalid) {
+                self.closeOthers=false;
+                return true
+            }
+            self.closeOthers=true;
+            return false
+        }
 
         //TODO remove, unneccesary
-        self.updateNervousSystemList = function(list){
+        self.updateNervousSystemList = function (list) {
 
-           // console.log("list"+list);
-           // self.model.nervousSystem.list = list;
+            // console.log("list"+list);
+            // self.model.nervousSystem.list = list;
             //self.onUpdate({model:self.model});
 
         };
         //TODO remove, unneccesary
-        self.updateDigestSystemList = function(list){
+        self.updateDigestSystemList = function (list) {
 
-         /*   self.model.digestiveSystem.list = list;
-            console.log("list"+list);
-            self.onUpdate({model:self.model});*/
-
-        };
-        //TODO remove, unneccesary
-        self.updateRepSystemList = function(list){
-
-          /*  self.model.reproductiveSystem.list = list;
-            console.log("list"+list);
-            self.onUpdate({model:self.model});*/
+            /*   self.model.digestiveSystem.list = list;
+             console.log("list"+list);
+             self.onUpdate({model:self.model});*/
 
         };
         //TODO remove, unneccesary
-        self.updateCardioSystemList = function(list){
+        self.updateRepSystemList = function (list) {
 
-          /*  self.model.cardioSystem.list = list;
-            console.log("list"+list);
-            self.onUpdate({model:self.model});*/
-
-        };
-        //TODO remove, unneccesary
-        self.updateImmuneSystemList = function(list){
-
-           /* self.model.immuneSystem.list = list;
-            console.log("list"+list);
-            self.onUpdate({model:self.model});*/
+            /*  self.model.reproductiveSystem.list = list;
+             console.log("list"+list);
+             self.onUpdate({model:self.model});*/
 
         };
         //TODO remove, unneccesary
-        self.updateSkinGlandSystemList = function(list){
+        self.updateCardioSystemList = function (list) {
 
-          /*  self.model.skinGlandSystem.list = list;
-            self.onUpdate({model:self.model});*/
+            /*  self.model.cardioSystem.list = list;
+             console.log("list"+list);
+             self.onUpdate({model:self.model});*/
 
         };
         //TODO remove, unneccesary
-        self.updateMusculoSystemList = function(list){
+        self.updateImmuneSystemList = function (list) {
 
-          /*  self.model.musculoSkeletalSystem.list = list;
-            self.onUpdate({model:self.model});*/
+            /* self.model.immuneSystem.list = list;
+             console.log("list"+list);
+             self.onUpdate({model:self.model});*/
+
+        };
+        //TODO remove, unneccesary
+        self.updateSkinGlandSystemList = function (list) {
+
+            /*  self.model.skinGlandSystem.list = list;
+             self.onUpdate({model:self.model});*/
+
+        };
+        //TODO remove, unneccesary
+        self.updateMusculoSystemList = function (list) {
+
+            /*  self.model.musculoSkeletalSystem.list = list;
+             self.onUpdate({model:self.model});*/
 
         };
 
         //TODO remove, unneccesary
-        self.updateOtherSystemList = function(list){
+        self.updateOtherSystemList = function (list) {
 
-         /*   self.model.otherTissues.list = list;
-            self.onUpdate({model:self.model});*/
+            /*   self.model.otherTissues.list = list;
+             self.onUpdate({model:self.model});*/
 
         };
 

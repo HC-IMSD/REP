@@ -27,6 +27,7 @@
     function sourceAnimalCtrl() {
         var self = this;
         self.animalType = "";
+        self.oneCountrySelected=""; //used for error messaging country
         self.model = {};
         self.$onInit = function () {
 
@@ -103,8 +104,17 @@
         };
 
         self.showOneCountryError = function () {
-            if(angular.isUndefined(self.model)) return false;
-            return(self.model.countryList.length>0)
+            console.log("in country error");
+            //if(angular.isUndefined(self.model)) return false;
+            if(self.model.countryList.length>0){
+                console.log("list of countries")
+                self.oneCountrySelected="selected"
+                return false;
+            }else{
+                console.log("no cou")
+                self.oneCountrySelected=""
+                return true;
+            }
         };
 
         self.showListError = function (isInvalid, isTouched, isRequired) {

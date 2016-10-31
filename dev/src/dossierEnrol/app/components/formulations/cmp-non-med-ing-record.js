@@ -66,6 +66,7 @@
         };
 
         self.discardChanges = function () {
+
             self.ingModel = angular.copy(self.backup);
             self.nonMedIngForm.$setPristine();
             self.onCancel();

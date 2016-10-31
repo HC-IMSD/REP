@@ -41,6 +41,8 @@
                 <label for="unknown-country-details" class="required">
                     <span class="field-name">{{'UNKNOWN_COUNTRY_DETAILS'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
+                    <input type="text" id="unknown-country-details" class="form-control" name="unknownCountry" required
+                           maxlength="100" size="100" ng-model="countryRecCtrl.model.unknownCountryDetails"/>
                     <strong id="country-error" class="error"
                             ng-if="countryRecCtrl.showError(countryForm.unknownCountry.$invalid,countryForm.unknownCountry.$touched)">
                         <span class="label label-danger"
@@ -49,8 +51,6 @@
                         </span>
                     </strong>
                 </label>
-                <input type="text" id="unknown-country-details" class="form-control" name="unknownCountry" required
-                       maxlength="100" size="100" ng-model="countryRecCtrl.model.unknownCountryDetails"/>
             </div>
         </div>
     </fieldset>

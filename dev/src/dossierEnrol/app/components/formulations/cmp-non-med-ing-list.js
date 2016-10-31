@@ -29,7 +29,9 @@
 
         var self = this;
         self.isDetailValid = true; //TODO: Need to manage for Add and Delete
-
+        self.selectRecord = -1;
+        self.resetToCollapsed = false;
+        self.newIngFormShown = false;
         self.$onInit = function () {
 
             self.newIngFormShown = false;
@@ -50,20 +52,55 @@
 
         self.addIng = function (ing) {
             //console.debug('ingList addIng: ' + ing);
+            self.setValid(true);
             self.ingList.push(ing);
             self.newIngFormShown = false;
+            //self.selectRecord=self.ingList.length-1;
+            console.log(self.ingList.length-1);
+            self.resetToCollapsed = !self.resetToCollapsed;
             self.onUpdate({list:self.ingList});
+            console.log("dfatertretre")
         };
 
         self.updateIng = function (idx, ing) {
             self.ingList[idx] = angular.copy(ing);
             self.onUpdate({list:self.ingList});
+            self.setValid(true);
         };
 
         self.deleteIng = function (idx) {
             // console.debug('ingList deleteIng: ' + idx);
             self.ingList.splice(idx, 1);
             self.onUpdate({list:self.ingList});
+            self.setValid(true);
+            setRecord(-1);
+            self.resetToCollapsed = !self.resetToCollapsed;
+        }
+        function setRecord(value){
+            self.selectRecord = value;
+        }
+
+        /**
+         * Sets the UI state for the add new template
+         */
+        self.addNewIngredientState=function(){
+            setRecord(-1);
+            self.resetToCollapsed = !self.resetToCollapsed;
+            self.newIngFormShown = true;
+            self.setValid(false);
+            console.log("yep")
+            return(self.newIngFormShow);
+        }
+        self.addNewDisabled=function(){
+            return(self.nonMedListForm.$invalid || self.newIngFormShown);
+        }
+        self.setValid=function(value){
+            self.isDetailValid=value;
+            console.log("set valid"+value)
+        }
+        self.onNewCancel=function(){
+            self.setValid(true);
+            self.newIngFormShown = false
         }
 
     }
