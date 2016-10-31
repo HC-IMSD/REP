@@ -30,15 +30,15 @@
             }
 
         });
-    activeIngRecCtrl.$inject = ['DossierLists','$scope'];
+    activeIngRecCtrl.$inject = ['DossierLists', '$scope'];
     function activeIngRecCtrl(DossierLists, $scope) {
 
         var self = this;
-        self.nanoMaterialList=DossierLists.getNanoMaterials();
+        self.nanoMaterialList = DossierLists.getNanoMaterials();
         self.yesNoList = DossierLists.getYesNoList();
-        self.savePressed=false;
+        self.savePressed = false;
         self.$onInit = function () {
-            self.savePressed=false;
+            self.savePressed = false;
             self.ingModel = {};
 
             if (self.record) {
@@ -48,18 +48,16 @@
         };
 
         self.saveIng = function () {
-            if(self.activeIngForm.$valid) {
+            if (self.activeIngForm.$valid) {
                 if (self.record) {
-                    // console.log('product details update product');
                     self.onUpdate({ing: self.ingModel});
                 } else {
-                    //  console.log('product details add product');
                     self.onAddIng({ing: self.ingModel});
                 }
                 self.activeIngForm.$setPristine();
-                self.savePressed=false;
-            }else{
-                self.savePressed=true;
+                self.savePressed = false;
+            } else {
+                self.savePressed = true;
             }
         };
 
@@ -71,19 +69,23 @@
 
         self.delete = function () {
             if (self.record) {
-                //  console.log('product details delete product');
                 self.onDelete();
             }
 
         };
 
-        self.$onChanges=function(changes){
-           /*
-            //Commented out as none of the other details records do this
-            //TODO: move init code to changes event where it belongs
-           if(changes.record){
-                self.ingModel = changes.record.currentValue;
-            }*/
+        self.copy = function () {
+            var ingredientCopy = angular.copy( self.ingModel);
+           self.onAddIng({ing: ingredientCopy});
+        }
+
+        self.$onChanges = function (changes) {
+            /*
+             //Commented out as none of the other details records do this
+             //TODO: move init code to changes event where it belongs
+             if(changes.record){
+             self.ingModel = changes.record.currentValue;
+             }*/
         };
 
 
@@ -93,8 +95,8 @@
          * @param isTouched
          * @returns {*}
          */
-        self.showError=function(isInvalid,isTouched){
-            return((isInvalid &&isTouched)|| (isInvalid && self.showErrors())|| (isInvalid && self.savePressed))
+        self.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (isInvalid && self.showErrors()) || (isInvalid && self.savePressed))
         }
 
         /**
@@ -109,12 +111,12 @@
                 self.ingModel.nanoMaterialOther = "";
                 return false;
             }
-        }
+        };
+
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {
             self.isDetailValid({state: !self.activeIngForm.$dirty});
         }, true);
-
 
 
     }

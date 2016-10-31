@@ -83,6 +83,12 @@
             }
         };
 
+        self.copy = function () {
+            var ingredientCopy = angular.copy( self.ingModel);
+            self.onAddIng({ing: ingredientCopy});
+        }
+
+
         self.$onChanges = function (changes) {
             if (changes.record) {
                 self.ingModel = changes.record.currentValue;
@@ -115,6 +121,8 @@
         $scope.$watch('nIngRecCtrl.nonMedIngForm.$dirty', function () {
             self.isDetailValid({state: !self.nonMedIngForm.$dirty});
         }, true);
+
+
 
     }
 

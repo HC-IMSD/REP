@@ -46,17 +46,14 @@
             if (self.ingredients) {
                 self.ingList = self.ingredients;
             }
-            self.updateActiveError();
         };
 
 
         self.addIng = function (ing) {
-            //console.debug('ingList addIng: ' + ing);
             self.setValid(true);
             self.ingList.push(ing);
             self.newIngFormShown = false;
             self.resetToCollapsed = !self.resetToCollapsed;
-            self.updateActiveError();
             self.onUpdate({list:self.ingList});
             setRecord(-1);
         };
@@ -68,9 +65,7 @@
         };
 
         self.deleteIng = function (idx) {
-            // console.debug('ingList deleteIng: ' + idx);
             self.ingList.splice(idx, 1);
-            self.updateActiveError();
             self.onUpdate({list:self.ingList});
             self.setValid(true);
             setRecord(-1);

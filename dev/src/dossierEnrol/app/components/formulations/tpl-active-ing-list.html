@@ -4,7 +4,7 @@
                          column-def="ailCtrl.colNames" select-record="ailCtrl.selectRecord"
                          disable-selection="!ailCtrl.isDetailValid">
 
-        <cmp-active-ing-record record="$parent.record" on-update="ailCtrl.updateIng($parent.$index,ing)"
+        <cmp-active-ing-record record="$parent.record" on-update="ailCtrl.updateIng($parent.$index,ing)" on-add-ing="ailCtrl.addIng(ing)"
                                on-delete="ailCtrl.deleteIng($parent.$index)" delete-btn="true" is-detail-valid="ailCtrl.setValid(state)"></cmp-active-ing-record>
 
     </cmp-expanding-table>

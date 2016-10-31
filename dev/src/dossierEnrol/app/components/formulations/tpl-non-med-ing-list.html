@@ -4,7 +4,7 @@
                          disable-selection="!nmilCtrl.isDetailValid">
 
         <cmp-non-med-ing-record record="$parent.record" on-update="nmilCtrl.updateIng($parent.$index,ing)"
-                                on-delete="nmilCtrl.deleteIng($parent.$index)"
+                                on-delete="nmilCtrl.deleteIng($parent.$index)" on-add-ing="nmilCtrl.addIng(ing)"
                                 is-detail-valid="nmilCtrl.setValid(state)"
                                 delete-btn="true"></cmp-non-med-ing-record>
 
