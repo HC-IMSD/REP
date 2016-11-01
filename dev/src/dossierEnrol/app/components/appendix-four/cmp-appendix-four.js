@@ -27,6 +27,8 @@
     function appendixFourCtrl(){
 
         var self=this;
+        self.selectRecord = -1; //the record to select, initially select non
+        self.resetToCollapsed = true;
         self.colNames = [
             {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
         ];
@@ -56,6 +58,9 @@
                 "ingredientName": ""
             };
             self.ingredientList.push(newRecord);
+            self.resetToCollapsed= !self.resetToCollapsed;;
+            self.selectRecord=( self.ingredientList.length-1);
+
         };
 
         function getListMaxID() {

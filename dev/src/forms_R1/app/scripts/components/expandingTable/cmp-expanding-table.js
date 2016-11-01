@@ -56,9 +56,7 @@
 
         vm.$onChanges = function (changes) {
 
-            if(changes.disableSelection){
-                vm.disableExpand=changes.disableSelection.currentValue;
-            }
+
 
             if (changes.listItems) {
                 if(vm.listItems) {
@@ -77,20 +75,23 @@
              For a true reset, first set select record to -1
              */
             if(changes.resetToCollapsed){
-                if(changes.resetToCollapsed.currentValue){
+                // if(changes.resetToCollapsed.currentValue){
                     vm.resetTableRow();
                     if (!changes.selectRecord) {
                         updateTableRow(vm.selectRecord);
                     }
-                }
+                //}
             }
             if(changes.selectRecord){
                 var selectIndex=parseInt(changes.selectRecord.currentValue);
                 if(selectIndex>=0) {
                     vm.selectTableRow(selectIndex);
                 }else{
-                    vm.resetTableRow()
+                    vm.resetTableRow();
                 }
+            }
+            if(changes.disableSelection){
+                vm.disableExpand=changes.disableSelection.currentValue;
             }
 
             if(changes.columnDef) {
