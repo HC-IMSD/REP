@@ -21,12 +21,13 @@
             bindings: {
                 deleteBtn: '<',
                 record:'<',
-              //  onAddNew: '&',
+                //onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
                 onCancel: '&',
                 showErrors:'&',
-                recordChanged:'&'
+                recordChanged:'&',
+                addCopy:'&'
             }
 
         });
@@ -58,9 +59,17 @@
             }
 
         };
+        self.copy=function(){
+            if(self.record){
+                var formulationCopy=angular.copy(self.record);
+                self.addCopy({record:formulationCopy});
+            }
+
+        };
+
         self.showError=function(isInvalid,isTouched){
            return(((isInvalid && isTouched)|| (isInvalid && self.showErrors()) ||(isInvalid && self.savePressed)))
-        }
+        };
         /***
          * Shows the no country of manufacture errro
          * TODO: Not show this until someone saves?

@@ -79,6 +79,15 @@
             self.updateFormulationsError();
         }
 
+        self.addCopy=function(formulation){
+            if(formulation) {
+                formulation.formulationId=(getMaxFormulationId() + 1);
+                self.formulationList.push(formulation);
+                setRecord(- 1);
+                self.resetToCollapsed = !self.resetToCollapsed;
+            }
+        }
+
         self.update = function (idx, frm) {
             self.formulationList[idx] = angular.copy(frm);
         };
@@ -91,7 +100,8 @@
 
             self.updateFormulationsError();
 
-        }
+        };
+
 
 
         /**

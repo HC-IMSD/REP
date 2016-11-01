@@ -37,7 +37,6 @@
             self.isDetailValid = true; //TODO needs to be managed in ADD and delete
 
             if(!self.ingredientList){
-                console.log("init")
                 self.ingredientList = [];
                // self.ingredientList = self.ingredients;
             }
@@ -53,11 +52,24 @@
 
         self.addNew = function () {
             var newRecord = {
-                "id":self.ingredientList.length + 1,
-                "ingredientName": "tretd"
+                "id":(getListMaxID() + 1),
+                "ingredientName": ""
             };
             self.ingredientList.push(newRecord);
         };
+
+        function getListMaxID() {
+            var out = 0;
+            var list = self.ingredientList;
+            if (list) {
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].id > out) {
+                        out = list[i].id;
+                    }
+                }
+            }
+            return out;
+        }
 
         self.update = function (idx, ing) {
             console.log('apdx4 list update; ');

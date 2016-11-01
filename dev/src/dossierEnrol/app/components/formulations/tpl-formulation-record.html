@@ -143,6 +143,8 @@
                 <div class="btn-group-sm col-xs-12 text-right">
                     <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Delete Formulation"
                            class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>
+                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Copy formulation"
+                           class="btn btn-default" ng-click="formulRecCtrl.copy()"/>
                 </div>
             </div>
         </fieldset>
