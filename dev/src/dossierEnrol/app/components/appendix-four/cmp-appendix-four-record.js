@@ -24,7 +24,9 @@
                 onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                deleteBtn:'<',
+                recordChanged:'&'
             }
 
         });
@@ -315,12 +317,10 @@
                 }
                 return true;
             }else{
-                self.model.animalSourced=null
+                self.model.animalSourced=null;
                 console.log("animal sources function: deleting animalSources")
             }
             return false;
-
-
         }
 
     }

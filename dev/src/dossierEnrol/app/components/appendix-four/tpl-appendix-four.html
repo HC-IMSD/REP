@@ -6,7 +6,7 @@
                              disable-selection="!ap4Ctrl.isDetailValid">
 
             <cmp-appendix-four-record record="$parent.record" on-update="ap4Ctrl.update($parent.$index,record)"
-                                      on-delete="ap4Ctrl.delete($parent.$index)"
+                                      on-delete="ap4Ctrl.delete($parent.$index)" record-changed="ap4Ctrl.recordChanged()"
                                       delete-btn="true"></cmp-appendix-four-record>
 
         </cmp-expanding-table>

@@ -19,8 +19,8 @@
             controllerAs: 'ap4Ctrl',
             bindings: {
 
-                ingredients : '<'
-
+                ingredients : '<',
+                recordChanged:'&'
             }
         });
 

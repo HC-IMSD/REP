@@ -95,6 +95,7 @@
   "SPECIFY_THE": "Spécifiez l'autre",
   "MISSING_APPENDIX": "fr_Missing Appendix 4 Ingredients",
   "UNKNOWN_COUNTRY_DETAILS":"fr_Unknown Country Details",
-  "ING_DETAILS": "Appendix 4 Details"
+  "ING_DETAILS": "fr_Human / Animal Source Record",
+  "APPENDIX4": "fr_Animal / Human Sourced"
 
 }

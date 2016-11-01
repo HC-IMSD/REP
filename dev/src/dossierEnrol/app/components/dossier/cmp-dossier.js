@@ -119,7 +119,6 @@
         }
 
         self.recordsChanged=function(){
-            console.log("calling records changed")
             self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
         }
 
@@ -246,28 +245,9 @@
             }
         }
 
-        /**
-         * @ngdoc method - updates if there are classifications
-         */
-        self.noTheraRecs=function(){
-            if(!self.model){
-                self.noRoa="";
-                console.log("false")
-                return false;
-            }
-            if(!self.model.list || self.model.list.length===0){
-                self.noRoa="";
-                console.log("true")
-                return true;
-            }
-            self.noRoa= self.model.list.length;
-            console.log("false2")
-            return false;
-
-        }
 
         /**
-         * Manages errors for no ROA
+         * Manages errors for no Thera
          * @returns {boolean}
          */
         self.noTheraRecs=function() {
