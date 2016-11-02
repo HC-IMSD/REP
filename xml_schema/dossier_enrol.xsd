@@ -176,19 +176,12 @@
 	<hpfb:element name="other_fluids_tissues" type="required_yes_no_content"/>
 	<hpfb:element name="other_fluids_tissues_details" type="char_0_40_content"/>
 	<!-- Animal Sourced content-->
-	<hpfb:element name="nonhuman_primate_type" type="char_0_100_content"/>
-	<hpfb:element name="aquatic_type" type="char_0_100_content"/>
-	<hpfb:element name="avian_type" type="char_0_100_content"/>
-	<hpfb:element name="bovine_type" type="char_0_100_content"/>
-	<hpfb:element name="canine_type" type="char_0_100_content"/>
-	<hpfb:element name="caprine_type" type="char_0_100_content"/>
-	<hpfb:element name="cervidae_type" type="char_0_100_content"/>
-	<hpfb:element name="equine_type" type="char_0_100_content"/>
-	<hpfb:element name="feline_type" type="char_0_100_content"/>
-	<hpfb:element name="ovine_type" type="char_0_100_content"/>
-	<hpfb:element name="porcine_type" type="char_0_100_content"/>
-	<hpfb:element name="rodent_type" type="char_0_100_content"/>
-	<hpfb:element name="other_type" type="char_0_100_content"/>
+	
+	<hpfb:element name="animal_src_record" type="animal_source_record"/>	
+	<hpfb:element name="animal_type"/>
+	<hpfb:element name="animal_details" type="char_1_40_content"/>
+	
+
 	<hpfb:element name="is_controlled_pop" type="required_yes_no_content"/>
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
 	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
@@ -432,23 +425,11 @@
 			<hpfb:element ref="other_fluids_tissues_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-
+	
 
 	<hpfb:complexType name="animal_sourced_content">
 		<hpfb:sequence>
-			<hpfb:element ref="nonhuman_primate_type"/>
-			<hpfb:element ref="aquatic_type"/>
-			<hpfb:element ref="avian_type"/>
-			<hpfb:element ref="bovine_type"/>
-			<hpfb:element ref="canine_type"/>
-			<hpfb:element ref="caprine_type"/>
-			<hpfb:element ref="cervidae_type"/>
-			<hpfb:element ref="equine_type"/>
-			<hpfb:element ref="feline_type"/>
-			<hpfb:element ref="ovine_type"/>
-			<hpfb:element ref="porcine_type"/>
-			<hpfb:element ref="rodent_type"/>
-			<hpfb:element ref="other_type"/>
+			<hpfb:element ref="animal_src_record" minOccurs="1" maxOccurs="unbounded"/>
 			<hpfb:element ref="is_controlled_pop"/>
 			<hpfb:element ref="is_biotech_derived"/>
 			<hpfb:element ref="is_cell_line"/>
@@ -463,6 +444,15 @@
 			<hpfb:element ref="unknown_country_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
+
+<hpfb:complexType name="animal_source_record">
+		<hpfb:sequence>
+			<hpfb:element ref="animal_type"/>
+			<hpfb:element ref="animal_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	
 
 	<hpfb:complexType name="country_origin_list_content">
 		<hpfb:sequence>

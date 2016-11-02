@@ -32,8 +32,11 @@
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
-            getOtherValue: getOtherValue,
-            getYesNoList: yesNoArray
+            getOtherValue: getOtherValue, //TODO make a constant instead
+            getUnknownValue:getUnknownValue, //TODO make a constant instead
+            getYesNoList: yesNoArray,
+            getYesNoUnknownList:yesNoUnknownArray,
+            getAnimalSources:animalSourcesArray
         };
         return service;
 
@@ -41,6 +44,10 @@
         ////////////////
         function getDoseOtherValue() {
             return "OTHER";
+        }
+
+        function getUnknownValue(){
+            return "UNLKNOWN";
         }
 
         function getOtherValue() {
@@ -144,6 +151,34 @@
             return ([
                 "Y",
                 "N"
+            ]);
+        }
+        function yesNoUnknownArray() {
+
+            return ([
+                "Y",
+                "N",
+                "UNKNOWN"
+            ]);
+        }
+
+
+        function animalSourcesArray() {
+
+            return ([
+                "NONHUMANPRIMATE_TYPE",
+                "AQUATIC_TYPE",
+                "AVIAN_TYPE",
+                "BOVINE_TYPE",
+                "CANINE_TYPE",
+                "CAPRINE_TYPE",
+                "CERVIDAE_TYPE",
+                "EQUINE_TYPE",
+                "FELINE_TYPE",
+                "OVINE_TYPE",
+                "PORCINE_TYPE",
+                "RODENT_TYPE",
+                "OTHERANIMAL_TYPE"
             ]);
         }
     }
