@@ -146,8 +146,11 @@
          * @ngdoc disables the XML save button
          */
         function disableXMLSave() {
-            console.log("IS IT INVALD"+self.dossierForm.$invalid )
-            self.disableXML = self.dossierForm.$invalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern());
+           var formInvalid=true; //TODO hack
+            if(self.dossierForm){
+                formInvalid=self.dossierForm.$invalid;
+            }
+            self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
 
         }
 
