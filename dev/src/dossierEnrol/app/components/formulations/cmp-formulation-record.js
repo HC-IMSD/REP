@@ -21,7 +21,7 @@
             bindings: {
                 deleteBtn: '<',
                 record:'<',
-              //  onAddNew: '&',
+               onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
                 onCancel: '&',
@@ -69,6 +69,11 @@
                 //  console.log('product details delete product');
                 self.onDelete();
             }
+
+        };
+
+        self.duplicate = function () {
+            self.onAddNew({record: self.frmModel});
 
         };
         self.showError=function(isInvalid,isTouched){

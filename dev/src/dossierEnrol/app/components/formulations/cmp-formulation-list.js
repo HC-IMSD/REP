@@ -54,7 +54,7 @@
             }
         };
 
-        self.addNew = function(){
+        self.addNew = function(input){
 
 
            var newRecord =  {
@@ -69,6 +69,11 @@
                 routeAdmins : [],
                 countryList : []
             };
+
+            if(input){
+                input.formulationId = self.formulationList.length + 1;
+                newRecord = angular.copy(input);
+            }
            // console.debug('self.formulationList.length add new: ' + self.formulationList.length);
           //  newRecord.formulationId = self.formulationList.length + 1;
             self.formulationList.push(newRecord);

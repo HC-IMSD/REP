@@ -74,6 +74,13 @@
 
         };
 
+
+
+        self.duplicate = function () {
+            self.onAddIng({ing: self.ingModel});
+
+        };
+
         self.$onChanges=function(changes){
             if(changes.record){
                 self.ingModel = changes.record.currentValue;
