@@ -72,10 +72,11 @@
             self.model.selected = item;
         };
 
-        self.saveRecord = function (_id) {
+        self.saveRecord = function (item) {
            // console.log("Saving item: "+_id);
+            self.editRecord(item);
             var idx = self.model.list.indexOf(
-                $filter('filter')(self.model.list, {id: _id}, true)[0]
+                $filter('filter')(self.model.list, {id: item.id}, true)[0]
             );
             self.model.list[idx] = self.model.selected;
             self.onUpdate({list:self.model.list});

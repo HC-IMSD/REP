@@ -6,7 +6,7 @@
                     <span class="field-name"> {{$ctrl.fieldLabel|translate}}&nbsp;{{$index+1}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <select ng-model="item.name" class="form-control full-width required" id="country_{{$index}}"
-                            name="countryName" required
+                            name="countryName" required data-ng-change="$ctrl.saveRecord(item)"
                             ng-options="country |translate for country in $ctrl.model.countries | orderByTranslatedCountry">
                     </select>
                     <strong id="countryName-error" class="error"

@@ -36,10 +36,22 @@
         </div>
 
     </div>
-        <div class="col-xs-12 form-group">
-            <!--<pre>countryList: {{saCtrl.model|json}}</pre>-->
-            <cmp-country-list with-unknown="true" list-items="saCtrl.model.countryList" on-update="saCtrl.updateCountryList(list)"></cmp-country-list>
+
+        <div class="col col-md-12">
+
+
+            <section class="panel panel-default">
+                <header class="panel-heading">
+                    <h3 class="panel-title">{{'COUNTRIES_LIST'|translate}}</h3>
+                </header>
+                <div class="panel-body">
+                    <cmp-country-list with-unknown="true" list-items="saCtrl.model.countryList" on-update="saCtrl.updateCountryList(list)" field-label="Country"></cmp-country-list>
+                </div>
+            </section>
+
             </div>
+
+
 
     </fieldset>
 
