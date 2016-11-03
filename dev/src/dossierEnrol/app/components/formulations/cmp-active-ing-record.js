@@ -41,10 +41,18 @@
 
             if (self.record) {
 
-                self.ingModel = angular.copy(self.record);
                 self.ingModel = self.record;
             }
             self.backup = angular.copy(self.ingModel);
+        };
+
+
+
+        self.duplicate = function () {
+            console.log('duplicate ing active model');
+            if (self.record) {
+                self.onAddIng({ing: self.record});
+            }
         };
 
         self.saveIng = function () {
