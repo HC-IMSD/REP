@@ -693,6 +693,21 @@
 
     }
 
+    /**
+     * Returns an empty animal source internal model
+     */
+    function getEmptyAnimalSourceModel(){
+
+        var emptyAnimalSource={};
+        emptyAnimalSource.animalSrcList=[];
+        emptyAnimalSource.isCellLine="";
+        emptyAnimalSource.isBiotechDerived="";
+        emptyAnimalSource.isControlledPop="";
+        emptyAnimalSource.ageAnimals="";
+        emptyAnimalSource.countryList=[];
+        return emptyAnimalSource;
+    }
+
     function getFormulationList(list){
 
         var formulationList = [];
@@ -1254,9 +1269,34 @@
 
 
             }
+            if (info[i].sourceAnimalDetails){
+                ing.animal_sourced_section = createEmptyAnimalSourceForOutput();
+                //get the static values
+                ing.animal_sourced_section.is_cell_line=info[i].sourceAnimalDetails.isCellLine;
+                ing.animal_sourced_section.is_biotech_derived=info[i].sourceAnimalDetails.isBiotechDerived;
+                ing.animal_sourced_section.is_controlled_pop=info[i].sourceAnimalDetails.isControlledPop;
+                ing.animal_sourced_section.animal_age=info[i].sourceAnimalDetails.ageAnimals;
+                //step 2 get all the animal sourcees
+                var animalSrcObj=info[i].sourceAnimalDetails;
+                for(var srcCount=0;srcCount<animalSrcObj.animalSrcList;srcCount++){
+                    var oneRec=animalSrcObj.animalSrcList[srcCount];
+                    var srcRecordOut={}
+                     srcRecordOut.animal_type= oneRec.animalType;
+                    srcRecordOut.animal_details=oneRec.typeDetails;;
+                    ing.animal_sourced_section.animal_src_record.push(srcRecordOut);
+                }
+                //step 3 get all the countries
+                var countries = info[i].sourceAnimalDetails.countryList;
+                for (var v = 0; v < countries.length; v++) {
+                    var countryRecord={};
+                    countryRecord.country_with_unknown=countries[v].name;
+                    countryRecord.unknown_country_details=countries[v].unknownCountryDetails;
+                    ing.animal_sourced_section.country_origin_list.country_origin.push(countryRecord);
+                }
 
+            }
 
-            if (info[i].sourceAnimalDetails) {
+           /* if (info[i].sourceAnimalDetails) {
                 ing.animal_sourced_section = createEmptyAnimalSourceForOutput();
                 var animalRecords = info[i].sourceAnimalDetails.primateTypeList;
                 for (var t = 0; t < animalRecords.length; t++) {
@@ -1330,7 +1370,8 @@
                     countryRecord.unknown_country_details=countries[v].unknownCountryDetails;
                     ing.animal_sourced_section.country_origin_list.country_origin.push(countryRecord);
                 }
-            }
+            }*/
+
             appendices.push(ing);
         }
 
@@ -1427,7 +1468,7 @@
     /**
      * Creates an empty structure for animals XML
      */
-    function createEmptyAnimalSourceForOutput() {
+   /* function createEmptyAnimalSourceForOutput() {
         var animals = {};
         //Order is important
         animals.nonhuman_primate_type = "";
@@ -1451,7 +1492,7 @@
         animals.country_origin_list = {};
         animals.country_origin_list.country_origin = []; //TODO verify this is correct
         return (animals);
-    }
+    }*/
 
     /**
      * Creates the formulation list in a format comapatible for output file
@@ -2012,7 +2053,18 @@
             }
         }
 
+    }
 
+
+    function createEmptyAnimalSourceForOutput(){
+        var record={};
+        record.animal_src_record=[];
+        record.is_controlled_pop="";
+        record.is_biotech_derived="";
+        record.is_cell_line="";
+        record.animal_age=""; //TODO number is this a problem?
+        record.country_origin_list={};
+        record.country_origin_list.country_origin=[];
     }
 
 
