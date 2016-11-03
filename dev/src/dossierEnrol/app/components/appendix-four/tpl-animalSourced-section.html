@@ -1,28 +1,104 @@
 <ng-form name="animalSectCtrl.anSectForm">
-
-<cmp-animalSourced-list></cmp-animalSourced-list>
-
-    <div class="row">
-        <div class="cl-md-6">
-            <select id="controlledPop{{$id}}" name="controlledPop" ng-model="animalSectCtrl.model.isControlledPop" class="form-control full-width"
-                    ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList"> required>
-            </select>
+    <div class="container-fluid">
+        <div class="row">
+            <section class="panel panel-default">
+                <header class="panel-heading">
+                    <h3 class="panel-title">{{'ANIMAL_SRCS'|translate}}</h3>
+                </header>
+                <div class="panel-body">
+                    <cmp-animal-sourced-list records="animalSectCtrl.model.animalSrcList"></cmp-animal-sourced-list>
+                </div>
+            </section>
         </div>
-        <div class="cl-md-6">
-            <select id="bioTech{{$id}}" name="biotech" ng-model="animalSectCtrl.model.isBiotechDerived" class="form-control full-width"
-                    ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList"> required>
-            </select>
+        <div class="row">
+            <div class="col-md-4 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.ageAnimals.$invalid}">
+                <label for="ageAnimals{{$id}}" class="required">
+                    <span class="field-name">{{'AGEANIMALS'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong>
+                    <input type="number" id="ageAnimals{{$id}}" name="ageAnimals"
+                           ng-model="animalSectCtrl.model.ageAnimals"
+                           class="form-control full-width" required/>
+                    <strong id="ageAnimals-error" class="error"
+                            ng-if="animalSectCtrl.showError(animalSectCtrl.anSectForm.ageAnimals)">
+                        <span class="label label-danger"
+                              ng-messages="animalSectCtrl.anSectForm.ageAnimals.$error">
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+
+            <div class="col-md-4 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.controlledPop.$invalid}">
+                <label for="controlledPop{{$id}}" class="required">
+                    <span class="field-name">{{'CONTROLLEDPOP'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong>
+                    <select id="controlledPop{{$id}}" name="controlledPop"
+                            ng-model="animalSectCtrl.model.isControlledPop"
+                            class="form-control full-width" required
+                            ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
+                    </select>
+                    <strong id="conPop-error" class="error"
+                            ng-if="animalSectCtrl.showError(animalSectCtrl.anSectForm.controlledPop)">
+                        <span class="label label-danger"
+                              ng-messages="animalSectCtrl.anSectForm.controlledPop.$error">
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+            <div class="col-md-4 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.isBiotech.$invalid}">
+                <label for="biotech{{$id}}" class="required">
+                    <span class="field-name">{{'BIOTECHDERIVED'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong>
+                    <select id="biotech{{$id}}" name="isBiotech" required
+                            ng-model="animalSectCtrl.model.isBiotechDerived" class="form-control full-width"
+                            ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
+                    </select>
+                    <strong id="biotech-error" class="error"
+                            ng-if="animalSectCtrl.showError(animalSectCtrl.anSectForm.isBiotech)">
+                        <span class="label label-danger"
+                              ng-messages="animalSectCtrl.anSectForm.isBiotech.$error">
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.cellLine.$invalid}">
+                <label for="cellLine{{$id}}" class="required">
+                    <span class="field-name">{{'CELLLINE'|translate}}</span>
+                    <strong class="required">{{"REQUIRED" |translate}}</strong>
+                    <select id="cellLine{{$id}}" name="cellLine"
+                            ng-model="animalSectCtrl.model.isCellLine" class="form-control full-width" required
+                            ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
+                    </select>
+                    <strong id="cellLine-error" class="error"
+                            ng-if="animalSectCtrl.showError(animalSectCtrl.anSectForm.cellLine)">
+                        <span class="label label-danger"
+                              ng-messages="animalSectCtrl.anSectForm.cellLine.$error">
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                        </span>
+                    </strong>
+                </label>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="row">
+                <section class="panel panel-default">
+                    <header class="panel-heading">
+                        <h3 class="panel-title">{{'ANIMAL_CTRIES_ORIGIN'|translate}}</h3>
+                    </header>
+                    <div class="panel-body">
+                        <cmp-country-list field-label="ANIMAL_CTRY_ORIGIN" with-unknown="true"
+                                          list-items="animalSectCtrl.model.countryList"
+                                          on-update="animalSectCtrl.updateCountryList(list)"></cmp-country-list>
+                    </div>
+                </section>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="cl-md-6">
-            <select id="cLine{{$id}}" name="cellLine" ng-model="animalSectCtrl.model.isCellLine" class="form-control full-width"
-                    ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList"> required>
-            </select>
-        </div>
-        <div class="cl-md-6">
-            <input type="number" id="ageAnimals{{$id}}" name="ageAnimals" ng-model="animalSectCtrl.model.ageAnimals" class="form-control full-width"  />
-        </div>
-    </div>
-
+    <pre>{{animalSectCtrl.model |json}} </pre>
 </ng-form>

@@ -24,7 +24,8 @@
        'numberFormat',
         'ngMessages',
         'ngAria',
-        'theraClass'
+        'theraClass',
+        'animalSourcedSection'
     ];
 
     angular

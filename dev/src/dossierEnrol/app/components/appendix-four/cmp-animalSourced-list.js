@@ -2,9 +2,6 @@
  * Created by dkilty on 02/11/2016.
  */
 
-/**
- * Created by dkilty 10/26/2016
- */
 
 (function () {
     'use strict';
@@ -49,7 +46,7 @@
             {
                 label: "ANIMAL_TYPE_DETAILS",
                 binding: "animalDetails",
-                width: "40"
+                width: "60"
             }
         ]
 

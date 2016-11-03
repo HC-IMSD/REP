@@ -15,7 +15,7 @@
     angular
         .module('animalSourcedRecord')
         .component('cmpAnimalSourcedRecord', {
-            templateUrl: './components/route-admin/tpl-animalSourced-record.html',
+            templateUrl: './components/appendix-four/tpl-animalSourced-record.html',
             controller: animalSourcedController,
             controllerAs:'animalSrcCtrl',
             bindings: {

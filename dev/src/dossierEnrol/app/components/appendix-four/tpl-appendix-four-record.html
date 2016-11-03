@@ -64,8 +64,9 @@
             </section>
 
             <section class="section">
-                <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"
-                                   record="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)"></cmp-source-animal>
+                <cmp-animal-sourced-section ng-if="ap4RecCtrl.model.animalSourced"  records="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)"></cmp-animal-sourced-section>
+               <!-- <cmp-source-animal ng-if="ap4RecCtrl.model.animalSourced"
+                                   record="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)"></cmp-source-animal>-->
             </section>
 
             <div class="row">

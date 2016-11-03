@@ -4,8 +4,8 @@
                          column-def="animalListCtrl.columnDef" select-record="animalListCtrl.selectRecord"
                          disable-selection="!animalListCtrl.isDetailValid">
 
-        <cmp-animalSourced-record record="$parent.record" show-errors="animalListCtrl.showErrors()"
-                          on-delete="animalListCtrl.deleteRecord(id)"></cmp-animalSourced-record>
+        <cmp-animal-sourced-record record="$parent.record" show-errors="animalListCtrl.showErrors()"
+                          on-delete="animalListCtrl.deleteRecord(id)"></cmp-animal-sourced-record>
 
     </cmp-expanding-table>
 
