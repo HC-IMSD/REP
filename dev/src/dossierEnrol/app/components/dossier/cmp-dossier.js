@@ -25,7 +25,8 @@
         'ngMessages',
         'ngAria',
         'theraClass',
-        'animalSourcedSection'
+        'animalSourcedSection',
+        'tissuesFluidsList'
     ];
 
     angular

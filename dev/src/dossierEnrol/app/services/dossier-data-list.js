@@ -27,26 +27,36 @@
 
     /* @ngInject */
     function getService() {
+        var OTHER = "OTHER";
         var service = {
             getDosageFormList: getDosageFormsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
             getOtherValue: getOtherValue, //TODO make a constant instead
-            getUnknownValue:getUnknownValue, //TODO make a constant instead
+            getUnknownValue: getUnknownValue, //TODO make a constant instead
             getYesNoList: yesNoArray,
-            getYesNoUnknownList:yesNoUnknownArray,
-            getAnimalSources:animalSourcesArray
+            getYesNoUnknownList: yesNoUnknownArray,
+            getAnimalSources: animalSourcesArray,
+            getTissuesSystem:tissuesSystemArray,
+            getNervousSystem:nervousSystemArray(),
+            getDigestiveSystem:digestiveSystemArray(),
+            getImmuneSystem:immuneSystemArray(),
+            getSkinSystem:skinSystemArray(),
+            getReprodSystem:reprodSystemArray(),
+            getOtherSystem:otherSystemArray(),
+            getMuscleSystem:muscleSystemArray(),
+            getCardioSystem:cardioSystemArray()
         };
         return service;
 
 
         ////////////////
         function getDoseOtherValue() {
-            return "OTHER";
+            return OTHER;
         }
 
-        function getUnknownValue(){
+        function getUnknownValue() {
             return "UNLKNOWN";
         }
 
@@ -90,7 +100,7 @@
                 "TABLET_EXTENDED_RELEASE",
                 "TABLET_ORALLY_DISINTEGRATING",
                 "WIPE",
-                "OTHER"
+                OTHER
             ]);
 
         }
@@ -105,7 +115,7 @@
                 "NANOEMULSIONS",
                 "NANOCRYSTAL",
                 "METALCOLLOIDS",
-                "OTHER"
+                OTHER
             ]);
         }
 
@@ -142,7 +152,7 @@
                 "TRANSDERMAL",
                 "URETHRAL",
                 "VAGINAL",
-                "OTHER"
+                OTHER
             ]);
         }
 
@@ -153,6 +163,7 @@
                 "N"
             ]);
         }
+
         function yesNoUnknownArray() {
 
             return ([
@@ -181,6 +192,167 @@
                 "OTHERANIMAL_TYPE"
             ]);
         }
+
+        /**
+         * Tisssues and fluids system types
+         * @returns {string[]}
+         */
+        function tissuesSystemArray() {
+
+            return ([
+                "DIGESTIVE_SYSTEM",
+                "NERVOUS_SYSTEM",
+                "REPRODUCT_SYSTEM",
+                "CARDIO_SYSTEM",
+                "IMMUNE_SYSTEM",
+                "SKINGLAND_SYSTEM",
+                "MUSCULO_SYSTEM",
+                "OTHERTISSUE_SYSTEM"
+            ]);
+        }
+
+        /**
+         * Nervous system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function nervousSystemArray() {
+
+            return ([
+                "BRAIN",
+                "BRAINSTEM",
+                "CEREBELLUM",
+                "CEROFLUID",
+                "CEROFLUID",
+                "DORSALROOT",
+                "DURAMATER",
+                "HYPOTHALAMUS",
+                "RETINA",
+                "SPINALCORD",
+                "TRIGEMINAL",
+                OTHER
+            ]);
+        }
+
+        /**
+         * Digestive system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function digestiveSystemArray() {
+
+            return ([
+                "APPENDIX",
+                "BILE",
+                "DISTALILEUM",
+                "LARGEINTEST",
+                "SALIVA",
+                "SMALLINTESTINE",
+                "STOMACH",
+                OTHER
+            ]);
+        }
+        /**
+         * Reproductive system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function reprodSystemArray() {
+
+            return ([
+                "MILK",
+                "KIDNEY",
+                "COLOSTRUM",
+                "MAMMARY",
+                "OVARIES",
+                "PLACENTA",
+                "PLACENTAFLUID",
+                "SEMEN",
+                "TESTES",
+                "URINE",
+                OTHER
+            ]);
+        }
+        /**
+         * Cardio system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function cardioSystemArray() {
+            return ([
+                "HEART",
+                "LUNG",
+                "NASALFLUID",
+                "TRACHEA",
+                "PLACENTALFLUID",
+                "CARDIOOTHER",
+                OTHER
+            ]);
+        }
+        /**
+         * Immune system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function immuneSystemArray() {
+            return ([
+                "LYMPH",
+                "SPLEEN",
+                "THYMUS",
+                "TONSILS",
+                OTHER
+            ]);
+        }
+
+        /**
+         * Skin system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function skinSystemArray() {
+            return ([
+                "ADRENAL",
+                "HAIR",
+                "LIVER",
+                "PANCREAS",
+                "PITUARYGLAND",
+                "SKINHIDES",
+                "THYROID",
+                OTHER
+            ]);
+        }
+        /**
+         * Muscle system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function muscleSystemArray() {
+            return ([
+                "ABDOMEN",
+                "SKULL",
+                "BONES",
+                "COLLAGEN",
+                "TENDONS",
+                "VERTEBRALCOLUMN",
+                "MUSCLE",
+                OTHER
+            ]);
+        }
+        /**
+         * Other system Tissues or fluids LOV
+         * @returns {*[]}
+         */
+        function otherSystemArray() {
+            return ([
+                "ADIPOSE",
+                "ASCITES",
+                "ANTLERV",
+                "SERUM",
+                "WHOLEBLOOD",
+                "PLASMA",
+                "EMBRYONICTISS",
+                "FETALTISS",
+                "BONEMARROW",
+                "EYESCORNEA",
+                "GALL",
+                OTHER
+            ]);
+        }
+
+
     }
 
 

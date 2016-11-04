@@ -1,0 +1,20 @@
+<ng-form name="tissuesListSrcCtrl.tissuesListForm">
+    <cmp-expanding-table title="Animal Sources" reset-to-collapsed="tissuesListSrcCtrl.resetToCollapsed"
+                         list-items="tissuesListSrcCtrl.model.animalSrcList"
+                         column-def="tissuesListSrcCtrl.columnDef" select-record="tissuesListSrcCtrl.selectRecord"
+                         disable-selection="!tissuesListSrcCtrl.isDetailValid">
+
+        <cmp-tissue-fluids-record record="$parent.record" show-errors="tissuesListSrcCtrl.showErrors()"
+                                   on-delete="tissuesListSrcCtrl.deleteRecord(id)"></cmp-tissue-fluids-record>
+
+    </cmp-expanding-table>
+
+    <div class="mrgn-tp-md mrgn-bttm-lg">
+        <div class="btn-group-sm col-md-12 text-right">
+            <button class="btn btn-primary" ng-click="tissuesListSrcCtrl.addNew()"
+                    ng-disabled="tissuesListSrcCtrl.tissuesListForm.$invalid">{{'ANIMAL_SRC_ADD'|translate}}
+            </button>
+        </div>
+    </div>
+
+</ng-form>
