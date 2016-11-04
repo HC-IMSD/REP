@@ -100,5 +100,13 @@
   "APPENDIX4": "Animal / Human Sourced",
   "MISSING_APPENDIX": "Missing Animal / Human Sourced Ingredients",
   "UNKNOWN_COUNTRY_DETAILS":"Unknown Country Details",
-  "ING_DETAILS": "Human / Animal Sourced Record"
+  "ING_DETAILS": "Human / Animal Sourced Record",
+  "ANIMAL_TYPE_LBL":"Animal Type Details",
+  "ANIMAL_TYPE":"Animal Type",
+  "ANIMAL_DETAILS": "Provide the animal type description",
+  "ANIMAL_SOURCE":"Animal Source",
+  "ANIMAL_TYPE_DETAILS": "Animal Type Details",
+  "ANIMAL_SRCS":"Animal Sources",
+  "ANIMAL_CTRIES_ORIGIN":"Animal Countries of Origin",
+  "ANIMAL_SRC_ADD": "Add Animal Source"
 }

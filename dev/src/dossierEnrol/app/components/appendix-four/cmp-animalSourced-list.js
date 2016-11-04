@@ -45,7 +45,7 @@
             },
             {
                 label: "ANIMAL_TYPE_DETAILS",
-                binding: "animalDetails",
+                binding: "animalDetail",
                 width: "60"
             }
         ]
@@ -83,7 +83,7 @@
         }
         vm.addNew = function() {
             var maxID = getMaxID();
-            var item = {"id": maxID + 1, "animalType": "",animalDetails:""};
+            var item = {"id": maxID + 1, "animalType": "",animalDetail:""}; //TODO call a service for this
             vm.model.animalSrcList.push(item);
             vm.resetToCollapsed= !vm.resetToCollapsed;
             vm.selectRecord=(0);

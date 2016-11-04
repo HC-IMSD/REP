@@ -4,6 +4,11 @@
             <section class="panel panel-default">
                 <header class="panel-heading">
                     <h3 class="panel-title">{{'ANIMAL_SRCS'|translate}}</h3>
+                    <strong id="active-error" class="error" ng-if="animalSectCtrl.noAnimalSrc()">
+                            <span class="label label-danger" ng-messages="animalSectCtrl.anSectForm.noAnimalSrc.$error">
+                                <span ng-message="required"><span translate="MSG_ERR_ONE_ANIMAL"></span></span>
+                            </span>
+                    </strong>
                 </header>
                 <div class="panel-body">
                     <cmp-animal-sourced-list records="animalSectCtrl.model.animalSrcList"></cmp-animal-sourced-list>

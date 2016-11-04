@@ -7,8 +7,8 @@
     angular
         .module('dossierModule')
         .factory('DossierService', DossierService)
-    DossierService.$inject = ['$http', '$q'];
-    function DossierService($http, $q) {
+    DossierService.$inject = [];
+    function DossierService() {
         // Define the DossierService function
         function DossierService() {}
 
@@ -17,12 +17,6 @@
 
             angular.extend(this._default, dossierData);
         }
-
-        DossierService.CanadianPostalCodePattern = function () {
-
-        }
-
-        // DossierService.dossierDefault = ;
 
 
         DossierService.prototype = {
@@ -511,7 +505,6 @@
             var list = [];
 
             for (var i = 0; i < input.length; i++) {
-
                 list.push({
                     "id":(i+1),
                     "name": input[i].country_with_unknown,
@@ -658,30 +651,21 @@
                 };
                 }
                     if(srcAnimal) {
-                ing.sourceAnimalDetails = {
-
-                    primateTypeList :  [
-                        {label: "NONHUMANPRIMATE", type: "text", name: "nhp-type", required: false, value: srcAnimal.nonhuman_primate_type},
-                        {label: "AQUATICTYPE", type: "text", name: "aquatic-type", required: false, value: srcAnimal.aquatic_type},
-                        {label: "AVIANTYPE", type: "text", name: "avian-type", required: false, value: srcAnimal.avian_type},
-                        {label: "BOVINETYPE", type: "text", name: "bovine-type", required: false, value: srcAnimal.bovine_type},
-                        {label: "CANINETYPE", type: "text", name: "canine-type", required: false, value: srcAnimal.canine_type},
-                        {label: "CAPRINETYPE", type: "text", name: "caprine-type", required: false, value: srcAnimal.caprine_type},
-                        {label: "CERVIDAETYPE", type: "text", name: "cervidae-type", required: false, value: srcAnimal.cervidae_type},
-                        {label: "EQUINETYPE", type: "text", name: "equine-type", required: false, value: srcAnimal.equine_type},
-                        {label: "FELINETYPE", type: "text", name: "feline-type", required: false, value: srcAnimal.feline_type},
-                        {label: "OVINETYPE", type: "text", name: "ovine-type", required: false, value: srcAnimal.ovine_type},
-                        {label: "PORCINETYPE", type: "text", name: "porcine-type", required: false, value: srcAnimal.porcine_type},
-                        {label: "RODENTTYPE", type: "text", name: "rodent-type", required: false, value: srcAnimal.rodent_type},
-                        {label: "OTHERANIMALTYPE", type: "text", name: "other-animal-type", required: false, value: srcAnimal.other_type},
-                        {label: "CONTROLLEDPOP", type: "select", name: "controlled-pop", required: true, value: srcAnimal.is_controlled_pop},
-                        {label: "BIOTECHDERIVED", type: "select", name: "biotech-derived", required: true, value:srcAnimal.is_biotech_derived},
-                        {label: "CELLLINE", type: "select", name: "cell-line", required: true, value: srcAnimal.is_cell_line},
-                        {label: "AGEANIMALS", type: "number", name: "age-animals", required: true, value: Number(srcAnimal.animal_age)}
-                    ],
-                    countryList: getCountries(srcAnimal.country_origin_list.country_origin)
-
-                };
+                ing.sourceAnimalDetails =createEmptyAnimalSourceModel()
+                        ing.sourceAnimalDetails.isCellLine=  info[i].animal_sourced_section.is_cell_line;
+                        ing.sourceAnimalDetails.isBiotechDerived=  info[i].animal_sourced_section.is_biotech_derived;
+                        ing.sourceAnimalDetails.isControlledPop=  info[i].animal_sourced_section.is_controlled_pop;
+                        ing.sourceAnimalDetails.ageAnimals=  info[i].animal_sourced_section.animal_age;
+                        //var animalSrcObj=info[i].sourceAnimalDetails;
+                        var animalTypeList=info[i].animal_sourced_section.animal_src_record;
+                        for(var srcCount=0;srcCount<animalTypeList.length;srcCount++) {
+                            var oneRec = animalTypeList[srcCount];
+                            var animalRecord = {}
+                            animalRecord.animalType = oneRec.animal_type;
+                            animalRecord.animalDetail = oneRec.animal_detail;
+                            ing.sourceAnimalDetails.animalSrcList.push(animalRecord);
+                        }
+                        ing.sourceAnimalDetails.countryList=getCountries(info[i].animal_sourced_section.country_origin_list.country_origin)
                 }
 
 
@@ -1282,7 +1266,7 @@
                     var oneRec=animalSrcObj.animalSrcList[srcCount];
                     var srcRecordOut={}
                      srcRecordOut.animal_type= oneRec.animalType;
-                    srcRecordOut.animal_details=oneRec.typeDetails;;
+                    srcRecordOut.animal_detail=oneRec.animalDetail;
                     ing.animal_sourced_section.animal_src_record.push(srcRecordOut);
                 }
                 //step 3 get all the countries
@@ -1293,85 +1277,7 @@
                     countryRecord.unknown_country_details=countries[v].unknownCountryDetails;
                     ing.animal_sourced_section.country_origin_list.country_origin.push(countryRecord);
                 }
-
             }
-
-           /* if (info[i].sourceAnimalDetails) {
-                ing.animal_sourced_section = createEmptyAnimalSourceForOutput();
-                var animalRecords = info[i].sourceAnimalDetails.primateTypeList;
-                for (var t = 0; t < animalRecords.length; t++) {
-                    switch (animalRecords[t].name) {
-                        case "nhp-type":
-                            ing.animal_sourced_section.nonhuman_primate_type = animalRecords[t].value;
-                            break;
-                        case "aqua-type":
-                            ing.animal_sourced_section.aquatic_type = animalRecords[t].value;
-                            break;
-                        case "avian-type":
-                            ing.animal_sourced_section.avian_type = animalRecords[t].value;
-                            break;
-                        case "bovine-type":
-                            ing.animal_sourced_section.bovine_type = animalRecords[t].value;
-                            break;
-                        case "canine-type":
-                            ing.animal_sourced_section.canine_type = animalRecords[t].value;
-                            break;
-                        case "caprine-type":
-                            ing.animal_sourced_section.caprine_type =animalRecords[t].value;
-                            break;
-                        case "cervidae-type":
-                            ing.animal_sourced_section.cervidae_type =animalRecords[t].value;
-                            break;
-                        case "equine-type":
-                            ing.animal_sourced_section.equine_type =animalRecords[t].value;
-                            break;
-                        case "feline-type":
-                            ing.animal_sourced_section.feline_type = animalRecords[t].value;
-                            break;
-                        case "ovine-type":
-                            ing.animal_sourced_section.ovine_type =animalRecords[t].value;
-                            break;
-                        case "porcine-type":
-                            ing.animal_sourced_section.porcine_type = animalRecords[t].value;
-                            break;
-
-                        case "rodent-type":
-                            ing.animal_sourced_section.rodent_type =animalRecords[t].value;
-                            break;
-
-                        case "other-animal-type":
-                            ing.animal_sourced_section.other_type = animalRecords[t].value;
-                            break;
-                        case "controlled-pop":
-                            ing.animal_sourced_section.is_controlled_pop = animalRecords[t].value;
-                            break;
-
-                        case "biotech-derived":
-                            ing.animal_sourced_section.is_biotech_derived = animalRecords[t].value;
-                            break;
-
-                        case "cell-line":
-                            ing.animal_sourced_section.is_cell_line =animalRecords[t].value;
-                            break;
-
-                        case "age-animals":
-                            ing.animal_sourced_section.animal_age = animalRecords[t].value;
-                            break;
-                        default:
-                            console.error("Unexpected animal src tag: "+info.animalRecords[t].name)
-                            break;
-                    }
-                }
-
-                var countries = info[i].sourceAnimalDetails.countryList;
-                for (var v = 0; v < countries.length; v++) {
-                    var countryRecord={};
-                    countryRecord.country_with_unknown=countries[v].name;
-                    countryRecord.unknown_country_details=countries[v].unknownCountryDetails;
-                    ing.animal_sourced_section.country_origin_list.country_origin.push(countryRecord);
-                }
-            }*/
-
             appendices.push(ing);
         }
 
@@ -2069,6 +1975,17 @@
         record.animal_age=""; //TODO number is this a problem?
         record.country_origin_list={};
         record.country_origin_list.country_origin=[];
+        return record;
+    }
+
+    function createEmptyAnimalSourceModel(){
+        var record={};
+        record.animalSrcList=[];
+        record.isCellLine="";
+        record.isBiotechDerived="";
+        record.isControlledPop="";
+        record.ageAnimals="";
+        record.countryList=[];
         return record;
     }
 

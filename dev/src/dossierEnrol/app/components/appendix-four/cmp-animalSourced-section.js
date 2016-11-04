@@ -46,15 +46,6 @@
             }
         }
 
-        /*var emptyAnimalSource={
-            "animalSrcList":[],
-            "isCellLine":"",
-            "isBiotechDerived":"",
-            "isControlledPop":"",
-            "ageAnimals":"",
-            countryList: []
-        }*/
-
         /**
          * @ngdoc method determines the state of the list errors
          *

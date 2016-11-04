@@ -96,6 +96,14 @@
   "MISSING_APPENDIX": "fr_Missing Animal / Human Sourced Ingredients",
   "UNKNOWN_COUNTRY_DETAILS":"fr_Unknown Country Details",
   "ING_DETAILS": "fr_Human / Animal Source Record",
-  "APPENDIX4": "fr_Animal / Human Sourced"
+  "APPENDIX4": "fr_Animal / Human Sourced",
+  "ANIMAL_TYPE_LBL":"fr_Animal Type Details",
+  "ANIMAL_TYPE":"fr_Animal Type",
+  "ANIMAL_DETAILS": "fr_Provide the animal type description",
+  "ANIMAL_SOURCE":"fr_Animal Source",
+  "ANIMAL_TYPE_DETAILS": "fr_Animal Type Details",
+  "ANIMAL_SRCS":"fr_Animal Sources",
+  "ANIMAL_CTRIES_ORIGIN":"fr_Animal Countries of Origin",
+  "ANIMAL_SRC_ADD": "fr_Add Animal Source"
 
 }
