@@ -1278,7 +1278,7 @@
                 ing.animal_sourced_section.animal_age=info[i].sourceAnimalDetails.ageAnimals;
                 //step 2 get all the animal sourcees
                 var animalSrcObj=info[i].sourceAnimalDetails;
-                for(var srcCount=0;srcCount<animalSrcObj.animalSrcList;srcCount++){
+                for(var srcCount=0;srcCount<animalSrcObj.animalSrcList.length;srcCount++){
                     var oneRec=animalSrcObj.animalSrcList[srcCount];
                     var srcRecordOut={}
                      srcRecordOut.animal_type= oneRec.animalType;
@@ -2056,6 +2056,10 @@
     }
 
 
+    /**
+     * Creates an animal sourced emptt json record for file write
+     * @returns {{}}
+     */
     function createEmptyAnimalSourceForOutput(){
         var record={};
         record.animal_src_record=[];
@@ -2065,6 +2069,7 @@
         record.animal_age=""; //TODO number is this a problem?
         record.country_origin_list={};
         record.country_origin_list.country_origin=[];
+        return record;
     }
 
 
