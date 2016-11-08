@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('tissuesFluidsRecord', [])
+        .module('tissuesFluidsRecord', ['dossierDataLists'])
 })();
 
 (function () {
@@ -49,7 +49,7 @@
 
             if (changes.record) {
                 vm.model=changes.record.currentValue;
-                setSelectedList(vm.model.system)
+                setSelectedList(vm.model.systemType)
             }
         };
 
@@ -69,7 +69,7 @@
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
         }
         vm.systemChanged=function(){
-            setSelectedList(vm.model.system);
+            setSelectedList(vm.model.systemType);
             //clear the values
             vm.model.systemDetails="";
             vm.model.otherDetails="";
@@ -80,13 +80,25 @@
          * @returns {boolean}
          */
         vm.isOther=function(){
-            if( vm.model.systemDetails===DossierLists.getOtherValue()){
-                return true;
-            }else{
-                vm.model.otherDetails="";
-                return false;
+            var val = false;
+            switch (vm.model.systemDetails) {
+                case "CARDIO_OTHER":
+                case "REPROD_OTHER":
+                case "DIGESTIVE_OTHER":
+                case "NERVOUS_OTHER":
+                case "IMMUNE_OTHER":
+                case "MUSCLE_OTHER":
+                case "FLUIDS_OTHER":
+                case "SKIN_OTHER":
+                    val = true;
+                    break;
+                default:
+                    vm.model.otherDetails = "";
+                    val = false;
+                    break;
             }
-        }
+            return val;
+        };
 
         function setSelectedList(value){
             if(!value){
@@ -117,6 +129,9 @@
                 break;
                 case 'OTHERTISSUE_SYSTEM':
                     vm.selectedSystemList=vm.otherList;
+                    break;
+                case '':
+                    vm.selectedSystemList = [];//empty case
                     break;
                 default:
                     console.warn("Invalid Tissues/Fluids System "+value);

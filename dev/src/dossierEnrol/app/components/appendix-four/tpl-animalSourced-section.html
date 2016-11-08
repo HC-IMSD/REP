@@ -10,6 +10,8 @@
                             </span>
                     </strong>
                 </header>
+                <input type="text" ng-show="false" required aria-hidden="true" name="noAnimalSrc"
+                       ng-model="animalSectCtrl.oneAnimal"/>
                 <div class="panel-body">
                     <cmp-animal-sourced-list records="animalSectCtrl.model.animalSrcList"></cmp-animal-sourced-list>
                 </div>
@@ -32,7 +34,6 @@
                     </strong>
                 </label>
             </div>
-
             <div class="col-md-4 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.controlledPop.$invalid}">
                 <label for="controlledPop{{$id}}" class="required">
                     <span class="field-name">{{'CONTROLLEDPOP'|translate}}</span>
@@ -95,7 +96,14 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'ANIMAL_CTRIES_ORIGIN'|translate}}</h3>
+                        <strong id="nocountry-error" class="error" ng-if="animalSectCtrl.noCountrySrc()">
+                            <span class="label label-danger" ng-messages="animalSectCtrl.anSectForm.noCountry.$error">
+                                <span ng-message="required"><span translate="MSG_ERR_ONE_CNTRY_ORIGIN"></span></span>
+                            </span>
+                        </strong>
                     </header>
+                    <input type="text" ng-show="false" required aria-hidden="true" name="noCountry"
+                           ng-model="animalSectCtrl.oneCountry"/>
                     <div class="panel-body">
                         <cmp-country-list field-label="ANIMAL_CTRY_ORIGIN" with-unknown="true"
                                           list-items="animalSectCtrl.model.countryList"
@@ -105,5 +113,5 @@
             </div>
         </div>
     </div>
-    <pre>{{animalSectCtrl.model |json}} </pre>
+    <!--<pre>{{animalSectCtrl.model |json}} </pre>-->
 </ng-form>

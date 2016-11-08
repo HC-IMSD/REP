@@ -32,10 +32,12 @@
         vm.yesNoUnknownList=DossierLists.getYesNoUnknownList();
         vm.model={};
         vm.model.animalSrcSection=[];
-
+        vm.oneAnimal = "";
+        vm.oneCountry = "";
 
         vm.$onInit = function () {
             //init code here
+            vm.noAnimalSrc()
         }
 
 
@@ -59,12 +61,29 @@
            return((ctrl.$invalid && ctrl.$touched)||(ctrl.$invalid && vm.showErrors()))
         };
 
-        self.updateCountryList = function(list){
+        vm.updateCountryList = function (list) {
 
-            self.model.countryList = list;
+            vm.model.countryList = list;
            // self.onUpdate({model:self.model});
 
         };
+        vm.noAnimalSrc = function () {
+            if (vm.model.animalSrcList.length > 0) {
+                vm.oneAnimal = "selected";
+                return false;
+            }
+            vm.oneAnimal = "";
+            return true;
+        }
+        vm.noCountrySrc = function () {
+            if (vm.model.countryList.length > 0) {
+                vm.oneCountry = "selected";
+                return false;
+            }
+            vm.oneCountry = "";
+            return true;
+        }
+
 
 
     }

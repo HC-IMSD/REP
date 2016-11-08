@@ -39,18 +39,18 @@
         vm.columnDef = [
             {
                 label: "SYSTEM_TYPE",
-                binding: "sytsemType",
-                width: "10"
+                binding: "systemType",
+                width: "25"
             },
             {
                 label: "SYSTEM_DETAILS",
-                binding: "systemDetail",
-                width: "50"
+                binding: "systemDetails",
+                width: "30"
             },
             {
-                label: "SYSTEM_other",
-                binding: "otherDetail",
-                width: "40"
+                label: "SYSTEM_OTHER",
+                binding: "otherDetails",
+                width: "35"
             }
         ]
 
@@ -58,7 +58,7 @@
             //init code here
             vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
             vm.resetToCollapsed = true;
-            vm.oneRecord="";
+            vm.noTissueRecs();
         }
 
 
@@ -75,7 +75,7 @@
         }
         vm.addNew = function() {
             var maxID = getMaxID();
-            var item = {"id": maxID + 1, "system": "",systemDetails:"",otherDetails:""}; //TODO call a service for this
+            var item = {"id": maxID + 1, "systemType": "", systemDetails: "", otherDetails: ""}; //TODO call a service for this
 
             vm.model.tissuesFluidsList.push(item);
             vm.resetToCollapsed= !vm.resetToCollapsed;
@@ -99,6 +99,26 @@
             }
             return(id);
         }
+
+        vm.noTissueRecs = function () {
+
+            if (vm.model.tissuesFluidsList.length > 0) {
+                vm.oneRecord = "selected";
+                return false;
+            }
+            vm.oneRecord = ""
+            return true;
+
+        }
+        vm.disableAdd = function () {
+
+            if (vm.noTissueRecs()) {
+                return false;
+            }
+            return (vm.tissuesListForm.$invalid)
+
+        }
+
 
     }
 })();

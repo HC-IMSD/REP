@@ -39,14 +39,14 @@
             getYesNoUnknownList: yesNoUnknownArray,
             getAnimalSources: animalSourcesArray,
             getTissuesSystem:tissuesSystemArray,
-            getNervousSystem:nervousSystemArray(),
-            getDigestiveSystem:digestiveSystemArray(),
-            getImmuneSystem:immuneSystemArray(),
-            getSkinSystem:skinSystemArray(),
-            getReprodSystem:reprodSystemArray(),
-            getOtherSystem:otherSystemArray(),
-            getMuscleSystem:muscleSystemArray(),
-            getCardioSystem:cardioSystemArray()
+            getNervousSystem: nervousSystemArray,
+            getDigestiveSystem: digestiveSystemArray,
+            getImmuneSystem: immuneSystemArray,
+            getSkinSystem: skinSystemArray,
+            getReprodSystem: reprodSystemArray,
+            getOtherSystem: otherSystemArray,
+            getMuscleSystem: muscleSystemArray,
+            getCardioSystem: cardioSystemArray
         };
         return service;
 
@@ -173,7 +173,6 @@
             ]);
         }
 
-
         function animalSourcesArray() {
 
             return ([
@@ -192,7 +191,6 @@
                 "OTHERANIMAL_TYPE"
             ]);
         }
-
         /**
          * Tisssues and fluids system types
          * @returns {string[]}
@@ -222,14 +220,13 @@
                 "BRAINSTEM",
                 "CEREBELLUM",
                 "CEROFLUID",
-                "CEROFLUID",
                 "DORSALROOT",
                 "DURAMATER",
                 "HYPOTHALAMUS",
                 "RETINA",
                 "SPINALCORD",
                 "TRIGEMINAL",
-                OTHER
+                "NERVOUS_OTHER"
             ]);
         }
 
@@ -247,7 +244,7 @@
                 "SALIVA",
                 "SMALLINTESTINE",
                 "STOMACH",
-                OTHER
+                "DIGESTIVE_OTHER"
             ]);
         }
         /**
@@ -267,7 +264,7 @@
                 "SEMEN",
                 "TESTES",
                 "URINE",
-                OTHER
+                "REPROD_OTHER"
             ]);
         }
         /**
@@ -281,8 +278,7 @@
                 "NASALFLUID",
                 "TRACHEA",
                 "PLACENTALFLUID",
-                "CARDIOOTHER",
-                OTHER
+                "CARDIO_OTHER"
             ]);
         }
         /**
@@ -295,7 +291,7 @@
                 "SPLEEN",
                 "THYMUS",
                 "TONSILS",
-                OTHER
+                "IMMUNE_OTHER"
             ]);
         }
 
@@ -312,7 +308,7 @@
                 "PITUARYGLAND",
                 "SKINHIDES",
                 "THYROID",
-                OTHER
+                "SKIN_OTHER"
             ]);
         }
         /**
@@ -327,8 +323,7 @@
                 "COLLAGEN",
                 "TENDONS",
                 "VERTEBRALCOLUMN",
-                "MUSCLE",
-                OTHER
+                "MUSCLE_OTHER"
             ]);
         }
         /**
@@ -348,7 +343,7 @@
                 "BONEMARROW",
                 "EYESCORNEA",
                 "GALL",
-                OTHER
+                "FLUIDS_OTHER"
             ]);
         }
 
