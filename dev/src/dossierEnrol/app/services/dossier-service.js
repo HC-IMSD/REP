@@ -259,6 +259,8 @@
 
         DossierService.prototype.getMissingAppendix4=function(dossierModel){
             var missingAppendices=[];
+            var extraAppendices = [];
+            var results = {};
 
             if(!dossierModel || !dossierModel.drugProduct){
                 return missingAppendices;
@@ -269,8 +271,11 @@
             var ingredients=getAnimalIngredients(dossierModel.drugProduct.formulations)
             //Step 3 Compare. Determine if there are missing ingredients
             missingAppendices=getMissingAppendices(appendices,ingredients);
-
-            return missingAppendices;
+            //step 4 get extra appendices
+            extraAppendices = findExtraApppendices(appendices);
+            results.missing = missingAppendices;
+            results.extra = extraAppendices;
+            return results;
         }
 
 
@@ -969,34 +974,6 @@
         return (tissues);
     }
 
-    /**
-     * Creates an empty structure for animals XML
-     */
-   /* function createEmptyAnimalSourceForOutput() {
-        var animals = {};
-        //Order is important
-        animals.nonhuman_primate_type = "";
-        animals.aquatic_type = "";
-        animals.avian_type = "";
-        animals.bovine_type = "";
-        animals.canine_type = "";
-        animals.caprine_type = "";
-        animals.cervidae_type = "";
-        animals.equine_type = "";
-        animals.feline_type = "";
-        animals.ovine_type = "";
-        animals.porcine_type = "";
-        animals.rodent_type = "";
-        animals.other_type = "";
-        animals.is_controlled_pop = "";
-        animals.is_biotech_derived = "";
-        animals.is_cell_line = "";
-        animals.animal_age = "";
-        animals.animal_age = "";
-        animals.country_origin_list = {};
-        animals.country_origin_list.country_origin = []; //TODO verify this is correct
-        return (animals);
-    }*/
 
     /**
      * Creates the formulation list in a format comapatible for output file
@@ -1363,7 +1340,11 @@
         return (result);
     }
 
-
+    /**
+     * Make list of json objects for appendix data
+     * @param appendices
+     * @returns {{}}
+     */
     function getAppendiceData(appendices) {
         var result = {};
         if (!appendices ) return result;
@@ -1371,7 +1352,7 @@
         for (var i = 0; i < appendices.length; i++) {
             var appendix=appendices[i];
            // var rec = {};
-            result[appendix.ingredientName] = i;
+            result[appendix.ingredientName] = (i + 1);
             //result.push(rec);
         }
         return result;
@@ -1423,11 +1404,27 @@
         for (var i = 0; i < ingredientJsonList.length; i++) {
                 if(!appendiceList.hasOwnProperty(ingredientJsonList[i])){
                     missingList.push(ingredientJsonList[i]);
+                } else {
+                    //make zero if found. any that are not zero are appendices without ingredients
+                    appendiceList[ingredientJsonList[i]] = 0;
                 }
         }
         return missingList;
     }
 
+    function findExtraApppendices(appendixJson) {
+        var extraList = [];
+        var keys = Object.keys(appendixJson);
+        for (var i = 0; i < keys.length; i++) {
+            var val = appendixJson[keys[i]];
+            if (val > 0) {
+                console.log("This is the key" + keys[i])
+                extraList.push(keys[i]);
+            }
+        }
+
+        return extraList;
+    }
 
     function getUniqueList(arr){
             var u = {}, a = [];

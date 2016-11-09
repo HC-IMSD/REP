@@ -170,13 +170,28 @@
             <div>
 
                 <section ng-if="dos.appendixMissingError()">
-                    <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixMissingError()"/>
+                    <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixMissingError()"
+                           aria-hidden="true"/>
                     <details class="alert alert-danger" id="alert-appendix" open="open">
                         <summary class="h3">
                             <h2>{{'MISSING_APPENDIX'|translate}}</h2>
                         </summary>
                         <ul>
                             <li ng-repeat="ingred in dos.errorAppendix">{{ingred}}</li>
+                        </ul>
+                    </details>
+                </section>
+            </div>
+            <div>
+                <section ng-if="dos.appendixExtraError()">
+                    <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixExtraError()"
+                           aria-hidden="true"/>
+                    <details class="alert alert-danger" id="alert-extra-appendix" open="open">
+                        <summary class="h3">
+                            <h2>{{'EXTRA_APPENDIX'|translate}}</h2>
+                        </summary>
+                        <ul>
+                            <li ng-repeat="ingred in dos.extraAppendix">{{ingred}}</li>
                         </ul>
                     </details>
                 </section>

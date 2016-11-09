@@ -73,6 +73,7 @@
         self.formAmend = false;
         self.showAllErrors = false;
         self.errorAppendix = [];
+        self.extraAppendix = [];
         self.noThera="";
         self.$onInit = function () {
 
@@ -101,6 +102,10 @@
             return (self.errorAppendix && self.errorAppendix.length > 0);
 
         };
+        self.appendixExtraError = function () {
+            return (self.extraAppendix && self.extraAppendix.length > 0);
+
+        };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
@@ -115,13 +120,13 @@
                 //load into data model as result json is not null
             }
             //if content is attempted to be loaded show all the errors
-            self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
+            getAppendix4Errors();
             self.showAllErrors = true;
             disableXMLSave();
         }
 
         self.recordsChanged=function(){
-            self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
+            getAppendix4Errors();
         }
 
         self.setApplicationType = function (value) {
@@ -129,6 +134,12 @@
             self.formAmend = self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+
+        function getAppendix4Errors() {
+            var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);
+            self.errorAppendix = appendixCheck.missing;
+            self.extraAppendix = appendixCheck.extra;
+        }
 
         /**
          * @ngdoc Used to determine if the form is incomplete
