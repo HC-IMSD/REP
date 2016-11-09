@@ -116,6 +116,7 @@
   "TISSUES_FLUIDS_ADD": "Add Tissues or Fluids",
   "TISSUES_FLUIDS_SRCS": "Tissues or Fluids sources",
   "TISSUE_FLUID": "Tissue or Fluid",
-  "ANIMAL_SRC": "Animal Source"
+  "ANIMAL_SRC": "Animal Source",
+  "EXTRA_APPENDIX": "Human / Animal Sourced Records not Referenced in any Formulation"
 
 }

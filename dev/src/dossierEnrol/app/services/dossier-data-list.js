@@ -28,6 +28,7 @@
     /* @ngInject */
     function getService() {
         var OTHER = "OTHER";
+        var YES = 'Y';
         var service = {
             getDosageFormList: getDosageFormsArray,
             getDosageOther: getDoseOtherValue,
@@ -46,7 +47,8 @@
             getReprodSystem: reprodSystemArray,
             getOtherSystem: otherSystemArray,
             getMuscleSystem: muscleSystemArray,
-            getCardioSystem: cardioSystemArray
+            getCardioSystem: cardioSystemArray,
+            getYesValue: getYesValue
         };
         return service;
 
@@ -54,6 +56,10 @@
         ////////////////
         function getDoseOtherValue() {
             return OTHER;
+        }
+
+        function getYesValue() {
+            return YES;
         }
 
         function getUnknownValue() {

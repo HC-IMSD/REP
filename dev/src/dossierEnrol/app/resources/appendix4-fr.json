@@ -112,6 +112,7 @@
   "SYSTEM_OTHER": "fr_Other Details",
   "TISSUES_FLUIDS_ADD": "fr_Add Tissues or Fluids",
   "TISSUES_FLUIDS_SRCS": "fr_Tissues or Fluids sources",
-  "ANIMAL_SRC": "fr_Animal Source"
+  "ANIMAL_SRC": "fr_Animal Source",
+  "EXTRA_APPENDIX": "fr_Human / Animal Sourced Records not Referenced in any Formulation"
 
 }

@@ -32,6 +32,7 @@
                 dataChecksum: "",
                 productName: "",
                 properName: "",
+                isRefProducts: "",
                 drugProduct: {
                     thirdPartySigned: false,
                     drugUseList: getDefaultDrugUseList(),
@@ -48,7 +49,6 @@
                 contactList: []
 
             },
-
 
             getDefaultObject: function () {
 
@@ -76,6 +76,7 @@
                     dataChecksum: info.data_checksum,
                     productName: info.brand_name,
                     properName: info.common_name,
+                    isRefProducts: info.is_ref_products,
                     drugProduct: {
                         thirdPartySigned: false,
                         drugUseList: loadDrugUseValues(info),
@@ -101,35 +102,6 @@
                 }
 
                 return dossierModel;
-
-            },
-
-            getAddressList: function (adrList) {
-
-                var list = [];
-
-                if (adrList) {
-                    for (var i = 0; i < adrList.length; i++) {
-                        var address = {};
-                        address.addressID = adrList[i].address_id;
-                        address.dossierName = adrList[i].dossier_name;
-                        address.amendRecord = adrList[i].amend_record === 'Y' ? true : false;
-                        address.addressRole = {};
-                        address.addressRole.manufacturer = adrList[i].manufacturer === 'Y' ? true : false;
-                        address.addressRole.mailing = adrList[i].mailing === 'Y' ? true : false;
-                        address.addressRole.billing = adrList[i].billing === 'Y' ? true : false;
-                        address.addressRole.importer = adrList[i].importer === 'Y' ? true : false;
-                        address.street = adrList[i].dossier_address_details.street_address;
-                        address.city = adrList[i].dossier_address_details.city;
-                        address.provState = adrList[i].dossier_address_details.province_lov;
-                        address.country = adrList[i].dossier_address_details.country;
-                        address.postalCode = adrList[i].dossier_address_details.postal_code;
-
-                        list.push(address);
-                    }
-                }
-
-                return list;
 
             }
 
@@ -158,8 +130,9 @@
             baseDossier.brand_name = jsonObj.productName;
             baseDossier.common_name = jsonObj.properName;
             baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned===true ?'Y':'N';
+            baseDossier.is_ref_products = jsonObj.isRefProducts;
             baseDossier.ref_product_list = {};
-            baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
+            //  baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
             //initialize values and order
             baseDossier.human_drug_use ='N';
             baseDossier.radiopharm_drug_use='N';

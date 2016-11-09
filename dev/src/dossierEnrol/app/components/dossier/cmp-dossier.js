@@ -50,18 +50,18 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
-        self.formUserType = 'EXT'; //set default to external type
         self.applicationInfoService = new ApplicationInfoService();
         self.userType = "EXT";
         self.saveXMLLabel = "SAVE_DRAFT";
-
+        self.yesNoList = DossierLists.getYesNoList();
+        self.yesValue = DossierLists.getYesValue()
         //config for applicationInfoCompoenent
         self.configField = {
             "label": "DOSSIER_ID",
@@ -127,6 +127,15 @@
 
         self.recordsChanged=function(){
             getAppendix4Errors();
+        }
+
+        self.isRefProducts = function () {
+
+            if (self.dossierModel.isRefProducts === self.yesValue) {
+                return true;
+            }
+            self.dossierModel.drugProduct.canRefProducts = [];
+            return false;
         }
 
         self.setApplicationType = function (value) {
