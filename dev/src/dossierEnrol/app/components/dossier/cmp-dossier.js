@@ -111,11 +111,8 @@
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-
                 // console.info('file loaded ... ' + JSON.stringify(resultJson));
                 self.dossierModel = self.dossierService.loadFromFile(resultJson);
-
-
                 //process file load results
                 //load into data model as result json is not null
             }
