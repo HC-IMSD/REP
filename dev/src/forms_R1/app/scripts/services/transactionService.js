@@ -77,7 +77,7 @@
              * */
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
-                var today= _getToday();
+                var today = _getToday();
                 var resultJson = {
                     TRANSACTION_ENROL: {
                         date_saved: today,
@@ -86,8 +86,8 @@
                         is_ectd: jsonObj.isEctd
                     }
                 };
-                    var ectd = this._transformEctdToFile(jsonObj.ectd);
-                    resultJson.TRANSACTION_ENROL.ectd = ectd;
+                var ectd = this._transformEctdToFile(jsonObj.ectd);
+                resultJson.TRANSACTION_ENROL.ectd = ectd;
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
                 resultJson.TRANSACTION_ENROL.solicited_requester = jsonObj.solicitedRequester;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
@@ -160,9 +160,13 @@
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
             },
-            getNewTransaction: function () {
+            getNewTransaction: function (isEctd) {
                 var model = _createLifeCycleModel();
-                model.sequence = this.getNextSequenceNumber();
+                if (isEctd) {
+                    model.sequence = this.getNextSequenceNumber();
+                } else {
+                    model.sequence = "";
+                }
                 return model;
             },
             _setSequenceNumber: function (value) {
@@ -230,8 +234,8 @@
                     this._default.ectd.dossierId = "";
                     this._default.ectd.dossierName = "";
 
-                    if(this._default.ectd.lifecycleRecord && this._default.ectd.lifecycleRecord>0){
-                        this._default.ectd.lifecycleRecord=[this._default.ectd.lifecycleRecord[0]];
+                    if (this._default.ectd.lifecycleRecord && this._default.ectd.lifecycleRecord > 0) {
+                        this._default.ectd.lifecycleRecord = [this._default.ectd.lifecycleRecord[0]];
                     }
                     //this._default.ectd = _getEmptyEctdSection();
                 }
@@ -432,7 +436,7 @@
         return contact;
     }
 
-     function _getToday() {
+    function _getToday() {
         var d = new Date();
         var isoDate = d.getFullYear() + '-'
             + pad(d.getMonth() + 1) + '-'

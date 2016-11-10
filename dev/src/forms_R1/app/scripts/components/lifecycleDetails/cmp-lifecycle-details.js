@@ -26,7 +26,8 @@
                 showErrors: '&',
                 isDetailValid: '&',
                 onDelete: '&',
-                enableDeleteIndex: '&'
+                enableDeleteIndex: '&',
+                isEctd: '<'
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
@@ -54,6 +55,7 @@
         vm.startDateVisible = false;
         vm.descriptionVisible = false;
         vm.versionVisible = false;
+        vm.ectd = false;
 
         vm.$onInit = function () {
         };
@@ -64,10 +66,22 @@
          */
         vm.$onChanges = function (changes) {
             if (changes.lifecycleRecord) {
-                console.log("changes to lifecycle record")
                 _updateLocalModel(changes.lifecycleRecord.currentValue);
             }
+            if (changes.isEctd) {
+
+                if (changes.isEctd.currentValue === 'Y') {
+                    vm.ectd = true;
+                } else {
+                    vm.ectd = false;
+                }
+            }
+
         };
+
+        function _updateEctdState() {
+
+        }
 
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
