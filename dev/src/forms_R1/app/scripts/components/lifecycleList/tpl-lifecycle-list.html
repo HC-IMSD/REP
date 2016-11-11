@@ -18,7 +18,7 @@
 
                 <cmp-lifecycle-details lifecycle-record="$parent.record"
                                        is-detail-valid="lifeListCtrl.setValid(state)"
-                                       on-delete="lifeListCtrl.deleteRecord(id)" is-ectd="lifeListCtrl.isEctd"
+                                       on-delete="lifeListCtrl.deleteRecord(id)" is-ectd="lifeListCtrl.ectdValue"
                                        enable-delete-index="lifeListCtrl.lastRecordSequence()"
                                        on-update="lifeListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
 

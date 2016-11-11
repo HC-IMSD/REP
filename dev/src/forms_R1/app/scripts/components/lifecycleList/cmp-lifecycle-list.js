@@ -40,7 +40,8 @@
         vm.lifecycleList = [];
         vm.setCollapsed = 0;
         vm.deletableIndex = 0;
-        vm.oneRecord="";
+        vm.oneRecord = "";
+        vm.ectdValue = false;
         vm.isParentDirty = false;
         vm.columnDef = [
             {
@@ -83,15 +84,21 @@
                 vm.lifecycleList = changes.records.currentValue;
                 /* if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
 
-                    vm.isDetailsValid = true;
+                 vm.isDetailsValid = true;
                  }*/
-                vm.setValid(!vm.lifecycleList || vm.lifecycleList.length === 0)
+                //vm.setValid(!vm.lifecycleList || vm.lifecycleList.length === 0)
                 vm.updateErrorState();
             }
             if (changes.parentDirty) {
                 vm.isParentDirty = changes.parentDirty.currentValue;
             }
+            if (changes.isEctd) {
+                vm.ectdValue = changes.isEctd.currentValue;
+                //update the first record
+                _checkFirstRecord();
+            }
         }
+
 
         vm.deleteRecord = function (aID) {
             var idx = vm.lifecycleList.indexOf(
@@ -104,8 +111,32 @@
             vm.updateErrorState();
         }
 
-        vm.lastRecordSequence = function () {
+        /**
+         * @ngdoc Checks to see if first record complies to eCTD or not
+         * @private
+         */
+        function _checkFirstRecord() {
+            if (!vm.lifecycleList || vm.lifecycleList.length === 0 || vm.lifecycleList.length > 1) {
+                return;
+            }
+            var record = angular.copy(vm.lifecycleList[0]);
+            if (!vm.ectdValue) {
+                record.sequence = "";
+                record.controlNumber = "";
+                record.dateFiled = "";
+            } else {
+                console.log(record)
+                record.sequence = "0000";
+            }
+            vm.lifecycleList[0] = record;
 
+        }
+
+        /**
+         * Usecd to determine if a record can be deleted. Only allowing the last record to be deleted
+         * @returns {number}
+         */
+        vm.lastRecordSequence = function () {
             if (!vm.lifecycleList) {
                 //this case should never happen, should always be empty array
                 return 0;
@@ -124,7 +155,7 @@
 
         vm.addTransaction = function () {
             var defaultTransaction = vm.getNewTransaction();
-            vm.lifecycleList.unshift(defaultTransaction);
+            vm.lifecycleList.unshift(defaultTransaction); //add to top
             vm.selectRecord = 0; //need to generate a change
             vm.setCollapsed++;
             vm.isDetailsValid = false;
@@ -133,7 +164,9 @@
 
 
         vm.isAddDisabled = function () {
-            return (!vm.isDetailsValid || (!vm.isEctd && vm.lifecycleList.length > 0))
+            console.log("Is valid" + vm.isDetailsValid)
+            console.log("ectd" + vm.ectdValue)
+            return (!vm.isDetailsValid || (!vm.ectdValue && vm.lifecycleList.length > 0) || (vm.lifecycleListForm.$invalid && vm.lifecycleList.length > 0))
 
         }
 

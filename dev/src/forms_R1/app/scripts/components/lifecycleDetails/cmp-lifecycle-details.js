@@ -39,7 +39,7 @@
         vm.sequenceList = [];
         vm.descriptionList = [];
 
-        vm.lifecycleModel = {
+        /* vm.lifecycleModel = {
             sequence: '0001',
             dateFiled: '',
             controlNumber: '',
@@ -50,7 +50,8 @@
             details: '',
             sequenceVersion: '',
             sequenceConcat: ''
-        };
+         };*/
+        vm.lifecycleModel = {};
         vm.endDateVisible = false;
         vm.startDateVisible = false;
         vm.descriptionVisible = false;
@@ -69,12 +70,13 @@
                 _updateLocalModel(changes.lifecycleRecord.currentValue);
             }
             if (changes.isEctd) {
-
-                if (changes.isEctd.currentValue === 'Y') {
+                console.log("Details ectd" + changes.isEctd.currentValue)
+                vm.ectd = changes.isEctd.currentValue;
+                /* if (changes.isEctd.currentValue === 'Y') {
                     vm.ectd = true;
                 } else {
                     vm.ectd = false;
-                }
+                 }*/
             }
 
         };
@@ -85,12 +87,17 @@
 
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
-            convertToDate()
+            convertToDate();
             vm.setSequenceList();
             vm.setDetailsState();
         }
 
         vm.disableDeleteState = function () {
+
+            //this is noEctd case
+            if (!vm.ectd) {
+                return true;
+            }
             var value = parseInt(vm.lifecycleModel.sequence);
             if (value == vm.enableDeleteIndex()) {
                 return false;

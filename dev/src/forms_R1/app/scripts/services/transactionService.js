@@ -25,7 +25,7 @@
                 dateSaved: "",
                 //applicationType: "NEW",
                 softwareVersion: "1.0.0",
-                isEctd: "",
+                isEctd: "Y",
                 ectd: {
                     companyId: "",
                     dossierId: "",
@@ -162,8 +162,9 @@
             },
             getNewTransaction: function (isEctd) {
                 var model = _createLifeCycleModel();
+                var sequenceNum = this.getNextSequenceNumber(); //always get it
                 if (isEctd) {
-                    model.sequence = this.getNextSequenceNumber();
+                    model.sequence = sequenceNum;
                 } else {
                     model.sequence = "";
                 }
@@ -171,7 +172,8 @@
             },
             _setSequenceNumber: function (value) {
                 if (!value)return;
-                var converted = parseInt(value)
+                var converted = parseInt(value);
+                console.log("converted" + converted)
                 if (converted > this.currSequence) {
                     this.currSequence = converted;
                 }
@@ -202,9 +204,10 @@
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
                     var record = _transformLifecycleRecFromFileObj(jsonObj[i])
-                    this._setSequenceNumber(record.sequence);
+
                     result.push(record);
                 }
+                this._setSequenceNumber(jsonObj.length);
                 return result
             },
             _mapLifecycleListToOutput: function (jsonObj) {
