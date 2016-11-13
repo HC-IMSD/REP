@@ -39,18 +39,6 @@
         vm.sequenceList = [];
         vm.descriptionList = [];
 
-        /* vm.lifecycleModel = {
-            sequence: '0001',
-            dateFiled: '',
-            controlNumber: '',
-            activityType: '',
-            descriptionValue: '',
-            startDate: '',
-            endDate: '',
-            details: '',
-            sequenceVersion: '',
-            sequenceConcat: ''
-         };*/
         vm.lifecycleModel = {};
         vm.endDateVisible = false;
         vm.startDateVisible = false;
@@ -70,20 +58,11 @@
                 _updateLocalModel(changes.lifecycleRecord.currentValue);
             }
             if (changes.isEctd) {
-                console.log("Details ectd" + changes.isEctd.currentValue)
                 vm.ectd = changes.isEctd.currentValue;
-                /* if (changes.isEctd.currentValue === 'Y') {
-                    vm.ectd = true;
-                } else {
-                    vm.ectd = false;
-                 }*/
             }
 
         };
 
-        function _updateEctdState() {
-
-        }
 
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
@@ -134,11 +113,9 @@
                 case ("EUSNDS"):
                     vm.descriptionList = TransactionLists.getEusndsType();
                     break;
-
                 case ("LEVEL_3"):
                     vm.descriptionList = TransactionLists.getLevel3Type();
                     break;
-
                 case ("NC_ACT"):
                     vm.descriptionList = TransactionLists.getNcType();
                     break;

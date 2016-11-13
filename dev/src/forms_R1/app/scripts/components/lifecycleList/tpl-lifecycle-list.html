@@ -12,7 +12,7 @@
                 </strong>
             </label>
             <cmp-expanding-table list-items="lifeListCtrl.lifecycleList"
-                                 reset-to-collapsed="lifeListCtrl.setCollapsed"
+                                 reset-to-collapsed="lifeListCtrl.resetCollapsed"
                                  column-def="lifeListCtrl.columnDef" select-record="lifeListCtrl.selectRecord"
                                  disable-selection="!lifeListCtrl.isDetailsValid">
 
@@ -28,7 +28,8 @@
         <div class="row mrgn-tp-md mrgn-bttm-lg">
             <div class="btn-group-sm col-md-12 text-right">
                 <input type="submit" value="{{'ADD_TRANSACTION'|translate}}" class="btn btn-primary"
-                       ng-click="lifeListCtrl.addTransaction()"
+                       ng-click="lifeListCtrl.addTransaction()" name="lifeListCtrl.lifecycleListForm.addRec"
+                       id="addTransactionRec"
                        ng-disabled="lifeListCtrl.isAddDisabled()">
                 <input type="submit" value="Cancel" class="btn btn-default"
                        data-ng-show="lifeListCtrl.newAdrFormShow"

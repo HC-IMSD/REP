@@ -43,6 +43,8 @@
         vm.oneRecord = "";
         vm.ectdValue = false;
         vm.isParentDirty = false;
+        vm.addFocused = false;
+        vm.resetCollapsed = false;
         vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
@@ -73,8 +75,8 @@
 
         vm.$onInit = function () {
             //local var from binding
-            // vm.lifecycleList = vm.records;
-
+            vm.selectRecord = -1
+            vm.addFocused = false;
         }
 
 
@@ -105,10 +107,12 @@
                 $filter('filter')(vm.lifecycleList, {sequence: aID}, true)[0]);
             vm.lifecycleList.splice(idx, 1);
             vm.onUpdate({newList: vm.lifecycleList});
-            vm.selectRecord = 0;
+            vm.selectRecord = -1;
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.deprecateSequence();
             vm.updateErrorState();
+            vm.resetCollapsed = !vm.resetCollapsed;
+            vm.addFocused = false;
         }
 
         /**
@@ -125,7 +129,6 @@
                 record.controlNumber = "";
                 record.dateFiled = "";
             } else {
-                console.log(record)
                 record.sequence = "0000";
             }
             vm.lifecycleList[0] = record;
@@ -156,16 +159,15 @@
         vm.addTransaction = function () {
             var defaultTransaction = vm.getNewTransaction();
             vm.lifecycleList.unshift(defaultTransaction); //add to top
+            vm.resetCollapsed = !vm.resetCollapsed;
             vm.selectRecord = 0; //need to generate a change
-            vm.setCollapsed++;
-            vm.isDetailsValid = false;
+            vm.addFocused = false;
+            vm.setValid(false);
             vm.updateErrorState();
         }
 
 
         vm.isAddDisabled = function () {
-            console.log("Is valid" + vm.isDetailsValid)
-            console.log("ectd" + vm.ectdValue)
             return (!vm.isDetailsValid || (!vm.ectdValue && vm.lifecycleList.length > 0) || (vm.lifecycleListForm.$invalid && vm.lifecycleList.length > 0))
 
         }
@@ -179,12 +181,14 @@
             var idx = vm.lifecycleList.indexOf(
                 $filter('filter')(vm.lifecycleList, {sequence: record.sequence}, true)[0]
             );
-
             record.dateFiled = convertDate(record.dateFiled);
             record.startDate = convertDate(record.startDate);
             record.endDate = convertDate(record.endDate);
             vm.lifecycleList[idx] = angular.copy(record);
-            vm.isDetailsValid = true;
+            vm.setValid(true);
+            vm.selectRecord = -1;
+            vm.resetCollapsed = !vm.resetCollapsed;
+            vm.addFocused = true;
         }
         /**
          * @ngdoc method determines the state of the list errors
@@ -198,6 +202,11 @@
             }
             return false
         };
+        /**
+         * Converts date to HC standard TOD0: replace with filter?
+         * @param value
+         * @returns {*}
+         */
         function convertDate(value) {
             if (!value) return value;
             var aDate = new Date(value);
