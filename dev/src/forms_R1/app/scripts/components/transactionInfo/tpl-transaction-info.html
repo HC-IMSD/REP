@@ -51,10 +51,6 @@
                                 <label for="dossierName_{{$id}}" class="required full-width">
                                     <span class="field-name">{{"DOSSIER_NAME" |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                        <textarea id="dossierName_{{$id}}" name="dossierName"
-                                  ng-model="transInfoCtrl.transactionModel.ectd.dossierName"
-                                  class="form-control full-width" maxlength="256" size="256"
-                                  ng-required="true"></textarea>
                                     <strong id="dossierName_-error" class="error"
                                             ng-if="transInfoCtrl.showError(transInfoForm.dossierName)">
                         <span class="label label-danger" ng-messages="transInfoForm.companyId.$error">
@@ -62,6 +58,11 @@
                         </span>
                                     </strong>
                                 </label>
+                        <textarea id="dossierName_{{$id}}" name="dossierName"
+                                  ng-model="transInfoCtrl.transactionModel.ectd.dossierName"
+                                  class="full-width" maxlength="256" size="256"
+                                  ng-required="true"></textarea>
+
                             </div>
                         </div>
                     </div>
@@ -130,10 +131,6 @@
                         <label for="solicitedRequester_{{$id}}" class="required full-width">
                             <span class="field-name">{{"SOLICITED_RQ" |translate}}</span>
                             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <textarea maxlength="256" size="256" id="solicitedRequester_{{$id}}" name="solicitedRequester"
-                              ng-model="transInfoCtrl.transactionModel.solicitedRequester"
-                              class="form-control full-width"
-                              ng-required="transInfoCtrl.showSolicitedDetail"></textarea>
                             <strong id="solicitedRequester-error" class="error"
                                     ng-if="transInfoCtrl.showError(transInfoForm.solicitedRequester)">
                         <span class="label label-danger" ng-messages="transInfoForm.solicitedRequester.$error">
@@ -141,6 +138,12 @@
                         </span>
                             </strong>
                         </label>
+                    <textarea maxlength="256" size="256" id="solicitedRequester_{{$id}}" name="solicitedRequester"
+                              ng-model="transInfoCtrl.transactionModel.solicitedRequester"
+                              class="form-control full-width"
+                              ng-required="transInfoCtrl.showSolicitedDetail"></textarea>
+
+
                     </div>
                 </div>
                 <div>
