@@ -1,5 +1,5 @@
 <ng-form name="ingRecCtrl.activeIngForm">
-    <pre>ingRecCtrl.ingModel: {{ingRecCtrl.ingModel|json}}</pre>
+  <!--  <pre>ingRecCtrl.ingModel: {{ingRecCtrl.ingModel|json}}</pre>-->
     <div class="container-fluid">
         <fieldset>
             <legend>{{'MEDICINAL_INGRED_DETAILS'|translate}}</legend>
@@ -152,7 +152,9 @@
                        ng-click="ingRecCtrl.saveIng()"/>
                 <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
                        ng-click="ingRecCtrl.delete()"/>
-                <input type="submit" value="Discard Changes" class="btn btn-default" ng-disabled="!ingRecCtrl.activeIngForm.$dirty"
+                <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Copy" class="btn btn-default"
+                       ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
+                <input type="submit" value="Discard Changes" class="btn btn-default"
                        ng-click="ingRecCtrl.discardChanges()">
             </div>
         </fieldset>

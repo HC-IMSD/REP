@@ -57,6 +57,7 @@
         vm.showAllErrors = false;
         vm.formAmend = false;
         vm.isNotifiable = false;
+        vm.isRationale = false;
 
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -182,6 +183,29 @@
          * @private
          */
         function _createFilename() {
+
+
+            var draft_prefix = "DRAFTREPRA";
+            var final_prefix = "HCREPRA";
+            var filename = "";
+            if (vm.userType === 'INT') { //TODO magic numbers
+
+                filename = final_prefix;
+            } else {
+                filename = draft_prefix;
+            }
+            if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
+                filename = filename + "_" + vm.activityRoot.dstsControlNumber;
+            }
+            if (vm.activityRoot.enrolmentVersion) {
+                var parts = vm.activityRoot.enrolmentVersion.split('.');
+                filename = filename + "_" + parts[0] + '_' + parts[1];
+            }
+            return filename;
+
+
+
+
             var filename = "HC_RA_Enrolment";
             if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
                 filename = filename + "_" + vm.activityRoot.dstsControlNumber;
@@ -209,9 +233,18 @@
             if (vm.activityService.isNotifiableChange(vm.activityRoot.regActivityType)) {
                 vm.activityService.resetRationale();
                 vm.isNotifiable = true;
-            } else {
+                vm.isRationale = false;
+            } else if (vm.activityService.isRationale(vm.activityRoot.regActivityType, vm.activityRoot.regActivityLead)) {
+                vm.isRationale = true;
                 vm.activityService.resetNotifiableChanges();
                 vm.isNotifiable = false;
+            }
+
+            else {
+                vm.activityService.resetNotifiableChanges();
+                vm.activityService.resetRationale();
+                vm.isNotifiable = false;
+                vm.isRationale = false;
             }
         };
 
@@ -247,6 +280,7 @@
             vm.showAllErrors = true;
             disableXMLSave();
             vm.setThirdParty();
+            vm.updateActivityType();
         }
 
         /**

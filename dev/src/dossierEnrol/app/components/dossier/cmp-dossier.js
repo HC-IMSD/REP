@@ -24,7 +24,9 @@
        'numberFormat',
         'ngMessages',
         'ngAria',
-        'theraClass'
+        'theraClass',
+        'animalSourcedSection',
+        'tissuesFluidsList'
     ];
 
     angular
@@ -48,18 +50,18 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
-        self.formUserType = 'EXT'; //set default to external type
         self.applicationInfoService = new ApplicationInfoService();
         self.userType = "EXT";
         self.saveXMLLabel = "SAVE_DRAFT";
-
+        self.yesNoList = DossierLists.getYesNoList();
+        self.yesValue = DossierLists.getYesValue()
         //config for applicationInfoCompoenent
         self.configField = {
             "label": "DOSSIER_ID",
@@ -71,7 +73,11 @@
         self.formAmend = false;
         self.showAllErrors = false;
         self.errorAppendix = [];
+        self.extraAppendix = [];
         self.noThera="";
+        self.oneRefSelected = "";
+        var yesValue = "Y";
+
         self.$onInit = function () {
 
             self.dossierService = new DossierService();
@@ -86,7 +92,6 @@
 
             if (changes.formType) {
                 self.userType = changes.formType.currentValue;
-                self.userType='EXT';
                 if (self.userType == 'INT') {
                     self.saveXMLLabel = "APPROVE_FINAL"
                 } else {
@@ -99,28 +104,37 @@
             return (self.errorAppendix && self.errorAppendix.length > 0);
 
         };
+        self.appendixExtraError = function () {
+            return (self.extraAppendix && self.extraAppendix.length > 0);
+
+        };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-
                 // console.info('file loaded ... ' + JSON.stringify(resultJson));
                 self.dossierModel = self.dossierService.loadFromFile(resultJson);
-
-
                 //process file load results
                 //load into data model as result json is not null
             }
             //if content is attempted to be loaded show all the errors
-            self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
+            getAppendix4Errors();
             self.showAllErrors = true;
             disableXMLSave();
         }
 
         self.recordsChanged=function(){
-            console.log("calling records changed")
-            self.errorAppendix=self.dossierService.getMissingAppendix4(self.dossierModel);
+            getAppendix4Errors();
+        }
+
+        self.isRefProducts = function () {
+
+            if (self.dossierModel.isRefProducts === self.yesValue) {
+                return true;
+            }
+            self.dossierModel.drugProduct.canRefProducts = [];
+            return false;
         }
 
         self.setApplicationType = function (value) {
@@ -128,6 +142,28 @@
             self.formAmend = self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+
+        self.cdnRefUpdated = function (list) {
+            //don't do anything with the list
+            self.showNoRefReError();
+        }
+
+        self.showNoRefReError = function () {
+
+            if (self.dossierModel.drugProduct.canRefProducts.length > 0 && self.dossierModel.isRefProducts === yesValue) {
+                self.oneRefSelected = "sel";
+                return false
+            } else {
+                self.oneRefSelected = "";
+                return true;
+            }
+        }
+
+        function getAppendix4Errors() {
+            var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);
+            self.errorAppendix = appendixCheck.missing;
+            self.extraAppendix = appendixCheck.extra;
+        }
 
         /**
          * @ngdoc Used to determine if the form is incomplete
@@ -139,12 +175,19 @@
             self.isIncomplete = !self.activityRoot.dossierID;
         }
 
+        $scope.$watch("dos.dossierForm.$invalid", function () {
+            disableXMLSave()
+        }, true);
 
         /**
          * @ngdoc disables the XML save button
          */
         function disableXMLSave() {
-            self.disableXML = self.dossierForm.$invalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern());
+           var formInvalid=true; //TODO hack
+            if(self.dossierForm){
+                formInvalid=self.dossierForm.$invalid;
+            }
+            self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
 
         }
 
@@ -187,13 +230,23 @@
             }
             return false;
         }
+
+        /**
+         * Save as a json file. Convert interal model to external model for output
+         */
         self.saveJson = function () {
             var writeResult = _transformFile();
-            console.log(writeResult);
            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), self.dossierService.getRootTagName());
             self.showAllErrors = true;
             //_setComplete()
         };
+
+        self.saveXML=function(){
+            var writeResult = _transformFile();
+            hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), self.dossierService.getRootTagName());
+            self.showAllErrors = false;
+        }
+
 
         /**
          * Takes the internal model and transforms to a json object compatible with the output
@@ -220,9 +273,6 @@
          */
         function _createFilename() {
             var filename = "HC_DO_Enrolment";
-            /*if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
-                filename = filename + "_" + vm.activityRoot.dstsControlNumber;
-            }*/
             return filename;
         }
 
@@ -235,28 +285,9 @@
             }
         }
 
-        /**
-         * @ngdoc method - updates if there are classifications
-         */
-        self.noTheraRecs=function(){
-            if(!self.model){
-                self.noRoa="";
-                console.log("false")
-                return false;
-            }
-            if(!self.model.list || self.model.list.length===0){
-                self.noRoa="";
-                console.log("true")
-                return true;
-            }
-            self.noRoa= self.model.list.length;
-            console.log("false2")
-            return false;
-
-        }
 
         /**
-         * Manages errors for no ROA
+         * Manages errors for no Thera
          * @returns {boolean}
          */
         self.noTheraRecs=function() {

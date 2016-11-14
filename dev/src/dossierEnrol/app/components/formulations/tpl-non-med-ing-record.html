@@ -152,7 +152,9 @@
                            ng-click="nIngRecCtrl.saveIng()"/>
                     <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
                            ng-click="nIngRecCtrl.delete()"/>
-                    <input type="submit" value="Discard Changes" class="btn btn-default" ng-disabled="!nIngRecCtrl.nonMedIngForm.$dirty"
+                    <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="Copy" class="btn btn-default"
+                           ng-click="nIngRecCtrl.copy()" ng-disabled="nIngRecCtrl.nonMedIngForm.$dirty">
+                    <input type="submit" value="Discard Changes" class="btn btn-default"
                            ng-click="nIngRecCtrl.discardChanges()">
                 </div>
             </div>

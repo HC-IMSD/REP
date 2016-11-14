@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('contactModule26', ['contactModule25', 'expandingTable','repContactService'])
+        .module('contactModule26', ['contactModule25', 'expandingTable', 'repContactService'])
 })();
 
 (function () {
@@ -16,13 +16,13 @@
     angular
         .module('contactModule26')
         .component('cmpRepContactList', {
-            templateUrl: './components/repContactList/tpl-rep-contact-list.html',
+            templateUrl: 'app/scripts/components/repContactList/tpl-rep-contact-list.html',
             controller: contactListCtrl,
             controllerAs: 'contactListCtrl',
             bindings: {
                 contacts: '<',
-              //  onUpdate: '&',
-               // getNewContact: '&',
+                //  onUpdate: '&',
+                // getNewContact: '&',
                 showListErrors: '&',
                 parentDirty: '<',
                 isAmend: '<'
@@ -36,7 +36,8 @@
         vm.contactList = [];
         vm.oneRecord = ""; //using required as the validaiton
         vm.isParentDirty = false; //tracks whether the parent form has been dirtied
-        vm.formAmend = false; //
+        vm.formAmend = false;
+        vm.resetCollapsed = false;
         var repContactService = new RepContactService();
         vm.columnDef = [
             {
@@ -104,7 +105,8 @@
             vm.contactList[idx] = angular.copy(record);
             vm.updateErrorState();
             vm.contactListForm.$setPristine();
-            vm.disableAdd()
+            vm.resetCollapsed = !vm.resetCollapsed;
+            vm.disableAdd();
         }
         /***
          * Tracks if no records
@@ -136,7 +138,7 @@
             vm.disableAdd()
             vm.setValid(true);
             vm.selectRecord = -1;
-
+            vm.resetCollapsed = !vm.resetCollapsed;
         }
         /**
          * Adds a contact to the contact list
@@ -145,7 +147,6 @@
             var defaultContact = repContactService.createRepContact(vm.contactList);
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
-            vm.setValid(true);
             vm.selectRecord = (vm.contactList.length - 1);
             vm.setValid(false);
         }

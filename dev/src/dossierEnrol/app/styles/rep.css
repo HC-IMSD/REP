@@ -17,10 +17,7 @@ label > select {
 .hd1rep {
     color:white;
 }
-.vertical-align {
-    display: flex;
-    align-items: center;
-}
+
 .vcenter {
     display: inline-block;
     vertical-align: middle;

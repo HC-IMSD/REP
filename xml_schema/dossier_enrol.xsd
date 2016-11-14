@@ -32,6 +32,7 @@
 	<hpfb:element name="third_party_signed" type="required_yes_no_content"/>
 	<hpfb:element name="therapeutic_class_list" type="therapeutic_class_content"/>
 	<hpfb:element name="therapeutic_class" type="char_1_256_content"/>
+	<hpfb:element name="is_ref_products" type="required_yes_no_content"/>
 	<hpfb:element name="ref_product_list" type="ref_product_list_content"/>
 	<hpfb:element name="cdn_ref_product" type="cdn_ref_product_content"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
@@ -81,9 +82,9 @@
 	<!-- ingredients-->
 	<hpfb:element name="appendix4_group" type="appendix4_content"/>
 	<!--<hpfb:element name="drug_ingredient" type="ingredient_content"/>-->
-	<hpfb:element name="ingredient_id" type="char_1_40_content" nillable="true"/>
+	<hpfb:element name="ingredient_id" type="char_0_40_content" nillable="true"/>
 	<hpfb:element name="ingredient_name" type="char_1_100_content"/>
-	<hpfb:element name="cas_number" type="cas_content"/>
+	<hpfb:element name="cas_number" type="cas_content" nillable="true"/>
 	<hpfb:element name="ingred_standard" type="char_0_40_content"/>
 	<hpfb:element name="is_human_animal_src" type="required_yes_no_content"/>
 	<hpfb:element name="animal_sourced" type="required_yes_no_content"/>
@@ -176,19 +177,12 @@
 	<hpfb:element name="other_fluids_tissues" type="required_yes_no_content"/>
 	<hpfb:element name="other_fluids_tissues_details" type="char_0_40_content"/>
 	<!-- Animal Sourced content-->
-	<hpfb:element name="nonhuman_primate_type" type="char_0_100_content"/>
-	<hpfb:element name="aquatic_type" type="char_0_100_content"/>
-	<hpfb:element name="avian_type" type="char_0_100_content"/>
-	<hpfb:element name="bovine_type" type="char_0_100_content"/>
-	<hpfb:element name="canine_type" type="char_0_100_content"/>
-	<hpfb:element name="caprine_type" type="char_0_100_content"/>
-	<hpfb:element name="cervidae_type" type="char_0_100_content"/>
-	<hpfb:element name="equine_type" type="char_0_100_content"/>
-	<hpfb:element name="feline_type" type="char_0_100_content"/>
-	<hpfb:element name="ovine_type" type="char_0_100_content"/>
-	<hpfb:element name="porcine_type" type="char_0_100_content"/>
-	<hpfb:element name="rodent_type" type="char_0_100_content"/>
-	<hpfb:element name="other_type" type="char_0_100_content"/>
+	
+	<hpfb:element name="animal_src_record" type="animal_source_record"/>	
+	<hpfb:element name="animal_type"/>
+	<hpfb:element name="animal_details" type="char_1_40_content"/>
+	
+
 	<hpfb:element name="is_controlled_pop" type="required_yes_no_content"/>
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
 	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
@@ -205,7 +199,7 @@
 	<hpfb:element name="formulation_details" type="formulation_content"/>
 	<hpfb:element name="roa_group" type="roa_content"/>
 	<hpfb:element name="roa_details" type="roa_details_content"/>
-	<hpfb:element name="roa" type="dosage_form_list"/>
+	<hpfb:element name="roa" type="roa_list"/>
 	<hpfb:element name="roa_other" type="char_0_40_content"/>
 
 	<hpfb:element name="country_group" type="country_group_content"/>
@@ -246,6 +240,7 @@
 			<hpfb:element ref="brand_name" />
 			<hpfb:element ref="common_name"/>
 			<hpfb:element ref="third_party_signed"/>
+			<hpfb:element ref="is_ref_products"/>
 			<hpfb:element ref="ref_product_list"/>
 			<hpfb:element ref="human_drug_use"/>
 			<hpfb:element ref="radiopharm_drug_use"/>
@@ -432,23 +427,11 @@
 			<hpfb:element ref="other_fluids_tissues_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-
+	
 
 	<hpfb:complexType name="animal_sourced_content">
 		<hpfb:sequence>
-			<hpfb:element ref="nonhuman_primate_type"/>
-			<hpfb:element ref="aquatic_type"/>
-			<hpfb:element ref="avian_type"/>
-			<hpfb:element ref="bovine_type"/>
-			<hpfb:element ref="canine_type"/>
-			<hpfb:element ref="caprine_type"/>
-			<hpfb:element ref="cervidae_type"/>
-			<hpfb:element ref="equine_type"/>
-			<hpfb:element ref="feline_type"/>
-			<hpfb:element ref="ovine_type"/>
-			<hpfb:element ref="porcine_type"/>
-			<hpfb:element ref="rodent_type"/>
-			<hpfb:element ref="other_type"/>
+			<hpfb:element ref="animal_src_record" minOccurs="1" maxOccurs="unbounded"/>
 			<hpfb:element ref="is_controlled_pop"/>
 			<hpfb:element ref="is_biotech_derived"/>
 			<hpfb:element ref="is_cell_line"/>
@@ -463,6 +446,15 @@
 			<hpfb:element ref="unknown_country_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
+
+<hpfb:complexType name="animal_source_record">
+		<hpfb:sequence>
+			<hpfb:element ref="animal_type"/>
+			<hpfb:element ref="animal_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	
 
 	<hpfb:complexType name="country_origin_list_content">
 		<hpfb:sequence>

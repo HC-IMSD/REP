@@ -42,7 +42,7 @@
         function getUSA() {
             return 'USA';
         }
-
+        //todo why is this listed twice?
         var getCountryValuesArray = (function () {
 
             return [

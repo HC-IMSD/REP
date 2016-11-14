@@ -24,7 +24,9 @@
                 onAddNew: '&',
                 onUpdate: '&',
                 onDelete: '&',
-                onCancel: '&'
+                onCancel: '&',
+                deleteBtn:'<',
+                recordChanged:'&'
             }
 
         });
@@ -33,13 +35,25 @@
 
         var self = this;
         self.isSourced = ""; //determines if at least one source is selected
+        var emptyFluidsTissues = {
+            tissuesList: []
+        }
+        var emptyAnimalSource={
+            animalSrcList: [],
+            isCellLine: "",
+            isBiotechDerived: "",
+            isControlledPop: "",
+            ageAnimals: 0,
+            countryList: []
+        }
+
         self.model = {}
         self.$onInit = function(){
 
         }
         self.$onChanges = function (changes) {
             if (changes.record) {
-                self.model = angular.copy(changes.record.currentValue);
+                self.model = (changes.record.currentValue);
             }
 
         }
@@ -96,10 +110,12 @@
             //console.log('apdx4 record updateTissuesFluids : ' + JSON.stringify(input));
 
             self.model.tissuesFluidsOrigin = input;
+            self.onUpdate({record: self.model});
 
-           /* if (self.record) {
-                self.onUpdate({record: self.model});
-            }*/
+
+            /* if (self.record) {
+                 self.onUpdate({record: self.model});
+             }*/
 
         };
 
@@ -109,6 +125,35 @@
             self.onUpdate({record: self.model});
 
         };
+
+        /**
+         * Determines whether to show or hide tissues o=r fluids
+         * @returns {boolean}
+         */
+        self.showTissuesFluids=function(){
+            if(self.model.humanSourced || self.model.animalSourced) {
+                if(!self.model.tissuesFluidsOrigin) {
+                    self.model.tissuesFluidsOrigin = angular.copy(emptyFluidsTissues);
+                }
+                return true;
+            }else{
+                self.model.tissuesFluidsOrigin=null;
+            }
+            return false;
+
+        }
+        self.showAnimalSources=function(){
+            self.showTissuesFluids();
+            if(self.model.animalSourced) {
+                if(!self.model.sourceAnimalDetails) {
+                    self.model.sourceAnimalDetails = angular.copy(emptyAnimalSource);
+                }
+                return true;
+            }else{
+                self.model.animalSourced=null;
+            }
+            return false;
+        }
 
     }
 })();
