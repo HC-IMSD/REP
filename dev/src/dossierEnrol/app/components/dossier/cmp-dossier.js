@@ -75,6 +75,9 @@
         self.errorAppendix = [];
         self.extraAppendix = [];
         self.noThera="";
+        self.oneRefSelected = "";
+        var yesValue = "Y";
+
         self.$onInit = function () {
 
             self.dossierService = new DossierService();
@@ -89,7 +92,6 @@
 
             if (changes.formType) {
                 self.userType = changes.formType.currentValue;
-                self.userType='EXT';
                 if (self.userType == 'INT') {
                     self.saveXMLLabel = "APPROVE_FINAL"
                 } else {
@@ -140,6 +142,22 @@
             self.formAmend = self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+
+        self.cdnRefUpdated = function (list) {
+            //don't do anything with the list
+            self.showNoRefReError();
+        }
+
+        self.showNoRefReError = function () {
+
+            if (self.dossierModel.drugProduct.canRefProducts.length > 0 && self.dossierModel.isRefProducts === yesValue) {
+                self.oneRefSelected = "sel";
+                return false
+            } else {
+                self.oneRefSelected = "";
+                return true;
+            }
+        }
 
         function getAppendix4Errors() {
             var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);

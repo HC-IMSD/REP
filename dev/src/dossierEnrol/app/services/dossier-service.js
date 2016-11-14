@@ -293,7 +293,7 @@
                 contact.initials = contacts[i].rep_contact_details.initials;
                 contact.title = contacts[i].rep_contact_details.job_title;
                 contact.phone = contacts[i].rep_contact_details.phone_num;
-                contact.PhoneExt = contacts[i].rep_contact_details.phone_ext;
+                contact.phoneExt = contacts[i].rep_contact_details.phone_ext;
                 contact.fax = contacts[i].rep_contact_details.fax_num;
                 contact.email = contacts[i].rep_contact_details.email;
                 contact.language = contacts[i].rep_contact_details.language_correspondance;
@@ -1137,7 +1137,7 @@
             obj.rep_contact_details.job_title = item.title;
             obj.rep_contact_details.language_correspondance = item.language;
             obj.rep_contact_details.phone_num = item.phone;
-            obj.rep_contact_details.phone_ext = item.PhoneExt;
+            obj.rep_contact_details.phone_ext = item.phoneExt;
             obj.rep_contact_details.fax_num = item.fax;
             obj.rep_contact_details.email = item.email;
             resultList.push(obj);

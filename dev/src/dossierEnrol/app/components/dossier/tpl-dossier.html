@@ -15,7 +15,7 @@
         </header>
         <div class="panel-body">
             <div>
-                <cmp-application-info record="dos.dossierModel" user-type="dos.formUserType"
+                <cmp-application-info record="dos.dossierModel" user-type="dos.userType"
                                       set-type="dos.setApplicationType(type)"
                                       configure-id-field="dos.configField"
                                       is-incomplete="dos.isIncomplete"></cmp-application-info>
@@ -148,10 +148,22 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
+                        <label>
+                            <strong id="contactNum-role-error" class="error"
+                                    ng-if="dos.showNoRefReError(dos.dossierForm.oneRefRec.$invalid)">
+                             <span class="label label-danger" aria-live="polite"
+                                   ng-messages="dos.dossierForm.oneRefRec.$error">
+                                 <span ng-message="required">{{"MSG_ERR_ONE_CDN_REF"|translate}}</span>
+                             </span>
+                            </strong>
+                        </label>
                     </header>
+                    <input type="text" ng-show="false" name="oneRefRec" id="oneRefRec{{$id}}"
+                           ng-model="dos.oneRefSelected" required/>
                     <div class="panel-body">
                         <cmp-ref-product-list
-                                products="dos.dossierModel.drugProduct.canRefProducts"></cmp-ref-product-list>
+                                products="dos.dossierModel.drugProduct.canRefProducts"
+                                on-update="dos.cdnRefUpdated(recs)"></cmp-ref-product-list>
                     </div>
                 </section>
             </div>
@@ -263,5 +275,5 @@
          </div>
              </div>-->
     </div>
-    <pre>{{dos.dossierModel | json }}</pre>
+    <!--    <pre>{{dos.dossierModel | json }}</pre>-->
 </ng-form>
