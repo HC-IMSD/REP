@@ -47,6 +47,7 @@ label > select {
     display: table;
     border-collapse: separate;
     margin-top: 5px;
+    font-weight: normal;
 }
 
 .rep-expander{
