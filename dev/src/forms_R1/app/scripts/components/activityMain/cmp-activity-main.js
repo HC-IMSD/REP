@@ -22,7 +22,8 @@
             'numberFormat',
             'contactModule26',
             'contactModule',
-            'contactModule25'
+            'contactModule25',
+            'ui.bootstrap'
         ])
 })();
 
@@ -58,7 +59,7 @@
         vm.formAmend = false;
         vm.isNotifiable = false;
         vm.isRationale = false;
-
+        vm.alerts = [];
         vm.configField = {
             "label": "CONTROL_NUMBER",
             "fieldLength": "6",
@@ -69,11 +70,11 @@
 
         vm.initUser = function (id) {
             /* if (!id) id = 'EXT';
-            vm.userType = id;
-            if (id == 'INT') {
-                vm.saveXMLLabel = "APPROVE_FINAL"
-            } else {
-                vm.saveXMLLabel = "SAVE_DRAFT"
+             vm.userType = id;
+             if (id == 'INT') {
+             vm.saveXMLLabel = "APPROVE_FINAL"
+             } else {
+             vm.saveXMLLabel = "SAVE_DRAFT"
              }*/
 
         };
@@ -147,6 +148,23 @@
             vm.formAmend = vm.activityRoot.applicationType === vm.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+        $scope.closeAlert = function () {
+            console.log('fired2');
+        }
+
+        vm.closeAlert = function (index) {
+            vm.alerts.splice(index, 1);
+            console.log('fired');
+        }
+
+        vm.addInstruct = function () {
+            vm.alerts = [
+                {
+                    type: 'info',
+                    msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.'
+                }
+            ];
+        }
 
         vm.openHelp = function (type) {
             var helpLink = ""
@@ -204,8 +222,6 @@
             return filename;
 
 
-
-
             var filename = "HC_RA_Enrolment";
             if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
                 filename = filename + "_" + vm.activityRoot.dstsControlNumber;
@@ -260,13 +276,16 @@
 
             vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern());
         }
+
         function disableJSONSave() {
 
             vm.disableJson = (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
         }
+
         function _setComplete() {
             vm.isIncomplete = !vm.activityRoot.dstsControlNumber;
         }
+
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             vm.activityService = new ActivityService();

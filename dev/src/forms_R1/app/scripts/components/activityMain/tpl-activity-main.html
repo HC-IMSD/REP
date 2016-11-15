@@ -25,16 +25,19 @@
     <div>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-                <!-- <div class="btn-group pull-right">
-                     <button class="btn btn-default btn-xs" ng-click="main.openHelp('activityMain')"
-                             aria-haspopup="true">
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default btn-xs" ng-click="main.addInstruct('activityMain')">
                          {{'HELP_ACTIVITY_MAIN'|translate}}
                      </button>
-                 </div>-->
+                </div>
                 <h2 class="panel-title">{{'ACTIVE_ENROL' |translate}}</h2>
             </header>
             <div class="panel-body">
-
+                <div>
+                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-repeat="alert in main.alerts"
+                         ng-class="'alert-' + (alert.type || 'warning')" close="main.closeAlert($index)">{{alert.msg}}
+                    </div>
+                </div>
                 <cmp-application-info record="main.activityRoot" user-type="main.userType"
                                       is-incomplete="main.isIncomplete" set-type="main.setApplicationType(type)"
                                       configure-id-field="main.configField"></cmp-application-info>
