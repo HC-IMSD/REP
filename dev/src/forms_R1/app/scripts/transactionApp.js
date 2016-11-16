@@ -16,7 +16,8 @@
             'transactionService',
             'filterLists',
             'lcDetailsModule',
-            'numberFormat'
+            'numberFormat',
+            'translations'
         ])
 })();
 
@@ -40,42 +41,6 @@
     angular
         .module('transactionApp')
         .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider.useStaticFilesLoader({
-                files: [
-                    {
-                        prefix: 'app/resources/countries-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/address-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/stateProvinces-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/general-',
-                        suffix: '.json'
-                    },
-                    {
-                     prefix: 'app/resources/fileIO-',
-                     suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/messages-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/contact-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/transaction-',
-                        suffix: '.json'
-                    }
-                ]
-            })
             $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);

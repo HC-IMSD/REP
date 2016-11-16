@@ -24,7 +24,7 @@
     angular
         .module('dossierApp')
         .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider.useStaticFilesLoader({
+            /*   $translateProvider.useStaticFilesLoader({
                 files: [
                     {
                         prefix: './resources/dossier-dosageform-',
@@ -84,7 +84,7 @@
                     }
 
                 ]
-            });
+             });*/
             $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);

@@ -6,7 +6,8 @@
     angular
         .module('activityApp', [
             'pascalprecht.translate',
-            'activityMain'
+            'activityMain',
+            'translations'
         ])
 })();
 
@@ -16,53 +17,17 @@
         .module('activityApp')
         .controller('MainController', MainController);
 
-    //MainController.$inject = ['CompanyService', 'hpfbFileProcessing', '$filter', '$scope']
-
-
     function MainController() {
         var vm = this;
         vm.formType = '@@SET_FORM';
     }
 })();
-
+//test
 (function () {
     'use strict';
     angular
         .module('activityApp')
         .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider.useStaticFilesLoader({
-                files: [
-                    {
-                        prefix: 'app/resources/general-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/fileIO-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/messages-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/contact-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/applicationInfo-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/activityInfo-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/activityList-',
-                        suffix: '.json'
-                    }
-
-                ]
-            });
             $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);

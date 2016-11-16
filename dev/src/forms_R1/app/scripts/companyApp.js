@@ -2,7 +2,8 @@
     'use strict';
     angular
         .module('companyApp', [
-            'companyMain'
+            'companyMain',
+            'translations'
         ])
 })();
 //TODO replace with service for incrememnting version
@@ -27,46 +28,7 @@
     angular
         .module('companyApp')
         .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider.useStaticFilesLoader({
-                files: [
-                    {
-                        prefix: 'app/resources/countries-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/address-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/stateProvinces-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/general-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/fileIO-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/messages-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/contact-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/applicationInfo-',
-                        suffix: '.json'
-                    },
-                    {
-                        prefix: 'app/resources/companyInfo-',
-                        suffix: '.json'
-                    }
-                ]
-            })
+
             $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);

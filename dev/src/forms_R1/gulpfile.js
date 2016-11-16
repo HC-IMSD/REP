@@ -12,6 +12,8 @@ var rename = require("gulp-rename");
 var angularFilesort = require('gulp-angular-filesort');
 var replace = require('gulp-replace-task');
 var stringReplace = require('gulp-string-replace');
+var gutil = require('gulp-util');
+var dateFormat = require('dateformat')
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -31,6 +33,7 @@ var paths = {
     frenchTemplate: wetBase + '/content-fr.html',
     lib: './app/lib/',
     scripts: baseScript,
+    relScript: '/app/scripts/',
     components: baseScript + '/components/',
     directives: baseScript + '/directives/',
     services: baseScript + '/services/',
@@ -56,13 +59,13 @@ var placeholders = {
 };
 
 var activityRootTitles_en = {
-    mainHeading: "Activity Form for the Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Activity Form'
+    mainHeading: "Activity Template: Regulatory Enrolment Process (REP)",
+    title: 'Health Canada Activity REP Template'
 
 };
 var activityRootTitles_fr = {
-    mainHeading: "fr_Activity Form for the Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Activity Form'
+    mainHeading: "fr_Activity Template: Regulatory Enrolment Process (REP)",
+    title: 'fr_Health Canada Activity REP Template'
 
 };
 
@@ -397,15 +400,20 @@ pipes.fullTranslateList = function (translateList) {
 };
 pipes.translateDev = function (translateList, destPath, baseIgnore) {
 
+    var def = Q.defer();
     if (!baseIgnore) baseIgnore = ".";
     var completeList = pipes.fullTranslateList(translateList);
     var copySources = gulp.src(completeList,
         {read: true, base: baseIgnore});
-    return copySources.pipe(gulp.dest(destPath))
+    copySources.pipe(gulp.dest(destPath)).on('end', function () {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
 };
 pipes.insertDateStamp = function (template, valsObj) {
-
-    var utc = new Date().toJSON().slice(0, 10);
+    var now = new Date();
+    var utc = dateFormat(now, "isoDate");
     return (gulp.src(template)
             .pipe(htmlreplace({
                 dateToday: utc,
@@ -466,7 +474,7 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath)
                     }
                 ]
             }))
-            .pipe(stringReplace("\\./resources/", "app/resources/"))
+            //  .pipe(stringReplace("\\./resources/", "app/resources/"))
             .pipe(rename(rootName + type + "-" + lang + '.js'))
             .pipe(gulp.dest(destPath))
     )
@@ -487,7 +495,7 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath)
  * */
 pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType) {
 
-
+    //inserts date stamp into base content page
     pipes.insertDateStamp(templatePath, valsObj)
         .pipe(inject(gulp.src([partialRoot]), {
             starttag: placeholders.mainContent,
@@ -511,6 +519,7 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                 buildDir + 'app/scripts/directives/**/*.js',
                 buildDir + 'app/scripts/services/**/*.js',
                 buildDir + 'app/scripts/' + injectRootJs,
+                buildDir + 'app/scripts/' + 'translations.js',
                 buildDir + 'app/lib/**/angular*.js'
 
             ])
@@ -668,11 +677,24 @@ gulp.task('copyActivitySrcDev', function () {
             jsDirectiveFiles.numberOnly
         ],
         {read: true, base: './'});
+    //copySources.pipe(gulp.dest(paths.buildDevActivity))
 
-
-    return copySources.pipe(gulp.dest(paths.buildDevActivity))
-
+    var dateToday = createSuffixDate()
+    return (
+        copySources.pipe(rename({
+                suffix: dateToday
+            }))
+            .pipe(stringReplace('.html', (dateToday + '.html')))
+            .pipe(gulp.dest(paths.buildDevActivity))
+    )
 });
+
+function createSuffixDate() {
+    dateFormat.masks.suffixDate = '_yyyymmdd_HHMM';
+    var now = new Date();
+    var dateToday = dateFormat(now, "suffixDate");
+    return dateToday;
+}
 
 gulp.task('copyActivityTranslateDev', function () {
     var translationList = [
@@ -684,8 +706,44 @@ gulp.task('copyActivityTranslateDev', function () {
         translationBaseFiles.general,
         translationBaseFiles.messages
     ];
-    pipes.translateDev(translationList, paths.buildDevActivity)
+
+    return (pipes.translateDev(translationList, paths.buildDevActivity));
 });
+
+gulp.task('activityCreateResourcesDev', ['copyActivityTranslateDev'], function () {
+    var devPath = paths.buildDevActivity;
+    gulp.src(devPath + paths.translations + '*.json')
+        .pipe(angularTranslate())
+        .pipe(gulp.dest(devPath + paths.relScript))
+
+
+});
+gulp.task('transactionCreateResourcesDev', ['copyTransactionTranslateDev'], function () {
+    var devPath = paths.buildDevTransaction;
+    gulp.src(devPath + paths.translations + '*.json')
+        .pipe(angularTranslate())
+        .pipe(gulp.dest(devPath + paths.relScript))
+
+});
+gulp.task('companyCreateResourcesDev', ['copyCompanyTranslateDev'], function () {
+    var devPath = paths.buildDevCompany;
+
+    gulp.src(devPath + paths.translations + '*.json')
+        .pipe(angularTranslate())
+        .pipe(gulp.dest(devPath + paths.relScript))
+
+});
+
+gulp.task('dossierCreateResourcesDev', ['copyDossierTranslateDev'], function () {
+    var devPath = dossierPaths.buildDevDossier;
+    gutil.log('@@@@@@@@@' + devPath + 'app/resources/');
+    return (gulp.src(devPath + 'app/resources/' + '*.json')
+        .pipe(angularTranslate())
+        .pipe(gulp.dest(devPath + 'app/')))
+
+});
+
+
 
 gulp.task('copyLibDevActivity', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
@@ -733,15 +791,18 @@ gulp.task('copyEnActivityRootINT', function () {
 });
 
 
-gulp.task('ActivityHtml', ['copyActivitySrcDev', 'copyLibDevActivity', 'copyFrActivityRoot', 'copyEnActivityRoot', 'copyFrActivityRootINT', 'copyEnActivityRootINT', 'copyActivityTranslateDev'], function () {
+gulp.task('ActivityHtml', ['copyActivitySrcDev', 'copyLibDevActivity', 'copyFrActivityRoot', 'copyEnActivityRoot', 'copyFrActivityRootINT', 'copyEnActivityRootINT', 'activityCreateResourcesDev'], function () {
 
 
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'EXT');
     pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolEXT-en.html', 'activityAppEXT-en.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'INT')
+
     return (
-        pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'INT')
+        pipes.cleanBuild(paths.buildDevActivity + paths.translations)
     );
+
 
 });
 
@@ -820,19 +881,21 @@ gulp.task('copyCompanyTranslateDev', function () {
         translationBaseFiles.messages,
         translationBaseFiles.companyInfo
     ];
-    pipes.translateDev(translationList, paths.buildDevCompany)
+    return (pipes.translateDev(translationList, paths.buildDevCompany))
 });
 
-gulp.task('CompanyHtml', ['copyCompanySrcDev', 'copyLibDevCompany', 'copyEnCompanyRootINT', 'copyFrCompanyRootExt', 'copyEnCompanyRootEXT', 'copyFrCompanyRootINT', 'copyCompanyTranslateDev'], function () {
+gulp.task('CompanyHtml', ['copyCompanySrcDev', 'copyLibDevCompany', 'copyEnCompanyRootINT', 'copyFrCompanyRootExt', 'copyEnCompanyRootEXT', 'copyFrCompanyRootINT', 'companyCreateResourcesDev'], function () {
     var ignoreDir = '/build/dev/company';
     var buildDir = paths.buildDevCompany;
     var htmlPartial = jsRootContent.partialCompanyRoot;
     pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolINT-fr.html', 'companyAppINT-fr.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
     pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolEXT-fr.html', 'companyAppEXT-fr.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
     pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolEXT-en.html', 'companyAppEXT-en.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT')
     return (
-        pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT')
+        pipes.cleanBuild(buildDir + paths.translations)
     );
+
 
 });
 gulp.task('copyWetDepCompany', function () {
@@ -916,7 +979,7 @@ gulp.task('copyTransactionTranslateDev', function () {
         translationBaseFiles.messages,
         translationBaseFiles.transaction
     ];
-    pipes.translateDev(translationList, paths.buildDevTransaction)
+    return (pipes.translateDev(translationList, paths.buildDevTransaction))
 });
 
 gulp.task('copyLibDevTransaction', function () {
@@ -930,15 +993,15 @@ gulp.task('copyWetDepTransaction', function () {
 });
 
 
-gulp.task('TransactionHtml', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'copyTransactionTranslateDev'], function () {
+gulp.task('TransactionHtml', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'transactionCreateResourcesDev'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot;
     pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionApp-fr.js', htmlPartial, buildDir, ignoreDir, 'fr', '');
-
+    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionApp-en.js', htmlPartial, buildDir, ignoreDir, 'en', '')
 
     return (
-        pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionApp-en.js', htmlPartial, buildDir, ignoreDir, 'en', '')
+        pipes.cleanBuild(buildDir + paths.translations)
     );
 
 });
@@ -1017,7 +1080,7 @@ gulp.task('copyDossierTranslateDev', function () {
     ];
     var baseIgnore = "../dossierEnrol";
 
-    pipes.translateDev(translationList, dossierPaths.buildDevDossier, baseIgnore)
+    return (pipes.translateDev(translationList, dossierPaths.buildDevDossier, baseIgnore))
 });
 
 
@@ -1089,7 +1152,7 @@ gulp.task('copyDossierCommonTranslateDev', function () {
         translationBaseFiles.messages,
         translationBaseFiles.contact
     ];
-    pipes.translateDev(translationList, dossierPaths.buildDevDossier)
+    return (pipes.translateDev(translationList, dossierPaths.buildDevDossier))
 
 });
 
@@ -1186,7 +1249,7 @@ gulp.task('copyEnDossierRootINT', function () {
  * Creates 4 html files- internal english, internal french, external english, external french
  */
 
-gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossierRootEXT', 'copyFrDossierRootEXT', 'copyFrDossierRootINT', 'copyEnDossierRootINT', 'copyDossierTranslateDev'], function () {
+gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossierRootEXT', 'copyFrDossierRootEXT', 'copyFrDossierRootINT', 'copyEnDossierRootINT', 'dossierCreateResourcesDev'], function () {
     var ignoreDir = '/build/dev/dossier';
     var buildDir = dossierPaths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;
@@ -1194,9 +1257,10 @@ gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossi
     pipes.createDossierDev(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en.js', htmlPartial, buildDir, ignoreDir);
     pipes.createDossierDev(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr.js', htmlPartial, buildDir, ignoreDir);
     pipes.createDossierDev(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr.js', htmlPartial, buildDir, ignoreDir);
-    return (
-        pipes.createDossierDev(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolEXT-en.html', 'dossierAppEXT-en.js', htmlPartial, buildDir, ignoreDir)
+    pipes.createDossierDev(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolEXT-en.html', 'dossierAppEXT-en.js', htmlPartial, buildDir, ignoreDir)
 
+    return (
+        pipes.cleanBuild(buildDir + paths.translations)
     );
 });
 
@@ -1266,4 +1330,11 @@ gulp.task('copyLibProd', function () {
         {read: true, base: ''});
     return copySources.pipe(gulp.dest(paths.buildProd))
 
+});
+
+gulp.task('watch-dev', function () {
+    var watcher = gulp.watch('app/**/*.js', ['ActivityHtml', 'CompanyHtml', 'TransactionHtml', 'DossierHtml']);
+    watcher.on('change', function (event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    });
 });
