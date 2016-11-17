@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('tissuesFluidsRecord', ['dossierDataLists'])
+        .module('tissuesFluidsRecord', ['dossierDataLists', 'nervousModule'])
 })();
 
 (function () {

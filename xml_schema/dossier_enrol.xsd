@@ -48,7 +48,7 @@
 	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
 	<!-- Schedule A definitions-->
 	<hpfb:element name="schedule_a_group" type="schedule_a_content"/>
-	<hpfb:element name="din_number" type="din_content"/>	
+	<hpfb:element name="din_number" type="din_content"/>
 	<hpfb:element name="acute_alcohol" type="required_yes_no_content"/>
 	<hpfb:element name="acute_anxiety" type="required_yes_no_content"/>
 	<hpfb:element name="acute_infectious" type="required_yes_no_content"/>
@@ -93,6 +93,7 @@
 	<hpfb:element name="animal_sourced_section" type="animal_sourced_content"/>
 	<!-- tissues fluids-->
 	<!-- Start nervous system-->
+	<hpfb:element name="brain_system" type="nervous_system_content"/>
 	<hpfb:element name="brain" type="required_yes_no_content"/>
 	<hpfb:element name="brain_stem" type="required_yes_no_content"/>
 	<hpfb:element name="cerebellum" type="required_yes_no_content"/>
@@ -106,6 +107,7 @@
 	<hpfb:element name="other_nervous" type="required_yes_no_content"/>
 	<hpfb:element name="other_nervous_details" type="char_0_40_content"/>
 	<!-- Start digestive system-->
+	<hpfb:element name="digestive_system" type="digestive_system_content"/>
 	<hpfb:element name="appendix" type="required_yes_no_content"/>
 	<hpfb:element name="bile" type="required_yes_no_content"/>
 	<hpfb:element name="distal_ileum" type="required_yes_no_content"/>
@@ -116,6 +118,7 @@
 	<hpfb:element name="other_digestive" type="required_yes_no_content"/>
 	<hpfb:element name="other_digestive_details" type="char_0_40_content"/>
 	<!-- Start reproductive system-->
+	<hpfb:element name="reproductive_system" type="reproductive_system_content"/>
 	<hpfb:element name="milk_products" type="required_yes_no_content"/>
 	<hpfb:element name="kidney" type="required_yes_no_content"/>
 	<hpfb:element name="colostrum" type="required_yes_no_content"/>
@@ -129,6 +132,7 @@
 	<hpfb:element name="other_reproductive" type="required_yes_no_content"/>
 	<hpfb:element name="other_reproductive_details" type="char_0_40_content"/>
 	<!-- Start cardio respiratory system-->
+	<hpfb:element name="cardio_system" type="cardio_system_content"/>
 	<hpfb:element name="heart_pericardium" type="required_yes_no_content"/>
 	<hpfb:element name="lung" type="required_yes_no_content"/>
 	<hpfb:element name="nasal_fluid" type="required_yes_no_content"/>
@@ -136,6 +140,7 @@
 	<hpfb:element name="other_cardio_respiratory" type="required_yes_no_content"/>
 	<hpfb:element name="other_cardio_respiratory_details" type="char_0_40_content"/>
 	<!-- Start immune system-->
+	<hpfb:element name="immune_system" type="immune_system_content"/>
 	<hpfb:element name="lymph_nodes" type="required_yes_no_content"/>
 	<hpfb:element name="spleen" type="required_yes_no_content"/>
 	<hpfb:element name="thymus" type="required_yes_no_content"/>
@@ -143,6 +148,7 @@
 	<hpfb:element name="other_immune" type="required_yes_no_content"/>
 	<hpfb:element name="other_immune_details" type="char_0_40_content"/>
 	<!-- Start skin glandular system-->
+	<hpfb:element name="skin_system" type="skin_system_content"/>
 	<hpfb:element name="adrenal_gland" type="required_yes_no_content"/>
 	<hpfb:element name="hair_hooves_feathers" type="required_yes_no_content"/>
 	<hpfb:element name="liver" type="required_yes_no_content"/>
@@ -153,6 +159,7 @@
 	<hpfb:element name="other_skin_glandular" type="required_yes_no_content"/>
 	<hpfb:element name="other_skin_glandular_details" type="char_0_40_content"/>
 	<!-- Start musculo-Skeletal system-->
+	<hpfb:element name="musclo_system" type="musclo_system_content"/>
 	<hpfb:element name="abdomen" type="required_yes_no_content"/>
 	<hpfb:element name="skull" type="required_yes_no_content"/>
 	<hpfb:element name="bones" type="required_yes_no_content"/>
@@ -163,6 +170,7 @@
 	<hpfb:element name="other_musculo_skeletal" type="required_yes_no_content"/>
 	<hpfb:element name="other_musculo_skeletal_details" type="char_0_40_content"/>
 	<!-- Start other system-->
+	<hpfb:element name="other_system" type="other_system_content"/>
 	<hpfb:element name="adipose" type="required_yes_no_content"/>
 	<hpfb:element name="ascites" type="required_yes_no_content"/>
 	<hpfb:element name="antler_velvet" type="required_yes_no_content"/>
@@ -177,11 +185,11 @@
 	<hpfb:element name="other_fluids_tissues" type="required_yes_no_content"/>
 	<hpfb:element name="other_fluids_tissues_details" type="char_0_40_content"/>
 	<!-- Animal Sourced content-->
-	
-	<hpfb:element name="animal_src_record" type="animal_source_record"/>	
+
+	<hpfb:element name="animal_src_record" type="animal_source_record"/>
 	<hpfb:element name="animal_type"/>
 	<hpfb:element name="animal_details" type="char_1_40_content"/>
-	
+
 
 	<hpfb:element name="is_controlled_pop" type="required_yes_no_content"/>
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
@@ -237,7 +245,7 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
-			<hpfb:element ref="brand_name" />
+			<hpfb:element ref="brand_name"/>
 			<hpfb:element ref="common_name"/>
 			<hpfb:element ref="third_party_signed"/>
 			<hpfb:element ref="is_ref_products"/>
@@ -269,7 +277,7 @@
 
 	<hpfb:complexType name="cdn_ref_product_content">
 		<hpfb:sequence>
-			<hpfb:element ref="brand_name" />
+			<hpfb:element ref="brand_name"/>
 			<hpfb:element ref="medicinal_ingredient"/>
 			<hpfb:element ref="dosage_form"/>
 			<hpfb:element ref="dosage_form_other"/>
@@ -330,7 +338,7 @@
 
 	<hpfb:complexType name="appendix4_content">
 		<hpfb:sequence>
-			<hpfb:element ref="ingredient_id" />
+			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="animal_sourced"/>
 			<hpfb:element ref="human_sourced"/>
@@ -339,95 +347,6 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-
-	<hpfb:complexType name="tissues_fluid_content">
-		<hpfb:sequence>
-			<hpfb:element ref="brain"/>
-			<hpfb:element ref="brain_stem"/>
-			<hpfb:element ref="cerebellum"/>
-			<hpfb:element ref="cerebrospinal_fluid"/>
-			<hpfb:element ref="dorsal_root_ganglia"/>
-			<hpfb:element ref="dura_mater"/>
-			<hpfb:element ref="hypothalmus"/>
-			<hpfb:element ref="retina_optic"/>
-			<hpfb:element ref="spinal_cord"/>
-			<hpfb:element ref="trigerminal_ganglia"/>
-			<hpfb:element ref="other_nervous"/>
-			<hpfb:element ref="other_nervous_details"/>
-			<!-- Start digestive system-->
-			<hpfb:element ref="appendix"/>
-			<hpfb:element ref="bile"/>
-			<hpfb:element ref="distal_ileum"/>
-			<hpfb:element ref="large_intestine"/>
-			<hpfb:element ref="saliva_salivary"/>
-			<hpfb:element ref="small_intestine"/>
-			<hpfb:element ref="stomach"/>
-			<hpfb:element ref="other_digestive"/>
-			<hpfb:element ref="other_digestive_details"/>
-			<!-- Start reproductive system-->
-			<hpfb:element ref="milk_products"/>
-			<hpfb:element ref="kidney"/>
-			<hpfb:element ref="colostrum"/>
-			<hpfb:element ref="mammary_glands"/>
-			<hpfb:element ref="ovaries"/>
-			<hpfb:element ref="placenta"/>
-			<hpfb:element ref="placental_fluid"/>
-			<hpfb:element ref="semen"/>
-			<hpfb:element ref="testes"/>
-			<hpfb:element ref="urine"/>
-			<hpfb:element ref="other_reproductive"/>
-			<hpfb:element ref="other_reproductive_details"/>
-			<!-- Start cardio respiratory system-->
-			<hpfb:element ref="heart_pericardium"/>
-			<hpfb:element ref="lung"/>
-			<hpfb:element ref="nasal_fluid"/>
-			<hpfb:element ref="trachea"/>
-			<hpfb:element ref="other_cardio_respiratory"/>
-			<hpfb:element ref="other_cardio_respiratory_details"/>
-			<!-- Start immune system-->
-			<hpfb:element ref="lymph_nodes"/>
-			<hpfb:element ref="spleen"/>
-			<hpfb:element ref="thymus"/>
-			<hpfb:element ref="tonsils"/>
-			<hpfb:element ref="other_immune"/>
-			<hpfb:element ref="other_immune_details"/>
-			<!-- Start skin glandular system-->
-			<hpfb:element ref="adrenal_gland"/>
-			<hpfb:element ref="hair_hooves_feathers"/>
-			<hpfb:element ref="liver"/>
-			<hpfb:element ref="pancreas"/>
-			<hpfb:element ref="pituitary"/>
-			<hpfb:element ref="skin_hides"/>
-			<hpfb:element ref="thyroid_parathyroid"/>
-			<hpfb:element ref="other_skin_glandular"/>
-			<hpfb:element ref="other_skin_glandular_details"/>
-			<!-- Start musculo-Skeletal system-->
-			<hpfb:element ref="abdomen"/>
-			<hpfb:element ref="skull"/>
-			<hpfb:element ref="bones"/>
-			<hpfb:element ref="collagen"/>
-			<hpfb:element ref="tendons_ligaments"/>
-			<hpfb:element ref="vertebral_column"/>
-			<hpfb:element ref="muscle"/>
-			<hpfb:element ref="other_musculo_skeletal"/>
-			<hpfb:element ref="other_musculo_skeletal_details"/>
-			<!-- Start other system-->
-			<hpfb:element ref="adipose"/>
-			<hpfb:element ref="ascites"/>
-			<hpfb:element ref="antler_velvet"/>
-			<hpfb:element ref="serum"/>
-			<hpfb:element ref="whole_blood"/>
-			<hpfb:element ref="plasma"/>
-			<hpfb:element ref="embryonic_tissue"/>
-			<hpfb:element ref="fetal_tissue"/>
-			<hpfb:element ref="bone_marrow"/>
-			<hpfb:element ref="eyes_cornea"/>
-			<hpfb:element ref="gall_bladder"/>
-			<hpfb:element ref="other_fluids_tissues"/>
-			<hpfb:element ref="other_fluids_tissues_details"/>
-		</hpfb:sequence>
-	</hpfb:complexType>
-	
 
 	<hpfb:complexType name="animal_sourced_content">
 		<hpfb:sequence>
@@ -447,14 +366,14 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-<hpfb:complexType name="animal_source_record">
+	<hpfb:complexType name="animal_source_record">
 		<hpfb:sequence>
 			<hpfb:element ref="animal_type"/>
 			<hpfb:element ref="animal_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-	
+
 
 	<hpfb:complexType name="country_origin_list_content">
 		<hpfb:sequence>
@@ -511,17 +430,17 @@
 	</hpfb:complexType>
 
 	<hpfb:complexType name="container_details_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="container_type"/>
 			<hpfb:element ref="package_size"/>
 			<hpfb:element ref="shelf_life_years"/>
 			<hpfb:element ref="shelf_life_months"/>
 			<hpfb:element ref="temperature_min"/>
 			<hpfb:element ref="temperature_max"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 	<hpfb:complexType name="active_group_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="cas_number"/>
@@ -533,10 +452,10 @@
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
 			<hpfb:element ref="nanomaterial_details"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 	<hpfb:complexType name="nmi_group_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="cas_number"/>
@@ -549,15 +468,126 @@
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
 			<hpfb:element ref="nanomaterial_details"/>
-		</hpfb:all>
+		</hpfb:sequence>
 	</hpfb:complexType>
 	<hpfb:complexType name="material_group_content">
-		<hpfb:all>
+		<hpfb:sequence>
 			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="cas_number"/>
 			<hpfb:element ref="ingred_standard"/>
 			<hpfb:element ref="in_final_container"/>
-		</hpfb:all>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="nervous_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="brain_system"/>
+			<hpfb:element ref="brain"/>
+			<hpfb:element ref="brain_stem"/>
+			<hpfb:element ref="cerebellum"/>
+			<hpfb:element ref="cerebrospinal_fluid"/>
+			<hpfb:element ref="dorsal_root_ganglia"/>
+			<hpfb:element ref="dura_mater"/>
+			<hpfb:element ref="hypothalmus"/>
+			<hpfb:element ref="retina_optic"/>
+			<hpfb:element ref="spinal_cord"/>
+			<hpfb:element ref="trigerminal_ganglia"/>
+			<hpfb:element ref="other_nervous"/>
+			<hpfb:element ref="other_nervous_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="digestive_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="appendix"/>
+			<hpfb:element ref="bile"/>
+			<hpfb:element ref="distal_ileum"/>
+			<hpfb:element ref="large_intestine"/>
+			<hpfb:element ref="saliva_salivary"/>
+			<hpfb:element ref="small_intestine"/>
+			<hpfb:element ref="stomach"/>
+			<hpfb:element ref="other_digestive"/>
+			<hpfb:element ref="other_digestive_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="reproductive_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="milk_products"/>
+			<hpfb:element ref="kidney"/>
+			<hpfb:element ref="colostrum"/>
+			<hpfb:element ref="mammary_glands"/>
+			<hpfb:element ref="ovaries"/>
+			<hpfb:element ref="placenta"/>
+			<hpfb:element ref="placental_fluid"/>
+			<hpfb:element ref="semen"/>
+			<hpfb:element ref="testes"/>
+			<hpfb:element ref="urine"/>
+			<hpfb:element ref="other_reproductive"/>
+			<hpfb:element ref="other_reproductive_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="immune_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="lymph_nodes"/>
+			<hpfb:element ref="spleen"/>
+			<hpfb:element ref="thymus"/>
+			<hpfb:element ref="tonsils"/>
+			<hpfb:element ref="other_immune"/>
+			<hpfb:element ref="other_immune_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="skin_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="skin_system"/>
+			<hpfb:element ref="adrenal_gland"/>
+			<hpfb:element ref="hair_hooves_feathers"/>
+			<hpfb:element ref="liver"/>
+			<hpfb:element ref="pancreas"/>
+			<hpfb:element ref="pituitary"/>
+			<hpfb:element ref="skin_hides"/>
+			<hpfb:element ref="thyroid_parathyroid"/>
+			<hpfb:element ref="other_skin_glandular"/>
+			<hpfb:element ref="other_skin_glandular_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="musclo_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="abdomen"/>
+			<hpfb:element ref="skull"/>
+			<hpfb:element ref="bones"/>
+			<hpfb:element ref="collagen"/>
+			<hpfb:element ref="tendons_ligaments"/>
+			<hpfb:element ref="vertebral_column"/>
+			<hpfb:element ref="muscle"/>
+			<hpfb:element ref="other_musculo_skeletal"/>
+			<hpfb:element ref="other_musculo_skeletal_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="cardio_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="heart_pericardium"/>
+			<hpfb:element ref="lung"/>
+			<hpfb:element ref="nasal_fluid"/>
+			<hpfb:element ref="trachea"/>
+			<hpfb:element ref="other_cardio_respiratory"/>
+			<hpfb:element ref="other_cardio_respiratory_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="other_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="adipose"/>
+			<hpfb:element ref="ascites"/>
+			<hpfb:element ref="antler_velvet"/>
+			<hpfb:element ref="serum"/>
+			<hpfb:element ref="whole_blood"/>
+			<hpfb:element ref="plasma"/>
+			<hpfb:element ref="embryonic_tissue"/>
+			<hpfb:element ref="fetal_tissue"/>
+			<hpfb:element ref="bone_marrow"/>
+			<hpfb:element ref="eyes_cornea"/>
+			<hpfb:element ref="gall_bladder"/>
+			<hpfb:element ref="other_fluids_tissues"/>
+			<hpfb:element ref="other_fluids_tissues_details"/>
+		</hpfb:sequence>
 	</hpfb:complexType>
 </hpfb:schema>

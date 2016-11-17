@@ -514,6 +514,7 @@
                         //make it an array, case there is only one
                         tissuesList = [tissuesList]
                     }
+                    //tissues
                     for (var tissCount = 0; tissCount < tissuesList.length; tissCount++) {
                         var rec = {};
                         rec.id = tissuesList[tissCount].tf_id;
@@ -1556,7 +1557,6 @@
         record.countryList=[];
         return record;
     }
-
 
 
 })();

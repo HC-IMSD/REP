@@ -16,7 +16,8 @@
     angular
         .module('contactModule26')
         .component('cmpRepContactList', {
-            templateUrl: 'app/scripts/components/repContactList/tpl-rep-contact-list.html',
+
+            templateUrl: './components/repContactList/tpl-rep-contact-list.html',
             controller: contactListCtrl,
             controllerAs: 'contactListCtrl',
             bindings: {
