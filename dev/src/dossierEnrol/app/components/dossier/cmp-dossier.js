@@ -26,7 +26,8 @@
         'ngAria',
         'theraClass',
         'animalSourcedSection',
-        'tissuesFluidsList'
+        'tissuesFluidsList',
+        'translations'
     ];
 
     angular
