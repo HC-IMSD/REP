@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('nervousModule', [])
+        .module('digestiveModule', [])
 })();
 
 
@@ -14,22 +14,23 @@
     'use strict';
 
     angular
-        .module('nervousModule')
-        .component('cmpNervousSystem', {
-            templateUrl: './components/appendix-four/tpl-nervous.html',
+        .module('digestiveModule')
+        .component('cmpDigestiveSystem', {
+            templateUrl: './components/appendix-four/tpl-digestive.html',
             controllerAs: 'sysCtrl',
-            controller: nervousSystemController,
+            controller: digestiveSystemController,
             bindings: {
                 record: '<',
                 otherUpdate: '&'
             }
-
         });
-    function nervousSystemController() {
+    function digestiveSystemController() {
         var vm = this;
         vm.model = {}
+        vm.isSelected = ""
+
         vm.$onInit = function () {
-            vm.isSelected = "";
+            //fdg
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -37,12 +38,13 @@
                 vm.updateErrorState();
             }
         };
+
         vm.updateErrorState = function () {
             var keys = Object.keys(vm.model);
             for (var i = 0; i < keys.length; i++) {
                 var val = vm.model[keys[i]];
                 if (val) {
-                    if (keys[i] === 'otherNervous') {
+                    if (keys[i] === 'otherDigestive') {
                         if (!vm.model.otherDetails) {
                             vm.isSelected = ""
                             return
@@ -57,9 +59,10 @@
             }
             vm.isSelected = ""
         };
+
         vm.otherChanged = function () {
             var state = false;
-            if (vm.model.otherNervous) {
+            if (vm.model.otherDigestive) {
                 state = true;
             } else {
                 state = false;
@@ -69,5 +72,6 @@
             vm.updateErrorState();
             return state;
         }
+
     }
 })();

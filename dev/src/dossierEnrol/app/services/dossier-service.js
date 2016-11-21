@@ -4,11 +4,21 @@
 
 (function () {
     'use strict';
+
     angular
-        .module('dossierModule')
+        .module('dossierService', [
+            'dossierDataLists'
+        ]);
+})();
+
+
+(function () {
+    'use strict';
+    angular
+        .module('dossierService')
         .factory('DossierService', DossierService)
-    DossierService.$inject = [];
-    function DossierService() {
+    DossierService.$inject = ['DossierLists'];
+    function DossierService(DossierLists) {
         // Define the DossierService function
         function DossierService() {}
 
@@ -170,7 +180,7 @@
         /**
          * Determines if any of the appendices have a data error
          */
-        DossierService.prototype.isAppendixesComplete = function () {
+        /* DossierService.prototype.isAppendixesComplete = function () {
             var dossierModel = this.getDossierInfo();
             //error check the model
             if (!dossierModel || !dossierModel.drugProduct || !dosssierModel.drugProduct.appendixFour) {
@@ -227,7 +237,7 @@
                 }
             }
             return false;
-        }
+         }*/
         // Return a reference to the function
 
         DossierService.prototype.getMissingAppendix4=function(dossierModel){
@@ -249,7 +259,7 @@
             results.missing = missingAppendices;
             results.extra = extraAppendices;
             return results;
-        }
+        };
 
 
         /**
@@ -259,7 +269,40 @@
         DossierService.prototype.getDefaultDiseaseDisorderList = function () {
             return getDefaultDiseaseDisorderList();
 
-        }
+        };
+
+        DossierService.prototype.getDefaultNervousSystem = function () {
+            return _createEmptyNervousSystemModel();
+
+        };
+        DossierService.prototype.getDefaultImmuneSystem = function () {
+            return _createEmptyImmuneSystemModel();
+
+        };
+        DossierService.prototype.getDefaultDigestiveSystem = function () {
+            return _createEmptyDigestiveSystemModel();
+
+        };
+        DossierService.prototype.getDefaultMuscleSystem = function () {
+            return _createEmptyMuscleSystemModel();
+
+        };
+        DossierService.prototype.getDefaultOtherSystem = function () {
+            return _createEmptyOtherSystemModel();
+
+        };
+        DossierService.prototype.getDefaultReproductiveSystem = function () {
+            return _createEmptyReproductiveSystemModel();
+
+        };
+        DossierService.prototype.getDefaultCardioSystem = function () {
+            return _createEmptyCardioSystemModel();
+
+        };
+        DossierService.prototype.getDefaultSkinSystem = function () {
+            return _createEmptySkinSystemModel();
+
+        };
 
         /**
          * Gets an empty Schedule A Object
@@ -267,11 +310,11 @@
          */
         DossierService.prototype.getDefaultScheduleA = function () {
             return (getDefaultSchedA());
-        }
+        };
 
         DossierService.prototype.getRootTagName = function () {
             return ("DOSSIER_ENROL");
-        }
+        };
 
 
         return DossierService;
@@ -424,7 +467,6 @@
 
 
 
-
     function getTherapeuticList(input) {
         var list = [];
 
@@ -434,17 +476,10 @@
                     "id" : "" + i+1,
                     "name" : input[i]
                 };
-
-
-
                 list.push(item);
             }
         }
-
-
         return list;
-
-
     }
 
 
@@ -510,7 +545,8 @@
                     var tissuesList = tissues.tissues_fluids_record;
                     ing.tissuesFluidsOrigin = {}
                     ing.tissuesFluidsOrigin.tissuesList = [];
-                    if (!(tissuesList instanceof Array)) {
+
+                    /*  if (!(tissuesList instanceof Array)) {
                         //make it an array, case there is only one
                         tissuesList = [tissuesList]
                     }
@@ -522,7 +558,7 @@
                         rec.systemDetails = tissuesList[tissCount].system_details;
                         rec.otherDetails = tissuesList[tissCount].system_other_details;
                         ing.tissuesFluidsOrigin.tissuesList.push(rec);
-                    }
+                     }*/
                 }
                 if (srcAnimal) {
                 ing.sourceAnimalDetails =createEmptyAnimalSourceModel()
@@ -817,7 +853,19 @@
             ing.human_sourced = info[i].humanSourced === true ? 'Y' : 'N';
             if (info[i].tissuesFluidsOrigin) {
                 ing.tissues_fluids_section = {};
-                ing.tissues_fluids_section.tissues_fluids_record = [];
+
+                for (var b = 0; b < info[i].tissuesFluidsOrigin.tissuesList.length; b++) {
+                    var fluidsRec = {};
+                    switch (info[i].tissuesFluidsOrigin.tissuesList[b].systemType) {
+                        case 'NERVOUS_SYSTEM':
+                            ing.tissues_fluids_section.nervous_sytem = _nervousSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
+                            break;
+
+                    }
+
+                }
+
+                /* ing.tissues_fluids_section.tissues_fluids_record = [];
                 for (var b = 0; b < info[i].tissuesFluidsOrigin.tissuesList.length; b++) {
                     var oneRec = info[i].tissuesFluidsOrigin.tissuesList[b];
                     var tissueRecord = {tf_id: "", system_type: "", system_details: "", system_other_details: ""};
@@ -826,7 +874,7 @@
                     tissueRecord.system_details = oneRec.systemDetails;
                     tissueRecord.system_other_details = oneRec.otherDetails;
                     ing.tissues_fluids_section.tissues_fluids_record.push(tissueRecord);
-                }
+                 }*/
 
             }
 
@@ -1558,5 +1606,274 @@
         return record;
     }
 
+    function _createEmptyNervousSystemModel() {
+        var record = {};
+        record.brain = false;
+        record.brainStem = false;
+        record.cerebellum = false;
+        record.ceroFluid = false;
+        record.dorsalRoot = false;
+        record.duraMater = false;
+        record.hypothalmus = false;
+        record.retina = false;
+        record.spinalCord = false;
+        record.trigeminal = false;
+        record.otherNervous = false;
+        record.otherDetails = "";
+        return record;
+    }
 
+    function _createEmptyDigestiveSystemModel() {
+        var record = {};
+        record.appendix = false;
+        record.bile = false;
+        record.distalIleum = false;
+        record.largeIntestine = false;
+        record.salivaSalivary = false;
+        record.smallIntestine = false;
+        record.stomach = false;
+        record.otherDigestive = false;
+        record.otherDetails = "";
+        return record;
+    }
+
+    function _createEmptyImmuneSystemModel() {
+        var record = {};
+        record.lymphNodes = false;
+        record.spleen = false;
+        record.thymus = false;
+        record.tonsils = false;
+        record.otherImmune = false;
+        record.otherDetails = "";
+
+        return record;
+    }
+
+    function _createEmptyMuscleSystemModel() {
+        var record = {};
+        record.abdomen = false;
+        record.skull = false;
+        record.bones = false;
+        record.collagen = false;
+        record.tendonsLigaments = false;
+        record.vertebralColumn = false;
+        record.muscle = false;
+        record.otherMuscle = false;
+        record.otherDetails = "";
+        return record;
+    }
+
+    function _createEmptyReproductiveSystemModel() {
+        var record = {};
+        record.milkProducts = false;
+        record.kidney = false;
+        record.colostrum = false;
+        record.mammaryGlands = false;
+        record.ovaries = false;
+        record.placenta = false;
+        record.placentalFluid = false;
+        record.semen = false;
+        record.testes = false;
+        record.urine = false;
+        record.otherReproductive = false;
+        record.otherDetails = "";
+
+        return record;
+    }
+
+    function _createEmptySkinSystemModel() {
+        var record = {};
+        record.adrenalGland = false;
+        record.hairHoovesFeathers = false;
+        record.liver = false;
+        record.pancreas = false;
+        record.pituitary = false;
+        record.skinHides = false;
+        record.thyroidParathyroid = false;
+        record.otherSkin = false;
+        record.otherDetails = "";
+        return record;
+    }
+
+    function _createEmptyOtherSystemModel() {
+        var record = {};
+        record.adipose = false;
+        record.ascites = false;
+        record.antlerVelvet = false;
+        record.serum = false;
+        record.wholeBlood = false;
+        record.plasma = false;
+        record.embryonicTissue = false;
+        record.fetalTissue = false;
+        record.boneMarrow = false;
+        record.eyesCornea = false;
+        record.gallBladder = false;
+        record.otherFluids = false;
+        record.otherDetails = "";
+        return record;
+    }
+
+    function _createEmptyCardioSystemModel() {
+        var record = {};
+        record.heartPericardium = false;
+        record.lung = false;
+        record.nasalFluid = false;
+        record.trachea = false;
+        record.otherCardio = false;
+        record.otherDetails = "";
+        return record;
+    }
+
+    function _createEmptyNervousSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.brain = noValue;
+        record.brain_stem = noValue;
+        record.cerebellum = noValue;
+        record.cerebrospinal_fluid = noValue;
+        record.dorsal_root_ganglia = noValue;
+        record.dura_mater = noValue;
+        record.hypothalmus = noValue;
+        record.retina_optic = noValue;
+        record.spinal_cord = noValue;
+        record.trigerminal_ganglia = noValue;
+        record.other_nervous = noValue;
+        record.other_nervous_details = "";
+        return record;
+    }
+
+    function _createEmptyDigestiveSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.appendix = noValue;
+        record.bile = noValue;
+        record.distal_ileum = noValue;
+        record.large_intestine = noValue;
+        record.small_intestine = noValue;
+        record.stomach = noValue;
+        record.other_digestive = noValue;
+        record.other_digestive_details = "";
+        return record;
+    }
+
+    function _createEmptyMuscleSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.abdomen = noValue;
+        record.skull = noValue;
+        record.bones = noValue;
+        record.collagen = noValue;
+        record.tendons_ligaments = noValue;
+        record.vertebral_column = noValue;
+        record.muscle = noValue;
+        record.other_musculo_skeletal = noValue;
+        record.other_musculo_skeletal_details = "";
+        return record;
+    }
+
+    function _createEmptyReproductiveSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.milk_products = noValue;
+        record.kidney = noValue;
+        record.colostrum = noValue;
+        record.mammary_glands = noValue;
+        record.ovaries = noValue;
+        record.placenta = noValue;
+        record.placental_fluid = noValue;
+        record.semen = noValue;
+        record.urine = noValue;
+        record.other_reproductive = noValue;
+        record.other_reproductive_details = "";
+        return record;
+    }
+
+    function _createEmptyCardioSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.heart_pericardium = noValue;
+        record.lung = noValue;
+        record.nasal_fluid = noValue;
+        record.trachea = noValue;
+        record.other_cardio_respiratory = noValue;
+        record.other_cardio_respiratory_details = "";
+        return record;
+    }
+
+    function _createEmptyImmuneSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.lymph_nodes = noValue;
+        record.spleen = noValue;
+        record.thymus = noValue;
+        record.tonsils = noValue;
+        record.other_immune = noValue;
+        record.other_immune_details = "";
+        return record;
+    }
+
+    function _createEmptySkinSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.adrenal_gland = noValue;
+        record.hair_hooves_feathers = noValue;
+        record.liver = noValue;
+        record.pancreas = noValue;
+        record.pituitary = noValue;
+        record.skin_hides = noValue;
+        record.thyroid_parathyroid = noValue;
+        record.other_skin_glandular = noValue;
+        record.other_skin_glandular_details = "";
+        return record;
+    }
+
+    function _createEmptySkinSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.abdomen = noValue;
+        record.skull = noValue;
+        record.bones = noValue;
+        record.collagen = noValue;
+        record.tendons_ligaments = noValue;
+        record.vertebral_column = noValue;
+        record.other_musculo_skeletal = noValue;
+        record.other_musculo_skeletal_details = "";
+        return record;
+    }
+
+    function _createEmptySkinSystemforOutput() {
+        var record = {};
+        var noValue = 'N';
+        record.adipose = noValue;
+        record.ascites = noValue;
+        record.antler_velvet = noValue;
+        record.serum = noValue;
+        record.whole_blood = noValue;
+        record.plasma = noValue;
+        record.embryonic_tissue = noValue;
+        record.fetal_tissue = noValue;
+        record.bone_marrow = noValue;
+        record.eyes_cornea = noValue;
+        record.gall_bladder = noValue;
+        record.other_fluids_tissues = noValue;
+        record.other_fluids_tissues_details = "";
+        return record;
+    }
+
+    function _nervousSystemToOutput(jsonObj) {
+        var record = _createEmptyNervousSystemforOutput();
+        record.brain = jsonObj.brain;
+        record.brain_stem = jsonObj.brainStem;
+        record.cerebellum = jsonObj.cerebellum;
+        record.cerebrospinal_fluid = jsonObj.ceroFluid;
+        record.dorsal_root_ganglia = jsonObj.dorsalRoot;
+        record.dura_mater = jsonObj.duraMater;
+        record.hypothalmus = jsonObj.hypothalmus;
+        record.retina_optic = jsonObj.retina;
+        record.spinal_cord = jsonObj.spinalCord;
+        record.trigerminal_ganglia = jsonObj.trigeminal;
+        record.other_nervous = jsonObj.otherNervous;
+        record.other_nervous_details = jsonObj.otherNervous;
+        return record;
+    }
 })();

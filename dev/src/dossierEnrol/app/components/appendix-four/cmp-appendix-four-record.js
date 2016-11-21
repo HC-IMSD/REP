@@ -26,7 +26,8 @@
                 onDelete: '&',
                 onCancel: '&',
                 deleteBtn:'<',
-                recordChanged:'&'
+                recordChanged: '&',
+                service: '<'
             }
 
         });

@@ -29,6 +29,7 @@
     function getService() {
         var OTHER = "OTHER";
         var YES = 'Y';
+
         var service = {
             getDosageFormList: getDosageFormsArray,
             getDosageOther: getDoseOtherValue,
@@ -48,6 +49,14 @@
             getOtherSystem: otherSystemArray,
             getMuscleSystem: muscleSystemArray,
             getCardioSystem: cardioSystemArray,
+            getDigestiveSystemValue: _getDigestiveSystemValue,
+            getNervousSystemValue: _getNervousSystemValue,
+            getReproductiveSystemValue: _getReproductiveSystemValue,
+            getCardioSystemValue: _getCardioSystemValue,
+            getImmuneSystemValue: _getImmuneSystemValue,
+            getSkinSystemValue: _getSkinSystemValue,
+            getMuscleSystemValue: _getMuscleSystemValue,
+            getOtherTissuesSystemValue: _getOtherTissuesSystemValue,
             getYesValue: getYesValue
         };
         return service;
@@ -204,16 +213,57 @@
         function tissuesSystemArray() {
 
             return ([
-                "DIGESTIVE_SYSTEM",
-                "NERVOUS_SYSTEM",
-                "REPRODUCT_SYSTEM",
-                "CARDIO_SYSTEM",
-                "IMMUNE_SYSTEM",
-                "SKINGLAND_SYSTEM",
-                "MUSCULO_SYSTEM",
-                "OTHERTISSUE_SYSTEM"
+                _getDigestiveSystemValue(),
+                _getNervousSystemValue(),
+                _getReproductiveSystemValue(),
+                _getCardioSystemValue(),
+                _getImmuneSystemValue(),
+                _getSkinSystemValue(),
+                _getMuscleSystemValue(),
+                _getOtherTissuesSystemValue()
             ]);
         }
+
+        function _getDigestiveSystemValue() {
+
+            return "DIGESTIVE_SYSTEM"
+        }
+
+        function _getNervousSystemValue() {
+
+            return "NERVOUS_SYSTEM"
+        }
+
+        function _getReproductiveSystemValue() {
+
+            return "REPRODUCT_SYSTEM"
+        }
+
+        function _getCardioSystemValue() {
+
+            return "CARDIO_SYSTEM"
+        }
+
+        function _getImmuneSystemValue() {
+
+            return "IMMUNE_SYSTEM"
+        }
+
+        function _getSkinSystemValue() {
+
+            return "SKINGLAND_SYSTEM"
+        }
+
+        function _getMuscleSystemValue() {
+
+            return "MUSCULO_SYSTEM"
+        }
+
+        function _getOtherTissuesSystemValue() {
+
+            return "OTHERTISSUE_SYSTEM"
+        }
+
 
         /**
          * Nervous system Tissues or fluids LOV

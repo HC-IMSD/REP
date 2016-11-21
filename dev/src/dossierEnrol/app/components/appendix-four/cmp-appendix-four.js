@@ -20,7 +20,8 @@
             bindings: {
 
                 ingredients : '<',
-                recordChanged:'&'
+                recordChanged: '&',
+                service: '<'
             }
         });
 

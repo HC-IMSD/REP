@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('nervousModule', [])
+        .module('otherTissuesModule', [])
 })();
 
 
@@ -14,22 +14,23 @@
     'use strict';
 
     angular
-        .module('nervousModule')
-        .component('cmpNervousSystem', {
-            templateUrl: './components/appendix-four/tpl-nervous.html',
+        .module('otherTissuesModule')
+        .component('cmpOtherTissuesSystem', {
+            templateUrl: './components/appendix-four/tpl-other-tissue.html',
             controllerAs: 'sysCtrl',
-            controller: nervousSystemController,
+            controller: otherTissueSystemController,
             bindings: {
                 record: '<',
                 otherUpdate: '&'
             }
 
         });
-    function nervousSystemController() {
+    function otherTissueSystemController() {
         var vm = this;
-        vm.model = {}
+        vm.model = {};
+        vm.isSelected = "";
         vm.$onInit = function () {
-            vm.isSelected = "";
+
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -42,7 +43,7 @@
             for (var i = 0; i < keys.length; i++) {
                 var val = vm.model[keys[i]];
                 if (val) {
-                    if (keys[i] === 'otherNervous') {
+                    if (keys[i] === 'otherFluids') {
                         if (!vm.model.otherDetails) {
                             vm.isSelected = ""
                             return
@@ -59,7 +60,7 @@
         };
         vm.otherChanged = function () {
             var state = false;
-            if (vm.model.otherNervous) {
+            if (vm.model.otherFluids) {
                 state = true;
             } else {
                 state = false;

@@ -59,6 +59,7 @@
 
             <section class="section">
                 <cmp-tissues-fluids-list ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"
+                                         service="ap4RecCtrl.service"
                                          records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList"></cmp-tissues-fluids-list>
                 <!--<cmp-tissues-fluids-origin
                         ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"

@@ -21,7 +21,7 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
-                showErrors: '&'
+                showErrors: '&',
             }
         });
 
@@ -42,6 +42,8 @@
             if (changes.record) {
                 vm.model=changes.record.currentValue;
             }
+
+
         };
 
         vm.deleteRecord = function()  {

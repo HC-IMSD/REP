@@ -18,7 +18,8 @@
             templateUrl: './components/appendix-four/tpl-tissuesFluids-list.html',
             bindings: {
                 records: '<',
-                showErrors: '&'
+                showErrors: '&',
+                service: '<'
             },
             controller: tissuesFluidsListController,
             controllerAs: 'tissuesListSrcCtrl'
@@ -32,6 +33,7 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
+        //vm.dosService="";
         vm.oneRecord="";
         //define empty model
         vm.model={};
@@ -40,17 +42,17 @@
             {
                 label: "SYSTEM_TYPE",
                 binding: "systemType",
-                width: "25"
+                width: "20"
             },
             {
                 label: "SYSTEM_DETAILS",
-                binding: "systemDetails",
-                width: "30"
+                binding: "detailsConcat",
+                width: "40"
             },
             {
                 label: "SYSTEM_OTHER",
                 binding: "otherDetails",
-                width: "35"
+                width: "40"
             }
         ]
 
@@ -67,6 +69,9 @@
             if (changes.records) {
                 vm.model.tissuesFluidsList=changes.records.currentValue;
             }
+            /* if(changes.service){
+             vm.dosService=changes.service.currentValue;
+             }*/
         }
 
 
@@ -75,7 +80,7 @@
         }
         vm.addNew = function() {
             var maxID = getMaxID();
-            var item = {"id": maxID + 1, "systemType": "", systemDetails: "", otherDetails: ""}; //TODO call a service for this
+            var item = {"id": maxID + 1, "systemType": "", detailsConcat: "", system: {}, otherDetails: ""}; //TODO call a service for this
 
             vm.model.tissuesFluidsList.push(item);
             vm.resetToCollapsed= !vm.resetToCollapsed;

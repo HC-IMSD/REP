@@ -22,7 +22,7 @@
                                          select-record="tissuesListSrcCtrl.selectRecord"
                                          disable-selection="!tissuesListSrcCtrl.isDetailValid">
 
-                        <cmp-tissues-fluids-record record="$parent.record"
+                        <cmp-tissues-fluids-record record="$parent.record" service="tissuesListSrcCtrl.service"
                                                    show-errors="tissuesListSrcCtrl.showErrors()"
                                                    on-delete="tissuesListSrcCtrl.deleteRecord(id)"></cmp-tissues-fluids-record>
 
@@ -40,5 +40,6 @@
                 </div>
             </section>
         </div>
+        <!-- <pre>{{tissuesListSrcCtrl.model.tissuesFluidsList}}</pre>-->
     </div>
 </ng-form>

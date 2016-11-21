@@ -117,6 +117,13 @@
   "TISSUES_FLUIDS_SRCS": "Tissues or Fluids sources",
   "TISSUE_FLUID": "Tissue or Fluid",
   "ANIMAL_SRC": "Animal Source",
-  "EXTRA_APPENDIX": "Human / Animal Sourced Records not Referenced in any Formulation"
-
+  "EXTRA_APPENDIX": "Human / Animal Sourced Records not Referenced in any Formulation",
+  "CARDIO_LEGEND": "Select one or more Cardio-Respiratory System selections",
+  "NERVOUS_LEGEND": "Select one or more Nervous System selections",
+  "OTHER_LEGEND": "Select one or more Other System selections",
+  "IMMUNE_LEGEND": "Select one or more Immune System selections",
+  "DIGESTIVE_LEGEND": "Select one or more Digestive System selections",
+  "REPRODUCTIVE_LEGEND": "Select one or more Reproductive System selections",
+  "MUSCLE_LEGEND": "Select one or more Musculo-Skeletal System selections",
+  "SKIN_LEGEND": "Select one or more Skin and Glandular System selections"
 }

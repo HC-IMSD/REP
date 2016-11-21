@@ -27,7 +27,8 @@
         'theraClass',
         'animalSourcedSection',
         'tissuesFluidsList',
-        'translations'
+        'translations',
+        'dossierService'
     ];
 
     angular
@@ -46,7 +47,8 @@
                 dossierRecordInput: '<',
                 onUpdateDossier: '&',
                 onDeleteDossier: '&',
-                formType: '@'
+                formType: '@',
+                service: '<'
                 // selectedCountryChanged: '&'
             }
         });
@@ -99,6 +101,7 @@
                     self.saveXMLLabel = "SAVE_DRAFT"
                 }
             }
+
         };
 
         self.appendixMissingError = function () {

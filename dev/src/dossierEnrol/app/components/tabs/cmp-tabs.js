@@ -18,7 +18,8 @@
         bindings: {
             formulationList : '<',
             appendix4List : '<',
-            recordChanged:'&'
+            recordChanged: '&',
+            service: '<'
         }
     });
 
@@ -48,6 +49,13 @@
 
             //console.log(self.tabs[0].form.$invalid)
         };
+        self.$onChanges = function () {
+            /*  if(changes.service){
+
+             self.dosService=changes.service.currentValue;
+             }*/
+
+        }
 
         self.selectTab = function (idx) {
 

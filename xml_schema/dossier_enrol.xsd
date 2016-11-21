@@ -89,11 +89,11 @@
 	<hpfb:element name="is_human_animal_src" type="required_yes_no_content"/>
 	<hpfb:element name="animal_sourced" type="required_yes_no_content"/>
 	<hpfb:element name="human_sourced" type="required_yes_no_content"/>
-	<hpfb:element name="tissues_fluids_section" type="tissues_fluid_content"/>
+	<hpfb:element name="tissues_fluids_section" type="tissues_fluids_content"/>
 	<hpfb:element name="animal_sourced_section" type="animal_sourced_content"/>
 	<!-- tissues fluids-->
 	<!-- Start nervous system-->
-	<hpfb:element name="brain_system" type="nervous_system_content"/>
+	<hpfb:element name="nervous_system" type="nervous_system_content"/>
 	<hpfb:element name="brain" type="required_yes_no_content"/>
 	<hpfb:element name="brain_stem" type="required_yes_no_content"/>
 	<hpfb:element name="cerebellum" type="required_yes_no_content"/>
@@ -479,6 +479,22 @@
 			<hpfb:element ref="in_final_container"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
+
+	<hpfb:complexType name="tissues_fluids_content">
+		<hpfb:sequence>
+			<hpfb:element ref="nervous_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="digestive_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="musclo_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="reproductive_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="cardio_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="immune_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="skin_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="musclo_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="other_system" minOccurs="0" maxOccurs="1"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
 	<hpfb:complexType name="nervous_system_content">
 		<hpfb:sequence>
 			<hpfb:element ref="brain_system"/>
@@ -537,7 +553,6 @@
 	</hpfb:complexType>
 	<hpfb:complexType name="skin_system_content">
 		<hpfb:sequence>
-			<hpfb:element ref="skin_system"/>
 			<hpfb:element ref="adrenal_gland"/>
 			<hpfb:element ref="hair_hooves_feathers"/>
 			<hpfb:element ref="liver"/>
