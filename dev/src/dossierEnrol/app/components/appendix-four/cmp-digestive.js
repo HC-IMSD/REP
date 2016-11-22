@@ -21,7 +21,8 @@
             controller: digestiveSystemController,
             bindings: {
                 record: '<',
-                otherUpdate: '&'
+                otherUpdate: '&',
+                concatUpdate: '&'
             }
         });
     function digestiveSystemController() {
@@ -38,6 +39,12 @@
                 vm.updateErrorState();
             }
         };
+
+        vm.detailsChanged = function (alias, value) {
+
+            vm.concatUpdate({'alias': alias, 'value': value});
+            vm.updateErrorState();
+        }
 
         vm.updateErrorState = function () {
             var keys = Object.keys(vm.model);

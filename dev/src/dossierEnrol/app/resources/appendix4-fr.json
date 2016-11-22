@@ -113,6 +113,13 @@
   "TISSUES_FLUIDS_ADD": "fr_Add Tissues or Fluids",
   "TISSUES_FLUIDS_SRCS": "fr_Tissues or Fluids sources",
   "ANIMAL_SRC": "fr_Animal Source",
-  "EXTRA_APPENDIX": "fr_Human / Animal Sourced Records not Referenced in any Formulation"
-
+  "EXTRA_APPENDIX": "fr_Human / Animal Sourced Records not Referenced in any Formulation",
+  "CARDIO_DETAILS": "fr_Other cardio-respiratory system  details",
+  "DIGESTIVE_DETAILS": "fr_Other digestive system  details",
+  "IMMUNE_DETAILS": "fr_Other immune system  details",
+  "MUSCLE_DETAILS": "fr_Other musculo-akeletal system  details",
+  "NERVOUS_DETAILS": "fr_Other nervous system  details",
+  "OTHERTISS_DETAILS": "fr_Other tissue details",
+  "REPRODUCTIVE_DETAILS": "Other reproductive system details",
+  "SKIN_DETAILS": "fr_Other skin and glandular system details"
 }

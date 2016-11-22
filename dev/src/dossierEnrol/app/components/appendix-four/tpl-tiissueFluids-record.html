@@ -1,9 +1,9 @@
 <ng-form name="tissuesSrcCtrl.tissuesRecForm">
     <div class="container-fluid">
-        <!--  <fieldset>
+        <fieldset>
               <legend>
                   {{'TISSUES_FLUIDS_LBL' | translate}}&nbsp;{{tissuesSrcCtrl.model.id}}
-              </legend>-->
+              </legend>
         <div class="row">
             <div class="col-md-3 form-group"
                  ng-class="{'has-error':tissuesSrcCtrl.tissuesRecForm.systemType.$invalid}">
@@ -27,34 +27,42 @@
         </div>
         <div>
             <cmp-nervous-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" ;
                                 ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getNervousSystemValue()">
             </cmp-nervous-system>
 
             <cmp-digestive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                                  concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                                   ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getDigestiveSystemValue()">
             </cmp-digestive-system>
 
             <cmp-cardio-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                                ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getCardioSystemValue()">
             </cmp-cardio-system>
 
             <cmp-immune-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                                ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getImmuneSystemValue()">
             </cmp-immune-system>
 
             <cmp-muscle-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                                ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getMuscleSystemValue()">
             </cmp-muscle-system>
 
             <cmp-other-tissues-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                                      concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                                       ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getOtherTissuesSystemValue()">
             </cmp-other-tissues-system>
 
             <cmp-reproductive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                                     concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                                      ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getReproductiveSystemValue()">
             </cmp-reproductive-system>
 
             <cmp-skin-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
+                             concat-update="tissuesSrcCtrl.updateConcat(alias,value)"
                              ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getSkinSystemValue()">
             </cmp-skin-system>
         </div>
@@ -65,7 +73,7 @@
                 </button>
             </div>
         </div>
-        <!--   </fieldset>-->
+        </fieldset>
     </div>
     <!-- <pre>{{tissuesSrcCtrl.model|json}} </pre>
      <pre>{{tissuesSrcCtrl.tissuesRecForm.$invalid}} </pre>-->

@@ -17,7 +17,8 @@
                     <div class="checkbox">
                         <label for="brain_{{$id}}">
                             <input type="checkbox" name="brain" id="brain_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.brain"/>
+                                   ng-change="sysCtrl.detailsChanged('BRAIN',sysCtrl.model.brain)"
+                                   ng-model="sysCtrl.model.brain"/>
                             {{'BRAIN'|translate}}
                         </label>
 
@@ -27,7 +28,8 @@
                     <div class="checkbox">
                         <label for="brainStem_{{$id}}">
                             <input type="checkbox" name="brainStem" id="brainStem_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.brainStem"/>
+                                   ng-change="sysCtrl.detailsChanged('BRAINSTEM',sysCtrl.model.brainStem)"
+                                   ng-model="sysCtrl.model.brainStem"/>
                             {{'BRAINSTEM'|translate}}
                         </label>
                     </div>
@@ -36,7 +38,8 @@
                     <div class="checkbox">
                         <label for="cerebellum_{{$id}}">
                             <input type="checkbox" name="cerebellum" id="cerebellum_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.cerebellum"/>
+                                   ng-change="sysCtrl.detailsChanged('CEREBELLUM',sysCtrl.model.cerebellum)"
+                                   ng-model="sysCtrl.model.cerebellum"/>
                             {{'CEREBELLUM'|translate}}
                         </label>
                     </div>
@@ -45,7 +48,8 @@
                     <div class="checkbox">
                         <label for="cerofluid_{{$id}}">
                             <input type="checkbox" name="ceroFluid" id="cerofluid_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.ceroFluid"/>
+                                   ng-change="sysCtrl.detailsChanged('CEROFLUID',sysCtrl.model.ceroFluid)"
+                                   ng-model="sysCtrl.model.ceroFluid"/>
                             {{'CEROFLUID'|translate}}
                         </label>
                     </div>
@@ -56,7 +60,8 @@
                     <div class="checkbox">
                         <label for="dorsal_{{$id}}">
                             <input type="checkbox" name="dorsal" id="dorsal_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.dorsalRoot"/>
+                                   ng-change="sysCtrl.detailsChanged('DORSALROOT',sysCtrl.model.dorsalRoot)"
+                                   ng-model="sysCtrl.model.dorsalRoot"/>
                             {{'DORSALROOT'|translate}}
                         </label>
                     </div>
@@ -65,7 +70,8 @@
                     <div class="checkbox">
                         <label for="duramater_{{$id}}">
                             <input type="checkbox" name="duramater" id="duramater_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState())" ng-model="sysCtrl.model.duraMater"/>
+                                   ng-change="sysCtrl.detailsChanged('DURAMATER',sysCtrl.model.duraMater)"
+                                   ng-model="sysCtrl.model.duraMater"/>
                             {{'DURAMATER'|translate}}
                         </label>
                     </div>
@@ -74,7 +80,8 @@
                     <div class="checkbox">
                         <label for="hypothalmus_{{$id}}">
                             <input type="checkbox" name="hypothalmus" id="hypothalmus_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.hypothalmus"/>
+                                   ng-change="sysCtrl.detailsChanged('HYPOTHALAMUS',sysCtrl.model.hypothalmus)"
+                                   ng-model="sysCtrl.model.hypothalmus"/>
                             {{'HYPOTHALAMUS'|translate}}
                         </label>
                     </div>
@@ -83,7 +90,8 @@
                     <div class="checkbox">
                         <label for="retina_{{$id}}">
                             <input type="checkbox" name="retina" id="retina_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.retina"/>
+                                   ng-change="sysCtrl.detailsChanged('RETINA',sysCtrl.model.retina)"
+                                   ng-model="sysCtrl.model.retina"/>
                             {{'RETINA'|translate}}
                         </label>
                     </div>
@@ -94,7 +102,8 @@
                     <div class="checkbox">
                         <label for="spinal_{{$id}}">
                             <input type="checkbox" name="dorsal" id="spinal_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.spinalCord"/>
+                                   ng-change="sysCtrl.detailsChanged('SPINALCORD',sysCtrl.model.spinalCord)"
+                                   ng-model="sysCtrl.model.spinalCord"/>
                             {{'SPINALCORD'|translate}}
                         </label>
                     </div>
@@ -103,7 +112,8 @@
                     <div class="checkbox">
                         <label for="trigeminal_{{$id}}">
                             <input type="checkbox" name="trigeminal" id="trigeminal_{{$id}}"
-                                   ng-change="sysCtrl.updateErrorState()" ng-model="sysCtrl.model.trigeminal"/>
+                                   ng-change="sysCtrl.detailsChanged('TRIGEMINAL',sysCtrl.model.trigeminal)"
+                                   ng-model="sysCtrl.model.trigeminal"/>
                             {{'TRIGEMINAL'|translate}}
                         </label>
                     </div>

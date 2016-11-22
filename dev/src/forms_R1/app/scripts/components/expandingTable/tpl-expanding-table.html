@@ -19,7 +19,8 @@
                                   ng-class='{open:expandTblCtrl.getExpandedState($index)}'></span>
             </td>
             <td ng-repeat="def in expandTblCtrl.columnDefinitions" width="{{def.width}}%">
-                {{record[def.binding]|translate}}
+                <span ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
+                <span ng-if="def.isHtml" ng-bind-html="record[def.binding]"></span>
             </td>
             <td  ng-if="!expandTblCtrl.disableErrorCol" width="5%">
                {{expandTblCtrl.formInError(expandTblCtrl['transcludeForm'+$index])|translate}}

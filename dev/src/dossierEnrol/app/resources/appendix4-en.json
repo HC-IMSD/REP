@@ -125,5 +125,13 @@
   "DIGESTIVE_LEGEND": "Select one or more Digestive System selections",
   "REPRODUCTIVE_LEGEND": "Select one or more Reproductive System selections",
   "MUSCLE_LEGEND": "Select one or more Musculo-Skeletal System selections",
-  "SKIN_LEGEND": "Select one or more Skin and Glandular System selections"
+  "SKIN_LEGEND": "Select one or more Skin and Glandular System selections",
+  "CARDIO_DETAILS": "Other cardio-respiratory system  details",
+  "DIGESTIVE_DETAILS": "Other digestive system  details",
+  "IMMUNE_DETAILS": "Other immune system  details",
+  "MUSCLE_DETAILS": "Other musculo-akeletal system  details",
+  "NERVOUS_DETAILS": "Other nervous system  details",
+  "OTHERTISS_DETAILS": "Other tissue details",
+  "REPRODUCTIVE_DETAILS": "Other reproductive system details",
+  "SKIN_DETAILS": "Other skin and glandular system details"
 }

@@ -47,7 +47,8 @@
             {
                 label: "SYSTEM_DETAILS",
                 binding: "detailsConcat",
-                width: "40"
+                width: "40",
+                isHtml: true
             },
             {
                 label: "SYSTEM_OTHER",

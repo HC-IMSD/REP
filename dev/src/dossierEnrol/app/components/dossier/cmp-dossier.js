@@ -28,7 +28,8 @@
         'animalSourcedSection',
         'tissuesFluidsList',
         'translations',
-        'dossierService'
+        'dossierService',
+        'ngSanitize'
     ];
 
     angular

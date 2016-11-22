@@ -36,9 +36,9 @@
             }
         });
 
-    tissuesFluidsController.$inject = ['DossierLists'];
+    tissuesFluidsController.$inject = ['DossierLists', '$translate', '$filter'];
 
-    function tissuesFluidsController(DossierLists, DossierService) {
+    function tissuesFluidsController(DossierLists, $translate, $filter) {
         var vm = this;
         vm.systemList = DossierLists.getTissuesSystem();
         vm.fluidsLists = DossierLists;
@@ -86,6 +86,7 @@
         };
         vm.systemChanged = function () {
             vm.model.system = {}; //clear out old
+            vm.model.detailsConcat = "";
             switch (vm.model.systemType) {
                 case DossierLists.getNervousSystemValue():
                     //get model
@@ -123,6 +124,7 @@
                 default:
                     vm.model.system = {};
                     vm.otherDetails = "";
+                    vm.model.detailsConcat = "";
                     break;
             }
             vm.otherChanged(); //update otherState, should be empty
@@ -134,71 +136,107 @@
             vm.model.otherDetails = vm.model.system.otherDetails;
 
         }
+        vm.updateConcat = function (alias, toAdd) {
+            var currentLang = $translate.proposedLanguage() || $translate.use();
+            var translateText = $translate.instant(alias, "", '', currentLang);
+            var records = vm.model.detailsConcat.split("<br>");
+            var index = -1;
+
+            for (var i = 0; i < records.length; i++) {
+                console.log(records[i])
+                if (records[i] == translateText) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index === -1 && toAdd) {
+                if (!records[0]) {
+                    records[0] = translateText
+                } else {
+                    records.push(translateText);
+                }
+                records = $filter('orderBy')(records);
+                vm.model.detailsConcat = "";
+                vm.model.detailsConcat = records[0];
+                for (var s = 1; s < records.length; s++) {
+                    vm.model.detailsConcat = vm.model.detailsConcat + "<br>" + records[s];
+                }
+
+            } else if (!toAdd && index !== -1) {
+                var newConcat = "";
+                for (var j = 0; j < records.length; j++) {
+                    if (j !== index) {
+                        newConcat = newConcat + records[j] + "<br>"
+                    }
+                }
+                vm.model.detailsConcat = newConcat.substring(0, newConcat.length - 4);
+            }
+        }
 
         /**
          * Sets the state of the other field when system details is other
          * @returns {boolean}
          */
         /*  vm.isOther = function () {
-            var val = false;
-            switch (vm.model.systemDetails) {
-                case "CARDIO_OTHER":
-                case "REPROD_OTHER":
-                case "DIGESTIVE_OTHER":
-                case "NERVOUS_OTHER":
-                case "IMMUNE_OTHER":
-                case "MUSCLE_OTHER":
-                case "FLUIDS_OTHER":
-                case "SKIN_OTHER":
-                    val = true;
-                    break;
-                default:
-                    vm.model.otherDetails = "";
-                    val = false;
-                    break;
-            }
-            return val;
+         var val = false;
+         switch (vm.model.systemDetails) {
+         case "CARDIO_OTHER":
+         case "REPROD_OTHER":
+         case "DIGESTIVE_OTHER":
+         case "NERVOUS_OTHER":
+         case "IMMUNE_OTHER":
+         case "MUSCLE_OTHER":
+         case "FLUIDS_OTHER":
+         case "SKIN_OTHER":
+         val = true;
+         break;
+         default:
+         vm.model.otherDetails = "";
+         val = false;
+         break;
+         }
+         return val;
          };*/
 
         /*  function setSelectedList(value) {
          if (!value) {
          vm.selectedSystemList = [];
-            }
+         }
          switch (value) {
 
-                case 'NERVOUS_SYSTEM':
+         case 'NERVOUS_SYSTEM':
          vm.selectedSystemList = vm.nervousList;
-                    break;
-                case 'DIGESTIVE_SYSTEM':
+         break;
+         case 'DIGESTIVE_SYSTEM':
          vm.selectedSystemList = vm.digestList;
-                    break;
-                case 'REPRODUCT_SYSTEM':
+         break;
+         case 'REPRODUCT_SYSTEM':
          vm.selectedSystemList = vm.reprodList;
-                    break;
-                case 'CARDIO_SYSTEM':
+         break;
+         case 'CARDIO_SYSTEM':
          vm.selectedSystemList = vm.cardioList;
-                    break;
-                case 'IMMUNE_SYSTEM':
+         break;
+         case 'IMMUNE_SYSTEM':
          vm.selectedSystemList = vm.immuneList;
-                    break;
-                case 'SKINGLAND_SYSTEM':
+         break;
+         case 'SKINGLAND_SYSTEM':
          vm.selectedSystemList = vm.skinList;
-                    break;
-                case 'MUSCULO_SYSTEM':
+         break;
+         case 'MUSCULO_SYSTEM':
          vm.selectedSystemList = vm.muscleList;
          break;
-                case 'OTHERTISSUE_SYSTEM':
+         case 'OTHERTISSUE_SYSTEM':
          vm.selectedSystemList = vm.otherList;
-                    break;
-                case '':
-                    vm.selectedSystemList = [];//empty case
-                    break;
-                default:
+         break;
+         case '':
+         vm.selectedSystemList = [];//empty case
+         break;
+         default:
          console.warn("Invalid Tissues/Fluids System " + value);
          vm.selectedSystemList = [];
-                    break;
-            }
-        }
+         break;
+         }
+         }
          */
 
     }

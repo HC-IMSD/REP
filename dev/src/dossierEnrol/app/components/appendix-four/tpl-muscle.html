@@ -17,7 +17,8 @@
                     <div class="checkbox">
                         <label for="abdomen_{{$id}}">
                             <input type="checkbox" name="abdomen" id="abdomen_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.abdomen"/>
+                                   ng-change="sysCtrl.detailsChanged('ABDOMEN',sysCtrl.model.abdomen)"
+                                   ng-model="sysCtrl.model.abdomen"/>
                             {{'ABDOMEN'|translate}}
                         </label>
 
@@ -27,7 +28,8 @@
                     <div class="checkbox">
                         <label for="skull_{{$id}}">
                             <input type="checkbox" name="skull" id="skull_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.skull"/>
+                                   ng-change="sysCtrl.detailsChanged('SKULL',sysCtrl.model.skull)"
+                                   ng-model="sysCtrl.model.skull"/>
                             {{'SKULL'|translate}}
                         </label>
                     </div>
@@ -36,7 +38,8 @@
                     <div class="checkbox">
                         <label for="bones_{{$id}}">
                             <input type="checkbox" name="bones" id="bones_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.bones"/>
+                                   ng-change="sysCtrl.detailsChanged('BONES',sysCtrl.model.bones)"
+                                   ng-model="sysCtrl.model.bones"/>
                             {{'BONES'|translate}}
                         </label>
                     </div>
@@ -45,7 +48,8 @@
                     <div class="checkbox">
                         <label for="collagen_{{$id}}">
                             <input type="checkbox" name="collagen" id="collagen_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.collagen"/>
+                                   ng-change="sysCtrl.detailsChanged('COLLAGEN',sysCtrl.model.collagen)"
+                                   ng-model="sysCtrl.model.collagen"/>
                             {{'COLLAGEN'|translate}}
                         </label>
                     </div>
@@ -56,7 +60,8 @@
                     <div class="checkbox">
                         <label for="tendonsLigaments_{{$id}}">
                             <input type="checkbox" name="tendonsLigaments" id="tendonsLigaments_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.tendonsLigaments"/>
+                                   ng-change="sysCtrl.detailsChanged('TENDONS',sysCtrl.model.tendonsLigaments)"
+                                   ng-model="sysCtrl.model.tendonsLigaments"/>
                             {{'TENDONS'|translate}}
                         </label>
                     </div>
@@ -65,7 +70,8 @@
                     <div class="checkbox">
                         <label for="vertebralColumn_{{$id}}">
                             <input type="checkbox" name="vertebralColumn" id="vertebralColumn_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.vertebralColumn"/>
+                                   ng-change="sysCtrl.detailsChanged('VERTEBRALCOLUMN',sysCtrl.model.vertebralColumn)"
+                                   ng-model="sysCtrl.model.vertebralColumn"/>
                             {{'VERTEBRALCOLUMN'|translate}}
                         </label>
                     </div>
@@ -74,7 +80,8 @@
                     <div class="checkbox">
                         <label for="muscle_{{$id}}">
                             <input type="checkbox" name="muscle" id="muscle_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.muscle"/>
+                                   ng-change="sysCtrl.detailsChanged('MUSCLE',sysCtrl.model.muscle)"
+                                   ng-model="sysCtrl.model.muscle"/>
                             {{'MUSCLE'|translate}}
                         </label>
                     </div>

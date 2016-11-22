@@ -21,7 +21,8 @@
             controller: skinSystemController,
             bindings: {
                 record: '<',
-                otherUpdate: '&'
+                otherUpdate: '&',
+                concatUpdate: '&'
             }
 
         });
@@ -60,6 +61,11 @@
             vm.isSelected = ""
         };
 
+        vm.detailsChanged = function (alias, value) {
+
+            vm.concatUpdate({'alias': alias, 'value': value});
+            vm.updateErrorState();
+        }
 
         vm.otherChanged = function () {
             var state = false;

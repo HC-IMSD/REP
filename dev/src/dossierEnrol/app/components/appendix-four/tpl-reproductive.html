@@ -17,7 +17,8 @@
                     <div class="checkbox">
                         <label for="milkProducts_{{$id}}">
                             <input type="checkbox" name="milkProducts" id="milkProducts_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.milkProducts"/>
+                                   ng-change="sysCtrl.detailsChanged('MILK',sysCtrl.model.milkProducts)"
+                                   ng-model="sysCtrl.model.milkProducts"/>
                             {{'MILK'|translate}}
                         </label>
 
@@ -27,7 +28,8 @@
                     <div class="checkbox">
                         <label for="kidney_{{$id}}">
                             <input type="checkbox" name="kidney" id="kidney_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.kidney"/>
+                                   ng-change="sysCtrl.detailsChanged('KIDNEY',sysCtrl.model.kidney)"
+                                   ng-model="sysCtrl.model.kidney"/>
                             {{'KIDNEY'|translate}}
                         </label>
                     </div>
@@ -36,7 +38,8 @@
                     <div class="checkbox">
                         <label for="colostrum_{{$id}}">
                             <input type="checkbox" name="colostrum" id="colostrum_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.colostrum"/>
+                                   ng-change="sysCtrl.detailsChanged('COLOSTRUM',sysCtrl.model.colostrum)"
+                                   ng-model="sysCtrl.model.colostrum"/>
                             {{'COLOSTRUM'|translate}}
                         </label>
                     </div>
@@ -45,7 +48,8 @@
                     <div class="checkbox">
                         <label for="mammaryGlands_{{$id}}">
                             <input type="checkbox" name="mammaryGlands" id="mammaryGlands_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.mammaryGlands"/>
+                                   ng-change="sysCtrl.detailsChanged('MAMMARY',sysCtrl.model.mammaryGlands)"
+                                   ng-model="sysCtrl.model.mammaryGlands"/>
                             {{'MAMMARY'|translate}}
                         </label>
                     </div>
@@ -56,7 +60,8 @@
                     <div class="checkbox">
                         <label for="ovaries_{{$id}}">
                             <input type="checkbox" name="ovaries" id="ovaries_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.ovaries"/>
+                                   ng-change="sysCtrl.detailsChanged('OVARIES',sysCtrl.model.ovaries)"
+                                   ng-model="sysCtrl.model.ovaries"/>
                             {{'OVARIES'|translate}}
                         </label>
                     </div>
@@ -65,7 +70,8 @@
                     <div class="checkbox">
                         <label for="placenta_{{$id}}">
                             <input type="checkbox" name="placenta" id="placenta_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.placenta"/>
+                                   ng-change="sysCtrl.detailsChanged('PLACENTA',sysCtrl.model.placenta)"
+                                   ng-model="sysCtrl.model.placenta"/>
                             {{'PLACENTA'|translate}}
                         </label>
                     </div>
@@ -74,7 +80,8 @@
                     <div class="checkbox">
                         <label for="placentalFluid_{{$id}}">
                             <input type="checkbox" name="placentalFluid" id="placentalFluid_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.placentalFluid"/>
+                                   ng-change="sysCtrl.detailsChanged('PLACENTAFLUID',sysCtrl.model.placentalFluid)"
+                                   ng-model="sysCtrl.model.placentalFluid"/>
                             {{'PLACENTAFLUID'|translate}}
                         </label>
                     </div>
@@ -83,7 +90,8 @@
                     <div class="checkbox">
                         <label for="semen_{{$id}}">
                             <input type="checkbox" name="semen" id="semen_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.semen"/>
+                                   ng-change="sysCtrl.detailsChanged('SEMEN',sysCtrl.model.semen)"
+                                   ng-model="sysCtrl.model.semen"/>
                             {{'SEMEN'|translate}}
                         </label>
                     </div>
@@ -94,7 +102,8 @@
                     <div class="checkbox">
                         <label for="testes_{{$id}}">
                             <input type="checkbox" name="testes" id="testes_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.testes"/>
+                                   ng-change="sysCtrl.detailsChanged('TESTES',sysCtrl.model.testes)"
+                                   ng-model="sysCtrl.model.testes"/>
                             {{'TESTES'|translate}}
                         </label>
                     </div>
@@ -103,7 +112,8 @@
                     <div class="checkbox">
                         <label for="urine_{{$id}}">
                             <input type="checkbox" name="urine" id="urine_{{$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model="sysCtrl.model.urine"/>
+                                   ng-change="sysCtrl.detailsChanged('URINE',sysCtrl.model.urine)"
+                                   ng-model="sysCtrl.model.urine"/>
                             {{'URINE'|translate}}
                         </label>
                     </div>

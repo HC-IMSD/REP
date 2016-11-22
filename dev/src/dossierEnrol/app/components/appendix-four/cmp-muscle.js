@@ -21,7 +21,8 @@
             controller: muscleSystemController,
             bindings: {
                 record: '<',
-                otherUpdate: '&'
+                otherUpdate: '&',
+                concatUpdate: '&'
             }
 
         });
@@ -37,6 +38,13 @@
                 vm.updateErrorState();
             }
         };
+
+        vm.detailsChanged = function (alias, value) {
+
+            vm.concatUpdate({'alias': alias, 'value': value});
+            vm.updateErrorState();
+        }
+
         vm.updateErrorState = function () {
             var keys = Object.keys(vm.model);
             for (var i = 0; i < keys.length; i++) {

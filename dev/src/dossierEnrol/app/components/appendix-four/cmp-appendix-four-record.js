@@ -151,7 +151,7 @@
                 }
                 return true;
             }else{
-                self.model.animalSourced=null;
+                self.model.sourceAnimalDetails = null;
             }
             return false;
         }
