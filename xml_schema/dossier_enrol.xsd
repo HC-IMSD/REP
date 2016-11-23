@@ -481,7 +481,7 @@
 	</hpfb:complexType>
 
 	<hpfb:complexType name="tissues_fluids_content">
-		<hpfb:sequence>
+		<hpfb:all>
 			<hpfb:element ref="nervous_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="digestive_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="musclo_system" minOccurs="0" maxOccurs="1"/>
@@ -489,15 +489,13 @@
 			<hpfb:element ref="cardio_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="immune_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="skin_system" minOccurs="0" maxOccurs="1"/>
-			<hpfb:element ref="musclo_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="other_system" minOccurs="0" maxOccurs="1"/>
-		</hpfb:sequence>
+		</hpfb:all>
 	</hpfb:complexType>
 
 
 	<hpfb:complexType name="nervous_system_content">
 		<hpfb:sequence>
-			<hpfb:element ref="brain_system"/>
 			<hpfb:element ref="brain"/>
 			<hpfb:element ref="brain_stem"/>
 			<hpfb:element ref="cerebellum"/>

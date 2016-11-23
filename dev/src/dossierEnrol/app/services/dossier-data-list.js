@@ -57,7 +57,8 @@
             getSkinSystemValue: _getSkinSystemValue,
             getMuscleSystemValue: _getMuscleSystemValue,
             getOtherTissuesSystemValue: _getOtherTissuesSystemValue,
-            getYesValue: getYesValue
+            getYesValue: getYesValue,
+            getTissuesFluidsLabels: _getTissuesFluidsLabels
         };
         return service;
 
@@ -401,6 +402,71 @@
                 "GALL",
                 "FLUIDS_OTHER"
             ]);
+        }
+
+        function _getTissuesFluidsLabels() {
+            return ({
+                brain: "BRAIN",
+                brainStem: "BRAINSTEM",
+                cerebellum: "CEREBELLUM",
+                ceroFluid: "CEROFLUID",
+                dorsalRoot: "DORSALROOT",
+                duraMater: "DURAMATER",
+                hypothalmus: "HYPOTHALAMUS",
+                retina: "RETINA",
+                spinalCord: "SPINALCORD",
+                trigeminal: "TRIGEMINAL",
+                appendix: "APPENDIX",
+                bile: "BILE",
+                distalIleum: "DISTALILEUM",
+                largeIntestine: "LARGEINTEST",
+                salivaSalivary: "SALIVA",
+                smallIntestine: "SMALLINTESTINE",
+                stomach: "STOMACH",
+                milkProducts: "MILK",
+                kidney: "KIDNEY",
+                colostrum: "COLOSTRUM",
+                mammaryGlands: "MAMMARY",
+                ovaries: "OVARIES",
+                placenta: "PLACENTA",
+                placentalFluid: "PLACENTAFLUID",
+                semen: "SEMEN",
+                testes: "TESTES",
+                urine: "URINE",
+                heartPericardium: "HEART",
+                lung: "LUNG",
+                nasalFluid: "NASALFLUID",
+                trachea: "TRACHEA",
+                lymphNodes: "LYMPH",
+                spleen: "SPLEEN",
+                thymus: "THYMUS",
+                tonsils: "TONSILS",
+                adrenalGland: "ADRENAL",
+                hairHoovesFeathers: "HAIR",
+                liver: "LIVER",
+                pancreas: "PANCREAS",
+                pituitary: "PITUARYGLAND",
+                skinHides: "SKINHIDES",
+                thyroidParathyroid: "THYROID",
+                abdomen: "ABDOMEN",
+                skull: "SKULL",
+                bones: "BONES",
+                collagen: "COLLAGEN",
+                tendonsLigaments: "TENDONS",
+                vertebralColumn: "VERTEBRALCOLUMN",
+                muscle: "MUSCLE",
+                adipose: "ADIPOSE",
+                ascites: "ASCITES",
+                antlerVelvet: "ANTLERV",
+                serum: "SERUM",
+                wholeBlood: "WHOLEBLOOD",
+                plasma: "PLASMA",
+                embryonicTissue: "EMBRYONICTISS",
+                fetalTissue: "FETALTISS",
+                boneMarrow: "BONEMARROW",
+                eyesCornea: "EYESCORNEA",
+                gallBladder: "GALL"
+            });
         }
 
 
