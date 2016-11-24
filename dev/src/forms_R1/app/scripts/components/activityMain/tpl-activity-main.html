@@ -10,11 +10,20 @@
                      {{'HELP_FILE_LOAD'|translate}}
                  </button>
              </div>-->
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs" ng-click="main.addInstruct('activityMain')">
+                    {{'HELP_FILE_LOAD'|translate}}
+                </button>
+            </div>
             <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
         </header>
         <div class="panel-body">
+            <div>
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-repeat="alert in main.alerts"
+                     ng-class="'alert-' + (alert.type || 'warning')" close="main.closeAlert($index)">{{alert.msg}}
+                </div>
+            </div>
             <div class="col-md-12">
-
                 <hpfb-file-select update-model-root="main.showContent(fileContent) "
                                   root-elem="{{main.rootTag}}"/>
             </div>
@@ -257,15 +266,21 @@
         <div>
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
-                    <!--<div class="btn-group pull-right">
-                        <button class="btn btn-default btn-xs" ng-click="main.openHelp('activityRep')"
-                                aria-haspopup="true">
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-default btn-xs" ng-click="main.addInstruct('activityMain')">
                             {{'HELP_ACTIVITY_REP'|translate}}
                         </button>
-                    </div>-->
+                    </div>
                     <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
                 </header>
                 <div class="panel-body">
+                    <div>
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html"
+                             ng-repeat="alert in main.alerts"
+                             ng-class="'alert-' + (alert.type || 'warning')" close="main.closeAlert($index)">
+                            {{alert.msg}}
+                        </div>
+                    </div>
                     <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
                                           show-list-errors="main.showErrors()" is-amend="main.formAmend"
                                           parent-dirty="main.activityEnrolForm.$dirty"
