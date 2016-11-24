@@ -39,6 +39,7 @@
         vm.tagName="fieldId";
         vm.setAsIncomplete = true;
         vm.errorMsg = "";
+        vm.isDossier = false;
 
         vm.$onInit = function () {
             ///do init
@@ -62,6 +63,10 @@
             vm.fieldLength = configJson.fieldLength;
           vm.tagName=configJson.tagName;
             vm.errorMsg = configJson.errorMsg;
+            vm.isDossier = configJson.isDossier;
+            if (angular.isUndefined(vm.isDossier)) {
+                vm.isDossier = false;
+            }
         }
         vm.isExtern = function () {
             return vm.formType == "EXT";

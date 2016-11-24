@@ -17,6 +17,7 @@
             'filterLists',
             'lcDetailsModule',
             'numberFormat',
+            'ui.bootstrap',
             'translations'
         ])
 })();

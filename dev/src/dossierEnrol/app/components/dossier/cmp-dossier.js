@@ -8,10 +8,10 @@
 
     var dependencies = [
         'expandingTable'
-        ,'tabsModule'
-        ,'refProductListModule'
-        ,'drugUseModule'
-        ,'scheduleAModule',
+        , 'tabsModule'
+        , 'refProductListModule'
+        , 'drugUseModule'
+        , 'scheduleAModule',
         'dossierDataLists',
         'filterLists',
         'fileIO',
@@ -21,7 +21,7 @@
         'applicationInfo',
         'ui.bootstrap',
         'filterLists',
-       'numberFormat',
+        'numberFormat',
         'ngMessages',
         'ngAria',
         'theraClass',
@@ -72,17 +72,40 @@
         //config for applicationInfoCompoenent
         self.configField = {
             "label": "DOSSIER_ID",
-            "fieldLength": "7",
-            "tagName": "dossierId",
-            "errorMsg": "MSG_LENGTH_7"
+            "fieldLength": "6",
+            "tagName": "dossierID",
+            "errorMsg": "MSG_LENGTH_6",
+            "isDossier": true
         };
         self.isIncomplete = true;
         self.formAmend = false;
         self.showAllErrors = false;
         self.errorAppendix = [];
         self.extraAppendix = [];
-        self.noThera="";
+        self.noThera = "";
         self.oneRefSelected = "";
+        self.alert1 = {
+            type: 'info',
+            msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
+            show: false
+        };
+        self.alert2 = {
+            type: 'info',
+            msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
+            show: false
+        };
+        self.alert3 = {
+            type: 'info',
+            msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
+            show: false
+        };
+        self.alert4 = {
+            type: 'info',
+            msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
+            show: false
+        };
+
+
         var yesValue = "Y";
 
         self.$onInit = function () {
@@ -132,7 +155,7 @@
             disableXMLSave();
         }
 
-        self.recordsChanged=function(){
+        self.recordsChanged = function () {
             getAppendix4Errors();
         }
 
@@ -191,9 +214,9 @@
          * @ngdoc disables the XML save button
          */
         function disableXMLSave() {
-           var formInvalid=true; //TODO hack
-            if(self.dossierForm){
-                formInvalid=self.dossierForm.$invalid;
+            var formInvalid = true; //TODO hack
+            if (self.dossierForm) {
+                formInvalid = self.dossierForm.$invalid;
             }
             self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
 
@@ -244,12 +267,12 @@
          */
         self.saveJson = function () {
             var writeResult = _transformFile();
-           hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), self.dossierService.getRootTagName());
+            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), self.dossierService.getRootTagName());
             self.showAllErrors = true;
             //_setComplete()
         };
 
-        self.saveXML=function(){
+        self.saveXML = function () {
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), self.dossierService.getRootTagName());
             self.showAllErrors = false;
@@ -266,12 +289,12 @@
             if (!self.isExtern()) {
                 self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMajorVersion(self.dossierModel.enrolmentVersion);
                 self.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
-               // updateModelOnApproval(); //updates all the amend
+                // updateModelOnApproval(); //updates all the amend
             } else {
                 console.log(self.dossierModel.enrolmentVersion);
                 self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMinorVersion(self.dossierModel.enrolmentVersion);
             }
-            return  self.dossierService.dossierToOutput(self.dossierModel);
+            return self.dossierService.dossierToOutput(self.dossierModel);
         };
 
         /**
@@ -280,7 +303,22 @@
          * @private
          */
         function _createFilename() {
-            var filename = "HC_DO_Enrolment";
+
+            var draft_prefix = "DRAFTREPDO";
+            var final_prefix = "HCREPDO";
+            var filename = "";
+            if (self.userType === 'INT') { //TODO magic numbers
+
+                filename = final_prefix;
+            } else {
+                filename = draft_prefix;
+            }
+            if (self.dossierModel && self.dossierModel.dossierID) {
+                filename = filename + "_" + self.dossierModel.dossierID;
+            }
+            if (self.dossierModel.enrolmentVersion) {
+                filename = filename + "_" + self.dossierModel.enrolmentVersion;
+            }
             return filename;
         }
 
@@ -298,9 +336,9 @@
          * Manages errors for no Thera
          * @returns {boolean}
          */
-        self.noTheraRecs=function() {
+        self.noTheraRecs = function () {
 
-            if (!self.dossierModel ||! self.dossierModel.drugProduct) {
+            if (!self.dossierModel || !self.dossierModel.drugProduct) {
                 self.noThera = "";
                 return false;
             }
@@ -308,9 +346,45 @@
                 self.noThera = "";
                 return true;
             }
-            self.noThera =self.dossierModel.drugProduct.therapeutic.length;
+            self.noThera = self.dossierModel.drugProduct.therapeutic.length;
             return false;
         }
+
+        self.closeAlert = function (value) {
+            switch (value) {
+                case '1':
+                    self.alert1.show = false;
+                    break;
+                case '2':
+                    self.alert2.show = false;
+                    break;
+                case '3':
+                    self.alert3.show = false;
+                    break;
+                case '4':
+                    self.alert4.show = false;
+                    break;
+            }
+        }
+
+        self.addInstruct = function (value) {
+
+            switch (value) {
+                case '1':
+                    self.alert1.show = true;
+                    break;
+                case '2':
+                    self.alert2.show = true;
+                    break;
+                case '3':
+                    self.alert3.show = true;
+                    break;
+                case '4':
+                    self.alert4.show = true;
+                    break;
+            }
+        }
+
 
     }
 

@@ -148,9 +148,6 @@
             vm.formAmend = vm.activityRoot.applicationType === vm.applicationInfoService.getAmendType();
             disableXMLSave();
         };
-        $scope.closeAlert = function () {
-            console.log('fired2');
-        }
 
         vm.closeAlert = function (index) {
             vm.alerts.splice(index, 1);
@@ -216,8 +213,8 @@
                 filename = filename + "_" + vm.activityRoot.dstsControlNumber;
             }
             if (vm.activityRoot.enrolmentVersion) {
-                var parts = vm.activityRoot.enrolmentVersion.split('.');
-                filename = filename + "_" + parts[0] + '_' + parts[1];
+                //var parts = vm.activityRoot.enrolmentVersion.split('.');
+                filename = filename + "_" + vm.activityRoot.enrolmentVersion;
             }
             return filename;
 

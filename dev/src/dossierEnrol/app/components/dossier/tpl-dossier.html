@@ -1,19 +1,37 @@
 <ng-form id="dossier-form" name="dos.dossierForm" novalidate>
 
     <section class="panel  panel-primary mrgn-tp-lg">
-        <header class="panel-heading">
+        <header class="panel-heading clearfix">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('1')">
+                    {{'HELP_FILE_LOAD'|translate}}
+                </button>
+            </div>
             <h2 class="panel-title">{{'LOAD_DOSSIER'|translate}}</h2>
         </header>
         <div class="panel-body">
+            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert1.show"
+                 ng-class="'alert-' + (dos.alert1.type || 'warning')"
+                 close="dos.closeAlert('1')">{{dos.alert1.msg}}
+            </div>
             <hpfb-file-select update-model-root="dos.showContent(fileContent)"
                               root-elem="DOSSIER_ENROL"></hpfb-file-select>
         </div>
     </section>
     <section class="panel panel-primary mrgn-tp-lg">
-        <header class="panel-heading">
+        <header class="panel-heading clearfix">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('2')">
+                    {{'Dossier Instructions'|translate}}
+                </button>
+            </div>
             <h2 class="panel-title">{{'Dossier Information'|translate}}</h2>
         </header>
         <div class="panel-body">
+            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert2.show"
+                 ng-class="'alert-' + (dos.alert2.type || 'warning')"
+                 close="dos.closeAlert('2')">{{dos.alert2.msg}}
+            </div>
             <div>
                 <cmp-application-info record="dos.dossierModel" user-type="dos.userType"
                                       set-type="dos.setApplicationType(type)"
@@ -190,11 +208,19 @@
         </div>
     </section>
     <section class="panel panel-primary mrgn-tp-lg">
-        <header class="panel-heading">
+        <header class="panel-heading clearfix">
+            <div class="btn-group pull-right">
+                <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('3')">
+                    {{'Drug Product Instructions'|translate}}
+                </button>
+            </div>
             <h2 class="panel-title">{{'DRUG_PRODUCT'|translate}}</h2>
         </header>
         <div class="panel-body">
-
+            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert3.show"
+                 ng-class="'alert-' + (dos.alert3.type || 'warning')"
+                 close="dos.closeAlert('3')">{{dos.alert3.msg}}
+            </div>
             <div class="row">
                 <div class="col-xs-12 form-group">
 
@@ -265,10 +291,19 @@
 
     <div>
         <section class="panel panel-primary mrgn-tp-lg">
-            <header class="panel-heading">
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('4')">
+                        {{'REP Contact Instructions'|translate}}
+                    </button>
+                </div>
                 <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
             </header>
             <div class="panel-body">
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert4.show"
+                     ng-class="'alert-' + (dos.alert4.type || 'warning')"
+                     close="dos.closeAlert('4')">{{dos.alert4.msg}}
+                </div>
                 <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
                                       parent-dirty="dos.dossierForm.$dirty"
                                       show-list-errors="dos.showErrors()" is-amend="dos.formAmend">

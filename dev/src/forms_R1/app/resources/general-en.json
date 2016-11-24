@@ -34,5 +34,8 @@
   "ERRORS":"Errors",
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",
-  "PHARMACEUTICAL": "Pharmaceutical"
+  "PHARMACEUTICAL": "Pharmaceutical",
+  "HELP_FILE_LOAD": "File Load Instructions",
+  "HELP_ACTIVITY_MAIN": "Activity Instructions",
+  "HELP_ACTIVITY_REP": "REP Contact Instructions"
 }

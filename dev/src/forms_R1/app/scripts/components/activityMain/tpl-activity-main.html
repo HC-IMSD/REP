@@ -36,8 +36,8 @@
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
                     <button class="btn btn-default btn-xs" ng-click="main.addInstruct('activityMain')">
-                         {{'HELP_ACTIVITY_MAIN'|translate}}
-                     </button>
+                        {{'HELP_ACTIVITY_MAIN'|translate}}
+                    </button>
                 </div>
                 <h2 class="panel-title">{{'ACTIVE_ENROL' |translate}}</h2>
             </header>
@@ -79,9 +79,8 @@
                                 <span class="input-group-addon">HC6-024-</span>
                                 <div ng-class="{'has-error':main.activityEnrolForm.dossierId.$invalid}">
                                     <input type="text" class="form-control full-width" id="dossierId_{{$id}}"
-                                           size="7"
-                                           maxlength="7" id="dossierId_{{$id}}" ng-minlength="7" name="dossierId"
-                                           ng-model="main.activityRoot.dossierId" ng-required="true"/>
+                                           size="6" maxlength="6" id="dossierId_{{$id}}" ng-minlength="6"
+                                           name="dossierId" ng-model="main.activityRoot.dossierId" ng-required="true"/>
                                 </div>
                             </div>
                             <strong id="dossierId-error" class="error">

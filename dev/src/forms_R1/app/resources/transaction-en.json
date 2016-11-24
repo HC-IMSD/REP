@@ -87,8 +87,9 @@
   "REG_ACT_CONTACT": "Regulatory Activity Contact",
   "COMPANY_REP_THIS": "Company Representative for THIS Regulatory Activity",
   "TRANSACTION_HDING": "Regulatory Transaction Enrolment",
-  "LOAD_TRANSACTION": "Load a Transaction Enrolment File",
+  "LOAD_TRANSACTION": "Load a Regulatory Transaction Enrolment File",
   "COMPANY_INFO": "Company Information",
   "ADDRESS_INFO": "Address Information",
-  "GENERATE_FINAL": "Generate Final XML"
+  "GENERATE_FINAL": "Generate Final XML",
+  "CONTACT_SAME": "I confirm that the above regulatory activity contact information is  valid."
 }

@@ -87,6 +87,7 @@
   "REG_ACT_CONTACT": "fr_Regulatory Activity Contact",
   "COMPANY_REP_THIS": "fr_Company Representative for THIS Regulatory Activity",
   "TRANSACTION_HDING": "fr_Regulatory Transaction Enrolment",
-  "LOAD_TRANSACTION": "fr_Load a Transaction Enrolment File",
-  "GENERATE_FINAL": "fr_Generate Final XML"
+  "LOAD_TRANSACTION": "fr_Load a Regulatory Transaction Enrolment File",
+  "GENERATE_FINAL": "fr_Generate Final XML",
+  "CONTACT_SAME": "fr_I confirm that the above regulatory activity contact information is  valid."
 }

@@ -1,11 +1,20 @@
 <div>
     <ng-form name="transInfoForm" novalidate="novalidate">
         <section class="panel panel-primary mrgn-tp-lg">
-            <header class="panel-heading">
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default btn-xs" ng-click="transInfoCtrl.addInstruct('1')">
+                        {{'Regulatory Transaction Instructions'|translate}}
+                    </button>
+                </div>
                 <h2 class="panel-title">{{'TRANSACTION_HDING'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div>
+                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="transInfoCtrl.alert1.show"
+                         ng-class="'alert-' + (transInfoCtrl.alert1.type || 'warning')"
+                         close="transInfoCtrl.closeAlert('1')">{{transInfoCtrl.alert1.msg}}
+                    </div>
                     <div>
                         <div class="row">
                             <div class="form-group col-md-3"
@@ -26,15 +35,20 @@
                                     </strong>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3"
-                                 ng-class="{'has-error':transInfoForm.dossierId.$invalid}">
-                                <label for="dossierId_{{$id}}" class="required full-width">
+                            <div class="form-group col-md-3">
+                                <label for="dossierId" class="required full-width">
                                     <span class="field-name">{{"DOSSIER_ID" |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                    <input type="text" id="dossierId_{{$id}}" name="dossierId"
-                                           ng-model="transInfoCtrl.transactionModel.ectd.dossierId"
-                                           class="form-control " maxlength="6" size="6"
-                                           ng-required="true" ng-minlength="6"/>
+                                    <div class="rep-input-group">
+                                        <span class="input-group-addon">HC6-024-</span>
+                                        <div ng-class="{'has-error':transInfoForm.dossierId.$invalid}">
+                                            <input type="text" class="form-control full-width" id="dossierId"
+                                                   size="6" maxlength="6" id="dossierId" ng-minlength="6"
+                                                   name="dossierId"
+                                                   ng-model="transInfoCtrl.transactionModel.ectd.dossierId"
+                                                   ng-required="true"/>
+                                        </div>
+                                    </div>
                                     <strong id="dossierId-error" class="error"
                                             ng-if="transInfoCtrl.showError(transInfoForm.dossierId)">
                         <span class="label label-danger" ng-messages="transInfoForm.dossierId.$error">
@@ -175,10 +189,19 @@
         </section>
         <div>
             <section class="panel  panel-primary">
-                <header class="panel-heading">
+                <header class="panel-heading clearfix">
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-default btn-xs" ng-click="transInfoCtrl.addInstruct('2')">
+                            {{'Regulatory Activity Instructions'|translate}}
+                        </button>
+                    </div>
                     <h2 class="panel-title">{{'REG_ACT_CONTACT' |translate}}</h2>
                 </header>
                 <div class="panel-body">
+                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="transInfoCtrl.alert2.show"
+                         ng-class="'alert-' + (transInfoCtrl.alert2.type || 'warning')"
+                         close="transInfoCtrl.closeAlert('2')">{{transInfoCtrl.alert2.msg}}>
+                    </div>
                     <div>
                         <fieldset>
                             <legend>{{'REG_CONTACT_THIS'|translate}}</legend>
@@ -213,20 +236,38 @@
                             </div>
                             <div class="row">
                                 <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
-                                                     is-amend="true"
-                                                     show-errors="transInfoCtrl.showError()"></cmp-address-details>
+                                                     is-amend="true" show-errors="transInfoCtrl.showError()">
+                                </cmp-address-details>
                             </div>
                         </fieldset>
                     </div>
                     <div>
                         <h3>{{'COMPANY_REP_THIS'|translate}}</h3>
-                            <div class="row">
-                                <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
-                                                     is-amend="true"
-                                                     show-errors="transInfoCtrl.showError()"></cmp-contact-details>
+                        <div class="row">
+                            <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
+                                                 is-amend="true" show-errors="transInfoCtrl.showError()">
+                            </cmp-contact-details>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <div class="checkbox required">
+                                    <label for="chkContactSame">
+                                        <input type="checkbox" ng-model="transInfoCtrl.transactionModel.contactSame"
+                                               name="chkContactSame" id="chkContactSame" required/>
+                                        {{"CONTACT_SAME"|translate}}
+                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                        <strong id="notlasa-error" class="error"
+                                                ng-if="transInfoCtrl.showError(transInfoForm.chkContactSame)">
+                                        <span class="label label-danger">
+                                         <span ng-if="!transInfoCtrl.transactionModel.contactSame">{{'MSG_ERR_MAND'|translate}}</span>
+                                         </span>
+                                        </strong>
+                                    </label>
+                                </div>
                             </div>
+
+                        </div>
                     </div>
-                </div>
             </section>
         </div>
         <!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->

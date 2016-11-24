@@ -37,11 +37,11 @@
                 projectManager1: "",
                 projectManager2: "",
                 isActivityChanges: "Y",
-                sameCompany: "N",
+                // sameCompany: "N",
                 companyName: "",
-                sameAddress: "N", //this may no longer be needed
+                // sameAddress: "N", //this may no longer be needed
                 activityAddress: _createAddressModel(),
-                sameContact: "N",
+                sameContact: false,
                 activityContact: _createContactModel(),
                 // regulatorySubmissionContact: [],
             };
@@ -95,10 +95,11 @@
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
                 resultJson.TRANSACTION_ENROL.same_regulatory_company = jsonObj.sameCompany === true ? 'Y' : 'N';
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
-                resultJson.TRANSACTION_ENROL.same_regulatory_address = jsonObj.sameAddress === true ? 'Y' : 'N'; //this may no longer be needed
+                /* resultJson.TRANSACTION_ENROL.same_regulatory_address = jsonObj.sameAddress === true ? 'Y' : 'N'; //this may no longer be needed*/
                 resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
-                resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameCompany === true ? 'Y' : 'N'; //this may no longer be needed
+                /* resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameCompany === true ? 'Y' : 'N'; //this may no longer be needed*/
                 resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput(jsonObj.activityContact);
+                resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameContact === true ? 'Y' : 'N'; //this may no longer be needed
                 return (resultJson);
             },
 
@@ -148,9 +149,9 @@
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
                 model.projectManager2 = jsonObj.regulatory_project_manager2;
                 model.isActivityChanges = jsonObj.is_activity_changes;
-                model.sameCompany = jsonObj.same_regulatory_company === 'Y';
+                //model.sameCompany = jsonObj.same_regulatory_company === 'Y';
                 model.companyName = jsonObj.company_name;
-                model.sameAddress = jsonObj.same_regulatory_address === 'Y';
+                //model.sameAddress = jsonObj.same_regulatory_address === 'Y';
                 //reg address
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact === 'Y';

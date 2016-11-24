@@ -2,10 +2,18 @@
     <ng-form id="reg-transaction-form" name="main.transactionEnrolForm"
              novalidate>
         <section class="panel panel-primary mrgn-tp-lg">
-            <header class="panel-heading">
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <button class="btn btn-default btn-xs" ng-click="main.addInstruct('activityMain')">
+                        {{'HELP_FILE_LOAD'|translate}}
+                    </button>
+                </div>
                 <h2 class="panel-title">{{'LOAD_TRANSACTION'|translate}}</h2>
             </header>
             <div class="panel-body">
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-repeat="alert in main.alerts"
+                     ng-class="'alert-' + (alert.type || 'warning')" close="main.closeAlert($index)">{{alert.msg}}
+                </div>
                 <div class="col-md-12">
                     <hpfb-file-select update-model-root="main.showContent(fileContent) "
                                       root-elem="{{main.rootTag}}"/>

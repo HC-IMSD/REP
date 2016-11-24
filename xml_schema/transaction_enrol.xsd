@@ -36,9 +36,9 @@
 	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
 	<hpfb:element name="regulatory_project_manager2" type="char_0_256_content"/>
 	<hpfb:element name="is_activity_changes" type="char_0_256_content"/>
-	<hpfb:element name="same_regulatory_company" type="required_yes_no_content"/>
+	<!--<hpfb:element name="same_regulatory_company" type="required_yes_no_content"/>-->
 	<hpfb:element name="company_name" type="char_0_80_content"/>
-	<hpfb:element name="same_regulatory_address" type="required_yes_no_content"/>
+	<!--<hpfb:element name="same_regulatory_address" type="required_yes_no_content"/>-->
 	<hpfb:element name="regulatory_activity_address" type="international_address_content"/>
 	<hpfb:element name="same_regulatory_contact" type="required_yes_no_content"/>
 	<hpfb:element name="regulatory_activity_contact" type="contact_content"/>
@@ -59,12 +59,12 @@
 			<hpfb:element ref="regulatory_project_manager1"/>
 			<hpfb:element ref="regulatory_project_manager2"/>
 			<hpfb:element ref="is_activity_changes"/>
-			<hpfb:element ref="same_regulatory_company"/>
+			<!--<hpfb:element ref="same_regulatory_company"/>-->
 			<hpfb:element ref="company_name"/>
-			<hpfb:element ref="same_regulatory_address"/>
-			<hpfb:element ref="regulatory_activity_address" minOccurs="0" maxOccurs="1"/>
+			<!--<hpfb:element ref="same_regulatory_address"/>-->
+			<hpfb:element ref="regulatory_activity_address"/>
+			<hpfb:element ref="regulatory_activity_contact"/>
 			<hpfb:element ref="same_regulatory_contact"/>
-			<hpfb:element ref="regulatory_activity_contact" minOccurs="0" maxOccurs="1"/>
 			
 		</hpfb:sequence>
 	</hpfb:complexType>
