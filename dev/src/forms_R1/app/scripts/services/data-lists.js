@@ -43,6 +43,7 @@
             return 'USA';
         }
 
+        //todo why is this listed twice?
         var getCountryValuesArray = (function () {
 
             return [
@@ -650,7 +651,7 @@
     function getSalService() {
         var service = {
             getSalutationList: getSalValuesArray,
-            getLanguages: getLanguagesValuesArray,
+            getLanguages: getLanguagesValuesArray
         };
         return service;
 
@@ -689,8 +690,15 @@
 
     /* @ngInject */
     function getRolesService() {
+        var _biologic = 'BIOLOGIC';
+        var _pharma = 'PHARMACEUTICAL';
+        /*'DRUG_MASTER_FILE',
+         'MEDICAL_DEVICE'*/
         var service = {
-            getContactRoles: getRoleValuesArray
+            getContactRoles: getRoleValuesArray,
+            getFormTypes: _getFormTypes,
+            getBiologicType: _getBiologic,
+            getPharmaType: _getPharmaceutical
         };
         return service;
 
@@ -705,10 +713,23 @@
                 ]);
         }
 
+        function _getFormTypes() {
+            return (
+                [
+                    _biologic,
+                    _pharma
+                ]);
+        }
+
+        function _getBiologic() {
+            return _biologic;
+        }
+
+        function _getPharmaceutical() {
+
+            return _pharma;
+        }
 
     }
 
 })();
-
-
-

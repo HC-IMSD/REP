@@ -29,7 +29,8 @@
         'tissuesFluidsList',
         'translations',
         'dossierService',
-        'ngSanitize'
+        'ngSanitize',
+        'dataLists'
     ];
 
     angular
@@ -54,10 +55,10 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
@@ -66,6 +67,8 @@
         self.saveXMLLabel = "SAVE_DRAFT";
         self.yesNoList = DossierLists.getYesNoList();
         self.yesValue = DossierLists.getYesValue()
+        console.log(getRoleLists);
+        self.formTypeList = getRoleLists.getFormTypes();
         //config for applicationInfoCompoenent
         self.configField = {
             "label": "DOSSIER_ID",

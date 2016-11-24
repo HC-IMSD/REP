@@ -31,5 +31,7 @@
   "COMPANY_ID": "fr_Company Id",
   "DOSSIER_ID": "fr_Dossier Id",
   "ERRORS": "Erreurs",
-  "UNKNOWN":"Inconnu"
+  "UNKNOWN": "Inconnu",
+  "BIOLOGIC": "fr_Biologic",
+  "PHARMACEUTICAL": "fr_Pharmaceutical"
 }

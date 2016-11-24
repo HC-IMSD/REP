@@ -44,6 +44,7 @@
                 applicationType: "NEW",
                 softwareVersion: "1.0.0",
                 dataChecksum: "",
+                dossierType: "",
                 productName: "",
                 properName: "",
                 isRefProducts: "",
@@ -88,6 +89,7 @@
                     applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     dataChecksum: info.data_checksum,
+                    dossierType: info.dossier_type,
                     productName: info.brand_name,
                     properName: info.common_name,
                     isRefProducts: info.is_ref_products,
@@ -141,6 +143,7 @@
             if (jsonObj.contactList) { //TODO skip if empty list?
                 baseDossier.contact_record = repContactToOutput(jsonObj.contactList);
             }
+            baseDossier.dossier_type = jsonObj.dossierType;
             baseDossier.brand_name = jsonObj.productName;
             baseDossier.common_name = jsonObj.properName;
             baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned === true ? 'Y' : 'N';

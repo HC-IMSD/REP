@@ -222,6 +222,16 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+
+	<hpfb:simpleType name="form_types_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="PHARMACEUTICAL"/>
+			<hpfb:enumeration value="DRUG_MASTER_FILE"/>
+			<hpfb:enumeration value="MEDICAL_DEVICE"/>
+			<hpfb:enumeration value="BIOLIGIC"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 	<hpfb:simpleType name="required_yes_no_content">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:pattern value="[y|Y]{1}|[n|N]{1}"/>

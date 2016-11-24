@@ -49,5 +49,6 @@
   "DELETE_COUNTRY":"Delete Country",
   "COUNTRIES_MANUFACT":"Countries of manufacture for this drug product",
   "ADD_CRP": "Add Canadian Reference Product",
-  "IS_CDN_REF": "Are there Canadian Reference Products?"
+  "IS_CDN_REF": "Are there Canadian Reference Products?",
+  "DOSSIER_TYPE": "Dossier Type"
 }
