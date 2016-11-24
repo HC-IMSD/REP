@@ -89,6 +89,7 @@
                                 <select id="isEctd_{{$id}}" name="isEctd" ng-change="transInfoCtrl.updateEctdState()"
                                         ng-model="transInfoCtrl.transactionModel.isEctd"
                                         class="form-control"
+                                        data-ng-disabled="transInfoCtrl.transactionModel.ectd.lifecycleRecord.length>1"
                                         ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
                                         required></select>
                                 <strong id="isEctd_-error" class="error"
