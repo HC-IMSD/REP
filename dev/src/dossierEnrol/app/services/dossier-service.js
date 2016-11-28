@@ -793,7 +793,7 @@
                         var fluidsRec = {};
                         switch (info[i].tissuesFluidsOrigin.tissuesList[b].systemType) {
                             case   DossierLists.getNervousSystemValue():
-                                ing.tissues_fluids_section.nervous_sytem = _nervousSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
+                                ing.tissues_fluids_section.nervous_system = _nervousSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
                                 break;
 
                             case   DossierLists.getDigestiveSystemValue():
@@ -808,7 +808,7 @@
 
                                 break;
                             case   DossierLists.getMuscleSystemValue():
-                                ing.tissues_fluids_section.musclo_system = _muscleSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
+                                ing.tissues_fluids_section.musculo_system = _muscleSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
                                 break;
                             case   DossierLists.getOtherTissuesSystemValue():
                                 ing.tissues_fluids_section.other_system = _otherSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
@@ -1938,22 +1938,22 @@
                 result.push(record);
             }
 
-            if (json.musclo_system) {
+            if (json.musculo_system) {
                 var record = _createEmptyTissuesSystemRecord();
                 record.id = index;
                 index++;
                 record.systemType = DossierLists.getMuscleSystemValue();
-                record.system = _getMuscleSystemModel(json.musclo_system);
+                record.system = _getMuscleSystemModel(json.musculo_system);
                 record.otherDetails = record.system.otherDetails;
                 record.detailsConcat = _getConcatTissues(record.system);
                 result.push(record);
             }
-            if (json.nervous_sytem) {
+            if (json.nervous_system) {
                 var record = _createEmptyTissuesSystemRecord();
                 record.id = index;
                 index++;
                 record.systemType = DossierLists.getNervousSystemValue();
-                record.system = _getNervousModel(json.nervous_sytem);
+                record.system = _getNervousModel(json.nervous_system);
                 record.otherDetails = record.system.otherDetails;
                 record.detailsConcat = _getConcatTissues(record.system);
                 result.push(record);
