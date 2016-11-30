@@ -464,6 +464,16 @@ pipes.insertTitleInfo = function (template) {
         }));
 };
 
+pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory) {
+
+    return (
+        copySourcesHtml.pipe(rename({
+                suffix: dateToday
+            }))
+            .pipe(gulp.dest(destDirectory))
+    )
+};
+
 pipes.copySrcProd = function (srcPath, basePath, destPath) {
     var copySources = gulp.src(srcPath,
         {read: true, base: basePath});
@@ -679,18 +689,8 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
 
 };
 
-// == TASKS ========
 
-
-// Dan added, TODO convert to pipes
-gulp.task('translate', function () {
-    return gulp.src(paths.translations + '*.json')
-        .pipe(angularTranslate())
-        .pipe(gulp.dest(paths.buildDev));
-});
-
-
-gulp.task('copyActivitySrcDev', function () {
+gulp.task('dev-activity-copySrc', function () {
 
     var deferred = Q.defer();
 
@@ -761,7 +761,7 @@ function createSuffixDate() {
     return _DATESTAMP;
 }
 
-gulp.task('copyActivityTranslateDev', function () {
+gulp.task('dev-activity-copyTranslate', function () {
     var translationList = [
         translationBaseFiles.activityInfo,
         translationBaseFiles.activityList,
@@ -775,7 +775,7 @@ gulp.task('copyActivityTranslateDev', function () {
     return (pipes.translateDev(translationList, paths.buildDevActivity));
 });
 
-gulp.task('activityCreateResourcesDev', ['copyActivityTranslateDev'], function () {
+gulp.task('dev-activity-createResources', ['dev-activity-copyTranslate'], function () {
     var devPath = paths.buildDevActivity;
     return (
         gulp.src(devPath + paths.translations + '*.json')
@@ -783,14 +783,14 @@ gulp.task('activityCreateResourcesDev', ['copyActivityTranslateDev'], function (
             .pipe(gulp.dest(devPath + paths.relScript))
     )
 });
-gulp.task('transactionCreateResourcesDev', ['copyTransactionTranslateDev'], function () {
+gulp.task('dev-transaction-createResources', ['dev-transaction-copyTranslate'], function () {
     var devPath = paths.buildDevTransaction;
     gulp.src(devPath + paths.translations + '*.json')
         .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
         .pipe(gulp.dest(devPath + paths.relScript))
 
 });
-gulp.task('companyCreateResourcesDev', ['copyCompanyTranslateDev'], function () {
+gulp.task('dev-company-createResources', ['dev-company-copyTranslate'], function () {
     var devPath = paths.buildDevCompany;
     return (
         gulp.src(devPath + paths.translations + '*.json')
@@ -800,7 +800,7 @@ gulp.task('companyCreateResourcesDev', ['copyCompanyTranslateDev'], function () 
 
 });
 
-gulp.task('dossierCreateResourcesDev', ['copyDossierTranslateDev'], function () {
+gulp.task('dev-dossier-createResources', ['dev-dossier-copyTranslate'], function () {
     var devPath = dossierPaths.buildDevDossier;
     return (gulp.src(devPath + 'app/resources/' + '*.json')
         .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
@@ -809,44 +809,44 @@ gulp.task('dossierCreateResourcesDev', ['copyDossierTranslateDev'], function () 
 });
 
 
-gulp.task('copyLibDevActivity', function () {
+gulp.task('dev-activity-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevActivity))
 
 });
 
-gulp.task('copyWetDepActivity', function () {
+gulp.task('dev-activity-copyWetDep', function () {
     return (pipes.copyWet(paths.buildDevActivity))
 });
 
-gulp.task('clean-devBuild', function () {
+gulp.task('dev-cleanEnvironment', function () {
     return (pipes.cleanBuild(paths.buildDev));
 });
 
 
-gulp.task('copyFrActivityRoot', function () {
+gulp.task('dev-activity-createFrRootEXT', function () {
     var lang = 'fr';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
         pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/activityApp.js', dest)
     );
 });
-gulp.task('copyEnActivityRoot', function () {
+gulp.task('dev-activity-createEnRootEXT', function () {
     var lang = 'en';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
         pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/activityApp.js', dest)
     );
 });
-gulp.task('copyFrActivityRootINT', function () {
+gulp.task('dev-activity-createFrRootINT', function () {
     var lang = 'fr';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
         pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/activityApp.js', dest)
     );
 });
-gulp.task('copyEnActivityRootINT', function () {
+gulp.task('dev-activity-createEnRootINT', function () {
     var lang = 'en';
     var dest = paths.buildDevActivity + '/app/scripts/';
     return (
@@ -855,7 +855,7 @@ gulp.task('copyEnActivityRootINT', function () {
 });
 
 //clean only seems to work becase of the timestam
-gulp.task('ActivityHtml', ['copyActivitySrcDev', 'copyLibDevActivity', 'copyFrActivityRoot', 'copyEnActivityRoot', 'copyFrActivityRootINT', 'copyEnActivityRootINT', 'activityCreateResourcesDev'], function () {
+gulp.task('ActivityHtml-devBuild', ['dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createFrRootEXT', 'dev-activity-createFrRootINT', 'dev-activity-createEnRootEXT', 'dev-activity-createEnRootINT', 'dev-activity-createResources'], function () {
 
 
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
@@ -869,19 +869,19 @@ gulp.task('ActivityHtml', ['copyActivitySrcDev', 'copyLibDevActivity', 'copyFrAc
 
 
 });
-gulp.task('clean-activity-dev', function () {
+gulp.task('dev-activity-clean', function () {
     return (pipes.cleanBuild(paths.buildDevActivity + 'app/'));
 
 });
-gulp.task('clean-company-dev', function () {
+gulp.task('dev-company-clean', function () {
     return (pipes.cleanBuild(paths.buildDevCompany + 'app/'));
 
 });
-gulp.task('clean-transaction-dev', function () {
+gulp.task('dev-transaction-clean', function () {
     return (pipes.cleanBuild(paths.buildDevTransaction + 'app/'));
 
 });
-gulp.task('clean-dossier-dev', function () {
+gulp.task('dev-dossier-clean', function () {
     return (pipes.cleanBuild(dossierPaths.buildDevDossier + 'app/'));
 
 });
@@ -890,7 +890,7 @@ gulp.task('clean-dossier-dev', function () {
 /******* Company Taska ****/
 
 //copy all the needed files for company
-gulp.task('copyCompanySrcDev', function () {
+gulp.task('dev-company-copySrc', function () {
 
     var companySrcPaths = [
         jsComponentPaths.companyMainPath + '**/*',
@@ -955,28 +955,28 @@ function copyCompanyHtml(src, dateToday) {
 
 
 //TODO make non repetitive
-gulp.task('copyEnCompanyRootINT', function () {
+gulp.task('dev-company-createEnRootINT', function () {
     var lang = 'en';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
         pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/companyApp.js', dest)
     );
 });
-gulp.task('copyEnCompanyRootEXT', function () {
+gulp.task('dev-company-createEnRootEXT', function () {
     var lang = 'en';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
         pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/companyApp.js', dest)
     );
 });
-gulp.task('copyFrCompanyRootINT', function () {
+gulp.task('dev-company-createFrRootINT', function () {
     var lang = 'fr';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
         pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/companyApp.js', dest)
     );
 });
-gulp.task('copyFrCompanyRootExt', function () {
+gulp.task('dev-company-createFrRootExt', function () {
     var lang = 'fr';
     var dest = paths.buildDevCompany + '/app/scripts/';
     return (
@@ -984,7 +984,7 @@ gulp.task('copyFrCompanyRootExt', function () {
     );
 });
 
-gulp.task('copyCompanyTranslateDev', function () {
+gulp.task('dev-company-copyTranslate', function () {
     var translationList = [
         translationBaseFiles.countries,
         translationBaseFiles.address,
@@ -999,7 +999,7 @@ gulp.task('copyCompanyTranslateDev', function () {
     return (pipes.translateDev(translationList, paths.buildDevCompany))
 });
 
-gulp.task('CompanyHtml', ['copyCompanySrcDev', 'copyLibDevCompany', 'copyEnCompanyRootINT', 'copyFrCompanyRootExt', 'copyEnCompanyRootEXT', 'copyFrCompanyRootINT', 'companyCreateResourcesDev'], function () {
+gulp.task('CompanyHtml-devBuild', ['dev-company-copySrc', 'dev-company-copyLib', 'dev-company-createEnRootINT', 'dev-company-createFrRootExt', 'dev-company-createEnRootEXT', 'dev-company-createFrRootINT', 'dev-company-createResources'], function () {
     var ignoreDir = '/build/dev/company';
     var buildDir = paths.buildDevCompany;
     var htmlPartial = jsRootContent.partialCompanyRoot;
@@ -1014,11 +1014,11 @@ gulp.task('CompanyHtml', ['copyCompanySrcDev', 'copyLibDevCompany', 'copyEnCompa
 
 
 });
-gulp.task('copyWetDepCompany', function () {
+gulp.task('dev-company-copyWetDep', function () {
     return (pipes.copyWet(paths.buildDevCompany))
 });
 
-gulp.task('copyLibDevCompany', function () {
+gulp.task('dev-company-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevCompany))
@@ -1026,7 +1026,7 @@ gulp.task('copyLibDevCompany', function () {
 });
 /**********************Start Transaction Gulp scripts******/
 //copy all the needed files for company
-gulp.task('copyTransactionSrcDev', function () {
+gulp.task('dev-transaction-copySrc', function () {
 
     var transactionSrcPaths = [
         jsComponentPaths.transactionMainPath + '**/*',
@@ -1092,7 +1092,7 @@ function copyTransactionHtml(src, dateToday) {
 }
 
 
-gulp.task('copyEnTransactionRootEXT', function () {
+gulp.task('dev-transaction-createEnRootEXT', function () {
     var lang = 'en';
     var dest = paths.buildDevTransaction + '/app/scripts/';
     //formType not needed
@@ -1100,7 +1100,7 @@ gulp.task('copyEnTransactionRootEXT', function () {
         pipes.generateRootJsFile(lang, '', paths.scripts + '/transactionApp.js', dest)
     );
 });
-gulp.task('copyFrTransactionRootEXT', function () {
+gulp.task('dev-transaction-createFrRootEXT', function () {
     var lang = 'fr';
     var dest = paths.buildDevTransaction + '/app/scripts/';
     //formType not needed
@@ -1108,7 +1108,7 @@ gulp.task('copyFrTransactionRootEXT', function () {
         pipes.generateRootJsFile(lang, '', paths.scripts + '/transactionApp.js', dest)
     );
 });
-gulp.task('copyTransactionTranslateDev', function () {
+gulp.task('dev-transaction-copyTranslate', function () {
     var translationList = [
         translationBaseFiles.countries,
         translationBaseFiles.address,
@@ -1123,18 +1123,18 @@ gulp.task('copyTransactionTranslateDev', function () {
     return (pipes.translateDev(translationList, paths.buildDevTransaction))
 });
 
-gulp.task('copyLibDevTransaction', function () {
+gulp.task('dev-transaction-copyLibDev', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevTransaction))
 
 });
-gulp.task('copyWetDepTransaction', function () {
+gulp.task('dev-transaction-copyWetDep', function () {
     return (pipes.copyWet(paths.buildDevTransaction))
 });
 
 
-gulp.task('TransactionHtml', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'transactionCreateResourcesDev'], function () {
+gulp.task('TransactionHtml-devBuild', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'transactionCreateResourcesDev'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot;
@@ -1147,69 +1147,20 @@ gulp.task('TransactionHtml', ['copyTransactionSrcDev', 'copyLibDevTransaction', 
 
 });
 
-gulp.task('copyWetDepDemo', function () {
-    var dest = './build/demo/';
-    return (pipes.copyWet(dest))
-});
-
-gulp.task('demo-deploy', function () {
-    pipes.copyAllSrc();
-    pipes.copyDemoCompany();
-    pipes.copyDemoActivity();
-    pipes.copyDemoTransaction();
-});
-
-/**
- * Creates the help files and places in base folder of buld
- * deprecated
- */
-gulp.task('dev-activity-help', function () {
-    var dest = paths.buildDevActivity;
-    var ActLoadEn = {
-        mainHeading: "REP Activity Form Load File Help",
-        title: 'Health Canada Activity Form Help'
-
-    };
-    var ActMainEn = {
-        mainHeading: "REP Activity Form Main Help",
-        title: 'Health Canada Activity Form Help'
-
-    };
-    var ActcontactEn = {
-        mainHeading: "REP Activity Form Rep Contact Help",
-        title: 'Health Canada Activity Form Help'
-
-    };
-    var destName = "help-activity-load-en.html";
-    pipes.createHelpFile(paths.englishTemplate, ActLoadEn, (paths.helpTemplates + destName), dest, destName);
-    destName = "help-activity-main-en.html";
-    pipes.createHelpFile(paths.englishTemplate, ActMainEn, (paths.helpTemplates + destName), dest, destName);
-    destName = "help-activity-rep-en.html";
-    pipes.createHelpFile(paths.englishTemplate, ActcontactEn, (paths.helpTemplates + destName), dest, destName);
-
-    //french
-    destName = "help-activity-load-fr.html";
-    pipes.createHelpFile(paths.englishTemplate, ActLoadEn, (paths.helpTemplates + destName), dest, destName);
-    destName = "help-activity-main-fr.html";
-    pipes.createHelpFile(paths.englishTemplate, ActMainEn, (paths.helpTemplates + destName), dest, destName);
-    destName = "help-activity-rep-fr.html";
-    pipes.createHelpFile(paths.englishTemplate, ActcontactEn, (paths.helpTemplates + destName), dest, destName)
-
-});
 
 /******** Dossier Related  tasks  *****************/
 
-gulp.task('copyWetDevDossier', function () {
+gulp.task('dev-dossier-copyWet', function () {
     return (pipes.copyWet(dossierPaths.buildDevDossier))
 });
-gulp.task('copyLibDevDossier', function () {
+gulp.task('dev-dossier-copyLib', function () {
     var def = Q.defer();
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return (copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
 });
 
-gulp.task('copyDossierTranslateDev', ['copyDossierCommonTranslateDev'], function () {
+gulp.task('dev-dossier-copyTranslate', ['dev-dossier-copyCommonTranslate'], function () {
     var translationList = [
         dossierTranslationBaseFiles.dosageForm,
         dossierTranslationBaseFiles.dossier,
@@ -1226,7 +1177,7 @@ gulp.task('copyDossierTranslateDev', ['copyDossierCommonTranslateDev'], function
 });
 
 
-gulp.task('copyDossierSrcDev', ['copyDossierCommonSrcDev'], function () {
+gulp.task('dev-dossier-copySrc', ['dev-dossier-copyCommonSrc'], function () {
 
     var dossierSrcPaths = [
 
@@ -1290,7 +1241,7 @@ function copyDossierHtml(src, dateToday) {
 /**
  * Copies the common components from the release 1 directory to the dossier build
  * */
-gulp.task('copyDossierCommonSrcDev', function () {
+gulp.task('dev-dossier-copyCommonSrc', function () {
     var dossierSrcPaths = [
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
         jsComponentPaths.repContactListPath + '**/*',
@@ -1345,7 +1296,7 @@ function copyCommonDossierHtml(src, dateToday) {
 }
 
 
-gulp.task('copyDossierCommonTranslateDev', function () {
+gulp.task('dev-dossier-copyCommonTranslate', function () {
     var translationList = [
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
         translationBaseFiles.general,
@@ -1363,7 +1314,7 @@ gulp.task('copyDossierCommonTranslateDev', function () {
 /* Copies the common services dossier uses to the dev build folder
  **
  */
-gulp.task('copyDossierCommonServicesDev', function () {
+gulp.task('dev-dossier-copyCommonServices', function () {
     var copySources = gulp.src([
             jsServiceFiles.applicationInfoService,
             jsServiceFiles.dataLists,
@@ -1404,7 +1355,7 @@ gulp.task('copyDossierCommonServicesDev', function () {
 
  });*/
 
-gulp.task('copyEnDossierRootEXT', function () {
+gulp.task('dev-dossier-createEnRootEXT', function () {
     var lang = 'en';
     var dest = dossierPaths.buildDevDossier + 'app/';
     //formType not needed
@@ -1413,7 +1364,7 @@ gulp.task('copyEnDossierRootEXT', function () {
     );
 });
 
-gulp.task('copyFrDossierRootEXT', function () {
+gulp.task('dev-dossier-createFrRootEXT', function () {
     var lang = 'fr';
     var dest = dossierPaths.buildDevDossier + 'app/';
     //formType not needed
@@ -1422,7 +1373,7 @@ gulp.task('copyFrDossierRootEXT', function () {
     );
 });
 
-gulp.task('copyFrDossierRootINT', function () {
+gulp.task('dev-dossier-createFrRootINT', function () {
     var lang = 'fr';
     var dest = dossierPaths.buildDevDossier + 'app/';
     //formType not needed
@@ -1435,7 +1386,7 @@ gulp.task('copyFrDossierRootINT', function () {
  *
  *
  */
-gulp.task('copyEnDossierRootINT', function () {
+gulp.task('dev-dossier-createEnRootINT', function () {
     var lang = 'en';
     var dest = dossierPaths.buildDevDossier + 'app/';
     //formType not needed
@@ -1452,7 +1403,7 @@ gulp.task('copyEnDossierRootINT', function () {
  * Creates 4 html files- internal english, internal french, external english, external french
  */
 
-gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossierRootEXT', 'copyFrDossierRootEXT', 'copyFrDossierRootINT', 'copyEnDossierRootINT', 'dossierCreateResourcesDev'], function () {
+gulp.task('DossierHtml-devBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createEnRootEXT', 'dev-dossier-createEnRootINT', 'dev-dossier-createFrRootEXT', 'dev-dossier-createFrRootINT', 'dev-dossier-createResources'], function () {
     var ignoreDir = '/build/dev/dossier';
     var buildDir = dossierPaths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;
@@ -1467,13 +1418,13 @@ gulp.task('DossierHtml', ['copyDossierSrcDev', 'copyLibDevDossier', 'copyEnDossi
     );
 });
 
-gulp.task('prod-clean', function () {
+gulp.task('prod-cleanEnvironment', function () {
     pipes.cleanBuild(paths.buildProd)
 
 });
 
 //activity
-gulp.task('prod-activity-createEnExtRoot', function () {
+gulp.task('prod-activity-createRoots', function () {
     var dest = paths.buildProd + 'activity/app/scripts/';
     //var result= pipes.cleanBuild(dest);
     return (
@@ -1485,7 +1436,7 @@ gulp.task('prod-activity-createEnExtRoot', function () {
 });
 
 
-gulp.task('prod-activity-compileSrc', ['prod-activity-copyDependencies', 'prod-activity-createEnExtRoot'], function () {
+gulp.task('prod-activity-compileSrc', ['prod-activity-copyDependencies', 'prod-activity-createRoots'], function () {
     var baseActivityPath = paths.buildProd + 'activity/app/scripts/';
     var def = Q.defer();
     // var outName = 'activityEXT-en.min.js';
@@ -1512,71 +1463,9 @@ gulp.task('prod-activity-compileSrc', ['prod-activity-copyDependencies', 'prod-a
     outFiles = filesToConcat.slice();
     outFiles.push(baseActivityPath + 'activityAppEXT-fr*.js');
     return (pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-fr' + dateToday + '.min.js', destPath));
-
-    /* pipes.builtAppCmpScriptsProd(filesToConcat
-     , outName, paths.buildProd + '/activity/').on('end', function () {
-     def.resolve();
-     })
-     .on('error', def.reject);
-     return def.promise;*/
 })
 
-/*
- pipes.prodCompileActivitySrc= function (rootJsName) {
- var baseActivityPath = paths.buildProd + 'activity/app/scripts/';
- var def = Q.defer();
- var outName = 'activityEXT-en.min.js';
- var filesToConcat = [
- baseActivityPath + rootJsName,
- baseActivityPath + 'translations*.js',
- baseActivityPath + 'components/!**!/!*.js',
- baseActivityPath + 'directives/!**!/!*.js',
- baseActivityPath + 'services/!**!/!*.js'];
 
- pipes.builtAppCmpScriptsProd(filesToConcat
- , outName, paths.buildProd + '/activity/').on('end', function () {
- def.resolve();
- })
- .on('error', def.reject);
- return def.promise;
- }
- */
-
-
-/*gulp.task('prod-activity-compileAllSrc',['prod-activity-copyDependencies','prod-activity-createEnExtRoot'],function(){
-
- // return(pipes.prodCompileActivitySrc( 'activityAppEXT-en*.js'));
- return(pipes.prodCompileActivitySrc( 'activityAppEXT-en*.js'));
-
- });*/
-
-
-gulp.task('testProd', function () {
-    var baseActivityPath = paths.buildProd + 'activity/app/scripts/';
-    var outName = 'activityEXT-en.min.js';
-
-    //all the html is just copied
-    /* var srcs = [
-     baseActivityPath + 'components/!**!/!*.html',
-     baseActivityPath + 'directives/!**!/!*.html'
-    ];
-     pipes.copySrcProd(srcs, './build/dev/activity', paths.buildProd);*/
-    var htmlPartial = jsRootContent.partialActivityRoot;
-    var srcJs = [
-        paths.buildProd + 'activityEXT-en.min.js',
-        paths.buildProd + 'app/lib/**/angular*.js'
-
-        //  paths.buildProd + '/app/scripts/components/**/*.js'
-    ]
-    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJs, '/build/prod/', 'indexActivityEXT-en.html', paths.buildProd + 'result/');
-
-});
-
-
-gulp.task('copyWetProd', function () {
-    var dest = './build/prod/';
-    return (pipes.copyWet(dest))
-});
 
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
     pipes.insertDateStamp(templatePath, metaObj)
@@ -1609,7 +1498,7 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
 };
 
 
-gulp.task('prod-copySrcComponents', function () {
+gulp.task('prod-copySrc-components', function () {
     /*
      components: baseScript + '/components/',
      directives: baseScript + '/directives/',
@@ -1632,7 +1521,7 @@ gulp.task('prod-copySrcComponents', function () {
     )
 
 });
-gulp.task('prod-copySrcServices', function () {
+gulp.task('prod-copySrc-services', function () {
 
     var destPath = paths.buildProd + 'app/scripts/services/';
     var dateToday = createSuffixDate();
@@ -1647,7 +1536,7 @@ gulp.task('prod-copySrcServices', function () {
     )
 });
 
-gulp.task('prod-copySrcDirectives', function () {
+gulp.task('prod-copySrc-directives', function () {
 
     var destPath = paths.buildProd + 'app/scripts/directives/';
     var dateToday = createSuffixDate();
@@ -1667,12 +1556,8 @@ gulp.task('prod-copySrcDirectives', function () {
             .pipe(gulp.dest(destPath))
     )
 });
-gulp.task('prod-copySrcRoot', function () {
-    /*
-     components: baseScript + '/components/',
-     directives: baseScript + '/directives/',
-     services: baseScript + '/services/',
-     */
+gulp.task('prod-copySrc-root', function () {
+
     var destPath = paths.buildProd + 'app/scripts/';
     var dateToday = createSuffixDate();
     var copyRootJs = gulp.src(['./app/scripts/' + '*.js'],
@@ -1688,7 +1573,7 @@ gulp.task('prod-copySrcRoot', function () {
 });
 
 
-gulp.task('prod-copyTranslate', function () {
+gulp.task('prod-copySrc-translate', function () {
 
     var destPath = paths.buildProd + 'app/resources/';
     var translationList = [
@@ -1702,7 +1587,7 @@ gulp.task('prod-copyTranslate', function () {
     return (copyTranslations.pipe(gulp.dest(destPath)));
 });
 
-gulp.task('prod-copyR1Src', ['prod-copySrcDirectives', 'prod-copySrcComponents', 'prod-copySrcRoot', 'prod-copySrcServices', 'prod-copyTranslate'], function () {
+gulp.task('prod-copyAllSrc', ['prod-copySrc-directives', 'prod-copySrc-components', 'prod-copySrc-root', 'prod-copySrc-services', 'prod-copySrc-translate'], function () {
 
 });
 
@@ -1822,11 +1707,12 @@ gulp.task('prod-activityHtml', ['prod-activity-copyLib', 'prod-activity-copyStyl
 });
 
 
-gulp.task('prod-activityBuild', ['prod-activityHtml'], function () {
+gulp.task('prod-activity-build', ['prod-activityHtml'], function () {
 
     return (
         pipes.cleanBuild([paths.buildProd + 'activity/app/resources/',
             paths.buildProd + 'activity/app/scripts/services/',
+            paths.buildProd + 'activity/app/scripts/directives/',
             paths.buildProd + 'activity/app/scripts/**/*.js']))
 })
 
@@ -1845,7 +1731,6 @@ gulp.task('prod-activity-copyResources', function () {
         translationBaseFiles.general,
         translationBaseFiles.messages
     ];
-
     return (pipes.translateDev(translationList, paths.buildProd + 'activity/'));
 });
 gulp.task('prod-activity-compileResources', ['prod-activity-copyResources'], function () {
@@ -1858,21 +1743,10 @@ gulp.task('prod-activity-compileResources', ['prod-activity-copyResources'], fun
 });
 
 
-pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory) {
-
-    return (
-        copySourcesHtml.pipe(rename({
-                suffix: dateToday
-            }))
-            .pipe(gulp.dest(destDirectory))
-    )
-};
-
-
 
 
 gulp.task('watch-dev', function () {
-    var watcher = gulp.watch('app/**/*.js', ['ActivityHtml', 'CompanyHtml', 'TransactionHtml', 'DossierHtml']);
+    var watcher = gulp.watch('app/**/*.js', ['ActivityHtml-devBuild', 'CompanyHtml-devBuild', 'TransactionHtml-devBuild', 'DossierHtml-devBuild']);
     watcher.on('change', function (event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
     });
