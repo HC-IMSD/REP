@@ -3,9 +3,9 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button class="btn btn-default btn-xs" ng-click="transInfoCtrl.addInstruct('1')">
-                        {{'Regulatory Transaction Instructions'|translate}}
-                    </button>
+                    <a title="{{'Regulatory Transaction Instructions'|translate}}" class="btn-xs rep-help-button"
+                       id="startdate-picker-toggle" ng-click="transInfoCtrl.addInstruct('1')" button=""><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Transaction Instructions'|translate}}</span></a>
                 </div>
                 <h2 class="panel-title">{{'TRANSACTION_HDING'|translate}}</h2>
             </header>
@@ -192,9 +192,12 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-default btn-xs" ng-click="transInfoCtrl.addInstruct('2')">
-                            {{'Regulatory Activity Instructions'|translate}}
-                        </button>
+                       <!-- <button class="btn btn-default btn-xs rep-help-button" ng-click="transInfoCtrl.addInstruct('2')" aria-label="{{'Regulatory Activity Instructions'|translate}}">
+                             <i class="fa fa-question-circle fa-2x"></i>
+                        </button>-->
+                        <a title="{{'Regulatory Activity Instructions'|translate}}" class="btn-xs rep-help-button"
+                           id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct('2')" button=""><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Activity Instructions'|translate}}</span></a>
                     </div>
                     <h2 class="panel-title">{{'REG_ACT_CONTACT' |translate}}</h2>
                 </header>

@@ -51,7 +51,7 @@
     "method-override": "^2.1.2",
     "protractor": "^1.1.1",
     "q": "^1.1.2",
-    "run-sequence": "^1.2.1",
+    "run-sequence": "^1.2.2",
     "shelljs": "^0.2.6"
   }
 }

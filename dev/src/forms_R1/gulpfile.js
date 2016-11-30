@@ -194,7 +194,6 @@ var componentFolders = {
 };
 
 
-
 var jsServiceFiles = {
     activityService: paths.services + 'activity-service.js',
     applicationInfoService: paths.services + 'application-info-service.js',
@@ -441,8 +440,8 @@ pipes.translateDev = function (translateList, destPath, baseIgnore) {
         {read: true, base: baseIgnore});
     return (copySources.pipe(gulp.dest(destPath)));
     /*.on('end', function () {
-            def.resolve();
-        })
+     def.resolve();
+     })
      .on('error', def.reject);*/
     //return def.promise;
 };
@@ -628,9 +627,9 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
 
 pipes.cleanBuild = function (baseDir) {
     /* var deferred = Q.defer();
-    del(baseDir, function () {
-        deferred.resolve();
-    });
+     del(baseDir, function () {
+     deferred.resolve();
+     });
      return deferred.promise;*/
     return (del([baseDir]));
 };
@@ -788,9 +787,9 @@ gulp.task('dev-activity-createResources', ['dev-activity-copyTranslate'], functi
 gulp.task('dev-transaction-createResources', ['dev-transaction-copyTranslate'], function () {
     var devPath = paths.buildDevTransaction;
     return (
-    gulp.src(devPath + paths.translations + '*.json')
-        .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
-        .pipe(gulp.dest(devPath + paths.relScript))
+        gulp.src(devPath + paths.translations + '*.json')
+            .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
+            .pipe(gulp.dest(devPath + paths.relScript))
     )
 });
 gulp.task('dev-company-createResources', ['dev-company-copyTranslate'], function () {
@@ -1095,20 +1094,12 @@ function copyTransactionHtml(src, dateToday) {
 }
 
 
-gulp.task('dev-transaction-createEnRootEXT', function () {
-    var lang = 'en';
+gulp.task('dev-transaction-createRootJs', function () {
     var dest = paths.buildDevTransaction + '/app/scripts/';
     //formType not needed
     return (
-        pipes.generateRootJsFile(lang, '', paths.scripts + '/transactionApp.js', dest)
-    );
-});
-gulp.task('dev-transaction-createFrRootEXT', function () {
-    var lang = 'fr';
-    var dest = paths.buildDevTransaction + '/app/scripts/';
-    //formType not needed
-    return (
-        pipes.generateRootJsFile(lang, '', paths.scripts + '/transactionApp.js', dest)
+        pipes.generateRootJsFile('en', '', paths.scripts + '/transactionApp.js', dest) &&
+        pipes.generateRootJsFile('fr', '', paths.scripts + '/transactionApp.js', dest)
     );
 });
 gulp.task('dev-transaction-copyTranslate', function () {
@@ -1137,7 +1128,7 @@ gulp.task('dev-transaction-copyWetDep', function () {
 });
 
 
-gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copySrc', 'dev-transaction-copyLib', 'dev-transaction-createEnRootEXT', 'dev-transaction-createFrRootEXT', 'dev-transaction-createResources'], function () {
+gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copySrc', 'dev-transaction-copyLib', 'dev-transaction-createRootJs', 'dev-transaction-createResources'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot;
@@ -1474,7 +1465,6 @@ gulp.task('prod-activity-compileSrc', ['prod-activity-copyDependencies', 'prod-a
 })
 
 
-
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
     pipes.insertDateStamp(templatePath, metaObj)
         .pipe(inject(gulp.src([htmlPartial]), {
@@ -1600,7 +1590,6 @@ gulp.task('prod-copyAllSrc', ['prod-copySrc-directives', 'prod-copySrc-component
 });
 
 
-
 gulp.task('prod-activity-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*'],
         {read: true, base: ''});
@@ -1715,7 +1704,7 @@ gulp.task('prod-activityHtml', ['prod-activity-copyLib', 'prod-activity-copyStyl
 });
 
 
-gulp.task('prod-activity-build', ['prod-activityHtml'], function () {
+gulp.task('prod-activity-htmlBuild', ['prod-activityHtml'], function () {
 
     return (
         pipes.cleanBuild([paths.buildProd + 'activity/app/resources/',
@@ -1749,8 +1738,6 @@ gulp.task('prod-activity-compileResources', ['prod-activity-copyResources'], fun
             .pipe(gulp.dest(destPath + paths.relScript))
     )
 });
-
-
 
 
 gulp.task('watch-dev', function () {

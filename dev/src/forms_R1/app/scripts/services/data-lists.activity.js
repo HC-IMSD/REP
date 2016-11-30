@@ -464,7 +464,7 @@
                 "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
                 "PHONE_RQ_RESPONSE", //Response to telephone Request
                 "RISK_COMMUN_DOC", //Risk communication document
-                "SIGNAL_WORK_UP", //Signal Work up
+                "SIGNAL_WORK_UP" //Signal Work up
             ]);
 
         }
@@ -495,7 +495,7 @@
                 "EMAIL_RQ_RESPONSE",// response to email request
                 "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
                 "PHONE_RQ_RESPONSE", //Response to telephone Request
-                "UNSOLICITED_DATA",
+                "UNSOLICITED_DATA"
             ])
 
         }

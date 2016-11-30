@@ -43,13 +43,24 @@
             var filename = "HCREPRT";
             var month = date.getMonth() + 1;
             var day = date.getDate();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+
             if (month < 10) {
                 month = "0" + month;
             }
             if (day < 10) {
                 day = "0" + day;
             }
-            filename = filename + "_" + date.getFullYear() + "_" + month + "_" + day + "_" + date.getHours() + date.getMinutes();
+            if (hours < 10) {
+                hours = "0" + hours;
+            }
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+
+            filename = filename + "_" + date.getFullYear() + "_" + month + "_" + day + "_" + hours + minutes;
             return (filename);
         }
 

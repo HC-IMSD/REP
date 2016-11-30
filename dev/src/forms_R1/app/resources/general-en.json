@@ -37,5 +37,7 @@
   "PHARMACEUTICAL": "Pharmaceutical",
   "HELP_FILE_LOAD": "File Load Instructions",
   "HELP_ACTIVITY_MAIN": "Activity Instructions",
-  "HELP_ACTIVITY_REP": "REP Contact Instructions"
+  "HELP_ACTIVITY_REP": "REP Contact Instructions",
+  "CALENDAR": "Pick date from calendar",
+  "HIDE_CALENDAR": "Hide Calendar (escape key)"
 }

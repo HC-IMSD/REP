@@ -16,6 +16,7 @@
   "START_DATE": "fr_Start Date",
   "END_DATE": "fr_End Date",
   "REG_ACTIVITY": "fr_Regulatory Activity",
+  "REG_ACTIVITY_TYPE": "fr_Regulatory Activity Type",
   "SEQUENCE_TYPE": "fr_Sequence Description",
   "VERSION_NO": "fr_Version No.",
   "BRIEF_DESC": "fr_Brief Description",
@@ -89,5 +90,6 @@
   "TRANSACTION_HDING": "fr_Regulatory Transaction Enrolment",
   "LOAD_TRANSACTION": "fr_Load a Regulatory Transaction Enrolment File",
   "GENERATE_FINAL": "fr_Generate Final XML",
-  "CONTACT_SAME": "fr_I confirm that the above regulatory activity contact information is  valid."
+  "CONTACT_SAME": "fr_I confirm that the above regulatory activity contact information is  valid.",
+  "YEAR_CHANGE": "fr_Year of change"
 }

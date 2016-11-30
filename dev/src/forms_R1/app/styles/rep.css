@@ -63,3 +63,14 @@ label > select {
     margin: 10px auto;
 / / it will center them
 }
+
+.rep-help-button {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+.rep-normal-font {
+    font-weight: normal;
+}
+

@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('lcDetailsModule', [])
+        .module('lcDetailsModule', ['ui.bootstrap'])
 })();
 
 (function () {
@@ -45,8 +45,19 @@
         vm.descriptionVisible = false;
         vm.versionVisible = false;
         vm.ectd = false;
+        vm.popOpened = false;
+        vm.dateOptions = {
+            showWeeks: false,
+        };
+        vm.yearList = _createYearList();
 
         vm.$onInit = function () {
+
+            if (!vm.yearList || vm.yearList.length === 0) {
+
+                vm.yearList = _createYearList();
+            }
+            console.log(vm.yearList);
         };
 
         /**
@@ -61,6 +72,17 @@
                 vm.ectd = changes.isEctd.currentValue;
             }
 
+        };
+
+
+        vm.openStartDate = function () {
+            vm.startDateOpen = true;
+        };
+        vm.openEndDate = function () {
+            vm.endDateOpen = true;
+        };
+        vm.openFiledDate = function () {
+            vm.filedDateOpen = true;
         };
 
 
@@ -202,7 +224,6 @@
                 case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
                 case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
                 case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
-
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();
@@ -215,7 +236,7 @@
                 case('CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
                 case('EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
                 case('LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('MHPG_RQ_RESPONSE'):             /*FALLTHROUGH*/
+                case('MHPD_RQ_RESPONSE'):             /*FALLTHROUGH*/
                 case('NOC_RESPONSE'):                  /*FALLTHROUGH*/
                 case('NOD_RESPONSE'):                  /*FALLTHROUGH*/
                 case('NON_RESPONSE'):                 /*FALLTHROUGH*/
@@ -225,6 +246,9 @@
                 case('SDN_RESPONSE'):                 /*FALLTHROUGH*/
                 case('PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
                 case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
+                case('SCREENING_ACCEPT_RESPONSE'):        /*FALLTHROUGH*/
+                case('SCREENING_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
+                case('NOL_RESPONSE'):        /*FALLTHROUGH*/
 
                     setAsStartDate();
                     vm.setConcatDetails();
@@ -240,97 +264,47 @@
                     break;
 
                 case('UNSOLICITED_DATA'):
-                case('YEAR_LIST_OF_CHANGE'):
+
                     setAsDescription();
                     vm.setConcatDetails();
                     break;
 
-            }
-
-        }
-        vm.setDetailsState = function () {
-            var value = vm.lifecycleModel.descriptionValue
-            if (!value) {
-                vm.descriptionList = [];
-                return;
-            }
-
-            switch (value) {
-                case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
-                case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
-                case('CANCEL_LETTER'):          /*FALLTHROUGH*/
-                case('CHANGE_TO_DIN'):          /*FALLTHROUGH*/
-                case('DIN_DISCONTINUED'):       /*FALLTHROUGH*/
-                case('DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
-                case('INITIAL'):                /*FALLTHROUGH*/
-                case('NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
-                case('PANDEMIC_APPL'):          /*FALLTHROUGH*/
-                case('POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
-                case('POST_MARKET_SURV'):       /*FALLTHROUGH*/
-                case('POST_NOC_CHANGE'):        /*FALLTHROUGH*/
-                case('POST_AUTH_DIV1_CHANGE'):  /*FALLTHROUGH*/
-                case('PRESUB_MEETING_PKG'):     /*FALLTHROUGH*/
-                case('PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
-                case('PRISTINE_PM'):            /*FALLTHROUGH*/
-                case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
-                case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
-                case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
-
-                    //nothing visible
-                    setDetailsAsNone();
-                    vm.setConcatDetails();
-                    break;
-
-                case('COMMENTS_NOC'):             /*FALLTHROUGH*/
-                case('COMMENTS_SUMMARY_BASIS'):   /*FALLTHROUGH*/
-                case('MEETING_MINUTES'):            /*FALLTHROUGH*/
-                case('ADVISEMENT_LETTER_RESPONSE'):   /*FALLTHROUGH*/
-                case('CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case('EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
-                case('LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('MHPG_RQ_RESPONSE'):             /*FALLTHROUGH*/
-                case('NOC_RESPONSE'):                  /*FALLTHROUGH*/
-                case('NOD_RESPONSE'):                  /*FALLTHROUGH*/
-                case('NON_RESPONSE'):                 /*FALLTHROUGH*/
-                case('PROCESSING_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case('QUAL_CLIN_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case('QUAL_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case('SDN_RESPONSE'):                 /*FALLTHROUGH*/
-                case('PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
-                case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-
-                    setAsStartDate();
-                    vm.setConcatDetails();
-                    break;
-                case('RMP_VERSION_DATE'):
-                    setVersionAndDate();
-                    vm.setConcatDetails();
-                    break;
-
-                case('FOR_PERIOD'):
-                    setAsDatePeriod();
-                    vm.setConcatDetails();
-                    break;
-
-                case('UNSOLICITED_DATA'):
                 case('YEAR_LIST_OF_CHANGE'):
-                    setAsDescription();
+                    setAsDescriptionYear();
                     vm.setConcatDetails();
                     break;
 
+                default:
+                    console.warn("Lifecycle Details activity not found: " + value);
+                    break;
             }
 
         }
+
+
 
         /**
          * @ngdoc method -sets the details fields to all hidden
          */
+        function setAsDescriptionYear() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = true;
+            vm.versionVisible = false;
+            vm.yearVisible = true;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.version = "";
+        }
+
         function setDetailsAsNone() {
 
             vm.endDateVisible = false;
             vm.startDateVisible = false;
             vm.descriptionVisible = false;
             vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
@@ -342,6 +316,8 @@
             vm.startDateVisible = false;
             vm.descriptionVisible = true;
             vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.version = "";
@@ -354,6 +330,8 @@
             vm.startDateLabel = "DATED"
             vm.descriptionVisible = false;
             vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.version = "";
@@ -365,9 +343,11 @@
             vm.startDateLabel = "DATED"
             vm.descriptionVisible = false;
             vm.versionVisible = true;
+            vm.yearVisible = false;
+            vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
-            vm.lifecycleModel.details = "";
+
 
         }
 
@@ -378,6 +358,8 @@
             vm.startDateLabel = "START_DATE"
             vm.descriptionVisible = false;
             vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.lifecycleModel.year = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.version = "";
         }
@@ -387,6 +369,8 @@
             vm.startDateVisible = false;
             vm.descriptionVisible = true;
             vm.versionVisible = true;
+            vm.yearVisible = false;
+            vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
         }
@@ -406,12 +390,15 @@
                 endDate = convertDate(vm.lifecycleModel.endDate);
                 concatText = enDescription + " of " + startDate + " to " + endDate;
             }
-            if (vm.descriptionVisible) {
+            if (vm.descriptionVisible && !vm.yearVisible) {
 
                 concatText = enDescription + "\n" + vm.lifecycleModel.details;
             }
             if (vm.versionVisible) {
                 concatText = enDescription + vm.lifecycleModel.version + concatText;
+            }
+            if (vm.yearVisible) {
+                concatText = vm.lifecycleModel.year + ": " + vm.lifecycleModel.details;
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;
@@ -420,11 +407,11 @@
             var translateText = "";
             //note this is done whether loaded or not should be OK
             translateText = $translate.instant(key, "", '', 'en')
-            console.log("This is the translate " + translateText)
             return translateText;
         }
 
         function convertDate(value) {
+
             if (!value) return "";
             var date = new Date(value);
             var m_names = ["Jan", "Feb", "Mar",
@@ -504,19 +491,14 @@
             return (false);
         }
 
-        /**
-         * @ngdoc method used to determine if record should be editable. Used for amend
-         * @returns {boolean}
-         */
-        /* vm.setNotEditable = function () {
-
-         if (vm.isAmend() && !vm.addressModel.amendRecord) {
-         return true;
-         }
-         return false;
-         }
-
-         }*/
-
+        function _createYearList() {
+            var start = 1980;
+            var end = (new Date()).getFullYear();
+            var result = [];
+            for (var i = start; i <= end; i++) {
+                result.push("" + i)
+            }
+            return (result);
+        }
     }
 })();

@@ -12,10 +12,11 @@
   "SOLICITED_RQ": "Requester of Solicited Information",
   "REP_CONTACT_INFO": "Main Contact Information",
   "NAME": "Name",
-  "DATED": "Dated",
-  "START_DATE": "Start Date",
-  "END_DATE": "End Date",
+  "DATED": "Dated (YYYY-MM-DD)",
+  "START_DATE": "Start Date (YYYY-MM-DD)",
+  "END_DATE": "End Date (YYYY-MM-DD)",
   "REG_ACTIVITY": "Regulatory Activity",
+  "REG_ACTIVITY_TYPE": "Regulatory Activity Type",
   "SEQUENCE_TYPE": "Sequence Description",
   "VERSION_NO": "Version No.",
   "BRIEF_DESC": "Brief Description",
@@ -48,6 +49,7 @@
   "NOC_RESPONSE": "Response to NOC/c-QN",
   "NOD_RESPONSE": "Response to NOD",
   "NON_RESPONSE": "Response to NON",
+  "NOL_RESPONSE": "Response to NOL",
   "PROCESSING_CLARIF_RESPONSE": "Response to Processing Clarification Request",
   "QUAL_CLIN_CLARIF_RESPONSE": "Response to Quality and Clinical Clarification Request",
   "QUAL_CLARIF_RESPONSE": "Response to Quality Clarification Request",
@@ -91,5 +93,6 @@
   "COMPANY_INFO": "Company Information",
   "ADDRESS_INFO": "Address Information",
   "GENERATE_FINAL": "Generate Final XML",
-  "CONTACT_SAME": "I confirm that the above regulatory activity contact information is  valid."
+  "CONTACT_SAME": "I confirm that the above regulatory activity contact information is  valid.",
+  "YEAR_CHANGE": "Year of the change"
 }
