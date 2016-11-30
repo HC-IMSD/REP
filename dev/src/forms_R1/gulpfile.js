@@ -13,7 +13,8 @@ var angularFilesort = require('gulp-angular-filesort');
 var replace = require('gulp-replace-task');
 var stringReplace = require('gulp-string-replace');
 var gutil = require('gulp-util');
-var dateFormat = require('dateformat')
+var dateFormat = require('dateformat');
+var runSequence = require('run-sequence');
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -433,16 +434,17 @@ pipes.fullTranslateList = function (translateList) {
 };
 pipes.translateDev = function (translateList, destPath, baseIgnore) {
 
-    var def = Q.defer();
+    // var def = Q.defer();
     if (!baseIgnore) baseIgnore = ".";
     var completeList = pipes.fullTranslateList(translateList);
     var copySources = gulp.src(completeList,
         {read: true, base: baseIgnore});
-    copySources.pipe(gulp.dest(destPath)).on('end', function () {
+    return (copySources.pipe(gulp.dest(destPath)));
+    /*.on('end', function () {
             def.resolve();
         })
-        .on('error', def.reject);
-    return def.promise;
+     .on('error', def.reject);*/
+    //return def.promise;
 };
 pipes.insertDateStamp = function (template, valsObj) {
     var now = new Date();
@@ -625,12 +627,12 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
 };
 
 pipes.cleanBuild = function (baseDir) {
-    var deferred = Q.defer();
+    /* var deferred = Q.defer();
     del(baseDir, function () {
         deferred.resolve();
     });
-    return deferred.promise;
-    //return (del(paths.buildDev));
+     return deferred.promise;*/
+    return (del([baseDir]));
 };
 pipes.copyAllSrc = function () {
     var dest = './build/demo/';
@@ -785,10 +787,11 @@ gulp.task('dev-activity-createResources', ['dev-activity-copyTranslate'], functi
 });
 gulp.task('dev-transaction-createResources', ['dev-transaction-copyTranslate'], function () {
     var devPath = paths.buildDevTransaction;
+    return (
     gulp.src(devPath + paths.translations + '*.json')
         .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
         .pipe(gulp.dest(devPath + paths.relScript))
-
+    )
 });
 gulp.task('dev-company-createResources', ['dev-company-copyTranslate'], function () {
     var devPath = paths.buildDevCompany;
@@ -1123,7 +1126,7 @@ gulp.task('dev-transaction-copyTranslate', function () {
     return (pipes.translateDev(translationList, paths.buildDevTransaction))
 });
 
-gulp.task('dev-transaction-copyLibDev', function () {
+gulp.task('dev-transaction-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevTransaction))
@@ -1134,10 +1137,11 @@ gulp.task('dev-transaction-copyWetDep', function () {
 });
 
 
-gulp.task('TransactionHtml-devBuild', ['copyTransactionSrcDev', 'copyLibDevTransaction', 'copyEnTransactionRootEXT', 'copyFrTransactionRootEXT', 'transactionCreateResourcesDev'], function () {
+gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copySrc', 'dev-transaction-copyLib', 'dev-transaction-createEnRootEXT', 'dev-transaction-createFrRootEXT', 'dev-transaction-createResources'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot;
+
     pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionApp-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '');
     pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionApp-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', '')
 
@@ -1146,6 +1150,10 @@ gulp.task('TransactionHtml-devBuild', ['copyTransactionSrcDev', 'copyLibDevTrans
     );
 
 });
+function callback() {
+
+    console.log("complete")
+}
 
 
 /******** Dossier Related  tasks  *****************/
