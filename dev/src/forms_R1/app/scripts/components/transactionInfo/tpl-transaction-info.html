@@ -3,9 +3,10 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <a title="{{'Regulatory Transaction Instructions'|translate}}" class="btn-xs rep-help-button"
-                       id="startdate-picker-toggle" ng-click="transInfoCtrl.addInstruct('1')" button=""><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Transaction Instructions'|translate}}</span></a>
+                    <button title="{{'Regulatory Transaction Instructions'|translate}}" class="btn-xs rep-help-button"
+                            id="startdate-picker-toggle" ng-click="transInfoCtrl.addInstruct('1')"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Transaction Instructions'|translate}}</span>
+                    </button>
                 </div>
                 <h2 class="panel-title">{{'TRANSACTION_HDING'|translate}}</h2>
             </header>
@@ -123,10 +124,10 @@
                 <div class="row">
                     <div class="form-group col-md-4"
                          ng-class="{'has-error':transInfoForm.isSolicited.$invalid}">
-                        <label for="isSolicited_{{$id}}" class="required full-width">
+                        <label for="isSolicited" class="required full-width">
                             <span class="field-name">{{"IS_SOLICITED" |translate}}</span>
                             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                            <select id="isSolicited_{{$id}}" name="isSolicited"
+                            <select id="isSolicited" name="isSolicited"
                                     ng-model="transInfoCtrl.transactionModel.isSolicited"
                                     class="form-control"
                                     ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
@@ -141,24 +142,40 @@
                     </div>
                 </div>
                 <div class="row" ng-show="transInfoCtrl.showSolicitedDetail">
-                    <div class="form-group col-md-12"
-                         ng-class="{'has-error':transInfoForm.solicitedRequester.$invalid}">
-                        <label for="solicitedRequester_{{$id}}" class="required full-width">
+                    <div class="form-group col-md-4" ng-class="{'has-error':transInfoForm.solicitedList.$invalid}">
+                        <label for="solicited_list" class="required full-width">
                             <span class="field-name">{{"SOLICITED_RQ" |translate}}</span>
                             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                            <strong id="solicitedRequester-error" class="error"
-                                    ng-if="transInfoCtrl.showError(transInfoForm.solicitedRequester)">
-                        <span class="label label-danger" ng-messages="transInfoForm.solicitedRequester.$error">
+                            <select id="solicited_list" name="solicitedList"
+                                    ng-model="transInfoCtrl.transactionModel.solicitedRequester"
+                                    class="form-control"
+                                    ng-options="choice |translate for choice in transInfoCtrl.requesterList |orderByTranslatedOtherFirst"
+                                    ng-change="transInfoCtrl.setOtherSolicitor()" required></select>
+                            <strong id="solicitor-error" class="error"
+                                    ng-if="transInfoCtrl.showError(transInfoForm.solicitedList)">
+                        <span class="label label-danger" ng-messages="transInfoForm.solicitedList.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                             </strong>
                         </label>
-                    <textarea maxlength="256" size="256" id="solicitedRequester_{{$id}}" name="solicitedRequester"
-                              ng-model="transInfoCtrl.transactionModel.solicitedRequester"
-                              class="form-control full-width"
-                              ng-required="transInfoCtrl.showSolicitedDetail"></textarea>
-
-
+                    </div>
+                    <div class="form-group col-md-8"
+                         ng-class="{'has-error':transInfoForm.otherSolicitedRequester.$invalid}"
+                         ng-show="transInfoCtrl.showOtherSolicitedDetail">
+                        <label for="otherSolicitedRequester" class="required full-width">
+                            <span class="field-name">{{"SOLICITED_RQ_OTHER" |translate}}</span>
+                            <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                            <strong id="othersolicitedRequester-error" class="error"
+                                    ng-if="transInfoCtrl.showError(transInfoForm.otherSolicitedRequester)">
+                        <span class="label label-danger" ng-messages="transInfoForm.otherSolicitedRequester.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                            </strong>
+                        </label>
+                    <textarea maxlength="256" size="256" id="otherSolicitedRequester" name="otherSolicitedRequester"
+                              ng-model="transInfoCtrl.transactionModel.otherSolicitedRequester"
+                              class="form-control full-width" rows="2"
+                              ng-required="transInfoCtrl.showOtherSolicitedDetail"></textarea>
                     </div>
                 </div>
                 <div>
@@ -192,12 +209,10 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                       <!-- <button class="btn btn-default btn-xs rep-help-button" ng-click="transInfoCtrl.addInstruct('2')" aria-label="{{'Regulatory Activity Instructions'|translate}}">
-                             <i class="fa fa-question-circle fa-2x"></i>
-                        </button>-->
-                        <a title="{{'Regulatory Activity Instructions'|translate}}" class="btn-xs rep-help-button"
-                           id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct('2')" button=""><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Activity Instructions'|translate}}</span></a>
+                        <button title="{{'Regulatory Activity Instructions'|translate}}" class="btn-xs rep-help-button"
+                                id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct('2')"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Activity Instructions'|translate}}</span>
+                        </button>
                     </div>
                     <h2 class="panel-title">{{'REG_ACT_CONTACT' |translate}}</h2>
                 </header>

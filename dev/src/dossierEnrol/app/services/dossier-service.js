@@ -1477,7 +1477,7 @@
             record.ceroFluid = false;
             record.dorsalRoot = false;
             record.duraMater = false;
-            record.hypothalmus = false;
+            record.hypothalamus = false;
             record.retina = false;
             record.spinalCord = false;
             record.trigeminal = false;
@@ -1600,7 +1600,7 @@
             record.cerebrospinal_fluid = noValue;
             record.dorsal_root_ganglia = noValue;
             record.dura_mater = noValue;
-            record.hypothalmus = noValue;
+            record.hypothalamus = noValue;
             record.retina_optic = noValue;
             record.spinal_cord = noValue;
             record.trigerminal_ganglia = noValue;
@@ -1737,7 +1737,7 @@
             record.cerebrospinal_fluid = jsonObj.ceroFluid === true ? yesValue : noValue;
             record.dorsal_root_ganglia = jsonObj.dorsalRoot === true ? yesValue : noValue;
             record.dura_mater = jsonObj.duraMater === true ? yesValue : noValue;
-            record.hypothalmus = jsonObj.hypothalmus === true ? yesValue : noValue;
+            record.hypothalamus = jsonObj.hypothalamus === true ? yesValue : noValue;
             record.retina_optic = jsonObj.retina === true ? yesValue : noValue;
             record.spinal_cord = jsonObj.spinalCord === true ? yesValue : noValue;
             record.trigerminal_ganglia = jsonObj.trigeminal === true ? yesValue : noValue;
@@ -2011,7 +2011,7 @@
             model.ceroFluid = json.cerebrospinal_fluid === yesValue;
             model.dorsalRoot = json.dorsal_root_ganglia === yesValue;
             model.duraMater = json.dura_mater === yesValue;
-            model.hypothalmus = json.hypothalmus === yesValue;
+            model.hypothalamus = json.hypothalamus === yesValue;
             model.retina = json.retina_optic === yesValue;
             model.spinalCord = json.spinal_cord === yesValue;
             model.trigeminal = json.trigerminal_ganglia === yesValue;

@@ -42,9 +42,10 @@
   "ADD_A":"fr_Add a ",
   "COUNTRY_MAN": "fr_Country of Manufacture",
   "DELETE_COUNTRY":"fr_Delete Country",
-  "COUNTRIES_MANUFACT":"fr_Countries of manufacture for this drug product",
   "ADD_CRP": "fr_Add Canadian Reference Product",
   "IS_CDN_REF": "fr_Are there Canadian Reference Products?",
   "DOSSIER_TYPE": "fr_Dossier Type",
-  "INGRED_MAT_NAME": "fr_Ingredient or Material Name"
+  "INGRED_MAT_NAME": "fr_Ingredient or Material Name",
+  "HELP_DOSSIER": "fr_Dossier Instructions",
+  "HELP_DRUG_PRODUCT": "fr_Drug Product Instructions"
 }

@@ -40,13 +40,15 @@
                     <label for="strength" class="required">
                         <span class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="strength" data-ng-model="ingRecCtrl.ingModel.strength"
-                               class="form-control full-width" name="strengthFld" maxlength="15" ng-required="true"/>
+                        <input type="number" id="strength" data-ng-model="ingRecCtrl.ingModel.strength"
+                               class="form-control full-width" name="strengthFld" ng-min="0" ng-required="true"/>
                         <strong id="strength-error" class="error"
                                 ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.strengthFld.$invalid,ingRecCtrl.activeIngForm.strengthFld.$touched)">
                         <span class="label label-danger"
                               ng-messages="ingRecCtrl.activeIngForm.strengthFld.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                            <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
+                             <span ng-message="min"><span translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
                         </span>
                         </strong>
                     </label>

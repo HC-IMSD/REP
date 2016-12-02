@@ -41,6 +41,7 @@
 
         vm.lifecycleModel = {};
         vm.endDateVisible = false;
+        vm.yearVisible = false;
         vm.startDateVisible = false;
         vm.descriptionVisible = false;
         vm.versionVisible = false;
@@ -53,11 +54,10 @@
 
         vm.$onInit = function () {
 
+            //lazy load of year lust
             if (!vm.yearList || vm.yearList.length === 0) {
-
                 vm.yearList = _createYearList();
             }
-            console.log(vm.yearList);
         };
 
         /**
@@ -94,7 +94,6 @@
         }
 
         vm.disableDeleteState = function () {
-
             //this is noEctd case
             if (!vm.ectd) {
                 return true;
@@ -203,7 +202,6 @@
                 vm.descriptionList = [];
                 return;
             }
-
             switch (value) {
                 case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
                 case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
@@ -347,8 +345,6 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
-
-
         }
 
         function setAsDatePeriod() {

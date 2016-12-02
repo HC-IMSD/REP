@@ -287,6 +287,7 @@
         lifecycleRec.endDate = lifecycleObj.sequence_to_date;
         lifecycleRec.details = lifecycleObj.sequence_details;
         lifecycleRec.version = lifecycleObj.sequence_version;
+        lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.sequence_concat;
         return (lifecycleRec);
     }
@@ -294,7 +295,6 @@
 
     function _mapLifecycleRecToOutput(lifecycleObj) {
         var lifecycleRec = {};
-
         lifecycleRec.sequence_number = lifecycleObj.sequence;
         lifecycleRec.date_filed = lifecycleObj.dateFiled;
         lifecycleRec.control_number = lifecycleObj.controlNumber;
@@ -304,6 +304,7 @@
         lifecycleRec.sequence_to_date = lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
         lifecycleRec.sequence_version = lifecycleObj.version;
+        lifecycleRec.sequence_year = lifecycleObj.year;
         lifecycleRec.sequence_concat = lifecycleObj.sequenceConcat;
         return (lifecycleRec);
     }

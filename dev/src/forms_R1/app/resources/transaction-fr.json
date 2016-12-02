@@ -11,6 +11,7 @@
   "IS_ECTD": "fr_Is this an eCTD transaction?",
   "IS_SOLICITED": "fr_Is this solicited information",
   "SOLICITED_RQ": "fr_Requester of Solicited Information",
+  "SOLICITED_RQ_OTHER": "fr_Other Requester Details",
   "REP_CONTACT_INFO": "Main Contact Information",
   "DATED": "fr_Dated",
   "START_DATE": "fr_Start Date",

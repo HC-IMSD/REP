@@ -55,7 +55,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <select id="dosage-form-listh_{{$id}}" data-ng-model="$ctrl.productModel.dosageForm"
                                 name="dosageForm" class="form-control full-width" required
-                                ng-options="formType |translate for formType in $ctrl.dosageFormList | orderByTranslated">
+                                ng-options="formType |translate for formType in $ctrl.dosageFormList | orderByTranslatedOtherFirst">
                         </select>
                         <strong id="dosageForm-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.dosageForm)">

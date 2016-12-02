@@ -1,7 +1,7 @@
 {
   "ADD_TRANSACTION": "Add Record",
   "SEQUENCE_NUM": "Sequence Number",
-  "DATE_SUBMITTED": "Date Submitted",
+  "DATE_SUBMITTED": "Date Submitted (YYYY-MM-DD)",
   "SEQUENCE_DESCRIPT": "Sequence Description",
   "IS_ACTCHANGES": "Same as Regulatory Activity Contact for this Submission?",
   "COMPANY_ID": "Company ID",
@@ -10,6 +10,7 @@
   "IS_ECTD": "Is this an eCTD transaction?",
   "IS_SOLICITED": "Is this solicited information?",
   "SOLICITED_RQ": "Requester of Solicited Information",
+  "SOLICITED_RQ_OTHER": "Other Requester Details",
   "REP_CONTACT_INFO": "Main Contact Information",
   "NAME": "Name",
   "DATED": "Dated (YYYY-MM-DD)",

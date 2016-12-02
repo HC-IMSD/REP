@@ -72,9 +72,9 @@
         //config for applicationInfoCompoenent
         self.configField = {
             "label": "DOSSIER_ID",
-            "fieldLength": "6",
+            "fieldLength": "7",
             "tagName": "dossierID",
-            "errorMsg": "MSG_LENGTH_6",
+            "errorMsg": "MSG_LENGTH_7",
             "isDossier": true
         };
         self.isIncomplete = true;

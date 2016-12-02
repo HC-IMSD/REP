@@ -9,6 +9,7 @@
 
     angular.module('hpfbConstants')
         .constant('CANADA','CAN')
+        .constant('OTHER', 'OTHER')
         .constant('USA','USA');
 
 })();

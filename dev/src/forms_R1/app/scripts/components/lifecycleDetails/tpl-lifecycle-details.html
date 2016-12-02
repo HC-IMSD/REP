@@ -30,11 +30,12 @@
                                            is-open="lifecycleCtrl.filedDateOpen" ng-required="true"
                                            ng-readonly="!lifecycleCtrl.ectd"/>
                                       <span class="input-group-btn">
-                                            <a title="{{'CALENDAR'|translate}}" class="btn btn-default"
-                                               aria-haspopup="true"
-                                               id="filed-picker-toggle" ng-click="lifecycleCtrl.openFiledDate()"
-                                               button=""><span
-                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{'CALENDAR'|translate}}</span></a>
+                                            <button title="{{'CALENDAR'|translate}}" class="btn btn-default"
+                                                    aria-haspopup="true"
+                                                    id="filed-picker-toggle"
+                                                    ng-click="lifecycleCtrl.openFiledDate()"><span
+                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{'CALENDAR'|translate}}</span>
+                                            </button>
                                       </span>
                                 </p>
 
@@ -130,11 +131,12 @@
                                            ng-required="lifecycleCtrl.startDateVisible"
                                            data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                                       <span class="input-group-btn">
-                                            <a title="{{'CALENDAR'|translate}}" class="btn btn-default"
-                                               aria-haspopup="true"
-                                               id="activity-picker-toggle" ng-click="lifecycleCtrl.openStartDate()"
-                                               button=""><span
-                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{'CALENDAR'|translate}}</span></a>
+                                            <button title="{{'CALENDAR'|translate}}" class="btn btn-default"
+                                                    aria-haspopup="true"
+                                                    id="activity-picker-toggle" ng-click="lifecycleCtrl.openStartDate()"
+                                            ><span
+                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{'CALENDAR'|translate}}</span>
+                                            </button>
                                       </span>
                                 </p>
                                 <strong id="startDate-error" class="error"
@@ -162,11 +164,12 @@
                                            ng-required="lifecycleCtrl.endDateVisible"
                                            data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                                       <span class="input-group-btn">
-                                            <a title="{{'CALENDAR'|translate}}" class="btn btn-default"
-                                               aria-haspopup="true"
-                                               id="dateEnd-picker-toggle" ng-click="lifecycleCtrl.openEndDate()"
-                                               button=""><span
-                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{'CALENDAR'|translate}}</span></a>
+                                            <button title="{{'CALENDAR'|translate}}" class="btn btn-default"
+                                                    aria-haspopup="true"
+                                                    id="dateEnd-picker-toggle"
+                                                    ng-click="lifecycleCtrl.openEndDate()"><span
+                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{'CALENDAR'|translate}}</span>
+                                            </button>
                                       </span>
                                 </p>
                                 <strong id="endDate-error" class="error"

@@ -1354,45 +1354,19 @@ gulp.task('dev-dossier-copyCommonServices', function () {
 
  });*/
 
-gulp.task('dev-dossier-createEnRootEXT', function () {
-    var lang = 'en';
+gulp.task('dev-dossier-createRootJS', function () {
+
     var dest = dossierPaths.buildDevDossier + 'app/';
     //formType not needed
     return (
-        pipes.generateRootJsFile(lang, 'EXT', dossierPaths.dossierApp, dest)
+        pipes.generateRootJsFile('en', 'EXT', dossierPaths.dossierApp, dest) &&
+        pipes.generateRootJsFile('fr', 'EXT', dossierPaths.dossierApp, dest) &&
+        pipes.generateRootJsFile('en', 'INT', dossierPaths.dossierApp, dest) &&
+        pipes.generateRootJsFile('fr', 'INT', dossierPaths.dossierApp, dest)
     );
 });
 
-gulp.task('dev-dossier-createFrRootEXT', function () {
-    var lang = 'fr';
-    var dest = dossierPaths.buildDevDossier + 'app/';
-    //formType not needed
-    return (
-        pipes.generateRootJsFile(lang, 'EXT', dossierPaths.dossierApp, dest)
-    );
-});
 
-gulp.task('dev-dossier-createFrRootINT', function () {
-    var lang = 'fr';
-    var dest = dossierPaths.buildDevDossier + 'app/';
-    //formType not needed
-    return (
-        pipes.generateRootJsFile(lang, 'INT', dossierPaths.dossierApp, dest)
-    );
-});
-
-/**
- *
- *
- */
-gulp.task('dev-dossier-createEnRootINT', function () {
-    var lang = 'en';
-    var dest = dossierPaths.buildDevDossier + 'app/';
-    //formType not needed
-    return (
-        pipes.generateRootJsFile(lang, 'INT', dossierPaths.dossierApp, dest)
-    );
-});
 
 /**
  * Generates the base Dossier HTML file.
@@ -1402,7 +1376,7 @@ gulp.task('dev-dossier-createEnRootINT', function () {
  * Creates 4 html files- internal english, internal french, external english, external french
  */
 
-gulp.task('DossierHtml-devBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createEnRootEXT', 'dev-dossier-createEnRootINT', 'dev-dossier-createFrRootEXT', 'dev-dossier-createFrRootINT', 'dev-dossier-createResources'], function () {
+gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS', 'dev-dossier-createResources'], function () {
     var ignoreDir = '/build/dev/dossier';
     var buildDir = dossierPaths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;

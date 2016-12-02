@@ -16,5 +16,8 @@
   "MSG_ERR_ONE_ROA": "fr_At least one Route of Administration is required",
   "MSG_ERR_ONE_TISSUE": "fr_At lease one Tissues of Fluids source is required",
   "MSG_ERR_ONE_CNTRY_ORIGIN": "fr_At least one Country of origin is required",
-  "MSG_ERR_ONE_CDN_REF": "fr_At least one Canadian Reference product is required"
+  "MSG_ERR_ONE_CDN_REF": "fr_At least one Canadian Reference product is required",
+  "MSG_ERR_INVALID_NUM_MIN": "fr_The value must be greater than -273",
+  "MSG_ERR_INVALID_NUM_MAX": "fr_The value must be less than 999",
+  "MSG_ERR_INVALID_NUM_MIN0": "fr_The value must be greater than 0"
 }

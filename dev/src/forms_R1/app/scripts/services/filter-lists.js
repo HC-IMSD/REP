@@ -16,10 +16,12 @@
         .module('filterLists')
         .filter('orderByTranslatedCountry', orderByTranslatedCountry)
         .filter('orderByTranslated', orderByTranslated)
+        .filter('orderByTranslatedOtherFirst', orderByTranslatedOtherFirst)
         .filter('sequenceOrderDescending', sequenceOrderBy);
 
     orderByTranslatedCountry.$inject = ['$translate', '$filter', 'CANADA', 'USA'];
     orderByTranslated.$inject = ['$translate', '$filter'];
+    orderByTranslatedOtherFirst.$inject = ['$translate', '$filter', 'OTHER'];
 
     function orderByTranslatedCountry($translate, $filter, CANADA, USA) {
         return function (array, objKey) {
@@ -63,14 +65,34 @@
         return function (array, objKey) {
             var result = [];
             angular.forEach($filter('orderBy')(array, 'sequence', true), function (sortedObject) {
-                console.log(sortedObject)
                 result.push(sortedObject);
 
             });
-            console.log(result)
             return result;
         };
     }
 
+    /*
+     Orders values
+     */
+    function orderByTranslatedOtherFirst($translate, $filter, OTHER) {
+        return function (array, objKey) {
+            var result = [];
+            var translated = [];
+            angular.forEach(array, function (value) {
+                translated.push({
+                    key: value,
+                    label: $translate.instant(value)
+                });
+            });
+            result.push(OTHER);
+            angular.forEach($filter('orderBy')(translated, 'label'), function (sortedObject) {
+                if (sortedObject.key !== OTHER) {
+                    result.push(sortedObject.key);
+                }
+            });
+            return result;
+        };
+    }
 
 })();
