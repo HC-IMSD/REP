@@ -10,14 +10,16 @@
                         <input type="text" id="brand-nameh_{{$id}}" data-ng-model="$ctrl.productModel.brandName"
                                class="form-control full-width" name="brandName" ng-required="true" maxlength="60"
                                size="60"/>
-                        <strong id="brand-error" class="error" ng-if="$ctrl.showError($ctrl.productDetailsForm.brandName)">
+                        <strong id="brand-error" class="error"
+                                ng-if="$ctrl.showError($ctrl.productDetailsForm.brandName)">
                         <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.brandName.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                         </strong>
                     </label>
                 </div>
-                <div class="col-md-4 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.medIngredient.$invalid}">
+                <div class="col-md-4 form-group"
+                     ng-class="{'has-error':$ctrl.productDetailsForm.medIngredient.$invalid}">
                     <label for="med-ingredienth_{{$id}}" class="required"><span class="field-name">{{'MEDICINAL_INGREDIENT'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="med-ingredienth_{{$id}}" data-ng-model="$ctrl.productModel.medIngredient"
@@ -36,13 +38,14 @@
                     <label for="strength_{{$id}}" class="required"><span
                             class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="strength_{{$id}}" data-ng-model="$ctrl.productModel.strengths"
-                               class="form-control full-width" name="strengths" ng-required="true" maxlength="60"
-                               size="60"/>
+                        <input type="number" id="strength_{{$id}}" data-ng-model="$ctrl.productModel.strengths"
+                               class="form-control full-width" name="strengths" ng-required="true" ng-min="0"/>
                         <strong id="strengths-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.strengths)">
                         <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.strengths.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                            <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
+                             <span ng-message="min"><span translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
                         </span>
                         </strong>
                     </label>
@@ -50,7 +53,27 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
+                <div class="form-group col-md-3" ng-class="{'has-error':$ctrl.productDetailsForm.nmUnits.$invalid}">
+                    <label for="units" class="required"><span class="field-name">{{'UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="text" id="units" data-ng-model="$ctrl.productModel.units"
+                               class="form-control full-width" name="nmUnits" ng-required="true" maxlength="40"
+                               size="40"/>
+                        <strong id="nm-unit-error" class="error"
+                                ng-if="nIngRecCtrl.showError($ctrl.productDetailsForm.nmUnits.$invalid,$ctrl.productDetailsForm.nmUnits.$touched)">
+                                    <span class="label label-danger"
+                                          ng-messages="$ctrl.productDetailsForm.nmUnits.$error">
+                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                    </span>
+                        </strong>
+                    </label>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
+                    <input type="text" id="per" data-ng-model="$ctrl.productModel.per"
+                           class="form-control" name="perVal" maxlength="40" size="40"/>
+                </div>
+                <div class="col-md-3 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
                     <label for="dosage-form-listh_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <select id="dosage-form-listh_{{$id}}" data-ng-model="$ctrl.productModel.dosageForm"
@@ -65,7 +88,8 @@
                         </strong>
                     </label>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="col-md-6 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageOther.$invalid}"
                      ng-show="$ctrl.isDosageOther()">
                     <label for="dosage-form-other_(($id}}" class="required">
@@ -103,7 +127,7 @@
                     </strong>
                 </div>
             </div>
-            <!--<pre>productModel : {{$ctrl.productModel | json}}</pre>-->
+            <pre>productModel : {{$ctrl.productModel | json}}</pre>
         </fieldset>
 
         <div class="row">

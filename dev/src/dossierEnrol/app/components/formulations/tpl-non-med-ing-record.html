@@ -42,14 +42,16 @@
                 <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.strength.$invalid}">
                     <label for="strength" class="required"><span class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="strength" data-ng-model="nIngRecCtrl.ingModel.strength"
-                               class="form-control full-width" name="strength" ng-required="true" size="15"
-                               maxlength="15"/>
+                        <input type="number" id="strength" data-ng-model="nIngRecCtrl.ingModel.strength"
+                               class="form-control full-width" name="strength" ng-required="true" ng-min="0"/>
                         <strong id="strength-error" class="error"
                                 ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.strength.$invalid,nIngRecCtrl.nonMedIngForm.strength.$touched)">
                                     <span class="label label-danger"
                                           ng-messages="nIngRecCtrl.nonMedIngForm.strength.$error">
                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                          <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
+                                            <span ng-message="min"><span
+                                                    translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
                                     </span>
                         </strong>
                     </label>
@@ -82,7 +84,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="nanoMaterial" ng-model="nIngRecCtrl.ingModel.nanoMaterial"
                             class="form-control full-width" name="nanoFld" ng-required="true"
-                            ng-options="nano |translate for nano in  nIngRecCtrl.nanoMaterialList| orderByTranslated">
+                            ng-options="nano |translate for nano in  nIngRecCtrl.nanoMaterialList| orderByTranslatedOtherFirst">
                     </select>
                     <strong id="nanoMaterial-error" class="error"
                             ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nanoFld.$invalid,nIngRecCtrl.nonMedIngForm.nanoFld.$touched)">

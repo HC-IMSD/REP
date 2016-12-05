@@ -8,7 +8,7 @@
   "PER_STRENGTH": "Per",
   "ISBASE": "Calculated as Base?",
   "NANO_MATERIAL": "Nanomaterial?",
-  "NANO_MATERIAL_OTHER": "Please indicate the type of nanomaterial",
+  "NANO_MATERIAL_OTHER": "Indicate the type of nanomaterial",
   "ANIMAL_HUMAN_SOURCED": "Animal or Human Sourced?",
   "ACTIVE_LIST":"Active Ingredient List",
   "NOTNANO":"Not a Nanomaterial",

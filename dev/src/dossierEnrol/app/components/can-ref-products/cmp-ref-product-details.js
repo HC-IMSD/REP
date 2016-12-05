@@ -36,8 +36,17 @@
         self.savePressed=false;
 
         self.$onInit = function () {
-
-            self.productModel = {};
+            //TODO this is a bad approach should come from services
+            self.productModel = {
+                brandName: "",
+                medIngredient: "",
+                strengths: "",
+                units: "",
+                per: "",
+                dosageForm: "",
+                dosageFormOther: "",
+                companyName: ""
+            };
             self.savePressed=false;
             if (self.productRecord) {
 

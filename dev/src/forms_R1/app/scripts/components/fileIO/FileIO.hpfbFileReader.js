@@ -261,9 +261,9 @@
          */
         function convertXMLToJSONObjects(reader) {
             var xmlConfig = {
-                attributePrefix: "$",
+                attributePrefix: "@",
                 escapeMode: "true",
-                emptyNodeForm: "text",
+                emptyNodeForm: "text"
             }
             var xmlConverter = new X2JS(xmlConfig);
             //converts XML as a string to a json

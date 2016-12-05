@@ -58,12 +58,10 @@
         };
 
         self.addProduct = function (product) {
-            console.log("adding product")
             self.setValid(true);
             self.resetToCollapsed = !self.resetToCollapsed;
             self.productList.push(product);
             self.newProductFormShown = false;
-
             setRecord(-1);
         };
 

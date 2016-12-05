@@ -443,6 +443,8 @@
                     product.dosageForm = info[i].dosage_form;
                     product.dosageFormOther = info[i].dosage_form_other;
                     product.strengths = info[i].strengths;
+                    product.units = info[i].units;
+                    product.per = info[i].per;
                     product.companyName = info[i].company_name;
 
                     list.push(product);
@@ -758,6 +760,9 @@
                     product.dosage_form = info[i].dosageForm;
                     product.dosage_form_other = info[i].dosageFormOther;
                     product.strengths = info[i].strengths;
+                    product.units = info[i].units;
+                    // product["units"]={"_version":"ff","__text":"eewe"}; this is how to attribute
+                    product.per = info[i].per;
                     product.company_name = info[i].companyName;
                     resultList.push(product);
                 }

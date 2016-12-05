@@ -81,7 +81,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="nanoMaterial" ng-model="ingRecCtrl.ingModel.nanoMaterial"
                             class="form-control full-width" name="nanoFld" ng-required="true"
-                            ng-options="nano |translate for nano in  ingRecCtrl.nanoMaterialList| orderByTranslated">
+                            ng-options="nano |translate for nano in  ingRecCtrl.nanoMaterialList| orderByTranslatedOtherFirst">
                     </select>
                     <strong id="nanoMaterial-error" class="error"
                             ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.nanoFld.$invalid,ingRecCtrl.activeIngForm.nanoFld.$touched)">
