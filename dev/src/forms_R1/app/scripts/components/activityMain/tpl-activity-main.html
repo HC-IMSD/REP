@@ -11,9 +11,15 @@
                  </button>
              </div>-->
             <div class="btn-group pull-right">
-                <button class="btn btn-default btn-xs" ng-click="main.addInstruct('1')">
-                    {{'HELP_FILE_LOAD'|translate}}
+
+                <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                        id="enrol-instructions-toggle" ng-click="main.addInstruct('1')"><span
+                        class="fa fa-question-circle fa-2x"></span><span
+                        class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
                 </button>
+                <!-- <button class="btn btn-default btn-xs" ng-click="main.addInstruct('1')">
+                     {{'HELP_FILE_LOAD'|translate}}
+                 </button>-->
             </div>
             <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
         </header>
@@ -36,9 +42,13 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button class="btn btn-default btn-xs" ng-click="main.addInstruct('2')">
-                        {{'HELP_ACTIVITY_MAIN'|translate}}
+                    <button title="{{'HELP_ACTIVITY_MAIN'|translate}}" class="btn-xs rep-help-button"
+                            id="main-instructions-toggle" ng-click="main.addInstruct('2')"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_ACTIVITY_MAIN'|translate}}"</span>
                     </button>
+                    <!--  <button class="btn btn-default btn-xs" ng-click="main.addInstruct('2')">
+                          {{'HELP_ACTIVITY_MAIN'|translate}}
+                      </button>-->
                 </div>
                 <h2 class="panel-title">{{'ACTIVE_ENROL' |translate}}</h2>
             </header>
@@ -268,9 +278,13 @@
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button class="btn btn-default btn-xs" ng-click="main.addInstruct('3')">
-                            {{'HELP_ACTIVITY_REP'|translate}}
+                        <button title="{{'HELP_ACTIVITY_REP'|translate}}" class="btn-xs rep-help-button"
+                                id="rep-instructions-toggle" ng-click="main.addInstruct('3')"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_ACTIVITY_REP'|translate}}"</span>
                         </button>
+                        <!-- <button class="btn btn-default btn-xs" ng-click="main.addInstruct('3')">
+                             {{'HELP_ACTIVITY_REP'|translate}}
+                         </button>-->
                     </div>
                     <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
                 </header>

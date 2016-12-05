@@ -826,39 +826,21 @@ gulp.task('dev-cleanEnvironment', function () {
     return (pipes.cleanBuild(paths.buildDev));
 });
 
+gulp.task('dev-activity-createRootJS', function () {
+    var lang = 'en';
+    var dest = paths.buildDevActivity + '/app/scripts/';
+    var rootJs = paths.scripts + '/activityApp.js'
+    return (
+        pipes.generateRootJsFile('en', 'EXT', rootJs, dest) &&
+        pipes.generateRootJsFile('fr', 'EXT', rootJs, dest) &&
+        pipes.generateRootJsFile('en', 'INT', rootJs, dest) &&
+        pipes.generateRootJsFile('fr', 'INT', rootJs, dest)
+    );
+});
 
-gulp.task('dev-activity-createFrRootEXT', function () {
-    var lang = 'fr';
-    var dest = paths.buildDevActivity + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/activityApp.js', dest)
-    );
-});
-gulp.task('dev-activity-createEnRootEXT', function () {
-    var lang = 'en';
-    var dest = paths.buildDevActivity + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/activityApp.js', dest)
-    );
-});
-gulp.task('dev-activity-createFrRootINT', function () {
-    var lang = 'fr';
-    var dest = paths.buildDevActivity + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/activityApp.js', dest)
-    );
-});
-gulp.task('dev-activity-createEnRootINT', function () {
-    var lang = 'en';
-    var dest = paths.buildDevActivity + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/activityApp.js', dest)
-    );
-});
 
 //clean only seems to work becase of the timestam
-gulp.task('ActivityHtml-devBuild', ['dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createFrRootEXT', 'dev-activity-createFrRootINT', 'dev-activity-createEnRootEXT', 'dev-activity-createEnRootINT', 'dev-activity-createResources'], function () {
-
+gulp.task('dev-activity-htmlBuild', ['dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createRootJS', 'dev-activity-createResources'], function () {
 
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'EXT');
@@ -955,34 +937,15 @@ function copyCompanyHtml(src, dateToday) {
     );
 }
 
-
-//TODO make non repetitive
-gulp.task('dev-company-createEnRootINT', function () {
+gulp.task('dev-company-createRootJS', function () {
     var lang = 'en';
     var dest = paths.buildDevCompany + '/app/scripts/';
+    var rootFile = paths.scripts + '/companyApp.js';
     return (
-        pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/companyApp.js', dest)
-    );
-});
-gulp.task('dev-company-createEnRootEXT', function () {
-    var lang = 'en';
-    var dest = paths.buildDevCompany + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/companyApp.js', dest)
-    );
-});
-gulp.task('dev-company-createFrRootINT', function () {
-    var lang = 'fr';
-    var dest = paths.buildDevCompany + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'INT', paths.scripts + '/companyApp.js', dest)
-    );
-});
-gulp.task('dev-company-createFrRootExt', function () {
-    var lang = 'fr';
-    var dest = paths.buildDevCompany + '/app/scripts/';
-    return (
-        pipes.generateRootJsFile(lang, 'EXT', paths.scripts + '/companyApp.js', dest)
+        pipes.generateRootJsFile('en', 'EXT', rootFile, dest) &&
+        pipes.generateRootJsFile('fr', 'EXT', rootFile, dest) &&
+        pipes.generateRootJsFile('en', 'INT', rootFile, dest) &&
+        pipes.generateRootJsFile('fr', 'INT', rootFile, dest)
     );
 });
 
@@ -1001,7 +964,7 @@ gulp.task('dev-company-copyTranslate', function () {
     return (pipes.translateDev(translationList, paths.buildDevCompany))
 });
 
-gulp.task('CompanyHtml-devBuild', ['dev-company-copySrc', 'dev-company-copyLib', 'dev-company-createEnRootINT', 'dev-company-createFrRootExt', 'dev-company-createEnRootEXT', 'dev-company-createFrRootINT', 'dev-company-createResources'], function () {
+gulp.task('dev-company-htmlBuild', ['dev-company-copySrc', 'dev-company-copyLib', 'dev-company-createRootJS', 'dev-company-createResources'], function () {
     var ignoreDir = '/build/dev/company';
     var buildDir = paths.buildDevCompany;
     var htmlPartial = jsRootContent.partialCompanyRoot;

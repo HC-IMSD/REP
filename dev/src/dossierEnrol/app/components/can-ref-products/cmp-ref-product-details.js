@@ -54,8 +54,7 @@
             }
             self.backup = angular.copy(self.productModel);
 
-        }
-
+        };
 
         /**
          * @ngDoc determines if dosage Other should be readonky
