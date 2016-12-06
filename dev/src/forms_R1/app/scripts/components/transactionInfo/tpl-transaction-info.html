@@ -44,7 +44,7 @@
                                         <span class="input-group-addon">HC6-024-</span>
                                         <div ng-class="{'has-error':transInfoForm.dossierId.$invalid}">
                                             <input type="text" class="form-control full-width" id="dossierId"
-                                                   size="6" maxlength="6" id="dossierId" ng-minlength="6"
+                                                   size="6" maxlength="7" id="dossierId" ng-minlength="7"
                                                    name="dossierId"
                                                    ng-model="transInfoCtrl.transactionModel.ectd.dossierId"
                                                    ng-required="true"/>
@@ -54,7 +54,7 @@
                                             ng-if="transInfoCtrl.showError(transInfoForm.dossierId)">
                         <span class="label label-danger" ng-messages="transInfoForm.dossierId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                            <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                            <span ng-message="minlength"><span translate="MSG_LENGTH_7"></span></span>
                         </span>
                                     </strong>
                                 </label>
@@ -209,9 +209,9 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{'Regulatory Activity Instructions'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{'REG_ACTIVITY_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
                                 id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct('2')"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'Regulatory Activity Instructions'|translate}}</span>
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'REG_ACTIVITY_INSTRUCT'|translate}}</span>
                         </button>
                     </div>
                     <h2 class="panel-title">{{'REG_ACT_CONTACT' |translate}}</h2>

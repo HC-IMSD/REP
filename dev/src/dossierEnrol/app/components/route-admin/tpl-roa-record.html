@@ -11,7 +11,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <select ng-model="roaRecCtrl.model.roa" class="form-control" id="roa{{$id}}" name="roaVal"
                                 ng-required="true"
-                                ng-options="val |translate for val in  roaRecCtrl.roaList  | orderByTranslated">
+                                ng-options="val |translate for val in  roaRecCtrl.roaList  | orderByTranslatedOtherFirst">
                         </select>
                         <strong id="roaList-error" class="error"
                                 ng-if="roaRecCtrl.showError(roaRecCtrl.roaRecForm.roaVal.$invalid,roaRecCtrl.roaRecForm.roaVal.$touched)">
@@ -21,7 +21,6 @@
                         </span>
                         </strong>
                     </label>
-
                 </div>
                 <div class="col-md-5" ng-if="roaRecCtrl.isRoaOther()"
                      ng-class="{'has-error':roaRecCtrl.roaRecForm.otherRoa.$invalid}">
