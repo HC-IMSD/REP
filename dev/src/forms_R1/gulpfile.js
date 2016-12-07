@@ -606,6 +606,15 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
                 ignorePath: ignorePath,
                 addRootSlash: false
             }))
+
+        .pipe(inject(gulp.src([
+                'app/styles/**/*.css']),
+            {
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }
+        ))
+
         .pipe(inject(gulp.src([
                 buildDir + 'app/components/**/*.js',
                 buildDir + 'app/directives/**/*.js',
@@ -624,6 +633,7 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
         .pipe(gulp.dest(buildDir))
 
 };
+
 
 pipes.cleanBuild = function (baseDir) {
     /* var deferred = Q.defer();

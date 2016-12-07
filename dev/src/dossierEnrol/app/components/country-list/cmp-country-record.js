@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('countryRecordModule', [])
+        .module('countryRecordModule', ['ui.select'])
 })();
 
 (function () {
@@ -14,6 +14,9 @@
 
     angular
         .module('countryRecordModule')
+        .config(function (uiSelectConfig) {
+            uiSelectConfig.theme = 'selectize';
+        })
         .component('cmpCountryRecord', {
             templateUrl: './components/country-list/tpl-country-record.html',
             controller: countryRecordController,
@@ -27,8 +30,8 @@
             }
         });
 
-
-    function countryRecordController(){
+    countryRecordController.$inject = ['$filter']
+    function countryRecordController($filter) {
         var vm = this;
 
         vm.model = {};
@@ -39,16 +42,20 @@
 
         vm.$onChanges = function (changes) {
 
-            if (changes.record) {
-                vm.model=changes.record.currentValue;
-            }
             if(changes.countryList){
                 vm.countries=changes.countryList.currentValue;
             }
+            if (changes.record) {
+                vm.model = changes.record.currentValue;
+                if (vm.model.name) {
+                    vm.model.pair = $filter('findCountryObject')(vm.countries, vm.model.name);
+                    //TODO get object
+                }
+            }
+
         };
 
         vm.deleteRecord = function()  {
-            console.log("deleting ....."+vm.model.id)
             vm.onDelete({id: vm.model.id})
         };
 

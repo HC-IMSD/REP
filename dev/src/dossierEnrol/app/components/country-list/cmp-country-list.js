@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('countryListModule', ['dataLists', 'countryRecordModule'])
+        .module('countryListModule', ['dataLists', 'countryRecordModule', 'ui.select'])
 })();
 
 (function () {
@@ -33,14 +33,15 @@
     function countryListController($filter, getCountriesISO3166) {
         var self = this;
         self.baseCountries = getCountriesISO3166.getCountryList3Letter();
-        self.countryList = angular.copy(self.baseCountries);
+        //self.countryList = angular.copy(self.baseCountries);
+        self.countryList = ""
         self.model = {};
         self.isDetailValid = true;
         self.resetToCollapsed = true;
         self.selectRecord = 0;
         self.columnDef = [
             {
-                label:  self.fieldLabel,
+                label: self.fieldLabel,
                 binding: "name",
                 width: "100"
             },
@@ -54,7 +55,10 @@
                 self.model.list = [];
                 console.log("creating an empty list")
             }
-
+            //should never happen,fallback...
+            if (angular.isUndefined(self.countryList)) {
+                setUnknownCountryState(self.withUnknown)
+            }
         }
 
         self.$onChanges = function (changes) {
@@ -69,12 +73,13 @@
             var countries = angular.copy(self.baseCountries);
             if (isUnknown) {
                 countries.push("UNKNOWN") //TODO should be from constants service
-                self.countryList = countries;
+                self.countryList = $filter('orderByCountryAndLabel')(countries);
+                //self.countryList = countries;
                 self.hasUnknown = true;
-                self.emptyModel = {"id": "", "name": "", unknownCountryDetails: ""};
+                self.emptyModel = {id: "", name: "", unknownCountryDetails: "", pair: ""};
                 self.columnDef = [
                     {
-                        label:  self.fieldLabel,
+                        label: self.fieldLabel,
                         binding: "name",
                         width: "50"
                     },
@@ -85,12 +90,12 @@
                     },
                 ]
             } else {
-                self.countryList = countries;
+                self.countryList = self.countryList = $filter('orderByCountryAndLabel')(self.baseCountries);
                 self.hasUnknown = false;
-                self.emptyModel = {"id": "", "name": ""};
+                self.emptyModel = {id: "", name: "", pair: ""};
                 self.columnDef = [
                     {
-                        label:  self.fieldLabel,
+                        label: self.fieldLabel,
                         binding: "name",
                         width: "100"
                     }
@@ -99,6 +104,7 @@
             }
 
         }
+
         self.addNew = function () {
             console.log("adding a new value")
             var maxID = getListMaxID();

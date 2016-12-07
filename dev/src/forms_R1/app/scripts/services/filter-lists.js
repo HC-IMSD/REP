@@ -17,6 +17,8 @@
         .filter('orderByTranslatedCountry', orderByTranslatedCountry)
         .filter('orderByTranslated', orderByTranslated)
         .filter('orderByTranslatedOtherFirst', orderByTranslatedOtherFirst)
+        .filter('orderByCountryAndLabel', orderByTranslatedCountryAndLabel)
+        .filter('findCountryObject', findCountryObj)
         .filter('sequenceOrderDescending', sequenceOrderBy);
 
     orderByTranslatedCountry.$inject = ['$translate', '$filter', 'CANADA', 'USA'];
@@ -43,6 +45,48 @@
             return result;
         };
     }
+
+    /**
+     * Orders country list by translated value and creates a list of saved and displayed value
+     * @param $translate
+     * @param $filter
+     * @param CANADA
+     * @param USA
+     */
+    function orderByTranslatedCountryAndLabel($translate, $filter, CANADA, USA) {
+        return function (array, objKey) {
+            var result = [];
+            var translated = [];
+            angular.forEach(array, function (value) {
+                translated.push({
+                    key: value,
+                    label: $translate.instant(value)
+                });
+            });
+
+            //top of the list
+            result.push({key: CANADA, label: $translate.instant(CANADA)});
+            result.push({key: USA, label: $translate.instant(USA)});
+            angular.forEach($filter('orderBy')(translated, 'label'), function (sortedObject) {
+                if (sortedObject.key !== CANADA && sortedObject.key !== USA) {
+                    result.push(sortedObject);
+                }
+            });
+            return result;
+        };
+    }
+
+    function findCountryObj() {
+        return function (array, targetKey) {
+            for (var i = 0; i < array.length; i++) {
+                if (array[i].key === targetKey) {
+                    return (array[i]);
+                }
+            }
+            return null; //not found
+        };
+    }
+
 
     function orderByTranslated($translate, $filter) {
         return function (array, objKey) {
