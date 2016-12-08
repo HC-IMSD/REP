@@ -25,7 +25,7 @@ var buildDev = './build/dev';
 var _DATESTAMP = "";
 
 var paths = {
-    styles: './app/styles/',
+    styles: 'app/styles/',
     translations: 'app/resources/',
     helpTemplates: 'app/help/',
     buildProd: './build/prod/',
@@ -240,6 +240,15 @@ var translationBaseFiles = {
     transaction: paths.translations + 'transaction',
     companyInfo: paths.translations + 'companyInfo'
 };
+var styleFiles = {
+    rep: paths.styles + 'rep.css',
+    select: paths.styles + 'select.min.css',
+    select2Style: paths.styles + 'select2.min.css',
+    select2Image: paths.styles + 'select2.png',
+    selectizeStyle: paths.styles + 'selectize.default.css'
+}
+
+
 /** Dossier stuff */
 var dossierTranslationBaseFiles = {
 
@@ -608,7 +617,10 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
             }))
 
         .pipe(inject(gulp.src([
-                'app/styles/**/*.css']),
+                styleFiles.rep,
+                styleFiles.select,
+                styleFiles.select2Style
+            ]),
             {
                 ignorePath: ignorePath,
                 addRootSlash: false

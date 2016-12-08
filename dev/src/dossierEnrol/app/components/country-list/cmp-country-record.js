@@ -15,7 +15,8 @@
     angular
         .module('countryRecordModule')
         .config(function (uiSelectConfig) {
-            uiSelectConfig.theme = 'selectize';
+            //choices: select2, bootstrap, selectize
+            uiSelectConfig.theme = 'select2';
         })
         .component('cmpCountryRecord', {
             templateUrl: './components/country-list/tpl-country-record.html',
