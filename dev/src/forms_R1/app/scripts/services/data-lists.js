@@ -26,14 +26,25 @@
 
     /* @ngInject */
     function getService() {
+        var tempVal = "NOOOO";
         var service = {
             getCountries: getCountryValuesArray,
             getProvinces: getProvinceValuesArray,
-            getUSStates: getUSStatesValueArray
+            getUSStates: getUSStatesValueArray,
+            setVal: setAVal,
+            getVal: getAVal
         };
         return service;
 
         ////////////////
+
+        function setAVal(value) {
+            tempVal = value;
+        }
+
+        function getAVal() {
+            return (tempVal);
+        }
 
         function getCanada() {
             return 'CAN';

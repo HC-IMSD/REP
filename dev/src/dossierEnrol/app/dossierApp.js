@@ -3,20 +3,18 @@
 
 
     //TODO: Lazy load modules
-    angular.module('dossierApp', ['pascalprecht.translate', 'dossierModule'])
-        .controller('MainController', MainController);
+    angular.module('dossierApp', ['pascalprecht.translate', 'dossierLoadModule', 'dossierModule', 'dataLists'])
+        .controller('MainController', MainController)
 
     angular.element(document).ready(function () {
         angular.bootstrap(document, ['dossierApp']);
     })
-
-    function MainController() {
+    MainController.$inject = ['$translate', 'getCountryAndProvinces']
+    function MainController($translate, getCountryAndProvinces) {
         var vm = this;
         vm.formType = '@@SET_FORM';
-
+        console.log(getCountryAndProvinces.getVal())
     }
-
-
 })();
 
 (function () {
@@ -27,6 +25,9 @@
             $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
-            //  $translateProvider.useSanitizeValueStrategy('sanitize');
+            $translateProvider.useLoader('customLoad');
+            $translateProvider.useSanitizeValueStrategy(null);
+
+            console.log($translateProvider.translations());
         }]);
 })();

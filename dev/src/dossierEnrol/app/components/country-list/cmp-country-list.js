@@ -33,8 +33,10 @@
     function countryListController($filter, getCountriesISO3166) {
         var self = this;
         self.baseCountries = getCountriesISO3166.getCountryList3Letter();
+
+
         //self.countryList = angular.copy(self.baseCountries);
-        self.countryList = ""
+        self.countryList = "";
         self.model = {};
         self.isDetailValid = true;
         self.resetToCollapsed = true;
@@ -46,11 +48,13 @@
                 width: "100"
             },
         ]
+
         self.hasUnknown = false;
         self.emptyModel = {"id": "", "name": ""}
 
         self.$onInit = function () {
-
+            //var foo= _getCountries();
+            console.log(self.test);
             if (angular.isUndefined(self.model.list)) { //TODO should be comimg from parent
                 self.model.list = [];
                 console.log("creating an empty list")
@@ -59,6 +63,18 @@
             if (angular.isUndefined(self.countryList)) {
                 setUnknownCountryState(self.withUnknown)
             }
+        }
+        function _getCountries() {
+            (getCountriesISO3166.loadCountries('en'))
+                .then(function (value) {
+                    self.test = value;
+                    console.log(self.test);
+                    return true;
+                }, function (value) {
+                    self.test = value;
+                    return false;
+                });
+
         }
 
         self.$onChanges = function (changes) {

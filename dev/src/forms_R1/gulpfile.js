@@ -285,7 +285,8 @@ var jsDossierComponentPaths = {
 
 var jsDossierServicePaths = {
     dossierService: dossierPaths.services + "dossier-service.js",
-    dossierDataList: dossierPaths.services + "dossier-data-list.js"
+    dossierDataList: dossierPaths.services + "dossier-data-list.js",
+    dossierLoadService: dossierPaths.services + "dossier-load-service.js"
 };
 
 
@@ -1187,11 +1188,13 @@ gulp.task('dev-dossier-copySrc', ['dev-dossier-copyCommonSrc'], function () {
     //add the services, no html
     dossierJs.push(jsDossierServicePaths.dossierDataList);
     dossierJs.push(jsDossierServicePaths.dossierService);
+    dossierJs.push(jsDossierServicePaths.dossierLoadService);
+
     var copySourcesJS = gulp.src(dossierJs, {read: true, base: '../dossierEnrol'});
     var copySourcesHtml = gulp.src(dossierHtml, {read: true, base: '../dossierEnrol'});
 
     var dateToday = createSuffixDate();
-    copyDossierHtml(copySourcesHtml, dateToday)
+    copyDossierHtml(copySourcesHtml, dateToday);
 
     var def = Q.defer();
     //TODO inefficient
@@ -1360,8 +1363,8 @@ gulp.task('dev-dossier-createRootJS', function () {
  * Then creates 4 versions of main app file (dossierApp).
  * Creates 4 html files- internal english, internal french, external english, external french
  */
-
-gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS', 'dev-dossier-createResources'], function () {
+//'dev-dossier-createResources'
+gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS'], function () {
     var ignoreDir = '/build/dev/dossier';
     var buildDir = dossierPaths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;

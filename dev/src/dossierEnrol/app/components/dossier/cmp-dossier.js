@@ -27,7 +27,6 @@
         'theraClass',
         'animalSourcedSection',
         'tissuesFluidsList',
-        'translations',
         'dossierService',
         'ngSanitize',
         'dataLists'
@@ -55,7 +54,7 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists',];
 
 
     function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists) {
@@ -67,7 +66,6 @@
         self.saveXMLLabel = "SAVE_DRAFT";
         self.yesNoList = DossierLists.getYesNoList();
         self.yesValue = DossierLists.getYesValue()
-        console.log(getRoleLists);
         self.formTypeList = getRoleLists.getFormTypes();
         //config for applicationInfoCompoenent
         self.configField = {
