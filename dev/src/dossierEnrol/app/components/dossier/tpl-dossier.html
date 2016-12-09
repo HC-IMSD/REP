@@ -50,10 +50,10 @@
 
                 <div class="col-xs-4 form-group"
                      ng-class="{'has-error':dos.dossierForm.dossierType.$invalid}">
-                    <label for="company-id" class="required">
+                    <label for="dossierType-id" class="required">
                         <span class="field-name">{{'DOSSIER_TYPE' |translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <select type="text" class="form-control full-width" id="dossierType"
+                        <select type="text" class="form-control full-width" id="dossierType-id"
                                 name="dossierType" required="true" ng-model="dos.dossierModel.dossierType"
                                 ng-options="val |translate for val in  dos.formTypeList">
                         </select>
