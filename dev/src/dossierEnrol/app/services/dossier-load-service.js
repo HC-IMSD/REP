@@ -6,14 +6,14 @@
 (function () {
     'use strict';
     angular
-        .module('dossierLoadModule', ['dataLists'])
+        .module('dossierLoadModule', ['dataLists', 'dossierDataLists'])
 })();
 
 (function () {
     'use strict';
     angular
         .module('dossierLoadModule')
-        .factory('customLoad', ['$http', '$q', 'getCountryAndProvinces', function ($http, $q, getCountryAndProvinces) {
+        .factory('customLoad', ['$http', '$q', 'getCountryAndProvinces', 'DossierLists', function ($http, $q, getCountryAndProvinces, DossierLists) {
             var result = {};
             //if going to inject translations
             /* var base_en = "@@TRANSLATIONS_EN" ;
@@ -23,8 +23,8 @@
 
             return function (options) {
                 var deferred = $q.defer();
-                var baseUrl = "data/dossier-" + options.key + ".json";
-                var countryUrl = "data/country-" + options.key + ".json";
+                var roaUrl = "data/roa-" + options.key + ".json";
+                var countryUrl = "data/countries-" + options.key + ".json";
                 /* if(options.key==='fr'){
                  result=base_fr;
                  base_en={};
@@ -33,9 +33,10 @@
                  result=base_en;
                  base_fr={};
                  }*/
-                $http.get(baseUrl)
+                $http.get(roaUrl)
                     .then(function (response) {
-                        //angular.extend(result, response.data);
+                        angular.extend(result, response.data);
+                        DossierLists.createRoaList(response.data);
                         return $http.get(countryUrl);
                     })
                     .then(function (response) {

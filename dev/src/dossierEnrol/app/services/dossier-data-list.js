@@ -29,8 +29,10 @@
     function getService() {
         var OTHER = "OTHER";
         var YES = 'Y';
+        this.roaList = [];
 
         var service = {
+            createRoaList: _createRoaArray,
             getDosageFormList: getDosageFormsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
@@ -78,6 +80,19 @@
 
         function getOtherValue() {
             return getDoseOtherValue();
+        }
+
+        function _createRoaArray(translateJson) {
+            var result = [];
+            var keys = Object.keys(translateJson);
+            for (var i = 0; i < keys.length; i++) {
+                //var val = translateJson[keys[i]];
+                result.push(keys[i])
+            }
+            this.roaList = result;
+            //return extraList;
+
+
         }
 
         function getDosageFormsArray() {
@@ -137,7 +152,9 @@
 
         function getRoaArray() {
 
-            return ([
+
+            return (this.roaList);
+            /*return ([
                 "BLOCK_INFILTRATION",
                 "BUCCAL",
                 "DENTAL",
@@ -169,7 +186,7 @@
                 "URETHRAL",
                 "VAGINAL",
                 OTHER
-            ]);
+             ]);*/
         }
 
         function yesNoArray() {

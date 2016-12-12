@@ -46,6 +46,7 @@ var paths = {
     englishTemplate: wetBase + '/content-en.html',
     frenchTemplate: wetBase + '/content-fr.html',
     lib: './app/lib/',
+    data: './app/data/',
     scripts: baseScript,
     relScript: '/app/scripts/',
     components: baseScript + '/components/',
@@ -268,8 +269,8 @@ var dossierTranslationBaseFiles = {
     appendix4: dossierPaths.translations + 'appendix4',
     msg: dossierPaths.translations + 'dossierMsg',
     scheduleA: dossierPaths.translations + 'scheduleA',
-    formulation: dossierPaths.translations + 'formulation',
-    roa: dossierPaths.translations + 'roa'
+    formulation: dossierPaths.translations + 'formulation'
+    // roa: dossierPaths.translations + 'roa'
 };
 
 var jsDossierComponentPaths = {
@@ -1223,6 +1224,14 @@ gulp.task('dev-dossier-copyLib', function () {
         {read: true, base: '.'});
     return (copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
 });
+gulp.task('dev-dossier-copyData', function () {
+    var def = Q.defer();
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
+});
+
+
 
 gulp.task('dev-dossier-copyTranslate', ['dev-dossier-copyCommonTranslate'], function () {
     var translationList = [
@@ -1232,8 +1241,8 @@ gulp.task('dev-dossier-copyTranslate', ['dev-dossier-copyCommonTranslate'], func
         dossierTranslationBaseFiles.appendix4,
         dossierTranslationBaseFiles.msg,
         dossierTranslationBaseFiles.scheduleA,
-        dossierTranslationBaseFiles.formulation,
-        dossierTranslationBaseFiles.roa
+        dossierTranslationBaseFiles.formulation
+        //dossierTranslationBaseFiles.roa
     ];
     var baseIgnore = "../dossierEnrol";
 
@@ -1435,7 +1444,7 @@ gulp.task('dev-dossier-createRootJS', function () {
 
 
 //Used for injecting into file. Not doing complicated
-gulp.task('dev-dossier-insertTranslateLoader', ['dev-dossier-createResources'], function () {
+/*gulp.task('dev-dossier-insertTranslateLoader', ['dev-dossier-createResources'], function () {
     var ignorePath = '/build/dev/dossier';
     var translations_en = dossierPaths.buildDevDossier + 'dossierTranslate-en.json'
     var translations_fr = dossierPaths.buildDevDossier + 'dossierTranslate-fr.json'
@@ -1443,7 +1452,7 @@ gulp.task('dev-dossier-insertTranslateLoader', ['dev-dossier-createResources'], 
         pipes.insertTranslations(jsDossierServicePaths.dossierLoadService, dossierPaths.buildDevDossier + 'app/services/', ignorePath, translations_en, translations_fr)
         // pipes.insertTranslations ("fr",jsDossierServicePaths.dossierLoadService, dossierPaths.buildDevDossier+'app/services/', ignorePath,translations_fr )
     )
-});
+ });*/
 
 
 /**
@@ -1454,7 +1463,7 @@ gulp.task('dev-dossier-insertTranslateLoader', ['dev-dossier-createResources'], 
  * Creates 4 html files- internal english, internal french, external english, external french
  */
 //' dev-dossier-insertTranslateLoader '
-gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS', 'dev-dossier-createResources'], function () {
+gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copyData', 'dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS', 'dev-dossier-createResources'], function () {
     var ignoreDir = '/build/dev/dossier';
     var buildDir = dossierPaths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;

@@ -31,20 +31,14 @@
             getCountries: getCountryValuesArray,
             getProvinces: getProvinceValuesArray,
             getUSStates: getUSStatesValueArray,
-            createCountryList: _createCountryArray,
-            setVal: setAVal,
-            getVal: getAVal
+            createCountryList: _createCountryArray
         };
         return service;
 
         ////////////////
 
-        function setAVal(value) {
-            this.tempVal = value;
-        }
 
         function _createCountryArray(translateJson) {
-            var extraList = [];
             var result = [];
             var keys = Object.keys(translateJson);
             for (var i = 0; i < keys.length; i++) {
@@ -53,10 +47,6 @@
             }
             this.countryList = result;
             //return extraList;
-        }
-
-        function getAVal() {
-            return (this.tempVal);
         }
 
         function getCanada() {
