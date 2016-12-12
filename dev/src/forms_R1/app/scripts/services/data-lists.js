@@ -26,11 +26,12 @@
 
     /* @ngInject */
     function getService() {
-        var tempVal = "NOOOO";
+        this.countryList = [];
         var service = {
             getCountries: getCountryValuesArray,
             getProvinces: getProvinceValuesArray,
             getUSStates: getUSStatesValueArray,
+            createCountryList: _createCountryArray,
             setVal: setAVal,
             getVal: getAVal
         };
@@ -39,11 +40,23 @@
         ////////////////
 
         function setAVal(value) {
-            tempVal = value;
+            this.tempVal = value;
+        }
+
+        function _createCountryArray(translateJson) {
+            var extraList = [];
+            var result = [];
+            var keys = Object.keys(translateJson);
+            for (var i = 0; i < keys.length; i++) {
+                //var val = translateJson[keys[i]];
+                result.push(keys[i])
+            }
+            this.countryList = result;
+            //return extraList;
         }
 
         function getAVal() {
-            return (tempVal);
+            return (this.tempVal);
         }
 
         function getCanada() {
@@ -55,247 +68,9 @@
         }
 
         //todo why is this listed twice?
-        var getCountryValuesArray = (function () {
-
-            return [
-                "CAN",
-                "USA",
-                "AFG",
-                'ALA',
-                'ALB',
-                'DZA',
-                'ASM',
-                'AND',
-                'AO',
-                'AIA',
-                'ATA',
-                'ATG',
-                'ARG',
-                'ARM',
-                'ABW',
-                'AUS',
-                'AUT',
-                'AZE',
-                'BHS',
-                'BHR',
-                'BGD',
-                'BRB',
-                'BLR',
-                'BEL',
-                'BLZ',
-                'BEN',
-                'BMU',
-                'BTN',
-                'BOL',
-                'BIH',
-                'BWA',
-                'BVT',
-                'BRA',
-                'IOT',
-                'BRN',
-                'BGR',
-                'BFA',
-                'BDI',
-                'KHM',
-                'CMR',
-                'CPV',
-                'CYM',
-                'CAF',
-                'TCD',
-                'CHL',
-                'CHN',
-                'CXR',
-                'CCK',
-                'COL',
-                'COM',
-                'COG',
-                'COD',
-                'COK',
-                'CRI',
-                'CIV',
-                'HRV',
-                'CUB',
-                'CYP',
-                'CZE',
-                'DNK',
-                'DJI',
-                'DMA',
-                'DOM',
-                'LS',
-                'ECU',
-                'EGY',
-                'SLV',
-                'GNQ',
-                'ERI',
-                'EST',
-                'ETH',
-                'FLK',
-                'FRO',
-                'FJI',
-                'FIN',
-                'FRA',
-                'GUF',
-                'PYF',
-                'ATF',
-                'GAB',
-                'GMB',
-                'GEO',
-                'DEU',
-                'GHA',
-                'GIB',
-                'GRC',
-                'GRL',
-                'GRD',
-                'GLP',
-                'GU',
-                'GTM',
-                'GIN',
-                'GNB',
-                'GUY',
-                'HTI',
-                'HMD',
-                'VAT',
-                'HND',
-                'HKG',
-                'HUN',
-                'ISL',
-                'IND',
-                'IDN',
-                'IRN',
-                'IRQ',
-                'IRL',
-                'ISR',
-                'ITA',
-                'JAM',
-                'JPN',
-                'JOR',
-                'KAZ',
-                'KEN',
-                'KIR',
-                'PRK',
-                'KOR',
-                'KWT',
-                'KGZ',
-                'LAO',
-                'LVA',
-                'LBN',
-                'LSO',
-                'LBR',
-                'LIE',
-                'LTU',
-                'LUX',
-                'MAC',
-                'MKD',
-                'MDG',
-                'MWI',
-                'MYS',
-                'MDV',
-                'MLI',
-                'MLT',
-                'MHL',
-                'MTQ',
-                'MRT',
-                'MUS',
-                'MYT',
-                'MEX',
-                'FSM',
-                'MDA',
-                'MCO',
-                'MNG',
-                'MSR',
-                'MAR',
-                'MOZ',
-                'MMR',
-                'NAM',
-                'NRU',
-                'NPL',
-                'NLD',
-                'NCL',
-                'NZL',
-                'NIC',
-                'NER',
-                'NGA',
-                'NIU',
-                'NFK',
-                'MNP',
-                'NOR',
-                'OMN',
-                'PAK',
-                'PLW',
-                'PAN',
-                'PNG',
-                'PRY',
-                'PER',
-                'PHL',
-                'PCN',
-                'POL',
-                'PRT',
-                'PRI',
-                'QAT',
-                'REU',
-                'ROU',
-                'RUS',
-                'RWA',
-                'KNA',
-                'LCA',
-                'VCT',
-                'WSM',
-                'SMR',
-                'STP',
-                'SAU',
-                'SEN',
-                'SYC',
-                'SLE',
-                'SGP',
-                'SVK',
-                'SVN',
-                'SLB',
-                'SOM',
-                'ZAF',
-                'SGS',
-                'ESP',
-                'LKA',
-                'SHN',
-                'SPM',
-                'SDN',
-                'SUR',
-                'SJM',
-                'SWZ',
-                'SWE',
-                'CHE',
-                'SYR',
-                'TWN',
-                'TJK',
-                'TZA',
-                'THA',
-                'TGO',
-                'TKL',
-                'TON',
-                'TTO',
-                'TUN',
-                'TUR',
-                'TKM',
-                'TCA',
-                'TUV',
-                'UGA',
-                'UKR',
-                'ARE',
-                'GBR',
-                'UMI',
-                'URY',
-                'UZB',
-                'VUT',
-                'VEN',
-                'VNM',
-                'VGB',
-                'VIR',
-                'WLF',
-                'ESH',
-                'YEM',
-                'ZMB',
-                'ZWE'
-            ];
-        })(this);
+        function getCountryValuesArray() {
+            return this.countryList;
+        }
 
 
         function getProvinceValuesArray() {
@@ -379,10 +154,7 @@
     }
 
 })();
-/**
- * getCountryAndProvinces services
- * Returns ISO3166 country 3 letter list,
- */
+
 (function () {
     'use strict';
 

@@ -1302,20 +1302,19 @@
             return missingList;
         }
 
+
         function findExtraApppendices(appendixJson) {
             var extraList = [];
             var keys = Object.keys(appendixJson);
             for (var i = 0; i < keys.length; i++) {
                 var val = appendixJson[keys[i]];
                 if (val > 0) {
-                    console.log("This is the key" + keys[i]);
                     extraList.push(keys[i]);
                 }
             }
 
             return extraList;
         }
-
         function getUniqueList(arr) {
             var u = {}, a = [];
             for (var i = 0, l = arr.length; i < l; ++i) {

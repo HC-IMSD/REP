@@ -27,11 +27,12 @@
                     })
                     .then(function (response) {
                         angular.extend(result, response.data);
-                        getCountryAndProvinces.setVal("FDFDFD")
+                        getCountryAndProvinces.createCountryList(response.data);
+
                         return (response.data);
                     }).then(function (result) {
                         //_createCountryList(result);
-                        getCountryAndProvinces.setVal("FDFDFD")
+                        //getCountryAndProvinces.setVal(result)
                     })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw

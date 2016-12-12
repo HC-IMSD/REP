@@ -142,7 +142,6 @@
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-                console.info('file loaded ... ' + JSON.stringify(resultJson));
                 self.dossierModel = self.dossierService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
@@ -289,7 +288,7 @@
                 self.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
                 // updateModelOnApproval(); //updates all the amend
             } else {
-                console.log(self.dossierModel.enrolmentVersion);
+
                 self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMinorVersion(self.dossierModel.enrolmentVersion);
             }
             return self.dossierService.dossierToOutput(self.dossierModel);
