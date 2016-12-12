@@ -27,15 +27,12 @@
             }
         });
 
-    countryListController.$inject = ['$filter', 'getCountriesISO3166', 'getCountryAndProvinces'];
+    countryListController.$inject = ['$filter', 'getCountryAndProvinces'];
 
 
-    function countryListController($filter, getCountriesISO3166, getCountryAndProvinces) {
+    function countryListController($filter, getCountryAndProvinces) {
         var self = this;
-        // self.baseCountries = getCountriesISO3166.getCountryList3Letter();
         self.baseCountries = getCountryAndProvinces.getCountries();
-
-        //self.countryList = angular.copy(self.baseCountries);
         self.countryList = "";
         self.model = {};
         self.isDetailValid = true;
@@ -53,7 +50,6 @@
         self.emptyModel = {"id": "", "name": ""}
 
         self.$onInit = function () {
-            //var foo= _getCountries();
 
             if (angular.isUndefined(self.model.list)) { //TODO should be comimg from parent
                 self.model.list = [];
@@ -64,18 +60,6 @@
                 setUnknownCountryState(self.withUnknown)
             }
         }
-        /* function _getCountries() {
-            (getCountriesISO3166.loadCountries('en'))
-                .then(function (value) {
-                    self.test = value;
-                    console.log(self.test);
-                    return true;
-                }, function (value) {
-                    self.test = value;
-                    return false;
-                });
-
-         }*/
 
         self.$onChanges = function (changes) {
             if (changes.withUnknown) {

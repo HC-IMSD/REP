@@ -15,7 +15,7 @@
                        ng-model="tissuesListSrcCtrl.oneRecord"/>
 
                 <div class="panel-body">
-                    <cmp-expanding-table title="Animal Sources"
+                    <cmp-expanding-table title=""
                                          reset-to-collapsed="tissuesListSrcCtrl.resetToCollapsed"
                                          list-items="tissuesListSrcCtrl.model.tissuesFluidsList"
                                          column-def="tissuesListSrcCtrl.columnDef"
@@ -24,6 +24,7 @@
 
                         <cmp-tissues-fluids-record record="$parent.record" service="tissuesListSrcCtrl.service"
                                                    show-errors="tissuesListSrcCtrl.showErrors()"
+                                                   system-used="tissuesListSrcCtrl.systemAlreadyUsed(value)"
                                                    on-delete="tissuesListSrcCtrl.deleteRecord(id)"></cmp-tissues-fluids-record>
 
                     </cmp-expanding-table>
@@ -40,6 +41,6 @@
                 </div>
             </section>
         </div>
-        <!--   <pre>Tissues Level{{tissuesListSrcCtrl.model.tissuesFluidsList |json}}</pre>-->
+        <!--<pre>Tissues Level{{tissuesListSrcCtrl.model.tissuesFluidsList |json}}</pre>-->
     </div>
 </ng-form>

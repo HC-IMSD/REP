@@ -32,7 +32,8 @@
                 record: '<',
                 onDelete: '&',
                 showErrors: '&',
-                service: '<'
+                service: '<',
+                systemUsed: '&'
             }
         });
 
@@ -42,7 +43,8 @@
         var vm = this;
         vm.systemList = DossierLists.getTissuesSystem();
         vm.fluidsLists = DossierLists;
-        vm.dosService = ""
+        vm.dosService = "";
+        vm.isUsed = false;
         /*vm.nervousList = DossierLists.getNervousSystem();
          vm.digestList = DossierLists.getDigestiveSystem();
          vm.cardioList = DossierLists.getCardioSystem();
@@ -84,9 +86,17 @@
             }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
         };
-        vm.systemChanged = function () {
+        vm.systemChanged = function (ctrl) {
             vm.model.system = {}; //clear out old
             vm.model.detailsConcat = "";
+
+            vm.isUsed = vm.systemUsed({value: vm.model.systemType});
+            ctrl.$setValidity("duplicateRole", !vm.isUsed);
+            if (vm.isUsed) {
+                vm.model.system = {};
+                vm.otherDetails = "";
+                vm.model.detailsConcat = "";
+            }
             switch (vm.model.systemType) {
                 case DossierLists.getNervousSystemValue():
                     //get model
@@ -127,6 +137,7 @@
                     vm.model.detailsConcat = "";
                     break;
             }
+
             vm.otherChanged(); //update otherState, should be empty
         };
         /**

@@ -35,15 +35,35 @@
 
         var self = this;
         self.savePressed=false;
+        self.ctModel = { //TODO move to service
+            "containerType": "",
+            "packageSize": "",
+            "shelfLifeYears": undefined,
+            "shelfLifeMonths": undefined,
+            "tempMin": undefined,
+            "tempMax": undefined
+        }
+        self.backup = angular.copy(self.ctModel);
         self.$onInit = function () {
             self.savePressed=false;
-            self.ctModel = {};
 
-            if(self.record){
+            /* if(self.record){
                 self.ctModel = angular.copy(self.record);
             }
-            self.backup = angular.copy(self.ctModel);
+             self.backup = angular.copy(self.ctModel);*/
         };
+
+        self.$onChanges = function (changes) {
+            if (changes.record && changes.record.currentValue) {
+                self.ctModel = angular.copy(changes.record.currentValue);
+                self.ctModel.shelfLifeYears = Number(changes.record.currentValue.shelfLifeYears);
+                self.ctModel.shelfLifeMonths = Number(changes.record.currentValue.shelfLifeMonths);
+                self.ctModel.tempMin = Number(changes.record.currentValue.tempMin);
+                self.ctModel.tempMax = Number(changes.record.currentValue.tempMax);
+                self.backup = angular.copy(self.ctModel);
+            }
+
+        }
 
         self.save = function () {
             if(self.containerTypeForm.$valid) {

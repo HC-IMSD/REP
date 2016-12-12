@@ -3,7 +3,7 @@
 
 
     //TODO: Lazy load modules
-    angular.module('dossierApp', ['pascalprecht.translate', 'dossierLoadModule', 'dossierModule', 'dataLists'])
+    angular.module('dossierApp', ['pascalprecht.translate', 'dossierLoadModule', 'dossierModule', 'dataLists', 'translations'])
         .controller('MainController', MainController)
 
     angular.element(document).ready(function () {
@@ -13,7 +13,6 @@
     function MainController($translate, getCountryAndProvinces) {
         var vm = this;
         vm.formType = '@@SET_FORM';
-        console.log(getCountryAndProvinces.getVal())
     }
 })();
 
@@ -27,7 +26,6 @@
             $translateProvider.directivePriority(1);
             $translateProvider.useLoader('customLoad');
             $translateProvider.useSanitizeValueStrategy(null);
-
-            console.log($translateProvider.translations());
+            $translateProvider.forceAsyncReload(true); //needed for the custom loader
         }]);
 })();

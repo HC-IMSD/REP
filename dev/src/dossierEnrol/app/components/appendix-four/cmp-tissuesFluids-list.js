@@ -122,7 +122,19 @@
                 return false;
             }
             return (vm.tissuesListForm.$invalid)
-
+        }
+        vm.systemAlreadyUsed = function (systemVal) {
+            var systemExists = 0;
+            for (var i = 0; i < vm.model.tissuesFluidsList.length; i++) {
+                if (vm.model.tissuesFluidsList[i].systemType === systemVal) {
+                    console.log("exists")
+                    systemExists++;
+                }
+            }
+            if (systemExists > 1) {
+                return true;
+            }
+            return false;
         }
 
 

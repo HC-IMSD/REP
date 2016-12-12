@@ -12,9 +12,19 @@ var rename = require("gulp-rename");
 var angularFilesort = require('gulp-angular-filesort');
 var replace = require('gulp-replace-task');
 var stringReplace = require('gulp-string-replace');
-var gutil = require('gulp-util');
+//var gutil = require('gulp-util');
 var dateFormat = require('dateformat');
-var runSequence = require('run-sequence');
+//var runSequence = require('run-sequence');
+var gulpMerge = require('gulp-merge-json');
+var fs = require('fs');
+
+
+/*
+ Basic functionality
+ */
+/*gulp.src('jsonFiles/!**!/!*.json')
+ .pipe(merge('combined.json'))
+ .pipe(gulp.dest('./dist'));*/
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -513,6 +523,7 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath)
     rootName = rootName[rootName.length - 1];
     rootName = rootName.substring(0, rootName.length - 3);
     var dateToday = createSuffixDate();
+
     var copySources = gulp.src([rootFile],
         {read: true, base: ignorePath});
     return (
@@ -535,6 +546,54 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath)
     )
 
 };
+pipes.insertTranslations = function (rootFile, destPath, ignorePath, translationsPathEn, translationsPathFr) {
+    if (!ignorePath) ignorePath = ".";
+
+    // var rootFile=jsDossierServicePaths.dossierLoadService;
+    //var destPath=  dossierPaths.buildDevDossier+'app/services/'
+    var rootName = rootFile.split("/");
+    rootName = rootName[rootName.length - 1];
+    rootName = rootName.substring(0, rootName.length - 3); //jsfiles
+    var dateToday = createSuffixDate();
+
+    var translationsEn = JSON.parse(
+        fs.readFileSync(translationsPathEn));
+    var translationsFr = JSON.parse(
+        fs.readFileSync(translationsPathFr));
+    translationsEn = JSON.stringify(translationsEn);
+    translationsFr = JSON.stringify(translationsFr);
+    var copySources = gulp.src([rootFile],
+        {read: true, base: ignorePath});
+    return (
+        copySources
+
+        /*.pipe(replace({
+
+         patterns: [
+         {
+         match: 'TRANSLATIONS',
+         replacement:translations
+         }
+
+         ]
+         }))*/
+            .pipe(stringReplace(/"@@TRANSLATIONS_EN"/, translationsEn))
+            .pipe(stringReplace(/"@@TRANSLATIONS_FR"/, translationsFr))
+            .pipe(rename(rootName + dateToday + '.js'))
+            .pipe(gulp.dest(destPath))
+    )
+
+};
+
+
+pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
+
+    return (
+        gulp.src(srcFolder + '**/*-' + lang + '.json')
+            .pipe(gulpMerge(destName))
+            .pipe(gulp.dest(destFolder))
+    );
+}
 
 /**
  *  Creates the root Html file  for the forms.
@@ -633,7 +692,8 @@ pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRo
                 buildDir + 'app/directives/**/*.js',
                 buildDir + 'app/services/**/*.js',
                 buildDir + 'app/' + injectRootJs,
-                buildDir + 'app/' + 'translations' + createSuffixDate() + '.js',
+                /*    "!"+buildDir + 'app/services/!**!/'+ignoreLoadService,*/
+                buildDir + 'app/' + 'dossierTranslations' + createSuffixDate() + '.js',
                 buildDir + 'app/lib/**/angular*.js'
             ])
             .pipe(angularFilesort())
@@ -696,7 +756,7 @@ pipes.copyDemoDossier = function () {
     return (copySources.pipe(gulp.dest(dest)))
 };
 
-
+//deprecated
 pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, destName) {
 
     pipes.insertDateStamp(templatePath, valsObj)
@@ -712,6 +772,19 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
     // }
 
 };
+
+/*pipes.insertJson = function (template, valsObj) {
+
+ return (
+ copySourcesJs.pipe(rename({
+ suffix: dateToday
+ }))
+ .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
+ .pipe(gulp.dest(paths.buildDevActivity))
+ )
+
+ };*/
+
 
 
 gulp.task('dev-activity-copySrc', function () {
@@ -827,9 +900,15 @@ gulp.task('dev-company-createResources', ['dev-company-copyTranslate'], function
 
 gulp.task('dev-dossier-createResources', ['dev-dossier-copyTranslate'], function () {
     var devPath = dossierPaths.buildDevDossier;
+    /*    return(
+     pipes.mergeJsonFiles(devPath + 'app/resources/',devPath , 'dossierTranslate-en.json','en')&&
+     pipes.mergeJsonFiles(devPath + 'app/resources/',devPath , 'dossierTranslate-fr.json','fr')
+     )*/
+
     return (gulp.src(devPath + 'app/resources/' + '*.json')
-        .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
+        .pipe(angularTranslate('dossierTranslations' + createSuffixDate() + '.js'))
         .pipe(gulp.dest(devPath + 'app/')))
+
 
 });
 
@@ -1288,7 +1367,7 @@ gulp.task('dev-dossier-copyCommonTranslate', function () {
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
         translationBaseFiles.general,
         translationBaseFiles.fileIO,
-        translationBaseFiles.countries,
+        //translationBaseFiles.countries,
         translationBaseFiles.applicationInfo,
         translationBaseFiles.messages,
         translationBaseFiles.contact
@@ -1355,6 +1434,17 @@ gulp.task('dev-dossier-createRootJS', function () {
 });
 
 
+//Used for injecting into file. Not doing complicated
+gulp.task('dev-dossier-insertTranslateLoader', ['dev-dossier-createResources'], function () {
+    var ignorePath = '/build/dev/dossier';
+    var translations_en = dossierPaths.buildDevDossier + 'dossierTranslate-en.json'
+    var translations_fr = dossierPaths.buildDevDossier + 'dossierTranslate-fr.json'
+    return (
+        pipes.insertTranslations(jsDossierServicePaths.dossierLoadService, dossierPaths.buildDevDossier + 'app/services/', ignorePath, translations_en, translations_fr)
+        // pipes.insertTranslations ("fr",jsDossierServicePaths.dossierLoadService, dossierPaths.buildDevDossier+'app/services/', ignorePath,translations_fr )
+    )
+});
+
 
 /**
  * Generates the base Dossier HTML file.
@@ -1363,12 +1453,13 @@ gulp.task('dev-dossier-createRootJS', function () {
  * Then creates 4 versions of main app file (dossierApp).
  * Creates 4 html files- internal english, internal french, external english, external french
  */
-//'dev-dossier-createResources'
-gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS'], function () {
+//' dev-dossier-insertTranslateLoader '
+gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS', 'dev-dossier-createResources'], function () {
     var ignoreDir = '/build/dev/dossier';
     var buildDir = dossierPaths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;
-
+    var serviceName = 'dossier-load-service.js';
+    var loadService = (serviceName).substring(0, serviceName.length - 3);
     pipes.createDossierDev(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir);
     pipes.createDossierDev(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir);
     pipes.createDossierDev(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir);
