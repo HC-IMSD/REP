@@ -76,6 +76,7 @@
             "isDossier": true
         };
         self.isIncomplete = true;
+        self.foo = "";
         self.formAmend = false;
         self.showAllErrors = false;
         self.errorAppendix = [];

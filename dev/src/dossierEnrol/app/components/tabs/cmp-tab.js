@@ -34,8 +34,6 @@
                 selected : false
             };
 
-            console.log('tabModule : ' + self.tab);
-
             self.tabs.addTab(self.tab);
         }
 

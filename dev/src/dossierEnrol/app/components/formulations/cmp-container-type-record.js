@@ -103,7 +103,7 @@
          * @returns {*}
          */
         self.showError=function(isInvalid, isTouched){
-            return((isInvalid && isTouched) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
+            return ((isInvalid && isTouched) || (isInvalid && self.savePressed) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
         }
 
         $scope.$watch('ctrCtrl.containerTypeForm.$dirty', function () {

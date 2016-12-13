@@ -154,7 +154,6 @@
             var index = -1;
 
             for (var i = 0; i < records.length; i++) {
-                console.log(records[i])
                 if (records[i] == translateText) {
                     index = i;
                     break;

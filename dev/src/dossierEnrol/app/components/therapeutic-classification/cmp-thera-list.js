@@ -75,7 +75,6 @@
             vm.isDetailValid = value;
         }
         vm.addNew = function() {
-            console.log("adsd")
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "name": ""};
             vm.model.theraList.push(item);
@@ -87,7 +86,6 @@
 
             var idx = vm.model.theraList.indexOf(
                 $filter('filter')(vm.model.theraList, {id: recId}, true)[0]);
-            console.log("index to delete "+idx)
             vm.model.theraList.splice(idx, 1);
         }
 

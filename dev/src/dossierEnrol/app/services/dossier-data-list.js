@@ -29,10 +29,15 @@
     function getService() {
         var OTHER = "OTHER";
         var YES = 'Y';
-        this.roaList = [];
+        var vm = this;
+        vm.roaList = [];
+        vm.nanoList = [];
+        vm.dosageFormList = [];
 
         var service = {
             createRoaList: _createRoaArray,
+            createNanomaterialList: _createNanoArray,
+            createDosageFormList: _createDosageFormArray,
             getDosageFormList: getDosageFormsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
@@ -82,17 +87,26 @@
             return getDoseOtherValue();
         }
 
+        function _createNanoArray(translateJson) {
+
+            vm.nanoList = _getKeys(translateJson)
+        }
+
+        function _createDosageFormArray(translateJson) {
+            vm.dosageFormList = _getKeys(translateJson);
+        }
+
         function _createRoaArray(translateJson) {
+            vm.roaList = _getKeys(translateJson)
+        }
+
+        function _getKeys(translateJson) {
             var result = [];
             var keys = Object.keys(translateJson);
             for (var i = 0; i < keys.length; i++) {
-                //var val = translateJson[keys[i]];
                 result.push(keys[i])
             }
-            this.roaList = result;
-            //return extraList;
-
-
+            return result;
         }
 
         function getDosageFormsArray() {
@@ -137,56 +151,11 @@
         }
 
         function getNanoMaterialArray() {
-            return ([
-                "NOTNANO",
-                "NANOPARTICLE",
-                "DENDRIMER",
-                "LIPOSOMES",
-                "MICELLES",
-                "NANOEMULSIONS",
-                "NANOCRYSTAL",
-                "METALCOLLOIDS",
-                OTHER
-            ]);
+            return (vm.nanoList);
         }
 
         function getRoaArray() {
-
-
-            return (this.roaList);
-            /*return ([
-                "BLOCK_INFILTRATION",
-                "BUCCAL",
-                "DENTAL",
-                "DIALYSIS",
-                "EPIDURAL",
-                "INHALATION",
-                "INTRA-ARTERIAL",
-                "INTRA-ARTICULAR",
-                "INTRABURSAL",
-                "INTRADERMAL",
-                "INTRAMAMMARY",
-                "INTRAOCULAR",
-                "INTRAPERITONEAL",
-                "INTRATHECAL",
-                "INTRATRACHEAL",
-                "INTRAVASCULAR",
-                "INTRAVENOUS",
-                "INTRAVITREAL",
-                "IRRIGATION",
-                "NASAL",
-                "OPHTHALMIC",
-                "ORAL",
-                "OTIC",
-                "RECTAL",
-                "SUBCUTANEOUS",
-                "SUBLINGUAL",
-                "TOPICAL",
-                "TRANSDERMAL",
-                "URETHRAL",
-                "VAGINAL",
-                OTHER
-             ]);*/
+            return (vm.roaList);
         }
 
         function yesNoArray() {

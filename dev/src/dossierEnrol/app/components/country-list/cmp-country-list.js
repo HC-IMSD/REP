@@ -106,7 +106,6 @@
         }
 
         self.addNew = function () {
-            console.log("adding a new value")
             var maxID = getListMaxID();
             var item = angular.copy(self.emptyModel);
             item.id = (getListMaxID() + 1);

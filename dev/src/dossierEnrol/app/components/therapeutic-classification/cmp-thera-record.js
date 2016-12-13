@@ -44,7 +44,6 @@
 
 
         vm.deleteRecord = function()  {
-            console.log("deleting ....."+vm.model.id)
             vm.onDelete({id: vm.model.id})
         };
 

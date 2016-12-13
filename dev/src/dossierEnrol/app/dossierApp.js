@@ -21,9 +21,9 @@
     angular
         .module('dossierApp')
         .config(['$translateProvider', function ($translateProvider) {
-            $translateProvider.preferredLanguage('@@prefLang');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
+            $translateProvider.preferredLanguage('@@prefLang');
             $translateProvider.useLoader('customLoad');
             $translateProvider.useSanitizeValueStrategy(null);
             $translateProvider.forceAsyncReload(true); //needed for the custom loader

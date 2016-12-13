@@ -62,6 +62,7 @@
             self.resetToCollapsed = !self.resetToCollapsed;
             self.productList.push(product);
             self.newProductFormShown = false;
+            self.onUpdate({recs: self.productList});
             setRecord(-1);
         };
 
@@ -76,6 +77,7 @@
             self.productList.splice(idx, 1);
             self.setValid(true);
             setRecord(-1);
+            self.onUpdate({recs: self.productList});
             self.resetToCollapsed = !self.resetToCollapsed;
         }
         function setRecord(value){

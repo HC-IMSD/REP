@@ -104,13 +104,12 @@
         };
 
         self.showOneCountryError = function () {
-            console.log("in country error");
             //if(angular.isUndefined(self.model)) return false;
             if(self.model.countryList.length>0){
                 self.oneCountrySelected="selected"
                 return false;
             }else{
-                console.log("no cou")
+
                 self.oneCountrySelected=""
                 return true;
             }

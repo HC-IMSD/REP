@@ -15,24 +15,13 @@
         .module('dossierLoadModule')
         .factory('customLoad', ['$http', '$q', 'getCountryAndProvinces', 'DossierLists', function ($http, $q, getCountryAndProvinces, DossierLists) {
             var result = {};
-            //if going to inject translations
-            /* var base_en = "@@TRANSLATIONS_EN" ;
-
-             var base_fr = "@@TRANSLATIONS_FR" ;
-             */
-
             return function (options) {
                 var deferred = $q.defer();
                 var roaUrl = "data/roa-" + options.key + ".json";
                 var countryUrl = "data/countries-" + options.key + ".json";
-                /* if(options.key==='fr'){
-                 result=base_fr;
-                 base_en={};
-                 }else{
-                 //fallback
-                 result=base_en;
-                 base_fr={};
-                 }*/
+                var nanoUrl = "data/nanomaterial-" + options.key + ".json";
+                var dosageFormUrl = "data/dosageForm-" + options.key + ".json";
+
                 $http.get(roaUrl)
                     .then(function (response) {
                         angular.extend(result, response.data);
@@ -42,12 +31,19 @@
                     .then(function (response) {
                         angular.extend(result, response.data);
                         getCountryAndProvinces.createCountryList(response.data);
-
-                        return (response.data);
+                        return $http.get(nanoUrl);
+                    }).then(function (response) {
+                    angular.extend(result, response.data);
+                    DossierLists.createNanomaterialList(response.data);
+                    return $http.get(dosageFormUrl);
+                }).then(function (response) {
+                        angular.extend(result, response.data);
+                        DossierLists.createDosageFormList(response.data);
+                        return response.data;
                     })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
-                        console.log("An error occurred: " + error);
+                        console.warn("An error occurred with Dossier List Load: " + error);
                         deferred.reject(result);
                     })
                     .finally(function () {
