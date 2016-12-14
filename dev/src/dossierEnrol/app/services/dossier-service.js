@@ -436,13 +436,18 @@
             var list = [];
 
             if (angular.isDefined(info)) {
+                if (!(info instanceof Array)) {
+                    //make it an array, case there is only one
+                    info = [info]
+                }
+
                 for (var i = 0; i < info.length; i++) {
                     var product = {};
                     product.brandName = info[i].brand_name;
                     product.medIngredient = info[i].medicinal_ingredient;
                     product.dosageForm = info[i].dosage_form;
                     product.dosageFormOther = info[i].dosage_form_other;
-                    product.strengths = info[i].strengths;
+                    product.strengths = Number(info[i].strengths);
                     product.units = info[i].units;
                     product.per = info[i].per;
                     product.companyName = info[i].company_name;
@@ -542,6 +547,8 @@
         function getFormulationList(list) {
 
             var formulationList = [];
+            if (!list || list.length === 0)
+                return formulationList;
             if (!(list instanceof Array)) {
                 //make it an array, case there is only one
                 list = [list]
@@ -597,7 +604,7 @@
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
-                    "strength": item.strength,
+                    "strength": Number(item.strength),
                     "per": item.per,
                     "units": item.units,
                     "calcAsBase": item.is_base_calc,
@@ -629,7 +636,7 @@
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
-                    "strength": item.strength,
+                    "strength": Number(item.strength),
                     "per": item.per,
                     "units": item.units,
                     "calcAsBase": item.is_base_calc,

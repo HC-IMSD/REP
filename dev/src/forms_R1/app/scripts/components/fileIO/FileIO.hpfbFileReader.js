@@ -261,9 +261,9 @@
          */
         function convertXMLToJSONObjects(reader) {
             var xmlConfig = {
-                attributePrefix: "@",
-                escapeMode: "true",
-                emptyNodeForm: "text"
+                escapeMode: true,
+                emptyNodeForm: "text",
+                useDoubleQuotes: true
             }
             var xmlConverter = new X2JS(xmlConfig);
             //converts XML as a string to a json
@@ -278,8 +278,12 @@
         }
 
         function convertJSONObjectsToXML(jsonObj) {
-
-            var jsonConverter = new X2JS();
+            var xmlConfig = {
+                escapeMode: true,
+                emptyNodeForm: "text",
+                useDoubleQuotes: true
+            }
+            var jsonConverter = new X2JS(xmlConfig);
             var xmlResult = null;
             //converts XML as a string to a json
             xmlResult = jsonConverter.json2xml_str(jsonObj)
