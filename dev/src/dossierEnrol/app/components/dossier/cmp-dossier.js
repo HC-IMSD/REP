@@ -75,6 +75,7 @@
             "errorMsg": "MSG_LENGTH_7",
             "isDossier": true
         };
+
         self.isIncomplete = true;
         self.foo = "";
         self.formAmend = false;
@@ -108,7 +109,6 @@
         var yesValue = "Y";
 
         self.$onInit = function () {
-
             self.dossierService = new DossierService();
 
             self.dossierModel = self.dossierService.getDefaultObject();

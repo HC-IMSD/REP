@@ -33,8 +33,11 @@
         vm.roaList = [];
         vm.nanoList = [];
         vm.dosageFormList = [];
+        vm.activeList = [];
 
         var service = {
+            setActiveList: _setActiveArray,
+            getActiveList: _getActiveArray,
             createRoaList: _createRoaArray,
             createNanomaterialList: _createNanoArray,
             createDosageFormList: _createDosageFormArray,
@@ -69,7 +72,14 @@
         };
         return service;
 
+        function _setActiveArray(data) {
+            vm.activeList = angular.copy(data);
+        }
 
+        function _getActiveArray() {
+            return (vm.activeList);
+
+        }
         ////////////////
         function getDoseOtherValue() {
             return OTHER;

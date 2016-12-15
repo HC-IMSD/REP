@@ -1,15 +1,26 @@
 <ng-form name="ingRecCtrl.activeIngForm">
-  <!--  <pre>ingRecCtrl.ingModel: {{ingRecCtrl.ingModel|json}}</pre>-->
+    <!--  <pre>ingRecCtrl.ingModel: {{ingRecCtrl.ingModel|json}}</pre>-->
     <div class="container-fluid">
         <fieldset>
             <legend>{{'MEDICINAL_INGRED_DETAILS'|translate}}</legend>
             <div class="row">
-                <div class="form-group col-md-12" ng-class="{'has-error':ingRecCtrl.activeIngForm.ingredName.$invalid}">
+                <div class="form-group col-md-12 typeahead-demo"
+                     ng-class="{'has-error':ingRecCtrl.activeIngForm.ingredName.$invalid}">
                     <label for="ing-name" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <input type="text" id="ing-name" data-ng-model="ingRecCtrl.ingModel.ingName" name="ingredName"
-                               class="form-control full-width" name="text" ng-required="true" maxlength="100"
-                               size="100"/>
+                        <input type="text" ng-model="ingRecCtrl.ingModel.ingObj" name="ingredName" id="ing-name"
+                               size="100"
+                               uib-typeahead="rec as rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
+                               class="form-control rep-normal-font" typeahead-show-hint="true" typeahead-min-length="2"
+                               ng-required="true"
+                               typeahead-editable="false"
+                               typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html">
+                        <input type="text" id="ing-id" data-ng-model="ingRecCtrl.ingModel.ingName" name="ingredId"
+                               class="form-control" ng-required="true" ng-show="false"/>
+                        <!-- <input type="text" id="ing-name" data-ng-model="ingRecCtrl.ingModel.ingName" name="ingredName"
+                                class="form-control full-width" name="text" ng-required="true" maxlength="100"
+                                size="100"/>-->
                         <strong id="ingredientName-error" class="error"
                                 ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.ingredName.$invalid,ingRecCtrl.activeIngForm.ingredName.$touched)">
                                     <span class="label label-danger"
@@ -160,5 +171,6 @@
                        ng-click="ingRecCtrl.discardChanges()">
             </div>
         </fieldset>
+        <!-- <pre>{{ingRecCtrl.ingModel |json}}</pre>-->
     </div>
 </ng-form>

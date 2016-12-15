@@ -37,15 +37,36 @@
         self.nanoMaterialList = DossierLists.getNanoMaterials();
         self.yesNoList = DossierLists.getYesNoList();
         self.savePressed = false;
+        self.activeList = DossierLists.getActiveList();
+
         self.$onInit = function () {
             self.savePressed = false;
-            self.ingModel = {};
+            self.ingModel = {
+                ingObj: "",
+                ingName: "",
+                ingLabel: "",
+                cas: "",
+                standard: "",
+                strength: null,
+                units: "",
+                per: "",
+                nanoMaterial: "",
+                nanoMaterialOther: "",
+                calcAsBase: "",
+                humanAnimalSourced: ""
+            };
 
             if (self.record) {
                 self.ingModel = angular.copy(self.record);
             }
             self.backup = angular.copy(self.ingModel);
         };
+
+        self.ingredSelectionUpdated = function (item, model, label, event) {
+            self.ingModel.ingName = model.id;
+            self.ingModel.ingLabel = label;
+        };
+
 
         self.saveIng = function () {
             if (self.activeIngForm.$valid) {

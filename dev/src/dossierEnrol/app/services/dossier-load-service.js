@@ -21,7 +21,6 @@
                 var countryUrl = "data/countries-" + options.key + ".json";
                 var nanoUrl = "data/nanomaterial-" + options.key + ".json";
                 var dosageFormUrl = "data/dosageForm-" + options.key + ".json";
-
                 $http.get(roaUrl)
                     .then(function (response) {
                         angular.extend(result, response.data);
@@ -36,9 +35,14 @@
                     angular.extend(result, response.data);
                     DossierLists.createNanomaterialList(response.data);
                     return $http.get(dosageFormUrl);
-                }).then(function (response) {
+                    })
+                    .then(function (response) {
                         angular.extend(result, response.data);
                         DossierLists.createDosageFormList(response.data);
+
+                        return $http.get("data/activeIngred.json");
+                    }).then(function (response) {
+                        DossierLists.setActiveList(response.data);
                         return response.data;
                     })
                     .catch(function (error) {
