@@ -23,24 +23,26 @@
                 var dosageFormUrl = "data/dosageForm-" + options.key + ".json";
                 $http.get(roaUrl)
                     .then(function (response) {
-                        angular.extend(result, response.data);
-                        DossierLists.createRoaList(response.data);
-                        return $http.get(countryUrl);
+                        var newList = _createNewKeyArray(response.data, DossierLists.getRoaPrefix());
+                        DossierLists.createRoaList(newList);
+                        angular.extend(result, newList);
+                        return $http.get(countryUrl); //country list load
                     })
                     .then(function (response) {
                         angular.extend(result, response.data);
                         getCountryAndProvinces.createCountryList(response.data);
-                        return $http.get(nanoUrl);
+                        return $http.get(nanoUrl); //nanomaterial load
                     }).then(function (response) {
                     angular.extend(result, response.data);
                     DossierLists.createNanomaterialList(response.data);
-                    return $http.get(dosageFormUrl);
+                        return $http.get(dosageFormUrl); //dosage form list Load
                     })
                     .then(function (response) {
-                        angular.extend(result, response.data);
-                        DossierLists.createDosageFormList(response.data);
 
-                        return $http.get("data/activeIngred.json");
+                        var newList = _createNewKeyArray(response.data, DossierLists.getDosageFormPrefix());
+                        DossierLists.createDosageFormList(newList);
+                        angular.extend(result, newList);
+                        return $http.get("data/activeIngred.json"); //active ingredient list load
                     }).then(function (response) {
                         DossierLists.setActiveList(response.data);
                         return response.data;
@@ -55,8 +57,23 @@
                     });
                 return deferred.promise;
             };
-        }]);
 
+            function _createNewKeyArray(oldList, prefix) {
+                var keys = Object.keys(oldList);
+                var newList = {};
+                for (var i = 0; i < keys.length; i++) {
+                    var newKey = "";
+                    if (DossierLists.getOtherValue() === keys[i]) {
+                        newKey = keys[i];
+                    } else {
+                        newKey = prefix + keys[i];
+                    }
+                    var newObj = {};
+                    newList[newKey] = oldList[keys[i]];
+                }
+                return newList;
+            }
+        }]);
 })();
 
 

@@ -445,7 +445,13 @@
                     var product = {};
                     product.brandName = info[i].brand_name;
                     product.medIngredient = info[i].medicinal_ingredient;
-                    product.dosageForm = info[i].dosage_form;
+                    var concatDoseForm = "";
+                    // if(!info[i].dosage_form || info[i].dosage_form===DossierLists.getOtherValue() ) {
+                    concatDoseForm = info[i].dosage_form;
+                    // }else{
+                    //    concatDoseForm = DossierLists.getDosageFormPrefix() + info[i].dosage_form;
+                    // }
+                    product.dosageForm = concatDoseForm;
                     product.dosageFormOther = info[i].dosage_form_other;
                     product.strengths = Number(info[i].strengths);
                     product.units = info[i].units;
@@ -557,12 +563,15 @@
 
                 //static fields
                 var obj = {
-                    "formulation": item.formulation_id,
+                    "formulationId": item.formulation_id,
                     "formulationName": item.formulation_name,
-                    "dosageForm": item.dosage_form_group.dosage_form,
-                    "dosageFormOther": item.dosage_form_group.dosage_form_other
                 };
-
+                // if(!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form===DossierLists.getOtherValue() ) {
+                obj.dosageForm = item.dosage_form_group.dosage_form;
+                // }else{
+                // obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
+                //  }
+                obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
                     obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
                 }
@@ -709,11 +718,16 @@
             var _id = 0;
 
             angular.forEach(list, function (item) {
-
+                var newRoa = ""
+                if (item.roa === DossierLists.getOtherValue() || !item.roa) {
+                    newRoa = item.roa;
+                } else {
+                    newRoa = DossierLists.getRoaPrefix() + item.roa;
+                }
                 _id = _id + 1;
                 var obj = {
                     "id": _id,
-                    "roa": item.roa,
+                    "roa": newRoa,
                     "otherRoaDetails": item.roa_other
                 };
 
@@ -764,6 +778,9 @@
                     var product = {};
                     product.brand_name = info[i].brandName;
                     product.medicinal_ingredient = info[i].medIngredient;
+
+                    // var splitArray= (info[i].dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                    //var newDosage=splitArray[splitArray.length-1];
                     product.dosage_form = info[i].dosageForm;
                     product.dosage_form_other = info[i].dosageFormOther;
                     product.strengths = info[i].strengths;
@@ -882,10 +899,12 @@
             angular.forEach(list, function (item) {
                 var obj = {
                     "formulation_name": item.formulationName,
-                    "formulation_id": item.formulation
+                    "formulation_id": item.formulationId
                 };
                 //dosage_form_group, static valuie
                 obj.dosage_form_group = {};
+                // var splitArray=(item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                // var newDosage=splitArray[splitArray.length-1];
                 obj.dosage_form_group.dosage_form = item.dosageForm;
                 obj.dosage_form_group.dosage_form_other = item.dosageFormOther;
                 obj.roa_group = {};
@@ -1023,8 +1042,10 @@
         function routeAdminToOutput(list) {
             var resultList = [];
             angular.forEach(list, function (item) {
+                var splitArray = (item.roa).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
+                var newRoa = splitArray[splitArray.length - 1];
                 var obj = {
-                    "roa": item.roa,
+                    "roa": newRoa,
                     "roa_other": item.otherRoaDetails
                 };
                 resultList.push(obj);

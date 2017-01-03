@@ -68,7 +68,9 @@
             getMuscleSystemValue: _getMuscleSystemValue,
             getOtherTissuesSystemValue: _getOtherTissuesSystemValue,
             getYesValue: getYesValue,
-            getTissuesFluidsLabels: _getTissuesFluidsLabels
+            getTissuesFluidsLabels: _getTissuesFluidsLabels,
+            getRoaPrefix: _getRoaListPrefix,
+            getDosageFormPrefix: _getDosagePrefix
         };
         return service;
 
@@ -108,56 +110,40 @@
 
         function _createRoaArray(translateJson) {
             vm.roaList = _getKeys(translateJson)
+
+
         }
 
-        function _getKeys(translateJson) {
+        function _getRoaListPrefix() {
+            return "ROA_";
+        }
+
+        function _getDosagePrefix() {
+            return "DOSFORM_";
+        }
+
+        /**
+         * gets the keys for a list If there is a prefix,add it
+         * @param translateJson
+         * @param prefix
+         * @returns {Array}
+         * @private
+         */
+        function _getKeys(translateJson, prefix) {
             var result = [];
+            if (!prefix) {
+                prefix = "";
+            }
             var keys = Object.keys(translateJson);
             for (var i = 0; i < keys.length; i++) {
-                result.push(keys[i])
+                var appended = prefix + keys[i];
+                result.push(appended)
             }
             return result;
         }
 
         function getDosageFormsArray() {
-            return ([
-                "AEROSOL",
-                "BOLUS",
-                "CAPSULE",
-                "CAPSULE_DELAYED_RELEASE",
-                "CAPSULE_EXTENDED_RELEASE",
-                "CREAM",
-                "EMULSION",
-                "GAS",
-                "GEL",
-                "IMPLANT",
-                "LOTION",
-                "LOZENGE",
-                "OINTMENT",
-                "PATCH",
-                "PATCH_EXTENDED_RELEASE",
-                "POWDER",
-                "POWDER_FOR_SOLUTION",
-                "POWDER_FOR_SUSPENSION",
-                "SHAMPOO",
-                "SOLUTION",
-                "SPRAY",
-                "SPRAY_BAG_ON_VALVE",
-                "SPRAY_METERED_DOSE",
-                "STICK",
-                "STRIP",
-                "SUPPOSITORY",
-                "SUSPENSION",
-                "SYRUP",
-                "TABLET",
-                "TABLET_CHEWABLE",
-                "TABLET_DELAYED_RELEASE",
-                "TABLET_EXTENDED_RELEASE",
-                "TABLET_ORALLY_DISINTEGRATING",
-                "WIPE",
-                OTHER
-            ]);
-
+            return vm.dosageFormList;
         }
 
         function getNanoMaterialArray() {
