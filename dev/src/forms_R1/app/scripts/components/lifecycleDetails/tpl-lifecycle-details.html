@@ -27,8 +27,7 @@
                                            uib-datepicker-popup
                                            show-button-bar="false" datepicker-options="lifecycleCtrl.dateOptions"
                                            name="dateFiled" ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
-                                           is-open="lifecycleCtrl.filedDateOpen" ng-required="true"
-                                           ng-readonly="!lifecycleCtrl.ectd"/>
+                                           is-open="lifecycleCtrl.filedDateOpen" ng-required="true"/>
                                       <span class="input-group-btn">
                                             <button title="{{'CALENDAR'|translate}}" class="btn btn-default"
                                                     aria-haspopup="true"
@@ -59,7 +58,6 @@
                                     |translate}}</strong>
                                 <input type="text" id="controlNum_{{$id}}" name="controlNum" only-digits=""
                                        ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
-                                       ng-readonly="!lifecycleCtrl.ectd"
                                        class="form-control full-width" maxlength="6" minlength="6" size="6"
                                        ng-required="lifecycleCtrl.ectd"/>
                                 <strong id="controlNum-error" class="error"

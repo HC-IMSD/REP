@@ -126,8 +126,8 @@
             var record = angular.copy(vm.lifecycleList[0]);
             if (!vm.ectdValue) {
                 record.sequence = "";
-                record.controlNumber = "";
-                record.dateFiled = "";
+                // record.controlNumber = "";
+                //record.dateFiled = "";
             } else {
                 record.sequence = "0000";
             }

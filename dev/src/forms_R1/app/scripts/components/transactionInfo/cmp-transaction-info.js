@@ -68,7 +68,7 @@
         vm.$onChanges = function (changes) {
             if (changes.transactionRoot) {
                 vm.transactionModel = changes.transactionRoot.currentValue;
-                //vm.updateEctdState();
+                vm.updateEctdState();
                 vm.setSolicitedState();
             }
         }
@@ -134,12 +134,9 @@
             vm.setOtherSolicitor();
         };
         vm.setOtherSolicitor = function () {
-            console.log(vm.transactionModel.solicitedRequester)
             if (vm.transactionModel.solicitedRequester === OTHER) {
-                console.log("is true")
                 vm.showOtherSolicitedDetail = true;
             } else {
-                console.log("is false")
                 vm.showOtherSolicitedDetail = false;
                 vm.transactionModel.otherSolicitedRequester = "";
             }
