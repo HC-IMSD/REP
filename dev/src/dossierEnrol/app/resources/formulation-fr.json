@@ -44,6 +44,6 @@
   "CONTAINER_TYPES": "C. fr_Container Types",
   "ANIMAL_HUMAN_HDING": "D. fr_Animal and / or Human Sourced Materials",
   "ROA_TITLE": "E. fr_Routes of Administration",
-  "COUNTRIES_MANUFACT": "F. fr_Countries of manufacture for this drug product"
-
+  "COUNTRIES_MANUFACT": "F. fr_Countries of manufacture for this drug product",
+  "NOT_IN_LIST": "fr_Not in list"
 }

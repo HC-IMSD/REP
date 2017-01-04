@@ -37,8 +37,9 @@
             self.selectRecord = -1;
 
             self.colNames = [
-                {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "70"},
-                {label: "CAS_NUM", "binding": "cas", width: "15"},
+                {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "65"},
+                {label: "NOT_IN_LIST", binding: "newIngred", width: "7"},
+                {label: "CAS_NUM", "binding": "cas", width: "13"},
                 {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
             ];
             self.ingList = [];

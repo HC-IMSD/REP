@@ -609,7 +609,8 @@
 
                 var obj = {
                     "ingId": item.ingredient_id,
-                    "ingName": item.ingredient_name,
+                    "ingLabel": item.ingredient_name,
+                    "newIngred": "N",
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
@@ -620,7 +621,9 @@
                     "nanoMaterial": item.is_nanomaterial,
                     "nanoMaterialOther": item.nanomaterial_details
                 };
-
+                if (!obj.ingId) {
+                    obj.newIngred = 'Y'
+                }
                 resultList.push(obj);
 
             });
@@ -944,7 +947,7 @@
 
                 var obj = {
                     "ingredient_id": item.ingId,
-                    "ingredient_name": item.ingName,
+                    "ingredient_name": item.ingLabel,
                     "cas_number": item.cas,
                     "ingred_standard": item.standard,
                     "is_human_animal_src": item.humanAnimalSourced,
@@ -1287,7 +1290,7 @@
                     for (var j = 0; j < (oneFormulation.activeIngList.length); j++) {
                         var oneActive = oneFormulation.activeIngList[j];
                         if (oneActive.humanAnimalSourced === yesValue) {
-                            allAnimalSourcedNames.push(oneActive.ingName);
+                            allAnimalSourcedNames.push(oneActive.ingLabel);
                         }
                     }
                 }

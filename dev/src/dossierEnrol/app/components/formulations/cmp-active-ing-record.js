@@ -38,33 +38,46 @@
         self.yesNoList = DossierLists.getYesNoList();
         self.savePressed = false;
         self.activeList = DossierLists.getActiveList();
-
+        self.newIngred = false;
+        self.ingModel = {
+            newIngred: 'Y',
+            ingId: "",
+            ingLabel: "",
+            cas: "",
+            standard: "",
+            strength: null,
+            units: "",
+            per: "",
+            nanoMaterial: "",
+            nanoMaterialOther: "",
+            calcAsBase: "",
+            humanAnimalSourced: ""
+        };
         self.$onInit = function () {
             self.savePressed = false;
-            self.ingModel = {
-                ingObj: "",
-                ingName: "",
-                ingLabel: "",
-                cas: "",
-                standard: "",
-                strength: null,
-                units: "",
-                per: "",
-                nanoMaterial: "",
-                nanoMaterialOther: "",
-                calcAsBase: "",
-                humanAnimalSourced: ""
-            };
-
-            if (self.record) {
+            /*  if (self.record) {
                 self.ingModel = angular.copy(self.record);
-            }
+             }*/
             self.backup = angular.copy(self.ingModel);
         };
+        $scope.$watch('ingRecCtrl.newIngred', function () {
+            if (self.newIngred === true) {
+                self.ingModel.newIngred = 'Y';
+                self.ingModel.ingId = "";
+            } else {
+                self.ingModel.newIngred = 'N';
+            }
+        }, true);
 
+        /**
+         * Only fires on selection from the list
+         * @param item
+         * @param model
+         * @param label
+         * @param event
+         */
         self.ingredSelectionUpdated = function (item, model, label, event) {
-            self.ingModel.ingName = model.id;
-            self.ingModel.ingLabel = label;
+            self.ingModel.ingId = item.id;
         };
 
 
@@ -96,17 +109,26 @@
         };
 
         self.copy = function () {
-            var ingredientCopy = angular.copy( self.ingModel);
-           self.onAddIng({ing: ingredientCopy});
+            var ingredientCopy = angular.copy(self.ingModel);
+            self.onAddIng({ing: ingredientCopy});
         }
 
         self.$onChanges = function (changes) {
-            /*
+
              //Commented out as none of the other details records do this
              //TODO: move init code to changes event where it belongs
-             if(changes.record){
-             self.ingModel = changes.record.currentValue;
-             }*/
+            if (changes.record && changes.record.currentValue) {
+                //self.ingModel = changes.record.currentValue;
+                self.ingModel = angular.copy(changes.record.currentValue);
+                if (!self.ingModel.ingId) {
+                    self.ingModel.newIngred = 'Y';
+                    self.newIngred = true;
+                } else {
+                    self.ingModel.newIngred = 'N';
+                    self.newIngred = false;
+                }
+
+            }
         };
 
 
