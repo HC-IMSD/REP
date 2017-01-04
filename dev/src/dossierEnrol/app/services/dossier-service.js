@@ -446,11 +446,11 @@
                     product.brandName = info[i].brand_name;
                     product.medIngredient = info[i].medicinal_ingredient;
                     var concatDoseForm = "";
-                    // if(!info[i].dosage_form || info[i].dosage_form===DossierLists.getOtherValue() ) {
-                    concatDoseForm = info[i].dosage_form;
-                    // }else{
-                    //    concatDoseForm = DossierLists.getDosageFormPrefix() + info[i].dosage_form;
-                    // }
+                    if (!info[i].dosage_form || info[i].dosage_form === DossierLists.getOtherValue()) {
+                        concatDoseForm = info[i].dosage_form;
+                    } else {
+                        concatDoseForm = DossierLists.getDosageFormPrefix() + info[i].dosage_form;
+                    }
                     product.dosageForm = concatDoseForm;
                     product.dosageFormOther = info[i].dosage_form_other;
                     product.strengths = Number(info[i].strengths);
@@ -566,11 +566,11 @@
                     "formulationId": item.formulation_id,
                     "formulationName": item.formulation_name,
                 };
-                // if(!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form===DossierLists.getOtherValue() ) {
-                obj.dosageForm = item.dosage_form_group.dosage_form;
-                // }else{
-                // obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
-                //  }
+                if (!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form === DossierLists.getOtherValue()) {
+                    obj.dosageForm = item.dosage_form_group.dosage_form;
+                } else {
+                    obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
+                }
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
                     obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
@@ -779,8 +779,8 @@
                     product.brand_name = info[i].brandName;
                     product.medicinal_ingredient = info[i].medIngredient;
 
-                    // var splitArray= (info[i].dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                    //var newDosage=splitArray[splitArray.length-1];
+                    var splitArray = (info[i].dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                    var newDosage = splitArray[splitArray.length - 1];
                     product.dosage_form = info[i].dosageForm;
                     product.dosage_form_other = info[i].dosageFormOther;
                     product.strengths = info[i].strengths;
@@ -901,11 +901,11 @@
                     "formulation_name": item.formulationName,
                     "formulation_id": item.formulationId
                 };
-                //dosage_form_group, static valuie
+                //dosage_form_group, static value
                 obj.dosage_form_group = {};
-                // var splitArray=(item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                // var newDosage=splitArray[splitArray.length-1];
-                obj.dosage_form_group.dosage_form = item.dosageForm;
+                var splitArray = (item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                var newDosage = splitArray[splitArray.length - 1];
+                obj.dosage_form_group.dosage_form = newDosage;
                 obj.dosage_form_group.dosage_form_other = item.dosageFormOther;
                 obj.roa_group = {};
                 if (item.routeAdmins && item.routeAdmins.length > 0) {
@@ -1343,6 +1343,7 @@
 
             return extraList;
         }
+
         function getUniqueList(arr) {
             var u = {}, a = [];
             for (var i = 0, l = arr.length; i < l; ++i) {
