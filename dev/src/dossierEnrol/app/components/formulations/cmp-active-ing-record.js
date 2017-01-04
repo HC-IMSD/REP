@@ -26,7 +26,8 @@
                 onUpdate: '&',
                 onDelete: '&',
                 onCancel: '&',
-                isDetailValid: '&'
+                isDetailValid: '&',
+                recordIndex: '<'
             }
 
         });
