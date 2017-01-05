@@ -27,7 +27,7 @@
   "FEE_CLASS": "fr_Fee Class",
   "NOT_LASA": "fr_I confirm that this administrative submission type is NOT a Look-alike Sound-alike (LASA) submission",
   "REASON_FILE": "fr_Reason for filing this Regulatory Activity",
-  "RELATED_ACTIVITIES": "fr_Related Regulatory Activities (Referred to in this Submission)",
+  "RELATED_ACTIVITIES": "fr_Related Regulatory Activity (Referred to in this Submission)",
   "ACTIVITY_TYPE": "fr_Regulatory Activity Type",
   "DATE_CLEARED": "fr_Date Cleared",
   "CONTROL_NUM": "fr_Control Number",
@@ -42,5 +42,9 @@
   "AUT_LETTER": "fr_Please include Third Party Authorization letter in the REP folder when submitting via the CESG",
   "DOSSIER_ID_PREV": "fr_Dossier Id (Previously File Number)",
   "RELATED_ACTIVITY": "fr_Related Activity",
-  "AMEND_ACTIVITY": "fr_Amend Related Activity"
+  "AMEND_ACTIVITY": "fr_Amend Related Activity",
+  "IS_ADMIN_SUB": "fr_Is this a regulatory administrative submission?",
+  "LICENCE_AGREE": "fr_Is this a licence agreement?",
+  "DIN_TRANSFER": "fr_I confirm that this is a DIN transfer",
+  "SPONSOR_NAME": "fr_Sponsor Name"
 }

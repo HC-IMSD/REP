@@ -168,6 +168,7 @@ var jsComponentPaths = {
     lifecycleListPath: paths.components + 'lifecycleList/',
     relatedActivityPath: paths.components + 'relatedActivity/',
     relatedActivityListPath: paths.components + 'relatedActivityList/',
+    adminSubmissionPath: paths.components + 'adminSubmission/',
     repContactListPath: paths.components + 'repContactList/',
     repContactRecordPath: paths.components + 'rep-contact-record/',
     transactionMainPath: paths.components + 'transactionMain/',
@@ -214,7 +215,8 @@ var jsServiceFiles = {
     filterLists: paths.services + 'filter-lists.js',
     hpfbConstants: paths.services + 'hpfb-constants.js',
     transactionService: paths.services + 'transactionService.js',
-    repContactService: paths.services + 'rep-contact-service.js'
+    repContactService: paths.services + 'rep-contact-service.js',
+    commonLists: paths.services + 'common-lists.js'
 };
 //TODO refactor
 var jsDirectiveFiles = {
@@ -801,8 +803,9 @@ gulp.task('dev-activity-copySrc', function () {
         jsComponentPaths.dinDetailsPath + '**/*',
         jsComponentPaths.expandingTablePath + '**/*',
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
-        jsComponentPaths.relatedActivityListPath + '**/*',
-        jsComponentPaths.relatedActivityPath + '**/*',
+        jsComponentPaths.adminSubmissionPath + '**/*',
+        //jsComponentPaths.relatedActivityListPath + '**/*',
+        // jsComponentPaths.relatedActivityPath + '**/*',
         jsComponentPaths.repContactListPath + '**/*',
         jsComponentPaths.repContactRecordPath + '**/*'
     ]
@@ -821,6 +824,7 @@ gulp.task('dev-activity-copySrc', function () {
     activityJs.push(jsServiceFiles.filterLists);
     activityJs.push(jsServiceFiles.dataLists);
     activityJs.push(jsServiceFiles.dataListsActivity);
+    activityJs.push(jsServiceFiles.commonLists);
     activityJs.push(jsDirectiveFiles.numberOnly);
 
 
@@ -1485,7 +1489,7 @@ gulp.task('prod-cleanEnvironment', function () {
 });
 
 //activity
-gulp.task('prod-activity-createRoots', function () {
+gulp.task('prod-activity-createRootJs', function () {
     var dest = paths.buildProd + 'activity/app/scripts/';
     //var result= pipes.cleanBuild(dest);
     return (
@@ -1666,7 +1670,7 @@ gulp.task('prod-activity-copyStyle', function () {
 
 });
 
-gulp.task('prod-activity-cleanComponents', function () {
+gulp.task('prod-activity-clean', function () {
     return pipes.cleanBuild(paths.buildProd + 'activity/app/scripts/components/')
 })
 gulp.task('prod-activity-copyDependencies', ['prod-activity-cleanComponents'], function () {

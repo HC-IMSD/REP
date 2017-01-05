@@ -16,13 +16,14 @@
             'applicationInfoService',
             'applicationInfo',
             'filterLists',
-            'relatedActivityList',
+            'commonStaticLists',
             'activityChange',
             'activityForm',
             'numberFormat',
             'contactModule26',
             'contactModule',
             'contactModule25',
+            'adminSubmission',
             'ui.bootstrap'
         ])
 })();
@@ -41,8 +42,8 @@
             }
         });
 
-    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope', '$window', '$location', '$translate'];
-    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $window, $location, $translate) {
+    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope', '$window', '$location', '$translate', 'CommonLists'];
+    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $window, $location, $translate, CommonLists) {
         var vm = this;
         vm.isIncomplete = true;
         vm.userType = "EXT";
@@ -51,14 +52,20 @@
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
-        vm.activityService = new ActivityService();
-        vm.applicationInfoService = new ApplicationInfoService();
-        vm.rootTag = vm.activityService.getRootTag();
-        vm.activityRoot = vm.activityService.getModelInfo();
+        //vm.activityService = null;
+        // vm.applicationInfoService ={};
+        //vm.rootTag = "";
+        //vm.activityRoot = {};
         vm.showAllErrors = false;
         vm.formAmend = false;
         vm.isNotifiable = false;
         vm.isRationale = false;
+        vm.showActivity = false;
+        vm.activityService = new ActivityService();
+        vm.applicationInfoService = new ApplicationInfoService();
+        vm.rootTag = vm.activityService.getRootTag();
+        vm.activityRoot = vm.activityService.getModelInfo();
+
         vm.alerts = [];
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -66,7 +73,8 @@
             "tagName": "dstsControlNumber",
             "errorMsg": "MSG_LENGTH_6"
         };
-        vm.yesNoList = ["Y", "N"]; //TODO magic numbers
+        vm.CommonLists = CommonLists;
+        vm.yesNoList = vm.CommonLists.getYesNoList();
         vm.alert1 = {
             type: 'info',
             msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
@@ -96,6 +104,10 @@
         };
 
         vm.$onInit = function () {
+            console.log("init")
+            vm.setThirdParty();
+            vm.updateActivityType();
+            vm.setAdminSubmission();
         };
 
 
@@ -164,36 +176,21 @@
             vm.formAmend = vm.activityRoot.applicationType === vm.applicationInfoService.getAmendType();
             disableXMLSave();
         };
+        /**
+         * Sets the visibility and state of the related activities
+         */
+        vm.setAdminSubmission = function () {
+            if (vm.activityRoot.isAdminSub === vm.CommonLists.getYesValue()) {
+                //show add
+                vm.activityRoot.relatedActivity = vm.activityService.getEmptyRelatedActivity();
+                vm.showActivity = true;
+            } else {
+                //hide,delete
+                vm.activityRoot.relatedActivity = {};
+                vm.showActivity = false;
+            }
 
-
-        /* vm.openHelp = function (type) {
-         var helpLink = ""
-         var currentLang = $translate.proposedLanguage() || $translate.use();
-
-         var url = $location.absUrl() //this is the only one that seems to work
-         var split = url.split('/')
-         var length = url.length - split[split.length - 1].length;
-         var newUrl = url.substring(0, length);
-         console.log("new url" + newUrl)
-
-         switch (type) {
-         case'activityFile':
-         helpLink = newUrl + "help-activity-load-" + currentLang + ".html";
-         $window.open(helpLink);
-         break;
-         case 'activityMain':
-         helpLink = newUrl + "help-activity-main-" + currentLang + ".html";
-         $window.open(helpLink);
-         break;
-
-         case 'activityRep':
-         helpLink = newUrl + "help-activity-rep-" + currentLang + ".html";
-         $window.open(helpLink);
-         break;
-         }
-
-         }*/
-
+        }
 
         /**
          * @ngdoc -creates a filename for activity file. If it exists,adds control number
@@ -236,7 +233,7 @@
             updateDate();
             if (!vm.isExtern()) {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
-                vm.activityRoot.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                vm.activityRoot.applicationType = ApplicationInfoService.getApprovedType();
                 updateModelOnApproval(); //updates all the amend
             } else {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
@@ -300,6 +297,7 @@
             disableXMLSave();
             vm.setThirdParty();
             vm.updateActivityType();
+            vm.setAdminSubmission();
         }
 
         /**

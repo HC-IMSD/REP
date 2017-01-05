@@ -44,13 +44,25 @@
             getUdpvType: getUDPVArray,
             getUdraType: getUDRAVArray,
             getYbprType: getYBPRArray,
-            getConsultType: getConsultArray
+            getConsultType: getConsultArray,
+            getYesNoList: yesNoArray
         };
         return service;
 
         ////////////////
 
         //TODO make lists be activity.. yikes!
+
+        function yesNoArray() {
+
+            return ([
+                "Y",
+                "N"
+            ]);
+        }
+
+
+
 
         //returns a list of all the unique description values
         function getTransactionDescriptionsArray() {

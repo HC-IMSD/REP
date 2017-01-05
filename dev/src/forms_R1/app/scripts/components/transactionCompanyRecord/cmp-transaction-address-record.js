@@ -45,7 +45,6 @@
         vm.addressModel = {}
 
         vm.$onInit = function () {
-            console.log("init the transaction record")
             vm.addressModel = vm.addressModel;
         };
 
