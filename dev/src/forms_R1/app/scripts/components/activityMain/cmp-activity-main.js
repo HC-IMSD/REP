@@ -104,7 +104,6 @@
         };
 
         vm.$onInit = function () {
-            console.log("init")
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
@@ -181,12 +180,9 @@
          */
         vm.setAdminSubmission = function () {
             if (vm.activityRoot.isAdminSub === vm.CommonLists.getYesValue()) {
-                //show add
-                vm.activityRoot.relatedActivity = vm.activityService.getEmptyRelatedActivity();
                 vm.showActivity = true;
             } else {
-                //hide,delete
-                vm.activityRoot.relatedActivity = {};
+                vm.activityRoot.relatedActivity = vm.activityService.getEmptyRelatedActivity();
                 vm.showActivity = false;
             }
 
@@ -290,7 +286,7 @@
             if (resultJson) {
                 vm.activityService.transformFromFileObj(resultJson);
                 vm.activityRoot = {};
-                angular.extend(vm.activityRoot, vm.activityService.getModelInfo());
+                vm.activityRoot = vm.activityService.getModelInfo();
                 _setComplete();
             }
             vm.showAllErrors = true;

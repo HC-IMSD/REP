@@ -37,12 +37,13 @@
                 "reasonFiling": "",
                 "isThirdParty": "",
                 "isAdminSub": "",
+                "relatedActivity": {},
                 "contactRecord": []
             };
             defaultActivityData.rationaleTypes = _createRationalTypes();
             defaultActivityData.notifiableChangeTypes = _createNotifiableChangeTypes();
+            defaultActivityData.relatedActivity = _getEmptyActivity();
             angular.extend(this._default, defaultActivityData);
-
             this.rootTag = "ACTIVITY_ENROL";
             this.activityId = 0;
         }
@@ -66,7 +67,7 @@
         /**
          * @ngdoc transforms the object model to the compatible file JSON objecct base transform call!!
          * @param jsonObj
-         * @returns json object compatible with the xml schema
+         * @returns (json) object compatible with the xml schema
          * */
         ActivityService.prototype.transformToFileObj = function (jsonObj) {
             var activity = {
@@ -88,7 +89,7 @@
                     is_third_party: jsonObj.isThirdParty,
                     is_admin_submission: jsonObj.isAdminSub,
                     notifiable_change_types: {},
-                    rationale_types: {},
+                    rationale_types: {}
                 }
             };
             activity[this.rootTag].notifiable_change_types = _mapNotifiableChangeTypesToOutput(jsonObj.notifiableChangeTypes);
@@ -97,8 +98,8 @@
                 activity[this.rootTag].related_activity = this.tranformRelatedActivityToFileObj(jsonObj.relatedActivity);
             }
             /* if (relatedActList && relatedActList.length > 0) {
-                //the checksum doesn't like empty tags of format <tag/> and this is optional in the schema
-                activity[this.rootTag].related_activity = relatedActList;
+             //the checksum doesn't like empty tags of format <tag/> and this is optional in the schema
+             activity[this.rootTag].related_activity = relatedActList;
              }*/
             activity[this.rootTag].contact_record = this.transformContactListToFileObj(jsonObj.contactRecord);
             //do other stuff
@@ -116,63 +117,44 @@
 
         ActivityService.prototype.mapContactList = function (jsonObj) {
 
-            var result = _mapRegulatoryContactList(jsonObj);
-            return result;
-        }
+            return _mapRegulatoryContactList(jsonObj);
+
+        };
         ActivityService.prototype.transformContactListToFileObj = function (jsonObj) {
             return _transformRegulatoryContactListToFileObj(jsonObj);
-        }
+        };
 
 
         ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
 
-            // _getEmptyActivity
             var activity = {};
             activity.sponsor_name = jsonObj.sponsorName;
-            activity.date_cleared = jsonObj.dateCleared;
+            activity.date_cleared = "";
+            var dateCleared = jsonObj.dateCleared;
+            var month = "";
+            var day = "";
+            if (dateCleared) {
+                month = dateCleared.getMonth() + 1;
+                day = dateCleared.getDate();
+                if (month < 10) {
+                    //todo hack
+                    month = "0" + month;
+                }
+                if (day < 10) {
+                    day = "0" + day;
+                }
+
+                activity.date_cleared = dateCleared.getFullYear() + '-' + (month) + '-' + day;
+            }
+
             activity.reg_activity_type = jsonObj.regActivityType;
             activity.control_number = jsonObj.controlNumber;
             activity.license_agreement = jsonObj.licenseAgree;
             activity.din_transfer = jsonObj.dinTransfer === true ? YES : NO;
             activity.not_lasa = jsonObj.notLasa === true ? YES : NO;
             return activity;
-            /*
-             "sponserName": "",
-             "dateCleared": "",
-             "regActivityType": "",
-             "controlNumber": "",
-             "licenseAgree": "",
-             "dinTransfer": "",
-             "isLasa": false
 
-
-             var regActivityType = {
-             "activity_id": jsonObj.activityId,
-             "amend_record": jsonObj.amendRecord === true ? 'Y' : 'N',
-             "reg_activity_type": jsonObj.regActivityType,
-             "date_cleared": "",
-             "control_number": jsonObj.dstsControlNumber,
-             "dossier_id": jsonObj.dossierId,
-             "manufacturer_name": jsonObj.manufacturerName,
-             "reason_filing": jsonObj.reasonFiling,
-             "assoc_dins": []
-             };
-
-             */
-
-
-            /*  var activityList = jsonObj.relatedActivity;
-            var result = [];
-            //should never happpen, defensive!
-            if (!(activityList instanceof Array)) {
-                //make it an array, case there is only one
-                activityList = [activityList]
-            }
-            for (var i = 0; i < activityList.length; i++) {
-                result.push(_mapRelatedRegActivityToOutput(activityList[i]));
-            }
-             return result;*/
-        }
+        };
         ActivityService.prototype.getModelInfo = function () {
             return this._default;
         };
@@ -183,7 +165,7 @@
             if (!jsonObj) {
                 return this._default;
             }
-            var model = this._default;
+            var model = {};
             model.companyId = jsonObj.company_id;
             model.dstsControlNumber = jsonObj.dsts_control_number;
             model.enrolmentVersion = jsonObj.enrolment_version;
@@ -202,36 +184,19 @@
 
             model.notifiableChangeTypes = _transformNotifiableChangeTypeFromFileObj(jsonObj.notifiable_change_types);
             model.rationaleTypes = _transformRationaleTypeFromFileObj(jsonObj.rationale_types);
+            model.relatedActivity = {};
 
-            // var relatedActivities = {relatedActivity: []};
             var repContacts = {contactRecord: []};
 
             if (jsonObj.related_activity) {
-                console.log("getting activity");
                 model.relatedActivity = this.transformRelatedRegActivityFromFileObj(jsonObj.related_activity);
-                console.log(model.relatedActivity);
-                //this.getRelatedActivityList(jsonObj.related_activity);
             }
+
             if (jsonObj.contact_record) {
                 repContacts.contactRecord = this.mapContactList(jsonObj.contact_record)
             }
-            return angular.extend(model, repContacts);
+            return angular.merge(model, repContacts);
         };
-
-        /* ActivityService.prototype.getRelatedActivityList = function (activityList) {
-            var listResult = [];
-            if (!activityList) return listResult;
-            if (!(activityList instanceof Array)) {
-                //make it an array, case there is only one
-                activityList = [activityList]
-            }
-            for (var i = 0; i < activityList.length; i++) {
-                var result = _transformRelatedRegActivityFromFileObj(activityList[i]);
-                this.updateActivityId(result.activityId);
-                listResult.push(result);
-            }
-            return listResult;
-         };*/
 
         ActivityService.prototype.resetRationale = function () {
             this._default.rationaleTypes = _createRationalTypes();
@@ -247,8 +212,7 @@
         ActivityService.prototype.transformFromFileObj = function (jsonObj) {
             var activityInfo = this.getActivityInfo(jsonObj[this.rootTag]);
             //get rid of previous default if it exists
-            this._default = {};
-            angular.extend(this._default, activityInfo)
+            this._default = activityInfo;
         };
 
         ActivityService.prototype.getNewActivity = function () {
@@ -295,7 +259,7 @@
                 return true;
             }
             return false;
-        }
+        };
         ActivityService.prototype.isRationale = function (activity, lead) {
 
             if (!activity) return false;
@@ -306,7 +270,7 @@
                 return true;
             }
             return false;
-        }
+        };
 
         ActivityService.prototype.getActivityTypeList = function (isPilot) {
 
@@ -357,20 +321,24 @@
         ActivityService.prototype.getEmptyRelatedActivity = function () {
             return _getEmptyActivity();
         };
-
+        /**
+         * Creates the internal model for Related Activity on a file load
+         * @param jsonObj
+         */
         ActivityService.prototype.transformRelatedRegActivityFromFileObj = function (jsonObj) {
             var relatedActivity = this.getEmptyRelatedActivity();
-            relatedActivity.sponserName = jsonObj.sponsor_name;
-            relatedActivity.dateCleared = jsonObj.date_cleared;
+            relatedActivity.sponsorName = jsonObj.sponsor_name;
+            relatedActivity.dateCleared = "";
+            if (jsonObj.date_cleared) {
+                relatedActivity.dateCleared = _parseDate(jsonObj.date_cleared);
+            }
+            relatedActivity.regActivityType = jsonObj.reg_activity_type;
             relatedActivity.controlNumber = Number(jsonObj.control_number);
             relatedActivity.licenseAgree = jsonObj.license_agreement;
             relatedActivity.dinTransfer = jsonObj.din_transfer;
             relatedActivity.notLasa = jsonObj.not_lasa;
             return relatedActivity;
         };
-
-
-
 
         // Return a reference to the object
         return ActivityService;
@@ -379,7 +347,7 @@
     /**
      * transforms from a file object
      * @param jsonObj
-     * @returns an array of contacts. Empty if there are none
+     * @returns (array) of contacts. Empty if there are none
      * @private
      */
     function _mapRegulatoryContactList(jsonObj) {
@@ -469,7 +437,7 @@
 
     //TODO make a standard service
 
-    function _createContactModel() {
+    /* function _createContactModel() {
         var contact = {};
 
         contact.salutation = "";
@@ -483,7 +451,7 @@
         contact.fax = "";
         contact.email = "";
         return contact;
-    }
+     }*/
 
     //todo deprecated
 
@@ -524,7 +492,7 @@
     /**
      * @ngdoc converts notifable change data object to a file object
      * @param jsonObj - the data object to convert
-     * @returns {jsonobj} representing the file object for a notifiable change
+     * @returns {json} representing the file object for a notifiable change
      * @private
      */
     function _mapNotifiableChangeTypesToOutput(jsonObj) {
@@ -546,7 +514,7 @@
 
     /**
      * @ngdoc method transforms a file json object to a data object
-     * @param jsonObj- the file json object to convert
+     * @param jsonObj - the file json object to convert
      * @returns {json} converted json object
      * @private
      */
@@ -596,13 +564,15 @@
         };
     }
 
-    function _mapRelatedRegActivityToOutput(jsonObj) {
+    //TODO delete
+    /*  function _mapRelatedRegActivityToOutput(jsonObj) {
         if (!jsonObj) return null;
         var regActivityType = {
             "activity_id": jsonObj.activityId,
             "amend_record": jsonObj.amendRecord === true ? 'Y' : 'N',
             "reg_activity_type": jsonObj.regActivityType,
             "date_cleared": "",
+
             "control_number": jsonObj.dstsControlNumber,
             "dossier_id": jsonObj.dossierId,
             "manufacturer_name": jsonObj.manufacturerName,
@@ -613,8 +583,8 @@
         var month = "";
         var day = "";
         if (dateCleared) {
-            month = dateCleared.getUTCMonth() + 1
-            day = dateCleared.getUTCDate();
+     month = dateCleared.getMonth() + 1;
+     day = dateCleared.getDate();
             if (month < 10) {
                 //todo hack
                 month = "0" + month;
@@ -622,7 +592,7 @@
             if (day < 10) {
                 day = "0" + day;
             }
-            regActivityType.date_cleared = dateCleared.getUTCFullYear() + '-' + (month) + '-' + day;
+     regActivityType.date_cleared = dateCleared.getFullYear() + '-' + (month) + '-' + day;
         }
         var dins = _mapRelatedDinsToOutput(jsonObj.assocDins);
         if (dins && dins.length > 0) {
@@ -631,33 +601,10 @@
             regActivityType.assoc_dins = "";
         }
         return regActivityType;
-    }
-
-    /*  function _transformRelatedRegActivityFromFileObj(jsonObj) {
-        if (!jsonObj) return null;
-        var regActivityType = {
-            "activityId": jsonObj.activity_id,
-            "amendRecord": jsonObj.amend_record === 'Y',
-            "regActivityType": jsonObj.reg_activity_type,
-            "dateCleared": "",
-            "dstsControlNumber": jsonObj.control_number,
-            "dossierId": jsonObj.dossier_id,
-            "manufacturerName": jsonObj.manufacturer_name,
-            "reasonFiling": jsonObj.reason_filing
-        };
-        if (jsonObj.date_cleared) {
-            regActivityType.dateCleared = _parseDate(jsonObj.date_cleared);
-        }
-        var dins = _transformRelatedDinsListFromFileObj(jsonObj.assoc_dins);
-        regActivityType.assocDins = {};
-        if (dins) {
-            regActivityType.assocDins = dins; //should always be an array
-        }
-        return regActivityType;
      }*/
 
 
-    function _transformRelatedDinsListFromFileObj(jsonObj) {
+    /* function _transformRelatedDinsListFromFileObj(jsonObj) {
         var result = [];
         if (!jsonObj) return result;
 
@@ -670,9 +617,9 @@
             result.push({"dinNumber": jsonObj[i].din_number});
         }
         return result;
-    }
+     }*/
 
-    function _mapRelatedDinsToOutput(jsonObj) {
+    /* function _mapRelatedDinsToOutput(jsonObj) {
         var result = "";
         if (!jsonObj) return result;
         if (!(jsonObj instanceof Array)) {
@@ -685,7 +632,7 @@
         }
 
         return result;
-    }
+     }*/
 
     function _parseDate(value) {
         var dateArray = value.split('-');
@@ -700,7 +647,7 @@
 
         return (
         {
-            "sponserName": "",
+            "sponsorName": "",
             "dateCleared": "",
             "regActivityType": "",
             "controlNumber": "",

@@ -48,7 +48,7 @@
         vm.ectd = false;
         vm.popOpened = false;
         vm.dateOptions = {
-            showWeeks: false,
+            showWeeks: false
         };
         vm.yearList = _createYearList();
 
@@ -414,7 +414,7 @@
                 "Apr", "May", "Jun", "Jul", "Aug", "Sep",
                 "Oct", "Nov", "Dec"];
             var result = ""
-            result = m_names[date.getUTCMonth()] + ". " + date.getUTCDate() + ", " + date.getUTCFullYear();
+            result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
             return result
         }
         /**

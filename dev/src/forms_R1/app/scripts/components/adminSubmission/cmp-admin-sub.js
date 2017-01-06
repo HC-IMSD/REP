@@ -4,7 +4,7 @@
 (function () {
     'use strict';
     angular
-        .module('adminSubmission', ['numberFormat', 'hpfbConstants'])
+        .module('adminSubmission', ['numberFormat', 'hpfbConstants', 'ui.bootstrap'])
 })();
 
 (function () {
@@ -27,12 +27,10 @@
 
     function AdminSubCtrl(NO) {
         var vm = this;
+        vm.dateFormat = 'yyyy-MM-dd';
         vm.dinTransferShow = false;
-        //only one related activity record
-        //yes no licence agreement
-        //Din transfer checkbox
         vm.model = {
-            sponserName: "",
+            sponsorName: "",
             dateCleared: "",
             "regActivityType": "",
             "controlNumber": "",
@@ -40,6 +38,14 @@
             "dinTransfer": "",
             "notLasa": false
         };
+
+        vm.dateOptions = {
+            showWeeks: false
+        };
+        vm.openRefDate = function () {
+            vm.refDateOpen = true;
+        };
+
         vm.yesNoList = vm.yesNoTypes();
         vm.activityTypeList = vm.activityTypes({isPilot: true}); //is pilot
         vm.$onInit = function () {
@@ -53,7 +59,7 @@
             }
         };
         vm.showError = function (isTouched, isInvalid) {
-            if (isTouched && isInvalid) {
+            if ((isTouched && isInvalid) || (isInvalid && vm.showErrors)) {
                 return true;
             }
         }
@@ -70,7 +76,6 @@
 
         vm.isLicenseAgreement = function () {
             //if no then show din transfer checkbox
-            console.log("launching the license")
             if (vm.model && NO === vm.model.licenseAgree) {
                 vm.dinTransferShow = true;
             } else {

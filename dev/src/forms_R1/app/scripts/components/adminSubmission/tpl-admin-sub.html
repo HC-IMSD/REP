@@ -5,7 +5,7 @@
                 <span class="field-name">{{"SPONSOR_NAME" |translate}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                 <input type="text" id="sponsorNameId" name="adminSponsorName" maxlength="100" size="100"
-                       class="form-control" required ng-model="adminCtrl.model.sponserName"/>
+                       class="form-control" required ng-model="adminCtrl.model.sponsorName"/>
                 <strong id="sponsorName-error" class="error"
                         ng-if="adminCtrl.showError(adminCtrl.adminSubForm.adminSponsorName.$touched,adminCtrl.adminSubForm.adminSponsorName.$invalid)">
                         <span class="label label-danger" ng-messages="adminCtrl.adminSubForm.adminSponsorName.$error">
@@ -19,12 +19,30 @@
             <label for="dateClearedId" class="required">
                 <span class="field-name">{{"DATE_CLEARED" |translate}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                <input type="date" id="dateClearedId" name="dateCleared" class="form-control"
-                       ng-model="adminCtrl.model.dateCleared" required/>
+                <!--    <input type="date" id="dateClearedId" name="dateCleared" class="form-control"
+                           ng-model="adminCtrl.model.dateCleared" required/>-->
+                <p class="input-group">
+                    <input id="dateClearedId" type="text" class="form-control rep-normal-font"
+                           uib-datepicker-popup
+                           show-button-bar="false" datepicker-options="adminCtrl.dateOptions"
+                           name="dateCleared" ng-model="adminCtrl.model.dateCleared"
+                           ng-change="adminCtrl.convertToDate()" ng-model-options="{ updateOn: 'blur' }"
+                           is-open="adminCtrl.refDateOpen" ng-required="true"/>
+                                      <span class="input-group-btn">
+                                            <button title="{{'CALENDAR'|translate}}" class="btn btn-default"
+                                                    aria-haspopup="true"
+                                                    id="activity-picker-toggle" ng-click="adminCtrl.openRefDate()">
+                                                <span
+                                                        class="glyphicon glyphicon-calendar"></span><span
+                                                    class="wb-inv">{{'CALENDAR'|translate}}</span>
+                                            </button>
+                                      </span>
+                </p>
                 <strong id="dateCleared-error" class="error"
-                        ng-if="adminCtrl.showError(adminCtrl.adminSubForm.sponsorName.$touched,adminCtrl.adminSubForm.sponsorName.$invalid)">
-                        <span class="label label-danger" ng-messages="adminCtrl.adminSubForm.sponsorName.$error">
+                        ng-if="adminCtrl.showError(adminCtrl.adminSubForm.dateCleared.$touched,adminCtrl.adminSubForm.dateCleared.$invalid)">
+                        <span class="label label-danger" ng-messages="adminCtrl.adminSubForm.dateCleared.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                            <span ng-message="date"><span translate="MSG_ERR_DATE_FORMAT"></span></span>
                         </span>
                 </strong>
             </label>
