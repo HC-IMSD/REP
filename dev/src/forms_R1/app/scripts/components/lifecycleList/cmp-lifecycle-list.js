@@ -84,11 +84,6 @@
 
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
-                /* if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
-
-                 vm.isDetailsValid = true;
-                 }*/
-                //vm.setValid(!vm.lifecycleList || vm.lifecycleList.length === 0)
                 vm.updateErrorState();
             }
             if (changes.parentDirty) {
@@ -126,8 +121,6 @@
             var record = angular.copy(vm.lifecycleList[0]);
             if (!vm.ectdValue) {
                 record.sequence = "";
-                // record.controlNumber = "";
-                //record.dateFiled = "";
             } else {
                 record.sequence = "0000";
             }

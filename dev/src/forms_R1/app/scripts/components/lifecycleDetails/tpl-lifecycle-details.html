@@ -15,9 +15,9 @@
                         </div>
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.dateFiled.$invalid}">
-                            <label for="dateFiled_{{$id}}" ng-class="{'required':lifecycleCtrl.ectd}">
+                            <label for="dateFiled_{{$id}}" class="required">
                                 <span class="field-name">{{"DATE_SUBMITTED" |translate}}</span>
-                                <strong ng-if="lifecycleCtrl.ectd" class="required">{{"REQUIRED" |translate}}</strong>
+                                <strong class="required">{{"REQUIRED" |translate}}</strong>
                                 <!--  <input type="date" id="dateFiled_{{$id}}" name="dateFiled"
                                          ng-readonly="!lifecycleCtrl.ectd"
                                          ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
@@ -52,14 +52,14 @@
 
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.controlNum.$invalid}">
-                            <label for="controlNum_{{$id}}" ng-class="{'required':lifecycleCtrl.ectd}">
+                            <label for="controlNum_{{$id}}" class="required">
                                 <span class="field-name">{{"Control Number" |translate}}</span>
-                                <strong ng-if="lifecycleCtrl.ectd" ng-if="lifecycleCtrl.ectd" class="required">{{"REQUIRED"
+                                <strong class="required">{{"REQUIRED"
                                     |translate}}</strong>
                                 <input type="text" id="controlNum_{{$id}}" name="controlNum" only-digits=""
                                        ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
                                        class="form-control full-width" maxlength="6" minlength="6" size="6"
-                                       ng-required="lifecycleCtrl.ectd"/>
+                                       ng-required="true"/>
                                 <strong id="controlNum-error" class="error"
                                         ng-if="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm.controlNum.$invalid,lifecycleCtrl.lifecycleDetailsForm.controlNum.$touched)">
                         <span class="label label-danger"
@@ -193,7 +193,6 @@
                                         class="form-control" ng-required="lifecycleCtrl.yearVisible"
                                         ng-change="lifecycleCtrl.setConcatDetails()"
                                         ng-options=" val for val in lifecycleCtrl.yearList">
-                                    ng-required="lifecycleCtrl.yearVisible" class="form-control">
 
                                 </select>
                                 <!-- <input type="text" name="year"
