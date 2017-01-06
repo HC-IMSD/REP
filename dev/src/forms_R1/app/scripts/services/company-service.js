@@ -178,6 +178,7 @@
                 //var jsonObj = this._default
                 var resultJson = {
                     COMPANY_ENROL: {
+                        template_type: "PHARMA",
                         data_checksum: jsonObj.dataChecksum,
                         enrolment_version: jsonObj.enrolmentVersion,
                         date_saved: jsonObj.dateSaved,

@@ -72,6 +72,7 @@
         ActivityService.prototype.transformToFileObj = function (jsonObj) {
             var activity = {
                 ACTIVITY_ENROL: {
+                    template_type: "PHARMA",
                     company_id: jsonObj.companyId,
                     dsts_control_number: jsonObj.dstsControlNumber,
                     enrolment_version: jsonObj.enrolmentVersion,

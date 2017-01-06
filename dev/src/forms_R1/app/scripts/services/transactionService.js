@@ -80,6 +80,7 @@
                 var today = _getToday();
                 var resultJson = {
                     TRANSACTION_ENROL: {
+                        template_type: "PHARMA",
                         date_saved: today,
                         software_version: "1.0.0",
                         data_checksum: jsonObj.dataChecksum,
