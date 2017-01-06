@@ -335,8 +335,8 @@
             relatedActivity.regActivityType = jsonObj.reg_activity_type;
             relatedActivity.controlNumber = Number(jsonObj.control_number);
             relatedActivity.licenseAgree = jsonObj.license_agreement;
-            relatedActivity.dinTransfer = jsonObj.din_transfer;
-            relatedActivity.notLasa = jsonObj.not_lasa;
+            relatedActivity.dinTransfer = jsonObj.din_transfer === YES;
+            relatedActivity.notLasa = jsonObj.not_lasa === YES;
             return relatedActivity;
         };
 

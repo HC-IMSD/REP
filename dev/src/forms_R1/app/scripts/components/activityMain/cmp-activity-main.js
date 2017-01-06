@@ -91,7 +91,7 @@
             show: false
         };
 
-
+        //TODO remove?
         vm.initUser = function (id) {
             /* if (!id) id = 'EXT';
              vm.userType = id;
@@ -331,11 +331,7 @@
         function updateModelOnApproval() {
             //reset any amend selections
             if (!vm.activityRoot) return;
-            if (vm.activityRoot.relatedActivity) {
-                for (var i = 0; i < vm.activityRoot.relatedActivity.length; i++) {
-                    vm.activityRoot.relatedActivity[i].amendRecord = false;
-                }
-            }
+
             if (vm.activityRoot.contactRecord) {
                 for (var j = 0; j < vm.activityRoot.contactRecord.length; j++) {
                     vm.activityRoot.contactRecord[j].amend = false;
