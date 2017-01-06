@@ -29,7 +29,8 @@
         'tissuesFluidsList',
         'dossierService',
         'ngSanitize',
-        'dataLists'
+        'dataLists',
+        'hpfbConstants'
     ];
 
     angular
@@ -54,10 +55,10 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists',];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
@@ -106,7 +107,7 @@
         };
 
 
-        var yesValue = "Y";
+        var yesValue = YES;
 
         self.$onInit = function () {
             self.dossierService = new DossierService();
@@ -138,6 +139,11 @@
             return (self.extraAppendix && self.extraAppendix.length > 0);
 
         };
+
+
+        self.thirdPartySignedChanged = function () {
+            return (self.dossierModel.drugProduct.thirdPartySigned === yesValue);
+        }
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;

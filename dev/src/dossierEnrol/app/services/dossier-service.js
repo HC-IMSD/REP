@@ -49,7 +49,7 @@
                 properName: "",
                 isRefProducts: "",
                 drugProduct: {
-                    thirdPartySigned: false,
+                    thirdPartySigned: "",
                     drugUseList: getDefaultDrugUseList(),
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
@@ -94,7 +94,7 @@
                     properName: info.common_name,
                     isRefProducts: info.is_ref_products,
                     drugProduct: {
-                        thirdPartySigned: false,
+                        thirdPartySigned: info.third_party_signed,
                         drugUseList: loadDrugUseValues(info),
                         isScheduleA: info.is_sched_a === 'Y',
                         therapeutic: getTherapeuticList(info.therapeutic_class_list.therapeutic_class),
@@ -146,7 +146,7 @@
             baseDossier.dossier_type = jsonObj.dossierType;
             baseDossier.brand_name = jsonObj.productName;
             baseDossier.common_name = jsonObj.properName;
-            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned === true ? 'Y' : 'N';
+            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
             baseDossier.is_ref_products = jsonObj.isRefProducts;
             baseDossier.ref_product_list = {};
             //  baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
