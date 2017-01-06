@@ -320,10 +320,13 @@
                                  close="main.closeAlert('3')">{{main.alert3.msg}}
                             </div>
                         </div>
+                        <div class="container-fluid">
                         <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
                                               show-list-errors="main.showErrors()" is-amend="main.formAmend"
-                                              parent-dirty="main.activityEnrolForm.$dirty"
-                        ></cmp-rep-contact-list>
+                                              parent-dirty="main.activityEnrolForm.$dirty">
+
+                        </cmp-rep-contact-list>
+                        </div>
 
                     </div>
                 </section>

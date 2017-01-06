@@ -322,11 +322,13 @@
                          ng-class="'alert-' + (dos.alert4.type || 'warning')"
                          close="dos.closeAlert('4')">{{dos.alert4.msg}}
                     </div>
-                    <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
-                                          parent-dirty="dos.dossierForm.$dirty"
-                                          show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
+                    <div class="container-fluid">
+                        <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
+                                              parent-dirty="dos.dossierForm.$dirty"
+                                              show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
 
-                    </cmp-rep-contact-list>
+                        </cmp-rep-contact-list>
+                    </div>
                 </div>
             </section>
         </div>
