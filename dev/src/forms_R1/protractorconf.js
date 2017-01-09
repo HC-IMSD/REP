@@ -6,7 +6,12 @@ exports.config = {
         'app/spec/e2e/**/*.js'
     ],
 
-    capabilities: {
-        'browserName': 'chrome'
-    }
+    multiCapabilities: [
+        {
+            'browserName': 'chrome'
+        },
+        {
+            'browserName': 'MicrosoftEdge'
+        }
+    ]
 };
