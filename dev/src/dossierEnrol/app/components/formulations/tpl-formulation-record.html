@@ -11,13 +11,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4 form-group" ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}">
-                    <label for="dosage-form-listh_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
+                <div class="col-md-6 form-group" ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}">
+                    <label for="dosage-form_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <select id="dosage-form-listh_{{$id}}" data-ng-model="formulRecCtrl.frmModel.dosageForm"
+                      <!--  <select id="dosage-form-listh_{{$id}}" data-ng-model="formulRecCtrl.frmModel.dosageForm"
                                 name="dosageForm" class="form-control full-width" required
-                                ng-options="formType |translate for formType in formulRecCtrl.dosageFormList | orderByTranslatedOtherFirst">
-                        </select>
+                                ng-options="formType.id |translate for formType in formulRecCtrl.dosageFormList">
+                        </select>-->
+                       <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="dosage-form_{{$id}}" name="dosageForm"
+                                   class="rep-selectize-dropdown" required
+                                   ng-disabled="false" title="Choose a dosage form" class="rep-selectize-font">
+                            <ui-select-match placeholder="Select or Search for a dosage form"
+                                             class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[formulRecCtrl.lang]}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="formType in formulRecCtrl.dosageFormList | filter: $select.search"
+                                               class="rep-selectize-font">
+                                <span ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+
                         <strong id="dosageForm-error" class="error"
                                 ng-if="formulRecCtrl.showError(formulationRecForm.dosageForm.$invalid,formulationRecForm.dosageForm.$touched)">
                         <span class="label label-danger" ng-messages="formulationRecForm.dosageForm.$error">

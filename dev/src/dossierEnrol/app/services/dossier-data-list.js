@@ -105,7 +105,7 @@
         }
 
         function _createDosageFormArray(translateJson) {
-            vm.dosageFormList = _getKeys(translateJson);
+            vm.dosageFormList = (translateJson);
         }
 
         function _createRoaArray(translateJson) {

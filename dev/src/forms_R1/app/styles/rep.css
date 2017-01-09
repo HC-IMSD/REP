@@ -86,6 +86,10 @@ label > select {
 
 .rep-selectize-dropdown {
     min-width: 100%;
+    padding-top: 6px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
 }
 
 .select2-container .select2-choice {

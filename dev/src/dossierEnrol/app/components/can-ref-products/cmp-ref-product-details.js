@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('refProductDetailsModule', ['expandingTable', 'dossierDataLists', 'filterLists'])
+        .module('refProductDetailsModule', ['expandingTable', 'dossierDataLists', 'filterLists','ui.select'])
 })();
 
 (function () {
@@ -14,6 +14,10 @@
 
     angular
         .module('refProductDetailsModule')
+        .config(function (uiSelectConfig) {
+            //choices: select2, bootstrap, selectize
+            uiSelectConfig.theme = 'select2';
+        })
         .component('cmpRefProductDetails', {
             templateUrl: './components/can-ref-products/tpl-ref-product-details.html',
             controller: refProductDetailsCtrl,
@@ -28,12 +32,13 @@
                 isDetailValid:'&'
             }
         });
-    refProductDetailsCtrl.$inject = ['DossierLists','$scope'];
-    function refProductDetailsCtrl(DossierLists, $scope) {
+    refProductDetailsCtrl.$inject = ['DossierLists','$scope','$translate'];
+    function refProductDetailsCtrl(DossierLists, $scope, $translate) {
         var self = this;
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
         self.savePressed=false;
+        self.lang = $translate.proposedLanguage() || $translate.use();
 
         self.$onInit = function () {
             //TODO this is a bad approach should come from services
@@ -61,7 +66,8 @@
          * @returns {boolean}
          */
         self.isDosageOther = function () {
-            if (self.productModel.dosageForm === self.otherValue) {
+            if(!self.productModel.dosageForm) return false;
+            if (self.productModel.dosageForm.id  === self.otherValue) {
                 return true;
             } else {
                 self.productModel.dosageFormOther = ""

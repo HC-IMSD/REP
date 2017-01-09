@@ -17,8 +17,8 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate'];
-    function DossierService(DossierLists, $translate) {
+    DossierService.$inject = ['DossierLists', '$translate','$filter'];
+    function DossierService(DossierLists, $translate,$filter) {
         var yesValue = 'Y';
         var noValue = 'N';
 
@@ -416,7 +416,9 @@
 
         function getTherapeuticList(input) {
             var list = [];
-
+            if (!(input instanceof Array)) {
+                input=[input];
+            }
             if (input) {
                 for (var i = 0; i < input.length; i++) {
                     var item = {
@@ -564,13 +566,21 @@
                 //static fields
                 var obj = {
                     "formulationId": item.formulation_id,
-                    "formulationName": item.formulation_name,
+                    "formulationName": item.formulation_name
                 };
-                if (!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form === DossierLists.getOtherValue()) {
+                if (!item.dosage_form_group.dosage_form) {
+                    obj.dosageForm = item.dosage_form_group.dosage_form;
+                }else{
+                    var dosageFormObj = $filter('filter')(DossierLists.getDosageFormList(), {id:item.dosage_form_group.dosage_form.__text})[0];
+                    obj.dosageForm = dosageFormObj;
+                }
+
+               /* if (!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form === DossierLists.getOtherValue()) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
                 } else {
                     obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
-                }
+                }*/
+
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
                     obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
@@ -782,9 +792,19 @@
                     product.brand_name = info[i].brandName;
                     product.medicinal_ingredient = info[i].medIngredient;
 
-                    var splitArray = (info[i].dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                    var newDosage = splitArray[splitArray.length - 1];
-                    product.dosage_form = info[i].dosageForm;
+                    //make dosage form with both english and french labels
+
+                   if(info[i].dosageForm) {
+                       var splitArray = (info[i].dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                       var newDosage = splitArray[splitArray.length - 1];
+                       // product.dosage_form = info[i].dosageForm;
+                       product.dosage_form = {
+                           _label_en: info[i].dosageForm.en,
+                           _label_fr: info[i].dosageForm.fr,
+                           __text: newDosage
+                       };
+                   }
+
                     product.dosage_form_other = info[i].dosageFormOther;
                     product.strengths = info[i].strengths;
                     product.units = info[i].units;
@@ -906,9 +926,18 @@
                 };
                 //dosage_form_group, static value
                 obj.dosage_form_group = {};
-                var splitArray = (item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                var newDosage = splitArray[splitArray.length - 1];
-                obj.dosage_form_group.dosage_form = newDosage;
+                if(item.dosageForm) {
+                    var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                    var newDosage = splitArray[splitArray.length - 1];
+                    obj.dosage_form_group.dosage_form = {
+                        _label_en: item.dosageForm.en,
+                        _label_fr: item.dosageForm.fr,
+                        __text: newDosage
+                    };
+                }
+               // var splitArray = (item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+               // var newDosage = splitArray[splitArray.length - 1];
+               // obj.dosage_form_group.dosage_form = newDosage;
                 obj.dosage_form_group.dosage_form_other = item.dosageFormOther;
                 obj.roa_group = {};
                 if (item.routeAdmins && item.routeAdmins.length > 0) {

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaListModule', 'dossierDataLists'])
+        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaListModule', 'dossierDataLists','ui.select'])
 })();
 
 (function () {
@@ -14,6 +14,11 @@
 
     angular
         .module('formulationRecordModule')
+        .config(function (uiSelectConfig) {
+            //choices: select2, bootstrap, selectize
+            uiSelectConfig.theme = 'select2';
+        })
+
         .component('cmpFormulationRecord', {
             templateUrl: './components/formulations/tpl-formulation-record.html',
             controllerAs: 'formulRecCtrl',
@@ -32,8 +37,8 @@
 
         });
 
-    formulationRecCtrl.$inject = ['DossierLists'];
-    function formulationRecCtrl(DossierLists) {
+    formulationRecCtrl.$inject = ['DossierLists','$translate'];
+    function formulationRecCtrl(DossierLists, $translate) {
 
         var self = this;
         self.noCountries="";
@@ -42,6 +47,7 @@
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
         self.savePressed=false;
+        self.lang = $translate.proposedLanguage() || $translate.use();
         self.$onInit = function () {
 
             self.frmModel = {};
@@ -165,10 +171,12 @@
          * @returns {boolean}
          */
         self.isDosageOther = function () {
-            if (self.frmModel.dosageForm === self.otherValue) {
+
+            if(!self.frmModel.dosageForm) return false;
+            if ((self.frmModel.dosageForm.id === self.otherValue)) {
                 return true;
             } else {
-                self.frmModel.dosageFormOther = ""
+                self.frmModel.dosageFormOther = "";
                 return false;
             }
         }

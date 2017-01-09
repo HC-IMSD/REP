@@ -18,12 +18,14 @@
         .filter('orderByTranslated', orderByTranslated)
         .filter('orderByTranslatedOtherFirst', orderByTranslatedOtherFirst)
         .filter('orderByCountryAndLabel', orderByTranslatedCountryAndLabel)
+        .filter('orderByLocale',_orderByLocale)
         .filter('findCountryObject', findCountryObj)
         .filter('sequenceOrderDescending', sequenceOrderBy);
 
     orderByTranslatedCountry.$inject = ['$translate', '$filter', 'CANADA', 'USA'];
     orderByTranslated.$inject = ['$translate', '$filter'];
     orderByTranslatedOtherFirst.$inject = ['$translate', '$filter', 'OTHER'];
+    _orderByLocale.$inject=['$translate'];
 
     function orderByTranslatedCountry($translate, $filter, CANADA, USA) {
         return function (array, objKey) {
@@ -54,7 +56,7 @@
      * @param USA
      */
     function orderByTranslatedCountryAndLabel($translate, $filter, CANADA, USA) {
-        return function (array, objKey) {
+        return function (array) {
             var result = [];
             var translated = [];
             angular.forEach(array, function (value) {
@@ -89,7 +91,7 @@
 
 
     function orderByTranslated($translate, $filter) {
-        return function (array, objKey) {
+        return function (array) {
             var result = [];
             var translated = [];
             angular.forEach(array, function (value) {
@@ -106,7 +108,7 @@
     }
 
     function sequenceOrderBy($filter) {
-        return function (array, objKey) {
+        return function (array) {
             var result = [];
             angular.forEach($filter('orderBy')(array, 'sequence', true), function (sortedObject) {
                 result.push(sortedObject);
@@ -120,7 +122,7 @@
      Orders values
      */
     function orderByTranslatedOtherFirst($translate, $filter, OTHER) {
-        return function (array, objKey) {
+        return function (array) {
             var result = [];
             var translated = [];
             angular.forEach(array, function (value) {
@@ -139,4 +141,21 @@
         };
     }
 
-})();
+    /**
+     * Sorts by locale specified by angular translate
+     * @param $translate
+     * @returns {Function}
+     * @private
+     */
+    function _orderByLocale($translate) {
+        return function (items) {
+            var lang=$translate.use();
+            items.sort(function (a, b) {
+                return a[lang].localeCompare(b[lang],lang);
+            });
+            return items;
+        };
+    }
+
+
+    })();

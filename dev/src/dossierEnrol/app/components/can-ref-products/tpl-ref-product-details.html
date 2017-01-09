@@ -73,13 +73,24 @@
                     <input type="text" id="per" data-ng-model="$ctrl.productModel.per"
                            class="form-control" name="perVal" maxlength="40" size="40"/>
                 </div>
-                <div class="col-md-3 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
-                    <label for="dosage-form-listh_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
+                <div class="col-md-5 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
+                    <label for="dosage-form_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <select id="dosage-form-listh_{{$id}}" data-ng-model="$ctrl.productModel.dosageForm"
+                       <!-- <select id="dosage-form-listh_{{$id}}" data-ng-model="$ctrl.productModel.dosageForm"
                                 name="dosageForm" class="form-control full-width" required
                                 ng-options="formType |translate for formType in $ctrl.dosageFormList | orderByTranslatedOtherFirst">
-                        </select>
+                        </select>-->
+                        <ui-select ng-model="$ctrl.productModel.dosageForm" id="dosage-form_{{$id}}" name="dosageForm"
+                                   class="rep-selectize-dropdown"
+                                   ng-disabled="false" title="Choose a dosage form" class="rep-selectize-font">
+                            <ui-select-match placeholder="Select or Search for a dosage form"
+                                             class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[$ctrl.lang]}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="formType in $ctrl.dosageFormList | filter: $select.search"
+                                               class="rep-selectize-font">
+                                <span ng-bind-html="formType[$ctrl.lang] | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
                         <strong id="dosageForm-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.dosageForm)">
                         <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.dosageForm.$error">
