@@ -38,7 +38,7 @@
         vm.columnDef = [
             {
                 label: "ROA_LBL",
-                binding: "roa",
+                binding: "display",
                 width: "40"
             },
             {
@@ -67,12 +67,13 @@
         }
         vm.addNew = function() {
             var maxID = getMaxID();
-            var item = {"id": maxID + 1, "roa": "", 'otherRoaDetails': ""};
+            var item = {"id": maxID + 1, "roa": {id:"",label_en:"",label_fr:""}, 'otherRoaDetails': "",display:""};
             vm.model.roaList.push(item);
             vm.resetToCollapsed= !vm.resetToCollapsed;
             vm.selectRecord=(0);
             vm.selectRecord=(vm.model.roaList.length-1);
         };
+
         vm.deleteRecord=function(recId){
 
             var idx = vm.model.roaList.indexOf(

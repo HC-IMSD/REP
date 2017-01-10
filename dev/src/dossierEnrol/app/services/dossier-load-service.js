@@ -16,12 +16,14 @@
         .factory('customLoad', ['$http', '$q','$filter', 'getCountryAndProvinces', 'DossierLists','OTHER', function ($http, $q,$filter, getCountryAndProvinces, DossierLists,OTHER) {
 
             return function (options) {
+
                 var result = {};
                 var deferred = $q.defer();
-                var roaUrl = "data/roa-" + options.key + ".json";
+                var roaUrl = "data/roa.json";
                 var countryUrl = "data/countries-" + options.key + ".json";
                 var nanoUrl = "data/nanomaterial-" + options.key + ".json";
                 var dosageFormUrl = "data/dosageForm.json";
+
                 $http.get(roaUrl)
                     .then(function (response) {
                         var newList = _createNewKeyArray(response.data, DossierLists.getRoaPrefix());
@@ -39,15 +41,22 @@
                         return $http.get(dosageFormUrl); //dosage form list Load contains both languages
                     })
                     .then(function (response) {
-                        //PROCESSING: dosage form list
+                        //PROCESSING: DOSAGE FORM list
                         var newList =_createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(),options.key);
                         var translateList=_createTranslateList(newList,options.key);
                         DossierLists.createDosageFormList(newList); //for display
-                        //DossierLists.createFullTranslate(response.data);
                         angular.extend(result, translateList);
                         return $http.get("data/activeIngred.json"); //active ingredient list load
                     }).then(function (response) {
                         DossierLists.setActiveList(response.data);
+                        return $http.get(roaUrl); //nanomaterial load
+                       // return response.data;
+                    }).then(function (response) {
+                        //DossierLists.setRoaList(response.data);
+                        var newList =_createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(),options.key);
+                        var translateList=_createTranslateList(newList,options.key);
+                        DossierLists.createRoaList(newList); //for display
+                        angular.extend(result, translateList);
                         return response.data;
                     })
                     .catch(function (error) {

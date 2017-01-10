@@ -109,7 +109,7 @@
         }
 
         function _createRoaArray(translateJson) {
-            vm.roaList = _getKeys(translateJson)
+            vm.roaList = (translateJson);
 
 
         }

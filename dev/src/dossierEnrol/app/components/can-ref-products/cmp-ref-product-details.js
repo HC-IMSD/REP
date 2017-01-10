@@ -70,7 +70,7 @@
             if (self.productModel.dosageForm.id  === self.otherValue) {
                 return true;
             } else {
-                self.productModel.dosageFormOther = ""
+                self.productModel.dosageFormOther = "";
                 return false;
             }
         }

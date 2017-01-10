@@ -6,7 +6,8 @@
     'use strict';
 
     angular
-        .module('roaRecord', [])
+        .module('roaRecord', ['ui.select'])
+
 })();
 
 (function () {
@@ -14,6 +15,10 @@
 
     angular
         .module('roaRecord')
+        .config(function (uiSelectConfig) {
+            //choices: select2, bootstrap, selectize
+            uiSelectConfig.theme = 'select2';
+        })
         .component('cmpRoaRecord', {
             templateUrl: './components/route-admin/tpl-roa-record.html',
             controller: roaRecordController,
@@ -25,15 +30,18 @@
             }
         });
 
-    roaRecordController.$inject=['DossierLists'];
+    roaRecordController.$inject=['DossierLists','$translate'];
 
-    function roaRecordController(DossierLists){
+    function roaRecordController(DossierLists, $translate){
         var vm = this;
         vm.roaList = DossierLists.getRoa();
         vm.model = {};
+        vm.lang = $translate.proposedLanguage() || $translate.use();
 
         vm.$onInit = function(){
-
+            if(!vm.lang){
+            vm.lang='en'; //TODO magic numbers
+            }
         };
 
         vm.$onChanges = function (changes) {
@@ -42,6 +50,15 @@
                 vm.model=changes.record.currentValue;
             }
         };
+
+        /**
+         * This is done strictly to update the summary table.
+         * @param item
+         * @param model
+         */
+        vm.roaChanged=function(item, model){
+            vm.model.display=vm.model.roa.id;
+        }
 
 
         vm.deleteRecord = function()  {
@@ -52,7 +69,7 @@
             return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()) )
         }
         vm.isRoaOther = function () {
-           if(vm.model.roa==DossierLists.getOtherValue()){
+           if(vm.model.roa.id==DossierLists.getOtherValue()){
                return true;
            }else{
                vm.model.otherRoaDetails="";

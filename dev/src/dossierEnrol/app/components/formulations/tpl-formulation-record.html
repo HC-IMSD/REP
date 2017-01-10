@@ -19,14 +19,14 @@
                                 ng-options="formType.id |translate for formType in formulRecCtrl.dosageFormList">
                         </select>-->
                        <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="dosage-form_{{$id}}" name="dosageForm"
-                                   class="rep-selectize-dropdown" required
-                                   ng-disabled="false" title="Choose a dosage form" class="rep-selectize-font">
+                                   class="rep-selectize-dropdown rep-selectize-font" required
+                                  ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}" title="Choose a dosage form">
                             <ui-select-match placeholder="Select or Search for a dosage form"
                                              class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[formulRecCtrl.lang]}}
                             </ui-select-match>
                             <ui-select-choices repeat="formType in formulRecCtrl.dosageFormList | filter: $select.search"
-                                               class="rep-selectize-font">
-                                <span ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
+                                               class="rep-selectize-font full-width">
+                                <span class="full-width" ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
 

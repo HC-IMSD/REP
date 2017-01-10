@@ -17,8 +17,8 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate','$filter'];
-    function DossierService(DossierLists, $translate,$filter) {
+    DossierService.$inject = ['DossierLists', '$translate', '$filter'];
+    function DossierService(DossierLists, $translate, $filter) {
         var yesValue = 'Y';
         var noValue = 'N';
 
@@ -417,7 +417,7 @@
         function getTherapeuticList(input) {
             var list = [];
             if (!(input instanceof Array)) {
-                input=[input];
+                input = [input];
             }
             if (input) {
                 for (var i = 0; i < input.length; i++) {
@@ -464,7 +464,7 @@
                 }
             }
 
-            // console.log('getCanRefProductList : ' + JSON.stringify(list));
+
 
 
             return list;
@@ -570,16 +570,16 @@
                 };
                 if (!item.dosage_form_group.dosage_form) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
-                }else{
-                    var dosageFormObj = $filter('filter')(DossierLists.getDosageFormList(), {id:item.dosage_form_group.dosage_form.__text})[0];
+                } else {
+                    var dosageFormObj = $filter('filter')(DossierLists.getDosageFormList(), {id: item.dosage_form_group.dosage_form.__text})[0];
                     obj.dosageForm = dosageFormObj;
                 }
 
-               /* if (!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form === DossierLists.getOtherValue()) {
-                    obj.dosageForm = item.dosage_form_group.dosage_form;
-                } else {
-                    obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
-                }*/
+                /* if (!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form === DossierLists.getOtherValue()) {
+                 obj.dosageForm = item.dosage_form_group.dosage_form;
+                 } else {
+                 obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
+                 }*/
 
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
@@ -731,17 +731,13 @@
             var _id = 0;
 
             angular.forEach(list, function (item) {
-                var newRoa = ""
-                if (item.roa === DossierLists.getOtherValue() || !item.roa) {
-                    newRoa = item.roa;
-                } else {
-                    newRoa = DossierLists.getRoaPrefix() + item.roa;
-                }
+                var roaObj = $filter('filter')(DossierLists.getRoa(), {id: item.roa.__text})[0];
                 _id = _id + 1;
                 var obj = {
                     "id": _id,
-                    "roa": newRoa,
-                    "otherRoaDetails": item.roa_other
+                    "roa": roaObj,
+                    "otherRoaDetails": item.roa_other,
+                    "display":roaObj.id
                 };
 
                 resultList.push(obj);
@@ -794,16 +790,16 @@
 
                     //make dosage form with both english and french labels
 
-                   if(info[i].dosageForm) {
-                       var splitArray = (info[i].dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                       var newDosage = splitArray[splitArray.length - 1];
-                       // product.dosage_form = info[i].dosageForm;
-                       product.dosage_form = {
-                           _label_en: info[i].dosageForm.en,
-                           _label_fr: info[i].dosageForm.fr,
-                           __text: newDosage
-                       };
-                   }
+                    if (info[i].dosageForm) {
+                        var splitArray = (info[i].dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                        var newDosage = splitArray[splitArray.length - 1];
+                        // product.dosage_form = info[i].dosageForm;
+                        product.dosage_form = {
+                            _label_en: info[i].dosageForm.en,
+                            _label_fr: info[i].dosageForm.fr,
+                            __text: newDosage
+                        };
+                    }
 
                     product.dosage_form_other = info[i].dosageFormOther;
                     product.strengths = info[i].strengths;
@@ -926,7 +922,7 @@
                 };
                 //dosage_form_group, static value
                 obj.dosage_form_group = {};
-                if(item.dosageForm) {
+                if (item.dosageForm) {
                     var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
                     var newDosage = splitArray[splitArray.length - 1];
                     obj.dosage_form_group.dosage_form = {
@@ -935,9 +931,9 @@
                         __text: newDosage
                     };
                 }
-               // var splitArray = (item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-               // var newDosage = splitArray[splitArray.length - 1];
-               // obj.dosage_form_group.dosage_form = newDosage;
+                // var splitArray = (item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                // var newDosage = splitArray[splitArray.length - 1];
+                // obj.dosage_form_group.dosage_form = newDosage;
                 obj.dosage_form_group.dosage_form_other = item.dosageFormOther;
                 obj.roa_group = {};
                 if (item.routeAdmins && item.routeAdmins.length > 0) {
@@ -1074,10 +1070,15 @@
         function routeAdminToOutput(list) {
             var resultList = [];
             angular.forEach(list, function (item) {
-                var splitArray = (item.roa).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
+                var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
                 var newRoa = splitArray[splitArray.length - 1];
+                //roa is a field with 2 attributes
                 var obj = {
-                    "roa": newRoa,
+                    "roa": {
+                        _label_en: item.roa.en,
+                        _label_fr: item.roa.fr,
+                        __text: newRoa
+                    },
                     "roa_other": item.otherRoaDetails
                 };
                 resultList.push(obj);
