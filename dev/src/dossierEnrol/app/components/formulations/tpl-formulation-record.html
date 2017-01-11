@@ -1,5 +1,5 @@
 <ng-form name="formulationRecForm">
-    <div class="container-fluid">
+    <div class="">
         <fieldset>
             <legend>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</legend>
 
@@ -12,12 +12,8 @@
             </div>
             <div class="row">
                 <div class="col-md-6 form-group" ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}">
-                    <label for="dosage-form_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
+                    <label for="dosage-form_{{$id}}" class="required rep-required-offset"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                      <!--  <select id="dosage-form-listh_{{$id}}" data-ng-model="formulRecCtrl.frmModel.dosageForm"
-                                name="dosageForm" class="form-control full-width" required
-                                ng-options="formType.id |translate for formType in formulRecCtrl.dosageFormList">
-                        </select>-->
                        <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="dosage-form_{{$id}}" name="dosageForm"
                                    class="rep-selectize-dropdown rep-selectize-font" required
                                   ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}" title="Choose a dosage form">
@@ -29,7 +25,6 @@
                                 <span class="full-width" ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
-
                         <strong id="dosageForm-error" class="error"
                                 ng-if="formulRecCtrl.showError(formulationRecForm.dosageForm.$invalid,formulationRecForm.dosageForm.$touched)">
                         <span class="label label-danger" ng-messages="formulationRecForm.dosageForm.$error">
@@ -57,9 +52,7 @@
                     </label>
                 </div>
             </div>
-
-
-            <div class="container-fluid">
+            <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'MEDICINAL_INGRED'|translate}}</h3>
@@ -69,7 +62,7 @@
                                 </span>
                         </strong>
                     </header>
-                    <div class="panel-body container-fluid">
+                    <div class="panel-body">
                         <input type="text" required ng-show="false" name="noActiveFld" id="noActive"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>
                         <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
@@ -77,7 +70,7 @@
                     </div>
                 </section>
             </div>
-            <div class="container-fluid">
+            <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'NONMEDICINAL_INGRED'|translate}}</h3>
@@ -88,7 +81,7 @@
                     </div>
                 </section>
             </div>
-            <div class="container-fluid">
+            <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'CONTAINER_TYPES'|translate}}</h3>
@@ -100,7 +93,7 @@
                 </section>
             </div>
 
-            <div class="container-fluid">
+            <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'ANIMAL_HUMAN_HDING'|translate}}</h3>
@@ -110,7 +103,7 @@
                                                on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
                     </div>
             </div>
-            <div class="container-fluid">
+            <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'ROA_TITLE'|translate}}</h3>
@@ -128,7 +121,7 @@
                     </div>
                 </section>
             </div>
-            <div class="container-fluid">
+            <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>

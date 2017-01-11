@@ -25,7 +25,6 @@
     orderByTranslatedCountry.$inject = ['$translate', '$filter', 'CANADA', 'USA'];
     orderByTranslated.$inject = ['$translate', '$filter'];
     orderByTranslatedOtherFirst.$inject = ['$translate', '$filter', 'OTHER'];
-    _orderByLocale.$inject=['$translate'];
 
     function orderByTranslatedCountry($translate, $filter, CANADA, USA) {
         return function (array, objKey) {
@@ -147,9 +146,9 @@
      * @returns {Function}
      * @private
      */
-    function _orderByLocale($translate) {
-        return function (items) {
-            var lang=$translate.use();
+    function _orderByLocale() {
+        return function (items,lang) {
+
             items.sort(function (a, b) {
                 return a[lang].localeCompare(b[lang],lang);
             });

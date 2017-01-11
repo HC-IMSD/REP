@@ -6,9 +6,11 @@
             <div class="row">
                 <div class="form-group col-md-12 typeahead-demo"
                      ng-class="{'has-error':ingRecCtrl.activeIngForm.ingredName.$invalid}">
-                    <label for="ing-name_{{$id}}" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
+                    <label for="ing-name_{{$id}}" class="required"><span
+                            class="field-name">{{'ING_NAME'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName" id="ing-name_{{$id}}"
+                        <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName"
+                               id="ing-name_{{$id}}"
                                size="100"
                                uib-typeahead=" rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
                                class="form-control rep-normal-font" typeahead-show-hint="true" typeahead-min-length="2"
@@ -61,12 +63,26 @@
                         </strong>
                     </label>
                 </div>
-
-                <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm.unitsFld.$invalid}">
-                    <label for="units_{{$id}}" class="required"><span class="field-name">{{'UNITS'|translate}}</span>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="units_{{$id}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <input type="text" id="units_{{$id}}" data-ng-model="ingRecCtrl.ingModel.units" size="40" maxlength="40"
-                           class="form-control full-width" name="unitsFld" ng-required="true"/>
+                    <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm.unitsFld.$invalid}" >
+                        <ui-select ng-model="ingRecCtrl.ingModel.units" id="units_{{$id}}" name="unitsFld"
+                                   class="rep-selectize-font full-width" required>
+                            <ui-select-match placeholder="Select or Search Units"
+                                             class="rep-selectize-font rep-selectize-dropdown form-control">
+                                {{$select.selected[ingRecCtrl.lang]}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="unitValue in ingRecCtrl.UnitsList | filter: $select.search"
+                                               class="rep-selectize-font">
+                                <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <!--  <input type="text" id="units_{{$id}}" data-ng-model="ingRecCtrl.ingModel.units" size="40" maxlength="40"
+                             class="form-control full-width" name="unitsFld" ng-required="true"/>-->
                     <strong id="units-error" class="error"
                             ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.unitsFld.$invalid,ingRecCtrl.activeIngForm.unitsFld.$touched)">
                         <span class="label label-danger"
@@ -75,14 +91,27 @@
                         </span>
                     </strong>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4" ng-show="ingRecCtrl.isUnitsOther()">
+                    <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="text" id="otherUnits_{{$id}}" data-ng-model="ingRecCtrl.ingModel.otherUnits"
+                               size="40" class="form-control" name="otherUnits"
+                               maxlength="40" ng-show="ingRecCtrl.isUnitsOther()"/>
+                        <strong id="unitsOther-error" class="error"
+                                ng-if="ingRecCtrl.showError(ingRecCtrl.otherUnits.$invalid,ingRecCtrl.otherUnits.$touched)">
+                        <span class="label label-danger" ng-messages="formulationRecForm.otherUnits.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
+                        </strong>
+                    </label>
+                </div>
+                <div class="form-group col-md-5">
                     <label for="per_{{$id}}"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
                     <input type="text" id="per_{{$id}}" data-ng-model="ingRecCtrl.ingModel.per" size="40" maxlength="40"
                            class="form-control" name="text"/>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm.nanoFld.$invalid}">
                     <label for="nanoMaterial_{{$id}}" class="required">
                         <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
@@ -99,13 +128,13 @@
                         </span>
                     </strong>
                 </div>
-
                 <div class="form-group col-md-5" ng-if="ingRecCtrl.isNanoOther()"
                      ng-class="{'has-error':ingRecCtrl.activeIngForm.nanoOtherFld.$invalid}">
                     <label for="nanoMaterialOther_{{$id}}" class="required">
                         <span class="field-name">{{'NANO_MATERIAL_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <input type="text" id="nanoMaterialOther_{{$id}}" data-ng-model="ingRecCtrl.ingModel.nanoMaterialOther"
+                    <input type="text" id="nanoMaterialOther_{{$id}}"
+                           data-ng-model="ingRecCtrl.ingModel.nanoMaterialOther"
                            class="form-control full-width" name="nanoOtherFld" ng-required="true" maxlength="40"/>
                     <strong id="nanoMaterialOther-error" class="error"
                             ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.nanoOtherFld.$invalid,ingRecCtrl.activeIngForm.nanoOtherFld.$touched)">
@@ -115,10 +144,7 @@
                         </span>
                     </strong>
                 </div>
-            </div>
-            <div class="row">
-
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
+                <div class="form-group  col-sm-4 col-xs-12"
                      ng-class="{'has-error':ingRecCtrl.activeIngForm.asBase.$invalid}">
                     <label for="asBase_{{$id}}" class="required">
                         <span class="field-name">{{'CALCULATED_AS_BASE'|translate}}</span>
@@ -136,7 +162,9 @@
                         </strong>
                     </label>
                 </div>
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
+            </div>
+            <div class="row">
+                <div class="form-group  col-sm-4 col-xs-12"
                      ng-class="{'has-error':ingRecCtrl.activeIngForm.animaHumanSourced.$invalid}">
                     <label for="animalHumanSourced_{{$id}}" class="required">
                         <span class="field-name">{{'ANIMAL_HUMAN_SOURCED'|translate}}</span>
@@ -155,17 +183,27 @@
                         </strong>
                     </label>
                 </div>
-            </div>
-
-            <div class="btn-group-sm col-xs-12 text-right">
-                <input type="submit" value="Save" class="btn btn-primary"
-                       ng-click="ingRecCtrl.saveIng()"/>
-                <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
-                       ng-click="ingRecCtrl.delete()"/>
-                <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Copy" class="btn btn-default"
-                       ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
-                <input type="submit" value="Discard Changes" class="btn btn-default"
-                       ng-click="ingRecCtrl.discardChanges()">
+                <div class="btn-group-sm col-xs-7 text-right align-bottom">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="submit" value="Save" class="btn btn-primary"
+                                   ng-click="ingRecCtrl.saveIng()"/>
+                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete"
+                                   class="btn btn-danger"
+                                   ng-click="ingRecCtrl.delete()"/>
+                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Copy"
+                                   class="btn btn-default"
+                                   ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
+                            <input type="submit" value="Discard Changes" class="btn btn-default"
+                                   ng-click="ingRecCtrl.discardChanges()">
+                        </div>
+                    </div>
+                </div>
             </div>
         </fieldset>
         <!--  <pre>{{ingRecCtrl.ingModel |json}}</pre>-->

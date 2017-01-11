@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('activeIngRecordModule', ['dossierDataLists'])
+        .module('activeIngRecordModule', ['dossierDataLists','hpfbConstants'])
 })();
 
 (function () {
@@ -31,14 +31,16 @@
             }
 
         });
-    activeIngRecCtrl.$inject = ['DossierLists', '$scope'];
-    function activeIngRecCtrl(DossierLists, $scope) {
+    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER'];
+    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER) {
 
         var self = this;
         self.nanoMaterialList = DossierLists.getNanoMaterials();
         self.yesNoList = DossierLists.getYesNoList();
-        self.savePressed = false;
         self.activeList = DossierLists.getActiveList();
+        self.UnitsList=DossierLists.getUnitsList();
+        self.savePressed = false;
+        self.lang = $translate.proposedLanguage() || $translate.use();
         self.newIngred = false;
         self.ingModel = {
             newIngred: 'Y',
@@ -48,6 +50,7 @@
             standard: "",
             strength: null,
             units: "",
+            otherUnits:"",
             per: "",
             nanoMaterial: "",
             nanoMaterialOther: "",
@@ -156,6 +159,21 @@
                 return false;
             }
         };
+
+        /**
+         * @ngDoc determines if units Other should be shown
+         * @returns {boolean}
+         */
+        self.isUnitsOther = function () {
+
+            if(!self.ingModel) return false;
+            if ((self.ingModel.units.id === OTHER)) {
+                return true;
+            } else {
+                self.ingModel.otherUnits = "";
+                return false;
+            }
+        }
 
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {

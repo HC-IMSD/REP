@@ -34,14 +34,17 @@
         vm.nanoList = [];
         vm.dosageFormList = [];
         vm.activeList = [];
-
+        vm.unitsList = [];
+        //TODO create getters/setters? safer as is
         var service = {
             setActiveList: _setActiveArray,
             getActiveList: _getActiveArray,
             createRoaList: _createRoaArray,
+            createUnitsList: _createUnitsArray,
             createNanomaterialList: _createNanoArray,
             createDosageFormList: _createDosageFormArray,
             getDosageFormList: getDosageFormsArray,
+            getUnitsList:_getUnitsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
@@ -50,7 +53,7 @@
             getYesNoList: yesNoArray,
             getYesNoUnknownList: yesNoUnknownArray,
             getAnimalSources: animalSourcesArray,
-            getTissuesSystem:tissuesSystemArray,
+            getTissuesSystem: tissuesSystemArray,
             getNervousSystem: nervousSystemArray,
             getDigestiveSystem: digestiveSystemArray,
             getImmuneSystem: immuneSystemArray,
@@ -70,7 +73,9 @@
             getYesValue: getYesValue,
             getTissuesFluidsLabels: _getTissuesFluidsLabels,
             getRoaPrefix: _getRoaListPrefix,
-            getDosageFormPrefix: _getDosagePrefix
+            getDosageFormPrefix: _getDosagePrefix,
+            getUnitsPrefix: _getUnitsPrefix
+
         };
         return service;
 
@@ -82,6 +87,7 @@
             return (vm.activeList);
 
         }
+
         ////////////////
         function getDoseOtherValue() {
             return OTHER;
@@ -114,12 +120,24 @@
 
         }
 
+        function _createUnitsArray(translateJson) {
+            vm.unitsList = (translateJson);
+
+        }
+        function _getUnitsArray() {
+           return vm.unitsList;
+        }
+
+
         function _getRoaListPrefix() {
             return "ROA_";
         }
 
         function _getDosagePrefix() {
             return "DOSFORM_";
+        }
+        function _getUnitsPrefix() {
+            return "UNITS_";
         }
 
         /**
@@ -189,6 +207,7 @@
                 "OTHERANIMAL_TYPE"
             ]);
         }
+
         /**
          * Tisssues and fluids system types
          * @returns {string[]}
@@ -286,6 +305,7 @@
                 "DIGESTIVE_OTHER"
             ]);
         }
+
         /**
          * Reproductive system Tissues or fluids LOV
          * @returns {*[]}
@@ -306,6 +326,7 @@
                 "REPROD_OTHER"
             ]);
         }
+
         /**
          * Cardio system Tissues or fluids LOV
          * @returns {*[]}
@@ -320,6 +341,7 @@
                 "CARDIO_OTHER"
             ]);
         }
+
         /**
          * Immune system Tissues or fluids LOV
          * @returns {*[]}
@@ -350,6 +372,7 @@
                 "SKIN_OTHER"
             ]);
         }
+
         /**
          * Muscle system Tissues or fluids LOV
          * @returns {*[]}
@@ -365,6 +388,7 @@
                 "MUSCLE_OTHER"
             ]);
         }
+
         /**
          * Other system Tissues or fluids LOV
          * @returns {*[]}

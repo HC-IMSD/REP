@@ -6,28 +6,39 @@
 (function () {
     'use strict';
     angular
-        .module('dossierLoadModule', ['dataLists', 'dossierDataLists','hpfbConstants'])
+        .module('dossierLoadModule', ['dataLists', 'dossierDataLists', 'hpfbConstants'])
 })();
 
 (function () {
     'use strict';
     angular
         .module('dossierLoadModule')
-        .factory('customLoad', ['$http', '$q','$filter', 'getCountryAndProvinces', 'DossierLists','OTHER', function ($http, $q,$filter, getCountryAndProvinces, DossierLists,OTHER) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'DossierLists', 'OTHER', function ($http, $q, $filter, getCountryAndProvinces, DossierLists, OTHER) {
 
             return function (options) {
 
                 var result = {};
                 var deferred = $q.defer();
-                var roaUrl = "data/roa.json";
+                var dataFolder = "data/"; //relative forlder to the data
+                var roaUrl = dataFolder + "roa.json";
                 var countryUrl = "data/countries-" + options.key + ".json";
                 var nanoUrl = "data/nanomaterial-" + options.key + ".json";
-                var dosageFormUrl = "data/dosageForm.json";
+                var unitsUrl = dataFolder + "units.json";
+                var dosageFormUrl = dataFolder + "dosageForm.json";
 
-                $http.get(roaUrl)
+                $http.get(unitsUrl)
+                    .then(function (response) {
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(),options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        DossierLists.createUnitsList(newList);
+                        console.log("This is the units");
+                        console.log(newList);
+                        angular.extend(result, translateList);
+                        return $http.get(roaUrl); //country list load
+                    })
                     .then(function (response) {
                         var newList = _createNewKeyArray(response.data, DossierLists.getRoaPrefix());
-                       DossierLists.createRoaList(newList);
+                        DossierLists.createRoaList(newList);
                         angular.extend(result, newList);
                         return $http.get(countryUrl); //country list load
                     })
@@ -36,25 +47,25 @@
                         getCountryAndProvinces.createCountryList(response.data);
                         return $http.get(nanoUrl); //nanomaterial load
                     }).then(function (response) {
-                    angular.extend(result, response.data);
-                    DossierLists.createNanomaterialList(response.data);
+                        angular.extend(result, response.data);
+                        DossierLists.createNanomaterialList(response.data);
                         return $http.get(dosageFormUrl); //dosage form list Load contains both languages
                     })
                     .then(function (response) {
                         //PROCESSING: DOSAGE FORM list
-                        var newList =_createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(),options.key);
-                        var translateList=_createTranslateList(newList,options.key);
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(),options.key);
+                        var translateList = _createTranslateList(newList, options.key);
                         DossierLists.createDosageFormList(newList); //for display
                         angular.extend(result, translateList);
                         return $http.get("data/activeIngred.json"); //active ingredient list load
                     }).then(function (response) {
-                        DossierLists.setActiveList(response.data);
-                        return $http.get(roaUrl); //nanomaterial load
-                       // return response.data;
-                    }).then(function (response) {
+                    DossierLists.setActiveList(response.data);
+                    return $http.get(roaUrl); //nanomaterial load
+                    // return response.data;
+                }).then(function (response) {
                         //DossierLists.setRoaList(response.data);
-                        var newList =_createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(),options.key);
-                        var translateList=_createTranslateList(newList,options.key);
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(),options.key);
+                        var translateList = _createTranslateList(newList, options.key);
                         DossierLists.createRoaList(newList); //for display
                         angular.extend(result, translateList);
                         return response.data;
@@ -78,12 +89,12 @@
              * @returns {{}}
              * @private
              */
-            function _createTranslateList(jsonList,lang){
-               // var langIndex=1;
-                if(!lang) lang='en';
-                var resultList={};
-                for(var i=0;i<jsonList.length;i++){
-                    resultList[jsonList[i].id]=jsonList[i][lang];
+            function _createTranslateList(jsonList, lang) {
+                // var langIndex=1;
+                if (!lang) lang = 'en';
+                var resultList = {};
+                for (var i = 0; i < jsonList.length; i++) {
+                    resultList[jsonList[i].id] = jsonList[i][lang];
                 }
                 return resultList;
             }
@@ -115,27 +126,23 @@
              * Creates new keys based on a specific json syntax
              * @param jsonList
              * @param prefix
-             * @param keyID
+             * @param lang
              * @returns {Array}
              * @private
              */
-            function _createNewSortedArrayWithOther(jsonList,prefix,lang){
+            function _createNewSortedArrayWithOther(jsonList, prefix,lang) {
 
                 var result = [];
-                var translated = [];
-                if(!lang) lang="en";
-                var newList=_createNewPrefixList(jsonList,prefix);
+                var newList = _createNewPrefixList(jsonList, prefix);
                 //got the new list, sort it by the current language
-            result.push({"id":OTHER,"en":"Other","fr":"Autre"});
-                //orderBy
-                angular.forEach($filter('orderByLocale')(newList, lang), function (sortedObject) {
+                if(!lang) lang='en'; //TODO magic number
+                result.push({"id": OTHER, "en": "Other", "fr": "Autre"});
+                angular.forEach($filter('orderByLocale')(newList,lang), function (sortedObject) {
                     if (sortedObject.key !== OTHER) {
                         result.push(sortedObject);
                     }
                 });
                 return result;
-
-               //return newList;
             }
 
             /**
@@ -145,11 +152,11 @@
              * @returns {Array}
              * @private
              */
-            function _createNewPrefixList(jsonList,prefix){
-                var newList=[];
-                for(var i=0;i<jsonList.length;i++){
-                    var newRec=angular.copy(jsonList[i]);
-                    newRec.id=prefix+ newRec.id;
+            function _createNewPrefixList(jsonList, prefix) {
+                var newList = [];
+                for (var i = 0; i < jsonList.length; i++) {
+                    var newRec = angular.copy(jsonList[i]);
+                    newRec.id = prefix + newRec.id;
                     newList.push(newRec);
                 }
                 return newList;
