@@ -33,5 +33,6 @@
   "ERRORS": "Erreurs",
   "UNKNOWN": "Inconnu",
   "BIOLOGIC": "fr_Biologic",
-  "PHARMACEUTICAL": "fr_Pharmaceutical"
+  "PHARMACEUTICAL": "fr_Pharmaceutical",
+  "COPY":"fr_Copy"
 }

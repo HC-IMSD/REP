@@ -663,11 +663,16 @@
                     "standard": item.ingred_standard,
                     "strength": Number(item.strength),
                     "per": item.per,
-                    "units": item.units,
+                    "units": "",
                     "calcAsBase": item.is_base_calc,
                     "nanoMaterial": item.is_nanomaterial,
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
+                if(item.units) {
+                    obj.units = $filter('filter')(DossierLists.getUnitsList(), {id: item.units.__text})[0];
+                }
+
                 resultList.push(obj);
             });
 
@@ -982,6 +987,7 @@
                     "strength": item.strength,
                     "per": item.per,
                     "units": "",
+                    "units_other":item.otherUnits,
                     "is_base_calc": item.calcAsBase,
                     "is_nanomaterial": item.nanoMaterial,
                     "nanomaterial_details": item.nanoMaterialOther
@@ -1037,11 +1043,14 @@
                 "variant_name": item.varId,
                 "strength": item.strength,
                 "per": item.per,
-                "units": item.units,
+                "units": "",
+                "units_other":item.otherUnits,
                 "is_base_calc": item.calcAsBase,
                 "is_nanomaterial": item.nanoMaterial,
                 "nanomaterial_details": item.nanoMaterialOther
             };
+            obj.units =_unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
+
             resultList.push(obj);
         });
         return resultList;

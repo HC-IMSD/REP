@@ -59,9 +59,6 @@
         };
         self.$onInit = function () {
             self.savePressed = false;
-            /*  if (self.record) {
-                self.ingModel = angular.copy(self.record);
-             }*/
             self.backup = angular.copy(self.ingModel);
         };
         $scope.$watch('ingRecCtrl.newIngred', function () {
@@ -173,7 +170,7 @@
                 self.ingModel.otherUnits = "";
                 return false;
             }
-        }
+        };
 
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {

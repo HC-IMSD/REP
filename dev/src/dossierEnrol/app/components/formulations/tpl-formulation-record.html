@@ -20,7 +20,7 @@
                             <ui-select-match placeholder="Select or Search for a dosage form"
                                              class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[formulRecCtrl.lang]}}
                             </ui-select-match>
-                            <ui-select-choices repeat="formType in formulRecCtrl.dosageFormList | filter: $select.search"
+                            <ui-select-choices repeat="formType in formulRecCtrl.dosageFormList | filter:{[formulRecCtrl.lang]:$select.search}"
                                                class="rep-selectize-font full-width">
                                 <span class="full-width" ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>

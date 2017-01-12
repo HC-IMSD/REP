@@ -56,29 +56,56 @@
                         </strong>
                     </label>
                 </div>
-                <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
-                    <label for="units" class="required"><span class="field-name">{{'UNITS'|translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="units" data-ng-model="nIngRecCtrl.ingModel.units"
-                               class="form-control full-width" name="nmUnits" ng-required="true" maxlength="40"
-                               size="40"/>
-                        <strong id="nm-unit-error" class="error"
-                                ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nmUnits.$invalid,nIngRecCtrl.nonMedIngForm.nmUnits.$touched)">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="units_{{$id}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                    <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
+                        <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{$id}}" name="nmUnits"
+                                   class="rep-selectize-font full-width" required>
+                            <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
+                                             class="rep-selectize-font rep-selectize-dropdown form-control">
+                                {{$select.selected[nIngRecCtrl.lang]}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"
+                                               class="rep-selectize-font">
+                                <span ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <strong id="nm-unit-error" class="error"
+                            ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nmUnits.$invalid,nIngRecCtrl.nonMedIngForm.nmUnits.$touched)">
                                     <span class="label label-danger"
                                           ng-messages="nIngRecCtrl.nonMedIngForm.nmUnits.$error">
                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                     </span>
+                    </strong>
+                </div>
+                <div class="form-group col-md-4" ng-show="nIngRecCtrl.isUnitsOther()">
+                    <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="text" id="otherUnits_{{$id}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
+                               size="40" class="form-control" name="otherUnits"
+                               maxlength="40" ng-show="nIngRecCtrl.isUnitsOther()"/>
+                        <strong id="unitsOther-error" class="error"
+                                ng-if="ingRecCtrl.showError(nIngRecCtrl.nonMedIngForm.otherUnits.$invalid,nIngRecCtrl.nonMedIngForm.otherUnits.$touched)">
+                        <span class="label label-danger" ng-messages="nIngRecCtrl.nonMedIngForm.otherUnits.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
                         </strong>
                     </label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
+
+                <div class="form-group col-md-5">
                     <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
                     <input type="text" id="per" data-ng-model="nIngRecCtrl.ingModel.per"
                            class="form-control" name="perVal" maxlength="40" size="40"/>
                 </div>
-                <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nanoFld.$invalid}">
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3"
+                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nanoFld.$invalid}">
                     <label for="nanoMaterial" class="required">
                         <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
@@ -109,8 +136,6 @@
                         </span>
                     </strong>
                 </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
                      ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.asBase.$invalid}">
                     <label for="asBase" class="required">
@@ -129,6 +154,10 @@
                         </strong>
                     </label>
                 </div>
+            </div>
+
+
+            <div class="row">
                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
                      ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.animaHumanSourced.$invalid}">
                     <label for="asBase" class="required">
@@ -147,19 +176,29 @@
                         </strong>
                     </label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="btn-group-sm col-xs-12 text-right">
-                    <input type="submit" value="Save" class="btn btn-primary"
-                           ng-click="nIngRecCtrl.saveIng()"/>
-                    <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
-                           ng-click="nIngRecCtrl.delete()"/>
-                    <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="Copy" class="btn btn-default"
-                           ng-click="nIngRecCtrl.copy()" ng-disabled="nIngRecCtrl.nonMedIngForm.$dirty">
-                    <input type="submit" value="Discard Changes" class="btn btn-default"
-                           ng-click="nIngRecCtrl.discardChanges()">
+                <div class="btn-group-sm col-xs-7 text-right">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <input type="submit" value="{{'SAVE'|translate}}" class="btn btn-primary"
+                                   ng-click="nIngRecCtrl.saveIng()"/>
+                            <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="{{'DELETE'|translate}}"
+                                   class="btn btn-danger"
+                                   ng-click="nIngRecCtrl.delete()"/>
+                            <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="{{'COPY'|translate}}"
+                                   class="btn btn-default"
+                                   ng-click="nIngRecCtrl.copy()" ng-disabled="nIngRecCtrl.nonMedIngForm.$dirty">
+                            <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
+                                   ng-click="nIngRecCtrl.discardChanges()">
+                        </div>
+                    </div>
                 </div>
             </div>
         </fieldset>
+         <!-- <pre>{{nIngRecCtrl.ingModel |json}}</pre>-->
     </div>
 </ng-form>

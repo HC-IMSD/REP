@@ -34,5 +34,6 @@
   "ERRORS":"Errors",
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",
-  "PHARMACEUTICAL": "Pharmaceutical"
+  "PHARMACEUTICAL": "Pharmaceutical",
+  "COPY":"Copy"
 }

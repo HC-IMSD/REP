@@ -20,7 +20,7 @@
                             <ui-select-match placeholder="Select or Search for a route of administration"
                                              class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[roaRecCtrl.lang]}}
                             </ui-select-match>
-                            <ui-select-choices repeat="roaValue in  roaRecCtrl.roaList | filter: $select.search track by roaValue.id"
+                            <ui-select-choices repeat="roaValue in  roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:$select.search} track by roaValue.id "
                                                class="rep-selectize-font full-width">
                                 <span  ng-bind-html="roaValue[roaRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
@@ -63,5 +63,6 @@
                 </div>
             </div>
         </fieldset>
+       <!-- <pre>{{roaRecCtrl.model.roa |json}}</pre>-->
     </div>
 </ng-form>

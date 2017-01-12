@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('nonMedIngRecordModule', ['dossierDataLists'])
+        .module('nonMedIngRecordModule', ['dossierDataLists','hpfbConstants','ui.select'])
 })();
 
 (function () {
@@ -30,40 +30,47 @@
             }
 
         });
-    nonMedIngRecCtrl.$inject = ['DossierLists', '$scope'];
-    function nonMedIngRecCtrl(DossierLists, $scope) {
+    nonMedIngRecCtrl.$inject = ['DossierLists', '$scope','$translate','OTHER'];
+    function nonMedIngRecCtrl(DossierLists, $scope,$translate, OTHER) {
 
         var self = this;
         self.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
         self.yesNoList = DossierLists.getYesNoList(); //yes-no lists
+        self.unitsList=DossierLists.getUnitsList();
         self.savePressed=false;
+        self.lang = $translate.proposedLanguage() || $translate.use();
+        self.ingModel = {
+            varId:"",
+            ingName: "",
+            cas: "",
+            standard: "",
+            strength: null,
+            units: "",
+            otherUnits:"",
+            per: "",
+            nanoMaterial: "",
+            nanoMaterialOther: "",
+            calcAsBase: "",
+            humanAnimalSourced: ""
+        }
 
         self.$onInit = function () {
             self.savePressed=false;
-            self.ingModel = {};
-
-            if (self.record) {
-                self.ingModel = angular.copy(self.record);
-            }
             self.backup = angular.copy(self.ingModel);
         };
 
-
-        /* self.duplicate = function () {
-            if (self.record) {
-                self.onAddIng({ing: self.record});
+        self.$onChanges = function (changes) {
+            if (changes.record && changes.record.currentValue) {
+                self.ingModel = angular.copy(changes.record.currentValue);
             }
-         };*/
+        };
 
         self.saveIng = function () {
-            // self.ingModel.animalHumanSourced = self.ingModel.animalHumanSourced == true ? "Yes" : "No";
             if(self.nonMedIngForm.$valid) {
 
                 if (self.record) {
-                    // console.log('product details update product');
                     self.onUpdate({ing: self.ingModel});
                 } else {
-                    //  console.log('product details add product');
                     self.onAddIng({ing: self.ingModel});
                 }
                 self.nonMedIngForm.$setPristine();
@@ -75,7 +82,6 @@
         };
 
         self.discardChanges = function () {
-
             self.ingModel = angular.copy(self.backup);
             self.nonMedIngForm.$setPristine();
             self.onCancel();
@@ -95,12 +101,6 @@
             self.onAddIng({ing: ingredientCopy});
         }
 
-
-        self.$onChanges = function (changes) {
-            if (changes.record) {
-                self.ingModel = changes.record.currentValue;
-            }
-        };
 
 
         /**
@@ -125,6 +125,23 @@
                 return false;
             }
         };
+
+        /**
+         * @ngDoc determines if units Other should be shown
+         * @returns {boolean}
+         */
+        self.isUnitsOther = function () {
+
+            if(!self.ingModel) return false;
+            if ((self.ingModel.units.id === OTHER)) {
+                return true;
+            } else {
+                self.ingModel.otherUnits = "";
+                return false;
+            }
+        };
+
+
         $scope.$watch('nIngRecCtrl.nonMedIngForm.$dirty', function () {
             self.isDetailValid({state: !self.nonMedIngForm.$dirty});
         }, true);

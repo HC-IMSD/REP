@@ -71,7 +71,7 @@
                                              class="rep-selectize-font rep-selectize-dropdown form-control">
                                 {{$select.selected[ingRecCtrl.lang]}}
                             </ui-select-match>
-                            <ui-select-choices repeat="unitValue in ingRecCtrl.UnitsList | filter: $select.search"
+                            <ui-select-choices repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
                                                class="rep-selectize-font">
                                 <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
@@ -94,8 +94,8 @@
                                size="40" class="form-control" name="otherUnits"
                                maxlength="40" ng-show="ingRecCtrl.isUnitsOther()"/>
                         <strong id="unitsOther-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.otherUnits.$invalid,ingRecCtrl.otherUnits.$touched)">
-                        <span class="label label-danger" ng-messages="formulationRecForm.otherUnits.$error">
+                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.otherUnits.$invalid,ingRecCtrl.activeIngForm.otherUnits.$touched)">
+                        <span class="label label-danger" ng-messages="ingRecCtrl.activeIngForm.otherUnits.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                         </strong>
@@ -187,15 +187,15 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <input type="submit" value="Save" class="btn btn-primary"
+                            <input type="submit" value="{{'SAVE'|translate}}" class="btn btn-primary"
                                    ng-click="ingRecCtrl.saveIng()"/>
-                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Delete"
+                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="{{'DELETE'|translate}}"
                                    class="btn btn-danger"
                                    ng-click="ingRecCtrl.delete()"/>
-                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="Copy"
+                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="{{'COPY'|translate}}"
                                    class="btn btn-default"
                                    ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
-                            <input type="submit" value="Discard Changes" class="btn btn-default"
+                            <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
                                    ng-click="ingRecCtrl.discardChanges()">
                         </div>
                     </div>

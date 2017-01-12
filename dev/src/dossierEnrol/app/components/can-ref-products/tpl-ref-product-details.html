@@ -86,7 +86,7 @@
                             <ui-select-match placeholder="Select or Search for a dosage form"
                                              class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[$ctrl.lang]}}
                             </ui-select-match>
-                            <ui-select-choices repeat="formType in $ctrl.dosageFormList | filter: $select.search"
+                            <ui-select-choices repeat="formType in $ctrl.dosageFormList | filter: {[$ctrl.lang]:$select.search}"
                                                class="rep-selectize-font">
                                 <span ng-bind-html="formType[$ctrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
