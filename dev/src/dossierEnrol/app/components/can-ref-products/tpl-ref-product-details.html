@@ -53,44 +53,81 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-3" ng-class="{'has-error':$ctrl.productDetailsForm.nmUnits.$invalid}">
-                    <label for="units" class="required"><span class="field-name">{{'UNITS'|translate}}</span>
+                <div class="form-group col-md-3">
+                    <label for="units_{{$id}}" class="required full-width">
+                        <span class="field-name">{{'UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="units" data-ng-model="$ctrl.productModel.units"
-                               class="form-control full-width" name="nmUnits" ng-required="true" maxlength="40"
-                               size="40"/>
-                        <strong id="nm-unit-error" class="error"
-                                ng-if="nIngRecCtrl.showError($ctrl.productDetailsForm.nmUnits.$invalid,$ctrl.productDetailsForm.nmUnits.$touched)">
-                                    <span class="label label-danger"
-                                          ng-messages="$ctrl.productDetailsForm.nmUnits.$error">
-                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                    </span>
+
+                        <div class="rep-pad-top">
+                            <div class="rep-error" ng-class="{'has-error':$ctrl.productDetailsForm.nmUnits.$invalid}">
+                                <ui-select ng-model="$ctrl.productModel.units" id="units_{{$id}}" name="nmUnits"
+                                           class="rep-selectize-font full-width" required>
+                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
+                                                     class="rep-selectize-font form-control">
+                                        {{$select.selected[$ctrl.lang]}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="unitValue in $ctrl.unitsList | filter: {[$ctrl.lang]:$select.search}"
+                                            class="rep-selectize-font">
+                                        <span ng-bind-html="unitValue[$ctrl.lang] | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <strong id="units-error" class="error"
+                                ng-if="$ctrl.showError($ctrl.productDetailsForm.nmUnits)">
+                        <span class="label label-danger"
+                              ng-messages="$ctrl.productDetailsForm.nmUnits.$error">
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                        </span>
+                        </strong>
+                    </label>
+                </div>
+                <div class="form-group col-md-4" ng-show="$ctrl.isUnitsOther()"
+                     ng-class="{'has-error':$ctrl.productDetailsForm.otherUnits.$invalid}">
+                    <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="text" id="otherUnits_{{$id}}" data-ng-model="$ctrl.productModel.otherUnits"
+                               size="40" class="form-control" name="otherUnits"
+                               maxlength="40" ng-required="$ctrl.isUnitsOther()"/>
+                        <strong id="unitsOther-error" class="error"
+                                ng-if="$ctrl.showError($ctrl.productDetailsForm.otherUnits)">
+                        <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.otherUnits.$error">
+                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                        </span>
                         </strong>
                     </label>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
-                    <input type="text" id="per" data-ng-model="$ctrl.productModel.per"
-                           class="form-control" name="perVal" maxlength="40" size="40"/>
+                    <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span>
+                        <input type="text" id="per" data-ng-model="$ctrl.productModel.per"
+                               class="form-control" name="perVal" maxlength="40" size="40"/>
+                    </label>
                 </div>
-                <div class="col-md-5 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
-                    <label for="dosage-form_{{$id}}" class="required"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
+            </div>
+            <div class="row">
+                <div class="col-md-5 form-group">
+                    <label for="dosage-form_{{$id}}" class="required full-width">
+                        <span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                       <!-- <select id="dosage-form-listh_{{$id}}" data-ng-model="$ctrl.productModel.dosageForm"
-                                name="dosageForm" class="form-control full-width" required
-                                ng-options="formType |translate for formType in $ctrl.dosageFormList | orderByTranslatedOtherFirst">
-                        </select>-->
-                        <ui-select ng-model="$ctrl.productModel.dosageForm" id="dosage-form_{{$id}}" name="dosageForm"
-                                   class="rep-selectize-dropdown"
-                                   ng-disabled="false" title="Choose a dosage form" class="rep-selectize-font">
-                            <ui-select-match placeholder="Select or Search for a dosage form"
-                                             class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[$ctrl.lang]}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="formType in $ctrl.dosageFormList | filter: {[$ctrl.lang]:$select.search}"
-                                               class="rep-selectize-font">
-                                <span ng-bind-html="formType[$ctrl.lang] | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                        <div class="rep-pad-top">
+                            <div class="rep-error"
+                                 ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
+                                <ui-select ng-model="$ctrl.productModel.dosageForm" id="dosage-form_{{$id}}"
+                                           name="dosageForm" class="rep-selectize-font full-width" ng-disabled="false"
+                                           title="Choose a dosage form" required>
+                                    <ui-select-match placeholder="Select or Search for a dosage form"
+                                                     class="rep-selectize-font rep-selectize-dropdown form-control">
+                                        {{$select.selected[$ctrl.lang]}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="formType in $ctrl.dosageFormList | filter: {[$ctrl.lang]:$select.search}"
+                                            class="rep-selectize-font">
+                                        <span ng-bind-html="formType[$ctrl.lang] | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
                         <strong id="dosageForm-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.dosageForm)">
                         <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.dosageForm.$error">
@@ -99,18 +136,15 @@
                         </strong>
                     </label>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageOther.$invalid}"
+                <div class="col-md-5 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageOther.$invalid}"
                      ng-show="$ctrl.isDosageOther()">
                     <label for="dosage-form-other_(($id}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="dosage-form-other_(($id}}"
                                data-ng-model="$ctrl.productModel.dosageFormOther"
-                               class="form-control full-width"
-                               name="dosageOther"
-                               ng-required="$ctrl.isDosageOther()" maxlength="60" size="60"/>
+                               class="form-control" name="dosageOther" ng-required="$ctrl.isDosageOther()"
+                               maxlength="60" size="60"/>
                         <strong id="dosageOther-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.dosageOther)">
                         <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.dosageOther.$error">
@@ -119,16 +153,14 @@
                         </strong>
                     </label>
                 </div>
-            </div>
 
-            <div class="row">
                 <div class="col-md-12 form-group"
                      ng-class="{'has-error':$ctrl.productDetailsForm.companyName.$invalid}">
                     <label for="company-name_{{$id}}" class="required"><span
                             class="field-name">{{'COMPANY_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <input type="text" id="company-name_{{$id}}" data-ng-model="$ctrl.productModel.companyName"
-                           class="form-control full-width" name="companyName" ng-required="true" maxlength="60"
+                           class="form-control" name="companyName" ng-required="true" maxlength="60"
                            size="60"/>
                     <strong id="companyName-error" class="error"
                             ng-if="$ctrl.showError($ctrl.productDetailsForm.companyName)">

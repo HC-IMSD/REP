@@ -61,6 +61,24 @@
             self.savePressed = false;
             self.backup = angular.copy(self.ingModel);
         };
+
+        self.$onChanges = function (changes) {
+
+            //TODO: move init code to changes event where it belongs
+            if (changes.record && changes.record.currentValue) {
+                //self.ingModel = changes.record.currentValue;
+                self.ingModel = angular.copy(changes.record.currentValue);
+                if (!self.ingModel.ingId) {
+                    self.ingModel.newIngred = 'Y';
+                    self.newIngred = true;
+                } else {
+                    self.ingModel.newIngred = 'N';
+                    self.newIngred = false;
+                }
+
+            }
+        };
+
         $scope.$watch('ingRecCtrl.newIngred', function () {
             if (self.newIngred === true) {
                 self.ingModel.newIngred = 'Y';
@@ -80,7 +98,6 @@
         self.ingredSelectionUpdated = function (item, model, label, event) {
             self.ingModel.ingId = item.id;
         };
-
 
         self.saveIng = function () {
             if (self.activeIngForm.$valid) {
@@ -114,23 +131,7 @@
             self.onAddIng({ing: ingredientCopy});
         }
 
-        self.$onChanges = function (changes) {
 
-             //Commented out as none of the other details records do this
-             //TODO: move init code to changes event where it belongs
-            if (changes.record && changes.record.currentValue) {
-                //self.ingModel = changes.record.currentValue;
-                self.ingModel = angular.copy(changes.record.currentValue);
-                if (!self.ingModel.ingId) {
-                    self.ingModel.newIngred = 'Y';
-                    self.newIngred = true;
-                } else {
-                    self.ingModel.newIngred = 'N';
-                    self.newIngred = false;
-                }
-
-            }
-        };
 
 
         /**

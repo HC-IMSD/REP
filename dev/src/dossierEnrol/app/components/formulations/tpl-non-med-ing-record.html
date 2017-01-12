@@ -60,34 +60,39 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label for="units_{{$id}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
-                        <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{$id}}" name="nmUnits"
-                                   class="rep-selectize-font full-width" required>
-                            <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                             class="rep-selectize-font rep-selectize-dropdown form-control">
-                                {{$select.selected[nIngRecCtrl.lang]}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"
-                                               class="rep-selectize-font">
-                                <span ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <strong id="nm-unit-error" class="error"
-                            ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nmUnits.$invalid,nIngRecCtrl.nonMedIngForm.nmUnits.$touched)">
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+
+                        <div class="rep-pad-top">
+                            <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
+                                <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{$id}}" name="nmUnits"
+                                           class="rep-selectize-font full-width" required>
+                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
+                                                     class="rep-selectize-font rep-selectize-dropdown form-control">
+                                        {{$select.selected[nIngRecCtrl.lang]}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"
+                                            class="rep-selectize-font">
+                                        <span ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <strong id="nm-unit-error" class="error"
+                                ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nmUnits.$invalid,nIngRecCtrl.nonMedIngForm.nmUnits.$touched)">
                                     <span class="label label-danger"
                                           ng-messages="nIngRecCtrl.nonMedIngForm.nmUnits.$error">
                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                     </span>
-                    </strong>
+                        </strong>
+                    </label>
                 </div>
                 <div class="form-group col-md-4" ng-show="nIngRecCtrl.isUnitsOther()">
                     <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="otherUnits_{{$id}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
                                size="40" class="form-control" name="otherUnits"
-                               maxlength="40" ng-show="nIngRecCtrl.isUnitsOther()"/>
+                               maxlength="40" ng-required="nIngRecCtrl.isUnitsOther()"/>
                         <strong id="unitsOther-error" class="error"
                                 ng-if="ingRecCtrl.showError(nIngRecCtrl.nonMedIngForm.otherUnits.$invalid,nIngRecCtrl.nonMedIngForm.otherUnits.$touched)">
                         <span class="label label-danger" ng-messages="nIngRecCtrl.nonMedIngForm.otherUnits.$error">
@@ -199,6 +204,6 @@
                 </div>
             </div>
         </fieldset>
-         <!-- <pre>{{nIngRecCtrl.ingModel |json}}</pre>-->
+        <!-- <pre>{{nIngRecCtrl.ingModel |json}}</pre>-->
     </div>
 </ng-form>

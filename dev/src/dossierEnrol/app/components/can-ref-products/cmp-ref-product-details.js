@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('refProductDetailsModule', ['expandingTable', 'dossierDataLists', 'filterLists','ui.select'])
+        .module('refProductDetailsModule', ['expandingTable', 'dossierDataLists', 'filterLists','ui.select','hpfbConstants'])
 })();
 
 (function () {
@@ -32,42 +32,42 @@
                 isDetailValid:'&'
             }
         });
-    refProductDetailsCtrl.$inject = ['DossierLists','$scope','$translate'];
-    function refProductDetailsCtrl(DossierLists, $scope, $translate) {
+    refProductDetailsCtrl.$inject = ['DossierLists','$scope','$translate','OTHER'];
+    function refProductDetailsCtrl(DossierLists, $scope, $translate,OTHER) {
         var self = this;
         self.dosageFormList = DossierLists.getDosageFormList();
-        self.otherValue = DossierLists.getDosageOther();
+        self.unitsList=DossierLists.getUnitsList();
         self.savePressed=false;
         self.lang = $translate.proposedLanguage() || $translate.use();
-
+        self.productModel = {
+            brandName: "",
+            medIngredient: "",
+            strengths: "",
+            units: "",
+            otherUnits:"",
+            per: "",
+            dosageForm: "",
+            dosageFormOther: "",
+            companyName: ""
+        };
         self.$onInit = function () {
-            //TODO this is a bad approach should come from services
-            self.productModel = {
-                brandName: "",
-                medIngredient: "",
-                strengths: "",
-                units: "",
-                per: "",
-                dosageForm: "",
-                dosageFormOther: "",
-                companyName: ""
-            };
-            self.savePressed=false;
-            if (self.productRecord) {
-
-                self.productModel = angular.copy(self.productRecord);
-            }
-            self.backup = angular.copy(self.productModel);
 
         };
+        self.$onChanges=function(changes){
 
+            if(changes.productRecord && changes.productRecord.currentValue){
+                self.productModel = angular.copy(self.productRecord);
+                self.backup = angular.copy(self.productModel);
+                self.savePressed=false;
+            }
+        };
         /**
          * @ngDoc determines if dosage Other should be readonky
          * @returns {boolean}
          */
         self.isDosageOther = function () {
             if(!self.productModel.dosageForm) return false;
-            if (self.productModel.dosageForm.id  === self.otherValue) {
+            if (self.productModel.dosageForm.id  === OTHER) {
                 return true;
             } else {
                 self.productModel.dosageFormOther = "";
@@ -116,6 +116,25 @@
                 //TODO
             }
         };
+
+
+        /**
+         * @ngDoc determines if units Other should be shown
+         * @returns {boolean}
+         */
+        self.isUnitsOther = function () {
+
+            if(!self.productModel) return false;
+            if ((self.productModel.units.id === OTHER)) {
+                return true;
+            } else {
+                self.productModel.otherUnits = "";
+                return false;
+            }
+        };
+
+
+
         $scope.$watch('$ctrl.productDetailsForm.$dirty', function () {
             self.isDetailValid({state: !self.productDetailsForm.$dirty});
         }, true);

@@ -63,36 +63,39 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label for="units_{{$id}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm.unitsFld.$invalid}" >
-                        <ui-select ng-model="ingRecCtrl.ingModel.units" id="units_{{$id}}" name="unitsFld"
-                                   class="rep-selectize-font full-width" required>
-                            <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                             class="rep-selectize-font rep-selectize-dropdown form-control">
-                                {{$select.selected[ingRecCtrl.lang]}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
-                                               class="rep-selectize-font">
-                                <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                    <!--  <input type="text" id="units_{{$id}}" data-ng-model="ingRecCtrl.ingModel.units" size="40" maxlength="40"
-                             class="form-control full-width" name="unitsFld" ng-required="true"/>-->
-                    <strong id="units-error" class="error"
-                            ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.unitsFld.$invalid,ingRecCtrl.activeIngForm.unitsFld.$touched)">
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+
+                        <div class="rep-pad-top">
+                            <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm.unitsFld.$invalid}">
+                                <ui-select ng-model="ingRecCtrl.ingModel.units" id="units_{{$id}}" name="unitsFld"
+                                           class="rep-selectize-font full-width" required>
+                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
+                                                     class="rep-selectize-font form-control">
+                                        {{$select.selected[ingRecCtrl.lang]}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
+                                            class="rep-selectize-font">
+                                        <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <strong id="units-error" class="error"
+                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.unitsFld.$invalid,ingRecCtrl.activeIngForm.unitsFld.$touched)">
                         <span class="label label-danger"
                               ng-messages="ingRecCtrl.activeIngForm.unitsFld.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
-                    </strong>
+                        </strong>
+                    </label>
                 </div>
                 <div class="form-group col-md-4" ng-show="ingRecCtrl.isUnitsOther()">
                     <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="otherUnits_{{$id}}" data-ng-model="ingRecCtrl.ingModel.otherUnits"
                                size="40" class="form-control" name="otherUnits"
-                               maxlength="40" ng-show="ingRecCtrl.isUnitsOther()"/>
+                               maxlength="40" ng-required="ingRecCtrl.isUnitsOther()"/>
                         <strong id="unitsOther-error" class="error"
                                 ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.otherUnits.$invalid,ingRecCtrl.activeIngForm.otherUnits.$touched)">
                         <span class="label label-danger" ng-messages="ingRecCtrl.activeIngForm.otherUnits.$error">
