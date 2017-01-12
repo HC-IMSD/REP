@@ -28,12 +28,11 @@
 
                 $http.get(unitsUrl)
                     .then(function (response) {
+                        //PROCESS units list. Not creating translate list
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(),options.key);
-                        var translateList = _createTranslateList(newList, options.key);
+                       // var translateList = _createTranslateList(newList, options.key);
                         DossierLists.createUnitsList(newList);
-                        console.log("This is the units");
-                        console.log(newList);
-                        angular.extend(result, translateList);
+                        //angular.extend(result, translateList);
                         return $http.get(roaUrl); //country list load
                     })
                     .then(function (response) {

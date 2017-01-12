@@ -44,6 +44,8 @@
   "ANIMAL_HUMAN_HDING": "D. Animal and / or Human Sourced Materials",
   "ROA_TITLE": "E. Routes of Administration",
   "COUNTRIES_MANUFACT": "F. Countries of manufacture for this drug product",
-  "NOT_IN_LIST": "Not in list"
+  "NOT_IN_LIST": "Not in list",
+  "UNITS_SRCH":"Select or Search Units"
+
 
 }

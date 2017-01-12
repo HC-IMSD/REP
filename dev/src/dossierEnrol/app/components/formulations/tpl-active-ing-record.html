@@ -10,16 +10,12 @@
                             class="field-name">{{'ING_NAME'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
                         <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName"
-                               id="ing-name_{{$id}}"
-                               size="100"
+                               id="ing-name_{{$id}}" size="100"
                                uib-typeahead=" rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
                                class="form-control rep-normal-font" typeahead-show-hint="true" typeahead-min-length="2"
                                ng-required="true" typeahead-no-results="ingRecCtrl.newIngred"
                                typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
                                typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html">
-                        <!-- <input type="text" id="ing-name" data-ng-model="ingRecCtrl.ingModel.ingName" name="ingredName"
-                                class="form-control full-width" name="text" ng-required="true" maxlength="100"
-                                size="100"/>-->
                         <strong id="ingredientName-error" class="error"
                                 ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.ingredName.$invalid,ingRecCtrl.activeIngForm.ingredName.$touched)">
                                     <span class="label label-danger"
@@ -71,7 +67,7 @@
                     <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm.unitsFld.$invalid}" >
                         <ui-select ng-model="ingRecCtrl.ingModel.units" id="units_{{$id}}" name="unitsFld"
                                    class="rep-selectize-font full-width" required>
-                            <ui-select-match placeholder="Select or Search Units"
+                            <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
                                              class="rep-selectize-font rep-selectize-dropdown form-control">
                                 {{$select.selected[ingRecCtrl.lang]}}
                             </ui-select-match>
