@@ -41,5 +41,6 @@
   "CALENDAR": "Pick date from calendar",
   "HIDE_CALENDAR": "Hide Calendar (escape key)",
   "OTHER": "Other",
-  "HELP_REP_CONTACT": "REP Contact Instructions"
+  "HELP_REP_CONTACT": "REP Contact Instructions",
+  "OTHER_UNITS": "Units other details"
 }

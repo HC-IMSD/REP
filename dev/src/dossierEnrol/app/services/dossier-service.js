@@ -8,7 +8,8 @@
     angular
         .module('dossierService', [
             'dossierDataLists',
-            'hpfbConstants'
+            'hpfbConstants',
+            'dataLists'
         ]);
 })();
 
@@ -18,8 +19,8 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'OTHER'];
-    function DossierService(DossierLists, $translate, $filter, OTHER) {
+    DossierService.$inject = ['DossierLists', '$translate', '$filter','getCountryAndProvinces', 'OTHER','UNKNOWN'];
+    function DossierService(DossierLists, $translate, $filter,getCountryAndProvinces, OTHER, UNKNOWN) {
         var yesValue = 'Y';
         var noValue = 'N';
 
@@ -450,7 +451,6 @@
                     product.medIngredient = info[i].medicinal_ingredient;
                     product.dosageForm = "";
                     if (info[i].dosage_form) {
-                        console.log("is dosage form"+info[i].dosage_form.__text);
                         product.dosageForm = $filter('filter')(DossierLists.getDosageFormList(), {id: info[i].dosage_form.__text})[0];
                     }
                     product.dosageFormOther = info[i].dosage_form_other;
@@ -481,12 +481,23 @@
                 var list = [];
 
                 for (var i = 0; i < input.length; i++) {
-                    list.push({
-                        "id": (i + 1),
-                        "name": input[i].country_with_unknown,
-                        "unknownCountryDetails": input[i].unknown_country_details
-                    });
 
+                   var obj = {
+                        "id": i,
+                        "country":"",
+                        "display":"",
+                        "unknownCountryDetails":""
+                    };
+                    if( input[i].country_with_unknown.__text===UNKNOWN){
+                        obj.country = getCountryAndProvinces.getUnknownCountryRecord();
+                    }else {
+                        obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id:  input[i].country_with_unknown.__text})[0];
+                    }
+                    if(obj.country){
+                        obj.display=obj.country.id
+                    }
+                    obj.unknownCountryDetails=input[i].unknown_country_details;
+                    list.push(obj);
                 }
                 return list;
             };
@@ -772,13 +783,22 @@
             angular.forEach(list, function (item) {
 
                 _id = _id + 1;
+
                 var obj = {
                     "id": _id,
-                    "name": item
+                    "country":"",
+                    "display":"",
+                    "unknownCountryDetails":""
                 };
-
+                if(item.__text===UNKNOWN){
+                    obj.country = getCountryAndProvinces.getUnknownCountryRecord();
+                }else {
+                    obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: item.__text})[0];
+                }
+                if(obj.country){
+                    obj.display=obj.country.id
+                }
                 resultList.push(obj);
-
             });
 
             return resultList;
@@ -907,7 +927,17 @@
                     var countries = info[i].sourceAnimalDetails.countryList;
                     for (var v = 0; v < countries.length; v++) {
                         var countryRecord = {};
-                        countryRecord.country_with_unknown = countries[v].name;
+                        countryRecord.country_with_unknown = {
+                            _label_en: "",
+                            _label_fr: "",
+                            __text:  ""
+                        }
+                        if( countries[v].country){
+                            countryRecord.country_with_unknown._label_en= countries[v].country.en;
+                            countryRecord.country_with_unknown._label_fr= countries[v].country.fr;
+                            countryRecord.country_with_unknown.__text= countries[v].country.id;
+                        }
+
                         countryRecord.unknown_country_details = countries[v].unknownCountryDetails;
                         ing.animal_sourced_section.country_origin_list.country_origin.push(countryRecord);
                     }
@@ -1138,7 +1168,12 @@
 
             var resultList = [];
             angular.forEach(list, function (item) {
-                resultList.push(item.name);
+                var country= {
+                    _label_en: item.country.en,
+                    _label_fr: item.country.fr,
+                    __text: item.country.id
+                };
+                resultList.push(country);
             });
             return resultList;
         }

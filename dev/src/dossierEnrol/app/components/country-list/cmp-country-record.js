@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('countryRecordModule', ['ui.select'])
+        .module('countryRecordModule', ['ui.select','hpfbConstants'])
 })();
 
 (function () {
@@ -31,27 +31,31 @@
             }
         });
 
-    countryRecordController.$inject = ['$filter']
-    function countryRecordController($filter) {
+    countryRecordController.$inject = ['$filter','$translate','UNKNOWN'];
+    function countryRecordController($filter, $translate, UNKNOWN) {
         var vm = this;
 
-        vm.model = {};
+        vm.model = {"id": "", "country": "","unknownCountryDetails":"","display":""};
         vm.countries=[];
-        vm.$onInit = function(){
+        vm.lang = $translate.proposedLanguage() || $translate.use();
 
+        vm.$onInit = function(){
+            //add init code here
         };
+        /**
+         * Updates the display value for the object for summary display
+         */
+        vm.countryChanged=function(){
+            vm.model.display=vm.model.country.id;
+        }
+
 
         vm.$onChanges = function (changes) {
-
             if(changes.countryList){
                 vm.countries=changes.countryList.currentValue;
             }
-            if (changes.record) {
+            if (changes.record && changes.record.currentValue) {
                 vm.model = changes.record.currentValue;
-                if (vm.model.name) {
-                    vm.model.pair = $filter('findCountryObject')(vm.countries, vm.model.name);
-                    //TODO get object
-                }
             }
 
         };
@@ -66,8 +70,10 @@
         }
 
         vm.isUnknown=function(){
-            if(vm.model.name==='UNKNOWN'){ //TODO constants service
-
+            if(!vm.model || !vm.model.country){
+                return false;
+            }
+            if(vm.model.country.id===UNKNOWN){
                 return true;
             }
             return false;

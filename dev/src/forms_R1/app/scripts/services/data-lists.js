@@ -9,7 +9,7 @@
     'use strict';
 
     angular
-        .module('dataLists', []);
+        .module('dataLists', ['hpfbConstants']);
 
 })();
 
@@ -25,13 +25,15 @@
         .factory('getCountryAndProvinces', getService);
 
     /* @ngInject */
-    function getService() {
+    getService.inject=['UNKNOWN'];
+    function getService(UNKNOWN) {
         this.countryList = [];
         var service = {
             getCountries: getCountryValuesArray,
             getProvinces: getProvinceValuesArray,
             getUSStates: getUSStatesValueArray,
-            createCountryList: _createCountryArray
+            createCountryList: _createCountryArray,
+            getUnknownCountryRecord:_getUnknownCountryRec
         };
         return service;
 
@@ -39,22 +41,18 @@
 
 
         function _createCountryArray(translateJson) {
-            var result = [];
-            var keys = Object.keys(translateJson);
-            for (var i = 0; i < keys.length; i++) {
-                //var val = translateJson[keys[i]];
-                result.push(keys[i])
-            }
-            this.countryList = result;
-            //return extraList;
+            this.countryList = translateJson;
         }
 
-        function getCanada() {
-            return 'CAN';
-        }
+        function _getUnknownCountryRec(){
 
-        function getUSA() {
-            return 'USA';
+            return(
+                {
+                    "id":UNKNOWN,
+                    "en":"Unknown",
+                    "fr":"Inconnu"
+                }
+            )
         }
 
         //todo why is this listed twice?
@@ -157,12 +155,12 @@
     /* @ngInject */
     function getCountries() {
         var service = {
-            getCountryList3Letter: getCountryList3Letter
+            //getCountryList3Letter: getCountryList3Letter
         };
         return service;
 
         ////////////////
-
+        //TODO deprecate
         function getCountryList3Letter() {
             return (
                 [

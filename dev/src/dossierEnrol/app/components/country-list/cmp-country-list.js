@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('countryListModule', ['dataLists', 'countryRecordModule', 'ui.select', 'dataLists'])
+        .module('countryListModule', ['dataLists', 'countryRecordModule', 'ui.select', 'hpfbConstants'])
 })();
 
 (function () {
@@ -27,10 +27,10 @@
             }
         });
 
-    countryListController.$inject = ['$filter', 'getCountryAndProvinces'];
+    countryListController.$inject = ['$filter', 'getCountryAndProvinces','UNKNOWN'];
 
 
-    function countryListController($filter, getCountryAndProvinces) {
+    function countryListController($filter, getCountryAndProvinces,UNKNOWN) {
         var self = this;
         self.baseCountries = getCountryAndProvinces.getCountries();
         self.countryList = "";
@@ -41,19 +41,19 @@
         self.columnDef = [
             {
                 label: self.fieldLabel,
-                binding: "name",
+                binding: "display",
                 width: "100"
-            },
+            }
         ]
 
         self.hasUnknown = false;
-        self.emptyModel = {"id": "", "name": ""}
+        self.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
+
 
         self.$onInit = function () {
-
+            console.log(self.baseCountries);
             if (angular.isUndefined(self.model.list)) { //TODO should be comimg from parent
                 self.model.list = [];
-                console.log("creating an empty list")
             }
             //should never happen,fallback...
             if (angular.isUndefined(self.countryList)) {
@@ -72,15 +72,14 @@
         function setUnknownCountryState(isUnknown) {
             var countries = angular.copy(self.baseCountries);
             if (isUnknown) {
-                countries.push("UNKNOWN") //TODO should be from constants service
-                self.countryList = $filter('orderByCountryAndLabel')(countries);
-                //self.countryList = countries;
+                var unknownRec=getCountryAndProvinces.getUnknownCountryRecord();
+                countries.unshift(unknownRec);
+                self.countryList =countries;
                 self.hasUnknown = true;
-                self.emptyModel = {id: "", name: "", unknownCountryDetails: "", pair: ""};
                 self.columnDef = [
                     {
                         label: self.fieldLabel,
-                        binding: "name",
+                        binding: "display",
                         width: "50"
                     },
                     {
@@ -90,13 +89,13 @@
                     },
                 ]
             } else {
-                self.countryList = self.countryList = $filter('orderByCountryAndLabel')(self.baseCountries);
+                self.countryList = countries;
                 self.hasUnknown = false;
-                self.emptyModel = {id: "", name: "", pair: ""};
+                self.emptyModel = {id: "", en: "", fr: ""};
                 self.columnDef = [
                     {
                         label: self.fieldLabel,
-                        binding: "name",
+                        binding: "display",
                         width: "100"
                     }
                 ]

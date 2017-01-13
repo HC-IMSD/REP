@@ -9,16 +9,16 @@
                     <label for="country_{{$id}}" class="required">
                         <span class="field-name"> {{'COUNTRY_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <ui-select ng-model="countryRecCtrl.model.pair" id="country_{{$id}}" name="countryName"
-                                   class="rep-selectize-dropdown" required
+                        <ui-select ng-model="countryRecCtrl.model.country" id="country_{{$id}}" name="countryName"
+                                   class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required
                                    ng-disabled="false" title="Choose a country" class="rep-selectize-font"
-                                   data-ng-change="countryRecCtrl.model.name=countryRecCtrl.model.pair.key">
+                                   data-ng-change="countryRecCtrl.model.name=countryRecCtrl.model.country">
                             <ui-select-match placeholder="Select or Search for country" name="countryMatch"
-                                             class="rep-selectize-font rep-selectize-dropdown">{{$select.selected.label}}
+                                             class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[countryRecCtrl.lang]}}
                             </ui-select-match>
-                            <ui-select-choices repeat="country in countryRecCtrl.countries | filter: $select.search"
+                            <ui-select-choices repeat="countryRecord in countryRecCtrl.countryList | filter:{[countryRecCtrl.lang]: $select.search} track by countryRecord.id"
                                                class="rep-selectize-font">
-                                <span ng-bind-html="country.label | highlight: $select.search"></span>
+                                <span ng-bind-html="countryRecord[countryRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
                         <strong id="countryName-error" class="error"

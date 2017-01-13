@@ -14,11 +14,9 @@
 
 (function () {
     'use strict';
-
     angular
         .module('commonStaticLists')
         .factory('CommonLists', getService);
-
 
     /* @ngInject */
     getService.$inject = ['YES', 'NO'];

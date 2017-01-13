@@ -12,6 +12,7 @@
         .constant('OTHER', 'OTHER')
         .constant('YES', 'Y')
         .constant('NO', 'N')
-        .constant('USA','USA');
+        .constant('USA','USA')
+        .constant("UNKNOWN","UNKNOWN");
 
 })();
