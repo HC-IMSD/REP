@@ -3,6 +3,7 @@
     angular
         .module('companyApp', [
             'companyMain',
+            'companyLoadService',
             'translations'
         ])
 })();
@@ -12,8 +13,6 @@
     angular
         .module('companyApp')
         .controller('MainController', MainController);
-
-    //MainController.$inject = ['CompanyService', 'hpfbFileProcessing', '$filter', '$scope']
 
     function MainController() {
 
@@ -30,8 +29,10 @@
         .config(['$translateProvider', function ($translateProvider) {
 
             $translateProvider.preferredLanguage('@@prefLang');
+            $translateProvider.useLoader('customLoad');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             $translateProvider.useSanitizeValueStrategy(null);
+            $translateProvider.forceAsyncReload(true); //needed for the custom loader
         }]);
 })();

@@ -8,9 +8,11 @@
 
     angular
         .module('addressModule', [
-            'countrySelect',
+            'hpfbConstants',
             'dataLists',
-            'filterLists'
+            'filterLists',
+            'ui.select'
+
         ])
 })();
 
@@ -18,6 +20,10 @@
     'use strict';
     angular
         .module('addressModule')
+        .config(function (uiSelectConfig) {
+            //choices: select2, bootstrap, selectize
+            uiSelectConfig.theme = 'select2';
+        })
         .component('cmpAddressDetails', {
             templateUrl: 'app/scripts/components/addressDetails/tpl-address-details.html',
             controller: addressCtrl,
@@ -29,31 +35,32 @@
                 isAmend: '<'
             }
         });
-    addressCtrl.$inject = [ 'getCountryAndProvinces', 'getCountriesISO3166'];
+    addressCtrl.$inject = ['getCountryAndProvinces','$translate','CANADA','USA'];
 
-    function addressCtrl( getCountryAndProvinces, getCountriesISO3166) {
+    function addressCtrl( getCountryAndProvinces,$translate, CANADA,USA) {
 
         var vm = this;
         vm.isEditable = true;
         //put model updates in ng-change but defer on blur. Now model updates on blur only if it changed
         vm.ngModelOptSetting = {updateOn: 'blur'};
-
+        vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.addressModel = {
             addressID: "",
             isDetailValid: false,
             street: "",
             city: "",
             country: "",
+            countryDisplay:"",
             stateLov: "",
             stateText: "",
             postalCode: ""
-
         };
+
         vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
         vm.hideProvinceText = false;
-        vm.countries = getCountriesISO3166.getCountryList3Letter();
+        vm.countryList= getCountryAndProvinces.getCountries();
         vm.$onInit = function () {
 
             if (vm.addressRecord) {
@@ -66,7 +73,6 @@
                 vm.hideProvinceText = getProvinceTextState();
                 vm.postalPattern = getPostalPattern();
                 vm.hideProvinceDdl = !vm.hideProvinceText;
-
             }
         }
         /**
@@ -81,6 +87,14 @@
                 vm.isEditable = changes.isAmend.currentValue;
             }
         };
+        /**
+         * Updates the display value for the object for summary display
+         */
+        vm.countryChanged=function(){
+            vm.addressModel.countryDisplay=vm.addressModel.country.id;
+        }
+
+
         vm.showError = function (ctrl) {
 
             if (!ctrl) {
@@ -127,7 +141,7 @@
             var postal=vm.addressModel.postalCode;
             if(!postal) return;
             postal= postal.toUpperCase();
-            if(postal.length==6 && vm.addressModel.country === 'CAN'){
+            if(postal.length==6 && vm.addressModel.country.id === CANADA){
                 postal=postal.substring(0,3)+" "+postal.substring(3,postal.length)
             }
             vm.addressModel.postalCode=postal;
@@ -147,36 +161,36 @@
         }
 
         var isPostalRequiredFn = function () {
-            return (vm.addressModel.country === 'CAN' || vm.addressModel.country === 'USA');
+            return (vm.addressModel.country.id === CANADA || vm.addressModel.country.id === USA);
         }
 
         var getProvinceStateList = function () {
 
-            if (vm.addressModel.country === 'CAN') {
+            if (vm.addressModel.country.id === CANADA) {
                 return getCountryAndProvinces.getProvinces();
 
             }
-            else if (vm.addressModel.country === 'USA') {
+            else if (vm.addressModel.country.id === USA) {
                 return getCountryAndProvinces.getUSStates();
             }
         }
 
         var getProvinceListLabel = function () {
-            var label = (vm.addressModel.country === 'USA') ? "STATE" : "PROVINCE";
+            var label = (vm.addressModel.country.id === USA) ? "STATE" : "PROVINCE";
             return label;
         }
 
 
         var getPostalLabel = function () {
-            var label = (vm.addressModel.country === 'USA') ? "ZIP" : "POSTAL";
+            var label = (vm.addressModel.country.id === USA) ? "ZIP" : "POSTAL";
             return label;
         }
 
         var getPostalPattern = function () {
             var postalPtrn = null;
-            if (vm.addressModel.country === 'USA') {
+            if (vm.addressModel.country.id === USA) {
                 postalPtrn = /^[0-9]{5}(?:-[0-9]{4})?$/;
-            } else if (vm.addressModel.country === 'CAN') {
+            } else if (vm.addressModel.country.id === CANADA) {
                 postalPtrn = /^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$/;
             }
 

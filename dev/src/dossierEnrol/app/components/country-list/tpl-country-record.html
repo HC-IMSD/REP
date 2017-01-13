@@ -11,8 +11,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <ui-select ng-model="countryRecCtrl.model.country" id="country_{{$id}}" name="countryName"
                                    class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required
-                                   ng-disabled="false" title="Choose a country" class="rep-selectize-font"
-                                   data-ng-change="countryRecCtrl.model.name=countryRecCtrl.model.country">
+                                   ng-disabled="false" title="Choose a country" class="rep-selectize-font">
                             <ui-select-match placeholder="Select or Search for country" name="countryMatch"
                                              class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[countryRecCtrl.lang]}}
                             </ui-select-match>
@@ -22,9 +21,9 @@
                             </ui-select-choices>
                         </ui-select>
                         <strong id="countryName-error" class="error"
-                                ng-if="countryRecCtrl.showError(countryForm.countrySave.$invalid,(countryForm.countryName.$touched||countryForm.countryMatch.$touched))">
+                                ng-if="countryRecCtrl.showError(countryForm.countryName.$invalid,countryForm.countryName.$touched)">
 
-                            <span class="label label-danger" ng-messages="countryForm.countrySave.$error">
+                            <span class="label label-danger" ng-messages="countryForm.countryName.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                             </span>
                         </strong>
@@ -52,7 +51,6 @@
                 </div>
             </div>
             <div class="row">
-                <input type="text" ng-show="false" ng-model="countryRecCtrl.model.name" name="countrySave" required/>
                 <button ng-click="countryRecCtrl.deleteRecord(countryRecCtrl.model.id)"
                         class="btn btn-danger btn-md">{{'DELETE'|translate}}
                 </button>

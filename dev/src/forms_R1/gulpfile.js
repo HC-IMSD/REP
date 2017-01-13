@@ -210,6 +210,7 @@ var jsServiceFiles = {
     activityService: paths.services + 'activity-service.js',
     applicationInfoService: paths.services + 'application-info-service.js',
     companyService: paths.services + 'company-service.js',
+    companyLoadService:paths.services+'company-load-service.js',
     dataListsActivity: paths.services + 'data-lists.activity.js',
     dataLists: paths.services + 'data-lists.js',
     filterLists: paths.services + 'filter-lists.js',
@@ -622,6 +623,7 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                     return file.contents.toString('utf8')
                 }
             }))
+
             //get all the third party libraries
             .pipe(inject(gulp.src([
                     'app/lib/**/*.js',
@@ -632,6 +634,16 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                     ignorePath: ignorePath,
                     addRootSlash: false
                 }))
+            .pipe(inject(gulp.src([
+                    styleFiles.rep,
+                    styleFiles.select,
+                    styleFiles.select2Style
+                ]),
+                {
+                    ignorePath: ignorePath,
+                    addRootSlash: false
+                }
+            ))
             .pipe(inject(gulp.src([
 
                     buildDir + 'app/scripts/components/**/*.js',
@@ -987,7 +999,7 @@ gulp.task('dev-company-copySrc', function () {
         jsComponentPaths.companyMainPath + '**/*',
         jsComponentPaths.applicationInfoPath + '**/*',
         jsComponentPaths.contactDetailsPath + '**/*',
-        jsComponentPaths.countrySelectPath + '**/*',
+       // jsComponentPaths.countrySelectPath + '**/*',
         jsComponentPaths.addressRolePath + '**/*',
         jsComponentPaths.expandingTablePath + '**/*',
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
@@ -1006,6 +1018,7 @@ gulp.task('dev-company-copySrc', function () {
     }
     //add the services
     companyJs.push(jsServiceFiles.companyService);
+    companyJs.push(jsServiceFiles.companyLoadService);
     companyJs.push(jsServiceFiles.applicationInfoService);
     companyJs.push(jsServiceFiles.filterLists);
     companyJs.push(jsServiceFiles.hpfbConstants);
@@ -1071,7 +1084,7 @@ gulp.task('dev-company-copyTranslate', function () {
     return (pipes.translateDev(translationList, paths.buildDevCompany))
 });
 
-gulp.task('dev-company-htmlBuild', ['dev-company-copySrc', 'dev-company-copyLib', 'dev-company-createRootJS', 'dev-company-createResources'], function () {
+gulp.task('dev-company-htmlBuild', ['dev-company-copyData','dev-company-copySrc', 'dev-company-copyLib', 'dev-company-createRootJS', 'dev-company-createResources'], function () {
     var ignoreDir = '/build/dev/company';
     var buildDir = paths.buildDevCompany;
     var htmlPartial = jsRootContent.partialCompanyRoot;
@@ -1233,6 +1246,12 @@ gulp.task('dev-dossier-copyData', function () {
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
+});
+gulp.task('dev-company-copyData', function () {
+    var def = Q.defer();
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildDevCompany)));
 });
 
 

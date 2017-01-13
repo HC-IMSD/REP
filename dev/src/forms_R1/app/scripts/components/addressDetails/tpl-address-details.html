@@ -33,11 +33,29 @@
 
             </div>
             <div class="col-md-6">
-                <cmp-country-select form-name="addressForm" selected-country="adr.addressModel.country"
+               <!-- <cmp-country-select form-name="addressForm" selected-country="adr.addressModel.country"
                                     countries="adr.countries" is-disabled="!adr.isEditable"
                                     show-errors="adr.showErrors()"
                                     country-change="adr.onSelectedCountryChange($event.country)"
-                ></cmp-country-select>
+                ></cmp-country-select>-->
+                <ui-select ng-model="adr.addressModel.country" id="country_{{$id}}" name="countryName"
+                           class="rep-selectize-dropdown" on-select="adr.countryChanged($item, $model)" required
+                           ng-disabled="false" title="Choose a country" class="rep-selectize-font">
+                    <ui-select-match placeholder="Select or Search for country"
+                                     class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[countryRecCtrl.lang]}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="countryRecord in adr.countryList | filter:{[adr.lang]: $select.search} track by countryRecord.id"
+                                       class="rep-selectize-font">
+                        <span ng-bind-html="countryRecord[adr.lang] | highlight: $select.search"></span>
+                    </ui-select-choices>
+                </ui-select>
+                <strong id="countryName-error" class="error"
+                        ng-if="countryRecCtrl.showError(addressForm.countryName.$invalid,addressForm.countryName.$touched)">
+                            <span class="label label-danger" ng-messages="addressForm.countrySave.$error">
+                                <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                            </span>
+                </strong>
+                </label>
             </div>
         </div>
         <div class="row">
