@@ -80,7 +80,7 @@
         return service;
 
         function _setActiveArray(data) {
-            vm.activeList = angular.copy(data);
+            vm.activeList = data;
         }
 
         function _getActiveArray() {

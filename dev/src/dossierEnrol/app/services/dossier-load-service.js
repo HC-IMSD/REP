@@ -16,8 +16,6 @@
         .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'DossierLists', 'OTHER', function ($http, $q, $filter, getCountryAndProvinces, DossierLists, OTHER) {
 
             return function (options) {
-
-
                 var deferred = $q.defer();
                 var dataFolder = "data/"; //relative forlder to the data
                 var roaUrl = dataFolder + "roa.json";
