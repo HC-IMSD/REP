@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('companyService', []);
+        .module('companyService', ['dataLists']);
 
 })();
 
@@ -16,9 +16,10 @@
     'use strict';
     angular
         .module('companyService')
-        .factory('CompanyService', CompanyService)
+        .factory('CompanyService', CompanyService);
 
-    function CompanyService() {
+    CompanyService.$inject=['$filter','getCountryAndProvinces'];
+    function CompanyService($filter,getCountryAndProvinces) {
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
@@ -234,7 +235,11 @@
                     address.city = adrList[i].company_address_details.city;
                     address.stateList = adrList[i].company_address_details.province_lov;
                     address.stateText = adrList[i].company_address_details.province_text;
-                    address.country = adrList[i].company_address_details.country;
+                    address.country ="";
+                    if( adrList[i].company_address_details.country.__text) {
+                        address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: adrList[i].company_address_details.country.__text})[0];
+                        address.countryDisplay=address.country.id;
+                    }
                     address.postalCode = adrList[i].company_address_details.postal_code;
                     list.push(address);
                 }
@@ -305,7 +310,15 @@
                 address.company_address_details.city = adrList[i].city;
                 address.company_address_details.province_lov = adrList[i].stateList;
                 address.company_address_details.province_text = adrList[i].stateText;
-                address.company_address_details.country = adrList[i].country;
+                address.company_address_details.country="";
+                if(adrList[i].country){
+                    address.company_address_details.country = {
+                        _label_en: adrList[i].country.en,
+                        _label_fr: adrList[i].country.fr,
+                        __text: adrList[i].country.id
+                    };
+                }
+               // address.company_address_details.country = adrList[i].country;
                 address.company_address_details.postal_code = adrList[i].postalCode;
                 addressList.push(address);
             }

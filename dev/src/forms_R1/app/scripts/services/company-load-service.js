@@ -5,14 +5,14 @@
 (function () {
     'use strict';
     angular
-        .module('companyLoadService', ['dataLists'])
+        .module('companyLoadService', ['dataLists','hpfbConstants'])
 })();
 
 (function () {
     'use strict';
     angular
         .module('companyLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', function ($http, $q, $filter, getCountryAndProvinces) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces','CANADA','USA', function ($http, $q, $filter, getCountryAndProvinces,CANADA,USA) {
 
             return function (options) {
                 var deferred = $q.defer();
@@ -22,7 +22,7 @@
                 $http.get(countryUrl)
                     .then(function (response) {
                         //PROCESS country list data
-                        var newList =  _createSortedArray(response.data,options.key);
+                        var newList =  _createSortedArrayNAFirst(response.data,options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
@@ -81,12 +81,14 @@
                 return newList;
             }
 
-            function _createSortedArray(jsonList,lang){
+            function _createSortedArrayNAFirst(jsonList,lang){
                 var result = [];
+                result.push({"id": "CAN", "en": "Canada", "fr": "Canada"});
+                result.push({"id":"USA","en":"United States","fr":"États-Unis"});
                 angular.forEach($filter('orderByLocale')(jsonList,lang), function (sortedObject) {
-                    ///if (sortedObject.key !== OTHER) {
+                    if (sortedObject.key !== CANADA && sortedObject.key !== USA) {
                         result.push(sortedObject);
-                    //}
+                    }
                 });
                 return result;
             }

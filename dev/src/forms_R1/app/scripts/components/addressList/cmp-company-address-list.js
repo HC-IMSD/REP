@@ -50,7 +50,7 @@
             },
             {
                 label: "COUNTRY",
-                binding: "country",
+                binding: "countryDisplay",
                 width: "25"
             },
             {

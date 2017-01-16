@@ -92,9 +92,27 @@
          */
         vm.countryChanged=function(){
             vm.addressModel.countryDisplay=vm.addressModel.country.id;
-        }
+            vm.provListLabel = getProvinceListLabel();
+            vm.postalLabel = getPostalLabel();
+            vm.isPostalRequired = isPostalRequiredFn();
+            vm.provinces = getProvinceStateList();
+            vm.hideProvinceText = getProvinceTextState();
+            vm.postalPattern = getPostalPattern();
+            vm.hideProvinceDdl = !vm.hideProvinceText;
+        };
 
-
+        vm.isCountryCanada=function(){
+          if(!vm.addressModel || !vm.addressModel.country){
+              return false;
+          }
+            return(vm.addressModel.country.id===CANADA)
+        };
+        vm.isCountryUsa=function(){
+            if(!vm.addressModel || !vm.addressModel.country){
+                return false;
+            }
+            return(vm.addressModel.country.id===USA)
+        };
         vm.showError = function (ctrl) {
 
             if (!ctrl) {
@@ -104,7 +122,8 @@
                 return true
             }
             return false
-        }
+        };
+
 
         vm.onDeleteButtonClick = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
@@ -116,18 +135,11 @@
         }
 
 
-        vm.onSelectedCountryChange = function (newValue) {
-            vm.addressModel.country = newValue;
-            vm.provListLabel = getProvinceListLabel();
-            vm.postalLabel = getPostalLabel();
-            vm.isPostalRequired = isPostalRequiredFn();
-            vm.provinces = getProvinceStateList();
-            vm.hideProvinceText = getProvinceTextState();
-            vm.postalPattern = getPostalPattern();
-            vm.hideProvinceDdl = !vm.hideProvinceText;
+       /* vm.onSelectedCountryChange = function () {
+
 
         }
-
+*/
         vm.onAddressRoleUpdate = function (newRole) {
             //  vm.addressModel.addressRole = newRole;
             // vm.updateAddressModel();
