@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionService', [])
+        .module('transactionService', ['dataLists'])
 })();
 
 
@@ -16,7 +16,9 @@
         .module('transactionService')
         .factory('TransactionService', TransactionService)
 
-    function TransactionService() {
+    TransactionService.$inject=['$filter','getCountryAndProvinces'];
+
+    function TransactionService($filter,getCountryAndProvinces) {
         function TransactionService() {
             //construction logic
             var defaultTransactionData = {
@@ -156,7 +158,7 @@
                 //reg address
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact === 'Y';
-                model.activityAddress = _transformAddressFromFileObj(jsonObj.regulatory_activity_address);
+                model.activityAddress = _transformAddressFromFileObj($filter,getCountryAndProvinces,jsonObj.regulatory_activity_address);
                 // model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj.rep_submission_contact_record);
 
                 this._transformEctdFromFile(model, jsonObj.ectd);
@@ -379,18 +381,31 @@
         address.city = addressObj.city;
         address.province_lov = addressObj.stateList;
         address.province_text = addressObj.stateText;
-        address.country = addressObj.country;
+        address.country = "";
+        if(addressObj.country) {
+            address.country =
+            {
+                _label_en: addressObj.country.en,
+                _label_fr: addressObj.country.fr,
+                __text: addressObj.country.id
+            }
+        }
         address.postal_code = addressObj.postalCode;
         return (address);
     }
 
-    function _transformAddressFromFileObj(addressObj) {
+    function _transformAddressFromFileObj($filter,getCountryAndProvinces,addressObj) {
         var address = {};
         address.street = addressObj.street_address;
         address.city = addressObj.city;
         address.stateList = addressObj.province_lov;
         address.stateText = addressObj.province_text;
-        address.country = addressObj.country;
+        address.country = "";
+        if( addressObj.country.__text) {
+            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id:addressObj.country.__text})[0];
+            address.countryDisplay= addressObj.country.id;
+        }
+
         address.postalCode = addressObj.postal_code;
         return (address);
     }
@@ -420,7 +435,8 @@
             city: "",
             stateList: "",
             stateText: "",
-            country: "",
+            country: {"id":"","en":"","fr":""},
+            countryDisplay:"",
             "postalCode": ""
         }
         )

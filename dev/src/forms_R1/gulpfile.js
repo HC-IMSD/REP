@@ -216,6 +216,7 @@ var jsServiceFiles = {
     filterLists: paths.services + 'filter-lists.js',
     hpfbConstants: paths.services + 'hpfb-constants.js',
     transactionService: paths.services + 'transactionService.js',
+    transactionLoadService: paths.services +'transaction-load-service.js',
     repContactService: paths.services + 'rep-contact-service.js',
     commonLists: paths.services + 'common-lists.js'
 };
@@ -1139,6 +1140,7 @@ gulp.task('dev-transaction-copySrc', function () {
         transactionJs.push(transactionSrcPaths[i] + '.js')
     }
     transactionJs.push(jsServiceFiles.transactionService);
+    transactionJs.push(jsServiceFiles.transactionLoadService);
     transactionJs.push(jsServiceFiles.repContactService);
     transactionJs.push(jsServiceFiles.dataLists);
     transactionJs.push(jsServiceFiles.dataListsActivity);
@@ -1211,7 +1213,7 @@ gulp.task('dev-transaction-copyWetDep', function () {
 });
 
 
-gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copySrc', 'dev-transaction-copyLib', 'dev-transaction-createRootJs', 'dev-transaction-createResources'], function () {
+gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copyData','dev-transaction-copySrc', 'dev-transaction-copyLib', 'dev-transaction-createRootJs', 'dev-transaction-createResources'], function () {
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot;
@@ -1254,6 +1256,12 @@ gulp.task('dev-company-copyData', function () {
     return (copySources.pipe(gulp.dest(paths.buildDevCompany)));
 });
 
+gulp.task('dev-transaction-copyData', function () {
+    var def = Q.defer();
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildDevTransaction)));
+});
 
 
 gulp.task('dev-dossier-copyTranslate', ['dev-dossier-copyCommonTranslate'], function () {

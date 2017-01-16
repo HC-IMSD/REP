@@ -14,12 +14,16 @@
             'contactModule26',
             'contactModule',
             'transactionService',
+            'transactionLoadService',
             'filterLists',
             'lcDetailsModule',
             'numberFormat',
             'ui.bootstrap',
-            'translations'
+            'translations',
+            'fileIO',
+            'ngSanitize'
         ])
+
 })();
 
 (function () {
@@ -43,7 +47,10 @@
         .module('transactionApp')
         .config(['$translateProvider', function ($translateProvider) {
             $translateProvider.preferredLanguage('@@prefLang');
+            $translateProvider.useLoader('customLoad');
             //this prevents conflicts with ngMessage
+            $translateProvider.useSanitizeValueStrategy(null);
             $translateProvider.directivePriority(1);
+            $translateProvider.forceAsyncReload(true); //needed for the custom loader
         }]);
 })();
