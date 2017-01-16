@@ -134,6 +134,13 @@
                 return result;
             }
 
+            /**
+             * Creates sorted array, will exclude any other values
+             * @param jsonList
+             * @param lang
+             * @returns {Array}
+             * @private
+             */
             function _createSortedArray(jsonList,lang){
                 var result = [];
                 angular.forEach($filter('orderByLocale')(jsonList,lang), function (sortedObject) {
