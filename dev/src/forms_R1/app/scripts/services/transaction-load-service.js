@@ -5,29 +5,43 @@
 (function () {
     'use strict';
     angular
-        .module('transactionLoadService', ['dataLists','hpfbConstants'])
+        .module('transactionLoadService', ['dataLists', 'hpfbConstants'])
 })();
 
 (function () {
     'use strict';
     angular
         .module('transactionLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces','CANADA','USA', function ($http, $q, $filter, getCountryAndProvinces,CANADA,USA) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA','OTHER', 'getContactLists', function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, OTHER ,getContactLists) {
 
             return function (options) {
                 var deferred = $q.defer();
                 var dataFolder = "data/"; //relative forlder to the data
                 var countryUrl = dataFolder + "countries.json";
+                var contactsUrl = dataFolder + "internalContacts.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {
                         //PROCESS country list data
-                        var newList =  _createSortedArrayNAFirst(response.data,options.key);
+                        var newList = _createSortedArrayNAFirst(response.data, options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
+                        //return response.data;
+                        return $http.get(contactsUrl);
+                    })
+                    .then(function (response) {
+                        //PROCESS internal contacts list data
+                        //always english as french/ english are the same
+                        var newList = _createSortedArray(response.data, 'en');
+                        //this is a bit of a hack, but saves unecessary space
+                        var otherRec={"id": OTHER, "en": "Other"};
+                        if(options.key==='fr'){
+                            otherRec.en="Autre";
+                        }
+                        newList.unshift(otherRec);
+                        getContactLists.createInternalContacts(newList);
                         return response.data;
-
                     })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
@@ -81,17 +95,26 @@
                 return newList;
             }
 
-            function _createSortedArrayNAFirst(jsonList,lang){
+            function _createSortedArrayNAFirst(jsonList, lang) {
                 var result = [];
                 result.push({"id": "CAN", "en": "Canada", "fr": "Canada"});
-                result.push({"id":"USA","en":"United States","fr":"États-Unis"});
-                angular.forEach($filter('orderByLocale')(jsonList,lang), function (sortedObject) {
+                result.push({"id": "USA", "en": "United States", "fr": "États-Unis"});
+                angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
                     if (sortedObject.key !== CANADA && sortedObject.key !== USA) {
                         result.push(sortedObject);
                     }
                 });
                 return result;
             }
+
+            function _createSortedArray(jsonList, lang) {
+                var result = [];
+                angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
+                    result.push(sortedObject);
+                });
+                return result;
+            }
+
         }]);
 })();
 

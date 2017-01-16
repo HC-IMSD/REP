@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionInfo', ['contactModule25', 'lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap'])
+        .module('transactionInfo', ['contactModule25', 'lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap','dataLists'])
 })();
 
 (function () {
@@ -30,8 +30,8 @@
             }
         });
 
-    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES'];
-    function transactionInfoCtrl(TransactionService, OTHER, YES) {
+    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','getContactLists'];
+    function transactionInfoCtrl(TransactionService, OTHER, YES,getContactLists) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'}
         vm.transactionModel = {};
@@ -52,18 +52,13 @@
             msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
             show: false
         };
-        vm.requesterList = [
-            "Lastname1, Firstname1",
-            "Lastname2, Firstname2",
-            "Lastname3, Firstname3",
-            "Lastname4, Firstname4",
-            "OTHER"
-        ];
+        vm.requesterList = getContactLists.getInternalContacts();
 
         vm.$onInit = function () {
             vm.updateEctdState();
+            vm.setSolicitedState();
 
-        }
+        };
         //TODO rename
         vm.$onChanges = function (changes) {
             if (changes.transactionRoot) {
@@ -134,7 +129,7 @@
             vm.setOtherSolicitor();
         };
         vm.setOtherSolicitor = function () {
-            if (vm.transactionModel.solicitedRequester === OTHER) {
+            if (vm.transactionModel.solicitedRequester.id === OTHER) {
                 vm.showOtherSolicitedDetail = true;
             } else {
                 vm.showOtherSolicitedDetail = false;

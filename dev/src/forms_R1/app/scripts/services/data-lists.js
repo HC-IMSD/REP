@@ -27,7 +27,8 @@
     /* @ngInject */
     getService.inject=['UNKNOWN'];
     function getService(UNKNOWN) {
-        this.countryList = [];
+        var vm = this;
+        vm.countryList = [];
         var service = {
             getCountries: getCountryValuesArray,
             getProvinces: getProvinceValuesArray,
@@ -41,7 +42,7 @@
 
 
         function _createCountryArray(translateJson) {
-            this.countryList = translateJson;
+            vm.countryList = translateJson;
         }
 
         function _getUnknownCountryRec(){
@@ -57,7 +58,7 @@
 
         //todo why is this listed twice?
         function getCountryValuesArray() {
-            return this.countryList;
+            return vm.countryList;
         }
 
 
@@ -143,7 +144,7 @@
 
 })();
 
-(function () {
+/*(function () {
     'use strict';
 
     angular
@@ -152,7 +153,7 @@
 
     // getCountries.$inject = ['dependency'];
 
-    /* @ngInject */
+    /!* @ngInject *!/
     function getCountries() {
         var service = {
             //getCountryList3Letter: getCountryList3Letter
@@ -405,24 +406,25 @@
         }
     }
 
-})();
-
-/**
- * Contact List Service -salutation and language
- */
+})();*/
 
 (function () {
     'use strict';
 
     angular
         .module('dataLists')
-        .factory('getContactLists', getSalService);
+        .factory('getContactLists', getSalService); //todo rename service
 
     /* @ngInject */
     function getSalService() {
+        var vm = this;
+        vm.internalContacts=[];
         var service = {
             getSalutationList: getSalValuesArray,
-            getLanguages: getLanguagesValuesArray
+            getLanguages: getLanguagesValuesArray, //TODO make constants
+            createInternalContacts: _createInternalContacts,
+            getInternalContacts: _getInternalContacts
+
         };
         return service;
 
@@ -445,8 +447,17 @@
                     'fr'
                 ]);
         }
+
+        function _createInternalContacts(values){
+            vm.internalContacts=values;
+        }
+        function _getInternalContacts(){
+            return(vm.internalContacts);
+        }
+
     }
 })();
+
 
 
 /**

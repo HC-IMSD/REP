@@ -46,11 +46,11 @@
     angular
         .module('transactionApp')
         .config(['$translateProvider', function ($translateProvider) {
+            $translateProvider.directivePriority(1);
             $translateProvider.preferredLanguage('@@prefLang');
             $translateProvider.useLoader('customLoad');
             //this prevents conflicts with ngMessage
             $translateProvider.useSanitizeValueStrategy(null);
-            $translateProvider.directivePriority(1);
             $translateProvider.forceAsyncReload(true); //needed for the custom loader
         }]);
 })();

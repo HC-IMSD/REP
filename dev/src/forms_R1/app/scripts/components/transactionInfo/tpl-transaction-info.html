@@ -20,10 +20,10 @@
                         <div class="row">
                             <div class="form-group col-md-3"
                                  ng-class="{'has-error':transInfoForm.companyId.$invalid}">
-                                <label for="companyId_{{$id}}" class="required full-width">
+                                <label for="companyId" class="required full-width">
                                     <span class="field-name">{{"COMPANY_ID" |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                    <input type="text" id="companyId_{{$id}}" name="companyId"
+                                    <input type="text" id="companyId" name="companyId"
                                            ng-model="transInfoCtrl.transactionModel.ectd.companyId"
                                            class="form-control" maxlength="6" size="6"
                                            ng-required="true" ng-minlength="6"/>
@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="form-group col-md-12"
                                  ng-class="{'has-error':transInfoForm.dossierName.$invalid}">
-                                <label for="dossierName_{{$id}}" class="required full-width">
+                                <label for="dossierName" class="required full-width">
                                     <span class="field-name">{{"DOSSIER_NAME" |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                     <strong id="dossierName_-error" class="error"
@@ -73,7 +73,7 @@
                         </span>
                                     </strong>
                                 </label>
-                        <textarea id="dossierName_{{$id}}" name="dossierName"
+                        <textarea id="dossierName" name="dossierName"
                                   ng-model="transInfoCtrl.transactionModel.ectd.dossierName"
                                   class="full-width" maxlength="256" size="256"
                                   ng-required="true"></textarea>
@@ -84,10 +84,10 @@
                     <div class="row">
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':transInfoForm.isEctd.$invalid}">
-                            <label for="isEctd_{{$id}}" class="required full-width">
+                            <label for="isEctd" class="required full-width">
                                 <span class="field-name">{{"IS_ECTD" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                <select id="isEctd_{{$id}}" name="isEctd" ng-change="transInfoCtrl.updateEctdState()"
+                                <select id="isEctd" name="isEctd" ng-change="transInfoCtrl.updateEctdState()"
                                         ng-model="transInfoCtrl.transactionModel.isEctd"
                                         class="form-control"
                                         data-ng-disabled="transInfoCtrl.transactionModel.ectd.lifecycleRecord.length>1"
@@ -142,16 +142,29 @@
                     </div>
                 </div>
                 <div class="row" ng-show="transInfoCtrl.showSolicitedDetail">
-                    <div class="form-group col-md-4" ng-class="{'has-error':transInfoForm.solicitedList.$invalid}">
+                    <div class="form-group col-md-4">
                         <label for="solicited_list" class="required full-width">
                             <span class="field-name">{{"SOLICITED_RQ" |translate}}</span>
                             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                            <select id="solicited_list" name="solicitedList"
-                                    ng-model="transInfoCtrl.transactionModel.solicitedRequester"
-                                    class="form-control"
-                                    ng-options="choice |translate for choice in transInfoCtrl.requesterList |orderByTranslatedOtherFirst"
-                                    ng-change="transInfoCtrl.setOtherSolicitor()"
-                                    ng-required="transInfoCtrl.showSolicitedDetail"></select>
+                            <div class="rep-pad-top">
+                                <div class="rep-error" ng-class="{'has-error':transInfoForm.solicitedList.$invalid}">
+                                    <ui-select ng-model="transInfoCtrl.transactionModel.solicitedRequester"
+                                               id="solicited_list" name="solicitedList"
+                                               on-select="transInfoCtrl.setOtherSolicitor()" required
+                                               ng-disabled="false" title="Choose a requester"
+                                               class="rep-selectize-font full-width">
+                                        <ui-select-match placeholder="Select or Search for requester"
+                                                         class="rep-selectize-font rep-selectize-dropdown form-control">
+                                            {{$select.selected['en']}}
+                                        </ui-select-match>
+                                        <ui-select-choices
+                                                repeat="contact in transInfoCtrl.requesterList  | filter:{['en']: $select.search}"
+                                                class="rep-selectize-font">
+                                            <span ng-bind-html="contact.en | highlight: $select.search"></span>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
                             <strong id="solicitor-error" class="error"
                                     ng-if="transInfoCtrl.showError(transInfoForm.solicitedList)">
                         <span class="label label-danger" ng-messages="transInfoForm.solicitedList.$error">
@@ -184,19 +197,19 @@
                         <legend>{{'Name of Regulatory Project Manager, if known'|translate}}</legend>
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="projectManager1_{{$id}}" class="full-width">
+                                <label for="projectManager1" class="full-width">
                                     <span class="field-name">{{"NAME" |translate}} 1</span>
                                 </label>
-                            <textarea id="projectManager1_{{$id}}" name="projectManager1"
+                            <textarea id="projectManager1" name="projectManager1"
                                       ng-model="transInfoCtrl.transactionModel.projectManager1"
                                       class="form-control full-width" maxlength="256" rows="2"></textarea>
 
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="projectManager2_{{$id}}" class="full-width">
+                                <label for="projectManager2" class="full-width">
                                     <span class="field-name">{{"NAME" |translate}} 2</span>
                                 </label>
-                            <textarea id="projectManager2_{{$id}}" name="projectManager2"
+                            <textarea id="projectManager2" name="projectManager2"
                                       ng-model="transInfoCtrl.transactionModel.projectManager2"
                                       class="form-control full-width" maxlength="256" rows="2"></textarea>
 
@@ -233,10 +246,10 @@
                             <div class="row">
                                 <div class="form-group col-md-12"
                                      ng-class="{'has-error':transInfoForm.transCompanyName.$invalid}">
-                                    <label for="companyName_{{$id}}" class="required full-width">
+                                    <label for="companyName" class="required full-width">
                                         <span class="field-name">{{"COMPANYNAME_FULL" |translate}}</span>
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                        <input type="text" maxlength="80" id="companyName_{{$id}}"
+                                        <input type="text" maxlength="80" id="companyName"
                                                name="transCompanyName"
                                                ng-model="transInfoCtrl.transactionModel.companyName"
                                                class="form-control full-width" ng-required="true"/>
@@ -285,9 +298,9 @@
                                     </label>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+                </div>
             </section>
         </div>
         <!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->

@@ -16,9 +16,9 @@
         .module('transactionService')
         .factory('TransactionService', TransactionService)
 
-    TransactionService.$inject=['$filter','getCountryAndProvinces'];
+    TransactionService.$inject=['$filter','getCountryAndProvinces','getContactLists'];
 
-    function TransactionService($filter,getCountryAndProvinces) {
+    function TransactionService($filter,getCountryAndProvinces,getContactLists) {
         function TransactionService() {
             //construction logic
             var defaultTransactionData = {
@@ -44,7 +44,7 @@
                 // sameAddress: "N", //this may no longer be needed
                 activityAddress: _createAddressModel(),
                 sameContact: false,
-                activityContact: _createContactModel(),
+                activityContact: _createContactModel()
                 // regulatorySubmissionContact: [],
             };
             angular.extend(this._default, defaultTransactionData);
@@ -67,9 +67,8 @@
             transformFromFileObj: function (jsonObj) {
 
                 var transactionInfo = this.getTransactionInfo(jsonObj[this.rootTag]);
-                //get rid of previous default if it exists
-                this._default = {};
-                angular.extend(this._default, transactionInfo)
+                this._default={};
+                this._default = transactionInfo;
             },
             //TODO transaction relevant
             /**
@@ -92,7 +91,14 @@
                 var ectd = this._transformEctdToFile(jsonObj.ectd);
                 resultJson.TRANSACTION_ENROL.ectd = ectd;
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                resultJson.TRANSACTION_ENROL.solicited_requester = jsonObj.solicitedRequester;
+                resultJson.TRANSACTION_ENROL.solicited_requester= "";
+                if(jsonObj.solicitedRequester){
+                    resultJson.TRANSACTION_ENROL.solicited_requester={
+                        _label_en: jsonObj.solicitedRequester.en,
+                        _label_fr: jsonObj.solicitedRequester.en,
+                        __text:jsonObj.solicitedRequester.id
+                    }
+                }
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
@@ -142,13 +148,16 @@
                 if (!jsonObj) {
                     return this._default;
                 }
-                var model = this._default;
+                var model =_getEmptyTransactionModel();
                 model.dateSaved = jsonObj.date_saved;
 
                 model.dataChecksum = jsonObj.data_checksum;
                 model.isEctd = jsonObj.is_ectd;
                 model.isSolicited = jsonObj.is_solicited;
-                model.solicitedRequester = jsonObj.solicited_requester;
+                model.solicitedRequester = "";
+                if(jsonObj.solicited_requester){
+                    model.solicitedRequester = $filter('filter')(getContactLists.getInternalContacts(), {id: jsonObj.solicited_requester.__text})[0];
+                }
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
                 model.projectManager2 = jsonObj.regulatory_project_manager2;
                 model.isActivityChanges = jsonObj.is_activity_changes;
@@ -159,8 +168,6 @@
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact === 'Y';
                 model.activityAddress = _transformAddressFromFileObj($filter,getCountryAndProvinces,jsonObj.regulatory_activity_address);
-                // model.regulatorySubmissionContact = _mapRegulatoryContactList(jsonObj.rep_submission_contact_record);
-
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
             },
@@ -177,7 +184,6 @@
             _setSequenceNumber: function (value) {
                 if (!value)return;
                 var converted = parseInt(value);
-                console.log("converted" + converted)
                 if (converted > this.currSequence) {
                     this.currSequence = converted;
                 }
@@ -196,7 +202,6 @@
                 return (seqText);
             },
             deprecateSequenceNumber: function () {
-                console.log("deprecate")
                 this.currSequence--;
             },
             _mapLifecycleList: function (jsonObj) {
@@ -477,4 +482,28 @@
         return contact
     }
 
+    function _getEmptyTransactionModel(){
+        var defaultTransactionData = {
+            dataChecksum: "",
+            dateSaved: "",
+            softwareVersion: "1.0.0",
+            isEctd: "Y",
+            ectd: {
+                companyId: "",
+                dossierId: "",
+                dossierName: "",
+                lifecycleRecord: []
+            },
+            isSolicited: "",
+            solicitedRequester: "",
+            projectManager1: "",
+            projectManager2: "",
+            isActivityChanges: "Y",
+            companyName: "",
+            activityAddress: _createAddressModel(),
+            sameContact: false,
+            activityContact: _createContactModel()
+        };
+        return defaultTransactionData;
+    }
 })();
