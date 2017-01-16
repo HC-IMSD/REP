@@ -8,7 +8,7 @@
 (function () {
     'use strict';
     angular
-        .module('activityService', ['hpfbConstants'])
+        .module('activityService', ['hpfbConstants','activityLists'])
 })();
 
 (function () {
@@ -16,8 +16,8 @@
     angular
         .module('activityService')
         .factory('ActivityService', ActivityService);
-    ActivityService.$inject = ['YES', 'NO'];
-    function ActivityService(YES, NO) {
+    ActivityService.$inject = ['YES', 'NO','ActivityListFactory'];
+    function ActivityService(YES, NO,ActivityListFactory) {
 
         function ActivityService() {
             //construction logic
@@ -50,11 +50,11 @@
 
         ActivityService.prototype = {
             _default: {},
-            SANDS: "SANDS",
-            SNDS: "SNDS",
-            NC: "NC",
+            SANDS: ActivityListFactory.getSANDSRaTypeValue(),
+            SNDS: ActivityListFactory.getSNDSTypeValue(),
+            NC:  ActivityListFactory.getNCTypeValue(),
             VNC: "VNC",
-            BIOLOGIC: "BIOLOGIC",
+            BIOLOGIC: ActivityListFactory.getBiologicalLeadValue(),
             DIN: "DIN"
 
         };
@@ -235,7 +235,7 @@
          * @param isPilot
          * @returns {string[]}
          */
-        ActivityService.prototype.getActivityLeadList = function (isPilot) {
+       /* ActivityService.prototype.getActivityLeadList = function (isPilot) {
 
             var leadList = [
                 this.BIOLOGIC,
@@ -243,6 +243,15 @@
                 "DMF",
                 "PHARMA",
                 "PMVIGILANCE"
+                /!*
+                 B14-20160301-09	Pharmaceutical
+                 B14-20160301-02	Biological
+                 B14-20160301-10	Post-Market Pharmacovigilance
+                 B14-20160301-07	Drug Master File
+
+                 *!/
+
+
             ];
 
             if (!isPilot) { //if pilot do not show these values
@@ -250,7 +259,7 @@
             }
             return leadList;
 
-        };
+        };*/
 
 
         ActivityService.prototype.isNotifiableChange = function (value) {

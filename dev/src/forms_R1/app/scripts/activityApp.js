@@ -6,6 +6,8 @@
     angular
         .module('activityApp', [
             'pascalprecht.translate',
+            'activityLoadService',
+            'activityLists',
             'activityMain',
             'translations'
         ])
@@ -29,8 +31,10 @@
         .module('activityApp')
         .config(['$translateProvider', function ($translateProvider) {
             $translateProvider.preferredLanguage('@@prefLang');
+            $translateProvider.useLoader('customLoad');
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
-            $translateProvider.useSanitizeValueStrategy('sanitize');
+            $translateProvider.useSanitizeValueStrategy(null);
+            $translateProvider.forceAsyncReload(true); //needed for the custom loader
         }]);
 })();

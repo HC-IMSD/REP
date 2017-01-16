@@ -1,5 +1,5 @@
 {
-  "CTA": "CTA - Clinical Trial Application",
+  /*"CTA": "CTA - Clinical Trial Application",
   "CTAA": "CTA-A - Clinical Trial Application Amendment",
   "NDS": "NDS - New Drug Submission",
   "SNDS": "SNDS - Supplemental New Drug Submission",
@@ -15,13 +15,10 @@
   "VANDS": "VANDS - Veterinary Abbreviated New Drug Submission",
   "VSANDS": "VSANDS - Veterinary Supplemental Abbreviated New Drug Submission",
   "VNC": "VNC - Veterinary Notifiable Change",
-  "VDIN": "VDIN - Veterinary Drug Identification Number submission - all types",
-  "BIOLOGIC": "Biologic",
-  "CHP": "CHP - ",
-  "DMF": "DMF - Drug Master File",
-  "PHARMA": "Pharma - ",
-  "PMVIGILANCE": "PM Vigilance - ",
-  "MD": "MD - ",
-  "VET": "Vet - ",
+  "VDIN": "VDIN - Veterinary Drug Identification Number submission - all types",*/
+  "B14-20160301-09":	"Pharmaceutical",
+  "B14-20160301-02":	"Biological",
+  "B14-20160301-10":	"Post-Market Pharmacovigilance",
+  "B14-20160301-07":	"Drug Master File",
   "UNASSIGNED": "Unassigned"
 }

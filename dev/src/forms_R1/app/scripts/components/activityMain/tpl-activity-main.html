@@ -106,11 +106,11 @@
                         </div>
                         <div class="col-xs-4" ng-class="{'has-error':main.activityEnrolForm.activityLead.$invalid}">
                             <div class="form-group">
-                                <label for="activityLead_{{$id}}" class="required">
+                                <label for="activityLead" class="required">
                                     <span class="field-name"> {{'ACTIVITY_LEAD' |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                    <select class="form-control" id="activityLead_{{$id}}"
-                                            ng-options="lead |translate for lead in main.activityService.getActivityLeadList(1) | orderByTranslated"
+                                    <select class="form-control" id="activityLead"
+                                            ng-options="lead |translate for lead in main.leadList | orderByTranslated"
                                             name="activityLead" ng-change="main.updateActivityType()"
                                             ng-model="main.activityRoot.regActivityLead" required></select>
                                     <strong id="activityLead-error" class="error">
@@ -132,11 +132,11 @@
                                 <label for="regActivityType_{{$id}}" class="required">
                                     <span class="field-name">{{'ACTIVITY_TYPE' |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                    <select class="form-control" id="regActivityType_{{$id}}"
+                                  <!--  <select class="form-control" id="regActivityType_{{$id}}"
                                             ng-change="main.updateActivityType()"
                                             ng-options="activity |translate for activity in main.activityService.getActivityTypeList(1) | orderByTranslated"
                                             name="activityType" ng-model="main.activityRoot.regActivityType"
-                                            ng-required="true"></select>
+                                            ng-required="true"></select>-->
                                     <strong id="regActivityType-error" class="error">
                         <span class="label label-danger"
                               ng-if="main.showError(main.activityEnrolForm.activityType.$touched,main.activityEnrolForm.activityType.$invalid)"
@@ -152,14 +152,29 @@
                             <div class="col-xs-4"
                                  ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
                                 <div class="form-group">
-                                    <label for="feeClass_{{$id}}" class="required">
+                                    <label for="feeClass" class="require">
                                         <span class="field-name">{{'FEE_CLASS' |translate}}</span>
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                        <select class="form-control" id="feeClass_{{$id}}"
+
+                                      <!-- <div class="rep-pad-top">
+                                            <div class="rep-error"ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
+                                                <ui-select ng-model="main.activityRoot.feeClass" id="feeClass" name="feeClass"
+                                                           class="rep-selectize-font full-width" required>
+                                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
+                                                                     class="rep-selectize-font form-control">
+                                                        {{$select.selected[ingRecCtrl.lang]}}
+                                                    </ui-select-match>
+                                                    <ui-select-choices
+                                                            repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
+                                                            class="rep-selectize-font">
+                                                        <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                            </div>
+                                        </div>-->
+                                        <select class="form-control" id="feeClass"
                                                 name="feeClass" ng-model="main.activityRoot.feeClass"
-                                                ng-required="true">
-                                            <option>Test 1</option>
-                                            <option>Test 2</option>
+                                                ng-required="true" ng-options="fee |translate for fee in main.feeClassList">
                                         </select>
                                         <strong id="feeClass-error" class="error">
                         <span class="label label-danger"
@@ -186,27 +201,7 @@
                                 </cmp-activity-change>
                             </div>
                         </div>
-
                     </div>
-                    <!--   <div class="row">
-                           <div class="form-group col-xs-12"
-                                ng-class="{'has-error':main.activityEnrolForm.notlasa.$invalid}">
-                               <div class="checkbox required">
-                                   <label for="chk-lasa_{{$id}}">
-                                       <input type="checkbox" ng-model="main.activityRoot.notLasa" name="chkLasa"
-                                              id="chk-lasa_{{$id}}"/>
-                                       {{"NOT_LASA"|translate}}
-                                       <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                       <strong id="notlasa-error" class="error"
-                                               ng-if="main.showErrorCheck(main.activityEnrolForm.chkLasa.$touched,main.activityRoot.notLasa)">
-                    <span class="label label-danger">
-                                 <span ng-if="!main.activityRoot.notLasa">{{'MSG_ERR_MAND'|translate}}</span>
-                           </span>
-                                       </strong>
-                                   </label>
-                               </div>
-                           </div>
-                       </div>-->
                     <div class="row">
                         <div class="col-xs-12 form-group"
                              ng-class="{'has-error':main.activityEnrolForm.reasonFiling.$invalid}">

@@ -208,6 +208,8 @@ var componentFolders = {
 
 var jsServiceFiles = {
     activityService: paths.services + 'activity-service.js',
+    activityLoadService:paths.services + 'activity-load-service.js',
+    activityLists:paths.services + 'activity-lists.js',
     applicationInfoService: paths.services + 'application-info-service.js',
     companyService: paths.services + 'company-service.js',
     companyLoadService:paths.services+'company-load-service.js',
@@ -831,6 +833,8 @@ gulp.task('dev-activity-copySrc', function () {
     }
     //add services and directives
     activityJs.push(jsServiceFiles.activityService);
+    activityJs.push(jsServiceFiles.activityLoadService);
+    activityJs.push(jsServiceFiles.activityLists);
     activityJs.push(jsServiceFiles.applicationInfoService);
     activityJs.push(jsServiceFiles.hpfbConstants);
     activityJs.push(jsServiceFiles.repContactService);
@@ -960,7 +964,7 @@ gulp.task('dev-activity-createRootJS', function () {
 
 
 //clean only seems to work becase of the timestam
-gulp.task('dev-activity-htmlBuild', ['dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createRootJS', 'dev-activity-createResources'], function () {
+gulp.task('dev-activity-htmlBuild', ['dev-activity-copyData','dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createRootJS', 'dev-activity-createResources'], function () {
 
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
     pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'EXT');
@@ -1254,6 +1258,12 @@ gulp.task('dev-company-copyData', function () {
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(paths.buildDevCompany)));
+});
+gulp.task('dev-activity-copyData', function () {
+    var def = Q.defer();
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildDevActivity)));
 });
 
 gulp.task('dev-transaction-copyData', function () {

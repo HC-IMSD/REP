@@ -1,5 +1,5 @@
 {
-  "CTA": "DEC - Demande d’essai clinique",
+ /* "CTA": "DEC - Demande d’essai clinique",
   "CTAA": "MDEC - Modification à une demande d’essai clinique",
   "NDS": "Présentation de drogue nouvelle (PDN)",
   "SNDS": "PSDN - Supplément à une présentation de drogue nouvelle",
@@ -15,13 +15,17 @@
   "VANDS": "PADNV - Présentation abrégée de drogue nouvelle à usage vétérinaire",
   "VSANDS": "PSADNV - Présentation supplémentaire abrégée de drogue nouvelle à usage vétérinaire",
   "VNC": "PMV - Préavis de modification d’un médicament à usage vétérinaire",
-  "VDIN": "DINV - Demande d’identification numérique de drogue à usage vétérinaire - tous les types",
-  "BIOLOGIC": "fr_Biologic",
+  "VDIN": "DINV - Demande d’identification numérique de drogue à usage vétérinaire - tous les types",*/
+ /* "BIOLOGIC": "fr_Biologic",
   "CHP": "fr_CHP - ",
   "DMF": "fr_DMF - Drug Master File",
   "PHARMA": "fr_Pharma - ",
   "PMVIGILANCE": "fr_PM Vigilance - ",
   "MD": "fr_MD - ",
-  "VET": "fr_Vet - ",
-  "UNASSIGNED": "fr_Unassigned"
+  "VET": "fr_Vet - ",*/
+  "B14-20160301-09":	"fr_Pharmaceutical",
+  "B14-20160301-02":	"fr_Biological",
+  "B14-20160301-10":	"fr_Post-Market Pharmacovigilance",
+  "B14-20160301-07":	"fr_Drug Master File",
+  "UNASSIGNED":         "fr_Unassigned"
 }

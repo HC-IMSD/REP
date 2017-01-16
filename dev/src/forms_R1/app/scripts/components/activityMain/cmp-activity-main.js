@@ -24,7 +24,9 @@
             'contactModule',
             'contactModule25',
             'adminSubmission',
-            'ui.bootstrap'
+            'activityLists',
+            'ui.bootstrap',
+            'ui.select'
         ])
 })();
 
@@ -42,8 +44,8 @@
             }
         });
 
-    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope', '$window', '$location', '$translate', 'CommonLists'];
-    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $window, $location, $translate, CommonLists) {
+    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope', '$translate', 'CommonLists','ActivityListFactory'];
+    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate, CommonLists, ActivityListFactory) {
         var vm = this;
         vm.isIncomplete = true;
         vm.userType = "EXT";
@@ -52,10 +54,6 @@
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
-        //vm.activityService = null;
-        // vm.applicationInfoService ={};
-        //vm.rootTag = "";
-        //vm.activityRoot = {};
         vm.showAllErrors = false;
         vm.formAmend = false;
         vm.isNotifiable = false;
@@ -65,6 +63,9 @@
         vm.applicationInfoService = new ApplicationInfoService();
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
+        vm.activityTypeList=ActivityListFactory.getRaTypeList();
+        vm.feeClassList=ActivityListFactory.getFeeClassList();
+        vm.leadList= ActivityListFactory.getActivityLeadList();
 
         vm.alerts = [];
         vm.configField = {
