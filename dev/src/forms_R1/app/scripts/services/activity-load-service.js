@@ -16,24 +16,15 @@
 
             return function (options) {
                 var deferred = $q.defer();
-                var dataFolder = "data/"; //relative forlder to the data
+                var dataFolder = "data/"; //relative folder to the data
                 var feeClassUrl = dataFolder + "feeClass.json";
                 var raTypeUrl = dataFolder + "raType.json";
                 var resultTranslateList = {};
 
-                $http.get(raTypeUrl)
-                    .then(function (response) {
-                        //PROCESS Regulatory Activity Type
-                        var newList = _createSortedArray(response.data, options.key);
-                        //var translateList = _createTranslateList(newList, options.key);
-                        ActivityListFactory.createRaTypeList(newList);
-                        console.log("creating the list")
-                        //angular.extend(resultTranslateList, translateList);
-                        $http.get(feeClassUrl)
-                    })
+
+                 $http.get(feeClassUrl)
                     .then(function (response) {
                         //PROCESS fee Class list data
-                        console.log("free")
                         var newList = _createSortedArray(response.data, options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         ActivityListFactory.createFeeClassList(translateList);
@@ -48,7 +39,7 @@
                     .finally(function () {
                         deferred.resolve(resultTranslateList);
                     });
-                deferred.promise;
+                return deferred.promise;
             };
 
             /**

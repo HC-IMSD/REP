@@ -135,7 +135,7 @@
                                           <div class="rep-error" ng-class="{'has-error':main.activityEnrolForm.activityType.$invalid}">
                                               <ui-select ng-model="main.activityRoot.regActivityType" id="regActivityType" name="activityType"
                                                          class="rep-selectize-font full-width" on-select="main.updateActivityType()" required>
-                                                  <ui-select-match placeholder="{{'REGACTIV' |translate}}"
+                                                  <ui-select-match placeholder="{{'REGACTIVSEARCH' |translate}}"
                                                                    class="rep-selectize-font form-control">
                                                       {{$select.selected[main.lang]}}
                                                   </ui-select-match>
@@ -147,12 +147,6 @@
                                               </ui-select>
                                           </div>
                                       </div>
-
-                                  <!--  <select class="form-control" id="regActivityType_{{$id}}"
-                                            ng-change="main.updateActivityType()"
-                                            ng-options="activity |translate for activity in main.activityService.getActivityTypeList(1) | orderByTranslated"
-                                            name="activityType" ng-model="main.activityRoot.regActivityType"
-                                            ng-required="true"></select>-->
                                     <strong id="regActivityType-error" class="error">
                         <span class="label label-danger"
                               ng-if="main.showError(main.activityEnrolForm.activityType.$touched,main.activityEnrolForm.activityType.$invalid)"
@@ -171,26 +165,9 @@
                                     <label for="feeClass" class="require">
                                         <span class="field-name">{{'FEE_CLASS' |translate}}</span>
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
-
-                                      <!-- <div class="rep-pad-top">
-                                            <div class="rep-error"ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
-                                                <ui-select ng-model="main.activityRoot.feeClass" id="feeClass" name="feeClass"
-                                                           class="rep-selectize-font full-width" required>
-                                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                                                     class="rep-selectize-font form-control">
-                                                        {{$select.selected[ingRecCtrl.lang]}}
-                                                    </ui-select-match>
-                                                    <ui-select-choices
-                                                            repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
-                                                            class="rep-selectize-font">
-                                                        <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
-                                                    </ui-select-choices>
-                                                </ui-select>
-                                            </div>
-                                        </div>-->
                                         <select class="form-control" id="feeClass"
                                                 name="feeClass" ng-model="main.activityRoot.feeClass"
-                                                ng-required="true" ng-options="fee |translate for fee in main.feeClassList">
+                                                required ng-options="fee |translate for fee in main.feeClassList">
                                         </select>
                                         <strong id="feeClass-error" class="error">
                         <span class="label label-danger"

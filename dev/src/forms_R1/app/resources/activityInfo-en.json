@@ -45,5 +45,6 @@
   "IS_ADMIN_SUB": "Is this a regulatory administrative submission?",
   "LICENCE_AGREE": " Is this a licence agreement?",
   "DIN_TRANSFER": "I confirm that this is a DIN transfer",
-  "SPONSOR_NAME": "Sponsor Name"
+  "SPONSOR_NAME": "Sponsor Name",
+  "REGACTIVSEARCH":"Select or search for a Regulatory Activity Type"
 }

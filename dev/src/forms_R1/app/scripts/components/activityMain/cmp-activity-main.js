@@ -70,7 +70,7 @@
         vm.applicationInfoService = new ApplicationInfoService();
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
-        vm.activityTypeList=ActivityListFactory.getRaTypeList();
+        //vm.activityTypeList=ActivityListFactory.getRaTypeList();
         /*vm.activityTypeList=[
             {"id":"B02-20160301-001","en":"ANDS (Abbreviated New Drug Submission)","fr":"ANDS (Présentation abrégée de drogue nouvelle)"},
             {"id":"B02-20160301-031","en":"EU NDS (Extraordinary Use New Drug Submission)","fr":"EU NDS (Présentation de drogue nouvelle pour usage exceptionnel)"},
@@ -104,14 +104,6 @@
         vm.feeClassList=ActivityListFactory.getFeeClassList();
         vm.leadList= ActivityListFactory.getActivityLeadList();
 
-        /*customLoad().then(
-            function(res){
-              console.load(results);
-            },
-            function(err){
-                console.error(err);
-            }
-        );*/
 
 
 
@@ -156,11 +148,16 @@
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
-            console.log("changes");
-            //vm.activityTypeList=ActivityListFactory.getRaTypeList();
-           // console.log( ActivityListFactory.getRaTypeList())
+           var result=loadActivityData();
         };
 
+        function loadActivityData(){
+            ActivityListFactory.getRaTypeList()
+                .then(function(data){
+                    vm.activityTypeList=data;
+                    return true;
+                });
+        }
 
         vm.$onChanges = function (changes) {
             if (changes.formType) {

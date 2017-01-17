@@ -19,8 +19,8 @@
         .factory('ActivityListFactory', getService);
 
     /* @ngInject */
-    //getService.inject = ['UNKNOWN'];
-    function getService() {
+    getService.inject = ['$http', '$q','$filter','$translate'];
+    function getService($http,$q, $filter,$translate) {
         var vm = this;
         vm.feeClassArray = [];
         vm.raTypeArray=[];
@@ -51,13 +51,36 @@
             vm.feeClassArray=value;
         }
         function _getRaTypeArray(){
-            console.log( vm.raTypeArray)
-            return  (vm.raTypeArray);
+
+            if(!vm.raTypeArray||vm.raTypeArray.length===0) {
+                console.log("calling ra type")
+                   return _loadRaType()
+            }else {
+                return (vm.raTypeArray);
+            }
         }
+
+        function _loadRaType(){
+            var deferred = $q.defer();
+            var raTypeUrl ="data/raType.json";
+            $http.get(raTypeUrl).
+            success(function(data, status, headers, config) {
+                var lang = $translate.proposedLanguage() || $translate.use();
+                        var newList = _createSortedArray(data, lang);
+
+                       vm.raTypeArray=newList;
+                deferred.resolve(newList);
+            }).
+            error(function(data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+
+
         function _createRaTypeArray(value){
 
             vm.raTypeArray=value;
-            console.log( vm.raTypeArray)
         }
 
         function _getActivityLeadArray(){
@@ -88,7 +111,13 @@
             return vm.DIN_raType;
         }
 
-
+        function _createSortedArray(jsonList, lang) {
+            var result = [];
+            angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
+                result.push(sortedObject);
+            });
+            return result;
+        }
 
     }//end service function
 })();

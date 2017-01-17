@@ -16,8 +16,8 @@
     angular
         .module('activityService')
         .factory('ActivityService', ActivityService);
-    ActivityService.$inject = ['YES', 'NO','ActivityListFactory'];
-    function ActivityService(YES, NO,ActivityListFactory) {
+    ActivityService.$inject = ['YES', 'NO','ActivityListFactory','$filter'];
+    function ActivityService(YES, NO,ActivityListFactory, $filter) {
 
         function ActivityService() {
             //construction logic
@@ -84,7 +84,7 @@
                     dossier_id: jsonObj.dossierId,
                     dossier_id_concat: "",
                     reg_activity_lead: jsonObj.regActivityLead,
-                    reg_activity_type: jsonObj.regActivityType,
+                    reg_activity_type: "",
                     fee_class: jsonObj.feeClass,
                     reason_filing: jsonObj.reasonFiling,
                     is_third_party: jsonObj.isThirdParty,
@@ -93,6 +93,13 @@
                     rationale_types: {}
                 }
             };
+            if(jsonObj.regActivityType) {
+                activity[this.rootTag].reg_activity_type = {
+                    _label_en: jsonObj.regActivityType.en,
+                    _label_fr: jsonObj.regActivityType.fr,
+                    __text: jsonObj.regActivityType.id
+                };
+            }
             activity[this.rootTag].notifiable_change_types = _mapNotifiableChangeTypesToOutput(jsonObj.notifiableChangeTypes);
             activity[this.rootTag].rationale_types = _mapRationaleTypeToOutput(jsonObj.rationaleTypes);
             if (jsonObj.isAdminSub === YES) {
@@ -125,7 +132,7 @@
             return _transformRegulatoryContactListToFileObj(jsonObj);
         };
 
-
+        //TODO obsolete?
         ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
 
             var activity = {};
@@ -148,7 +155,16 @@
                 activity.date_cleared = dateCleared.getFullYear() + '-' + (month) + '-' + day;
             }
 
-            activity.reg_activity_type = jsonObj.regActivityType;
+            activity.reg_activity_type = "";
+
+            activity.reg_activity_type = {
+                _label_en:  jsonObj.regActivityType.en,
+                _label_fr:   jsonObj.regActivityType.fr,
+                __text:   jsonObj.regActivityType.id
+            };
+            console.log(activity.reg_activity_type);
+            console.log("the id "+jsonObj.regActivityType.id);
+
             activity.control_number = jsonObj.controlNumber;
             activity.license_agreement = jsonObj.licenseAgree;
             activity.din_transfer = jsonObj.dinTransfer === true ? YES : NO;
@@ -281,7 +297,7 @@
             return false;
         };
 
-        ActivityService.prototype.getActivityTypeList = function (isPilot) {
+      /*  ActivityService.prototype.getActivityTypeList = function (isPilot) {
 
             var activityList = [
                 "CTA",
@@ -308,7 +324,8 @@
                     "VDIN")
             }
             return activityList;
-        };
+        };*/
+
         ActivityService.prototype.updateActivityId = function (value) {
             if (isNaN(value)) return;
             if (value > this.activityId) {
@@ -341,7 +358,10 @@
             if (jsonObj.date_cleared) {
                 relatedActivity.dateCleared = _parseDate(jsonObj.date_cleared);
             }
-            relatedActivity.regActivityType = jsonObj.reg_activity_type;
+            //relatedActivity.regActivityType = jsonObj.reg_activity_type;
+            relatedActivity.regActivityType  = $filter('filter')(ActivityListFactory.getRaTypeList(), {id:  jsonObj.reg_activity_type.__text})[0];
+
+
             relatedActivity.controlNumber = Number(jsonObj.control_number);
             relatedActivity.licenseAgree = jsonObj.license_agreement;
             relatedActivity.dinTransfer = jsonObj.din_transfer === YES;
