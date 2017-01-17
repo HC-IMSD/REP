@@ -833,7 +833,7 @@ gulp.task('dev-activity-copySrc', function () {
     }
     //add services and directives
     activityJs.push(jsServiceFiles.activityService);
-    activityJs.push(jsServiceFiles.activityLoadService);
+    /*activityJs.push(jsServiceFiles.activityLoadService);*/
     activityJs.push(jsServiceFiles.activityLists);
     activityJs.push(jsServiceFiles.applicationInfoService);
     activityJs.push(jsServiceFiles.hpfbConstants);

@@ -1,7 +1,7 @@
 /**
  * Created by dkilty on 16/01/2017.
  */
-
+//deprecate. Currently not used as there are no translated lists
 (function () {
     'use strict';
     angular
@@ -22,7 +22,7 @@
                 var resultTranslateList = {};
 
 
-                 $http.get(feeClassUrl)
+               /*  $http.get(feeClassUrl)
                     .then(function (response) {
                         //PROCESS fee Class list data
                         var newList = _createSortedArray(response.data, options.key);
@@ -38,7 +38,7 @@
                     })
                     .finally(function () {
                         deferred.resolve(resultTranslateList);
-                    });
+                    });*/
                 return deferred.promise;
             };
 

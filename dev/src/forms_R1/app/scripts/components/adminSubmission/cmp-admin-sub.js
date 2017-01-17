@@ -4,7 +4,7 @@
 (function () {
     'use strict';
     angular
-        .module('adminSubmission', ['numberFormat', 'hpfbConstants', 'ui.bootstrap'])
+        .module('adminSubmission', ['numberFormat', 'hpfbConstants', 'ui.bootstrap', 'ui.select'])
 })();
 
 (function () {
@@ -23,9 +23,9 @@
             }
         });
 
-    AdminSubCtrl.$inject = ['NO']
+    AdminSubCtrl.$inject = ['NO','$translate'];
 
-    function AdminSubCtrl(NO) {
+    function AdminSubCtrl(NO, $translate) {
         var vm = this;
         vm.dateFormat = 'yyyy-MM-dd';
         vm.dinTransferShow = false;
@@ -38,7 +38,7 @@
             "dinTransfer": "",
             "notLasa": false
         };
-
+        vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.dateOptions = {
             showWeeks: false
         };
