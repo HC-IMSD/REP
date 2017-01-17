@@ -28,6 +28,7 @@
         vm.NC_raType="B02-20160301-050";
         vm.SANDS_raType="B02-20160301-082";
         vm.SNDS_raType="B02-20160301-084";
+        vm.DIN_raType="B02-20160301-090";
         var service = {
             getFeeClassList: _getfeeClassArray,
             createFeeClassList:_createfeeClassArray,
@@ -37,7 +38,8 @@
             getBiologicalLeadValue:_getBiologicalLead,
             getSANDSRaTypeValue:_getNC_raType,
             getSNDSTypeValue: _getSNDS_raType,
-            getNCTypeValue:  _getNC_raType
+            getNCTypeValue:  _getNC_raType,
+            getDINTypeValue:  _getDIN_raType
         };
         return service;
 
@@ -49,10 +51,13 @@
             vm.feeClassArray=value;
         }
         function _getRaTypeArray(){
-            return  vm.raTypeArray;
+            console.log( vm.raTypeArray)
+            return  (vm.raTypeArray);
         }
         function _createRaTypeArray(value){
+
             vm.raTypeArray=value;
+            console.log( vm.raTypeArray)
         }
 
         function _getActivityLeadArray(){
@@ -77,8 +82,13 @@
             return vm.SANDS_raType;
         }
         function _getSNDS_raType(){
-            returnvm.SNDS_raType;
+            return vm.SNDS_raType;
         }
+        function _getDIN_raType(){
+            return vm.DIN_raType;
+        }
+
+
 
     }//end service function
 })();

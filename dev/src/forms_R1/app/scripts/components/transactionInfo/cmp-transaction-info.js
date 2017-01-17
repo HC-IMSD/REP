@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionInfo', ['contactModule25', 'lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap','dataLists'])
+        .module('transactionInfo', ['contactModule25', 'lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap','dataLists','ui.select'])
 })();
 
 (function () {
@@ -14,6 +14,10 @@
 
     angular
         .module('transactionInfo')
+        .config(function (uiSelectConfig) {
+            //choices: select2, bootstrap, selectize
+            uiSelectConfig.theme = 'select2';
+        })
         .component('cmpTransactionInfo', {
             templateUrl: 'app/scripts/components/transactionInfo/tpl-transaction-info.html',
             controller: transactionInfoCtrl,

@@ -55,7 +55,7 @@
             NC:  ActivityListFactory.getNCTypeValue(),
             VNC: "VNC",
             BIOLOGIC: ActivityListFactory.getBiologicalLeadValue(),
-            DIN: "DIN"
+            DIN: ActivityListFactory.getDINTypeValue()
 
         };
 
@@ -263,7 +263,6 @@
 
 
         ActivityService.prototype.isNotifiableChange = function (value) {
-
             if (!value) return false;
             if (value === this.VNC || value === this.NC) {
                 return true;

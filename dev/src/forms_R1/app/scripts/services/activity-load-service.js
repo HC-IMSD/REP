@@ -20,20 +20,24 @@
                 var feeClassUrl = dataFolder + "feeClass.json";
                 var raTypeUrl = dataFolder + "raType.json";
                 var resultTranslateList = {};
-                $http.get(feeClassUrl)
-                    .then(function (response) {
-                        //PROCESS fee Class list data
-                        var newList = _createSortedArray(response.data, options.key);
-                       var translateList = _createTranslateList(newList, options.key);
-                        ActivityListFactory.createFeeClassList(translateList);
-                        angular.extend(resultTranslateList, translateList);
-                        return $http.get(raTypeUrl);
-                    })
+
+                $http.get(raTypeUrl)
                     .then(function (response) {
                         //PROCESS Regulatory Activity Type
                         var newList = _createSortedArray(response.data, options.key);
+                        //var translateList = _createTranslateList(newList, options.key);
                         ActivityListFactory.createRaTypeList(newList);
-                        console.log(newList);
+                        console.log("creating the list")
+                        //angular.extend(resultTranslateList, translateList);
+                        $http.get(feeClassUrl)
+                    })
+                    .then(function (response) {
+                        //PROCESS fee Class list data
+                        console.log("free")
+                        var newList = _createSortedArray(response.data, options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        ActivityListFactory.createFeeClassList(translateList);
+                        angular.extend(resultTranslateList, translateList);
                         return response.data;
                     })
                     .catch(function (error) {
@@ -44,7 +48,7 @@
                     .finally(function () {
                         deferred.resolve(resultTranslateList);
                     });
-                return deferred.promise;
+                deferred.promise;
             };
 
             /**

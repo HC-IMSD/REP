@@ -126,12 +126,28 @@
                     </div>
                     <div class="row">
 
-                        <div class="col-xs-8"
-                             ng-class="{'has-error':main.activityEnrolForm.activityType.$invalid}">
+                        <div class="col-xs-6">
                             <div class="form-group">
-                                <label for="regActivityType_{{$id}}" class="required">
+                                <label for="regActivityType" class="required full-width">
                                     <span class="field-name">{{'ACTIVITY_TYPE' |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                     <div class="rep-pad-top">
+                                          <div class="rep-error" ng-class="{'has-error':main.activityEnrolForm.activityType.$invalid}">
+                                              <ui-select ng-model="main.activityRoot.regActivityType" id="regActivityType" name="activityType"
+                                                         class="rep-selectize-font full-width" on-select="main.updateActivityType()" required>
+                                                  <ui-select-match placeholder="{{'REGACTIV' |translate}}"
+                                                                   class="rep-selectize-font form-control">
+                                                      {{$select.selected[main.lang]}}
+                                                  </ui-select-match>
+                                                  <ui-select-choices
+                                                          repeat="activityValue in main.activityTypeList | filter: {[main.lang]:$select.search}"
+                                                          class="rep-selectize-font">
+                                                      <span ng-bind-html="activityValue[main.lang] | highlight: $select.search"></span>
+                                                  </ui-select-choices>
+                                              </ui-select>
+                                          </div>
+                                      </div>
+
                                   <!--  <select class="form-control" id="regActivityType_{{$id}}"
                                             ng-change="main.updateActivityType()"
                                             ng-options="activity |translate for activity in main.activityService.getActivityTypeList(1) | orderByTranslated"
@@ -149,7 +165,7 @@
                             </div>
                         </div>
                         <div>
-                            <div class="col-xs-4"
+                            <div class="col-xs-6"
                                  ng-class="{'has-error':main.activityEnrolForm.feeClass.$invalid}">
                                 <div class="form-group">
                                     <label for="feeClass" class="require">

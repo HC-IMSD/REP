@@ -9,7 +9,8 @@
             'activityLoadService',
             'activityLists',
             'activityMain',
-            'translations'
+            'translations',
+            'ui.select'
         ])
 })();
 
@@ -30,11 +31,11 @@
     angular
         .module('activityApp')
         .config(['$translateProvider', function ($translateProvider) {
+            $translateProvider.directivePriority(1);
             $translateProvider.preferredLanguage('@@prefLang');
             $translateProvider.useLoader('customLoad');
-            //this prevents conflicts with ngMessage
-            $translateProvider.directivePriority(1);
             $translateProvider.useSanitizeValueStrategy(null);
             $translateProvider.forceAsyncReload(true); //needed for the custom loader
+
         }]);
 })();
