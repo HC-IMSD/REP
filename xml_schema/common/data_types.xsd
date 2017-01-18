@@ -237,6 +237,11 @@
 			<hpfb:pattern value="[y|Y]{1}|[n|N]{1}"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+	<hpfb:simpleType name="yes_no_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value="[y|Y]{0,1}|[n|N]{0,1}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 
 	<hpfb:simpleType name="sequence_content">
 		<hpfb:restriction base="hpfb:string">

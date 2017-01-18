@@ -12,6 +12,7 @@
 	<!-- ****************************** -->
 	<!-- ACTIVITY_ENROL is the root element-->
 	<hpfb:element name="ACTIVITY_ENROL" type="activity_enrol_content"/>
+	<hpfb:element name="template_type" type="hpfb:string"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="dsts_control_number" type="char_0_6_content"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
@@ -23,21 +24,37 @@
 	<hpfb:element name="dossier_id" type="char_1_10_content"/>
 	<hpfb:element name="dossier_id_concat" type="char_1_20_content"/>
 	<hpfb:element name="reg_activity_lead" type="hpfb:string"/>
-	<hpfb:element name="reg_activity_type" type="hpfb:string"/>
-	<xsd:element name="operation">
-		   <xsd:complexType>
-		      <xsd:attribute name="count" type="nonNegativeInteger" use="required"/>
-		   </xsd:complexType>
-	</xsd:element>
+	<hpfb:element name="sponsor_name" type="char_1_80_content"/>
 
-	<hpfb:element name="fee_class"/>
-	<hpfb:element name="not_lasa" type="required_yes_no_content"/>
+	<hpfb:element name="reg_activity_type">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="fee_class">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="is_admin_submission" type="yes_no_content"/>
+	<hpfb:element name="not_lasa" type="yes_no_content"/>
+	<hpfb:element name="din_transfer" type="yes_no_content"/>
+	<hpfb:element name="license_agreement" type="required_yes_no_content"/>
 	<hpfb:element name="reason_filing" type="char_1_1024_content"/>
 	<hpfb:element name="related_activity" type="related_reg_activity_content"/>
 	<hpfb:element name="is_third_party" type="required_yes_no_content"/>
 	<hpfb:element name="date_cleared" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content"/>
-	<hpfb:element name="manufacturer_name" type="char_1_80_content"/>
 	<hpfb:element name="new_roa" type="required_yes_no_content"/>
 	<hpfb:element name="new_claims" type="required_yes_no_content"/>
 	<hpfb:element name="change_formulation" type="required_yes_no_content"/>
@@ -68,7 +85,8 @@
 	<!-- ****************************** -->
 	<hpfb:complexType name="activity_enrol_content">
 		<hpfb:sequence>
-			<!--<template_type -->
+
+			<hpfb:element ref="template_type"/>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dsts_control_number"/>
 			<hpfb:element ref="enrolment_version"/>
@@ -80,12 +98,11 @@
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="dossier_id_concat"/>
 			<hpfb:element ref="reg_activity_lead"/>
-			<hpfb:element ref="reg_activity_type"/> <!--<Change to include label_en and label_fr -->
-			<hpfb:element ref="fee_class"/> <!--<Change to include label_en and label_fr -->
-			<hpfb:element ref="not_lasa"/>
+			<hpfb:element ref="reg_activity_type"/>
+			<hpfb:element ref="fee_class"/>
 			<hpfb:element ref="reason_filing"/>
 			<hpfb:element ref="is_third_party"/>
-			<!--<<is_admin_submission if is submission realated activity -->
+			<hpfb:element ref="is_admin_submission"/>
 			<hpfb:element ref="notifiable_change_types"/>
 			<hpfb:element ref="rationale_types"/>
 			<hpfb:element ref="related_activity" minOccurs="0" maxOccurs="1"/>
@@ -133,23 +150,14 @@
 
 	<hpfb:complexType name="related_reg_activity_content">
 		<hpfb:sequence>
-			<hpfb:element ref="amend_record"/> <!-- remove? -->
-				<!-- sponsor name -->
-				<hpfb:element ref="date_cleared"/>
-			<hpfb:element ref="reg_activity_type"/> <!-- add label_en and label_fr -->
+			<hpfb:element ref="sponsor_name"/>
+			<hpfb:element ref="date_cleared"/>
+			<hpfb:element ref="reg_activity_type"/>
 			<hpfb:element ref="control_number"/>
-			<hpfb:element ref="dossier_id"/> <!-- remove -->
-			<hpfb:element ref="manufacturer_name"/><!-- remove -->
-			<hpfb:element ref="reason_filing"/><!-- remove -->
-			<!--<license_agreement>N</license_agreement>
-		<din_transfer>Y</din_transfer>
-		<not_lasa>Y</not_lasa>
-		-->
+
+			<hpfb:element ref="license_agreement"/>
+			<hpfb:element ref="din_transfer"/>
+			<hpfb:element ref="not_lasa"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-
-
-
-
-
 </hpfb:schema>
