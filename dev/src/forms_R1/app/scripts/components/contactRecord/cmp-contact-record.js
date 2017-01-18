@@ -26,7 +26,8 @@
                 onDelete:'&',
                 isAmend: '<',
                 isDetailValid:'&',
-                isRoleSelected:'&'
+                isRoleSelected:'&',
+                recordIndex:'<'
             }
         });
         contactRecCtrl.$inject=['$scope']

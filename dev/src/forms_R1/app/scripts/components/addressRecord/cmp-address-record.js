@@ -27,7 +27,8 @@
                 onDelete: '&',
                 isAmend: '<',
                 isDetailValid: '&',
-                isRoleSelected: '&'
+                isRoleSelected: '&',
+                recordIndex:'<'
             }
         });
     addressRecCtrl.$inject = ['$scope']
