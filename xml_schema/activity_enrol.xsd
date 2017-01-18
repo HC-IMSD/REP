@@ -77,7 +77,7 @@
 	<hpfb:element name="notifiable_change_types" type="change_types_content"/>
 	<hpfb:element name="rationale_types" type="rationale_content"/>
 	<hpfb:element name="contact_record" type="contact_record_content"/>
-	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"/>
+	<hpfb:element name="rep_contact_role" type="required_yes_no_content"/>
 	<hpfb:element name="rep_contact_details" type="contact_content"/>
 	<hpfb:element name="amend_record" type="required_yes_no_content"/>
 	<!-- ****************************** -->

@@ -268,7 +268,7 @@
                     contact.addressRole.importer = contacts[i].importer === 'Y';
                     contact.addressRole.repPrimary = contacts[i].rep_primary === 'Y';
                     contact.addressRole.repSecondary = contacts[i].rep_secondary === 'Y';
-                    contact.contactRole = contacts[i].company_contact_details.rep_contact_role;
+                    //contact.contactRole = contacts[i].company_contact_details.rep_contact_role;
                     contact.salutation = contacts[i].company_contact_details.salutation;
                     contact.givenName = contacts[i].company_contact_details.given_name;
                     contact.initials = contacts[i].company_contact_details.initials;
@@ -339,7 +339,7 @@
                 //contact.importer = contacts[i].importer === true ? 'Y' : 'N';
                 contact.rep_primary = contacts[i].addressRole.repPrimary === true ? 'Y' : 'N';
                 contact.rep_secondary = contacts[i].addressRole.repSecondary === true ? 'Y' : 'N';
-                contact.rep_contact_role = contacts[i].addressRole.contactRole === true ? 'Y' : 'N';
+                //contact.rep_contact_role = contacts[i].addressRole.contactRole === true ? 'Y' : 'N';
                 contact.company_contact_details = {};
                 contact.company_contact_details.salutation = contacts[i].salutation;
                 contact.company_contact_details.given_name = contacts[i].givenName;

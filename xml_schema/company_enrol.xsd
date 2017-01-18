@@ -11,7 +11,8 @@
 	<!-- ELEMENT DECLARATIONS -->
 	<!-- ****************************** -->
 	<!-- COMPANY_ENROL = root element-->
-	<hpfb:element name="COMPANY_ENROL" type="company_enrol_content" />	
+	<hpfb:element name="COMPANY_ENROL" type="company_enrol_content" />
+	<hpfb:element name="template_type" type="hpfb:string"/>	
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="application_type" type="rep_type"/>
@@ -26,7 +27,6 @@
 	<hpfb:element name="rep_primary" type="required_yes_no_content"/>
 	<hpfb:element name="rep_secondary" type="required_yes_no_content"/>
 	<hpfb:element name="company_name" type="char_1_80_content"/>
-	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"  nillable="true"/>
 	<hpfb:element name="company_contact_details" type="contact_content"/>
 	<hpfb:element name="contact_record" type="contact_record_content" />
 	<hpfb:element name="company_address_details" type="international_address_content"/>
@@ -36,6 +36,7 @@
 
 	<hpfb:complexType name="company_enrol_content" >
 		<hpfb:sequence>
+		<hpfb:element ref="template_type"/>
 		<hpfb:element ref="data_checksum"/>
 		<hpfb:element ref="enrolment_version"/>
 		<hpfb:element ref="date_saved"/>
