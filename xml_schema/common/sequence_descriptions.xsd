@@ -48,7 +48,7 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
-	<hpfb:simpleType name="reg_activity_type_list">
+	<!--<hpfb:simpleType name="reg_activity_type_list">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="PRESUB_MEETING"/>
 			<hpfb:enumeration value="ANDS"/>
@@ -72,5 +72,5 @@
 			<hpfb:enumeration value="CONSULTATION"/>
 			<hpfb:enumeration value="YBPR"/>
 		</hpfb:restriction>
-	</hpfb:simpleType>
+	</hpfb:simpleType>-->
 </hpfb:schema>

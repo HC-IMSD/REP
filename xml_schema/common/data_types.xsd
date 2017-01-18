@@ -245,7 +245,7 @@
 
 	<hpfb:simpleType name="sequence_content">
 		<hpfb:restriction base="hpfb:string">
-			<hpfb:pattern value="[0-9]{4}"/>
+			<hpfb:pattern value="[0-9]{0,4}"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
 

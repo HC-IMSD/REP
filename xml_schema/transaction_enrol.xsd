@@ -12,6 +12,7 @@
 	<!-- ****************************** -->
 	<!-- COMPANY_ENROL is the root element-->
 	<hpfb:element name="TRANSACTION_ENROL" type="transaction_enrol_content"/>
+	<hpfb:element name="template_type" type="hpfb:string"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="software_version" type="hpfb:string"/>
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
@@ -23,16 +24,27 @@
 	<hpfb:element name="sequence_number" type="sequence_content"/>
 	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
-	<hpfb:element name="sequence_activity_type" type="reg_activity_type_list"/>
+	<hpfb:element name="sequence_activity_type" type="hpfb:string"/>
 	<hpfb:element name="sequence_description_value" type="sequence_description_list"/>
 	<hpfb:element name="sequence_from_date" type="optional_yyyymmdd_date_content"/>
 	<hpfb:element name="sequence_to_date" type="optional_yyyymmdd_date_content"/>
 	<hpfb:element name="sequence_version" type="number_0_5_content"/>
 	<hpfb:element name="sequence_details" type="char_0_50_content"/>
 	<hpfb:element name="sequence_concat" type="hpfb:string"/>
+	<hpfb:element name="sequence_year" type="char_0_6_content"/>
+
 	<hpfb:element name="lifecycle_record" type="lifecycle_record_content"/>
 	<hpfb:element name="is_solicited" type="required_yes_no_content"/>
-	<hpfb:element name="solicited_requester" type="char_0_256_content"/>
+	<hpfb:element name="solicited_requester">
+	<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
 	<hpfb:element name="regulatory_project_manager2" type="char_0_256_content"/>
 	<hpfb:element name="is_activity_changes" type="char_0_256_content"/>
@@ -49,6 +61,7 @@
 
 	<hpfb:complexType name="transaction_enrol_content">
 		<hpfb:sequence>
+			<hpfb:element ref="template_type"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
@@ -89,6 +102,7 @@
 			<hpfb:element ref="sequence_to_date"/>
 			<hpfb:element ref="sequence_details"/>
 			<hpfb:element ref="sequence_version"/>
+			<hpfb:element ref="sequence_year"/>
 			<hpfb:element ref="sequence_concat"/>
 		</hpfb:sequence>
 	</hpfb:complexType>

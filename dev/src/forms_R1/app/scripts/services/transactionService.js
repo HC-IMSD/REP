@@ -102,7 +102,7 @@
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
-                resultJson.TRANSACTION_ENROL.same_regulatory_company = jsonObj.sameCompany === true ? 'Y' : 'N';
+                //resultJson.TRANSACTION_ENROL.same_regulatory_company = jsonObj.sameCompany === true ? 'Y' : 'N';
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
                 /* resultJson.TRANSACTION_ENROL.same_regulatory_address = jsonObj.sameAddress === true ? 'Y' : 'N'; //this may no longer be needed*/
                 resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
