@@ -228,7 +228,7 @@
 			<hpfb:enumeration value="PHARMACEUTICAL"/>
 			<hpfb:enumeration value="DRUG_MASTER_FILE"/>
 			<hpfb:enumeration value="MEDICAL_DEVICE"/>
-			<hpfb:enumeration value="BIOLIGIC"/>
+			<hpfb:enumeration value="BIOLOGIC"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
 

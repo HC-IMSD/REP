@@ -38,7 +38,17 @@
 	<hpfb:element name="cdn_ref_product" type="cdn_ref_product_content"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
 	<hpfb:element name="dosage_form_group" type="dosage_form_group_content"/>
-	<hpfb:element name="dosage_form" type="dosage_form_list"/>
+	<hpfb:element name="dosage_form">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
 	<hpfb:element name="dosage_form_other" type="char_0_100_content"/>
 	<hpfb:element name="strengths" type="char_1_256_content"/>
 	<hpfb:element name="company_name" type="char_1_256_content"/>
@@ -189,14 +199,22 @@
 
 	<hpfb:element name="animal_src_record" type="animal_source_record"/>
 	<hpfb:element name="animal_type"/>
-	<hpfb:element name="animal_details" type="char_1_40_content"/>
-
-
+	<hpfb:element name="animal_detail" type="char_1_40_content"/>
 	<hpfb:element name="is_controlled_pop" type="required_yes_no_content"/>
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
 	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
 	<hpfb:element name="animal_age" type="integer_1_999_content"/>
-	<hpfb:element name="country_with_unknown" type="country_unknown_list"/>
+	<hpfb:element name="country_with_unknown">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
 	<hpfb:element name="country_origin_list" type="country_origin_list_content"/>
 	<hpfb:element name="unknown_country_details" type="char_0_100_content"/>
 	<hpfb:element name="country_origin" type="country_origin_content"/>
@@ -208,11 +226,29 @@
 	<hpfb:element name="formulation_details" type="formulation_content"/>
 	<hpfb:element name="roa_group" type="roa_content"/>
 	<hpfb:element name="roa_details" type="roa_details_content"/>
-	<hpfb:element name="roa" type="roa_list"/>
+	<hpfb:element name="roa">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="roa_other" type="char_0_40_content"/>
-
 	<hpfb:element name="country_group" type="country_group_content"/>
-	<hpfb:element name="country_manufacturer" type="country_list"/>
+	<hpfb:element name="country_manufacturer">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
 	<hpfb:element name="container_group" type="container_group_content"/>
 	<hpfb:element name="container_details" type="container_details_content"/>
 	<hpfb:element name="container_type" type="char_1_256_content"/>
@@ -226,7 +262,18 @@
 	<hpfb:element name="material_ingredient" type="material_group_content"/>
 	<hpfb:element name="strength" type="char_1_15_content"/>
 	<hpfb:element name="per" type="char_0_40_content"/>
-	<hpfb:element name="units" type="char_1_40_content"/>
+	<hpfb:element name="units">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="units_other" type="char_0_40_content"/>
+
 	<hpfb:element name="is_base_calc" type="required_yes_no_content"/>
 	<hpfb:element name="is_nanomaterial" type="nano_list"/>
 	<hpfb:element name="nanomaterial_details" type="char_0_40_content"/>
@@ -246,6 +293,7 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
+			<hpfb:element ref="dossier_type"/>
 			<hpfb:element ref="brand_name"/>
 			<hpfb:element ref="common_name"/>
 			<hpfb:element ref="third_party_signed"/>
@@ -283,6 +331,9 @@
 			<hpfb:element ref="dosage_form"/>
 			<hpfb:element ref="dosage_form_other"/>
 			<hpfb:element ref="strengths"/>
+			<hpfb:element ref="units"/>
+			<hpfb:element ref="units_other"/>
+			<hpfb:element ref="per"/>
 			<hpfb:element ref="company_name"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -290,7 +341,7 @@
 
 	<hpfb:complexType name="ref_product_list_content">
 		<hpfb:sequence>
-			<hpfb:element ref="amend_record"/>
+			<!--<hpfb:element ref="amend_record"/>-->
 			<hpfb:element ref="cdn_ref_product" minOccurs="0" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -370,7 +421,7 @@
 	<hpfb:complexType name="animal_source_record">
 		<hpfb:sequence>
 			<hpfb:element ref="animal_type"/>
-			<hpfb:element ref="animal_details"/>
+			<hpfb:element ref="animal_detail"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -450,6 +501,7 @@
 			<hpfb:element ref="strength"/>
 			<hpfb:element ref="per"/>
 			<hpfb:element ref="units"/>
+			<hpfb:element ref="units_other"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
 			<hpfb:element ref="nanomaterial_details"/>
@@ -466,6 +518,7 @@
 			<hpfb:element ref="strength"/>
 			<hpfb:element ref="per"/>
 			<hpfb:element ref="units"/>
+			<hpfb:element ref="units_other"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
 			<hpfb:element ref="nanomaterial_details"/>
