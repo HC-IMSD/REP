@@ -84,6 +84,17 @@
             <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
+                        <h3 class="panel-title">{{'ANIMAL_HUMAN_HDING'|translate}}</h3>
+                    </header>
+                    <div class="panel-body">
+                        <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials"
+                                               on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
+                    </div>
+                </section>
+            </div>
+            <div class="">
+                <section class="panel panel-default">
+                    <header class="panel-heading">
                         <h3 class="panel-title">{{'CONTAINER_TYPES'|translate}}</h3>
                     </header>
                     <div class="panel-body">
@@ -93,16 +104,6 @@
                 </section>
             </div>
 
-            <div class="">
-                <section class="panel panel-default">
-                    <header class="panel-heading">
-                        <h3 class="panel-title">{{'ANIMAL_HUMAN_HDING'|translate}}</h3>
-                    </header>
-                    <div class="panel-body">
-                        <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials"
-                                               on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
-                    </div>
-            </div>
             <div class="">
                 <section class="panel panel-default">
                     <header class="panel-heading">
