@@ -5,12 +5,13 @@
 
         <cmp-non-med-ing-record record="$parent.record" on-update="nmilCtrl.updateIng($parent.$index,ing)"
                                 on-delete="nmilCtrl.deleteIng($parent.$index)" on-add-ing="nmilCtrl.addIng(ing)"
-                                is-detail-valid="nmilCtrl.setValid(state)"
+                                is-detail-valid="nmilCtrl.setValid(state)" record-index="$parent.$index"
                                 delete-btn="true"></cmp-non-med-ing-record>
 
     </cmp-expanding-table>
 
     <cmp-non-med-ing-record ng-if="nmilCtrl.newIngFormShown === true" on-add-ing="nmilCtrl.addIng(ing)"
+                            record-index="nmilCtrl.ingList.length"
                             on-cancel="nmilCtrl.onNewCancel()" delete-btn="false"></cmp-non-med-ing-record>
 
     <div class="mrgn-tp-md mrgn-bttm-lg">

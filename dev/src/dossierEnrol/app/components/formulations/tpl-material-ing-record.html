@@ -1,7 +1,7 @@
 <ng-form name="mirCtrl.materialIngRecordForm">
     <div class="container-fluid">
         <fieldset>
-            <legend>{{'MATERIAL_DETAILS'|translate}}</legend>
+            <legend>{{'MATERIAL_DETAILS'|translate}}&nbsp;{{mirCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-12"
                      ng-class="{'has-error':mirCtrl.materialIngRecordForm.matIngName.$invalid}">

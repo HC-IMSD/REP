@@ -1,7 +1,7 @@
 <ng-form name="ctrCtrl.containerTypeForm">
     <div class="container-fluid">
         <fieldset>
-            <legend>{{'CONTAINER_TYPE_DETAILS'|translate}}</legend>
+            <legend>{{'CONTAINER_TYPE_DETAILS'|translate}}&nbsp;{{ctrCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-12"  ng-class="{'has-error':ctrCtrl.containerTypeForm.containerType.$invalid}">
                     <label for="containerType" class="required">

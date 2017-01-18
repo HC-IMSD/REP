@@ -26,7 +26,8 @@
                 onDelete: '&',
                 onCancel: '&',
                 showErrors:'&',
-                isDetailValid: '&'
+                isDetailValid: '&',
+                recordIndex:'<'
             }
 
         });
