@@ -52,7 +52,7 @@ var paths = {
     components: baseScript + '/components/',
     directives: baseScript + '/directives/',
     services: baseScript + '/services/',
-    rootActivity: './app/activityApp.js',
+   // rootActivity: './app/activityApp.js',
     wetBase: wetBase
 };
 
@@ -121,7 +121,7 @@ var
     };
 
 
-var jsComponentFiles = {
+/*var jsComponentFiles = {
     activityChangeCmp: paths.components + 'activityChangeType/cmp-activity-change.js',
     activityMainCmp: paths.components + 'activityMain/cmp-activity-main.js',
     activityRationaleCmp: paths.components + 'activityRationale/cmp-activity-rationale.js',
@@ -136,7 +136,7 @@ var jsComponentFiles = {
     contactRecordCmp: paths.components + 'contactRecord/cmp-contact-record.js',
     dinDetailsCmp: paths.components + 'dinDetails/cmp-din-details.js',
     expandingTableCmp: paths.components + 'expandingTable/cmp-expanding-table.js',
-    fileIOComponentAndDep: paths.components + 'fileIO/*.js',
+    fileIOComponentAndDep: paths.components + 'fileIO/!*.js',
     lifecycleDetailsCmp: paths.components + 'lifecycleDetails/cmp-lifecycle-details.js',
     lifecycleListCmp: paths.components + 'lifecycleList/cmp-lifecycle-list.js',
     relatedActivityCmp: paths.components + 'relatedActivity/cmp-related-activity.js',
@@ -147,7 +147,7 @@ var jsComponentFiles = {
     transactionAddressRecordCmp: paths.components + 'transactionCompanyRecord/cmp-transaction-address-record.js',
     transactionInfoCmp: paths.components + 'transactionInfo/cmp-transaction-info.js',
     countrySelectCmp: paths.components + 'cmp-country-select.js'
-};
+};*/
 var jsComponentPaths = {
     activityChangePath: paths.components + 'activityChangeType/',
     activityMainPath: paths.components + 'activityMain/',
@@ -177,6 +177,11 @@ var jsComponentPaths = {
     countrySelectPath: paths.components + 'countrySelect/'
 };
 
+
+/**
+ * All the component folders
+ * @type {{activityChange: string, activityMain: string, activityRationale: string, addressDetails: string, addressList: string, addressRecord: string, addressRole: string, applicationInfo: string, companyMain: string, contactDetails: string, contactList: string, contactRecord: string, dinDetails: string, expandingTable: string, fileIOComponentAndDep: string, lifecycleDetails: string, lifecycleList: string, relatedActivity: string, relatedActivityList: string, repContactList: string, repContactRecord: string, transactionMain: string, transactionAddressRecord: string, transactionInfo: string, countrySelect: string, adminSubmissionPath: string}}
+ */
 var componentFolders = {
     activityChange: 'activityChangeType/',
     activityMain: 'activityMain/',
@@ -202,8 +207,39 @@ var componentFolders = {
     transactionMain: 'transactionMain/',
     transactionAddressRecord: 'transactionCompanyRecord/',
     transactionInfo: 'transactionInfo/',
-    countrySelect: 'countrySelect/'
+    countrySelect: 'countrySelect/',
+    adminSubmissionPath: 'adminSubmission/'
 };
+//good
+var serviceFileNames= {
+    activityService: 'activity-service.js',
+    activityLoadService:'activity-load-service.js',
+    activityLists:'activity-lists.js',
+    applicationInfoService:'application-info-service.js',
+    companyService:'company-service.js',
+    companyLoadService: 'company-load-service.js',
+    dataListsActivity:'data-lists.activity.js',
+    dataLists: 'data-lists.js',
+    filterLists:'filter-lists.js',
+    hpfbConstants: 'hpfb-constants.js',
+    transactionService: 'transactionService.js',
+    transactionLoadService: 'transaction-load-service.js',
+    repContactService: 'rep-contact-service.js',
+    commonLists:'common-lists.js'
+};
+//good
+var rootFileNames={
+    activityRoot:"activityApp.js",
+    companyRoot:"companyApp.js",
+    transactionRoor:"transactionApp.js"
+};
+
+//good
+var directiveFolders = {
+    country:  'country/',
+    numberOnly: 'numberOnly/'
+};
+
 
 
 var jsServiceFiles = {
@@ -241,7 +277,7 @@ var jsRootContent = {
     partialDossierRoot: 'rootContent/dossierRoot.html'
 };
 
-
+//good
 var translationBaseFiles = {
 
     activityInfo: paths.translations + 'activityInfo',
@@ -342,7 +378,7 @@ pipes.builtAppCmpScriptsProd = function (filePaths, outName, destPath) {
         .pipe(pipes.orderedAppScripts())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat(outName))
-        .pipe(plugins.uglify())
+       // .pipe(plugins.uglify())
         .pipe(plugins.sourcemaps.write())
         .pipe(gulp.dest(destPath));
 };
@@ -524,13 +560,14 @@ pipes.copyWet = function (destDirectory) {
 };
 
 //creates ALL the root files js TODO rename
-pipes.generateRootJsFile = function (lang, type, rootFile, destPath, ignorePath) {
-    if (!ignorePath) ignorePath = ".";
+pipes.generateRootJsFile = function (lang, type, rootFile, destPath, skipDate) {
+    var  ignorePath = ".";
+    if(!skipDate) skipDate=false;
     var rootName = rootFile.split("/");
     rootName = rootName[rootName.length - 1];
     rootName = rootName.substring(0, rootName.length - 3);
     var dateToday = createSuffixDate();
-
+    if(skipDate) dateToday="";
     var copySources = gulp.src([rootFile],
         {read: true, base: ignorePath});
     return (
@@ -791,52 +828,82 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
 
 };
 
+/**
+ * Array of the component folders used for the Pharam Activity form
+ * @type {*[]}
+ */
+//good
+var activityComponentFolders = [
+    componentFolders.activityChange,
+    componentFolders.activityMain,
+    componentFolders.activityRationale,
+    componentFolders.applicationInfo,
+    componentFolders.contactDetails,
+    componentFolders.expandingTable,
+    componentFolders.fileIOComponentAndDep,
+    componentFolders.repContactList,
+    componentFolders.repContactRecord,
+    componentFolders.adminSubmissionPath
+];
+//good
+var activityServiceFileNames=[
+    serviceFileNames.activityService,
+    serviceFileNames.activityLists,
+    serviceFileNames.applicationInfoService,
+    serviceFileNames.hpfbConstants,
+    serviceFileNames.repContactService,
+    serviceFileNames.filterLists,
+    serviceFileNames.dataLists,
+    serviceFileNames.dataListsActivity,
+    serviceFileNames.commonLists
+];
+//good
+var activityDirectiveFolders=[
+    directiveFolders.numberOnly
+];
+
+//goood
+var activityTranslationFilesBaseList = [
+    translationBaseFiles.activityInfo,
+    translationBaseFiles.activityList,
+    translationBaseFiles.contact,
+    translationBaseFiles.applicationInfo,
+    translationBaseFiles.fileIO,
+    translationBaseFiles.general,
+    translationBaseFiles.messages
+];
+
+
+
+/**
+ * Copies all the activity src to destination directory
+ * @param noDate
+ * @param destDir
+ * @returns {*}
+ */
 pipes.devCopyActivitySrc=function(noDate,destDir){
-    var deferred = Q.defer();
-
-    var activitySrcPaths = [ //componenents, anything with html
-        jsComponentPaths.activityChangePath + '**/*',
-        jsComponentPaths.activityMainPath + '**/*',
-        jsComponentPaths.activityRationalePath + '**/*',
-        jsComponentPaths.applicationInfoPath + '**/*',
-        jsComponentPaths.contactDetailsPath + '**/*',
-        jsComponentPaths.dinDetailsPath + '**/*',
-        jsComponentPaths.expandingTablePath + '**/*',
-        jsComponentPaths.fileIOComponentAndDepPath + '**/*',
-        jsComponentPaths.adminSubmissionPath + '**/*',
-        //jsComponentPaths.relatedActivityListPath + '**/*',
-        // jsComponentPaths.relatedActivityPath + '**/*',
-        jsComponentPaths.repContactListPath + '**/*',
-        jsComponentPaths.repContactRecordPath + '**/*'
-    ]
-
     var activityHtml = [];
     var activityJs = [];
-    for (var i = 0; i < activitySrcPaths.length; i++) {
-        activityHtml.push(activitySrcPaths[i] + '.html');
-        activityJs.push(activitySrcPaths[i] + '.js');
+    for(var i=0;i<activityComponentFolders.length;i++){
+        var folderPath=paths.components+activityComponentFolders[i]+ '**/*';
+        activityHtml.push(folderPath + '.html');
+        activityJs.push(folderPath + '.js');
     }
-    //add services and directives
-    activityJs.push(jsServiceFiles.activityService);
-    /*activityJs.push(jsServiceFiles.activityLoadService);*/
-    activityJs.push(jsServiceFiles.activityLists);
-    activityJs.push(jsServiceFiles.applicationInfoService);
-    activityJs.push(jsServiceFiles.hpfbConstants);
-    activityJs.push(jsServiceFiles.repContactService);
-    activityJs.push(jsServiceFiles.filterLists);
-    activityJs.push(jsServiceFiles.dataLists);
-    activityJs.push(jsServiceFiles.dataListsActivity);
-    activityJs.push(jsServiceFiles.commonLists);
-    activityJs.push(jsDirectiveFiles.numberOnly);
-
+    //get all the activity services
+    for(var i=0;i<activityServiceFileNames.length;i++) {
+        activityJs.push(paths.services+activityServiceFileNames[i])
+    }
+    //get all the activity directive folders
+    for(var i=0;i<activityDirectiveFolders.length;i++) {
+        activityJs.push(paths.directives+activityDirectiveFolders[i]+"**/*.js")
+        activityHtml.push(paths.directives+activityDirectiveFolders[i]+"**/*.html")
+    }
 
     var copySourcesJs = gulp.src(activityJs, {read: true, base: './'});
     var copySourcesHtml = gulp.src(activityHtml, {read: true, base: './'});
 
     var dateToday = createSuffixDate();
-
     if(noDate===true) dateToday="";
-
 
     pipes.copyHtml(copySourcesHtml, dateToday,destDir);
     return (
@@ -846,8 +913,7 @@ pipes.devCopyActivitySrc=function(noDate,destDir){
             .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
             .pipe(gulp.dest(destDir))
     )
-}
-
+};
 
 gulp.task('dev-activity-copySrc', function (noDate) {
     return(pipes.devCopyActivitySrc(false,paths.buildDevActivity))
@@ -875,7 +941,7 @@ function createSuffixDate() {
 }
 
 gulp.task('dev-activity-copyTranslate', function () {
-    var translationList = [
+   /* var translationList = [
         translationBaseFiles.activityInfo,
         translationBaseFiles.activityList,
         translationBaseFiles.contact,
@@ -883,7 +949,8 @@ gulp.task('dev-activity-copyTranslate', function () {
         translationBaseFiles.fileIO,
         translationBaseFiles.general,
         translationBaseFiles.messages
-    ];
+    ];*/
+    var translationList=activityTranslationFilesBaseList;
 
     return (pipes.translateDev(translationList, paths.buildDevActivity));
 });
@@ -1519,48 +1586,7 @@ gulp.task('prod-cleanEnvironment', function () {
 
 });
 
-//activity
-gulp.task('prod-activity-createRootJs', function () {
-    var dest = paths.buildProd + 'activity/app/scripts/';
-    //var result= pipes.cleanBuild(dest);
-    return (
-        pipes.generateRootJsFile('en', 'INT', paths.scripts + '/activityApp.js', dest) &&
-        pipes.generateRootJsFile('fr', 'INT', paths.scripts + '/activityApp.js', dest) &&
-        pipes.generateRootJsFile('fr', 'EXT', paths.scripts + '/activityApp.js', dest) &&
-        pipes.generateRootJsFile('en', 'EXT', paths.scripts + '/activityApp.js', dest)
-    );
-});
 
-
-gulp.task('aaaaprod-activity-compileSrc', ['prod-activity-copyDependencies'], function () {
-    var baseActivityPath = paths.buildProd + 'app/scripts/';
-
-    var def = Q.defer();
-    // var outName = 'activityEXT-en.min.js';
-    var filesToConcat = [
-        baseActivityPath + 'translations*.js',
-        baseActivityPath + 'components/**/*.js',
-        baseActivityPath + 'directives/**/*.js',
-        baseActivityPath + 'services/**/*.js'
-    ];
-    var dateToday = createSuffixDate();
-    var outFiles = filesToConcat.slice();
-    var result = "";
-    var destPath = paths.buildProd + '/activity/';
-    // var result= pipes.cleanBuild(destPath);
-
-    outFiles.push(baseActivityPath + 'activityAppEXT-en*.js');
-    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-en' + dateToday + '.min.js', destPath);
-    outFiles = filesToConcat.slice();
-    outFiles.push(baseActivityPath + 'activityAppINT-en*.js');
-    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityINT-en' + dateToday + '.min.js', destPath);
-    outFiles = filesToConcat.slice();
-    outFiles.push(baseActivityPath + 'activityAppINT-fr*.js');
-    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityINT-fr' + dateToday + '.min.js', destPath);
-    outFiles = filesToConcat.slice();
-    outFiles.push(baseActivityPath + 'activityAppEXT-fr*.js');
-    return (pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-fr' + dateToday + '.min.js', destPath));
-})
 
 
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
@@ -1581,6 +1607,16 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
                 ignorePath: ignorePath,
                 addRootSlash: false
             }))
+        .pipe(inject(gulp.src([
+                styleFiles.rep,
+                styleFiles.select,
+                styleFiles.select2Style
+            ]),
+            {
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }
+        ))
         .pipe(inject(gulp.src(src)
             .pipe(angularFilesort())
             , {
@@ -1668,20 +1704,33 @@ gulp.task('prod-copySrc-root', function () {
 
 });
 
-
-gulp.task('prod-copySrc-translate', function () {
+//good
+gulp.task('aaaa-prod-copyActivity-translate', function () {
 
     var destPath = paths.buildProd + 'app/resources/';
-    var translationList = [
-        paths.translations + '*.json'
-    ];
 
-    var copyTranslations = gulp.src(translationList,
-        {read: true, base: ''});
-    copyTranslations.pipe(gulp.dest(destPath))
+    var translationList=activityTranslationFilesBaseList;
 
-    return (copyTranslations.pipe(gulp.dest(destPath)));
+    return (pipes.translateDev(translationList,paths.buildProd));
+
 });
+
+gulp.task('aaaa-prod-activity-createTranslateFile', [], function () {
+
+    var translationActivitySources=[];
+    //going to explicitly name files
+    for(var i=0;i<activityTranslationFilesBaseList.length;i++){
+        translationActivitySources.push(paths.buildProd +activityTranslationFilesBaseList[i]+"-en.json");
+        translationActivitySources.push(paths.buildProd +activityTranslationFilesBaseList[i]+"-fr.json");
+    };
+    return (
+        gulp.src(translationActivitySources)
+            .pipe(angularTranslate('activityTranslations'+ '.js'))
+            .pipe(gulp.dest(paths.buildProd + paths.relScript))
+    )
+});
+
+
 
 gulp.task('prod-copyAllSrc', ['prod-copySrc-directives', 'prod-copySrc-components', 'prod-copySrc-root', 'prod-copySrc-services', 'prod-copySrc-translate'], function () {
 
@@ -1690,20 +1739,20 @@ gulp.task('prod-copyAllSrc', ['prod-copySrc-directives', 'prod-copySrc-component
 /**
  * Copies the activity library file to the prod directory
  **/
-gulp.task('prod-activity-copyLib', function () {
+gulp.task('aaaaprod-activity-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*'],
         {read: true, base: ''});
     return (
-        copySources.pipe(gulp.dest(paths.buildProd + 'activity/app/lib/'))
+        copySources.pipe(gulp.dest(paths.buildProd + 'app/lib/'))
     );
 });
 /**
  *  Copy all the styles to the activity folder
  * */
-gulp.task('prod-activity-copyStyle', function () {
+gulp.task('aaaa-prod-copyStyle', function () {
     var copySources = gulp.src([paths.styles + '**/*'],
         {read: true, base: ''});
-    return copySources.pipe(gulp.dest(paths.buildProd + 'activity/app/styles/'))
+    return copySources.pipe(gulp.dest(paths.buildProd + 'app/styles/'))
 
 });
 
@@ -1732,21 +1781,7 @@ gulp.task('prod-activity-copyDependencies', [], function () {
     return copySources.pipe(gulp.dest(dest))
 });
 
-var activityComponentFolders = [
-    componentFolders.activityChange,
-    componentFolders.activityMain,
-    componentFolders.activityRationale,
-    componentFolders.applicationInfo,
-    componentFolders.contactDetails,
-    componentFolders.dinDetails,
-    componentFolders.expandingTable,
-    componentFolders.fileIOComponentAndDep,
-    componentFolders.relatedActivity,
-    componentFolders.relatedActivityList,
-    componentFolders.repContactList,
-    componentFolders.repContactRecord
 
-];
 var servicesFilesProd = {
     //add services and directives
     activityService: 'activity-service*.js',
@@ -1769,56 +1804,55 @@ var activityServicesFilesProd = [
     servicesFilesProd.hpfbConstants,
     servicesFilesProd.repContactService
 ];
-var directivePathsProd = {
-    country: 'country/',
-    numberOnly: 'numberOnly/'
+var directiveFolders = {
+    country: "country/",
+    numberOnly: "numberOnly/"
 };
 
 
-gulp.task('prod-activityHtml', ['prod-activity-copyLib', 'prod-activity-copyStyle', 'prod-activity-compileResources', 'prod-activity-compileSrc'], function () {
-    var baseActivityPath = paths.buildProd + 'actvity/app/scripts/';
+gulp.task('aaaaprod-activityHtml', [], function () {
+    var baseActivityPath = paths.buildProd + 'app/scripts/';
     var htmlPartial = jsRootContent.partialActivityRoot;
     var dateToday = createSuffixDate();
     var srcJsExtEn = [
-        paths.buildProd + 'activity/' + 'activityEXT-en' + dateToday + '.min.js',
-        paths.buildProd + 'activity/app/lib/**/angular*.js'
+        baseActivityPath + 'activityEXT-en' + '*.min.js',
+        paths.buildProd + 'app/lib/**/angular*.js'
     ];
     var srcJsExtFr = [
-        paths.buildProd + 'activity/' + 'activityEXT-fr' + dateToday + '.min.js',
-        paths.buildProd + 'activity/app/lib/**/angular*.js'
+        baseActivityPath + 'activityEXT-fr' + '*.min.js',
+        paths.buildProd + 'app/lib/**/angular*.js'
     ];
     var srcJsIntFr = [
-        paths.buildProd + 'activity/' + 'activityINT-fr' + dateToday + '.min.js',
-        paths.buildProd + 'activity/app/lib/**/angular*.js'
+        baseActivityPath + 'activityINT-fr' + '*.min.js',
+        paths.buildProd + 'app/lib/**/angular*.js'
     ];
     var srcJsIntEn = [
-        paths.buildProd + 'activity/' + 'activityINT-en' + dateToday + '.min.js',
-        paths.buildProd + 'activity/app/lib/**/angular*.js'
+        baseActivityPath + 'activityINT-en' + '*.min.js',
+        paths.buildProd + 'app/lib/**/angular*.js'
     ];
     var result = "";
-    result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/activity/', 'indexActivityEXT-en.html', paths.buildProd + 'activity/');
-    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/activity/', 'indexActivityINT-fr.html', paths.buildProd + 'activity/');
-    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntEn, '/build/prod/activity/', 'indexActivityINT-en.html', paths.buildProd + 'activity/');
+    result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd);
+    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd);
+    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd);
 
-
-    return pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/activity/', 'indexActivityEXT-fr.html', paths.buildProd + 'activity/');
+    return pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd);
 
 
 });
 
 
-gulp.task('prod-activity-htmlBuild', ['prod-activityHtml'], function () {
+/*gulp.task('prod-activity-htmlBuild', ['prod-activityHtml'], function () {
 
     return (
         pipes.cleanBuild([paths.buildProd + 'activity/app/resources/',
             paths.buildProd + 'activity/app/scripts/services/',
             paths.buildProd + 'activity/app/scripts/directives/',
-            paths.buildProd + 'activity/app/scripts/**/*.js']))
-})
+            paths.buildProd + 'activity/app/scripts/!**!/!*.js']))
+})*/
 
 
-gulp.task('prod-activity-copyWetDep', function () {
-    return (pipes.copyWet(paths.buildProd + 'activity/'))
+gulp.task('aaaa-prod-copyWetDep', function () {
+    return (pipes.copyWet(paths.buildProd))
 });
 
 gulp.task('prod-activity-copyResources', function () {
@@ -1844,18 +1878,126 @@ gulp.task('prod-activity-compileResources', ['prod-activity-copyResources'], fun
             .pipe(gulp.dest(destPath + paths.relScript))
     )
 });
+
+
+gulp.task('aaaaprod-deleteNotCompiledJs', function () {
+    var basePath = paths.buildProd;
+    var deletePaths=[
+        basePath+ 'app/scripts/**/*.js',
+        '!'+basePath+ 'app/scripts/*.min.js'
+    ];
+
+    return(del(deletePaths));
+});
+
+//copy source files
 gulp.task('aaaaprod-activity-copyResources', function () {
     return(pipes.devCopyActivitySrc(true,paths.buildProd))
 });
+/**
+ * Blind copies all the data files from the data source directory to the prod directory
+ * */
+gulp.task('aaaaprod-copyData', function () {
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildProd)));
+});
+
+
+gulp.task('aaaaprod-activity-compileSrc', [], function () {
+    var baseActivityPath = paths.buildProd + 'app/scripts/';
+
+    var filesToConcat=[];
+    //get all the activity component folders
+    for(var i=0;i<activityComponentFolders.length;i++){
+        filesToConcat.push(baseActivityPath+"components/"+activityComponentFolders[i]+"**/*.js")
+    }
+    //get all the activity services
+    for(var i=0;i<activityServiceFileNames.length;i++) {
+        filesToConcat.push(baseActivityPath+"services/"+activityServiceFileNames[i])
+    }
+    //get all the activity directives
+    for(var i=0;i<activityDirectiveFolders.length;i++) {
+        filesToConcat.push(baseActivityPath+"directives/"+activityDirectiveFolders[i]+"**/*.js")
+    }
+    //add translation file
+    filesToConcat.push(baseActivityPath+"activityTranslations.js")
+
+    var dateToday = createSuffixDate();
+    var outFiles = filesToConcat;
+    console.log(outFiles.length);
+    var result = "";
+    var destPath = baseActivityPath;
+
+    outFiles.push(baseActivityPath + 'activityAppEXT-en.js');
+    console.log(outFiles.length);
+    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-en' + dateToday + '.min.js', destPath);
+    outFiles = filesToConcat.slice();
+    console.log(outFiles.length);
+    outFiles.push(baseActivityPath + 'activityAppINT-en.js');
+    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityINT-en' + dateToday + '.min.js', destPath);
+    outFiles = filesToConcat.slice();
+    outFiles.push(baseActivityPath + 'activityAppINT-fr.js');
+    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityINT-fr' + dateToday + '.min.js', destPath);
+    outFiles = filesToConcat.slice();
+    outFiles.push(baseActivityPath + 'activityAppEXT-fr.js');
+    return (pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-fr' + dateToday + '.min.js', destPath));
+})
+
+/**
+ * Copies all the source files to production folder that are used by the activity form
+ * */
+gulp.task('aaaaprod-copyActivitySources', [], function () {
+    var dest = paths.buildProd;
+    var src =[];
+
+    //get all the activity component folders
+    for(var i=0;i<activityComponentFolders.length;i++){
+        src.push(paths.components+activityComponentFolders[i]+"**/*.*")
+    }
+    //get all the activity services
+    for(var i=0;i<activityServiceFileNames.length;i++) {
+        src.push(paths.services+activityServiceFileNames[i])
+    }
+    //get all the activity directive folders
+   // paths.directives+directiveFolders
+    for(var i=0;i<activityDirectiveFolders.length;i++) {
+        src.push(paths.directives+activityDirectiveFolders[i]+"**/*.*")
+    }
+    //get  the base App javascript file
+    src.push(paths.scripts +"/"+rootFileNames.activityRoot);
+
+
+    var copySources = gulp.src(src,
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(dest))
+});
+
+/**
+ * Creates the root JS files for internal/external and french/English forms
+ * */
+gulp.task('aaaaprod-activity-createRootJs', function () {
+    var dest = paths.buildProd + 'app/scripts/';
+    var activityRootPath=dest+"/"+rootFileNames.activityRoot;
+    return (
+        pipes.generateRootJsFile('en', 'INT',activityRootPath, dest,true) &&
+        pipes.generateRootJsFile('fr', 'INT',activityRootPath, dest,true) &&
+        pipes.generateRootJsFile('fr', 'EXT',activityRootPath, dest,true) &&
+        pipes.generateRootJsFile('en', 'EXT',activityRootPath, dest,true)
+    );
+});
+
+
+
+
 
 gulp.task('prod-copyAllSources', [], function () {
-    var dest = paths.buildProd
+    var dest = paths.buildProd;
     var src =
         [
             paths.relScript + 'components/*.*',
             paths.relScript + 'directives/*.*',
         ];
-
     var copySources = gulp.src(src,
         {read: true, base: paths.buildProd});
     return copySources.pipe(gulp.dest(dest))
