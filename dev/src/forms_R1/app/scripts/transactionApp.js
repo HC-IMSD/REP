@@ -10,8 +10,6 @@
             'dataLists',
             'transactionInfo',
             'addressModule',
-            'contactModule25',
-            'contactModule26',
             'contactModule',
             'transactionService',
             'transactionLoadService',

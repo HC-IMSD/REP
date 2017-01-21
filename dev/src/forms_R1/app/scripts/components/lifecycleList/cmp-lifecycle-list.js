@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('lifecycleList', ['filterLists'])
+        .module('lifecycleList', ['filterLists','lcDetailsModule','expandingTable'])
 })();
 
 (function () {

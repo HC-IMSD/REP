@@ -146,7 +146,6 @@ var jsComponentPaths = {
     repContactListPath: paths.components + 'repContactList/',
     repContactRecordPath: paths.components + 'rep-contact-record/',
     transactionMainPath: paths.components + 'transactionMain/',
-    transactionAddressRecordPath: paths.components + 'transactionCompanyRecord/',
     transactionInfoPath: paths.components + 'transactionInfo/',
     countrySelectPath: paths.components + 'countrySelect/'
 };
@@ -887,6 +886,50 @@ var companyTranslationFilesBaseList =
         translationBaseFiles.companyInfo
     ];
 
+var transactionTranslationFilesBaseList=[
+    translationBaseFiles.countries,
+    translationBaseFiles.address,
+    translationBaseFiles.stateProvinces,
+    translationBaseFiles.contact,
+    translationBaseFiles.applicationInfo,
+    translationBaseFiles.fileIO,
+    translationBaseFiles.general,
+    translationBaseFiles.messages,
+    translationBaseFiles.transaction
+];
+var transactionComponentFolders=[
+
+    componentFolders.transactionMain,
+    componentFolders.transactionInfo,
+    componentFolders.contactDetails,
+    componentFolders.expandingTable,
+    componentFolders.fileIOComponentAndDep,
+    componentFolders.repContactList,
+    componentFolders.repContactRecord,
+    componentFolders.lifecycleList,
+    componentFolders.lifecycleDetails,
+    componentFolders.addressDetails
+];
+var transactionServiceFileNames=[
+
+    serviceFileNames.transactionService,
+    serviceFileNames.transactionLoadService,
+    serviceFileNames.dataLists,
+    serviceFileNames.dataListsActivity,
+    serviceFileNames.filterLists,
+    serviceFileNames.hpfbConstants
+
+];
+var transactionDirectiveFolders =
+    [
+        directiveFolders.numberOnly
+    ];
+
+/*
+
+
+ */
+
 /**
  * Copy the source files based on the arrays for the different components
  *
@@ -1122,20 +1165,13 @@ gulp.task('dev-transaction-copySrc', function () {
     var transactionSrcPaths = [
         jsComponentPaths.transactionMainPath + '**/*',
         jsComponentPaths.contactDetailsPath + '**/*',
-        jsComponentPaths.countrySelectPath + '**/*',
         jsComponentPaths.expandingTablePath + '**/*',
         jsComponentPaths.fileIOComponentAndDepPath + '**/*',
         jsComponentPaths.transactionInfoPath + '**/*',
-        jsComponentPaths.transactionAddressRecordPath + '**/*',
-        jsComponentPaths.repContactListPath + '**/*',
-        jsComponentPaths.repContactRecordPath + '**/*',
         jsComponentPaths.lifecycleDetailsPath + '**/*',
         jsComponentPaths.lifecycleListPath + '**/*',
-        jsComponentPaths.addressListPath + '**/*',
-        jsComponentPaths.contactListPath + '**/*',
-        jsComponentPaths.addressDetailsPath + '**/*',
-        jsComponentPaths.addressRecordPath + '**/*',
-        jsComponentPaths.contactRecordPath + '**/*'
+        jsComponentPaths.addressDetailsPath + '**/*'
+
     ];
 
     var transactionHtml = [];
@@ -1146,10 +1182,8 @@ gulp.task('dev-transaction-copySrc', function () {
     }
     transactionJs.push(jsServiceFiles.transactionService);
     transactionJs.push(jsServiceFiles.transactionLoadService);
-    transactionJs.push(jsServiceFiles.repContactService);
     transactionJs.push(jsServiceFiles.dataLists);
     transactionJs.push(jsServiceFiles.dataListsActivity);
-    transactionJs.push(jsServiceFiles.applicationInfoService);
     transactionJs.push(jsServiceFiles.filterLists);
     transactionJs.push(jsServiceFiles.hpfbConstants);
     transactionJs.push(jsDirectiveFiles.numberOnly);
@@ -1193,18 +1227,7 @@ gulp.task('dev-transaction-createRootJs', function () {
 
 });
 gulp.task('dev-transaction-copyTranslate', function () {
-    var translationList = [
-        translationBaseFiles.countries,
-        translationBaseFiles.address,
-        translationBaseFiles.stateProvinces,
-        translationBaseFiles.contact,
-        translationBaseFiles.applicationInfo,
-        translationBaseFiles.fileIO,
-        translationBaseFiles.general,
-        translationBaseFiles.messages,
-        translationBaseFiles.transaction
-    ];
-    return (pipes.translateDev(translationList, paths.buildDevTransaction))
+    return (pipes.translateDev(transactionTranslationFilesBaseList, paths.buildDevTransaction))
 });
 
 gulp.task('dev-transaction-copyLib', function () {
@@ -1593,7 +1616,7 @@ gulp.task('prod-global-copyLibFolder', function () {
  * Want all the sources to have the same time stamp
  *
  * */
-gulp.task('prod-global-copyAllSources', ['prod-activity-copySourceFiles','prod-company-copySourceFiles'], function () {
+gulp.task('prod-global-copyAllSources', ['prod-activity-copySourceFiles','prod-company-copySourceFiles','prod-transaction-copySourceFiles'], function () {
     // var destDir = paths.buildProd;
     //return(pipes.copyActivitySrc(false,paths))
     return (true);
@@ -1721,8 +1744,6 @@ gulp.task('prod-activity-createRootJsFiles', function () {
 /*********** COMPANY PRODCTION SCRIPTS ****************/
 
 
-
-
 gulp.task('prod-company-copyTranslateFiles', function () {
 
     var destPath = paths.buildProd + 'app/resources/';
@@ -1779,7 +1800,7 @@ gulp.task('prod-company-compileTranslateFile', ['prod-company-copyTranslateFiles
 
 });
 
-//Leaves out copying activity source files as that should be done globally
+
 gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function () {
     var basePath = paths.buildProd + 'app/scripts/';
     var htmlPartial = jsRootContent.partialCompanyRoot;
@@ -1804,21 +1825,87 @@ gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function ()
     var result = "";
     result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html', paths.buildProd);
     result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html', paths.buildProd);
-    return pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html', paths.buildProd);
+    result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html', paths.buildProd);
+    return pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html', paths.buildProd);
 
 });
-
-
-
-
 
 
 
 /****** END COMPANY PROD SCRIPTS******/
 
 
+/******START TRANSACTION PROD SCRIPTS******/
 
+gulp.task('prod-transaction-copyTranslateFiles', function () {
+
+    var destPath = paths.buildProd + 'app/resources/';
+    var translationList = transactionTranslationFilesBaseList;
+
+    return (pipes.translateDev(translationList, paths.buildProd));
+
+});
+gulp.task('prod-transaction-compileTranslateFile', ['prod-transaction-copyTranslateFiles'], function () {
+
+    var destPath = paths.buildProd + paths.relScript;
+    return (pipes.compileTranslateFile(paths.buildProd, destPath, "transactionTranslations", transactionTranslationFilesBaseList));
+
+});
+
+/**
+ * Creates the root JS files for internal/external and french/English forms
+ * */
+gulp.task('prod-transaction-createRootJsFiles', function () {
+    var dest = paths.buildProd + 'app/scripts/';
+    var rootPath = paths.scripts + "/" + rootFileNames.transactionRoot + ".js";
+    //skip the date and and generate internal files
+    return (
+        pipes.createRootFileSet(rootPath, dest, true, false)
+    );
+
+});
+
+gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFile', 'prod-transaction-createRootJsFiles'], function () {
+
+    var srcPath = paths.buildProd + 'app/scripts/';
+    var dest = paths.buildProd + 'app/scripts/';
+    var rootJsBaseName = "transactionApp";
+    var translateName = "transactionTranslations";
+    var hasInternal=false;
+    return (
+        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, translateName, hasInternal)
+    )
+});
+
+
+gulp.task('prod-transaction-copySourceFiles', function () {
+    return (
+        pipes.copySrcs(false, paths.buildProd, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders)
+    );
+});
+
+gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], function () {
+    var basePath = paths.buildProd + 'app/scripts/';
+    var htmlPartial = jsRootContent.partialTransactionRoot;
+    var dateToday = createSuffixDate();
+    var libFiles= paths.buildProd + paths.relLib+'**/angular*.js';
+    var srcJsExtEn = [
+        basePath + 'transactionAppEXT-en' + '*.min.js',
+        libFiles
+    ];
+    var srcJsExtFr = [
+        basePath + 'transactionAppEXT-fr' + '*.min.js',
+        libFiles
+    ];
+
+    var result = "";
+    result = pipes.createProdRootHtml(paths.englishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'transactionEXT-en.html', paths.buildProd);
+    return pipes.createProdRootHtml(paths.frenchTemplate, transactionRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'transactionEXT-fr.html', paths.buildProd);
+});
+
+
+
+/******END TRANSACTION PROD SCRIPTS******/
 
 //TODO: move and copy to other locations
 pipes.createRootFileSet = function (rootPath, destDir, skipDate, generateInternal) {
@@ -1898,52 +1985,6 @@ pipes.compileSourceJsMinified = function (srcPath, destPath, rootJsBaseName, com
     )
 };
 
-gulp.task('prod-company-compileSrcJs', ['prod-company-compileTranslateFile', 'prod-company-createRootJsFiles'], function () {
-
-    var srcPath = paths.buildProd + 'app/scripts/';
-    var dest = paths.buildProd + 'app/scripts/';
-    var rootJsBaseName = "companyApp";
-    var translateName = "companyTranslations";
-    return (
-        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, translateName, true)
-    )
-
-    /*var baseActivityPath = paths.buildProd + 'app/scripts/';
-
-    var filesToConcat = [];
-    //get all the activity component folders
-    for (var i = 0; i < activityComponentFolders.length; i++) {
-        filesToConcat.push(baseActivityPath + "components/" + companyComponentFolders[i] + "**!/!*.js")
-    }
-    //get all the activity services
-    for (var i = 0; i < activityServiceFileNames.length; i++) {
-        filesToConcat.push(baseActivityPath + "services/" + activityServiceFileNames[i] + "*.js")
-    }
-    //get all the activity directives
-    for (var i = 0; i < activityDirectiveFolders.length; i++) {
-        filesToConcat.push(baseActivityPath + "directives/" + activityDirectiveFolders[i] + "**!/!*.js")
-    }
-    //add translation file
-    filesToConcat.push(baseActivityPath + "activityTranslations.js")
-
-    var dateToday = createSuffixDate();
-    var outFiles = filesToConcat;
-    console.log(outFiles.length);
-    var result = "";
-    var destPath = baseActivityPath;
-
-    outFiles.push(baseActivityPath + 'activityAppEXT-en.js');
-    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-en' + dateToday + '.min.js', destPath);
-    outFiles = filesToConcat.slice();
-    outFiles.push(baseActivityPath + 'activityAppINT-en.js');
-    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityINT-en' + dateToday + '.min.js', destPath);
-    outFiles = filesToConcat.slice();
-    outFiles.push(baseActivityPath + 'activityAppINT-fr.js');
-    result = pipes.builtAppCmpScriptsProd(outFiles, 'activityINT-fr' + dateToday + '.min.js', destPath);
-    outFiles = filesToConcat.slice();
-    outFiles.push(baseActivityPath + 'activityAppEXT-fr.js');
-    return (pipes.builtAppCmpScriptsProd(outFiles, 'activityEXT-fr' + dateToday + '.min.js', destPath));*/
-});
 
 
 

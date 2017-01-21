@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionInfo', ['contactModule25', 'lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap','dataLists','ui.select'])
+        .module('transactionInfo', ['lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap','dataLists','ui.select','addressModule','contactModule'])
 })();
 
 (function () {
