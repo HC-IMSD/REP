@@ -1162,49 +1162,10 @@ gulp.task('dev-company-copyLib', function () {
 //copy all the needed files for company
 gulp.task('dev-transaction-copySrc', function () {
 
-    var transactionSrcPaths = [
-        jsComponentPaths.transactionMainPath + '**/*',
-        jsComponentPaths.contactDetailsPath + '**/*',
-        jsComponentPaths.expandingTablePath + '**/*',
-        jsComponentPaths.fileIOComponentAndDepPath + '**/*',
-        jsComponentPaths.transactionInfoPath + '**/*',
-        jsComponentPaths.lifecycleDetailsPath + '**/*',
-        jsComponentPaths.lifecycleListPath + '**/*',
-        jsComponentPaths.addressDetailsPath + '**/*'
+    return (
+        pipes.copySrcs(false, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders)
+    );
 
-    ];
-
-    var transactionHtml = [];
-    var transactionJs = [];
-    for (var i = 0; i < transactionSrcPaths.length; i++) {
-        transactionHtml.push(transactionSrcPaths[i] + '.html')
-        transactionJs.push(transactionSrcPaths[i] + '.js')
-    }
-    transactionJs.push(jsServiceFiles.transactionService);
-    transactionJs.push(jsServiceFiles.transactionLoadService);
-    transactionJs.push(jsServiceFiles.dataLists);
-    transactionJs.push(jsServiceFiles.dataListsActivity);
-    transactionJs.push(jsServiceFiles.filterLists);
-    transactionJs.push(jsServiceFiles.hpfbConstants);
-    transactionJs.push(jsDirectiveFiles.numberOnly);
-
-    var copySourcesJs = gulp.src(transactionJs, {read: true, base: './'});
-    var copySourcesHtml = gulp.src(transactionHtml, {read: true, base: './'});
-    var dateToday = createSuffixDate();
-    copyTransactionHtml(copySourcesHtml, dateToday)
-    var def = Q.defer();
-    copySourcesJs.pipe(rename({
-            suffix: dateToday
-        }))
-        .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
-        .pipe(gulp.dest(paths.buildDevTransaction))
-        .on('end', function () {
-            def.resolve();
-        })
-        .on('error', def.reject);
-    return def.promise;
-
-    //return copySources.pipe(gulp.dest(paths.buildDevTransaction))
 
 });
 function copyTransactionHtml(src, dateToday) {
