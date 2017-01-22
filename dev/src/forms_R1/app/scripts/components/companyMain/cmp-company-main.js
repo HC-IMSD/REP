@@ -2,12 +2,11 @@
     'use strict';
     angular
         .module('companyMain', [
-            'pascalprecht.translate',
             'companyService',
             'applicationInfoService',
             'ngMessages',
             'ngAria',
-            'addressList2',
+            'addressList',
             'contactList2',
             'fileIO',
             'ngSanitize',
@@ -117,7 +116,6 @@
 
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
         };
-
 
         /**
          * Creates a filename based on HC specifications

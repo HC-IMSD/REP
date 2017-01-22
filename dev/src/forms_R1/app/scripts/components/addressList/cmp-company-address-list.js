@@ -6,14 +6,14 @@
     'use strict';
 
     angular
-        .module('addressList2', ['addressRecord'])
+        .module('addressList', ['addressRecord'])
 })();
-
+//test
 (function () {
     'use strict';
 
     angular
-        .module('addressList2')
+        .module('addressList')
         .component('cmpCompanyAddressList', {
             templateUrl: 'app/scripts/components/addressList/tpl-company-address-list.html',
             bindings: {
@@ -128,7 +128,7 @@
             //TODO don't hard code length
             return (!(vm.addressList.length < 4 && vm.isDetailsValid))
 
-        }
+        };
 
         vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;

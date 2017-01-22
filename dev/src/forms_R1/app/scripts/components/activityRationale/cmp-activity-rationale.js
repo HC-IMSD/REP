@@ -27,7 +27,7 @@
         });
     function activityRationaleCtrl() {
         var vm = this;
-        vm.record = {}
+        vm.record = {};
         vm.requiredState = false;
         vm.rationaleSelected = ""; //sets error handling
         /**
@@ -49,7 +49,7 @@
                 return true
             }
             return false
-        }
+        };
         vm.updateErrorState = function () {
             if (vm.record.newRoa || vm.record.newClaims
                 || vm.record.changeFormulation
@@ -62,7 +62,7 @@
             } else {
                 vm.rationaleSelected = ""
             }
-        }
+        };
 
         vm.showErrorMissing = function () {
             //TODO service

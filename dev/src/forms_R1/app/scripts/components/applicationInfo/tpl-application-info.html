@@ -1,4 +1,4 @@
-<ng-form name="infoCtrl.applInfoForm"
+<ng-form name="infoCtrl.applInfoForm">
 <div>
     <div class="row">
         <div class="col-xs-3 form-group">
@@ -47,7 +47,7 @@
                                ng-model="infoCtrl.record[infoCtrl.tagName]" ng-required="!infoCtrl.isExtern()"/>
                     </div>
                 </div>
-                <strong id="code-error" class="error">
+                <strong id="idType-error" class="error">
                         <span class="label label-danger" ng-if="infoCtrl.applInfoForm.fieldId.$invalid"
                               ng-messages="infoCtrl.applInfoForm.fieldId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
@@ -71,3 +71,4 @@
       </div>
   </div>
 </div>
+</ng-form>

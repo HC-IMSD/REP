@@ -2,6 +2,7 @@
     'use strict';
     angular
         .module('companyApp', [
+            'pascalprecht.translate',
             'companyMain',
             'companyLoadService',
             'translations'

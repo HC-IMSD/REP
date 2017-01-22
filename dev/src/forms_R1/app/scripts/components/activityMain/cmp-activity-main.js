@@ -110,8 +110,8 @@
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
-           var result=loadActivityData();
-            result=loadFeeData();
+           loadActivityData();
+            loadFeeData();
         };
 
         function loadActivityData(){
@@ -209,7 +209,7 @@
                 vm.showActivity = false;
             }
 
-        }
+        };
 
         /**
          * @ngdoc -creates a filename for activity file. If it exists,adds control number
@@ -315,6 +315,7 @@
             }
             vm.showAllErrors = true;
             disableXMLSave();
+            disableJSONSave();
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
@@ -375,7 +376,7 @@
                     vm.alert3.show = false;
                     break;
             }
-        }
+        };
 
         vm.addInstruct = function (value) {
 

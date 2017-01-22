@@ -31,7 +31,7 @@
                 recordIndex:'<'
             }
         });
-    addressRecCtrl.$inject = ['$scope']
+    addressRecCtrl.$inject = ['$scope'];
     function addressRecCtrl($scope) {
         var vm = this;
         vm.savePressed = false;
@@ -175,7 +175,7 @@
                 return true
             }
             return false
-        }
+        };
 
 
 
@@ -185,11 +185,7 @@
          */
         vm.setEditable = function () {
 
-            if (vm.formAmend && !vm.addressModel.amendRecord) {
-                vm.isEditable = false;
-            } else {
-                vm.isEditable = true;
-            }
+            vm.isEditable = !(vm.formAmend && !vm.addressModel.amendRecord);
         }
 
     }

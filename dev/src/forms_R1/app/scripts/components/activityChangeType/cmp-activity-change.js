@@ -30,15 +30,15 @@
 
     function  activityChangeCtrl() {
         var vm = this;
-        vm.record={}
-        vm.rationaleSelected = ""
+        vm.record={};
+        vm.rationaleSelected = "";
         /**
          *
          * @param changes
          */
         vm.$onChanges = function (changes) {
             if (changes.activityRecord) {
-                vm.record = changes.activityRecord.currentValue
+                vm.record = changes.activityRecord.currentValue;
                 vm.updateErrorState();
             }
             if (changes.isRequired) {
@@ -51,7 +51,7 @@
                 return true
             }
             return false
-        }
+        };
 
         vm.updateErrorState = function () {
 
@@ -69,10 +69,9 @@
             } else {
                 vm.rationaleSelected = ""
             }
-        }
+        };
 
         vm.showErrorMissing = function () {
-            //TODO service
             if (!vm.requiredState) {
                 return false;
             }

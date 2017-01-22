@@ -74,7 +74,7 @@
                 vm.postalPattern = getPostalPattern();
                 vm.hideProvinceDdl = !vm.hideProvinceText;
             }
-        }
+        };
         /**
          * @ngdoc method updates if the model changes
          * @param changes
@@ -127,12 +127,12 @@
 
         vm.onDeleteButtonClick = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
-        }
+        };
 
         vm.onDiscardButtonClick = function () {
             vm.addressModel = angular.extend({}, vm.addressRecord);
             vm.addressForm.$setPristine();
-        }
+        };
 
 
        /* vm.onSelectedCountryChange = function () {
@@ -144,7 +144,7 @@
             //  vm.addressModel.addressRole = newRole;
             // vm.updateAddressModel();
 
-        }
+        };
 
         /**
          * @ngdoc method formats canadian postal code to upper and space
@@ -157,7 +157,7 @@
                 postal=postal.substring(0,3)+" "+postal.substring(3,postal.length)
             }
             vm.addressModel.postalCode=postal;
-        }
+        };
         var getProvinceTextState = function () {
 
             var isCanOrUsa = isPostalRequiredFn();
@@ -170,11 +170,11 @@
             }
 
             return isCanOrUsa;
-        }
+        };
 
         var isPostalRequiredFn = function () {
             return (vm.addressModel.country.id === CANADA || vm.addressModel.country.id === USA);
-        }
+        };
 
         var getProvinceStateList = function () {
 
@@ -185,18 +185,18 @@
             else if (vm.addressModel.country.id === USA) {
                 return getCountryAndProvinces.getUSStates();
             }
-        }
+        };
 
         var getProvinceListLabel = function () {
             var label = (vm.addressModel.country.id === USA) ? "STATE" : "PROVINCE";
             return label;
-        }
+        };
 
 
         var getPostalLabel = function () {
             var label = (vm.addressModel.country.id === USA) ? "ZIP" : "POSTAL";
             return label;
-        }
+        };
 
         var getPostalPattern = function () {
             var postalPtrn = null;
