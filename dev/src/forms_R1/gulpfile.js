@@ -2,8 +2,6 @@ var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var del = require('del');
 var es = require('event-stream');
-var bowerFiles = require('main-bower-files');
-var print = require('gulp-print');
 var Q = require('q');
 var angularTranslate = require('gulp-angular-translate');
 var inject = require('gulp-inject');
@@ -12,19 +10,10 @@ var rename = require("gulp-rename");
 var angularFilesort = require('gulp-angular-filesort');
 var replace = require('gulp-replace-task');
 var stringReplace = require('gulp-string-replace');
-//var gutil = require('gulp-util');
 var dateFormat = require('dateformat');
-//var runSequence = require('run-sequence');
 var gulpMerge = require('gulp-merge-json');
-var fs = require('fs');
+var htmlmin = require('gulp-htmlmin');
 
-
-/*
- Basic functionality
- */
-/*gulp.src('jsonFiles/!**!/!*.json')
- .pipe(merge('combined.json'))
- .pipe(gulp.dest('./dist'));*/
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -34,6 +23,7 @@ var buildDev = './build/dev';
 //GLOBAL variable save
 var _DATESTAMP = "";
 
+//paths and relativePaths of interest
 var paths = {
     styles: 'app/styles/',
     translations: 'app/resources/',
@@ -47,34 +37,24 @@ var paths = {
     englishTemplate: wetBase + '/content-en.html',
     frenchTemplate: wetBase + '/content-fr.html',
     lib: './app/lib/',
-    relLib:'app/lib/',
+    relLib: 'app/lib/',
     data: './app/data/',
     scripts: baseScript,
     relScript: '/app/scripts/',
     components: baseScript + '/components/',
     directives: baseScript + '/directives/',
     services: baseScript + '/services/',
-    // rootActivity: './app/activityApp.js',
     wetBase: wetBase
 };
 
-/*** dossier paths because right now it is special**/
-//var baseDossier = '../dossierEnrol';
-/*var dossierPaths = {
-    lib: './app/lib/', //going to use the same as transaction paths
-    translations: baseDossier + '/app/resources/',
-    buildDevDossier: buildDev + '/dossier/',
-    services: baseDossier + '/app/services/',
-    components: baseDossier + '/app/components/',
-    dossierApp: baseDossier + '/app/dossierApp.js'
-};*/
 
-
+//custom placeholders used to inject content
 var placeholders = {
     mainContent: '<!-- inject:mainContent-->',
     dateStamp: 'dateToday'
 };
 
+//================================ Titles and main headings for the web page START========================
 var activityRootTitles_en = {
     mainHeading: "Regulatory Activity Template: Regulatory Enrolment Process (REP)",
     title: 'Health Canada Activity REP Template'
@@ -121,41 +101,50 @@ var
         title: 'fr_Health Canada Dossier Template'
 
     };
+//======================== Titles and main headings for the web page END================================
 
 
-var jsComponentPaths = {
-    activityChangePath: paths.components + 'activityChangeType/',
-    activityMainPath: paths.components + 'activityMain/',
-    activityRationalePath: paths.components + 'activityRationale/',
-    addressDetailsPath: paths.components + 'addressDetails/',
-    addressListPath: paths.components + 'addressList/',
-    addressRecordPath: paths.components + 'addressRecord/',
-    addressRolePath: paths.components + 'addressRole/',
-    applicationInfoPath: paths.components + 'applicationInfo/',
-    companyMainPath: paths.components + 'companyMain/',
-    contactDetailsPath: paths.components + 'contactDetails/',
-    contactListPath: paths.components + 'contactList/',
-    contactRecordPath: paths.components + 'contactRecord/',
-    dinDetailsPath: paths.components + 'dinDetails/',
-    expandingTablePath: paths.components + 'expandingTable/',
-    fileIOComponentAndDepPath: paths.components + 'fileIO/',
-    lifecycleDetailsPath: paths.components + 'lifecycleDetails/',
-    lifecycleListPath: paths.components + 'lifecycleList/',
-    relatedActivityPath: paths.components + 'relatedActivity/',
-    relatedActivityListPath: paths.components + 'relatedActivityList/',
-    adminSubmissionPath: paths.components + 'adminSubmission/',
-    repContactListPath: paths.components + 'repContactList/',
-    repContactRecordPath: paths.components + 'rep-contact-record/',
-    transactionMainPath: paths.components + 'transactionMain/',
-    transactionInfoPath: paths.components + 'transactionInfo/',
-    countrySelectPath: paths.components + 'countrySelect/'
+//================================NAMES AND PATHS FOR MISC ITEMS START ================================
+
+
+//Paths in source control to the root html content that gets injected into a template
+var jsRootContent = {
+    partialActivityRoot: 'rootContent/activityRoot.html',
+    partialCompanyRoot: 'rootContent/companyRoot.html',
+    partialTransactionRoot: 'rootContent/transactionRoot.html',
+    partialDossierRoot: 'rootContent/dossierRoot.html'
 };
 
 
+// Root javascript filenames for a form. Leave off the .js
+var rootFileNames = {
+    activityRoot: "activityApp",
+    companyRoot: "companyApp",
+    transactionRoot: "transactionApp",
+    dossierRoot: "dossierApp"
+};
+
+//Style file paths from source countrol to inject into the forms
+var styleFiles = {
+    rep: paths.styles + 'rep.css',
+    select: paths.styles + 'select.min.css',
+    select2Style: paths.styles + 'select2.min.css',
+    select2Image: paths.styles + 'select2.png',
+    selectizeStyle: paths.styles + 'selectize.default.css'
+};
+
+
+var changedFile = ""; // GLOBAL USED for Watcher storing changed file
+
+
+//======================== NAMES AND PATHS FOR MISC ITEMS END =======================================
+
+
+//======================== Component Definitions START ========================================
+
 /**
- * All the component folders
- * @type {{activityChange: string, activityMain: string, activityRationale: string, addressDetails: string, addressList: string, addressRecord: string, addressRole: string, applicationInfo: string, companyMain: string, contactDetails: string, contactList: string, contactRecord: string, dinDetails: string, expandingTable: string, fileIOComponentAndDep: string, lifecycleDetails: string, lifecycleList: string, relatedActivity: string, relatedActivityList: string, repContactList: string, repContactRecord: string, transactionMain: string, transactionAddressRecord: string, transactionInfo: string, countrySelect: string, adminSubmissionPath: string}}
- */
+ * All the component folders used for all forms
+ **/
 var componentFolders = {
     activityChange: 'activityChangeType/',
     activityMain: 'activityMain/',
@@ -183,12 +172,12 @@ var componentFolders = {
     transactionInfo: 'transactionInfo/',
     countrySelect: 'countrySelect/',
     adminSubmissionPath: 'adminSubmission/',
-    appendix4:'appendix-four/',
-    canRefProducts:'can-ref-products/',
-    checkboxList:'checkbox-list/',
+    appendix4: 'appendix-four/',
+    canRefProducts: 'can-ref-products/',
+    checkboxList: 'checkbox-list/',
     contact: 'contact/',
     countryList: 'country-list/',
-    dossier:'dossier/',
+    dossier: 'dossier/',
     drugUse: 'drug-use/',
     routeAdmin: 'route-admin/',
     fileIO: 'fileIO/',
@@ -196,9 +185,81 @@ var componentFolders = {
     tabs: 'tabs/',
     theraClass: 'therapeutic-classification/',
     formulations: 'formulations/'
-
 };
-//service file names. Leave off the .js
+
+//Activity Form Components
+var activityComponentFolders = [
+    componentFolders.activityChange,
+    componentFolders.activityMain,
+    componentFolders.activityRationale,
+    componentFolders.applicationInfo,
+    componentFolders.contactDetails,
+    componentFolders.expandingTable,
+    componentFolders.fileIOComponentAndDep,
+    componentFolders.repContactList,
+    componentFolders.repContactRecord,
+    componentFolders.adminSubmissionPath
+];
+
+//Company Form Components
+var companyComponentFolders =
+    [
+        componentFolders.companyMain,
+        componentFolders.applicationInfo,
+        componentFolders.contactDetails,
+        componentFolders.addressRole,
+        componentFolders.expandingTable,
+        componentFolders.fileIOComponentAndDep,
+        componentFolders.addressList,
+        componentFolders.contactList,
+        componentFolders.addressDetails,
+        componentFolders.addressRecord,
+        componentFolders.contactRecord
+    ];
+
+//Dossier Form Components
+var dossierComponentFolders =
+    [
+        componentFolders.appendix4,
+        componentFolders.canRefProducts,
+        componentFolders.checkboxList,
+        componentFolders.countryList,
+        componentFolders.dossier,
+        componentFolders.drugUse,
+        componentFolders.routeAdmin,
+        componentFolders.scheduleA,
+        componentFolders.tabs,
+        componentFolders.theraClass,
+        componentFolders.formulations,
+        componentFolders.fileIOComponentAndDep,
+        componentFolders.repContactList,
+        componentFolders.repContactRecord,
+        componentFolders.contactDetails,
+        componentFolders.applicationInfo,
+        componentFolders.expandingTable
+    ];
+
+//transaction Form Components
+var transactionComponentFolders = [
+
+    componentFolders.transactionMain,
+    componentFolders.transactionInfo,
+    componentFolders.contactDetails,
+    componentFolders.expandingTable,
+    componentFolders.fileIOComponentAndDep,
+    componentFolders.repContactList,
+    componentFolders.repContactRecord,
+    componentFolders.lifecycleList,
+    componentFolders.lifecycleDetails,
+    componentFolders.addressDetails
+];
+
+
+//======================== Component Definitions END ========================================
+
+//======================== SERVICE Definitions START ========================================
+
+//service file names for ALL forms . Leave off the .js
 var serviceFileNames = {
     activityService: 'activity-service',
     activityLoadService: 'activity-load-service',
@@ -218,51 +279,98 @@ var serviceFileNames = {
     dossierDataList: "dossier-data-list",
     dossierLoadService: "dossier-load-service"
 };
-//leave off the .js
-var rootFileNames = {
-    activityRoot: "activityApp",
-    companyRoot: "companyApp",
-    transactionRoot: "transactionApp",
-    dossierRoot: "dossierApp"
-};
 
-//good
+//Activity Form Service File names
+var activityServiceFileNames = [
+    serviceFileNames.activityService,
+    serviceFileNames.activityLists,
+    serviceFileNames.applicationInfoService,
+    serviceFileNames.hpfbConstants,
+    serviceFileNames.repContactService,
+    serviceFileNames.filterLists,
+    serviceFileNames.dataLists,
+    serviceFileNames.commonLists
+];
+
+//Company Form Service Files
+var companyServiceFileNames =
+    [
+        serviceFileNames.companyService,
+        serviceFileNames.companyLoadService,
+        serviceFileNames.applicationInfoService,
+        serviceFileNames.filterLists,
+        serviceFileNames.hpfbConstants,
+        serviceFileNames.dataLists
+    ];
+
+//Dossier Form Service Files
+var dossierServiceFileNames =
+    [
+        serviceFileNames.dossierDataList,
+        serviceFileNames.dossierLoadService,
+        serviceFileNames.dossierService,
+        serviceFileNames.applicationInfoService,
+        serviceFileNames.dataLists,
+        serviceFileNames.filterLists,
+        serviceFileNames.repContactService,
+        serviceFileNames.hpfbConstants
+
+    ];
+
+//Transaction Service files
+var transactionServiceFileNames = [
+
+    serviceFileNames.transactionService,
+    serviceFileNames.transactionLoadService,
+    serviceFileNames.dataLists,
+    serviceFileNames.dataListsActivity,
+    serviceFileNames.filterLists,
+    serviceFileNames.hpfbConstants
+
+];
+
+//================================ SERVICE Definitions END ========================================/
+
+//================================ DIRECTIVE Definitions START ================================
+
+
 var directiveFolders = {
     country: 'country/',
     numberOnly: 'numberOnly/'
 };
 
 
-var jsServiceFiles = {
-    activityService: paths.services + 'activity-service.js',
-    activityLoadService: paths.services + 'activity-load-service.js',
-    activityLists: paths.services + 'activity-lists.js',
-    applicationInfoService: paths.services + 'application-info-service.js',
-    companyService: paths.services + 'company-service.js',
-    companyLoadService: paths.services + 'company-load-service.js',
-    dataListsActivity: paths.services + 'data-lists.activity.js',
-    dataLists: paths.services + 'data-lists.js',
-    filterLists: paths.services + 'filter-lists.js',
-    hpfbConstants: paths.services + 'hpfb-constants.js',
-    transactionService: paths.services + 'transactionService.js',
-    transactionLoadService: paths.services + 'transaction-load-service.js',
-    repContactService: paths.services + 'rep-contact-service.js',
-    commonLists: paths.services + 'common-lists.js'
-};
-//TODO refactor
-var jsDirectiveFiles = {
-    country: paths.directives + 'country/country-select.js',
-    numberOnly: paths.directives + 'numberOnly/only-digits.js'
-};
+//Activity Form Directives
+var activityDirectiveFolders = [
+    directiveFolders.numberOnly
+];
 
-var jsRootContent = {
-    partialActivityRoot: 'rootContent/activityRoot.html',
-    partialCompanyRoot: 'rootContent/companyRoot.html',
-    partialTransactionRoot: 'rootContent/transactionRoot.html',
-    partialDossierRoot: 'rootContent/dossierRoot.html'
-};
+//Company Form Directives
+var companyDirectiveFolders =
+    [
+        directiveFolders.numberOnly
+    ];
 
-//good
+//Dossier Form Directives
+var dossierDirectiveFolders =
+    [
+        directiveFolders.numberOnly
+    ];
+
+
+//Transaction Form directives
+var transactionDirectiveFolders =
+    [
+        directiveFolders.numberOnly
+    ];
+
+
+//================DIRECTIVE Definitions END ================================================
+
+
+//============== TRANSLATION file definiitions START =============================================
+
+//file paths and base names for ALL translation files. Leave .json/ -lang off name
 var translationBaseFiles = {
 
     activityInfo: paths.translations + 'activityInfo',
@@ -276,23 +384,73 @@ var translationBaseFiles = {
     stateProvinces: paths.translations + 'stateProvinces',
     transaction: paths.translations + 'transaction',
     companyInfo: paths.translations + 'companyInfo',
-    dosageForm:  paths.translations + 'dossierDosageform',
-    dossier:  paths.translations + 'dossier',
-    dossierGeneral:  paths.translations + 'dossierGeneral',
-    appendix4:  paths.translations + 'appendix4',
-    dossierMsg:  paths.translations + 'dossierMsg',
-    scheduleA:  paths.translations + 'scheduleA',
-    formulation:  paths.translations + 'formulation'
+    dosageForm: paths.translations + 'dossierDosageform',
+    dossier: paths.translations + 'dossier',
+    dossierGeneral: paths.translations + 'dossierGeneral',
+    appendix4: paths.translations + 'appendix4',
+    dossierMsg: paths.translations + 'dossierMsg',
+    scheduleA: paths.translations + 'scheduleA',
+    formulation: paths.translations + 'formulation'
 };
-var styleFiles = {
-    rep: paths.styles + 'rep.css',
-    select: paths.styles + 'select.min.css',
-    select2Style: paths.styles + 'select2.min.css',
-    select2Image: paths.styles + 'select2.png',
-    selectizeStyle: paths.styles + 'selectize.default.css'
-}
 
-// == PIPE SEGMENTS ========
+//Activity Form Translations
+var activityTranslationFilesBaseList = [
+    translationBaseFiles.activityInfo,
+    translationBaseFiles.activityList,
+    translationBaseFiles.contact,
+    translationBaseFiles.applicationInfo,
+    translationBaseFiles.fileIO,
+    translationBaseFiles.general,
+    translationBaseFiles.messages
+];
+
+//COMPANY form translations
+var companyTranslationFilesBaseList =
+    [
+        translationBaseFiles.address,
+        translationBaseFiles.stateProvinces,
+        translationBaseFiles.contact,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.general,
+        translationBaseFiles.messages,
+        translationBaseFiles.companyInfo
+    ];
+
+/*** Dossier Form translations***/
+var dossierTranslationFilesBaseList =
+    [
+        translationBaseFiles.dosageForm,
+        translationBaseFiles.dossier,
+        translationBaseFiles.dossierGeneral,
+        translationBaseFiles.dossierMsg,
+        translationBaseFiles.appendix4,
+        translationBaseFiles.scheduleA,
+        translationBaseFiles.formulation,
+        translationBaseFiles.general,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.messages,
+        translationBaseFiles.contact
+    ];
+
+
+///transaction form translations
+var transactionTranslationFilesBaseList = [
+    translationBaseFiles.address,
+    translationBaseFiles.stateProvinces,
+    translationBaseFiles.contact,
+    translationBaseFiles.applicationInfo,
+    translationBaseFiles.fileIO,
+    translationBaseFiles.general,
+    translationBaseFiles.messages,
+    translationBaseFiles.transaction
+];
+
+//===================== TRANSLATION file definiitions END ======================
+
+
+// ========= PIPE SEGMENTS ===============================
 
 var pipes = {};
 
@@ -321,7 +479,7 @@ pipes.builtAppCmpScriptsProd = function (filePaths, outName, destPath) {
         .pipe(pipes.orderedAppScripts())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat(outName))
-        //.pipe(plugins.uglify())
+        .pipe(plugins.uglify())
         .pipe(plugins.sourcemaps.write())
         .pipe(gulp.dest(destPath));
 };
@@ -347,33 +505,9 @@ pipes.scriptedPartials = function () {
         }));
 };
 
-/*pipes.builtStylesDev = function () {
-    return gulp.src(paths.styles)
-        .pipe(plugins.sass())
-        .pipe(gulp.dest(paths.distDev));
-};
-
-pipes.builtStylesProd = function () {
-    return gulp.src(paths.styles)
-        .pipe(plugins.sourcemaps.init())
-        .pipe(plugins.sass())
-        .pipe(plugins.minifyCss())
-        .pipe(plugins.sourcemaps.write())
-        .pipe(pipes.minifiedFileName())
-        .pipe(gulp.dest(paths.distProd));
-};*/
-
-
-
-/*
-pipes.validatedIndex = function () {
-    return gulp.src(paths.index)
-        .pipe(plugins.htmlhint())
-        .pipe(plugins.htmlhint.reporter());
-};
-*/
-
-
+/**
+ *  Creates the full translations json list (assumes en and fr)
+ * */
 pipes.fullTranslateList = function (translateList) {
     var completeList = [];
     for (var i = 0; i < translateList.length; i++) {
@@ -382,6 +516,10 @@ pipes.fullTranslateList = function (translateList) {
     }
     return completeList;
 };
+
+/**
+ * Creates a concatenated list of translations as a javascript file!
+ * */
 pipes.translateDev = function (translateList, destPath, baseIgnore) {
     if (!baseIgnore) baseIgnore = ".";
     var completeList = pipes.fullTranslateList(translateList);
@@ -390,6 +528,11 @@ pipes.translateDev = function (translateList, destPath, baseIgnore) {
     return (copySources.pipe(gulp.dest(destPath)));
 
 };
+
+/**
+ *  Inserts a date stamp in the passed in templaste
+ *
+ * */
 pipes.insertDateStamp = function (template, valsObj) {
     var now = new Date();
     var utc = dateFormat(now, "isoDate");
@@ -402,14 +545,21 @@ pipes.insertDateStamp = function (template, valsObj) {
     );
 };
 
-pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory) {
-
-    return (
+pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory, isHtmlMin) {
+    if (isHtmlMin === true) {
+        return (
+            copySourcesHtml.pipe(rename({
+                    suffix: dateToday
+                }))
+                .pipe(htmlmin({collapseWhitespace: true, removeComments: true, html5: true, caseSensitive: true}))
+                .pipe(gulp.dest(destDirectory))
+        )
+    } else {
         copySourcesHtml.pipe(rename({
                 suffix: dateToday
             }))
             .pipe(gulp.dest(destDirectory))
-    )
+    }
 };
 
 pipes.copyWet = function (destDirectory) {
@@ -421,7 +571,7 @@ pipes.copyWet = function (destDirectory) {
 
 pipes.generateRootJsFile = function (lang, type, rootFile, destPath, skipDate) {
 
-    console.log("generating the root file")
+    console.log("generating the root file");
     var ignorePath = ".";
     if (!skipDate) skipDate = false;
     var rootName = rootFile.split("/");
@@ -463,15 +613,15 @@ pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
 
 /**
  *  Creates the root Html file  for the forms.
- *  @param templatePath- the path to the WET template to inject data into
- *  @param valsObj- the metadata elements to insert into the web page. Currently Title and  formname
- *  @param templateName- the destination name of the html template
+ *  @param templatePath - the path to the WET template to inject data into
+ *  @param valsObj - the metadata elements to insert into the web page. Currently Title and  formname
+ *  @param templateName - the destination name of the html template
  *  @param injectRootJs - the name of rootJS file (i.e. app.js). Assumed to be under app/scripts
- *  @param partialRoot- the html fragment to be injected into the template. This is the root content
- *  @param buildDir- the destination build directory
- *  @param ingorePath- the folder parh to ignore from the source files
- *  @param lang- the language to generate. For angular translate
- *  @param formType- the type of form to generate, either external (EXT) or internal (INT)
+ *  @param partialRoot - the html fragment to be injected into the template. This is the root content
+ *  @param buildDir - the destination build directory
+ *  @param ignorePath - the folder parh to ignore from the source files
+ *  @param lang - the language to generate. For angular translate
+ *  @param formType - the type of form to generate, either external (EXT) or internal (INT)
  * */
 pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType) {
 
@@ -530,52 +680,10 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
 };
 
 pipes.cleanBuild = function (baseDir) {
-    /* var deferred = Q.defer();
-     del(baseDir, function () {
-     deferred.resolve();
-     });
-     return deferred.promise;*/
+
     return (del([baseDir]));
 };
-pipes.copyAllSrc = function () {
-    var dest = './build/demo/';
-    var copySources = gulp.src(['./app/**/*', '!./app/views/**/*', '!./app/spec/**/*',
-            '!./app/scripts/*'],
-        {read: true, base: '.'});
-    return (copySources.pipe(gulp.dest(dest)))
-};
-pipes.copyDemoActivity = function () {
-    var dest = './build/demo/';
-    var copySources = gulp.src([
-        paths.buildDevActivity + '/*.html',
-        paths.buildDevActivity + '/app/scripts/*.js'
-    ], {read: true, base: paths.buildDevActivity});
-    return (copySources.pipe(gulp.dest(dest)))
-};
-pipes.copyDemoTransaction = function () {
-    var dest = './build/demo/';
-    var copySources = gulp.src([
-        paths.buildDevTransaction + '/*.html',
-        paths.buildDevTransaction + '/app/scripts/*.js'
-    ], {read: true, base: paths.buildDevTransaction});
-    return (copySources.pipe(gulp.dest(dest)))
-};
-pipes.copyDemoCompany = function () {
-    var dest = './build/demo/';
-    var copySources = gulp.src([
-        paths.buildDevCompany + '/*.html',
-        paths.buildDevCompany + '/app/scripts/*.js'
-    ], {read: true, base: paths.buildDevCompany});
-    return (copySources.pipe(gulp.dest(dest)))
-};
-pipes.copyDemoDossier = function () {
-    var dest = './build/demo/';
-    var copySources = gulp.src([
-        paths.buildDevCompany + '/*.html',
-        paths.buildDevCompany + '/app/scripts/*.js'
-    ], {read: true, base: paths.buildDevCompany});
-    return (copySources.pipe(gulp.dest(dest)))
-};
+
 
 //deprecated
 pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, destName) {
@@ -592,207 +700,12 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
         .pipe(gulp.dest(destDir));
 };
 
-/**
- * Array of the component folders used for the Pharam Activity form
- * @type {*[]}
- */
-//good
-var activityComponentFolders = [
-    componentFolders.activityChange,
-    componentFolders.activityMain,
-    componentFolders.activityRationale,
-    componentFolders.applicationInfo,
-    componentFolders.contactDetails,
-    componentFolders.expandingTable,
-    componentFolders.fileIOComponentAndDep,
-    componentFolders.repContactList,
-    componentFolders.repContactRecord,
-    componentFolders.adminSubmissionPath
-];
-//good
-var activityServiceFileNames = [
-    serviceFileNames.activityService,
-    serviceFileNames.activityLists,
-    serviceFileNames.applicationInfoService,
-    serviceFileNames.hpfbConstants,
-    serviceFileNames.repContactService,
-    serviceFileNames.filterLists,
-    serviceFileNames.dataLists,
-    serviceFileNames.commonLists
-];
-//good
-var activityDirectiveFolders = [
-    directiveFolders.numberOnly
-];
-
-//goood
-var activityTranslationFilesBaseList = [
-    translationBaseFiles.activityInfo,
-    translationBaseFiles.activityList,
-    translationBaseFiles.contact,
-    translationBaseFiles.applicationInfo,
-    translationBaseFiles.fileIO,
-    translationBaseFiles.general,
-    translationBaseFiles.messages
-];
-
-//COMPANY definitions
-
-
-var companyComponentFolders =
-    [
-        componentFolders.companyMain,
-        componentFolders.applicationInfo,
-        componentFolders.contactDetails,
-        componentFolders.addressRole,
-        componentFolders.expandingTable,
-        componentFolders.fileIOComponentAndDep,
-        componentFolders.addressList,
-        componentFolders.contactList,
-        componentFolders.addressDetails,
-        componentFolders.addressRecord,
-        componentFolders.contactRecord
-    ];
-
-var companyServiceFileNames =
-    [
-        serviceFileNames.companyService,
-        serviceFileNames.companyLoadService,
-        serviceFileNames.applicationInfoService,
-        serviceFileNames.filterLists,
-        serviceFileNames.hpfbConstants,
-        serviceFileNames.dataLists
-    ];
-
-var companyDirectiveFolders =
-    [
-        directiveFolders.numberOnly
-    ];
-
-var companyTranslationFilesBaseList =
-    [
-        translationBaseFiles.address,
-        translationBaseFiles.stateProvinces,
-        translationBaseFiles.contact,
-        translationBaseFiles.applicationInfo,
-        translationBaseFiles.fileIO,
-        translationBaseFiles.general,
-        translationBaseFiles.messages,
-        translationBaseFiles.companyInfo
-    ];
-
-/*** Dossier***/
-
-var dossierComponentFolders =
-    [
-        componentFolders.appendix4,
-        componentFolders.canRefProducts,
-        componentFolders.checkboxList,
-        componentFolders.countryList,
-        componentFolders.dossier,
-        componentFolders.drugUse,
-        componentFolders.routeAdmin,
-        componentFolders.scheduleA,
-        componentFolders.tabs,
-        componentFolders.theraClass,
-        componentFolders.formulations,
-        componentFolders.fileIOComponentAndDep,
-        componentFolders.repContactList,
-        componentFolders.repContactRecord,
-        componentFolders.contactDetails,
-        componentFolders.applicationInfo,
-        componentFolders.expandingTable
-    ];
-
-var dossierServiceFileNames =
-    [
-        serviceFileNames.dossierDataList,
-        serviceFileNames.dossierLoadService,
-        serviceFileNames.dossierService,
-        serviceFileNames.applicationInfoService,
-        serviceFileNames.dataLists,
-        serviceFileNames.filterLists,
-        serviceFileNames.repContactService,
-        serviceFileNames.hpfbConstants
-
-    ];
-
-var dossierDirectiveFolders =
-    [
-        directiveFolders.numberOnly
-    ];
-
-var dossierTranslationFilesBaseList =
-    [
-        translationBaseFiles.dosageForm,
-        translationBaseFiles.dossier,
-        translationBaseFiles.dossierGeneral,
-        translationBaseFiles.dossierMsg,
-        translationBaseFiles.appendix4,
-        translationBaseFiles.scheduleA,
-        translationBaseFiles.formulation,
-        translationBaseFiles.general,
-        translationBaseFiles.fileIO,
-        translationBaseFiles.applicationInfo,
-        translationBaseFiles.messages,
-        translationBaseFiles.contact
-    ];
-
-
-
-/*******/
-
-
-
-
-var transactionTranslationFilesBaseList=[
-    translationBaseFiles.address,
-    translationBaseFiles.stateProvinces,
-    translationBaseFiles.contact,
-    translationBaseFiles.applicationInfo,
-    translationBaseFiles.fileIO,
-    translationBaseFiles.general,
-    translationBaseFiles.messages,
-    translationBaseFiles.transaction
-];
-var transactionComponentFolders=[
-
-    componentFolders.transactionMain,
-    componentFolders.transactionInfo,
-    componentFolders.contactDetails,
-    componentFolders.expandingTable,
-    componentFolders.fileIOComponentAndDep,
-    componentFolders.repContactList,
-    componentFolders.repContactRecord,
-    componentFolders.lifecycleList,
-    componentFolders.lifecycleDetails,
-    componentFolders.addressDetails
-];
-var transactionServiceFileNames=[
-
-    serviceFileNames.transactionService,
-    serviceFileNames.transactionLoadService,
-    serviceFileNames.dataLists,
-    serviceFileNames.dataListsActivity,
-    serviceFileNames.filterLists,
-    serviceFileNames.hpfbConstants
-
-];
-var transactionDirectiveFolders =
-    [
-        directiveFolders.numberOnly
-    ];
-
-/*
-
-
- */
 
 /**
  * Copy the source files based on the arrays for the different components
  *
  * */
-pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, directiveFolders) {
+pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, directiveFolders, isHtmlMin) {
     var htmlArray = [];
     var jsArray = [];
 
@@ -807,7 +720,7 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
     }
     //get all the activity directive folders
     for (var i = 0; i < directiveFolders.length; i++) {
-        jsArray.push(paths.directives + directiveFolders[i] + "**/*.js")
+        jsArray.push(paths.directives + directiveFolders[i] + "**/*.js");
         htmlArray.push(paths.directives + directiveFolders[i] + "**/*.html")
     }
 
@@ -817,7 +730,7 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
     var dateToday = createSuffixDate();
     if (noDate === true) dateToday = "";
 
-    pipes.copyHtml(copySourcesHtml, dateToday, destDir);
+    pipes.copyHtml(copySourcesHtml, dateToday, destDir, isHtmlMin);
     return (
         copySourcesJs.pipe(rename({
                 suffix: dateToday
@@ -827,16 +740,128 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
     )
 };
 
+pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
+    pipes.insertDateStamp(templatePath, metaObj)
+        .pipe(inject(gulp.src([htmlPartial]), {
+            starttag: placeholders.mainContent,
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(inject(gulp.src([
+                'app/lib/**/*.js',
+                '!app/lib/**/angular*.js'
+            ]),
+            {
+                name: 'thirdParty',
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }))
+        .pipe(inject(gulp.src([
+                styleFiles.rep,
+                styleFiles.select,
+                styleFiles.select2Style
+            ]),
+            {
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }
+        ))
+        .pipe(inject(gulp.src(src)
+            .pipe(angularFilesort())
+            , {
+                ignorePath: ignorePath,
+                addRootSlash: false,
+                read: false
+            }))
+        .pipe(rename(outName))
+        .pipe(gulp.dest(destDir))
 
-gulp.task('dev-activity-copySrc', function (noDate) {
-    /*  return (pipes.copyActivitySrc(false, paths.buildDevActivity))*/
+};
+
+
+pipes.createRootFileSet = function (rootPath, destDir, skipDate, generateInternal) {
+    /*
+     console.log(rootPath)
+     console.log(destDir)
+     console.log("skipdData "+skipDate)
+     console.log("generate internal"+generateInternal)*/
+
+    if (generateInternal) {
+        return (
+            pipes.generateRootJsFile('en', 'INT', rootPath, destDir, skipDate) &&
+            pipes.generateRootJsFile('fr', 'INT', rootPath, destDir, skipDate) &&
+            pipes.generateRootJsFile('fr', 'EXT', rootPath, destDir, skipDate) &&
+            pipes.generateRootJsFile('en', 'EXT', rootPath, destDir, skipDate)
+        );
+    } else {
+        return (
+            pipes.generateRootJsFile('fr', 'EXT', rootPath, destDir, skipDate) &&
+            pipes.generateRootJsFile('en', 'EXT', rootPath, destDir, skipDate)
+        )
+    }
+
+};
+
+pipes.compileTranslateFile = function (srcPath, destPath, outFileName, translateFileBaseList) {
+
+    var translationSources = [];
+    //going to explicitly name files
+    for (var i = 0; i < translateFileBaseList.length; i++) {
+        translationSources.push(srcPath + translateFileBaseList[i] + "-en.json");
+        translationSources.push(srcPath + translateFileBaseList[i] + "-fr.json");
+    }
     return (
-        pipes.copySrcs(false, paths.buildDevActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders)
-    );
+        gulp.src(translationSources)
+            .pipe(angularTranslate(outFileName + '.js'))
+            .pipe(gulp.dest(destPath))
+    )
+};
 
-});
+
+pipes.compileSourceJsMinified = function (srcPath, destPath, rootJsBaseName, componentFoldersArray, serviceFileNamesArray, directiveFoldersArray, baseTranslationFileName, hasInternal) {
+
+    var filesToConcat = [];
+    //get all the  component folders
+    for (var i = 0; i < componentFoldersArray.length; i++) {
+        filesToConcat.push(srcPath + "components/" + componentFoldersArray[i] + "**/*.js")
+    }
+    //get all the  services
+    for (var i = 0; i < serviceFileNamesArray.length; i++) {
+        filesToConcat.push(srcPath + "services/" + serviceFileNamesArray[i] + "*.js")
+    }
+    //get all the  directives
+    for (var i = 0; i < directiveFoldersArray.length; i++) {
+        filesToConcat.push(srcPath + "directives/" + directiveFoldersArray[i] + "**/*.js")
+    }
+    //add translation file
+    filesToConcat.push(srcPath + baseTranslationFileName + "*.js");
+
+    var dateToday = createSuffixDate();
+
+    if (hasInternal) {
+        //filesToConcat = filesToConcat.slice();
+        filesToConcat.push(srcPath + rootJsBaseName + "INT-en" + "*.js");
+         pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-en" + dateToday + '.min.js', destPath);
+        filesToConcat = filesToConcat.slice();
+        filesToConcat.push(srcPath + rootJsBaseName + "INT-fr" + "*.js");
+         pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-fr" + dateToday + '.min.js', destPath);
+        filesToConcat = filesToConcat.slice();
+    }
+    filesToConcat.push(srcPath + rootJsBaseName + "EXT-en" + "*.js");
+     pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-en" + dateToday + '.min.js', destPath);
+    filesToConcat = filesToConcat.slice();
+    filesToConcat.push(srcPath + rootJsBaseName + "EXT-fr" + "*.js");
+    return (
+        (pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-fr" + dateToday + '.min.js', destPath))
+    )
+};
 
 
+//============================ Pipe Segmeents END =============================================
+
+//============================Helper Function START===========================================
 
 function createSuffixDate() {
     dateFormat.masks.suffixDate = '_yyyymmdd_HHMM';
@@ -848,14 +873,109 @@ function createSuffixDate() {
     return _DATESTAMP;
 }
 
+//=================================Helper Function END ===========================================
 
-gulp.task('dev-global-watch', function () {
-    var watcher = gulp.watch('app/**/*.js', ['ActivityHtml-devBuild', 'CompanyHtml-devBuild', 'TransactionHtml-devBuild', 'DossierHtml-devBuild']);
-    watcher.on('change', function (event) {
-        console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
-    });
+
+//=============================== Tasks START ====================================================
+gulp.task('dev-activity-copySrc', function () {
+    /*  return (pipes.copyActivitySrc(false, paths.buildDevActivity))*/
+    return (
+        pipes.copySrcs(true, paths.buildDevActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, false)
+    );
+
 });
 
+
+gulp.task('dev-global-watch', function () {
+    var watcher = gulp.watch('app/scripts/**/*.*', ['dev-copy-activity']);
+    watcher.on('change', function (event) {
+        console.log('File ' + event.path + ' was ' + event.type + ', running watch tasks...');
+        changedFile = event.path;
+    });
+});
+gulp.task('dev-copy-activity', function () {
+    var destFolder = "";
+    var filename = "";
+    var folders = changedFile.split("\\");
+    var compFolder = "";
+    var matchingForms = [
+        {
+            matches: false,
+            formName: "Activity",
+            buildPath: paths.buildDevActivity,
+            compFolders: activityComponentFolders,
+            serviceFiles: activityServiceFileNames,
+            directiveFiles: activityDirectiveFolders
+        },
+        {
+            matches: false,
+            formName: "Company",
+            buildPath: paths.buildDevCompany,
+            compFolders: companyComponentFolders,
+            serviceFiles: companyServiceFileNames,
+            directiveFiles: companyDirectiveFolders
+        },
+        {
+            matches: false,
+            formName: "Dossier",
+            buildPath: paths.buildDevDossier,
+            compFolders: dossierComponentFolders,
+            serviceFiles: dossierServiceFileNames,
+            directiveFiles: dossierDirectiveFolders
+        },
+        {
+            matches: false,
+            formName: "Transaction",
+            buildPath: paths.buildDevTransaction,
+            compFolders: transactionComponentFolders,
+            serviceFiles: transactionServiceFileNames,
+            directiveFiles: transactionDirectiveFolders
+        }
+    ];
+
+    if (folders.length > 0) {
+        filename = folders[folders.length - 1];
+        compFolder = folders[folders.length - 2];
+    }
+    for (var k = 0; k < matchingForms.length; k++) {
+        var def = matchingForms[k];
+
+        for (var i = 0; i < def.compFolders.length; i++) {
+            if (def.compFolders[i].includes(compFolder)) {
+                def.matches = true;
+                console.info("copying file to components for " + def.formName + ".... " + changedFile);
+                gulp.src(changedFile, {read: true, base: './'})
+                    .pipe(gulp.dest(def.buildPath));
+                break;
+            }
+        }
+        if (!def.matches && filename) {
+            for (var i = 0; i < def.serviceFiles.length; i++) {
+                if (filename.includes(def.serviceFiles[i])) {
+                    def.matches = true;
+                    console.info("copying file to services for " + def.formName + ".... " + changedFile);
+                    gulp.src(changedFile, {read: true, base: './'})
+                        .pipe(gulp.dest(def.buildPath));
+                    break;
+                }
+            }
+            if (!def.matches && filename) {
+                for (var i = 0; i < def.directiveFiles.length; i++) {
+                    if (filename.includes(def.directiveFiles[i])) {
+                        def.matches = true;
+                        console.info("copying file to directives for " + def.formName + ".... " + changedFile);
+                        gulp.src(changedFile, {read: true, base: './'})
+                            .pipe(gulp.dest(def.buildPath));
+                        break;
+                    }
+                }
+            }
+
+        }
+    }
+
+    return true
+});
 
 gulp.task('dev-activity-copyTranslate', function () {
 
@@ -924,11 +1044,12 @@ gulp.task('dev-activity-createRootJS', function () {
 
 //clean only seems to work becase of the timestam
 gulp.task('dev-activity-htmlBuild', ['dev-activity-copyData', 'dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createRootJS', 'dev-activity-createResources'], function () {
-
-    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
-    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolEXT-en.html', 'activityAppEXT-en' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en' + createSuffixDate() + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'INT')
+    var today = createSuffixDate();
+    today = "";
+    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'INT');
+    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolEXT-en.html', 'activityAppEXT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', 'INT');
 
     return (
         pipes.cleanBuild(paths.buildDevActivity + paths.translations)
@@ -959,7 +1080,7 @@ gulp.task('dev-dossier-clean', function () {
 //copy all the needed files for company
 gulp.task('dev-company-copySrc', function () {
     return (
-        pipes.copySrcs(false, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders)
+        pipes.copySrcs(false, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, false)
     )
 });
 
@@ -983,7 +1104,7 @@ gulp.task('dev-company-htmlBuild', ['dev-company-copyData', 'dev-company-copySrc
     pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolINT-fr.html', 'companyAppINT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
     pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolEXT-fr.html', 'companyAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
     pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolEXT-en.html', 'companyAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT')
+    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT');
     return (
         pipes.cleanBuild(buildDir + paths.translations)
 
@@ -1006,7 +1127,7 @@ gulp.task('dev-company-copyLib', function () {
 gulp.task('dev-transaction-copySrc', function () {
 
     return (
-        pipes.copySrcs(false, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders)
+        pipes.copySrcs(false, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, false)
     );
 
 
@@ -1042,7 +1163,7 @@ gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copyData', 'dev-transac
     var htmlPartial = jsRootContent.partialTransactionRoot;
 
     pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '');
-    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', '')
+    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', '');
 
     return (
         pipes.cleanBuild(buildDir + paths.translations)
@@ -1096,7 +1217,7 @@ gulp.task('dev-dossier-copyTranslate', [], function () {
 
 gulp.task('dev-dossier-copySrc', [], function () {
     return (
-        pipes.copySrcs(false, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames,dossierDirectiveFolders)
+        pipes.copySrcs(true, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, false)
     )
 });
 
@@ -1134,49 +1255,6 @@ gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copyData', 'dev-dossier-copySrc
     );
 });
 
-pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
-    pipes.insertDateStamp(templatePath, metaObj)
-        .pipe(inject(gulp.src([htmlPartial]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-        .pipe(inject(gulp.src([
-                'app/lib/**/*.js',
-                '!app/lib/**/angular*.js'
-            ]),
-            {
-                name: 'thirdParty',
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }))
-        .pipe(inject(gulp.src([
-                styleFiles.rep,
-                styleFiles.select,
-                styleFiles.select2Style
-            ]),
-            {
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }
-        ))
-        .pipe(inject(gulp.src(src)
-            .pipe(angularFilesort())
-            , {
-                ignorePath: ignorePath,
-                addRootSlash: false,
-                read: false
-            }))
-        .pipe(rename(outName))
-        .pipe(gulp.dest(destDir))
-
-};
-
-
-//good
-
 
 /*******************PRODUCTIION SCRIPTS START HERE **********************/
 
@@ -1205,7 +1283,7 @@ gulp.task('prod-global-copyLibFolder', function () {
  * Want all the sources to have the same time stamp
  *
  * */
-gulp.task('prod-global-copyAllSources', ['prod-activity-copySourceFiles','prod-company-copySourceFiles','prod-transaction-copySourceFiles','prod-dossier-copySourceFiles'], function () {
+gulp.task('prod-global-copyAllSources', ['prod-activity-copySourceFiles', 'prod-company-copySourceFiles', 'prod-transaction-copySourceFiles', 'prod-dossier-copySourceFiles'], function () {
     // var destDir = paths.buildProd;
     //return(pipes.copyActivitySrc(false,paths))
     return (true);
@@ -1272,7 +1350,7 @@ gulp.task('prod-activity-compileTranslateFile', ['prod-activity-copyTranslateFil
 gulp.task('prod-activity-compileHtml', ['prod-activity-compileSrcJs'], function () {
     var baseActivityPath = paths.buildProd + 'app/scripts/';
     var htmlPartial = jsRootContent.partialActivityRoot;
-    var dateToday = createSuffixDate();
+    //var dateToday = createSuffixDate();
     var srcJsExtEn = [
         baseActivityPath + 'activityAppEXT-en' + '*.min.js',
         paths.buildProd + 'app/lib/**/angular*.js'
@@ -1289,10 +1367,10 @@ gulp.task('prod-activity-compileHtml', ['prod-activity-compileSrcJs'], function 
         baseActivityPath + 'activityAppINT-en' + '*.min.js',
         paths.buildProd + 'app/lib/**/angular*.js'
     ];
-    var result = "";
-    result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd);
+
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd);
 
     return pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd);
 
@@ -1302,7 +1380,7 @@ gulp.task('prod-activity-compileHtml', ['prod-activity-compileSrcJs'], function 
 //copy source files
 gulp.task('prod-activity-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProd, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders)
+        pipes.copySrcs(false, paths.buildProd, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, true)
     );
 });
 
@@ -1369,7 +1447,7 @@ gulp.task('prod-company-compileSrcJs', ['prod-company-compileTranslateFile', 'pr
     var srcPath = paths.buildProd + 'app/scripts/';
     var dest = paths.buildProd + 'app/scripts/';
     var rootJsBaseName = "companyApp";
-    var translateName = "commpanyTranslations";
+    var translateName = "companyTranslations";
     return (
         pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, translateName, true)
     )
@@ -1378,7 +1456,7 @@ gulp.task('prod-company-compileSrcJs', ['prod-company-compileTranslateFile', 'pr
 
 gulp.task('prod-company-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProd, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders)
+        pipes.copySrcs(false, paths.buildProd, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, true)
     );
 });
 
@@ -1387,7 +1465,7 @@ gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function ()
     var basePath = paths.buildProd + 'app/scripts/';
     var htmlPartial = jsRootContent.partialCompanyRoot;
     var dateToday = createSuffixDate();
-    var libFiles= paths.buildProd + paths.relLib+'**/angular*.js';
+    var libFiles = paths.buildProd + paths.relLib + '**/angular*.js';
     var srcJsExtEn = [
         basePath + 'companyAppEXT-en' + '*.min.js',
         libFiles
@@ -1404,14 +1482,13 @@ gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function ()
         basePath + 'companyAppINT-en' + '*.min.js',
         libFiles
     ];
-    var result = "";
-    result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html', paths.buildProd);
+
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html', paths.buildProd);
     return pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html', paths.buildProd);
 
 });
-
 
 
 /****** END COMPANY PROD SCRIPTS******/
@@ -1459,7 +1536,7 @@ gulp.task('prod-dossier-compileSrcJs', ['prod-dossier-compileTranslateFile', 'pr
 
 gulp.task('prod-dossier-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProd, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders)
+        pipes.copySrcs(false, paths.buildProd, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, true)
     );
 });
 
@@ -1467,7 +1544,7 @@ gulp.task('prod-dossier-compileHtml', ['prod-dossier-compileSrcJs'], function ()
     var basePath = paths.buildProd + 'app/scripts/';
     var htmlPartial = jsRootContent.partialDossierRoot;
     var dateToday = createSuffixDate();
-    var libFiles= paths.buildProd + paths.relLib+'**/angular*.js';
+    var libFiles = paths.buildProd + paths.relLib + '**/angular*.js';
     var srcJsExtEn = [
         basePath + 'dossierAppEXT-en' + '*.min.js',
         libFiles
@@ -1484,18 +1561,16 @@ gulp.task('prod-dossier-compileHtml', ['prod-dossier-compileSrcJs'], function ()
         basePath + 'dossierAppINT-en' + '*.min.js',
         libFiles
     ];
-    var result = "";
-    result = pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'dossierEXT-en.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'dossierINT-fr.html', paths.buildProd);
-    result = pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'dossierINT-en.html', paths.buildProd);
+
+    pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'dossierEXT-en.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'dossierINT-fr.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'dossierINT-en.html', paths.buildProd);
     return pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'dossierEXT-fr.html', paths.buildProd);
 
 });
 
 
-
 /*******************END DOSSIER PROD SCRIPTS*************************************************/
-
 
 
 /******START TRANSACTION PROD SCRIPTS******/
@@ -1534,7 +1609,7 @@ gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFi
     var dest = paths.buildProd + 'app/scripts/';
     var rootJsBaseName = "transactionApp";
     var translateName = "transactionTranslations";
-    var hasInternal=false;
+    var hasInternal = false;
     return (
         pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, translateName, hasInternal)
     )
@@ -1543,7 +1618,7 @@ gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFi
 
 gulp.task('prod-transaction-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProd, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders)
+        pipes.copySrcs(false, paths.buildProd, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, true)
     );
 });
 
@@ -1551,7 +1626,7 @@ gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], fun
     var basePath = paths.buildProd + 'app/scripts/';
     var htmlPartial = jsRootContent.partialTransactionRoot;
     var dateToday = createSuffixDate();
-    var libFiles= paths.buildProd + paths.relLib+'**/angular*.js';
+    var libFiles = paths.buildProd + paths.relLib + '**/angular*.js';
     var srcJsExtEn = [
         basePath + 'transactionAppEXT-en' + '*.min.js',
         libFiles
@@ -1567,86 +1642,8 @@ gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], fun
 });
 
 
-
 /******END TRANSACTION PROD SCRIPTS******/
 
-//TODO: move and copy to other locations
-pipes.createRootFileSet = function (rootPath, destDir, skipDate, generateInternal) {
-    /*
-     console.log(rootPath)
-     console.log(destDir)
-     console.log("skipdData "+skipDate)
-     console.log("generate internal"+generateInternal)*/
-
-    if (generateInternal) {
-        return (
-            pipes.generateRootJsFile('en', 'INT', rootPath, destDir, skipDate) &&
-            pipes.generateRootJsFile('fr', 'INT', rootPath, destDir, skipDate) &&
-            pipes.generateRootJsFile('fr', 'EXT', rootPath, destDir, skipDate) &&
-            pipes.generateRootJsFile('en', 'EXT', rootPath, destDir, skipDate)
-        );
-    } else {
-        return (
-            pipes.generateRootJsFile('fr', 'EXT', rootPath, destDir, skipDate) &&
-            pipes.generateRootJsFile('en', 'EXT', rootPath, destDir, skipDate)
-        )
-    }
-
-};
-
-pipes.compileTranslateFile = function (srcPath, destPath, outFileName, translateFileBaseList) {
-
-    var translationSources = [];
-    //going to explicitly name files
-    for (var i = 0; i < translateFileBaseList.length; i++) {
-        translationSources.push(srcPath + translateFileBaseList[i] + "-en.json");
-        translationSources.push(srcPath + translateFileBaseList[i] + "-fr.json");
-    }
-    return (
-        gulp.src(translationSources)
-            .pipe(angularTranslate(outFileName + '.js'))
-            .pipe(gulp.dest(destPath))
-    )
-};
-
-
-pipes.compileSourceJsMinified = function (srcPath, destPath, rootJsBaseName, componentFoldersArray, serviceFileNamesArray, directiveFoldersArray, baseTranslationFileName, hasInternal) {
-
-    var filesToConcat = [];
-    //get all the  component folders
-    for (var i = 0; i < componentFoldersArray.length; i++) {
-        filesToConcat.push(srcPath + "components/" + componentFoldersArray[i] + "**/*.js")
-    }
-    //get all the  services
-    for (var i = 0; i < serviceFileNamesArray.length; i++) {
-        filesToConcat.push(srcPath + "services/" + serviceFileNamesArray[i] + "*.js")
-    }
-    //get all the  directives
-    for (var i = 0; i < directiveFoldersArray.length; i++) {
-        filesToConcat.push(srcPath + "directives/" + directiveFoldersArray[i] + "**/*.js")
-    }
-    //add translation file
-    filesToConcat.push(srcPath + baseTranslationFileName + "*.js");
-
-    var dateToday = createSuffixDate();
-    var result = false;
-    if (hasInternal) {
-        //filesToConcat = filesToConcat.slice();
-        filesToConcat.push(srcPath + rootJsBaseName + "INT-en" + "*.js");
-        result = pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-en" + dateToday + '.min.js', destPath);
-        filesToConcat = filesToConcat.slice();
-        filesToConcat.push(srcPath + rootJsBaseName + "INT-fr" + "*.js");
-        result = pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-fr" + dateToday + '.min.js', destPath);
-        filesToConcat = filesToConcat.slice();
-    }
-    filesToConcat.push(srcPath + rootJsBaseName + "EXT-en" + "*.js");
-    result = pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-en" + dateToday + '.min.js', destPath);
-    filesToConcat = filesToConcat.slice();
-    filesToConcat.push(srcPath + rootJsBaseName + "EXT-fr" + "*.js");
-    return (
-        (pipes.builtAppCmpScriptsProd(filesToConcat,  rootJsBaseName + "EXT-fr" + dateToday + '.min.js', destPath))
-    )
-};
 
 
 
