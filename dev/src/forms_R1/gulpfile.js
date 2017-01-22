@@ -43,6 +43,7 @@ var paths = {
     buildDevActivity: buildDev + '/activity/',
     buildDevCompany: buildDev + '/company/',
     buildDevTransaction: buildDev + '/transaction/',
+    buildDevDossier: buildDev + '/dossier/',
     englishTemplate: wetBase + '/content-en.html',
     frenchTemplate: wetBase + '/content-fr.html',
     lib: './app/lib/',
@@ -58,15 +59,15 @@ var paths = {
 };
 
 /*** dossier paths because right now it is special**/
-var baseDossier = '../dossierEnrol';
-var dossierPaths = {
+//var baseDossier = '../dossierEnrol';
+/*var dossierPaths = {
     lib: './app/lib/', //going to use the same as transaction paths
     translations: baseDossier + '/app/resources/',
     buildDevDossier: buildDev + '/dossier/',
     services: baseDossier + '/app/services/',
     components: baseDossier + '/app/components/',
     dossierApp: baseDossier + '/app/dossierApp.js'
-};
+};*/
 
 
 var placeholders = {
@@ -181,7 +182,21 @@ var componentFolders = {
     transactionAddressRecord: 'transactionCompanyRecord/',
     transactionInfo: 'transactionInfo/',
     countrySelect: 'countrySelect/',
-    adminSubmissionPath: 'adminSubmission/'
+    adminSubmissionPath: 'adminSubmission/',
+    appendix4:'appendix-four/',
+    canRefProducts:'can-ref-products/',
+    checkboxList:'checkbox-list/',
+    contact: 'contact/',
+    countryList: 'country-list/',
+    dossier:'dossier/',
+    drugUse: 'drug-use/',
+    routeAdmin: 'route-admin/',
+    fileIO: 'fileIO/',
+    scheduleA: 'schedule-a/',
+    tabs: 'tabs/',
+    theraClass: 'therapeutic-classification/',
+    formulations: 'formulations/'
+
 };
 //service file names. Leave off the .js
 var serviceFileNames = {
@@ -198,13 +213,17 @@ var serviceFileNames = {
     transactionService: 'transactionService',
     transactionLoadService: 'transaction-load-service',
     repContactService: 'rep-contact-service',
-    commonLists: 'common-lists'
+    commonLists: 'common-lists',
+    dossierService: "dossier-service",
+    dossierDataList: "dossier-data-list",
+    dossierLoadService: "dossier-load-service"
 };
 //leave off the .js
 var rootFileNames = {
     activityRoot: "activityApp",
     companyRoot: "companyApp",
-    transactionRoot: "transactionApp"
+    transactionRoot: "transactionApp",
+    dossierRoot: "dossierApp"
 };
 
 //good
@@ -251,13 +270,19 @@ var translationBaseFiles = {
     address: paths.translations + 'address',
     applicationInfo: paths.translations + 'applicationInfo',
     contact: paths.translations + 'contact',
-    countries: paths.translations + 'countries',
     fileIO: paths.translations + 'fileIO',
     general: paths.translations + 'general',
     messages: paths.translations + 'messages',
     stateProvinces: paths.translations + 'stateProvinces',
     transaction: paths.translations + 'transaction',
-    companyInfo: paths.translations + 'companyInfo'
+    companyInfo: paths.translations + 'companyInfo',
+    dosageForm:  paths.translations + 'dossierDosageform',
+    dossier:  paths.translations + 'dossier',
+    dossierGeneral:  paths.translations + 'dossierGeneral',
+    appendix4:  paths.translations + 'appendix4',
+    dossierMsg:  paths.translations + 'dossierMsg',
+    scheduleA:  paths.translations + 'scheduleA',
+    formulation:  paths.translations + 'formulation'
 };
 var styleFiles = {
     rep: paths.styles + 'rep.css',
@@ -267,52 +292,9 @@ var styleFiles = {
     selectizeStyle: paths.styles + 'selectize.default.css'
 }
 
-
-/** Dossier stuff */
-var dossierTranslationBaseFiles = {
-
-    dosageForm: dossierPaths.translations + 'dossierDosageform',
-    dossier: dossierPaths.translations + 'dossier',
-    dossierGeneral: dossierPaths.translations + 'dossierGeneral',
-    appendix4: dossierPaths.translations + 'appendix4',
-    msg: dossierPaths.translations + 'dossierMsg',
-    scheduleA: dossierPaths.translations + 'scheduleA',
-    formulation: dossierPaths.translations + 'formulation'
-    // roa: dossierPaths.translations + 'roa'
-};
-
-var jsDossierComponentPaths = {
-    appendix4: dossierPaths.components + 'appendix-four/',
-    canRefProducts: dossierPaths.components + 'can-ref-products/',
-    checkboxList: dossierPaths.components + 'checkbox-list/',
-    contact: dossierPaths.components + 'contact/',
-    countryList: dossierPaths.components + 'country-list/',
-    dossier: dossierPaths.components + 'dossier/',
-    drugUse: dossierPaths.components + 'drug-use/',
-    routeAdmin: dossierPaths.components + 'route-admin/',
-    expandingTable: dossierPaths.components + 'expanding-table/',
-    fileIO: dossierPaths.components + 'fileIO/',
-    scheduleA: dossierPaths.components + 'schedule-a/',
-    tabs: dossierPaths.components + 'tabs/',
-    theraClass: dossierPaths.components + 'therapeutic-classification/',
-    repContactList: dossierPaths.components + 'repContactList/',
-    repContactRecord: dossierPaths.components + 'rep-contact-record/',
-    applicationInfo: dossierPaths.components + 'applicationInfo/',
-    formulations: dossierPaths.components + 'formulations/'
-
-};
-
-var jsDossierServicePaths = {
-    dossierService: dossierPaths.services + "dossier-service.js",
-    dossierDataList: dossierPaths.services + "dossier-data-list.js",
-    dossierLoadService: dossierPaths.services + "dossier-load-service.js"
-};
-
-
 // == PIPE SEGMENTS ========
 
 var pipes = {};
-
 
 pipes.orderedAppScripts = function () {
     return plugins.angularFilesort();
@@ -322,11 +304,6 @@ pipes.minifiedFileName = function () {
     return plugins.rename(function (path) {
         path.extname = '.min' + path.extname;
     });
-};
-
-pipes.builtAppScriptsDev = function () {
-    return pipes.validatedAppScripts()
-        .pipe(gulp.dest(paths.distDev));
 };
 
 
@@ -350,15 +327,6 @@ pipes.builtAppCmpScriptsProd = function (filePaths, outName, destPath) {
 };
 
 
-pipes.builtVendorScriptsProd = function () {
-    return gulp.src(bowerFiles('**/*.js'))
-        .pipe(pipes.orderedVendorScripts())
-        .pipe(plugins.concat('vendor.min.js'))
-        .pipe(plugins.uglify())
-        .pipe(gulp.dest(paths.distScriptsProd));
-};
-
-
 pipes.validatedPartials = function () {
     return gulp.src(paths.partials)
         .pipe(plugins.htmlhint({'doctype-first': false}))
@@ -379,7 +347,7 @@ pipes.scriptedPartials = function () {
         }));
 };
 
-pipes.builtStylesDev = function () {
+/*pipes.builtStylesDev = function () {
     return gulp.src(paths.styles)
         .pipe(plugins.sass())
         .pipe(gulp.dest(paths.distDev));
@@ -393,64 +361,18 @@ pipes.builtStylesProd = function () {
         .pipe(plugins.sourcemaps.write())
         .pipe(pipes.minifiedFileName())
         .pipe(gulp.dest(paths.distProd));
-};
+};*/
 
-pipes.processedImagesDev = function () {
-    return gulp.src(paths.images)
-        .pipe(gulp.dest(paths.distDev + '/images/'));
-};
 
-pipes.processedImagesProd = function () {
-    return gulp.src(paths.images)
-        .pipe(gulp.dest(paths.distProd + '/images/'));
-};
 
+/*
 pipes.validatedIndex = function () {
     return gulp.src(paths.index)
         .pipe(plugins.htmlhint())
         .pipe(plugins.htmlhint.reporter());
 };
+*/
 
-pipes.builtIndexDev = function () {
-
-    var orderedVendorScripts = pipes.builtVendorScriptsDev()
-        .pipe(pipes.orderedVendorScripts());
-
-    var orderedAppScripts = pipes.builtAppScriptsDev()
-        .pipe(pipes.orderedAppScripts());
-
-    var appStyles = pipes.builtStylesDev();
-
-    return pipes.validatedIndex()
-        .pipe(gulp.dest(paths.distDev)) // write first to get relative path for inject
-        .pipe(plugins.inject(orderedVendorScripts, {relative: true, name: 'bower'}))
-        .pipe(plugins.inject(orderedAppScripts, {relative: true}))
-        .pipe(plugins.inject(appStyles, {relative: true}))
-        .pipe(gulp.dest(paths.distDev));
-};
-
-pipes.builtIndexProd = function () {
-
-    var vendorScripts = pipes.builtVendorScriptsProd();
-    var appScripts = pipes.builtAppScriptsProd();
-    var appStyles = pipes.builtStylesProd();
-
-    return pipes.validatedIndex()
-        .pipe(gulp.dest(paths.distProd)) // write first to get relative path for inject
-        .pipe(plugins.inject(vendorScripts, {relative: true, name: 'bower'}))
-        .pipe(plugins.inject(appScripts, {relative: true}))
-        .pipe(plugins.inject(appStyles, {relative: true}))
-        .pipe(plugins.htmlmin({collapseWhitespace: true, removeComments: true}))
-        .pipe(gulp.dest(paths.distProd));
-};
-
-pipes.builtAppDev = function () {
-    return es.merge(pipes.builtIndexDev(), pipes.builtPartialsDev(), pipes.processedImagesDev());
-};
-
-pipes.builtAppProd = function () {
-    return es.merge(pipes.builtIndexProd(), pipes.processedImagesProd());
-};
 
 pipes.fullTranslateList = function (translateList) {
     var completeList = [];
@@ -461,18 +383,12 @@ pipes.fullTranslateList = function (translateList) {
     return completeList;
 };
 pipes.translateDev = function (translateList, destPath, baseIgnore) {
-
-    // var def = Q.defer();
     if (!baseIgnore) baseIgnore = ".";
     var completeList = pipes.fullTranslateList(translateList);
     var copySources = gulp.src(completeList,
         {read: true, base: baseIgnore});
     return (copySources.pipe(gulp.dest(destPath)));
-    /*.on('end', function () {
-     def.resolve();
-     })
-     .on('error', def.reject);*/
-    //return def.promise;
+
 };
 pipes.insertDateStamp = function (template, valsObj) {
     var now = new Date();
@@ -485,14 +401,6 @@ pipes.insertDateStamp = function (template, valsObj) {
             }))
     );
 };
-pipes.insertTitleInfo = function (template) {
-
-    var utc = new Date().toJSON().slice(0, 10);
-    return gulp.src(template)
-        .pipe(htmlreplace({
-            mainHeading: utc
-        }));
-};
 
 pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory) {
 
@@ -504,28 +412,13 @@ pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory) {
     )
 };
 
-pipes.copySrcProd = function (srcPath, basePath, destPath) {
-    var copySources = gulp.src(srcPath,
-        {read: true, base: basePath});
-
-    var def = Q.defer();
-    copySources.pipe(gulp.dest(destPath))
-        .on('end', function () {
-            def.resolve();
-        })
-        .on('error', def.reject);
-    return def.promise;
-
-};
-
-
 pipes.copyWet = function (destDirectory) {
     var copySources = gulp.src([paths.wetBase + '/**/*', '!' + paths.englishTemplate, '!' + paths.frenchTemplate],
         {read: true, base: paths.wetBase});
     return (copySources.pipe(gulp.dest(destDirectory)))
 };
 
-//creates ALL the root files js TODO rename
+
 pipes.generateRootJsFile = function (lang, type, rootFile, destPath, skipDate) {
 
     console.log("generating the root file")
@@ -558,45 +451,6 @@ pipes.generateRootJsFile = function (lang, type, rootFile, destPath, skipDate) {
     )
 
 };
-pipes.insertTranslations = function (rootFile, destPath, ignorePath, translationsPathEn, translationsPathFr) {
-    if (!ignorePath) ignorePath = ".";
-
-    // var rootFile=jsDossierServicePaths.dossierLoadService;
-    //var destPath=  dossierPaths.buildDevDossier+'app/services/'
-    var rootName = rootFile.split("/");
-    rootName = rootName[rootName.length - 1];
-    rootName = rootName.substring(0, rootName.length - 3); //jsfiles
-    var dateToday = createSuffixDate();
-
-    var translationsEn = JSON.parse(
-        fs.readFileSync(translationsPathEn));
-    var translationsFr = JSON.parse(
-        fs.readFileSync(translationsPathFr));
-    translationsEn = JSON.stringify(translationsEn);
-    translationsFr = JSON.stringify(translationsFr);
-    var copySources = gulp.src([rootFile],
-        {read: true, base: ignorePath});
-    return (
-        copySources
-
-        /*.pipe(replace({
-
-         patterns: [
-         {
-         match: 'TRANSLATIONS',
-         replacement:translations
-         }
-
-         ]
-         }))*/
-            .pipe(stringReplace(/"@@TRANSLATIONS_EN"/, translationsEn))
-            .pipe(stringReplace(/"@@TRANSLATIONS_FR"/, translationsFr))
-            .pipe(rename(rootName + dateToday + '.js'))
-            .pipe(gulp.dest(destPath))
-    )
-
-};
-
 
 pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
 
@@ -605,7 +459,7 @@ pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
             .pipe(gulpMerge(destName))
             .pipe(gulp.dest(destFolder))
     );
-}
+};
 
 /**
  *  Creates the root Html file  for the forms.
@@ -653,7 +507,6 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                 }
             ))
             .pipe(inject(gulp.src([
-
                     buildDir + 'app/scripts/components/**/*.js',
                     buildDir + 'app/scripts/directives/**/*.js',
                     buildDir + 'app/scripts/services/**/*.js',
@@ -675,61 +528,6 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
     )
 
 };
-
-
-//dosssier is special
-pipes.createDossierDev = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath) {
-
-
-    pipes.insertDateStamp(templatePath, valsObj)
-        .pipe(inject(gulp.src([partialRoot]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-        .pipe(inject(gulp.src([
-                'app/lib/**/*.js',
-                '!app/lib/**/angular*.js'
-            ]),
-            {
-                name: 'thirdParty',
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }))
-
-        .pipe(inject(gulp.src([
-                styleFiles.rep,
-                styleFiles.select,
-                styleFiles.select2Style
-            ]),
-            {
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }
-        ))
-
-        .pipe(inject(gulp.src([
-                buildDir + 'app/components/**/*.js',
-                buildDir + 'app/directives/**/*.js',
-                buildDir + 'app/services/**/*.js',
-                buildDir + 'app/' + injectRootJs,
-                /*    "!"+buildDir + 'app/services/!**!/'+ignoreLoadService,*/
-                buildDir + 'app/' + 'dossierTranslations' + createSuffixDate() + '.js',
-                buildDir + 'app/lib/**/angular*.js'
-            ])
-            .pipe(angularFilesort())
-            , {
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }))
-
-        .pipe(rename(templateName))
-        .pipe(gulp.dest(buildDir))
-
-};
-
 
 pipes.cleanBuild = function (baseDir) {
     /* var deferred = Q.defer();
@@ -792,8 +590,6 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
         }))
         .pipe(rename(destName))
         .pipe(gulp.dest(destDir));
-    // }
-
 };
 
 /**
@@ -875,7 +671,6 @@ var companyDirectiveFolders =
 
 var companyTranslationFilesBaseList =
     [
-        translationBaseFiles.countries,
         translationBaseFiles.address,
         translationBaseFiles.stateProvinces,
         translationBaseFiles.contact,
@@ -886,8 +681,71 @@ var companyTranslationFilesBaseList =
         translationBaseFiles.companyInfo
     ];
 
+/*** Dossier***/
+
+var dossierComponentFolders =
+    [
+        componentFolders.appendix4,
+        componentFolders.canRefProducts,
+        componentFolders.checkboxList,
+        componentFolders.countryList,
+        componentFolders.dossier,
+        componentFolders.drugUse,
+        componentFolders.routeAdmin,
+        componentFolders.scheduleA,
+        componentFolders.tabs,
+        componentFolders.theraClass,
+        componentFolders.formulations,
+        componentFolders.fileIOComponentAndDep,
+        componentFolders.repContactList,
+        componentFolders.repContactRecord,
+        componentFolders.contactDetails,
+        componentFolders.applicationInfo,
+        componentFolders.expandingTable
+    ];
+
+var dossierServiceFileNames =
+    [
+        serviceFileNames.dossierDataList,
+        serviceFileNames.dossierLoadService,
+        serviceFileNames.dossierService,
+        serviceFileNames.applicationInfoService,
+        serviceFileNames.dataLists,
+        serviceFileNames.filterLists,
+        serviceFileNames.repContactService,
+        serviceFileNames.hpfbConstants
+
+    ];
+
+var dossierDirectiveFolders =
+    [
+        directiveFolders.numberOnly
+    ];
+
+var dossierTranslationFilesBaseList =
+    [
+        translationBaseFiles.dosageForm,
+        translationBaseFiles.dossier,
+        translationBaseFiles.dossierGeneral,
+        translationBaseFiles.dossierMsg,
+        translationBaseFiles.appendix4,
+        translationBaseFiles.scheduleA,
+        translationBaseFiles.formulation,
+        translationBaseFiles.general,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.messages,
+        translationBaseFiles.contact
+    ];
+
+
+
+/*******/
+
+
+
+
 var transactionTranslationFilesBaseList=[
-    translationBaseFiles.countries,
     translationBaseFiles.address,
     translationBaseFiles.stateProvinces,
     translationBaseFiles.contact,
@@ -978,15 +836,6 @@ gulp.task('dev-activity-copySrc', function (noDate) {
 
 });
 
-pipes.copyHtml = function (copySourcesHtml, dateToday, destDir) {
-
-    return (
-        copySourcesHtml.pipe(rename({
-                suffix: dateToday
-            }))
-            .pipe(gulp.dest(destDir))
-    )
-}
 
 
 function createSuffixDate() {
@@ -1039,17 +888,11 @@ gulp.task('dev-company-createResources', ['dev-company-copyTranslate'], function
 });
 
 gulp.task('dev-dossier-createResources', ['dev-dossier-copyTranslate'], function () {
-    var devPath = dossierPaths.buildDevDossier;
-    /*    return(
-     pipes.mergeJsonFiles(devPath + 'app/resources/',devPath , 'dossierTranslate-en.json','en')&&
-     pipes.mergeJsonFiles(devPath + 'app/resources/',devPath , 'dossierTranslate-fr.json','fr')
-     )*/
 
-    return (gulp.src(devPath + 'app/resources/' + '*.json')
-        .pipe(angularTranslate('dossierTranslations' + createSuffixDate() + '.js'))
-        .pipe(gulp.dest(devPath + 'app/')))
-
-
+    var srcPath = paths.buildDevDossier;
+    var destPath = paths.buildDevDossier + paths.relScript;
+    var filename = 'translations' + createSuffixDate();
+    return (pipes.compileTranslateFile(srcPath, destPath, filename, dossierTranslationFilesBaseList));
 });
 
 
@@ -1106,7 +949,7 @@ gulp.task('dev-transaction-clean', function () {
 
 });
 gulp.task('dev-dossier-clean', function () {
-    return (pipes.cleanBuild(dossierPaths.buildDevDossier + 'app/'));
+    return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
 
 });
 
@@ -1168,15 +1011,6 @@ gulp.task('dev-transaction-copySrc', function () {
 
 
 });
-function copyTransactionHtml(src, dateToday) {
-    //TODO inefficient
-    return (
-        src.pipe(rename({
-                suffix: dateToday
-            }))
-            .pipe(gulp.dest(paths.buildDevTransaction))
-    );
-}
 
 
 gulp.task('dev-transaction-createRootJs', function () {
@@ -1215,28 +1049,23 @@ gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copyData', 'dev-transac
     );
 
 });
-function callback() {
-
-    console.log("complete")
-}
-
 
 /******** Dossier Related  tasks  *****************/
 
 gulp.task('dev-dossier-copyWet', function () {
-    return (pipes.copyWet(dossierPaths.buildDevDossier))
+    return (pipes.copyWet(paths.buildDevDossier))
 });
 gulp.task('dev-dossier-copyLib', function () {
     var def = Q.defer();
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
-    return (copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
+    return (copySources.pipe(gulp.dest(paths.buildDevDossier)));
 });
 gulp.task('dev-dossier-copyData', function () {
     var def = Q.defer();
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
-    return (copySources.pipe(gulp.dest(dossierPaths.buildDevDossier)));
+    return (copySources.pipe(gulp.dest(paths.buildDevDossier)));
 });
 gulp.task('dev-company-copyData', function () {
     var def = Q.defer();
@@ -1259,226 +1088,28 @@ gulp.task('dev-transaction-copyData', function () {
 });
 
 
-gulp.task('dev-dossier-copyTranslate', ['dev-dossier-copyCommonTranslate'], function () {
-    var translationList = [
-        dossierTranslationBaseFiles.dosageForm,
-        dossierTranslationBaseFiles.dossier,
-        dossierTranslationBaseFiles.dossierGeneral,
-        dossierTranslationBaseFiles.appendix4,
-        dossierTranslationBaseFiles.msg,
-        dossierTranslationBaseFiles.scheduleA,
-        dossierTranslationBaseFiles.formulation
-        //dossierTranslationBaseFiles.roa
-    ];
-    var baseIgnore = "../dossierEnrol";
+gulp.task('dev-dossier-copyTranslate', [], function () {
 
-    return (pipes.translateDev(translationList, dossierPaths.buildDevDossier, baseIgnore))
+    return (pipes.translateDev(dossierTranslationFilesBaseList, paths.buildDevDossier));
 });
 
 
-gulp.task('dev-dossier-copySrc', ['dev-dossier-copyCommonSrc'], function () {
-
-    var dossierSrcPaths = [
-
-        jsDossierComponentPaths.appendix4 + '**/*',
-        jsDossierComponentPaths.canRefProducts + '**/*',
-        jsDossierComponentPaths.checkboxList + '**/*',
-        jsDossierComponentPaths.countryList + '**/*',
-        jsDossierComponentPaths.dossier + '**/*',
-        jsDossierComponentPaths.drugUse + '**/*',
-        jsDossierComponentPaths.routeAdmin + '**/*',
-        jsDossierComponentPaths.scheduleA + '**/*',
-        jsDossierComponentPaths.tabs + '**/*',
-        jsDossierComponentPaths.theraClass + '**/*',
-        jsDossierComponentPaths.formulations + '**/*'
-    ];
-
-    var dossierHtml = [];
-    var dossierJs = [];
-    for (var i = 0; i < dossierSrcPaths.length; i++) {
-        dossierHtml.push(dossierSrcPaths[i] + '.html')
-        dossierJs.push(dossierSrcPaths[i] + '.js')
-    }
-    //add the services, no html
-    dossierJs.push(jsDossierServicePaths.dossierDataList);
-    dossierJs.push(jsDossierServicePaths.dossierService);
-    dossierJs.push(jsDossierServicePaths.dossierLoadService);
-
-    var copySourcesJS = gulp.src(dossierJs, {read: true, base: '../dossierEnrol'});
-    var copySourcesHtml = gulp.src(dossierHtml, {read: true, base: '../dossierEnrol'});
-
-    var dateToday = createSuffixDate();
-    copyDossierHtml(copySourcesHtml, dateToday);
-
-    var def = Q.defer();
-    //TODO inefficient
-    copySourcesJS.pipe(stringReplace('./components/', './app/components/'))
-        .pipe(stringReplace('../lib/uib-templates/tpl-accordian-group-caret.html', 'app/lib/uib-templates/tpl-accordian-group-caret.html'))
-        .pipe(rename({
-            suffix: dateToday
-        }))
-        .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
-        .pipe(gulp.dest(dossierPaths.buildDevDossier))
-        .on('end', function () {
-            def.resolve();
-        })
-        .on('error', def.reject);
-    return def.promise;
-
-});
-function copyDossierHtml(src, dateToday) {
-
-    //TODO inefficient
+gulp.task('dev-dossier-copySrc', [], function () {
     return (
-        src.pipe(stringReplace('../lib/uib-templates/tpl-accordian-group-caret.html', 'app/lib/uib-templates/tpl-accordian-group-caret.html'))
-            .pipe(rename({
-                suffix: dateToday
-            }))
-            .pipe(gulp.dest(dossierPaths.buildDevDossier))
-    );
-}
-
-
-/**
- * Copies the common components from the release 1 directory to the dossier build
- * */
-gulp.task('dev-dossier-copyCommonSrc', function () {
-    var dossierSrcPaths = [
-        jsComponentPaths.fileIOComponentAndDepPath + '**/*',
-        jsComponentPaths.repContactListPath + '**/*',
-        jsComponentPaths.repContactRecordPath + '**/*',
-        jsComponentPaths.contactDetailsPath + '**/*',
-        jsComponentPaths.applicationInfoPath + '**/*',
-        jsComponentPaths.expandingTablePath + '**/*',
-
-
-    ];
-    var dossierHtml = [];
-    var dossierJs = [];
-    for (var i = 0; i < dossierSrcPaths.length; i++) {
-        dossierHtml.push(dossierSrcPaths[i] + '.html')
-        dossierJs.push(dossierSrcPaths[i] + '.js')
-    }
-    //add the services and directives, no html
-    dossierJs.push(jsDirectiveFiles.numberOnly);
-    dossierJs.push(jsServiceFiles.applicationInfoService);
-    dossierJs.push(jsServiceFiles.dataLists);
-    dossierJs.push(jsServiceFiles.filterLists);
-    dossierJs.push(jsServiceFiles.repContactService);
-    dossierJs.push(jsServiceFiles.hpfbConstants);
-
-    var copySourcesJS = gulp.src(dossierJs, {read: true, base: './app/scripts'});
-    var copySourcesHtml = gulp.src(dossierHtml, {read: true, base: './app/scripts'});
-
-    var dateToday = createSuffixDate();
-    copyCommonDossierHtml(copySourcesHtml, dateToday)
-    var def = Q.defer();
-    copySourcesJS.pipe(stringReplace('app/scripts/components/', './app/components/'))
-        .pipe(rename({
-            suffix: dateToday
-        }))
-        .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
-        .pipe(gulp.dest(dossierPaths.buildDevDossier + 'app/'))
-        .on('end', function () {
-            def.resolve();
-        })
-        .on('error', def.reject);
-    return def.promise;
+        pipes.copySrcs(false, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames,dossierDirectiveFolders)
+    )
 });
-function copyCommonDossierHtml(src, dateToday) {
-
-    //TODO inefficient
-    return (
-        src.pipe(rename({
-                suffix: dateToday
-            }))
-            .pipe(gulp.dest(dossierPaths.buildDevDossier + 'app/'))
-    );
-}
-
-
-gulp.task('dev-dossier-copyCommonTranslate', function () {
-    var translationList = [
-        jsComponentPaths.fileIOComponentAndDepPath + '**/*',
-        translationBaseFiles.general,
-        translationBaseFiles.fileIO,
-        //translationBaseFiles.countries,
-        translationBaseFiles.applicationInfo,
-        translationBaseFiles.messages,
-        translationBaseFiles.contact
-    ];
-    return (pipes.translateDev(translationList, dossierPaths.buildDevDossier))
-
-});
-
-
-/* Copies the common services dossier uses to the dev build folder
- **
- */
-gulp.task('dev-dossier-copyCommonServices', function () {
-    var copySources = gulp.src([
-            jsServiceFiles.applicationInfoService,
-            jsServiceFiles.dataLists,
-            jsServiceFiles.filterLists,
-            jsServiceFiles.repContactService,
-            jsServiceFiles.hpfbConstants
-
-        ],
-        {read: true, base: './app/scripts'});
-
-    var def = Q.defer();
-    copySources.pipe(gulp.dest(dossierPaths.buildDevDossier + 'app/'))
-        .on('end', function () {
-            def.resolve();
-        })
-        .on('error', def.reject);
-    return def.promise;
-
-});
-
-
-/**
- * Copies Dossier service files from the dossier github folder to the build folder
- */
-/*gulp.task('copyDossierServicesDev', function () {
- var copySources = gulp.src([
- jsDossierServicePaths.dossierDataList,
- jsDossierServicePaths.dossierService
- ],
- {read: true, base: '../dossierEnrol'});
- var def = Q.defer();
- copySources.pipe(gulp.dest(dossierPaths.buildDevDossier))
- .on('end', function () {
- def.resolve();
- })
- .on('error', def.reject);
- return def.promise;
-
- });*/
 
 gulp.task('dev-dossier-createRootJS', function () {
 
-    var dest = dossierPaths.buildDevDossier + 'app/';
-    //formType not needed
+    var dest = paths.buildDevDossier + 'app/scripts/';
+    var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
     return (
-        pipes.generateRootJsFile('en', 'EXT', dossierPaths.dossierApp, dest) &&
-        pipes.generateRootJsFile('fr', 'EXT', dossierPaths.dossierApp, dest) &&
-        pipes.generateRootJsFile('en', 'INT', dossierPaths.dossierApp, dest) &&
-        pipes.generateRootJsFile('fr', 'INT', dossierPaths.dossierApp, dest)
+        pipes.createRootFileSet(rootFile, dest, false, true)
     );
+
+
 });
-
-
-//Used for injecting into file. Not doing complicated
-/*gulp.task('dev-dossier-insertTranslateLoader', ['dev-dossier-createResources'], function () {
- var ignorePath = '/build/dev/dossier';
- var translations_en = dossierPaths.buildDevDossier + 'dossierTranslate-en.json'
- var translations_fr = dossierPaths.buildDevDossier + 'dossierTranslate-fr.json'
- return (
- pipes.insertTranslations(jsDossierServicePaths.dossierLoadService, dossierPaths.buildDevDossier + 'app/services/', ignorePath, translations_en, translations_fr)
- // pipes.insertTranslations ("fr",jsDossierServicePaths.dossierLoadService, dossierPaths.buildDevDossier+'app/services/', ignorePath,translations_fr )
- )
- });*/
 
 
 /**
@@ -1490,21 +1121,18 @@ gulp.task('dev-dossier-createRootJS', function () {
  */
 //' dev-dossier-insertTranslateLoader '
 gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copyData', 'dev-dossier-copySrc', 'dev-dossier-copyLib', 'dev-dossier-createRootJS', 'dev-dossier-createResources'], function () {
-    var ignoreDir = '/build/dev/dossier';
-    var buildDir = dossierPaths.buildDevDossier;
-    var htmlPartial = jsRootContent.partialDossierRoot;
-    var serviceName = 'dossier-load-service.js';
-    var loadService = (serviceName).substring(0, serviceName.length - 3);
-    pipes.createDossierDev(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir);
-    pipes.createDossierDev(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir);
-    pipes.createDossierDev(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir);
-    pipes.createDossierDev(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolEXT-en.html', 'dossierAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir)
 
+    var ignoreDir = '/build/dev/dossier';
+    var buildDir = paths.buildDevDossier;
+    var htmlPartial = jsRootContent.partialDossierRoot;
+    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
+    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrollEXT-en.html', 'dossierAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT');
     return (
         pipes.cleanBuild(buildDir + paths.translations)
     );
 });
-
 
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
     pipes.insertDateStamp(templatePath, metaObj)
@@ -1577,7 +1205,7 @@ gulp.task('prod-global-copyLibFolder', function () {
  * Want all the sources to have the same time stamp
  *
  * */
-gulp.task('prod-global-copyAllSources', ['prod-activity-copySourceFiles','prod-company-copySourceFiles','prod-transaction-copySourceFiles'], function () {
+gulp.task('prod-global-copyAllSources', ['prod-activity-copySourceFiles','prod-company-copySourceFiles','prod-transaction-copySourceFiles','prod-dossier-copySourceFiles'], function () {
     // var destDir = paths.buildProd;
     //return(pipes.copyActivitySrc(false,paths))
     return (true);
@@ -1754,13 +1382,6 @@ gulp.task('prod-company-copySourceFiles', function () {
     );
 });
 
-gulp.task('prod-company-compileTranslateFile', ['prod-company-copyTranslateFiles'], function () {
-
-    var destPath = paths.buildProd + paths.relScript;
-    return (pipes.compileTranslateFile(paths.buildProd, destPath, "companyTranslations", companyTranslationFilesBaseList));
-
-});
-
 
 gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function () {
     var basePath = paths.buildProd + 'app/scripts/';
@@ -1794,6 +1415,87 @@ gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function ()
 
 
 /****** END COMPANY PROD SCRIPTS******/
+
+/***START DOSSIER PROD SCRIPTS****/
+
+gulp.task('prod-dossier-copyTranslateFiles', function () {
+
+    var destPath = paths.buildProd + 'app/resources/';
+    var translationList = dossierTranslationFilesBaseList;
+    return (pipes.translateDev(translationList, paths.buildProd));
+
+});
+
+gulp.task('prod-dossier-compileTranslateFile', ['prod-dossier-copyTranslateFiles'], function () {
+
+    var destPath = paths.buildProd + paths.relScript;
+    return (pipes.compileTranslateFile(paths.buildProd, destPath, "dossierTranslations", dossierTranslationFilesBaseList));
+
+});
+
+/**
+ * Creates the root JS files for internal/external and french/English forms
+ * */
+gulp.task('prod-dossier-createRootJsFiles', function () {
+    var dest = paths.buildProd + 'app/scripts/';
+    var rootPath = paths.scripts + "/" + rootFileNames.dossierRoot + ".js";
+    //skip the date and and generate internal files
+    return (
+        pipes.createRootFileSet(rootPath, dest, true, true)
+    );
+
+});
+
+gulp.task('prod-dossier-compileSrcJs', ['prod-dossier-compileTranslateFile', 'prod-dossier-createRootJsFiles'], function () {
+
+    var srcPath = paths.buildProd + 'app/scripts/';
+    var dest = paths.buildProd + 'app/scripts/';
+    var rootJsBaseName = "dossierApp";
+    var translateName = "dossierTranslations";
+    return (
+        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, translateName, true)
+    )
+});
+
+gulp.task('prod-dossier-copySourceFiles', function () {
+    return (
+        pipes.copySrcs(false, paths.buildProd, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders)
+    );
+});
+
+gulp.task('prod-dossier-compileHtml', ['prod-dossier-compileSrcJs'], function () {
+    var basePath = paths.buildProd + 'app/scripts/';
+    var htmlPartial = jsRootContent.partialDossierRoot;
+    var dateToday = createSuffixDate();
+    var libFiles= paths.buildProd + paths.relLib+'**/angular*.js';
+    var srcJsExtEn = [
+        basePath + 'dossierAppEXT-en' + '*.min.js',
+        libFiles
+    ];
+    var srcJsExtFr = [
+        basePath + 'dossierAppEXT-fr' + '*.min.js',
+        libFiles
+    ];
+    var srcJsIntFr = [
+        basePath + 'dossierAppINT-fr' + '*.min.js',
+        libFiles
+    ];
+    var srcJsIntEn = [
+        basePath + 'dossierAppINT-en' + '*.min.js',
+        libFiles
+    ];
+    var result = "";
+    result = pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'dossierEXT-en.html', paths.buildProd);
+    result = pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'dossierINT-fr.html', paths.buildProd);
+    result = pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'dossierINT-en.html', paths.buildProd);
+    return pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'dossierEXT-fr.html', paths.buildProd);
+
+});
+
+
+
+/*******************END DOSSIER PROD SCRIPTS*************************************************/
+
 
 
 /******START TRANSACTION PROD SCRIPTS******/
