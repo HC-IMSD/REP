@@ -23,9 +23,9 @@
   "CHANGE_MATERIAL": "Change in packaging material composition",
   "ACTIVITY_LEAD": "Activity Lead",
   "FEE_CLASS": "Fee Class",
-  "NOT_LASA": "I confirm that this administrative submission type is NOT a Look-alike Sound-alike (LASA) submission",
+  "NOT_LASA": "I confirm that this administrative submission is NOT a Look-alike Sound-alike (LASA) submission",
   "REASON_FILE": "Reason for filing this Regulatory Activity",
-  "RELATED_ACTIVITIES": "Related Regulatory Activity (Referred to in this Submission)",
+  "RELATED_ACTIVITIES": "Related Regulatory Activity (Referred to in this Administrative Submission)",
   "ACTIVITY_TYPE": "Regulatory Activity Type",
   "DATE_CLEARED": "Date Cleared",
   "CONTROL_NUM": "Control Number",
@@ -43,8 +43,7 @@
   "RELATED_ACTIVITY": "Related Activity",
   "AMEND_ACTIVITY": "Amend Related Activity",
   "IS_ADMIN_SUB": "Is this a regulatory administrative submission?",
-  "LICENCE_AGREE": " Is this a licence agreement?",
-  "DIN_TRANSFER": "I confirm that this is a DIN transfer",
-  "SPONSOR_NAME": "Sponsor Name",
+  "LICENCE_AGREE": "Is this an administrative submission license agreement?",
+  "DIN_TRANSFER": "I confirm that this Administrative Submission is a DIN transfer of ownership",
   "REGACTIVSEARCH":"Select or search for a Regulatory Activity Type"
 }

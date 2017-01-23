@@ -2,7 +2,7 @@
     <div class="row">
         <div class="form-group col-md-8" ng-class="{'has-error':adminCtrl.adminSubForm.adminSponsorName.$invalid}">
             <label for="sponsorNameId" class="required">
-                <span class="field-name">{{"SPONSOR_NAME" |translate}}</span>
+                <span class="field-name">{{"COMPANY_NOABBREV" |translate}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                 <input type="text" id="sponsorNameId" name="adminSponsorName" maxlength="100" size="100"
                        class="form-control" required ng-model="adminCtrl.model.sponsorName"/>
@@ -67,9 +67,6 @@
                         </ui-select>
                     </div>
                 </div>
-               <!-- <select id="activityTypeId" name="activityType" ng-model="adminCtrl.model.regActivityType"
-                        ng-options="activity |translate for activity in adminCtrl.activityTypeList | orderByTranslated"
-                        class="form-control" required></select>-->
                 <strong id="activityType-error" class="error"
                         ng-if="adminCtrl.showError(adminCtrl.adminSubForm.activityType.$touched,adminCtrl.adminSubForm.activityType.$invalid)">
                         <span class="label label-danger" ng-messages="adminCtrl.adminSubForm.activityType.$error">
@@ -152,6 +149,5 @@
                 </label>
             </div>
         </div>
-    </div>
     </div>
 </ng-form>
