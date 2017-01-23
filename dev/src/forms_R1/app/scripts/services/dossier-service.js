@@ -99,7 +99,7 @@
                         thirdPartySigned: info.third_party_signed,
                         drugUseList: loadDrugUseValues(info),
                         isScheduleA: info.is_sched_a === 'Y',
-                        therapeutic: getTherapeuticList(info.therapeutic_class_list.therapeutic_class),
+                        therapeutic:[] ,
                         canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         appendixFourList: getAppendix4IngredientList(info.appendix4_group)/*{
@@ -110,6 +110,9 @@
                     contactList: getContactList(info.contact_record)
 
                 };
+                if(info.therapeutic_class_list.therapeutic_class) {
+                    dossierModel.drugProduct.therapeutic = getTherapeuticList(info.therapeutic_class_list.therapeutic_class)
+                }
                 dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
                 //dossierModel.drugProduct.drugUseList=loadDrugUseValues(info);
 
@@ -160,6 +163,7 @@
             drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseDossier);
             baseDossier.therapeutic_class_list = {};
             baseDossier.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
+
             if (jsonObj.drugProduct.therapeutic && jsonObj.drugProduct.therapeutic.length > 0) {
                 baseDossier.therapeutic_class_list.therapeutic_class = therapeuticClassToOutput(jsonObj.drugProduct.therapeutic);
             }
@@ -417,11 +421,12 @@
 
 
         function getTherapeuticList(input) {
-            var list = [];
+            var list = "";
             if (!(input instanceof Array)) {
                 input = [input];
             }
             if (input) {
+                list=[];
                 for (var i = 0; i < input.length; i++) {
                     var item = {
                         "id": "" + i + 1,
