@@ -50,6 +50,7 @@
         vm.dateOptions = {
             showWeeks: false
         };
+        vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.yearList = _createYearList();
 
         vm.$onInit = function () {
@@ -111,73 +112,104 @@
          */
         vm.setSequenceList = function () {
 
-            var value = vm.lifecycleModel.activityType;
+            var value = vm.lifecycleModel.activityType.id;
             var temp = vm.lifecycleModel.descriptionValue;
+            vm.lifecycleModel.activityTypeDisplay=vm.lifecycleModel.activityType.id;
             vm.lifecycleModel.descriptionValue = "";
             switch (value) {
-                case ("PRESUB_MEETING"):
+                //commented out values not in list as of Jan 23,2017
+               /* case ("PRESUB_MEETING"):
                     vm.descriptionList = TransactionLists.getPresubTypes();
-                    break;
-                case ("ANDS"):
+                    break;*/
+                case ("B02-20160301-001"): //ANDS
                     vm.descriptionList = TransactionLists.getAndsType();
                     break;
-                case ("DINA"):
+              /*  case ("DINA"):
                     vm.descriptionList = TransactionLists.getDinaType();
-                    break;
-                case ("DINB"):
+                    break;*/
+              /*  case ("DINB"):
                     vm.descriptionList = TransactionLists.getDinbType();
-                    break;
-                case ("EUNDS"):
+                    break;*/
+                case ("B02-20160301-031"): //EU NDS (Extraordinary Use New Drug Submission)
                     vm.descriptionList = TransactionLists.getEundsType()
                     break;
 
-                case ("EUSNDS"):
+                case ("B02-20160301-032"): //EUSNDS (Extraordinary Use Supplement to a New Drug Submission)
                     vm.descriptionList = TransactionLists.getEusndsType();
                     break;
-                case ("LEVEL_3"):
+                case ("B02-20160301-038"): //Level 3 - Notice of Change (Post-Notice of Compliance Changes - Level III)
                     vm.descriptionList = TransactionLists.getLevel3Type();
                     break;
-                case ("NC_ACT"):
-                    vm.descriptionList = TransactionLists.getNcType();
-                    break;
-                case ("NDS"):
-                    vm.descriptionList = TransactionLists.getNdsType();
-                    break;
-                case ("PDC"):
-                    vm.descriptionList = TransactionLists.getPdcType();
-                    break;
-                case ("PDC_B"):
-                    vm.descriptionList = TransactionLists.getPdcBType();
-                    break;
-                case ("PSUR_C"):
-                    vm.descriptionList = TransactionLists.getpSurCType();
-                    break;
-                case ("PSUR_PV"):
-                    vm.descriptionList = TransactionLists.getpSurPvType();
-                    break;
-                case ("RMP_PV"):
-                    vm.descriptionList = TransactionLists.getRmpPvType();
-                    break;
-                case ("SANDS"):
-                    vm.descriptionList = TransactionLists.getSandsType();
-                    break;
-                case ("SNDS"):
-                    vm.descriptionList = TransactionLists.getSndsType();
-                    break;
-                case ("SNDS_C"):
-                    vm.descriptionList = TransactionLists.getSndsCArray();
-                    break;
-                case ("UD_PV"):
-                    vm.descriptionList = TransactionLists.getUdpvType();
-                    break;
-                case ("UDRA"):
-                    vm.descriptionList = TransactionLists.getUdraType();
-                    break;
-                case ("CONSULTATION"):
-                    vm.descriptionList = TransactionLists.getConsultType();
+
+                case ("B02-20160301-046"): //	MPNC (Pre-NC Meeting)
+                    vm.descriptionList = TransactionLists.getMPNCType();
                     break;
 
-                case ("YBPR"):
+                case ("B02-20160301-047"): //	MPNDS (Pre-NDS Meeting)
+                    vm.descriptionList = TransactionLists.getMPNDSType();
+                    break;
+                case ("B02-20160301-049"): //	MPSNDS (Pre-SNDS Meeting)
+                    vm.descriptionList = TransactionLists.getMPSNDSType();
+                    break;
+
+                case ("B02-20160301-050"): //NC (Notifiable Change)
+                    vm.descriptionList = TransactionLists.getNcType();
+                    break;
+                case ("B02-20160301-051"): //NDS (New Drug Submission)
+                    vm.descriptionList = TransactionLists.getNdsType();
+                    break;
+               /* case ("PDC"):
+                    vm.descriptionList = TransactionLists.getPdcType();
+                    break;*/
+               /* case ("PDC_B"):
+                    vm.descriptionList = TransactionLists.getPdcBType();
+                    break;*/
+                case ("B02-20160301-067"): //PAND (Pandemic Application)
+                    vm.descriptionList = TransactionLists.getPANDType();
+                    break;
+                case ("B02-20160301-068"): //PBRER-C
+                    vm.descriptionList = TransactionLists.getPBRERCType();
+                    break;
+                case ("B02-20160301-069"): //PBRER-PV
+                    vm.descriptionList = TransactionLists.getPBRERPVType();
+                    break;
+
+                case ("B02-20160301-075"): //PRNDS (Priority Request NDS)
+                    vm.descriptionList = TransactionLists.getPRNDSType();
+                    break;
+
+                case ("B02-20160301-077"): //PRSNDS (Priority Request SNDS)
+                    vm.descriptionList = TransactionLists.getPRSNDSType();
+                    break;
+
+                case ("B02-20160301-078"): //PSUR-C (Periodic Safety Update Report - Conditional)
+                    vm.descriptionList = TransactionLists.getpSurCType();
+                    break;
+                case ("B02-20160301-079"): //PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)
+                    vm.descriptionList = TransactionLists.getpSurPvType();
+                    break;
+                case ("B02-20160301-080"): //RMP-PV (Risk Management Plan - Pharmacovigilance)
+                    vm.descriptionList = TransactionLists.getRmpPvType();
+                    break;
+                case ("B02-20160301-082"): //SANDS (Supplement to an Abbreviated New Drug Submission)
+                    vm.descriptionList = TransactionLists.getSandsType();
+                    break;
+                case ("B02-20160301-084"): //SNDS (Supplement to a New Drug Submission)
+                    vm.descriptionList = TransactionLists.getSndsType();
+                    break;
+                case ("B02-20160301-085"): //SNDS-C (Supplement to a New Drug Submission - Conditional)
+                    vm.descriptionList = TransactionLists.getSndsCArray();
+                    break;
+                case ("B02-20160301-087"): //UD-PV (Undefined Data Pharmacovigilance)
+                    vm.descriptionList = TransactionLists.getUdpvType();
+                    break;
+                case ("B02-20160301-088"): //UDRA (Undefined Regulatory Activity)
+                    vm.descriptionList = TransactionLists.getUdraType();
+                    break;
+               /* case ("CONSULTATION"):
+                    vm.descriptionList = TransactionLists.getConsultType();
+                    break;*/
+                case ("B02-20160301-089"): //YBPR (Yearly Biologic Product Report)
                     vm.descriptionList = TransactionLists.getYbprType()
                     break;
 
@@ -376,7 +408,7 @@
             var endDate = "";
             var concatText = ""
             //translate value to english
-            var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
+           var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
             if (vm.startDateVisible) {
                 startDate = convertDate(vm.lifecycleModel.startDate);
                 concatText = enDescription + " dated " + startDate;

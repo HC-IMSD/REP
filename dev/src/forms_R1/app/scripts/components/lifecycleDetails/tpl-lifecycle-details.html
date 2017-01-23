@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group  col-md-4"
+                        <div class="form-group  col-md-7"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.regActivity.$invalid}">
                             <label for="regActivity_{{$id}}" class="required">
                                 <span class="field-name">{{"REG_ACTIVITY_TYPE" |translate}}</span>
@@ -81,7 +81,7 @@
                                         ng-model="lifecycleCtrl.lifecycleModel.activityType"
                                         data-ng-change="lifecycleCtrl.setSequenceList()"
                                         class="form-control full-width" ng-required="true"
-                                        ng-options="activity |translate for activity in  lifecycleCtrl.activityList | orderByTranslated">
+                                        ng-options="activity[lifecycleCtrl.lang] for activity in lifecycleCtrl.activityList track by activity.id">
                                 </select>
                                 <strong id="activityType-error" class="error"
                                         ng-if="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm.regActivity.$invalid,lifecycleCtrl.lifecycleDetailsForm.regActivity.$touched)">
@@ -92,7 +92,7 @@
                                 </strong>
                             </label>
                         </div>
-                        <div class="form-group col-md-6 "
+                        <div class="form-group col-md-5"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.seqDescription.$invalid}">
                             <label for="seqDescription_{{$id}}" class="required">
                                 <span class="field-name">{{"SEQUENCE_TYPE" |translate}}</span>
@@ -276,5 +276,5 @@
             </div>
         </div>
     </ng-form>
-    <!--    <pre>lifecycle record model: {{lifecycleCtrl.lifecycleModel | json : spacing}}</pre>-->
+        <pre>lifecycle record model: {{lifecycleCtrl.lifecycleModel | json : spacing}}</pre>
 </div>

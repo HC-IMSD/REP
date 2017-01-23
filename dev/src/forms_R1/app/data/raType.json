@@ -3,10 +3,8 @@
   {"id":"B02-20160301-031","en":"EU NDS (Extraordinary Use New Drug Submission)","fr":"EU NDS (Présentation de drogue nouvelle pour usage exceptionnel)"},
   {"id":"B02-20160301-032","en":"EUSNDS (Extraordinary Use Supplement to a New Drug Submission)","fr":"EUSNDS (Supplément à une présentation de drogue nouvelle pour usage exceptionnel)"},
   {"id":"B02-20160301-038","en":"Level 3 - Notice of Change (Post-Notice of Compliance Changes - Level III)","fr":"Level 3 - Notice of Change (Changements survenus après l'avis de conformité - Niveau III)"},
-  {"id":"B02-20160301-041","en":"MPANDS","fr":"MPANDS"},
   {"id":"B02-20160301-046","en":"MPNC (Pre-NC Meeting)","fr":"MPNC (Réunion préalable - PM)"},
   {"id":"B02-20160301-047","en":"MPNDS (Pre-NDS Meeting)","fr":"MPNDS (Réunion préalable – PDN)"},
-  {"id":"B02-20160301-048","en":"MPSANDS","fr":"MPSANDS"},
   {"id":"B02-20160301-049","en":"MPSNDS (Pre-SNDS Meeting)","fr":"MPSNDS (Réunion préalable – RPPDN)"},
   {"id":"B02-20160301-050","en":"NC (Notifiable Change)","fr":"NC (Préavis de modification)"},
   {"id":"B02-20160301-051","en":"NDS (New Drug Submission)","fr":"NDS (Présentation de drogue nouvelle)"},
@@ -23,5 +21,5 @@
   {"id":"B02-20160301-085","en":"SNDS-C (Supplement to a New Drug Submission - Conditional)","fr":"SNDS-C (Supplément à 'une présentation de drogue nouvelle - Conditionnelle)"},
   {"id":"B02-20160301-087","en":"UD-PV (Undefined Data Pharmacovigilance)","fr":"UD-PV (Données non définies – Pharmacovigilance)"},
   {"id":"B02-20160301-088","en":"UDRA (Undefined Regulatory Activity)","fr":"UDRA (Activité réglementaire non définie)"},
-  {"id":"B02-20160301-089","en":"YBPR (Yearly Biologic Product Report)","fr":"YBPR (Rapport annuel sur un produit biologique)"},
+  {"id":"B02-20160301-089","en":"YBPR (Yearly Biologic Product Report)","fr":"YBPR (Rapport annuel sur un produit biologique)"}
 ]

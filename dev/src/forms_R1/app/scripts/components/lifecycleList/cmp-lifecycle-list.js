@@ -63,13 +63,13 @@
             },
             {
                 label: "REG_ACTIVITY",
-                binding: "activityType",
-                width: "10"
+                binding: "activityTypeDisplay",
+                width: "30"
             },
             {
                 label: "SEQUENCE_DESCRIPT",
                 binding: "sequenceConcat",
-                width: "68"
+                width: "48"
             }
         ]
 

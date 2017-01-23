@@ -5,20 +5,21 @@
 (function () {
     'use strict';
     angular
-        .module('transactionLoadService', ['dataLists', 'hpfbConstants'])
+        .module('transactionLoadService', ['dataLists', 'hpfbConstants','services'])
 })();
 
 (function () {
     'use strict';
     angular
         .module('transactionLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA','OTHER', 'getContactLists', function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, OTHER ,getContactLists) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA','OTHER', 'getContactLists','TransactionLists', function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, OTHER ,getContactLists,TransactionLists) {
 
             return function (options) {
                 var deferred = $q.defer();
                 var dataFolder = "data/"; //relative forlder to the data
                 var countryUrl = dataFolder + "countries.json";
                 var contactsUrl = dataFolder + "internalContacts.json";
+                var raTypeUrl=dataFolder + "raType.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {
@@ -41,6 +42,14 @@
                         }
                         newList.unshift(otherRec);
                         getContactLists.createInternalContacts(newList);
+                        return $http.get(raTypeUrl)
+                    }) .then(function (response) {
+                        //PROCESS country list data
+                        var newList = _createSortedArray(response.data, options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        TransactionLists.createRaTypes(newList);
+                        angular.extend(resultTranslateList, translateList);
+                        //return response.data;
                         return response.data;
                     })
                     .catch(function (error) {

@@ -20,9 +20,13 @@
 
     /* @ngInject */
     function getTransactionSeq() {
+        var vm = this;
+        vm.raTypeArray = [];
+
         var service = {
             getTransactionDescriptions: getTransactionDescriptionsArray,
             getActivityTypes: getActivityArray,
+            createRaTypes: _createRaArray,
             getPresubTypes: getPresubArray,
             getAndsType: getANDSArray,
             getDinaType: getDINAArray,
@@ -45,6 +49,14 @@
             getUdraType: getUDRAVArray,
             getYbprType: getYBPRArray,
             getConsultType: getConsultArray,
+            getMPNCType: _getMPNCArray,
+            getMPNDSType: _getMPNDSArray,
+            getMPSNDSType: _getMPSNDSArray,
+            getPANDType: _getPANDArray,
+            getPBRERCType: _getPBRERCArray,
+            getPBRERPVType: _getPBRERPVArray,
+            getPRNDSType: _getPRNDSArray,
+            getPRSNDSType:_getPRSNDSArray,
             getYesNoList: yesNoArray
         };
         return service;
@@ -61,7 +73,9 @@
             ]);
         }
 
-
+        function _createRaArray(value) {
+            vm.raTypeArray = value;
+        }
 
 
         //returns a list of all the unique description values
@@ -115,29 +129,30 @@
         }
 
         function getActivityArray() {
-            return ([
-                "PRESUB_MEETING",
-                "ANDS",
-                "DINA",
-                "DINB",
-                "EUNDS",
-                "EUSNDS",
-                "LEVEL_3",
-                "NC_ACT",
-                "NDS",
-                "PDC",
-                "PDC_B",
-                "PSUR_C",
-                "PSUR_PV",
-                "RMP_PV",
-                "SANDS",
-                "SNDS",
-                "SNDS_C",
-                "UD_PV",
-                "UDRA",
-                "CONSULTATION",
-                "YBPR"
-            ]);
+            /* return ([
+             "PRESUB_MEETING",
+             "ANDS",
+             "DINA",
+             "DINB",
+             "EUNDS",
+             "EUSNDS",
+             "LEVEL_3",
+             "NC_ACT",
+             "NDS",
+             "PDC",
+             "PDC_B",
+             "PSUR_C",
+             "PSUR_PV",
+             "RMP_PV",
+             "SANDS",
+             "SNDS",
+             "SNDS_C",
+             "UD_PV",
+             "UDRA",
+             "CONSULTATION",
+             "YBPR"
+             ]);*/
+            return (vm.raTypeArray);
         }
 
         function getPresubArray() {
@@ -519,8 +534,80 @@
             ])
         }
 
+        function _getMPNCArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "MEETING_MINUTES",
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
 
-        //udra
+        function _getMPNDSArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "MEETING_MINUTES",
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
+        function _getMPSNDSArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "MEETING_MINUTES",
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
+        function _getPANDArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
+        function _getPBRERCArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
+        function _getPBRERPVArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
+        function  _getPRNDSArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
+        function _getPRSNDSArray(){
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
 
         function getYBPRArray() {
             return ([

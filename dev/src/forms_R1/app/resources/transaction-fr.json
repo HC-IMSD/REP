@@ -63,7 +63,7 @@
   "UNSOLICITED_DATA": "fr_Unsolicited Data",
   "YEAR_LIST_OF_CHANGE": "fr_Year, list of change number (for example: 2012, 15, 19a,….)",
   "BE_CLARIF_RESPONSE": "fr_Response to BE Clarification Request",
-  "PRESUB_MEETING": "fr_All pre-submission Meetings",
+  /*"PRESUB_MEETING": "fr_All pre-submission Meetings",
   "ANDS": "fr_ANDS",
   "DINA": "fr_DINA",
   "DINB": "fr_DINB",
@@ -83,7 +83,7 @@
   "UD_PV": "fr_UD-PV",
   "UDRA": "fr_UDRA",
   "CONSULTATION": "fr_Upon Consultation",
-  "YBPR": "fr_YBPR",
+  "YBPR": "fr_YBPR",*/
   "LIFECYCLE_TITLE": "fr_Lifecycle Management Table",
   "REG_CONTACT_THIS": "fr_Regulatory Activity Contact for THIS transaction",
   "REG_ACT_CONTACT": "fr_Regulatory Activity Contact",

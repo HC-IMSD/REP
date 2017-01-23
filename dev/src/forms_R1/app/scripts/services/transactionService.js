@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionService', ['dataLists'])
+        .module('transactionService', ['dataLists', 'services'])
 })();
 
 
@@ -16,9 +16,9 @@
         .module('transactionService')
         .factory('TransactionService', TransactionService)
 
-    TransactionService.$inject=['$filter','getCountryAndProvinces','getContactLists'];
+    TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists'];
 
-    function TransactionService($filter,getCountryAndProvinces,getContactLists) {
+    function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists) {
         function TransactionService() {
             //construction logic
             var defaultTransactionData = {
@@ -67,7 +67,7 @@
             transformFromFileObj: function (jsonObj) {
 
                 var transactionInfo = this.getTransactionInfo(jsonObj[this.rootTag]);
-                this._default={};
+                this._default = {};
                 this._default = transactionInfo;
             },
             //TODO transaction relevant
@@ -91,12 +91,12 @@
                 var ectd = this._transformEctdToFile(jsonObj.ectd);
                 resultJson.TRANSACTION_ENROL.ectd = ectd;
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                resultJson.TRANSACTION_ENROL.solicited_requester= "";
-                if(jsonObj.solicitedRequester){
-                    resultJson.TRANSACTION_ENROL.solicited_requester={
+                resultJson.TRANSACTION_ENROL.solicited_requester = "";
+                if (jsonObj.solicitedRequester) {
+                    resultJson.TRANSACTION_ENROL.solicited_requester = {
                         _label_en: jsonObj.solicitedRequester.en,
                         _label_fr: jsonObj.solicitedRequester.en,
-                        __text:jsonObj.solicitedRequester.id
+                        __text: jsonObj.solicitedRequester.id
                     }
                 }
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
@@ -148,14 +148,14 @@
                 if (!jsonObj) {
                     return this._default;
                 }
-                var model =_getEmptyTransactionModel();
+                var model = _getEmptyTransactionModel();
                 model.dateSaved = jsonObj.date_saved;
 
                 model.dataChecksum = jsonObj.data_checksum;
                 model.isEctd = jsonObj.is_ectd;
                 model.isSolicited = jsonObj.is_solicited;
                 model.solicitedRequester = "";
-                if(jsonObj.solicited_requester){
+                if (jsonObj.solicited_requester) {
                     model.solicitedRequester = $filter('filter')(getContactLists.getInternalContacts(), {id: jsonObj.solicited_requester.__text})[0];
                 }
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
@@ -167,7 +167,7 @@
                 //reg address
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 model.sameContact = jsonObj.same_regulatory_contact === 'Y';
-                model.activityAddress = _transformAddressFromFileObj($filter,getCountryAndProvinces,jsonObj.regulatory_activity_address);
+                model.activityAddress = _transformAddressFromFileObj($filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
             },
@@ -212,7 +212,7 @@
                     jsonObj = [jsonObj]
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _transformLifecycleRecFromFileObj(jsonObj[i])
+                    var record = _transformLifecycleRecFromFileObj(jsonObj[i],$filter,TransactionLists)
 
                     result.push(record);
                 }
@@ -284,12 +284,17 @@
      * @returns {jsonObj}
      * @private
      */
-    function _transformLifecycleRecFromFileObj(lifecycleObj) {
+    function _transformLifecycleRecFromFileObj(lifecycleObj, $filter,TransactionLists) {
         var lifecycleRec = _createLifeCycleModel();
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
-        lifecycleRec.activityType = lifecycleObj.sequence_activity_type;
+
+        lifecycleRec.activityType = "";
+        if (lifecycleObj.sequence_activity_type) {
+            lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.sequence_activity_type.__text})[0];
+            lifecycleRec.activityTypeDisplay=lifecycleRec.activityType.id;
+        }
         lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
         lifecycleRec.endDate = lifecycleObj.sequence_to_date;
@@ -306,7 +311,15 @@
         lifecycleRec.sequence_number = lifecycleObj.sequence;
         lifecycleRec.date_filed = lifecycleObj.dateFiled;
         lifecycleRec.control_number = lifecycleObj.controlNumber;
-        lifecycleRec.sequence_activity_type = lifecycleObj.activityType;
+        lifecycleRec.sequence_activity_type = "";
+        if (lifecycleObj.activityType) {
+            lifecycleRec.sequence_activity_type = {
+                _label_en: lifecycleObj.activityType.en,
+                _label_fr: lifecycleObj.activityType.fr,
+                __text: lifecycleObj.activityType.id
+            }
+        }
+
         lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
         lifecycleRec.sequence_to_date = lifecycleObj.endDate;
@@ -387,7 +400,7 @@
         address.province_lov = addressObj.stateList;
         address.province_text = addressObj.stateText;
         address.country = "";
-        if(addressObj.country) {
+        if (addressObj.country) {
             address.country =
             {
                 _label_en: addressObj.country.en,
@@ -399,16 +412,16 @@
         return (address);
     }
 
-    function _transformAddressFromFileObj($filter,getCountryAndProvinces,addressObj) {
+    function _transformAddressFromFileObj($filter, getCountryAndProvinces, addressObj) {
         var address = {};
         address.street = addressObj.street_address;
         address.city = addressObj.city;
         address.stateList = addressObj.province_lov;
         address.stateText = addressObj.province_text;
         address.country = "";
-        if( addressObj.country.__text) {
-            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id:addressObj.country.__text})[0];
-            address.countryDisplay= addressObj.country.id;
+        if (addressObj.country.__text) {
+            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: addressObj.country.__text})[0];
+            address.countryDisplay = addressObj.country.id;
         }
 
         address.postalCode = addressObj.postal_code;
@@ -421,6 +434,7 @@
             "dateFiled": "",
             "controlNumber": "",
             "activityType": "",
+            activityTypeDisplay: "",
             "descriptionValue": "",
             "startDate": "",
             "endDate": "",
@@ -440,8 +454,8 @@
             city: "",
             stateList: "",
             stateText: "",
-            country: {"id":"","en":"","fr":""},
-            countryDisplay:"",
+            country: {"id": "", "en": "", "fr": ""},
+            countryDisplay: "",
             "postalCode": ""
         }
         )
@@ -482,7 +496,7 @@
         return contact
     }
 
-    function _getEmptyTransactionModel(){
+    function _getEmptyTransactionModel() {
         var defaultTransactionData = {
             dataChecksum: "",
             dateSaved: "",
