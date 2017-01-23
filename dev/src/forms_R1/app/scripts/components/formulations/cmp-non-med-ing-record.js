@@ -119,7 +119,7 @@
          * @returns {boolean} true if other is the value
          */
         self.isNanoOther = function () {
-            if (self.ingModel.nanoMaterial === DossierLists.getOtherValue()) {
+            if (self.ingModel.nanoMaterial.id === DossierLists.getOtherValue()) {
                 return true;
             } else {
                 self.ingModel.nanoMaterialOther = "";

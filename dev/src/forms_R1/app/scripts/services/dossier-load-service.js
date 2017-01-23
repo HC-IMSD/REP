@@ -20,7 +20,7 @@
                 var dataFolder = "data/"; //relative forlder to the data
                 var roaUrl = dataFolder + "roa.json";
                 var countryUrl = dataFolder + "countries.json";
-                var nanoUrl = "data/nanomaterial-" + options.key + ".json";
+                var nanoUrl = "data/nanomaterials.json";
                 var unitsUrl = dataFolder + "units.json";
                 var dosageFormUrl = dataFolder + "dosageForm.json";
                 var resultTranslateList = {};
@@ -36,14 +36,15 @@
                         //PROCESS country list data
                         var newList =  _createSortedArray(response.data,options.key);
                         var translateList = _createTranslateList(newList, options.key);
-                        console.log(translateList)
                         getCountryAndProvinces.createCountryList(newList);
                        angular.extend(resultTranslateList, translateList);
                         return $http.get(nanoUrl); //nanomaterial load
 
                     }).then(function (response) {
-                        angular.extend(resultTranslateList, response.data);
-                        DossierLists.createNanomaterialList(response.data);
+                        var newList =  _createNewSortedArrayWithOther(response.data, DossierLists.getNanoPrefix(),options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        DossierLists.createNanomaterialList(newList);
+                        angular.extend(resultTranslateList, translateList);
                         return $http.get(dosageFormUrl); //dosage form list Load contains both languages
                     })
                     .then(function (response) {

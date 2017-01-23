@@ -167,7 +167,7 @@
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="feeClass"
                                                 name="feeClass" ng-model="main.activityRoot.feeClass"
-                                                required ng-options="fee[main.lang] for fee in main.feeClassList">
+                                                required ng-options="fee[main.lang] for fee in main.feeClassList track by fee.id">
                                         </select>
                                         <strong id="feeClass-error" class="error">
                         <span class="label label-danger"

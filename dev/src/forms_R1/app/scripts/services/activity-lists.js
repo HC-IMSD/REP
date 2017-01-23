@@ -28,7 +28,7 @@
         vm.NC_raType="B02-20160301-050";
         vm.SANDS_raType="B02-20160301-082";
         vm.SNDS_raType="B02-20160301-084";
-        vm.DIN_raType="B02-20160301-090";
+        vm.DIN_raType="no used- deprecated?";
         var service = {
             getFeeClassList: _getfeeClassArray,
             //createFeeClassList:_createfeeClassArray,

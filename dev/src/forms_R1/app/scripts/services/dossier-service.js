@@ -640,12 +640,20 @@
                     "per": item.per,
                     "units": "",
                     "calcAsBase": item.is_base_calc,
-                    "nanoMaterial": item.is_nanomaterial,
+                    "nanoMaterial":"",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
                 if (item.units) {
                     var unitsObj = $filter('filter')(DossierLists.getUnitsList(), {id: item.units.__text})[0];
                     obj.units = unitsObj;
+                }
+                if( item.is_nanomaterial){
+                    var nanoValue=DossierLists.getNanoPrefix()+item.is_nanomaterial.__text;
+                    if(item.is_nanomaterial.__text===OTHER){
+                        nanoValue=item.is_nanomaterial.__text;
+                    }
+                    obj.nanoMaterial=$filter('filter')(DossierLists.getNanoMaterials() , {id: nanoValue})[0];
                 }
                 // used to identify if the ingredient is not from the type ahead lookup
                 if (!obj.ingId) {
@@ -679,12 +687,20 @@
                     "per": item.per,
                     "units": "",
                     "calcAsBase": item.is_base_calc,
-                    "nanoMaterial": item.is_nanomaterial,
+                    "nanoMaterial":"",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
 
                 if (item.units) {
                     obj.units = $filter('filter')(DossierLists.getUnitsList(), {id: item.units.__text})[0];
+                }
+                if( item.is_nanomaterial){
+                    //prefixed so need to do things differently than units
+                    var nanoValue=DossierLists.getNanoPrefix()+item.is_nanomaterial.__text;
+                    if(item.is_nanomaterial.__text===OTHER){
+                        nanoValue=item.is_nanomaterial.__text;
+                    }
+                   obj.nanoMaterial=$filter('filter')(DossierLists.getNanoMaterials() , {id: nanoValue})[0];
                 }
 
                 resultList.push(obj);
@@ -1024,11 +1040,13 @@
                     "units": "",
                     "units_other": item.otherUnits,
                     "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial": item.nanoMaterial,
+                    "is_nanomaterial":"",
                     "nanomaterial_details": item.nanoMaterialOther
                 };
                 //item.units
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
+                obj.is_nanomaterial=_unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+
                 resultList.push(obj);
             });
             return (resultList);
@@ -1058,6 +1076,7 @@
             return newObj;
         }
 
+
         /**
          * Converts nonMedicinal Ingredient to a the output json object
          * @param nonMedList
@@ -1081,10 +1100,11 @@
                     "units": "",
                     "units_other": item.otherUnits,
                     "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial": item.nanoMaterial,
+                    "is_nanomaterial": "",
                     "nanomaterial_details": item.nanoMaterialOther
                 };
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
+                obj.is_nanomaterial=_unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
 
                 resultList.push(obj);
             });

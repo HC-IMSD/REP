@@ -74,7 +74,8 @@
             getTissuesFluidsLabels: _getTissuesFluidsLabels,
             getRoaPrefix: _getRoaListPrefix,
             getDosageFormPrefix: _getDosagePrefix,
-            getUnitsPrefix: _getUnitsPrefix
+            getUnitsPrefix: _getUnitsPrefix,
+            getNanoPrefix: _getNanoPrefix
 
         };
         return service;
@@ -107,7 +108,7 @@
 
         function _createNanoArray(translateJson) {
 
-            vm.nanoList = _getKeys(translateJson)
+            vm.nanoList = translateJson
         }
 
         function _createDosageFormArray(translateJson) {
@@ -138,6 +139,9 @@
         }
         function _getUnitsPrefix() {
             return "UNITS_";
+        }
+        function _getNanoPrefix(){
+            return "NANOMAT_"
         }
 
         /**

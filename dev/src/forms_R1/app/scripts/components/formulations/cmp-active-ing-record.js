@@ -52,7 +52,7 @@
             units: "",
             otherUnits:"",
             per: "",
-            nanoMaterial: "",
+            nanoMaterial: {id:"",en:"",fr:""},
             nanoMaterialOther: "",
             calcAsBase: "",
             humanAnimalSourced: ""
@@ -150,7 +150,7 @@
          */
         self.isNanoOther = function () {
 
-            if (self.ingModel.nanoMaterial === DossierLists.getOtherValue()) {
+            if (self.ingModel.nanoMaterial.id === DossierLists.getOtherValue()) {
                 return true;
             } else {
                 self.ingModel.nanoMaterialOther = "";

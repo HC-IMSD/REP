@@ -116,7 +116,8 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="nanoMaterial_{{$id}}" ng-model="ingRecCtrl.ingModel.nanoMaterial"
                             class="form-control full-width" name="nanoFld" ng-required="true"
-                            ng-options="nano |translate for nano in  ingRecCtrl.nanoMaterialList| orderByTranslatedOtherFirst">
+                            ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id" >
+
                     </select>
                     <strong id="nanoMaterial-error" class="error"
                             ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.nanoFld.$invalid,ingRecCtrl.activeIngForm.nanoFld.$touched)">
@@ -204,6 +205,8 @@
                 </div>
             </div>
         </fieldset>
-        <!--  <pre>{{ingRecCtrl.ingModel |json}}</pre>-->
+        <!--  <pre>{{ingRecCtrl.ingModel |json}}
+                {{ingRecCtrl.lang |json}}
+          </pre>-->
     </div>
 </ng-form>
