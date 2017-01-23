@@ -7,7 +7,8 @@
 
     angular
         .module('contactModule', [
-            'dataLists'
+            'dataLists',
+            'hpfbConstants'
         ])
 })();
 
@@ -27,13 +28,13 @@
             }
     });
 
-    contactCtrl.$inject = ['getContactLists']
-    function contactCtrl( getContactLists) {
+    contactCtrl.$inject = ['getContactLists','ENGLISH','FRENCH'];
+    function contactCtrl( getContactLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.isEditable = true;
-        vm.ngModelOptSetting = {updateOn: 'blur'}
+        vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.salutationList = getContactLists.getSalutationList();
-        vm.langCorrespondance = getContactLists.getLanguages();
+        vm.langCorrespondance=[ENGLISH,FRENCH];
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.contactModel = {
             isDetailValid: false,
@@ -56,6 +57,7 @@
             fax: ""
         };
         vm.$onInit = function () {
+           vm.langCorrespondance=[ENGLISH,FRENCH];
             /*console.log("init contact details");
            if (vm.contactRecord) {
                 //doesn't copy as this is a dumb component

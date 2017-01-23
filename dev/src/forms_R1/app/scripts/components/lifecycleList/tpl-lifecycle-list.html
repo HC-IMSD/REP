@@ -1,8 +1,8 @@
 <ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
         <div class="row">
-            <input type="text" id="oneRec_{{$id}}" name="oneRec" ng-show="false"
+            <input type="text" id="oneRec" name="oneRec" ng-show="false"
                    ng-model="lifeListCtrl.oneRecord" ng-required="true"/>
-            <label>
+            <label for="oneRec">
                 <strong id=" onerec-error" class="error"
                         ng-if="lifeListCtrl.showError(lifeListCtrl.lifecycleListForm.oneRec.$touched,lifeListCtrl.lifecycleListForm.oneRec.$invalid)">
                         <span class="label label-danger"
@@ -36,5 +36,4 @@
                        ng-click="lifeListCtrl.newAdrFormShow = false">
             </div>
         </div>
-    </div>
 </ng-form>

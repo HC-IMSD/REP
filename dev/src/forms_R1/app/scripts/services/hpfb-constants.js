@@ -13,6 +13,8 @@
         .constant('YES', 'Y')
         .constant('NO', 'N')
         .constant('USA','USA')
-        .constant("UNKNOWN","UNKNOWN");
+        .constant("UNKNOWN","UNKNOWN")
+        .constant("ENGLISH","en")
+        .constant("FRENCH","fr");
 
 })();
