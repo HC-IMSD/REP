@@ -479,7 +479,7 @@ pipes.builtAppCmpScriptsProd = function (filePaths, outName, destPath) {
         .pipe(pipes.orderedAppScripts())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat(outName))
-        .pipe(plugins.uglify())
+        .pipe(plugins.uglify({mangle:false}))
         .pipe(plugins.sourcemaps.write())
         .pipe(gulp.dest(destPath));
 };
@@ -1035,8 +1035,10 @@ gulp.task('dev-activity-createRootJS', function () {
     var lang = 'en';
     var dest = paths.buildDevActivity + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.activityRoot + '.js';
+    var skipDate=true;
+    var generateInternalForms=false;
     return (
-        pipes.createRootFileSet(rootFile, dest, false, true)
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
 
 });
@@ -1088,8 +1090,10 @@ gulp.task('dev-company-copySrc', function () {
 gulp.task('dev-company-createRootJS', function () {
     var dest = paths.buildDevCompany + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.companyRoot + '.js';
+    var skipDate=true;
+    var generateInternalForms=true;
     return (
-        pipes.createRootFileSet(rootFile, dest, false, true)
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
 });
 
@@ -1101,10 +1105,12 @@ gulp.task('dev-company-htmlBuild', ['dev-company-copyData', 'dev-company-copySrc
     var ignoreDir = '/build/dev/company';
     var buildDir = paths.buildDevCompany;
     var htmlPartial = jsRootContent.partialCompanyRoot;
-    pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolINT-fr.html', 'companyAppINT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
-    pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolEXT-fr.html', 'companyAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolEXT-en.html', 'companyAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT');
+    var today = createSuffixDate();
+    today = "";
+    pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolINT-fr.html', 'companyAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
+    pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolEXT-fr.html', 'companyAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolEXT-en.html', 'companyAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT');
     return (
         pipes.cleanBuild(buildDir + paths.translations)
 
@@ -1127,7 +1133,7 @@ gulp.task('dev-company-copyLib', function () {
 gulp.task('dev-transaction-copySrc', function () {
 
     return (
-        pipes.copySrcs(false, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, false)
     );
 
 
@@ -1137,8 +1143,10 @@ gulp.task('dev-transaction-copySrc', function () {
 gulp.task('dev-transaction-createRootJs', function () {
     var dest = paths.buildDevTransaction + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.transactionRoot + '.js';
+    var skipDate=true;
+    var generateInternalForms=false;
     return (
-        pipes.createRootFileSet(rootFile, dest, false, false)
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
 
 });
@@ -1161,9 +1169,10 @@ gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copyData', 'dev-transac
     var ignoreDir = '/build/dev/transaction';
     var buildDir = paths.buildDevTransaction;
     var htmlPartial = jsRootContent.partialTransactionRoot;
-
-    pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '');
-    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', '');
+    var today = createSuffixDate();
+    today = "";
+    pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '');
+    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + today+ '.js', htmlPartial, buildDir, ignoreDir, 'en', '');
 
     return (
         pipes.cleanBuild(buildDir + paths.translations)
@@ -1225,8 +1234,10 @@ gulp.task('dev-dossier-createRootJS', function () {
 
     var dest = paths.buildDevDossier + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
+    var skipDate=true;
+    var generateInternalForms=true;
     return (
-        pipes.createRootFileSet(rootFile, dest, false, true)
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
 
 
@@ -1246,10 +1257,12 @@ gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copyData', 'dev-dossier-copySrc
     var ignoreDir = '/build/dev/dossier';
     var buildDir = paths.buildDevDossier;
     var htmlPartial = jsRootContent.partialDossierRoot;
-    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
-    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrollEXT-en.html', 'dossierAppEXT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
-    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + createSuffixDate() + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT');
+    var today = createSuffixDate();
+    today = "";
+    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'INT');
+    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrollEXT-en.html', 'dossierAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'EXT');
+    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', 'INT');
     return (
         pipes.cleanBuild(buildDir + paths.translations)
     );
