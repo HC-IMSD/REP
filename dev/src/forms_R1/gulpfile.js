@@ -551,6 +551,7 @@ pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory, isHtmlMin)
             copySourcesHtml.pipe(rename({
                     suffix: dateToday
                 }))
+                .pipe(plugins.htmlhint.failReporter())
                 .pipe(htmlmin({collapseWhitespace: true, removeComments: true, html5: true, caseSensitive: true}))
                 .pipe(gulp.dest(destDirectory))
         )
@@ -841,17 +842,17 @@ pipes.compileSourceJsMinified = function (srcPath, destPath, rootJsBaseName, com
     var dateToday = createSuffixDate();
 
     if (hasInternal) {
-        //filesToConcat = filesToConcat.slice();
+
         filesToConcat.push(srcPath + rootJsBaseName + "INT-en" + "*.js");
          pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-en" + dateToday + '.min.js', destPath);
-        filesToConcat = filesToConcat.slice();
+        filesToConcat.pop();
         filesToConcat.push(srcPath + rootJsBaseName + "INT-fr" + "*.js");
          pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-fr" + dateToday + '.min.js', destPath);
-        filesToConcat = filesToConcat.slice();
+        filesToConcat.pop();
     }
     filesToConcat.push(srcPath + rootJsBaseName + "EXT-en" + "*.js");
      pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-en" + dateToday + '.min.js', destPath);
-    filesToConcat = filesToConcat.slice();
+    filesToConcat.pop();
     filesToConcat.push(srcPath + rootJsBaseName + "EXT-fr" + "*.js");
     return (
         (pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-fr" + dateToday + '.min.js', destPath))
@@ -1383,9 +1384,9 @@ gulp.task('prod-activity-compileHtml', ['prod-activity-compileSrcJs'], function 
 
     pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd);
     pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd);
-    pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd);
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd);
 
-    return pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd);
+    return pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd);
 
 });
 
