@@ -17,13 +17,12 @@
     'use strict';
     angular
         .module('applicationInfoService')
-        .factory('ApplicationInfoService', ApplicationInfoService)
+        .factory('ApplicationInfoService', ApplicationInfoService);
 
     function ApplicationInfoService() {
         function ApplicationInfoService() {
             //constructor here
-        };
-
+        }
         /**
          * @ngdoc method gets the current date formatted as YYYY-MM-DD
          * @returns {string}
@@ -33,8 +32,8 @@
             var d = new Date();
             var isoDate = d.getFullYear() + '-'
                 + pad(d.getMonth() + 1) + '-'
-                + pad(d.getDate())
-            return (isoDate)
+                + pad(d.getDate());
+            return (isoDate);
             function pad(n) {
                 return n < 10 ? '0' + n : n
             }
@@ -44,7 +43,7 @@
             if (!enrolmentVersion) {
                 result = "0.1";
             } else {
-                var parts = enrolmentVersion.split('.')
+                var parts = enrolmentVersion.split('.');
                 var dec = parseInt(parts[1]);
                 result = parts[0] + "." + (dec + 1);
 
@@ -59,7 +58,7 @@
             if (!enrolmentVersion) {
                 result = "1.0";
             } else {
-                var parts = enrolmentVersion.split('.')
+                var parts = enrolmentVersion.split('.');
                 var whole = parseInt(parts[0]);
                 result = (whole + 1) + ".0"
             }

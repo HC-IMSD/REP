@@ -17,7 +17,7 @@
                                  disable-selection="!lifeListCtrl.isDetailsValid">
 
                 <cmp-lifecycle-details lifecycle-record="$parent.record"
-                                       is-detail-valid="lifeListCtrl.setValid(state)"
+                                       is-detail-valid="lifeListCtrl.setValid(state)" activity-types="lifeListCtrl.activityTypes"
                                        on-delete="lifeListCtrl.deleteRecord(id)" is-ectd="lifeListCtrl.ectdValue"
                                        enable-delete-index="lifeListCtrl.lastRecordSequence()"
                                        on-update="lifeListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>

@@ -25,7 +25,7 @@
         .factory('getCountryAndProvinces', getService);
 
     /* @ngInject */
-    getService.inject=['UNKNOWN'];
+    getService.inject = ['UNKNOWN'];
     function getService(UNKNOWN) {
         var vm = this;
         vm.countryList = [];
@@ -34,7 +34,7 @@
             getProvinces: getProvinceValuesArray,
             getUSStates: getUSStatesValueArray,
             createCountryList: _createCountryArray,
-            getUnknownCountryRecord:_getUnknownCountryRec
+            getUnknownCountryRecord: _getUnknownCountryRec
         };
         return service;
 
@@ -45,14 +45,14 @@
             vm.countryList = translateJson;
         }
 
-        function _getUnknownCountryRec(){
+        function _getUnknownCountryRec() {
 
-            return(
-                {
-                    "id":UNKNOWN,
-                    "en":"Unknown",
-                    "fr":"Inconnu"
-                }
+            return (
+            {
+                "id": UNKNOWN,
+                "en": "Unknown",
+                "fr": "Inconnu"
+            }
             )
         }
 
@@ -152,9 +152,10 @@
         .factory('getContactLists', getSalService); //todo rename service
 
     /* @ngInject */
-    function getSalService() {
+    getSalService.$inject = ['$filter', '$q', '$http', '$translate', 'OTHER', 'FRENCH'];
+    function getSalService($filter, $q, $http,$translate, OTHER, FRENCH) {
         var vm = this;
-        vm.internalContacts=[];
+        vm.internalContacts = [];
         var service = {
             getSalutationList: getSalValuesArray,
             getLanguages: getLanguagesValuesArray, //TODO make constants
@@ -184,16 +185,48 @@
                 ]);
         }
 
-        function _createInternalContacts(values){
-            vm.internalContacts=values;
+        function _createInternalContacts() {
+            var deferred = $q.defer();
+            var contactsUrl = "data/internalContacts.json";
+            if (!vm.internalContacts || vm.internalContacts.length === 0) {
+                $http.get(contactsUrl)
+                    .success(function (data, status, headers, config) {
+                        var newList = _createSortedArray(data, 'en');
+                        var lang = $translate.proposedLanguage() || $translate.use();
+                        //this is a bit of a hack, but saves unecessary space
+                        var otherRec = {"id": OTHER, "en": "Other"};
+                        if (lang === FRENCH) {
+                            otherRec.en = "Autre";
+                        }
+                        newList.unshift(otherRec);
+                        vm.internalContacts = newList;
+                        deferred.resolve(newList);
+                    })
+                    .error(function (data, status, headers, config) {
+                        deferred.reject(status);
+                    });
+            }else{
+                deferred.resolve(vm.internalContacts);
+            }
+            return deferred.promise;
         }
-        function _getInternalContacts(){
-            return(vm.internalContacts);
+
+        function _getInternalContacts() {
+                return _createInternalContacts();
+        }
+
+        function _createSortedArray(jsonList, lang) {
+            var result = [];
+            angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
+                result.push(sortedObject);
+            });
+            return result;
         }
 
     }
-})();
 
+
+})();
 
 
 /**

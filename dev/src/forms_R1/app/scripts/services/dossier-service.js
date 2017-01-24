@@ -524,7 +524,7 @@
 
                         ing.tissuesFluidsOrigin = {};
                         // ing.tissuesFluidsOrigin.tissuesList = [];
-                        ing.tissuesFluidsOrigin.tissuesList = _getTissuesFluidsModel(tissues)
+                        ing.tissuesFluidsOrigin.tissuesList = _getTissuesFluidsModel(tissues);
                         //"ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList
                     }
                     if (srcAnimal) {
@@ -952,7 +952,7 @@
                             _label_en: "",
                             _label_fr: "",
                             __text:  ""
-                        }
+                        };
                         if( countries[v].country){
                             countryRecord.country_with_unknown._label_en= countries[v].country.en;
                             countryRecord.country_with_unknown._label_fr= countries[v].country.fr;
@@ -2281,7 +2281,7 @@
         function _getConcatTissues(json) {
             var labelLookup = DossierLists.getTissuesFluidsLabels();
             var result = "";
-            var markupBreak = "<br>"
+            var markupBreak = "<br>";
             if (angular.isUndefined(json)) return result;
             var keys = Object.keys(json);
             for (var i = 0; i < keys.length; i++) {

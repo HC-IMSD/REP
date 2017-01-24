@@ -37,7 +37,7 @@
     transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','getContactLists'];
     function transactionInfoCtrl(TransactionService, OTHER, YES,getContactLists) {
         var vm = this;
-        vm.ngModelOptSetting = {updateOn: 'blur'}
+        vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {};
         vm.yesNoList = ['Y', 'N'];
         vm.showEctdSection = true;
@@ -56,56 +56,53 @@
             msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
             show: false
         };
-        vm.requesterList = getContactLists.getInternalContacts();
+        vm.requesterList =  [];
 
         vm.$onInit = function () {
+            loadContactData(); //asynch load of contact data
             vm.updateEctdState();
             vm.setSolicitedState();
-
         };
-        //TODO rename
+
+
         vm.$onChanges = function (changes) {
             if (changes.transactionRoot) {
                 vm.transactionModel = changes.transactionRoot.currentValue;
                 vm.updateEctdState();
                 vm.setSolicitedState();
             }
-        }
+        };
 
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
-        }
+        };
         vm.getNewRepContact = function () {
             return (vm.getRepContact());
-        }
+        };
 
         vm.subtractSequence = function () {
             vm.deprecateSequence();
-        }
+        };
         vm.showFormErrors=function(){
 
             return(vm.showErrors())
-        }
+        };
 
         vm.showError = function (ctrl) {
             if (!ctrl) return;
 
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
-             return true
+             return true;
             }
-            return false
-        }
+            return false;
+        };
         vm.updateEctdState = function () {
             if (isEctdValue()) {
-                //vm.showEctdSection = true;
                 vm.isEctd = true;
             } else {
-                //clear data
-                //  vm.resetEctd();
                 vm.isEctd = false;
-                //vm.showEctdSection = false;
             }
-        }
+        };
         function isEctdValue() {
             return vm.transactionModel.isEctd === YES;
         }
@@ -118,6 +115,14 @@
             return vm.transactionModel.isActivityChanges === YES;
         }
 
+
+        function loadContactData(){
+            getContactLists.getInternalContacts()
+                .then(function(data){
+                    vm.requesterList=data;
+                    return true;
+                });
+        }
 
         /**
          * @ngdoc method sets the visibilty of the solicited requester field. Clears
@@ -143,7 +148,7 @@
 
         vm.updateActivityChanges = function () {
             vm.activityEditable = isActivityChangesValue();
-        }
+        };
 
         vm.closeAlert = function (value) {
             switch (value) {
@@ -154,7 +159,7 @@
                     vm.alert2.show = false;
                     break;
             }
-        }
+        };
 
         vm.addInstruct = function (value) {
 

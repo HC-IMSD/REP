@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('hpfbConstants', [])
+        .module('hpfbConstants', []);
 
     angular.module('hpfbConstants')
         .constant('CANADA','CAN')

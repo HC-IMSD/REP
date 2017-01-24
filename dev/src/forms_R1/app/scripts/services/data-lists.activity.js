@@ -19,7 +19,9 @@
         .factory('TransactionLists', getTransactionSeq);
 
     /* @ngInject */
-    function getTransactionSeq() {
+    getTransactionSeq.inject = ['$http', '$q'];
+
+    function getTransactionSeq($http,$q) {
         var vm = this;
         vm.raTypeArray = [];
 
@@ -74,7 +76,7 @@
         }
 
         function _createRaArray(value) {
-            vm.raTypeArray = value;
+            vm.raTypeArray =value;
         }
 
 
@@ -129,29 +131,7 @@
         }
 
         function getActivityArray() {
-            /* return ([
-             "PRESUB_MEETING",
-             "ANDS",
-             "DINA",
-             "DINB",
-             "EUNDS",
-             "EUSNDS",
-             "LEVEL_3",
-             "NC_ACT",
-             "NDS",
-             "PDC",
-             "PDC_B",
-             "PSUR_C",
-             "PSUR_PV",
-             "RMP_PV",
-             "SANDS",
-             "SNDS",
-             "SNDS_C",
-             "UD_PV",
-             "UDRA",
-             "CONSULTATION",
-             "YBPR"
-             ]);*/
+
             return (vm.raTypeArray);
         }
 
@@ -306,7 +286,7 @@
                 "EMAIL_RQ_RESPONSE",// response to email request
                 "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
                 "PHONE_RQ_RESPONSE", //Response to telephone Request
-                "YEAR_LIST_OF_CHANGE", //Year, list of change number,
+                "YEAR_LIST_OF_CHANGE" //Year, list of change number,
             ]);
         }
 

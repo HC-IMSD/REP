@@ -66,7 +66,7 @@
                     mailing: false,
                     billing: false,
                     importer: false
-                }
+                };
                 return (defaultAddressRole);
             },
             createContactRole: function () {
@@ -166,7 +166,7 @@
              * @param jsonObj
              */
             transformFromFileObj: function (jsonObj) {
-                var rootTag = "COMPANY_ENROL"
+                var rootTag = "COMPANY_ENROL";
                 var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);
                 var addressInfo = {addressList: this.getAddressList(jsonObj[rootTag].address_record)};
                 var contactInfo = {contactList: this.getContactList(jsonObj[rootTag].contact_record)};
@@ -189,7 +189,7 @@
                         address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
                     }
-                }
+                };
                 return (resultJson);
             },
             getModelInfo: function () {
@@ -221,7 +221,7 @@
 
 
                 for (var i = 0; i < adrList.length; i++) {
-                    this.updateAddressID(parseInt(adrList[i].address_id))
+                    this.updateAddressID(parseInt(adrList[i].address_id));
                     var address = {};
                     address.addressID = adrList[i].address_id;
                     address.companyName = adrList[i].company_name;

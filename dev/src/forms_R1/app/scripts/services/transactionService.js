@@ -14,7 +14,7 @@
     'use strict';
     angular
         .module('transactionService')
-        .factory('TransactionService', TransactionService)
+        .factory('TransactionService', TransactionService);
 
     TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists'];
 
@@ -212,7 +212,7 @@
                     jsonObj = [jsonObj]
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _transformLifecycleRecFromFileObj(jsonObj[i],$filter,TransactionLists)
+                    var record = _transformLifecycleRecFromFileObj(jsonObj[i],$filter,TransactionLists);
 
                     result.push(record);
                 }
@@ -229,7 +229,7 @@
 
 
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _mapLifecycleRecToOutput(jsonObj[i])
+                    var record = _mapLifecycleRecToOutput(jsonObj[i]);
                     if (jsonObj.length == 1) {
                         return (record);
                     }
@@ -359,7 +359,7 @@
     function _transformContactFromFileObj(contactObj) {
         var contact = {};
         if (!contactObj) {
-            console.error("There is no contact object")
+            console.error("There is no contact object");
             return contact;
         }
         contact.salutation = contactObj.salutation;
@@ -441,7 +441,7 @@
             "details": "",
             "version": "",
             "sequenceConcat": ""
-        }
+        };
         //TODO get next sequence number
         return defaultRecord;
     }
@@ -481,18 +481,17 @@
         var d = new Date();
         var isoDate = d.getFullYear() + '-'
             + pad(d.getMonth() + 1) + '-'
-            + pad(d.getDate())
-        return (isoDate)
+            + pad(d.getDate());
+        return (isoDate);
         function pad(n) {
             return n < 10 ? '0' + n : n
         }
-    };
-
+    }
     //todo deprecated
     function _createRepContact() {
 
-        var contact = _createContactModel()
-        contact.repRole = ""
+        var contact = _createContactModel();
+        contact.repRole = "";
         return contact
     }
 

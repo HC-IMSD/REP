@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('lifecycleList', ['filterLists','lcDetailsModule','expandingTable'])
+        .module('lifecycleList', ['filterLists', 'lcDetailsModule', 'expandingTable'])
 })();
 
 (function () {
@@ -30,9 +30,9 @@
             controllerAs: 'lifeListCtrl'
         });
 
-    lifecycleListCtrl.$inject = ['$filter', 'sequenceOrderDescendingFilter'];
+    lifecycleListCtrl.$inject = ['$filter', 'TransactionLists'];
 
-    function lifecycleListCtrl($filter, sequenceOrderDescendingFilter) {
+    function lifecycleListCtrl($filter, TransactionLists) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
@@ -45,6 +45,9 @@
         vm.isParentDirty = false;
         vm.addFocused = false;
         vm.resetCollapsed = false;
+        vm.activityTypes = [];
+
+
         vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
@@ -75,8 +78,10 @@
 
         vm.$onInit = function () {
             //local var from binding
+            vm.activityTypes= TransactionLists.getActivityTypes();
             vm.selectRecord = -1
             vm.addFocused = false;
+
         }
 
 
@@ -125,8 +130,8 @@
                 record.sequence = "0000";
             }
             vm.lifecycleList[0] = record;
-
         }
+
 
         /**
          * Usecd to determine if a record can be deleted. Only allowing the last record to be deleted

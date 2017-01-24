@@ -20,11 +20,12 @@
         .component('cmpContactDetails',{
             templateUrl: 'app/scripts/components/contactDetails/tpl-contact-details.html',
             controller: contactCtrl,
+            controllerAs: 'contCtrl',
             bindings: {
                 contactRecord: '<',
                 onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
-                showErrors: '&',
+                showErrors: '&'
             }
     });
 
@@ -34,7 +35,7 @@
         vm.isEditable = true;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.salutationList = getContactLists.getSalutationList();
-        vm.langCorrespondance=[ENGLISH,FRENCH];
+        vm.langCorresppond=[ENGLISH,FRENCH];
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.contactModel = {
             isDetailValid: false,
@@ -57,13 +58,13 @@
             fax: ""
         };
         vm.$onInit = function () {
-           vm.langCorrespondance=[ENGLISH,FRENCH];
+           vm.langList=[ENGLISH,FRENCH];
             /*console.log("init contact details");
            if (vm.contactRecord) {
                 //doesn't copy as this is a dumb component
                 vm.contactModel = vm.contactRecord;
              }*/
-        }
+        };
         //TODO rename
         vm.$onChanges=function(changes){
             if(changes.contactRecord){
@@ -74,7 +75,7 @@
                 vm.isEditable = changes.isAmend.currentValue;
             }
 
-        }
+        };
         vm.showError=function(ctrl){
             if((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid )){
                 return true

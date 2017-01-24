@@ -18,7 +18,6 @@
                 var deferred = $q.defer();
                 var dataFolder = "data/"; //relative forlder to the data
                 var countryUrl = dataFolder + "countries.json";
-                var contactsUrl = dataFolder + "internalContacts.json";
                 var raTypeUrl=dataFolder + "raType.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
@@ -28,23 +27,12 @@
                         var translateList = _createTranslateList(newList, options.key);
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
-                        //return response.data;
-                        return $http.get(contactsUrl);
+                        return $http.get(raTypeUrl);
+                        //return $http.get(contactsUrl);
+
                     })
-                    .then(function (response) {
-                        //PROCESS internal contacts list data
-                        //always english as french/ english are the same
-                        var newList = _createSortedArray(response.data, 'en');
-                        //this is a bit of a hack, but saves unecessary space
-                        var otherRec={"id": OTHER, "en": "Other"};
-                        if(options.key==='fr'){
-                            otherRec.en="Autre";
-                        }
-                        newList.unshift(otherRec);
-                        getContactLists.createInternalContacts(newList);
-                        return $http.get(raTypeUrl)
-                    }) .then(function (response) {
-                        //PROCESS country list data
+                  .then(function (response) {
+                        //PROCESS raType list data
                         var newList = _createSortedArray(response.data, options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         TransactionLists.createRaTypes(newList);

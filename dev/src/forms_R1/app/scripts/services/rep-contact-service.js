@@ -28,15 +28,15 @@
         };
         RepContactService.prototype.getPrimaryRole=function(){
             return "PRIMARY";
-        }
+        };
         RepContactService.prototype.getSecondaryRole=function(){
             return "SECONDARY";
-        }
+        };
 
         RepContactService.prototype.createRepContact = function(repContactList){
             if(!repContactList) return;
             var PRIMARY=this.getPrimaryRole();
-            var SECONDARY=this.getSecondaryRole()
+            var SECONDARY=this.getSecondaryRole();
             var contact = _createDefaultRepContact();
 
             var currentContacts = repContactList;
@@ -68,7 +68,7 @@
 
         var repcontact=  _createContactModel();
         repcontact.repRole = "";
-        repcontact.amend=false
+        repcontact.amend=false;
         return repcontact
     }
 

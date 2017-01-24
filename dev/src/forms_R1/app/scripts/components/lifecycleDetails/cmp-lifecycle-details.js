@@ -27,7 +27,8 @@
                 isDetailValid: '&',
                 onDelete: '&',
                 enableDeleteIndex: '&',
-                isEctd: '<'
+                isEctd: '<',
+                activityTypes:'<'
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
@@ -35,7 +36,8 @@
     function lifecycleRecCtrl(TransactionLists, $translate) {
         var vm = this;
         vm.savePressed = false;
-        vm.activityList = TransactionLists.getActivityTypes();
+       // vm.activityList = TransactionLists.getActivityTypes();
+        vm.activityList=[];
         vm.sequenceList = [];
         vm.descriptionList = [];
 
@@ -72,7 +74,9 @@
             if (changes.isEctd) {
                 vm.ectd = changes.isEctd.currentValue;
             }
-
+            if(changes.activityTypes){
+                vm.activityList=changes.activityTypes.currentValue;
+            }
         };
 
 
