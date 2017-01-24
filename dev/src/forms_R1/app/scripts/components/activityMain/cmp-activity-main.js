@@ -237,12 +237,12 @@
             }
             return filename;
 
-
+/*
             var filename = "HC_RA_Enrolment";
             if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
                 filename = filename + "_" + vm.activityRoot.dstsControlNumber;
             }
-            return filename;
+            return filename;*/
         }
 
         /**

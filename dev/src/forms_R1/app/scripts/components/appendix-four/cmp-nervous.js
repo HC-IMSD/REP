@@ -28,7 +28,7 @@
         });
     function nervousSystemController() {
         var vm = this;
-        vm.model = {}
+        vm.model = {};
         vm.$onInit = function () {
             vm.isSelected = "";
         };
@@ -43,7 +43,7 @@
 
             vm.concatUpdate({'alias': alias, 'value': value});
             vm.updateErrorState();
-        }
+        };
 
         vm.updateErrorState = function () {
             var keys = Object.keys(vm.model);
@@ -52,7 +52,7 @@
                 if (val) {
                     if (keys[i] === 'otherNervous') {
                         if (!vm.model.otherDetails) {
-                            vm.isSelected = ""
+                            vm.isSelected = "";
                             return
                         }
                         vm.isSelected = "selected";

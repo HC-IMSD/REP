@@ -27,7 +27,7 @@
     function formulationsCtrl() {
 
         var self = this;
-        self.isDetailValid = true //TODO this must be managed
+        self.isDetailValid = true; //TODO this must be managed
         self.selectRecord = -1;
         self.resetToCollapsed = false;
         self.noFormulations = "";
@@ -77,7 +77,7 @@
             setRecord(self.formulationList.length - 1);
             self.resetToCollapsed = !self.resetToCollapsed;
             self.updateFormulationsError();
-        }
+        };
 
         self.addCopy=function(formulation){
             if(formulation) {
@@ -86,7 +86,7 @@
                 setRecord(- 1);
                 self.resetToCollapsed = !self.resetToCollapsed;
             }
-        }
+        };
 
         self.update = function (idx, frm) {
             self.formulationList[idx] = angular.copy(frm);
@@ -116,7 +116,7 @@
             self.noFormulations = "";
             return true;
 
-        }
+        };
 
         function setRecord(value){
             self.selectRecord=value;

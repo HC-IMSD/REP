@@ -62,7 +62,7 @@
             if ((isTouched && isInvalid) || (isInvalid && vm.showErrors)) {
                 return true;
             }
-        }
+        };
 
         /**
          * Error display specifically for checkbox

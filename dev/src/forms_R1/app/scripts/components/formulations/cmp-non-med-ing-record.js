@@ -53,7 +53,7 @@
             nanoMaterialOther: "",
             calcAsBase: "",
             humanAnimalSourced: ""
-        }
+        };
 
         self.$onInit = function () {
             self.savePressed=false;
@@ -100,7 +100,7 @@
         self.copy = function () {
             var ingredientCopy = angular.copy( self.ingModel);
             self.onAddIng({ing: ingredientCopy});
-        }
+        };
 
 
 

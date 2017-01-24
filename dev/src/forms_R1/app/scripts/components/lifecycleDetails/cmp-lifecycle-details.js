@@ -108,7 +108,7 @@
                 return false;
             }
             return true;
-        }
+        };
 
         /**
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
@@ -135,7 +135,7 @@
                     vm.descriptionList = TransactionLists.getDinbType();
                     break;*/
                 case ("B02-20160301-031"): //EU NDS (Extraordinary Use New Drug Submission)
-                    vm.descriptionList = TransactionLists.getEundsType()
+                    vm.descriptionList = TransactionLists.getEundsType();
                     break;
 
                 case ("B02-20160301-032"): //EUSNDS (Extraordinary Use Supplement to a New Drug Submission)
@@ -214,7 +214,7 @@
                     vm.descriptionList = TransactionLists.getConsultType();
                     break;*/
                 case ("B02-20160301-089"): //YBPR (Yearly Biologic Product Report)
-                    vm.descriptionList = TransactionLists.getYbprType()
+                    vm.descriptionList = TransactionLists.getYbprType();
                     break;
 
                 default:
@@ -233,7 +233,7 @@
          * what was selected for the details description
          */
         vm.setDetailsState = function () {
-            var value = vm.lifecycleModel.descriptionValue
+            var value = vm.lifecycleModel.descriptionValue;
             if (!value) {
                 vm.descriptionList = [];
                 return;
@@ -313,7 +313,7 @@
                     break;
             }
 
-        }
+        };
 
 
 
@@ -361,7 +361,7 @@
         function setAsStartDate() {
             vm.endDateVisible = false;
             vm.startDateVisible = true;
-            vm.startDateLabel = "DATED"
+            vm.startDateLabel = "DATED";
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
@@ -374,7 +374,7 @@
         function setVersionAndDate() {
             vm.endDateVisible = false;
             vm.startDateVisible = true;
-            vm.startDateLabel = "DATED"
+            vm.startDateLabel = "DATED";
             vm.descriptionVisible = false;
             vm.versionVisible = true;
             vm.yearVisible = false;
@@ -387,7 +387,7 @@
 
             vm.endDateVisible = true;
             vm.startDateVisible = true;
-            vm.startDateLabel = "START_DATE"
+            vm.startDateLabel = "START_DATE";
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
@@ -410,7 +410,7 @@
         vm.setConcatDetails = function () {
             var startDate = "";
             var endDate = "";
-            var concatText = ""
+            var concatText = "";
             //translate value to english
            var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
             if (vm.startDateVisible) {
@@ -434,11 +434,11 @@
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;
-        }
+        };
         function translateToEnglish(key) {
             var translateText = "";
             //note this is done whether loaded or not should be OK
-            translateText = $translate.instant(key, "", '', 'en')
+            translateText = $translate.instant(key, "", '', 'en');
             return translateText;
         }
 
@@ -449,7 +449,7 @@
             var m_names = ["Jan", "Feb", "Mar",
                 "Apr", "May", "Jun", "Jul", "Aug", "Sep",
                 "Oct", "Nov", "Dec"];
-            var result = ""
+            var result = "";
             result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
             return result
         }
@@ -464,7 +464,7 @@
          */
         vm.discardChanges = function () {
             if (vm.lifecycleDetailsForm.$pristine) return;
-            _updateLocalModel(vm.lifecycleRecord)
+            _updateLocalModel(vm.lifecycleRecord);
             vm.isDetailValid({state: vm.lifecycleDetailsForm.$valid});
             vm.savePressed = false;
         };
@@ -488,7 +488,7 @@
                 vm.onUpdate({record: vm.lifecycleModel});
             }
             vm.savePressed = true;
-        }
+        };
         function convertToDate() {
             //TODO parse string and convert
             if (vm.lifecycleModel.dateFiled) {
@@ -521,7 +521,7 @@
                 return true
             }
             return (false);
-        }
+        };
 
         function _createYearList() {
             var start = 1980;

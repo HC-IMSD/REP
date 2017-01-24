@@ -51,7 +51,7 @@
                 self.numberColumns = changes.numberCols.currentValue;
                 self.colWidth = Math.ceil(12 / self.numberColumns);
             }
-        }
+        };
         //TODO remove?
         self.someSelected = function () {
             var object = self.roleModel;
@@ -61,7 +61,7 @@
                 //console.log("cmpAddressRole someSelected: " + object[key]);
                 return object[key];
             });
-        }
+        };
         //TODO remove?
 
         /**
@@ -77,7 +77,7 @@
                     item.otherText = "";
                 }
             }
-        }
+        };
       //  self.onUpdate({list:self.currentModel}); //TODO fix shouldn't have to update, should be dumb component
     }
 

@@ -58,7 +58,7 @@
          */
         vm.roaChanged=function(item, model){
             vm.model.display=vm.model.roa.id;
-        }
+        };
 
 
         vm.deleteRecord = function()  {
@@ -67,7 +67,7 @@
 
         vm.showError = function (isInvalid, isTouched) {
             return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()) )
-        }
+        };
         vm.isRoaOther = function () {
            if(vm.model.roa.id==DossierLists.getOtherValue()){
                return true;

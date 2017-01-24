@@ -81,7 +81,7 @@
          */
         vm.showError = function (ctrl) {
             if (!ctrl) {
-                console.warn("No control found in tissuesFluids-record")
+                console.warn("No control found in tissuesFluids-record");
                 return false;
             }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
@@ -146,7 +146,7 @@
         vm.otherChanged = function () {
             vm.model.otherDetails = vm.model.system.otherDetails;
 
-        }
+        };
         vm.updateConcat = function (alias, toAdd) {
             var currentLang = $translate.proposedLanguage() || $translate.use();
             var translateText = $translate.instant(alias, "", '', currentLang);
@@ -181,7 +181,7 @@
                 }
                 vm.model.detailsConcat = newConcat.substring(0, newConcat.length - 4);
             }
-        }
+        };
 
         /**
          * Sets the state of the other field when system details is other

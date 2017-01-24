@@ -44,7 +44,7 @@
 
             vm.concatUpdate({'alias': alias, 'value': value});
             vm.updateErrorState();
-        }
+        };
 
 
         vm.updateErrorState = function () {
@@ -54,7 +54,7 @@
                 if (val) {
                     if (keys[i] === 'otherReproductive') {
                         if (!vm.model.otherDetails) {
-                            vm.isSelected = ""
+                            vm.isSelected = "";
                             return
                         }
                         vm.isSelected = "selected";

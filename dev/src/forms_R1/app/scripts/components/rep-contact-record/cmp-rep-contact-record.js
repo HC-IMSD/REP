@@ -40,7 +40,7 @@
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
 
-        }
+        };
 
         /**
          * Due to binding with table expander this method does not get called
@@ -49,7 +49,7 @@
         vm.$onChanges = function (changes) {
             //how this is currently wired, this will never fire!
             if (changes.contactRecord) {
-                console.log(changes.contactRecord.currentValue)
+                console.log(changes.contactRecord.currentValue);
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
                 vm.setEditableState();
             }
@@ -57,14 +57,14 @@
                 vm.formAmend=changes.isAmend.currentValue;
                 vm.setEditableState();
             }
-        }
+        };
 
         /**
          *  calls the delete function on the parent
          */
         vm.delete = function () {
             vm.onDelete({contactId: vm.contactModel.repRole});
-        }
+        };
         /* @ngdoc method -discards the changes and reverts to the model
          *
          */
@@ -72,19 +72,19 @@
             if (vm.contactRecForm.$pristine) return;
             var currRecord = vm.contactRecord;
             vm.contactModel = angular.copy(currRecord);
-            vm.setNotEditable()
+            vm.setNotEditable();
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state: vm.contactRecForm.$valid});
             vm.savePressed = false;
-        }
+        };
 
         /**
          * @ngdoc method -Updates the parent on whether this record is valid or not
          */
         vm.updateValid = function () {
             vm.isDetailValid({state: (vm.contactRecForm.$valid && !vm.contactRecForm.$dirty)});
-        }
+        };
         /**
          * If the form is dirty always set that it is not valid
          */
@@ -101,19 +101,19 @@
         vm.updateContactModel = function () {
             if (vm.contactRecForm.$valid) {
                 //vm.contactModel.isDetailValid = true; TODO remove
-                vm.isDetailValid({state: true})
+                vm.isDetailValid({state: true});
                 vm.contactRecForm.$setPristine();
                 vm.onUpdate({contact: vm.contactModel});
             }
             vm.savePressed = true;
-        }
+        };
         /**
          * @ngdoc method toggles error state to make errors visible
          * @returns {boolean}
          */
         vm.showErrors = function () {
             return (vm.savePressed)
-        }
+        };
 
         vm.setEditableState = function () {
 

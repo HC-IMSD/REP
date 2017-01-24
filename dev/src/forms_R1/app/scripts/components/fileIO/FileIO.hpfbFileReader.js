@@ -65,12 +65,12 @@
     });
 
 
-    FileSelectController.$inject = ['hpfbFileProcessing']
+    FileSelectController.$inject = ['hpfbFileProcessing'];
     function FileSelectController(hpfbFileProcessing) {
         var vm = this;
-        vm.fileTypes = ".xml, .hcsc"
+        vm.fileTypes = ".xml, .hcsc";
         vm.modelCallback = function (fileContent) {
-            vm.status = ""
+            vm.status = "";
             if (fileContent) {
                 vm.status = fileContent.messages;
             }
@@ -104,7 +104,7 @@
     });
 
 
-    FileWriteController.$inject = ['hpfbFileProcessing']
+    FileWriteController.$inject = ['hpfbFileProcessing'];
     /**
      * @ngdoc controller - controller for file writing
      * @param hpfbFileProcessing - the service that does all the file creation and validation
@@ -158,7 +158,7 @@
         var msg_err_load = "MSG_ERR_FILE_LOAD"; //file load error
         var msg_err_fileType = "MSG_ERR_FILE_TYPE"; //file type error
         var msg_err_formType = "MSG_ERR_FORM_TYPE"; // valid json but incorrect root tag
-        var msg_err_checksum_compareFail = "MSG_ERR_CHECKSUM_FAIL"
+        var msg_err_checksum_compareFail = "MSG_ERR_CHECKSUM_FAIL";
         var draft_file_type = "hcsc"; // type of file suffix for JSON files. Can change to process other types
         /**
          * @ngObject: used to store the jsonResult and any messages
@@ -167,7 +167,7 @@
         var convertResult = {
             jsonResult: "",
             messages: ""
-        }
+        };
         var service = {
             readAsDataText: readAsDataText,
             writeAsJson: jsonToFile,
@@ -264,7 +264,7 @@
                 escapeMode: true,
                 emptyNodeForm: "text",
                 useDoubleQuotes: true
-            }
+            };
             var xmlConverter = new X2JS(xmlConfig);
             //converts XML as a string to a json
             convertResult.jsonResult = xmlConverter.xml_str2json(reader.result);
@@ -282,11 +282,11 @@
                 escapeMode: true,
                 emptyNodeForm: "text",
                 useDoubleQuotes: true
-            }
+            };
             var jsonConverter = new X2JS(xmlConfig);
             var xmlResult = null;
             //converts XML as a string to a json
-            xmlResult = jsonConverter.json2xml_str(jsonObj)
+            xmlResult = jsonConverter.json2xml_str(jsonObj);
             return (xmlResult);
         }
 
@@ -341,7 +341,7 @@
            //remove checksum
             convertedToJson[scope.rootTag].data_checksum = "";
             //convert to xml
-            var xmlResult = convertJSONObjectsToXML(convertedToJson)
+            var xmlResult = convertJSONObjectsToXML(convertedToJson);
             scope.hash = CryptoJS.SHA256(xmlResult);
             if (currentTagValue !== scope.hash.toString()) {
                 reader.parseResult.jsonResult = null;
@@ -367,7 +367,7 @@
             //As per meeting of Oct 21, ignore checksum
             //clear out any previous value if it exists
             //jsonObj[rootTag].data_checksum = "";
-            var xmlResult = convertJSONObjectsToXML(jsonObj)
+            var xmlResult = convertJSONObjectsToXML(jsonObj);
             //TODO this needs to be configurable
            xmlResult= '<?xml version="1.0" encoding="UTF-8"?>'+ '<?xml-stylesheet href="REP_Combined.xsl" type="text/xsl"?>'+xmlResult;
            // var hash = CryptoJS.SHA256(xmlResult);

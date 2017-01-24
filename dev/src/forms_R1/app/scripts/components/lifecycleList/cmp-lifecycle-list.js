@@ -74,15 +74,15 @@
                 binding: "sequenceConcat",
                 width: "48"
             }
-        ]
+        ];
 
         vm.$onInit = function () {
             //local var from binding
             vm.activityTypes= TransactionLists.getActivityTypes();
-            vm.selectRecord = -1
+            vm.selectRecord = -1;
             vm.addFocused = false;
 
-        }
+        };
 
 
         vm.$onChanges = function (changes) {
@@ -99,7 +99,7 @@
                 //update the first record
                 _checkFirstRecord();
             }
-        }
+        };
 
 
         vm.deleteRecord = function (aID) {
@@ -113,7 +113,7 @@
             vm.updateErrorState();
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = false;
-        }
+        };
 
         /**
          * @ngdoc Checks to see if first record complies to eCTD or not
@@ -143,7 +143,7 @@
                 return 0;
             }
             return (vm.lifecycleList.length - 1);
-        }
+        };
         vm.updateErrorState = function () {
             if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
                 vm.oneRecord = "";
@@ -152,7 +152,7 @@
 
             }
 
-        }
+        };
 
         vm.addTransaction = function () {
             var defaultTransaction = vm.getNewTransaction();
@@ -162,17 +162,17 @@
             vm.addFocused = false;
             vm.setValid(false);
             vm.updateErrorState();
-        }
+        };
 
 
         vm.isAddDisabled = function () {
             return (!vm.isDetailsValid || (!vm.ectdValue && vm.lifecycleList.length > 0) || (vm.lifecycleListForm.$invalid && vm.lifecycleList.length > 0))
 
-        }
+        };
 
         vm.setValid = function (detailValid) {
             vm.isDetailsValid = detailValid;
-        }
+        };
 
         vm.onUpdateLifecycleRecord = function (record) {
 
@@ -187,7 +187,7 @@
             vm.selectRecord = -1;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = true;
-        }
+        };
         /**
          * @ngdoc method determines the state of the list errors
          *
@@ -208,11 +208,11 @@
         function convertDate(value) {
             if (!value) return value;
             var aDate = new Date(value);
-            var month = +(aDate.getMonth() + 1)
+            var month = +(aDate.getMonth() + 1);
             if (month < 10) {
                 month = '0' + month;
             }
-            var day = aDate.getDate()
+            var day = aDate.getDate();
             if (day < 10) {
                 day = '0' + day;
             }

@@ -76,7 +76,7 @@
 
                 };
              }
-    }
+    };
         /**
          * Updates the bindings
          * @param changes
@@ -97,7 +97,7 @@
                     return true;
                 }
             }
-            self.isClaim=""
+            self.isClaim="";
             return false;
         };
         self.noClaimSelected=function(){
@@ -106,7 +106,7 @@
         self.showError = function (isInvalid, isTouched) {
 
             return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
-        }
+        };
 
         self.isOpenState=function(){
             if(self.schedAForm.$invalid){
@@ -117,7 +117,7 @@
                // self.expanderOpenState= !self.expanderOpenState;
             }
             return self.expanderOpenState;
-        }
+        };
 
         $scope.$watch("$ctrl.schedAForm.$invalid", function () {
             self.isOpenState();

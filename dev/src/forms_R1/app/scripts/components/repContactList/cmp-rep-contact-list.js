@@ -28,7 +28,7 @@
                 isAmend: '<'
             }
         });
-    contactListCtrl.$inject = ['$filter', 'RepContactService']
+    contactListCtrl.$inject = ['$filter', 'RepContactService'];
     function contactListCtrl($filter, RepContactService) {
         var vm = this;
         vm.selectRecord = -1; //the record to select
@@ -56,14 +56,14 @@
                 binding: "repRole",
                 width: "20"
             }
-        ]
+        ];
         /**
          * using to get contact list
          */
         vm.$onInit = function () {
             vm.focused = false;
             // vm.contactList = vm.contacts;
-        }
+        };
         vm.$onChanges = function (changes) {
             if (changes.contacts) {
                 vm.contactList = changes.contacts.currentValue;
@@ -76,27 +76,27 @@
                 vm.formAmend = changes.isAmend.currentValue;
             }
 
-        }
+        };
         vm.isAddContact = function () {
             if (vm.contactList.length > 1) {
 
                 return false;
             }
             return (vm.isDetailValid);
-        }
+        };
 
         vm.showNoRecordError = function (isInvalid) {
             return ((vm.isParentDirty && isInvalid  ) || (vm.showListErrors() && isInvalid));
-        }
+        };
 
         vm.setValid = function (value) {
             vm.isDetailValid = value; //this is a shared value
-        }
+        };
 
         vm.showError = function () {
 
             return (vm.contactListForm.$invalid && !vm.contactListForm.$pristine) || (vm.contactListForm.$invalid && vm.showListErrors());
-        }
+        };
 
         vm.onUpdateContactRecord = function (record) {
             var idx = vm.contactList.indexOf(
@@ -107,7 +107,7 @@
             vm.contactListForm.$setPristine();
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.disableAdd();
-        }
+        };
         /***
          * Tracks if no records
          */
@@ -118,7 +118,7 @@
                 vm.oneRecord = "";
             }
 
-        }
+        };
         vm.deleteContact = function (cID) {
             var idx = vm.contactList.indexOf(
                 $filter('filter')(vm.contactList, {repRole: cID}, true)[0]
@@ -127,19 +127,19 @@
             //check if only one record
             //todo get Alternate
             if (vm.contactList.length === 1 && vm.contactList[0].repRole !== "PRIMARY") {
-                vm.contactList[0].repRole = "PRIMARY"
+                vm.contactList[0].repRole = "PRIMARY";
                 var temp=angular.copy(vm.contactList);
-                vm.contactList=[]
+                vm.contactList=[];
                 vm.contactList=temp;
             }
 
             //vm.onUpdate({newList: vm.contactList});
             vm.updateErrorState();
-            vm.disableAdd()
+            vm.disableAdd();
             vm.setValid(true);
             vm.selectRecord = -1;
             vm.resetCollapsed = !vm.resetCollapsed;
-        }
+        };
         /**
          * Adds a contact to the contact list
          */
@@ -149,11 +149,11 @@
             //select table row first then make invalid
             vm.selectRecord = (vm.contactList.length - 1);
             vm.setValid(false);
-        }
+        };
 
         vm.disableAdd = function () {
             if (!vm.contactList) return false;
-            var isInvalid = !vm.isDetailValid || vm.contactList.length == 2 || (vm.contactList.length > 0 && vm.contactListForm.$invalid)
+            var isInvalid = !vm.isDetailValid || vm.contactList.length == 2 || (vm.contactList.length > 0 && vm.contactListForm.$invalid);
                // || (vm.contactListForm.$valid && vm.contactListForm.$dirty);
 
             return isInvalid;

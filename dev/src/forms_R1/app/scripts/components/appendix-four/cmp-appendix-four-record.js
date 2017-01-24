@@ -38,7 +38,7 @@
         self.isSourced = ""; //determines if at least one source is selected
         var emptyFluidsTissues = {
             tissuesList: []
-        }
+        };
         var emptyAnimalSource={
             animalSrcList: [],
             isCellLine: "",
@@ -46,20 +46,20 @@
             isControlledPop: "",
             ageAnimals: 0,
             countryList: []
-        }
+        };
 
-        self.model = {}
+        self.model = {};
         self.$onInit = function(){
 
-        }
+        };
         self.$onChanges = function (changes) {
             if (changes.record) {
                 self.model = (changes.record.currentValue);
             }
 
-        }
+        };
         self.isSourcedSelected = function () {
-            var result = (self.model.humanSourced || self.model.animalSourced)
+            var result = (self.model.humanSourced || self.model.animalSourced);
             if (result) {
                 self.isSourced = result;
             } else {
@@ -67,11 +67,11 @@
             }
             return (result);
 
-        }
+        };
 
         self.noSelectionError = function () {
             return ((self.appendix4RecForm.$dirty && !self.isSourcedSelected() ) || (self.showListErrors() && !self.isSourcedSelected()));
-        }
+        };
         /**
          * Used to show field level errors
          * @param isInvalid
@@ -142,7 +142,7 @@
             }
             return false;
 
-        }
+        };
         self.showAnimalSources=function(){
             self.showTissuesFluids();
             if(self.model.animalSourced) {

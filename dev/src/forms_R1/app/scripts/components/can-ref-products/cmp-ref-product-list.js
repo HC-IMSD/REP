@@ -79,7 +79,7 @@
             setRecord(-1);
             self.onUpdate({recs: self.productList});
             self.resetToCollapsed = !self.resetToCollapsed;
-        }
+        };
         function setRecord(value){
             self.selectRecord = value;
         }
@@ -92,13 +92,13 @@
             self.newProductFormShown = true;
             self.setValid(false);
             return(self.newProductFormShown);
-        }
+        };
         self.addNewDisabled=function(){
             return ( self.newProductFormShown || !self.isDetailValid);
-        }
+        };
         self.setValid=function(value){
             self.isDetailValid=value;
-        }
+        };
         self.onNewCancel=function(){
             self.setValid(true);
             self.newProductFormShown = false

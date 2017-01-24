@@ -114,11 +114,11 @@
         vm.showErrors = function () {
             return (vm.transactionEnrolForm.$dirty && vm.transactionEnrolForm.$invalid && vm.savePressed)
 
-        }
+        };
 
         vm.closeAlert = function (index) {
             vm.alerts.splice(index, 1);
-        }
+        };
 
         vm.addInstruct = function () {
             vm.alerts = [

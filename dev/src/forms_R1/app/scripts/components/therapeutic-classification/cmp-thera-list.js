@@ -40,14 +40,14 @@
                 label: "THERA_CLASS_NAME",
                 binding: "name",
                 width: "100"
-            },
-        ]
+            }
+        ];
 
         vm.$onInit = function () {
             //local var from binding
             // vm.lifecycleList = vm.records;
 
-        }
+        };
 
 
         vm.$onChanges = function (changes) {
@@ -56,7 +56,7 @@
                 vm.model.theraList=changes.records.currentValue;
 
             }
-        }
+        };
 
             /**
              * @ngdoc method determines the state of the list errors
@@ -66,14 +66,14 @@
             vm.showError = function (isTouched, isInvalid) {
 
                // if ((vm.isParentDirty && isInvalid) || (vm.showErrors() && isInvalid)) {
-                    return true
+                    return true;
                // }
                // return false
             };
 
         vm.setValid=function(value){
             vm.isDetailValid = value;
-        }
+        };
         vm.addNew = function() {
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "name": ""};
@@ -87,7 +87,7 @@
             var idx = vm.model.theraList.indexOf(
                 $filter('filter')(vm.model.theraList, {id: recId}, true)[0]);
             vm.model.theraList.splice(idx, 1);
-        }
+        };
 
 
         function getMaxID(){

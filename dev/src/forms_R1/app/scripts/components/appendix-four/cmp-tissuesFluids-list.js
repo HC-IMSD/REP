@@ -55,14 +55,14 @@
                 binding: "otherDetails",
                 width: "40"
             }
-        ]
+        ];
 
         vm.$onInit = function () {
             //init code here
             vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
             vm.resetToCollapsed = true;
             vm.noTissueRecs();
-        }
+        };
 
 
         vm.$onChanges = function (changes) {
@@ -73,12 +73,12 @@
             /* if(changes.service){
              vm.dosService=changes.service.currentValue;
              }*/
-        }
+        };
 
 
         vm.setValid=function(value){
             vm.isDetailValid = value;
-        }
+        };
         vm.addNew = function() {
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "systemType": "", detailsConcat: "", system: {}, otherDetails: ""}; //TODO call a service for this
@@ -93,7 +93,7 @@
             var idx = vm.model.tissuesFluidsList.indexOf(
                 $filter('filter')(vm.model.tissuesFluidsList, {id: recId}, true)[0]);
             vm.model.tissuesFluidsList.splice(idx, 1);
-        }
+        };
 
 
         function getMaxID(){
@@ -112,17 +112,17 @@
                 vm.oneRecord = "selected";
                 return false;
             }
-            vm.oneRecord = ""
+            vm.oneRecord = "";
             return true;
 
-        }
+        };
         vm.disableAdd = function () {
 
             if (vm.noTissueRecs()) {
                 return false;
             }
             return (vm.tissuesListForm.$invalid)
-        }
+        };
         vm.systemAlreadyUsed = function (systemVal) {
             var systemExists = 0;
             for (var i = 0; i < vm.model.tissuesFluidsList.length; i++) {

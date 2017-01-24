@@ -28,7 +28,7 @@
                 disableErrColumn:'@'
             }
         });
-    expandingTableCtrl.$inject = ['$filter']
+    expandingTableCtrl.$inject = ['$filter'];
     function expandingTableCtrl($filter) {
         var vm = this;
         vm.focused = false;
@@ -45,14 +45,14 @@
             if(vm.listItems) {
                 vm.dayDataCollapse = _createArray(vm.listItems.length, true);
             }
-        }
+        };
 
         vm.getExpandedState = function (row) {
             if (row === vm.tableRowIndexCurrExpanded) {
                 return true;
             }
             return false
-        }
+        };
 
         vm.$onChanges = function (changes) {
 
@@ -155,7 +155,7 @@
          * @returns {*}
          */
         vm.formInError=function(aForm){
-            if(!aForm) return ('N') //should never happen
+            if(!aForm) return ('N'); //should never happen
             if(aForm.$invalid){
                 return ('Y')
             }
@@ -192,7 +192,7 @@
         vm.deletedRow=function(){
             vm.tableRowExpanded = false;
             vm.tableRowIndexCurrExpanded = "";
-        }
+        };
         /**
          * @ngdoc resets the table to a collapsed state
          */
@@ -206,7 +206,7 @@
                 _createArray(0, true);
             }
 
-        }
+        };
 
         vm.dayDataCollapseFn = function () {
             for (var i = 0; vm.listItems.length - 1; i += 1) {

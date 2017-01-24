@@ -30,7 +30,7 @@
                 recordIndex:'<'
             }
         });
-        contactRecCtrl.$inject=['$scope']
+        contactRecCtrl.$inject=['$scope'];
     function contactRecCtrl($scope) {
         var vm = this;
         vm.savePressed=false;
@@ -62,7 +62,7 @@
             };
         vm.isOneSelected=function(type){
             return(vm.isRoleSelected({roleName:type,id:vm.contactModel.contactId}));
-        }
+        };
         vm.$onInit = function () {
             /*//after init do not initialise variables here onchanges is called first
                 var rec=vm.trackRecordCtrl.trackRecord();
@@ -72,7 +72,7 @@
 
                     angular.element(saveContact).trigger('focus');
              }*/
-        }
+        };
         //todo move to service
         function _getRolesConcat(){
             var addressRoles=vm.contactModel.addressRole;
@@ -112,14 +112,14 @@
                 vm.formAmend = changes.isAmend.currentValue;
                 vm.setEditable();
             }
-        }
+        };
 
         /**
          *  calls the delete function on the parent
          */
         vm.delete = function () {
             vm.onDelete({contactId: vm.contactModel.contactId});
-        }
+        };
         /* @ngdoc method -discards the changes and reverts to the model
         *
          */
@@ -127,26 +127,26 @@
             if(vm.contactRecForm.$pristine) return;
             var currRecord = vm.contactRecord;
             vm.contactModel =angular.copy(currRecord);
-            vm.setEditable()
+            vm.setEditable();
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state:vm.contactRecForm.$valid});
             vm.savePressed=false;
-        }
+        };
 
         vm.onContactRoleUpdate = function (newRole) {
             var aRole={};
-            angular.extend(aRole,newRole)
+            angular.extend(aRole,newRole);
             vm.contactModel.addressRole = aRole;
             vm.updateContactModel2();
             vm.setEditable();
-        }
+        };
         /**
          * @ngdoc method -Updates the parent on whether this record is valid or not
          */
         vm.updateValid=function(){
             vm.isDetailValid({state:(vm.contactRecForm.$valid && !vm.contactRecForm.$dirty) });
-        }
+        };
         /**
          * If the form is dirty always set that it is not valid
          */
@@ -164,12 +164,12 @@
             vm.contactModel.roleConcat=_getRolesConcat();
           if(vm.contactRecForm.$valid) {
              // vm.contactModel.isDetailValid=true;
-              vm.isDetailValid({state:true})
+              vm.isDetailValid({state:true});
               vm.contactRecForm.$setPristine() ;
                 vm.onUpdate({contact: vm.contactModel});
             }
             vm.savePressed=true;
-        }
+        };
         /**
          * @ngdoc method toggles error state to make errors visible
          * @returns {boolean}
@@ -177,7 +177,7 @@
         vm.showErrors=function(){
 
             return(vm.savePressed)
-        }
+        };
         /**
          * @ngdoc method used to determine if record should be editable. Used for amend button
          * @returns {boolean}

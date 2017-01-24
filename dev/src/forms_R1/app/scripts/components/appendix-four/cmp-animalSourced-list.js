@@ -48,14 +48,14 @@
                 binding: "animalDetail",
                 width: "60"
             }
-        ]
+        ];
 
         vm.$onInit = function () {
             //init code here
             vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
             vm.resetToCollapsed = true;
             vm.oneRecord="";
-        }
+        };
 
 
         vm.$onChanges = function (changes) {
@@ -63,7 +63,7 @@
             if (changes.records) {
                 vm.model.animalSrcList=changes.records.currentValue;
             }
-        }
+        };
 
         /**
          * @ngdoc method determines the state of the list errors
@@ -73,14 +73,14 @@
         vm.showError = function (isTouched, isInvalid) {
 
             // if ((vm.isParentDirty && isInvalid) || (vm.showErrors() && isInvalid)) {
-            return true
+            return true;
             // }
             // return false
         };
 
         vm.setValid=function(value){
             vm.isDetailValid = value;
-        }
+        };
         vm.addNew = function() {
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "animalType": "",animalDetail:""}; //TODO call a service for this
@@ -94,7 +94,7 @@
             var idx = vm.model.animalSrcList.indexOf(
                 $filter('filter')(vm.model.animalSrcList, {id: recId}, true)[0]);
             vm.model.animalSrcList.splice(idx, 1);
-        }
+        };
 
 
         function getMaxID(){

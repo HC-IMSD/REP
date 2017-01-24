@@ -47,7 +47,7 @@
                 if (val) {
                     if (keys[i] === 'otherSkin') {
                         if (!vm.model.otherDetails) {
-                            vm.isSelected = ""
+                            vm.isSelected = "";
                             return
                         }
                         vm.isSelected = "selected";
@@ -65,7 +65,7 @@
 
             vm.concatUpdate({'alias': alias, 'value': value});
             vm.updateErrorState();
-        }
+        };
 
         vm.otherChanged = function () {
             var state = false;

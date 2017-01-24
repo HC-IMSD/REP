@@ -75,7 +75,7 @@
             self.mirModel = angular.copy(self.backup);
             self.materialIngRecordForm.$setPristine();
             self.onCancel();
-        }
+        };
 
         self.delete = function () {
             if (self.record) {

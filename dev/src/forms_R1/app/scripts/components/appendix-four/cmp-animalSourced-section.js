@@ -38,7 +38,7 @@
         vm.$onInit = function () {
             //init code here
             vm.noAnimalSrc()
-        }
+        };
 
 
         vm.$onChanges = function (changes) {
@@ -46,7 +46,7 @@
             if (changes.records) {
                 vm.model=changes.records.currentValue;
             }
-        }
+        };
 
         /**
          * @ngdoc method determines the state of the list errors
@@ -55,7 +55,7 @@
          */
         vm.showError = function (ctrl) {
             if(!ctrl){
-                console.warn("No control animalSourced-section")
+                console.warn("No control animalSourced-section");
                 return false;
             }
            return((ctrl.$invalid && ctrl.$touched)||(ctrl.$invalid && vm.showErrors()))
@@ -74,7 +74,7 @@
             }
             vm.oneAnimal = "";
             return true;
-        }
+        };
         vm.noCountrySrc = function () {
             if (vm.model.countryList.length > 0) {
                 vm.oneCountry = "selected";

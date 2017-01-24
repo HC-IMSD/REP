@@ -106,11 +106,11 @@
         self.showOneCountryError = function () {
             //if(angular.isUndefined(self.model)) return false;
             if(self.model.countryList.length>0){
-                self.oneCountrySelected="selected"
+                self.oneCountrySelected="selected";
                 return false;
             }else{
 
-                self.oneCountrySelected=""
+                self.oneCountrySelected="";
                 return true;
             }
         };

@@ -56,7 +56,7 @@
                 }
             }
             return false;
-        }
+        };
         self.showNoRecordError = function (isInvalid) {
             return ((self.parentDirty && !self.isDrugUseSelected() ) || (self.showListErrors() && !self.isDrugUseSelected()));
         }

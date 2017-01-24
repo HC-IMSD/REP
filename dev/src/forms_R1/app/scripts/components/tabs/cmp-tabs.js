@@ -55,7 +55,7 @@
              self.dosService=changes.service.currentValue;
              }*/
 
-        }
+        };
 
         self.selectTab = function (idx) {
 

@@ -29,7 +29,7 @@
 
             }
         });
-    activityRecCtrl.$inject = ['$scope']
+    activityRecCtrl.$inject = ['$scope'];
 
     function activityRecCtrl($scope) {
         var vm = this;
@@ -66,7 +66,7 @@
             if (!(vm.activityModel.assocDins instanceof Array)) {
                 vm.activityModel.assocDins = [];
             }
-            vm.activityModel.assocDins.push({dinNumber: ""})
+            vm.activityModel.assocDins.push({dinNumber: ""});
             ///form is invalid if adding a din
             vm.isDetailValid({state: false});
 
@@ -79,7 +79,7 @@
             }
             vm.activityModel.assocDins.splice(index, 1);
             vm.isDetailValid({state: false});
-        }
+        };
 
 
         /**
@@ -131,7 +131,7 @@
         };
         vm.isDinInvalid=function(index){
             return !(vm.activityModel.assocDins[index].dinNumber && vm.activityModel.assocDins[index].dinNumber.length === 8);
-        }
+        };
 
         /**
          * Controls errors state of an individual UI control. Since cannot pass the control for some reason
@@ -143,7 +143,7 @@
         vm.showError = function (isTouched, isInvalid) {
 
             return (isInvalid && isTouched) || (vm.showErrors() && isInvalid );
-        }
+        };
 
 
         /**

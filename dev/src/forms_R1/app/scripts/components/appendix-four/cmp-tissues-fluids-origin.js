@@ -30,11 +30,11 @@
         var self = this;
         self.isSelected = "";
         self.otherTextError = false;
-        self.closeOthers=true;
+        self.closeOthers = true;
         self.model = {};
         self.$onInit = function () {
 
-        }
+        };
 
         self.$onChanges = function (changes) {
             if (changes.tissuesModel) {
@@ -62,7 +62,7 @@
             ];
             //reset before looping
             self.isSelected = "";
-            self.otherTextError = false
+            self.otherTextError = false;
             //n2 not terribly efficient
             //go through the entire list looking for other text errors
 
@@ -93,12 +93,12 @@
         //TODO need to: detect error, open if in error, disable all if in error
         self.tissuesDisabled = function (form) {
             if (form.$invalid) {
-                self.closeOthers=false;
+                self.closeOthers = false;
                 return true
             }
-            self.closeOthers=true;
+            self.closeOthers = true;
             return false
-        }
+        };
 
         //TODO remove, unneccesary
         self.updateNervousSystemList = function (list) {

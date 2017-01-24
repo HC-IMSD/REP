@@ -117,7 +117,7 @@
             self.ingModel = angular.copy(self.backup);
             self.activeIngForm.$setPristine();
             self.onCancel();
-        }
+        };
 
         self.delete = function () {
             if (self.record) {
@@ -129,7 +129,7 @@
         self.copy = function () {
             var ingredientCopy = angular.copy(self.ingModel);
             self.onAddIng({ing: ingredientCopy});
-        }
+        };
 
 
 
@@ -142,7 +142,7 @@
          */
         self.showError = function (isInvalid, isTouched) {
             return ((isInvalid && isTouched) || (isInvalid && self.showErrors()) || (isInvalid && self.savePressed))
-        }
+        };
 
         /**
          * Sets the state of the nanomaterial other field

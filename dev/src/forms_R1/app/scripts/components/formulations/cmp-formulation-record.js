@@ -43,7 +43,7 @@
         var self = this;
         self.noCountries="";
         self.noROAValues="";
-        self.noActiveValues=""
+        self.noActiveValues="";
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
         self.savePressed=false;
@@ -92,7 +92,7 @@
             }
             self.noCountries=self.frmModel.countryList.length;
             return false;
-        }
+        };
         /**
          * Tracks for error handling if there are one or more ROA
          * @returns {boolean}
@@ -110,7 +110,7 @@
             self.noROAValues="values";
             return false;
 
-        }
+        };
         self.noActives=function(){
 
             if(!self.frmModel){
@@ -124,7 +124,7 @@
             self.noActiveValues="values";
             return false;
 
-        }
+        };
 
 
         self.updateActiveIngList = function(list){

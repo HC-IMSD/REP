@@ -4,7 +4,7 @@
 
     //TODO: Lazy load modules
     angular.module('dossierApp', ['pascalprecht.translate', 'dossierLoadModule', 'dossierModule', 'dataLists', 'translations'])
-        .controller('MainController', MainController)
+        .controller('MainController', MainController);
 
   /*  angular.element(document).ready(function () {
         angular.bootstrap(document, ['dossierApp']);

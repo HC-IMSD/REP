@@ -26,7 +26,7 @@
                 companyService:'<'
             }
         });
-    contactListCtrl.$inject = ['$filter','CompanyService']
+    contactListCtrl.$inject = ['$filter','CompanyService'];
     function contactListCtrl($filter,CompanyService) {
         var vm = this;
         vm.selectRecord = -1; //the record to select
@@ -56,7 +56,7 @@
                 binding:"roleConcat",
                 width:"20"
             }
-        ]
+        ];
         /**
          * using to get contact list
          */
@@ -65,7 +65,7 @@
             //vm.contactList = vm.contacts; //HERE Is how it is bound
             //updateRolesConcat();
             //vm.allRolesSelected = vm.isAllContactRolesSelected();
-        }
+        };
         vm.$onChanges = function (changes) {
             if (changes.contacts) {
                 vm.contactList = changes.contacts.currentValue;
@@ -75,7 +75,7 @@
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
             }
-        }
+        };
 
         function updateRolesConcat() {
             if (!vm.contactList) return;
@@ -114,7 +114,7 @@
         vm.setValid=function(value){
 
             vm.isDetailValid=value; //this is a shared value
-        }
+        };
 
         vm.showError = function () {
 
@@ -122,7 +122,7 @@
                 return true
             }
             return false
-        }
+        };
 
         vm.onUpdateContactRecord = function (record) {
 
@@ -133,7 +133,7 @@
             vm.allRolesSelected= vm.isAllContactRolesSelected();
             vm.resetCollapsed = !vm.resetCollapsed;
 
-        }
+        };
 
         vm.deleteContact = function (cID) {
             var idx = vm.contactList.indexOf(
@@ -145,19 +145,19 @@
             vm.allRolesSelected= vm.isAllContactRolesSelected();
             vm.resetCollapsed = !vm.resetCollapsed;
 
-        }
+        };
 
         /**
          * Adds a contact to the contact list
          */
         vm.addContact = function () {
-            var defaultContact = vm.getNewContact()
+            var defaultContact = vm.getNewContact();
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
             //vm.isDetailValid=true;
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
-        }
+        };
 
         /**
          * @ngdoc method - checks if all the roles have been selected
@@ -181,7 +181,7 @@
                 }
             }
             return false;
-        }
+        };
         /**
          * @ngdoc method checks if all the contact roles have been selected
          * @returns {boolean}

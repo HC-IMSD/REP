@@ -66,7 +66,7 @@
         self.userType = "EXT";
         self.saveXMLLabel = "SAVE_DRAFT";
         self.yesNoList = DossierLists.getYesNoList();
-        self.yesValue = DossierLists.getYesValue()
+        self.yesValue = DossierLists.getYesValue();
         self.formTypeList = getRoleLists.getFormTypes();
         //config for applicationInfoCompoenent
         self.configField = {
@@ -113,7 +113,7 @@
             self.dossierService = new DossierService();
 
             self.dossierModel = self.dossierService.getDefaultObject();
-        }
+        };
         /**
          * @ngdoc captures any change events from variable bindings
          * @param changes
@@ -143,7 +143,7 @@
 
         self.thirdPartySignedChanged = function () {
             return (self.dossierModel.drugProduct.thirdPartySigned === yesValue);
-        }
+        };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
@@ -161,7 +161,7 @@
 
         self.recordsChanged = function () {
             getAppendix4Errors();
-        }
+        };
 
         self.isRefProducts = function () {
 
@@ -170,7 +170,7 @@
             }
             self.dossierModel.drugProduct.canRefProducts = [];
             return false;
-        }
+        };
 
         self.setApplicationType = function (value) {
             self.dossierModel.applicationType = value;
@@ -181,7 +181,7 @@
         self.cdnRefUpdated = function (list) {
             //don't do anything with the list
             self.showNoRefReError();
-        }
+        };
 
         self.showNoRefReError = function () {
 
@@ -192,7 +192,7 @@
                 self.oneRefSelected = "";
                 return true;
             }
-        }
+        };
 
         function getAppendix4Errors() {
             var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);
@@ -241,7 +241,7 @@
          */
         self.showErrors = function () {
             return (self.showAllErrors);
-        }
+        };
         /**
          * For individual controls, whether to show the error for a fiedl
          * @param isInvalid - control $invalid flag
@@ -250,7 +250,7 @@
          */
         self.showError = function (isInvalid, isTouched) {
             return ((isInvalid && isTouched) || (self.showErrors() && isInvalid))
-        }
+        };
 
         /***
          * Manages the schedule A details since the fields are always in the model
@@ -264,7 +264,7 @@
                 self.dossierModel.drugProduct.scheduleAGroup = self.dossierService.getDefaultScheduleA();
             }
             return false;
-        }
+        };
 
         /**
          * Save as a json file. Convert interal model to external model for output
@@ -280,7 +280,7 @@
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), self.dossierService.getRootTagName());
             self.showAllErrors = false;
-        }
+        };
 
 
         /**
@@ -299,8 +299,7 @@
                 self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMinorVersion(self.dossierModel.enrolmentVersion);
             }
             return self.dossierService.dossierToOutput(self.dossierModel);
-        };
-
+        }
         /**
          * @ngdoc -creates a filename for dossier file. If it exists,adds control number
          * @returns {string}
@@ -352,7 +351,7 @@
             }
             self.noThera = self.dossierModel.drugProduct.therapeutic.length;
             return false;
-        }
+        };
 
         self.closeAlert = function (value) {
             switch (value) {
@@ -369,7 +368,7 @@
                     self.alert4.show = false;
                     break;
             }
-        }
+        };
 
         self.addInstruct = function (value) {
 

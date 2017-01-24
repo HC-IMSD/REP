@@ -31,7 +31,7 @@
 
     function  dinDetailsCtrl() {
         var vm = this;
-        vm.record={}
+        vm.record={};
         vm.detailsIndex=0;
         vm.$onInit = function () {
         };
@@ -50,7 +50,7 @@
         };
         vm.delete=function(){
             vm.deleteDin({dinIndex:vm.detailsIndex})
-        }
+        };
         vm.showError=function(isTouched,isInvalid){
             if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )){
                 return true

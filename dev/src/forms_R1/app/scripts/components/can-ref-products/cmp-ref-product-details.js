@@ -73,7 +73,7 @@
                 self.productModel.dosageFormOther = "";
                 return false;
             }
-        }
+        };
         /**
          * @ngdoc show an error on an individual control
          * @param ctrl -control
@@ -81,7 +81,7 @@
          */
         self.showError = function (ctrl) {
             return ((ctrl.$touched && ctrl.$invalid) || (ctrl.$invalid && self.showErrors())|| (ctrl.$invalid && self.savePressed));
-        }
+        };
 
         self.saveProduct = function () {
             if(self.productDetailsForm.$valid) {
@@ -106,7 +106,7 @@
             self.productDetailsForm.$setPristine();
             //self.productDetailsForm.$setPristine();
             self.onCancel();
-        }
+        };
 
         self.delete = function(){
             if (self.productRecord) {

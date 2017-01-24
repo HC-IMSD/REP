@@ -38,7 +38,7 @@
         self.$onInit = function () {
             self.selectRecord = -1;
             self.resetToCollapsed = false;
-            self.isDetailValid = true
+            self.isDetailValid = true;
             self.newIngFormShown = false;
 
             self.colNames = [
@@ -83,7 +83,7 @@
             self.setValid(true);
             setRecord(-1);
             self.resetToCollapsed = !self.resetToCollapsed;
-        }
+        };
         /**
          * sets the record in the expanding table to select less than zero means none
          * @param value
@@ -98,14 +98,14 @@
          */
         self.setValid=function(value){
             self.isDetailValid=value;
-        }
+        };
         /**
          * Controls the state of the add new ingredient button
          * @returns {*|boolean}
          */
         self.addNewDisabled=function(){
             return (self.newIngFormShown || !self.isDetailValid);
-        }
+        };
         /**
          * Sets the UI state for the add new template
          */
@@ -114,7 +114,7 @@
             self.newIngFormShown = true;
             self.setValid(false);
             return(self.newIngFormShown);
-        }
+        };
 
         /**
          * When a new record is cancelled, resets state;

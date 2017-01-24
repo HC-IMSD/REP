@@ -39,11 +39,11 @@
 
         vm.$onInit = function(){
             //if anything needed
-        }
+        };
 
          vm.countryChanged = function(value){
             vm.countryChange({$event : {country : value}});
-        }
+        };
 
         vm.showError = function () {
             return (

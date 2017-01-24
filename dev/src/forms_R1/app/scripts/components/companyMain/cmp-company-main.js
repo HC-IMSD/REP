@@ -199,7 +199,7 @@
             vm.company.applicationType = type;
             disableXMLSave();
             vm.setAmend();
-        }
+        };
 
         //used on update
         vm.onUpdateAddressList = function (newList) {
@@ -268,7 +268,7 @@
                     vm.alert2.show = false;
                     break;
             }
-        }
+        };
 
         vm.addInstruct = function (value) {
 

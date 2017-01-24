@@ -45,12 +45,12 @@
                 label: "OTHER_ROA_DETAILS",
                 binding: "otherRoaDetails",
                 width: "60"
-            },
-        ]
+            }
+        ];
 
         vm.$onInit = function () {
 
-        }
+        };
 
 
         vm.$onChanges = function (changes) {
@@ -59,12 +59,12 @@
                 vm.model.roaList=changes.records.currentValue;
 
             }
-        }
+        };
 
 
         vm.setValid=function(value){
             vm.isDetailValid = value;
-        }
+        };
         vm.addNew = function() {
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "roa": {id:"",label_en:"",label_fr:""}, 'otherRoaDetails': "",display:""};
@@ -79,7 +79,7 @@
             var idx = vm.model.roaList.indexOf(
                 $filter('filter')(vm.model.roaList, {id: recId}, true)[0]);
             vm.model.roaList.splice(idx, 1);
-        }
+        };
 
 
         function getMaxID(){

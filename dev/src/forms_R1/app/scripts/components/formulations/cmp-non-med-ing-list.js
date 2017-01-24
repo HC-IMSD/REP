@@ -72,7 +72,7 @@
             self.setValid(true);
             setRecord(-1);
             self.resetToCollapsed = !self.resetToCollapsed;
-        }
+        };
         function setRecord(value){
             self.selectRecord = value;
         }
@@ -85,13 +85,13 @@
             self.newIngFormShown = true;
             self.setValid(false);
             return(self.newIngFormShown);
-        }
+        };
         self.addNewDisabled=function(){
             return ( self.newIngFormShown || !self.isDetailValid);
-        }
+        };
         self.setValid=function(value){
             self.isDetailValid=value;
-        }
+        };
         self.onNewCancel=function(){
             self.setValid(true);
             self.newIngFormShown = false

@@ -28,7 +28,7 @@
         });
     function immuneSystemController() {
         var vm = this;
-        vm.model = {}
+        vm.model = {};
         vm.isSelected = "";
         vm.$onInit = function () {
 
@@ -44,7 +44,7 @@
 
             vm.concatUpdate({'alias': alias, 'value': value});
             vm.updateErrorState();
-        }
+        };
 
         vm.updateErrorState = function () {
             var keys = Object.keys(vm.model);

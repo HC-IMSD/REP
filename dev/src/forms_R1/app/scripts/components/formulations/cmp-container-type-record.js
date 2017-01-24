@@ -43,7 +43,7 @@
             "shelfLifeMonths": undefined,
             "tempMin": undefined,
             "tempMax": undefined
-        }
+        };
         self.backup = angular.copy(self.ctModel);
         self.$onInit = function () {
             self.savePressed=false;
@@ -64,7 +64,7 @@
                 self.backup = angular.copy(self.ctModel);
             }
 
-        }
+        };
 
         self.save = function () {
             if(self.containerTypeForm.$valid) {
@@ -88,7 +88,7 @@
             self.ctModel = angular.copy(self.backup);
             self.containerTypeForm.$setPristine();
             self.onCancel();
-        }
+        };
 
         self.delete = function(){
             if (self.record) {
@@ -105,7 +105,7 @@
          */
         self.showError=function(isInvalid, isTouched){
             return ((isInvalid && isTouched) || (isInvalid && self.savePressed) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
-        }
+        };
 
         $scope.$watch('ctrCtrl.containerTypeForm.$dirty', function () {
             self.isDetailValid({state: !self.containerTypeForm.$dirty});

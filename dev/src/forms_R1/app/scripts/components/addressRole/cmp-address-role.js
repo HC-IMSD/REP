@@ -30,7 +30,7 @@
             }
         });
 
-    addressRoleCtrl.$inject = ['$scope']
+    addressRoleCtrl.$inject = ['$scope'];
     function addressRoleCtrl($scope) {
 
         var vm = this;
@@ -53,7 +53,7 @@
                 vm.oneSelected();
 
             }
-        }
+        };
         vm.$onChanges=function(changes){
            if(changes.record){
                vm.roleModel=(changes.record.currentValue.addressRole);
@@ -64,7 +64,7 @@
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
             }
-        }
+        };
         /**
          * Checks all the controls and updates the error state
          *
@@ -87,7 +87,7 @@
          */
         vm.oneSelected = function (ctrl, toCheck) {
             var obj=vm.roleModel;
-            vm.checkForDuplicates(ctrl, toCheck)
+            vm.checkForDuplicates(ctrl, toCheck);
             for (var key in obj){
                 var attrName = key;
                 var attrValue = obj[key];
@@ -97,16 +97,16 @@
                     return true;
                 }
             }
-            vm.isSelected=""
+            vm.isSelected="";
             return false
-        }
+        };
 
         vm.checkForDuplicates = function (ctrl, toCheck) {
             if (ctrl) {
-                var isDup = isDuplicateSelected(toCheck)
+                var isDup = isDuplicateSelected(toCheck);
                 ctrl.$setValidity("duplicateRole", !isDup);
             }
-        }
+        };
 
         function isDuplicateSelected(toCheck) {
             var obj=vm.roleModel;
@@ -114,7 +114,7 @@
                 var attrName = key;
                 var attrValue = obj[key];
                 if(attrName==toCheck) {
-                    if(!attrValue) return false
+                    if(!attrValue) return false;
                     return(vm.alreadySelected({roleName: attrName}));
                 }
             }
@@ -130,7 +130,7 @@
                 return true
             }
             return false
-        }
+        };
         vm.showError = function (ctrl) {
             if ((ctrl.$invalid) || (vm.showErrors() && ctrl.$invalid)) {
                 return true

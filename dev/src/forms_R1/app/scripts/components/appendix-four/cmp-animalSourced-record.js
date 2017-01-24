@@ -52,7 +52,7 @@
 
         vm.showError = function (ctrl) {
             if(!ctrl){
-                console.warn("No control found in animalSourced-record")
+                console.warn("No control found in animalSourced-record");
                 return false;
             }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
