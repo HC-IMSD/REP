@@ -179,43 +179,42 @@
                         <label for="otherSolicitedRequester" class="required full-width">
                             <span class="field-name">{{"SOLICITED_RQ_OTHER" |translate}}</span>
                             <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                             <textarea maxlength="256" size="256" id="otherSolicitedRequester"
+                                       name="otherSolicitedRequester"
+                                       ng-model="transInfoCtrl.transactionModel.otherSolicitedRequester"
+                                       class="form-control full-width rep-margin-top" rows="2"
+                                       ng-required="transInfoCtrl.showOtherSolicitedDetail"></textarea>
+
                             <strong id="othersolicitedRequester-error" class="error"
                                     ng-if="transInfoCtrl.showError(transInfoForm.otherSolicitedRequester)">
-                        <span class="label label-danger" ng-messages="transInfoForm.otherSolicitedRequester.$error">
+                                   <span class="label label-danger"
+                                         ng-messages="transInfoForm.otherSolicitedRequester.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                             </strong>
                         </label>
-                    <textarea maxlength="256" size="256" id="otherSolicitedRequester" name="otherSolicitedRequester"
-                              ng-model="transInfoCtrl.transactionModel.otherSolicitedRequester"
-                              class="form-control full-width" rows="2"
-                              ng-required="transInfoCtrl.showOtherSolicitedDetail"></textarea>
+
                     </div>
                 </div>
                 <div>
-                    <fieldset>
-                        <legend>{{'Name of Regulatory Project Manager, if known'|translate}}</legend>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="projectManager1" class="full-width">
-                                    <span class="field-name">{{"NAME" |translate}} 1</span>
-                                </label>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="projectManager1" class="full-width">
+                                <span class="field-name">1.&nbsp;{{"PROJ_MANAGER_NAME" |translate}}</span>
+                            </label>
                             <textarea id="projectManager1" name="projectManager1"
                                       ng-model="transInfoCtrl.transactionModel.projectManager1"
                                       class="form-control full-width" maxlength="256" rows="2"></textarea>
-
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="projectManager2" class="full-width">
-                                    <span class="field-name">{{"NAME" |translate}} 2</span>
-                                </label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="projectManager2" class="full-width">
+                                <span class="field-name">2.&nbsp;{{"PROJ_MANAGER_NAME" |translate}}</span>
+                            </label>
                             <textarea id="projectManager2" name="projectManager2"
                                       ng-model="transInfoCtrl.transactionModel.projectManager2"
                                       class="form-control full-width" maxlength="256" rows="2"></textarea>
-
-                            </div>
                         </div>
-                    </fieldset>
+                    </div>
                 </div>
             </div>
         </section>
