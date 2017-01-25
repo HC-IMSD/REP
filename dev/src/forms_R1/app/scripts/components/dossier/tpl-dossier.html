@@ -50,7 +50,7 @@
                     <div class="col-xs-4 form-group"
                          ng-class="{'has-error':dos.dossierForm.dossierType.$invalid}">
                         <label for="dossierType" class="required">
-                            <span class="field-name">{{'DOSSIER_TYPE' |translate}}</span>
+                            <span class="field-name">A.&nbsp;{{'DOSSIER_TYPE' |translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <select class="form-control full-width" id="dossierType"
                                     name="dossierType" required="true" ng-model="dos.dossierModel.dossierType"
@@ -68,7 +68,7 @@
                     <div class="col-xs-4 form-group"
                          ng-class="{'has-error':dos.dossierForm.companyId.$invalid}">
                         <label for="company-id" class="required">
-                            <span class="field-name">{{'COMPANY_ID' |translate}}</span>
+                            <span class="field-name">B.&nbsp;{{'COMPANY_ID' |translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <input type="text" class="form-control full-width" id="company-id"
                                    name="companyId" required="true" maxlength="6"
@@ -87,7 +87,7 @@
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm.thirdPartySigned.$invalid}">
                         <label for="third-party-signed" class="required">
-                            <span class="field-name">{{'SIGNED_THIRD'|translate}}</span>
+                            <span class="field-name">C.&nbsp;{{'SIGNED_THIRD'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <select name="thirdPartySigned" class="form-control"
                                     ng-model="dos.dossierModel.drugProduct.thirdPartySigned"
@@ -114,7 +114,7 @@
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm.productName.$invalid}">
                         <label for="product-name" class="required">
-                            <span class="field-name">{{'PROD_NAME' |translate}}</span>
+                            <span class="field-name">D.&nbsp;{{'PROD_NAME' |translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <strong id="productName-error" class="error"
                                     ng-if="dos.showError(dos.dossierForm.productName.$invalid,dos.dossierForm.productName.$touched)">
@@ -124,17 +124,17 @@
                                     </span>
                             </strong>
                         </label>
-                            <textarea type="text" class="form-control full-width" id="product-name" rows="2"
-                                      name="productName" required="true"
-                                      data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase();"
-                                      maxlength="200" ng-model="dos.dossierModel.productName"></textarea>
+                        <textarea type="text" class="form-control full-width" id="product-name" rows="2"
+                                  name="productName" required="true"
+                                  data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase()"
+                                  maxlength="200" ng-model="dos.dossierModel.productName"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm.properName.$invalid}">
                         <label for="proper-name" class="required">
-                            <span class="field-name"> {{'PROPER_NAME' |translate}}</span>
+                            <span class="field-name">E.&nbsp;{{'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <strong id="properName-error" class="error"
                                     ng-if="dos.showError(dos.dossierForm.properName.$invalid,dos.dossierForm.properName.$touched)">
@@ -144,25 +144,26 @@
                                     </span>
                             </strong>
                         </label>
-                            <textarea type="text" class="form-control full-width" id="proper-name" name="properName"
-                                      required="true" ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
-                                      data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase();">
+                        <textarea type="text" class="form-control full-width" id="proper-name" name="properName"
+                                  required="true" ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
+                                  data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase()">
                             </textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group">
-                        <label for="related-dossier-id"></label>
-                        {{'RELATED_DOSSIER'|translate}}
-                    <textarea class="form-control full-width" id="related-dossier-id"
-                              ng-model="dos.dossierModel.relatedDossierID" maxlength="256" rows="3"></textarea>
+                        <label for="related-dossier-id">
+                            F.&nbsp;{{'RELATED_DOSSIER'|translate}}
+                        </label>
+                        <textarea class="form-control full-width" id="related-dossier-id"
+                                  ng-model="dos.dossierModel.relatedDossierID" maxlength="256" rows="3"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <section class="panel panel-default ">
                         <header class="panel-heading">
-                            <h3 class="panel-title">{{'THERA_CLASS'|translate}}</h3>
+                            <h3 class="panel-title">G.&nbsp;{{'THERA_CLASS'|translate}}</h3>
                             <strong id="active-error" class="error" ng-if="dos.noTheraRecs() && dos.dossierForm.$dirty">
                             <span class="label label-danger" ng-messages="dos.dossierForm.noTheraVal.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_ONE_THERA"></span></span>
@@ -181,7 +182,7 @@
                 <div class="row">
                     <div class="col-md-12 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
                         <label for="isRefProducts{{$id}}" class="required">
-                            <span class="field-name">{{'IS_CDN_REF'|translate}}</span>
+                            <span class="field-name">H.&nbsp;{{'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <select class="form-control" required name="isRefProducts" id="isRefProducts{{$id}}"
                                     ng-model="dos.dossierModel.isRefProducts"
@@ -343,6 +344,6 @@
                 </button>
             </div>
         </div>
-           <!-- <pre>{{dos.dossierModel | json }}</pre>-->
+        <!-- <pre>{{dos.dossierModel | json }}</pre>-->
     </div>
 </ng-form>
