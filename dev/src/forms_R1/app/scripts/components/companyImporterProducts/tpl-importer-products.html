@@ -1,0 +1,20 @@
+<ng-form name="impProdCtrl.importProdForm">
+    <div class="row">
+        <div>
+            <h3>{{"DOSSIER_IMPORTERED" |translate}}</h3>
+
+            <div ng-repeat="record in impProdCtrl.model.dossierIdList">
+
+                <cmp-dossier-id-details dossier-record="record" id-index="$index"
+                                        show-errors="impProdCtrl.showErrors()" delete-id="impProdCtrl.deleteId(dossierIndex)"></cmp-dossier-id-details>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary" ng-click="impProdCtrl.addDossierId()">
+            {{'ADD_DOSSIER_ID'|translate}}
+        </button>
+    </div>
+
+</ng-form>

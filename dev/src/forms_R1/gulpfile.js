@@ -154,11 +154,13 @@ var componentFolders = {
     addressRecord: 'addressRecord/',
     addressRole: 'addressRole/',
     applicationInfo: 'applicationInfo/',
+    importerProducts:'companyImporterProducts/',
     companyMain: 'companyMain/',
     contactDetails: 'contactDetails/',
     contactList: 'contactList/',
     contactRecord: 'contactRecord/',
     dinDetails: 'dinDetails/',
+    dossierIdDetails:'dossierIdDetails/',
     expandingTable: 'expandingTable/',
     fileIOComponentAndDep: 'fileIO/',
     lifecycleDetails: 'lifecycleDetails/',
@@ -214,7 +216,9 @@ var companyComponentFolders =
         componentFolders.contactList,
         componentFolders.addressDetails,
         componentFolders.addressRecord,
-        componentFolders.contactRecord
+        componentFolders.contactRecord,
+        componentFolders.importerProducts,
+        componentFolders.dossierIdDetails
     ];
 
 //Dossier Form Components
@@ -937,10 +941,10 @@ gulp.task('dev-copy-changedFiles', function () {
     if (folders.length > 0) {
         filename = folders[folders.length - 1];
         compFolder = folders[folders.length - 2];
+
     }
     for (var k = 0; k < matchingForms.length; k++) {
         var def = matchingForms[k];
-
         for (var i = 0; i < def.compFolders.length; i++) {
             if (def.compFolders[i].includes(compFolder)) {
                 def.matches = true;
@@ -1083,7 +1087,7 @@ gulp.task('dev-dossier-clean', function () {
 //copy all the needed files for company
 gulp.task('dev-company-copySrc', function () {
     return (
-        pipes.copySrcs(false, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, false)
     )
 });
 
