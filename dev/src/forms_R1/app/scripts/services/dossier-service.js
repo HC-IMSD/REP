@@ -1071,7 +1071,7 @@
                 "__text": ""
             };
             if (!unitsObj || !prefix) {
-                return newObj;
+                return "";
             }
             var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
             var newUnits = splitArray[splitArray.length - 1];

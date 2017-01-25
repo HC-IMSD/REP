@@ -115,7 +115,7 @@
                         <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="nanoMaterial_{{$id}}" ng-model="ingRecCtrl.ingModel.nanoMaterial"
-                            class="form-control full-width" name="nanoFld" ng-required="true"
+                            class="form-control full-width" name="nanoFld" required
                             ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id" >
 
                     </select>
@@ -205,8 +205,8 @@
                 </div>
             </div>
         </fieldset>
-        <!--  <pre>{{ingRecCtrl.ingModel |json}}
-                {{ingRecCtrl.lang |json}}
+        <!--  <pre> Model:
+              {{ingRecCtrl.ingModel |json}}
           </pre>-->
     </div>
 </ng-form>

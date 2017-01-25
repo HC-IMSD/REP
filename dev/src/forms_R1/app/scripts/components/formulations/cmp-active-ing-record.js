@@ -52,7 +52,7 @@
             units: "",
             otherUnits:"",
             per: "",
-            nanoMaterial: {id:"",en:"",fr:""},
+            nanoMaterial:"",
             nanoMaterialOther: "",
             calcAsBase: "",
             humanAnimalSourced: ""
