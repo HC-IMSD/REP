@@ -327,7 +327,8 @@
 	<hpfb:complexType name="cdn_ref_product_content">
 		<hpfb:sequence>
 			<hpfb:element ref="brand_name"/>
-			<hpfb:element ref="medicinal_ingredient"/>
+			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="dosage_form"/>
 			<hpfb:element ref="dosage_form_other"/>
 			<hpfb:element ref="strengths"/>
