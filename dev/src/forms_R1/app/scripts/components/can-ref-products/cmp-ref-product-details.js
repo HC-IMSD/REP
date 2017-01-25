@@ -29,7 +29,8 @@
                 onDelete: '&',
                 onCancel: '&',
                 showErrors:'&',
-                isDetailValid:'&'
+                isDetailValid:'&',
+                recordIndex: '<'
             }
         });
     refProductDetailsCtrl.$inject = ['DossierLists','$scope','$translate','OTHER'];

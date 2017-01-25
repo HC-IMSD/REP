@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <ng-form name="$ctrl.productDetailsForm">
         <fieldset>
-            <legend>{{'CDN_REF_PRODUCT'|translate}}</legend>
+            <legend>{{'CDN_REF_PRODUCT'|translate}}&nbsp{{$ctrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="col-md-4 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.brandName.$invalid}">
                     <label for="brand-nameh_{{$id}}" class="required"><span
