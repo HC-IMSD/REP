@@ -46,5 +46,7 @@
   "ROA_TITLE": "E. fr_Routes of Administration",
   "COUNTRIES_MANUFACT": "F. fr_Countries of manufacture for this drug product",
   "NOT_IN_LIST": "fr_Not in list",
-  "UNITS_SRCH":"fr_Select or Search Units"
+  "UNITS_SRCH":"fr_Select or Search Units",
+  "SOURCED_INFO":"fr_Please provide additional details of this ingredient/material on the Animal/Human Source tab."
+
 }

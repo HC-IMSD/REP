@@ -31,8 +31,8 @@
             }
 
         });
-    nonMedIngRecCtrl.$inject = ['DossierLists', '$scope','$translate','OTHER'];
-    function nonMedIngRecCtrl(DossierLists, $scope,$translate, OTHER) {
+    nonMedIngRecCtrl.$inject = ['DossierLists', '$scope','$translate','OTHER','YES'];
+    function nonMedIngRecCtrl(DossierLists, $scope,$translate, OTHER, YES) {
 
         var self = this;
         self.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
@@ -95,6 +95,18 @@
             } else {
 
             }
+        };
+
+        /**
+         * Checks if the model is animal or human sourced
+         * Used to set the state of the info box
+         * @returns {boolean}
+         */
+        self.isAnimalHumanSourced=function(){
+            if(!self.ingModel){ //should never happen
+                return false;
+            }
+            return(self.ingModel.humanAnimalSourced===YES);
         };
 
         self.copy = function () {

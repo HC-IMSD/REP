@@ -50,8 +50,7 @@
                                           ng-messages="nIngRecCtrl.nonMedIngForm.strength.$error">
                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                           <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
-                                            <span ng-message="min"><span
-                                                    translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
+                                            <span ng-message="min"><span translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
                                     </span>
                         </strong>
                     </label>
@@ -65,7 +64,7 @@
                         <div class="rep-pad-top">
                             <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
                                 <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{$id}}" name="nmUnits"
-                                           class="rep-selectize-font full-width" required>
+                                           class="rep-selectize-font" required>
                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
                                                      class="rep-selectize-font rep-selectize-dropdown form-control">
                                         {{$select.selected[nIngRecCtrl.lang]}}
@@ -160,8 +159,6 @@
                     </label>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
                      ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.animaHumanSourced.$invalid}">
@@ -181,7 +178,7 @@
                         </strong>
                     </label>
                 </div>
-                <div class="btn-group-sm col-xs-7 text-right">
+                <div class="btn-group-sm col-xs-8 text-right">
                     <div class="row">
                         <div class="col-xs-12">
                             <span>&nbsp;</span>
@@ -201,6 +198,12 @@
                                    ng-click="nIngRecCtrl.discardChanges()">
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-if="nIngRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
+                     role="alert" aria-live="polite">
+                    {{'SOURCED_INFO'|translate}}
                 </div>
             </div>
         </fieldset>

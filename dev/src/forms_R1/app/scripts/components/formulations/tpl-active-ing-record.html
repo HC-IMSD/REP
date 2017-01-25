@@ -169,8 +169,7 @@
                         <span class="field-name">{{'ANIMAL_HUMAN_SOURCED'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <select id="animalHumanSourced_{{::$id}}" ng-model="ingRecCtrl.ingModel.humanAnimalSourced"
-                                ng-required="true"
-                                class="form-control" name="animaHumanSourced"
+                                ng-required="true" class="form-control" name="animaHumanSourced"
                                 ng-options="val |translate for val in  ingRecCtrl.yesNoList">
                         </select>
                         <strong id="animalHumanSourced-error" class="error"
@@ -182,7 +181,7 @@
                         </strong>
                     </label>
                 </div>
-                <div class="btn-group-sm col-xs-7 text-right align-bottom">
+                <div class="btn-group-sm col-xs-8 text-right align-bottom">
                     <div class="row">
                         <div class="col-xs-12">
                             <span>&nbsp;</span>
@@ -202,6 +201,12 @@
                                    ng-click="ingRecCtrl.discardChanges()">
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div ng-if="ingRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
+                     role="alert" aria-live="polite">
+                    {{'SOURCED_INFO'|translate}}
                 </div>
             </div>
         </fieldset>

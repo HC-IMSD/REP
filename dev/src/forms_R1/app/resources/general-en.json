@@ -43,5 +43,6 @@
   "OTHER": "Other",
   "HELP_REP_CONTACT": "REP Contact Instructions",
   "OTHER_UNITS": "Units other details",
-  "COMPANY_NOABBREV":"Company Name (Full legal name - no abbreviations)"
+  "COMPANY_NOABBREV":"Company Name (Full legal name - no abbreviations)",
+  "COPY":"Copy"
 }

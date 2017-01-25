@@ -42,5 +42,6 @@
   "OTHER": "Autre",
   "HELP_REP_CONTACT": "fr_REP Contact Instructions",
   "OTHER_UNITS": "fr_Units other details",
-  "COMPANY_NOABBREV":"fr_Company Name (Full legal name - no abbreviations)"
+  "COMPANY_NOABBREV":"fr_Company Name (Full legal name - no abbreviations)",
+  "COPY":"fr_Copy"
 }
