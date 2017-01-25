@@ -4,10 +4,10 @@
             <legend>{{'CDN_REF_PRODUCT'|translate}}&nbsp{{$ctrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="col-md-4 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.brandName.$invalid}">
-                    <label for="brand-nameh_{{$id}}" class="required"><span
+                    <label for="brand-name_{{::$id}}" class="required"><span
                             class="field-name">{{'BRAND_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="brand-nameh_{{$id}}" data-ng-model="$ctrl.productModel.brandName"
+                        <input type="text" id="brand-name_{{::$id}}" data-ng-model="$ctrl.productModel.brandName"
                                class="form-control full-width" name="brandName" ng-required="true" maxlength="60"
                                size="60"/>
                         <strong id="brand-error" class="error"
@@ -18,23 +18,31 @@
                         </strong>
                     </label>
                 </div>
-                <div class="col-md-4 form-group"
-                     ng-class="{'has-error':$ctrl.productDetailsForm.medIngredient.$invalid}">
-                    <label for="med-ingredienth_{{$id}}" class="required"><span class="field-name">{{'MEDICINAL_INGREDIENT'|translate}}</span>
+            </div>
+            <div class="row">
+                <div class="col-md-9 form-group"
+                     ng-class="{'has-error':$ctrl.productDetailsForm.ingredName.$invalid}">
+                    <label for="ref-ing-name_{{::$id}}" class="required"><span class="field-name">{{'MEDICINAL_INGREDIENT'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="med-ingredienth_{{$id}}" data-ng-model="$ctrl.productModel.medIngredient"
-                               class="form-control full-width" name="medIngredient" ng-required="true" maxlength="60"
-                               size="60"/>
+                        <input type="text" ng-model="$ctrl.productModel.ingLabel" name="ingredName"
+                               id="ref-ing-name_{{::$id}}" size="100"  maxlength="100"
+                               uib-typeahead=" rec.label for rec in $ctrl.activeList | filter:{label:$viewValue} | limitTo:15"
+                               class="form-control rep-normal-font rep-margin-top" typeahead-show-hint="true" typeahead-min-length="2"
+                               required typeahead-no-results="$ctrl.newIngred"
+                               typeahead-on-select="$ctrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html">
+                        <!--<input type="text" id="med-ingredienth_{{$id}}" data-ng-model="$ctrl.productModel.medIngredient"-->
+                        <!--class="form-control full-width" name="medIngredient" ng-required="true" maxlength="60"-->
+                        <!--size="60"/>-->
                         <strong id="medIngred-error" class="error"
-                                ng-if="$ctrl.showError($ctrl.productDetailsForm.medIngredient)">
-                        <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.medIngredient.$error">
+                                ng-if="$ctrl.showError($ctrl.productDetailsForm.ingredName)">
+                        <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.ingredName.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                         </strong>
                     </label>
                 </div>
-
-                <div class="col-md-4 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.strengths.$invalid}">
+                <div class="col-md-3 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.strengths.$invalid}">
                     <label for="strength_{{$id}}" class="required"><span
                             class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -51,8 +59,8 @@
                     </label>
                 </div>
             </div>
-
             <div class="row">
+
                 <div class="form-group col-md-3">
                     <label for="units_{{$id}}" class="required full-width">
                         <span class="field-name">{{'UNITS'|translate}}</span>
@@ -110,7 +118,7 @@
                     <label for="dosage-form_{{$id}}" class="required full-width">
                         <span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <div class="rep-pad-top">
+                        <div class="rep-margin-top">
                             <div class="rep-error"
                                  ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
                                 <ui-select ng-model="$ctrl.productModel.dosageForm" id="dosage-form_{{$id}}"

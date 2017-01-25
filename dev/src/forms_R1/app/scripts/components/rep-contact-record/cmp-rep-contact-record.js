@@ -49,7 +49,6 @@
         vm.$onChanges = function (changes) {
             //how this is currently wired, this will never fire!
             if (changes.contactRecord) {
-                console.log(changes.contactRecord.currentValue);
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
                 vm.setEditableState();
             }

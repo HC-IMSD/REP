@@ -453,7 +453,14 @@
                 for (var i = 0; i < info.length; i++) {
                     var product = {};
                     product.brandName = info[i].brand_name;
-                    product.medIngredient = info[i].medicinal_ingredient;
+                    product.ingId= info[i].ingredient_id;
+                    product.ingLabel = info[i].ingredient_name;
+                    product.newIngred="N";
+
+                    if (!product.ingId) {
+                        product.newIngred = 'Y'
+                    }
+
                     product.dosageForm = "";
                     if (info[i].dosage_form) {
                         product.dosageForm = $filter('filter')(DossierLists.getDosageFormList(), {id: info[i].dosage_form.__text})[0];
@@ -838,8 +845,9 @@
                 for (var i = 0; i < info.length; i++) {
                     var product = {};
                     product.brand_name = info[i].brandName;
-                    product.medicinal_ingredient = info[i].medIngredient;
-
+                   // product.medicinal_ingredient = info[i].medIngredient;
+                    product.ingredient_id= info[i].ingId;
+                    product.ingredient_name = info[i].ingLabel;
                     //make dosage form with both english and french labels
 
                     if (info[i].dosageForm) {

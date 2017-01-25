@@ -38,11 +38,15 @@
         var self = this;
         self.dosageFormList = DossierLists.getDosageFormList();
         self.unitsList=DossierLists.getUnitsList();
+        self.activeList = DossierLists.getActiveList();
         self.savePressed=false;
         self.lang = $translate.proposedLanguage() || $translate.use();
         self.productModel = {
             brandName: "",
-            medIngredient: "",
+           // medIngredient: "",
+            "newIngred": "Y",
+            "ingId": "",
+            "ingLabel": "",
             strengths: "",
             units: "",
             otherUnits:"",
@@ -100,7 +104,9 @@
             }
 
         };
-
+        self.ingredSelectionUpdated = function (item, model, label, event) {
+            self.productModel.ingId = item.id;
+        };
         self.discardChanges = function(){
             self.productModel = angular.copy(self.backup);
            //self.productModel = backup;

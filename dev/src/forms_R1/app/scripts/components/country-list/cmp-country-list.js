@@ -51,7 +51,6 @@
 
 
         self.$onInit = function () {
-            console.log(self.baseCountries);
             if (angular.isUndefined(self.model.list)) { //TODO should be comimg from parent
                 self.model.list = [];
             }
