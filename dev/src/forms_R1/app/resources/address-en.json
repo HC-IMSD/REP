@@ -14,5 +14,11 @@
   "DELETE_ADDR": "Delete Address",
   "ADDR_INFO": "Address Information",
   "ADDR_DETAILS": "Address Details",
-  "ADDR_ROLE_LEGEND": "Select one or more roles for this company"
+  "ADDR_ROLE_LEGEND": "Select one or more roles for this company",
+  "PRODUCTS_IMPORTED": "Imported Products",
+  "PRODUCT_TYPES":"Products imported by this Company",
+  "ALL_PRODUCTS": "All Products",
+  "SELECTED_PRODUCTS":"Some Products",
+  "IDENTIFY_PRODUCTS": "Provide the Dosser Identifiers for the products that are imported by this Company",
+  "ADD_DOSSIER_ID":"Add Dossier Id"
 }

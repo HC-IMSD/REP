@@ -38,6 +38,7 @@
         vm.isContact = false;
         vm.isEditable = true;
         vm.formAmend = false;
+        vm.isImporter=false;
         vm.addressRecForm = "";
         //TODO get  model from a servide
         vm.addressModel = {
@@ -56,8 +57,16 @@
             stateList: "",
             stateText: "",
             country: "",
-            postalCode: ""
+            postalCode: "",
+            importerProducts: {
+                selectedProducts: "",
+                dossierIdList: []
+            }
         };
+        /*
+        * Sends the message up to determine if a row has already been selected.
+        * This merss
+         */
         vm.isOneSelected = function (type) {
             return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressID}));
         };
@@ -94,6 +103,7 @@
                 vm.addressModel = angular.copy(changes.addressRecord.currentValue);
                 vm.addressModel.roleConcat = _getRolesConcat();
                 vm.setEditable();
+                vm.importerProductState(vm.addressModel.addressRole.importer);
                 //angular.element(saveAddress).trigger('focus');
 
             }
@@ -121,13 +131,26 @@
             vm.isDetailValid({state: vm.addressRecForm.$valid});
             vm.savePressed = false;
         };
-
+        //TODO obsolete?
         vm.onAddressRoleUpdate = function (newRole) {
             var aRole = {};
             angular.extend(aRole, newRole);
             vm.addressModel.addressRole = aRole;
             vm.updateAddressModel2();
         };
+
+        vm.importerProductState=function(state){
+            vm.isImporter=state;
+            if(!vm.isImporter){
+                 vm.addressModel.importerProducts={
+                    "selectedProducts":"",
+                    "dossierIdList":[]
+                };
+            }else if( vm.addressModel.importerProducts.dossierIdList.length===0){
+                vm.addressModel.importerProducts.dossierIdList.push({dossierId:""})
+            }
+        };
+
         /**
          * @ngdoc method -Updates the parent on whether this record is valid or not
          */

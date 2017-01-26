@@ -67,9 +67,9 @@
                     <label for="chk-importer_{{$id}}">
                         <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
                                ng-disabled="!ar.isEditable"
-                               ng-change="ar.oneSelected(ar.roleForm.importer,'importer')" id="chk-importer_{{$id}}"/>
+                               ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="chk-importer_{{$id}}"/>
                         {{"IMPORTER"|translate}}
-                        <strong id="importer-role-error" class="error" ng-if="ar.roleForm.importer.$invalid">
+                        <strong id="importer-rolec-error" class="error" ng-if="ar.roleForm.importer.$invalid">
                  <span class="label label-danger" ng-messages="ar.roleForm.importer.$error">
                             <span ng-message="duplicateRole">{{"IMPORTER_SEL"|translate}}</span>
                         </span>

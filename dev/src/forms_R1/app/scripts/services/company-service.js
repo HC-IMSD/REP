@@ -2,15 +2,12 @@
  * Created by Abdessamad on 7/6/2016.
  */
 
-
 (function () {
     'use strict';
 
     angular
         .module('companyService', ['dataLists']);
-
 })();
-
 
 (function () {
     'use strict';
@@ -18,8 +15,8 @@
         .module('companyService')
         .factory('CompanyService', CompanyService);
 
-    CompanyService.$inject=['$filter','getCountryAndProvinces'];
-    function CompanyService($filter,getCountryAndProvinces) {
+    CompanyService.$inject = ['$filter', 'getCountryAndProvinces'];
+    function CompanyService($filter, getCountryAndProvinces) {
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
@@ -92,11 +89,14 @@
                     },
                     street: "",
                     city: "",
-                    /// provLov: "",
                     stateList: "",
                     stateText: "",
                     country: "",
-                    postalCode: ""
+                    postalCode: "",
+                    importerProducts: {
+                        selectedProducts: "",
+                        dossierIdList: []
+                    }
                 };
                 defaultAddress.addressID = this.getNextAddressID();
                 return (defaultAddress);
@@ -126,6 +126,14 @@
                 defaultContact.contactId = this.getNextContactID();
                 return (defaultContact);
             },
+            createImporterProductRecord: function () {
+                var importerRecord = {
+                    "selectedProducts": "",
+                    "dossierIdList": []
+                };
+                return importerRecord;
+            },
+
             updateAddressID: function (value) {
                 if (isNaN(value)) return;
                 if (value > this.addressID) {
@@ -235,10 +243,10 @@
                     address.city = adrList[i].company_address_details.city;
                     address.stateList = adrList[i].company_address_details.province_lov;
                     address.stateText = adrList[i].company_address_details.province_text;
-                    address.country ="";
-                    if( adrList[i].company_address_details.country.__text) {
+                    address.country = "";
+                    if (adrList[i].company_address_details.country.__text) {
                         address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: adrList[i].company_address_details.country.__text})[0];
-                        address.countryDisplay=address.country.id;
+                        address.countryDisplay = address.country.id;
                     }
                     address.postalCode = adrList[i].company_address_details.postal_code;
                     list.push(address);
@@ -310,15 +318,15 @@
                 address.company_address_details.city = adrList[i].city;
                 address.company_address_details.province_lov = adrList[i].stateList;
                 address.company_address_details.province_text = adrList[i].stateText;
-                address.company_address_details.country="";
-                if(adrList[i].country){
+                address.company_address_details.country = "";
+                if (adrList[i].country) {
                     address.company_address_details.country = {
                         _label_en: adrList[i].country.en,
                         _label_fr: adrList[i].country.fr,
                         __text: adrList[i].country.id
                     };
                 }
-               // address.company_address_details.country = adrList[i].country;
+                // address.company_address_details.country = adrList[i].country;
                 address.company_address_details.postal_code = adrList[i].postalCode;
                 addressList.push(address);
             }

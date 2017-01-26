@@ -1,6 +1,6 @@
 <ng-form name="dosIdCtrl.dosIdForm">
     <div class="form-group">
-        <div  <div class="col-xs-4">
+        <div class="col-xs-4">
             <label for="dossierId_{{::$id}}" class="required">
                 <span class="field-name">{{'DOSSIER_ID'|translate}}&nbsp;</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
@@ -11,7 +11,7 @@
                                 <span class="input-group-addon">HC6-024-</span>
                                 <div ng-class="{'has-error':dosIdCtrl.dosIdForm.dossierId.$invalid}">
                                     <input type="text" class="form-control full-width" id="dossierId_{{::$id}}"
-                                           maxlength="7" name="dossierId" minlength="7" size="7"
+                                           maxlength="7" name="dossierId" minlength="7" size="9"
                                            ng-model="dosIdCtrl.record.dossierId" required/>
                                 </div>
                                 <span class="input-group-btn">
@@ -23,16 +23,15 @@
                             </div>
                         </div>
                     </div>
-                    <strong id="dinValue-error" class="error"
-                            ng-show="dinCtrl.showError(dinForm.dinValue.$touched,dinForm.dinValue.$invalid)">
-                        <span class="label label-danger" ng-messages="dinForm.dinValue.$error">
+                    <strong id="dossierIdValue-error" class="error"
+                            ng-show="dosIdCtrl.showError(dosIdCtrl.dosIdForm.dossierId)">
+                        <span class="label label-danger" ng-messages="dosIdCtrl.dosIdForm.dossierId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_8NUM"></span></span>
+                              <span ng-message="minlength"><span translate="MSG_LENGTH_7NUM"></span></span>
                         </span>
                     </strong>
                 </div>
             </label>
         </div>
     </div>
-
 </ng-form>

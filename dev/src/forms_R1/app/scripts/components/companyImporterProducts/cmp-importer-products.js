@@ -23,27 +23,29 @@
                 onDelete: '&',
                 isAmend: '<',
                 isDetailValid: '&',
-                importerProducts: '<',
+                importerRecord: '<',
                 onUpdate: '&'
 
             }
         });
-    importerProductsCtrl.$inject = [];
+    //importerProductsCtrl.$inject = [];
 
     function importerProductsCtrl() {
         var vm = this;
         vm.savePressed = false;
         vm.formAmend = false;
+        vm.someProducts=false;
         vm.recordReadOnly = false; //needed for din
+        vm.productTypeList=['ALL_PRODUCTS','SELECTED_PRODUCTS'];
         //vm.isNotEditable = false;
 
         vm.model = {
-            productsImported: "",
+            selectedProducts: "",
             dossierIdList: []
         };
 
         vm.$onInit = function () {
-
+            vm.productTypeChanged();
         };
 
         /**
@@ -51,9 +53,9 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            if (changes.importerProducts && changes.importerProducts.currentValue) {
-                vm.model = angular.copy(changes.importerProducts.currentValue);
-
+            if (changes.importerRecord && changes.importerRecord.currentValue) {
+                vm.model = (changes.importerRecord.currentValue);
+                console.log("there was a change")
             }
         };
 
@@ -86,8 +88,23 @@
             return (vm.savePressed)
         };
         vm.isIdInvalid = function (index) {
-            return !( vm.model.dossierIdList[index].dossierId &&  vm.model.dossierIdList[index].dossierId.length === 8);
+            return !( vm.model.dossierIdList[index].dossierId &&  vm.model.dossierIdList[index].dossierId.length === 7);
         };
+
+        vm.productTypeChanged=function(){
+
+            if(vm.model.selectedProducts==="ALL_PRODUCTS"){
+                //clear out the dossier list
+                vm.model.dossierIdList=[];
+                vm.someProducts=false;
+            }else{
+                vm.someProducts=true;
+                if(vm.model.dossierIdList.length===0){
+                    vm.model.dossierIdList.push({dossierId:""});
+                }
+            }
+
+        }
 
         /**
          * Controls errors state of an individual UI control. Since cannot pass the control for some reason

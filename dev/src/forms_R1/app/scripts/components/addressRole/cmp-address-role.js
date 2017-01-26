@@ -26,7 +26,8 @@
                 isContact:'<',
                 alreadySelected: '&',
                 isAmend: '<',
-                legendText: '@'
+                legendText: '@',
+                importerUpdated:'&'
             }
         });
 
@@ -41,6 +42,7 @@
             manufacturer: false,
             mailing: false,
             billing: false,
+            importer:false,
             repPrimary: false,
             repSecondary: false
         };
@@ -51,7 +53,6 @@
                 //doesn't copy as this is a dumb component
                 vm.roleModel = vm.record.addressRole;
                 vm.oneSelected();
-
             }
         };
         vm.$onChanges=function(changes){
@@ -79,6 +80,12 @@
             vm.checkForDuplicates(vm.roleForm.manufacturer, 'manufacturer');
         }
 
+
+        vm.updateImporterState=function(ctrl,toCheck){
+            vm.oneSelected(ctrl,toCheck);
+            vm.importerUpdated({state:vm.roleModel.importer})
+        }
+
         /**
          *
          * @param ctrl the form control
@@ -91,7 +98,6 @@
             for (var key in obj){
                 var attrName = key;
                 var attrValue = obj[key];
-
                 if(attrValue===true){
                     vm.isSelected=true;
                     return true;

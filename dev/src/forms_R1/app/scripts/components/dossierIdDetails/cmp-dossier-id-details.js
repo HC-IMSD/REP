@@ -51,8 +51,11 @@
         vm.delete=function(){
             vm.deleteId({dossierIndex:vm.detailsIndex})
         };
-        vm.showError=function(isTouched,isInvalid){
-            if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )){
+        vm.showError=function(ctrl){
+            if(!ctrl) return false;
+
+            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )){
+              console.log("error")
                 return true
             }
             return false
