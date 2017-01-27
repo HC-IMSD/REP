@@ -50,11 +50,12 @@
 
         self.model = {};
         self.$onInit = function(){
-
+            self.isSourcedSelected();
         };
         self.$onChanges = function (changes) {
             if (changes.record) {
                 self.model = (changes.record.currentValue);
+                self.isSourcedSelected();
             }
 
         };

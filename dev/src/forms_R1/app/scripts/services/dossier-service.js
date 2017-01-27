@@ -102,9 +102,8 @@
                         therapeutic:[] ,
                         canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
-                        appendixFourList: getAppendix4IngredientList(info.appendix4_group)/*{
-                         ingredientList :
-                         }//tab + grid +*/
+                        appendixFourList: getAppendix4IngredientList(info.appendix4_group)
+
 
                     },
                     contactList: getContactList(info.contact_record)
@@ -538,7 +537,6 @@
                     var srcAnimal = info[i].animal_sourced_section;
 
                     if (tissues) {
-
                         ing.tissuesFluidsOrigin = {};
                         // ing.tissuesFluidsOrigin.tissuesList = [];
                         ing.tissuesFluidsOrigin.tissuesList = _getTissuesFluidsModel(tissues);
@@ -562,11 +560,9 @@
                         ing.sourceAnimalDetails.countryList = getCountries(info[i].animal_sourced_section.country_origin_list.country_origin)
                     }
 
-
                     list.push(ing);
                 }
             }
-
             return list;
 
         }

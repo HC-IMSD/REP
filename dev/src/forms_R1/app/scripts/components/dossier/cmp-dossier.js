@@ -78,7 +78,6 @@
         };
 
         self.isIncomplete = true;
-        self.foo = "";
         self.formAmend = false;
         self.showAllErrors = false;
         self.errorAppendix = [];
@@ -155,6 +154,7 @@
             }
             //if content is attempted to be loaded show all the errors
             getAppendix4Errors();
+            _setComplete();
             self.showAllErrors = true;
             disableXMLSave();
         }
@@ -224,6 +224,9 @@
             }
             self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
 
+        }
+        function _setComplete() {
+            self.isIncomplete = !self.dossierModel.dossierID;
         }
 
         /**
