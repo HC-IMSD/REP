@@ -56,6 +56,9 @@ label > select {
 .rep-margin-top{
     margin-top: 5px;
 }
+.rep-margin-minus-top-h3{
+    margin-top: -5px !important;
+}
 .rep-expander {
     cursor: pointer;
     color: #295376;
