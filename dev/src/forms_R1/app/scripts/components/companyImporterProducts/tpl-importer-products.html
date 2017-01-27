@@ -5,16 +5,16 @@
     <div class="row">
         <div class="form-group col-md-5"
              ng-class="{'has-error':impProdCtrl.importProdForm.productTypes.$invalid}">
-            <label for="productTypes" class="required">
+            <label for="productTypes_{{::$id}}" class="required">
                 <span class="field-name">{{'PRODUCT_TYPES'|translate}}</span>
                 <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-            <select id="productTypes" ng-model="impProdCtrl.model.selectedProducts"
-                    class="form-control full-width" name="productTypes_{{::$id}}" required
+            <select id="productTypes_{{::$id}}" ng-model="impProdCtrl.model.selectedProducts"
+                    class="form-control" name="productTypes" required
                     ng-change="impProdCtrl.productTypeChanged()"
                     ng-options="rec |translate for rec in  impProdCtrl.productTypeList">
             </select>
             <strong id="dossierTypes-error" class="error"
-                    ng-if="nIngRecCtrl.showError(impProdCtrl.importProdForm.productTypes)">
+                    ng-if="impProdCtrl.showError(impProdCtrl.importProdForm.productTypes)">
                         <span class="label label-danger"
                               ng-messages="impProdCtrl.importProdForm.productTypes.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>

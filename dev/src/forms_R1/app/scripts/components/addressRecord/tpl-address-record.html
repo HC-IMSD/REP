@@ -44,12 +44,14 @@
                 <cmp-address-role record="addressRec.addressModel" legend-text="ADDR_ROLE_LEGEND"
                                   is-contact="addressRec.isContact" is-amend="addressRec.isEditable"
                                   on-update="addressRec.onAddressRoleUpdate($event.roles)"
-                                  show-errors="addressRec.showErrors()" importer-updated="addressRec.importerProductState(state)"
+                                  show-errors="addressRec.showErrors()"
+                                  importer-updated="addressRec.importerProductState(state)"
                                   already-selected="addressRec.isOneSelected(roleName)"></cmp-address-role>
 
             </div>
             <div ng-if="addressRec.isImporter">
-                <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"></cmp-importer-products>
+                <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"
+                                       show-errors="addressRec.showErrors()"></cmp-importer-products>
             </div>
             <div class="row">
                 <div class="btn-group-sm col-xs-12 text-right">
@@ -63,8 +65,6 @@
                 </div>
             </div>
         </div>
-
-
     </ng-form>
-     <!-- <pre>address record model: {{addressRec.addressModel | json : spacing}}</pre>-->
+     <!--<pre>address record model: {{addressRec.addressModel | json : spacing}}</pre>-->
 </div>

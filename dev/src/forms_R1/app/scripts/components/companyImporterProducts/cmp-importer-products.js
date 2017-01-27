@@ -24,6 +24,7 @@
                 isAmend: '<',
                 isDetailValid: '&',
                 importerRecord: '<',
+                showErrors:'&',
                 onUpdate: '&'
 
             }
@@ -32,7 +33,6 @@
 
     function importerProductsCtrl() {
         var vm = this;
-        vm.savePressed = false;
         vm.formAmend = false;
         vm.someProducts=false;
         vm.recordReadOnly = false; //needed for din
@@ -55,7 +55,7 @@
         vm.$onChanges = function (changes) {
             if (changes.importerRecord && changes.importerRecord.currentValue) {
                 vm.model = (changes.importerRecord.currentValue);
-                console.log("there was a change")
+                vm.productTypeChanged();
             }
         };
 
@@ -78,22 +78,13 @@
             vm.isDetailValid({state: true});
         };
 
-
-        /**
-         * @ngdoc method toggles error state to make errors visible
-         * @returns {boolean}
-         */
-        vm.showErrors = function () {
-
-            return (vm.savePressed)
-        };
         vm.isIdInvalid = function (index) {
             return !( vm.model.dossierIdList[index].dossierId &&  vm.model.dossierIdList[index].dossierId.length === 7);
         };
 
         vm.productTypeChanged=function(){
 
-            if(vm.model.selectedProducts==="ALL_PRODUCTS"){
+            if(vm.model.selectedProducts!=="SELECTED_PRODUCTS"){
                 //clear out the dossier list
                 vm.model.dossierIdList=[];
                 vm.someProducts=false;
@@ -113,9 +104,10 @@
          * @param isInvalid
          * @returns {boolean}
          */
-        vm.showError = function (isTouched, isInvalid) {
+        vm.showError = function (ctrl) {
 
-            return (isInvalid && isTouched) || (vm.showErrors() && isInvalid );
+            if(!ctrl) return false;
+            return (ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid );
         };
 
 

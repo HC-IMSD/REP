@@ -20,5 +20,6 @@
   "ALL_PRODUCTS": "All Products",
   "SELECTED_PRODUCTS":"Some Products",
   "IDENTIFY_PRODUCTS": "Provide the Dosser Identifiers for the products that are imported by this Company",
-  "ADD_DOSSIER_ID":"Add Dossier Id"
+  "ADD_DOSSIER_ID":"Add Dossier Id",
+  "IMPORTER_NONCDN":"There should be a Canadian Importer when the Manufacturer / Sponsor is not a Canadian Address"
 }

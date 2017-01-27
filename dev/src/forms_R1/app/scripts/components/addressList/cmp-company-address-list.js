@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressList', ['addressRecord'])
+        .module('addressList', ['addressRecord','hpfbConstants'])
 })();
 //test
 (function () {
@@ -27,15 +27,16 @@
             controllerAs: 'addressListCtrl'
         });
 
-    addressListCtrl.$inject = ['$filter', 'CompanyService'];
+    addressListCtrl.$inject = ['$filter', 'CompanyService','CANADA'];
 
-    function addressListCtrl($filter, CompanyService) {
+    function addressListCtrl($filter, CompanyService, CANADA) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailsValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.allRolesSelected = "";
         vm.resetCollapsed = false;
+        vm.showImporterInfo=false;
         vm.addressList = [];
         vm.columnDef = [
             {
@@ -178,25 +179,42 @@
          * @ngdoc method determines if all the roles have been selected for the address
          * @returns {boolean}
          */
-            //TODO move to a service
+            //TODO move to a service, can this be simplified?
         vm.isAllRolesSelected = function () {
             var rolesSelected = 0;
             var importerSelected = false;
+
             if (!vm.addressList) return false;
             var companyRole = vm.companyService.createAddressRole();
             var numKeys = vm.companyService.getNumberKeys(companyRole);
-
             for (var i = 0; i < vm.addressList.length; i++) {
-                var obj = vm.addressList[i].addressRole;
+                var isCanadaAddress=false;
+                var obj = vm.addressList[i].addressRole
+                if(vm.addressList[i].country.id===CANADA){
+                    isCanadaAddress=true;
+                }
                 for (var key in obj) {
                     var attrName = key;
                     var attrValue = obj[key];
+                    //check to determine if need to show importer  info message
+                    if(attrName==="manufacturer"){
+                        if(isCanadaAddress &&(attrValue)){
+                            console.log("Is cdn")
+                            vm.showImporterInfo=false;
+                        }else if(!isCanadaAddress &&(attrValue)){
+                            vm.showImporterInfo=true;
+                        }else if(!attrValue){
+                            //handle the case where changes have been made and now there is no importer role
+                            vm.showImporterInfo=false;
+                        }
+                    }
                     if (attrValue && companyRole.hasOwnProperty(attrName)) {
                         rolesSelected++;
                         if (attrName === "importer") importerSelected = true;
                     }
                 }
             }
+
             if (rolesSelected === numKeys) {
                 return "true";
             }

@@ -28,13 +28,17 @@
                 softwareVersion: "1.0.0",
                 companyId: "",
                 addressList: [],
-                contactList: []
+                contactList: [],
+                importerProducts: {
+                    selectedProducts: "",
+                    dossierIdList: []
+                }
             };
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
             this.contactId = 0;
         }
-
+        //TODO rewrite this object to proper prototype syntax
         CompanyService.prototype = {
             _default: {},
 
@@ -184,7 +188,7 @@
             },
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
-                //var jsonObj = this._default
+                var rootTag = "COMPANY_ENROL"; //TODO needs to be a global
                 var resultJson = {
                     COMPANY_ENROL: {
                         template_type: "PHARMA",
@@ -197,7 +201,7 @@
                         address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
                     }
-                };
+                }
                 return (resultJson);
             },
             getModelInfo: function () {
@@ -249,11 +253,33 @@
                         address.countryDisplay = address.country.id;
                     }
                     address.postalCode = adrList[i].company_address_details.postal_code;
+                   // if(address.addressRole.importer){
+                        console.log("loading importer data");
+                        address.importerProducts= this.getImporterInfo(adrList[i].importer_products);
+
+                    //}
                     list.push(address);
                 }
 
                 return list;
             },
+            getImporterInfo: function(jsonObj){
+                var result=this.createImporterProductRecord();
+
+                if(!jsonObj) return result;
+                result.selectedProducts=jsonObj.selected_products;
+                var dossierIdList=jsonObj.dossier_id;
+                if(!dossierIdList) return result; //case where ALL selected
+                if (!(dossierIdList instanceof Array)) {
+                    dossierIdList=[dossierIdList];
+                }
+                for(var i=0;i<dossierIdList.length;i++){
+                    var newRec={"dossierId":dossierIdList[i]};
+                    result.dossierIdList.push(newRec);
+                }
+                return result;
+            },
+
             //right side is original json left side is translation ;oading
             getContactList: function (contacts) {
                 var list = [];
@@ -289,9 +315,9 @@
                     contact.email = contacts[i].company_contact_details.email;
                     list.push(contact);
                 }
-
                 return list;
             }
+
         };
         // Return a reference to the object
         return CompanyService;
@@ -328,6 +354,12 @@
                 }
                 // address.company_address_details.country = adrList[i].country;
                 address.company_address_details.postal_code = adrList[i].postalCode;
+                if(adrList[i].addressRole.importer){
+                    address.importer_products=_mapImporterInfoToOutput( adrList[i].importerProducts);
+                }
+
+
+
                 addressList.push(address);
             }
         }
@@ -364,4 +396,26 @@
         }
         return contactList;
     }
+
+    /***
+     * Maps the adress importer information to the output xml definition
+     * @param jsonObj
+     * @returns object
+     * @private
+     */
+    function _mapImporterInfoToOutput(jsonObj){
+        var importerInfo={};
+        if(!jsonObj) return importerInfo;
+        importerInfo.selected_products=jsonObj.selectedProducts;
+        if(jsonObj.dossierIdList && jsonObj.dossierIdList.length>0){
+            importerInfo.dossier_id=[];
+            for(var i=0;i<jsonObj.dossierIdList.length;i++){
+                importerInfo.dossier_id.push(jsonObj.dossierIdList[i].dossierId);
+            }
+        }
+        return importerInfo;
+    }
+
+
+
 })();

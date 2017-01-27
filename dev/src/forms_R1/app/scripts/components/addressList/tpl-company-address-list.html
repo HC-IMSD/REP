@@ -15,6 +15,11 @@
                         </span>
                     </strong>
                 </label>
+
+                <div ng-show="addressListCtrl.showImporterInfo" class="alert alert-info" role="alert" aria-live="polite">
+                    {{'IMPORTER_NONCDN'|translate}}
+                </div>
+
                 <cmp-expanding-table list-items="addressListCtrl.addressList"
                                      reset-to-collapsed="addressListCtrl.resetCollapsed"
                                      column-def="addressListCtrl.columnDef" select-record="addressListCtrl.selectRecord"
