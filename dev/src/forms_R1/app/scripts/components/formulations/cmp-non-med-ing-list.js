@@ -41,7 +41,7 @@
                 {label: "VARIANT_NAME", binding: "varId", width: "15"},
                 {label: "NONMEDICINAL_INGREDIENT", binding: "ingName", width: "65"},
                 {label: "CAS_NUM", binding: "cas", width: "15"},
-                {label: "HUMAN_ANIMAL_SOURCE", binding: "animaHumanSourced", width: "10"}
+                {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "10"}
             ];
             self.ingList = [];
 

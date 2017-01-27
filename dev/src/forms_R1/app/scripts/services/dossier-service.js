@@ -279,6 +279,10 @@
 
             if (angular.isDefined(contacts)) {
 
+                if(!(contacts instanceof Array)){
+                    contacts=[contacts];
+                }
+
                 for (var i = 0; i < contacts.length; i++) {
                     var contact = {};
                     contact.amend = contacts[i].amend_record === 'Y';
@@ -491,7 +495,9 @@
             //TODO externalize
             var getCountries = function (input) {
                 var list = [];
-
+                if(!(input instanceof Array)){
+                    input=[input];
+                }
                 for (var i = 0; i < input.length; i++) {
 
                    var obj = {
@@ -515,6 +521,10 @@
             };
 
             if (angular.isDefined(info)) {
+
+                if (!(info instanceof Array)){
+                    info=[info];
+                }
                 for (var i = 0; i < info.length; i++) {
                     var ing = {};
                     ing.id = info[i].ingredient_id;
