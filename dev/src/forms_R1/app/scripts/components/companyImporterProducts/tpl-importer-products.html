@@ -9,7 +9,7 @@
                 <span class="field-name">{{'PRODUCT_TYPES'|translate}}</span>
                 <strong class="required">{{"REQUIRED" |translate}}</strong></label>
             <select id="productTypes_{{::$id}}" ng-model="impProdCtrl.model.selectedProducts"
-                    class="form-control" name="productTypes" required
+                    class="form-control" name="productTypes" required ng-disabled="!impProdCtrl.isEditable"
                     ng-change="impProdCtrl.productTypeChanged()"
                     ng-options="rec |translate for rec in  impProdCtrl.productTypeList">
             </select>
@@ -31,12 +31,13 @@
                 <div ng-repeat="record in impProdCtrl.model.dossierIdList">
                     <cmp-dossier-id-details dossier-record="record" id-index="$index"
                                             show-errors="impProdCtrl.showErrors()"
+                                            is-amend="impProdCtrl.isEditable"
                                             delete-id="impProdCtrl.deleteId(dossierIndex)"></cmp-dossier-id-details>
                 </div>
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-primary" ng-click="impProdCtrl.addDossierId()">
+            <button class="btn btn-primary" ng-click="impProdCtrl.addDossierId()" ng-disabled="!impProdCtrl.isEditable">
                 {{'ADD_DOSSIER_ID'|translate}}
             </button>
         </div>

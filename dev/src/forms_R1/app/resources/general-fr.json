@@ -44,5 +44,6 @@
   "OTHER_UNITS": "fr_Units other details",
   "COMPANY_NOABBREV":"fr_Company Name (Full legal name - no abbreviations)",
   "COPY":"fr_Copy",
-  "DELETE":"fr_Delete"
+  "DELETE":"fr_Delete",
+  "SAVE_WORKING":"fr_Save Working Copy"
 }

@@ -11,11 +11,11 @@
                                 <span class="input-group-addon">HC6-024-</span>
                                 <div ng-class="{'has-error':dosIdCtrl.dosIdForm.dossierId.$invalid}">
                                     <input type="text" class="form-control full-width" id="dossierId_{{::$id}}"
-                                           maxlength="7" name="dossierId" minlength="7" size="9"
+                                           maxlength="7" name="dossierId" minlength="7" size="9" ng-disabled="!dosIdCtrl.isEditable"
                                            ng-model="dosIdCtrl.record.dossierId" required/>
                                 </div>
                                 <span class="input-group-btn">
-                                <button class="btn btn-danger" ng-click="dosIdCtrl.delete()">
+                                <button class="btn btn-danger" ng-click="dosIdCtrl.delete()" ng-disabled="!dosIdCtrl.isEditable">
                                     <span aria-label="{{'DELETE_DIN'|translate }}"></span>
                                     {{'DELETE'|translate}}
                                 </button>

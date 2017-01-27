@@ -24,6 +24,7 @@
                 idIndex:'<',
                 deleteId:'&',
                 showErrors: '&',
+                isAmend:'<',
                 setReadonly: '&'
             }
         });
@@ -33,6 +34,7 @@
         var vm = this;
         vm.record={dossierId:""};
         vm.detailsIndex=0;
+        vm.isEditable=true;
         vm.$onInit = function () {
         };
 
@@ -46,6 +48,9 @@
             }
             if(changes.idIndex){
                 vm.detailsIndex=changes.idIndex.currentValue;
+            }
+            if (changes.isAmend) {
+                vm.isEditable = changes.isAmend.currentValue;
             }
         };
         vm.delete=function(){

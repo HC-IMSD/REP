@@ -2,10 +2,10 @@
     <ng-form name="contactForm">
         <div class="row">
             <div class="col-md-3 form-group" ng-class="{'has-error':contactForm.salutation.$invalid}">
-                <label for="contact-salut_{{$id}}" class="required">
+                <label for="contact-salut_{{::$id}}" class="required">
                     <span class="field-name">{{"SALUTATION"|translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <select id="contact-salut_{{$id}}" name="salutation" class="form-control"
+                    <select id="contact-salut_{{::$id}}" name="salutation" class="form-control"
                             data-ng-model="contCtrl.contactModel.salutation" ng-disabled="!contCtrl.isEditable"
                             ng-options="salut |translate for salut in contCtrl.salutationList" required>
                     </select>
@@ -19,10 +19,10 @@
         </div>
         <div class="row">
             <div class="col-md-5 form-group" ng-class="{'has-error':contactForm.firstName.$invalid}">
-                <label for="first-name_{{$id}}" class="required">
+                <label for="first-name_{{::$id}}" class="required">
                     <span class="field-name">{{'FIRST_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="first-name_{{$id}}" data-ng-model="contCtrl.contactModel.givenName"
+                    <input type="text" id="first-name_{{::$id}}" data-ng-model="contCtrl.contactModel.givenName"
                            class="form-control full-width" name="firstName" maxlength="60"
                            size="60" ng-readonly="!contCtrl.isEditable" required/>
                     <strong id="firstName-error" class="error" ng-if="contCtrl.showError(contactForm.firstName)">
@@ -33,18 +33,18 @@
                 </label>
             </div>
             <div class="col-md-2 form-group">
-                <label for="initials_{{$id}}">
+                <label for="initials_{{::$id}}">
                     <span class="field-name">{{'INITIALS'|translate}}</span>
-                    <input type="text" id="initials_{{$id}}" data-ng-model="contCtrl.contactModel.initials"
+                    <input type="text" id="initials_{{::$id}}" data-ng-model="contCtrl.contactModel.initials"
                            class="form-control full-width" name="contactIntials" maxlength="10" size="10"
                            ng-readonly="!contCtrl.isEditable"/>
                 </label>
             </div>
             <div class="col-md-5 form-group" ng-class="{'has-error':contactForm.lastName.$invalid}">
-                <label for="last-name_{{$id}}" class="required">
+                <label for="last-name_{{::$id}}" class="required">
                     <span class="field-name">{{'LAST_NAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="last-name_{{$id}}" data-ng-model="contCtrl.contactModel.surname"
+                    <input type="text" id="last-name_{{::$id}}" data-ng-model="contCtrl.contactModel.surname"
                            ng-readonly="!contCtrl.isEditable"
                            class="form-control full-width" name="lastName" required maxlength="60" size="60"/>
 
@@ -74,10 +74,10 @@
                 </label>
             </div>
             <div class="col-md-4 form-group" ng-class="{'has-error':contactForm.jobTitle.$invalid}">
-                <label for="job-title_{{$id}}" class="required">
+                <label for="job-title_{{::$id}}" class="required">
                     <span class="field-name">{{'JOB_TITLE'|translate}}</span>
                     <strong class="required">{{'REQUIRED'|translate}}</strong>
-                    <input type="text" id="job-title_{{$id}}" data-ng-model="contCtrl.contactModel.title"
+                    <input type="text" id="job-title_{{::$id}}" data-ng-model="contCtrl.contactModel.title"
                            class="form-control full-width" name="jobTitle" required maxlength="40" size="40"
                            ng-readonly="!contCtrl.isEditable"
                            required/>
@@ -90,8 +90,8 @@
 
             </div>
             <div class="col-md-3 form-group">
-                <label for="fax-number_{{$id}}"><span class="field-name">{{'FAX_NUMBER'|translate}}</span></label>
-                <input type="text" id="fax-number_{{$id}}" data-ng-model="contCtrl.contactModel.fax"
+                <label for="fax-number_{{::$id}}"><span class="field-name">{{'FAX_NUMBER'|translate}}</span></label>
+                <input type="text" id="fax-number_{{::$id}}" data-ng-model="contCtrl.contactModel.fax"
                        ng-model-options="contCtrl.ngModelOptSetting"
                        ng-readonly="!contCtrl.isEditable"
                        class="form-control full-width" name="faxNumber" maxlength="25" size="25"/>
@@ -99,10 +99,10 @@
         </div>
         <div class="row">
             <div class="col-md-3 form-group" ng-class="{'has-error':contactForm.phoneNumber.$invalid}">
-                <label for="phone-number_{{$id}}" class="required">
+                <label for="phone-number_{{::$id}}" class="required">
                     <span class="field-name">{{'PHONE_NUMBER'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="phone-number_{{$id}}" data-ng-model="contCtrl.contactModel.phone"
+                    <input type="text" id="phone-number_{{::$id}}" data-ng-model="contCtrl.contactModel.phone"
                            ng-model-options="contCtrl.ngModelOptSetting"
                            class="form-control full-width" name="phoneNumber" required maxlength="25"
                            size="25" ng-readonly="!contCtrl.isEditable" ng-pattern="contCtrl.phoneReg"
@@ -117,18 +117,18 @@
 
             </div>
             <div class="col-md-3 form-group">
-                <label for="phone-ext_{{$id}}"><span class="field-name">{{'PHONE_EXT'|translate}}</span>
-                    <input type="text" id="phone-ext_{{$id}}" data-ng-model="contCtrl.contactModel.phoneExt"
+                <label for="phone-ext_{{::$id}}"><span class="field-name">{{'PHONE_EXT'|translate}}</span>
+                    <input type="text" id="phone-ext_{{::$id}}" data-ng-model="contCtrl.contactModel.phoneExt"
                            ng-model-options="contCtrl.ngModelOptSetting"
                            ng-readonly="!contCtrl.isEditable"
                            class="form-control" name="phoneExt" maxlength="10"/>
                 </label>
             </div>
             <div class="col-md-6 form-group" ng-class="{'has-error':contactForm.contactEmail.$invalid}">
-                <label for="contact-email_{{$id}}" class="required">
+                <label for="contact-email_{{::$id}}" class="required">
                     <span class="field-name">{{'EMAIL'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="email" id="contact-email_{{$id}}" data-ng-model="contCtrl.contactModel.email"
+                    <input type="email" id="contact-email_{{::$id}}" data-ng-model="contCtrl.contactModel.email"
                            ng-model-options="contCtrl.ngModelOptSetting"
                            ng-readonly="!contCtrl.isEditable" maxlength="50" size="60"
                            class="form-control full-width" name="contactEmail" required/>

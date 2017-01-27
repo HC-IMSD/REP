@@ -35,6 +35,7 @@
         var vm = this;
         vm.formAmend = false;
         vm.someProducts=false;
+        vm.isEditable=true;
         vm.recordReadOnly = false; //needed for din
         vm.productTypeList=['ALL_PRODUCTS','SELECTED_PRODUCTS'];
         //vm.isNotEditable = false;
@@ -57,6 +58,10 @@
                 vm.model = (changes.importerRecord.currentValue);
                 vm.productTypeChanged();
             }
+            if (changes.isAmend) {
+                vm.isEditable = changes.isAmend.currentValue;
+            }
+
         };
 
         vm.addDossierId = function () {

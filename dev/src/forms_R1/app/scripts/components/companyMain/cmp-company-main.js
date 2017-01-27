@@ -45,6 +45,7 @@
         vm.applicationInfoService = new ApplicationInfoService();
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
+        vm.disableDraftButton=false;
         var _company = new CompanyService();
         vm.configCompany = {
             "label": "COMPANY_ID",
@@ -163,8 +164,10 @@
         }, true);
 
         function disableXMLSave() {
+            var isApprovedExternal= (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern());
 
-            vm.disableXML = vm.companyEnrolForm.$invalid || (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
+            vm.disableDraftButton=isApprovedExternal;
+            vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal;
         }
 
         function disableJSONSave() {

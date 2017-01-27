@@ -6,10 +6,10 @@
 
                 <div class="row">
                     <div class="form-group" ng-show="addressRec.isAmend">
-                        <input class="formControl" id="chk-amend-rec_{{$id}}" type="checkbox"
+                        <input class="formControl" id="chk-amend-rec_{{::$id}}" type="checkbox"
                                ng-change="addressRec.setEditable()"
                                ng-model="addressRec.addressModel.amendRecord"/>
-                        <label class="form-checkbox" for="chk-amend-rec_{{$id}}">
+                        <label class="form-checkbox" for="chk-amend-rec_{{::$id}}">
                             {{'AMEND_RECORD'|translate}}
                         </label>
                     </div>
@@ -51,6 +51,7 @@
             </div>
             <div ng-if="addressRec.isImporter">
                 <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"
+                                       is-amend="addressRec.isEditable"
                                        show-errors="addressRec.showErrors()"></cmp-importer-products>
             </div>
             <div class="row">
@@ -59,12 +60,12 @@
                            id="saveAddress"
                            ng-click="addressRec.updateAddressModel2()" ng-disabled="!addressRec.isEditable">
                     <input type="submit" value="{{'DELETE_ADDR'|translate}}" class="btn btn-danger"
-                           ng-click="addressRec.delete()">
+                           ng-click="addressRec.delete()" ng-disabled="!addressRec.isEditable">
                     <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                           ng-click="addressRec.discardChanges()">
+                           ng-click="addressRec.discardChanges()" ng-disabled="!addressRec.isEditable">
                 </div>
             </div>
         </div>
     </ng-form>
-     <!--<pre>address record model: {{addressRec.addressModel | json : spacing}}</pre>-->
+    <!--<pre>address record model: {{addressRec.addressModel | json : spacing}}</pre>-->
 </div>

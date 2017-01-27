@@ -2,10 +2,10 @@
     <ng-form name="addressForm" novalidate>
         <div class="row">
             <div class="form-group col-md-12" ng-class="{'has-error':addressForm.street.$invalid}">
-                <label for="street_{{$id}}" class="required full-width">
+                <label for="street_{{::$id}}" class="required full-width">
                     <span class="field-name">{{"STREET" |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <input type="text" class="form-control full-width" maxlength="120" id="street_{{$id}}"
+                    <input type="text" class="form-control full-width" maxlength="120" id="street_{{::$id}}"
                            name="street" ng-readonly="!adr.isEditable"
                            data-ng-model="adr.addressModel.street" required/>
                     <strong id="street-error" class="error" ng-if="adr.showError(addressForm.street)">
@@ -18,10 +18,10 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6" ng-class="{'has-error':addressForm.city.$invalid}">
-                <label for="city_{{$id}}" class="required full-width">
+                <label for="city_{{::$id}}" class="required full-width">
                     <span class="field-name">{{"CITY_TOWN" |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                    <input type="text" id="city_{{$id}}" name="city" data-ng-model="adr.addressModel.city"
+                    <input type="text" id="city_{{::$id}}" name="city" data-ng-model="adr.addressModel.city"
                            class="form-control  full-width" maxlength="60"
                            ng-readonly="!adr.isEditable" required/>
                     <strong id="city-error" class="error" ng-if="adr.showError(addressForm.city)">
@@ -40,7 +40,7 @@
                         <div class="rep-error" ng-class="{'has-error':addressForm.countryName.$invalid}">
                             <ui-select ng-model="adr.addressModel.country" id="country_{{::$id}}" name="countryName"
                                        on-select="adr.countryChanged()" required
-                                       ng-disabled="false" title="Choose a country"
+                                       ng-disabled="!adr.isEditable" title="Choose a country"
                                        class="rep-selectize-font full-width">
                                 <ui-select-match placeholder="Select or Search for country"
                                                  class="rep-selectize-font rep-selectize-dropdown form-control">
