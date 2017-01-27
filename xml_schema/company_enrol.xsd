@@ -33,6 +33,10 @@
 	<hpfb:element name="address_record" type="address_record_content"/>
 	<hpfb:element name="address_id" type="hpfb:string"/>
 	<hpfb:element name="contact_id" type="hpfb:string"/>
+	<hpfb:element name="selected_products" type="hpfb:string"/>
+	<hpfb:element name="dossier_id" type="char_7_content" />
+	<hpfb:element name="importer_products" type="importer_record_content" />
+	
 
 	<hpfb:complexType name="company_enrol_content" >
 		<hpfb:sequence>
@@ -61,7 +65,7 @@
 		</hpfb:all>
 	</hpfb:complexType>
 
-	<hpfb:complexType name="address_record_content" >
+	<hpfb:complexType name="address_record_content">
 		<hpfb:all>
 			<hpfb:element ref="address_id" />
 			<hpfb:element ref="amend_record"/>
@@ -71,6 +75,17 @@
 			<hpfb:element ref="importer"/>
 			<hpfb:element ref="company_name"/>
 			<hpfb:element ref="company_address_details"/>
+			<hpfb:element ref="importer_products" minOccurs="0" maxOccurs="1"/>
+			
 		</hpfb:all>
 		</hpfb:complexType>	
+
+		<hpfb:complexType name="importer_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="selected_products"/>
+			<hpfb:element ref="dossier_id" minOccurs="0" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+		</hpfb:complexType>	
 </hpfb:schema>
+
+

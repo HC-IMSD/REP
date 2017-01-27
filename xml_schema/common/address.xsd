@@ -17,7 +17,7 @@
 	<hpfb:element name="country">
 	<hpfb:complexType>
 			<hpfb:simpleContent>
-				<hpfb:extension base="country_list">
+				<hpfb:extension base="hpfb:string">
 					<hpfb:attribute name="label_en" type="hpfb:string"/>
 					<hpfb:attribute name="label_fr" type="hpfb:string"/>
 				</hpfb:extension>
