@@ -41,7 +41,7 @@
   "MEDICINAL_INGRED": "A. Medicinal (Active) Ingredients",
   "NONMEDICINAL_INGRED": "B. Non-Medicinal Ingredients",
   "CONTAINER_TYPES": "D. Container Types",
-  "ANIMAL_HUMAN_HDING": "C. Animal and / or Human Sourced Materials",
+  "ANIMAL_HUMAN_HDING": "C. Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug",
   "ROA_TITLE": "E. Routes of Administration",
   "COUNTRIES_MANUFACT": "F. Countries of manufacture for this drug product",
   "NOT_IN_LIST": "Not in list",
