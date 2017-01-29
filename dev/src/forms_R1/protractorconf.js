@@ -9,9 +9,7 @@ exports.config = {
     multiCapabilities: [
         {
             'browserName': 'chrome'
-        },
-        {
-            'browserName': 'MicrosoftEdge'
         }
-    ]
+    ],
+    rootElement: '#app-root'
 };

@@ -14,6 +14,8 @@ var dateFormat = require('dateformat');
 var gulpMerge = require('gulp-merge-json');
 var htmlmin = require('gulp-htmlmin');
 
+var connect = require('gulp-connect');
+
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -744,6 +746,29 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
             .pipe(gulp.dest(destDir))
     )
 };
+pipes.deleteSrcs = function (srcDir, componentFolders, serviceFileNames, directiveFolders) {
+    var fileArray = [];
+
+    for (var i = 0; i < componentFolders.length; i++) {
+        var folderPath = srcDir+'/components/' + componentFolders[i] + '**/*.*';
+        console.log(folderPath)
+        fileArray.push(folderPath);
+    }
+    //get all the activity services
+    for (var i = 0; i < serviceFileNames.length; i++) {
+        fileArray.push(srcDir+'/services/' + serviceFileNames[i] + "*.js")
+    }
+    //get all the activity directive folders
+    for (var i = 0; i < directiveFolders.length; i++) {
+        fileArray.push(srcDir+'/directives/' + directiveFolders[i] + "**/*.*");
+
+    }
+    return (
+       del(fileArray)
+    )
+};
+
+
 
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
     pipes.insertDateStamp(templatePath, metaObj)
@@ -787,11 +812,6 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
 
 
 pipes.createRootFileSet = function (rootPath, destDir, skipDate, generateInternal) {
-    /*
-     console.log(rootPath)
-     console.log(destDir)
-     console.log("skipdData "+skipDate)
-     console.log("generate internal"+generateInternal)*/
 
     if (generateInternal) {
         return (
@@ -1402,6 +1422,12 @@ gulp.task('prod-activity-copySourceFiles', function () {
     );
 });
 
+gulp.task('prod-activity-deleteSourceFiles', function () {
+    return (
+        pipes.deleteSrcs( paths.buildProd+'app/scripts',activityComponentFolders, activityServiceFileNames, activityDirectiveFolders)
+    );
+});
+
 
 gulp.task('prod-activity-compileSrcJs', ['prod-activity-compileTranslateFile', 'prod-activity-createRootJsFiles'], function () {
 
@@ -1661,6 +1687,14 @@ gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], fun
 
 
 /******END TRANSACTION PROD SCRIPTS******/
+
+
+gulp.task('connect-server-start', function() {
+    connect.server({
+        root:"build",
+        livereload:false
+    });
+});
 
 
 
