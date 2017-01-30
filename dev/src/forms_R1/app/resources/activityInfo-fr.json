@@ -43,8 +43,8 @@
   "DOSSIER_ID_PREV": "fr_Dossier Id (Previously File Number)",
   "RELATED_ACTIVITY": "fr_Related Activity",
   "AMEND_ACTIVITY": "fr_Amend Related Activity",
-  "IS_ADMIN_SUB": "fr_Is this an administrative submission license agreement?",
-  "LICENCE_AGREE": "fr_Is this an administrative submission license agreement",
+  "IS_ADMIN_SUB": "fr_Is this an Administrative Submission license agreement?",
+  "LICENCE_AGREE": "fr_Is this Administrative Submission a license agreement?",
   "DIN_TRANSFER": "fr_I confirm that this Administrative Submission is a DIN transfer of ownership",
   "REGACTIVSEARCH":"fr_Select or search for Regulatory Activity Type"
 

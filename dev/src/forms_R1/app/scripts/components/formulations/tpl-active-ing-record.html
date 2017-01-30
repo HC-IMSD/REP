@@ -9,13 +9,16 @@
                     <label for="ing-name_{{::$id}}" class="required full-width"><span
                             class="field-name">{{'ING_NAME'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName"
-                               id="ing-name_{{::$id}}" size="100" maxlength="100"
-                               uib-typeahead=" rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
-                               class="form-control rep-normal-font rep-margin-top" typeahead-show-hint="true" typeahead-min-length="2"
-                               ng-required="true" typeahead-no-results="ingRecCtrl.newIngred"
-                               typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
-                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html">
+                        <div class="rep-margin-top">
+                            <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName"
+                                   id="ing-name_{{::$id}}" size="100" maxlength="100"
+                                   uib-typeahead=" rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
+                                   class="form-control rep-normal-font" typeahead-show-hint="true"
+                                   typeahead-min-length="1"
+                                   ng-required="true" typeahead-no-results="ingRecCtrl.newIngred"
+                                   typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                                   typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                        </div>
                         <strong id="ingredientName-error" class="error"
                                 ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.ingredName.$invalid,ingRecCtrl.activeIngForm.ingredName.$touched)">
                                     <span class="label label-danger"
@@ -105,7 +108,8 @@
                 </div>
                 <div class="form-group col-md-5">
                     <label for="per_{{::$id}}"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
-                    <input type="text" id="per_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.per" size="40" maxlength="40"
+                    <input type="text" id="per_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.per" size="40"
+                           maxlength="40"
                            class="form-control" name="text"/>
                 </div>
             </div>
@@ -116,7 +120,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="nanoMaterial_{{::$id}}" ng-model="ingRecCtrl.ingModel.nanoMaterial"
                             class="form-control full-width" name="nanoFld" required
-                            ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id" >
+                            ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id">
 
                     </select>
                     <strong id="nanoMaterial-error" class="error"
@@ -204,14 +208,16 @@
                 </div>
             </div>
             <div class="row">
-                <div ng-if="ingRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
-                     role="alert" aria-live="polite">
-                    {{'SOURCED_INFO'|translate}}
+                <div class="col-xs-10">
+                    <div ng-if="ingRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
+                         role="alert" aria-live="polite">
+                        {{'SOURCED_INFO'|translate}}
+                    </div>
                 </div>
             </div>
         </fieldset>
-          <!--<pre> Model:-->
-              <!--{{ingRecCtrl.ingModel |json}}-->
-          <!--</pre>-->
+        <!--<pre> Model:-->
+        <!--{{ingRecCtrl.ingModel |json}}-->
+        <!--</pre>-->
     </div>
 </ng-form>

@@ -4,9 +4,9 @@
             <legend class="required">
                 <span class="field-name">{{'OTHER_LEGEND' |translate}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                <input id="roleMissing_{{$id}}" name="roleMissing" ng-required="true" ng-show="false"
+                <input id="roleMissing_{{::$id}}" name="roleMissing" ng-required="true" ng-show="false"
                        ng-model="sysCtrl.isSelected" required/>
-                <strong id="role-error{{$id}}" class="error" ng-if="sysCtrl.showErrorMissing()">
+                <strong id="role-error{{::$id}}" class="error" ng-if="sysCtrl.showErrorMissing()">
                          <span class="label label-danger" ng-messages="sysCtrl.otherForm.roleMissing.$error">
                              <span ng-message="required">{{"MSG_ERR_ROLE"|translate}}</span>
                          </span>
@@ -15,8 +15,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="adipose_{{$id}}">
-                            <input type="checkbox" name="adipose" id="adipose_{{$id}}"
+                        <label for="adipose_{{::$id}}">
+                            <input type="checkbox" name="adipose" id="adipose_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('ADIPOSE',sysCtrl.model.adipose)"
                                    ng-model="sysCtrl.model.adipose"/>
                             {{'ADIPOSE'|translate}}
@@ -26,8 +26,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="ascites_{{$id}}">
-                            <input type="checkbox" name="ascites" id="ascites_{{$id}}"
+                        <label for="ascites_{{::$id}}">
+                            <input type="checkbox" name="ascites" id="ascites_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('ASCITES',sysCtrl.model.ascites)"
                                    ng-model="sysCtrl.model.ascites"/>
                             {{'ASCITES'|translate}}
@@ -36,8 +36,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="antlerVelvet_{{$id}}">
-                            <input type="checkbox" name="ascites" id="antlerVelvet_{{$id}}"
+                        <label for="antlerVelvet_{{::$id}}">
+                            <input type="checkbox" name="ascites" id="antlerVelvet_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('ANTLERV',sysCtrl.model.antlerVelvet)"
                                    ng-model="sysCtrl.model.antlerVelvet"/>
                             {{'ANTLERV'|translate}}
@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="serum_{{$id}}">
-                            <input type="checkbox" name="serum" id="serum_{{$id}}"
+                        <label for="serum_{{::$id}}">
+                            <input type="checkbox" name="serum" id="serum_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('SERUM',sysCtrl.model.serum)"
                                    ng-model="sysCtrl.model.serum"/>
                             {{'SERUM'|translate}}
@@ -58,8 +58,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="wholeBlood_{{$id}}">
-                            <input type="checkbox" name="wholeBlood" id="wholeBlood_{{$id}}"
+                        <label for="wholeBlood_{{::$id}}">
+                            <input type="checkbox" name="wholeBlood" id="wholeBlood_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('WHOLEBLOOD',sysCtrl.model.wholeBlood)"
                                    ng-model="sysCtrl.model.wholeBlood"/>
                             {{'WHOLEBLOOD'|translate}}
@@ -68,8 +68,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="plasma_{{$id}}">
-                            <input type="checkbox" name="plasma" id="plasma_{{$id}}"
+                        <label for="plasma_{{::$id}}">
+                            <input type="checkbox" name="plasma" id="plasma_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('PLASMA',sysCtrl.model.plasma)"
                                    ng-model="sysCtrl.model.plasma"/>
                             {{'PLASMA'|translate}}
@@ -78,8 +78,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="embryonicTissue_{{$id}}">
-                            <input type="checkbox" name="embryonicTissue" id="embryonicTissue_{{$id}}"
+                        <label for="embryonicTissue_{{::$id}}">
+                            <input type="checkbox" name="embryonicTissue" id="embryonicTissue_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('EMBRYONICTISS',sysCtrl.model.embryonicTissue)"
                                    ng-model="sysCtrl.model.embryonicTissue"/>
                             {{'EMBRYONICTISS'|translate}}
@@ -88,8 +88,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="fetalTissue_{{$id}}">
-                            <input type="checkbox" name="fetalTissue" id="fetalTissue_{{$id}}"
+                        <label for="fetalTissue_{{::$id}}">
+                            <input type="checkbox" name="fetalTissue" id="fetalTissue_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('FETALTISS',sysCtrl.model.fetalTissue)"
                                    ng-model="sysCtrl.model.fetalTissue"/>
                             {{'FETALTISS'|translate}}
@@ -100,8 +100,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="boneMarrow_{{$id}}">
-                            <input type="checkbox" name="boneMarrow" id="boneMarrow_{{$id}}"
+                        <label for="boneMarrow_{{::$id}}">
+                            <input type="checkbox" name="boneMarrow" id="boneMarrow_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('BONEMARROW',sysCtrl.model.boneMarrow)"
                                    ng-model="sysCtrl.model.boneMarrow"/>
                             {{'BONEMARROW'|translate}}
@@ -110,8 +110,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="eyesCornea_{{$id}}">
-                            <input type="checkbox" name="eyesCornea" id="eyesCornea_{{$id}}"
+                        <label for="eyesCornea_{{::$id}}">
+                            <input type="checkbox" name="eyesCornea" id="eyesCornea_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('EYESCORNEA',sysCtrl.model.eyesCornea)"
                                    ng-model="sysCtrl.model.eyesCornea"/>
                             {{'EYESCORNEA'|translate}}
@@ -121,8 +121,8 @@
 
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="gallBladder_{{$id}}">
-                            <input type="checkbox" name="gallBladder" id="gallBladder_{{$id}}"
+                        <label for="gallBladder_{{::$id}}">
+                            <input type="checkbox" name="gallBladder" id="gallBladder_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('GALL',sysCtrl.model.gallBladder)"
                                    ng-model="sysCtrl.model.gallBladder"/>
                             {{'GALL'|translate}}
@@ -131,8 +131,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="fluidsOther_{{$id}}">
-                            <input type="checkbox" name="fluidsOther" id="fluidsOther_{{$id}}"
+                        <label for="fluidsOther_{{::$id}}">
+                            <input type="checkbox" name="fluidsOther" id="fluidsOther_{{::$id}}"
                                    ng-change="sysCtrl.otherChanged()"
                                    ng-model="sysCtrl.model.otherFluids"/>
                             {{'FLUIDS_OTHER'|translate}}
@@ -143,8 +143,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" ng-if="sysCtrl.otherChanged()">
-                        <label for="otherDetails_{{$id}}">{{'OTHERTISS_DETAILS'|translate}}
-                            <input type="text" size="40" maxlength="40" name="otherDetails" id="otherDetails_{{$id}}"
+                        <label for="otherDetails_{{::$id}}">{{'OTHERTISS_DETAILS'|translate}}
+                            <input type="text" size="40" maxlength="40" name="otherDetails" id="otherDetails_{{::$id}}"
                                    ng-change="sysCtrl.otherChanged()" ng-model-options="{updateOn: 'blur'}"
                                    ng-model="sysCtrl.model.otherDetails"/>
                         </label>

@@ -6,7 +6,7 @@
             </legend>
             <div class="row form-group">
                 <div class="col-md-6" ng-class="{'has-error':roaRecCtrl.roaRecForm.roaVal.$invalid}">
-                    <label for="roa{{$id}}" class="required">
+                    <label for="roa{{::$id}}" class="required">
                         <span class="field-name">{{'ROA_LBL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                       <!--  <select ng-model="roaRecCtrl.model.roa" class="form-control" id="roa{{$id}}" name="roaVal"
@@ -14,7 +14,7 @@
                                 ng-options="val |translate for val in  roaRecCtrl.roaList  | orderByTranslatedOtherFirst">
                         </select>-->
 
-                        <ui-select ng-model="roaRecCtrl.model.roa" id="roa{{$id}}" name="roaVal" on-select="roaRecCtrl.roaChanged($item, $model)"
+                        <ui-select ng-model="roaRecCtrl.model.roa" id="roa{{::$id}}" name="roaVal" on-select="roaRecCtrl.roaChanged($item, $model)"
                                    class="rep-selectize-dropdown rep-selectize-font" required ng-disabled="false"
                                    ng-class="{'has-error':roaRecCtrl.roaRecForm.roaVal.$invalid}" title="Choose a Route of Administration">
                             <ui-select-match placeholder="Select or Search for a route of administration"

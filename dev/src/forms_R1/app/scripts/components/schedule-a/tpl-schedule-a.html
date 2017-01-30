@@ -30,7 +30,7 @@
                                     <span class=" field-name">{{'SCHEDA_DISEASE'|translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                  <span>
-                 <input type="text" class="form-control" id="oneSelected_{{$id}}" name="oneDiseaseSelected" ng-show="false"
+                 <input type="text" class="form-control" id="oneSelected_{{::$id}}" name="oneDiseaseSelected" ng-show="false"
                         ng-model="$ctrl.isClaim" aria-hidden="true" required/>
                 <strong id="claim-select-error" class="error" ng-if="$ctrl.noClaimSelected()">
                              <span class="label label-danger" aria-live="polite" ng-messages="$ctrl.schedAForm.oneDiseaseSelected.$error">

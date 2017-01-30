@@ -32,10 +32,10 @@
   "OTHER_ROA_DETAILS": "fr_Other Route of Administration Details",
   "ROA_LBL": "fr_Route of Administration",
   "ROA_ABREV": "ROA",
-  "FORMULATIONS":"Formulations",
+  "FORMULATIONS": "Formulations",
   "APPENDIX4": "Annexe 4",
-  "FORMULATION_DETAILS":"fr_Formulation Record",
-  "FORMULATION_NAME":"fr_Formulation Name",
+  "FORMULATION_DETAILS": "fr_Formulation Record",
+  "FORMULATION_NAME": "fr_Formulation Name",
   "FORM_ID": "ID",
   "ANIMAL_CTRY_ORIGIN": "fr_Country of Origin of the Animals",
   "ADD_ROA": "fr_Add Route of Administration",
@@ -46,7 +46,8 @@
   "ROA_TITLE": "E. fr_Routes of Administration",
   "COUNTRIES_MANUFACT": "F. fr_Countries of manufacture for this drug product",
   "NOT_IN_LIST": "fr_Not in list",
-  "UNITS_SRCH":"fr_Select or Search Units",
-  "SOURCED_INFO":"fr_Please provide additional details of this ingredient/material on the Animal/Human Source tab."
-
+  "UNITS_SRCH": "fr_Select or Search Units",
+  "SOURCED_INFO": "fr_Please provide additional details of this ingredient/material on the Animal/Human Source tab.",
+  "DELETE_FORMULATION": "fr_Delete Formulation",
+  "COPY_FORMULATION": "fr_Copy formulation"
 }

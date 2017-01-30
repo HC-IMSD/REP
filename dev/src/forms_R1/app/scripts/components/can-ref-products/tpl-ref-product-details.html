@@ -24,13 +24,15 @@
                      ng-class="{'has-error':$ctrl.productDetailsForm.ingredName.$invalid}">
                     <label for="ref-ing-name_{{::$id}}" class="required"><span class="field-name">{{'MEDICINAL_INGREDIENT'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" ng-model="$ctrl.productModel.ingLabel" name="ingredName"
-                               id="ref-ing-name_{{::$id}}" size="100"  maxlength="100"
-                               uib-typeahead=" rec.label for rec in $ctrl.activeList | filter:{label:$viewValue} | limitTo:15"
-                               class="form-control rep-normal-font rep-margin-top" typeahead-show-hint="true" typeahead-min-length="2"
-                               required typeahead-no-results="$ctrl.newIngred"
-                               typeahead-on-select="$ctrl.ingredSelectionUpdated($item, $model, $label, $event)"
-                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html">
+                        <div class="rep-margin-top">
+                            <input type="text" ng-model="$ctrl.productModel.ingLabel" name="ingredName"
+                                   id="ref-ing-name_{{::$id}}" size="100" maxlength="100"
+                                   uib-typeahead=" rec.label for rec in $ctrl.activeList | filter:{label:$viewValue} | limitTo:15"
+                                   class="form-control rep-normal-font" typeahead-show-hint="true"
+                                   typeahead-min-length="1" required typeahead-no-results="$ctrl.newIngred"
+                                   typeahead-on-select="$ctrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                                   typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                        </div>
                         <!--<input type="text" id="med-ingredienth_{{$id}}" data-ng-model="$ctrl.productModel.medIngredient"-->
                         <!--class="form-control full-width" name="medIngredient" ng-required="true" maxlength="60"-->
                         <!--size="60"/>-->
@@ -43,10 +45,10 @@
                     </label>
                 </div>
                 <div class="col-md-3 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.strengths.$invalid}">
-                    <label for="strength_{{$id}}" class="required"><span
+                    <label for="strength_{{::$id}}" class="required"><span
                             class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="number" id="strength_{{$id}}" data-ng-model="$ctrl.productModel.strengths"
+                        <input type="number" id="strength_{{::$id}}" data-ng-model="$ctrl.productModel.strengths"
                                class="form-control full-width" name="strengths" ng-required="true" ng-min="0"/>
                         <strong id="strengths-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.strengths)">
@@ -62,13 +64,13 @@
             <div class="row">
 
                 <div class="form-group col-md-3">
-                    <label for="units_{{$id}}" class="required full-width">
+                    <label for="units_{{::$id}}" class="required full-width">
                         <span class="field-name">{{'UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
 
                         <div class="rep-pad-top">
                             <div class="rep-error" ng-class="{'has-error':$ctrl.productDetailsForm.nmUnits.$invalid}">
-                                <ui-select ng-model="$ctrl.productModel.units" id="units_{{$id}}" name="nmUnits"
+                                <ui-select ng-model="$ctrl.productModel.units" id="units_{{::$id}}" name="nmUnits"
                                            class="rep-selectize-font full-width" required>
                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
                                                      class="rep-selectize-font form-control">
@@ -93,9 +95,9 @@
                 </div>
                 <div class="form-group col-md-4" ng-show="$ctrl.isUnitsOther()"
                      ng-class="{'has-error':$ctrl.productDetailsForm.otherUnits.$invalid}">
-                    <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                    <label for="otherUnits_{{::$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="otherUnits_{{$id}}" data-ng-model="$ctrl.productModel.otherUnits"
+                        <input type="text" id="otherUnits_{{::$id}}" data-ng-model="$ctrl.productModel.otherUnits"
                                size="40" class="form-control" name="otherUnits"
                                maxlength="40" ng-required="$ctrl.isUnitsOther()"/>
                         <strong id="unitsOther-error" class="error"
@@ -115,13 +117,13 @@
             </div>
             <div class="row">
                 <div class="col-md-5 form-group">
-                    <label for="dosage-form_{{$id}}" class="required full-width">
+                    <label for="dosage-form_{{::$id}}" class="required full-width">
                         <span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <div class="rep-margin-top">
                             <div class="rep-error"
                                  ng-class="{'has-error':$ctrl.productDetailsForm.dosageForm.$invalid}">
-                                <ui-select ng-model="$ctrl.productModel.dosageForm" id="dosage-form_{{$id}}"
+                                <ui-select ng-model="$ctrl.productModel.dosageForm" id="dosage-form_{{::$id}}"
                                            name="dosageForm" class="rep-selectize-font full-width" ng-disabled="false"
                                            title="Choose a dosage form" required>
                                     <ui-select-match placeholder="Select or Search for a dosage form"
@@ -146,10 +148,10 @@
                 </div>
                 <div class="col-md-5 form-group" ng-class="{'has-error':$ctrl.productDetailsForm.dosageOther.$invalid}"
                      ng-show="$ctrl.isDosageOther()">
-                    <label for="dosage-form-other_(($id}}" class="required">
+                    <label for="dosage-form-other_((::$id}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="dosage-form-other_(($id}}"
+                        <input type="text" id="dosage-form-other_((::$id}}"
                                data-ng-model="$ctrl.productModel.dosageFormOther"
                                class="form-control" name="dosageOther" ng-required="$ctrl.isDosageOther()"
                                maxlength="60" size="60"/>
@@ -164,10 +166,10 @@
 
                 <div class="col-md-12 form-group"
                      ng-class="{'has-error':$ctrl.productDetailsForm.companyName.$invalid}">
-                    <label for="company-name_{{$id}}" class="required"><span
+                    <label for="company-name_{{::$id}}" class="required"><span
                             class="field-name">{{'COMPANY_NOABBREV'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <input type="text" id="company-name_{{$id}}" data-ng-model="$ctrl.productModel.companyName"
+                    <input type="text" id="company-name_{{::$id}}" data-ng-model="$ctrl.productModel.companyName"
                            class="form-control" name="companyName" ng-required="true" maxlength="60"
                            size="60"/>
                     <strong id="companyName-error" class="error"

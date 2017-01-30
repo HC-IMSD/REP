@@ -153,6 +153,7 @@
                 //load into data model as result json is not null
             }
             //if content is attempted to be loaded show all the errors
+            self.showNoRefReError();
             getAppendix4Errors();
             _setComplete();
             self.showAllErrors = true;

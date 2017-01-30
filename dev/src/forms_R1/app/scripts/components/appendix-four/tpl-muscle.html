@@ -4,9 +4,9 @@
             <legend class="required">
                 <span class="field-name">{{'MUSCLE_LEGEND' |translate}}</span>
                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                <input id="roleMissing_{{$id}}" name="roleMissing" ng-required="true" ng-show="false"
+                <input id="roleMissing_{{::$id}}" name="roleMissing" ng-required="true" ng-show="false"
                        ng-model="sysCtrl.isSelected" required/>
-                <strong id="role-error{{$id}}" class="error" ng-if="sysCtrl.showErrorMissing()">
+                <strong id="role-error{{::$id}}" class="error" ng-if="sysCtrl.showErrorMissing()">
                          <span class="label label-danger" ng-messages="sysCtrl.muscleForm.roleMissing.$error">
                              <span ng-message="required">{{"MSG_ERR_ROLE"|translate}}</span>
                          </span>
@@ -15,8 +15,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="abdomen_{{$id}}">
-                            <input type="checkbox" name="abdomen" id="abdomen_{{$id}}"
+                        <label for="abdomen_{{::$id}}">
+                            <input type="checkbox" name="abdomen" id="abdomen_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('ABDOMEN',sysCtrl.model.abdomen)"
                                    ng-model="sysCtrl.model.abdomen"/>
                             {{'ABDOMEN'|translate}}
@@ -26,8 +26,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="skull_{{$id}}">
-                            <input type="checkbox" name="skull" id="skull_{{$id}}"
+                        <label for="skull_{{::$id}}">
+                            <input type="checkbox" name="skull" id="skull_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('SKULL',sysCtrl.model.skull)"
                                    ng-model="sysCtrl.model.skull"/>
                             {{'SKULL'|translate}}
@@ -36,8 +36,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="bones_{{$id}}">
-                            <input type="checkbox" name="bones" id="bones_{{$id}}"
+                        <label for="bones_{{::$id}}">
+                            <input type="checkbox" name="bones" id="bones_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('BONES',sysCtrl.model.bones)"
                                    ng-model="sysCtrl.model.bones"/>
                             {{'BONES'|translate}}
@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="collagen_{{$id}}">
-                            <input type="checkbox" name="collagen" id="collagen_{{$id}}"
+                        <label for="collagen_{{::$id}}">
+                            <input type="checkbox" name="collagen" id="collagen_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('COLLAGEN',sysCtrl.model.collagen)"
                                    ng-model="sysCtrl.model.collagen"/>
                             {{'COLLAGEN'|translate}}
@@ -58,8 +58,8 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="tendonsLigaments_{{$id}}">
-                            <input type="checkbox" name="tendonsLigaments" id="tendonsLigaments_{{$id}}"
+                        <label for="tendonsLigaments_{{::$id}}">
+                            <input type="checkbox" name="tendonsLigaments" id="tendonsLigaments_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('TENDONS',sysCtrl.model.tendonsLigaments)"
                                    ng-model="sysCtrl.model.tendonsLigaments"/>
                             {{'TENDONS'|translate}}
@@ -68,8 +68,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="vertebralColumn_{{$id}}">
-                            <input type="checkbox" name="vertebralColumn" id="vertebralColumn_{{$id}}"
+                        <label for="vertebralColumn_{{::$id}}">
+                            <input type="checkbox" name="vertebralColumn" id="vertebralColumn_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('VERTEBRALCOLUMN',sysCtrl.model.vertebralColumn)"
                                    ng-model="sysCtrl.model.vertebralColumn"/>
                             {{'VERTEBRALCOLUMN'|translate}}
@@ -78,8 +78,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="muscle_{{$id}}">
-                            <input type="checkbox" name="muscle" id="muscle_{{$id}}"
+                        <label for="muscle_{{::$id}}">
+                            <input type="checkbox" name="muscle" id="muscle_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('MUSCLE',sysCtrl.model.muscle)"
                                    ng-model="sysCtrl.model.muscle"/>
                             {{'MUSCLE'|translate}}
@@ -88,8 +88,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="checkbox">
-                        <label for="muscleOther_{{$id}}">
-                            <input type="checkbox" name="muscleOther" id="muscleOther_{{$id}}"
+                        <label for="muscleOther_{{::$id}}">
+                            <input type="checkbox" name="muscleOther" id="muscleOther_{{::$id}}"
                                    ng-change="sysCtrl.otherChanged()"
                                    ng-model="sysCtrl.model.otherMuscle"/>
                             {{'MUSCLE_OTHER'|translate}}
@@ -100,8 +100,8 @@
             <div class="row">
                 <div class="col-md-6" ng-if="sysCtrl.otherChanged()">
                     <div class="form-group">
-                        <label for="muscleDetails_{{$id}}">{{'MUSCLE_DETAILS'|translate}}
-                            <input type="text" size="40" maxlength="40" name="muscleDetails" id="muscleDetails_{{$id}}"
+                        <label for="muscleDetails_{{::$id}}">{{'MUSCLE_DETAILS'|translate}}
+                            <input type="text" size="40" maxlength="40" name="muscleDetails" id="muscleDetails_{{::$id}}"
                                    ng-change="sysCtrl.otherChanged()" ng-model-options="{updateOn: 'blur'}"
                                    ng-model="sysCtrl.model.otherDetails"/>
                         </label>

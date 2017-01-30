@@ -50,7 +50,8 @@
                                           ng-messages="nIngRecCtrl.nonMedIngForm.strength.$error">
                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                           <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
-                                            <span ng-message="min"><span translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
+                                            <span ng-message="min"><span
+                                                    translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
                                     </span>
                         </strong>
                     </label>
@@ -58,13 +59,13 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-3">
-                    <label for="units_{{$id}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
+                    <label for="units_{{::$id}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-
                         <div class="rep-pad-top">
                             <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
-                                <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{$id}}" name="nmUnits"
-                                           class="rep-selectize-font" required>
+                                <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{::$id}}"
+                                           name="nmUnits"
+                                           class="rep-selectize-font full-width" required>
                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
                                                      class="rep-selectize-font rep-selectize-dropdown form-control">
                                         {{$select.selected[nIngRecCtrl.lang]}}
@@ -87,9 +88,9 @@
                     </label>
                 </div>
                 <div class="form-group col-md-4" ng-show="nIngRecCtrl.isUnitsOther()">
-                    <label for="otherUnits_{{$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                    <label for="otherUnits_{{::$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="otherUnits_{{$id}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
+                        <input type="text" id="otherUnits_{{::$id}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
                                size="40" class="form-control" name="otherUnits"
                                maxlength="40" ng-required="nIngRecCtrl.isUnitsOther()"/>
                         <strong id="unitsOther-error" class="error"
@@ -201,9 +202,11 @@
                 </div>
             </div>
             <div class="row">
-                <div ng-if="nIngRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
-                     role="alert" aria-live="polite">
-                    {{'SOURCED_INFO'|translate}}
+                <div class="col-xs-10">
+                    <div ng-if="nIngRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
+                         role="alert" aria-live="polite">
+                        {{'SOURCED_INFO'|translate}}
+                    </div>
                 </div>
             </div>
         </fieldset>

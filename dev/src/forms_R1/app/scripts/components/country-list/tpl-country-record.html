@@ -6,10 +6,10 @@
             </legend>
             <div class="row" ng-class="{'has-error':countryForm.countrySave.$invalid}">
                 <div class="form-group col-sm-5">
-                    <label for="country_{{$id}}" class="required">
+                    <label for="country_{{::$id}}" class="required">
                         <span class="field-name"> {{'COUNTRY_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <ui-select ng-model="countryRecCtrl.model.country" id="country_{{$id}}" name="countryName"
+                        <ui-select ng-model="countryRecCtrl.model.country" id="country_{{::$id}}" name="countryName"
                                    class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required
                                    ng-disabled="false" title="Choose a country" class="rep-selectize-font">
                             <ui-select-match placeholder="Select or Search for country" name="countryMatch"

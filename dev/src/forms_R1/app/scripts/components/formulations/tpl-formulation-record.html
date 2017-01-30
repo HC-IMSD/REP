@@ -1,4 +1,4 @@
-<ng-form name="formulationRecForm">
+<ng-form name="formulationRecForm" ng-model-options="{ debounce: 250, '*': '$inherit' }">
     <div class="">
         <fieldset>
             <legend>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</legend>
@@ -12,9 +12,9 @@
             </div>
             <div class="row">
                 <div class="col-md-5 form-group" ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}">
-                    <label for="dosage-form_{{$id}}" class="required rep-required-offset full-width"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
+                    <label for="dosage-form_{{::$id}}" class="required rep-required-offset full-width"><span class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                       <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="dosage-form_{{$id}}" name="dosageForm"
+                       <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="dosage-form_{{::$id}}" name="dosageForm"
                                    class="rep-selectize-dropdown rep-selectize-font" required
                                   ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}" title="Choose a dosage form">
                             <ui-select-match placeholder="Select or Search for a dosage form"
@@ -35,10 +35,10 @@
                 </div>
                 <div class="col-md-6 form-group" ng-class="{'has-error':formulationRecForm.dosageOther.$invalid}"
                      ng-show="formulRecCtrl.isDosageOther()">
-                    <label for="dosage-form-other_(($id}}" class="required">
+                    <label for="dosage-form-other_((::$id}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="dosage-form-other_(($id}}"
+                        <input type="text" id="dosage-form-other_((::$id}}"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
                                class="form-control full-width"
                                name="dosageOther"
@@ -133,7 +133,7 @@
                         </strong>
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noCountry" id="noCountry{{$id}}"
+                        <input type="text" required ng-show="false" name="noCountry" id="noCountry{{::$id}}"
                                aria-hidden="true"
                                data-ng-model="formulRecCtrl.noCountries"/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
@@ -147,9 +147,9 @@
             <div class="row">
 
                 <div class="btn-group-sm col-xs-12 text-right">
-                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Delete Formulation"
+                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="{{'DELETE_FORMULATION'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}} "
                            class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>
-                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="Copy formulation"
+                    <input type="submit" ng-if="formulRecCtrl.deleteBtn === true" value="{{'COPY_FORMULATION'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}"
                            class="btn btn-default" ng-click="formulRecCtrl.copy()"/>
                 </div>
             </div>

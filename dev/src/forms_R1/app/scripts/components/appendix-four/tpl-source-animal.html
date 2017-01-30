@@ -4,7 +4,7 @@
             <span class="field-name">{{'SOURCED_ANIMAL'|translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
                 <span>
-                 <input id="oneSelected_{{$id}}" name="oneSelected" ng-required="true" ng-show="false"
+                 <input id="oneSelected_{{::$id}}" name="oneSelected" ng-required="true" ng-show="false"
                         ng-model="saCtrl.isSelected" ng-required="true"/>
                 <strong id="roleSelected-role-error" class="error" ng-if="saCtrl.showAnimalError()">
                              <span class="label label-danger" aria-live="polite"
@@ -43,7 +43,7 @@
             <span class="field-name">{{'Countries of origin of the Animals' |translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
             <span>
-                 <input id="oneCountry_{{$id}}" name="oneCountry" ng-required="true" ng-show="false"
+                 <input id="oneCountry_{{::$id}}" name="oneCountry" ng-required="true" ng-show="false"
                         aria-hidden="true" ng-model="saCtrl.oneCountrySelected" ng-required="true"/>
                 <strong id="country-select-error" class="error" ng-if="saCtrl.showOneCountryError()">
                              <span class="label label-danger" aria-live="polite"

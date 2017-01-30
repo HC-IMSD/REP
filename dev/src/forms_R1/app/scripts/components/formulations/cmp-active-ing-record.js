@@ -43,7 +43,7 @@
         self.lang = $translate.proposedLanguage() || $translate.use();
         self.newIngred = false;
         self.ingModel = {
-            newIngred: 'Y',
+            autoIngred: 'N',
             ingId: "",
             ingLabel: "",
             cas: "",
@@ -69,10 +69,10 @@
                 //self.ingModel = changes.record.currentValue;
                 self.ingModel = angular.copy(changes.record.currentValue);
                 if (!self.ingModel.ingId) {
-                    self.ingModel.newIngred = 'Y';
+                    self.ingModel.autoIngred = 'N';
                     self.newIngred = true;
                 } else {
-                    self.ingModel.newIngred = 'N';
+                    self.ingModel.autoIngred = 'Y';
                     self.newIngred = false;
                 }
 
@@ -93,10 +93,10 @@
 
         $scope.$watch('ingRecCtrl.newIngred', function () {
             if (self.newIngred === true) {
-                self.ingModel.newIngred = 'Y';
+                self.ingModel.autoIngred = 'N';
                 self.ingModel.ingId = "";
             } else {
-                self.ingModel.newIngred = 'N';
+                self.ingModel.autoIngred = 'Y';
             }
         }, true);
 

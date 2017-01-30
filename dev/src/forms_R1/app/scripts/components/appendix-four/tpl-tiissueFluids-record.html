@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-md-3 form-group"
                  ng-class="{'has-error':tissuesSrcCtrl.tissuesRecForm.systemType.$invalid}">
-                <label for="systemType{{$id}}" class="required">
+                <label for="systemType{{::$id}}" class="required">
                     <span class="field-name">{{'SYSTEM_TYPE'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <select ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="systemType{{$id}}"
+                    <select ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="systemType{{::$id}}"
                             name="systemType" ng-required="true"
                             ng-change="tissuesSrcCtrl.systemChanged(tissuesSrcCtrl.tissuesRecForm.systemType)"
                             ng-options="val |translate for val in  tissuesSrcCtrl.systemList  | orderByTranslated">

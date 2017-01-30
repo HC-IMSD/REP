@@ -181,10 +181,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
-                        <label for="isRefProducts{{$id}}" class="required">
+                        <label for="isRefProducts" class="required">
                             <span class="field-name">H.&nbsp;{{'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <select class="form-control" required name="isRefProducts" id="isRefProducts{{$id}}"
+                            <select class="form-control" required name="isRefProducts" id="isRefProducts"
                                     ng-model="dos.dossierModel.isRefProducts"
                                     ng-options="val |translate for val in  dos.yesNoList">
 
@@ -200,12 +200,12 @@
                     </div>
                 </div>
                 <div class="row" ng-if="dos.isRefProducts()">
-                    <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec{{$id}}"
+                    <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec"
                            ng-model="dos.oneRefSelected" required/>
                     <section class="panel panel-default">
                         <header class="panel-heading">
                             <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
-                            <label for="oneRefRec{{$id}}">
+                            <label for="oneRefRec">
                                 <strong id="oneRefProduct-error" class="error"
                                         ng-if="dos.dossierForm.oneRefProductRec.$invalid">
                              <span class="label label-danger" aria-live="polite"

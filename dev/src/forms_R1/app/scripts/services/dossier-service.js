@@ -175,7 +175,7 @@
             }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFourList);
-                if (appendix4) {
+                if (appendix4 && appendix4.length>0) {
                     baseDossier.appendix4_group = appendix4;
                 }
                 var formulations = formulationListToOutput(jsonObj.drugProduct.formulations);
@@ -458,10 +458,10 @@
                     product.brandName = info[i].brand_name;
                     product.ingId= info[i].ingredient_id;
                     product.ingLabel = info[i].ingredient_name;
-                    product.newIngred="N";
+                    product.autoIngred="Y";
 
                     if (!product.ingId) {
-                        product.newIngred = 'Y'
+                        product.autoIngred = 'N'
                     }
 
                     product.dosageForm = "";
@@ -547,9 +547,12 @@
                         ing.sourceAnimalDetails.isCellLine = info[i].animal_sourced_section.is_cell_line;
                         ing.sourceAnimalDetails.isBiotechDerived = info[i].animal_sourced_section.is_biotech_derived;
                         ing.sourceAnimalDetails.isControlledPop = info[i].animal_sourced_section.is_controlled_pop;
-                        ing.sourceAnimalDetails.ageAnimals = info[i].animal_sourced_section.animal_age;
+                        ing.sourceAnimalDetails.ageAnimals = Number(info[i].animal_sourced_section.animal_age);
                         //var animalSrcObj=info[i].sourceAnimalDetails;
                         var animalTypeList = info[i].animal_sourced_section.animal_src_record;
+                        if (!(animalTypeList instanceof Array)){
+                            animalTypeList=[animalTypeList];
+                        }
                         for (var srcCount = 0; srcCount < animalTypeList.length; srcCount++) { //TODO function?
                             var oneRec = animalTypeList[srcCount];
                             var animalRecord = {};
@@ -650,7 +653,7 @@
                 var obj = {
                     "ingId": item.ingredient_id,
                     "ingLabel": item.ingredient_name,
-                    "newIngred": "N",
+                    "autoIngred": "N",
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
@@ -675,7 +678,7 @@
                 }
                 // used to identify if the ingredient is not from the type ahead lookup
                 if (!obj.ingId) {
-                    obj.newIngred = 'Y'
+                    obj.autoIngred = 'N'
                 }
                 resultList.push(obj);
 

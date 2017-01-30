@@ -19,10 +19,10 @@
         </div>
         <div class="row">
             <div class="col-md-4 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.ageAnimals.$invalid}">
-                <label for="ageAnimals{{$id}}" class="required">
+                <label for="ageAnimals{{::$id}}" class="required">
                     <span class="field-name">{{'AGEANIMALS'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="number" id="ageAnimals{{$id}}" name="ageAnimals"
+                    <input type="number" id="ageAnimals{{::$id}}" name="ageAnimals"
                            ng-model="animalSectCtrl.model.ageAnimals"
                            class="form-control full-width" required/>
                     <strong id="ageAnimals-error" class="error"
@@ -35,10 +35,10 @@
                 </label>
             </div>
             <div class="col-md-4 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.controlledPop.$invalid}">
-                <label for="controlledPop{{$id}}" class="required">
+                <label for="controlledPop{{::$id}}" class="required">
                     <span class="field-name">{{'CONTROLLEDPOP'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <select id="controlledPop{{$id}}" name="controlledPop"
+                    <select id="controlledPop{{::$id}}" name="controlledPop"
                             ng-model="animalSectCtrl.model.isControlledPop"
                             class="form-control full-width" required
                             ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
@@ -53,10 +53,10 @@
                 </label>
             </div>
             <div class="col-md-3 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.cellLine.$invalid}">
-                <label for="cellLine{{$id}}" class="required">
+                <label for="cellLine{{::$id}}" class="required">
                     <span class="field-name">{{'CELLLINE'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <select id="cellLine{{$id}}" name="cellLine"
+                    <select id="cellLine{{::$id}}" name="cellLine"
                             ng-model="animalSectCtrl.model.isCellLine" class="form-control full-width" required
                             ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
                     </select>
@@ -73,10 +73,10 @@
         </div>
         <div class="row">
             <div class="col-md-5 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.isBiotech.$invalid}">
-                <label for="biotech{{$id}}" class="required">
+                <label for="biotech{{::$id}}" class="required">
                     <span class="field-name">{{'BIOTECHDERIVED'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <select id="biotech{{$id}}" name="isBiotech" required
+                    <select id="biotech{{::$id}}" name="isBiotech" required
                             ng-model="animalSectCtrl.model.isBiotechDerived" class="form-control full-width"
                             ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
                     </select>

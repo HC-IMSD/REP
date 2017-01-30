@@ -15,7 +15,7 @@ var gulpMerge = require('gulp-merge-json');
 var htmlmin = require('gulp-htmlmin');
 
 var connect = require('gulp-connect');
-
+var cleanCSS = require('gulp-clean-css');
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -126,7 +126,18 @@ var rootFileNames = {
     dossierRoot: "dossierApp"
 };
 
+
+var styleFilesNames={
+    rep:'rep.css',
+    select: 'select.min.css',
+    select2Style: 'select2.min.css',
+    select2Image:'select2.png',
+    selectizeStyle:'selectize.default.css'
+
+}
+
 //Style file paths from source countrol to inject into the forms
+/*
 var styleFiles = {
     rep: paths.styles + 'rep.css',
     select: paths.styles + 'select.min.css',
@@ -134,6 +145,7 @@ var styleFiles = {
     select2Image: paths.styles + 'select2.png',
     selectizeStyle: paths.styles + 'selectize.default.css'
 };
+*/
 
 
 var changedFile = ""; // GLOBAL USED for Watcher storing changed file
@@ -190,6 +202,16 @@ var componentFolders = {
     theraClass: 'therapeutic-classification/',
     formulations: 'formulations/'
 };
+
+//exclude custom styles only lib
+var stylesProd=[
+    //paths.styles+styleFilesNames.rep,
+    paths.styles+styleFilesNames.select,
+    paths.styles+styleFilesNames.select2Style,
+    paths.styles+styleFilesNames.select2Image
+
+];
+
 
 //Activity Form Components
 var activityComponentFolders = [
@@ -654,9 +676,10 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                     addRootSlash: false
                 }))
             .pipe(inject(gulp.src([
-                    styleFiles.rep,
-                    styleFiles.select,
-                    styleFiles.select2Style
+                    paths.styles+styleFilesNames.rep,
+                    paths.styles+styleFilesNames.select,
+                    paths.styles+styleFilesNames.select2Style,
+                    paths.styles+styleFilesNames.select2Image
                 ]),
                 {
                     ignorePath: ignorePath,
@@ -771,6 +794,8 @@ pipes.deleteSrcs = function (srcDir, componentFolders, serviceFileNames, directi
 
 
 pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir) {
+
+
     pipes.insertDateStamp(templatePath, metaObj)
         .pipe(inject(gulp.src([htmlPartial]), {
             starttag: placeholders.mainContent,
@@ -789,9 +814,9 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
                 addRootSlash: false
             }))
         .pipe(inject(gulp.src([
-                styleFiles.rep,
-                styleFiles.select,
-                styleFiles.select2Style
+                paths.buildProd+paths.styles+"rep*.min.css",
+                paths.buildProd+paths.styles+styleFilesNames.select,
+                paths.buildProd+paths.styles+styleFilesNames.select2Style
             ]),
             {
                 ignorePath: ignorePath,
@@ -1341,9 +1366,24 @@ gulp.task('prod-global-copyDataFolder', function () {
  *  Copy all the styles to the activity folder
  * */
 gulp.task('prod-global-copyStyleFolder', function () {
-    var copySources = gulp.src([paths.styles + '**/*'],
+
+
+   /* var stylesProd=[
+        styleFiles.select,
+        styleFiles.select2Style,
+        styleFiles.select2Image,
+        styleFiles.select2Image];*/
+
+    var copySources = gulp.src(stylesProd,
         {read: true, base: ''});
-    return copySources.pipe(gulp.dest(paths.buildProd + 'app/styles/'))
+    var dateToday = createSuffixDate();
+    copySources.pipe(gulp.dest(paths.buildProd + 'app/styles/'));
+    copySources=gulp.src(paths.styles+styleFilesNames.rep, {read: true, base: ''});
+    return(
+        copySources.pipe(cleanCSS())
+            .pipe(rename("rep"+dateToday+ ".min.css"))
+            .pipe(gulp.dest(paths.buildProd + 'app/styles/'))
+    )
 
 });
 
@@ -1356,7 +1396,8 @@ gulp.task('prod-global-deleteNonMinifiedJs', function () {
     var basePath = paths.buildProd;
     var deletePaths = [
         basePath + 'app/scripts/**/*.js',
-        '!' + basePath + 'app/scripts/*.min.js'
+        '!' + basePath + 'app/scripts/*.min.js',
+        basePath + 'app/resources/**/*.*'
     ];
 
     return (del(deletePaths));
