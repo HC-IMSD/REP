@@ -53,14 +53,18 @@
             "tagName": "companyId"
         };
 
-        //TODO get rid of private variable
         vm.companyService = _company;
         vm.applTypes = vm.companyService.getApplicationTypes(); //TODO service ofor app types
         vm.company = _company.getModelInfo();
+
+       //TODO this is awkward for managing
         vm.alert1 = {
             show: false
         };
         vm.alert2 = {
+            show: false
+        };
+        vm.alert3 = {
             show: false
         };
         vm.lang="en";
@@ -261,6 +265,10 @@
             }
         }
 
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
         vm.closeAlert = function (value) {
             switch (value) {
                 case '1':
@@ -268,6 +276,9 @@
                     break;
                 case '2':
                     vm.alert2.show = false;
+                    break;
+                case '3':
+                    vm.alert3.show = false;
                     break;
             }
         };
@@ -280,6 +291,9 @@
                     break;
                 case '2':
                     vm.alert2.show = true;
+                    break;
+                case '3':
+                    vm.alert3.show = true;
                     break;
             }
         }

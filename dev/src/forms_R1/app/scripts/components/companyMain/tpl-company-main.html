@@ -165,7 +165,7 @@
                     </div>
                 </div>
             </section>
-            <div class="row">
+            <div class="row btn-group-sm">
                 <div class="form-group col-md-3">
                     <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()"
                             ng-disabled="main.disableDraftButton">{{'SAVE_WORKING' |translate}}
@@ -175,9 +175,38 @@
                     <button class="btn btn-default btn-lg active" ng-disabled="main.disableXML" id="btn_xmlSave"
                             ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
                     </button>
+                    <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            id="save-instructions-toggle" ng-click="main.addInstruct('3')"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
+                    </button>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alert3.show"
+                         class="alert-info" close="main.closeAlert('3')">
+                        <section>
+                            <div>
+                                <ul>
+                                    <li>
+                                        Click the "Save Draft for Filing" button to generate the draft XML file.
+                                    </li>
+                                    <li>
+                                        Submit the created file to Health Canada using the Common Electronic Submission
+                                        Gateway (CESG).
+                                    </li>
+                                    <li>
+                                        Refer to the REP guidance document for detailed information.
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </div>
-            <!--<pre>overall: {{main.company | json : spacing}}</pre>-->
+            <!--tewsts-->
+            <!--<pre>overall: {{main.company | json : spacing} }</pre>-->
         </div>
     </ng-form>
 
