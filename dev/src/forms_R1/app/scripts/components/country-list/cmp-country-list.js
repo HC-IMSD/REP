@@ -90,7 +90,7 @@
             } else {
                 self.countryList = countries;
                 self.hasUnknown = false;
-                self.emptyModel = {id: "", en: "", fr: ""};
+                self.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
                 self.columnDef = [
                     {
                         label: self.fieldLabel,

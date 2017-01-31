@@ -45,8 +45,8 @@
         /**
          * Updates the display value for the object for summary display
          */
-        vm.countryChanged=function(){
-            vm.model.display=vm.model.country.id;
+        vm.countryChanged=function($item,$model){
+            vm.model.display=$model.id;
         }
 
 

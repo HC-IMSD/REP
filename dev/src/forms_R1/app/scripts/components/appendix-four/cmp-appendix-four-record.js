@@ -1,12 +1,13 @@
 /**
  * Created by Abdessamad on 8/22/2016.
+ * //Is used
  */
 
 (function () {
     'use strict';
 
     angular
-        .module('appendix4RecordModule', ['tissuesFluidsOriginModule', 'sourceAnimalModule'])
+        .module('appendix4RecordModule', ['tissuesFluidsList','animalSourcedSection'])
 })();
 
 (function () {

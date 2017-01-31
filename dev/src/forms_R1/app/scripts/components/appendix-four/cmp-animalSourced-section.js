@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('animalSourcedSection',['animalSourcedList'])
+        .module('animalSourcedSection',['animalSourcedList','countryListModule'])
 })();
 
 (function () {
