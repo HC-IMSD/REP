@@ -15,6 +15,9 @@
         .constant('USA','USA')
         .constant("UNKNOWN","UNKNOWN")
         .constant("ENGLISH","en")
-        .constant("FRENCH","fr");
+        .constant("FRENCH","fr")
+        .constant("NEW_TYPE","NEW")
+        .constant("APPROVED_TYPE","APPROVED")
+        .constant("AMEND_TYPE","AMEND");
 
 })();

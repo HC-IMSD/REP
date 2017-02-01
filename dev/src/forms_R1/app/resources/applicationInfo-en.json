@@ -2,5 +2,6 @@
   "APPL_STATUS": "Application Status",
   "ENROL_VERSION": "Enrolment Version",
   "DATE_SAVED": "Date Last Saved",
-  "AMEND_ENROL":  "Amend Enrolment"
+  "AMEND_ENROL":  "Amend Enrolment",
+  "AMEND_MSG":"Edit records to be amended below."
 }

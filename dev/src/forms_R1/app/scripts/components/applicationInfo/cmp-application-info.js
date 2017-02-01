@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     angular
-        .module('applicationInfo', ['numberFormat'])
+        .module('applicationInfo', ['numberFormat','hpfbConstants'])
 })();
 
 (function () {
@@ -25,9 +25,11 @@
             }
         });
 
-    function ApplInfoCtrl() {
+    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE'];
+
+    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE) {
         var vm = this;
-        vm.applTypes = ["NEW", "AMEND", "APPROVED"];
+        vm.applTypes = [NEW_TYPE, AMEND_TYPE, APPROVED_TYPE];
         vm.formType = 'EXT';
         vm.infoModel = {
             applicationType: "NEW",
@@ -86,13 +88,20 @@
                 vm.isDossier = false;
             }
         }
+        vm.showAmendMsg=function(){
+
+            if(!vm.record){
+                return false;
+            }
+            return vm.record.applicationType===AMEND_TYPE;
+        };
 
         vm.isExtern = function () {
             return vm.formType == "EXT";
         };
         vm.setAmendState = function () {
             //TODO hardcode should be service
-            vm.setType({type: 'AMEND'});
+            vm.setType({type: AMEND_TYPE});
         }
 
     }

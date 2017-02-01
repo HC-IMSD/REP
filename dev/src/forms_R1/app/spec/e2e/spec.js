@@ -106,14 +106,66 @@ var RepContactObj = function () {
         return (_salutationSelect);
     };
     this.setFirstNameValue = function (value) {
-        return _firstNameText.sendKeys(value);
+         _firstNameText.sendKeys(value);
     };
     this.setLastNameValue = function (value) {
-        return _lastNameText.sendKeys(value);
+        _lastNameText.sendKeys(value);
     };
     this.setInitialsValue = function (value) {
-        return _intitialsText.sendKeys(value);
+         _intitialsText.sendKeys(value);
     };
+    this.setLanguageValue = function (value) {
+        browser.selectOption(by.model(_languageSelect), value);
+    };
+    this.setJobTitleValue = function (value) {
+        _jobTitleText.sendKeys(value);
+    };
+    this.setFaxValue = function (value) {
+        _faxText.sendKeys(value);
+    };
+    this.setPhoneValue = function (value) {
+        _phoneText.sendKeys(value);
+    };
+    this.setPhoneExtValue = function (value) {
+        _phoneExtText.sendKeys(value);
+    };
+    this.setEmailValue = function (value) {
+        _emailText.sendKeys(value);
+    };
+
+
+    this.getFirstNameValue = function () {
+       return  _firstNameText.getAttribute('value');
+    };
+    this.getLastNameValue = function () {
+        return  _lastNameText.getAttribute('value');
+    };
+
+    this.getInitialsValue = function () {
+        return  _intitialsText.getAttribute('value');
+
+    };
+    this.getLanguageValue = function () {
+        return _languageSelect.getAttribute('value');
+    }
+
+    this.getJobTitleValue = function () {
+        return _jobTitleText.getAttribute('value');
+    };
+    this.getFaxValue = function () {
+       return _faxText.getAttribute('value');
+    };
+    this.getPhoneValue = function () {
+        return _phoneText.getAttribute('value');
+    };
+    this.getPhoneExtValue = function () {
+        return _phoneExtText.getAttribute('value');
+    };
+    this.getEmailValue = function () {
+        _emailText.getAttribute('value');;
+    };
+
+
 
 
 };
