@@ -121,5 +121,7 @@
   "NERVOUS_DETAILS": "fr_Other nervous system  details",
   "OTHERTISS_DETAILS": "fr_Other tissue details",
   "REPRODUCTIVE_DETAILS": "Other reproductive system details",
-  "SKIN_DETAILS": "fr_Other skin and glandular system details"
+  "SKIN_DETAILS": "fr_Other skin and glandular system details",
+  "ADD_SOURCED":"fr_Add Sourced Ingredient",
+  "DELETE_SOURCED":"fr_Delete Sourced Ingredient"
 }

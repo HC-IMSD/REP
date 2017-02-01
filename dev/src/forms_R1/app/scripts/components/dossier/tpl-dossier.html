@@ -71,13 +71,14 @@
                             <span class="field-name">B.&nbsp;{{'COMPANY_ID' |translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <input type="text" class="form-control full-width" id="company-id"
-                                   name="companyId" required="true" maxlength="6"
+                                   name="companyId" required="true" maxlength="6" minlength="5"
                                    ng-model="dos.dossierModel.companyID"/>
                             <strong id="company-id-error" class="error"
                                     ng-if="dos.showError(dos.dossierForm.companyId.$invalid,dos.dossierForm.companyId.$touched)">
                                     <span class="label label-danger"
                                           ng-messages="dos.dossierForm.companyId.$error">
                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                         <span ng-message="minlength"><span translate="MSG_LENGTH_MIN5"></span></span>
                                     </span>
                             </strong>
                         </label>
@@ -231,9 +232,6 @@
                             id="drugProduct-instructions-toggle" ng-click="dos.addInstruct('3')"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_DRUG_PRODUCT'|translate}}"</span>
                     </button>
-                    <!-- <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('3')">
-                         {{'Drug Product Instructions'|translate}}
-                     </button>-->
                 </div>
                 <h2 class="panel-title">{{'DRUG_PRODUCT'|translate}}</h2>
             </header>
@@ -244,7 +242,6 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group">
-
                         <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
                                       show-list-errors="dos.showErrors()"
                                       parent-dirty="dos.dossierForm.$dirty"></cmp-drug-use>

@@ -49,8 +49,11 @@
         var _company = new CompanyService();
         vm.configCompany = {
             "label": "COMPANY_ID",
+            "minFieldLength":"5",
             "fieldLength": "6",
-            "tagName": "companyId"
+            "tagName": "companyId",
+            "minErrorMsg":"MSG_LENGTH_MIN5",
+            "errorMsg":"MSG_LENGTH_6NUM",
         };
 
         vm.companyService = _company;

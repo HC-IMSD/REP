@@ -11,7 +11,7 @@
                     </strong>
                 </header>
                 <input type="text" ng-show="false" required aria-hidden="true" name="noAnimalSrc"
-                       ng-model="animalSectCtrl.oneAnimal"/>
+                       ng-model="animalSectCtrl.oneAnimal" aria-hidden="true"/>
                 <div class="panel-body">
                     <cmp-animal-sourced-list records="animalSectCtrl.model.animalSrcList"></cmp-animal-sourced-list>
                 </div>
@@ -23,13 +23,15 @@
                     <span class="field-name">{{'AGEANIMALS'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="number" id="ageAnimals{{::$id}}" name="ageAnimals"
-                           ng-model="animalSectCtrl.model.ageAnimals"
+                           ng-model="animalSectCtrl.model.ageAnimals" ng-model-options="{debounce: 0}"
+                           only-digits only-max="5"
                            class="form-control full-width" required/>
                     <strong id="ageAnimals-error" class="error"
                             ng-if="animalSectCtrl.showError(animalSectCtrl.anSectForm.ageAnimals)">
                         <span class="label label-danger"
                               ng-messages="animalSectCtrl.anSectForm.ageAnimals.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                             <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
                         </span>
                     </strong>
                 </label>
@@ -39,8 +41,7 @@
                     <span class="field-name">{{'CONTROLLEDPOP'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <select id="controlledPop{{::$id}}" name="controlledPop"
-                            ng-model="animalSectCtrl.model.isControlledPop"
-                            class="form-control full-width" required
+                            ng-model="animalSectCtrl.model.isControlledPop" class="form-control full-width" required
                             ng-options="val |translate for val in animalSectCtrl.yesNoUnknownList">
                     </select>
                     <strong id="conPop-error" class="error"

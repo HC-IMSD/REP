@@ -16,6 +16,7 @@
   "IMPORTER_SEL": "Importer Role already Selected",
   "REPPRIM_SEL": "REP Primary Role already Selected",
   "REPALT_SEL": "REP Alternate Role already Selected",
+  "MSG_LENGTH_MIN5": "Please enter at least 5 digits",
   "MSG_LENGTH_6": "Please enter 6 characters.",
   "MSG_LENGTH_6NUM": "Please enter 6 digits.",
   "MSG_LENGTH_8NUM": "Please enter 8 digits.",

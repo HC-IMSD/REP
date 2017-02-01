@@ -41,7 +41,7 @@
         self.UnitsList=DossierLists.getUnitsList();
         self.savePressed = false;
         self.lang = $translate.proposedLanguage() || $translate.use();
-        self.newIngred = false;
+        //self.newIngred = false;
         self.ingModel = {
             autoIngred: 'N',
             ingId: "",
@@ -70,10 +70,10 @@
                 self.ingModel = angular.copy(changes.record.currentValue);
                 if (!self.ingModel.ingId) {
                     self.ingModel.autoIngred = 'N';
-                    self.newIngred = true;
+                    //self.newIngred = true;
                 } else {
                     self.ingModel.autoIngred = 'Y';
-                    self.newIngred = false;
+                    //self.newIngred = false;
                 }
 
             }
@@ -91,27 +91,39 @@
             return(self.ingModel.humanAnimalSourced===YES);
         };
 
-        $scope.$watch('ingRecCtrl.newIngred', function () {
+       /* $scope.$watch('ingRecCtrl.newIngred', function () {
             if (self.newIngred === true) {
                 self.ingModel.autoIngred = 'N';
                 self.ingModel.ingId = "";
             } else {
                 self.ingModel.autoIngred = 'Y';
             }
-        }, true);
+        }, true);*/
 
         /**
-         * Only fires on selection from the list
+         * Fires on selection OR when the value has changed
+         * A bit of overkill, but avoids using a watch and worksaround the case where autocomplete is considered
+         * In the list but not selected.
          * @param item
          * @param model
          * @param label
          * @param event
          */
         self.ingredSelectionUpdated = function (item, model, label, event) {
-            self.ingModel.ingId = item.id;
+
+            //if no item this means fired from the change event
+
+            if(!item){
+                self.ingModel.ingId="";
+                self.ingModel.autoIngred = 'N';
+            }else {
+                self.ingModel.ingId = item.id;
+                self.ingModel.autoIngred = 'Y';
+            }
         };
 
         self.saveIng = function () {
+            console.log(self.ingModel);
             if (self.activeIngForm.$valid) {
                 if (self.record) {
                     self.onUpdate({ing: self.ingModel});

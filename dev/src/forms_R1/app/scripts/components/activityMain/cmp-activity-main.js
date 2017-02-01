@@ -74,7 +74,8 @@
             "label": "CONTROL_NUMBER",
             "fieldLength": "6",
             "tagName": "dstsControlNumber",
-            "errorMsg": "MSG_LENGTH_6"
+            "errorMsg": "MSG_LENGTH_6",
+            "isNumber": true
         };
         vm.CommonLists = CommonLists;
         vm.yesNoList = vm.CommonLists.getYesNoList();

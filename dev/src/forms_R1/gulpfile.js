@@ -1086,7 +1086,7 @@ gulp.task('dev-activity-createRootJS', function () {
     var dest = paths.buildDevActivity + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.activityRoot + '.js';
     var skipDate=true;
-    var generateInternalForms=false;
+    var generateInternalForms=true;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );

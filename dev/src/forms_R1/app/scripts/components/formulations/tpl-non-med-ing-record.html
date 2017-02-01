@@ -6,6 +6,7 @@
                 <div class="form-group col-md-6">
                     <label for="variant-id"><span class="field-name">{{'VARIANT_NAME'|translate}}</span>
                         <input type="text" id="variant-id" data-ng-model="nIngRecCtrl.ingModel.varId"
+                               ng-model-options="{ debounce: $inherit}"
                                class="form-control full-width" name="text" maxlength="100" size="100"/>
                     </label>
                 </div>
@@ -16,6 +17,7 @@
                     <label for="ing-name" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="ing-name" data-ng-model="nIngRecCtrl.ingModel.ingName"
+                               ng-model-options="{ debounce: $inherit}"
                                class="form-control full-width" name="nonmedName" ng-required="true" maxlength="100"
                                size="100"/>
                         <strong id="ingredientName-error" class="error"
@@ -32,18 +34,20 @@
                 <div class="form-group col-md-3">
                     <label for="cas"><span class="field-name">{{'CAS'|translate}}</span></label>
                     <input type="text" id="cas" data-ng-model="nIngRecCtrl.ingModel.cas" maxlength="12" size="12"
-                           class="form-control full-width" name="casNum"/>
+                           ng-model-options="{ debounce: $inherit}" class="form-control full-width" name="casNum"/>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="standard"><span class="field-name">{{'STANDARD'|translate}}</span></label>
                     <input type="text" id="standard" data-ng-model="nIngRecCtrl.ingModel.standard"
+                           ng-model-options="{ debounce: $inherit}"
                            class="form-control full-width" name="standard" maxlength="40" size="40"/>
                 </div>
                 <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.strength.$invalid}">
                     <label for="strength" class="required"><span class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="number" id="strength" data-ng-model="nIngRecCtrl.ingModel.strength"
-                               class="form-control full-width" name="strength" ng-required="true" ng-min="0"/>
+                               ng-model-options="{ debounce: $inherit}" class="form-control full-width" name="strength"
+                               ng-required="true" ng-min="0"/>
                         <strong id="strength-error" class="error"
                                 ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.strength.$invalid,nIngRecCtrl.nonMedIngForm.strength.$touched)">
                                     <span class="label label-danger"
@@ -64,7 +68,7 @@
                         <div class="rep-pad-top">
                             <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
                                 <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{::$id}}"
-                                           name="nmUnits"
+                                           name="nmUnits"  ng-model-options="{debounce: 0}"
                                            class="rep-selectize-font full-width" required>
                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
                                                      class="rep-selectize-font rep-selectize-dropdown form-control">
@@ -91,7 +95,7 @@
                     <label for="otherUnits_{{::$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="otherUnits_{{::$id}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
-                               size="40" class="form-control" name="otherUnits"
+                               size="40" class="form-control" name="otherUnits" ng-model-options="{ debounce: $inherit}"
                                maxlength="40" ng-required="nIngRecCtrl.isUnitsOther()"/>
                         <strong id="unitsOther-error" class="error"
                                 ng-if="ingRecCtrl.showError(nIngRecCtrl.nonMedIngForm.otherUnits.$invalid,nIngRecCtrl.nonMedIngForm.otherUnits.$touched)">
@@ -104,7 +108,7 @@
 
                 <div class="form-group col-md-5">
                     <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
-                    <input type="text" id="per" data-ng-model="nIngRecCtrl.ingModel.per"
+                    <input type="text" id="per" data-ng-model="nIngRecCtrl.ingModel.per" ng-model-options="{ debounce: $inherit}"
                            class="form-control" name="perVal" maxlength="40" size="40"/>
                 </div>
             </div>
@@ -132,6 +136,7 @@
                         <span class="field-name">{{'NANO_MATERIAL_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <input type="text" id="nanoMaterialOther" data-ng-model="nIngRecCtrl.ingModel.nanoMaterialOther"
+                           ng-model-options="{ debounce: $inherit}"
                            class="form-control full-width" name="nanoOtherFld" ng-required="true" maxlength="40"/>
                     <strong id="nanoMaterialOther-error" class="error"
                             ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nanoOtherFld.$invalid,nIngRecCtrl.nonMedIngForm.nanoOtherFld.$touched)">

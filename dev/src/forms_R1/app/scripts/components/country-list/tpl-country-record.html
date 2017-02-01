@@ -10,6 +10,7 @@
                         <span class="field-name"> {{'COUNTRY_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <ui-select ng-model="countryRecCtrl.model.country" id="country_{{::$id}}" name="countryName"
+                                   ng-model-options="{ debounce: 0}"
                                    class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required
                                    ng-disabled="false" title="Choose a country" class="rep-selectize-font">
                             <ui-select-match placeholder="Select or Search for country" name="countryMatch"
@@ -22,13 +23,11 @@
                         </ui-select>
                         <strong id="countryName-error" class="error"
                                 ng-if="countryRecCtrl.showError(countryForm.countryName.$invalid,countryForm.countryName.$touched)">
-
                             <span class="label label-danger" ng-messages="countryForm.countryName.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                             </span>
                         </strong>
                     </label>
-
                 </div>
             </div>
             <div class="row">
@@ -38,7 +37,7 @@
                         <span class="field-name">{{'UNKNOWN_COUNTRY_DETAILS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="unknown-country-details" class="form-control" name="unknownCountry"
-                               required
+                               required ng-model-options="{ debounce: '$inherit'}"
                                maxlength="100" size="100" ng-model="countryRecCtrl.model.unknownCountryDetails"/>
                         <strong id="country-error" class="error"
                                 ng-if="countryRecCtrl.showError(countryForm.unknownCountry.$invalid,countryForm.unknownCountry.$touched)">

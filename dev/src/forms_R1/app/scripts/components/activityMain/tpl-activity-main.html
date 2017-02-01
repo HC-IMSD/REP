@@ -15,9 +15,6 @@
                             class="fa fa-question-circle fa-2x"></span><span
                             class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
                     </button>
-                    <!-- <button class="btn btn-default btn-xs" ng-click="main.addInstruct('1')">
-                         {{'HELP_FILE_LOAD'|translate}}
-                     </button>-->
                 </div>
                 <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
             </header>
@@ -67,14 +64,14 @@
                                     <span class="field-name">{{'COMPANY_ID' |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                     <input type="text" class="form-control" id="companyId_{{$id}}"
-                                           maxlength="6" name="companyId" ng-minlength="6"
-                                           ng-model="main.activityRoot.companyId" ng-required="true"/>
+                                           minlength="5" maxlength="6" name="companyId"
+                                           ng-model="main.activityRoot.companyId" required/>
                                     <strong id="companyId-error" class="error">
                         <span class="label label-danger"
                               ng-if="main.showError(main.activityEnrolForm.companyId.$touched,main.activityEnrolForm.companyId.$invalid)"
                               ng-messages="main.activityEnrolForm.companyId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                              <span ng-message="minlength"><span translate="MSG_LENGTH_MIN5"></span></span>
                         </span>
                                     </strong>
                                 </label>
@@ -130,22 +127,25 @@
                                 <label for="regActivityType" class="required full-width">
                                     <span class="field-name">{{'ACTIVITY_TYPE' |translate}}</span>
                                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                                     <div class="rep-pad-top">
-                                          <div class="rep-error" ng-class="{'has-error':main.activityEnrolForm.activityType.$invalid}">
-                                              <ui-select ng-model="main.activityRoot.regActivityType" id="regActivityType" name="activityType"
-                                                         class="rep-selectize-font full-width" on-select="main.updateActivityType()" required>
-                                                  <ui-select-match placeholder="{{'REGACTIVSEARCH' |translate}}"
-                                                                   class="rep-selectize-font form-control">
-                                                      {{$select.selected[main.lang]}}
-                                                  </ui-select-match>
-                                                  <ui-select-choices
-                                                          repeat="activityValue in main.activityTypeList | filter: {[main.lang]:$select.search}"
-                                                          class="rep-selectize-font">
-                                                      <span ng-bind-html="activityValue[main.lang] | highlight: $select.search"></span>
-                                                  </ui-select-choices>
-                                              </ui-select>
-                                          </div>
-                                      </div>
+                                    <div class="rep-pad-top">
+                                        <div class="rep-error"
+                                             ng-class="{'has-error':main.activityEnrolForm.activityType.$invalid}">
+                                            <ui-select ng-model="main.activityRoot.regActivityType" id="regActivityType"
+                                                       name="activityType"
+                                                       class="rep-selectize-font full-width"
+                                                       on-select="main.updateActivityType()" required>
+                                                <ui-select-match placeholder="{{'REGACTIVSEARCH' |translate}}"
+                                                                 class="rep-selectize-font form-control">
+                                                    {{$select.selected[main.lang]}}
+                                                </ui-select-match>
+                                                <ui-select-choices
+                                                        repeat="activityValue in main.activityTypeList | filter: {[main.lang]:$select.search}"
+                                                        class="rep-selectize-font">
+                                                    <span ng-bind-html="activityValue[main.lang] | highlight: $select.search"></span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
                                     <strong id="regActivityType-error" class="error">
                         <span class="label label-danger"
                               ng-if="main.showError(main.activityEnrolForm.activityType.$touched,main.activityEnrolForm.activityType.$invalid)"
@@ -166,7 +166,8 @@
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="feeClass"
                                                 name="feeClass" ng-model="main.activityRoot.feeClass"
-                                                required ng-options="fee[main.lang] for fee in main.feeClassList track by fee.id">
+                                                required
+                                                ng-options="fee[main.lang] for fee in main.feeClassList track by fee.id">
                                         </select>
                                         <strong id="feeClass-error" class="error">
                         <span class="label label-danger"
@@ -247,7 +248,7 @@
                     </div>
                     <div class="row">
                         <!--<div class="col-xs-12 form-group">-->
-                            <div class="col-xs-6 form-group" >
+                        <div class="col-xs-6 form-group">
                             <label for="setAdminSubId" class="required">
                                 <span class="field-name">{{"IS_ADMIN_SUB" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
@@ -258,14 +259,14 @@
                                 </span>
                                 </strong>
                             </label>
-                            </div>
-                            <div class="col-xs-2" ng-class="{'has-error':main.activityEnrolForm.isAdminSub.$invalid}">
-                                <select id="setAdminSubId" name="isAdminSub"
-                                        ng-model="main.activityRoot.isAdminSub" class="form-control"
-                                        ng-change="main.setAdminSubmission()"
-                                        ng-options="choice |translate for choice in main.yesNoList" required></select>
-                            </div>
-                      <!--  </div>-->
+                        </div>
+                        <div class="col-xs-2" ng-class="{'has-error':main.activityEnrolForm.isAdminSub.$invalid}">
+                            <select id="setAdminSubId" name="isAdminSub"
+                                    ng-model="main.activityRoot.isAdminSub" class="form-control"
+                                    ng-change="main.setAdminSubmission()"
+                                    ng-options="choice |translate for choice in main.yesNoList" required></select>
+                        </div>
+                        <!--  </div>-->
                     </div>
                     <div ng-if="main.showActivity">
                         <section class="panel  panel-default">
@@ -307,11 +308,11 @@
                             </div>
                         </div>
                         <div class="container-fluid">
-                        <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
-                                              show-list-errors="main.showErrors()" is-amend="main.formAmend"
-                                              parent-dirty="main.activityEnrolForm.$dirty">
+                            <cmp-rep-contact-list contacts="main.activityRoot.contactRecord" on-update=""
+                                                  show-list-errors="main.showErrors()" is-amend="main.formAmend"
+                                                  parent-dirty="main.activityEnrolForm.$dirty">
 
-                        </cmp-rep-contact-list>
+                            </cmp-rep-contact-list>
                         </div>
 
                     </div>

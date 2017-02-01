@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     angular
-        .module('applicationInfo', [])
+        .module('applicationInfo', ['numberFormat'])
 })();
 
 (function () {
@@ -34,12 +34,16 @@
             enrolmentVersion: "0.0",
             dateSaved: ""
         };
-        vm.fieldIdLabel="";
-        vm.fieldLength="";
-        vm.tagName="fieldId";
+        vm.fieldIdLabel = "";
+        vm.minFieldLength = "";
+        vm.isNumber=false;
+        vm.fieldLength = "";
+        vm.tagName = "fieldId";
         vm.setAsIncomplete = true;
         vm.errorMsg = "";
+        vm.maxErrorMsg = "";
         vm.isDossier = false;
+        vm.isNumber=false;
 
         vm.$onInit = function () {
             ///do init
@@ -54,20 +58,35 @@
             if (changes.isIncomplete) {
                 vm.setAsIncomplete = changes.isIncomplete.currentValue;
             }
-            if(changes.configureIdField){
+            if (changes.configureIdField) {
                 _setConfigItems(changes.configureIdField.currentValue);
             }
         };
-        function _setConfigItems(configJson){
-          vm.fieldIdLabel=  configJson.label;
-            vm.fieldLength = configJson.fieldLength;
-          vm.tagName=configJson.tagName;
+        function _setConfigItems(configJson) {
+            vm.fieldIdLabel = configJson.label;
+            vm.fieldLength = configJson.fieldLength; //this is the max
+            vm.tagName = configJson.tagName;
+            if (configJson.minFieldLength) {
+                vm.minFieldLength = configJson.minFieldLength;
+            } else {
+                vm.minFieldLength = configJson.fieldLength;
+            }
             vm.errorMsg = configJson.errorMsg;
+
+            if (configJson.minErrorMsg) {
+                vm.minErrorMsg = configJson.minErrorMsg;
+            } else {
+                vm.minErrorMsg = configJson.errorMsg;
+            }
+            if(configJson.isNumber){
+                vm.isNumber=configJson.isNumber;
+            }
             vm.isDossier = configJson.isDossier;
             if (angular.isUndefined(vm.isDossier)) {
                 vm.isDossier = false;
             }
         }
+
         vm.isExtern = function () {
             return vm.formType == "EXT";
         };

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('animalSourcedSection',['animalSourcedList','countryListModule'])
+        .module('animalSourcedSection',['animalSourcedList','countryListModule','numberFormat'])
 })();
 
 (function () {

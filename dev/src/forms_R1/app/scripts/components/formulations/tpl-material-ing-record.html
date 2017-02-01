@@ -9,6 +9,7 @@
                         <span class="field-name">{{'MATERIAL_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="matIngName" data-ng-model="mirCtrl.mirModel.ingredientName"
+                               ng-model-options="{ debounce: $inherit}"
                                maxlength="100" size="100" ng-required="true"
                                class="form-control" name="matIngName" ng-required="true"/>
                         <strong id="msterialName-error" class="error"
@@ -24,12 +25,13 @@
             <div class="row">
                 <div class="form-group col-md-2">
                     <label for="cas"><span class="field-name">{{'CAS_NUM'|translate}}</span></label>
-                    <input type="text" id="cas" data-ng-model="mirCtrl.mirModel.cas"
+                    <input type="text" id="cas" data-ng-model="mirCtrl.mirModel.cas" ng-model-options="{ debounce: $inherit}"
                            class="form-control" name="casNum" maxlength="12" size="12"/>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="standard"><span class="field-name">{{'STANDARD'|translate}}</span></label>
                     <input type="text" id="standard" data-ng-model="mirCtrl.mirModel.ingredientStandard"
+                           ng-model-options="{ debounce: $inherit}"
                            class="form-control" name="stamdard" maxlength="40" size="40"/>
                 </div>
                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
@@ -38,8 +40,7 @@
                         <span class="field-name">{{'IN_FINAL_CONTAINER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <select id="inFinalContainer" ng-model="mirCtrl.mirModel.inFinalContainer"
-                                ng-required="true"
-                                class="form-control" name="inFinal"
+                                ng-required="true" class="form-control" name="inFinal"
                                 ng-options="val |translate for val in  mirCtrl.yesNoList">
                         </select>
                         <strong id="inFinalContainer-error" class="error"

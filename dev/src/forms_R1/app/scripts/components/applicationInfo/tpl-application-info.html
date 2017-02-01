@@ -24,13 +24,14 @@
             <label ng-if="!infoCtrl.isDossier" for="field-id-text_{{$id}}">{{infoCtrl.fieldIdLabel |translate}}
                 <input type="text" class="form-control" id="field-id-text_{{$id}}"
                        ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="fieldId"
-                       ng-minlength="{{infoCtrl.fieldLength}}"
+                       ng-minlength="{{infoCtrl.minFieldLength}}" only-digits="{{infoCtrl.isNumber}}"
                        ng-model="infoCtrl.record[infoCtrl.tagName]" ng-required="!infoCtrl.isExtern()"/>
                 <strong id="code-error" class="error">
                         <span class="label label-danger" ng-if="infoCtrl.applInfoForm.fieldId.$invalid"
                               ng-messages="infoCtrl.applInfoForm.fieldId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
+                              <span ng-message="minlength"><span translate="{{infoCtrl.minErrorMsg}}"></span></span>
+                            <span ng-message="maxlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
                         </span>
                 </strong>
             </label>

@@ -10,7 +10,12 @@
         .module('numberFormat', []);
 
 })();
-
+/***
+ * Directive for restricting user input to numbers
+ * Options: use only-max to indicate the number of digits (integer)
+ *  use flag intNeg (ie  only-digits="intNeg") to indicate to allow negative numbers
+ *  Currently this directive only supports integers
+ */
 (function () {
     'use strict';
 
@@ -32,6 +37,7 @@
                 if (inputValue == undefined) return '';
                 var isNumber = false;
                 var max = -1;
+                var ignore = false;
                 var tempVal = "" + inputValue;
                 if (attrs['type'] && attrs['type'] === 'number') {
                     isNumber = true;
@@ -45,8 +51,14 @@
                 var regexValue = integerReg;
                 if (attrs['onlyDigits'] == 'intNeg') {
                     regexValue = regexIntNeg;
-                } else {
-                    regexValue = integerReg
+                } else if (attrs['onlyDigits']==='false') {
+                    ignore=true;
+                }
+                else {
+                    regexValue = integerReg;
+                }
+                if (ignore) {
+                    return inputValue;
                 }
                 var transformedInput = tempVal.replace(regexValue, '');
                 if (max > 0) {
