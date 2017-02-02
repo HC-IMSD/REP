@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('animalSourcedList',['animalSourcedRecord'])
+        .module('animalSourcedList',['animalSourcedRecord','expandingTable'])
 })();
 
 (function () {

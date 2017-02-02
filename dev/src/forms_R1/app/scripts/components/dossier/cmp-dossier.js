@@ -7,30 +7,24 @@
     'use strict';
 
     var dependencies = [
-        'expandingTable'
-        , 'tabsModule'
-        , 'refProductListModule'
-        , 'drugUseModule'
-        , 'scheduleAModule',
+        'tabsModule',
+        'refProductListModule',
+         'drugUseModule',
+         'scheduleAModule',
         'dossierDataLists',
+        'dataLists',
         'filterLists',
         'fileIO',
-        'contactModule25',
         'contactModule26',
         'applicationInfoService',
         'applicationInfo',
         'ui.bootstrap',
-        'filterLists',
         'numberFormat',
         'ngMessages',
         'ngAria',
         'theraClass',
-        'animalSourcedSection',
-        'tissuesFluidsList',
         'dossierService',
-        'ngSanitize',
-        'dataLists',
-        'hpfbConstants'
+        'ngSanitize'
     ];
 
     angular
@@ -55,15 +49,15 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
         self.applicationInfoService = new ApplicationInfoService();
-        self.userType = "EXT";
+        self.userType = EXTERNAL_TYPE;
         self.saveXMLLabel = "SAVE_DRAFT";
         self.yesNoList = DossierLists.getYesNoList();
         self.yesValue = DossierLists.getYesValue();
@@ -121,7 +115,7 @@
 
             if (changes.formType) {
                 self.userType = changes.formType.currentValue;
-                if (self.userType == 'INT') {
+                if (self.userType == INTERNAL_TYPE) {
                     self.saveXMLLabel = "APPROVE_FINAL"
                 } else {
                     self.saveXMLLabel = "SAVE_DRAFT"
@@ -226,6 +220,7 @@
             self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
 
         }
+
         function _setComplete() {
             self.isIncomplete = !self.dossierModel.dossierID;
         }
@@ -235,7 +230,7 @@
          * @returns {boolean}
          */
         self.isExtern = function () {
-            return self.userType == "EXT";
+            return self.userType == EXTERNAL_TYPE;
 
         };
 
@@ -304,6 +299,7 @@
             }
             return self.dossierService.dossierToOutput(self.dossierModel);
         }
+
         /**
          * @ngdoc -creates a filename for dossier file. If it exists,adds control number
          * @returns {string}
@@ -314,7 +310,7 @@
             var draft_prefix = "DRAFTREPDO";
             var final_prefix = "HCREPDO";
             var filename = "";
-            if (self.userType === 'INT') { //TODO magic numbers
+            if (self.userType === INTERNAL_TYPE) {
 
                 filename = final_prefix;
             } else {

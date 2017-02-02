@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('tissuesFluidsList',['tissuesFluidsRecord'])
+        .module('tissuesFluidsList',['tissuesFluidsRecord','expandingTable'])
 })();
 
 (function () {

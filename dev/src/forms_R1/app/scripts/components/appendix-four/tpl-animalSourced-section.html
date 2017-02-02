@@ -1,5 +1,5 @@
 <ng-form name="animalSectCtrl.anSectForm">
-    <div class="container-fluid">
+    <div>
         <div class="row">
             <section class="panel panel-default">
                 <header class="panel-heading">
@@ -70,7 +70,6 @@
                     </strong>
                 </label>
             </div>
-
         </div>
         <div class="row">
             <div class="col-md-5 form-group" ng-class="{'has-error':animalSectCtrl.anSectForm.isBiotech.$invalid}">
@@ -90,29 +89,25 @@
                     </strong>
                 </label>
             </div>
-
         </div>
         <div class="row">
-
-            <div class="row">
-                <section class="panel panel-default">
-                    <header class="panel-heading">
-                        <h3 class="panel-title">{{'ANIMAL_CTRIES_ORIGIN'|translate}}</h3>
-                        <strong id="nocountry-error" class="error" ng-if="animalSectCtrl.noCountrySrc()">
+            <section class="panel panel-default">
+                <header class="panel-heading">
+                    <h3 class="panel-title">{{'ANIMAL_CTRIES_ORIGIN'|translate}}</h3>
+                    <strong id="nocountry-error" class="error" ng-if="animalSectCtrl.noCountrySrc()">
                             <span class="label label-danger" ng-messages="animalSectCtrl.anSectForm.noCountry.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_ONE_CNTRY_ORIGIN"></span></span>
                             </span>
-                        </strong>
-                    </header>
-                    <input type="text" ng-show="false" required aria-hidden="true" name="noCountry"
-                           ng-model="animalSectCtrl.oneCountry"/>
-                    <div class="panel-body">
-                        <cmp-country-list field-label="ANIMAL_CTRY_ORIGIN" with-unknown="true"
-                                          list-items="animalSectCtrl.model.countryList"
-                                          on-update="animalSectCtrl.updateCountryList(list)"></cmp-country-list>
-                    </div>
-                </section>
-            </div>
+                    </strong>
+                </header>
+                <input type="text" ng-show="false" required aria-hidden="true" name="noCountry"
+                       ng-model="animalSectCtrl.oneCountry"/>
+                <div class="panel-body">
+                    <cmp-country-list field-label="ANIMAL_CTRY_ORIGIN" with-unknown="true"
+                                      list-items="animalSectCtrl.model.countryList"
+                                      on-update="animalSectCtrl.updateCountryList(list)"></cmp-country-list>
+                </div>
+            </section>
         </div>
     </div>
     <!--<pre>{{animalSectCtrl.model |json}} </pre>-->
