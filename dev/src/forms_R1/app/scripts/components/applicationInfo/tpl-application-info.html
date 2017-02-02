@@ -1,12 +1,12 @@
 <ng-form name="infoCtrl.applInfoForm">
     <div>
         <div class="row">
-            <div class="col-xs-3 form-group">
-                <label for="application-type_{{$id}}">{{"APPL_STATUS"| translate}}</label>
+            <div class="col-xs-3 form-group ">
+                <label for="application-type_{{$id}}" >{{"APPL_STATUS"| translate}}</label>
                 <select id="application-type_{{$id}}"
                         ng-options="type |translate for type in infoCtrl.applTypes"
                         ng-model="infoCtrl.record.applicationType" ng-disabled="true"
-                        class="form-control full-width"></select>
+                        ng-class="{'rep-success':infoCtrl.showAmendMsg()}" class="form-control full-width"></select>
             </div>
             <div class="col-xs-3 form-group">
                 <label for="enr-version-text_{{$id}}">{{"ENROL_VERSION"| translate}}</label>

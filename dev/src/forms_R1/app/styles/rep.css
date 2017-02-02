@@ -122,11 +122,6 @@ label > select {
 }
 
 .select2-container .select2-choice > .select2-chosen {
- /*   margin-right: 26px;
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;*/
     min-width: 100%;
     width: 100%;
 }
@@ -157,4 +152,9 @@ label > select {
 .custom-popup-wrapper > li > a {
 
     text-decoration: none !important;
+}
+
+.rep-success{
+    border-color: #3c763d;
+    border-width: medium;
 }
