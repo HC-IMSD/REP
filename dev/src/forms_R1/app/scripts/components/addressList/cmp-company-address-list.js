@@ -36,7 +36,6 @@
         vm.isDetailsValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.allRolesSelected = "";
         vm.resetCollapsed = false;
-        vm.showImporterInfo=false;
         vm.addressList = [];
         vm.columnDef = [
             {
@@ -188,26 +187,10 @@
             var companyRole = vm.companyService.createAddressRole();
             var numKeys = vm.companyService.getNumberKeys(companyRole);
             for (var i = 0; i < vm.addressList.length; i++) {
-                var isCanadaAddress=false;
                 var obj = vm.addressList[i].addressRole
-                if(vm.addressList[i].country.id===CANADA){
-                    isCanadaAddress=true;
-                }
                 for (var key in obj) {
                     var attrName = key;
                     var attrValue = obj[key];
-                    //check to determine if need to show importer  info message
-                    if(attrName==="manufacturer"){
-                        if(isCanadaAddress &&(attrValue)){
-                            console.log("Is cdn")
-                            vm.showImporterInfo=false;
-                        }else if(!isCanadaAddress &&(attrValue)){
-                            vm.showImporterInfo=true;
-                        }else if(!attrValue){
-                            //handle the case where changes have been made and now there is no importer role
-                            vm.showImporterInfo=false;
-                        }
-                    }
                     if (attrValue && companyRole.hasOwnProperty(attrName)) {
                         rolesSelected++;
                         if (attrName === "importer") importerSelected = true;

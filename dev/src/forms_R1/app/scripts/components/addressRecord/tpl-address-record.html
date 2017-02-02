@@ -3,7 +3,6 @@
         <div>
             <div>
                 <h3>{{'ADDR_DETAILS'|translate}}&nbsp;{{addressRec.recordIndex+1}}</h3>
-
                 <div class="row">
                     <div class="form-group" ng-show="addressRec.isAmend">
                         <input class="formControl" id="chk-amend-rec_{{::$id}}" type="checkbox"
@@ -53,6 +52,14 @@
                 <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"
                                        is-amend="addressRec.isEditable"
                                        show-errors="addressRec.showErrors()"></cmp-importer-products>
+            </div>
+            <div class="row">
+                <div class="col-xs-7">
+                    <div ng-show="addressRec.notCanadianManufact()" class="alert alert-info" role="alert"
+                         aria-live="polite">
+                        <span>{{'IMPORTER_NONCDN'|translate}}</span>
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="btn-group-sm col-xs-12 text-right">

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRecord', ['addressModule', 'addressRole','filterLists','importerProducts'])
+        .module('addressRecord', ['addressModule', 'addressRole','filterLists','importerProducts','hpfbConstants'])
 })();
 
 (function () {
@@ -31,8 +31,8 @@
                 recordIndex:'<'
             }
         });
-    addressRecCtrl.$inject = ['$scope'];
-    function addressRecCtrl($scope) {
+    addressRecCtrl.$inject = ['$scope','CANADA'];
+    function addressRecCtrl($scope,CANADA) {
         var vm = this;
         vm.savePressed = false;
         vm.isContact = false;
@@ -94,6 +94,16 @@
         }
 
         /**
+         * Determines if a canadian importer role has been selected
+         * @returns {boolean} true -if importer
+         */
+        vm.notCanadianManufact=function(){
+            if(!vm.addressModel) return false;
+            return (vm.addressModel.addressRole.manufacturer===true &&vm.addressModel.country.id!==CANADA);
+
+        };
+
+        /**
          * Due to binding with table expander this method does not get called
          * @param changes
          */
@@ -105,7 +115,6 @@
                 vm.setEditable();
                 vm.importerProductState(vm.addressModel.addressRole.importer);
                 //angular.element(saveAddress).trigger('focus');
-
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
