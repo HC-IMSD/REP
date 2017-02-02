@@ -30,48 +30,11 @@
             }
         });
 
-    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope'];
+    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope','INTERNAL_TYPE','EXTERNAL_TYPE'];
 
-    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope) {
+    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope,INTERNAL_TYPE,EXTERNAL_TYPE) {
 
         var vm = this;
-        //TODO magic number
-        vm.rootTag = 'COMPANY_ENROL';
-        vm.isIncomplete = true;
-        vm.formAmendType = false;
-        vm.userType = "EXT";
-        vm.saveXMLLabel = "SAVE_DRAFT";
-        vm.updateValues = 0;
-        vm.applicationInfoService = new ApplicationInfoService();
-        vm.showContent = _loadFileContent;
-        vm.disableXML = true;
-        vm.disableDraftButton=false;
-        var _company = new CompanyService();
-        vm.configCompany = {
-            "label": "COMPANY_ID",
-            "minFieldLength":"5",
-            "fieldLength": "6",
-            "tagName": "companyId",
-            "minErrorMsg":"MSG_LENGTH_MIN5",
-            "errorMsg":"MSG_LENGTH_6NUM",
-        };
-
-        vm.companyService = _company;
-        vm.applTypes = vm.companyService.getApplicationTypes(); //TODO service ofor app types
-        vm.company = _company.getModelInfo();
-
-       //TODO this is awkward for managing
-        vm.alert1 = {
-            show: false
-        };
-        vm.alert2 = {
-            show: false
-        };
-        vm.alert3 = {
-            show: false
-        };
-        vm.lang="en";
-
         vm.initUser = function (id) { //TODO needed?
             /*
              if (!id) id = 'EXT'
@@ -82,20 +45,46 @@
              vm.saveXMLLabel = "SAVE_DRAFT"
              }*/
         };
-        vm.$onInit=function(){
-          //  vm.lang=
-        }
+
+        vm.$onInit = function () {
+            //add init code here
+            vm.isIncomplete = true;
+            vm.formAmendType = false;
+            vm.userType = EXTERNAL_TYPE;
+            vm.saveXMLLabel = "SAVE_DRAFT";
+            vm.updateValues = 0;
+            vm.applicationInfoService = new ApplicationInfoService();
+            vm.showContent = _loadFileContent;
+            vm.disableXML = true;
+            vm.disableDraftButton = false;
+            vm.configCompany = {
+                "label": "COMPANY_ID",
+                "minFieldLength": "5",
+                "fieldLength": "6",
+                "tagName": "companyId",
+                "minErrorMsg": "MSG_LENGTH_MIN5",
+                "errorMsg": "MSG_LENGTH_6NUM"
+            };
+            vm.companyService =  new CompanyService();
+            vm.rootTag = '';
+            if(vm.companyService) {
+                vm.rootTag = vm.companyService.getRootTag();
+            }
+            vm.applTypes = vm.companyService.getApplicationTypes();
+            vm.company =  vm.companyService.getModelInfo();
+            vm.alerts=[false,false,false,false,false];
+
+        };
 
         vm.$onChanges = function (changes) {
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
-                if (vm.userType == 'INT') {
+                if (vm.userType == INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
                     vm.saveXMLLabel = "SAVE_DRAFT"
                 }
             }
-
         };
 
         /**
@@ -130,19 +119,19 @@
          * @private
          */
         function _createFilename() {
-            var draft_prefix="DRAFTREPCO";
-            var final_prefix= "HCREPCO";
-            var filename="";
-            if( vm.userType==='INT'){ //TODO magic numbers
+            var draft_prefix = "DRAFTREPCO";
+            var final_prefix = "HCREPCO";
+            var filename = "";
+            if (vm.userType === INTERNAL_TYPE) {
 
-                filename=final_prefix;
-            }else{
-                filename=draft_prefix;
+                filename = final_prefix;
+            } else {
+                filename = draft_prefix;
             }
-            if(vm.company.companyId){
-                filename=filename+"_"+vm.company.companyId;
+            if (vm.company.companyId) {
+                filename = filename + "_" + vm.company.companyId;
             }
-            if(vm.company.enrolmentVersion){
+            if (vm.company.enrolmentVersion) {
                 //var parts = vm.company.enrolmentVersion.split('.')
                 filename = filename + "_" + vm.company.enrolmentVersion;
             }
@@ -152,7 +141,6 @@
         /**
          * @ngdcc method updates data and increments version before creating json
          */
-
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
@@ -162,7 +150,7 @@
             } else {
                 vm.company.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.company.enrolmentVersion)
             }
-            return _company.transformToFileObj(vm.company);
+            return  vm.companyService.transformToFileObj(vm.company);
         }
 
         $scope.$watch("main.companyEnrolForm.$valid", function () {
@@ -170,9 +158,9 @@
         }, true);
 
         function disableXMLSave() {
-            var isApprovedExternal= (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern());
+            var isApprovedExternal = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern());
 
-            vm.disableDraftButton=isApprovedExternal;
+            vm.disableDraftButton = isApprovedExternal;
             vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal;
         }
 
@@ -187,18 +175,19 @@
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
-            _company = new CompanyService();
+            vm.companyService = new CompanyService();
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-                _company.transformFromFileObj(resultJson);
+                vm.companyService.transformFromFileObj(resultJson);
                 vm.company = {};
-                angular.extend(vm.company, _company.getModelInfo());
+                angular.extend(vm.company,  vm.companyService.getModelInfo());
                 _setComplete();
                 vm.setAmend();
 
             }
             disableXMLSave();
         }
+
         /**
          * ngdoc method to set the application type to amend
          * @private
@@ -216,11 +205,11 @@
         };
 
         vm.getNewAddress = function () {
-            return _company.createAddressRecord();
+            return  vm.companyService.createAddressRecord();
         };
 
         vm.getNewContact = function () {
-            return _company.createContactRecord();
+            return  vm.companyService.createContactRecord();
         };
 
         //TODO remove?
@@ -249,10 +238,8 @@
             }
         }
 
-
         vm.isExtern = function () {
-            return vm.userType == "EXT";
-
+            return vm.userType == EXTERNAL_TYPE;
         };
         /**
          * @ngdoc method when a form gets approved
@@ -273,31 +260,17 @@
          * @param value
          */
         vm.closeAlert = function (value) {
-            switch (value) {
-                case '1':
-                    vm.alert1.show = false;
-                    break;
-                case '2':
-                    vm.alert2.show = false;
-                    break;
-                case '3':
-                    vm.alert3.show = false;
-                    break;
+            if(angular.isUndefined(value)) return;
+            if(value<vm.alerts.length) {
+                vm.alerts[value] = false;
             }
         };
 
         vm.addInstruct = function (value) {
 
-            switch (value) {
-                case '1':
-                    vm.alert1.show = true;
-                    break;
-                case '2':
-                    vm.alert2.show = true;
-                    break;
-                case '3':
-                    vm.alert3.show = true;
-                    break;
+            if(angular.isUndefined(value)) return;
+            if(value <vm.alerts.length) {
+                vm.alerts[value] = true;
             }
         }
 

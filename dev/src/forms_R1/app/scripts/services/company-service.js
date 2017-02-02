@@ -172,13 +172,15 @@
                     this.contactId = value;
                 }
             },
-
+            getRootTag:function(){
+                return "COMPANY_ENROL";
+            },
             /**
              * @ngdoc mehtod converts the file json to object model
              * @param jsonObj
              */
             transformFromFileObj: function (jsonObj) {
-                var rootTag = "COMPANY_ENROL";
+                var rootTag = this.getRootTag();
                 var companyInfo = this.getCompanyInfo(jsonObj[rootTag]);
                 var addressInfo = {addressList: this.getAddressList(jsonObj[rootTag].address_record)};
                 var contactInfo = {contactList: this.getContactList(jsonObj[rootTag].contact_record)};

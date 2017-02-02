@@ -2,5 +2,7 @@
   "REG_COMPANY_ENROL": "Regulatory Company Enrolment",
   "LOAD_COMPANY_FILE": "Load a Company Enrolment File",
   "ENROL_INSTRUCT": "Company Regulatory Enrolment Instructions",
+  "ADDRESS_INSTRUCT":"Company Address Record Instructions",
+  "REPRESENT_INSTRUCT":"Company Representative Information",
   "SAVE_INSTRUCT": "Company File Save Instructions"
 }
