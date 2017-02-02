@@ -937,7 +937,7 @@ gulp.task('dev-activity-copySrc', function () {
 
 
 gulp.task('dev-global-watch', function () {
-    var watcher = gulp.watch('app/scripts/**/*.*', ['dev-copy-changedFiles']);
+    var watcher = gulp.watch(['app/scripts/**/*.js','app/scripts/**/*.html'], ['dev-copy-changedFiles']);
     watcher.on('change', function (event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running watch tasks...');
         changedFile = event.path;
