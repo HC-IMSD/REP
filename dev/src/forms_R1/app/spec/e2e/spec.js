@@ -28,7 +28,6 @@ function selectOption(selector, item) {
 
     selectList = this.findElement(selector);
     selectList.click();
-
     selectList.findElements(protractor.By.tagName('option'))
         .then(function findMatchingOption(options) {
             options.some(function (option) {
@@ -76,8 +75,9 @@ var RootActivityPageObj = function () {
 };
 var RepContactObj = function () {
     var _addRepContactButton = element(by.buttonText("Add REP Contact"));
+    var _saveRepContactButton = element(by.buttonText("Save Contact"));
     var _salutationModel="contCtrl.contactModel.salutation";
-    var _salutationSelect = element(by.model(salutationModel));
+    var _salutationSelect = element(by.model(_salutationModel));
     var _amendChk=element(by.model("contactRec.contactModel.amend"));
     var _firstNameText=element(by.model("contCtrl.contactModel.givenName"));
     var _intitialsText=element(by.model("contCtrl.contactModel.initials"));
@@ -92,6 +92,10 @@ var RepContactObj = function () {
     this.addRepContact = function () {
         _addRepContactButton.sendKeys(protractor.Key.ENTER);
     };
+    this.saveRepContact = function () {
+        _saveRepContactButton.sendKeys(protractor.Key.ENTER);
+    };
+
     this.setSalutationValue = function (value) {
         _salutationSelect.sendKeys(value);
     };
@@ -116,6 +120,9 @@ var RepContactObj = function () {
     };
     this.setLanguageValue = function (value) {
         browser.selectOption(by.model(_languageSelect), value);
+    };
+    this.setLanguageValueLetter = function (value) {
+        _languageSelect.sendKeys(value);
     };
     this.setJobTitleValue = function (value) {
         _jobTitleText.sendKeys(value);
@@ -171,7 +178,12 @@ var RepContactObj = function () {
 };
 
 
-describe('Activity External Test', function () {
+describe('Activity External Form Type Test', function () {
+
+    beforeAll(function(){
+       console.log("run beforeAll")
+    });
+
     it('Activity Test', function () {
 
         var rootActivityObj = new RootActivityPageObj();
@@ -185,17 +197,60 @@ describe('Activity External Test', function () {
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
 
     });
+
+    var repContactObj= new RepContactObj();
     it('Add Rep Contact', function () {
 
-        var repContactObj= new RepContactObj();
         repContactObj.addRepContact();
         expect(repContactObj.getSalutationValue()).toEqual('?');
+        expect(repContactObj.getFirstNameValue()).toEqual('');
+        expect(repContactObj.getInitialsValue()).toEqual('');
+        expect(repContactObj.getLastNameValue()).toEqual('');
+        expect(repContactObj.getJobTitleValue()).toEqual('');
+        expect(repContactObj.getPhoneValue()).toEqual('');
+        expect(repContactObj.getPhoneExtValue()).toEqual('');
+        expect(repContactObj.getLanguageValue()).toEqual('?');
         repContactObj.setSalutationValue('D');
         expect(repContactObj.getSalutationValue()).toEqual('string:SALUT_DR');
         repContactObj.setSalutationByText( 'Mrs.');
         expect(repContactObj.getSalutationValue()).toEqual('string:SALUT_MRS');
 
+
+        repContactObj.setFirstNameValue("John");
+        repContactObj.setInitialsValue("I");
+        repContactObj.setLastNameValue("Smith");
+        repContactObj.setJobTitleValue("Job Title");
+        repContactObj.setPhoneValue("435-123-8765");
+        repContactObj.setEmailValue("foo@google.ca");
+        repContactObj.setLanguageValueLetter("e");
+
+
+        expect(repContactObj.getFirstNameValue()).toEqual('John');
+        expect(repContactObj.getInitialsValue()).toEqual('I');
+        expect(repContactObj.getLastNameValue()).toEqual('Smith');
+        expect(repContactObj.getJobTitleValue()).toEqual('Job Title');
+        expect(repContactObj.getPhoneValue()).toEqual('435-123-8765');
+        expect(repContactObj.getLanguageValue()).toEqual('string:en');
+
+        repContactObj.saveRepContact();
+
     });
+    it('Open First Rep Contact Record Check Value are the same', function () {
+
+        //get the first REP record
+        var repPrimary=element(by.repeater("record in expandTblCtrl.listItems").row(0));
+        repPrimary.sendKeys(protractor.Key.ENTER);
+        //check that the values have not changed from before the save
+        expect(repContactObj.getFirstNameValue()).toEqual('John');
+        expect(repContactObj.getInitialsValue()).toEqual('I');
+        expect(repContactObj.getLastNameValue()).toEqual('Smith');
+        expect(repContactObj.getJobTitleValue()).toEqual('Job Title');
+        expect(repContactObj.getPhoneValue()).toEqual('435-123-8765');
+        expect(repContactObj.getLanguageValue()).toEqual('string:en');
+        expect(repContactObj.getInitialsValue()).toEqual('');
+        expect(repContactObj.getPhoneExtValue()).toEqual('');
+    });
+
 
 
 });
@@ -203,7 +258,7 @@ describe('Activity External Test', function () {
 
 describe('pause', function () {
     it('Activity Test', function () {
-        // browser.pause();
+       //  browser.pause();
 
     });
 
