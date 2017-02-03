@@ -82,7 +82,8 @@
                 vm.transaction = {};
                 // angular.extend(vm.transaction, vm.transactionService.getModelInfo())
                 vm.transaction = vm.transactionService.getModelInfo();
-                //doing this as model won't update otherwise
+                //doing this as model won't update otherwise. Business wanted these values cleared on load
+                //service currently populates them if they exist
                 vm.transaction.projectManager1 = "";
                 vm.transaction.projectManager2 = "";
                 vm.transaction.isSolicited = "";

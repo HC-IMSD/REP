@@ -26,7 +26,8 @@
             'adminSubmission',
             'activityLists',
             'ui.bootstrap',
-            'ui.select'
+            'ui.select',
+            'hpfbConstants'
         ])
 })();
 
@@ -48,11 +49,16 @@
             }
         });
 
-    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope', '$translate', 'CommonLists','ActivityListFactory'];
-    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate, CommonLists, ActivityListFactory) {
+    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope',
+        '$translate', 'CommonLists', 'ActivityListFactory', 'NEW_TYPE', 'AMEND_TYPE', 'APPROVED_TYPE','INTERNAL_TYPE',
+        'EXTERNAL_TYPE'];
+    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate,
+                              CommonLists, ActivityListFactory,NEW_TYPE, AMEND_TYPE, APPROVED_TYPE,INTERNAL_TYPE,
+                              EXTERNAL_TYPE) {
+
         var vm = this;
         vm.isIncomplete = true;
-        vm.userType = "EXT";
+        vm.userType = EXTERNAL_TYPE;
         vm.saveXMLLabel = "SAVE_DRAFT";
         vm.updateValues = 0;
         vm.setAmendState = _setApplTypeToAmend;
@@ -68,7 +74,7 @@
         vm.applicationInfoService = new ApplicationInfoService();
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
-        vm.leadList= ActivityListFactory.getActivityLeadList();
+        vm.leadList = ActivityListFactory.getActivityLeadList();
         vm.alerts = [];
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -111,14 +117,14 @@
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
-           loadActivityData();
+            loadActivityData();
             loadFeeData();
         };
 
-        function loadActivityData(){
+        function loadActivityData() {
             ActivityListFactory.getRaTypeList()
-                .then(function(data){
-                    vm.activityTypeList=data;
+                .then(function (data) {
+                    vm.activityTypeList = data;
                     return true;
                 });
         }
@@ -126,10 +132,10 @@
         /**
          * Asynch load of Fee Data
          */
-        function loadFeeData(){
+        function loadFeeData() {
             ActivityListFactory.getFeeClassList()
-                .then(function(data){
-                    vm.feeClassList=data;
+                .then(function (data) {
+                    vm.feeClassList = data;
                     return true;
                 });
         }
@@ -137,7 +143,7 @@
         vm.$onChanges = function (changes) {
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
-                if (vm.userType == 'INT') {
+                if (vm.userType == INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
                     vm.saveXMLLabel = "SAVE_DRAFT"
@@ -196,7 +202,7 @@
 
         vm.setApplicationType = function (value) {
             vm.activityRoot.applicationType = value;
-            vm.formAmend = vm.activityRoot.applicationType === vm.applicationInfoService.getAmendType();
+            vm.formAmend = vm.activityRoot.applicationType === AMEND_TYPE;
             disableXMLSave();
         };
         /**
@@ -218,12 +224,10 @@
          * @private
          */
         function _createFilename() {
-
-
             var draft_prefix = "DRAFTREPRA";
             var final_prefix = "HCREPRA";
             var filename = "";
-            if (vm.userType === 'INT') { //TODO magic numbers
+            if (vm.userType ===INTERNAL_TYPE) { //TODO magic numbers
 
                 filename = final_prefix;
             } else {
@@ -237,13 +241,6 @@
                 filename = filename + "_" + vm.activityRoot.enrolmentVersion;
             }
             return filename;
-
-/*
-            var filename = "HC_RA_Enrolment";
-            if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
-                filename = filename + "_" + vm.activityRoot.dstsControlNumber;
-            }
-            return filename;*/
         }
 
         /**
@@ -253,7 +250,7 @@
             updateDate();
             if (!vm.isExtern()) {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
-                vm.activityRoot.applicationType = ApplicationInfoService.getApprovedType();
+                vm.activityRoot.applicationType = APPROVED_TYPE;
                 updateModelOnApproval(); //updates all the amend
             } else {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
@@ -292,12 +289,13 @@
 
         function disableXMLSave() {
 
-            vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern());
+            vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
         }
 
-        function disableJSONSave() {
+        vm.disableJSONSave=function() {
 
-            vm.disableJson = (vm.activityRoot.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern())
+            return(vm.activityRoot.applicationType == APPROVED_TYPE&& vm.isExtern());
+
         }
 
         function _setComplete() {
@@ -316,7 +314,6 @@
             }
             vm.showAllErrors = true;
             disableXMLSave();
-            disableJSONSave();
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
@@ -328,7 +325,7 @@
          */
         function _setApplTypeToAmend() {
 
-            vm.activityRoot.applicationType = vm.ApplicationInfoService.getAmendType();
+            vm.activityRoot.applicationType = AMEND_TYPE;
             disableXMLSave();
         }
 
@@ -346,7 +343,7 @@
          * @returns {boolean}
          */
         vm.isExtern = function () {
-            return vm.userType == "EXT";
+            return vm.userType == EXTERNAL_TYPE;
 
         };
 

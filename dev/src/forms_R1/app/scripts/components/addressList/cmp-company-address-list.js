@@ -168,10 +168,9 @@
          * @returns {boolean}
          */
         vm.showError = function () {
-            if (vm.addressListForm.$invalid && !vm.addressListForm.$pristine) {
-                return true
-            }
-            return false
+
+            // Could show on not pristine&&!vm.addressListForm.$pristine
+            return(!vm.isAllRolesSelected());
         };
 
         /**
@@ -187,7 +186,7 @@
             var companyRole = vm.companyService.createAddressRole();
             var numKeys = vm.companyService.getNumberKeys(companyRole);
             for (var i = 0; i < vm.addressList.length; i++) {
-                var obj = vm.addressList[i].addressRole
+                var obj = vm.addressList[i].addressRole;
                 for (var key in obj) {
                     var attrName = key;
                     var attrValue = obj[key];
@@ -197,14 +196,13 @@
                     }
                 }
             }
-
             if (rolesSelected === numKeys) {
-                return "true";
+                return true;
             }
             else if ((rolesSelected === (numKeys - 1)) && (!importerSelected)) {
-                return "true";
+                return true;
             } else {
-                return "";
+                return false
             }
         }
     }

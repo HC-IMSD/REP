@@ -25,12 +25,12 @@
             }
         });
 
-    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE'];
+    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE'];
 
-    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE) {
+    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE) {
         var vm = this;
         vm.applTypes = [NEW_TYPE, AMEND_TYPE, APPROVED_TYPE];
-        vm.formType = 'EXT';
+        vm.formType = EXTERNAL_TYPE;
         vm.infoModel = {
             applicationType: "NEW",
             enrolmentVersion: "0.0",
@@ -97,7 +97,7 @@
         };
 
         vm.isExtern = function () {
-            return vm.formType == "EXT";
+            return vm.formType == EXTERNAL_TYPE;
         };
         vm.setAmendState = function () {
             //TODO hardcode should be service

@@ -117,11 +117,12 @@
         };
 
         vm.showError = function () {
-
-            if ((vm.contactListForm.$invalid && !vm.contactListForm.$pristine)) {
+            // !vm.contactListForm.$pristine
+            return(!vm.isAllContactRolesSelected());
+           /* if ((!vm.isAllContactRolesSelected() )) {
                 return true
             }
-            return false
+            return false*/
         };
 
         vm.onUpdateContactRecord = function (record) {
@@ -182,6 +183,15 @@
             }
             return false;
         };
+
+
+        vm.disableAddContact = function () {
+            //TODO don't hard code length?
+            if(!vm.contactList) return false; //should never happen
+            return ((vm.contactList.length < 5 && vm.isDetailsValid))
+
+        };
+
         /**
          * @ngdoc method checks if all the contact roles have been selected
          * @returns {boolean}

@@ -1,6 +1,6 @@
 <ng-form name="addressListCtrl.addressListForm">
     <div class="row">
-        <input type="text" id="addressValid" name="addressRolesValid" ng-show="false"
+        <input type="checkbox" id="addressValid" name="addressRolesValid" ng-show="false"
                ng-model="addressListCtrl.allRolesSelected" required/>
         <label>
             <strong id=" addressNum-role-error" class="error" ng-if="addressListCtrl.showError()">
@@ -23,7 +23,6 @@
                                 is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
                                 is-detail-valid="addressListCtrl.setValid(state)">
             </cmp-address-record>
-
         </cmp-expanding-table>
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">

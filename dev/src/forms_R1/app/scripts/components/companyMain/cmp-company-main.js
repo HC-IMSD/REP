@@ -35,7 +35,35 @@
     function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope,INTERNAL_TYPE,EXTERNAL_TYPE) {
 
         var vm = this;
-        vm.initUser = function (id) { //TODO needed?
+        vm.userType = EXTERNAL_TYPE;
+        vm.isIncomplete = true;
+        vm.formAmendType = false;
+        vm.saveXMLLabel = "SAVE_DRAFT";
+        vm.updateValues = 0;
+        vm.applicationInfoService = new ApplicationInfoService();
+        vm.showContent = _loadFileContent;
+        vm.disableXML = true;
+        vm.disableDraftButton = false;
+        vm.configCompany = {
+            "label": "COMPANY_ID",
+            "minFieldLength": "5",
+            "fieldLength": "6",
+            "tagName": "companyId",
+            "minErrorMsg": "MSG_LENGTH_MIN5",
+            "errorMsg": "MSG_LENGTH_6NUM"
+        };
+        vm.companyService =  new CompanyService();
+        vm.rootTag = '';
+        if(vm.companyService) {
+            vm.rootTag = vm.companyService.getRootTag();
+        }
+        vm.applTypes = vm.companyService.getApplicationTypes();
+        vm.company =  vm.companyService.getModelInfo();
+        vm.alerts=[false,false,false,false,false];
+
+
+        //TODO needed?
+        vm.initUser = function (id) {
             /*
              if (!id) id = 'EXT'
              vm.userType = id;
@@ -48,30 +76,7 @@
 
         vm.$onInit = function () {
             //add init code here
-            vm.isIncomplete = true;
-            vm.formAmendType = false;
-            vm.userType = EXTERNAL_TYPE;
-            vm.saveXMLLabel = "SAVE_DRAFT";
-            vm.updateValues = 0;
-            vm.applicationInfoService = new ApplicationInfoService();
-            vm.showContent = _loadFileContent;
-            vm.disableXML = true;
-            vm.disableDraftButton = false;
-            vm.configCompany = {
-                "label": "COMPANY_ID",
-                "minFieldLength": "5",
-                "fieldLength": "6",
-                "tagName": "companyId",
-                "minErrorMsg": "MSG_LENGTH_MIN5",
-                "errorMsg": "MSG_LENGTH_6NUM"
-            };
-            vm.companyService =  new CompanyService();
-            vm.rootTag = '';
-            if(vm.companyService) {
-                vm.rootTag = vm.companyService.getRootTag();
-            }
-            vm.applTypes = vm.companyService.getApplicationTypes();
-            vm.company =  vm.companyService.getModelInfo();
+            //reset instructions
             vm.alerts=[false,false,false,false,false];
 
         };

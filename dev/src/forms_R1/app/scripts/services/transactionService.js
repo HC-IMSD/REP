@@ -156,7 +156,9 @@
                 model.isSolicited = jsonObj.is_solicited;
                 model.solicitedRequester = "";
                 if (jsonObj.solicited_requester) {
-                    model.solicitedRequester = $filter('filter')(getContactLists.getInternalContacts(), {id: jsonObj.solicited_requester.__text})[0];
+                    getContactLists.getInternalContacts().then(function(data) {
+                        model.solicitedRequester = $filter('filter')(data, {id: jsonObj.solicited_requester.__text})[0];
+                    })
                 }
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
                 model.projectManager2 = jsonObj.regulatory_project_manager2;
@@ -519,4 +521,5 @@
         };
         return defaultTransactionData;
     }
+
 })();

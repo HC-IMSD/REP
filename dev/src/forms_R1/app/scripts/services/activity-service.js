@@ -332,8 +332,8 @@
             //relatedActivity.regActivityType = jsonObj.reg_activity_type;
             relatedActivity.regActivityType  = $filter('filter')(ActivityListFactory.getRaTypeList(), {id:  jsonObj.reg_activity_type.__text})[0];
 
-
-            relatedActivity.controlNumber = Number(jsonObj.control_number);
+            //TODO control number has no leading zeros?
+            relatedActivity.controlNumber = (jsonObj.control_number);
             relatedActivity.licenseAgree = jsonObj.license_agreement;
             relatedActivity.dinTransfer = jsonObj.din_transfer === YES;
             relatedActivity.notLasa = jsonObj.not_lasa === YES;
