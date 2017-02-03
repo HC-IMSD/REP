@@ -71,6 +71,7 @@
                 vm.contactList = changes.contacts.currentValue;
                 updateRolesConcat();
                 vm.allRolesSelected = vm.isAllContactRolesSelected();
+                vm.isDetailValid=true;
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
@@ -155,7 +156,6 @@
             var defaultContact = vm.getNewContact();
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
-            //vm.isDetailValid=true;
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
         };
@@ -188,7 +188,7 @@
         vm.disableAddContact = function () {
             //TODO don't hard code length?
             if(!vm.contactList) return false; //should never happen
-            return ((vm.contactList.length < 5 && vm.isDetailsValid))
+            return (!(vm.contactList.length < 5 && vm.isDetailValid))
 
         };
 

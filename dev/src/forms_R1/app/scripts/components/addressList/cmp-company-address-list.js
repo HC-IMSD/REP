@@ -72,6 +72,7 @@
                 vm.addressList = changes.addresses.currentValue;
                 vm.allRolesSelected = vm.isAllRolesSelected();
                 updateRolesConcat();
+                vm.isDetailValid=true;
             }
 
         };
