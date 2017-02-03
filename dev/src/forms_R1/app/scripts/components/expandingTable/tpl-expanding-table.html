@@ -1,5 +1,5 @@
 <div>
-    <table class="table dataTable table-bordered table-hover table-condensed table-striped">
+    <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
         <thead>
         <tr>
             <th></th>
@@ -8,7 +8,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr id="tr-contact-{{$index}}" class="clickableRow"
+        <tr id="tr-expand-row-{{$index}}" class="clickableRow"
             data-ng-class="{'selected':$index == expandTblCtrl.tableRowIndexCurrExpanded}"
             aria-expanded="expandTblCtrl.getExpandedState($index)" index="{{$index}}"
             data-ng-repeat-start="record in expandTblCtrl.listItems"
