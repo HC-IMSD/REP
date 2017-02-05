@@ -10,7 +10,7 @@ var selectDropdownbyNum = function (element, optionNum) {
     }
 };
 
-//used for select boxes. Select the value by display text, complete
+
 function selectOption(selector, item) {
     var selectList, desiredOption;
 
