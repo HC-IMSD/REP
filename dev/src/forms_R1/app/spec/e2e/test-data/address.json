@@ -1,0 +1,12 @@
+{
+  "streetAddress": {
+    "typical":{"en": "100 Main Street East, Suite 404, AL 3043"},
+    "max": "Smith",
+    "min":"S"
+  },
+  "city": {
+    "typical": "Ottawa",
+    "max": "Smith",
+    "min":"N"
+  }
+}

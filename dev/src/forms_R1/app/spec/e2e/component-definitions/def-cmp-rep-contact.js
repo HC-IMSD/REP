@@ -34,7 +34,6 @@ function selectOption(selector, item) {
 
 
 
-
 var RepContact = function () {
     var _addRepContactButton = element(by.buttonText("Add REP Contact"));
     var _saveRepContactButton = element(by.buttonText("Save Contact"));
@@ -44,6 +43,7 @@ var RepContact = function () {
     var _firstNameText=element(by.model("contCtrl.contactModel.givenName"));
     var _intitialsText=element(by.model("contCtrl.contactModel.initials"));
     var _lastNameText=element(by.model("contCtrl.contactModel.surname"));
+    var _languageModel="contCtrl.contactModel.language";
     var _languageSelect=element(by.model("contCtrl.contactModel.language"));
     var _jobTitleText=element(by.model("contCtrl.contactModel.title"));
     var _faxText=element(by.model("contCtrl.contactModel.fax"));
@@ -81,7 +81,7 @@ var RepContact = function () {
         _intitialsText.sendKeys(value);
     };
     this.setLanguageValue = function (value) {
-        browser.selectOption(by.model(_languageSelect), value);
+        browser.selectOption(by.model(_languageModel), value);
     };
     this.setLanguageValueLetter = function (value) {
         _languageSelect.sendKeys(value);

@@ -19,6 +19,10 @@ var dev_activity_root_ext_url = "http://localhost:8080/dev/activity/activityEnro
 var RepContact = require('./component-definitions/def-cmp-rep-contact');
 var ActivityMain = require('./component-definitions/def-cmp-activity-main');
 
+
+var contactData=require('../e2e/test-data/contact.json');
+var activityTypeList=require('../../data/raType.json');
+
 describe('Activity External Form Type Test', function () {
 
     beforeAll(function(){
@@ -33,6 +37,10 @@ describe('Activity External Form Type Test', function () {
         rootActivityObj.setCompanyId('123456');
         rootActivityObj.setDossierId('1D23456');
 
+        rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
+        expect(rootActivityObj.getRegActivityModelValue()).toEqual('B02-20160301-079');
+        expect(rootActivityObj.getRegActivitySavedDisplay()).toEqual('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
+
         expect(rootActivityObj.getCompanyId()).toEqual('123456');
 
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
@@ -41,7 +49,6 @@ describe('Activity External Form Type Test', function () {
 
     var repContactObj= new RepContact();
     it('Add Rep Contact', function () {
-
         repContactObj.addRepContact();
         expect(repContactObj.getSalutationValue()).toEqual('?');
         expect(repContactObj.getFirstNameValue()).toEqual('');
@@ -51,31 +58,27 @@ describe('Activity External Form Type Test', function () {
         expect(repContactObj.getPhoneValue()).toEqual('');
         expect(repContactObj.getPhoneExtValue()).toEqual('');
         expect(repContactObj.getLanguageValue()).toEqual('?');
-        repContactObj.setSalutationValue('D');
-        expect(repContactObj.getSalutationValue()).toEqual('string:SALUT_DR');
-        repContactObj.setSalutationByText( 'Mrs.');
-        expect(repContactObj.getSalutationValue()).toEqual('string:SALUT_MRS');
 
-
+        repContactObj.setSalutationByText(contactData.salutation.MRS.en);
         repContactObj.setFirstNameValue("John");
         repContactObj.setInitialsValue("I");
         repContactObj.setLastNameValue("Smith");
         repContactObj.setJobTitleValue("Job Title");
         repContactObj.setPhoneValue("435-123-8765");
         repContactObj.setEmailValue("foo@google.ca");
-        repContactObj.setLanguageValueLetter("e");
+        repContactObj.setLanguageValue("English");
 
-
+        expect(repContactObj.getSalutationValue()).toEqual('string:'+contactData.salutation.MRS.expect);
         expect(repContactObj.getFirstNameValue()).toEqual('John');
         expect(repContactObj.getInitialsValue()).toEqual('I');
-        expect(repContactObj.getLastNameValue()).toEqual('Smith');
+        expect(repContactObj.getLastNameValue()).toEqual(contactData.lastNames.typical);
         expect(repContactObj.getJobTitleValue()).toEqual('Job Title');
         expect(repContactObj.getPhoneValue()).toEqual('435-123-8765');
         expect(repContactObj.getLanguageValue()).toEqual('string:en');
 
         repContactObj.saveRepContact();
 
-    });
+    },3000);
     it('Open First Rep Contact Record Check Value are the same', function () {
 
         //get the first REP record

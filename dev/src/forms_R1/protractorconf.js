@@ -11,5 +11,7 @@ exports.config = {
             'browserName': 'chrome'
         }
     ],
-    rootElement: '#app-root'
+    rootElement: '#app-root',
+    //addressData:require('./app/spec/e2e/test-data/address.json')
+
 };
