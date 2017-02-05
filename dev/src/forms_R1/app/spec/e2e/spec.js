@@ -40,9 +40,7 @@ describe('Activity External Form Type Test', function () {
         rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
         expect(rootActivityObj.getRegActivityModelValue()).toEqual('B02-20160301-079');
         expect(rootActivityObj.getRegActivitySavedDisplay()).toEqual('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
-
         expect(rootActivityObj.getCompanyId()).toEqual('123456');
-
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
 
     });
