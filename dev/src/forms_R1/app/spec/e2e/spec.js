@@ -29,23 +29,47 @@ describe('Activity External Form Type Test', function () {
        console.log("run beforeAll")
     });
 
-    it('Activity Test', function () {
+    it('Activity Root Information Test', function () {
 
         var rootActivityObj = new ActivityMain();
 
+        //fill in the activity part
         rootActivityObj.get(dev_activity_root_ext_url);
         rootActivityObj.setCompanyId('123456');
         rootActivityObj.setDossierId('1D23456');
-
         rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
+        rootActivityObj.setActivityLeadValue("Drug Master File");
+        rootActivityObj.setFeeClassByText("New active substance");
+        rootActivityObj.setReasonFiling("This is the reason for filing. \n\n This is a new line.");
+        rootActivityObj.setThirdPartyByText("No");
+        rootActivityObj.setAdminSubmissionByText("Yes");
+
+        rootActivityObj.setRelatedActCompanyName("Related Company Name");
+        rootActivityObj.setRelatedActDateCleared("2007-11-21");
+        rootActivityObj.setRelatedActAdminLicenseByText("No");
+        rootActivityObj.setRelatedActRegActivityValue("NC (Notifiable Change)");
+        rootActivityObj.setRelatedActControlNumber("1234556");
+
+        rootActivityObj.setRelatedIsDinTransfer(protractor.Key.ENTER);
+        rootActivityObj.setRelatedIsNotLasa(protractor.Key.ENTER);
+
         expect(rootActivityObj.getRegActivityModelValue()).toEqual('B02-20160301-079');
         expect(rootActivityObj.getRegActivitySavedDisplay()).toEqual('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
-
         expect(rootActivityObj.getCompanyId()).toEqual('123456');
-
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
 
+        expect(rootActivityObj.getThirdPartyValue()).toEqual("string:N");
+        expect(rootActivityObj.getIsAdmendSubmissionValue()).toEqual("string:Y");
+
+
     });
+
+    it('Related Activity Information Test', function(){
+
+
+
+    });
+
 
     var repContactObj= new RepContact();
     it('Add Rep Contact', function () {
@@ -101,7 +125,7 @@ describe('Activity External Form Type Test', function () {
 
 describe('pause', function () {
     it('Activity Test', function () {
-       //  browser.pause();
+         browser.pause();
 
     });
 

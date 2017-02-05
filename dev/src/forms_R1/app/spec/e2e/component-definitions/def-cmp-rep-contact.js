@@ -116,7 +116,7 @@ var RepContact = function () {
     };
     this.getLanguageValue = function () {
         return _languageSelect.getAttribute('value');
-    }
+    };
 
     this.getJobTitleValue = function () {
         return _jobTitleText.getAttribute('value');
