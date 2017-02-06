@@ -1,8 +1,8 @@
 <ng-form name="contactListCtrl.contactListForm" novalidate="novalidate">
     <div class="row">
         <div ng-show="false" aria-hidden="true">
-        <input type="text" id="oneRecord_{{::$id}}" name="oneRecord" ng-show="false"
-               ng-model="contactListCtrl.oneRecord" required/>
+            <input type="text" id="oneRecord_{{::$id}}" name="oneRecord" ng-show="false"
+                   ng-model="contactListCtrl.oneRecord" required/>
         </div>
         <label ng-if="contactListCtrl.showNoRecordError(contactListCtrl.contactListForm.oneRecord.$invalid)">
             <strong id="contactNum-role-error" class="error">
@@ -27,9 +27,11 @@
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
-            <input type="submit" value="{{'ADD_CONTACT'|translate }}" class="btn btn-primary"
-                   ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAdd()">
+            <button type="submit" class="btn btn-primary"
+                    ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAdd()">
+                {{'ADD_CONTACT'|translate }}
+            </button>
         </div>
     </div>
-<!--    <pre>contact list model: {{contactListCtrl.contactList | json : spacing}}</pre>-->
+    <!--    <pre>contact list model: {{contactListCtrl.contactList | json : spacing}}</pre>-->
 </ng-form>

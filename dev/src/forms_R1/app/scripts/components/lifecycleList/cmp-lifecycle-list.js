@@ -89,6 +89,7 @@
 
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
+                vm.isDetailsValid = true;
                 vm.updateErrorState();
             }
             if (changes.parentDirty) {
