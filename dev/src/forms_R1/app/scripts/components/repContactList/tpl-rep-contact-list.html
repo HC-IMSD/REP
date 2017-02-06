@@ -1,13 +1,11 @@
 <ng-form name="contactListCtrl.contactListForm" novalidate="novalidate">
     <div class="row">
         <div ng-show="false" aria-hidden="true">
-            <label for="oneRecord_{{$id}}"></label>
-        <input type="text" id="oneRecord_{{$id}}" name="oneRecord" ng-show="false"
+        <input type="text" id="oneRecord_{{::$id}}" name="oneRecord" ng-show="false"
                ng-model="contactListCtrl.oneRecord" required/>
         </div>
-        <label>
-            <strong id="contactNum-role-error" class="error"
-                    ng-if="contactListCtrl.showNoRecordError(contactListCtrl.contactListForm.oneRecord.$invalid)">
+        <label ng-if="contactListCtrl.showNoRecordError(contactListCtrl.contactListForm.oneRecord.$invalid)">
+            <strong id="contactNum-role-error" class="error">
                              <span class="label label-danger" aria-live="polite"
                                    ng-messages="contactListCtrl.contactListForm.oneRecord.$error">
                                  <span ng-message="required">{{"MSG_ERR_ONE_REP"|translate}}</span>
