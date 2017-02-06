@@ -102,7 +102,7 @@ describe('Activity External Form Type Test', function () {
 
         repContactObj.saveRepContact();
 
-    },3000);
+    });
     it('Open First Rep Contact Record Check Value are the same', function () {
 
         //get the first REP record
@@ -125,7 +125,7 @@ describe('Activity External Form Type Test', function () {
 
 describe('pause', function () {
     it('Activity Test', function () {
-         browser.pause();
+        // browser.pause();
 
     });
 

@@ -112,6 +112,8 @@ var MainActivity = function () {
         browser.selectOption = selectOption.bind(browser);
         browser.getUISelectOption=pickUISelectOption.bind(browser);
         browser.getUISelectModelValue=getUISelectModelValue.bind(browser);
+        browser.driver.manage().window().maximize();
+
     };
     //model value of UI select
     this.getRegActivityModelValue=function(){

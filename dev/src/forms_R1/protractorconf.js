@@ -12,6 +12,47 @@ exports.config = {
         }
     ],
     rootElement: '#app-root',
-    //addressData:require('./app/spec/e2e/test-data/address.json')
+
+   /* plugins: [{
+        chromeA11YDevTools: {
+            treatWarningsAsFailures: true
+        },
+        path: 'node_modules/protractor/plugins/accessiblity/index.js',
+        failOnWarning: true,
+        failOnError: true
+    }],*/
+    plugins: [{
+        chromeA11YDevTools: {
+            treatWarningsAsFailures: true,
+            auditConfiguration: {
+                auditRulesToRun: [
+                    'pageWithoutTitle',
+                    'controlsWithoutLabel',
+                    'requiredAriaAttributeMissing',
+                    'unfocusableElementsWithOnClick',
+                    'mainRoleOnInappropriateElement',
+                    'badAriaRole'
+                    /*'lowContrastElements'*/
+                    /*  'badAriaAttributeValue', outer hmyml error*/
+                    /* 'nonExistentAriaLabelledbyElement' test causes collectIDRefs Errors*/
+                  /*  'focusableElementNotVisibleAndNotAriaHidden' get outerHtml error*/
+                ],
+                auditRulesToSkip: []
+            }
+        },
+        axe: true,
+        package: 'protractor-accessibility-plugin'
+    }],
+
+
+    jasmineDefaultOpts: {
+        defaultTimeoutInterval: 120000
+    }
+
+
+
+
+
+//addressData:require('./app/spec/e2e/test-data/address.json')
 
 };
