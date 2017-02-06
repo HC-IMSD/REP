@@ -67,6 +67,7 @@
         vm.$onChanges = function (changes) {
             if (changes.contacts) {
                 vm.contactList = changes.contacts.currentValue;
+                vm.isDetailValid=true; //if left false,will lock out
                 vm.updateErrorState();
             }
             if (changes.parentDirty) {
@@ -77,6 +78,13 @@
             }
 
         };
+
+        /**
+         * Determines if a user should be able to add another contact
+         * Rules: if there are more than one contacts or the details are not valid (record in progress),
+         * cannot add a contact.
+         * @returns {*}
+         */
         vm.isAddContact = function () {
             if (vm.contactList.length > 1) {
 
