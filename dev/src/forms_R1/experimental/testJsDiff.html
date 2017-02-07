@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<pre id="display"></pre>
+<script src="../node_modules/diff/dist/diff.js"></script>
+<script>
+    var one = 'beep boop',
+        other = 'beep boob blah',
+        color = '',
+        span = null;
+
+    var diff = JsDiff.diffChars(one, other),
+        display = document.getElementById('display'),
+        fragment = document.createDocumentFragment();
+
+    /*var oldObj = {
+        foo: 1,
+        bar: "sunny ways",
+        new2:{
+            prop1:"foo"
+        }
+    };*/
+
+    var oldObj=new Object();
+    oldObj.foo=1;
+    oldObj.bar="sunny ways";
+    oldObj.prop1="foo2"
+    //oldObj.new2=new Object();
+    //oldObj.new2.prop1="foo";
+
+
+    var newObj=new Object();
+    newObj.foo=4;
+    newObj.bar="sunny";
+    newObj.prop1="foo";
+    //newObj.new2=new Object();
+    //newObj.new2.prop1="foo2323";
+
+    oldObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","company_id":"","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"NEW","software_version":"1.0.0","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-046"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar"}]}};
+    newObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","company_id":"","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"AMEND","software_version":"1.0.1","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-047"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[]}}
+
+    var diff2 = JsDiff.diffJson(oldObj, newObj,[{"ignoreWhitespace": true}]);
+
+    console.log(diff2);
+
+    var resultAdd=[];
+    var resultRemove=[];
+    diff2.forEach(function (part){
+         if(part.added){
+           console.log("2 this was added "+part.value);
+           //var temp=JSON.parse((part.value.trim()));
+            var temp=part.value.trim();
+            var tagList=temp.split(":");
+
+             //resultAdd.push(temp);
+             resultAdd.push(tagList[0]);
+       }else if(part.removed){
+           console.log("2this was removed "+part.value);
+       }
+    });
+    console.log("result array")
+    console.log(resultAdd);
+   var diff3= JsDiff.diffWords(JSON.stringify(oldObj),JSON.stringify(newObj));
+    console.log("dddddd");
+    console.log(diff3);
+    diff3.forEach(function (part){
+        if(part.added){
+            console.log("this was added "+part.value);
+
+        }else if(part.removed){
+            console.log("this was removed "+part.value);
+        }
+    });
+    diff.forEach(function (part) {
+        // green for additions, red for deletions
+        // grey for common parts
+        color = part.added ? 'green' :
+            part.removed ? 'red' : 'grey';
+        span = document.createElement('span');
+        span.style.color = color;
+        span.appendChild(document
+            .createTextNode(part.value));
+        fragment.appendChild(span);
+    });
+
+    display.appendChild(fragment);
+</script>
+
+</body>
+</html>
