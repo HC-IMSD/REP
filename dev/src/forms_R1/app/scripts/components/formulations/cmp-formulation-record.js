@@ -44,6 +44,7 @@
         self.noCountries="";
         self.noROAValues="";
         self.noActiveValues="";
+        self.noContainers="";
         self.dosageFormList = DossierLists.getDosageFormList();
         self.otherValue = DossierLists.getDosageOther();
         self.savePressed=false;
@@ -125,6 +126,25 @@
             return false;
 
         };
+        /**
+         * Checks if there is at least one container type
+         * @returns {boolean}
+         */
+        self.noContainers=function(){
+
+            if(!self.frmModel){
+                self.noContainerValues="";
+                return false;
+            }
+            if(!self.frmModel.containerTypes || self.frmModel.containerTypes.length===0){
+                self.noContainerValues="";
+                return true;
+            }
+            self.noContainerValues="values";
+            return false;
+
+        };
+
 
 
         self.updateActiveIngList = function(list){

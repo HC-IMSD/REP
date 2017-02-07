@@ -1733,6 +1733,8 @@ gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], fun
 gulp.task('connect-server-start', function() {
     connect.server({
         root:"build",
+       // host:"127.0.0.1",
+        port:2121,
         livereload:false
     });
 });

@@ -30,25 +30,33 @@
         self.selectRecord = -1;
         self.resetToCollapsed = false;
         self.isDetailValid = true;
+        self.newIngFormShown = false;
+        self.isDetailValid = true;
+        self.selectRecord = -1;
+
+        self.colNames = [
+            {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "65"},
+            {label: "IN_LIST", binding: "autoIngred", width: "7"},
+            {label: "CAS_NUM", "binding": "cas", width: "13"},
+            {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
+        ];
+        self.ingList = [];
         self.$onInit = function () {
 
-            self.newIngFormShown = false;
-            self.isDetailValid = true;
-            self.selectRecord = -1;
 
-            self.colNames = [
-                {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "65"},
-                {label: "IN_LIST", binding: "autoIngred", width: "7"},
-                {label: "CAS_NUM", "binding": "cas", width: "13"},
-                {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
-            ];
-            self.ingList = [];
 
-            if (self.ingredients) {
+          /*  if (self.ingredients) {
                 self.ingList = self.ingredients;
-            }
+            }*/
         };
+        self.$onChanges=function(changes){
+            //TODO get rid of the currentvalue check
+            if(changes.ingredients && changes.ingredients.currentValue){
+                self.ingList = self.ingredients;
+                self.isDetailValid = true;
+            }
 
+        }
 
         self.addIng = function (ing) {
             self.setValid(true);

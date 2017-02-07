@@ -47,7 +47,6 @@
         ];
         self.$onInit = function () {
 
-            //console.log(self.tabs[0].form.$invalid)
         };
         self.$onChanges = function () {
             /*  if(changes.service){

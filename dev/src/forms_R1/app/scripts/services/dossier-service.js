@@ -624,6 +624,8 @@
                 //container_group is static but do a check to be safe
                 if (item.container_group && item.container_group.container_details) {
                     obj.containerTypes = getContainerTypeList(item.container_group.container_details);
+                }else{
+                    obj.containerTypes=[];
                 }
                 if (item.material_ingredient) {
                     obj.animalHumanMaterials = getMaterialList(item.material_ingredient);

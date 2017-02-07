@@ -55,9 +55,8 @@
 
         vm.$onChanges = function (changes) {
 
-            if (changes.records) {
+            if (changes.records&&changes.records.currentValue) {
                 vm.model.roaList=changes.records.currentValue;
-
             }
         };
 
@@ -84,6 +83,7 @@
 
         function getMaxID(){
             var id=0;
+            if(!vm.model ||!vm.model.roaList) return id;
             for(var i=0;i<vm.model.roaList.length;i++){
                 if(vm.model.roaList[i].id>id){
                     id=vm.model.roaList[i].id;

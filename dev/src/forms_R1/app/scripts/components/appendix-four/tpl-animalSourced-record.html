@@ -31,7 +31,7 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="animal-details{{::$id}}" class="form-control"
                                name="typeDetail" size="100" maxlength="100"
-                               ng-model="animalSrcCtrl.model.animalDetail" ng-model-options="{updateOn:'blur'}" required/>
+                               ng-model="animalSrcCtrl.model.animalDetail" ng-model-options="{ debounce: '$inherit'}" required/>
                         <strong id="animalDetail-error" class="error"
                                 ng-if="animalSrcCtrl.showError(animalSrcCtrl.animalRecForm.typeDetail)">
                          <span class="label label-danger"

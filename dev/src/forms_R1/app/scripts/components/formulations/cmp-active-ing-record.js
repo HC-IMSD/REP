@@ -123,7 +123,6 @@
         };
 
         self.saveIng = function () {
-            console.log(self.ingModel);
             if (self.activeIngForm.$valid) {
                 if (self.record) {
                     self.onUpdate({ing: self.ingModel});

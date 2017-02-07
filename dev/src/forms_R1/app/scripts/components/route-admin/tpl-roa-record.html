@@ -15,7 +15,7 @@
                         </select>-->
 
                         <ui-select ng-model="roaRecCtrl.model.roa" id="roa{{::$id}}" name="roaVal" on-select="roaRecCtrl.roaChanged($item, $model)"
-                                   class="rep-selectize-dropdown rep-selectize-font" required ng-disabled="false"
+                                   class="rep-selectize-dropdown rep-selectize-font" required ng-disabled="false"  ng-model-options="{ debounce: '0'}"
                                    ng-class="{'has-error':roaRecCtrl.roaRecForm.roaVal.$invalid}" title="Choose a Route of Administration">
                             <ui-select-match placeholder="Select or Search for a route of administration"
                                              class="rep-selectize-font rep-selectize-dropdown">{{$select.selected[roaRecCtrl.lang]}}

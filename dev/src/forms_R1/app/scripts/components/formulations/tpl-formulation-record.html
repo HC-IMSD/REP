@@ -104,8 +104,15 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'CONTAINER_TYPES'|translate}}</h3>
+                        <strong id="nocontainer-error" class="error" ng-if="formulRecCtrl.noContainers()">
+                                <span class="label label-danger" ng-messages="formulationRecForm.noContainerFld.$error">
+                                    <span ng-message="required"><span translate="MSG_ERR_ONE_CONTAINER"></span></span>
+                                </span>
+                        </strong>
                     </header>
                     <div class="panel-body">
+                        <input type="text" required ng-show="false" name="noContainerFld" id="noContainer"
+                               aria-hidden="true" data-ng-model="formulRecCtrl.noContainerValues"/>
                         <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
                                                  on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
                     </div>
