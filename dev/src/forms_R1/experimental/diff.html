@@ -94,21 +94,23 @@
                 <div id="mb-pnl"></div>
             </section>
             <section id="wb-srch" class="col-xs-6 text-right visible-md visible-lg">
-<h2>Search</h2>
-<form action="#" method="post" name="cse-search-box" role="search" class="form-inline">
-<div class="form-group">
-<label for="wb-srch-q" class="wb-inv">Search website</label>
-<input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search" value="" size="27" maxlength="150" placeholder="Search Canada.ca">
-<datalist id="wb-srch-q-ac">
-<!--[if lte IE 9]><select><![endif]-->
-<!--[if lte IE 9]></select><![endif]-->
-</datalist>
-</div>
-<div class="form-group submit">
-<button type="submit" id="wb-srch-sub" class="btn btn-primary btn-small" name="wb-srch-sub"><span class="glyphicon-search glyphicon"></span><span class="wb-inv">Search</span></button>
-</div>
-</form>
-</section>
+                <h2>Search</h2>
+                <form action="#" method="post" name="cse-search-box" role="search" class="form-inline">
+                    <div class="form-group">
+                        <label for="wb-srch-q" class="wb-inv">Search website</label>
+                        <input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search"
+                               value="" size="27" maxlength="150" placeholder="Search Canada.ca">
+                        <datalist id="wb-srch-q-ac">
+                            <!--[if lte IE 9]><select><![endif]-->
+                            <!--[if lte IE 9]></select><![endif]-->
+                        </datalist>
+                    </div>
+                    <div class="form-group submit">
+                        <button type="submit" id="wb-srch-sub" class="btn btn-primary btn-small" name="wb-srch-sub">
+                            <span class="glyphicon-search glyphicon"></span><span class="wb-inv">Search</span></button>
+                    </div>
+                </form>
+            </section>
         </div>
     </div>
     <nav role="navigation" id="wb-sm" data-ajax-replace="./ajax/sitemenu-en.html" data-trgt="mb-pnl"
@@ -147,48 +149,62 @@
 
     <!--content starts here -->
     <div>
-        <h1 property="name" id="wb-cont">Regulatory Activity Template: Regulatory Enrolment Process (REP)</h1>
+        <h1 property="name" id="wb-cont">Experimental Diff Template</h1>
 
         <!-- inject:mainContent-->
         <div id="app-root" ng-app="activityApp" ng-controller="MainController as ctrl">
 
+            <div ng-repeat="record in ctrl.listResults">
+                <ul class="list-unstyled">
+                    <li>
+                        <details>
+                            <summary>{{record.recordName |translate}} {{record.index+1}}</summary>
+                            <table class="table dataTable table-bordered table-hover table-condensed table-striped">
+                                <tr>
+                                    <th> Record or Field Affected</th>
+                                    <th>Change Type</th>
+                                    <th>Original Value</th>
+                                    <th>Changed Value</th>
+                                </tr>
+                                <tr ng-repeat="leaf in record.leaf">
+                                    <td>{{leaf.name |translate}}</td>
+                                    <td>{{leaf.type |translate}}</td>
+                                    <td>{{leaf.original}}</td>
+                                    <td>{{leaf.diff}}</td>
+                                </tr>
+                            </table>
+                        </details>
+                    </li>
+                </ul>
+            </div>
 
 
-            <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
-                <thead>
-                <tr>
-                    <th>Element Affected</th>
-                    <th>Original Value</th>
-                     <th>Changed Value</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr id="tr-expand-row-{{$index}}"
-                    ng-repeat="record in ctrl.listResults">
-                    <td>
-                        <span>{{record.tag}}</span>
-                        <ul class="list-unstyled">
-                            <li>
-                                <details>
-                                    <summary>Example 1</summary>
-                                    <span>{{record.original}}</span>
-                                    <span >{{record.change}}</span>
-                                </details>
-                            </li>
-                        </ul>
+            <!--  <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
+                  <thead>
+                  <tr>
+                      <th>Element Affected</th>
+                      <th>Original Value</th>
+                       <th>Changed Value</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr id="tr-expand-row-{{$index}}"
+                      ng-repeat="record in ctrl.listResults">
+                      <td>
+                          <span>{{record.tag}}</span>
 
-                    </td>
-                    <td>
-                        <span>{{record.original}}</span>
-                    </td>
-                    <td >
-                        <span >{{record.change}}</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                      </td>
+                      <td>
+                          <span>{{record.original}}</span>
+                      </td>
+                      <td >
+                          <span >{{record.change}}</span>
+                      </td>
+                  </tr>
+                  </tbody>
+              </table>-->
 
-            <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
+            <!--<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
                 <thead>
                 <tr>
                     <th>Element Affected</th>
@@ -210,11 +226,10 @@
                     </td>
                 </tr>
                 </tbody>
-            </table>
+            </table>-->
 
 
-
-</div>
+        </div>
         <!-- endinject-->
 
 
@@ -225,7 +240,7 @@
         <dl id="wb-dtmd">
             <dt>Date modified:&#32;</dt>
             <dd>
-                <time property="dateModified">2017-02-02 </time>
+                <time property="dateModified">2017-02-02</time>
             </dd>
         </dl>
     </div>
@@ -307,6 +322,8 @@
 <script src="app/scripts/activityAppEXT-en.js"></script>
 <script src="app/scripts/translations.js"></script>
 <script src="../node_modules/deep-diff/releases/deep-diff-0.3.4.min.js"></script>
+<!--<script src="app/lib/deep-diff-0.3.4.min.js"></script>-->
+
 
 <!-- endinject -->
 <!-- thirdParty:js  -->
@@ -323,37 +340,37 @@
 
 <!-- endinject -->
 <script>
-  /*  var oldObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","company_id":"","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"NEW","software_version":"1.0.0","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-046"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar"}]}};
-    var newObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","hhh":"hhhh","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"AMEND","software_version":"1.0.1","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-047"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar2"}]}}
-    //"company_id":"",
-    var oldObj2={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-    var newObj2={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-    var newObj3={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[{"amend_record":"N","rep_contact_role":"PRIMARY","rep_contact_details":{"salutation":"SALUT_DR","given_name":"asdsadsa","initials":"","surname":"asdasa","job_title":"job title 1","language_correspondance":"en","phone_num":"111-111-1111","phone_ext":"","fax_num":"","email":"fsdfdfsd@asdsadas"}}],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-    var newObj4={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[{"amend_record":"N","rep_contact_role":"PRIMARY","rep_contact_details":{"salutation":"SALUT_DR","given_name":"asdsadsa","initials":"","surname":"asdasa","job_title":"job title 2","language_correspondance":"fr","phone_num":"111-111-1111","phone_ext":"","fax_num":"","email":"fsdfdfsd@asdsadas"}}],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
+    /*  var oldObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","company_id":"","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"NEW","software_version":"1.0.0","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-046"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar"}]}};
+     var newObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","hhh":"hhhh","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"AMEND","software_version":"1.0.1","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-047"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar2"}]}}
+     //"company_id":"",
+     var oldObj2={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
+     var newObj2={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
+     var newObj3={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[{"amend_record":"N","rep_contact_role":"PRIMARY","rep_contact_details":{"salutation":"SALUT_DR","given_name":"asdsadsa","initials":"","surname":"asdasa","job_title":"job title 1","language_correspondance":"en","phone_num":"111-111-1111","phone_ext":"","fax_num":"","email":"fsdfdfsd@asdsadas"}}],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
+     var newObj4={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[{"amend_record":"N","rep_contact_role":"PRIMARY","rep_contact_details":{"salutation":"SALUT_DR","given_name":"asdsadsa","initials":"","surname":"asdasa","job_title":"job title 2","language_correspondance":"fr","phone_num":"111-111-1111","phone_ext":"","fax_num":"","email":"fsdfdfsd@asdsadas"}}],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
 
-    var result4=DeepDiff(newObj4,newObj3);
-    console.log(result4);
-    for(var g=0;g<result4.length;g++){
-        var rec=result4[g];
-        console.log("Type of change "+rec.kind);
-        if(rec.kind==='E') {
-            console.log("change of a single element");
-            var pathString="";
-            for(var i=0;i<rec.path.length;i++){
-                pathString=pathString+" {{"+rec.path[i]+"}}";
-            }
-            console.log("Element "+pathString)
-            console.log("Original value: "+rec.lhs);
-            console.log("Changed value: "+rec.rhs);
+     var result4=DeepDiff(newObj4,newObj3);
+     console.log(result4);
+     for(var g=0;g<result4.length;g++){
+     var rec=result4[g];
+     console.log("Type of change "+rec.kind);
+     if(rec.kind==='E') {
+     console.log("change of a single element");
+     var pathString="";
+     for(var i=0;i<rec.path.length;i++){
+     pathString=pathString+" {{"+rec.path[i]+"}}";
+     }
+     console.log("Element "+pathString)
+     console.log("Original value: "+rec.lhs);
+     console.log("Changed value: "+rec.rhs);
 
-        }
-        if(rec.kind==='A') {
-            console.log("Change element "+rec.path[rec.path.length-1]);
-            console.log("Type of change " + JSON.stringify(rec.item.kind));
-            console.log("Original " + JSON.stringify(rec.item.lhs));
-            console.log("Updated " + JSON.stringify(rec.item.rhs));
-        }
-    }*/
+     }
+     if(rec.kind==='A') {
+     console.log("Change element "+rec.path[rec.path.length-1]);
+     console.log("Type of change " + JSON.stringify(rec.item.kind));
+     console.log("Original " + JSON.stringify(rec.item.lhs));
+     console.log("Updated " + JSON.stringify(rec.item.rhs));
+     }
+     }*/
 
 
 </script>
