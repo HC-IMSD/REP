@@ -60,17 +60,17 @@
                     <div class="checkbox">
                         <label for="otherCardio_{{::$id}}">
                             <input type="checkbox" name="otherCardio" id="otherCardio_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()"
                                    ng-model="sysCtrl.model.otherCardio"/>
                             {{'CARDIO_OTHER'|translate}}
                         </label>
                     </div>
                 </div>
                 <div ng-if="sysCtrl.otherChanged()" class="col-md-6">
-                    <div class="form-group">
-                        <label for="cardioDetails_{{::$id}}">{{'CARDIO_DETAILS'|translate}}
+                    <div class="form-group ">
+                        <label class="required" for="cardioDetails_{{::$id}}">{{'CARDIO_DETAILS'|translate}}
+                            <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <input type="text" size="40" maxlength="40" name="cardioDetails" id="cardioDetails_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model-options="{updateOn: 'blur'}"
+                                  ng-required="{{sysCtrl.model.otherCardio}}"  ng-model-options="{ debounce: '$inherit'}"
                                    ng-model="sysCtrl.model.otherDetails"/>
                         </label>
                     </div>

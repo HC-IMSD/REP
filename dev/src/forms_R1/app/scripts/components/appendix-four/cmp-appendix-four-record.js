@@ -45,7 +45,7 @@
             isCellLine: "",
             isBiotechDerived: "",
             isControlledPop: "",
-            ageAnimals: 0,
+            ageAnimals: '',
             countryList: []
         };
 

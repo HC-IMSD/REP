@@ -49,10 +49,10 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
@@ -189,6 +189,12 @@
             }
         };
 
+        self.disableJSONSave=function() {
+
+            return(self.dossierModel.applicationType == APPROVED_TYPE&& self.isExtern());
+
+        }
+
         function getAppendix4Errors() {
             var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);
             self.errorAppendix = appendixCheck.missing;
@@ -220,6 +226,9 @@
             self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
 
         }
+
+
+
 
         function _setComplete() {
             self.isIncomplete = !self.dossierModel.dossierID;

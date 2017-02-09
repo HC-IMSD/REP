@@ -80,5 +80,11 @@
             return state;
         }
 
+        vm.showErrorMissing=function(){
+
+            return (vm.digestForm.$dirty && vm.digestForm.$invalid);
+        }
+
+
     }
 })();

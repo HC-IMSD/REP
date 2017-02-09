@@ -80,7 +80,10 @@
             vm.updateErrorState();
             return state;
         }
+        vm.showErrorMissing=function(){
 
+            return (vm.cardioForm.$dirty && vm.cardioForm.$invalid);
+        }
 
     }
 })();

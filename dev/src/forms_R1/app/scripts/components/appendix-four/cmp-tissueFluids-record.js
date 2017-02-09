@@ -25,7 +25,7 @@
     angular
         .module('tissuesFluidsRecord')
         .component('cmpTissuesFluidsRecord', {
-            templateUrl: 'app/scripts/components/appendix-four/tpl-tiissueFluids-record.html',
+            templateUrl: 'app/scripts/components/appendix-four/tpl-tissueFluids-record.html',
             controller: tissuesFluidsController,
             controllerAs: 'tissuesSrcCtrl',
             bindings: {
@@ -141,7 +141,7 @@
             vm.otherChanged(); //update otherState, should be empty
         };
         /**
-         * Used for ui purposes only
+         * Used for ui purposes only updates model temp variable
          */
         vm.otherChanged = function () {
             vm.model.otherDetails = vm.model.system.otherDetails;

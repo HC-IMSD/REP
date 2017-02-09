@@ -330,7 +330,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-3">
-                <button class="btn btn-primary btn-lg active" ng-click="dos.saveJson()">
+                <button class="btn btn-primary btn-lg active" ng-click="dos.saveJson()" ng-disabled="dos.disableJSONSave()">
                     {{'SAVE_WORK'|translate}}
                 </button>
             </div>

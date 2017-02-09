@@ -133,7 +133,6 @@
                     <div class="checkbox">
                         <label for="fluidsOther_{{::$id}}">
                             <input type="checkbox" name="fluidsOther" id="fluidsOther_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()"
                                    ng-model="sysCtrl.model.otherFluids"/>
                             {{'FLUIDS_OTHER'|translate}}
                         </label>
@@ -143,9 +142,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" ng-if="sysCtrl.otherChanged()">
-                        <label for="otherDetails_{{::$id}}">{{'OTHERTISS_DETAILS'|translate}}
+                        <label class="required" for="otherDetails_{{::$id}}">
+                            {{'OTHERTISS_DETAILS'|translate}}
+                            <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <input type="text" size="40" maxlength="40" name="otherDetails" id="otherDetails_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model-options="{updateOn: 'blur'}"
+                                   ng-model-options="{ debounce: '$inherit'}" ng-required="{{sysCtrl.model.otherFluids}}"
                                    ng-model="sysCtrl.model.otherDetails"/>
                         </label>
                     </div>

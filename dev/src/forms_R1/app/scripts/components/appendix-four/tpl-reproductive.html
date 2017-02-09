@@ -122,7 +122,6 @@
                     <div class="checkbox">
                         <label for="reprodOther_{{::$id}}">
                             <input type="checkbox" name="reprodOther" id="reprodOther_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()"
                                    ng-model="sysCtrl.model.otherReproductive"/>
                             {{'REPROD_OTHER'|translate}}
                         </label>
@@ -132,9 +131,11 @@
             <div class="row">
                 <div class="col-md-6" ng-if="sysCtrl.otherChanged()">
                     <div class="form-group">
-                        <label for="reprodDetails_{{::$id}}">{{'REPRODUCTIVE_DETAILS'|translate}}
+                        <label class="required" for="reprodDetails_{{::$id}}">
+                            {{'REPRODUCTIVE_DETAILS'|translate}}
+                            <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <input type="text" size="40" maxlength="40" name="reprodDetails" id="reprodDetails_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model-options="{updateOn: 'blur'}"
+                                  ng-required="{{sysCtrl.model.otherReproductive}}"  ng-model-options="{ debounce: '$inherit'}"
                                    ng-model="sysCtrl.model.otherDetails"/>
                         </label>
                     </div>

@@ -80,6 +80,11 @@
             vm.otherUpdate();
             vm.updateErrorState();
             return state;
-        }
+        };
+
+        vm.showErrorMissing=function(){
+            return (vm.reprodForm.$dirty && vm.reprodForm.$invalid);
+        };
+
     }
 })();

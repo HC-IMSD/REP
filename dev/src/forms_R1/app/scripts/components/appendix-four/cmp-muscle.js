@@ -76,6 +76,10 @@
             vm.otherUpdate();
             vm.updateErrorState();
             return state;
-        }
+        };
+
+        vm.showErrorMissing=function(){
+            return (vm.muscleForm.$dirty && vm.muscleForm.$invalid);
+        };
     }
 })();

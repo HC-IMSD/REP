@@ -40,6 +40,11 @@
             }
         };
 
+        vm.showErrorMissing=function(){
+
+            return (vm.immuneForm.$dirty && vm.immuneForm.$invalid);
+        }
+
         vm.detailsChanged = function (alias, value) {
 
             vm.concatUpdate({'alias': alias, 'value': value});
@@ -77,7 +82,7 @@
                 vm.model.otherDetails = "";
             }
             vm.otherUpdate();
-            vm.updateErrorState();
+           vm.updateErrorState();
             return state;
         }
 

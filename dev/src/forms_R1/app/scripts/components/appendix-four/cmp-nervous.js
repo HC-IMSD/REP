@@ -76,6 +76,13 @@
             vm.otherUpdate();
             vm.updateErrorState();
             return state;
+        };
+
+        vm.showErrorMissing=function(){
+
+            return (vm.nervForm.$dirty && vm.nervForm.$invalid);
         }
+
+
     }
 })();

@@ -16,7 +16,7 @@
                             ng-options="val |translate for val in  tissuesSrcCtrl.systemList  | orderByTranslated">
                     </select>
                     <strong id="systemList-error" class="error"
-                            ng-if="tissuesSrcCtrl.showError(tissuesSrcCtrl.tissuesRecForm.systemType)||tissuesSrcCtrl.isUsed ">
+                            ng-if="tissuesSrcCtrl.showError(tissuesSrcCtrl.tissuesRecForm.systemType)||tissuesSrcCtrl.isUsed">
                         <span class="label label-danger"
                               ng-messages="tissuesSrcCtrl.tissuesRecForm.systemType.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>

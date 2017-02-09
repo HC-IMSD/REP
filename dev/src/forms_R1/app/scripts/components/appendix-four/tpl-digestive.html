@@ -89,8 +89,7 @@
                     <div class="checkbox">
                         <label for="otherDigestive_{{::$id}}">
                             <input type="checkbox" name="otherDigestive" id="otherDigestive_{{::$id}}"
-                                   ng-model="sysCtrl.model.otherDigestive"
-                                   ng-change="sysCtrl.otherChanged()"/>
+                                   ng-model="sysCtrl.model.otherDigestive"/>
                             {{'DIGESTIVE_OTHER'|translate}}
                         </label>
                     </div>
@@ -99,10 +98,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div ng-if="sysCtrl.otherChanged()" class="form-group">
-                        <label for="digestiveDetails_{{::$id}}">{{'DIGESTIVE_DETAILS'|translate}}
-                            <input type="text" size="40" maxlength="40" name="digestiveDetails"
-                                   id="digestiveDetails_{{::$id}}"
-                                   ng-change="sysCtrl.otherChanged()" ng-model-options="{updateOn: 'blur'}"
+                        <label class="required" for="digestiveDetails_{{::$id}}">
+                            {{'DIGESTIVE_DETAILS'|translate}}
+                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <input type="text" size="40" maxlength="40" name="digestiveDetails" ng-required="{{sysCtrl.model.otherDigestive}}"
+                                   id="digestiveDetails_{{::$id}}" ng-model-options="{ debounce: '$inherit'}"
                                    ng-model="sysCtrl.model.otherDetails"/>
                         </label>
                     </div>
