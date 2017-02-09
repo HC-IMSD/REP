@@ -64,12 +64,11 @@
             <div class="row">
                 <div class="btn-group-sm col-xs-12 text-right">
                     <input type="submit" value="{{'SAVE_ADDR'|translate}}" class="btn btn-primary" name="saveAddress"
-                           id="saveAddress"
-                           ng-click="addressRec.updateAddressModel2()" ng-disabled="!addressRec.isEditable">
+                           id="saveAddress" ng-click="addressRec.updateAddressModel2()">
                     <input type="submit" value="{{'DELETE_ADDR'|translate}}" class="btn btn-danger"
-                           ng-click="addressRec.delete()" ng-disabled="!addressRec.isEditable">
+                           ng-click="addressRec.delete()">
                     <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                           ng-click="addressRec.discardChanges()" ng-disabled="!addressRec.isEditable">
+                           ng-click="addressRec.discardChanges()" >
                 </div>
             </div>
         </div>

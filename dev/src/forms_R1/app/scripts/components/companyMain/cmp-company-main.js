@@ -30,9 +30,9 @@
             }
         });
 
-    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope','INTERNAL_TYPE','EXTERNAL_TYPE'];
+    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE'];
 
-    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope,INTERNAL_TYPE,EXTERNAL_TYPE) {
+    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE) {
 
         var vm = this;
         vm.userType = EXTERNAL_TYPE;
@@ -52,14 +52,14 @@
             "minErrorMsg": "MSG_LENGTH_MIN5",
             "errorMsg": "MSG_LENGTH_6NUM"
         };
-        vm.companyService =  new CompanyService();
+        vm.companyService = new CompanyService();
         vm.rootTag = '';
-        if(vm.companyService) {
+        if (vm.companyService) {
             vm.rootTag = vm.companyService.getRootTag();
         }
         vm.applTypes = vm.companyService.getApplicationTypes();
-        vm.company =  vm.companyService.getModelInfo();
-        vm.alerts=[false,false,false,false,false];
+        vm.company = vm.companyService.getModelInfo();
+        vm.alerts = [false, false, false, false, false];
 
 
         //TODO needed?
@@ -77,7 +77,7 @@
         vm.$onInit = function () {
             //add init code here
             //reset instructions
-            vm.alerts=[false,false,false,false,false];
+            vm.alerts = [false, false, false, false, false];
 
         };
 
@@ -98,7 +98,7 @@
          */
         vm.setAmend = function () {
 
-            vm.formAmendType = (vm.company.applicationType === vm.applicationInfoService.getAmendType())
+            vm.formAmendType = (vm.company.applicationType === AMEND_TYPE)
         };
 
         /**
@@ -155,7 +155,7 @@
             } else {
                 vm.company.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.company.enrolmentVersion)
             }
-            return  vm.companyService.transformToFileObj(vm.company);
+            return vm.companyService.transformToFileObj(vm.company);
         }
 
         $scope.$watch("main.companyEnrolForm.$valid", function () {
@@ -185,7 +185,7 @@
             if (resultJson) {
                 vm.companyService.transformFromFileObj(resultJson);
                 vm.company = {};
-                angular.extend(vm.company,  vm.companyService.getModelInfo());
+                angular.extend(vm.company, vm.companyService.getModelInfo());
                 _setComplete();
                 vm.setAmend();
 
@@ -210,11 +210,11 @@
         };
 
         vm.getNewAddress = function () {
-            return  vm.companyService.createAddressRecord();
+            return vm.companyService.createAddressRecord();
         };
 
         vm.getNewContact = function () {
-            return  vm.companyService.createContactRecord();
+            return vm.companyService.createContactRecord();
         };
 
         //TODO remove?
@@ -265,16 +265,16 @@
          * @param value
          */
         vm.closeAlert = function (value) {
-            if(angular.isUndefined(value)) return;
-            if(value<vm.alerts.length) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
                 vm.alerts[value] = false;
             }
         };
 
         vm.addInstruct = function (value) {
 
-            if(angular.isUndefined(value)) return;
-            if(value <vm.alerts.length) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
         }

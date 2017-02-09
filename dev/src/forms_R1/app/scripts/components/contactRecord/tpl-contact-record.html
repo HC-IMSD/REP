@@ -30,12 +30,12 @@
             <div>
                 <div class="btn-group-sm col-xs-12 text-right">
                     <input type="submit" value="{{'SAVE_REPRES' |translate}}" class="btn btn-primary" name="saveContact"
-                           id="saveContact" ng-disabled="!contactRec.isEditable"
+                           id="saveContact"
                            ng-click="contactRec.updateContactModel2()">
                     <input type="submit" value="{{'DELETE_REPRES'|translate}}" class="btn btn-danger"
-                           ng-click="contactRec.delete()" ng-disabled="!contactRec.isEditable">
+                           ng-click="contactRec.delete()" >
                     <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                           ng-click="contactRec.discardChanges()" ng-disabled="!contactRec.isEditable">
+                           ng-click="contactRec.discardChanges()">
                 </div>
             </div>
         </div>
