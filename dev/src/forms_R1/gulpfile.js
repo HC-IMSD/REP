@@ -1606,11 +1606,12 @@ gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function ()
         basePath + 'companyAppINT-en' + '*.min.js',
         libFiles
     ];
+    var deploy=deployType.prod;
 
-    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html', paths.buildProd,homePath.prod_en);
-    pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html', paths.buildProd,homePath.prod_fr);
-    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html', paths.buildProd,homePath.prod_en);
-    return pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html', paths.buildProd,homePath.prod_fr);
+    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html',paths.buildProd, 'en',deploy);
+    pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html',paths.buildProd, 'fr',deploy);
+    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html',paths.buildProd, 'en',deploy);
+    return pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html',paths.buildProd, 'fr',deploy);
 
 });
 

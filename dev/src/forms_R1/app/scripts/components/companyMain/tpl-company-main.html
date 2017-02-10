@@ -228,11 +228,10 @@
                             </div>
                         </section>
                         <section class="panel  panel-default">
-                        <!--    <header class="panel-heading">
-                            </header>-->
                             <header class="panel-heading clearfix">
                                 <div class="btn-group pull-right">
-                                    <button title="{{'REPRESENT_INSTRUCT'|translate}}" class="btn-xs rep-help-button-primary"
+                                    <button title="{{'REPRESENT_INSTRUCT'|translate}}"
+                                            class="btn-xs rep-help-button-primary"
                                             id="contacts-instructions-toggle" ng-click="main.addInstruct(4)"><span
                                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'REPRESENT_INSTRUCT'|translate}}"</span>
                                     </button>
@@ -244,7 +243,38 @@
                                      class="alert-info" close="main.closeAlert(4)">
                                     <section>
                                         <div>
-                                            <h4 class="rep-margin-minus-top">Description of Roles</h4>
+                                            <h4 class="rep-margin-minus-top">Company Representative Information</h4>
+                                            <ul>
+                                                <li>
+                                                    A minimum of one company representative is required for the company
+                                                    template
+                                                </li>
+                                                <li>
+                                                    There must be a company representative associated with each of the
+                                                    following
+                                                    roles: “Manufacturer / Sponsor Mailing Address”, “Billing Address”,
+                                                    “Regulatory
+                                                    Mailing / Annual Contact” and “Primary REP contact”
+                                                </li>
+                                                <li>
+                                                    A single contact may be provided for multiple roles, however, each
+                                                    role must be
+                                                    associated to only one contact.
+                                                </li>
+                                                <li>
+                                                    The Primary REP contact is the person to be contacted by Health
+                                                    Canada if there
+                                                    are any issues or clarifications required for this template when it
+                                                    is submitted
+                                                    for approval.
+                                                </li>
+                                                <li>
+                                                    Sponsors may choose to provide an Alternate REP contact, however
+                                                    this is not a
+                                                    requirement.
+                                                </li>
+                                            </ul>
+                                            <h4>Description of Roles</h4>
                                             <ul>
                                                 <li>
                                                     “Manufacturer / Sponsor Information”: Refers to the name to
@@ -270,30 +300,6 @@
                                                     “Billing Address” – To whom the invoice is to be sent.
                                                 </li>
                                             </ul>
-                                            <h4>Company Representative Information</h4>
-                                            <ul>
-                                                <li>
-                                                    A minimum of one company representative is required for the company template
-                                                </li>
-                                                <li>
-                                                    There must be a company representative associated with each of the following
-                                                    roles: “Manufacturer / Sponsor Mailing Address”, “Billing Address”, “Regulatory
-                                                    Mailing / Annual Contact” and “Primary REP contact”
-                                                </li>
-                                                <li>
-                                                    A single contact may be provided for multiple roles, however, each role must be
-                                                    associated to only one contact.
-                                                </li>
-                                                <li>
-                                                    The Primary REP contact is the person to be contacted by Health Canada if there
-                                                    are any issues or clarifications required for this template when it is submitted
-                                                    for approval.
-                                                </li>
-                                                <li>
-                                                    Sponsors may choose to provide an Alternate REP contact, however this is not a
-                                                    requirement.
-                                                </li>
-                                            </ul>
                                         </div>
                                     </section>
                                 </div>
@@ -308,12 +314,12 @@
             </section>
             <div class="row btn-group-sm">
                 <div class="form-group col-md-3">
-                    <button class="btn btn-primary btn-lg active" ng-click="main.saveJson()"
+                    <button class="btn btn-default btn-lg active" ng-click="main.saveJson()"
                             ng-disabled="main.disableDraftButton">{{'SAVE_WORKING' |translate}}
                     </button>
                 </div>
                 <div class="form-group col-md-3">
-                    <button class="btn btn-default btn-lg active" ng-disabled="main.disableXML" id="btn_xmlSave"
+                    <button class="btn btn-primary btn-lg active" ng-disabled="main.disableXML" id="btn_xmlSave"
                             ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
                     </button>
                     <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
