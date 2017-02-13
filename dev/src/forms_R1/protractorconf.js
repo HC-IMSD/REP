@@ -3,7 +3,8 @@ exports.config = {
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
 
     specs: [
-        'app/spec/e2e/**/*.js'
+       'app/spec/e2e/tests/dossier/*.js',
+       /* 'app/spec/e2e/tests/activity/!*.js'*/
     ],
 
     multiCapabilities: [

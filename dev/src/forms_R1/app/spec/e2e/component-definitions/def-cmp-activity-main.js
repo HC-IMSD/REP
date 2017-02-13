@@ -1,83 +1,14 @@
 /**
  * Created by dkilty on 2/2/2017.
  */
-var selectDropdownbyNum = function (element, optionNum) {
-    if (optionNum) {
-        var options = element.findElements(by.tagName('option'))
-            .then(function (options) {
-                options[optionNum].click();
-            });
-    }
-};
 
-
-function selectOption(selector, item) {
-    var selectList, desiredOption;
-
-    selectList = this.findElement(selector);
-    selectList.click();
-    selectList.findElements(protractor.By.tagName('option'))
-        .then(function findMatchingOption(options) {
-            options.some(function (option) {
-
-                option.getText().then(function doesOptionMatch(text) {
-                    if (item === text) {
-                        desiredOption = option;
-                        return true;
-                    }
-                });
-            });
-        })
-        .then(function clickOption() {
-            if (desiredOption) {
-                desiredOption.click();
-            }
-        });
-}
-//pick a text option for the UI select box, not using search
-function pickUISelectOption(selector, item) {
-    var selectList, desiredOption;
-
-    selectList = this.findElement(selector);
-    selectList.click();
-
-    selectList.findElements(protractor.By.xpath('//li/div/span')) //needs review better way?
-        .then(function findMatchingOption(options) {
-            options.some(function (option) {
-                option.getText().then(function doesOptionMatch(text) {
-                    if (item === text) {
-                        desiredOption = option;
-                        return true;
-                    }
-                });
-            });
-        })
-        .then(function clickOption() {
-            if (desiredOption) {
-                desiredOption.click();
-            }
-        });
-}
-
-
-function getUISelectModelValue(modelElement, modelString){
-    var deferred= protractor.promise.defer();
-    modelElement.evaluate(modelString).then(function (modelVal) {
-        var  value="";
-        if(modelVal){
-            value=modelVal.id; //assumes id and object
-        }
-        return   deferred.fulfill(value);
-    });
-    return deferred.promise;
-};
-
-
-
-var dev_activity_root_ext_url = "http://localhost:8080/dev/activity/activityEnrolEXT-en.html";
+var UiUtil = require('../util/util-ui.js');
 
 
 var MainActivity = function () {
+
+
+    var uiUtil=new UiUtil();
     var companyIdElement = element(by.model("main.activityRoot.companyId"));
     var dossierIdElement = element(by.model("main.activityRoot.dossierId"));
     var _activityLeadModel="main.activityRoot.regActivityLead";
@@ -103,17 +34,27 @@ var MainActivity = function () {
     var _relatedAct_adminLicenseSubmissionSelect=element(by.model(_relatedAct_adminLicenseSubmissionModelString));
     var _relatedAct_dinTransferCheck=element(by.model("adminCtrl.model.dinTransfer"));
     var _relatedAct_notLasaCheck=element(by.model("adminCtrl.model.notLasa"));
+
+
+    /**
+     *
+     * @constructor
+     */
+    this.MainActivity=function(){
+
+    };
+
     /**
      * Sets up the browser and launches the form
      * @param value
      */
     this.get = function (value) {
         browser.get(value);
-        browser.selectOption = selectOption.bind(browser);
-        browser.getUISelectOption=pickUISelectOption.bind(browser);
-        browser.getUISelectModelValue=getUISelectModelValue.bind(browser);
+        //cannot bind until you have and instance of the browser set
+        browser.selectOption=uiUtil.selectOption.bind(browser);
+        browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
+        browser.getUISelectModelValue=uiUtil.getUISelectModelValue.bind(browser);
         browser.driver.manage().window().maximize();
-
     };
     //model value of UI select
     this.getRegActivityModelValue=function(){
@@ -163,12 +104,12 @@ var MainActivity = function () {
     this.setRelatedActAdminLicenseByText = function (value) {
         browser.selectOption(by.model(_relatedAct_adminLicenseSubmissionModelString), value);
     };
-    this.setRelatedIsDinTransfer= function (value) {
-        _relatedAct_dinTransferCheck.sendKeys(value);
+    this.setRelatedIsDinTransfer= function () {
+        _relatedAct_dinTransferCheck.click()
     };
 
-    this.setRelatedIsNotLasa= function (value) {
-        _relatedAct_dinTransferCheck.sendKeys(value);
+    this.setRelatedIsNotLasa= function () {
+        _relatedAct_dinTransferCheck.click();
     };
 
     //=====================GETTERS==================================================

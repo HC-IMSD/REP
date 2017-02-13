@@ -1,38 +1,33 @@
 /**
- * Created by dkilty on 9/3/2016.
+ * Created by dkilty on 13/02/2017.
  */
 
+var dev_dossier_root_ext_url = "http://localhost:2121/dev/dossier/dossierEnrolEXT-en.html";
 
+var DossierMain = require('../../component-definitions/def-cmp-dossier-main');
+var RepContact = require('../../component-definitions/def-cmp-rep-contact');
+var RelatedActivity=require('../../component-definitions/def-cmp-related-activity');
 
-var devUrl = {
-    activityExternalEn: "http://localhost:2121/dev/activity/activityEnrolEXT-en.html"
+var contactData=require('../../../e2e/test-data/contact.json');
 
-};
-var prodUrl = {
-    activityExternalEn: "http://localhost:2121/prod/activityEnrolEXT-en.html"
-
-};
-
-var dev_activity_root_ext_url = "http://localhost:8080/dev/activity/activityEnrolEXT-en.html";
-
-
-var RepContact = require('./component-definitions/def-cmp-rep-contact');
-var ActivityMain = require('./component-definitions/def-cmp-activity-main');
-
-
-var contactData=require('../e2e/test-data/contact.json');
-var activityTypeList=require('../../data/raType.json');
-
-describe('Activity External Form Type Test', function () {
+var repContactObj;
+var rootDossierObj;
+var relatedActivities;
+describe('Dossier External Form Type Test', function () {
 
     beforeAll(function(){
-       console.log("run beforeAll")
-    });
+        console.log("run beforeAll");
+        rootDossierObj = new DossierMain();
+        rootDossierObj.get(dev_dossier_root_ext_url);
+       repContactObj= new RepContact();
+        relatedActivities=new RelatedActivity();
+});
 
-    it('Activity Root Information Test', function () {
+    it('Dossier Main Test', function () {
 
-        var rootActivityObj = new ActivityMain();
-
+       // var rootDossierObj = new DossierMain();
+        rootDossierObj.setIsRefProductByText('Yes');
+/*
         //fill in the activity part
         rootActivityObj.get(dev_activity_root_ext_url);
         rootActivityObj.setCompanyId('123456');
@@ -50,8 +45,8 @@ describe('Activity External Form Type Test', function () {
         rootActivityObj.setRelatedActRegActivityValue("NC (Notifiable Change)");
         rootActivityObj.setRelatedActControlNumber("1234556");
 
-        rootActivityObj.setRelatedIsDinTransfer(protractor.Key.ENTER);
-        rootActivityObj.setRelatedIsNotLasa(protractor.Key.ENTER);
+        rootActivityObj.setRelatedIsDinTransfer();
+        rootActivityObj.setRelatedIsNotLasa();
 
         expect(rootActivityObj.getRegActivityModelValue()).toEqual('B02-20160301-079');
         expect(rootActivityObj.getRegActivitySavedDisplay()).toEqual('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
@@ -59,23 +54,21 @@ describe('Activity External Form Type Test', function () {
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
 
         expect(rootActivityObj.getThirdPartyValue()).toEqual("string:N");
-        expect(rootActivityObj.getIsAdmendSubmissionValue()).toEqual("string:Y");
+        expect(rootActivityObj.getIsAdmendSubmissionValue()).toEqual("string:Y");*/
+
+    });
+
+    it('Related Dossier Information Test', function(){
 
 
     });
 
-    it('Related Activity Information Test', function(){
 
 
-
-    });
-
-
-    var repContactObj= new RepContact();
     it('Add Rep Contact', function () {
         repContactObj.addRepContact();
-        expect(repContactObj.getSalutationValue()).toEqual('?');
         expect(repContactObj.getFirstNameValue()).toEqual('');
+        expect(repContactObj.getSalutationValue()).toEqual('?');
         expect(repContactObj.getInitialsValue()).toEqual('');
         expect(repContactObj.getLastNameValue()).toEqual('');
         expect(repContactObj.getJobTitleValue()).toEqual('');
@@ -124,7 +117,7 @@ describe('Activity External Form Type Test', function () {
 
 
 describe('pause', function () {
-    it('Activity Test', function () {
+    it('Dossier Pause Test', function () {
         // browser.pause();
 
     });

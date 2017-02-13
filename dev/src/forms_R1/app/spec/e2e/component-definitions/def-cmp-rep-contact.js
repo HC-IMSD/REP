@@ -1,37 +1,5 @@
 
-var selectDropdownbyNum = function (element, optionNum) {
-    if (optionNum) {
-        var options = element.findElements(by.tagName('option'))
-            .then(function (options) {
-                options[optionNum].click();
-            });
-    }
-};
-
-
-function selectOption(selector, item) {
-    var selectList, desiredOption;
-
-    selectList = this.findElement(selector);
-    selectList.click();
-    selectList.findElements(protractor.By.tagName('option'))
-        .then(function findMatchingOption(options) {
-            options.some(function (option) {
-                option.getText().then(function doesOptionMatch(text) {
-                    if (item === text) {
-                        desiredOption = option;
-                        return true;
-                    }
-                });
-            });
-        })
-        .then(function clickOption() {
-            if (desiredOption) {
-                desiredOption.click();
-            }
-        });
-}
-
+var UiUtil = require('../util/util-ui.js');
 
 
 var RepContact = function () {
@@ -50,6 +18,16 @@ var RepContact = function () {
     var _phoneText=element(by.model("contCtrl.contactModel.phone"));
     var _phoneExtText=element(by.model("contCtrl.contactModel.phoneExt"));
     var _emailText=element(by.model("contCtrl.contactModel.email"));
+    var uiUtil="";
+
+    /**
+     * Rep contact contructor. Binds the required functions for this object
+     * @constructor
+     */
+    this.RepContact=function(){
+        uiUtil = new UiUtil();
+        browser.selectOption=uiUtil.selectOption.bind(browser);
+    }
 
     this.addRepContact = function () {
         _addRepContactButton.sendKeys(protractor.Key.ENTER);
