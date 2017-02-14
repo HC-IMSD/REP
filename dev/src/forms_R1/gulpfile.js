@@ -52,6 +52,8 @@ var paths = {
 var homePath={
     dev_en:'<a href="https://lam-dev.hres.ca/rep-dev/index.html">Home</a>',
     dev_fr:'<a href="https://lam-dev.hres.ca/rep-dev/index-fr.html">Accueil</a>',
+    test_en:'<a href="https://lam-dev.hres.ca/rep_test/index.html">Home</a>',
+    test_fr:'<a href="https://lam-dev.hres.ca/rep_test/index-fr.html">Accueil</a>',
     prod_en:'<a href="https://lam-dev.hres.ca/REP-Form/index.html">Home</a>',
     prod_fr:'<a href="https://lam-dev.hres.ca/REP-Form/index-fr.html">Accueil</a>'
 
@@ -602,6 +604,11 @@ pipes.getHomeAnchor=function(type,lang){
         var homeEn=homePath.prod_en;
         var homeFr=homePath.prod_fr;
     }
+    else if(type===deployType.test){
+        var homeEn=homePath.test_en;
+        var homeFr=homePath.test_fr;
+    }
+
     if(lang=='fr'){
         return homeFr;
     }
@@ -1774,8 +1781,18 @@ gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], fun
 gulp.task('connect-server-start', function() {
     connect.server({
         root:"build",
-       // host:"127.0.0.1",
+        // host:"127.0.0.1",
         port:2121,
+        livereload:false
+    });
+});
+
+
+gulp.task('connect-server-start-experimental', function() {
+    connect.server({
+        root:"experimental",
+        // host:"127.0.0.1",
+        port:2122,
         livereload:false
     });
 });

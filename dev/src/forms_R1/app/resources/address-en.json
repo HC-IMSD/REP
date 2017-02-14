@@ -19,7 +19,7 @@
   "PRODUCT_TYPES":"Products imported by this Company",
   "ALL_PRODUCTS": "All Products",
   "SELECTED_PRODUCTS":"Some Products",
-  "IDENTIFY_PRODUCTS": "Provide the Dosser Identifiers for the products that are imported by this Company",
+  "IDENTIFY_PRODUCTS": "Provide the Dossier Identifiers for the products that are imported by this Company",
   "ADD_DOSSIER_ID":"Add Dossier Id",
   "IMPORTER_NONCDN":"Please ensure you indicate a Canadian Importer"
 }

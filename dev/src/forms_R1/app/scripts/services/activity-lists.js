@@ -113,7 +113,7 @@
             $http.get(raTypeUrl).
             success(function(data, status, headers, config) {
                 var lang = $translate.proposedLanguage() || $translate.use();
-                        var newList = _createSortedArray(data, lang);
+                        var newList =  _createRaTypeSortedArray(data, lang);
 
                        vm.raTypeArray=newList;
                 deferred.resolve(newList);
@@ -184,6 +184,20 @@
             });
             return result;
         }
+
+        function _createRaTypeSortedArray(jsonList, lang) {
+            var result = [];
+            angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
+                // filter out this type :"id":"B02-20160301-038","en":"Level 3 - Notice of Change (Post-Notice of Compliance Changes - Level III)"
+                if(sortedObject.id!=="B02-20160301-038") {
+                    result.push(sortedObject);
+                }
+            });
+            return result;
+        }
+
+        //
+
 
     }//end service function
 })();
