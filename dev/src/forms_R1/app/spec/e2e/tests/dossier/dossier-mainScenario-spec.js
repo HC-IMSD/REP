@@ -27,6 +27,10 @@ describe('Dossier External Form Type Test', function () {
 
        // var rootDossierObj = new DossierMain();
         rootDossierObj.setIsRefProductByText('Yes');
+        relatedActivities.addReferenceProduct();
+
+
+        relatedActivities.setActiveNameLookup("eth","(ETHYLENEDINITRILO)TETRAACETIC ACID");
 /*
         //fill in the activity part
         rootActivityObj.get(dev_activity_root_ext_url);
@@ -65,7 +69,8 @@ describe('Dossier External Form Type Test', function () {
 
 
 
-    it('Add Rep Contact', function () {
+   it('Add Rep Contact', function () {
+
         repContactObj.addRepContact();
         expect(repContactObj.getFirstNameValue()).toEqual('');
         expect(repContactObj.getSalutationValue()).toEqual('?');
@@ -112,13 +117,12 @@ describe('Dossier External Form Type Test', function () {
     });
 
 
-
 });
 
 
 describe('pause', function () {
     it('Dossier Pause Test', function () {
-        // browser.pause();
+         browser.pause();
 
     });
 

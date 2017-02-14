@@ -90,7 +90,18 @@ var UiUtil = function () {
         return deferred.promise;
     };
 
-
+    /**
+     * Looks for the typeahead element and selects a value in the popup list
+     * @param modelString
+     * @param typeVal
+     * @param lookupVal
+     */
+    this.selectTypeAheadPopupValue=function(modelString,typeVal,lookupVal){
+        var _element=element.all(by.model(modelString)).last(); //temporary till a better fix
+        _element.sendKeys(typeVal);
+        var _popup=element(by.css(".custom-popup-wrapper"));
+        _popup.element(by.css('a[title="'+lookupVal+'"]')).click();
+    }
 
 };
 

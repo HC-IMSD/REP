@@ -15,9 +15,8 @@
 
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
-            <input type="submit" value="{{'ADD_CRP'|translate}}" class="btn btn-primary"
-                   data-ng-disabled="crpl.addNewDisabled()"
-                   ng-click="crpl.addNewProductState()"/>
+            <button class="btn btn-primary" data-ng-disabled="crpl.addNewDisabled()" id="addRefProduct"
+                   ng-click="crpl.addNewProductState()">"{{'ADD_CRP'|translate}}"</button>
         </div>
     </div>
 </ng-form>

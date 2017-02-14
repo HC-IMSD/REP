@@ -25,7 +25,7 @@ var MainDossier=function(){
     /**
      * Sets up the browser and launches the form in maximized
      * Imports and binds all required functions. Since this is the top level
-     * Element, should handle any depencency function calls
+     * Element, should handle any dependency function calls
      * @param value
      */
     this.get = function (value) {
@@ -34,6 +34,7 @@ var MainDossier=function(){
         browser.selectOption=uiUtil.selectOption.bind(browser);
         browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
         browser.getUISelectModelValue=uiUtil.getUISelectModelValue.bind(browser);
+        browser.selectTypeAheadPopupValue=uiUtil.selectTypeAheadPopupValue.bind(browser);
         browser.driver.manage().window().maximize();
     };
 
@@ -85,7 +86,8 @@ var MainDossier=function(){
         return _relatedDossierIdText.getAttribute('value');
     };
     this.setIsRefProductByText = function (value) {
-        browser.selectOption(by.model(_isRefProductsModelString), value);
+        _isRefProductsSelect.element(by.cssContainingText('option', value)).click();
+       // browser.selectOption(by.model(_isRefProductsModelString), value);
     };
 
     this.getIsRefProductValue = function () {

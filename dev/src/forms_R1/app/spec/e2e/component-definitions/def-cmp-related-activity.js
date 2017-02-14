@@ -9,15 +9,19 @@ var RelatedActivity=function(){
 
     var uiUtil=new UiUtil();
 
-    var _addRelatedActivityButton=element(by.id("addRelatedActivityBtn"));
+    var _addRefProductButton=element(By.id("addRefProduct"));
     var _brandNameText=element(by.model("$ctrl.productModel.brandName"));
-    var _ingredName="" //typeahead need to figure out
-        //$ctrl.productModel.ingLabel - this is the model of the input
-        //popup is a ul with class custom-popup-wrapper uib-typeahead-popup
-        //li is uib-typeahead-match ng-scope active child of 'a' that has the titile attribute of the text, text or strong text
+    var _activeNameModel="$ctrl.productModel.ingLabel";
 
-    this.addRelatedActivity=function(){
-        _addRelatedActivityButton.sendKeys(protractor.Key.ENTER);
+
+    this.setActiveNameLookup= function (value,selectionValue) {
+        browser.selectTypeAheadPopupValue(_activeNameModel,value,selectionValue)
+
+    };
+
+
+    this.addReferenceProduct=function(){
+        _addRefProductButton.sendKeys(protractor.Key.ENTER);
     };
 
  /*   var _applStatus = element(by.model("infoCtrl.record.applicationType"));
