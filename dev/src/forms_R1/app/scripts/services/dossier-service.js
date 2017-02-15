@@ -1186,19 +1186,21 @@
         function routeAdminToOutput(list) {
             var resultList = [];
             angular.forEach(list, function (item) {
-                var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
-                var newRoa = splitArray[splitArray.length - 1];
-                //roa is a field with 2 attributes
-                var obj = {
-                    "roa": {
-                        _label_en: item.roa.en,
-                        _label_fr: item.roa.fr,
-                        __text: newRoa
-                    },
-                    "roa_other": item.otherRoaDetails
-                };
-                resultList.push(obj);
-
+                //check to see if this is an object. If not it was empty
+                if(angular.isObject(item.roa)) {
+                    var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
+                    var newRoa = splitArray[splitArray.length - 1];
+                    //roa is a field with 2 attributes
+                    var obj = {
+                        "roa": {
+                            _label_en: item.roa.en,
+                            _label_fr: item.roa.fr,
+                            __text: newRoa
+                        },
+                        "roa_other": item.otherRoaDetails
+                    };
+                    resultList.push(obj);
+                }
             });
             return resultList
         }
