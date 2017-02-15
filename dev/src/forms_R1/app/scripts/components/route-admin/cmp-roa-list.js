@@ -66,7 +66,8 @@
         };
         vm.addNew = function() {
             var maxID = getMaxID();
-            var item = {"id": maxID + 1, "roa": {id:"",label_en:"",label_fr:""}, 'otherRoaDetails': "",display:""};
+            //make roa field not an object to trigger validation!!
+            var item = {"id": maxID + 1, "roa": "", 'otherRoaDetails': "",display:""};
             vm.model.roaList.push(item);
             vm.resetToCollapsed= !vm.resetToCollapsed;
             vm.selectRecord=(0);
