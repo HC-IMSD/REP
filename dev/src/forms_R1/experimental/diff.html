@@ -146,13 +146,27 @@
 </header>
 <main role="main" property="mainContentOfPage" class="container">
 
-
+    <script type="text/ng-template"  id="tree_item_renderer.html">
+        {{data.recordName}}
+        <ul>
+            <li>
+            <details>
+                <summary>{{record.recordName |translate}} {{record.index+1}}</summary>
+           <!-- <li ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'"></li>-->
+            </details>
+            </li>
+        </ul>
+    </script>
     <!--content starts here -->
     <div>
         <h1 property="name" id="wb-cont">Experimental Diff Template</h1>
 
         <!-- inject:mainContent-->
         <div id="app-root" ng-app="activityApp" ng-controller="MainController as ctrl">
+
+           <!-- <ul class="list-unstyled">
+            <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+            </ul>-->
 
             <div ng-repeat="record in ctrl.listResults">
                 <ul class="list-unstyled">
@@ -166,7 +180,7 @@
                                     <th>Original Value</th>
                                     <th>Changed Value</th>
                                 </tr>
-                                <tr ng-repeat="leaf in record.leaf">
+                                <tr ng-repeat="leaf in record.children">
                                     <td>{{leaf.name |translate}}</td>
                                     <td>{{leaf.type |translate}}</td>
                                     <td>{{leaf.original}}</td>
@@ -177,6 +191,22 @@
                     </li>
                 </ul>
             </div>
+        <!--    http://jsfiddle.net/brendanowen/uXbn6/8/
+
+             <script type="text/ng-template"  id="tree_item_renderer.html">
+                {{data.name}}
+                <button ng-click="add(data)">Add node</button>
+                <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
+                <ul>
+                    <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
+                </ul>
+            </script>
+
+            <ul ng-app="Application" ng-controller="TreeController">
+                <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
+
+        -->
+
 
 
             <!--  <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
@@ -321,8 +351,8 @@
 
 <script src="app/scripts/activityAppEXT-en.js"></script>
 <script src="app/scripts/translations.js"></script>
-<script src="../node_modules/deep-diff/releases/deep-diff-0.3.4.min.js"></script>
-<!--<script src="app/lib/deep-diff-0.3.4.min.js"></script>-->
+<!--<script src="../node_modules/deep-diff/releases/deep-diff-0.3.4.min.js"></script>-->
+<script src="app/lib/deep-diff-0.3.4.min.js"></script>
 
 
 <!-- endinject -->
