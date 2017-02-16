@@ -3,13 +3,16 @@
  */
 
 
-var RelatedActivity=function(){
+var ReferenceProduct=function(){
 
     var UiUtil = require('../util/util-ui.js');
 
     var uiUtil=new UiUtil();
 
+    var  expandingTable=uiUtil.getExpandingTable("cmp-thera-list");
     var _addRefProductButton=element(By.id("addRefProduct"));
+    var _saveRefProductButton=element(By.id("saveRef"));
+
     var _brandNameText=element(by.model("$ctrl.productModel.brandName"));
     var _activeNameModel="$ctrl.productModel.ingLabel";
 
@@ -20,6 +23,15 @@ var RelatedActivity=function(){
     var _dosageFormModelString="$ctrl.productModel.dosageForm";
     var _dosageFormUiSelect=element(by.model(_dosageFormModelString));
     var _companyNameText=element(by.model("$ctrl.productModel.companyName"));
+
+
+    this.addReferenceProduct=function(){
+        _addRefProductButton.sendKeys(protractor.Key.ENTER);
+    };
+
+    this.saveReferenceProduct=function(){
+        _saveRefProductButton.sendKeys(protractor.Key.ENTER);
+    };
 
     /**
      * Sets the active name by typing some text, then selecting from the lookup
@@ -39,14 +51,19 @@ var RelatedActivity=function(){
 
     };
     this.setUnitsTextValue=function(value) {
-        browser.pickUISelectOption(_unitsModelString, value);
+        browser.getUISelectOption(By.model(_unitsModelString), value);
     };
 
     this.setPerValue=function(value){
         _perText.sendKeys(value);
     };
     this.setDosageFormTextValue=function(value) {
-        browser.pickUISelectOption(_dosageFormModelString, value);
+        browser.getUISelectOption(By.model(_dosageFormModelString), value);
+    };
+
+    this.setCompanyNameValue=function(value){
+        _companyNameText.sendKeys(value);
+
     };
 
     //======================== Getters
@@ -74,6 +91,21 @@ var RelatedActivity=function(){
         return browser.getUISelectModelValue(_dosageFormUiSelect, _dosageFormModelString);
     };
 
+    this.getCompanyNameValue=function(){
+        return _companyNameText.getAttribute('value');
+    };
+
+    this.getRows=function(){
+       return  uiUtil.getExpandingTableRows(expandingTable);
+    }
+    this.clickRow=function(index){
+        uiUtil.clickRow(this.getRows(),index);
+    }
+    this.getRecordVisibility=function(index){
+        console.log("Is present"+this.getRows().isPresent());
+        return uiUtil.getRecordVisibility(this.getRows(),index);
+    }
+
 };
 
-module.exports = RelatedActivity;
+module.exports = ReferenceProduct;

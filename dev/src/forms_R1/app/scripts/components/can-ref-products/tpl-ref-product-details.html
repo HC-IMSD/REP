@@ -186,12 +186,15 @@
         <div class="row">
 
             <div class="btn-group-sm col-xs-12 text-right">
-                <input type="submit" value="{{'SAVE'|translate}}" class="btn btn-primary"
-                       ng-click="$ctrl.saveProduct()"/>
-                <input type="submit" ng-if="$ctrl.deleteBtn === true" value="{{'DELETE'|translate}}"
-                       class="btn btn-danger" ng-click="$ctrl.delete()"/>
-                <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                       ng-click="$ctrl.discardChanges()">
+                <button class="btn btn-primary"
+                        ng-click="$ctrl.saveProduct()" name="saveRef" id="saveRef">{{'SAVE'|translate}}
+                </button>
+                <button ng-if="$ctrl.deleteBtn === true" class="btn btn-danger" ng-click="$ctrl.delete()" name="deleteRef" id="deleteRef">
+                    {{'DELETE'|translate}}
+                </button>
+                <button class="btn btn-default" id="discardRef" name="discrardRef"
+                       ng-click="$ctrl.discardChanges()"> {{'DISCARD_CHANGES'|translate}}
+                </button>
             </div>
         </div>
     </ng-form>
