@@ -4,7 +4,7 @@ exports.config = {
 
     specs: [
        'app/spec/e2e/tests/dossier/*.js',
-       /* 'app/spec/e2e/tests/activity/!*.js'*/
+      /*  'app/spec/e2e/tests/activity/!*.js'*/
     ],
 
     multiCapabilities: [

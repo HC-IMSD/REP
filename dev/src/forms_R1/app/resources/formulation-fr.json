@@ -49,5 +49,6 @@
   "UNITS_SRCH": "fr_Select or Search Units",
   "SOURCED_INFO": "fr_Please provide additional details of this ingredient/material on the Animal/Human Source tab.",
   "DELETE_FORMULATION": "fr_Delete Formulation",
-  "COPY_FORMULATION": "fr_Copy formulation"
+  "COPY_FORMULATION": "fr_Copy formulation",
+  "ADD_FORMULATION":"fr_Add formulation"
 }

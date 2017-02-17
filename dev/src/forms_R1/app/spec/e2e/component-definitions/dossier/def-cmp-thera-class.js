@@ -8,13 +8,17 @@
 
 
 var TheraClass=function() {
-    var UiUtil = require("../util/util-ui.js");
+    var UiUtil = require("../../util/util-ui.js");
     var uiUtil=new UiUtil();
     var  expandingTable=uiUtil.getExpandingTable("cmp-thera-list");
     var _addTheraClassButton = element(By.id("addTheraClass"));
     var _deleteTheraClassId = (By.id("deleteThera"));
     var  _theraTextByModel=(By.model("theraRecCtrl.record.name"));
 
+
+    this.getRecord=function(recordRow){
+        return this.getRows().get(recordRow*2+1);
+    };
 
     this.addTherapeuticClassification = function () {
         _addTheraClassButton.sendKeys(protractor.Key.ENTER);
@@ -46,10 +50,6 @@ var TheraClass=function() {
     this.getNumberRecords=function(){
         return (this.getRows().count())/2;
     };
-    this.getRecord=function(recordRow){
-        var allRows=this.getRows();
-        return this.getRows().get(recordRow*2+1);
-    }
 
 };
 

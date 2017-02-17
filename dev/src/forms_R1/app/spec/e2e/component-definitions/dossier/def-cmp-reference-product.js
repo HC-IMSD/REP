@@ -5,7 +5,7 @@
 
 var ReferenceProduct=function(){
 
-    var UiUtil = require('../util/util-ui.js');
+    var UiUtil = require('../../util/util-ui.js');
 
     var uiUtil=new UiUtil();
 
@@ -102,7 +102,6 @@ var ReferenceProduct=function(){
         uiUtil.clickRow(this.getRows(),index);
     }
     this.getRecordVisibility=function(index){
-        console.log("Is present"+this.getRows().isPresent());
         return uiUtil.getRecordVisibility(this.getRows(),index);
     }
 
