@@ -4,20 +4,27 @@
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
                     <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
-                            id="instructions-toggle" ng-click="dos.addInstruct('1')"><span
+                            id="instructions-toggle" ng-click="dos.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span><span
                             class="wb-inv">{{'HELP_FILE_LOAD'|translate}}</span></button>
-                    <!--   <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('1')">
-                           {{'HELP_FILE_LOAD'|translate}}
-                       </button>-->
                 </div>
                 <h2 class="panel-title">{{'LOAD_DOSSIER'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert1.show"
-                     ng-class="'alert-' + (dos.alert1.type || 'warning')"
-                     close="dos.closeAlert('1')">{{dos.alert1.msg}}
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[0]"
+                     class="alert-info" close="dos.closeAlert(0)">
+                    <section>
+                        <div>
+                            <h3 class="rep-margin-minus-top">Files to load</h3>
+                            <ul>
+                                <li>Working Copy (.hcsc) – when continuing with an incomplete Dossier template.</li>
+                                <li>Final XML – when amending an approved Dossier enrolment.</li>
+                            </ul>
+                            <p>A file should not be loaded if it is the initial enrolment for the Dossier.</p>
+                        </div>
+                    </section>
                 </div>
+
                 <hpfb-file-select update-model-root="dos.showContent(fileContent)"
                                   root-elem="DOSSIER_ENROL"></hpfb-file-select>
             </div>
@@ -26,19 +33,101 @@
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
                     <button title="{{'HELP_DOSSIER'|translate}}" class="btn-xs rep-help-button"
-                            id="dossier-instructions-toggle" ng-click="dos.addInstruct('2')"><span
+                            id="dossier-instructions-toggle" ng-click="dos.addInstruct(1)"><span
                             class="fa fa-question-circle fa-2x"></span><span
                             class="wb-inv">"{{'HELP_DOSSIER'|translate}}"</span></button>
-                    <!-- <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('2')">
-                         {{'Dossier Instructions'|translate}}
-                     </button>-->
                 </div>
                 <h2 class="panel-title">{{'Dossier Information'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert2.show"
-                     ng-class="'alert-' + (dos.alert2.type || 'warning')"
-                     close="dos.closeAlert('2')">{{dos.alert2.msg}}
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[1]"
+                     class="alert-info" close="dos.closeAlert(1)">
+                    <section>
+                        <div>
+                            <!--<h3 class="rep-margin-minus-top">Files to load</h3>-->
+                            <ul>
+                                <li>
+                                    The “<b>Application&nbsp;Status</b>”, “<b>Enrolment&nbsp;Version</b>”, and “<b>Date&nbsp;Last&nbsp;Saved</b>”
+                                    fields are automatically filled by the form upon selecting “<b>Save&nbsp;Working&nbsp;Copy</b>”
+                                    or “<b>Save&nbsp;Draft&nbsp;for&nbsp;Filing</b>” in the bottom of the
+                                    template.
+                                </li>
+                                <li>
+                                    The “<b>Dossier&nbsp;Id</b>” field will be filled by Health Canada when generating
+                                    final xml file.
+                                </li>
+                                <li>
+                                    The “Company&nbsp;ID” can be obtained from the final company XML file, approved by
+                                    Health Canada.
+                                </li>
+                            </ul>
+                            <h3>Amendment Information</h3>
+                            <ul>
+                                <li>
+                                    The “<b>Amend&nbsp;Enrolment</b>” button must be selected when amending an approved
+                                    company enrolment. Load the approved final xml file in the template to enable
+                                    the “Amend&nbsp;Enrolment” button.
+                                </li>
+                                <li>
+                                    The amended fields should be identified by selecting the “Amend&nbsp;Record”
+                                    checkbox in
+                                    the desired section.
+                                </li>
+                            </ul>
+                            <h3>Product (Dossier) Name</h3>
+                            <ul>
+                                <li>
+                                    The <b>brand</b> or proprietary or product name is the name assigned by the
+                                    manufacturer / sponsor to distinguish the dossier (product) and under which the
+                                    product is to be sold / advertised. The brand name is also the name used to identify
+                                    the product in all correspondence related to the submission and on the product
+                                    label(s) and Product Monograph/Package Insert if applicable. If the brand name has
+                                    not yet been determined, e.g. CTA, VIND, or NDS submissions, the proper or common
+                                    name of the drug or the research code may be used.
+                                </li>
+                            </ul>
+                            <h3>Proper, common or non-proprietary Name</h3>
+                            <ul>
+                                <li>
+                                    The <b>proper name</b> for a product is the name assigned to the drug in Section
+                                    C.01.002
+                                    of the <em>Food&nbsp;and&nbsp;Drug&nbsp;Regulations</em>, or in boldface type in
+                                    other Sections of the <em>Regulations</em> or the name of the drug in its finished
+                                    form
+                                    identified in the title of a monograph or in any of the official publications listed
+                                    in Schedule B to the <em>Food and Drugs Act</em>. Example: Acetaminophen, Ferrous
+                                    Sulphate
+                                    Tablets.
+                                </li>
+                                <li>
+                                    The <b>common name</b> is the name by which a single ingredient drug is commonly
+                                    known / designated in scientific or technical journals <b>other than</b> the
+                                    publications
+                                    referred to in Schedule B to the <em>Food and Drugs Act</em>. The common name
+                                    includes the
+                                    pharmaceutical form when used in relation to the finished drug product.
+                                </li>
+                                <li>
+                                    If there is no proper name and the drug is comprised of a single medicinal
+                                    ingredient, enter the common name. If there is no proper name and the drug is
+                                    comprised of more than one medicinal ingredient, leave Section 9 blank. For a
+                                    clinical trial all the active substances should be listed. If the product comprises
+                                    more than one ingredient, the proper name of the ingredients should be captured and
+                                    separated by a forward slash (/).
+                                </li>
+                            </ul>
+
+                            <h3>Therapeutic Classifications</h3>
+                            <ul>
+                                <li>Record the appropriate therapeutic and pharmacological classification for the drug,
+                                    e.g. calcium channel blocker, biological response modifier, histamine H2-receptor
+                                    antagonist, disinfectant.
+                                </li>
+                            </ul>
+
+
+                        </div>
+                    </section>
                 </div>
                 <div>
                     <cmp-application-info record="dos.dossierModel" user-type="dos.userType"
@@ -162,9 +251,16 @@
                 </div>
 
                 <div class="row">
-                    <section class="panel panel-default ">
-                        <header class="panel-heading">
-                            <h3 class="panel-title">G.&nbsp;{{'THERA_CLASS'|translate}}</h3>
+                    <section class="panel panel-default">
+                        <header class="panel-heading clearfix">
+                            <div class="btn-group pull-right">
+                                <button title="{{'HELP_thera'|translate}}"
+                                        class="btn rep-help-button-primary btn-xs"
+                                        id="thera-instructions-toggle" ng-click="dos.addInstruct(2)"><span
+                                        class="fa fa-question-circle fa-2x"></span><span
+                                        class="wb-inv">"{{'HELP_THERA'|translate}}"</span></button>
+                            </div>
+                            <h3 class="panel-title">G.&nbsp{{'THERA_CLASS'|translate}}</h3>
                             <strong id="active-error" class="error" ng-if="dos.noTheraRecs() && dos.dossierForm.$dirty">
                             <span class="label label-danger" ng-messages="dos.dossierForm.noTheraVal.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_ONE_THERA"></span></span>
@@ -172,6 +268,21 @@
                             </strong>
                         </header>
                         <div class="panel-body">
+                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[2]"
+                                 class="alert-info" close="dos.closeAlert(2)">
+                                <section>
+                                    <div>
+                                        <ul>
+                                            <li>Record the appropriate therapeutic and pharmacological classification
+                                                for the drug,
+                                                e.g. calcium channel blocker, biological response modifier, histamine
+                                                H2-receptor
+                                                antagonist, disinfectant.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </div>
                             <input type="text" required ng-show="false" name="noTheraVal" id="noThera"
                                    aria-hidden="true"
                                    data-ng-model="dos.noThera"/>
@@ -181,15 +292,10 @@
                     </section>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
-                        <label for="isRefProducts" class="required">
+                    <div class="col-md-5 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
+                        <label for="isRefProducts" class="required" >
                             <span class="field-name">H.&nbsp;{{'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <select class="form-control" required name="isRefProducts" id="isRefProducts"
-                                    ng-model="dos.dossierModel.isRefProducts"
-                                    ng-options="val |translate for val in  dos.yesNoList">
-
-                            </select>
                             <strong id="isRef-error" class="error"
                                     ng-if="dos.showError(dos.dossierForm.isRefProducts.$invalid,dos.dossierForm.isRefProducts.$touched)">
                             <span class="label label-danger"
@@ -198,32 +304,78 @@
                       </span>
                             </strong>
                         </label>
+
+                    </div>
+                    <div  class="col-md-1 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
+                        <select class="form-control" required name="isRefProducts" id="isRefProducts"
+                                ng-model="dos.dossierModel.isRefProducts"
+                                ng-options="val |translate for val in  dos.yesNoList">
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-2 form-group pull-left">
+                        <div class="btn-group">
+                            <button title="{{'HELP_REFPRODUCTS'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span
+                                    class="wb-inv">"{{'HELP_REFPRODUCTS'|translate}}"</span></button>
+                        </div>
                     </div>
                 </div>
-                <div class="row" ng-if="dos.isRefProducts()">
-                    <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec"
-                           ng-model="dos.oneRefSelected" required/>
-                    <section class="panel panel-default">
-                        <header class="panel-heading">
-                            <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
-                            <label for="oneRefRec">
-                                <strong id="oneRefProduct-error" class="error"
-                                        ng-if="dos.dossierForm.oneRefProductRec.$invalid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[3]"
+                             class="alert-info" close="dos.closeAlert(3)">
+                            <section aria-live="assertive">
+                                <div>
+                                    <ol>
+                                        <li>a drug in respect of which a notice of compliance is issued pursuant to
+                                            section C.08.004 and which is marketed in Canada by the innovator of the
+                                            drug,
+                                        </li>
+                                        <li>a drug, acceptable to the Minister, that can be used for the purpose of
+                                            demonstrating bioequivalence on the basis of pharmaceutical and, where
+                                            applicable, bioavailability characteristics, where a drug in respect of
+                                            which a notice of compliance has been issued pursuant to section C.08.004
+                                            cannot be used for that purpose because it is no longer marketed in Canada,
+                                            or
+                                        </li>
+                                        <li> drug, acceptable to the Minister, that can be used for the purpose of
+                                            demonstrating bioequivalence on the basis of pharmaceutical and, where
+                                            applicable, bioavailability characteristics, in comparison to a drug
+                                            referred to in paragraph a).
+                                        </li>
+                                    </ol>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="dos.isRefProducts()">
+                        <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec"
+                               ng-model="dos.oneRefSelected" required/>
+                        <section class="panel panel-default">
+                            <header class="panel-heading">
+                                <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
+                                <label for="oneRefRec">
+                                    <strong id="oneRefProduct-error" class="error"
+                                            ng-if="dos.dossierForm.oneRefProductRec.$invalid">
                              <span class="label label-danger" aria-live="polite"
                                    ng-messages="dos.dossierForm.oneRefProductRec.$error">
                                  <span ng-message="required"> <span translate="MSG_ERR_ONE_CDN_REF"></span></span>
                              </span>
-                                </strong>
-                            </label>
-                        </header>
-                        <div class="panel-body">
-                            <cmp-ref-product-list
-                                    products="dos.dossierModel.drugProduct.canRefProducts"
-                                    on-update="dos.cdnRefUpdated(recs)"></cmp-ref-product-list>
-                        </div>
-                    </section>
+                                    </strong>
+                                </label>
+                            </header>
+                            <div class="panel-body">
+                                <cmp-ref-product-list
+                                        products="dos.dossierModel.drugProduct.canRefProducts"
+                                        on-update="dos.cdnRefUpdated(recs)"></cmp-ref-product-list>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-            </div>
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
@@ -330,7 +482,8 @@
         </div>
         <div class="row">
             <div class="form-group col-md-3">
-                <button class="btn btn-default btn-lg active" ng-click="dos.saveJson()" ng-disabled="dos.disableJSONSave()">
+                <button class="btn btn-default btn-lg active" ng-click="dos.saveJson()"
+                        ng-disabled="dos.disableJSONSave()">
                     {{'SAVE_WORK'|translate}}
                 </button>
             </div>
