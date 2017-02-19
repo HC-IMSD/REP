@@ -97,13 +97,13 @@ var ReferenceProduct=function(){
 
     this.getRows=function(){
        return  uiUtil.getExpandingTableRows(expandingTable);
-    }
+    };
     this.clickRow=function(index){
         uiUtil.clickRow(this.getRows(),index);
-    }
-    this.getRecordVisibility=function(index){
+    };
+    this.isRecordVisible=function(index){
         return uiUtil.getRecordVisibility(this.getRows(),index);
-    }
+    };
 
 };
 

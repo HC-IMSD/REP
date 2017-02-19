@@ -159,11 +159,13 @@ var UiUtil = function () {
         return deferred.promise;
     };
     this.getRecordVisibility = function (tableRows, recordIndex) {
-
+        var deferred = protractor.promise.defer();
         var rowIndex = recordIndex * 2 + 1;
         (tableRows.get(rowIndex)).isDisplayed().then(function (isVisible) {
-            return isVisible;
+            //return isVisible;
+            return deferred.fulfill(isVisible);
         });
+        return deferred.promise;
     };
 
     this.getNumberRows = function (tableRows) {

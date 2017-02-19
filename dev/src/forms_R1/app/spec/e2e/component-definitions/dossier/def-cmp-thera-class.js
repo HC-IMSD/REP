@@ -20,6 +20,9 @@ var TheraClass=function() {
         return this.getRows().get(recordRow*2+1);
     };
 
+    /*
+     Adds a therapeutic classification
+     */
     this.addTherapeuticClassification = function () {
         _addTheraClassButton.sendKeys(protractor.Key.ENTER);
     };
@@ -44,7 +47,7 @@ var TheraClass=function() {
     this.clickRow=function(index){
         uiUtil.clickRow(this.getRows(),index);
     };
-    this.getRecordVisibility=function(index){
+    this.isRecordVisible=function(index){
         return uiUtil.getRecordVisibility(this.getRows(),index);
     };
     this.getNumberRecords=function(){
