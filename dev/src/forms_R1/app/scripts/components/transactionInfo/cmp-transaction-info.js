@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionInfo', ['lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap','dataLists','ui.select','addressModule','contactModule'])
+        .module('transactionInfo', ['lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap', 'dataLists', 'ui.select', 'addressModule', 'contactModule'])
 })();
 
 (function () {
@@ -24,8 +24,8 @@
             controllerAs: 'transInfoCtrl',
             bindings: {
                 transactionRoot: '<',
-                 onUpdate: '&',
-                 isAmend: '<',
+                onUpdate: '&',
+                isAmend: '<',
                 showErrors: '&',
                 getTransaction: '&',
                 getRepContact: '&',
@@ -34,8 +34,8 @@
             }
         });
 
-    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','getContactLists'];
-    function transactionInfoCtrl(TransactionService, OTHER, YES,getContactLists) {
+    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES', 'getContactLists'];
+    function transactionInfoCtrl(TransactionService, OTHER, YES, getContactLists) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {};
@@ -46,17 +46,8 @@
         vm.activityEditable = true;
         vm.isEctd = false;
         vm.requesterList = [];
-        vm.alert1 = {
-            type: 'info',
-            msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
-            show: false
-        };
-        vm.alert2 = {
-            type: 'info',
-            msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.',
-            show: false
-        };
-        vm.requesterList =  [];
+        vm.alerts = [false,false];
+        vm.requesterList = [];
 
         vm.$onInit = function () {
             loadContactData(); //asynch load of contact data
@@ -83,16 +74,16 @@
         vm.subtractSequence = function () {
             vm.deprecateSequence();
         };
-        vm.showFormErrors=function(){
+        vm.showFormErrors = function () {
 
-            return(vm.showErrors())
+            return (vm.showErrors())
         };
 
         vm.showError = function (ctrl) {
             if (!ctrl) return;
 
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
-             return true;
+                return true;
             }
             return false;
         };
@@ -116,10 +107,10 @@
         }
 
 
-        function loadContactData(){
+        function loadContactData() {
             getContactLists.getInternalContacts()
-                .then(function(data){
-                    vm.requesterList=data;
+                .then(function (data) {
+                    vm.requesterList = data;
                     return true;
                 });
         }
@@ -150,33 +141,30 @@
             vm.activityEditable = isActivityChangesValue();
         };
 
-        vm.closeAlert = function (value) {
-            switch (value) {
-                case '1':
-                    vm.alert1.show = false;
-                    break;
-                case '2':
-                    vm.alert2.show = false;
-                    break;
-            }
-        };
-
         vm.addInstruct = function (value) {
 
-            switch (value) {
-                case '1':
-                    vm.alert1.show = true;
-                    break;
-                case '2':
-                    vm.alert2.show = true;
-                    break;
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
             }
-
         }
 
 
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
 
-    }
 
-})();
+
+}
+
+})
+();
 

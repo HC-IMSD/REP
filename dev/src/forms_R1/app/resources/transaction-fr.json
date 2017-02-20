@@ -73,5 +73,7 @@
   "YEAR_CHANGE": "fr_Year of change",
   "COMPANY_INFO": "A. Company Information",
   "ADDRESS_INFO": "B. Address Information",
-  "COMPANY_REP_THIS": "C. Company Representative"
+  "COMPANY_REP_THIS": "C. Company Representative",
+  "REG_ACTIVITY_INSTRUCT":"fr_Regulatory Activity Contact Instructions",
+  "SAVE_INSTRUCT": "fr_Transaction File Save Instructions"
 }

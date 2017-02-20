@@ -74,5 +74,7 @@
   "COMPANY_REP_THIS": "C. Company Representative",
   "GENERATE_FINAL": "Generate Final XML",
   "CONTACT_SAME": "I confirm that the above regulatory activity contact information is  valid.",
-  "YEAR_CHANGE": "Year of the change"
+  "YEAR_CHANGE": "Year of the change",
+  "REG_ACTIVITY_INSTRUCT":"Regulatory Activity Contact Instructions",
+  "SAVE_INSTRUCT": "Transaction File Save Instructions"
 }

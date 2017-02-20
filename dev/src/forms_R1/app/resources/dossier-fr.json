@@ -46,5 +46,9 @@
   "DOSSIER_TYPE": "fr_Dossier Type",
   "INGRED_MAT_NAME": "fr_Ingredient or Material Name",
   "HELP_DOSSIER": "fr_Dossier Instructions",
-  "HELP_DRUG_PRODUCT": "fr_Drug Product Instructions"
+  "HELP_DRUG_PRODUCT": "fr_Drug Product Instructions",
+  "HELP_thera":"fr_Therapeutic Classification Instructions",
+  "HELP_REFPRODUCTS":"fr_Reference Product Instructions",
+  "ADD_FORMULATION": "fr_Add Formulation",
+  "SAVE_INSTRUCT":"fr_Dossier File Save Instructions"
 }

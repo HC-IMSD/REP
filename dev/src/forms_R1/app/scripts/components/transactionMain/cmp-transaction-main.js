@@ -19,6 +19,8 @@
         vm.rootTag = vm.transactionService.getRootTag();
         vm.transaction = vm.transactionService.getModelInfo();
         vm.showContent = _loadFileContent;
+        vm.alerts = [false, false];
+
         /**
          *
          * @ngdoc method Saves the model content in JSON format
@@ -92,6 +94,7 @@
 
             }
         }
+
         vm.getNewRepContact = function () {
             return vm.transactionService.createRepContact();
         };
@@ -116,19 +119,26 @@
             return (vm.transactionEnrolForm.$dirty && vm.transactionEnrolForm.$invalid && vm.savePressed)
 
         };
+        vm.addInstruct = function (value) {
 
-        vm.closeAlert = function (index) {
-            vm.alerts.splice(index, 1);
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        }
+
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
         };
 
-        vm.addInstruct = function () {
-            vm.alerts = [
-                {
-                    type: 'info',
-                    msg: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi feugiat nunc et tempor malesuada. Nullam tristique ligula blandit, posuere est ac, sagittis mi. In hac habitasse platea dictumst. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras ullamcorper sagittis erat ac lobortis. Suspendisse bibendum sed mauris eget condimentum. Suspendisse egestas ligula a libero tincidunt, ut vehicula sem fermentum. Quisque semper scelerisque urna, in dignissim odio condimentum ac. Nullam suscipit malesuada magna, eget lacinia nulla tempor id. Curabitur tristique ipsum libero, ut pulvinar ipsum venenatis non. Ut porta, sem non blandit aliquet, ante mauris porta ex, quis iaculis elit orci eu leo. Morbi at enim nec odio ullamcorper molestie. Nulla sit amet magna consequat, blandit orci a, porta eros. Sed enim nisl, tempus ac imperdiet a, ornare gravida sapien. Curabitur ultricies dolor aliquet bibendum accumsan.'
-                }
-            ];
-        }
 
 
     }
