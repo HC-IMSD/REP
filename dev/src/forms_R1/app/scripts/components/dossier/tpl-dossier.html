@@ -293,7 +293,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-5 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
-                        <label for="isRefProducts" class="required" >
+                        <label for="isRefProducts" class="required">
                             <span class="field-name">H.&nbsp;{{'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <strong id="isRef-error" class="error"
@@ -306,21 +306,22 @@
                         </label>
 
                     </div>
-                    <div  class="col-md-1 form-group" ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
+                    <div class="col-md-4 form-group form-inline"
+                         ng-class="{'has-error':dos.dossierForm.isRefProducts.$invalid}">
                         <select class="form-control" required name="isRefProducts" id="isRefProducts"
                                 ng-model="dos.dossierModel.isRefProducts"
                                 ng-options="val |translate for val in  dos.yesNoList">
                         </select>
-
+                        <button title="{{'HELP_REFPRODUCTS'|translate}}"
+                                class="btn rep-help-button-primary btn-xs"
+                                id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
+                                class="fa fa-question-circle fa-2x"></span><span
+                                class="wb-inv">"{{'HELP_REFPRODUCTS'|translate}}"</span></button>
                     </div>
 
                     <div class="col-md-2 form-group pull-left">
                         <div class="btn-group">
-                            <button title="{{'HELP_REFPRODUCTS'|translate}}"
-                                    class="btn rep-help-button-primary btn-xs"
-                                    id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span
-                                    class="wb-inv">"{{'HELP_REFPRODUCTS'|translate}}"</span></button>
+
                         </div>
                     </div>
                 </div>
@@ -330,7 +331,7 @@
                              class="alert-info" close="dos.closeAlert(3)">
                             <section aria-live="assertive">
                                 <div>
-                                    <ol>
+                                    <ul>
                                         <li>a drug in respect of which a notice of compliance is issued pursuant to
                                             section C.08.004 and which is marketed in Canada by the innovator of the
                                             drug,
@@ -347,50 +348,97 @@
                                             applicable, bioavailability characteristics, in comparison to a drug
                                             referred to in paragraph a).
                                         </li>
-                                    </ol>
+                                    </ul>
                                 </div>
                             </section>
                         </div>
                     </div>
-                    <div class="row" ng-if="dos.isRefProducts()">
-                        <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec"
-                               ng-model="dos.oneRefSelected" required/>
-                        <section class="panel panel-default">
-                            <header class="panel-heading">
-                                <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
-                                <label for="oneRefRec">
-                                    <strong id="oneRefProduct-error" class="error"
-                                            ng-if="dos.dossierForm.oneRefProductRec.$invalid">
+                </div>
+                <div class="row" ng-if="dos.isRefProducts()">
+                    <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec"
+                           ng-model="dos.oneRefSelected" required/>
+                    <section class="panel panel-default">
+                        <header class="panel-heading">
+                            <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
+                            <label for="oneRefRec" ng-if="dos.dossierForm.oneRefProductRec.$invalid">
+                                <strong id="oneRefProduct-error" class="error">
                              <span class="label label-danger" aria-live="polite"
                                    ng-messages="dos.dossierForm.oneRefProductRec.$error">
                                  <span ng-message="required"> <span translate="MSG_ERR_ONE_CDN_REF"></span></span>
                              </span>
-                                    </strong>
-                                </label>
-                            </header>
-                            <div class="panel-body">
-                                <cmp-ref-product-list
-                                        products="dos.dossierModel.drugProduct.canRefProducts"
-                                        on-update="dos.cdnRefUpdated(recs)"></cmp-ref-product-list>
-                            </div>
-                        </section>
-                    </div>
+                                </strong>
+                            </label>
+                        </header>
+                        <div class="panel-body">
+                            <cmp-ref-product-list
+                                    products="dos.dossierModel.drugProduct.canRefProducts"
+                                    on-update="dos.cdnRefUpdated(recs)"></cmp-ref-product-list>
+                        </div>
+                    </section>
                 </div>
+            </div>
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
                     <button title="{{'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
-                            id="drugProduct-instructions-toggle" ng-click="dos.addInstruct('3')"><span
+                            id="drugProduct-instructions-toggle" ng-click="dos.addInstruct(4)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_DRUG_PRODUCT'|translate}}"</span>
                     </button>
                 </div>
                 <h2 class="panel-title">{{'DRUG_PRODUCT'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert3.show"
-                     ng-class="'alert-' + (dos.alert3.type || 'warning')"
-                     close="dos.closeAlert('3')">{{dos.alert3.msg}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[4]"
+                             class="alert-info" close="dos.closeAlert(4)">
+                            <section aria-live="assertive">
+                                <div>
+                                    <ul>
+                                        <li>Drug Product Formulation Information Drug Product formulation information
+                                            will be used to generate the DIN at the end of the review process.
+                                        </li>
+                                        <li>Each section with a save button must be saved individually; otherwise
+                                            incomplete information will be lost.
+                                        </li>
+                                    </ul>
+                                    <h3>Formulations</h3>
+                                    <ul>
+                                        <li>The formulation “ID” is auto generated by the template when you click on
+                                            “Add Formulation”.
+                                        </li>
+                                        <li>Sponsors may choose to add a formulation name for easier identification.
+                                        </li>
+                                        <li>Sponsors should always select the medicinal ingredient name from the
+                                            searchable list where possible. If the medicinal ingredient name is not
+                                            found in the list, enter the new medicinal ingredient name in this field.
+                                        </li>
+                                        <li>Copy button: After saving ingredient / formulation details, sponsors may
+                                            choose to copy those details into a new ingredient / formulation record and
+                                            change one or more fields as required. This will help minimize the amount of
+                                            data entry for similar ingredients / formulations.
+                                        </li>
+                                    </ul>
+                                    <h3>Animal / human sourced details</h3>
+                                    <ul>
+                                        <li>When an ingredient/material is identified as Animal / Human sourced,
+                                            sponsors
+                                            must provide additional details by selecting the “Animal / Human Sourced”
+                                            tab
+                                            next to the “Formulations” tab.
+                                        </li>
+                                        <li>A list of ingredient / materials for which additional details must be
+                                            provided
+                                            is displayed at the top of this section.
+                                        </li>
+                                        <li>The “Ingredient or Material Name” field in this section is case-sensitive.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group">
@@ -456,20 +504,30 @@
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
                         <button title="{{'HELP_REP_CONTACT'|translate}}" class="btn-xs rep-help-button"
-                                id="repContact-instructions-toggle" ng-click="dos.addInstruct('4')"><span
+                                id="repContact-instructions-toggle" ng-click="dos.addInstruct(5)"><span
                                 class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_REP_CONTACT'|translate}}"</span>
                         </button>
-                        <!--   <button class="btn btn-default btn-xs" ng-click="dos.addInstruct('4')">
-                               {{'REP Contact Instructions'|translate}}
-                           </button>-->
                     </div>
                     <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
                 </header>
                 <div class="panel-body">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-show="dos.alert4.show"
-                         ng-class="'alert-' + (dos.alert4.type || 'warning')"
-                         close="dos.closeAlert('4')">{{dos.alert4.msg}}
+                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[5]"
+                         class="alert-info" close="dos.closeAlert(5)">
+                        <section>
+                            <div>
+                                <ul>
+                                    <li>The Primary REP contact is the person to be contacted by Health Canada if there
+                                        are any issues or clarifications required for this template when it’s submitted
+                                        for approval.
+                                    </li>
+                                    <li>Sponsors may choose to provide an Alternate REP contact, however this is not a
+                                        requirement.
+                                    </li>
+                                </ul>
+                            </div>
+                        </section>
                     </div>
+
                     <div class="container-fluid">
                         <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
                                               parent-dirty="dos.dossierForm.$dirty"
@@ -491,6 +549,28 @@
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave" ng-disabled="dos.disableXML"
                         ng-click="dos.saveXML()">{{dos.saveXMLLabel |translate}}
                 </button>
+                <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                        id="save-instructions-toggle" ng-click="dos.addInstruct(6)"><span
+                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10">
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[6]"
+                     class="alert-info" close="dos.closeAlert(6)">
+                    <section aria-live="assertive">
+                        <div>
+                            <ul>
+                                <li>Click the "Save Draft for Filing" button to generate the draft XML file.</li>
+                                <li>Submit the created file to Health Canada using the Common Electronic Submission
+                                    Gateway (CESG).
+                                </li>
+                                <li>Refer to the REP guidance document for detailed information.</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
         <!-- <pre>{{dos.dossierModel | json }}</pre>-->

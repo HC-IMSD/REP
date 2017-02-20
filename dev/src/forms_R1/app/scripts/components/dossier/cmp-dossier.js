@@ -78,7 +78,7 @@
         self.extraAppendix = [];
         self.noThera = "";
         self.oneRefSelected = "";
-        self.alerts = [false, false, false, false];
+        self.alerts = [false, false, false, false,false,false,false];
 
         var yesValue = YES;
         self.$onInit = function () {
