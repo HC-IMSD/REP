@@ -70,18 +70,14 @@ var UiUtil = function () {
                     }
                 });
         }
-        console.log(selectList);
 
     }
 
 
     //pick a text option for the UI select box, not using search
-    this.pickUISelectOption = function (selector, item) {
-        var selectList, desiredOption;
-
-        selectList = this.findElement(selector);
+    this.pickUISelectOption = function (item,selectList) {
+        var  desiredOption;
         selectList.click();
-
         selectList.findElements(protractor.By.xpath('//li/div/span')) //needs review better way?
             .then(function findMatchingOption(options) {
                 options.some(function (option) {
@@ -119,30 +115,37 @@ var UiUtil = function () {
      * @param typeVal
      * @param lookupVal
      */
-    this.selectTypeAheadPopupValue = function (modelString, typeVal, lookupVal) {
-        var _element = element.all(by.model(modelString)).last(); //temporary till a better fix
+    this.selectTypeAheadPopupValue = function (modelString, typeVal, lookupVal,control) {
+        var _element="";
+        if(control){
+            _element=control;
+        }else {
+            _element = element.all(by.model(modelString)).last(); //temporary till a better fix
+        }
         _element.sendKeys(typeVal);
         var _popup = element(by.css(".custom-popup-wrapper"));
         _popup.element(by.css('a[title="' + lookupVal + '"]')).click();
     }
 
-    this.getExpandingTable = function (tagName) {
+    this.getExpandingTable = function (tagName,parent) {
 
-        var component = element(by.tagName(tagName));
+        var component ="";
+
+        if (parent) {
+            component = parent.element(by.tagName(tagName));
+
+        }else{
+            component = element(by.tagName(tagName));
+        }
+
         var table = component.element(by.tagName('cmp-expanding-table'));
         return table; //promises needed?
-    }
-    /*  this.getExpandingTableRows=function(tagName){
-     var expandTable=this.getExpandingTable(tagName);
-     var rows=null;
-     if(expandTable.isPresent()){
-     rows=expandTable.all(By.repeater('record in expandTblCtrl.listItems'));
-     }
-     return rows;
-     }*/
+    };
+
+
     this.getExpandingTableRows = function (expandTable) {
         return expandTable.all(By.repeater('record in expandTblCtrl.listItems'));
-    }
+    };
 
     /**
      * Zero based index to click on a row to expand or hide it

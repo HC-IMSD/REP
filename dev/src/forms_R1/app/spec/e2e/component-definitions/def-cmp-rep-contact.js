@@ -1,6 +1,7 @@
 //TODO update how to retreive values
+var UiUtil = require('../util/util-ui.js');
 var RepContact = function () {
-    var UiUtil = require('../util/util-ui.js');
+
     uiUtil = new UiUtil();
     var expandingTable = uiUtil.getExpandingTable("cmp-rep-contact-list");
     var _addRepContactButton = element(by.buttonText("Add REP Contact"));

@@ -10,11 +10,13 @@
                             class="field-name">{{'ING_NAME'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
                         <div class="rep-margin-top">
-                            <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName" ng-model-options="{ debounce: $inherit}"
+                            <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="ingredName"
+                                   ng-model-options="{ debounce: $inherit}"
                                    id="ing-name_{{::$id}}" size="100" maxlength="100"
                                    uib-typeahead=" rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
                                    class="form-control rep-normal-font" typeahead-show-hint="false"
-                                    typeahead-focus-first="false" ng-change="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                                   typeahead-focus-first="false"
+                                   ng-change="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
                                    ng-required="true"
                                    typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
                                    typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
@@ -200,16 +202,19 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <input type="submit" value="{{'SAVE'|translate}}" class="btn btn-primary"
-                                   ng-click="ingRecCtrl.saveIng()"/>
-                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="{{'DELETE'|translate}}"
-                                   class="btn btn-danger"
-                                   ng-click="ingRecCtrl.delete()"/>
-                            <input type="submit" ng-if="ingRecCtrl.deleteBtn === true" value="{{'COPY'|translate}}"
-                                   class="btn btn-default"
-                                   ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
-                            <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                                   ng-click="ingRecCtrl.discardChanges()">
+                            <button class="btn btn-primary" ng-click="ingRecCtrl.saveIng()" id="medSave_{{::$id}}"
+                                    name="saveMI">{{'SAVE'|translate}}
+                            </button>
+                            <button ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-danger" id="medDelete_{{::$id}}"
+                                    name="deleteMI" ng-click="ingRecCtrl.delete()">{{'DELETE'|translate}}
+                            </button>
+                            <button ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-default"
+                                    ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
+                                {{'COPY'|translate}}
+                            </button>
+                            <button class="btn btn-default" name="discardMI" ng-click="ingRecCtrl.discardChanges()">
+                                {{'DISCARD_CHANGES'|translate}}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -223,8 +228,8 @@
                 </div>
             </div>
         </fieldset>
-      <!--  <pre> Model:
-        {{ingRecCtrl.ingModel |json}}
-        </pre>-->
+        <!--  <pre> Model:
+          {{ingRecCtrl.ingModel |json}}
+          </pre>-->
     </div>
 </ng-form>

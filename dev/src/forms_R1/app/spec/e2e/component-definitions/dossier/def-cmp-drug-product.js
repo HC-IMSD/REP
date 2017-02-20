@@ -2,7 +2,7 @@
  * Created by dkilty on 17/02/2017.
  */
 
-var UiUtil = require("../util/util-ui.js");
+var UiUtil = require("../../util/util-ui.js");
 
 
 var DrugProduct = function () {

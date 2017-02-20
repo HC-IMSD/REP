@@ -11,12 +11,9 @@ var Formulations = function () {
     var uiUtil = new UiUtil();
     var expandingTable = uiUtil.getExpandingTable("cmp-formulations");
     var addFormulationButton = element(by.id("addFormulation"));
-    var formulationNameByModel = By.model("formulRecCtrl.frmModel.formulationName");
+    var formulationNameModelString = "formulRecCtrl.frmModel.formulationName";
     var dosageFormModelString="formulRecCtrl.frmModel.dosageForm";
-   // var _unitsModelString="$ctrl.productModel.units";
-    // _unitsUiSelect=element(by.model(_unitsModelString));
 
-    //browser.selectOption(by.model(_activityLeadModel), value);
 
     this.getRows = function () {
         return uiUtil.getExpandingTableRows(expandingTable);
@@ -32,15 +29,20 @@ var Formulations = function () {
     };
     this.getRecord=function(recordRow){
         return this.getRows().get(recordRow*2+1);
-    }
-    this.setDosageFormSelect=function(recordRow,value){
-
-        var parent=this.getRecord(recordRow);
-        browser.selectOption(by.model(dosageFormModelString), value,parent);
-    }
+    };
     this.addFormulationRecord=function(){
         addFormulationButton.click();
-    }
+    };
+
+    this.setDosageFormSelect=function(parent,value){
+        browser.selectOption(by.model(dosageFormModelString), value,parent);
+    };
+
+    this.setFormulationName=function(parent,value){
+        parent.element(by.model(formulationNameModelString)).sendKeys(value);
+    };
+
+
 
 };
 
