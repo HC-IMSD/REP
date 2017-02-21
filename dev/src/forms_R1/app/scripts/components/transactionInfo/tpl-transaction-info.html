@@ -43,12 +43,12 @@
                                     <input type="text" id="companyId" name="companyId"
                                            ng-model="transInfoCtrl.transactionModel.ectd.companyId"
                                            class="form-control" maxlength="6" size="6"
-                                           ng-required="true" ng-minlength="6"/>
+                                           ng-required="true" ng-minlength="5"/>
                                     <strong id="companyId-error" class="error"
                                             ng-if="transInfoCtrl.showError(transInfoForm.companyId)">
                         <span class="label label-danger" ng-messages="transInfoForm.companyId.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                             <span ng-message="minlength"><span translate="MSG_LENGTH_6"></span></span>
+                             <span ng-message="minlength"><span translate="MSG_LENGTH_MIN5"></span></span>
                         </span>
                                     </strong>
                                 </label>
