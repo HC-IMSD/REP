@@ -213,6 +213,7 @@
             var draft_prefix = "DRAFTREPRA";
             var final_prefix = "HCREPRA";
             var filename = "";
+            var separator="-";
             if (vm.userType ===INTERNAL_TYPE) { //TODO magic numbers
 
                 filename = final_prefix;
@@ -220,11 +221,11 @@
                 filename = draft_prefix;
             }
             if (vm.activityRoot && vm.activityRoot.dstsControlNumber) {
-                filename = filename + "_" + vm.activityRoot.dstsControlNumber;
+                filename = filename + separator + vm.activityRoot.dstsControlNumber;
             }
             if (vm.activityRoot.enrolmentVersion) {
                 //var parts = vm.activityRoot.enrolmentVersion.split('.');
-                filename = filename + "_" + vm.activityRoot.enrolmentVersion;
+                filename = filename + separator + vm.activityRoot.enrolmentVersion;
             }
             return filename;
         }

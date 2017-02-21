@@ -369,7 +369,7 @@
             //jsonObj[rootTag].data_checksum = "";
             var xmlResult = convertJSONObjectsToXML(jsonObj);
             //TODO this needs to be configurable
-           xmlResult= '<?xml version="1.0" encoding="UTF-8"?>'+ '<?xml-stylesheet href="REP_Combined.xsl" type="text/xsl"?>'+xmlResult;
+           xmlResult= '<?xml version="1.0" encoding="UTF-8"?>'+ '<?xml-stylesheet  type="text/xsl" href="REP_Combined.xsl"?>'+xmlResult;
            // var hash = CryptoJS.SHA256(xmlResult);
             //jsonObj[rootTag].data_checksum = hash.toString();
             //regenerate the xml

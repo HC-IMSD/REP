@@ -47,6 +47,7 @@
             var day = date.getDate();
             var hours = date.getHours();
             var minutes = date.getMinutes();
+            var separator="-";
 
             if (month < 10) {
                 month = "0" + month;
@@ -62,7 +63,7 @@
             }
 
 
-            filename = filename + "_" + date.getFullYear() + "_" + month + "_" + day + "_" + hours + minutes;
+            filename = filename + separator + date.getFullYear() +separator + month + separator + day + separator + hours + minutes;
             return (filename);
         }
 

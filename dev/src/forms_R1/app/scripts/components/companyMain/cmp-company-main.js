@@ -127,6 +127,7 @@
             var draft_prefix = "DRAFTREPCO";
             var final_prefix = "HCREPCO";
             var filename = "";
+            var separator="-";
             if (vm.userType === INTERNAL_TYPE) {
 
                 filename = final_prefix;
@@ -134,11 +135,11 @@
                 filename = draft_prefix;
             }
             if (vm.company.companyId) {
-                filename = filename + "_" + vm.company.companyId;
+                filename = filename + separator+ vm.company.companyId;
             }
             if (vm.company.enrolmentVersion) {
                 //var parts = vm.company.enrolmentVersion.split('.')
-                filename = filename + "_" + vm.company.enrolmentVersion;
+                filename = filename + separator+ vm.company.enrolmentVersion;
             }
             return filename;
         }

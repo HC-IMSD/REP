@@ -298,6 +298,7 @@
             var draft_prefix = "DRAFTREPDO";
             var final_prefix = "HCREPDO";
             var filename = "";
+            var separator="-";
             if (self.userType === INTERNAL_TYPE) {
 
                 filename = final_prefix;
@@ -305,10 +306,10 @@
                 filename = draft_prefix;
             }
             if (self.dossierModel && self.dossierModel.dossierID) {
-                filename = filename + "_" + self.dossierModel.dossierID;
+                filename = filename + separator + self.dossierModel.dossierID;
             }
             if (self.dossierModel.enrolmentVersion) {
-                filename = filename + "_" + self.dossierModel.enrolmentVersion;
+                filename = filename + separator + self.dossierModel.enrolmentVersion;
             }
             return filename;
         }
