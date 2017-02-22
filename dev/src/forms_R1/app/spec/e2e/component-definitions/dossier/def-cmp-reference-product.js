@@ -11,11 +11,14 @@ var ReferenceProduct=function(){
 
     var  expandingTable=uiUtil.getExpandingTable("cmp-thera-list");
     var _addRefProductButton=element(By.id("addRefProduct"));
-    var _saveRefProductButton=element(By.id("saveRef"));
+
+    var _saveRefProductButtonIdString="saveRef";
+    var _saveRefProductButton=element(By.id(_saveRefProductButtonIdString));
 
     var _brandNameText=element(by.model("$ctrl.productModel.brandName"));
     var _activeNameModel="$ctrl.productModel.ingLabel";
 
+    var _strengthModelString="$ctrl.productModel.strengths";
     var _strengthNumber=element(by.model("$ctrl.productModel.strengths"));
     var _unitsModelString="$ctrl.productModel.units";
     var _unitsUiSelect=element(by.model(_unitsModelString));
@@ -46,22 +49,22 @@ var ReferenceProduct=function(){
         _brandNameText.sendKeys(value);
 
     };
-    this.setStrengthValue=function(value){
-        _strengthNumber.sendKeys(value);
+    this.setStrengthValue=function(parent,value){
+        parent.element(by.model(_strengthModelString)).sendKeys(value);
 
     };
-    this.setUnitsTextValue=function(value) {
+    this.setUnitsTextValue=function(parent, value) {
         browser.getUISelectOption(By.model(_unitsModelString), value);
     };
 
-    this.setPerValue=function(value){
+    this.setPerValue=function(parent,value){
         _perText.sendKeys(value);
     };
-    this.setDosageFormTextValue=function(value) {
+    this.setDosageFormTextValue=function(parent,value) {
         browser.getUISelectOption(By.model(_dosageFormModelString), value);
     };
 
-    this.setCompanyNameValue=function(value){
+    this.setCompanyNameValue=function(parent,value){
         _companyNameText.sendKeys(value);
 
     };

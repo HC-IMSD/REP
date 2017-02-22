@@ -41,7 +41,8 @@ describe('Dossier External Form Type Components Test', function () {
             formulationRecord=formulations.getRecord(0);
         });
         it("Select dosage form", function () {
-            formulations.setDosageFormSelect(formulationRecord,0, "BEAD");
+
+           formulations.setDosageFormSelect(formulationRecord, "BEAD");
         });
         it("Add an active ingredient", function () {
             var  formulationRecord=formulations.getRecord(0);

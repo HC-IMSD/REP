@@ -71,14 +71,16 @@ var UiUtil = function () {
                 });
         }
 
-    }
+    };
 
 
-    //pick a text option for the UI select box, not using search
-    this.pickUISelectOption = function (item,selectList) {
-        var  desiredOption;
+    // Deprecrated Doesn't and pick a text option for the UI select box, not using search
+    this.pickUISelectOption = function (item, selectList) {
+        var desiredOption;
+        console.log("FFFFFFFF");
+        console.log(selectList);
         selectList.click();
-        selectList.findElements(protractor.By.xpath('//li/div/span')) //needs review better way?
+        selectList.element.all(protractor.By.xpath('//li/div/span')) //needs review better way?
             .then(function findMatchingOption(options) {
                 options.some(function (option) {
                     option.getText().then(function doesOptionMatch(text) {
@@ -94,7 +96,7 @@ var UiUtil = function () {
                     desiredOption.click();
                 }
             });
-    }
+    };
 
 
     this.getUISelectModelValue = function (modelElement, modelString) {
@@ -115,11 +117,11 @@ var UiUtil = function () {
      * @param typeVal
      * @param lookupVal
      */
-    this.selectTypeAheadPopupValue = function (modelString, typeVal, lookupVal,control) {
-        var _element="";
-        if(control){
-            _element=control;
-        }else {
+    this.selectTypeAheadPopupValue = function (modelString, typeVal, lookupVal, control) {
+        var _element = "";
+        if (control) {
+            _element = control;
+        } else {
             _element = element.all(by.model(modelString)).last(); //temporary till a better fix
         }
         _element.sendKeys(typeVal);
@@ -127,14 +129,14 @@ var UiUtil = function () {
         _popup.element(by.css('a[title="' + lookupVal + '"]')).click();
     }
 
-    this.getExpandingTable = function (tagName,parent) {
+    this.getExpandingTable = function (tagName, parent) {
 
-        var component ="";
+        var component = "";
 
         if (parent) {
             component = parent.element(by.tagName(tagName));
 
-        }else{
+        } else {
             component = element(by.tagName(tagName));
         }
 
@@ -178,6 +180,16 @@ var UiUtil = function () {
             return deferred.fulfill(value);
         });
         return deferred.promise;
+    };
+
+
+    this.UISelectSearch = function (selectList, val) {
+        var _searchInput = selectList.element(by.css('.ui-select-search'));
+       // var choices = selectList.all(by.css('.ui-select-choices .ui-select-choices-row-inner'));
+        selectList.click();
+        _searchInput.clear();
+        _searchInput.sendKeys(val);
+       return _searchInput.sendKeys(protractor.Key.ENTER);
     };
 
 

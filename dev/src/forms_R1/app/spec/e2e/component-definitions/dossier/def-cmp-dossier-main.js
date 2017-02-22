@@ -33,6 +33,8 @@ var MainDossier=function(){
         //cannot bind until you have and instance of the browser set
         browser.selectOption=uiUtil.selectOption.bind(browser);
         browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
+        browser.UISelectSearch=uiUtil.UISelectSearch.bind(browser);
+
         browser.getUISelectModelValue=uiUtil.getUISelectModelValue.bind(browser);
         browser.selectTypeAheadPopupValue=uiUtil.selectTypeAheadPopupValue.bind(browser);
         browser.driver.manage().window().maximize();
