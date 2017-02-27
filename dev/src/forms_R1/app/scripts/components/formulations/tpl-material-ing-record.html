@@ -25,7 +25,8 @@
             <div class="row">
                 <div class="form-group col-md-2">
                     <label for="cas"><span class="field-name">{{'CAS_NUM'|translate}}</span></label>
-                    <input type="text" id="cas" data-ng-model="mirCtrl.mirModel.cas" ng-model-options="{ debounce: $inherit}"
+                    <input type="text" id="cas" data-ng-model="mirCtrl.mirModel.cas"
+                           ng-model-options="{ debounce: $inherit}"
                            class="form-control" name="casNum" maxlength="12" size="12"/>
                 </div>
                 <div class="form-group col-md-4">
@@ -61,14 +62,14 @@
             <div class="row">
 
                 <div class="btn-group-sm col-xs-12 text-right">
-                    <input type="submit" value="Save" class="btn btn-primary"
-                           ng-click="mirCtrl.save()"/>
-                    <input type="submit" ng-if="mirCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
-                           ng-click="mirCtrl.delete()"/>
-                    <input type="submit" value="Discard Changes" class="btn btn-default"
-                           ng-click="mirCtrl.discardChanges()">
+                    <button class="btn btn-primary" name="saveMaterial"
+                            ng-click="mirCtrl.save()">Save
+                    </button>
+                    <button ng-if="mirCtrl.deleteBtn === true" class="btn btn-danger" name="deleteMaterial"
+                            ng-click="mirCtrl.delete()">Delete</button>
+                    <button class="btn btn-default" name="discardMaterial" ng-click="mirCtrl.discardChanges()">
+                        Discard Changes</button>
                 </div>
-
             </div>
         </fieldset>
     </div>

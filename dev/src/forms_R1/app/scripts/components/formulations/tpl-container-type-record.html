@@ -116,16 +116,14 @@
         </fieldset>
 
         <div class="row">
-
             <div class="btn-group-sm col-xs-12 text-right">
-                <input type="submit" value="Save" class="btn btn-primary"
-                       ng-click="ctrCtrl.save()"/>
-                <input type="submit" ng-if="ctrCtrl.deleteBtn === true" value="Delete" class="btn btn-danger"
-                       ng-click="ctrCtrl.delete()"/>
-                <input type="submit" value="Discard Changes" class="btn btn-default"
-                       ng-click="ctrCtrl.discardChanges()"/>
+                <button  class="btn btn-primary" name="saveContainer"
+                        ng-click="ctrCtrl.save()">Save</button>
+                <button ng-if="ctrCtrl.deleteBtn === true" class="btn btn-danger" name="deleteContainer"
+                        ng-click="ctrCtrl.delete()">Delete</button>
+                <button  class="btn btn-default" name="discardContainer"
+                        ng-click="ctrCtrl.discardChanges()">Discard Changes</button>
             </div>
         </div>
-
     </div>
 </ng-form>

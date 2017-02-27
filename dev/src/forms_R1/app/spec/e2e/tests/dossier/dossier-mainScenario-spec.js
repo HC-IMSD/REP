@@ -12,6 +12,9 @@ var Formulations = require('../../component-definitions/dossier/def-cmp-formulat
 var DrugProduct = require('../../component-definitions/dossier/def-cmp-drug-product');
 var MedIngredient=require('../../component-definitions/dossier/def-cmp-medicinal-ingredient');
 var NonMedIngredient=require('../../component-definitions/dossier/def-cmp-nonmedicinal-ingredient');
+var MaterialIngredient=require('../../component-definitions/dossier/def-cmp-material');
+var ContainerType=require('../../component-definitions/dossier/def-cmp-container');
+
 var contactData = require('../../../e2e/test-data/contact.json');
 
 var repContactObj;
@@ -19,7 +22,7 @@ var rootDossierObj;
 var referenceProduct;
 var theraProduct;
 var drugProduct;
-var formulations,medIngredient,nonMedIngredient;
+var formulations,medIngredient,nonMedIngredient,materialIngredient,containerType;
 describe('Dossier External Form Type Components Test', function () {
 
     beforeAll(function () {
@@ -33,6 +36,8 @@ describe('Dossier External Form Type Components Test', function () {
         formulations = new Formulations();
        medIngredient=new MedIngredient();
        nonMedIngredient=new NonMedIngredient();
+        materialIngredient=new MaterialIngredient();
+        containerType=new ContainerType();
     });
 
     describe("Add a formulation", function () {
@@ -85,17 +90,30 @@ describe('Dossier External Form Type Components Test', function () {
             nonMedIngredient.setBaseTextValue(newIngredient,"Yes");
             nonMedIngredient.setAnimalSrcTextValue(newIngredient,'No');
             nonMedIngredient.saveNonMedicinalIngredient(newIngredient);
-          /*  medIngredient.addMedIngredent(formulationRecord);
-            var newIngredient=medIngredient.getNewRecord(formulationRecord);
-            medIngredient.setCasValue(newIngredient,"111-11-1");
-            medIngredient.setActiveNameLookup(newIngredient,"aa","BANISTERIA CAAPI");
-            medIngredient.setStrengthValue(newIngredient,2.2345)
-            medIngredient.setUnitsTextValue(newIngredient,"UNIT");
-            medIngredient.setNanoTextValue(newIngredient,"NANOPARTICLE");
-            medIngredient.setBaseTextValue(newIngredient,"Yes");
-            medIngredient.setAnimalSrcTextValue(newIngredient,'No');
-            medIngredient.saveMedicinalIngredient(newIngredient);*/
         });
+        it("Add a Material ingredient", function () {
+            var  formulationRecord=formulations.getRecord(0);
+            materialIngredient.addMaterialIngredient(formulationRecord);
+            var newIngredient=materialIngredient.getNewRecord(formulationRecord);
+            materialIngredient.setCasValue(newIngredient,"111-11-1");
+            materialIngredient.setIngredientNameValue(newIngredient,"test 1");
+            materialIngredient.setPresentInFinalTextValue(newIngredient,'No');
+            materialIngredient.saveMaterialIngredient(newIngredient);
+        });
+
+        it("Add a Container Type", function () {
+            var  formulationRecord=formulations.getRecord(0);
+            containerType.addContainerType(formulationRecord);
+            var newIngredient=containerType.getNewRecord(formulationRecord);
+            containerType.setContainerTypeValue(newIngredient,"Container Type 1");
+            containerType.setPackageTypeValue(newIngredient,"Package Type 1");
+            containerType.setShelfLifeYearValue(newIngredient,3);
+            containerType.setShelfLifeMonthValue(newIngredient,12);
+            containerType.setTempMinValue(newIngredient,-4.4);
+            containerType.setTempMaxValue(newIngredient,20);
+            containerType.saveContainerTypeRecord(newIngredient);
+        });
+
     });
 
 
