@@ -11,7 +11,7 @@ var TheraProducts = require('../../component-definitions/dossier/def-cmp-thera-c
 var Formulations = require('../../component-definitions/dossier/def-cmp-formulation');
 var DrugProduct = require('../../component-definitions/dossier/def-cmp-drug-product');
 var MedIngredient=require('../../component-definitions/dossier/def-cmp-medicinal-ingredient');
-
+var NonMedIngredient=require('../../component-definitions/dossier/def-cmp-nonmedicinal-ingredient');
 var contactData = require('../../../e2e/test-data/contact.json');
 
 var repContactObj;
@@ -19,7 +19,7 @@ var rootDossierObj;
 var referenceProduct;
 var theraProduct;
 var drugProduct;
-var formulations,medIngredient;
+var formulations,medIngredient,nonMedIngredient;
 describe('Dossier External Form Type Components Test', function () {
 
     beforeAll(function () {
@@ -27,22 +27,23 @@ describe('Dossier External Form Type Components Test', function () {
         rootDossierObj = new DossierMain();
         rootDossierObj.get(dev_dossier_root_ext_url);
         repContactObj = new RepContact();
-        referenceProduct = new ReferenceProduct();
-        theraProduct = new TheraProducts();
+        //referenceProduct = new ReferenceProduct();
+       theraProduct = new TheraProducts();
         drugProduct = new DrugProduct();
         formulations = new Formulations();
-        medIngredient=new MedIngredient();
+       medIngredient=new MedIngredient();
+       nonMedIngredient=new NonMedIngredient();
     });
 
     describe("Add a formulation", function () {
         var  formulationRecord="";
         it("Create a formulation and  fill in formulation fields", function () {
             formulations.addFormulationRecord();
-            formulationRecord=formulations.getRecord(0);
+           formulationRecord=formulations.getRecord(0);
         });
         it("Select dosage form", function () {
-
-           formulations.setDosageFormSelect(formulationRecord, "BEAD");
+            formulationRecord=formulations.getRecord(0);
+         formulations.setDosageFormSelect(formulationRecord, "BEAD");
         });
         it("Add an active ingredient", function () {
             var  formulationRecord=formulations.getRecord(0);
@@ -50,6 +51,50 @@ describe('Dossier External Form Type Components Test', function () {
             var newIngredient=medIngredient.getNewRecord(formulationRecord);
             medIngredient.setCasValue(newIngredient,"111-11-1");
             medIngredient.setActiveNameLookup(newIngredient,"aa","BANISTERIA CAAPI");
+            medIngredient.setStrengthValue(newIngredient,2.2345)
+            medIngredient.setUnitsTextValue(newIngredient,"UNIT");
+            medIngredient.setNanoTextValue(newIngredient,"NANOPARTICLE");
+            medIngredient.setBaseTextValue(newIngredient,"Yes");
+            medIngredient.setAnimalSrcTextValue(newIngredient,'No');
+            medIngredient.saveMedicinalIngredient(newIngredient);
+        });
+
+        it("Add a second active ingredient", function () {
+            var  formulationRecord=formulations.getRecord(0);
+            medIngredient.addMedIngredent(formulationRecord);
+            var newIngredient=medIngredient.getNewRecord(formulationRecord);
+            medIngredient.setCasValue(newIngredient,"111-11-1");
+            medIngredient.setActiveNameLookup(newIngredient,"aa","BANISTERIA CAAPI");
+            medIngredient.setStrengthValue(newIngredient,2.2345)
+            medIngredient.setUnitsTextValue(newIngredient,"UNIT");
+            medIngredient.setNanoTextValue(newIngredient,"NANOPARTICLE");
+            medIngredient.setBaseTextValue(newIngredient,"Yes");
+            medIngredient.setAnimalSrcTextValue(newIngredient,'No');
+            medIngredient.saveMedicinalIngredient(newIngredient);
+        });
+
+        it("Add a non medicinal ingredient", function () {
+            var  formulationRecord=formulations.getRecord(0);
+            nonMedIngredient.addnonMedIngredent(formulationRecord);
+            var newIngredient=nonMedIngredient.getNewRecord(formulationRecord);
+            nonMedIngredient.setCasValue(newIngredient,"111-11-1");
+            nonMedIngredient.setIngredientNameValue(newIngredient,"test 1");
+            nonMedIngredient.setStrengthValue(newIngredient,2.2345)
+            nonMedIngredient.setUnitsTextValue(newIngredient,"UNIT");
+            nonMedIngredient.setNanoTextValue(newIngredient,"NANOPARTICLE");
+            nonMedIngredient.setBaseTextValue(newIngredient,"Yes");
+            nonMedIngredient.setAnimalSrcTextValue(newIngredient,'No');
+            nonMedIngredient.saveNonMedicinalIngredient(newIngredient);
+          /*  medIngredient.addMedIngredent(formulationRecord);
+            var newIngredient=medIngredient.getNewRecord(formulationRecord);
+            medIngredient.setCasValue(newIngredient,"111-11-1");
+            medIngredient.setActiveNameLookup(newIngredient,"aa","BANISTERIA CAAPI");
+            medIngredient.setStrengthValue(newIngredient,2.2345)
+            medIngredient.setUnitsTextValue(newIngredient,"UNIT");
+            medIngredient.setNanoTextValue(newIngredient,"NANOPARTICLE");
+            medIngredient.setBaseTextValue(newIngredient,"Yes");
+            medIngredient.setAnimalSrcTextValue(newIngredient,'No');
+            medIngredient.saveMedicinalIngredient(newIngredient);*/
         });
     });
 
@@ -148,9 +193,9 @@ describe('Dossier External Form Type Components Test', function () {
         });
 
     });
-    describe('pause', function () {
+    xdescribe('pause', function () {
         it('Dossier Pause Test', function () {
-            //browser.pause();
+            browser.pause();
 
         });
 

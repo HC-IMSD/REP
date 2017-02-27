@@ -38,7 +38,7 @@ var Formulations = function () {
 
       var selectList=parent.element(by.model(dosageFormModelString));
        // parent.element(by.name(dosageFormModelString)).then(function (selectList) {
-            browser.UISelectSearch(selectList,value);
+           browser.UISelectSearch(selectList,value);
            // return deferred.fulfill(true);
         //});
        // return deferred.promise;

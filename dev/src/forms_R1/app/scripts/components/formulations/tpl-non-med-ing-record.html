@@ -68,7 +68,7 @@
                         <div class="rep-pad-top">
                             <div class="rep-error" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nmUnits.$invalid}">
                                 <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="units_{{::$id}}"
-                                           name="nmUnits"  ng-model-options="{debounce: 0}"
+                                           name="nmUnits" ng-model-options="{debounce: 0}"
                                            class="rep-selectize-font full-width" required>
                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
                                                      class="rep-selectize-font rep-selectize-dropdown form-control">
@@ -108,7 +108,8 @@
 
                 <div class="form-group col-md-5">
                     <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
-                    <input type="text" id="per" data-ng-model="nIngRecCtrl.ingModel.per" ng-model-options="{ debounce: $inherit}"
+                    <input type="text" id="per" data-ng-model="nIngRecCtrl.ingModel.per"
+                           ng-model-options="{ debounce: $inherit}"
                            class="form-control" name="perVal" maxlength="40" size="40"/>
                 </div>
             </div>
@@ -192,16 +193,19 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <input type="submit" value="{{'SAVE'|translate}}" class="btn btn-primary"
-                                   ng-click="nIngRecCtrl.saveIng()"/>
-                            <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="{{'DELETE'|translate}}"
-                                   class="btn btn-danger"
-                                   ng-click="nIngRecCtrl.delete()"/>
-                            <input type="submit" ng-if="nIngRecCtrl.deleteBtn === true" value="{{'COPY'|translate}}"
-                                   class="btn btn-default"
-                                   ng-click="nIngRecCtrl.copy()" ng-disabled="nIngRecCtrl.nonMedIngForm.$dirty">
-                            <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                                   ng-click="nIngRecCtrl.discardChanges()">
+                            <button class="btn btn-primary" name="saveNMI"
+                                    ng-click="nIngRecCtrl.saveIng()">{{'SAVE'|translate}}
+                            </button>
+                            <button ng-if="nIngRecCtrl.deleteBtn === true"
+                                    class="btn btn-danger" name="deleteNMI"
+                                    ng-click="nIngRecCtrl.delete()">{{'DELETE'|translate}}
+                            </button>
+                            <button ng-if="nIngRecCtrl.deleteBtn === true" class="btn btn-default" name="copyNMI"
+                                    ng-click="nIngRecCtrl.copy()" ng-disabled="nIngRecCtrl.nonMedIngForm.$dirty">
+                                {{'COPY'|translate}}
+                            </button>
+                            <button class="btn btn-default" name="discardNMI"
+                                    ng-click="nIngRecCtrl.discardChanges()">{{'DISCARD_CHANGES'|translate}}</button>
                         </div>
                     </div>
                 </div>

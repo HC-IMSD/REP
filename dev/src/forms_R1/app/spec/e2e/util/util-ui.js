@@ -125,13 +125,13 @@ var UiUtil = function () {
             _element = element.all(by.model(modelString)).last(); //temporary till a better fix
         }
         _element.sendKeys(typeVal);
-        var _popup = element(by.css(".custom-popup-wrapper"));
+        var _popup = element(by.css(".custom-popup-wrapper:not(.ng-hide)"));
         _popup.element(by.css('a[title="' + lookupVal + '"]')).click();
     }
 
     this.getExpandingTable = function (tagName, parent) {
 
-        var component = "";
+        var component = null;
 
         if (parent) {
             component = parent.element(by.tagName(tagName));
@@ -139,8 +139,9 @@ var UiUtil = function () {
         } else {
             component = element(by.tagName(tagName));
         }
-
-        var table = component.element(by.tagName('cmp-expanding-table'));
+        console.log(tagName);
+        var table = component.all(by.tagName('cmp-expanding-table')).first();
+        //TODO why am i getting multiples. should be one
         return table; //promises needed?
     };
 
@@ -185,7 +186,9 @@ var UiUtil = function () {
 
     this.UISelectSearch = function (selectList, val) {
         var _searchInput = selectList.element(by.css('.ui-select-search'));
-       // var choices = selectList.all(by.css('.ui-select-choices .ui-select-choices-row-inner'));
+        //var _searchInput = selectList.element(by.model('$select.search'));
+
+       //var choices = selectList.all(by.css('.ui-select-choices .ui-select-choices-row-inner'));
         selectList.click();
         _searchInput.clear();
         _searchInput.sendKeys(val);

@@ -1,34 +1,37 @@
 /**
- * Created by dkilty on 20/02/2017.
+ * Created by dkilty on 2/26/2017.
  */
+
 var UiUtil = require('../../util/util-ui.js');
 
-var MedIngredient=function(){
+var NonMedIngredient=function(){
     var uiUtil = new UiUtil();
-    var medIngredListTag="cmp-active-ing-list";
-    var medIngredTag="cmp-active-ing-record";
-    var newRecTag="new-record";
-    var addAIButtonName="addAI";
+    var medIngredListTag="cmp-non-med-ing-list";
+    var medIngredTag="cmp-non-med-ing-record";
+    var newRecTag="new-nmi-record";
+    var addNMIButtonName="addNMI";
 
     //record string models
-    var _ingedNameModelString="ingRecCtrl.ingModel.ingLabel";
-    var _casModelString="ingRecCtrl.ingModel.cas";
-    var _standardModelString="ingRecCtrl.ingModel.standard";
-    var _strengthModelString="ingRecCtrl.ingModel.strength";
-    var _unitsModelString="ingRecCtrl.ingModel.units";
-    var _unitsOtherModelString="ingRecCtrl.ingModel.otherUnits";
-    var _perModelString="ingRecCtrl.ingModel.per";
-    var _nanoModelString="ingRecCtrl.ingModel.nanoMaterial";
-    var _nanoOtherModelString="ingRecCtrl.ingModel.nanoMaterialOther";
-    var _baseModelString="ingRecCtrl.ingModel.calcAsBase";
-    var _animalSrcModelString="ingRecCtrl.ingModel.humanAnimalSourced";
-    var _saveRecordButtonString="saveMI";
-    var _discardRecordButtonString="discardMI";
+    var _variantModelString="nIngRecCtrl.ingModel.varId";
+    var _ingedNameModelString="nIngRecCtrl.ingModel.ingName";
+    var _casModelString="nIngRecCtrl.ingModel.cas";
+    var _standardModelString="nIngRecCtrl.ingModel.standard";
+    var _strengthModelString="nIngRecCtrl.ingModel.strength";
+    var _unitsModelString="nIngRecCtrl.ingModel.units";
+    var _unitsOtherModelString="nIngRecCtrl.ingModel.otherUnits";
+    var _perModelString="nIngRecCtrl.ingModel.per";
+    var _nanoModelString="nIngRecCtrl.ingModel.nanoMaterial";
+    var _nanoOtherModelString="nIngRecCtrl.ingModel.nanoMaterialOther";
+    var _baseModelString="nIngRecCtrl.ingModel.calcAsBase";
+    var _animalSrcModelString="nIngRecCtrl.ingModel.humanAnimalSourced";
+    var _saveRecordButtonString="saveNMI";
+    var _deleteRecordButtonNameString="deleteNMI";
+    var _copyRecordButtonNameString="copyNMI";
+    var _discardRecordButtonString="discardNMI";
 
-    this.addMedIngredent = function (parent) {
-        //_addRepContactButton.sendKeys(protractor.Key.ENTER);
-       // parentElement.element(selector);
-        parent.element(by.name(addAIButtonName)).sendKeys(protractor.Key.ENTER);
+    this.addnonMedIngredent = function (parent) {
+
+        parent.element(by.name(addNMIButtonName)).sendKeys(protractor.Key.ENTER);
     };
 
     /**
@@ -60,18 +63,21 @@ var MedIngredient=function(){
     };
 
     /*
-    gets the new record that is outside the expanding table
+     gets the new record that is outside the expanding table
      */
     this.getNewRecord=function(parent){
 
         return parent.element(by.name(newRecTag)).element(by.tagName(medIngredTag));
     };
 
-    this.setActiveNameLookup= function (record,value,selectionValue) {
+   /* this.setActiveNameLookup= function (record,value,selectionValue) {
         var control=record.element(By.model(_ingedNameModelString));
         browser.selectTypeAheadPopupValue(_ingedNameModelString,value,selectionValue,control);
     };
-
+*/
+   this.setIngredientNameValue=function(record,value){
+       record.element(by.model(_ingedNameModelString)).sendKeys(value);
+   };
     this.setCasValue=function(record,value){
         record.element(by.model(_casModelString)).sendKeys(value);
     };
@@ -84,19 +90,13 @@ var MedIngredient=function(){
     };
     this.setUnitsTextValue=function(record,value) {
         var selectList=record.element(by.model(_unitsModelString));
-        // parent.element(by.name(dosageFormModelString)).then(function (selectList) {
         browser.UISelectSearch(selectList,value);
-       // var control=record.element(By.model(_unitsModelString));
-       // browser.getUISelectOption( value,control);
     };
     this.setUnitsOtherTextValue=function(record,value) {
         record.element(By.model(_unitsOtherModelString)).sendKeys(value);
     };
 
-
     this.setNanoTextValue=function(record,value) {
-       // var control=record.element(By.model(_unitsModelString));
-
         browser.selectOption(By.model(_nanoModelString),value,record);
     };
 
@@ -117,11 +117,11 @@ var MedIngredient=function(){
         // var control=record.element(By.model(_unitsModelString));
         browser.selectOption(By.model(_animalSrcModelString),value,record);
     };
-    this.saveMedicinalIngredient=function(record){
+    this.saveNonMedicinalIngredient=function(record){
         record.element(by.name(_saveRecordButtonString)).sendKeys(protractor.Key.ENTER);
     };
 
 
 };
 
-module.exports = MedIngredient;
+module.exports = NonMedIngredient;

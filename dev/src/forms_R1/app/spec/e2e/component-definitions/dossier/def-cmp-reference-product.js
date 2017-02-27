@@ -9,7 +9,7 @@ var ReferenceProduct=function(){
 
     var uiUtil=new UiUtil();
 
-    var  expandingTable=uiUtil.getExpandingTable("cmp-thera-list");
+    var  expandingTable=uiUtil.getExpandingTable("cmp-ref-product-list");
     var _addRefProductButton=element(By.id("addRefProduct"));
 
     var _saveRefProductButtonIdString="saveRef";
