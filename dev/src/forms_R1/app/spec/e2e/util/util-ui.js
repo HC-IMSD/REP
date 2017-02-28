@@ -70,15 +70,12 @@ var UiUtil = function () {
                     }
                 });
         }
-
     };
 
 
     // Deprecrated Doesn't and pick a text option for the UI select box, not using search
     this.pickUISelectOption = function (item, selectList) {
         var desiredOption;
-        console.log("FFFFFFFF");
-        console.log(selectList);
         selectList.click();
         selectList.element.all(protractor.By.xpath('//li/div/span')) //needs review better way?
             .then(function findMatchingOption(options) {
