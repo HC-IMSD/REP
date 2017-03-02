@@ -117,8 +117,55 @@ var MedIngredient=function(){
         // var control=record.element(By.model(_unitsModelString));
         browser.selectOption(By.model(_animalSrcModelString),value,record);
     };
+    //getters
+
+
+    this.getActiveNameLookup= function (record) {
+        return record.element(By.model(_ingedNameModelString)).getAttribute('value');
+    };
+
+    this.getCasValue=function(record){
+       return record.element(by.model(_casModelString)).getAttribute('value');
+    };
+    this.getStandardValue=function(record){
+       return record.element(by.model(_standardModelString)).getAttribute('value');
+    };
+
+    this.getStrengthValue=function(record){
+        return record.element(by.model(_strengthModelString)).getAttribute('value');
+    };
+    this.setUnitsTextValue=function(record) {
+        return record.element(by.model(_unitsModelString)).getAttribute('value');
+    };
+    this.getUnitsOtherTextValue=function(record) {
+        return record.element(By.model(_unitsOtherModelString)).getAttribute('value');
+    };
+
+    this.getNanoTextValue=function(record) {
+        return record.element(By.model(_nanoModelString)).getAttribute('value');
+    };
+
+    this.getNanoOtherTextValue=function(record) {
+       return record.element(By.model(_nanoOtherModelString)).getAttribute('value');
+    };
+
+    this.getPerTextValue=function(record) {
+        return record.element(By.model(_perModelString)).getAttribute('value');
+    };
+
+    this.getBaseTextValue=function(record) {
+        // var control=record.element(By.model(_unitsModelString));
+        return record.element(By.model(_baseModelString)).getAttribute('value');
+    };
+
+    this.getAnimalSrcTextValue=function(record) {
+        return record.element(By.model(_animalSrcModelString)).getAttribute('value');
+    };
+
+
+
     this.saveMedicinalIngredient=function(record){
-        record.element(by.name(_saveRecordButtonString)).sendKeys(protractor.Key.ENTER);
+        record.element(By.model(_saveRecordButtonString)).sendKeys(protractor.Key.ENTER);
     };
 
 

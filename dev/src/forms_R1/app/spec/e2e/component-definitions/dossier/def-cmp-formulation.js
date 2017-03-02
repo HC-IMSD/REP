@@ -37,19 +37,21 @@ var Formulations = function () {
     this.setDosageFormSelect=function(parent,value){
 
       var selectList=parent.element(by.model(dosageFormModelString));
-       // parent.element(by.name(dosageFormModelString)).then(function (selectList) {
            browser.UISelectSearch(selectList,value);
-           // return deferred.fulfill(true);
-        //});
-       // return deferred.promise;
-
-
-        //browser.getUISelectOption(value,parent);
-       // browser.selectOption(by.model(dosageFormModelString), value,parent);
     };
 
     this.setFormulationName=function(parent,value){
         parent.element(by.model(formulationNameModelString)).sendKeys(value);
+    };
+
+
+    this.getDosageFormSelect=function(parent){
+
+        return parent.element(by.model(dosageFormModelString)).getAttribute('value');
+    };
+
+    this.getFormulationName=function(parent){
+        return parent.element(by.model(formulationNameModelString)).getAttribute('value');
     };
 
 

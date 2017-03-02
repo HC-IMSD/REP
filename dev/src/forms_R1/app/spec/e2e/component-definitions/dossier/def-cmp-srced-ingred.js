@@ -27,6 +27,16 @@ var SrcIngedient = function () {
         parent.element(by.model(animalChkModelString)).click();
     };
 
+    this.getHumanCheckValue=function(parent){
+       return parent.element(by.model(humanChkModelString)).getAttribute('value');
+    };
+
+    this.getAnimalCheckValue=function(parent){
+        return parent.element(by.model(animalChkModelString)).getAttribute('value');
+    };
+
+
+
 
     /**
      * This will get the committed records

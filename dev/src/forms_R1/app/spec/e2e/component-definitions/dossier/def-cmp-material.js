@@ -76,6 +76,22 @@ var MaterialIngredient=function(){
         browser.selectOption(By.model(_presentFinalModelString),value,record);
     };
 
+    //getters
+
+    this.getIngredientNameValue=function(record){
+        record.element(by.model(_ingedNameModelString)).getAttribute('value');
+    };
+    this.getCasValue=function(record){
+        record.element(by.model(_casModelString)).getAttribute('value');
+    };
+    this.getStandardValue=function(record){
+        record.element(by.model(_standardModelString)).getAttribute('value');
+    };
+
+    this.getPresentInFinalTextValue=function(record) {
+        record.element(by.model(_presentFinalModelString)).getAttribute('value');
+    };
+
     this.saveMaterialIngredient=function(record){
         record.element(by.name(_saveRecordButtonString)).sendKeys(protractor.Key.ENTER);
     };

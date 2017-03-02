@@ -8,32 +8,29 @@ var ReferenceProduct=function(){
     var UiUtil = require('../../util/util-ui.js');
 
     var uiUtil=new UiUtil();
-
-    var  expandingTable=uiUtil.getExpandingTable("cmp-ref-product-list");
+    var refProductListTag="cmp-ref-product-list";
+    var newRecTag="new-cdnRef-record";
+    var rootRefCmpName="refProductRoot";
     var _addRefProductButton=element(By.id("addRefProduct"));
 
     var _saveRefProductButtonIdString="saveRef";
-    var _saveRefProductButton=element(By.id(_saveRefProductButtonIdString));
 
-    var _brandNameText=element(by.model("$ctrl.productModel.brandName"));
+    var _brandNameModelString="$ctrl.productModel.brandName";
     var _activeNameModel="$ctrl.productModel.ingLabel";
-
+    var _perModelString="$ctrl.productModel.per";
     var _strengthModelString="$ctrl.productModel.strengths";
-    var _strengthNumber=element(by.model("$ctrl.productModel.strengths"));
     var _unitsModelString="$ctrl.productModel.units";
-    var _unitsUiSelect=element(by.model(_unitsModelString));
-    var _perText=element(by.model("$ctrl.productModel.per"));
     var _dosageFormModelString="$ctrl.productModel.dosageForm";
-    var _dosageFormUiSelect=element(by.model(_dosageFormModelString));
-    var _companyNameText=element(by.model("$ctrl.productModel.companyName"));
+
+    var _companyNameModelString="$ctrl.productModel.companyName";
 
 
     this.addReferenceProduct=function(){
         _addRefProductButton.sendKeys(protractor.Key.ENTER);
     };
 
-    this.saveReferenceProduct=function(){
-        _saveRefProductButton.sendKeys(protractor.Key.ENTER);
+    this.saveReferenceProduct=function(record){
+        record.element(By.id(_saveRefProductButtonIdString)).sendKeys(protractor.Key.ENTER);
     };
 
     /**
@@ -41,12 +38,19 @@ var ReferenceProduct=function(){
      * @param value
      * @param selectionValue
      */
-    this.setActiveNameLookup= function (value,selectionValue) {
-        browser.selectTypeAheadPopupValue(_activeNameModel,value,selectionValue)
+    this.setActiveNameLookup= function (record,value,selectionValue) {
 
+        var control=record.all(By.model(_activeNameModel)).last();
+
+        browser.selectTypeAheadPopupValue(_activeNameModel,value,selectionValue,control);
     };
-    this.setBrandNameValue=function(value){
-        _brandNameText.sendKeys(value);
+    this.setActiveNameText= function (record,value) {
+       record.all(By.model(_activeNameModel)).last().sendKeys(value);
+    };
+
+
+    this.setBrandNameValue=function(parent,value){
+        parent.element(by.model(_brandNameModelString)).sendKeys(value);
 
     };
     this.setStrengthValue=function(parent,value){
@@ -54,58 +58,96 @@ var ReferenceProduct=function(){
 
     };
     this.setUnitsTextValue=function(parent, value) {
-        browser.getUISelectOption(By.model(_unitsModelString), value);
+        var selectList=parent.element(by.model(_unitsModelString));
+        // parent.element(by.name(dosageFormModelString)).then(function (selectList) {
+        browser.UISelectSearch(selectList,value);
     };
 
     this.setPerValue=function(parent,value){
-        _perText.sendKeys(value);
+        parent.element(by.model(_perModelString)).sendKeys(value);
     };
     this.setDosageFormTextValue=function(parent,value) {
-        browser.getUISelectOption(By.model(_dosageFormModelString), value);
+
+        var selectList=parent.element(by.model(_dosageFormModelString));
+        // parent.element(by.name(dosageFormModelString)).then(function (selectList) {
+        browser.UISelectSearch(selectList,value);
+
+       // browser.getUISelectOption(By.model(_dosageFormModelString), value);
     };
 
     this.setCompanyNameValue=function(parent,value){
-        _companyNameText.sendKeys(value);
+        parent.element(by.model(_companyNameModelString)).sendKeys(value);
 
     };
 
     //======================== Getters
 
-    this.getActiveNameLookup= function () {
-        var _element=element.all(by.model(modelString)).last(); //temporary till a better fix
+    this.getRootRefProduct=function(){
+
+      return (element(by.name(rootRefCmpName)));
+    };
+
+    this.getActiveNameLookup= function (parent) {
+        var _element=parent.all(by.model(modelString)).last(); //temporary till a better fix
         return _element.getAttribute('value');
     };
-    this.getBrandNameValue=function(){
-        return _brandNameText.getAttribute('value');
+    this.getBrandNameValue=function(parent){
+        return parent.get(by.model(_brandNameModelString)).getAttribute('value');
     };
     this.getStrengthValue=function(){
-        return _strengthNumber.getAttribute('value');
+        return parent.get(by.model(_strengthModelString)).getAttribute('value');
     };
 
-    this.getUnitsTextValue=function(value) {
-        return browser.getUISelectModelValue(_unitsUiSelect, _unitsModelString);
+    this.getUnitsTextValue=function(parent) {
+        return parent.get(by.model(_unitsModelString)).getAttribute('value');
     };
 
 
-    this.getPerValue=function(){
-        return _perText.getAttribute('value');
+    this.getPerValue=function(parent){
+        return parent.get(by.model(_perModelString)).getAttribute('value');
     };
-    this.getDosageFormTextValue=function(value) {
-        return browser.getUISelectModelValue(_dosageFormUiSelect, _dosageFormModelString);
-    };
-
-    this.getCompanyNameValue=function(){
-        return _companyNameText.getAttribute('value');
+    this.getDosageFormTextValue=function(parent) {
+        return parent.get(by.model(_dosageFormModelString)).getAttribute('value');
     };
 
-    this.getRows=function(){
-       return  uiUtil.getExpandingTableRows(expandingTable);
+    this.getCompanyNameValue=function(parent){
+        return parent.get(by.model(_dosageFormModelString)).getAttribute('value');
     };
-    this.clickRow=function(index){
-        uiUtil.clickRow(this.getRows(),index);
+
+
+    /**
+     * This will get the committed records
+     * @param parent
+     */
+    this.getRows = function (parent) {
+        var expandingTable= uiUtil.getExpandingTable(refProductListTag,parent);
+        return uiUtil.getExpandingTableRows(expandingTable);
     };
-    this.isRecordVisible=function(index){
-        return uiUtil.getRecordVisibility(this.getRows(),index);
+
+    this.clickRow = function (parent,index) {
+        uiUtil.clickRow(this.getRows(parent), index);
+    };
+
+    this.isRecordVisible=function(parent,recordIndex){
+        return uiUtil.getRecordVisibility(this.getRows(parent), recordIndex);
+    };
+
+    this.getRecordVisibility = function (parent,index) {
+        return uiUtil.getRecordVisibility(this.getRows(parent), index);
+    };
+    this.getNumberRecords = function (parent) {
+        return (uiUtil.getNumberRows(this.getRows(parent)) / 2)
+    };
+    this.getRecord = function (parent,recordRow) {
+        return this.getRows(parent).get(recordRow * 2 + 1);
+    };
+
+    /*
+     gets the new record that is outside the expanding table
+     */
+    this.getNewRecord=function(parent){
+
+        return parent.element(by.name(newRecTag));
     };
 
 };

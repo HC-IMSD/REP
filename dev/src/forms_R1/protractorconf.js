@@ -14,15 +14,9 @@ exports.config = {
     ],
     rootElement: '#app-root',
 
-   /* plugins: [{
-        chromeA11YDevTools: {
-            treatWarningsAsFailures: true
-        },
-        path: 'node_modules/protractor/plugins/accessiblity/index.js',
-        failOnWarning: true,
-        failOnError: true
-    }],*/
     plugins: [{
+
+
         chromeA11YDevTools: {
             treatWarningsAsFailures: true,
             auditConfiguration: {

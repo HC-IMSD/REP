@@ -59,6 +59,13 @@ var CountryRecord=function(){
         browser.UISelectSearch(selectList,value);
     };
 
+    this.getCountryListValue=function(parent,row,value){
+        var record=this.getRecord(parent,row);
+       return record.element(by.model(_countryTypeModelString)).getAttribute('value');
+    };
+
+
+
     this.deleteCountryTypeRecord=function(parent,row,value){
         var record=this.getRecord(parent,row);
         record.element(by.name(_deleteRecordButtonNameString)).sendKeys(protractor.Key.ENTER);

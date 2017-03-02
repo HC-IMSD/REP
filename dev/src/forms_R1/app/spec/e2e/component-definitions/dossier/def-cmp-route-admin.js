@@ -56,6 +56,12 @@ var ROARecord=function(){
         browser.UISelectSearch(selectList,value);
     };
 
+    this.getRoaListValue=function(parent,row){
+        var record=this.getRecord(parent,row);
+        return record.element(by.model(_roaTypeModelString)).getAttribute('value');
+    };
+
+
     this.deleteROATypeRecord=function(record){
         record.element(by.name(_deleteRecordButtonNameString)).sendKeys(protractor.Key.ENTER);
     };

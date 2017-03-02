@@ -60,9 +60,6 @@ var AnimalSrced = function () {
 
 
     this.setAnimalTypeListValue = function (record, value) {
-        // var record=this.getRecord(parent,row);
-       // var selectList = record.element(by.model(_animalTypeModelString));
-       // browser.UISelectSearch(selectList, value);
 
         browser.selectOption(By.model(_animalTypeModelString),value,record);
 
@@ -86,6 +83,33 @@ var AnimalSrced = function () {
     this.setAgeAnimals=function(record, value){
         record.element(by.model(_ageAnimalsModelString)).sendKeys(value);
     };
+
+    //getters
+    this.getAnimalTypeListValue = function (record) {
+       return record.element(by.model(_animalTypeModelString)).getAttribute('value');
+
+    };
+    this.getAnimalDescriptionValue = function (record) {
+
+        return record.element(by.model(_animalDescriptionModelString)).getAttribute('value');
+    };
+
+    this.getIsControlledPopulation=function(record, value){
+        return record.element(by.model(_isControlledPopModelString)).getAttribute('value');
+    };
+
+    this.getIsCellLine=function(record){
+        return record.element(by.model(_isCellLineModelString)).getAttribute('value');
+    };
+
+    this.getIsBiotechDerived=function(record){
+        return record.element(by.model(_isBiotechDerivedModelString)).getAttribute('value');
+    };
+    this.getAgeAnimals=function(record){
+        return record.element(by.model(_ageAnimalsModelString)).getAttribute('value');
+
+    };
+
 
 
 

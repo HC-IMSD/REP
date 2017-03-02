@@ -9,14 +9,17 @@
                                  delete-btn="true"></cmp-ref-product-details>
 
     </cmp-expanding-table>
+    <div name="new-cdnRef-record">
+        <cmp-ref-product-details ng-if="crpl.newProductFormShown===true" on-add-product="crpl.addProduct(product)"
+                                 record-index="crpl.productList.length" on-cancel="crpl.onNewCancel()"
+                                 delete-btn="false"></cmp-ref-product-details>
 
-    <cmp-ref-product-details ng-if="crpl.newProductFormShown===true" on-add-product="crpl.addProduct(product)"
-                             record-index="crpl.productList.length" on-cancel="crpl.onNewCancel()" delete-btn="false"></cmp-ref-product-details>
-
+    </div>
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
             <button class="btn btn-primary" data-ng-disabled="crpl.addNewDisabled()" id="addRefProduct"
-                   ng-click="crpl.addNewProductState()">{{'ADD_CRP'|translate}}</button>
+                    ng-click="crpl.addNewProductState()">{{'ADD_CRP'|translate}}
+            </button>
         </div>
     </div>
 </ng-form>

@@ -33,9 +33,6 @@
                                    typeahead-on-select="$ctrl.ingredSelectionUpdated($item, $model, $label, $event)"
                                    typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
                         </div>
-                        <!--<input type="text" id="med-ingredienth_{{$id}}" data-ng-model="$ctrl.productModel.medIngredient"-->
-                        <!--class="form-control full-width" name="medIngredient" ng-required="true" maxlength="60"-->
-                        <!--size="60"/>-->
                         <strong id="medIngred-error" class="error"
                                 ng-if="$ctrl.showError($ctrl.productDetailsForm.ingredName)">
                         <span class="label label-danger" ng-messages="$ctrl.productDetailsForm.ingredName.$error">

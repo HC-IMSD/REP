@@ -40,7 +40,7 @@ describe('Dossier External Form Type Components Test', function () {
         rootDossierObj = new DossierMain();
         rootDossierObj.get(dev_dossier_root_ext_url);
         repContactObj = new RepContact();
-        //referenceProduct = new ReferenceProduct();
+        referenceProduct = new ReferenceProduct();
         theraProduct = new TheraProducts();
         drugProduct = new DrugProduct();
         formulations = new Formulations();
@@ -172,7 +172,7 @@ describe('Dossier External Form Type Components Test', function () {
         });
     });
 
-    xdescribe('Dossier Reference Product Tests', function () {
+    describe('Dossier Reference Product Tests', function () {
 
         it('Yes there are reference products', function () {
             rootDossierObj.setIsRefProductByText('Yes');
@@ -181,17 +181,20 @@ describe('Dossier External Form Type Components Test', function () {
 
         it(' Add a reference product', function () {
             referenceProduct.addReferenceProduct();
-            referenceProduct.setActiveNameLookup("eth", "(ETHYLENEDINITRILO)TETRAACETIC ACID");
-            referenceProduct.setBrandNameValue("brand name 1");
-            referenceProduct.setStrengthValue(2.444);
-            referenceProduct.setPerValue('Per value');
-            referenceProduct.setUnitsTextValue("AMP");
-            referenceProduct.setCompanyNameValue('Company Name 1');
-            referenceProduct.setDosageFormTextValue("CAPSULE");
-            referenceProduct.saveReferenceProduct();
+            var rootRefInstance = referenceProduct.getRootRefProduct();
+            var newRefRecord = referenceProduct.getNewRecord(rootRefInstance);
+            referenceProduct.setActiveNameLookup(newRefRecord, "(ETH", "(ETHYLENEDINITRILO)TETRAACETIC ACID");
+            referenceProduct.setBrandNameValue(newRefRecord, "brand name 1");
+            referenceProduct.setStrengthValue(newRefRecord, 2.444);
+            referenceProduct.setPerValue(newRefRecord, 'Per value');
+            referenceProduct.setUnitsTextValue(newRefRecord, "AMP");
+            referenceProduct.setCompanyNameValue(newRefRecord, 'Company Name 1');
+            referenceProduct.setDosageFormTextValue(newRefRecord, "CAPSULE");
+           // referenceProduct.setActiveNameText(newRefRecord, "active name");
+            referenceProduct.saveReferenceProduct(newRefRecord);
             //TODO check the values that were set
-            referenceProduct.clickRow(0);
-            expect(referenceProduct.isRecordVisible(0)).toBeTruthy();
+            referenceProduct.clickRow(rootRefInstance,0);
+            expect(referenceProduct.isRecordVisible(rootRefInstance,0)).toBeTruthy();
         });
 
 
@@ -249,7 +252,7 @@ describe('Dossier External Form Type Components Test', function () {
     });
 
 });
-describe("Animal or Human Sourced Tab", function () {
+xdescribe("Animal or Human Sourced Tab", function () {
 
     it('Select the Animal tab', function () {
         tabsCmp.selectSourcedTab();
@@ -276,6 +279,14 @@ describe("Animal or Human Sourced Tab", function () {
         animalSrc.setIsCellLine(srcRec, "Yes");
         animalSrc.setIsBiotechDerived(srcRec, "Yes");
         animalSrc.setAgeAnimals(srcRec, 14);
+
+
+        expect(animalSrc.getAnimalTypeListValue(srcRec)).toEqual("string:CANINE_TYPE");
+        expect(animalSrc.getAnimalDescriptionValue(srcRec)).toBe("This is canine type description");
+        expect(animalSrc.getIsBiotechDerived(srcRec)).toBe("string:Y");
+
+        expect(animalSrc.getAgeAnimals(srcRec)).toBe("14");
+        expect(animalSrc.getIsControlledPopulation(srcRec)).toBe("string:N");
 
     });
 
