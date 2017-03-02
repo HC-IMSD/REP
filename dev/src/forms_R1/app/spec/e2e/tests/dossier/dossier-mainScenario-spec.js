@@ -3,7 +3,7 @@
  */
 
 var dev_dossier_root_ext_url = "http://localhost:2121/dev/dossier/dossierEnrolEXT-en.html";
-
+//var dev_dossier_root_ext_url="https://lam-dev.hres.ca/rep_test/dossierEXT-en.html";
 var DossierMain = require('../../component-definitions/dossier/def-cmp-dossier-main');
 var RepContact = require('../../component-definitions/def-cmp-rep-contact');
 var ReferenceProduct = require('../../component-definitions/dossier/def-cmp-reference-product');
@@ -19,6 +19,8 @@ var CountryRecord = require('../../component-definitions/dossier/def-cmp-country
 var DossierTabs = require('../../component-definitions/dossier/def-cmp-tabs');
 var SrcIngedient = require('../../component-definitions/dossier/def-cmp-srced-ingred');
 var TissuesFluids = require('../../component-definitions/dossier/def-cmp-tissues-fluids-list');
+var AnimalSrced = require('../../component-definitions/dossier/def-cmp-animal-sourced');
+
 
 var contactData = require('../../../e2e/test-data/contact.json');
 
@@ -29,7 +31,7 @@ var theraProduct;
 var drugProduct;
 var tabsCmp;
 var formulations, medIngredient, nonMedIngredient, materialIngredient, containerType, roaRecord, manufactCountry;
-var sourcedIngred, tissuesFluids;
+var sourcedIngred, tissuesFluids, animalSrc;
 
 describe('Dossier External Form Type Components Test', function () {
 
@@ -51,6 +53,7 @@ describe('Dossier External Form Type Components Test', function () {
         tabsCmp = new DossierTabs();
         sourcedIngred = new SrcIngedient();
         tissuesFluids = new TissuesFluids();
+        animalSrc = new AnimalSrced();
     });
 
 
@@ -252,18 +255,28 @@ describe("Animal or Human Sourced Tab", function () {
         tabsCmp.selectSourcedTab();
     });
     it("Add an Animal Sourced Ingredient", function () {
+        var lang = "en";
         sourcedIngred.addSrcIngred();
         var srcedRecord = sourcedIngred.getRecord(null, 0);
-        sourcedIngred.setHumanCheckValue(srcedRecord);
+        sourcedIngred.setAnimalCheckValue(srcedRecord);
         tissuesFluids.addTissuesFluids(srcedRecord);
         var tissuesFluidsRecord = tissuesFluids.getRecord(srcedRecord, 0);
-        tissuesFluids.setSystemSelectValue(tissuesFluidsRecord, "Immune");
+        tissuesFluids.setSystemSelectValue(tissuesFluidsRecord, tissuesFluids.systemTypes.IMMUNE, lang);
         tissuesFluids.setSystemDetails(tissuesFluidsRecord, tissuesFluids.tissueTypes.LYMPH_NODES);
         tissuesFluids.setSystemDetails(tissuesFluidsRecord, tissuesFluids.tissueTypes.OTHER_DETAILS);
         tissuesFluids.setSystemDetails(tissuesFluidsRecord, tissuesFluids.tissueTypes.SPLEEN);
         tissuesFluids.setSystemDetails(tissuesFluidsRecord, tissuesFluids.tissueTypes.THYMUS);
         tissuesFluids.setSystemDetails(tissuesFluidsRecord, tissuesFluids.tissueTypes.TONSILS);
-        tissuesFluids.setOtherDetailsValue(tissuesFluidsRecord,"This the other details")
+        tissuesFluids.setOtherDetailsValue(tissuesFluidsRecord, "This the other details");
+        animalSrc.addAnimalSrcRecord(srcedRecord);
+        var srcRec = animalSrc.getRecord(0);
+        animalSrc.setAnimalTypeListValue(srcRec, "Canine type");
+        animalSrc.setAnimalDescriptionValue(srcRec, "This is canine type description");
+        animalSrc.setIsControlledPopulation(srcRec, "No");
+        animalSrc.setIsCellLine(srcRec, "Yes");
+        animalSrc.setIsBiotechDerived(srcRec, "Yes");
+        animalSrc.setAgeAnimals(srcRec, 14);
+
     });
 
 });
