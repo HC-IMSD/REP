@@ -9,7 +9,21 @@ exports.config = {
 
     multiCapabilities: [
         {
-            'browserName': 'chrome'
+            'browserName': 'chrome',
+            'platform': 'ANY',
+            'version': 'ANY',
+            'chromeOptions': {
+                // Get rid of --ignore-certificate yellow warning
+                args: ['--no-sandbox', '--test-type=browser'],
+                // Set download path and avoid prompting for download even though
+                // this is already the default on Chrome but for completeness
+                prefs: {
+                    'download': {
+                        'prompt_for_download': false,
+                        'default_directory': '/e2e/downloads/'
+                    }
+                }
+            }
         }
     ],
     rootElement: '#app-root',
@@ -43,8 +57,6 @@ exports.config = {
     jasmineDefaultOpts: {
         defaultTimeoutInterval: 120000
     }
-
-
 
 
 

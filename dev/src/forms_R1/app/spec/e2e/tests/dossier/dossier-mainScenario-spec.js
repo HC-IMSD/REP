@@ -200,7 +200,7 @@ describe('Dossier External Form Type Components Test', function () {
 
     });
 
-    xdescribe('Rep Contact Tests', function () {
+    describe('Rep Contact Tests', function () {
         it('Add Rep Contact', function () {
 
             repContactObj.addRepContact();

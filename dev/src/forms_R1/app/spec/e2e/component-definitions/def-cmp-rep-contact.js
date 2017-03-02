@@ -1,12 +1,15 @@
 //TODO update how to retreive values
 var UiUtil = require('../util/util-ui.js');
+var ContactDetails=require('./common/def-cmp-contact-details');
+
 var RepContact = function () {
 
     uiUtil = new UiUtil();
     var expandingTable = uiUtil.getExpandingTable("cmp-rep-contact-list");
     var _addRepContactButton = element(by.buttonText("Add REP Contact"));
     var _saveRepContactButton = element(by.buttonText("Save Contact"));
-    var _salutationModelString = "contCtrl.contactModel.salutation";
+    var contactDetails=new ContactDetails();
+   /* var _salutationModelString = "contCtrl.contactModel.salutation";
     //var _amendChk=element(by.model("contactRec.contactModel.amend"));
     var _firstNameModelString = "contCtrl.contactModel.givenName";
     var _intitialsModelString = "contCtrl.contactModel.initials";
@@ -17,7 +20,7 @@ var RepContact = function () {
     var _faxModelString = "contCtrl.contactModel.fax";
     var _phoneModelString = "contCtrl.contactModel.phone";
     var _phoneExtModelString = "contCtrl.contactModel.phoneExt";
-    var _emailModelString = "contCtrl.contactModel.email";
+    var _emailModelString = "contCtrl.contactModel.email";*/
 
     /**
      * Rep contact contructor. Binds the required functions for this object
@@ -25,6 +28,7 @@ var RepContact = function () {
      */
     this.RepContact = function () {
         // browser.selectOption=uiUtil.selectOption.bind(browser);
+
     }
 
     this.addRepContact = function () {
@@ -35,81 +39,81 @@ var RepContact = function () {
     };
 
     this.setSalutationValue = function (parent, value) {
-
-        parent.element(by.model(_salutationModelString)).sendKeys(value);
+        contactDetails.setSalutationValue(parent,value);
     };
     this.setSalutationByText = function (parent, value) {
-        browser.selectOption(by.model(_salutationModelString), value, parent);
+
+        contactDetails.setSalutationByText(parent,value);
     };
 
     this.getSalutationValue = function (parent) {
-        return parent.element(by.model(_salutationModelString)).getAttribute('value');
+        return  contactDetails.getSalutationValue(parent);
     };
     /*  this.getSalutationCtrl = function () {
      return (_salutationSelect);
      };*/
     this.setFirstNameValue = function (parent, value) {
-        parent.element(by.model(_firstNameModelString)).sendKeys(value);
+        contactDetails.setFirstNameValue(parent,value);
     };
     this.setLastNameValue = function (parent, value) {
-        parent.element(by.model(_lastNameModelString)).sendKeys(value);
+        contactDetails.setLastNameValue(parent,value);
     };
     this.setInitialsValue = function (parent, value) {
-        parent.element(by.model(_intitialsModelString)).sendKeys(value);
+        contactDetails.setInitialsValue(parent,value);
     };
     this.setLanguageValue = function (parent, value) {
-        parent.element(by.model(_languageModelString)).sendKeys(value);
+        contactDetails.setLanguageValue(parent,value);
     };
     this.setLanguageValueLetter = function (value) {
-        browser.selectOption(by.model(_languageModelString), value, parent);
+        contactDetails.setLanguageValueLetter(value);
     };
     this.setJobTitleValue = function (parent, value) {
-        parent.element(by.model(_jobTitleModelString)).sendKeys(value);
+        contactDetails.setJobTitleValue(parent,value);
     };
     this.setFaxValue = function (parent, value) {
-        parent.element(by.model(_faxModelString)).sendKeys(value);
+        contactDetails.setFaxValue(parent,value);
     };
     this.setPhoneValue = function (parent, value) {
-        parent.element(by.model(_phoneModelString)).sendKeys(value);
+        contactDetails.setPhoneValue(parent,value);
     };
     this.setPhoneExtValue = function (parent, value) {
-        parent.element(by.model(_phoneExtModelString)).sendKeys(value);
+        contactDetails.setPhoneExtValue(parent,value);
     };
     this.setEmailValue = function (parent, value) {
 
-        parent.element(by.model(_emailModelString)).sendKeys(value);
+        contactDetails.setEmailValue(parent,value);
     };
 
 
     this.getFirstNameValue = function (parent) {
-        return parent.element(by.model(_firstNameModelString)).getAttribute('value');
+        return contactDetails.getFirstNameValue(parent);
     };
     this.getLastNameValue = function (parent) {
-        return parent.element(by.model(_lastNameModelString)).getAttribute('value');
+       return contactDetails.getLastNameValue(parent);
     };
 
     this.getInitialsValue = function (parent) {
-        return parent.element(by.model(_intitialsModelString)).getAttribute('value');
+        return  contactDetails.getInitialsValue(parent);
     };
     this.getLanguageValue = function (parent) {
-        return parent.element(by.model(_languageModelString)).getAttribute('value');
+        return  contactDetails.getLanguageValue(parent);
     };
 
     this.getJobTitleValue = function (parent) {
-        return parent.element(by.model(_jobTitleModelString)).getAttribute('value');
+        return  contactDetails.getJobTitleValue(parent);
     };
     this.getFaxValue = function (parent) {
-        return parent.element(by.model(_faxModelString)).getAttribute('value');
+        return  contactDetails.getFaxValue(parent);
     };
     this.getPhoneValue = function (parent) {
-        return parent.element(by.model(_phoneModelString)).getAttribute('value');
+        return  contactDetails.getPhoneValue(parent);
 
     };
     this.getPhoneExtValue = function (parent) {
-        return parent.element(by.model(_phoneExtModelString)).getAttribute('value');
+        return  contactDetails.getPhoneExtValue(parent);
     };
     this.getEmailValue = function (parent) {
-        return parent.element(by.model(_emailModelString)).getAttribute('value');
+        return  contactDetails.getEmailValue(parent);
     };
 
     this.getRows = function () {
@@ -120,7 +124,7 @@ var RepContact = function () {
     };
     this.isRecordVisible=function(recordIndex){
         return uiUtil.getRecordVisibility(this.getRows(), recordIndex);
-    }
+    };
 
 
     this.getRecordVisibility = function (index) {
@@ -131,12 +135,7 @@ var RepContact = function () {
     };
     this.getRecord = function (recordRow) {
         return this.getRows().get(recordRow * 2 + 1);
-    }
-    /* this.setDosageFormSelect=function(recordRow,value){
-
-     var parent=this.getRecord(recordRow);
-     browser.selectOption(by.model(dosageFormModelString), value,parent);
-     }*/
+    };
 
 };
 module.exports = RepContact;
