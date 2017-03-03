@@ -4,23 +4,11 @@ var ContactDetails=require('./common/def-cmp-contact-details');
 
 var RepContact = function () {
 
-    uiUtil = new UiUtil();
+    var uiUtil = new UiUtil();
     var expandingTable = uiUtil.getExpandingTable("cmp-rep-contact-list");
     var _addRepContactButton = element(by.buttonText("Add REP Contact"));
     var _saveRepContactButton = element(by.buttonText("Save Contact"));
     var contactDetails=new ContactDetails();
-   /* var _salutationModelString = "contCtrl.contactModel.salutation";
-    //var _amendChk=element(by.model("contactRec.contactModel.amend"));
-    var _firstNameModelString = "contCtrl.contactModel.givenName";
-    var _intitialsModelString = "contCtrl.contactModel.initials";
-    var _lastNameModelString = "contCtrl.contactModel.surname";
-    var _languageModelString = "contCtrl.contactModel.language";
-    //var _languageS=element(by.model("contCtrl.contactModel.language"));
-    var _jobTitleModelString = "contCtrl.contactModel.title";
-    var _faxModelString = "contCtrl.contactModel.fax";
-    var _phoneModelString = "contCtrl.contactModel.phone";
-    var _phoneExtModelString = "contCtrl.contactModel.phoneExt";
-    var _emailModelString = "contCtrl.contactModel.email";*/
 
     /**
      * Rep contact contructor. Binds the required functions for this object

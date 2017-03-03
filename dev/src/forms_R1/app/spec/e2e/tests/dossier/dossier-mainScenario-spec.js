@@ -148,8 +148,6 @@ describe('Dossier External Form Type Components Test', function () {
             manufactCountry.setCountryListValue(formulationRecord, 0, "Kuwait");
             manufactCountry.addCountryRecord(formulationRecord);
             manufactCountry.setCountryListValue(formulationRecord, 1, "Canada");
-
-
         });
 
     });

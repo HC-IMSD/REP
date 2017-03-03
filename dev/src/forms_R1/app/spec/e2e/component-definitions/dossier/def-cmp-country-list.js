@@ -59,7 +59,7 @@ var CountryRecord=function(){
         browser.UISelectSearch(selectList,value);
     };
 
-    this.getCountryListValue=function(parent,row,value){
+    this.getCountryListValue=function(parent,row){
         var record=this.getRecord(parent,row);
        return record.element(by.model(_countryTypeModelString)).getAttribute('value');
     };
