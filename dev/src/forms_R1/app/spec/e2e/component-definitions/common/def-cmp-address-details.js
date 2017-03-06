@@ -17,6 +17,7 @@ var AddressDetails = function () {
     var stateText_modelString="adr.addressModel.stateText";
     var stateList_modelString="adr.addressModel.stateList";
     var postalCode_modelString="adr.addressModel.postalCode";
+    var city_modelString="adr.addressModel.city";
 
     /**
      * Rep contact contructor. Binds the required functions for this object
@@ -66,6 +67,17 @@ var AddressDetails = function () {
     this.getStateListValue=function(parent){
         return parent.element(by.model(stateList_modelString)).getAttribute('value');
     };
+
+
+    this.setCityTextValue = function (parent,value) {
+        parent.element(by.model(city_modelString)).sendKeys(value);
+    };
+
+    this.getCityTextValue = function (parent) {
+        return parent.element(by.model(city_modelString)).getAttribute('value');
+    };
+
+
 };
 module.exports = AddressDetails;
 

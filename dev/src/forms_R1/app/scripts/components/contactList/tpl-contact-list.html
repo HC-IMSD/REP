@@ -27,11 +27,15 @@
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
-            <input type="submit" value="{{'ADD_REPRES'|translate}}" class="btn btn-primary"
+            <button name="addContact" class="btn btn-primary"
                    ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAddContact()">
-            <input type="submit" value="Cancel" class="btn btn-default"
+                {{'ADD_REPRES'|translate}}
+            </button>
+            <button class="btn btn-default"
                    data-ng-show="contactListCtrl.newContactFormShow"
                    ng-click="contactListCtrl.newAdrFormShow=false">
+                {{'CANCEL'|translate}}
+            </button>
         </div>
     </div>
 

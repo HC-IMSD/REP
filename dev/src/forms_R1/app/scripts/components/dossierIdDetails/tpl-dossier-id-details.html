@@ -15,7 +15,7 @@
                                            ng-model="dosIdCtrl.record.dossierId" required/>
                                 </div>
                                 <span class="input-group-btn">
-                                <button class="btn btn-danger" ng-click="dosIdCtrl.delete()" ng-disabled="!dosIdCtrl.isEditable">
+                                <button class="btn btn-danger" ng-click="dosIdCtrl.delete()" name="dossierIdDelete" ng-disabled="!dosIdCtrl.isEditable">
                                     <span aria-label="{{'DELETE_DIN'|translate }}"></span>
                                     {{'DELETE'|translate}}
                                 </button>

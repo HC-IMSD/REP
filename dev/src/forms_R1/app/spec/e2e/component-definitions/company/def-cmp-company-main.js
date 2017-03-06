@@ -28,6 +28,7 @@ var CompanyMain = function () {
         browser.selectOption=uiUtil.selectOption.bind(browser);
         browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
         browser.getUISelectModelValue=uiUtil.getUISelectModelValue.bind(browser);
+        browser.UISelectSearch=uiUtil.UISelectSearch.bind(browser);
         browser.driver.manage().window().maximize();
     };
 

@@ -4,6 +4,7 @@
 
 var UiUtil = require('../../util/util-ui.js');
 var AddressDetails = require('../common/def-cmp-address-details');
+var AddressRoles = require('../common/def-cmp-company-roles');
 
 var AddressRecord = function () {
 
@@ -15,11 +16,19 @@ var AddressRecord = function () {
     var addAddressButtonName = "addAddressBtn";
     var saveAddressButtonName = "saveAddress";
 
+    //importer records section
+    var importerProductsTag="cmp=importer-products";
+    var dossierIdRecordTag="cmp-dossier-id-details";
+    var addDossierIdButtonName="addDossierId";
+    var deleteDossierIdButtonName="dossierIdDelete";
+    var productsImporter_modelString="impProdCtrl.model.selectedProducts";
+
+
     var addressDetails = new AddressDetails();
     var uiUtil = new UiUtil();
+    var addressRoles=new AddressRoles();
 
-
-    this.AddressRecord=function(){
+    this.AddressRecord = function () {
 
 
     };
@@ -107,15 +116,92 @@ var AddressRecord = function () {
         return addressDetails.getStateListValue(parent);
     };
 
+
+    this.setCityValue = function (parent, value) {
+        addressDetails.setCityTextValue(parent, value);
+    };
+
+    this.getCityValue = function (parent) {
+        return addressDetails.getCityTextValue(parent);
+    };
+
+    this.setManufacturerRole=function(parent){
+
+        addressRoles.setManufacturererValue(parent);
+    };
+    this.getManufacturerRole=function(parent){
+
+        return addressRoles.getManufacturererValue(parent);
+    };
+
+
+    this.setBillingRole=function(parent){
+
+        addressRoles.setBillingValue(parent);
+    };
+    this.getBillingRole=function(parent){
+
+        return addressRoles.getBillingValue(parent);
+    };
+
+    this.setMailingRole=function(parent){
+
+        addressRoles.setMailingValue(parent);
+    };
+    this.getMailingRole=function(parent){
+
+        return addressRoles.getMailingValue(parent);
+    };
+    this.setImporterRole=function(parent){
+
+        addressRoles.setImporterValue(parent);
+    };
+    this.getImporterRole=function(parent){
+
+        return addressRoles.getImporterValue(parent);
+    };
+
+    this.setProductsImporterListValue = function (parent, value) {
+        parent.element(by.model(productsImporter_modelString)).sendKeys(value);
+    };
+
+    this.getProductsImporterListValue = function (parent) {
+        return  parent.element(by.model(productsImporter_modelString)).getAttribute('value');
+    };
+
+
     this.saveAddressRecord = function (parent) {
         if (parent) {
             parent.element(by.name(saveAddressButtonName)).click();
         } else {
+
+
             element(by.name(saveAddressButtonName)).click();
         }
     };
 
 
-};
+    this.getDossierIdRecords=function(parent){
 
-module.exports = AddressRecord;
+        return parent.all(by.tagName(dossierIdRecordTag));
+
+    };
+    this.getDossierIdRecord=function(parent,index){
+
+        return  this.getDossierIdRecords(parent).get(index);
+    };
+    this.deleteDossierIdRecord=function(parent,index){
+
+        this.getDossierIdRecords(parent).get(index).element(by.tagName(deleteDossierIdButtonName)).click();
+    };
+    this.addDossierIdRecord=function(parent){
+        parent.element(by.name(addDossierIdButtonName)).click();
+    };
+    this.setDossierId=function(parent,index,value){
+
+        this.getDossierIdRecord(parent,index).element(by.model("dosIdCtrl.record.dossierId")).sendKeys(value);
+    }
+
+
+
+};module.exports = AddressRecord;
