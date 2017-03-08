@@ -24,7 +24,7 @@ var UiUtil = function () {
 
     /**
      * Used for selecting a value from a HTML5 droplist control
-     * @param selector
+     * @param selector- the protracto search criteria i.e by.model, by.id etch
      * @param item
      */
     this.selectOption = function (selector, item, parentElement) {

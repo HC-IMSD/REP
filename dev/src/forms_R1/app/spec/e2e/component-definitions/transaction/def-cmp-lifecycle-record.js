@@ -10,22 +10,19 @@ var LifecycleRecord = function () {
 
 
     var uiUtil = new UiUtil();
-    var _companyId_modelString = "transInfoCtrl.transactionModel.ectd.companyId";
     var _addLifecycleButton_idString="addTransactionRec";
+    var _saveLifecycleButton_nameString="saveContact";
+
     var _dateFiled_modelString="lifecycleCtrl.lifecycleModel.dateFiled";
-
-    /*
-
-     lifecycleCtrl.lifecycleModel.controlNumber
-     lifecycleCtrl.lifecycleModel.activityType
-     cription_{{$id}}" name="seqDescription"
-     lifecycleCtrl.lifecycleModel.descriptionValue
-     lifecycleCtrl.lifecycleModel.startDate
-     lifecycleCtrl.lifecycleModel.endDate
-     lifecycleCtrl.lifecycleModel.year
-     lifecycleCtrl.lifecycleModel.details
-     lifecycleCtrl.lifecycleModel.sequenceVersion
-     */
+    var _controlNumber_modelString="lifecycleCtrl.lifecycleModel.controlNumber";
+    var _activityType_modelString="lifecycleCtrl.lifecycleModel.activityType";
+    var _descriptionValue_modelString="lifecycleCtrl.lifecycleModel.descriptionValue";
+    var _startDateValue_modelString="lifecycleCtrl.lifecycleModel.startDate";
+    var _endDateValue_modelString="lifecycleCtrl.lifecycleModel.endDate";
+    var _yearValue_modelString="lifecycleCtrl.lifecycleModel.year";
+    var _detailsValue_modelString="lifecycleCtrl.lifecycleModel.details";
+    var _sequenceValue_modelString=" lifecycleCtrl.lifecycleModel.sequenceVersion";
+    var _lifecycleListTag="cmp-lifecycle-list";
 
     /**
      *
@@ -37,16 +34,107 @@ var LifecycleRecord = function () {
 
 
 
-
-    this.setCompanyNameValue = function (parent, value) {
-        parent.element(by.model(_companyName_modelString)).sendKeys(value);
-
-    };
-    this.getCompanyNameValue = function (parent) {
-        return parent.element(by.model(_companyName_modelString)).getAttribute('value');
-
+    this.addTransactionRecord = function (parent) {
+        if(parent) {
+            parent.element(by.id(_addLifecycleButton_idString)).click();
+        }else{
+            element(by.id(_addLifecycleButton_idString)).click();
+        }
     };
 
+    this.saveTransactionRecord = function (parent) {
+            parent.element(by.name(_saveLifecycleButton_nameString)).click();
+
+    };
+
+
+
+    this.setDateFiledValue = function (parent, value) {
+        parent.element(by.model(_dateFiled_modelString)).sendKeys(value);
+
+    };
+    this.getDateFiledValue = function (parent) {
+        return parent.element(by.model(_dateFiled_modelString)).getAttribute('value');
+
+    };
+
+
+    this.setControlNumberValue = function (parent, value) {
+        parent.element(by.model(_controlNumber_modelString)).sendKeys(value);
+
+    };
+    this.getControlNumberValue = function (parent) {
+        return parent.element(by.model(_controlNumber_modelString)).getAttribute('value');
+
+    };
+
+    this.setActivityTypeSelectValue = function (parent, value) {
+        browser.selectOption(by.model(_activityType_modelString),value,parent)
+
+    };
+
+
+    this.getActivityTypeSelectValue = function (parent) {
+        return parent.element(by.model(_activityType_modelString)).getAttribute('value');
+
+    };
+
+
+    this.setDescriptionSelectValue = function (parent, value) {
+        browser.selectOption(by.model(_descriptionValue_modelString),value,parent)
+
+    };
+    this.getDescriptionSelectValue = function (parent) {
+        return parent.element(by.model(_descriptionValue_modelString)).getAttribute('value');
+
+    };
+
+    this.setStartDateValue = function (parent, value) {
+        parent.element(by.model(_startDateValue_modelString)).sendKeys(value);
+
+    };
+    this.getStartDateValue = function (parent) {
+        return parent.element(by.model(_startDateValue_modelString)).getAttribute('value');
+
+    };
+
+
+    this.setEndDateValue = function (parent, value) {
+        parent.element(by.model(_endDateValue_modelString)).sendKeys(value);
+
+    };
+    this.getEndtDateValue = function (parent) {
+        return parent.element(by.model(_endDateValue_modelString)).getAttribute('value');
+
+    };
+
+    this.setYearValue = function (parent, value) {
+        parent.element(by.model(_yearValue_modelString)).sendKeys(value);
+
+    };
+    this.getYearValue = function (parent) {
+        return parent.element(by.model(_yearValue_modelString)).getAttribute('value');
+
+    };
+
+
+    this.setDetailsValue = function (parent, value) {
+        parent.element(by.model(_detailsValue_modelString)).sendKeys(value);
+
+    };
+    this.getDetailsValue = function (parent) {
+        return parent.element(by.model(_detailsValue_modelString)).getAttribute('value');
+
+    };
+
+    this.setSequenceValue = function (parent, value) {
+        parent.element(by.model(_sequenceValue_modelString)).sendKeys(value);
+
+    };
+    this.getSequenceValue = function (parent) {
+        return parent.element(by.model(_sequenceValue_modelString)).getAttribute('value');
+
+    };
 
 
     /**
@@ -54,7 +142,7 @@ var LifecycleRecord = function () {
      * @param parent
      */
     this.getRows = function (parent) {
-        var expandingTable= uiUtil.getExpandingTable(medIngredListTag,parent);
+        var expandingTable= uiUtil.getExpandingTable(_lifecycleListTag,parent);
         return uiUtil.getExpandingTableRows(expandingTable);
     };
 
@@ -77,13 +165,7 @@ var LifecycleRecord = function () {
         return this.getRows(parent).get(recordRow * 2 + 1);
     };
 
-    /*
-     gets the new record that is outside the expanding table
-     */
-    this.getNewRecord=function(parent){
 
-        return parent.element(by.name(newRecTag)).element(by.tagName(medIngredTag));
-    };
 
 };
 
