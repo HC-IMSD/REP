@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="app/styles/rep.css">
     <link rel="stylesheet" href="app/styles/select.min.css">
     <link rel="stylesheet" href="app/styles/select2.min.css">
+    <link rel="stylesheet" href="app/lib/uiTree/angular-ui-tree.min.css">
     <!-- endinject -->
     <noscript>
         <link rel="stylesheet" href="./wet-boew/css/noscript.min.css"/>
@@ -146,134 +147,109 @@
 </header>
 <main role="main" property="mainContentOfPage" class="container">
 
-    <script type="text/ng-template"  id="tree_item_renderer.html">
-        {{data.recordName}}
-        <ul>
-            <li>
-            <details>
-                <summary>{{record.recordName |translate}} {{record.index+1}}</summary>
-           <!-- <li ng-repeat="data in data.children" ng-include="'tree_item_renderer.html'"></li>-->
-            </details>
-            </li>
-        </ul>
-    </script>
+
     <!--content starts here -->
     <div>
         <h1 property="name" id="wb-cont">Experimental Diff Template</h1>
 
         <!-- inject:mainContent-->
+
+
+        <!-- Nodrop Nested node template -->
+
         <div id="app-root" ng-app="activityApp" ng-controller="MainController as ctrl">
+           <!-- <script type="text/ng-template" id="nodrop_nodes_renderer.html">
+                <div ui-tree-handle class="tree-node tree-node-content" ng-class="{nodrop: node.nodrop}">
+                    {{node.recordName}} <span ng-if="node.nodrop">No drop</span>
+                    <div ng-if="node.isChange">
 
-           <!-- <ul class="list-unstyled">
-            <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
-            </ul>-->
+                    </div>
 
-            <div ng-repeat="record in ctrl.listResults">
-                <ul class="list-unstyled">
-                    <li>
-                        <details>
-                            <summary>{{record.recordName |translate}} {{record.index+1}}</summary>
-                            <table class="table dataTable table-bordered table-hover table-condensed table-striped">
-                                <tr>
-                                    <th> Record or Field Affected</th>
-                                    <th>Change Type</th>
-                                    <th>Original Value</th>
-                                    <th>Changed Value</th>
-                                </tr>
-                                <tr ng-repeat="leaf in record.children">
-                                    <td>{{leaf.name |translate}}</td>
-                                    <td>{{leaf.type |translate}}</td>
-                                    <td>{{leaf.original}}</td>
-                                    <td>{{leaf.diff}}</td>
-                                </tr>
-                            </table>
-                        </details>
+                   &lt;!&ndash; <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+                            class="glyphicon glyphicon-remove"></span></a>&ndash;&gt;
+                </div>
+                <ol  ui-tree-nodes="" data-nodrop-enabled="true" ng-model="node.nodes"
+                    ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
                     </li>
-                </ul>
-            </div>
-        <!--    http://jsfiddle.net/brendanowen/uXbn6/8/
+                </ol>
+               &lt;!&ndash; <ol ng-if="!node.nodrop" ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
+                    </li>
+                </ol>&ndash;&gt;
+            </script>-->
 
-             <script type="text/ng-template"  id="tree_item_renderer.html">
-                {{data.name}}
-                <button ng-click="add(data)">Add node</button>
-                <button ng-click="delete(data)" ng-show="data.nodes.length > 0">Delete nodes</button>
-                <ul>
-                    <li ng-repeat="data in data.nodes" ng-include="'tree_item_renderer.html'"></li>
-                </ul>
+            <script type="text/ng-template" id="nodes_renderer.html">
+                <div ui-tree-handle class="tree-node tree-node-content">
+                    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag
+                       ng-click="toggle(this)"><span
+                            class="glyphicon"
+                            ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
+                    {{node.recordName}}&nbsp;Instance:&nbsp{{node.index}}
+                    <div ng-if="node.isChange">
+                        <table class="table dataTable table-bordered table-hover table-condensed table-striped">
+                            <tr>
+                                <th>Change Type</th>
+                                <th>Original Value</th>
+                                <th>Changed Value</th>
+                            </tr>
+                            <tr>
+                                <td>{{node.type |translate}}</td>
+                                <td>{{node.original}}</td>
+                                <td>{{node.diff}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
+                    </li>
+                </ol>
             </script>
 
-            <ul ng-app="Application" ng-controller="TreeController">
-                <li ng-repeat="data in tree" ng-include="'tree_item_renderer.html'"></li>
 
-        -->
+            <div class="col-md-12">
+                <h2>Load the base file</h2>
+                <hpfb-file-select update-model-root="ctrl.showContent(fileContent) "
+                                  root-elem=""></hpfb-file-select>
+            </div>
+            <div class="col-md-12">
+                <h2>Load the file to compare</h2>
+                <hpfb-file-select update-model-root="ctrl.showContent2(fileContent) "
+                                  root-elem=""></hpfb-file-select>
+            </div>
+            <div class="row">
+                <button ng-click="ctrl.compareFiles()">Start Compare</button>
+            </div>
 
-
-
-            <!--  <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
-                  <thead>
-                  <tr>
-                      <th>Element Affected</th>
-                      <th>Original Value</th>
-                       <th>Changed Value</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr id="tr-expand-row-{{$index}}"
-                      ng-repeat="record in ctrl.listResults">
-                      <td>
-                          <span>{{record.tag}}</span>
-
-                      </td>
-                      <td>
-                          <span>{{record.original}}</span>
-                      </td>
-                      <td >
-                          <span >{{record.change}}</span>
-                      </td>
-                  </tr>
-                  </tbody>
-              </table>-->
-
-            <!--<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
-                <thead>
-                <tr>
-                    <th>Element Affected</th>
-                    <th>Original Value</th>
-                    <th>Changed Value</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr id="tr-row-{{$index}}"
-                    ng-repeat="record in ctrl.resultDiff">
-                    <td>
-                        <span>{{record.tag}}</span>
-                    </td>
-                    <td>
-                        <span>{{record.lhs}}</span>
-                    </td>
-                    <td >
-                        <span >{{record.rhs}}</span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div ui-tree id="tree-root" data-drag-enabled="false">
+                        <ol ui-tree-nodes ng-model="ctrl.listResults">
+                            <li ng-repeat="node in ctrl.listResults" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- endinject-->
 
 
         </div>
-        <!-- endinject-->
 
 
-    </div>
-    <!--content ends here -->
+        <!-- Nodrop Nested node template -->
 
-    <div class="datemod col-xs-12 mrgn-tp-lg">
-        <dl id="wb-dtmd">
-            <dt>Date modified:&#32;</dt>
-            <dd>
-                <time property="dateModified">2017-02-02</time>
-            </dd>
-        </dl>
-    </div>
+        <!--content ends here -->
+
+        <div class="datemod col-xs-12 mrgn-tp-lg">
+            <dl id="wb-dtmd">
+                <dt>Date modified:&#32;</dt>
+                <dd>
+                    <time property="dateModified">2017-02-02</time>
+                </dd>
+            </dl>
+        </div>
 
 </main>
 <aside class="gc-nttvs container">
@@ -349,11 +325,13 @@
 
 <script src="app/lib/angular-aria.min.js"></script>
 
-<script src="app/scripts/activityAppEXT-en.js"></script>
+<script src="app/scripts/testDiff-en.js"></script>
 <script src="app/scripts/translations.js"></script>
 <!--<script src="../node_modules/deep-diff/releases/deep-diff-0.3.4.min.js"></script>-->
 <script src="app/lib/deep-diff-0.3.4.min.js"></script>
 
+<script src="app/scripts/components/fileIO/FileIO.hpfbFileReader.js"></script>
+<script src="app/lib/uiTree/angular-ui-tree.min.js"></script>
 
 <!-- endinject -->
 <!-- thirdParty:js  -->
@@ -369,41 +347,6 @@
 <script src="app/lib/xml2json.js"></script>-->
 
 <!-- endinject -->
-<script>
-    /*  var oldObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","company_id":"","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"NEW","software_version":"1.0.0","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-046"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar"}]}};
-     var newObj={"ACTIVITY_ENROL":{"template_type":"PHARMA","hhh":"hhhh","dsts_control_number":"","enrolment_version":"0.2","date_saved":"2017-02-04","application_type":"AMEND","software_version":"1.0.1","data_checksum":"","dossier_id_prefix":"HC6-024-","dossier_id":"","dossier_id_concat":"","reg_activity_lead":"","reg_activity_type":{"_label_en":"MPNC (Pre-NC Meeting)","_label_fr":"MPNC (Réunion préalable - PM)","__text":"B02-20160301-047"},"fee_class":"","reason_filing":"","is_third_party":"","is_admin_submission":"","notifiable_change_types":{"text_label_change":"N","drug_substance_change":"N","formulation_change":"N","specification_change":"N","expiry_storage_change":"N","manufact_method_change":"N","manufact_site_change":"N","container_size_change":"N","packaging_spec_change":"N","packaging_materials_change":"N","other_change_details":""},"rationale_types":{"new_roa":"N","new_claims":"N","change_formulation":"N","change_drug_substance":"N","replace_sterility":"N","confirmitory_studies":"N","other_rationale":"N","other_rationale_details":""},"contact_record":[{"foo":"bar2"}]}}
-     //"company_id":"",
-     var oldObj2={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-     var newObj2={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-     var newObj3={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[{"amend_record":"N","rep_contact_role":"PRIMARY","rep_contact_details":{"salutation":"SALUT_DR","given_name":"asdsadsa","initials":"","surname":"asdasa","job_title":"job title 1","language_correspondance":"en","phone_num":"111-111-1111","phone_ext":"","fax_num":"","email":"fsdfdfsd@asdsadas"}}],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-     var newObj4={"DOSSIER_ENROL":{"company_id":"","dossier_id":"","related_dossier_id":"","enrolment_version":"0.1","date_saved":"2017-02-07","application_type":"NEW","software_version":"1.0.0","data_checksum":"","contact_record":[{"amend_record":"N","rep_contact_role":"PRIMARY","rep_contact_details":{"salutation":"SALUT_DR","given_name":"asdsadsa","initials":"","surname":"asdasa","job_title":"job title 2","language_correspondance":"fr","phone_num":"111-111-1111","phone_ext":"","fax_num":"","email":"fsdfdfsd@asdsadas"}}],"dossier_type":"","brand_name":"","common_name":"","third_party_signed":"","is_ref_products":"","ref_product_list":{},"human_drug_use":"N","radiopharm_drug_use":"N","vet_drug_use":"N","disinfectant_drug_use":"N","therapeutic_class_list":{},"is_sched_a":"N","formulation_group":{"formulation_details":[]}}};
-
-     var result4=DeepDiff(newObj4,newObj3);
-     console.log(result4);
-     for(var g=0;g<result4.length;g++){
-     var rec=result4[g];
-     console.log("Type of change "+rec.kind);
-     if(rec.kind==='E') {
-     console.log("change of a single element");
-     var pathString="";
-     for(var i=0;i<rec.path.length;i++){
-     pathString=pathString+" {{"+rec.path[i]+"}}";
-     }
-     console.log("Element "+pathString)
-     console.log("Original value: "+rec.lhs);
-     console.log("Changed value: "+rec.rhs);
-
-     }
-     if(rec.kind==='A') {
-     console.log("Change element "+rec.path[rec.path.length-1]);
-     console.log("Type of change " + JSON.stringify(rec.item.kind));
-     console.log("Original " + JSON.stringify(rec.item.lhs));
-     console.log("Updated " + JSON.stringify(rec.item.rhs));
-     }
-     }*/
-
-
-</script>
 
 </body>
 </html>
