@@ -27,10 +27,10 @@
         </div>
         <div class="row mrgn-tp-md mrgn-bttm-lg">
             <div class="btn-group-sm col-md-12 text-right">
-                <input type="submit" value="{{'ADD_TRANSACTION'|translate}}" class="btn btn-primary"
+                <button class="btn btn-primary"
                        ng-click="lifeListCtrl.addTransaction()" name="lifeListCtrl.lifecycleListForm.addRec"
                        id="addTransactionRec"
-                       ng-disabled="lifeListCtrl.isAddDisabled()">
+                        ng-disabled="lifeListCtrl.isAddDisabled()">{{'ADD_TRANSACTION'|translate}}</button>
                 <input type="submit" value="Cancel" class="btn btn-default"
                        data-ng-show="lifeListCtrl.newAdrFormShow"
                        ng-click="lifeListCtrl.newAdrFormShow = false">
