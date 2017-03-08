@@ -18,7 +18,6 @@
             'numberFormat',
             'ui.bootstrap',
             'translations',
-            'fileIO',
             'ngSanitize'
         ])
 
