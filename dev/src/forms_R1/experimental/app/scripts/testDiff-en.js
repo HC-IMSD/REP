@@ -12,14 +12,17 @@
         ])
 })();
 
+// https://github.com/angular-ui-tree/angular-ui-tree
+
+
 (function () {
     'use strict';
     angular
         .module('activityApp')
         .controller('MainController', MainController);
 
-    MainController.$inject = ['$translate', '$filter'];
-    function MainController($translate, $filter) {
+    MainController.$inject = ['$translate', '$filter','$scope'];
+    function MainController($translate, $filter,$scope) {
         var vm = this;
         vm.formType = 'EXT';
         vm.showContent = _loadFileContent;
@@ -272,78 +275,13 @@
             return leaf;
         }
 
+        vm.collapseAll = function () {
+            $scope.$broadcast('angular-ui-tree:collapse-all');
+        };
 
-        function _breadthWalk(treeHeadNode) {
-            var stack = [{
-                depth: 0,
-                element: treeHeadNode
-            }];
-            var stackItem = 0;
-            var current;
-            var children, i, len;
-            var depth;
-
-            while (current = stack[stackItem++]) {
-                //get the arguments
-                depth = current.depth;
-                current = current.element;
-                children = current.nodes;
-                for (i = 0, len = children.length; i < len; i++) {
-                    stack.push({ //pass args via object or array
-                        element: children[i],
-                        depth: depth + 1
-                    });
-                }
-            }
-
-
-        }
-
-
-        function createParentRecord(name, index) {
-            var leaf = {};
-            leaf.recordName = name;
-            leaf.index = 0;
-            leaf.isChange = false;
-            leaf.nodes = [];
-            return leaf;
-        }
-
-
-        /**
-         * Create a leaf record
-         * @param node -the difference node
-         * @param name - The name to give this node
-         * @param node_index - the index to give this node
-         * @returns {{}} json object
-         * @private
-         */
-        function _createLeafRecord2(node, name, node_index) {
-            var leaf = {};
-            leaf.recordName = name;
-            leaf.nodes = [];
-            leaf.isChange = true;
-            leaf.index = node_index;
-            leaf.type = node.kind;
-            leaf.original = node.lhs;
-            leaf.diff = node.rhs;
-
-
-            /**
-             * kind - indicates the kind of change; will be one of the following:
-             N - indicates a newly added property/element
-             D - indicates a property/element was deleted
-             E - indicates a property/element was edited
-             A - indicates a change occurred within an array
-             */
-
-            if (node.kind === 'A') {
-                leaf.type = node.item.kind;
-                leaf.original = node.item.lhs;
-                leaf.diff = node.item.rhs;
-            }
-            return leaf;
-        }
+        vm.expandAll = function () {
+            $scope.$broadcast('angular-ui-tree:expand-all');
+        };
 
 
     }

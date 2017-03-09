@@ -158,48 +158,49 @@
         <!-- Nodrop Nested node template -->
 
         <div id="app-root" ng-app="activityApp" ng-controller="MainController as ctrl">
-           <!-- <script type="text/ng-template" id="nodrop_nodes_renderer.html">
-                <div ui-tree-handle class="tree-node tree-node-content" ng-class="{nodrop: node.nodrop}">
-                    {{node.recordName}} <span ng-if="node.nodrop">No drop</span>
-                    <div ng-if="node.isChange">
+            <!-- <script type="text/ng-template" id="nodrop_nodes_renderer.html">
+                 <div ui-tree-handle class="tree-node tree-node-content" ng-class="{nodrop: node.nodrop}">
+                     {{node.recordName}} <span ng-if="node.nodrop">No drop</span>
+                     <div ng-if="node.isChange">
 
-                    </div>
+                     </div>
 
-                   &lt;!&ndash; <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
-                            class="glyphicon glyphicon-remove"></span></a>&ndash;&gt;
-                </div>
-                <ol  ui-tree-nodes="" data-nodrop-enabled="true" ng-model="node.nodes"
-                    ng-class="{hidden: collapsed}">
-                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
-                    </li>
-                </ol>
-               &lt;!&ndash; <ol ng-if="!node.nodrop" ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
-                    </li>
-                </ol>&ndash;&gt;
-            </script>-->
+                    &lt;!&ndash; <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
+                             class="glyphicon glyphicon-remove"></span></a>&ndash;&gt;
+                 </div>
+                 <ol  ui-tree-nodes="" data-nodrop-enabled="true" ng-model="node.nodes"
+                     ng-class="{hidden: collapsed}">
+                     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
+                     </li>
+                 </ol>
+                &lt;!&ndash; <ol ng-if="!node.nodrop" ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+                     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
+                     </li>
+                 </ol>&ndash;&gt;
+             </script>-->
 
             <script type="text/ng-template" id="nodes_renderer.html">
                 <div ui-tree-handle class="tree-node tree-node-content">
                     <button class="btn btn-primary btn-xs" ng-if="node.nodes"
-                       ng-click="toggle(this)"><span class="glyphicon"
-                            ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></button>
+                            ng-click="toggle(this)"><span class="glyphicon"
+                                                          ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
+                    </button>
                     <label>{{node.recordName}}&nbsp;Record:&nbsp{{node.index}}</label>
                     <div ng-if="node.value && node.value.length>0 && !collapsed">
-                    <table class="table dataTable table-bordered table-hover table-condensed table-striped">
-                        <tr>
-                            <th>Name</th>
-                            <th>Change Type</th>
-                            <th>Original Value</th>
-                            <th>Changed Value</th>
-                        </tr>
-                        <tr ng-repeat="child in node.value">
-                            <td>{{child.recordName |translate}}</td>
-                            <td>{{child.type |translate}}</td>
-                            <td>{{child.original}}</td>
-                            <td>{{child.diff}}</td>
-                        </tr>
-                    </table>
+                        <table class="table dataTable table-bordered table-hover table-condensed table-striped">
+                            <tr>
+                                <th>Name</th>
+                                <th>Change Type</th>
+                                <th>Original Value</th>
+                                <th>Changed Value</th>
+                            </tr>
+                            <tr ng-repeat="child in node.value">
+                                <td>{{child.recordName |translate}}</td>
+                                <td>{{child.type |translate}}</td>
+                                <td>{{child.original}}</td>
+                                <td>{{child.diff}}</td>
+                            </tr>
+                        </table>
                     </div>
                     <div ng-if="node.isChange &&!collapsed">
                         <label>(Entire record&nbsp;{{node.type |translate}})</label>
@@ -224,49 +225,58 @@
                 </ol>
             </script>
 
-
-            <div class="col-md-12">
-                <h2>Load the base file</h2>
-                <hpfb-file-select update-model-root="ctrl.showContent(fileContent) "
-                                  root-elem=""></hpfb-file-select>
-            </div>
-            <div class="col-md-12">
-                <h2>Load the file to compare</h2>
-                <hpfb-file-select update-model-root="ctrl.showContent2(fileContent) "
-                                  root-elem=""></hpfb-file-select>
-            </div>
             <div class="row">
-            <div class="row">
-                <button ng-click="ctrl.compareFiles()">Start Compare</button>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <div ui-tree id="tree-root" data-drag-enabled="false">
-                        <ol ui-tree-nodes ng-model="ctrl.listResults">
-                            <li ng-repeat="node in ctrl.listResults" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-                        </ol>
-                    </div>
+                <div class="col-md-12">
+                    <h2>Load the base file</h2>
+                    <hpfb-file-select update-model-root="ctrl.showContent(fileContent) "
+                                      root-elem=""></hpfb-file-select>
                 </div>
             </div>
-            <!-- endinject-->
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Load the file to compare</h2>
+                    <hpfb-file-select update-model-root="ctrl.showContent2(fileContent) "
+                                      root-elem=""></hpfb-file-select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <button ng-click="ctrl.compareFiles()">Start Compare</button>
+                </div>
+            </div>
+            <div class="row" ng-if="ctrl.listResults && ctrl.listResults.length>0">
+                <div class="col-sm-12 button-group">
+                    <button ng-click="ctrl.expandAll()">Expand all</button>
+                    <button ng-click="ctrl.collapseAll()">Collapse all</button>
+                </div>
+            </div>
+            <div>
+                <div class="row margin-top-large">
+                    <div class="col-sm-6 form-group">
+                        <div ui-tree id="tree-root" data-drag-enabled="false">
+                            <ol ui-tree-nodes ng-model="ctrl.listResults">
+                                <li ng-repeat="node in ctrl.listResults" ui-tree-node
+                                    ng-include="'nodes_renderer.html'"></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <!-- endinject-->
+            </div>
 
 
-        </div>
+            <!-- Nodrop Nested node template -->
 
+            <!--content ends here -->
 
-        <!-- Nodrop Nested node template -->
-
-        <!--content ends here -->
-
-        <div class="datemod col-xs-12 mrgn-tp-lg">
-            <dl id="wb-dtmd">
-                <dt>Date modified:&#32;</dt>
-                <dd>
-                    <time property="dateModified">2017-02-02</time>
-                </dd>
-            </dl>
-        </div>
+            <div class="datemod col-xs-12 mrgn-tp-lg">
+                <dl id="wb-dtmd">
+                    <dt>Date modified:&#32;</dt>
+                    <dd>
+                        <time property="dateModified">2017-02-02</time>
+                    </dd>
+                </dl>
+            </div>
 
 </main>
 <aside class="gc-nttvs container">
