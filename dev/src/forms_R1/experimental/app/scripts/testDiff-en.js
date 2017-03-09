@@ -866,13 +866,19 @@
                 } else {
                     //new create it
                     var isLeaf = i === node.path.length - 1;
+                    //if kind is E and diff
                     var newNode = _createNodeRecord(node, node.path[i], _index, isLeaf);
                     searchList = newNode.nodes;
                     if (!existingRecord) {
                         existingRecord = newNode;
                         resultList.push(newNode);
                     } else {
-                        existingRecord.nodes.push(newNode);
+
+                        if(isLeaf) {
+                            existingRecord.value.push(newNode);
+                        }else{
+                            existingRecord.nodes.push(newNode);
+                        }
                         existingRecord = newNode;
                     }
                 }
@@ -937,7 +943,7 @@
             leaf.index = node_index;
             leaf.type = null;
             leaf.original = null;
-
+            leaf.value=[];
             /**
              * kind - indicates the kind of change; will be one of the following:
              N - indicates a newly added property/element
