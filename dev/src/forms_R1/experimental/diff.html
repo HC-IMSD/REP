@@ -181,12 +181,11 @@
 
             <script type="text/ng-template" id="nodes_renderer.html">
                 <div ui-tree-handle class="tree-node tree-node-content">
-                    <a class="btn btn-success btn-xs" ng-if="node.nodes && node.nodes.length > 0" data-nodrag
-                       ng-click="toggle(this)"><span
-                            class="glyphicon"
-                            ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></a>
-                    {{node.recordName}}&nbsp;Instance:&nbsp{{node.index}}
-                    <div ng-if="node.isChange">
+                    <button class="btn btn-primary btn-xs" ng-if="node.nodes"
+                       ng-click="toggle(this)"><span class="glyphicon"
+                            ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span></button>
+                    <label>{{node.recordName}}&nbsp;Record:&nbsp{{node.index}}</label>
+                    <div ng-if="node.isChange &&!collapsed">
                         <table class="table dataTable table-bordered table-hover table-condensed table-striped">
                             <tr>
                                 <th>Change Type</th>
@@ -219,6 +218,7 @@
                 <hpfb-file-select update-model-root="ctrl.showContent2(fileContent) "
                                   root-elem=""></hpfb-file-select>
             </div>
+            <div class="row">
             <div class="row">
                 <button ng-click="ctrl.compareFiles()">Start Compare</button>
             </div>
