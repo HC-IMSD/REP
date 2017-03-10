@@ -29,7 +29,11 @@
         vm.showContent2 = _loadFileContent2;
         vm.content1 = {};
         vm.content2 = {};
+        vm.diffList={};
         vm.listResults = null;
+        vm.exclusions={
+            "company_contact_details":"true"
+        };
 
         /***
          * Compares the two files
@@ -37,9 +41,8 @@
         vm.compareFiles = function () {
             if (vm.content1 && vm.content2) {
                 var diffList = DeepDiff(vm.content1, vm.content2);
-                console.log(diffList);
+                vm.diffList=diffList;
                 vm.listResults = _consolidateResults(diffList);
-                console.log(vm.listResults)
             } else {
                 console.error("Null file")
             }
@@ -59,6 +62,13 @@
 
 
         //  https://www.npmjs.com/package/deep-diff
+
+        /**
+         * Consolidates all the results from the diff engine
+         * @param diffList
+         * @returns {Array}
+         * @private
+         */
         function _consolidateResults(diffList) {
 
             var resultList = [];
@@ -67,9 +77,7 @@
             for (var i = 0; i < diffList.length; i++) {
                 var record = diffList[i];
                 processNode(record, resultList);
-                //rec.path.length
             }
-            console.log(resultList);
             return (resultList);
         }
 
@@ -91,13 +99,13 @@
                 searchList = currentNode.nodes;
             }
             //check to see if it has index property. Indicates multiplicity
-            if (node.hasOwnProperty("index")) {
-                _index = node.index;
-            }
 
             //specia; case: node paths are one
             if (node.path && node.path.length === 1) {
 
+                if (node.hasOwnProperty("index")) {
+                    _index = node.index;
+                }
                 //find existing record if it exists
                 existingRecord = $filter('filter')(resultList, {
                     recordName: node.path[0], index: _index
@@ -110,9 +118,11 @@
                 }
                 //if no current record, make a new entery
                 else if (!currentRecord) {
-                    var newNode = _createNodeRecord(node, node.path[0], _index, true);
-                    resultList.push(newNode);
-                    currentRecord = newNode;
+                    if(!vm.exclusions.hasOwnProperty(node.path[0])) {
+                        var newNode = _createNodeRecord(node, node.path[0], _index, true);
+                        resultList.push(newNode);
+                        currentRecord = newNode;
+                    }
                 }
                 return;
             }
@@ -126,8 +136,10 @@
                 //if not at end and is a num
                 if (i < node.path.length - 2 && angular.isNumber(node.path[i + 1])) {
                     _index = Number(node.path[i + 1]);
-                } else {
-                    _index = 0; //is this always true?
+                }else  if (node.hasOwnProperty("index")&&i===node.path.length-1) {
+                    _index = node.index;
+                }else{
+                    _index = 0;
                 }
                 record_found = $filter('filter')(searchList, {recordName: node.path[i], index: _index});
                 if (record_found && record_found.length > 0) {
@@ -147,7 +159,6 @@
                         console.log(specialResults);
                         var target=null;
                         if (!existingRecord) {
-                            //existingRecord = specialResults;
                             target=resultList;
                         }else{
                            target= existingRecord.nodes;
@@ -157,19 +168,21 @@
                         }
 
                     } else {
-                        var newNode = _createNodeRecord(node, node.path[i], _index, isLeaf);
-                        searchList = newNode.nodes;
-                        if (!existingRecord) {
-                            existingRecord = newNode;
-                            resultList.push(newNode);
-                        } else {
-
-                            if (isLeaf) {
-                                existingRecord.value.push(newNode);
+                        if(!vm.exclusions.hasOwnProperty(node.path[i])) {
+                            var newNode = _createNodeRecord(node, node.path[i], _index, isLeaf);
+                            searchList = newNode.nodes;
+                            if (!existingRecord) {
+                                existingRecord = newNode;
+                                resultList.push(newNode);
                             } else {
-                                existingRecord.nodes.push(newNode);
+
+                                if (isLeaf) {
+                                    existingRecord.value.push(newNode);
+                                } else {
+                                    existingRecord.nodes.push(newNode);
+                                }
+                                existingRecord = newNode;
                             }
-                            existingRecord = newNode;
                         }
                     }
                 }
@@ -198,8 +211,6 @@
             } else {
                 console.error("_processSpecialCase::neither are arrays");
             }
-            console.log(base);
-            console.log(compare);
             var diffList = DeepDiff(base, compare);
             console.log("===============result===============")
             console.log(diffList);

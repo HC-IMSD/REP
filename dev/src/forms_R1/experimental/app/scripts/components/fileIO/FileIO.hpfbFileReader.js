@@ -37,10 +37,10 @@
             element.bind("change", function (e) {
                 scope.file = (e.srcElement || e.target).files[0];
 
-                    hpfbFileReader.readAsDataText(scope.file, scope)
-                        .then(function (result) {
-                            scope.hpfbFileSelect({fileContent: result});
-                        })
+                hpfbFileReader.readAsDataText(scope.file, scope)
+                    .then(function (result) {
+                        scope.hpfbFileSelect({fileContent: result});
+                    })
 
             })
         }
@@ -68,7 +68,7 @@
     FileSelectController.$inject = ['hpfbFileProcessing'];
     function FileSelectController(hpfbFileProcessing) {
         var vm = this;
-        vm.fileTypes = ".xml,.json";
+        vm.fileTypes = ".xml,.json,.hcsc";
         vm.modelCallback = function (fileContent) {
             vm.status = "";
             if (fileContent) {
@@ -99,7 +99,7 @@
             rootTag: '@',
             saveType: '@',
             buttonLabel: '@',
-            buttonDisabled:'@'
+            buttonDisabled: '@'
         }
     });
 
@@ -113,26 +113,27 @@
     function FileWriteController(hpfbFileProcessing) {
 
         var vm = this;
-        vm.$onInit =_init;
+        vm.$onInit = _init;
         vm.generate = _generateFile;
 
-        function _generateFile(){
+        function _generateFile() {
             if (vm.saveType.toUpperCase() === "JSON") {
                 hpfbFileProcessing.writeAsJson(vm.jsonToSave, vm.fileName, vm.rootTag);
             } else if (vm.saveType.toUpperCase() === "XML") {
                 hpfbFileProcessing.writeAsXml(vm.jsonToSave, vm.fileName, vm.rootTag);
             }
         }
-        function _init(){
-           //disabled state
-            if(!vm.buttonDisabled){
-               vm.buttonDisabled=false;
-            }else if(vm.buttonDisabled.toLowerCase()==="true"){
-                vm.buttonDisabled=true
-            }else if(vm.buttonDisabled.toLowerCase()==="false"){
-                vm.buttonDisabled=false;
-            }else{
-                vm.buttonDisabled=false;
+
+        function _init() {
+            //disabled state
+            if (!vm.buttonDisabled) {
+                vm.buttonDisabled = false;
+            } else if (vm.buttonDisabled.toLowerCase() === "true") {
+                vm.buttonDisabled = true
+            } else if (vm.buttonDisabled.toLowerCase() === "false") {
+                vm.buttonDisabled = false;
+            } else {
+                vm.buttonDisabled = false;
             }
         }
     }
@@ -159,7 +160,7 @@
         var msg_err_fileType = "MSG_ERR_FILE_TYPE"; //file type error
         var msg_err_formType = "MSG_ERR_FORM_TYPE"; // valid json but incorrect root tag
         var msg_err_checksum_compareFail = "MSG_ERR_CHECKSUM_FAIL";
-        var draft_file_type = "json"; // type of file suffix for JSON files. Can change to process other types
+        var draft_file_type = "hcsc"; // type of file suffix for JSON files. Can change to process other types
         /**
          * @ngObject: used to store the jsonResult and any messages
          * @type {{jsonResult: string, messages: string}}
@@ -182,20 +183,21 @@
                     if (file) {
                         var splitFile = file.name.split('.');
                         var fileType = splitFile[splitFile.length - 1];
-                        if ((fileType.toLowerCase()) == draft_file_type) {
+                        //  if ((fileType.toLowerCase()) == draft_file_type) {
+                        if ((fileType.toLowerCase()) == 'json' ||(fileType.toLowerCase()) == draft_file_type) {
                             convertToJSONObjects(reader);
-                           // checkRootTagMatch(reader, scope);
+                            // checkRootTagMatch(reader, scope);
                             /* As per meeting of oct 21
-                            if (reader.parseResult.jsonResult) {
-                                compareHashInJson(reader, scope.rootTag);
-                            }*/
+                             if (reader.parseResult.jsonResult) {
+                             compareHashInJson(reader, scope.rootTag);
+                             }*/
                         } else if ((fileType.toLowerCase() === "xml")) {
                             convertXMLToJSONObjects(reader);
-                           // checkRootTagMatch(reader, scope);
+                            // checkRootTagMatch(reader, scope);
                             /* As per meeting of oct 21
-                            if (reader.parseResult.jsonResult) {
-                                compareHashInXML(reader, scope)
-                            }*/
+                             if (reader.parseResult.jsonResult) {
+                             compareHashInXML(reader, scope)
+                             }*/
 
                         } else {
                             convertResult.parseResult = null;
@@ -216,6 +218,7 @@
                 });
             }
         }
+
         function getReader(deferred, scope, file) {
             var reader = new FileReader();
             //extend the fileReader object
@@ -316,6 +319,7 @@
             var hash = CryptoJS.SHA256(JSON.stringify(jsonObj));
             jsonObj[rootTag].data_checksum = hash.toString();
         }
+
         /**
          * @ngdoc method - compares the hash in the JSON to the calculated JSON hash
          * @param reader- the reader extended object that contains the json
@@ -330,6 +334,7 @@
                 reader.parseResult.messages = msg_err_checksum_compareFail;
             }
         }
+
         /**
          * @ngdoc method - compares the hash in the XML to the calculated XML hash
          * @param reader- the reader extended object that contains the json
@@ -337,8 +342,8 @@
          */
         function compareHashInXML(reader, scope) {
             var currentTagValue = reader.parseResult.jsonResult[scope.rootTag].data_checksum;
-            var convertedToJson= reader.parseResult.jsonResult;
-           //remove checksum
+            var convertedToJson = reader.parseResult.jsonResult;
+            //remove checksum
             convertedToJson[scope.rootTag].data_checksum = "";
             //convert to xml
             var xmlResult = convertJSONObjectsToXML(convertedToJson);
@@ -369,8 +374,8 @@
             //jsonObj[rootTag].data_checksum = "";
             var xmlResult = convertJSONObjectsToXML(jsonObj);
             //TODO this needs to be configurable
-           xmlResult= '<?xml version="1.0" encoding="UTF-8"?>'+ '<?xml-stylesheet  type="text/xsl" href="REP_Combined.xsl"?>'+xmlResult;
-           // var hash = CryptoJS.SHA256(xmlResult);
+            xmlResult = '<?xml version="1.0" encoding="UTF-8"?>' + '<?xml-stylesheet  type="text/xsl" href="REP_Combined.xsl"?>' + xmlResult;
+            // var hash = CryptoJS.SHA256(xmlResult);
             //jsonObj[rootTag].data_checksum = hash.toString();
             //regenerate the xml
             //xmlResult = convertJSONObjectsToXML(jsonObj)

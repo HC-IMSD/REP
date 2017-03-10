@@ -13,7 +13,12 @@ $translateProvider.translations("en", {
     "company_id":"Company Id",
     "formulation_details":"Formulation Record",
     "enrolment_version": "Enrolment Version",
-    "appendix4_group": "Animal/ human sourced record"
+    "appendix4_group": "Animal/ human sourced record",
+    "COMPANY_ENROL":"REP Company Form",
+    "contact_record":"Contact Record",
+    "address_record":"Address Record",
+    "given_name":"Given Name",
+    "initials": "Initials"
 });
 
 }]);
