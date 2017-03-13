@@ -6,7 +6,7 @@
     angular
         .module('diffFormApp', [
             'pascalprecht.translate',
-            'translations',
+            /*'translations',*/
             'diffMain'
         ])
 })();
@@ -33,7 +33,7 @@
         .module('diffFormApp')
         .config(['$translateProvider', function ($translateProvider) {
             $translateProvider.directivePriority(1);
-            $translateProvider.preferredLanguage('en');
+            $translateProvider.preferredLanguage('@@prefLang');
             // $translateProvider.useLoader('customLoad');
             $translateProvider.useSanitizeValueStrategy(null);
             // $translateProvider.forceAsyncReload(true); //needed for the custom loader

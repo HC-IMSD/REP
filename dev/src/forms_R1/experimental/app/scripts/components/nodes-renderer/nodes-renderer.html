@@ -1,0 +1,50 @@
+<div ui-tree-handle class="tree-node tree-node-content rep-ui-tree-cursor">
+    <div >
+        <div class="row margin-top-large">
+            <div class="margin-bottom-medium">
+                <a class="" ng-if="node.nodes" class="rep-anchor"
+                   ng-click="toggle(this)"><i class="glyphicon"
+                                              ng-class="{'fa fa-caret-right fa-lg fa-fw': collapsed, 'fa fa-caret-down fa-lg fa-fw': !collapsed}"></i>
+                    {{node.recordName|translate}}&nbsp;-&nbsp;Record:&nbsp{{node.index+1}}
+                </a>
+            </div>
+            <div ng-if="node.value && node.value.length>0 && !collapsed" class="col-xs-12">
+                <table class="table dataTable table-bordered table-hover table-condensed table-striped">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Change Type</th>
+                        <th scope="col">Original Value</th>
+                        <th scope="col">Changed Value</th>
+                    </tr>
+                    <tr ng-repeat="child in node.value">
+                        <td width="20%">{{child.recordName |translate}}</td>
+                        <td width="20%">{{child.type |translate}}</td>
+                        <td width="30%">{{child.original }}</td>
+                        <td width="30%">{{child.diff }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div ng-if="node.isChange &&!collapsed">
+                <div class="col-xs-12">
+                    <label>(Entire record&nbsp;{{node.type |translate}})</label>
+                    <table class="table dataTable table-bordered table-hover table-condensed table-striped">
+                        <tr>
+                            <th>Change Type</th>
+                            <th>Original Value</th>
+                            <th>Changed Value</th>
+                        </tr>
+                        <tr>
+                            <td width="20%">{{node.type |translate}}</td>
+                            <td width="20%">{{node.original |json}}</td>
+                            <td width="60%">{{node.diff |json}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
+            <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'app/scripts/components/nodes-renderer/nodes-renderer.html'">
+            </li>
+        </ol>
+    </div>
+</div>

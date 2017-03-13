@@ -32,6 +32,7 @@ var paths = {
     helpTemplates: 'app/help/',
     buildProd: './build/prod/',
     buildDev: buildDev,
+    buildDevDiff: buildDev + '/repDiff/',
     buildDevActivity: buildDev + '/activity/',
     buildDevCompany: buildDev + '/company/',
     buildDevTransaction: buildDev + '/transaction/',
@@ -129,7 +130,9 @@ var jsRootContent = {
     partialActivityRoot: 'rootContent/activityRoot.html',
     partialCompanyRoot: 'rootContent/companyRoot.html',
     partialTransactionRoot: 'rootContent/transactionRoot.html',
-    partialDossierRoot: 'rootContent/dossierRoot.html'
+    partialDossierRoot: 'rootContent/dossierRoot.html',
+    partialDiffFormRoot: 'rootContent/diffForm.html'
+
 };
 
 
@@ -138,7 +141,8 @@ var rootFileNames = {
     activityRoot: "activityApp",
     companyRoot: "companyApp",
     transactionRoot: "transactionApp",
-    dossierRoot: "dossierApp"
+    dossierRoot: "dossierApp",
+    repDiff:"diffApp"
 };
 
 
@@ -147,9 +151,27 @@ var styleFilesNames={
     select: 'select.min.css',
     select2Style: 'select2.min.css',
     select2Image:'select2.png',
-    selectizeStyle:'selectize.default.css'
+    selectizeStyle:'selectize.default.css',
+    repDiff:'rep-diff.css',
+    uiTree:'angular-ui-tree.min.css'
 
+};
+
+var libFileNames={
+    angularMin:"angular.min.js",
+    ariaMin:"angular-aria.min.js",
+    resourceMin:"angular-resource.min.js",
+    sanitizeMin:"angular-sanitize.min.js",
+    translateMin:"angular-translate.mim.js",
+    fileSaverMin:"FileSave.min.js",
+    selectMin:"select.min.js",
+    sha256:"sha256.js",
+    uiBootStrapMin:"ui-bootstrap-tpls-2.1.4.min.js",
+    xml2Json:"xml2json.js",
+    deepDiffMin:"deep-diff-0.3.4.min.js",
+    uiTreeMin:"angular-ui-tree.min.js"
 }
+
 
 //Style file paths from source countrol to inject into the forms
 /*
@@ -215,7 +237,10 @@ var componentFolders = {
     scheduleA: 'schedule-a/',
     tabs: 'tabs/',
     theraClass: 'therapeutic-classification/',
-    formulations: 'formulations/'
+    formulations: 'formulations/',
+    diffFileIO:'fileIODiff/',
+    nodesRender:'nodes-renderer/',
+    diffMain:'diff-main/'
 };
 
 //exclude custom styles only lib
@@ -320,7 +345,8 @@ var serviceFileNames = {
     commonLists: 'common-lists',
     dossierService: "dossier-service",
     dossierDataList: "dossier-data-list",
-    dossierLoadService: "dossier-load-service"
+    dossierLoadService: "dossier-load-service",
+    diffService:'diff-service'
 };
 
 //Activity Form Service File names
@@ -694,7 +720,16 @@ pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
  *  @param lang - the language to generate. For angular translate
  *  @param formType - the type of form to generate, either external (EXT) or internal (INT)
  * */
-pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType) {
+pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType,stylesList) {
+
+    var stylesArray=[
+        paths.styles+styleFilesNames.rep,
+        paths.styles+styleFilesNames.select,
+        paths.styles+styleFilesNames.select2Style,
+        paths.styles+styleFilesNames.select2Image
+    ];
+
+    if(stylesList) stylesArray=stylesList;
 
     //inserts date stamp into base content page
     return (
@@ -708,20 +743,15 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
             }))
             //get all the third party libraries
             .pipe(inject(gulp.src([
-                    'app/lib/**/*.js',
-                    '!app/lib/**/angular*.js'
+                    buildDir+'app/lib/**/*.js',
+                    buildDir+'!app/lib/**/angular*.js'
                 ]),
                 {
                     name: 'thirdParty',
                     ignorePath: ignorePath,
                     addRootSlash: false
                 }))
-            .pipe(inject(gulp.src([
-                    paths.styles+styleFilesNames.rep,
-                    paths.styles+styleFilesNames.select,
-                    paths.styles+styleFilesNames.select2Style,
-                    paths.styles+styleFilesNames.select2Image
-                ]),
+            .pipe(inject(gulp.src(stylesArray),
                 {
                     ignorePath: ignorePath,
                     addRootSlash: false
@@ -734,7 +764,6 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                     buildDir + 'app/scripts/' + injectRootJs,
                     buildDir + 'app/scripts/' + 'translations' + createSuffixDate() + '.js',
                     buildDir + 'app/lib/**/angular*.js'
-
                 ])
                 .pipe(angularFilesort())
                 , {
@@ -749,6 +778,11 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
     )
 
 };
+
+
+
+
+
 
 pipes.cleanBuild = function (baseDir) {
 
@@ -1109,7 +1143,7 @@ gulp.task('dev-dossier-createResources', ['dev-dossier-copyTranslate'], function
 
 
 gulp.task('dev-activity-copyLib', function () {
-    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
+    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*','!'+paths.lib+libFileNames.deepDiffMin],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevActivity))
 
@@ -1797,10 +1831,89 @@ gulp.task('connect-server-start-experimental', function() {
     });
 });
 
+gulp.task('dev-diffForm-clean', function () {
+    return (pipes.cleanBuild(paths.buildDevDiff + 'app/'));
+
+});
+
+gulp.task('dev-diffForm-copyWetDep', function () {
+    return (pipes.copyWet(paths.buildDevDiff))
+});
+
+gulp.task('dev-diffForm-copyLib', function () {
+    var copySources = gulp.src([
+            paths.lib + libFileNames.angularMin,
+            paths.lib + libFileNames.ariaMin,
+            paths.lib + libFileNames.resourceMin,
+            paths.lib + libFileNames.sanitizeMin,
+            paths.lib + libFileNames.translateMin,
+            paths.lib + libFileNames.xml2Json,
+            paths.lib + libFileNames.deepDiffMin,
+            paths.lib + libFileNames.uiTreeMin,
+            paths.styles + '**/'+styleFilesNames.repDiff,
+            paths.styles + '**/'+styleFilesNames.uiTree
+        ],
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildDevDiff))
+    /**
+     * var libFileNames={
+    angularMin:"angular.min.js",
+    ariaMin:"angular.aria.min.js",
+    resourceMin:"angular.resource.min.js",
+    sanitizeMin:"angular.sanitize.min.js",
+    translateMin:"angular-translate.mim.js",
+    fileSaverMin:"FileSave.min.js",
+    selectMin:"select.min.js",
+    sha256:"sha256.js",
+    uiBootStrapMin:"ui-bootstrap-tpls-2.1.4.min.js",
+    xml2Json:"xml2json.js",
+    deepDiffMin:"deep-diff-0.3.4.min.js",
+    uiTreeMin:"angular-ui-tree.min.js"
+}
+     */
+});
+
+gulp.task('dev-diffForm-copySrc', function () {
+    var servFiles=[serviceFileNames.diffService];
+    var compFolder=[componentFolders.nodesRender,componentFolders.diffFileIO,componentFolders.diffMain];
+    var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
+    var copySourcesJs = gulp.src([paths.scripts + "/"+rootFileNames.repDiff+".js"], {read: true, base: './'});
+    copySourcesJs.pipe(gulp.dest(paths.buildDevDiff));
+    return (
+        pipes.copySrcs(true, paths.buildDevDiff, compFolder, servFiles, [], false)
+    );
+
+});
+
+gulp.task('dev-diffForm-copyTranslate', function () {
+
+    var diffBaseList=[];
+
+    return (pipes.translateDev(diffBaseList, paths.buildDevDiff))
+});
+
+gulp.task('dev-diffForm-createRootJS', function () {
+    var dest = paths.buildDevDiff + 'app/scripts/';
+    var rootFile = paths.scripts + "/" + rootFileNames.repDiff + '.js';
+    var skipDate=true;
+    var generateInternalForms=false;
+    return (
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
+    );
+
+});
 
 
 
+gulp.task('dev-diffForm-htmlBuild', [], function () {
 
+    var deploy=deployType.dev;
+    var ignoreDir = '/build/dev/repDiff';
+    var stylesList=[ paths.styles+styleFilesNames.repDiff];
+    return (
 
+    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', jsRootContent. partialDiffFormRoot, paths.buildDevDiff, ignoreDir,'en',deploy,stylesList)
 
+    );
 
+});

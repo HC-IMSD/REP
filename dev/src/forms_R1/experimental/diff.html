@@ -30,7 +30,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="./app/styles/rep.css ">-->
     <!-- inject:css -->
-    <link rel="stylesheet" href="app/styles/rep.css">
+    <link rel="stylesheet" href="app/styles/rep-diff.css">
     <link rel="stylesheet" href="app/styles/select.min.css">
     <link rel="stylesheet" href="app/styles/select2.min.css">
     <link rel="stylesheet" href="app/lib/uiTree/angular-ui-tree.min.css">
@@ -150,152 +150,12 @@
 
     <!--content starts here -->
     <div>
-        <h1 property="name" id="wb-cont">Experimental Diff Template</h1>
+        <h1 property="name" id="wb-cont">File Diff Template</h1>
 
         <!-- inject:mainContent-->
 
-
-        <!-- Nodrop Nested node template -->
-
-        <div id="app-root" ng-app="activityApp" ng-controller="MainController as ctrl">
-            <!-- <script type="text/ng-template" id="nodrop_nodes_renderer.html">
-                 <div ui-tree-handle class="tree-node tree-node-content" ng-class="{nodrop: node.nodrop}">
-                     {{node.recordName}} <span ng-if="node.nodrop">No drop</span>
-                     <div ng-if="node.isChange">
-
-                     </div>
-
-                    &lt;!&ndash; <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="remove(this)"><span
-                             class="glyphicon glyphicon-remove"></span></a>&ndash;&gt;
-                 </div>
-                 <ol  ui-tree-nodes="" data-nodrop-enabled="true" ng-model="node.nodes"
-                     ng-class="{hidden: collapsed}">
-                     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
-                     </li>
-                 </ol>
-                &lt;!&ndash; <ol ng-if="!node.nodrop" ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-                     <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodrop_nodes_renderer.html'">
-                     </li>
-                 </ol>&ndash;&gt;
-             </script>-->
-
-            <script type="text/ng-template" id="nodes_renderer.html">
-                <div ui-tree-handle class="tree-node tree-node-content">
-                    <button class="btn btn-primary btn-xs" ng-if="node.nodes"
-                            ng-click="toggle(this)"><span class="glyphicon"
-                                                          ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}"></span>
-                    </button>
-                    <label>{{node.recordName|translate}}&nbsp;-&nbsp;Record:&nbsp{{node.index+1}}</label>
-                    <div ng-if="node.value && node.value.length>0 && !collapsed">
-                        <table class="table dataTable table-bordered table-hover table-condensed table-striped">
-                            <tr>
-                                <th>Name</th>
-                                <th>Change Type</th>
-                                <th>Original Value</th>
-                                <th>Changed Value</th>
-                            </tr>
-                            <tr ng-repeat="child in node.value">
-                                <td>{{child.recordName |translate}}</td>
-                                <td>{{child.type |translate}}</td>
-                                <td>{{child.original}}</td>
-                                <td>{{child.diff}}</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div ng-if="node.isChange &&!collapsed">
-                        <label>(Entire record&nbsp;{{node.type |translate}})</label>
-                        <table class="table dataTable table-bordered table-hover table-condensed table-striped">
-                            <tr>
-                                <th>Change Type</th>
-                                <th>Original Value</th>
-                                <th>Changed Value</th>
-                            </tr>
-                            <tr>
-                                <td>{{node.type |translate}}</td>
-                                <td>{{node.original}}</td>
-                                <td>{{node.diff}}</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div>
-                <ol ui-tree-nodes="" ng-model="node.nodes" ng-class="{hidden: collapsed}">
-                    <li ng-repeat="node in node.nodes" ui-tree-node ng-include="'nodes_renderer.html'">
-                    </li>
-                </ol>
-            </script>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Load the base file</h2>
-                    <hpfb-file-select update-model-root="ctrl.showContent(fileContent) "
-                                      root-elem=""></hpfb-file-select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Load the file to compare</h2>
-                    <hpfb-file-select update-model-root="ctrl.showContent2(fileContent) "
-                                      root-elem=""></hpfb-file-select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 form-group">
-                    <button class="btn btn-primary" ng-click="ctrl.compareFiles()">Start Compare</button>
-                </div>
-            </div>
-            <div class="row" ng-if="ctrl.listResults && ctrl.listResults.length>0">
-                <div class="col-sm-12 button-group">
-                    <button ng-click="ctrl.expandAll()">Expand all</button>
-                    <button ng-click="ctrl.collapseAll()">Collapse all</button>
-                </div>
-            </div>
-            <div>
-                <div class="row margin-top-large">
-                    <div class="col-sm-6 form-group">
-                        <div ui-tree id="tree-root" data-drag-enabled="false">
-                            <ol ui-tree-nodes ng-model="ctrl.listResults">
-                                <li ng-repeat="node in ctrl.listResults" ui-tree-node
-                                    ng-include="'nodes_renderer.html'"></li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                <!-- endinject-->
-            </div>
-            <div class="row margin-top-large">
-                <details>
-                    <summary>Raw Data</summary>
-
-                    <details>
-                        <summary>Difference Engine Raw Results</summary>
-                        <div class="row">
-                            <pre>{{ctrl.diffList |json}}</pre>
-                        </div>
-                    </details>
-                    <details>
-                        <summary>Consolidated Results</summary>
-                        <div class="row">
-                            <pre>{{ctrl.listResults |json}}</pre>
-                        </div>
-                    </details>
-                    <details>
-                        <summary>Base File Contents</summary>
-                        <div class="row">
-                            <pre>{{ctrl.content1 |json}}</pre>
-                        </div>
-                    </details>
-                    <details>
-                        <summary>Compare File Contents</summary>
-                        <div class="row">
-                            <pre>{{ctrl.content2 |json}}</pre>
-                        </div>
-                    </details>
-
-
-                </details>
-
-            </div>
+        <div id="app-root" ng-app="diffFormApp" ng-controller="MainController as ctrl">
+            <cmp-diff-main></cmp-diff-main>
 
             <!--content ends here -->
 
@@ -308,6 +168,8 @@
                 </dl>
             </div>
 
+        </div>
+    </div>
 </main>
 <aside class="gc-nttvs container">
     <h2>Government of Canada activities and initiatives</h2>
@@ -382,6 +244,7 @@
 
 <script src="app/lib/angular-aria.min.js"></script>
 
+<script src="app/scripts/components/diff-main/cmp-diff-main.js"></script>
 <script src="app/scripts/services/diff-service.js"></script>
 
 <script src="app/scripts/testDiff-en.js"></script>
@@ -390,7 +253,7 @@
 <!--<script src="../node_modules/deep-diff/releases/deep-diff-0.3.4.min.js"></script>-->
 <script src="app/lib/deep-diff-0.3.4.min.js"></script>
 
-<script src="app/scripts/components/fileIO/FileIO.hpfbFileReader.js"></script>
+<script src="app/scripts/components/fileIODiff/FileIO.hpfbFileReader.js"></script>
 <script src="app/lib/uiTree/angular-ui-tree.min.js"></script>
 
 <!-- endinject -->
