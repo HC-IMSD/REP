@@ -1,0 +1,16 @@
+{
+  "company_contact_details": "true",
+  "company_address_details": "true",
+  "toString": "true"
+}
+/**
+ref_product_list
+<therapeutic_class_list>
+<formulation_group>
+<dosage_form_group>
+<roa_group>
+container_group
+ "appendix4_group": "Animal/ human sourced record"
+country_group
+
+**/

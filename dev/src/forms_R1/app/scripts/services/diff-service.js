@@ -44,7 +44,9 @@
             //loop through each difference node and build a consolidated view
             for (var i = 0; i < diffList.length; i++) {
                 var record = diffList[i];
-                _processNode(record, resultList, exclusionList);
+                if (!(record.path && record.path[record.path.length - 1] === "toString")) {
+                    _processNode(record, resultList, exclusionList);
+                }
             }
             return (resultList);
         }

@@ -37,7 +37,8 @@
         vm.listResults = null;
         vm.exclusions={
             "company_contact_details":"true",
-            "company_address_details":"false",
+            "company_address_details": "true",
+            "formulation_group": "true",
             "toString":"true"
         };
 

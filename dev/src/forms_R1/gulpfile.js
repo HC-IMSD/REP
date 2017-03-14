@@ -50,19 +50,19 @@ var paths = {
     wetBase: wetBase
 };
 
-var homePath={
-    dev_en:'<a href="https://lam-dev.hres.ca/rep-dev/index.html">Home</a>',
-    dev_fr:'<a href="https://lam-dev.hres.ca/rep-dev/index-fr.html">Accueil</a>',
-    test_en:'<a href="https://lam-dev.hres.ca/rep_test/index.html">Home</a>',
-    test_fr:'<a href="https://lam-dev.hres.ca/rep_test/index-fr.html">Accueil</a>',
-    prod_en:'<a href="https://lam-dev.hres.ca/REP-Form/index.html">Home</a>',
-    prod_fr:'<a href="https://lam-dev.hres.ca/REP-Form/index-fr.html">Accueil</a>'
+var homePath = {
+    dev_en: '<a href="https://lam-dev.hres.ca/rep-dev/index.html">Home</a>',
+    dev_fr: '<a href="https://lam-dev.hres.ca/rep-dev/index-fr.html">Accueil</a>',
+    test_en: '<a href="https://lam-dev.hres.ca/rep_test/index.html">Home</a>',
+    test_fr: '<a href="https://lam-dev.hres.ca/rep_test/index-fr.html">Accueil</a>',
+    prod_en: '<a href="https://lam-dev.hres.ca/REP-Form/index.html">Home</a>',
+    prod_fr: '<a href="https://lam-dev.hres.ca/REP-Form/index-fr.html">Accueil</a>'
 
 };
-var deployType={
-    dev:"DEV",
-    test:"TEST",
-    prod:"PROD"
+var deployType = {
+    dev: "DEV",
+    test: "TEST",
+    prod: "PROD"
 }
 
 
@@ -73,6 +73,11 @@ var placeholders = {
 };
 
 //================================ Titles and main headings for the web page START========================
+
+var diffFormRootTitles_en = {
+    mainHeading: "REP File Compare Utility",
+    title: 'REP File Compare Utility'
+};
 var activityRootTitles_en = {
     mainHeading: "Regulatory Activity Template: Regulatory Enrolment Process (REP)",
     title: 'Health Canada Activity REP Template'
@@ -142,47 +147,47 @@ var rootFileNames = {
     companyRoot: "companyApp",
     transactionRoot: "transactionApp",
     dossierRoot: "dossierApp",
-    repDiff:"diffApp"
+    repDiff: "diffApp"
 };
 
 
-var styleFilesNames={
-    rep:'rep.css',
+var styleFilesNames = {
+    rep: 'rep.css',
     select: 'select.min.css',
     select2Style: 'select2.min.css',
-    select2Image:'select2.png',
-    selectizeStyle:'selectize.default.css',
-    repDiff:'rep-diff.css',
-    uiTree:'angular-ui-tree.min.css'
+    select2Image: 'select2.png',
+    selectizeStyle: 'selectize.default.css',
+    repDiff: 'rep-diff.css',
+    uiTree: 'angular-ui-tree.min.css'
 
 };
 
-var libFileNames={
-    angularMin:"angular.min.js",
-    ariaMin:"angular-aria.min.js",
-    resourceMin:"angular-resource.min.js",
-    sanitizeMin:"angular-sanitize.min.js",
-    translateMin:"angular-translate.mim.js",
-    fileSaverMin:"FileSave.min.js",
-    selectMin:"select.min.js",
-    sha256:"sha256.js",
-    uiBootStrapMin:"ui-bootstrap-tpls-2.1.4.min.js",
-    xml2Json:"xml2json.js",
-    deepDiffMin:"deep-diff-0.3.4.min.js",
-    uiTreeMin:"angular-ui-tree.min.js"
+var libFileNames = {
+    angularMin: "angular.min.js",
+    ariaMin: "angular-aria.min.js",
+    resourceMin: "angular-resource.min.js",
+    sanitizeMin: "angular-sanitize.min.js",
+    translateMin: "angular-translate.min.js",
+    fileSaverMin: "FileSave.min.js",
+    selectMin: "select.min.js",
+    sha256: "sha256.js",
+    uiBootStrapMin: "ui-bootstrap-tpls-2.1.4.min.js",
+    xml2Json: "xml2json.js",
+    deepDiffMin: "deep-diff-0.3.4.min.js",
+    uiTreeMin: "angular-ui-tree.min.js"
 }
 
 
 //Style file paths from source countrol to inject into the forms
 /*
-var styleFiles = {
-    rep: paths.styles + 'rep.css',
-    select: paths.styles + 'select.min.css',
-    select2Style: paths.styles + 'select2.min.css',
-    select2Image: paths.styles + 'select2.png',
-    selectizeStyle: paths.styles + 'selectize.default.css'
-};
-*/
+ var styleFiles = {
+ rep: paths.styles + 'rep.css',
+ select: paths.styles + 'select.min.css',
+ select2Style: paths.styles + 'select2.min.css',
+ select2Image: paths.styles + 'select2.png',
+ selectizeStyle: paths.styles + 'selectize.default.css'
+ };
+ */
 
 
 var changedFile = ""; // GLOBAL USED for Watcher storing changed file
@@ -205,13 +210,13 @@ var componentFolders = {
     addressRecord: 'addressRecord/',
     addressRole: 'addressRole/',
     applicationInfo: 'applicationInfo/',
-    importerProducts:'companyImporterProducts/',
+    importerProducts: 'companyImporterProducts/',
     companyMain: 'companyMain/',
     contactDetails: 'contactDetails/',
     contactList: 'contactList/',
     contactRecord: 'contactRecord/',
     dinDetails: 'dinDetails/',
-    dossierIdDetails:'dossierIdDetails/',
+    dossierIdDetails: 'dossierIdDetails/',
     expandingTable: 'expandingTable/',
     fileIOComponentAndDep: 'fileIO/',
     lifecycleDetails: 'lifecycleDetails/',
@@ -238,17 +243,17 @@ var componentFolders = {
     tabs: 'tabs/',
     theraClass: 'therapeutic-classification/',
     formulations: 'formulations/',
-    diffFileIO:'fileIODiff/',
-    nodesRender:'nodes-renderer/',
-    diffMain:'diff-main/'
+    diffFileIO: 'fileIODiff/',
+    nodesRender: 'nodes-renderer/',
+    diffMain: 'diff-main/'
 };
 
 //exclude custom styles only lib
-var stylesProd=[
+var stylesProd = [
     //paths.styles+styleFilesNames.rep,
-    paths.styles+styleFilesNames.select,
-    paths.styles+styleFilesNames.select2Style,
-    paths.styles+styleFilesNames.select2Image
+    paths.styles + styleFilesNames.select,
+    paths.styles + styleFilesNames.select2Style,
+    paths.styles + styleFilesNames.select2Image
 
 ];
 
@@ -346,7 +351,7 @@ var serviceFileNames = {
     dossierService: "dossier-service",
     dossierDataList: "dossier-data-list",
     dossierLoadService: "dossier-load-service",
-    diffService:'diff-service'
+    diffService: 'diff-service'
 };
 
 //Activity Form Service File names
@@ -459,8 +464,25 @@ var translationBaseFiles = {
     appendix4: paths.translations + 'appendix4',
     dossierMsg: paths.translations + 'dossierMsg',
     scheduleA: paths.translations + 'scheduleA',
-    formulation: paths.translations + 'formulation'
+    formulation: paths.translations + 'formulation',
+    dossierXml: paths.translations + 'dossierXml',
+    activityXml: paths.translations + 'activityXml',
+    transactionXml: paths.translations + 'transactionXml',
+    companyXml: paths.translations + 'companyXml',
+    addressXml: paths.translations + 'addressXml',
+    contactXml: paths.translations + 'contactXml',
+    defaultXml: paths.translations + 'defaultXml'
 };
+
+
+var diffFormTranslationBaseList = [
+    translationBaseFiles.fileIO,
+    translationBaseFiles.dossierXml,
+    translationBaseFiles.addressXml,
+    translationBaseFiles.contactXml,
+    translationBaseFiles.defaultXml
+];
+
 
 //Activity Form Translations
 var activityTranslationFilesBaseList = [
@@ -548,7 +570,7 @@ pipes.builtAppCmpScriptsProd = function (filePaths, outName, destPath) {
         .pipe(pipes.orderedAppScripts())
         .pipe(plugins.sourcemaps.init())
         .pipe(plugins.concat(outName))
-        .pipe(plugins.uglify({mangle:false}))
+        .pipe(plugins.uglify({mangle: false}))
         .pipe(plugins.sourcemaps.write())
         .pipe(gulp.dest(destPath));
 };
@@ -602,10 +624,10 @@ pipes.translateDev = function (translateList, destPath, baseIgnore) {
  *  Inserts a date stamp in the passed in templaste
  *
  * */
-pipes.insertDateStamp = function (template, valsObj,lang,type) {
+pipes.insertDateStamp = function (template, valsObj, lang, type) {
     var now = new Date();
     var utc = dateFormat(now, "isoDate");
-    var anchor=pipes.getHomeAnchor(type,lang)
+    var anchor = pipes.getHomeAnchor(type, lang)
 
     return (gulp.src(template)
             .pipe(htmlreplace({
@@ -622,20 +644,20 @@ pipes.insertDateStamp = function (template, valsObj,lang,type) {
  * @param lang
  * @returns {*}
  */
-pipes.getHomeAnchor=function(type,lang){
-    var homeEn=homePath.dev_en;
-    var homeFr=homePath.dev_fr;
+pipes.getHomeAnchor = function (type, lang) {
+    var homeEn = homePath.dev_en;
+    var homeFr = homePath.dev_fr;
 
-    if(type===deployType.prod){
-        var homeEn=homePath.prod_en;
-        var homeFr=homePath.prod_fr;
+    if (type === deployType.prod) {
+        var homeEn = homePath.prod_en;
+        var homeFr = homePath.prod_fr;
     }
-    else if(type===deployType.test){
-        var homeEn=homePath.test_en;
-        var homeFr=homePath.test_fr;
+    else if (type === deployType.test) {
+        var homeEn = homePath.test_en;
+        var homeFr = homePath.test_fr;
     }
 
-    if(lang=='fr'){
+    if (lang == 'fr') {
         return homeFr;
     }
     return homeEn;
@@ -645,16 +667,16 @@ pipes.copyHtml = function (copySourcesHtml, dateToday, destDirectory, isHtmlMin)
     if (isHtmlMin === true) {
         return (
             copySourcesHtml.pipe(rename({
-                    suffix: dateToday
-                }))
+                suffix: dateToday
+            }))
                 .pipe(plugins.htmlhint.failReporter())
                 .pipe(htmlmin({collapseWhitespace: true, removeComments: true, html5: true, caseSensitive: true}))
                 .pipe(gulp.dest(destDirectory))
         )
     } else {
         copySourcesHtml.pipe(rename({
-                suffix: dateToday
-            }))
+            suffix: dateToday
+        }))
             .pipe(gulp.dest(destDirectory))
     }
 };
@@ -720,20 +742,20 @@ pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
  *  @param lang - the language to generate. For angular translate
  *  @param formType - the type of form to generate, either external (EXT) or internal (INT)
  * */
-pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType,stylesList) {
+pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType, stylesList) {
 
-    var stylesArray=[
-        paths.styles+styleFilesNames.rep,
-        paths.styles+styleFilesNames.select,
-        paths.styles+styleFilesNames.select2Style,
-        paths.styles+styleFilesNames.select2Image
+    var stylesArray = [
+        paths.styles + styleFilesNames.rep,
+        paths.styles + styleFilesNames.select,
+        paths.styles + styleFilesNames.select2Style,
+        paths.styles + styleFilesNames.select2Image
     ];
 
-    if(stylesList) stylesArray=stylesList;
+    if (stylesList) stylesArray = stylesList;
 
     //inserts date stamp into base content page
     return (
-        pipes.insertDateStamp(templatePath, valsObj, lang,formType)
+        pipes.insertDateStamp(templatePath, valsObj, lang, formType)
             .pipe(inject(gulp.src([partialRoot]), {
                 starttag: placeholders.mainContent,
                 transform: function (filePath, file) {
@@ -743,8 +765,8 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
             }))
             //get all the third party libraries
             .pipe(inject(gulp.src([
-                    buildDir+'app/lib/**/*.js',
-                    buildDir+'!app/lib/**/angular*.js'
+                    buildDir + 'app/lib/**/*.js',
+                    '!' + buildDir + '/app/lib/**/angular*.js'
                 ]),
                 {
                     name: 'thirdParty',
@@ -765,7 +787,7 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
                     buildDir + 'app/scripts/' + 'translations' + createSuffixDate() + '.js',
                     buildDir + 'app/lib/**/angular*.js'
                 ])
-                .pipe(angularFilesort())
+                    .pipe(angularFilesort())
                 , {
                     ignorePath: ignorePath,
                     addRootSlash: false,
@@ -778,10 +800,6 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
     )
 
 };
-
-
-
-
 
 
 pipes.cleanBuild = function (baseDir) {
@@ -838,8 +856,8 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
     pipes.copyHtml(copySourcesHtml, dateToday, destDir, isHtmlMin);
     return (
         copySourcesJs.pipe(rename({
-                suffix: dateToday
-            }))
+            suffix: dateToday
+        }))
             .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
             .pipe(gulp.dest(destDir))
     )
@@ -848,31 +866,29 @@ pipes.deleteSrcs = function (srcDir, componentFolders, serviceFileNames, directi
     var fileArray = [];
 
     for (var i = 0; i < componentFolders.length; i++) {
-        var folderPath = srcDir+'/components/' + componentFolders[i] + '**/*.*';
+        var folderPath = srcDir + '/components/' + componentFolders[i] + '**/*.*';
         console.log(folderPath)
         fileArray.push(folderPath);
     }
     //get all the activity services
     for (var i = 0; i < serviceFileNames.length; i++) {
-        fileArray.push(srcDir+'/services/' + serviceFileNames[i] + "*.js")
+        fileArray.push(srcDir + '/services/' + serviceFileNames[i] + "*.js")
     }
     //get all the activity directive folders
     for (var i = 0; i < directiveFolders.length; i++) {
-        fileArray.push(srcDir+'/directives/' + directiveFolders[i] + "**/*.*");
+        fileArray.push(srcDir + '/directives/' + directiveFolders[i] + "**/*.*");
 
     }
     return (
-       del(fileArray)
+        del(fileArray)
     )
 };
 
 
+pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType) {
 
 
-pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang,formType) {
-
-
-    pipes.insertDateStamp(templatePath, metaObj,lang,formType)
+    pipes.insertDateStamp(templatePath, metaObj, lang, formType)
         .pipe(inject(gulp.src([htmlPartial]), {
             starttag: placeholders.mainContent,
             transform: function (filePath, file) {
@@ -890,9 +906,9 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
                 addRootSlash: false
             }))
         .pipe(inject(gulp.src([
-                paths.buildProd+paths.styles+"rep*.min.css",
-                paths.buildProd+paths.styles+styleFilesNames.select,
-                paths.buildProd+paths.styles+styleFilesNames.select2Style
+                paths.buildProd + paths.styles + "rep*.min.css",
+                paths.buildProd + paths.styles + styleFilesNames.select,
+                paths.buildProd + paths.styles + styleFilesNames.select2Style
             ]),
             {
                 ignorePath: ignorePath,
@@ -900,7 +916,7 @@ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ig
             }
         ))
         .pipe(inject(gulp.src(src)
-            .pipe(angularFilesort())
+                .pipe(angularFilesort())
             , {
                 ignorePath: ignorePath,
                 addRootSlash: false,
@@ -969,14 +985,14 @@ pipes.compileSourceJsMinified = function (srcPath, destPath, rootJsBaseName, com
     if (hasInternal) {
 
         filesToConcat.push(srcPath + rootJsBaseName + "INT-en" + "*.js");
-         pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-en" + dateToday + '.min.js', destPath);
+        pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-en" + dateToday + '.min.js', destPath);
         filesToConcat.pop();
         filesToConcat.push(srcPath + rootJsBaseName + "INT-fr" + "*.js");
-         pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-fr" + dateToday + '.min.js', destPath);
+        pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "INT-fr" + dateToday + '.min.js', destPath);
         filesToConcat.pop();
     }
     filesToConcat.push(srcPath + rootJsBaseName + "EXT-en" + "*.js");
-     pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-en" + dateToday + '.min.js', destPath);
+    pipes.builtAppCmpScriptsProd(filesToConcat, rootJsBaseName + "EXT-en" + dateToday + '.min.js', destPath);
     filesToConcat.pop();
     filesToConcat.push(srcPath + rootJsBaseName + "EXT-fr" + "*.js");
     return (
@@ -1013,7 +1029,7 @@ gulp.task('dev-activity-copySrc', function () {
 
 
 gulp.task('dev-global-watch', function () {
-    var watcher = gulp.watch(['app/scripts/**/*.js','app/scripts/**/*.html'], ['dev-copy-changedFiles']);
+    var watcher = gulp.watch(['app/scripts/**/*.js', 'app/scripts/**/*.html'], ['dev-copy-changedFiles']);
     watcher.on('change', function (event) {
         console.log('File ' + event.path + ' was ' + event.type + ', running watch tasks...');
         changedFile = event.path;
@@ -1143,7 +1159,7 @@ gulp.task('dev-dossier-createResources', ['dev-dossier-copyTranslate'], function
 
 
 gulp.task('dev-activity-copyLib', function () {
-    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*','!'+paths.lib+libFileNames.deepDiffMin],
+    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*', '!' + paths.lib + libFileNames.deepDiffMin],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevActivity))
 
@@ -1161,8 +1177,8 @@ gulp.task('dev-activity-createRootJS', function () {
     var lang = 'en';
     var dest = paths.buildDevActivity + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.activityRoot + '.js';
-    var skipDate=true;
-    var generateInternalForms=true;
+    var skipDate = true;
+    var generateInternalForms = true;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
@@ -1174,11 +1190,11 @@ gulp.task('dev-activity-createRootJS', function () {
 gulp.task('dev-activity-htmlBuild', ['dev-activity-copyData', 'dev-activity-copySrc', 'dev-activity-copyLib', 'dev-activity-createRootJS', 'dev-activity-createResources'], function () {
     var today = createSuffixDate();
     today = "";
-    var deploy=deployType.dev;
-    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity','fr',deploy);
-    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity','fr',deploy );
-    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolEXT-en.html', 'activityAppEXT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity','en',deploy);
-    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity','en',deploy);
+    var deploy = deployType.dev;
+    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', deploy);
+    pipes.createRootHtml(paths.frenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', deploy);
+    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolEXT-en.html', 'activityAppEXT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', deploy);
+    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', deploy);
 
     return (
         pipes.cleanBuild(paths.buildDevActivity + paths.translations)
@@ -1217,8 +1233,8 @@ gulp.task('dev-company-copySrc', function () {
 gulp.task('dev-company-createRootJS', function () {
     var dest = paths.buildDevCompany + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.companyRoot + '.js';
-    var skipDate=true;
-    var generateInternalForms=true;
+    var skipDate = true;
+    var generateInternalForms = true;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
@@ -1234,8 +1250,8 @@ gulp.task('dev-company-htmlBuild', ['dev-company-copyData', 'dev-company-copySrc
     var htmlPartial = jsRootContent.partialCompanyRoot;
     var today = createSuffixDate();
     today = "";
-    var deploy=deployType.dev;
-    pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolINT-fr.html', 'companyAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr',deploy);
+    var deploy = deployType.dev;
+    pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolINT-fr.html', 'companyAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
     pipes.createRootHtml(paths.frenchTemplate, companyRootTitles_fr, 'companyEnrolEXT-fr.html', 'companyAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
     pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolEXT-en.html', 'companyAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
     pipes.createRootHtml(paths.englishTemplate, companyRootTitles_en, 'companyEnrolINT-en.html', 'companyAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
@@ -1271,8 +1287,8 @@ gulp.task('dev-transaction-copySrc', function () {
 gulp.task('dev-transaction-createRootJs', function () {
     var dest = paths.buildDevTransaction + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.transactionRoot + '.js';
-    var skipDate=true;
-    var generateInternalForms=false;
+    var skipDate = true;
+    var generateInternalForms = false;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
@@ -1299,9 +1315,9 @@ gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copyData', 'dev-transac
     var htmlPartial = jsRootContent.partialTransactionRoot;
     var today = createSuffixDate();
     today = "";
-    var deploy=deployType.dev;
-    pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '',deploy);
-    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + today+ '.js', htmlPartial, buildDir, ignoreDir, 'en', '',deploy);
+    var deploy = deployType.dev;
+    pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '', deploy);
+    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', '', deploy);
 
     return (
         pipes.cleanBuild(buildDir + paths.translations)
@@ -1363,8 +1379,8 @@ gulp.task('dev-dossier-createRootJS', function () {
 
     var dest = paths.buildDevDossier + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
-    var skipDate=true;
-    var generateInternalForms=true;
+    var skipDate = true;
+    var generateInternalForms = true;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
@@ -1388,11 +1404,11 @@ gulp.task('dev-dossier-htmlBuild', ['dev-dossier-copyData', 'dev-dossier-copySrc
     var htmlPartial = jsRootContent.partialDossierRoot;
     var today = createSuffixDate();
     today = "";
-    var deploy=deployType.dev;
-    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr',deploy);
-    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr',deploy);
-    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolEXT-en.html', 'dossierAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en',deploy);
-    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en',deploy);
+    var deploy = deployType.dev;
+    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolINT-fr.html', 'dossierAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.frenchTemplate, dossierRootTitles_fr, 'dossierEnrolEXT-fr.html', 'dossierAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolEXT-en.html', 'dossierAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+    pipes.createRootHtml(paths.englishTemplate, dossierRootTitles_en, 'dossierEnrolINT-en.html', 'dossierAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
     return (
         pipes.cleanBuild(buildDir + paths.translations)
     );
@@ -1448,20 +1464,20 @@ gulp.task('prod-global-copyDataFolder', function () {
 gulp.task('prod-global-copyStyleFolder', function () {
 
 
-   /* var stylesProd=[
-        styleFiles.select,
-        styleFiles.select2Style,
-        styleFiles.select2Image,
-        styleFiles.select2Image];*/
+    /* var stylesProd=[
+     styleFiles.select,
+     styleFiles.select2Style,
+     styleFiles.select2Image,
+     styleFiles.select2Image];*/
 
     var copySources = gulp.src(stylesProd,
         {read: true, base: ''});
     var dateToday = createSuffixDate();
     copySources.pipe(gulp.dest(paths.buildProd + 'app/styles/'));
-    copySources=gulp.src(paths.styles+styleFilesNames.rep, {read: true, base: ''});
-    return(
+    copySources = gulp.src(paths.styles + styleFilesNames.rep, {read: true, base: ''});
+    return (
         copySources.pipe(cleanCSS())
-            .pipe(rename("rep"+dateToday+ ".min.css"))
+            .pipe(rename("rep" + dateToday + ".min.css"))
             .pipe(gulp.dest(paths.buildProd + 'app/styles/'))
     )
 
@@ -1526,12 +1542,12 @@ gulp.task('prod-activity-compileHtml', ['prod-activity-compileSrcJs'], function 
         baseActivityPath + 'activityAppINT-en' + '*.min.js',
         paths.buildProd + 'app/lib/**/angular*.js'
     ];
-    var deploy=deployType.prod;
-    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd,'en',deploy);
-    pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd,'fr',deploy);
-    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd,'en',deploy);
+    var deploy = deployType.prod;
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd, 'en', deploy);
+    pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd, 'fr', deploy);
+    pipes.createProdRootHtml(paths.englishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd, 'en', deploy);
 
-    return pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd,'fr',deploy);
+    return pipes.createProdRootHtml(paths.frenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd, 'fr', deploy);
 
 });
 
@@ -1545,7 +1561,7 @@ gulp.task('prod-activity-copySourceFiles', function () {
 
 gulp.task('prod-activity-deleteSourceFiles', function () {
     return (
-        pipes.deleteSrcs( paths.buildProd+'app/scripts',activityComponentFolders, activityServiceFileNames, activityDirectiveFolders)
+        pipes.deleteSrcs(paths.buildProd + 'app/scripts', activityComponentFolders, activityServiceFileNames, activityDirectiveFolders)
     );
 });
 
@@ -1647,12 +1663,12 @@ gulp.task('prod-company-compileHtml', ['prod-company-compileSrcJs'], function ()
         basePath + 'companyAppINT-en' + '*.min.js',
         libFiles
     ];
-    var deploy=deployType.prod;
+    var deploy = deployType.prod;
 
-    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html',paths.buildProd, 'en',deploy);
-    pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html',paths.buildProd, 'fr',deploy);
-    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html',paths.buildProd, 'en',deploy);
-    return pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html',paths.buildProd, 'fr',deploy);
+    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'companyEXT-en.html', paths.buildProd, 'en', deploy);
+    pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'companyINT-fr.html', paths.buildProd, 'fr', deploy);
+    pipes.createProdRootHtml(paths.englishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'companyINT-en.html', paths.buildProd, 'en', deploy);
+    return pipes.createProdRootHtml(paths.frenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'companyEXT-fr.html', paths.buildProd, 'fr', deploy);
 
 });
 
@@ -1727,11 +1743,11 @@ gulp.task('prod-dossier-compileHtml', ['prod-dossier-compileSrcJs'], function ()
         basePath + 'dossierAppINT-en' + '*.min.js',
         libFiles
     ];
-    var deploy=deployType.prod;
-    pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'dossierEXT-en.html', paths.buildProd,'en',deploy);
-    pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'dossierINT-fr.html', paths.buildProd,'fr',deploy);
-    pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'dossierINT-en.html', paths.buildProd,'en',deploy);
-    return pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'dossierEXT-fr.html', paths.buildProd,'fr',deploy);
+    var deploy = deployType.prod;
+    pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'dossierEXT-en.html', paths.buildProd, 'en', deploy);
+    pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'dossierINT-fr.html', paths.buildProd, 'fr', deploy);
+    pipes.createProdRootHtml(paths.englishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'dossierINT-en.html', paths.buildProd, 'en', deploy);
+    return pipes.createProdRootHtml(paths.frenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'dossierEXT-fr.html', paths.buildProd, 'fr', deploy);
 
 });
 
@@ -1803,31 +1819,31 @@ gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], fun
     ];
 
     var result = "";
-    var deploy=deployType.prod;
-    result = pipes.createProdRootHtml(paths.englishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'transactionEXT-en.html', paths.buildProd,'en',deploy);
-    return pipes.createProdRootHtml(paths.frenchTemplate, transactionRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'transactionEXT-fr.html', paths.buildProd, 'fr',deploy);
+    var deploy = deployType.prod;
+    result = pipes.createProdRootHtml(paths.englishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'transactionEXT-en.html', paths.buildProd, 'en', deploy);
+    return pipes.createProdRootHtml(paths.frenchTemplate, transactionRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'transactionEXT-fr.html', paths.buildProd, 'fr', deploy);
 });
 
 
 /******END TRANSACTION PROD SCRIPTS******/
 
 
-gulp.task('connect-server-start', function() {
+gulp.task('connect-server-start', function () {
     connect.server({
-        root:"build",
+        root: "build",
         // host:"127.0.0.1",
-        port:2121,
-        livereload:false
+        port: 2121,
+        livereload: false
     });
 });
 
 
-gulp.task('connect-server-start-experimental', function() {
+gulp.task('connect-server-start-experimental', function () {
     connect.server({
-        root:"experimental",
+        root: "experimental",
         // host:"127.0.0.1",
-        port:2122,
-        livereload:false
+        port: 2122,
+        livereload: false
     });
 });
 
@@ -1850,8 +1866,8 @@ gulp.task('dev-diffForm-copyLib', function () {
             paths.lib + libFileNames.xml2Json,
             paths.lib + libFileNames.deepDiffMin,
             paths.lib + libFileNames.uiTreeMin,
-            paths.styles + '**/'+styleFilesNames.repDiff,
-            paths.styles + '**/'+styleFilesNames.uiTree
+            paths.styles + '**/' + styleFilesNames.repDiff,
+            paths.styles + '**/' + styleFilesNames.uiTree
         ],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevDiff))
@@ -1874,11 +1890,11 @@ gulp.task('dev-diffForm-copyLib', function () {
 });
 
 gulp.task('dev-diffForm-copySrc', function () {
-    var servFiles=[serviceFileNames.diffService];
-    var compFolder=[componentFolders.nodesRender,componentFolders.diffFileIO,componentFolders.diffMain];
+    var servFiles = [serviceFileNames.diffService];
+    var compFolder = [componentFolders.nodesRender, componentFolders.diffFileIO, componentFolders.diffMain];
     var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
-    var copySourcesJs = gulp.src([paths.scripts + "/"+rootFileNames.repDiff+".js"], {read: true, base: './'});
-    copySourcesJs.pipe(gulp.dest(paths.buildDevDiff));
+    //var copySourcesJs = gulp.src([paths.scripts + "/"+rootFileNames.repDiff+".js"], {read: true, base: './'});
+    // copySourcesJs.pipe(gulp.dest(paths.buildDevDiff));
     return (
         pipes.copySrcs(true, paths.buildDevDiff, compFolder, servFiles, [], false)
     );
@@ -1887,16 +1903,18 @@ gulp.task('dev-diffForm-copySrc', function () {
 
 gulp.task('dev-diffForm-copyTranslate', function () {
 
-    var diffBaseList=[];
+    var translationList = diffFormTranslationBaseList;
 
-    return (pipes.translateDev(diffBaseList, paths.buildDevDiff))
+    return (pipes.translateDev(translationList, paths.buildDevDiff));
+
+
 });
 
 gulp.task('dev-diffForm-createRootJS', function () {
     var dest = paths.buildDevDiff + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.repDiff + '.js';
-    var skipDate=true;
-    var generateInternalForms=false;
+    var skipDate = true;
+    var generateInternalForms = false;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
@@ -1904,15 +1922,26 @@ gulp.task('dev-diffForm-createRootJS', function () {
 });
 
 
+gulp.task('dev-diffForm-createResources', ['dev-diffForm-copyTranslate'], function () {
 
-gulp.task('dev-diffForm-htmlBuild', [], function () {
+    var srcPath = paths.buildDevDiff;
+    var destPath = paths.buildDevDiff + paths.relScript;
+    var filename = 'translations' + createSuffixDate();
+    return (pipes.compileTranslateFile(srcPath, destPath, filename, diffFormTranslationBaseList));
+});
 
-    var deploy=deployType.dev;
+
+gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources'], function () {
+
+    var deploy = deployType.dev;
     var ignoreDir = '/build/dev/repDiff';
-    var stylesList=[ paths.styles+styleFilesNames.repDiff];
+    var stylesList = [
+        paths.styles + styleFilesNames.repDiff,
+        paths.styles + styleFilesNames.uiTree
+    ];
     return (
 
-    pipes.createRootHtml(paths.englishTemplate, activityRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', jsRootContent. partialDiffFormRoot, paths.buildDevDiff, ignoreDir,'en',deploy,stylesList)
+        pipes.createRootHtml(paths.englishTemplate, diffFormRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', jsRootContent.partialDiffFormRoot, paths.buildDevDiff, ignoreDir, 'en', deploy, stylesList)
 
     );
 

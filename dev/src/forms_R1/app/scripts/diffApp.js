@@ -6,7 +6,7 @@
     angular
         .module('diffFormApp', [
             'pascalprecht.translate',
-            /*'translations',*/
+            'translations',
             'diffMain'
         ])
 })();
@@ -34,6 +34,25 @@
         .config(['$translateProvider', function ($translateProvider) {
             $translateProvider.directivePriority(1);
             $translateProvider.preferredLanguage('@@prefLang');
+            /* $translateProvider.useStaticFilesLoader({
+             files: [{
+             prefix: '/app/i18n/dossierXml-',
+             suffix: '.json'
+             }, {
+             prefix: '/app/i18n/companyXml-',
+             suffix: '.json'
+             }, {
+             prefix: '/app/i18n/transactionXml-',
+             suffix: '.json'
+             }, {
+             prefix: '/app/i18n/activityXml-',
+             suffix: '.json'
+             }
+
+             ]
+             });*/
+
+
             // $translateProvider.useLoader('customLoad');
             $translateProvider.useSanitizeValueStrategy(null);
             // $translateProvider.forceAsyncReload(true); //needed for the custom loader

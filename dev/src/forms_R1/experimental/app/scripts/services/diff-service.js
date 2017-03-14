@@ -43,8 +43,13 @@
             if (!diffList) return resultList;
             //loop through each difference node and build a consolidated view
             for (var i = 0; i < diffList.length; i++) {
+
                 var record = diffList[i];
-                _processNode(record, resultList, exclusionList);
+                if (record.nodes && record.nodes[record.nodes.length - 1] === "toString") {
+                    continue;
+                } else {
+                    _processNode(record, resultList, exclusionList);
+                }
             }
             return (resultList);
         }
