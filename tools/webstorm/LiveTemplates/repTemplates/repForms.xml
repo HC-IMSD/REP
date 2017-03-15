@@ -1,0 +1,10 @@
+<templateSet group="repForms">
+    <template name="repapp"
+              value="(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$', [&#10;            'pascalprecht.translate',&#10;            'translations'&#10;        ])&#10;})();&#10;(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$')&#10;        .controller('MainController', MainController);&#10;&#10;    function MainController() {&#10;&#10;        var vm = this;&#10;        vm.formType = '@@SET_FORM';&#10;&#10;    }&#10;})();&#10;&#10;(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$')&#10;        .config(['$translateProvider', function ($translateProvider) {&#10;&#10;            $translateProvider.preferredLanguage('@@prefLang');&#10;            //$translateProvider.useLoader('customLoad');&#10;            //this prevents conflicts with ngMessage&#10;            $translateProvider.directivePriority(1);&#10;            $translateProvider.useSanitizeValueStrategy(null);&#10;            //$translateProvider.forceAsyncReload(true); //needed for the custom loader&#10;        }]);&#10;})();"
+              description="Create rep app" toReformat="false" toShortenFQNames="true">
+        <variable name="moduleName" expression="" defaultValue="moduleName" alwaysStopAt="true"/>
+        <context>
+            <option name="JS_STATEMENT" value="true"/>
+        </context>
+    </template>
+</templateSet>
