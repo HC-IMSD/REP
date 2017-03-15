@@ -18,9 +18,9 @@
                     </tr>
                     <tr ng-repeat="child in node.value">
                         <td width="20%">{{child.recordName |translate}}</td>
-                        <td width="20%">{{child.type |translate}}</td>
-                        <td width="30%">{{child.original }}</td>
-                        <td width="30%">{{child.diff }}</td>
+                        <td width="15%">{{child.type |translate}}</td>
+                        <td width="30%">{{child.original |json }}</td>
+                        <td width="30%">{{child.diff |json }}</td>
                     </tr>
                 </table>
             </div>

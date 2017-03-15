@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <section class="panel panel-primary">
             <header class="panel-heading">
-                <h2 class="panel-title">Load the base file</h2>
+                <h2 class="panel-title">1. Load the base file</h2>
             </header>
             <div class="panel-body">
                 <hpfb-file-select update-model-root="ctrl.showContent(fileContent) "
@@ -15,7 +15,7 @@
     <div class="col-md-12">
         <section class="panel panel-primary">
             <header class="panel-heading">
-                <h2 class="panel-title">Load the file to compare</h2>
+                <h2 class="panel-title">2. Load the file to compare</h2>
             </header>
             <div class="panel-body">
                 <hpfb-file-select update-model-root="ctrl.showContent2(fileContent) "
@@ -32,7 +32,7 @@
 <div>
     <section class="panel panel-primary" ng-if="ctrl.listResults && ctrl.listResults.length>0">
         <header class="panel-heading clearfix">
-            <h2 class="panel-title">Comparison Results</h2>
+            <h2 class="panel-title">3. Comparison Results</h2>
         </header>
         <div class="panel-body">
             <div class="row margin-top-medium">
@@ -63,6 +63,9 @@
 
         <details>
             <summary>Difference Engine Raw Results</summary>
+            <div class="row" ng-if="ctrl.diffList">
+                <pre>Number of Diff Records:{{ctrl.diffList.length}}</pre>
+            </div>
             <div class="row">
                 <pre>{{ctrl.diffList |json}}</pre>
             </div>

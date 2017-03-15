@@ -16,6 +16,7 @@ var htmlmin = require('gulp-htmlmin');
 
 var connect = require('gulp-connect');
 var cleanCSS = require('gulp-clean-css');
+var protractor = require("gulp-protractor").protractor;
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
@@ -75,7 +76,7 @@ var placeholders = {
 //================================ Titles and main headings for the web page START========================
 
 var diffFormRootTitles_en = {
-    mainHeading: "REP File Compare Utility",
+    mainHeading: "Beta 1:REP File Compare Utility",
     title: 'REP File Compare Utility'
 };
 var activityRootTitles_en = {
@@ -1856,6 +1857,18 @@ gulp.task('dev-diffForm-copyWetDep', function () {
     return (pipes.copyWet(paths.buildDevDiff))
 });
 
+gulp.task('dev-diffForm-copyData', function () {
+    var def = Q.defer();
+    var dataList = [paths.data + "xmlDiffExclusions.json"];
+
+    var copySources = gulp.src(dataList,
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildDevDiff)));
+});
+
+
+
+
 gulp.task('dev-diffForm-copyLib', function () {
     var copySources = gulp.src([
             paths.lib + libFileNames.angularMin,
@@ -1931,7 +1944,7 @@ gulp.task('dev-diffForm-createResources', ['dev-diffForm-copyTranslate'], functi
 });
 
 
-gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources'], function () {
+gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copyData', 'dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources'], function () {
 
     var deploy = deployType.dev;
     var ignoreDir = '/build/dev/repDiff';
@@ -1945,4 +1958,18 @@ gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copySrc', 'dev-diffForm-copyL
 
     );
 
+});
+
+
+gulp.task('protractor', function () {
+    gulp.src(["app/spec/e2e/tests/**/*.js"])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+            seleniumServerJar: './node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.3.1.jar',
+            seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
+            args: ['--baseUrl', 'https://lam-dev.hres.ca/rep_test/']
+        }))
+        .on('error', function (e) {
+            throw e
+        })
 });

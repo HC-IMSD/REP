@@ -17,13 +17,14 @@
         .module('diffModule')
         .factory('diffEngine', differenceEngine);
 
-    differenceEngine.$inject = ['$filter'];
+    differenceEngine.$inject = ['$filter', '$http', '$q'];
 
     /* @ngInject */
-    function differenceEngine($filter) {
+    function differenceEngine($filter, $http, $q) {
         var service = {
             compareJson: _compareFiles,
-            consolidateResults: _consolidateDiffResults
+            consolidateResults: _consolidateDiffResults,
+            loadExceptionList: _getExceptions
         };
         return service;
 
@@ -96,15 +97,16 @@
                 }
                 //new record create it
                 var isLeaf = i === node.path.length - 1;
+                if (!exclusionList.hasOwnProperty(node.path[i])) {
                 //checking for the case where one file has a single record and another file has an array of the same
                 //records. This needs to be specially handled
                 if (((node.lhs instanceof Array) && (!(node.rhs instanceof Array) && (node.rhs instanceof Object))) ||
                     ((node.rhs instanceof Array) && (!(node.lhs instanceof Array) && (node.lhs instanceof Object)))) {
 
-                    _processArrayUpdate(node, node.path[i], _index, existingRecord, resultList);
+                    _processArrayUpdate(node, node.path[i], _index, existingRecord, resultList, exclusionList);
                     continue;
                 }
-                if (!exclusionList.hasOwnProperty(node.path[i])) {
+
                     var newNode = _createNodeRecord(node, node.path[i], _index, isLeaf);
                     searchList = newNode.nodes;
                     if (!existingRecord) {
@@ -227,9 +229,9 @@
         }
 
 
-        function _processArrayUpdate(node, nodeName, index, existingRecord, resultList) {
+        function _processArrayUpdate(node, nodeName, index, existingRecord, resultList, exclusionList) {
 
-            var specialResults = _processOneArrayCase(node, nodeName, index);
+            var specialResults = _processOneArrayCase(node, nodeName, index, exclusionList);
             var target = null;
             if (!existingRecord) {
                 target = resultList;
@@ -251,7 +253,7 @@
          * @returns {Array}
          * @private
          */
-        function _processOneArrayCase(node, nodeName, index) {
+        function _processOneArrayCase(node, nodeName, index, exclusionList) {
             //since a special case need to make a group of node results
             var result = [];
             //var isAdd = true;
@@ -273,23 +275,40 @@
                 console.error("_processSpecialCase::neither are arrays");
             }
             var diffList = DeepDiff(base, compare);
-            var newNode = _createNodeRecord(null, nodeName, 0, false); //there is at least one record
-            result.push(newNode);
+            //TODO: is the commented lines needed?
+            // var newNode = _createNodeRecord(null, nodeName, 0, false); //there is at least one record
+            // result.push(newNode);
             for (var i = 0; i < diffList.length; i++) {
                 var diffNode = diffList[i];
                 if (diffNode.kind == 'E' && ((!diffNode.lhs && !diffNode.rhs) || (diffNode.lhs.length == 0 && diffNode.lhs.length == 0))) {
                     //special case- appears to be a bug with DeepDiff lib. Creates empty record
                     console.warn("there is no diff");
-                } else if (!diffNode.path || diffNode.path.length === 0) {
+                } else if (!exclusionList.hasOwnProperty(nodeName) && (!diffNode.path || diffNode.path.length === 0)) {
                     //if there is no path array then this is a leaf!
                     result.push(_createNodeRecord(diffNode, nodeName, 0, true));
                 } else {
-                    _processNode(diffNode, result);
+                    _processNode(diffNode, result, exclusionList);
                 }
             }
             return result;
 
         }
+
+
+        function _getExceptions(url) {
+
+            var deferred = $q.defer();
+
+            $http.get(url).success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
+        }
+
+
+
     }
 
 })();

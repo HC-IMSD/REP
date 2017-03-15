@@ -31,21 +31,27 @@
         var vm = this;
         vm.showContent = _loadFileContent;
         vm.showContent2 = _loadFileContent2;
-        vm.content1 = {};
-        vm.content2 = {};
+        vm.content1 = null;
+        vm.content2 = null;
         vm.diffList={};
         vm.listResults = null;
-        vm.exclusions={
-            "company_contact_details":"true",
-            "company_address_details": "true",
-            "formulation_group": "true",
-            "toString":"true"
+        vm.exceptionUrl = "data/xmlDiffExclusions.json";
+        vm.exclusions = {};
+
+        vm.$onInit = function () {
+            _loadExceptionData();
+
         };
+        vm.$onChanges = function (changes) {
+            //if change events
+        };
+
 
         /***
          * Compares the two files
          */
         vm.compareFiles = function () {
+            console.log(vm.exclusions);
             if (vm.content1 && vm.content2) {
                 var diffList=diffEngine.compareJson(vm.content1, vm.content2);
                 vm.diffList=diffList;
@@ -72,6 +78,16 @@
         vm.expandAll = function () {
             $scope.$broadcast('angular-ui-tree:expand-all');
         };
+
+
+        function _loadExceptionData() {
+            diffEngine.loadExceptionList(vm.exceptionUrl)
+                .then(function (data) {
+                    vm.exclusions = data;
+                    return true;
+                });
+        }
+
 
     }
 })();
