@@ -1,10 +1,10 @@
 {
   "en": "English",
   "fr": "French",
-  "E": "Edited",
-  "A": "Record Added",
-  "N": "New / Added",
-  "D": "Deleted",
+  "E_DIFF": "Edited",
+  "A_DIFF": "Record Added",
+  "N_DIFF": "New / Added",
+  "D_DIFF": "Deleted",
   "enrolment_version": "Enrolment Version",
   "date_saved": "Date Saved",
   "application_type": "Application Type",
@@ -16,5 +16,8 @@
   "_label_fr": "French Caption",
   "template_type": "Template Type",
   "data_checksum": "Data checksum",
-  "amend_record": "Amend Record"
+  "amend_record": "Amend Record",
+  "template_type": "Template Type",
+  "Y": "Yes",
+  "N": "No"
 }

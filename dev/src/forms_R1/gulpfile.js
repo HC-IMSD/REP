@@ -481,7 +481,9 @@ var diffFormTranslationBaseList = [
     translationBaseFiles.dossierXml,
     translationBaseFiles.addressXml,
     translationBaseFiles.contactXml,
-    translationBaseFiles.defaultXml
+    translationBaseFiles.defaultXml,
+    translationBaseFiles.transactionXml,
+    translationBaseFiles.activityXml
 ];
 
 

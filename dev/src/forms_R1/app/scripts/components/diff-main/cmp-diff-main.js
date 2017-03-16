@@ -51,7 +51,6 @@
          * Compares the two files
          */
         vm.compareFiles = function () {
-            console.log(vm.exclusions);
             if (vm.content1 && vm.content2) {
                 var diffList=diffEngine.compareJson(vm.content1, vm.content2);
                 vm.diffList=diffList;
@@ -87,7 +86,5 @@
                     return true;
                 });
         }
-
-
     }
 })();

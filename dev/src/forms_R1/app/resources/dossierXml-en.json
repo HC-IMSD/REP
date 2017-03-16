@@ -1,5 +1,5 @@
 {
-  "DOSSIER_ENROL": "Dossier Enrol Form",
+  "DOSSIER_ENROL": "Dossier",
   "related_dossier_id": "Related Dossier Id",
   "rep_contact_role": "REP Contact Type",
   "dossier_type": "Dossier Type",
@@ -176,6 +176,7 @@
   "country_origin": "Country of Origin Record",
   "country_with_unknown": "Country",
   "unknown_country_details": "Unknown Country details",
-  "animal_sourced_section": "Animal Sources"
+  "animal_sourced_section": "Animal Sources",
+  "schedule_a_group": "Schedule A"
 }
 

@@ -21,6 +21,8 @@
 
     /* @ngInject */
     function differenceEngine($filter, $http, $q) {
+
+        var kindSuffix = "_DIFF";
         var service = {
             compareJson: _compareFiles,
             consolidateResults: _consolidateDiffResults,
@@ -100,8 +102,8 @@
                 if (!exclusionList.hasOwnProperty(node.path[i])) {
                 //checking for the case where one file has a single record and another file has an array of the same
                 //records. This needs to be specially handled
-                if (((node.lhs instanceof Array) && (!(node.rhs instanceof Array) && (node.rhs instanceof Object))) ||
-                    ((node.rhs instanceof Array) && (!(node.lhs instanceof Array) && (node.lhs instanceof Object)))) {
+                    if (isLeaf && (((node.lhs instanceof Array) && (!(node.rhs instanceof Array) && (node.rhs instanceof Object))) ||
+                        ((node.rhs instanceof Array) && (!(node.lhs instanceof Array) && (node.lhs instanceof Object))))) {
 
                     _processArrayUpdate(node, node.path[i], _index, existingRecord, resultList, exclusionList);
                     continue;
@@ -180,13 +182,21 @@
              A - indicates a change occurred within an array
              */
             if (isLeaf) {
+                var type = "";
                 if (node.kind === 'A') {
-                    record.type = node.item.kind;
+
+                    if (node.item.kind) {
+                        type = node.item.kind + kindSuffix;
+                    }
+                    record.type = type;
                     record.original = node.item.lhs;
                     record.diff = node.item.rhs;
                     record.index = node.index;
                 } else {
-                    record.type = node.kind;
+                    if (node.kind) {
+                        type = node.kind + kindSuffix;
+                    }
+                    record.type = type;
                     record.original = node.lhs;
                     record.diff = node.rhs;
                 }
@@ -206,7 +216,7 @@
         function _updateNodeRecord(node, record, isLeaf) {
 
             record.isChange = isLeaf;
-
+            var type = "";
             /**
              * kind - indicates the kind of change; will be one of the following:
              N - indicates a newly added property/element
@@ -216,11 +226,18 @@
              */
             if (isLeaf) {
                 if (node.kind === 'A') {
-                    record.type = node.item.kind;
+
+                    if (node.item.kind) {
+                        type = node.item.kind + kindSuffix;
+                    }
+                    record.type = type;
                     record.original = node.item.lhs;
                     record.diff = node.item.rhs;
                 } else {
-                    record.type = node.kind;
+                    if (node.kind) {
+                        type = node.kind + kindSuffix;
+                    }
+                    record.type = type;
                     record.original = node.lhs;
                     record.diff = node.rhs;
                 }
@@ -280,7 +297,7 @@
             // result.push(newNode);
             for (var i = 0; i < diffList.length; i++) {
                 var diffNode = diffList[i];
-                if (diffNode.kind == 'E' && ((!diffNode.lhs && !diffNode.rhs) || (diffNode.lhs.length == 0 && diffNode.lhs.length == 0))) {
+                if (diffNode.kind == 'E' && ((!diffNode.lhs && !diffNode.rhs) || (diffNode.lhs.length == 0 && diffNode.rhs.length == 0))) {
                     //special case- appears to be a bug with DeepDiff lib. Creates empty record
                     console.warn("there is no diff");
                 } else if (!exclusionList.hasOwnProperty(nodeName) && (!diffNode.path || diffNode.path.length === 0)) {
