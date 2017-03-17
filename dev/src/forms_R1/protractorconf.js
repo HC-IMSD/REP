@@ -1,16 +1,16 @@
 // An example configuration file.
 exports.config = {
-    seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
 
+    seleniumAddress: 'http://localhost:4444/wd/hub',
     specs: [
 
         'app/spec/e2e/tests/transaction/*.js',
 
-      /*
-       'app/spec/e2e/tests/company/*.js',
-      'app/spec/e2e/tests/activity/!*.js',
-      *  'app/spec/e2e/tests/dossier/*.js',
-      * */
+        /*
+         'app/spec/e2e/tests/company/*.js',
+         'app/spec/e2e/tests/activity/!*.js',
+         *  'app/spec/e2e/tests/dossier/*.js',
+         * */
     ],
 
     multiCapabilities: [
@@ -30,7 +30,17 @@ exports.config = {
                     }
                 }
             }
-        }
+        },
+        /*{
+         'browserName': 'internet explorer',
+         'platform': 'ANY',
+         version: '11'
+         },
+         {
+         'browserName': 'firefox'
+
+         }*/
+
     ],
     rootElement: '#app-root',
 
@@ -50,7 +60,7 @@ exports.config = {
                     /*'lowContrastElements'*/
                     /*  'badAriaAttributeValue', outer hmyml error*/
                     /* 'nonExistentAriaLabelledbyElement' test causes collectIDRefs Errors*/
-                  /*  'focusableElementNotVisibleAndNotAriaHidden' get outerHtml error*/
+                    /*  'focusableElementNotVisibleAndNotAriaHidden' get outerHtml error*/
                 ],
                 auditRulesToSkip: []
             }

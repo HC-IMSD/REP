@@ -3,11 +3,13 @@
  */
 
 
+var transactionData = require('../../../e2e/test-data/transaction.json');
+var lang = "en";
 
-
-var dev_transaction_root_en_url = "http://localhost:2121/dev/transaction/transactionEnrol-en.html";
-
-
+//var dev_transaction_root_en_url = "http://localhost:2121/dev/transaction/transactionEnrol-en.html";
+var dev_transaction_root_en_url = "https://lam-dev.hres.ca/rep-dev/transaction/transactionEnrolEXT-en.html";
+https://lam-dev.hres.ca/rep-dev/transactionEXT-en.html
+    var transaction_root_en_url = dev_transaction_root_en_url;
 var Address = require('../../component-definitions/common/def-cmp-address-details');
 var TransactionMain = require('../../component-definitions/transaction/def-cmp-transaction-main');
 var Contact= require('../../component-definitions/common/def-cmp-contact-details');
@@ -21,7 +23,7 @@ describe('Transaction External Main Test', function () {
     beforeAll(function () {
         console.log("run beforeAll");
         transactionMain = new TransactionMain();
-        transactionMain.get(dev_transaction_root_en_url);
+        transactionMain.get(transaction_root_en_url);
         addressObj = new Address();
         contactObj=new Contact();
         lifecycleRecord=new LifecycleRecord();
@@ -34,12 +36,16 @@ describe('Transaction External Main Test', function () {
 
         it('Add an Address', function () {
             var formRoot = transactionMain.getRoot();
-            addressObj.setStreetValue(formRoot, "1234 Main St");
-            addressObj.setCityTextValue(formRoot, "Ottawa");
-            addressObj.setCountryListValue(formRoot,"Canada");
-            addressObj.setStateListValue(formRoot,"Ontario");
-            addressObj.setPostalCodeTextValue(formRoot,"k2m2r1");
 
+            addressObj.setCityTextValue(formRoot, transactionData.city.typical[lang]);
+            addressObj.setCountryListValue(formRoot, transactionData.country.canada[lang]);
+            addressObj.setStateListValue(formRoot, transactionData.state.typical[lang]);
+            addressObj.setPostalCodeTextValue(formRoot, transactionData.postal.canada_lower.input);
+            addressObj.setStreetValue(formRoot, transactionData.street.typical[lang]);
+            console.log(addressObj.getCountryListValue(formRoot));
+            expect(addressObj.getPostalCodeTextValue(formRoot)).toEqual(transactionData.postal.canada_lower.expect);
+            expect(addressObj.getStreetValue(formRoot)).toEqual(transactionData.street.typical[lang]);
+            expect(addressObj.getCountryListValue(formRoot)).toEqual(transactionData.country.canada[lang]);
 
         });
         it('Add a contact',function(){

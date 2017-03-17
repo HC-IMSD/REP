@@ -1,0 +1,30 @@
+{
+  "street": {
+    "typical": {
+      "en": "1234 Main St"
+    }
+  },
+  "city": {
+    "typical": {
+      "en": "Ottawa"
+    }
+  },
+  "country": {
+    "canada": {
+      "en": "Canada",
+      "fr": "Canada"
+    }
+  },
+  "state": {
+    "typical": {
+      "en": "Ontario",
+      "fr": "Ontario"
+    }
+  },
+  "postal": {
+    "canada_lower": {
+      "input": "k2m2r1",
+      "expect": "K2M 2R1"
+    }
+  }
+}

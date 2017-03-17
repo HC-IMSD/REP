@@ -56,7 +56,9 @@ var AddressDetails = function () {
     };
 
     this.getCountryListValue=function(parent){
-        return parent.element(by.model(country_modelString)).getAttribute('value');
+        //TODO: make a util function for this
+        return parent.element(by.model(country_modelString)).all(by.css('.select2-chosen')).last().getText();
+
     };
 
 

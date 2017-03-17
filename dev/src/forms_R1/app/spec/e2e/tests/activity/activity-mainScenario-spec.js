@@ -122,9 +122,9 @@ describe('Activity External Form Type Test', function () {
 });
 
 
-describe('pause', function () {
+xdescribe('pause', function () {
     it('Activity Test', function () {
-        // browser.pause();
+        browser.pause();
 
     });
 

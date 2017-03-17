@@ -1967,11 +1967,12 @@ gulp.task('protractor', function () {
     gulp.src(["app/spec/e2e/tests/**/*.js"])
         .pipe(protractor({
             configFile: "./protractorconf.js",
-            seleniumServerJar: './node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.3.1.jar',
             seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
             args: ['--baseUrl', 'https://lam-dev.hres.ca/rep_test/']
         }))
         .on('error', function (e) {
-            throw e
+            console.error(e);
+            throw e;
         })
 });
+
