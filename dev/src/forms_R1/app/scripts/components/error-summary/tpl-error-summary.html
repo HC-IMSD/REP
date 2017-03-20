@@ -1,0 +1,11 @@
+<section id="errors-summary" class="alert alert-danger" tabindex="-1"><h2>The form could not be submitted
+    because errors {{errSummaryCtrl.errorArray.length}} were found.</h2>
+
+    <ul>
+        <li ng-repeat="errorRec in errSummaryCtrl.errorArray"><a href="#{{errorRec.name}}">{{errorRec.name||translate}}
+            &nbsp;{{errorRec.type |translate}}</a></li>
+        <!--     <li><a href="#title1"><span class="prefix">Error&nbsp;1: </span>Title - This field is required.</a></li>-->
+
+    </ul>
+
+</section>

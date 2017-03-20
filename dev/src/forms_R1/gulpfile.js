@@ -246,7 +246,8 @@ var componentFolders = {
     formulations: 'formulations/',
     diffFileIO: 'fileIODiff/',
     nodesRender: 'nodes-renderer/',
-    diffMain: 'diff-main/'
+    diffMain: 'diff-main/',
+    errorSummary:'error-summary'
 };
 
 //exclude custom styles only lib
@@ -288,7 +289,8 @@ var companyComponentFolders =
         componentFolders.addressRecord,
         componentFolders.contactRecord,
         componentFolders.importerProducts,
-        componentFolders.dossierIdDetails
+        componentFolders.dossierIdDetails,
+        componentFolders.errorSummary
     ];
 
 //Dossier Form Components
@@ -472,7 +474,8 @@ var translationBaseFiles = {
     companyXml: paths.translations + 'companyXml',
     addressXml: paths.translations + 'addressXml',
     contactXml: paths.translations + 'contactXml',
-    defaultXml: paths.translations + 'defaultXml'
+    defaultXml: paths.translations + 'defaultXml',
+    temp:paths.translations +'companyError'
 };
 
 
@@ -508,7 +511,8 @@ var companyTranslationFilesBaseList =
         translationBaseFiles.fileIO,
         translationBaseFiles.general,
         translationBaseFiles.messages,
-        translationBaseFiles.companyInfo
+        translationBaseFiles.companyInfo,
+        translationBaseFiles.temp
     ];
 
 /*** Dossier Form translations***/
