@@ -35,6 +35,7 @@
         vm.contactList = [];
         vm.formAmend = false;
         vm.resetCollapsed = false;//used to signal expanding table collapse
+        vm.updateSummary=false; //sends signal to update error summary object
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
@@ -77,6 +78,11 @@
                 vm.formAmend = changes.isAmend.currentValue;
             }
         };
+
+        vm.updateErrorSummaryState=function(){
+            vm.updateSummary= !vm.updateSummary;
+        };
+
 
         function updateRolesConcat() {
             if (!vm.contactList) return;

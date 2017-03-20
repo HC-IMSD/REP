@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactRecord', ['addressRole','contactModule'])
+        .module('contactRecord', ['addressRole','contactModule','errorSummaryModule'])
 })();
 
 (function () {
@@ -37,6 +37,7 @@
         vm.isContact=true; //used to set the state of the role
         vm.isEditable = false;
         vm.formAmend = false;
+        vm.updateSummary=false;
        //TODO get role model from a servide
 
         vm.contactModel={
@@ -63,7 +64,12 @@
         vm.isOneSelected=function(type){
             return(vm.isRoleSelected({roleName:type,id:vm.contactModel.contactId}));
         };
+
+        vm.updateErrorSummaryState=function(){
+            vm.updateSummary= !vm.updateSummary;
+        };
         vm.$onInit = function () {
+            vm.updateErrorSummaryState();
             /*//after init do not initialise variables here onchanges is called first
                 var rec=vm.trackRecordCtrl.trackRecord();
                 //only bind if there is a record. Should never happen that there is no record
@@ -167,8 +173,13 @@
               vm.isDetailValid({state:true});
               vm.contactRecForm.$setPristine() ;
                 vm.onUpdate({contact: vm.contactModel});
-            }
-            vm.savePressed=true;
+              vm.savePressed=false;
+            }else{
+              vm.savePressed=true;
+              vm.updateErrorSummaryState();
+          }
+
+
         };
         /**
          * @ngdoc method toggles error state to make errors visible

@@ -1,6 +1,11 @@
 <div class="container-fluid">
     <ng-form name="contactRec.contactRecForm">
         <div>
+            <cmp-error-summary form-ref="contactRec.contactRecForm" show-errors="contactRec.savePressed"
+                               update-errors="contactRec.updateSummary"></cmp-error-summary>
+
+        </div>
+        <div>
             <div>
                 <h3>{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}} </h3>
 
@@ -16,7 +21,7 @@
             </div>
             <div class="row">
                 <cmp-contact-details contact-record="contactRec.contactModel" is-amend="contactRec.isEditable"
-                                     on-update="contactRec.onUpdateContactRecord(contact)"
+                                     on-update="contactRec.onUpdateContactRecord(contact)" update-error-summary="contactRec.updateErrorSummaryState()"
                                      show-errors="contactRec.showErrors()"></cmp-contact-details>
             </div>
             <div>
@@ -29,12 +34,15 @@
             </div>
             <div>
                 <div class="btn-group-sm col-xs-12 text-right">
-                    <button  class="btn btn-primary" name="saveContact" id="saveContact"
-                            ng-click="contactRec.updateContactModel2()">{{'SAVE_REPRES' |translate}}</button>
-                    <button  class="btn btn-danger" name="deleteContact"
-                            ng-click="contactRec.delete()" >{{'DELETE_REPRES'|translate}}</button>
-                    <button  name="discardContact" class="btn btn-default"
-                             ng-click="contactRec.discardChanges()">{{'DISCARD_CHANGES'|translate}}</button>
+                    <button class="btn btn-primary" name="saveContact" id="saveContact"
+                            ng-click="contactRec.updateContactModel2()">{{'SAVE_REPRES' |translate}}
+                    </button>
+                    <button class="btn btn-danger" name="deleteContact"
+                            ng-click="contactRec.delete()">{{'DELETE_REPRES'|translate}}
+                    </button>
+                    <button name="discardContact" class="btn btn-default"
+                            ng-click="contactRec.discardChanges()">{{'DISCARD_CHANGES'|translate}}
+                    </button>
                 </div>
             </div>
         </div>

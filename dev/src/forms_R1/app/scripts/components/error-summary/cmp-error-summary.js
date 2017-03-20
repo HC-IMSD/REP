@@ -21,10 +21,12 @@
             controllerAs: 'errSummaryCtrl',
 
             bindings: {
-                formErrors: '<',
+                formRef: '<',
                 formTarget:'<',
                 showErrors:'<',
-                getErrors:'<'
+                updateErrors:'<',
+                nameSuffix:'@',
+                formPreamble:'@'
 
             }
         });
@@ -37,6 +39,13 @@
         vm.errorArray=[];
         vm.uniqueErrorList={};
         vm.prevValue={};
+        vm.isVisible=false;
+        vm.nameAddendum="";
+        vm.exclusions={
+            "contactListCtrl.contactListForm":"true"
+        };
+        vm.headingPreamble="";
+
         vm.$onInit = function () {
 
         };
@@ -46,26 +55,37 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            if(changes.formErrors){
+
+            if(changes.nameSuffix){
+                vm.nameAddendum="-"+changes.nameSuffix.currentValue;
+            }
+            if(changes.formPreamble){
+                vm.headingPreamble=changes.formPreamble.currentValue;
+            }
+            if(changes.formRef){
                 console.log("there is a change")
-                console.log(changes.formErrors.currentValue);
+                console.log(changes.formRef.currentValue);
                 //vm.targetFormRef=angular.copy(changes.formErrors.currentValue);
                 console.log(vm.targetFormRef);
 
-                //vm.getErrorsSumm(changes.formErrors.currentValue.$error,changes.formErrors.currentValue.$name);
+                vm.getErrorsSumm(changes.formRef.currentValue.$error,changes.formRef.currentValue.$name);
 
             }
             if(changes.formTarget){
                 vm.targetFormRef=changes.formTarget.currentValue;
             }
-            if(changes.getErrors){
+            if(changes.updateErrors){
                 console.log("detect getErrors");
-                if(vm.formErrors) {
-                    console.log(vm.formErrors);
-                   vm.getErrorsSumm(vm.formErrors.$error,""+vm.formErrors.$name);
+                if(vm.formRef) {
+                   vm.getErrorsSumm(vm.formRef.$error,""+vm.formRef.$name);
                     console.log("ran getErrors")
                 }
             }
+            if(changes.showErrors){
+
+                vm.isVisible=changes.showErrors.currentValue;
+            }
+
         };
         /*vm.$doCheck=function(){
             console.log("running do check");
@@ -76,7 +96,10 @@
             }
 
         };*/
+        vm.setIsVisible=function(){
+            return(vm.isVisible &&(vm.errorArray && vm.errorArray.length>0))
 
+        };
 
         vm.getErrorsSumm=function(myformErrors,name) {
             vm.errorArray=[];
@@ -106,7 +129,22 @@
                 for(var j=0;j<record.length;j++)
 
                     if(record[j].$invalid===true && record[j].$name.indexOf('.')>0){
-                        _getErr(record[j].$error,resultsList,record[j].$name);
+
+                       // contactListCtrl.contactListForm
+                        if(vm.exclusions.hasOwnProperty(record[j].$name)){
+                            var result={};
+                            result[record[j].$name]={
+                                name:record[j].$name,
+                                type:keys[i],
+                                parent:parent,
+                                concat:parent+'.'+ record[j].$name,
+                                isSummary:true
+                            };
+                            angular.merge(resultsList,result);
+
+                        }else {
+                            _getErr(record[j].$error, resultsList, record[j].$name);
+                        }
 
                     }else if(record[j].$invalid===true && !resultsList.hasOwnProperty(record[j].$name) ){
                         var result={};
@@ -115,7 +153,8 @@
 
                             type:keys[i],
                             parent:parent,
-                            concat:parent+'.'+ record[j].$name
+                            concat:parent+'.'+ record[j].$name,
+                            isSummary:false
                         };
 
 

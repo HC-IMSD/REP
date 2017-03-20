@@ -25,12 +25,13 @@
                 contactRecord: '<',
                 onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
-                showErrors: '&'
+                showErrors: '&',
+                updateErrorSummary:'&'
             }
     });
 
-    contactCtrl.$inject = ['getContactLists','ENGLISH','FRENCH'];
-    function contactCtrl( getContactLists,ENGLISH,FRENCH) {
+    contactCtrl.$inject = ['getContactLists','ENGLISH','FRENCH','$scope'];
+    function contactCtrl( getContactLists,ENGLISH,FRENCH,$scope) {
         var vm = this;
         vm.isEditable = true;
         vm.ngModelOptSetting = {updateOn: 'blur'};
@@ -77,6 +78,9 @@
 
         };
         vm.showError=function(ctrl){
+            if(!ctrl){
+                return false;
+            }
             if((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid )){
                 return true
             }

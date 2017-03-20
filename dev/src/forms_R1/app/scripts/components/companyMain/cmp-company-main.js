@@ -13,7 +13,8 @@
             'applicationInfo',
             'filterLists',
             'hpfbConstants',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'errorSummaryModule'
         ])
 })();
 
@@ -60,7 +61,7 @@
         vm.applTypes = vm.companyService.getApplicationTypes();
         vm.company = vm.companyService.getModelInfo();
         vm.alerts = [false, false, false, false, false];
-
+        vm.updateSummary=false;
 
         //TODO needed?
         vm.initUser = function (id) {
@@ -278,6 +279,11 @@
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
+        }
+
+        vm.updateErrorSummary=function(){
+            vm.updateSummary= !vm.updateSummary;
+
         }
 
 
