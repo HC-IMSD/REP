@@ -37,7 +37,7 @@
         vm.tableRowExpanded = false;
         vm.tableRowIndexCurrExpanded = "";
         vm.tableRowIndexPrevExpanded = "";
-        vm.numberCols=vm.columnDef.length+2;
+        vm.numberCols=1;
         vm.disableErrorCol=false;
         vm.dayDataCollapse = _createArray(0, true);
 
