@@ -27,6 +27,13 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	<hpfb:simpleType name="integer_0_999_content">
+		<hpfb:restriction base="hpfb:integer">
+			<hpfb:minInclusive value="0"/>
+			<hpfb:maxInclusive value="999"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 	<hpfb:simpleType name="integer_0_9999_content">
 		<hpfb:restriction base="hpfb:integer">
 			<hpfb:minInclusive value="0"/>
@@ -236,6 +243,17 @@
 			<hpfb:enumeration value="BIOLOGIC"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+	
+	<hpfb:simpleType name="required_yes_no_unknown_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="Y"/>
+			<hpfb:enumeration value="N"/>
+			<hpfb:enumeration value="UNKNOWN"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+
+	
 
 	<hpfb:simpleType name="required_yes_no_content">
 		<hpfb:restriction base="hpfb:string">

@@ -200,10 +200,10 @@
 	<hpfb:element name="animal_src_record" type="animal_source_record"/>
 	<hpfb:element name="animal_type"/>
 	<hpfb:element name="animal_detail" type="char_1_40_content"/>
-	<hpfb:element name="is_controlled_pop" type="required_yes_no_content"/>
+	<hpfb:element name="is_controlled_pop" type="required_yes_no_unknown_content"/>
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
 	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
-	<hpfb:element name="animal_age" type="integer_1_999_content"/>
+	<hpfb:element name="animal_age" type="integer_0_999_content"/>
 	<hpfb:element name="country_with_unknown">
 		<hpfb:complexType>
 			<hpfb:simpleContent>
@@ -275,7 +275,7 @@
 	<hpfb:element name="units_other" type="char_0_40_content"/>
 
 	<hpfb:element name="is_base_calc" type="required_yes_no_content"/>
-	<hpfb:element name="is_nanomaterial" type="nano_list"/>
+	<hpfb:element name="is_nanomaterial" />
 	<hpfb:element name="nanomaterial_details" type="char_0_40_content"/>
 	<hpfb:element name="variant_name" type="char_0_100_content"/>
 	<hpfb:element name="in_final_container" type="required_yes_no_content"/>
