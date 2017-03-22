@@ -1,11 +1,11 @@
 <ng-form name="contactListCtrl.contactListForm">
     <div class="row">
     <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="true" name-suffix="contactListCtrl.contactListForm"
-                       update-errors="contactListCtrl.updateSummary" form-preamble="Company Representative Information" ></cmp-error-summary>
+                       update-errors="contactListCtrl.updateSummary33" form-preamble="Company Representative Information" ></cmp-error-summary>
 
-    <!--    <button ng-click="contactListCtrl.updateErrorSummaryState()">Update</button>-->
+        <button ng-click="contactListCtrl.updateErrorSummaryState()">Update</button>
     </div>
-    <div class="row">
+    <div>
         <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false"
                ng-model="contactListCtrl.allRolesSelected" required/>
         <label>
@@ -24,7 +24,7 @@
             <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
                                 on-update="contactListCtrl.onUpdateContactRecord(contact)"
                                 contact-record="$parent.record" record-index="$parent.$index"
-                                is-amend="contactListCtrl.formAmend"
+                                is-amend="contactListCtrl.formAmend" error-summary-update="contactListCtrl.updateErrorSummaryState()"
                                 is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                 is-detail-valid="contactListCtrl.setValid(state)">
             </cmp-contact-record>

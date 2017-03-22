@@ -1,7 +1,7 @@
-<div ng-if="errSummaryCtrl.setIsVisible()" id="errors-summary{{::errSummaryCtrl.nameAddendum}}">
+<div ng-if="errSummaryCtrl.calcIsVisible()" id="errors-summary{{::errSummaryCtrl.nameAddendum}}" >
     <section id="error-section" class="alert alert-danger" tabindex="-1">
-        <h2 ng-if="errSummaryCtrl.errorArray.length>1">For&nbsp;{{errSummaryCtrl.formPreamble}}&nbsp;{{errSummaryCtrl.errorArray.length}} errors were found.</h2>
-        <h2 ng-if="errSummaryCtrl.errorArray.length==1">For&nbsp;{{errSummaryCtrl.formPreamble}}&nbsp;{{errSummaryCtrl.errorArray.length}} error was found.</h2>
+        <h2 ng-if="errSummaryCtrl.errorArray.length>1">For&nbsp;the&nbsp;{{errSummaryCtrl.formPreamble}}&nbsp;{{errSummaryCtrl.errorArray.length}} errors were found.</h2>
+        <h2 ng-if="errSummaryCtrl.errorArray.length==1">For&nbsp;the&nbsp;{{errSummaryCtrl.formPreamble}}&nbsp;{{errSummaryCtrl.errorArray.length}} error was found.</h2>
         <ul>
             <div ng-repeat="errorRec in errSummaryCtrl.errorArray">
                 <li ng-if="!errorRec.isSummary"><a href="#{{errorRec.name}}">{{errorRec.name||translate}}

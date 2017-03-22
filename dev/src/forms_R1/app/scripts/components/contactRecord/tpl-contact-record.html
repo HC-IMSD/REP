@@ -1,13 +1,15 @@
 <div class="container-fluid">
     <ng-form name="contactRec.contactRecForm">
-        <div>
+        <div id="errorTest">
             <cmp-error-summary form-ref="contactRec.contactRecForm" show-errors="contactRec.savePressed"
+                               form-preamble="{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}}:"
+                               name-suffix="contactRec.contactRecForm"
                                update-errors="contactRec.updateSummary"></cmp-error-summary>
 
         </div>
         <div>
             <div>
-                <h3>{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}} </h3>
+                <h3>{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}}</h3>
 
                 <div class="row">
                     <div class="form-group" ng-show="contactRec.formAmend">
@@ -21,7 +23,8 @@
             </div>
             <div class="row">
                 <cmp-contact-details contact-record="contactRec.contactModel" is-amend="contactRec.isEditable"
-                                     on-update="contactRec.onUpdateContactRecord(contact)" update-error-summary="contactRec.updateErrorSummaryState()"
+                                     on-update="contactRec.onUpdateContactRecord(contact)"
+                                     update-error-summary="contactRec.updateErrorSummaryState()"
                                      show-errors="contactRec.showErrors()"></cmp-contact-details>
             </div>
             <div>

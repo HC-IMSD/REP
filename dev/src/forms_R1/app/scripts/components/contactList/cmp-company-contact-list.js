@@ -23,7 +23,9 @@
                 onUpdate: '&',
                 getNewContact: '&',
                 isAmend: '<',
-                companyService:'<'
+                companyService:'<',
+                showErrorSummary:'<',
+                errorSummaryUpdate:'<'
             }
         });
     contactListCtrl.$inject = ['$filter','CompanyService'];
@@ -35,7 +37,8 @@
         vm.contactList = [];
         vm.formAmend = false;
         vm.resetCollapsed = false;//used to signal expanding table collapse
-        vm.updateSummary=false; //sends signal to update error summary object
+        vm.updateSummary33=true; //sends signal to update error summary object
+        vm.showSummary=false;
         vm.columnDef = [
             {
                 label: "FIRST_NAME",
@@ -77,10 +80,26 @@
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
             }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                console.log("Show error summary for contactlist "+ vm.showSummary);
+                vm.updateErrorSummaryState()
+            }
+            if(changes.errorSummaryUpdate){
+
+                //vm.updateSummary=changes.errorSummaryUpdate.currentValue;
+                console.log("ErrorSummaryState update in contactlist");
+
+                console.log("start value"+  vm.updateSummary33)
+                vm.updateErrorSummaryState();
+                console.log("ned value"+  vm.updateSummary33)
+            }
         };
 
         vm.updateErrorSummaryState=function(){
-            vm.updateSummary= !vm.updateSummary;
+            console.log("change summarySTate");
+            vm.updateSummary33= !vm.updateSummary33;
+            console.log("end change summarySTate");
         };
 
 
@@ -90,6 +109,7 @@
 
                 _setRolesConcat(vm.contactList[i]);
             }
+
 
         }
 

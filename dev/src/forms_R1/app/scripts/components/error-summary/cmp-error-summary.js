@@ -41,8 +41,10 @@
         vm.prevValue={};
         vm.isVisible=false;
         vm.nameAddendum="";
+        vm.rootError="";
         vm.exclusions={
-            "contactListCtrl.contactListForm":"true"
+            "contactListCtrl.contactListForm":"true",
+            "contactRec.contactRecForm":"true"
         };
         vm.headingPreamble="";
 
@@ -74,16 +76,23 @@
             if(changes.formTarget){
                 vm.targetFormRef=changes.formTarget.currentValue;
             }
-            if(changes.updateErrors){
-                console.log("detect getErrors");
-                if(vm.formRef) {
-                   vm.getErrorsSumm(vm.formRef.$error,""+vm.formRef.$name);
-                    console.log("ran getErrors")
-                }
-            }
+
             if(changes.showErrors){
 
                 vm.isVisible=changes.showErrors.currentValue;
+            }
+
+
+            if(changes.updateErrors){
+                console.log("Calling update Errors in errorSummary");
+                if(vm.formRef) {
+                    //pass in the form name and the error object
+                    console.log("==============" + "Start getErrors for form "+vm.formRef.$name);
+                   vm.getErrorsSumm(vm.formRef.$error,vm.formRef.$name);
+
+                    console.log("==============End getErrors for form "+vm.formRef.$name);
+
+                }
             }
 
         };
@@ -96,7 +105,7 @@
             }
 
         };*/
-        vm.setIsVisible=function(){
+        vm.calcIsVisible=function(){
             return(vm.isVisible &&(vm.errorArray && vm.errorArray.length>0))
 
         };
@@ -110,7 +119,8 @@
                      return vm.uniqueErrorList[k]
                  });
             if(!angular.equals(vm.prevValue,temp)){
-                console.log("not equal")
+                console.log(vm.rootError)
+                angular.element(vm.rootError).trigger('focus');
                 vm.errorArray=temp;
             }
 

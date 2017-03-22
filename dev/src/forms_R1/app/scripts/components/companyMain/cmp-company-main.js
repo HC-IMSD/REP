@@ -62,6 +62,7 @@
         vm.company = vm.companyService.getModelInfo();
         vm.alerts = [false, false, false, false, false];
         vm.updateSummary=false;
+        vm.showErrorSummary=false;
 
         //TODO needed?
         vm.initUser = function (id) {
@@ -114,9 +115,15 @@
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            var writeResult = _transformFile();
+            if(vm.disableXML){
+                vm.showErrorSummary=true;
+                vm.updateErrorSummary();
 
-            hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+            }else {
+                var writeResult = _transformFile();
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                vm.showErrorSummary=true;
+            }
         };
 
         /**

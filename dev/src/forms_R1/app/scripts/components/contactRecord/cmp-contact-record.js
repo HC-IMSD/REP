@@ -27,7 +27,8 @@
                 isAmend: '<',
                 isDetailValid:'&',
                 isRoleSelected:'&',
-                recordIndex:'<'
+                recordIndex:'<',
+                errorSummaryUpdate:'&'
             }
         });
         contactRecCtrl.$inject=['$scope'];
@@ -107,12 +108,12 @@
          * @param changes
          */
         vm.$onChanges=function(changes){
-            //how this is currently wired, this will never fire!
             if (changes.contactRecord) {
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
                 vm.contactModel.roleConcat = _getRolesConcat();
                 vm.setEditable();
                 //angular.element(saveContact).trigger('focus');
+
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
@@ -138,6 +139,7 @@
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state:vm.contactRecForm.$valid});
             vm.savePressed=false;
+            vm.errorSummaryUpdate();
         };
 
         vm.onContactRoleUpdate = function (newRole) {
@@ -174,9 +176,14 @@
               vm.contactRecForm.$setPristine() ;
                 vm.onUpdate({contact: vm.contactModel});
               vm.savePressed=false;
+              vm.errorSummaryUpdate();
             }else{
               vm.savePressed=true;
               vm.updateErrorSummaryState();
+              vm.errorSummaryUpdate();
+              //var myElement = angular.element( document.querySelector('error-section' ))
+              //console.log(myElement)
+             // angular.element(document.querySelector('#errors-summary-contactRec.contactRecForm' )).trigger('focus');
           }
 
 
