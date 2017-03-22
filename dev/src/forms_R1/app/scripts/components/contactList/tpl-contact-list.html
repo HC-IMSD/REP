@@ -1,10 +1,6 @@
 <ng-form name="contactListCtrl.contactListForm">
     <div class="row">
-    <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="true" name-suffix="contactListCtrl.contactListForm"
-                       update-errors="contactListCtrl.updateSummary" form-preamble="Company Representative Information" ></cmp-error-summary>
 
-    <!--    <button ng-click="contactListCtrl.updateErrorSummaryState()">Update</button>-->
-    </div>
     <div class="row">
         <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false"
                ng-model="contactListCtrl.allRolesSelected" required/>

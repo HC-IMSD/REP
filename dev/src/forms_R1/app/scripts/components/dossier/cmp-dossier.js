@@ -311,7 +311,8 @@
             if (self.dossierModel.enrolmentVersion) {
                 filename = filename + separator + self.dossierModel.enrolmentVersion;
             }
-            return filename;
+            filename= filename.replace(".",separator);
+            return filename.toLowerCase();
         }
 
         /**

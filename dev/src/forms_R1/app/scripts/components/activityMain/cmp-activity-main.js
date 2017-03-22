@@ -224,10 +224,11 @@
                 filename = filename + separator + vm.activityRoot.dstsControlNumber;
             }
             if (vm.activityRoot.enrolmentVersion) {
-                //var parts = vm.activityRoot.enrolmentVersion.split('.');
+
                 filename = filename + separator + vm.activityRoot.enrolmentVersion;
             }
-            return filename;
+            filename=filename.replace(".",separator);
+            return filename.toLowerCase();
         }
 
         /**

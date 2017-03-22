@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactRecord', ['addressRole','contactModule','errorSummaryModule'])
+        .module('contactRecord', ['addressRole','contactModule'])
 })();
 
 (function () {

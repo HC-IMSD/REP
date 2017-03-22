@@ -64,7 +64,7 @@
 
 
             filename = filename + separator + date.getFullYear() +separator + month + separator + day + separator + hours + minutes;
-            return (filename);
+            return (filename.toLowerCase());
         }
 
 

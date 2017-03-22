@@ -289,8 +289,8 @@ var companyComponentFolders =
         componentFolders.addressRecord,
         componentFolders.contactRecord,
         componentFolders.importerProducts,
-        componentFolders.dossierIdDetails,
-        componentFolders.errorSummary
+        componentFolders.dossierIdDetails
+   /*     componentFolders.errorSummary*/
     ];
 
 //Dossier Form Components
@@ -757,7 +757,7 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
         paths.styles + styleFilesNames.select2Style,
         paths.styles + styleFilesNames.select2Image
     ];
-
+    console.log(stylesList)
     if (stylesList) stylesArray = stylesList;
 
     //inserts date stamp into base content page
@@ -1323,8 +1323,8 @@ gulp.task('dev-transaction-htmlBuild', ['dev-transaction-copyData', 'dev-transac
     var today = createSuffixDate();
     today = "";
     var deploy = deployType.dev;
-    pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', '', deploy);
-    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', '', deploy);
+    pipes.createRootHtml(paths.frenchTemplate, transactionRootTitles_fr, 'transactionEnrol-fr.html', 'transactionAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.englishTemplate, transactionRootTitles_en, 'transactionEnrol-en.html', 'transactionAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
 
     return (
         pipes.cleanBuild(buildDir + paths.translations)
@@ -1961,7 +1961,6 @@ gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copyData', 'dev-diffForm-copy
     return (
 
         pipes.createRootHtml(paths.englishTemplate, diffFormRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', jsRootContent.partialDiffFormRoot, paths.buildDevDiff, ignoreDir, 'en', deploy, stylesList)
-
     );
 
 });
@@ -1978,5 +1977,54 @@ gulp.task('protractor', function () {
             console.error(e);
             throw e;
         })
+});
+
+gulp.task('create-company-convert-template',function(){
+
+    /**
+
+     englishTemplate: wetBase + '/content-en.html',
+     frenchTemplate: wetBase + '/content-fr.html',
+
+     */
+    //var baseHtml = gulp.src([paths.englishTemplate,paths.frenchTemplate], {read: true, base: './'});
+    gulp.src(paths.englishTemplate).pipe(stringReplace('./', './company/'))
+       .pipe(rename("temp"))
+        .pipe(gulp.dest(' ./build/dev/temp'));
+
+ /*
+    copySourcesJs.
+        .pipe(stringReplace('.html', (dateToday + '.html')))//dangerous, blind replace
+        .pipe(gulp.dest(destDir))
+
+
+  var copySources = gulp.src([
+
+
+    jsDossierComponentPaths.formulations +
+    ],
+
+    {read: true, base: '../dossierEnrol'});
+
+    var def = Q.defer();
+    //TODO inefficient
+    copySources.pipe(stringReplace('./components/', './app/components/'))
+        .pipe(stringReplace('../lib/uib-templates/tpl-accordian-group-caret.html', 'app/lib/uib-templates/tpl-accordian-group-caret.html'))
+        .pipe(gulp.dest(dossierPaths.buildDevDossier))
+        .on('end', function () {
+            def.resolve();
+        })
+        .on('error', def.reject);
+    return def.promise;
+
+
+
+
+
+        */
+
+
+
+
 });
 

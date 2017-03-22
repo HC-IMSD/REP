@@ -13,8 +13,7 @@
             'applicationInfo',
             'filterLists',
             'hpfbConstants',
-            'ui.bootstrap',
-            'errorSummaryModule'
+            'ui.bootstrap'
         ])
 })();
 
@@ -139,10 +138,10 @@
                 filename = filename + separator+ vm.company.companyId;
             }
             if (vm.company.enrolmentVersion) {
-                //var parts = vm.company.enrolmentVersion.split('.')
-                filename = filename + separator+ vm.company.enrolmentVersion;
+                filename = filename + separator+  vm.company.enrolmentVersion;
             }
-            return filename;
+            filename=filename.replace(".",separator);
+            return filename.toLowerCase();
         }
 
         /**
