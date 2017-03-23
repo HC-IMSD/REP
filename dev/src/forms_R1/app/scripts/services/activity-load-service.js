@@ -16,7 +16,7 @@
 
             return function (options) {
                 var deferred = $q.defer();
-                var dataFolder = "data/"; //relative folder to the data
+                var dataFolder = "../data/"; //relative folder to the data
                 var feeClassUrl = dataFolder + "feeClass.json";
                 var raTypeUrl = dataFolder + "raType.json";
                 var resultTranslateList = {};
