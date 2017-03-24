@@ -2,7 +2,8 @@
  * Created by dkilty on 13/02/2017.
  */
 
-var dev_dossier_root_ext_url = "http://localhost:2121/dev/dossier/dossierEnrolEXT-en.html";
+//var dev_dossier_root_ext_url = "http://localhost:2121/dev/dossier/dossierEnrolEXT-en.html";
+var dev_dossier_root_ext_url = "http://localhost:2121/prod/dossier/dossierEXT-en.html";
 //var dev_dossier_root_ext_url="https://lam-dev.hres.ca/rep_test/dossierEXT-en.html";
 var DossierMain = require('../../component-definitions/dossier/def-cmp-dossier-main');
 var RepContact = require('../../component-definitions/def-cmp-rep-contact');
@@ -57,7 +58,7 @@ describe('Dossier External Form Type Components Test', function () {
     });
 
 
-    xdescribe("Add a formulation", function () {
+    describe("Add a formulation", function () {
         var formulationRecord = "";
         it("Create a formulation and  fill in formulation fields", function () {
             formulations.addFormulationRecord();
@@ -74,7 +75,7 @@ describe('Dossier External Form Type Components Test', function () {
             medIngredient.setCasValue(newIngredient, "111-11-1");
             medIngredient.setActiveNameLookup(newIngredient, "aa", "BANISTERIA CAAPI");
             medIngredient.setStrengthValue(newIngredient, 2.2345)
-            medIngredient.setUnitsTextValue(newIngredient, "UNIT");
+            medIngredient.setUnitsTextValue(newIngredient, "CC");
             medIngredient.setNanoTextValue(newIngredient, "NANOPARTICLE");
             medIngredient.setBaseTextValue(newIngredient, "Yes");
             medIngredient.setAnimalSrcTextValue(newIngredient, 'No');
@@ -153,7 +154,7 @@ describe('Dossier External Form Type Components Test', function () {
     });
 
 
-    xdescribe('Add 2 therapeutic products', function () {
+    describe('Add 2 therapeutic products', function () {
 
         it('Add Thera Products', function () {
             theraProduct.addTherapeuticClassification();
@@ -250,7 +251,7 @@ describe('Dossier External Form Type Components Test', function () {
     });
 
 });
-xdescribe("Animal or Human Sourced Tab", function () {
+describe("Animal or Human Sourced Tab", function () {
 
     it('Select the Animal tab', function () {
         tabsCmp.selectSourcedTab();

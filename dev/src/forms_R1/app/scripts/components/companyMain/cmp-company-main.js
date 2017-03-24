@@ -116,6 +116,7 @@
             var writeResult = _transformFile();
 
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+            vm.companyEnrolForm.$setPristine();
         };
 
         /**
@@ -150,9 +151,11 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                vm.company.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.company.enrolmentVersion);
-                vm.company.applicationType = ApplicationInfoService.prototype.getApprovedType();
-                updateModelOnApproval();
+                if(!vm.companyEnrolForm.$pristine) {
+                    vm.company.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.company.enrolmentVersion);
+                    vm.company.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                    updateModelOnApproval();
+                }
             } else {
                 vm.company.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.company.enrolmentVersion)
             }
@@ -189,6 +192,7 @@
                 angular.extend(vm.company, vm.companyService.getModelInfo());
                 _setComplete();
                 vm.setAmend();
+                vm.companyEnrolForm.$setDirty();
 
             }
             disableXMLSave();

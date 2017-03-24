@@ -196,7 +196,9 @@
             model.dossierId = jsonObj.dossier_id;
             model.regActivityLead = jsonObj.reg_activity_lead;
             model.regActivityType = $filter('filter')(ActivityListFactory.getRaTypeList(), {id:  jsonObj.reg_activity_type.__text})[0];
-            model.feeClass =  $filter('filter')(ActivityListFactory.getFeeClassList(), {id:  jsonObj.fee_class.__text})[0];
+           //TODO replace with a custom filter
+            var feeClassList= $filter('filter')(ActivityListFactory.getFeeClassList(), {id:  jsonObj.fee_class.__text});
+            model.feeClass =  _getFilterJsonMatch(feeClassList,jsonObj.fee_class.__text,"id");
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
             model.isAdminSub = jsonObj.is_admin_submission;
@@ -656,6 +658,27 @@
             "notLasa": false
         }
         );
+    }
+    //TODO Should be replaced with a custom filter Fixes bug reported on March 24
+    /**
+     * For a given property looks for an exact match. This is being used to augment default filter
+     * @param valueList
+     * @param targetValue
+     * @param targetProperty
+     * @returns {*}
+     * @private
+     */
+    function _getFilterJsonMatch(valueList,targetValue,targetProperty){
+
+        for(var i=0;i<valueList.length;i++){
+            var rec=valueList[i];
+            if(rec[targetProperty]===targetValue){
+
+                return rec;
+            }
+
+        }
+        return "";
     }
 
 })();

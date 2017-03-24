@@ -4,8 +4,8 @@ exports.config = {
     seleniumAddress: 'http://localhost:4444/wd/hub',
     specs: [
 
-        'app/spec/e2e/tests/transaction/*.js',
-
+       /* 'app/spec/e2e/tests/transaction/!*.js',*/
+        'app/spec/e2e/tests/dossier/*.js'
         /*
          'app/spec/e2e/tests/company/*.js',
          'app/spec/e2e/tests/activity/!*.js',

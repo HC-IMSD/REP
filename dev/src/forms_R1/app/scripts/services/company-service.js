@@ -256,7 +256,6 @@
                     }
                     address.postalCode = adrList[i].company_address_details.postal_code;
                    // if(address.addressRole.importer){
-                        console.log("loading importer data");
                         address.importerProducts= this.getImporterInfo(adrList[i].importer_products);
 
                     //}

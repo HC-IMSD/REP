@@ -23,6 +23,7 @@
                 var nanoUrl = RELATIVE_FOLDER_DATA+"nanomaterials.json";
                 var unitsUrl = RELATIVE_FOLDER_DATA + "units.json";
                 var dosageFormUrl = RELATIVE_FOLDER_DATA + "dosageForm.json";
+                var activeUrl= RELATIVE_FOLDER_DATA +"activeIngred.json";
                 var resultTranslateList = {};
                 $http.get(unitsUrl)
                     .then(function (response) {
@@ -53,7 +54,7 @@
                         var translateList = _createTranslateList(newList, options.key);
                         DossierLists.createDosageFormList(newList); //for display
                         angular.extend(resultTranslateList, translateList);
-                        return $http.get("data/activeIngred.json"); //active ingredient list load
+                        return $http.get(activeUrl); //active ingredient list load
                     }).then(function (response) {
                     DossierLists.setActiveList(response.data);
                     return $http.get(roaUrl); //roa load
