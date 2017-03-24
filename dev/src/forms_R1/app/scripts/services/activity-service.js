@@ -25,7 +25,7 @@
                 "enrolmentVersion": "",
                 "dateSaved": "",
                 "applicationType": "NEW",
-                "softwareVersion": "1.0.0",
+                "softwareVersion": "1.1.0",
                 "dataChecksum": "",
                 "dossierIdPrefix": "HC6-024-",
                 "dossierId": "",

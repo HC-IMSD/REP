@@ -12,12 +12,12 @@
     'use strict';
     angular
         .module('companyLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces','CANADA','USA', function ($http, $q, $filter, getCountryAndProvinces,CANADA,USA) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces','CANADA','USA','RELATIVE_FOLDER_DATA', function ($http, $q, $filter, getCountryAndProvinces,CANADA,USA,RELATIVE_FOLDER_DATA) {
 
             return function (options) {
                 var deferred = $q.defer();
-                var dataFolder = "data/"; //relative forlder to the data
-                var countryUrl = dataFolder + "countries.json";
+                //var dataFolder = "data/"; //relative forlder to the data
+                var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {
