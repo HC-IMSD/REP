@@ -171,7 +171,7 @@ var styleFilesNames = {
     select: 'select.min.css',
     select2Style: 'select2.min.css',
     select2Image: 'select2.png',
-    select2X2:  'select2X2.png',
+    select2X2: 'select2X2.png',
     selectizeStyle: 'selectize.default.css',
     repDiff: 'rep-diff.css',
     uiTree: 'angular-ui-tree.min.css'
@@ -185,7 +185,7 @@ var libFileNames = {
     messagesMin: "angular-resource.min.js",
     sanitizeMin: "angular-sanitize.min.js",
     translateMin: "angular-translate.min.js",
-    fileSaverMin: "FileSave.min.js",
+    fileSaverMin: "FileSaver.min.js",
     selectMin: "select.min.js",
     sha256: "sha256.js",
     uiBootStrapMin: "ui-bootstrap-tpls-2.1.4.min.js",
@@ -272,22 +272,22 @@ var stylesProd = [
     paths.styles + styleFilesNames.select,
     paths.styles + styleFilesNames.select2Style,
     paths.styles + styleFilesNames.select2Image,
-    paths.styles +styleFilesNames.select2X2
+    paths.styles + styleFilesNames.select2X2
 
 ];
 
-var libProd=[
-    paths.lib+libFileNames.angularMin,
-    paths.lib+libFileNames.resourceMin,
-    paths.lib+libFileNames.sanitizeMin,
-    paths.lib+libFileNames.translateMin,
-    paths.lib+libFileNames.fileSaverMin,
-    paths.lib+libFileNames.selectMin,
-    paths.lib+libFileNames.sha256,
-    paths.lib+libFileNames.uiBootStrapMin,
-    paths.lib+libFileNames.xml2Json,
-    paths.lib+libFileNames.messagesMin,
-    paths.lib+libFileNames.ariaMin
+var libProd = [
+    paths.lib + libFileNames.angularMin,
+    paths.lib + libFileNames.resourceMin,
+    paths.lib + libFileNames.sanitizeMin,
+    paths.lib + libFileNames.translateMin,
+    paths.lib + libFileNames.fileSaverMin,
+    paths.lib + libFileNames.selectMin,
+    paths.lib + libFileNames.sha256,
+    paths.lib + libFileNames.uiBootStrapMin,
+    paths.lib + libFileNames.xml2Json,
+    paths.lib + libFileNames.messagesMin,
+    paths.lib + libFileNames.ariaMin
 ];
 
 
@@ -926,49 +926,51 @@ pipes.deleteSrcs = function (srcDir, componentFolders, serviceFileNames, directi
     )
 };
 
+/*
 
-pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType) {
+ pipes.createProdRootHtml = function (templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType) {
 
 
-    pipes.insertDateStamp(templatePath, metaObj, lang, formType)
-        .pipe(inject(gulp.src([htmlPartial]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-        .pipe(inject(gulp.src([
-                'app/lib/**/*.js',
-                '!app/lib/**/angular*.js'
-            ]),
-            {
-                name: 'thirdParty',
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }))
-        .pipe(inject(gulp.src([
-                paths.buildProd + paths.styles + "rep*.min.css",
-                paths.buildProd + paths.styles + styleFilesNames.select,
-                paths.buildProd + paths.styles + styleFilesNames.select2Style
-            ]),
-            {
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }
-        ))
-        .pipe(inject(gulp.src(src)
-                .pipe(angularFilesort())
-            , {
-                ignorePath: ignorePath,
-                addRootSlash: false,
-                read: false
-            }))
-        .pipe(rename(outName))
-        .pipe(gulp.dest(destDir))
+ pipes.insertDateStamp(templatePath, metaObj, lang, formType)
+ .pipe(inject(gulp.src([htmlPartial]), {
+ starttag: placeholders.mainContent,
+ transform: function (filePath, file) {
+ // return file contents as string
+ return file.contents.toString('utf8')
+ }
+ }))
+ .pipe(inject(gulp.src([
+ 'app/lib/!**!/!*.js',
+ '!app/lib/!**!/angular*.js'
+ ]),
+ {
+ name: 'thirdParty',
+ ignorePath: ignorePath,
+ addRootSlash: false
+ }))
+ .pipe(inject(gulp.src([
+ paths.buildProd + paths.styles + "rep*.min.css",
+ paths.buildProd + paths.styles + styleFilesNames.select,
+ paths.buildProd + paths.styles + styleFilesNames.select2Style
+ ]),
+ {
+ ignorePath: ignorePath,
+ addRootSlash: false
+ }
+ ))
+ .pipe(inject(gulp.src(src)
+ .pipe(angularFilesort())
+ , {
+ ignorePath: ignorePath,
+ addRootSlash: false,
+ read: false
+ }))
+ .pipe(rename(outName))
+ .pipe(gulp.dest(destDir))
 
-};
+ };
 
+ */
 
 pipes.createRootFileSet = function (rootPath, destDir, skipDate, generateInternal) {
 
@@ -1076,6 +1078,48 @@ pipes.copyAndMinStyles = function (stylesArray, isTimeStamped, destPath) {
             .pipe(gulp.dest(destPath))
     );
 
+
+};
+
+pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType) {
+
+
+    pipes.insertDateStamp(templatePath, metaObj, lang, formType)
+        .pipe(inject(gulp.src([htmlPartial]), {
+            starttag: placeholders.mainContent,
+            transform: function (filePath, file) {
+                // return file contents as string
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(inject(gulp.src([
+                srcPath + 'app/lib/**/*.js',
+                '!' + srcPath + 'app/lib/**/angular*.js'
+            ]),
+            {
+                name: 'thirdParty',
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }))
+        .pipe(inject(gulp.src([
+                srcPath + paths.styles + "rep*.css",
+                srcPath + paths.styles + styleFilesNames.select,
+                srcPath + paths.styles + styleFilesNames.select2Style
+            ]),
+            {
+                ignorePath: ignorePath,
+                addRootSlash: false
+            }
+        ))
+        .pipe(inject(gulp.src(src)
+                .pipe(angularFilesort())
+            , {
+                ignorePath: ignorePath,
+                addRootSlash: false,
+                read: false
+            }))
+        .pipe(rename(outName))
+        .pipe(gulp.dest(destDir))
 
 };
 
@@ -1592,44 +1636,44 @@ gulp.task('prod-activity-copyTranslateFiles', function () {
 });
 
 /*
-gulp.task('prod-activity-compileTranslateFile', ['prod-activity-copyTranslateFiles'], function () {
+ gulp.task('prod-activity-compileTranslateFile', ['prod-activity-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProd + paths.relScript;
-    return (pipes.compileTranslateFile(paths.buildProd, destPath, "activityTranslations", activityTranslationFilesBaseList));
+ var destPath = paths.buildProd + paths.relScript;
+ return (pipes.compileTranslateFile(paths.buildProd, destPath, "activityTranslations", activityTranslationFilesBaseList));
 
-});
-*/
+ });
+ */
 
 
 //Leaves out copying activity source files as that should be done globally
 /*gulp.task('prod-activity-compileHtml', ['prod-activity-compileSrcJs'], function () {
-    var baseActivityPath = paths.buildProd + 'app/scripts/';
-    var htmlPartial = jsRootContent.partialActivityRoot;
-    //var dateToday = createSuffixDate();
-    var srcJsExtEn = [
-        baseActivityPath + 'activityAppEXT-en' + '*.min.js',
-        paths.buildProd + 'app/lib/!**!/angular*.js'
-    ];
-    var srcJsExtFr = [
-        baseActivityPath + 'activityAppEXT-fr' + '*.min.js',
-        paths.buildProd + 'app/lib/!**!/angular*.js'
-    ];
-    var srcJsIntFr = [
-        baseActivityPath + 'activityAppINT-fr' + '*.min.js',
-        paths.buildProd + 'app/lib/!**!/angular*.js'
-    ];
-    var srcJsIntEn = [
-        baseActivityPath + 'activityAppINT-en' + '*.min.js',
-        paths.buildProd + 'app/lib/!**!/angular*.js'
-    ];
-    var deploy = deployType.prod;
-    pipes.createProdRootHtml(paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd, 'en', deploy);
-    pipes.createProdRootHtml(paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd, 'fr', deploy);
-    pipes.createProdRootHtml(paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd, 'en', deploy);
+ var baseActivityPath = paths.buildProd + 'app/scripts/';
+ var htmlPartial = jsRootContent.partialActivityRoot;
+ //var dateToday = createSuffixDate();
+ var srcJsExtEn = [
+ baseActivityPath + 'activityAppEXT-en' + '*.min.js',
+ paths.buildProd + 'app/lib/!**!/angular*.js'
+ ];
+ var srcJsExtFr = [
+ baseActivityPath + 'activityAppEXT-fr' + '*.min.js',
+ paths.buildProd + 'app/lib/!**!/angular*.js'
+ ];
+ var srcJsIntFr = [
+ baseActivityPath + 'activityAppINT-fr' + '*.min.js',
+ paths.buildProd + 'app/lib/!**!/angular*.js'
+ ];
+ var srcJsIntEn = [
+ baseActivityPath + 'activityAppINT-en' + '*.min.js',
+ paths.buildProd + 'app/lib/!**!/angular*.js'
+ ];
+ var deploy = deployType.prod;
+ pipes.createProdRootHtml(paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'activityEXT-en.html', paths.buildProd, 'en', deploy);
+ pipes.createProdRootHtml(paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, '/build/prod/', 'activityINT-fr.html', paths.buildProd, 'fr', deploy);
+ pipes.createProdRootHtml(paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, '/build/prod/', 'activityINT-en.html', paths.buildProd, 'en', deploy);
 
-    return pipes.createProdRootHtml(paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd, 'fr', deploy);
+ return pipes.createProdRootHtml(paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, '/build/prod/', 'activityEXT-fr.html', paths.buildProd, 'fr', deploy);
 
-});*/
+ });*/
 
 
 //copy source files
@@ -1647,29 +1691,29 @@ gulp.task('prod-activity-deleteSourceFiles', function () {
 
 
 /*
-gulp.task('prod-activity-compileSrcJs', ['prod-activity-compileTranslateFile', 'prod-activity-createRootJsFiles'], function () {
+ gulp.task('prod-activity-compileSrcJs', ['prod-activity-compileTranslateFile', 'prod-activity-createRootJsFiles'], function () {
 
-    var srcPath = paths.buildProd + 'app/scripts/';
-    var dest = paths.buildProd + 'app/scripts/';
-    var rootJsBaseName = "activityApp";
-    var translateName = "activityTranslations";
-    return (
-        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, translateName, true)
-    )
-});
-*/
+ var srcPath = paths.buildProd + 'app/scripts/';
+ var dest = paths.buildProd + 'app/scripts/';
+ var rootJsBaseName = "activityApp";
+ var translateName = "activityTranslations";
+ return (
+ pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, translateName, true)
+ )
+ });
+ */
 
 
 /**
  * Creates the root JS files for internal/external and french/English forms
  * */
 /*gulp.task('prod-activity-createRootJsFiles', function () {
-    var dest = paths.buildProdActivity + 'app/scripts/';
-    var rootFile = paths.scripts + "/" + rootFileNames.activityRoot + ".js";
-    return (
-        pipes.createRootFileSet(rootFile, dest, true, true)
-    );
-});*/
+ var dest = paths.buildProdActivity + 'app/scripts/';
+ var rootFile = paths.scripts + "/" + rootFileNames.activityRoot + ".js";
+ return (
+ pipes.createRootFileSet(rootFile, dest, true, true)
+ );
+ });*/
 
 /*********** COMPANY PRODCTION SCRIPTS ****************/
 
@@ -1841,16 +1885,16 @@ gulp.task('prod-dossier-compileHtml', ['prod-dossier-compileSrcJs'], function ()
 
 gulp.task('prod-transaction-copyTranslateFiles', function () {
 
-    var destPath = paths.buildProd + 'app/resources/';
+    var destPath = paths.buildProdTransaction
     var translationList = transactionTranslationFilesBaseList;
 
-    return (pipes.translateDev(translationList, paths.buildProd));
+    return (pipes.translateDev(translationList, destPath));
 
 });
 gulp.task('prod-transaction-compileTranslateFile', ['prod-transaction-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProd + paths.relScript;
-    return (pipes.compileTranslateFile(paths.buildProd, destPath, "transactionTranslations", transactionTranslationFilesBaseList));
+    var destPath = paths.buildProdTransaction + paths.relScript;
+    return (pipes.compileTranslateFile(paths.buildProdTransaction, destPath, "transactionTranslations", transactionTranslationFilesBaseList));
 
 });
 
@@ -1858,7 +1902,7 @@ gulp.task('prod-transaction-compileTranslateFile', ['prod-transaction-copyTransl
  * Creates the root JS files for internal/external and french/English forms
  * */
 gulp.task('prod-transaction-createRootJsFiles', function () {
-    var dest = paths.buildProd + 'app/scripts/';
+    var dest = paths.buildProdTransaction + 'app/scripts/';
     var rootPath = paths.scripts + "/" + rootFileNames.transactionRoot + ".js";
     //skip the date and and generate internal files
     return (
@@ -1867,10 +1911,11 @@ gulp.task('prod-transaction-createRootJsFiles', function () {
 
 });
 
-gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFile', 'prod-transaction-createRootJsFiles'], function () {
 
-    var srcPath = paths.buildProd + 'app/scripts/';
-    var dest = paths.buildProd + 'app/scripts/';
+gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFile', 'prod-transaction-createRootJsFiles', 'prod-transaction-copySourceFiles'], function () {
+
+    var srcPath = paths.buildProdTransaction + 'app/scripts/';
+    var dest = paths.buildProdTransaction + 'app/scripts/';
     var rootJsBaseName = "transactionApp";
     var translateName = "transactionTranslations";
     var hasInternal = false;
@@ -1882,28 +1927,8 @@ gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFi
 
 gulp.task('prod-transaction-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProd, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, true)
+        pipes.copySrcs(false, paths.buildProdTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, true)
     );
-});
-
-gulp.task('prod-transaction-compileHtml', ['prod-transaction-compileSrcJs'], function () {
-    var basePath = paths.buildProd + 'app/scripts/';
-    var htmlPartial = jsRootContent.partialTransactionRoot;
-    var dateToday = createSuffixDate();
-    var libFiles = paths.buildProd + paths.relLib + '**/angular*.js';
-    var srcJsExtEn = [
-        basePath + 'transactionAppEXT-en' + '*.min.js',
-        libFiles
-    ];
-    var srcJsExtFr = [
-        basePath + 'transactionAppEXT-fr' + '*.min.js',
-        libFiles
-    ];
-
-    var result = "";
-    var deploy = deployType.prod;
-    result = pipes.createProdRootHtml(paths.prodEnglishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, '/build/prod/', 'transactionEXT-en.html', paths.buildProd, 'en', deploy);
-    return pipes.createProdRootHtml(paths.prodFrenchTemplate, transactionRootTitles_en, htmlPartial, srcJsExtFr, '/build/prod/', 'transactionEXT-fr.html', paths.buildProd, 'fr', deploy);
 });
 
 
@@ -2064,19 +2089,19 @@ gulp.task('prod-global-create-src-template', function () {
 
 });
 
-gulp.task('prod-activity-allFormsCreate',['prod-activity-compileHtml2'],function(){
+gulp.task('prod-activity-allFormsCreate', ['prod-activity-compileHtml'], function () {
 
     var basePath = paths.buildProdActivity;
     var deletePaths = [
         basePath + 'app/scripts/**/*.js',
         '!' + basePath + 'app/scripts/*.min.js',
-        basePath + 'app/resources/**/*.*'
+        basePath + 'app/resources/'
     ];
     return (del(deletePaths));
 
 });
 
-gulp.task('prod-activity-compileHtml2', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-activity-compileSrcJs2', 'prod-activity-copyLib'], function () {
+gulp.task('prod-activity-compileHtml', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-activity-compileSrcJs', 'prod-activity-copyLib'], function () {
 
     var ignorePath = '/build/prod/activity';
     var baseActivityPath = paths.buildProdActivity;
@@ -2100,20 +2125,20 @@ gulp.task('prod-activity-compileHtml2', ['prod-global-create-src-template', 'pro
         paths.buildProdActivity + 'app/lib/**/angular*.js'
     ];
 
-    var srcPath=paths.buildProdActivity;
+    var srcPath = paths.buildProdActivity;
 
-     pipes.createProdRootHtml2(srcPath,paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'activityEXT-en.html',destPath, 'en', deployType.prod);
-     pipes.createProdRootHtml2(srcPath,paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'activityEXT-fr.html',destPath, 'fr', deployType.prod);
-     pipes.createProdRootHtml2(srcPath,paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'activityINT-fr.html',destPath, 'fr', deployType.prodInt);
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'activityEXT-en.html', destPath, 'en', deployType.prod);
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'activityEXT-fr.html', destPath, 'fr', deployType.prod);
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'activityINT-fr.html', destPath, 'fr', deployType.prodInt);
 
     return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'activityINT-en.html', destPath, 'en', deployType.prodInt);
 
 });
 
 gulp.task('prod-activity-copyLib', function () {
-    var srcArray=stylesProd;
+    var srcArray = stylesProd;
 
-    for(var i=0;i<libProd.length;i++){
+    for (var i = 0; i < libProd.length; i++) {
         srcArray.push(libProd[i])
     }
 
@@ -2121,12 +2146,31 @@ gulp.task('prod-activity-copyLib', function () {
     return copySources.pipe(gulp.dest(paths.buildProdActivity))
 
 });
+
+gulp.task('prod-transaction-copyLib', function () {
+    var srcArray = stylesProd;
+
+    for (var i = 0; i < libProd.length; i++) {
+        srcArray.push(libProd[i])
+    }
+
+    var copySources = gulp.src(srcArray, {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildProdTransaction))
+
+});
+
+
 gulp.task('prod-activity-clean', function () {
     return (pipes.cleanBuild(paths.buildProdActivity));
 
 });
+gulp.task('prod-transaction-clean', function () {
+    return (pipes.cleanBuild(paths.buildProdTransaction));
 
-gulp.task('prod-activity-compileSrcJs2', ['prod-activity-compileTranslateFile2', 'prod-activity-createRootJsFiles2', 'prod-activity-copySourceFiles'], function () {
+});
+
+
+gulp.task('prod-activity-compileSrcJs', ['prod-activity-compileTranslateFile', 'prod-activity-createRootJsFiles2', 'prod-activity-copySourceFiles'], function () {
 
     var srcPath = paths.buildProdActivity + 'app/scripts/';
     var dest = paths.buildProdActivity + 'app/scripts/';
@@ -2145,53 +2189,49 @@ gulp.task('prod-activity-createRootJsFiles2', [], function () {
     );
 });
 
-gulp.task('prod-activity-compileTranslateFile2', ['prod-activity-copyTranslateFiles'], function () {
+gulp.task('prod-activity-compileTranslateFile', ['prod-activity-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProdActivity + 'app/scripts/';
+    var destPath = paths.buildProdActivity+ paths.relScript;
     var srcPath = paths.buildProdActivity;
     return (pipes.compileTranslateFile(srcPath, destPath, "activityTranslations", activityTranslationFilesBaseList));
 
 });
 
 
-pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType) {
+gulp.task('prod-transaction-allFormsCreate', ['prod-activity-compileHtml'], function () {
+
+    var basePath = paths.buildProdTransaction;
+    var deletePaths = [
+        basePath + 'app/scripts/**/*.js',
+        '!' + basePath + 'app/scripts/*.min.js',
+        basePath + 'app/resources/'
+    ];
+    return (del(deletePaths));
+
+});
 
 
-    pipes.insertDateStamp(templatePath, metaObj, lang, formType)
-        .pipe(inject(gulp.src([htmlPartial]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-        .pipe(inject(gulp.src([
-                srcPath + 'app/lib/**/*.js',
-                '!'+srcPath + 'app/lib/**/angular*.js'
-            ]),
-            {
-                name: 'thirdParty',
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }))
-        .pipe(inject(gulp.src([
-                srcPath + paths.styles + "rep*.css",
-                srcPath + paths.styles + styleFilesNames.select,
-                srcPath + paths.styles + styleFilesNames.select2Style
-            ]),
-            {
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }
-        ))
-        .pipe(inject(gulp.src(src)
-                .pipe(angularFilesort())
-            , {
-                ignorePath: ignorePath,
-                addRootSlash: false,
-                read: false
-            }))
-        .pipe(rename(outName))
-        .pipe(gulp.dest(destDir))
+gulp.task('prod-transaction-compileHtml', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-transaction-compileSrcJs', 'prod-transaction-copyLib'], function () {
 
-};
+    var ignorePath = '/build/prod/transaction';
+    var destPath = paths.buildProdTransaction;
+    var htmlPartial = jsRootContent.partialTransactionRoot;
+    var libFiles = paths.buildProdTransaction + paths.relLib + '**/angular*.js';
+    var srcJsExtEn = [
+        paths.buildProdTransaction + 'app/scripts/' + 'transactionAppEXT-en' + '*.min.js',
+        libFiles
+    ];
+
+
+    var srcJsExtFr = [
+        paths.buildProdTransaction + 'app/scripts/' + 'transactionAppEXT-fr' + '*.min.js',
+        libFiles
+    ];
+
+    var srcPath = paths.buildProdTransaction;
+    var deploy = deployType.prod;
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'transactionEXT-en.html', destPath, 'en', deploy)
+    return (
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, transactionRootTitles_en, htmlPartial, srcJsExtFr, ignorePath, 'transactionEXT-fr.html', destPath, 'fr', deploy)
+    )
+});
