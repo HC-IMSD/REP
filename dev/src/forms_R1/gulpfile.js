@@ -1938,18 +1938,29 @@ gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copyData', 'dev-diffForm-copy
 });
 
 
-gulp.task('protractor', function () {
+gulp.task('protractor-testEnv', function () {
     gulp.src(["app/spec/e2e/tests/**/*.js"])
         .pipe(protractor({
             configFile: "./protractorconf.js",
-            seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
-            args: ['--baseUrl', 'https://lam-dev.hres.ca/rep_test/']
+            args: [
+                '--baseUrl', 'https://lam-dev.hres.ca/rep_test/'
+            ]
         }))
+
         .on('error', function (e) {
             console.error(e);
-            throw e;
+            //throw e;
         })
 });
+/**
+ *  Runs the selenium standalone we
+ */
+var webdriver_standalone = require("gulp-protractor").webdriver_standalone;
+gulp.task('web-driver', webdriver_standalone);
+
+var webdriver_update = require('gulp-protractor').webdriver_update;
+gulp.task('webdriver_update', webdriver_update);
+
 
 gulp.task('dev-global-create-src-template', function () {
 
@@ -1965,13 +1976,6 @@ gulp.task('prod-global-create-src-template', function () {
 
 gulp.task('prod-activity-allFormsCreate', ['prod-activity-compileHtml'], function () {
 
-   /* var basePath = paths.buildProdActivity;
-    var deletePaths = [
-        basePath + 'app/scripts/!**!/!*.js',
-        '!' + basePath + 'app/scripts/!*.min.js',
-        basePath + 'app/resources/'
-    ];
-    return (del(deletePaths));*/
 
     var basePath = paths.buildProdActivity;
     return pipes.deleteResourcesNonMinFiles(paths.buildProdActivity);

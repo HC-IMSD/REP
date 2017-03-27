@@ -7,8 +7,8 @@
  * Created by dkilty on 13/02/2017.
  */
 
-var dev_company_root_ext_url = "http://localhost:2121/dev/company/companyEnrolEXT-en.html";
-//var dev_dossier_root_ext_url="https://lam-dev.hres.ca/rep_test/companyEXT-en.html";
+var dev_company_root_ext_url = "company/companyEXT-en.html";
+
 
 //var RepContact = require('../../component-definitions/def-cmp-rep-contact')
 var Address = require('../../component-definitions/company/def-cmp-address-record');

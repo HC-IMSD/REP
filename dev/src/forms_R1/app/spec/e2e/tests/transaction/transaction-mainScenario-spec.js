@@ -7,7 +7,7 @@ var transactionData = require('../../../e2e/test-data/transaction.json');
 var lang = "en";
 
 //var dev_transaction_root_en_url = "http://localhost:2121/dev/transaction/transactionEnrol-en.html";
-var dev_transaction_root_en_url = "https://lam-dev.hres.ca/rep-dev/transaction/transactionEnrolEXT-en.html";
+var dev_transaction_root_en_url = "transaction/transactionEXT-en.html";
 https://lam-dev.hres.ca/rep-dev/transactionEXT-en.html
     var transaction_root_en_url = dev_transaction_root_en_url;
 var Address = require('../../component-definitions/common/def-cmp-address-details');
@@ -16,25 +16,26 @@ var Contact= require('../../component-definitions/common/def-cmp-contact-details
 var LifecycleRecord=require('../../component-definitions/transaction/def-cmp-lifecycle-record');
 var addressObj, transactionMain, contactObj, lifecycleRecord;
 
-
+var contactData=require('../../../e2e/test-data/contact.json');
 
 describe('Transaction External Main Test', function () {
 
     beforeAll(function () {
-        console.log("run beforeAll");
+        console.log("run beforeAll for Transaction.....");
         transactionMain = new TransactionMain();
         transactionMain.get(transaction_root_en_url);
         addressObj = new Address();
         contactObj=new Contact();
         lifecycleRecord=new LifecycleRecord();
+
     });
 
 
-    describe('Transaction tests', function () {
+    describe('Transaction test- fill in the form', function () {
 
 
 
-        it('Add an Address', function () {
+        it('Set Address information', function () {
             var formRoot = transactionMain.getRoot();
 
             addressObj.setCityTextValue(formRoot, transactionData.city.typical[lang]);
@@ -48,7 +49,7 @@ describe('Transaction External Main Test', function () {
             expect(addressObj.getCountryListValue(formRoot)).toEqual(transactionData.country.canada[lang]);
 
         });
-        it('Add a contact',function(){
+        it('Set contact information',function(){
             var formRoot = transactionMain.getRoot();
             contactObj.setSalutationByText(formRoot,'Dr.')
             contactObj.setFirstNameValue(formRoot,'John');
@@ -57,6 +58,10 @@ describe('Transaction External Main Test', function () {
             contactObj.setLanguageValue(formRoot,'English');
             contactObj.setPhoneValue(formRoot,'123-345-4444');
             contactObj.setEmailValue(formRoot,'foo@aol.com');
+           /* expect(contactObj.getSalutationValue(record)).toEqual('SALUT_DR');
+            expect(contactObj.getFirstNameValue(record)).toEqual('John');
+            expect(contactObj.getLastNameValue(record)).toEqual('Smith');
+            expect(contactObj.getJobTitleValue(record)).toEqual('Manager');*/
         });
 
         it("Fill in the main Transaction Information",function(){
@@ -81,10 +86,27 @@ describe('Transaction External Main Test', function () {
             lifecycleRecord.setDescriptionSelectValue(record,'Cancellation Letter');
             lifecycleRecord.setDateFiledValue(record,'2007-05-22');
             lifecycleRecord.saveTransactionRecord(record);
+
+
         });
 
 
     });
+
+    describe('Validate the form values that were completed', function () {
+        it('Check if lifecycle record 1 is valid',function(){
+           var record=lifecycleRecord.getRecord(formRoot,0);
+            expect(lifecycleRecord.getControlNumberValue(record)).toEqual('123456');
+            expect(lifecycleRecord.getActivityTypeSelectValue(record)).toEqual('B02-20160301-089');
+            expect(lifecycleRecord.getDescriptionSelectValue(record)).toEqual('CANCEL_LETTER');
+            expect(lifecycleRecord.getDateFiledValue(record)).toEqual('2007-05-22');
+        });
+
+    });
+
+
+
+
 
 });
 

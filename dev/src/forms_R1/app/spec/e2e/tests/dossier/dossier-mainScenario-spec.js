@@ -3,8 +3,8 @@
  */
 
 //var dev_dossier_root_ext_url = "http://localhost:2121/dev/dossier/dossierEnrolEXT-en.html";
-var dev_dossier_root_ext_url = "http://localhost:2121/prod/dossier/dossierEXT-en.html";
-//var dev_dossier_root_ext_url="https://lam-dev.hres.ca/rep_test/dossierEXT-en.html";
+//var dev_dossier_root_ext_url = "http://localhost:2121/prod/dossier/dossierEXT-en.html";
+var dev_dossier_root_ext_url="dossier/dossierEXT-en.html";
 var DossierMain = require('../../component-definitions/dossier/def-cmp-dossier-main');
 var RepContact = require('../../component-definitions/def-cmp-rep-contact');
 var ReferenceProduct = require('../../component-definitions/dossier/def-cmp-reference-product');
