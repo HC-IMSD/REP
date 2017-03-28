@@ -1,4 +1,6 @@
 {
-  "addressListCtrl.addressListForm":"At least one address is",
-  "contactListCtrl.contactListForm":"At least one contact is"
+  "addressListCtrl.addressListForm": "At least one address is",
+  "contactListCtrl.contactListForm": "the Company Representative Information section.",
+  "contactRolesValid": "The selection of manufacturer, mailing, billing, and primary REP contact roles are",
+  "addressRolesValid": "The selection of manufacturer, mailing, and billing roles are"
 }

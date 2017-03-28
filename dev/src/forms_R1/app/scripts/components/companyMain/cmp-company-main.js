@@ -14,7 +14,8 @@
             'filterLists',
             'hpfbConstants',
             'ui.bootstrap',
-            'errorSummaryModule'
+            'errorSummaryModule',
+            'focus-if'
         ])
 })();
 

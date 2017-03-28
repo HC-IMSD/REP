@@ -37,7 +37,7 @@
         vm.contactList = [];
         vm.formAmend = false;
         vm.resetCollapsed = false;//used to signal expanding table collapse
-        vm.updateSummary33=true; //sends signal to update error summary object
+        vm.updateSummary33=0; //sends signal to update error summary object
         vm.showSummary=false;
         vm.columnDef = [
             {
@@ -76,6 +76,7 @@
                 updateRolesConcat();
                 vm.allRolesSelected = vm.isAllContactRolesSelected();
                 vm.isDetailValid=true;
+                vm.updateErrorSummaryState()
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
@@ -88,7 +89,7 @@
             if(changes.errorSummaryUpdate){
 
                 //vm.updateSummary=changes.errorSummaryUpdate.currentValue;
-                console.log("ErrorSummaryState update in contactlist");
+                console.log("ErrorSummaryState update changed in contactlist");
 
                 console.log("start value"+  vm.updateSummary33)
                 vm.updateErrorSummaryState();
@@ -97,9 +98,8 @@
         };
 
         vm.updateErrorSummaryState=function(){
-            console.log("change summarySTate");
-            vm.updateSummary33= !vm.updateSummary33;
-            console.log("end change summarySTate");
+            console.log("change summaryState in ::contactList");
+            vm.updateSummary33= vm.updateSummary33+1;
         };
 
 
@@ -172,6 +172,7 @@
             vm.isDetailValid = true; //case that incomplete record
             vm.allRolesSelected= vm.isAllContactRolesSelected();
             vm.resetCollapsed = !vm.resetCollapsed;
+            vm.updateErrorSummaryState();
 
         };
 

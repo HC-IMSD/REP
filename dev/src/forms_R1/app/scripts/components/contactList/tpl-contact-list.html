@@ -2,19 +2,17 @@
     <div class="row">
     <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="true" name-suffix="contactListCtrl.contactListForm"
                        update-errors="contactListCtrl.updateSummary33" form-preamble="Company Representative Information" ></cmp-error-summary>
-
-        <button ng-click="contactListCtrl.updateErrorSummaryState()">Update</button>
     </div>
     <div>
         <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false"
                ng-model="contactListCtrl.allRolesSelected" required/>
         <label>
-            <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
+           <!-- <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
                         <span class="label label-danger"
                               ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
                             <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
                         </span>
-            </strong>
+            </strong>-->
         </label>
         <cmp-expanding-table list-items="contactListCtrl.contactList" transclude-name="companyContact"
                              reset-to-collapsed="contactListCtrl.resetCollapsed"

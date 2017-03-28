@@ -58,6 +58,7 @@
             PhoneExt: "",
             fax: ""
         };
+        vm.inputModelOptions={updateOn: 'blur'};
         vm.$onInit = function () {
            vm.langList=[ENGLISH,FRENCH];
             /*console.log("init contact details");

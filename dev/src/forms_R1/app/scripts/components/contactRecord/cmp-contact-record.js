@@ -39,6 +39,7 @@
         vm.isEditable = false;
         vm.formAmend = false;
         vm.updateSummary=false;
+        vm.setSummaryFocus=0;
        //TODO get role model from a servide
 
         vm.contactModel={
@@ -71,14 +72,7 @@
         };
         vm.$onInit = function () {
             vm.updateErrorSummaryState();
-            /*//after init do not initialise variables here onchanges is called first
-                var rec=vm.trackRecordCtrl.trackRecord();
-                //only bind if there is a record. Should never happen that there is no record
-                if(rec) {
-                    vm.contactModel = angular.copy(rec);
 
-                    angular.element(saveContact).trigger('focus');
-             }*/
         };
         //todo move to service
         function _getRolesConcat(){
@@ -126,6 +120,7 @@
          */
         vm.delete = function () {
             vm.onDelete({contactId: vm.contactModel.contactId});
+            vm.errorSummaryUpdate()
         };
         /* @ngdoc method -discards the changes and reverts to the model
         *
@@ -180,6 +175,7 @@
             }else{
               vm.savePressed=true;
               vm.updateErrorSummaryState();
+              vm.focusOnSummary();
               vm.errorSummaryUpdate();
               //var myElement = angular.element( document.querySelector('error-section' ))
               //console.log(myElement)
@@ -188,6 +184,11 @@
 
 
         };
+        vm.focusOnSummary=function(){
+            vm.setSummaryFocus= vm.setSummaryFocus+1;
+        };
+
+
         /**
          * @ngdoc method toggles error state to make errors visible
          * @returns {boolean}

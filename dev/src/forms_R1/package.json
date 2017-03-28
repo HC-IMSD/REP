@@ -61,6 +61,7 @@
     "karma-junit-reporter": "^0.2.2",
     "main-bower-files": "^2.5.0",
     "method-override": "^2.1.2",
+    "ng-focus-if": "^1.0.7",
     "protractor": "^1.8.0",
     "protractor-accessibility-plugin": "^0.3.0",
     "q": "^1.1.2",

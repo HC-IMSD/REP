@@ -1,13 +1,13 @@
 <div ng-if="errSummaryCtrl.calcIsVisible()" id="errors-summary{{::errSummaryCtrl.nameAddendum}}" >
-    <section id="error-section" class="alert alert-danger" tabindex="-1">
-        <h2 ng-if="errSummaryCtrl.errorArray.length>1">For&nbsp;the&nbsp;{{errSummaryCtrl.formPreamble}}&nbsp;{{errSummaryCtrl.errorArray.length}} errors were found.</h2>
+    <section id="error-section" class="alert alert-danger" tabindex="-1" focus-if="errSummaryCtrl.isFocusInput" focus-delay="200">
+        <h2 ng-if="errSummaryCtrl.errorArray.length>1">For&nbsp;the&nbsp;{{errSummaryCtrl.formPreamble}}:&nbsp;{{errSummaryCtrl.errorArray.length}} errors were found.</h2>
         <h2 ng-if="errSummaryCtrl.errorArray.length==1">For&nbsp;the&nbsp;{{errSummaryCtrl.formPreamble}}&nbsp;{{errSummaryCtrl.errorArray.length}} error was found.</h2>
         <ul>
             <div ng-repeat="errorRec in errSummaryCtrl.errorArray">
-                <li ng-if="!errorRec.isSummary"><a href="#{{errorRec.name}}">{{errorRec.name||translate}}
+                <li ng-if="!errorRec.isSummary"><a href="#{{errorRec.name}}">{{errorRec.name|translate}}
                     &nbsp;{{errorRec.type |translate}}</a></li>
                 <li ng-if="errorRec.isSummary"><a href="#errors-summary-{{errorRec.name}}">There are errors with
-                    {{errorRec.name||translate}}
+                    {{errorRec.name|translate}}
                 </a></li>
                 <!--     <li><a href="#title1"><span class="prefix">Error&nbsp;1: </span>Title - This field is required.</a></li>-->
             </div>

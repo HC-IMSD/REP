@@ -35,8 +35,7 @@
         </section>
         <div id="master-error">
             <cmp-error-summary form-ref="main.companyEnrolForm" show-errors="true" form-preamble="Company Enrolment Form"
-                               update-errors="main.updateSummary"></cmp-error-summary>
-            <button ng-click="main.updateErrorSummary()">Update</button>
+                               update-errors="main.updateSummary" make-focused="main.updateSummary" name-suffix="main.companyEnrolForm"></cmp-error-summary>
         </div>
         <div>
             <section class="panel panel-primary mrgn-tp-lg">

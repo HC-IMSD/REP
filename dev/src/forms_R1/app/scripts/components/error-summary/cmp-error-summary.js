@@ -26,13 +26,14 @@
                 showErrors:'<',
                 updateErrors:'<',
                 nameSuffix:'@',
-                formPreamble:'@'
+                formPreamble:'@',
+                makeFocused:'<'
 
             }
         });
-    //errorSummaryController.$inject = [];
+    errorSummaryController.$inject = ['$scope'];
 
-    function  errorSummaryController() {
+    function  errorSummaryController($scope) {
         var vm = this;
         vm.parentRef=null;
         vm.targetFormRef=null;
@@ -42,6 +43,7 @@
         vm.isVisible=false;
         vm.nameAddendum="";
         vm.rootError="";
+        vm.isFocusInput=0;
         vm.exclusions={
             "contactListCtrl.contactListForm":"true",
             "contactRec.contactRecForm":"true"
@@ -63,16 +65,22 @@
             }
             if(changes.formPreamble){
                 vm.headingPreamble=changes.formPreamble.currentValue;
-            }
+            };
+
+         /*   <cmp-error-summary form-ref="main.companyEnrolForm" show-errors="true" form-preamble="Company Enrolment Form"
+            update-errors="main.updateSummary" make-focused="main.updateSummary" name-suffix="main.companyEnrolForm"></cmp-error-summary>*/
+
+            //the base form that this error summary is checking for
             if(changes.formRef){
-                console.log("there is a change")
+                console.log("there is a change to the form ref")
                 console.log(changes.formRef.currentValue);
-                //vm.targetFormRef=angular.copy(changes.formErrors.currentValue);
                 console.log(vm.targetFormRef);
 
                 vm.getErrorsSumm(changes.formRef.currentValue.$error,changes.formRef.currentValue.$name);
 
             }
+
+            //TODO remove form target
             if(changes.formTarget){
                 vm.targetFormRef=changes.formTarget.currentValue;
             }
@@ -94,45 +102,60 @@
 
                 }
             }
-
-        };
-        /*vm.$doCheck=function(){
-            console.log("running do check");
-            console.log( vm.targetFormRef);
-            console.log(vm.formErrors);
-            if( vm.formErrors && vm.getErrors==true) {
-                vm.getErrorsSumm( vm.formErrors.$error,""+ vm.formErrors.$name);
+            if(changes.makeFocused){
+                if(angular.isDefined(changes.makeFocused.currentValue)) {
+                    vm.isFocusInput = vm.isFocusInput + 1;
+                }
             }
 
-        };*/
-        vm.calcIsVisible=function(){
-            return(vm.isVisible &&(vm.errorArray && vm.errorArray.length>0))
-
         };
+        /***
+         * Determines if the summary is visible
+         * @returns {boolean|*|Array}
+         */
+        vm.calcIsVisible=function(){
+            var summaryIsVisible=_isErrorSummaryVisible();
+            if(!summaryIsVisible){
+                $scope.$emit('childErrorSummaryHide',+vm.nameAddendum);
+            }
+            return(summaryIsVisible);
+        };
+
+        function _isErrorSummaryVisible(){
+           return (vm.isVisible &&(vm.errorArray && vm.errorArray.length>0));
+        }
+
+        $scope.$on('childErrorSummaryHide', function(event, data) {
+           // $scope.mainData.logs = $scope.mainData.logs + '\nMainController - receive EVENT "' + event.name + '" with message = "' + data.message + '"';
+            if(_isErrorSummaryVisible()) {
+                var errorSummaryBroadcastName = data.message;
+                for (var i = 0; i < vm.errorArray.length; i++) {
+                    var errorRecord=errorArray[i];
+                    if(errorRecord.isSummary && errorRecord.name===errorSummaryBroadcastName){
+                        vm.errorArray.splice(i, 1);
+                    }
+                }
+            }
+        });
 
         vm.getErrorsSumm=function(myformErrors,name) {
             vm.errorArray=[];
             vm.uniqueErrorList={};
              _getErr(myformErrors,vm.uniqueErrorList,name);
 
-                 var temp= Object.keys(vm.uniqueErrorList).map(function (k) {
+                 var newErrors= Object.keys(vm.uniqueErrorList).map(function (k) {
                      return vm.uniqueErrorList[k]
                  });
-            if(!angular.equals(vm.prevValue,temp)){
-                console.log(vm.rootError)
+            if(!angular.equals(vm.prevValue,newErrors)){
                 angular.element(vm.rootError).trigger('focus');
-                vm.errorArray=temp;
+                vm.errorArray=newErrors;
             }
-
-            console.log(vm.errorArray)
-
         };
 
-
+        //gets all the errors from error objects
         function _getErr(errorObj,resultsList,parent){
             var keys = Object.keys(errorObj);
             var newList={};
-            console.log("Number of keys"+keys.length);
             for (var i = 0; i < keys.length; i++) {
                 var record=errorObj[keys[i]];
 
@@ -140,7 +163,6 @@
 
                     if(record[j].$invalid===true && record[j].$name.indexOf('.')>0){
 
-                       // contactListCtrl.contactListForm
                         if(vm.exclusions.hasOwnProperty(record[j].$name)){
                             var result={};
                             result[record[j].$name]={
@@ -159,8 +181,7 @@
                     }else if(record[j].$invalid===true && !resultsList.hasOwnProperty(record[j].$name) ){
                         var result={};
                         result[record[j].$name]={
-                            name:record[j].$name,
-
+                            name:_scrubFieldName(record[j].$name),
                             type:keys[i],
                             parent:parent,
                             concat:parent+'.'+ record[j].$name,
@@ -178,7 +199,20 @@
 
         }
 
-    }
+        function _scrubFieldName(rawName){
+            var separator='_';
+            var index=rawName.lastIndexOf(separator);
+            var cleanedName="";
+            if(index>-1) {
+                cleanedName = rawName.substring(0, index);
+            }else{
+                cleanedName=rawName;
+            }
+            return cleanedName;
+        };
+
+
+    }//end controller
 
 
 
