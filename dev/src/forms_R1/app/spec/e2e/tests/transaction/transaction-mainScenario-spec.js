@@ -4,12 +4,10 @@
 
 
 var transactionData = require('../../../e2e/test-data/transaction.json');
-var lang = "en";
+var lang = "";
+var formType="";
+var transaction_url="";
 
-//var dev_transaction_root_en_url = "http://localhost:2121/dev/transaction/transactionEnrol-en.html";
-var dev_transaction_root_en_url = "transaction/transactionEXT-en.html";
-https://lam-dev.hres.ca/rep-dev/transactionEXT-en.html
-    var transaction_root_en_url = dev_transaction_root_en_url;
 var Address = require('../../component-definitions/common/def-cmp-address-details');
 var TransactionMain = require('../../component-definitions/transaction/def-cmp-transaction-main');
 var Contact= require('../../component-definitions/common/def-cmp-contact-details');
@@ -23,16 +21,34 @@ describe('Transaction External Main Test', function () {
     beforeAll(function () {
         console.log("run beforeAll for Transaction.....");
         transactionMain = new TransactionMain();
-        transactionMain.get(transaction_root_en_url);
         addressObj = new Address();
         contactObj=new Contact();
         lifecycleRecord=new LifecycleRecord();
+        lang=browser.params.lang;
+        formType=browser.params.formType;
+        if(formType==='EXT' && lang==='en'){
+            transaction_url="transaction/transactionEXT-en.html"
+        }else  if(formType==='INT' && lang==='en'){
+            transaction_url="transaction/transactionINT-en.html"
+
+        }
+        else  if(formType==='INT' && lang==='fr'){
+            transaction_url="transaction/transactionINT-fr.html"
+
+        }
+        else  if(formType==='EXT' && lang==='fr'){
+            transaction_url="transaction/transactionEXT-fr.html"
+
+        }else{
+            //error condition
+            transaction_url="";
+        }
+        transactionMain.get(transaction_url);
 
     });
 
 
     describe('Transaction test- fill in the form', function () {
-
 
 
         it('Set Address information', function () {
@@ -43,7 +59,6 @@ describe('Transaction External Main Test', function () {
             addressObj.setStateListValue(formRoot, transactionData.state.typical[lang]);
             addressObj.setPostalCodeTextValue(formRoot, transactionData.postal.canada_lower.input);
             addressObj.setStreetValue(formRoot, transactionData.street.typical[lang]);
-            console.log(addressObj.getCountryListValue(formRoot));
             expect(addressObj.getPostalCodeTextValue(formRoot)).toEqual(transactionData.postal.canada_lower.expect);
             expect(addressObj.getStreetValue(formRoot)).toEqual(transactionData.street.typical[lang]);
             expect(addressObj.getCountryListValue(formRoot)).toEqual(transactionData.country.canada[lang]);
@@ -87,7 +102,6 @@ describe('Transaction External Main Test', function () {
             lifecycleRecord.setDateFiledValue(record,'2007-05-22');
             lifecycleRecord.saveTransactionRecord(record);
 
-
         });
 
 
@@ -95,10 +109,11 @@ describe('Transaction External Main Test', function () {
 
     describe('Validate the form values that were completed', function () {
         it('Check if lifecycle record 1 is valid',function(){
+            var formRoot = transactionMain.getRoot();
            var record=lifecycleRecord.getRecord(formRoot,0);
             expect(lifecycleRecord.getControlNumberValue(record)).toEqual('123456');
             expect(lifecycleRecord.getActivityTypeSelectValue(record)).toEqual('B02-20160301-089');
-            expect(lifecycleRecord.getDescriptionSelectValue(record)).toEqual('CANCEL_LETTER');
+            expect(lifecycleRecord.getDescriptionSelectValue(record)).toEqual('string:CANCEL_LETTER');
             expect(lifecycleRecord.getDateFiledValue(record)).toEqual('2007-05-22');
         });
 

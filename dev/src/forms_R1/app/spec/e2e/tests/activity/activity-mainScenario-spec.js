@@ -2,7 +2,7 @@
  * Created by dkilty on 9/3/2016.
  */
 
-var activity_root_ext_url = "activity/activityEXT-en.html";
+var activity_url = "";
 
 
 var RepContact = require('../../component-definitions/def-cmp-rep-contact');
@@ -10,20 +10,42 @@ var ActivityMain = require('../../component-definitions/def-cmp-activity-main');
 
 
 var contactData=require('../../../e2e/test-data/contact.json');
-
+var lang="";
+var formType="";
 describe('Activity External Form Type Test', function () {
 
     beforeAll(function(){
-       console.log("run beforeAll for activity..")
+       console.log("run beforeAll for activity..");
+        lang=browser.params.lang;
+        formType=browser.params.formType;
+        if(formType==='EXT' && lang==='en'){
+            activity_url="activity/activityEXT-en.html"
+        }else  if(formType==='INT' && lang==='en'){
+            activity_url="activity/activityINT-en.html"
+
+        }
+        else  if(formType==='INT' && lang==='fr'){
+            activity_url="activity/activityINT-fr.html"
+
+        }
+        else  if(formType==='EXT' && lang==='fr'){
+            activity_url="activity/activityEXT-fr.html"
+
+        }else{
+            //error condition
+            activity_url="";
+        }
+
+
     });
 
     it('Activity Root Information Test', function () {
 
         var rootActivityObj = new ActivityMain();
+        rootActivityObj.get(activity_url);
 
         //fill in the activity part
         var rootRef=rootActivityObj.getRoot();
-        rootActivityObj.get(activity_root_ext_url);
         rootActivityObj.setCompanyId('123456');
         rootActivityObj.setDossierId('1D23456');
         rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)',rootRef);

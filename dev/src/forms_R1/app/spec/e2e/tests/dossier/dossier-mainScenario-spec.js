@@ -2,9 +2,6 @@
  * Created by dkilty on 13/02/2017.
  */
 
-//var dev_dossier_root_ext_url = "http://localhost:2121/dev/dossier/dossierEnrolEXT-en.html";
-//var dev_dossier_root_ext_url = "http://localhost:2121/prod/dossier/dossierEXT-en.html";
-var dev_dossier_root_ext_url="dossier/dossierEXT-en.html";
 var DossierMain = require('../../component-definitions/dossier/def-cmp-dossier-main');
 var RepContact = require('../../component-definitions/def-cmp-rep-contact');
 var ReferenceProduct = require('../../component-definitions/dossier/def-cmp-reference-product');
@@ -33,13 +30,29 @@ var drugProduct;
 var tabsCmp;
 var formulations, medIngredient, nonMedIngredient, materialIngredient, containerType, roaRecord, manufactCountry;
 var sourcedIngred, tissuesFluids, animalSrc;
-
+var lang,formType,dossier_url;
 describe('Dossier External Form Type Components Test', function () {
 
     beforeAll(function () {
         console.log("run beforeAll");
         rootDossierObj = new DossierMain();
-        rootDossierObj.get(dev_dossier_root_ext_url);
+        lang=browser.params.lang;
+        formType=browser.params.formType;
+        if(formType==='EXT' && lang==='en'){
+            dossier_url="dossier/dossierEXT-en.html"
+        }else  if(formType==='INT' && lang==='en'){
+            dossier_url="dossier/dossierINT-en.html"
+        }
+        else  if(formType==='INT' && lang==='fr'){
+            dossier_url="dossier/dossierINT-fr.html"
+        }
+        else  if(formType==='EXT' && lang==='fr'){
+            dossier_url="dossier/dossierEXT-fr.html"
+        }else{
+            //error condition
+            dossier_url="";
+        }
+        rootDossierObj.get(dossier_url);
         repContactObj = new RepContact();
         referenceProduct = new ReferenceProduct();
         theraProduct = new TheraProducts();
@@ -55,6 +68,8 @@ describe('Dossier External Form Type Components Test', function () {
         sourcedIngred = new SrcIngedient();
         tissuesFluids = new TissuesFluids();
         animalSrc = new AnimalSrced();
+
+
     });
 
 

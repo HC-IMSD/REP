@@ -1939,11 +1939,18 @@ gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copyData', 'dev-diffForm-copy
 
 
 gulp.task('protractor-testEnv', function () {
-    gulp.src(["app/spec/e2e/tests/**/*.js"])
+    gulp.src([
+         'app/spec/e2e/tests/transaction/*.js',
+         'app/spec/e2e/tests/dossier/*.js',
+         'app/spec/e2e/tests/company/*.js',
+        'app/spec/e2e/tests/activity/*.js'
+    ])
         .pipe(protractor({
             configFile: "./protractorconf.js",
             args: [
-                '--baseUrl', 'https://lam-dev.hres.ca/rep_test/'
+                '--baseUrl', 'https://lam-dev.hres.ca/rep_test/',
+                '--params.lang' ,'en',
+                '--params.formType','EXT'
             ]
         }))
 
