@@ -41,17 +41,17 @@
         vm.showSummary=false;
         vm.columnDef = [
             {
-                label: "FIRST_NAME",
+                label: "FIRSTNAME",
                 binding:"givenName",
                 width:"25"
             },
             {
-                label: "LAST_NAME",
+                label: "LASTNAME",
                 binding:"surname",
                 width:"30"
             },
             {
-                label: "JOB_TITLE",
+                label: "JOBTITLE",
                 binding:"title",
                 width:"25"
             },

@@ -2,8 +2,8 @@
     <ng-form name="contactRec.contactRecForm">
         <div id="errorTest">
             <cmp-error-summary form-ref="contactRec.contactRecForm" show-errors="contactRec.savePressed"
-                               form-preamble="{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}}:"
-                               name-suffix="contactRec.contactRecForm"
+                               form-preamble="{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}}"
+                               name-suffix="contactRec.contactRecForm" set-heading-level="h4"
                                make-focused="contactRec.setSummaryFocus"
                                update-errors="contactRec.updateSummary"></cmp-error-summary>
 

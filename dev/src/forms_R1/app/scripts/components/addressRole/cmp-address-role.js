@@ -131,20 +131,18 @@
          * Specical show error function as relying on a hiddend field
          * @returns {boolean}
          */
-        vm.showErrorMissing = function () {
-            if((vm.roleForm.$touched && vm.roleForm.roleMissing.$invalid) || (vm.showErrors()&&vm.roleForm.roleMissing.$invalid)){
+      /*  vm.showErrorMissing = function () {
+            if((vm.roleForm.$touched && vm.roleForm.roleMissing_vm.$id.$invalid) || (vm.showErrors()&&vm.roleForm.roleMissing.$invalid)){
                 return true
             }
             return false
-        };
+        };*/
         vm.showError = function (ctrl) {
             if ((ctrl.$invalid) || (vm.showErrors() && ctrl.$invalid)) {
                 return true
             }
             return false
         }
-
-
     }
 
 

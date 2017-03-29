@@ -1,18 +1,20 @@
 <ng-form name="contactListCtrl.contactListForm">
     <div class="row">
-    <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="true" name-suffix="contactListCtrl.contactListForm"
-                       update-errors="contactListCtrl.updateSummary33" form-preamble="Company Representative Information" ></cmp-error-summary>
+        <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="true"
+                           name-suffix="contactListCtrl.contactListForm"
+                           update-errors="contactListCtrl.updateSummary33" form-preamble="CONTACT_INFO"
+                           set-heading-level="h4"></cmp-error-summary>
     </div>
     <div>
-        <input type="checkbox" id="contactValid" name="contactRolesValid" ng-show="false"
+        <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" ng-show="false"
                ng-model="contactListCtrl.allRolesSelected" required/>
         <label>
-           <!-- <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
-                        <span class="label label-danger"
-                              ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
-                            <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
-                        </span>
-            </strong>-->
+            <!-- <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
+                         <span class="label label-danger"
+                               ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
+                             <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
+                         </span>
+             </strong>-->
         </label>
         <cmp-expanding-table list-items="contactListCtrl.contactList" transclude-name="companyContact"
                              reset-to-collapsed="contactListCtrl.resetCollapsed"
@@ -22,7 +24,8 @@
             <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
                                 on-update="contactListCtrl.onUpdateContactRecord(contact)"
                                 contact-record="$parent.record" record-index="$parent.$index"
-                                is-amend="contactListCtrl.formAmend" error-summary-update="contactListCtrl.updateErrorSummaryState()"
+                                is-amend="contactListCtrl.formAmend"
+                                error-summary-update="contactListCtrl.updateErrorSummaryState()"
                                 is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                 is-detail-valid="contactListCtrl.setValid(state)">
             </cmp-contact-record>
@@ -31,13 +34,13 @@
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
-            <button name="addContact" class="btn btn-primary"
-                   ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAddContact()">
+            <button name="addContact" class="btn btn-primary" id="addContact_{{::$id}}"
+                    ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAddContact()">
                 {{'ADD_REPRES'|translate}}
             </button>
             <button class="btn btn-default"
-                   data-ng-show="contactListCtrl.newContactFormShow"
-                   ng-click="contactListCtrl.newAdrFormShow=false">
+                    data-ng-show="contactListCtrl.newContactFormShow"
+                    ng-click="contactListCtrl.newAdrFormShow=false">
                 {{'CANCEL'|translate}}
             </button>
         </div>

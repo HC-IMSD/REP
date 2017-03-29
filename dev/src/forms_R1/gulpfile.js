@@ -475,7 +475,8 @@ var translationBaseFiles = {
     addressXml: paths.translations + 'addressXml',
     contactXml: paths.translations + 'contactXml',
     defaultXml: paths.translations + 'defaultXml',
-    temp:paths.translations +'companyError'
+    temp:paths.translations +'companyError',
+    errorSummary:paths.translations +'errorSummary'
 };
 
 
@@ -512,7 +513,8 @@ var companyTranslationFilesBaseList =
         translationBaseFiles.general,
         translationBaseFiles.messages,
         translationBaseFiles.companyInfo,
-        translationBaseFiles.temp
+        translationBaseFiles.temp,
+        translationBaseFiles.errorSummary
     ];
 
 /*** Dossier Form translations***/
