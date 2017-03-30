@@ -1,9 +1,10 @@
 {
   "ADDRESSLISTCTRL.ADDRESSLISTFORM": "in the Address Information section.",
   "CONTACTLISTCTRL.CONTACTLISTFORM": "in the Company Representative Information section.",
-  "CONTACTROLESVALID": "Selection of all roles: manufacturer, mailing, billing, and primary REP ",
-  "ADDRESSROLESVALID": "Selection of all roles: manufacturer, mailing, and billing",
+  "CONTACTROLESVALID": "For Company Representative, selection of  all roles: manufacturer, mailing, billing, and primary REP ",
+  "ADDRESSROLESVALID": "For the Address Information, selection of all roles: manufacturer, mailing, and billing",
   "CONTACTREC.CONTACTRECFORM":"in the Company Representative details",
   "COMPANY_FORM":"Company Enrolment Form",
-  "ROLEMISSING": "Record Role"
+  "ROLEMISSING": "Record Role",
+
 }

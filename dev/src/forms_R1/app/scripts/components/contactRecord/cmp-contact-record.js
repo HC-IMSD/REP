@@ -25,10 +25,10 @@
                 checkRoles:'&',
                 onDelete:'&',
                 isAmend: '<',
-                isDetailValid:'&',
-                isRoleSelected:'&',
-                recordIndex:'<',
-                errorSummaryUpdate:'&'
+                isDetailValid:'&',      /* messages to list whether the record is valid */
+                isRoleSelected:'&',     /* determines if a role has been selected in another record*/
+                recordIndex:'<',        /* used to obtain record index, controlled by list */
+                errorSummaryUpdate:'&' /* used to message that a parent errorSummary needs updating */
             }
         });
         contactRecCtrl.$inject=['$scope'];
@@ -38,8 +38,8 @@
         vm.isContact=true; //used to set the state of the role
         vm.isEditable = false;
         vm.formAmend = false;
-        vm.updateSummary=false;
-        vm.setSummaryFocus=0;
+        vm.updateSummary=0; //triggers and error summary update
+        vm.setSummaryFocus=0; //sets the summary focus
        //TODO get role model from a servide
 
         vm.contactModel={
@@ -68,7 +68,7 @@
         };
 
         vm.updateErrorSummaryState=function(){
-            vm.updateSummary= !vm.updateSummary;
+            vm.updateSummary= vm.updateSummary+1;
         };
         vm.$onInit = function () {
             vm.updateErrorSummaryState();
@@ -171,19 +171,19 @@
               vm.contactRecForm.$setPristine() ;
                 vm.onUpdate({contact: vm.contactModel});
               vm.savePressed=false;
-              vm.errorSummaryUpdate();
+              vm.errorSummaryUpdate(); //updating parent
             }else{
               vm.savePressed=true;
-              vm.updateErrorSummaryState();
+              vm.errorSummaryUpdate(); //updating parent
+              vm.updateErrorSummaryState(); //updating current
               vm.focusOnSummary();
-              vm.errorSummaryUpdate();
-              //var myElement = angular.element( document.querySelector('error-section' ))
-              //console.log(myElement)
-             // angular.element(document.querySelector('#errors-summary-contactRec.contactRecForm' )).trigger('focus');
           }
 
 
         };
+        /***
+         * Signals to focus on the record errorSummary object
+         */
         vm.focusOnSummary=function(){
             vm.setSummaryFocus= vm.setSummaryFocus+1;
         };

@@ -4,5 +4,6 @@
   "ERRORS_FOUND":"errors were found.",
   "ERROR_FOUND":"error was found.",
   "TYPE_REQUIRED":"This field is required.",
-  "TYPE_EMAIL":"Please enter a valid email address."
+  "TYPE_EMAIL":"Please enter a valid email address.",
+  "TYPE_DUPLICATEROLE":"This role has already been selected."
 }

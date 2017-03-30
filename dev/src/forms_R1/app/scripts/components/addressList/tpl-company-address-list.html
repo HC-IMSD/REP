@@ -1,11 +1,17 @@
 <ng-form name="addressListCtrl.addressListForm">
     <div>
-        <input type="checkbox" id="addressValid" name="addressRolesValid" ng-show="false"
+        <div class="row">
+            <cmp-error-summary form-ref="addressListCtrl.addressListForm" show-errors="true"
+                               name-suffix="addressListCtrl.addressListForm"
+                               update-errors="addressListCtrl.updateSummary" form-preamble="ADDRESS_INFO"
+                               set-heading-level="h4"></cmp-error-summary>
+        </div>
+        <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}" ng-show="false"
                ng-model="addressListCtrl.allRolesSelected" required/>
         <label>
-            <strong id=" addressNum-role-error" class="error" ng-if="addressListCtrl.showError()">
+            <strong id=" addressNum-role-error" class="error" ng-show="addressListCtrl.showError()">
                         <span class="label label-danger"
-                              ng-messages="addressListCtrl.addressListForm.addressRolesValid.$error">
+                              ng-messages="addressListCtrl.addressListForm.addressRolesValid_{{::$id}}.$error">
                             <span ng-message="required">{{"MSG_ERR_ADDRESSSROLE"|translate}}</span>
                         </span>
             </strong>
@@ -20,6 +26,7 @@
                                 on-update="addressListCtrl.onUpdateAddressRecord(rec)"
                                 is-amend="addressListCtrl.isAmend" record-index="$parent.$index"
                                 address-record="$parent.record"
+                                error-summary-update="addressListCtrl.updateErrorSummaryState()"
                                 is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
                                 is-detail-valid="addressListCtrl.setValid(state)">
             </cmp-address-record>
@@ -27,7 +34,7 @@
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
-            <button class="btn btn-primary" ng-click="addressListCtrl.addAddress()" name="addAddressBtn" id="addAddressBtn"
+            <button class="btn btn-primary" ng-click="addressListCtrl.addAddress()" name="addAddressBtn_{{::$id}}" id="addAddressBtn_{{::$id}}"
                     ng-disabled="addressListCtrl.disableAddAddress()">{{'ADD_ADDRESS'|translate}}</button>
         </div>
     </div>

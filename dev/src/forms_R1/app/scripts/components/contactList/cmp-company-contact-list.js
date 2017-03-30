@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactList2', ['contactRecord','expandingTable'])
+        .module('contactList2', ['contactRecord','expandingTable','errorSummaryModule'])
 })();
 
 (function () {
@@ -37,7 +37,7 @@
         vm.contactList = [];
         vm.formAmend = false;
         vm.resetCollapsed = false;//used to signal expanding table collapse
-        vm.updateSummary33=0; //sends signal to update error summary object
+        vm.updateSummary=0; //sends signal to update error summary object
         vm.showSummary=false;
         vm.columnDef = [
             {
@@ -83,23 +83,18 @@
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
-                console.log("Show error summary for contactlist "+ vm.showSummary);
                 vm.updateErrorSummaryState()
             }
             if(changes.errorSummaryUpdate){
 
                 //vm.updateSummary=changes.errorSummaryUpdate.currentValue;
-                console.log("ErrorSummaryState update changed in contactlist");
-
-                console.log("start value"+  vm.updateSummary33)
                 vm.updateErrorSummaryState();
-                console.log("ned value"+  vm.updateSummary33)
+
             }
         };
 
         vm.updateErrorSummaryState=function(){
-            console.log("change summaryState in ::contactList");
-            vm.updateSummary33= vm.updateSummary33+1;
+            vm.updateSummary= vm.updateSummary+1;
         };
 
 

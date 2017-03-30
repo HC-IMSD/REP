@@ -24,8 +24,8 @@
                 formRef: '<',
                 showErrors: '<',
                 updateErrors: '<',
-                nameSuffix: '@',
-                formPreamble: '@',
+                nameSuffix: '@', /** What to add to the id of the error summary to be able to find it **/
+                formPreamble: '@', /** What to name the heading should say about the section **/
                 makeFocused: '<',
                 setHeadingLevel: '@'
 
@@ -59,9 +59,18 @@
                 "parent":"",
                 "target":"addContact"
             },
+            "addressRolesValid":{
+                "type":"button",
+                "parent":"",
+                "target":"addAddressBtn"
+            },
             "phoneNumber":{
                 "type":"pattern",
                 "errorType":"MSG_ERR_PHONE_FORMAT"
+            },
+            "country":{
+                "type":"select2",
+                "name":"country"
             }
         };
 
@@ -122,6 +131,7 @@
         vm.calcIsVisible = function () {
             var summaryIsVisible = _isErrorSummaryVisible();
             if (!summaryIsVisible) {
+                //if it is not visible brodcast it so others are hidden
                 $scope.$emit('childErrorSummaryHide', +vm.nameAddendum);
             }
             return (summaryIsVisible);
@@ -251,7 +261,13 @@
                             errorKey = aliasRec.errorType;
                         }
                         break;
-
+                    case "select2":
+                        var searchId = aliasRec.name + "_match" + scopeId;
+                        var destObj = $("#" + searchId);
+                        if (destObj.length>0) {
+                            destId = searchId;
+                        }
+                        break;
                     default:
                         console.warn("No type found " + aliasRec.type);
                         break;

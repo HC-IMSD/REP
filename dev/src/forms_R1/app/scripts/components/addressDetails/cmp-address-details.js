@@ -32,7 +32,8 @@
                 addressRecord: '<',
                 onUpdate: '&', //no longer used TBD should be removed
                 showErrors: '&',
-                isAmend: '<'
+                isAmend: '<',
+                updateErrorSummary:'&'
             }
         });
     addressCtrl.$inject = ['getCountryAndProvinces','$translate','CANADA','USA'];
@@ -61,6 +62,7 @@
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
         vm.hideProvinceText = false;
         vm.countryList= getCountryAndProvinces.getCountries();
+        vm.postalError="MSG_ERR_POSTAL";
         vm.$onInit = function () {
 
             if (vm.addressRecord) {
@@ -99,20 +101,24 @@
             vm.hideProvinceText = getProvinceTextState();
             vm.postalPattern = getPostalPattern();
             vm.hideProvinceDdl = !vm.hideProvinceText;
+            vm.isCountryCanada();
+            vm.updateErrorSummary();
         };
 
         vm.isCountryCanada=function(){
           if(!vm.addressModel || !vm.addressModel.country){
+              vm.postalError="MSG_ERR_POSTAL";
               return false;
           }
-            return(vm.addressModel.country.id===CANADA)
-        };
-        vm.isCountryUsa=function(){
-            if(!vm.addressModel || !vm.addressModel.country){
-                return false;
+           else if(vm.addressModel.country.id===CANADA){
+                vm.postalError="MSG_ERR_POSTAL";
+                return true;
+            }else{
+                vm.postalError="MSG_ERR_ZIP";
             }
-            return(vm.addressModel.country.id===USA)
+            return false
         };
+
         vm.showError = function (ctrl) {
 
             if (!ctrl) {
@@ -157,6 +163,7 @@
                 postal=postal.substring(0,3)+" "+postal.substring(3,postal.length)
             }
             vm.addressModel.postalCode=postal;
+            vm.updateErrorSummary();
         };
         var getProvinceTextState = function () {
 
