@@ -118,7 +118,7 @@
                 }
             }
             if (changes.makeFocused) {
-                if (angular.isDefined(changes.makeFocused.currentValue)) {
+                if ((changes.makeFocused.currentValue)) {
                     vm.isFocusInput = vm.isFocusInput + 1;
                 }
             }
@@ -163,8 +163,6 @@
                 return vm.uniqueErrorList[k]
             });
             if (!angular.equals(vm.prevValue, newErrors)) {
-                console.log(myformErrors)
-                angular.element(vm.rootError).trigger('focus');
                 vm.errorArray = newErrors;
             }
         };

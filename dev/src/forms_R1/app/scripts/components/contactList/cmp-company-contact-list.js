@@ -38,7 +38,7 @@
         vm.formAmend = false;
         vm.resetCollapsed = false;//used to signal expanding table collapse
         vm.updateSummary=0; //sends signal to update error summary object
-        vm.showSummary=false;
+        vm.showSummary=false; //flag to control error summary visibility
         vm.columnDef = [
             {
                 label: "FIRSTNAME",
@@ -81,15 +81,12 @@
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
             }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
+            }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState()
-            }
-            if(changes.errorSummaryUpdate){
-
-                //vm.updateSummary=changes.errorSummaryUpdate.currentValue;
-                vm.updateErrorSummaryState();
-
             }
         };
 
@@ -180,6 +177,7 @@
             //select table row first then make invalid
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
+            vm.showSummary=false;
         };
 
         /**

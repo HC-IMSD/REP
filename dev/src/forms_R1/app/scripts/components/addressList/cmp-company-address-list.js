@@ -136,7 +136,7 @@
         vm.addAddress = function () {
             var defaultAddress = vm.getNewAddress();
             vm.addressList.push(defaultAddress);
-            vm.isDetailsValid = true; //set to true to exapnd
+            vm.isDetailsValid = true; //set to true to exapnd?
             vm.selectRecord = (vm.addressList.length - 1);
             vm.isDetailsValid = false;
         };

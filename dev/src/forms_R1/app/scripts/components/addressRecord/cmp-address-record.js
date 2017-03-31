@@ -29,7 +29,8 @@
                 isDetailValid: '&',
                 isRoleSelected: '&',
                 recordIndex: '<',
-                errorSummaryUpdate: '&' /* used to message that errorSummary needs updating */
+                errorSummaryUpdate: '&', /* used to message that errorSummary needs updating */
+                showErrorSummary:'<'
             }
         });
     addressRecCtrl.$inject = ['$scope', 'CANADA'];
@@ -43,6 +44,7 @@
         vm.updateSummary=0; //triggers and error summary update
         vm.setSummaryFocus=0; //sets the summary focus
         vm.addressRecForm = "";
+        vm.showSummary=false;
         //TODO get  model from a servide
         vm.addressModel = {
             addressID: 1,
@@ -75,6 +77,7 @@
         };
         vm.$onInit = function () {
             vm.updateErrorSummaryState();
+            vm.showSummary=false;
         };
         //TODO move to service
         function _getRolesConcat() {
@@ -131,6 +134,10 @@
                 vm.formAmend = changes.isAmend.currentValue;
                 vm.setEditable();
             }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+            }
+
         };
 
         /**
@@ -211,7 +218,7 @@
          */
         vm.showErrors = function () {
 
-            return (vm.savePressed)
+            return((vm.savePressed ||vm.showSummary));
         };
 
         /**

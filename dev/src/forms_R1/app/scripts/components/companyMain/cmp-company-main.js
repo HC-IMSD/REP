@@ -81,7 +81,8 @@
             //add init code here
             //reset instructions
             vm.alerts = [false, false, false, false, false];
-
+            vm.updateSummary=false;
+            vm.showErrorSummary=false;
         };
 
         vm.$onChanges = function (changes) {
@@ -116,8 +117,8 @@
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            if(vm.disableXML){
-                vm.showErrorSummary=true;
+            if(vm.companyEnrolForm.$invalid){
+                vm.showErrorSummary= vm.showErrorSummary+1;
                 vm.updateErrorSummary();
 
             }else {
@@ -174,10 +175,10 @@
 
         function disableXMLSave() {
             var isApprovedExternal = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern());
-
             vm.disableDraftButton = isApprovedExternal;
-            vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal;
-        }
+            vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal; //used to disable the generate xml button
+            //vm.showErrorSummary=true;
+        };
 
         function disableJSONSave() {
 
@@ -198,7 +199,7 @@
                 angular.extend(vm.company, vm.companyService.getModelInfo());
                 _setComplete();
                 vm.setAmend();
-
+                vm.showErrorSummary=false;
             }
             disableXMLSave();
         }
@@ -290,7 +291,7 @@
         }
 
         vm.updateErrorSummary=function(){
-            vm.updateSummary= !vm.updateSummary;
+            vm.updateSummary= vm.updateSummary+1;
 
         }
 

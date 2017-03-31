@@ -3,19 +3,19 @@
         <div class="row">
             <cmp-error-summary form-ref="addressListCtrl.addressListForm" show-errors="true"
                                name-suffix="addressListCtrl.addressListForm"
-                               update-errors="addressListCtrl.updateSummary" form-preamble="ADDRESS_INFO"
+                               update-errors="addressListCtrl.updateSummary" form-preamble="ADDR_INFO"
                                set-heading-level="h4"></cmp-error-summary>
         </div>
         <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}" ng-show="false"
                ng-model="addressListCtrl.allRolesSelected" required/>
-        <label>
+       <!-- <label>
             <strong id=" addressNum-role-error" class="error" ng-show="addressListCtrl.showError()">
                         <span class="label label-danger"
                               ng-messages="addressListCtrl.addressListForm.addressRolesValid_{{::$id}}.$error">
                             <span ng-message="required">{{"MSG_ERR_ADDRESSSROLE"|translate}}</span>
                         </span>
-            </strong>
-        </label>
+        </strong>
+        </label> -->
 
         <cmp-expanding-table list-items="addressListCtrl.addressList"
                              reset-to-collapsed="addressListCtrl.resetCollapsed"
@@ -27,6 +27,7 @@
                                 is-amend="addressListCtrl.isAmend" record-index="$parent.$index"
                                 address-record="$parent.record"
                                 error-summary-update="addressListCtrl.updateErrorSummaryState()"
+                                show-error-summary="addressListCtrl.showSummary"
                                 is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
                                 is-detail-valid="addressListCtrl.setValid(state)">
             </cmp-address-record>
