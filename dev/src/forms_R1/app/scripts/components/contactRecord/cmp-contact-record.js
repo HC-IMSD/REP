@@ -90,7 +90,7 @@
             /** Messaging for Showing the error summary **/
             if (changes.showErrorSummary) {
                 vm.showSummary = changes.showErrorSummary.currentValue;
-
+                vm.updateErrorSummaryState();
             }
         };
 

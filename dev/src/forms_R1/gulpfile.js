@@ -311,8 +311,8 @@ var companyComponentFolders =
         componentFolders.addressRecord,
         componentFolders.contactRecord,
         componentFolders.importerProducts,
-        componentFolders.dossierIdDetails
-        /*     componentFolders.errorSummary*/
+        componentFolders.dossierIdDetails,
+         componentFolders.errorSummary
     ];
 
 //Dossier Form Components
