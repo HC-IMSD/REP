@@ -44,7 +44,7 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "1.0.0",
+                softwareVersion: "1.1.0",
                 dataChecksum: "",
                 dossierType: "",
                 productName: "",

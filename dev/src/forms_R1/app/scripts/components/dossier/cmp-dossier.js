@@ -124,6 +124,7 @@
                 self.dossierModel = self.dossierService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
+                self.dossierForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
             self.showNoRefReError();
@@ -267,6 +268,7 @@
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), self.dossierService.getRootTagName());
             self.showAllErrors = false;
+            self.dossierForm.$setPristine();
         };
 
 
@@ -278,8 +280,10 @@
         function _transformFile() {
             updateDate();
             if (!self.isExtern()) {
-                self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMajorVersion(self.dossierModel.enrolmentVersion);
-                self.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                if(!self.dossierForm.$pristine) {
+                    self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMajorVersion(self.dossierModel.enrolmentVersion);
+                    self.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                }
                 // updateModelOnApproval(); //updates all the amend
             } else {
 
@@ -311,7 +315,8 @@
             if (self.dossierModel.enrolmentVersion) {
                 filename = filename + separator + self.dossierModel.enrolmentVersion;
             }
-            return filename;
+            filename= filename.replace(".",separator);
+            return filename.toLowerCase();
         }
 
         /**

@@ -7,8 +7,8 @@
  * Created by dkilty on 13/02/2017.
  */
 
-var dev_company_root_ext_url = "http://localhost:2121/dev/company/companyEnrolEXT-en.html";
-//var dev_dossier_root_ext_url="https://lam-dev.hres.ca/rep_test/companyEXT-en.html";
+var company_url,lang,formType;
+
 
 //var RepContact = require('../../component-definitions/def-cmp-rep-contact')
 var Address = require('../../component-definitions/company/def-cmp-address-record');
@@ -23,7 +23,24 @@ describe('Company External Main Test', function () {
     beforeAll(function () {
         console.log("run beforeAll");
         companyMain = new CompanyMain();
-        companyMain.get(dev_company_root_ext_url);
+        lang=browser.params.lang;
+        formType=browser.params.formType;
+        if(formType==='EXT' && lang==='en'){
+            company_url="company/companyEXT-en.html"
+        }else  if(formType==='INT' && lang==='en'){
+            company_url="company/companyINT-en.html"
+        }
+        else  if(formType==='INT' && lang==='fr'){
+            company_url="company/companyINT-fr.html"
+        }
+        else  if(formType==='EXT' && lang==='fr'){
+            company_url="comapny/companyEXT-fr.html"
+        }else{
+            //error condition
+            company_url="";
+        }
+
+        companyMain.get(company_url);
         addressObj = new Address();
         contactObj=new Contact();
     });

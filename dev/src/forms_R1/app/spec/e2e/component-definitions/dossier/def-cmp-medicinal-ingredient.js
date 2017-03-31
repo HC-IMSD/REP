@@ -134,7 +134,7 @@ var MedIngredient=function(){
     this.getStrengthValue=function(record){
         return record.element(by.model(_strengthModelString)).getAttribute('value');
     };
-    this.setUnitsTextValue=function(record) {
+    this.getUnitsTextValue=function(record) {
         return record.element(by.model(_unitsModelString)).getAttribute('value');
     };
     this.getUnitsOtherTextValue=function(record) {
@@ -165,7 +165,7 @@ var MedIngredient=function(){
 
 
     this.saveMedicinalIngredient=function(record){
-        record.element(By.model(_saveRecordButtonString)).sendKeys(protractor.Key.ENTER);
+        record.element(By.name(_saveRecordButtonString)).sendKeys(protractor.Key.ENTER);
     };
 
 

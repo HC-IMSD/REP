@@ -164,7 +164,8 @@
         vm.saveXML = function () {
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
-            _setComplete()
+            _setComplete();
+            vm.activityEnrolForm.$setPristine();
         };
 
 
@@ -224,10 +225,11 @@
                 filename = filename + separator + vm.activityRoot.dstsControlNumber;
             }
             if (vm.activityRoot.enrolmentVersion) {
-                //var parts = vm.activityRoot.enrolmentVersion.split('.');
+
                 filename = filename + separator + vm.activityRoot.enrolmentVersion;
             }
-            return filename;
+            filename=filename.replace(".",separator);
+            return filename.toLowerCase();
         }
 
         /**
@@ -236,9 +238,11 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
-                vm.activityRoot.applicationType = APPROVED_TYPE;
-                updateModelOnApproval(); //updates all the amend
+                if(!vm.activityEnrolForm.$pristine) {
+                    vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
+                    vm.activityRoot.applicationType = APPROVED_TYPE;
+                    updateModelOnApproval(); //updates all the amend
+                }
             } else {
                 vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.activityRoot.enrolmentVersion);
             }
@@ -298,6 +302,7 @@
                 vm.activityRoot = {};
                 vm.activityRoot = vm.activityService.getModelInfo();
                 _setComplete();
+                vm.activityEnrolForm.$setDirty();
             }
             vm.showAllErrors = true;
             disableXMLSave();

@@ -65,7 +65,7 @@
          */
         function _loadFeeType(){
             var deferred = $q.defer();
-            var feeClassUrl ="data/feeClass.json";
+            var feeClassUrl ="../data/feeClass.json";
             $http.get(feeClassUrl).
             success(function(data, status, headers, config) {
                 var lang = $translate.proposedLanguage() || $translate.use();
@@ -109,7 +109,7 @@
          */
         function _loadRaType(){
             var deferred = $q.defer();
-            var raTypeUrl ="data/raType.json";
+            var raTypeUrl ="../data/raType.json";
             $http.get(raTypeUrl).
             success(function(data, status, headers, config) {
                 var lang = $translate.proposedLanguage() || $translate.use();

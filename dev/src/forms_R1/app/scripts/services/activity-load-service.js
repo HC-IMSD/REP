@@ -5,20 +5,20 @@
 (function () {
     'use strict';
     angular
-        .module('activityLoadService', ['activityLists'])
+        .module('activityLoadService', ['activityLists','hpfbContants'])
 })();
 
 (function () {
     'use strict';
     angular
         .module('activityLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'ActivityListFactory', function ($http, $q, $filter, ActivityListFactory) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'ActivityListFactory','RELATIVE_FOLDER_DATA', function ($http, $q, $filter, ActivityListFactory,RELATIVE_FOLDER_DATA) {
 
             return function (options) {
                 var deferred = $q.defer();
-                var dataFolder = "data/"; //relative folder to the data
-                var feeClassUrl = dataFolder + "feeClass.json";
-                var raTypeUrl = dataFolder + "raType.json";
+               // var dataFolder = "../data/"; //relative folder to the data
+                var feeClassUrl = RELATIVE_FOLDER_DATA + "feeClass.json";
+                var raTypeUrl = RELATIVE_FOLDER_DATA + "raType.json";
                 var resultTranslateList = {};
 
 

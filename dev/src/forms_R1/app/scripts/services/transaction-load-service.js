@@ -12,13 +12,12 @@
     'use strict';
     angular
         .module('transactionLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA','OTHER', 'getContactLists','TransactionLists', function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, OTHER ,getContactLists,TransactionLists) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA','OTHER','RELATIVE_FOLDER_DATA', 'getContactLists','TransactionLists', function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, OTHER,RELATIVE_FOLDER_DATA, getContactLists,TransactionLists) {
 
             return function (options) {
                 var deferred = $q.defer();
-                var dataFolder = "data/"; //relative forlder to the data
-                var countryUrl = dataFolder + "countries.json";
-                var raTypeUrl=dataFolder + "raType.json";
+                var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
+                var raTypeUrl=RELATIVE_FOLDER_DATA + "raType.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {

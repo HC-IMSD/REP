@@ -83,7 +83,7 @@
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
                         date_saved: today,
-                        software_version: "1.0.0",
+                        software_version: "1.1.0",
                         data_checksum: jsonObj.dataChecksum,
                         is_ectd: jsonObj.isEctd
                     }

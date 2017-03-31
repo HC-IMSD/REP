@@ -52,10 +52,17 @@ var MainActivity = function () {
         browser.get(value);
         //cannot bind until you have and instance of the browser set
         browser.selectOption=uiUtil.selectOption.bind(browser);
-        browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
+        browser.UISelectSearch=uiUtil.UISelectSearch.bind(browser);
+        //browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
         browser.getUISelectModelValue=uiUtil.getUISelectModelValue.bind(browser);
         browser.driver.manage().window().maximize();
     };
+
+    this.getRoot = function () {
+        return element(by.id('app-root'));
+
+    };
+
     //model value of UI select
     this.getRegActivityModelValue=function(){
         return browser.getUISelectModelValue(_regActivityModelElement,_regActivityModelString);
@@ -67,25 +74,29 @@ var MainActivity = function () {
     this.setDossierId = function (value) {
         dossierIdElement.sendKeys(value);
     };
-    this.setActivityLeadValue=function(value){
+    this.setActivityLeadValue=function(value,parent){
         //assumes selectOPtion prebound
-         browser.selectOption(by.model(_activityLeadModel), value);
+         browser.selectOption(by.model(_activityLeadModel), value,parent);
     };
-    this.setRegActivityValue=function(value){
+    this.setRegActivityValue=function(value,parent){
         //assumes selectOPtion prebound
-        browser.getUISelectOption(by.model(_regActivityModelString), value);
+       // browser.selectOption(by.model(_regActivityModelString),value,parent)
+        var selectList=parent.element(by.model(_regActivityModelString));
+        browser.UISelectSearch(selectList,value);
+
+        //browser.getUISelectOption(by.model(_regActivityModelString), value);
     };
-    this.setFeeClassByText = function (value) {
-        browser.selectOption(by.model(_feeClassModelString), value);
+    this.setFeeClassByText = function (value,parent) {
+        browser.selectOption(by.model(_feeClassModelString), value,parent);
     };
     this.setReasonFiling = function (value) {
         _reasonFiling.sendKeys(value);
     };
-    this.setThirdPartyByText = function (value) {
-        browser.selectOption(by.model(_thirdPartyModelString), value);
+    this.setThirdPartyByText = function (value,parent) {
+        browser.selectOption(by.model(_thirdPartyModelString), value,parent);
     };
-    this.setAdminSubmissionByText = function (value) {
-        browser.selectOption(by.model(_adminSubModelString), value);
+    this.setAdminSubmissionByText = function (value,parent) {
+        browser.selectOption(by.model(_adminSubModelString), value,parent);
     };
     this.setRelatedActCompanyName = function (value) {
         _relatedAct_companyNameElement.sendKeys(value);
@@ -94,22 +105,26 @@ var MainActivity = function () {
     this.setRelatedActDateCleared = function (value) {
         _relatedAct_dateClearedElement.sendKeys(value);
     };
-    this.setRelatedActRegActivityValue=function(value){
+    this.setRelatedActRegActivityValue=function(value,parent){
         //assumes selectOPtion prebound
-        browser.getUISelectOption(by.model( _relatedAct_regActivityModelString), value);
+       // browser.getUISelectOption(by.model( _relatedAct_regActivityModelString), value);
+        var selectList=parent.element(by.model(_relatedAct_regActivityModelString));
+        browser.UISelectSearch(selectList,value);
+
+        //browser.selectOption(by.model(_relatedAct_regActivityModelString),value,parent)
     };
     this.setRelatedActControlNumber = function (value) {
         _relatedAct_controlNumberElement.sendKeys(value);
     };
-    this.setRelatedActAdminLicenseByText = function (value) {
-        browser.selectOption(by.model(_relatedAct_adminLicenseSubmissionModelString), value);
+    this.setRelatedActAdminLicenseByText = function (value,parent) {
+        browser.selectOption(by.model(_relatedAct_adminLicenseSubmissionModelString), value,parent);
     };
     this.setRelatedIsDinTransfer= function () {
         _relatedAct_dinTransferCheck.click()
     };
 
     this.setRelatedIsNotLasa= function () {
-        _relatedAct_dinTransferCheck.click();
+        _relatedAct_notLasaCheck.click();
     };
 
     //=====================GETTERS==================================================

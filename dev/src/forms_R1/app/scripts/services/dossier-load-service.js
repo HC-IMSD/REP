@@ -13,57 +13,58 @@
     'use strict';
     angular
         .module('dossierLoadModule')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'DossierLists', 'OTHER', function ($http, $q, $filter, getCountryAndProvinces, DossierLists, OTHER) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'DossierLists', 'OTHER', 'RELATIVE_FOLDER_DATA', function ($http, $q, $filter, getCountryAndProvinces, DossierLists, OTHER, RELATIVE_FOLDER_DATA) {
 
             return function (options) {
                 var deferred = $q.defer();
-                var dataFolder = "data/"; //relative forlder to the data
-                var roaUrl = dataFolder + "roa.json";
-                var countryUrl = dataFolder + "countries.json";
-                var nanoUrl = "data/nanomaterials.json";
-                var unitsUrl = dataFolder + "units.json";
-                var dosageFormUrl = dataFolder + "dosageForm.json";
+                //var dataFolder = "data/"; //relative forlder to the data
+                var roaUrl = RELATIVE_FOLDER_DATA + "roa.json";
+                var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
+                var nanoUrl = RELATIVE_FOLDER_DATA+"nanomaterials.json";
+                var unitsUrl = RELATIVE_FOLDER_DATA + "units.json";
+                var dosageFormUrl = RELATIVE_FOLDER_DATA + "dosageForm.json";
+                var activeUrl= RELATIVE_FOLDER_DATA +"activeIngred.json";
                 var resultTranslateList = {};
                 $http.get(unitsUrl)
                     .then(function (response) {
                         //PROCESS units list. Not creating translate list
-                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(),options.key);
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
                         DossierLists.createUnitsList(newList);
                         //not adding units to translation
                         return $http.get(countryUrl); //country list load
                     })
                     .then(function (response) {
                         //PROCESS country list data
-                        var newList =  _createSortedArray(response.data,options.key);
+                        var newList = _createSortedArray(response.data, options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         getCountryAndProvinces.createCountryList(newList);
-                       angular.extend(resultTranslateList, translateList);
+                        angular.extend(resultTranslateList, translateList);
                         return $http.get(nanoUrl); //nanomaterial load
 
                     }).then(function (response) {
-                        var newList =  _createNewSortedArrayWithOther(response.data, DossierLists.getNanoPrefix(),options.key);
-                        var translateList = _createTranslateList(newList, options.key);
-                        DossierLists.createNanomaterialList(newList);
-                        angular.extend(resultTranslateList, translateList);
-                        return $http.get(dosageFormUrl); //dosage form list Load contains both languages
-                    })
+                    var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getNanoPrefix(), options.key);
+                    var translateList = _createTranslateList(newList, options.key);
+                    DossierLists.createNanomaterialList(newList);
+                    angular.extend(resultTranslateList, translateList);
+                    return $http.get(dosageFormUrl); //dosage form list Load contains both languages
+                })
                     .then(function (response) {
                         //PROCESSING: DOSAGE FORM list
-                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(),options.key);
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(), options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         DossierLists.createDosageFormList(newList); //for display
                         angular.extend(resultTranslateList, translateList);
-                        return $http.get("data/activeIngred.json"); //active ingredient list load
+                        return $http.get(activeUrl); //active ingredient list load
                     }).then(function (response) {
                     DossierLists.setActiveList(response.data);
                     return $http.get(roaUrl); //roa load
                 }).then(function (response) {
-                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(),options.key);
-                        var translateList = _createTranslateList(newList, options.key);
-                        DossierLists.createRoaList(newList); //for display
-                        angular.extend(resultTranslateList, translateList);
-                        return response.data;
-                    })
+                    var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(), options.key);
+                    var translateList = _createTranslateList(newList, options.key);
+                    DossierLists.createRoaList(newList); //for display
+                    angular.extend(resultTranslateList, translateList);
+                    return response.data;
+                })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
                         console.warn("An error occurred with Dossier List Load: " + error);
@@ -124,12 +125,12 @@
              * @returns {Array}
              * @private
              */
-            function _createNewSortedArrayWithOther(jsonList, prefix,lang) {
+            function _createNewSortedArrayWithOther(jsonList, prefix, lang) {
 
                 var newList = _createNewPrefixList(jsonList, prefix);
                 //got the new list, sort it by the current language
-                if(!lang) lang='en'; //TODO magic number
-                var result=_createSortedArray(newList,lang);
+                if (!lang) lang = 'en'; //TODO magic number
+                var result = _createSortedArray(newList, lang);
                 //add Other to the beginning of the array
                 result.unshift({"id": OTHER, "en": "Other", "fr": "Autre"});
                 return result;
@@ -142,9 +143,9 @@
              * @returns {Array}
              * @private
              */
-            function _createSortedArray(jsonList,lang){
+            function _createSortedArray(jsonList, lang) {
                 var result = [];
-                angular.forEach($filter('orderByLocale')(jsonList,lang), function (sortedObject) {
+                angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
                     if (sortedObject.key !== OTHER) {
                         result.push(sortedObject);
                     }

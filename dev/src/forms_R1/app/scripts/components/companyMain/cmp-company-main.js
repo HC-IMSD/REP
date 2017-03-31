@@ -125,6 +125,7 @@
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
                 vm.showErrorSummary=true;
+                vm.companyEnrolForm.$setPristine();
             }
         };
 
@@ -148,10 +149,10 @@
                 filename = filename + separator+ vm.company.companyId;
             }
             if (vm.company.enrolmentVersion) {
-                //var parts = vm.company.enrolmentVersion.split('.')
-                filename = filename + separator+ vm.company.enrolmentVersion;
+                filename = filename + separator+  vm.company.enrolmentVersion;
             }
-            return filename;
+            filename=filename.replace(".",separator);
+            return filename.toLowerCase();
         }
 
         /**
@@ -160,9 +161,11 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                vm.company.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.company.enrolmentVersion);
-                vm.company.applicationType = ApplicationInfoService.prototype.getApprovedType();
-                updateModelOnApproval();
+                if(!vm.companyEnrolForm.$pristine) {
+                    vm.company.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.company.enrolmentVersion);
+                    vm.company.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                    updateModelOnApproval();
+                }
             } else {
                 vm.company.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.company.enrolmentVersion)
             }
@@ -200,6 +203,8 @@
                 _setComplete();
                 vm.setAmend();
                 vm.showErrorSummary=false;
+                vm.companyEnrolForm.$setDirty();
+
             }
             disableXMLSave();
         }

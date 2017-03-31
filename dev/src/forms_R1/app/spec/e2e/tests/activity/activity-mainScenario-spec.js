@@ -2,18 +2,7 @@
  * Created by dkilty on 9/3/2016.
  */
 
-
-
-var devUrl = {
-    activityExternalEn: "http://localhost:2121/dev/activity/activityEnrolEXT-en.html"
-
-};
-var prodUrl = {
-    activityExternalEn: "http://localhost:2121/prod/activityEnrolEXT-en.html"
-
-};
-
-var dev_activity_root_ext_url = "http://localhost:2121/dev/activity/activityEnrolEXT-en.html";
+var activity_url = "";
 
 
 var RepContact = require('../../component-definitions/def-cmp-rep-contact');
@@ -21,32 +10,55 @@ var ActivityMain = require('../../component-definitions/def-cmp-activity-main');
 
 
 var contactData=require('../../../e2e/test-data/contact.json');
-
+var lang="";
+var formType="";
 describe('Activity External Form Type Test', function () {
 
     beforeAll(function(){
-       console.log("run beforeAll")
+       console.log("run beforeAll for activity..");
+        lang=browser.params.lang;
+        formType=browser.params.formType;
+        if(formType==='EXT' && lang==='en'){
+            activity_url="activity/activityEXT-en.html"
+        }else  if(formType==='INT' && lang==='en'){
+            activity_url="activity/activityINT-en.html"
+
+        }
+        else  if(formType==='INT' && lang==='fr'){
+            activity_url="activity/activityINT-fr.html"
+
+        }
+        else  if(formType==='EXT' && lang==='fr'){
+            activity_url="activity/activityEXT-fr.html"
+
+        }else{
+            //error condition
+            activity_url="";
+        }
+
+
     });
 
     it('Activity Root Information Test', function () {
 
         var rootActivityObj = new ActivityMain();
+        rootActivityObj.get(activity_url);
 
         //fill in the activity part
-        rootActivityObj.get(dev_activity_root_ext_url);
+        var rootRef=rootActivityObj.getRoot();
         rootActivityObj.setCompanyId('123456');
         rootActivityObj.setDossierId('1D23456');
-        rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
-        rootActivityObj.setActivityLeadValue("Drug Master File");
-        rootActivityObj.setFeeClassByText("New active substance");
+        rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)',rootRef);
+        rootActivityObj.setActivityLeadValue("Drug Master File",rootRef);
+        rootActivityObj.setFeeClassByText("New active substance",rootRef);
         rootActivityObj.setReasonFiling("This is the reason for filing. \n\n This is a new line.");
-        rootActivityObj.setThirdPartyByText("No");
-        rootActivityObj.setAdminSubmissionByText("Yes");
+        rootActivityObj.setThirdPartyByText("No",rootRef);
+        rootActivityObj.setAdminSubmissionByText("Yes",rootRef);
 
         rootActivityObj.setRelatedActCompanyName("Related Company Name");
         rootActivityObj.setRelatedActDateCleared("2007-11-21");
-        rootActivityObj.setRelatedActAdminLicenseByText("No");
-        rootActivityObj.setRelatedActRegActivityValue("NC (Notifiable Change)");
+        rootActivityObj.setRelatedActAdminLicenseByText("No",rootRef);
+        rootActivityObj.setRelatedActRegActivityValue("NC (Notifiable Change)",rootRef);
         rootActivityObj.setRelatedActControlNumber("1234556");
 
         rootActivityObj.setRelatedIsDinTransfer();
@@ -71,52 +83,56 @@ describe('Activity External Form Type Test', function () {
 
 
     var repContactObj= new RepContact();
-    it('Add Rep Contact', function () {
-        repContactObj.addRepContact();
-        expect(repContactObj.getSalutationValue()).toEqual('?');
-        expect(repContactObj.getFirstNameValue()).toEqual('');
-        expect(repContactObj.getInitialsValue()).toEqual('');
-        expect(repContactObj.getLastNameValue()).toEqual('');
-        expect(repContactObj.getJobTitleValue()).toEqual('');
-        expect(repContactObj.getPhoneValue()).toEqual('');
-        expect(repContactObj.getPhoneExtValue()).toEqual('');
-        expect(repContactObj.getLanguageValue()).toEqual('?');
+    describe('Rep Contact Tests', function () {
+        it('Add Rep Contact', function () {
 
-        repContactObj.setSalutationByText(contactData.salutation.MRS.en);
-        repContactObj.setFirstNameValue("John");
-        repContactObj.setInitialsValue("I");
-        repContactObj.setLastNameValue("Smith");
-        repContactObj.setJobTitleValue("Job Title");
-        repContactObj.setPhoneValue("435-123-8765");
-        repContactObj.setEmailValue("foo@google.ca");
-        repContactObj.setLanguageValue("English");
+            repContactObj.addRepContact();
+            var record = repContactObj.getRecord(0);
+            expect(repContactObj.getFirstNameValue(record)).toEqual('');
+            expect(repContactObj.getSalutationValue(record)).toEqual('?');
+            expect(repContactObj.getInitialsValue(record)).toEqual('');
+            expect(repContactObj.getLastNameValue(record)).toEqual('');
+            expect(repContactObj.getJobTitleValue(record)).toEqual('');
+            expect(repContactObj.getPhoneValue(record)).toEqual('');
+            expect(repContactObj.getPhoneExtValue(record)).toEqual('');
+            expect(repContactObj.getLanguageValue(record)).toEqual('?');
+            repContactObj.setSalutationByText(record, contactData.salutation.MRS.en);
+            repContactObj.setFirstNameValue(record, "John");
+            repContactObj.setInitialsValue(record, "I");
+            repContactObj.setLastNameValue(record, "Smith");
+            repContactObj.setJobTitleValue(record, "Job Title");
+            repContactObj.setPhoneValue(record, "435-123-8765");
+            repContactObj.setEmailValue(record, "foo@google.ca");
+            repContactObj.setLanguageValue(record, "English");
 
-        expect(repContactObj.getSalutationValue()).toEqual('string:'+contactData.salutation.MRS.expect);
-        expect(repContactObj.getFirstNameValue()).toEqual('John');
-        expect(repContactObj.getInitialsValue()).toEqual('I');
-        expect(repContactObj.getLastNameValue()).toEqual(contactData.lastNames.typical);
-        expect(repContactObj.getJobTitleValue()).toEqual('Job Title');
-        expect(repContactObj.getPhoneValue()).toEqual('435-123-8765');
-        expect(repContactObj.getLanguageValue()).toEqual('string:en');
+            expect(repContactObj.getSalutationValue(record)).toEqual('string:' + contactData.salutation.MRS.expect);
+            expect(repContactObj.getFirstNameValue(record)).toEqual('John');
+            expect(repContactObj.getInitialsValue(record)).toEqual('I');
+            expect(repContactObj.getLastNameValue(record)).toEqual(contactData.lastNames.typical);
+            expect(repContactObj.getJobTitleValue(record)).toEqual('Job Title');
+            expect(repContactObj.getPhoneValue(record)).toEqual('435-123-8765');
+            expect(repContactObj.getLanguageValue(record)).toEqual('string:en');
 
-        repContactObj.saveRepContact();
+            repContactObj.saveRepContact();
 
+        });
+        it('Open First Rep Contact Record Check Value are the same', function () {
+
+            //get the first REP record
+            // var repPrimary = element(by.repeater("record in expandTblCtrl.listItems").row(0));
+            var record = repContactObj.getRecord(0);
+            repContactObj.clickRow(0); //expand the first row
+            expect(repContactObj.isRecordVisible(0)).toBeTruthy();
+            //check that the values have not changed from before the save
+            expect(repContactObj.getFirstNameValue(record)).toEqual('John');
+            expect(repContactObj.getInitialsValue(record)).toEqual('I');
+            expect(repContactObj.getLastNameValue(record)).toEqual('Smith');
+            expect(repContactObj.getJobTitleValue(record)).toEqual('Job Title');
+            expect(repContactObj.getPhoneValue(record)).toEqual('435-123-8765');
+            expect(repContactObj.getLanguageValue(record)).toEqual('string:en');
+            expect(repContactObj.getPhoneExtValue(record)).toEqual('');
+        });
     });
-    it('Open First Rep Contact Record Check Value are the same', function () {
-
-        //get the first REP record
-        var repPrimary=element(by.repeater("record in expandTblCtrl.listItems").row(0));
-        repPrimary.sendKeys(protractor.Key.ENTER);
-        //check that the values have not changed from before the save
-        expect(repContactObj.getFirstNameValue()).toEqual('John');
-        expect(repContactObj.getInitialsValue()).toEqual('I');
-        expect(repContactObj.getLastNameValue()).toEqual('Smith');
-        expect(repContactObj.getJobTitleValue()).toEqual('Job Title');
-        expect(repContactObj.getPhoneValue()).toEqual('435-123-8765');
-        expect(repContactObj.getLanguageValue()).toEqual('string:en');
-        expect(repContactObj.getPhoneExtValue()).toEqual('');
-    });
-
 
 
 });

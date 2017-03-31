@@ -48,7 +48,6 @@ var LifecycleRecord = function () {
     };
 
 
-
     this.setDateFiledValue = function (parent, value) {
         parent.element(by.model(_dateFiled_modelString)).sendKeys(value);
 
@@ -103,7 +102,7 @@ var LifecycleRecord = function () {
         parent.element(by.model(_endDateValue_modelString)).sendKeys(value);
 
     };
-    this.getEndtDateValue = function (parent) {
+    this.getEndDateValue = function (parent) {
         return parent.element(by.model(_endDateValue_modelString)).getAttribute('value');
 
     };
