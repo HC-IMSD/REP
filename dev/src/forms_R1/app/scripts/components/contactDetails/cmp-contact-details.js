@@ -39,34 +39,20 @@
         vm.langCorresppond=[ENGLISH,FRENCH];
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.contactModel = {
-            isDetailValid: false,
-            contactId: "",
-            amendRecord: false,
-            addressRole: {
-                manufacturer: false,
-                mailing: false,
-                billing: false,
-                importer: false
-            },
-            contactRole: "",
             salutation: "",
             givenName: "",
             surname: "",
             initials: "",
             title: "",
             phone: "",
-            PhoneExt: "",
+            phoneExt: "",
             fax: ""
         };
         vm.$onInit = function () {
            vm.langList=[ENGLISH,FRENCH];
-            /*console.log("init contact details");
-           if (vm.contactRecord) {
-                //doesn't copy as this is a dumb component
-                vm.contactModel = vm.contactRecord;
-             }*/
+
         };
-        //TODO rename
+
         vm.$onChanges=function(changes){
             if(changes.contactRecord){
                 vm.contactModel = changes.contactRecord.currentValue;
