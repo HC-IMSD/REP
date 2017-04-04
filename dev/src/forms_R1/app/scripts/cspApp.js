@@ -8,7 +8,8 @@
     angular
         .module('cspApp', [
             'pascalprecht.translate',
-            'translations'
+            'translations',
+            'cspMain'
         ])
 })();
 (function () {

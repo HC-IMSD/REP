@@ -7,7 +7,9 @@
 
     angular
         .module('cspMain', [
-            'hpfbConstants'
+            'hpfbConstants',
+            'cspService',
+            'cspApplicant'
         ]);
 
 })();
@@ -26,10 +28,36 @@
             }
         });
 
-    cspMainCtrl.$inject = ['INTERNAL_TYPE', 'EXTERNAL_TYPE'];
-    function cspMainCtrl(INTERNAL_TYPE, EXTERNAL_TYPE) {
+    cspMainCtrl.$inject = ['CspService','INTERNAL_TYPE', 'EXTERNAL_TYPE'];
+    function cspMainCtrl(CspService,INTERNAL_TYPE, EXTERNAL_TYPE) {
 
         var vm = this;
+        vm.saveXMLLabel = "SAVE_DRAFT"; //used to dynamically label save button
+
+        /**
+         * Called after onChanges evnet, initializes
+         */
+        vm.$onInit=function(){
+            vm.modelService = new CspService(); //create the service
+            vm.cspModel = vm.modelService.getModelInfo(); //the model
+            console.log(vm.modelService.getModelInfo())
+
+        };
+
+        /**
+         * Called on binding changes
+         */
+        vm.$onChanges = function (changes) {
+
+            if (changes.formType) {
+                vm.userType = changes.formType.currentValue;
+                if (vm.userType == INTERNAL_TYPE) {
+                    vm.saveXMLLabel = "APPROVE_FINAL"
+                } else {
+                    vm.saveXMLLabel = "SAVE_DRAFT"
+                }
+            }
+        };
 
     }
 })();
