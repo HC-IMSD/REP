@@ -16,10 +16,13 @@
     angular
         .module('cspHCOnly')
         .component('cmpCspHcOnly', {
-            templateUrl: 'app/scripts/components/folder-name/tpl-name.html',
+            templateUrl: 'app/scripts/components/cspHealthCanadaOnly/tpl-csp-hc-only.html',
             controller: hcOnlyController,
             controllerAs: 'hcOnlyCtrl',
-            bindings: {}
+            bindings: {
+                showErrors:'&'
+
+            }
         });
 
    // hcOnlyController.$inject = [];
@@ -39,8 +42,18 @@
          * Called on binding changes
          */
         vm.$onChanges = function (changes) {
-
+            if(changes.record){
+                vm.model=changes.record.currentValue;
+            }
         };
+        vm.showError=function(ctrl){
 
+            if(!ctrl) return false;
+
+            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
+                return true
+            }
+
+        }
     }
 })();

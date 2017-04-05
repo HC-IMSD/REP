@@ -19,9 +19,12 @@
 	<hpfb:element name="software_version" type="hpfb:string"/>
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="applicant_name" type="char_1_80_content"/>
-	<hpfb:element name="billing_different" type="yes_no_content"/>
+
+	<hpfb:element name="billing_role" type="yes_no_content"/>
+	<hpfb:element name="applicant_role" type="yes_no_content"/>
+
 	<hpfb:element name="applicant" type="applicant_content"/>
-	<hpfb:element name="billing" type="billing_content"/>
+	<!--<hpfb:element name="billing" type="billing_content"/>-->
 	<hpfb:element name="address" type="international_address_content"/>
 	<hpfb:element name="contact" type="contact_content"/>
 	<!--start of hcOnly section-->
@@ -38,9 +41,9 @@
 	<hpfb:element name="expiry_date" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content"/>
 	<hpfb:element name="drug_use" type="drug_use_type"/>
-	<hpfb:element name="time_application" type="char_1_256_content"/>
+	<hpfb:element name="time_application" type="issuance_type"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
-	<hpfb:element name="applicant_statement" type="application_statement_type"/>
+	<hpfb:element name="applicant_statement" type="applicant_type"/>
 	<!--timely information section-->
 	<hpfb:element name="timely_submission_info" type="timely_content"/>
 	<hpfb:element name="timely_submission_statement" type="timely_application_type"/>
@@ -71,8 +74,8 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="health_canada_only"/>
-			<hpfb:element ref="applicant"/>
-			<hpfb:element ref="billing" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="applicant" minOccurs="1" maxOccurs="2"/>
+			<!--<hpfb:element ref="billing" minOccurs="0" maxOccurs="1"/>-->
 			<hpfb:element ref="application_info"/>
 			<hpfb:element ref="timely_submission_info"/>
 			<hpfb:element ref="certification"/>
@@ -84,20 +87,22 @@
 
 	<hpfb:complexType name="applicant_content">
 		<hpfb:sequence>
+			<hpfb:element ref="billing_role" />
+			<hpfb:element ref="applicant_role"/>
 			<hpfb:element ref="applicant_name"/>
 			<hpfb:element ref="contact"/>
 			<hpfb:element ref="address"/>
-			<hpfb:element ref="billing_different"/>
+			
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-	<hpfb:complexType name="billing_content">
+	<!--<hpfb:complexType name="billing_content">
 		<hpfb:sequence>
 			<hpfb:element ref="applicant_name"/>
 			<hpfb:element ref="contact"/>
 			<hpfb:element ref="address"/>
 		</hpfb:sequence>
-	</hpfb:complexType>
+	</hpfb:complexType>-->
 
 	<hpfb:complexType name="hc_only_content">
 		<hpfb:all>
@@ -173,12 +178,13 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
-	<hpfb:simpleType name="application_statement_type">
+
+	<hpfb:simpleType name="issuance_type">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value="NOC"/>
 			<hpfb:enumeration value="GRANT"/>
 		</hpfb:restriction>
-	</hpfb:simpleType>
+	</hpfb:simpleType>	
 
 	<hpfb:simpleType name="timely_application_type">
 		<hpfb:restriction base="hpfb:string">

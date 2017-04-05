@@ -26,18 +26,19 @@
                 dateSaved: "",
                 softwareVersion: "1.0.0"
             }; //TODO appl Info
-            defaultCSPData.applicant=this.createApplicantRecord(); //don't think I can do this
+            defaultCSPData.applicant=[this.createApplicantRecord(true)];
+            //defaultCSPData.billingDifferent=false; //use the the length of the array to determine
             defaultCSPData.healthCanadaOnly={};
             defaultCSPData.healthCanadaOnly.companyId="";
             defaultCSPData.healthCanadaOnly.dateReceived="";
+            defaultCSPData.healthCanadaOnly.applicationId="";
             defaultCSPData.healthCanadaOnly.hcNotes="";
-            defaultCSPData.applicationInfo={};
-
             defaultCSPData.patent={};
             defaultCSPData.patent.patentNumber="";
             defaultCSPData.patent.filingDate="";
             defaultCSPData.patent.grantedDate="";
             defaultCSPData.patent.expiryDate="";
+            defaultCSPData.applicationInfo={};
             defaultCSPData.applicationInfo.controlNumber="";
             defaultCSPData.applicationInfo.drugUse="";
             defaultCSPData.applicationInfo.timeApplication="";
@@ -72,20 +73,30 @@
         CspService.prototype.transformFromFileObj = function () {
             return null;
         };
-        CspService.prototype.createApplicantRecord = function () {
+       /* CspService.prototype.createApplicantRecord = function () {
             var record=this.createContactRecord();
-            record.applicantName="appl";
-            record.type= this.applicantType;
+            record.applicantName="";
             return record
-        };
-        CspService.prototype.createBillingRecord = function () {
-            var record=this.createContactRecord();
-            record.applicantName="ddd";
-            record.type= this.billingType;
+        };*/
+
+        CspService.prototype.createApplicantRecord = function (isApplicant){
+          var record  =this.createContactRecord();
+            record.applicantName="";
+            if(!isApplicant){
+                record.role.applicant=false;
+                record.role.billing=true;
+            }else{
+                record.role.applicant=true;
+                record.role.billing=true;
+            }
             return record;
         };
         CspService.prototype.createContactRecord = function () {
             var applicant = {};
+            applicant.role={
+                applicant:true,
+                billing:true
+            };
             applicant.contact = {
                 salutation: "",
                 givenName: "",
@@ -107,7 +118,52 @@
             };
             return applicant
         };
+        /**
+         * Adds an applicant to the model. Determines if it should be a billing applicant
+         * and updates the roles as appropiate
+         */
+        CspService.prototype.addApplicantToModel = function () {
+            if(!this._default.applicant){
+                this._default.applicant=[];
+            }
+            var numberRecords=this._default.applicant.length;
+            if(numberRecords===0){
+                //this should never happen.....
+                this._default.applicant.push(this.createApplicantRecord(true));
+            }else if (numberRecords==1){
+                this._default.applicant[0].role.applicant=true;
+                this._default.applicant[0].role.billing=false;
+                this._default.applicant.push(this.createApplicantRecord(false));
+            }else{
+             console.warn("Tried to add an applicant when there were 2 records")
+            }
+           // defaultCSPData.applicant=[this.createApplicantRecord()];
+        };
+        /**
+         * Deletes the billing address only. Checks each record for billing role to be true
+         */
+        CspService.prototype.deleteApplicant = function () {
+            if(!this._default.applicant){
+                this._default.applicant=[];
+            }
+            var numberRecords=this._default.applicant.length;
+            if(numberRecords===0||numberRecords===1){
+                //console.warn("Tried to delete applicant when there was only 1 or zero")
+                //this case can happen as a record could be doing this blind
+                return;
+            }else{
 
+                for(var i=0;i<numberRecords;i++){
+                    var record=this._default.applicant[i];
+                    if(record.role.billing===true){
+                        this._default.applicant.splice(i,1);
+                    }
+                }
+                //update the remaining record to have both the billing and applicant roles
+                this._default.applicant[0].role.applicant=true;
+                this._default.applicant[0].role.billing=true;
+            }
+        };
 
 
         return CspService;

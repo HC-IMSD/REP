@@ -1,21 +1,76 @@
-<div>
-    <ng-form id="csp-form" name="main.cspForm"
-             novalidate="novalidate">
-        <div>
+<div class="container-fluid">
+    <ng-form id="csp-form" name="main.cspForm" novalidate="novalidate">
+
+
+        <div ng-if="main.showHCOnlySection()">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
-                    <div class="btn-group pull-right">
-                        <!--  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
-                                  id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                                  class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
-                          </button>-->
-                    </div>
-                    <h2 class="panel-title">{{'1. Applicant Information'|translate}}</h2>
+                    <!--  <div class="btn-group pull-right">
+                          &lt;!&ndash;  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                                    id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
+                            </button>&ndash;&gt;
+                      </div>-->
+                    <h2 class="panel-title">{{'HCONLY'|translate}}</h2>
+
                 </header>
                 <div class="panel-body">
-                    <cmp-csp-applicant record="main.cspModel.applicant"></cmp-csp-applicant>
+                    <cmp-csp-hc-only record="main.cspModel.healthCanadaOnly"></cmp-csp-hc-only>
                 </div>
             </section>
         </div>
+
+
+        <section class="panel panel-primary mrgn-tp-lg">
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <!--  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                              id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                              class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
+                      </button>-->
+                </div>
+                <h2 class="panel-title">{{'CERTIFICATE OF SUPPLEMENTARY PROTECTION (CSP) INFORMATION'|translate}}</h2>
+            </header>
+            <div class="panel-body">
+
+
+                <div ng-repeat="applicantRecord in main.cspModel.applicant track by $index ">
+                    <!-- <section class="panel panel-primary mrgn-tp-lg">
+                         <header class="panel-heading clearfix">
+                             <div class="btn-group pull-right">-->
+                    <!--  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                              id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                              class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
+                      </button>
+                </div>-->
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3 ng-if="applicantRecord.role.applicant">{{'1. Applicant Information'|translate}}</h3>
+                            <h3 ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">{{'Billing
+                                Information'|translate}}</h3>
+                        </div>
+                    </div>
+                    <!--  </header>-->
+                    <!--  <div class="panel-body">-->
+
+                    <div class="row">
+                        <cmp-csp-applicant record="applicantRecord"
+                                           add-applicant="main.modelService.addApplicantToModel()"
+                                           delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant>
+                    </div>
+                </div>
+                <!--   </section>
+               </div>-->
+                <div>
+                    <cmp-csp-patent record="main.cspModel.patent"></cmp-csp-patent>
+                </div>
+                <div>
+                    <cmp-csp-main-application record="main.cspModel.applicationInfo"></cmp-csp-main-application>
+                </div>
+            </div>
+        </section>
+
+
+        <pre>{{main.cspModel|json}}</pre>
     </ng-form>
 </div>

@@ -9,7 +9,10 @@
         .module('cspMain', [
             'hpfbConstants',
             'cspService',
-            'cspApplicant'
+            'cspApplicant',
+            'cspHCOnly',
+            'cspMainApplication',
+            'cspPatent'
         ]);
 
 })();
@@ -32,6 +35,7 @@
     function cspMainCtrl(CspService,INTERNAL_TYPE, EXTERNAL_TYPE) {
 
         var vm = this;
+        vm.userType=EXTERNAL_TYPE;
         vm.saveXMLLabel = "SAVE_DRAFT"; //used to dynamically label save button
 
         /**
@@ -58,6 +62,11 @@
                 }
             }
         };
+
+        vm.showHCOnlySection=function(){
+
+            return (vm.userType===INTERNAL_TYPE);
+        }
 
     }
 })();

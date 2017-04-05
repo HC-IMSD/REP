@@ -268,7 +268,10 @@ var componentFolders = {
     diffMain: 'diff-main/',
     errorSummary: 'error-summary',
     cspMain:'cspMain',
-    cspContact:'cspContactRecord'
+    cspContact:'cspContactRecord',
+    cspHCOnly:'cspHealthCanadaOnly',
+    cspMainAppl:'cspMainAppl',
+    cspPatent:'cspPatent'
 };
 
 //exclude custom styles only lib
@@ -393,7 +396,10 @@ var cspComponentFolders = [
     componentFolders.cspMain,
     componentFolders.cspContact,
     componentFolders.contactDetails,
-    componentFolders.addressDetails
+    componentFolders.addressDetails,
+    componentFolders.cspHCOnly,
+    componentFolders.cspMainAppl,
+    componentFolders.cspPatent
 ];
 
 
@@ -422,6 +428,7 @@ var serviceFileNames = {
     dossierDataList: "dossier-data-list",
     dossierLoadService: "dossier-load-service",
     cspService:"csp-service",
+    cspConstants:'csp-constants',
     diffService: 'diff-service'
 };
 
@@ -479,8 +486,8 @@ var cspServiceFileNames =
         serviceFileNames.hpfbConstants,
         serviceFileNames.dataLists,
         serviceFileNames.filterLists,
-        serviceFileNames.cspService
-
+        serviceFileNames.cspService,
+        serviceFileNames.cspConstants
     ];
 
 
@@ -560,6 +567,7 @@ var translationBaseFiles = {
     addressXml: paths.translations + 'addressXml',
     contactXml: paths.translations + 'contactXml',
     defaultXml: paths.translations + 'defaultXml',
+    cspGeneral: paths.translations + 'csp',
     temp: paths.translations + 'companyError'
 };
 
@@ -637,7 +645,8 @@ var cspTranslationFilesBaseList=[
     translationBaseFiles.applicationInfo,
     translationBaseFiles.fileIO,
     translationBaseFiles.general,
-    translationBaseFiles.messages
+    translationBaseFiles.messages,
+    translationBaseFiles.cspGeneral
 
 ];
 

@@ -24,7 +24,9 @@
             controller: cspApplicantCtrl,
             controllerAs: 'cspApplCtrl',
             bindings: {
-                record:'<'
+                record:'<',
+                addApplicant:'&',
+                deleteApplicant:'&'
             }
         });
 
@@ -37,17 +39,33 @@
         var vm = this;
         vm.title = 'CspApplicantCtrl';
         vm.model=null;
+        vm.isBillingDifferent=false;
+        vm.applicantTextAlias="APPLICANT";
         vm.$onInit=function(){
-
-
+            //after on changes called
+            if(vm.model && (!vm.model.role.applicant) ){
+                vm.applicantTextAlias="COMPANY_NOABBREV";
+            }else{
+                vm.applicantTextAlias="APPLICANT";
+            }
         };
 
         vm.$onChanges=function(changes){
 
            if(changes.record){
              vm.model=changes.record.currentValue;
-           };
+           }
 
+        };
+
+        vm.setBilling=function(){
+            console.log("In the set billing "+vm.isBillingDifferent)
+            if(vm.isBillingDifferent) {
+
+                vm.addApplicant();
+            }else{
+               vm.deleteApplicant();
+            }
         }
 
         ////////////////

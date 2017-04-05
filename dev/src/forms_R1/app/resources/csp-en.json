@@ -1,0 +1,9 @@
+{
+  "APPLICANT": "Applicant Name",
+  "DATE_APPL_REC":"Date Application Received",
+  "CSP_COMPANY_CODE":"CSP Company Code",
+  "CSP_APPLICATION_CODE":"CSP Application Number",
+  "NOTES":"Notes",
+  "HCONLY":"Health Canada Use Only",
+  "BILLING_DIFFERENT":"Select to enter a billing address (if different from Applicant’s Contact Information)"
+}

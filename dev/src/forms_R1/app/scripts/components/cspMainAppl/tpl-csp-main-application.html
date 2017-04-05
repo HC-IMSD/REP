@@ -1,0 +1,133 @@
+<div class="container-fluid">
+    <ng-form name="cspMainApplCtrl.mainApplForm">
+        <div class="row">
+            <div>
+                <h3>3. New Drug Submission (NDS) Information</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm.controlNumber{{::$id}}.$invalid}">
+                <label for="controlNumber{{::$id}}" class="required">
+                    <span class="field-name">{{'NDS_NUMBER' |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                    <input type="text" id="controlNumber{{::$id}}" name="controlNumber{{::$id}}"
+                           data-ng-model="cspMainApplCtrl.model.controlNumber" class="form-control"
+                           maxlength="6" size="6" required/>
+                    <strong id="controlNumber-error" class="error"
+                            ng-show="cspMainApplCtrl.showError(cspMainApplCtrl.mainApplForm.controlNumber{{::$id}})">
+                             <span class="label label-danger"
+                                   ng-messages="cspMainApplCtrl.mainApplForm.controlNumber{{::$id}}.$error">
+                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                             </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <h3>4. Drug Use</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm.drugUse{{::$id}}.$invalid}">
+                <label for="drugUse{{::$id}}" class="required">
+                    <span class="field-name">{{'NDS_NUMBER' |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                    <select id="drugUse{{::$id}}" name="drugUse{{::$id}}"
+                            data-ng-model="cspMainApplCtrl.model.drugUse" class="form-control"
+                            required></select>
+                    <strong id="drugUse-error" class="error"
+                            ng-show="cspMainApplCtrl.showError(cspMainApplCtrl.mainApplForm.drugUse{{::$id}})">
+                             <span class="label label-danger"
+                                   ng-messages="cspMainApplCtrl.mainApplForm.drugUse{{::$id}}.$error">
+                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                             </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <h3>5. Time of Application</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <fieldset>
+                    <legend class="required"><span class="field-name">{{'APPLICANT_APPLY' |translate}}</span> <strong
+                            class="required"> {{"REQUIRED" |translate}} </strong></legend>
+                    <div class="radio">
+                        <label for="status1"><input type="radio" name="time120" id="status1"
+                                                    ng-model="cspMainApplCtrl.model.timeApplication"
+                                                    ng-value="cspMainApplCtrl.nocValue" required="required"/>within
+                            120 days of the issuance of the Notice of Compliance (NOC) for the above noted
+                            NDS,or</label>
+                    </div>
+                    <div class="radio">
+                        <label for="status2"><input type="radio" name="time120"
+                                                    ng-model="cspMainApplCtrl.model.timeApplication"
+                                                    ng-value="cspMainApplCtrl.grantValue" id="status2"/>within 120 days
+                            of the grant of the above noted patent</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <h3>6. Medicinal Ingredient</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12"
+                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}}.$invalid}">
+                <label for="medicinalIngredient_{{::$id}}" class="required">
+                    <span class="field-name">{{'MED_INGRED' |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                    <input type="text" id="medicinalIngredient_{{::$id}}" name="medicinalIngredient_{{::$id}}"
+                           data-ng-model="cspMainApplCtrl.model.medicinalIngredient"
+                           class="form-control full-width" maxlength="7"
+                           size="7" required/>
+                    <strong id="medicinalIngredient-error" class="error"
+                            ng-show="cspMainApplCtrl.showError(cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}})">
+                             <span class="label label-danger"
+                                   ng-messages="cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}}.$error">
+                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                             </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <h3>7. Statement</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <fieldset>
+                    <legend class="required"><span class="field-name">{{'STATEMENTS_APPLICANT' |translate}}</span>
+                        <strong
+                                class="required"> {{"REQUIRED" |translate}} </strong></legend>
+                    <div class="radio">
+                        <label for="status1"><input type="radio" name="time120" id="status1"
+                                                    ng-model="cspMainApplCtrl.model.applicantStatement"
+                                                    ng-value="cspMainApplCtrl.ownerValue" required="required"/>
+                            The Applicant is recorded as the owner of the above noted Canadian Patent at the
+                            Canadian Patent Office.
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="status2"><input type="radio" name="time120"
+                                                    ng-model="cspMainApplCtrl.model.applicantStatement"
+                                                    ng-value="cspMainApplCtrl.ownerBehalfValue" id="status2"/>The Applicant is
+                            applying on behalf of and with the consent of the owner of the above noted Canadian Patent as
+                            recorded at the Canadian Patent Office.</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </ng-form>
+</div>
