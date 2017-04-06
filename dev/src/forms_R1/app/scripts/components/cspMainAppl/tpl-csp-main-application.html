@@ -33,10 +33,11 @@
             <div class="form-group col-md-4"
                  ng-class="{'has-error':cspMainApplCtrl.mainApplForm.drugUse{{::$id}}.$invalid}">
                 <label for="drugUse{{::$id}}" class="required">
-                    <span class="field-name">{{'NDS_NUMBER' |translate}}</span>
+                    <span class="field-name">{{'DRUGUSE' |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <select id="drugUse{{::$id}}" name="drugUse{{::$id}}"
                             data-ng-model="cspMainApplCtrl.model.drugUse" class="form-control"
+                            ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList"
                             required></select>
                     <strong id="drugUse-error" class="error"
                             ng-show="cspMainApplCtrl.showError(cspMainApplCtrl.mainApplForm.drugUse{{::$id}})">

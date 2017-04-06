@@ -16,5 +16,7 @@
         .constant('GRANT', 'GRANT')
         .constant('OWNER', 'OWNER')
         .constant('OWNER_BEHALF', 'BEHALF_OWNER')
-
+        .constant('NO_APPLICATION', 'NO_APPLICATION')
+        .constant('APPLICATION', 'APPLICATION')
+        .constant('EUOTHER', 'EU_OTHER');
 })();

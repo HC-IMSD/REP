@@ -271,7 +271,10 @@ var componentFolders = {
     cspContact:'cspContactRecord',
     cspHCOnly:'cspHealthCanadaOnly',
     cspMainAppl:'cspMainAppl',
-    cspPatent:'cspPatent'
+    cspPatent: 'cspPatent',
+    cspTimelySub: 'cspTimelySubmission',
+    cspFeePayment: 'cspFeePayment',
+    cspCert: 'cspCertification'
 };
 
 //exclude custom styles only lib
@@ -314,9 +317,6 @@ var libCsp=[
     paths.lib + libFileNames.uibTemplates
 
 ];
-
-
-
 
 
 
@@ -399,7 +399,10 @@ var cspComponentFolders = [
     componentFolders.addressDetails,
     componentFolders.cspHCOnly,
     componentFolders.cspMainAppl,
-    componentFolders.cspPatent
+    componentFolders.cspPatent,
+    componentFolders.cspTimelySub,
+    componentFolders.cspFeePayment,
+    componentFolders.cspCert
 ];
 
 

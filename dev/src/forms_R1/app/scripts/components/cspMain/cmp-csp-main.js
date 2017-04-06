@@ -12,7 +12,10 @@
             'cspApplicant',
             'cspHCOnly',
             'cspMainApplication',
-            'cspPatent'
+            'cspPatent',
+            'cspTimelySubmission',
+            'cspFeePayment',
+            'cspCertification'
         ]);
 
 })();
@@ -37,15 +40,18 @@
         var vm = this;
         vm.userType=EXTERNAL_TYPE;
         vm.saveXMLLabel = "SAVE_DRAFT"; //used to dynamically label save button
-
+        vm.countryList = [];
+        vm.paymentType = [];
+        vm.drugUseList = [];
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit=function(){
             vm.modelService = new CspService(); //create the service
             vm.cspModel = vm.modelService.getModelInfo(); //the model
-            console.log(vm.modelService.getModelInfo())
-
+            vm.countryList = vm.modelService.getMarketingCountries();
+            vm.paymentType = vm.modelService.getAdvancedPaymentTypes();
+            vm.drugUseList = vm.modelService.getDrugUses();
         };
 
         /**

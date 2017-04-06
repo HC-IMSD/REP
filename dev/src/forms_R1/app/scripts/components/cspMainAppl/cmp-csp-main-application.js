@@ -22,7 +22,8 @@
             controller: mainApplicationController,
             controllerAs: 'cspMainApplCtrl',
             bindings: {
-                record:'<'
+                record: '<',
+                drugUses: '<'
             }
         });
 
@@ -35,7 +36,7 @@
         vm.grantValue=GRANT;
         vm.ownerValue=OWNER;
         vm.ownerBehalfValue=OWNER_BEHALF;
-
+        vm.drugUseList = [];
         /**
          * Called after onChanges evnet, initializes
          */
@@ -50,6 +51,9 @@
             if(changes.record){
 
                 vm.model=changes.record.currentValue;
+            }
+            if (changes.drugUses) {
+                vm.drugUseList = changes.drugUses.currentValue;
             }
         };
 

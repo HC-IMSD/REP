@@ -5,5 +5,22 @@
   "CSP_APPLICATION_CODE":"CSP Application Number",
   "NOTES":"Notes",
   "HCONLY":"Health Canada Use Only",
-  "BILLING_DIFFERENT":"Select to enter a billing address (if different from Applicant’s Contact Information)"
+  "BILLING_DIFFERENT": "Select to enter a billing address that is different from the Applicant’s Contact Information",
+  "ADVANCE_FEE_PAYMENT": "The Advanced Payment Details form is being submitted separately by fax or mail, and the fee is being paid or the fee has been prepaid in the amount of",
+  "PAYMENT_METHOD": "Method of Advanced Payment",
+  "FINANCIAL": "Payment through a Canadian Financial Institution",
+  "CHEQUE": "Cheque / Bank Draft / Money Order",
+  "CREDIT_CARD": "MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International",
+  "CREDIT": "Payment Using Existing Credit",
+  "WIRE": "Wire",
+  "USA": "United States of America",
+  "CHE": "Switzerland",
+  "AUS": "Australia",
+  "EU": "The European Union",
+  "JPN": "Japan",
+  "EU_OTHER": "Any country that is a member of the European Union",
+  "HUMAN": "Human",
+  "VETERINARY": "Veterinary",
+  "DRUGUSE": "Drug use"
+
 }

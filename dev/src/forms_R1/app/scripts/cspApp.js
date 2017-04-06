@@ -9,6 +9,7 @@
         .module('cspApp', [
             'pascalprecht.translate',
             'translations',
+            'ngSanitize',
             'cspMain'
         ])
 })();

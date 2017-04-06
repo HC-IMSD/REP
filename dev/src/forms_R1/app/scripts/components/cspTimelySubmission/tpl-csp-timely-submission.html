@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <ng-form name="timelySubCtrl.timelySubForm">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <fieldset>
+                    <legend class="required"><span class="field-name">{{'STATEMENTS_TIMELY' |translate}}</span>
+                        <strong
+                                class="required"> {{"REQUIRED" |translate}} </strong></legend>
+                    <div class="radio">
+                        <label for="status1"><input type="radio" name="time120" id="status1"
+                                                    ng-model="timelySubCtrl.model.submissionStatement"
+                                                    ng-value="timelySubCtrl.noappValue" required="required"/>
+                            No application for a marketing approval equivalent to an authorization for sale with respect
+                            to the medicinal ingredient or combination of medicinal ingredients set out in this CSP
+                            application has been submitted in the United States, the European Union or any country that
+                            is a member of the European Union, Australia, Switzerland or Japan, before the application
+                            for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above
+                            noted NDS) was filed with the Minister of Health
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="status2"><input type="radio" name="time120"
+                                                    ng-model="timelySubCtrl.model.submissionStatement"
+                                                    ng-value="timelySubCtrl.appValue" id="status2"/>The
+                            If an application for a marketing approval equivalent to an authorization for sale with
+                            respect to the
+                            medicinal ingredient or combination of medicinal ingredients set out in this CSP application
+                            has been
+                            submitted in the United States, the European Union or any country that is a member of the
+                            European
+                            Union, Australia, Switzerland or Japan, the application for the authorization for sale
+                            referred to in
+                            paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of
+                            Health before the
+                            end of a period of one year that begins on the day on which the first such application for a
+                            marketing
+                            approval was submitted. Details of the first application for marketing approval are as
+                            follows:</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-4"
+                 ng-class="{'has-error':timelySubCtrl.timelySubForm.timelyDate_{{::$id}}.$invalid}">
+                <label for="timelyDate_{{::$id}}" class="required">
+                    <span class="field-name">{{"APPL_DATE" |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                    <input type="date" id="timelyDate_{{::$id}}" name="timelyDate_{{::$id}}"
+                           data-ng-model="timelySubCtrl.model.approvalDate" class="form-control" required/>
+                    <strong id="timelyDate-error" class="error"
+                            ng-show="timelySubCtrl.showError(timelySubCtrl.timelySubForm.timelyDate_{{::$id}})">
+                                         <span class="label label-danger"
+                                               ng-messages="timelySubCtrl.timelySubForm.timelyDate_{{::$id}}.$error">
+                                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                         </span>
+                    </strong>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6"
+                 ng-class="{'has-error':timelySubCtrl.timelySubForm.timelyCountry_{{::$id}}.$invalid}">
+                <label for="timelyCountry_{{::$id}}" class="required">
+                    <span class="field-name">{{"MARKETING_COUNTRY" |translate}}</span>
+                    <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                    <select id="timelyCountry_{{::$id}}" name="timelyCountry_{{::$id}}"
+                            ng-options="country |translate for country in timelySubCtrl.countries"
+                            ng-change="timelySubCtrl.isEuOther()"
+                            data-ng-model="timelySubCtrl.model.country" class="form-control" required></select>
+                    <strong id="timelyCountry-error" class="error"
+                            ng-show="timelySubCtrl.showError(timelySubCtrl.timelySubForm.timelyCountry_{{::$id}})">
+                                         <span class="label label-danger"
+                                               ng-messages="timelySubCtrl.timelySubForm.timelyCountry_{{::$id}}.$error">
+                                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                         </span>
+                    </strong>
+                </label>
+            </div>
+            <div ng-if="timelySubCtrl.isEuOther()">
+                <div class="form-group col-md-6"
+                     ng-class="{'has-error':timelySubCtrl.timelySubForm.otherCountry_{{::$id}}.$invalid}">
+                    <label for="otherCountry_{{::$id}}" class="required">
+                        <span class="field-name">{{"OTHER_EU_COUNTRY" |translate}}</span>
+                        <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                        <input type="text" id="otherCountry_{{::$id}}" name="otherCountry_{{::$id}}" maxlength="60"
+                               size="60"
+                               data-ng-model="timelySubCtrl.model.otherCountry" class="form-control" required/>
+                        <strong id="otherCountry-error" class="error"
+                                ng-show="timelySubCtrl.showError(timelySubCtrl.timelySubForm.otherCountry_{{::$id}})">
+                                         <span class="label label-danger"
+                                               ng-messages="timelySubCtrl.timelySubForm.otherCountry_{{::$id}}.$error">
+                                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                         </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </ng-form>
+</div>

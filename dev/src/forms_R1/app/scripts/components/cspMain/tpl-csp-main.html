@@ -29,7 +29,7 @@
                               class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
                       </button>-->
                 </div>
-                <h2 class="panel-title">{{'CERTIFICATE OF SUPPLEMENTARY PROTECTION (CSP) INFORMATION'|translate}}</h2>
+                <h2 class="panel-title">{{'Certificate of Supplementary Protection (CSP) Information'|translate}}</h2>
             </header>
             <div class="panel-body">
 
@@ -47,7 +47,7 @@
                         <div class="col-xs-12">
                             <h3 ng-if="applicantRecord.role.applicant">{{'1. Applicant Information'|translate}}</h3>
                             <h3 ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">{{'Billing
-                                Information'|translate}}</h3>
+                                Information' |translate}}</h3>
                         </div>
                     </div>
                     <!--  </header>-->
@@ -65,7 +65,34 @@
                     <cmp-csp-patent record="main.cspModel.patent"></cmp-csp-patent>
                 </div>
                 <div>
-                    <cmp-csp-main-application record="main.cspModel.applicationInfo"></cmp-csp-main-application>
+                    <cmp-csp-main-application record="main.cspModel.applicationInfo"
+                                              drug-uses="main.drugUseList"></cmp-csp-main-application>
+                </div>
+                <div>
+                    <cmp-csp-timely-submission record="main.cspModel.timelySubmission"
+                                               country-list="main.countryList"></cmp-csp-timely-submission>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>5. Fee Payment (use separate Advances Payment Details Form)</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <cmp-csp-fee-payment record="main.cspModel.payment"
+                                                 payment-types="main.paymentType"></cmp-csp-fee-payment>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>6. Certification</h3>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <cmp-csp-certification record="main.cspModel.certification"></cmp-csp-certification>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
