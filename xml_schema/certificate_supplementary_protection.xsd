@@ -78,6 +78,7 @@
 			<!--<hpfb:element ref="billing" minOccurs="0" maxOccurs="1"/>-->
 			<hpfb:element ref="application_info"/>
 			<hpfb:element ref="timely_submission_info"/>
+			<hpfb:element ref="advanced_payment"/>
 			<hpfb:element ref="certification"/>
 
 			<!--Main form content defined here -->
