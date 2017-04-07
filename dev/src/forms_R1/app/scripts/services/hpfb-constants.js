@@ -21,6 +21,7 @@
         .constant("AMEND_TYPE","AMEND")
         .constant("INTERNAL_TYPE","INT")
         .constant("EXTERNAL_TYPE","EXT")
+        .constant("PHARMA_TYPE", "PHARMA")
         .constant("RELATIVE_FOLDER_DATA","../data/");
 
 })();

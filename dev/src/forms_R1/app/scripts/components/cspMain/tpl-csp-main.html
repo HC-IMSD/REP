@@ -1,6 +1,37 @@
 <div class="container-fluid">
     <ng-form id="csp-form" name="main.cspForm" novalidate="novalidate">
+        <section class="panel panel-primary mrgn-tp-lg">
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <!-- <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                             id="load-instructions-toggle" ng-click="main.addInstruct(0)"><span
+                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
+                     </button>-->
+                </div>
+                <h2 class="panel-title">{{'LOAD_COMPANY_FILE'| translate}}</h2>
+            </header>
+            <div class="panel-body">
+                <!-- <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
+                      class="alert-info" close="main.closeAlert(0)">
+                     <section>
+                         <div>
+                             <h3 class="rep-margin-minus-top">Files to load</h3>
+                             <ul>
+                                 <li>Working Copy (.hcsc) – when continuing with an incomplete company template.</li>
+                                 <li>Final XML – when amending an approved company enrolment.</li>
+                                 <li>A file should not be loaded if it is the initial enrolment for company.</li>
+                             </ul>
+                         </div>
+                     </section>
+                 </div>-->
+                <div class="col-md-12">
 
+                    <hpfb-file-select update-model-root="main.showContent(fileContent)" root-elem="main.rootTag"/>
+                </div>
+            </div>
+            <div>
+            </div>
+        </section>
 
         <div ng-if="main.showHCOnlySection()">
             <section class="panel panel-primary mrgn-tp-lg">
@@ -96,6 +127,22 @@
                 </div>
             </div>
         </section>
+        <div class="row btn-group-sm">
+            <div class="form-group col-md-3">
+                <button class="btn btn-default btn-lg active" ng-click="main.saveJson()">{{'SAVE_WORKING' |translate}}
+                </button>
+            </div>
+            <div class="form-group col-md-3">
+                <button class="btn btn-primary btn-lg active" id="btn_xmlSave" ng-click="main.saveXML()">
+                    {{main.saveXMLLabel |translate}}
+                </button>
+                <!-- <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                         id="save-instructions-toggle" ng-click="main.addInstruct(2)"><span
+                         class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
+                 </button>-->
+            </div>
+
+        </div>
 
 
         <pre>{{main.cspModel|json}}</pre>

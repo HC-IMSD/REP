@@ -394,6 +394,7 @@ var transactionComponentFolders = [
 var cspComponentFolders = [
 
     componentFolders.cspMain,
+    componentFolders.fileIO,
     componentFolders.cspContact,
     componentFolders.contactDetails,
     componentFolders.addressDetails,
@@ -489,6 +490,7 @@ var cspServiceFileNames =
         serviceFileNames.hpfbConstants,
         serviceFileNames.dataLists,
         serviceFileNames.filterLists,
+        serviceFileNames.applicationInfoService,
         serviceFileNames.cspService,
         serviceFileNames.cspConstants
     ];
