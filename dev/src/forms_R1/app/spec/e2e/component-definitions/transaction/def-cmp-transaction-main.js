@@ -18,7 +18,7 @@ var TransactionMain = function () {
     var _solicitedRequester_modelString = "transInfoCtrl.transactionModel.solicitedRequester";
     var _projectManager1_modelString = "transInfoCtrl.transactionModel.projectManager1";
     var _projectManager2_modelString = "transInfoCtrl.transactionModel.projectManager2";
-    var _activityValid_modelString = "transInfoCtrl.transactionModel.contactSame";
+    var _activityValid_modelString = "transInfoCtrl.transactionModel.sameContact";
     var _companyName_modelString = "transInfoCtrl.transactionModel.companyName";
 
 

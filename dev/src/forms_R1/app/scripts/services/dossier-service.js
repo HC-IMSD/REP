@@ -19,10 +19,10 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate', '$filter','getCountryAndProvinces', 'OTHER','UNKNOWN'];
-    function DossierService(DossierLists, $translate, $filter,getCountryAndProvinces, OTHER, UNKNOWN) {
-        var yesValue = 'Y';
-        var noValue = 'N';
+    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
+        var yesValue = YES;
+        var noValue = NO;
 
         // Define the DossierService objecy
         function DossierService() {
@@ -458,21 +458,32 @@
                     product.brandName = info[i].brand_name;
                     product.ingId= info[i].ingredient_id;
                     product.ingLabel = info[i].ingredient_name;
-                    product.autoIngred="Y";
+                    product.autoIngred = YES;
 
                     if (!product.ingId) {
-                        product.autoIngred = 'N'
+                        product.autoIngred = NO;
                     }
 
                     product.dosageForm = "";
                     if (info[i].dosage_form) {
-                        product.dosageForm = $filter('filter')(DossierLists.getDosageFormList(), {id: info[i].dosage_form.__text})[0];
+
+                        var dosageValue = DossierLists.getDosageFormPrefix() + info[i].dosage_form.__text; //add the prefix
+                        //if other revert the value. OTHER value never has a prefix
+                        if (info[i].dosage_form.__text === OTHER) {
+                            dosageValue = info[i].dosage_form.__text;
+                        }
+                        product.dosageForm = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: dosageValue});
                     }
                     product.dosageFormOther = info[i].dosage_form_other;
                     product.strengths = Number(info[i].strengths);
                     product.units = "";
                     if (info[i].units) {
-                        product.units = $filter('filter')(DossierLists.getUnitsList(), {id: info[i].units.__text})[0];
+                        var unitsValue = DossierLists.getUnitsPrefix() + info[i].units.__text; //add the prefix
+                        //if other revert the value. OTHER value never has a prefix
+                        if (info[i].units.__text === OTHER) {
+                            unitsValue = info[i].units.__text;
+                        }
+                        product.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                     }
                     product.otherUnits = info[i].units_other;
                     product.per = info[i].per;
@@ -488,7 +499,11 @@
 
         }
 
-
+        /**
+         * Loads all the external appendix 4 information into the internal data model
+         * @param info - the 'external type' formatted json object
+         * @returns {Array}
+         */
         function getAppendix4IngredientList(info) { //info = dossier.appendixFour.ingredientList
             var list = [];
             //TODO externalize
@@ -635,6 +650,8 @@
                 }
                 if (item.country_group && item.country_group.country_manufacturer) {
                     obj.countryList = getFormulationCountryList(item.country_group.country_manufacturer);
+                } else {
+                    obj.countryList = [];
                 }
                 formulationList.push(obj);
             });
@@ -643,6 +660,11 @@
 
         }
 
+        /**
+         * Loads all the active ingredient records into the internal Data model
+         * @param list
+         * @returns {Array}
+         */
         function getActiveIngList(list) {
 
             var resultList = [];
@@ -655,32 +677,40 @@
                 var obj = {
                     "ingId": item.ingredient_id,
                     "ingLabel": item.ingredient_name,
-                    "autoIngred": "N",
+                    "autoIngred": YES,
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
                     "strength": Number(item.strength),
                     "per": item.per,
                     "units": "",
+                    "otherUnits": item.units_other,
                     "calcAsBase": item.is_base_calc,
                     "nanoMaterial":"",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
 
                 if (item.units) {
-                    var unitsObj = $filter('filter')(DossierLists.getUnitsList(), {id: item.units.__text})[0];
-                    obj.units = unitsObj;
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.units.__text === OTHER) {
+                        unitsValue = item.units.__text;
+                    }
+                    obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
                 if( item.is_nanomaterial){
+                    //prefixed so need to do things differently than units
                     var nanoValue=DossierLists.getNanoPrefix()+item.is_nanomaterial.__text;
                     if(item.is_nanomaterial.__text===OTHER){
                         nanoValue=item.is_nanomaterial.__text;
                     }
-                    obj.nanoMaterial=$filter('filter')(DossierLists.getNanoMaterials() , {id: nanoValue})[0];
+                    obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
                 // used to identify if the ingredient is not from the type ahead lookup
                 if (!obj.ingId) {
-                    obj.autoIngred = 'N'
+                    obj.autoIngred = NO
+                } else {
+                    obj.autoIngred = YES;
                 }
                 resultList.push(obj);
 
@@ -709,13 +739,19 @@
                     "strength": Number(item.strength),
                     "per": item.per,
                     "units": "",
+                    "otherUnits": item.units_other,
                     "calcAsBase": item.is_base_calc,
                     "nanoMaterial":"",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
 
                 if (item.units) {
-                    obj.units = $filter('filter')(DossierLists.getUnitsList(), {id: item.units.__text})[0];
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.units.__text === OTHER) {
+                        unitsValue = item.units.__text;
+                    }
+                    obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
                 if( item.is_nanomaterial){
                     //prefixed so need to do things differently than units
@@ -723,7 +759,7 @@
                     if(item.is_nanomaterial.__text===OTHER){
                         nanoValue=item.is_nanomaterial.__text;
                     }
-                   obj.nanoMaterial=$filter('filter')(DossierLists.getNanoMaterials() , {id: nanoValue})[0];
+                    obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
 
                 resultList.push(obj);
@@ -792,7 +828,11 @@
             var _id = 0;
 
             angular.forEach(list, function (item) {
-                var roaObj = $filter('filter')(DossierLists.getRoa(), {id: item.roa.__text})[0];
+                var roaValue = DossierLists.getRoaPrefix() + item.roa.__text;
+                if (item.roa.__text === OTHER) {
+                    roaValue = item.roa.__text;
+                }
+                var roaObj = $filter('findListItemById')(DossierLists.getRoa(), {id: roaValue});
                 _id = _id + 1;
                 var obj = {
                     "id": _id,
@@ -857,10 +897,18 @@
                     var product = {};
                     product.brand_name = info[i].brandName;
                    // product.medicinal_ingredient = info[i].medIngredient;
-                    product.ingredient_id= info[i].ingId;
-                    product.ingredient_name = info[i].ingLabel;
-                    //make dosage form with both english and french labels
 
+                    //BUG Fix April 10, 2017
+                    // This fixes data issues where ingredient is not on the list
+                    //id should be empty in this case
+                    if (info[i].ingId && (info[i].ingId !== info[i].ingLabel)) {
+                        product.ingredient_id = "";
+                        product.ingredient_name = info[i].ingLabel;
+                    } else {
+                        product.ingredient_id = info[i].ingId;
+                        product.ingredient_name = info[i].ingLabel;
+                    }
+                    //make dosage form with both english and french labels
                     if (info[i].dosageForm) {
                         var splitArray = (info[i].dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
                         var newDosage = splitArray[splitArray.length - 1];
