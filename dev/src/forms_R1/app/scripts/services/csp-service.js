@@ -112,16 +112,74 @@
          */
         CspService.prototype.transformFromFileObj = function (jsonObj) {
             var resultJson = this.getEmptyInternalModel();
-            //TODO
+
+            resultJson.applicant = this._mapApplicantToInternal(jsonObj.applicant);
+            //health Canada Only Section
+            resultJson.enrolmentVersion = jsonObj.enrolment_version;
+            resultJson.dateSaved = jsonObj.date_saved;
+            resultJson.healthCanadaOnly.companyId = jsonObj.health_canada_only.company_id;
+            resultJson.healthCanadaOnly.dateReceived = jsonObj.health_canada_only.date_received;
+            resultJson.healthCanadaOnly.applicationId = jsonObj.health_canada_only.application_id;
+            resultJson.healthCanadaOnly.hcNotes = jsonObj.health_canada_only.hc_notes;
+            resultJson.patent.patentNumber = jsonObj.application_info.patent_info.patent_number;
+            resultJson.patent.filingDate = jsonObj.application_info.patent_info.filing_date;
+            resultJson.patent.grantedDate = jsonObj.application_info.patent_info.granted_date;
+            resultJson.patent.expiryDate = jsonObj.application_info.patent_info.expiry_date;
+            resultJson.applicationInfo.controlNumber = jsonObj.application_info.control_number;
+            resultJson.applicationInfo.drugUse = jsonObj.application_info.drug_use;
+            resultJson.applicationInfo.timeApplication = jsonObj.application_info.time_application;
+            resultJson.applicationInfo.medicinalIngredient = jsonObj.application_info.medicinal_ingredient;
+            resultJson.applicationInfo.applicantStatement = jsonObj.application_info.applicant_statement;
+            resultJson.timelySubmission.submissionStatement = jsonObj.timely_submission_info.timely_submission_statement;
+            resultJson.timelySubmission.approvalDate = jsonObj.timely_submission_info.marketing_approval_date;
+            resultJson.timelySubmission.country = jsonObj.timely_submission_info.marketing_country;
+            resultJson.timelySubmission.otherCountry = jsonObj.timely_submission_info.marketing_country_eu;
+            resultJson.payment.advancedPaymentFee = jsonObj.advanced_payment.advanced_payment_fee;
+            resultJson.payment.advancedPaymentType = jsonObj.advanced_payment.advanced_payment_type;
+            resultJson.certification.givenName = jsonObj.certification.given_name;
+            resultJson.certification.initials = jsonObj.certification.initials;
+            resultJson.certification.surname = jsonObj.certification.surname;
+            resultJson.certification.jobTitle = jsonObj.certification.job_title;
+            resultJson.certification.dateSigned = jsonObj.certification.date_signed;
+
+            /** var defaultCSPData = {};
+             defaultCSPData.dataChecksum = "";
+             defaultCSPData.enrolmentVersion = "0.0";
+             defaultCSPData.dateSaved = "";
+             defaultCSPData.softwareVersion = "";
+             //TODO appl Info
+             defaultCSPData.applicant = [this.createApplicantRecord(true)];
+
+             defaultCSPData.patent = {};
+             defaultCSPData.patent.patentNumber = "";
+             defaultCSPData.patent.filingDate = "";
+             defaultCSPData.patent.grantedDate = "";
+             defaultCSPData.patent.expiryDate = "";
+             defaultCSPData.applicationInfo = {};
+             defaultCSPData.applicationInfo.controlNumber = "";
+             defaultCSPData.applicationInfo.drugUse = "";
+             defaultCSPData.applicationInfo.timeApplication = "";
+             defaultCSPData.applicationInfo.medicinalIngredient = "";
+             defaultCSPData.applicationInfo.applicantStatement = "";
+             defaultCSPData.timelySubmission = {};
+             defaultCSPData.timelySubmission.submissionStatement = "";
+             defaultCSPData.timelySubmission.approvalDate = "";
+             defaultCSPData.timelySubmission.country = "";
+             defaultCSPData.timelySubmission.otherCountry = "";
+             defaultCSPData.payment = {};
+             defaultCSPData.payment.advancedPaymentFee = null;
+             defaultCSPData.payment.advancedPaymentType = "";
+             defaultCSPData.certification = {};
+             defaultCSPData.certification.givenName = "";
+             defaultCSPData.certification.initials = "";
+             defaultCSPData.certification.surname = "";
+             defaultCSPData.certification.jobTitle = "";
+             defaultCSPData.certification.dateSigned = "";   **/
+
+
             return resultJson;
         };
 
-
-        /* CspService.prototype.createApplicantRecord = function () {
-         var record=this.createContactRecord();
-         record.applicantName="";
-         return record
-         };*/
 
         CspService.prototype.createApplicantRecord = function (isApplicant) {
             var record = this.createContactRecord();
@@ -290,8 +348,8 @@
             defaultCSPData.health_canada_only = {};
             var hc = defaultCSPData.health_canada_only;
             hc.company_id = "";
+            hc.application_id = "";
             hc.date_received = "";
-            hc.company_id = "";
             hc.hc_notes = "";
             defaultCSPData.application_info = {};
             defaultCSPData.application_info.patent_info = {};
@@ -398,6 +456,40 @@
             }
             console.log(outputArray);
             return outputArray;
+        };
+
+
+        CspService.prototype._mapApplicantToInternal = function (inputJson) {
+            var result = [];
+            if (!inputJson) return result; //should never happen
+
+            if (!(inputJson instanceof Array)) {
+
+                inputJson = [inputJson];
+            }
+            for (var i = 0; i < inputJson.length; i++) {
+                var record = this.createApplicantRecord(true);
+                var externalRecord = inputJson[i];
+                record.role.applicant = externalRecord.applicant_role;
+                record.role.billing = externalRecord.billing_role;
+                record.contact.salutation = externalRecord.contact.salutation;
+                record.contact.givenName = externalRecord.contact.given_name;
+                record.contact.surname = externalRecord.contact.surname;
+                record.contact.initials = externalRecord.contact.initials;
+                record.contact.title = externalRecord.contact.job_title;
+                record.contact.phone = externalRecord.contact.phone_num;
+                record.contact.phoneExt = externalRecord.contact.phone_ext;
+                record.contact.fax = externalRecord.contact.fax_num;
+                record.contact.email = externalRecord.contact.email;
+                record.address.street = externalRecord.address.street_address;
+                record.address.city = externalRecord.address.city;
+                record.address.stateList = externalRecord.address.province_lov;
+                record.address.stateText = externalRecord.address.province_text;
+                record.address.country = externalRecord.address.country; //TODO fix with lookup
+                record.address.postalCode = externalRecord.address.postal_code;
+                result.push(record);
+            }
+            return result;
         };
 
         return CspService;

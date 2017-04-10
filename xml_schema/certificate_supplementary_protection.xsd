@@ -30,6 +30,7 @@
 	<!--start of hcOnly section-->
 	<hpfb:element name="health_canada_only" type="hc_only_content"/>
 	<hpfb:element name="hc_notes" type="char_0_256_content"/>
+	<hpfb:element name="application_id" type="char_0_6_content"/>
 	<hpfb:element name="company_id" type="optional_integer_0_999999_content"/>
 	<hpfb:element name="date_received" type="optional_yyyymmdd_date_content"/>
 	<!--Start of application information-->
@@ -108,6 +109,7 @@
 	<hpfb:complexType name="hc_only_content">
 		<hpfb:all>
 			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="application_id"/>
 			<hpfb:element ref="date_received"/>
 			<hpfb:element ref="hc_notes"/>
 		</hpfb:all>

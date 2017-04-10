@@ -62,6 +62,7 @@
             vm.paymentType = vm.modelService.getAdvancedPaymentTypes();
             vm.drugUseList = vm.modelService.getDrugUses();
             vm.rootTag = vm.modelService.getRootTag();
+            console.log("The root tag is: " + vm.rootTag);
             vm.applicationInfoService = new ApplicationInfoService();
         };
 
