@@ -60,7 +60,7 @@
             console.log(model);
             model[rootTag].template_type = PHARMA_TYPE;
             model[rootTag].enrolment_version = jsonObj.enrolmentVersion;
-            model[rootTag].date_saved = jsonObj.dateSaved;
+            model[rootTag].date_saved = $filter('date')(jsonObj.dateSaved, "yyyy-MM-dd");
             model[rootTag].software_version = "1.0.0";
             model[rootTag].data_checksum = "";
             var hcOnly = model[rootTag].health_canada_only;
@@ -70,7 +70,7 @@
 
             //application info mapping
             var extInfo = model[rootTag].application_info;
-            var intInfo = jsonObj, applicationInfo;
+            var intInfo = jsonObj.applicationInfo;
             extInfo.control_number = intInfo.controlNumber;
             extInfo.drug_use = intInfo.drugUse;
             extInfo.time_application = intInfo.timeApplication;
@@ -80,13 +80,13 @@
             var extPatent = extInfo.patent_info;
             var intPatent = jsonObj.patent;
             extPatent.patent_number = intPatent.patentNumber;
-            extPatent.filing_date = intPatent.filingDate;
-            extPatent.granted_date = intPatent.grantedDate;
-            extPatent.expiry_date = intPatent.expiryDate;
+            extPatent.filing_date =  $filter('date')(intPatent.filingDate, "yyyy-MM-dd");
+            extPatent.granted_date = $filter('date')(intPatent.grantedDate, "yyyy-MM-dd");
+            extPatent.expiry_date = $filter('date')(intPatent.expiryDate, "yyyy-MM-dd");
             var extTimely = model[rootTag].timely_submission_info;
             var intTimely = jsonObj.timelySubmission;
             extTimely.timely_submission_statement = intTimely.submissionStatement;
-            extTimely.marketing_approval_date = intTimely.approvalDate;
+            extTimely.marketing_approval_date =  $filter('date')(intTimely.approvalDate, "yyyy-MM-dd");
             extTimely.marketing_country = intTimely.country;
             extTimely.marketing_country_eu = intTimely.otherCountry;
             var extPayment = model[rootTag].advanced_payment;
@@ -98,7 +98,7 @@
             extCertification.given_name = intCertification.givenName;
             extCertification.initials = intCertification.initials;
             extCertification.surname = intCertification.surname;
-            extCertification.job_title = intCertification.jobTitle;
+            extCertification.job_title = intCertification.title;
             extCertification.date_signed = intCertification.dateSigned;
 
             model[rootTag].applicant = this._transformApplicantInfoForOutput(jsonObj.applicant);
@@ -110,28 +110,29 @@
          * @param jsonObj
          * @returns {*}
          */
-        CspService.prototype.transformFromFileObj = function (jsonObj) {
+        CspService.prototype.transformFromFileObj = function (inputJsonObj) {
             var resultJson = this.getEmptyInternalModel();
-
+            var jsonObj=inputJsonObj[this.rootTag];
+            console.log(jsonObj);
             resultJson.applicant = this._mapApplicantToInternal(jsonObj.applicant);
             //health Canada Only Section
             resultJson.enrolmentVersion = jsonObj.enrolment_version;
-            resultJson.dateSaved = jsonObj.date_saved;
+            resultJson.dateSaved = _parseDate(jsonObj.date_saved);
             resultJson.healthCanadaOnly.companyId = jsonObj.health_canada_only.company_id;
             resultJson.healthCanadaOnly.dateReceived = jsonObj.health_canada_only.date_received;
             resultJson.healthCanadaOnly.applicationId = jsonObj.health_canada_only.application_id;
             resultJson.healthCanadaOnly.hcNotes = jsonObj.health_canada_only.hc_notes;
             resultJson.patent.patentNumber = jsonObj.application_info.patent_info.patent_number;
-            resultJson.patent.filingDate = jsonObj.application_info.patent_info.filing_date;
-            resultJson.patent.grantedDate = jsonObj.application_info.patent_info.granted_date;
-            resultJson.patent.expiryDate = jsonObj.application_info.patent_info.expiry_date;
+            resultJson.patent.filingDate = _parseDate(jsonObj.application_info.patent_info.filing_date);
+            resultJson.patent.grantedDate = _parseDate(jsonObj.application_info.patent_info.granted_date);
+            resultJson.patent.expiryDate = _parseDate(jsonObj.application_info.patent_info.expiry_date);
             resultJson.applicationInfo.controlNumber = jsonObj.application_info.control_number;
             resultJson.applicationInfo.drugUse = jsonObj.application_info.drug_use;
             resultJson.applicationInfo.timeApplication = jsonObj.application_info.time_application;
             resultJson.applicationInfo.medicinalIngredient = jsonObj.application_info.medicinal_ingredient;
             resultJson.applicationInfo.applicantStatement = jsonObj.application_info.applicant_statement;
             resultJson.timelySubmission.submissionStatement = jsonObj.timely_submission_info.timely_submission_statement;
-            resultJson.timelySubmission.approvalDate = jsonObj.timely_submission_info.marketing_approval_date;
+            resultJson.timelySubmission.approvalDate = _parseDate(jsonObj.timely_submission_info.marketing_approval_date);
             resultJson.timelySubmission.country = jsonObj.timely_submission_info.marketing_country;
             resultJson.timelySubmission.otherCountry = jsonObj.timely_submission_info.marketing_country_eu;
             resultJson.payment.advancedPaymentFee = jsonObj.advanced_payment.advanced_payment_fee;
@@ -139,44 +140,12 @@
             resultJson.certification.givenName = jsonObj.certification.given_name;
             resultJson.certification.initials = jsonObj.certification.initials;
             resultJson.certification.surname = jsonObj.certification.surname;
-            resultJson.certification.jobTitle = jsonObj.certification.job_title;
-            resultJson.certification.dateSigned = jsonObj.certification.date_signed;
+            resultJson.certification.title = jsonObj.certification.job_title;
+            resultJson.certification.dateSigned = _parseDate(jsonObj.certification.date_signed);
 
-            /** var defaultCSPData = {};
-             defaultCSPData.dataChecksum = "";
-             defaultCSPData.enrolmentVersion = "0.0";
-             defaultCSPData.dateSaved = "";
-             defaultCSPData.softwareVersion = "";
-             //TODO appl Info
-             defaultCSPData.applicant = [this.createApplicantRecord(true)];
-
-             defaultCSPData.patent = {};
-             defaultCSPData.patent.patentNumber = "";
-             defaultCSPData.patent.filingDate = "";
-             defaultCSPData.patent.grantedDate = "";
-             defaultCSPData.patent.expiryDate = "";
-             defaultCSPData.applicationInfo = {};
-             defaultCSPData.applicationInfo.controlNumber = "";
-             defaultCSPData.applicationInfo.drugUse = "";
-             defaultCSPData.applicationInfo.timeApplication = "";
-             defaultCSPData.applicationInfo.medicinalIngredient = "";
-             defaultCSPData.applicationInfo.applicantStatement = "";
-             defaultCSPData.timelySubmission = {};
-             defaultCSPData.timelySubmission.submissionStatement = "";
-             defaultCSPData.timelySubmission.approvalDate = "";
-             defaultCSPData.timelySubmission.country = "";
-             defaultCSPData.timelySubmission.otherCountry = "";
-             defaultCSPData.payment = {};
-             defaultCSPData.payment.advancedPaymentFee = null;
-             defaultCSPData.payment.advancedPaymentType = "";
-             defaultCSPData.certification = {};
-             defaultCSPData.certification.givenName = "";
-             defaultCSPData.certification.initials = "";
-             defaultCSPData.certification.surname = "";
-             defaultCSPData.certification.jobTitle = "";
-             defaultCSPData.certification.dateSigned = "";   **/
-
-
+            //console.log(resultJson)
+            //
+            this._default=resultJson;
             return resultJson;
         };
 
@@ -184,6 +153,7 @@
         CspService.prototype.createApplicantRecord = function (isApplicant) {
             var record = this.createContactRecord();
             record.applicantName = "";
+            record.isBillingDifferent=false;
             if (!isApplicant) {
                 record.role.applicant = false;
                 record.role.billing = true;
@@ -329,7 +299,7 @@
             defaultCSPData.certification.givenName = "";
             defaultCSPData.certification.initials = "";
             defaultCSPData.certification.surname = "";
-            defaultCSPData.certification.jobTitle = "";
+            defaultCSPData.certification.title = "";
             defaultCSPData.certification.dateSigned = "";
 
             return (defaultCSPData);
@@ -397,7 +367,7 @@
             record.contact.given_name = "";
             record.contact.initials = "";
             record.contact.surname = "";
-            record.contact.job_title = "";
+            record.contact.title = "";
             // record.contact.language_correspondance="";
             record.contact.phone_num = "";
             record.contact.phone_ext = "";
@@ -419,7 +389,6 @@
                 console.log("This is not an instance of an Array");
                 inputJson = [inputJson];
             }
-            ;
             //should never happen error catch
             if (inputJson.length == 0) {
                 outputArray.push(this.createExternalApplicantRecord());
@@ -428,13 +397,17 @@
             }
             for (var i = 0; i < inputJson.length; i++) {
                 var record = this.createExternalApplicantRecord();
+                /*record.role.applicant = externalRecord.applicant_role;
+                record.role.billing = externalRecord.billing_role;*/
                 record.billing_role = inputJson[i].role.billing === true ? YES : NO;
                 record.applicant_role = inputJson[i].role.applicant === true ? YES : NO;
                 record.applicant_name = inputJson[i].applicantName;
+                record.contact.salutation = inputJson[i].contact.salutation;
                 record.contact.given_name = inputJson[i].contact.givenName;
                 record.contact.initials = inputJson[i].contact.initials;
                 record.contact.surname = inputJson[i].contact.surname;
-                record.contact.job_title = inputJson[i].contact.jobTitle;
+                record.contact.language_correspondance=inputJson[i].contact.language;
+                record.contact.job_title = inputJson[i].contact.title;
                 record.contact.phone_num = inputJson[i].contact.phone;
                 record.contact.phone_ext = inputJson[i].contact.phoneExt;
                 record.contact.fax_num = inputJson[i].contact.fax;
@@ -470,13 +443,19 @@
             for (var i = 0; i < inputJson.length; i++) {
                 var record = this.createApplicantRecord(true);
                 var externalRecord = inputJson[i];
-                record.role.applicant = externalRecord.applicant_role;
-                record.role.billing = externalRecord.billing_role;
+                record.role.applicant = externalRecord.applicant_role===YES ;
+                record.role.billing = externalRecord.billing_role===YES;
+                //this is being managed only on the internal data model
+                if(record.role.applicant && !record.role.billing){
+                    record.isBillingDifferent=true;
+                };
+                record.applicantName =externalRecord.applicant_name;
                 record.contact.salutation = externalRecord.contact.salutation;
                 record.contact.givenName = externalRecord.contact.given_name;
                 record.contact.surname = externalRecord.contact.surname;
                 record.contact.initials = externalRecord.contact.initials;
                 record.contact.title = externalRecord.contact.job_title;
+                record.contact.language=externalRecord.contact.language_correspondance;
                 record.contact.phone = externalRecord.contact.phone_num;
                 record.contact.phoneExt = externalRecord.contact.phone_ext;
                 record.contact.fax = externalRecord.contact.fax_num;
@@ -492,7 +471,18 @@
             return result;
         };
 
+
         return CspService;
     }
 
+    function _parseDate(value) {
+        if(!value) return null;
+        var dateArray = value.split('-');
+        if (dateArray.length != 3) {
+            console.warn("_parseDate error not 3 parts: "+value);
+        }
+        console.log(dateArray[0]+" "+ dateArray[1] - 1+" "+ dateArray[2]);
+        var aDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
+        return aDate;
+    }
 })();

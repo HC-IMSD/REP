@@ -46,7 +46,7 @@
                 <label for="jobTitle_{{::$id}}" class="required">
                     <span class="field-name">{{'JOB_TITLE'|translate}}</span>
                     <strong class="required">{{'REQUIRED'|translate}}</strong>
-                    <input type="text" id="jobTitle_{{::$id}}" data-ng-model="cspCertCtrl.model.jobTitle"
+                    <input type="text" id="jobTitle_{{::$id}}" data-ng-model="cspCertCtrl.model.title"
                            class="form-control full-width" name="jobTitle" required maxlength="40" size="40"
                            ng-blur="cspCertCtrl.updateErrorSummary()" required/>
                     <strong id="jobTitle-error" class="error"

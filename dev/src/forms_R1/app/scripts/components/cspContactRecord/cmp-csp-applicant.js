@@ -38,8 +38,9 @@
     function cspApplicantCtrl() {
         var vm = this;
         vm.title = 'CspApplicantCtrl';
-        vm.model=null;
-        vm.isBillingDifferent=false;
+        vm.model={
+            isBillingDifferent:false
+        };
         vm.applicantTextAlias="APPLICANT";
         vm.$onInit=function(){
             //after on changes called
@@ -59,8 +60,7 @@
         };
 
         vm.setBilling=function(){
-            console.log("In the set billing "+vm.isBillingDifferent)
-            if(vm.isBillingDifferent) {
+            if(vm.model.isBillingDifferent) {
 
                 vm.addApplicant();
             }else{

@@ -25,13 +25,14 @@
             }
         });
 
-    timelySubmissionController.$inject = ['EUOTHER'];
-    function timelySubmissionController(EUOTHER) {
+    timelySubmissionController.$inject = ['EUOTHER','NO_APPLICATION','APPLICATION'];
+    function timelySubmissionController(EUOTHER,NO_APPLICATION,APPLICATION) {
 
         var vm = this;
-        vm.model = null;
+        vm.model = {};
         vm.countries = [];
-
+        vm.noAppValue=NO_APPLICATION;
+        vm.appValue=APPLICATION;
         /**
          * Called after onChanges evnet, initializes
          */

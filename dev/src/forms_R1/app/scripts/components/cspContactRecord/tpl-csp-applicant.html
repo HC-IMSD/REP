@@ -23,7 +23,7 @@
         <div class=" col-md-12" ng-class="{'has-error':cspApplCtrl.applForm.billingDifferent.$invalid}">
             <div class="checkbox" ng-if="cspApplCtrl.model.role.applicant">
                 <label for="billingDifferent_{{$id}}">
-                    <input type="checkbox" ng-model="cspApplCtrl.isBillingDifferent" name="billingDifferent_{{$id}}"
+                    <input type="checkbox" ng-model="cspApplCtrl.model.isBillingDifferent" name="billingDifferent_{{$id}}"
                            ng-change="cspApplCtrl.setBilling()"
                            id="billingDifferent_{{$id}}"/>{{"BILLING_DIFFERENT"|translate}}
                 </label>

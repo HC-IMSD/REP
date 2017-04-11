@@ -13,8 +13,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="patentNum_{{::$id}}" name="patentNum_{{::$id}}"
                            data-ng-model="cspPatentCtrl.model.patentNumber" class="form-control" maxlength="7"
-                           size="7"
-                           required/>
+                           size="7" required/>
                     <strong id="applicant-error" class="error"
                             ng-show="cspPatentCtrl.showError(cspPatentCtrl.patentForm.patentNum_{{::$id}})">
                              <span class="label label-danger"
