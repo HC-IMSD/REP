@@ -383,8 +383,6 @@ var transactionComponentFolders = [
     componentFolders.contactDetails,
     componentFolders.expandingTable,
     componentFolders.fileIOComponentAndDep,
-    componentFolders.repContactList,
-    componentFolders.repContactRecord,
     componentFolders.lifecycleList,
     componentFolders.lifecycleDetails,
     componentFolders.addressDetails
@@ -433,6 +431,7 @@ var serviceFileNames = {
     dossierLoadService: "dossier-load-service",
     cspService:"csp-service",
     cspConstants:'csp-constants',
+    cspLoadService: 'csp-load-service',
     diffService: 'diff-service'
 };
 
@@ -492,7 +491,8 @@ var cspServiceFileNames =
         serviceFileNames.filterLists,
         serviceFileNames.applicationInfoService,
         serviceFileNames.cspService,
-        serviceFileNames.cspConstants
+        serviceFileNames.cspConstants,
+        serviceFileNames.cspLoadService
     ];
 
 

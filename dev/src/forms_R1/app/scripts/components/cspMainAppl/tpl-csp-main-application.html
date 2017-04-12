@@ -87,10 +87,6 @@
                 <label for="medicinalIngredient_{{::$id}}" class="required">
                     <span class="field-name">{{'MED_INGRED' |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                    <input type="text" id="medicinalIngredient_{{::$id}}" name="medicinalIngredient_{{::$id}}"
-                           data-ng-model="cspMainApplCtrl.model.medicinalIngredient"
-                           class="form-control full-width" maxlength="7"
-                           size="7" required/>
                     <strong id="medicinalIngredient-error" class="error"
                             ng-show="cspMainApplCtrl.showError(cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}})">
                              <span class="label label-danger"
@@ -99,6 +95,10 @@
                              </span>
                     </strong>
                 </label>
+                <textarea id="medicinalIngredient_{{::$id}}" name="medicinalIngredient_{{::$id}}"
+                          data-ng-model="cspMainApplCtrl.model.medicinalIngredient"
+                          class="form-control full-width" maxlength="300" rows="4"
+                          size="7" required></textarea>
             </div>
         </div>
         <div class="row">

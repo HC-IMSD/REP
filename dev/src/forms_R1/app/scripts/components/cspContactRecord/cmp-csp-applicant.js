@@ -26,7 +26,8 @@
             bindings: {
                 record:'<',
                 addApplicant:'&',
-                deleteApplicant:'&'
+                deleteApplicant: '&',
+                showErrors: '&'
             }
         });
 
@@ -59,6 +60,10 @@
 
         };
 
+        /**
+         * Adds or deletes and applicant address depending if a
+         * user selects billing address or not
+         */
         vm.setBilling=function(){
             if(vm.model.isBillingDifferent) {
 
@@ -68,9 +73,18 @@
             }
         }
 
-        ////////////////
-
+        /**
+         * used to control when to show an individual error
+         * @param ctrl - control to show an error on
+         * @returns {*}
+         */
+        vm.showError = function (ctrl) {
+            if (!ctrl) {
+                console.warn("cmpCspApplicant::showError: no control");
+                return false;
+            }
+            return (ctrl.$invalid && ctrl.$touched || (vm.showErrors() && ctrl.$invalid));
+        };
     }
-
 })();
 

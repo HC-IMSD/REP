@@ -1,10 +1,10 @@
 {
   "APPLICANT": "Applicant Name",
-  "DATE_APPL_REC":"Date Application Received",
-  "CSP_COMPANY_CODE":"CSP Company Code",
-  "CSP_APPLICATION_CODE":"CSP Application Number",
-  "NOTES":"Notes",
-  "HCONLY":"Health Canada Use Only",
+  "DATE_APPL_REC": "Date Application Received",
+  "CSP_COMPANY_CODE": "CSP Company Code",
+  "CSP_APPLICATION_CODE": "CSP Application Number",
+  "NOTES": "Notes",
+  "HCONLY": "Health Canada Use Only",
   "BILLING_DIFFERENT": "Select to enter a billing address that is different from the Applicant’s Contact Information",
   "ADVANCE_FEE_PAYMENT": "The Advanced Payment Details form is being submitted separately by fax or mail, and the fee is being paid or the fee has been prepaid in the amount of",
   "PAYMENT_METHOD": "Method of Advanced Payment",
@@ -21,6 +21,14 @@
   "EU_OTHER": "Any country that is a member of the European Union",
   "HUMAN": "Human",
   "VETERINARY": "Veterinary",
-  "DRUGUSE": "Drug use"
-
+  "DRUGUSE": "Drug use",
+  "DATE_FILED": "Filing Date",
+  "DATE_GRANTED": "Date Granted",
+  "DATE_EXPIRY": "Expiration Date",
+  "NDS_NUMBER": "NDS Control Number",
+  "MED_INGRED": "Medicinal ingredient or combination of medicinal ingredients (as provided on the NOC for the above noted NDS)",
+  "STATEMENTS_APPLICANT": "Statements as to Applicant",
+  "STATEMENTS_TIMELY": "Statements as to timely submission",
+  "STATE_NO_APPLICATION": "No application for a marketing approval equivalent to an authorization for sale with respect to the medicinal ingredient or combination of medicinal ingredients set out in this CSP application has been submitted in the United States, the European Union or any country that is a member of the European Union, Australia, Switzerland or Japan, before the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health",
+  "STATE_APPLICATION": "If an application for a marketing approval equivalent to an authorization for sale with respect to the medicinal ingredient or combination of medicinal ingredients set out in this CSP application has been submitted in the United States, the European Union or any country that is a member of the European Union, Australia, Switzerland or Japan, the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health before the end of a period of one year that begins on the day on which the first such application for a marketing approval was submitted. Details of the first application for marketing approval are as follows:"
 }

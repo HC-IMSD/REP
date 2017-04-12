@@ -20,6 +20,7 @@
             controller: hcOnlyController,
             controllerAs: 'hcOnlyCtrl',
             bindings: {
+                record: '<',
                 showErrors:'&'
 
             }

@@ -15,8 +15,8 @@
         .module('cspService')
         .factory('CspService', CspService);
 
-    CspService.$inject = ['$filter', 'NO', 'YES', 'PHARMA_TYPE'];
-    function CspService($filter, NO, YES, PHARMA_TYPE) {
+    CspService.$inject = ['$filter', 'NO', 'YES', 'PHARMA_TYPE', 'getCountryAndProvinces'];
+    function CspService($filter, NO, YES, PHARMA_TYPE, getCountryAndProvinces) {
 
         function CspService() {
             //constructorlogic
@@ -46,6 +46,7 @@
 
         /**
          * Transforms the internal data model to the external data model
+         * i.e. creates the data model for file write
          *
          * @param jsonObj
          */
@@ -64,10 +65,11 @@
             model[rootTag].software_version = "1.0.0";
             model[rootTag].data_checksum = "";
             var hcOnly = model[rootTag].health_canada_only;
-            hcOnly.company_id = jsonObj.healthCanadaOnly.companyId;
-            hcOnly.date_received = jsonObj.healthCanadaOnly.dateReceived;
-            hcOnly.hc_notes = jsonObj.healthCanadaOnly.hcNotes;
-
+            var intHcOnly = jsonObj.healthCanadaOnly;
+            hcOnly.company_id = intHcOnly.companyId;
+            hcOnly.application_id = intHcOnly.applicationId;
+            hcOnly.date_received = $filter('date')(intHcOnly.dateReceived, "yyyy-MM-dd");
+            hcOnly.hc_notes = intHcOnly.hcNotes;
             //application info mapping
             var extInfo = model[rootTag].application_info;
             var intInfo = jsonObj.applicationInfo;
@@ -119,7 +121,7 @@
             resultJson.enrolmentVersion = jsonObj.enrolment_version;
             resultJson.dateSaved = _parseDate(jsonObj.date_saved);
             resultJson.healthCanadaOnly.companyId = jsonObj.health_canada_only.company_id;
-            resultJson.healthCanadaOnly.dateReceived = jsonObj.health_canada_only.date_received;
+            resultJson.healthCanadaOnly.dateReceived = _parseDate(jsonObj.health_canada_only.date_received);
             resultJson.healthCanadaOnly.applicationId = jsonObj.health_canada_only.application_id;
             resultJson.healthCanadaOnly.hcNotes = jsonObj.health_canada_only.hc_notes;
             resultJson.patent.patentNumber = jsonObj.application_info.patent_info.patent_number;
@@ -423,6 +425,8 @@
                         _label_fr: inputJson[i].address.country.fr,
                         __text: inputJson[i].address.country.id
                     };
+
+
                 }
                 record.address.postal_code = inputJson[i].address.postalCode;
                 outputArray.push(record);
@@ -431,7 +435,13 @@
             return outputArray;
         };
 
-
+        /**
+         * Copies the values from an external Applicant data JSON data model to an internal one
+         * i.e. file load scenario
+         * @param inputJson
+         * @returns {Array}
+         * @private
+         */
         CspService.prototype._mapApplicantToInternal = function (inputJson) {
             var result = [];
             if (!inputJson) return result; //should never happen
@@ -465,6 +475,11 @@
                 record.address.stateList = externalRecord.address.province_lov;
                 record.address.stateText = externalRecord.address.province_text;
                 record.address.country = externalRecord.address.country; //TODO fix with lookup
+
+                if (record.address.country.__text) {
+                    record.address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: record.address.country.__text})[0];
+                }
+
                 record.address.postalCode = externalRecord.address.postal_code;
                 result.push(record);
             }

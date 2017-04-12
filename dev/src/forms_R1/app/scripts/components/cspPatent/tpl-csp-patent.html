@@ -38,6 +38,7 @@
                             <span class="label label-danger"
                                   ng-messages="cspPatentCtrl.patentForm.dateFiled_{{::$id}}.$error">
                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                 <span ng-message="date">{{'MSG_ERR_DATE_FORMAT'|translate}}</span>
                             </span>
                     </strong>
                 </label>
@@ -55,6 +56,7 @@
                             <span class="label label-danger"
                                   ng-messages="cspPatentCtrl.patentForm.dateGranted_{{::$id}}.$error">
                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                <span ng-message="date">{{'MSG_ERR_DATE_FORMAT'|translate}}</span>
                             </span>
                     </strong>
                 </label>
@@ -72,6 +74,7 @@
                             <span class="label label-danger"
                                   ng-messages="cspPatentCtrl.patentForm.dateExpiry_{{::$id}}.$error">
                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                 <span ng-message="date">{{'MSG_ERR_DATE_FORMAT'|translate}}</span>
                             </span>
                     </strong>
                 </label>
