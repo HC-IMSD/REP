@@ -1,10 +1,46 @@
 <templateSet group="repForms">
-    <template name="repapp"
-              value="(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$', [&#10;            'pascalprecht.translate',&#10;            'translations'&#10;        ])&#10;})();&#10;(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$')&#10;        .controller('MainController', MainController);&#10;&#10;    function MainController() {&#10;&#10;        var vm = this;&#10;        vm.formType = '@@SET_FORM';&#10;&#10;    }&#10;})();&#10;&#10;(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$')&#10;        .config(['$translateProvider', function ($translateProvider) {&#10;&#10;            $translateProvider.preferredLanguage('@@prefLang');&#10;            //$translateProvider.useLoader('customLoad');&#10;            //this prevents conflicts with ngMessage&#10;            $translateProvider.directivePriority(1);&#10;            $translateProvider.useSanitizeValueStrategy(null);&#10;            //$translateProvider.forceAsyncReload(true); //needed for the custom loader&#10;        }]);&#10;})();"
-              description="Create rep app" toReformat="false" toShortenFQNames="true">
-        <variable name="moduleName" expression="" defaultValue="moduleName" alwaysStopAt="true"/>
-        <context>
-            <option name="JS_STATEMENT" value="true"/>
-        </context>
-    </template>
+  <template name="repapp"
+            value="(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$', [&#10;            'pascalprecht.translate',&#10;            'translations'&#10;        ])&#10;})();&#10;(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$')&#10;        .controller('MainController', MainController);&#10;&#10;    function MainController() {&#10;&#10;        var vm = this;&#10;        vm.formType = '@@SET_FORM';&#10;&#10;    }&#10;})();&#10;&#10;(function () {&#10;    'use strict';&#10;    angular&#10;        .module('$moduleName$')&#10;        .config(['$translateProvider', function ($translateProvider) {&#10;&#10;            $translateProvider.preferredLanguage('@@prefLang');&#10;            //$translateProvider.useLoader('customLoad');&#10;            //this prevents conflicts with ngMessage&#10;            $translateProvider.directivePriority(1);&#10;            $translateProvider.useSanitizeValueStrategy(null);&#10;            //$translateProvider.forceAsyncReload(true); //needed for the custom loader&#10;        }]);&#10;})();"
+            description="Create rep app" toReformat="false" toShortenFQNames="true">
+    <variable name="moduleName" expression="" defaultValue="moduleName" alwaysStopAt="true"/>
+    <context>
+      <option name="JS_STATEMENT" value="true"/>
+    </context>
+  </template>
+  <template name="rep-html-list"
+            value="&lt;ng-form name=&quot;$ctrlAs$.$formName$&quot;&gt;&#10;&#10;    &lt;cmp-expanding-table title=&quot;{{'$listTitle$'|translate}}&quot; list-items=&quot;$ctrlAs$.ingList&quot;&#10;                         reset-to-collapsed=&quot;$ctrlAs$.resetToCollapsed&quot;&#10;                         column-def=&quot;$ctrlAs$.colNames&quot; select-record=&quot;$ctrlAs$.selectRecord&quot;&#10;                         disable-selection=&quot;!$ctrlAs$.isDetailValid&quot;&gt;&#10;&#10;        &lt;$compName$ record=&quot;$parent.record&quot; on-update=&quot;$ctrlAs$.updateIng($parent.$index,ing)&quot;&#10;                               on-add-ing=&quot;$ctrlAs$.addIng(ing)&quot; record-index=&quot;$parent.$index&quot;&#10;                               on-delete=&quot;$ctrlAs$.deleteIng($parent.$index)&quot; delete-btn=&quot;true&quot;&#10;                               is-detail-valid=&quot;$ctrlAs$.setValid(state)&quot;&gt;&lt;/$compName$&gt;&#10;&#10;    &lt;/cmp-expanding-table&gt;&#10;    &lt;div name=&quot;new-record&quot;&gt;&#10;        &lt;$compName$ ng-if=&quot;$ctrlAs$.newIngFormShown === true&quot; on-add-ing=&quot;$ctrlAs$.addIng(ing)&quot;&#10;                               on-cancel=&quot;$ctrlAs$.onNewCancel()&quot; delete-btn=&quot;false&quot;&#10;                               record-index=&quot;$ctrlAs$.ingList.length&quot;&gt;&lt;/$compName$&gt;&#10;    &lt;/div&gt;&#10;    &lt;div class=&quot;mrgn-tp-md mrgn-bttm-lg&quot;&gt;&#10;        &lt;div class=&quot;btn-group-sm col-md-12 text-right&quot;&gt;&#10;            &lt;button class=&quot;btn btn-primary&quot; data-ng-disabled=&quot;$ctrlAs$.addNewDisabled()&quot;&#10;                    ng-click=&quot;$ctrlAs$.addNewIngredientState()&quot; id=&quot;addAI_{{::$index}}&quot; name=&quot;addAI&quot;&gt;Add Ingredient&#10;            &lt;/button&gt;&#10;        &lt;/div&gt;&#10;    &lt;/div&gt;&#10;&lt;/ng-form&gt;$END$"
+            description="Creates a generic list component" toReformat="false" toShortenFQNames="true">
+    <variable name="ctrlAs" expression="" defaultValue="ctrl" alwaysStopAt="true"/>
+    <variable name="formName" expression="" defaultValue="formName" alwaysStopAt="true"/>
+    <variable name="listTitle" expression="" defaultValue="listTitle" alwaysStopAt="true"/>
+    <variable name="compName" expression="" defaultValue="component-name" alwaysStopAt="true"/>
+    <context>
+      <option name="HTML" value="true"/>
+    </context>
+  </template>
+  <template name="repfldreq"
+            value=" &lt;div class=&quot;form-group col-md-$colSize$&quot; ng-class=&quot;{'has-error':$formName$.$fieldName$.$invalid}&quot;&gt;&#10;                &lt;label for=&quot;$fieldName$_{{::$id}}&quot; class=&quot;required&quot;&gt;&#10;                    &lt;span class=&quot;field-name&quot;&gt;{{&quot;CITY_TOWN&quot; |translate}}&lt;/span&gt;&#10;                    &lt;strong class=&quot;required&quot;&gt; {{&quot;REQUIRED&quot; |translate}} &lt;/strong&gt;&#10;                    &lt;input type=&quot;text&quot; id=&quot;$fieldName$_{{::$id}}&quot; name=&quot;$fieldName$_{{::$id}}&quot; data-ng-model=&quot;$ctrl$.$model$&quot; class=&quot;form-control&quot; maxlength=&quot;$length$&quot;&#10;                    required/&gt;&#10;                    &lt;strong id=&quot;$fieldName$-error&quot; class=&quot;error&quot; ng-if=&quot;$ctrl$.showError($formName$.$fieldName$)&quot;&gt;&#10;                        &lt;span class=&quot;label label-danger&quot; ng-messages=&quot;$formName$.$fieldName$.$error&quot;&gt;&#10;                            &lt;span ng-message=&quot;required&quot;&gt;{{'MSG_ERR_MAND'|translate}}&lt;/span&gt;&#10;                        &lt;/span&gt;&#10;                    &lt;/strong&gt;&#10;                &lt;/label&gt;&#10;            &lt;/div&gt;"
+            description="Required field" toReformat="false" toShortenFQNames="true">
+    <variable name="colSize" expression="" defaultValue="6" alwaysStopAt="true"/>
+    <variable name="formName" expression="" defaultValue="" alwaysStopAt="true"/>
+    <variable name="fieldName" expression="" defaultValue="" alwaysStopAt="true"/>
+    <variable name="ctrl" expression="" defaultValue="" alwaysStopAt="true"/>
+    <variable name="model" expression="" defaultValue="" alwaysStopAt="true"/>
+    <variable name="length" expression="" defaultValue="60" alwaysStopAt="true"/>
+    <context>
+      <option name="HTML" value="true"/>
+    </context>
+  </template>
+  <template name="repcomp"
+            value="(function () {&#10;    'use strict';&#10;&#10;    angular&#10;        .module('$moduleName$', [&#10;           &#10;        ]);&#10;&#10;})();&#10;&#10;(function () {&#10;    'use strict';&#10;&#10;    angular&#10;        .module('$moduleName$')&#10;        .component('$componentName$', {&#10;            templateUrl: 'app/scripts/components/folder-name/tpl-name.html',&#10;            controller: $controllerName$,&#10;            controllerAs: '$controllerAs$',&#10;            bindings: {&#10;            &#10;            }&#10;        });&#10;&#10;    $controllerName$.$inject = [];&#10;    function $controllerName$() {&#10;&#10;        var vm = this;&#10;       vm.model=null;&#10;&#10;        /**&#10;         * Called after onChanges evnet, initializes&#10;         */&#10;        vm.$onInit=function(){&#10;           &#10;        };&#10;&#10;        /**&#10;         * Called on binding changes&#10;         */&#10;        vm.$onChanges = function (changes) {&#10;&#10;        };&#10;        &#10;        &#10;         vm.showError=function(ctrl){&#10;&#10;            if(!ctrl) return false;&#10;&#10;            if ((ctrl.$invalid &amp;&amp; ctrl.$touched) || (vm.showErrors() &amp;&amp; ctrl.$invalid )) {&#10;                return true&#10;            }&#10;        }&#10;&#10;    }&#10;})();$END$"
+            description="Component Definition" toReformat="false" toShortenFQNames="true">
+    <variable name="moduleName" expression="" defaultValue="moduleName" alwaysStopAt="true"/>
+    <variable name="componentName" expression="" defaultValue="componentName" alwaysStopAt="true"/>
+    <variable name="controllerName" expression="" defaultValue="controllerName" alwaysStopAt="true"/>
+    <variable name="controllerAs" expression="" defaultValue="controllerAsSyntax" alwaysStopAt="true"/>
+    <context>
+      <option name="JAVA_SCRIPT" value="true"/>
+      <option name="JSX_HTML" value="false"/>
+    </context>
+  </template>
 </templateSet>
