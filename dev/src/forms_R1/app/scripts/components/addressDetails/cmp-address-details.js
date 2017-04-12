@@ -82,6 +82,7 @@
         vm.$onChanges = function (changes) {
             if (changes.addressRecord) {
                 vm.addressModel = changes.addressRecord.currentValue;
+                vm.countryChanged();
             }
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
