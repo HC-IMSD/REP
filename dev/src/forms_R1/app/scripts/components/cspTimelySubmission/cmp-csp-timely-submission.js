@@ -63,7 +63,20 @@
             }
             return false;
 
-        }
+        };
+        vm.isApplicationMarketing=function(){
+
+            if(!vm.model) return false;
+
+            if(vm.model.submissionStatement=== APPLICATION){
+              return true;
+            }else{
+                vm.model.approvalDate="";
+                vm.model.country="";
+                vm.model.otherCountry="";
+                return false;
+            }
+        };
         vm.showError = function (ctrl) {
 
             if (!ctrl) return false;

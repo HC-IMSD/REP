@@ -2,7 +2,7 @@
     <ng-form name="cspMainApplCtrl.mainApplForm">
         <div class="row">
             <div>
-                <h3>3. New Drug Submission (NDS) Information</h3>
+                <h3>3.&nbsp;{{'NDS_TITLE'|translate}}</h3>
             </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div>
-                <h3>4. Drug Use</h3>
+                <h3>4.&nbsp;{{'DRUGUSE_TITLE'|translate}}</h3>
             </div>
         </div>
         <div class="row">
@@ -51,7 +51,7 @@
         </div>
         <div class="row">
             <div>
-                <h3>5. Time of Application</h3>
+                <h3>5.&nbsp;{{'TIMEAPP_TITLE'|translate}}</h3>
             </div>
         </div>
         <div class="row">
@@ -62,15 +62,12 @@
                     <div class="radio">
                         <label for="status1"><input type="radio" name="time120" id="status1"
                                                     ng-model="cspMainApplCtrl.model.timeApplication"
-                                                    ng-value="cspMainApplCtrl.nocValue" required="required"/>within
-                            120 days of the issuance of the Notice of Compliance (NOC) for the above noted
-                            NDS,or</label>
+                                                    ng-value="cspMainApplCtrl.nocValue" required="required"/>{{'NOC_120'|translate}}</label>
                     </div>
                     <div class="radio">
                         <label for="status2"><input type="radio" name="time120"
                                                     ng-model="cspMainApplCtrl.model.timeApplication"
-                                                    ng-value="cspMainApplCtrl.grantValue" id="status2"/>within 120 days
-                            of the grant of the above noted patent</label>
+                                                    ng-value="cspMainApplCtrl.grantValue" id="status2"/>{{'GRANT_120'|translate}}</label>
                     </div>
                 </fieldset>
             </div>
@@ -113,19 +110,21 @@
                         <strong
                                 class="required"> {{"REQUIRED" |translate}} </strong></legend>
                     <div class="radio">
-                        <label for="applicant-owner"><input type="radio" name="applicantStatement" id="applicant-owner"
-                                                    ng-model="cspMainApplCtrl.model.applicantStatement"
-                                                    ng-value="cspMainApplCtrl.ownerValue" required="required"/>
-                            The Applicant is recorded as the owner of the above noted Canadian Patent at the
-                            Canadian Patent Office.
+                        <label for="applicant-owner">
+                            <input type="radio" name="applicantStatement" id="applicant-owner"
+                                   ng-model="cspMainApplCtrl.model.applicantStatement"
+                                   ng-value="cspMainApplCtrl.ownerValue" required="required"/>
+                            {{'APPLICANT_OWNER'|translate}}
                         </label>
                     </div>
                     <div class="radio">
-                        <label for="applicant-consent"><input type="radio" name="applicantStatement"
-                                                    ng-model="cspMainApplCtrl.model.applicantStatement"
-                                                    ng-value="cspMainApplCtrl.ownerBehalfValue" id="applicant-consent"/>The Applicant is
-                            applying on behalf of and with the consent of the owner of the above noted Canadian Patent as
-                            recorded at the Canadian Patent Office.</label>
+                        <label for="applicant-consent">
+                            <input type="radio" name="applicantStatement"
+                                   ng-model="cspMainApplCtrl.model.applicantStatement"
+                                   ng-value="cspMainApplCtrl.ownerBehalfValue"
+                                   id="applicant-consent"/>
+                            {{'APPLICANT_BEHALF'|translate}}
+                        </label>
                     </div>
                 </fieldset>
             </div>

@@ -89,12 +89,21 @@
                 </label>
 
             </div>
-            <div class="col-md-3 form-group">
-                <label for="fax-number_{{::$id}}"><span class="field-name">{{'FAX_NUMBER'|translate}}</span></label>
-                <input type="text" id="fax-number_{{::$id}}" data-ng-model="contCtrl.contactModel.fax"
+            <div class="col-md-3 form-group"  ng-class="{'has-error':contCtrl.contactForm.fax_number_{{::$id}}.$invalid}">
+                <label for="fax_number_{{::$id}}" ng-class="{'required':contCtrl.faxMandatory}">
+                    <span class="field-name">{{'FAX_NUMBER'|translate}}</span>
+                    <strong ng-if="contCtrl.faxMandatory" class="required">{{'REQUIRED'|translate}}</strong>
+
+                <input type="text" id="fax_number_{{::$id}}" data-ng-model="contCtrl.contactModel.fax"
                        ng-model-options="contCtrl.ngModelOptSetting"
-                       ng-readonly="!contCtrl.isEditable"
-                       class="form-control full-width" name="faxNumber" maxlength="25" size="25"/>
+                       ng-readonly="!contCtrl.isEditable" ng-required="contCtrl.faxMandatory"
+                       class="form-control full-width" name="fax_number_{{::$id}}" maxlength="25" size="25"/>
+                    <strong id="fax-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.fax_number_{{::$id}})">
+                        <span class="label label-danger" ng-messages="contCtrl.contactForm.fax_number_{{::$id}}.$error">
+                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                        </span>
+                    </strong>
+                </label>
             </div>
         </div>
         <div class="row">

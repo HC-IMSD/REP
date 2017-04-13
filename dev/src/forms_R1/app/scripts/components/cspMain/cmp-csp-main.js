@@ -79,9 +79,11 @@
                 }
             }
         };
-
+        /**
+         * Controls the visibility of the Health Canada section information
+         * @returns {boolean}
+         */
         vm.showHCOnlySection=function(){
-
             return (vm.userType===INTERNAL_TYPE);
         };
 
@@ -119,7 +121,7 @@
             var writeResult = _transformFile();
 
             hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
-            vm.companyEnrolForm.$setPristine();
+            vm.cspForm.$setPristine();
         };
 
 
@@ -130,26 +132,36 @@
          */
         function _createFilename() {
             //TODO algorithm
-            return "foo"
+            var filename="hccsp";
+            var separator="-";
+
+            if (vm.cspModel.enrolmentVersion) {
+                filename = filename + separator+  vm.cspModel.enrolmentVersion;
+            }
+            filename=filename.replace(".",separator);
+            return filename.toLowerCase();
+
+            return filename
         }
 
+        /**
+         * Adds the date and increments version number before the data is written to file
+         * @private
+         */
         function _transformFile() {
             updateDate();
-            /* if (!vm.isExtern()) {
-             if(!vm.companyEnrolForm.$pristine) {
-             vm.company.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.company.enrolmentVersion);
-             vm.company.applicationType = ApplicationInfoService.prototype.getApprovedType();
-             updateModelOnApproval();
-             }
-             } else {
-             vm.company.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.company.enrolmentVersion)
-             }*/
+        if(vm.userType===EXTERNAL_TYPE){
+            vm.cspModel.enrolmentVersion= vm.applicationInfoService.incrementMajorVersion(vm.cspModel.enrolmentVersion);
+        }
             return vm.modelService.transformToFileObj(vm.cspModel);
         }
 
+        /**
+         * Updatyes the date saved field in the model
+         */
         function updateDate() {
-            if (vm.company) {
-                vm.company.dateSaved = vm.applicationInfoService.getTodayDate()
+            if (vm.cspModel) {
+                vm.cspModel.dateSaved = vm.applicationInfoService.getTodayDate();
             }
         }
 

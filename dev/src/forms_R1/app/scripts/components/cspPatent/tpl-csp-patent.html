@@ -1,11 +1,6 @@
 <div class="container-fluid">
     <ng-form name="cspPatentCtrl.patentForm">
         <div class="row">
-            <div>
-                <h3>2. Patent Information</h3>
-            </div>
-        </div>
-        <div class="row">
             <div class="form-group col-md-12"
                  ng-class="{'has-error':cspPatentCtrl.patentForm.patentNum_{{::$id}}.$invalid}">
                 <label for="patentNum_{{::$id}}" class="required">
@@ -13,12 +8,13 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="patentNum_{{::$id}}" name="patentNum_{{::$id}}"
                            data-ng-model="cspPatentCtrl.model.patentNumber" class="form-control" maxlength="7"
-                           size="7" required/>
+                           size="7" minlength="7" only-digits="" required/>
                     <strong id="applicant-error" class="error"
                             ng-show="cspPatentCtrl.showError(cspPatentCtrl.patentForm.patentNum_{{::$id}})">
                              <span class="label label-danger"
                                    ng-messages="cspPatentCtrl.patentForm.patentNum_{{::$id}}.$error">
                                  <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                  <span ng-message="minlength">{{'MSG_LENGTH_7NUM'|translate}}</span>
                              </span>
                     </strong>
                 </label>

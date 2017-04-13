@@ -8,7 +8,7 @@
                              class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
                      </button>-->
                 </div>
-                <h2 class="panel-title">{{'LOAD_COMPANY_FILE'| translate}}</h2>
+                <h2 class="panel-title">{{'LOAD_CSP_FILE'| translate}}</h2>
             </header>
             <div class="panel-body">
                 <!-- <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
@@ -59,40 +59,60 @@
                               class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
                       </button>-->
                 </div>
-                <h2 class="panel-title">{{'Certificate of Supplementary Protection (CSP) Information'|translate}}</h2>
+                <h2 class="panel-title">{{'CSP_TITLE'|translate}}</h2>
             </header>
             <div class="panel-body">
 
-
-                <div ng-repeat="applicantRecord in main.cspModel.applicant track by $index ">
-                    <!-- <section class="panel panel-primary mrgn-tp-lg">
-                         <header class="panel-heading clearfix">
-                             <div class="btn-group pull-right">-->
-                    <!--  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
-                              id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                              class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
-                      </button>
-                </div>-->
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h3 ng-if="applicantRecord.role.applicant">{{'1. Applicant Information'|translate}}</h3>
-                            <h3 ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">
-                                {{'Billing Information' |translate}}</h3>
-                        </div>
+                <div class="row">
+                    <div class="col-xs-3 form-group">
+                        <label for="enr-version-text_{{$id}}">{{"ENROL_VERSION"| translate}}</label>
+                        <input type="text" class="form-control" id="enr-version-text_{{$id}}"
+                               ng-readonly="true"
+                               ng-model="main.cspModel.enrolmentVersion"/>
                     </div>
-                    <!--  </header>-->
-                    <!--  <div class="panel-body">-->
-
-                    <div class="row">
-                        <cmp-csp-applicant record="applicantRecord"
-                                           add-applicant="main.modelService.addApplicantToModel()"
-                                           delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant>
+                    <div class="col-xs-3 form-group">
+                        <label for="date-saved-text_{{$id}}">{{"DATE_SAVED"| translate}}</label>
+                        <input type="text" class="form-control" id="date-saved-text_{{$id}}"
+                               ng-model="main.cspModel.dateSaved"
+                               ng-readonly="true"/>
                     </div>
                 </div>
-                <!--   </section>
-               </div>-->
+                <div ng-repeat="applicantRecord in main.cspModel.applicant track by $index ">
+                    <!--<div class="row">
+                        <div class="col-xs-12">
+                            <h3 ng-if="applicantRecord.role.applicant">1.&nbsp;{{'APPL_TITILE'|translate}}</h3>
+                            <h3 ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">
+                                {{'BILLING_TITLE' |translate}}</h3>
+                        </div>
+                    </div>-->
+                    <div class="row">
+
+                        <fieldset>
+                            <div class="col-xs-12">
+                                <legend ng-if="applicantRecord.role.applicant">1.&nbsp;{{'APPL_TITILE'|translate}}
+                                </legend>
+                                <legend ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">
+                                    {{'BILLING_TITLE' |translate}}
+                                </legend>
+                            </div>
+                            <cmp-csp-applicant record="applicantRecord"
+                                               add-applicant="main.modelService.addApplicantToModel()"
+                                               delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant>
+                        </fieldset>
+
+                    </div>
+                </div>
                 <div>
-                    <cmp-csp-patent record="main.cspModel.patent"></cmp-csp-patent>
+                    <div class="row">
+                        <fieldset>
+                            <div class="col-xs-12">
+                                <legend>2.&nbsp;{{'PATENT_TITLE'|translate}}</legend>
+
+                                <cmp-csp-patent record="main.cspModel.patent"></cmp-csp-patent>
+
+                            </div>
+                        </fieldset>
+                    </div>
                 </div>
                 <div>
                     <cmp-csp-main-application record="main.cspModel.applicationInfo"
@@ -105,7 +125,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3>5. Fee Payment (use separate Advances Payment Details Form)</h3>
+                        <h3>8.&nbsp;{{'FEE_TITLE'|translate}}</h3>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -114,17 +134,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h3>6. Certification</h3>
-                    </div>
+               <!-- <div class="row">-->
+                    <!-- <div class="col-xs-12">
+                         <h3>9.&nbsp;{{'CERT_TITLE'|translate}} </h3>
+                     </div>-->
                     <div class="row">
-                        <div class="col-xs-12">
-                            <cmp-csp-certification record="main.cspModel.certification"></cmp-csp-certification>
-                        </div>
+                        <fieldset>
+                            <div class="col-xs-12">
+
+                                <legend>9.&nbsp;{{'CERT_TITLE'|translate}}</legend>
+                                <cmp-csp-certification record="main.cspModel.certification"></cmp-csp-certification>
+
+                            </div>
+                        </fieldset>
+
                     </div>
                 </div>
-            </div>
+           <!-- </div>-->
         </section>
         <div class="row btn-group-sm">
             <div class="form-group col-md-3">

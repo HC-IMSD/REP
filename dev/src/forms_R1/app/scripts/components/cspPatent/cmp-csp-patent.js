@@ -7,7 +7,7 @@
 
     angular
         .module('cspPatent', [
-
+            'numberFormat'
         ]);
 
 })();

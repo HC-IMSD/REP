@@ -26,6 +26,7 @@
                 onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
                 showErrors: '&',
+                faxMandatory:'@',
                 updateErrorSummary:'&'
             }
     });
@@ -37,6 +38,7 @@
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.salutationList = getContactLists.getSalutationList();
         vm.langCorresppond=[ENGLISH,FRENCH];
+        vm.faxRequired=false; //default to false for backwards compatibility
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.contactModel = {
             salutation: "",
@@ -60,6 +62,9 @@
             }
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
+            }
+            if(changes.faxMandatory){
+               vm.faxRequired=changes.faxMandatory.currentValue;
             }
 
         };

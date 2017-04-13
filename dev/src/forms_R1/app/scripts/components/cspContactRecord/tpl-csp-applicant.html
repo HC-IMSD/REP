@@ -18,7 +18,7 @@
                 </label>
             </div>
         </div>
-        <cmp-contact-details is-amend="true" contact-record="cspApplCtrl.model.contact"></cmp-contact-details>
+        <cmp-contact-details is-amend="true" contact-record="cspApplCtrl.model.contact" fax-mandatory="true"></cmp-contact-details>
         <cmp-address-details is-amend="true" address-record="cspApplCtrl.model.address"></cmp-address-details>
         <div class=" col-md-12" ng-class="{'has-error':cspApplCtrl.applForm.billingDifferent.$invalid}">
             <div class="checkbox" ng-if="cspApplCtrl.model.role.applicant">

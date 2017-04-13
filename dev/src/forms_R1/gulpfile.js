@@ -535,7 +535,7 @@ var transactionDirectiveFolders =
 //Complementary
 var cspDirectiveFolders =
     [
-       // directiveFolders.numberOnly
+       directiveFolders.numberOnly
     ];
 
 
