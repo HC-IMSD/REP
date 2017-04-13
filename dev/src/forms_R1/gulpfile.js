@@ -40,6 +40,7 @@ var paths = {
     buildDevCompany: buildDev + '/company/',
     buildDevTransaction: buildDev + '/transaction/',
     buildDevDossier: buildDev + '/dossier/',
+    buildDevCSP: buildDev + '/csp/',
     buildProdActivity: buildProd + '/activity/',
     buildProdCompany: buildProd + '/company/',
     buildProdTransaction: buildProd + '/transaction/',
@@ -126,19 +127,30 @@ var transactionRootTitles_fr = {
 
 };
 
-var
-    dossierRootTitles_en = {
+var dossierRootTitles_en = {
         mainHeading: "Dossier Template: Regulatory Enrolment Process (REP)",
         title: 'Health Canada Dossier Template'
 
     };
 
-var
-    dossierRootTitles_fr = {
+var dossierRootTitles_fr = {
         mainHeading: "fr_Dossier Template: Regulatory Enrolment Process (REP)",
         title: 'fr_Health Canada Dossier Template'
 
     };
+
+var cspRootTitles_en = {
+        mainHeading: "Certificate of Supplementary Protection (CSP) Application Form",
+        title: 'Health Canada CSP Template'
+
+    };
+
+var cspRootTitles_fr = {
+        mainHeading: "fr_Certificate of Supplementary Protection (CSP) Application Form",
+        title: 'fr_Health Canada CSP Template'
+
+    };
+
 //======================== Titles and main headings for the web page END================================
 
 
@@ -151,8 +163,8 @@ var jsRootContent = {
     partialCompanyRoot: 'rootContent/companyRoot.html',
     partialTransactionRoot: 'rootContent/transactionRoot.html',
     partialDossierRoot: 'rootContent/dossierRoot.html',
-    partialDiffFormRoot: 'rootContent/diffForm.html'
-
+    partialDiffFormRoot: 'rootContent/diffForm.html',
+    partialCSPFormRoot: 'rootContent/cspForm.html'
 };
 
 
@@ -162,7 +174,8 @@ var rootFileNames = {
     companyRoot: "companyApp",
     transactionRoot: "transactionApp",
     dossierRoot: "dossierApp",
-    repDiff: "diffApp"
+    repDiff: "diffApp",
+    cspRoot:"cspApp"
 };
 
 
@@ -253,7 +266,15 @@ var componentFolders = {
     diffFileIO: 'fileIODiff/',
     nodesRender: 'nodes-renderer/',
     diffMain: 'diff-main/',
-    errorSummary: 'error-summary'
+    errorSummary: 'error-summary',
+    cspMain:'cspMain',
+    cspContact:'cspContactRecord',
+    cspHCOnly:'cspHealthCanadaOnly',
+    cspMainAppl:'cspMainAppl',
+    cspPatent: 'cspPatent',
+    cspTimelySub: 'cspTimelySubmission',
+    cspFeePayment: 'cspFeePayment',
+    cspCert: 'cspCertification'
 };
 
 //exclude custom styles only lib
@@ -280,6 +301,23 @@ var libProd = [
     paths.lib + libFileNames.ariaMin,
     paths.lib + libFileNames.uibTemplates
 ];
+
+var libCsp=[
+    paths.lib + libFileNames.angularMin,
+    paths.lib + libFileNames.resourceMin,
+    paths.lib + libFileNames.sanitizeMin,
+    paths.lib + libFileNames.translateMin,
+    paths.lib + libFileNames.fileSaverMin,
+    paths.lib + libFileNames.selectMin,
+   /* paths.lib + libFileNames.sha256,*/
+   /* paths.lib + libFileNames.uiBootStrapMin,*/
+    paths.lib + libFileNames.xml2Json,
+    paths.lib + libFileNames.messagesMin,
+    paths.lib + libFileNames.ariaMin,
+    paths.lib + libFileNames.uibTemplates
+
+];
+
 
 
 //Activity Form Components
@@ -345,12 +383,27 @@ var transactionComponentFolders = [
     componentFolders.contactDetails,
     componentFolders.expandingTable,
     componentFolders.fileIOComponentAndDep,
-    componentFolders.repContactList,
-    componentFolders.repContactRecord,
     componentFolders.lifecycleList,
     componentFolders.lifecycleDetails,
     componentFolders.addressDetails
 ];
+//certificate of Supplementary Protection File
+
+var cspComponentFolders = [
+
+    componentFolders.cspMain,
+    componentFolders.fileIO,
+    componentFolders.cspContact,
+    componentFolders.contactDetails,
+    componentFolders.addressDetails,
+    componentFolders.cspHCOnly,
+    componentFolders.cspMainAppl,
+    componentFolders.cspPatent,
+    componentFolders.cspTimelySub,
+    componentFolders.cspFeePayment,
+    componentFolders.cspCert
+];
+
 
 
 //======================== Component Definitions END ========================================
@@ -376,6 +429,9 @@ var serviceFileNames = {
     dossierService: "dossier-service",
     dossierDataList: "dossier-data-list",
     dossierLoadService: "dossier-load-service",
+    cspService:"csp-service",
+    cspConstants:'csp-constants',
+    cspLoadService: 'csp-load-service',
     diffService: 'diff-service'
 };
 
@@ -427,6 +483,19 @@ var transactionServiceFileNames = [
     serviceFileNames.hpfbConstants
 
 ];
+// Complementary Supplementary Protection Application Form
+var cspServiceFileNames =
+    [
+        serviceFileNames.hpfbConstants,
+        serviceFileNames.dataLists,
+        serviceFileNames.filterLists,
+        serviceFileNames.applicationInfoService,
+        serviceFileNames.cspService,
+        serviceFileNames.cspConstants,
+        serviceFileNames.cspLoadService
+    ];
+
+
 
 //================================ SERVICE Definitions END ========================================/
 
@@ -461,6 +530,12 @@ var dossierDirectiveFolders =
 var transactionDirectiveFolders =
     [
         directiveFolders.numberOnly
+    ];
+
+//Complementary
+var cspDirectiveFolders =
+    [
+       directiveFolders.numberOnly
     ];
 
 
@@ -498,7 +573,9 @@ var translationBaseFiles = {
     contactXml: paths.translations + 'contactXml',
     defaultXml: paths.translations + 'defaultXml',
     temp:paths.translations +'companyError',
-    errorSummary:paths.translations +'errorSummary'
+    errorSummary:paths.translations +'errorSummary',
+    cspGeneral: paths.translations + 'csp',
+    temp: paths.translations + 'companyError'
 };
 
 
@@ -567,6 +644,18 @@ var transactionTranslationFilesBaseList = [
     translationBaseFiles.general,
     translationBaseFiles.messages,
     translationBaseFiles.transaction
+];
+//complementary supplementary Forms
+var cspTranslationFilesBaseList=[
+    translationBaseFiles.address,
+    translationBaseFiles.stateProvinces,
+    translationBaseFiles.contact,
+    translationBaseFiles.applicationInfo,
+    translationBaseFiles.fileIO,
+    translationBaseFiles.general,
+    translationBaseFiles.messages,
+    translationBaseFiles.cspGeneral
+
 ];
 
 //===================== TRANSLATION file definiitions END ======================
@@ -1157,6 +1246,14 @@ gulp.task('dev-copy-changedFiles', function () {
             compFolders: transactionComponentFolders,
             serviceFiles: transactionServiceFileNames,
             directiveFiles: transactionDirectiveFolders
+        },
+        {
+            matches: false,
+            formName: "CSP",
+            buildPath: paths.buildDevCSP,
+            compFolders: cspComponentFolders,
+            serviceFiles: cspServiceFileNames,
+            directiveFiles: cspDirectiveFolders
         }
     ];
 
@@ -1302,6 +1399,11 @@ gulp.task('dev-dossier-clean', function () {
     return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
 
 });
+gulp.task('dev-csp-clean', function () {
+    return (pipes.cleanBuild(paths.buildDevCSP + 'app/'));
+
+});
+
 
 
 /******* Company Taska ****/
@@ -1346,9 +1448,6 @@ gulp.task('dev-company-htmlBuild', ['dev-global-create-src-template', 'dev-compa
 
 
 });
-/*gulp.task('dev-company-copyWetDep', function () {
- return (pipes.copyWet(paths.buildDevCompany))
- });*/
 
 gulp.task('dev-company-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
@@ -1415,32 +1514,34 @@ gulp.task('dev-dossier-copyWet', function () {
     return (pipes.copyWet(paths.buildDevDossier))
 });
 gulp.task('dev-dossier-copyLib', function () {
-    var def = Q.defer();
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return (copySources.pipe(gulp.dest(paths.buildDevDossier)));
 });
 gulp.task('dev-dossier-copyData', function () {
-    var def = Q.defer();
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(paths.buildDev)));
 });
 gulp.task('dev-company-copyData', function () {
-    var def = Q.defer();
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(paths.buildDev)));
 });
 gulp.task('dev-activity-copyData', function () {
-    var def = Q.defer();
+
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(paths.buildDev)));
 });
 
 gulp.task('dev-transaction-copyData', function () {
-    var def = Q.defer();
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildDev)));
+});
+
+gulp.task('dev-csp-copyData', function () {
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(paths.buildDev)));
@@ -1939,7 +2040,69 @@ gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copyData', 'dev-diffForm-copy
 
 });
 
+//=========================================
+// Certificate of Supplementary Protection
 
+gulp.task('dev-csp-copySrc', function () {
+    return (
+        pipes.copySrcs(true, paths.buildDevCSP, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders, false)
+    )
+});
+
+gulp.task('dev-csp-createRootJS', function () {
+    var dest = paths.buildDevCSP + 'app/scripts/';
+    var rootFile = paths.scripts + "/" + rootFileNames.cspRoot + '.js';
+    var skipDate = true;
+    var generateInternalForms = true;
+    return (
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
+    );
+});
+
+gulp.task('dev-csp-copyTranslate', function () {
+    return (pipes.translateDev(cspTranslationFilesBaseList, paths.buildDevCSP))
+});
+
+gulp.task('dev-csp-copyLib', function () {
+
+    var srcs=libCsp;
+    srcs.push(paths.styles + '**/*')
+    var copySources = gulp.src(srcs,
+        {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildDevCSP))
+
+});
+gulp.task('dev-csp-createResources', ['dev-csp-copyTranslate'], function () {
+
+    var srcPath = paths.buildDevCSP;
+    var destPath = paths.buildDevCSP + paths.relScript;
+    var filename = 'translations' + createSuffixDate();
+    return (pipes.compileTranslateFile(srcPath, destPath, filename, cspTranslationFilesBaseList));
+});
+
+
+gulp.task('dev-csp-htmlBuild', ['dev-global-create-src-template', 'dev-csp-copyData', 'dev-csp-copySrc', 'dev-csp-copyLib', 'dev-csp-createRootJS', 'dev-csp-createResources'], function () {
+    var ignoreDir = '/build/dev/csp';
+    var buildDir = paths.buildDevCSP;
+    var htmlPartial = jsRootContent.partialCSPFormRoot;
+    var today = createSuffixDate();
+    today = ""; //remove if you want the timestamp!
+    var deploy = deployType.dev;
+    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, 'cspINT-fr.html', 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, 'cspEXT-fr.html', 'cspAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, 'cspEXT-en.html', 'cspAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, 'cspINT-en.html', 'cspAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+    return (
+        pipes.cleanBuild(buildDir + paths.translations)
+
+    );
+});
+
+
+
+//==================================================================
+
+//=========================================
 gulp.task('protractor-testEnv', function () {
     gulp.src([
          'app/spec/e2e/tests/transaction/*.js',

@@ -26,6 +26,7 @@
                 onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
                 showErrors: '&',
+                faxMandatory:'@',
                 updateErrorSummary:'&'
             }
     });
@@ -37,37 +38,24 @@
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.salutationList = getContactLists.getSalutationList();
         vm.langCorresppond=[ENGLISH,FRENCH];
+        vm.faxRequired=false; //default to false for backwards compatibility
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.contactModel = {
-            isDetailValid: false,
-            contactId: "",
-            amendRecord: false,
-            addressRole: {
-                manufacturer: false,
-                mailing: false,
-                billing: false,
-                importer: false
-            },
-            contactRole: "",
             salutation: "",
             givenName: "",
             surname: "",
             initials: "",
             title: "",
             phone: "",
-            PhoneExt: "",
+            phoneExt: "",
             fax: ""
         };
         vm.inputModelOptions={updateOn: 'blur'};
         vm.$onInit = function () {
            vm.langList=[ENGLISH,FRENCH];
-            /*console.log("init contact details");
-           if (vm.contactRecord) {
-                //doesn't copy as this is a dumb component
-                vm.contactModel = vm.contactRecord;
-             }*/
+
         };
-        //TODO rename
+
         vm.$onChanges=function(changes){
             if(changes.contactRecord){
                 vm.contactModel = changes.contactRecord.currentValue;
@@ -75,6 +63,9 @@
             }
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
+            }
+            if(changes.faxMandatory){
+               vm.faxRequired=changes.faxMandatory.currentValue;
             }
 
         };

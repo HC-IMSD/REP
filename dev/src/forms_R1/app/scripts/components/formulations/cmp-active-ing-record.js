@@ -187,7 +187,7 @@
          */
         self.isUnitsOther = function () {
 
-            if(!self.ingModel) return false;
+            if (!self.ingModel || !self.ingModel.units) return false;
             if ((self.ingModel.units.id === OTHER)) {
                 return true;
             } else {

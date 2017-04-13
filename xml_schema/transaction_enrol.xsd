@@ -24,7 +24,16 @@
 	<hpfb:element name="sequence_number" type="sequence_content"/>
 	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
-	<hpfb:element name="sequence_activity_type" type="hpfb:string"/>
+	<hpfb:element name="sequence_activity_type">
+	<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="sequence_description_value" type="sequence_description_list"/>
 	<hpfb:element name="sequence_from_date" type="optional_yyyymmdd_date_content"/>
 	<hpfb:element name="sequence_to_date" type="optional_yyyymmdd_date_content"/>

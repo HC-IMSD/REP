@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<!-- ****************************** -->
+<!-- CSP Enrolment version 0.1 -->
+<!-- ****************************** -->
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified">
+	<hpfb:include schemaLocation="./common/data_types.xsd"/>
+	<hpfb:include schemaLocation="./common/contact.xsd"/>
+	<hpfb:include schemaLocation="./common/address.xsd"/>
+
+
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<!-- ACTIVITY_ENROL is the root element-->
+	<hpfb:element name="CERTIFICATE_SUPPLEMENTARY_PROTECTION" type="csp_content"/>
+	<hpfb:element name="template_type" type="hpfb:string"/>
+	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
+	<hpfb:element name="software_version" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
+	<hpfb:element name="applicant_name" type="char_1_80_content"/>
+
+	<hpfb:element name="billing_role" type="yes_no_content"/>
+	<hpfb:element name="applicant_role" type="yes_no_content"/>
+
+	<hpfb:element name="applicant" type="applicant_content"/>
+	<!--<hpfb:element name="billing" type="billing_content"/>-->
+	<hpfb:element name="address" type="international_address_content"/>
+	<hpfb:element name="contact" type="contact_content"/>
+	<!--start of hcOnly section-->
+	<hpfb:element name="health_canada_only" type="hc_only_content"/>
+	<hpfb:element name="hc_notes" type="char_0_256_content"/>
+	<hpfb:element name="application_id" type="char_0_6_content"/>
+	<hpfb:element name="company_id" type="optional_integer_0_999999_content"/>
+	<hpfb:element name="date_received" type="optional_yyyymmdd_date_content"/>
+	<!--Start of application information-->
+	<hpfb:element name="application_info" type="application_content"/>
+	<hpfb:element name="patent_info" type="patent_content"/>
+	<hpfb:element name="patent_number" type="number_7_content"/>
+	<hpfb:element name="filing_date" type="yyyymmdd_date_content"/>
+	<hpfb:element name="granted_date" type="yyyymmdd_date_content"/>
+	<hpfb:element name="expiry_date" type="yyyymmdd_date_content"/>
+	<hpfb:element name="control_number" type="control_number_content"/>
+	<hpfb:element name="drug_use" type="drug_use_type"/>
+	<hpfb:element name="time_application" type="issuance_type"/>
+	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
+	<hpfb:element name="applicant_statement" type="applicant_type"/>
+	<!--timely information section-->
+	<hpfb:element name="timely_submission_info" type="timely_content"/>
+	<hpfb:element name="timely_submission_statement" type="timely_application_type"/>
+	<hpfb:element name="marketing_approval_date" type="optional_yyyymmdd_date_content"/>
+	<hpfb:element name="marketing_country" type="country_marketing_type"/>
+	<hpfb:element name="marketing_country_eu" type="char_0_80_content"/>
+	<!--payment section-->
+	<hpfb:element name="advanced_payment" type="advanced_payment_section"/>
+	<hpfb:element name="advanced_payment_type" type="payment_type"/>
+	<hpfb:element name="advanced_payment_fee" type="hpfb:decimal"/>
+	<!--Start of certification content-->
+	<hpfb:element name="certification" type="certification_content"/>
+	<hpfb:element name="date_signed" type="yyyymmdd_date_content"/>
+
+
+
+
+
+
+	<!-- ****************************** -->
+	<!-- Main Content Element -->
+	<!-- ****************************** -->
+	<hpfb:complexType name="csp_content">
+		<hpfb:sequence>
+			<hpfb:element ref="template_type"/>
+			<hpfb:element ref="enrolment_version"/>
+			<hpfb:element ref="date_saved"/>
+			<hpfb:element ref="software_version"/>
+			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="health_canada_only"/>
+			<hpfb:element ref="applicant" minOccurs="1" maxOccurs="2"/>
+			<!--<hpfb:element ref="billing" minOccurs="0" maxOccurs="1"/>-->
+			<hpfb:element ref="application_info"/>
+			<hpfb:element ref="timely_submission_info"/>
+			<hpfb:element ref="advanced_payment"/>
+			<hpfb:element ref="certification"/>
+
+			<!--Main form content defined here -->
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="applicant_content">
+		<hpfb:sequence>
+			<hpfb:element ref="billing_role" />
+			<hpfb:element ref="applicant_role"/>
+			<hpfb:element ref="applicant_name"/>
+			<hpfb:element ref="contact"/>
+			<hpfb:element ref="address"/>
+			
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<!--<hpfb:complexType name="billing_content">
+		<hpfb:sequence>
+			<hpfb:element ref="applicant_name"/>
+			<hpfb:element ref="contact"/>
+			<hpfb:element ref="address"/>
+		</hpfb:sequence>
+	</hpfb:complexType>-->
+
+	<hpfb:complexType name="hc_only_content">
+		<hpfb:all>
+			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="application_id"/>
+			<hpfb:element ref="date_received"/>
+			<hpfb:element ref="hc_notes"/>
+		</hpfb:all>
+	</hpfb:complexType>
+	<hpfb:complexType name="patent_content">
+		<hpfb:all>
+			<hpfb:element ref="patent_number"/>
+			<hpfb:element ref="filing_date"/>
+			<hpfb:element ref="granted_date"/>
+			<hpfb:element ref="expiry_date"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+
+
+
+
+	<hpfb:complexType name="application_content">
+		<hpfb:all>
+			<hpfb:element ref="patent_info"/>
+			<hpfb:element ref="control_number"/>
+			<hpfb:element ref="drug_use"/>
+			<hpfb:element ref="time_application"/>
+			<hpfb:element ref="medicinal_ingredient"/>
+			<hpfb:element ref="applicant_statement"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="timely_content">
+		<hpfb:all>
+			<hpfb:element ref="timely_submission_statement"/>
+			<hpfb:element ref="marketing_approval_date"/>
+			<hpfb:element ref="marketing_country"/>
+			<hpfb:element ref="marketing_country_eu"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="advanced_payment_section">
+		<hpfb:all>
+			<hpfb:element ref="advanced_payment_type"/>
+			<hpfb:element ref="advanced_payment_fee"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="certification_content">
+		<hpfb:all>
+			<hpfb:element ref="given_name"/>
+			<hpfb:element ref="initials"/>
+			<hpfb:element ref="surname"/>
+			<hpfb:element ref="job_title"/>
+			<hpfb:element ref="date_signed"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+	<hpfb:simpleType name="applicant_type">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="OWNER"/>
+			<hpfb:enumeration value="BEHALF_OWNER"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="drug_use_type">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="HUMAN"/>
+			<hpfb:enumeration value="VETERINARY"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+
+	<hpfb:simpleType name="issuance_type">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="NOC"/>
+			<hpfb:enumeration value="GRANT"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>	
+
+	<hpfb:simpleType name="timely_application_type">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="NO_APPLICATION"/>
+			<hpfb:enumeration value="APPLICATION"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+
+
+	<hpfb:simpleType name="country_marketing_type">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value=""/>
+			<hpfb:enumeration value="USA"/>
+			<hpfb:enumeration value="AUS"/>
+			<hpfb:enumeration value="CHE"/>
+			<hpfb:enumeration value="JPN"/>
+			<hpfb:enumeration value="EU"/>
+			<hpfb:enumeration value="EU_OTHER"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
+	<hpfb:simpleType name="payment_type">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="FINANCIAL"/>
+			<hpfb:enumeration value="CHEQUE"/>
+			<hpfb:enumeration value="CREDIT_CARD"/>
+			<hpfb:enumeration value="CREDIT"/>
+			<hpfb:enumeration value="WIRE"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+</hpfb:schema>

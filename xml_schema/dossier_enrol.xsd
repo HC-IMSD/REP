@@ -275,7 +275,16 @@
 	<hpfb:element name="units_other" type="char_0_40_content"/>
 
 	<hpfb:element name="is_base_calc" type="required_yes_no_content"/>
-	<hpfb:element name="is_nanomaterial" />
+	<hpfb:element name="is_nanomaterial">
+	<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="nanomaterial_details" type="char_0_40_content"/>
 	<hpfb:element name="variant_name" type="char_0_100_content"/>
 	<hpfb:element name="in_final_container" type="required_yes_no_content"/>

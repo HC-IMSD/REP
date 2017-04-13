@@ -44,9 +44,10 @@
         self.productModel = {
             brandName: "",
            // medIngredient: "",
-            "newIngred": "Y",
-            "ingId": "",
-            "ingLabel": "",
+            newIngred: "Y",
+            ingId: "",
+            ingLabel: "",
+            autoIngred: 'N',
             strengths: "",
             units: "",
             otherUnits:"",
@@ -91,10 +92,8 @@
         self.saveProduct = function () {
             if(self.productDetailsForm.$valid) {
                 if (self.productRecord) {
-                    // console.log('product details update product');
                     self.onUpdate({product: self.productModel});
                 } else {
-                    //  console.log('product details add product');
                     self.onAddProduct({product: self.productModel});
                 }
                 self.productDetailsForm.$setPristine();
@@ -105,7 +104,14 @@
 
         };
         self.ingredSelectionUpdated = function (item, model, label, event) {
-            self.productModel.ingId = item.id;
+            if (!item) {
+                self.productModel.ingId = "";
+                self.productModel.autoIngred = 'N';
+            } else {
+                self.productModel.ingId = item.id;
+                self.productModel.autoIngred = 'Y';
+            }
+
         };
         self.discardChanges = function(){
             self.productModel = angular.copy(self.backup);

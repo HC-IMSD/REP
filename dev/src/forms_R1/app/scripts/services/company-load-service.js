@@ -83,13 +83,20 @@
 
             function _createSortedArrayNAFirst(jsonList,lang){
                 var result = [];
-                result.push({"id": "CAN", "en": "Canada", "fr": "Canada"});
-                result.push({"id":"USA","en":"United States","fr":"États-Unis"});
+                var canadaRecord = null;
+                var usaRecord = null;
                 angular.forEach($filter('orderByLocale')(jsonList,lang), function (sortedObject) {
-                    if (sortedObject.key !== CANADA && sortedObject.key !== USA) {
+                    if (sortedObject.id === USA) {
+                        usaRecord = sortedObject;
+                    } else if (sortedObject.id === CANADA) {
+                        canadaRecord = sortedObject;
+                    }
+                    else {
                         result.push(sortedObject);
                     }
                 });
+                if (usaRecord) result.unshift(usaRecord);
+                if (canadaRecord) result.unshift(canadaRecord);
                 return result;
             }
         }]);
