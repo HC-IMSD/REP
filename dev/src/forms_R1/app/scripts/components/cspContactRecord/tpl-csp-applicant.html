@@ -2,23 +2,23 @@
     <ng-form name="cspApplCtrl.applForm">
         <div>
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':cspApplCtrl.applForm.applicant_{{::$id}}.$invalid}">
-                <label for="applicant_{{::$id}}" class="required">
+                 ng-class="{'has-error':cspApplCtrl.applForm.applicant_{{cspApplCtrl.fieldId}}.$invalid}">
+                <label for="applicant_{{cspApplCtrl.fieldId}}" class="required">
                     <span class="field-name">{{cspApplCtrl.applicantTextAlias |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                    <input type="text" id="applicant_{{::$id}}" name="applicant_{{::$id}}"
+                    <input type="text" id="applicant_{{cspApplCtrl.fieldId}}" name="applicant_{{cspApplCtrl.fieldId}}"
                            data-ng-model="cspApplCtrl.model.applicantName" class="form-control" maxlength="80" size="80"
                            required/>
                     <strong id="applicant-error" class="error"
-                            ng-show="cspApplCtrl.showError(cspApplCtrl.applForm.applicant_{{::$id}})">
-                             <span class="label label-danger" ng-messages="cspApplCtrl.applForm.applicant_{{::$id}}.$error">
+                            ng-show="cspApplCtrl.showError(cspApplCtrl.applForm.applicant_{{cspApplCtrl.fieldId}})">
+                             <span class="label label-danger" ng-messages="cspApplCtrl.applForm.applicant_{{cspApplCtrl.fieldId}}.$error">
                                  <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                              </span>
                     </strong>
                 </label>
             </div>
         </div>
-        <cmp-contact-details is-amend="true" contact-record="cspApplCtrl.model.contact" fax-mandatory="true"></cmp-contact-details>
+        <cmp-contact-details is-amend="true" contact-record="cspApplCtrl.model.contact" fax-mandatory="true" field-suffix="cspApplCtrl.type"></cmp-contact-details>
         <cmp-address-details is-amend="true" address-record="cspApplCtrl.model.address"></cmp-address-details>
         <div class=" col-md-12" ng-class="{'has-error':cspApplCtrl.applForm.billingDifferent.$invalid}">
             <div class="checkbox" ng-if="cspApplCtrl.model.role.applicant">

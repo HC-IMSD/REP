@@ -32,7 +32,10 @@
             <div>
             </div>
         </section>
-
+        <cmp-error-summary form-ref="main.cspForm" show-errors="true"
+                           form-preamble="COMPANY_FORM"
+                           update-errors="main.updateSummary" make-focused="main.updateSummary"
+                           name-suffix="main.cspForm" set-heading-level="h2"></cmp-error-summary>
         <div ng-if="main.showHCOnlySection()">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
@@ -77,6 +80,7 @@
                                ng-readonly="true"/>
                     </div>
                 </div>
+
                 <div ng-repeat="applicantRecord in main.cspModel.applicant track by $index ">
                     <!--<div class="row">
                         <div class="col-xs-12">
@@ -95,7 +99,8 @@
                                     {{'BILLING_TITLE' |translate}}
                                 </legend>
                             </div>
-                            <cmp-csp-applicant record="applicantRecord"
+
+                            <cmp-csp-applicant record="applicantRecord" alias="main.setAlias(applicantRecord)"
                                                add-applicant="main.modelService.addApplicantToModel()"
                                                delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant>
                         </fieldset>

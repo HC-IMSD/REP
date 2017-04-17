@@ -205,7 +205,8 @@ var libFileNames = {
     xml2Json: "xml2json.js",
     deepDiffMin: "deep-diff-0.3.4.min.js",
     uiTreeMin: "angular-ui-tree.min.js",
-    uibTemplates: "uib-templates/*.*"
+    uibTemplates: "uib-templates/*.*",
+    ngIf:"focusIf.min.js"
 }
 
 
@@ -314,7 +315,8 @@ var libCsp=[
     paths.lib + libFileNames.xml2Json,
     paths.lib + libFileNames.messagesMin,
     paths.lib + libFileNames.ariaMin,
-    paths.lib + libFileNames.uibTemplates
+    paths.lib + libFileNames.uibTemplates,
+    paths.lib + libFileNames.ngIf
 
 ];
 
@@ -401,7 +403,8 @@ var cspComponentFolders = [
     componentFolders.cspPatent,
     componentFolders.cspTimelySub,
     componentFolders.cspFeePayment,
-    componentFolders.cspCert
+    componentFolders.cspCert,
+    componentFolders.errorSummary
 ];
 
 
@@ -574,8 +577,7 @@ var translationBaseFiles = {
     defaultXml: paths.translations + 'defaultXml',
     temp:paths.translations +'companyError',
     errorSummary:paths.translations +'errorSummary',
-    cspGeneral: paths.translations + 'csp',
-    temp: paths.translations + 'companyError'
+    cspGeneral: paths.translations + 'csp'
 };
 
 
@@ -654,7 +656,8 @@ var cspTranslationFilesBaseList=[
     translationBaseFiles.fileIO,
     translationBaseFiles.general,
     translationBaseFiles.messages,
-    translationBaseFiles.cspGeneral
+    translationBaseFiles.cspGeneral,
+    translationBaseFiles.errorSummary
 
 ];
 

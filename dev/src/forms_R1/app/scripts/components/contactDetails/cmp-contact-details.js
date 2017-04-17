@@ -27,7 +27,8 @@
                 isAmend: '<',
                 showErrors: '&',
                 faxMandatory:'@',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                fieldSuffix:'<'
             }
     });
 
@@ -51,6 +52,7 @@
             fax: ""
         };
         vm.inputModelOptions={updateOn: 'blur'};
+        vm.fldId=""; //used to dynamically distinguish fields default to empty for backwards compat
         vm.$onInit = function () {
            vm.langList=[ENGLISH,FRENCH];
 
@@ -66,6 +68,10 @@
             }
             if(changes.faxMandatory){
                vm.faxRequired=changes.faxMandatory.currentValue;
+            }
+            if(changes.fieldSuffix){
+
+                vm.fldId=changes.fieldSuffix.currentValue;
             }
 
         };

@@ -7,7 +7,9 @@
     'use strict';
 
     angular
-        .module('errorSummaryModule', [])
+        .module('errorSummaryModule', [
+            'focus-if'
+        ])
 })();
 
 (function () {
@@ -113,12 +115,14 @@
 
             if (changes.updateErrors) {
                 if (vm.formRef) {
+                    console.log(vm.formRef.$error);
                     //pass in the form name and the error object
                     vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
                 }
             }
             if (changes.makeFocused) {
                 if ((changes.makeFocused.currentValue)) {
+                    console.log("make it focused")
                     vm.isFocusInput = vm.isFocusInput + 1;
                 }
             }
@@ -203,6 +207,7 @@
             }
         }
 
+        //gets the name parts
         function _scrubFieldName(rawName) {
             var separator = '_';
             var index = rawName.lastIndexOf(separator);

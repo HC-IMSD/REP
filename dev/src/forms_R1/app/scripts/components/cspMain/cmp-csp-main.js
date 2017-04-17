@@ -17,7 +17,8 @@
             'cspPatent',
             'cspTimelySubmission',
             'cspFeePayment',
-            'cspCertification'
+            'cspCertification',
+            'errorSummaryModule'
         ]);
 
 })();
@@ -50,7 +51,8 @@
         vm.rootTag = "";
         vm.showContent = _loadFileContent; //could just make a function avail
         vm.applicationInfoService = null;
-
+        vm.showErrorSummary=0; //signals child error summaries to show
+        vm.updateSummary=0; //signals to update the error summary contents
 
         /**
          * Called after onChanges evnet, initializes
@@ -118,10 +120,18 @@
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            var writeResult = _transformFile();
 
-            hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
-            vm.cspForm.$setPristine();
+            if(vm.cspForm.$invalid){
+                vm.showErrorSummary= vm.showErrorSummary+1;
+                vm.updateErrorSummary();
+
+            }else {
+
+                var writeResult = _transformFile();
+
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                vm.cspForm.$setPristine();
+            }
         };
 
 
@@ -164,6 +174,25 @@
                 vm.cspModel.dateSaved = vm.applicationInfoService.getTodayDate();
             }
         }
+
+        /**
+         * Updates the Error Summary Flag. This causes the Error Summary to update
+         */
+        vm.updateErrorSummary=function(){
+            vm.updateSummary= vm.updateSummary+1;
+
+        }
+        vm.setAlias=function(record){
+
+            if(record&& record.billing){
+                return "billing";
+            }else{
+                return("appl");
+
+            }
+
+        }
+
 
     }
 })();

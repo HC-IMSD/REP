@@ -27,28 +27,37 @@
                 record:'<',
                 addApplicant:'&',
                 deleteApplicant: '&',
-                showErrors: '&'
+                showErrors: '&',
+                alias:'<'
             }
         });
 
 
 
-   // cspApplicantCtrl.$inject = [];
+    cspApplicantCtrl.$inject = ['$scope'];
 
     /* @ngInject */
-    function cspApplicantCtrl() {
+    function cspApplicantCtrl($scope) {
         var vm = this;
         vm.title = 'CspApplicantCtrl';
+
         vm.model={
             isBillingDifferent:false
         };
         vm.applicantTextAlias="APPLICANT";
+
+        vm.type="_appl";
+        vm.fieldId=vm.type+$scope.$id;
         vm.$onInit=function(){
             //after on changes called
             if(vm.model && (!vm.model.role.applicant) ){
                 vm.applicantTextAlias="COMPANY_NOABBREV";
+                vm.type="_bill";
+                vm.fieldId=vm.type+$scope.$id;
             }else{
                 vm.applicantTextAlias="APPLICANT";
+                vm.type="_appl";
+                vm.fieldId=vm.type+$scope.$id;
             }
         };
 
@@ -56,6 +65,10 @@
 
            if(changes.record){
              vm.model=changes.record.currentValue;
+           }
+           if(changes.alias){
+
+               vm.pref=changes.alias.currentValue;
            }
 
         };

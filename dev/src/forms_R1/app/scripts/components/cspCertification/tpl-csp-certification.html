@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-5 form-group" ng-class="{'has-error':cspCertCtrl.certForm.firstName.$invalid}">
                 <label for="firstName_{{::$id}}" class="required">
-                    <span class="field-name">{{'FIRST_NAME'|translate}}</span>
+                    <span class="field-name">{{'FIRSTNAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="firstName_{{::$id}}" data-ng-model="cspCertCtrl.model.givenName"
                            class="form-control full-width" name="firstName" maxlength="60"
@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-5 form-group" ng-class="{'has-error':cspCertCtrl.certForm.lastName.$invalid}">
                 <label for="lastName_{{::$id}}" class="required">
-                    <span class="field-name">{{'LAST_NAME'|translate}}</span>
+                    <span class="field-name">{{'LASTNAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="lastName_{{::$id}}" data-ng-model="cspCertCtrl.model.surname"
                            ng-blur="cspCertCtrl.updateErrorSummary()"
@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-4 form-group" ng-class="{'has-error':cspCertCtrl.certForm.jobTitle.$invalid}">
                 <label for="jobTitle_{{::$id}}" class="required">
-                    <span class="field-name">{{'JOB_TITLE'|translate}}</span>
+                    <span class="field-name">{{'JOBTITLE'|translate}}</span>
                     <strong class="required">{{'REQUIRED'|translate}}</strong>
                     <input type="text" id="jobTitle_{{::$id}}" data-ng-model="cspCertCtrl.model.title"
                            class="form-control full-width" name="jobTitle" required maxlength="40" size="40"
