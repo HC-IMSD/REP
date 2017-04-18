@@ -119,7 +119,7 @@
             resultJson.applicant = this._mapApplicantToInternal(jsonObj.applicant);
             //health Canada Only Section
             resultJson.enrolmentVersion = jsonObj.enrolment_version;
-            resultJson.dateSaved = _parseDate(jsonObj.date_saved);
+            resultJson.dateSaved = (jsonObj.date_saved); //not a date field, no need to parse
             resultJson.healthCanadaOnly.companyId = jsonObj.health_canada_only.company_id;
             resultJson.healthCanadaOnly.dateReceived = _parseDate(jsonObj.health_canada_only.date_received);
             resultJson.healthCanadaOnly.applicationId = jsonObj.health_canada_only.application_id;

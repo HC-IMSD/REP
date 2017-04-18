@@ -103,6 +103,11 @@
                 vm.headingPreamble = changes.formPreamble.currentValue;
             }
             ;
+            if (changes.exclusionList) {
+
+                vm.exclusions = changes.exclusionList.currentValue;
+            }
+
 
             //the base form that this error summary is checking for
             if (changes.formRef) {

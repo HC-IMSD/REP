@@ -577,7 +577,8 @@ var translationBaseFiles = {
     defaultXml: paths.translations + 'defaultXml',
     temp:paths.translations +'companyError',
     errorSummary:paths.translations +'errorSummary',
-    cspGeneral: paths.translations + 'csp'
+    cspGeneral: paths.translations + 'csp',
+    cspError: paths.translations + 'cspError'
 };
 
 
@@ -657,6 +658,7 @@ var cspTranslationFilesBaseList=[
     translationBaseFiles.general,
     translationBaseFiles.messages,
     translationBaseFiles.cspGeneral,
+    translationBaseFiles.cspError,
     translationBaseFiles.errorSummary
 
 ];
@@ -1920,7 +1922,7 @@ gulp.task('connect-server-start', function () {
         root: "build",
         // host:"127.0.0.1",
         port: 2121,
-        livereload: false
+        livereload: true
     });
 });
 

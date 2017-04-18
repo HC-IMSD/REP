@@ -3,19 +3,27 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <fieldset>
+                <fieldset ng-class="{ 'has-error' : timelySubCtrl.timelySubForm.timely.$invalid }">
                     <legend class="required"><span class="field-name">{{'STATEMENTS_TIMELY' |translate}}</span>
                         <strong
                                 class="required"> {{"REQUIRED" |translate}} </strong></legend>
+                    <strong id="timely-error" class="error"
+                            ng-show="timelySubCtrl.showError(timelySubCtrl.timelySubForm.timely)">
+                    <span class="label label-danger"
+                          ng-messages="timelySubCtrl.timelySubForm.timely.$error">
+                                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                         </span>
+                    </strong>
                     <div class="radio">
-                        <label for="no-market-approval"><input type="radio" name="timely" id="no-market-approval"
+                        <label for="no-market-approval"><input type="radio" name="timelySubCtrl.timelySubForm.timely"
+                                                               id="no-market-approval"
                                                                ng-model="timelySubCtrl.model.submissionStatement"
                                                                ng-value="timelySubCtrl.noAppValue" required="required"/>
                             {{'STATE_NO_APPLICATION'|translate}}
                         </label>
                     </div>
                     <div class="radio">
-                        <label for="market-approval"><input type="radio" name="timely"
+                        <label for="market-approval"><input type="radio" name="timelySubCtrl.timelySubForm.timely"
                                                             ng-model="timelySubCtrl.model.submissionStatement"
                                                             ng-value="timelySubCtrl.appValue" id="market-approval"/>
                             {{'STATE_APPLICATION'|translate}}

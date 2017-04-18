@@ -33,7 +33,7 @@
             </div>
         </section>
         <cmp-error-summary form-ref="main.cspForm" show-errors="true"
-                           form-preamble="COMPANY_FORM"
+                           form-preamble="CSP_FORM" exclusion-list="main.exclusions" alias-list="main.alias"
                            update-errors="main.updateSummary" make-focused="main.updateSummary"
                            name-suffix="main.cspForm" set-heading-level="h2"></cmp-error-summary>
         <div ng-if="main.showHCOnlySection()">

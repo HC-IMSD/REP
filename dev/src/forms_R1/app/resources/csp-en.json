@@ -1,5 +1,7 @@
 {
-  "APPLICANT": "Applicant Name",
+  "CSP_FORM": "CSP Application Form",
+  "APPLICANTNAME": "Applicant Name",
+  "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)",
   "DATE_APPL_REC": "Date Application Received",
   "CSP_COMPANY_CODE": "CSP Company Code",
   "CSP_APPLICATION_CODE": "CSP Application Number",
@@ -51,5 +53,5 @@
   "APPL_TITILE":" Applicant Information",
   "PATENT":"Canadian Patent Number",
   "MSG_LENGTH_7NUM": "Please enter 7 digits.",
-  "OTHER_EU_COUNTRY":" Other Europen Union Country Details"
+  "OTHER_EU_COUNTRY": " Other European Union Country Details"
 }

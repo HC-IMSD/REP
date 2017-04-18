@@ -54,6 +54,29 @@
         vm.showErrorSummary=0; //signals child error summaries to show
         vm.updateSummary=0; //signals to update the error summary contents
 
+        vm.exclusions = {
+            "contactListCtrl.contactListForm": "true",
+            "contactRec.contactRecForm": "true",
+            "addressListCtrl.addressListForm": "true",
+            "addressRec.addressRecForm": "true"
+        };
+        vm.alias = {
+            "roleMissing": {
+                "type": "fieldset",
+                "parent": "fs_roleMissing"
+            },
+            "phoneNumber": {
+                "type": "pattern",
+                "errorType": "MSG_ERR_PHONE_FORMAT"
+            },
+            "country": {
+                "type": "select2",
+                "name": "country"
+            }
+        };
+
+
+
         /**
          * Called after onChanges evnet, initializes
          */

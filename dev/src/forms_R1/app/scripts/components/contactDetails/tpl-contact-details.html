@@ -18,15 +18,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 form-group" ng-class="{'has-error':contCtrl.contactForm.firstName_{{::$id}}.$invalid}">
-                <label for="firstName_{{::$id}}" class="required">
+            <div class="col-md-5 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.firstName{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
+                <label for="firstName{{::contCtrl.fldId}}_{{::$id}}" class="required">
                     <span class="field-name">{{'FIRSTNAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="firstName_{{::$id}}" data-ng-model="contCtrl.contactModel.givenName"
-                           class="form-control full-width" name="firstName_{{::$id}}" maxlength="60" ng-blur="contCtrl.updateErrorSummary()"
+                    <input type="text" id="firstName{{::contCtrl.fldId}}_{{::$id}}"
+                           data-ng-model="contCtrl.contactModel.givenName"
+                           class="form-control full-width" name="firstName{{::contCtrl.fldId}}_{{::$id}}" maxlength="60"
+                           ng-blur="contCtrl.updateErrorSummary()"
                            size="60" ng-readonly="!contCtrl.isEditable" required/>
-                    <strong id="firstName-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.firstName_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.firstName_{{::$id}}.$error">
+                    <strong id="firstName-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.firstName{{::contCtrl.fldId}}_{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.firstName{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                     </strong>
@@ -40,15 +45,20 @@
                            ng-readonly="!contCtrl.isEditable"/>
                 </label>
             </div>
-            <div class="col-md-5 form-group" ng-class="{'has-error':contCtrl.contactForm.lastName_{{::$id}}.$invalid}">
-                <label for="lastName_{{::$id}}" class="required">
+            <div class="col-md-5 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.lastName{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
+                <label for="lastName{{::contCtrl.fldId}}_{{::$id}}" class="required">
                     <span class="field-name">{{'LASTNAME'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="lastName_{{::$id}}" data-ng-model="contCtrl.contactModel.surname"
+                    <input type="text" id="lastName{{::contCtrl.fldId}}_{{::$id}}"
+                           data-ng-model="contCtrl.contactModel.surname"
                            ng-readonly="!contCtrl.isEditable" ng-blur="contCtrl.updateErrorSummary()"
-                           class="form-control full-width" name="lastName_{{::$id}}" required maxlength="60" size="60"/>
-                    <strong id="surname-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.lastName_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.lastName_{{::$id}}.$error">
+                           class="form-control full-width" name="lastName{{::contCtrl.fldId}}_{{::$id}}" required
+                           maxlength="60" size="60"/>
+                    <strong id="surname-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.lastName{{::contCtrl.fldId}}_{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.lastName{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                     </strong>
@@ -56,48 +66,62 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-5 form-group" ng-class="{'has-error':contCtrl.contactForm.langCorrespond_{{::$id}}.$invalid}">
-                <label for="langCorrespond_{{::$id}}" class="required">
+            <div class="col-md-5 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.langCorrespond{{::contCtrl.fldId}}__{{::$id}}.$invalid}">
+                <label for="langCorrespond{{::contCtrl.fldId}}_{{::$id}}" class="required">
                     <span class="field-name">{{'LANGCORRESPOND'|translate}}</span>
                     <strong class="required">{{'REQUIRED' |translate}}</strong>
-                    <select id="langCorrespond_{{::$id}}" name="langCorrespond_{{::$id}}"
+                    <select id="langCorrespond{{::contCtrl.fldId}}_{{::$id}}"
+                            name="langCorrespond{{::contCtrl.fldId}}_{{::$id}}"
                             data-ng-model="contCtrl.contactModel.language" ng-blur="contCtrl.updateErrorSummary()"
                             ng-options="langCorr |translate for langCorr in contCtrl.langList"
                             class="form-control" ng-disabled="!contCtrl.isEditable" required>
                     </select>
-                    <strong id="langCorresp-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.langCorrespond_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.langCorrespond_{{::$id}}.$error">
+                    <strong id="langCorresp-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.langCorrespond{{::contCtrl.fldId}}_{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.langCorrespond{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                     </strong>
                 </label>
             </div>
-            <div class="col-md-4 form-group" ng-class="{'has-error':contCtrl.contactForm.jobTitle_{{::$id}}.$invalid}">
-                <label for="jobTitle_{{::$id}}" class="required">
+            <div class="col-md-4 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.jobTitle{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
+                <label for="jobTitle{{::contCtrl.fldId}}_{{::$id}}" class="required">
                     <span class="field-name">{{'JOBTITLE'|translate}}</span>
                     <strong class="required">{{'REQUIRED'|translate}}</strong>
-                    <input type="text" id="jobTitle_{{::$id}}" data-ng-model="contCtrl.contactModel.title"
-                           class="form-control full-width" name="jobTitle_{{::$id}}" required maxlength="40" size="40"
+                    <input type="text" id="jobTitle{{::contCtrl.fldId}}_{{::$id}}"
+                           data-ng-model="contCtrl.contactModel.title"
+                           class="form-control full-width" name="jobTitle{{::contCtrl.fldId}}_{{::$id}}" required
+                           maxlength="40" size="40"
                            ng-readonly="!contCtrl.isEditable" ng-blur="contCtrl.updateErrorSummary()"
                            required/>
-                    <strong id="jobTitle-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.jobTitle_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.jobTitle_{{::$id}}.$error">
+                    <strong id="jobTitle-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.jobTitle{{::contCtrl.fldId}}__{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.jobTitle{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                     </strong>
                 </label>
 
             </div>
-            <div class="col-md-3 form-group"  ng-class="{'has-error':contCtrl.contactForm.fax_number_{{::$id}}.$invalid}">
-                <label for="fax_number_{{::$id}}" ng-class="{'required':contCtrl.faxMandatory}">
+            <div class="col-md-3 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.fax_number{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
+                <label for="fax_number{{::contCtrl.fldId}}_{{::$id}}" ng-class="{'required':contCtrl.faxMandatory}">
                     <span class="field-name">{{'FAX_NUMBER'|translate}}</span>
                     <strong ng-if="contCtrl.faxMandatory" class="required">{{'REQUIRED'|translate}}</strong>
 
-                <input type="text" id="fax_number_{{::$id}}" data-ng-model="contCtrl.contactModel.fax"
-                       ng-readonly="!contCtrl.isEditable" ng-required="contCtrl.faxMandatory"
-                       class="form-control full-width" name="fax_number_{{::$id}}" maxlength="25" size="25"/>
-                    <strong id="fax-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.fax_number_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.fax_number_{{::$id}}.$error">
+                    <input type="text" id="fax_number{{::contCtrl.fldId}}_{{::$id}}"
+                           data-ng-model="contCtrl.contactModel.fax"
+                           ng-readonly="!contCtrl.isEditable" ng-required="contCtrl.faxMandatory"
+                           class="form-control full-width" name="fax_number{{::contCtrl.fldId}}_{{::$id}}"
+                           maxlength="25" size="25"/>
+                    <strong id="fax-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.fax_number{{::contCtrl.fldId}}_{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.fax_number{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                         </span>
                     </strong>
@@ -105,17 +129,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 form-group" ng-class="{'has-error':contCtrl.contactForm.phoneNumber_{{::$id}}.$invalid}">
-                <label for="phoneNumber_{{::$id}}" class="required">
+            <div class="col-md-3 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.phoneNumber{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
+                <label for="phoneNumber{{::contCtrl.fldId}}_{{::$id}}" class="required">
                     <span class="field-name">{{'PHONENUMBER'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="phoneNumber_{{::$id}}" data-ng-model="contCtrl.contactModel.phone"
-                            ng-blur="contCtrl.updateErrorSummary()"
-                           class="form-control full-width" name="phoneNumber_{{::$id}}" required maxlength="25"
+                    <input type="text" id="phoneNumber{{::contCtrl.fldId}}_{{::$id}}"
+                           data-ng-model="contCtrl.contactModel.phone"
+                           ng-blur="contCtrl.updateErrorSummary()"
+                           class="form-control full-width" name="phoneNumber{{::contCtrl.fldId}}_{{::$id}}" required
+                           maxlength="25"
                            size="25" ng-readonly="!contCtrl.isEditable" ng-pattern="contCtrl.phoneReg"
                            required/>
-                    <strong id="phoneNum-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.phoneNumber_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.phoneNumber_{{::$id}}.$error">
+                    <strong id="phoneNum-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.phoneNumber{{::contCtrl.fldId}}_{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.phoneNumber{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                              <span ng-message="pattern"><span translate="MSG_ERR_PHONE_FORMAT"></span></span>
                         </span>
@@ -129,16 +158,20 @@
                            ng-readonly="!contCtrl.isEditable" class="form-control" name="phoneExt" maxlength="10"/>
                 </label>
             </div>
-            <div class="col-md-6 form-group" ng-class="{'has-error':contCtrl.contactForm.contactEmail_{{::$id}}.$invalid}">
-                <label for="contactEmail_{{::$id}}" class="required">
+            <div class="col-md-6 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm.contactEmail{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
+                <label for="contactEmail{{::contCtrl.fldId}}_{{::$id}}" class="required">
                     <span class="field-name">{{'CONTACTEMAIL'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <input type="email" id="contactEmail_{{::$id}}" data-ng-model="contCtrl.contactModel.email"
+                    <input type="email" id="contactEmail{{::contCtrl.fldId}}_{{::$id}}"
+                           data-ng-model="contCtrl.contactModel.email"
                            ng-blur="contCtrl.updateErrorSummary()"
                            ng-readonly="!contCtrl.isEditable" maxlength="50" size="60"
-                           class="form-control full-width" name="contactEmail_{{::$id}}" required/>
-                    <strong id="contactEmail-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.contactEmail_{{::$id}})">
-                        <span class="label label-danger" ng-messages="contCtrl.contactForm.contactEmail_{{::$id}}.$error">
+                           class="form-control full-width" name="contactEmail{{::contCtrl.fldId}}_{{::$id}}" required/>
+                    <strong id="contactEmail-error" class="error"
+                            ng-show="contCtrl.showError(contCtrl.contactForm.contactEmail{{::contCtrl.fldId}}_{{::$id}})">
+                        <span class="label label-danger"
+                              ng-messages="contCtrl.contactForm.contactEmail{{::contCtrl.fldId}}_{{::$id}}.$error">
                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                           <span ng-message="email"><span translate="MSG_ERR_EMAIL_FORMAT"></span></span>
                         </span>

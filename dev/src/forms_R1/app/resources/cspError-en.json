@@ -1,0 +1,20 @@
+{
+  "APPLICANT_APPL": "Applicant",
+  "SALUTATION_APPL": "Applicant Salutation",
+  "FIRSTNAME_APPL": "Applicant First Name",
+  "LASTNAME_APPL": "Applicant Last Name",
+  "LANGCORRESPOND_APPL": "Applicant Language of Correspondance",
+  "JOBTITLE_APPL": "Applicant Job Title",
+  "FAX_NUMBER_APPL": "Applicant Fax Number",
+  "PHONENUMBER_APPL": "Applicant Phone Number",
+  "CONTACTEMAIL_APPL": "Applicant Email",
+  "APPLICANT_BILL": "Billing Company Name",
+  "SALUTATION_BILL": "Billing Salutation",
+  "FIRSTNAME_BILL": "Billing First Name",
+  "LASTNAME_BILL": "Billing Last Name",
+  "LANGCORRESPOND_BILL": "Billing Language of Correspondance",
+  "JOBTITLE_BILL": "Billing Job Title",
+  "FAX_NUMBER_BILL": "Billing Fax Number",
+  "PHONENUMBER_BILL": "Billing Phone Number",
+  "CONTACTEMAIL_BILL": "Billing Email"
+}
