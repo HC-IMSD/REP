@@ -6,7 +6,9 @@
     'use strict';
 
     angular
-        .module('cspCertification', []);
+        .module('cspCertification', [
+            'errorMessageModule'
+        ]);
 
 })();
 
@@ -25,17 +27,20 @@
             }
         });
 
-    cspCertificationController.$inject = [];
-    function cspCertificationController() {
+    cspCertificationController.$inject = ['$scope'];
+    function cspCertificationController($scope) {
 
         var vm = this;
         vm.model = null;
 
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.dateError = [{type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "date", displayAlias: "MSG_ERR_DATE_FORMAT"}];
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
-
+            _setIDNames();
         };
 
         /**
@@ -50,14 +55,13 @@
         };
 
 
-        vm.showError = function (ctrl) {
-
-            if (!ctrl) return false;
-
-            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
-                return true
-            }
+        function _setIDNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.firstNameId = "certFirstName" + scopeId;
+            vm.lastNameId = "certLastName" + scopeId;
+            vm.salutationId = "certSalut" + scopeId;
+            vm.jobTitleId = "certJobTitle" + scopeId;
+            vm.dateSignedId = "certDateSigned" + scopeId;
         }
-
     }
 })();

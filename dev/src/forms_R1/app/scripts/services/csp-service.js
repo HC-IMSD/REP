@@ -101,7 +101,8 @@
             extCertification.initials = intCertification.initials;
             extCertification.surname = intCertification.surname;
             extCertification.job_title = intCertification.title;
-            extCertification.date_signed = intCertification.dateSigned;
+            extCertification.date_signed = $filter('date')(intCertification.dateSigned, "yyyy-MM-dd");
+            ;
 
             model[rootTag].applicant = this._transformApplicantInfoForOutput(jsonObj.applicant);
 

@@ -44,7 +44,7 @@
         vm.model={
             isBillingDifferent:false
         };
-        vm.applicantTextAlias="APPLICANT";
+        vm.applicantTextAlias = "APPLICANTNAME";
 
         vm.type="_appl";
         vm.fieldId=vm.type+$scope.$id;
@@ -55,7 +55,7 @@
                 vm.type="_bill";
                 vm.fieldId=vm.type+$scope.$id;
             }else{
-                vm.applicantTextAlias="APPLICANT";
+                vm.applicantTextAlias = "APPLICANTNAME";
                 vm.type="_appl";
                 vm.fieldId=vm.type+$scope.$id;
             }
