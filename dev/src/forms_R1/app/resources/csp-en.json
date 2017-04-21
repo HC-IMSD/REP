@@ -53,5 +53,6 @@
   "APPL_TITILE":" Applicant Information",
   "PATENT":"Canadian Patent Number",
   "MSG_LENGTH_7NUM": "Please enter 7 digits.",
-  "OTHER_EU_COUNTRY": " Other European Union Country Details"
+  "OTHER_EU_COUNTRY": " Other European Union Country Details",
+  "CERT_FS": "Name of Authorized Official"
 }

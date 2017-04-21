@@ -1462,6 +1462,14 @@ gulp.task('dev-company-copyLib', function () {
     return copySources.pipe(gulp.dest(paths.buildDevCompany))
 
 });
+
+
+gulp.task('dev-company-copyWet', function () {
+    return (pipes.copyWet(paths.buildDevCompany))
+});
+
+
+
 /**********************Start Transaction Gulp scripts******/
 //copy all the needed files for company
 gulp.task('dev-transaction-copySrc', function () {
@@ -2049,6 +2057,10 @@ gulp.task('dev-diffForm-htmlBuild', ['dev-diffForm-copyData', 'dev-diffForm-copy
 
 //=========================================
 // Certificate of Supplementary Protection
+
+gulp.task('dev-csp-copyWet', function () {
+    return (pipes.copyWet(paths.buildDevCSP))
+});
 
 gulp.task('dev-csp-copySrc', function () {
     return (

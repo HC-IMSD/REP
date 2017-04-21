@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('cspService', ['hpfbConstants']);
+        .module('cspService', ['hpfbConstants', 'dataLists']);
 })();
 
 (function () {

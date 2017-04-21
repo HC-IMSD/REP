@@ -25,19 +25,26 @@
             }
         });
 
-    timelySubmissionController.$inject = ['EUOTHER','NO_APPLICATION','APPLICATION'];
-    function timelySubmissionController(EUOTHER,NO_APPLICATION,APPLICATION) {
+    timelySubmissionController.$inject = ['EUOTHER', 'NO_APPLICATION', 'APPLICATION', '$scope'];
+    function timelySubmissionController(EUOTHER, NO_APPLICATION, APPLICATION, $scope) {
 
         var vm = this;
         vm.model = {};
         vm.countries = [];
         vm.noAppValue=NO_APPLICATION;
         vm.appValue=APPLICATION;
+
+        vm.dateError = [{type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "date", displayAlias: "MSG_ERR_DATE_FORMAT"}];
+
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
+
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
-
+            _setIdNames();
         };
 
         /**
@@ -77,14 +84,12 @@
                 return false;
             }
         };
-        vm.showError = function (ctrl) {
-
-            if (!ctrl) return false;
-
-            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
-                return true
-            }
-
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.timelyId = "patentNum" + scopeId;
+            vm.dateId = "timelyDate" + scopeId;
+            vm.countryId = "timelyCountry" + scopeId;
+            vm.otherCountryId = "otherCountry" + scopeId;
         }
 
     }

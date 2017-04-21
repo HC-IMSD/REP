@@ -1,19 +1,19 @@
 <div class="container-fluid">
     <ng-form name="contCtrl.contactForm">
         <div class="row">
-            <div class="col-md-3 form-group" ng-class="{'has-error':contCtrl.contactForm.salutation{{::contCtrl.fldId}}_{{::$id}}.$invalid}">
-                <label for="salutation{{::contCtrl.fldId}}_{{::$id}}" class="required">
+            <div class="col-md-3 form-group"
+                 ng-class="{'has-error':contCtrl.contactForm[contCtrl.salutationId].$invalid}">
+                <label for="{{::contCtrl.salutationId}}" class="required">
                     <span class="field-name">{{"SALUTATION"|translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <select id="salutation{{::contCtrl.fldId}}_{{::$id}}" name="salutation{{::contCtrl.fldId}}_{{::$id}}" class="form-control" ng-blur="contCtrl.updateErrorSummary()"
+                    <select id="{{::contCtrl.salutationId}}" name="{{::contCtrl.salutationId}}" class="form-control"
+                            ng-blur="contCtrl.updateErrorSummary()"
                             data-ng-model="contCtrl.contactModel.salutation" ng-disabled="!contCtrl.isEditable"
                             ng-options="salut |translate for salut in contCtrl.salutationList" required>
                     </select>
-                    <strong id="salutation-error" class="error" ng-show="contCtrl.showError(contCtrl.contactForm.salutation{{::contCtrl.fldId}}_{{::$id}})">
-                      <span class="label label-danger" ng-messages="contCtrl.contactForm.salutation{{::contCtrl.fldId}}_{{::$id}}.$error">
-                          <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                      </span>
-                    </strong>
+                    <cmp-error-message field-name="contCtrl.salutationId" form-ref="contCtrl.contactForm"
+                                       show-error="contCtrl.showErrors()"
+                                       error-types="contCtrl.requiredOnly"></cmp-error-message>
                 </label>
             </div>
         </div>

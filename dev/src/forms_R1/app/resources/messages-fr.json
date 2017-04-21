@@ -23,5 +23,7 @@
   "MSG_ERR_ONE_REP": "fr_At least one contact is required.",
   "MSG_ERR_ONE_LIFE_REC": "fr_One lifecycle record is required.",
   "MSG_ERR_RATIONALE_SEL": "fr_Please select at least one rationale.",
-  "MSG_ERR_NOTIF_SEL": "fr_Please select at least one notifiable change."
+  "MSG_ERR_NOTIF_SEL": "fr_Please select at least one notifiable change.",
+  "MSG_ERR_MIN_POS": "fr_Must be a positive number",
+  "MSG_ERR_MAX": "fr_Exceeds the maximum"
 }

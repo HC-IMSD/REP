@@ -8,7 +8,8 @@
     angular
         .module('contactModule', [
             'dataLists',
-            'hpfbConstants'
+            'hpfbConstants',
+            'errorMessageModule'
         ])
 })();
 
@@ -53,9 +54,11 @@
         };
         vm.inputModelOptions={updateOn: 'blur'};
         vm.fldId=""; //used to dynamically distinguish fields default to empty for backwards compat
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
         vm.$onInit = function () {
            vm.langList=[ENGLISH,FRENCH];
-
+            _setIdNames();
         };
 
         vm.$onChanges=function(changes){
@@ -70,8 +73,8 @@
                vm.faxRequired=changes.faxMandatory.currentValue;
             }
             if(changes.fieldSuffix){
-
                 vm.fldId=changes.fieldSuffix.currentValue;
+                // _setIdNames();
             }
 
         };
@@ -83,6 +86,12 @@
                 return true
             }
             return false
+        }
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.salutationId = "salutation" + vm.fldId + scopeId;
+
         }
 
     }

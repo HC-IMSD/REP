@@ -7,7 +7,8 @@
 
     angular
         .module('cspMainApplication', [
-            'cspConstants'
+            'cspConstants',
+            'errorMessageModule'
         ]);
 
 })();
