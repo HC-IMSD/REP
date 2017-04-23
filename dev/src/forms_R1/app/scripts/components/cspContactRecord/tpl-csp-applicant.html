@@ -18,7 +18,7 @@
         </div>
         <cmp-contact-details is-amend="true" contact-record="cspApplCtrl.model.contact" fax-mandatory="true"
                              field-suffix="cspApplCtrl.type"></cmp-contact-details>
-        <cmp-address-details is-amend="true" address-record="cspApplCtrl.model.address"></cmp-address-details>
+        <cmp-address-details is-amend="true" address-record="cspApplCtrl.model.address" field-suffix="cspApplCtrl.type"></cmp-address-details>
         <div class=" col-md-12">
             <div class="checkbox" ng-if="cspApplCtrl.model.role.applicant">
                 <label for="billingDifferent_{{$id}}">

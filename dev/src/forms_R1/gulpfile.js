@@ -334,7 +334,8 @@ var activityComponentFolders = [
     componentFolders.fileIOComponentAndDep,
     componentFolders.repContactList,
     componentFolders.repContactRecord,
-    componentFolders.adminSubmissionPath
+    componentFolders.adminSubmissionPath,
+    componentFolders.errorMsg
 ];
 
 //Company Form Components
@@ -353,7 +354,8 @@ var companyComponentFolders =
         componentFolders.contactRecord,
         componentFolders.importerProducts,
         componentFolders.dossierIdDetails,
-         componentFolders.errorSummary
+         componentFolders.errorSummary,
+        componentFolders.errorMsg
     ];
 
 //Dossier Form Components
@@ -375,7 +377,8 @@ var dossierComponentFolders =
         componentFolders.repContactRecord,
         componentFolders.contactDetails,
         componentFolders.applicationInfo,
-        componentFolders.expandingTable
+        componentFolders.expandingTable,
+        componentFolders.errorMsg
     ];
 
 //transaction Form Components
@@ -388,7 +391,8 @@ var transactionComponentFolders = [
     componentFolders.fileIOComponentAndDep,
     componentFolders.lifecycleList,
     componentFolders.lifecycleDetails,
-    componentFolders.addressDetails
+    componentFolders.addressDetails,
+    componentFolders.errorMsg
 ];
 //certificate of Supplementary Protection File
 

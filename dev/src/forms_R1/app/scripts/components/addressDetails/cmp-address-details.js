@@ -11,7 +11,8 @@
             'hpfbConstants',
             'dataLists',
             'filterLists',
-            'ui.select'
+            'ui.select',
+            'errorMessageModule'
 
         ])
 })();
@@ -33,12 +34,13 @@
                 onUpdate: '&', //no longer used TBD should be removed
                 showErrors: '&',
                 isAmend: '<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                fieldSuffix:'<'
             }
         });
-    addressCtrl.$inject = ['getCountryAndProvinces','$translate','CANADA','USA'];
+    addressCtrl.$inject = ['getCountryAndProvinces','$translate','CANADA','USA','$scope'];
 
-    function addressCtrl( getCountryAndProvinces,$translate, CANADA,USA) {
+    function addressCtrl( getCountryAndProvinces,$translate, CANADA,USA, $scope) {
 
         var vm = this;
         vm.isEditable = true;
@@ -62,7 +64,10 @@
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
         vm.hideProvinceText = false;
         vm.countryList= getCountryAndProvinces.getCountries();
+        vm.fdId="";
         vm.postalError="MSG_ERR_POSTAL";
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
         vm.$onInit = function () {
 
             if (vm.addressRecord) {
@@ -76,6 +81,7 @@
                 vm.postalPattern = getPostalPattern();
                 vm.hideProvinceDdl = !vm.hideProvinceText;
             }
+            _setIdNames();
         };
         /**
          * @ngdoc method updates if the model changes
@@ -88,6 +94,9 @@
             }
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
+            }
+            if(changes.fieldSuffix){
+                vm.fldId=changes.fieldSuffix.currentValue;
             }
         };
         /**
@@ -141,17 +150,6 @@
             vm.addressForm.$setPristine();
         };
 
-
-       /* vm.onSelectedCountryChange = function () {
-
-
-        }
-*/
-        vm.onAddressRoleUpdate = function (newRole) {
-            //  vm.addressModel.addressRole = newRole;
-            // vm.updateAddressModel();
-
-        };
 
         /**
          * @ngdoc method formats canadian postal code to upper and space
@@ -215,6 +213,17 @@
             }
 
             return postalPtrn;
+        }
+
+
+        function _setIdNames() {
+            var scopeId = vm.fldId+ "_" + $scope.$id;
+            vm.streetId = "street" + scopeId;
+            vm.cityId = "city" + scopeId;
+            vm.countryId = "country" + scopeId;
+            vm.stateTextId = "proveState" + scopeId;
+            vm.stateListId = "provinceList" + scopeId;
+            vm.postalId = "postal" + scopeId;
         }
 
     }

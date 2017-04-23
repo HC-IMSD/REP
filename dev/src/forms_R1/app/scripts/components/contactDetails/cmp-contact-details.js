@@ -55,6 +55,8 @@
         vm.inputModelOptions={updateOn: 'blur'};
         vm.fldId=""; //used to dynamically distinguish fields default to empty for backwards compat
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.emailError=[{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "email", displayAlias: "MSG_ERR_EMAIL_FORMAT"}];
+        vm.phoneError=[{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_PHONE_FORMAT"}];
 
         vm.$onInit = function () {
            vm.langList=[ENGLISH,FRENCH];
@@ -74,7 +76,6 @@
             }
             if(changes.fieldSuffix){
                 vm.fldId=changes.fieldSuffix.currentValue;
-                // _setIdNames();
             }
 
         };
@@ -89,9 +90,16 @@
         }
 
         function _setIdNames() {
-            var scopeId = "_" + $scope.$id;
-            vm.salutationId = "salutation" + vm.fldId + scopeId;
-
+            var scopeId = vm.fldId+ "_" + $scope.$id;
+            vm.salutationId = "salutation" + scopeId;
+            vm.firstNameId="firstName" + scopeId;
+            vm.lastNameId="lastName" + scopeId;
+            vm.langCorrespondId="langCorrespond" + scopeId;
+            vm.jobTitleId="jobTitle" + scopeId;
+            vm.faxId="faxNumber" + scopeId;
+            vm.phoneNumberId="phoneNumber" + scopeId;
+            vm.phoneExtId="phoneExt" + scopeId;
+            vm.contactEmailId="contactEmail" + scopeId;
         }
 
     }
