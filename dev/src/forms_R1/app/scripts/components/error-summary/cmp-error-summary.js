@@ -30,7 +30,9 @@
                 formPreamble: '@', /** What to name the heading should say about the section **/
                 makeFocused: '<',
                 setHeadingLevel: '@',
-                exclusionList: '<'
+                exclusionList: '<',
+                formId: '@',
+                aliasList: '<'
 
             }
         });
@@ -41,7 +43,7 @@
         vm.parentRef = null;
         vm.errorArray = [];
         vm.uniqueErrorList = {};
-        vm.prevValue = {};
+        //vm.prevValue = {};
         vm.isVisible = false;
         vm.nameAddendum = "";
         vm.rootError = "";
@@ -80,6 +82,7 @@
 
         vm.headingPreamble = "";
         vm.headerLevel = "";
+        vm.startFormId = "";
         vm.$onInit = function () {
 
         };
@@ -108,6 +111,10 @@
 
                 vm.exclusions = changes.exclusionList.currentValue;
             }
+            if (changes.aliasList) {
+
+                vm.alias = changes.aliasList.currentValue;
+            }
 
             //the base form that this error summary is checking for
             if (changes.formRef) {
@@ -122,13 +129,20 @@
                 if (vm.formRef) {
                    // console.log(vm.formRef.$error);
                     //pass in the form name and the error object
-                    vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
+                    //should I run it if hidden?
+                    if (vm.isVisible) {
+                        vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
+                    }
                 }
             }
             if (changes.makeFocused) {
                 if ((changes.makeFocused.currentValue)) {
                     vm.isFocusInput = vm.isFocusInput + 1;
                 }
+            }
+            if (changes.formId) {
+
+                vm.startFormId = changes.formId.currentValue;
             }
 
         };
@@ -189,22 +203,22 @@
              });
              console.log(tt)*/
 
-            $.each($('input, select ,textarea', '#csp-form'), function (k) {
+            $.each($('input, select ,textarea', '#' + vm.startFormId), function (k) {
                 //summary.push($(this).attr('id')+' '+$(this).attr('name'));
                 var temp_attr = $(this).attr('id');
                 if (temp_attr) {
                     lup[temp_attr] = k;
-                    // summary.push(temp_attr)
                 }
-                // summary.push($(this).attr('id')+' '+$(this).attr('name'));
             });
-            // lup= $filter('orderByObject')(lup, '');
+
             console.log(lup)
 
             //delete anything in the not in the list
+            //TODO refactor? seems inefficient
             var key2 = Object.keys(lup);
             for (var p = 0; p < key2.length; p++) {
                 if (!vm.uniqueErrorList[key2[p]]) {
+                    // console.log("deleting "+key2[p]);
                     delete lup[key2[p]];
                 }
 
@@ -219,15 +233,15 @@
                 sa[temp[v]] = v;
             }
            //var sa=lup;
-          //  console.log(sa)
+            console.log(sa)
             var newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
                 return vm.uniqueErrorList[k]
             });
             //sort errors
-           // console.log(newErrors)
+            var notDefined = {};
             if (newErrors.length > 0) {
                 var i = 0;
-                while (i < ((newErrors.length / 2) + 1)) {
+                while (i < newErrors.length) {
                     var currRec = newErrors[i];
                     var targetName = currRec.name;
                     var destIndex = sa[targetName];
@@ -236,12 +250,18 @@
                         newErrors[destIndex] = angular.copy(currRec);
                         newErrors[i] = angular.copy(tempRec);
                     } else {
+
+                        if (!angular.isDefined(destIndex)) {
+                            notDefined[currRec.name] = {rec: currRec, pos: i};
+                        }
                         i++;
                     }
                 }
             }
+            console.log(notDefined);
+            _sortUnknowns(notDefined, newErrors);
           //  console.log(newErrors);
-            if (!angular.equals(vm.prevValue, newErrors)) {
+            if (!angular.equals(vm.errorArray, newErrors)) {
                 console.log("not equal")
                 vm.errorArray = newErrors;
             }
@@ -255,7 +275,6 @@
                 var record = errorObj[keys[i]];
 
                 for (var j = 0; j < record.length; j++)
-
                     if (record[j].$invalid === true && record[j].$name.indexOf('.') > 0) {
 
                         //it is assummed that if it is in the exclusion list it is a summary
@@ -297,11 +316,9 @@
         };
         function _getElementScope(rawName) {
             var separator = '_';
-            var index = rawName.lastIndexOf(separator);
-            var scopeId = "";
-            if (index > -1) {
-                scopeId = rawName.substring(index + 1, rawName.length);
-            } else {
+            var nameSplit = rawName.split(separator);
+            var scopeId = parseInt(nameSplit[nameSplit.length - 1]);
+            if (!angular.isNumber(scopeId)) {
                 scopeId = "";
             }
             return scopeId;
@@ -342,6 +359,7 @@
                         break;
                     case "select2":
                         var searchId = aliasRec.name + "_match" + scopeId;
+                        //TODO make angular friendly
                         var destObj = $("#" + searchId);
                         if (destObj.length > 0) {
                             destId = searchId;
@@ -364,6 +382,39 @@
         }
 
 
+        function _sortUnknowns(unknownJson, sortList) {
+            //try and find scope
+            //create array
+            var unknownArray = Object.keys(unknownJson).map(function (k) {
+                //  console.log(k);
+                return unknownJson[k]
+            });
+            console.log(unknownArray)
+            for (var i = 0; i < unknownArray.length; i++) {
+                var unknownRec = unknownArray[i];
+                var unknownName = unknownRec.rec.name;
+                var scopeIndex = _getElementScope(unknownName);
+                if (angular.isNumber(scopeIndex)) {
+                    for (var g = sortList.length - 1; g >= 0; g--) {
+                        var sortRec = sortList[g];
+                        var sortScope = _getElementScope(sortRec.name);
+                        if (angular.isNumber(sortScope) && sortScope === scopeIndex && unknownName !== sortRec.name) {
+                            sortList.move(unknownRec.pos, g + 1);
+                            break;
+                        }
+                    }
+
+                }
+            }
+
+            console.log(sortList);
+        }
+
+        Array.prototype.move = function (from, to) {
+            if (to < 0) to = 0;
+            if (to >= this.length) to = this.length - 1;
+            this.splice(to, 0, this.splice(from, 1)[0]);
+        };
     }//end controller
 
 })();
@@ -398,35 +449,6 @@
             });
             return array;
         }
-
-        /*    function sequenceOrderBy($filter) {
-         return function (array) {
-         var result = [];
-         angular.forEach($filter('orderBy')(array, 'sequence', true), function (sortedObject) {
-         result.push(sortedObject);
-
-         });
-         return result;
-         };
-         }*/
-        /* app.filter('orderObjectBy', function(){
-         return function(input, attribute) {
-         if (!angular.isObject(input)) return input;
-
-         var array = [];
-         for(var objectKey in input) {
-         array.push(input[objectKey]);
-         }
-
-         array.sort(function(a, b){
-         a = parseInt(a[attribute]);
-         b = parseInt(b[attribute]);
-         return a - b;
-         });
-         return array;
-         }
-         });*/
-
 
     }
 

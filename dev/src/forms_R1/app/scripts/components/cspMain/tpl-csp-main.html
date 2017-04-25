@@ -32,9 +32,9 @@
             <div>
             </div>
         </section>
-        <cmp-error-summary form-ref="main.cspForm" show-errors="true"
+        <cmp-error-summary form-ref="main.cspForm" show-errors="main.showErrorSummary"
                            form-preamble="CSP_FORM" exclusion-list="main.exclusions" alias-list="main.alias"
-                           update-errors="main.updateSummary" make-focused="main.updateSummary"
+                           update-errors="main.updateSummary" make-focused="main.summaryFocusIndex" form-id="csp-form"
                            name-suffix="main.cspForm" set-heading-level="h2"></cmp-error-summary>
         <div ng-if="main.showHCOnlySection()">
             <section class="panel panel-primary mrgn-tp-lg">
@@ -82,7 +82,9 @@
                 </div>
                 <div>
                 <cmp-csp-applicant-list add-applicant="main.modelService.addApplicantToModel()" record="main.cspModel.applicant"
-                                        delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant-list>
+                                        delete-applicant="main.modelService.deleteApplicant()"
+                                        update-error-summary="main.updateErrorSummary()"
+                ></cmp-csp-applicant-list>
                 </div>
                 <div>
                     <div class="row">
@@ -145,7 +147,6 @@
                          class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
                  </button>-->
             </div>
-
         </div>
 
 

@@ -51,7 +51,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <fieldset>
+                <fieldset
+                        ng-class="{'has-error' : cspMainApplCtrl.mainApplForm[cspMainApplCtrl.applApplyId].$invalid }">
                     <legend class="required"><span class="field-name">{{'APPLICANT_APPLY' |translate}}</span> <strong
                             class="required"> {{"REQUIRED" |translate}} </strong>
                         <cmp-error-message field-name="cspMainApplCtrl.applApplyId"
@@ -64,7 +65,8 @@
                             <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
                                    id="{{::cspMainApplCtrl.applApplyId}}"
                                    ng-model="cspMainApplCtrl.model.timeApplication"
-                                   ng-value="cspMainApplCtrl.nocValue" required/>{{'NOC_120'|translate}}
+                                   ng-value="cspMainApplCtrl.nocValue" required="required"/>
+                            {{'NOC_120'|translate}}
                         </label>
                     </div>
                     <div class="radio">
@@ -108,16 +110,18 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <fieldset>
-                    <legend class="required"><span class="field-name">{{'STATEMENTS_APPLICANT' |translate}}</span>
+                <fieldset ng-class="{'has-error' :cspMainApplCtrl.mainApplForm[cspMainApplCtrl.applStateId].$invalid }">
+                    <legend class="required"><span class="field-name">{{'APPLICANTAPPLY' |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                        <cmp-error-message field-name="timelySubCtrl.timelyId" form-ref="timelySubCtrl.timelySubForm"
-                                           show-error="timelySubCtrl.showErrors()"
-                                           error-types="timelySubCtrl.requiredOnly"></cmp-error-message>
+                        <cmp-error-message field-name="cspMainApplCtrl.applStateId"
+                                           form-ref="cspMainApplCtrl.mainApplForm"
+                                           show-error="cspMainApplCtrl.showErrors()"
+                                           error-types="cspMainApplCtrl.requiredOnly"></cmp-error-message>
                     </legend>
                     <div class="radio">
-                        <label for="applicant-owner">
-                            <input type="radio" name="applicantStatement" id="applicant-owner"
+                        <label for="{{::cspMainApplCtrl.applStateId}}">
+                            <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
+                                   id="{{::cspMainApplCtrl.applStateId}}"
                                    ng-model="cspMainApplCtrl.model.applicantStatement"
                                    ng-value="cspMainApplCtrl.ownerValue" required="required"/>
                             {{'APPLICANT_OWNER'|translate}}
@@ -125,7 +129,7 @@
                     </div>
                     <div class="radio">
                         <label for="applicant-consent">
-                            <input type="radio" name="applicantStatement"
+                            <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
                                    ng-model="cspMainApplCtrl.model.applicantStatement"
                                    ng-value="cspMainApplCtrl.ownerBehalfValue"
                                    id="applicant-consent"/>

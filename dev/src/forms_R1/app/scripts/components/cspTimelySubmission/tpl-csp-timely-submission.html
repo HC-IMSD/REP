@@ -36,7 +36,7 @@
                 <div class="form-group col-md-4"
                      ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.dateId].$invalid}">
                     <label for="{{::timelySubCtrl.dateId}}" class="required">
-                        <span class="field-name">{{"APPL_DATE" |translate}}</span>
+                        <span class="field-name">{{"TIMELYDATE" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
                                data-ng-model="timelySubCtrl.model.approvalDate" class="form-control" required/>
@@ -50,7 +50,7 @@
                 <div class="form-group col-md-6"
                      ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.countryId].$invalid}">
                     <label for="{{::timelySubCtrl.countryId}}" class="required">
-                        <span class="field-name">{{"MARKETING_COUNTRY" |translate}}</span>
+                        <span class="field-name">{{"TIMELYCOUNTRY" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <select id="{{::timelySubCtrl.countryId}}" name="{{::timelySubCtrl.countryId}}"
                                 ng-options="country |translate for country in timelySubCtrl.countries"

@@ -4,7 +4,7 @@
             <div class="form-group col-md-12"
                  ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.patentNumId].$invalid}">
                 <label for="{{::cspPatentCtrl.patentNumId}}" class="required">
-                    <span class="field-name">{{'PATENT' |translate}}</span>
+                    <span class="field-name">{{'PATENTNUM' |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspPatentCtrl.patentNumId}}" name="{{::cspPatentCtrl.patentNumId}}"
                            data-ng-model="cspPatentCtrl.model.patentNumber" class="form-control" maxlength="7"

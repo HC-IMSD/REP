@@ -30,7 +30,8 @@
                 record: '<',
                 showErrors: '&',
                 addApplicant:'&',
-                deleteApplicant:'&'
+                deleteApplicant: '&',
+                updateErrorSummary: '&'
             }
         });
 

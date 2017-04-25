@@ -84,12 +84,19 @@
                 return false;
             }
         };
+
+
+        /**
+         * sets the ids of the controls
+         * If use the same name as label, don't need a separate definition!
+         * @private
+         */
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.timelyId = "patentNum" + scopeId;
+            vm.timelyId = "statements_timely" + scopeId;
             vm.dateId = "timelyDate" + scopeId;
             vm.countryId = "timelyCountry" + scopeId;
-            vm.otherCountryId = "otherCountry" + scopeId;
+            vm.otherCountryId = "other_eu_country" + scopeId;
         }
 
     }

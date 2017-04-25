@@ -29,7 +29,8 @@
                 addApplicant:'&',
                 deleteApplicant: '&',
                 showErrors: '&',
-                alias:'<'
+                alias: '<',
+                updateErrorSummary: '&'
             }
         });
 

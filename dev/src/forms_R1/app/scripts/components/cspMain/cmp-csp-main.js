@@ -53,6 +53,7 @@
         vm.applicationInfoService = null;
         vm.showErrorSummary = 0; //signals child error summaries to show
         vm.updateSummary = 0; //signals to update the error summary contents
+        vm.summaryFocusIndex = 0;
 
         vm.exclusions = {
             "contactListCtrl.contactListForm": "true",
@@ -61,18 +62,24 @@
             "addressRec.addressRecForm": "true"
         };
         vm.alias = {
-            "roleMissing": {
-                "type": "fieldset",
-                "parent": "fs_roleMissing"
+
+            "phoneNumber_appl": {
+                "type": "pattern",
+                "errorType": "MSG_ERR_PHONE_FORMAT"
             },
-            "phoneNumber": {
+            "phoneNumber_bill": {
                 "type": "pattern",
                 "errorType": "MSG_ERR_PHONE_FORMAT"
             },
             "country": {
                 "type": "select2",
                 "name": "country"
+            },
+            "patentNum": {
+                "type": "minlength",
+                "errorType": "MSG_LENGTH_7NUM"
             }
+
         };
 
 
@@ -87,6 +94,7 @@
             vm.drugUseList = vm.modelService.getDrugUses();
             vm.rootTag = vm.modelService.getRootTag();
             vm.applicationInfoService = new ApplicationInfoService();
+            vm.showErrorSummary = false;
         };
 
         /**
@@ -127,6 +135,7 @@
                 vm.cspModel = vm.modelService.getModelInfo(); //the model
                 //angular.extend(vm.company, vm.companyService.getModelInfo());
                 //vm.companyEnrolForm.$setDirty();
+                vm.showErrorSummary = false;
             }
         }
 
@@ -144,8 +153,9 @@
         vm.saveXML = function () {
 
             if (vm.cspForm.$invalid) {
-                vm.showErrorSummary = vm.showErrorSummary + 1;
+                vm.showErrorSummary = true;
                 vm.updateErrorSummary();
+                setErrorSummaryFocus()
 
             } else {
 
@@ -153,6 +163,7 @@
 
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
                 vm.cspForm.$setPristine();
+                vm.showErrorSummary = false;
             }
         };
 
@@ -213,6 +224,10 @@
 
             }
 
+        }
+        function setErrorSummaryFocus() {
+
+            vm.summaryFocusIndex++;
         }
 
 
