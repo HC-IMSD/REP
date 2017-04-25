@@ -65,8 +65,9 @@
         vm.hideProvinceText = false;
         vm.countryList= getCountryAndProvinces.getCountries();
         vm.fdId="";
-        vm.postalError="MSG_ERR_POSTAL";
+       // vm.postalError="MSG_ERR_POSTAL";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_POSTAL"}];
 
         vm.$onInit = function () {
 
@@ -117,14 +118,14 @@
 
         vm.isCountryCanada=function(){
           if(!vm.addressModel || !vm.addressModel.country){
-              vm.postalError="MSG_ERR_POSTAL";
+              vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_POSTAL"}];
               return false;
           }
            else if(vm.addressModel.country.id===CANADA){
-                vm.postalError="MSG_ERR_POSTAL";
+              vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_POSTAL"}];
                 return true;
             }else{
-                vm.postalError="MSG_ERR_ZIP";
+              vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_ZIP"}];
             }
             return false
         };

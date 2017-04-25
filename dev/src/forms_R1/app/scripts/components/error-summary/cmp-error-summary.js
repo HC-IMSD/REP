@@ -29,13 +29,14 @@
                 nameSuffix: '@', /** What to add to the id of the error summary to be able to find it **/
                 formPreamble: '@', /** What to name the heading should say about the section **/
                 makeFocused: '<',
-                setHeadingLevel: '@'
+                setHeadingLevel: '@',
+                exclusionList: '<'
 
             }
         });
-    errorSummaryController.$inject = ['$scope'];
+    errorSummaryController.$inject = ['$scope', '$filter'];
 
-    function errorSummaryController($scope) {
+    function errorSummaryController($scope, $filter) {
         var vm = this;
         vm.parentRef = null;
         vm.errorArray = [];
@@ -56,23 +57,23 @@
                 "type": "fieldset",
                 "parent": "fs_roleMissing"
             },
-            "contactRolesValid":{
-                "type":"button",
-                "parent":"",
-                "target":"addContact"
+            "contactRolesValid": {
+                "type": "button",
+                "parent": "",
+                "target": "addContact"
             },
-            "addressRolesValid":{
-                "type":"button",
-                "parent":"",
-                "target":"addAddressBtn"
+            "addressRolesValid": {
+                "type": "button",
+                "parent": "",
+                "target": "addAddressBtn"
             },
-            "phoneNumber":{
-                "type":"pattern",
-                "errorType":"MSG_ERR_PHONE_FORMAT"
+            "phoneNumber": {
+                "type": "pattern",
+                "errorType": "MSG_ERR_PHONE_FORMAT"
             },
-            "country":{
-                "type":"select2",
-                "name":"country"
+            "country": {
+                "type": "select2",
+                "name": "country"
             }
         };
 
@@ -102,12 +103,11 @@
             if (changes.formPreamble) {
                 vm.headingPreamble = changes.formPreamble.currentValue;
             }
-            ;
+
             if (changes.exclusionList) {
 
                 vm.exclusions = changes.exclusionList.currentValue;
             }
-
 
             //the base form that this error summary is checking for
             if (changes.formRef) {
@@ -120,14 +120,13 @@
 
             if (changes.updateErrors) {
                 if (vm.formRef) {
-                    console.log(vm.formRef.$error);
+                   // console.log(vm.formRef.$error);
                     //pass in the form name and the error object
                     vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
                 }
             }
             if (changes.makeFocused) {
                 if ((changes.makeFocused.currentValue)) {
-                    console.log("make it focused")
                     vm.isFocusInput = vm.isFocusInput + 1;
                 }
             }
@@ -163,15 +162,87 @@
             }
         });
 
+        /**
+         * Main functionality for getting hte errors
+         * @param myformErrors
+         * @param name
+         */
         vm.getErrorsSumm = function (myformErrors, name) {
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
+            console.log(vm.uniqueErrorList);
+            var summary = [];
+            var lup = {};
 
+
+            /*  console.log($('#csp-form :input,select,textarea,ui-select-match'));
+             var tt={};
+             $.each($('#csp-form :input,select,textarea'),function(k){
+             //summary.push($(this).attr('id')+' '+$(this).attr('name'));
+             var temp_attr=$(this).attr('id');
+             if(temp_attr){
+             tt[temp_attr]=k;
+             // summary.push(temp_attr)
+             }
+             // summary.push($(this).attr('id')+' '+$(this).attr('name'));
+             });
+             console.log(tt)*/
+
+            $.each($('input, select ,textarea', '#csp-form'), function (k) {
+                //summary.push($(this).attr('id')+' '+$(this).attr('name'));
+                var temp_attr = $(this).attr('id');
+                if (temp_attr) {
+                    lup[temp_attr] = k;
+                    // summary.push(temp_attr)
+                }
+                // summary.push($(this).attr('id')+' '+$(this).attr('name'));
+            });
+            // lup= $filter('orderByObject')(lup, '');
+            console.log(lup)
+
+            //delete anything in the not in the list
+            var key2 = Object.keys(lup);
+            for (var p = 0; p < key2.length; p++) {
+                if (!vm.uniqueErrorList[key2[p]]) {
+                    delete lup[key2[p]];
+                }
+
+            }
+            var temp = Object.keys(lup).map(function (k) {
+              //  console.log(k);
+                return k
+            });
+           // console.log(temp);
+            var sa = {};
+            for (var v = 0; v < temp.length; v++) {
+                sa[temp[v]] = v;
+            }
+           //var sa=lup;
+          //  console.log(sa)
             var newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
                 return vm.uniqueErrorList[k]
             });
+            //sort errors
+           // console.log(newErrors)
+            if (newErrors.length > 0) {
+                var i = 0;
+                while (i < ((newErrors.length / 2) + 1)) {
+                    var currRec = newErrors[i];
+                    var targetName = currRec.name;
+                    var destIndex = sa[targetName];
+                    if (angular.isDefined(destIndex) && destIndex !== i) {
+                        var tempRec = angular.copy(newErrors[destIndex]);
+                        newErrors[destIndex] = angular.copy(currRec);
+                        newErrors[i] = angular.copy(tempRec);
+                    } else {
+                        i++;
+                    }
+                }
+            }
+          //  console.log(newErrors);
             if (!angular.equals(vm.prevValue, newErrors)) {
+                console.log("not equal")
                 vm.errorArray = newErrors;
             }
         };
@@ -187,8 +258,8 @@
 
                     if (record[j].$invalid === true && record[j].$name.indexOf('.') > 0) {
 
-                    //it is assummed that if it is in the exclusion list it is a summary
-                    if (vm.exclusions.hasOwnProperty(record[j].$name)) {
+                        //it is assummed that if it is in the exclusion list it is a summary
+                        if (vm.exclusions.hasOwnProperty(record[j].$name)) {
                             var result = {};
                             result[record[j].$name] = {
                                 name: record[j].$name,
@@ -249,7 +320,7 @@
             var result = {};
             var scrubName = _scrubFieldName(error_Name);
             var scopeId = _getElementScope(error_Name);
-            var errorKey="TYPE_"+errorType.toUpperCase();
+            var errorKey = "TYPE_" + errorType.toUpperCase();
             var destId = error_Name;
             if (vm.alias.hasOwnProperty(scrubName)) {
                 var aliasRec = vm.alias[scrubName];
@@ -262,17 +333,17 @@
                         }
                         break;
                     case "button":
-                        destId=aliasRec.target+ "_" + scopeId;
+                        destId = aliasRec.target + "_" + scopeId;
                         break;
                     case "pattern":
-                        if(errorType==="pattern") {
+                        if (errorType === "pattern") {
                             errorKey = aliasRec.errorType;
                         }
                         break;
                     case "select2":
                         var searchId = aliasRec.name + "_match" + scopeId;
                         var destObj = $("#" + searchId);
-                        if (destObj.length>0) {
+                        if (destObj.length > 0) {
                             destId = searchId;
                         }
                         break;
@@ -290,8 +361,73 @@
                 isSummary: false
             };
             return result;
-
         }
+
+
     }//end controller
+
+})();
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('errorSummaryModule')
+        .filter('orderByObject', orderByObject);
+
+    function orderByObject() {
+        return orderByObjectFilter;
+
+        ////////////////
+
+        function orderByObjectFilter(input, attribute) {
+
+            if (!angular.isObject(input)) return input;
+
+            var array = [];
+            for (var objectKey in input) {
+                array.push(input[objectKey]);
+                console.log(input[objectKey]);
+            }
+
+            array.sort(function (a, b) {
+                a = parseInt(a[attribute]);
+                b = parseInt(b[attribute]);
+                return a - b;
+            });
+            return array;
+        }
+
+        /*    function sequenceOrderBy($filter) {
+         return function (array) {
+         var result = [];
+         angular.forEach($filter('orderBy')(array, 'sequence', true), function (sortedObject) {
+         result.push(sortedObject);
+
+         });
+         return result;
+         };
+         }*/
+        /* app.filter('orderObjectBy', function(){
+         return function(input, attribute) {
+         if (!angular.isObject(input)) return input;
+
+         var array = [];
+         for(var objectKey in input) {
+         array.push(input[objectKey]);
+         }
+
+         array.sort(function(a, b){
+         a = parseInt(a[attribute]);
+         b = parseInt(b[attribute]);
+         return a - b;
+         });
+         return array;
+         }
+         });*/
+
+
+    }
 
 })();

@@ -11,7 +11,7 @@
             'applicationInfoService',
             'hpfbConstants',
             'cspService',
-            'cspApplicant',
+            'cspContactList',
             'cspHCOnly',
             'cspMainApplication',
             'cspPatent',

@@ -12,19 +12,19 @@
                                            error-types="timelySubCtrl.requiredOnly"></cmp-error-message>
                     </legend>
                     <div class="radio">
-                        <label for="{{::timelySubCtrl.timelyId}}"><input type="radio"
-                                                                         name="{{::timelySubCtrl.timelyId}}"
-                                                                         id="{{::timelySubCtrl.timelyId}}"
-                                                                         ng-model="timelySubCtrl.model.submissionStatement"
-                                                                         ng-value="timelySubCtrl.noAppValue"
-                                                                         required="required"/>
+                        <label for="{{::timelySubCtrl.timelyId}}">
+                            <input type="radio"
+                                   name="{{::timelySubCtrl.timelyId}}" id="{{::timelySubCtrl.timelyId}}"
+                                   ng-model="timelySubCtrl.model.submissionStatement"
+                                   ng-value="timelySubCtrl.noAppValue" required="required"/>
                             {{'STATE_NO_APPLICATION'|translate}}
                         </label>
                     </div>
                     <div class="radio">
-                        <label for="market-approval"><input type="radio" name="{{::timelySubCtrl.timelyId}}"
-                                                            ng-model="timelySubCtrl.model.submissionStatement"
-                                                            ng-value="timelySubCtrl.appValue" id="market-approval"/>
+                        <label for="market-approval">
+                            <input type="radio" name="{{::timelySubCtrl.timelyId}}"
+                                   ng-model="timelySubCtrl.model.submissionStatement"
+                                   ng-value="timelySubCtrl.appValue" id="market-approval"/>
                             {{'STATE_APPLICATION'|translate}}
                         </label>
                     </div>

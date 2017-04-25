@@ -110,8 +110,11 @@
             <div class="col-xs-12">
                 <fieldset>
                     <legend class="required"><span class="field-name">{{'STATEMENTS_APPLICANT' |translate}}</span>
-                        <strong
-                                class="required"> {{"REQUIRED" |translate}} </strong></legend>
+                        <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                        <cmp-error-message field-name="timelySubCtrl.timelyId" form-ref="timelySubCtrl.timelySubForm"
+                                           show-error="timelySubCtrl.showErrors()"
+                                           error-types="timelySubCtrl.requiredOnly"></cmp-error-message>
+                    </legend>
                     <div class="radio">
                         <label for="applicant-owner">
                             <input type="radio" name="applicantStatement" id="applicant-owner"

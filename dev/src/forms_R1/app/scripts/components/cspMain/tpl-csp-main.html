@@ -80,32 +80,9 @@
                                ng-readonly="true"/>
                     </div>
                 </div>
-
-                <div ng-repeat="applicantRecord in main.cspModel.applicant track by $index ">
-                    <!--<div class="row">
-                        <div class="col-xs-12">
-                            <h3 ng-if="applicantRecord.role.applicant">1.&nbsp;{{'APPL_TITILE'|translate}}</h3>
-                            <h3 ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">
-                                {{'BILLING_TITLE' |translate}}</h3>
-                        </div>
-                    </div>-->
-                    <div class="row">
-
-                        <fieldset>
-                            <div class="col-xs-12">
-                                <legend ng-if="applicantRecord.role.applicant">1.&nbsp;{{'APPL_TITILE'|translate}}
-                                </legend>
-                                <legend ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">
-                                    {{'BILLING_TITLE' |translate}}
-                                </legend>
-                            </div>
-
-                            <cmp-csp-applicant record="applicantRecord" alias="main.setAlias(applicantRecord)"
-                                               add-applicant="main.modelService.addApplicantToModel()"
-                                               delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant>
-                        </fieldset>
-
-                    </div>
+                <div>
+                <cmp-csp-applicant-list add-applicant="main.modelService.addApplicantToModel()" record="main.cspModel.applicant"
+                                        delete-applicant="main.modelService.deleteApplicant()"></cmp-csp-applicant-list>
                 </div>
                 <div>
                     <div class="row">

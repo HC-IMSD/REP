@@ -90,12 +90,10 @@
                            ng-change="adr.postalCodeChanged()" ng-model-options="adr.ngModelOptSetting"
                            ng-blur=" adr.updateErrorSummary()"
                           maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="!adr.isEditable"/>
-                     <strong id="postal-error" class="error" ng-if="adr.showError(adr.addressForm[adr.postalId])">
-                            <span class="label label-danger" ng-messages="adr.addressForm[adr.postalId].$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}} </span>
-                            <span ng-message="pattern">{{adr.postalError |translate}} </span>
-                        </span>
-                    </strong>
+
+                    <cmp-error-message field-name="adr.postalId" form-ref="adr.addressForm"
+                                       show-error="adr.showErrors()"error-types="adr.postalErrorList">
+                    </cmp-error-message>
                 </label>
             </div>
         </div>

@@ -276,7 +276,8 @@ var componentFolders = {
     cspTimelySub: 'cspTimelySubmission',
     cspFeePayment: 'cspFeePayment',
     cspCert: 'cspCertification',
-    errorMsg: 'error-message'
+    errorMsg: 'error-message',
+    cspApplicantList:'cspContactList'
 };
 
 //exclude custom styles only lib
@@ -410,7 +411,8 @@ var cspComponentFolders = [
     componentFolders.cspFeePayment,
     componentFolders.cspCert,
     componentFolders.errorSummary,
-    componentFolders.errorMsg
+    componentFolders.errorMsg,
+    componentFolders.cspApplicantList
 ];
 
 

@@ -1,5 +1,5 @@
 {
-  "APPLICANT_APPL": "Applicant",
+  "APPLICANT_APPL": "Applicant Name",
   "SALUTATION_APPL": "Applicant Salutation",
   "FIRSTNAME_APPL": "Applicant First Name",
   "LASTNAME_APPL": "Applicant Last Name",
@@ -16,5 +16,20 @@
   "JOBTITLE_BILL": "Billing Job Title",
   "FAX_NUMBER_BILL": "Billing Fax Number",
   "PHONENUMBER_BILL": "Billing Phone Number",
-  "CONTACTEMAIL_BILL": "Billing Email"
+  "CONTACTEMAIL_BILL": "Billing Email",
+  "CERTFIRSTNAME":"Authorized Official First Name",
+  "CERTLASTNAME":"Authorized Official Last Name",
+  "CERTJOBTITLE":"Authorized Official Job Title",
+  "CERTDATESIGNED":"Authorized Official Date Signed",
+  "PATENTNUM":"Statements as to timely submission",
+  "DATEFILED":"Patent Filing Date",
+  "DATEGRANTED":"Patent Date Granted",
+  "DATEEXPIRY":"Patent Expiration Date",
+  "CONTROLNUMBER":"NDS Control Number",
+  "TIME120":"Applicant is applying",
+  "MEDICINALINGREDIENT":"Medicinal Ingredient",
+  "APPLICANTSTATEMENT":"Statements as to Applicant",
+  "FEE":"Advanced Payment Fee",
+  "FEETYPE":"Method of Advanced Payment"
+
 }
