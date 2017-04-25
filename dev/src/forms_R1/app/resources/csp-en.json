@@ -24,9 +24,9 @@
   "HUMAN": "Human",
   "VETERINARY": "Veterinary",
   "DRUGUSE": "Drug use",
-  "DATE_FILED": "Filing Date",
-  "DATE_GRANTED": "Date Granted",
-  "DATE_EXPIRY": "Expiration Date",
+  "DATE_FILED": "Patent Filing Date",
+  "DATE_GRANTED": "Patent Date Granted",
+  "DATE_EXPIRY": "Patent Expiration Date",
   "NDS_NUMBER": "NDS Control Number",
   "MED_INGRED": "Medicinal ingredient or combination of medicinal ingredients (as provided on the NOC for the NDS provided in Section 3)",
   "APPLICANTAPPLY": "Statements as to Applicant",
@@ -54,5 +54,6 @@
   "PATENTNUM": "Canadian Patent Number",
   "MSG_LENGTH_7NUM": "Please enter 7 digits.",
   "OTHER_EU_COUNTRY": " Other European Union Country Details",
-  "CERT_FS": "Name of Authorized Official"
+  "CERT_FS": "Name of Authorized Official",
+  "CONTACT_TITLE": "Contact Information"
 }

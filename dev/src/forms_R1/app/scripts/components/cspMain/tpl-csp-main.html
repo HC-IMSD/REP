@@ -80,6 +80,12 @@
                                ng-readonly="true"/>
                     </div>
                 </div>
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <h3>1.&nbsp;{{'CONTACT_TITLE'|translate}}</h3>
+                    </div>
+                </div>
                 <div>
                     <cmp-csp-applicant-list add-applicant="main.modelService.addApplicantToModel()"
                                             record="main.cspModel.applicant"
@@ -90,13 +96,12 @@
                 </div>
                 <div>
                     <div class="row">
-                        <fieldset>
-                            <div class="col-xs-12">
-                                <legend>2.&nbsp;{{'PATENT_TITLE'|translate}}</legend>
-                                <cmp-csp-patent record="main.cspModel.patent" show-errors="main.showErrors()"
-                                                update-error-summary="main.updateErrorSummary()"></cmp-csp-patent>
-                            </div>
-                        </fieldset>
+
+                        <div class="col-xs-12">
+                            <h3>2.&nbsp;{{'PATENT_TITLE'|translate}}</h3>
+                            <cmp-csp-patent record="main.cspModel.patent" show-errors="main.showErrors()"
+                                            update-error-summary="main.updateErrorSummary()"></cmp-csp-patent>
+                        </div>
                     </div>
                 </div>
                 <div>
