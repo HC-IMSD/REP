@@ -3,8 +3,7 @@
 
         <div class="row">
             <div class="col-xs-12">
-                <fieldset
-                        ng-class="{'has-error' : timelySubCtrl.timelySubForm[timelySubCtrl.timelyId].$invalid }">
+                <fieldset>
                     <legend class="required"><span class="field-name">{{'STATEMENTS_TIMELY' |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <cmp-error-message field-name="timelySubCtrl.timelyId" form-ref="timelySubCtrl.timelySubForm"
@@ -16,7 +15,8 @@
                             <input type="radio"
                                    name="{{::timelySubCtrl.timelyId}}" id="{{::timelySubCtrl.timelyId}}"
                                    ng-model="timelySubCtrl.model.submissionStatement"
-                                   ng-value="timelySubCtrl.noAppValue" required="required"/>
+                                   ng-value="timelySubCtrl.noAppValue"
+                                   ng-required="!timelySubCtrl.model.submissionStatement"/>
                             {{'STATE_NO_APPLICATION'|translate}}
                         </label>
                     </div>
@@ -24,6 +24,7 @@
                         <label for="market-approval">
                             <input type="radio" name="{{::timelySubCtrl.timelyId}}"
                                    ng-model="timelySubCtrl.model.submissionStatement"
+                                   ng-required="!timelySubCtrl.model.submissionStatement"
                                    ng-value="timelySubCtrl.appValue" id="market-approval"/>
                             {{'STATE_APPLICATION'|translate}}
                         </label>

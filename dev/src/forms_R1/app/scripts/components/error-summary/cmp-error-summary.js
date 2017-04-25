@@ -127,7 +127,7 @@
 
             if (changes.updateErrors) {
                 if (vm.formRef) {
-                   // console.log(vm.formRef.$error);
+                    // console.log(vm.formRef.$error);
                     //pass in the form name and the error object
                     //should I run it if hidden?
                     if (vm.isVisible) {
@@ -185,84 +185,9 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
-            console.log(vm.uniqueErrorList);
-            var summary = [];
-            var lup = {};
 
-
-            /*  console.log($('#csp-form :input,select,textarea,ui-select-match'));
-             var tt={};
-             $.each($('#csp-form :input,select,textarea'),function(k){
-             //summary.push($(this).attr('id')+' '+$(this).attr('name'));
-             var temp_attr=$(this).attr('id');
-             if(temp_attr){
-             tt[temp_attr]=k;
-             // summary.push(temp_attr)
-             }
-             // summary.push($(this).attr('id')+' '+$(this).attr('name'));
-             });
-             console.log(tt)*/
-
-            $.each($('input, select ,textarea', '#' + vm.startFormId), function (k) {
-                //summary.push($(this).attr('id')+' '+$(this).attr('name'));
-                var temp_attr = $(this).attr('id');
-                if (temp_attr) {
-                    lup[temp_attr] = k;
-                }
-            });
-
-            console.log(lup)
-
-            //delete anything in the not in the list
-            //TODO refactor? seems inefficient
-            var key2 = Object.keys(lup);
-            for (var p = 0; p < key2.length; p++) {
-                if (!vm.uniqueErrorList[key2[p]]) {
-                    // console.log("deleting "+key2[p]);
-                    delete lup[key2[p]];
-                }
-
-            }
-            var temp = Object.keys(lup).map(function (k) {
-              //  console.log(k);
-                return k
-            });
-           // console.log(temp);
-            var sa = {};
-            for (var v = 0; v < temp.length; v++) {
-                sa[temp[v]] = v;
-            }
-           //var sa=lup;
-            console.log(sa)
-            var newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
-                return vm.uniqueErrorList[k]
-            });
-            //sort errors
-            var notDefined = {};
-            if (newErrors.length > 0) {
-                var i = 0;
-                while (i < newErrors.length) {
-                    var currRec = newErrors[i];
-                    var targetName = currRec.name;
-                    var destIndex = sa[targetName];
-                    if (angular.isDefined(destIndex) && destIndex !== i) {
-                        var tempRec = angular.copy(newErrors[destIndex]);
-                        newErrors[destIndex] = angular.copy(currRec);
-                        newErrors[i] = angular.copy(tempRec);
-                    } else {
-
-                        if (!angular.isDefined(destIndex)) {
-                            notDefined[currRec.name] = {rec: currRec, pos: i};
-                        }
-                        i++;
-                    }
-                }
-            }
-            console.log(notDefined);
-            _sortUnknowns(notDefined, newErrors);
-          //  console.log(newErrors);
+            var newErrors = _sortErrorsByDomOrder();
             if (!angular.equals(vm.errorArray, newErrors)) {
-                console.log("not equal")
                 vm.errorArray = newErrors;
             }
         };
@@ -313,7 +238,14 @@
                 cleanedName = rawName;
             }
             return cleanedName;
-        };
+        }
+
+        /**
+         * Gets the element scope. By convention it is the value after the last underscore
+         * @param rawName
+         * @returns {Number}
+         * @private
+         */
         function _getElementScope(rawName) {
             var separator = '_';
             var nameSplit = rawName.split(separator);
@@ -381,15 +313,77 @@
             return result;
         }
 
+        //TODO cleanup  this function, inefficient
+        function _sortErrorsByDomOrder() {
+            var domFieldList = {};
+            var newErrors = [];
+            //TODO make angular friendly
+            //get all the inputs and assign order index
+            $.each($('input, select ,textarea', '#' + vm.startFormId), function (k) {
+                var temp_attr = $(this).attr('id');
+                if (temp_attr) {
+                    domFieldList[temp_attr] = k;
+                }
+            });
+            //delete anything in the not in the list
+            //TODO refactor? seems inefficient
+            var keyList = Object.keys(domFieldList);
+            for (var p = 0; p < keyList.length; p++) {
+                if (!vm.uniqueErrorList[keyList[p]]) {
+                    delete domFieldList[keyList[p]];
+                }
+            }
+            //get all the keys
+            var temp = Object.keys(domFieldList).map(function (k) {
+                return k
+            });
+            //add the keys
+            var sortedDomJsonList = {};
+            for (var v = 0; v < temp.length; v++) {
+                sortedDomJsonList[temp[v]] = v;
+            }
+            newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
+                return vm.uniqueErrorList[k]
+            });
+            //sort errors
+            var notDefined = {};
+            if (newErrors.length > 0) {
+                var i = 0;
+                while (i < newErrors.length) {
+                    var currRec = newErrors[i];
+                    var targetName = currRec.name;
+                    var destIndex = sortedDomJsonList[targetName];
+                    if (angular.isDefined(destIndex) && destIndex !== i) {
+                        var tempRec = angular.copy(newErrors[destIndex]);
+                        newErrors[destIndex] = angular.copy(currRec);
+                        newErrors[i] = angular.copy(tempRec);
+                    } else {
 
+                        if (!angular.isDefined(destIndex)) {
+                            notDefined[currRec.name] = {rec: currRec, pos: i};
+                        }
+                        i++;
+                    }
+                }
+            }
+            _sortUnknowns(notDefined, newErrors)
+            return newErrors;
+        }
+
+        /**
+         * For errors not found in dom using jquery, try to find where they belong based on scope id
+         * If found place after the last same scope vale
+         * @param unknownJson
+         * @param sortList
+         * @private
+         */
         function _sortUnknowns(unknownJson, sortList) {
             //try and find scope
             //create array
             var unknownArray = Object.keys(unknownJson).map(function (k) {
-                //  console.log(k);
+
                 return unknownJson[k]
             });
-            console.log(unknownArray)
             for (var i = 0; i < unknownArray.length; i++) {
                 var unknownRec = unknownArray[i];
                 var unknownName = unknownRec.rec.name;
@@ -403,11 +397,8 @@
                             break;
                         }
                     }
-
                 }
             }
-
-            console.log(sortList);
         }
 
         Array.prototype.move = function (from, to) {
@@ -416,40 +407,5 @@
             this.splice(to, 0, this.splice(from, 1)[0]);
         };
     }//end controller
-
-})();
-
-
-(function () {
-    'use strict';
-
-    angular
-        .module('errorSummaryModule')
-        .filter('orderByObject', orderByObject);
-
-    function orderByObject() {
-        return orderByObjectFilter;
-
-        ////////////////
-
-        function orderByObjectFilter(input, attribute) {
-
-            if (!angular.isObject(input)) return input;
-
-            var array = [];
-            for (var objectKey in input) {
-                array.push(input[objectKey]);
-                console.log(input[objectKey]);
-            }
-
-            array.sort(function (a, b) {
-                a = parseInt(a[attribute]);
-                b = parseInt(b[attribute]);
-                return a - b;
-            });
-            return array;
-        }
-
-    }
 
 })();

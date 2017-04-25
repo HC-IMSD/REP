@@ -36,7 +36,7 @@
                         <div class="rep-error" ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
                             <ui-select ng-model="adr.addressModel.country" id="{{::adr.countryId}}" name="{{::adr.countryId}}"
                                        on-select="adr.countryChanged()" required ng-disabled="!adr.isEditable" title="Choose a country"
-                                       class="rep-selectize-font full-width">
+                                       class="rep-selectize-font full-width" ng-blur="adr.updateErrorSummary()">
                                 <ui-select-match placeholder="Select or Search for country" id="country_match{{::$id}}"
                                                  class="rep-selectize-font rep-selectize-dropdown form-control">
                                     {{$select.selected[adr.lang]}}
@@ -64,6 +64,7 @@
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
                                 id="{{::adr.stateListId}}" name="{{::adr.stateListId}}"
+                                ng-blur="adr.updateErrorSummary()"
                                 data-ng-options="province |translate for province in adr.provinces"
                                 ng-disabled="!adr.isEditable" ng-required="adr.hideProvinceText"></select>
 
@@ -88,8 +89,8 @@
                            data-ng-model="adr.addressModel.postalCode"
                            class="form-control full-width" ng-maxlength="7" ng-required="adr.isPostalRequired"
                            ng-change="adr.postalCodeChanged()" ng-model-options="adr.ngModelOptSetting"
-                           ng-blur=" adr.updateErrorSummary()"
-                          maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="!adr.isEditable"/>
+                           ng-blur="adr.updateErrorSummary()"
+                           maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="!adr.isEditable"/>
 
                     <cmp-error-message field-name="adr.postalId" form-ref="adr.addressForm"
                                        show-error="adr.showErrors()"error-types="adr.postalErrorList">

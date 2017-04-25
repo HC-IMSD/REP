@@ -75,6 +75,14 @@
                 "type": "select2",
                 "name": "country"
             },
+            "postal_appl": {
+                "type": "pattern",
+                "errorType": "POSTAL_FORMAT"
+            },
+            "postal_bill": {
+                "type": "pattern",
+                "errorType": "POSTAL_FORMAT"
+            },
             "patentNum": {
                 "type": "minlength",
                 "errorType": "MSG_LENGTH_7NUM"
@@ -118,6 +126,11 @@
         vm.showHCOnlySection = function () {
             return (vm.userType === INTERNAL_TYPE);
         };
+
+        vm.showErrors = function () {
+            return vm.showErrorSummary;
+        }
+
 
         /**
          * If a file is successfully loaded, this function is called
@@ -225,8 +238,10 @@
             }
 
         }
+        /**
+         * Sends a signal to the error summary component to set focus
+         */
         function setErrorSummaryFocus() {
-
             vm.summaryFocusIndex++;
         }
 

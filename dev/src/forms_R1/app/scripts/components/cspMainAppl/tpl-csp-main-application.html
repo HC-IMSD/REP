@@ -13,14 +13,14 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspMainApplCtrl.controlNumberId}}"
                            ng-model-options="cspMainApplCtrl.ngModelOptSetting"
-                           name="{{::cspMainApplCtrl.controlNumberId}}"
+                           name="{{::cspMainApplCtrl.controlNumberId}}" ng-blur="cspMainApplCtrl.updateErrorSummary()"
                            data-ng-model="cspMainApplCtrl.model.controlNumber" class="form-control" minlength="6"
                            maxlength="6" size="6" required/>
                     <cmp-error-message field-name="cspMainApplCtrl.controlNumberId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
                                        error-types="cspMainApplCtrl.numberError"></cmp-error-message>
                 </label>
-                </label>
+
             </div>
         </div>
         <div class="row">
@@ -37,7 +37,7 @@
                     <select id="{{::cspMainApplCtrl.drugUseId}}" name="{{::cspMainApplCtrl.drugUseId}}"
                             data-ng-model="cspMainApplCtrl.model.drugUse" class="form-control"
                             ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList"
-                            required></select>
+                            ng-blur="cspMainApplCtrl.updateErrorSummary()" required></select>
                     <cmp-error-message field-name="cspMainApplCtrl.drugUseId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
                                        error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
@@ -51,13 +51,12 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <fieldset
-                        ng-class="{'has-error' : cspMainApplCtrl.mainApplForm[cspMainApplCtrl.applApplyId].$invalid }">
+                <fieldset>
                     <legend class="required"><span class="field-name">{{'APPLICANT_APPLY' |translate}}</span> <strong
                             class="required"> {{"REQUIRED" |translate}} </strong>
                         <cmp-error-message field-name="cspMainApplCtrl.applApplyId"
                                            form-ref="cspMainApplCtrl.mainApplForm"
-                                           show-error="true"
+                                           show-error="cspMainApplCtrl.showErrors()"
                                            error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
                     </legend>
                     <div class="radio">
@@ -65,14 +64,19 @@
                             <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
                                    id="{{::cspMainApplCtrl.applApplyId}}"
                                    ng-model="cspMainApplCtrl.model.timeApplication"
-                                   ng-value="cspMainApplCtrl.nocValue" required="required"/>
+                                   ng-value="cspMainApplCtrl.nocValue" ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                                   ng-required="!cspMainApplCtrl.model.timeApplication"/>
                             {{'NOC_120'|translate}}
                         </label>
                     </div>
                     <div class="radio">
-                        <label for="within120"><input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
-                                                      ng-model="cspMainApplCtrl.model.timeApplication"
-                                                      ng-value="cspMainApplCtrl.grantValue" id="within120"/>{{'GRANT_120'|translate}}</label>
+                        <label for="within120">
+                            <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
+                                   ng-model="cspMainApplCtrl.model.timeApplication"
+                                   ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                                   ng-required="!cspMainApplCtrl.model.timeApplication"
+                                   ng-value="cspMainApplCtrl.grantValue" id="within120"/>
+                            {{'GRANT_120'|translate}}</label>
                     </div>
                 </fieldset>
             </div>
@@ -85,22 +89,19 @@
         </div>
         <div class="row">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}}.$invalid}">
-                <label for="medicinalIngredient_{{::$id}}" class="required">
+                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.medIngedId].$invalid}">
+                <label for="{{::cspMainApplCtrl.medIngedId}}" class="required">
                     <span class="field-name">{{'MED_INGRED' |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                    <strong id="medicinalIngredient-error" class="error"
-                            ng-show="cspMainApplCtrl.showError(cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}})">
-                             <span class="label label-danger"
-                                   ng-messages="cspMainApplCtrl.mainApplForm.medicinalIngredient_{{::$id}}.$error">
-                                 <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                             </span>
-                    </strong>
+                    <cmp-error-message field-name="cspMainApplCtrl.medIngedId"
+                                       form-ref="cspMainApplCtrl.mainApplForm"
+                                       show-error="cspMainApplCtrl.showErrors()"
+                                       error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
                 </label>
-                <textarea id="medicinalIngredient_{{::$id}}" name="medicinalIngredient_{{::$id}}"
+                <textarea id="{{::cspMainApplCtrl.medIngedId}}" name="{{::cspMainApplCtrl.medIngedId}}"
                           data-ng-model="cspMainApplCtrl.model.medicinalIngredient"
-                          class="form-control full-width" maxlength="300" rows="4"
-                          size="7" required></textarea>
+                          ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                          class="form-control full-width" maxlength="300" rows="4" size="7" required></textarea>
             </div>
         </div>
         <div class="row">
@@ -110,20 +111,21 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <fieldset ng-class="{'has-error' :cspMainApplCtrl.mainApplForm[cspMainApplCtrl.applStateId].$invalid }">
+                <fieldset>
                     <legend class="required"><span class="field-name">{{'APPLICANTAPPLY' |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <cmp-error-message field-name="cspMainApplCtrl.applStateId"
                                            form-ref="cspMainApplCtrl.mainApplForm"
                                            show-error="cspMainApplCtrl.showErrors()"
-                                           error-types="cspMainApplCtrl.requiredOnly"></cmp-error-message>
+                                           error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
                     </legend>
                     <div class="radio">
                         <label for="{{::cspMainApplCtrl.applStateId}}">
                             <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
                                    id="{{::cspMainApplCtrl.applStateId}}"
                                    ng-model="cspMainApplCtrl.model.applicantStatement"
-                                   ng-value="cspMainApplCtrl.ownerValue" required="required"/>
+                                   ng-value="cspMainApplCtrl.ownerValue" ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                                   ng-required="!cspMainApplCtrl.model.applicantStatement"/>
                             {{'APPLICANT_OWNER'|translate}}
                         </label>
                     </div>
@@ -132,6 +134,8 @@
                             <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
                                    ng-model="cspMainApplCtrl.model.applicantStatement"
                                    ng-value="cspMainApplCtrl.ownerBehalfValue"
+                                   ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                                   ng-required="!cspMainApplCtrl.model.applicantStatement"
                                    id="applicant-consent"/>
                             {{'APPLICANT_BEHALF'|translate}}
                         </label>

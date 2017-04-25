@@ -27,7 +27,8 @@
                 record: '<',
                 language: '<',
                 paymentTypes: '<',
-                showErrors: '&'
+                showErrors: '&',
+                updateErrorSummary: '&'
             }
         });
 

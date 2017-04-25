@@ -23,7 +23,8 @@
             controllerAs: 'cspCertCtrl',
             bindings: {
                 record: '<',
-                showErrors: '&'
+                showErrors: '&',
+                updateErrorSummary: '&'
             }
         });
 

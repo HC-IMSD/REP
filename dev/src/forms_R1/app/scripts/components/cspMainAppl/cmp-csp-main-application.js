@@ -24,7 +24,9 @@
             controllerAs: 'cspMainApplCtrl',
             bindings: {
                 record: '<',
-                drugUses: '<'
+                drugUses: '<',
+                showErrors: '&',
+                updateErrorSummary: '&'
             }
         });
 
@@ -74,6 +76,7 @@
             vm.drugUseId = "drugUse" + scopeId;
             vm.applApplyId = "time120" + scopeId; //timely submission radio question
             vm.applStateId = "applicantApply" + scopeId; //Statements as to applicant
+            vm.medIngedId = "medicinalIngredient" + scopeId
         }
     }
 })();

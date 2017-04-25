@@ -81,29 +81,32 @@
                     </div>
                 </div>
                 <div>
-                <cmp-csp-applicant-list add-applicant="main.modelService.addApplicantToModel()" record="main.cspModel.applicant"
-                                        delete-applicant="main.modelService.deleteApplicant()"
-                                        update-error-summary="main.updateErrorSummary()"
-                ></cmp-csp-applicant-list>
+                    <cmp-csp-applicant-list add-applicant="main.modelService.addApplicantToModel()"
+                                            record="main.cspModel.applicant"
+                                            delete-applicant="main.modelService.deleteApplicant()"
+                                            show-errors="main.showErrors()"
+                                            update-error-summary="main.updateErrorSummary()"
+                    ></cmp-csp-applicant-list>
                 </div>
                 <div>
                     <div class="row">
                         <fieldset>
                             <div class="col-xs-12">
                                 <legend>2.&nbsp;{{'PATENT_TITLE'|translate}}</legend>
-
-                                <cmp-csp-patent record="main.cspModel.patent"></cmp-csp-patent>
-
+                                <cmp-csp-patent record="main.cspModel.patent" show-errors="main.showErrors()"
+                                                update-error-summary="main.updateErrorSummary()"></cmp-csp-patent>
                             </div>
                         </fieldset>
                     </div>
                 </div>
                 <div>
-                    <cmp-csp-main-application record="main.cspModel.applicationInfo"
+                    <cmp-csp-main-application record="main.cspModel.applicationInfo" show-errors="main.showErrors()"
+                                              update-error-summary="main.updateErrorSummary()"
                                               drug-uses="main.drugUseList"></cmp-csp-main-application>
                 </div>
                 <div>
-                    <cmp-csp-timely-submission record="main.cspModel.timelySubmission"
+                    <cmp-csp-timely-submission record="main.cspModel.timelySubmission" show-errors="main.showErrors()"
+                                               update-error-summary="main.updateErrorSummary()"
                                                country-list="main.countryList"></cmp-csp-timely-submission>
                 </div>
 
@@ -113,7 +116,8 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <cmp-csp-fee-payment record="main.cspModel.payment"
+                            <cmp-csp-fee-payment record="main.cspModel.payment" show-errors="main.showErrors()"
+                                                 update-error-summary="main.updateErrorSummary()"
                                                  payment-types="main.paymentType"></cmp-csp-fee-payment>
                         </div>
                     </div>
@@ -123,11 +127,11 @@
                      <h3>9.&nbsp;{{'CERT_TITLE'|translate}} </h3>
                  </div>-->
                 <div class="row">
-
                     <div class="col-xs-12">
-
                         <h3>9.&nbsp;{{'CERT_TITLE'|translate}}</h3>
-                        <cmp-csp-certification record="main.cspModel.certification"></cmp-csp-certification>
+                        <cmp-csp-certification record="main.cspModel.certification"
+                                               update-error-summary="main.updateErrorSummary()"
+                                               show-errors="main.showErrors()"></cmp-csp-certification>
                     </div>
                 </div>
             </div>

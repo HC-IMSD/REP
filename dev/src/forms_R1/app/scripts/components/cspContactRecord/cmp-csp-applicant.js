@@ -87,6 +87,7 @@
             }else{
                vm.deleteApplicant();
             }
+            vm.updateErrorSummary();
         };
 
         /**
