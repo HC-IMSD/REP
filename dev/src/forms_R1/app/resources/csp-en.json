@@ -8,7 +8,7 @@
   "NOTES": "Notes",
   "HCONLY": "Health Canada Use Only",
   "BILLING_DIFFERENT": "Select to enter a billing address that is different from the Applicant’s Contact Information",
-  "ADVANCE_FEE_PAYMENT": "The Advanced Payment Details form is being submitted separately by fax or mail, and the fee is being paid or the fee has been prepaid in the amount of",
+  "ADVANCE_FEE_PAYMENT": "The fee is being paid or the fee has been prepaid in the amount of",
   "PAYMENT_METHOD": "Method of Advanced Payment",
   "FINANCIAL": "Payment through a Canadian Financial Institution",
   "CHEQUE": "Cheque / Bank Draft / Money Order",
@@ -55,5 +55,6 @@
   "MSG_LENGTH_7NUM": "Please enter 7 digits.",
   "OTHER_EU_COUNTRY": " Other European Union Country Details",
   "CERT_FS": "Name of Authorized Official",
-  "CONTACT_TITLE": "Contact Information"
+  "CONTACT_TITLE": "Contact Information",
+  "ACK_FEE_SUBMIT":"The Advanced Payment Details form is being submitted separately by fax or mail"
 }

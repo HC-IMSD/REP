@@ -24,7 +24,8 @@
             controllerAs: 'cspPatentCtrl',
             bindings: {
                 record: '<',
-                showErrors: '&'
+                showErrors: '&',
+                updateErrorSummary:'&'
             }
         });
 

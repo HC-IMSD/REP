@@ -10,6 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "angular-filter": "^0.5.11",
+    "angular-mocks": "^1.6.4",
     "angular-translate": "^2.13.1",
     "angular-translate-loader-partial": "^2.11.1",
     "angular-ui-bootstrap": "^2.1.4",

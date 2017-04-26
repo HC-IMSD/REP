@@ -95,6 +95,7 @@
             var intPayment = jsonObj.payment;
             extPayment.advanced_payment_type = intPayment.advancedPaymentType;
             extPayment.advanced_payment_fee = intPayment.advancedPaymentFee;
+            extPayment.advanced_payment_ack= intPayment.ackPaymentSubmit=== true ? YES: NO;
             var extCertification = model[rootTag].certification;
             var intCertification = jsonObj.certification;
             extCertification.given_name = intCertification.givenName;
@@ -116,7 +117,6 @@
         CspService.prototype.transformFromFileObj = function (inputJsonObj) {
             var resultJson = this.getEmptyInternalModel();
             var jsonObj=inputJsonObj[this.rootTag];
-            console.log(jsonObj);
             resultJson.applicant = this._mapApplicantToInternal(jsonObj.applicant);
             //health Canada Only Section
             resultJson.enrolmentVersion = jsonObj.enrolment_version;
@@ -140,6 +140,7 @@
             resultJson.timelySubmission.otherCountry = jsonObj.timely_submission_info.marketing_country_eu;
             resultJson.payment.advancedPaymentFee = jsonObj.advanced_payment.advanced_payment_fee;
             resultJson.payment.advancedPaymentType = jsonObj.advanced_payment.advanced_payment_type;
+            resultJson.payment.ackPaymentSubmit= jsonObj.advanced_payment.advanced_payment_ack===YES;
             resultJson.certification.givenName = jsonObj.certification.given_name;
             resultJson.certification.initials = jsonObj.certification.initials;
             resultJson.certification.surname = jsonObj.certification.surname;
@@ -298,6 +299,7 @@
             defaultCSPData.payment = {};
             defaultCSPData.payment.advancedPaymentFee = null;
             defaultCSPData.payment.advancedPaymentType = "";
+            defaultCSPData.payment.ackPaymentSubmit = false;
             defaultCSPData.certification = {};
             defaultCSPData.certification.givenName = "";
             defaultCSPData.certification.initials = "";
@@ -347,6 +349,7 @@
             var payment = defaultCSPData.advanced_payment;
             payment.advanced_payment_type = null;
             payment.advanced_payment_fee = "";
+            payment.advanced_payment_ack=NO;
 
             defaultCSPData.certification = {};
             var cert = defaultCSPData.certification;

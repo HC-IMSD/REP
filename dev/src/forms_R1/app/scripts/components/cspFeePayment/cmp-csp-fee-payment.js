@@ -56,10 +56,11 @@
         vm.preamble = preambleHtml_en;
         vm.urlTitle = urlTitle_en;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.numberMaxError = [{type: "required", displayAlias: "MSG_ERR_MAND"}, {
-            type: "min",
-            displayAlias: "MSG_ERR_MIN"
-        }, {type: "max", displayAlias: "MSG_ERR_MAX"}];
+        vm.numberMaxError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "min", displayAlias: "TYPE_ZERO_MIN"},
+            {type: "max", displayAlias: "MSG_ERR_MAX"}
+        ];
 
 
         /**
@@ -93,11 +94,15 @@
             }
         };
 
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.feeId = "fee" + scopeId;
             vm.feeTypeId = "feeType" + scopeId;
-
+            vm.ackFeeSubmitId = "ack_fee_submit" + scopeId;
         }
 
     }

@@ -1943,14 +1943,6 @@ gulp.task('connect-server-start', function () {
 });
 
 
-gulp.task('connect-server-start-experimental', function () {
-    connect.server({
-        root: "experimental",
-        // host:"127.0.0.1",
-        port: 2122,
-        livereload: false
-    });
-});
 
 gulp.task('dev-diffForm-clean', function () {
     return (pipes.cleanBuild(paths.buildDevDiff + 'app/'));
@@ -1986,22 +1978,6 @@ gulp.task('dev-diffForm-copyLib', function () {
         ],
         {read: true, base: '.'});
     return copySources.pipe(gulp.dest(paths.buildDevDiff))
-    /**
-     * var libFileNames={
-    angularMin:"angular.min.js",
-    ariaMin:"angular.aria.min.js",
-    resourceMin:"angular.resource.min.js",
-    sanitizeMin:"angular.sanitize.min.js",
-    translateMin:"angular-translate.mim.js",
-    fileSaverMin:"FileSave.min.js",
-    selectMin:"select.min.js",
-    sha256:"sha256.js",
-    uiBootStrapMin:"ui-bootstrap-tpls-2.1.4.min.js",
-    xml2Json:"xml2json.js",
-    deepDiffMin:"deep-diff-0.3.4.min.js",
-    uiTreeMin:"angular-ui-tree.min.js"
-}
-     */
 });
 
 gulp.task('dev-diffForm-copySrc', function () {

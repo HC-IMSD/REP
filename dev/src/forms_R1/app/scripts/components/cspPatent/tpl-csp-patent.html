@@ -8,7 +8,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspPatentCtrl.patentNumId}}" name="{{::cspPatentCtrl.patentNumId}}"
                            data-ng-model="cspPatentCtrl.model.patentNumber" class="form-control" maxlength="7"
-                           size="7" minlength="7" only-digits="" required/>
+                           ng-blur="cspPatentCtrl.updateErrorSummary()" size="7" minlength="7" only-digits="" required/>
 
                     <cmp-error-message field-name="cspPatentCtrl.patentNumId" form-ref="cspPatentCtrl.patentForm"
                                        show-error="cspPatentCtrl.showErrors()"
@@ -24,7 +24,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateFiledId}}" name="{{::cspPatentCtrl.dateFiledId}}"
                            data-ng-model="cspPatentCtrl.model.filingDate" class="form-control"
-                           required/>
+                           ng-blur="cspPatentCtrl.updateErrorSummary()" required/>
 
                     <cmp-error-message field-name="cspPatentCtrl.dateFiledId" form-ref="cspPatentCtrl.patentForm"
                                        show-error="cspPatentCtrl.showErrors()"
@@ -38,7 +38,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateGrantedId}}" name="{{::cspPatentCtrl.dateGrantedId}}"
                            data-ng-model="cspPatentCtrl.model.grantedDate" class="form-control"
-                           required/>
+                           ng-blur="cspPatentCtrl.updateErrorSummary()" required/>
 
                     <cmp-error-message field-name="cspPatentCtrl.dateGrantedId" form-ref="cspPatentCtrl.patentForm"
                                        show-error="cspPatentCtrl.showErrors()"
@@ -52,7 +52,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateExpiryId}}" name="{{::cspPatentCtrl.dateExpiryId}}"
                            data-ng-model="cspPatentCtrl.model.expiryDate" class="form-control"
-                           required/>
+                           ng-blur="cspPatentCtrl.updateErrorSummary()" required/>
                     <cmp-error-message field-name="cspPatentCtrl.dateExpiryId" form-ref="cspPatentCtrl.patentForm"
                                        show-error="cspPatentCtrl.showErrors()"
                                        error-types="cspPatentCtrl.dateError"></cmp-error-message>

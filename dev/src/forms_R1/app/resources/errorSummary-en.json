@@ -7,5 +7,7 @@
   "TYPE_EMAIL":"Please enter a valid email address.",
   "TYPE_DUPLICATEROLE": "This role has already been selected.",
   "TYPE_MINLENGTH": "Less than minimum length",
-  "POSTAL_FORMAT": "Please enter a valid format"
+  "POSTAL_FORMAT": "Please enter a valid format",
+  "TYPE_MIN": "Must be greater than the minimum",
+  "TYPE_DATE":"The date format is incorrect"
 }

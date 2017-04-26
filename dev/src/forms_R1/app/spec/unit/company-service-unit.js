@@ -12,14 +12,17 @@ describe("CompanyService Test", function () {
      this.alert=jasmin.createSpy('alert');
      })
      });*/
+    beforeEach(module('ngAnimateMock'))
     beforeEach(function () {
         module('companyService');
     });
+
     beforeEach(inject(function (_CompanyService_) {
             companyServiceObj = _CompanyService_;
             _instantCompanyService = new companyServiceObj();
         }
     ));
+
     afterEach(function () {
         companyServiceObj = null;
         _instantCompanyService = null;

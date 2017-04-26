@@ -40,6 +40,8 @@
   "MEDICINALINGREDIENT":"Medicinal Ingredient",
   "APPLICANTSTATEMENT":"Statements as to Applicant",
   "FEE":"Advanced Payment Fee",
-  "FEETYPE":"Method of Advanced Payment"
+  "FEETYPE":"Method of Advanced Payment",
+  "TYPE_ZERO_MIN":"Must be greater than zero",
+  "MSG_ERR_MAX":"Must be less than 1000000000"
 
 }

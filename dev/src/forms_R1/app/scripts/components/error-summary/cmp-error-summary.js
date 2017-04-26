@@ -131,6 +131,7 @@
                     //pass in the form name and the error object
                     //should I run it if hidden?
                     if (vm.isVisible) {
+                        console.log(vm.formRef.$error)
                         vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
                     }
                 }
@@ -295,6 +296,27 @@
                         var destObj = $("#" + searchId);
                         if (destObj.length > 0) {
                             destId = searchId;
+                        }
+                        break;
+                    case "min":
+                        if (errorType === "min") {
+                            errorKey = aliasRec.errorType;
+                        }
+                        break;
+                    case "max":
+                        if (errorType === "max") {
+                            errorKey = aliasRec.errorType;
+                        }
+                        break;
+                    case "minlength":
+                        console.log(scrubName)
+                        if (errorType === "minlength") {
+                            errorKey = aliasRec.errorType;
+                        }
+                        break;
+                    case "maxlength":
+                        if (errorType === "maxlength") {
+                            errorKey = aliasRec.errorType;
                         }
                         break;
                     default:

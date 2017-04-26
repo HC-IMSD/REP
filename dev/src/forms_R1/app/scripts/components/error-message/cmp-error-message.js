@@ -57,8 +57,15 @@
         vm.showErrorMessage = function () {
             if (!vm.form_ref) return false;
             //dev error messsaging
-            if (angular.isUndefined(vm.fieldName)) console.warn("No field name for: " + vm.form_ref);
-            if (angular.isUndefined(vm.form_ref[vm.fieldName])) console.warn("lookup undefined " + vm.form_ref.$name + "." + vm.fieldName);
+            if (angular.isUndefined(vm.fieldName)){
+                console.warn("No field name for: " + vm.form_ref.$name);
+                return false;
+            }
+            if (angular.isUndefined(vm.form_ref[vm.fieldName]))
+            {
+                console.warn("lookup undefined " + vm.form_ref.$name + "." + vm.fieldName);
+                return false;
+            } 
             return ((vm.showError() && vm.form_ref[vm.fieldName].$invalid) || (vm.form_ref[vm.fieldName].$touched && vm.form_ref[vm.fieldName].$invalid));
         }
         //errMessageCtrl.field_ref[errMessageCtrl.fieldName]

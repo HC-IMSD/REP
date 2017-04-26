@@ -86,7 +86,12 @@
             "patentNum": {
                 "type": "minlength",
                 "errorType": "MSG_LENGTH_7NUM"
+            },
+            "fee":{
+                "type": "min",
+                "errorType": "TYPE_ZERO_MIN"
             }
+
 
         };
 
@@ -206,11 +211,18 @@
          */
         function _transformFile() {
             updateDate();
-            if (vm.userType === EXTERNAL_TYPE) {
-                vm.cspModel.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.cspModel.enrolmentVersion);
+            if (vm.userType === INTERNAL_TYPE) {
+                if(!vm.cspForm.$pristine) {
+                    vm.cspModel.enrolmentVersion  = self.applicationInfoService.incrementMajorVersion(vm.cspModel.enrolmentVersion);
+                }
+
+            }else{
+                vm.cspModel.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.cspModel.enrolmentVersion);
             }
             return vm.modelService.transformToFileObj(vm.cspModel);
         }
+
+
 
         /**
          * Updatyes the date saved field in the model
