@@ -227,6 +227,11 @@
             vm.postalId = "postal" + scopeId;
         }
 
+        // component only has one field, just watch this field for changes to update error summary
+        $scope.$watch('adr.addressForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
+
     }
 
 })();

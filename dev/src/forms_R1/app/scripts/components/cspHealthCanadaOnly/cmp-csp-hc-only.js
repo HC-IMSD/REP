@@ -21,8 +21,8 @@
             controllerAs: 'hcOnlyCtrl',
             bindings: {
                 record: '<',
-                showErrors:'&'
-
+                showErrors:'&',
+                updateErrorSummary:'&'
             }
         });
 
@@ -54,7 +54,10 @@
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
                 return true
             }
-
         }
+        $scope.$watch('hcOnlyCtrl.hcOnlyForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
+
     }
 })();

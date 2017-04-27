@@ -131,7 +131,7 @@
                     //pass in the form name and the error object
                     //should I run it if hidden?
                     if (vm.isVisible) {
-                        console.log(vm.formRef.$error)
+                        //console.log(vm.formRef.$error)
                         vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
                     }
                 }
@@ -309,7 +309,6 @@
                         }
                         break;
                     case "minlength":
-                        console.log(scrubName)
                         if (errorType === "minlength") {
                             errorKey = aliasRec.errorType;
                         }

@@ -11,7 +11,7 @@
                         <input type="text" id="{{::cspCertCtrl.firstNameId}}"
                                data-ng-model="cspCertCtrl.model.givenName"
                                class="form-control full-width" name="{{::cspCertCtrl.firstNameId}}" maxlength="60"
-                               ng-blur="cspCertCtrl.updateErrorSummary()" size="60" required/>
+                                size="60" required/>
                         <cmp-error-message field-name="cspCertCtrl.firstNameId" form-ref="cspCertCtrl.certForm"
                                            show-error="cspCertCtrl.showErrors()"
                                            error-types="cspCertCtrl.requiredOnly"></cmp-error-message>
@@ -30,7 +30,6 @@
                         <span class="field-name">{{'LASTNAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <input type="text" id="{{::cspCertCtrl.lastNameId}}" data-ng-model="cspCertCtrl.model.surname"
-                               ng-blur="cspCertCtrl.updateErrorSummary()"
                                class="form-control full-width" name="{{::cspCertCtrl.lastNameId}}" required
                                maxlength="60"
                                size="60"/>
@@ -47,10 +46,8 @@
                         <span class="field-name">{{'JOBTITLE'|translate}}</span>
                         <strong class="required">{{'REQUIRED'|translate}}</strong>
                         <input type="text" id="{{::cspCertCtrl.jobTitleId}}" data-ng-model="cspCertCtrl.model.title"
-                               class="form-control full-width" name="{{::cspCertCtrl.jobTitleId}}" required
-                               maxlength="40"
-                               size="40"
-                               ng-blur="cspCertCtrl.updateErrorSummary()" required/>
+                               class="form-control full-width" name="{{::cspCertCtrl.jobTitleId}}"
+                               maxlength="40" size="40" required/>
                         <cmp-error-message field-name="cspCertCtrl.jobTitleId" form-ref="cspCertCtrl.certForm"
                                            show-error="cspCertCtrl.showErrors()"
                                            error-types="cspCertCtrl.requiredOnly"></cmp-error-message>

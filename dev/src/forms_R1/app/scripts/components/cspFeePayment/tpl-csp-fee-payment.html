@@ -9,13 +9,11 @@
                 </a>
             </p>
         </div>
-
         <div class="row mrgn-bttm-md">
             <div class=" col-xs-12 checkbox ">
                 <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}" class="required">
                     <input type="checkbox" ng-model="cspFeePayCtrl.model.ackPaymentSubmit"
-                           name="{{::cspFeePayCtrl.ackFeeSubmitId}}" id="{{::cspFeePayCtrl.ackFeeSubmitId}}"
-                           ng-blur="cspFeePayCtrl.updateErrorSummary()" required/>
+                           name="{{::cspFeePayCtrl.ackFeeSubmitId}}" id="{{::cspFeePayCtrl.ackFeeSubmitId}}" required/>
                     {{"ACK_FEE_SUBMIT"|translate}} <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="cspFeePayCtrl.ackFeeSubmitId"
                                        form-ref="cspFeePayCtrl.paymentForm"
@@ -42,16 +40,12 @@
                         <div  ng-class="{'has-error':cspFeePayCtrl.paymentForm[cspFeePayCtrl.feeId].$invalid}">
                             <input type="number" step='0.01' id="{{::cspFeePayCtrl.feeId}}" name="{{::cspFeePayCtrl.feeId}}"
                                    data-ng-model="cspFeePayCtrl.model.advancedPaymentFee" class="form-control"
-                                   ng-blur="cspFeePayCtrl.updateErrorSummary()"  ng-blur="cspFeePayCtrl.updateErrorSummary()"
                                    min="0.01" max="99999999.99" required/>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
         <div class="row">
             <div class="form-group col-sm-12"
                  ng-class="{'has-error':cspFeePayCtrl.paymentForm[cspFeePayCtrl.feeTypeId].$invalid}">
@@ -62,7 +56,6 @@
                         <select type="text" id="{{::cspFeePayCtrl.feeTypeId}}" name="{{::cspFeePayCtrl.feeTypeId}}"
                                 data-ng-model="cspFeePayCtrl.model.advancedPaymentType" class="form-control"
                                 ng-options="payMethod |translate for payMethod in cspFeePayCtrl.paymentList"
-                                ng-blur="cspFeePayCtrl.updateErrorSummary()"  ng-blur="cspFeePayCtrl.updateErrorSummary()"
                                 required></select>
                         <cmp-error-message field-name="cspFeePayCtrl.feeTypeId"
                                            form-ref="cspFeePayCtrl.paymentForm"

@@ -56,5 +56,7 @@
   "OTHER_EU_COUNTRY": " Other European Union Country Details",
   "CERT_FS": "Name of Authorized Official",
   "CONTACT_TITLE": "Contact Information",
-  "ACK_FEE_SUBMIT":"The Advanced Payment Details form is being submitted separately by fax or mail"
+  "ACK_FEE_SUBMIT":"The Advanced Payment Details form is being submitted separately by fax or mail",
+  "MEDINGRED_TITLE": "Medicinal Ingredient",
+  "STATEMENT_TITLE": "Statement"
 }

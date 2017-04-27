@@ -6,13 +6,8 @@ describe("CompanyService Test", function () {
 
     var companyServiceObj;
     var _instantCompanyService;
-    /*  beforeEach(function($provide){
-     //creating a mock for dependencies
-     $provide.service('$window',function(){
-     this.alert=jasmin.createSpy('alert');
-     })
-     });*/
-    beforeEach(module('ngAnimateMock'))
+
+
     beforeEach(function () {
         module('companyService');
     });

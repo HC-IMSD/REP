@@ -53,7 +53,7 @@
 
         vm.$onInit=function(){
             //after on changes called
-            if(vm.model && (!vm.model.role.applicant) ){
+            if(vm.model && vm.model.role && (!vm.model.role.applicant) ){
                 vm.applicantTextAlias="COMPANY_NOABBREV";
                 vm.type="_bill";
 
@@ -75,6 +75,11 @@
            }
 
         };
+
+        // component only has one field, just watch this field for changes to update error summary
+        $scope.$watch('cspApplCtrl.applForm[cspApplCtrl.applicantId].$invalid', function () {
+            vm.updateErrorSummary();
+        }, true);
 
         /**
          * Adds or deletes and applicant address depending if a

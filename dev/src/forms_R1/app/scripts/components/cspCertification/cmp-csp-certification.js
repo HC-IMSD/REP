@@ -55,7 +55,11 @@
 
         };
 
-
+        /**
+         * Sets the field names and ids called on $onInit.
+         * Important: use underscore scope as the last in name
+         * @private
+         */
         function _setIDNames() {
             var scopeId = "_" + $scope.$id;
             vm.firstNameId = "certFirstName" + scopeId;
@@ -64,5 +68,13 @@
             vm.jobTitleId = "certJobTitle" + scopeId;
             vm.dateSignedId = "certDateSigned" + scopeId;
         }
+
+        /**
+         * Watch for changes in the errors and tell the error summary
+         */
+        $scope.$watch('cspCertCtrl.certForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
+
     }
 })();

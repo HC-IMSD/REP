@@ -57,8 +57,7 @@
             var rootTag = this.getRootTag();
             model[rootTag] = {};
             model[rootTag] = this.createEmptyExternalModel();
-            console.log("empty model");
-            console.log(model);
+
             model[rootTag].template_type = PHARMA_TYPE;
             model[rootTag].enrolment_version = jsonObj.enrolmentVersion;
             model[rootTag].date_saved = $filter('date')(jsonObj.dateSaved, "yyyy-MM-dd");
@@ -138,7 +137,9 @@
             resultJson.timelySubmission.approvalDate = _parseDate(jsonObj.timely_submission_info.marketing_approval_date);
             resultJson.timelySubmission.country = jsonObj.timely_submission_info.marketing_country;
             resultJson.timelySubmission.otherCountry = jsonObj.timely_submission_info.marketing_country_eu;
-            resultJson.payment.advancedPaymentFee = jsonObj.advanced_payment.advanced_payment_fee;
+            if(jsonObj.advanced_payment.advanced_payment_fee) {
+                resultJson.payment.advancedPaymentFee = Number(jsonObj.advanced_payment.advanced_payment_fee);
+            }
             resultJson.payment.advancedPaymentType = jsonObj.advanced_payment.advanced_payment_type;
             resultJson.payment.ackPaymentSubmit= jsonObj.advanced_payment.advanced_payment_ack===YES;
             resultJson.certification.givenName = jsonObj.certification.given_name;
@@ -147,8 +148,6 @@
             resultJson.certification.title = jsonObj.certification.job_title;
             resultJson.certification.dateSigned = _parseDate(jsonObj.certification.date_signed);
 
-            //console.log(resultJson)
-            //
             this._default=resultJson;
             return resultJson;
         };
@@ -373,7 +372,7 @@
             record.contact.given_name = "";
             record.contact.initials = "";
             record.contact.surname = "";
-            record.contact.title = "";
+            record.contact.job_title = "";
             // record.contact.language_correspondance="";
             record.contact.phone_num = "";
             record.contact.phone_ext = "";
@@ -500,7 +499,6 @@
         if (dateArray.length != 3) {
             console.warn("_parseDate error not 3 parts: "+value);
         }
-        console.log(dateArray[0]+" "+ dateArray[1] - 1+" "+ dateArray[2]);
         var aDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
         return aDate;
     }

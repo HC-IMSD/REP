@@ -14,10 +14,10 @@
 	<!-- ACTIVITY_ENROL is the root element-->
 	<hpfb:element name="CERTIFICATE_SUPPLEMENTARY_PROTECTION" type="csp_content"/>
 	<hpfb:element name="template_type" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="software_version" type="hpfb:string"/>
-	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="applicant_name" type="char_1_80_content"/>
 
 	<hpfb:element name="billing_role" type="yes_no_content"/>
@@ -55,6 +55,8 @@
 	<hpfb:element name="advanced_payment" type="advanced_payment_section"/>
 	<hpfb:element name="advanced_payment_type" type="payment_type"/>
 	<hpfb:element name="advanced_payment_fee" type="hpfb:decimal"/>
+	<hpfb:element name="advanced_payment_ack" type="yes_no_content"/>
+	
 	<!--Start of certification content-->
 	<hpfb:element name="certification" type="certification_content"/>
 	<hpfb:element name="date_signed" type="yyyymmdd_date_content"/>
@@ -70,10 +72,10 @@
 	<hpfb:complexType name="csp_content">
 		<hpfb:sequence>
 			<hpfb:element ref="template_type"/>
+			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="software_version"/>
-			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="health_canada_only"/>
 			<hpfb:element ref="applicant" minOccurs="1" maxOccurs="2"/>
 			<!--<hpfb:element ref="billing" minOccurs="0" maxOccurs="1"/>-->
@@ -153,6 +155,7 @@
 		<hpfb:all>
 			<hpfb:element ref="advanced_payment_type"/>
 			<hpfb:element ref="advanced_payment_fee"/>
+			<hpfb:element ref="advanced_payment_ack"/>
 		</hpfb:all>
 	</hpfb:complexType>
 

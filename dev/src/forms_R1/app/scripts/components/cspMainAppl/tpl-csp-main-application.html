@@ -12,15 +12,13 @@
                     <span class="field-name">{{'NDS_NUMBER' |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspMainApplCtrl.controlNumberId}}"
-                           ng-model-options="cspMainApplCtrl.ngModelOptSetting"
-                           name="{{::cspMainApplCtrl.controlNumberId}}" ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                           name="{{::cspMainApplCtrl.controlNumberId}}" only-digits=""
                            data-ng-model="cspMainApplCtrl.model.controlNumber" class="form-control" minlength="6"
                            maxlength="6" size="6" required/>
                     <cmp-error-message field-name="cspMainApplCtrl.controlNumberId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
                                        error-types="cspMainApplCtrl.numberError"></cmp-error-message>
                 </label>
-
             </div>
         </div>
         <div class="row">
@@ -37,7 +35,7 @@
                     <select id="{{::cspMainApplCtrl.drugUseId}}" name="{{::cspMainApplCtrl.drugUseId}}"
                             data-ng-model="cspMainApplCtrl.model.drugUse" class="form-control"
                             ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList"
-                            ng-blur="cspMainApplCtrl.updateErrorSummary()" required></select>
+                             required></select>
                     <cmp-error-message field-name="cspMainApplCtrl.drugUseId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
                                        error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
@@ -64,7 +62,7 @@
                             <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
                                    id="{{::cspMainApplCtrl.applApplyId}}"
                                    ng-model="cspMainApplCtrl.model.timeApplication"
-                                   ng-value="cspMainApplCtrl.nocValue" ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                                   ng-value="cspMainApplCtrl.nocValue"
                                    ng-required="!cspMainApplCtrl.model.timeApplication"/>
                             {{'NOC_120'|translate}}
                         </label>
@@ -73,7 +71,6 @@
                         <label for="within120">
                             <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
                                    ng-model="cspMainApplCtrl.model.timeApplication"
-                                   ng-blur="cspMainApplCtrl.updateErrorSummary()"
                                    ng-required="!cspMainApplCtrl.model.timeApplication"
                                    ng-value="cspMainApplCtrl.grantValue" id="within120"/>
                             {{'GRANT_120'|translate}}</label>
@@ -84,7 +81,7 @@
 
         <div class="row">
             <div>
-                <h3>6.&nbsp;Medicinal Ingredient</h3>
+                <h3>6.&nbsp;{{'MEDINGRED_TITLE'|translate}}</h3>
             </div>
         </div>
         <div class="row">
@@ -100,13 +97,12 @@
                 </label>
                 <textarea id="{{::cspMainApplCtrl.medIngedId}}" name="{{::cspMainApplCtrl.medIngedId}}"
                           data-ng-model="cspMainApplCtrl.model.medicinalIngredient"
-                          ng-blur="cspMainApplCtrl.updateErrorSummary()"
                           class="form-control full-width" maxlength="300" rows="4" size="7" required></textarea>
             </div>
         </div>
         <div class="row">
             <div>
-                <h3>7.&nbsp;Statement</h3>
+                <h3>7.&nbsp;{{'STATEMENT_TITLE' | translate}}</h3>
             </div>
         </div>
         <div class="row">
@@ -124,7 +120,7 @@
                             <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
                                    id="{{::cspMainApplCtrl.applStateId}}"
                                    ng-model="cspMainApplCtrl.model.applicantStatement"
-                                   ng-value="cspMainApplCtrl.ownerValue" ng-blur="cspMainApplCtrl.updateErrorSummary()"
+                                   ng-value="cspMainApplCtrl.ownerValue"
                                    ng-required="!cspMainApplCtrl.model.applicantStatement"/>
                             {{'APPLICANT_OWNER'|translate}}
                         </label>
@@ -134,9 +130,7 @@
                             <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
                                    ng-model="cspMainApplCtrl.model.applicantStatement"
                                    ng-value="cspMainApplCtrl.ownerBehalfValue"
-                                   ng-blur="cspMainApplCtrl.updateErrorSummary()"
-                                   ng-required="!cspMainApplCtrl.model.applicantStatement"
-                                   id="applicant-consent"/>
+                                   ng-required="!cspMainApplCtrl.model.applicantStatement" id="applicant-consent"/>
                             {{'APPLICANT_BEHALF'|translate}}
                         </label>
                     </div>

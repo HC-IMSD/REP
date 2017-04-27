@@ -21,7 +21,8 @@
             bindings: {
                 record: '<',
                 countryList: '<',
-                showErrors: '&'
+                showErrors: '&',
+                updateErrorSummary:'&'
             }
         });
 
@@ -98,6 +99,10 @@
             vm.countryId = "timelyCountry" + scopeId;
             vm.otherCountryId = "other_eu_country" + scopeId;
         }
+
+        $scope.$watch('timelySubCtrl.timelySubForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
 
     }
 })();

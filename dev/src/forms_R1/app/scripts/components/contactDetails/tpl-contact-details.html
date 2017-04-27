@@ -7,7 +7,6 @@
                     <span class="field-name">{{"SALUTATION"|translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                     <select id="{{::contCtrl.salutationId}}" name="{{::contCtrl.salutationId}}" class="form-control"
-                            ng-blur="contCtrl.updateErrorSummary()"
                             data-ng-model="contCtrl.contactModel.salutation" ng-disabled="!contCtrl.isEditable"
                             ng-options="salut |translate for salut in contCtrl.salutationList" required>
                     </select>
@@ -26,7 +25,6 @@
                     <input type="text" id="{{::contCtrl.firstNameId}}"
                            data-ng-model="contCtrl.contactModel.givenName"
                            class="form-control full-width" name="{{::contCtrl.firstNameId}}" maxlength="60"
-                           ng-blur="contCtrl.updateErrorSummary()"
                            size="60" ng-readonly="!contCtrl.isEditable" required/>
                     <cmp-error-message field-name="contCtrl.firstNameId" form-ref="contCtrl.contactForm"
                                        show-error="contCtrl.showErrors()"
@@ -48,7 +46,7 @@
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="{{::contCtrl.lastNameId}}"
                            data-ng-model="contCtrl.contactModel.surname"
-                           ng-readonly="!contCtrl.isEditable" ng-blur="contCtrl.updateErrorSummary()"
+                           ng-readonly="!contCtrl.isEditable"
                            class="form-control full-width" name="{{::contCtrl.lastNameId}}" required
                            maxlength="60" size="60"/>
                     <cmp-error-message field-name="contCtrl.lastNameId" form-ref="contCtrl.contactForm"
@@ -64,7 +62,7 @@
                     <span class="field-name">{{'LANGCORRESPOND'|translate}}</span>
                     <strong class="required">{{'REQUIRED' |translate}}</strong>
                     <select id="{{::contCtrl.langCorrespondId}}" name="{{::contCtrl.langCorrespondId}}"
-                            data-ng-model="contCtrl.contactModel.language" ng-blur="contCtrl.updateErrorSummary()"
+                            data-ng-model="contCtrl.contactModel.language"
                             ng-options="langCorr |translate for langCorr in contCtrl.langList"
                             class="form-control" ng-disabled="!contCtrl.isEditable" required>
                     </select>
@@ -81,7 +79,7 @@
                     <input type="text" id="{{::contCtrl.jobTitleId}}"
                            data-ng-model="contCtrl.contactModel.title" class="form-control full-width"
                            name="{{::contCtrl.jobTitleId}}" maxlength="40" size="40" ng-readonly="!contCtrl.isEditable"
-                           ng-blur="contCtrl.updateErrorSummary()" required/>
+                           required/>
                     <cmp-error-message field-name="contCtrl.jobTitleId" form-ref="contCtrl.contactForm"
                                        show-error="contCtrl.showErrors()"
                                        error-types="contCtrl.requiredOnly"></cmp-error-message>
@@ -111,7 +109,7 @@
                     <span class="field-name">{{'PHONENUMBER'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="text" id="{{::contCtrl.phoneNumberId}}"
-                           data-ng-model="contCtrl.contactModel.phone" ng-blur="contCtrl.updateErrorSummary()"
+                           data-ng-model="contCtrl.contactModel.phone"
                            class="form-control full-width" name="{{::contCtrl.phoneNumberId}}"
                            maxlength="25" size="25" ng-readonly="!contCtrl.isEditable" ng-pattern="contCtrl.phoneReg"
                            required/>
@@ -132,7 +130,7 @@
                     <span class="field-name">{{'CONTACTEMAIL'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <input type="email" id="{{::contCtrl.contactEmailId}}"
-                           data-ng-model="contCtrl.contactModel.email" ng-blur="contCtrl.updateErrorSummary()"
+                           data-ng-model="contCtrl.contactModel.email"
                            ng-readonly="!contCtrl.isEditable" maxlength="50" size="60"
                            class="form-control full-width" name="{{::contCtrl.contactEmailId}}" required/>
                     <cmp-error-message field-name="contCtrl.contactEmailId" form-ref="contCtrl.contactForm"

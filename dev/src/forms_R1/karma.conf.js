@@ -19,8 +19,11 @@ module.exports = function (config) {
             'node_modules/angular-mocks/angular-mocks.js',
             'app/spec/unit/*.js',
             'app/scripts/*.js',
+            'app/scripts/directives/*/*.js',
             'app/scripts/services/*.js',
-            'app/scripts/components/*/*.js'
+            'app/scripts/components/*/*.js',
+            'app/lib/select.min.js'
+
         ],
 
 

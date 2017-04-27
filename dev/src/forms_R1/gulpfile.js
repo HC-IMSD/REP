@@ -141,13 +141,13 @@ var dossierRootTitles_fr = {
 
 var cspRootTitles_en = {
         mainHeading: "Certificate of Supplementary Protection (CSP) Application Form",
-        title: 'Health Canada CSP Template'
+        title: 'Health Canada CSP Form'
 
     };
 
 var cspRootTitles_fr = {
         mainHeading: "fr_Certificate of Supplementary Protection (CSP) Application Form",
-        title: 'fr_Health Canada CSP Template'
+        title: 'fr_Health Canada CSP Form'
 
     };
 

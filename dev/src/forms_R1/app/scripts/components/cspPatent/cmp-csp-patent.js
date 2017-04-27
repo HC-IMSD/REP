@@ -68,5 +68,9 @@
             vm.dateGrantedId = "dateGranted" + scopeId;
             vm.dateExpiryId = "dateExpiry" + scopeId;
         }
+
+        $scope.$watch('cspPatentCtrl.patentForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
     }
 })();

@@ -7,7 +7,6 @@
                     <span class="field-name">{{cspApplCtrl.applicantTextAlias |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspApplCtrl.applicantId}}" name="{{::cspApplCtrl.applicantId}}"
-                           ng-blur="cspApplCtrl.updateErrorSummary()"
                            data-ng-model="cspApplCtrl.model.applicantName" class="form-control" maxlength="80" size="80"
                            required/>
 

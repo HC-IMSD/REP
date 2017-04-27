@@ -101,7 +101,9 @@
             vm.phoneExtId="phoneExt" + scopeId;
             vm.contactEmailId="contactEmail" + scopeId;
         }
-
+        $scope.$watch('contCtrl.contactForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
     }
 
 })();

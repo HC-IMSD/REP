@@ -8,7 +8,8 @@
     angular
         .module('cspMainApplication', [
             'cspConstants',
-            'errorMessageModule'
+            'errorMessageModule',
+            'numberFormat'
         ]);
 
 })();
@@ -69,7 +70,11 @@
             }
         };
 
-
+        /**
+         * Sets the names and ids of the fields
+         * Important: end of name to contain underscore and scope
+         * @private
+         */
         function _setIDNames() {
             var scopeId = "_" + $scope.$id;
             vm.controlNumberId = "controlNumber" + scopeId;
@@ -78,5 +83,9 @@
             vm.applStateId = "applicantApply" + scopeId; //Statements as to applicant
             vm.medIngedId = "medicinalIngredient" + scopeId
         }
+
+        $scope.$watch('cspMainApplCtrl.mainApplForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
     }
 })();

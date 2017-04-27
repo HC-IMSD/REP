@@ -59,7 +59,8 @@
         vm.numberMaxError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "min", displayAlias: "TYPE_ZERO_MIN"},
-            {type: "max", displayAlias: "MSG_ERR_MAX"}
+            {type: "max", displayAlias: "MSG_ERR_MAX"},
+            {type: "number", displayAlias: "TYPE_NUMBER"}
         ];
 
 
@@ -104,6 +105,13 @@
             vm.feeTypeId = "feeType" + scopeId;
             vm.ackFeeSubmitId = "ack_fee_submit" + scopeId;
         }
+
+        /**
+         * Watch for changes in the errors and tell the error summary
+         */
+        $scope.$watch('cspFeePayCtrl.paymentForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
 
     }
 })();
