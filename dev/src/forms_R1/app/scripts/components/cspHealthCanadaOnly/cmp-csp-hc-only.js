@@ -6,7 +6,9 @@
     'use strict';
 
     angular
-        .module('cspHCOnly', []);
+        .module('cspHCOnly', [
+            'errorMessageModule'
+        ]);
 
 })();
 
@@ -26,17 +28,18 @@
             }
         });
 
-   // hcOnlyController.$inject = [];
-    function hcOnlyController() {
+    hcOnlyController.$inject = ['$scope'];
+    function hcOnlyController($scope) {
 
         var vm = this;
         vm.model = null;
+        vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
-
+            _setIDNames();
         };
 
         /**
@@ -47,14 +50,16 @@
                 vm.model=changes.record.currentValue;
             }
         };
-        vm.showError=function(ctrl){
 
-            if(!ctrl) return false;
 
-            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
-                return true
-            }
+        function _setIDNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.dateReceivedId = "date_appl_rec" + scopeId;
+            vm.companyCodeId= "csp_company_code"+ scopeId;
+            vm.applicationCodeId="csp_application_code"+ scopeId;
+            vm.notesId="notes"+ scopeId;
         }
+
         $scope.$watch('hcOnlyCtrl.hcOnlyForm.$error', function () {
             vm.updateErrorSummary();
         }, true);
