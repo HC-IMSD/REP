@@ -1,12 +1,35 @@
 {
   "streetAddress": {
-    "typical":{"en": "100 Main Street East, Suite 404, AL 3043"},
+    "typical": {
+      "en": "100 Main Street East, Suite 404, AL 3043"
+    },
     "max": "Smith",
-    "min":"S"
+    "min": "S"
   },
   "city": {
     "typical": "Ottawa",
     "max": "Itete",
     "min": "O"
+  },
+  "country": {
+    "CAN": {
+      "en": "Canada",
+      "fr": "Canada",
+      "expect":"CAN"
+    },
+    "USA": {
+      "en": "United States",
+      "fr": "Unis Etats",
+      "expect":"CAN"
+    }
+  },
+  "province": {
+    "ON": {
+      "en": "Ontario",
+      "fr": "Ontario",
+      "expect":"ON"
+    }
+
   }
+
 }

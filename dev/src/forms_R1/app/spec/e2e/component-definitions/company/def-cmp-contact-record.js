@@ -86,7 +86,7 @@ var ContactRecord = function () {
         contactDetails.setLastNameValue(parent,value)
     };
     this.getLastName = function (parent) {
-        contactDetails.getLastNameValue(parent,value)
+        contactDetails.getLastNameValue(parent)
     };
     this.setInitials = function (parent, value) {
         contactDetails.setInitialsValue(parent,value)

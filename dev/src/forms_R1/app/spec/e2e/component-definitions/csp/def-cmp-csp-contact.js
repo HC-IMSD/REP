@@ -5,11 +5,10 @@ var ContactDetails = require('../common/def-cmp-contact-details');
 var AddressDetails = require('../common/def-cmp-address-details');
 
 
-
 var CspContact = function () {
 
-    var _name_modelString="cspApplCtrl.model.applicantName";
-    var contactDetails=new ContactDetails();
+    var _name_modelString = "cspApplCtrl.model.applicantName";
+    var contactDetails = new ContactDetails();
     var addressDetails = new AddressDetails();
 
     /**
@@ -18,6 +17,25 @@ var CspContact = function () {
      */
     this.CspContact = function () {
 
+    };
+
+    this.getBillingContact = function (parent) {
+
+        var contacts = parent.element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index'));
+        if (contacts.length < 2) {
+
+            return null; // no billing
+        }
+        return (contacts[1])//dangerous
+
+    };
+    this.getApplicantContact = function (parent) {
+          var deferred = protractor.promise.defer();
+         element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index')).then(function (items) {
+         console.log("Numnber of contacts" + items.length)
+         return deferred.fulfill(items[0]);
+         });
+         return deferred.promise;
     };
 
     this.setApplicantNameValue = function (parent) {
@@ -29,7 +47,7 @@ var CspContact = function () {
 
 
     this.setSalutation = function (parent, value) {
-        contactDetails.setSalutationValue(parent,value)
+        contactDetails.setSalutationValue(parent, value)
     };
 
     this.getSalutation = function (parent) {
@@ -37,55 +55,55 @@ var CspContact = function () {
     };
 
     this.setFirstName = function (parent, value) {
-        contactDetails.setFirstNameValue(parent,value)
+        contactDetails.setFirstNameValue(parent, value)
     };
     this.getFirstName = function (parent) {
         contactDetails.getFirstNameValue(parent);
     };
     this.setLastName = function (parent, value) {
-        contactDetails.setLastNameValue(parent,value)
+        contactDetails.setLastNameValue(parent, value)
     };
     this.getLastName = function (parent) {
-        contactDetails.getLastNameValue(parent,value)
+        contactDetails.getLastNameValue(parent)
     };
     this.setInitials = function (parent, value) {
-        contactDetails.setInitialsValue(parent,value)
+        contactDetails.setInitialsValue(parent, value)
     };
     this.getInitials = function (parent) {
         contactDetails.getInitialsValue(parent)
     };
     this.setJobTitle = function (parent, value) {
-        contactDetails.setJobTitleValue(parent,value)
+        contactDetails.setJobTitleValue(parent, value)
     };
     this.getJobTitle = function (parent) {
         contactDetails.getJobTitleValue(parent)
     };
     this.setPhone = function (parent, value) {
-        contactDetails.setPhoneValue(parent,value)
+        contactDetails.setPhoneValue(parent, value)
     };
     this.getPhone = function (parent) {
         contactDetails.getPhoneValue(parent)
     };
     this.setPhoneExt = function (parent, value) {
-        contactDetails.setPhoneExtValue(parent,value)
+        contactDetails.setPhoneExtValue(parent, value)
     };
     this.getPhoneExt = function (parent) {
         contactDetails.getPhoneExtValue(parent)
     };
     this.setFax = function (parent, value) {
-        contactDetails.setFaxValue(parent,value)
+        contactDetails.setFaxValue(parent, value)
     };
     this.getFax = function (parent) {
         contactDetails.getFaxValue(parent)
     };
     this.setEmail = function (parent, value) {
-        contactDetails.setEmailValue(parent,value)
+        contactDetails.setEmailValue(parent, value)
     };
     this.getEmail = function (parent) {
         contactDetails.getEmailValue(parent)
     };
     this.setLanguage = function (parent, value) {
-        contactDetails.setLanguageValue(parent,value)
+        contactDetails.setLanguageValue(parent, value)
     };
     this.getLanguage = function (parent) {
         contactDetails.setLanguageValue(parent);
@@ -137,7 +155,6 @@ var CspContact = function () {
     this.getCityValue = function (parent) {
         return addressDetails.getCityTextValue(parent);
     };
-
 
 };
 

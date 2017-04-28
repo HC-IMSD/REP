@@ -15,6 +15,10 @@ var csp_url, lang, formType;
 
 var UiUtil = require('../../util/util-ui.js');
 var cspData=require('../../../e2e/test-data/csp.json');
+var contactData=require('../../../e2e/test-data/contact.json');
+var addressData=require('../../../e2e/test-data/address.json');
+
+
 var CspMain = require('../../component-definitions/csp/def-cmp-csp-main');
 var CspCertification = require('../../component-definitions/csp/def-cmp-csp-certification');
 var CspContact = require('../../component-definitions/csp/def-cmp-csp-contact');
@@ -58,16 +62,46 @@ describe('Certificate of Supplementary Protection Main Test', function () {
 
     describe('Fill in CSP form information', function () {
 
+        it('Complete Applicant Record Information',function(){
+            var root=mainObj.getRoot();
+            contactObj.getApplicantContact(root).then(function(contact) {
+                contactObj.setSalutation(contact,contactData.salutation.MRS[lang]);
+                contactObj.setFirstName(contact,contactData.firstNames.typical);
+                contactObj.setLastName(contact,contactData.lastNames.typical);
+                contactObj.setInitials(contact,contactData.initials.typical);
+                contactObj.setJobTitle(contact,contactData.jobTitle.typical);
+                contactObj.setPhone(contact,contactData.phone.typical);
+                contactObj.setPhoneExt(contact,contactData.phoneExt.typical);
+                contactObj.setFax(contact,contactData.fax.typical);
+                contactObj.setEmail(contact,contactData.email.typical);
+                contactObj.setStreetValue(contact,addressData.streetAddress.typical[lang]);
+                contactObj.setCountryListValue(contact,addressData.country.CAN[lang]);
+                contactObj.setStateListValue(contact,addressData.province.ON);
+                contactObj.setCityValue(contact,addressData.city.typical);
+                contactObj.setPostalCodeTextValue(contact,"k1a3n1");
+
+                expect(contactObj.getSalutation(contact)).toEqual(contactData.salutation.MRS.expect);
+                expect(contactObj.getFirstName(contact)).toEqual(contactData.firstNames.typical);
+                expect(contactObj.getLastName(contact)).toEqual(contactData.lastNames.typical);
+                expect(contactObj.getInitials(contact)).toEqual(contactData.initials.typical);
+                expect(contactObj.getJobTitle(contact)).toEqual(contactData.jobTitle.typical);
+                expect(contactObj.getPhone(contact)).toEqual(contactData.phone.typical);
+                expect(contactObj.getPhone(contact)).toEqual(contactData.phone.typical);
+            })
+
+        });
+
+
 
         it('Fill in Patent information', function () {
            var root=mainObj.getRoot();
-
-            var expectedGrantDate="2007-5-15"; //format saved
+            //DATE hack relies on OS using YYYY-MM-DD
+            var expectedGrantDate="2007-05-15"; //format saved
             var expectedExpiryDate="2022-12-05"; //format saved
             var expectedFilingDate="2006-12-14"; //format saved
             patentObj.setPatentNumValue(root,cspData.patentNum.typical);
             patentObj.setGrantDateValue(root,"002007-5-15");
-            patentObj.setFilingDateValue(root,"2006-12-14");
+            patentObj.setFilingDateValue(root,"002006-12-14");
             patentObj.setExpiryDateValue(root,"002022-12-05");
 
             expect(patentObj.getGrantDateValue(root)).toEqual(expectedGrantDate);
