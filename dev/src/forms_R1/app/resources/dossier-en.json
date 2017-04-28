@@ -52,6 +52,6 @@
   "HELP_thera":"Therapeutic Classification Instructions",
   "HELP_REFPRODUCTS":"Reference Product Instructions",
   "ADD_FORMULATION": "Add Formulation",
-  "SAVE_INSTRUCT":"Dossier File Save Instructions",
-  "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)"
+  "SAVE_INSTRUCT":"Dossier File Save Instructions"
+
 }

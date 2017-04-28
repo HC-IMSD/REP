@@ -258,6 +258,7 @@
                 case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
                 case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
                 case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
+                case('PRESUB_MEETING_RQ'):      /*FALLTHROUGH*/
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();

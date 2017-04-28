@@ -46,5 +46,6 @@
   "COMPANYNAME":"Company Name (Full legal name - no abbreviations)",
   "COPY":"Copy",
   "DELETE":"Delete",
-  "SAVE_WORKING":"Save Working Copy"
+  "SAVE_WORKING":"Save Working Copy",
+  "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)"
 }

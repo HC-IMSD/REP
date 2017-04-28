@@ -18,6 +18,9 @@
 
     TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists'];
 
+    //version 1.1 bug fix?
+    //version 1.2 added presubmission package/rq to MPNC, MPDNS
+
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists) {
         function TransactionService() {
             //construction logic
@@ -26,7 +29,7 @@
                 // enrolmentVersion: "0.0",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "1.1.0",
+                softwareVersion: "1.2.0",
                 isEctd: "Y",
                 ectd: {
                     companyId: "",
