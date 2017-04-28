@@ -136,7 +136,7 @@ var UiUtil = function () {
         } else {
             component = element(by.tagName(tagName));
         }
-        console.log(tagName);
+
         var table = component.all(by.tagName('cmp-expanding-table')).first();
         //TODO why am i getting multiples. should be one
         return table; //promises needed?
@@ -192,9 +192,25 @@ var UiUtil = function () {
        return _searchInput.sendKeys(protractor.Key.ENTER);
     };
 
-
-
+    /**
+     * Gete the browser localized date. Depends on browser existing
+     * @param year
+     * @param month
+     * @param day
+     */
+    this.getLocaleDateString=function(year,month,day){
+        var deferred = protractor.promise.defer();
+        browser.executeScript(
+            'return (new Date('+year+','+month+','+day+')).toLocaleDateString()'
+       // 'var OldDate = Date;return function (){return new OldDate(2012,0,20).toLocaleDateString();}'
+        ).then(function (value) {
+            //ar dateValue = new Date(value);
+           return deferred.fulfill(value);
+        });
+        return deferred.promise;
+    }
 };
+//'return (new Date('+year+','+month+','+day+')).toLocaleDateString()'
 
 
 //make available externally

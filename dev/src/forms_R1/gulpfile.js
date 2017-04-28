@@ -2125,6 +2125,30 @@ gulp.task('protractor-testEnv', function () {
             //throw e;
         })
 });
+
+gulp.task('protractor-localDevEnv', function () {
+    gulp.src([
+
+        'app/spec/e2e/tests/csp/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang' ,'en',
+                '--params.formType','EXT',
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        })
+});
+
+
+
 /**
  *  Runs the selenium standalone we
  */

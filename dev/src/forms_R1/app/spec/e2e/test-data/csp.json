@@ -1,0 +1,40 @@
+{
+  "lastNames": {
+    "typical": "Smith",
+    "max": "Smith",
+    "max_plus1": "SSSSSSSSSS",
+    "min": "1"
+  },
+  "firstNames": {
+    "typical": "Jérôme",
+    "typical2": "Gaëtan",
+    "min": "1",
+    "max": "",
+    "max_plus1": ""
+  },
+  "jobTitle": {
+    "typical": "Senior Regulatory Manager",
+    "min": "S",
+    "max": "",
+    "max_plus1": ""
+  },
+
+  "initials": {
+    "min": "",
+    "typical": "Q. R. A.",
+    "max": "H.P.A.R.A."
+  },
+  "fax": {
+    "typical": "705-476-1671"
+  },
+  "email": {
+    "min": "a@a",
+    "max": "dadasadsadssdsadadasdsdsdashgfhfhh@fdsfsdf.com",
+    "typical": "myname@gmail.com",
+    "invalid1": "my_name"
+  },
+  "patentNum":{
+    "typical":"1234567"
+
+  }
+}
