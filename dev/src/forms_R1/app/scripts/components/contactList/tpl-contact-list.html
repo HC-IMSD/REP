@@ -1,7 +1,8 @@
 <ng-form name="contactListCtrl.contactListForm">
     <div class="row">
-        <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="true"
-                           name-suffix="contactListCtrl.contactListForm"
+        <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="contactListCtrl.showSummary"
+                           name-suffix="contactListCtrl.contactListForm" alias-list="contactListCtrl.alias"
+                           exclusion-list="contactListCtrl.exclusions"
                            update-errors="contactListCtrl.updateSummary" form-preamble="CONTACT_INFO"
                            set-heading-level="h4"></cmp-error-summary>
     </div>

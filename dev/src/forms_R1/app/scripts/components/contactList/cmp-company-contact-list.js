@@ -61,6 +61,23 @@
                 width:"20"
             }
         ];
+
+
+        vm.alias = {
+            "roleMissing": {
+                "type": "fieldset",
+                "parent": "fs_roleMissing"
+            },
+            "contactRolesValid": {
+                "type": "element",
+                "target": "addContact"
+            }
+        };
+        vm.exclusions = {
+            "contactRec.contactRecForm": "true"
+        };
+
+
         /**
          * using to get contact list
          */

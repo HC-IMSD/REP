@@ -6,7 +6,15 @@
     'use strict';
 
     angular
-        .module('addressRecord', ['addressModule', 'addressRole', 'filterLists', 'importerProducts', 'hpfbConstants','errorSummaryModule'])
+        .module('addressRecord', [
+            'addressModule',
+            'addressRole',
+            'filterLists',
+            'importerProducts',
+            'hpfbConstants',
+            'errorSummaryModule',
+            'errorMessageModule'
+        ])
 })();
 
 (function () {
@@ -34,6 +42,7 @@
             }
         });
     addressRecCtrl.$inject = ['$scope', 'CANADA'];
+
     function addressRecCtrl($scope, CANADA) {
         var vm = this;
         vm.savePressed = false;
@@ -68,14 +77,28 @@
                 dossierIdList: []
             }
         };
+        vm.alias = {
+            "roleMissing": {
+                "type": "fieldset",
+                "parent": "fs_roleMissing"
+            },
+            "postal": {
+                "type": "pattern",
+                "errorType": "POSTAL_FORMAT"
+            }
+        };
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
+
         /*
-         * Sends the message up to determine if a row has already been selected.
-         * This merss
+         * Sends the message up to determine if a role has already been selected.
+         *
          */
         vm.isOneSelected = function (type) {
             return (vm.isRoleSelected({roleName: type, id: vm.addressModel.addressID}));
         };
         vm.$onInit = function () {
+            _setIdNames();
             vm.updateErrorSummaryState();
             vm.showSummary=false;
         };
@@ -135,7 +158,9 @@
                 vm.setEditable();
             }
             if(changes.showErrorSummary){
+
                 vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
             }
 
         };
@@ -217,7 +242,6 @@
          * @returns {boolean}
          */
         vm.showErrors = function () {
-
             return((vm.savePressed ||vm.showSummary));
         };
 
@@ -244,6 +268,10 @@
         vm.setEditable = function () {
 
             vm.isEditable = !(vm.formAmend && !vm.addressModel.amendRecord);
+        }
+
+        function _setIdNames() {
+            vm.companyNameId = "companyName" +"_"+  $scope.$id;
         }
 
     }

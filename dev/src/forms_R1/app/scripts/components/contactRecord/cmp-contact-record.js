@@ -65,6 +65,19 @@
             PhoneExt: "",
             fax: ""
         };
+        vm.alias={
+            "roleMissing": {
+                "type": "fieldset",
+                "parent": "fs_roleMissing"
+            },
+            "phoneNumber": {
+                "type": "pattern",
+                "errorType": "MSG_ERR_PHONE_FORMAT"
+            }
+        }
+
+
+
 
         vm.$onInit = function () {
             vm.updateErrorSummaryState();

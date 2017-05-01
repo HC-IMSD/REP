@@ -34,8 +34,9 @@
             </div>
         </section>
         <div id="master-error">
-            <cmp-error-summary form-ref="main.companyEnrolForm" show-errors="true"
-                               form-preamble="COMPANY_FORM"
+            <cmp-error-summary form-ref="main.companyEnrolForm" show-errors="main.showErrorSummary"
+                               form-preamble="COMPANY_FORM" exclusion-list="main.exclusions"
+                               alias-list="main.alias"
                                update-errors="main.updateSummary" make-focused="main.updateSummary"
                                name-suffix="main.companyEnrolForm" set-heading-level="h2"></cmp-error-summary>
         </div>

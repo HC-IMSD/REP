@@ -64,6 +64,21 @@
             }
         ];
 
+        vm.alias = {
+            "roleMissing": {
+                "type": "fieldset",
+                "parent": "fs_roleMissing"
+            },
+            "addressRolesValid": {
+                "type": "element",
+                "target": "addAddressBtn"
+            }
+        };
+        vm.exclusions = {
+            "addressRec.addressRecForm": "true"
+        };
+
+
         vm.$onInit = function () {
             //local var from binding
             vm.addressList = vm.addresses;

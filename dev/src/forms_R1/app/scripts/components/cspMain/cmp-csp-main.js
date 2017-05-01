@@ -56,10 +56,7 @@
         vm.summaryFocusIndex = 0;
 
         vm.exclusions = {
-            "contactListCtrl.contactListForm": "true",
-            "contactRec.contactRecForm": "true",
-            "addressListCtrl.addressListForm": "true",
-            "addressRec.addressRecForm": "true"
+
         };
         vm.alias = {
 
@@ -91,8 +88,6 @@
                 "type": "min",
                 "errorType": "TYPE_ZERO_MIN"
             }
-
-
         };
 
 

@@ -6,5 +6,6 @@
   "CONTACTREC.CONTACTRECFORM":"in the Company Representative details",
   "ADDRESSREC.ADDRESSRECFORM":"in the Address details",
   "COMPANY_FORM":"Company Enrolment Form",
-  "ROLEMISSING": "Record Role"
+  "ROLEMISSING": "Record Role",
+
 }

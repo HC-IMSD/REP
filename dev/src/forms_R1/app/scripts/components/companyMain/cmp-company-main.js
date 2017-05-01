@@ -65,16 +65,42 @@
         vm.updateSummary=false;
         vm.showErrorSummary=false;
 
-        //TODO needed?
+
+        vm.exclusions = {
+            "contactListCtrl.contactListForm": "true",
+            "addressListCtrl.addressListForm": "true"
+        };
+        vm.alias = {
+            "roleMissing": {
+                "type": "fieldset",
+                "parent": "fs_roleMissing"
+            },
+            "contactRolesValid": {
+                "type": "button",
+                "parent": "",
+                "target": "addContact"
+            },
+            "addressRolesValid": {
+                "type": "button",
+                "parent": "",
+                "target": "addAddressBtn"
+            },
+            "phoneNumber": {
+                "type": "pattern",
+                "errorType": "MSG_ERR_PHONE_FORMAT"
+            },
+            "country": {
+                "type": "select2",
+                "name": "country"
+            }
+        };
+
+
+
+
+
         vm.initUser = function (id) {
-            /*
-             if (!id) id = 'EXT'
-             vm.userType = id;
-             if (id == 'INT') {
-             vm.saveXMLLabel = "APPROVE_FINAL"
-             } else {
-             vm.saveXMLLabel = "SAVE_DRAFT"
-             }*/
+
         };
 
         vm.$onInit = function () {
