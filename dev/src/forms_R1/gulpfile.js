@@ -45,7 +45,7 @@ var paths = {
     buildProdCompany: buildProd + '/company/',
     buildProdTransaction: buildProd + '/transaction/',
     buildProdDossier: buildProd + '/dossier/',
-
+    buildProdCsp: buildProd + '/csp/',
     englishTemplate: wetBase + '/' + templateFileEn, //this is the wet template before path injection
     frenchTemplate: wetBase + '/' + templateFileFr, //this is the wet template before path injection
     devEnglishTemplate: buildDev + '/templates/' + templateFileEn,
@@ -1951,7 +1951,111 @@ gulp.task('prod-transaction-copySourceFiles', function () {
 
 
 /******END TRANSACTION PROD SCRIPTS******/
+////////////////////////// Start CSP PROD scripts
 
+
+
+gulp.task('prod-csp-copySourceFiles', function () {
+    return (
+        pipes.copySrcs(false, paths.buildProdCsp, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders,[], true)
+    );
+});
+
+gulp.task('prod-csp-allFormsCreate', ['prod-csp-compileHtml'], function () {
+
+    return pipes.deleteResourcesNonMinFiles(paths.buildProdCsp);
+
+});
+
+
+gulp.task('prod-csp-compileHtml', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-csp-compileSrcJs', 'prod-csp-copyLib'], function () {
+
+    var ignorePath = '/build/prod/csp';
+    var basePath = paths.buildProdCsp;
+    var destPath = paths.buildProdCsp;
+    var htmlPartial = jsRootContent.partialCSPFormRoot;
+
+    var srcJsExtEn = [
+        basePath + 'app/scripts/' + 'cspAppEXT-en' + '*.min.js',
+        paths.buildProdCsp + 'app/lib/**/angular*.js'
+    ];
+    var srcJsExtFr = [
+        basePath + 'app/scripts/' + 'cspAppEXT-fr' + '*.min.js',
+        paths.buildProdCsp + 'app/lib/**/angular*.js'
+    ];
+    var srcJsIntFr = [
+        basePath + 'app/scripts/' + 'cspAppINT-fr' + '*.min.js',
+        paths.buildProdCsp + 'app/lib/**/angular*.js'
+    ];
+    var srcJsIntEn = [
+        basePath + 'app/scripts/' + 'cspAppINT-en' + '*.min.js',
+        paths.buildProdCsp + 'app/lib/**/angular*.js'
+    ];
+    var srcPath = paths.buildProdCsp;
+
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'cspEXT-en.html', destPath, 'en', deployType.prod);
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'cspEXT-fr.html', destPath, 'fr', deployType.prod);
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'cspINT-fr.html', destPath, 'fr', deployType.prodInt);
+    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'cspINT-en.html', destPath, 'en', deployType.prodInt);
+
+});
+gulp.task('prod-csp-compileSrcJs', ['prod-csp-compileTranslateFile', 'prod-csp-createRootJsFiles', 'prod-csp-copySourceFiles'], function () {
+
+    var srcPath = paths.buildProdCsp + 'app/scripts/';
+    var dest = paths.buildProdCsp + 'app/scripts/';
+    var rootJsBaseName = "cspApp";
+    var translateName = "cspTranslations";
+    return (
+        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders, translateName, true)
+    )
+});
+gulp.task('prod-csp-compileTranslateFile', ['prod-csp-copyTranslateFiles'], function () {
+
+    var destPath = paths.buildProdCsp+ paths.relScript;
+    var srcPath = paths.buildProdCsp;
+    return (pipes.compileTranslateFile(srcPath, destPath, "cspTranslations", cspTranslationFilesBaseList));
+
+});
+
+gulp.task('prod-csp-copyTranslateFiles', function () {
+
+    var destPath = paths.buildProdCsp;
+
+    var translationList = cspTranslationFilesBaseList;
+
+    return (pipes.translateDev(translationList, destPath));
+
+});
+
+gulp.task('prod-csp-createRootJsFiles', [], function () {
+    var dest = paths.buildProdCsp + 'app/scripts/';
+    var rootFile = paths.scripts + "/" + rootFileNames.cspRoot + ".js";
+    return (
+        pipes.createRootFileSet(rootFile, dest, true, true)
+    );
+});
+
+gulp.task('prod-csp-copyLib', function () {
+    var srcArray = stylesProd;
+
+    for (var i = 0; i < libCsp.length; i++) {
+        srcArray.push(libCsp[i])
+    }
+    var copySources = gulp.src(srcArray, {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildProdCsp))
+});
+
+
+
+
+
+
+
+
+
+
+
+/////////////// End CSP Prod scripts
 
 gulp.task('connect-server-start', function () {
     connect.server({
@@ -2270,6 +2374,12 @@ gulp.task('prod-company-clean', function () {
     return (pipes.cleanBuild(paths.buildProdCompany));
 
 });
+
+gulp.task('prod-csp-clean', function () {
+    return (pipes.cleanBuild(paths.buildProdCsp));
+
+});
+
 
 
 
