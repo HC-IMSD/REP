@@ -245,20 +245,6 @@
             return((vm.savePressed ||vm.showSummary));
         };
 
-        /**
-         * Controls errors state of an individual UI control. Since cannot pass the control for some reason
-         * pass the needed state variables... very annoying
-         * @param isTouched
-         * @param isInvalid
-         * @returns {boolean}
-         */
-        vm.showError = function (isTouched, isInvalid) {
-
-            if ((isInvalid && isTouched) || (vm.showErrors() && isInvalid )) {
-                return true
-            }
-            return false
-        };
 
 
         /**

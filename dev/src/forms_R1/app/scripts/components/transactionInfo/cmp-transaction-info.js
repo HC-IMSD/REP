@@ -30,16 +30,17 @@
                 getTransaction: '&',
                 getRepContact: '&',
                 resetEctd: '&',
-                deprecateSequence: '&'
+                deprecateSequence: '&',
+                language:'<'
             }
         });
 
-    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES', 'getContactLists'];
-    function transactionInfoCtrl(TransactionService, OTHER, YES, getContactLists) {
+    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
+    function transactionInfoCtrl(TransactionService, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {};
-        vm.yesNoList = ['Y', 'N'];
+        vm.yesNoList = [YES, NO];
         vm.showEctdSection = true;
         vm.showSolicitedDetail = false;
         vm.showOtherSolicitedDetail = false;
@@ -48,7 +49,7 @@
         vm.requesterList = [];
         vm.alerts = [false,false];
         vm.requesterList = [];
-
+        vm.lang=ENGLISH;
         vm.$onInit = function () {
             loadContactData(); //asynch load of contact data
             vm.updateEctdState();
@@ -62,6 +63,11 @@
                 vm.updateEctdState();
                 vm.setSolicitedState();
             }
+            if(changes.language){
+
+                vm.lang=changes.language.currentValue;
+            }
+
         };
 
         vm.getNewTransaction = function () {
@@ -160,8 +166,13 @@
                 vm.alerts[value] = false;
             }
         };
-
-
+        /***
+         * used to determine the form language
+         * @returns {boolean}
+         */
+        vm.isFrench=function(){
+            return(vm.lang===FRENCH);
+        };
 
 }
 

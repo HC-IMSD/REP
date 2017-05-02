@@ -15,16 +15,12 @@
                 <div>
                     <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
                          class="alert-info" close="main.closeAlert(0)">
-                        <section>
-                            <div>
-                                <h3 class="rep-margin-minus-top">Files to load</h3>
-                                <ul>
-                                    <li>Working Copy (.hcsc) – when continuing with an incomplete Regulatory Transaction
-                                        template.
-                                    </li>
-                                    <li>Final XML – when amending an approved Regulatory Transaction enrolment.</li>
-                                    <li>A file should not be loaded if it is the initial enrolment for the Regulatory Transaction.</li>
-                                </ul>
+                        <section aria-live="assertive">
+                            <div ng-if="!main.isFrench()"
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-file-en.html'">
+                            </div>
+                            <div ng-if="main.isFrench()"
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-file-fr.html'">
                             </div>
                         </section>
                     </div>
@@ -38,7 +34,7 @@
         <div>
             <cmp-transaction-info transaction-root="main.transaction" show-errors="main.showErrors()"
                                   deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
-                                  reset-ectd="main.transactionService.resetEctdSection()"
+                                  reset-ectd="main.transactionService.resetEctdSection()" language="main.lang"
                                   get-transaction="main.transactionService.getNewTransaction(main.transaction.isEctd==='Y')"
                                   get-rep-contact="main.transactionService.getNewRepContact()"></cmp-transaction-info>
             <div class="row">
@@ -63,16 +59,15 @@
                     <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[1]"
                          class="alert-info" close="main.closeAlert(1)">
                         <section aria-live="assertive">
-                            <div>
-                                <ul>
-                                    <li>Click here to generate the final XML file.</li>
-                                    <li>The final XML file does not need to be provided to Health Canada for approval.</li>
-                                    <li>Refer to the REP guidance document for detailed information.</li>
-                                </ul>
+                            <div ng-if="!main.isFrench()"
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
+                            </div>
+                            <div ng-if="main.isFrench()"
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
                             </div>
                         </section>
                     </div>
                 </div>
-        </div>
+            </div>
     </ng-form>
 </div>

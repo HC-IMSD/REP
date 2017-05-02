@@ -32,9 +32,9 @@
             }
         });
 
-    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE'];
+    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE','ENGLISH','$translate'];
 
-    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE) {
+    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE, ENGLISH, $translate) {
 
         var vm = this;
         vm.userType = EXTERNAL_TYPE;
@@ -64,7 +64,7 @@
         vm.alerts = [false, false, false, false, false];
         vm.updateSummary=false;
         vm.showErrorSummary=false;
-
+        vm.lang = $translate.proposedLanguage() || $translate.use();
 
         vm.exclusions = {
             "contactListCtrl.contactListForm": "true",
@@ -94,9 +94,6 @@
                 "name": "country"
             }
         };
-
-
-
 
 
         vm.initUser = function (id) {
@@ -313,6 +310,10 @@
             }
         };
 
+        /*
+        Makes an instruction visible baseed on an index passed in
+        Index sets the UI state in the alerts array
+         */
         vm.addInstruct = function (value) {
 
             if (angular.isUndefined(value)) return;
@@ -321,11 +322,20 @@
             }
         }
 
+        /**
+         * Increments the conunter to send a signal to update the error summary module
+          */
         vm.updateErrorSummary=function(){
             vm.updateSummary= vm.updateSummary+1;
 
         }
-
+        /**
+         * Determines if the current language is french
+         * @returns {boolean}
+         */
+        vm.isFrench=function(){
+            return(vm.lang!== ENGLISH);
+        };
 
     }
 })();

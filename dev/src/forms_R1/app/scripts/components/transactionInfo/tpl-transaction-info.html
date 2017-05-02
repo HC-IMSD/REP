@@ -15,20 +15,12 @@
                     <div>
                         <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="transInfoCtrl.alerts[0]"
                              class="alert-info" close="transInfoCtrl.closeAlert(0)">
-                            <section>
-                                <div>
-                                    <ul>
-                                        <li>The “Company ID” can be obtained from the final company XML file, approved
-                                            by Health Canada.
-                                        </li>
-                                        <li>The “Dossier ID” can be obtained from the final dossier XML file, approved
-                                            by Health Canada.
-                                        </li>
-                                        <li>If this is the first REP regulatory transaction for an existing dossier, a
-                                            record must be added in the Lifecycle Management (LCM) table for each
-                                            previous sequence number by clinking on the “Add Record” button.
-                                        </li>
-                                    </ul>
+                            <section aria-live="assertive">
+                                <div ng-if="!transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-en.html'">
+                                </div>
+                                <div ng-if="transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-fr.html'">
                                 </div>
                             </section>
                         </div>
@@ -250,33 +242,12 @@
                     <div>
                         <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="transInfoCtrl.alerts[1]"
                              class="alert-info" close="transInfoCtrl.closeAlert(1)">
-                            <section>
-                                <div>
-                                    <ul>
-                                        <li>Information provided here pertains to <b>the contact specific to the subject
-                                            regulatory activity,</b> i.e., the person/company to whom Health Canada
-                                            should
-                                            direct correspondence about the subject regulatory activity.
-                                        </li>
-                                        <li>To avoid confusion, this section <b>must be completed even if the regulatory
-                                            activity contact is identified in the company template under another
-                                            role.</b>
-                                        </li>
-                                        <li>Please note that it is the discretion of Health Canada to decide the method
-                                            of correspondence.
-                                        </li>
-                                        <li>If you are adding a record to previously submitted final regulatory
-                                            transaction xml, these fields will be prepopulated with the information of
-                                            the previous transaction (sequence number).
-                                        </li>
-                                        <li>Sponsors should update this information if required; otherwise confirm that
-                                            the information is still valid.
-                                        </li>
-                                        <li>Enter the name of the company to which the regulatory activity contact
-                                            belongs (i.e., is a staff member). If the contact does not belong to a
-                                            company, enter the name of the contact.
-                                        </li>
-                                    </ul>
+                            <section aria-live="assertive">
+                                <div ng-if="!transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
+                                </div>
+                                <div ng-if="transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
                                 </div>
                             </section>
                         </div>

@@ -28,6 +28,7 @@
             'ui.bootstrap',
             'ui.select',
             'hpfbConstants'
+           /* 'errorMessageModule'*/
         ])
 })();
 
@@ -51,10 +52,10 @@
 
     activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope',
         '$translate', 'CommonLists', 'ActivityListFactory', 'NEW_TYPE', 'AMEND_TYPE', 'APPROVED_TYPE','INTERNAL_TYPE',
-        'EXTERNAL_TYPE'];
+        'EXTERNAL_TYPE', 'ENGLISH'];
     function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate,
                               CommonLists, ActivityListFactory,NEW_TYPE, AMEND_TYPE, APPROVED_TYPE,INTERNAL_TYPE,
-                              EXTERNAL_TYPE) {
+                              EXTERNAL_TYPE, ENGLISH) {
 
         var vm = this;
         vm.isIncomplete = true;
@@ -100,6 +101,7 @@
         };
 
         vm.$onInit = function () {
+            _setIdNames();
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
@@ -135,8 +137,10 @@
                     vm.saveXMLLabel = "SAVE_DRAFT"
                 }
             }
+        };
 
-
+        vm.isFrench=function(){
+            return(vm.lang!==ENGLISH);
         };
 
         /**
@@ -373,6 +377,14 @@
                 vm.alerts[value] = false;
             }
         };
+        /**
+         * Sets the ids and names for fields
+         * @private
+         */
+        function _setIdNames() {
+           // vm.companyNameId = "companyName" +"_"+  $scope.$id;
+        }
+
     }
 })();
 

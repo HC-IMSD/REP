@@ -49,10 +49,10 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate) {
 
         var self = this;
         self.showContent = _loadFileContent; //binds the component to the function
@@ -79,6 +79,7 @@
         self.noThera = "";
         self.oneRefSelected = "";
         self.alerts = [false, false, false, false,false,false,false];
+        self.lang = $translate.proposedLanguage() || $translate.use();
 
         var yesValue = YES;
         self.$onInit = function () {
@@ -366,7 +367,13 @@
                 self.alerts[value] = false;
             }
         };
-
+        /**
+         * Determines if form is in french
+         * @returns {boolean}
+         */
+        self.isFrench=function(){
+            return(self.lang===FRENCH);
+        };
 
     }
 

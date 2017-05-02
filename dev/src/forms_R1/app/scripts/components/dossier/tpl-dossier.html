@@ -13,14 +13,12 @@
             <div class="panel-body">
                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[0]"
                      class="alert-info" close="dos.closeAlert(0)">
-                    <section>
-                        <div>
-                            <h3 class="rep-margin-minus-top">Files to load</h3>
-                            <ul>
-                                <li>Working Copy (.hcsc) – when continuing with an incomplete Dossier template.</li>
-                                <li>Final XML – when amending an approved Dossier enrolment.</li>
-                                <li>A file should not be loaded if it is the initial enrolment for the Dossier.</li>
-                            </ul>
+                    <section aria-live="assertive">
+                        <div ng-if="!dos.isFrench()"
+                             ng-include="'app/scripts/templates/dossier/tpl-dossier-file-en.html'">
+                        </div>
+                        <div ng-if="dos.isFrench()"
+                             ng-include="'app/scripts/templates/dossier/tpl-dossier-file-fr.html'">
                         </div>
                     </section>
                 </div>
@@ -42,80 +40,12 @@
             <div class="panel-body">
                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[1]"
                      class="alert-info" close="dos.closeAlert(1)">
-                    <section>
-                        <div>
-                            <!--<h3 class="rep-margin-minus-top">Files to load</h3>-->
-                            <ul>
-                                <li>
-                                    The “<b>Application&nbsp;Status</b>”, “<b>Enrolment&nbsp;Version</b>”, and “<b>Date&nbsp;Last&nbsp;Saved</b>”
-                                    fields are automatically filled by the form upon selecting “<b>Save&nbsp;Working&nbsp;Copy</b>”
-                                    or “<b>Save&nbsp;Draft&nbsp;for&nbsp;Filing</b>” in the bottom of the
-                                    template.
-                                </li>
-                                <li>
-                                    The “<b>Dossier&nbsp;Id</b>” field will be filled by Health Canada when generating
-                                    final xml file.
-                                </li>
-                                <li>
-                                    The “Company&nbsp;ID” can be obtained from the final company XML file, approved by
-                                    Health Canada.
-                                </li>
-                            </ul>
-                            <h3>Amendment Information</h3>
-                            <ul>
-                                <li>
-                                    The “<b>Amend&nbsp;Enrolment</b>” button must be selected when amending an approved
-                                    company enrolment. Load the approved final xml file in the template to enable
-                                    the “Amend&nbsp;Enrolment” button.
-                                </li>
-                                <li>
-                                    The amended fields should be identified by selecting the “Amend&nbsp;Record”
-                                    checkbox in
-                                    the desired section.
-                                </li>
-                            </ul>
-                            <h3>Product (Dossier) Name</h3>
-                            <ul>
-                                <li>
-                                    The <b>brand</b> or proprietary or product name is the name assigned by the
-                                    manufacturer / sponsor to distinguish the dossier (product) and under which the
-                                    product is to be sold / advertised. The brand name is also the name used to identify
-                                    the product in all correspondence related to the submission and on the product
-                                    label(s) and Product Monograph/Package Insert if applicable. If the brand name has
-                                    not yet been determined, e.g. CTA, VIND, or NDS submissions, the proper or common
-                                    name of the drug or the research code may be used.
-                                </li>
-                            </ul>
-                            <h3>Proper, common or non-proprietary Name</h3>
-                            <ul>
-                                <li>
-                                    The <b>proper name</b> for a product is the name assigned to the drug in Section
-                                    C.01.002
-                                    of the <em>Food&nbsp;and&nbsp;Drug&nbsp;Regulations</em>, or in boldface type in
-                                    other Sections of the <em>Regulations</em> or the name of the drug in its finished
-                                    form
-                                    identified in the title of a monograph or in any of the official publications listed
-                                    in Schedule B to the <em>Food and Drugs Act</em>. Example: Acetaminophen, Ferrous
-                                    Sulphate
-                                    Tablets.
-                                </li>
-                                <li>
-                                    The <b>common name</b> is the name by which a single ingredient drug is commonly
-                                    known / designated in scientific or technical journals <b>other than</b> the
-                                    publications
-                                    referred to in Schedule B to the <em>Food and Drugs Act</em>. The common name
-                                    includes the
-                                    pharmaceutical form when used in relation to the finished drug product.
-                                </li>
-                                <li>
-                                    If there is no proper name and the drug is comprised of a single medicinal
-                                    ingredient, enter the common name. If there is no proper name and the drug is
-                                    comprised of more than one medicinal ingredient, leave Section 9 blank. For a
-                                    clinical trial all the active substances should be listed. If the product comprises
-                                    more than one ingredient, the proper name of the ingredients should be captured and
-                                    separated by a forward slash (/).
-                                </li>
-                            </ul>
+                    <section aria-live="assertive">
+                        <div ng-if="!dos.isFrench()"
+                             ng-include="'app/scripts/templates/dossier/tpl-dossier-enrolment-en.html'">
+                        </div>
+                        <div ng-if="dos.isFrench()"
+                             ng-include="'app/scripts/templates/dossier/tpl-dossier-enrolment-fr.html'">
                         </div>
                     </section>
                 </div>
@@ -260,16 +190,12 @@
                         <div class="panel-body">
                             <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[2]"
                                  class="alert-info" close="dos.closeAlert(2)">
-                                <section>
-                                    <div>
-                                        <ul>
-                                            <li>Record the appropriate therapeutic and pharmacological classification
-                                                for the drug,
-                                                e.g. calcium channel blocker, biological response modifier, histamine
-                                                H2-receptor
-                                                antagonist, disinfectant.
-                                            </li>
-                                        </ul>
+                                <section aria-live="assertive">
+                                    <div ng-if="!dos.isFrench()"
+                                         ng-include="'app/scripts/templates/dossier/tpl-dossier-thera-en.html'">
+                                    </div>
+                                    <div ng-if="dos.isFrench()"
+                                         ng-include="'app/scripts/templates/dossier/tpl-dossier-thera-fr.html'">
                                     </div>
                                 </section>
                             </div>
@@ -320,25 +246,11 @@
                         <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[3]"
                              class="alert-info" close="dos.closeAlert(3)">
                             <section aria-live="assertive">
-                                <div>
-                                    <ul>
-                                        <li>a drug in respect of which a notice of compliance is issued pursuant to
-                                            section C.08.004 and which is marketed in Canada by the innovator of the
-                                            drug,
-                                        </li>
-                                        <li>a drug, acceptable to the Minister, that can be used for the purpose of
-                                            demonstrating bioequivalence on the basis of pharmaceutical and, where
-                                            applicable, bioavailability characteristics, where a drug in respect of
-                                            which a notice of compliance has been issued pursuant to section C.08.004
-                                            cannot be used for that purpose because it is no longer marketed in Canada,
-                                            or
-                                        </li>
-                                        <li> drug, acceptable to the Minister, that can be used for the purpose of
-                                            demonstrating bioequivalence on the basis of pharmaceutical and, where
-                                            applicable, bioavailability characteristics, in comparison to a drug
-                                            referred to in paragraph a).
-                                        </li>
-                                    </ul>
+                                <div ng-if="!dos.isFrench()"
+                                     ng-include="'app/scripts/templates/dossier/tpl-dossier-ref-product-en.html'">
+                                </div>
+                                <div ng-if="dos.isFrench()"
+                                     ng-include="'app/scripts/templates/dossier/tpl-dossier-ref-product-fr.html'">
                                 </div>
                             </section>
                         </div>
@@ -384,47 +296,11 @@
                         <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[4]"
                              class="alert-info" close="dos.closeAlert(4)">
                             <section aria-live="assertive">
-                                <div>
-                                    <ul>
-                                        <li>Drug Product Formulation Information Drug Product formulation information
-                                            will be used to generate the DIN at the end of the review process.
-                                        </li>
-                                        <li>Each section with a save button must be saved individually; otherwise
-                                            incomplete information will be lost.
-                                        </li>
-                                    </ul>
-                                    <h3>Formulations</h3>
-                                    <ul>
-                                        <li>The formulation “ID” is auto generated by the template when you click on
-                                            “Add Formulation”.
-                                        </li>
-                                        <li>Sponsors may choose to add a formulation name for easier identification.
-                                        </li>
-                                        <li>Sponsors should always select the medicinal ingredient name from the
-                                            searchable list where possible. If the medicinal ingredient name is not
-                                            found in the list, enter the new medicinal ingredient name in this field.
-                                        </li>
-                                        <li>Copy button: After saving ingredient / formulation details, sponsors may
-                                            choose to copy those details into a new ingredient / formulation record and
-                                            change one or more fields as required. This will help minimize the amount of
-                                            data entry for similar ingredients / formulations.
-                                        </li>
-                                    </ul>
-                                    <h3>Animal / human sourced details</h3>
-                                    <ul>
-                                        <li>When an ingredient/material is identified as Animal / Human sourced,
-                                            sponsors
-                                            must provide additional details by selecting the “Animal / Human Sourced”
-                                            tab
-                                            next to the “Formulations” tab.
-                                        </li>
-                                        <li>A list of ingredient / materials for which additional details must be
-                                            provided
-                                            is displayed at the top of this section.
-                                        </li>
-                                        <li>The “Ingredient or Material Name” field in this section is case-sensitive.
-                                        </li>
-                                    </ul>
+                                <div ng-if="!dos.isFrench()"
+                                     ng-include="'app/scripts/templates/dossier/tpl-dossier-product-en.html'">
+                                </div>
+                                <div ng-if="dos.isFrench()"
+                                     ng-include="'app/scripts/templates/dossier/tpl-dossier-product-fr.html'">
                                 </div>
                             </section>
                         </div>
@@ -503,17 +379,12 @@
                 <div class="panel-body">
                     <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[5]"
                          class="alert-info" close="dos.closeAlert(5)">
-                        <section>
-                            <div>
-                                <ul>
-                                    <li>The Primary REP contact is the person to be contacted by Health Canada if there
-                                        are any issues or clarifications required for this template when it’s submitted
-                                        for approval.
-                                    </li>
-                                    <li>Sponsors may choose to provide an Alternate REP contact, however this is not a
-                                        requirement.
-                                    </li>
-                                </ul>
+                        <section aria-live="assertive">
+                            <div ng-if="!dos.isFrench()"
+                                 ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-en.html'">
+                            </div>
+                            <div ng-if="dos.isFrench()"
+                                 ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-fr.html'">
                             </div>
                         </section>
                     </div>
@@ -550,14 +421,11 @@
                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[6]"
                      class="alert-info" close="dos.closeAlert(6)">
                     <section aria-live="assertive">
-                        <div>
-                            <ul>
-                                <li>Click the "Save Draft for Filing" button to generate the draft XML file.</li>
-                                <li>Submit the created file to Health Canada using the Common Electronic Submission
-                                    Gateway (CESG).
-                                </li>
-                                <li>Refer to the REP guidance document for detailed information.</li>
-                            </ul>
+                        <div ng-if="!dos.isFrench()"
+                             ng-include="'app/scripts/templates/dossier/tpl-dossier-save-en.html'">
+                        </div>
+                        <div ng-if="dos.isFrench()"
+                             ng-include="'app/scripts/templates/dossier/tpl-dossier-save-fr.html'">
                         </div>
                     </section>
                 </div>

@@ -41,13 +41,13 @@
         var repContactService = new RepContactService();
         vm.columnDef = [
             {
-                label: "FIRST_NAME",
+                label: "FIRSTNAME",
                 binding: "givenName",
                 width: "40"
             },
 
             {
-                label: "LAST_NAME",
+                label: "LASTNAME",
                 binding: "surname",
                 width: "40"
             },

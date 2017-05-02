@@ -56,10 +56,12 @@ var paths = {
     relLib: 'app/lib/',
     data: './app/data/',
     scripts: baseScript,
+    templates:'app/scripts/templates/',
     relScript: '/app/scripts/',
     components: baseScript + '/components/',
     directives: baseScript + '/directives/',
     services: baseScript + '/services/',
+    templates: baseScript + '/templates/',
     wetBase: wetBase
 };
 
@@ -267,17 +269,17 @@ var componentFolders = {
     diffFileIO: 'fileIODiff/',
     nodesRender: 'nodes-renderer/',
     diffMain: 'diff-main/',
-    errorSummary: 'error-summary',
-    cspMain:'cspMain',
-    cspContact:'cspContactRecord',
-    cspHCOnly:'cspHealthCanadaOnly',
-    cspMainAppl:'cspMainAppl',
-    cspPatent: 'cspPatent',
-    cspTimelySub: 'cspTimelySubmission',
-    cspFeePayment: 'cspFeePayment',
-    cspCert: 'cspCertification',
-    errorMsg: 'error-message',
-    cspApplicantList:'cspContactList'
+    errorSummary: 'error-summary/',
+    cspMain:'cspMain/',
+    cspContact:'cspContactRecord/',
+    cspHCOnly:'cspHealthCanadaOnly/',
+    cspMainAppl:'cspMainAppl/',
+    cspPatent: 'cspPatent/',
+    cspTimelySub: 'cspTimelySubmission/',
+    cspFeePayment: 'cspFeePayment/',
+    cspCert: 'cspCertification/',
+    errorMsg: 'error-message/',
+    cspApplicantList:'cspContactList/'
 };
 
 //exclude custom styles only lib
@@ -302,7 +304,8 @@ var libProd = [
     paths.lib + libFileNames.xml2Json,
     paths.lib + libFileNames.messagesMin,
     paths.lib + libFileNames.ariaMin,
-    paths.lib + libFileNames.uibTemplates
+    paths.lib + libFileNames.uibTemplates,
+    paths.lib + libFileNames.ngIf
 ];
 
 var libCsp=[
@@ -494,6 +497,14 @@ var transactionServiceFileNames = [
     serviceFileNames.hpfbConstants
 
 ];
+// Template folders
+var activityTemplates=["activity/"];
+var transactionTemplates=["transaction/"];
+var companyTemplates = ["company/"];
+var dossierTemplates = ["dossier/"];
+
+
+
 // Complementary Supplementary Protection Application Form
 var cspServiceFileNames =
     [
@@ -535,6 +546,8 @@ var dossierDirectiveFolders =
     [
         directiveFolders.numberOnly
     ];
+
+
 
 
 //Transaction Form directives
@@ -965,7 +978,7 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
  * Copy the source files based on the arrays for the different components
  *
  * */
-pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, directiveFolders, isHtmlMin) {
+pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, directiveFolders,templateFolders, isHtmlMin) {
     var htmlArray = [];
     var jsArray = [];
 
@@ -983,6 +996,13 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
         jsArray.push(paths.directives + directiveFolders[i] + "**/*.js");
         htmlArray.push(paths.directives + directiveFolders[i] + "**/*.html")
     }
+    var templatesArray=[];
+    for (var i = 0; i < templateFolders.length; i++) {
+        folderPath = paths.templates + templateFolders[i] + '**/*';
+        templatesArray.push(folderPath + '.html');
+    }
+    //never add a date for templates
+    pipes.copyHtml(gulp.src(templatesArray, {read: true, base: './'}), "", destDir, isHtmlMin);
 
     var copySourcesJs = gulp.src(jsArray, {read: true, base: './'});
     var copySourcesHtml = gulp.src(htmlArray, {read: true, base: './'});
@@ -1209,7 +1229,7 @@ function createSuffixDate() {
 gulp.task('dev-activity-copySrc', function () {
     /*  return (pipes.copyActivitySrc(false, paths.buildDevActivity))*/
     return (
-        pipes.copySrcs(true, paths.buildDevActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, activityTemplates, false)
     );
 
 });
@@ -1424,7 +1444,7 @@ gulp.task('dev-csp-clean', function () {
 //copy all the needed files for company
 gulp.task('dev-company-copySrc', function () {
     return (
-        pipes.copySrcs(true, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders,companyTemplates, false)
     )
 });
 
@@ -1481,7 +1501,7 @@ gulp.task('dev-company-copyWet', function () {
 gulp.task('dev-transaction-copySrc', function () {
 
     return (
-        pipes.copySrcs(true, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders,transactionTemplates, false)
     );
 
 
@@ -1577,7 +1597,7 @@ gulp.task('dev-dossier-copyTranslate', [], function () {
 
 gulp.task('dev-dossier-copySrc', [], function () {
     return (
-        pipes.copySrcs(true, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders,dossierTemplates, false)
     )
 });
 
@@ -1663,7 +1683,7 @@ gulp.task('prod-activity-copyTranslateFiles', function () {
 //copy source files
 gulp.task('prod-activity-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, true)
+        pipes.copySrcs(false, paths.buildProdActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders,activityTemplates, true)
     );
 });
 
@@ -1678,7 +1698,7 @@ gulp.task('prod-activity-deleteSourceFiles', function () {
 
 gulp.task('prod-company-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, true)
+        pipes.copySrcs(false, paths.buildProdCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders,companyTemplates, true)
     );
 });
 
@@ -1859,7 +1879,7 @@ gulp.task('prod-dossier-createRootJsFiles', [], function () {
 
 gulp.task('prod-dossier-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, true)
+        pipes.copySrcs(false, paths.buildProdDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders,dossierTemplates, true)
     );
 });
 
@@ -1925,7 +1945,7 @@ gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFi
 
 gulp.task('prod-transaction-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, true)
+        pipes.copySrcs(false, paths.buildProdTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders,transactionTemplates, true)
     );
 });
 
@@ -2046,7 +2066,7 @@ gulp.task('dev-csp-copyWet', function () {
 
 gulp.task('dev-csp-copySrc', function () {
     return (
-        pipes.copySrcs(true, paths.buildDevCSP, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders, false)
+        pipes.copySrcs(true, paths.buildDevCSP, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders,[], false)
     )
 });
 

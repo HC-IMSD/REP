@@ -8,9 +8,9 @@
             controllerAs: 'main'
         });
 
-    TransactionMainCtrl.$inject = ['TransactionService', 'hpfbFileProcessing', '$filter'];
+    TransactionMainCtrl.$inject = ['TransactionService', 'hpfbFileProcessing', '$filter','$translate','ENGLISH'];
 
-    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter) {
+    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, ENGLISH) {
 
         var vm = this;
         vm.savePressed = false;
@@ -20,7 +20,7 @@
         vm.transaction = vm.transactionService.getModelInfo();
         vm.showContent = _loadFileContent;
         vm.alerts = [false, false];
-
+        vm.lang = $translate.proposedLanguage() || $translate.use();
         /**
          *
          * @ngdoc method Saves the model content in JSON format
@@ -140,7 +140,13 @@
             }
         };
 
-
+        /**
+         * Determines if the language used is french
+         * @returns {boolean}
+         */
+        vm.isFrench=function(){
+            return(vm.lang!==ENGLISH);
+        };
 
     }
 })();
