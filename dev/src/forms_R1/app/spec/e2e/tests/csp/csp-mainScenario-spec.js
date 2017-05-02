@@ -14,10 +14,11 @@
 var csp_url, lang, formType;
 
 var UiUtil = require('../../util/util-ui.js');
-var cspData=require('../../../e2e/test-data/csp.json');
-var contactData=require('../../../e2e/test-data/contact.json');
-var addressData=require('../../../e2e/test-data/address.json');
-
+var cspData = require('../../../e2e/test-data/csp.json');
+var contactData = require('../../../e2e/test-data/contact.json');
+var addressData = require('../../../e2e/test-data/address.json');
+var remote = remote = require('selenium-webdriver/remote');
+var path = require('path');
 
 var CspMain = require('../../component-definitions/csp/def-cmp-csp-main');
 var CspCertification = require('../../component-definitions/csp/def-cmp-csp-certification');
@@ -47,6 +48,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             csp_url = "csp/cspEXT-fr.html"
         } else {
             //error condition
+            //csp_url = "csp/cspEXT-en.html"
             csp_url = "";
         }
 
@@ -57,52 +59,82 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         patentObj = new CspPatent();
         paymentObj = new CspPayment();
         timelySubObj = new CspTimelySub();
-        uiUtil=new UiUtil();
+        uiUtil = new UiUtil();
     });
 
-    describe('Fill in CSP form information', function () {
+    describe('Get Browser', function () {
+        it('fff', function () {
 
-        it('Complete Applicant Record Information',function(){
-            var root=mainObj.getRoot();
-            contactObj.getApplicantContact(root).then(function(contact) {
-                contactObj.setSalutation(contact,contactData.salutation.MRS[lang]);
-                contactObj.setFirstName(contact,contactData.firstNames.typical);
-                contactObj.setLastName(contact,contactData.lastNames.typical);
-                contactObj.setInitials(contact,contactData.initials.typical);
-                contactObj.setJobTitle(contact,contactData.jobTitle.typical);
-                contactObj.setPhone(contact,contactData.phone.typical);
-                contactObj.setPhoneExt(contact,contactData.phoneExt.typical);
-                contactObj.setFax(contact,contactData.fax.typical);
-                contactObj.setEmail(contact,contactData.email.typical);
-                contactObj.setStreetValue(contact,addressData.streetAddress.typical[lang]);
-                contactObj.setCountryListValue(contact,addressData.country.CAN[lang]);
-                contactObj.setStateListValue(contact,addressData.province.ON);
-                contactObj.setCityValue(contact,addressData.city.typical);
-                contactObj.setPostalCodeTextValue(contact,"k1a3n1");
+            //setfile detector
 
-                expect(contactObj.getSalutation(contact)).toEqual(contactData.salutation.MRS.expect);
-                expect(contactObj.getFirstName(contact)).toEqual(contactData.firstNames.typical);
-                expect(contactObj.getLastName(contact)).toEqual(contactData.lastNames.typical);
-                expect(contactObj.getInitials(contact)).toEqual(contactData.initials.typical);
-                expect(contactObj.getJobTitle(contact)).toEqual(contactData.jobTitle.typical);
-                expect(contactObj.getPhone(contact)).toEqual(contactData.phone.typical);
-                expect(contactObj.getPhone(contact)).toEqual(contactData.phone.typical);
-            })
+            browser.setFileDetector(new remote.FileDetector());
+            // browser.setFileDetector(new remote.DriverService.FileDetector());
+           /// browser.driver.setFileDetector(new browser.remote.FileDetector);
+            var fileToUpload = './test.txt';
+            var absolutePath = path.resolve(__dirname, fileToUpload);
+
+            //var fileElem = element(by.css('input[type="file"]'));
+            var fileElem = element(by.id('fileLoad'));
+            // Unhide file input
+            //browser.executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; arguments[0].style.width = '1px';  arguments[0].style.opacity = 1", fileElem.getWebElement());
+
+            fileElem.sendKeys(absolutePath);
+
+            // take a breath
+            browser.driver.sleep(4000);
+
+            // click upload button
+           // $('#uploadButton').click();
+            //element(by.css('button[data-ng-click="uploadFile(file)"]')).click(); // does post request
+            element(by.css('#uploadButton')).click();
+        });
+
+    });
+
+
+    xdescribe('Fill in CSP form information', function () {
+
+
+
+        it('Complete Applicant Record Information', function () {
+            var root = mainObj.getRoot();
+            var contact = contactObj.getApplicantContact(root)
+
+            contactObj.setSalutation(contact, contactData.salutation.MRS[lang]);
+            contactObj.setFirstName(contact, contactData.firstNames.typical);
+            contactObj.setLastName(contact, contactData.lastNames.typical);
+            contactObj.setInitials(contact, contactData.initials.typical);
+            contactObj.setJobTitle(contact, contactData.jobTitle.typical);
+            contactObj.setPhone(contact, contactData.phone.typical);
+            contactObj.setPhoneExt(contact, contactData.phoneExt.typical);
+            contactObj.setFax(contact, contactData.fax.typical);
+            contactObj.setEmail(contact, contactData.email.typical);
+            contactObj.setStreetValue(contact, addressData.streetAddress.typical[lang]);
+            contactObj.setCountryListValue(contact, addressData.country.CAN[lang]);
+            contactObj.setStateListValue(contact, addressData.province.ON.en);
+            contactObj.setCityValue(contact, addressData.city.typical);
+            contactObj.setPostalCodeTextValue(contact, "k1a3n1");
+
+            expect(contactObj.getSalutation(root)).toEqual("string:" + contactData.salutation.MRS.expect);
+            expect(contactObj.getFirstName(contact)).toEqual(contactData.firstNames.typical);
+            expect(contactObj.getLastName(contact)).toEqual(contactData.lastNames.typical);
+            expect(contactObj.getInitials(contact)).toEqual(contactData.initials.typical);
+            expect(contactObj.getJobTitle(contact)).toEqual(contactData.jobTitle.typical);
+            expect(contactObj.getPhone(contact)).toEqual(contactData.phone.typical);
 
         });
 
 
-
         it('Fill in Patent information', function () {
-           var root=mainObj.getRoot();
+            var root = mainObj.getRoot();
             //DATE hack relies on OS using YYYY-MM-DD
-            var expectedGrantDate="2007-05-15"; //format saved
-            var expectedExpiryDate="2022-12-05"; //format saved
-            var expectedFilingDate="2006-12-14"; //format saved
-            patentObj.setPatentNumValue(root,cspData.patentNum.typical);
-            patentObj.setGrantDateValue(root,"002007-5-15");
-            patentObj.setFilingDateValue(root,"002006-12-14");
-            patentObj.setExpiryDateValue(root,"002022-12-05");
+            var expectedGrantDate = "2007-05-15"; //format saved
+            var expectedExpiryDate = "2022-12-05"; //format saved
+            var expectedFilingDate = "2006-12-14"; //format saved
+            patentObj.setPatentNumValue(root, cspData.patentNum.typical);
+            patentObj.setGrantDateValue(root, "002007-5-15");
+            patentObj.setFilingDateValue(root, "002006-12-14");
+            patentObj.setExpiryDateValue(root, "002022-12-05");
 
             expect(patentObj.getGrantDateValue(root)).toEqual(expectedGrantDate);
             expect(patentObj.getExpiryDateValue(root)).toEqual(expectedExpiryDate);
@@ -113,15 +145,15 @@ describe('Certificate of Supplementary Protection Main Test', function () {
 
 
         it('Fill in certification info', function () {
-            var root=mainObj.getRoot();
+            var root = mainObj.getRoot();
             //TODO handling dates across browsers is hard!
-            var expectedCertDate="2007-05-15"; //format saved
+            var expectedCertDate = "2007-05-15"; //format saved
 
-            certObj.setDateSignedValue(root,"002007","05","15");
-            certObj.setSurnameValue(root,cspData.lastNames.typical);
-            certObj.setGivenNameValue(root,cspData.firstNames.typical);
-            certObj.setTitleValue(root,cspData.jobTitle.typical);
-            certObj.setInitialsValue(root,cspData.initials.typical);
+            certObj.setDateSignedValue(root, "002007", "05", "15");
+            certObj.setSurnameValue(root, cspData.lastNames.typical);
+            certObj.setGivenNameValue(root, cspData.firstNames.typical);
+            certObj.setTitleValue(root, cspData.jobTitle.typical);
+            certObj.setInitialsValue(root, cspData.initials.typical);
 
             expect(certObj.getSurnameValue(root)).toEqual(cspData.lastNames.typical);
             expect(certObj.getGivenNameValue(root)).toEqual(cspData.firstNames.typical);
@@ -136,7 +168,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
 });
 
 
-describe('pause', function () {
+xdescribe('pause', function () {
     it(' Pause Test', function () {
         browser.pause();
 

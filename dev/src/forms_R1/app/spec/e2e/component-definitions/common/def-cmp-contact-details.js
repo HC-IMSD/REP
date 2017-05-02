@@ -26,7 +26,9 @@ var ContactDetails = function () {
     };
 
     this.getSalutationValue = function (parent) {
-        return parent.element(by.model(_salutationModelString)).getAttribute('value');
+       // var temp=  parent.element(by.model(_salutationModelString))
+       // var result=temp.getAttribute('value');
+        return (parent.element(by.model(_salutationModelString))).getAttribute('value');
     };
     /*  this.getSalutationCtrl = function () {
      return (_salutationSelect);

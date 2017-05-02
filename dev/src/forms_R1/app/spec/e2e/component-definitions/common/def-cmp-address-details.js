@@ -61,7 +61,6 @@ var AddressDetails = function () {
 
     };
 
-
     this.setStateListValue=function(parent,value){
         browser.selectOption(By.model(stateList_modelString),value,parent);
     };

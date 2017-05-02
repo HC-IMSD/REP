@@ -30,12 +30,28 @@ var CspContact = function () {
 
     };
     this.getApplicantContact = function (parent) {
-          var deferred = protractor.promise.defer();
+       /*   var deferred = protractor.promise.defer();
          element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index')).then(function (items) {
          console.log("Numnber of contacts" + items.length)
          return deferred.fulfill(items[0]);
          });
-         return deferred.promise;
+         return deferred.promise;*/
+        //var contactList=element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index'));
+        return( this.getContactList(parent).get(0));
+
+    };
+
+
+    this.getContactList = function () {
+        /*   var deferred = protractor.promise.defer();
+         element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index')).then(function (items) {
+         console.log("Numnber of contacts" + items.length)
+         return deferred.fulfill(items[0]);
+         });
+         return deferred.promise;*/
+        var contactList=element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index'));
+        return(contactList);
+
     };
 
     this.setApplicantNameValue = function (parent) {
@@ -51,62 +67,62 @@ var CspContact = function () {
     };
 
     this.getSalutation = function (parent) {
-        contactDetails.getSalutationValue(parent);
+        return contactDetails.getSalutationValue(parent);
     };
 
     this.setFirstName = function (parent, value) {
         contactDetails.setFirstNameValue(parent, value)
     };
     this.getFirstName = function (parent) {
-        contactDetails.getFirstNameValue(parent);
+        return contactDetails.getFirstNameValue(parent);
     };
     this.setLastName = function (parent, value) {
         contactDetails.setLastNameValue(parent, value)
     };
     this.getLastName = function (parent) {
-        contactDetails.getLastNameValue(parent)
+        return contactDetails.getLastNameValue(parent)
     };
     this.setInitials = function (parent, value) {
         contactDetails.setInitialsValue(parent, value)
     };
     this.getInitials = function (parent) {
-        contactDetails.getInitialsValue(parent)
+        return contactDetails.getInitialsValue(parent)
     };
     this.setJobTitle = function (parent, value) {
         contactDetails.setJobTitleValue(parent, value)
     };
     this.getJobTitle = function (parent) {
-        contactDetails.getJobTitleValue(parent)
+       return contactDetails.getJobTitleValue(parent)
     };
     this.setPhone = function (parent, value) {
         contactDetails.setPhoneValue(parent, value)
     };
     this.getPhone = function (parent) {
-        contactDetails.getPhoneValue(parent)
+        return contactDetails.getPhoneValue(parent)
     };
     this.setPhoneExt = function (parent, value) {
         contactDetails.setPhoneExtValue(parent, value)
     };
     this.getPhoneExt = function (parent) {
-        contactDetails.getPhoneExtValue(parent)
+        return contactDetails.getPhoneExtValue(parent)
     };
     this.setFax = function (parent, value) {
         contactDetails.setFaxValue(parent, value)
     };
     this.getFax = function (parent) {
-        contactDetails.getFaxValue(parent)
+        return contactDetails.getFaxValue(parent)
     };
     this.setEmail = function (parent, value) {
         contactDetails.setEmailValue(parent, value)
     };
     this.getEmail = function (parent) {
-        contactDetails.getEmailValue(parent)
+       return contactDetails.getEmailValue(parent)
     };
     this.setLanguage = function (parent, value) {
         contactDetails.setLanguageValue(parent, value)
     };
     this.getLanguage = function (parent) {
-        contactDetails.setLanguageValue(parent);
+       return contactDetails.setLanguageValue(parent);
     };
     this.setStreetValue = function (parent, value) {
         addressDetails.setStreetValue(parent, value);

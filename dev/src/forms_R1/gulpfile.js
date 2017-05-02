@@ -1405,10 +1405,10 @@ gulp.task('dev-activity-htmlBuild', ['dev-global-create-src-template', 'dev-acti
     var today = createSuffixDate();
     today = "";
     var deploy = deployType.dev;
-    pipes.createRootHtml(paths.devFrenchTemplate, activityRootTitles_fr, 'activityEnrolINT-fr.html', 'activityAppINT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', deploy);
-    pipes.createRootHtml(paths.devFrenchTemplate, activityRootTitles_fr, 'activityEnrolEXT-fr.html', 'activityAppEXT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', deploy);
-    pipes.createRootHtml(paths.devEnglishTemplate, activityRootTitles_en, 'activityEnrolEXT-en.html', 'activityAppEXT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', deploy);
-    pipes.createRootHtml(paths.devEnglishTemplate, activityRootTitles_en, 'activityEnrolINT-en.html', 'activityAppINT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', deploy);
+    pipes.createRootHtml(paths.devFrenchTemplate, activityRootTitles_fr, 'activityINT-fr.html', 'activityAppINT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', deploy);
+    pipes.createRootHtml(paths.devFrenchTemplate, activityRootTitles_fr, 'activityEXT-fr.html', 'activityAppEXT-fr' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'fr', deploy);
+    pipes.createRootHtml(paths.devEnglishTemplate, activityRootTitles_en, 'activityEXT-en.html', 'activityAppEXT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', deploy);
+    pipes.createRootHtml(paths.devEnglishTemplate, activityRootTitles_en, 'activityINT-en.html', 'activityAppINT-en' + today + '.js', jsRootContent.partialActivityRoot, paths.buildDevActivity, '/build/dev/activity', 'en', deploy);
 
     return (
         pipes.cleanBuild(paths.buildDevActivity + paths.translations)
@@ -2254,6 +2254,7 @@ gulp.task('protractor-localDevEnv', function () {
     gulp.src([
 
         'app/spec/e2e/tests/csp/*.js'
+      /*  'app/spec/e2e/tests/activity/!*.js'*/
     ])
         .pipe(protractor({
             configFile: "./protractorconf.js",
@@ -2261,7 +2262,7 @@ gulp.task('protractor-localDevEnv', function () {
             args: [
                 '--baseUrl', 'http://localhost:2121/dev/',
                 '--params.lang' ,'en',
-                '--params.formType','EXT',
+                '--params.formType','EXT'
             ]
         }))
 

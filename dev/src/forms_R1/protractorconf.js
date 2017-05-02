@@ -2,7 +2,7 @@
 exports.config = {
 
     seleniumAddress: 'http://localhost:4444/wd/hub',
-    //baseUrl: "https://lam-dev.hres.ca/rep_test/",
+    //baseUrl: "http://localhost:2121/dev/",
    /* specs: [
 
         'app/spec/e2e/tests/transaction/!*.js',
