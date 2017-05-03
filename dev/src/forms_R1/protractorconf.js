@@ -22,10 +22,10 @@ exports.config = {
                 // Set download path and avoid prompting for download even though
                 // this is already the default on Chrome but for completeness
                 prefs: {
-                    'download': {
+                    /*'download': {
                         'prompt_for_download': false,
                         'default_directory': '/e2e/downloads/'
-                    }
+                    }*/
                 }
             }
         },

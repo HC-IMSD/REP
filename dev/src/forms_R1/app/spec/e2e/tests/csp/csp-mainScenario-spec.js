@@ -28,6 +28,7 @@ var CspPatent = require('../../component-definitions/csp/def-cmp-csp-patent');
 var CspPayment = require('../../component-definitions/csp/def-cmp-csp-payment');
 var CspTimelySub = require('../../component-definitions/csp/def-cmp-csp-timely-sub');
 
+var testRecords= require('../../test-data/csp/testRecords');
 
 var mainObj, certObj, contactObj, mainContentObj, patentObj, paymentObj, timelySubObj, uiUtil;
 
@@ -48,8 +49,8 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             csp_url = "csp/cspEXT-fr.html"
         } else {
             //error condition
-            //csp_url = "csp/cspEXT-en.html"
-            csp_url = "";
+            csp_url = "csp/cspEXT-en.html";
+            //csp_url = "";
         }
 
         mainObj.get(csp_url);
@@ -62,39 +63,8 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         uiUtil = new UiUtil();
     });
 
-    describe('Get Browser', function () {
-        it('fff', function () {
 
-            //setfile detector
-
-            browser.setFileDetector(new remote.FileDetector());
-            // browser.setFileDetector(new remote.DriverService.FileDetector());
-           /// browser.driver.setFileDetector(new browser.remote.FileDetector);
-            var fileToUpload = './test.txt';
-            var absolutePath = path.resolve(__dirname, fileToUpload);
-
-            //var fileElem = element(by.css('input[type="file"]'));
-            var fileElem = element(by.id('fileLoad'));
-            // Unhide file input
-            //browser.executeScript("arguments[0].style.visibility = 'visible'; arguments[0].style.height = '1px'; arguments[0].style.width = '1px';  arguments[0].style.opacity = 1", fileElem.getWebElement());
-
-            fileElem.sendKeys(absolutePath);
-
-            // take a breath
-            browser.driver.sleep(4000);
-
-            // click upload button
-           // $('#uploadButton').click();
-            //element(by.css('button[data-ng-click="uploadFile(file)"]')).click(); // does post request
-            element(by.css('#uploadButton')).click();
-        });
-
-    });
-
-
-    xdescribe('Fill in CSP form information', function () {
-
-
+    describe('Fill in CSP form information', function () {
 
         it('Complete Applicant Record Information', function () {
             var root = mainObj.getRoot();

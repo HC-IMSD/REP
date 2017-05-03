@@ -257,7 +257,10 @@
             return(vm.lang===FRENCH);
         };
 
-
+        vm.testMe=function(){
+            var result=JSON.parse(vm.test);
+            _loadFileContent(result);
+        }
     }
 })();
 

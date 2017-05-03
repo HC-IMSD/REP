@@ -1,0 +1,82 @@
+{
+  "test1": {
+    "jsonResult": {
+      "CERTIFICATE_SUPPLEMENTARY_PROTECTION": {
+        "template_type": "PHARMA",
+        "data_checksum": "",
+        "enrolment_version": "0.1",
+        "date_saved": "2017-04-27",
+        "software_version": "1.0.0",
+        "applicant": [
+          {
+            "billing_role": "Y",
+            "applicant_role": "Y",
+            "applicant_name": "Applicant Name",
+            "contact": {
+              "given_name": "dassds",
+              "initials": "",
+              "surname": "asdasdasds",
+              "title": "",
+              "phone_num": "111-111-1111",
+              "phone_ext": "",
+              "fax_num": "111-111-1111",
+              "email": "sfsdfdsf@asdaasad",
+              "salutation": "SALUT_DR",
+              "language_correspondance": "fr",
+              "job_title": "asddadas"
+            },
+            "address": {
+              "street_address": "123 main st",
+              "city": "Town",
+              "province_lov": "",
+              "province_text": "",
+              "country": {
+                "_label_en": "Algeria",
+                "_label_fr": "Algérie",
+                "__text": "DZA"
+              },
+              "postal_code": ""
+            }
+          }
+        ],
+        "health_canada_only": {
+          "company_id": "",
+          "application_id": "",
+          "date_received": "",
+          "hc_notes": ""
+        },
+        "application_info": {
+          "patent_info": {
+            "patent_number": "1111111",
+            "filing_date": "2017-04-12",
+            "granted_date": "2017-04-12",
+            "expiry_date": "2017-04-11"
+          },
+          "control_number": "111111",
+          "drug_use": "VETERINARY",
+          "time_application": "NOC",
+          "medicinal_ingredient": "asdasdsadaasdas",
+          "applicant_statement": "OWNER"
+        },
+        "timely_submission_info": {
+          "timely_submission_statement": "NO_APPLICATION",
+          "marketing_approval_date": "",
+          "marketing_country": "",
+          "marketing_country_eu": ""
+        },
+        "advanced_payment": {
+          "advanced_payment_type": "CHEQUE",
+          "advanced_payment_fee": 122.22,
+          "advanced_payment_ack": "Y"
+        },
+        "certification": {
+          "given_name": "adasd",
+          "initials": "",
+          "surname": "asdsad",
+          "job_title": "asdasdsaad",
+          "date_signed": "2017-04-04"
+        }
+      }
+    }
+  }
+}

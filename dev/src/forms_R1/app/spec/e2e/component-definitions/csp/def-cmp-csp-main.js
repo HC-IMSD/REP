@@ -9,8 +9,10 @@ var CspMain=function(){
 
     var uiUtil=new UiUtil();
 
-
-
+    var _version_modelString = "main.cspModel.enrolmentVersion";
+    var _dateSaved_modelString = "main.cspModel.dateSaved";
+    var _draftSaveId="btn_draftSave";
+    var _xmlSaveId="btn_xmlSave";
     /**
      * Sets up the browser and launches the form in maximized
      * Imports and binds all required functions. Since this is the top level
@@ -33,6 +35,21 @@ var CspMain=function(){
         return element(by.id('app-root'));
 
     };
+    this.getVersionValue = function () {
+        //this is in the root template before compilation
+
+        return element(by.model(_version_modelString)).getAttribute('value');
+    };
+    this.getSaveDateValue = function () {
+        //this is in the root template before compilation
+        return element(by.model(_dateSaved_modelString)).getAttribute('value');
+    };
+    this.saveDraft=function(){
+         element(by.id(_draftSaveId)).click();
+    }
+    this.saveXml=function(){
+        element(by.id(_xmlSaveId)).click();
+    }
 
 
 };

@@ -28,6 +28,8 @@ var templateFileFr = 'content-fr.html';
 //GLOBAL variable save
 var _DATESTAMP = "";
 
+
+
 //paths and relativePaths of interest for dev and prod
 var paths = {
     styles: 'app/styles/',
@@ -2223,6 +2225,21 @@ gulp.task('dev-csp-htmlBuild', ['dev-global-create-src-template', 'dev-csp-copyD
     );
 });
 
+gulp.task('dev-csp-injectTest', [], function () {
+    var ignoreDir = '/build/dev/csp';
+    var templateDir = paths.buildDevCSP+'app/scripts/components/'+componentFolders.cspMain;
+
+    var template= templateDir+"tpl-csp-main.html";
+    console.log(template)
+    var cspTest='<input id="testInput" type="text"  ng-model="main.test" ng-blur="main.testMe()" />';
+    return (gulp.src(template)
+            .pipe(htmlreplace({
+                test: cspTest
+            })).pipe(gulp.dest(templateDir))
+    );
+
+
+});
 
 
 //==================================================================
