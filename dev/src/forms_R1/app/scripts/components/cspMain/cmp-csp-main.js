@@ -209,7 +209,7 @@
             updateDate();
             if (vm.userType === INTERNAL_TYPE) {
                 if(!vm.cspForm.$pristine) {
-                    vm.cspModel.enrolmentVersion  = self.applicationInfoService.incrementMajorVersion(vm.cspModel.enrolmentVersion);
+                    vm.cspModel.enrolmentVersion  = vm.applicationInfoService.incrementMajorVersion(vm.cspModel.enrolmentVersion);
                 }
 
             }else{
