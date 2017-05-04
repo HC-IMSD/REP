@@ -35,6 +35,22 @@
   },
   "patentNum":{
     "typical":"1234567"
-
+  },
+  "controlNum":{
+    "typical":"123456"
+  },
+  "drugUse": {
+    "VET": {
+      "en": "Veterinary",
+      "fr": "",
+      "save":"string:VETERINARY"
+    },
+    "HUMAN": {
+      "en": "Human",
+      "fr": ""
+    }
+  },
+  "ingredient":{
+    "typical":"Ingredient 1, Ingredient 2, Ingredient 3"
   }
 }

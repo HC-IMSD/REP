@@ -27,10 +27,12 @@ var CspMainAppl = require('../../component-definitions/csp/def-cmp-csp-main-appl
 var CspPatent = require('../../component-definitions/csp/def-cmp-csp-patent');
 var CspPayment = require('../../component-definitions/csp/def-cmp-csp-payment');
 var CspTimelySub = require('../../component-definitions/csp/def-cmp-csp-timely-sub');
+var ErrorSummary = require('../../component-definitions/common/def-cmp-error-summary');
 
-var testRecords= require('../../test-data/csp/testRecords');
 
-var mainObj, certObj, contactObj, mainContentObj, patentObj, paymentObj, timelySubObj, uiUtil;
+var testRecords = require('../../test-data/csp/testRecords');
+
+var mainObj, certObj, contactObj, mainContentObj, patentObj, paymentObj, timelySubObj, uiUtil, errorSummaryObj;
 
 describe('Certificate of Supplementary Protection Main Test', function () {
     beforeAll(function () {
@@ -61,6 +63,27 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         paymentObj = new CspPayment();
         timelySubObj = new CspTimelySub();
         uiUtil = new UiUtil();
+        errorSummaryObj = new ErrorSummary();
+    });
+
+
+    describe('Check the Error Summary Object', function () {
+
+        it('Check that the error Summary displays expected errors on empty form', function () {
+            var root = mainObj.getRoot();
+            mainObj.saveXml();
+
+            uiUtil.getAttributeValue(mainObj.getMainForm(), "name").then(function (value) {
+                var errorSummary = errorSummaryObj.getErrorSummaryElementByPartialId(root, value);
+                expect(errorSummary).toBeDefined();
+
+                errorSummaryObj.getIndividualErrors(root).count().then(function(value){
+                    console.log("number of errors "+value);
+                    expect(errorSummaryObj.getErrorsObj(errorSummary).count()).toEqual(value);
+                });
+            });
+            expect(errorSummaryObj.getIndividualErrors(root).count()).toEqual(29);
+        });
     });
 
 
@@ -112,7 +135,24 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             expect(patentObj.getPatentNumValue(root)).toEqual(cspData.patentNum.typical);
 
         });
+        it('Fill in Question 4-7',function(){
+            var root = mainObj.getRoot();
 
+            mainContentObj.setControlNumValue(root,cspData.controlNum.typical);
+            mainContentObj.setDrugUseValue(root,cspData.drugUse.VET.en);
+            mainContentObj.setMedIngredientValue(root,cspData.ingredient.typical);
+            //GRANT
+            mainContentObj.setTimeApplicationAsGrant(root);
+            browser.sleep(12000)
+            //test the values
+            expect(mainContentObj.getControlNumValue(root)).toEqual(cspData.controlNum.typical);
+            expect(mainContentObj.getDrugUseValue(root)).toEqual(cspData.drugUse.VET.save);
+            expect(mainContentObj.getMedIngredientValue(root)).toEqual(cspData.ingredient.typical);
+            expect(mainContentObj.getTimeApplicationValue(root)).toEqual('GRANT');
+
+
+
+        });
 
         it('Fill in certification info', function () {
             var root = mainObj.getRoot();

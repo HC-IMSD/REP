@@ -2005,12 +2005,14 @@ gulp.task('prod-csp-compileSrcJs', ['prod-csp-compileTranslateFile', 'prod-csp-c
 
     var srcPath = paths.buildProdCsp + 'app/scripts/';
     var dest = paths.buildProdCsp + 'app/scripts/';
-    var rootJsBaseName = "cspApp";
+    var rootJsBaseName = rootFileNames.cspRoot;
     var translateName = "cspTranslations";
     return (
         pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders, translateName, true)
     )
 });
+
+
 gulp.task('prod-csp-compileTranslateFile', ['prod-csp-copyTranslateFiles'], function () {
 
     var destPath = paths.buildProdCsp+ paths.relScript;
@@ -2270,7 +2272,7 @@ gulp.task('protractor-testEnv', function () {
 gulp.task('protractor-localDevEnv', function () {
     gulp.src([
 
-        'app/spec/e2e/tests/csp/*.js'
+        'app/spec/e2e/tests/csp/csp-main*.js'
       /*  'app/spec/e2e/tests/activity/!*.js'*/
     ])
         .pipe(protractor({

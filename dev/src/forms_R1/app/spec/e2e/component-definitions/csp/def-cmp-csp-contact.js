@@ -21,6 +21,7 @@ var CspContact = function () {
 
     this.getBillingContact = function (parent) {
 
+        //TODO this doesn't seem the right way to do this in protractor
         var contacts = parent.element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index'));
         if (contacts.length < 2) {
 

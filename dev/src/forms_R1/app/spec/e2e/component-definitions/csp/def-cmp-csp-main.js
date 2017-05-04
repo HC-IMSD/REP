@@ -30,6 +30,10 @@ var CspMain=function(){
         browser.driver.manage().window().maximize();
     };
 
+    this.getMainForm=function(){
+        return element(by.id('csp-form'));
+    }
+
     this.getRoot = function () {
         //this is in the root template before compilation
         return element(by.id('app-root'));

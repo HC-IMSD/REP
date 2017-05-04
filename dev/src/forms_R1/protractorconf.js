@@ -51,10 +51,10 @@ exports.config = {
                 auditRulesToRun: [
                     'pageWithoutTitle',
                     'controlsWithoutLabel',
-                    'requiredAriaAttributeMissing',
-                    'unfocusableElementsWithOnClick',
-                    'mainRoleOnInappropriateElement',
-                    'badAriaRole'
+                  /*  'requiredAriaAttributeMissing',*/
+                   /* 'unfocusableElementsWithOnClick',*/
+                  /*  'mainRoleOnInappropriateElement'*/
+                   /* 'badAriaRole'*/
                     /*'lowContrastElements'*/
                     /*  'badAriaAttributeValue', outer hmyml error*/
                     /* 'nonExistentAriaLabelledbyElement' test causes collectIDRefs Errors*/
@@ -63,7 +63,7 @@ exports.config = {
                 auditRulesToSkip: []
             }
         },
-        axe: true,
+        axe: false,
         package: 'protractor-accessibility-plugin'
     }],
 

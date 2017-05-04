@@ -208,9 +208,17 @@ var UiUtil = function () {
            return deferred.fulfill(value);
         });
         return deferred.promise;
+    };
+
+    this.getAttributeValue=function(elementObj,attr) {
+        return browser.wait(function () {
+            return elementObj.getAttribute(attr).then(function (value) {
+                return value;
+            });
+        });
     }
 };
-//'return (new Date('+year+','+month+','+day+')).toLocaleDateString()'
+
 
 
 //make available externally
