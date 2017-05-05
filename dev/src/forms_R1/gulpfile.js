@@ -2272,8 +2272,8 @@ gulp.task('protractor-testEnv', function () {
 gulp.task('protractor-localDevEnv', function () {
     gulp.src([
 
-        'app/spec/e2e/tests/csp/csp-main*.js'
-      /*  'app/spec/e2e/tests/activity/!*.js'*/
+       'app/spec/e2e/tests/csp/csp-main*.js'
+     /*  'app/spec/e2e/tests/csp/!*.js'*/
     ])
         .pipe(protractor({
             configFile: "./protractorconf.js",

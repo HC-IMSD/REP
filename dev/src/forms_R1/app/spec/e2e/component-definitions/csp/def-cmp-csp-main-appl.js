@@ -26,7 +26,8 @@ var CspMainAppl = function () {
     };
 
     this.setDrugUseValue = function (parent, value) {
-        browser.selectOption(by.model(_drugUse_modelString), value,parent);
+        //browser.selectHtmlDropList(parent,_drugUse_modelString,value);
+       browser.selectOption(by.model(_drugUse_modelString), value,parent);
     };
 
     this.getDrugUseValue = function (parent) {
@@ -40,21 +41,52 @@ var CspMainAppl = function () {
 
     this.setTimeApplicationAsGrant=function(parent){
 
-        parent.element(by.id("within120")).click();
+        parent.element(by.id("within120")).sendKeys(protractor.Key.SPACE);
     };
-    this.getTimeApplicationValue = function (parent) {
-      /*  return (parent.all(by.model(_timeApplication_modelString)).element(by.css("input[type='radio']:checked")).getAttribute('value');*/
-     //   return parent.element(by.model(_timeApplication_modelString)).getAttribute('value');
+    this.setTimeApplicationAsNOC = function (parent) {
+        parent.element(by.css("input[id^=time120_]")).sendKeys(protractor.Key.SPACE);
     };
 
     this.setApplicationStatementValue = function (parent, value) {
         parent.element(by.model(_applicantStatement_modelString)).sendKeys(value);
     };
 
-    this.getApplicationStatementValue = function (parent) {
-       // var radio = $("input[type='radio']:checked")
-        return parent.element(by.css("[ng-model=cspMainApplCtrl.model.timeApplication]:checked")).getAttribute('value')
+    this.setStatementAsApplicantAsOwner = function (parent, value) {
 
+        parent.element(by.css("input[id^=applicantApply_]")).sendKeys(protractor.Key.SPACE);
+
+    };
+    this.setStatementAsApplicantAsOwnerConsent = function (parent, value) {
+        parent.element(by.id("applicant-consent")).sendKeys(protractor.Key.SPACE);
+
+    };
+
+    //Question 7
+    this.getStatementsAsToApplicantValue = function (parent) {
+
+        return (parent.element(by.css('input[ng-model="cspMainApplCtrl.model.applicantStatement"]:checked')));
+    };
+
+    this.getApplicationStatementValue = function (parent) {
+       /*
+            element.all(by.model('cspMainApplCtrl.model.timeApplication')).each(function (element, index) {
+                console.log("gettimg one");
+
+                element.getAttribute('checked').then(function (text) {
+                    console.log("This is the checked value")
+                    console.log(index, text);
+                    indexChecked = index;
+                });
+                element.getAttribute('value').then(function (text) {
+                    console.log(index, text);
+                    if (index === indexChecked) {
+                        value = text
+                        console.log("This is what the value is" + value);
+                        return value;
+                    }
+                });
+            });*/
+        return (parent.element(by.css('input[ng-model="cspMainApplCtrl.model.timeApplication"]:checked')));
     };
     this.setMedIngredientValue=function(parent,value){
         parent.element(by.model(_medIngredient_modelString)).sendKeys(value);

@@ -5,11 +5,24 @@
 
 var UiUtil = function () {
 
+    this.UiUtil=function(){
+        browser.selectOption = this.selectOption.bind(browser);
+        browser.getUISelectOption = this.pickUISelectOption.bind(browser);
+        browser.getUISelectModelValue = this.getUISelectModelValue.bind(browser);
+        browser.selectHtmlDropList=this.selectHtmlDropListOption.bind(browser);
+        browser.UISelectSearch=this.UISelectSearch.bind(browser);
+        browser.selectTypeAheadPopupValue=this.selectTypeAheadPopupValue.bind(browser);
+    }
+
     this.init = function () {
         //browswer is  a global
         browser.selectOption = this.selectOption.bind(browser);
         browser.getUISelectOption = this.pickUISelectOption.bind(browser);
         browser.getUISelectModelValue = this.getUISelectModelValue.bind(browser);
+        browser.selectHtmlDropList=this.selectHtmlDropListOption.bind(browser);
+        browser.UISelectSearch=this.UISelectSearch.bind(browser);
+        browser.selectTypeAheadPopupValue=this.selectTypeAheadPopupValue.bind(browser);
+
     }
 
 
@@ -22,6 +35,36 @@ var UiUtil = function () {
         }
     };
 
+    this.selectHtmlDropListOption=function(parent,model,value){
+
+        parent.element(by.model(model)).$('[value='+value+']').click();
+
+    };
+
+  /*  exports.selectDropdownByText = function selectOption(element, item, milliseconds) {
+     var desiredOption;
+     element.findElements(by.tagName('option'))
+     .then(function findMatchingOption(options) {
+     options.some(function (option) {
+     option.getText().then(function doesOptionMatch(text) {
+     if (text.indexOf(item) != -1) {
+     desiredOption = option;
+     return true;
+     }
+     });
+     });
+     })
+     .then(function clickOption() {
+     if (desiredOption) {
+     desiredOption.click();
+     }
+     });
+     if (typeof milliseconds != 'undefined') {
+     browser.sleep(milliseconds);
+     }
+     };*/
+
+
     /**
      * Used for selecting a value from a HTML5 droplist control
      * @param selector- the protracto search criteria i.e by.model, by.id etch
@@ -33,12 +76,15 @@ var UiUtil = function () {
         if (parentElement) {
             selectList = parentElement.element(selector);
             selectList.click();
-            selectList.all(protractor.By.tagName('option'))
+            browser.sleep(100);
+            selectList.element(by.cssContainingText('option', item)).click();
+            /*selectList.all(protractor.By.tagName('option'))
                 .then(function findMatchingOption(options) {
                     options.some(function (option) {
                         option.getText().then(function doesOptionMatch(text) {
                             if (item === text) {
                                 desiredOption = option;
+
                                 return true;
                             }
                         });
@@ -48,11 +94,12 @@ var UiUtil = function () {
                     if (desiredOption) {
                         desiredOption.click();
                     }
-                });
+                });*/
 
         } else {
             selectList = this.findElement(selector);
             selectList.click();
+            browser.sleep(100);
             selectList.findElement(protractor.By.tagName('option'))
                 .then(function findMatchingOption(options) {
                     options.some(function (option) {
@@ -71,7 +118,17 @@ var UiUtil = function () {
                 });
         }
     };
+/*
+ var selectDropdownbyNum = function ( element, optionNum ) {
+ if (optionNum){
+ var options = element.findElements(by.tagName('option'))
+ .then(function(options){
+ options[optionNum].click();
+ });
+ }
+ };
 
+ */
 
     // Deprecrated Doesn't and pick a text option for the UI select box, not using search
     this.pickUISelectOption = function (item, selectList) {

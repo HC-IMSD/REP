@@ -63,6 +63,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         paymentObj = new CspPayment();
         timelySubObj = new CspTimelySub();
         uiUtil = new UiUtil();
+        //uiUtil.init();
         errorSummaryObj = new ErrorSummary();
     });
 
@@ -72,7 +73,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         it('Check that the error Summary displays expected errors on empty form', function () {
             var root = mainObj.getRoot();
             mainObj.saveXml();
-
+            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@browser@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ "+ browser.browserName)
             uiUtil.getAttributeValue(mainObj.getMainForm(), "name").then(function (value) {
                 var errorSummary = errorSummaryObj.getErrorSummaryElementByPartialId(root, value);
                 expect(errorSummary).toBeDefined();
@@ -93,13 +94,14 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             var root = mainObj.getRoot();
             var contact = contactObj.getApplicantContact(root)
 
-            contactObj.setSalutation(contact, contactData.salutation.MRS[lang]);
+            contactObj.setSalutationByText(contact, contactData.salutation.MRS[lang]);
             contactObj.setFirstName(contact, contactData.firstNames.typical);
             contactObj.setLastName(contact, contactData.lastNames.typical);
             contactObj.setInitials(contact, contactData.initials.typical);
             contactObj.setJobTitle(contact, contactData.jobTitle.typical);
             contactObj.setPhone(contact, contactData.phone.typical);
             contactObj.setPhoneExt(contact, contactData.phoneExt.typical);
+            contactObj.setLanguage(contact,contactData.language.ENGLISH.en);
             contactObj.setFax(contact, contactData.fax.typical);
             contactObj.setEmail(contact, contactData.email.typical);
             contactObj.setStreetValue(contact, addressData.streetAddress.typical[lang]);
@@ -125,9 +127,18 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             var expectedExpiryDate = "2022-12-05"; //format saved
             var expectedFilingDate = "2006-12-14"; //format saved
             patentObj.setPatentNumValue(root, cspData.patentNum.typical);
-            patentObj.setGrantDateValue(root, "002007-5-15");
-            patentObj.setFilingDateValue(root, "002006-12-14");
-            patentObj.setExpiryDateValue(root, "002022-12-05");
+            var grantDate = "2007-05-15"; //format saved
+            var expiryDate = "2022-12-05"; //format saved
+            var filingDate = "2006-12-14"; //format saved
+            //hack
+            if(browser.browserName==="chrome"){
+               grantDate ="00"+ grantDate;
+               expiryDate = "00"+expiryDate;
+                filingDate = "00"+filingDate;
+            }
+            patentObj.setGrantDateValue(root, grantDate);
+            patentObj.setFilingDateValue(root,filingDate);
+            patentObj.setExpiryDateValue(root, expiryDate);
 
             expect(patentObj.getGrantDateValue(root)).toEqual(expectedGrantDate);
             expect(patentObj.getExpiryDateValue(root)).toEqual(expectedExpiryDate);
@@ -135,31 +146,38 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             expect(patentObj.getPatentNumValue(root)).toEqual(cspData.patentNum.typical);
 
         });
-        it('Fill in Question 4-7',function(){
+        it('Fill in Question 4-7 (statements',function(){
             var root = mainObj.getRoot();
 
             mainContentObj.setControlNumValue(root,cspData.controlNum.typical);
             mainContentObj.setDrugUseValue(root,cspData.drugUse.VET.en);
             mainContentObj.setMedIngredientValue(root,cspData.ingredient.typical);
-            //GRANT
-            mainContentObj.setTimeApplicationAsGrant(root);
-            browser.sleep(12000)
+            // Set as GRANT
+           mainContentObj.setTimeApplicationAsGrant(root);
+           mainContentObj.setStatementAsApplicantAsOwner(root);
             //test the values
             expect(mainContentObj.getControlNumValue(root)).toEqual(cspData.controlNum.typical);
             expect(mainContentObj.getDrugUseValue(root)).toEqual(cspData.drugUse.VET.save);
             expect(mainContentObj.getMedIngredientValue(root)).toEqual(cspData.ingredient.typical);
-            expect(mainContentObj.getTimeApplicationValue(root)).toEqual('GRANT');
+            expect(mainContentObj.getApplicationStatementValue(root).getAttribute('value')).toEqual('GRANT');
+            expect(mainContentObj.getStatementsAsToApplicantValue(root).getAttribute('value')).toEqual('OWNER');
+        });
 
-
-
+        it('Fill in Question 7 Timely statements with Country',function() {
+            var root = mainObj.getRoot();
+            //timelySubObj
         });
 
         it('Fill in certification info', function () {
             var root = mainObj.getRoot();
             //TODO handling dates across browsers is hard!
             var expectedCertDate = "2007-05-15"; //format saved
+            var certDate = "2007-05-15";
+            if(browser.browserName==="chrome"){
+                certDate="00"+certDate;
+            };
 
-            certObj.setDateSignedValue(root, "002007", "05", "15");
+            certObj.setDateSignedValue(root,certDate);
             certObj.setSurnameValue(root, cspData.lastNames.typical);
             certObj.setGivenNameValue(root, cspData.firstNames.typical);
             certObj.setTitleValue(root, cspData.jobTitle.typical);

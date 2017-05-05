@@ -1,16 +1,17 @@
 // An example configuration file.
+var q = require('q');
 exports.config = {
 
     seleniumAddress: 'http://localhost:4444/wd/hub',
     //baseUrl: "http://localhost:2121/dev/",
-   /* specs: [
+    /* specs: [
 
-        'app/spec/e2e/tests/transaction/!*.js',
-        'app/spec/e2e/tests/dossier/!*.js',
-        'app/spec/e2e/tests/company/!*.js',
-        'app/spec/e2e/tests/activity/!*.js'
+     'app/spec/e2e/tests/transaction/!*.js',
+     'app/spec/e2e/tests/dossier/!*.js',
+     'app/spec/e2e/tests/company/!*.js',
+     'app/spec/e2e/tests/activity/!*.js'
 
-    ],*/
+     ],*/
     multiCapabilities: [
         {
             'browserName': 'chrome',
@@ -23,55 +24,74 @@ exports.config = {
                 // this is already the default on Chrome but for completeness
                 prefs: {
                     /*'download': {
-                        'prompt_for_download': false,
-                        'default_directory': '/e2e/downloads/'
-                    }*/
+                     'prompt_for_download': false,
+                     'default_directory': '/e2e/downloads/'
+                     }*/
                 }
             }
         },
-        /*{
+       /* {
          'browserName': 'internet explorer',
          'platform': 'ANY',
          version: '11'
-         },
+         },*/
          {
          'browserName': 'firefox'
 
-         }*/
+         }
 
     ],
     rootElement: '#app-root',
 
-    plugins: [{
+    plugins: [
+        {
 
-
-        chromeA11YDevTools: {
-            treatWarningsAsFailures: true,
-            auditConfiguration: {
-                auditRulesToRun: [
-                    'pageWithoutTitle',
-                    'controlsWithoutLabel',
-                  /*  'requiredAriaAttributeMissing',*/
-                   /* 'unfocusableElementsWithOnClick',*/
-                  /*  'mainRoleOnInappropriateElement'*/
-                   /* 'badAriaRole'*/
-                    /*'lowContrastElements'*/
-                    /*  'badAriaAttributeValue', outer hmyml error*/
-                    /* 'nonExistentAriaLabelledbyElement' test causes collectIDRefs Errors*/
-                    /*  'focusableElementNotVisibleAndNotAriaHidden' get outerHtml error*/
-                ],
-                auditRulesToSkip: []
-            }
+            chromeA11YDevTools: {
+                treatWarningsAsFailures: true,
+                auditConfiguration: {
+                    auditRulesToRun: [
+                        'pageWithoutTitle',
+                        'controlsWithoutLabel',
+                        /*  'requiredAriaAttributeMissing',*/
+                        /* 'unfocusableElementsWithOnClick',*/
+                        /*  'mainRoleOnInappropriateElement'*/
+                        /* 'badAriaRole'*/
+                        /*'lowContrastElements'*/
+                        /*  'badAriaAttributeValue', outer hmyml error*/
+                        /* 'nonExistentAriaLabelledbyElement' test causes collectIDRefs Errors*/
+                        /*  'focusableElementNotVisibleAndNotAriaHidden' get outerHtml error*/
+                    ],
+                    auditRulesToSkip: []
+                }
+            },
+            axe: false,
+            package: 'protractor-accessibility-plugin'
         },
-        axe: false,
-        package: 'protractor-accessibility-plugin'
-    }],
+        {
+            package: 'protractor-screenshoter-plugin',
+            screenshotPath: './app/spec/REPORTS/e2e',
+            screenshotOnExpect: 'failure+success',
+            screenshotOnSpec: 'none',
+            withLogs: 'true',
+            writeReportFreq: 'asap',
+            imageToAscii: 'failure',
+            clearFoldersBeforeTest: true
+        }
+    ],
 
     suites: {
-        csp:  'app/spec/e2e/tests/csp/*.js'
+        csp: 'app/spec/e2e/tests/csp/*.js'
     },
     jasmineDefaultOpts: {
         defaultTimeoutInterval: 120000
+    },
+
+    onPrepare: function() {
+        return q.fcall(function() {
+            browser.driver.getCapabilities().then(function(caps){
+                browser.browserName = caps.get('browserName');
+            });
+        }).delay(1000);
     }
 
 

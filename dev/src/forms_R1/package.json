@@ -65,6 +65,7 @@
     "ng-focus-if": "^1.0.7",
     "protractor": "^1.8.0",
     "protractor-accessibility-plugin": "^0.3.0",
+    "protractor-screenshoter-plugin": "^0.3.2",
     "q": "^1.1.2",
     "run-sequence": "^1.2.2",
     "select2-bootstrap-css": "^1.4.6",

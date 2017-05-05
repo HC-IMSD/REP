@@ -20,13 +20,10 @@ var CspMain=function(){
      * @param value
      */
     this.get = function (value) {
+
         browser.get(value);
         //cannot bind until you have and instance of the browser set
-        browser.selectOption=uiUtil.selectOption.bind(browser);
-        browser.getUISelectOption=uiUtil.pickUISelectOption.bind(browser);
-        browser.UISelectSearch=uiUtil.UISelectSearch.bind(browser);
-        browser.getUISelectModelValue=uiUtil.getUISelectModelValue.bind(browser);
-        browser.selectTypeAheadPopupValue=uiUtil.selectTypeAheadPopupValue.bind(browser);
+        uiUtil.init();
         browser.driver.manage().window().maximize();
     };
 

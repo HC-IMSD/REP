@@ -55,6 +55,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         paymentObj = new CspPayment();
         timelySubObj = new CspTimelySub();
         uiUtil = new UiUtil();
+        uiUtil.init();
     });
 
     describe('Load a valid file', function () {

@@ -18,13 +18,18 @@ var CspCertification = function () {
 
     };
 
-    this.setDateSignedValue = function (parent, year,month,day) {
+    this.setDateSignedIndValue = function (parent, year,month,day) {
         parent.element(by.model(_dateSigned_modelString)).sendKeys(year+"-"+month+"-"+day);
         /*uiUtil.getLocaleDateString(year,month,day).then(function (value) {
             console.log("The date being injected is "+value);
 
         });*/
     };
+    this.setDateSignedValue = function (parent, value) {
+        parent.element(by.model(_dateSigned_modelString)).sendKeys(value);
+
+    };
+
 
     this.getDateSignedValue = function (parent) {
         return parent.element(by.model(_dateSigned_modelString)).getAttribute('value');

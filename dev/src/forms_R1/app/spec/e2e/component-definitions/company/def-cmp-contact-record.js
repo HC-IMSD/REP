@@ -71,6 +71,9 @@ var ContactRecord = function () {
     this.setSalutation = function (parent, value) {
         contactDetails.setSalutationValue(parent,value)
     };
+    this.setSalutationByText = function (parent, value) {
+        contactDetails.setSalutationByText(parent,value)
+    };
 
     this.getSalutation = function (parent) {
         return contactDetails.getSalutationValue(parent);
