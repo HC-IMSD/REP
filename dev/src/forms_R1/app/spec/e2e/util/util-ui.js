@@ -5,13 +5,13 @@
 
 var UiUtil = function () {
 
-    this.UiUtil=function(){
+    this.UiUtil = function () {
         browser.selectOption = this.selectOption.bind(browser);
         browser.getUISelectOption = this.pickUISelectOption.bind(browser);
         browser.getUISelectModelValue = this.getUISelectModelValue.bind(browser);
-        browser.selectHtmlDropList=this.selectHtmlDropListOption.bind(browser);
-        browser.UISelectSearch=this.UISelectSearch.bind(browser);
-        browser.selectTypeAheadPopupValue=this.selectTypeAheadPopupValue.bind(browser);
+        browser.selectHtmlDropList = this.selectHtmlDropListOption.bind(browser);
+        browser.UISelectSearch = this.UISelectSearch.bind(browser);
+        browser.selectTypeAheadPopupValue = this.selectTypeAheadPopupValue.bind(browser);
     }
 
     this.init = function () {
@@ -19,9 +19,9 @@ var UiUtil = function () {
         browser.selectOption = this.selectOption.bind(browser);
         browser.getUISelectOption = this.pickUISelectOption.bind(browser);
         browser.getUISelectModelValue = this.getUISelectModelValue.bind(browser);
-        browser.selectHtmlDropList=this.selectHtmlDropListOption.bind(browser);
-        browser.UISelectSearch=this.UISelectSearch.bind(browser);
-        browser.selectTypeAheadPopupValue=this.selectTypeAheadPopupValue.bind(browser);
+        browser.selectHtmlDropList = this.selectHtmlDropListOption.bind(browser);
+        browser.UISelectSearch = this.UISelectSearch.bind(browser);
+        browser.selectTypeAheadPopupValue = this.selectTypeAheadPopupValue.bind(browser);
 
     }
 
@@ -35,34 +35,11 @@ var UiUtil = function () {
         }
     };
 
-    this.selectHtmlDropListOption=function(parent,model,value){
+    this.selectHtmlDropListOption = function (parent, model, value) {
 
-        parent.element(by.model(model)).$('[value='+value+']').click();
+        parent.element(by.model(model)).$('[value=' + value + ']').click();
 
     };
-
-  /*  exports.selectDropdownByText = function selectOption(element, item, milliseconds) {
-     var desiredOption;
-     element.findElements(by.tagName('option'))
-     .then(function findMatchingOption(options) {
-     options.some(function (option) {
-     option.getText().then(function doesOptionMatch(text) {
-     if (text.indexOf(item) != -1) {
-     desiredOption = option;
-     return true;
-     }
-     });
-     });
-     })
-     .then(function clickOption() {
-     if (desiredOption) {
-     desiredOption.click();
-     }
-     });
-     if (typeof milliseconds != 'undefined') {
-     browser.sleep(milliseconds);
-     }
-     };*/
 
 
     /**
@@ -76,59 +53,43 @@ var UiUtil = function () {
         if (parentElement) {
             selectList = parentElement.element(selector);
             selectList.click();
-            browser.sleep(100);
+           // browser.sleep(100);
             selectList.element(by.cssContainingText('option', item)).click();
-            /*selectList.all(protractor.By.tagName('option'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                            if (item === text) {
-                                desiredOption = option;
-
-                                return true;
-                            }
-                        });
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });*/
-
+            if (browser.browserName === 'firefox') {
+                //TODO hack to workaround firefox issue with protractor
+                selectList.element(by.cssContainingText('option', item)).sendKeys(protractor.Key.ENTER)
+            }
         } else {
             selectList = this.findElement(selector);
             selectList.click();
-            browser.sleep(100);
-            selectList.findElement(protractor.By.tagName('option'))
-                .then(function findMatchingOption(options) {
-                    options.some(function (option) {
-                        option.getText().then(function doesOptionMatch(text) {
-                            if (item === text) {
-                                desiredOption = option;
-                                return true;
-                            }
-                        });
-                    });
-                })
-                .then(function clickOption() {
-                    if (desiredOption) {
-                        desiredOption.click();
-                    }
-                });
+            //browser.sleep(100);
+            selectList.element(by.cssContainingText('option', item)).click();
+            if (browser.browserName === 'firefox') {
+                //TODO hack to workaround firefox issue with protractor
+                //this will potentially find dupllicates if a substring of itemes
+                selectList.element(by.cssContainingText('option', item)).sendKeys(protractor.Key.ENTER)
+                /*selectList.all(protractor.By.tagName('option'))
+                 .then(function findMatchingOption(options) {
+                 options.some(function (option) {
+                 option.getText().then(function doesOptionMatch(text) {
+                 if (item === text) {
+                 desiredOption = option;
+
+                 return true;
+                 }
+                 });
+                 });
+                 })
+                 .then(function clickOption() {
+                 if (desiredOption) {
+                 desiredOption.click();
+                 }
+                 });*/
+
+            }
         }
     };
-/*
- var selectDropdownbyNum = function ( element, optionNum ) {
- if (optionNum){
- var options = element.findElements(by.tagName('option'))
- .then(function(options){
- options[optionNum].click();
- });
- }
- };
 
- */
 
     // Deprecrated Doesn't and pick a text option for the UI select box, not using search
     this.pickUISelectOption = function (item, selectList) {
@@ -242,11 +203,11 @@ var UiUtil = function () {
         var _searchInput = selectList.element(by.css('.ui-select-search'));
         //var _searchInput = selectList.element(by.model('$select.search'));
 
-       //var choices = selectList.all(by.css('.ui-select-choices .ui-select-choices-row-inner'));
+        //var choices = selectList.all(by.css('.ui-select-choices .ui-select-choices-row-inner'));
         selectList.click();
         _searchInput.clear();
         _searchInput.sendKeys(val);
-       return _searchInput.sendKeys(protractor.Key.ENTER);
+        return _searchInput.sendKeys(protractor.Key.ENTER);
     };
 
     /**
@@ -255,19 +216,19 @@ var UiUtil = function () {
      * @param month
      * @param day
      */
-    this.getLocaleDateString=function(year,month,day){
+    this.getLocaleDateString = function (year, month, day) {
         var deferred = protractor.promise.defer();
         browser.executeScript(
-            'return (new Date('+year+','+month+','+day+')).toLocaleDateString()'
-       // 'var OldDate = Date;return function (){return new OldDate(2012,0,20).toLocaleDateString();}'
+            'return (new Date(' + year + ',' + month + ',' + day + ')).toLocaleDateString()'
+            // 'var OldDate = Date;return function (){return new OldDate(2012,0,20).toLocaleDateString();}'
         ).then(function (value) {
             //ar dateValue = new Date(value);
-           return deferred.fulfill(value);
+            return deferred.fulfill(value);
         });
         return deferred.promise;
     };
 
-    this.getAttributeValue=function(elementObj,attr) {
+    this.getAttributeValue = function (elementObj, attr) {
         return browser.wait(function () {
             return elementObj.getAttribute(attr).then(function (value) {
                 return value;
@@ -275,7 +236,6 @@ var UiUtil = function () {
         });
     }
 };
-
 
 
 //make available externally

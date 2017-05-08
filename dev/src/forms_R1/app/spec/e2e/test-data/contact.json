@@ -1,4 +1,7 @@
 {
+ "contactName":{
+   "typical": "John Anderton"
+ },
   "lastNames": {
     "typical": "Smith",
     "max": "Smith",
@@ -21,11 +24,11 @@
   "language": {
     "ENGLISH": {
       "en": "English",
-      "expect": "en"
+      "expect": "string:en"
     },
     "FRENCH": {
       "en": "French",
-      "expect": "fr"
+      "expect": "string:fr"
     }
   },
   "phone": {
@@ -41,19 +44,19 @@
   "salutation": {
     "MR": {
       "en": "Mr.",
-      "expect": "SALUT_MR"
+      "expect": "string:SALUT_MR"
     },
     "MRS": {
       "en": "Mrs.",
-      "expect": "SALUT_MRS"
+      "expect": "string:SALUT_MRS"
     },
     "MS": {
       "en": "Ms.",
-      "expect": "SALUT_MS"
+      "expect": "string:SALUT_MS"
     },
     "DR": {
       "en": "Dr.",
-      "expect": "SALUT_DR"
+      "expect": "string:SALUT_DR"
     }
   },
   "initials": {
@@ -69,5 +72,9 @@
     "max": "dadasadsadssdsadadasdsdsdashgfhfhh@fdsfsdf.com",
     "typical": "myname@gmail.com",
     "invalid1": "my_name"
+  },
+  "postal":{
+      "ca_valid_input":"k1a3n1",
+      "ca_valid_expect":"K1A 3N1"
   }
 }

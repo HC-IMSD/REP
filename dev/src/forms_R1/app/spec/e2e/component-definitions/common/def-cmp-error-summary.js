@@ -30,6 +30,10 @@ var ErrorSummary = function () {
         return this.getErrorSummaryElementById(parent,idString);
     };
 
+  /*  this.isErrorSummaryState=function(errorSummary){
+
+        return errorSummary.getAttribute()
+    }*/
 
     this.getErrorObjects=function(parent){
         return this.getErrorsObj(this.getErrorSummaryElement(parent));

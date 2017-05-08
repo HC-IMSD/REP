@@ -55,8 +55,8 @@ var CspContact = function () {
 
     };
 
-    this.setApplicantNameValue = function (parent) {
-        parent.element(by.model(_name_modelString)).click();
+    this.setApplicantNameValue = function (parent,value) {
+        parent.element(by.model(_name_modelString)).sendKeys(value);
     };
     this.getApplicantNameValue = function (parent) {
         return parent.element(by.model(_name_modelString)).getAttribute('value');
@@ -127,7 +127,7 @@ var CspContact = function () {
         contactDetails.setLanguageValue(parent, value)
     };
     this.getLanguage = function (parent) {
-       return contactDetails.setLanguageValue(parent);
+       return contactDetails.getLanguageValue(parent);
     };
     this.setStreetValue = function (parent, value) {
         addressDetails.setStreetValue(parent, value);

@@ -7,7 +7,7 @@ var CspPayment = function () {
 
     var _payAck_modelString="cspFeePayCtrl.model.ackPaymentSubmit";
     var _fee_modelString="cspFeePayCtrl.model.advancedPaymentFee";
-    var _payType_modelString=" cspFeePayCtrl.model.advancedPaymentType";
+    var _payType_modelString="cspFeePayCtrl.model.advancedPaymentType";
 
     /**
      *

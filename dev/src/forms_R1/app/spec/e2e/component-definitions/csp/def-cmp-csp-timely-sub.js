@@ -17,12 +17,19 @@ var CspTimelySub = function () {
 
     };
 
-    this.setSubStatementValue = function (parent, value) {
-        parent.element(by.model(_subStatement_modelString)).sendKeys(value);
+
+
+    this.setTimelyNoApplication=function(parent){
+        parent.element(by.css("input[id^=statements_timely_]")).sendKeys(protractor.Key.SPACE);
+    };
+    this.setTimelyApplicationMade=function(parent){
+        parent.element(by.css("input[id=market-approval]")).sendKeys(protractor.Key.SPACE);
     };
 
+
     this.getSubStatementValue = function (parent) {
-        return parent.element(by.model(_subStatement_modelString)).getAttribute('value');
+
+        return (parent.element(by.css('input[ng-model="timelySubCtrl.model.submissionStatement"]:checked')).getAttribute("value"));
     };
 
 
@@ -35,6 +42,10 @@ var CspTimelySub = function () {
     };
 
     this.setApprovalDateValue = function (parent, value) {
+        if(browser.browserName==="chrome"){
+            //TODO hack, is there a better way?
+            value="00"+value;
+        }
         parent.element(by.model(_approvalDate_modelString)).sendKeys(value);
     };
 
@@ -45,7 +56,7 @@ var CspTimelySub = function () {
         parent.element(by.model(_otherCountry_modelString)).sendKeys(value);
     };
 
-    this.setOtherCountryValue = function (parent) {
+    this.getOtherCountryValue = function (parent) {
         return parent.element(by.model(_otherCountry_modelString)).getAttribute('value');
     };
 

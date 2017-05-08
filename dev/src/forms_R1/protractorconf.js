@@ -19,14 +19,21 @@ exports.config = {
             'version': 'ANY',
             'chromeOptions': {
                 // Get rid of --ignore-certificate yellow warning
-                args: ['--no-sandbox', '--test-type=browser'],
+                args: ['--no-sandbox', '--test-type=browser','--disable-infobars=true','--disable-datasaver-prompt=true',
+                '--disable-extensions-file-access-check=true'],
                 // Set download path and avoid prompting for download even though
                 // this is already the default on Chrome but for completeness
                 prefs: {
-                    /*'download': {
-                     'prompt_for_download': false,
-                     'default_directory': '/e2e/downloads/'
-                     }*/
+                    'download': {
+                        'prompt_for_download': false,
+                        'directory_upgrade': true,
+                        'default_directory': 'C:/Users/hcuser/Downloads',
+                        'default_content_settings':{
+                            "popups": 0
+                        }
+
+
+                     }
                 }
             }
         },
@@ -85,12 +92,19 @@ exports.config = {
     jasmineDefaultOpts: {
         defaultTimeoutInterval: 120000
     },
+    jasmineNodeOpts: {
+        defaultTimeoutInterval: 120000
+    },
 
     onPrepare: function() {
         return q.fcall(function() {
             browser.driver.getCapabilities().then(function(caps){
                 browser.browserName = caps.get('browserName');
-            });
+            }).then(function(){
+                //wait for the test reporter setup
+                return global.browser.getProcessedConfig().then(function(){
+                });
+            })
         }).delay(1000);
     }
 

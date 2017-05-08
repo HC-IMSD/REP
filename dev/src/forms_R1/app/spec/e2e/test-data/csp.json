@@ -18,7 +18,6 @@
     "max": "",
     "max_plus1": ""
   },
-
   "initials": {
     "min": "",
     "typical": "Q. R. A.",
@@ -33,24 +32,49 @@
     "typical": "myname@gmail.com",
     "invalid1": "my_name"
   },
-  "patentNum":{
-    "typical":"1234567"
+  "patentNum": {
+    "typical": "1234567"
   },
-  "controlNum":{
-    "typical":"123456"
+  "controlNum": {
+    "typical": "123456"
   },
   "drugUse": {
     "VET": {
       "en": "Veterinary",
       "fr": "",
-      "save":"string:VETERINARY"
+      "save": "string:VETERINARY"
     },
     "HUMAN": {
       "en": "Human",
       "fr": ""
     }
   },
-  "ingredient":{
-    "typical":"Ingredient 1, Ingredient 2, Ingredient 3"
+  "ingredient": {
+    "typical": "Ingredient 1, Ingredient 2, Ingredient 3"
+  },
+  "timely_country": {
+    "other": {
+      "en": "Any country that is",
+      "expected": "string:EU_OTHER"
+    }
+  },
+  "other_country": {
+    "typical": {
+      "en": "This is the other Country",
+      "fr": ""
+    }
+  },
+  "application_statement":{
+    "APPLICATION":"APPLICATION",
+    "NO_APPLICATION":"NO_APPLICATION"
+  },
+  "fee":{
+    "typical":"157222.33"
+  },
+  "fee_type":{
+    "wire":{
+      "en":"Wire",
+      "expected":"string:WIRE"
+    }
   }
 }

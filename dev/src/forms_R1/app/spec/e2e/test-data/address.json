@@ -27,7 +27,7 @@
     "ON": {
       "en": "Ontario",
       "fr": "Ontario",
-      "expect":"ON"
+      "expect":"string:ON"
     }
 
   }

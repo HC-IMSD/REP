@@ -56,37 +56,19 @@ var CspMainAppl = function () {
         parent.element(by.css("input[id^=applicantApply_]")).sendKeys(protractor.Key.SPACE);
 
     };
-    this.setStatementAsApplicantAsOwnerConsent = function (parent, value) {
+  /*  this.setStatementAsApplicantAsOwnerConsent = function (parent, value) {
         parent.element(by.id("applicant-consent")).sendKeys(protractor.Key.SPACE);
 
-    };
+    };*/
 
     //Question 7
     this.getStatementsAsToApplicantValue = function (parent) {
 
-        return (parent.element(by.css('input[ng-model="cspMainApplCtrl.model.applicantStatement"]:checked')));
+        return (parent.element(by.css('input[ng-model="cspMainApplCtrl.model.applicantStatement"]:checked')).getAttribute('value'));
     };
 
     this.getApplicationStatementValue = function (parent) {
-       /*
-            element.all(by.model('cspMainApplCtrl.model.timeApplication')).each(function (element, index) {
-                console.log("gettimg one");
-
-                element.getAttribute('checked').then(function (text) {
-                    console.log("This is the checked value")
-                    console.log(index, text);
-                    indexChecked = index;
-                });
-                element.getAttribute('value').then(function (text) {
-                    console.log(index, text);
-                    if (index === indexChecked) {
-                        value = text
-                        console.log("This is what the value is" + value);
-                        return value;
-                    }
-                });
-            });*/
-        return (parent.element(by.css('input[ng-model="cspMainApplCtrl.model.timeApplication"]:checked')));
+        return (parent.element(by.css('input[ng-model="cspMainApplCtrl.model.timeApplication"]:checked')).getAttribute('value'));
     };
     this.setMedIngredientValue=function(parent,value){
         parent.element(by.model(_medIngredient_modelString)).sendKeys(value);
