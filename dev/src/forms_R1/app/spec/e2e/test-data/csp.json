@@ -76,5 +76,7 @@
       "en":"Wire",
       "expected":"string:WIRE"
     }
-  }
+  },
+  "GRANT":"GRANT",
+  "OWNER":"OWNER"
 }

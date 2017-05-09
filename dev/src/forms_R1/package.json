@@ -24,6 +24,7 @@
     "diff": "^3.2.0",
     "event-stream": "^3.2.2",
     "express": "^4.7.2",
+    "firefox-profile": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-angular-translate": "^0.1.4",

@@ -27,6 +27,10 @@ var CspPatent = function () {
     };
 
     this.setFilingDateValue = function (parent, value) {
+        if(browser.browserName==="chrome"){
+            //TODO hack, doesn't seem to be a way around this?
+            value= "00"+value;
+        }
         parent.element(by.model(_filingDate_modelString)).sendKeys(value);
     };
 
@@ -35,6 +39,10 @@ var CspPatent = function () {
     };
 
     this.setGrantDateValue = function (parent, value) {
+        if(browser.browserName==="chrome"){
+            //TODO hack, doesn't seem to be a way around this?
+            value= "00"+value;
+        }
         parent.element(by.model(_grantedDate_modelString)).sendKeys(value);
     };
 
@@ -42,6 +50,10 @@ var CspPatent = function () {
         return parent.element(by.model(_grantedDate_modelString)).getAttribute('value');
     };
     this.setExpiryDateValue = function (parent, value) {
+        if(browser.browserName==="chrome"){
+            //TODO hack, doesn't seem to be a way around this?
+            value= "00"+value;
+        }
         parent.element(by.model(_expiryDate_modelString)).sendKeys(value);
     };
 

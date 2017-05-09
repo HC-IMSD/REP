@@ -22,6 +22,8 @@ var CspMain=function(){
     this.get = function (value) {
 
         browser.get(value);
+        browser.refresh();
+        browser.get(value);
         //cannot bind until you have and instance of the browser set
         uiUtil.init();
         browser.driver.manage().window().maximize();

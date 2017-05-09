@@ -58,6 +58,14 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         uiUtil.init();
     });
 
+
+    describe('Admin Steps for report', function () {
+        it('csp-load-files.js TEST START: The browser is: '+browser.browserName, function () {
+            //NOP
+        });
+
+    });
+
     describe('Load a valid file', function () {
         it('Load the file', function () {
 

@@ -1,5 +1,30 @@
 // An example configuration file.
 var q = require('q');
+var q = require("q");
+var FirefoxProfile = require("firefox-profile");
+
+var makeFirefoxProfile = function(preferenceMap, specs) {
+    var deferred = q.defer();
+    var firefoxProfile = new FirefoxProfile();
+
+    for (var key in preferenceMap) {
+        firefoxProfile.setPreference(key, preferenceMap[key]);
+    }
+
+    firefoxProfile.encoded(function (encodedProfile) {
+        var capabilities = {
+            browserName: "firefox",
+            firefox_profile: encodedProfile,
+            specs: specs
+        };
+
+        deferred.resolve(capabilities);
+    });
+    return deferred.promise;
+};
+
+
+
 exports.config = {
 
     seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -12,6 +37,19 @@ exports.config = {
      'app/spec/e2e/tests/activity/!*.js'
 
      ],*/
+ /*   getMultiCapabilities: function() {
+        return q.all([
+            makeFirefoxProfile(
+                {
+                    "browser.download.folderList": 2,
+                    "browser.download.dir": "C:/Users/hcuser/Downloads",
+                    "browser.helperApps.neverAsk.saveToDisk": "text/xml",
+                    "browser.helperApps.neverAsk.openFile": "text/xml",
+                    "browser.download.panel.shown":"false"
+                }
+            )
+        ]);
+    },*/
     multiCapabilities: [
         {
             'browserName': 'chrome',
@@ -19,11 +57,14 @@ exports.config = {
             'version': 'ANY',
             'chromeOptions': {
                 // Get rid of --ignore-certificate yellow warning
-                args: ['--no-sandbox', '--test-type=browser','--disable-infobars=true','--disable-datasaver-prompt=true',
-                '--disable-extensions-file-access-check=true'],
+                args: ['safebrowsing-disable-download-protection',
+                    'safebrowsing-disable-extension-blacklist','disable-extensions',
+                    'no-sandbox', 'test-type=browser','disable-infobars',
+                'disable-extensions-file-access-check'],
                 // Set download path and avoid prompting for download even though
                 // this is already the default on Chrome but for completeness
                 prefs: {
+                    'safebrowsing.enabled': true,
                     'download': {
                         'prompt_for_download': false,
                         'directory_upgrade': true,
@@ -37,16 +78,15 @@ exports.config = {
                 }
             }
         },
-       /* {
+      /*  {
          'browserName': 'internet explorer',
          'platform': 'ANY',
          version: '11'
          },*/
          {
-         'browserName': 'firefox'
+            'browserName': 'firefox'
 
-         }
-
+        }
     ],
     rootElement: '#app-root',
 
@@ -104,6 +144,7 @@ exports.config = {
                 //wait for the test reporter setup
                 return global.browser.getProcessedConfig().then(function(){
                 });
+
             })
         }).delay(1000);
     }

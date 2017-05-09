@@ -2,14 +2,6 @@
  * Created by dkilty on 27/04/2017.
  */
 
-/**
- * Created by dkilty on 02/03/2017.
- */
-
-
-/**
- * Created by dkilty on 13/02/2017.
- */
 
 var csp_url, lang, formType;
 
@@ -68,7 +60,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         errorSummaryObj = new ErrorSummary();
     });
     describe('Admin Steps for report', function () {
-        it('@@@@@@@@@@@@@@@@ csp-MainScenario TEST START: The browser is: '+browser.browserName, function () {
+        it('csp-MainScenario.js TEST START: The browser is: '+browser.browserName, function () {
             //NOP
         });
 
@@ -113,11 +105,11 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             contactObj.setFax(contact, contactData.fax.typical);
             contactObj.setEmail(contact, contactData.email.typical);
             contactObj.setStreetValue(contact, addressData.streetAddress.typical[lang]);
-            contactObj.setCountryListValue(contact, addressData.country.CAN[lang]);
-            contactObj.setStateListValue(contact, addressData.province.ON.en);
             contactObj.setCityValue(contact, addressData.city.typical);
+            contactObj.setCountryListValue(contact, addressData.country.CAN[lang]);
             contactObj.setPostalCodeTextValue(contact, contactData.postal.ca_valid_input);
-
+            contactObj.setStateListValue(contact, addressData.province.ON.en);
+           // root.sendKeys(protractor.Key.TAB); //tab away from field so updates
             expect(contactObj.getApplicantNameValue(contact)).toEqual(contactData.contactName.typical);
             expect(contactObj.getSalutation(root)).toEqual(contactData.salutation.MRS.expect);
             expect(contactObj.getFirstName(contact)).toEqual(contactData.firstNames.typical);
@@ -142,23 +134,16 @@ describe('Certificate of Supplementary Protection Main Test', function () {
 
         it('Fill in Patent information', function () {
             var root = mainObj.getRoot();
-            //DATE hack relies on OS using YYYY-MM-DD
+            //TODO DATE hack relies on OS using YYYY-MM-DD
             var expectedGrantDate = "2007-05-15"; //format saved
             var expectedExpiryDate = "2022-12-05"; //format saved
             var expectedFilingDate = "2006-12-14"; //format saved
             patentObj.setPatentNumValue(root, cspData.patentNum.typical);
-            var grantDate = "2007-05-15"; //format saved
-            var expiryDate = "2022-12-05"; //format saved
-            var filingDate = "2006-12-14"; //format saved
-            //hack
-            if(browser.browserName==="chrome"){
-               grantDate ="00"+ grantDate;
-               expiryDate = "00"+expiryDate;
-                filingDate = "00"+filingDate;
-            }
-            patentObj.setGrantDateValue(root, grantDate);
-            patentObj.setFilingDateValue(root,filingDate);
-            patentObj.setExpiryDateValue(root, expiryDate);
+
+
+            patentObj.setGrantDateValue(root, expectedGrantDate);
+            patentObj.setFilingDateValue(root,expectedFilingDate);
+            patentObj.setExpiryDateValue(root, expectedExpiryDate);
 
             expect(patentObj.getGrantDateValue(root)).toEqual(expectedGrantDate);
             expect(patentObj.getExpiryDateValue(root)).toEqual(expectedExpiryDate);
@@ -166,7 +151,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             expect(patentObj.getPatentNumValue(root)).toEqual(cspData.patentNum.typical);
 
         });
-        it('Fill in Question 4-7 (statements',function(){
+        it('Fill in Questions 4-7. Only completing Applicaiton Statement',function(){
             var root = mainObj.getRoot();
 
             mainContentObj.setControlNumValue(root,cspData.controlNum.typical);
@@ -179,8 +164,8 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             expect(mainContentObj.getControlNumValue(root)).toEqual(cspData.controlNum.typical);
             expect(mainContentObj.getDrugUseValue(root)).toEqual(cspData.drugUse.VET.save);
             expect(mainContentObj.getMedIngredientValue(root)).toEqual(cspData.ingredient.typical);
-            expect(mainContentObj.getApplicationStatementValue(root)).toEqual('GRANT');
-            expect(mainContentObj.getStatementsAsToApplicantValue(root)).toEqual('OWNER');
+            expect(mainContentObj.getApplicationStatementValue(root)).toEqual(cspData.GRANT);
+            expect(mainContentObj.getStatementsAsToApplicantValue(root)).toEqual(cspData.OWNER);
         });
 
         it('Fill in Question 7 Timely statements as Application Made, Other EU country',function() {
@@ -212,12 +197,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             var root = mainObj.getRoot();
             //TODO handling dates across browsers is hard!
             var expectedCertDate = "2007-05-15"; //format saved
-            var certDate = "2007-05-15";
-            if(browser.browserName==="chrome"){
-                certDate="00"+certDate;
-            };
-
-            certObj.setDateSignedValue(root,certDate);
+            certObj.setDateSignedValue(root,expectedCertDate);
             certObj.setSurnameValue(root, cspData.lastNames.typical);
             certObj.setGivenNameValue(root, cspData.firstNames.typical);
             certObj.setTitleValue(root, cspData.jobTitle.typical);
@@ -245,6 +225,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
                 expect(errorSummary.isPresent()).toBeFalsy();
             });
             mainObj.saveXml();
+            browser.sleep(15000);
             var filename='C:/Users/hcuser/Downloads/hccsp-0-1.hcsc'
             browser.driver.wait(function () {
                 // Wait until the file has been downloaded.
