@@ -5,32 +5,37 @@
 		<html lang="en">
 			<head>
 				<title>CSP Form</title>
-				<style>table, th, td {
+				<style>table, th, td 
+				{
    				 border: 1px solid black;
 				 text-align: center ;
 				 }
 				 .col20 {
-     				-webkit-column-width: 20px; /* Chrome, Safari, Opera */
-    				-moz-column-width: 20px; /* Firefox */
-     				column-width: 20px;
-					  -webkit-column-count: 3; /* Chrome, Safari, Opera */
-    				-moz-column-count: 3; /* Firefox */
-    				column-count: 3;
+					  -webkit-column-count: 5; /* Chrome, Safari, Opera */
+    				-moz-column-count: 5; /* Firefox */
+    				column-count: 5;
+					-moz-column-gap: 2em;
+					-webkit-column-gap: 2em;
+					column-gap: 2em
 				}
-				</style>
+				 .col4 {
+					  -webkit-column-count: 4; /* Chrome, Safari, Opera */
+    				-moz-column-count: 4; /* Firefox */
+    				column-count: 4;
+					-moz-column-gap: 2em;
+					-webkit-column-gap: 2em;
+					column-gap: 2em
+				}
+
+				div {
+   				 display: block;
+				}</style>
 			</head>
 			<body>
 				<h1>Certificate of Supplementary Protection (CSP) Application Form</h1>
-				<p>
-					<b>Date Saved:</b>
-					<xsl:value-of select="date_saved"/>
-				</p>
-				<p>
-					<b>Software Version:</b>
-					<xsl:value-of select="software_version"/>
-				</p>
+	
 				<h2>1. Contact Information</h2>
-
+				<h3>Contacts</h3>
 				<table>
 					<tr>
 						<th style="width:5%">Type</th>
@@ -105,14 +110,14 @@
 								<td>Billing</td>
 							</xsl:if>
 							<td>
-								<xsl:apply-templates select="address/street_address"/>
+								<xsl:value-of select="address/street_address"/>
 							</td>
 							<td>
-								<xsl:apply-templates select="address/city"/>
+								<xsl:value-of select="address/city"/>
 							</td>
 							<td>
 								<xsl:if test="address/province_lov!=''">
-									<xsl:apply-templates select="address/province_lov"/>
+									<xsl:value-of select="address/province_lov"/>
 								</xsl:if>
 								<xsl:if test="address/province_text!=''">
 									<xsl:value-of select="address/province_text"/>
@@ -127,200 +132,129 @@
 						</tr>
 					</xsl:for-each>
 				</table>
-
-				<!--
-				<xsl:for-each select="applicant">
-
-					<xsl:if test="applicant_role='Y'">
-						<h3>
-							<u>Applicant</u>
-						</h3>
-						<p>
-							<b>Applicant Name:</b>
-							<xsl:value-of select="applicant_name"/>
-						</p>
-					</xsl:if>
-					<xsl:if test="applicant_role='N'">
-						<h3>
-							<u>Billing</u>
-						</h3>
-						<p>
-							<b>Billing Company:</b>
-							<xsl:value-of select="applicant_name"/>
-						</p>
-					</xsl:if>
-					<p>
-						<b>Salutation:</b>
-						<xsl:apply-templates select="contact/salutation"/>
-					</p>
-					<p>
-						<b>Given Name:</b>
-						<xsl:value-of select="contact/given_name"/>
-					</p>
-					<p>
-						<b>Initials:</b>
-						<xsl:value-of select="contact/initials"/>
-					</p>
-					<p>
-						<b>Surname:</b>
-						<xsl:value-of select="contact/surname"/>
-					</p>
-					<p>
-						<b>Title:</b>
-						<xsl:value-of select="contact/title"/>
-					</p>
-					<p>
-						<b>Phone:</b>
-						<xsl:value-of select="contact/phone_num"/>
-					</p>
-					<p>
-						<b>Phone Extension:</b>
-						<xsl:value-of select="contact/phone_ext"/>
-					</p>
-					<p>
-						<b>Fax:</b>
-						<xsl:value-of select="contact/fax_num"/>
-					</p>
-					<p>
-						<b>Email:</b>
-						<xsl:value-of select="contact/email"/>
-					</p>
-					<p>
-						<b>Language:</b>
-						<xsl:apply-templates select="contact/language_correspondance"/>
-					</p>
-					<p>
-						<b>Street:</b>
-						<xsl:apply-templates select="address/street_address"/>
-					</p>
-					<p>
-						<b>City:</b>
-						<xsl:apply-templates select="address/City"/>
-					</p>
-					<xsl:if test="address/province_lov!=''">
-						<p>
-							<b>Province:</b>
-							<xsl:apply-templates select="address/province_lov"/>
-						</p>
-					</xsl:if>
-					<xsl:if test="address/province_text!=''">
-						<p>
-							<b>Province:</b>
-							<xsl:value-of select="address/province_text"/>
-						</p>
-					</xsl:if>
-					<p>
-						<b>Country:</b>
-						<xsl:value-of select="address/country/@label_en"/>
-					</p>
-					<p>
-						<b>Postal Code:</b>
-						<xsl:value-of select="address/postal_code"/>
-					</p>
-				</xsl:for-each>-->
-
-				<h3>2. Patent Information</h3>
-				 <div class="col20">
-				
-					<b>Patent Number:</b>
-					<xsl:value-of select="application_info/patent_info/patent_number"/>
-				
-				
-					<b>Filing Date:</b>
-					<xsl:value-of select="application_info/patent_info/filing_date"/>
-			
+				<hr></hr>
+				<div>
+					<h2>2. Patent Information</h2>
 				</div>
-				 <div class="col20">
-				<p>
-					<b>Filing Date:</b>
-					<xsl:value-of select="application_info/patent_info/filing_date"/>
-				</p>
-				</div>
-				<p>
-					<b>Granted Date:</b>
-					<xsl:value-of select="application_info/patent_info/granted_date"/>
-				</p>
-				<p>
-					<b>Expiry Date:</b>
-					<xsl:value-of select="application_info/patent_info/expiry_date"/>
-				</p>
+				<div class="col4">
 
-				<h3>3. New Drug Submission (NDS) Information</h3>
+					<b>Patent&#xA0;Number: </b>
+					<span>
+						<xsl:value-of select="application_info/patent_info/patent_number"/>
+					</span>
+
+					<p>
+						<b>&#xA0;Filing&#xA0;Date: </b><xsl:value-of select="application_info/patent_info/filing_date"/></p>
+					<p>
+						<b>Granted&#xA0;Date: </b><xsl:value-of select="application_info/patent_info/granted_date"/></p>
+					<p>
+						<b>Expiry&#xA0;Date: </b><xsl:value-of select="application_info/patent_info/expiry_date"/></p>
+				</div>
+				<hr></hr>
+				<h2>3. New Drug Submission (NDS) Information</h2>
 				<p>
-					<b>NDS Number:</b>
+					<b>NDS Number:&#xA0;</b>
 					<xsl:value-of select="application_info/control_number"/>
 				</p>
-				<h3>4. Drug Use</h3>
+				<hr></hr>
+				<h2>4. Drug Use</h2>
 				<p>
-					<xsl:value-of select="application_info/drug_use"/>
+					<xsl:apply-templates select="application_info/drug_use"/>
 				</p>
-				<h3>5. Time of Application</h3>
+				<hr></hr>
+				<h2>5. Time of Application</h2>
 				<p>
-					<b>Applicant is applying:</b>
+					<b>Applicant is applying:&#xA0;</b>
 					<xsl:apply-templates select="application_info/time_application"/>
 				</p>
-				<h3>6. Medicinal Ingredient</h3>
+				<hr></hr>
+				<h2>6. Medicinal Ingredient</h2>
 				<p>
 					<xsl:value-of select="application_info/medicinal_ingredient"/>
 				</p>
-				<h3>7. Statement</h3>
+				<hr></hr>
+				<h2>7. Statement</h2>
 				<p>
-					<b>Statements as to Applicant:</b>
+					<b>Statements as to Applicant:&#xA0;</b>
 					<xsl:apply-templates select="application_info/applicant_statement"/>
 				</p>
 				<p>
-					<b>Statements as to timely submission:</b>
+					<b>Statements as to timely submission:&#xA0;</b>
 					<xsl:apply-templates select="timely_submission_info/timely_submission_statement"/>
 				</p>
 
 				<xsl:if test="timely_submission_info/marketing_approval_date!=''">
 					<p>
-						<b>Application Date:</b>
+						<b>Application Date:&#xA0;</b>
 						<xsl:value-of select="timely_submission_info/marketing_approval_date"/>
 					</p>
 				</xsl:if>
 				<xsl:if test="timely_submission_info/marketing_country!=''">
 					<p>
-						<b>Marketing Country:</b>
-						<xsl:value-of select="timely_submission_info/marketing_country"/>
+						<b>Marketing Country:&#xA0;</b>
+						<xsl:apply-templates select="timely_submission_info/marketing_country"/>
 					</p>
 				</xsl:if>
 				<xsl:if test="timely_submission_info/marketing_country_eu!=''">
 					<p>
-						<b>Other European Country:</b>
+						<b>Other European Country:&#xA0;</b>
 						<xsl:value-of select="timely_submission_info/marketing_country_eu"/>
 					</p>
 				</xsl:if>
-				<h3>8. Fee Payment</h3>
+				<hr></hr>
+				<h2>8. Fee Payment</h2>
 				<p>
-					<b>Fee Payment Type:</b>
+					<b>Fee Payment Type:&#xA0;</b>
 					<xsl:apply-templates select="advanced_payment/advanced_payment_type"/>
 				</p>
 				<p>
-					<b>The fee is being paid or the fee has been prepaid in the amount of $</b>
+					<b>The fee is being paid or the fee has been prepaid in the amount of $&#xA0;</b>
 					<xsl:value-of select="advanced_payment/advanced_payment_fee"/>
 				</p>
-				<h3>9. Certification</h3>
-				<p>
-					<b>Given Name:</b>
-					<xsl:value-of select="certification/given_name"/>
-				</p>
-				<p>
-					<b>Initials:</b>
-					<xsl:value-of select="certification/initials"/>
-				</p>
-				<p>
-					<b>Surname:</b>
-					<xsl:value-of select="certification/surname"/>
-				</p>
-				<p>
-					<b>Job Title:</b>
-					<xsl:value-of select="certification/job_title"/>
-				</p>
-				<p>
-					<b>Date Signed:</b>
-					<xsl:value-of select="certification/date_signed"/>
-				</p>
+				<hr></hr>
+				<h2>9. Certification</h2>
+
+				<table>
+					<tr>
+						<th style="width:15%">Given Name</th>
+						<th style="width:5%">Initials</th>
+						<th style="width:15%">Surname</th>
+						<th style="width:15%">Job Title</th>
+						<th style="width:10%">Signature Date</th>
+					</tr>
+					<tr>
+						<td>
+
+							<xsl:value-of select="certification/given_name"/>
+						</td>
+						<td>
+							<xsl:value-of select="certification/initials"/>
+						</td>
+						<td>
+							<xsl:value-of select="certification/surname"/>
+						</td>
+						<td>
+							<xsl:value-of select="certification/job_title"/>
+						</td>
+						<td>
+							<xsl:value-of select="certification/date_signed"/>
+						</td>
+					</tr>
+				</table>
+				<hr></hr>
+				<div class="col20">
+					<span>
+						<b>Date Saved:&#xA0;</b>
+						<xsl:value-of select="date_saved"/>
+					</span>
+					<p>
+						<span>
+							<b>Software Version:&#xA0;</b>
+							<xsl:value-of select="software_version"/>
+						</span>
+					</p>
+				</div>
+				<hr></hr>
 			</body>
 		</html>
 	</xsl:template>
@@ -376,17 +310,56 @@
 
 	<xsl:template match="advanced_payment_type">
 		<xsl:choose>
-			<xsl:when test="current()='CHEQUE'">Cheque</xsl:when>
+			<xsl:when test="current()='CHEQUE'">Cheque/Bank Draft/ Money Order</xsl:when>
 			<xsl:when test="current()='WIRE'">Wire</xsl:when>
+			<xsl:when test="current()='FINANCIAL'">Payment through a Canadian Financial Institution</xsl:when>
+			<xsl:when test="current()='CREDIT_CARD'">MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</xsl:when>
+			<xsl:when test="current()='CREDIT'">Payment Using Existing Credit</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="marketing_country">
+		<xsl:choose>
+			<xsl:when test="current()='EU_OTHER'">Any country that is a member in the EU</xsl:when>
+			<xsl:when test="current()='USA'">U.S.A.</xsl:when>
+			<xsl:when test="current()='JPN'">Japan</xsl:when>
+			<xsl:when test="current()='AUS'">Australia</xsl:when>
+			<xsl:when test="current()='CHE'">Switzerland</xsl:when>
+			<xsl:when test="current()='EU'">European Union</xsl:when>
+		</xsl:choose>
+	</xsl:template>
+
+	<xsl:template match="drug_use">
+		<xsl:choose>
+			<xsl:when test="current()='HUMAN'">Human</xsl:when>
+			<xsl:when test="current()='VETERINARY'">Veterinary</xsl:when>
 		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet><!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="no" url="..\..\..\..\Downloads\hccsp-1-0.xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth="" profilelength=""
-		          urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal"
+		<scenario default="no" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="..\..\..\..\Downloads\hccsp-1-0.xml" htmlbaseurl="" outputurl="tt.html" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth=""
+		          profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal"
 		          customvalidator="">
+			<advancedProp name="sInitialMode" value=""/>
+			<advancedProp name="schemaCache" value="||"/>
+			<advancedProp name="bXsltOneIsOkay" value="true"/>
+			<advancedProp name="bSchemaAware" value="true"/>
+			<advancedProp name="bGenerateByteCode" value="true"/>
+			<advancedProp name="bXml11" value="false"/>
+			<advancedProp name="iValidation" value="0"/>
+			<advancedProp name="bExtensions" value="true"/>
+			<advancedProp name="iWhitespace" value="0"/>
+			<advancedProp name="sInitialTemplate" value=""/>
+			<advancedProp name="bTinyTree" value="true"/>
+			<advancedProp name="xsltVersion" value="2.0"/>
+			<advancedProp name="bWarnings" value="true"/>
+			<advancedProp name="bUseDTD" value="false"/>
+			<advancedProp name="iErrorHandling" value="fatal"/>
+		</scenario>
+		<scenario default="yes" name="Scenario2" userelativepaths="yes" externalpreview="yes" url="hccsp-0-1 (8).xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml=""
+		          commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal" customvalidator="">
 			<advancedProp name="sInitialMode" value=""/>
 			<advancedProp name="schemaCache" value="||"/>
 			<advancedProp name="bXsltOneIsOkay" value="true"/>

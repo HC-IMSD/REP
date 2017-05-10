@@ -1,4 +1,25 @@
 {
-  "APPLICANT": "fr_Applicant Name"
+  "APPLICANT": "fr_Applicant Name",
+  "LOAD_CSP_FILE":"Charger un fichier de la demande de certificat de protection supplémentaire",
+  "HCONLY": "Á l'usage de Santé Canada",
+  "DATE_APPL_REC":"Date de réception de la demande (AAAA-MM-JJ)",
+  "CSP_COMPANY_CODE": "Code de la société du CPS",
+  "CSP_APPLICATION_CODE": "No de demande de CPS",
+  "NOTES": "Remarques",
+  "APPLICANTNAME": "Renseignements sur le demandeur",
+  "APPL_TITILE":" Applicant Information",
+  "CONTACT_TITLE": "Coordonnées du demandeur (où seront envoyées toutes les communications concernant le CPS)",
+  "BILLING_DIFFERENT": "Cocher ici pour saisir une adresse de facturation (si elle diffère des coordonnées du demandeur)",
+  "BILLING_TITLE":"Adresse de facturation",
+  "COMPANY_NOABBREV": "Nom de la société (dénomination sociale complète – ne pas utiliser d’abréviations)",
+
+  "PATENT_TITLE":"Renseignements sur le brevet",
+  "PATENTNUM": "Numéro de brevet au Canada",
+  "DATE_FILED": "Date de dépôt du brevet (AAAA-MM-JJ)",
+  "DATE_GRANTED": "Date d’octroi du brevet (AAAA-MM-JJ)",
+  "DATE_EXPIRY": "Date le brevet est périmé (AAAA-MM-JJ)",
+  "NDS_TITLE":"Renseignements sur la présentation de drogue nouvelle (PDN)",
+  "NDS_NUMBER": "Numéro de PDN",
+  "NDS_NUMBER": "Numéro de PDN"
 
 }

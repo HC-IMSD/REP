@@ -32,7 +32,7 @@
                 </fieldset>
             </div>
         </div>
-        <div ng-if="timelySubCtrl.isApplicationMarketing()">
+        <div ng-show="timelySubCtrl.isApplicationMarketing()">
             <div class="row">
                 <div class="form-group col-md-4"
                      ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.dateId].$invalid}">

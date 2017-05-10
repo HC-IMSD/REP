@@ -150,7 +150,7 @@ var cspRootTitles_en = {
     };
 
 var cspRootTitles_fr = {
-        mainHeading: "fr_Certificate of Supplementary Protection (CSP) Application Form",
+        mainHeading: "Formulaire de la demande de certificat de protection supplémentaire (CPS)",
         title: 'fr_Health Canada CSP Form'
 
     };

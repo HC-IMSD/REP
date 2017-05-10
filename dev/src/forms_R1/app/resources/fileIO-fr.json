@@ -1,5 +1,5 @@
 {
-  "SELECT_LOAD": "fr_Select a data file to load",
+  "SELECT_LOAD": "Sélectionnez un fichier à charger",
   "MSG_SUCCESS_LOAD": "fr_The file was loaded successfully",
   "MSG_ERR_JSONPARSE": "fr_Error: there was an error parsing the working file.",
   "MSG_ERR_XMLPARSE": "fr_Error: there was an error parsing the draft XML file.",
