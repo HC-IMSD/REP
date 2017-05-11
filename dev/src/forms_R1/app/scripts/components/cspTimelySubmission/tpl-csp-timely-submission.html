@@ -17,16 +17,17 @@
                                    ng-model="timelySubCtrl.model.submissionStatement"
                                    ng-value="timelySubCtrl.noAppValue"
                                    ng-required="!timelySubCtrl.model.submissionStatement"/>
-                            {{'STATE_NO_APPLICATION'|translate}}
+                            <ng-bind-html ng-bind-html="timelySubCtrl.noApplication"></ng-bind-html>
                         </label>
                     </div>
+                    <br/>
                     <div class="radio">
                         <label for="market-approval">
                             <input type="radio" name="{{::timelySubCtrl.timelyId}}"
                                    ng-model="timelySubCtrl.model.submissionStatement"
                                    ng-required="!timelySubCtrl.model.submissionStatement"
                                    ng-value="timelySubCtrl.appValue" id="market-approval"/>
-                            {{'STATE_APPLICATION'|translate}}
+                            <ng-bind-html ng-bind-html="timelySubCtrl.application"></ng-bind-html>
                         </label>
                     </div>
                 </fieldset>

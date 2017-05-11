@@ -112,7 +112,7 @@
                 </div>
                 <div>
                     <cmp-csp-timely-submission record="main.cspModel.timelySubmission" show-errors="main.showErrors()"
-                                               update-error-summary="main.updateErrorSummary()"
+                                               update-error-summary="main.updateErrorSummary()" language="main.lang"
                                                country-list="main.countryList"></cmp-csp-timely-submission>
                 </div>
 
@@ -123,7 +123,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <cmp-csp-fee-payment record="main.cspModel.payment" show-errors="main.showErrors()"
-                                                 update-error-summary="main.updateErrorSummary()"
+                                                 update-error-summary="main.updateErrorSummary()" language="main.lang"
                                                  payment-types="main.paymentType"></cmp-csp-fee-payment>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <h3>9.&nbsp;{{'CERT_TITLE'|translate}}</h3>
-                        <cmp-csp-certification record="main.cspModel.certification"
+                        <cmp-csp-certification record="main.cspModel.certification" language="main.lang"
                                                update-error-summary="main.updateErrorSummary()"
                                                show-errors="main.showErrors()"></cmp-csp-certification>
                     </div>
