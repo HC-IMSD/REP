@@ -61,7 +61,6 @@
                 vm.model = changes.record.currentValue;
             }
             if(changes.language){
-
                 vm.lang=changes.language.currentValue;
             }
         };
@@ -81,9 +80,8 @@
         }
 
         vm.isFrench=function(){
-
             return vm.lang===FRENCH;
-        }
+        };
 
         /**
          * Watch for changes in the errors and tell the error summary

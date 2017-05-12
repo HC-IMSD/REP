@@ -25,41 +25,21 @@
             controllerAs: 'cspFeePayCtrl',
             bindings: {
                 record: '<',
-                language: '<',
                 paymentTypes: '<',
                 showErrors: '&',
                 updateErrorSummary: '&'
             }
         });
 
-    feePaymentController.$inject = ['FRENCH', '$scope'];
-    function feePaymentController(FRENCH, $scope) {
+    feePaymentController.$inject = ['FRENCH', '$scope', '$translate'];
+    function feePaymentController(FRENCH, $scope,$translate) {
         var vm = this;
-
-        var url_en = 'http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv_pa_av-eng.pdf';
-        var url_fr = 'http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv_pa_av-fra.pdf';
-        var preambleHtml_en = "This form should <b><u>not</u></b> include payment information (eg credit card number),"
-            + " other than as specifically requested below, as the information included within an electronic submission"
-            + " cannot be deleted and will remain aspart of the CSP application on record. As such, please separately <b><u>mail</u></b> or <b><u>fax</u></b> the";
-
-        var preambleHtml_fr =  "Ce formulaire <b>ne doit pas</b> inclure de renseignements sur le paiement"+
-            " (par ex. numéro de carte de crédit) autres que ceux spécifiquement demandés ci-dessous, puisque"+
-            " les renseignements inclus dans un formulaire électronique ne peuvent pas être supprimés et continueront"+
-            " de faire partie de la demande de CPS en dossier.  À cet effet, veuillez envoyer séparément par "+
-            "<b><u>courriel</u></b> ou par <b><u>télécopieur</u></b> le formulaire ";
-
-
-
-
-        var urlTitle_en = "Advanced Payment Details Form for Drug Submissions, Master Files and Certificates of Supplementary Protection";
-        var urlTitle_fr = " Détails du paiement en avance pour présentations de drogues et fiches maîtresses pour les médicaments à usage humain et les désinfectants assimilés à drogues et demandes de certificat de protection supplémentaire";
-
         vm.model = null;
         vm.lang = 'en';
         vm.paymentList = [];
-        vm.url = url_en;
-        vm.preamble = preambleHtml_en;
-        vm.urlTitle = urlTitle_en;
+        vm.url = "";
+        vm.preamble = "";
+        vm.urlTitle = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.numberMaxError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
@@ -74,6 +54,10 @@
          */
         vm.$onInit = function () {
             _setIdNames();
+            //formatted text so needs to be injecteed
+            vm.preamble =  $translate.instant("FEE_PREAMBLE");
+            vm.url = $translate.instant("FEE_URL");
+            vm.urlTitle = $translate.instant("FEE_URLTITLE");
         };
 
         /**
@@ -85,17 +69,6 @@
             }
             if (changes.paymentTypes) {
                 vm.paymentList = changes.paymentTypes.currentValue;
-            }
-            if (changes.language) {
-                if (changes.language.currentValue === FRENCH) {
-                    vm.url = url_fr;
-                    vm.preamble = preambleHtml_fr;
-                    vm.urlTitle = urlTitle_fr;
-                } else {
-                    vm.url = url_en;
-                    vm.preamble = preambleHtml_en;
-                    vm.urlTitle = urlTitle_en;
-                }
             }
         };
 

@@ -448,6 +448,7 @@ var serviceFileNames = {
     cspService:"csp-service",
     cspConstants:'csp-constants',
     cspLoadService: 'csp-load-service',
+    cspDataLists:'csp-data-lists',
     diffService: 'diff-service'
 };
 
@@ -516,7 +517,8 @@ var cspServiceFileNames =
         serviceFileNames.applicationInfoService,
         serviceFileNames.cspService,
         serviceFileNames.cspConstants,
-        serviceFileNames.cspLoadService
+        serviceFileNames.cspLoadService,
+        serviceFileNames.cspDataLists
     ];
 
 

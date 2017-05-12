@@ -11,7 +11,8 @@
         .module('cspLoadService', [
             'dataLists',
             'hpfbConstants',
-            'filterLists'
+            'filterLists',
+            'cspDataModule'
         ])
 })();
 
@@ -19,22 +20,30 @@
     'use strict';
     angular
         .module('cspLoadService')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA', 'RELATIVE_FOLDER_DATA', function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, RELATIVE_FOLDER_DATA) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'CANADA', 'USA', 'RELATIVE_FOLDER_DATA', 'cspDataLists',
+            function ($http, $q, $filter, getCountryAndProvinces, CANADA, USA, RELATIVE_FOLDER_DATA, cspDataLists) {
 
             return function (options) {
                 var deferred = $q.defer();
                 //var dataFolder = "data/"; //relative forlder to the data
                 var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
+                var euCountryUrl = RELATIVE_FOLDER_DATA + "csp_eucountries.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {
                         //PROCESS country list data
                         var newList = _createSortedArrayNAFirst(response.data, options.key);
-                        // var translateList = _createTranslateList(newList, options.key);
-                        getCountryAndProvinces.createCountryList(newList);
-                        //angular.extend(resultTranslateList, translateList);
-                        return response.data;
 
+                        getCountryAndProvinces.createCountryList(newList);
+
+                        return $http.get(euCountryUrl);
+
+
+                    })
+                    .then(function (response) {
+                        var newList = _createSortedArray(response.data, options.key);
+                        cspDataLists.loadEuCountries(newList);
+                        return response.data;
                     })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
@@ -66,6 +75,15 @@
                 if (canadaRecord) result.unshift(canadaRecord);
                 return result;
             }
+            function _createSortedArray(jsonList, lang) {
+                    var result = [];
+                    angular.forEach($filter('orderByLocale')(jsonList, lang), function (sortedObject) {
+                            result.push(sortedObject);
+
+                    });
+                    return result;
+                }
+
         }]);
 })();
 
