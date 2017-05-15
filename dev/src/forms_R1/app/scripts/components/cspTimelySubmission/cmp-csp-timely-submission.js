@@ -48,9 +48,16 @@
         vm.$onInit = function () {
             _setIdNames();
             vm.lang = $translate.proposedLanguage() || $translate.use();
-            vm.countries=cspDataLists.getEuCountries();
-            vm.noApplication = $translate.instant('NOAPPLICATION'); //NEW LINE
-            vm.application = $translate.instant('APPLICATION'); //NEW LINE
+            vm.countries=cspDataLists.getMarketingCountries();
+            $translate('NOAPPLICATION').then(function (data) {
+                vm.noApplication = data;
+            });
+            $translate('APPLICATION').then(function (data) {
+                vm.application = data;
+            });
+
+           // vm.noApplication = $translate.instant('NOAPPLICATION'); //NEW LINE
+           // vm.application = $translate.instant('APPLICATION'); //NEW LINE
         };
 
         /**
@@ -61,22 +68,8 @@
             if (changes.record) {
                 vm.model = changes.record.currentValue;
             }
-            /*if (changes.countryList) {
-                vm.countries = changes.countryList.currentValue;
-            }*/
         };
 
-        vm.isEuOther = function () {
-            vm.model.country
-            if (vm.model.country === EUOTHER) {
-                return true;
-
-            } else {
-                vm.model.otherCountry = "";
-            }
-            return false;
-
-        };
         vm.isApplicationMarketing = function () {
 
             if (!vm.model) return false;
@@ -86,7 +79,7 @@
             } else {
                 vm.model.approvalDate = "";
                 vm.model.country = "";
-                vm.model.otherCountry = "";
+               // vm.model.otherCountry = "";
                 return false;
             }
         };

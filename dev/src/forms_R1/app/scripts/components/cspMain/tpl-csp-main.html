@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" translate-cloak="cloak-class">
     <ng-form id="csp-form" name="main.cspForm" novalidate="novalidate">
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
@@ -112,8 +112,8 @@
                 </div>
                 <div>
                     <cmp-csp-timely-submission record="main.cspModel.timelySubmission" show-errors="main.showErrors()"
-                                               update-error-summary="main.updateErrorSummary()"
-                                               country-list="main.countryList"></cmp-csp-timely-submission>
+                                               update-error-summary="main.updateErrorSummary()">
+                    </cmp-csp-timely-submission>
                 </div>
 
                 <div class="row">
@@ -140,11 +140,11 @@
             <!-- </div>-->
         </section>
         <div class="row btn-group-sm">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <button class="btn btn-default btn-lg active" id="btn_draftSave" ng-click="main.saveJson()">{{'SAVE_WORKING' |translate}}
                 </button>
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave" ng-click="main.saveXML()">
                     {{main.saveXMLLabel |translate}}
                 </button>

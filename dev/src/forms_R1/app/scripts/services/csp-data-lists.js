@@ -30,7 +30,7 @@
         var vm=this;
         vm.euCountryList=[];
         var service = {
-            getEuCountries: _getEuCountries,
+            getMarketingCountries: _getEuCountries,
             loadEuCountries:_setEuCountries
         };
         return service;

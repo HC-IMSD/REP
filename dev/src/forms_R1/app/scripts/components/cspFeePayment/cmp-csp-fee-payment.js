@@ -55,9 +55,18 @@
         vm.$onInit = function () {
             _setIdNames();
             //formatted text so needs to be injecteed
-            vm.preamble =  $translate.instant("FEE_PREAMBLE");
-            vm.url = $translate.instant("FEE_URL");
-            vm.urlTitle = $translate.instant("FEE_URLTITLE");
+            $translate('FEE_PREAMBLE').then(function (data) {
+                vm.preamble = data;
+            });
+            $translate('FEE_URL').then(function (data) {
+                vm.url = data;
+            });
+            $translate('FEE_URLTITLE').then(function (data) {
+                vm.urlTitle = data;
+            });
+           // vm.preamble =  $translate.instant("FEE_PREAMBLE");
+            //vm.url = $translate.instant("FEE_URL");
+            //vm.urlTitle = $translate.instant("FEE_URLTITLE");
         };
 
         /**

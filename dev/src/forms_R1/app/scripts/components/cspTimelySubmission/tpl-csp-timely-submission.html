@@ -1,6 +1,5 @@
 <div class="container-fluid">
     <ng-form name="timelySubCtrl.timelySubForm">
-
         <div class="row">
             <div class="col-xs-12">
                 <fieldset>
@@ -41,7 +40,8 @@
                         <span class="field-name">{{"TIMELYDATE" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
-                               data-ng-model="timelySubCtrl.model.approvalDate" class="form-control" required/>
+                               data-ng-model="timelySubCtrl.model.approvalDate" class="form-control"
+                               ng-required="timelySubCtrl.isApplicationMarketing()"/>
                         <cmp-error-message field-name="timelySubCtrl.dateId" form-ref="timelySubCtrl.timelySubForm"
                                            show-error="timelySubCtrl.showErrors()"
                                            error-types="timelySubCtrl.dateError"></cmp-error-message>
@@ -49,51 +49,21 @@
                 </div>
             </div>
             <div class="row">
-             <!--   <div class="col-md-5 form-group">
-                    <label for="{{::adr.countryId}}" class="required full-width">
-                        <span class="field-name">{{"COUNTRY" |translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong>
-
-                        <div class="rep-pad-top">
-                            <div class="rep-error" ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
-                                <ui-select ng-model="adr.addressModel.country" id="{{::adr.countryId}}" name="{{::adr.countryId}}"
-                                           on-select="adr.countryChanged()" required ng-disabled="!adr.isEditable" title="{{'COUNTRY_CHOOSE'|translate}}"
-                                           class="rep-selectize-font full-width">
-                                    <ui-select-match placeholder="{{'COUNTRY_CHOOSE'|translate}}" id="country_match{{::$id}}"
-                                                     class="rep-selectize-font rep-selectize-dropdown form-control">
-                                        {{$select.selected[adr.lang]}}
-                                    </ui-select-match>
-                                    <ui-select-choices
-                                            repeat="countryRecord in adr.countryList | filter:{[adr.lang]: $select.search}"
-                                            class="rep-selectize-font">
-                                        <span ng-bind-html="countryRecord[adr.lang] | highlight: $select.search"></span>
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
-                        </div>
-                        <cmp-error-message field-name="adr.countryId" form-ref="adr.addressForm"
-                                           show-error="adr.showErrors()"error-types="adr.requiredOnly">
-                        </cmp-error-message>
-                    </label>
-                </div>-->
-
-
-
-                <div class="form-group col-md-6"
+                <div class="form-group col-md-7"
                      ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.countryId].$invalid}">
                     <label for="{{::timelySubCtrl.countryId}}" class="required">
                         <span class="field-name">{{"TIMELYCOUNTRY" |translate}}</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                     <!--   <select id="{{::timelySubCtrl.countryId}}" name="{{::timelySubCtrl.countryId}}"
-                                ng-options="country |translate for country in timelySubCtrl.countries"
-                                ng-change="timelySubCtrl.isEuOther()"
-                                data-ng-model="timelySubCtrl.model.country" class="form-control" required></select>-->
                         <div class="rep-pad-top">
                             <div class="rep-error" ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
-                                <ui-select ng-model="timelySubCtrl.model.country" id="{{::timelySubCtrl.countryId}}" name="{{::timelySubCtrl.countryId}}"
-                                           on-select="timelySubCtrl.countryChanged()" required  title="{{'COUNTRY_CHOOSE'|translate}}"
+                                <ui-select ng-model="timelySubCtrl.model.country" id="{{::timelySubCtrl.countryId}}"
+                                           name="{{::timelySubCtrl.countryId}}"
+                                           on-select="timelySubCtrl.countryChanged()"
+                                           ng-required="timelySubCtrl.isApplicationMarketing()"
+                                           title="{{'COUNTRY_CHOOSE'|translate}}"
                                            class="rep-selectize-font full-width">
-                                    <ui-select-match placeholder="{{'COUNTRY_CHOOSE'|translate}}" id="country_match{{::$id}}"
+                                    <ui-select-match placeholder="{{'COUNTRY_CHOOSE'|translate}}"
+                                                     id="country_match{{::$id}}"
                                                      class="rep-selectize-font rep-selectize-dropdown form-control">
                                         {{$select.selected[timelySubCtrl.lang]}}
                                     </ui-select-match>
@@ -105,31 +75,14 @@
                                 </ui-select>
                             </div>
                         </div>
-
                         <cmp-error-message field-name="timelySubCtrl.countryId" form-ref="timelySubCtrl.timelySubForm"
                                            show-error="timelySubCtrl.showErrors()"
                                            error-types="timelySubCtrl.requiredOnly"></cmp-error-message>
 
                     </label>
                 </div>
-                <div ng-if="timelySubCtrl.isEuOther()">
-                    <div class="form-group col-md-6"
-                         ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.otherCountryId].$invalid}">
-                        <label for="{{::timelySubCtrl.otherCountryId}}" class="required">
-                            <span class="field-name">{{"OTHER_EU_COUNTRY" |translate}}</span>
-                            <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                            <input type="text" id="{{::timelySubCtrl.otherCountryId}}"
-                                   name="{{::timelySubCtrl.otherCountryId}}" maxlength="60" size="60"
-                                   data-ng-model="timelySubCtrl.model.otherCountry" class="form-control" required/>
-                            <cmp-error-message field-name="timelySubCtrl.otherCountryId"
-                                               form-ref="timelySubCtrl.timelySubForm"
-                                               show-error="timelySubCtrl.showErrors()"
-                                               error-types="timelySubCtrl.requiredOnly"></cmp-error-message>
-
-                        </label>
-                    </div>
-                </div>
             </div>
         </div>
     </ng-form>
+    <!-- <pre>{{timelySubCtrl.model|json}}</pre>-->
 </div>

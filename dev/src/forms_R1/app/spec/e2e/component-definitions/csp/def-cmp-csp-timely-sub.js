@@ -34,11 +34,15 @@ var CspTimelySub = function () {
 
 
     this.setCountryValue = function (parent, value) {
-        browser.selectOption(by.model(_country_modelString), value,parent);
+        //browser.selectOption(by.model(_country_modelString), value,parent);
+        var selectList=parent.element(by.model(_country_modelString));
+        browser.UISelectSearch(selectList,value);
+
     };
 
     this.getCountryValue = function (parent) {
-        return parent.element(by.model(_country_modelString)).getAttribute('value');
+        //return parent.element(by.model(_country_modelString)).getAttribute('value');
+        return parent.element(by.model(_country_modelString)).all(by.css('.select2-chosen')).last().getText();
     };
 
     this.setApprovalDateValue = function (parent, value) {
@@ -52,13 +56,7 @@ var CspTimelySub = function () {
     this.getApprovalDateValue = function (parent) {
         return parent.element(by.model(_approvalDate_modelString)).getAttribute('value');
     };
-    this.setOtherCountryValue = function (parent, value) {
-        parent.element(by.model(_otherCountry_modelString)).sendKeys(value);
-    };
 
-    this.getOtherCountryValue = function (parent) {
-        return parent.element(by.model(_otherCountry_modelString)).getAttribute('value');
-    };
 
 
 };

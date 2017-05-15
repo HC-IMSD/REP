@@ -3,6 +3,7 @@
   "MSG_ERR_EMAIL_FORMAT": "Veuillez fournir une adresse électronique valide.",
   "MSG_ERR_CONTACT_NUM": "fr_All the roles have to be used for the company contacts",
   "MSG_ERR_PHONE_FORMAT": "Veuillez fournir un numéro de téléphone valide.",
+  "MSG_ERR_FAX_FORMAT":"Veuillez fournir un numéro de télécopieur valide.",
   "MSG_ERR_ALLROLE": "fr_Across the contact records, the roles of manufacturer, mailing, billing, and REP primary contact must be selected",
   "MSG_ERR_ADDRESSSROLE": "fr_The roles of manufacturer, mailing, and billing have not all been selected among the list of addresses",
   "MSG_ERR_POSTAL": "Veuillez fournir un code postal valide.",

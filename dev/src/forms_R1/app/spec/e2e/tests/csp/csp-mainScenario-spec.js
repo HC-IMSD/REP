@@ -106,7 +106,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             contactObj.setEmail(contact, contactData.email.typical);
             contactObj.setStreetValue(contact, addressData.streetAddress.typical[lang]);
             contactObj.setCityValue(contact, addressData.city.typical);
-            contactObj.setCountryListValue(contact, addressData.country.CAN[lang]);
+            //contactObj.setCountryListValue(contact, addressData.country.CAN[lang]);
             contactObj.setPostalCodeTextValue(contact, contactData.postal.ca_valid_input);
             contactObj.setStateListValue(contact, addressData.province.ON.en);
            // root.sendKeys(protractor.Key.TAB); //tab away from field so updates
@@ -168,18 +168,16 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             expect(mainContentObj.getStatementsAsToApplicantValue(root)).toEqual(cspData.OWNER);
         });
 
-        it('Fill in Question 7 Timely statements as Application Made, Other EU country',function() {
+        it('Fill in Question 7 Timely statements as Application Made, Latvia as country',function() {
             var root = mainObj.getRoot();
             timelySubObj.setTimelyApplicationMade(root);
             //set the country to other EU
-
-            timelySubObj.setCountryValue(root,cspData.timely_country.other.en);
-            timelySubObj.setOtherCountryValue(root,cspData.other_country.typical[lang]);
             var approvalDate="2006-11-22";
             timelySubObj.setApprovalDateValue(root,approvalDate);
+            timelySubObj.setCountryValue(root,cspData.timely_country.typical[lang]);
+
            expect(timelySubObj.getSubStatementValue(root)).toEqual(cspData.application_statement.APPLICATION);
-            expect(timelySubObj.getCountryValue(root)).toEqual(cspData.timely_country.other.expected);
-            expect(timelySubObj.getOtherCountryValue(root)).toEqual(cspData.other_country.typical[lang]);
+            expect(timelySubObj.getCountryValue(root)).toEqual(cspData.timely_country.typical[lang]);
             expect(timelySubObj.getApprovalDateValue(root)).toEqual(approvalDate);
         });
 
@@ -225,7 +223,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
                 expect(errorSummary.isPresent()).toBeFalsy();
             });
             mainObj.saveXml();
-            browser.sleep(15000);
+
             var filename='C:/Users/hcuser/Downloads/hccsp-0-1.hcsc'
             browser.driver.wait(function () {
                 // Wait until the file has been downloaded.

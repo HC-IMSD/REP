@@ -53,17 +53,12 @@
     "typical": "Ingredient 1, Ingredient 2, Ingredient 3"
   },
   "timely_country": {
-    "other": {
-      "en": "Any country that is",
-      "expected": "string:EU_OTHER"
-    }
-  },
-  "other_country": {
     "typical": {
-      "en": "This is the other Country",
-      "fr": ""
+      "en": "Latvia",
+      "expected": "LVA"
     }
   },
+
   "application_statement":{
     "APPLICATION":"APPLICATION",
     "NO_APPLICATION":"NO_APPLICATION"

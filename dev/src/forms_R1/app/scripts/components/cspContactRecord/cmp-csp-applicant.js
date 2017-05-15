@@ -74,16 +74,18 @@
 
         vm.type = "_appl"; //sets the type of applicant either applicant or billing
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.isCountryEditable=false;
 
         vm.$onInit = function () {
             //after on changes called
             if (vm.model && vm.model.role && (!vm.model.role.applicant)) {
                 vm.applicantTextAlias = "COMPANY_NOABBREV";
                 vm.type = "_bill";
-
+                vm.isCountryEditable=true;
             } else {
                 vm.applicantTextAlias = "APPLICANTNAME";
                 vm.type = "_appl";
+                vm.isCountryEditable=false;
             }
             _setIDNames();
         };

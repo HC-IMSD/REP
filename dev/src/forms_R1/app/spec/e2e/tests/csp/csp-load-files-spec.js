@@ -90,6 +90,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
                 var currVersion = -1;
                 console.log("The value is " + value);
                 mainObj.saveDraft();
+               // mainContentObj.saveXml();
                 if (formType === internal) {
 
                     currVersion = (parseInt(value) + 1);

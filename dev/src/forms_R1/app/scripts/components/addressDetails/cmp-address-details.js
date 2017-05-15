@@ -35,7 +35,8 @@
                 showErrors: '&',
                 isAmend: '<',
                 updateErrorSummary:'&',
-                fieldSuffix:'<'
+                fieldSuffix:'<',
+                countryEditable:'<'
             }
         });
     addressCtrl.$inject = ['getCountryAndProvinces','$translate','CANADA','USA','$scope'];
@@ -59,6 +60,7 @@
             postalCode: ""
         };
 
+        vm.countryReadOnly=false;
         vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
@@ -101,6 +103,9 @@
                 if(!vm.fldId){
                     vm.fldId="";
                 }
+            }
+            if(changes.countryEditable){
+                vm.countryReadOnly=changes.countryEditable.currentValue;
             }
         };
         /**
@@ -153,6 +158,10 @@
             vm.addressModel = angular.extend({}, vm.addressRecord);
             vm.addressForm.$setPristine();
         };
+        vm.isCountryEditable=function(){
+
+          return(vm.isEditable &&!vm.countryReadOnly)
+        };
 
 
         /**
@@ -198,6 +207,7 @@
         };
 
         var getProvinceListLabel = function () {
+           // if(!vm.addressModel || !vm.addressModel.country) return "PROVINCE";
             var label = (vm.addressModel.country.id === USA) ? "STATE" : "PROVINCE";
             return label;
         };
