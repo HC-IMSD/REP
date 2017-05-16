@@ -49,7 +49,9 @@
 
                 </header>
                 <div class="panel-body">
-                    <cmp-csp-hc-only record="main.cspModel.healthCanadaOnly"></cmp-csp-hc-only>
+                    <cmp-csp-hc-only record="main.cspModel.healthCanadaOnly" show-errors="main.showErrors()"
+                                     update-error-summary="main.updateErrorSummary()">
+                    </cmp-csp-hc-only>
                 </div>
             </section>
         </div>

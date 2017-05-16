@@ -19,7 +19,7 @@
   "BILLING": "fr_Billing",
   "MANUFACTURER": "fr_Manufacturer",
   "IMPORTER": "Importateur canadien",
-  "APPROVE_FINAL": "fr_Approve Final XML",
+  "APPROVE_FINAL": "Approuver XML final",
   "PRIMARY": "fr_Primary",
   "SECONDARY": "fr_Alternate",
   "TOGGLE_EXPAND": "fr_Click to toggle collapse or expand details of row",

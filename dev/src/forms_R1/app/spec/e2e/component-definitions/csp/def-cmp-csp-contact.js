@@ -32,10 +32,10 @@ var CspContact = function () {
     };
     this.getApplicantContact = function (parent) {
        /*   var deferred = protractor.promise.defer();
-         element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index')).then(function (items) {
-         console.log("Numnber of contacts" + items.length)
-         return deferred.fulfill(items[0]);
-         });
+        element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index')).then(function (items) {
+        console.log("Numnber of contacts" + items.length)
+        return deferred.fulfill(items[0]);
+        });
          return deferred.promise;*/
         //var contactList=element.all(by.repeater('applicantRecord in cspApplListCtrl.model track by $index'));
         return( this.getContactList(parent).get(0));

@@ -146,7 +146,6 @@ var dossierRootTitles_fr = {
 var cspRootTitles_en = {
         mainHeading: "Certificate of Supplementary Protection (CSP) Application Form",
         title: 'Health Canada CSP Form'
-
     };
 
 var cspRootTitles_fr = {
@@ -774,17 +773,19 @@ pipes.translateDev = function (translateList, destPath, baseIgnore) {
  *  Inserts a date stamp in the passed in templaste
  *
  * */
-pipes.insertDateStamp = function (template, valsObj, lang, type) {
+pipes.insertDateStamp = function (template, valsObj, lang, type,langHtmlName) {
     var now = new Date();
     var utc = dateFormat(now, "isoDate");
-    var anchor = pipes.getHomeAnchor(type, lang)
-
+    var anchor = pipes.getHomeAnchor(type, lang);
+    var langSwitch="";
+    if(langHtmlName) langSwitch=langHtmlName;
     return (gulp.src(template)
             .pipe(htmlreplace({
                 dateToday: utc,
                 mainHeading: valsObj.mainHeading,
                 formTitle: valsObj.title,
-                homeAnchor: anchor
+                homeAnchor: anchor,
+                langHtml:langSwitch
             }))
     );
 };
@@ -1169,10 +1170,10 @@ pipes.copyAndMinStyles = function (stylesArray, isTimeStamped, destPath) {
 
 };
 
-pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType) {
+pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType,htmlLangName) {
 
 
-    pipes.insertDateStamp(templatePath, metaObj, lang, formType)
+    pipes.insertDateStamp(templatePath, metaObj, lang, formType,htmlLangName)
         .pipe(inject(gulp.src([htmlPartial]), {
             starttag: placeholders.mainContent,
             transform: function (filePath, file) {
@@ -1997,10 +1998,10 @@ gulp.task('prod-csp-compileHtml', ['prod-global-create-src-template', 'prod-glob
     ];
     var srcPath = paths.buildProdCsp;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'cspEXT-en.html', destPath, 'en', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'cspEXT-fr.html', destPath, 'fr', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'cspINT-fr.html', destPath, 'fr', deployType.prodInt);
-    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'cspINT-en.html', destPath, 'en', deployType.prodInt);
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'cspEXT-en.html', destPath, 'en', deployType.test,'cspEXT-fr.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'cspEXT-fr.html', destPath, 'fr', deployType.test,'cspEXT-en.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'cspINT-fr.html', destPath, 'fr', deployType.test, 'cspINT-en.html');
+    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'cspINT-en.html', destPath, 'en', deployType.test, 'cspINT-fr.html');
 
 });
 gulp.task('prod-csp-compileSrcJs', ['prod-csp-compileTranslateFile', 'prod-csp-createRootJsFiles', 'prod-csp-copySourceFiles'], function () {

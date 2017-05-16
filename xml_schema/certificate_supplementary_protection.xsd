@@ -48,9 +48,17 @@
 	<!--timely information section-->
 	<hpfb:element name="timely_submission_info" type="timely_content"/>
 	<hpfb:element name="timely_submission_statement" type="timely_application_type"/>
-	<hpfb:element name="marketing_approval_date" type="optional_yyyymmdd_date_content"/>
-	<hpfb:element name="marketing_country" type="country_marketing_type"/>
-	<hpfb:element name="marketing_country_eu" type="char_0_80_content"/>
+	<hpfb:element name="marketing_application_date" type="optional_yyyymmdd_date_content"/>
+	<hpfb:element name="marketing_country">
+	<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="country_marketing_type">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<!--payment section-->
 	<hpfb:element name="advanced_payment" type="advanced_payment_section"/>
 	<hpfb:element name="advanced_payment_type" type="payment_type"/>
@@ -78,7 +86,6 @@
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="health_canada_only"/>
 			<hpfb:element ref="applicant" minOccurs="1" maxOccurs="2"/>
-			<!--<hpfb:element ref="billing" minOccurs="0" maxOccurs="1"/>-->
 			<hpfb:element ref="application_info"/>
 			<hpfb:element ref="timely_submission_info"/>
 			<hpfb:element ref="advanced_payment"/>
@@ -91,7 +98,7 @@
 
 	<hpfb:complexType name="applicant_content">
 		<hpfb:sequence>
-			<hpfb:element ref="billing_role" />
+			<hpfb:element ref="billing_role"/>
 			<hpfb:element ref="applicant_role"/>
 			<hpfb:element ref="applicant_name"/>
 			<hpfb:element ref="contact"/>
@@ -99,14 +106,6 @@
 			
 		</hpfb:sequence>
 	</hpfb:complexType>
-
-	<!--<hpfb:complexType name="billing_content">
-		<hpfb:sequence>
-			<hpfb:element ref="applicant_name"/>
-			<hpfb:element ref="contact"/>
-			<hpfb:element ref="address"/>
-		</hpfb:sequence>
-	</hpfb:complexType>-->
 
 	<hpfb:complexType name="hc_only_content">
 		<hpfb:all>
@@ -125,10 +124,6 @@
 		</hpfb:all>
 	</hpfb:complexType>
 
-
-
-
-
 	<hpfb:complexType name="application_content">
 		<hpfb:all>
 			<hpfb:element ref="patent_info"/>
@@ -144,9 +139,8 @@
 	<hpfb:complexType name="timely_content">
 		<hpfb:all>
 			<hpfb:element ref="timely_submission_statement"/>
-			<hpfb:element ref="marketing_approval_date"/>
+			<hpfb:element ref="marketing_application_date"/>
 			<hpfb:element ref="marketing_country"/>
-			<hpfb:element ref="marketing_country_eu"/>
 		</hpfb:all>
 	</hpfb:complexType>
 
@@ -204,14 +198,42 @@
 	<hpfb:simpleType name="country_marketing_type">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:enumeration value=""/>
+			<hpfb:enumeration value="EU_ALL"/>
+			<hpfb:enumeration value="AUT"/>
+			<hpfb:enumeration value="BEL"/>
+			<hpfb:enumeration value="BGR"/>
+			<hpfb:enumeration value="HRV"/>
+			<hpfb:enumeration value="CYP"/>
+			<hpfb:enumeration value="CZE"/>
+			<hpfb:enumeration value="DNK"/>
+			<hpfb:enumeration value="EST"/>
+			<hpfb:enumeration value="FIN"/>
+			<hpfb:enumeration value="FRA"/>
+			<hpfb:enumeration value="DEU"/>
+			<hpfb:enumeration value="GRC"/>
+			<hpfb:enumeration value="HUN"/>
+			<hpfb:enumeration value="IRL"/>
+			<hpfb:enumeration value="ITA"/>
+			<hpfb:enumeration value="LVA"/>
+			<hpfb:enumeration value="LTU"/>
+			<hpfb:enumeration value="LUX"/>
+			<hpfb:enumeration value="MLT"/>
+			<hpfb:enumeration value="NLD"/>
+			<hpfb:enumeration value="POL"/>
+			<hpfb:enumeration value="PRT"/>
+			<hpfb:enumeration value="ROU"/>
+			<hpfb:enumeration value="SVK"/>
+			<hpfb:enumeration value="SVN"/>
+			<hpfb:enumeration value="ESP"/>
+			<hpfb:enumeration value="SWE"/>
+			<hpfb:enumeration value="GBR"/>
 			<hpfb:enumeration value="USA"/>
 			<hpfb:enumeration value="AUS"/>
 			<hpfb:enumeration value="CHE"/>
 			<hpfb:enumeration value="JPN"/>
-			<hpfb:enumeration value="EU"/>
-			<hpfb:enumeration value="EU_OTHER"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+	  
 
 	<hpfb:simpleType name="payment_type">
 		<hpfb:restriction base="hpfb:string">

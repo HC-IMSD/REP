@@ -33,7 +33,27 @@
 			</head>
 			<body>
 				<h1>Certificate of Supplementary Protection (CSP) Application Form</h1>
-	
+				<hr></hr>	
+				<h2>Health Canada Only</h2>
+				<p>
+					<b>&#xA0;Date&#xA0;Application&#xA0;Recieved:</b>&#xA0;
+					<xsl:value-of select="health_canada_only/date_received"/>
+				</p>
+				<p>
+					<b>&#xA0;CSP&#xA0;Company&#xA0;Code:</b>&#xA0;
+					<xsl:value-of select="health_canada_only/company_id"/>
+				</p>
+				<p>
+					<b>&#xA0;CSP&#xA0;Application&#xA0;Number:</b>&#xA0;
+					<xsl:value-of select="health_canada_only/application_id"/>
+				</p>
+				<p>
+					<b>&#xA0;Notes:</b>&#xA0;
+				</p>
+				<p>
+				<xsl:value-of select="health_canada_only/hc_notes"/>
+				</p>
+				<hr></hr>
 				<h2>1. Contact Information</h2>
 				<h3>Contacts</h3>
 				<table>
@@ -124,8 +144,7 @@
 								</xsl:if>
 							</td>
 							<td>
-								<xsl:value-of select="address/country/@label_en"/>
-							</td>
+								<xsl:value-of select="address/country/@label_en"/>&#xA0;(<xsl:value-of select="address/country"/>)</td>
 							<td>
 								<xsl:value-of select="address/postal_code"/>
 							</td>
@@ -138,22 +157,28 @@
 				</div>
 				<div class="col4">
 
-					<b>Patent&#xA0;Number: </b>
+					<b>Patent&#xA0;Number:</b>&#xA0;
 					<span>
 						<xsl:value-of select="application_info/patent_info/patent_number"/>
 					</span>
 
 					<p>
-						<b>&#xA0;Filing&#xA0;Date: </b><xsl:value-of select="application_info/patent_info/filing_date"/></p>
+						<b>&#xA0;Filing&#xA0;Date:</b>&#xA0;
+						<xsl:value-of select="application_info/patent_info/filing_date"/>
+					</p>
 					<p>
-						<b>Granted&#xA0;Date: </b><xsl:value-of select="application_info/patent_info/granted_date"/></p>
+						<b>Granted&#xA0;Date:</b>&#xA0;
+						<xsl:value-of select="application_info/patent_info/granted_date"/>
+					</p>
 					<p>
-						<b>Expiry&#xA0;Date: </b><xsl:value-of select="application_info/patent_info/expiry_date"/></p>
+						<b>Expiry&#xA0;Date:</b>&#xA0;
+						<xsl:value-of select="application_info/patent_info/expiry_date"/>
+					</p>
 				</div>
 				<hr></hr>
 				<h2>3. New Drug Submission (NDS) Information</h2>
 				<p>
-					<b>NDS Number:&#xA0;</b>
+					<b>NDS Number:&#xA0;</b>&#xA0;
 					<xsl:value-of select="application_info/control_number"/>
 				</p>
 				<hr></hr>
@@ -164,7 +189,7 @@
 				<hr></hr>
 				<h2>5. Time of Application</h2>
 				<p>
-					<b>Applicant is applying:&#xA0;</b>
+					<b>Applicant is applying:&#xA0;</b>&#xA0;
 					<xsl:apply-templates select="application_info/time_application"/>
 				</p>
 				<hr></hr>
@@ -175,36 +200,31 @@
 				<hr></hr>
 				<h2>7. Statement</h2>
 				<p>
-					<b>Statements as to Applicant:&#xA0;</b>
+					<b>Statements as to Applicant:&#xA0;</b>&#xA0;
 					<xsl:apply-templates select="application_info/applicant_statement"/>
 				</p>
 				<p>
-					<b>Statements as to timely submission:&#xA0;</b>
+					<b>Statements as to timely submission:&#xA0;</b>&#xA0;
 					<xsl:apply-templates select="timely_submission_info/timely_submission_statement"/>
 				</p>
 
 				<xsl:if test="timely_submission_info/marketing_approval_date!=''">
 					<p>
-						<b>Application Date:&#xA0;</b>
+						<b>Application Date:&#xA0;</b>&#xA0;
 						<xsl:value-of select="timely_submission_info/marketing_approval_date"/>
 					</p>
 				</xsl:if>
 				<xsl:if test="timely_submission_info/marketing_country!=''">
 					<p>
-						<b>Marketing Country:&#xA0;</b>
-						<xsl:apply-templates select="timely_submission_info/marketing_country"/>
-					</p>
-				</xsl:if>
-				<xsl:if test="timely_submission_info/marketing_country_eu!=''">
-					<p>
-						<b>Other European Country:&#xA0;</b>
-						<xsl:value-of select="timely_submission_info/marketing_country_eu"/>
-					</p>
+						<b>Marketing Country:&#xA0;</b>&#xA0;
+						<xsl:value-of select="timely_submission_info/marketing_country/@label_en"/>&#xA0;
+						(<xsl:value-of select="timely_submission_info/marketing_country"/>)
+						<!--<xsl:apply-templates select="timely_submission_info/marketing_country"/>--></p>
 				</xsl:if>
 				<hr></hr>
 				<h2>8. Fee Payment</h2>
 				<p>
-					<b>Fee Payment Type:&#xA0;</b>
+					<b>Fee Payment Type:&#xA0;</b>&#xA0;
 					<xsl:apply-templates select="advanced_payment/advanced_payment_type"/>
 				</p>
 				<p>
@@ -244,12 +264,12 @@
 				<hr></hr>
 				<div class="col20">
 					<span>
-						<b>Date Saved:&#xA0;</b>
+						<b>Date Saved:&#xA0;</b>&#xA0;
 						<xsl:value-of select="date_saved"/>
 					</span>
 					<p>
 						<span>
-							<b>Software Version:&#xA0;</b>
+							<b>Software Version:&#xA0;</b>&#xA0;
 							<xsl:value-of select="software_version"/>
 						</span>
 					</p>
@@ -358,7 +378,7 @@
 			<advancedProp name="bUseDTD" value="false"/>
 			<advancedProp name="iErrorHandling" value="fatal"/>
 		</scenario>
-		<scenario default="yes" name="Scenario2" userelativepaths="yes" externalpreview="yes" url="hccsp-0-1 (8).xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml=""
+		<scenario default="yes" name="Scenario2" userelativepaths="yes" externalpreview="yes" url="hccsp-1-1.xml" htmlbaseurl="" outputurl="" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml=""
 		          commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal" customvalidator="">
 			<advancedProp name="sInitialMode" value=""/>
 			<advancedProp name="schemaCache" value="||"/>

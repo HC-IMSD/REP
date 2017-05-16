@@ -113,7 +113,7 @@
             }
             date = $filter('date')(intTimely.approvalDate, "yyyy-MM-dd");
             if (date) {
-                extTimely.marketing_approval_date = date;
+                extTimely.marketing_application_date = date;
             }
             //get the marketing country
             if (intTimely.country) {
@@ -180,7 +180,7 @@
             resultJson.applicationInfo.medicinalIngredient = jsonObj.application_info.medicinal_ingredient;
             resultJson.applicationInfo.applicantStatement = jsonObj.application_info.applicant_statement;
             resultJson.timelySubmission.submissionStatement = jsonObj.timely_submission_info.timely_submission_statement;
-            resultJson.timelySubmission.approvalDate = _parseDate(jsonObj.timely_submission_info.marketing_approval_date);
+            resultJson.timelySubmission.approvalDate = _parseDate(jsonObj.timely_submission_info.marketing_application_date);
             if (jsonObj.timely_submission_info.marketing_country) {
                 resultJson.timelySubmission.country = $filter('filter')(cspDataLists.getMarketingCountries(), {id: jsonObj.timely_submission_info.marketing_country.__text})[0];
                 //resultJson.timelySubmission.country = jsonObj.timely_submission_info.marketing_country;
@@ -365,10 +365,8 @@
             defaultCSPData.date_saved = "";
             defaultCSPData.software_version = "";
             defaultCSPData.data_checksum = "";
-
-            //TODO appl Info
-            defaultCSPData.applicant = [];
             defaultCSPData.health_canada_only = {};
+            defaultCSPData.applicant = [];
             var hc = defaultCSPData.health_canada_only;
             hc.company_id = "";
             hc.application_id = "";
@@ -390,7 +388,7 @@
             defaultCSPData.timely_submission_info = {};
             var timely = defaultCSPData.timely_submission_info;
             timely.timely_submission_statement = "";
-            timely.marketing_approval_date = "";
+            timely.marketing_application_date = "";
             timely.marketing_country = "";
             // timely.marketing_country_eu = "";
             defaultCSPData.advanced_payment = {};

@@ -83,7 +83,9 @@
                 return false;
             }
         };
-
+        vm.isFrench=function(){
+            return vm.lang===FRENCH;
+        };
 
         /**
          * sets the ids of the controls

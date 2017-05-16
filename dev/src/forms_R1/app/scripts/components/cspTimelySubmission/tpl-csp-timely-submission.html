@@ -38,6 +38,8 @@
                      ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.dateId].$invalid}">
                     <label for="{{::timelySubCtrl.dateId}}" class="required">
                         <span class="field-name">{{"TIMELYDATE" |translate}}</span>
+                        <span ng-if="!timelySubCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                        <span ng-if="timelySubCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
                                data-ng-model="timelySubCtrl.model.approvalDate" class="form-control"
