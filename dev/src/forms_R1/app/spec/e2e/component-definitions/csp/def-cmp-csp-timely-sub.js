@@ -2,13 +2,14 @@
  * Created by dkilty on 27/04/2017.
  */
 
-
+var UiUtil = require('../../util/util-ui.js');
 var CspTimelySub = function () {
 
     var _subStatement_modelString="timelySubCtrl.model.submissionStatement";
     var _approvalDate_modelString="timelySubCtrl.model.approvalDate";
     var _country_modelString="timelySubCtrl.model.country";
     var _otherCountry_modelString="timelySubCtrl.model.otherCountry";
+    var uiUtil=new UiUtil();
     /**
      *
      * @constructor
@@ -45,12 +46,13 @@ var CspTimelySub = function () {
         return parent.element(by.model(_country_modelString)).all(by.css('.select2-chosen')).last().getText();
     };
 
-    this.setApprovalDateValue = function (parent, value) {
-        if(browser.browserName==="chrome"){
+    this.setApprovalDateValue = function (parent, year,month,day) {
+     /*   if(browser.browserName==="chrome"){
             //TODO hack, is there a better way?
             value="00"+value;
         }
-        parent.element(by.model(_approvalDate_modelString)).sendKeys(value);
+        parent.element(by.model(_approvalDate_modelString)).sendKeys(value);*/
+        uiUtil.setDate( parent.element(by.model(_approvalDate_modelString)),year,month,day);
     };
 
     this.getApprovalDateValue = function (parent) {

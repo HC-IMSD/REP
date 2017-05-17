@@ -1,14 +1,14 @@
 /**
  * Created by dkilty on 27/04/2017.
  */
-
+var UiUtil = require('../../util/util-ui.js');
 
 var CspPayment = function () {
 
     var _payAck_modelString="cspFeePayCtrl.model.ackPaymentSubmit";
     var _fee_modelString="cspFeePayCtrl.model.advancedPaymentFee";
     var _payType_modelString="cspFeePayCtrl.model.advancedPaymentType";
-
+    var uiUtil=new UiUtil();
     /**
      *
      * @constructor
@@ -24,8 +24,9 @@ var CspPayment = function () {
         return parent.element(by.model(_payAck_modelString)).getAttribute('value');
     };
 
-    this.setFeeNumValue = function (parent, value) {
+    this.setFeeNumValue = function (parent,value) {
         parent.element(by.model(_fee_modelString)).sendKeys(value);
+
     };
 
     this.getFeeNumValue = function (parent) {

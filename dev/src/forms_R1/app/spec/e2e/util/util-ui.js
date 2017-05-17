@@ -53,7 +53,7 @@ var UiUtil = function () {
         if (parentElement) {
             selectList = parentElement.element(selector);
             selectList.click();
-           // browser.sleep(100);
+            // browser.sleep(100);
             selectList.element(by.cssContainingText('option', item)).click();
             if (browser.browserName === 'firefox') {
                 //TODO hack to workaround firefox issue with protractor
@@ -235,6 +235,63 @@ var UiUtil = function () {
             });
         });
     }
+
+    this.setDate = function (dateElement, year, month, day) {
+        var separator="-"
+        if (browser.browserName === "chrome") {
+            //TODO hack, doesn't seem to be a way around this?
+            var value = "00" + year + month + day;
+            dateElement.sendKeys(value);
+        } else if (browser.browserName === "MicrosoftEdge") {
+            //bug: currently MM-dd-yyyy
+            var today = new Date();
+            var todayMonth = today.getMonth() + 1;
+            var numSends = (todayMonth - month);
+            var keySend = "";
+            if (numSends > 0) {
+                keySend = protractor.Key.UP;
+            } else {
+                keySend = protractor.Key.DOWN;
+            }
+            numSends = Math.abs(numSends);
+            //month
+            for (var i = 0; i < numSends; i++) {
+                dateElement.sendKeys(keySend);
+            }
+            //tab to day
+            //console.log("This is the day"+day);
+            //console.log("This is the todday"+today.getDay());
+            dateElement.sendKeys(protractor.Key.TAB);
+            numSends = (today.getDate() - day);
+            if (numSends > 0) {
+                keySend = protractor.Key.UP;
+            } else {
+                keySend = protractor.Key.DOWN;
+            }
+            numSends = Math.abs(numSends);
+            for (var i = 0; i < numSends; i++) {
+                dateElement.sendKeys(keySend);
+            }
+            //year
+            dateElement.sendKeys(protractor.Key.TAB);
+            numSends = (today.getFullYear() - year);
+            if (numSends > 0) {
+                keySend = protractor.Key.UP;
+            } else {
+                keySend = protractor.Key.DOWN;
+            }
+            numSends = Math.abs(numSends);
+            for (var i = 0; i < numSends; i++) {
+                dateElement.sendKeys(keySend);
+            }
+            dateElement.sendKeys(protractor.Key.ENTER);
+
+        } else {
+            dateElement.sendKeys(year +separator+ month+separator + day);
+        }
+
+    };
+
 };
 
 

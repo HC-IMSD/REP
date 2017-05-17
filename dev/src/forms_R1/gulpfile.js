@@ -2252,10 +2252,11 @@ gulp.task('dev-csp-injectTest', [], function () {
 //=========================================
 gulp.task('protractor-testEnv', function () {
     gulp.src([
-         'app/spec/e2e/tests/transaction/*.js',
-         'app/spec/e2e/tests/dossier/*.js',
-         'app/spec/e2e/tests/company/*.js',
-        'app/spec/e2e/tests/activity/*.js'
+       /*  'app/spec/e2e/tests/transaction/!*.js',
+         'app/spec/e2e/tests/dossier/!*.js',
+         'app/spec/e2e/tests/company/!*.js',
+        'app/spec/e2e/tests/activity/!*.js'*/
+        'app/spec/e2e/tests/csp/*.js'
     ])
         .pipe(protractor({
             configFile: "./protractorconf.js",

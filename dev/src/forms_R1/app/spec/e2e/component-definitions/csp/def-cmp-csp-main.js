@@ -24,6 +24,9 @@ var CspMain=function(){
         browser.get(value);
         browser.refresh();
         browser.get(value);
+        var EC = protractor.ExpectedConditions;
+        var getStarted = element(by.id(_xmlSaveId));
+        browser.wait(EC.elementToBeClickable(getStarted), 5000);
         //cannot bind until you have and instance of the browser set
         uiUtil.init();
         browser.driver.manage().window().maximize();
@@ -51,7 +54,15 @@ var CspMain=function(){
          element(by.id(_draftSaveId)).click();
     }
     this.saveXml=function(){
-        element(by.id(_xmlSaveId)).click();
+        //element(by.id(_xmlSaveId)).click();
+        var but= element(by.id(_xmlSaveId));
+
+        var scrollIntoView = function () {
+            arguments[0].scrollIntoView();
+        };
+        browser.executeScript(scrollIntoView, but);
+        but.click();
+
     }
 
 

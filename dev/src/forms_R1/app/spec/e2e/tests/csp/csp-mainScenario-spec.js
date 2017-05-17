@@ -141,9 +141,12 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             patentObj.setPatentNumValue(root, cspData.patentNum.typical);
 
 
-            patentObj.setGrantDateValue(root, expectedGrantDate);
-            patentObj.setFilingDateValue(root,expectedFilingDate);
-            patentObj.setExpiryDateValue(root, expectedExpiryDate);
+           // patentObj.setGrantDateValue(root, expectedGrantDate);
+            patentObj.setGrantDateValue(root,"2007","05","15");
+            patentObj.setFilingDateValue(root,"2006","12","14");
+            patentObj.setExpiryDateValue(root, "2022","12","05");
+          //  patentObj.setFilingDateValue(root,expectedFilingDate);
+           // patentObj.setExpiryDateValue(root, expectedExpiryDate);
 
             expect(patentObj.getGrantDateValue(root)).toEqual(expectedGrantDate);
             expect(patentObj.getExpiryDateValue(root)).toEqual(expectedExpiryDate);
@@ -173,7 +176,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             timelySubObj.setTimelyApplicationMade(root);
             //set the country to other EU
             var approvalDate="2006-11-22";
-            timelySubObj.setApprovalDateValue(root,approvalDate);
+            timelySubObj.setApprovalDateValue(root,"2006","11","22");
             timelySubObj.setCountryValue(root,cspData.timely_country.typical[lang]);
 
            expect(timelySubObj.getSubStatementValue(root)).toEqual(cspData.application_statement.APPLICATION);
@@ -195,7 +198,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             var root = mainObj.getRoot();
             //TODO handling dates across browsers is hard!
             var expectedCertDate = "2007-05-15"; //format saved
-            certObj.setDateSignedValue(root,expectedCertDate);
+            certObj.setDateSignedValue(root,"2007","05","15");
             certObj.setSurnameValue(root, cspData.lastNames.typical);
             certObj.setGivenNameValue(root, cspData.firstNames.typical);
             certObj.setTitleValue(root, cspData.jobTitle.typical);

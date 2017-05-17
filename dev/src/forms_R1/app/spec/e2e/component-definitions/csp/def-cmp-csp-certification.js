@@ -25,12 +25,13 @@ var CspCertification = function () {
 
         });*/
     };
-    this.setDateSignedValue = function (parent, value) {
-        if(browser.browserName==="chrome"){
+    this.setDateSignedValue = function (parent, year,month,day) {
+     /*   if(browser.browserName==="chrome"){
             //TODO hack, doesn't seem to be a way around this?
             value= "00"+value;
         }
-        parent.element(by.model(_dateSigned_modelString)).sendKeys(value);
+        parent.element(by.model(_dateSigned_modelString)).sendKeys(value);*/
+        uiUtil.setDate( parent.element(by.model(_dateSigned_modelString)),year,month,day);
 
     };
 
@@ -42,6 +43,7 @@ var CspCertification = function () {
         (parent.element(by.model(_dateSigned_modelString))).getText().then(function (value) {
             //ar dateValue = new Date(value);
             console.log(value);
+            return value
         });
     }
 
