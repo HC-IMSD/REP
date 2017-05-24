@@ -3,6 +3,17 @@
 <html class="no-js" lang="en" dir="ltr">
 <!--<![endif]-->
 <head>
+    <script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/wet-en.js"></script>
+    <script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/compiled/soyutils.js"></script>
+    <script type="text/javascript">
+        document.write(wet.builder.refTop({
+            cdnEnv:"prod"
+        }));
+    </script>
+
+    <noscript>
+
+    </noscript>
     <meta charset="utf-8">
     <!--No cache-->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
@@ -26,6 +37,11 @@
     <link rel="stylesheet" href="./@@formpath/GCWeb/css/ie8-theme.min.css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="./@@formpath/wet-boew/js/ie8-wet-boew.min.js"></script>
+
+
+    <noscript>
+    </noscript>
+
     <![endif]-->
     <!--[if lte IE 9]>
 
@@ -65,7 +81,7 @@
         <a class="wb-sl" href="#wb-info">Skip to "About this site"</a>
     </li>
 </ul>
-<header role="banner">
+<!--<header role="banner">
     <div id="wb-bnr" class="container">
         <section id="wb-lng" class="visible-md visible-lg text-right">
             <h2 class="wb-inv">Language selection</h2>
@@ -73,7 +89,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="list-inline margin-bottom-none">
-                    <li><a lang="fr" href=<!--build:langHtml--><!--endbuild-->>Français</a></li>
+                    <li><a lang="fr" href=&lt;!&ndash;build:langHtml&ndash;&gt;&lt;!&ndash;endbuild&ndash;&gt;>Français</a></li>
                     </ul>
                 </div>
             </div>
@@ -101,8 +117,8 @@
 <label for="wb-srch-q" class="wb-inv">Search website</label>
 <input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search" value="" size="27" maxlength="150" placeholder="Search Canada.ca">
 <datalist id="wb-srch-q-ac">
-<!--[if lte IE 9]><select><![endif]-->
-<!--[if lte IE 9]></select><![endif]-->
+&lt;!&ndash;[if lte IE 9]><select><![endif]&ndash;&gt;
+&lt;!&ndash;[if lte IE 9]></select><![endif]&ndash;&gt;
 </datalist>
 </div>
 <div class="form-group submit">
@@ -137,14 +153,28 @@
         <div class="container">
             <div class="row">
                 <ol class="breadcrumb">
-                    <li><!--build:homeAnchor--><!--endbuild--></li>
+                    <li>&lt;!&ndash;build:homeAnchor&ndash;&gt;&lt;!&ndash;endbuild&ndash;&gt;</li>
                 </ol>
             </div>
         </div>
     </nav>
-</header>
-<main role="main" property="mainContentOfPage" class="container">
+</header>-->
+<div id="def-top">
+<!-- #include virtual=/etc/designs/canada/cdts/gcweb/v4_0_22/cdts/static/top-en.html-->
+</div>
+<script type="text/javascript">
+    var defTop=document.getElementById("def-top");
+    defTop.outerHTML=wet.builder.top({
+        cdnEnv:"prod",
+        lngLinks:[{
+           lang:"fr",
+            href:"test.html",
+            text:"Francais"
+        }]
 
+    })
+</script>
+<main role="main" property="mainContentOfPage" class="container">
 
     <!--content starts here -->
     <div>
@@ -156,25 +186,46 @@
 
     </div>
     <!--content ends here -->
+    <div id="def-preFooter">
 
-    <div class="datemod col-xs-12 mrgn-tp-lg">
+    </div>
+    <script type="text/javascript">
+        var defPreFooter=document.getElementById("def-preFooter");
+        defPreFooter.outerHTML=wet.builder.preFooter({
+            cdnEnv:"prod",
+            dateModified:"<!--build:dateToday--><!--endbuild-->",
+            showShare:false,
+            showFeedback:false
+        })
+    </script>
+
+    <!--<div class="datemod col-xs-12 mrgn-tp-lg">
         <dl id="wb-dtmd">
             <dt>Date modified:&#32;</dt>
             <dd>
-                <time property="dateModified"><!--build:dateToday--><!--endbuild--> </time>
+                <time property="dateModified">&lt;!&ndash;build:dateTodayendbuild&ndash;&gt; </time>
             </dd>
         </dl>
-    </div>
-
+    </div>-->
 </main>
-<aside class="gc-nttvs container">
+<div id="def-footer">
+
+</div>
+<script type="text/javascript">
+    var defFooter=document.getElementById("def-footer");
+    defFooter.outerHTML=wet.builder.footer({
+        cdnEnv:"prod"
+    })
+</script>
+<!--<aside class="gc-nttvs container">
     <h2>Government of Canada activities and initiatives</h2>
 
     <div id="gcwb_prts" class="wb-eqht row wb-init wb-data-ajax-replace-inited wb-eqht-inited"
          data-ajax-append="https://cdn.canada.ca/gcweb-cdn-live/features/features-en.html">
 
     </div>
-</aside>
+</aside>-->
+<!--
 <footer role="contentinfo" id="wb-info">
     <nav role="navigation" class="container wb-navcurr">
         <h2 class="wb-inv">About government</h2>
@@ -214,7 +265,16 @@
             </div>
         </div>
     </div>
-</footer>
+</footer>-->
+<!--<footer  role="contentinfo" id="wb-info">
+    <script type="text/javascript">
+        document.write(wet.builder.refFooter({
+            cdnEnv:"prod"
+        }));
+    </script>
+</footer>-->
+
+
 <!--[if gte IE 9 | !IE ]><!-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script src="./@@formpath/wet-boew/js/wet-boew.min.js"></script>
