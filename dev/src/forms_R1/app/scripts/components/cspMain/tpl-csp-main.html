@@ -1,35 +1,29 @@
 <div class="container-fluid" translate-cloak="cloak-class">
     <ng-form id="csp-form" name="main.cspForm" novalidate="novalidate">
+
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <!-- <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
-                             id="load-instructions-toggle" ng-click="main.addInstruct(0)"><span
-                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
-                     </button>-->
+                    <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                            id="load-instructions-toggle" ng-click="main.addInstruct(0)"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
+                    </button>
                 </div>
                 <h2 class="panel-title">{{'LOAD_CSP_FILE'| translate}}</h2>
             </header>
             <div class="panel-body">
-                <!-- <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
-                      class="alert-info" close="main.closeAlert(0)">
-                     <section>
-                         <div>
-                             <h3 class="rep-margin-minus-top">Files to load</h3>
-                             <ul>
-                                 <li>Working Copy (.hcsc) – when continuing with an incomplete company template.</li>
-                                 <li>Final XML – when amending an approved company enrolment.</li>
-                                 <li>A file should not be loaded if it is the initial enrolment for company.</li>
-                             </ul>
-                         </div>
-                     </section>
-                 </div>-->
+                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
+                     class="alert-info" close="main.closeAlert(0)">
+                    <section aria-live="assertive">
+                        <div ng-if="!main.isFrench()" ng-include="'app/scripts/templates/csp/tpl-csp-file-en.html'">
+                        </div>
+                        <div ng-if="main.isFrench()" ng-include="'app/scripts/templates/csp/tpl-csp-file-fr.html'">
+                        </div>
+                    </section>
+                </div>
                 <div class="col-md-12">
-
                     <hpfb-file-select update-model-root="main.showContent(fileContent)" root-elem="{{main.rootTag}}"/>
                 </div>
-            </div>
-            <div>
             </div>
         </section>
         <cmp-error-summary form-ref="main.cspForm" show-errors="main.showErrorSummary"
@@ -39,12 +33,13 @@
         <div ng-if="main.showHCOnlySection()">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
-                    <!--  <div class="btn-group pull-right">
-                          &lt;!&ndash;  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
-                                    id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
-                            </button>&ndash;&gt;
-                      </div>-->
+                    <div class="btn-group pull-right">
+                        <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                                id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                                class="fa fa-question-circle fa-2x"></span><span
+                                class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
+                        </button>
+                    </div>
                     <h2 class="panel-title">{{'HCONLY'|translate}}</h2>
 
                 </header>
@@ -58,16 +53,9 @@
 
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-                <div class="btn-group pull-right">
-                    <!--  <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
-                              id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                              class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
-                      </button>-->
-                </div>
                 <h2 class="panel-title">{{'CSP_TITLE'|translate}}</h2>
             </header>
             <div class="panel-body">
-
                 <div class="row">
                     <div class="col-xs-3 form-group">
                         <label for="enr-version-text_{{$id}}">{{"ENROL_VERSION"| translate}}</label>
@@ -75,15 +63,37 @@
                                ng-readonly="true"
                                ng-model="main.cspModel.enrolmentVersion"/>
                     </div>
-                    <div class="col-xs-3 form-group">
-                        <label for="date-saved-text_{{$id}}">{{"DATE_SAVED"| translate}}</label>
+                    <div class="col-xs-6 form-group" form-inline>
+                        <label for="date-saved-text_{{$id}}">{{"DATE_SAVED"| translate}}
                         <input type="text" class="form-control" id="date-saved-text_{{$id}}"
                                ng-model="main.cspModel.dateSaved"
                                ng-readonly="true"/>
+                        </label>
+                        <button title="{{'VERSION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                id="version-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'VERSION_INSTRUCT'|translate}}"</span>
+                        </button>
+                    </div>
+                    <div class="col-xs-2">
+
                     </div>
                 </div>
                 <div class="row">
-
+                    <div class="col-xs-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[1]"
+                             class="alert-info" close="main.closeAlert(1)">
+                            <section aria-live="assertive">
+                                <div ng-if="!main.isFrench()"
+                                     ng-include="'app/scripts/templates/csp/tpl-csp-saveVersion-en.html'">
+                                </div>
+                                <div ng-if="main.isFrench()"
+                                     ng-include="'app/scripts/templates/csp/tpl-csp-saveVersion-fr.html'">
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12">
                         <h3>1.&nbsp;{{'CONTACT_TITLE'|translate}}</h3>
                     </div>
@@ -103,7 +113,8 @@
                         <div class="col-xs-12">
                             <h3>2.&nbsp;{{'PATENT_TITLE'|translate}}</h3>
                             <cmp-csp-patent record="main.cspModel.patent" show-errors="main.showErrors()"
-                                   language="main.lang" update-error-summary="main.updateErrorSummary()"></cmp-csp-patent>
+                                            language="main.lang"
+                                            update-error-summary="main.updateErrorSummary()"></cmp-csp-patent>
                         </div>
                     </div>
                 </div>
@@ -113,7 +124,8 @@
                                               drug-uses="main.drugUseList"></cmp-csp-main-application>
                 </div>
                 <div>
-                    <cmp-csp-timely-submission record="main.cspModel.timelySubmission" show-errors="main.showErrors()"
+                    <cmp-csp-timely-submission record="main.cspModel.timelySubmission"
+                                               show-errors="main.showErrors()"
                                                update-error-summary="main.updateErrorSummary()">
                     </cmp-csp-timely-submission>
                 </div>
@@ -143,7 +155,9 @@
         </section>
         <div class="row btn-group-sm">
             <div class="form-group col-md-4">
-                <button class="btn btn-default btn-lg active" id="btn_draftSave" ng-click="main.saveJson()">{{'SAVE_WORKING' |translate}}
+                <button class="btn btn-default btn-lg active" id="btn_draftSave" ng-click="main.saveJson()">
+                    {{'SAVE_WORKING'
+                    |translate}}
                 </button>
             </div>
             <div class="form-group col-md-4">

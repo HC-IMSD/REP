@@ -18,7 +18,8 @@
             'cspTimelySubmission',
             'cspFeePayment',
             'cspCertification',
-            'errorSummaryModule'
+            'errorSummaryModule',
+            'ui.bootstrap'
         ]);
 
 })();
@@ -55,7 +56,7 @@
         vm.showErrorSummary = 0; //signals child error summaries to show
         vm.updateSummary = 0; //signals to update the error summary contents
         vm.summaryFocusIndex = 0;
-
+        vm.alerts = [false, false, false, false, false];
         vm.exclusions = {
 
         };
@@ -104,6 +105,7 @@
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
+            vm.alerts = [false, false, false, false, false];
             vm.modelService = new CspService(); //create the service
             vm.cspModel = vm.modelService.getModelInfo(); //the model
             vm.paymentType = vm.modelService.getAdvancedPaymentTypes();
@@ -268,6 +270,30 @@
             var result=JSON.parse(vm.test);
             _loadFileContent(result);
         }
+        /*
+         Makes an instruction visible baseed on an index passed in
+         Index sets the UI state in the alerts array
+         */
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+
     }
 })();
 

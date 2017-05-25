@@ -29,7 +29,6 @@ var templateFileFr = 'content-fr.html';
 var _DATESTAMP = "";
 
 
-
 //paths and relativePaths of interest for dev and prod
 var paths = {
     styles: 'app/styles/',
@@ -58,7 +57,7 @@ var paths = {
     relLib: 'app/lib/',
     data: './app/data/',
     scripts: baseScript,
-    templates:'app/scripts/templates/',
+    templates: 'app/scripts/templates/',
     relScript: '/app/scripts/',
     components: baseScript + '/components/',
     directives: baseScript + '/directives/',
@@ -132,27 +131,27 @@ var transactionRootTitles_fr = {
 };
 
 var dossierRootTitles_en = {
-        mainHeading: "Dossier Template: Regulatory Enrolment Process (REP)",
-        title: 'Health Canada Dossier Template'
+    mainHeading: "Dossier Template: Regulatory Enrolment Process (REP)",
+    title: 'Health Canada Dossier Template'
 
-    };
+};
 
 var dossierRootTitles_fr = {
-        mainHeading: "fr_Dossier Template: Regulatory Enrolment Process (REP)",
-        title: 'fr_Health Canada Dossier Template'
+    mainHeading: "fr_Dossier Template: Regulatory Enrolment Process (REP)",
+    title: 'fr_Health Canada Dossier Template'
 
-    };
+};
 
 var cspRootTitles_en = {
-        mainHeading: "Certificate of Supplementary Protection (CSP) Application Form",
-        title: 'Health Canada CSP Form'
-    };
+    mainHeading: "Certificate of Supplementary Protection (CSP) Application Form",
+    title: 'Health Canada CSP Form'
+};
 
 var cspRootTitles_fr = {
-        mainHeading: "Formulaire de la demande de certificat de protection supplémentaire (CPS)",
-        title: 'Formulaire CPS de Santé Canada'
+    mainHeading: "Formulaire de la demande de certificat de protection supplémentaire (CPS)",
+    title: 'Formulaire CPS de Santé Canada'
 
-    };
+};
 
 //======================== Titles and main headings for the web page END================================
 
@@ -178,7 +177,7 @@ var rootFileNames = {
     transactionRoot: "transactionApp",
     dossierRoot: "dossierApp",
     repDiff: "diffApp",
-    cspRoot:"cspApp"
+    cspRoot: "cspApp"
 };
 
 
@@ -209,9 +208,8 @@ var libFileNames = {
     deepDiffMin: "deep-diff-0.3.4.min.js",
     uiTreeMin: "angular-ui-tree.min.js",
     uibTemplates: "uib-templates/*.*",
-    ngIf:"focusIf.min.js"
+    ngIf: "focusIf.min.js"
 }
-
 
 
 var changedFile = ""; // GLOBAL USED for Watcher storing changed file
@@ -271,16 +269,16 @@ var componentFolders = {
     nodesRender: 'nodes-renderer/',
     diffMain: 'diff-main/',
     errorSummary: 'error-summary/',
-    cspMain:'cspMain/',
-    cspContact:'cspContactRecord/',
-    cspHCOnly:'cspHealthCanadaOnly/',
-    cspMainAppl:'cspMainAppl/',
+    cspMain: 'cspMain/',
+    cspContact: 'cspContactRecord/',
+    cspHCOnly: 'cspHealthCanadaOnly/',
+    cspMainAppl: 'cspMainAppl/',
     cspPatent: 'cspPatent/',
     cspTimelySub: 'cspTimelySubmission/',
     cspFeePayment: 'cspFeePayment/',
     cspCert: 'cspCertification/',
     errorMsg: 'error-message/',
-    cspApplicantList:'cspContactList/'
+    cspApplicantList: 'cspContactList/'
 };
 
 //exclude custom styles only lib
@@ -309,15 +307,15 @@ var libProd = [
     paths.lib + libFileNames.ngIf
 ];
 
-var libCsp=[
+var libCsp = [
     paths.lib + libFileNames.angularMin,
     paths.lib + libFileNames.resourceMin,
     paths.lib + libFileNames.sanitizeMin,
     paths.lib + libFileNames.translateMin,
     paths.lib + libFileNames.fileSaverMin,
     paths.lib + libFileNames.selectMin,
-   /* paths.lib + libFileNames.sha256,*/
-   /* paths.lib + libFileNames.uiBootStrapMin,*/
+    /* paths.lib + libFileNames.sha256,*/
+     paths.lib + libFileNames.uiBootStrapMin,
     paths.lib + libFileNames.xml2Json,
     paths.lib + libFileNames.messagesMin,
     paths.lib + libFileNames.ariaMin,
@@ -325,7 +323,6 @@ var libCsp=[
     paths.lib + libFileNames.ngIf
 
 ];
-
 
 
 //Activity Form Components
@@ -359,7 +356,7 @@ var companyComponentFolders =
         componentFolders.contactRecord,
         componentFolders.importerProducts,
         componentFolders.dossierIdDetails,
-         componentFolders.errorSummary,
+        componentFolders.errorSummary,
         componentFolders.errorMsg
     ];
 
@@ -419,6 +416,10 @@ var cspComponentFolders = [
     componentFolders.cspApplicantList
 ];
 
+var noscriptObj = {
+    en: "Javascript must be enabled to fill in this form",
+    fr: "Javascript doit être activé pour remplir ce formulaire "
+}
 
 
 //======================== Component Definitions END ========================================
@@ -444,10 +445,10 @@ var serviceFileNames = {
     dossierService: "dossier-service",
     dossierDataList: "dossier-data-list",
     dossierLoadService: "dossier-load-service",
-    cspService:"csp-service",
-    cspConstants:'csp-constants',
+    cspService: "csp-service",
+    cspConstants: 'csp-constants',
     cspLoadService: 'csp-load-service',
-    cspDataLists:'csp-data-lists',
+    cspDataLists: 'csp-data-lists',
     diffService: 'diff-service'
 };
 
@@ -500,12 +501,11 @@ var transactionServiceFileNames = [
 
 ];
 // Template folders
-var activityTemplates=["activity/"];
-var transactionTemplates=["transaction/"];
+var activityTemplates = ["activity/"];
+var transactionTemplates = ["transaction/"];
 var companyTemplates = ["company/"];
 var dossierTemplates = ["dossier/"];
-
-
+var cspTemplates = ["csp/"];
 
 // Complementary Supplementary Protection Application Form
 var cspServiceFileNames =
@@ -519,7 +519,6 @@ var cspServiceFileNames =
         serviceFileNames.cspLoadService,
         serviceFileNames.cspDataLists
     ];
-
 
 
 //================================ SERVICE Definitions END ========================================/
@@ -551,8 +550,6 @@ var dossierDirectiveFolders =
     ];
 
 
-
-
 //Transaction Form directives
 var transactionDirectiveFolders =
     [
@@ -562,7 +559,7 @@ var transactionDirectiveFolders =
 //Complementary
 var cspDirectiveFolders =
     [
-       directiveFolders.numberOnly
+        directiveFolders.numberOnly
     ];
 
 
@@ -599,8 +596,8 @@ var translationBaseFiles = {
     addressXml: paths.translations + 'addressXml',
     contactXml: paths.translations + 'contactXml',
     defaultXml: paths.translations + 'defaultXml',
-    temp:paths.translations +'companyError',
-    errorSummary:paths.translations +'errorSummary',
+    temp: paths.translations + 'companyError',
+    errorSummary: paths.translations + 'errorSummary',
     cspGeneral: paths.translations + 'csp',
     cspError: paths.translations + 'cspError'
 };
@@ -673,7 +670,7 @@ var transactionTranslationFilesBaseList = [
     translationBaseFiles.transaction
 ];
 //complementary supplementary Forms
-var cspTranslationFilesBaseList=[
+var cspTranslationFilesBaseList = [
     translationBaseFiles.address,
     translationBaseFiles.stateProvinces,
     translationBaseFiles.contact,
@@ -773,19 +770,19 @@ pipes.translateDev = function (translateList, destPath, baseIgnore) {
  *  Inserts a date stamp in the passed in templaste
  *
  * */
-pipes.insertDateStamp = function (template, valsObj, lang, type,langHtmlName) {
+pipes.insertDateStamp = function (template, valsObj, lang, type, langHtmlName) {
     var now = new Date();
     var utc = dateFormat(now, "isoDate");
     var anchor = pipes.getHomeAnchor(type, lang);
-    var langSwitch="";
-    if(langHtmlName) langSwitch=langHtmlName;
+    var langSwitch = "";
+    if (langHtmlName) langSwitch = langHtmlName;
     return (gulp.src(template)
             .pipe(htmlreplace({
                 dateToday: utc,
                 mainHeading: valsObj.mainHeading,
                 formTitle: valsObj.title,
                 homeAnchor: anchor,
-                langHtml:langSwitch
+                langHtml: langSwitch
             }))
     );
 };
@@ -983,7 +980,7 @@ pipes.createHelpFile = function (templatePath, valsObj, partialRoot, destDir, de
  * Copy the source files based on the arrays for the different components
  *
  * */
-pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, directiveFolders,templateFolders, isHtmlMin) {
+pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, directiveFolders, templateFolders, isHtmlMin) {
     var htmlArray = [];
     var jsArray = [];
 
@@ -1001,7 +998,7 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
         jsArray.push(paths.directives + directiveFolders[i] + "**/*.js");
         htmlArray.push(paths.directives + directiveFolders[i] + "**/*.html")
     }
-    var templatesArray=[];
+    var templatesArray = [];
     for (var i = 0; i < templateFolders.length; i++) {
         folderPath = paths.templates + templateFolders[i] + '**/*';
         templatesArray.push(folderPath + '.html');
@@ -1046,7 +1043,7 @@ pipes.deleteSrcs = function (srcDir, componentFolders, serviceFileNames, directi
     )
 };
 
-pipes.deleteResourcesNonMinFiles=function(basePath) {
+pipes.deleteResourcesNonMinFiles = function (basePath) {
 
     var deletePaths = [
         basePath + 'app/scripts/**/*.js',
@@ -1056,9 +1053,6 @@ pipes.deleteResourcesNonMinFiles=function(basePath) {
     return (del(deletePaths));
 
 };
-
-
-
 
 
 pipes.createRootFileSet = function (rootPath, destDir, skipDate, generateInternal) {
@@ -1170,10 +1164,10 @@ pipes.copyAndMinStyles = function (stylesArray, isTimeStamped, destPath) {
 
 };
 
-pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType,htmlLangName) {
+pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType, htmlLangName) {
 
-
-    pipes.insertDateStamp(templatePath, metaObj, lang, formType,htmlLangName)
+    return(
+    pipes.insertDateStamp(templatePath, metaObj, lang, formType, htmlLangName)
         .pipe(inject(gulp.src([htmlPartial]), {
             starttag: placeholders.mainContent,
             transform: function (filePath, file) {
@@ -1209,8 +1203,26 @@ pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartia
             }))
         .pipe(rename(outName))
         .pipe(gulp.dest(destDir))
-
+    )
 };
+
+pipes.injectNoJsMsg = function (srcDir) {
+
+    var noJsText = noscriptObj['en'];
+    (gulp.src(srcDir + "*-en.html")
+            .pipe(htmlreplace({
+                noJsMsg: noJsText
+            })).pipe(gulp.dest(srcDir))
+    );
+    noJsText = noscriptObj['fr'];
+    return (gulp.src(srcDir + "*-fr.html")
+            .pipe(htmlreplace({
+                noJsMsg: noJsText
+            })).pipe(gulp.dest(srcDir))
+    );
+
+
+}
 
 
 //============================ Pipe Segmeents END =============================================
@@ -1443,13 +1455,12 @@ gulp.task('dev-csp-clean', function () {
 });
 
 
-
 /******* Company Taska ****/
 
 //copy all the needed files for company
 gulp.task('dev-company-copySrc', function () {
     return (
-        pipes.copySrcs(true, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders,companyTemplates, false)
+        pipes.copySrcs(true, paths.buildDevCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, companyTemplates, false)
     )
 });
 
@@ -1500,13 +1511,12 @@ gulp.task('dev-company-copyWet', function () {
 });
 
 
-
 /**********************Start Transaction Gulp scripts******/
 //copy all the needed files for company
 gulp.task('dev-transaction-copySrc', function () {
 
     return (
-        pipes.copySrcs(true, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders,transactionTemplates, false)
+        pipes.copySrcs(true, paths.buildDevTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, transactionTemplates, false)
     );
 
 
@@ -1602,7 +1612,7 @@ gulp.task('dev-dossier-copyTranslate', [], function () {
 
 gulp.task('dev-dossier-copySrc', [], function () {
     return (
-        pipes.copySrcs(true, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders,dossierTemplates, false)
+        pipes.copySrcs(true, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, dossierTemplates, false)
     )
 });
 
@@ -1654,8 +1664,6 @@ gulp.task('prod-global-cleanEnvironment', function () {
 });
 
 
-
-
 /**
  * Blind copies all the data files from the data source directory to the prod directory
  * */
@@ -1684,11 +1692,10 @@ gulp.task('prod-activity-copyTranslateFiles', function () {
 });
 
 
-
 //copy source files
 gulp.task('prod-activity-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders,activityTemplates, true)
+        pipes.copySrcs(false, paths.buildProdActivity, activityComponentFolders, activityServiceFileNames, activityDirectiveFolders, activityTemplates, true)
     );
 });
 
@@ -1703,7 +1710,7 @@ gulp.task('prod-activity-deleteSourceFiles', function () {
 
 gulp.task('prod-company-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders,companyTemplates, true)
+        pipes.copySrcs(false, paths.buildProdCompany, companyComponentFolders, companyServiceFileNames, companyDirectiveFolders, companyTemplates, true)
     );
 });
 
@@ -1757,7 +1764,7 @@ gulp.task('prod-company-compileSrcJs', ['prod-company-compileTranslateFile', 'pr
 });
 gulp.task('prod-company-compileTranslateFile', ['prod-company-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProdCompany+ paths.relScript;
+    var destPath = paths.buildProdCompany + paths.relScript;
     var srcPath = paths.buildProdCompany;
     return (pipes.compileTranslateFile(srcPath, destPath, "companyTranslations", companyTranslationFilesBaseList));
 
@@ -1810,7 +1817,6 @@ gulp.task('prod-dossier-allFormsCreate', ['prod-dossier-compileHtml'], function 
 });
 
 
-
 gulp.task('prod-dossier-compileHtml', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-dossier-compileSrcJs', 'prod-dossier-copyLib'], function () {
 
     var ignorePath = '/build/prod/dossier';
@@ -1859,7 +1865,7 @@ gulp.task('prod-dossier-compileSrcJs', ['prod-dossier-compileTranslateFile', 'pr
 
 gulp.task('prod-dossier-compileTranslateFile', ['prod-dossier-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProdDossier+ paths.relScript;
+    var destPath = paths.buildProdDossier + paths.relScript;
     var srcPath = paths.buildProdDossier;
     return (pipes.compileTranslateFile(srcPath, destPath, "dossierTranslations", dossierTranslationFilesBaseList));
 
@@ -1884,7 +1890,7 @@ gulp.task('prod-dossier-createRootJsFiles', [], function () {
 
 gulp.task('prod-dossier-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders,dossierTemplates, true)
+        pipes.copySrcs(false, paths.buildProdDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, dossierTemplates, true)
     );
 });
 
@@ -1950,7 +1956,7 @@ gulp.task('prod-transaction-compileSrcJs', ['prod-transaction-compileTranslateFi
 
 gulp.task('prod-transaction-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders,transactionTemplates, true)
+        pipes.copySrcs(false, paths.buildProdTransaction, transactionComponentFolders, transactionServiceFileNames, transactionDirectiveFolders, transactionTemplates, true)
     );
 });
 
@@ -1959,16 +1965,15 @@ gulp.task('prod-transaction-copySourceFiles', function () {
 ////////////////////////// Start CSP PROD scripts
 
 
-
 gulp.task('prod-csp-copySourceFiles', function () {
     return (
-        pipes.copySrcs(false, paths.buildProdCsp, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders,[], true)
+        pipes.copySrcs(false, paths.buildProdCsp, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders, cspTemplates, true)
     );
 });
 
 gulp.task('prod-csp-allFormsCreate', ['prod-csp-compileHtml'], function () {
 
-    return pipes.deleteResourcesNonMinFiles(paths.buildProdCsp);
+    return  pipes.deleteResourcesNonMinFiles(paths.buildProdCsp);
 
 });
 
@@ -1998,11 +2003,15 @@ gulp.task('prod-csp-compileHtml', ['prod-global-create-src-template', 'prod-glob
     ];
     var srcPath = paths.buildProdCsp;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'cspEXT-en.html', destPath, 'en', deployType.test,'cspEXT-fr.html');
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'cspEXT-fr.html', destPath, 'fr', deployType.test,'cspEXT-en.html');
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'cspINT-fr.html', destPath, 'fr', deployType.test, 'cspINT-en.html');
-    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'cspINT-en.html', destPath, 'en', deployType.test, 'cspINT-fr.html');
-
+    return (
+        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'cspINT-en.html', destPath, 'en', deployType.test, 'cspINT-fr.html')
+        &&
+        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'cspEXT-en.html', destPath, 'en', deployType.test, 'cspEXT-fr.html')
+        &&
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'cspEXT-fr.html', destPath, 'fr', deployType.test, 'cspEXT-en.html')
+        &&
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'cspINT-fr.html', destPath, 'fr', deployType.test, 'cspINT-en.html')
+    )
 });
 gulp.task('prod-csp-compileSrcJs', ['prod-csp-compileTranslateFile', 'prod-csp-createRootJsFiles', 'prod-csp-copySourceFiles'], function () {
 
@@ -2018,7 +2027,7 @@ gulp.task('prod-csp-compileSrcJs', ['prod-csp-compileTranslateFile', 'prod-csp-c
 
 gulp.task('prod-csp-compileTranslateFile', ['prod-csp-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProdCsp+ paths.relScript;
+    var destPath = paths.buildProdCsp + paths.relScript;
     var srcPath = paths.buildProdCsp;
     return (pipes.compileTranslateFile(srcPath, destPath, "cspTranslations", cspTranslationFilesBaseList));
 
@@ -2053,15 +2062,6 @@ gulp.task('prod-csp-copyLib', function () {
 });
 
 
-
-
-
-
-
-
-
-
-
 /////////////// End CSP Prod scripts
 
 gulp.task('connect-server-start', function () {
@@ -2072,7 +2072,6 @@ gulp.task('connect-server-start', function () {
         livereload: true
     });
 });
-
 
 
 gulp.task('dev-diffForm-clean', function () {
@@ -2177,7 +2176,7 @@ gulp.task('dev-csp-copyWet', function () {
 
 gulp.task('dev-csp-copySrc', function () {
     return (
-        pipes.copySrcs(true, paths.buildDevCSP, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders,[], false)
+        pipes.copySrcs(true, paths.buildDevCSP, cspComponentFolders, cspServiceFileNames, cspDirectiveFolders, cspTemplates, false)
     )
 });
 
@@ -2197,7 +2196,7 @@ gulp.task('dev-csp-copyTranslate', function () {
 
 gulp.task('dev-csp-copyLib', function () {
 
-    var srcs=libCsp;
+    var srcs = libCsp;
     srcs.push(paths.styles + '**/*')
     var copySources = gulp.src(srcs,
         {read: true, base: '.'});
@@ -2226,17 +2225,17 @@ gulp.task('dev-csp-htmlBuild', ['dev-global-create-src-template', 'dev-csp-copyD
     pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, 'cspINT-en.html', 'cspAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
     return (
         pipes.cleanBuild(buildDir + paths.translations)
-
     );
 });
 
+
 gulp.task('dev-csp-injectTest', [], function () {
     var ignoreDir = '/build/dev/csp';
-    var templateDir = paths.buildDevCSP+'app/scripts/components/'+componentFolders.cspMain;
+    var templateDir = paths.buildDevCSP + 'app/scripts/components/' + componentFolders.cspMain;
 
-    var template= templateDir+"tpl-csp-main.html";
+    var template = templateDir + "tpl-csp-main.html";
     console.log(template)
-    var cspTest='<input id="testInput" type="text"  ng-model="main.test" ng-blur="main.testMe()" />';
+    var cspTest = '<input id="testInput" type="text"  ng-model="main.test" ng-blur="main.testMe()" />';
     return (gulp.src(template)
             .pipe(htmlreplace({
                 test: cspTest
@@ -2252,18 +2251,18 @@ gulp.task('dev-csp-injectTest', [], function () {
 //=========================================
 gulp.task('protractor-testEnv', function () {
     gulp.src([
-       /*  'app/spec/e2e/tests/transaction/!*.js',
+        /*  'app/spec/e2e/tests/transaction/!*.js',
          'app/spec/e2e/tests/dossier/!*.js',
          'app/spec/e2e/tests/company/!*.js',
-        'app/spec/e2e/tests/activity/!*.js'*/
+         'app/spec/e2e/tests/activity/!*.js'*/
         'app/spec/e2e/tests/csp/*.js'
     ])
         .pipe(protractor({
             configFile: "./protractorconf.js",
             args: [
                 '--baseUrl', 'https://lam-dev.hres.ca/rep_test/',
-                '--params.lang' ,'en',
-                '--params.formType','EXT'
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
             ]
         }))
 
@@ -2276,16 +2275,16 @@ gulp.task('protractor-testEnv', function () {
 gulp.task('protractor-localDevEnv', function () {
     gulp.src([
 
-      /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
-       'app/spec/e2e/tests/csp/*.js'
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/csp/*.js'
     ])
         .pipe(protractor({
             configFile: "./protractorconf.js",
 
             args: [
                 '--baseUrl', 'http://localhost:2121/dev/',
-                '--params.lang' ,'en',
-                '--params.formType','EXT'
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
             ]
         }))
 
@@ -2294,7 +2293,6 @@ gulp.task('protractor-localDevEnv', function () {
             //throw e;
         })
 });
-
 
 
 /**
@@ -2405,8 +2403,6 @@ gulp.task('prod-csp-clean', function () {
 });
 
 
-
-
 gulp.task('prod-activity-compileSrcJs', ['prod-activity-compileTranslateFile', 'prod-activity-createRootJsFiles', 'prod-activity-copySourceFiles'], function () {
 
     var srcPath = paths.buildProdActivity + 'app/scripts/';
@@ -2428,7 +2424,7 @@ gulp.task('prod-activity-createRootJsFiles', [], function () {
 
 gulp.task('prod-activity-compileTranslateFile', ['prod-activity-copyTranslateFiles'], function () {
 
-    var destPath = paths.buildProdActivity+ paths.relScript;
+    var destPath = paths.buildProdActivity + paths.relScript;
     var srcPath = paths.buildProdActivity;
     return (pipes.compileTranslateFile(srcPath, destPath, "activityTranslations", activityTranslationFilesBaseList));
 

@@ -2,12 +2,26 @@
 <div  data-ng-repeat="applicantRecord in cspApplListCtrl.model track by $index ">
     <div class="row">
         <fieldset>
-            <div class="col-xs-12">
-                <legend ng-if="applicantRecord.role.applicant">{{'APPL_TITLE'|translate}}
-                </legend>
-                <legend ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant">
-                    {{'BILLING_TITLE' |translate}}
-                </legend>
+            <div class="col-xs-12 ">
+                <div ng-if="applicantRecord.role.applicant" >
+                    <div class="col-xs-5">
+                       <legend >{{'APPL_TITLE'|translate}}</legend>
+                   </div>
+                    <div class="col-xs-1">
+                        <button title="{{'APPLICANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                id="applicant-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'APPLICANT_INSTRUCT'|translate}}"</span>
+                        </button>
+                    </div>
+                </div>
+                <div ng-if="applicantRecord.role.billing && !applicantRecord.role.applicant" >
+                    <div class="col-xs-5">
+                        <legend > {{'BILLING_TITLE' |translate}}</legend>
+                    </div>
+                    <button title="{{'APPLICANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            id="billing-instructions-toggle" ng-click="main.addInstruct(1)"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'APPLICANT_INSTRUCT'|translate}}"</span>
+                    </button>
             </div>
             <cmp-csp-applicant record="applicantRecord" alias="cspApplListCtrl.setAlias(applicantRecord)"
                                add-applicant="cspApplListCtrl.addApplicant()" show-errors="cspApplListCtrl.showErrors()"
