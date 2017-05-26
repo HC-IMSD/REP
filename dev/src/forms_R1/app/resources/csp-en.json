@@ -25,7 +25,7 @@
   "MED_INGRED": "Medicinal ingredient or combination of medicinal ingredients (as provided on the NOC for the NDS provided in Section 3)",
   "APPLICANTAPPLY": "Attestation as to Applicant",
   "STATEMENTS_TIMELY": "Attestation as to Timely Submission",
-  "TIMELYDATE": "Application Date",
+  "TIMELYDATE": "Date of first marketing approval application",
   "TIMELYCOUNTRY": "Country of first marketing approval application",
   "DATE_SIGNED": "Date",
   "CSP_TITLE": "Certificate of Supplementary Protection (CSP) Information",
@@ -55,6 +55,20 @@
   "APPLICATION":"If one or more applications for a marketing approval, equivalent to an authorization for sale, with respect to the medicinal ingredient or combination of medicinal ingredients, as the case may be, set out in this CSP application had been submitted in one or more of the European Union or any country that is a member of the European Union, the United States of America, Australia, Switzerland or Japan, the application for the authorization for sale referred to in paragraph 106(1)(c) of the <i>Patent&nbsp;Act</i> (above noted NDS) was filed with the Minister of Health before the end of the 18 month period that begins on the date of submission of the first of those marketing approval applications.  Details of the first of those marketing approval applications are as follows:",
   "FEE_PREAMBLE":"This form should <b><u>not</u></b> include payment information (eg credit card number) other than as specifically requested below, as the information included within an electronic submission cannot be deleted and will remain as part of the CSP application on record. As such, please separately <b><u>mail</u></b> or <b><u>fax</u></b> the",
   "FEE_URL":"http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv_pa_av-eng.pdf",
-  "FEE_URLTITLE":"Advance Payment Details for Drug Submissions and Master Files for Human and Disinfectant Drugs, and Certificate of Supplementary Protection Application Form"
+  "FEE_URLTITLE":"Advance Payment Details for Drug Submissions and Master Files for Human and Disinfectant Drugs, and Certificate of Supplementary Protection Application Form",
+  "HELP_CSPFILE_LOAD":"Expand File load Instructions",
+  "VERSION_INSTRUCT":"Expand Version Number Instructions",
+  "HELP_PATENT":"Expand Patent Instructions",
+  "HELP_FEE":"Expand Fee Payment Instructions",
+  "HELP_CERT":"Expand Certification Instructions",
+
+  "HELP_ATTEST":"Expand Attestation Instructions",
+  "HELP_DRUGUSE":"Expand Drug Use Instructions",
+  "HELP_MI":"Expand Medicinal Ingredient Instructions",
+  "HELP_NDS":"Expand New Drug Submission Instructions",
+
+  "HELP_MARKETDATE":"Expand Market Date Instructions",
+  "APPLICANT_INSTRUCT":"Expand Applicant Information Instructions",
+  "BILLING_INSTRUCT":"Expand Billing Address Instructions"
 }
 

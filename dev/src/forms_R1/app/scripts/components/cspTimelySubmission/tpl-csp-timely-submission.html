@@ -34,24 +34,47 @@
         </div>
         <div ng-show="timelySubCtrl.isApplicationMarketing()">
             <div class="row">
-                <div class="form-group col-md-4"
-                     ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.dateId].$invalid}">
-                    <label for="{{::timelySubCtrl.dateId}}" class="required">
-                        <span class="field-name">{{"TIMELYDATE" |translate}}</span>
-                        <span ng-if="!timelySubCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
-                        <span ng-if="timelySubCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
-                        <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                <div class="col-xs-12">
+                    <div class=" rep-vertical-align"
+                         ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.dateId].$invalid}">
+                        <label for="{{::timelySubCtrl.dateId}}" class="required">
+                            <span class="field-name">{{"TIMELYDATE" |translate}}</span>
+                            <span ng-if="!timelySubCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                            <span ng-if="timelySubCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
+                            <strong class="required"> {{"REQUIRED" |translate}} </strong>
+                            <cmp-error-message field-name="timelySubCtrl.dateId" form-ref="timelySubCtrl.timelySubForm"
+                                               show-error="timelySubCtrl.showErrors()"
+                                               error-types="timelySubCtrl.dateError"></cmp-error-message>
+                        </label>
+                    </div>
+                    <div class="rep-vertical-align">
                         <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
                                data-ng-model="timelySubCtrl.model.approvalDate" class="form-control"
                                ng-required="timelySubCtrl.isApplicationMarketing()"/>
-                        <cmp-error-message field-name="timelySubCtrl.dateId" form-ref="timelySubCtrl.timelySubForm"
-                                           show-error="timelySubCtrl.showErrors()"
-                                           error-types="timelySubCtrl.dateError"></cmp-error-message>
-                    </label>
+                    </div>
+                    <button title="{{'HELP_MARKETDATE'|translate}}"  class="btn rep-help-button-primary btn-xs rep-vertical-align"
+                            ng-click="timelySubCtrl.addInstruct(0)"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_MARKETDATE'|translate}}"</span>
+                    </button>
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-7"
+                <div class="col-xs-12">
+                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="timelySubCtrl.alerts[0]"
+                         class="alert-info" close="timelySubCtrl.closeAlert(0)">
+                        <section aria-live="assertive">
+                            <div ng-if="!timelySubCtrl.isFrench()"
+                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-en.html'">
+                            </div>
+                            <div ng-if="timelySubCtrl.isFrench()"
+                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-fr.html'">
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="row rep-margin-top">
+                <div class="form-group col-md-7 rep-margin-top"
                      ng-class="{'has-error':timelySubCtrl.timelySubForm[timelySubCtrl.countryId].$invalid}">
                     <label for="{{::timelySubCtrl.countryId}}" class="required">
                         <span class="field-name">{{"TIMELYCOUNTRY" |translate}}</span>

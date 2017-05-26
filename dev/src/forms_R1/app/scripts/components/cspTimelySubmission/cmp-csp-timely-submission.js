@@ -22,7 +22,7 @@
                 record: '<',
                 countryList: '<',
                 showErrors: '&',
-                updateErrorSummary: '&',
+                updateErrorSummary: '&'
 
             }
         });
@@ -41,7 +41,7 @@
 
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.lang = $translate.proposedLanguage() || $translate.use();
-
+        vm.alerts = [false];
         /**
          * Called after onChanges evnet, initializes
          */
@@ -55,7 +55,7 @@
             $translate('APPLICATION').then(function (data) {
                 vm.application = data;
             });
-
+            vm.alerts = [false];
            // vm.noApplication = $translate.instant('NOAPPLICATION'); //NEW LINE
            // vm.application = $translate.instant('APPLICATION'); //NEW LINE
         };
@@ -75,11 +75,16 @@
             if (!vm.model) return false;
 
             if (vm.model.submissionStatement === APPLICATION) {
+                if(!vm.countries || !vm.countries.length>0) {
+                    //guarding against potential race conditions
+                    console.warn("Needed to redefine marketing countries")
+                    vm.countries = cspDataLists.getMarketingCountries();
+                }
                 return true;
             } else {
                 vm.model.approvalDate = "";
                 vm.model.country = "";
-               // vm.model.otherCountry = "";
+                vm.alerts[0] = false; //reset alert
                 return false;
             }
         };
@@ -103,6 +108,35 @@
         $scope.$watch('timelySubCtrl.timelySubForm.$error', function () {
             vm.updateErrorSummary();
         }, true);
+
+        /*
+         Makes an instruction visible baseed on an index passed in
+         Index sets the UI state in the alerts array
+         */
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        vm.isFrench=function(){
+            return(vm.lang===FRENCH);
+        };
+
+
 
     }
 })();

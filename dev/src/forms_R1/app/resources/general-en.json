@@ -35,7 +35,7 @@
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",
   "PHARMACEUTICAL": "Pharmaceutical",
-  "HELP_FILE_LOAD": "File Load Instructions",
+  "HELP_FILE_LOAD": "Expand file load instructions",
   "HELP_ACTIVITY_MAIN": "Activity Instructions",
   "HELP_ACTIVITY_REP": "REP Contact Instructions",
   "CALENDAR": "Pick date from calendar",
@@ -48,5 +48,5 @@
   "DELETE":"Delete",
   "SAVE_WORKING":"Save Working Copy",
   "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)",
-  "CLOSE":"Close"
+  "CLOSE_ALERT":"Collapse instructions"
 }

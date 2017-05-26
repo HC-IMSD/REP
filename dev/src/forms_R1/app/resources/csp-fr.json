@@ -36,7 +36,7 @@
   "ACK_FEE_SUBMIT": "Le formulaire Détails du paiement en avance est soumis séparément par télécopieur ou par courriel",
   "PAYMENT_METHOD": "Avec la méthode de paiement suivante",
   "DATE_SIGNED": "Date",
-  "TIMELYDATE": "Date de la demande",
+  "TIMELYDATE": "Date de première demande pour une autorisation de vente",
   "TIMELYCOUNTRY": "Pays de première demande pour une autorisation de vente",
   "CERT_TITLE": "Attestation",
   "CERT_FS": "Représentant autorisé",
@@ -54,6 +54,19 @@
   "CREDIT": "Paiement au moyen d'un crédit existant",
   "WIRE": "Virements télégraphiques",
   "HUMAN": "Humain",
-  "VETERINARY": "Vétérinaire"
+  "VETERINARY": "Vétérinaire",
+  "HELP_CSPFILE_LOAD":"Élargir les instructions de chargement du fichier",
+  "VERSION_INSTRUCT":"Élargir les instructions de version",
+  "HELP_PATENT":"Élargir les instructions de brevet",
+  "HELP_FEE":"Élargir les instructions frais",
+  "HELP_CERT":"Élargir les instructions de attestation",
+
+  "HELP_ATTEST":"Élargir les instructions de attestations",
+  "HELP_DRUGUSE":"Élargir les instructions d'utilisation de drogues",
+  "HELP_MI":"Élargir les instructions de ingrédient médicinal",
+  "HELP_NDS":"Élargir les instructions de renseignements sur la présentation de drogue nouvelle",
+  "HELP_MARKETDATE":"Élargir les instructions de date de première demande pour une autorisation de vente",
+  "APPLICANT_INSTRUCT":"Élargir les instructions de renseignements sur le demandeur",
+  "BILLING_INSTRUCT":"Élargir les instructions de adresse de facturation"
 
 }
