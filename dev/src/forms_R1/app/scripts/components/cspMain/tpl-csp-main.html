@@ -55,19 +55,15 @@
                                ng-readonly="true"
                                ng-model="main.cspModel.enrolmentVersion"/>
                     </div>
-                    <div class="col-xs-6 form-group" form-inline>
+                    <div class="col-xs-6 form-group">
                         <label for="date-saved-text_{{$id}}">{{"DATE_SAVED"| translate}}
                             <input type="text" class="form-control" id="date-saved-text_{{$id}}"
-                                   ng-model="main.cspModel.dateSaved"
-                                   ng-readonly="true"/>
+                                   ng-model="main.cspModel.dateSaved" ng-readonly="true"/>
                         </label>
                         <button title="{{'VERSION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                 id="version-instructions-toggle" ng-click="main.addInstruct(1)"><span
                                 class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'VERSION_INSTRUCT'|translate}}"</span>
                         </button>
-                    </div>
-                    <div class="col-xs-2">
-
                     </div>
                 </div>
                 <div class="row">
