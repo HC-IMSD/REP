@@ -19,7 +19,7 @@
     TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists'];
 
     //version 1.1 bug fix?
-    //version 1.2 added presubmission package/rq to MPNC, MPDNS
+    //version 1.2 added Submission package/rq to MPNC, MPDNS
 
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists) {
         function TransactionService() {
