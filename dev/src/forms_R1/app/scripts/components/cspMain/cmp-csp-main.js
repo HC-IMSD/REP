@@ -19,7 +19,8 @@
             'cspFeePayment',
             'cspCertification',
             'errorSummaryModule',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'alertModule'
         ]);
 
 })();
@@ -38,8 +39,8 @@
             }
         });
 
-    cspMainCtrl.$inject = ['CspService', 'hpfbFileProcessing', 'ApplicationInfoService', 'INTERNAL_TYPE', 'EXTERNAL_TYPE','$translate','FRENCH'];
-    function cspMainCtrl(CspService, hpfbFileProcessing, ApplicationInfoService, INTERNAL_TYPE, EXTERNAL_TYPE,$translate,FRENCH) {
+    cspMainCtrl.$inject = ['CspService', 'hpfbFileProcessing', 'ApplicationInfoService', 'INTERNAL_TYPE', 'EXTERNAL_TYPE','$translate','FRENCH','$scope'];
+    function cspMainCtrl(CspService, hpfbFileProcessing, ApplicationInfoService, INTERNAL_TYPE, EXTERNAL_TYPE,$translate,FRENCH,$scope) {
 
         var vm = this;
         vm.userType = EXTERNAL_TYPE;
@@ -293,7 +294,12 @@
             }
         };
 
-
+        vm.toggleAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = !vm.alerts[value];
+            }
+        };
     }
 })();
 

@@ -12,8 +12,7 @@
 
     angular
         .module('cspContactList', [
-            'cspApplicant',
-            'hpfbConstants'
+            'cspApplicant'
         ]);
 
 })();
@@ -35,18 +34,16 @@
                 updateErrorSummary: '&'
             }
         });
-    cspApplicantListController.$inject = ['$translate', 'FRENCH'];
-    function cspApplicantListController($translate, FRENCH) {
+    cspApplicantListController.$inject = [];
+    function cspApplicantListController() {
 
         var vm = this;
         vm.model = "";
-        vm.alerts = [false,false];
-        vm.lang = $translate.proposedLanguage() || $translate.use();
+
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
-            vm.alerts = [false,false];
         };
 
         /**
@@ -59,32 +56,6 @@
             }
         };
 
-        /*
-         Makes an instruction visible baseed on an index passed in
-         Index sets the UI state in the alerts array
-         */
-        vm.addInstruct = function (value) {
-
-            if (angular.isUndefined(value)) return;
-            if (value < vm.alerts.length) {
-                vm.alerts[value] = true;
-            }
-        };
-
-        /**
-         * Closes the instruction alerts
-         * @param value
-         */
-        vm.closeAlert = function (value) {
-            if (angular.isUndefined(value)) return;
-            if (value < vm.alerts.length) {
-                vm.alerts[value] = false;
-            }
-        };
-
-        vm.isFrench = function () {
-            return (vm.lang === FRENCH);
-        };
 
     }
 })();

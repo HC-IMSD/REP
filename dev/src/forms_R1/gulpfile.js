@@ -67,14 +67,14 @@ var paths = {
 };
 
 var homePath = {
-    dev_en: '<a href="https://lam-dev.hres.ca/rep-dev/index.html">Home</a>',
-    dev_fr: '<a href="https://lam-dev.hres.ca/rep-dev/index-fr.html">Accueil</a>',
-    test_en: '<a href="https://lam-dev.hres.ca/rep_test/index.html">Home</a>',
-    test_fr: '<a href="https://lam-dev.hres.ca/rep_test/index-fr.html">Accueil</a>',
-    prod_en: '<a href="https://lam-dev.hres.ca/REP-Form/index.html">Home</a>',
-    prod_fr: '<a href="https://lam-dev.hres.ca/REP-Form/index-fr.html">Accueil</a>',
-    prodInt_en: '<a href="https://lam-dev.hres.ca/REP-Form-Internal/index.html">Home</a>',
-    prodInt_fr: '<a href="https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html">Accueil</a>'
+    dev_en: "https://lam-dev.hres.ca/rep-dev/index.html",
+    dev_fr: "https://lam-dev.hres.ca/rep-dev/index-fr.html",
+    test_en: "https://lam-dev.hres.ca/rep_test/index.html",
+    test_fr: "https://lam-dev.hres.ca/rep_test/index-fr.html",
+    prod_en: "https://lam-dev.hres.ca/REP-Form/index.html",
+    prod_fr: "https://lam-dev.hres.ca/REP-Form/index-fr.html",
+    prodInt_en:"https://lam-dev.hres.ca/REP-Form-Internal/index.html",
+    prodInt_fr:"https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
 
 };
 var deployType = {
@@ -278,7 +278,8 @@ var componentFolders = {
     cspFeePayment: 'cspFeePayment/',
     cspCert: 'cspCertification/',
     errorMsg: 'error-message/',
-    cspApplicantList: 'cspContactList/'
+    cspApplicantList: 'cspContactList/',
+    alertComp:"alertComponent"
 };
 
 //exclude custom styles only lib
@@ -413,7 +414,8 @@ var cspComponentFolders = [
     componentFolders.cspCert,
     componentFolders.errorSummary,
     componentFolders.errorMsg,
-    componentFolders.cspApplicantList
+    componentFolders.cspApplicantList,
+    componentFolders.alertComp
 ];
 
 var noscriptObj = {

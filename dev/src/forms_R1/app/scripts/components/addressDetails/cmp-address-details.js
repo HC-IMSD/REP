@@ -60,7 +60,7 @@
             postalCode: ""
         };
 
-        vm.countryReadOnly=false;
+        vm.countryIsEditable=true; //default to true in case binding not set
         vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
@@ -105,7 +105,10 @@
                 }
             }
             if(changes.countryEditable){
-                vm.countryReadOnly=changes.countryEditable.currentValue;
+                vm.countryIsEditable=changes.countryEditable.currentValue;
+                if(angular.isUndefined(vm.countryIsEditable)){
+                    vm.countryIsEditable=true;
+                }
             }
         };
         /**
@@ -159,8 +162,7 @@
             vm.addressForm.$setPristine();
         };
         vm.isCountryEditable=function(){
-
-          return(vm.isEditable &&!vm.countryReadOnly)
+          return(vm.isEditable &&vm.countryIsEditable)
         };
 
 

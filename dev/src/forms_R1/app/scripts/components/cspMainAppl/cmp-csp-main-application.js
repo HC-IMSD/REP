@@ -9,7 +9,8 @@
         .module('cspMainApplication', [
             'cspConstants',
             'errorMessageModule',
-            'numberFormat'
+            'numberFormat',
+            'alertModule'
         ]);
 
 })();
@@ -109,6 +110,12 @@
             if (angular.isUndefined(value)) return;
             if (value < vm.alerts.length) {
                 vm.alerts[value] = false;
+            }
+        };
+        vm.toggleAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = !vm.alerts[value];
             }
         };
 

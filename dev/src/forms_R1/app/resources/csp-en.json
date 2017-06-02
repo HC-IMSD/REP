@@ -57,7 +57,9 @@
   "FEE_URL":"http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv_pa_av-eng.pdf",
   "FEE_URLTITLE":"Advance Payment Details for Drug Submissions and Master Files for Human and Disinfectant Drugs, and Certificate of Supplementary Protection Application Form",
   "HELP_CSPFILE_LOAD":"Expand File load Instructions",
+  "CSPFILE_LOAD":"File load Instructions",
   "VERSION_INSTRUCT":"Expand Version Number Instructions",
+
   "HELP_PATENT":"Expand Patent Instructions",
   "HELP_FEE":"Expand Fee Payment Instructions",
   "HELP_CERT":"Expand Certification Instructions",
@@ -69,6 +71,21 @@
 
   "HELP_MARKETDATE":"Expand Market Date Instructions",
   "APPLICANT_INSTRUCT":"Expand Applicant Information Instructions",
-  "BILLING_INSTRUCT":"Expand Billing Address Instructions"
+  "BILLING_INSTRUCT":"Expand Billing Address Instructions",
+
+  "VERSION_INSTRUCT_CLOSE":"Version Number Instructions",
+  "PATENT_INSTRUCT":"Patent Instructions",
+  "FEE_INSTRUCT":"Fee Payment Instructions",
+  "CERT_INSTRUCT":"Certification Instructions",
+
+  "ATTEST_INSTRUCT":"Attestation Instructions",
+  "DRUGUSE_INSTRUCT":"Drug Use Instructions",
+  "MI_INSTRUCT":"Medicinal Ingredient Instructions",
+  "NDS_INSTRUCT":"New Drug Submission Instructions",
+
+  "MARKETDATE_INSTRUCT":"Market Date Instructions",
+  "APPLICANT_CLOSE":"Applicant Information Instructions",
+  "BILLING_CLOSE":"Billing Address Instructions"
+
 }
 

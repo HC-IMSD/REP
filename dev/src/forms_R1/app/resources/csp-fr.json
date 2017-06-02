@@ -56,6 +56,7 @@
   "HUMAN": "Humain",
   "VETERINARY": "Vétérinaire",
   "HELP_CSPFILE_LOAD":"Élargir les instructions de chargement du fichier",
+  "CSPFILE_LOAD":"Chargement du fichier",
   "VERSION_INSTRUCT":"Élargir les instructions de version",
   "HELP_PATENT":"Élargir les instructions de brevet",
   "HELP_FEE":"Élargir les instructions frais",
@@ -67,6 +68,21 @@
   "HELP_NDS":"Élargir les instructions de renseignements sur la présentation de drogue nouvelle",
   "HELP_MARKETDATE":"Élargir les instructions de date de première demande pour une autorisation de vente",
   "APPLICANT_INSTRUCT":"Élargir les instructions de renseignements sur le demandeur",
-  "BILLING_INSTRUCT":"Élargir les instructions de adresse de facturation"
+  "BILLING_INSTRUCT":"Élargir les instructions de adresse de facturation",
+
+
+  "VERSION_INSTRUCT_CLOSE":"instructions de version",
+  "PATENT_INSTRUCT":"instructions de brevet",
+  "FEE_INSTRUCT":"instructions frais",
+  "CERT_INSTRUCT":"instructions de attestation",
+
+  "ATTEST_INSTRUCT":"instructions de attestations",
+  "DRUGUSE_INSTRUCT":"instructions d'utilisation de drogues",
+  "MI_INSTRUCT":"instructions de ingrédient médicinal",
+  "NDS_INSTRUCT":"instructions de renseignements sur la présentation de drogue nouvelle",
+
+  "MARKETDATE_INSTRUCT":"instructions de date de première demande pour une autorisation de vente",
+  "APPLICANT_CLOSE":"instructions de renseignements sur le demandeur",
+  "BILLING_CLOSE":"instructions de adresse de facturation"
 
 }

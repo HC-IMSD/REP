@@ -48,5 +48,6 @@
   "DELETE":"Delete",
   "SAVE_WORKING":"Save Working Copy",
   "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)",
-  "CLOSE_ALERT":"Collapse instructions"
+  "CLOSE_ALERT":"Collapse instructions",
+  "COLLAPSE":"Collapse"
 }
