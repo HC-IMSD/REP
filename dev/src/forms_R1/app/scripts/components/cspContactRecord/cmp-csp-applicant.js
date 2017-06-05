@@ -137,7 +137,6 @@
          Index sets the UI state in the alerts array
          */
         vm.addInstruct = function (value) {
-            console.log("show alert"+value)
             if (angular.isUndefined(value)) return;
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
