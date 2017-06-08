@@ -23,6 +23,7 @@ var baseScript = './app/scripts';
 var wetBase = './wet_4_0_22_base';
 var buildDev = './build/dev';
 var buildProd = './build/prod/';
+var buildProdAbs = '/build/prod/';
 var templateFileEn = 'content-en.html';
 var templateFileFr = 'content-fr.html';
 //GLOBAL variable save
@@ -46,7 +47,7 @@ var paths = {
     buildProdCompany: buildProd + '/company/',
     buildProdTransaction: buildProd + '/transaction/',
     buildProdDossier: buildProd + '/dossier/',
-    buildProdCsp: buildProd + '/csp/',
+    buildProdCsp: buildProd + '/csp-cps/',
     englishTemplate: wetBase + '/' + templateFileEn, //this is the wet template before path injection
     frenchTemplate: wetBase + '/' + templateFileFr, //this is the wet template before path injection
     devEnglishTemplate: buildDev + '/templates/' + templateFileEn,
@@ -1982,7 +1983,7 @@ gulp.task('prod-csp-allFormsCreate', ['prod-csp-compileHtml'], function () {
 
 gulp.task('prod-csp-compileHtml', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-csp-compileSrcJs', 'prod-csp-copyLib'], function () {
 
-    var ignorePath = '/build/prod/csp';
+    var ignorePath ='build/prod/csp-cps' ;
     var basePath = paths.buildProdCsp;
     var destPath = paths.buildProdCsp;
     var htmlPartial = jsRootContent.partialCSPFormRoot;
@@ -2004,15 +2005,18 @@ gulp.task('prod-csp-compileHtml', ['prod-global-create-src-template', 'prod-glob
         paths.buildProdCsp + 'app/lib/**/angular*.js'
     ];
     var srcPath = paths.buildProdCsp;
-
+    var englishHtmlName="certificate-supplementary-protection-form.html";
+    var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
+    var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
+    var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
     return (
-        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'cspINT-en.html', destPath, 'en', deployType.test, 'cspINT-fr.html')
+        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, englishInternalHtmlName, destPath, 'en', deployType.prod, frenchInternalHtmlName)
         &&
-        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'cspEXT-en.html', destPath, 'en', deployType.test, 'cspEXT-fr.html')
+        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, englishHtmlName, destPath, 'en', deployType.prod, frenchHtmlName)
         &&
-        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'cspEXT-fr.html', destPath, 'fr', deployType.test, 'cspEXT-en.html')
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, frenchHtmlName, destPath, 'fr', deployType.prod, englishHtmlName)
         &&
-        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'cspINT-fr.html', destPath, 'fr', deployType.test, 'cspINT-en.html')
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, frenchInternalHtmlName, destPath, 'fr', deployType.prod, englishInternalHtmlName)
     )
 });
 gulp.task('prod-csp-compileSrcJs', ['prod-csp-compileTranslateFile', 'prod-csp-createRootJsFiles', 'prod-csp-copySourceFiles'], function () {

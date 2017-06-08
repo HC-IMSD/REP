@@ -1,6 +1,5 @@
 <div class="container-fluid" translate-cloak="cloak-class">
     <ng-form id="csp-form" name="main.cspForm" novalidate="novalidate">
-
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
@@ -169,7 +168,6 @@
                                              payment-types="main.paymentType"></cmp-csp-fee-payment>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-xs-12">
                         <h3>9.&nbsp;{{'CERT_TITLE'|translate}}
@@ -215,17 +213,10 @@
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave" ng-click="main.saveXML()">
                     {{main.saveXMLLabel |translate}}
                 </button>
-                <!-- <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                         id="save-instructions-toggle" ng-click="main.addInstruct(2)"><span
-                         class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
-                 </button>-->
             </div>
         </div>
         <div>
-            <!--build:test--><!--endbuild-->
-
         </div>
-
         <!-- <pre>{{main.cspModel|json}}</pre>-->
     </ng-form>
 </div>
