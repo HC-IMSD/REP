@@ -24,7 +24,7 @@
         </div>
         <div class="row mrgn-bttm-md">
             <div class="form-group col-xs-12 rep-vertical-align">
-                <div class="col-xs-7 rep-vertical-align">
+                <div class="col-xs-12  col-sm-7 rep-vertical-align">
                     <label for="{{::cspFeePayCtrl.feeId}}" class="required">
                         <span class="field-name">{{'ADVANCE_FEE_PAYMENT' |translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -34,7 +34,7 @@
                                            error-types="cspFeePayCtrl.numberMaxError"></cmp-error-message>
                     </label>
                 </div>
-                <div class="col-xs-3 rep-vertical-align">
+                <div class="col-xs-12 col-sm-3 rep-vertical-align">
                     <div class="rep-input-group">
                         <span class="input-group-addon">$</span>
                         <div  ng-class="{'has-error':cspFeePayCtrl.paymentForm[cspFeePayCtrl.feeId].$invalid}">
