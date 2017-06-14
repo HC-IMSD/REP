@@ -6,7 +6,12 @@
     'use strict';
 
     angular
-        .module('formulationsModule', ['expandingTable', 'formulationRecordModule'])
+        .module('formulationsModule',
+            [
+                'expandingTable',
+                'formulationRecordModule',
+                'errorSummaryModule'
+            ])
 })();
 
 (function () {
@@ -20,44 +25,70 @@
             controllerAs: 'formulCtrl',
             bindings: {
                 formulations: '<',
-                recordChanged: '&'
+                recordChanged: '&',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
         });
 
     function formulationsCtrl() {
 
-        var self = this;
-        self.isDetailValid = true; //TODO this must be managed
-        self.selectRecord = -1;
-        self.resetToCollapsed = false;
-        self.noFormulations = "";
-        self.$onInit = function () {
+        var vm = this;
+        vm.isDetailValid = true; //TODO this must be managed
+        vm.selectRecord = -1;
+        vm.resetToCollapsed = false;
+        vm.noFormulations = "";
+        vm.updateSummary=0;
+        vm.showSummary=false;
+        vm.exclusions = {
 
-            self.newFormShown = false;
+        };
+        vm.transcludeList={
+            "cmp-formulation-record": "true"
+        };
+        vm.alias = {
+            "noFormulation": {
+                "type": "element",
+                "target": "addFormulation"
+            }
+        };
 
-            self.colNames = [
+
+        vm.$onInit = function () {
+
+            vm.newFormShown = false;
+
+            vm.colNames = [
                 {label: "FORM_ID", binding: "formulationId", width: "15"},
                 {label: "FORMULATION_NAME", binding: "formulationName", width: "85"}
             ];
-            self.formulationList = [];
+            vm.formulationList = [];
 
-            if (self.formulations) {
-                self.formulationList = self.formulations;
+            if (vm.formulations) {
+                vm.formulationList = vm.formulations;
             }
-            self.updateFormulationsError();
+            vm.updateFormulationsError();
         };
 
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
 
             if (changes.formulations) {
-                self.formulationList = changes.formulations.currentValue;
-                self.updateFormulationsError();
+                vm.formulationList = changes.formulations.currentValue;
+                vm.updateFormulationsError();
+            }
+
+            if(changes.showErrorSummary){
+                console.log("Show Error Summary for Formulations")
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
             }
         };
 
-        self.addNew = function () {
-
+        vm.addNew = function () {
 
             var newRecord = {
                 "formulationId": (getMaxFormulationId() + 1),
@@ -72,33 +103,33 @@
                 countryList: []
             };
 
-            self.formulationList.push(newRecord);
+            vm.formulationList.push(newRecord);
             //set the expanding table
-            setRecord(self.formulationList.length - 1);
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.updateFormulationsError();
+           vm.setRecord(vm.formulationList.length - 1);
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.updateFormulationsError();
         };
 
-        self.addCopy=function(formulation){
+        vm.addCopy=function(formulation){
             if(formulation) {
                 formulation.formulationId=(getMaxFormulationId() + 1);
-                self.formulationList.push(formulation);
-                setRecord(- 1);
-                self.resetToCollapsed = !self.resetToCollapsed;
+                vm.formulationList.push(formulation);
+                vm.setRecord(- 1);
+                vm.resetToCollapsed = !vm.resetToCollapsed;
             }
         };
 
-        self.update = function (idx, frm) {
-            self.formulationList[idx] = angular.copy(frm);
+        vm.update = function (idx, frm) {
+            vm.formulationList[idx] = angular.copy(frm);
         };
 
-        self.delete = function (idx) {
+        vm.delete = function (idx) {
             //console.debug('frmList delete: ' + idx);
-            if (self.formulationList.splice(idx, 1))
-                setRecord(-1);
-                self.resetToCollapsed = !self.resetToCollapsed;
+            if (vm.formulationList.splice(idx, 1))
+                vm.setRecord(-1);
+                vm.resetToCollapsed = !vm.resetToCollapsed;
 
-            self.updateFormulationsError();
+            vm.updateFormulationsError();
 
         };
 
@@ -108,23 +139,36 @@
          * Used for error messaging that there are no active ingredients
          * @returns {string} string is empty if not empty
          */
-        self.updateFormulationsError = function () {
-            if (self.formulationList && self.formulationList.length > 0) {
-                self.noFormulations = self.formulationList.length;
+        vm.updateFormulationsError = function () {
+            if (vm.formulationList && vm.formulationList.length > 0) {
+                vm.noFormulations = vm.formulationList.length;
                 return false;
             }
-            self.noFormulations = "";
+            vm.noFormulations = "";
             return true;
 
         };
 
-        function setRecord(value){
-            self.selectRecord=value;
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+        };
+
+
+        vm.setRecord=function(value){
+            console.log("record"+value);
+          resetMe();
+            vm.selectRecord=-1;
+            vm.selectRecord=value;
 
         }
+        function resetMe(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+
+        }
+
         function getMaxFormulationId() {
             var out = 0;
-            var list = self.formulationList;
+            var list = vm.formulationList;
             if (list) {
                 for (var i = 0; i < list.length; i++) {
                     if (list[i].formulationId > out) {
@@ -135,7 +179,7 @@
             return out;
         }
 
-
+     
     }
 
 })();

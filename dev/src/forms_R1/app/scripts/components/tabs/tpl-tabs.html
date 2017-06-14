@@ -14,7 +14,8 @@
         <ng-form name="tabsCtrl.tabs[0].form">
             <div id="formulations-panel" role="tabpanel" class="out">
                 <div ng-show="tabsCtrl.tabs[0].selected">
-                    <cmp-formulations formulations="tabsCtrl.formulationList"
+                    <cmp-formulations formulations="tabsCtrl.formulationList"  error-summary-update="tabsCtrl.updateSummary"
+                    show-error-summary="tabsCtrl.showSummary"
                                       record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
                 </div>
             </div>

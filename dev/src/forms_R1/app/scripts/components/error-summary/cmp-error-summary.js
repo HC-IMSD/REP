@@ -31,14 +31,16 @@
                 makeFocused: '<',
                 setHeadingLevel: '@',
                 exclusionList: '<',
-                formId: '@',
-                aliasList: '<'
+                transcludeList:'<', //used for expander lists, the name of an error summary in an expanding table entry
+                formId: '<',
+                aliasList: '<',
+                expandRecord:'&'
 
             }
         });
-    errorSummaryController.$inject = ['$scope', '$filter'];
+    errorSummaryController.$inject = ['$scope','$location','$anchorScroll'];
 
-    function errorSummaryController($scope, $filter) {
+    function errorSummaryController($scope,$location,$anchorScroll) {
         var vm = this;
         vm.parentRef = null;
         vm.errorArray = [];
@@ -51,6 +53,7 @@
 
         vm.exclusions={};
         vm.alias={};
+        vm.transcludeNames={};
 
         vm.headingPreamble = "";
         vm.headerLevel = "";
@@ -100,11 +103,9 @@
 
             if (changes.updateErrors) {
                 if (vm.formRef) {
-                    // console.log(vm.formRef.$error);
                     //pass in the form name and the error object
                     //should I run it if hidden?
                     if (vm.isVisible) {
-                        //console.log(vm.formRef.$error)
                         vm.getErrorsSumm(vm.formRef.$error, vm.formRef.$name);
                     }
                 }
@@ -115,10 +116,15 @@
                 }
             }
             if (changes.formId) {
-
+                /* used for the jquery ordering. This gives the starting id **/
                 vm.startFormId = changes.formId.currentValue;
             }
+            if(changes.transcludeList){
+                if(changes.transcludeList.currentValue) {
+                    vm.transcludeNames = changes.transcludeList.currentValue;
+                }
 
+            }
         };
         /***
          * Determines if the summary is visible
@@ -132,6 +138,21 @@
             }
             return (summaryIsVisible);
         };
+
+
+        vm.scrollTo=function(errorRecord){
+            var hashId="";
+            if(!errorRecord) return;
+            if(errorRecord.isSummary){
+                hashId='errors-summary-'+errorRecord.name;
+            }else{
+                hashId=errorRecord.name;
+            }
+            vm.expandRecord({index: errorRecord.exIndex});
+            $location.hash(hashId);
+            $anchorScroll();
+        };
+
 
         function _isErrorSummaryVisible() {
             return (vm.isVisible && (vm.errorArray && vm.errorArray.length > 0));
@@ -166,38 +187,51 @@
             }
         };
 
+
         //gets all the errors from error objects
         function _getErr(errorObj, resultsList, parent) {
             var keys = Object.keys(errorObj);
             var newList = {};
             for (var i = 0; i < keys.length; i++) {
                 var record = errorObj[keys[i]];
+                //expecting an array
+                if (!(record instanceof Array)) {
+                    record = [record];
+                }
+                for (var j = 0; j < record.length; j++) {
 
-                for (var j = 0; j < record.length; j++)
+                    //configure for the tests
+                    var numIndex=record[j].$name.lastIndexOf("_");
+                    var transcludeName="";
+                    //parse for a transclude name. Used for comparison below
+                    if(numIndex>0) {
+                        transcludeName = record[j].$name.substring(0, numIndex);
+                    };
+                    //case this is a form- assumes format <controlller>.<formName>
                     if (record[j].$invalid === true && record[j].$name.indexOf('.') > 0) {
-
-                        //it is assummed that if it is in the exclusion list it is a summary
+                        //it is assumed that if it is in the exclusion list it is a summary
                         if (vm.exclusions && vm.exclusions.hasOwnProperty(record[j].$name)) {
-                            var result = {};
-                            result[record[j].$name] = {
-                                name: record[j].$name,
-                                type: keys[i],
-                                translateKey: record[j].$name.toUpperCase(),
-                                parent: parent,
-                                concat: parent + '.' + record[j].$name,
-                                isSummary: true
-                            };
-                            angular.merge(resultsList, result);
-
-                        } else {
+                            //only process this as a summary if it is in the exclusions list
+                            angular.merge(resultsList, _createSummaryRecord(record[j].$name,keys[i],parent));
+                        }
+                        else {
                             _getErr(record[j].$error, resultsList, record[j].$name);
                         }
-
-                    } else if (record[j].$invalid === true && !resultsList.hasOwnProperty(record[j].$name)) {
+                    }
+                    // case this is a transclude i.e. the expanding table
+                    else if (vm.transcludeNames.hasOwnProperty(transcludeName)) {
+                        var exIndex = record[j].$name.indexOf(transcludeName);
+                        //extract the index it is the string length +1. By convention there is an underscore
+                        var expandIndex = record[j].$name.substring(exIndex+transcludeName.length+1);
+                        //make an object that will cause expand and focus on
+                        angular.merge(resultsList,_createExpanderRecord(record[j].$name,transcludeName,keys[i],parent,expandIndex));
+                    }
+                    else if (record[j].$invalid === true && !resultsList.hasOwnProperty(record[j].$name)) {
 
                         var result = _processRecord(record[j].$name, keys[i], parent)
                         angular.merge(resultsList, result);
                     }
+                }
             }
         }
 
@@ -228,8 +262,7 @@
                 scopeId = "";
             }
             return scopeId;
-
-        }
+        };
 
         /**
          * Processes a non summary record. Checks for aliases and processes accordingly
@@ -360,7 +393,7 @@
                     }
                 }
             }
-            _sortUnknowns(notDefined, newErrors)
+            _sortUnknowns(notDefined, newErrors);
             return newErrors;
         }
 
@@ -400,6 +433,45 @@
             if (to >= this.length) to = this.length - 1;
             this.splice(to, 0, this.splice(from, 1)[0]);
         };
+
+
+        /**
+         *  Used to create a summary record. Generally used when new forms are defined
+         *  i.e. get a dot syntax of myController.myFormName
+         * @param name- the name to give to the record, and the translate key
+         * @param type - type of error that occured i.e. required etc
+         * @param parent- parent ot this dom object
+         * @returns {{}}
+         * @private
+         */
+        function _createSummaryRecord(name,type,parent){
+            var result = {};
+            result[name] = {
+                name: name,
+                type: type,
+                translateKey: name.toUpperCase(),
+                parent: parent,
+                concat: parent + '.' + name,
+                isSummary: true
+            };
+            return result;
+        };
+
+        function _createExpanderRecord(name,transcludeName,type,parent, expanderIndex){
+            var result = {};
+            result[name] = {
+                name: name,
+                type: type,
+                translateKey: transcludeName.toUpperCase(),
+                parent: parent,
+                concat: parent + '.' + name,
+                isSummary: true,
+                toExpand:true,
+                exIndex:parseInt(expanderIndex)
+            };
+            return result;
+        };
+
     }//end controller
 
 })();

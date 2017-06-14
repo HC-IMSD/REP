@@ -1,5 +1,12 @@
-<ng-form name="formulationRecForm" ng-model-options="{debounce: 250}">
+<ng-form name="formulRecCtrl.formulationForm" ng-model-options="{debounce: 250}"
+         id="{{formulRecCtrl.formName}}">
     <div>
+        <cmp-error-summary form-ref=formulRecCtrl.formulationForm show-errors="true"
+                           form-preamble="FORMULATION_DETAILS" exclusion-list=formulRecCtrl.exclusions
+                           name-suffix="{{formulRecCtrl.summaryName}}" set-heading-level="h3" form-id="formulRecCtrl.formName"
+                           make-focused="" alias-list=""  show-errors="formulRecCtrl.showSummary" update-errors="formulRecCtrl.updateSummary"
+                           update-errors="formulRecCtrl.updateSummary"></cmp-error-summary>
+
         <fieldset>
             <legend>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</legend>
 
@@ -12,17 +19,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-5 form-group" ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}">
-                    <label for="dosage-form_{{::$id}}" class="required rep-required-offset full-width"><span
+                <div class="col-md-5 form-group">
+
+                    <label for="{{::formulRecCtrl.dosageId}}" class="required rep-required-offset full-width"><span
                             class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="dosage-form_{{::$id}}"
-                                   name="dosageForm"
+
+                        <div class="">
+                        <div  class="rep-error" ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}">
+                        <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="{{::formulRecCtrl.dosageId}}"
+                                   name="{{::formulRecCtrl.dosageId}}"   ng-model-options="{debounce: 0}"
                                    class="rep-selectize-dropdown rep-selectize-font" required
-                                   ng-model-options="{debounce: 0}"
-                                   ng-class="{'has-error':formulationRecForm.dosageForm.$invalid}"
+                                   ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}"
                                    title="Choose a dosage form">
                             <ui-select-match placeholder="Select or Search for a dosage form"
+
                                              class="rep-selectize-font rep-selectize-dropdown">
                                 {{$select.selected[formulRecCtrl.lang]}}
                             </ui-select-match>
@@ -33,27 +44,27 @@
                                       ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <strong id="dosageForm-error" class="error"
-                                ng-if="formulRecCtrl.showError(formulationRecForm.dosageForm.$invalid,formulationRecForm.dosageForm.$touched)">
-                        <span class="label label-danger" ng-messages="formulationRecForm.dosageForm.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                        </strong>
+                        </div>
+                    </div>
+                        <cmp-error-message field-name="formulRecCtrl.dosageId"
+                                           form-ref="formulRecCtrl.formulationForm"
+                                           show-error="formulRecCtrl.showErrors()"
+                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
-                <div class="col-md-6 form-group" ng-class="{'has-error':formulationRecForm.dosageOther.$invalid}"
+                <div class="col-md-6 form-group" ng-class="{'has-error':formulRecCtrl.formulationRecForm.dosageOther.$invalid}"
                      ng-show="formulRecCtrl.isDosageOther()">
-                    <label for="dosage-form-other_((::$id}}" class="required">
+                    <label for="dosage-form-other_{{::$id}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="dosage-form-other_((::$id}}"
+                        <input type="text" id="dosage-form-other_{{::$id}}"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
                                class="form-control full-width" name="dosageOther"
                                ng-model-options="{ debounce: '$inherit'}"
                                ng-required="formulRecCtrl.isDosageOther()" maxlength="60" size="60"/>
                         <strong id="dosageOther-error" class="error"
-                                ng-if="formulRecCtrl.showError(formulationRecForm.dosageOther.$invalid,formulationRecForm.dosageOther.$touched)">
-                        <span class="label label-danger" ng-messages="formulationRecForm.dosageOther.$error">
+                                ng-if="formulRecCtrl.showError(formulRecCtrl.formulationRecForm.dosageOther.$invalid,formulRecCtrl.formulationRecForm.dosageOther.$touched)">
+                        <span class="label label-danger" ng-messages="formulRecCtrl.formulationRecForm.dosageOther.$error">
                             <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                         </strong>
@@ -64,14 +75,14 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'MEDICINAL_INGRED'|translate}}</h3>
-                        <strong id="noactive-error" class="error" ng-if="formulRecCtrl.noActives()">
-                                <span class="label label-danger" ng-messages="formulationRecForm.noActiveFld.$error">
+                      <!--  <strong id="noactive-error" class="error" ng-if="formulRecCtrl.noActives()">
+                                <span class="label label-danger" ng-messages="formulRecCtrl.formName.noActiveFld.$error">
                                     <span ng-message="required"><span translate="MSG_ERR_ONE_ACTIVE"></span></span>
                                 </span>
-                        </strong>
+                        </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noActiveFld" id="noActive"
+                        <input type="text" required ng-show="false" name="noActiveFld_{{$id}}" id="noActiveFld_{{$id}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>
                         <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
                                              on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
@@ -104,14 +115,14 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'CONTAINER_TYPES'|translate}}</h3>
-                        <strong id="nocontainer-error" class="error" ng-if="formulRecCtrl.noContainers()">
+                       <!-- <strong id="nocontainer-error" class="error" ng-if="formulRecCtrl.noContainers()">
                                 <span class="label label-danger" ng-messages="formulationRecForm.noContainerFld.$error">
                                     <span ng-message="required"><span translate="MSG_ERR_ONE_CONTAINER"></span></span>
                                 </span>
-                        </strong>
+                        </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noContainerFld" id="noContainer"
+                        <input type="text" required ng-show="false" name="noContainerFld_{{$id}}" id="noContainerFld_{{$id}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noContainerValues"/>
                         <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
                                                  on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
@@ -122,14 +133,14 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'ROA_TITLE'|translate}}</h3>
-                        <strong id="noroa-error" class="error" ng-if="formulRecCtrl.noROA()">
+                       <!-- <strong id="noroa-error" class="error" ng-if="formulRecCtrl.noROA()">
                                 <span class="label label-danger" ng-messages="formulationRecForm.noROAFld.$error">
                                     <span ng-message="required"><span translate="MSG_ERR_ONE_ROA"></span></span>
                                 </span>
-                        </strong>
+                        </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noROAFld" id="noROA"
+                        <input type="text" required ng-show="false" name="noROA_{{::$id}}" id="noROA_{{::$id}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noROAValues"/>
                         <cmp-roa-list records="formulRecCtrl.frmModel.routeAdmins" show-errors=""></cmp-roa-list>
                     </div>
@@ -139,14 +150,14 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
-                        <strong id="country-error" class="error" ng-if="formulRecCtrl.noCountry()">
+                       <!-- <strong id="country-error" class="error" ng-if="formulRecCtrl.noCountry()">
                                 <span class="label label-danger" ng-messages="formulationRecForm.noCountry.$error">
                                     <span ng-message="required"><span translate="MSG_ERR_ONE_MANCOUNTRY"></span></span>
                                 </span>
-                        </strong>
+                        </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noCountry" id="noCountry{{::$id}}"
+                        <input type="text" required ng-show="false" name="noCountry_{{::$id}}" id="noCountry_{{::$id}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
                                           on-update="formulRecCtrl.updateCountryList(list)"

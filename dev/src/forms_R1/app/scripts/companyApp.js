@@ -27,7 +27,12 @@
     'use strict';
     angular
         .module('companyApp')
-        .config(['$translateProvider', function ($translateProvider) {
+        .config(['$translateProvider','$locationProvider', function ($translateProvider,$locationProvider) {
+
+            $locationProvider.html5Mode(
+                {enabled : true,
+                    requireBase: false,
+                    rewriteLinks : false});
 
             $translateProvider.preferredLanguage('@@prefLang');
             $translateProvider.useLoader('customLoad');

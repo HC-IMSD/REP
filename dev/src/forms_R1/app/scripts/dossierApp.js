@@ -20,7 +20,12 @@
     'use strict';
     angular
         .module('dossierApp')
-        .config(['$translateProvider', function ($translateProvider) {
+        .config(['$translateProvider','$locationProvider', function ($translateProvider,$locationProvider) {
+
+            $locationProvider.html5Mode(
+                {enabled : true,
+                    requireBase: false,
+                    rewriteLinks : false});
             //this prevents conflicts with ngMessage
             $translateProvider.directivePriority(1);
             $translateProvider.preferredLanguage('@@prefLang');

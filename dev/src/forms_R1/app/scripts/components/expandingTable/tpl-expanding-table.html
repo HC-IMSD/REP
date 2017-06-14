@@ -28,7 +28,7 @@
         </tr>
         <tr data-ng-show="!expandTblCtrl.dayDataCollapse[$index]" data-ng-repeat-end>
             <td colspan="{{expandTblCtrl.numberCols}}">
-                <ng-form name="expandTblCtrl.transcludeForm{{$index}}">
+                <ng-form name="{{expandTblCtrl.formName}}_{{$index}}">
                 <div ng-transclude>
                 </div>
                 </ng-form>

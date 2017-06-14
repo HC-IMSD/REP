@@ -6,7 +6,18 @@
     'use strict';
 
     angular
-        .module('formulationRecordModule', ['activeIngListModule', 'nonMedIngListModule', 'containerTypeListModule', 'materialIngListModule', 'roaListModule', 'dossierDataLists','ui.select'])
+        .module('formulationRecordModule', 
+            [
+                'activeIngListModule',
+                'nonMedIngListModule',
+                'containerTypeListModule',
+                'materialIngListModule',
+                'roaListModule',
+                'dossierDataLists',
+                'ui.select',
+                'errorSummaryModule',
+                'errorMessageModule'
+            ])
 })();
 
 (function () {
@@ -32,97 +43,119 @@
                 onCancel: '&',
                 showErrors:'&',
                 recordChanged:'&',
-                addCopy:'&'
+                addCopy:'&',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
 
         });
 
-    formulationRecCtrl.$inject = ['DossierLists','$translate'];
-    function formulationRecCtrl(DossierLists, $translate) {
+    formulationRecCtrl.$inject = ['DossierLists','$translate','$scope'];
+    function formulationRecCtrl(DossierLists, $translate,$scope) {
 
-        var self = this;
-        self.noCountries="";
-        self.noROAValues="";
-        self.noActiveValues="";
-        self.noContainers="";
-        self.dosageFormList = DossierLists.getDosageFormList();
-        self.otherValue = DossierLists.getDosageOther();
-        self.savePressed=false;
-        self.lang = $translate.proposedLanguage() || $translate.use();
-        self.$onInit = function () {
+        var vm = this;
+        vm.noCountries="";
+        vm.noROAValues="";
+        vm.noActiveValues="";
+        vm.dosageFormList = DossierLists.getDosageFormList();
+        vm.otherValue = DossierLists.getDosageOther();
+        vm.savePressed=false;
+        vm.updateSummary=0; //message to update the summary component
+        vm.showSummary=false; //show the errror summary object
+        vm.formName="";
+        vm.summaryName="";
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.frmModel = {};
+        vm.exclusions={};
+        vm.$onInit = function () {
 
-            self.frmModel = {};
-
-
-            if(self.record){
-                self.frmModel = self.record;
+            _setIdNames();
+        };
+        vm.$onChanges=function(changes){
+            if(changes.record){
+                vm.frmModel = changes.record.currentValue;
+                vm.formName="formulationRecForm_"+vm.frmModel.formulationId;
+                vm.summaryName="cmp-formulation-record_"+(vm.frmModel.formulationId-1);
             }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+
+                vm.updateErrorSummaryState();
+            }
+
+        }
+
+        vm.delete = function(){
+            if (vm.record) {
+                vm.onDelete();
+            }
+
+        };
+        vm.copy=function(){
+            if(vm.record){
+                var formulationCopy=angular.copy(vm.record);
+                vm.addCopy({record:formulationCopy});
+            }
+
         };
 
-        self.delete = function(){
-            if (self.record) {
-                //  console.log('product details delete product');
-                self.onDelete();
-            }
+        vm.showErrors=function(){
+            return vm.showSummary;
+        }
 
-        };
-        self.copy=function(){
-            if(self.record){
-                var formulationCopy=angular.copy(self.record);
-                self.addCopy({record:formulationCopy});
-            }
-
-        };
-
-        self.showError=function(isInvalid,isTouched){
-           return(((isInvalid && isTouched)|| (isInvalid && self.showErrors()) ||(isInvalid && self.savePressed)))
+        vm.showError=function(isInvalid,isTouched){
+           return(((isInvalid && isTouched)|| (isInvalid && vm.showErrors()) ||(isInvalid && vm.showSummary)))
         };
         /***
          * Shows the no country of manufacture errro
          * TODO: Not show this until someone saves?
          * @returns {boolean}
          */
-        self.noCountry=function(){
-            if(!self.frmModel){
-                self.noCountries="";
+        vm.noCountry=function(){
+            if(!vm.frmModel){
+                vm.noCountries="";
                 return false;
             }
-            if(!self.frmModel.countryList || self.frmModel.countryList.length===0){
-                self.noCountries="";
+            if(!vm.frmModel.countryList || vm.frmModel.countryList.length===0){
+                vm.noCountries="";
                 return true;
             }
-            self.noCountries=self.frmModel.countryList.length;
+            vm.noCountries=vm.frmModel.countryList.length;
             return false;
         };
         /**
          * Tracks for error handling if there are one or more ROA
          * @returns {boolean}
          */
-        self.noROA=function(){
+        vm.noROA=function(){
 
-            if(!self.frmModel){
-                self.noROAValues="";
+            if(!vm.frmModel){
+                vm.noROAValues="";
                 return false;
             }
-            if(!self.frmModel.routeAdmins || self.frmModel.routeAdmins.length===0){
-                self.noROAValues="";
+            if(!vm.frmModel.routeAdmins || vm.frmModel.routeAdmins.length===0){
+                vm.noROAValues="";
                 return true;
             }
-            self.noROAValues="values";
+            vm.noROAValues="values";
             return false;
 
         };
-        self.noActives=function(){
+        vm.noActives=function(){
 
-            if(!self.frmModel){
-                self.noActiveValues="";
-                return false;
-            }
-            if(!self.frmModel.activeIngList || self.frmModel.activeIngList.length===0){
-                self.noActiveValues="";
+            if(!vm.frmModel){
+                vm.noActiveValues="";
                 return true;
             }
-            self.noActiveValues="values";
+            if(!vm.frmModel.activeIngList || vm.frmModel.activeIngList.length===0){
+                vm.noActiveValues="";
+                return true;
+            }
+            vm.noActiveValues="values";
             return false;
 
         };
@@ -130,75 +163,94 @@
          * Checks if there is at least one container type
          * @returns {boolean}
          */
-        self.noContainers=function(){
+        vm.noContainers=function(){
 
-            if(!self.frmModel){
-                self.noContainerValues="";
-                return false;
-            }
-            if(!self.frmModel.containerTypes || self.frmModel.containerTypes.length===0){
-                self.noContainerValues="";
+            if(!vm.frmModel){
+                vm.noContainerValues="";
                 return true;
             }
-            self.noContainerValues="values";
+            if(!vm.frmModel.containerTypes || vm.frmModel.containerTypes.length===0){
+                vm.noContainerValues="";
+                return true;
+            }
+            vm.noContainerValues="values";
             return false;
 
         };
 
 
 
-        self.updateActiveIngList = function(list){
+        vm.updateActiveIngList = function(list){
             if(!list) return;
 
-            self.frmModel.activeIngList = list;
-            self.recordChanged();
+            vm.frmModel.activeIngList = list;
+            vm.recordChanged();
         };
 
-        self.updateNonMedIngList = function(list){
+        vm.updateNonMedIngList = function(list){
             if(!list) return;
 
-            self.frmModel.nMedIngList = list;
-            self.recordChanged();
+            vm.frmModel.nMedIngList = list;
+            vm.recordChanged();
         };
 
-        self.updateContainerTypeList = function(list){
+        vm.updateContainerTypeList = function(list){
             if(!list) return;
 
-            self.frmModel.containerTypes = list;
+            vm.frmModel.containerTypes = list;
 
         };
 
-        self.updateMaterialList = function(list){
+        vm.updateMaterialList = function(list){
             if(!list) return;
 
-            self.frmModel.animalHumanMaterials = list;
-            self.recordChanged();
+            vm.frmModel.animalHumanMaterials = list;
+            vm.recordChanged();
         };
 
-        self.updateRoaList = function(list){
+        vm.updateRoaList = function(list){
             if(!list) return;
 
-            self.frmModel.routeAdmins = list;
+            vm.frmModel.routeAdmins = list;
         };
 
-        self.updateCountryList = function(list){
+        vm.updateCountryList = function(list){
             if(!list) return;
 
-            self.frmModel.countryList = list;
+            vm.frmModel.countryList = list;
         };
         /**
          * @ngDoc determines if dosage Other should be shown
          * @returns {boolean}
          */
-        self.isDosageOther = function () {
+        vm.isDosageOther = function () {
 
-            if(!self.frmModel.dosageForm) return false;
-            if ((self.frmModel.dosageForm.id === self.otherValue)) {
+            if(!vm.frmModel|| !vm.frmModel.dosageForm) return false;
+            if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
                 return true;
             } else {
-                self.frmModel.dosageFormOther = "";
+                vm.frmModel.dosageFormOther = "";
                 return false;
             }
         }
+
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+        };
+
+        vm.getFormName=function(){
+
+            return vm.formName;
+        }
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.dosageId = "dosageForm" + scopeId;
+            vm.dosageOtherId = "dosageOther" + scopeId;
+        }
+
     }
 })();

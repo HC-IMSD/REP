@@ -26,15 +26,15 @@
 
     function tabCtrl() {
 
-        var self = this;
+        var vm = this;
 
-        self.$onInit = function(){
-            self.tab = {
-                title : self.title,
+        vm.$onInit = function(){
+            vm.tab = {
+                title : vm.title,
                 selected : false
             };
 
-            self.tabs.addTab(self.tab);
+            vm.tabs.addTab(vm.tab);
         }
 
 

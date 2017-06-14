@@ -70,7 +70,8 @@
             "contactListCtrl.contactListForm": "true",
             "addressListCtrl.addressListForm": "true"
         };
-        vm.alias = {
+        vm.alias={};
+       /* vm.alias = {
             "roleMissing": {
                 "type": "fieldset",
                 "parent": "fs_roleMissing"
@@ -93,7 +94,7 @@
                 "type": "select2",
                 "name": "country"
             }
-        };
+        };*/
 
 
         vm.initUser = function (id) {
@@ -141,9 +142,8 @@
          */
         vm.saveXML = function () {
             if(vm.companyEnrolForm.$invalid){
-                vm.showErrorSummary= vm.showErrorSummary+1;
-                vm.updateErrorSummary();
-
+                vm.showErrorSummary= true;
+                vm.updateErrorSummaryState();
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);

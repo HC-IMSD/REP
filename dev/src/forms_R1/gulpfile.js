@@ -382,7 +382,8 @@ var dossierComponentFolders =
         componentFolders.contactDetails,
         componentFolders.applicationInfo,
         componentFolders.expandingTable,
-        componentFolders.errorMsg
+        componentFolders.errorMsg,
+        componentFolders.errorSummary
     ];
 
 //transaction Form Components
@@ -657,7 +658,8 @@ var dossierTranslationFilesBaseList =
         translationBaseFiles.fileIO,
         translationBaseFiles.applicationInfo,
         translationBaseFiles.messages,
-        translationBaseFiles.contact
+        translationBaseFiles.contact,
+        translationBaseFiles.errorSummary
     ];
 
 

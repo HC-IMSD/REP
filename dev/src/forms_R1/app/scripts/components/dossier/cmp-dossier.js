@@ -54,16 +54,16 @@
 
     function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate) {
 
-        var self = this;
-        self.showContent = _loadFileContent; //binds the component to the function
-        self.applicationInfoService = new ApplicationInfoService();
-        self.userType = EXTERNAL_TYPE;
-        self.saveXMLLabel = "SAVE_DRAFT";
-        self.yesNoList = DossierLists.getYesNoList();
-        self.yesValue = DossierLists.getYesValue();
-        self.formTypeList = getRoleLists.getFormTypes();
+        var vm = this;
+        vm.showContent = _loadFileContent; //binds the component to the function
+        vm.applicationInfoService = new ApplicationInfoService();
+        vm.userType = EXTERNAL_TYPE;
+        vm.saveXMLLabel = "SAVE_DRAFT";
+        vm.yesNoList = DossierLists.getYesNoList();
+        vm.yesValue = YES; //is this needed?
+        vm.formTypeList = getRoleLists.getFormTypes();
         //config for applicationInfoCompoenent
-        self.configField = {
+        vm.configField = {
             "label": "DOSSIER_ID",
             "fieldLength": "7",
             "tagName": "dossierID",
@@ -71,115 +71,124 @@
             "isDossier": true
         };
 
-        self.isIncomplete = true;
-        self.formAmend = false;
-        self.showAllErrors = false;
-        self.errorAppendix = [];
-        self.extraAppendix = [];
-        self.noThera = "";
-        self.oneRefSelected = "";
-        self.alerts = [false, false, false, false,false,false,false];
-        self.lang = $translate.proposedLanguage() || $translate.use();
+        vm.isIncomplete = true;
+        vm.formAmend = false;
+        vm.showAllErrors = false;
+        vm.errorAppendix = [];
+        vm.extraAppendix = [];
+        vm.noThera = "";
+        vm.oneRefSelected = "";
+        vm.updateSummary=0; //increment to send message to error summaries
+        vm.showSummary=false;
+        vm.alerts = [false, false, false, false,false,false,false]; //for help boxes
+        vm.lang = $translate.proposedLanguage() || $translate.use();
 
-        var yesValue = YES;
-        self.$onInit = function () {
-            self.dossierService = new DossierService();
 
-            self.dossierModel = self.dossierService.getDefaultObject();
+
+
+        vm.$onInit = function () {
+            vm.dossierService = new DossierService();
+            vm.dossierModel = vm.dossierService.getDefaultObject();
+            vm.showSummary=false;
         };
         /**
          * @ngdoc captures any change events from variable bindings
          * @param changes
          */
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
 
             if (changes.formType) {
-                self.userType = changes.formType.currentValue;
-                if (self.userType == INTERNAL_TYPE) {
-                    self.saveXMLLabel = "APPROVE_FINAL"
+                vm.userType = changes.formType.currentValue;
+                if (vm.userType == INTERNAL_TYPE) {
+                    vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
-                    self.saveXMLLabel = "SAVE_DRAFT"
+                    vm.saveXMLLabel = "SAVE_DRAFT"
                 }
             }
 
         };
 
-        self.appendixMissingError = function () {
-            return (self.errorAppendix && self.errorAppendix.length > 0);
 
-        };
-        self.appendixExtraError = function () {
-            return (self.extraAppendix && self.extraAppendix.length > 0);
-
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
         };
 
+        vm.appendixMissingError = function () {
+            return (vm.errorAppendix && vm.errorAppendix.length > 0);
 
-        self.thirdPartySignedChanged = function () {
-            return (self.dossierModel.drugProduct.thirdPartySigned === yesValue);
+        };
+        vm.appendixExtraError = function () {
+            return (vm.extraAppendix && vm.extraAppendix.length > 0);
+
+        };
+
+
+        vm.thirdPartySignedChanged = function () {
+            return (vm.dossierModel.drugProduct.thirdPartySigned === YES);
         };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-                self.dossierModel = self.dossierService.loadFromFile(resultJson);
+                vm.dossierModel = vm.dossierService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
-                self.dossierForm.$setDirty();
+                vm.dossierForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
-            self.showNoRefReError();
+            vm.showNoRefReError();
             getAppendix4Errors();
             _setComplete();
-            self.showAllErrors = true;
+            vm.showAllErrors = true;
             disableXMLSave();
         }
 
-        self.recordsChanged = function () {
+        vm.recordsChanged = function () {
             getAppendix4Errors();
         };
 
-        self.isRefProducts = function () {
+        vm.isRefProducts = function () {
 
-            if (self.dossierModel.isRefProducts === self.yesValue) {
+            if (vm.dossierModel.isRefProducts === YES) {
                 return true;
             }
-            self.dossierModel.drugProduct.canRefProducts = [];
+            vm.dossierModel.drugProduct.canRefProducts = [];
             return false;
         };
 
-        self.setApplicationType = function (value) {
-            self.dossierModel.applicationType = value;
-            self.formAmend = self.dossierModel.applicationType === self.applicationInfoService.getAmendType();
+        vm.setApplicationType = function (value) {
+            vm.dossierModel.applicationType = value;
+            vm.formAmend = vm.dossierModel.applicationType === vm.applicationInfoService.getAmendType();
             disableXMLSave();
         };
 
-        self.cdnRefUpdated = function (list) {
+        vm.cdnRefUpdated = function (list) {
             //don't do anything with the list
-            self.showNoRefReError();
+            vm.showNoRefReError();
         };
 
-        self.showNoRefReError = function () {
+        vm.showNoRefReError = function () {
 
-            if (self.dossierModel.drugProduct.canRefProducts.length > 0 && self.dossierModel.isRefProducts === yesValue) {
-                self.oneRefSelected = "sel";
+            if (vm.dossierModel.drugProduct.canRefProducts.length > 0 && vm.dossierModel.isRefProducts === YES) {
+                vm.oneRefSelected = "sel";
                 return false
             } else {
-                self.oneRefSelected = "";
+                vm.oneRefSelected = "";
                 return true;
             }
         };
 
-        self.disableJSONSave=function() {
+        vm.disableJSONSave=function() {
 
-            return(self.dossierModel.applicationType == APPROVED_TYPE&& self.isExtern());
+            return(vm.dossierModel.applicationType == APPROVED_TYPE&& vm.isExtern());
 
         }
 
         function getAppendix4Errors() {
-            var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);
-            self.errorAppendix = appendixCheck.missing;
-            self.extraAppendix = appendixCheck.extra;
+            var appendixCheck = vm.dossierService.getMissingAppendix4(vm.dossierModel);
+            vm.errorAppendix = appendixCheck.missing;
+            vm.extraAppendix = appendixCheck.extra;
         }
 
         /**
@@ -189,7 +198,7 @@
          * @return true if the form is incomplete
          */
         function _setComplete() {
-            self.isIncomplete = !self.activityRoot.dossierID;
+            vm.isIncomplete = !vm.activityRoot.dossierID;
         }
 
         $scope.$watch("dos.dossierForm.$invalid", function () {
@@ -201,26 +210,23 @@
          */
         function disableXMLSave() {
             var formInvalid = true; //TODO hack
-            if (self.dossierForm) {
-                formInvalid = self.dossierForm.$invalid;
+            if (vm.dossierForm) {
+                formInvalid = vm.dossierForm.$invalid;
             }
-            self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
+            vm.disableXML = (formInvalid || (vm.dossierModel.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern()));
 
         }
 
-
-
-
         function _setComplete() {
-            self.isIncomplete = !self.dossierModel.dossierID;
+            vm.isIncomplete = !vm.dossierModel.dossierID;
         }
 
         /**
          * @ngdoc - determines if the form is the internal or the external version
          * @returns {boolean}
          */
-        self.isExtern = function () {
-            return self.userType == EXTERNAL_TYPE;
+        vm.isExtern = function () {
+            return vm.userType == EXTERNAL_TYPE;
 
         };
 
@@ -228,8 +234,8 @@
          * Used to show all the fields in an error state. Can be activated by a parent component
          * @returns {boolean}
          */
-        self.showErrors = function () {
-            return (self.showAllErrors);
+        vm.showErrors = function () {
+            return (vm.showAllErrors);
         };
         /**
          * For individual controls, whether to show the error for a fiedl
@@ -237,20 +243,20 @@
          * @param isTouched -control $touched flag
          * @returns {*|dossierCtrl.showErrors}
          */
-        self.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (self.showErrors() && isInvalid))
+        vm.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (vm.showErrors() && isInvalid))
         };
 
         /***
          * Manages the schedule A details since the fields are always in the model
          */
-        self.isSchedA = function () {
-            if (!self.dossierModel || !self.dossierModel.drugProduct || !self.dossierService) return false; //never happen case;
-            if (self.dossierModel.drugProduct.isScheduleA) {
+        vm.isSchedA = function () {
+            if (!vm.dossierModel || !vm.dossierModel.drugProduct || !vm.dossierService) return false; //never happen case;
+            if (vm.dossierModel.drugProduct.isScheduleA) {
 
                 return true;
             } else {
-                self.dossierModel.drugProduct.scheduleAGroup = self.dossierService.getDefaultScheduleA();
+                vm.dossierModel.drugProduct.scheduleAGroup = vm.dossierService.getDefaultScheduleA();
             }
             return false;
         };
@@ -258,18 +264,25 @@
         /**
          * Save as a json file. Convert interal model to external model for output
          */
-        self.saveJson = function () {
+        vm.saveJson = function () {
             var writeResult = _transformFile();
-            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), self.dossierService.getRootTagName());
-            self.showAllErrors = true;
+            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), vm.dossierService.getRootTagName());
+            vm.showAllErrors = true;
             //_setComplete()
         };
 
-        self.saveXML = function () {
-            var writeResult = _transformFile();
-            hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), self.dossierService.getRootTagName());
-            self.showAllErrors = false;
-            self.dossierForm.$setPristine();
+        vm.saveXML = function () {
+            vm.showSummary=true;
+            if(vm.dossierForm.$invalid) {
+                console.log("sending message for dossier root update")
+                vm.showErrorSummary = vm.showErrorSummary + 1;
+                vm.updateErrorSummaryState();
+            }else {
+                var writeResult = _transformFile();
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName());
+                vm.showAllErrors = false;
+                vm.dossierForm.$setPristine();
+            }
         };
 
 
@@ -280,17 +293,17 @@
          */
         function _transformFile() {
             updateDate();
-            if (!self.isExtern()) {
-                if(!self.dossierForm.$pristine) {
-                    self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMajorVersion(self.dossierModel.enrolmentVersion);
-                    self.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
+            if (!vm.isExtern()) {
+                if(!vm.dossierForm.$pristine) {
+                    vm.dossierModel.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.dossierModel.enrolmentVersion);
+                    vm.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
                 }
                 // updateModelOnApproval(); //updates all the amend
             } else {
 
-                self.dossierModel.enrolmentVersion = self.applicationInfoService.incrementMinorVersion(self.dossierModel.enrolmentVersion);
+                vm.dossierModel.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.dossierModel.enrolmentVersion);
             }
-            return self.dossierService.dossierToOutput(self.dossierModel);
+            return vm.dossierService.dossierToOutput(vm.dossierModel);
         }
 
         /**
@@ -304,17 +317,17 @@
             var final_prefix = "HCREPDO";
             var filename = "";
             var separator="-";
-            if (self.userType === INTERNAL_TYPE) {
+            if (vm.userType === INTERNAL_TYPE) {
 
                 filename = final_prefix;
             } else {
                 filename = draft_prefix;
             }
-            if (self.dossierModel && self.dossierModel.dossierID) {
-                filename = filename + separator + self.dossierModel.dossierID;
+            if (vm.dossierModel && vm.dossierModel.dossierID) {
+                filename = filename + separator + vm.dossierModel.dossierID;
             }
-            if (self.dossierModel.enrolmentVersion) {
-                filename = filename + separator + self.dossierModel.enrolmentVersion;
+            if (vm.dossierModel.enrolmentVersion) {
+                filename = filename + separator + vm.dossierModel.enrolmentVersion;
             }
             filename= filename.replace(".",separator);
             return filename.toLowerCase();
@@ -324,58 +337,59 @@
          * @ngdoc method -updates the date field to the current date
          */
         function updateDate() {
-            if (self.dossierModel) {
-                self.dossierModel.dateSaved = self.applicationInfoService.getTodayDate();
+            if (vm.dossierModel) {
+                vm.dossierModel.dateSaved = vm.applicationInfoService.getTodayDate();
             }
         }
-
-
+        
         /**
          * Manages errors for no Thera
          * @returns {boolean}
          */
-        self.noTheraRecs = function () {
+        vm.noTheraRecs = function () {
 
-            if (!self.dossierModel || !self.dossierModel.drugProduct) {
-                self.noThera = "";
+            if (!vm.dossierModel || !vm.dossierModel.drugProduct) {
+                vm.noThera = "";
                 return false;
             }
-            if (!self.dossierModel.drugProduct.therapeutic || self.dossierModel.drugProduct.therapeutic.length === 0) {
-                self.noThera = "";
+            if (!vm.dossierModel.drugProduct.therapeutic || vm.dossierModel.drugProduct.therapeutic.length === 0) {
+                vm.noThera = "";
                 return true;
             }
-            self.noThera = self.dossierModel.drugProduct.therapeutic.length;
+            vm.noThera = vm.dossierModel.drugProduct.therapeutic.length;
             return false;
         };
 
-        self.addInstruct = function (value) {
+        vm.addInstruct = function (value) {
 
             if (angular.isUndefined(value)) return;
-            if (value < self.alerts.length) {
-                self.alerts[value] = true;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
             }
-        }
+        };
 
 
         /**
          * Closes the instruction alerts
          * @param value
          */
-        self.closeAlert = function (value) {
+        vm.closeAlert = function (value) {
             if (angular.isUndefined(value)) return;
-            if (value < self.alerts.length) {
-                self.alerts[value] = false;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
             }
         };
         /**
          * Determines if form is in french
          * @returns {boolean}
          */
-        self.isFrench=function(){
-            return(self.lang===FRENCH);
+        vm.isFrench=function(){
+            return(vm.lang===FRENCH);
         };
 
-    }
+
+
+    }//endcontroller
 
 })();
 

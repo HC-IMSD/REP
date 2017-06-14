@@ -19,7 +19,9 @@
             formulationList : '<',
             appendix4List : '<',
             recordChanged: '&',
-            service: '<'
+            service: '<',
+            errorSummaryUpdate:'<',
+            showErrorSummary:'<'
         }
     });
 
@@ -28,8 +30,10 @@
 
     function tabsCtrl($scope) {
 
-        var self = this;
-        self.tabs = [
+        var vm = this;
+        vm.showSummary=false;
+        vm.updateSummary=0;
+        vm.tabs = [
             {
                 label: "FORMULATIONS",
                 selected: true,
@@ -45,33 +49,36 @@
                 form: {}
             }
         ];
-        self.$onInit = function () {
+        vm.$onInit = function () {
 
         };
-        self.$onChanges = function () {
-            /*  if(changes.service){
+        vm.$onChanges=function(changes){
+            if(changes.errorSummaryUpdate){
+                console.log("Changes in tab")
+                vm.updateSummary=changes.errorSummaryUpdate.currentValue;
 
-             self.dosService=changes.service.currentValue;
-             }*/
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+            }
 
-        };
+        }
+        vm.selectTab = function (idx) {
 
-        self.selectTab = function (idx) {
-
-            /*  angular.forEach(self.tabs, function (tab) {
+            /*  angular.forEach(vm.tabs, function (tab) {
                     tab.selected = false;
              tab.errors=tab.form.$invalid;
              });*/
 
-            for (var i = 0; i < self.tabs.length; i++) {
-                self.tabs[i].selected = false;
+            for (var i = 0; i < vm.tabs.length; i++) {
+                vm.tabs[i].selected = false;
                 if (idx !== i) {
-                    self.tabs[i].errors = self.tabs[i].form.$invalid;
+                    vm.tabs[i].errors = vm.tabs[i].form.$invalid;
                 }
             }
 
-                self.tabs[idx].selected = true;
-            //self.tabs[idx].errors= self.tabs[idx].form.$invalid
+                vm.tabs[idx].selected = true;
+            //vm.tabs[idx].errors= vm.tabs[idx].form.$invalid
         };
     }
 

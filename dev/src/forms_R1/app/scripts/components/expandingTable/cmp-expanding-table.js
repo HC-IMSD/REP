@@ -26,7 +26,7 @@
                 selectRecord: '<',
                 resetToCollapsed: '<',
                 disableErrColumn:'@',
-                transcludeName:'@'
+                tname:'@'
             }
         });
     expandingTableCtrl.$inject = ['$filter'];
@@ -41,7 +41,8 @@
         vm.numberCols=1;
         vm.disableErrorCol=false;
         vm.dayDataCollapse = _createArray(0, true);
-        vm.formName="";
+        vm.formName="expandTblCtrl.transcludeForm";
+
         vm.$onInit = function () {
             if(vm.listItems) {
                 vm.dayDataCollapse = _createArray(vm.listItems.length, true);
@@ -57,10 +58,6 @@
 
         vm.$onChanges = function (changes) {
 
-            if(changes.transcludeName){
-
-                vm.formName=changes.transcludeName.currentValue;
-            }
 
             if (changes.listItems) {
                 if(vm.listItems) {
@@ -70,6 +67,13 @@
                     vm.dayDataCollapse = _createArray(0, true);
                 }
                 vm.resetTableRow();
+            }
+
+            if(changes.tname){
+                //if the binding is not defined will fire and be null
+                if(changes.tname.currentValue) {
+                    vm.formName = changes.tname.currentValue;
+                }
             }
 
             /**
