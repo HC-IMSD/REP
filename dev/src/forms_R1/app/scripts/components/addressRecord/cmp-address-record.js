@@ -257,7 +257,9 @@
         }
 
         function _setIdNames() {
-            vm.companyNameId = "companyName" +"_"+  $scope.$id;
+            var scopeId="_"+  $scope.$id;
+            vm.companyNameId = "companyName" +scopeId;
+            vm.formNameId="company-address-record-form"+scopeId;
         }
 
     }

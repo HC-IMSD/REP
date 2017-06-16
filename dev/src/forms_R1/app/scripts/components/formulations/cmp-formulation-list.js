@@ -57,6 +57,7 @@
         vm.$onInit = function () {
 
             vm.newFormShown = false;
+            vm.formulationListId="formulation-list-form";
 
             vm.colNames = [
                 {label: "FORM_ID", binding: "formulationId", width: "15"},
@@ -79,7 +80,6 @@
             }
 
             if(changes.showErrorSummary){
-                console.log("Show Error Summary for Formulations")
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
             }
@@ -124,13 +124,10 @@
         };
 
         vm.delete = function (idx) {
-            //console.debug('frmList delete: ' + idx);
             if (vm.formulationList.splice(idx, 1))
                 vm.setRecord(-1);
                 vm.resetToCollapsed = !vm.resetToCollapsed;
-
             vm.updateFormulationsError();
-
         };
 
 
@@ -155,7 +152,6 @@
 
 
         vm.setRecord=function(value){
-            console.log("record"+value);
           resetMe();
             vm.selectRecord=-1;
             vm.selectRecord=value;
@@ -178,8 +174,6 @@
             }
             return out;
         }
-
-     
     }
 
 })();

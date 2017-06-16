@@ -117,6 +117,7 @@
             }
             if (changes.formId) {
                 /* used for the jquery ordering. This gives the starting id **/
+                console.log("This is formId "+ changes.formId.currentValue);
                 vm.startFormId = changes.formId.currentValue;
             }
             if(changes.transcludeList){
@@ -180,7 +181,6 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
-
             var newErrors = _sortErrorsByDomOrder();
             if (!angular.equals(vm.errorArray, newErrors)) {
                 vm.errorArray = newErrors;
@@ -227,7 +227,6 @@
                         angular.merge(resultsList,_createExpanderRecord(record[j].$name,transcludeName,keys[i],parent,expandIndex));
                     }
                     else if (record[j].$invalid === true && !resultsList.hasOwnProperty(record[j].$name)) {
-
                         var result = _processRecord(record[j].$name, keys[i], parent)
                         angular.merge(resultsList, result);
                     }
@@ -324,6 +323,16 @@
                             errorKey = aliasRec.errorType;
                         }
                         break;
+
+                    case "buttonsearch":
+                        errorKey =  "TYPE_REQUIRED";
+                            $.each($('button', '#' + vm.startFormId), function (k) {
+                            var temp_attr = $(this).attr('id');
+                            if (temp_attr && temp_attr.indexOf(aliasRec.buttonName)>-1) {
+                              destId=temp_attr;
+                            }
+                        });
+                        break;
                     default:
                         console.warn("No type found " + aliasRec.type);
                         break;
@@ -343,7 +352,6 @@
         //TODO cleanup  this function, inefficient
         function _sortErrorsByDomOrder() {
             var domFieldList = {};
-            var newErrors = [];
             //TODO make angular friendly
             //get all the inputs and assign order index
             $.each($('input, select ,textarea', '#' + vm.startFormId), function (k) {
@@ -352,24 +360,33 @@
                     domFieldList[temp_attr] = k;
                 }
             });
+            console.log(domFieldList)
             //delete anything in the not in the list
             //TODO refactor? seems inefficient
             var keyList = Object.keys(domFieldList);
             for (var p = 0; p < keyList.length; p++) {
+                //specifically handled the angular bootstrap ui-select
+                if(keyList[p].indexOf("focusser-")>-1){
+                    //find the parent
+                    var parentName=angular.element(document.querySelector('#'+keyList[p])).parent().attr('name');
+                    if(parentName){
+                        keyList[p]=parentName;
+                    }
+                }
                 if (!vm.uniqueErrorList[keyList[p]]) {
-                    delete domFieldList[keyList[p]];
+                    keyList.splice(p, 1);
+                        p--;
                 }
             }
-            //get all the keys
-            var temp = Object.keys(domFieldList).map(function (k) {
-                return k
-            });
-            //add the keys
             var sortedDomJsonList = {};
-            for (var v = 0; v < temp.length; v++) {
-                sortedDomJsonList[temp[v]] = v;
+            //create a json where the key is the name, and the value is the index (ie the position it should be
+            //this allows lookup by name and gets the index
+            for (var v = 0; v < keyList.length; v++) {
+                sortedDomJsonList[keyList[v]] = v;
             }
-            newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
+            console.log(sortedDomJsonList)
+            //create an array
+            var newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
                 return vm.uniqueErrorList[k]
             });
             //sort errors

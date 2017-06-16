@@ -93,7 +93,6 @@
                            class="form-control" ng-maxlength="7" ng-required="adr.isPostalRequired"
                            ng-change="adr.postalCodeChanged()"
                            maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="!adr.isEditable"/>
-
                     <cmp-error-message field-name="adr.postalId" form-ref="adr.addressForm"
                                        show-error="adr.showErrors()" error-types="adr.postalErrorList">
                     </cmp-error-message>

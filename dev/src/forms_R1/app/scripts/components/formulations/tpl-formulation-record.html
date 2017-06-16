@@ -1,12 +1,11 @@
 <ng-form name="formulRecCtrl.formulationForm" ng-model-options="{debounce: 250}"
-         id="{{formulRecCtrl.formName}}">
+         id="{{::formulRecCtrl.formulationFormRecordId}}">
     <div>
         <cmp-error-summary form-ref=formulRecCtrl.formulationForm show-errors="true"
-                           form-preamble="FORMULATION_DETAILS" exclusion-list=formulRecCtrl.exclusions
-                           name-suffix="{{formulRecCtrl.summaryName}}" set-heading-level="h3" form-id="formulRecCtrl.formName"
-                           make-focused="" alias-list=""  show-errors="formulRecCtrl.showSummary" update-errors="formulRecCtrl.updateSummary"
+                           form-preamble="{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}" exclusion-list=formulRecCtrl.exclusions
+                           name-suffix="{{formulRecCtrl.summaryName}}" set-heading-level="h3" form-id="formulRecCtrl.formulationFormRecordId"
+                           make-focused="" alias-list="formulRecCtrl.alias" show-errors="formulRecCtrl.showSummary"
                            update-errors="formulRecCtrl.updateSummary"></cmp-error-summary>
-
         <fieldset>
             <legend>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</legend>
 
@@ -20,20 +19,17 @@
             </div>
             <div class="row">
                 <div class="col-md-5 form-group">
-
                     <label for="{{::formulRecCtrl.dosageId}}" class="required rep-required-offset full-width"><span
                             class="field-name">{{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-
-                        <div class="">
+                        <div class="rep-pad-top" >
                         <div  class="rep-error" ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}">
                         <ui-select ng-model="formulRecCtrl.frmModel.dosageForm" id="{{::formulRecCtrl.dosageId}}"
                                    name="{{::formulRecCtrl.dosageId}}"   ng-model-options="{debounce: 0}"
                                    class="rep-selectize-dropdown rep-selectize-font" required
                                    ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}"
                                    title="Choose a dosage form">
-                            <ui-select-match placeholder="Select or Search for a dosage form"
-
+                            <ui-select-match placeholder="{{SELECT_DOSAGE|translate}}"
                                              class="rep-selectize-font rep-selectize-dropdown">
                                 {{$select.selected[formulRecCtrl.lang]}}
                             </ui-select-match>
@@ -52,22 +48,21 @@
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
-                <div class="col-md-6 form-group" ng-class="{'has-error':formulRecCtrl.formulationRecForm.dosageOther.$invalid}"
+                <div class="col-md-6 form-group" ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageOtherId].$invalid}"
                      ng-show="formulRecCtrl.isDosageOther()">
-                    <label for="dosage-form-other_{{::$id}}" class="required">
+                    <label for="{{::formulRecCtrl.dosageOtherId}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="dosage-form-other_{{::$id}}"
+                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
-                               class="form-control full-width" name="dosageOther"
+                               class="form-control full-width" name="{{::formulRecCtrl.dosageOtherId}}"
                                ng-model-options="{ debounce: '$inherit'}"
-                               ng-required="formulRecCtrl.isDosageOther()" maxlength="60" size="60"/>
-                        <strong id="dosageOther-error" class="error"
-                                ng-if="formulRecCtrl.showError(formulRecCtrl.formulationRecForm.dosageOther.$invalid,formulRecCtrl.formulationRecForm.dosageOther.$touched)">
-                        <span class="label label-danger" ng-messages="formulRecCtrl.formulationRecForm.dosageOther.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                        </strong>
+                             ng-required="formulRecCtrl.isDosageOther()" maxlength="60" size="60"/>
+                        <cmp-error-message field-name="formulRecCtrl.dosageOtherId"
+                                           form-ref="formulRecCtrl.formulationForm"
+                                           show-error="formulRecCtrl.showErrors()"
+                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
+
                     </label>
                 </div>
             </div>
@@ -75,14 +70,9 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'MEDICINAL_INGRED'|translate}}</h3>
-                      <!--  <strong id="noactive-error" class="error" ng-if="formulRecCtrl.noActives()">
-                                <span class="label label-danger" ng-messages="formulRecCtrl.formName.noActiveFld.$error">
-                                    <span ng-message="required"><span translate="MSG_ERR_ONE_ACTIVE"></span></span>
-                                </span>
-                        </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noActiveFld_{{$id}}" id="noActiveFld_{{$id}}"
+                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noActiveId}}" id="{{::formulRecCtrl.noActiveId}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>
                         <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
                                              on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
@@ -122,7 +112,7 @@
                         </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noContainerFld_{{$id}}" id="noContainerFld_{{$id}}"
+                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noContainerId}}" id="{{::formulRecCtrl.noContainerId}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noContainerValues"/>
                         <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
                                                  on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
@@ -140,7 +130,7 @@
                         </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noROA_{{::$id}}" id="noROA_{{::$id}}"
+                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noRoaId}}" id="{{::formulRecCtrl.noRoaId}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noROAValues"/>
                         <cmp-roa-list records="formulRecCtrl.frmModel.routeAdmins" show-errors=""></cmp-roa-list>
                     </div>
@@ -157,7 +147,7 @@
                         </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="noCountry_{{::$id}}" id="noCountry_{{::$id}}"
+                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
                                           on-update="formulRecCtrl.updateCountryList(list)"

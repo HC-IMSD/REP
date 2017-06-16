@@ -143,7 +143,7 @@
         vm.saveXML = function () {
             if(vm.companyEnrolForm.$invalid){
                 vm.showErrorSummary= true;
-                vm.updateErrorSummaryState();
+                vm.updateErrorSummary();
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);

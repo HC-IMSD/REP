@@ -62,12 +62,34 @@
         vm.savePressed=false;
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
-        vm.formName="";
+       // vm.formName="";
         vm.summaryName="";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.frmModel = {};
-        vm.exclusions={};
+        vm.exclusions={
+            "ingRecCtrl.activeIngForm":"true"
+        };
+        vm.alias={
+            "no_country": {
+                "type": "buttonSearch",
+                "buttonName": "addCountry"
+            },
+            "no_roa": {
+                "type": "buttonSearch",
+                "buttonName": "addRoaRec"
+            },
+            "no_active": {
+                "type": "buttonSearch",
+                "buttonName": "addAI"
+            },
+            "no_container": {
+                "type": "buttonSearch",
+                "buttonName": "addContainer"
+            }
+
+        };
+
         vm.$onInit = function () {
 
             _setIdNames();
@@ -75,7 +97,7 @@
         vm.$onChanges=function(changes){
             if(changes.record){
                 vm.frmModel = changes.record.currentValue;
-                vm.formName="formulationRecForm_"+vm.frmModel.formulationId;
+                //vm.formName="formulationRecForm_"+vm.frmModel.formulationId;
                 vm.summaryName="cmp-formulation-record_"+(vm.frmModel.formulationId-1);
             }
             if(changes.showErrorSummary){
@@ -232,24 +254,29 @@
                 vm.frmModel.dosageFormOther = "";
                 return false;
             }
-        }
+        };
 
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
         };
 
-        vm.getFormName=function(){
+       /* vm.getFormName=function(){
 
             return vm.formName;
-        }
+        }*/
         /**
          * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
          * @private
          */
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.dosageId = "dosageForm" + scopeId;
-            vm.dosageOtherId = "dosageOther" + scopeId;
+            vm.formulationFormRecordId="formulationRecord" + scopeId;
+            vm.dosageId = "dosage_form" + scopeId;
+            vm.dosageOtherId = "dosage_form_other" + scopeId;
+            vm.noActiveId="no_active"+scopeId;
+            vm.noContainerId="no_container"+scopeId;
+            vm.noRoaId="no_roa"+scopeId;
+            vm.noCountryId="no_country"+scopeId;
         }
 
     }

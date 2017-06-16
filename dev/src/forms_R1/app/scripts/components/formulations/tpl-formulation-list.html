@@ -1,8 +1,8 @@
-<ng-form name="formulCtrl.formulationsForm" id="formulation-list-form">
+<ng-form name="formulCtrl.formulationsForm" id="formulCtrl.formulationListId">
 
     <cmp-error-summary form-ref="formulCtrl.formulationsForm" show-errors="formulCtrl.showSummary"
                        form-preamble="FORMULATIONS" exclusion-list="formulCtrl.exclusions"
-                       name-suffix="formulation-list-form" set-heading-level="h3" form-id="formulation-list-form"
+                       name-suffix="formulation-list-form" set-heading-level="h3" form-id="formulCtrl.formulationListId"
                        make-focused="" alias-list="formulCtrl.alias" expand-record="formulCtrl.setRecord(index)"
                        transclude-list="formulCtrl.transcludeList"
                        update-errors="formulCtrl.updateSummary"></cmp-error-summary>
@@ -12,7 +12,7 @@
     <!--<pre>formulationList: {{formulCtrl.formulationList|json}}</pre>-->
     <cmp-expanding-table title="Formulations List" tname="cmp-formulation-record"
                          reset-to-collapsed="formulCtrl.resetToCollapsed" list-items="formulCtrl.formulationList"
-                         column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord"
+                         column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord" disable-err-column="true"
                          disable-selection="!formulCtrl.isDetailValid">
 
         <cmp-formulation-record record="$parent.record" on-update="formulCtrl.update($parent.$index,record)"

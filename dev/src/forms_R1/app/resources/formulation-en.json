@@ -49,5 +49,6 @@
   "SOURCED_INFO":"Please provide additional details of this ingredient / material on the Animal / Human Source tab.",
   "DELETE_FORMULATION":  "Delete Formulation",
   "COPY_FORMULATION":"Copy formulation",
-  "ADD_FORMULATION":"Add formulation"
+  "ADD_FORMULATION":"Add formulation",
+  "SELECT_DOSAGE":"Select a dosage form"
 }
