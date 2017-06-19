@@ -46,9 +46,14 @@
         vm.yesNoList = DossierLists.getYesNoList();
         vm.activeList = DossierLists.getActiveList();
         vm.UnitsList=DossierLists.getUnitsList();
-        //vm.savePressed = false;
         vm.lang = $translate.proposedLanguage() || $translate.use();
-        //vm.newIngred = false;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.numberMinError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
+            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+        ];
+
         vm.ingModel = {
             autoIngred: 'N',
             ingId: "",
@@ -154,11 +159,10 @@
                 vm.activeIngForm.$setPristine();
                 vm.showSummary=false;
                 vm.updateErrorSummaryState();
-               // vm.savePressed = false;
+
             } else {
                 vm.showSummary=true;
                 vm.updateErrorSummaryState();
-              //  vm.savePressed = true;
             }
         };
 
@@ -189,8 +193,11 @@
          * @param isTouched
          * @returns {*}
          */
-        vm.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid &&  vm.showSummary))
+        vm.showError = function (ctrl) {
+            if(!ctrl){
+                console.warn("no control for active record")
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid &&  vm.showSummary))
         };
 
         /**

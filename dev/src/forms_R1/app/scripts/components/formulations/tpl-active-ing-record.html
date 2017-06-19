@@ -26,13 +26,10 @@
                                    typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
                                    typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
                         </div>
-                        <!--<strong id="ingredientName-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.ingredName.$invalid,ingRecCtrl.activeIngForm.ingredName.$touched)">
-                                    <span class="label label-danger"
-                                          ng-messages="ingRecCtrl.activeIngForm.ingredName.$error">
-                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                    </span>
-                        </strong>-->
+                        <cmp-error-message field-name="ingRecCtrl.ingredName"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.ingredName])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
             </div>
@@ -61,15 +58,11 @@
                         <input type="number" id="{{::ingRecCtrl.strengthId}}" data-ng-model="ingRecCtrl.ingModel.strength"
                                ng-model-options="{ debounce: '$inherit'}"
                                class="form-control full-width" name="{{::ingRecCtrl.strengthId}}" ng-min="0" ng-required="true"/>
-                        <!--<strong id="strength-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.strengthFld.$invalid,ingRecCtrl.activeIngForm.strengthFld.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ingRecCtrl.activeIngForm.strengthFld.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                            <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
-                             <span ng-message="min"><span translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
-                        </span>
-                        </strong>-->
+                        <cmp-error-message field-name="ingRecCtrl.strengthId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.strengthId])"
+                                           error-types="ingRecCtrl.numberMinError"></cmp-error-message>
+
                     </label>
                 </div>
             </div>
@@ -94,13 +87,10 @@
                                 </ui-select>
                             </div>
                         </div>
-                      <!--  <strong id="units-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.unitsFld.$invalid,ingRecCtrl.activeIngForm.unitsFld.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ingRecCtrl.activeIngForm.unitsFld.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>-->
+                        <cmp-error-message field-name="ingRecCtrl.unitsId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.unitsId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
                 <div class="form-group col-md-4" ng-show="ingRecCtrl.isUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId].$invalid}">
@@ -110,12 +100,11 @@
                                ng-model-options="{ debounce: '$inherit'}"
                                size="40" class="form-control" name="{{::ingRecCtrl.otherUnitsId}}"
                                maxlength="40" ng-required="ingRecCtrl.isUnitsOther()"/>
-                    <!--    <strong id="unitsOther-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.otherUnits.$invalid,ingRecCtrl.activeIngForm.otherUnits.$touched)">
-                        <span class="label label-danger" ng-messages="ingRecCtrl.activeIngForm.otherUnits.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                        </strong>-->
+
+                <cmp-error-message field-name="ingRecCtrl.otherUnitsId"
+                                   form-ref="ingRecCtrl.activeIngForm"
+                                   show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId])"
+                                   error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
                 <div class="form-group col-md-5">
@@ -136,16 +125,13 @@
                             ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id">
 
                     </select>
-                  <!--  <strong id="nanoMaterial-error" class="error"
-                            ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.nanoFld.$invalid,ingRecCtrl.activeIngForm.nanoFld.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ingRecCtrl.activeIngForm.nanoFld.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                    </strong>-->
+                    <cmp-error-message field-name="ingRecCtrl.nanoId"
+                                       form-ref="ingRecCtrl.activeIngForm"
+                                       show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.nanoId])"
+                                       error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
                 <div class="form-group col-md-5" ng-if="ingRecCtrl.isNanoOther()"
-                     ng-class="{'has-error':ingRecCtrl.activeIngForm.nanoOtherFld.$invalid}">
+                     ng-class="{'has-error':ingRecCtrl.activeIngForm.[ingRecCtrl.nanoOtherId].$invalid}">
                     <label for="{{::ingRecCtrl.nanoOtherId}}" class="required">
                         <span class="field-name">{{'NANO_MATERIAL_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
@@ -153,13 +139,11 @@
                            data-ng-model="ingRecCtrl.ingModel.nanoMaterialOther"
                            ng-model-options="{ debounce: '$inherit'}"
                            class="form-control full-width" name="{{::ingRecCtrl.nanoOtherId}}" ng-required="true" maxlength="40"/>
-                  <!--  <strong id="nanoMaterialOther-error" class="error"
-                            ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.nanoOtherFld.$invalid,ingRecCtrl.activeIngForm.nanoOtherFld.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ingRecCtrl.activeIngForm.nanoOtherFld.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                    </strong>-->
+                    <cmp-error-message field-name="ingRecCtrl.nanoOtherId"
+                                       form-ref="ingRecCtrl.activeIngForm"
+                                       show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.nanoOtherId])"
+                                       error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+
                 </div>
                 <div class="form-group  col-sm-4 col-xs-12"
                      ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.asBaseId].$invalid}">
@@ -170,13 +154,10 @@
                                 class="form-control" name="{{::ingRecCtrl.asBaseId}}"
                                 ng-options="val |translate for val in  ingRecCtrl.yesNoList">
                         </select>
-                       <!-- <strong id="asBase-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.asBase.$invalid,ingRecCtrl.activeIngForm.asBase.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ingRecCtrl.activeIngForm.asBase.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>-->
+                        <cmp-error-message field-name="ingRecCtrl.asBaseId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.asBaseId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
             </div>
@@ -190,13 +171,10 @@
                                 ng-required="true" class="form-control" name="{{::ingRecCtrl.animalHumanSrcId}}"
                                 ng-options="val |translate for val in  ingRecCtrl.yesNoList">
                         </select>
-                       <!-- <strong id="animalHumanSourced-error" class="error"
-                                ng-if="ingRecCtrl.showError(ingRecCtrl.activeIngForm.animaHumanSourced.$invalid,ingRecCtrl.activeIngForm.animaHumanSourced.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ingRecCtrl.activeIngForm.animaHumanSourced.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>-->
+                        <cmp-error-message field-name="ingRecCtrl.animalHumanSrcId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.animalHumanSrcId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
                 <div class="btn-group-sm col-xs-8 text-right align-bottom">
