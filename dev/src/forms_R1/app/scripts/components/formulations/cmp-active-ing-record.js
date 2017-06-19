@@ -9,6 +9,7 @@
         .module('activeIngRecordModule', [
             'dossierDataLists',
             'hpfbConstants',
+            'ui.select',
             'errorSummaryModule',
             'errorMessageModule'
         ])
@@ -74,7 +75,7 @@
         vm.alias={};
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
-
+        vm.focusSummary=false;
         vm.$onInit = function () {
             vm.showSummary=false;
             vm.backup = angular.copy(vm.ingModel);
@@ -162,13 +163,19 @@
 
             } else {
                 vm.showSummary=true;
+                vm.makeFocused();
                 vm.updateErrorSummaryState();
             }
         };
 
+        vm.makeFocused=function(){
+            vm.focusSummary=vm.focusSummary+1;
+        }
+
         vm.discardChanges = function () {
             vm.ingModel = angular.copy(vm.backup);
             vm.activeIngForm.$setPristine();
+            vm.updateErrorSummaryState();
             vm.onCancel();
         };
 
@@ -189,13 +196,12 @@
 
         /**
          * Controls showing errors for a field
-         * @param isInvalid
-         * @param isTouched
+         * @param ctrl- an instance of the control to check
          * @returns {*}
          */
         vm.showError = function (ctrl) {
             if(!ctrl){
-                console.warn("no control for active record")
+                return false
             }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid &&  vm.showSummary))
         };

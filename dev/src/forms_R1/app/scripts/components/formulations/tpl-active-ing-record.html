@@ -4,7 +4,7 @@
         <cmp-error-summary form-ref="ingRecCtrl.activeIngForm"
                            form-preamble="{{'MEDICINAL_INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}" exclusion-list=ingRecCtrl.exclusions
                            name-suffix="ingRecCtrl.activeIngForm" set-heading-level="h3" form-id="ingRecCtrl.activeFormId"
-                           make-focused="" alias-list="ingRecCtrl.alias" show-errors="ingRecCtrl.showSummary"
+                           make-focused="ingRecCtrl.focusSummary" alias-list="ingRecCtrl.alias" show-errors="ingRecCtrl.showSummary"
                            update-errors="ingRecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
             <legend>{{'MEDICINAL_INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}</legend>

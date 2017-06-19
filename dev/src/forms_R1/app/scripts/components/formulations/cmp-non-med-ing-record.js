@@ -6,7 +6,13 @@
     'use strict';
 
     angular
-        .module('nonMedIngRecordModule', ['dossierDataLists','hpfbConstants','ui.select'])
+        .module('nonMedIngRecordModule', [
+            'dossierDataLists',
+            'hpfbConstants',
+            'ui.select',
+            'errorSummaryModule',
+            'errorMessageModule'
+        ])
 })();
 
 (function () {
@@ -27,20 +33,29 @@
                 onDelete: '&',
                 onCancel: '&',
                 isDetailValid: '&',
-                recordIndex:'<'
+                recordIndex:'<',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
 
         });
     nonMedIngRecCtrl.$inject = ['DossierLists', '$scope','$translate','OTHER','YES'];
     function nonMedIngRecCtrl(DossierLists, $scope,$translate, OTHER, YES) {
 
-        var self = this;
-        self.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
-        self.yesNoList = DossierLists.getYesNoList(); //yes-no lists
-        self.unitsList=DossierLists.getUnitsList();
-        self.savePressed=false;
-        self.lang = $translate.proposedLanguage() || $translate.use();
-        self.ingModel = {
+        var vm = this;
+        vm.nanoMaterialList = DossierLists.getNanoMaterials(); //nanoMaterial list
+        vm.yesNoList = DossierLists.getYesNoList(); //yes-no lists
+        vm.unitsList=DossierLists.getUnitsList();
+       // vm.savePressed=false;
+        vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.numberMinError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
+            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+        ];
+        
+        vm.ingModel = {
             varId:"",
             ingName: "",
             cas: "",
@@ -55,43 +70,71 @@
             humanAnimalSourced: ""
         };
 
-        self.$onInit = function () {
-            self.savePressed=false;
-            self.backup = angular.copy(self.ingModel);
+        vm.exclusions={
+        };
+        vm.alias={};
+        vm.updateSummary=0; //message to update the summary component
+        vm.showSummary=false; //show the errror summary object
+
+        vm.$onInit = function () {
+            vm.savePressed=false;
+            vm.backup = angular.copy(vm.ingModel);
+            _setIdNames();
+            vm.summaryName="cmp-non-med-ing-record_"+(vm.recordIndex);
         };
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
             if (changes.record && changes.record.currentValue) {
-                self.ingModel = angular.copy(changes.record.currentValue);
+                vm.ingModel = angular.copy(changes.record.currentValue);
             }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
+            }
+            if(changes.recordIndex){
+
+                vm.summaryName="cmp-non-med-ing-record_"+(vm.recordIndex.currentValue);
+            }
+
         };
 
-        self.saveIng = function () {
-            if(self.nonMedIngForm.$valid) {
+        vm.saveIng = function () {
+            if(vm.nonMedIngForm.$valid) {
 
-                if (self.record) {
-                    self.onUpdate({ing: self.ingModel});
+                if (vm.record) {
+                    vm.onUpdate({ing: vm.ingModel});
                 } else {
-                    self.onAddIng({ing: self.ingModel});
+                    vm.onAddIng({ing: vm.ingModel});
                 }
-                self.nonMedIngForm.$setPristine();
-                self.savePressed=false;
+                vm.nonMedIngForm.$setPristine();
+                vm.showSummary=false;
+                vm.updateErrorSummaryState();
             }else{
-                self.savePressed=true;
+                vm.showSummary=true;
+                vm.makeFocused();
+                vm.updateErrorSummaryState();
             }
 
         };
 
-        self.discardChanges = function () {
-            self.ingModel = angular.copy(self.backup);
-            self.nonMedIngForm.$setPristine();
-            self.onCancel();
+        vm.makeFocused=function(){
+            vm.focusSummary=vm.focusSummary+1;
+        }
+
+        vm.discardChanges = function () {
+            vm.ingModel = angular.copy(vm.backup);
+            vm.nonMedIngForm.$setPristine();
+            vm.updateErrorSummaryState();
+            vm.onCancel();
         };
 
-        self.delete = function () {
-            if (self.record) {
+        vm.delete = function () {
+            if (vm.record) {
                 //  console.log('product details delete product');
-                self.onDelete();
+                vm.onDelete();
             } else {
 
             }
@@ -102,39 +145,41 @@
          * Used to set the state of the info box
          * @returns {boolean}
          */
-        self.isAnimalHumanSourced=function(){
-            if(!self.ingModel){ //should never happen
+        vm.isAnimalHumanSourced=function(){
+            if(!vm.ingModel){ //should never happen
                 return false;
             }
-            return(self.ingModel.humanAnimalSourced===YES);
+            return(vm.ingModel.humanAnimalSourced===YES);
         };
 
-        self.copy = function () {
-            var ingredientCopy = angular.copy( self.ingModel);
-            self.onAddIng({ing: ingredientCopy});
+        vm.copy = function () {
+            var ingredientCopy = angular.copy( vm.ingModel);
+            vm.onAddIng({ing: ingredientCopy});
         };
 
 
 
         /**
          * Controls showing errors for a field
-         * @param isInvalid
-         * @param isTouched
+         * @param ctrl- an instance of the control to check
          * @returns {*}
          */
-        self.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && self.showErrors())|| (isInvalid && self.savePressed))
+        vm.showError = function (ctrl) {
+            if(!ctrl){
+                return false
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid &&  vm.showSummary))
         };
 
         /**
          * Sets the state of the nanomaterial other field
          * @returns {boolean} true if other is the value
          */
-        self.isNanoOther = function () {
-            if (self.ingModel.nanoMaterial.id === DossierLists.getOtherValue()) {
+        vm.isNanoOther = function () {
+            if (vm.ingModel.nanoMaterial.id === DossierLists.getOtherValue()) {
                 return true;
             } else {
-                self.ingModel.nanoMaterialOther = "";
+                vm.ingModel.nanoMaterialOther = "";
                 return false;
             }
         };
@@ -143,21 +188,45 @@
          * @ngDoc determines if units Other should be shown
          * @returns {boolean}
          */
-        self.isUnitsOther = function () {
+        vm.isUnitsOther = function () {
 
-            if (!self.ingModel || !self.ingModel.units) return false;
-            if ((self.ingModel.units.id === OTHER)) {
+            if (!vm.ingModel || !vm.ingModel.units) return false;
+            if ((vm.ingModel.units.id === OTHER)) {
                 return true;
             } else {
-                self.ingModel.otherUnits = "";
+                vm.ingModel.otherUnits = "";
                 return false;
             }
         };
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
 
+        };
 
         $scope.$watch('nIngRecCtrl.nonMedIngForm.$dirty', function () {
-            self.isDetailValid({state: !self.nonMedIngForm.$dirty});
+            vm.isDetailValid({state: !vm.nonMedIngForm.$dirty});
         }, true);
+
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.variantId="variantName" + scopeId;
+            vm.nmiFormId="nmiRecordForm" + scopeId;
+            vm.ingredName="ing-name"+scopeId;
+            vm.casId="cas"+scopeId;
+            vm.standardId="stamndard"+scopeId;
+            vm.strengthId="strength"+scopeId;
+            vm.unitsId="units"+scopeId;
+            vm.otherUnitsId="otherUnits"+scopeId;
+            vm.perId="per"+scopeId;
+            vm.nanoId="nanoMaterial"+scopeId;
+            vm.nanoOtherId="nanoMaterialOther"+scopeId;
+            vm.asBaseId="asBase"+scopeId;
+            vm.animalHumanSrcId="animalHumanSourced_"+scopeId;
+        }
 
 
 
