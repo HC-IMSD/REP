@@ -56,16 +56,6 @@
                                            form-ref="nIngRecCtrl.nonMedIngForm"
                                            show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthId])"
                                            error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
-                       <!-- <strong id="strength-error" class="error"
-                                ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.strength.$invalid,nIngRecCtrl.nonMedIngForm.strength.$touched)">
-                                    <span class="label label-danger"
-                                          ng-messages="nIngRecCtrl.nonMedIngForm.strength.$error">
-                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                          <span ng-message="number"><span translate="MSG_ERR_INVALID_NUM"></span></span>
-                                            <span ng-message="min"><span
-                                                    translate="MSG_ERR_INVALID_NUM_MIN0"></span></span>
-                                    </span>
-                        </strong>-->
                     </label>
                 </div>
             </div>
@@ -94,107 +84,87 @@
                                            form-ref="nIngRecCtrl.nonMedIngForm"
                                            show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.unitsId])"
                                            error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
-                       <!-- <strong id="nm-unit-error" class="error"
-                                ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nmUnits.$invalid,nIngRecCtrl.nonMedIngForm.nmUnits.$touched)">
-                                    <span class="label label-danger"
-                                          ng-messages="nIngRecCtrl.nonMedIngForm.nmUnits.$error">
-                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                    </span>
-                        </strong>-->
                     </label>
                 </div>
-                <div class="form-group col-md-4" ng-show="nIngRecCtrl.isUnitsOther()">
-                    <label for="otherUnits_{{::$id}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                <div class="form-group col-md-4" ng-show="nIngRecCtrl.isUnitsOther()" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.otherUnitsId].$invalid}">
+                    <label for="{{::nIngRecCtrl.otherUnitsId}}" class="required">
+                        <span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="otherUnits_{{::$id}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
+                        <input type="text" id="{{::nIngRecCtrl.otherUnitsId}}" data-ng-model="nIngRecCtrl.ingModel.otherUnits"
                                size="40" class="form-control" name="otherUnits" ng-model-options="{ debounce: $inherit}"
                                maxlength="40" ng-required="nIngRecCtrl.isUnitsOther()"/>
-                        <strong id="unitsOther-error" class="error"
-                                ng-if="ingRecCtrl.showError(nIngRecCtrl.nonMedIngForm.otherUnits.$invalid,nIngRecCtrl.nonMedIngForm.otherUnits.$touched)">
-                        <span class="label label-danger" ng-messages="nIngRecCtrl.nonMedIngForm.otherUnits.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                        </strong>
+                        <cmp-error-message field-name="nIngRecCtrl.otherUnitsId"
+                                           form-ref="nIngRecCtrl.nonMedIngForm"
+                                           show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.otherUnitsId])"
+                                           error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
 
                 <div class="form-group col-md-5">
-                    <label for="per"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
-                    <input type="text" id="per" data-ng-model="nIngRecCtrl.ingModel.per"
+                    <label for="{{::nIngRecCtrl.perId}}"><span class="field-name">{{'PER_STRENGTH'|translate}}</span></label>
+                    <input type="text" id="{{::nIngRecCtrl.perId}}" name="{{::nIngRecCtrl.perId}}" data-ng-model="nIngRecCtrl.ingModel.per"
                            ng-model-options="{ debounce: $inherit}"
                            class="form-control" name="perVal" maxlength="40" size="40"/>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-3"
-                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nanoFld.$invalid}">
-                    <label for="nanoMaterial" class="required">
+                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.nanoId].$invalid}">
+                    <label for="{{::nIngRecCtrl.nanoId}}" class="required">
                         <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <select id="nanoMaterial" ng-model="nIngRecCtrl.ingModel.nanoMaterial"
-                            class="form-control full-width" name="nanoFld" ng-required="true"
+                    <select id="{{::nIngRecCtrl.nanoId}}" ng-model="nIngRecCtrl.ingModel.nanoMaterial"
+                            class="form-control full-width" name="{{::nIngRecCtrl.nanoId}}" ng-required="true"
                             ng-options="nano[nIngRecCtrl.lang] for nano in  nIngRecCtrl.nanoMaterialList track by nano.id">
                     </select>
-                    <strong id="nanoMaterial-error" class="error"
-                            ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nanoFld.$invalid,nIngRecCtrl.nonMedIngForm.nanoFld.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="nIngRecCtrl.nonMedIngForm.nanoFld.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                    </strong>
+                    <cmp-error-message field-name="nIngRecCtrl.nanoId"
+                                       form-ref="nIngRecCtrl.nonMedIngForm"
+                                       show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.nanoId])"
+                                       error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
                 <div class="form-group col-md-5" ng-if="nIngRecCtrl.isNanoOther()"
-                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.nanoOtherFld.$invalid}">
-                    <label for="nanoMaterialOther" class="required">
+                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.nanoOtherId].$invalid}">
+                    <label for="{{::nIngRecCtrl.nanoOtherId}}" class="required">
                         <span class="field-name">{{'NANO_MATERIAL_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <input type="text" id="nanoMaterialOther" data-ng-model="nIngRecCtrl.ingModel.nanoMaterialOther"
+                    <input type="text" id="{{::nIngRecCtrl.nanoOtherId}}" data-ng-model="nIngRecCtrl.ingModel.nanoMaterialOther"
                            ng-model-options="{ debounce: $inherit}"
-                           class="form-control full-width" name="nanoOtherFld" ng-required="true" maxlength="40"/>
-                    <strong id="nanoMaterialOther-error" class="error"
-                            ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.nanoOtherFld.$invalid,nIngRecCtrl.nonMedIngForm.nanoOtherFld.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="nIngRecCtrl.nonMedIngForm.nanoOtherFld.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                    </strong>
+                           class="form-control full-width" name="{{::nIngRecCtrl.nanoOtherId}}" required maxlength="40"/>
+                    <cmp-error-message field-name="nIngRecCtrl.nanoOtherId"
+                                       form-ref="nIngRecCtrl.nonMedIngForm"
+                                       show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.nanoOtherId])"
+                                       error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
-                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.asBase.$invalid}">
-                    <label for="asBase" class="required">
+                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.asBaseId].$invalid}">
+                    <label for="{{::nIngRecCtrl.asBaseId}}" class="required">
                         <span class="field-name">{{'CALCULATED_AS_BASE'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <select id="asBase" ng-model="nIngRecCtrl.ingModel.calcAsBase"
-                                class="form-control" name="asBase" ng-required="true"
+                        <select id="{{::nIngRecCtrl.asBaseId}}" ng-model="nIngRecCtrl.ingModel.calcAsBase"
+                                class="form-control" name="{{::nIngRecCtrl.asBaseId}}" ng-required="true"
                                 ng-options="val |translate for val in  nIngRecCtrl.yesNoList">
                         </select>
-                        <strong id="asBase-error" class="error"
-                                ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.asBase.$invalid,nIngRecCtrl.nonMedIngForm.asBase.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="nIngRecCtrl.nonMedIngForm.asBase.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>
+                        <cmp-error-message field-name="nIngRecCtrl.asBaseId"
+                                           form-ref="nIngRecCtrl.nonMedIngForm"
+                                           show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.asBaseId])"
+                                           error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12"
-                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm.animaHumanSourced.$invalid}">
-                    <label for="animalHumanSourced_{{::$id}}" class="required">
+                     ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.animalHumanSrcId].$invalid}">
+                    <label for="{{::nIngRecCtrl.animalHumanSrcId}}" class="required">
                         <span class="field-name">{{'ANIMAL_HUMAN_SOURCED'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <select id="animalHumanSourced_{{::$id}}" ng-model="nIngRecCtrl.ingModel.humanAnimalSourced"
-                                class="form-control" name="animaHumanSourced" ng-required="true"
+                        <select id="{{::nIngRecCtrl.animalHumanSrcId}}" ng-model="nIngRecCtrl.ingModel.humanAnimalSourced"
+                                class="form-control" name="{{::nIngRecCtrl.animalHumanSrcId}}" required
                                 ng-options="val |translate for val in  nIngRecCtrl.yesNoList">
                         </select>
-                        <strong id="animalHumanSourced-error" class="error"
-                                ng-if="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm.animaHumanSourced.$invalid,nIngRecCtrl.nonMedIngForm.animaHumanSourced.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="nIngRecCtrl.nonMedIngForm.animaHumanSourced.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>
+                        <cmp-error-message field-name="nIngRecCtrl.animalHumanSrcId"
+                                           form-ref="nIngRecCtrl.nonMedIngForm"
+                                           show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.animalHumanSrcId])"
+                                           error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
                 <div class="btn-group-sm col-xs-8 text-right">

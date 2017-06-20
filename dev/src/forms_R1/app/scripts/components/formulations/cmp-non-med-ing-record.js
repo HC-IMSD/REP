@@ -213,19 +213,19 @@
          */
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.variantId="variantName" + scopeId;
+            vm.variantId="variant_name" + scopeId;
             vm.nmiFormId="nmiRecordForm" + scopeId;
-            vm.ingredName="ing-name"+scopeId;
+            vm.ingredName="ing_name"+scopeId;
             vm.casId="cas"+scopeId;
-            vm.standardId="stamndard"+scopeId;
+            vm.standardId="standard"+scopeId;
             vm.strengthId="strength"+scopeId;
             vm.unitsId="units"+scopeId;
-            vm.otherUnitsId="otherUnits"+scopeId;
-            vm.perId="per"+scopeId;
-            vm.nanoId="nanoMaterial"+scopeId;
-            vm.nanoOtherId="nanoMaterialOther"+scopeId;
-            vm.asBaseId="asBase"+scopeId;
-            vm.animalHumanSrcId="animalHumanSourced_"+scopeId;
+            vm.otherUnitsId="other_units"+scopeId;
+            vm.perId="per_strength"+scopeId;
+            vm.nanoId="nano_material"+scopeId;
+            vm.nanoOtherId="nano_material_other"+scopeId;
+            vm.asBaseId="calculated_As_base"+scopeId;
+            vm.animalHumanSrcId="animal_human_sourced"+scopeId;
         }
 
 
