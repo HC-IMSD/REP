@@ -6,7 +6,11 @@
     'use strict';
 
     angular
-        .module('containerTypeRecordModule', [])
+        .module('containerTypeRecordModule',
+            [
+            'errorSummaryModule',
+            'errorMessageModule'
+        ])
 })();
 
 (function () {
@@ -27,16 +31,25 @@
                 onCancel: '&',
                 showErrors:'&',
                 isDetailValid: '&',
-                recordIndex:'<'
+                recordIndex:'<',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
 
         });
     containerTypeRecCtrl.$inject=['$scope'];
     function containerTypeRecCtrl($scope) {
 
-        var self = this;
-        self.savePressed=false;
-        self.ctModel = { //TODO move to service
+        var vm = this;
+       // vm.savePressed=false;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.numberMinError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
+            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+        ];
+
+        vm.ctModel = { //TODO move to service
             "containerType": "",
             "packageSize": "",
             "shelfLifeYears": undefined,
@@ -44,56 +57,76 @@
             "tempMin": undefined,
             "tempMax": undefined
         };
-        self.backup = angular.copy(self.ctModel);
-        self.$onInit = function () {
-            self.savePressed=false;
 
-            /* if(self.record){
-                self.ctModel = angular.copy(self.record);
-            }
-             self.backup = angular.copy(self.ctModel);*/
+        vm.exclusions={
+        };
+        vm.alias={};
+        vm.updateSummary=0; //message to update the summary component
+        vm.showSummary=false; //show the errror summary object
+        vm.focusSummary=0;
+
+        vm.backup = angular.copy(vm.ctModel);
+        vm.$onInit = function () {
+            _setIdNames();
+            vm.summaryName="cmp-container-type-record_"+(vm.recordIndex);
+
         };
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
             if (changes.record && changes.record.currentValue) {
-                self.ctModel = angular.copy(changes.record.currentValue);
-                self.ctModel.shelfLifeYears = Number(changes.record.currentValue.shelfLifeYears);
-                self.ctModel.shelfLifeMonths = Number(changes.record.currentValue.shelfLifeMonths);
-                self.ctModel.tempMin = Number(changes.record.currentValue.tempMin);
-                self.ctModel.tempMax = Number(changes.record.currentValue.tempMax);
-                self.backup = angular.copy(self.ctModel);
+                vm.ctModel = angular.copy(changes.record.currentValue);
+                vm.ctModel.shelfLifeYears = Number(changes.record.currentValue.shelfLifeYears);
+                vm.ctModel.shelfLifeMonths = Number(changes.record.currentValue.shelfLifeMonths);
+                vm.ctModel.tempMin = Number(changes.record.currentValue.tempMin);
+                vm.ctModel.tempMax = Number(changes.record.currentValue.tempMax);
+                vm.backup = angular.copy(vm.ctModel);
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
+            }
+            if(changes.recordIndex){
+                vm.summaryName="cmp-container-type-record_"+(vm.recordIndex.currentValue);
             }
 
         };
 
-        self.save = function () {
-            if(self.containerTypeForm.$valid) {
-                if (self.record) {
+        vm.save = function () {
+            if(vm.containerTypeForm.$valid) {
+                if (vm.record) {
                     // console.log('product details update product');
-                    self.onUpdate({cType: self.ctModel});
+                    vm.onUpdate({cType: vm.ctModel});
 
                 } else {
                     //  console.log('product details add product');
-                    self.onAddIng({cType: self.ctModel});
+                    vm.onAddIng({cType: vm.ctModel});
                 }
-                self.containerTypeForm.$setPristine();
-                self.savePressed=false;
+                vm.containerTypeForm.$setPristine();
+                vm.updateErrorSummaryState();
             }else{
-                self.savePressed=true;
+                vm.showSummary=true;
+                vm.makeFocused();
+                vm.updateErrorSummaryState();
             }
 
         };
-
-        self.discardChanges = function(){
-            self.ctModel = angular.copy(self.backup);
-            self.containerTypeForm.$setPristine();
-            self.onCancel();
+        vm.makeFocused=function(){
+            vm.focusSummary=vm.focusSummary+1;
+        }
+        vm.discardChanges = function(){
+            vm.ctModel = angular.copy(vm.backup);
+            vm.containerTypeForm.$setPristine();
+            vm.updateErrorSummaryState();
+            vm.onCancel();
         };
 
-        self.delete = function(){
-            if (self.record) {
+        vm.delete = function(){
+            if (vm.record) {
                 //  console.log('product details delete product');
-                self.onDelete();
+                vm.onDelete();
             }
 
         };
@@ -103,13 +136,33 @@
          * @param isTouched
          * @returns {*}
          */
-        self.showError=function(isInvalid, isTouched){
-            return ((isInvalid && isTouched) || (isInvalid && self.savePressed) /* TODO add showErrors||(isInvalid && self.showErrors())*/)
+        vm.showError=function(ctrl){
+            if(!ctrl){
+                return false
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid &&  vm.showSummary))
+        };
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+
         };
 
         $scope.$watch('ctrCtrl.containerTypeForm.$dirty', function () {
-            self.isDetailValid({state: !self.containerTypeForm.$dirty});
+            vm.isDetailValid({state: !vm.containerTypeForm.$dirty});
         }, true);
+
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+                vm.formId="containerRecordForm" + scopeId;
+                vm.typeId="container_type"+scopeId;
+                vm.sizeId="package_size"+scopeId;
+
+            }
+
     }
 
 })();

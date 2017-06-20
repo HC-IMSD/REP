@@ -1,43 +1,42 @@
-<ng-form name="ctrCtrl.containerTypeForm">
+<ng-form name="ctrCtrl.containerTypeForm" id="{{::ctrCtrl.formId}}">
     <div class="container-fluid">
+        <cmp-error-summary form-ref="ctrCtrl.containerTypeForm"
+                           form-preamble="{{'CONTAINER_TYPE_DETAILS'|translate}}&nbsp;{{ctrCtrl.recordIndex+1}}" exclusion-list=ctrCtrl.exclusions
+                           name-suffix="ctrCtrl.formId" set-heading-level="h3" form-id="ctrCtrl.formId"
+                           make-focused="ctrCtrl.focusSummary" alias-list="ctrCtrl.alias" show-errors="ctrCtrl.showSummary"
+                           update-errors="ctrCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
             <legend>{{'CONTAINER_TYPE_DETAILS'|translate}}&nbsp;{{ctrCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-12"
-                     ng-class="{'has-error':ctrCtrl.containerTypeForm.containerType.$invalid}">
-                    <label for="containerType" class="required">
+                     ng-class="{'has-error':ctrCtrl.containerTypeForm[ctrCtrl.typeId].$invalid}">
+                    <label for="{{::ctrCtrl.typeId}}"  class="required">
                         <span class="field-name">{{'CONTAINER_TYPE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <strong id="containerType-error" class="error"
-                                ng-if="ctrCtrl.showError(ctrCtrl.containerTypeForm.containerType.$invalid,ctrCtrl.containerTypeForm.containerType.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ctrCtrl.containerTypeForm.containerType.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>
+                        <cmp-error-message field-name="ctrCtrl.typeId"
+                                           form-ref="ctrCtrl.containerTypeForm"
+                                           show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.typeId])"
+                                           error-types="ctrCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                    <textarea id="containerType" data-ng-model="ctrCtrl.ctModel.containerType" maxlength="256" rows="3"
-                              ng-model-options="{ debounce: $inherit}"
-                              class="form-control full-width" name="containerType" ng-required="true"></textarea>
+                    <textarea id="{{::ctrCtrl.typeId}}" data-ng-model="ctrCtrl.ctModel.containerType" maxlength="256" rows="3"
+                              ng-model-options="{ debounce: $inherit}" name="{{::ctrCtrl.typeId}}"
+                              class="form-control full-width" required></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-12"
-                     ng-class="{'has-error':ctrCtrl.containerTypeForm.packageSize.$invalid}">
-                    <label for="pckSize" class="required">
+                     ng-class="{'has-error':ctrCtrl.containerTypeForm[ctrCtrl.sizeId].$invalid}">
+                    <label for="{{::ctrCtrl.sizeId}}" class="required">
                         <span class="field-name">{{'PACKAGE_SIZE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <strong id="pcksize-error" class="error"
-                                ng-if="ctrCtrl.showError(ctrCtrl.containerTypeForm.packageSize.$invalid,ctrCtrl.containerTypeForm.packageSize.$touched)">
-                        <span class="label label-danger"
-                              ng-messages="ctrCtrl.containerTypeForm.packageSize.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                        </strong>
+                        <cmp-error-message field-name="ctrCtrl.sizeId"
+                                           form-ref="ctrCtrl.containerTypeForm"
+                                           show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.sizeId])"
+                                           error-types="ctrCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                    <textarea id="pckSize" data-ng-model="ctrCtrl.ctModel.packageSize" maxlength="256" rows="3"
-                              ng-model-options="{ debounce: $inherit}"
-                              class="form-control full-width" name="packageSize" ng-required="true"></textarea>
+                    <textarea id="{{::ctrCtrl.sizeId}}" data-ng-model="ctrCtrl.ctModel.packageSize" maxlength="256" rows="3"
+                              ng-model-options="{ debounce: $inherit}" name="{{::ctrCtrl.sizeId}}"
+                              class="form-control full-width" name="packageSize" required></textarea>
                 </div>
             </div>
             <div class="row">
