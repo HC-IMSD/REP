@@ -619,7 +619,7 @@
                 if (!item.dosage_form_group.dosage_form) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
                 } else {
-                    var dosageFormObj = $filter('filter')(DossierLists.getDosageFormList(), {id: item.dosage_form_group.dosage_form.__text})[0];
+                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix()+ item.dosage_form_group.dosage_form.__text});
                     obj.dosageForm = dosageFormObj;
                 }
 
