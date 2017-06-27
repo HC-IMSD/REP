@@ -22,7 +22,9 @@
             controllerAs: 'ctlCtrl',
             bindings: {
                 containers: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
         });
 

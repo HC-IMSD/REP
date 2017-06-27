@@ -68,7 +68,10 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.frmModel = {};
         vm.exclusions={
-            "ingRecCtrl.activeIngForm":"true"
+            "ingRecCtrl.activeIngForm":"true",
+            "nIngRecCtrl.nonMedIngForm":"true",
+            "mirCtrl.materialIngRecordForm":"true",
+            "ctrCtrl.containerTypeForm":"true"
         };
         vm.alias={
             "no_country": {
@@ -97,7 +100,6 @@
         vm.$onChanges=function(changes){
             if(changes.record){
                 vm.frmModel = changes.record.currentValue;
-                //vm.formName="formulationRecForm_"+vm.frmModel.formulationId;
                 vm.summaryName="cmp-formulation-record_"+(vm.frmModel.formulationId-1);
             }
             if(changes.showErrorSummary){

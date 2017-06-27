@@ -51,5 +51,8 @@
   "DELETE_FORMULATION": "fr_Delete Formulation",
   "COPY_FORMULATION": "fr_Copy formulation",
   "ADD_FORMULATION":"fr_Add formulation",
-  "SELECT_DOSAGE":"fr_Select a dosage form"
+  "SELECT_DOSAGE":"fr_Select a dosage form",
+  "CMP-FORMULATION-RECORD":"fr_ in formulation record",
+  "INGRECCTRL.ACTIVEINGFORM":"fr_in the active ingredient details",
+  "NINGRECCTRL.NONMEDINGFORM":"fr_in the nom-medicinal ingredient details"
 }

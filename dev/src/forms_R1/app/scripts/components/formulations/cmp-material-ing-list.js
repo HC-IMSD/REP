@@ -20,7 +20,9 @@
             controllerAs: 'milCtrl',
             bindings: {
                 ingredients: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
         });
 

@@ -6,7 +6,12 @@
     'use strict';
 
     angular
-        .module('materialIngRecordModule', ['dossierDataLists'])
+        .module('materialIngRecordModule',
+            [
+                'dossierDataLists',
+                'errorSummaryModule',
+                'errorMessageModule'
+            ])
 })();
 
 (function () {
@@ -27,67 +32,113 @@
                 onDelete: '&',
                 onCancel: '&',
                 isDetailValid: '&',
-                recordIndex:'<'
+                recordIndex:'<',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
 
         });
     materialIngRecCtrl.$inject = ['DossierLists','$scope'];
     function materialIngRecCtrl(DossierLists, $scope) {
 
-        var self = this;
-        self.yesNoList = DossierLists.getYesNoList();
-        self.savePressed=false;
-        self.$onInit = function () {
+        var vm = this;
+        vm.yesNoList = DossierLists.getYesNoList();
 
-            self.mirModel = {};
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.updateSummary=0; //message to update the summary component
+        vm.showSummary=false; //show the errror summary object
+        vm.focusSummary=0;
 
-            if (self.record) {
-                self.mirModel = self.record;
+        vm.$onInit = function () {
+            vm.mirModel = {};
+            vm.showSummary=false;
+            vm.summaryName="cmp-material-ing-record_"+(vm.recordIndex);
+            _setIdNames();
+            if (vm.record) {
+                vm.mirModel = vm.record;
             }
-            self.backup = angular.copy(self.mirModel);
+            vm.backup = angular.copy(vm.mirModel);
         };
 
-        self.showError = function (isInvalid, isTouched) {
-            //return ((isInvalid && isTouched) || (isInvalid && self.showErrors())); generates error
-            return ((isInvalid && isTouched) ||(isInvalid && self.showErrors())||(self.savePressed && isInvalid));
+        vm.$onChanges=function(changes){
+            if(changes.showErrorSummary){
+                console.log("active ingredient changes to show Error Summary")
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
+            }
+        };
+
+
+        vm.showError = function (ctrl) {
+
+            if(!ctrl){
+                return false;
+            }
+            return ((ctrl.$invalid && ctrl.$touched)||(vm.showSummary && ctrl.$invalid));
 
         };
 
-        self.save = function () {
-            if(self.materialIngRecordForm.$valid) {
-                if (self.record) {
+        vm.save = function () {
+            if(vm.materialIngRecordForm.$valid) {
+                if (vm.record) {
                     // console.log('product details update product');
-                    self.onUpdate({ing: self.mirModel});
-                    self.materialIngRecordForm.$setPristine();
+                    vm.onUpdate({ing: vm.mirModel});
+                    vm.materialIngRecordForm.$setPristine();
                 } else {
                     //  console.log('product details add product');
-                    self.onAddNew({ing: self.mirModel});
+                    vm.onAddNew({ing: vm.mirModel});
                 }
-                self.materialIngRecordForm.$setPristine();
-                self.savePressed=false;
+                vm.materialIngRecordForm.$setPristine();
+                vm.showSummary=false;
             }else{
-                self.savePressed=true;
+                vm.showSummary=true;
+                vm.makeFocused();
+                vm.updateErrorSummaryState();
             }
 
         };
 
-        self.discardChanges = function () {
-            self.mirModel = angular.copy(self.backup);
-            self.materialIngRecordForm.$setPristine();
-            self.onCancel();
+        vm.makeFocused=function(){
+            vm.focusSummary=vm.focusSummary+1;
+        }
+
+        vm.discardChanges = function () {
+            vm.mirModel = angular.copy(vm.backup);
+            vm.materialIngRecordForm.$setPristine();
+            vm.onCancel();
         };
 
-        self.delete = function () {
-            if (self.record) {
+        vm.delete = function () {
+            if (vm.record) {
                 //  console.log('product details delete product');
-                self.onDelete();
+                vm.onDelete();
             }
-
         };
 
         $scope.$watch('mirCtrl.materialIngRecordForm.$dirty', function () {
-            self.isDetailValid({state: !self.materialIngRecordForm.$dirty});
+            vm.isDetailValid({state: !vm.materialIngRecordForm.$dirty});
         }, true);
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.materialFormId="materialRecordForm" + scopeId;
+            vm.nameId="material_name" + scopeId;
+            vm.casId="cas_num"+ scopeId;
+            vm.standardId="standard"+ scopeId;
+            vm.inFinalId="in_final_container"+ scopeId;
+        }
+
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+
+        };
 
     }
 })();

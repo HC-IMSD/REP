@@ -75,12 +75,12 @@
         vm.alias={};
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
-        vm.focusSummary=false;
+        vm.focusSummary=0;
         vm.$onInit = function () {
             vm.showSummary=false;
             vm.backup = angular.copy(vm.ingModel);
             _setIdNames();
-            vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex);
+           // vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex);
         };
 
         vm.$onChanges = function (changes) {
@@ -247,17 +247,17 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.activeFormId="activeRecordForm" + scopeId;
-            vm.ingredName="ing-name"+scopeId;
+            vm.ingredName="ing_name"+scopeId;
             vm.casId="cas"+scopeId;
-            vm.standardId="stamndard"+scopeId;
+            vm.standardId="standard"+scopeId;
             vm.strengthId="strength"+scopeId;
             vm.unitsId="units"+scopeId;
-            vm.otherUnitsId="otherUnits"+scopeId;
+            vm.otherUnitsId="other_units"+scopeId;
             vm.perId="per"+scopeId;
-            vm.nanoId="nanoMaterial"+scopeId;
-            vm.nanoOtherId="nanoMaterialOther"+scopeId;
-            vm.asBaseId="asBase"+scopeId;
-            vm.animalHumanSrcId="animalHumanSourced_"+scopeId;
+            vm.nanoId="nano_material"+scopeId;
+            vm.nanoOtherId="nano_material_other"+scopeId;
+            vm.asBaseId="calculated_as_base"+scopeId;
+            vm.animalHumanSrcId="animal_human_sourced"+scopeId;
         }
 
         vm.updateErrorSummaryState = function () {

@@ -212,6 +212,7 @@
                         //it is assumed that if it is in the exclusion list it is a summary
                         if (vm.exclusions && vm.exclusions.hasOwnProperty(record[j].$name)) {
                             //only process this as a summary if it is in the exclusions list
+                            console.log("the name is "+record[j].$name);
                             angular.merge(resultsList, _createSummaryRecord(record[j].$name,keys[i],parent));
                         }
                         else {

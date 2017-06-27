@@ -28,9 +28,8 @@
                                    name="{{::formulRecCtrl.dosageId}}"   ng-model-options="{debounce: 0}"
                                    class="rep-selectize-dropdown rep-selectize-font" required
                                    ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}"
-                                   title="Choose a dosage form">
-                            <ui-select-match placeholder="{{SELECT_DOSAGE|translate}}"
-                                             class="rep-selectize-font rep-selectize-dropdown">
+                                   title="{{'SELECT_DOSAGE'|translate}}">
+                            <ui-select-match placeholder="{{SELECT_DOSAGE|translate}}" class="rep-selectize-font rep-selectize-dropdown">
                                 {{$select.selected[formulRecCtrl.lang]}}
                             </ui-select-match>
                             <ui-select-choices
@@ -62,7 +61,6 @@
                                            form-ref="formulRecCtrl.formulationForm"
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-
                     </label>
                 </div>
             </div>
@@ -74,7 +72,8 @@
                     <div class="panel-body">
                         <input type="text" required ng-show="false" name="{{::formulRecCtrl.noActiveId}}" id="{{::formulRecCtrl.noActiveId}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>
-                        <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
+                        <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList" error-summary-update="formulRecCtrl.errorSummaryUpdate"
+                                             show-error-summary="formulRecCtrl.showSummary"
                                              on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
                     </div>
                 </section>
@@ -86,6 +85,8 @@
                     </header>
                     <div class="panel-body">
                         <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList"
+                                              error-summary-update="formulRecCtrl.errorSummaryUpdate"
+                                              show-error-summary="formulRecCtrl.showSummary"
                                               on-update="formulRecCtrl.updateNonMedIngList(list)"></cmp-non-med-ing-list>
                     </div>
                 </section>
@@ -97,6 +98,8 @@
                     </header>
                     <div class="panel-body">
                         <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials"
+                                               error-summary-update="formulRecCtrl.errorSummaryUpdate"
+                                               show-error-summary="formulRecCtrl.showSummary"
                                                on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
                     </div>
                 </section>
@@ -115,6 +118,8 @@
                         <input type="text" required ng-show="false" name="{{::formulRecCtrl.noContainerId}}" id="{{::formulRecCtrl.noContainerId}}"
                                aria-hidden="true" data-ng-model="formulRecCtrl.noContainerValues"/>
                         <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
+                                                 error-summary-update="formulRecCtrl.errorSummaryUpdate"
+                                                 show-error-summary="formulRecCtrl.showSummary"
                                                  on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
                     </div>
                 </section>

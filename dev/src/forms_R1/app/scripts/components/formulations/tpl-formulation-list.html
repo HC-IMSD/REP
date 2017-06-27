@@ -13,6 +13,7 @@
     <cmp-expanding-table title="Formulations List" tname="cmp-formulation-record"
                          reset-to-collapsed="formulCtrl.resetToCollapsed" list-items="formulCtrl.formulationList"
                          column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord" disable-err-column="true"
+
                          disable-selection="!formulCtrl.isDetailValid">
 
         <cmp-formulation-record record="$parent.record" on-update="formulCtrl.update($parent.$index,record)"

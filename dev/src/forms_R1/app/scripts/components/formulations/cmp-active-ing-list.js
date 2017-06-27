@@ -20,65 +20,65 @@
             controllerAs: 'ailCtrl',
             bindings: {
                 ingredients: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                errorSummaryUpdate:'<',
+                showErrorSummary:'<'
             }
         });
 
     function activeIngListCtrl() {
 
-        var self = this;
-        self.selectRecord = -1;
-        self.resetToCollapsed = false;
-        self.isDetailValid = true;
-        self.newIngFormShown = false;
-        self.isDetailValid = true;
-        self.selectRecord = -1;
+        var vm = this;
+        vm.selectRecord = -1;
+        vm.resetToCollapsed = false;
+        vm.isDetailValid = true;
+        vm.newIngFormShown = false;
+        vm.isDetailValid = true;
+        vm.selectRecord = -1;
 
-        self.colNames = [
+        vm.colNames = [
             {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "65"},
             {label: "IN_LIST", binding: "autoIngred", width: "7"},
             {label: "CAS_NUM", "binding": "cas", width: "13"},
             {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
         ];
-        self.ingList = [];
-        self.$onInit = function () {
+        vm.ingList = [];
+        vm.$onInit = function () {
 
-
-
-          /*  if (self.ingredients) {
-                self.ingList = self.ingredients;
+          /*  if (vm.ingredients) {
+                vm.ingList = vm.ingredients;
             }*/
         };
-        self.$onChanges=function(changes){
+        vm.$onChanges=function(changes){
             //TODO get rid of the currentvalue check
             if(changes.ingredients && changes.ingredients.currentValue){
-                self.ingList = self.ingredients;
-                self.isDetailValid = true;
+                vm.ingList = vm.ingredients;
+                vm.isDetailValid = true;
             }
 
         }
 
-        self.addIng = function (ing) {
-            self.setValid(true);
-            self.ingList.push(ing);
-            self.newIngFormShown = false;
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.onUpdate({list:self.ingList});
+        vm.addIng = function (ing) {
+            vm.setValid(true);
+            vm.ingList.push(ing);
+            vm.newIngFormShown = false;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.onUpdate({list:vm.ingList});
             setRecord(-1);
         };
 
-        self.updateIng = function (idx, ing) {
-            self.ingList[idx] = angular.copy(ing);
-            self.onUpdate({list:self.ingList});
-            self.setValid(true);
+        vm.updateIng = function (idx, ing) {
+            vm.ingList[idx] = angular.copy(ing);
+            vm.onUpdate({list:vm.ingList});
+            vm.setValid(true);
         };
 
-        self.deleteIng = function (idx) {
-            self.ingList.splice(idx, 1);
-            self.onUpdate({list:self.ingList});
-            self.setValid(true);
+        vm.deleteIng = function (idx) {
+            vm.ingList.splice(idx, 1);
+            vm.onUpdate({list:vm.ingList});
+            vm.setValid(true);
             setRecord(-1);
-            self.resetToCollapsed = !self.resetToCollapsed;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
         };
 
         /**
@@ -86,38 +86,38 @@
          * @param value
          */
         function setRecord(value){
-            self.selectRecord = value;
+            vm.selectRecord = value;
         }
 
         /**
          * Flag set to indicate if the record details are in a valid state
          * @param value
          */
-        self.setValid=function(value){
-            self.isDetailValid=value;
+        vm.setValid=function(value){
+            vm.isDetailValid=value;
         };
         /**
          * Controls the state of the add new ingredient button
          * @returns {*|boolean}
          */
-        self.addNewDisabled=function(){
-            return (self.newIngFormShown || !self.isDetailValid);
+        vm.addNewDisabled=function(){
+            return (vm.newIngFormShown || !vm.isDetailValid);
         };
         /**
          * Sets the UI state for the add new template
          */
-        self.addNewIngredientState=function(){
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.newIngFormShown = true;
-            self.setValid(false);
-            return(self.newIngFormShown);
+        vm.addNewIngredientState=function(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.newIngFormShown = true;
+            vm.setValid(false);
+            return(vm.newIngFormShown);
         };
         /**
          * When new record is cancelled, resets the state
          */
-        self.onNewCancel=function(){
-            self.setValid(true);
-            self.newIngFormShown = false
+        vm.onNewCancel=function(){
+            vm.setValid(true);
+            vm.newIngFormShown = false
         }
     }
 })();
