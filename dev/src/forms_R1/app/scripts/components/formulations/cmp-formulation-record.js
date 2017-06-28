@@ -45,7 +45,8 @@
                 recordChanged:'&',
                 addCopy:'&',
                 errorSummaryUpdate:'<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                updateErrorSummary:'&'
             }
 
         });
@@ -90,9 +91,11 @@
                 "type": "buttonSearch",
                 "buttonName": "addContainer"
             }
+        };
+        vm.transcludeList={
 
         };
-
+        // "cmp-roa-record": "true"
         vm.$onInit = function () {
 
             _setIdNames();
@@ -280,6 +283,11 @@
             vm.noRoaId="no_roa"+scopeId;
             vm.noCountryId="no_country"+scopeId;
         }
+
+        $scope.$watch('formulRecCtrl.formulationForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
+
 
     }
 })();

@@ -4,6 +4,7 @@
         <cmp-error-summary form-ref=formulRecCtrl.formulationForm show-errors="true"
                            form-preamble="{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}" exclusion-list=formulRecCtrl.exclusions
                            name-suffix="{{formulRecCtrl.summaryName}}" set-heading-level="h3" form-id="formulRecCtrl.formulationFormRecordId"
+                           transclude-list="formulRecCtrl.transcludeList"
                            make-focused="" alias-list="formulRecCtrl.alias" show-errors="formulRecCtrl.showSummary"
                            update-errors="formulRecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
@@ -74,6 +75,7 @@
                                aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>
                         <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList" error-summary-update="formulRecCtrl.errorSummaryUpdate"
                                              show-error-summary="formulRecCtrl.showSummary"
+                                             error-summary-update="formulRecCtrl.errorSummaryUpdate()"
                                              on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
                     </div>
                 </section>
@@ -135,8 +137,8 @@
                         </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noRoaId}}" id="{{::formulRecCtrl.noRoaId}}"
-                               aria-hidden="true" data-ng-model="formulRecCtrl.noROAValues"/>
+                     <!--   <input type="text" required ng-show="false" name="{{::formulRecCtrl.noRoaId}}" id="{{::formulRecCtrl.noRoaId}}"
+                               aria-hidden="true" data-ng-model="formulRecCtrl.noROAValues"/>-->
                         <cmp-roa-list records="formulRecCtrl.frmModel.routeAdmins" show-errors=""></cmp-roa-list>
                     </div>
                 </section>
@@ -152,8 +154,8 @@
                         </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
-                               aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
+                      <!--  <input type="text" required ng-show="false" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
+                               aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>-->
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
                                           on-update="formulRecCtrl.updateCountryList(list)"
                                           field-label="COUNTRY_MAN"></cmp-country-list>

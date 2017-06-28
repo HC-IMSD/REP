@@ -27,11 +27,14 @@
                 formulations: '<',
                 recordChanged: '&',
                 errorSummaryUpdate:'<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                updateErrorSummary:'&'
             }
         });
 
-    function formulationsCtrl() {
+    formulationsCtrl.$inject = ['$scope'];
+
+    function formulationsCtrl($scope) {
 
         var vm = this;
         vm.isDetailValid = true; //TODO this must be managed
@@ -174,6 +177,9 @@
             }
             return out;
         }
+        $scope.$watch('formulCtrl.formulationsForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
     }
 
 })();

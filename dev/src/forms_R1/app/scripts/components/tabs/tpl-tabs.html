@@ -15,7 +15,7 @@
             <div id="formulations-panel" role="tabpanel" class="out">
                 <div ng-show="tabsCtrl.tabs[0].selected">
                     <cmp-formulations formulations="tabsCtrl.formulationList"  error-summary-update="tabsCtrl.updateSummary"
-                    show-error-summary="tabsCtrl.showSummary"
+                    show-error-summary="tabsCtrl.showSummary" update-error-summary="tabsCtrl.updateErrorSummary()"
                                       record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
                 </div>
             </div>

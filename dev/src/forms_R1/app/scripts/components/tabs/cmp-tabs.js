@@ -21,7 +21,8 @@
             recordChanged: '&',
             service: '<',
             errorSummaryUpdate:'<',
-            showErrorSummary:'<'
+            showErrorSummary:'<',
+            updateErrorSummary:'&'
         }
     });
 

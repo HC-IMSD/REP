@@ -10,15 +10,14 @@
     <input type="textbox" required="true" ng-show="false" name="noFormulation_{{::$id}}" id="noFormulation_{{::$id}}"
            data-ng-model="formulCtrl.noFormulations"/>
     <!--<pre>formulationList: {{formulCtrl.formulationList|json}}</pre>-->
-    <cmp-expanding-table title="Formulations List" tname="cmp-formulation-record"
+    <cmp-expanding-table  tname="cmp-formulation-record"
                          reset-to-collapsed="formulCtrl.resetToCollapsed" list-items="formulCtrl.formulationList"
                          column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord" disable-err-column="true"
-
                          disable-selection="!formulCtrl.isDetailValid">
 
         <cmp-formulation-record record="$parent.record" on-update="formulCtrl.update($parent.$index,record)"
                                 on-delete="formulCtrl.delete($parent.$index)" add-copy="formulCtrl.addCopy(record)"
-                                delete-btn="true" record-changed="formulCtrl.recordChanged()"
+                                delete-btn="true" record-changed="formulCtrl.recordChanged()" update-error-summary="formulCtrl.updateErrorSummary()"
                                 error-summary-update="formulCtrl.updateSummary" show-error-summary="formulCtrl.showSummary"
         ></cmp-formulation-record>
 

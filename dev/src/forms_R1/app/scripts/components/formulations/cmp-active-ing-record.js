@@ -35,12 +35,13 @@
                 isDetailValid: '&',
                 recordIndex: '<',
                 errorSummaryUpdate:'<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                updateErrorSummary:'&'
             }
 
         });
-    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER','YES'];
-    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES) {
+    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER','YES','NO'];
+    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES,NO) {
 
         var vm = this;
         vm.nanoMaterialList = DossierLists.getNanoMaterials();
@@ -56,7 +57,7 @@
         ];
 
         vm.ingModel = {
-            autoIngred: 'N',
+            autoIngred: NO,
             ingId: "",
             ingLabel: "",
             cas: "",
@@ -75,7 +76,8 @@
         vm.alias={};
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
-        vm.focusSummary=0;
+        vm.focusSummary=0; //messaging to focus on the active ingredient summary
+
         vm.$onInit = function () {
             vm.showSummary=false;
             vm.backup = angular.copy(vm.ingModel);
@@ -89,9 +91,9 @@
             if (changes.record && changes.record.currentValue) {
                 vm.ingModel = angular.copy(changes.record.currentValue);
                 if (!vm.ingModel.ingId) {
-                    vm.ingModel.autoIngred = 'N';
+                    vm.ingModel.autoIngred = NO;
                 } else {
-                    vm.ingModel.autoIngred = 'Y';
+                    vm.ingModel.autoIngred = YES;
                 }
             }
             if(changes.showErrorSummary){
@@ -143,10 +145,10 @@
 
             if(!item){
                 vm.ingModel.ingId="";
-                vm.ingModel.autoIngred = 'N';
+                vm.ingModel.autoIngred = NO;
             }else {
                 vm.ingModel.ingId = item.id;
-                vm.ingModel.autoIngred = 'Y';
+                vm.ingModel.autoIngred = YES;
             }
         };
 
@@ -260,12 +262,18 @@
             vm.animalHumanSrcId="animal_human_sourced"+scopeId;
         }
 
+        /**
+         * Used as messaging to get the error summary to update itself
+         */
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
 
         };
 
-
+        $scope.$watch('ingRecCtrl.activeIngForm.$error', function () {
+            vm.updateErrorSummaryState();
+            vm.updateErrorSummary();
+        }, true);
     }
 
 })();

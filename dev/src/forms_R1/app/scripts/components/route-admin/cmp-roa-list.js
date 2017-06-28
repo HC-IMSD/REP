@@ -24,15 +24,15 @@
             controllerAs: 'roaCtrl'
         });
 
-    roaListCtrl.$inject = ["$filter"];
+    roaListCtrl.$inject = ["$filter","$scope"];
 
-    function roaListCtrl($filter) {
+    function roaListCtrl($filter,$scope) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
-        vm.oneRecord="";
+        vm.noROAValues="";
         vm.model={};
         vm.model.roaList=[];
         vm.columnDef = [
@@ -49,7 +49,7 @@
         ];
 
         vm.$onInit = function () {
-
+            _setIdNames();
         };
 
 
@@ -57,6 +57,7 @@
 
             if (changes.records&&changes.records.currentValue) {
                 vm.model.roaList=changes.records.currentValue;
+                vm.noROA();
             }
         };
 
@@ -72,6 +73,16 @@
             vm.resetToCollapsed= !vm.resetToCollapsed;
             vm.selectRecord=(0);
             vm.selectRecord=(vm.model.roaList.length-1);
+            vm.noROA();
+        };
+
+        vm.noROA=function(){
+            if(! vm.model.roaList || vm.model.roaList.length===0){
+                vm.noROAValues="";
+                return true;
+            }
+            vm.noROAValues="values";
+            return false;
         };
 
         vm.deleteRecord=function(recId){
@@ -79,8 +90,13 @@
             var idx = vm.model.roaList.indexOf(
                 $filter('filter')(vm.model.roaList, {id: recId}, true)[0]);
             vm.model.roaList.splice(idx, 1);
+            vm.noROA();
         };
 
+        vm.disableAddButton=function(){
+            if(vm.noROA()) return false;
+            return(vm.roaListForm.$invalid);
+        };
 
         function getMaxID(){
             var id=0;
@@ -92,6 +108,27 @@
             }
             return(id);
         }
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+
+            vm.noRoaId="no_roa"+scopeId;
+        }
+
+        vm.setRecord=function(value){
+            resetMe();
+            //vm.selectRecord=-1;
+            vm.selectRecord=value;
+
+        }
+        function resetMe(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+
+        }
+
 
     }
 })();

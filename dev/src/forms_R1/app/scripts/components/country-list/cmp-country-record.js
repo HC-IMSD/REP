@@ -27,12 +27,13 @@
                 onDelete: '&',
                 showErrors: '&',
                 countryList:'<',
-                fieldsetLabel:'@'
+                fieldsetLabel:'@',
+                updateErrorSummary:'&'
             }
         });
 
-    countryRecordController.$inject = ['$filter','$translate','UNKNOWN'];
-    function countryRecordController($filter, $translate, UNKNOWN) {
+    countryRecordController.$inject = ['$scope','$filter','$translate','UNKNOWN'];
+    function countryRecordController($scope,$filter, $translate, UNKNOWN) {
         var vm = this;
 
         vm.model = {"id": "", "country": "","unknownCountryDetails":"","display":""};
@@ -65,9 +66,10 @@
         };
 
 
-        vm.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()) )
-        }
+        vm.showError = function (ctrl) {
+            if(!ctrl) return false;
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
+        };
 
         vm.isUnknown=function(){
             if(!vm.model || !vm.model.country){
@@ -77,6 +79,9 @@
                 return true;
             }
             return false;
-        }
+        };
+        $scope.$watch('countryRecCtrl.countryForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
     }
 })();

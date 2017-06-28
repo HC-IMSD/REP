@@ -22,11 +22,14 @@
                 ingredients: '<',
                 onUpdate: '&',
                 errorSummaryUpdate:'<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                updateErrorSummary:'&'
             }
         });
 
-    function activeIngListCtrl() {
+    activeIngListCtrl.$inject = ['$scope'];
+
+    function activeIngListCtrl($scope) {
 
         var vm = this;
         vm.selectRecord = -1;
@@ -119,5 +122,11 @@
             vm.setValid(true);
             vm.newIngFormShown = false
         }
+        $scope.$watch('ailCtrl.activeIngListForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
+
+
+
     }
 })();

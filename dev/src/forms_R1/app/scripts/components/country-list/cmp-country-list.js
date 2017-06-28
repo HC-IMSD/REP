@@ -23,61 +23,64 @@
                 onUpdate: '&',
                 onDelete: '&',
                 showErrors: '&',
-                fieldLabel: '@'
+                fieldLabel: '@',
+                updateErrorSummary:'&'
             }
         });
 
-    countryListController.$inject = ['$filter', 'getCountryAndProvinces','UNKNOWN'];
+    countryListController.$inject = ['$filter', 'getCountryAndProvinces','UNKNOWN','$scope'];
 
 
-    function countryListController($filter, getCountryAndProvinces,UNKNOWN) {
-        var self = this;
-        self.baseCountries = getCountryAndProvinces.getCountries();
-        self.countryList = "";
-        self.model = {};
-        self.isDetailValid = true;
-        self.resetToCollapsed = true;
-        self.selectRecord = 0;
-        self.columnDef = [
+    function countryListController($filter, getCountryAndProvinces,UNKNOWN,$scope) {
+        var vm = this;
+        vm.baseCountries = getCountryAndProvinces.getCountries();
+        vm.countryList = "";
+        vm.model = {};
+        vm.isDetailValid = true;
+        vm.resetToCollapsed = true;
+        vm.noCountries="";
+        vm.selectRecord = 0;
+        vm.columnDef = [
             {
-                label: self.fieldLabel,
+                label: vm.fieldLabel,
                 binding: "display",
                 width: "100"
             }
         ]
 
-        self.hasUnknown = false;
-        self.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
+        vm.hasUnknown = false;
+        vm.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
 
 
-        self.$onInit = function () {
-            if (angular.isUndefined(self.model.list)) { //TODO should be comimg from parent
-                self.model.list = [];
+        vm.$onInit = function () {
+            _setIdNames();
+            if (angular.isUndefined(vm.model.list)) { //TODO should be comimg from parent
+                vm.model.list = [];
             }
             //should never happen,fallback...
-            if (angular.isUndefined(self.countryList)) {
-                setUnknownCountryState(self.withUnknown)
+            if (angular.isUndefined(vm.countryList)) {
+                setUnknownCountryState(vm.withUnknown)
             }
         }
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
             if (changes.withUnknown) {
                 setUnknownCountryState(changes.withUnknown.currentValue);
             }
             if (changes.listItems) {
-                self.model.list = changes.listItems.currentValue;
+                vm.model.list = changes.listItems.currentValue;
             }
         };
         function setUnknownCountryState(isUnknown) {
-            var countries = angular.copy(self.baseCountries);
+            var countries = angular.copy(vm.baseCountries);
             if (isUnknown) {
                 var unknownRec=getCountryAndProvinces.getUnknownCountryRecord();
                 countries.unshift(unknownRec);
-                self.countryList =countries;
-                self.hasUnknown = true;
-                self.columnDef = [
+                vm.countryList =countries;
+                vm.hasUnknown = true;
+                vm.columnDef = [
                     {
-                        label: self.fieldLabel,
+                        label: vm.fieldLabel,
                         binding: "display",
                         width: "50"
                     },
@@ -88,12 +91,12 @@
                     },
                 ]
             } else {
-                self.countryList = countries;
-                self.hasUnknown = false;
-                self.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
-                self.columnDef = [
+                vm.countryList = countries;
+                vm.hasUnknown = false;
+                vm.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
+                vm.columnDef = [
                     {
-                        label: self.fieldLabel,
+                        label: vm.fieldLabel,
                         binding: "display",
                         width: "100"
                     }
@@ -103,34 +106,34 @@
 
         }
 
-        self.addNew = function () {
+        vm.addNew = function () {
             var maxID = getListMaxID();
-            var item = angular.copy(self.emptyModel);
+            var item = angular.copy(vm.emptyModel);
             item.id = (getListMaxID() + 1);
-            (self.model.list).push(item);
+            (vm.model.list).push(item);
             setRecord(-1);
-            self.resetToCollapsed = !self.resetToCollapsed;
-            setRecord(self.model.list.length - 1);
-            //self.editRecord(item);
-            //self.onUpdate({list: self.model.list});
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            setRecord(vm.model.list.length - 1);
+            //vm.editRecord(item);
+            //vm.onUpdate({list: vm.model.list});
 
         };
 
         function setRecord(value) {
-            self.selectRecord = value;
+            vm.selectRecord = value;
 
         }
 
-        self.deleteRecord = function (_id) {
+        vm.deleteRecord = function (_id) {
             //console.log("Deleting item: "+_id);
 
-            var idx = self.model.list.indexOf(
-                $filter('filter')(self.model.list, {id: _id}, true)[0]
+            var idx = vm.model.list.indexOf(
+                $filter('filter')(vm.model.list, {id: _id}, true)[0]
             );
             if (idx < 0) return;
 
-            self.model.list.splice(idx, 1);
-            // self.onUpdate({list:self.model.list});
+            vm.model.list.splice(idx, 1);
+            // vm.onUpdate({list:vm.model.list});
         };
 
 
@@ -140,14 +143,14 @@
          * @param isTouched
          * @returns {*}
          */
-        self.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
+        vm.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()))
         }
 
         function getListMaxID() {
 
             var out = 0;
-            var list = self.model.list;
+            var list = vm.model.list;
             if (list) {
                 for (var i = 0; i < list.length; i++) {
                     if (list[i].id > out) {
@@ -158,5 +161,30 @@
             return out;
 
         }
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.noCountryId="no_country"+scopeId;
+        }
+        vm.noCountry=function(){
+            if(! vm.model.list || vm.model.list.length===0){
+                vm.noCountries="";
+                return true;
+            }
+            vm.noCountries="values";
+            return false;
+        };
+        vm.disableAddButton=function(){
+            if(vm.noCountry()) return false;
+            return(vm.countryListForm.$invalid);
+        };
+
+        $scope.$watch('countryListCtrl.countryListForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
+
     }
 })();

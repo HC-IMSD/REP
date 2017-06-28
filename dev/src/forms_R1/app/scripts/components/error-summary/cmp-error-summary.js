@@ -140,7 +140,10 @@
             return (summaryIsVisible);
         };
 
-
+        /**
+         * Used for the error summary to expand a record
+         * @param errorRecord
+         */
         vm.scrollTo=function(errorRecord){
             var hashId="";
             if(!errorRecord) return;
@@ -149,6 +152,8 @@
             }else{
                 hashId=errorRecord.name;
             }
+            console.log("hashID "+hashId)
+            console.log("index "+errorRecord.exIndex)
             vm.expandRecord({index: errorRecord.exIndex});
             $location.hash(hashId);
             $anchorScroll();

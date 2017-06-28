@@ -6,14 +6,14 @@
             </legend>
             <div class="row" ng-class="{'has-error':roaRecCtrl.roaRecForm.roaVal.$invalid}">
                 <div class="col-md-6 form-group">
-                    <label for="roa{{::$id}}" class="required">
+                    <label for="roa_lbl_{{::$id}}" class="required">
                         <span class="field-name">{{'ROA_LBL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <ui-select ng-model="roaRecCtrl.model.roa" id="roa{{::$id}}" name="roaVal"
+                        <ui-select ng-model="roaRecCtrl.model.roa" id="roa_lbl_{{::$id}}" name="roa_lbl_{{::$id}}"
                                    on-select="roaRecCtrl.roaChanged($item, $model)" ng-model-options="{ debounce: '0'}"
                                    class="rep-selectize-dropdown rep-selectize-font"
-                                   title="Choose a Route of Administration" required>
-                            <ui-select-match placeholder="Select or Search for a route of administration"
+                                   title="{{'SELECT_ROA'|translate}}" required>
+                            <ui-select-match placeholder="{{'SELECT_ROA'|translate}}"
                                              name="roaMatch" class="rep-selectize-font rep-selectize-dropdown">
                                 {{$select.selected[roaRecCtrl.lang]}}
                             </ui-select-match>

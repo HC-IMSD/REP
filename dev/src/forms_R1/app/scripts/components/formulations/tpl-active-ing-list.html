@@ -8,6 +8,7 @@
         <cmp-active-ing-record record="$parent.record" on-update="ailCtrl.updateIng($parent.$index,ing)"
                                on-add-ing="ailCtrl.addIng(ing)" record-index="$parent.$index"
                                on-delete="ailCtrl.deleteIng($parent.$index)" delete-btn="true"
+                               update-error-summary="ailCtrl.updateErrorSummary()"
                                error-summary-update="ailCtrl.errorSummaryUpdate" show-error-summary="ailCtrl.showErrorSummary"
                                is-detail-valid="ailCtrl.setValid(state)"></cmp-active-ing-record>
 
