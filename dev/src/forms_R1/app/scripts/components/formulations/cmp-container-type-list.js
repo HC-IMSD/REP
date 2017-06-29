@@ -27,105 +27,139 @@
                 showErrorSummary:'<'
             }
         });
+    containerTypeListCtrl.$inject = ['$scope'];
 
-    function containerTypeListCtrl() {
+    function containerTypeListCtrl($scope) {
 
-        var self = this;
-        self.isDetailValid = true;
-        self.selectRecord = -1;
-        self.resetToCollapsed = false;
-        self.isDetailValid = true;
-        self.newIngFormShown = false;
+        var vm = this;
+        vm.isDetailValid = true;
+        vm.selectRecord = -1;
+        vm.resetToCollapsed = false;
+        vm.isDetailValid = true;
+        vm.newIngFormShown = false;
+        vm.noContainerValues="";
 
-        self.$onInit = function () {
-            self.selectRecord = -1;
-            self.resetToCollapsed = false;
-            self.isDetailValid = true;
-            self.newIngFormShown = false;
-
-            self.colNames = [
+        vm.$onInit = function () {
+            vm.selectRecord = -1;
+            vm.resetToCollapsed = false;
+            vm.isDetailValid = true;
+            vm.newIngFormShown = false;
+            _setIdNames();
+            vm.colNames = [
                 {label: "CONTAINER_TYPE", binding: "containerType", width: "50"},
                 {label: "PACKAGE_SIZE", binding: "packageSize", width: "50"}
             ];
 
-            self.containerList = [];
+            vm.containerList = [];
 
-            if (self.containers) {
-                self.containerList = self.containers;
+            if (vm.containers) {
+                vm.containerList = vm.containers;
             }
 
         };
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
 
             if (changes.containers) {
-                self.containerList = changes.containers.currentValue;
+                vm.containerList = changes.containers.currentValue;
+                vm.noContainers();
             }
         };
 
-        self.addNew = function (ing) {
-            self.setValid(true);
-            self.containerList.push(ing);
-            self.newIngFormShown = false;
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.onUpdate({list:self.containerList});
+        vm.addNew = function (ing) {
+            vm.setValid(true);
+            vm.containerList.push(ing);
+            vm.newIngFormShown = false;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.onUpdate({list:vm.containerList});
             setRecord(-1);
+            vm.noContainers();
         };
 
-        self.updateRec = function (idx, ing) {
-            self.containerList[idx] = angular.copy(ing);
-            self.onUpdate({list:self.containerList});
-            self.setValid(true);
+        vm.updateRec = function (idx, ing) {
+            vm.containerList[idx] = angular.copy(ing);
+            vm.onUpdate({list:vm.containerList});
+            vm.setValid(true);
         };
 
-        self.deleteRec = function (idx) {
+        vm.deleteRec = function (idx) {
             // console.debug('containerList deleteIng: ' + idx);
-            self.containerList.splice(idx, 1);
-            self.onUpdate({list:self.containerList});
-            self.setValid(true);
+            vm.containerList.splice(idx, 1);
+            vm.onUpdate({list:vm.containerList});
+            vm.setValid(true);
+            vm.noContainers();
             setRecord(-1);
-            self.resetToCollapsed = !self.resetToCollapsed;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
         };
         /**
          * sets the record in the expanding table to select less than zero means none
          * @param value
          */
         function setRecord(value){
-            self.selectRecord = value;
+            vm.selectRecord = value;
         }
 
         /**
          * Flag set to indicate if the record details are in a valid state
          * @param value
          */
-        self.setValid=function(value){
-            self.isDetailValid=value;
+        vm.setValid=function(value){
+            vm.isDetailValid=value;
         };
         /**
          * Controls the state of the add new ingredient button
          * @returns {*|boolean}
          */
-        self.addNewDisabled=function(){
-            return (self.newIngFormShown || !self.isDetailValid);
+        vm.addNewDisabled=function(){
+            return (vm.newIngFormShown || !vm.isDetailValid);
         };
         /**
          * Sets the UI state for the add new template
          */
-        self.addNewIngredientState=function(){
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.newIngFormShown = true;
-            self.setValid(false);
-            return(self.newIngFormShown);
+        vm.addNewIngredientState=function(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.newIngFormShown = true;
+            vm.setValid(false);
+            vm.noContainers();
+            return(vm.newIngFormShown);
         };
 
         /**
          * When a new record is cancelled, resets state;
          */
-        self.onNewCancel=function(){
-            self.setValid(true);
-            self.newIngFormShown = false
-        }
+        vm.onNewCancel=function(){
+            vm.setValid(true);
+            vm.newIngFormShown = false
+            vm.noContainers();
+        };
 
+        /**
+         * Checks if there is at least one container type
+         * @returns {boolean}
+         */
+        vm.noContainers=function(){
+
+            if(!vm.containerList ||   vm.containerList.length===0){
+                vm.noContainerValues="";
+                return true;
+            }
+            vm.noContainerValues="values";
+            return false;
+        };
+
+
+
+
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.noContainerId="no_container"+scopeId;
+        }
+        
+        
     }
 
 })();

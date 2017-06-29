@@ -50,7 +50,7 @@
             "cmp-formulation-record": "true"
         };
         vm.alias = {
-            "noFormulation": {
+            "no_formulation": {
                 "type": "element",
                 "target": "addFormulation"
             }

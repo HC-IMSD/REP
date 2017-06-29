@@ -62,16 +62,11 @@
         ];
 
         vm.updateSummary=0; //message to update the summary component
-        vm.showSummary=false; //show the errror summary object
+        vm.showSummary=false; //show the error summary object
         vm.focusSummary=0;
         
         vm.$onInit = function () {
-            vm.showSummary=false;
             _setIdNames();
-            /* if(vm.record){
-                vm.ctModel = angular.copy(vm.record);
-            }
-             vm.backup = angular.copy(vm.ctModel);*/
         };
 
         vm.$onChanges = function (changes) {
@@ -144,7 +139,9 @@
         $scope.$watch('ctrCtrl.containerTypeForm.$dirty', function () {
             vm.isDetailValid({state: !vm.containerTypeForm.$dirty});
         }, true);
-
+        $scope.$watch('ctrCtrl.containerTypeForm.$error', function () {
+            vm.updateErrorSummaryState();
+        }, true);
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.containerFormId="containerRecordForm" + scopeId;

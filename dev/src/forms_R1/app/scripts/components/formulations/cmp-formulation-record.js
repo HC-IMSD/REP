@@ -108,6 +108,7 @@
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
+                console.log("Formulation show summary value is "+vm.showSummary)
             }
             if(changes.errorSummaryUpdate){
 
@@ -129,13 +130,13 @@
             }
 
         };
-
-        vm.showErrors=function(){
+        //TODO Delete
+       /* vm.showErrors=function(){
             return vm.showSummary;
         }
-
+*/
         vm.showError=function(isInvalid,isTouched){
-           return(((isInvalid && isTouched)|| (isInvalid && vm.showErrors()) ||(isInvalid && vm.showSummary)))
+           return(((isInvalid && isTouched)||(isInvalid && vm.showSummary)))
         };
         /***
          * Shows the no country of manufacture errro
@@ -172,7 +173,7 @@
             return false;
 
         };
-        vm.noActives=function(){
+        /*vm.noActives=function(){
 
             if(!vm.frmModel){
                 vm.noActiveValues="";
@@ -185,7 +186,7 @@
             vm.noActiveValues="values";
             return false;
 
-        };
+        };*/
         /**
          * Checks if there is at least one container type
          * @returns {boolean}

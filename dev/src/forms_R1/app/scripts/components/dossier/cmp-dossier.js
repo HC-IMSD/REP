@@ -24,7 +24,10 @@
         'ngAria',
         'theraClass',
         'dossierService',
-        'ngSanitize'
+        'ngSanitize',
+        'errorSummaryModule',
+        'errorMessageModule'
+
     ];
 
     angular
@@ -73,13 +76,37 @@
 
         vm.isIncomplete = true;
         vm.formAmend = false;
-        vm.showAllErrors = false;
+       // vm.showAllErrors = false;
         vm.errorAppendix = [];
         vm.extraAppendix = [];
         vm.noThera = "";
         vm.oneRefSelected = "";
+        //error summary fields
         vm.updateSummary=0; //increment to send message to error summaries
         vm.showSummary=false;
+        vm.focusSummary=0;
+        vm.exclusions = {
+            "formulCtrl.formulationsForm":"true",
+            "contactRec.contactRecForm":"true"
+        };
+        vm.transcludeList={};
+        vm.alias = {
+            "no_theraVal": {
+                "type": "element",
+                "target": "addTheraClass"
+            },
+            "one_rep": {
+                "type": "element",
+                "target": "addTheraClass"
+            }
+
+        };
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.min5Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
+        ];
+
         vm.alerts = [false, false, false, false,false,false,false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
@@ -87,6 +114,7 @@
 
 
         vm.$onInit = function () {
+            _setIdNames();
             vm.dossierService = new DossierService();
             vm.dossierModel = vm.dossierService.getDefaultObject();
             vm.showSummary=false;
@@ -140,7 +168,7 @@
             vm.showNoRefReError();
             getAppendix4Errors();
             _setComplete();
-            vm.showAllErrors = true;
+           // vm.showAllErrors = true;
             disableXMLSave();
         }
 
@@ -234,17 +262,20 @@
          * Used to show all the fields in an error state. Can be activated by a parent component
          * @returns {boolean}
          */
-        vm.showErrors = function () {
+       /* vm.showErrors = function () {
             return (vm.showAllErrors);
-        };
+        };*/
         /**
          * For individual controls, whether to show the error for a fiedl
          * @param isInvalid - control $invalid flag
          * @param isTouched -control $touched flag
          * @returns {*|dossierCtrl.showErrors}
          */
-        vm.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (vm.showErrors() && isInvalid))
+        vm.showError = function (ctrl) {
+            if(!ctrl){
+                return false;
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid))
         };
 
         /***
@@ -267,21 +298,24 @@
         vm.saveJson = function () {
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), vm.dossierService.getRootTagName());
-            vm.showAllErrors = true;
+           // vm.showAllErrors = true; //TODO get rid of this?
             //_setComplete()
         };
 
         vm.saveXML = function () {
-            vm.showSummary=true;
+
             if(vm.dossierForm.$invalid) {
-                console.log("sending message for dossier root update")
-                vm.showErrorSummary = vm.showErrorSummary + 1;
+                console.log("sending message for dossier root update");
+                vm.showSummary=true;
+                vm.focusSummary++;
+               // vm.showErrorSummary = vm.showErrorSummary + 1;
                 vm.updateErrorSummaryState();
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName());
-                vm.showAllErrors = false;
+               // vm.showAllErrors = false;
                 vm.dossierForm.$setPristine();
+                vm.showSummary=false;
             }
         };
 
@@ -387,6 +421,17 @@
             return(vm.lang===FRENCH);
         };
 
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.dossierFormId="dossier_form" + scopeId;
+            vm.typeId="dossier_type"+ scopeId;
+            vm.compId="company_id"+ scopeId;
+            vm.thirdId="signed_third"+ scopeId;
+            vm.prodNameId="prod_name"+ scopeId;
+            vm.properNameId="proper_name"+ scopeId;
+            vm.isRefId="is_cdn_ref"+ scopeId;
+            vm.noTheraId="no_theraVal"+scopeId;
+        }
 
 
     }//endcontroller

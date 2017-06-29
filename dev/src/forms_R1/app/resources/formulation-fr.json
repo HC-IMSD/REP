@@ -53,7 +53,9 @@
   "ADD_FORMULATION":"fr_Add formulation",
   "SELECT_DOSAGE":"fr_Select a dosage form",
   "SELECT_ROA":"fr_Choose a Route of Administration",
+  "ADD_CONTAINER":"fr_Add Container Type",
   "CMP-FORMULATION-RECORD":"fr_ in formulation record",
   "INGRECCTRL.ACTIVEINGFORM":"fr_in the active ingredient details",
-  "NINGRECCTRL.NONMEDINGFORM":"fr_in the nom-medicinal ingredient details"
+  "NINGRECCTRL.NONMEDINGFORM":"fr_in the nom-medicinal ingredient details",
+  "FORMULCTRL.FORMULATIONSFORM":"in the formulations tab"
 }

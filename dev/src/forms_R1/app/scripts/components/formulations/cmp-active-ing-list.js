@@ -38,6 +38,7 @@
         vm.newIngFormShown = false;
         vm.isDetailValid = true;
         vm.selectRecord = -1;
+        vm.noActiveValues=""; //used for error handling Business Rule: must be at least one active
 
         vm.colNames = [
             {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "65"},
@@ -47,7 +48,7 @@
         ];
         vm.ingList = [];
         vm.$onInit = function () {
-
+            _setIdNames();
           /*  if (vm.ingredients) {
                 vm.ingList = vm.ingredients;
             }*/
@@ -57,6 +58,7 @@
             if(changes.ingredients && changes.ingredients.currentValue){
                 vm.ingList = vm.ingredients;
                 vm.isDetailValid = true;
+                vm.noActives();
             }
 
         }
@@ -68,6 +70,7 @@
             vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.onUpdate({list:vm.ingList});
             setRecord(-1);
+            vm.noActives();
         };
 
         vm.updateIng = function (idx, ing) {
@@ -82,6 +85,7 @@
             vm.setValid(true);
             setRecord(-1);
             vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.noActives();
         };
 
         /**
@@ -121,10 +125,32 @@
         vm.onNewCancel=function(){
             vm.setValid(true);
             vm.newIngFormShown = false
-        }
+        };
+
+        //this sends a signal to the error summary to update itself, when a value changes.
+        //is $error is a nested json object, won't fire for any child form errors
         $scope.$watch('ailCtrl.activeIngListForm.$error', function () {
             vm.updateErrorSummary();
         }, true);
+
+        vm.noActives=function(){
+
+            if(!vm.ingList ||vm.ingList.length===0){
+                vm.noActiveValues="";
+                return true;
+            }
+            vm.noActiveValues="values";
+            return false;
+        };
+
+        /**
+         * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
+         * @private
+         */
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.noActiveId="no_active"+scopeId;
+        }
 
 
 

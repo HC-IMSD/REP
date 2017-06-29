@@ -99,6 +99,7 @@
 
             if (changes.showErrors) {
                 vm.isVisible = changes.showErrors.currentValue;
+                console.log("error summary is visible "+vm.headingPreamble+" "+vm.isVisible)
             }
 
             if (changes.updateErrors) {
@@ -370,6 +371,7 @@
             //delete anything in the not in the list
             //TODO refactor? seems inefficient
             var keyList = Object.keys(domFieldList);
+            console.log(keyList);
             for (var p = 0; p < keyList.length; p++) {
                 //specifically handled the angular bootstrap ui-select
                 if(keyList[p].indexOf("focusser-")>-1){
