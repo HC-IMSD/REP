@@ -53,6 +53,7 @@
   "SELECT_DOSAGE":"Select a dosage form",
   "SELECT_ROA":"Choose a Route of Administration",
   "ADD_CONTAINER":"Add Container Type",
+  "ADD_INGREDIENT":"Add Ingredient",
   "CMP-FORMULATION-RECORD":"in formulation record",
   "INGRECCTRL.ACTIVEINGFORM":"in the active ingredient details",
   "NINGRECCTRL.NONMEDINGFORM":"in the non-medicinal ingredient details",

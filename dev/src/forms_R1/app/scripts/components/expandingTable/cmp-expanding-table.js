@@ -29,8 +29,8 @@
                 tname:'@'
             }
         });
-    expandingTableCtrl.$inject = ['$filter'];
-    function expandingTableCtrl($filter) {
+    expandingTableCtrl.$inject = ['$filter','$scope'];
+    function expandingTableCtrl($filter,$scope) {
         var vm = this;
         vm.focused = false;
         vm.columnDefinitions={};

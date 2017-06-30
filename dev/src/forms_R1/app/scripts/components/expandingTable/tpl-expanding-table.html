@@ -2,7 +2,7 @@
     <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
         <thead>
         <tr>
-            <th aria-label="Expanded State" scope="col" style="color:transparent" >e</th>
+            <th aria-label="Expanded State" scope="col" style="color:transparent">e</th>
             <th scope="col" ng-repeat="heading in expandTblCtrl.columnDefinitions">{{heading.label |translate}}</th>
             <th scope="col" ng-if="!expandTblCtrl.disableErrorCol">{{'ERRORS'|translate}}</th>
         </tr>
@@ -22,15 +22,19 @@
                 <span ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
                 <span ng-if="def.isHtml" ng-bind-html="record[def.binding]"></span>
             </td>
-            <td  ng-if="!expandTblCtrl.disableErrorCol" width="5%">
-               <!-- {{expandTblCtrl.formInError(expandTblCtrl.formName_$index)|translate}}-->
+            <td ng-if="!expandTblCtrl.disableErrorCol" width="5%">
+                <!-- {{expandTblCtrl.formInError(expandTblCtrl.formName_$index)|translate}}-->
             </td>
         </tr>
         <tr data-ng-show="!expandTblCtrl.dayDataCollapse[$index]" data-ng-repeat-end>
             <td colspan="{{expandTblCtrl.numberCols}}">
                 <ng-form name="{{expandTblCtrl.formName}}_{{$index}}">
-                <div ng-transclude>
-                </div>
+                    <ng-form name="expandTblCtrl.transcludeForm[$index]">
+                        <div ng-if="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid)">
+                            <div ng-transclude>
+                            </div>
+                        </div>
+                    </ng-form>
                 </ng-form>
             </td>
         </tr>

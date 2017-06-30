@@ -97,7 +97,7 @@
             },
             "one_rep": {
                 "type": "element",
-                "target": "addTheraClass"
+                "target": "addRepContactBtn"
             }
 
         };
