@@ -105,11 +105,8 @@
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
-                //resultJson.TRANSACTION_ENROL.same_regulatory_company = jsonObj.sameCompany === true ? 'Y' : 'N';
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
-                /* resultJson.TRANSACTION_ENROL.same_regulatory_address = jsonObj.sameAddress === true ? 'Y' : 'N'; //this may no longer be needed*/
                 resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
-                /* resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameCompany === true ? 'Y' : 'N'; //this may no longer be needed*/
                 resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput(jsonObj.activityContact);
                 resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameContact === true ? 'Y' : 'N'; //this may no longer be needed
                 return (resultJson);
@@ -304,7 +301,7 @@
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
         lifecycleRec.endDate = lifecycleObj.sequence_to_date;
         lifecycleRec.details = lifecycleObj.sequence_details;
-        lifecycleRec.version = lifecycleObj.sequence_version;
+        lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.sequence_concat;
         return (lifecycleRec);
@@ -324,12 +321,11 @@
                 __text: lifecycleObj.activityType.id
             }
         }
-
         lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
         lifecycleRec.sequence_to_date = lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
-        lifecycleRec.sequence_version = lifecycleObj.version;
+        lifecycleRec.sequence_version = lifecycleObj.sequenceVersion;
         lifecycleRec.sequence_year = lifecycleObj.year;
         lifecycleRec.sequence_concat = lifecycleObj.sequenceConcat;
         return (lifecycleRec);
@@ -444,7 +440,7 @@
             "startDate": "",
             "endDate": "",
             "details": "",
-            "version": "",
+            "sequenceVersion": "",
             "sequenceConcat": ""
         };
         //TODO get next sequence number
