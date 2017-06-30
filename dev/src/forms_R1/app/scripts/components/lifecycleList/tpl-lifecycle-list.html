@@ -1,7 +1,7 @@
 <ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
         <div class="row">
             <input type="text" id="oneRec" name="oneRec" ng-show="false"
-                   ng-model="lifeListCtrl.oneRecord" ng-required="true"/>
+                   ng-model="lifeListCtrl.oneRecord"required/>
             <label for="oneRec">
                 <strong id=" onerec-error" class="error"
                         ng-if="lifeListCtrl.showError(lifeListCtrl.lifecycleListForm.oneRec.$touched,lifeListCtrl.lifecycleListForm.oneRec.$invalid)">

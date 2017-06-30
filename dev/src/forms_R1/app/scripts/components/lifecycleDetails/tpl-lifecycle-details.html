@@ -18,10 +18,6 @@
                             <label for="dateFiled_{{$id}}" class="required">
                                 <span class="field-name">{{"DATE_SUBMITTED" |translate}}</span>
                                 <strong class="required">{{"REQUIRED" |translate}}</strong>
-                                <!--  <input type="date" id="dateFiled_{{$id}}" name="dateFiled"
-                                         ng-readonly="!lifecycleCtrl.ectd"
-                                         ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
-                                         class="form-control" ng-required="lifecycleCtrl.ectd" ng-pattern="datePattern"/>-->
                                 <p class="input-group">
                                     <input id="dateFiled_{{$id}}" type="text" class="form-control rep-normal-font"
                                            uib-datepicker-popup
@@ -54,8 +50,7 @@
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.controlNum.$invalid}">
                             <label for="controlNum_{{$id}}" class="required">
                                 <span class="field-name">{{"Control Number" |translate}}</span>
-                                <strong class="required">{{"REQUIRED"
-                                    |translate}}</strong>
+                                <strong class="required">{{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="controlNum_{{$id}}" name="controlNum" only-digits=""
                                        ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
                                        class="form-control full-width" maxlength="6" minlength="6" size="6"
@@ -195,14 +190,6 @@
                                         ng-options=" val for val in lifecycleCtrl.yearList">
 
                                 </select>
-                                <!-- <input type="text" name="year"
-
-                                ng-options="option.name for option in data.availableOptions track by option.id"
-                                        ng-model="lifecycleCtrl.lifecycleModel.year"
-                                        ng-change="lifecycleCtrl.setConcatDetails()"
-                                        ng-required="lifecycleCtrl.yearVisible"
-                                        class="form-control">
-                                 </input>-->
                                 <strong id="year-error" class="error"
                                         ng-if="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm.year.$invalid,lifecycleCtrl.lifecycleDetailsForm.year.$touched)">
                         <span class="label label-danger"

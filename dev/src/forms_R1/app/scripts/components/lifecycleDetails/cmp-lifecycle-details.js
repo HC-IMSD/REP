@@ -225,7 +225,10 @@
             ///find if the value is in the list
             if (temp && vm.descriptionList.indexOf(temp) !== -1) {
                 vm.lifecycleModel.descriptionValue = temp;
+            }else{
+                setDetailsAsNone();
             }
+
         };
         /**
          * @ngdoc method sets the state of the details field based on
@@ -329,7 +332,7 @@
             vm.yearVisible = true;
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
-            vm.lifecycleModel.version = "";
+            vm.lifecycleModel.sequenceVersion = "";
         }
 
         function setDetailsAsNone() {
@@ -343,7 +346,7 @@
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
-            vm.lifecycleModel.version = "";
+            vm.lifecycleModel.sequenceVersion = "";
         }
 
         function setAsDescription() {
@@ -355,7 +358,7 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
-            vm.lifecycleModel.version = "";
+            vm.lifecycleModel.sequenceVersion = "";
 
         }
 
@@ -369,7 +372,7 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
-            vm.lifecycleModel.version = "";
+            vm.lifecycleModel.sequenceVersion = "";
         }
 
         function setVersionAndDate() {
@@ -394,7 +397,7 @@
             vm.yearVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.details = "";
-            vm.lifecycleModel.version = "";
+            vm.lifecycleModel.sequenceVersion = "";
         }
 
         function setAsVersionDescription() {
@@ -416,7 +419,11 @@
            var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
             if (vm.startDateVisible) {
                 startDate = convertDate(vm.lifecycleModel.startDate);
-                concatText = enDescription + " dated " + startDate;
+                if (vm.versionVisible){
+                    concatText = " dated " + startDate;
+                }else {
+                    concatText = enDescription + " dated " + startDate;
+                }
             }
             if (vm.endDateVisible) {
 
@@ -428,7 +435,7 @@
                 concatText = enDescription + "\n" + vm.lifecycleModel.details;
             }
             if (vm.versionVisible) {
-                concatText = enDescription + vm.lifecycleModel.version + concatText;
+                concatText = enDescription +" "+ vm.lifecycleModel.sequenceVersion + concatText;
             }
             if (vm.yearVisible) {
                 concatText = vm.lifecycleModel.year + ": " + vm.lifecycleModel.details;

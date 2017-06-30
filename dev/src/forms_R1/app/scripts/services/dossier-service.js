@@ -619,7 +619,7 @@
                 if (!item.dosage_form_group.dosage_form) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
                 } else {
-                    var dosageFormObj = $filter('filter')(DossierLists.getDosageFormList(), {id: item.dosage_form_group.dosage_form.__text})[0];
+                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix()+ item.dosage_form_group.dosage_form.__text});
                     obj.dosageForm = dosageFormObj;
                 }
 
@@ -632,9 +632,13 @@
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
                     obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
+                }else{
+                    obj.nMedIngList=[];
                 }
                 if (item.active_ingredient) {
                     obj.activeIngList = getActiveIngList(item.active_ingredient);
+                }else{
+                    obj.animalHumanMaterials=[];
                 }
                 //container_group is static but do a check to be safe
                 if (item.container_group && item.container_group.container_details) {
@@ -644,9 +648,13 @@
                 }
                 if (item.material_ingredient) {
                     obj.animalHumanMaterials = getMaterialList(item.material_ingredient);
+                }else{
+                    obj.animalHumanMaterials=[];
                 }
                 if (item.roa_group && item.roa_group.roa_details) {
                     obj.routeAdmins = getRouteAdminList(item.roa_group.roa_details);
+                }else{
+                    obj.routeAdmins=[];
                 }
                 if (item.country_group && item.country_group.country_manufacturer) {
                     obj.countryList = getFormulationCountryList(item.country_group.country_manufacturer);
