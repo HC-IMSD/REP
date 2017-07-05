@@ -4,12 +4,12 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
                             id="load-instructions-toggle" ng-click="main.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_FILE_LOAD'|translate}}"</span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{'LOAD_COMPANY_FILE'| translate}}</h2>
+                <h2 class="panel-title">{{::'LOAD_COMPANY_FILE'| translate}}</h2>
             </header>
             <div class="panel-body">
                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
@@ -44,12 +44,12 @@
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{::'ENROL_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
                                 id="enrol-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ENROL_INSTRUCT'|translate}}"</span>
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'ENROL_INSTRUCT'|translate}}"</span>
                         </button>
                     </div>
-                    <h2 class="panel-title">{{'REG_COMPANY_ENROL'|translate}}</h2>
+                    <h2 class="panel-title">{{::'REG_COMPANY_ENROL'|translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[1]"
@@ -70,13 +70,13 @@
                         <section class="panel  panel-default">
                             <header class="panel-heading clearfix">
                                 <div class="btn-group pull-right">
-                                    <button title="{{'ADDRESS_INSTRUCT'|translate}}"
+                                    <button title="{{::'ADDRESS_INSTRUCT'|translate}}"
                                             class="btn-xs rep-help-button-primary"
                                             id="address-instructions-toggle" ng-click="main.addInstruct(3)"><span
-                                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'ADDRESS_INSTRUCT'|translate}}"</span>
+                                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'ADDRESS_INSTRUCT'|translate}}"</span>
                                     </button>
                                 </div>
-                                <h3 class="panel-title">{{'ADDR_INFO'|translate}}</h3>
+                                <h3 class="panel-title">{{::'ADDR_INFO'|translate}}</h3>
                             </header>
                             <div class="panel-body">
                                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[3]"
@@ -101,13 +101,13 @@
                         <section class="panel  panel-default">
                             <header class="panel-heading clearfix">
                                 <div class="btn-group pull-right">
-                                    <button title="{{'REPRESENT_INSTRUCT'|translate}}"
+                                    <button title="{{::'REPRESENT_INSTRUCT'|translate}}"
                                             class="btn-xs rep-help-button-primary"
                                             id="contacts-instructions-toggle" ng-click="main.addInstruct(4)"><span
-                                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'REPRESENT_INSTRUCT'|translate}}"</span>
+                                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'REPRESENT_INSTRUCT'|translate}}"</span>
                                     </button>
                                 </div>
-                                <h3 class="panel-title">{{'CONTACT_INFO'|translate}}</h3>
+                                <h3 class="panel-title">{{::'CONTACT_INFO'|translate}}</h3>
                             </header>
                             <div class="panel-body">
                                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[4]"
@@ -135,16 +135,16 @@
             <div class="row btn-group-sm">
                 <div class="form-group col-md-3">
                     <button class="btn btn-default btn-lg active" ng-click="main.saveJson()"
-                            ng-disabled="main.disableDraftButton">{{'SAVE_WORKING' |translate}}
+                            ng-disabled="main.disableDraftButton">{{::'SAVE_WORKING' |translate}}
                     </button>
                 </div>
                 <div class="form-group col-md-3">
                     <button class="btn btn-primary btn-lg active" id="btn_xmlSave" ng-disabled="main.disableDraftButton"
-                            ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
+                            ng-click="main.saveXML()">{{::main.saveXMLLabel |translate}}
                     </button>
-                    <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                    <button title="{{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                             id="save-instructions-toggle" ng-click="main.addInstruct(2)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SAVE_INSTRUCT'|translate}}"</span>
                     </button>
                 </div>
 
