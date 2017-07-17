@@ -218,6 +218,10 @@
                 case ("B02-20160301-089"): //YBPR (Yearly Biologic Product Report)
                     vm.descriptionList = TransactionLists.getYbprType();
                     break;
+                case ("DSUR"): //DSUR (Development Safety Update Report)
+                    vm.descriptionList = TransactionLists.getDSurType();
+                    break;
+
 
                 default:
                     vm.descriptionList = "";
@@ -301,6 +305,7 @@
                 case('SCREENING_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
                 case('NOL_RESPONSE'):        /*FALLTHROUGH*/
                 case('CLARIF_RESPONSE'):        /*FALLTHROUGH July 17,2017*/
+                case('NONCLIN_CLARIF_RESPONSE'):        /*FALLTHROUGH July 17,2017*/
 
                     setAsStartDate();
                     vm.setConcatDetails();

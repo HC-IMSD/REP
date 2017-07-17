@@ -33,6 +33,7 @@
             getAndsType: getANDSArray,
             getDinaType: getDINAArray,
             getDinbType: getDINBArray,
+            getDSurType: getDSurArray,
             getEundsType: getEUNDSArray,
             getEusndsType: getEUSNDSArray,
             getLevel3Type: getLevel3Array,
@@ -139,7 +140,8 @@
                     "FORM_IV", //Form IV
                     "FORM_V", //Form V
                     "CONSENT_LTR", //Consent Letter
-                    "DATA_PROTECT_CORRESP" //Correspondence - Data Protection
+                    "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
+                    "NONCLIN_CLARIF_RESPONSE" //response to Nonclinical clarification request
                 ]);
         }
 
@@ -290,7 +292,8 @@
                 "FORM_IV", //Form IV
                 "FORM_V", //Form V
                 "CONSENT_LTR", //Consent Letter
-                "DATA_PROTECT_CORRESP" //Correspondence - Data Protection
+                "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
+                "NONCLIN_CLARIF_RESPONSE" //response to Nonclinical clarification request
             ]);
 
         }
@@ -324,7 +327,6 @@
                 "RECON_DECIS_LTR_INTENT",// Reconsideration of Decision - Letter of Intent
                 "RECON_DECIS_RQ_RECON", //Reconsideration of Decision - Request for Reconsideration
                 "RECON_DECIS_OTHER_INFO",// Reconsideration of Decision - Other Information
-
                 "SCREENING_ACCEPT_RESPONSE", //response to screening acceptance letter
                 "SCREENING_CLARIF_RESPONSE", // response to screening clarification request
                 "SDN_RESPONSE", //response to SDN
@@ -335,7 +337,8 @@
                 "FORM_IV", //Form IV
                 "FORM_V", //Form V
                 "CONSENT_LTR", //Consent Letter
-                "DATA_PROTECT_CORRESP" //Correspondence - Data Protection
+                "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
+                "NONCLIN_CLARIF_RESPONSE" //response to Nonclinical clarification request
             ]);
 
         }
@@ -423,7 +426,8 @@
                 "FORM_IV", //Form IV
                 "FORM_V", //Form V
                 "CONSENT_LTR", //Consent Letter
-                "DATA_PROTECT_CORRESP" //Correspondence - Data Protection
+                "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
+                "NONCLIN_CLARIF_RESPONSE" //response to Nonclinical clarification request
             ])
         }
 
@@ -568,7 +572,8 @@
                 "FORM_IV", //Form IV
                 "FORM_V", //Form V
                 "CONSENT_LTR", //Consent Letter
-                "DATA_PROTECT_CORRESP" //Correspondence - Data Protection
+                "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
+                "NONCLIN_CLARIF_RESPONSE" //response to Nonclinical clarification request
             ]);
         }
 
@@ -691,7 +696,7 @@
             return ([
                 "BE_CLARIF_RESPONSE", //Response to BE clarification request dated..
                 "CANCEL_LETTER", //cancellation letter
-                "CLIN_CLARIF_RESPONSE", //Response to clinical clarifaction request
+                "CLIN_CLARIF_RESPONSE", //Response to clinical  Clarification request
                 "COMMENTS_NOC", // comments on notice of decision
                 "DRUG_NOTIF_FORM", // drug notification form
                 "EMAIL_RQ_RESPONSE",// response to email request
@@ -722,7 +727,8 @@
                 "FORM_IV", //Form IV
                 "FORM_V", //Form V
                 "CONSENT_LTR", //Consent Letter
-                "DATA_PROTECT_CORRESP" //Correspondence - Data Protection
+                "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
+                "NONCLIN_CLARIF_RESPONSE" //response to Nonclinical clarification request
             ]);
         }
 
@@ -792,6 +798,20 @@
                 "PHONE_RQ_RESPONSE" //Response to telephone Request
             ]);
         }
+
+
+        function getDSurArray() {
+            return ([
+                "CANCEL_LETTER", //cancellation letter
+                "CLIN_CLARIF_RESPONSE", //Response to clinical  Clarification request
+                "FOR_PERIOD", //for period of ....
+                "EMAIL_RQ_RESPONSE",// response to email request
+                "MEETING_MINUTES", //minutes of meeting dated
+                "PROCESSING_CLARIF_RESPONSE", //Response to processing Clarification Request
+                "PHONE_RQ_RESPONSE" //Response to telephone Request
+            ]);
+        }
+
 
 
     }

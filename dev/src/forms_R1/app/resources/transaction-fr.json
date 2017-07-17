@@ -83,6 +83,7 @@
   "REG_ACTIVITY_INSTRUCT":"fr_Regulatory Activity Contact Instructions",
   "SAVE_INSTRUCT": "fr_Transaction File Save Instructions",
   "CLARIF_RESPONSE":"fr_Response to Clarification Request",
+  "NONCLIN_CLARIF_RESPONSE": "fr_Response to Non-clinical Clarification Request ",
   "CORR_PATENT_MED":"fr_Correspondence - Patented Medicines",
   "ALLEGATION_NOTICE":"fr_Notice of allegation",
   "FORM_IV":"fr_Form IV",
