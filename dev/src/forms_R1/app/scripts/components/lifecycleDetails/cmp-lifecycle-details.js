@@ -110,6 +110,8 @@
             return true;
         };
 
+
+        //TODO move this logic to a service.
         /**
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
          * @param value
@@ -250,6 +252,7 @@
                 case('DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
                 case('INITIAL'):                /*FALLTHROUGH*/
                 case('NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
+                case('NOTIFICATION_INTERRUPT_SALE'): /*FALLTHROUGH July 17,2017 added*/
                 case('PANDEMIC_APPL'):          /*FALLTHROUGH*/
                 case('POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
                 case('POST_MARKET_SURV'):       /*FALLTHROUGH*/
@@ -259,9 +262,19 @@
                 case('PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
                 case('PRISTINE_PM'):            /*FALLTHROUGH*/
                 case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
+                case('RECON_DECIS_LTR_INTENT'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('RECON_DECIS_RQ_RECON'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('RECON_DECIS_OTHER_INFO'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('LABEL_PREAPPROVAL_2LANG'):  /*FALLTHROUGH Jul 17,2017 added*/
                 case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
                 case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
                 case('PRESUB_MEETING_RQ'):      /*FALLTHROUGH*/
+                case('CORR_PATENT_MED'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('ALLEGATION_NOTICE'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('FORM_IV'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('FORM_V'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('CONSENT_LTR'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case('DATA_PROTECT_CORRESP'):  /*FALLTHROUGH Jul 17,2017 added*/
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();
@@ -287,6 +300,7 @@
                 case('SCREENING_ACCEPT_RESPONSE'):        /*FALLTHROUGH*/
                 case('SCREENING_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
                 case('NOL_RESPONSE'):        /*FALLTHROUGH*/
+                case('CLARIF_RESPONSE'):        /*FALLTHROUGH July 17,2017*/
 
                     setAsStartDate();
                     vm.setConcatDetails();
