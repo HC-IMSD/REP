@@ -54,13 +54,14 @@
         };
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.yearList = _createYearList();
-
+        vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         vm.$onInit = function () {
 
             //lazy load of year lust
             if (!vm.yearList || vm.yearList.length === 0) {
                 vm.yearList = _createYearList();
             }
+            vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         };
 
         /**
@@ -130,12 +131,12 @@
                 case ("B02-20160301-001"): //ANDS
                     vm.descriptionList = TransactionLists.getAndsType();
                     break;
-              /*  case ("DINA"):
+                case ("DINA"):
                     vm.descriptionList = TransactionLists.getDinaType();
-                    break;*/
-              /*  case ("DINB"):
+                    break;
+              case ("DINB"):
                     vm.descriptionList = TransactionLists.getDinbType();
-                    break;*/
+                    break;
                 case ("B02-20160301-031"): //EU NDS (Extraordinary Use New Drug Submission)
                     vm.descriptionList = TransactionLists.getEundsType();
                     break;
@@ -164,12 +165,12 @@
                 case ("B02-20160301-051"): //NDS (New Drug Submission)
                     vm.descriptionList = TransactionLists.getNdsType();
                     break;
-               /* case ("PDC"):
+               case ("PDC"):
                     vm.descriptionList = TransactionLists.getPdcType();
-                    break;*/
-               /* case ("PDC_B"):
+                    break;
+             case ("PDCB"):
                     vm.descriptionList = TransactionLists.getPdcBType();
-                    break;*/
+                    break;
                 case ("B02-20160301-067"): //PAND (Pandemic Application)
                     vm.descriptionList = TransactionLists.getPANDType();
                     break;
@@ -221,6 +222,21 @@
                 case ("DSUR"): //DSUR (Development Safety Update Report)
                     vm.descriptionList = TransactionLists.getDSurType();
                     break;
+                case ("MPDIN"):
+                    vm.descriptionList = TransactionLists.getMPDINType();
+                    break;
+                case ("PDC"):
+                    vm.descriptionList = TransactionLists.getPdcType();
+                    break;
+                case ("PDCB"):
+                    vm.descriptionList = TransactionLists.getPdcBType();
+                    break;
+                case ("DIND"):
+                    vm.descriptionList = TransactionLists.getDindType();
+                    break;
+                case ("DINF"):
+                    vm.descriptionList = TransactionLists.getDinfType();
+                    break;
 
 
                 default:
@@ -248,85 +264,85 @@
                 return;
             }
             switch (value) {
-                case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
-                case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
-                case('CANCEL_LETTER'):          /*FALLTHROUGH*/
-                case('CHANGE_TO_DIN'):          /*FALLTHROUGH*/
-                case('DIN_DISCONTINUED'):       /*FALLTHROUGH*/
-                case('DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
-                case('INITIAL'):                /*FALLTHROUGH*/
-                case('NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
-                case('NOTIFICATION_INTERRUPT_SALE'): /*FALLTHROUGH July 17,2017 added*/
-                case('PANDEMIC_APPL'):          /*FALLTHROUGH*/
-                case('POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
-                case('POST_MARKET_SURV'):       /*FALLTHROUGH*/
-                case('POST_NOC_CHANGE'):        /*FALLTHROUGH*/
-                case('POST_AUTH_DIV1_CHANGE'):  /*FALLTHROUGH*/
-                case('PRESUB_MEETING_PKG'):     /*FALLTHROUGH*/
-                case('PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
-                case('PRISTINE_PM'):            /*FALLTHROUGH*/
-                case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
-                case('RECON_DECIS_LTR_INTENT'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('RECON_DECIS_RQ_RECON'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('RECON_DECIS_OTHER_INFO'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('LABEL_PREAPPROVAL_2LANG'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
-                case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
-                case('PRESUB_MEETING_RQ'):      /*FALLTHROUGH*/
-                case('CORR_PATENT_MED'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('ALLEGATION_NOTICE'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('FORM_IV'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('FORM_V'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('CONSENT_LTR'):  /*FALLTHROUGH Jul 17,2017 added*/
-                case('DATA_PROTECT_CORRESP'):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.ADMINISTRATIVE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.BENEFIT_RISK_ASSESS):    /*FALLTHROUGH*/
+                case(vm.descriptionObj.CANCEL_LETTER):          /*FALLTHROUGH*/
+                case(vm.descriptionObj.CHANGE_TO_DIN):          /*FALLTHROUGH*/
+                case(vm.descriptionObj.DIN_DISCONTINUED):       /*FALLTHROUGH*/
+                case(vm.descriptionObj.DRUG_NOTIF_FORM):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.INITIAL):                /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOTIFICATION_CHANGE):    /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOTIFICATION_INTERRUPT_SALE): /*FALLTHROUGH July 17,2017 added*/
+                case(vm.descriptionObj.PANDEMIC_APPL):          /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_CLEARANCE_DATA):    /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_MARKET_SURV):       /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_NOC_CHANGE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_AUTH_DIV1_CHANGE):  /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRESUB_MEETING_PKG):     /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRIORITY_REVIEW_RQ):     /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRISTINE_PM):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRISTINE_PM_2LANG):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.RECON_DECIS_LTR_INTENT):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.RECON_DECIS_RQ_RECON):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.RECON_DECIS_OTHER_INFO):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.LABEL_PREAPPROVAL_2LANG):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.RISK_COMMUN_DOC):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.SIGNAL_WORK_UP):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRESUB_MEETING_RQ):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.CORR_PATENT_MED):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.ALLEGATION_NOTICE):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.FORM_IV):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.FORM_V):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.CONSENT_LTR):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.DATA_PROTECT_CORRESP):  /*FALLTHROUGH Jul 17,2017 added*/
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();
                     break;
 
-                case('COMMENTS_NOC'):             /*FALLTHROUGH*/
-                case('COMMENTS_SUMMARY_BASIS'):   /*FALLTHROUGH*/
-                case('MEETING_MINUTES'):            /*FALLTHROUGH*/
-                case('ADVISEMENT_LETTER_RESPONSE'):   /*FALLTHROUGH*/
-                case('CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case('EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
-                case('LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('MHPD_RQ_RESPONSE'):             /*FALLTHROUGH*/
-                case('NOC_RESPONSE'):                  /*FALLTHROUGH*/
-                case('NOD_RESPONSE'):                  /*FALLTHROUGH*/
-                case('NON_RESPONSE'):                 /*FALLTHROUGH*/
-                case('PROCESSING_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case('QUAL_CLIN_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case('QUAL_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case('SDN_RESPONSE'):                 /*FALLTHROUGH*/
-                case('PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
-                case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('SCREENING_ACCEPT_RESPONSE'):        /*FALLTHROUGH*/
-                case('SCREENING_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('NOL_RESPONSE'):        /*FALLTHROUGH*/
-                case('CLARIF_RESPONSE'):        /*FALLTHROUGH July 17,2017*/
-                case('NONCLIN_CLARIF_RESPONSE'):        /*FALLTHROUGH July 17,2017*/
+                case(vm.descriptionObj.COMMENTS_NOC):             /*FALLTHROUGH*/
+                case(vm.descriptionObj.COMMENTS_SUMMARY_BASIS):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.MEETING_MINUTES):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.ADVISEMENT_LETTER_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.EMAIL_RQ_RESPONSE):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.MHPD_RQ_RESPONSE):             /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOC_RESPONSE):                  /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOD_RESPONSE):                  /*FALLTHROUGH*/
+                case(vm.descriptionObj.NON_RESPONSE):                 /*FALLTHROUGH*/
+                case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.SDN_RESPONSE):                 /*FALLTHROUGH*/
+                case(vm.descriptionObj.PHONE_RQ_RESPONSE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.BE_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.SCREENING_ACCEPT_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.SCREENING_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOL_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
+                case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
 
                     setAsStartDate();
                     vm.setConcatDetails();
                     break;
-                case('RMP_VERSION_DATE'):
+                case(vm.descriptionObj.RMP_VERSION_DATE):
                     setVersionAndDate();
                     vm.setConcatDetails();
                     break;
 
-                case('FOR_PERIOD'):
+                case(vm.descriptionObj.FOR_PERIOD):
                     setAsDatePeriod();
                     vm.setConcatDetails();
                     break;
 
-                case('UNSOLICITED_DATA'):
+                case(vm.descriptionObj.UNSOLICITED_DATA):
 
                     setAsDescription();
                     vm.setConcatDetails();
                     break;
 
-                case('YEAR_LIST_OF_CHANGE'):
+                case(vm.descriptionObj.YEAR_LIST_OF_CHANGE):
                     setAsDescriptionYear();
                     vm.setConcatDetails();
                     break;

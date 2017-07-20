@@ -35,7 +35,8 @@
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",
   "PHARMACEUTICAL": "Pharmaceutical",
-  "HELP_FILE_LOAD": "Expand file load instructions",
+  "HELP_FILE_LOAD": "file load instructions",
+  "EXPAND": "Expand",
   "HELP_ACTIVITY_MAIN": "Activity Instructions",
   "HELP_ACTIVITY_REP": "REP Contact Instructions",
   "CALENDAR": "Pick date from calendar",
@@ -49,5 +50,7 @@
   "SAVE_WORKING":"Save Working Copy",
   "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)",
   "CLOSE_ALERT":"Collapse instructions",
-  "COLLAPSE":"Collapse"
+  "COLLAPSE":"Collapse",
+  "SAVE_RECORD":"Save Record",
+  "DELETE_RECORD":"Delete Record"
 }

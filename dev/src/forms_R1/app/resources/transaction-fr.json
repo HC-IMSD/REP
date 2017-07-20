@@ -89,5 +89,7 @@
   "FORM_IV":"fr_Form IV",
   "FORM_V":"fr_Form V",
   "CONSENT_LTR":"fr_Consent Letter",
-  "DATA_PROTECT_CORRESP":"fr_Correspondence - Data Protection"
+  "DATA_PROTECT_CORRESP":"fr_Correspondence - Data Protection",
+  "CHOOSE_REQUEST":"fr_Choose a requester",
+  "TRANSACT_INSTRUCT":"fr_Regulatory Transaction Instructions"
 }

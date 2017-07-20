@@ -18,7 +18,8 @@
             'numberFormat',
             'ui.bootstrap',
             'translations',
-            'ngSanitize'
+            'ngSanitize',
+            'alertModule'
         ])
 
 })();

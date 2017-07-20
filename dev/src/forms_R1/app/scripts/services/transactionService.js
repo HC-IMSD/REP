@@ -315,11 +315,13 @@
         lifecycleRec.control_number = lifecycleObj.controlNumber;
         lifecycleRec.sequence_activity_type = "";
         if (lifecycleObj.activityType) {
-            lifecycleRec.sequence_activity_type = {
+            lifecycleRec.sequence_activity_type={};
+            _setActivityTypeValuesForOutput(lifecycleObj.activityType,lifecycleRec.sequence_activity_type);
+          /*  lifecycleRec.sequence_activity_type = {
                 _label_en: lifecycleObj.activityType.en,
                 _label_fr: lifecycleObj.activityType.fr,
                 __text: lifecycleObj.activityType.id
-            }
+            }*/
         }
         lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
@@ -329,6 +331,31 @@
         lifecycleRec.sequence_year = lifecycleObj.year;
         lifecycleRec.sequence_concat = lifecycleObj.sequenceConcat;
         return (lifecycleRec);
+    }
+
+    /**
+     * Truncates the label for activity type based on feedback of Jul 18, 2017
+     * Removes the full name
+     * @param srcActivityTypeRec
+     * @param destActivityTypeRec
+     * @private
+     */
+    function _setActivityTypeValuesForOutput(srcActivityTypeRec,destActivityTypeRec){
+            var stringIndex=srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
+        destActivityTypeRec.__text=srcActivityTypeRec.id;
+
+            if(stringIndex>-1){
+                destActivityTypeRec._label_en=srcActivityTypeRec.en.substring(0,stringIndex)
+            }else{
+                destActivityTypeRec._label_en=srcActivityTypeRec.en;
+            }
+            stringIndex=srcActivityTypeRec.fr.indexOf('(');
+        if(stringIndex>-1){
+            destActivityTypeRec._label_fr=srcActivityTypeRec.fr.substring(0,stringIndex-1)
+        }else{
+            destActivityTypeRec._label_fr=srcActivityTypeRec.fr;
+        }
+
     }
 
 

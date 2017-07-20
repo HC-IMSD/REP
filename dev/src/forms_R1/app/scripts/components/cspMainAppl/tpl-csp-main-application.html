@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[0]" msg="NDS_INSTRUCT" update-state="cspMainApplCtrl.toggleAlert(0)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[0]" msg="NDS_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(0)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-nds-en.html'">
@@ -52,7 +52,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[1]" msg="DRUGUSE_INSTRUCT" update-state="cspMainApplCtrl.toggleAlert(1)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[1]" msg="DRUGUSE_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(1)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-drugUse-en.html'">
@@ -130,7 +130,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[2]" msg="MI_INSTRUCT" update-state="cspMainApplCtrl.toggleAlert(2)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[2]" msg="MI_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(2)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-mi-en.html'">
@@ -170,7 +170,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[3]" msg="ATTEST_INSTRUCT" update-state="cspMainApplCtrl.toggleAlert(3)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[3]" msg="ATTEST_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(3)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-attest-en.html'">

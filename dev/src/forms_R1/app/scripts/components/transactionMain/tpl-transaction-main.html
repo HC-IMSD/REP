@@ -4,17 +4,16 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
                             id="startdate-picker-toggle" ng-click="main.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">{{'HELP_FILE_LOAD'|translate}}</span>
+                            class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
                 <h2 class="panel-title">{{'LOAD_TRANSACTION'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div>
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
-                         class="alert-info" close="main.closeAlert(0)">
+                    <cmp-alert  ui-state="main.alerts[0]" msg="HELP_FILE_LOAD" update-state="main.closeAlert(0)" type="alert-info">
                         <section aria-live="assertive">
                             <div ng-if="!main.isFrench()"
                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-file-en.html'">
@@ -23,7 +22,8 @@
                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-file-fr.html'">
                             </div>
                         </section>
-                    </div>
+                    </cmp-alert>
+
                 </div>
                 <div class="col-md-12">
                     <hpfb-file-select update-model-root="main.showContent(fileContent) "
@@ -48,16 +48,16 @@
                             ng-click="main.saveXML()"
                             ng-disabled="main.transactionEnrolForm.$invalid">{{'GENERATE_FINAL'|translate}}
                     </button>
-                    <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                    <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                             id="save-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[1]"
-                         class="alert-info" close="main.closeAlert(1)">
+
+                    <cmp-alert  ui-state="main.alerts[1]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(1)" type="alert-info">
                         <section aria-live="assertive">
                             <div ng-if="!main.isFrench()"
                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
@@ -66,7 +66,7 @@
                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
                             </div>
                         </section>
-                    </div>
+                    </cmp-alert>
                 </div>
             </div>
     </ng-form>

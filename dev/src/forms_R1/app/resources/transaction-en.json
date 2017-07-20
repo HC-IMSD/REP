@@ -90,5 +90,7 @@
   "FORM_IV":"Form IV",
   "FORM_V":"Form V",
   "CONSENT_LTR":"Consent Letter",
-  "DATA_PROTECT_CORRESP":"Correspondence - Data Protection"
+  "DATA_PROTECT_CORRESP":"Correspondence - Data Protection",
+  "CHOOSE_REQUEST":"Choose a requester",
+  "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions"
 }

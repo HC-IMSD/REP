@@ -6,7 +6,16 @@
     'use strict';
 
     angular
-        .module('transactionInfo', ['lifecycleList', 'filterLists', 'hpfbConstants', 'ui.bootstrap', 'dataLists', 'ui.select', 'addressModule', 'contactModule'])
+        .module('transactionInfo',
+            ['lifecycleList',
+                'filterLists',
+                'hpfbConstants',
+                'ui.bootstrap',
+                'dataLists',
+                'ui.select',
+                'addressModule',
+                'contactModule',
+                'alertModule'])
 })();
 
 (function () {
@@ -147,6 +156,7 @@
             vm.activityEditable = isActivityChangesValue();
         };
 
+        //deprecated
         vm.addInstruct = function (value) {
 
             if (angular.isUndefined(value)) return;
@@ -166,6 +176,9 @@
                 vm.alerts[value] = false;
             }
         };
+
+
+
         /***
          * used to determine the form language
          * @returns {boolean}
