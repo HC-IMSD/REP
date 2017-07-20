@@ -4,18 +4,16 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
                             id="enrol-instructions-toggle" ng-click="main.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">"{{'HELP_FILE_LOAD'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
                 <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div>
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[0]"
-                         class="alert-info" close="main.closeAlert(0)">
+                    <cmp-alert  ui-state="main.alerts[0]" msg="HELP_FILE_LOAD" update-state="main.closeAlert(0)" type="alert-info">
                         <section>
                             <div ng-if="!main.isFrench()"
                                  ng-include="'app/scripts/templates/activity/tpl-activity-file-en.html'">
@@ -24,7 +22,7 @@
                                  ng-include="'app/scripts/templates/activity/tpl-activity-file-fr.html'">
                             </div>
                         </section>
-                    </div>
+                    </cmp-alert>
                 </div>
                 <div class="col-md-12">
                     <hpfb-file-select update-model-root="main.showContent(fileContent) "
@@ -38,24 +36,25 @@
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{'HELP_ACTIVITY_MAIN'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_MAIN'|translate}}" class="btn-xs rep-help-button"
                                 id="main-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_ACTIVITY_MAIN'|translate}}"</span>
+                                class="fa fa-question-circle fa-2x"></span>
                         </button>
                     </div>
                     <h2 class="panel-title">{{'ACTIVE_ENROL' |translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <div>
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[1]"
-                             class="alert-info" close="main.closeAlert(1)">
-                            <div ng-if="!main.isFrench()"
-                                 ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-en.html'">
-                            </div>
-                            <div ng-if="main.isFrench()"
-                                 ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-fr.html'">
-                            </div>
-                        </div>
+                        <cmp-alert  ui-state="main.alerts[1]" msg="HELP_ACTIVITY_MAIN" update-state="main.closeAlert(1)" type="alert-info">
+                            <section>
+                                <div ng-if="!main.isFrench()"
+                                     ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-en.html'">
+                                </div>
+                                <div ng-if="main.isFrench()"
+                                     ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-fr.html'">
+                                </div>
+                            </section>
+                        </cmp-alert>
                     </div>
                     <cmp-application-info record="main.activityRoot" user-type="main.userType"
                                           is-incomplete="main.isIncomplete" set-type="main.setApplicationType(type)"
@@ -293,20 +292,16 @@
                 <section class="panel panel-primary mrgn-tp-lg">
                     <header class="panel-heading clearfix">
                         <div class="btn-group pull-right">
-                            <button title="{{'HELP_ACTIVITY_REP'|translate}}" class="btn-xs rep-help-button"
+                            <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}" class="btn-xs rep-help-button"
                                     id="rep-instructions-toggle" ng-click="main.addInstruct(2)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_ACTIVITY_REP'|translate}}"</span>
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}"</span>
                             </button>
-                            <!-- <button class="btn btn-default btn-xs" ng-click="main.addInstruct('3')">
-                                 {{'HELP_ACTIVITY_REP'|translate}}
-                             </button>-->
                         </div>
                         <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
                     </header>
                     <div class="panel-body">
                         <div>
-                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[2]"
-                                 class="alert-info" close="main.closeAlert(2)">
+                            <cmp-alert  ui-state="main.alerts[2]" msg="HELP_ACTIVITY_REP" update-state="main.closeAlert(2)" type="alert-info">
                                 <section>
                                     <div ng-if="!main.isFrench()"
                                          ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-en.html'">
@@ -315,7 +310,7 @@
                                          ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-fr.html'">
                                     </div>
                                 </section>
-                            </div>
+                            </cmp-alert>
 
                         </div>
                         <div class="container-fluid">
@@ -340,25 +335,24 @@
                     <button class="btn btn-primary  btn-lg active" ng-disabled="main.disableXML" id="btn_xmlSave"
                             ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
                     </button>
-                    <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                    <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                             id="save-instructions-toggle" ng-click="main.addInstruct(3)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[3]"
-                         class="alert-info" close="main.closeAlert(3)">
-                        <section aria-live="assertive">
-                            <div ng-if="!main.isFrench()"
-                                 ng-include="'app/scripts/templates/activity/tpl-activity-save-en.html'">
-                            </div>
-                            <div ng-if="main.isFrench()"
-                                 ng-include="'app/scripts/templates/activity/tpl-activity-save-fr.html'">
-                            </div>
+
+                    <cmp-alert  ui-state="main.alerts[3]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(3)" type="alert-info">
+                        <div ng-if="!main.isFrench()"
+                             ng-include="'app/scripts/templates/activity/tpl-activity-save-en.html'">
+                        </div>
+                        <div ng-if="main.isFrench()"
+                             ng-include="'app/scripts/templates/activity/tpl-activity-save-fr.html'">
+                        </div>
                         </section>
-                    </div>
+                    </cmp-alert>
                 </div>
             </div>
             <!-- <pre>overall: {{main.activityRoot | json : spacing}}</pre>-->

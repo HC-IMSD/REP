@@ -45,6 +45,7 @@
   "IS_ADMIN_SUB": "Is this regulatory activity an Administrative Submission?",
   "LICENCE_AGREE": "Is this Administrative Submission a license agreement?",
   "DIN_TRANSFER": "I confirm that this Administrative Submission is a DIN transfer of ownership",
-  "REGACTIVSEARCH":"Select or search for a Regulatory Activity Type"
+  "REGACTIVSEARCH":"Select or search for a Regulatory Activity Type",
+  "SAVE_INSTRUCT": "Activity File Save Instructions"
 
 }
