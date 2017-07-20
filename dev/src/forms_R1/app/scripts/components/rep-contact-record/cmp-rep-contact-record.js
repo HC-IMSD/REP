@@ -21,7 +21,6 @@
             bindings: {
                 contactRecord: '<',
                 onUpdate: '&',
-                updateValid: '&',
                 onDelete: '&',
                 isDetailValid: '&',
                 isAmend:'<'
@@ -71,7 +70,7 @@
             if (vm.contactRecForm.$pristine) return;
             var currRecord = vm.contactRecord;
             vm.contactModel = angular.copy(currRecord);
-            vm.setNotEditable();
+            vm.setEditableState();
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state: vm.contactRecForm.$valid});
@@ -79,7 +78,7 @@
         };
 
         /**
-         * @ngdoc method -Updates the parent on whether this record is valid or not
+         * @ngdoc method -Updates the parent on whether this record is valid or not deprecated?
          */
         vm.updateValid = function () {
             vm.isDetailValid({state: (vm.contactRecForm.$valid && !vm.contactRecForm.$dirty)});

@@ -28,12 +28,12 @@
                 onDelete: '&',
                 enableDeleteIndex: '&',
                 isEctd: '<',
-                activityTypes:'<'
+                activityTypes:'<' //list of activity types
             }
         });
-    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
+    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate','$scope'];
 
-    function lifecycleRecCtrl(TransactionLists, $translate) {
+    function lifecycleRecCtrl(TransactionLists, $translate,$scope) {
         var vm = this;
         vm.savePressed = false;
        // vm.activityList = TransactionLists.getActivityTypes();
@@ -80,7 +80,18 @@
             }
         };
 
+        /**
+         * If the form is dirty always set that it is not valid
+         */
+        $scope.$watch('lifecycleCtrl.lifecycleDetailsForm.$dirty', function() {
+            console.log("Details are dirty"+vm.lifecycleDetailsForm.$dirty);
+            if(vm.lifecycleDetailsForm.$dirty) {
+                vm.isDetailValid({state:false})
+            }
+        }, true);
 
+
+        //sets the start date calendar state
         vm.openStartDate = function () {
             vm.startDateOpen = true;
         };
@@ -90,7 +101,6 @@
         vm.openFiledDate = function () {
             vm.filedDateOpen = true;
         };
-
 
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
@@ -508,15 +518,16 @@
         vm.discardChanges = function () {
             if (vm.lifecycleDetailsForm.$pristine) return;
             _updateLocalModel(vm.lifecycleRecord);
+            vm.lifecycleDetailsForm.$setPristine();
             vm.isDetailValid({state: vm.lifecycleDetailsForm.$valid});
             vm.savePressed = false;
         };
 
         /**
-         * @ngdoc method -Updates the parent on whether this record is valid or not
+         * @ngdoc method -Updates the parent on whether this record is valid or not deprecated
          */
         vm.updateValid = function () {
-            //vm.isDetailValid({state: (vm.addressRecForm.$valid && !vm.addressRecForm.$dirty)});
+            vm.isDetailValid({state: (vm.lifecycleDetailsForm.$valid && !vm.lifecycleDetailsForm.$dirty)});
         };
 
 
