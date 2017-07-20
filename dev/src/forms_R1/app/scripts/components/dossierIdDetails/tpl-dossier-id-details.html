@@ -2,8 +2,8 @@
     <div class="form-group">
         <div class="col-xs-4">
             <label for="dossierId_{{::$id}}" class="required">
-                <span class="field-name">{{'DOSSIER_ID'|translate}}&nbsp;</span>
-                <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                <span class="field-name">{{::'DOSSIER_ID'|translate}}&nbsp;</span>
+                <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                 <div>
                     <div>
                         <div class="btn-group">
@@ -16,8 +16,8 @@
                                 </div>
                                 <span class="input-group-btn">
                                 <button class="btn btn-danger" ng-click="dosIdCtrl.delete()" name="dossierIdDelete" ng-disabled="!dosIdCtrl.isEditable">
-                                    <span aria-label="{{'DELETE_DIN'|translate }}"></span>
-                                    {{'DELETE'|translate}}
+                                    <span aria-label="{{::'DELETE_DIN'|translate }}"></span>
+                                    {{::'DELETE'|translate}}
                                 </button>
                                 </span>
                             </div>
@@ -26,7 +26,7 @@
                     <strong id="dossierIdValue-error" class="error"
                             ng-show="dosIdCtrl.showError(dosIdCtrl.dosIdForm.dossierId)">
                         <span class="label label-danger" ng-messages="dosIdCtrl.dosIdForm.dossierId.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                            <span ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
                               <span ng-message="minlength"><span translate="MSG_LENGTH_7NUM"></span></span>
                         </span>
                     </strong>

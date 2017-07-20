@@ -6,8 +6,8 @@
         <div class="form-group col-md-5"
              ng-class="{'has-error':impProdCtrl.importProdForm.productTypes.$invalid}">
             <label for="productTypes_{{::$id}}" class="required">
-                <span class="field-name">{{'PRODUCT_TYPES'|translate}}</span>
-                <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                <span class="field-name">{{::'PRODUCT_TYPES'|translate}}</span>
+                <strong class="required">{{::"REQUIRED" |translate}}</strong></label>
             <select id="productTypes_{{::$id}}" ng-model="impProdCtrl.model.selectedProducts"
                     class="form-control" name="productTypes" required ng-disabled="!impProdCtrl.isEditable"
                     ng-change="impProdCtrl.productTypeChanged()"
@@ -24,7 +24,7 @@
     </div>
     <div ng-if="impProdCtrl.someProducts">
         <div class="row">
-            <h4>{{'IDENTIFY_PRODUCTS'|translate}}</h4>
+            <h4>{{::'IDENTIFY_PRODUCTS'|translate}}</h4>
         </div>
         <div class="row">
             <div>
@@ -38,7 +38,7 @@
         </div>
         <div class="row">
             <button class="btn btn-primary" ng-click="impProdCtrl.addDossierId()" name="addDossierId" ng-disabled="!impProdCtrl.isEditable">
-                {{'ADD_DOSSIER_ID'|translate}}
+                {{::'ADD_DOSSIER_ID'|translate}}
             </button>
         </div>
     </div>
