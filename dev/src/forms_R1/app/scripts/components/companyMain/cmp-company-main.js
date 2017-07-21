@@ -204,6 +204,7 @@
             vm.disableDraftButton = isApprovedExternal;
             vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal; //used to disable the generate xml button
             //vm.showErrorSummary=true;
+            console.log($scope)
         };
 
         function disableJSONSave() {
