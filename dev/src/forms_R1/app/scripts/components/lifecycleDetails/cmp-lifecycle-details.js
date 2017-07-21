@@ -84,7 +84,6 @@
          * If the form is dirty always set that it is not valid
          */
         $scope.$watch('lifecycleCtrl.lifecycleDetailsForm.$dirty', function() {
-            console.log("Details are dirty"+vm.lifecycleDetailsForm.$dirty);
             if(vm.lifecycleDetailsForm.$dirty) {
                 vm.isDetailValid({state:false})
             }
@@ -569,9 +568,10 @@
          * @ngdoc method toggles error state to make errors visible
          * @returns {boolean}
          */
-        vm.showError = function (isInvalid, isTouched) {
+        vm.showError = function (ctrl) {
+            if(!ctrl) return false;
 
-            if ((isInvalid && isTouched) || (vm.savePressed && isInvalid )) {
+            if ((ctrl.$invalid &&ctrl.$touched) || (vm.savePressed && ctrl.$invalid )) {
                 return true
             }
             return (false);

@@ -335,6 +335,7 @@
                 vm.allActivities.SCREENING_ACCEPT_RESPONSE, //response to screening acceptance letter
                 vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
                 vm.allActivities.SDN_RESPONSE, //response to SDN
+                vm.allActivities.LABEL_PREAPPROVAL_2LANG, //second langage preapproval
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.CORR_PATENT_MED, //Correspondence - Patented Medicines
@@ -526,6 +527,7 @@
                 vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis
                 vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
+                vm.allActivities.PANDEMIC_APPL, //Pandemic application
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 vm.allActivities.POST_NOC_CHANGE, //Post NOC change
                 vm.allActivities.PRESUB_MEETING_PKG, // submission meeting package
