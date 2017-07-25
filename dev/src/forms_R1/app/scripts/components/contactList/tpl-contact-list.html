@@ -38,12 +38,12 @@
         <div class="btn-group-sm col-md-12 text-right">
             <button name="addContact" class="btn btn-primary" id="addContact_{{::$id}}"
                     ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAddContact()">
-                {{'ADD_REPRES'|translate}}
+                {{::'ADD_REPRES'|translate}}
             </button>
             <button class="btn btn-default"
                     data-ng-show="contactListCtrl.newContactFormShow"
                     ng-click="contactListCtrl.newAdrFormShow=false">
-                {{'CANCEL'|translate}}
+                {{::'CANCEL'|translate}}
             </button>
         </div>
     </div>

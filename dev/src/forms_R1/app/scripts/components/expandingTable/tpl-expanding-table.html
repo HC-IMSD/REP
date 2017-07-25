@@ -3,8 +3,8 @@
         <thead>
         <tr>
             <th aria-label="Expanded State" scope="col" style="color:transparent">e</th>
-            <th scope="col" ng-repeat="heading in expandTblCtrl.columnDefinitions">{{heading.label |translate}}</th>
-            <th scope="col" ng-if="!expandTblCtrl.disableErrorCol">{{'ERRORS'|translate}}</th>
+            <th scope="col" ng-repeat="heading in expandTblCtrl.columnDefinitions">{{::heading.label |translate}}</th>
+            <th scope="col" ng-if="!expandTblCtrl.disableErrorCol">{{::'ERRORS'|translate}}</th>
         </tr>
         </thead>
         <tbody>
@@ -18,8 +18,8 @@
                             <span ng-class="{'fa fa-caret-down fa-lg fa-fw':expandTblCtrl.getExpandedState($index) ,'fa fa-caret-right fa-lg fa-fw':!expandTblCtrl.getExpandedState($index)}"
                                   ng-class='{open:expandTblCtrl.getExpandedState($index)}'></span>
             </td>
-            <td ng-repeat="def in expandTblCtrl.columnDefinitions" width="{{def.width}}%">
-                <span ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
+            <td ng-repeat="def in expandTblCtrl.columnDefinitions" width="{{::def.width}}%">
+                <span ng-if="!def.isHtml"> {{::record[def.binding]|translate}}</span>
                 <span ng-if="def.isHtml" ng-bind-html="record[def.binding]"></span>
             </td>
             <td ng-if="!expandTblCtrl.disableErrorCol" width="5%">
@@ -27,8 +27,8 @@
             </td>
         </tr>
         <tr data-ng-show="!expandTblCtrl.dayDataCollapse[$index]" data-ng-repeat-end>
-            <td colspan="{{expandTblCtrl.numberCols}}">
-                <ng-form name="{{expandTblCtrl.formName}}_{{$index}}">
+            <td colspan="{{::expandTblCtrl.numberCols}}">
+                <ng-form name="{{::expandTblCtrl.formName}}_{{::$index}}">
                     <ng-form name="expandTblCtrl.transcludeForm[$index]">
                         <div ng-if="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid)">
                             <div ng-transclude>
