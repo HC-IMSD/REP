@@ -25,7 +25,7 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
-                showErrors: '&',
+                showErrors: '<',
                 countryList:'<',
                 fieldsetLabel:'@',
                 updateErrorSummary:'&'
@@ -68,7 +68,8 @@
 
         vm.showError = function (ctrl) {
             if(!ctrl) return false;
-            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
+            console.log("is show errors in Country"+vm.showErrors);
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors) )
         };
 
         vm.isUnknown=function(){

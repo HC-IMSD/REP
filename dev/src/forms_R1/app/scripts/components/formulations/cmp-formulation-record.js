@@ -60,7 +60,6 @@
         vm.noActiveValues="";
         vm.dosageFormList = DossierLists.getDosageFormList();
         vm.otherValue = DossierLists.getDosageOther();
-        vm.savePressed=false;
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
        // vm.formName="";

@@ -22,7 +22,7 @@
                 listItems: '<',
                 onUpdate: '&',
                 onDelete: '&',
-                showErrors: '&',
+                showErrors:'<',
                 fieldLabel: '@',
                 updateErrorSummary:'&'
             }
@@ -38,7 +38,8 @@
         vm.model = {};
         vm.isDetailValid = true;
         vm.resetToCollapsed = true;
-        vm.noCountries="";
+        vm.noCountries=""; //TODO deprecate
+        vm.showErrors
         vm.selectRecord = 0;
         vm.columnDef = [
             {
@@ -69,6 +70,9 @@
             }
             if (changes.listItems) {
                 vm.model.list = changes.listItems.currentValue;
+            }
+            if(changes.showErrors){
+                console.log("$$$$$$$$$$$$$$$$Country list error")
             }
         };
         function setUnknownCountryState(isUnknown) {
