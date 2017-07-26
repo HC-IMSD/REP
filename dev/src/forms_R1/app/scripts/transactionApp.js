@@ -9,17 +9,13 @@
             'services',
             'dataLists',
             'transactionInfo',
-            'addressModule',
-            'contactModule',
             'transactionService',
             'transactionLoadService',
             'filterLists',
-            'lcDetailsModule',
             'numberFormat',
             'ui.bootstrap',
             'translations',
-            'ngSanitize',
-            'alertModule'
+            'ngSanitize'
         ])
 
 })();

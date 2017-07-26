@@ -484,7 +484,7 @@
                 concatText = enDescription +" "+ vm.lifecycleModel.sequenceVersion + concatText;
             }
             if (vm.yearVisible) {
-                concatText = vm.lifecycleModel.year + ": " + vm.lifecycleModel.details;
+                concatText = vm.lifecycleModel.year + ", " + vm.lifecycleModel.details;
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;
