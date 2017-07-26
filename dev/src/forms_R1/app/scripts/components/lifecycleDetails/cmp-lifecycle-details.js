@@ -140,10 +140,10 @@
                 case ("B02-20160301-001"): //ANDS
                     vm.descriptionList = TransactionLists.getAndsType();
                     break;
-                case ("DINA"):
+                case ("B02-20160301-018"):
                     vm.descriptionList = TransactionLists.getDinaType();
                     break;
-              case ("DINB"):
+              case ("B02-20160301-019"):
                     vm.descriptionList = TransactionLists.getDinbType();
                     break;
                 case ("B02-20160301-031"): //EU NDS (Extraordinary Use New Drug Submission)
@@ -174,10 +174,10 @@
                 case ("B02-20160301-051"): //NDS (New Drug Submission)
                     vm.descriptionList = TransactionLists.getNdsType();
                     break;
-               case ("PDC"):
+               case ("B02-20160301-070"):
                     vm.descriptionList = TransactionLists.getPdcType();
                     break;
-             case ("PDCB"):
+             case ("B02-20160301-071"):
                     vm.descriptionList = TransactionLists.getPdcBType();
                     break;
                 case ("B02-20160301-067"): //PAND (Pandemic Application)
@@ -228,22 +228,22 @@
                 case ("B02-20160301-089"): //YBPR (Yearly Biologic Product Report)
                     vm.descriptionList = TransactionLists.getYbprType();
                     break;
-                case ("DSUR"): //DSUR (Development Safety Update Report)
+                case ("B02-20160301-028"): //DSUR (Development Safety Update Report)
                     vm.descriptionList = TransactionLists.getDSurType();
                     break;
-                case ("MPDIN"):
+                case ("B02-20160301-043"):
                     vm.descriptionList = TransactionLists.getMPDINType();
                     break;
-                case ("PDC"):
+                case ("B02-20160301-070"):
                     vm.descriptionList = TransactionLists.getPdcType();
                     break;
-                case ("PDCB"):
+                case ("B02-20160301-071"):
                     vm.descriptionList = TransactionLists.getPdcBType();
                     break;
-                case ("DIND"):
+                case ("B02-20160301-020"):
                     vm.descriptionList = TransactionLists.getDindType();
                     break;
-                case ("DINF"):
+                case ("B02-20160301-021"):
                     vm.descriptionList = TransactionLists.getDinfType();
                     break;
 
@@ -377,6 +377,7 @@
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.descriptionLabel = "LIST_DESCRIPT";
         }
 
         function setDetailsAsNone() {
@@ -399,6 +400,7 @@
             vm.descriptionVisible = true;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.descriptionLabel = "BRIEF_DESC";
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";

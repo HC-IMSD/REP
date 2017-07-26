@@ -202,7 +202,7 @@
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.lifeDetails.$invalid}"
                              ng-show="lifecycleCtrl.descriptionVisible">
                             <label for="details_{{$id}}" class="required full-width">
-                                <span class="field-name">{{::"BRIEF_DESC" |translate}}</span>
+                                <span class="field-name">{{lifecycleCtrl.descriptionLabel |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                 <strong id="lifeDescipt-error" class="error"
                                         ng-if="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm.lifeDetails)">
@@ -223,15 +223,14 @@
                     <div class="row">
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.version.$invalid}"
-                             ng-show="lifecycleCtrl.versionVisible">
-                            <label for="version_{{$id}}">
+                             ng-if="lifecycleCtrl.versionVisible">
+                            <label for="version_{{$id}}" class="required">
                                 <span class="field-name">{{::"VERSION_NO" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                 <input type="text" id="version_{{$id}}" name="version"
                                        ng-model="lifecycleCtrl.lifecycleModel.sequenceVersion"
                                        ng-change="lifecycleCtrl.setConcatDetails()"
-                                       ng-required="lifecycleCtrl.versionVisible"
-                                       class="form-control"/>
+                                       ng-required="lifecycleCtrl.versionVisible" class="form-control"/>
 
                                 <strong id="lifeVersion-error" class="error"
                                         ng-if="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm.version)">
