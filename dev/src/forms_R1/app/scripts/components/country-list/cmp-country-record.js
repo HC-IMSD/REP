@@ -6,7 +6,11 @@
     'use strict';
 
     angular
-        .module('countryRecordModule', ['ui.select','hpfbConstants'])
+        .module('countryRecordModule',
+            [   'ui.select',
+                'hpfbConstants',
+                'errorMessageModule'
+            ])
 })();
 
 (function () {
@@ -39,9 +43,12 @@
         vm.model = {"id": "", "country": "","unknownCountryDetails":"","display":""};
         vm.countries=[];
         vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.showDetailErrors=false;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function(){
-            //add init code here
+            vm.showDetailErrors=false;
+            _setIdNames();
         };
         /**
          * Updates the display value for the object for summary display
@@ -58,6 +65,9 @@
             if (changes.record && changes.record.currentValue) {
                 vm.model = changes.record.currentValue;
             }
+            if(changes.showErrors){
+                vm.showDetailErrors=changes.showErrors.currentValue;
+            }
 
         };
 
@@ -68,8 +78,7 @@
 
         vm.showError = function (ctrl) {
             if(!ctrl) return false;
-            console.log("is show errors in Country"+vm.showErrors);
-            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors) )
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
 
         vm.isUnknown=function(){
@@ -81,8 +90,19 @@
             }
             return false;
         };
+        //watches for changes in error state of the country form and updates the error summary
         $scope.$watch('countryRecCtrl.countryForm.$error', function () {
             vm.updateErrorSummary();
         }, true);
+
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.countryId="country_name" + scopeId;
+            vm.unknownCountryId="unknown_country_details" + scopeId;
+        }
+
+
+
     }
 })();

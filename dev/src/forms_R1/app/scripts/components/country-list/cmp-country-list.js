@@ -39,7 +39,7 @@
         vm.isDetailValid = true;
         vm.resetToCollapsed = true;
         vm.noCountries=""; //TODO deprecate
-        vm.showErrors
+        vm.showDetailErrors=false;
         vm.selectRecord = 0;
         vm.columnDef = [
             {
@@ -55,6 +55,7 @@
 
         vm.$onInit = function () {
             _setIdNames();
+            vm.showDetailErrors=false;
             if (angular.isUndefined(vm.model.list)) { //TODO should be comimg from parent
                 vm.model.list = [];
             }
@@ -72,7 +73,8 @@
                 vm.model.list = changes.listItems.currentValue;
             }
             if(changes.showErrors){
-                console.log("$$$$$$$$$$$$$$$$Country list error")
+                vm.showDetailErrors=changes.showErrors.currentValue;
+
             }
         };
         function setUnknownCountryState(isUnknown) {
@@ -129,7 +131,7 @@
         }
 
         vm.deleteRecord = function (_id) {
-            //console.log("Deleting item: "+_id);
+
 
             var idx = vm.model.list.indexOf(
                 $filter('filter')(vm.model.list, {id: _id}, true)[0]
@@ -141,15 +143,6 @@
         };
 
 
-        /***
-         * Shows a control error if touched and invalid or remote trigger
-         * @param isInvalid
-         * @param isTouched
-         * @returns {*}
-         */
-        vm.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()))
-        }
 
         function getListMaxID() {
 
