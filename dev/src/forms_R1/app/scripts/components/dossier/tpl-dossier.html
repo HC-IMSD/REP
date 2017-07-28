@@ -56,7 +56,7 @@
                                           is-incomplete="dos.isIncomplete"></cmp-application-info>
                 </div>
                 <div>
-                    <cmp-error-summary form-ref="dos.dossierForm"
+                    <cmp-error-summary form-ref="dos.dossierForm" select-tab="dos.selectTab(index)"
                                        form-preamble="DOSSIER" exclusion-list=dos.exclusions
                                        name-suffix="dos.dossierForm" set-heading-level="h2" form-id="dos.dossierFormId"
                                        make-focused="dos.focusSummary" alias-list="dos.alias" show-errors="dos.showSummary"
@@ -340,7 +340,7 @@
                     <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations"
                               record-changed="dos.recordsChanged()" service="dos.dossierService"
                               error-summary-update="dos.updateSummary" show-error-summary="dos.showSummary"
-                              update-error-summary="dos.updateErrorSummaryState()"
+                              update-error-summary="dos.updateErrorSummaryState()" set-selected-tab="dos.setVisibleTabIndex"
                               appendix4-list="dos.dossierModel.drugProduct.appendixFourList"></cmp-tabs>
                 </div>
             </div>

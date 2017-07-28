@@ -86,8 +86,9 @@
         vm.showSummary=false;
         vm.focusSummary=0;
         vm.exclusions = {
-            "formulCtrl.formulationsForm":"true",
-            "contactRec.contactRecForm":"true"
+            "formulCtrl.formulationsForm":"tab_0",
+            "contactRec.contactRecForm":"true",
+            "ap4Ctrl.appendixForm":"tab_1"
         };
         vm.transcludeList={};
         vm.alias = {
@@ -118,6 +119,7 @@
             vm.dossierService = new DossierService();
             vm.dossierModel = vm.dossierService.getDefaultObject();
             vm.showSummary=false;
+            vm.setVisibleTabIndex=-1;
         };
         /**
          * @ngdoc captures any change events from variable bindings
@@ -351,6 +353,7 @@
             var final_prefix = "HCREPDO";
             var filename = "";
             var separator="-";
+            vm.setVisibleTabIndex=-1;
             if (vm.userType === INTERNAL_TYPE) {
 
                 filename = final_prefix;
@@ -420,6 +423,12 @@
         vm.isFrench=function(){
             return(vm.lang===FRENCH);
         };
+
+        vm.selectTab=function(index){
+            var temp={id:index};
+            vm.setVisibleTabIndex=temp;
+        }
+
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;

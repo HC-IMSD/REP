@@ -22,7 +22,8 @@
             service: '<',
             errorSummaryUpdate:'<',
             showErrorSummary:'<',
-            updateErrorSummary:'&'
+            updateErrorSummary:'&',
+            setSelectedTab:'<'
         }
     });
 
@@ -55,21 +56,33 @@
         };
         vm.$onChanges=function(changes){
             if(changes.errorSummaryUpdate){
-                console.log("Changes in tab")
                 vm.updateSummary=changes.errorSummaryUpdate.currentValue;
 
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
             }
+            if(changes.setSelectedTab){
+
+                if(changes.setSelectedTab.currentValue) {
+                 var index=changes.setSelectedTab.currentValue.id;
+                    if(index>-1) {
+                    vm.selectTab(index);
+                    }
+                }
+            }
 
         }
+        /***
+         * Selects the visible tab based on a zero based index
+         * @param idx
+         */
         vm.selectTab = function (idx) {
 
-            /*  angular.forEach(vm.tabs, function (tab) {
-                    tab.selected = false;
-             tab.errors=tab.form.$invalid;
-             });*/
+            if(idx>vm.tabs.length){
+                console.warn("Invalid tab index "+idx)
+                return;
+            }
 
             for (var i = 0; i < vm.tabs.length; i++) {
                 vm.tabs[i].selected = false;
@@ -77,7 +90,6 @@
                     vm.tabs[i].errors = vm.tabs[i].form.$invalid;
                 }
             }
-
                 vm.tabs[idx].selected = true;
             //vm.tabs[idx].errors= vm.tabs[idx].form.$invalid
         };

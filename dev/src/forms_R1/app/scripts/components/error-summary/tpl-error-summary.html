@@ -36,11 +36,15 @@
             <div ng-repeat="errorRec in errSummaryCtrl.errorArray">
                 <li ng-if="!errorRec.isSummary"><a  href="#{{errorRec.name}}" target="_self">{{errorRec.translateKey|translate}}
                     &nbsp;&#8208;&nbsp;{{errorRec.type |translate}}</a></li>
-                <li ng-if="errorRec.isSummary&& !errorRec.toExpand"><a href="#errors-summary-{{errorRec.name}}" ng-click="errSummaryCtrl.scrollTo(errorRec)">{{'THERE_ARE_ERRORS'|translate}}&nbsp;{{errorRec.translateKey|translate}}
+                <li ng-if="errSummaryCtrl.isSummaryLink(errorRec)"><a href="#errors-summary-{{errorRec.name}}" ng-click="errSummaryCtrl.scrollTo(errorRec)">{{'THERE_ARE_ERRORS'|translate}}&nbsp;{{errorRec.translateKey|translate}}
                 </a></li>
-                <li ng-if="errorRec.toExpand"><a  href="#errors-summary-{{errorRec.name}}" ng-click="errSummaryCtrl.scrollTo(errorRec)">{{'THERE_ARE_ERRORS'|translate}}&nbsp;{{errorRec.translateKey|translate}}&nbsp;{{errorRec.exIndex+1}}
+                <li ng-if="errSummaryCtrl.isTabLink(errorRec)"><a href="#errors-summary-{{errorRec.name}}" ng-click="errSummaryCtrl.selectVisibleTab(errorRec)">{{'THERE_ARE_ERRORS'|translate}}&nbsp;{{errorRec.translateKey|translate}}
                 </a></li>
+                <li ng-if="errSummaryCtrl.isExpanderLink(errorRec)"><a  href="#errors-summary-{{errorRec.name}}" ng-click="errSummaryCtrl.scrollTo(errorRec)">{{'THERE_ARE_ERRORS'|translate}}&nbsp;{{errorRec.translateKey|translate}}&nbsp;{{errorRec.exIndex+1}}
+                </a></li>
+              <!--  <pre> {{errorRec|json}}</pre>-->
             </div>
         </ul>
     </section>
+
 </div>
