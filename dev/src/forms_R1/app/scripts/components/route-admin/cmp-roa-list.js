@@ -18,7 +18,8 @@
             templateUrl: 'app/scripts/components/route-admin/tpl-roa-list.html',
             bindings: {
                 records: '<',
-                showErrors: '&'
+                showErrors: '<',
+                updateErrorSummary:'&'
             },
             controller: roaListCtrl,
             controllerAs: 'roaCtrl'
@@ -32,7 +33,8 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
-        vm.noROAValues="";
+        vm.noROAValues=""; //used to track if no ROA recorad have been seleected
+        vm.showDetailErrors=false;
         vm.model={};
         vm.model.roaList=[];
         vm.columnDef = [
@@ -50,6 +52,7 @@
 
         vm.$onInit = function () {
             _setIdNames();
+            vm.showDetailErrors=false;
         };
 
 
@@ -58,6 +61,11 @@
             if (changes.records&&changes.records.currentValue) {
                 vm.model.roaList=changes.records.currentValue;
                 vm.noROA();
+            }
+
+            if(changes.showErrors){
+
+                vm.showDetailErrors=changes.showErrors.currentValue;
             }
         };
 
@@ -120,15 +128,16 @@
 
         vm.setRecord=function(value){
             resetMe();
-            //vm.selectRecord=-1;
             vm.selectRecord=value;
 
         }
         function resetMe(){
             vm.resetToCollapsed = !vm.resetToCollapsed;
-
         }
 
+      /*  $scope.$watch('roaCtrl.roaListForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);*/
 
     }
 })();

@@ -6,7 +6,12 @@
     'use strict';
 
     angular
-        .module('roaRecord', ['ui.select'])
+        .module('roaRecord',
+            [
+                'ui.select',
+                'hpfbConstants',
+                'errorMessageModule'
+            ])
 
 })();
 
@@ -26,28 +31,37 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
-                showErrors: '&'
+                showErrors: '<'
             }
         });
 
-    roaRecordController.$inject=['DossierLists','$translate'];
+    roaRecordController.$inject=['DossierLists','$translate','$scope','ENGLISH'];
 
-    function roaRecordController(DossierLists, $translate){
+    function roaRecordController(DossierLists, $translate,$scope, ENGLISH){
         var vm = this;
         vm.roaList = DossierLists.getRoa();
         vm.model = {};
         vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.showDetailErrors=false;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function(){
+            vm.lang = $translate.proposedLanguage() || $translate.use();
             if(!vm.lang){
-            vm.lang='en'; //TODO magic numbers
+            vm.lang=ENGLISH;
             }
+            _setIdNames();
+            vm.showDetailErrors=false;
         };
 
         vm.$onChanges = function (changes) {
 
             if (changes.record) {
                 vm.model=changes.record.currentValue;
+            }
+            if(changes.showErrors){
+
+                vm.showDetailErrors=changes.showErrors.currentValue;
             }
         };
 
@@ -65,8 +79,9 @@
             vm.onDelete({id: vm.model.id})
         };
 
-        vm.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()) )
+        vm.showError = function (ctrl) {
+            if(!ctrl) return false;
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
         vm.isRoaOther = function () {
            if(vm.model.roa.id==DossierLists.getOtherValue()){
@@ -76,6 +91,13 @@
                return false;
            }
         };
+
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roaId="roa_lbl" + scopeId;
+            vm.unknownRoaId="other_roa_details" + scopeId;
+        }
 
     }
 })();

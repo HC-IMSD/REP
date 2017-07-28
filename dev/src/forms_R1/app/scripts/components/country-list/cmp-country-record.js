@@ -31,8 +31,7 @@
                 onDelete: '&',
                 showErrors: '<',
                 countryList:'<',
-                fieldsetLabel:'@',
-                updateErrorSummary:'&'
+                fieldsetLabel:'@'
             }
         });
 
@@ -90,19 +89,11 @@
             }
             return false;
         };
-        //watches for changes in error state of the country form and updates the error summary
-        $scope.$watch('countryRecCtrl.countryForm.$error', function () {
-            vm.updateErrorSummary();
-        }, true);
-
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.countryId="country_name" + scopeId;
             vm.unknownCountryId="unknown_country_details" + scopeId;
         }
-
-
-
     }
 })();

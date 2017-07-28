@@ -73,8 +73,8 @@
                 vm.model.list = changes.listItems.currentValue;
             }
             if(changes.showErrors){
-                vm.showDetailErrors=changes.showErrors.currentValue;
 
+                vm.showDetailErrors=changes.showErrors.currentValue;
             }
         };
         function setUnknownCountryState(isUnknown) {
@@ -179,9 +179,9 @@
             return(vm.countryListForm.$invalid);
         };
 
-        $scope.$watch('countryListCtrl.countryListForm.$error', function () {
-            vm.updateErrorSummary();
-        }, true);
 
+        /*  $scope.$watch('countryListCtrl.countryListForm.$error', function () {
+                    vm.updateErrorSummary();
+                }, true);*/
     }
 })();

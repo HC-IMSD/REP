@@ -6,7 +6,7 @@
                          column-def="roaCtrl.columnDef" select-record="roaCtrl.selectRecord"
                          disable-selection="roaCtrl.disableAddButton()">
 
-        <cmp-roa-record record="$parent.record" show-errors="thera.showErrors()"
+        <cmp-roa-record record="$parent.record" show-errors="roaCtrl.showDetailErrors"
                         on-delete="roaCtrl.deleteRecord(id)"></cmp-roa-record>
 
     </cmp-expanding-table>
