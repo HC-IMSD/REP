@@ -6,67 +6,81 @@
     'use strict';
 
     angular
-        .module('appendixFourModule', ['expandingTable','appendix4RecordModule'])
+        .module('appendixFourModule',
+            [
+                'expandingTable',
+                'errorSummaryModule',
+                'appendix4RecordModule'
+            ])
 })();
 
 (function () {
     'use strict';
     angular
         .module('appendixFourModule')
-        .component('cmpAppendixFour',{
+        .component('cmpAppendixFour', {
             templateUrl: 'app/scripts/components/appendix-four/tpl-appendix-four.html',
             controller: appendixFourCtrl,
             controllerAs: 'ap4Ctrl',
             bindings: {
-
-                ingredients : '<',
+                ingredients: '<',
                 recordChanged: '&',
-                service: '<'
+                service: '<',
+              /*  errorSummaryUpdate:'<',*/
+                showErrorSummary:'<',
+                updateErrorSummary:'&'
             }
         });
 
-    function appendixFourCtrl(){
-
-        var self=this;
-        self.selectRecord = -1; //the record to select, initially select non
-        self.resetToCollapsed = true;
-        self.colNames = [
+    function appendixFourCtrl() {
+        var vm = this;
+        vm.selectRecord = -1; //the record to select, initially select non
+        vm.resetToCollapsed = true;
+        vm.colNames = [
             {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
         ];
-        self.ingredientList=[];
+        vm.ingredientList = [];
+        vm.updateSummary = 0; //increment to send message to error summaries
+        vm.showSummary = false;
+        vm.focusSummary = 0;
+        vm.exclusions = {};
+        vm.transcludeList = {};
+        vm.alias = {};
 
-        self.$onInit = function(){
-            self.newFormShown = false;
-            self.isDetailValid = true; //TODO needs to be managed in ADD and delete
 
-            if(!self.ingredientList){
-                self.ingredientList = [];
-               // self.ingredientList = self.ingredients;
+        vm.$onInit = function () {
+            vm.newFormShown = false;
+            vm.isDetailValid = true; //TODO needs to be managed in ADD and delete
+
+            if (!vm.ingredientList) {
+                vm.ingredientList = [];
+                // vm.ingredientList = vm.ingredients;
             }
         };
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
 
             if (changes.ingredients) {
-                self.ingredientList = changes.ingredients.currentValue;
+                vm.ingredientList = changes.ingredients.currentValue;
             }
         };
 
 
-        self.addNew = function () {
+        vm.addNew = function () {
             var newRecord = {
-                "id":(getListMaxID() + 1),
+                "id": (getListMaxID() + 1),
                 "ingredientName": ""
             };
-            self.ingredientList.push(newRecord);
-            self.resetToCollapsed= !self.resetToCollapsed;;
-            self.selectRecord=( self.ingredientList.length-1);
+            vm.ingredientList.push(newRecord);
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            ;
+            vm.selectRecord = ( vm.ingredientList.length - 1);
 
         };
 
         function getListMaxID() {
             var out = 0;
-            var list = self.ingredientList;
+            var list = vm.ingredientList;
             if (list) {
                 for (var i = 0; i < list.length; i++) {
                     if (list[i].id > out) {
@@ -77,16 +91,24 @@
             return out;
         }
 
-        self.update = function (idx, ing) {
-            //self.ingredientList[idx] = angular.copy(ing);
+        vm.update = function (idx, ing) {
+            //vm.ingredientList[idx] = angular.copy(ing);
         };
 
-        self.delete = function (idx) {
+        vm.delete = function (idx) {
             //console.debug('frmList delete: ' + idx);
-            if (self.ingredientList.splice(idx, 1))
-                self.resetToCollapsed = true;
+            if (vm.ingredientList.splice(idx, 1))
+                vm.resetToCollapsed = true;
 
         }
+
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+        };
+
+        $scope.$watch('ap4Ctrl.appendixForm.$error', function () {
+            vm.updateErrorSummary();
+        }, true);
 
     }
 })();

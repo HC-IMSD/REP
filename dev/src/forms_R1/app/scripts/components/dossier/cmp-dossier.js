@@ -27,7 +27,6 @@
         'ngSanitize',
         'errorSummaryModule',
         'errorMessageModule'
-
     ];
 
     angular
@@ -118,7 +117,7 @@
             _setIdNames();
             vm.dossierService = new DossierService();
             vm.dossierModel = vm.dossierService.getDefaultObject();
-            vm.showSummary=false;
+
             vm.setVisibleTabIndex=-1;
         };
         /**
@@ -307,7 +306,6 @@
         vm.saveXML = function () {
 
             if(vm.dossierForm.$invalid) {
-                console.log("sending message for dossier root update");
                 vm.showSummary=true;
                 vm.focusSummary++;
                // vm.showErrorSummary = vm.showErrorSummary + 1;

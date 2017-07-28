@@ -22,8 +22,8 @@
         <ng-form name="tabsCtrl.tabs[1].form">
             <div id="appendix4-panel" role="tabpanel" class="out">
                 <div  ng-show="tabsCtrl.tabs[1].selected">
-                    <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service"
-                                       record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
+                    <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service" update-error-summary="tabsCtrl.updateErrorSummary()"
+                                       error-summary-update="tabsCtrl.updateSummary" record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
                 </div>
             </div>
         </ng-form>

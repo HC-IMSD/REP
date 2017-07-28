@@ -1,5 +1,11 @@
-<ng-form name="ap4Ctrl.appendixForm">
+<ng-form name="ap4Ctrl.appendixForm" name="ap4Ctrl.appendixRootId">
     <div class="container-fluid">
+        <cmp-error-summary form-ref="ap4Ctrl.appendixForm"
+                           form-preamble="DOSSIER" exclusion-list=ap4Ctrl.exclusions
+                           name-suffix="ap4Ctrl.appendixForm" set-heading-level="h2" form-id="dos.dossierFormId"
+                           make-focused="ap4Ctrl.focusSummary" alias-list="dos.alias" show-errors="ap4Ctrl.showSummary"
+                           update-errors="ap4Ctrl.updateSummary"></cmp-error-summary>
+
         <cmp-expanding-table title="{{'INGRED_LIST'|translate}}" reset-to-collapsed="ap4Ctrl.resetToCollapsed"
                              list-items="ap4Ctrl.ingredientList"
                              column-def="ap4Ctrl.colNames" select-record="ap4Ctrl.selectRecord"
