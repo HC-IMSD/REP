@@ -40,6 +40,7 @@
                 showErrors: '&',
                 getTransaction: '&',
                 getRepContact: '&',
+                getFee:'&',
                 resetEctd: '&',
                 deprecateSequence: '&',
                 language:'<'
@@ -81,6 +82,10 @@
 
         };
 
+        vm.isFeesIndicated=function() {
+            return vm.transactionModel.isFees === YES;
+        }
+
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
         };
@@ -110,6 +115,16 @@
             } else {
                 vm.isEctd = false;
             }
+        };
+        vm.updateFeeState=function(){
+          if(vm.transactionModel.isFees===YES){
+              vm.transactionModel.feeDetails=vm.getFee();
+
+          }else{
+              //clear out all the fee details
+              vm.transactionModel.feeDetails=null;
+          }
+
         };
         function isEctdValue() {
             return vm.transactionModel.isEctd === YES;

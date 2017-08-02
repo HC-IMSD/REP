@@ -93,5 +93,8 @@
   "DATA_PROTECT_CORRESP":"Correspondence - Data Protection",
   "CHOOSE_REQUEST":"Choose a requester",
   "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
-  "LIST_DESCRIPT":"List Description"
+  "LIST_DESCRIPT":"List Description",
+  "DEFER_FEES":" A deferral of payment is requested with this transaction.",
+  "DEFER_STATEMENT":"The statement supporting the deferral request is included.",
+  "FEE_REMISSION":"Fee Remission is requested with this transaction"
 }

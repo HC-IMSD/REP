@@ -1,8 +1,10 @@
 (function () {
     'use strict';
     angular
-        .module('TransactionFeesModule', [
-            'services'
+        .module('transactionFeesModule', [
+            'services',
+            'hpfbConstants',
+            'rw.moneymask'
         ]);
 
 })();
@@ -11,7 +13,7 @@
     'use strict';
 
     angular
-        .module('TransactionFeesModule')
+        .module('transactionFeesModule')
         .component('cmpTransactionFees', {
             templateUrl: 'app/scripts/components/transactionFees/tpl-transaction-fees.html',
             controller: transactionFeesController,
@@ -22,13 +24,13 @@
             }
         });
 
-    transactionFeesController.$inject = ['$scope','TransactionLists'];
-    function transactionFeesController($scope,TransactionLists) {
+    transactionFeesController.$inject = ['$scope','TransactionLists','YES','NO'];
+    function transactionFeesController($scope,TransactionLists,YES,NO) {
 
         var vm = this;
-       vm.model=null;
+       vm.model={};
        vm.submissionType={};
-
+        vm.yesNoList = [YES, NO];
         /**
          * Called after onChanges evnet, initializes
          */
@@ -38,11 +40,14 @@
 
 
 
-
         /**
          * Called on binding changes
          */
         vm.$onChanges = function (changes) {
+
+            if(changes.feeRecord){
+                vm.model=changes.feeRecord.currentValue;
+            }
 
         };
 
@@ -61,12 +66,15 @@
             vm.submClassId = "submClass" + scopeId;
             vm.descriptId="descript"+scopeId;
             vm.feeId="feeAmount"+scopeId;
-          /*  vm.deferralId="deferral"+scopeId;
+          vm.deferralId="deferral"+scopeId;
+          vm.remitId="applyRemit"+scopeId;
+          vm.revenueId="grossRevenue"+scopeId;
+            vm.deferralStateId="deferralState"+scopeId; //statement supporting deferral
             vm.certId="cert"+scopeId;
             vm.supportInfoId="supportInfoId"+scopeId;
             vm.versionId="version"+scopeId;
             vm.otherId="other"+scopeId;
-            vm.PaymentMethod="paymentMethod"+scopeId;*/
+            vm.PaymentMethod="paymentMethod"+scopeId
 
         }
 

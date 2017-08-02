@@ -36,7 +36,8 @@
                                   deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
                                   reset-ectd="main.transactionService.resetEctdSection()" language="main.lang"
                                   get-transaction="main.transactionService.getNewTransaction(main.transaction.isEctd==='Y')"
-                                  get-rep-contact="main.transactionService.getNewRepContact()"></cmp-transaction-info>
+                                  get-rep-contact="main.transactionService.getNewRepContact()"
+                                  get-fee="main.transactionService.createFeeDetails()"></cmp-transaction-info>
             <div class="row">
                 <div class="form-group col-md-3">
                     <button class="btn btn-default btn-lg active" formnovalidate ng-click="main.saveJson()">
@@ -70,4 +71,5 @@
                 </div>
             </div>
     </ng-form>
+    <pre>{{main.transaction|json}}</pre>
 </div>

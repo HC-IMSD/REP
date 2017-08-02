@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('transactionService', ['dataLists', 'services'])
+        .module('transactionService', ['dataLists', 'services', 'hpfbConstants'])
 })();
 
 
@@ -16,15 +16,16 @@
         .module('transactionService')
         .factory('TransactionService', TransactionService);
 
-    TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists'];
+    TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists', 'YES', 'NO'];
 
     //version 1.1 bug fix?
     //version 1.2 added Submission package/rq to MPNC, MPDNS
 
-    function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists) {
+    function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO) {
         function TransactionService() {
             //construction logic
-            var defaultTransactionData = {
+            var defaultTransactionData = _getEmptyTransactionModel();
+            /*{
                 dataChecksum: "",
                 // enrolmentVersion: "0.0",
                 dateSaved: "",
@@ -41,6 +42,7 @@
                 solicitedRequester: "",
                 projectManager1: "",
                 projectManager2: "",
+                isFees:"",
                 isActivityChanges: "Y",
                 // sameCompany: "N",
                 companyName: "",
@@ -49,7 +51,7 @@
                 sameContact: false,
                 activityContact: _createContactModel()
                 // regulatorySubmissionContact: [],
-            };
+            };*/
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
@@ -156,7 +158,7 @@
                 model.isSolicited = jsonObj.is_solicited;
                 model.solicitedRequester = "";
                 if (jsonObj.solicited_requester) {
-                    getContactLists.getInternalContacts().then(function(data) {
+                    getContactLists.getInternalContacts().then(function (data) {
                         model.solicitedRequester = $filter('filter')(data, {id: jsonObj.solicited_requester.__text})[0];
                     })
                 }
@@ -184,7 +186,7 @@
                 return model;
             },
             _setSequenceNumber: function (value) {
-                if (!value)return;
+                if (!value) return;
                 var converted = parseInt(value);
                 if (converted > this.currSequence) {
                     this.currSequence = converted;
@@ -214,7 +216,7 @@
                     jsonObj = [jsonObj]
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _transformLifecycleRecFromFileObj(jsonObj[i],$filter,TransactionLists);
+                    var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
 
                     result.push(record);
                 }
@@ -239,7 +241,6 @@
                 }
                 return result
             },
-
             resetEctdSection: function () {
 
                 if (this._default.hasOwnProperty('ectd')) {
@@ -253,6 +254,9 @@
                     }
                     //this._default.ectd = _getEmptyEctdSection();
                 }
+            },
+            createFeeDetails: function () {
+                return _createFeeDetails(NO);
             }
         };
         // Return a reference to the object
@@ -286,7 +290,7 @@
      * @returns {jsonObj}
      * @private
      */
-    function _transformLifecycleRecFromFileObj(lifecycleObj, $filter,TransactionLists) {
+    function _transformLifecycleRecFromFileObj(lifecycleObj, $filter, TransactionLists) {
         var lifecycleRec = _createLifeCycleModel();
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
@@ -295,7 +299,7 @@
         lifecycleRec.activityType = "";
         if (lifecycleObj.sequence_activity_type) {
             lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.sequence_activity_type.__text})[0];
-            lifecycleRec.activityTypeDisplay=lifecycleRec.activityType.id;
+            lifecycleRec.activityTypeDisplay = lifecycleRec.activityType.id;
         }
         lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
@@ -315,13 +319,13 @@
         lifecycleRec.control_number = lifecycleObj.controlNumber;
         lifecycleRec.sequence_activity_type = "";
         if (lifecycleObj.activityType) {
-            lifecycleRec.sequence_activity_type={};
-            _setActivityTypeValuesForOutput(lifecycleObj.activityType,lifecycleRec.sequence_activity_type);
-          /*  lifecycleRec.sequence_activity_type = {
-                _label_en: lifecycleObj.activityType.en,
-                _label_fr: lifecycleObj.activityType.fr,
-                __text: lifecycleObj.activityType.id
-            }*/
+            lifecycleRec.sequence_activity_type = {};
+            _setActivityTypeValuesForOutput(lifecycleObj.activityType, lifecycleRec.sequence_activity_type);
+            /*  lifecycleRec.sequence_activity_type = {
+                  _label_en: lifecycleObj.activityType.en,
+                  _label_fr: lifecycleObj.activityType.fr,
+                  __text: lifecycleObj.activityType.id
+              }*/
         }
         lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
@@ -340,20 +344,20 @@
      * @param destActivityTypeRec
      * @private
      */
-    function _setActivityTypeValuesForOutput(srcActivityTypeRec,destActivityTypeRec){
-            var stringIndex=srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
-        destActivityTypeRec.__text=srcActivityTypeRec.id;
+    function _setActivityTypeValuesForOutput(srcActivityTypeRec, destActivityTypeRec) {
+        var stringIndex = srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
+        destActivityTypeRec.__text = srcActivityTypeRec.id;
 
-            if(stringIndex>-1){
-                destActivityTypeRec._label_en=srcActivityTypeRec.en.substring(0,stringIndex)
-            }else{
-                destActivityTypeRec._label_en=srcActivityTypeRec.en;
-            }
-            stringIndex=srcActivityTypeRec.fr.indexOf('(');
-        if(stringIndex>-1){
-            destActivityTypeRec._label_fr=srcActivityTypeRec.fr.substring(0,stringIndex-1)
-        }else{
-            destActivityTypeRec._label_fr=srcActivityTypeRec.fr;
+        if (stringIndex > -1) {
+            destActivityTypeRec._label_en = srcActivityTypeRec.en.substring(0, stringIndex)
+        } else {
+            destActivityTypeRec._label_en = srcActivityTypeRec.en;
+        }
+        stringIndex = srcActivityTypeRec.fr.indexOf('(');
+        if (stringIndex > -1) {
+            destActivityTypeRec._label_fr = srcActivityTypeRec.fr.substring(0, stringIndex - 1)
+        } else {
+            destActivityTypeRec._label_fr = srcActivityTypeRec.fr;
         }
 
     }
@@ -430,11 +434,11 @@
         address.country = "";
         if (addressObj.country) {
             address.country =
-            {
-                _label_en: addressObj.country.en,
-                _label_fr: addressObj.country.fr,
-                __text: addressObj.country.id
-            }
+                {
+                    _label_en: addressObj.country.en,
+                    _label_fr: addressObj.country.fr,
+                    __text: addressObj.country.id
+                }
         }
         address.postal_code = addressObj.postalCode;
         return (address);
@@ -477,15 +481,15 @@
     //TODO make a standard service
     function _createAddressModel() {
         return (
-        {
-            street: "",
-            city: "",
-            stateList: "",
-            stateText: "",
-            country: {"id": "", "en": "", "fr": ""},
-            countryDisplay: "",
-            "postalCode": ""
-        }
+            {
+                street: "",
+                city: "",
+                stateList: "",
+                stateText: "",
+                country: {"id": "", "en": "", "fr": ""},
+                countryDisplay: "",
+                "postalCode": ""
+            }
         )
     }
 
@@ -511,10 +515,12 @@
             + pad(d.getMonth() + 1) + '-'
             + pad(d.getDate());
         return (isoDate);
+
         function pad(n) {
             return n < 10 ? '0' + n : n
         }
     }
+
     //todo deprecated
     function _createRepContact() {
 
@@ -539,13 +545,58 @@
             solicitedRequester: "",
             projectManager1: "",
             projectManager2: "",
-            isActivityChanges: "Y",
+            isFees: "",
+            feesDetails: null,
+            isActivityChanges: "Y", //deprecated
             companyName: "",
             activityAddress: _createAddressModel(),
             sameContact: false,
             activityContact: _createContactModel()
         };
         return defaultTransactionData;
+    }
+
+    /**
+     * Creates and empty Fee Details object
+     * @returns {{feeType: string, deferralStatemnet: string}}
+     * @private
+     */
+    function _createFeeDetails(NO) {
+        var feeObj = {
+            submissionClass: {
+                id: "",
+                en: "",
+                fr: "",
+                description_en: "",
+                description_fr: "",
+                fee: ""
+            },
+            deferralRequest: NO, //defer payment for two years
+            feeRemission: "", //applying for fee remission
+            grossRevenue: "",
+            requiredDocs: {
+                deferralStat: NO, //statement supporting the deferral request
+                revStat: NO,
+                appFee: NO,
+                salesHistory: NO, //sales history
+                avgSalePrice: NO, //average sales price and demand
+                estMarketShare: NO, //estimated market share
+                comparison: NO, ///compariosn to similar products
+                marketPlan: NO, //marketing palne for the drug product
+                other: NO    //other
+            },
+            paymentMethod: {
+                creditCard: NO,
+                cheque: NO,
+                moneyOrder: NO,
+                bankDraft: NO,
+                existingCredit: NO,
+                bankWire: NO,
+                billPayment: NO
+            }
+
+        }
+        return feeObj;
     }
 
 })();

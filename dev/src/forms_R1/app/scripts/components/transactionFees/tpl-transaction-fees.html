@@ -1,40 +1,100 @@
-<ng-form name="transFeeCtrl.transFeeForm">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6 form-group">
-                <ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.submClassId].$invalid}">
-                <label for="{{::transFeeCtrl.submClassId}}" class="required">
-                    <span class="field-name">{{::'FEE_TYPE' |translate}}</span>
-                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                    <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
-                            name="{{::transFeeCtrl.submClassId}}" required ng-model="transFeeCtrl.model.feeType"
-                            ng-options="val.en  for val in  transFeeCtrl.submissionType">
-                    </select>
-                   <!-- <strong id="dossierType-error" class="error"
-                            ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
-                                    <span class="label label-danger"
-                                          ng-messages="dos.dossierForm.dossierType.$error">
-                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                    </span>
-                    </strong>-->
-                </label>
+<div>
+    <ng-form name="transFeeCtrl.transFeeForm">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6 form-group"
+                     ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.submClassId].$invalid}">
+                    <label for="{{::transFeeCtrl.submClassId}}" class="required">
+                        <span class="field-name">{{::'FEE_TYPE' |translate}}</span>
+                        <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                        <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
+                                name="{{::transFeeCtrl.submClassId}}" required ng-model="transFeeCtrl.model.submissionClass"
+                                ng-options="val.en  for val in  transFeeCtrl.submissionType">
+                        </select>
+                        <!-- <strong id="dossierType-error" class="error"
+                                 ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
+                                         <span class="label label-danger"
+                                               ng-messages="dos.dossierForm.dossierType.$error">
+                                             <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                         </span>
+                         </strong>-->
+                    </label>
+                </div>
+                <div class="col-xs-2 form-group">
+                    <label for="{{::transFeeCtrl.feeId}}">
+                        <span class="field-name">{{::'FEE_AMOUNT' |translate}}</span>
+                    </label>
+                    <input type="text" class="form-control full-width" id="{{::transFeeCtrl.feeId}}" readonly
+                           name="{{::transFeeCtrl.feeId}}" value="{{transFeeCtrl.model.submissionClass.fee  | currency}}"/>
+                </div>
             </div>
-            <div class="col-xs-6 form-group">
-                <label for="{{::transFeeCtrl.descriptId}}" class="required">
-                    <span class="field-name">{{::'FEE_DESCRIPTION' |translate}}</span>
-
-
-                    <!-- <strong id="dossierType-error" class="error"
-                             ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
-                                     <span class="label label-danger"
-                                           ng-messages="dos.dossierForm.dossierType.$error">
-                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                     </span>
-                     </strong>-->
-                </label>
-                <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}"
-                          name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.feeType.description_en}}
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <label for="{{::transFeeCtrl.descriptId}}">
+                        <span class="field-name">{{::'FEE_DESCRIPTION' |translate}}</span>
+                    </label>
+                    <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}" readonly rows="3"
+                              name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.submissionClass.description_en}}
                     </textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <div class="checkbox">
+                        <label for="{{::transFeeCtrl.deferralId}}">
+                            <input type="checkbox" ng-model="transFeeCtrl.model.deferFees"
+                                   name="{{::transFeeCtrl.deferralId}}" id="{{::transFeeCtrl.deferralId}}" required/>
+                            {{::"DEFER_FEES"|translate}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 ">
+                    <div  ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
+                        <label for="{{::transFeeCtrl.remitId}}"  class="required full-width">
+                            <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
+                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                            <select  class="form-control" ng-model="transFeeCtrl.model.feeRemission"
+                                   name="{{::transFeeCtrl.remitId}}" id="{{::transFeeCtrl.remitId}}" required
+                                    ng-options="choice |translate for choice in transFeeCtrl.yesNoList">
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-5 form-group">
+                        <label for="{{::transFeeCtrl.revenueId}}">
+                            <span class="field-name">{{::'GROSS_REVENUE' |translate}}</span>
+                        </label>
+                        <input type="text" class="form-control full-width" id="{{::transFeeCtrl.revenueId}}"
+                               ng-model="transFeeCtrl.model.feeRemission"  money-mask money-mask-prepend="$"
+                               name="{{::transFeeCtrl.revenueId}}" value="{{transFeeCtrl.model.feeRemission }}"/>
+
+                </div>
+            </div>
+            <div class="row">
+                <h3>Required Docuemetntation</h3>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12">
+                    <div class="checkbox required">
+                        <label for="{{::transFeeCtrl.deferralStateId}}">
+                            <input type="checkbox" ng-model="transFeeCtrl.model.deferralStatemnet"
+                                   name="{{::transFeeCtrl.deferralStateId}}" id="{{::transFeeCtrl.deferralStateId}}" required/>
+                            {{::"DEFER_STATEMENT"|translate}}
+                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                           <!-- <strong id="notlasa-error" class="error"
+                                    ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm.chkContactSame)">
+                                        <span class="label label-danger">
+                                         <span ng-if="!transInfoCtrl.transactionModel.contactSame">{{::'MSG_ERR_MAND'|translate}}</span>
+                                         </span>
+                            </strong>-->
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
-</ng-form>
+    </ng-form>
+</div>
