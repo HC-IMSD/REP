@@ -6,29 +6,28 @@
 (function () {
     'use strict';
 
-    var dependencies = [
-        'tabsModule',
-        'refProductListModule',
-         'drugUseModule',
-         'scheduleAModule',
-        'dossierDataLists',
-        'dataLists',
-        'filterLists',
-        'fileIO',
-        'contactModule26',
-        'applicationInfoService',
-        'applicationInfo',
-        'ui.bootstrap',
-        'numberFormat',
-        'ngMessages',
-        'ngAria',
-        'theraClass',
-        'dossierService',
-        'ngSanitize'
-    ];
-
     angular
-        .module('dossierModule', dependencies);
+        .module('dossierModule',
+            [
+            'tabsModule',
+            'refProductListModule',
+            'drugUseModule',
+            'scheduleAModule',
+            'dossierDataLists',
+            'dataLists',
+            'filterLists',
+            'fileIO',
+            'contactModule26',
+            'applicationInfoService',
+            'applicationInfo',
+            'ui.bootstrap',
+            'numberFormat',
+            'ngMessages',
+            'ngAria',
+            'theraClass',
+            'dossierService',
+            'ngSanitize'
+        ]);
 })();
 
 (function () {

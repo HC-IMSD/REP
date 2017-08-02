@@ -280,7 +280,8 @@ var componentFolders = {
     cspCert: 'cspCertification/',
     errorMsg: 'error-message/',
     cspApplicantList: 'cspContactList/',
-    alertComp:"alertComponent/"
+    alertComp:"alertComponent/",
+    transFees:'transactionFees/'
 };
 
 //exclude custom styles only lib
@@ -398,7 +399,8 @@ var transactionComponentFolders = [
     componentFolders.lifecycleDetails,
     componentFolders.addressDetails,
     componentFolders.errorMsg,
-    componentFolders.alertComp
+    componentFolders.alertComp,
+    componentFolders.transFees
 ];
 //certificate of Supplementary Protection File
 

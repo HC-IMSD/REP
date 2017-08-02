@@ -3,7 +3,8 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
+                            class="btn-xs rep-help-button"
                             id="startdate-picker-toggle" ng-click="transInfoCtrl.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
@@ -13,7 +14,8 @@
             <div class="panel-body">
                 <div>
                     <div>
-                        <cmp-alert  ui-state="transInfoCtrl.alerts[0]" msg="TRANSACT_INSTRUCT" update-state="transInfoCtrl.closeAlert(0)" type="alert-info">
+                        <cmp-alert ui-state="transInfoCtrl.alerts[0]" msg="TRANSACT_INSTRUCT"
+                                   update-state="transInfoCtrl.closeAlert(0)" type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-en.html'">
@@ -226,7 +228,38 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
+                                class="btn-xs rep-help-button"
+                                id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct(1)"><span
+                                class="fa fa-question-circle fa-2x"></span>
+                        </button>
+                    </div>
+                    <h2 class="panel-title">{{::'REGULATORY_FEES' |translate}}</h2>
+                </header>
+                <div class="panel-body">
+                    <div>
+                        <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="FEE_INSTRUCT"
+                                   update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
+                            <section aria-live="assertive">
+                                <div ng-if="!transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
+                                </div>
+                                <div ng-if="transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
+                                </div>
+                            </section>
+                        </cmp-alert>
+                    </div>
+                    <cmp-transaction-fees></cmp-transaction-fees>
+                </div>
+            </section>
+        </div>
+        <div>
+            <section class="panel  panel-primary">
+                <header class="panel-heading clearfix">
+                    <div class="btn-group pull-right">
+                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
+                                class="btn-xs rep-help-button"
                                 id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct(1)"><span
                                 class="fa fa-question-circle fa-2x"></span>
                         </button>
@@ -235,7 +268,8 @@
                 </header>
                 <div class="panel-body">
                     <div>
-                        <cmp-alert  ui-state="transInfoCtrl.alerts[1]" msg="REG_ACTIVITY_INSTRUCT" update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
+                        <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="REG_ACTIVITY_INSTRUCT"
+                                   update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">

@@ -15,7 +15,9 @@
                 'ui.select',
                 'addressModule',
                 'contactModule',
-                'alertModule'])
+                'alertModule',
+                'transactionFeesModule'
+            ])
 })();
 
 (function () {

@@ -1,0 +1,40 @@
+<ng-form name="transFeeCtrl.transFeeForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-6 form-group">
+                <ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.submClassId].$invalid}">
+                <label for="{{::transFeeCtrl.submClassId}}" class="required">
+                    <span class="field-name">{{::'FEE_TYPE' |translate}}</span>
+                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                    <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
+                            name="{{::transFeeCtrl.submClassId}}" required ng-model="transFeeCtrl.model.feeType"
+                            ng-options="val.en  for val in  transFeeCtrl.submissionType">
+                    </select>
+                   <!-- <strong id="dossierType-error" class="error"
+                            ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
+                                    <span class="label label-danger"
+                                          ng-messages="dos.dossierForm.dossierType.$error">
+                                        <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                    </span>
+                    </strong>-->
+                </label>
+            </div>
+            <div class="col-xs-6 form-group">
+                <label for="{{::transFeeCtrl.descriptId}}" class="required">
+                    <span class="field-name">{{::'FEE_DESCRIPTION' |translate}}</span>
+
+
+                    <!-- <strong id="dossierType-error" class="error"
+                             ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
+                                     <span class="label label-danger"
+                                           ng-messages="dos.dossierForm.dossierType.$error">
+                                         <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                     </span>
+                     </strong>-->
+                </label>
+                <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}"
+                          name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.feeType.description_en}}
+                    </textarea>
+            </div>
+        </div>
+</ng-form>
