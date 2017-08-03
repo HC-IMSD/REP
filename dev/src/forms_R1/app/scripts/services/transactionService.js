@@ -571,28 +571,29 @@
                 description_fr: "",
                 fee: ""
             },
-            deferralRequest: NO, //defer payment for two years
+            deferralRequest: false, //defer payment for two years
             feeRemission: "", //applying for fee remission
             grossRevenue: "",
             requiredDocs: {
-                deferralStat: NO, //statement supporting the deferral request
-                revStat: NO,
-                appFee: NO,
-                salesHistory: NO, //sales history
-                avgSalePrice: NO, //average sales price and demand
-                estMarketShare: NO, //estimated market share
-                comparison: NO, ///compariosn to similar products
-                marketPlan: NO, //marketing palne for the drug product
-                other: NO    //other
+                deferralStat: false, //statement supporting the deferral request
+                revStat: false,
+                appFee: false,
+                salesHistory: false, //sales history
+                avgSalePrice: false, //average sales price and demand
+                estMarketShare: false, //estimated market share
+                comparison: false, ///compariosn to similar products
+                marketPlan: false, //marketing palne for the drug product
+                other: false,   //other
+                otherDetails:""
             },
             paymentMethod: {
-                creditCard: NO,
-                cheque: NO,
-                moneyOrder: NO,
-                bankDraft: NO,
-                existingCredit: NO,
-                bankWire: NO,
-                billPayment: NO
+                creditCard: false,
+                cheque: false,
+                moneyOrder: false,
+                bankDraft: false,
+                existingCredit: false,
+                bankWire: false,
+                billPayment: false
             }
 
         }

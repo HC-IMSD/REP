@@ -8,7 +8,8 @@
                         <span class="field-name">{{::'FEE_TYPE' |translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
-                                name="{{::transFeeCtrl.submClassId}}" required ng-model="transFeeCtrl.model.submissionClass"
+                                name="{{::transFeeCtrl.submClassId}}" required
+                                ng-model="transFeeCtrl.model.submissionClass"
                                 ng-options="val.en  for val in  transFeeCtrl.submissionType">
                         </select>
                         <!-- <strong id="dossierType-error" class="error"
@@ -25,7 +26,8 @@
                         <span class="field-name">{{::'FEE_AMOUNT' |translate}}</span>
                     </label>
                     <input type="text" class="form-control full-width" id="{{::transFeeCtrl.feeId}}" readonly
-                           name="{{::transFeeCtrl.feeId}}" value="{{transFeeCtrl.model.submissionClass.fee  | currency}}"/>
+                           name="{{::transFeeCtrl.feeId}}"
+                           value="{{transFeeCtrl.model.submissionClass.fee  | currency}}"/>
                 </div>
             </div>
             <div class="row">
@@ -51,27 +53,56 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 ">
-                    <div  ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
-                        <label for="{{::transFeeCtrl.remitId}}"  class="required full-width">
+                    <div ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
+                        <label for="{{::transFeeCtrl.remitId}}" class="required full-width">
                             <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                            <select  class="form-control" ng-model="transFeeCtrl.model.feeRemission"
-                                   name="{{::transFeeCtrl.remitId}}" id="{{::transFeeCtrl.remitId}}" required
+                            <select class="form-control" ng-model="transFeeCtrl.model.feeRemission"
+                                    name="{{::transFeeCtrl.remitId}}" id="{{::transFeeCtrl.remitId}}" required
                                     ng-options="choice |translate for choice in transFeeCtrl.yesNoList">
                             </select>
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-5 form-group">
+            <div ng-if="transFeeCtrl.isFeeRemit()">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p aria-live="polite">Review fees must not be included with the submission, supplement or
+                            application. Sponsors will be invoiced for the applicable fee.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-5 form-group">
                         <label for="{{::transFeeCtrl.revenueId}}">
-                            <span class="field-name">{{::'GROSS_REVENUE' |translate}}</span>
+                            <span class="field-name">{{::'GROSS_REVENUE'|translate}}</span>
                         </label>
-                        <input type="text" class="form-control full-width" id="{{::transFeeCtrl.revenueId}}"
-                               ng-model="transFeeCtrl.model.feeRemission"  money-mask money-mask-prepend="$"
-                               name="{{::transFeeCtrl.revenueId}}" value="{{transFeeCtrl.model.feeRemission }}"/>
-
+                        <input class="form-control full-width" id="{{::transFeeCtrl.revenueId}}"
+                               ng-model="transFeeCtrl.model.grossRevenue" money-mask money-mask-prepend="$"
+                               ng-change="transFeeCtrl.calcValue()"
+                               name="{{::transFeeCtrl.revenueId}}"/>
+                    </div>
+                    <div class="col-xs-5 form-group">
+                        <label for="{{::transFeeCtrl.percentId}}">
+                            <span class="field-name">{{::'TEN_PERCENT_REVENUE'|translate}}</span>
+                        </label>
+                        <input class="form-control full-width" id="{{::transFeeCtrl.percentId}}"
+                               readonly name="{{::transFeeCtrl.percentId}}"
+                               value="{{transFeeCtrl.model.percentGross  | currency}}"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 form-group alert alert-success" ng-if="transFeeCtrl.isEligible()" role="alert"
+                         aria-live="polite">
+                        <span>You are eligible to apply for fee remission. The submission fee is greater
+                            than 10% of anticipated gross revenues.</span>
+                    </div>
+                    <div class="col-xs-12 form-group alert alert-warning"
+                         ng-if="!transFeeCtrl.isEligible() && transFeeCtrl.model.percentGross>0" role="alert"
+                         aria-live="polite">
+                        <span>You are not eligible to apply for fee remission. The submission fee is
+                            less than 10% of anticipated gross revenues.</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -82,18 +113,195 @@
                     <div class="checkbox required">
                         <label for="{{::transFeeCtrl.deferralStateId}}">
                             <input type="checkbox" ng-model="transFeeCtrl.model.deferralStatemnet"
-                                   name="{{::transFeeCtrl.deferralStateId}}" id="{{::transFeeCtrl.deferralStateId}}" required/>
+                                   name="{{::transFeeCtrl.deferralStateId}}" id="{{::transFeeCtrl.deferralStateId}}"
+                                   required/>
                             {{::"DEFER_STATEMENT"|translate}}
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                           <!-- <strong id="notlasa-error" class="error"
-                                    ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm.chkContactSame)">
-                                        <span class="label label-danger">
-                                         <span ng-if="!transInfoCtrl.transactionModel.contactSame">{{::'MSG_ERR_MAND'|translate}}</span>
-                                         </span>
-                            </strong>-->
+                            <!-- <strong id="notlasa-error" class="error"
+                                     ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm.chkContactSame)">
+                                         <span class="label label-danger">
+                                          <span ng-if="!transInfoCtrl.transactionModel.contactSame">{{::'MSG_ERR_MAND'|translate}}</span>
+                                          </span>
+                             </strong>-->
                         </label>
                     </div>
                 </div>
+            </div>
+            <div class="row" ng-if="transFeeCtrl.isEligible()">
+                <div class="form-group col-xs-12">
+                    <div class="checkbox">
+                        <label for="{{::transFeeCtrl.statement10Id}}">
+                            <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.revStat" class="required"
+                                   name="{{::transFeeCtrl.statement10Id}}" id="{{::transFeeCtrl.statement10Id}}"
+                                   required/>
+                            {{::'STATEMENT_REVENUE'|translate}}
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <!-- <strong id="notlasa-error" class="error"
+                                     ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm.chkContactSame)">
+                                         <span class="label label-danger">
+                                          <span ng-if="!transInfoCtrl.transactionModel.contactSame">{{::'MSG_ERR_MAND'|translate}}</span>
+                                          </span>
+                             </strong>-->
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <fieldset>
+                <legend>Please include information to establish that the applicable fee payable is greater than 10% of
+                    the anticipated gross revenue from sales of the drug product in Canada during the fee
+                    verification period. Supporting documentation provided with transaction include (check all that
+                    apply):
+                </legend>
+
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <div class="checkbox">
+                            <label for="market-potential">
+                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.estMarketShare"
+                                       name="market-potential"
+                                       id="market-potential"/>
+                                {{::"Estimated market share (that is [i.e.], product's market potential compared to the
+                                total market for similar products in Canada)"|translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <div class="checkbox">
+                            <label for="similar-product">
+                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.comparison"
+                                       name="similar-product" id="similar-product"/>
+                                {{::"Comparison to similar products on the Canadian market or other similar markets
+                                (e.g., United States, European Union)"|translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-8">
+                        <div class="checkbox">
+                            <label for="sales-history">
+                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.salesHistory"
+                                       name="sales-history" id="sales-history"/>
+                                {{::'Sales history prior to product upgrades or sales history of similar
+                                products'|translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <div class="checkbox">
+                            <label for="marketing-plan">
+                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.marketPlan"
+                                       name="marketing-plan" id="marketing-plan"/>
+                                {{::'Marketing plan/product plan for the drug product'|translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-4">
+                        <div class="checkbox">
+                            <label for="avg-sale">
+                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.avgSalePrice"
+                                       name="avg-sale"
+                                       id="avg-sale"/>
+                                {{::'Average sale price and demand'|translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-4">
+                        <div class="checkbox">
+                            <label for="{{::transFeeCtrl.otherId}}">
+                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.other"
+                                       name="{{::transFeeCtrl.otherId}}"
+                                       id="{{::transFeeCtrl.otherId}}"/>
+                                {{::'OTHER'|translate}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <h3>Payment</h3>
+            </div>
+            <div ng-if="!transFeeCtrl.model.deferFees">
+                <fieldset>
+                    <legend>Please select all the payment methods you intend to use</legend>
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <div class="checkbox">
+                                <label for="bill-payment">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.billPayment"
+                                           name="bill-payment" id="bill-payment"/>
+                                    {{::"Bill Payment Service Option (preferred method)"|translate}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-2">
+                            <div class="checkbox">
+                                <label for="existing-credit">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.existingCredit"
+                                           name="existing-credit" id="existing-credit"/>
+                                    {{::"Existing credit"|translate}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-4">
+                            <div class="checkbox">
+                                <label for="wire">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.bankWire"
+                                           name="wire" id="wire"/>
+                                    {{::"Wire (include bank confirmation)"|translate}}
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-5">
+                            <div class="checkbox">
+                                <label for="credit">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.creditCard"
+                                           name="credit" id="credit"/>
+                                    {{::"Mastercard / Visa / Amex / Visa Debit / JCB International"|translate}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-2">
+                            <div class="checkbox">
+                                <label for="cheque">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.cheque"
+                                           name="cheque" id="cheque"/>
+                                    {{::"Cheque"|translate}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-2">
+                            <div class="checkbox">
+                                <label for="money-order">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.moneyOrder"
+                                           name="money-order" id="money-order"/>
+                                    {{::"Money Order"|translate}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-3">
+                            <div class="checkbox">
+                                <label for="bank-draft">
+                                    <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.bankDraft"
+                                           name="bank-draft" id="bank-draft"/>
+                                    {{::"International Bank Draft"|translate}}
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
             </div>
         </div>
     </ng-form>
