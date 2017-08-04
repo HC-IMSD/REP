@@ -153,7 +153,8 @@
                             <span class="field-name">{{::"SOLICITED_RQ" |translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                             <div class="rep-pad-top">
-                                <div class="rep-error" ng-class="{'has-error':transInfoCtrl.transInfoForm.solicitedList.$invalid}">
+                                <div class="rep-error"
+                                     ng-class="{'has-error':transInfoCtrl.transInfoForm.solicitedList.$invalid}">
                                     <ui-select ng-model="transInfoCtrl.transactionModel.solicitedRequester"
                                                id="solicited_list" name="solicitedList"
                                                on-select="transInfoCtrl.setOtherSolicitor()" required
@@ -202,7 +203,6 @@
 
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="projectManager1" class="full-width">
@@ -222,24 +222,26 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div>
-                        <div class="col-xs-6 form-group" ng-class="{'has-error':transInfoCtrl.transFeeForm[transFeeCtrl.submClassId].$invalid}">
-                            <label for="{{::transInfoCtrl.isFeesId}}" class="required">
-                                <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
-                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <select class="form-control full-width" id="{{::transInfoCtrl.isFeesId}}" ng-change="transInfoCtrl.updateFeeState()"
-                                        name="{{::transFeeCtrl.submClassId}}" required ng-model="transInfoCtrl.transactionModel.isFees"
-                                        ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
-                                </select>
-                                <!-- <strong id="dossierType-error" class="error"
-                                         ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
-                                                 <span class="label label-danger"
-                                                       ng-messages="dos.dossierForm.dossierType.$error">
-                                                     <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                                                 </span>
-                                 </strong>-->
-                            </label>
-                        </div>
+
+                    <div class="col-xs-8 form-group"
+                         ng-class="{'has-error':transInfoCtrl.transFeeForm[transFeeCtrl.submClassId].$invalid}">
+                        <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
+                            <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <select class="form-control" id="{{::transInfoCtrl.isFeesId}}"
+                                    ng-change="transInfoCtrl.updateFeeState()"
+                                    name="{{::transFeeCtrl.submClassId}}" required
+                                    ng-model="transInfoCtrl.transactionModel.isFees"
+                                    ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
+                            </select>
+                            <!-- <strong id="dossierType-error" class="error"
+                                     ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
+                                             <span class="label label-danger"
+                                                   ng-messages="dos.dossierForm.dossierType.$error">
+                                                 <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                             </span>
+                             </strong>-->
+                        </label>
                     </div>
                 </div>
             </div>
@@ -270,7 +272,7 @@
                             </section>
                         </cmp-alert>
                     </div>
-                    <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails" ></cmp-transaction-fees>
+                    <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"></cmp-transaction-fees>
                 </div>
             </section>
         </div>
@@ -320,7 +322,8 @@
                                                class="form-control full-width" required/>
                                         <strong id="companyName-error" class="error"
                                                 ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm.transCompanyName)">
-                        <span class="label label-danger" ng-messages="transInfoCtrl.transInfoForm.transCompanyName.$error">
+                        <span class="label label-danger"
+                              ng-messages="transInfoCtrl.transInfoForm.transCompanyName.$error">
                             <span ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
                         </span>
                                         </strong>
@@ -353,7 +356,7 @@
                                         <input type="checkbox" ng-model="transInfoCtrl.transactionModel.sameContact"
                                                name="chkContactSame" id="chkContactSame" required/>
                                         {{::"CONTACT_SAME"|translate}}
-                                          <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <strong id="notlasa-error" class="error"
                                                 ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm.chkContactSame)">
                                         <span class="label label-danger">

@@ -61,47 +61,58 @@
             }
         }
         vm.isFeeRemit = function () {
-            if (vm.model.feeRemission === YES) {
+            if (vm.model.feeRemission === YES ) {
                 return true;
-            } else {
-                vm.model.grossRevenue = "";
-                return false;
             }
-        };
-        vm.calcValue=function(){
-            var result=parseFloat(vm.model.grossRevenue)*0.1;
-            if(isNaN(result)) result=0;
-            vm.model.percentGross= result.toFixed(2);
-        };
-        vm.isEligible=function(){
+            vm.model.grossRevenue = "";
+            return false;
 
-            if(!vm.model || !vm.model.submissionClass || !vm.model.submissionClass.fee)
+        };
+        vm.calcValue = function () {
+            var result = parseFloat(vm.model.grossRevenue) * 0.1;
+            if (isNaN(result)) result = 0;
+            vm.model.percentGross = result.toFixed(2);
+        };
+        vm.isEligible = function () {
+
+            if (!vm.model || !vm.model.submissionClass || !vm.model.submissionClass.fee)
                 return false;
 
-            if(vm.model.percentGross < vm.model.submissionClass.fee){
+            if ( vm.isFeeRemit() &&(vm.model.percentGross < vm.model.submissionClass.fee)) {
                 return true;
             }
             return false
         };
-        vm.isLess10K=function(){
-            if(!vm.model||!vm.model.submissionClass) {
+        vm.isLess10K = function () {
+            if (!vm.model || !vm.model.submissionClass) {
                 return false;
             }
-          return vm.model.submissionClass.fee<10000
+            return vm.model.submissionClass.fee < 10000
         };
 
-        vm.openPaymentForm=function(){
+        vm.openPaymentForm = function () {
 
             $window.open('http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av-eng.pdf', '_blank');
         }
 
+        vm.setDocOther = function () {
+            if (!vm.model) return false;
+            if (vm.model.requiredDocs.other) {
+                return true;
+            }
+            vm.model.requiredDocs.otherDetails = "";
+            return false
+        }
+
+
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.submClassId = "submClass" + scopeId;
-            vm.descriptId = "descript" + scopeId;
-            vm.feeId = "feeAmount" + scopeId;
-            vm.deferralId = "deferral" + scopeId;
-            vm.remitId = "applyRemit" + scopeId;
+            vm.submClassId = "sub_class" + scopeId;
+            vm.descriptId = "fee_description" + scopeId;
+            vm.feeId = "fee_amount" + scopeId;
+            ///vm.deferralId = "deferral" + scopeId;
+            vm.remitId = "fee_remission" + scopeId;
+
             vm.revenueId = "grossRevenue" + scopeId;
             vm.percentId = "calcPercent" + scopeId;
             vm.deferralStateId = "deferralState" + scopeId; //statement supporting deferral

@@ -52,5 +52,6 @@
   "CLOSE_ALERT":"Collapse instructions",
   "COLLAPSE":"Collapse",
   "SAVE_RECORD":"Save Record",
-  "DELETE_RECORD":"Delete Record"
+  "DELETE_RECORD":"Delete Record",
+  "OTHER_DETAILS": "Other - specify"
 }

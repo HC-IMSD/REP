@@ -97,6 +97,24 @@
   "DEFER_FEES":" A deferral of payment is requested with this transaction.",
   "DEFER_STATEMENT":"The statement supporting the deferral request is included.",
   "FEE_REMISSION":"Fee Remission is requested with this transaction",
-  "STATEMENT_REVENUE":"A statement signed by the individual responsible for the applicant's financial affairs is included to certify that the fee payable is greater than 10% of the anticipated gross revenue"
+  "STATEMENT_REVENUE":"A statement signed by the individual responsible for the applicant's financial affairs is included to certify that the fee payable is greater than 10% of the anticipated gross revenue",
+  "SUB_CLASS":"Submission Class",
+  "FEE_AMOUNT":"Fees",
+  "FEE_DESCRIPTION":"Submisssion Description",
+  "DEFER_FEES":"A deferral of payment is requested with this transaction",
+  "FEE_REMISSION":"Fee Remission is requested with this transaction",
+  "REMISSION_ELIGIBLE":"You are eligible to apply for fee remission. The submission fee is greater than 10% of anticipated gross revenues.",
+  "REMISSION_INELIGIBLE":"You are not eligible to apply for fee remission. The submission fee is less than 10% of anticipated gross revenues.",
+  "IS_FEE_TRANSACTION":"Are new fees or revised fees associated with this transaction?",
+  "REGULATORY_FEES":"Fees",
+  "GROSS_REVENUE":"Anticipated gross revenue for this drug product during the fee verification period",
+  "TEN_PERCENT_REVENUE": "10% of anticipated gross revenue",
+  "REQUIRED_DOC":"Required Documentation",
+  "SUPPORTING_DOC":"Please include information to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period. Supporting documentation provided with transaction include (check all that apply):",
+  "EST_MARKET_SHARE":"Estimated market share (that is [i.e.], product's market potential compared to the total market for similar products in Canada)",
+  "SIMILAR_PRODUCT":"Comparison to similar products on the Canadian market or other similar markets (e.g., United States, European Union)",
+  "SALES_HISTORY":"Sales history prior to product upgrades or sales history of similar products",
+  "MARKETING_PLAN":"Marketing plan/product plan for the drug product",
+  "AVG_SALES":"Average sale price and demand"
 
 }
