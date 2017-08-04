@@ -24,9 +24,9 @@
             }
         });
 
-    transactionFeesController.$inject = ['$scope', 'TransactionLists', 'YES', 'NO'];
+    transactionFeesController.$inject = ['$scope', '$window', 'TransactionLists', 'YES', 'NO'];
 
-    function transactionFeesController($scope, TransactionLists, YES, NO) {
+    function transactionFeesController($scope, $window, TransactionLists, YES, NO) {
 
         var vm = this;
         vm.model = {};
@@ -82,6 +82,17 @@
                 return true;
             }
             return false
+        };
+        vm.isLess10K=function(){
+            if(!vm.model||!vm.model.submissionClass) {
+                return false;
+            }
+          return vm.model.submissionClass.fee<10000
+        };
+
+        vm.openPaymentForm=function(){
+
+            $window.open('http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av-eng.pdf', '_blank');
         }
 
         function _setIdNames() {
