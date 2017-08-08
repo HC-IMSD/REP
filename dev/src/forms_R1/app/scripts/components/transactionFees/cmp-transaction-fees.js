@@ -4,7 +4,8 @@
         .module('transactionFeesModule', [
             'services',
             'hpfbConstants',
-            'rw.moneymask'
+            'rw.moneymask',
+            'errorMessageModule'
         ]);
 
 })();
@@ -31,15 +32,21 @@
         var vm = this;
         vm.model = {};
         vm.submissionType = {};
+        vm.onePaymentSelected = "";
         vm.yesNoList = [YES, NO];
+        vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.onePaymentError = [{type: "required", displayAlias: "ONE_PAYMENT_METHOD"}];
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
+            _setIdNames();
             vm.submissionType = TransactionLists.getFeeList();
         };
 
-
+        vm.errorsTemp = function () {
+            return true;
+        }
         /**
          * Called on binding changes
          */
@@ -51,7 +58,6 @@
 
         };
 
-
         vm.showError = function (ctrl) {
 
             if (!ctrl) return false;
@@ -59,12 +65,32 @@
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
                 return true
             }
+        };
+        vm.isPaymentSelected = function () {
+            var methodSelected = false;
+            var keys = Object.keys(vm.model.paymentMethod);
+            for (var i = 0; i < keys.length; i++) {
+                if (vm.model.paymentMethod[keys[i]] === true) {
+                    methodSelected = true;
+                    break;
+                }
+            }
+            vm.onePaymentSelected = ""
+
+            if (methodSelected) {
+                vm.onePaymentSelected = true;
+                return true
+            } else {
+                vm.onePaymentSelected = false;
+                return false
+            }
+
         }
         vm.isFeeRemit = function () {
-            if (vm.model.feeRemission === YES ) {
+            if (vm.model.feeRemission === YES) {
                 return true;
             }
-            vm.model.grossRevenue = "";
+            vm.model.grossRevenue = 0;
             return false;
 
         };
@@ -73,14 +99,66 @@
             if (isNaN(result)) result = 0;
             vm.model.percentGross = result.toFixed(2);
         };
-        vm.isEligible = function () {
 
-            if (!vm.model || !vm.model.submissionClass || !vm.model.submissionClass.fee)
-                return false;
+        /**
+         * Sets the deferral state information
+         * @returns {boolean}
+         */
+        vm.isDeferral = function () {
+            if (!vm.model) return false;
 
-            if ( vm.isFeeRemit() &&(vm.model.percentGross < vm.model.submissionClass.fee)) {
+            if (vm.model.deferFees) {
                 return true;
             }
+            vm.model.requiredDocs.deferralStat = false;
+            return false;
+        };
+
+        /**
+         * Determines if the entire documentation section should be  shown
+         * @returns {boolean}
+         */
+        vm.showDocumentationSection = function () {
+            if (vm.isEligible() || vm.isDeferral()) {
+                return true;
+            }
+            return false;
+
+        };
+        /**
+         * Determines if payment methods should be shown
+         * @returns {boolean}
+         */
+        vm.showPaymentMethods = function () {
+            if (!vm.model) return false;
+            return !vm.isDeferral() && (!vm.isEligible() && vm.isLess10K()) || (vm.isEligible() );
+        }
+
+        /**
+         * Determines if no fees should be sent
+         * @returns {boolean}
+         */
+        vm.isSendNoFees = function () {
+            return (!vm.isLess10K() && !vm.isEligible() && !vm.isDeferral())
+
+        }
+
+        /**
+         * Returns if the fees are elgible for remissions
+         * @returns {boolean}
+         */
+        vm.isEligible = function () {
+
+            //check if there is no model or submission class chosen
+            if (!vm.model || !vm.model.submissionClass || !vm.model.submissionClass.fee) {
+                clearRemitRequiredDocs();
+                return false;
+            }
+
+            if (vm.isFeeRemit() && (vm.model.percentGross < vm.model.submissionClass.fee)) {
+                return true;
+            }
+            clearRemitRequiredDocs();
             return false
         };
         vm.isLess10K = function () {
@@ -102,8 +180,24 @@
             }
             vm.model.requiredDocs.otherDetails = "";
             return false
-        }
+        };
 
+        /**
+         * Clears the required data related to remit
+         */
+        function clearRemitRequiredDocs() {
+            if (!vm.model) return;
+
+            vm.model.requiredDocs.revStat = false;
+            vm.model.requiredDocs.estMarketShare = false;
+            vm.model.requiredDocs.comparison = false;
+            vm.model.requiredDocs.salesHistory = false;
+            vm.model.requiredDocs.marketPlan = false;
+            vm.model.requiredDocs.avgSalePrice = false;
+            vm.model.requiredDocs.other = false;
+            vm.model.requiredDocs.otherDetails = "";
+
+        }
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
@@ -112,7 +206,7 @@
             vm.feeId = "fee_amount" + scopeId;
             ///vm.deferralId = "deferral" + scopeId;
             vm.remitId = "fee_remission" + scopeId;
-
+            vm.paymentSelectedId = "payment_selected" + scopeId;
             vm.revenueId = "grossRevenue" + scopeId;
             vm.percentId = "calcPercent" + scopeId;
             vm.deferralStateId = "deferralState" + scopeId; //statement supporting deferral
@@ -121,7 +215,7 @@
             vm.versionId = "version" + scopeId;
             vm.otherId = "other" + scopeId;
 
-            vm.PaymentMethod = "paymentMethod" + scopeId;
+            vm.PaymentMethod = "onePaymentMethod" + scopeId;
 
         }
 

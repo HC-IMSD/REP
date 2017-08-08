@@ -400,7 +400,8 @@ var transactionComponentFolders = [
     componentFolders.addressDetails,
     componentFolders.errorMsg,
     componentFolders.alertComp,
-    componentFolders.transFees
+    componentFolders.transFees,
+    componentFolders.errorMsg
 ];
 //certificate of Supplementary Protection File
 
