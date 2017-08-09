@@ -40,9 +40,8 @@
                       return $http.get(feeUrl);
                     })
                     .then(function (response) {
-                        //PROCESS fe url list data
+                        //PROCESS fee url list data
                         var newList = _createSortedArray(response.data, options.key);
-                       // var translateList = _createTranslateList(newList, options.key);
                         TransactionLists.createFeeTypes(newList);
                        // angular.extend(resultTranslateList, translateList);
                         return response.data;
@@ -115,7 +114,7 @@
                     else {
                         result.push(sortedObject);
                     }
-                    ;
+
                 });
                 if (usaRecord) result.unshift(usaRecord);
                 if (canadaRecord) result.unshift(canadaRecord);

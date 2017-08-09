@@ -149,8 +149,6 @@
 
         function _createFeeArray(value) {
             vm.feeTypeArray = value;
-
-            console.log(vm.feeTypeArray)
         }
 
         //returns a list of all the unique description values
@@ -165,14 +163,6 @@
 
         function _getfeeTypeArray() {
 
-            if (!vm.feeTypeArray || vm.feeTypeArray.length === 0) {
-                var deferred = $q.defer();
-                _createRaArray
-
-                $q.when().then(function () {
-                    console.log(vm.feeTypeArray);
-                });
-            }
             return (vm.feeTypeArray);
         }
 

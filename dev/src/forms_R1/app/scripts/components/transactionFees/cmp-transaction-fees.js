@@ -107,7 +107,7 @@
         vm.isDeferral = function () {
             if (!vm.model) return false;
 
-            if (vm.model.deferFees) {
+            if (vm.model.deferralRequest) {
                 return true;
             }
             vm.model.requiredDocs.deferralStat = false;

@@ -40,7 +40,7 @@
                 <div class="form-group col-xs-12">
                     <div class="checkbox">
                         <label for="fee-deferral">
-                            <input type="checkbox" ng-model="transFeeCtrl.model.deferFees"
+                            <input type="checkbox" ng-model="transFeeCtrl.model.deferralRequest"
                                    name="fee-deferral" id="fee-deferral"/>
                             {{::"DEFER_FEES"|translate}}
                         </label>
@@ -223,7 +223,7 @@
             <div class="row">
                 <h3>Payment</h3>
             </div>
-            <div class="row" ng-if="!transFeeCtrl.isSendNoFees() && !transFeeCtrl.isDeferral()">
+            <div class="row" ng-if="(!transFeeCtrl.isSendNoFees() && !transFeeCtrl.isDeferral()) || transFeeCtrl.isEligible()">
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
