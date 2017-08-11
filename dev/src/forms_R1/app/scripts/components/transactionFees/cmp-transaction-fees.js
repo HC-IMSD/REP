@@ -36,12 +36,15 @@
         vm.yesNoList = [YES, NO];
         vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.onePaymentError = [{type: "required", displayAlias: "ONE_PAYMENT_METHOD"}];
+        vm.alerts = [false, false,false,false];
+
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
             _setIdNames();
             vm.submissionType = TransactionLists.getFeeList();
+            vm.alerts = [false, false,false,false];
         };
 
         vm.errorsTemp = function () {
@@ -217,7 +220,30 @@
 
             vm.PaymentMethod = "onePaymentMethod" + scopeId;
 
+        };
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
         }
+
+
+
+
+
 
 
     }
