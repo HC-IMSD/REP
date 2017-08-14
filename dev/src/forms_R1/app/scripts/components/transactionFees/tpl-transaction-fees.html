@@ -32,14 +32,14 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <cmp-alert ui-state="transFeeCtrl.alerts[0]" msg="FEE_AMOUNT"
+                    <cmp-alert ui-state="transFeeCtrl.alerts[0]" msg="CLASS_INSTRUCT"
                                update-state="transFeeCtrl.closeAlert(0)" type="alert-info">
                         <section aria-live="assertive">
                             <div ng-if="!transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-class-en.html'">
                             </div>
                             <div ng-if="transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-class-fr.html'">
                             </div>
                         </section>
                     </cmp-alert>
@@ -77,10 +77,10 @@
                                update-state="transFeeCtrl.closeAlert(1)" type="alert-info">
                         <section aria-live="assertive">
                             <div ng-if="!transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-defer-en.html'">
                             </div>
                             <div ng-if="transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-defer-fr.html'">
                             </div>
                         </section>
                     </cmp-alert>
@@ -89,7 +89,6 @@
             <div class="row">
                 <div class="form-group col-xs-8 ">
                     <div ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
-
                         <label for="{{::transFeeCtrl.remitId}}" class="required ">
                             <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -118,14 +117,14 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <cmp-alert ui-state="transFeeCtrl.alerts[2]" msg="DEFERSTATE_INSTRUCT"
+                    <cmp-alert ui-state="transFeeCtrl.alerts[2]" msg="REMISSION_INSTRUCT"
                                update-state="transFeeCtrl.closeAlert(2)" type="alert-info">
                         <section aria-live="assertive">
                             <div ng-if="!transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-remission-en.html'">
                             </div>
                             <div ng-if="transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
+                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-remission-fr.html'">
                             </div>
                         </section>
                     </cmp-alert>
@@ -182,27 +181,7 @@
                                                    show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.deferralStateId])"
                                                    error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
                             </label>
-                            <button title="{{::'EXPAND'|translate}} {{::'DEFERSTATE_INSTRUCT'|translate}}"
-                                    class="btn rep-help-button-primary btn-xs"
-                                    ng-click="transFeeCtrl.addInstruct(3)"><span
-                                    class="fa fa-question-circle fa-2x"></span>
-                            </button>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <cmp-alert ui-state="transFeeCtrl.alerts[3]" msg="DEFERSTATE_INSTRUCT"
-                                   update-state="transFeeCtrl.closeAlert(3)" type="alert-info">
-                            <section aria-live="assertive">
-                                <div ng-if="!transFeeCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
-                                </div>
-                                <div ng-if="transFeeCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
                     </div>
                 </div>
                 <div class="row" ng-if="transFeeCtrl.isEligible()">
@@ -295,14 +274,19 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-10 form-group" ng-if="transFeeCtrl.model.requiredDocs.other">
-                                <label for="{{::transFeeCtrl.otherDetailsId}}" class="required">
-                                    <span class="field-name">{{::'OTHER_DETAILS'|translate}}</span>
-                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                    <input ng-model="transFeeCtrl.model.requiredDocs.otherDetails" maxlength="100"
-                                           size="100"
-                                           name="{{::transFeeCtrl.otherDetailsId}}"
-                                           id="{{::transFeeCtrl.otherDetailsId}}"/>
-                                </label>
+                                <div ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.otherDetailsId].$invalid}">
+                                    <label for="{{::transFeeCtrl.otherDetailsId}}" class="required">
+                                        <span class="field-name">{{::'OTHER_DETAILS'|translate}}</span>
+                                        <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                        <input ng-model="transFeeCtrl.model.requiredDocs.otherDetails" maxlength="100"
+                                               size="100" name="{{::transFeeCtrl.otherDetailsId}}" required
+                                               id="{{::transFeeCtrl.otherDetailsId}}"/>
+                                        <cmp-error-message field-name="transFeeCtrl.otherDetailsId"
+                                                           form-ref="transFeeCtrl.transFeeForm"
+                                                           show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.otherDetailsId])"
+                                                           error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
@@ -322,6 +306,14 @@
                     </span>
                 </div>
             </div>
+            <div class="row" ng-if="transFeeCtrl.isEligible()">
+                <div class="col-xs-12 form-group alert alert-warning" role="alert"
+                     aria-live="polite">
+                    <span>
+                    <p>{{'PLEASE_REMIT'|translate}}</p>
+                    </span>
+                </div>
+            </div>
             <div>
                 <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
                     <div class="col-xs-12 form-group alert alert-info" role="alert">
@@ -333,7 +325,7 @@
                 <div class="row" ng-if="transFeeCtrl.isDeferral() &&!transFeeCtrl.isEligible()">
                     <div class="col-xs-12 form-group alert alert-info" role="alert">
                        <span>
-                        <p aria-live="polite">You are applying for a deferral. Please send no payment with this form.</p>
+                        <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
                            </span>
                     </div>
                 </div>
@@ -357,7 +349,7 @@
                                         <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.billPayment"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="bill-payment" id="bill-payment"/>
-                                        {{::"Bill Payment Service Option (preferred method)"|translate}}
+                                        {{::"PREFEERED_OPTION"|translate}}
                                     </label>
                                 </div>
                             </div>
@@ -368,7 +360,7 @@
                                                ng-model="transFeeCtrl.model.paymentMethod.existingCredit"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="existing-credit" id="existing-credit"/>
-                                        {{::"Existing credit"|translate}}
+                                        {{::"EXISTING_CREDIT"|translate}}
                                     </label>
                                 </div>
                             </div>
@@ -378,7 +370,7 @@
                                         <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.bankWire"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="wire" id="wire"/>
-                                        {{::"Wire (include bank confirmation)"|translate}}
+                                        {{::"BANK_WIRE"|translate}}
                                     </label>
                                 </div>
                             </div>
@@ -391,7 +383,7 @@
                                         <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.creditCard"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="credit" id="credit"/>
-                                        {{::"Mastercard / Visa / Amex / Visa Debit / JCB International"|translate}}
+                                        {{::"CREDIT"|translate}}
                                     </label>
                                 </div>
                             </div>
@@ -401,7 +393,7 @@
                                         <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.cheque"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="cheque" id="cheque"/>
-                                        {{::"Cheque"|translate}}
+                                        {{::"CHEQUE"|translate}}
                                     </label>
                                 </div>
                             </div>
@@ -411,7 +403,7 @@
                                         <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.moneyOrder"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="money-order" id="money-order"/>
-                                        {{::"Money Order"|translate}}
+                                        {{::"MONEY_ORDER"|translate}}
                                     </label>
                                 </div>
                             </div>
@@ -421,20 +413,12 @@
                                         <input type="checkbox" ng-model="transFeeCtrl.model.paymentMethod.bankDraft"
                                                ng-change="transFeeCtrl.isPaymentSelected()"
                                                name="bank-draft" id="bank-draft"/>
-                                        {{::"International Bank Draft"|translate}}
+                                        {{::"BANK_DRAFT"|translate}}
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </fieldset>
-                </div>
-                <div class="row" ng-if="transFeeCtrl.isEligible()">
-                    <div class="col-xs-12 form-group alert alert-warning" role="alert"
-                         aria-live="polite">
-                    <span>
-                    <p>Please include the remission processing fee of $566.</p>
-                    </span>
-                    </div>
                 </div>
             </div>
         </div>

@@ -47,8 +47,8 @@
             }
         });
 
-    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
-    function transactionInfoCtrl(TransactionService, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
+    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH','$scope'];
+    function transactionInfoCtrl(TransactionService, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH,$scope) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {};
@@ -63,6 +63,7 @@
         vm.requesterList = [];
         vm.lang=ENGLISH;
         vm.$onInit = function () {
+            _setIdNames();
             loadContactData(); //asynch load of contact data
             vm.updateEctdState();
             vm.setSolicitedState();
@@ -203,6 +204,12 @@
         vm.isFrench=function(){
             return(vm.lang===FRENCH);
         };
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.isFeesId="isFees"+scopeId;
+        }
+
 
 }
 

@@ -94,6 +94,19 @@
   "TRANSACT_INSTRUCT":"fr_Regulatory Transaction Instructions",
   "LIST_DESCRIPT":"fr_List Description",
   "FEE_REMISSION":"fr_Fee Remission is requested with this transaction",
-  "STATEMENT_REVENUE":"fr_A statement signed by the individual responsible for the applicant's financial affairs is included to certify that the fee payable is greater than 10% of the anticipated gross revenue"
+  "STATEMENT_REVENUE":"fr_A statement signed by the individual responsible for the applicant's financial affairs is included to certify that the fee payable is greater than 10% of the anticipated gross revenue",
+  "DEFER_INSTRUCT":"fr_Deferral of payment Instructions",
+  "REMISSION_INSTRUCT":"fr_Fee remission Instructions",
+  "CLASS_INSTRUCT":"fr_Submission Class Instructions",
+
+  "PLEASE_REMIT":"fr_Please include the remission processing fee of $566.",
+  "APPLY_DEFER":"fr_You are applying for a deferral. Please send no payment with this form.",
+  "BANK_DRAFT":"fr_International Bank Draft",
+  "MONEY_ORDER":"fr_Money Order",
+  "CHEQUE":"fr_Cheque",
+  "CREDIT":"fr_Mastercard / Visa / Amex / Visa Debit / JCB International",
+  "BANK_WIRE":"fr_Wire (include bank confirmation)",
+  "EXISTING_CREDIT":"fr_Existing credit",
+  "PREFEERED_OPTION":"fr_Bill Payment Service Option (preferred method)"
 
 }

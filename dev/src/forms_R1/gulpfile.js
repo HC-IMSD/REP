@@ -209,7 +209,8 @@ var libFileNames = {
     deepDiffMin: "deep-diff-0.3.4.min.js",
     uiTreeMin: "angular-ui-tree.min.js",
     uibTemplates: "uib-templates/*.*",
-    ngIf: "focusIf.min.js"
+    ngIf: "focusIf.min.js",
+    moneyMask:"rw-money-mask.min.js"
 }
 
 
@@ -307,7 +308,9 @@ var libProd = [
     paths.lib + libFileNames.messagesMin,
     paths.lib + libFileNames.ariaMin,
     paths.lib + libFileNames.uibTemplates,
-    paths.lib + libFileNames.ngIf
+    paths.lib + libFileNames.ngIf,
+    paths.lib + libFileNames.moneyMask
+
 ];
 
 var libCsp = [

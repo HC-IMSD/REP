@@ -224,23 +224,23 @@
                 <div class="row">
 
                     <div class="col-xs-8 form-group"
-                         ng-class="{'has-error':transInfoCtrl.transFeeForm[transFeeCtrl.submClassId].$invalid}">
+                         ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
                         <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
                             <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <select class="form-control" id="{{::transInfoCtrl.isFeesId}}"
                                     ng-change="transInfoCtrl.updateFeeState()"
-                                    name="{{::transFeeCtrl.submClassId}}" required
+                                    name="{{::transInfoCtrl.isFeesId}}" required
                                     ng-model="transInfoCtrl.transactionModel.isFees"
                                     ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
                             </select>
-                            <!-- <strong id="dossierType-error" class="error"
-                                     ng-if="dos.showError(dos.dossierForm.dossierType.$invalid,dos.dossierForm.dossierType.$touched)">
+                           <strong id="isfee-error" class="error"
+                                     ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId])">
                                              <span class="label label-danger"
-                                                   ng-messages="dos.dossierForm.dossierType.$error">
+                                                   ng-messages="transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$error">
                                                  <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                              </span>
-                             </strong>-->
+                             </strong>
                         </label>
                     </div>
                 </div>

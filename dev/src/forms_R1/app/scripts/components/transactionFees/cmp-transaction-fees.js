@@ -36,7 +36,7 @@
         vm.yesNoList = [YES, NO];
         vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.onePaymentError = [{type: "required", displayAlias: "ONE_PAYMENT_METHOD"}];
-        vm.alerts = [false, false,false,false];
+        vm.alerts = [false, false,false];
 
         /**
          * Called after onChanges evnet, initializes
@@ -44,7 +44,7 @@
         vm.$onInit = function () {
             _setIdNames();
             vm.submissionType = TransactionLists.getFeeList();
-            vm.alerts = [false, false,false,false];
+            vm.alerts = [false, false,false];
         };
 
         vm.errorsTemp = function () {
@@ -207,18 +207,14 @@
             vm.submClassId = "sub_class" + scopeId;
             vm.descriptId = "fee_description" + scopeId;
             vm.feeId = "fee_amount" + scopeId;
-            ///vm.deferralId = "deferral" + scopeId;
             vm.remitId = "fee_remission" + scopeId;
             vm.paymentSelectedId = "payment_selected" + scopeId;
             vm.revenueId = "grossRevenue" + scopeId;
             vm.percentId = "calcPercent" + scopeId;
             vm.deferralStateId = "deferralState" + scopeId; //statement supporting deferral
             vm.statement10Id = "statementSalse" + scopeId;
-            vm.supportInfoId = "supportInfoId" + scopeId;
-            vm.versionId = "version" + scopeId;
             vm.otherId = "other" + scopeId;
-
-            vm.PaymentMethod = "onePaymentMethod" + scopeId;
+            vm.otherDetailsId="otherDetails"+scopeId;
 
         };
         /**
