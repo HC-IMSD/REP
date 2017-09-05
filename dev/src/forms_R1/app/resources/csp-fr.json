@@ -39,7 +39,7 @@
   "TIMELYDATE": "Date de première demande pour une autorisation de vente",
   "TIMELYCOUNTRY": "Pays de première demande pour une autorisation de vente",
   "CERT_TITLE": "Attestation",
-  "CERT_FS": "Représentant autorisé",
+  "CERT_FS": "Agent autorisé",
   "ADVANCE_FEE_PAYMENT": "Les frais sont payés ou un montant de (saisir le montant des frais) a été prépayé pour les frais",
   "FEE_TITLE": "Paiement des frais",
   "STATEMENT_TITLE": "Attestations",
