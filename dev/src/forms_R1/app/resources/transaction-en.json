@@ -111,7 +111,7 @@
   "GROSS_REVENUE":"Anticipated gross revenue for this drug product during the fee verification period",
   "TEN_PERCENT_REVENUE": "10% of anticipated gross revenue",
   "REQUIRED_DOC":"Required Documentation",
-  "SUPPORTING_DOC":"Please include information to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period. Supporting documentation provided with transaction include (check all that apply):",
+  "SUPPORTING_DOC":"Please include the required signed statement AND at least one of the support documentation to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period.",
   "EST_MARKET_SHARE":"Estimated market share (that is [i.e.], product's market potential compared to the total market for similar products in Canada)",
   "SIMILAR_PRODUCT":"Comparison to similar products on the Canadian market or other similar markets (e.g., United States, European Union)",
   "SALES_HISTORY":"Sales history prior to product upgrades or sales history of similar products",

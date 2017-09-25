@@ -107,7 +107,7 @@
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_fees = jsonObj.isFees;
-                if (jsonObj.isFees) {
+                if (jsonObj.isFees===YES) {
                     resultJson.TRANSACTION_ENROL.fee_details = this._mapFeeDetailsToOutput(jsonObj.feeDetails, YES, NO, $filter);
                 }
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;

@@ -22,6 +22,7 @@
         .constant("INTERNAL_TYPE","INT")
         .constant("EXTERNAL_TYPE","EXT")
         .constant("PHARMA_TYPE", "PHARMA")
-        .constant("RELATIVE_FOLDER_DATA","../data/");
-
+        .constant("RELATIVE_FOLDER_DATA","../data/")
+        .constant("ADVANCE_FEE_PAYMENT_EN","https://www.canada.ca/content/dam/hc-sc/migration/hc-sc/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av2-eng.pdf")
+        .constant("ADVANCE_FEE_PAYMENT_FR","https://www.canada.ca/content/dam/hc-sc/migration/hc-sc/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av2-fra.pdf");
 })();

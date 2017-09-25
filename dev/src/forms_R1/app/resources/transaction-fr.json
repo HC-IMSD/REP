@@ -107,6 +107,7 @@
   "CREDIT":"fr_Mastercard / Visa / Amex / Visa Debit / JCB International",
   "BANK_WIRE":"fr_Wire (include bank confirmation)",
   "EXISTING_CREDIT":"fr_Existing credit",
-  "PREFEERED_OPTION":"fr_Bill Payment Service Option (preferred method)"
+  "PREFEERED_OPTION":"fr_Bill Payment Service Option (preferred method)",
+  "SUPPORTING_DOC":"fr_Please include the required signed statement AND at least one of the support documentation to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period."
 
 }

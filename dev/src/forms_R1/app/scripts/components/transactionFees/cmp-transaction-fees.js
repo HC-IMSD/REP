@@ -4,7 +4,6 @@
         .module('transactionFeesModule', [
             'services',
             'hpfbConstants',
-            'rw.moneymask',
             'errorMessageModule'
         ]);
 
@@ -21,13 +20,14 @@
             controllerAs: 'transFeeCtrl',
             bindings: {
                 showErrors: '&',
-                feeRecord: '<'
+                feeRecord: '<',
+                language:'<'
             }
         });
 
-    transactionFeesController.$inject = ['$scope', '$window', 'TransactionLists', 'YES', 'NO'];
+    transactionFeesController.$inject = ['$scope', '$window', 'TransactionLists', 'YES', 'NO','ENGLISH','FRENCH','ADVANCE_FEE_PAYMENT_EN','ADVANCE_FEE_PAYMENT_FR'];
 
-    function transactionFeesController($scope, $window, TransactionLists, YES, NO) {
+    function transactionFeesController($scope, $window, TransactionLists, YES, NO,ENGLISH,FRENCH, ADVANCE_FEE_PAYMENT_EN,ADVANCE_FEE_PAYMENT_FR) {
 
         var vm = this;
         vm.model = {};
@@ -36,15 +36,15 @@
         vm.yesNoList = [YES, NO];
         vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.onePaymentError = [{type: "required", displayAlias: "ONE_PAYMENT_METHOD"}];
-        vm.alerts = [false, false,false];
-
+        vm.alerts = [false, false, false];
+        vm.lang=ENGLISH;
         /**
          * Called after onChanges evnet, initializes
          */
         vm.$onInit = function () {
             _setIdNames();
             vm.submissionType = TransactionLists.getFeeList();
-            vm.alerts = [false, false,false];
+            vm.alerts = [false, false, false];
         };
 
         vm.errorsTemp = function () {
@@ -55,6 +55,10 @@
          */
         vm.$onChanges = function (changes) {
 
+            if(changes.language){
+                console.log("Changes to lnang"+changes.language.currentValue);
+                vm.lang=changes.language.currentValue;
+            }
             if (changes.feeRecord) {
                 vm.model = changes.feeRecord.currentValue;
             }
@@ -94,6 +98,7 @@
                 return true;
             }
             vm.model.grossRevenue = 0;
+            vm.model.percentGross = 0;
             return false;
 
         };
@@ -172,8 +177,14 @@
         };
 
         vm.openPaymentForm = function () {
+            var feelink=ADVANCE_FEE_PAYMENT_EN;
+            console.log(vm.lang);
+            if(vm.lang==FRENCH){
 
-            $window.open('http://www.hc-sc.gc.ca/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av-eng.pdf', '_blank');
+                feelink=ADVANCE_FEE_PAYMENT_FR;
+            }
+
+            $window.open(feelink, '_blank');
         }
 
         vm.setDocOther = function () {
@@ -214,7 +225,7 @@
             vm.deferralStateId = "deferralState" + scopeId; //statement supporting deferral
             vm.statement10Id = "statementSalse" + scopeId;
             vm.otherId = "other" + scopeId;
-            vm.otherDetailsId="otherDetails"+scopeId;
+            vm.otherDetailsId = "otherDetails" + scopeId;
 
         };
         /**
@@ -235,11 +246,6 @@
                 vm.alerts[value] = true;
             }
         }
-
-
-
-
-
 
 
     }

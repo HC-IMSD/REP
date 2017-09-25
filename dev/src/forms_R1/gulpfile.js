@@ -308,8 +308,7 @@ var libProd = [
     paths.lib + libFileNames.messagesMin,
     paths.lib + libFileNames.ariaMin,
     paths.lib + libFileNames.uibTemplates,
-    paths.lib + libFileNames.ngIf,
-    paths.lib + libFileNames.moneyMask
+    paths.lib + libFileNames.ngIf
 
 ];
 
