@@ -362,14 +362,26 @@
             saveAs(blob, fileName);
         }
 
-        function xmlToFile(jsonObj, fileName, rootTag) {
+        /**
+         *
+         * @param jsonObj
+         * @param fileName
+         * @param rootTag
+         * @param xslName - (optional). The stylesheet name. For backwards compatibility defaults to REP_Combined
+         */
+        function xmlToFile(jsonObj, fileName, rootTag,xslName) {
             if (!jsonObj) return;
             //As per meeting of Oct 21, ignore checksum
             //clear out any previous value if it exists
             //jsonObj[rootTag].data_checksum = "";
             var xmlResult = convertJSONObjectsToXML(jsonObj);
             //TODO this needs to be configurable
-           xmlResult= '<?xml version="1.0" encoding="UTF-8"?>'+ '<?xml-stylesheet  type="text/xsl" href="REP_Combined.xsl"?>'+xmlResult;
+            if(!xslName) {
+                xmlResult = '<?xml version="1.0" encoding="UTF-8"?>' + '<?xml-stylesheet  type="text/xsl" href="REP_Combined.xsl"?>' + xmlResult;
+            }else{
+
+                xmlResult = '<?xml version="1.0" encoding="UTF-8"?>' + '<?xml-stylesheet  type="text/xsl" href="'+xslName+'"?>' + xmlResult;
+            }
            // var hash = CryptoJS.SHA256(xmlResult);
             //jsonObj[rootTag].data_checksum = hash.toString();
             //regenerate the xml
