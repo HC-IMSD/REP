@@ -28,12 +28,12 @@
                 onDelete: '&',
                 enableDeleteIndex: '&',
                 isEctd: '<',
-                activityTypes:'<'
+                activityTypes:'<' //list of activity types
             }
         });
-    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate'];
+    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate','$scope'];
 
-    function lifecycleRecCtrl(TransactionLists, $translate) {
+    function lifecycleRecCtrl(TransactionLists, $translate,$scope) {
         var vm = this;
         vm.savePressed = false;
        // vm.activityList = TransactionLists.getActivityTypes();
@@ -54,13 +54,14 @@
         };
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.yearList = _createYearList();
-
+        vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         vm.$onInit = function () {
 
             //lazy load of year lust
             if (!vm.yearList || vm.yearList.length === 0) {
                 vm.yearList = _createYearList();
             }
+            vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         };
 
         /**
@@ -79,7 +80,17 @@
             }
         };
 
+        /**
+         * If the form is dirty always set that it is not valid
+         */
+        $scope.$watch('lifecycleCtrl.lifecycleDetailsForm.$dirty', function() {
+            if(vm.lifecycleDetailsForm.$dirty) {
+                vm.isDetailValid({state:false})
+            }
+        }, true);
 
+
+        //sets the start date calendar state
         vm.openStartDate = function () {
             vm.startDateOpen = true;
         };
@@ -89,7 +100,6 @@
         vm.openFiledDate = function () {
             vm.filedDateOpen = true;
         };
-
 
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
@@ -110,6 +120,8 @@
             return true;
         };
 
+
+        //TODO move this logic to a service.
         /**
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
          * @param value
@@ -128,12 +140,12 @@
                 case ("B02-20160301-001"): //ANDS
                     vm.descriptionList = TransactionLists.getAndsType();
                     break;
-              /*  case ("DINA"):
+                case ("B02-20160301-018"):
                     vm.descriptionList = TransactionLists.getDinaType();
-                    break;*/
-              /*  case ("DINB"):
+                    break;
+              case ("B02-20160301-019"):
                     vm.descriptionList = TransactionLists.getDinbType();
-                    break;*/
+                    break;
                 case ("B02-20160301-031"): //EU NDS (Extraordinary Use New Drug Submission)
                     vm.descriptionList = TransactionLists.getEundsType();
                     break;
@@ -162,12 +174,12 @@
                 case ("B02-20160301-051"): //NDS (New Drug Submission)
                     vm.descriptionList = TransactionLists.getNdsType();
                     break;
-               /* case ("PDC"):
+               case ("B02-20160301-070"):
                     vm.descriptionList = TransactionLists.getPdcType();
-                    break;*/
-               /* case ("PDC_B"):
+                    break;
+             case ("B02-20160301-071"):
                     vm.descriptionList = TransactionLists.getPdcBType();
-                    break;*/
+                    break;
                 case ("B02-20160301-067"): //PAND (Pandemic Application)
                     vm.descriptionList = TransactionLists.getPANDType();
                     break;
@@ -216,6 +228,25 @@
                 case ("B02-20160301-089"): //YBPR (Yearly Biologic Product Report)
                     vm.descriptionList = TransactionLists.getYbprType();
                     break;
+                case ("B02-20160301-028"): //DSUR (Development Safety Update Report)
+                    vm.descriptionList = TransactionLists.getDSurType();
+                    break;
+                case ("B02-20160301-043"):
+                    vm.descriptionList = TransactionLists.getMPDINType();
+                    break;
+                case ("B02-20160301-070"):
+                    vm.descriptionList = TransactionLists.getPdcType();
+                    break;
+                case ("B02-20160301-071"):
+                    vm.descriptionList = TransactionLists.getPdcBType();
+                    break;
+                case ("B02-20160301-020"):
+                    vm.descriptionList = TransactionLists.getDindType();
+                    break;
+                case ("B02-20160301-021"):
+                    vm.descriptionList = TransactionLists.getDinfType();
+                    break;
+
 
                 default:
                     vm.descriptionList = "";
@@ -242,72 +273,85 @@
                 return;
             }
             switch (value) {
-                case('ADMINISTRATIVE'):         /*FALLTHROUGH*/
-                case('BENEFIT_RISK_ASSESS'):    /*FALLTHROUGH*/
-                case('CANCEL_LETTER'):          /*FALLTHROUGH*/
-                case('CHANGE_TO_DIN'):          /*FALLTHROUGH*/
-                case('DIN_DISCONTINUED'):       /*FALLTHROUGH*/
-                case('DRUG_NOTIF_FORM'):        /*FALLTHROUGH*/
-                case('INITIAL'):                /*FALLTHROUGH*/
-                case('NOTIFICATION_CHANGE'):    /*FALLTHROUGH*/
-                case('PANDEMIC_APPL'):          /*FALLTHROUGH*/
-                case('POST_CLEARANCE_DATA'):    /*FALLTHROUGH*/
-                case('POST_MARKET_SURV'):       /*FALLTHROUGH*/
-                case('POST_NOC_CHANGE'):        /*FALLTHROUGH*/
-                case('POST_AUTH_DIV1_CHANGE'):  /*FALLTHROUGH*/
-                case('PRESUB_MEETING_PKG'):     /*FALLTHROUGH*/
-                case('PRIORITY_REVIEW_RQ'):     /*FALLTHROUGH*/
-                case('PRISTINE_PM'):            /*FALLTHROUGH*/
-                case('PRISTINE_PM_2LANG'):      /*FALLTHROUGH*/
-                case('RISK_COMMUN_DOC'):        /*FALLTHROUGH*/
-                case('SIGNAL_WORK_UP'):         /*FALLTHROUGH*/
-                case('PRESUB_MEETING_RQ'):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.ADMINISTRATIVE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.BENEFIT_RISK_ASSESS):    /*FALLTHROUGH*/
+                case(vm.descriptionObj.CANCEL_LETTER):          /*FALLTHROUGH*/
+                case(vm.descriptionObj.CHANGE_TO_DIN):          /*FALLTHROUGH*/
+                case(vm.descriptionObj.DIN_DISCONTINUED):       /*FALLTHROUGH*/
+                case(vm.descriptionObj.DRUG_NOTIF_FORM):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.INITIAL):                /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOTIFICATION_CHANGE):    /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOTIFICATION_INTERRUPT_SALE): /*FALLTHROUGH July 17,2017 added*/
+                case(vm.descriptionObj.PANDEMIC_APPL):          /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_CLEARANCE_DATA):    /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_MARKET_SURV):       /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_NOC_CHANGE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.POST_AUTH_DIV1_CHANGE):  /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRESUB_MEETING_PKG):     /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRIORITY_REVIEW_RQ):     /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRISTINE_PM):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRISTINE_PM_2LANG):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.RECON_DECIS_LTR_INTENT):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.RECON_DECIS_RQ_RECON):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.RECON_DECIS_OTHER_INFO):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.LABEL_PREAPPROVAL_2LANG):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.RISK_COMMUN_DOC):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.SIGNAL_WORK_UP):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.PRESUB_MEETING_RQ):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.CORR_PATENT_MED):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.ALLEGATION_NOTICE):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.FORM_IV):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.FORM_V):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.CONSENT_LTR):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.DATA_PROTECT_CORRESP):  /*FALLTHROUGH Jul 17,2017 added*/
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();
                     break;
 
-                case('COMMENTS_NOC'):             /*FALLTHROUGH*/
-                case('COMMENTS_SUMMARY_BASIS'):   /*FALLTHROUGH*/
-                case('MEETING_MINUTES'):            /*FALLTHROUGH*/
-                case('ADVISEMENT_LETTER_RESPONSE'):   /*FALLTHROUGH*/
-                case('CLIN_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case('EMAIL_RQ_RESPONSE'):            /*FALLTHROUGH*/
-                case('LABEL_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('MHPD_RQ_RESPONSE'):             /*FALLTHROUGH*/
-                case('NOC_RESPONSE'):                  /*FALLTHROUGH*/
-                case('NOD_RESPONSE'):                  /*FALLTHROUGH*/
-                case('NON_RESPONSE'):                 /*FALLTHROUGH*/
-                case('PROCESSING_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case('QUAL_CLIN_CLARIF_RESPONSE'):   /*FALLTHROUGH*/
-                case('QUAL_CLARIF_RESPONSE'):         /*FALLTHROUGH*/
-                case('SDN_RESPONSE'):                 /*FALLTHROUGH*/
-                case('PHONE_RQ_RESPONSE'):         /*FALLTHROUGH*/
-                case('BE_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('SCREENING_ACCEPT_RESPONSE'):        /*FALLTHROUGH*/
-                case('SCREENING_CLARIF_RESPONSE'):        /*FALLTHROUGH*/
-                case('NOL_RESPONSE'):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.COMMENTS_NOC):             /*FALLTHROUGH*/
+                case(vm.descriptionObj.COMMENTS_SUMMARY_BASIS):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.MEETING_MINUTES):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.ADVISEMENT_LETTER_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.EMAIL_RQ_RESPONSE):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.MHPD_RQ_RESPONSE):             /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOC_RESPONSE):                  /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOD_RESPONSE):                  /*FALLTHROUGH*/
+                case(vm.descriptionObj.NON_RESPONSE):                 /*FALLTHROUGH*/
+                case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.SDN_RESPONSE):                 /*FALLTHROUGH*/
+                case(vm.descriptionObj.PHONE_RQ_RESPONSE):         /*FALLTHROUGH*/
+                case(vm.descriptionObj.BE_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.SCREENING_ACCEPT_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.SCREENING_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.NOL_RESPONSE):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
+                case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
 
                     setAsStartDate();
                     vm.setConcatDetails();
                     break;
-                case('RMP_VERSION_DATE'):
+                case(vm.descriptionObj.RMP_VERSION_DATE):
                     setVersionAndDate();
                     vm.setConcatDetails();
                     break;
 
-                case('FOR_PERIOD'):
+                case(vm.descriptionObj.FOR_PERIOD):
                     setAsDatePeriod();
                     vm.setConcatDetails();
                     break;
 
-                case('UNSOLICITED_DATA'):
+                case(vm.descriptionObj.UNSOLICITED_DATA):
 
                     setAsDescription();
                     vm.setConcatDetails();
                     break;
 
-                case('YEAR_LIST_OF_CHANGE'):
+                case(vm.descriptionObj.YEAR_LIST_OF_CHANGE):
                     setAsDescriptionYear();
                     vm.setConcatDetails();
                     break;
@@ -333,6 +377,7 @@
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.descriptionLabel = "LIST_DESCRIPT";
         }
 
         function setDetailsAsNone() {
@@ -355,6 +400,7 @@
             vm.descriptionVisible = true;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.descriptionLabel = "BRIEF_DESC";
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
@@ -438,7 +484,7 @@
                 concatText = enDescription +" "+ vm.lifecycleModel.sequenceVersion + concatText;
             }
             if (vm.yearVisible) {
-                concatText = vm.lifecycleModel.year + ": " + vm.lifecycleModel.details;
+                concatText = vm.lifecycleModel.year + ", " + vm.lifecycleModel.details;
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;
@@ -473,15 +519,16 @@
         vm.discardChanges = function () {
             if (vm.lifecycleDetailsForm.$pristine) return;
             _updateLocalModel(vm.lifecycleRecord);
+            vm.lifecycleDetailsForm.$setPristine();
             vm.isDetailValid({state: vm.lifecycleDetailsForm.$valid});
             vm.savePressed = false;
         };
 
         /**
-         * @ngdoc method -Updates the parent on whether this record is valid or not
+         * @ngdoc method -Updates the parent on whether this record is valid or not deprecated
          */
         vm.updateValid = function () {
-            //vm.isDetailValid({state: (vm.addressRecForm.$valid && !vm.addressRecForm.$dirty)});
+            vm.isDetailValid({state: (vm.lifecycleDetailsForm.$valid && !vm.lifecycleDetailsForm.$dirty)});
         };
 
 
@@ -523,9 +570,10 @@
          * @ngdoc method toggles error state to make errors visible
          * @returns {boolean}
          */
-        vm.showError = function (isInvalid, isTouched) {
+        vm.showError = function (ctrl) {
+            if(!ctrl) return false;
 
-            if ((isInvalid && isTouched) || (vm.savePressed && isInvalid )) {
+            if ((ctrl.$invalid &&ctrl.$touched) || (vm.savePressed && ctrl.$invalid )) {
                 return true
             }
             return (false);

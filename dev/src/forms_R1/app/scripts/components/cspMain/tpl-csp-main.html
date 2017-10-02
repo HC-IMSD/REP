@@ -3,12 +3,12 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_CSPFILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'HELP_CSPFILE_LOAD'|translate}}" class="btn-xs rep-help-button"
                             id="load-instructions-toggle" ng-click="main.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_CSPFILE_LOAD'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_CSPFILE_LOAD'|translate}}"</span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{'LOAD_CSP_FILE'| translate}}</h2>
+                <h2 class="panel-title">{{::'LOAD_CSP_FILE'| translate}}</h2>
             </header>
             <div class="panel-body">
                 <cmp-alert  ui-state="main.alerts[0]" msg="CSPFILE_LOAD" update-state="main.toggleAlert(0)" type="alert-info">
@@ -31,7 +31,7 @@
         <div ng-if="main.showHCOnlySection()">
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
-                    <h2 class="panel-title">{{'HCONLY'|translate}}</h2>
+                    <h2 class="panel-title">{{::'HCONLY'|translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <cmp-csp-hc-only record="main.cspModel.healthCanadaOnly" show-errors="main.showErrors()"
@@ -43,24 +43,24 @@
 
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-                <h2 class="panel-title">{{'CSP_TITLE'|translate}}</h2>
+                <h2 class="panel-title">{{::'CSP_TITLE'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-3 form-group">
-                        <label for="enr-version-text_{{$id}}">{{"ENROL_VERSION"| translate}}</label>
-                        <input type="text" class="form-control" id="enr-version-text_{{$id}}"
+                        <label for="enr-version-text_{{::$id}}">{{::"ENROL_VERSION"| translate}}</label>
+                        <input type="text" class="form-control" id="enr-version-text_{{::$id}}"
                                ng-readonly="true"
                                ng-model="main.cspModel.enrolmentVersion"/>
                     </div>
                     <div class="col-xs-12 col-sm-6 form-group">
-                        <label for="date-saved-text_{{$id}}">{{"DATE_SAVED"| translate}}
-                            <input type="text" class="form-control" id="date-saved-text_{{$id}}"
+                        <label for="date-saved-text_{{::$id}}">{{::"DATE_SAVED"| translate}}
+                            <input type="text" class="form-control" id="date-saved-text_{{::$id}}"
                                    ng-model="main.cspModel.dateSaved" ng-readonly="true"/>
                         </label>
-                        <button title="{{'VERSION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                        <button title="{{::'VERSION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                 id="version-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'VERSION_INSTRUCT'|translate}}"</span>
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'VERSION_INSTRUCT'|translate}}"</span>
                         </button>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3>1.&nbsp;{{'APPL_TITLE'|translate}}</h3>
+                        <h3>1.&nbsp;{{::'APPL_TITLE'|translate}}</h3>
                     </div>
                 </div>
                 <div>
@@ -95,10 +95,10 @@
                 <div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <h3>2.&nbsp;{{'PATENT_TITLE'|translate}}
-                                <button title="{{'HELP_PATENT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <h3>2.&nbsp;{{::'PATENT_TITLE'|translate}}
+                                <button title="{{::'HELP_PATENT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                         ng-click="main.addInstruct(2)"><span
-                                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_PATENT'|translate}}"</span>
+                                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_PATENT'|translate}}"</span>
                                 </button>
                             </h3>
                         </div>
@@ -139,10 +139,10 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3>8.&nbsp;{{'FEE_TITLE'|translate}}
-                            <button title="{{'HELP_FEE'|translate}}" class="btn rep-help-button-primary btn-xs"
+                        <h3>8.&nbsp;{{::'FEE_TITLE'|translate}}
+                            <button title="{{::'HELP_FEE'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     ng-click="main.addInstruct(3)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FEE'|translate}}"</span>
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_FEE'|translate}}"</span>
                             </button>
                         </h3>
                     </div>
@@ -170,10 +170,10 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <h3>9.&nbsp;{{'CERT_TITLE'|translate}}
-                            <button title="{{'HELP_CERT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                        <h3>9.&nbsp;{{::'CERT_TITLE'|translate}}
+                            <button title="{{::'HELP_CERT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     ng-click="main.addInstruct(4)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_FEE'|translate}}"</span>
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_FEE'|translate}}"</span>
                             </button>
                         </h3>
                     </div>
@@ -206,7 +206,7 @@
         <div class="row btn-group-sm">
             <div class="form-group col-md-4">
                 <button class="btn btn-default btn-lg active" id="btn_draftSave" ng-click="main.saveJson()">
-                    {{'SAVE_WORKING' |translate}}
+                    {{::'SAVE_WORKING' |translate}}
                 </button>
             </div>
             <div class="form-group col-md-4">

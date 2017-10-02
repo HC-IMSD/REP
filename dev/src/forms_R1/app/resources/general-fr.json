@@ -35,6 +35,7 @@
   "BIOLOGIC": "fr_Biologic",
   "PHARMACEUTICAL": "fr_Pharmaceutical",
   "HELP_FILE_LOAD": "fr_File Load Instructions",
+  "EXPAND": "fr_Expand",
   "HELP_ACTIVITY_MAIN": "fr_Activity Instructions",
   "HELP_ACTIVITY_REP": "fr_REP Contact Instructions",
   "CALENDAR": "fr_Pick date from calendar",
@@ -48,5 +49,7 @@
   "SAVE_WORKING":"Enregistrer une copie de travail",
   "COMPANY_NOABBREV": "fr_Company Name (Full legal Name - no abbreviations)",
   "CLOSE":"Minimiser les instructions",
-  "COLLAPSE":"Minimiser les"
+  "COLLAPSE":"Minimiser les",
+  "SAVE_RECORD":"fr_Save Record",
+  "DELETE_RECORD":"fr_Delete Record"
 }

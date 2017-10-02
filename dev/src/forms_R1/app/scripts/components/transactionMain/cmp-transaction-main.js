@@ -10,11 +10,11 @@
 
     TransactionMainCtrl.$inject = ['TransactionService', 'hpfbFileProcessing', '$filter','$translate','ENGLISH'];
 
-    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, ENGLISH) {
+    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, ENGLISH, EXTERNAL_TYPE) {
 
         var vm = this;
         vm.savePressed = false;
-        vm.userType = "EXT";
+        vm.userType = EXTERNAL_TYPE;
         vm.transactionService = new TransactionService();
         vm.rootTag = vm.transactionService.getRootTag();
         vm.transaction = vm.transactionService.getModelInfo();
@@ -113,7 +113,7 @@
         };
 
         vm.isExtern = function () {
-            return vm.userType == "EXT";
+            return vm.userType == EXTERNAL_TYPE;
 
         };
         vm.showErrors = function () {

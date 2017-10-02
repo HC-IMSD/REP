@@ -25,9 +25,9 @@
             'contactModule25',
             'adminSubmission',
             'activityLists',
-            'ui.bootstrap',
             'ui.select',
-            'hpfbConstants'
+            'hpfbConstants',
+            'alertModule'
            /* 'errorMessageModule'*/
         ])
 })();
