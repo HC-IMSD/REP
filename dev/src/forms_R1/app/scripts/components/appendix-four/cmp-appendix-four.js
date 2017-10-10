@@ -32,7 +32,9 @@
             }
         });
 
-    function appendixFourCtrl() {
+    appendixFourCtrl.$inject=['$scope'];
+
+    function appendixFourCtrl($scope) {
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
         vm.resetToCollapsed = true;
