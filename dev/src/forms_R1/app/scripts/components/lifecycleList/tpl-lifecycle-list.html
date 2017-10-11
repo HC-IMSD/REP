@@ -10,7 +10,7 @@
                         </span>
         </strong>
     </label>
-    <div class="row">
+    <div class="row" ng-if="lifeListCtrl.ectdValue">
         <div class="col-xs-4 form-group">
             <label for="startSeq"> Starting sequence number
                 <input id="startSeq" type="number" step="1" style="width: 6em"
@@ -18,8 +18,9 @@
             </label>
         </div>
         <div class="col-xs-4">
-            <button class="btn btn-primary btn-sm" ng-click="lifeListCtrl.setStartingSequence()">Update Sequence
+            <button class="btn btn-default btn-sm" ng-click="lifeListCtrl.setStartingSequence()">Update Sequence
             </button>
+        </div>
         </div>
         <div>
             <cmp-expanding-table list-items="lifeListCtrl.lifecycleList"

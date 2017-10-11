@@ -135,7 +135,15 @@
             if (!vm.ectdValue) {
                 record.sequence = "";
             } else {
-                record.sequence = "0000";
+               //TODO call service?
+                var seqText = "" + vm.startingSequence;
+                var pad = 4 - seqText.length;
+                var padText = "";
+                for (var i = 0; i < pad; i++) {
+                    padText = padText + "0";
+                }
+                seqText = padText + seqText;
+                record.sequence =  seqText;
             }
             vm.lifecycleList[0] = record;
         }
@@ -146,11 +154,11 @@
          * @returns {number}
          */
         vm.lastRecordSequence = function () {
-            if (!vm.lifecycleList) {
+            if (!vm.lifecycleList || vm.lifecycleList.length==1) {
                 //this case should never happen, should always be empty array
-                return 0;
+                return -1;
             }
-            return (vm.lifecycleList.length - 1);
+            return ((vm.lifecycleList.length - 1)+vm.startingSequence);
         };
         vm.updateErrorState = function () {
             if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
