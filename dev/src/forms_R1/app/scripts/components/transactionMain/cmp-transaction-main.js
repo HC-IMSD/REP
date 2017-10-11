@@ -21,6 +21,7 @@
         vm.showContent = _loadFileContent;
         vm.alerts = [false, false];
         vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.sequenceUpdated=false;
         /**
          *
          * @ngdoc method Saves the model content in JSON format
@@ -98,6 +99,12 @@
 
         vm.getNewRepContact = function () {
             return vm.transactionService.createRepContact();
+        };
+        vm.setSequenceNumber=function(startVal){
+
+            var result=vm.transactionService.setSequenceNumber(startVal);
+            vm.sequenceUpdated=!vm.sequenceUpdated;
+
         };
 
         //TODO remove?

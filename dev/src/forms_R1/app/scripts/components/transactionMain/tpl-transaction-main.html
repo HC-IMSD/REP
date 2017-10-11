@@ -36,6 +36,8 @@
                                   deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
                                   reset-ectd="main.transactionService.resetEctdSection()" language="main.lang"
                                   get-transaction="main.transactionService.getNewTransaction(main.transaction.isEctd==='Y')"
+                                  set-starting-sequence="main.setSequenceNumber(startVal)"
+                                  sequence-updated="main.sequenceUpdated"
                                   get-rep-contact="main.transactionService.getNewRepContact()"></cmp-transaction-info>
             <div class="row">
                 <div class="form-group col-md-3">

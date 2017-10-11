@@ -183,12 +183,25 @@
                 }
                 return model;
             },
-            _setSequenceNumber: function (value) {
-                if (!value)return;
-                var converted = parseInt(value);
-                if (converted > this.currSequence) {
-                    this.currSequence = converted;
+            setSequenceNumber: function (startVal) {
+                if (startVal===null)return false;
+                var converted = parseInt(startVal);
+               if (isNaN(converted)) {
+                   this.currSequence = 0;
+                   return false;
+               }
+               this.currSequence = converted;
+               var model= this.getModelInfo();
+
+                if(model.ectd.lifecycleRecord &&model.ectd.lifecycleRecord.length>0) {
+                    //number in reverse order
+                    for(var i=(model.ectd.lifecycleRecord.length-1);i>=0;i--){
+                        var rec=model.ectd.lifecycleRecord[i];
+                        rec.sequence=this.getNextSequenceNumber();
+                    }
                 }
+                return true;
+
             },
             getNextSequenceNumber: function () {
 
@@ -218,7 +231,7 @@
 
                     result.push(record);
                 }
-                this._setSequenceNumber(jsonObj.length);
+                this.setSequenceNumber(jsonObj.length);
                 return result
             },
             _mapLifecycleListToOutput: function (jsonObj) {
