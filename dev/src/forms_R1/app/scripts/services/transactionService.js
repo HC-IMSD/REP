@@ -225,6 +225,7 @@
             },
             _mapLifecycleList: function (jsonObj) {
                 var result = [];
+                this.currSequence=0; //reset the starting
                 if (!jsonObj) return result;
                 if (!(jsonObj instanceof Array)) {
                     //make it an array, case there is only one record
@@ -244,7 +245,6 @@
                 if(this.currSequence<0) {
                     this.currSequence=0;
                 }
-                console.log("this is the sequence"+sequence);
                 if(isNaN(sequence)) return;
                 if(sequence>this.currSequence){
                     this.currSequence=sequence+1;

@@ -85,7 +85,7 @@
             vm.activityTypes= TransactionLists.getActivityTypes();
             vm.selectRecord = -1;
             vm.addFocused = false;
-            vm.startingSequence=vm.getCurrentSequence();
+            vm.startingSequence=0;
 
         };
 
@@ -96,7 +96,7 @@
                 vm.lifecycleList = changes.records.currentValue;
                 vm.isDetailsValid = true;
                 vm.updateErrorState();
-                vm.startingSequence=vm.getCurrentSequence();
+                vm.startingSequence=0;
             }
             if (changes.parentDirty) {
                 vm.isParentDirty = changes.parentDirty.currentValue;
@@ -108,7 +108,7 @@
             }
             if(changes.sequenceUpdated){
                 vm.seqUpdated=changes.sequenceUpdated.currentValue;
-                vm.startingSequence=vm.getCurrentSequence();
+                //vm.startingSequence=vm.getCurrentSequence();
             }
         };
 
@@ -157,11 +157,9 @@
          * @returns {number}
          */
         vm.lastRecordSequence = function () {
-            if (!vm.lifecycleList || vm.lifecycleList.length==1) {
-                //this case should never happen, should always be empty array
-                return -1;
-            }
-            return ((vm.lifecycleList.length - 1)+vm.startingSequence);
+
+            return vm.getCurrentSequence()-1;
+
         };
         vm.updateErrorState = function () {
             if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
