@@ -42,7 +42,8 @@
                 resetEctd: '&',
                 deprecateSequence: '&',
                 language:'<',
-                sequenceUpdated:'<'
+                sequenceUpdated:'<',
+                getCurrentSequence:'&'
             }
         });
 

@@ -26,7 +26,8 @@
                 showErrors: '&',
                 isEctd: '<',
                 parentDirty: '<',
-                sequenceUpdated:'<'
+                sequenceUpdated:'<',
+                getCurrentSequence:'&'
             },
             controller: lifecycleListCtrl,
             controllerAs: 'lifeListCtrl'
@@ -84,7 +85,7 @@
             vm.activityTypes= TransactionLists.getActivityTypes();
             vm.selectRecord = -1;
             vm.addFocused = false;
-            vm.startingSequence=0;
+            vm.startingSequence=vm.getCurrentSequence();
 
         };
 
@@ -95,6 +96,7 @@
                 vm.lifecycleList = changes.records.currentValue;
                 vm.isDetailsValid = true;
                 vm.updateErrorState();
+                vm.startingSequence=vm.getCurrentSequence();
             }
             if (changes.parentDirty) {
                 vm.isParentDirty = changes.parentDirty.currentValue;
@@ -106,6 +108,7 @@
             }
             if(changes.sequenceUpdated){
                 vm.seqUpdated=changes.sequenceUpdated.currentValue;
+                vm.startingSequence=vm.getCurrentSequence();
             }
         };
 
