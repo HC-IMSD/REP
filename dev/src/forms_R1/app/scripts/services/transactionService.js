@@ -194,12 +194,29 @@
                 }
                 return model;
             },
-            _setSequenceNumber: function (value) {
-                if (!value) return;
-                var converted = parseInt(value);
-                if (converted > this.currSequence) {
-                    this.currSequence = converted;
+            getCurrentSequence:function(){
+
+              return(this.currSequence);
+            },
+            setSequenceNumber: function (startVal) {
+                if (startVal === null) return false;
+                var converted = parseInt(startVal);
+                if (isNaN(converted)) {
+                    this.currSequence = 0;
+                    return false;
                 }
+                this.currSequence = converted;
+                var model = this.getModelInfo();
+
+                if (model.ectd.lifecycleRecord && model.ectd.lifecycleRecord.length > 0) {
+                    //number in reverse order
+                    for (var i = (model.ectd.lifecycleRecord.length - 1); i >= 0; i--) {
+                        var rec = model.ectd.lifecycleRecord[i];
+                        rec.sequence = this.getNextSequenceNumber();
+                    }
+                }
+                return true;
+
             },
             getNextSequenceNumber: function () {
 
@@ -219,6 +236,7 @@
             },
             _mapLifecycleList: function (jsonObj) {
                 var result = [];
+                this.currSequence=0; //reset the starting
                 if (!jsonObj) return result;
                 if (!(jsonObj instanceof Array)) {
                     //make it an array, case there is only one record
@@ -226,12 +244,25 @@
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
                     var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
-
+                    //update the start value;
+                    this._setNextSequenceOnLoad(parseInt(record.sequence));
                     result.push(record);
                 }
-                this._setSequenceNumber(jsonObj.length);
+                //this.setSequenceNumber(jsonObj.length);
                 return result
             },
+            _setNextSequenceOnLoad: function (sequence) {
+
+                if(this.currSequence<0) {
+                    this.currSequence=0;
+                }
+                if(isNaN(sequence)) return;
+                if(sequence>this.currSequence){
+                    this.currSequence=sequence+1;
+                }
+            },
+
+
             _mapLifecycleListToOutput: function (jsonObj) {
                 var result = [];
                 if (!jsonObj) return result;
@@ -249,7 +280,9 @@
                     result.push(record);
                 }
                 return result
-            },
+            }
+            ,
+
             resetEctdSection: function () {
 
                 if (this._default.hasOwnProperty('ectd')) {

@@ -35,15 +35,18 @@
             controllerAs: 'transInfoCtrl',
             bindings: {
                 transactionRoot: '<',
-                onUpdate: '&',
+                //onUpdate: '&',
                 isAmend: '<',
                 showErrors: '&',
                 getTransaction: '&',
+                setStartingSequence:'&',
                 getRepContact: '&',
                 getFee:'&',
                 resetEctd: '&',
                 deprecateSequence: '&',
-                language:'<'
+                language:'<',
+                sequenceUpdated:'<',
+                getCurrentSequence:'&'
             }
         });
 
@@ -62,6 +65,7 @@
         vm.alerts = [false,false];
         vm.requesterList = [];
         vm.lang=ENGLISH;
+        vm.sequenceChange=false;
         vm.$onInit = function () {
             _setIdNames();
             loadContactData(); //asynch load of contact data
@@ -80,6 +84,9 @@
 
                 vm.lang=changes.language.currentValue;
             }
+            if(changes.sequenceUpdated){
+                vm.sequenceChange=changes.sequenceUpdated.currentValue;
+            }
 
         };
 
@@ -90,6 +97,16 @@
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
         };
+
+        vm.setSequence=function(start){
+
+            if(isNaN(start) ||start==null){
+                start=0;
+            }
+            vm.setStartingSequence({startVal:start});
+
+        };
+
         vm.getNewRepContact = function () {
             return (vm.getRepContact());
         };

@@ -28,7 +28,8 @@
                 onDelete: '&',
                 enableDeleteIndex: '&',
                 isEctd: '<',
-                activityTypes:'<' //list of activity types
+                activityTypes:'<', //list of activity types
+                sequenceUpdated:'<'
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate','$scope'];
@@ -77,6 +78,12 @@
             }
             if(changes.activityTypes){
                 vm.activityList=changes.activityTypes.currentValue;
+            }
+            if(changes.sequenceUpdated){
+                if(!changes.lifecycleRecord && vm.lifecycleRecord) {
+                    vm.lifecycleModel.sequence=vm.lifecycleRecord.sequence;
+                    //_updateLocalModel(vm.lifecycleRecord);
+                }
             }
         };
 

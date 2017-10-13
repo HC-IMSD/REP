@@ -120,7 +120,10 @@
                                                     is-ectd="transInfoCtrl.isEctd"
                                                     deprecate-sequence="transInfoCtrl.subtractSequence()"
                                                     show-errors="transInfoCtrl.showFormErrors()"
-                                                    parent-dirty="transInfoCtrl.transInfoForm.$dirty"
+                                                    parent-dirty="transInfoForm.$dirty"
+                                                    set-sequence-value="transInfoCtrl.setSequence(start)"
+                                                    sequence-updated="transInfoCtrl.sequenceChange"
+                                                    get-current-sequence="transInfoCtrl.getCurrentSequence()"
                                                     get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
 
                             </div>
@@ -371,6 +374,6 @@
                 </div>
             </section>
         </div>
-        <!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
+      <!--     <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
     </ng-form>
 </div>
