@@ -10,6 +10,7 @@
             [
                 'expandingTable',
                 'errorSummaryModule',
+                'errorMessageModule',
                 'appendix4RecordModule'
             ])
 })();
@@ -26,7 +27,7 @@
                 ingredients: '<',
                 recordChanged: '&',
                 service: '<',
-              /*  errorSummaryUpdate:'<',*/
+               errorSummaryUpdate:'<',
                 showErrorSummary:'<',
                 updateErrorSummary:'&'
             }
@@ -37,7 +38,7 @@
     function appendixFourCtrl($scope) {
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
-        vm.resetToCollapsed = true;
+        //vm.resetToCollapsed = true;
         vm.colNames = [
             {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
         ];
@@ -46,11 +47,19 @@
         vm.showSummary = false;
         vm.focusSummary = 0;
         vm.exclusions = {};
-        vm.transcludeList = {};
-        vm.alias = {};
+        vm.transcludeList={
+            "cmp-appendix-four-record": "true"
+        };
+        vm.alias = {
+            "oneselected": {
+                "type": "element",
+                "target": "addSrcIngred"
+            }
+        }
 
 
         vm.$onInit = function () {
+            _setIdNames();
             vm.newFormShown = false;
             vm.isDetailValid = true; //TODO needs to be managed in ADD and delete
 
@@ -58,6 +67,7 @@
                 vm.ingredientList = [];
                 // vm.ingredientList = vm.ingredients;
             }
+
         };
 
         vm.$onChanges = function (changes) {
@@ -65,8 +75,18 @@
             if (changes.ingredients) {
                 vm.ingredientList = changes.ingredients.currentValue;
             }
-        };
 
+            if(changes.showErrorSummary){
+
+                vm.showSummary=changes.showErrorSummary.currentValue;
+
+            }
+            if(changes.errorSummaryUpdate){
+
+                vm.updateErrorSummaryState();
+            }
+
+        };
 
         vm.addNew = function () {
             var newRecord = {
@@ -74,9 +94,9 @@
                 "ingredientName": ""
             };
             vm.ingredientList.push(newRecord);
-            vm.resetToCollapsed = !vm.resetToCollapsed;
-            ;
-            vm.selectRecord = ( vm.ingredientList.length - 1);
+           // vm.resetToCollapsed = !vm.resetToCollapsed;
+            //vm.selectRecord = ( vm.ingredientList.length - 1);
+            vm.setRecord(vm.ingredientList.length - 1);
 
         };
 
@@ -108,9 +128,31 @@
             vm.updateSummary = vm.updateSummary + 1;
         };
 
-        $scope.$watch('ap4Ctrl.appendixForm.$error', function () {
-            vm.updateErrorSummary();
-        }, true);
+        $scope.$watchCollection(
+            "ap4Ctrl.appendixForm.$error",
+            function( newValue, oldValue ) {
+                vm.updateErrorSummary();
+            }
+        );
+
+
+        vm.setRecord=function(value){
+            resetMe();
+            vm.selectRecord=-1;
+            vm.selectRecord=value;
+
+        };
+        function resetMe(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+
+        }
+
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.appendix4Id="appendix_form" + scopeId;
+
+        }
 
     }
 })();

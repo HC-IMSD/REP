@@ -134,5 +134,8 @@
   "REPRODUCTIVE_DETAILS": "Other reproductive system details",
   "SKIN_DETAILS": "Other skin and glandular system details",
   "ADD_SOURCED":"Add Sourced Ingredient",
-  "DELETE_SOURCED":"Delete Sourced Ingredient"
+  "DELETE_SOURCED":"Delete Sourced Ingredient",
+  "AP4CTRL.APPENDIXFORM":"in the appendix tab",
+  "CMP-APPENDIX-FOUR-RECORD":"Human / Animal Sourced Record"
+
 }

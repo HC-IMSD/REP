@@ -7,7 +7,12 @@
     'use strict';
 
     angular
-        .module('appendix4RecordModule', ['tissuesFluidsList','animalSourcedSection'])
+        .module('appendix4RecordModule', [
+            'tissuesFluidsList',
+            'animalSourcedSection',
+            'errorSummaryModule',
+            'errorMessageModule'
+        ])
 })();
 
 (function () {
@@ -28,15 +33,18 @@
                 onCancel: '&',
                 deleteBtn:'<',
                 recordChanged: '&',
-                service: '<'
+                service: '<',
+                errorSummaryUpdate:'<', //sending a signal that the error summary should be updated
+                showErrorSummary:'<', //flag to show or hide the error summary
+                updateErrorSummary:'&' //function to update the list of error summmaries
             }
 
         });
+    app4RecCtrl.$inject=['$scope']
+    function app4RecCtrl($scope){
 
-    function app4RecCtrl(){
-
-        var self = this;
-        self.isSourced = ""; //determines if at least one source is selected
+        var vm = this;
+        vm.isSourced = ""; //determines if at least one source is selected
         var emptyFluidsTissues = {
             tissuesList: []
         };
@@ -49,30 +57,53 @@
             countryList: []
         };
 
-        self.model = {};
-        self.$onInit = function(){
-            self.isSourcedSelected();
+        vm.model = {};
+        vm.exclusions={};
+        vm.appendix4RecForm={};
+        vm.transcludeList={};
+        vm.alias={};
+        vm.showSummary=false;
+        vm.updateSummary=0;
+        vm.summaryName="";
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
+        vm.$onInit = function(){
+            vm.isSourcedSelected();
+            _setIdNames();
         };
-        self.$onChanges = function (changes) {
-            if (changes.record) {
-                self.model = (changes.record.currentValue);
-                self.isSourcedSelected();
+        vm.$onChanges = function (changes) {
+            if (changes.record) { //model changes
+                vm.model = (changes.record.currentValue);
+
+                vm.isSourcedSelected();
+                vm.summaryName="cmp-appendix-four-record_"+(vm.model.id-1);
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
             }
 
         };
-        self.isSourcedSelected = function () {
-            var result = (self.model.humanSourced || self.model.animalSourced);
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+        };
+
+        vm.isSourcedSelected = function () {
+            var result = (vm.model.humanSourced || vm.model.animalSourced);
             if (result) {
-                self.isSourced = result;
+                vm.isSourced = result;
             } else {
-                self.isSourced = "";
+                vm.isSourced = "";
             }
             return (result);
 
         };
 
-        self.noSelectionError = function () {
-            return ((self.appendix4RecForm.$dirty && !self.isSourcedSelected() ) || (self.showListErrors() && !self.isSourcedSelected()));
+        vm.noSelectionError = function () {
+            return ((vm.appendix4RecForm.$dirty && !vm.isSourcedSelected() ) || (vm.showListErrors() && !vm.isSourcedSelected()));
         };
         /**
          * Used to show field level errors
@@ -80,52 +111,55 @@
          * @param isTouched
          * @returns {boolean}  true if you should show error
          */
-        self.showError = function (isInvalid, isTouched) {
-            return ((isInvalid && isTouched) || (isInvalid && self.showListErrors()))
+        vm.showError = function (isInvalid, isTouched) {
+            return ((isInvalid && isTouched) || (isInvalid && vm.showListErrors()))
         };
-        self.save = function () {
-            if (self.record) {
+        vm.save = function () {
+            if (vm.record) {
                 // console.log('product details update product');
-                self.onUpdate({record: self.model});
+                vm.onUpdate({record: vm.model});
             } else {
                 //  console.log('product details add product');
-                self.onAddNew({record: self.model});
+                vm.onAddNew({record: vm.model});
             }
 
         };
+        vm.showErrors=function(){
+            return vm.showSummary;
+        }
 
-        /*self.discardChanges = function () {
-            self.model = {};
-            //self.productDetailsForm.$setPristine();
-            self.onCancel();
+        /*vm.discardChanges = function () {
+            vm.model = {};
+            //vm.productDetailsForm.$setPristine();
+            vm.onCancel();
         }*/
 
-        self.delete = function () {
-            if (self.record) {
+        vm.delete = function () {
+            if (vm.record) {
                 //  console.log('product details delete product');
-                self.onDelete();
+                vm.onDelete();
             }
 
         };
 
-        self.updateTissuesFluids = function(input){
+        vm.updateTissuesFluids = function(input){
 
             //console.log('apdx4 record updateTissuesFluids : ' + JSON.stringify(input));
 
-            self.model.tissuesFluidsOrigin = input;
-            self.onUpdate({record: self.model});
+            vm.model.tissuesFluidsOrigin = input;
+            vm.onUpdate({record: vm.model});
 
 
-            /* if (self.record) {
-                 self.onUpdate({record: self.model});
+            /* if (vm.record) {
+                 vm.onUpdate({record: vm.model});
              }*/
 
         };
 
-        self.updateAnimalSourced = function(input){
+        vm.updateAnimalSourced = function(input){
 
-            self.model.sourceAnimalDetails = input;
-            self.onUpdate({record: self.model});
+            vm.model.sourceAnimalDetails = input;
+            vm.onUpdate({record: vm.model});
 
         };
 
@@ -133,30 +167,46 @@
          * Determines whether to show or hide tissues o=r fluids
          * @returns {boolean}
          */
-        self.showTissuesFluids=function(){
-            if(self.model.humanSourced || self.model.animalSourced) {
-                if(!self.model.tissuesFluidsOrigin) {
-                    self.model.tissuesFluidsOrigin = angular.copy(emptyFluidsTissues);
+        vm.showTissuesFluids=function(){
+            if(vm.model.humanSourced || vm.model.animalSourced) {
+                if(!vm.model.tissuesFluidsOrigin) {
+                    vm.model.tissuesFluidsOrigin = angular.copy(emptyFluidsTissues);
                 }
                 return true;
             }else{
-                self.model.tissuesFluidsOrigin=null;
+                vm.model.tissuesFluidsOrigin=null;
             }
             return false;
 
         };
-        self.showAnimalSources=function(){
-            self.showTissuesFluids();
-            if(self.model.animalSourced) {
-                if(!self.model.sourceAnimalDetails) {
-                    self.model.sourceAnimalDetails = angular.copy(emptyAnimalSource);
+        vm.showAnimalSources=function(){
+            vm.showTissuesFluids();
+            if(vm.model.animalSourced) {
+                if(!vm.model.sourceAnimalDetails) {
+                    vm.model.sourceAnimalDetails = angular.copy(emptyAnimalSource);
                 }
                 return true;
             }else{
-                self.model.sourceAnimalDetails = null;
+                vm.model.sourceAnimalDetails = null;
             }
             return false;
+        };
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.appendixFormRecordId="formulationRecord" + scopeId;
+            vm.ingredNameId="ingredientName"+ scopeId;
         }
+ /*       $scope.$watchCollection(
+            "ap4RecCtrl.appendix4RecForm.$error",
+            function( newValue, oldValue ) {
+                console.log("update summary state");
+                vm.updateErrorSummaryState();
+            }
+        );*/
+        $scope.$watch('ap4RecCtrl.appendix4RecForm.$error', function () {
+            vm.updateErrorSummaryState();
+        }, true);
 
     }
 })();

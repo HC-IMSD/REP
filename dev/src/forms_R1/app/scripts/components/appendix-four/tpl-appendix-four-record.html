@@ -1,23 +1,33 @@
 <div class="container-fluid">
-    <ng-form name="ap4RecCtrl.appendix4RecForm" novalidate ng-model-options="{debounce: 250}">
+    <ng-form name="ap4RecCtrl.appendix4RecForm" id="{{::ap4RecCtrl.appendixFormRecordId}}" novalidate ng-model-options="{debounce: 250}">
+        <cmp-error-summary form-ref="ap4RecCtrl.appendix4RecForm"
+                           form-preamble="{{'ING_DETAILS'|translate}}&nbsp;{{ap4RecCtrl.model.id}}" exclusion-list=ap4RecCtrl.exclusions
+                           name-suffix="{{ap4RecCtrl.summaryName}}" set-heading-level="h3" form-id="ap4RecCtrl.appendixFormRecordId"
+                           transclude-list="ap4RecCtrl.transcludeList"
+                           make-focused="" alias-list="ap4RecCtrl.alias" show-errors="true"
+                           update-errors="ap4RecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
             <legend>{{'ING_DETAILS'|translate}}&nbsp;{{ap4RecCtrl.model.id}}</legend>
             <div class="row">
                 <div class="col-xs-12 form-group"
                      ng-class="{'has-error':ap4RecCtrl.appendix4RecForm.ingredientName.$invalid}">
-                    <label for="ing-name" class="required">
+                    <label for="{{::ap4RecCtrl.ingredNameId}}" class="required">
                         {{'INGRED_MAT_NAME'|translate}}
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                        <input type="text" class="form-control full-width" id="ing-name" ng-change="ap4RecCtrl.recordChanged()"
-                               ng-model="ap4RecCtrl.model.ingredientName" name="ingredientName" required
+                        <input type="text" class="form-control full-width" id="{{::ap4RecCtrl.ingredNameId}}" ng-change="ap4RecCtrl.recordChanged()"
+                               ng-model="ap4RecCtrl.model.ingredientName" name="{{::ap4RecCtrl.ingredNameId}}" required
                                ng-model-options="{updateOn: 'blur'}" maxlength="100" size="100"/>
-                        <strong id="ingred-name-error" class="error"
+                        <cmp-error-message field-name="ap4RecCtrl.ingredNameId"
+                                           form-ref="ap4RecCtrl.appendix4RecForm"
+                                           show-error="ap4RecCtrl.showErrors()"
+                                           error-types="ap4RecCtrl.requiredOnly"></cmp-error-message>
+                       <!-- <strong id="ingred-name-error" class="error"
                                 ng-if="ap4RecCtrl.showError(ap4RecCtrl.appendix4RecForm.ingredientName.$invalid,ap4RecCtrl.appendix4RecForm.ingredientName.$touched)">
                              <span class="label label-danger"
                                    ng-messages="ap4RecCtrl.appendix4RecForm.$error">
                                 <span ng-message="required">{{"MSG_ERR_MAND"|translate}}</span>
                              </span>
-                        </strong>
+                        </strong>-->
                     </label>
                 </div>
             </div>
