@@ -1,17 +1,25 @@
-<ng-form name="tissuesListSrcCtrl.tissuesListForm">
+<ng-form name="tissuesListSrcCtrl.tissuesListForm" id="{{::tissuesListSrcCtrl.tissuesListFormRecordId}}">
     <div>
         <div class="row">
             <section class="panel panel-default">
                 <header class="panel-heading">
                     <h3 class="panel-title">{{'TISSUES_FLUIDS_SRCS'|translate}}</h3>
-                    <strong id="active-error" class="error" ng-if="tissuesListSrcCtrl.noTissueRecs()">
+            <!--        <strong id="active-error" class="error" ng-if="tissuesListSrcCtrl.noTissueRecs()">
                             <span class="label label-danger"
                                   ng-messages="tissuesListSrcCtrl.tissuesListForm.noTissueRecs.$error">
                                 <span ng-message="required"><span translate="MSG_ERR_ONE_TISSUE"></span></span>
                             </span>
-                    </strong>
+                    </strong>-->
                 </header>
-                <input type="text" ng-show="false" required aria-hidden="true" name="noTissueRecs"
+              <!--  <cmp-error-summary form-ref="tissuesListSrcCtrl.tissuesListForm"
+                                   form-preamble="TISSUES_FLUIDS_SRCS" exclusion-list=tissuesListSrcCtrl.exclusions
+                                   name-suffix="tissuesListSrcCtrl.tissuesListForm" set-heading-level="h4" form-id="tissuesListSrcCtrl.tissuesListFormRecordId"
+                                   transclude-list="tissuesListSrcCtrl.transcludeList"
+                                   expand-record="tissuesListSrcCtrl.setRecord(index)"
+                                   make-focused="" alias-list="tissuesListSrcCtrl.alias" show-errors="true"
+                                   update-errors="tissuesListSrcCtrl.updateSummary"></cmp-error-summary>-->
+
+                <input type="hidden" required aria-hidden="true" name="{{::tissuesListSrcCtrl.oneTissueId}}" id="{{::tissuesListSrcCtrl.oneTissueId}}"
                        ng-model="tissuesListSrcCtrl.oneRecord"/>
 
                 <div class="panel-body">
@@ -25,13 +33,17 @@
                         <cmp-tissues-fluids-record record="$parent.record" service="tissuesListSrcCtrl.service"
                                                    show-errors="tissuesListSrcCtrl.showErrors()"
                                                    system-used="tissuesListSrcCtrl.systemAlreadyUsed(value)"
-                                                   on-delete="tissuesListSrcCtrl.deleteRecord(id)"></cmp-tissues-fluids-record>
+                                                   on-delete="tissuesListSrcCtrl.deleteRecord(id)"
+                                                   update-error-summary="tissuesListSrcCtrl.updateErrorSummary()"
+                                                   error-summary-update="tissuesListSrcCtrl.updateSummary" show-error-summary="tissuesListSrcCtrl.showSummary"
+                        ></cmp-tissues-fluids-record>
 
                     </cmp-expanding-table>
 
                     <div class="mrgn-tp-md mrgn-bttm-lg">
                         <div class="btn-group-sm col-md-12 text-right">
-                            <button class="btn btn-primary" ng-click="tissuesListSrcCtrl.addNew()" name="addTissuesRec"
+                            <button class="btn btn-primary" ng-click="tissuesListSrcCtrl.addNew()" name="{{::tissuesListSrcCtrl.addTissuesRecId}}"
+                                    id="{{::tissuesListSrcCtrl.addTissuesRecId}}"
                                     ng-disabled="tissuesListSrcCtrl.disableAdd()">
                                 {{'TISSUES_FLUIDS_ADD'|translate}}
                             </button>

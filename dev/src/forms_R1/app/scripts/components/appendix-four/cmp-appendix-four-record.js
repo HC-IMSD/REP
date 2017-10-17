@@ -58,10 +58,20 @@
         };
 
         vm.model = {};
-        vm.exclusions={};
+        vm.exclusions = {
+
+        };
         vm.appendix4RecForm={};
-        vm.transcludeList={};
-        vm.alias={};
+        vm.transcludeList={
+        };
+
+        vm.alias={
+            "msg_app4_type": {
+                "type": "fieldset",
+                "parent": "fs_type"
+        }
+
+        };
         vm.showSummary=false;
         vm.updateSummary=0;
         vm.summaryName="";
@@ -70,6 +80,7 @@
         vm.$onInit = function(){
             vm.isSourcedSelected();
             _setIdNames();
+            vm.showErrors();
         };
         vm.$onChanges = function (changes) {
             if (changes.record) { //model changes
@@ -77,10 +88,12 @@
 
                 vm.isSourcedSelected();
                 vm.summaryName="cmp-appendix-four-record_"+(vm.model.id-1);
+                vm.showErrors();
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
+                vm.showErrors();
             }
             if(changes.errorSummaryUpdate){
                 vm.updateErrorSummaryState();
@@ -194,18 +207,14 @@
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.appendixFormRecordId="formulationRecord" + scopeId;
-            vm.ingredNameId="ingredientName"+ scopeId;
+            vm.appendixFormRecordId="appendix4FormRecord" + scopeId;
+            vm.ingredNameId="ingred_mat_name"+ scopeId;
+            vm.oneTypeId="msg_app4_type"+scopeId;
+            vm.fsType="fs_type"+scopeId;
         }
- /*       $scope.$watchCollection(
-            "ap4RecCtrl.appendix4RecForm.$error",
-            function( newValue, oldValue ) {
-                console.log("update summary state");
-                vm.updateErrorSummaryState();
-            }
-        );*/
         $scope.$watch('ap4RecCtrl.appendix4RecForm.$error', function () {
             vm.updateErrorSummaryState();
+            vm.isSourcedSelected(); //updates source
         }, true);
 
     }

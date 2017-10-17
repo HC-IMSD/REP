@@ -31,18 +31,12 @@
                     </label>
                 </div>
             </div>
-            <fieldset>
+            <fieldset id="{{::ap4RecCtrl.fsType}}">
                 <legend class="required">
                     <span class="field-name">{{'SOURCED'|translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <input id="oneSelected_{{::$id}}" name="oneSelected" ng-required="true" ng-show="false"
-                           ng-model="ap4RecCtrl.isSourced" ng-required="true"/>
-                    <strong id="contactNum-role-error" class="error" ng-if="ap4RecCtrl.noSelectionError()">
-                             <span class="label label-danger"
-                                   ng-messages="ap4RecCtrl.appendix4RecForm.oneSelected.$error">
-                                 <span ng-message="required">{{"MSG_APP4_TYPE"|translate}}</span>
-                             </span>
-                    </strong>
+                    <input id="{{::ap4RecCtrl.oneTypeId}}" name="{{::ap4RecCtrl.oneTypeId}}" required type="hidden"
+                           ng-model="ap4RecCtrl.isSourced"/>
                 </legend>
                 <div class="row">
                     <div class="col-xs-2">
@@ -69,7 +63,10 @@
             <section class="section">
                 <cmp-tissues-fluids-list ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"
                                          service="ap4RecCtrl.service"
-                                         records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList"></cmp-tissues-fluids-list>
+                                         records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList"
+                                          update-error-summary="ap4RecCtrl.updateErrorSummary"
+                                         error-summary-update="ap4RecCtrl.updateSummary"
+                                         show-error-summary="true"></cmp-tissues-fluids-list>
             </section>
 
             <section class="section">

@@ -1,17 +1,17 @@
-<ng-form name="tissuesSrcCtrl.tissuesRecForm">
+<ng-form name="tissuesSrcCtrl.tissuesRecForm" id="{{::tissuesSrcCtrl.tissuesFormId}}">
     <div class="container-fluid">
         <fieldset>
               <legend>
-                  {{'TISSUES_FLUIDS_LBL' | translate}}&nbsp;{{tissuesSrcCtrl.model.id}}
               </legend>
+            {{'TISSUES_FLUIDS_LBL' | translate}}&nbsp;{{tissuesSrcCtrl.model.id}}
         <div class="row">
             <div class="col-md-3 form-group"
                  ng-class="{'has-error':tissuesSrcCtrl.tissuesRecForm.systemType.$invalid}">
                 <label for="systemType{{::$id}}" class="required">
                     <span class="field-name">{{'SYSTEM_TYPE'|translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-                    <select ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="systemType{{::$id}}"
-                            name="systemType" ng-required="true"
+                    <select ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="systemType_{{::$id}}"
+                            name="systemType_{{::$id}}" ng-required="true"
                             ng-change="tissuesSrcCtrl.systemChanged(tissuesSrcCtrl.tissuesRecForm.systemType)"
                             ng-options="val |translate for val in  tissuesSrcCtrl.systemList  | orderByTranslated">
                     </select>

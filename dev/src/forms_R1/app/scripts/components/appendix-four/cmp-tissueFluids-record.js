@@ -37,9 +37,9 @@
             }
         });
 
-    tissuesFluidsController.$inject = ['DossierLists', '$translate', '$filter'];
+    tissuesFluidsController.$inject = ['DossierLists', '$translate', '$filter','$scope'];
 
-    function tissuesFluidsController(DossierLists, $translate, $filter) {
+    function tissuesFluidsController(DossierLists, $translate, $filter,$scope) {
         var vm = this;
         vm.systemList = DossierLists.getTissuesSystem();
         vm.fluidsLists = DossierLists;
@@ -57,7 +57,7 @@
         vm.model = {};
 
         vm.$onInit = function () {
-
+            _setIdNames();
         };
 
         vm.$onChanges = function (changes) {
@@ -183,6 +183,11 @@
             }
         };
 
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.tissuesFormId = "tissuesFluidsRecForm" + scopeId;
+
+        }
         /**
          * Sets the state of the other field when system details is other
          * @returns {boolean}
