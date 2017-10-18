@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('reprodModule', [])
+        .module('reprodModule', ['errorMessageModule'])
 })();
 
 
@@ -22,16 +22,21 @@
             bindings: {
                 record: '<',
                 otherUpdate: '&',
-                concatUpdate: '&'
+                concatUpdate: '&',
+                showErrors:'&'
             }
 
         });
-    function reproductiveSystemController() {
+
+    reproductiveSystemController.$inject=['$scope']
+    function reproductiveSystemController($scope) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
-        vm.$onInit = function () {
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
+        vm.$onInit = function () {
+            _setIdNames();
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -81,10 +86,11 @@
             vm.updateErrorState();
             return state;
         };
-
-        vm.showErrorMissing=function(){
-            return (vm.reprodForm.$dirty && vm.reprodForm.$invalid);
-        };
-
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "reproductive_details" + scopeId;
+        }
     }
 })();

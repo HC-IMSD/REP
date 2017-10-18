@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('cardioModule', [])
+        .module('cardioModule', [ 'errorMessageModule'])
 })();
 
 
@@ -22,23 +22,29 @@
             bindings: {
                 record: '<',
                 otherUpdate: '&',
-                concatUpdate: '&'
+                concatUpdate: '&',
+                showErrors:'&'
             }
 
         });
 
-    function cardioSystemController() {
+     cardioSystemController.$inject=['$scope'];
+    function cardioSystemController($scope) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.$onInit = function () {
-
+            _setIdNames()
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
                 vm.model = (changes.record.currentValue);
                 vm.updateErrorState();
             }
+           /* if(changes.showErrors){
+                vm.showSummary=changes.showErrors.currentValue;
+            }*/
         };
 
         vm.detailsChanged = function (alias, value) {
@@ -80,9 +86,17 @@
             vm.updateErrorState();
             return state;
         }
-        vm.showErrorMissing=function(){
 
-            return (vm.cardioForm.$dirty && vm.cardioForm.$invalid);
+       /* vm.showError=function(){
+
+            return (vm.showSummary);
+        }*/
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "cardio_other_details" + scopeId;
         }
 
     }

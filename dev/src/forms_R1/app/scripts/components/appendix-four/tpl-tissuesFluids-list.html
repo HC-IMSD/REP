@@ -11,7 +11,7 @@
                             </span>
                     </strong>-->
                 </header>
-              <!--  <cmp-error-summary form-ref="tissuesListSrcCtrl.tissuesListForm"
+               <!-- <cmp-error-summary form-ref="tissuesListSrcCtrl.tissuesListForm"
                                    form-preamble="TISSUES_FLUIDS_SRCS" exclusion-list=tissuesListSrcCtrl.exclusions
                                    name-suffix="tissuesListSrcCtrl.tissuesListForm" set-heading-level="h4" form-id="tissuesListSrcCtrl.tissuesListFormRecordId"
                                    transclude-list="tissuesListSrcCtrl.transcludeList"
@@ -28,7 +28,7 @@
                                          list-items="tissuesListSrcCtrl.model.tissuesFluidsList"
                                          column-def="tissuesListSrcCtrl.columnDef"
                                          select-record="tissuesListSrcCtrl.selectRecord"
-                                         disable-selection="!tissuesListSrcCtrl.isDetailValid">
+                                         disable-selection="tissuesListSrcCtrl.disableAdd()">
 
                         <cmp-tissues-fluids-record record="$parent.record" service="tissuesListSrcCtrl.service"
                                                    show-errors="tissuesListSrcCtrl.showErrors()"

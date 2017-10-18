@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('animalSourcedRecord', [])
+        .module('animalSourcedRecord', ['errorMessageModule'])
 })();
 
 (function () {
@@ -21,20 +21,20 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
-                showErrors: '&',
+                showErrors: '&'
             }
         });
 
-    animalSourcedController.$inject=['DossierLists'];
+    animalSourcedController.$inject=['DossierLists','$scope'];
 
-    function animalSourcedController(DossierLists){
+    function animalSourcedController(DossierLists,$scope){
         var vm = this;
         vm.animalsList = DossierLists.getAnimalSources();
         vm.yesNoUnknownList = DossierLists.getYesNoUnknownList();
         vm.model = {};
-
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.$onInit = function(){
-
+            _setIdNames();
         };
 
         vm.$onChanges = function (changes) {
@@ -50,13 +50,22 @@
             vm.onDelete({id: vm.model.id})
         };
 
-        vm.showError = function (ctrl) {
+        /*vm.showError = function (ctrl) {
             if(!ctrl){
                 console.warn("No control found in animalSourced-record");
                 return false;
             }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()) )
+        }*/
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "animal_details" + scopeId;
+            vm.animalTypeId="animal_type"+scopeId;
         }
+
 
     }
 })();

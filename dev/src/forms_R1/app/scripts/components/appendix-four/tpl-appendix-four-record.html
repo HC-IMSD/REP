@@ -21,13 +21,7 @@
                                            form-ref="ap4RecCtrl.appendix4RecForm"
                                            show-error="ap4RecCtrl.showErrors()"
                                            error-types="ap4RecCtrl.requiredOnly"></cmp-error-message>
-                       <!-- <strong id="ingred-name-error" class="error"
-                                ng-if="ap4RecCtrl.showError(ap4RecCtrl.appendix4RecForm.ingredientName.$invalid,ap4RecCtrl.appendix4RecForm.ingredientName.$touched)">
-                             <span class="label label-danger"
-                                   ng-messages="ap4RecCtrl.appendix4RecForm.$error">
-                                <span ng-message="required">{{"MSG_ERR_MAND"|translate}}</span>
-                             </span>
-                        </strong>-->
+
                     </label>
                 </div>
             </div>
@@ -70,7 +64,7 @@
             </section>
 
             <section class="section">
-                <cmp-animal-sourced-section ng-if="ap4RecCtrl.model.animalSourced"  records="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)"></cmp-animal-sourced-section>
+                <cmp-animal-sourced-section ng-if="ap4RecCtrl.model.animalSourced"  records="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)" show-errors="ap4RecCtrl.showErrors()"></cmp-animal-sourced-section>
             </section>
 
             <div class="row">

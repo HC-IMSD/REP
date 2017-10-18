@@ -1,16 +1,15 @@
 <ng-form name="sysCtrl.nervForm">
     <div>
-        <fieldset>
+        <fieldset id="{{::sysCtrl.systemRoleId}}">
             <legend class="required">
-                <span class="field-name">{{'NERVOUS_LEGEND' |translate}}</span>
-                <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                <input id="roleMissing_{{::$id}}" name="roleMissing" ng-required="true" ng-show="false"
+                <span class="field-name">{{::'NERVOUS_LEGEND' |translate}}</span>
+                <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}" type="hidden"
                        ng-model="sysCtrl.isSelected" required/>
-                <strong id="role-error{{::$id}}" class="error" ng-if="sysCtrl.showErrorMissing()">
-                         <span class="label label-danger" ng-messages="sysCtrl.nervForm.roleMissing.$error">
-                             <span ng-message="required">{{"MSG_ERR_ROLE"|translate}}</span>
-                         </span>
-                </strong>
+                <cmp-error-message field-name="sysCtrl.roleMissingId"
+                                   form-ref="sysCtrl.nervForm"
+                                   show-error="sysCtrl.showErrors()"
+                                   error-types="sysCtrl.requiredOnly"></cmp-error-message>
             </legend>
             <div class="row">
                 <div class="col-md-3">
@@ -19,7 +18,7 @@
                             <input type="checkbox" name="brain" id="brain_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('BRAIN',sysCtrl.model.brain)"
                                    ng-model="sysCtrl.model.brain"/>
-                            {{'BRAIN'|translate}}
+                            {{::'BRAIN'|translate}}
                         </label>
 
                     </div>
@@ -30,7 +29,7 @@
                             <input type="checkbox" name="brainStem" id="brainStem_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('BRAINSTEM',sysCtrl.model.brainStem)"
                                    ng-model="sysCtrl.model.brainStem"/>
-                            {{'BRAINSTEM'|translate}}
+                            {{::'BRAINSTEM'|translate}}
                         </label>
                     </div>
                 </div>
@@ -40,7 +39,7 @@
                             <input type="checkbox" name="cerebellum" id="cerebellum_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('CEREBELLUM',sysCtrl.model.cerebellum)"
                                    ng-model="sysCtrl.model.cerebellum"/>
-                            {{'CEREBELLUM'|translate}}
+                            {{::'CEREBELLUM'|translate}}
                         </label>
                     </div>
                 </div>
@@ -50,7 +49,7 @@
                             <input type="checkbox" name="ceroFluid" id="cerofluid_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('CEROFLUID',sysCtrl.model.ceroFluid)"
                                    ng-model="sysCtrl.model.ceroFluid"/>
-                            {{'CEROFLUID'|translate}}
+                            {{::'CEROFLUID'|translate}}
                         </label>
                     </div>
                 </div>
@@ -62,7 +61,7 @@
                             <input type="checkbox" name="dorsal" id="dorsal_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('DORSALROOT',sysCtrl.model.dorsalRoot)"
                                    ng-model="sysCtrl.model.dorsalRoot"/>
-                            {{'DORSALROOT'|translate}}
+                            {{::'DORSALROOT'|translate}}
                         </label>
                     </div>
                 </div>
@@ -72,7 +71,7 @@
                             <input type="checkbox" name="duramater" id="duramater_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('DURAMATER',sysCtrl.model.duraMater)"
                                    ng-model="sysCtrl.model.duraMater"/>
-                            {{'DURAMATER'|translate}}
+                            {{::'DURAMATER'|translate}}
                         </label>
                     </div>
                 </div>
@@ -82,7 +81,7 @@
                             <input type="checkbox" name="hypothalmus" id="hypothalmus_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('HYPOTHALAMUS',sysCtrl.model.hypothalamus)"
                                    ng-model="sysCtrl.model.hypothalamus"/>
-                            {{'HYPOTHALAMUS'|translate}}
+                            {{::'HYPOTHALAMUS'|translate}}
                         </label>
                     </div>
                 </div>
@@ -92,7 +91,7 @@
                             <input type="checkbox" name="retina" id="retina_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('RETINA',sysCtrl.model.retina)"
                                    ng-model="sysCtrl.model.retina"/>
-                            {{'RETINA'|translate}}
+                            {{::'RETINA'|translate}}
                         </label>
                     </div>
                 </div>
@@ -104,7 +103,7 @@
                             <input type="checkbox" name="dorsal" id="spinal_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('SPINALCORD',sysCtrl.model.spinalCord)"
                                    ng-model="sysCtrl.model.spinalCord"/>
-                            {{'SPINALCORD'|translate}}
+                            {{::'SPINALCORD'|translate}}
                         </label>
                     </div>
                 </div>
@@ -114,7 +113,7 @@
                             <input type="checkbox" name="trigeminal" id="trigeminal_{{::$id}}"
                                    ng-change="sysCtrl.detailsChanged('TRIGEMINAL',sysCtrl.model.trigeminal)"
                                    ng-model="sysCtrl.model.trigeminal"/>
-                            {{'TRIGEMINAL'|translate}}
+                            {{::'TRIGEMINAL'|translate}}
                         </label>
                     </div>
                 </div>
@@ -123,7 +122,7 @@
                         <label for="nervOther_{{::$id}}">
                             <input type="checkbox" name="nervOther" id="nervOther_{{::$id}}"
                                    ng-model="sysCtrl.model.otherNervous"/>
-                            {{'NERVOUS_OTHER'|translate}}
+                            {{::'NERVOUS_OTHER'|translate}}
                         </label>
                     </div>
                 </div>
@@ -131,12 +130,16 @@
             <div class="row">
                 <div class="col-md-6" ng-if="sysCtrl.otherChanged()">
                     <div class="form-group">
-                        <label class="required" for="nervDetails_{{::$id}}">
-                            {{'NERVOUS_DETAILS'|translate}}
-                            <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <input type="text" size="40" maxlength="40" name="nervDetails" id="nervDetails_{{::$id}}"
+                        <label class="required" for="{{::sysCtrl.otherDetailsId}}">
+                            {{::'NERVOUS_DETAILS'|translate}}
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <input type="text" size="40" maxlength="40" name="{{::sysCtrl.otherDetailsId}}" id="{{::sysCtrl.otherDetailsId}}"
                                    ng-required="{{sysCtrl.model.otherNervous}}" ng-model-options="{ debounce: '$inherit'}"
                                    ng-model="sysCtrl.model.otherDetails"/>
+                            <cmp-error-message field-name="sysCtrl.otherDetailsId"
+                                               form-ref="sysCtrl.nervForm"
+                                               show-error="sysCtrl.showErrors()"
+                                               error-types="sysCtrl.requiredOnly"></cmp-error-message>
                         </label>
                     </div>
                 </div>

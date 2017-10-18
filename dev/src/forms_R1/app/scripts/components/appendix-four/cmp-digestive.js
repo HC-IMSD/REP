@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('digestiveModule', [])
+        .module('digestiveModule', ['errorMessageModule'])
 })();
 
 
@@ -22,16 +22,20 @@
             bindings: {
                 record: '<',
                 otherUpdate: '&',
-                concatUpdate: '&'
+                concatUpdate: '&',
+                showErrors:'&'
             }
         });
-    function digestiveSystemController() {
+
+    digestiveSystemController.$inject=['$scope']
+    function digestiveSystemController($scope) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
-            //fdg
+            _setIdNames()
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -80,9 +84,16 @@
             return state;
         }
 
-        vm.showErrorMissing=function(){
+       /* vm.showErrorMissing=function(){
 
             return (vm.digestForm.$dirty && vm.digestForm.$invalid);
+        }*/
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "digestive_details" + scopeId;
         }
 
 

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('immuneModule', [])
+        .module('immuneModule', ['errorMessageModule'])
 })();
 
 
@@ -22,16 +22,21 @@
             bindings: {
                 record: '<',
                 otherUpdate: '&',
-                concatUpdate: '&'
+                concatUpdate: '&',
+                showErrors:'&'
             }
 
         });
-    function immuneSystemController() {
+
+    immuneSystemController.$inject=['$scope'];
+    function immuneSystemController($scope) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
-        vm.$onInit = function () {
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
+        vm.$onInit = function () {
+            _setIdNames();
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -39,12 +44,6 @@
                 vm.updateErrorState();
             }
         };
-
-        vm.showErrorMissing=function(){
-
-            return (vm.immuneForm.$dirty && vm.immuneForm.$invalid);
-        }
-
         vm.detailsChanged = function (alias, value) {
 
             vm.concatUpdate({'alias': alias, 'value': value});
@@ -84,6 +83,13 @@
             vm.otherUpdate();
            vm.updateErrorState();
             return state;
+        }
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "immune_details" + scopeId;
         }
 
     }

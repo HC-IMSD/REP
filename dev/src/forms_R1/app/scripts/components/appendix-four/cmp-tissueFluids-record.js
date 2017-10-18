@@ -15,7 +15,8 @@
                 'muscleModule',
                 'otherTissuesModule',
                 'reprodModule',
-                'skinModule'
+                'skinModule',
+                'errorMessageModule'
             ])
 })();
 
@@ -55,6 +56,8 @@
          vm.muscleList = DossierLists.getMuscleSystem();*/
         vm.selectedSystemList = [];
         vm.model = {};
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
 
         vm.$onInit = function () {
             _setIdNames();
@@ -186,7 +189,7 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.tissuesFormId = "tissuesFluidsRecForm" + scopeId;
-
+            vm.systemTypeId="systemType"+scopeId;
         }
         /**
          * Sets the state of the other field when system details is other

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('muscleModule', [])
+        .module('muscleModule', ['errorMessageModule'])
 })();
 
 
@@ -22,15 +22,21 @@
             bindings: {
                 record: '<',
                 otherUpdate: '&',
-                concatUpdate: '&'
+                concatUpdate: '&',
+                showErrors:'&'
             }
 
         });
-    function muscleSystemController() {
+
+    muscleSystemController.$inject=['$scope']
+    function muscleSystemController($scope) {
         var vm = this;
         vm.model = {};
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
         vm.$onInit = function () {
             vm.isSelected = "";
+            _setIdNames()
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -78,8 +84,12 @@
             return state;
         };
 
-        vm.showErrorMissing=function(){
-            return (vm.muscleForm.$dirty && vm.muscleForm.$invalid);
-        };
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "muscle_details" + scopeId;
+        }
     }
 })();

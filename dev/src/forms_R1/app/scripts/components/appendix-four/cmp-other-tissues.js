@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('otherTissuesModule', [])
+        .module('otherTissuesModule', ['errorMessageModule'])
 })();
 
 
@@ -22,16 +22,19 @@
             bindings: {
                 record: '<',
                 otherUpdate: '&',
-                concatUpdate: '&'
+                concatUpdate: '&',
+                showErrors:'&'
             }
 
         });
-    function otherTissueSystemController() {
+    otherTissueSystemController.$inject=['$scope']
+    function otherTissueSystemController($scope) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.$onInit = function () {
-
+            _setIdNames();
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -80,10 +83,12 @@
             return state;
         };
 
-        vm.showErrorMissing=function(){
-
-            return (vm.otherForm.$dirty && vm.otherForm.$invalid);
-        };
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.roleMissingId = "roleMissing" + scopeId;
+            vm.systemRoleId = "system_role" + scopeId;
+            vm.otherDetailsId = "othertiss_details" + scopeId;
+        }
 
     }
 })();
