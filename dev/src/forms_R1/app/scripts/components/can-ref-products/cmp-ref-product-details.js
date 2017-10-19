@@ -6,7 +6,16 @@
     'use strict';
 
     angular
-        .module('refProductDetailsModule', ['expandingTable', 'dossierDataLists', 'filterLists','ui.select','hpfbConstants'])
+        .module('refProductDetailsModule',
+            [
+                'expandingTable',
+                'dossierDataLists',
+                'filterLists',
+                'ui.select',
+                'hpfbConstants',
+                'errorSummaryModule',
+                'errorMessageModule'
+            ])
 })();
 
 (function () {
@@ -21,6 +30,7 @@
         .component('cmpRefProductDetails', {
             templateUrl: 'app/scripts/components/can-ref-products/tpl-ref-product-details.html',
             controller: refProductDetailsCtrl,
+            controllerAs: 'refProdCtrl',
             bindings: {
                 productRecord: '<',
                 deleteBtn: '<',
@@ -28,55 +38,78 @@
                 onUpdate: '&',
                 onDelete: '&',
                 onCancel: '&',
-                showErrors:'&',
-                isDetailValid:'&',
-                recordIndex: '<'
+                isDetailValid: '&',
+                recordIndex: '<',
+                showErrorSummary: '<', //flag to show or hide the error summary
+                errorSummaryUpdate: '&' /* used to message that errorSummary needs updating */
             }
         });
-    refProductDetailsCtrl.$inject = ['DossierLists','$scope','$translate','OTHER'];
-    function refProductDetailsCtrl(DossierLists, $scope, $translate,OTHER) {
-        var self = this;
-        self.dosageFormList = DossierLists.getDosageFormList();
-        self.unitsList=DossierLists.getUnitsList();
-        self.activeList = DossierLists.getActiveList();
-        self.savePressed=false;
-        self.lang = $translate.proposedLanguage() || $translate.use();
-        self.productModel = {
+    refProductDetailsCtrl.$inject = ['DossierLists', '$scope', '$translate', 'OTHER'];
+    function refProductDetailsCtrl(DossierLists, $scope, $translate, OTHER) {
+        var vm = this;
+        vm.dosageFormList = DossierLists.getDosageFormList();
+        vm.unitsList = DossierLists.getUnitsList();
+        vm.activeList = DossierLists.getActiveList();
+        vm.savePressed = false;
+        vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.productModel = {
             brandName: "",
-           // medIngredient: "",
+            // medIngredient: "",
             newIngred: "Y",
             ingId: "",
             ingLabel: "",
             autoIngred: 'N',
             strengths: "",
             units: "",
-            otherUnits:"",
+            otherUnits: "",
             per: "",
             dosageForm: "",
             dosageFormOther: "",
             companyName: ""
         };
-        self.$onInit = function () {
+        vm.summaryName = "";
+        vm.updateSummary = 0; //triggers and error summary update
+        vm.setSummaryFocus = 0; //sets the summary focus
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.numberError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"},
+            {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"}
+        ];
 
+
+        vm.showSummary = false;
+
+        vm.$onInit = function () {
+            vm.showSummary = false;
+            _setIdNames();
         };
-        self.$onChanges=function(changes){
+        vm.$onChanges = function (changes) {
 
-            if(changes.productRecord && changes.productRecord.currentValue){
-                self.productModel = angular.copy(self.productRecord);
-                self.backup = angular.copy(self.productModel);
-                self.savePressed=false;
+            if (changes.productRecord && changes.productRecord.currentValue) {
+                vm.productModel = angular.copy(vm.productRecord);
+                vm.backup = angular.copy(vm.productModel);
+                vm.savePressed = false;
+                vm.summaryName = "cmp-ref-product-details_" + (vm.productModel.id - 1);
+            }
+            if (changes.showErrorSummary) {
+
+                vm.showSummary = changes.showErrorSummary.currentValue;
+                if (vm.showSummary) {
+                    vm.updateErrorSummaryState(); //updating current
+                }
             }
         };
         /**
          * @ngDoc determines if dosage Other should be readonky
          * @returns {boolean}
          */
-        self.isDosageOther = function () {
-            if(!self.productModel.dosageForm) return false;
-            if (self.productModel.dosageForm.id  === OTHER) {
+        vm.isDosageOther = function () {
+            if (!vm.productModel.dosageForm) return false;
+            if (vm.productModel.dosageForm.id === OTHER) {
                 return true;
             } else {
-                self.productModel.dosageFormOther = "";
+                vm.productModel.dosageFormOther = "";
                 return false;
             }
         };
@@ -85,47 +118,63 @@
          * @param ctrl -control
          * @returns {true if ctrl in error}
          */
-        self.showError = function (ctrl) {
-            return ((ctrl.$touched && ctrl.$invalid) || (ctrl.$invalid && self.showErrors())|| (ctrl.$invalid && self.savePressed));
+        vm.showError = function (ctrl) {
+            return ((ctrl.$touched && ctrl.$invalid) || (ctrl.$invalid && vm.showRecordSummary()));
         };
 
-        self.saveProduct = function () {
-            if(self.productDetailsForm.$valid) {
-                if (self.productRecord) {
-                    self.onUpdate({product: self.productModel});
+        vm.saveProduct = function () {
+            if (vm.productDetailsForm.$valid) {
+                if (vm.productRecord) {
+                    vm.onUpdate({product: vm.productModel});
+
                 } else {
-                    self.onAddProduct({product: self.productModel});
+                    vm.onAddProduct({product: vm.productModel});
                 }
-                self.productDetailsForm.$setPristine();
-                self.savePressed=false;
-            }else{
-                self.savePressed=true;
-            }
-
-        };
-        self.ingredSelectionUpdated = function (item, model, label, event) {
-            if (!item) {
-                self.productModel.ingId = "";
-                self.productModel.autoIngred = 'N';
+                vm.productDetailsForm.$setPristine();
+                vm.savePressed = false;
             } else {
-                self.productModel.ingId = item.id;
-                self.productModel.autoIngred = 'Y';
+                vm.savePressed = true;
+                vm.updateErrorSummaryState(); //updating current
+                vm.focusOnSummary()
             }
 
         };
-        self.discardChanges = function(){
-            self.productModel = angular.copy(self.backup);
-           //self.productModel = backup;
-            self.productDetailsForm.$setPristine();
-            //self.productDetailsForm.$setPristine();
-            self.onCancel();
+
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+        }
+        vm.focusOnSummary = function () {
+
+            vm.setSummaryFocus = vm.setSummaryFocus + 1;
+        }
+        vm.showRecordSummary = function () {
+            return ((vm.savePressed || vm.showSummary));
         };
 
-        self.delete = function(){
-            if (self.productRecord) {
-              //  console.log('product details delete product');
-                self.onDelete();
-            }else{
+
+        vm.ingredSelectionUpdated = function (item, model, label, event) {
+            if (!item) {
+                vm.productModel.ingId = "";
+                vm.productModel.autoIngred = 'N';
+            } else {
+                vm.productModel.ingId = item.id;
+                vm.productModel.autoIngred = 'Y';
+            }
+
+        };
+        vm.discardChanges = function () {
+            vm.productModel = angular.copy(vm.backup);
+            //vm.productModel = backup;
+            vm.productDetailsForm.$setPristine();
+            //vm.productDetailsForm.$setPristine();
+            vm.onCancel();
+        };
+
+        vm.delete = function () {
+            if (vm.productRecord) {
+                //  console.log('product details delete product');
+                vm.onDelete();
+            } else {
                 //TODO
             }
         };
@@ -135,22 +184,31 @@
          * @ngDoc determines if units Other should be shown
          * @returns {boolean}
          */
-        self.isUnitsOther = function () {
+        vm.isUnitsOther = function () {
 
-            if(!self.productModel) return false;
-            if ((self.productModel.units.id === OTHER)) {
+            if (!vm.productModel) return false;
+            if ((vm.productModel.units.id === OTHER)) {
                 return true;
             } else {
-                self.productModel.otherUnits = "";
+                vm.productModel.otherUnits = "";
                 return false;
             }
         };
 
 
-
         $scope.$watch('$ctrl.productDetailsForm.$dirty', function () {
-            self.isDetailValid({state: !self.productDetailsForm.$dirty});
+            vm.isDetailValid({state: !vm.productDetailsForm.$dirty});
         }, true);
+
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.repProductFormId = "productDetailsForm" + scopeId;
+            vm.brandId = "brand_name" + scopeId;
+            vm.ingredNameId = "medicinal_ingredient" + scopeId;
+            vm.strengthId = "strength" + scopeId;
+        }
+
 
     }
 

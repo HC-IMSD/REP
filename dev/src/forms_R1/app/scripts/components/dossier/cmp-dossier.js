@@ -98,7 +98,12 @@
             "one_rep": {
                 "type": "element",
                 "target": "addRepContactBtn"
+            },
+            "msg_err_one_cdn_ref": {
+                "type": "elementNoId",
+                "target": "addRefProductBtn"
             }
+
 
         };
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
@@ -114,6 +119,7 @@
 
 
         vm.$onInit = function () {
+            vm.showSummary=false;
             _setIdNames();
             vm.dossierService = new DossierService();
             vm.dossierModel = vm.dossierService.getDefaultObject();
@@ -263,9 +269,9 @@
          * Used to show all the fields in an error state. Can be activated by a parent component
          * @returns {boolean}
          */
-       /* vm.showErrors = function () {
-            return (vm.showAllErrors);
-        };*/
+        vm.showErrors = function () {
+            return (vm.showSummary);
+        };
         /**
          * For individual controls, whether to show the error for a fiedl
          * @param isInvalid - control $invalid flag
@@ -438,6 +444,7 @@
             vm.properNameId="proper_name"+ scopeId;
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
+            vm.oneCdnRefId="msg_err_one_cdn_ref"+scopeId;
         }
 
 

@@ -19,7 +19,8 @@
             templateUrl: 'app/scripts/components/appendix-four/tpl-animalSourced-list.html',
             bindings: {
                 records: '<',
-                showErrors: '&'
+                showErrors: '&',
+                onUpdate: '&' //seems redundant, but used as a messaging mech. when something changes
             },
             controller: animalSourcedListController,
             controllerAs: 'animalListCtrl'
@@ -88,12 +89,13 @@
             vm.resetToCollapsed= !vm.resetToCollapsed;
             vm.selectRecord=(0);
             vm.selectRecord=(vm.model.animalSrcList.length-1);
+            vm.onUpdate({list: vm.model.animalSrcList});
         };
         vm.deleteRecord=function(recId){
-
             var idx = vm.model.animalSrcList.indexOf(
                 $filter('filter')(vm.model.animalSrcList, {id: recId}, true)[0]);
             vm.model.animalSrcList.splice(idx, 1);
+            vm.onUpdate({list: vm.model.animalSrcList});
         };
 
 

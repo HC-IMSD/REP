@@ -20,7 +20,7 @@
             bindings: {
                 withUnknown: '<',
                 listItems: '<',
-                onUpdate: '&',
+                onUpdate: '&', //seems redundant, but used as a messaging mech. when something changes
                 onDelete: '&',
                 showErrors:'<',
                 fieldLabel: '@',
@@ -121,7 +121,7 @@
             vm.resetToCollapsed = !vm.resetToCollapsed;
             setRecord(vm.model.list.length - 1);
             //vm.editRecord(item);
-            //vm.onUpdate({list: vm.model.list});
+            vm.onUpdate({list: vm.model.list});
 
         };
 
@@ -139,7 +139,7 @@
             if (idx < 0) return;
 
             vm.model.list.splice(idx, 1);
-            // vm.onUpdate({list:vm.model.list});
+             vm.onUpdate({list:vm.model.list});
         };
 
 

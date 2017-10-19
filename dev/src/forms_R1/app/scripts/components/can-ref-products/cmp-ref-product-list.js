@@ -19,89 +19,94 @@
             controllerAs: 'crpl',
             bindings: {
                 products: '<',
-                onUpdate: '&'
+                onUpdate: '&',
+                showErrorSummary:'<'
             }
         });
 
     function refProductListCtrl() {
-        var self = this;
-        self.isDetailValid = true;
-        self.selectRecord = -1;
-        self.resetToCollapsed = false;
-        self.newProductFormShown = false;
-        self.$onInit = function () {
+        var vm = this;
+        vm.isDetailValid = true;
+        vm.selectRecord = -1;
+        vm.resetToCollapsed = false;
+        vm.newProductFormShown = false;
+        vm.$onInit = function () {
 
-            self.newProductFormShown = false;
-            self.isDetailValid = true;
-            self.selectRecord = -1;
+            vm.newProductFormShown = false;
+            vm.isDetailValid = true;
+            vm.selectRecord = -1;
 
-            self.colNames = [
+            vm.colNames = [
                 {label: "BRAND_NAME", binding: "brandName", width: "50"},
                 {label: "COMPANY_NAME", binding: "companyName", width: "50"}
             ];
-            self.productList = [];
-            self.newProductFormShown = false;
+            vm.productList = [];
+            vm.newProductFormShown = false;
 
-            if (self.products) {
-                self.productList = self.products;
+            if (vm.products) {
+                vm.productList = vm.products;
             }
             // }
 
 
         };
 
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
 
             if (changes.products) {
-                self.productList = changes.products.currentValue;
+                vm.productList = changes.products.currentValue;
+            }
+            if(changes.showErrorSummary){
+
+                vm.showSummmary=changes.showErrorSummary.currentValue;
             }
         };
 
-        self.addProduct = function (product) {
-            self.setValid(true);
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.productList.push(product);
-            self.newProductFormShown = false;
-            self.onUpdate({recs: self.productList});
+        vm.addProduct = function (product) {
+            vm.setValid(true);
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.productList.push(product);
+            vm.newProductFormShown = false;
+            vm.onUpdate({recs: vm.productList});
             setRecord(-1);
         };
 
-        self.updateProduct = function (idx, product) {
-            self.productList[idx] = angular.copy(product);
-            self.setValid(true);
-            self.onUpdate({recs: self.productList});
+        vm.updateProduct = function (idx, product) {
+            vm.productList[idx] = angular.copy(product);
+            vm.setValid(true);
+            vm.onUpdate({recs: vm.productList});
         };
 
-        self.deleteProduct = function (idx) {
+        vm.deleteProduct = function (idx) {
             // console.debug('productList deleteProduct: ' + idx);
-            self.productList.splice(idx, 1);
-            self.setValid(true);
+            vm.productList.splice(idx, 1);
+            vm.setValid(true);
             setRecord(-1);
-            self.onUpdate({recs: self.productList});
-            self.resetToCollapsed = !self.resetToCollapsed;
+            vm.onUpdate({recs: vm.productList});
+            vm.resetToCollapsed = !vm.resetToCollapsed;
         };
         function setRecord(value){
-            self.selectRecord = value;
+            vm.selectRecord = value;
         }
 
         /**
          * Sets the UI state for the add new template
          */
-        self.addNewProductState=function(){
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.newProductFormShown = true;
-            self.setValid(false);
-            return(self.newProductFormShown);
+        vm.addNewProductState=function(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.newProductFormShown = true;
+            vm.setValid(false);
+            return(vm.newProductFormShown);
         };
-        self.addNewDisabled=function(){
-            return ( self.newProductFormShown || !self.isDetailValid);
+        vm.addNewDisabled=function(){
+            return ( vm.newProductFormShown || !vm.isDetailValid);
         };
-        self.setValid=function(value){
-            self.isDetailValid=value;
+        vm.setValid=function(value){
+            vm.isDetailValid=value;
         };
-        self.onNewCancel=function(){
-            self.setValid(true);
-            self.newProductFormShown = false
+        vm.onNewCancel=function(){
+            vm.setValid(true);
+            vm.newProductFormShown = false
         }
 
 

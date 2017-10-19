@@ -327,6 +327,9 @@
                     case "element":
                         destId = aliasRec.target + "_" + scopeId;
                         break;
+                    case "elementnoid":
+                        destId = aliasRec.target;
+                        break;
                     case "pattern":
                         if (errorType === "pattern") {
                             errorKey = aliasRec.errorType;

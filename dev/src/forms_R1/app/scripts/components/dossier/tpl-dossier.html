@@ -3,12 +3,12 @@
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
                             id="instructions-toggle" ng-click="dos.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">{{'HELP_FILE_LOAD'|translate}}</span></button>
+                            class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span></button>
                 </div>
-                <h2 class="panel-title">{{'LOAD_DOSSIER'|translate}}</h2>
+                <h2 class="panel-title">{{::'LOAD_DOSSIER'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[0]"
@@ -30,12 +30,12 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_DOSSIER'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'HELP_DOSSIER'|translate}}" class="btn-xs rep-help-button"
                             id="dossier-instructions-toggle" ng-click="dos.addInstruct(1)"><span
                             class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">"{{'HELP_DOSSIER'|translate}}"</span></button>
+                            class="wb-inv">"{{::'HELP_DOSSIER'|translate}}"</span></button>
                 </div>
-                <h2 class="panel-title">{{'Dossier Information'|translate}}</h2>
+                <h2 class="panel-title">{{::'Dossier Information'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[1]"
@@ -81,8 +81,8 @@
                     <div class="col-xs-4 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.compId].$invalid}">
                         <label for="{{::dos.compId}}" class="required">
-                            <span class="field-name">B.&nbsp;{{'COMPANY_ID' |translate}}</span>
-                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <span class="field-name">B.&nbsp;{{::'COMPANY_ID' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <input type="text" class="form-control full-width" id="{{::dos.compId}}"
                                    name="{{::dos.compId}}" required maxlength="6" minlength="5"
                                    ng-model="dos.dossierModel.companyID"/>
@@ -97,8 +97,8 @@
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.thirdId].$invalid}">
                         <label for="{{::dos.thirdId}}" class="required">
-                            <span class="field-name">C.&nbsp;{{'SIGNED_THIRD'|translate}}</span>
-                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <span class="field-name">C.&nbsp;{{::'SIGNED_THIRD'|translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <select name="{{::dos.thirdId}}" class="form-control"
                                     ng-model="dos.dossierModel.drugProduct.thirdPartySigned"
                                     id="{{::dos.thirdId}}" ng-options="val |translate for val in  dos.yesNoList"
@@ -114,15 +114,15 @@
                     <div ng-if="dos.thirdPartySignedChanged()" class="alert alert-info"
                          role="alert"
                          aria-live="polite">
-                        {{'INCLUDE_AUTH'|translate}}
+                        {{::"INCLUDE_AUTH"|translate}}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.prodNameId].$invalid}">
                         <label for="{{::dos.prodNameId}}" class="required">
-                            <span class="field-name">D.&nbsp;{{'PROD_NAME' |translate}}</span>
-                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <span class="field-name">D.&nbsp;{{::'PROD_NAME' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="dos.prodNameId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.prodNameId])"
@@ -138,8 +138,8 @@
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.properNameId].$invalid}">
                         <label for="{{::dos.properNameId}}" class="required">
-                            <span class="field-name">E.&nbsp;{{'PROPER_NAME' |translate}}</span>
-                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <span class="field-name">E.&nbsp;{{::'PROPER_NAME' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="dos.properNameId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.properNameId])"
@@ -154,7 +154,7 @@
                 <div class="row">
                     <div class="col-xs-12 form-group">
                         <label for="related-dossier-id">
-                            F.&nbsp;{{'RELATED_DOSSIER'|translate}}
+                            F.&nbsp;{{::'RELATED_DOSSIER'|translate}}
                         </label>
                         <textarea class="form-control full-width" id="related-dossier-id"
                                   ng-model="dos.dossierModel.relatedDossierID" maxlength="256" rows="3"></textarea>
@@ -165,13 +165,13 @@
                     <section class="panel panel-default">
                         <header class="panel-heading clearfix">
                             <div class="btn-group pull-right">
-                                <button title="{{'HELP_thera'|translate}}"
+                                <button title="{{::'HELP_thera'|translate}}"
                                         class="btn rep-help-button-primary btn-xs"
                                         id="thera-instructions-toggle" ng-click="dos.addInstruct(2)"><span
                                         class="fa fa-question-circle fa-2x"></span><span
-                                        class="wb-inv">"{{'HELP_THERA'|translate}}"</span></button>
+                                        class="wb-inv">"{{::'HELP_THERA'|translate}}"</span></button>
                             </div>
-                            <h3 class="panel-title">G.&nbsp{{'THERA_CLASS'|translate}}</h3>
+                            <h3 class="panel-title">G.&nbsp{{::'THERA_CLASS'|translate}}</h3>
                         </header>
                         <div class="panel-body">
                             <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[2]"
@@ -196,8 +196,8 @@
                 <div class="row">
                     <div class="col-md-5 form-group">
                         <label for="{{::dos.isRefId}}" class="required">
-                            <span class="field-name">H.&nbsp;{{'IS_CDN_REF'|translate}}</span>
-                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <span class="field-name">H.&nbsp;{{::'IS_CDN_REF'|translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="dos.isRefId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.isRefId])"
@@ -210,11 +210,11 @@
                                 ng-model="dos.dossierModel.isRefProducts"
                                 ng-options="val |translate for val in  dos.yesNoList">
                         </select>
-                        <button title="{{'HELP_REFPRODUCTS'|translate}}"
+                        <button title="{{::'HELP_REFPRODUCTS'|translate}}"
                                 class="btn rep-help-button-primary btn-xs"
                                 id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
                                 class="fa fa-question-circle fa-2x"></span><span
-                                class="wb-inv">"{{'HELP_REFPRODUCTS'|translate}}"</span></button>
+                                class="wb-inv">"{{::'HELP_REFPRODUCTS'|translate}}"</span></button>
                     </div>
 
                     <div class="col-md-2 form-group pull-left">
@@ -238,23 +238,23 @@
                     </div>
                 </div>
                 <div class="row" ng-if="dos.isRefProducts()" name="refProductRoot">
-                    <input type="text" ng-show="false" name="oneRefProductRec" id="oneRefRec"
+                    <input type="hidden"  name="{{::dos.oneCdnRefId}}" id="{{::dos.oneCdnRefId}}"
                            ng-model="dos.oneRefSelected" required/>
                     <section class="panel panel-default">
                         <header class="panel-heading">
-                            <h3 class="panel-title">{{'CAN_REF_PRODUCTS'|translate}}</h3>
-                            <label for="oneRefRec" ng-if="dos.dossierForm.oneRefProductRec.$invalid">
+                            <h3 class="panel-title">{{::'CAN_REF_PRODUCTS'|translate}}</h3>
+                          <!--  <label for="oneRefRec" ng-if="dos.dossierForm.oneRefProductRec.$invalid">
                                 <strong id="oneRefProduct-error" class="error">
                              <span class="label label-danger" aria-live="polite"
                                    ng-messages="dos.dossierForm.oneRefProductRec.$error">
                                  <span ng-message="required"> <span translate="MSG_ERR_ONE_CDN_REF"></span></span>
                              </span>
                                 </strong>
-                            </label>
+                            </label>-->
                         </header>
                         <div class="panel-body">
                             <cmp-ref-product-list products="dos.dossierModel.drugProduct.canRefProducts"
-                                    on-update="dos.cdnRefUpdated(recs)"></cmp-ref-product-list>
+                                    on-update="dos.cdnRefUpdated(recs)" show-error-summary="dos.showSummary"></cmp-ref-product-list>
                         </div>
                     </section>
                 </div>
@@ -263,12 +263,12 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
                             id="drugProduct-instructions-toggle" ng-click="dos.addInstruct(4)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_DRUG_PRODUCT'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUG_PRODUCT'|translate}}"</span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{'DRUG_PRODUCT'|translate}}</h2>
+                <h2 class="panel-title">{{::'DRUG_PRODUCT'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div class="row">
@@ -298,7 +298,7 @@
                         <label for="is-schedule-case">
                             <input type="checkbox" name="isScheduleA"
                                    ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case">
-                            {{'ISSCHEDA'|translate}}
+                            {{::'ISSCHEDA'|translate}}
                         </label>
                     </div>
                 </div>
@@ -314,7 +314,7 @@
                                aria-hidden="true"/>
                         <details class="alert alert-danger" id="alert-appendix" open="open">
                             <summary class="h3">
-                                <h2>{{'MISSING_APPENDIX'|translate}}</h2>
+                                <h2>{{::'MISSING_APPENDIX'|translate}}</h2>
                             </summary>
                             <ul>
                                 <li ng-repeat="ingred in dos.errorAppendix">{{ingred}}</li>
@@ -328,7 +328,7 @@
                                aria-hidden="true"/>
                         <details class="alert alert-danger" id="alert-extra-appendix" open="open">
                             <summary class="h3">
-                                <h2>{{'EXTRA_APPENDIX'|translate}}</h2>
+                                <h2>{{::'EXTRA_APPENDIX'|translate}}</h2>
                             </summary>
                             <ul>
                                 <li ng-repeat="ingred in dos.extraAppendix">{{ingred}}</li>
@@ -349,12 +349,12 @@
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{'HELP_REP_CONTACT'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{::'HELP_REP_CONTACT'|translate}}" class="btn-xs rep-help-button"
                                 id="repContact-instructions-toggle" ng-click="dos.addInstruct(5)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'HELP_REP_CONTACT'|translate}}"</span>
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_REP_CONTACT'|translate}}"</span>
                         </button>
                     </div>
-                    <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
+                    <h2 class="panel-title">{{::'REP_CONTACT_INFO'|translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[5]"
@@ -383,16 +383,16 @@
             <div class="form-group col-md-3">
                 <button class="btn btn-default btn-lg active" ng-click="dos.saveJson()"
                         ng-disabled="dos.disableJSONSave()">
-                    {{'SAVE_WORK'|translate}}
+                    {{::'SAVE_WORK'|translate}}
                 </button>
             </div>
             <div class="form-group col-md-3">
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave"
                         ng-click="dos.saveXML()">{{dos.saveXMLLabel |translate}}
                 </button>
-                <button title="{{'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                <button title="{{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                         id="save-instructions-toggle" ng-click="dos.addInstruct(6)"><span
-                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{'SAVE_INSTRUCT'|translate}}"</span>
+                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SAVE_INSTRUCT'|translate}}"</span>
                 </button>
             </div>
         </div>

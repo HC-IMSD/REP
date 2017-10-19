@@ -25,8 +25,8 @@
                 records: '<',
                 showErrors: '&',
                 service: '<',
-                errorSummaryUpdate:'<', //sending a signal that the error summary should be updated
-                showErrorSummary:'<', //flag to show or hide the error summary
+               // errorSummaryUpdate:'<', //sending a signal that the error summary should be updated
+               // showErrorSummary:'<', //flag to show or hide the error summary
                 updateErrorSummary:'&' //function to update the list of error summmaries
             },
             controller: tissuesFluidsListController,
@@ -95,14 +95,14 @@
             if (changes.records) {
                 vm.model.tissuesFluidsList = changes.records.currentValue;
             }
-            if(changes.showErrorSummary){
+            /*if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
                 vm.showErrors();
-            }
-            if(changes.errorSummaryUpdate){
+            }*/
+           /* if(changes.errorSummaryUpdate){
                 vm.updateErrorSummaryState();
-            }
+            }*/
         };
         vm.showErrors=function(){
             return vm.showSummary;
@@ -125,9 +125,9 @@
                 $filter('filter')(vm.model.tissuesFluidsList, {id: recId}, true)[0]);
             vm.model.tissuesFluidsList.splice(idx, 1);
         };
-        vm.updateErrorSummaryState = function () {
+       /* vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
-        };
+        };*/
 
         vm.setRecord = function (value) {
             resetMe();

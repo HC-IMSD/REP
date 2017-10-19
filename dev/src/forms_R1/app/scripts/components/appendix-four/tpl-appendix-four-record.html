@@ -4,7 +4,7 @@
                            form-preamble="{{'ING_DETAILS'|translate}}&nbsp;{{ap4RecCtrl.model.id}}" exclusion-list=ap4RecCtrl.exclusions
                            name-suffix="{{ap4RecCtrl.summaryName}}" set-heading-level="h3" form-id="ap4RecCtrl.appendixFormRecordId"
                            transclude-list="ap4RecCtrl.transcludeList"
-                           make-focused="" alias-list="ap4RecCtrl.alias" show-errors="true"
+                           make-focused="" alias-list="ap4RecCtrl.alias" show-errors="ap4RecCtrl.showSummary"
                            update-errors="ap4RecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
             <legend>{{'ING_DETAILS'|translate}}&nbsp;{{ap4RecCtrl.model.id}}</legend>
@@ -57,14 +57,15 @@
             <section class="section">
                 <cmp-tissues-fluids-list ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"
                                          service="ap4RecCtrl.service"
-                                         records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList"
-                                          update-error-summary="ap4RecCtrl.updateErrorSummary"
-                                         error-summary-update="ap4RecCtrl.updateSummary"
-                                         show-error-summary="true"></cmp-tissues-fluids-list>
+                                         records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList">
+                </cmp-tissues-fluids-list>
             </section>
 
             <section class="section">
-                <cmp-animal-sourced-section ng-if="ap4RecCtrl.model.animalSourced"  records="ap4RecCtrl.model.sourceAnimalDetails" on-update="ap4RecCtrl.updateAnimalSourced(model)" show-errors="ap4RecCtrl.showErrors()"></cmp-animal-sourced-section>
+                <cmp-animal-sourced-section ng-if="ap4RecCtrl.model.animalSourced"  records="ap4RecCtrl.model.sourceAnimalDetails"
+                                            on-update="ap4RecCtrl.updateAnimalSourced(model)" show-errors="ap4RecCtrl.showErrors()"
+
+                update-error-summary="ap4RecCtrl.updateErrorSummaryState()"></cmp-animal-sourced-section>
             </section>
 
             <div class="row">
@@ -77,6 +78,6 @@
                 </div>
             </div>
         </fieldset>
-      <!--  <pre>record {{ap4RecCtrl.model |json}}</pre>-->
+       <!-- <pre>record {{ap4RecCtrl.model |json}}</pre>-->
     </ng-form>
 </div>
