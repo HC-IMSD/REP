@@ -53,6 +53,6 @@
   "HELP_REFPRODUCTS":"Reference Product Instructions",
   "ADD_FORMULATION": "Add Formulation",
   "SAVE_INSTRUCT":"Dossier File Save Instructions",
-  "REFPRODCTRL.PRODUCTDETAILSFORM":"in the Canadian Reference Product Record"
-
+  "REFPRODCTRL.PRODUCTDETAILSFORM":"in the Canadian Reference Product Record",
+  "CONTACTREC.CONTACTRECFORM":"in the REP contact record"
 }

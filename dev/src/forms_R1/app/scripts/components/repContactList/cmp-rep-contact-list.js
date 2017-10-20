@@ -25,7 +25,8 @@
                 // getNewContact: '&',
                 showListErrors: '&',
                 parentDirty: '<',
-                isAmend: '<'
+                isAmend: '<',
+                showErrorSummary:'<'
             }
         });
     contactListCtrl.$inject = ['$filter', 'RepContactService'];
@@ -75,6 +76,10 @@
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
+            }
+            if(changes.showErrorSummary){
+
+                vm.showSummmary=changes.showErrorSummary.currentValue;
             }
 
         };

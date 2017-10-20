@@ -32,6 +32,7 @@
         vm.selectRecord = -1;
         vm.resetToCollapsed = false;
         vm.newProductFormShown = false;
+        vm.showSummmary=false;
         vm.$onInit = function () {
 
             vm.newProductFormShown = false;

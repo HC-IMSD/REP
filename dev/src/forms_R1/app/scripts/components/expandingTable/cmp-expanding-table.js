@@ -110,6 +110,7 @@
             if(changes.disableErrColumn){
                 vm.disableErrorCol=changes.disableErrColumn.currentValue;
                 vm.numberCols=vm.columnDef.length;
+                vm.disableErrorCol=true;
                 _setNumberColumns();
             }
 
@@ -121,7 +122,7 @@
                 vm.numberCols= vm.numberCols+1;
             }else{
                 //caret + error
-                vm.numberCols= vm.numberCols+2;
+             //   vm.numberCols= vm.numberCols+2;
             }
         }
 
