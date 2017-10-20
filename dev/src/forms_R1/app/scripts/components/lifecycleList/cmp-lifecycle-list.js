@@ -21,10 +21,13 @@
                 onUpdate: '&',
                 isAmend: '&',
                 getNewTransaction: '&',
+                setSequenceValue:'&',
                 deprecateSequence: '&', //bit of a hack
                 showErrors: '&',
                 isEctd: '<',
-                parentDirty: '<'
+                parentDirty: '<',
+                sequenceUpdated:'<',
+                getCurrentSequence:'&'
             },
             controller: lifecycleListCtrl,
             controllerAs: 'lifeListCtrl'
@@ -46,7 +49,8 @@
         vm.addFocused = false;
         vm.resetCollapsed = false;
         vm.activityTypes = [];
-
+        vm.startingSequence=0;
+        vm.seqUpdated=false;
 
         vm.columnDef = [
             {
@@ -81,6 +85,7 @@
             vm.activityTypes= TransactionLists.getActivityTypes();
             vm.selectRecord = -1;
             vm.addFocused = false;
+            vm.startingSequence=0;
 
         };
 
@@ -91,6 +96,7 @@
                 vm.lifecycleList = changes.records.currentValue;
                 vm.isDetailsValid = true;
                 vm.updateErrorState();
+                vm.startingSequence=0;
             }
             if (changes.parentDirty) {
                 vm.isParentDirty = changes.parentDirty.currentValue;
@@ -99,6 +105,10 @@
                 vm.ectdValue = changes.isEctd.currentValue;
                 //update the first record
                 _checkFirstRecord();
+            }
+            if(changes.sequenceUpdated){
+                vm.seqUpdated=changes.sequenceUpdated.currentValue;
+                //vm.startingSequence=vm.getCurrentSequence();
             }
         };
 
@@ -128,7 +138,15 @@
             if (!vm.ectdValue) {
                 record.sequence = "";
             } else {
-                record.sequence = "0000";
+               //TODO call service?
+                var seqText = "" + vm.startingSequence;
+                var pad = 4 - seqText.length;
+                var padText = "";
+                for (var i = 0; i < pad; i++) {
+                    padText = padText + "0";
+                }
+                seqText = padText + seqText;
+                record.sequence =  seqText;
             }
             vm.lifecycleList[0] = record;
         }
@@ -139,11 +157,9 @@
          * @returns {number}
          */
         vm.lastRecordSequence = function () {
-            if (!vm.lifecycleList) {
-                //this case should never happen, should always be empty array
-                return 0;
-            }
-            return (vm.lifecycleList.length - 1);
+
+            return vm.getCurrentSequence()-1;
+
         };
         vm.updateErrorState = function () {
             if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
@@ -164,7 +180,12 @@
             vm.setValid(false);
             vm.updateErrorState();
         };
-
+        vm.setStartingSequence=function(){
+            if(isNaN(vm.startingSequence) ||vm.startingSequence==null){
+                vm.startingSequence=0;
+            }
+            vm.setSequenceValue({start:vm.startingSequence});
+        };
 
         vm.isAddDisabled = function () {
             return (!vm.isDetailsValid || (!vm.ectdValue && vm.lifecycleList.length > 0) || (vm.lifecycleListForm.$invalid && vm.lifecycleList.length > 0))
@@ -176,7 +197,6 @@
         };
 
         vm.onUpdateLifecycleRecord = function (record) {
-
             var idx = vm.lifecycleList.indexOf(
                 $filter('filter')(vm.lifecycleList, {sequence: record.sequence}, true)[0]
             );
