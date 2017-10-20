@@ -79,7 +79,7 @@
         vm.errorAppendix = [];
         vm.extraAppendix = [];
         vm.noThera = "";
-        vm.oneRefSelected = "";
+
         //error summary fields
         vm.updateSummary=0; //increment to send message to error summaries
         vm.showSummary=false;
@@ -87,7 +87,8 @@
         vm.exclusions = {
             "formulCtrl.formulationsForm":"tab_0",
             "contactRec.contactRecForm":"true",
-            "ap4Ctrl.appendixForm":"tab_1"
+            "ap4Ctrl.appendixForm":"tab_1",
+           "refProdCtrl.productDetailsForm":"true"
         };
         vm.transcludeList={};
         vm.alias = {
@@ -172,7 +173,6 @@
                 vm.dossierForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
-            vm.showNoRefReError();
             getAppendix4Errors();
             _setComplete();
            // vm.showAllErrors = true;
@@ -200,18 +200,6 @@
 
         vm.cdnRefUpdated = function (list) {
             //don't do anything with the list
-            vm.showNoRefReError();
-        };
-
-        vm.showNoRefReError = function () {
-
-            if (vm.dossierModel.drugProduct.canRefProducts.length > 0 && vm.dossierModel.isRefProducts === YES) {
-                vm.oneRefSelected = "sel";
-                return false
-            } else {
-                vm.oneRefSelected = "";
-                return true;
-            }
         };
 
         vm.disableJSONSave=function() {
@@ -236,8 +224,9 @@
             vm.isIncomplete = !vm.activityRoot.dossierID;
         }
 
-        $scope.$watch("dos.dossierForm.$invalid", function () {
-            disableXMLSave()
+        $scope.$watch("dos.dossierForm.$error", function () {
+           // disableXMLSave()
+            vm.updateErrorSummaryState();
         }, true);
 
         /**
@@ -444,7 +433,6 @@
             vm.properNameId="proper_name"+ scopeId;
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
-            vm.oneCdnRefId="msg_err_one_cdn_ref"+scopeId;
         }
 
 

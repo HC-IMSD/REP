@@ -24,7 +24,9 @@
             }
         });
 
-    function refProductListCtrl() {
+    refProductListCtrl.$inject=['$scope'];
+
+    function refProductListCtrl($scope) {
         var vm = this;
         vm.isDetailValid = true;
         vm.selectRecord = -1;
@@ -46,7 +48,7 @@
             if (vm.products) {
                 vm.productList = vm.products;
             }
-            // }
+            _setIdNames();
 
 
         };
@@ -69,6 +71,7 @@
             vm.newProductFormShown = false;
             vm.onUpdate({recs: vm.productList});
             setRecord(-1);
+            vm.showNoRefReError()
         };
 
         vm.updateProduct = function (idx, product) {
@@ -84,6 +87,7 @@
             setRecord(-1);
             vm.onUpdate({recs: vm.productList});
             vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.showNoRefReError()
         };
         function setRecord(value){
             vm.selectRecord = value;
@@ -96,6 +100,7 @@
             vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.newProductFormShown = true;
             vm.setValid(false);
+            vm.showNoRefReError();
             return(vm.newProductFormShown);
         };
         vm.addNewDisabled=function(){
@@ -109,7 +114,23 @@
             vm.newProductFormShown = false
         }
 
+        vm.showNoRefReError = function () {
 
+            if (vm.productList.length > 0 || vm.newProductFormShown===true) {
+                vm.oneRefSelected = "sel";
+                return false
+            } else {
+                vm.oneRefSelected = "";
+                return true;
+            }
+        };
+
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+           // vm.dossierFormId="dossier_form" + scopeId;
+            vm.oneCdnRefId="msg_err_one_cdn_ref"+scopeId;
+        }
 
     }
 

@@ -238,19 +238,11 @@
                     </div>
                 </div>
                 <div class="row" ng-if="dos.isRefProducts()" name="refProductRoot">
-                    <input type="hidden"  name="{{::dos.oneCdnRefId}}" id="{{::dos.oneCdnRefId}}"
-                           ng-model="dos.oneRefSelected" required/>
+                  <!--  <input type="hidden"  name="{{::dos.oneCdnRefId}}" id="{{::dos.oneCdnRefId}}"
+                           ng-model="dos.oneRefSelected" required/>-->
                     <section class="panel panel-default">
                         <header class="panel-heading">
                             <h3 class="panel-title">{{::'CAN_REF_PRODUCTS'|translate}}</h3>
-                          <!--  <label for="oneRefRec" ng-if="dos.dossierForm.oneRefProductRec.$invalid">
-                                <strong id="oneRefProduct-error" class="error">
-                             <span class="label label-danger" aria-live="polite"
-                                   ng-messages="dos.dossierForm.oneRefProductRec.$error">
-                                 <span ng-message="required"> <span translate="MSG_ERR_ONE_CDN_REF"></span></span>
-                             </span>
-                                </strong>
-                            </label>-->
                         </header>
                         <div class="panel-body">
                             <cmp-ref-product-list products="dos.dossierModel.drugProduct.canRefProducts"

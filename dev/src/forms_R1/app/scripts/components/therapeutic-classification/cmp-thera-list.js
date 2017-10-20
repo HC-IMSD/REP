@@ -72,7 +72,8 @@
 
         vm.addNew = function () {
             var maxID = getMaxID();
-            var item = {"id": maxID + 1, "name": ""};
+            maxID=maxID+1;
+            var item = {"id": maxID , "name": ""};
             vm.model.theraList.push(item);
             vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.selectRecord = (0);
@@ -96,7 +97,7 @@
         function getMaxID() {
             var id = 0;
             for (var i = 0; i < vm.model.theraList.length; i++) {
-                if (vm.model.theraList[i].id > id) {
+                if (parseInt(vm.model.theraList[i].id) > id) {
                     id = vm.model.theraList[i].id;
                 }
             }

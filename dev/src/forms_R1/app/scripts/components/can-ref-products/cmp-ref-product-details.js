@@ -196,8 +196,11 @@
         };
 
 
-        $scope.$watch('$ctrl.productDetailsForm.$dirty', function () {
+        $scope.$watch('refProdCtrl.productDetailsForm.$dirty', function () {
             vm.isDetailValid({state: !vm.productDetailsForm.$dirty});
+        }, true);
+        $scope.$watch('refProdCtrl.productDetailsForm.$error', function () {
+            vm.updateErrorSummaryState();
         }, true);
 
 
@@ -207,6 +210,12 @@
             vm.brandId = "brand_name" + scopeId;
             vm.ingredNameId = "medicinal_ingredient" + scopeId;
             vm.strengthId = "strength" + scopeId;
+            vm.unitsId = "units" + scopeId;
+            vm.otherId="other_units"+scopeId;
+            vm.perId="per"+scopeId;
+            vm.dosageFormId="dosage_form"+scopeId;
+            vm.dosageFormOtherId="dosage_form_other"+scopeId;
+            vm.companyId="company_noabbrev"+scopeId;
         }
 
 

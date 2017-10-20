@@ -1,4 +1,6 @@
-<ng-form name="material-ing-list-form">
+<ng-form name="crpl.cdn_ref_list_form">
+    <input type="hidden"  name="{{::crpl.oneCdnRefId}}" id="{{::crpl.oneCdnRefId}}"
+           ng-model="crpl.oneRefSelected" required/>
     <cmp-expanding-table title="{{::'REF_PRODUCTS'|translate}}" list-items="crpl.productList"
                          column-def="crpl.colNames" select-record="crpl.selectRecord"
                          reset-to-collapsed="crpl.resetToCollapsed"

@@ -20,6 +20,7 @@
         .module('dossierService')
         .factory('DossierService', DossierService);
     DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+
     function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
         var yesValue = YES;
         var noValue = NO;
@@ -99,7 +100,7 @@
                         thirdPartySigned: info.third_party_signed,
                         drugUseList: loadDrugUseValues(info),
                         isScheduleA: info.is_sched_a === 'Y',
-                        therapeutic:[] ,
+                        therapeutic: [],
                         canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         appendixFourList: getAppendix4IngredientList(info.appendix4_group)
@@ -109,7 +110,7 @@
                     contactList: getContactList(info.contact_record)
 
                 };
-                if(info.therapeutic_class_list.therapeutic_class) {
+                if (info.therapeutic_class_list.therapeutic_class) {
                     dossierModel.drugProduct.therapeutic = getTherapeuticList(info.therapeutic_class_list.therapeutic_class)
                 }
                 dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
@@ -175,7 +176,7 @@
             }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFourList);
-                if (appendix4 && appendix4.length>0) {
+                if (appendix4 && appendix4.length > 0) {
                     baseDossier.appendix4_group = appendix4;
                 }
                 var formulations = formulationListToOutput(jsonObj.drugProduct.formulations);
@@ -278,8 +279,8 @@
 
             if (angular.isDefined(contacts)) {
 
-                if(!(contacts instanceof Array)){
-                    contacts=[contacts];
+                if (!(contacts instanceof Array)) {
+                    contacts = [contacts];
                 }
 
                 for (var i = 0; i < contacts.length; i++) {
@@ -429,13 +430,15 @@
                 input = [input];
             }
             if (input) {
-                list=[];
+                list = [];
                 for (var i = 0; i < input.length; i++) {
-                    var item = {
-                        "id": "" + i + 1,
-                        "name": input[i]
-                    };
-                    list.push(item);
+                    if (angular.isString(input[i])&&input[i].length>0) {
+                        var item = {
+                            "id": ( i + 1),
+                            "name": input[i]
+                        };
+                        list.push(item);
+                    }
                 }
             }
             return list;
@@ -447,7 +450,7 @@
         function getCanRefProductList(info) {
             var list = [];
 
-            if (angular.isDefined(info)) {
+            if (angular.isString(info)&& info.length>0) {
                 if (!(info instanceof Array)) {
                     //make it an array, case there is only one
                     info = [info]
@@ -456,7 +459,7 @@
                 for (var i = 0; i < info.length; i++) {
                     var product = {};
                     product.brandName = info[i].brand_name;
-                    product.ingId= info[i].ingredient_id;
+                    product.ingId = info[i].ingredient_id;
                     product.ingLabel = info[i].ingredient_name;
                     product.autoIngred = YES;
 
@@ -509,26 +512,26 @@
             //TODO externalize
             var getCountries = function (input) {
                 var list = [];
-                if(!(input instanceof Array)){
-                    input=[input];
+                if (!(input instanceof Array)) {
+                    input = [input];
                 }
                 for (var i = 0; i < input.length; i++) {
 
-                   var obj = {
+                    var obj = {
                         "id": i,
-                        "country":"",
-                        "display":"",
-                        "unknownCountryDetails":""
+                        "country": "",
+                        "display": "",
+                        "unknownCountryDetails": ""
                     };
-                    if( input[i].country_with_unknown.__text===UNKNOWN){
+                    if (input[i].country_with_unknown.__text === UNKNOWN) {
                         obj.country = getCountryAndProvinces.getUnknownCountryRecord();
-                    }else {
-                        obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id:  input[i].country_with_unknown.__text})[0];
+                    } else {
+                        obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: input[i].country_with_unknown.__text})[0];
                     }
-                    if(obj.country){
-                        obj.display=obj.country.id
+                    if (obj.country) {
+                        obj.display = obj.country.id
                     }
-                    obj.unknownCountryDetails=input[i].unknown_country_details;
+                    obj.unknownCountryDetails = input[i].unknown_country_details;
                     list.push(obj);
                 }
                 return list;
@@ -536,8 +539,8 @@
 
             if (angular.isDefined(info)) {
 
-                if (!(info instanceof Array)){
-                    info=[info];
+                if (!(info instanceof Array)) {
+                    info = [info];
                 }
                 for (var i = 0; i < info.length; i++) {
                     var ing = {};
@@ -565,8 +568,8 @@
                         ing.sourceAnimalDetails.ageAnimals = Number(info[i].animal_sourced_section.animal_age);
                         //var animalSrcObj=info[i].sourceAnimalDetails;
                         var animalTypeList = info[i].animal_sourced_section.animal_src_record;
-                        if (!(animalTypeList instanceof Array)){
-                            animalTypeList=[animalTypeList];
+                        if (!(animalTypeList instanceof Array)) {
+                            animalTypeList = [animalTypeList];
                         }
                         for (var srcCount = 0; srcCount < animalTypeList.length; srcCount++) { //TODO function?
                             var oneRec = animalTypeList[srcCount];
@@ -619,7 +622,7 @@
                 if (!item.dosage_form_group.dosage_form) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
                 } else {
-                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix()+ item.dosage_form_group.dosage_form.__text});
+                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form.__text});
                     obj.dosageForm = dosageFormObj;
                 }
 
@@ -632,29 +635,29 @@
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
                     obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
-                }else{
-                    obj.nMedIngList=[];
+                } else {
+                    obj.nMedIngList = [];
                 }
                 if (item.active_ingredient) {
                     obj.activeIngList = getActiveIngList(item.active_ingredient);
-                }else{
-                    obj.animalHumanMaterials=[];
+                } else {
+                    obj.animalHumanMaterials = [];
                 }
                 //container_group is static but do a check to be safe
                 if (item.container_group && item.container_group.container_details) {
                     obj.containerTypes = getContainerTypeList(item.container_group.container_details);
-                }else{
-                    obj.containerTypes=[];
+                } else {
+                    obj.containerTypes = [];
                 }
                 if (item.material_ingredient) {
                     obj.animalHumanMaterials = getMaterialList(item.material_ingredient);
-                }else{
-                    obj.animalHumanMaterials=[];
+                } else {
+                    obj.animalHumanMaterials = [];
                 }
                 if (item.roa_group && item.roa_group.roa_details) {
                     obj.routeAdmins = getRouteAdminList(item.roa_group.roa_details);
-                }else{
-                    obj.routeAdmins=[];
+                } else {
+                    obj.routeAdmins = [];
                 }
                 if (item.country_group && item.country_group.country_manufacturer) {
                     obj.countryList = getFormulationCountryList(item.country_group.country_manufacturer);
@@ -694,7 +697,7 @@
                     "units": "",
                     "otherUnits": item.units_other,
                     "calcAsBase": item.is_base_calc,
-                    "nanoMaterial":"",
+                    "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
 
@@ -706,11 +709,11 @@
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
-                if( item.is_nanomaterial){
+                if (item.is_nanomaterial) {
                     //prefixed so need to do things differently than units
-                    var nanoValue=DossierLists.getNanoPrefix()+item.is_nanomaterial.__text;
-                    if(item.is_nanomaterial.__text===OTHER){
-                        nanoValue=item.is_nanomaterial.__text;
+                    var nanoValue = DossierLists.getNanoPrefix() + item.is_nanomaterial.__text;
+                    if (item.is_nanomaterial.__text === OTHER) {
+                        nanoValue = item.is_nanomaterial.__text;
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
@@ -749,7 +752,7 @@
                     "units": "",
                     "otherUnits": item.units_other,
                     "calcAsBase": item.is_base_calc,
-                    "nanoMaterial":"",
+                    "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
 
@@ -761,11 +764,11 @@
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
-                if( item.is_nanomaterial){
+                if (item.is_nanomaterial) {
                     //prefixed so need to do things differently than units
-                    var nanoValue=DossierLists.getNanoPrefix()+item.is_nanomaterial.__text;
-                    if(item.is_nanomaterial.__text===OTHER){
-                        nanoValue=item.is_nanomaterial.__text;
+                    var nanoValue = DossierLists.getNanoPrefix() + item.is_nanomaterial.__text;
+                    if (item.is_nanomaterial.__text === OTHER) {
+                        nanoValue = item.is_nanomaterial.__text;
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
@@ -873,17 +876,17 @@
 
                 var obj = {
                     "id": _id,
-                    "country":"",
-                    "display":"",
-                    "unknownCountryDetails":""
+                    "country": "",
+                    "display": "",
+                    "unknownCountryDetails": ""
                 };
-                if(item.__text===UNKNOWN){
+                if (item.__text === UNKNOWN) {
                     obj.country = getCountryAndProvinces.getUnknownCountryRecord();
-                }else {
+                } else {
                     obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: item.__text})[0];
                 }
-                if(obj.country){
-                    obj.display=obj.country.id
+                if (obj.country) {
+                    obj.display = obj.country.id
                 }
                 resultList.push(obj);
             });
@@ -904,7 +907,7 @@
                 for (var i = 0; i < info.length; i++) {
                     var product = {};
                     product.brand_name = info[i].brandName;
-                   // product.medicinal_ingredient = info[i].medIngredient;
+                    // product.medicinal_ingredient = info[i].medIngredient;
 
                     //BUG Fix April 10, 2017
                     // This fixes data issues where ingredient is not on the list
@@ -1026,12 +1029,12 @@
                         countryRecord.country_with_unknown = {
                             _label_en: "",
                             _label_fr: "",
-                            __text:  ""
+                            __text: ""
                         };
-                        if( countries[v].country){
-                            countryRecord.country_with_unknown._label_en= countries[v].country.en;
-                            countryRecord.country_with_unknown._label_fr= countries[v].country.fr;
-                            countryRecord.country_with_unknown.__text= countries[v].country.id;
+                        if (countries[v].country) {
+                            countryRecord.country_with_unknown._label_en = countries[v].country.en;
+                            countryRecord.country_with_unknown._label_fr = countries[v].country.fr;
+                            countryRecord.country_with_unknown.__text = countries[v].country.id;
                         }
 
                         countryRecord.unknown_country_details = countries[v].unknownCountryDetails;
@@ -1120,12 +1123,12 @@
                     "units": "",
                     "units_other": item.otherUnits,
                     "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial":"",
+                    "is_nanomaterial": "",
                     "nanomaterial_details": item.nanoMaterialOther
                 };
                 //item.units
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
-                obj.is_nanomaterial=_unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                obj.is_nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
 
                 resultList.push(obj);
             });
@@ -1184,7 +1187,7 @@
                     "nanomaterial_details": item.nanoMaterialOther
                 };
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
-                obj.is_nanomaterial=_unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                obj.is_nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
 
                 resultList.push(obj);
             });
@@ -1243,7 +1246,7 @@
             var resultList = [];
             angular.forEach(list, function (item) {
                 //check to see if this is an object. If not it was empty
-                if(angular.isObject(item.roa)) {
+                if (angular.isObject(item.roa)) {
                     var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
                     var newRoa = splitArray[splitArray.length - 1];
                     //roa is a field with 2 attributes
@@ -1270,7 +1273,7 @@
 
             var resultList = [];
             angular.forEach(list, function (item) {
-                var country= {
+                var country = {
                     _label_en: item.country.en,
                     _label_fr: item.country.fr,
                     __text: item.country.id
@@ -1312,7 +1315,9 @@
             var resultList = [];
             for (var i = 0; i < jsonObj.length; i++) {
                 //TODO save the ids??
-                resultList.push(jsonObj[i].name);
+                if (angular.isString(jsonObj[i].name)&&jsonObj[i].name.length>0) {
+                    resultList.push(jsonObj[i].name);
+                }
             }
             return (resultList);
         }
