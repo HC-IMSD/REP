@@ -42,6 +42,7 @@ var paths = {
     buildDevCompany: buildDev + '/company/',
     buildDevTransaction: buildDev + '/transaction/',
     buildDevDossier: buildDev + '/dossier/',
+    buildDevDrugProduct: buildDev + '/drugProduct/',
     buildDevCSP: buildDev + '/csp/',
     buildProdActivity: buildProd + '/activity/',
     buildProdCompany: buildProd + '/company/',
@@ -143,6 +144,19 @@ var dossierRootTitles_fr = {
 
 };
 
+var drugProductRootTitles_en = {
+    mainHeading: "Drug Product Template: Regulatory Enrolment Process (REP)",
+    title: 'Health Canada Drug Product Template'
+
+};
+
+var drugProductRootTitles_fr = {
+    mainHeading: "fr_Drug Product Template: Regulatory Enrolment Process (REP)",
+    title: 'fr_Health Canada Drug Product Template'
+
+};
+
+
 var cspRootTitles_en = {
     mainHeading: "Certificate of Supplementary Protection (CSP) Application Form",
     title: 'Health Canada CSP Form'
@@ -166,6 +180,7 @@ var jsRootContent = {
     partialCompanyRoot: 'rootContent/companyRoot.html',
     partialTransactionRoot: 'rootContent/transactionRoot.html',
     partialDossierRoot: 'rootContent/dossierRoot.html',
+    partialDrugProductRoot: 'rootContent/drugProductRoot.html',
     partialDiffFormRoot: 'rootContent/diffForm.html',
     partialCSPFormRoot: 'rootContent/cspForm.html'
 };
@@ -177,6 +192,7 @@ var rootFileNames = {
     companyRoot: "companyApp",
     transactionRoot: "transactionApp",
     dossierRoot: "dossierApp",
+    drugProductRoot: "drugProductApp",
     repDiff: "diffApp",
     cspRoot: "cspApp"
 };
@@ -259,6 +275,7 @@ var componentFolders = {
     contact: 'contact/',
     countryList: 'country-list/',
     dossier: 'dossier/',
+    drugProduct: 'drugProduct/',
     drugUse: 'drug-use/',
     routeAdmin: 'route-admin/',
     fileIO: 'fileIO/',
@@ -387,6 +404,25 @@ var dossierComponentFolders =
         componentFolders.errorSummary
     ];
 
+var drugProductComponentFolders =
+    [
+        componentFolders.appendix4,
+        componentFolders.checkboxList,
+        componentFolders.countryList,
+        componentFolders.drugProduct,
+        componentFolders.applicationInfo,
+        componentFolders.drugUse,
+        componentFolders.routeAdmin,
+        componentFolders.scheduleA,
+        componentFolders.tabs,
+        componentFolders.formulations,
+        componentFolders.fileIOComponentAndDep,
+        componentFolders.expandingTable,
+        componentFolders.errorMsg,
+        componentFolders.errorSummary
+    ];
+
+
 //transaction Form Components
 var transactionComponentFolders = [
 
@@ -495,6 +531,18 @@ var dossierServiceFileNames =
 
     ];
 
+var drugProductServiceFileNames =
+    [
+        serviceFileNames.dossierDataList,
+        serviceFileNames.dossierLoadService,
+        serviceFileNames.dossierService,
+        serviceFileNames.applicationInfoService,
+        serviceFileNames.dataLists,
+        serviceFileNames.filterLists,
+        serviceFileNames.hpfbConstants
+
+    ];
+
 //Transaction Service files
 var transactionServiceFileNames = [
 
@@ -511,6 +559,7 @@ var activityTemplates = ["activity/"];
 var transactionTemplates = ["transaction/"];
 var companyTemplates = ["company/"];
 var dossierTemplates = ["dossier/"];
+var drugProductTemplates = ["drugProduct/"];
 var cspTemplates = ["csp/"];
 
 // Complementary Supplementary Protection Application Form
@@ -551,6 +600,10 @@ var companyDirectiveFolders =
 
 //Dossier Form Directives
 var dossierDirectiveFolders =
+    [
+        directiveFolders.numberOnly
+    ];
+var drugProductDirectiveFolders =
     [
         directiveFolders.numberOnly
     ];
@@ -1298,6 +1351,14 @@ gulp.task('dev-copy-changedFiles', function () {
         },
         {
             matches: false,
+            formName: "DrugProduct",
+            buildPath: paths.buildDevDrugProduct,
+            compFolders: drugProductComponentFolders,
+            serviceFiles: drugProductServiceFileNames,
+            directiveFiles: drugProductDirectiveFolders
+        },
+        {
+            matches: false,
             formName: "Transaction",
             buildPath: paths.buildDevTransaction,
             compFolders: transactionComponentFolders,
@@ -1396,6 +1457,14 @@ gulp.task('dev-dossier-createResources', ['dev-dossier-copyTranslate'], function
     return (pipes.compileTranslateFile(srcPath, destPath, filename, dossierTranslationFilesBaseList));
 });
 
+gulp.task('dev-drugProduct-createResources', ['dev-drugProduct-copyTranslate'], function () {
+
+    var srcPath = paths.buildDevDrugProduct;
+    var destPath = paths.buildDevDrugProduct + paths.relScript;
+    var filename = 'translations' + createSuffixDate();
+    return (pipes.compileTranslateFile(srcPath, destPath, filename, dossierTranslationFilesBaseList));
+});
+
 
 gulp.task('dev-activity-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*', '!' + paths.lib + libFileNames.deepDiffMin],
@@ -1456,6 +1525,12 @@ gulp.task('dev-dossier-clean', function () {
     return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
 
 });
+
+gulp.task('dev-drugProduct-clean', function () {
+    return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
+
+});
+
 gulp.task('dev-csp-clean', function () {
     return (pipes.cleanBuild(paths.buildDevCSP + 'app/'));
 
@@ -1576,16 +1651,35 @@ gulp.task('dev-transaction-htmlBuild', ['dev-global-create-src-template', 'dev-t
 gulp.task('dev-dossier-copyWet', function () {
     return (pipes.copyWet(paths.buildDevDossier))
 });
+gulp.task('dev-drugProduct-copyWet', function () {
+    return (pipes.copyWet(paths.buildDevDrugProduct))
+});
+
 gulp.task('dev-dossier-copyLib', function () {
     var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
         {read: true, base: '.'});
     return (copySources.pipe(gulp.dest(paths.buildDevDossier)));
 });
+gulp.task('dev-drugProduct-copyLib', function () {
+    var copySources = gulp.src([paths.lib + '**/*', paths.styles + '**/*'],
+        {read: true, base: '.'});
+    return (copySources.pipe(gulp.dest(paths.buildDevDrugProduct)));
+});
+
+
 gulp.task('dev-dossier-copyData', function () {
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
     return (copySources.pipe(gulp.dest(paths.buildDev)));
 });
+
+gulp.task('dev-drugProduct-copyData', function () {
+    var copySources = gulp.src([paths.data + '**/*'],
+        {read: true, base: 'app'});
+    return (copySources.pipe(gulp.dest(paths.buildDev)));
+});
+
+
 gulp.task('dev-company-copyData', function () {
     var copySources = gulp.src([paths.data + '**/*'],
         {read: true, base: 'app'});
@@ -1616,10 +1710,21 @@ gulp.task('dev-dossier-copyTranslate', [], function () {
     return (pipes.translateDev(dossierTranslationFilesBaseList, paths.buildDevDossier));
 });
 
+gulp.task('dev-drugProduct-copyTranslate', [], function () {
+
+    return (pipes.translateDev(dossierTranslationFilesBaseList, paths.buildDevDrugProduct));
+});
+
 
 gulp.task('dev-dossier-copySrc', [], function () {
     return (
         pipes.copySrcs(true, paths.buildDevDossier, dossierComponentFolders, dossierServiceFileNames, dossierDirectiveFolders, dossierTemplates, false)
+    )
+});
+
+gulp.task('dev-drugProduct-copySrc', [], function () {
+    return (
+        pipes.copySrcs(true, paths.buildDevDrugProduct, drugProductComponentFolders, drugProductServiceFileNames, drugProductDirectiveFolders, drugProductTemplates, false)
     )
 });
 
@@ -1634,6 +1739,17 @@ gulp.task('dev-dossier-createRootJS', function () {
     );
 
 
+});
+
+gulp.task('dev-drugProduct-createRootJS', function () {
+
+    var dest = paths.buildDevDrugProduct + 'app/scripts/';
+    var rootFile = paths.scripts + "/" + rootFileNames.drugProductRoot + '.js';
+    var skipDate = true;
+    var generateInternalForms = true;
+    return (
+        pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
+    );
 });
 
 
@@ -1661,6 +1777,36 @@ gulp.task('dev-dossier-htmlBuild', ['dev-global-create-src-template', 'dev-dossi
         pipes.cleanBuild(buildDir + paths.translations)
     );
 });
+
+
+
+
+/**
+ * Generates the base Drug Product HTML file.
+ * First copies the source files (copyDossierSrcDev),
+ * library files (copyLibDevDrugProduct),
+ * Then creates 4 versions of main app file (dossierApp).
+ * Creates 4 html files- internal english, internal french, external english, external french
+ */
+//' dev-dossier-insertTranslateLoader '
+gulp.task('dev-drugProduct-htmlBuild', ['dev-global-create-src-template', 'dev-drugProduct-copyData', 'dev-drugProduct-copySrc', 'dev-drugProduct-copyLib', 'dev-drugProduct-createRootJS', 'dev-drugProduct-createResources'], function () {
+
+    var ignoreDir = '/build/dev/drugProduct';
+    var buildDir = paths.buildDevDrugProduct;
+    var htmlPartial = jsRootContent.partialDrugProductRoot;
+    var today = createSuffixDate();
+    today = "";
+    var deploy = deployType.dev;
+    pipes.createRootHtml(paths.devFrenchTemplate, drugProductRootTitles_fr, 'drugProductEnrolINT-fr.html', 'drugProductAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.devFrenchTemplate, drugProductRootTitles_fr, 'drugProductEnrolEXT-fr.html', 'drugProductAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    pipes.createRootHtml(paths.devEnglishTemplate, drugProductRootTitles_en, 'drugProductEnrolEXT-en.html', 'drugProductAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+    pipes.createRootHtml(paths.devEnglishTemplate, drugProductRootTitles_en, 'drugProductEnrolINT-en.html', 'drugProductAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+    return (
+        pipes.cleanBuild(buildDir + paths.translations)
+    );
+});
+
+
 
 
 /*******************PRODUCTIION SCRIPTS START HERE **********************/
