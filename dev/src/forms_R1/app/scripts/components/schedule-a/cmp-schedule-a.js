@@ -18,6 +18,7 @@
         .component('cmpScheduleA', {
             templateUrl: 'app/scripts/components/schedule-a/tpl-schedule-a.html',
             controller: scheduleACtrl,
+            controllerAs:'schedACtrl',
             bindings: {
                 scheduleGroup: '<',
                 onUpdate: '&',
@@ -29,17 +30,17 @@
     scheduleACtrl.$inject=['$scope'];
 
     function scheduleACtrl($scope) {
-        var self = this;
-        self.isClaim="";
-        self.expanderOpenState=false;
-        self.disableExpander=false;
-        self.$onInit = function () {
+        var vm = this;
+        vm.isClaim="";
+        vm.expanderOpenState=false;
+       vm.disableExpander=false;
+        vm.$onInit = function () {
             var noValue=false;
-            if (!self.scheduleAModel) {
-                self.scheduleAModel = {
+            if (!vm.model) {
+                vm.model = {
                     drugIdNumber: "",
-                    scheduleAClaimsIndDetails: "",
-                    diseaseDisorderList: [
+                    scheduleAClaimsIndDetails: ""
+                /*    diseaseDisorderList: [
 
                         {name: "acute-alcohol", label: "ACUTEALCOHOL", value:noValue },
                         {name: "acute-anxiety", label: "ACUTEANXIETY", value: noValue },
@@ -71,58 +72,103 @@
                         {name: "thyroid-disease", label: "THYROIDDISEASE", value: noValue},
                         {name: "ulcer-gastro", label: "UCLERGASTRO", value: noValue}
 
-                    ]
+                    ]*/
 
 
                 };
+
              }
+            _setIdNames();
     };
         /**
          * Updates the bindings
          * @param changes
          */
-        self.$onChanges=function(changes){
+        vm.$onChanges=function(changes){
             if(changes.scheduleGroup){
-                self.scheduleAModel = changes.scheduleGroup.currentValue;
+                vm.model = changes.scheduleGroup.currentValue;
             }
         };
 
         /**
          * Checks to see if at least one claim has been selected
          */
-        self.claimSelected=function(){
-            for (var i=0;i<self.scheduleAModel.diseaseDisorderList.length;i++){
-                if(self.scheduleAModel.diseaseDisorderList[i].value){
-                    self.isClaim="selected";//give mand field a value
+        vm.claimSelected=function(){
+            var keys = Object.keys(vm.model.diseaseDisorderList);
+
+            for (var i=0;i<keys.length;i++){
+                if(vm.model.diseaseDisorderList[keys[i]]){
+                    vm.isClaim="selected";//give mand field a value
                     return true;
                 }
             }
-            self.isClaim="";
+            vm.isClaim="";
             return false;
         };
-        self.noClaimSelected=function(){
-            return(!self.claimSelected());
+        vm.noClaimSelected=function(){
+            return(!vm.claimSelected());
         };
-        self.showError = function (isInvalid, isTouched) {
+        vm.showError = function (isInvalid, isTouched) {
 
-            return ((isInvalid && isTouched) || (isInvalid && self.showErrors()))
+            return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()))
         };
 
-        self.isOpenState=function(){
-            if(self.schedAForm.$invalid){
-                self.expanderOpenState=true;
-                self.disableExpander=true;
+        vm.isOpenState=function(form){
+            if(form.$invalid){
+                vm.expanderOpenState=true;
+                vm.disableExpander=true;
             }else{
-                self.disableExpander=false;
-               // self.expanderOpenState= !self.expanderOpenState;
+                vm.disableExpander=false;
+               // vm.expanderOpenState= !vm.expanderOpenState;
             }
-            return self.expanderOpenState;
+            return vm.expanderOpenState;
         };
 
         $scope.$watch("$ctrl.schedAForm.$invalid", function () {
-            self.isOpenState();
+            //vm.isOpenState();
+            vm.expanderOpenState=true;
+            vm.disableExpander=true;
         }, true);
+       /* $scope.$watch("$ctrl.schedAForm.$valid", function () {
+            //vm.isOpenState();
+            vm.expanderOpenState=true;
+            vm.disableExpander=false;
+        }, true);*/
 
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+           // vm.formId="drug_product_form" + scopeId;
+            vm.acuteAlcoholId="acute_alcohol"+ scopeId;
+            vm.acuteAnxietyId="acute_anxiety"+ scopeId;
+            vm.acuteInfectId="acute_infectious"+ scopeId;
+            vm.accuteInflamId="acute_inflammatory"+ scopeId;
+            vm.acutePsycoticId="acute_psychotic"+ scopeId;
+            vm.addictionId="addiction"+ scopeId;
+            vm.aterioId="ateriosclerosis"+ scopeId;
+            vm.appendId="appendicitis"+ scopeId;
+            vm.asthmaId="asthma"+ scopeId;
+            vm.cancerId="cancer"+ scopeId;
+            vm.congestId="congest_heart_fail"+ scopeId;
+            vm.convulId="convulsions"+ scopeId;
+            vm.dementId="dementia"+ scopeId;
+            vm.depressId="depression"+ scopeId;
+            vm.diabetesId="diabetes"+ scopeId;
+            vm.gangreneId="gangrene"+ scopeId;
+            vm.glaucomaId="glaucoma"+ scopeId;
+            vm.haemId="haematologic_bleeding"+ scopeId;
+            vm.hepatitisId="hepatitis"+ scopeId;
+            vm.hypertensionId="hypertension"+ scopeId;
+            vm.nausPregId="nausea_pregnancy"+ scopeId;
+            vm.obesityId="obesity"+ scopeId;
+            vm.rFeverId="rheumatic_fever"+ scopeId;
+            vm.septId="septicemia"+ scopeId;
+            vm.sexDiseasetId="sex_transmit_disease"+ scopeId;
+            vm.sHerniaId="strangulated_hernia"+ scopeId;
+            vm.thromDisorderId="thrombotic_embolic_disorder"+ scopeId;
+            vm.thyroidId="thyroid_disease"+ scopeId;
+            vm.ulcerGssId="ulcer_gastro"+ scopeId;
+        }
     }
 
 })();

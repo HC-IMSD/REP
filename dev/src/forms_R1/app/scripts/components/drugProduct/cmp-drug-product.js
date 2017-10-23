@@ -9,6 +9,7 @@
     var dependencies = [
         'tabsModule',
          'drugUseModule',
+        'scheduleAModule',
         'dossierDataLists',
         'dataLists',
         'filterLists',
@@ -36,7 +37,7 @@
         .component('cmpDrugProduct', {
             templateUrl: 'app/scripts/components/drugProduct/tpl-drug-product.html',
             controller: drugProductCtrl,
-            controllerAs: 'dos',
+            controllerAs: 'drugProdCtrl',
             bindings: {
                 dossierRecordInput: '<',
                 onUpdateDossier: '&',
@@ -61,13 +62,13 @@
         vm.yesValue = YES; //is this needed?
         vm.formTypeList = getRoleLists.getFormTypes();
         //config for applicationInfoCompoenent
-        vm.configField = {
+       /* vm.configField = {
             "label": "DOSSIER_ID",
             "fieldLength": "7",
             "tagName": "dossierID",
             "errorMsg": "MSG_LENGTH_7",
             "isDossier": true
-        };
+        };*/
 
         vm.isIncomplete = true;
         vm.formAmend = false;
@@ -119,7 +120,7 @@
             vm.showSummary=false;
             _setIdNames();
             vm.dossierService = new DossierService();
-            vm.dossierModel = vm.dossierService.getDefaultObject();
+            vm.model = vm.dossierService.getDefaultObject();
 
             vm.setVisibleTabIndex=-1;
         };
@@ -156,23 +157,23 @@
 
 
         vm.thirdPartySignedChanged = function () {
-            return (vm.dossierModel.drugProduct.thirdPartySigned === YES);
+            return (vm.model.drugProduct.thirdPartySigned === YES);
         };
 
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-                vm.dossierModel = vm.dossierService.loadFromFile(resultJson);
+                vm.model = vm.dossierService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
-                vm.dossierForm.$setDirty();
+                vm.drugProdForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
             getAppendix4Errors();
             _setComplete();
            // vm.showAllErrors = true;
-            disableXMLSave();
+           // disableXMLSave();
         }
 
         vm.recordsChanged = function () {
@@ -181,17 +182,17 @@
 
         vm.isRefProducts = function () {
 
-            if (vm.dossierModel.isRefProducts === YES) {
+            if (vm.model.isRefProducts === YES) {
                 return true;
             }
-            vm.dossierModel.drugProduct.canRefProducts = [];
+            vm.model.drugProduct.canRefProducts = [];
             return false;
         };
 
         vm.setApplicationType = function (value) {
-            vm.dossierModel.applicationType = value;
-            vm.formAmend = vm.dossierModel.applicationType === vm.applicationInfoService.getAmendType();
-            disableXMLSave();
+            vm.model.applicationType = value;
+            vm.formAmend = vm.model.applicationType === vm.applicationInfoService.getAmendType();
+            //disableXMLSave();
         };
 
         vm.cdnRefUpdated = function (list) {
@@ -200,12 +201,12 @@
 
         vm.disableJSONSave=function() {
 
-            return(vm.dossierModel.applicationType == APPROVED_TYPE&& vm.isExtern());
+            return(vm.model.applicationType == APPROVED_TYPE&& vm.isExtern());
 
         }
 
         function getAppendix4Errors() {
-            var appendixCheck = vm.dossierService.getMissingAppendix4(vm.dossierModel);
+            var appendixCheck = vm.dossierService.getMissingAppendix4(vm.model);
             vm.errorAppendix = appendixCheck.missing;
             vm.extraAppendix = appendixCheck.extra;
         }
@@ -220,25 +221,14 @@
             vm.isIncomplete = !vm.activityRoot.dossierID;
         }
 
-        $scope.$watch("dos.dossierForm.$error", function () {
-           // disableXMLSave()
+        $scope.$watch("drugProdCtrl.drugProdForm.$error", function () {
+
             vm.updateErrorSummaryState();
         }, true);
 
-        /**
-         * @ngdoc disables the XML save button
-         */
-        function disableXMLSave() {
-            var formInvalid = true; //TODO hack
-            if (vm.dossierForm) {
-                formInvalid = vm.dossierForm.$invalid;
-            }
-            vm.disableXML = (formInvalid || (vm.dossierModel.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern()));
-
-        }
 
         function _setComplete() {
-            vm.isIncomplete = !vm.dossierModel.dossierID;
+            vm.isIncomplete = !vm.model.dossierID;
         }
 
         /**
@@ -261,7 +251,7 @@
          * For individual controls, whether to show the error for a fiedl
          * @param isInvalid - control $invalid flag
          * @param isTouched -control $touched flag
-         * @returns {*|dossierCtrl.showErrors}
+         * @returns {boolean}
          */
         vm.showError = function (ctrl) {
             if(!ctrl){
@@ -274,12 +264,12 @@
          * Manages the schedule A details since the fields are always in the model
          */
         vm.isSchedA = function () {
-            if (!vm.dossierModel || !vm.dossierModel.drugProduct || !vm.dossierService) return false; //never happen case;
-            if (vm.dossierModel.drugProduct.isScheduleA) {
+            if (!vm.model || !vm.model.drugProduct || !vm.dossierService) return false; //never happen case;
+            if (vm.model.drugProduct.isScheduleA) {
 
                 return true;
             } else {
-                vm.dossierModel.drugProduct.scheduleAGroup = vm.dossierService.getDefaultScheduleA();
+                vm.model.drugProduct.scheduleAGroup = vm.dossierService.getDefaultScheduleA();
             }
             return false;
         };
@@ -296,7 +286,7 @@
 
         vm.saveXML = function () {
 
-            if(vm.dossierForm.$invalid) {
+            if(vm.drugProdForm.$invalid) {
                 vm.showSummary=true;
                 vm.focusSummary++;
                // vm.showErrorSummary = vm.showErrorSummary + 1;
@@ -305,7 +295,7 @@
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName());
                // vm.showAllErrors = false;
-                vm.dossierForm.$setPristine();
+                vm.drugProdForm.$setPristine();
                 vm.showSummary=false;
             }
         };
@@ -319,16 +309,16 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                if(!vm.dossierForm.$pristine) {
-                    vm.dossierModel.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.dossierModel.enrolmentVersion);
-                    vm.dossierModel.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                if(!vm.drugProdForm.$pristine) {
+                    vm.model.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.model.enrolmentVersion);
+                    vm.model.applicationType = ApplicationInfoService.prototype.getApprovedType();
                 }
                 // updateModelOnApproval(); //updates all the amend
             } else {
 
-                vm.dossierModel.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.dossierModel.enrolmentVersion);
+                vm.model.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.model.enrolmentVersion);
             }
-            return vm.dossierService.dossierToOutput(vm.dossierModel);
+            return vm.dossierService.dossierToOutput(vm.model);
         }
 
         /**
@@ -349,11 +339,11 @@
             } else {
                 filename = draft_prefix;
             }
-            if (vm.dossierModel && vm.dossierModel.dossierID) {
-                filename = filename + separator + vm.dossierModel.dossierID;
+            if (vm.model && vm.model.dossierID) {
+                filename = filename + separator + vm.model.dossierID;
             }
-            if (vm.dossierModel.enrolmentVersion) {
-                filename = filename + separator + vm.dossierModel.enrolmentVersion;
+            if (vm.model.enrolmentVersion) {
+                filename = filename + separator + vm.model.enrolmentVersion;
             }
             filename= filename.replace(".",separator);
             return filename.toLowerCase();
@@ -363,8 +353,8 @@
          * @ngdoc method -updates the date field to the current date
          */
         function updateDate() {
-            if (vm.dossierModel) {
-                vm.dossierModel.dateSaved = vm.applicationInfoService.getTodayDate();
+            if (vm.model) {
+                vm.model.dateSaved = vm.applicationInfoService.getTodayDate();
             }
         }
         
@@ -374,15 +364,15 @@
          */
         vm.noTheraRecs = function () {
 
-            if (!vm.dossierModel || !vm.dossierModel.drugProduct) {
+            if (!vm.model || !vm.model.drugProduct) {
                 vm.noThera = "";
                 return false;
             }
-            if (!vm.dossierModel.drugProduct.therapeutic || vm.dossierModel.drugProduct.therapeutic.length === 0) {
+            if (!vm.model.drugProduct.therapeutic || vm.model.drugProduct.therapeutic.length === 0) {
                 vm.noThera = "";
                 return true;
             }
-            vm.noThera = vm.dossierModel.drugProduct.therapeutic.length;
+            vm.noThera = vm.model.drugProduct.therapeutic.length;
             return false;
         };
 
@@ -421,7 +411,7 @@
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.dossierFormId="dossier_form" + scopeId;
+            vm.formId="drug_product_form" + scopeId;
             vm.typeId="dossier_type"+ scopeId;
             vm.compId="company_id"+ scopeId;
             vm.thirdId="signed_third"+ scopeId;

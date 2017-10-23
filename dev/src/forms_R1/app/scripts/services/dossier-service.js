@@ -308,119 +308,21 @@
         }
 
         /**
-         * Get diseaseDisorderList
+         * Get diseaseDisorderList from the xml fiel
          * @param info
          * @param diseaseList
          * @returns {*}
          */
-        function getDiseaseDisorderList(info, diseaseList) {
+        function getDiseaseDisorderList(info, diseaseListModel) {
 
-            if (!info || !diseaseList) return;
-            for (var i = 0; i < diseaseList.length; i++) {
-                var checkboxRec = diseaseList[i];
-                switch (checkboxRec.name) {
-                    case "acute-alcohol":
-                        checkboxRec.value = info.acute_alcohol === 'Y';
-                        break;
-                    case "acute-anxiety":
-                        checkboxRec.value = info.acute_anxiety === 'Y';
-                        break;
-                    case "acute-infectious":
-                        checkboxRec.value = info.acute_infectious === 'Y';
-                        break;
-                    case "acute-inflammatory":
-                        checkboxRec.value = info.acute_inflammatory === 'Y';
-                        break;
-                    case "acute-psychotic":
-                        checkboxRec.value = info.acute_psychotic === 'Y';
-                        break;
-                    case "addiction":
-                        checkboxRec.value = info.addiction === 'Y';
-                        break;
-                    case "ateriosclerosis":
-                        checkboxRec.value = info.ateriosclerosis === 'Y';
-                        break;
-                    case "appendicitis":
-                        checkboxRec.value = info.appendicitis === 'Y';
-                        break;
-                    case "asthma":
-                        checkboxRec.value = info.asthma === 'Y';
-                        break;
+            if (!info || !diseaseListModel) return;
 
-                    case "cancer":
-                        checkboxRec.value = info.cancer === 'Y';
-                        break;
-                    case "congest-heart-fail":
-                        checkboxRec.value = info.congest_heart_fail === 'Y';
-                        break;
-                    case "convulsions":
-                        checkboxRec.value = info.convulsions === 'Y';
-                        break;
-
-                    case "dementia":
-                        checkboxRec.value = info.dementia === 'Y';
-                        break;
-
-                    case "depression":
-                        checkboxRec.value = info.depression === 'Y';
-                        break;
-
-                    case "diabetes":
-                        checkboxRec.value = info.diabetes === 'Y';
-                        break;
-
-                    case "gangrene":
-                        checkboxRec.value = info.gangrene === 'Y';
-                        break;
-
-                    case "glaucoma":
-                        checkboxRec.value = info.glaucoma === 'Y';
-                        break;
-
-                    case "haematologic-bleeding":
-                        checkboxRec.value = info.haematologic_bleeding === 'Y';
-                        break;
-
-                    case "hepatitis":
-                        checkboxRec.value = info.hepatitis === 'Y';
-                        break;
-
-                    case "hypertension":
-                        checkboxRec.value = info.hypertension === 'Y';
-                        break;
-
-                    case "nausea-pregnancy":
-                        checkboxRec.value = info.nausea_pregnancy === 'Y';
-                        break;
-
-                    case "obesity":
-                        checkboxRec.value = info.obesity === 'Y';
-                        break;
-                    case "rheumatic-fever":
-                        checkboxRec.value = info.rheumatic_fever === 'Y';
-                        break;
-                    case "septicemia":
-                        checkboxRec.value = info.septicemia === 'Y';
-                        break;
-                    case "sex-transmit-disease":
-                        checkboxRec.value = info.sex_transmit_disease === 'Y';
-                        break;
-                    case "strangulated-hernia":
-                        checkboxRec.value = info.strangulated_hernia === 'Y';
-                        break;
-                    case "thrombotic-embolic-disorder":
-                        checkboxRec.value = info.thrombotic_embolic_disorder === 'Y';
-                        break;
-                    case "thyroid-disease":
-                        checkboxRec.value = info.thyroid_disease === 'Y';
-                        break;
-                    case "ulcer-gastro":
-                        checkboxRec.value = info.ulcer_gastro === 'Y';
-                        break;
-
-                }
+            var keys = Object.keys(info);
+            for (var i=0;i<keys.length;i++) {
+                diseaseListModel[keys[i]] = (info[keys[i]] === 'Y');
             }
-            return diseaseList;
+
+            return diseaseListModel;
         }
 
 
@@ -1326,109 +1228,10 @@
             var result = createEmptyScheduleAForOutput();
             result.din_number = jsonObj.drugIdNumber;
             var disorderList = jsonObj.diseaseDisorderList;
-            for (var i = 0; i < disorderList.length; i++) {
-                switch (disorderList[i].name) {
-                    case "acute-alcohol":
-                        result.acute_alcohol = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "acute-anxiety":
-                        result.acute_anxiety = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "acute-infectious":
-                        result.acute_infectious = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "acute-inflammatory":
-                        result.acute_inflammatory = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "acute-psychotic":
-                        result.acute_psychotic = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "addiction":
-                        result.addiction = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "ateriosclerosis":
-                        result.ateriosclerosis = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "appendicitis":
-                        result.appendicitis = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "asthma":
-                        result.asthma = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "cancer":
-                        result.cancer = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "congest-heart-fail":
-                        result.congest_heart_fail = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "convulsions":
-                        result.convulsions = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "dementia":
-                        result.dementia = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "depression":
-                        result.depression = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "diabetes":
-                        result.diabetes = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "gangrene":
-                        result.gangrene = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "glaucoma":
-                        result.glaucoma = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "haematologic-bleeding":
-                        result.haematologic_bleeding = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "hepatitis":
-                        result.hepatitis = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "hypertension":
-                        result.hypertension = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "nausea-pregnancy":
-                        result.nausea_pregnancy = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "obesity":
-                        result.obesity = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "rheumatic-fever":
-                        result.rheumatic_fever = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "septicemia":
-                        result.septicemia = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "sex-transmit-disease":
-                        result.sex_transmit_disease = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "strangulated-hernia":
-                        result.strangulated_hernia = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "thrombotic-embolic-disorder":
-                        result.thrombotic_embolic_disorder = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-                    case "thyroid-disease":
-                        result.thyroid_disease = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                    case "ulcer-gastro":
-                        result.ulcer_gastro = disorderList[i].value === true ? 'Y' : 'N';
-                        break;
-
-                }
+            var keys = Object.keys(result);
+            console.log("keys "+keys.length)
+            for (var i=0;i<keys.length;i++) {
+                result[keys[i]] = (disorderList[keys[i]] === true ? 'Y' : 'N');
             }
             result.sched_a_claims_ind_details = jsonObj.scheduleAClaimsIndDetails;
             return (result);
@@ -1587,40 +1390,41 @@
          */
         function getDefaultDiseaseDisorderList() {
             var noModelValue = false;
-            return [
-                {name: "acute-alcohol", label: "ACUTEALCOHOL", value: noModelValue},
-                {name: "acute-anxiety", label: "ACUTEANXIETY", value: noModelValue},
-                {name: "acute-infectious", label: "ACUTERESP", value: noModelValue},
-                {name: "acute-inflammatory", label: "ACUTEINFLAM", value: noModelValue},
-                {name: "acute-psychotic", label: "ACUTEPSYCHOTIC", value: noModelValue},
-                {name: "addiction", label: "ADDICTION", value: noModelValue},
-                {name: "ateriosclerosis", label: "ATERIOSCLEROSIS", value: noModelValue},
-                {name: "appendicitis", label: "APPENDICITIS", value: noModelValue},
-                {name: "asthma", label: "ASTHMA", value: noModelValue},
-                {name: "cancer", label: "CANCER", value: noModelValue},
-                {name: "congest-heart-fail", label: "HEARTCONGEST", value: noModelValue},
-                {name: "convulsions", label: "CONVULSIONS", value: noModelValue},
-                {name: "dementia", label: "DEMENTIA", value: noModelValue},
-                {name: "depression", label: "DEPRESSION", value: noModelValue},
-                {name: "diabetes", label: "DIABETES", value: noModelValue},
-                {name: "gangrene", label: "GANGRENE", value: noModelValue},
-                {name: "glaucoma", label: "GLAUCOMA", value: noModelValue},
-                {name: "haematologic-bleeding", label: "BLEEDINGDISORDERS", value: noModelValue},
-                {name: "hepatitis", label: "HEPATITIS", value: noModelValue},
-                {name: "hypertension", label: "HYPERTENSION", value: noModelValue},
-                {name: "nausea-pregnancy", label: "NAUSEAPREG", value: noModelValue},
-                {name: "obesity", label: "OBESITY", value: noModelValue},
-                {name: "rheumatic-fever", label: "RHEUMATICFEVER", value: noModelValue},
-                {name: "septicemia", label: "SEPTICEMIA", value: noModelValue},
-                {name: "sex-transmit-disease", label: "SEXDISEASE", value: noModelValue},
-                {name: "strangulated-hernia", label: "STRANGHERNIA", value: noModelValue},
-                {name: "thrombotic-embolic-disorder", label: "THROMBOTICDISORDER", value: noModelValue},
-                {name: "thyroid-disease", label: "THYROIDDISEASE", value: noModelValue},
-                {name: "ulcer-gastro", label: "UCLERGASTRO", value: noModelValue}
-            ];
+            return (
 
-        }
-
+            {
+                "acute_alcohol": false,
+                "acute_anxiety": false,
+                "acute_infectious": false,
+                "acute_inflammatory": false,
+                "acute_psychotic": false,
+                "addiction": false,
+                "ateriosclerosis": false,
+                "appendicitis": false,
+                "asthma": false,
+                "cancer": false,
+                "congest_heart_fail": false,
+                "convulsions": false,
+                "dementia": false,
+                "depression": false,
+                "diabetes": false,
+                "gangrene": false,
+                "glaucoma": false,
+                "haematologic_bleeding": false,
+                "hepatitis": false,
+                "hypertension": false,
+                "nausea_pregnancy": false,
+                "obesity": false,
+                "rheumatic_fever": false,
+                "septicemia": false,
+                "sex_transmit_disease": false,
+                "strangulated_hernia": false,
+                "thrombotic_embolic_disorder": false,
+                "thyroid_disease": false,
+                "ulcer_gastro": false
+            }
+            );
+        };
         /*
          * Returns an empty list of drug uses
          *
