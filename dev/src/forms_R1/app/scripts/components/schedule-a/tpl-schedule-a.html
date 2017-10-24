@@ -14,7 +14,7 @@
                                            maxlength="8" size="8" only-digits ng-minlength="8"
                                            ng-model="schedACtrl.scheduleAModel.drugIdNumber"/>
                                     <strong id="din-error" class="error"
-                                            ng-if="schedACtrl.showError(schedACtrl.schedAForm.schedDinValue.$invalid,schedACtrl.schedAForm.schedDinValue.$touched)">
+                                            ng-if="schedACtrl.showError(schedACtrl.schedAForm.schedDinValue)">
                                     <span class="label label-danger"
                                           ng-messages="schedACtrl.schedAForm.schedDinValue.$error">
                                           <span ng-message="minlength"><span translate="MSG_LENGTH_8NUM"></span></span>
@@ -31,14 +31,18 @@
                                         <span class=" field-name">{{'SCHEDA_DISEASE'|translate}}</span>
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                         <span>
-                 <input type="hidden" class="form-control" id="oneSelected_{{::$id}}" name="oneDiseaseSelected"
+                 <input type="hidden" class="form-control" id="{{::schedACtrl.oneSchedId}}" name="{{::schedACtrl.oneSchedId}}"
                         ng-model="schedACtrl.isClaim" aria-hidden="true" required/>
-                <strong id="claim-select-error" class="error" ng-if="schedACtrl.noClaimSelected()">
-                             <span class="label label-danger" aria-live="polite"
-                                   ng-messages="schedACtrl.schedAForm.oneDiseaseSelected.$error">
-                                <span ng-message="required">{{"MSG_ONE_SCHEDA"|translate}}</span>
-                             </span>
-                </strong>
+                                            <cmp-error-message field-name="schedACtrl.oneSchedId"
+                                                               form-ref="schedACtrl.schedAForm"
+                                                               show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.oneSchedId])"
+                                                               error-types="schedACtrl.oneRequired"></cmp-error-message>
+                                            <!--  <strong id="claim-select-error" class="error" ng-if="schedACtrl.noClaimSelected()">
+                                                           <span class="label label-danger" aria-live="polite"
+                                                                 ng-messages="schedACtrl.schedAForm.oneDiseaseSelected.$error">
+                                                              <span ng-message="required">{{"MSG_ONE_SCHEDA"|translate}}</span>
+                                                           </span>
+                                              </strong>-->
                     </span></legend>
                                     <div class="row checkbox">
                                         <div class="col-md-4">
@@ -331,19 +335,16 @@
 
                         <div class="row">
                             <div class="col-xs-12 form-group"
-                                 ng-class="{'has-error':schedACtrl.schedAForm.schedIndicate.$invalid}">
-                                <label for="schedA-indications" class="required">
+                                 ng-class="{'has-error':schedACtrl.schedAForm[schedACtrl.schedIndId].$invalid}">
+                                <label for="{{::schedACtrl.schedIndId}}" class="required">
                                     <span class="field-name">{{'SCHEDA_CLAIMS'|translate}}</span>
-                                    <strong class="required">{{"REQUIRED"|translate}}</strong>
-                                    <strong id="schedAIndication-error" class="error"
-                                            ng-if="schedACtrl.showError(schedACtrl.schedAForm.schedIndicate.$invalid,schedACtrl.schedAForm.schedIndicate.$touched)">
-                        <span class="label label-danger" ng-messages="schedACtrl.schedAForm.schedIndicate.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-                                    </strong>
+                                    <cmp-error-message field-name="schedACtrl.schedIndId"
+                                                       form-ref="schedACtrl.schedAForm"
+                                                       show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.schedIndId])"
+                                                       error-types="schedACtrl.requiredOnly"></cmp-error-message>
                                 </label>
-                                <textarea class="form-control full-width" required rows="3" id="schedA-indications"
-                                          name="schedIndicate"
+                                <textarea class="form-control full-width" required rows="3"
+                                          id="{{::schedACtrl.schedIndId}}" name="{{::schedACtrl.schedIndId}}"
                                           ng-model="schedACtrl.scheduleAModel.scheduleAClaimsIndDetails"></textarea>
                             </div>
                         </div>

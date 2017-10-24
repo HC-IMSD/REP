@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('scheduleAModule', ['checkBoxListModule'])
+        .module('scheduleAModule', ['checkBoxListModule','errorMessageModule'])
 })();
 
 
@@ -34,6 +34,8 @@
         vm.isClaim="";
         vm.expanderOpenState=false;
        vm.disableExpander=false;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.oneRequired = [{type: "required", displayAlias: "MSG_ONE_SCHEDA"}];
         vm.$onInit = function () {
             var noValue=false;
             if (!vm.model) {
@@ -108,9 +110,12 @@
         vm.noClaimSelected=function(){
             return(!vm.claimSelected());
         };
-        vm.showError = function (isInvalid, isTouched) {
-
-            return ((isInvalid && isTouched) || (isInvalid && vm.showErrors()))
+        vm.showError = function (ctrl) {
+            if(!ctrl){
+                console.warn("No ctrl in cmp-schedule-a::showError");
+                return false;
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()))
         };
 
         vm.isOpenState=function(form){
@@ -168,6 +173,8 @@
             vm.thromDisorderId="thrombotic_embolic_disorder"+ scopeId;
             vm.thyroidId="thyroid_disease"+ scopeId;
             vm.ulcerGssId="ulcer_gastro"+ scopeId;
+            vm.schedIndId="scheda_claims"+ scopeId;
+            vm.oneSchedId="oneSchedSelected"+ scopeId;
         }
     }
 
