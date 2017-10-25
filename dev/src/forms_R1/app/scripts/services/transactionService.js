@@ -257,7 +257,7 @@
                     this.currSequence=0;
                 }
                 if(isNaN(sequence)) return;
-                if(sequence>this.currSequence){
+                if(sequence>=this.currSequence){
                     this.currSequence=sequence+1;
                 }
             },
