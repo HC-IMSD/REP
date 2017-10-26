@@ -1769,7 +1769,7 @@ gulp.task('dev-drugProduct-createRootJS', function () {
     var dest = paths.buildDevDrugProduct + 'app/scripts/';
     var rootFile = paths.scripts + "/" + rootFileNames.drugProductRoot + '.js';
     var skipDate = true;
-    var generateInternalForms = true;
+    var generateInternalForms = false;
     return (
         pipes.createRootFileSet(rootFile, dest, skipDate, generateInternalForms)
     );
@@ -1820,10 +1820,10 @@ gulp.task('dev-drugProduct-htmlBuild', ['dev-global-create-src-template', 'dev-d
     var today = createSuffixDate();
     today = "";
     var deploy = deployType.dev;
-    pipes.createRootHtml(paths.devFrenchTemplate, drugProductRootTitles_fr, 'drugProductEnrolINT-fr.html', 'drugProductAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
+    //pipes.createRootHtml(paths.devFrenchTemplate, drugProductRootTitles_fr, 'drugProductEnrolINT-fr.html', 'drugProductAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
     pipes.createRootHtml(paths.devFrenchTemplate, drugProductRootTitles_fr, 'drugProductEnrolEXT-fr.html', 'drugProductAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
     pipes.createRootHtml(paths.devEnglishTemplate, drugProductRootTitles_en, 'drugProductEnrolEXT-en.html', 'drugProductAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
-    pipes.createRootHtml(paths.devEnglishTemplate, drugProductRootTitles_en, 'drugProductEnrolINT-en.html', 'drugProductAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+   // pipes.createRootHtml(paths.devEnglishTemplate, drugProductRootTitles_en, 'drugProductEnrolINT-en.html', 'drugProductAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
     return (
         pipes.cleanBuild(buildDir + paths.translations)
     );

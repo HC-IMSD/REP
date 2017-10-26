@@ -659,7 +659,7 @@
 																											<div class="row">
 																													<div class="col-sm-049">
 																															<span class="labels"> Application Date </span>
-																																<span class="company_enrol"><xsl:call-template name="Dropdown_Label"><xsl:with-param name="input" select="timely_submission_info/marketing_approval_date"/></xsl:call-template></span>
+																																<span class="company_enrol"><xsl:call-template name="Dropdown_Label"><xsl:with-param name="input" select="timely_submission_info/marketing_application_date"/></xsl:call-template></span>
 																													</div>
 																													<div class="col-sm-049">
 																															<span class="labels"> Country of first marketing approval application </span>

@@ -152,6 +152,27 @@
                     </div>
                 </div>
                 <div class="row">
+
+                    <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm[dos.drugUseId].$invalid}">
+                        <label for="{{::dos.drugUseId}}" class="required">
+                            <span class="field-name">C.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <select name="{{::dos.drugUseId}}" class="form-control"
+                                    ng-model="dos.dossierModel.drugProduct.drugUse" id="{{::dos.drugUseId}}"
+                                    ng-options="use[dos.lang] for use in  dos.drugUseList track by use.id"
+                                    required></select>
+                            <cmp-error-message field-name="dos.drugUseId"
+                                               form-ref="dos.dossierForm"
+                                               show-error="dos.showError(dos.dossierForm[dos.drugUseId])"
+                                               error-types="dos.requiredOnly"></cmp-error-message>
+                        </label>
+
+                        <!-- <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
+                                       show-list-errors="dos.showErrors()"
+                                       parent-dirty="dos.dossierForm.$dirty"></cmp-drug-use>-->
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 form-group">
                         <label for="related-dossier-id">
                             F.&nbsp;{{::'RELATED_DOSSIER'|translate}}
@@ -252,7 +273,7 @@
                 </div>
             </div>
         </section>
-        <section class="panel panel-primary mrgn-tp-lg">
+     <!--   <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
                     <button title="{{::'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
@@ -278,14 +299,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
+            &lt;!&ndash;    <div class="row">
+
+                            <div class="col-xs-12 form-group" ng-class="{'has-error':dos.drugProdForm[dos.drugUseId].$invalid}">
+                                <label for="{{::dos.drugUseId}}" class="required">
+                                    <span class="field-name">C.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <select name="{{::dos.drugUseId}}" class="form-control"
+                                            ng-model="dos.model.drugProduct.drugUse" id="{{::dos.drugUseId}}"
+                                            ng-options="use[dos.lang] for use in  dos.drugUseList track by use.id"
+                                            required></select>
+                                    <cmp-error-message field-name="dos.drugUseId"
+                                                       form-ref="dos.drugProdForm"
+                                                       show-error="dos.showError(dos.drugProdForm[dos.drugUseId])"
+                                                       error-types="dos.requiredOnly"></cmp-error-message>
+                                </label>
+
+                       &lt;!&ndash; <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
                                       show-list-errors="dos.showErrors()"
-                                      parent-dirty="dos.dossierForm.$dirty"></cmp-drug-use>
+                                      parent-dirty="dos.dossierForm.$dirty"></cmp-drug-use>&ndash;&gt;
                     </div>
-                </div>
-                <div class="row">
+                </div>&ndash;&gt;
+               &lt;!&ndash; <div class="row">
                     <div class="col-xs-12 checkbox">
                         <label for="is-schedule-case">
                             <input type="checkbox" name="isScheduleA"
@@ -293,14 +328,14 @@
                             {{::'ISSCHEDA'|translate}}
                         </label>
                     </div>
-                </div>
+                </div>&ndash;&gt;
 
-                <div class="row" ng-if="dos.isSchedA()">
+              &lt;!&ndash;  <div class="row" ng-if="dos.isSchedA()">
                     <div class="col-xs-12 form-group">
                         <cmp-schedule-a schedule-group="dos.dossierModel.drugProduct.scheduleAGroup"></cmp-schedule-a>
                     </div>
-                </div>
-                <div>
+                </div>&ndash;&gt;
+               &lt;!&ndash; <div>
                     <section ng-if="dos.appendixMissingError()">
                         <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixMissingError()"
                                aria-hidden="true"/>
@@ -327,16 +362,16 @@
                             </ul>
                         </details>
                     </section>
-                </div>
-                <div>
+                </div> &ndash;&gt;
+                &lt;!&ndash;<div>
                     <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations"
                               record-changed="dos.recordsChanged()" service="dos.dossierService"
                               error-summary-update="dos.updateSummary" show-error-summary="dos.showSummary"
                               update-error-summary="dos.updateErrorSummaryState()" set-selected-tab="dos.setVisibleTabIndex"
                               appendix4-list="dos.dossierModel.drugProduct.appendixFourList"></cmp-tabs>
-                </div>
+                </div>&ndash;&gt;
             </div>
-        </section>
+        </section>-->
         <div>
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
@@ -404,6 +439,6 @@
                 </div>
             </div>
         </div>
-        <!-- <pre>{{dos.dossierModel | json }}</pre>-->
+ <!--      <pre>{{dos.dossierModel | json }}</pre>-->
     </div>
 </ng-form>

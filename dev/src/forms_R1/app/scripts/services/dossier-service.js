@@ -53,15 +53,16 @@
                 isRefProducts: "",
                 drugProduct: {
                     thirdPartySigned: "",
-                    drugUseList: getDefaultDrugUseList(),
-                    isScheduleA: false,
-                    scheduleAGroup: getDefaultSchedA(),
+                    //drugUseList: getDefaultDrugUseList(),
+                    drugUse: "",
+                   // isScheduleA: false,
+                    //scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
-                    canRefProducts: [],//grid
-                    formulations: [],//tab + grid +
-                    appendixFourList: []/*{
-                     ingredientList:[]
-                     }//tab + grid +*/
+                    canRefProducts: []//grid
+                   // formulations: [],//tab + grid +
+                   // appendixFourList: []/*{
+                   //  ingredientList:[]
+                  //   }//tab + grid +*/
 
                 },
                 contactList: []
@@ -74,15 +75,18 @@
 
             },
             loadFromFile: function (info) {
-
+                var rootTag=this.getRootTagName();
                 if (!info)
                     return this._default;
 
-                if (!info['DOSSIER_ENROL'])
+                if (!info[rootTag])
                     return this._default;
 
-                info = info['DOSSIER_ENROL'];
-
+                info = info[rootTag];
+                var drugUseValue ="";
+                if(info.drug_use) {
+                    drugUseValue = info.drug_use.__text;
+                }
                 var dossierModel = {
                     dossierID: info.dossier_id,
                     companyID: info.company_id,
@@ -98,14 +102,13 @@
                     isRefProducts: info.is_ref_products,
                     drugProduct: {
                         thirdPartySigned: info.third_party_signed,
-                        drugUseList: loadDrugUseValues(info),
-                        isScheduleA: info.is_sched_a === 'Y',
+                       // drugUseList: loadDrugUseValues(info),
+                        drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
+                       // isScheduleA: info.is_sched_a === 'Y',
                         therapeutic: [],
                         canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
-                        formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
-                        appendixFourList: getAppendix4IngredientList(info.appendix4_group)
-
-
+                       // formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
+                        //appendixFourList: getAppendix4IngredientList(info.appendix4_group)
                     },
                     contactList: getContactList(info.contact_record)
 
@@ -113,14 +116,14 @@
                 if (info.therapeutic_class_list.therapeutic_class) {
                     dossierModel.drugProduct.therapeutic = getTherapeuticList(info.therapeutic_class_list.therapeutic_class)
                 }
-                dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
+               // dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
                 //dossierModel.drugProduct.drugUseList=loadDrugUseValues(info);
 
-                if (info.schedule_a_group) {
+               /* if (info.schedule_a_group) {
                     dossierModel.drugProduct.scheduleAGroup.drugIdNumber = info.schedule_a_group.din_number;
                     dossierModel.drugProduct.scheduleAGroup.scheduleAClaimsIndDetails = info.schedule_a_group.sched_a_claims_ind_details;
                     getDiseaseDisorderList(info.schedule_a_group, dossierModel.drugProduct.scheduleAGroup.diseaseDisorderList);
-                }
+                }*/
 
                 return dossierModel;
 
@@ -156,13 +159,22 @@
             baseDossier.ref_product_list = {};
             //  baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
             //initialize values and order
-            baseDossier.human_drug_use = 'N';
-            baseDossier.radiopharm_drug_use = 'N';
-            baseDossier.vet_drug_use = 'N';
-            baseDossier.disinfectant_drug_use = 'N';
-            drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseDossier);
+           // baseDossier.human_drug_use = 'N';
+           // baseDossier.radiopharm_drug_use = 'N';
+           // baseDossier.vet_drug_use = 'N';
+            //baseDossier.disinfectant_drug_use = 'N';
+            if(jsonObj.drugProduct.drugUse) {
+                baseDossier.drug_use = {
+                    _label_en: jsonObj.drugProduct.drugUse.en,
+                    _label_fr: jsonObj.drugProduct.drugUse.fr,
+                    __text: jsonObj.drugProduct.drugUse.id
+                };
+            }else{
+                baseDossier.drug_use="";
+            }
+            //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseDossier);
             baseDossier.therapeutic_class_list = {};
-            baseDossier.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
+           // baseDossier.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
 
             if (jsonObj.drugProduct.therapeutic && jsonObj.drugProduct.therapeutic.length > 0) {
                 baseDossier.therapeutic_class_list.therapeutic_class = therapeuticClassToOutput(jsonObj.drugProduct.therapeutic);
@@ -171,10 +183,10 @@
             if (jsonObj.drugProduct.canRefProducts && jsonObj.drugProduct.canRefProducts.length > 0) {
                 baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.drugProduct.canRefProducts)
             }
-            if (jsonObj.drugProduct.isScheduleA) {
+           /* if (jsonObj.drugProduct.isScheduleA) {
                 baseDossier.schedule_a_group = scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
-            }
-            if (jsonObj.drugProduct) {
+            }*/
+            /*if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFourList);
                 if (appendix4 && appendix4.length > 0) {
                     baseDossier.appendix4_group = appendix4;
@@ -184,7 +196,7 @@
                 if (formulations) {
                     baseDossier.formulation_group.formulation_details = formulations;
                 }
-            }
+            }*/
             //forgot to add root tag!
             return {DOSSIER_ENROL: baseDossier};
 

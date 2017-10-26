@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('drugProductService', [
+        .module('dossierService', [
             'dossierDataLists',
             'hpfbConstants',
             'dataLists'
@@ -17,54 +17,54 @@
 (function () {
     'use strict';
     angular
-        .module('drugProductService')
-        .factory('DrugProductService', DrugProductService);
-    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+        .module('dossierService')
+        .factory('DossierService', DossierService);
+    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
 
-    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
+    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
         var yesValue = YES;
         var noValue = NO;
 
-        // Define the DrugProductService object
-        function DrugProductService() {
+        // Define the DossierService objecy
+        function DossierService() {
         }
 
-        function DrugProductService(formData) {
+        function DossierService(dossierData) {
             //construction logic
 
-            angular.extend(this._default, formData);
+            angular.extend(this._default, dossierData);
         }
 
 
-        DrugProductService.prototype = {
+        DossierService.prototype = {
 
             _default: {
                 dossierID: "",
                 companyID: "",
-                //relatedDossierID: "",
+                relatedDossierID: "",
                 enrolmentVersion: "0.00",
                 dateSaved: "",
-                //applicationType: "NEW",
+                applicationType: "NEW",
                 softwareVersion: "1.2.0",
                 dataChecksum: "",
                 dossierType: "",
-               // productName: "",
-               // properName: "",
-               // isRefProducts: "",
+                productName: "",
+                properName: "",
+                isRefProducts: "",
                 drugProduct: {
-                    //thirdPartySigned: "",
-                    drugUse: "",
+                    thirdPartySigned: "",
+                    drugUseList: getDefaultDrugUseList(),
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
-                   // therapeutic: [],
-                  //  canRefProducts: [],//grid
+                    therapeutic: [],
+                    canRefProducts: [],//grid
                     formulations: [],//tab + grid +
                     appendixFourList: []/*{
                      ingredientList:[]
                      }//tab + grid +*/
 
                 },
-                //contactList: []
+                contactList: []
 
             },
 
@@ -74,59 +74,55 @@
 
             },
             loadFromFile: function (info) {
-                var rootTag=this.getRootTagName();
+
                 if (!info)
                     return this._default;
 
-                if (!info[rootTag])
+                if (!info['DOSSIER_ENROL'])
                     return this._default;
 
-                info = info[rootTag];
-                var drugUseValue ="";
-                if(info.drug_use) {
-                    drugUseValue = info.drug_use.__text;
-                }
-                var formModel = {
+                info = info['DOSSIER_ENROL'];
+
+                var dossierModel = {
                     dossierID: info.dossier_id,
                     companyID: info.company_id,
-                   // relatedDossierID: info.related_dossier_id,
+                    relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
-                    //applicationType: info.application_type,
+                    applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     dataChecksum: info.data_checksum,
                     dossierType: info.dossier_type,
-                   // productName: info.brand_name,
-                   // properName: info.common_name,
-                   // isRefProducts: info.is_ref_products,
+                    productName: info.brand_name,
+                    properName: info.common_name,
+                    isRefProducts: info.is_ref_products,
                     drugProduct: {
-                       // thirdPartySigned: info.third_party_signed,
-                       // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
-                        drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
+                        thirdPartySigned: info.third_party_signed,
+                        drugUseList: loadDrugUseValues(info),
                         isScheduleA: info.is_sched_a === 'Y',
-                       // therapeutic: [],
-                       // canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
+                        therapeutic: [],
+                        canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         appendixFourList: getAppendix4IngredientList(info.appendix4_group)
 
 
                     },
-                    //contactList: getContactList(info.contact_record)
+                    contactList: getContactList(info.contact_record)
 
                 };
-               /* if (info.therapeutic_class_list.therapeutic_class) {
+                if (info.therapeutic_class_list.therapeutic_class) {
                     dossierModel.drugProduct.therapeutic = getTherapeuticList(info.therapeutic_class_list.therapeutic_class)
-                }*/
-                formModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
-               // formModel.drugProduct.drugUseList=loadDrugUseValues(info);
+                }
+                dossierModel.drugProduct.scheduleAGroup = getDefaultSchedA();//always create the default for the forms
+                //dossierModel.drugProduct.drugUseList=loadDrugUseValues(info);
 
                 if (info.schedule_a_group) {
-                    formModel.drugProduct.scheduleAGroup.drugIdNumber = info.schedule_a_group.din_number;
-                    formModel.drugProduct.scheduleAGroup.scheduleAClaimsIndDetails = info.schedule_a_group.sched_a_claims_ind_details;
-                    getDiseaseDisorderList(info.schedule_a_group, formModel.drugProduct.scheduleAGroup.diseaseDisorderList);
+                    dossierModel.drugProduct.scheduleAGroup.drugIdNumber = info.schedule_a_group.din_number;
+                    dossierModel.drugProduct.scheduleAGroup.scheduleAClaimsIndDetails = info.schedule_a_group.sched_a_claims_ind_details;
+                    getDiseaseDisorderList(info.schedule_a_group, dossierModel.drugProduct.scheduleAGroup.diseaseDisorderList);
                 }
 
-                return formModel;
+                return dossierModel;
 
             }
 
@@ -137,56 +133,65 @@
          * @param jsonObj
          * @returns {*}
          */
-        DrugProductService.prototype.formDataToOutput = function (jsonObj) {
+        DossierService.prototype.dossierToOutput = function (jsonObj) {
             if (!jsonObj) return null;
-            var rootTag=this.getRootTagName();
-            var baseModel = {};
+            var baseDossier = {};
             //order is important!!! Must match schema
-            baseModel.company_id = jsonObj.companyID; //TODO missing from internal model
-            baseModel.dossier_id = jsonObj.dossierID; //TODO missing from  internal model and XML! Net New
-            baseModel.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
-            baseModel.enrolment_version = jsonObj.enrolmentVersion;
-            baseModel.date_saved = jsonObj.dateSaved;
-            baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "1.0.0"; //TODO: hard code or make a function, should be centrally available
-            baseModel.data_checksum = "";
+            baseDossier.company_id = jsonObj.companyID; //TODO missing from internal model
+            baseDossier.dossier_id = jsonObj.dossierID; //TODO missing from  internal model and XML! Net New
+            baseDossier.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
+            baseDossier.enrolment_version = jsonObj.enrolmentVersion;
+            baseDossier.date_saved = jsonObj.dateSaved;
+            baseDossier.application_type = jsonObj.applicationType;
+            baseDossier.software_version = "1.0.0"; //TODO: hard code or make a function, should be centrally available
+            baseDossier.data_checksum = "";
+            if (jsonObj.contactList) { //TODO skip if empty list?
+                baseDossier.contact_record = repContactToOutput(jsonObj.contactList);
+            }
+            baseDossier.dossier_type = jsonObj.dossierType;
+            baseDossier.brand_name = jsonObj.productName;
+            baseDossier.common_name = jsonObj.properName;
+            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
+            baseDossier.is_ref_products = jsonObj.isRefProducts;
+            baseDossier.ref_product_list = {};
+            //  baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
+            //initialize values and order
+            baseDossier.human_drug_use = 'N';
+            baseDossier.radiopharm_drug_use = 'N';
+            baseDossier.vet_drug_use = 'N';
+            baseDossier.disinfectant_drug_use = 'N';
+            drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseDossier);
+            baseDossier.therapeutic_class_list = {};
+            baseDossier.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
 
-            baseModel.dossier_type = jsonObj.dossierType;
-            if(jsonObj.drugProduct.drugUse) {
-                baseModel.drug_use = {
-                    _label_en: jsonObj.drugProduct.drugUse.en,
-                    _label_fr: jsonObj.drugProduct.drugUse.fr,
-                    __text: jsonObj.drugProduct.drugUse.id
-                };
-            }else{
-                baseModel.drug_use="";
+            if (jsonObj.drugProduct.therapeutic && jsonObj.drugProduct.therapeutic.length > 0) {
+                baseDossier.therapeutic_class_list.therapeutic_class = therapeuticClassToOutput(jsonObj.drugProduct.therapeutic);
             }
 
-            //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
-            baseModel.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
-
+            if (jsonObj.drugProduct.canRefProducts && jsonObj.drugProduct.canRefProducts.length > 0) {
+                baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.drugProduct.canRefProducts)
+            }
             if (jsonObj.drugProduct.isScheduleA) {
-                baseModel.schedule_a_group = scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
-                console.log( baseModel.schedule_a_group)
+                baseDossier.schedule_a_group = scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
             }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFourList);
                 if (appendix4 && appendix4.length > 0) {
-                    baseModel.appendix4_group = appendix4;
+                    baseDossier.appendix4_group = appendix4;
                 }
                 var formulations = formulationListToOutput(jsonObj.drugProduct.formulations);
-                baseModel.formulation_group = {};
+                baseDossier.formulation_group = {};
                 if (formulations) {
-                    baseModel.formulation_group.formulation_details = formulations;
+                    baseDossier.formulation_group.formulation_details = formulations;
                 }
             }
-            //cant seem to use a variable for the key
-            return {"DRUG_PRODUCT_ENROL": baseModel};
+            //forgot to add root tag!
+            return {DOSSIER_ENROL: baseDossier};
 
         };
 
 
-        DrugProductService.prototype.getMissingAppendix4 = function (dossierModel) {
+        DossierService.prototype.getMissingAppendix4 = function (dossierModel) {
             var missingAppendices = [];
             var extraAppendices = [];
             var results = {};
@@ -212,40 +217,40 @@
          * Gets an empty disease disorder list with values set to No
          * @returns {*[]}
          */
-        DrugProductService.prototype.getDefaultDiseaseDisorderList = function () {
+        DossierService.prototype.getDefaultDiseaseDisorderList = function () {
             return getDefaultDiseaseDisorderList();
 
         };
 
-        DrugProductService.prototype.getDefaultNervousSystem = function () {
+        DossierService.prototype.getDefaultNervousSystem = function () {
             return _createEmptyNervousSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultImmuneSystem = function () {
+        DossierService.prototype.getDefaultImmuneSystem = function () {
             return _createEmptyImmuneSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultDigestiveSystem = function () {
+        DossierService.prototype.getDefaultDigestiveSystem = function () {
             return _createEmptyDigestiveSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultMuscleSystem = function () {
+        DossierService.prototype.getDefaultMuscleSystem = function () {
             return _createEmptyMuscleSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultOtherSystem = function () {
+        DossierService.prototype.getDefaultOtherSystem = function () {
             return _createEmptyOtherSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultReproductiveSystem = function () {
+        DossierService.prototype.getDefaultReproductiveSystem = function () {
             return _createEmptyReproductiveSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultCardioSystem = function () {
+        DossierService.prototype.getDefaultCardioSystem = function () {
             return _createEmptyCardioSystemModel();
 
         };
-        DrugProductService.prototype.getDefaultSkinSystem = function () {
+        DossierService.prototype.getDefaultSkinSystem = function () {
             return _createEmptySkinSystemModel();
 
         };
@@ -254,21 +259,21 @@
          * Gets an empty Schedule A Object
          * @returns {*}
          */
-        DrugProductService.prototype.getDefaultScheduleA = function () {
+        DossierService.prototype.getDefaultScheduleA = function () {
             return (getDefaultSchedA());
         };
 
-        DrugProductService.prototype.getRootTagName = function () {
-            return ("DRUG_PRODUCT_ENROL");
+        DossierService.prototype.getRootTagName = function () {
+            return ("DOSSIER_ENROL");
         };
 
         //return the Dossier Service object
-        return DrugProductService;
+        return DossierService;
 
 
         //###############INTERNAL FUNCTIONS start here##################################
 
-      /*  function getContactList(contacts) {
+        function getContactList(contacts) {
 
             var list = [];
 
@@ -300,7 +305,7 @@
             }
 
             return list;
-        }*/
+        }
 
         /**
          * Get diseaseDisorderList from the xml fiel
@@ -321,7 +326,7 @@
         }
 
 
-       /* function getTherapeuticList(input) {
+        function getTherapeuticList(input) {
             var list = "";
             if (!(input instanceof Array)) {
                 input = [input];
@@ -339,12 +344,12 @@
                 }
             }
             return list;
-        }*/
+        }
 
 
         //formulations section
 
-      /*  function getCanRefProductList(info) {
+        function getCanRefProductList(info) {
             var list = [];
 
             if (angular.isString(info)&& info.length>0) {
@@ -397,14 +402,14 @@
             return list;
 
 
-        }*/
+        }
 
         /**
          * Loads all the external appendix 4 information into the internal data model
          * @param info - the 'external type' formatted json object
          * @returns {Array}
          */
-        function getAppendix4IngredientList(info) {
+        function getAppendix4IngredientList(info) { //info = dossier.appendixFour.ingredientList
             var list = [];
             //TODO externalize
             var getCountries = function (input) {
@@ -443,6 +448,9 @@
                     var ing = {};
                     ing.id = info[i].ingredient_id;
                     ing.ingredientName = info[i].ingredient_name;
+                    // ing.role = info[i].dosage_form;
+                    // ing.abstractNum = info[i].dosage_form_other;
+                    // ing.standard = info[i].strengths;
                     ing.humanSourced = info[i].human_sourced === 'Y';
                     ing.animalSourced = info[i].animal_sourced === 'Y';
                     var tissues = info[i].tissues_fluids_section;
@@ -450,7 +458,9 @@
 
                     if (tissues) {
                         ing.tissuesFluidsOrigin = {};
+                        // ing.tissuesFluidsOrigin.tissuesList = [];
                         ing.tissuesFluidsOrigin.tissuesList = _getTissuesFluidsModel(tissues);
+                        //"ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList
                     }
                     if (srcAnimal) {
                         ing.sourceAnimalDetails = createEmptyAnimalSourceModel();
@@ -458,6 +468,7 @@
                         ing.sourceAnimalDetails.isBiotechDerived = info[i].animal_sourced_section.is_biotech_derived;
                         ing.sourceAnimalDetails.isControlledPop = info[i].animal_sourced_section.is_controlled_pop;
                         ing.sourceAnimalDetails.ageAnimals = Number(info[i].animal_sourced_section.animal_age);
+                        //var animalSrcObj=info[i].sourceAnimalDetails;
                         var animalTypeList = info[i].animal_sourced_section.animal_src_record;
                         if (!(animalTypeList instanceof Array)) {
                             animalTypeList = [animalTypeList];
@@ -476,6 +487,7 @@
                 }
             }
             return list;
+
         }
 
         /**
@@ -515,6 +527,12 @@
                     var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form.__text});
                     obj.dosageForm = dosageFormObj;
                 }
+
+                /* if (!item.dosage_form_group.dosage_form || item.dosage_form_group.dosage_form === DossierLists.getOtherValue()) {
+                 obj.dosageForm = item.dosage_form_group.dosage_form;
+                 } else {
+                 obj.dosageForm = DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form;
+                 }*/
 
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
                 if (item.nonmedicinal_ingredient) {
@@ -656,6 +674,7 @@
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
+
                 resultList.push(obj);
             });
 
@@ -783,7 +802,7 @@
             //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
         };
 
-     /*   function canRefProductListToOutput(info) {
+        function canRefProductListToOutput(info) {
             var resultList = [];
 
             if (angular.isDefined(info)) {
@@ -826,7 +845,7 @@
                 }
             }
             return resultList;
-        }*/
+        }
 
         /**
          * Converts all the appendix 4 data to output
@@ -1166,12 +1185,12 @@
             return resultList;
         }
 
-       /* function repContactToOutput(contactList) {
+        function repContactToOutput(contactList) {
             var resultList = [];
             angular.forEach(contactList, function (item) {
                 var obj = {};
                 obj.amend_record = item.amend ? 'Y' : 'N';
-                obj.rep_contact_role = item.repRole;
+                obj.rep_contact_role = item.repRole; //TODO XML needs to be updated!
                 obj.rep_contact_details = {};
                 obj.rep_contact_details.salutation = item.salutation;
                 obj.rep_contact_details.given_name = item.givenName;
@@ -1186,34 +1205,34 @@
                 resultList.push(obj);
             });
             return resultList;
-        }*/
+        }
 
         /***
          * Converts the therapeutic classification to output format
          * @param jsonObj
          * @returns {Array}
          */
-      /*  function therapeuticClassToOutput(jsonObj) {
+        function therapeuticClassToOutput(jsonObj) {
 
             var resultList = [];
             for (var i = 0; i < jsonObj.length; i++) {
-
+                //TODO save the ids??
                 if (angular.isString(jsonObj[i].name)&&jsonObj[i].name.length>0) {
                     resultList.push(jsonObj[i].name);
                 }
             }
             return (resultList);
-        }*/
+        }
 
         function scheduleAToOutput(jsonObj) {
             var result = createEmptyScheduleAForOutput();
+            result.din_number = jsonObj.drugIdNumber;
             var disorderList = jsonObj.diseaseDisorderList;
             var keys = Object.keys(result);
+            console.log("keys "+keys.length)
             for (var i=0;i<keys.length;i++) {
                 result[keys[i]] = (disorderList[keys[i]] === true ? 'Y' : 'N');
             }
-            //set these values after the keys for loop as will get defaulted to N
-            result.din_number = jsonObj.drugIdNumber;
             result.sched_a_claims_ind_details = jsonObj.scheduleAClaimsIndDetails;
             return (result);
         }
@@ -1410,7 +1429,7 @@
          * Returns an empty list of drug uses
          *
          */
-       /* function getDefaultDrugUseList() {
+        function getDefaultDrugUseList() {
             var noModelValue = false;
             var drugUseList = [
                 {"name": "human", "label": "HUMAN", "value": noModelValue},
@@ -1420,13 +1439,13 @@
             ];
             return drugUseList;
         }
-*/
+
         /***
          * Loads the drug use data into a checkbox list format;
          * @param info
          * @returns {*}
          */
-      /*  function loadDrugUseValues(info) {
+        function loadDrugUseValues(info) {
             var drugList = getDefaultDrugUseList();
             for (var i = 0; i < drugList.length; i++) {
                 var rec = drugList[i];
@@ -1446,14 +1465,14 @@
                 }
             }
             return (drugList);
-        }*/
+        }
 
         /**
          * Adds the drug use properties to the output JSON
          * @param drugUseArray
          * @param outputJson
          */
-       /* function drugUseValuesToOutput(drugUseArray, outputJson) {
+        function drugUseValuesToOutput(drugUseArray, outputJson) {
 
             for (var i = 0; i < drugUseArray.length; i++) {
                 var rec = drugUseArray[i];
@@ -1475,7 +1494,7 @@
             }
 
         }
-*/
+
 
         /**
          * Creates an animal sourced emptt json record for file write
@@ -2169,5 +2188,7 @@
         }
 
     }
+
+
 })
 ();

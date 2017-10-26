@@ -77,9 +77,9 @@
         vm.formAmend = false;
        // vm.showAllErrors = false;
         vm.errorAppendix = [];
-        vm.extraAppendix = [];
+       vm.extraAppendix = [];
         vm.noThera = "";
-
+        vm.drugUseList=[];
         //error summary fields
         vm.updateSummary=0; //increment to send message to error summaries
         vm.showSummary=false;
@@ -121,6 +121,7 @@
 
         vm.$onInit = function () {
             vm.showSummary=false;
+            vm.drugUseList=DossierLists.getDrugUseList();
             _setIdNames();
             vm.dossierService = new DossierService();
             vm.dossierModel = vm.dossierService.getDefaultObject();
@@ -209,9 +210,9 @@
         }
 
         function getAppendix4Errors() {
-            var appendixCheck = vm.dossierService.getMissingAppendix4(vm.dossierModel);
-            vm.errorAppendix = appendixCheck.missing;
-            vm.extraAppendix = appendixCheck.extra;
+           // var appendixCheck = vm.dossierService.getMissingAppendix4(vm.dossierModel);
+           // vm.errorAppendix = appendixCheck.missing;
+           // vm.extraAppendix = appendixCheck.extra;
         }
 
         /**
@@ -433,6 +434,7 @@
             vm.properNameId="proper_name"+ scopeId;
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
+            vm.drugUseId="drug_use"+scopeId;
         }
 
 
