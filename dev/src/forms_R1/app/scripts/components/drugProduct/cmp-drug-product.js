@@ -20,7 +20,7 @@
         'numberFormat',
         'ngMessages',
         'ngAria',
-        'dossierService',
+        'drugProductService',
         'ngSanitize',
         'errorSummaryModule',
         'errorMessageModule'
@@ -48,10 +48,10 @@
             }
         });
 
-    drugProductCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate'];
+    drugProductCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DrugProductService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate'];
 
 
-    function drugProductCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate) {
+    function drugProductCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DrugProductService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate) {
 
         var vm = this;
         vm.showContent = _loadFileContent; //binds the component to the function
@@ -85,7 +85,9 @@
             "formulCtrl.formulationsForm":"tab_0",
             "contactRec.contactRecForm":"true",
             "ap4Ctrl.appendixForm":"tab_1",
-           "refProdCtrl.productDetailsForm":"true"
+           "refProdCtrl.productDetailsForm":"true",
+            "fake.appendix_extra_error":"true",
+            "fake.appendix_missing_error":"true"
         };
         vm.transcludeList={};
         vm.alias = {
@@ -100,6 +102,10 @@
             "msg_err_one_cdn_ref": {
                 "type": "elementNoId",
                 "target": "addRefProductBtn"
+            },
+            "msg_one_scheda":{
+                "type":"fieldset",
+                "parent": "fs_schedAMissing"
             }
 
 
@@ -112,16 +118,18 @@
 
         vm.alerts = [false, false, false, false,false,false,false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
-
-
-
+        vm.rootTag="";
+        vm.drugUseList=[];
+        vm.extraAppendixModel="none";
+        vm.missingAppendixModel="none";
 
         vm.$onInit = function () {
             vm.showSummary=false;
+            vm.drugUseList=DossierLists.getDrugUseList();
             _setIdNames();
-            vm.dossierService = new DossierService();
-            vm.model = vm.dossierService.getDefaultObject();
-
+            vm.drugProductService = new DrugProductService();
+            vm.model = vm.drugProductService.getDefaultObject();
+            vm.rootTag= vm.drugProductService.getRootTagName();
             vm.setVisibleTabIndex=-1;
         };
         /**
@@ -147,11 +155,23 @@
         };
 
         vm.appendixMissingError = function () {
-            return (vm.errorAppendix && vm.errorAppendix.length > 0);
+            if(vm.errorAppendix && vm.errorAppendix.length > 0){
+                vm.missingAppendixModel="";
+                return true
+            }else{
+               // vm.missingAppendixModel=false;
+                return false
+            };
 
         };
         vm.appendixExtraError = function () {
-            return (vm.extraAppendix && vm.extraAppendix.length > 0);
+            if (vm.extraAppendix && vm.extraAppendix.length > 0){
+                vm.extraAppendixModel=""
+                return true;
+            }else{
+               // vm.extraAppendixModel=false;
+                return false;
+            }
 
         };
 
@@ -164,7 +184,7 @@
             if (!fileContent)return;
             var resultJson = fileContent.jsonResult;
             if (resultJson) {
-                vm.model = vm.dossierService.loadFromFile(resultJson);
+                vm.model = vm.drugProductService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
                 vm.drugProdForm.$setDirty();
@@ -206,9 +226,11 @@
         }
 
         function getAppendix4Errors() {
-            var appendixCheck = vm.dossierService.getMissingAppendix4(vm.model);
+            var appendixCheck = vm.drugProductService.getMissingAppendix4(vm.model);
             vm.errorAppendix = appendixCheck.missing;
             vm.extraAppendix = appendixCheck.extra;
+            vm.appendixMissingError();
+            vm.appendixExtraError();
         }
 
         /**
@@ -264,12 +286,12 @@
          * Manages the schedule A details since the fields are always in the model
          */
         vm.isSchedA = function () {
-            if (!vm.model || !vm.model.drugProduct || !vm.dossierService) return false; //never happen case;
+            if (!vm.model || !vm.model.drugProduct || !vm.drugProductService) return false; //never happen case;
             if (vm.model.drugProduct.isScheduleA) {
 
                 return true;
             } else {
-                vm.model.drugProduct.scheduleAGroup = vm.dossierService.getDefaultScheduleA();
+                vm.model.drugProduct.scheduleAGroup = vm.drugProductService.getDefaultScheduleA();
             }
             return false;
         };
@@ -279,7 +301,7 @@
          */
         vm.saveJson = function () {
             var writeResult = _transformFile();
-            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), vm.dossierService.getRootTagName());
+            hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), vm.drugProductService.getRootTagName());
            // vm.showAllErrors = true; //TODO get rid of this?
             //_setComplete()
         };
@@ -293,7 +315,7 @@
                 vm.updateErrorSummaryState();
             }else {
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName());
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.drugProductService.getRootTagName());
                // vm.showAllErrors = false;
                 vm.drugProdForm.$setPristine();
                 vm.showSummary=false;
@@ -318,7 +340,7 @@
 
                 vm.model.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.model.enrolmentVersion);
             }
-            return vm.dossierService.dossierToOutput(vm.model);
+            return vm.drugProductService.formDataToOutput(vm.model);
         }
 
         /**
@@ -419,6 +441,7 @@
             vm.properNameId="proper_name"+ scopeId;
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
+            vm.drugUseId="drug_use"+scopeId;
         }
 
 

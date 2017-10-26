@@ -1,6 +1,6 @@
 <ng-form name="schedACtrl.schedAForm">
     <uib-accordion close-others="false">
-        <div uib-accordion-group heading="{{'Schedule A Claim Details' |translate}}"
+        <div uib-accordion-group heading="{{'SCHEDA_DETAILS' |translate}}"
              is-open="schedACtrl.expanderOpenState" is-disabled="schedACtrl.schedAForm.$invalid"
              template-url="./app/lib/uib-templates/tpl-accordian-group-caret.html">
             <div>
@@ -8,25 +8,22 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-xs-12 form-group">
-                                <label for="din-value">
+                                <label for="{{::schedACtrl.dinId}}">
                                     <span class="field-name">{{'DIN_FULL'|translate}}</span>
-                                    <input type="text" class="form-control" id="din-value" name="schedDinValue"
+                                    <input type="text" class="form-control" id="{{::schedACtrl.dinId}}" name="{{::schedACtrl.dinId}}"
                                            maxlength="8" size="8" only-digits ng-minlength="8"
-                                           ng-model="schedACtrl.scheduleAModel.drugIdNumber"/>
-                                    <strong id="din-error" class="error"
-                                            ng-if="schedACtrl.showError(schedACtrl.schedAForm.schedDinValue)">
-                                    <span class="label label-danger"
-                                          ng-messages="schedACtrl.schedAForm.schedDinValue.$error">
-                                          <span ng-message="minlength"><span translate="MSG_LENGTH_8NUM"></span></span>
-                                    </span>
-                                    </strong>
+                                           ng-model="schedACtrl.model.drugIdNumber"/>
+                                    <cmp-error-message field-name="schedACtrl.dinId"
+                                                       form-ref="schedACtrl.schedAForm"
+                                                       show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.dinId])"
+                                                       error-types="schedACtrl.errorMinLength"></cmp-error-message>
                                 </label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-xs-12 form-group">
-                                <fieldset>
+                                <fieldset id="{{::schedACtrl.fsId}}">
                                     <legend class="required">
                                         <span class=" field-name">{{'SCHEDA_DISEASE'|translate}}</span>
                                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
@@ -37,12 +34,6 @@
                                                                form-ref="schedACtrl.schedAForm"
                                                                show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.oneSchedId])"
                                                                error-types="schedACtrl.oneRequired"></cmp-error-message>
-                                            <!--  <strong id="claim-select-error" class="error" ng-if="schedACtrl.noClaimSelected()">
-                                                           <span class="label label-danger" aria-live="polite"
-                                                                 ng-messages="schedACtrl.schedAForm.oneDiseaseSelected.$error">
-                                                              <span ng-message="required">{{"MSG_ONE_SCHEDA"|translate}}</span>
-                                                           </span>
-                                              </strong>-->
                     </span></legend>
                                     <div class="row checkbox">
                                         <div class="col-md-4">
@@ -345,10 +336,10 @@
                                 </label>
                                 <textarea class="form-control full-width" required rows="3"
                                           id="{{::schedACtrl.schedIndId}}" name="{{::schedACtrl.schedIndId}}"
-                                          ng-model="schedACtrl.scheduleAModel.scheduleAClaimsIndDetails"></textarea>
+                                          ng-model="schedACtrl.model.scheduleAClaimsIndDetails"></textarea>
                             </div>
                         </div>
-                        <pre>currentModel: {{schedACtrl.model | json : spacing}}</pre>
+                        <!--<pre>currentModel: {{schedACtrl.model | json : spacing}}</pre>-->
                     </div>
                 </div>
             </div>

@@ -170,8 +170,9 @@
             var list = vm.formulationList;
             if (list) {
                 for (var i = 0; i < list.length; i++) {
-                    if (list[i].formulationId > out) {
-                        out = list[i].formulationId;
+
+                    if (parseInt(list[i].formulationId) > out) {
+                        out = parseInt(list[i].formulationId);
                     }
                 }
             }

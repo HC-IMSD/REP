@@ -189,7 +189,7 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.tissuesFormId = "tissuesFluidsRecForm" + scopeId;
-            vm.systemTypeId="systemType"+scopeId;
+            vm.systemTypeId="system_type"+scopeId;
         }
         /**
          * Sets the state of the other field when system details is other

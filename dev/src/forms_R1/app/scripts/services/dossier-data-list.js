@@ -44,6 +44,7 @@
             createNanomaterialList: _createNanoArray,
             createDosageFormList: _createDosageFormArray,
             getDosageFormList: getDosageFormsArray,
+            getDrugUseList:_getDrugUseArray,
             getUnitsList:_getUnitsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
@@ -142,6 +143,23 @@
         }
         function _getNanoPrefix(){
             return "NANOMAT_"
+        }
+
+        function _getDrugUseArray(){
+
+            return(
+                [
+                    {"id":"HUMAN","en":"Human","fr":"fr_Human"},
+                    {"id":"RADIO","en":"Radiopharmaceutical","fr":"fr_Radiopharmaceutical"},
+                    {"id":"DISINFECT","en":"Disinfectant","fr":"fr_Disinfectant"},
+                    {"id":"VET","en":"Veterinary","fr":"fr_Veterinary"},
+
+                ]
+
+
+            )
+
+
         }
 
         /**

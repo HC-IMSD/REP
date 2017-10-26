@@ -21,9 +21,9 @@
             controllerAs:'schedACtrl',
             bindings: {
                 scheduleGroup: '<',
-                onUpdate: '&',
-                onDelete: '&',
-                showErrors: '&'
+                //onUpdate: '&',
+                //onDelete: '&',
+                showErrors: '<'
             }
 
         });
@@ -36,6 +36,9 @@
        vm.disableExpander=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.oneRequired = [{type: "required", displayAlias: "MSG_ONE_SCHEDA"}];
+        vm.errorMinLength = [{type: "minlength", displayAlias: "MSG_LENGTH_8NUM"}];
+
+
         vm.$onInit = function () {
             var noValue=false;
             if (!vm.model) {
@@ -89,6 +92,11 @@
         vm.$onChanges=function(changes){
             if(changes.scheduleGroup){
                 vm.model = changes.scheduleGroup.currentValue;
+                vm.claimSelected();
+            }
+            if(changes.showErrors){
+
+                vm.showErrorDetails=changes.showErrors.currentValue;
             }
         };
 
@@ -115,7 +123,7 @@
                 console.warn("No ctrl in cmp-schedule-a::showError");
                 return false;
             }
-            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrors()))
+            return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showErrorDetails))
         };
 
         vm.isOpenState=function(form){
@@ -174,7 +182,9 @@
             vm.thyroidId="thyroid_disease"+ scopeId;
             vm.ulcerGssId="ulcer_gastro"+ scopeId;
             vm.schedIndId="scheda_claims"+ scopeId;
-            vm.oneSchedId="oneSchedSelected"+ scopeId;
+            vm.oneSchedId="msg_one_scheda"+ scopeId;
+            vm.fsId="fs_schedAMissing"+scopeId;
+            vm.dinId="sched_din"+scopeId;
         }
     }
 

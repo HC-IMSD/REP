@@ -491,7 +491,8 @@ var serviceFileNames = {
     cspConstants: 'csp-constants',
     cspLoadService: 'csp-load-service',
     cspDataLists: 'csp-data-lists',
-    diffService: 'diff-service'
+    diffService: 'diff-service',
+    drugProductService:'drug-product-service'
 };
 
 //Activity Form Service File names
@@ -535,7 +536,7 @@ var drugProductServiceFileNames =
     [
         serviceFileNames.dossierDataList,
         serviceFileNames.dossierLoadService,
-        serviceFileNames.dossierService,
+        serviceFileNames.drugProductService,
         serviceFileNames.applicationInfoService,
         serviceFileNames.dataLists,
         serviceFileNames.filterLists,
@@ -658,7 +659,8 @@ var translationBaseFiles = {
     temp: paths.translations + 'companyError',
     errorSummary: paths.translations + 'errorSummary',
     cspGeneral: paths.translations + 'csp',
-    cspError: paths.translations + 'cspError'
+    cspError: paths.translations + 'cspError',
+    drugProduct:paths.translations +'drugProduct'
 };
 
 
@@ -716,6 +718,27 @@ var dossierTranslationFilesBaseList =
         translationBaseFiles.contact,
         translationBaseFiles.errorSummary
     ];
+
+var drugProductTranslationFilesBaseList =
+    [
+        translationBaseFiles.dosageForm,
+        translationBaseFiles.dossier,
+        translationBaseFiles.dossierGeneral,
+        translationBaseFiles.dossierMsg,
+        translationBaseFiles.appendix4,
+        translationBaseFiles.scheduleA,
+        translationBaseFiles.formulation,
+        translationBaseFiles.general,
+        translationBaseFiles.fileIO,
+        translationBaseFiles.applicationInfo,
+        translationBaseFiles.messages,
+        translationBaseFiles.contact,
+        translationBaseFiles.errorSummary,
+        translationBaseFiles.drugProduct
+
+    ];
+
+
 
 
 ///transaction form translations
@@ -1462,7 +1485,7 @@ gulp.task('dev-drugProduct-createResources', ['dev-drugProduct-copyTranslate'], 
     var srcPath = paths.buildDevDrugProduct;
     var destPath = paths.buildDevDrugProduct + paths.relScript;
     var filename = 'translations' + createSuffixDate();
-    return (pipes.compileTranslateFile(srcPath, destPath, filename, dossierTranslationFilesBaseList));
+    return (pipes.compileTranslateFile(srcPath, destPath, filename, drugProductTranslationFilesBaseList));
 });
 
 
@@ -1527,7 +1550,7 @@ gulp.task('dev-dossier-clean', function () {
 });
 
 gulp.task('dev-drugProduct-clean', function () {
-    return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
+    return (pipes.cleanBuild(paths.buildDevDrugProduct + 'app/'));
 
 });
 
@@ -1712,7 +1735,7 @@ gulp.task('dev-dossier-copyTranslate', [], function () {
 
 gulp.task('dev-drugProduct-copyTranslate', [], function () {
 
-    return (pipes.translateDev(dossierTranslationFilesBaseList, paths.buildDevDrugProduct));
+    return (pipes.translateDev(drugProductTranslationFilesBaseList, paths.buildDevDrugProduct));
 });
 
 

@@ -3,8 +3,8 @@
   "LOAD_DRUGPROD":"Load a Drug Product File",
   "INFO_DRUGPROD":"Drug Product Information",
   "DRUGPROD":"Drug Product",
-  "TYPE_DRUGPROD":"Drug Product Type"
-
-
-
+  "TYPE_DRUGPROD":"Drug Product Type",
+  "SCHED_DIN":"Schedule A DIN Number",
+  "FAKE.APPENDIX_MISSING_ERROR":"with the Human /Animal Sourced Records, missing source",
+  "FAKE.APPENDIX_EXTRA_ERROR":"with the Human /Animal Sourced Records, extra source"
 }

@@ -24,7 +24,7 @@
                 </div>
 
                 <hpfb-file-select update-model-root="drugProdCtrl.showContent(fileContent)"
-                                  root-elem="DOSSIER_ENROL"></hpfb-file-select>
+                                  root-elem="{{::drugProdCtrl.rootTag}}"></hpfb-file-select>
             </div>
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
@@ -279,10 +279,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <cmp-drug-use list-items="drugProdCtrl.model.drugProduct.drugUseList"
+                    <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
+                        <label for="{{::drugProdCtrl.drugUseId}}" class="required">
+                            <span class="field-name">C.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
+                                    ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
+                                    ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.drugUseList track by use.id"
+                                    required></select>
+                            <cmp-error-message field-name="drugProdCtrl.drugUseId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                      <!--  <cmp-drug-use list-items="drugProdCtrl.model.drugProduct.drugUseList"
                                       show-list-errors="drugProdCtrl.showErrors()"
-                                      parent-dirty="drugProdCtrl.drugProdForm.$dirty"></cmp-drug-use>
+                                      parent-dirty="drugProdCtrl.drugProdForm.$dirty"></cmp-drug-use>-->
                     </div>
                 </div>
                 <div class="row">
@@ -297,14 +309,14 @@
 
                 <div class="row" ng-if="drugProdCtrl.isSchedA()">
                     <div class="col-xs-12 form-group">
-                        <cmp-schedule-a schedule-group="drugProdCtrl.model.drugProduct.scheduleAGroup"></cmp-schedule-a>
+                        <cmp-schedule-a schedule-group="drugProdCtrl.model.drugProduct.scheduleAGroup" show-errors="drugProdCtrl.showSummary"></cmp-schedule-a>
                     </div>
                 </div>
                 <div>
                     <section ng-if="drugProdCtrl.appendixMissingError()">
-                        <input type="checkbox" ng-show="false" required="true" ng-checked="drugProdCtrl.appendixMissingError()"
-                               aria-hidden="true"/>
-                        <details class="alert alert-danger" id="alert-appendix" open="open">
+                        <input type="text" required ng-model="drugProdCtrl.missingAppendixModel"
+                               aria-hidden="true" name="fake.appendix_missing_error" id="fake.appendix_missing_error"/>
+                        <details class="alert alert-danger" id="errors-summary-fake.appendix_missing_error" open="open">
                             <summary class="h3">
                                 <h2>{{::'MISSING_APPENDIX'|translate}}</h2>
                             </summary>
@@ -316,9 +328,9 @@
                 </div>
                 <div>
                     <section ng-if="drugProdCtrl.appendixExtraError()">
-                        <input type="checkbox" ng-show="false" required="true" ng-checked="drugProdCtrl.appendixExtraError()"
-                               aria-hidden="true"/>
-                        <details class="alert alert-danger" id="alert-extra-appendix" open="open">
+                        <input type="hidden"  required ng-model="drugProdCtrl.extraAppendixModel"
+                               aria-hidden="true" id="fake.appendix_extra_error" name="fake.appendix_extra_error"/>
+                        <details class="alert alert-danger" id="errors-summary-fake.appendix_extra_error" open="open">
                             <summary class="h3">
                                 <h2>{{::'EXTRA_APPENDIX'|translate}}</h2>
                             </summary>
@@ -330,7 +342,7 @@
                 </div>
                 <div>
                     <cmp-tabs formulation-list="drugProdCtrl.model.drugProduct.formulations"
-                              record-changed="drugProdCtrl.recordsChanged()" service="drugProdCtrl.dossierService"
+                              record-changed="drugProdCtrl.recordsChanged()" service="drugProdCtrl.drugProductService"
                               error-summary-update="drugProdCtrl.updateSummary" show-error-summary="drugProdCtrl.showSummary"
                               update-error-summary="drugProdCtrl.updateErrorSummaryState()" set-selected-tab="drugProdCtrl.setVisibleTabIndex"
                               appendix4-list="drugProdCtrl.model.drugProduct.appendixFourList"></cmp-tabs>
@@ -404,6 +416,6 @@
                 </div>
             </div>
         </div>
- <pre>{{drugProdCtrl.model | json }}</pre>
+<!-- <pre>{{drugProdCtrl.model | json }}</pre>-->
     </div>
 </ng-form>
