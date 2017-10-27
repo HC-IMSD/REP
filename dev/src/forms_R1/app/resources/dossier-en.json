@@ -54,5 +54,6 @@
   "ADD_FORMULATION": "Add Formulation",
   "SAVE_INSTRUCT":"Dossier File Save Instructions",
   "REFPRODCTRL.PRODUCTDETAILSFORM":"in the Canadian Reference Product Record",
-  "CONTACTREC.CONTACTRECFORM":"in the REP contact record"
+  "CONTACTREC.CONTACTRECFORM":"in the REP contact record",
+  "DOSSIER":"Dossier"
 }

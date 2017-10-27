@@ -20,7 +20,8 @@
             bindings: {
                 products: '<',
                 onUpdate: '&',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                errorSummaryUpdate:'&'
             }
         });
 
@@ -50,8 +51,6 @@
                 vm.productList = vm.products;
             }
             _setIdNames();
-
-
         };
 
         vm.$onChanges = function (changes) {
@@ -72,7 +71,7 @@
             vm.newProductFormShown = false;
             vm.onUpdate({recs: vm.productList});
             setRecord(-1);
-            vm.showNoRefReError()
+            vm.showNoRefReError();
         };
 
         vm.updateProduct = function (idx, product) {
@@ -116,8 +115,8 @@
         }
 
         vm.showNoRefReError = function () {
-
-            if (vm.productList.length > 0 || vm.newProductFormShown===true) {
+            //TODO show this error is form shown? || vm.newProductFormShown===true
+            if (vm.productList.length > 0 ) {
                 vm.oneRefSelected = "sel";
                 return false
             } else {

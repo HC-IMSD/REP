@@ -76,12 +76,9 @@
             {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"}
         ];
-
-
         vm.showSummary = false;
 
         vm.$onInit = function () {
-            vm.showSummary = false;
             _setIdNames();
         };
         vm.$onChanges = function (changes) {
@@ -97,7 +94,7 @@
                 vm.showSummary = changes.showErrorSummary.currentValue;
                 if (vm.showSummary) {
                     vm.updateErrorSummaryState(); //updating current
-                }
+               }
             }
         };
         /**

@@ -267,6 +267,7 @@
                         </header>
                         <div class="panel-body">
                             <cmp-ref-product-list products="dos.dossierModel.drugProduct.canRefProducts"
+                                                  error-summary-update="dos.updateSummary"
                                     on-update="dos.cdnRefUpdated(recs)" show-error-summary="dos.showSummary"></cmp-ref-product-list>
                         </div>
                     </section>
@@ -430,10 +431,10 @@
                      class="alert-info" close="dos.closeAlert(6)">
                     <section aria-live="assertive">
                         <div ng-if="!dos.isFrench()"
-                             ng-include="'app/scripts/templates/dossier/tpl-dossier-save-en.html'">
+                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-save-en.html'">
                         </div>
                         <div ng-if="dos.isFrench()"
-                             ng-include="'app/scripts/templates/dossier/tpl-dossier-save-fr.html'">
+                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-save-fr.html'">
                         </div>
                     </section>
                 </div>
