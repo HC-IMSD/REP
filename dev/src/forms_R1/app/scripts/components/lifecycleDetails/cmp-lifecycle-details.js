@@ -7,7 +7,11 @@
     'use strict';
 
     angular
-        .module('lcDetailsModule', ['ui.bootstrap'])
+        .module('lcDetailsModule', [
+            'ui.bootstrap',
+            'errorSummaryModule',
+            'errorMessageModule'
+        ])
 })();
 
 (function () {
@@ -23,21 +27,23 @@
             bindings: {
                 lifecycleRecord: '<',
                 onUpdate: '&',
-                showErrors: '&',
                 isDetailValid: '&',
                 onDelete: '&',
                 enableDeleteIndex: '&',
                 isEctd: '<',
                 activityTypes:'<', //list of activity types
-                sequenceUpdated:'<'
+                sequenceUpdated:'<',
+                errorSummaryUpdate:'<', //update the component error summary
+               showErrorSummary:'<', //show the component error summary
+                updateErrorSummary:'&' //update the parent error summary
             }
         });
     lifecycleRecCtrl.$inject = ['TransactionLists', '$translate','$scope'];
 
     function lifecycleRecCtrl(TransactionLists, $translate,$scope) {
         var vm = this;
-        vm.savePressed = false;
-       // vm.activityList = TransactionLists.getActivityTypes();
+       //s vm.savePressed = false;
+
         vm.activityList=[];
         vm.sequenceList = [];
         vm.descriptionList = [];
@@ -56,8 +62,26 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.yearList = _createYearList();
         vm.descriptionObj=TransactionLists.getTransactionDescriptions();
-        vm.$onInit = function () {
 
+        vm.updateSummary=0; //message to update the summary component
+        vm.showSummary=false; //show the errror summary object
+        vm.focusSummary=0; //messaging to focus on the active ingredient summary
+
+        vm.dateFormatError=[
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "date", displayAlias: "MSG_ERR_DATE_FORMAT"}
+        ];
+        vm.minLength6Error=[
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_6NUM"}
+        ];
+        vm.requiredOnly=[
+            {type: "required", displayAlias: "MSG_ERR_MAND"}
+        ];
+
+        //
+        vm.$onInit = function () {
+            _setIdNames();
             //lazy load of year lust
             if (!vm.yearList || vm.yearList.length === 0) {
                 vm.yearList = _createYearList();
@@ -85,6 +109,14 @@
                     //_updateLocalModel(vm.lifecycleRecord);
                 }
             }
+            if(changes.showErrorSummary){
+
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
+            }
+            if(changes.errorSummaryUpdate){
+                vm.updateErrorSummaryState();
+            }
         };
 
         /**
@@ -96,6 +128,18 @@
             }
         }, true);
 
+        $scope.$watch('lifecycleCtrl.lifecycleDetailsForm.$error', function () {
+            vm.updateErrorSummaryState();
+            vm.updateErrorSummary();
+        }, true);
+
+        /**
+         * Used as messaging to get the error summary to update itself
+         */
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+
+        };
 
         //sets the start date calendar state
         vm.openStartDate = function () {
@@ -528,7 +572,8 @@
             _updateLocalModel(vm.lifecycleRecord);
             vm.lifecycleDetailsForm.$setPristine();
             vm.isDetailValid({state: vm.lifecycleDetailsForm.$valid});
-            vm.savePressed = false;
+           // vm.savePressed = false;
+
         };
 
         /**
@@ -548,8 +593,17 @@
                 vm.isDetailValid({state: true});
                 vm.lifecycleDetailsForm.$setPristine();
                 vm.onUpdate({record: vm.lifecycleModel});
+            }else {
+                vm.showSummary=true;
+                vm.makeFocused();
+                vm.updateErrorSummaryState();
             }
-            vm.savePressed = true;
+
+            //vm.savePressed = true;
+        };
+
+        vm.makeFocused=function(){
+            vm.focusSummary=vm.focusSummary+1;
         };
         function convertToDate() {
             //TODO parse string and convert
@@ -580,7 +634,7 @@
         vm.showError = function (ctrl) {
             if(!ctrl) return false;
 
-            if ((ctrl.$invalid &&ctrl.$touched) || (vm.savePressed && ctrl.$invalid )) {
+            if ((ctrl.$invalid &&ctrl.$touched) || (vm.showSummary && ctrl.$invalid )) {
                 return true
             }
             return (false);
@@ -595,5 +649,21 @@
             }
             return (result);
         }
+        function _setIdNames(){
+            var scopeId = "_" + $scope.$id;
+            vm.lifecycleDetailsFormId="life_detail_form" + scopeId;
+            vm.dateSubId="date_submitted"+scopeId;
+            vm.controlNumId="control_num"+scopeId;
+            vm.regActivityId="reg_activity_type"+scopeId;
+            vm.seqDescriptId="sequence_type"+scopeId;
+            vm.startDateId="start_date"+scopeId;
+            vm.endDateId="end_date"+scopeId;
+            vm.yearId="year_change"+scopeId;
+            vm.descriptId="brief_desc"+scopeId;
+            vm.versionId="version_no"+scopeId;
+        }
+
+
+
     }
 })();

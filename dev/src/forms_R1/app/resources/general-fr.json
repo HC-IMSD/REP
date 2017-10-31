@@ -51,5 +51,6 @@
   "CLOSE":"Minimiser les instructions",
   "COLLAPSE":"Minimiser les",
   "SAVE_RECORD":"fr_Save Record",
-  "DELETE_RECORD":"fr_Delete Record"
+  "DELETE_RECORD":"fr_Delete Record",
+  "CONTROL_NUM": "fr_Control Number"
 }

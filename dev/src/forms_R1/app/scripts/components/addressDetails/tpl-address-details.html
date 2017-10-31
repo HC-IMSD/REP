@@ -9,7 +9,7 @@
                            name="{{::adr.streetId}}" ng-readonly="!adr.isEditable"
                            data-ng-model="adr.addressModel.street" required/>
                     <cmp-error-message field-name="adr.streetId" form-ref="adr.addressForm"
-                                       show-error="adr.showErrors()" error-types="adr.requiredOnly">
+                                       show-error="adr.showError(adr.addressForm[adr.streetId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
                 </label>
             </div>
@@ -24,7 +24,7 @@
                            class="form-control  full-width" maxlength="60"
                            ng-readonly="!adr.isEditable" required/>
                     <cmp-error-message field-name="adr.cityId" form-ref="adr.addressForm"
-                                       show-error="adr.showErrors()" error-types="adr.requiredOnly">
+                                       show-error="adr.showError(adr.addressForm[adr.cityId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
                 </label>
             </div>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <cmp-error-message field-name="adr.countryId" form-ref="adr.addressForm"
-                                       show-error="adr.showErrors()" error-types="adr.requiredOnly">
+                                       show-error="adr.showError(adr.addressForm[adr.countryId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
                 </label>
             </div>
@@ -72,7 +72,7 @@
                                 ng-disabled="!adr.isEditable" ng-required="adr.hideProvinceText"></select>
 
                         <cmp-error-message field-name="adr.stateListId" form-ref="adr.addressForm"
-                                           show-error="adr.showErrors()" error-types="adr.requiredOnly">
+                                           show-error="adr.showError(adr.addressForm[adr.stateListId])" error-types="adr.requiredOnly">
                         </cmp-error-message>
                     </label>
                 </div>
@@ -94,7 +94,7 @@
                            ng-change="adr.postalCodeChanged()"
                            maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="!adr.isEditable"/>
                     <cmp-error-message field-name="adr.postalId" form-ref="adr.addressForm"
-                                       show-error="adr.showErrors()" error-types="adr.postalErrorList">
+                                       show-error="adr.showError(adr.addressForm[adr.postalId])" error-types="adr.postalErrorList">
                     </cmp-error-message>
                 </label>
             </div>

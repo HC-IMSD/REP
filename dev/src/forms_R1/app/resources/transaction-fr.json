@@ -92,5 +92,8 @@
   "DATA_PROTECT_CORRESP":"fr_Correspondence - Data Protection",
   "CHOOSE_REQUEST":"fr_Choose a requester",
   "TRANSACT_INSTRUCT":"fr_Regulatory Transaction Instructions",
-  "LIST_DESCRIPT":"fr_List Description"
+  "LIST_DESCRIPT":"fr_List Description",
+  "REG_TRANSACT":"fr_Regulatory Transaction",
+  "LIFE_REC":"fr_Lifecycle Record",
+  "ONELIFEREC": "Un enregistrement de cycle de vie est nécessaire"
 }

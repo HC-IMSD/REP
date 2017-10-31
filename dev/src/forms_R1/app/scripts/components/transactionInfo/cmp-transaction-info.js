@@ -15,7 +15,9 @@
                 'ui.select',
                 'addressModule',
                 'contactModule',
-                'alertModule'])
+                'alertModule',
+                'errorMessageModule'
+            ])
 })();
 
 (function () {
@@ -35,7 +37,7 @@
                 transactionRoot: '<',
                 //onUpdate: '&',
                 isAmend: '<',
-                showErrors: '&',
+                showErrorSummary: '<',
                 getTransaction: '&',
                 setStartingSequence:'&',
                 getRepContact: '&',
@@ -43,12 +45,13 @@
                 deprecateSequence: '&',
                 language:'<',
                 sequenceUpdated:'<',
-                getCurrentSequence:'&'
+                getCurrentSequence:'&',
+                updateErrorSummary:'&'
             }
         });
 
-    transactionInfoCtrl.$inject = ['TransactionService', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
-    function transactionInfoCtrl(TransactionService, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
+    transactionInfoCtrl.$inject = ['$scope','TransactionService', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
+    function transactionInfoCtrl($scope, TransactionService, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {};
@@ -63,7 +66,18 @@
         vm.requesterList = [];
         vm.lang=ENGLISH;
         vm.sequenceChange=false;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.min5Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
+        ];
+        vm.min7Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_7"}
+        ];
+        vm.showSummary=false;
         vm.$onInit = function () {
+            _setIdNames()
             loadContactData(); //asynch load of contact data
             vm.updateEctdState();
             vm.setSolicitedState();
@@ -82,6 +96,9 @@
             }
             if(changes.sequenceUpdated){
                 vm.sequenceChange=changes.sequenceUpdated.currentValue;
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
             }
 
         };
@@ -106,15 +123,17 @@
         vm.subtractSequence = function () {
             vm.deprecateSequence();
         };
+
+        //temp used for autimation testing. Ignore for coding
         vm.showFormErrors = function () {
 
-            return (vm.showErrors())
+          //  return (vm.showErrors())
         };
 
         vm.showError = function (ctrl) {
             if (!ctrl) return;
 
-            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
+            if ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid )) {
                 return true;
             }
             return false;
@@ -203,6 +222,25 @@
         vm.isFrench=function(){
             return(vm.lang===FRENCH);
         };
+
+        $scope.$watch('transInfoCtrl.transInfoForm.$error', function () {
+            //vm.updateErrorSummaryState();
+            vm.updateErrorSummary();
+        }, true);
+
+        function _setIdNames(){
+            var scopeId = "_" + $scope.$id;
+            vm.companyId="company_id"+scopeId;
+            vm.dossierId="dossier_id"+scopeId;
+            vm.dossierNameId="dossier_name"+scopeId;
+            vm.isEctdId="is_ectd"+scopeId;
+            vm.isSolicitedId="is_solicited"+scopeId;
+            vm.solictedRqId="solicited_rq"+scopeId;
+            vm.solicitedOtherId="solicited_rq_other"+scopeId;
+            vm.companyNameId="company_noabbrev"+scopeId;
+            vm.contactSameId="contact_same"+scopeId;
+        };
+
 
 }
 

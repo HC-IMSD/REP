@@ -1,15 +1,6 @@
 <ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
-    <input type="text" id="oneRec" name="oneRec" ng-show="false"
+    <input type="hidden" id="oneLifeRec_{{$id}}" name="oneLifeRec_{{$id}}"
            ng-model="lifeListCtrl.oneRecord" required/>
-    <label for="oneRec">
-        <strong id=" onerec-error" class="error"
-                ng-if="lifeListCtrl.showError(lifeListCtrl.lifecycleListForm.oneRec.$touched,lifeListCtrl.lifecycleListForm.oneRec.$invalid)">
-                        <span class="label label-danger"
-                              ng-messages="lifeListCtrl.lifecycleListForm.oneRec.$error">
-                            <span ng-message="required">{{"MSG_ERR_ONE_LIFE_REC"|translate}}</span>
-                        </span>
-        </strong>
-    </label>
     <div class="row" ng-if="lifeListCtrl.ectdValue">
         <div class="col-xs-4 form-group">
             <label for="startSeq"> Starting sequence number
@@ -34,7 +25,11 @@
                                        on-delete="lifeListCtrl.deleteRecord(id)" is-ectd="lifeListCtrl.ectdValue"
                                        enable-delete-index="lifeListCtrl.lastRecordSequence()"
                                        sequence-updated="lifeListCtrl.seqUpdated"
-                                       on-update="lifeListCtrl.onUpdateLifecycleRecord(record)"></cmp-lifecycle-details>
+                                       on-update="lifeListCtrl.onUpdateLifecycleRecord(record)"
+                                       error-summary-update=""
+                                       show-error-summary="lifeListCtrl.showSummary"
+                                       update-error-eummary=""
+                ></cmp-lifecycle-details>
 
             </cmp-expanding-table>
 
@@ -43,7 +38,7 @@
             <div class="btn-group-sm col-md-12 text-right">
                 <button class="btn btn-primary"
                         ng-click="lifeListCtrl.addTransaction()" name="lifeListCtrl.lifecycleListForm.addRec"
-                        id="addTransactionRec"
+                        id="addTransactionRec_{{$id}}"
                         ng-disabled="lifeListCtrl.isAddDisabled()">{{'ADD_TRANSACTION'|translate}}
                 </button>
                 <input type="submit" value="Cancel" class="btn btn-default"

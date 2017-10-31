@@ -100,7 +100,6 @@
 
             if (changes.showErrors) {
                 vm.isVisible = changes.showErrors.currentValue;
-               // console.log("error summary is visible "+vm.headingPreamble+" "+vm.isVisible)
             }
 
             if (changes.updateErrors) {
@@ -119,7 +118,6 @@
             }
             if (changes.formId) {
                 /* used for the jquery ordering. This gives the starting id **/
-               // console.log("This is formId "+ changes.formId.currentValue);
                 vm.startFormId = changes.formId.currentValue;
             }
             if(changes.transcludeList){
@@ -154,8 +152,6 @@
             }else{
                 hashId=errorRecord.name;
             }
-          //  console.log("hashID "+hashId)
-           // console.log("index "+errorRecord.exIndex)
             vm.expandRecord({index: errorRecord.exIndex});
             $location.hash(hashId);
             $anchorScroll();
@@ -163,20 +159,17 @@
 
         vm.selectVisibleTab=function(errorRecord){
             var hashId='errors-summary-'+errorRecord.name;
-            //console.log("selectVisible "+errorRecord.tabId);
+
             vm.selectTab({index:errorRecord.tabId});
-            //$location.hash(hashId);
-            //$anchorScroll();
         }
 
         vm.isSummaryLink=function(errorRecord){
 
-            return(errorRecord.isSummary && (!angular.isDefined(errorRecord.toExpand)) &&(!angular.isDefined(errorRecord.tabId)));
+            return(errorRecord.isSummary && (!angular.isDefined(errorRecord.toExpand)) &&(angular.isDefined(errorRecord.tabId && parseInt(errorRecord.tabId)>-1)));
         };
 
         vm.isTabLink=function(errorRecord){
-
-            return(errorRecord.isSummary &&(angular.isDefined(errorRecord.tabId)));
+            return(errorRecord.isSummary &&(angular.isDefined(errorRecord.tabId) && parseInt(errorRecord.tabId)>-1));
         };
         vm.isExpanderLink=function(errorRecord){
 
@@ -242,7 +235,6 @@
                         //it is assumed that if it is in the exclusion list it is a summary
                         if (vm.exclusions && vm.exclusions.hasOwnProperty(record[j].$name)) {
                             //only process this as a summary if it is in the exclusions list
-                          //  console.log("the name is "+record[j].$name);
                             var tabIndex=vm.exclusions[record[j].$name].indexOf('tab_');
                             var tabId=-1;
                             if(tabIndex>-1){
@@ -400,11 +392,9 @@
                     domFieldList[temp_attr] = k;
                 }
             });
-            //console.log(domFieldList)
             //delete anything in the not in the list
             //TODO refactor? seems inefficient
             var keyList = Object.keys(domFieldList);
-          //  console.log(keyList);
             for (var p = 0; p < keyList.length; p++) {
                 //specifically handled the angular bootstrap ui-select
                 if(keyList[p].indexOf("focusser-")>-1){
@@ -425,7 +415,6 @@
             for (var v = 0; v < keyList.length; v++) {
                 sortedDomJsonList[keyList[v]] = v;
             }
-            //console.log(sortedDomJsonList)
             //create an array
             var newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
                 return vm.uniqueErrorList[k]

@@ -435,7 +435,9 @@ var transactionComponentFolders = [
     componentFolders.lifecycleDetails,
     componentFolders.addressDetails,
     componentFolders.errorMsg,
-    componentFolders.alertComp
+    componentFolders.alertComp,
+    componentFolders.errorMsg,
+    componentFolders.errorSummary
 ];
 //certificate of Supplementary Protection File
 
@@ -739,8 +741,6 @@ var drugProductTranslationFilesBaseList =
     ];
 
 
-
-
 ///transaction form translations
 var transactionTranslationFilesBaseList = [
     translationBaseFiles.address,
@@ -750,7 +750,8 @@ var transactionTranslationFilesBaseList = [
     translationBaseFiles.fileIO,
     translationBaseFiles.general,
     translationBaseFiles.messages,
-    translationBaseFiles.transaction
+    translationBaseFiles.transaction,
+    translationBaseFiles.errorSummary
 ];
 //complementary supplementary Forms
 var cspTranslationFilesBaseList = [

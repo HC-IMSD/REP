@@ -93,5 +93,8 @@
   "DATA_PROTECT_CORRESP":"Correspondence - Data Protection",
   "CHOOSE_REQUEST":"Choose a requester",
   "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
-  "LIST_DESCRIPT":"List Description"
+  "LIST_DESCRIPT":"List Description",
+  "REG_TRANSACT":"Regulatory Transaction",
+  "LIFE_REC":"Lifecycle Record",
+  "ONELIFEREC": "One lifecycle record is required."
 }

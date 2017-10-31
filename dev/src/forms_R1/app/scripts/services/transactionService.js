@@ -514,7 +514,7 @@
                 city: "",
                 stateList: "",
                 stateText: "",
-                country: {"id": "", "en": "", "fr": ""},
+                country: "",
                 countryDisplay: "",
                 "postalCode": ""
             }

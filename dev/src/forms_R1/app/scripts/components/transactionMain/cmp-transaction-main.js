@@ -1,16 +1,43 @@
 (function () {
     'use strict';
     angular
-        .module('transactionApp')
+        .module('transactionMainModule', [
+            'transactionInfo',
+            'transactionService',
+            'transactionLoadService',
+            'fileIO',
+            'services',
+            'dataLists',
+            'filterLists',
+            'numberFormat',
+            'errorSummaryModule',
+            'errorMessageModule'
+        ])
+
+})();
+
+
+(function () {
+    'use strict';
+    angular
+        .module('transactionMainModule')
         .component('cmpTransactionMain', {
             templateUrl: 'app/scripts/components/transactionMain/tpl-transaction-main.html',
             controller: TransactionMainCtrl,
             controllerAs: 'main'
         });
 
-    TransactionMainCtrl.$inject = ['TransactionService', 'hpfbFileProcessing', '$filter','$translate','ENGLISH'];
+    TransactionMainCtrl.$inject = [
+        'TransactionService',
+        'hpfbFileProcessing',
+        '$filter',
+        '$translate',
+        '$scope',
+        'ENGLISH',
+        'EXTERNAL_TYPE'
+        ];
 
-    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, ENGLISH, EXTERNAL_TYPE) {
+    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, $scope, ENGLISH, EXTERNAL_TYPE) {
 
         var vm = this;
         vm.savePressed = false;
@@ -21,7 +48,33 @@
         vm.showContent = _loadFileContent;
         vm.alerts = [false, false];
         vm.lang = $translate.proposedLanguage() || $translate.use();
-        vm.sequenceUpdated=false;
+        vm.sequenceUpdated = false;
+
+        vm.updateSummary = 0; //increment to send message to error summaries
+
+        vm.focusSummary = 0; //messaging to set focus on the error summary
+        vm.exclusions = { // when error summary hit these, assumes there is a sub summary if type x.x
+            "lifecycleCtrl.lifecycleDetailsForm":"true"
+        };
+        vm.transcludeList = {}; //specific to expanding table to tag records
+        vm.alias = { // do something other than a simple hyperlink
+            "oneLifeRec": {
+                "type": "element",
+                "target": "addTransactionRec"
+            }
+
+        };
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+
+        vm.$onInit = function () {
+            vm.updateSummary=vm.updateSummary+1;
+
+            vm.updateSummary=vm.updateSummary+1;
+            _setIdNames();
+        };
+
+
+
         /**
          *
          * @ngdoc method Saves the model content in JSON format
@@ -36,10 +89,25 @@
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            var writeResult = _transformFile();
-            hpfbFileProcessing.writeAsXml(writeResult, _getFileName(), vm.rootTag);
-            vm.savePressed = true;
+
+            if(vm.transactionEnrolForm.$invalid) {
+
+                vm.focusSummary++;
+                vm.updateErrorSummaryState();
+                vm.savePressed = true;
+            }else {
+
+                var writeResult = _transformFile();
+                hpfbFileProcessing.writeAsXml(writeResult, _getFileName(), vm.rootTag);
+                vm.savePressed = false;
+            }
         };
+
+        vm.updateErrorSummaryState = function () {
+            console.log("update summary from main")
+            vm.updateSummary = vm.updateSummary + 1;
+        };
+
 
         function _getFileName() {
             var date = new Date();
@@ -48,7 +116,7 @@
             var day = date.getDate();
             var hours = date.getHours();
             var minutes = date.getMinutes();
-            var separator="-";
+            var separator = "-";
 
             if (month < 10) {
                 month = "0" + month;
@@ -64,7 +132,7 @@
             }
 
 
-            filename = filename + separator + date.getFullYear() +separator + month + separator + day + separator + hours + minutes;
+            filename = filename + separator + date.getFullYear() + separator + month + separator + day + separator + hours + minutes;
             return (filename.toLowerCase());
         }
 
@@ -100,10 +168,10 @@
         vm.getNewRepContact = function () {
             return vm.transactionService.createRepContact();
         };
-        vm.setSequenceNumber=function(startVal){
+        vm.setSequenceNumber = function (startVal) {
 
-            var result=vm.transactionService.setSequenceNumber(startVal);
-            vm.sequenceUpdated=!vm.sequenceUpdated;
+            var result = vm.transactionService.setSequenceNumber(startVal);
+            vm.sequenceUpdated = !vm.sequenceUpdated;
 
         };
 
@@ -124,7 +192,9 @@
 
         };
         vm.showErrors = function () {
-            return (vm.transactionEnrolForm.$dirty && vm.transactionEnrolForm.$invalid && vm.savePressed)
+        //vm.transactionEnrolForm.$dirty && vm.transactionEnrolForm.$invalid &&
+
+            return ( vm.savePressed)
 
         };
         vm.addInstruct = function (value) {
@@ -151,9 +221,15 @@
          * Determines if the language used is french
          * @returns {boolean}
          */
-        vm.isFrench=function(){
-            return(vm.lang!==ENGLISH);
+        vm.isFrench = function () {
+            return (vm.lang !== ENGLISH);
         };
+
+        function _setIdNames(){
+            var scopeId = "_" + $scope.$id;
+            vm.formId="transaction_form"+scopeId;
+
+        }
 
     }
 })();

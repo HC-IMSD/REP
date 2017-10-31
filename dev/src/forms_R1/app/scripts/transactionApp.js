@@ -2,17 +2,10 @@
     'use strict';
     angular
         .module('transactionApp', [
+            'transactionMainModule',
             'pascalprecht.translate',
             'ngMessages',
             'ngAria',
-            'fileIO',
-            'services',
-            'dataLists',
-            'transactionInfo',
-            'transactionService',
-            'transactionLoadService',
-            'filterLists',
-            'numberFormat',
             'ui.bootstrap',
             'translations',
             'ngSanitize'
@@ -39,7 +32,12 @@
     'use strict';
     angular
         .module('transactionApp')
-        .config(['$translateProvider','$httpProvider', function ($translateProvider,$httpProvider) {
+        .config(['$translateProvider','$httpProvider','$locationProvider', function ($translateProvider,$httpProvider,$locationProvider) {
+            $locationProvider.html5Mode(
+                {enabled : true,
+                    requireBase: false,
+                    rewriteLinks : false});
+
             $translateProvider.directivePriority(1);
             $translateProvider.preferredLanguage('@@prefLang');
             $translateProvider.useLoader('customLoad');

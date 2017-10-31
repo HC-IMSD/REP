@@ -30,7 +30,6 @@
   "RELATED_ACTIVITIES": "fr_Related Regulatory Activity (Referred to in this Administrative Submission)",
   "ACTIVITY_TYPE": "fr_Regulatory Activity Type",
   "DATE_CLEARED": "fr_Date Cleared",
-  "CONTROL_NUM": "fr_Control Number",
   "MANUFACT_NAME": "fr_Manufacturer / Sponsor Name [Full Legal Name - No Abbreviations]",
   "REASON_FILING": "fr_Reason for Filing this Regulatory Activity",
   "ASSOC_DINS": "fr_Associated Drug Identification Numbers (DIN)",

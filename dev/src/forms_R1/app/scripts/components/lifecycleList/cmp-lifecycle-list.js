@@ -23,7 +23,7 @@
                 getNewTransaction: '&',
                 setSequenceValue:'&',
                 deprecateSequence: '&', //bit of a hack
-                showErrors: '&',
+                showErrorSummary: '<',
                 isEctd: '<',
                 parentDirty: '<',
                 sequenceUpdated:'<',
@@ -51,6 +51,7 @@
         vm.activityTypes = [];
         vm.startingSequence=0;
         vm.seqUpdated=false;
+        vm.showSummary=false;
 
         vm.columnDef = [
             {
@@ -109,6 +110,9 @@
             if(changes.sequenceUpdated){
                 vm.seqUpdated=changes.sequenceUpdated.currentValue;
                 //vm.startingSequence=vm.getCurrentSequence();
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
             }
         };
 
@@ -214,13 +218,13 @@
          *
          * @returns {boolean}
          */
-        vm.showError = function (isTouched, isInvalid) {
+      /*  vm.showError = function (isTouched, isInvalid) {
 
             if ((vm.isParentDirty && isInvalid) || (vm.showErrors() && isInvalid)) {
                 return true
             }
             return false
-        };
+        };*/
         /**
          * Converts date to HC standard TOD0: replace with filter?
          * @param value
