@@ -130,6 +130,12 @@
           //  return (vm.showErrors())
         };
 
+        //TODO : needed for subcomponents, replace with one way binding?
+        vm.showErrors=function(){
+
+            return  vm.showSummary;
+        };
+
         vm.showError = function (ctrl) {
             if (!ctrl) return;
 

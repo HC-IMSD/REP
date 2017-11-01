@@ -16,7 +16,8 @@
   "ADDR_DETAILS": "Détails de l'adresse",
   "ADDR_ROLE_LEGEND": "fr_Select one or more roles for this company",
   "IMPORTER_NONCDN":"There should be a Canadian Importer when the Manufacturer / Sponsor is not a Canadian Address",
-  "COUNTRY_CHOOSE":"Choisir un pays"
-
+  "COUNTRY_CHOOSE":"Choisir un pays",
+  "COUNTRY_SEARCH":"Select or Search for country",
+  "PROVINCELIST":"Province"
 
 }

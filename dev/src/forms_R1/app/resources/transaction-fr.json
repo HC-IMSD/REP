@@ -95,5 +95,6 @@
   "LIST_DESCRIPT":"fr_List Description",
   "REG_TRANSACT":"fr_Regulatory Transaction",
   "LIFE_REC":"fr_Lifecycle Record",
-  "ONELIFEREC": "Un enregistrement de cycle de vie est nécessaire"
+  "ONELIFEREC": "Un enregistrement de cycle de vie est nécessaire",
+  "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"with a Lifecycle Record"
 }

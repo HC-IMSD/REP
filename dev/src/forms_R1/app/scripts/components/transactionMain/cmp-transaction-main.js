@@ -104,7 +104,6 @@
         };
 
         vm.updateErrorSummaryState = function () {
-            console.log("update summary from main")
             vm.updateSummary = vm.updateSummary + 1;
         };
 

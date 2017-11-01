@@ -96,5 +96,6 @@
   "LIST_DESCRIPT":"List Description",
   "REG_TRANSACT":"Regulatory Transaction",
   "LIFE_REC":"Lifecycle Record",
-  "ONELIFEREC": "One lifecycle record is required."
+  "ONELIFEREC": "One lifecycle record is required.",
+  "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"with a Lifecycle Record"
 }

@@ -23,5 +23,6 @@
   "ADD_DOSSIER_ID":"Add Dossier Id",
   "IMPORTER_NONCDN":"Please ensure you indicate a Canadian Importer",
   "COUNTRY_CHOOSE":"Choose a country",
-  "COUNTRY_SEARCH":"Select or Search for country"
+  "COUNTRY_SEARCH":"Select or Search for country",
+  "PROVINCELIST":"Province"
 }
