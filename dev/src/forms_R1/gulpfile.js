@@ -356,8 +356,9 @@ var activityComponentFolders = [
     componentFolders.repContactList,
     componentFolders.repContactRecord,
     componentFolders.adminSubmissionPath,
+    componentFolders.alertComp,
     componentFolders.errorMsg,
-    componentFolders.alertComp
+    componentFolders.errorSummary
 ];
 
 //Company Form Components
@@ -434,7 +435,6 @@ var transactionComponentFolders = [
     componentFolders.lifecycleList,
     componentFolders.lifecycleDetails,
     componentFolders.addressDetails,
-    componentFolders.errorMsg,
     componentFolders.alertComp,
     componentFolders.errorMsg,
     componentFolders.errorSummary

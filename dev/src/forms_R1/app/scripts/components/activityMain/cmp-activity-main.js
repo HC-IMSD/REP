@@ -27,8 +27,8 @@
             'activityLists',
             'ui.select',
             'hpfbConstants',
-            'alertModule'
-           /* 'errorMessageModule'*/
+            'alertModule',
+            'errorMessageModule'
         ])
 })();
 
@@ -87,6 +87,13 @@
         vm.CommonLists = CommonLists;
         vm.yesNoList = vm.CommonLists.getYesNoList();
         vm.alerts = [false, false, false, false];
+
+        vm.exclusions={};
+        vm.focusSummary=false;
+        vm.updateSummary=0;
+        vm.requiredOnly= [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.length5Error= [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}];
+        vm.length7Error= [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "minlength", displayAlias: "MSG_LENGTH_7"}];
 
         //TODO remove?
         vm.initUser = function (id) {
@@ -162,20 +169,33 @@
             vm.showAllErrors = true;
             _setComplete()
         };
+
+        vm.updateErrorSummaryState = function () {
+            vm.updateSummary = vm.updateSummary + 1;
+        };
+
         /**
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            var writeResult = _transformFile();
-            hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
-            _setComplete();
-            vm.activityEnrolForm.$setPristine();
+
+            if(vm.activityEnrolForm.$invalid) {
+                vm.focusSummary++;
+                vm.updateErrorSummaryState();
+                vm.savePressed = true;
+            }else {
+
+                var writeResult = _transformFile();
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                _setComplete();
+                vm.activityEnrolForm.$setPristine();
+            }
         };
 
 
-        vm.showError = function (isTouched, isInvalid) {
-
-            return (isInvalid && isTouched) || (vm.showErrors() && isInvalid );
+        vm.showError = function (ctrl) {
+            if(!ctrl) return;
+            return (ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid);
         };
         //TODO remove?
         vm.showErrorCheck = function (isTouched, value) {
@@ -194,7 +214,7 @@
         vm.setApplicationType = function (value) {
             vm.activityRoot.applicationType = value;
             vm.formAmend = vm.activityRoot.applicationType === AMEND_TYPE;
-            disableXMLSave();
+            //disableXMLSave();
         };
         /**
          * Sets the visibility and state of the related activities
@@ -278,13 +298,13 @@
             vm.updateValues++;
         }
 
-        $scope.$watch("main.activityEnrolForm.$valid", function () {
+       /* $scope.$watch("main.activityEnrolForm.$valid", function () {
             disableXMLSave()
         }, true);
-
+*/
         function disableXMLSave() {
 
-            vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
+           // vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
         }
 
         vm.disableJSONSave=function() {
@@ -309,7 +329,7 @@
                 vm.activityEnrolForm.$setDirty();
             }
             vm.showAllErrors = true;
-            disableXMLSave();
+            //disableXMLSave();
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
@@ -322,7 +342,7 @@
         function _setApplTypeToAmend() {
 
             vm.activityRoot.applicationType = AMEND_TYPE;
-            disableXMLSave();
+            //disableXMLSave();
         }
 
         /**
@@ -381,8 +401,17 @@
          * Sets the ids and names for fields
          * @private
          */
-        function _setIdNames() {
-           // vm.companyNameId = "companyName" +"_"+  $scope.$id;
+        function _setIdNames(){
+            var scopeId = "_" + $scope.$id;
+            vm.formId="activity_form"+scopeId;
+            vm.companyId="company_id"+scopeId;
+            vm.dossierId="dossier_id"+scopeId;
+            vm.activityLeadId="activity_lead"+scopeId;
+            vm.activityTypeId="activity_type"+scopeId;
+            vm.feeClassId="fee_class"+scopeId;
+            vm.reasonId="reason_file"+scopeId;
+            vm.thirdPartyId="is_solicited"+scopeId;
+            vm.isAdminSubId="is_admin_sub"+scopeId;
         }
 
     }

@@ -74,7 +74,6 @@
         };
 
 
-
         /**
          *
          * @ngdoc method Saves the model content in JSON format
