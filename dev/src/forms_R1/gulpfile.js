@@ -685,7 +685,8 @@ var activityTranslationFilesBaseList = [
     translationBaseFiles.applicationInfo,
     translationBaseFiles.fileIO,
     translationBaseFiles.general,
-    translationBaseFiles.messages
+    translationBaseFiles.messages,
+    translationBaseFiles.errorSummary
 ];
 
 //COMPANY form translations

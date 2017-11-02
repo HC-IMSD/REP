@@ -51,10 +51,10 @@
         });
 
     activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope',
-        '$translate', 'CommonLists', 'ActivityListFactory', 'NEW_TYPE', 'AMEND_TYPE', 'APPROVED_TYPE','INTERNAL_TYPE',
+        '$translate', 'CommonLists', 'ActivityListFactory', 'NEW_TYPE', 'AMEND_TYPE', 'APPROVED_TYPE', 'INTERNAL_TYPE',
         'EXTERNAL_TYPE', 'ENGLISH'];
     function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate,
-                              CommonLists, ActivityListFactory,NEW_TYPE, AMEND_TYPE, APPROVED_TYPE,INTERNAL_TYPE,
+                              CommonLists, ActivityListFactory, NEW_TYPE, AMEND_TYPE, APPROVED_TYPE, INTERNAL_TYPE,
                               EXTERNAL_TYPE, ENGLISH) {
 
         var vm = this;
@@ -65,7 +65,7 @@
         vm.setAmendState = _setApplTypeToAmend;
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
-        vm.showAllErrors = false;
+        //vm.showAllErrors = false;
         vm.formAmend = false;
         vm.isNotifiable = false;
         vm.isRationale = false;
@@ -88,12 +88,36 @@
         vm.yesNoList = vm.CommonLists.getYesNoList();
         vm.alerts = [false, false, false, false];
 
-        vm.exclusions={};
-        vm.focusSummary=false;
-        vm.updateSummary=0;
-        vm.requiredOnly= [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.length5Error= [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}];
-        vm.length7Error= [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "minlength", displayAlias: "MSG_LENGTH_7"}];
+        vm.exclusions = {
+            "contactRec.contactRecForm":"true"
+        };
+
+        vm.alias = {
+            "notif_missing": {
+                "type": "fieldset",
+                "parent": "fs_notif_change"
+            },
+            "rationale_missing": {
+                "type": "fieldset",
+                "parent": "fs_rationale_missing"
+            },
+            "one_rep": {
+                "type": "element",
+                "target": "addRepContactBtn"
+            }
+        };
+
+        vm.focusSummary = false;
+        vm.updateSummary = 0;
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.length5Error = [{type: "required", displayAlias: "MSG_ERR_MAND"}, {
+            type: "minlength",
+            displayAlias: "MSG_LENGTH_MIN5"
+        }];
+        vm.length7Error = [{type: "required", displayAlias: "MSG_ERR_MAND"}, {
+            type: "minlength",
+            displayAlias: "MSG_LENGTH_7"
+        }];
 
         //TODO remove?
         vm.initUser = function (id) {
@@ -146,8 +170,8 @@
             }
         };
 
-        vm.isFrench=function(){
-            return(vm.lang!==ENGLISH);
+        vm.isFrench = function () {
+            return (vm.lang !== ENGLISH);
         };
 
         /**
@@ -166,7 +190,7 @@
         vm.saveJson = function () {
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), vm.rootTag);
-            vm.showAllErrors = true;
+            //vm.showAllErrors = true;
             _setComplete()
         };
 
@@ -179,22 +203,23 @@
          */
         vm.saveXML = function () {
 
-            if(vm.activityEnrolForm.$invalid) {
+            if (vm.activityEnrolForm.$invalid) {
                 vm.focusSummary++;
                 vm.updateErrorSummaryState();
                 vm.savePressed = true;
-            }else {
+            } else {
 
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
                 _setComplete();
                 vm.activityEnrolForm.$setPristine();
+                vm.savePressed = false;
             }
         };
 
 
         vm.showError = function (ctrl) {
-            if(!ctrl) return;
+            if (!ctrl) return;
             return (ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid);
         };
         //TODO remove?
@@ -205,7 +230,7 @@
 
         //TODO handled save pressed?
         vm.showErrors = function () {
-            return vm.showAllErrors;
+            return vm.savePressed;
         };
         vm.setThirdParty = function () {
             vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
@@ -238,8 +263,8 @@
             var draft_prefix = "DRAFTREPRA";
             var final_prefix = "HCREPRA";
             var filename = "";
-            var separator="-";
-            if (vm.userType ===INTERNAL_TYPE) { //TODO magic numbers
+            var separator = "-";
+            if (vm.userType === INTERNAL_TYPE) { //TODO magic numbers
 
                 filename = final_prefix;
             } else {
@@ -252,7 +277,7 @@
 
                 filename = filename + separator + vm.activityRoot.enrolmentVersion;
             }
-            filename=filename.replace(".",separator);
+            filename = filename.replace(".", separator);
             return filename.toLowerCase();
         }
 
@@ -262,7 +287,7 @@
         function _transformFile() {
             updateDate();
             if (!vm.isExtern()) {
-                if(!vm.activityEnrolForm.$pristine) {
+                if (!vm.activityEnrolForm.$pristine) {
                     vm.activityRoot.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.activityRoot.enrolmentVersion);
                     vm.activityRoot.applicationType = APPROVED_TYPE;
                     updateModelOnApproval(); //updates all the amend
@@ -298,18 +323,18 @@
             vm.updateValues++;
         }
 
-       /* $scope.$watch("main.activityEnrolForm.$valid", function () {
-            disableXMLSave()
-        }, true);
-*/
+        /* $scope.$watch("main.activityEnrolForm.$valid", function () {
+         disableXMLSave()
+         }, true);
+         */
         function disableXMLSave() {
 
-           // vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
+            // vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
         }
 
-        vm.disableJSONSave=function() {
+        vm.disableJSONSave = function () {
 
-            return(vm.activityRoot.applicationType == APPROVED_TYPE&& vm.isExtern());
+            return (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
 
         }
 
@@ -328,7 +353,7 @@
                 _setComplete();
                 vm.activityEnrolForm.$setDirty();
             }
-            vm.showAllErrors = true;
+            //vm.showAllErrors = true;
             //disableXMLSave();
             vm.setThirdParty();
             vm.updateActivityType();
@@ -401,17 +426,17 @@
          * Sets the ids and names for fields
          * @private
          */
-        function _setIdNames(){
+        function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.formId="activity_form"+scopeId;
-            vm.companyId="company_id"+scopeId;
-            vm.dossierId="dossier_id"+scopeId;
-            vm.activityLeadId="activity_lead"+scopeId;
-            vm.activityTypeId="activity_type"+scopeId;
-            vm.feeClassId="fee_class"+scopeId;
-            vm.reasonId="reason_file"+scopeId;
-            vm.thirdPartyId="is_solicited"+scopeId;
-            vm.isAdminSubId="is_admin_sub"+scopeId;
+            vm.formId = "activity_form" + scopeId;
+            vm.companyId = "company_id" + scopeId;
+            vm.dossierId = "dossier_id" + scopeId;
+            vm.activityLeadId = "activity_lead" + scopeId;
+            vm.activityTypeId = "activity_type" + scopeId;
+            vm.feeClassId = "fee_class" + scopeId;
+            vm.reasonId = "reason_file" + scopeId;
+            vm.thirdPartyId = "is_solicited" + scopeId;
+            vm.isAdminSubId = "is_admin_sub" + scopeId;
         }
 
     }

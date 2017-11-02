@@ -47,6 +47,8 @@
   "DIN_TRANSFER": "fr_I confirm that this Administrative Submission is a DIN transfer of ownership",
   "REGACTIVSEARCH":"fr_Select or search for Regulatory Activity Type",
   "SAVE_INSTRUCT": "fr_Activity File Save Instructions",
-  "RATIONALE_MISSING": "Veuillez sélectionner au moins une justification"
+  "RATIONALE_MISSING": "Veuillez sélectionner au moins une justification",
+  "NOTIF_MISSING":"fr_A least one type of Notifiable Change is required",
+  "CONTACTREC.CONTACTRECFORM":"fr_in the REP contact record"
 
 }

@@ -22,7 +22,7 @@
                     </div>
                     <div class="row">
                         <cmp-contact-details contact-record="contactRec.contactModel"
-                                             is-amend="contactRec.editState"
+                                             is-amend="contactRec.editState" update-error-summary="contactRec.updateErrorSummaryState()"
                                              on-update="contactRec.onUpdateContactRecord(contact)"
                                              show-errors="contactRec.showErrors()"></cmp-contact-details>
                     </div>

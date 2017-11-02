@@ -12,5 +12,6 @@
 "POSTAL_FORMAT": "Entrez un format valide.",
 "TYPE_MIN": "Doit être supérieur au minimum.",
 "TYPE_DATE":"Veuillez fournir une une date valide.",
-  "TYPE_NUMBER":"Veuillez fournir un numéro valide."
+  "TYPE_NUMBER":"Veuillez fournir un numéro valide.",
+  "TYPE_PATTERN": "fr_The format is not valid"
 }

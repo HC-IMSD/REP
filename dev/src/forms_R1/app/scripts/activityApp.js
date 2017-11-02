@@ -28,7 +28,12 @@
     'use strict';
     angular
         .module('activityApp')
-        .config(['$translateProvider','$httpProvider', function ($translateProvider,$httpProvider) {
+        .config(['$translateProvider','$httpProvider','$locationProvider', function ($translateProvider,$httpProvider,$locationProvider) {
+
+            $locationProvider.html5Mode(
+                {enabled : true,
+                    requireBase: false,
+                    rewriteLinks : false});
             $translateProvider.directivePriority(1);
             $translateProvider.preferredLanguage('@@prefLang');
            // $translateProvider.useLoader('customLoad');

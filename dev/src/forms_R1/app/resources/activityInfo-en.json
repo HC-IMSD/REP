@@ -11,7 +11,7 @@
   "CHANGE_FORM":"Change in formulation or method of manufacturing with clinical / bio data",
   "CHANGE_SUBSTANCE": "Change in drug substance / product (site, method, equipment, process control)",
   "OTHER_SPECIFY": "Other (please specify):",
-  "TYPE_VNC": "Type of Notifiable Chance (NC) or Veterinary Notifiable Change (VNC) submission",
+  "TYPE_VNC": "Type of Notifiable Change (NC) or Veterinary Notifiable Change (VNC) submission",
   "CHANGE_LABEL":"Change in text of labelling",
   "CHANGE_DRUGSUB":"Change in drug substance (source, synthesis)",
   "CHANGE_SPEC":"Change in specifications (medicinal or non-medicinal ingredient, pharmaceutical form, analytical method)",
@@ -46,6 +46,8 @@
   "DIN_TRANSFER": "I confirm that this Administrative Submission is a DIN transfer of ownership",
   "REGACTIVSEARCH":"Select or search for a Regulatory Activity Type",
   "SAVE_INSTRUCT": "Activity File Save Instructions",
-  "RATIONALE_MISSING": "Please select at least one rationale."
+  "RATIONALE_MISSING": "Please select at least one rationale.",
+  "NOTIF_MISSING":"A least one type of Notifiable Change is required",
+  "CONTACTREC.CONTACTRECFORM":"in the REP contact record"
 
 }

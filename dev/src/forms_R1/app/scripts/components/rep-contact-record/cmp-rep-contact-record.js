@@ -44,7 +44,6 @@
         vm.contactModel = {};
         vm.editState = true;
 
-        //vm.summaryName = "";
         vm.updateSummary = 0; //triggers and error summary update
         vm.setSummaryFocus = 0; //sets the summary focus
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}]
@@ -52,6 +51,7 @@
 
         vm.$onInit = function () {
             //after init do not initialise variables here onchanges is called first
+            _setIdNames();
             vm.updateErrorSummaryState();
             //vm.showSummary = false;
         };
@@ -168,8 +168,7 @@
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.repContactFormId = "repContactDetailsForm" + scopeId;
-
+            vm.repContactFormId = "rep_contact_form" + scopeId;
         }
 
         $scope.$watch('contactRec.contactRecForm.$error', function () {
