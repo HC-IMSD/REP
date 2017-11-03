@@ -49,6 +49,7 @@
   "SAVE_INSTRUCT": "fr_Activity File Save Instructions",
   "RATIONALE_MISSING": "Veuillez sélectionner au moins une justification",
   "NOTIF_MISSING":"fr_A least one type of Notifiable Change is required",
-  "CONTACTREC.CONTACTRECFORM":"fr_in the REP contact record"
+  "CONTACTREC.CONTACTRECFORM":"fr_in the REP contact record",
+  "REG_TRANSACT":"fr_Regulatory Activity Form"
 
 }

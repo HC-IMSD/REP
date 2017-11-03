@@ -48,6 +48,7 @@
   "SAVE_INSTRUCT": "Activity File Save Instructions",
   "RATIONALE_MISSING": "Please select at least one rationale.",
   "NOTIF_MISSING":"A least one type of Notifiable Change is required",
-  "CONTACTREC.CONTACTRECFORM":"in the REP contact record"
+  "CONTACTREC.CONTACTRECFORM":"in the REP contact record",
+  "REG_TRANSACT":"Regulatory Activity Form"
 
 }
