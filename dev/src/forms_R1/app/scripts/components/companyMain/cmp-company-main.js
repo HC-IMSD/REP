@@ -64,38 +64,25 @@
         vm.alerts = [false, false, false, false, false];
         vm.updateSummary=false;
         vm.showErrorSummary=false;
+        vm.savePressed=false; //used for focus
+        vm.focusSummary = 0; //messaging to set focus on the error summary
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
         vm.exclusions = {
-            "contactListCtrl.contactListForm": "true",
-            "addressListCtrl.addressListForm": "true"
+            "contactRec.contactRecForm": "true",
+            "addressRec.addressRecForm": "true"
         };
-        vm.alias={};
-       /* vm.alias = {
-            "roleMissing": {
-                "type": "fieldset",
-                "parent": "fs_roleMissing"
-            },
+        vm.alias={
+
             "contactRolesValid": {
-                "type": "button",
-                "parent": "",
+                "type": "element",
                 "target": "addContact"
             },
             "addressRolesValid": {
-                "type": "button",
-                "parent": "",
+                "type": "element",
                 "target": "addAddressBtn"
-            },
-            "phoneNumber": {
-                "type": "pattern",
-                "errorType": "MSG_ERR_PHONE_FORMAT"
-            },
-            "country": {
-                "type": "select2",
-                "name": "country"
             }
-        };*/
-
+        };
 
         vm.initUser = function (id) {
 
@@ -104,9 +91,12 @@
         vm.$onInit = function () {
             //add init code here
             //reset instructions
+            _setIdNames();
+
             vm.alerts = [false, false, false, false, false];
             vm.updateSummary=false;
             vm.showErrorSummary=false;
+            vm.savePressed=false;
         };
 
         vm.$onChanges = function (changes) {
@@ -144,11 +134,14 @@
             if(vm.companyEnrolForm.$invalid){
                 vm.showErrorSummary= true;
                 vm.updateErrorSummary();
+                vm.savePressed=true;
+                vm.focusSummary++;
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
                 vm.showErrorSummary=true;
                 vm.companyEnrolForm.$setPristine();
+                vm.savePressed=false;
             }
         };
 
@@ -342,5 +335,13 @@
             console.log($scope)
         }
 
+
+
+        function _setIdNames() {
+            var scopeId="_"+  $scope.$id;
+            vm.formId = "company_form" +scopeId;
+        }
+
     }
+
 })();

@@ -23,7 +23,8 @@
                 isAmend: '<',
                 companyService: '<',
                 showErrorSummary:'<',
-                errorSummaryUpdate:'<'
+                errorSummaryUpdate:'<',
+                updateErrorSummary:'&' //update the parent error summary
             },
             controller: addressListCtrl,
             controllerAs: 'addressListCtrl'
@@ -64,19 +65,6 @@
             }
         ];
 
-        vm.alias = {
-            "roleMissing": {
-                "type": "fieldset",
-                "parent": "fs_roleMissing"
-            },
-            "addressRolesValid": {
-                "type": "element",
-                "target": "addAddressBtn"
-            }
-        };
-        vm.exclusions = {
-            "addressRec.addressRecForm": "true"
-        };
 
 
         vm.$onInit = function () {

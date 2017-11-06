@@ -1,5 +1,5 @@
 <div>
-    <ng-form id="reg-company-form" name="main.companyEnrolForm"
+    <ng-form id="{{::main.formId}}" name="main.companyEnrolForm"
              novalidate="novalidate">
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
@@ -36,8 +36,8 @@
         <div id="master-error">
             <cmp-error-summary form-ref="main.companyEnrolForm" show-errors="main.showErrorSummary"
                                form-preamble="COMPANY_FORM" exclusion-list="main.exclusions"
-                               alias-list="main.alias"
-                               update-errors="main.updateSummary" make-focused="main.updateSummary"
+                               alias-list="main.alias" form-id="main.formId"
+                               update-errors="main.updateSummary" make-focused="main.focusSummary"
                                name-suffix="main.companyEnrolForm" set-heading-level="h2"></cmp-error-summary>
         </div>
         <div>
@@ -93,8 +93,10 @@
                                 <cmp-company-address-list addresses="main.company.addressList"
                                                           get-new-address="main.getNewAddress()"
                                                           is-amend="main.formAmendType"
+
                                                           error-summary-update="main.updateSummary"
                                                           show-error-summary="main.showErrorSummary"
+                                                          update-error-summary="main.updateErrorSummary()"
                                                           company-service="main.companyService"></cmp-company-address-list>
                             </div>
                         </section>
@@ -126,6 +128,7 @@
                                                           is-amend="main.formAmendType"
                                                           error-summary-update="main.updateSummary"
                                                           show-error-summary="main.showErrorSummary"
+                                                          update-error-summary="main.updateErrorSummary()"
                                                           company-service="main.companyService"></cmp-company-contact-list>
                             </div>
                         </section>

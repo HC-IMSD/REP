@@ -38,14 +38,16 @@
                 isRoleSelected: '&',
                 recordIndex: '<',
                 errorSummaryUpdate: '&', /* used to message that errorSummary needs updating */
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                updateErrorSummary:'&' //update the parent error summary
+
             }
         });
     addressRecCtrl.$inject = ['$scope', 'CANADA'];
 
     function addressRecCtrl($scope, CANADA) {
         var vm = this;
-        vm.savePressed = false;
+
         vm.isContact = false;
         vm.isEditable = true;
         vm.formAmend = false;
@@ -100,7 +102,6 @@
         vm.$onInit = function () {
             _setIdNames();
             vm.updateErrorSummaryState();
-            vm.showSummary=false;
         };
         //TODO move to service
         function _getRolesConcat() {
@@ -158,7 +159,6 @@
                 vm.setEditable();
             }
             if(changes.showErrorSummary){
-
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
             }
@@ -170,7 +170,7 @@
          */
         vm.delete = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
-            vm.errorSummaryUpdate();
+            vm.updateErrorSummary();;
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *
@@ -182,7 +182,6 @@
             vm.setEditable(); //case of amend
             vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
-            vm.savePressed = false;
             vm.errorSummaryUpdate();
         };
         //TODO obsolete?
@@ -218,6 +217,13 @@
             }
         }, true);
 
+        $scope.$watch('addressRec.addressRecForm.$error', function () {
+            vm.updateErrorSummaryState();
+            vm.updateErrorSummary();
+        }, true);
+
+
+
         /**
          * Updates the contact model used by the save button
          */
@@ -227,10 +233,10 @@
                 vm.isDetailValid({state: true});
                 vm.addressRecForm.$setPristine();
                 vm.onUpdate({rec: vm.addressModel});
-                vm.savePressed=false;
+                vm.showSummary=false;
                 vm.errorSummaryUpdate(); //updating parent
             } else {
-                vm.savePressed = true;
+                vm.showSummary = true;
                 vm.updateErrorSummaryState(); //updating current
                 vm.focusOnSummary()
             }
@@ -242,9 +248,8 @@
          * @returns {boolean}
          */
         vm.showErrors = function () {
-            return((vm.savePressed ||vm.showSummary));
+            return((vm.showSummary));
         };
-
 
 
         /**

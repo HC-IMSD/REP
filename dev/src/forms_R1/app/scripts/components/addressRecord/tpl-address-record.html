@@ -2,7 +2,7 @@
     <ng-form name="addressRec.addressRecForm" id="{{::addressRec.formNameId}}">
         <div>
 
-            <cmp-error-summary form-ref="addressRec.addressRecForm" show-errors="addressRec.showErrors()"
+            <cmp-error-summary form-ref="addressRec.addressRecForm" show-errors="addressRec.showSummary"
                                form-preamble="{{::'ADDR_DETAILS'|translate}}&nbsp;{{::addressRec.recordIndex+1}}"
                                name-suffix="addressRec.addressRecForm" set-heading-level="h4" form-id="company-address-record-form"
                                make-focused="addressRec.setSummaryFocus" alias-list="addressRec.alias"

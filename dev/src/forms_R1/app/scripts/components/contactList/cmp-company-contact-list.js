@@ -25,7 +25,8 @@
                 isAmend: '<',
                 companyService:'<',
                 showErrorSummary:'<',
-                errorSummaryUpdate:'<'
+                errorSummaryUpdate:'<',
+                updateErrorSummary:'&' //update the parent error summary
             }
         });
     contactListCtrl.$inject = ['$filter','CompanyService'];
@@ -38,7 +39,7 @@
         vm.formAmend = false;
         vm.resetCollapsed = false;//used to signal expanding table collapse
         vm.updateSummary=0; //sends signal to update error summary object
-        vm.showSummary=false; //flag to control error summary visibility
+      //  vm.showSummary=false; //flag to control error summary visibility
         vm.columnDef = [
             {
                 label: "FIRSTNAME",
@@ -64,17 +65,17 @@
 
 
         vm.alias = {
-            "roleMissing": {
+       /*     "roleMissing": {
                 "type": "fieldset",
                 "parent": "fs_roleMissing"
             },
             "contactRolesValid": {
                 "type": "element",
                 "target": "addContact"
-            }
+            }*/
         };
         vm.exclusions = {
-            "contactRec.contactRecForm": "true"
+           // "contactRec.contactRecForm": "true"
         };
 
 
@@ -103,7 +104,7 @@
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
-                vm.updateErrorSummaryState()
+                //vm.updateErrorSummaryState()
             }
         };
 
@@ -194,7 +195,7 @@
             //select table row first then make invalid
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
-            vm.showSummary=false;
+           // vm.showSummary=false;
         };
 
         /**

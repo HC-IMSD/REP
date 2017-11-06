@@ -29,7 +29,8 @@
                 isRoleSelected: '&', /* determines if a role has been selected in another record*/
                 recordIndex: '<', /* used to obtain record index, controlled by list */
                 errorSummaryUpdate: '&', /* used to message that a parent errorSummary needs updating */
-                showErrorSummary: '<'
+                showErrorSummary: '<',
+                updateErrorSummary:'&' //update the parent error summary
             }
         });
     contactRecCtrl.$inject = ['$scope'];
@@ -81,7 +82,6 @@
 
         vm.$onInit = function () {
             vm.updateErrorSummaryState();
-            vm.showSummary = false;
 
         };
         /**
@@ -145,7 +145,7 @@
          */
         vm.delete = function () {
             vm.onDelete({contactId: vm.contactModel.contactId});
-            vm.errorSummaryUpdate()
+            vm.updateErrorSummary();
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *
@@ -158,7 +158,6 @@
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state: vm.contactRecForm.$valid});
-            vm.savePressed = false;
             vm.errorSummaryUpdate();
         };
 
@@ -185,6 +184,11 @@
             }
         }, true);
 
+        $scope.$watch('contactRec.contactRecForm.$error', function () {
+            vm.updateErrorSummaryState();
+            vm.updateErrorSummary();
+        }, true);
+
         /**
          * Updates the contact model used by the save button
          */
@@ -195,10 +199,10 @@
                 vm.isDetailValid({state: true});
                 vm.contactRecForm.$setPristine();
                 vm.onUpdate({contact: vm.contactModel});
-                vm.savePressed = false;
+                vm.showSummary = false;
                 vm.errorSummaryUpdate(); //updating parent
             } else {
-                vm.savePressed = true;
+                vm.showSummary = true;
                 vm.errorSummaryUpdate(); //updating parent
                 vm.updateErrorSummaryState(); //updating current
                 vm.focusOnSummary();
@@ -220,7 +224,7 @@
          */
         vm.showErrors = function () {
 
-            return ((vm.savePressed || vm.showSummary));
+            return (( vm.showSummary));
         };
         /**
          * @ngdoc method used to determine if record should be editable. Used for amend button

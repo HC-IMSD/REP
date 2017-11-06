@@ -1,10 +1,10 @@
 <ng-form name="contactListCtrl.contactListForm">
     <div class="row">
-        <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="contactListCtrl.showSummary"
+       <!-- <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="contactListCtrl.showSummary"
                            name-suffix="contactListCtrl.contactListForm" alias-list="contactListCtrl.alias"
                            exclusion-list="contactListCtrl.exclusions"
                            update-errors="contactListCtrl.updateSummary" form-preamble="CONTACT_INFO"
-                           set-heading-level="h4"></cmp-error-summary>
+                           set-heading-level="h4"></cmp-error-summary>-->
     </div>
     <div>
         <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" ng-show="false"
@@ -29,6 +29,7 @@
                                 error-summary-update="contactListCtrl.updateErrorSummaryState()"
                                 is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                 show-error-summary="contactListCtrl.showSummary"
+                                update-error-summary="contactListCtrl.updateErrorSummary()"
                                 is-detail-valid="contactListCtrl.setValid(state)">
             </cmp-contact-record>
 
