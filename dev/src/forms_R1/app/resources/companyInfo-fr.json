@@ -4,5 +4,6 @@
   "ENROL_INSTRUCT": "fr_Company Regulatory Enrolment Instructions",
   "ADDRESS_INSTRUCT":"fr_Company Address Record Instructions",
   "REPRESENT_INSTRUCT":"fr_Company Representative Information",
-  "SAVE_INSTRUCT": "fr_Company File Save Instructions"
+  "SAVE_INSTRUCT": "fr_Company File Save Instructions",
+  "FIELDID": "fr_Company Id"
 }

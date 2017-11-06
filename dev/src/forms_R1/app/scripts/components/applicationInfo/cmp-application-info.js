@@ -25,9 +25,9 @@
             }
         });
 
-    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE'];
+    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
 
-    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE) {
+    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE, $scope) {
         var vm = this;
         vm.applTypes = [NEW_TYPE, AMEND_TYPE, APPROVED_TYPE];
         vm.formType = EXTERNAL_TYPE;
@@ -49,6 +49,7 @@
 
         vm.$onInit = function () {
             ///do init
+            _setIdNames();
         };
         vm.$onChanges = function (changes) {
             if (changes.userType) {
@@ -103,6 +104,12 @@
             //TODO hardcode should be service
             vm.setType({type: AMEND_TYPE});
         }
+
+        function _setIdNames() {
+            var scopeId="_"+  $scope.$id;
+            vm.fieldId = "fieldId" +scopeId;
+        }
+
 
     }
 })();
