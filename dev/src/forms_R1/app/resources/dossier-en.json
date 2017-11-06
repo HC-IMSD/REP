@@ -55,5 +55,6 @@
   "SAVE_INSTRUCT":"Dossier File Save Instructions",
   "REFPRODCTRL.PRODUCTDETAILSFORM":"in the Canadian Reference Product Record",
   "CONTACTREC.CONTACTRECFORM":"in the REP contact record",
-  "DOSSIER":"Dossier"
+  "DOSSIER":"Dossier",
+  "FIELDID":"Dossier Id"
 }
