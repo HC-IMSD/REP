@@ -19,9 +19,10 @@
             controller: transactionFeesController,
             controllerAs: 'transFeeCtrl',
             bindings: {
-                showErrors: '&',
                 feeRecord: '<',
-                language:'<'
+                language:'<',
+                showErrorSummary: '<',
+                updateErrorSummary:'&'
             }
         });
 
@@ -56,11 +57,14 @@
         vm.$onChanges = function (changes) {
 
             if(changes.language){
-                console.log("Changes to lnang"+changes.language.currentValue);
                 vm.lang=changes.language.currentValue;
             }
             if (changes.feeRecord) {
                 vm.model = changes.feeRecord.currentValue;
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+
             }
 
         };
@@ -69,7 +73,7 @@
 
             if (!ctrl) return false;
 
-            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
+            if ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid )) {
                 return true
             }
         };
@@ -219,13 +223,14 @@
             vm.descriptId = "fee_description" + scopeId;
             vm.feeId = "fee_amount" + scopeId;
             vm.remitId = "fee_remission" + scopeId;
-            vm.paymentSelectedId = "payment_selected" + scopeId;
+            vm.paymentSelectedId = "one_payment_method" + scopeId;
             vm.revenueId = "grossRevenue" + scopeId;
             vm.percentId = "calcPercent" + scopeId;
             vm.deferralStateId = "deferralState" + scopeId; //statement supporting deferral
-            vm.statement10Id = "statementSalse" + scopeId;
+            vm.statement10Id = "required_doc" + scopeId;
             vm.otherId = "other" + scopeId;
-            vm.otherDetailsId = "otherDetails" + scopeId;
+            vm.otherDetailsId = "other_doc_details" + scopeId;
+            vm.paymentFsId="fs_payment_methods" + scopeId;
 
         };
         /**

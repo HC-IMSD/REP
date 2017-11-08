@@ -252,7 +252,10 @@
                             </section>
                         </cmp-alert>
                     </div>
-                    <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails" language="transInfoCtrl.lang"></cmp-transaction-fees>
+                    <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"
+                                          show-error-summary="transInfoCtrl.showSummary"
+                                          update-error-summary="transInfoCtrl.updateErrorSummary()"
+                                          language="transInfoCtrl.lang"></cmp-transaction-fees>
                 </div>
             </section>
         </div>
@@ -348,6 +351,6 @@
                 </div>
             </section>
         </div>
-          <!-- <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
+         <!--  <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
     </ng-form>
 </div>

@@ -15,7 +15,7 @@
                 'ui.select',
                 'addressModule',
                 'contactModule',
-                'transactionFeesModule'
+                'transactionFeesModule',
                 'alertModule',
                 'errorMessageModule'
             ])
@@ -38,7 +38,6 @@
                 transactionRoot: '<',
                 //onUpdate: '&',
                 isAmend: '<',
-                showErrorSummary: '<',
                 getTransaction: '&',
                 setStartingSequence:'&',
                 getRepContact: '&',
@@ -48,6 +47,7 @@
                 language:'<',
                 sequenceUpdated:'<',
                 getCurrentSequence:'&',
+                showErrorSummary: '<',
                 updateErrorSummary:'&'
             }
         });
@@ -261,7 +261,7 @@
             vm.solicitedOtherId="solicited_rq_other"+scopeId;
             vm.companyNameId="company_noabbrev"+scopeId;
             vm.contactSameId="contact_same"+scopeId;
-            vm.isFeesId="isFees"+scopeId;
+            vm.isFeesId="is_fee_transaction"+scopeId;
         };
 
 

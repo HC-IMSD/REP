@@ -61,6 +61,10 @@
             "oneLifeRec": {
                 "type": "element",
                 "target": "addTransactionRec"
+            },
+            "one_payment_method": {
+                "type": "fieldset",
+                "parent": "fs_payment_methods"
             }
 
         };
