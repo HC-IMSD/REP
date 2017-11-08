@@ -38,7 +38,7 @@
             <div class="btn-group-sm col-md-12 text-right">
                 <button class="btn btn-primary"
                         ng-click="lifeListCtrl.addTransaction()" name="lifeListCtrl.lifecycleListForm.addRec"
-                        id="addTransactionRec_{{$id}}"
+                        id="addTransactionRec_{{::$id}}"
                         ng-disabled="lifeListCtrl.isAddDisabled()">{{'ADD_TRANSACTION'|translate}}
                 </button>
                 <input type="submit" value="Cancel" class="btn btn-default"

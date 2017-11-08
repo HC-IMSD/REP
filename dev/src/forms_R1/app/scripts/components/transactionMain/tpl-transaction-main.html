@@ -4,7 +4,8 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
+                            class="btn-xs rep-help-button"
                             id="startdate-picker-toggle" ng-click="main.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
@@ -43,6 +44,7 @@
                                   deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
                                   reset-ectd="main.transactionService.resetEctdSection()" language="main.lang"
                                   get-transaction="main.transactionService.getNewTransaction(main.transaction.isEctd==='Y')"
+                                  get-rep-contact="main.transactionService.getNewRepContact()"
                                   set-starting-sequence="main.setSequenceNumber(startVal)"
                                   sequence-updated="main.sequenceUpdated" update-error-summary="main.updateErrorSummaryState()"
                                   get-current-sequence="main.transactionService.getCurrentSequence()"
@@ -66,17 +68,19 @@
             <div class="row">
                 <div class="col-md-10">
 
-                    <cmp-alert  ui-state="main.alerts[1]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(1)" type="alert-info">
-                        <section aria-live="assertive">
-                            <div ng-if="!main.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
-                            </div>
-                            <div ng-if="main.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
-                            </div>
-                        </section>
-                    </cmp-alert>
-                </div>
+                <cmp-alert ui-state="main.alerts[1]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(1)"
+                           type="alert-info">
+                    <section aria-live="assertive">
+                        <div ng-if="!main.isFrench()"
+                             ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
+                        </div>
+                        <div ng-if="main.isFrench()"
+                             ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
+                        </div>
+                    </section>
+                </cmp-alert>
             </div>
+        </div>
     </ng-form>
+    <!--<pre>{{main.transaction|json}}</pre>-->
 </div>

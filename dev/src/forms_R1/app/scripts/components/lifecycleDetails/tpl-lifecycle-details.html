@@ -11,9 +11,9 @@
                     <legend>{{::'LIFE_REC' | translate}}&nbsp;</legend>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label for="sequenceNumber_{{$id}}">
+                            <label for="sequenceNumber_{{::$id}}">
                                 <span class="field-name">{{"SEQUENCE_NUM" |translate}}</span>
-                                <input type="text" id="sequenceNumber_{{$id}}" name="sequenceNumber"
+                                <input type="text" id="sequenceNumber_{{$::id}}" name="sequenceNumber_{{$::id}}"
                                        ng-model="lifecycleCtrl.lifecycleModel.sequence"
                                        class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
                             </label>
@@ -163,8 +163,8 @@
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId].$invalid}"
                              ng-show="lifecycleCtrl.yearVisible">
                             <label for="{{::lifecycleCtrl.yearId}}" class="required">
-                                <span class="field-name">{{"YEAR_CHANGE" |translate}}</span>
-                                <strong class="required">{{"REQUIRED" |translate}}</strong>
+                                <span class="field-name">{{::"YEAR_CHANGE" |translate}}</span>
+                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                 <select name="{{::lifecycleCtrl.yearId}}" id="{{::lifecycleCtrl.yearId}}" ng-model="lifecycleCtrl.lifecycleModel.year"
                                         class="form-control" ng-required="lifecycleCtrl.yearVisible"
                                         ng-change="lifecycleCtrl.setConcatDetails()"
@@ -202,10 +202,10 @@
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.version.$invalid}"
                              ng-if="lifecycleCtrl.versionVisible">
-                            <label for="version_{{$id}}" class="required">
+                            <label for="version_{{::$id}}" class="required">
                                 <span class="field-name">{{::"VERSION_NO" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <input type="text" id="version_{{$id}}" name="version"
+                                <input type="text" id="version_{{::$id}}" name="version"
                                        ng-model="lifecycleCtrl.lifecycleModel.sequenceVersion"
                                        ng-change="lifecycleCtrl.setConcatDetails()"
                                        ng-required="lifecycleCtrl.versionVisible" class="form-control"/>

@@ -18,6 +18,7 @@
                 var deferred = $q.defer();
                 var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
                 var raTypeUrl=RELATIVE_FOLDER_DATA + "raType.json";
+                var feeUrl=RELATIVE_FOLDER_DATA + "feeClass.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {
@@ -36,9 +37,17 @@
                         var translateList = _createTranslateList(newList, options.key);
                         TransactionLists.createRaTypes(newList);
                         angular.extend(resultTranslateList, translateList);
-                        //return response.data;
+                      return $http.get(feeUrl);
+                    })
+                    .then(function (response) {
+                        //PROCESS fee url list data
+                        var newList = _createSortedArray(response.data, options.key);
+                        TransactionLists.createFeeTypes(newList);
+                       // angular.extend(resultTranslateList, translateList);
                         return response.data;
                     })
+
+
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
                         console.warn("An error occurred with transaction List Load: " + error.status);
@@ -49,6 +58,7 @@
                     });
                 return deferred.promise;
             };
+
 
             /**
              * Creates the list of key value pairs for the translate service. Converts the complex json
@@ -104,7 +114,7 @@
                     else {
                         result.push(sortedObject);
                     }
-                    ;
+
                 });
                 if (usaRecord) result.unshift(usaRecord);
                 if (canadaRecord) result.unshift(canadaRecord);

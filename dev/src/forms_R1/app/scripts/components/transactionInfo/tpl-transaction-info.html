@@ -3,7 +3,8 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
+                            class="btn-xs rep-help-button"
                             id="startdate-picker-toggle" ng-click="transInfoCtrl.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
@@ -182,33 +183,85 @@
 
                     </div>
                 </div>
-                <div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="projectManager1" class="full-width">
-                                <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
-                            </label>
-                            <textarea id="projectManager1" name="projectManager1"
-                                      ng-model="transInfoCtrl.transactionModel.projectManager1"
-                                      class="form-control full-width" maxlength="256" rows="2"></textarea>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="projectManager2" class="full-width">
-                                <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
-                            </label>
-                            <textarea id="projectManager2" name="projectManager2"
-                                      ng-model="transInfoCtrl.transactionModel.projectManager2"
-                                      class="form-control full-width" maxlength="256" rows="2"></textarea>
-                        </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="projectManager1" class="full-width">
+                            <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
+                        </label>
+                        <textarea id="projectManager1" name="projectManager1"
+                                  ng-model="transInfoCtrl.transactionModel.projectManager1"
+                                  class="form-control full-width" maxlength="256" rows="2"></textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="projectManager2" class="full-width">
+                            <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
+                        </label>
+                        <textarea id="projectManager2" name="projectManager2"
+                                  ng-model="transInfoCtrl.transactionModel.projectManager2"
+                                  class="form-control full-width" maxlength="256" rows="2"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xs-8 form-group"
+                         ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
+                        <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
+                            <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <select class="form-control" id="{{::transInfoCtrl.isFeesId}}"
+                                    ng-change="transInfoCtrl.updateFeeState()"
+                                    name="{{::transInfoCtrl.isFeesId}}" required
+                                    ng-model="transInfoCtrl.transactionModel.isFees"
+                                    ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
+                            </select>
+                           <strong id="isfee-error" class="error"
+                                     ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId])">
+                                             <span class="label label-danger"
+                                                   ng-messages="transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$error">
+                                                 <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                             </span>
+                             </strong>
+                        </label>
                     </div>
                 </div>
             </div>
         </section>
+        <div ng-if="transInfoCtrl.isFeesIndicated()">
+            <section class="panel  panel-primary">
+                <header class="panel-heading clearfix">
+                    <div class="btn-group pull-right">
+                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
+                                class="btn-xs rep-help-button"
+                                id="fee-toggle" ng-click="transInfoCtrl.addInstruct(1)"><span
+                                class="fa fa-question-circle fa-2x"></span>
+                        </button>
+                    </div>
+                    <h2 class="panel-title">{{::'REGULATORY_FEES' |translate}}</h2>
+                </header>
+                <div class="panel-body">
+                    <div>
+                        <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="FEE_INSTRUCT"
+                                   update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
+                            <section aria-live="assertive">
+                                <div ng-if="!transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
+                                </div>
+                                <div ng-if="transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
+                                </div>
+                            </section>
+                        </cmp-alert>
+                    </div>
+                    <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails" language="transInfoCtrl.lang"></cmp-transaction-fees>
+                </div>
+            </section>
+        </div>
         <div>
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
+                                class="btn-xs rep-help-button"
                                 id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct(1)"><span
                                 class="fa fa-question-circle fa-2x"></span>
                         </button>
@@ -217,7 +270,8 @@
                 </header>
                 <div class="panel-body">
                     <div>
-                        <cmp-alert  ui-state="transInfoCtrl.alerts[1]" msg="REG_ACTIVITY_INSTRUCT" update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
+                        <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="REG_ACTIVITY_INSTRUCT"
+                                   update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">

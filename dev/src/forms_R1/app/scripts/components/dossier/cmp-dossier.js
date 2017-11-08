@@ -259,8 +259,8 @@
          * Used to show all the fields in an error state. Can be activated by a parent component
          * @returns {boolean}
          */
-        vm.showErrors = function () {
-            return (vm.showSummary);
+        self.showErrors = function () {
+            return (self.showAllErrors);
         };
         /**
          * For individual controls, whether to show the error for a fiedl

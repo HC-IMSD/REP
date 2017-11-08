@@ -24,6 +24,7 @@
     function getTransactionSeq($http, $q) {
         var vm = this;
         vm.raTypeArray = [];
+        vm.feeTypeArray = [];
         vm.allActivities = {
             ADMINISTRATIVE: "ADMINISTRATIVE", //administrative
             BENEFIT_RISK_ASSESS: "BENEFIT_RISK_ASSESS", //benefit risk assessment
@@ -100,7 +101,7 @@
             getEundsType: getEUNDSArray,
             getEusndsType: getEUSNDSArray,
             getLevel3Type: getLevel3Array,
-            getMPDINType:getMPDINArray,
+            getMPDINType: getMPDINArray,
             getNcType: getNCArray,
             getNdsType: getNDSArray,
             getPdcType: getPDCArray,
@@ -124,7 +125,9 @@
             getPBRERPVType: _getPBRERPVArray,
             getPRNDSType: _getPRNDSArray,
             getPRSNDSType: _getPRSNDSArray,
-            getYesNoList: yesNoArray
+            getYesNoList: yesNoArray,
+            getFeeList: _getfeeTypeArray,
+            createFeeTypes: _createFeeArray
         };
         return service;
 
@@ -144,6 +147,9 @@
             vm.raTypeArray = value;
         }
 
+        function _createFeeArray(value) {
+            vm.feeTypeArray = value;
+        }
 
         //returns a list of all the unique description values
         function getTransactionDescriptionsArray() {
@@ -154,6 +160,12 @@
 
             return (vm.raTypeArray);
         }
+
+        function _getfeeTypeArray() {
+
+            return (vm.feeTypeArray);
+        }
+
 
         function getPresubArray() {
             return ([
@@ -832,6 +844,7 @@
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG
             ]);
         }
+
         function getDINBArray() {
             return ([
                 vm.allActivities.ADMINISTRATIVE,
@@ -864,6 +877,7 @@
                 vm.allActivities.YEAR_LIST_OF_CHANGE
             ]);
         }
+
         function getDINDArray() {
             return ([
                 vm.allActivities.ADMINISTRATIVE,
@@ -923,6 +937,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE
             ]);
         }
+
         function getPDCArray() {
             return ([
                 vm.allActivities.CANCEL_LETTER,
@@ -941,6 +956,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE
             ]);
         }
+
         function getPDCBArray() {
             return ([
                 vm.allActivities.CANCEL_LETTER,
@@ -960,8 +976,6 @@
                 vm.allActivities.PHONE_RQ_RESPONSE
             ]);
         }
-
-
 
 
     }

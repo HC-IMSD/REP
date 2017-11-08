@@ -56,6 +56,9 @@
 	</hpfb:element>
 	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
 	<hpfb:element name="regulatory_project_manager2" type="char_0_256_content"/>
+	<hpfb:element name="is_fees" type="required_yes_no_content"/>
+	<hpfb:element name="fee_details" type="fee_details_content"/>
+	
 	<hpfb:element name="is_activity_changes" type="char_0_256_content"/>
 	<!--<hpfb:element name="same_regulatory_company" type="required_yes_no_content"/>-->
 	<hpfb:element name="company_name" type="char_0_80_content"/>
@@ -67,6 +70,36 @@
 	<hpfb:element name="rep_submission_contact" type="contact_content"/>
 	<hpfb:element name="rep_submission_contact_record" type="rep_submission_contact_record_content"/>
 
+	<hpfb:element name="id" type="char_0_80_content"/>
+	<hpfb:element name="en" type="char_0_256_content"/>
+	<hpfb:element name="fr" type="char_0_256_content"/>
+	<hpfb:element name="description_en" type="char_0_256_content"/>
+	<hpfb:element name="description_fr" type="char_0_256_content"/>
+	<hpfb:element name="fee" type="hpfb:decimal" />
+
+	<hpfb:element name="deferral_statement" type="required_yes_no_content"/>
+	<hpfb:element name="remission_certified" type="required_yes_no_content"/>
+	<hpfb:element name="sales_history" type="required_yes_no_content"/>
+	<hpfb:element name="avg_sale_price" type="required_yes_no_content"/>
+	<hpfb:element name="est_market_share" type="required_yes_no_content"/>
+	<hpfb:element name="comparison_products" type="required_yes_no_content"/>
+	<hpfb:element name="market_plan" type="required_yes_no_content"/>
+	<hpfb:element name="other" type="required_yes_no_content"/>
+	<hpfb:element name="other_details" type="char_0_100_content"/>
+	<hpfb:element name="credit_card" type="required_yes_no_content"/>
+	<hpfb:element name="cheque" type="required_yes_no_content"/>
+	<hpfb:element name="money_order" type="required_yes_no_content"/>
+	<hpfb:element name="bank_draft" type="required_yes_no_content"/>
+	<hpfb:element name="existing_credit" type="required_yes_no_content"/>
+	<hpfb:element name="bank_wire" type="required_yes_no_content"/>
+	<hpfb:element name="bill_payment" type="required_yes_no_content"/>
+	<hpfb:element name="deferral_request" type="required_yes_no_content"/>
+	<hpfb:element name="fee_remission" type="yes_no_content"/>
+	<hpfb:element name="gross_revenue" type="hpfb:decimal" />
+	<hpfb:element name="percent_gross" type="hpfb:decimal"/>
+	<hpfb:element name="submission_class" type="submission_class_content"/>
+	<hpfb:element name="required_docs" type="required_docs_content"/>
+	<hpfb:element name="payment_method" type="payment_method_content"/>	
 
 	<hpfb:complexType name="transaction_enrol_content">
 		<hpfb:sequence>
@@ -80,6 +113,8 @@
 			<hpfb:element ref="solicited_requester"/>
 			<hpfb:element ref="regulatory_project_manager1"/>
 			<hpfb:element ref="regulatory_project_manager2"/>
+			<hpfb:element ref="is_fees"/>
+			<hpfb:element ref="fee_details" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="is_activity_changes"/>
 			<!--<hpfb:element ref="same_regulatory_company"/>-->
 			<hpfb:element ref="company_name"/>
@@ -122,4 +157,59 @@
 			<hpfb:element ref="rep_submission_contact"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
+	<hpfb:complexType name="fee_details_content">
+		<hpfb:sequence>
+			<hpfb:element ref="submission_class"/>
+			<hpfb:element ref="deferral_request"/>
+			<hpfb:element ref="fee_remission"/>
+			<hpfb:element ref="gross_revenue"/>
+			<hpfb:element ref="percent_gross"/>
+			<hpfb:element ref="required_docs"/>
+			<hpfb:element ref="payment_method"/>
+			
+		</hpfb:sequence>
+	</hpfb:complexType>
+	
+	
+	<hpfb:complexType name="submission_class_content">
+		<hpfb:sequence>
+			<hpfb:element ref="id"/>
+			<hpfb:element ref="en"/>
+			<hpfb:element ref="fr"/>
+			<hpfb:element ref="description_en"/>
+			<hpfb:element ref="description_fr"/>
+			<hpfb:element ref="fee"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="required_docs_content">
+		<hpfb:sequence>
+			<hpfb:element ref="deferral_statement"/>
+			<hpfb:element ref="remission_certified"/>
+			<hpfb:element ref="sales_history"/>
+			<hpfb:element ref="avg_sale_price"/>
+			<hpfb:element ref="est_market_share"/>
+			<hpfb:element ref="comparison_products"/>
+			<hpfb:element ref="market_plan"/>
+			<hpfb:element ref="other"/>
+			<hpfb:element ref="other_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="payment_method_content">
+		<hpfb:sequence>
+			<hpfb:element ref="credit_card"/>
+			<hpfb:element ref="cheque"/>
+			<hpfb:element ref="money_order"/>
+			<hpfb:element ref="bank_draft"/>
+			<hpfb:element ref="existing_credit"/>
+			<hpfb:element ref="bank_wire"/>
+			<hpfb:element ref="bill_payment"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+
+
 </hpfb:schema>

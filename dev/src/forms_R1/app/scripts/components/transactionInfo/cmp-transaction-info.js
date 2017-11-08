@@ -15,6 +15,7 @@
                 'ui.select',
                 'addressModule',
                 'contactModule',
+                'transactionFeesModule'
                 'alertModule',
                 'errorMessageModule'
             ])
@@ -41,6 +42,7 @@
                 getTransaction: '&',
                 setStartingSequence:'&',
                 getRepContact: '&',
+                getFee:'&',
                 resetEctd: '&',
                 deprecateSequence: '&',
                 language:'<',
@@ -77,7 +79,7 @@
         ];
         vm.showSummary=false;
         vm.$onInit = function () {
-            _setIdNames()
+            _setIdNames();
             loadContactData(); //asynch load of contact data
             vm.updateEctdState();
             vm.setSolicitedState();
@@ -102,6 +104,10 @@
             }
 
         };
+
+        vm.isFeesIndicated=function() {
+            return vm.transactionModel.isFees === YES;
+        }
 
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
@@ -150,6 +156,16 @@
             } else {
                 vm.isEctd = false;
             }
+        };
+        vm.updateFeeState=function(){
+          if(vm.transactionModel.isFees===YES){
+              vm.transactionModel.feeDetails=vm.getFee();
+
+          }else{
+              //clear out all the fee details
+              vm.transactionModel.feeDetails=null;
+          }
+
         };
         function isEctdValue() {
             return vm.transactionModel.isEctd === YES;
@@ -245,6 +261,7 @@
             vm.solicitedOtherId="solicited_rq_other"+scopeId;
             vm.companyNameId="company_noabbrev"+scopeId;
             vm.contactSameId="contact_same"+scopeId;
+            vm.isFeesId="isFees"+scopeId;
         };
 
 

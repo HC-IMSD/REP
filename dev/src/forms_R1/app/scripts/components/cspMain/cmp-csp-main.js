@@ -39,8 +39,8 @@
             }
         });
 
-    cspMainCtrl.$inject = ['CspService', 'hpfbFileProcessing', 'ApplicationInfoService', 'INTERNAL_TYPE', 'EXTERNAL_TYPE','$translate','FRENCH','$scope'];
-    function cspMainCtrl(CspService, hpfbFileProcessing, ApplicationInfoService, INTERNAL_TYPE, EXTERNAL_TYPE,$translate,FRENCH,$scope) {
+    cspMainCtrl.$inject = ['CspService', 'hpfbFileProcessing', 'ApplicationInfoService', 'INTERNAL_TYPE', 'EXTERNAL_TYPE','$translate','FRENCH','CSP_XSL','$scope'];
+    function cspMainCtrl(CspService, hpfbFileProcessing, ApplicationInfoService, INTERNAL_TYPE, EXTERNAL_TYPE,$translate,FRENCH,CSP_XSL, $scope) {
 
         var vm = this;
         vm.userType = EXTERNAL_TYPE;
@@ -185,7 +185,7 @@
 
                 var writeResult = _transformFile();
 
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,CSP_XSL);
                 vm.cspForm.$setPristine();
                 vm.showErrorSummary = false;
             }
