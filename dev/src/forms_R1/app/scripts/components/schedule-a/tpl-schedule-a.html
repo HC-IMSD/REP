@@ -1,6 +1,6 @@
 <ng-form name="schedACtrl.schedAForm">
     <uib-accordion close-others="false">
-        <div uib-accordion-group heading="{{'SCHEDA_DETAILS' |translate}}"
+        <div uib-accordion-group heading="{{::'SCHEDA_DETAILS' |translate}}"
              is-open="schedACtrl.expanderOpenState" is-disabled="schedACtrl.schedAForm.$invalid"
              template-url="./app/lib/uib-templates/tpl-accordian-group-caret.html">
             <div>
@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-xs-12 form-group">
                                 <label for="{{::schedACtrl.dinId}}">
-                                    <span class="field-name">{{'DIN_FULL'|translate}}</span>
+                                    <span class="field-name">{{::'DIN_FULL'|translate}}</span>
                                     <input type="text" class="form-control" id="{{::schedACtrl.dinId}}" name="{{::schedACtrl.dinId}}"
                                            maxlength="8" size="8" only-digits ng-minlength="8"
                                            ng-model="schedACtrl.model.drugIdNumber"/>
@@ -25,8 +25,8 @@
                             <div class="col-xs-12 form-group">
                                 <fieldset id="{{::schedACtrl.fsId}}">
                                     <legend class="required">
-                                        <span class=" field-name">{{'SCHEDA_DISEASE'|translate}}</span>
-                                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
+                                        <span class=" field-name">{{::'SCHEDA_DISEASE'|translate}}</span>
+                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <span>
                  <input type="hidden" class="form-control" id="{{::schedACtrl.oneSchedId}}" name="{{::schedACtrl.oneSchedId}}"
                         ng-model="schedACtrl.isClaim" aria-hidden="true" required/>
@@ -328,7 +328,7 @@
                             <div class="col-xs-12 form-group"
                                  ng-class="{'has-error':schedACtrl.schedAForm[schedACtrl.schedIndId].$invalid}">
                                 <label for="{{::schedACtrl.schedIndId}}" class="required">
-                                    <span class="field-name">{{'SCHEDA_CLAIMS'|translate}}</span>
+                                    <span class="field-name">{{::'SCHEDA_CLAIMS'|translate}}</span>
                                     <cmp-error-message field-name="schedACtrl.schedIndId"
                                                        form-ref="schedACtrl.schedAForm"
                                                        show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.schedIndId])"

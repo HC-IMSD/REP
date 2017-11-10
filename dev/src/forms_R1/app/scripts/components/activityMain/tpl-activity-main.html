@@ -8,7 +8,7 @@
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{'LOAD_ACTIVITY'|translate}}</h2>
+                <h2 class="panel-title">{{::'LOAD_ACTIVITY'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div>
@@ -40,7 +40,7 @@
                                 class="fa fa-question-circle fa-2x"></span>
                         </button>
                     </div>
-                    <h2 class="panel-title">{{'ACTIVE_ENROL' |translate}}</h2>
+                    <h2 class="panel-title">{{::'ACTIVE_ENROL' |translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <div>
@@ -235,7 +235,7 @@
                     </div>
                     <div class="row">
                         <div ng-show="main.thirdPartyState" class="alert alert-info" role="alert" aria-live="polite">
-                            {{::'AUT_LETTER'|translate}}
+                           <p> {{::'AUT_LETTER'|translate}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -285,7 +285,7 @@
                                     class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}"</span>
                             </button>
                         </div>
-                        <h2 class="panel-title">{{'REP_CONTACT_INFO'|translate}}</h2>
+                        <h2 class="panel-title">{{::'REP_CONTACT_INFO'|translate}}</h2>
                     </header>
                     <div class="panel-body">
                         <div>
@@ -317,7 +317,7 @@
                 <div class="form-group col-md-3">
                     <button class="btn btn-default btn-lg active" ng-click="main.saveJson()"
                             ng-disabled="main.disableJSONSave()">
-                        {{'SAVE_WORK'|translate}}
+                        {{::'SAVE_WORK'|translate}}
                     </button>
                 </div>
                 <div class="form-group col-md-3">

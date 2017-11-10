@@ -13,7 +13,7 @@
                                    on-select="roaRecCtrl.roaChanged($item, $model)" ng-model-options="{ debounce: '0'}"
                                    class="rep-selectize-dropdown rep-selectize-font"
                                    title="{{'SELECT_ROA'|translate}}" required>
-                            <ui-select-match placeholder="{{'SELECT_ROA'|translate}}"
+                            <ui-select-match placeholder="{{::'SELECT_ROA'|translate}}"
                                              name="roaMatch" class="rep-selectize-font rep-selectize-dropdown">
                                 {{$select.selected[roaRecCtrl.lang]}}
                             </ui-select-match>
@@ -32,8 +32,8 @@
                 <div class="col-md-5" ng-if="roaRecCtrl.isRoaOther()"
                      ng-class="{'has-error':roaRecCtrl.roaRecForm.otherRoa.$invalid}">
                     <label for="{{::roaRecCtrl.unknownRoaId}}" class="required">
-                        <span class="field-name">{{'OTHER_ROA_DETAILS'|translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <span class="field-name">{{::'OTHER_ROA_DETAILS'|translate}}</span>
+                        <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         <input type="text" id="{{::roaRecCtrl.unknownRoaId}}" class="form-control"
                                name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40"
                                ng-model="roaRecCtrl.model.otherRoaDetails" required/>
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class=" col-sm-3">
                     <button ng-click="roaRecCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm" name="roaDelete">
-                        {{'DELETE'|translate}}&nbsp;{{'ROA_ABREV'|translate}}
+                        {{::'DELETE'|translate}}&nbsp;{{::'ROA_ABREV'|translate}}
                     </button>
                 </div>
             </div>
