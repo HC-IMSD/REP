@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('dossierIdDetails', [])
+        .module('dossierIdDetails', [  'errorMessageModule'])
 })();
 
 (function () {
@@ -28,14 +28,22 @@
                 setReadonly: '&'
             }
         });
-    //dossierIdDetailsCtrl.$inject = [];
+    dossierIdDetailsCtrl.$inject = ['$scope'];
 
-    function  dossierIdDetailsCtrl() {
+    function  dossierIdDetailsCtrl($scope) {
         var vm = this;
         vm.record={dossierId:""};
         vm.detailsIndex=0;
         vm.isEditable=true;
+
+        vm.min7Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_7NUM"}
+        ];
+
         vm.$onInit = function () {
+            _setIdNames();
+
         };
 
         /**
@@ -60,10 +68,19 @@
             if(!ctrl) return false;
 
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )){
-              console.log("error")
                 return true
             }
             return false
         }
+
+
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.dossierId="dossier_id" + scopeId;
+
+        }
+
+
+
     }
 })();

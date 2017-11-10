@@ -4,22 +4,19 @@
     </div>
     <div class="row">
         <div class="form-group col-md-5"
-             ng-class="{'has-error':impProdCtrl.importProdForm.productTypes.$invalid}">
-            <label for="productTypes_{{::$id}}" class="required">
+             ng-class="{'has-error':impProdCtrl.importProdForm[impProdCtrl.prodTypesId].$invalid}">
+            <label for="{{::impProdCtrl.prodTypesId}}" class="required">
                 <span class="field-name">{{::'PRODUCT_TYPES'|translate}}</span>
                 <strong class="required">{{::"REQUIRED" |translate}}</strong></label>
-            <select id="productTypes_{{::$id}}" ng-model="impProdCtrl.model.selectedProducts"
-                    class="form-control" name="productTypes" required ng-disabled="!impProdCtrl.isEditable"
+            <select id="{{::impProdCtrl.prodTypesId}}" ng-model="impProdCtrl.model.selectedProducts"
+                    class="form-control" name="{{::impProdCtrl.prodTypesId}}" required ng-disabled="!impProdCtrl.isEditable"
                     ng-change="impProdCtrl.productTypeChanged()"
                     ng-options="rec |translate for rec in  impProdCtrl.productTypeList">
             </select>
-            <strong id="dossierTypes-error" class="error"
-                    ng-if="impProdCtrl.showError(impProdCtrl.importProdForm.productTypes)">
-                        <span class="label label-danger"
-                              ng-messages="impProdCtrl.importProdForm.productTypes.$error">
-                            <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                        </span>
-            </strong>
+            <cmp-error-message field-name="impProdCtrl.prodTypesId"
+                               form-ref="impProdCtrl.importProdForm"
+                               show-error="impProdCtrl.showError(impProdCtrl.importProdForm[impProdCtrl.prodTypesId])"
+                               error-types="impProdCtrl.requiredOnly"></cmp-error-message>
         </div>
     </div>
     <div ng-if="impProdCtrl.someProducts">
@@ -37,7 +34,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="btn btn-primary" ng-click="impProdCtrl.addDossierId()" name="addDossierId" ng-disabled="!impProdCtrl.isEditable">
+            <button class="btn btn-primary" ng-click="impProdCtrl.addDossierId()" name="addDossierId" ng-disabled="impProdCtrl.disableAddButton()">
                 {{::'ADD_DOSSIER_ID'|translate}}
             </button>
         </div>

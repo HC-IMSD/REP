@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('importerProducts', ['dossierIdDetails'])
+        .module('importerProducts', ['dossierIdDetails', 'errorMessageModule'])
 })();
 
 (function () {
@@ -21,7 +21,7 @@
             bindings: {
                 updateValid: '&',
                 onDelete: '&',
-                isAmend: '<',
+                isAmend: '<', //deprecated
                 isDetailValid: '&',
                 importerRecord: '<',
                 showErrors:'&',
@@ -29,23 +29,25 @@
 
             }
         });
-    //importerProductsCtrl.$inject = [];
+    importerProductsCtrl.$inject = ['$scope'];
 
-    function importerProductsCtrl() {
+    function importerProductsCtrl($scope) {
         var vm = this;
         vm.formAmend = false;
         vm.someProducts=false;
         vm.isEditable=true;
         vm.recordReadOnly = false; //needed for din
         vm.productTypeList=['ALL_PRODUCTS','SELECTED_PRODUCTS'];
-        //vm.isNotEditable = false;
-
+        vm.requiredOnly = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+        ];
         vm.model = {
             selectedProducts: "",
             dossierIdList: []
         };
 
         vm.$onInit = function () {
+            _setIdNames();
             vm.productTypeChanged();
         };
 
@@ -62,6 +64,10 @@
                 vm.isEditable = changes.isAmend.currentValue;
             }
 
+        };
+
+        vm.disableAddButton=function(){
+            return vm.importProdForm.$invalid;
         };
 
         vm.addDossierId = function () {
@@ -125,6 +131,15 @@
            /// return (vm.recordReadOnly);
             return false;
         }
+
+
+       // productTypes_
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.prodTypesId="product_types" + scopeId;
+
+        }
+
 
     }
 
