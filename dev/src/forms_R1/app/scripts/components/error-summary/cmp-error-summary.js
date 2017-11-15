@@ -163,11 +163,22 @@
             vm.selectTab({index:errorRecord.tabId});
         }
 
+        /**
+         * Checks if an error is a link to a summary record
+         * It is a summart is isSummmary is true and it is not in a tab. Tab is handled separately
+         * @param errorRecord
+         * @returns {boolean|*}
+         */
         vm.isSummaryLink=function(errorRecord){
 
-            return(errorRecord.isSummary && (!angular.isDefined(errorRecord.toExpand)) &&(angular.isDefined(errorRecord.tabId && parseInt(errorRecord.tabId)>-1)));
+            return(errorRecord.isSummary && (!angular.isDefined(errorRecord.toExpand)) &&(angular.isDefined(errorRecord.tabId) && parseInt(errorRecord.tabId)<0));
         };
 
+        /**
+         * Checks if an error reoord is a summary in a tab. If true, need to click the tab first before focussing on the summary
+         * @param errorRecord
+         * @returns {boolean|*}
+         */
         vm.isTabLink=function(errorRecord){
             return(errorRecord.isSummary &&(angular.isDefined(errorRecord.tabId) && parseInt(errorRecord.tabId)>-1));
         };
@@ -204,7 +215,9 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
+            console.log( vm.uniqueErrorList)
             var newErrors = _sortErrorsByDomOrder();
+            console.log(newErrors);
             if (!angular.equals(vm.errorArray, newErrors)) {
                 vm.errorArray = newErrors;
             }
@@ -415,6 +428,7 @@
             for (var v = 0; v < keyList.length; v++) {
                 sortedDomJsonList[keyList[v]] = v;
             }
+
             //create an array
             var newErrors = Object.keys(vm.uniqueErrorList).map(function (k) {
                 return vm.uniqueErrorList[k]
