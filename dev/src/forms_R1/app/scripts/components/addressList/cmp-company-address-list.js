@@ -70,14 +70,14 @@
         vm.$onInit = function () {
             //local var from binding
             vm.addressList = vm.addresses;
-            vm.allRolesSelected = vm.isAllRolesSelected();
+            vm.allRolesSelected = vm.companyService.isAllRolesSelected(vm.addressList);
             updateRolesConcat();
         };
 
         vm.$onChanges = function (changes) {
             if (changes.addresses && changes.addresses.currentValue) {
                 vm.addressList = changes.addresses.currentValue;
-                vm.allRolesSelected = vm.isAllRolesSelected();
+                vm.allRolesSelected = vm.companyService.isAllRolesSelected(vm.addressList);
                 updateRolesConcat();
                 vm.isDetailsValid=true;
                 vm.updateErrorSummaryState();
@@ -131,7 +131,7 @@
             vm.onUpdate({newList: vm.addressList});
             vm.selectRecord = 0;
             vm.isDetailsValid = true; //case that incomplete record is deleted
-            vm.allRolesSelected = vm.isAllRolesSelected();
+            vm.allRolesSelected = vm.companyService.isAllRolesSelected(vm.addressList);
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.updateErrorSummaryState();
         };
@@ -158,7 +158,7 @@
                 $filter('filter')(vm.addressList, {addressID: address.addressID}, true)[0]
             );
             vm.addressList[idx] = angular.copy(address);
-            vm.allRolesSelected = vm.isAllRolesSelected();
+            vm.allRolesSelected = vm.companyService.isAllRolesSelected(vm.addressList);
             vm.isDetailsValid = true;
             vm.resetCollapsed = !vm.resetCollapsed;
         };
@@ -189,44 +189,11 @@
         vm.showError = function () {
 
             // Could show on not pristine&&!vm.addressListForm.$pristine
-            return(!vm.isAllRolesSelected());
+            return(!vm.companyService.isAllRolesSelected(vm.addressList));
         };
 
         vm.updateErrorSummaryState=function(){
             vm.updateSummary= vm.updateSummary+1;
         };
-
-        /**
-         * @ngdoc method determines if all the roles have been selected for the address
-         * @returns {boolean}
-         */
-            //TODO move to a service, can this be simplified?
-        vm.isAllRolesSelected = function () {
-            var rolesSelected = 0;
-            var importerSelected = false;
-
-            if (!vm.addressList) return false;
-            var companyRole = vm.companyService.createAddressRole();
-            var numKeys = vm.companyService.getNumberKeys(companyRole);
-            for (var i = 0; i < vm.addressList.length; i++) {
-                var obj = vm.addressList[i].addressRole;
-                for (var key in obj) {
-                    var attrName = key;
-                    var attrValue = obj[key];
-                    if (attrValue && companyRole.hasOwnProperty(attrName)) {
-                        rolesSelected++;
-                        if (attrName === "importer") importerSelected = true;
-                    }
-                }
-            }
-            if (rolesSelected === numKeys) {
-                return true;
-            }
-            else if ((rolesSelected === (numKeys - 1)) && (!importerSelected)) {
-                return true;
-            } else {
-                return false
-            }
-        }
     }
 })();

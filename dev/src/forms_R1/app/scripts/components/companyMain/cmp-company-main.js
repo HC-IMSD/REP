@@ -102,7 +102,7 @@
         vm.$onChanges = function (changes) {
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
-                if (vm.userType == INTERNAL_TYPE) {
+                if (vm.userType === INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
                     vm.saveXMLLabel = "SAVE_DRAFT"
@@ -131,17 +131,17 @@
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            if(vm.companyEnrolForm.$invalid){
-                vm.showErrorSummary= true;
+            if (vm.companyEnrolForm.$invalid) {
+                vm.showErrorSummary = true;
                 vm.updateErrorSummary();
-                vm.savePressed=true;
+                vm.savePressed = true;
                 vm.focusSummary++;
-            }else {
+            } else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
-                vm.showErrorSummary=true;
+                vm.showErrorSummary = true;
                 vm.companyEnrolForm.$setPristine();
-                vm.savePressed=false;
+                vm.savePressed = false;
             }
         };
 
@@ -193,16 +193,16 @@
         }, true);
 
         function disableXMLSave() {
-            var isApprovedExternal = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern());
+            var isApprovedExternal = (vm.company.applicationType === vm.companyService.getApprovedType() && vm.isExtern());
             vm.disableDraftButton = isApprovedExternal;
             vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal; //used to disable the generate xml button
             //vm.showErrorSummary=true;
 
-        };
+        }
 
         function disableJSONSave() {
 
-            vm.disableJson = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
+            vm.disableJson = (vm.company.applicationType === vm.companyService.getApprovedType() && vm.isExtern())
         }
 
         function _setComplete() {
@@ -277,7 +277,7 @@
         }
 
         vm.isExtern = function () {
-            return vm.userType == EXTERNAL_TYPE;
+            return vm.userType === EXTERNAL_TYPE;
         };
         /**
          * @ngdoc method when a form gets approved
@@ -314,26 +314,26 @@
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
-        }
+        };
 
         /**
-         * Increments the conunter to send a signal to update the error summary module
+         * Increments the counter to send a signal to update the error summary module
           */
         vm.updateErrorSummary=function(){
             vm.updateSummary= vm.updateSummary+1;
 
-        }
+        };
         /**
          * Determines if the current language is french
          * @returns {boolean}
          */
         vm.isFrench=function(){
-            return(vm.lang!== ENGLISH);
+            return(vm.lang !== ENGLISH);
         };
 
         vm.temp=function(){
             console.log($scope)
-        }
+        };
 
 
 

@@ -203,7 +203,7 @@
                         address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
                     }
-                }
+                };
                 return (resultJson);
             },
             getModelInfo: function () {
@@ -317,6 +317,38 @@
                     list.push(contact);
                 }
                 return list;
+            },
+
+            /**
+             * @ngdoc method determines if all the roles have been selected for the address
+             * @returns {boolean}
+             */
+             isAllRolesSelected: function(addressList) {
+                var rolesSelected = 0;
+                var importerSelected = false;
+
+                if (!addressList) return false;
+                var companyRole = this.createAddressRole();
+                var numKeys = this.getNumberKeys(companyRole);
+                for (var i = 0; i < addressList.length; i++) {
+                    var obj = addressList[i].addressRole;
+                    for (var key in obj) {
+                        var attrName = key;
+                        var attrValue = obj[key];
+                        if (attrValue && companyRole.hasOwnProperty(attrName)) {
+                            rolesSelected++;
+                            if (attrName === "importer") importerSelected = true;
+                        }
+                    }
+                }
+                if (rolesSelected === numKeys) {
+                    return true;
+                }
+                else if ((rolesSelected === (numKeys - 1)) && (!importerSelected)) {
+                    return true;
+                } else {
+                    return false
+                }
             }
 
         };
@@ -334,11 +366,11 @@
             for (var i = 0; i < adrList.length; i++) {
                 var address = {};
                 address.address_id = adrList[i].addressID;
-                address.amend_record = adrList[i].amendRecord == true ? 'Y' : 'N';
-                address.manufacturer = adrList[i].addressRole.manufacturer == true ? 'Y' : 'N';
-                address.mailing = adrList[i].addressRole.mailing == true ? 'Y' : 'N';
-                address.billing = adrList[i].addressRole.billing == true ? 'Y' : 'N';
-                address.importer = adrList[i].addressRole.importer == true ? 'Y' : 'N';
+                address.amend_record = adrList[i].amendRecord === true ? 'Y' : 'N';
+                address.manufacturer = adrList[i].addressRole.manufacturer === true ? 'Y' : 'N';
+                address.mailing = adrList[i].addressRole.mailing === true ? 'Y' : 'N';
+                address.billing = adrList[i].addressRole.billing === true ? 'Y' : 'N';
+                address.importer = adrList[i].addressRole.importer === true ? 'Y' : 'N';
                 address.company_name = adrList[i].companyName;
                 address.company_address_details = {};
                 address.company_address_details.street_address = adrList[i].street;
@@ -416,7 +448,5 @@
         }
         return importerInfo;
     }
-
-
 
 })();
