@@ -30,9 +30,9 @@
             controllerAs: 'addressListCtrl'
         });
 
-    addressListCtrl.$inject = ['$filter', 'CompanyService','CANADA'];
+    addressListCtrl.$inject = ['$filter'];
 
-    function addressListCtrl($filter, CompanyService, CANADA) {
+    function addressListCtrl($filter) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
@@ -97,38 +97,15 @@
         function updateRolesConcat() {
             if (!vm.addressList) return;
             for (var i = 0; i < vm.addressList.length; i++) {
-
-                _setRolesConcat(vm.addressList[i]);
+                vm.addressList[i].roleConcat = vm.companyService.setRolesConcat(vm.addressList[i]);
             }
         }
-
-        //this is needed on load. Bit of a hack
-        //TODO move to a service
-        function _setRolesConcat(addressModel) {
-            var addressRoles = addressModel.addressRole;
-            var result = "";
-
-            if (addressRoles.manufacturer) {
-                result = result + " MFR"
-            }
-            if (addressRoles.billing) {
-                result = result + " BILL"
-            }
-            if (addressRoles.mailing) {
-                result = result + " MAIL"
-            }
-            if (addressRoles.importer) {
-                result = result + " IMP"
-            }
-            addressModel.roleConcat = result;
-        };
-
 
         vm.deleteAddress = function (aID) {
             var idx = vm.addressList.indexOf(
                 $filter('filter')(vm.addressList, {addressID: aID}, true)[0]);
             vm.addressList.splice(idx, 1);
-            vm.onUpdate({newList: vm.addressList});
+            //vm.onUpdate({newList: vm.addressList});
             vm.selectRecord = 0;
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.allRolesSelected = vm.companyService.isAllRolesSelected(vm.addressList);
@@ -139,14 +116,13 @@
         vm.addAddress = function () {
             var defaultAddress = vm.getNewAddress();
             vm.addressList.push(defaultAddress);
-            vm.isDetailsValid = true; //set to true to exapnd?
+            vm.isDetailsValid = true; //set to true to expand?
             vm.selectRecord = (vm.addressList.length - 1);
             vm.isDetailsValid = false;
         };
 
         vm.disableAddAddress = function () {
-            //TODO don't hard code length
-            return (!(vm.addressList.length < 4 && vm.isDetailsValid))
+            return (!(vm.addressList.length < vm.companyService.getNumberOfAddressRoles() && vm.isDetailsValid));
 
         };
 
@@ -163,23 +139,8 @@
             vm.resetCollapsed = !vm.resetCollapsed;
         };
 
-        //TODO move to the service
         vm.isREPRoleSelected = function (roleToCheck, recordID) {
-            var rolesSelected = 0;
-            //if no role to check, see if all selected
-            if (!vm.addressList) return false;
-            for (var i = 0; i < vm.addressList.length; i++) {
-                if (vm.addressList[i].addressRole[roleToCheck] == true) {
-                    //don't count it if it is the existing record
-                    if (vm.addressList[i].addressID !== recordID) {
-                        rolesSelected = rolesSelected + 1;
-                    }
-                    if (rolesSelected > 0) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return vm.companyService.isREPRoleSelected(roleToCheck, recordID, vm.addressList);
         };
         /**
          * @ngdoc method determines the state of the list errors

@@ -323,13 +323,13 @@
              * @ngdoc method determines if all the roles have been selected for the address
              * @returns {boolean}
              */
-             isAllRolesSelected: function(addressList) {
+             isAllRolesSelected: function (addressList) {
                 var rolesSelected = 0;
                 var importerSelected = false;
 
                 if (!addressList) return false;
                 var companyRole = this.createAddressRole();
-                var numKeys = this.getNumberKeys(companyRole);
+                var numKeys = this.getNumberOfAddressRoles();
                 for (var i = 0; i < addressList.length; i++) {
                     var obj = addressList[i].addressRole;
                     for (var key in obj) {
@@ -349,6 +349,118 @@
                 } else {
                     return false
                 }
+            },
+
+            //get number of default company roles
+            getNumberOfAddressRoles: function () {
+                var companyRole = this.createAddressRole();
+                return this.getNumberKeys(companyRole);
+            },
+
+            //get number of default company roles
+            getNumberOfContractRoles: function () {
+                var contactRole = this.createContactRole();
+                return this.getNumberKeys(contactRole);
+            },
+
+            //this is needed on load. Bit of a hack
+            setRolesConcat: function(addressModel) {
+                var addressRoles = addressModel.addressRole;
+                var result = "";
+
+                if (addressRoles.manufacturer) {
+                    result = result + " MFR"
+                }
+                if (addressRoles.billing) {
+                    result = result + " BILL"
+                }
+                if (addressRoles.mailing) {
+                    result = result + " MAIL"
+                }
+                if (addressRoles.importer) {
+                    result = result + " IMP"
+                }
+                if (addressRoles.repPrimary) {
+                    result = result + " REP1"
+                }
+                if (addressRoles.repSecondary) {
+                    result = result + " REP2"
+                }
+                return result;
+            },
+
+            //determine if REP role is selected
+            isREPRoleSelected: function (roleToCheck, recordID, addressList) {
+                var rolesSelected = 0;
+                //if no role to check, see if all selected
+                if (!addressList) return false;
+                for (var i = 0; i < addressList.length; i++) {
+                    if (addressList[i].addressRole[roleToCheck] === true) {
+                        //don't count it if it is the existing record
+                        if (addressList[i].addressID !== recordID) {
+                            rolesSelected = rolesSelected + 1;
+                        }
+                        if (rolesSelected > 0) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            },
+
+            //determine if REP role is selected
+            isContactREPRoleSelected: function (roleToCheck, recordID, contactList) {
+                var rolesSelected = 0;
+                //if no role to check, see if all selected
+                if (!contactList) return false;
+                for (var i = 0; i < contactList.length; i++) {
+                    if (contactList[i].addressRole[roleToCheck] === true) {
+                        //don't count it if it is the existing record
+                        if (contactList[i].contactId !== recordID) {
+                            rolesSelected = rolesSelected + 1;
+                        }
+                        if (rolesSelected > 0) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            },
+
+            /**
+             * @ngdoc method checks if all the contact roles have been selected
+             * @returns {boolean}
+             */
+            isAllContactRolesSelected: function(contactList){
+                var rolesSelected = 0;
+                var repPrimarySelected=false;
+                var repSecondarySelected=false;
+
+                if (!contactList) return false;
+                var companyRole = this.createContactRole();
+                var numKeys = this.getNumberOfContractRoles();
+                for(var i=0;i<contactList.length;i++) {
+                    var obj = contactList[i].addressRole;
+                    for (var key in obj) {
+                        var attrName = key;
+                        var attrValue = obj[key];
+                        if (attrValue && companyRole.hasOwnProperty(attrName)) {
+                            rolesSelected++;
+                            if(key==="repPrimary") repPrimarySelected=true;
+                            if(key==="repSecondary") repSecondarySelected=true;
+
+                        }
+                    }
+                }
+                if(rolesSelected===numKeys){
+                    return true;
+                }
+                //primary has to be selected at least
+                if (rolesSelected === (numKeys - 1) && (repPrimarySelected && !repSecondarySelected)) {
+                    return true;
+                }
+
+                return false;
             }
 
         };
