@@ -80,7 +80,7 @@
                 };
                 return (defaultContactRole);
             },
-            createAddressRecord: function () {
+            createAddressRecord: function (isDefaultRecord) {
                 var defaultAddress = {
                     addressID: 1,
                     companyName: "",
@@ -102,10 +102,12 @@
                         dossierIdList: []
                     }
                 };
-                defaultAddress.addressID = this.getNextAddressID();
+                if (!isDefaultRecord) {
+                    defaultAddress.addressID = this.getNextAddressID();
+                }
                 return (defaultAddress);
             },
-            createContactRecord: function () {
+            createContactRecord: function (isDefaultRecord) {
 
                 var defaultContact = {
                     contactId: "",
@@ -127,7 +129,9 @@
                     phoneExt: "",
                     fax: ""
                 };
-                defaultContact.contactId = this.getNextContactID();
+                if (!isDefaultRecord) {
+                    defaultContact.contactId = this.getNextContactID();
+                }
                 return (defaultContact);
             },
             createImporterProductRecord: function () {
@@ -364,7 +368,7 @@
             },
 
             //this is needed on load. Bit of a hack
-            setRolesConcat: function(addressModel) {
+            getRolesConcat: function(addressModel) {
                 var addressRoles = addressModel.addressRole;
                 var result = "";
 

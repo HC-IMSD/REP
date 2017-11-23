@@ -97,7 +97,7 @@
         function updateRolesConcat() {
             if (!vm.addressList) return;
             for (var i = 0; i < vm.addressList.length; i++) {
-                vm.addressList[i].roleConcat = vm.companyService.setRolesConcat(vm.addressList[i]);
+                vm.addressList[i].roleConcat = vm.companyService.getRolesConcat(vm.addressList[i]);
             }
         }
 

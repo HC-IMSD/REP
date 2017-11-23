@@ -94,16 +94,16 @@
             if(!vm.record){
                 return false;
             }
-            return vm.record.applicationType===AMEND_TYPE;
+            return vm.record.applicationType === AMEND_TYPE;
         };
 
         vm.isExtern = function () {
-            return vm.formType == EXTERNAL_TYPE;
+            return vm.formType === EXTERNAL_TYPE;
         };
         vm.setAmendState = function () {
             //TODO hardcode should be service
             vm.setType({type: AMEND_TYPE});
-        }
+        };
 
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;

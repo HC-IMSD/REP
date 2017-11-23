@@ -116,16 +116,14 @@
         function updateRolesConcat() {
             if (!vm.contactList) return;
             for (var i = 0; i < vm.contactList.length; i++) {
-                vm.addressList[i].roleConcat = vm.companyService.setRolesConcat(vm.addressList[i]);
+                vm.contactList[i].roleConcat = vm.companyService.getRolesConcat(vm.contactList[i]);
             }
-
-
         }
 
 
         vm.setValid=function(value){
 
-            vm.isDetailValid=value; //this is a shared value
+            vm.isDetailValid = value; //this is a shared value
         };
 
         vm.showError = function () {

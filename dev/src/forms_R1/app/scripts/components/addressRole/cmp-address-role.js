@@ -99,7 +99,7 @@
             var obj = vm.roleModel;
             vm.checkForDuplicates(ctrl, toCheck);
             for (var key in obj) {
-                var attrName = key;
+                //var attrName = key;
                 var attrValue = obj[key];
                 if (attrValue === true) {
                     vm.isSelected = true;
@@ -124,7 +124,7 @@
             for (var key in obj) {
                 var attrName = key;
                 var attrValue = obj[key];
-                if (attrName == toCheck) {
+                if (attrName === toCheck) {
                     if (!attrValue) return false;
                     return (vm.alreadySelected({roleName: attrName}));
                 }
@@ -133,22 +133,15 @@
         }
 
         vm.showError = function (ctrl) {
-            if ((ctrl.$invalid) || (vm.showErrors() && ctrl.$invalid)) {
-                return true
-            }
-            return false
-        }
+            return ((ctrl.$invalid) || (vm.showErrors() && ctrl.$invalid));
+        };
 
         /**
          * Specical show error function as relying on a hiddend field
          * @returns {boolean}
          */
         vm.showErrorMissing = function () {
-
-            if ((vm.roleForm.$touched && !vm.isSelected) || (vm.showErrors() && !vm.isSelected)) {
-                return true
-            }
-            return false
+            return ((vm.roleForm.$touched && !vm.isSelected) || (vm.showErrors() && !vm.isSelected));
         };
 
     }//end controller

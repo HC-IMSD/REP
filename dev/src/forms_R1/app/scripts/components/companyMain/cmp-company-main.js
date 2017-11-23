@@ -243,11 +243,11 @@
         };
 
         vm.getNewAddress = function () {
-            return vm.companyService.createAddressRecord();
+            return vm.companyService.createAddressRecord(false);
         };
 
         vm.getNewContact = function () {
-            return vm.companyService.createContactRecord();
+            return vm.companyService.createContactRecord(false);
         };
 
         //TODO remove?

@@ -25,6 +25,7 @@
                 checkRoles: '&',
                 onDelete: '&',
                 isAmend: '<',
+                companyService: '<',
                 isDetailValid: '&', /* messages to list whether the record is valid */
                 isRoleSelected: '&', /* determines if a role has been selected in another record*/
                 recordIndex: '<', /* used to obtain record index, controlled by list */
@@ -43,29 +44,7 @@
         vm.updateSummary = 0; //triggers and error summary update
         vm.setSummaryFocus = 0; //sets the summary focus
         vm.showSummary = false;
-        //TODO get role model from a servide
-
-        vm.contactModel = {
-            roleConcat: "",
-            contactId: "",
-            amendRecord: false,
-            addressRole: {
-                manufacturer: false,
-                mailing: false,
-                billing: false,
-                repPrimary: false,
-                repSecondary: false
-            },
-            contactRole: "",
-            salutation: "",
-            givenName: "",
-            surname: "",
-            initials: "",
-            title: "",
-            phone: "",
-            PhoneExt: "",
-            fax: ""
-        };
+        vm.contactModel = vm.companyService.createContactRecord(true);
         vm.alias={
             "roleMissing": {
                 "type": "fieldset",
@@ -75,7 +54,7 @@
                 "type": "pattern",
                 "errorType": "MSG_ERR_PHONE_FORMAT"
             }
-        }
+        };
 
 
 
@@ -91,7 +70,7 @@
         vm.$onChanges = function (changes) {
             if (changes.contactRecord) {
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
-                vm.contactModel.roleConcat = _getRolesConcat();
+                vm.contactModel.roleConcat = vm.companyService.getRolesConcat(vm.contactModel);
                 vm.setEditable();
                 //angular.element(saveContact).trigger('focus');
 
@@ -115,30 +94,6 @@
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
         };
-
-        //todo move to service
-        function _getRolesConcat() {
-            var addressRoles = vm.contactModel.addressRole;
-            var result = "";
-
-            if (addressRoles.manufacturer) {
-                result = result + " MFR"
-            }
-            if (addressRoles.billing) {
-                result = result + " BILL"
-            }
-            if (addressRoles.mailing) {
-                result = result + " MAIL"
-            }
-            if (addressRoles.repPrimary) {
-                result = result + " REP1"
-            }
-            if (addressRoles.repSecondary) {
-                result = result + " REP2"
-            }
-            return result
-        }
-
 
         /**
          *  calls the delete function on the parent
@@ -193,7 +148,7 @@
          * Updates the contact model used by the save button
          */
         vm.updateContactModel2 = function () {
-            vm.contactModel.roleConcat = _getRolesConcat();
+            vm.contactModel.roleConcat = vm.companyService.getRolesConcat(vm.contactModel);
             if (vm.contactRecForm.$valid) {
                 // vm.contactModel.isDetailValid=true;
                 vm.isDetailValid({state: true});
@@ -234,10 +189,8 @@
 
             if (!vm.formAmend) {
                 vm.isEditable = true
-            } else if (vm.formAmend && vm.contactModel.amendRecord) {
-                vm.isEditable = true;
             } else {
-                vm.isEditable = false;
+                vm.isEditable = (vm.formAmend && vm.contactModel.amendRecord);
             }
         }
 

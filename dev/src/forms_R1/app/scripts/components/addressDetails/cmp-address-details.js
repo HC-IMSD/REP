@@ -146,10 +146,7 @@
             if (!ctrl) {
                 return false
             }
-            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
-                return true
-            }
-            return false
+            return ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid ));
         };
 
 
@@ -173,7 +170,7 @@
             var postal=vm.addressModel.postalCode;
             if(!postal) return;
             postal= postal.toUpperCase();
-            if(postal.length==6 && vm.addressModel.country.id === CANADA){
+            if(postal.length === 6 && vm.addressModel.country.id === CANADA){
                 postal=postal.substring(0,3)+" "+postal.substring(3,postal.length)
             }
             vm.addressModel.postalCode=postal;
@@ -210,14 +207,14 @@
 
         var getProvinceListLabel = function () {
            // if(!vm.addressModel || !vm.addressModel.country) return "PROVINCE";
-            var label = (vm.addressModel.country.id === USA) ? "STATE" : "PROVINCE";
-            return label;
+            return (vm.addressModel.country.id === USA) ? "STATE" : "PROVINCE";
+            //return label;
         };
 
 
         var getPostalLabel = function () {
-            var label = (vm.addressModel.country.id === USA) ? "ZIP" : "POSTAL";
-            return label;
+            return (vm.addressModel.country.id === USA) ? "ZIP" : "POSTAL";
+            //return label;
         };
 
         var getPostalPattern = function () {
@@ -229,7 +226,7 @@
             }
 
             return postalPtrn;
-        }
+        };
 
 
         function _setIdNames() {

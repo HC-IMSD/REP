@@ -34,6 +34,7 @@
                 checkRoles: '&',
                 onDelete: '&',
                 isAmend: '<',
+                companyService: '<',
                 isDetailValid: '&',
                 isRoleSelected: '&',
                 recordIndex: '<',
@@ -56,29 +57,7 @@
         vm.setSummaryFocus=0; //sets the summary focus
         vm.addressRecForm = "";
         vm.showSummary=false;
-        //TODO get  model from a servide
-        vm.addressModel = {
-            addressID: 1,
-            companyName: "",
-            amendRecord: false,
-            addressRole: {
-                manufacturer: false,
-                mailing: false,
-                billing: false,
-                importer: false
-            },
-            street: "",
-            city: "",
-            provLov: "",
-            stateList: "",
-            stateText: "",
-            country: "",
-            postalCode: "",
-            importerProducts: {
-                selectedProducts: "",
-                dossierIdList: []
-            }
-        };
+        vm.addressModel = vm.companyService.createAddressRecord(true);
         vm.alias = {
             "roleMissing": {
                 "type": "fieldset",
@@ -103,26 +82,6 @@
             _setIdNames();
             vm.updateErrorSummaryState();
         };
-        //TODO move to service
-        function _getRolesConcat() {
-            var addressRoles = vm.addressModel.addressRole;
-            var result = "";
-
-            if (addressRoles.manufacturer) {
-                result = result + " MFR,"
-            }
-            if (addressRoles.billing) {
-                result = result + " BILL,"
-            }
-            if (addressRoles.mailing) {
-                result = result + " MAIL,"
-            }
-            if (addressRoles.importer) {
-                result = result + " IMP,"
-            }
-            result = result.substring(0, result.length - 1);
-            return result
-        }
 
         /**
          * Determines if a canadian importer role has been selected
@@ -149,7 +108,7 @@
             //how this is currently wired, this will never fire!
             if (changes.addressRecord) {
                 vm.addressModel = angular.copy(changes.addressRecord.currentValue);
-                vm.addressModel.roleConcat = _getRolesConcat();
+                vm.addressModel.roleConcat = vm.companyService.getRolesConcat(vm.addressModel);
                 vm.setEditable();
                 vm.importerProductState(vm.addressModel.addressRole.importer);
                 //angular.element(saveAddress).trigger('focus');
@@ -170,7 +129,7 @@
          */
         vm.delete = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
-            vm.updateErrorSummary();;
+            vm.updateErrorSummary();
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *
@@ -228,7 +187,7 @@
          * Updates the contact model used by the save button
          */
         vm.updateAddressModel2 = function () {
-            vm.addressModel.roleConcat = _getRolesConcat();
+            vm.addressModel.roleConcat = vm.companyService.getRolesConcat(vm.addressModel);
             if (vm.addressRecForm.$valid) {
                 vm.isDetailValid({state: true});
                 vm.addressRecForm.$setPristine();
@@ -257,9 +216,8 @@
          * @returns {boolean}
          */
         vm.setEditable = function () {
-
             vm.isEditable = !(vm.formAmend && !vm.addressModel.amendRecord);
-        }
+        };
 
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;

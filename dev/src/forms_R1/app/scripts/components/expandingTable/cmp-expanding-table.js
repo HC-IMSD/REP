@@ -50,10 +50,7 @@
         };
 
         vm.getExpandedState = function (row) {
-            if (row === vm.tableRowIndexCurrExpanded) {
-                return true;
-            }
-            return false
+            return row === vm.tableRowIndexCurrExpanded;
         };
 
         vm.$onChanges = function (changes) {
@@ -130,6 +127,7 @@
          * Recalculates the column defs based on the caret column and the error columne
          * Assumes that the column definitions provided total 100%
          * @param colDefs
+         * @param numCols
          * @private
          */
         function _recalculateColumnDefs(colDefs,numCols){
