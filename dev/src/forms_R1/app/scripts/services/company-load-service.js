@@ -75,7 +75,7 @@
                     } else {
                         newKey = prefix + keys[i];
                     }
-                    var newObj = {};
+                    //var newObj = {};
                     newList[newKey] = oldList[keys[i]];
                 }
                 return newList;

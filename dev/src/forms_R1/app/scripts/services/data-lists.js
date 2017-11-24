@@ -53,7 +53,7 @@
                 "en": "Unknown",
                 "fr": "Inconnu"
             }
-            )
+            );
         }
 
         //todo why is this listed twice?

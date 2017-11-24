@@ -53,7 +53,7 @@
                 return numKeys;
             },
             getApplicationTypes: function () {
-                return (["NEW", "AMEND", "APPROVED"])
+                return (["NEW", "AMEND", "APPROVED"]);
             },
             getApprovedType: function () {
                 return "APPROVED";
@@ -190,7 +190,7 @@
                 var contactInfo = {contactList: this.getContactList(jsonObj[rootTag].contact_record)};
                 //get rid of previous default
                 this._default = {};
-                angular.extend(this._default, companyInfo, addressInfo, contactInfo)
+                angular.extend(this._default, companyInfo, addressInfo, contactInfo);
             },
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
@@ -226,7 +226,7 @@
                     companyId: info.company_id,
                     addressList: [],
                     contactList: []
-                }
+                };
             },
             //not sure why this is needed anymore
             getAddressList: function (adrList) {
@@ -234,7 +234,7 @@
                 if (!adrList) return list;
                 if (!(adrList instanceof Array)) {
                     //make it an array, case there is only one
-                    adrList = [adrList]
+                    adrList = [adrList];
                 }
 
 
@@ -291,7 +291,7 @@
                 if (!contacts) return list;
                 if (!(contacts instanceof Array)) {
                     //make it an array, case there is only one
-                    contacts = [contacts]
+                    contacts = [contacts];
                 }
 
                 for (var i = 0; i < contacts.length; i++) {
@@ -348,10 +348,8 @@
                 if (rolesSelected === numKeys) {
                     return true;
                 }
-                else if ((rolesSelected === (numKeys - 1)) && (!importerSelected)) {
-                    return true;
-                } else {
-                    return false
+                else {
+                    return ((rolesSelected === (numKeys - 1)) && (!importerSelected));
                 }
             },
 
@@ -456,15 +454,11 @@
                         }
                     }
                 }
-                if(rolesSelected===numKeys){
+                if(rolesSelected === numKeys){
                     return true;
                 }
                 //primary has to be selected at least
-                if (rolesSelected === (numKeys - 1) && (repPrimarySelected && !repSecondarySelected)) {
-                    return true;
-                }
-
-                return false;
+                return (rolesSelected === (numKeys - 1) && (repPrimarySelected && !repSecondarySelected));
             }
 
         };

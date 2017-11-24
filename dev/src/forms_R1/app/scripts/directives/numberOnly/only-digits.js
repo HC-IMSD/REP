@@ -49,7 +49,7 @@
                 var regexIntNeg = /[^0-9-]/g;
                 var integerReg = /[^0-9]/g; //default
                 var regexValue = integerReg;
-                if (attrs['onlyDigits'] == 'intNeg') {
+                if (attrs['onlyDigits'] === 'intNeg') {
                     regexValue = regexIntNeg;
                 } else if (attrs['onlyDigits']==='false') {
                     ignore=true;

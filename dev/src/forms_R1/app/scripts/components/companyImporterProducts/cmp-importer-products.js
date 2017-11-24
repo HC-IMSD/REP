@@ -39,7 +39,7 @@
         vm.recordReadOnly = false; //needed for din
         vm.productTypeList=['ALL_PRODUCTS','SELECTED_PRODUCTS'];
         vm.requiredOnly = [
-            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "required", displayAlias: "MSG_ERR_MAND"}
         ];
         vm.model = {
             selectedProducts: "",
@@ -106,13 +106,12 @@
                 }
             }
 
-        }
+        };
 
         /**
          * Controls errors state of an individual UI control. Since cannot pass the control for some reason
          * pass the needed state variables... very annoying
-         * @param isTouched
-         * @param isInvalid
+         * @param ctrl
          * @returns {boolean}
          */
         vm.showError = function (ctrl) {
@@ -130,7 +129,7 @@
            // vm.recordReadOnly = vm.formAmend && !vm.activityModel.amendRecord;
            /// return (vm.recordReadOnly);
             return false;
-        }
+        };
 
 
        // productTypes_

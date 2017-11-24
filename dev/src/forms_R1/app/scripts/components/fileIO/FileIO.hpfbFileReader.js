@@ -27,8 +27,8 @@
             link: link,
             restrict: 'A',
             scope: {
-                hpfbFileSelect: "&",
-            },
+                hpfbFileSelect: "&"
+            }
         };
         return directive;
 
@@ -40,9 +40,9 @@
                     hpfbFileReader.readAsDataText(scope.file, scope)
                         .then(function (result) {
                             scope.hpfbFileSelect({fileContent: result});
-                        })
+                        });
 
-            })
+            });
         }
 
     }
@@ -60,7 +60,7 @@
         controller: FileSelectController,
         bindings: {
             updateModelRoot: '&',
-            rootElem: '@',
+            rootElem: '@'
         }
     });
 
@@ -128,7 +128,7 @@
             if(!vm.buttonDisabled){
                vm.buttonDisabled=false;
             }else if(vm.buttonDisabled.toLowerCase()==="true"){
-                vm.buttonDisabled=true
+                vm.buttonDisabled=true;
             }else if(vm.buttonDisabled.toLowerCase()==="false"){
                 vm.buttonDisabled=false;
             }else{
@@ -182,7 +182,7 @@
                     if (file) {
                         var splitFile = file.name.split('.');
                         var fileType = splitFile[splitFile.length - 1];
-                        if ((fileType.toLowerCase()) == draft_file_type) {
+                        if ((fileType.toLowerCase()) === draft_file_type) {
                             convertToJSONObjects(reader);
                             checkRootTagMatch(reader, scope);
                             /* As per meeting of oct 21
@@ -205,7 +205,7 @@
                     }
                     deferred.resolve(reader.parseResult);
                 });
-            }
+            };
         }
 
         function onError(reader, deferred, scope) {
@@ -214,7 +214,7 @@
                     //TODO need to review reject case
                     deferred.reject(msg_err_load);
                 });
-            }
+            };
         }
         function getReader(deferred, scope, file) {
             var reader = new FileReader();
@@ -256,7 +256,7 @@
 
         /**
          * @ngdoc method converts a valid XML file to a JSON object
-         * @param reader- the extended file reader object
+         * @param reader - the extended file reader object
          * @returns null
          */
         function convertXMLToJSONObjects(reader) {
@@ -295,7 +295,7 @@
          * and sets the error message
          * @param reader the file reader object that is used to read in a file
          * @param scope - scope of the service
-         *  @returns null
+         *  @returns
          */
         function checkRootTagMatch(reader, scope) {
             if (!scope.rootTag || !reader.parseResult || !reader.parseResult.jsonResult) return;
@@ -308,8 +308,8 @@
 
         /**
          * @ngdoc method - inserts a hash value into a json object. Hash is calculated on the entire json
-         * @param jsonObj- the json object to hash
-         * @param rootTag- the root tag of the jsonObject. Used for lookups
+         * @param jsonObj - the json object to hash
+         * @param rootTag - the root tag of the jsonObject. Used for lookups
          */
         function insertHashInJson(jsonObj, rootTag) {
             jsonObj[rootTag].data_checksum = "";
@@ -318,8 +318,8 @@
         }
         /**
          * @ngdoc method - compares the hash in the JSON to the calculated JSON hash
-         * @param reader- the reader extended object that contains the json
-         * @param rootTag- the root tag of the jsonObject. Used for lookups
+         * @param reader - the reader extended object that contains the json
+         * @param rootTag - the root tag of the jsonObject. Used for lookups
          */
         function compareHashInJson(reader, rootTag) {
             var currentTagValue = reader.parseResult.jsonResult[rootTag].data_checksum;
@@ -332,8 +332,8 @@
         }
         /**
          * @ngdoc method - compares the hash in the XML to the calculated XML hash
-         * @param reader- the reader extended object that contains the json
-         * @param rootTag- the root tag of the jsonObject. Used for lookups
+         * @param reader - the reader extended object that contains the json
+         * @param scope - scope of the root tag of the jsonObject. Used for lookups
          */
         function compareHashInXML(reader, scope) {
             var currentTagValue = reader.parseResult.jsonResult[scope.rootTag].data_checksum;
@@ -388,7 +388,7 @@
             //xmlResult = convertJSONObjectsToXML(jsonObj)
             var blob = new Blob([xmlResult], {type: "text/plain;charset=utf-8"});
             if (!fileName) {
-                fileName = "hpfbXML.xml"
+                fileName = "hpfbXML.xml";
             } else {
                 fileName += ".xml";
             }
