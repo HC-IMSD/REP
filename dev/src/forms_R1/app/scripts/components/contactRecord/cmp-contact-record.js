@@ -73,8 +73,12 @@
             "phoneNumber": {
                 "type": "pattern",
                 "errorType": "MSG_ERR_PHONE_FORMAT"
+            },
+            "fax_number": {
+                "type": "pattern",
+                "errorType": "MSG_ERR_FAX_FORMAT"
             }
-        }
+        };
 
 
 

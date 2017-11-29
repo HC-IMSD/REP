@@ -86,11 +86,8 @@
             if(!ctrl){
                 return false;
             }
-            if((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid )){
-                return true
-            }
-            return false
-        }
+            return((ctrl.$invalid && ctrl.$touched) || (vm.showErrors()&&ctrl.$invalid ));
+        };
 
         function _setIdNames() {
             var scopeId = vm.fldId+ "_" + $scope.$id;
@@ -99,7 +96,7 @@
             vm.lastNameId="lastName" + scopeId;
             vm.langCorrespondId="langCorrespond" + scopeId;
             vm.jobTitleId="jobTitle" + scopeId;
-            vm.faxId="faxNumber" + scopeId;
+            vm.faxId="fax_number" + scopeId;
             vm.phoneNumberId="phoneNumber" + scopeId;
             vm.phoneExtId="phoneExt" + scopeId;
             vm.contactEmailId="contactEmail" + scopeId;
