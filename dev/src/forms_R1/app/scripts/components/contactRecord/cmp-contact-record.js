@@ -42,7 +42,7 @@
         vm.updateSummary = 0; //triggers and error summary update
         vm.setSummaryFocus = 0; //sets the summary focus
         vm.showSummary = false;
-        //TODO get role model from a servide
+        //TODO get role model from a service
 
         vm.contactModel = {
             roleConcat: "",
@@ -234,10 +234,8 @@
 
             if (!vm.formAmend) {
                 vm.isEditable = true
-            } else if (vm.formAmend && vm.contactModel.amendRecord) {
-                vm.isEditable = true;
             } else {
-                vm.isEditable = false;
+                vm.isEditable = vm.formAmend && vm.contactModel.amendRecord;
             }
         }
 
