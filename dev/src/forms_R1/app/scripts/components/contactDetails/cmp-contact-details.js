@@ -99,7 +99,7 @@
             vm.lastNameId="lastName" + scopeId;
             vm.langCorrespondId="langCorrespond" + scopeId;
             vm.jobTitleId="jobTitle" + scopeId;
-            vm.faxId="faxNumber" + scopeId;
+            vm.faxId="fax_number" + scopeId;
             vm.phoneNumberId="phoneNumber" + scopeId;
             vm.phoneExtId="phoneExt" + scopeId;
             vm.contactEmailId="contactEmail" + scopeId;
