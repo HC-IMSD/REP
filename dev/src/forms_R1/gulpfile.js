@@ -48,6 +48,7 @@ var paths = {
     buildProdCompany: buildProd + '/company/',
     buildProdTransaction: buildProd + '/transaction/',
     buildProdDossier: buildProd + '/dossier/',
+    buildProdDrugProduct: buildProd + '/drugProduct/',
     buildProdCsp: buildProd + '/csp-cps/',
     englishTemplate: wetBase + '/' + templateFileEn, //this is the wet template before path injection
     frenchTemplate: wetBase + '/' + templateFileFr, //this is the wet template before path injection
@@ -2142,6 +2143,118 @@ gulp.task('prod-transaction-copySourceFiles', function () {
 
 
 /******END TRANSACTION PROD SCRIPTS******/
+
+////////////////////////// Start Drug Product PROD scripts
+
+gulp.task('prod-drugProduct-compileHtml', ['prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-drugProduct-compileSrcJs', 'prod-drugProduct-copyLib'], function () {
+
+    var ignorePath = '/build/prod/drugProduct';
+    var basePath = paths.buildProdDrugProduct;
+    var destPath = paths.buildProdDrugProduct;
+    var htmlPartial = jsRootContent.partialDrugProductRoot;
+
+    var srcJsExtEn = [
+        basePath + 'app/scripts/' + 'drugProductAppEXT-en' + '*.min.js',
+        paths.buildProdDrugProduct + 'app/lib/**/angular*.js'
+    ];
+    var srcJsExtFr = [
+        basePath + 'app/scripts/' + 'drugProductAppEXT-fr' + '*.min.js',
+        paths.buildProdDrugProduct + 'app/lib/**/angular*.js'
+    ];
+    var srcJsIntFr = [
+        basePath + 'app/scripts/' + 'drugProductAppINT-fr' + '*.min.js',
+        paths.buildProdDrugProduct + 'app/lib/**/angular*.js'
+    ];
+    var srcJsIntEn = [
+        basePath + 'app/scripts/' + 'drugProductAppINT-en' + '*.min.js',
+        paths.buildProdDrugProduct + 'app/lib/**/angular*.js'
+    ];
+
+    var srcPath = paths.buildProdDrugProduct;
+
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, drugProductRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'drugProductEXT-en.html', destPath, 'en', deployType.prod);
+    return pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, drugProductRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'drugProductEXT-fr.html', destPath, 'fr', deployType.prod);
+    //pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, drugProductRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'dossierINT-fr.html', destPath, 'fr', deployType.prodInt);
+    // return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'dossierINT-en.html', destPath, 'en', deployType.prodInt);
+});
+
+gulp.task('prod-drugProduct-copyTranslateFiles', function () {
+
+    var destPath = paths.buildProdDrugProduct;
+
+    var translationList = drugProductTranslationFilesBaseList;
+
+    return (pipes.translateDev(translationList, destPath));
+
+});
+
+
+
+gulp.task('prod-drugProduct-copySourceFiles', function () {
+    return (
+        pipes.copySrcs(false, paths.buildProdDrugProduct, drugProductComponentFolders, drugProductServiceFileNames, drugProductDirectiveFolders, drugProductTemplates, true)
+    );
+});
+
+gulp.task('prod-drugProduct-copyLib', function () {
+    var srcArray = stylesProd;
+
+    for (var i = 0; i < libProd.length; i++) {
+        srcArray.push(libProd[i])
+    }
+    var copySources = gulp.src(srcArray, {read: true, base: '.'});
+    return copySources.pipe(gulp.dest(paths.buildProdDrugProduct))
+});
+
+
+gulp.task('prod-drugProduct-compileSrcJs', ['prod-drugProduct-compileTranslateFile', 'prod-drugProduct-createRootJsFiles', 'prod-drugProduct-copySourceFiles'], function () {
+
+    var srcPath = paths.buildProdDrugProduct + 'app/scripts/';
+    var dest = paths.buildProdDrugProduct + 'app/scripts/';
+    var rootJsBaseName = "drugProductApp";
+    var translateName = "drugProductTranslations"; //TODO make this a resuable variable
+    return (
+        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, drugProductComponentFolders, drugProductServiceFileNames, drugProductDirectiveFolders, translateName, true)
+    )
+});
+
+gulp.task('prod-drugProduct-createRootJsFiles', [], function () {
+    var dest = paths.buildProdDrugProduct + 'app/scripts/';
+    var rootFile = paths.scripts + "/" + rootFileNames.drugProductRoot + ".js";
+    return (
+        pipes.createRootFileSet(rootFile, dest, true, false)
+    );
+});
+
+
+gulp.task('prod-drugProduct-compileSrcJs', ['prod-drugProduct-compileTranslateFile', 'prod-drugProduct-createRootJsFiles', 'prod-drugProduct-copySourceFiles'], function () {
+
+    var srcPath = paths.buildProdDrugProduct + 'app/scripts/';
+    var dest = paths.buildProdDrugProduct + 'app/scripts/';
+    var rootJsBaseName = "drugProductApp";
+    var translateName = "drugProductTranslations"; //TODO make this a resuable variable
+    return (
+        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, drugProductComponentFolders, drugProductServiceFileNames, drugProductDirectiveFolders, translateName, true)
+    )
+});
+
+
+gulp.task('prod-drugProduct-compileTranslateFile', ['prod-drugProduct-copyTranslateFiles'], function () {
+
+    var destPath = paths.buildProdDrugProduct + paths.relScript;
+    var srcPath = paths.buildProdDrugProduct;
+    return (pipes.compileTranslateFile(srcPath, destPath, "drugProductTranslations", drugProductTranslationFilesBaseList));
+});
+
+
+gulp.task('prod-drugProduct-allFormsCreate', ['prod-drugProduct-compileHtml'], function () {
+
+    return pipes.deleteResourcesNonMinFiles(paths.buildProdDrugProduct);
+
+});
+
+/******END Drug Product PROD SCRIPTS******/
+
 ////////////////////////// Start CSP PROD scripts
 
 
@@ -2579,6 +2692,13 @@ gulp.task('prod-company-clean', function () {
     return (pipes.cleanBuild(paths.buildProdCompany));
 
 });
+
+gulp.task('prod-drugProduct-clean', function () {
+    return (pipes.cleanBuild(paths.buildProdDrugProduct));
+
+});
+
+
 
 gulp.task('prod-csp-clean', function () {
     return (pipes.cleanBuild(paths.buildProdCsp));

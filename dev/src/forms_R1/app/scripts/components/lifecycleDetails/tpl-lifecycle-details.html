@@ -13,7 +13,7 @@
                         <div class="form-group col-md-4">
                             <label for="sequenceNumber_{{::$id}}">
                                 <span class="field-name">{{"SEQUENCE_NUM" |translate}}</span>
-                                <input type="text" id="sequenceNumber_{{$::id}}" name="sequenceNumber_{{$::id}}"
+                                <input type="text" id="sequenceNumber_{{::$id}}" name="sequenceNumber_{{::$id}}"
                                        ng-model="lifecycleCtrl.lifecycleModel.sequence"
                                        class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
                             </label>
