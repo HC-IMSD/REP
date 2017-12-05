@@ -65,10 +65,10 @@
             return result;
         };
         ApplicationInfoService.prototype.getApplicationStatusList = function () {
-            return (["NEW", "AMEND", "APPROVED"])
+            return (["NEW", "AMEND", "FINAL"])
         };
         ApplicationInfoService.prototype.getApprovedType = function () {
-            return "APPROVED";
+            return "FINAL";
         };
         ApplicationInfoService.prototype.getAmendType = function () {
             return "AMEND";

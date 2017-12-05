@@ -12,7 +12,7 @@ var UiUtil = function () {
         browser.selectHtmlDropList = this.selectHtmlDropListOption.bind(browser);
         browser.UISelectSearch = this.UISelectSearch.bind(browser);
         browser.selectTypeAheadPopupValue = this.selectTypeAheadPopupValue.bind(browser);
-    }
+    };
 
     this.init = function () {
         //browswer is  a global
@@ -23,7 +23,7 @@ var UiUtil = function () {
         browser.UISelectSearch = this.UISelectSearch.bind(browser);
         browser.selectTypeAheadPopupValue = this.selectTypeAheadPopupValue.bind(browser);
 
-    }
+    };
 
 
     this.selectDropdownbyNum = function (element, optionNum) {
@@ -142,7 +142,7 @@ var UiUtil = function () {
         _element.sendKeys(typeVal);
         var _popup = element(by.css(".custom-popup-wrapper:not(.ng-hide)"));
         _popup.element(by.css('a[title="' + lookupVal + '"]')).click();
-    }
+    };
 
     this.getExpandingTable = function (tagName, parent) {
 
@@ -234,10 +234,10 @@ var UiUtil = function () {
                 return value;
             });
         });
-    }
+    };
 
     this.setDate = function (dateElement, year, month, day) {
-        var separator="-"
+        var separator="-";
         if (browser.browserName === "chrome") {
             //TODO hack, doesn't seem to be a way around this?
             var value = "00" + year + month + day;
