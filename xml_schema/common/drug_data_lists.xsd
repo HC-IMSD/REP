@@ -99,4 +99,14 @@
 			<hpfb:enumeration value="OTHER"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+
+	<hpfb:simpleType name="drug_use_list">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:enumeration value="HUMAN"/>
+			<hpfb:enumeration value="RADIO"/>
+			<hpfb:enumeration value="DISINFECT"/>
+			<hpfb:enumeration value="VET"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 </hpfb:schema>

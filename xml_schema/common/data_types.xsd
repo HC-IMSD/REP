@@ -40,6 +40,39 @@
 			<hpfb:maxInclusive value="9999"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+
+<hpfb:simpleType name="optional_integer_0_9999_content">	
+    <hpfb:union>
+      <hpfb:simpleType>
+        <hpfb:restriction base='hpfb:string'>
+          <hpfb:length value="0"/>
+        </hpfb:restriction>
+      </hpfb:simpleType>
+      <hpfb:simpleType>
+        <hpfb:restriction base='hpfb:integer' >
+		<hpfb:minInclusive value="0"/>
+			<hpfb:maxInclusive value="9999"/>
+			</hpfb:restriction>
+      </hpfb:simpleType>
+    </hpfb:union>
+  </hpfb:simpleType>
+
+  <hpfb:simpleType name="optional_integer_0_99_content">	
+    <hpfb:union>
+      <hpfb:simpleType>
+        <hpfb:restriction base='hpfb:string'>
+          <hpfb:length value="0"/>
+        </hpfb:restriction>
+      </hpfb:simpleType>
+      <hpfb:simpleType>
+        <hpfb:restriction base='hpfb:integer' >
+		<hpfb:minInclusive value="0"/>
+			<hpfb:maxInclusive value="99"/>
+			</hpfb:restriction>
+      </hpfb:simpleType>
+    </hpfb:union>
+  </hpfb:simpleType>
+
 	<hpfb:simpleType name="optional_integer_0_999999_content">	
     <hpfb:union>
       <hpfb:simpleType>
@@ -57,12 +90,23 @@
   </hpfb:simpleType>
 
 
-	<hpfb:simpleType name="temp_integer_content">
-		<hpfb:restriction base="hpfb:integer">
-			<hpfb:minInclusive value="-274"/>
+
+	<hpfb:simpleType name="temp_integer_content">	
+    <hpfb:union>
+      <hpfb:simpleType>
+        <hpfb:restriction base='hpfb:string'>
+          <hpfb:length value="0"/>
+        </hpfb:restriction>
+      </hpfb:simpleType>
+      <hpfb:simpleType>
+        <hpfb:restriction base='hpfb:integer' >
+		<hpfb:minInclusive value="-274"/>
 			<hpfb:maxInclusive value="999"/>
-		</hpfb:restriction>
-	</hpfb:simpleType>
+			</hpfb:restriction>
+      </hpfb:simpleType>
+    </hpfb:union>
+  </hpfb:simpleType>
+
 
 	<hpfb:simpleType name="integer_0_99_content">
 		<hpfb:restriction base="hpfb:integer">
