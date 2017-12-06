@@ -80,6 +80,8 @@
         self.oneRefSelected = "";
         self.alerts = [false, false, false, false,false,false,false];
         self.lang = $translate.proposedLanguage() || $translate.use();
+        self.extraAppendixModel="none";
+        self.missingAppendixModel="none";
 
         var yesValue = YES;
         self.$onInit = function () {
@@ -95,7 +97,7 @@
 
             if (changes.formType) {
                 self.userType = changes.formType.currentValue;
-                if (self.userType == INTERNAL_TYPE) {
+                if (self.userType === INTERNAL_TYPE) {
                     self.saveXMLLabel = "APPROVE_FINAL"
                 } else {
                     self.saveXMLLabel = "SAVE_DRAFT"
@@ -105,11 +107,21 @@
         };
 
         self.appendixMissingError = function () {
-            return (self.errorAppendix && self.errorAppendix.length > 0);
+            if (self.errorAppendix && self.errorAppendix.length > 0) {
+                self.missingAppendixModel="";
+                return true
+            }else{
+                return false
+            }
 
         };
         self.appendixExtraError = function () {
-            return (self.extraAppendix && self.extraAppendix.length > 0);
+            if (self.extraAppendix && self.extraAppendix.length > 0) {
+                self.extraAppendixModel = "";
+                return true;
+            } else {
+                return false;
+            }
 
         };
 
@@ -171,10 +183,8 @@
         };
 
         self.disableJSONSave=function() {
-
-            return(self.dossierModel.applicationType == APPROVED_TYPE&& self.isExtern());
-
-        }
+            return(self.dossierModel.applicationType === APPROVED_TYPE&& self.isExtern());
+        };
 
         function getAppendix4Errors() {
             var appendixCheck = self.dossierService.getMissingAppendix4(self.dossierModel);
@@ -193,7 +203,7 @@
         }
 
         $scope.$watch("dos.dossierForm.$invalid", function () {
-            disableXMLSave()
+            disableXMLSave();
         }, true);
 
         /**
@@ -204,7 +214,7 @@
             if (self.dossierForm) {
                 formInvalid = self.dossierForm.$invalid;
             }
-            self.disableXML = (formInvalid || (self.dossierModel.applicationType == self.applicationInfoService.getApprovedType() && self.isExtern()));
+            self.disableXML = (formInvalid || (self.dossierModel.applicationType === self.applicationInfoService.getApprovedType() && self.isExtern()));
 
         }
 
@@ -220,7 +230,7 @@
          * @returns {boolean}
          */
         self.isExtern = function () {
-            return self.userType == EXTERNAL_TYPE;
+            return self.userType === EXTERNAL_TYPE;
 
         };
 
