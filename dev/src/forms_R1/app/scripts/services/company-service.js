@@ -53,10 +53,10 @@
                 return numKeys;
             },
             getApplicationTypes: function () {
-                return (["NEW", "AMEND", "FINAL"])
+                return (["NEW", "AMEND", "APPROVED"])
             },
             getApprovedType: function () {
-                return "FINAL";
+                return "APPROVED";
             },
             getAmendType: function () {
                 return "AMEND";

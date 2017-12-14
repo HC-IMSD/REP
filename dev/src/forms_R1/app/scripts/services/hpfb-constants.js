@@ -17,7 +17,7 @@
         .constant("ENGLISH","en")
         .constant("FRENCH","fr")
         .constant("NEW_TYPE","NEW")
-        .constant("APPROVED_TYPE","FINAL")
+        .constant("APPROVED_TYPE","APPROVED")
         .constant("AMEND_TYPE","AMEND")
         .constant("INTERNAL_TYPE","INT")
         .constant("EXTERNAL_TYPE","EXT")

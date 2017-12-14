@@ -1710,7 +1710,7 @@ gulp.task('dev-diffForm-copyLib', function () {
 gulp.task('dev-diffForm-copySrc', function () {
     var servFiles = [serviceFileNames.diffService];
     var compFolder = [componentFolders.nodesRender, componentFolders.diffFileIO, componentFolders.diffMain];
-    var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
+    //var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
     //var copySourcesJs = gulp.src([paths.scripts + "/"+rootFileNames.repDiff+".js"], {read: true, base: './'});
     // copySourcesJs.pipe(gulp.dest(paths.buildDevDiff));
     return (
