@@ -156,7 +156,7 @@
                 model.isSolicited = jsonObj.is_solicited;
                 model.solicitedRequester = "";
                 if (jsonObj.solicited_requester) {
-                    getContactLists.getInternalContacts().then(function(data) {
+                    getContactLists.getInternalContacts().then(function (data) {
                         model.solicitedRequester = $filter('filter')(data, {id: jsonObj.solicited_requester.__text})[0];
                     })
                 }
@@ -183,12 +183,29 @@
                 }
                 return model;
             },
-            _setSequenceNumber: function (value) {
-                if (!value)return;
-                var converted = parseInt(value);
-                if (converted > this.currSequence) {
-                    this.currSequence = converted;
+            getCurrentSequence:function(){
+
+              return(this.currSequence);
+            },
+            setSequenceNumber: function (startVal) {
+                if (startVal === null) return false;
+                var converted = parseInt(startVal);
+                if (isNaN(converted)) {
+                    this.currSequence = 0;
+                    return false;
                 }
+                this.currSequence = converted;
+                var model = this.getModelInfo();
+
+                if (model.ectd.lifecycleRecord && model.ectd.lifecycleRecord.length > 0) {
+                    //number in reverse order
+                    for (var i = (model.ectd.lifecycleRecord.length - 1); i >= 0; i--) {
+                        var rec = model.ectd.lifecycleRecord[i];
+                        rec.sequence = this.getNextSequenceNumber();
+                    }
+                }
+                return true;
+
             },
             getNextSequenceNumber: function () {
 
@@ -208,19 +225,33 @@
             },
             _mapLifecycleList: function (jsonObj) {
                 var result = [];
+                this.currSequence=0; //reset the starting
                 if (!jsonObj) return result;
                 if (!(jsonObj instanceof Array)) {
                     //make it an array, case there is only one record
                     jsonObj = [jsonObj]
                 }
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _transformLifecycleRecFromFileObj(jsonObj[i],$filter,TransactionLists);
-
+                    var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
+                    //update the start value;
+                    this._setNextSequenceOnLoad(parseInt(record.sequence));
                     result.push(record);
                 }
-                this._setSequenceNumber(jsonObj.length);
+                //this.setSequenceNumber(jsonObj.length);
                 return result
             },
+            _setNextSequenceOnLoad: function (sequence) {
+
+                if(this.currSequence<0) {
+                    this.currSequence=0;
+                }
+                if(isNaN(sequence)) return;
+                if(sequence>=this.currSequence){
+                    this.currSequence=sequence+1;
+                }
+            },
+
+
             _mapLifecycleListToOutput: function (jsonObj) {
                 var result = [];
                 if (!jsonObj) return result;
@@ -238,7 +269,8 @@
                     result.push(record);
                 }
                 return result
-            },
+            }
+            ,
 
             resetEctdSection: function () {
 
@@ -254,7 +286,7 @@
                     //this._default.ectd = _getEmptyEctdSection();
                 }
             }
-        };
+        }
         // Return a reference to the object
         return TransactionService;
     }
@@ -286,7 +318,7 @@
      * @returns {jsonObj}
      * @private
      */
-    function _transformLifecycleRecFromFileObj(lifecycleObj, $filter,TransactionLists) {
+    function _transformLifecycleRecFromFileObj(lifecycleObj, $filter, TransactionLists) {
         var lifecycleRec = _createLifeCycleModel();
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
@@ -295,7 +327,7 @@
         lifecycleRec.activityType = "";
         if (lifecycleObj.sequence_activity_type) {
             lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.sequence_activity_type.__text})[0];
-            lifecycleRec.activityTypeDisplay=lifecycleRec.activityType.id;
+            lifecycleRec.activityTypeDisplay = lifecycleRec.activityType.id;
         }
         lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
@@ -315,13 +347,13 @@
         lifecycleRec.control_number = lifecycleObj.controlNumber;
         lifecycleRec.sequence_activity_type = "";
         if (lifecycleObj.activityType) {
-            lifecycleRec.sequence_activity_type={};
-            _setActivityTypeValuesForOutput(lifecycleObj.activityType,lifecycleRec.sequence_activity_type);
-          /*  lifecycleRec.sequence_activity_type = {
-                _label_en: lifecycleObj.activityType.en,
-                _label_fr: lifecycleObj.activityType.fr,
-                __text: lifecycleObj.activityType.id
-            }*/
+            lifecycleRec.sequence_activity_type = {};
+            _setActivityTypeValuesForOutput(lifecycleObj.activityType, lifecycleRec.sequence_activity_type);
+            /*  lifecycleRec.sequence_activity_type = {
+                  _label_en: lifecycleObj.activityType.en,
+                  _label_fr: lifecycleObj.activityType.fr,
+                  __text: lifecycleObj.activityType.id
+              }*/
         }
         lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
@@ -340,20 +372,20 @@
      * @param destActivityTypeRec
      * @private
      */
-    function _setActivityTypeValuesForOutput(srcActivityTypeRec,destActivityTypeRec){
-            var stringIndex=srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
-        destActivityTypeRec.__text=srcActivityTypeRec.id;
+    function _setActivityTypeValuesForOutput(srcActivityTypeRec, destActivityTypeRec) {
+        var stringIndex = srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
+        destActivityTypeRec.__text = srcActivityTypeRec.id;
 
-            if(stringIndex>-1){
-                destActivityTypeRec._label_en=srcActivityTypeRec.en.substring(0,stringIndex)
-            }else{
-                destActivityTypeRec._label_en=srcActivityTypeRec.en;
-            }
-            stringIndex=srcActivityTypeRec.fr.indexOf('(');
-        if(stringIndex>-1){
-            destActivityTypeRec._label_fr=srcActivityTypeRec.fr.substring(0,stringIndex-1)
-        }else{
-            destActivityTypeRec._label_fr=srcActivityTypeRec.fr;
+        if (stringIndex > -1) {
+            destActivityTypeRec._label_en = srcActivityTypeRec.en.substring(0, stringIndex)
+        } else {
+            destActivityTypeRec._label_en = srcActivityTypeRec.en;
+        }
+        stringIndex = srcActivityTypeRec.fr.indexOf('(');
+        if (stringIndex > -1) {
+            destActivityTypeRec._label_fr = srcActivityTypeRec.fr.substring(0, stringIndex - 1)
+        } else {
+            destActivityTypeRec._label_fr = srcActivityTypeRec.fr;
         }
 
     }
@@ -430,11 +462,11 @@
         address.country = "";
         if (addressObj.country) {
             address.country =
-            {
-                _label_en: addressObj.country.en,
-                _label_fr: addressObj.country.fr,
-                __text: addressObj.country.id
-            }
+                {
+                    _label_en: addressObj.country.en,
+                    _label_fr: addressObj.country.fr,
+                    __text: addressObj.country.id
+                }
         }
         address.postal_code = addressObj.postalCode;
         return (address);
@@ -477,15 +509,15 @@
     //TODO make a standard service
     function _createAddressModel() {
         return (
-        {
-            street: "",
-            city: "",
-            stateList: "",
-            stateText: "",
-            country: {"id": "", "en": "", "fr": ""},
-            countryDisplay: "",
-            "postalCode": ""
-        }
+            {
+                street: "",
+                city: "",
+                stateList: "",
+                stateText: "",
+                country: {"id": "", "en": "", "fr": ""},
+                countryDisplay: "",
+                "postalCode": ""
+            }
         )
     }
 
@@ -511,10 +543,12 @@
             + pad(d.getMonth() + 1) + '-'
             + pad(d.getDate());
         return (isoDate);
+
         function pad(n) {
             return n < 10 ? '0' + n : n
         }
     }
+
     //todo deprecated
     function _createRepContact() {
 

@@ -34,7 +34,7 @@ describe("CompanyService Test", function () {
         expect(_instantCompanyService.getAmendType()).toBe('AMEND')
     });
     it('Checks Approved Type', function () {
-        expect(_instantCompanyService.getApprovedType()).toBe('APPROVED')
+        expect(_instantCompanyService.getApprovedType()).toBe('FINAL')
     });
     it('Checks Address Role default values', function () {
         var roles = _instantCompanyService.createAddressRole();

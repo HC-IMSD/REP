@@ -50,7 +50,7 @@
                                     <div class="rep-input-group">
                                         <span class="input-group-addon">HC6-024-</span>
                                         <div ng-class="{'has-error':transInfoForm.dossierId.$invalid}">
-                                            <input type="text" class="form-control full-width" id="dossierId"
+                                            <input type="text" class="form-control full-width"
                                                    size="6" maxlength="7" id="dossierId" ng-minlength="7"
                                                    name="dossierId" required
                                                    ng-model="transInfoCtrl.transactionModel.ectd.dossierId"/>
@@ -118,7 +118,10 @@
                                                     is-ectd="transInfoCtrl.isEctd"
                                                     deprecate-sequence="transInfoCtrl.subtractSequence()"
                                                     show-errors="transInfoCtrl.showFormErrors()"
-                                                    parent-dirty="transInfoForm.$dirty"
+                                                    parent-dirty="transInfoCtrl.$dirty"
+                                                    set-sequence-value="transInfoCtrl.setSequence(start)"
+                                                    sequence-updated="transInfoCtrl.sequenceChange"
+                                                    get-current-sequence="transInfoCtrl.getCurrentSequence()"
                                                     get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
 
                             </div>
@@ -289,6 +292,7 @@
                         <h3>{{::'COMPANY_REP_THIS'|translate}}</h3>
                         <div class="row">
                             <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
+                                                 fax-mandatory="true"
                                                  is-amend="true" show-errors="transInfoCtrl.showError()">
                             </cmp-contact-details>
                         </div>
@@ -314,6 +318,6 @@
                 </div>
             </section>
         </div>
-        <!--   <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
+      <!--     <pre>{{transInfoCtrl.transactionModel | json:spacing}}</pre>-->
     </ng-form>
 </div>

@@ -1,11 +1,11 @@
 <div class="container-fluid">
     <ng-form name="contactRec.contactRecForm" id="company-contact-record-form">
         <div>
-            <cmp-error-summary form-ref="contactRec.contactRecForm" show-errors="contactRec.showErrors()"
+            <!-- cmp-error-summary form-ref="contactRec.contactRecForm" show-errors="contactRec.showErrors()"
                                form-preamble="{{'CONTACT_DETAILS'|translate}}&nbsp;{{contactRec.recordIndex+1}}"
                                name-suffix="contactRec.contactRecForm" set-heading-level="h4" form-id="company-contact-record-form"
                                make-focused="contactRec.setSummaryFocus" alias-list="contactRec.alias"
-                               update-errors="contactRec.updateSummary"></cmp-error-summary>
+                               update-errors="contactRec.updateSummary"></cmp-error-summary -->
 
         </div>
         <div>
@@ -26,6 +26,7 @@
                 <cmp-contact-details contact-record="contactRec.contactModel" is-amend="contactRec.isEditable"
                                      on-update="contactRec.onUpdateContactRecord(contact)"
                                      update-error-summary="contactRec.updateErrorSummaryState()"
+                                     fax-mandatory="true"
                                      show-errors="contactRec.showErrors()"></cmp-contact-details>
             </div>
             <div>

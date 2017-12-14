@@ -331,8 +331,8 @@
                 </div>
                 <div>
                     <section ng-if="dos.appendixMissingError()">
-                        <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixMissingError()"
-                               aria-hidden="true"/>
+                        <input type="hidden" required ng-model="dos.missingAppendixModel"
+                               aria-hidden="true" name="fake.appendix_missing_error" id="fake.appendix_missing_error"/>
                         <details class="alert alert-danger" id="alert-appendix" open="open">
                             <summary class="h3">
                                 <h2>{{'MISSING_APPENDIX'|translate}}</h2>
@@ -345,8 +345,8 @@
                 </div>
                 <div>
                     <section ng-if="dos.appendixExtraError()">
-                        <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixExtraError()"
-                               aria-hidden="true"/>
+                        <input type="hidden"  required ng-model="dos.extraAppendixModel"
+                               aria-hidden="true" id="fake.appendix_extra_error" name="fake.appendix_extra_error"/>
                         <details class="alert alert-danger" id="alert-extra-appendix" open="open">
                             <summary class="h3">
                                 <h2>{{'EXTRA_APPENDIX'|translate}}</h2>

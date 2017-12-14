@@ -2,11 +2,11 @@
     <ng-form name="addressRec.addressRecForm" id="company-address-record-form">
         <div>
 
-            <cmp-error-summary form-ref="addressRec.addressRecForm" show-errors="addressRec.showErrors()"
+            <!--  cmp-error-summary form-ref="addressRec.addressRecForm" show-errors="addressRec.showErrors()"
                                form-preamble="{{'ADDR_DETAILS'|translate}}&nbsp;{{addressRec.recordIndex+1}}"
                                name-suffix="addressRec.addressRecForm" set-heading-level="h4" form-id="company-address-record-form"
                                make-focused="addressRec.setSummaryFocus" alias-list="addressRec.alias"
-                               update-errors="addressRec.updateSummary"></cmp-error-summary>
+                               update-errors="addressRec.updateSummary"></cmp-error-summary -->
 
             <div>
                 <h3>{{'ADDR_DETAILS'|translate}}&nbsp;{{addressRec.recordIndex+1}}</h3>
@@ -83,5 +83,5 @@
             </div>
         </div>
     </ng-form>
-    <!--<pre>address record model: {{addressRec.addressModel | json : spacing}}</pre>-->
+    <!-- pre>address record model: {{addressRec.addressModel | json : spacing}}</pre-->
 </div>
