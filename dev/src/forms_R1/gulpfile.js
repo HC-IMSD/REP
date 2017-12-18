@@ -2444,7 +2444,30 @@ gulp.task('protractor-testEnv', function () {
         })
 });
 
-gulp.task('protractor-localDevEnv', function () {
+gulp.task('protractor-localDevEnv-company', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/company/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv-csp', function (done) {
     gulp.src([
 
         /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
@@ -2463,7 +2486,77 @@ gulp.task('protractor-localDevEnv', function () {
         .on('error', function (e) {
             console.error(e);
             //throw e;
-        })
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv-dossier', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/dossier/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv-transaction', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/transaction/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/company/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
 });
 
 

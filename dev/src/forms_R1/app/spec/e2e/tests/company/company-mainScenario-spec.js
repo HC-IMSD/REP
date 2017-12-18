@@ -26,16 +26,10 @@ describe('Company External Main Test', function () {
         lang=browser.params.lang;
         formType=browser.params.formType;
         if(formType==='EXT' && lang==='en'){
-            company_url="company/companyEXT-en.html"
-        }else  if(formType==='INT' && lang==='en'){
-            company_url="company/companyINT-en.html"
-        }
-        else  if(formType==='INT' && lang==='fr'){
-            company_url="company/companyINT-fr.html"
-        }
-        else  if(formType==='EXT' && lang==='fr'){
-            company_url="comapny/companyEXT-fr.html"
-        }else{
+            company_url="company/companyEnrolEXT-en.html"
+        } else  if(formType==='INT' && lang==='en'){
+            company_url="company/companyEnrolINT-en.html"
+        } else{
             //error condition
             company_url="";
         }

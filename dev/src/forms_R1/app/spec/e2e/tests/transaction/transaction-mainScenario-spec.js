@@ -27,19 +27,8 @@ describe('Transaction External Main Test', function () {
         lang=browser.params.lang;
         formType=browser.params.formType;
         if(formType==='EXT' && lang==='en'){
-            transaction_url="transaction/transactionEXT-en.html"
-        }else  if(formType==='INT' && lang==='en'){
-            transaction_url="transaction/transactionINT-en.html"
-
-        }
-        else  if(formType==='INT' && lang==='fr'){
-            transaction_url="transaction/transactionINT-fr.html"
-
-        }
-        else  if(formType==='EXT' && lang==='fr'){
-            transaction_url="transaction/transactionEXT-fr.html"
-
-        }else{
+            transaction_url="transaction/transactionEnrol-en.html"
+        } else{
             //error condition
             transaction_url="";
         }

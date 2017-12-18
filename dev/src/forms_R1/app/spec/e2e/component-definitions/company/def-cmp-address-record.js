@@ -13,7 +13,6 @@ var AddressRecord = function () {
     var addressListTag = "cmp-company-address-list";
     //var addressRecTag="cmp-address-record";
     ///var newRecTag="new-record"; TODO: will be needed when this record is refactored
-    var addAddressButtonName = "addAddressBtn";
     var saveAddressButtonName = "saveAddress";
 
     //importer records section
@@ -35,9 +34,9 @@ var AddressRecord = function () {
 
     this.addAddressRecord = function (parent) {
         if (parent) {
-            parent.element(by.name(addAddressButtonName)).click();
+            parent.element(by.xpath("//button[@ng-click='addressListCtrl.addAddress()']")).click();
         } else {
-            element(by.name(addAddressButtonName)).click();
+            element(by.xpath("//button[@ng-click='addressListCtrl.addAddress()']")).click();
         }
     };
 

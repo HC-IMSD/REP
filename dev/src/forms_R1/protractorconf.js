@@ -91,14 +91,14 @@ exports.config = {
     rootElement: '#app-root',
 
     plugins: [
-        {
+       /* {
 
             chromeA11YDevTools: {
                 treatWarningsAsFailures: true,
                 auditConfiguration: {
                     auditRulesToRun: [
                         'pageWithoutTitle',
-                        'controlsWithoutLabel',
+                        'controlsWithoutLabel' */
                         /*  'requiredAriaAttributeMissing',*/
                         /* 'unfocusableElementsWithOnClick',*/
                         /*  'mainRoleOnInappropriateElement'*/
@@ -107,7 +107,7 @@ exports.config = {
                         /*  'badAriaAttributeValue', outer hmyml error*/
                         /* 'nonExistentAriaLabelledbyElement' test causes collectIDRefs Errors*/
                         /*  'focusableElementNotVisibleAndNotAriaHidden' get outerHtml error*/
-                    ],
+             /*       ],
                     auditRulesToSkip: []
                 }
             },
@@ -124,6 +124,7 @@ exports.config = {
             imageToAscii: 'failure',
             clearFoldersBeforeTest: true
         }
+        */
     ],
 
     suites: {

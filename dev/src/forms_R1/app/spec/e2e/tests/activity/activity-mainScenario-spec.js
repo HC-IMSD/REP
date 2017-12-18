@@ -48,7 +48,7 @@ describe('Activity External Form Type Test', function () {
         var rootRef=rootActivityObj.getRoot();
         rootActivityObj.setCompanyId('123456');
         rootActivityObj.setDossierId('1D23456');
-        rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)',rootRef);
+        rootActivityObj.setRegActivityValue('PSUR-PV (Periodic Safety Update Report - Post-Market Vigilance)',rootRef);
         rootActivityObj.setActivityLeadValue("Drug Master File",rootRef);
         rootActivityObj.setFeeClassByText("New active substance",rootRef);
         rootActivityObj.setReasonFiling("This is the reason for filing. \n\n This is a new line.");
@@ -65,7 +65,7 @@ describe('Activity External Form Type Test', function () {
         rootActivityObj.setRelatedIsNotLasa();
 
         expect(rootActivityObj.getRegActivityModelValue()).toEqual('B02-20160301-079');
-        expect(rootActivityObj.getRegActivitySavedDisplay()).toEqual('PSUR-PV (Periodic Safety Update Report - Pharmacovigilance)');
+        expect(rootActivityObj.getRegActivitySavedDisplay()).toEqual('PSUR-PV (Periodic Safety Update Report - Post-Market Vigilance)');
         expect(rootActivityObj.getCompanyId()).toEqual('123456');
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
 
@@ -105,7 +105,7 @@ describe('Activity External Form Type Test', function () {
             repContactObj.setEmailValue(record, "foo@google.ca");
             repContactObj.setLanguageValue(record, "English");
 
-            expect(repContactObj.getSalutationValue(record)).toEqual('string:' + contactData.salutation.MRS.expect);
+            expect(repContactObj.getSalutationValue(record)).toEqual(contactData.salutation.MRS.expect);
             expect(repContactObj.getFirstNameValue(record)).toEqual('John');
             expect(repContactObj.getInitialsValue(record)).toEqual('I');
             expect(repContactObj.getLastNameValue(record)).toEqual(contactData.lastNames.typical);

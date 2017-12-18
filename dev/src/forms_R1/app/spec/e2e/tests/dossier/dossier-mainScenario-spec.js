@@ -39,16 +39,10 @@ describe('Dossier External Form Type Components Test', function () {
         lang=browser.params.lang;
         formType=browser.params.formType;
         if(formType==='EXT' && lang==='en'){
-            dossier_url="dossier/dossierEXT-en.html"
-        }else  if(formType==='INT' && lang==='en'){
-            dossier_url="dossier/dossierINT-en.html"
-        }
-        else  if(formType==='INT' && lang==='fr'){
-            dossier_url="dossier/dossierINT-fr.html"
-        }
-        else  if(formType==='EXT' && lang==='fr'){
-            dossier_url="dossier/dossierEXT-fr.html"
-        }else{
+            dossier_url="dossier/dossierEnrolEXT-en.html"
+        } else if(formType==='INT' && lang==='en'){
+            dossier_url="dossier/dossierEnrolINT-en.html"
+        } else{
             //error condition
             dossier_url="";
         }
@@ -236,7 +230,7 @@ describe('Dossier External Form Type Components Test', function () {
             repContactObj.setEmailValue(record, "foo@google.ca");
             repContactObj.setLanguageValue(record, "English");
 
-            expect(repContactObj.getSalutationValue(record)).toEqual('string:' + contactData.salutation.MRS.expect);
+            expect(repContactObj.getSalutationValue(record)).toEqual(contactData.salutation.MRS.expect);
             expect(repContactObj.getFirstNameValue(record)).toEqual('John');
             expect(repContactObj.getInitialsValue(record)).toEqual('I');
             expect(repContactObj.getLastNameValue(record)).toEqual(contactData.lastNames.typical);
