@@ -11,6 +11,8 @@
                 <h2 class="panel-title">{{::'LOAD_CSP_FILE'| translate}}</h2>
             </header>
             <div class="panel-body">
+                <!-- build:test -->
+                <!-- endbuild -->
                 <cmp-alert  ui-state="main.alerts[0]" msg="CSPFILE_LOAD" update-state="main.toggleAlert(0)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!main.isFrench()" ng-include="'app/scripts/templates/csp/tpl-csp-file-en.html'">

@@ -2489,7 +2489,7 @@ gulp.task('protractor-localDevEnv-company', function (done) {
     done();
 });
 
-gulp.task('protractor-localDevEnv-csp', function (done) {
+gulp.task('protractor-localDevEnv-csp', gulp.series('dev-csp-injectTest', function (done) {
     gulp.src([
 
         /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
@@ -2510,7 +2510,7 @@ gulp.task('protractor-localDevEnv-csp', function (done) {
             //throw e;
         });
     done();
-});
+}));
 
 gulp.task('protractor-localDevEnv-dossier', function (done) {
     gulp.src([
