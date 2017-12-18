@@ -44,7 +44,7 @@ var UiUtil = function () {
 
     /**
      * Used for selecting a value from a HTML5 droplist control
-     * @param selector- the protracto search criteria i.e by.model, by.id etch
+     * @param selector - the protracto search criteria i.e by.model, by.id etch
      * @param item
      */
     this.selectOption = function (selector, item, parentElement) {
@@ -239,8 +239,8 @@ var UiUtil = function () {
     this.setDate = function (dateElement, year, month, day) {
         var separator="-";
         if (browser.browserName === "chrome") {
-            //TODO hack, doesn't seem to be a way around this?
-            var value = "00" + year + month + day;
+            var value = month +separator+ day +separator + year;
+            //console.log("This is the day: "+value);
             dateElement.sendKeys(value);
         } else if (browser.browserName === "MicrosoftEdge") {
             //bug: currently MM-dd-yyyy
