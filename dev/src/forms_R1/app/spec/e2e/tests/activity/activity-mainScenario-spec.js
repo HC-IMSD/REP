@@ -69,10 +69,17 @@ describe('Activity External Form Type Test', function () {
         expect(rootActivityObj.getCompanyId()).toEqual('123456');
         expect(rootActivityObj.getDossierId()).toEqual('1D23456');
 
+        expect(rootActivityObj.getActivityLeadValue()).toEqual("string:B14-20160301-07");
+        expect(rootActivityObj.getFeeClassValue()).toEqual("FC1");
+        expect(rootActivityObj.getReasonFilingValue()).toEqual("This is the reason for filing. \n\n This is a new line.");
         expect(rootActivityObj.getThirdPartyValue()).toEqual("string:N");
         expect(rootActivityObj.getIsAdmendSubmissionValue()).toEqual("string:Y");
 
-
+        expect(rootActivityObj.getRelatedAct_CompanyName()).toEqual("Related Company Name");
+        expect(rootActivityObj.getRelatedAct_DateCleared()).toEqual("2007-11-21");
+        expect(rootActivityObj.getRelatedAct_isAdminLicenseSubmission()).toEqual("string:N");
+        expect(rootActivityObj.getRelatedAct_RegActivityModelValue()).toEqual("B02-20160301-050");
+        expect(rootActivityObj.getRelatedAct_ControlNumber()).toEqual("123455");
     });
 
     it('Related Activity Information Test', function(){
