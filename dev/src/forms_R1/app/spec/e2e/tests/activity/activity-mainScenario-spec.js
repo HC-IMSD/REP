@@ -119,6 +119,7 @@ describe('Activity External Form Type Test', function () {
             expect(repContactObj.getJobTitleValue(record)).toEqual('Job Title');
             expect(repContactObj.getPhoneValue(record)).toEqual('435-123-8765');
             expect(repContactObj.getLanguageValue(record)).toEqual('string:en');
+            expect(repContactObj.getEmailValue(record)).toEqual('foo@google.ca');
 
             repContactObj.saveRepContact();
 
@@ -138,6 +139,7 @@ describe('Activity External Form Type Test', function () {
             expect(repContactObj.getPhoneValue(record)).toEqual('435-123-8765');
             expect(repContactObj.getLanguageValue(record)).toEqual('string:en');
             expect(repContactObj.getPhoneExtValue(record)).toEqual('');
+            expect(repContactObj.getEmailValue(record)).toEqual('foo@google.ca');
         });
     });
 

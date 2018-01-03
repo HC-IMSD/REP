@@ -60,7 +60,6 @@ var MainActivity = function () {
 
     this.getRoot = function () {
         return element(by.id('app-root'));
-
     };
 
     //model value of UI select

@@ -66,6 +66,50 @@ describe('Dossier External Form Type Components Test', function () {
 
     });
 
+    describe('Dossier main and Reference Product Tests', function () {
+
+        it('Main with Yes there are reference products', function () {
+            var rootRef = rootDossierObj.getRoot();
+            rootDossierObj.setDossierTypeByText('Biologic', rootRef);
+            rootDossierObj.setCompanyId('123456');
+            rootDossierObj.setThirdPartyByText('Yes', rootRef);
+            rootDossierObj.setProductNameValue('Test Product1');
+            rootDossierObj.setCommonNameValue('Common Name2');
+            rootDossierObj.setIsRefProductByText('Yes');
+
+            expect(rootDossierObj.getDossierTypeValue()).toEqual("string:BIOLOGIC");
+            expect(rootDossierObj.getCompanyIdValue()).toEqual("123456");
+            expect(rootDossierObj.getThirdPartyValue()).toEqual("string:Y");
+            expect(rootDossierObj.getProductNameValue()).toEqual("TEST PRODUCT1");
+            expect(rootDossierObj.getCommonNameValue()).toEqual("COMMON NAME2");
+            expect(rootDossierObj.getIsRefProductValue()).toEqual("string:Y");
+        });
+
+        it(' Add a reference product', function () {
+            referenceProduct.addReferenceProduct();
+            var rootRefInstance = referenceProduct.getRootRefProduct();
+            var newRefRecord = referenceProduct.getNewRecord(rootRefInstance);
+            referenceProduct.setActiveNameLookup(newRefRecord, "ETH", "(ETHYLENEDINITRILO)TETRAACETIC ACID");
+            referenceProduct.setBrandNameValue(newRefRecord, "brand name 1");
+            referenceProduct.setStrengthValue(newRefRecord, 2.444);
+            referenceProduct.setPerValue(newRefRecord, 'Per value');
+            referenceProduct.setUnitsTextValue(newRefRecord, "AMP");
+            referenceProduct.setCompanyNameValue(newRefRecord, 'Company Name 1');
+            referenceProduct.setDosageFormTextValue(newRefRecord, "CAPSULE");
+            referenceProduct.saveReferenceProduct(newRefRecord);
+            //check the values that were set
+            referenceProduct.clickRow(rootRefInstance,0);
+            expect(referenceProduct.isRecordVisible(rootRefInstance,0)).toBeTruthy();
+            expect(referenceProduct.getActiveNameLookup()).toEqual('(ETHYLENEDINITRILO)TETRAACETIC ACID');
+            expect(referenceProduct.getBrandNameValue()).toEqual('brand name 1');
+            expect(referenceProduct.getStrengthValue()).toEqual('2.444');
+            expect(referenceProduct.getPerValue()).toEqual('Per value');
+            expect(referenceProduct.getUnitsTextValue()).toEqual('AMP');
+            expect(referenceProduct.getCompanyNameValue()).toEqual('Company Name 1');
+            expect(referenceProduct.getDosageFormTextValue()).toEqual('CAPSULE');
+        });
+
+    });
 
     describe("Add a formulation", function () {
         var formulationRecord = "";
@@ -178,34 +222,6 @@ describe('Dossier External Form Type Components Test', function () {
             theraProduct.clickRow(1);
             expect(theraProduct.isRecordVisible(1)).toBeFalsy();
         });
-    });
-
-    describe('Dossier Reference Product Tests', function () {
-
-        it('Yes there are reference products', function () {
-            rootDossierObj.setIsRefProductByText('Yes');
-            //TODO check states
-        });
-
-        it(' Add a reference product', function () {
-            referenceProduct.addReferenceProduct();
-            var rootRefInstance = referenceProduct.getRootRefProduct();
-            var newRefRecord = referenceProduct.getNewRecord(rootRefInstance);
-            referenceProduct.setActiveNameLookup(newRefRecord, "(ETH", "(ETHYLENEDINITRILO)TETRAACETIC ACID");
-            referenceProduct.setBrandNameValue(newRefRecord, "brand name 1");
-            referenceProduct.setStrengthValue(newRefRecord, 2.444);
-            referenceProduct.setPerValue(newRefRecord, 'Per value');
-            referenceProduct.setUnitsTextValue(newRefRecord, "AMP");
-            referenceProduct.setCompanyNameValue(newRefRecord, 'Company Name 1');
-            referenceProduct.setDosageFormTextValue(newRefRecord, "CAPSULE");
-           // referenceProduct.setActiveNameText(newRefRecord, "active name");
-            referenceProduct.saveReferenceProduct(newRefRecord);
-            //TODO check the values that were set
-            referenceProduct.clickRow(rootRefInstance,0);
-            expect(referenceProduct.isRecordVisible(rootRefInstance,0)).toBeTruthy();
-        });
-
-
     });
 
     describe('Rep Contact Tests', function () {

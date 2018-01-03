@@ -40,8 +40,12 @@ var MainDossier=function(){
         browser.driver.manage().window().maximize();
     };
 
-    this.setDossierTypeByText = function (value) {
-        browser.selectOption(by.model(_dossierTypeModelString), value);
+    this.getRoot = function () {
+        return element(by.id('app-root'));
+    };
+
+    this.setDossierTypeByText = function (value, parent) {
+        browser.selectOption(by.model(_dossierTypeModelString), value, parent);
     };
 
     this.getDossierTypeValue = function () {
@@ -59,8 +63,8 @@ var MainDossier=function(){
      * Set the value by text value
      * @param value
      */
-    this.setThirdPartyByText = function (value) {
-        browser.selectOption(by.model(_thirdPartyModelString), value);
+    this.setThirdPartyByText = function (value, parent) {
+        browser.selectOption(by.model(_thirdPartyModelString), value, parent);
     };
 
     this.getThirdPartyValue = function () {

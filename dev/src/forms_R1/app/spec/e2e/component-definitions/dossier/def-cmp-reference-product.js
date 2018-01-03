@@ -59,7 +59,6 @@ var ReferenceProduct=function(){
     };
     this.setUnitsTextValue=function(parent, value) {
         var selectList=parent.element(by.model(_unitsModelString));
-        // parent.element(by.name(dosageFormModelString)).then(function (selectList) {
         browser.UISelectSearch(selectList,value);
     };
 
@@ -87,31 +86,33 @@ var ReferenceProduct=function(){
       return (element(by.name(rootRefCmpName)));
     };
 
-    this.getActiveNameLookup= function (parent) {
-        var _element=parent.all(by.model(modelString)).last(); //temporary till a better fix
+    this.getActiveNameLookup= function () {
+        var _element=element.all(by.model(_activeNameModel)).last(); //temporary till a better fix
         return _element.getAttribute('value');
     };
-    this.getBrandNameValue=function(parent){
-        return parent.get(by.model(_brandNameModelString)).getAttribute('value');
+    this.getBrandNameValue=function(){
+        return element(by.model(_brandNameModelString)).getAttribute('value');
     };
     this.getStrengthValue=function(){
-        return parent.get(by.model(_strengthModelString)).getAttribute('value');
+        return element(by.model(_strengthModelString)).getAttribute('value');
     };
 
-    this.getUnitsTextValue=function(parent) {
-        return parent.get(by.model(_unitsModelString)).getAttribute('value');
+    this.getUnitsTextValue=function() {
+        return element(by.model(_unitsModelString))
+            .element(by.css('span.ng-binding.ng-scope')).getText();
     };
 
 
-    this.getPerValue=function(parent){
-        return parent.get(by.model(_perModelString)).getAttribute('value');
+    this.getPerValue=function(){
+        return element(by.model(_perModelString)).getAttribute('value');
     };
-    this.getDosageFormTextValue=function(parent) {
-        return parent.get(by.model(_dosageFormModelString)).getAttribute('value');
+    this.getDosageFormTextValue=function() {
+        return element(by.model(_dosageFormModelString))
+            .element(by.css('span.ng-binding.ng-scope')).getText();
     };
 
-    this.getCompanyNameValue=function(parent){
-        return parent.get(by.model(_dosageFormModelString)).getAttribute('value');
+    this.getCompanyNameValue=function(){
+        return element(by.model(_companyNameModelString)).getAttribute('value');
     };
 
 
