@@ -296,7 +296,7 @@
 						<xsl:if test="mailing = 'Y'">
 							<div class="panel panel-warning">
 								<header class="panel-warning panel-heading">
-									<h3 class="panel-warning panel-title"> Regulatory Mailing Address / Annual Contact* </h3>
+									<h3 class="panel-warning panel-title"> Regulatory Mailing Address / Annual Contact Address* </h3>
 								</header>
 								
 								<div class="panel-body">

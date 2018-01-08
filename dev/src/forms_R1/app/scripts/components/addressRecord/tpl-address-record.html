@@ -10,16 +10,6 @@
 
             <div>
                 <h3>{{'ADDR_DETAILS'|translate}}&nbsp;{{addressRec.recordIndex+1}}</h3>
-                <div class="row">
-                    <div class="form-group" ng-show="addressRec.isAmend">
-                        <input class="formControl" id="chk-amend-rec_{{::$id}}" type="checkbox"
-                               ng-change="addressRec.setEditable()"
-                               ng-model="addressRec.addressModel.amendRecord"/>
-                        <label class="form-checkbox" for="chk-amend-rec_{{::$id}}">
-                            {{'AMEND_RECORD'|translate}}
-                        </label>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-12"
@@ -54,11 +44,6 @@
                                   update-error-summary="addressRec.updateErrorSummaryState()"
                                   already-selected="addressRec.isOneSelected(roleName)"></cmp-address-role>
 
-            </div>
-            <div ng-if="addressRec.isImporter">
-                <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"
-                                       is-amend="addressRec.isEditable"
-                                       show-errors="addressRec.showErrors()"></cmp-importer-products>
             </div>
             <div class="row">
                 <div class="col-xs-7">

@@ -155,6 +155,7 @@
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
+                vm.addressModel.amendRecord = changes.isAmend.currentValue;
                 vm.setEditable();
             }
             if(changes.showErrorSummary){
@@ -252,9 +253,8 @@
          * @returns {boolean}
          */
         vm.setEditable = function () {
-
             vm.isEditable = !(vm.formAmend && !vm.addressModel.amendRecord);
-        }
+        };
 
         function _setIdNames() {
             vm.companyNameId = "companyName" +"_"+  $scope.$id;
