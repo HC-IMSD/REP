@@ -28,11 +28,13 @@
                 softwareVersion: "1.1.0",
                 companyId: "",
                 addressList: [],
-                contactList: [],
+                contactList: []
+                /* ,
                 importerProducts: {
                     selectedProducts: "",
                     dossierIdList: []
                 }
+                */
             };
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
@@ -53,10 +55,10 @@
                 return numKeys;
             },
             getApplicationTypes: function () {
-                return (["NEW", "AMEND", "APPROVED"])
+                return (["NEW", "AMEND", "FINAL"])
             },
             getApprovedType: function () {
-                return "APPROVED";
+                return "FINAL";
             },
             getAmendType: function () {
                 return "AMEND";
@@ -96,11 +98,13 @@
                     stateList: "",
                     stateText: "",
                     country: "",
-                    postalCode: "",
+                    postalCode: ""
+                    /* ,
                     importerProducts: {
                         selectedProducts: "",
                         dossierIdList: []
                     }
+                    */
                 };
                 defaultAddress.addressID = this.getNextAddressID();
                 return (defaultAddress);
@@ -256,7 +260,7 @@
                     }
                     address.postalCode = adrList[i].company_address_details.postal_code;
                    // if(address.addressRole.importer){
-                        address.importerProducts= this.getImporterInfo(adrList[i].importer_products);
+                       // address.importerProducts= this.getImporterInfo(adrList[i].importer_products);
 
                     //}
                     list.push(address);
@@ -355,9 +359,9 @@
                 }
                 // address.company_address_details.country = adrList[i].country;
                 address.company_address_details.postal_code = adrList[i].postalCode;
-                if(adrList[i].addressRole.importer){
-                    address.importer_products=_mapImporterInfoToOutput( adrList[i].importerProducts);
-                }
+                //if(adrList[i].addressRole.importer){
+                  //  address.importer_products=_mapImporterInfoToOutput( adrList[i].importerProducts);
+                //}
 
 
 

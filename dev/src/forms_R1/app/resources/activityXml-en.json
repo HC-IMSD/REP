@@ -1,7 +1,7 @@
 {
   "ACTIVITY_ENROL": "Regulatory Activity",
   "dsts_control_number": "DTSTS number",
-  "dossier_id_concat": "Dossier Id Full",
+  "dossier_id_concat": "Dossier ID Full",
   "reg_activity_lead": "Regulatory Activity Lead",
   "reg_activity_type": "Regulatory Activity Type",
   "fee_class": "Fee class",

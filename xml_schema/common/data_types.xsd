@@ -291,6 +291,7 @@
 			<hpfb:enumeration value="NEW"/>
 			<hpfb:enumeration value="AMEND"/>
 			<hpfb:enumeration value="APPROVED"/>
+			<hpfb:enumeration value="FINAL"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
 

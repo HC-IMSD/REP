@@ -12,15 +12,6 @@
             <div>
                 <h4>{{::'CONTACT_DETAILS'|translate}}&nbsp;{{::contactRec.recordIndex+1}}</h4>
 
-                <div class="row">
-                    <div class="form-group" ng-show="contactRec.formAmend">
-                        <input class="formControl" id="chk-amend-rec_{{::$id}}" type="checkbox"
-                               ng-model="contactRec.contactModel.amendRecord" ng-change="contactRec.setEditable()"/>
-                        <label class="form-checkbox" for="chk-amend-rec_{{::$id}}">
-                            {{::'AMEND_RECORD'|translate}}
-                        </label>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <cmp-contact-details contact-record="contactRec.contactModel" is-amend="contactRec.isEditable"

@@ -63,6 +63,7 @@
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
     "karma-junit-reporter": "^0.2.2",
+    "lodash": "4.17.4",
     "main-bower-files": "^2.5.0",
     "method-override": "^2.1.2",
     "ng-focus-if": "^1.0.7",

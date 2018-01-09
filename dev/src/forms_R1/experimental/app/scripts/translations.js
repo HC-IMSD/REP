@@ -10,7 +10,7 @@ $translateProvider.translations("en", {
     "A": "Record Added",
     "N": "New / Added",
     "D":"Deleted",
-    "company_id":"Company Id",
+    "company_id":"Company ID",
     "formulation_details":"Formulation Record",
     "enrolment_version": "Enrolment Version",
     "appendix4_group": "Animal/ human sourced record",

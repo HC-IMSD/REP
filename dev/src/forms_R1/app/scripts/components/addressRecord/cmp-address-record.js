@@ -151,11 +151,12 @@
                 vm.addressModel = angular.copy(changes.addressRecord.currentValue);
                 vm.addressModel.roleConcat = _getRolesConcat();
                 vm.setEditable();
-                vm.importerProductState(vm.addressModel.addressRole.importer);
+                //vm.importerProductState(vm.addressModel.addressRole.importer);
                 //angular.element(saveAddress).trigger('focus');
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
+                vm.addressModel.amendRecord = changes.isAmend.currentValue;
                 vm.setEditable();
             }
             if(changes.showErrorSummary){
@@ -257,9 +258,8 @@
          * @returns {boolean}
          */
         vm.setEditable = function () {
-
             vm.isEditable = !(vm.formAmend && !vm.addressModel.amendRecord);
-        }
+        };
 
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;

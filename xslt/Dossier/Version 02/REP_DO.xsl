@@ -278,7 +278,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-099">
-                            <span class="labels" > Related Dossier ID [If applicable] </span>
+                            <span class="labels" > Related Information [If applicable] </span>
                             <span class="dossier_enrol">
                                 <xsl:apply-templates select="related_dossier_id" />
                             </span>

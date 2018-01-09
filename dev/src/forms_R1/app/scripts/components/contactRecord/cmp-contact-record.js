@@ -98,6 +98,7 @@
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
+                vm.contactModel.amendRecord = changes.isAmend.currentValue;
                 vm.setEditable();
             }
             /** Messaging for Showing the error summary **/
