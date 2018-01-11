@@ -27,7 +27,7 @@
   "THERA_CLASS_NAME": "Therapeutic Classification Name",
   "PROPNAME": "Brand or Proprietary or Product Name (should be the same as the brand name on the product label)",
   "DRUG_PRODUCT": "Drug Product Formulation Information",
-  "SIGNED_THIRD": "The submission will be signed or filled by a third party on behalf of the manufacturer or sponsor",
+  "SIGNED_THIRD": "The submission will be signed or filed by a third party on behalf of the manufacturer or sponsor",
   "INCLUDE_AUTH": "Please include the Third Party Authorization letter in the REP folder when submitting via the  Common Electonic Submissions Gateway (CESG)",
   "RELATED_DOSSIER": "Related Information [if applicable]",
   "PROPER_NAME": "Proper, Common or Non-Proprietary Name",

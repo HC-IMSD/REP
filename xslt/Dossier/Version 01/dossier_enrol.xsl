@@ -278,7 +278,7 @@
 					<div class="row">
 						<div class="col-sm-099">
 							<span class="labels" > Brand or Proprietary or Product Name (should be the same as the brand name on the product label)* </span>
-							<span class="dossier_enrol"> <xsl:apply-templates select="brand_name" /> </span>
+							<span class="dossier_enrol"> <xsl:apply-templates select="product_name" /> </span>
 						</div>
 					</div>
 					<div class="row">

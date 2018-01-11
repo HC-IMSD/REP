@@ -19,9 +19,9 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
 
-    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
+    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO) {
         var yesValue = YES;
         var noValue = NO;
 
@@ -45,12 +45,12 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "1.2.0",
+                softwareVersion: SOFTWARE_VERSION,
                 dataChecksum: "",
                 dossierType: "",
                 productName: "",
                 properName: "",
-                isRefProducts: "",
+                isRefProduct: "",
                 drugProduct: {
                     thirdPartySigned: "",
                     //drugUseList: getDefaultDrugUseList(),
@@ -58,14 +58,17 @@
                    // isScheduleA: false,
                     //scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
-                    canRefProducts: []//grid
+                    canRefProduct: {
+                        brandName: "",
+                        companyName: ""
+                    }//grid
                    // formulations: [],//tab + grid +
                    // appendixFourList: []/*{
                    //  ingredientList:[]
                   //   }//tab + grid +*/
 
-                },
-                contactList: []
+                }
+                //contactList: []
 
             },
 
@@ -97,20 +100,24 @@
                     softwareVersion: info.software_version,
                     dataChecksum: info.data_checksum,
                     dossierType: info.dossier_type,
-                    productName: info.brand_name,
+                    productName: info.product_name,
                     properName: info.common_name,
-                    isRefProducts: info.is_ref_products,
+                    isRefProduct: info.is_ref_product,
                     drugProduct: {
                         thirdPartySigned: info.third_party_signed,
                        // drugUseList: loadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                        // isScheduleA: info.is_sched_a === 'Y',
                         therapeutic: [],
-                        canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
+                        canRefProduct: {
+                            brandName: info.cdn_ref_product.brand_name,
+                            companyName: info.cdn_ref_product.company_name
+                        }
+                        //canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                        // formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         //appendixFourList: getAppendix4IngredientList(info.appendix4_group)
-                    },
-                    contactList: getContactList(info.contact_record)
+                    }
+                   // contactList: getContactList(info.contact_record)
 
                 };
                 if (info.therapeutic_class_list.therapeutic_class) {
@@ -140,24 +147,26 @@
             if (!jsonObj) return null;
             var baseDossier = {};
             //order is important!!! Must match schema
-            baseDossier.company_id = jsonObj.companyID; //TODO missing from internal model
-            baseDossier.dossier_id = jsonObj.dossierID; //TODO missing from  internal model and XML! Net New
-            baseDossier.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
+            baseDossier.company_id = jsonObj.companyID;
+            baseDossier.dossier_id = jsonObj.dossierID;
+            baseDossier.related_dossier_id = jsonObj.relatedDossierID;
             baseDossier.enrolment_version = jsonObj.enrolmentVersion;
             baseDossier.date_saved = jsonObj.dateSaved;
             baseDossier.application_type = jsonObj.applicationType;
-            baseDossier.software_version = "1.0.0"; //TODO: hard code or make a function, should be centrally available
+            baseDossier.software_version = SOFTWARE_VERSION;
             baseDossier.data_checksum = "";
-            if (jsonObj.contactList) { //TODO skip if empty list?
+            /* if (jsonObj.contactList) {
                 baseDossier.contact_record = repContactToOutput(jsonObj.contactList);
-            }
+            } */
             baseDossier.dossier_type = jsonObj.dossierType;
-            baseDossier.brand_name = jsonObj.productName;
+            baseDossier.product_name = jsonObj.productName;
             baseDossier.common_name = jsonObj.properName;
             baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
-            baseDossier.is_ref_products = jsonObj.isRefProducts;
-            baseDossier.ref_product_list = {};
-            //  baseDossier.ref_product_list.amend_record = "N" //TODO implement this functionality?
+            baseDossier.is_ref_product = jsonObj.isRefProduct;
+            if (jsonObj.isRefProduct === 'Y' && jsonObj.drugProduct.canRefProduct) {
+                baseDossier.cdn_ref_product = canRefProductToOutput(jsonObj.drugProduct.canRefProduct)
+            }
+            //  baseDossier.ref_product_list.amend_record = "N"
             //initialize values and order
            // baseDossier.human_drug_use = 'N';
            // baseDossier.radiopharm_drug_use = 'N';
@@ -178,10 +187,6 @@
 
             if (jsonObj.drugProduct.therapeutic && jsonObj.drugProduct.therapeutic.length > 0) {
                 baseDossier.therapeutic_class_list.therapeutic_class = therapeuticClassToOutput(jsonObj.drugProduct.therapeutic);
-            }
-
-            if (jsonObj.drugProduct.canRefProducts && jsonObj.drugProduct.canRefProducts.length > 0) {
-                baseDossier.ref_product_list.cdn_ref_product = canRefProductListToOutput(jsonObj.drugProduct.canRefProducts)
             }
            /* if (jsonObj.drugProduct.isScheduleA) {
                 baseDossier.schedule_a_group = scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
@@ -814,49 +819,14 @@
             //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
         };
 
-        function canRefProductListToOutput(info) {
-            var resultList = [];
+        function canRefProductToOutput(info) {
+            var result = {};
 
             if (angular.isDefined(info)) {
-                for (var i = 0; i < info.length; i++) {
-                    var product = {};
-                    product.brand_name = info[i].brandName;
-                    // product.medicinal_ingredient = info[i].medIngredient;
-
-                    //BUG Fix April 10, 2017
-                    // This fixes data issues where ingredient is not on the list
-                    //id should be empty in this case
-                    if (info[i].ingId && (info[i].ingId !== info[i].ingLabel)) {
-                        product.ingredient_id = "";
-                        product.ingredient_name = info[i].ingLabel;
-                    } else {
-                        product.ingredient_id = info[i].ingId;
-                        product.ingredient_name = info[i].ingLabel;
-                    }
-                    //make dosage form with both english and french labels
-                    if (info[i].dosageForm) {
-                        var splitArray = (info[i].dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                        var newDosage = splitArray[splitArray.length - 1];
-                        // product.dosage_form = info[i].dosageForm;
-                        product.dosage_form = {
-                            _label_en: info[i].dosageForm.en,
-                            _label_fr: info[i].dosageForm.fr,
-                            __text: newDosage
-                        };
-                    }
-
-                    product.dosage_form_other = info[i].dosageFormOther;
-                    product.strengths = info[i].strengths;
-                    product.units = _unitsFldToOutput(info[i].units, DossierLists.getUnitsPrefix());
-                    product.units_other = info[i].otherUnits;
-                    product.per = info[i].per;
-                    product.company_name = info[i].companyName;
-
-
-                    resultList.push(product);
-                }
+                result.brand_name = info.brandName;
+                result.company_name = info.companyName;
             }
-            return resultList;
+            return result;
         }
 
         /**

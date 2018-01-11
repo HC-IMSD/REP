@@ -6,7 +6,7 @@
   "brand_name": "Brand Name",
   "common_name": "Common Name",
   "third_party_signed": "Signed by a third Party?",
-  "is_ref_products": "Is there a Canadian Reference Product?",
+  "is_ref_product": "Is there a Canadian Reference Product?",
   "human_drug_use": "Human Use",
   "radiopharm_drug_use": "RadioPharmaceutical Use",
   "vet_drug_use": "Veterinary Use",

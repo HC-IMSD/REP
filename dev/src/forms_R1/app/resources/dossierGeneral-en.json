@@ -9,5 +9,6 @@
   "DELETE": "Delete",
   "EDIT": "Edit",
   "CAN_REF_PRODUCTS": "Canadian Reference Products",
+  "CAN_REF_PRODUCT": "Canadian Reference Product",
   "PROD_NAME":"Product Name"
 }

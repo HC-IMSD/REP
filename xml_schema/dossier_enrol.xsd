@@ -27,13 +27,13 @@
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="related_dossier_id" type="char_0_256_content"/>
 	<!-- Drug Product element definitions-->
-	<hpfb:element name="brand_name" type="char_1_200_content"/>
+	<hpfb:element name="product_name" type="char_1_200_content"/>
 	<hpfb:element name="common_name" type="char_1_256_content"/>
 	<hpfb:element name="dossier_type" type="form_types_content"/>
 	<hpfb:element name="third_party_signed" type="required_yes_no_content"/>
 	<hpfb:element name="therapeutic_class_list" type="therapeutic_class_content"/>
 	<hpfb:element name="therapeutic_class" type="char_1_256_content"/>
-	<hpfb:element name="is_ref_products" type="required_yes_no_content"/>
+	<hpfb:element name="is_ref_product" type="required_yes_no_content"/>
 	<hpfb:element name="ref_product_list" type="ref_product_list_content"/>
 	<hpfb:element name="cdn_ref_product" type="cdn_ref_product_content"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
@@ -51,6 +51,7 @@
 
 	<hpfb:element name="dosage_form_other" type="char_0_100_content"/>
 	<hpfb:element name="strengths" type="char_1_256_content"/>
+	<hpfb:element name="brand_name" type="char_1_256_content"/>
 	<hpfb:element name="company_name" type="char_1_256_content"/>
 	<hpfb:element name="human_drug_use" type="required_yes_no_content"/>
 	<hpfb:element name="radiopharm_drug_use" type="required_yes_no_content"/>
@@ -301,22 +302,17 @@
 			<hpfb:element ref="application_type"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
-			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
 			<hpfb:element ref="dossier_type"/>
-			<hpfb:element ref="brand_name"/>
+			<hpfb:element ref="product_name"/>
 			<hpfb:element ref="common_name"/>
 			<hpfb:element ref="third_party_signed"/>
-			<hpfb:element ref="is_ref_products"/>
-			<hpfb:element ref="ref_product_list"/>
+			<hpfb:element ref="is_ref_product"/>
+			<hpfb:element ref="cdn_ref_product"/>
 			<hpfb:element ref="human_drug_use"/>
 			<hpfb:element ref="radiopharm_drug_use"/>
 			<hpfb:element ref="vet_drug_use"/>
 			<hpfb:element ref="disinfectant_drug_use"/>
 			<hpfb:element ref="therapeutic_class_list"/>
-			<hpfb:element ref="is_sched_a"/>
-			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
-			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
-			<hpfb:element ref="formulation_group"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -336,14 +332,6 @@
 	<hpfb:complexType name="cdn_ref_product_content">
 		<hpfb:sequence>
 			<hpfb:element ref="brand_name"/>
-			<hpfb:element ref="ingredient_id"/>
-			<hpfb:element ref="ingredient_name"/>
-			<hpfb:element ref="dosage_form"/>
-			<hpfb:element ref="dosage_form_other"/>
-			<hpfb:element ref="strengths"/>
-			<hpfb:element ref="units"/>
-			<hpfb:element ref="units_other"/>
-			<hpfb:element ref="per"/>
 			<hpfb:element ref="company_name"/>
 		</hpfb:sequence>
 	</hpfb:complexType>

@@ -184,12 +184,11 @@
             getAppendix4Errors();
         };
 
-        vm.isRefProducts = function () {
-
-            if (vm.dossierModel.isRefProducts === YES) {
+        vm.isRefProduct = function () {
+            if (vm.dossierModel.isRefProduct === YES) {
                 return true;
             }
-            vm.dossierModel.drugProduct.canRefProducts = [];
+            vm.dossierModel.drugProduct.canRefProduct = {};
             return false;
         };
 
@@ -435,6 +434,8 @@
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
             vm.drugUseId="drug_use"+scopeId;
+            vm.brandId="brand"+scopeId;
+            vm.companyId="company"+scopeId;
         }
 
 
