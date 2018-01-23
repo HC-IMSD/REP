@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('checkBoxListModule', [])
+        .module('checkBoxListModule', []);
 })();
 
 (function () {

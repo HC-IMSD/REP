@@ -3,6 +3,9 @@
         <div uib-accordion-group heading="{{::'SCHEDA_DETAILS' |translate}}"
              is-open="schedACtrl.expanderOpenState" is-disabled="schedACtrl.schedAForm.$invalid"
              template-url="./app/lib/uib-templates/tpl-accordian-group-caret.html">
+            <div class="row">
+                <span class="field-name">{{::'SCHEDA_DESCRIPTION'|translate}}</span><p></p>
+            </div>
             <div>
                 <div>
                     <div class="col-md-12">

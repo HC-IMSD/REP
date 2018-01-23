@@ -136,10 +136,10 @@
 
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
-                if (vm.userType == INTERNAL_TYPE) {
-                    vm.saveXMLLabel = "APPROVE_FINAL"
+                if (vm.userType === INTERNAL_TYPE) {
+                    vm.saveXMLLabel = "APPROVE_FINAL";
                 } else {
-                    vm.saveXMLLabel = "SAVE_DRAFT"
+                    vm.saveXMLLabel = "SAVE_DRAFT";
                 }
             }
 
@@ -204,9 +204,9 @@
 
         vm.disableJSONSave=function() {
 
-            return(vm.dossierModel.applicationType == APPROVED_TYPE&& vm.isExtern());
+            return(vm.dossierModel.applicationType === APPROVED_TYPE&& vm.isExtern());
 
-        }
+        };
 
         function getAppendix4Errors() {
            // var appendixCheck = vm.dossierService.getMissingAppendix4(vm.dossierModel);
@@ -221,7 +221,7 @@
          * @return true if the form is incomplete
          */
         function _setComplete() {
-            vm.isIncomplete = !vm.activityRoot.dossierID;
+            vm.isIncomplete = !vm.dossierModel.dossierID;
         }
 
         $scope.$watch("dos.dossierForm.$error", function () {
@@ -233,16 +233,12 @@
          * @ngdoc disables the XML save button
          */
         function disableXMLSave() {
-            var formInvalid = true; //TODO hack
+            var formInvalid = true;
             if (vm.dossierForm) {
                 formInvalid = vm.dossierForm.$invalid;
             }
-            vm.disableXML = (formInvalid || (vm.dossierModel.applicationType == vm.applicationInfoService.getApprovedType() && vm.isExtern()));
+            vm.disableXML = (formInvalid || (vm.dossierModel.applicationType === vm.applicationInfoService.getApprovedType() && vm.isExtern()));
 
-        }
-
-        function _setComplete() {
-            vm.isIncomplete = !vm.dossierModel.dossierID;
         }
 
         /**
@@ -250,7 +246,7 @@
          * @returns {boolean}
          */
         vm.isExtern = function () {
-            return vm.userType == EXTERNAL_TYPE;
+            return vm.userType === EXTERNAL_TYPE;
 
         };
 
@@ -263,15 +259,15 @@
         };
         /**
          * For individual controls, whether to show the error for a fiedl
-         * @param isInvalid - control $invalid flag
-         * @param isTouched -control $touched flag
+         * @param ctrl.isInvalid - control $invalid flag
+         * @param ctrl.isTouched -control $touched flag
          * @returns {*|dossierCtrl.showErrors}
          */
         vm.showError = function (ctrl) {
             if(!ctrl){
                 return false;
             }
-            return ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid))
+            return ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid));
         };
 
         /***
@@ -294,8 +290,6 @@
         vm.saveJson = function () {
             var writeResult = _transformFile();
             hpfbFileProcessing.writeAsJson(writeResult, _createFilename(), vm.dossierService.getRootTagName());
-           // vm.showAllErrors = true; //TODO get rid of this?
-            //_setComplete()
         };
 
         vm.saveXML = function () {
@@ -418,9 +412,8 @@
         };
 
         vm.selectTab=function(index){
-            var temp={id:index};
-            vm.setVisibleTabIndex=temp;
-        }
+            vm.setVisibleTabIndex = {id:index};
+        };
 
 
         function _setIdNames() {

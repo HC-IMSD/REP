@@ -32,6 +32,8 @@
   "RELATED_DOSSIER": "Related Information [if applicable]",
   "PROPER_NAME": "Proper, Common or Non-Proprietary Name",
   "DRUG_USE": "Drug Use",
+  "SCHEDULE": "Schedule",
+  "SCHEDA_DESCRIPTION": "Provide information below for non prescription products that have associated Schedule A claims only.",
   "DELETE_CLASS": "Delete Classification",
   "SOURCED_ANIMAL": "Provide the animal types used for this ingredient",
   "SPECIFY": "Please specify",

@@ -47,13 +47,14 @@
                 //applicationType: "NEW",
                 softwareVersion: "1.2.0",
                 dataChecksum: "",
-                dossierType: "",
+                //dossierType: "",
                // productName: "",
                // properName: "",
                // isRefProducts: "",
                 drugProduct: {
                     //thirdPartySigned: "",
                     drugUse: "",
+                    schedule: "",
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
                    // therapeutic: [],
@@ -63,7 +64,7 @@
                      ingredientList:[]
                      }//tab + grid +*/
 
-                },
+                }
                 //contactList: []
 
             },
@@ -86,6 +87,10 @@
                 if(info.drug_use) {
                     drugUseValue = info.drug_use.__text;
                 }
+                var scheduleValue ="";
+                if(info.schedule) {
+                    scheduleValue = info.schedule.__text;
+                }
                 var formModel = {
                     dossierID: info.dossier_id,
                     companyID: info.company_id,
@@ -95,7 +100,7 @@
                     //applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     dataChecksum: info.data_checksum,
-                    dossierType: info.dossier_type,
+                    //dossierType: info.dossier_type,
                    // productName: info.brand_name,
                    // properName: info.common_name,
                    // isRefProducts: info.is_ref_products,
@@ -103,6 +108,7 @@
                        // thirdPartySigned: info.third_party_signed,
                        // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
+                        schedule: $filter('findListItemById')(DossierLists.getScheduleList(), {id: scheduleValue}),
                         isScheduleA: info.is_sched_a === 'Y',
                        // therapeutic: [],
                        // canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
@@ -142,16 +148,16 @@
             var rootTag=this.getRootTagName();
             var baseModel = {};
             //order is important!!! Must match schema
-            baseModel.company_id = jsonObj.companyID; //TODO missing from internal model
-            baseModel.dossier_id = jsonObj.dossierID; //TODO missing from  internal model and XML! Net New
-            baseModel.related_dossier_id = jsonObj.relatedDossierID; //TODO missing from nodel
+            baseModel.company_id = jsonObj.companyID;
+            baseModel.dossier_id = jsonObj.dossierID;
+           // baseModel.related_dossier_id = jsonObj.relatedDossierID;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
             baseModel.application_type = jsonObj.applicationType;
             baseModel.software_version = "1.0.0"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
-            baseModel.dossier_type = jsonObj.dossierType;
+            //baseModel.dossier_type = jsonObj.dossierType;
             if(jsonObj.drugProduct.drugUse) {
                 baseModel.drug_use = {
                     _label_en: jsonObj.drugProduct.drugUse.en,
@@ -162,6 +168,15 @@
                 baseModel.drug_use="";
             }
 
+            if(jsonObj.drugProduct.schedule) {
+                baseModel.schedule = {
+                    _label_en: jsonObj.drugProduct.schedule.en,
+                    _label_fr: jsonObj.drugProduct.schedule.fr,
+                    __text: jsonObj.drugProduct.schedule.id
+                };
+            }else{
+                baseModel.schedule="";
+            }
             //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
             baseModel.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
 
@@ -1406,76 +1421,6 @@
             }
             );
         };
-        /*
-         * Returns an empty list of drug uses
-         *
-         */
-       /* function getDefaultDrugUseList() {
-            var noModelValue = false;
-            var drugUseList = [
-                {"name": "human", "label": "HUMAN", "value": noModelValue},
-                {"name": "radio-pharmaceutical", "label": "RADIOPHARM", "value": noModelValue},
-                {"name": "veterinary", "label": "VETERINARY", "value": noModelValue},
-                {"name": "disinfectant", "label": "DISINFECTANT", "value": noModelValue}
-            ];
-            return drugUseList;
-        }
-*/
-        /***
-         * Loads the drug use data into a checkbox list format;
-         * @param info
-         * @returns {*}
-         */
-      /*  function loadDrugUseValues(info) {
-            var drugList = getDefaultDrugUseList();
-            for (var i = 0; i < drugList.length; i++) {
-                var rec = drugList[i];
-                switch (rec.name) {
-                    case "human":
-                        rec.value = info.human_drug_use === 'Y';
-                        break;
-                    case "radio-pharmaceutical":
-                        rec.value = info.radiopharm_drug_use === 'Y';
-                        break;
-                    case "disinfectant":
-                        rec.value = info.disinfectant_drug_use === 'Y';
-                        break;
-                    case "veterinary":
-                        rec.value = info.vet_drug_use === 'Y';
-                        break;
-                }
-            }
-            return (drugList);
-        }*/
-
-        /**
-         * Adds the drug use properties to the output JSON
-         * @param drugUseArray
-         * @param outputJson
-         */
-       /* function drugUseValuesToOutput(drugUseArray, outputJson) {
-
-            for (var i = 0; i < drugUseArray.length; i++) {
-                var rec = drugUseArray[i];
-
-                switch (rec.name) {
-                    case "human":
-                        outputJson.human_drug_use = rec.value === true ? 'Y' : 'N';
-                        break;
-                    case "radio-pharmaceutical":
-                        outputJson.radiopharm_drug_use = rec.value === true ? 'Y' : 'N';
-                        break;
-                    case "disinfectant":
-                        outputJson.disinfectant_drug_use = rec.value === true ? 'Y' : 'N';
-                        break;
-                    case "veterinary":
-                        outputJson.vet_drug_use = rec.value === true ? 'Y' : 'N';
-                        break;
-                }
-            }
-
-        }
-*/
 
         /**
          * Creates an animal sourced emptt json record for file write

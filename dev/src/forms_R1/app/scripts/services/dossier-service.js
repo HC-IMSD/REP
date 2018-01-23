@@ -210,7 +210,7 @@
 
         DossierService.prototype.getMissingAppendix4 = function (dossierModel) {
             var missingAppendices = [];
-            var extraAppendices = [];
+            var extraAppendices;
             var results = {};
 
             if (!dossierModel || !dossierModel.drugProduct) {
@@ -289,7 +289,7 @@
 
 
         //###############INTERNAL FUNCTIONS start here##################################
-
+        /*
         function getContactList(contacts) {
 
             var list = [];
@@ -323,13 +323,13 @@
 
             return list;
         }
-
+        */
         /**
          * Get diseaseDisorderList from the xml fiel
          * @param info
-         * @param diseaseList
+         * @param diseaseListModel
          * @returns {*}
-         */
+
         function getDiseaseDisorderList(info, diseaseListModel) {
 
             if (!info || !diseaseListModel) return;
@@ -341,8 +341,11 @@
 
             return diseaseListModel;
         }
-
-
+         */
+        /**
+         * Get TherapeuticList from the xml fiel
+         * @param input
+         * */
         function getTherapeuticList(input) {
             var list = "";
             if (!(input instanceof Array)) {
@@ -365,7 +368,7 @@
 
 
         //formulations section
-
+        /*
         function getCanRefProductList(info) {
             var list = [];
 
@@ -420,7 +423,7 @@
 
 
         }
-
+*/
         /**
          * Loads all the external appendix 4 information into the internal data model
          * @param info - the 'external type' formatted json object
@@ -1211,7 +1214,7 @@
             result.din_number = jsonObj.drugIdNumber;
             var disorderList = jsonObj.diseaseDisorderList;
             var keys = Object.keys(result);
-            console.log("keys "+keys.length)
+            //console.log("keys "+keys.length)
             for (var i=0;i<keys.length;i++) {
                 result[keys[i]] = (disorderList[keys[i]] === true ? 'Y' : 'N');
             }
@@ -1296,17 +1299,17 @@
                 //step 2 get nmi flagged
                 if (oneFormulation.nMedIngList) {
                     for (var j = 0; j < (oneFormulation.nMedIngList.length); j++) {
-                        var oneActive = oneFormulation.nMedIngList[j];
-                        if (oneActive.humanAnimalSourced === yesValue) {
-                            allAnimalSourcedNames.push(oneActive.ingName);
+                        var oneActive1 = oneFormulation.nMedIngList[j];
+                        if (oneActive1.humanAnimalSourced === yesValue) {
+                            allAnimalSourcedNames.push(oneActive1.ingName);
                         }
                     }
                 }
                 //step 3  all materials
                 if (oneFormulation.animalHumanMaterials) {
                     for (var j = 0; j < (oneFormulation.animalHumanMaterials.length); j++) {
-                        var oneActive = oneFormulation.animalHumanMaterials[j];
-                        allAnimalSourcedNames.push(oneActive.ingredientName);
+                        var oneActive2 = oneFormulation.animalHumanMaterials[j];
+                        allAnimalSourcedNames.push(oneActive2.ingredientName);
                     }
                 }
             }
@@ -1371,7 +1374,7 @@
          * @returns {*[]}
          */
         function getDefaultDiseaseDisorderList() {
-            var noModelValue = false;
+            //var noModelValue = false;
             return (
 
             {
@@ -1406,7 +1409,7 @@
                 "ulcer_gastro": false
             }
             );
-        };
+        }
         /*
          * Returns an empty list of drug uses
          *

@@ -115,17 +115,23 @@
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
         ];
+        vm.min7Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_7"}
+        ];
 
         vm.alerts = [false, false, false, false,false,false,false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
         vm.drugUseList=[];
+        vm.scheduleList=[];
         vm.extraAppendixModel="none";
         vm.missingAppendixModel="none";
 
         vm.$onInit = function () {
             vm.showSummary=false;
             vm.drugUseList=DossierLists.getDrugUseList();
+            vm.scheduleList=DossierLists.getScheduleList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -140,7 +146,7 @@
 
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
-                if (vm.userType == INTERNAL_TYPE) {
+                if (vm.userType === INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
                     vm.saveXMLLabel = "SAVE_DRAFT"
@@ -161,12 +167,12 @@
             }else{
                // vm.missingAppendixModel=false;
                 return false
-            };
+            }
 
         };
         vm.appendixExtraError = function () {
             if (vm.extraAppendix && vm.extraAppendix.length > 0){
-                vm.extraAppendixModel=""
+                vm.extraAppendixModel="";
                 return true;
             }else{
                // vm.extraAppendixModel=false;
@@ -221,9 +227,9 @@
 
         vm.disableJSONSave=function() {
 
-            return(vm.model.applicationType == APPROVED_TYPE&& vm.isExtern());
+            return(vm.model.applicationType === APPROVED_TYPE&& vm.isExtern());
 
-        }
+        };
 
         function getAppendix4Errors() {
             var appendixCheck = vm.drugProductService.getMissingAppendix4(vm.model);
@@ -258,7 +264,7 @@
          * @returns {boolean}
          */
         vm.isExtern = function () {
-            return vm.userType == EXTERNAL_TYPE;
+            return vm.userType === EXTERNAL_TYPE;
 
         };
 
@@ -271,8 +277,8 @@
         };
         /**
          * For individual controls, whether to show the error for a fiedl
-         * @param isInvalid - control $invalid flag
-         * @param isTouched -control $touched flag
+         * @param ctrl: isInvalid - control $invalid flag
+         * @param ctrl: isTouched -control $touched flag
          * @returns {boolean}
          */
         vm.showError = function (ctrl) {
@@ -428,13 +434,13 @@
         vm.selectTab=function(index){
             var temp={id:index};
             vm.setVisibleTabIndex=temp;
-        }
+        };
 
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.formId="drug_product_form" + scopeId;
-            vm.typeId="dossier_type"+ scopeId;
+            vm.dossierId="dossier_id"+ scopeId;
             vm.compId="company_id"+ scopeId;
             vm.thirdId="signed_third"+ scopeId;
             vm.prodNameId="prod_name"+ scopeId;
@@ -442,6 +448,7 @@
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
             vm.drugUseId="drug_use"+scopeId;
+            vm.scheduleId="schedule"+scopeId;
         }
 
 

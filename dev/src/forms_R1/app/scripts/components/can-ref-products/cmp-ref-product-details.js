@@ -15,7 +15,7 @@
                 'hpfbConstants',
                 'errorSummaryModule',
                 'errorMessageModule'
-            ])
+            ]);
 })();
 
 (function () {
@@ -132,18 +132,18 @@
             } else {
                 vm.savePressed = true;
                 vm.updateErrorSummaryState(); //updating current
-                vm.focusOnSummary()
+                vm.focusOnSummary();
             }
 
         };
 
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
-        }
+        };
         vm.focusOnSummary = function () {
 
             vm.setSummaryFocus = vm.setSummaryFocus + 1;
-        }
+        };
         vm.showRecordSummary = function () {
             return ((vm.savePressed || vm.showSummary));
         };
@@ -171,8 +171,6 @@
             if (vm.productRecord) {
                 //  console.log('product details delete product');
                 vm.onDelete();
-            } else {
-                //TODO
             }
         };
 

@@ -45,6 +45,7 @@
             createDosageFormList: _createDosageFormArray,
             getDosageFormList: getDosageFormsArray,
             getDrugUseList:_getDrugUseArray,
+            getScheduleList:_getScheduleArray,
             getUnitsList:_getUnitsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
@@ -152,14 +153,48 @@
                     {"id":"HUMAN","en":"Human","fr":"fr_Human"},
                     {"id":"RADIO","en":"Radiopharmaceutical","fr":"fr_Radiopharmaceutical"},
                     {"id":"DISINFECT","en":"Disinfectant","fr":"fr_Disinfectant"},
-                    {"id":"VET","en":"Veterinary","fr":"fr_Veterinary"},
+                    {"id":"VET","en":"Veterinary","fr":"fr_Veterinary"}
 
                 ]
-
-
             )
+        }
 
+        function _getScheduleArray(){
 
+            return(
+                [
+                    {"id":"A","en":"Acute Alcholisum","fr":"fr_Acute Alcholisum"},
+                    {"id":"B","en":"Acute anxiety state","fr":"fr_Acute anxiety state"},
+                    {"id":"C","en":"Acute infectious respiratory syndromes","fr":"fr_Acute infectious respiratory syndromes"},
+                    {"id":"D","en":"Acute inflammatory and debilitating arthiritis","fr":"fr_Acute inflammatory and debilitating arthiritis"},
+                    {"id":"E","en":"Acute psychotic conditions","fr":"fr_Acute psychotic conditions"},
+                    {"id":"F","en":"Addiction (except nicotine addiction)","fr":"fr_Addiction (except nicotine addiction)"},
+                    {"id":"G","en":"Ateriosclerosis","fr":"fr_Ateriosclerosis"},
+                    {"id":"H","en":"Appendicitis","fr":"fr_Appendicitis"},
+                    {"id":"I","en":"Asthma","fr":"fr_Asthma"},
+                    {"id":"J","en":"Cancer","fr":"fr_Cancer"},
+                    {"id":"K","en":"Congestive heart failure","fr":"fr_Congestive heart failure"},
+                    {"id":"L","en":"Convulsions","fr":"fr_Convulsions"},
+                    {"id":"M","en":"Dementia","fr":"fr_Dementia"},
+                    {"id":"N","en":"Depresssion","fr":"fr_Depresssion"},
+                    {"id":"O","en":"Diabetes","fr":"fr_Diabetes"},
+                    {"id":"P","en":"Gangrene","fr":"fr_Gangrene"},
+                    {"id":"Q","en":"Glaucoma","fr":"fr_Glaucoma"},
+                    {"id":"R","en":"Haematologic bleeding disorders","fr":"fr_Haematologic bleeding disorders"},
+                    {"id":"S","en":"Hepatitis","fr":"fr_Hepatitis"},
+                    {"id":"T","en":"Hypertension","fr":"fr_Hypertension"},
+                    {"id":"U","en":"Nausea and vomiting of pregnancy","fr":"fr_Nausea and vomiting of pregnancy"},
+                    {"id":"V","en":"Obesity","fr":"fr_Obesity"},
+                    {"id":"W","en":"Rheumatic fever","fr":"fr_Rheumatic fever"},
+                    {"id":"X","en":"Septicemia","fr":"fr_Septicemia"},
+                    {"id":"Y","en":"Sexually transmitted disease","fr":"fr_Sexually transmitted disease"},
+                    {"id":"Z","en":"Strangulated hernia","fr":"fr_Strangulated hernia"},
+                    {"id":"AA","en":"Thrombotic and Embolic Disorder","fr":"fr_Thrombotic and Embolic Disorder"},
+                    {"id":"BB","en":"Thyroid disease","fr":"fr_Thyroid disease"},
+                    {"id":"CC","en":"Ulcer of gastro-intestinal tract","fr":"fr_Ulcer of gastro-intestinal tract"}
+
+                ]
+            )
         }
 
         /**

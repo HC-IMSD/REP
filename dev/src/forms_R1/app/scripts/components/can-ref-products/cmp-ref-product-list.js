@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('refProductListModule', ['expandingTable', 'refProductDetailsModule'])
+        .module('refProductListModule', ['expandingTable', 'refProductDetailsModule']);
 })();
 
 (function () {
@@ -87,7 +87,7 @@
             setRecord(-1);
             vm.onUpdate({recs: vm.productList});
             vm.resetToCollapsed = !vm.resetToCollapsed;
-            vm.showNoRefReError()
+            vm.showNoRefReError();
         };
         function setRecord(value){
             vm.selectRecord = value;
@@ -111,14 +111,14 @@
         };
         vm.onNewCancel=function(){
             vm.setValid(true);
-            vm.newProductFormShown = false
-        }
+            vm.newProductFormShown = false;
+        };
 
         vm.showNoRefReError = function () {
             //TODO show this error is form shown? || vm.newProductFormShown===true
             if (vm.productList.length > 0 ) {
                 vm.oneRefSelected = "sel";
-                return false
+                return false;
             } else {
                 vm.oneRefSelected = "";
                 return true;
