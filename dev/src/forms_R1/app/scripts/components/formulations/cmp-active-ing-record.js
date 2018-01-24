@@ -48,11 +48,18 @@
         vm.yesNoList = DossierLists.getYesNoList();
         vm.activeList = DossierLists.getActiveList();
         vm.UnitsList=DossierLists.getUnitsList();
+        vm.strengthList = DossierLists.getStrengthList();
+        vm.perList = DossierLists.getPerList();
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.numberMinError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
+            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+        ];
+        vm.numberMinLowerError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN_LOWER"},
             {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
         ];
 
@@ -62,7 +69,9 @@
             ingLabel: "",
             cas: "",
             standard: "",
-            strength: null,
+            strength: {operator: "",
+                data1: null,
+                data2: null },
             units: "",
             otherUnits:"",
             per: "",
@@ -71,6 +80,11 @@
             calcAsBase: "",
             humanAnimalSourced: ""
         };
+
+        vm.strengthData1Title="";
+        vm.isStrengthSet=false;
+        vm.isRange=false;
+
         vm.exclusions={
         };
         vm.alias={};
@@ -152,6 +166,38 @@
             }
         };
 
+        /**
+         * Fires on selection OR when the value has changed
+         */
+        vm.strengthSelectionUpdated = function () {
+
+            if(vm.ingModel.strength.operator.id !== ""){
+                vm.isStrengthSet=true;
+                switch (vm.ingModel.strength.operator.id)
+                {
+                    case "EQ":
+                        vm.strengthData1Title = "EQUALS";
+                        vm.isRange=false;
+                        break;
+                    case "NGT":
+                        vm.strengthData1Title = "NOT_GREAT_THAN";
+                        vm.isRange=false;
+                        break;
+                    case "NLT":
+                        vm.strengthData1Title = "NOT_LESS_THAN";
+                        vm.isRange=false;
+                        break;
+                    case "RA":
+                        vm.strengthData1Title = "RANGE_LOWER_LIMIT";
+                        vm.isRange=true;
+                        break;
+                }
+            }else {
+                vm.isStrengthSet=false;
+                vm.isRange=false;
+            }
+        };
+
         vm.saveIng = function () {
             if (vm.activeIngForm.$valid) {
                 if (vm.record) {
@@ -172,7 +218,7 @@
 
         vm.makeFocused=function(){
             vm.focusSummary=vm.focusSummary+1;
-        }
+        };
 
         vm.discardChanges = function () {
             vm.ingModel = angular.copy(vm.backup);
@@ -198,7 +244,7 @@
 
         /**
          * Controls showing errors for a field
-         * @param ctrl- an instance of the control to check
+         * @param ctrl - an instance of the control to check
          * @returns {*}
          */
         vm.showError = function (ctrl) {
@@ -253,6 +299,8 @@
             vm.casId="cas"+scopeId;
             vm.standardId="standard"+scopeId;
             vm.strengthId="strength"+scopeId;
+            vm.strengthData1Id="strength_data1_"+scopeId;
+            vm.strengthData2Id="strength_data2_"+scopeId;
             vm.unitsId="units"+scopeId;
             vm.otherUnitsId="other_units"+scopeId;
             vm.perId="per"+scopeId;

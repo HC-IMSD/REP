@@ -46,16 +46,49 @@
                            ng-model-options="{ debounce: $inherit}" name="{{::nIngRecCtrl.standardId}}"
                            class="form-control full-width" name="standard" maxlength="40" size="40"/>
                 </div>
+            </div>
+            <div class="row">
                 <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthId].$invalid}">
-                    <label for="{{::nIngRecCtrl.strengthId}}" class="required"><span class="field-name">{{'STRENGTH'|translate}}</span>
+                    <label for="{{::nIngRecCtrl.strengthId}}" class="required">
+                        <span class="field-name">{{'STRENGTH'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                    <select id="{{::nIngRecCtrl.strengthId}}" ng-model="nIngRecCtrl.ingModel.strength.operator"
+                            ng-model-options="{ debounce: '$inherit'}"
+                            ng-change="nIngRecCtrl.strengthSelectionUpdated()"
+                            class="form-control full-width" name="{{::nIngRecCtrl.strengthId}}" required
+                            ng-options="op[nIngRecCtrl.lang] for op in  nIngRecCtrl.strengthList track by op.id">
+                    </select>
+                    <cmp-error-message field-name="nIngRecCtrl.strengthId"
+                                       form-ref="nIngRecCtrl.nonMedIngForm"
+                                       show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthId])"
+                                       error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
+                </div>
+                <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData1Id].$invalid}"
+                     ng-if="nIngRecCtrl.isStrengthSet">
+                    <label for="{{::nIngRecCtrl.strengthData1Id}}" class="required">
+                        <span class="field-name">{{nIngRecCtrl.strengthData1Title|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="number" id="{{::nIngRecCtrl.strengthId}}" data-ng-model="nIngRecCtrl.ingModel.strength"
-                               ng-model-options="{ debounce: $inherit}" class="form-control full-width"
-                               name="{{::nIngRecCtrl.strengthId}}" ng-required="true" ng-min="0"/>
-                        <cmp-error-message field-name="nIngRecCtrl.strengthId"
+                        <input type="number" id="{{::nIngRecCtrl.strengthData1Id}}" data-ng-model="nIngRecCtrl.ingModel.strength.data1"
+                               ng-model-options="{ debounce: '$inherit'}"
+                               class="form-control full-width" name="{{::nIngRecCtrl.strengthData1Id}}" ng-min="0" ng-required="true"/>
+                        <cmp-error-message field-name="nIngRecCtrl.strengthData1Id"
                                            form-ref="nIngRecCtrl.nonMedIngForm"
-                                           show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthId])"
-                                           error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
+                                           show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData1Id])"
+                                           error-types="nIngRecCtrl.numberMinError"></cmp-error-message>
+                    </label>
+                </div>
+                <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData2Id].$invalid}"
+                     ng-if="nIngRecCtrl.isRange">
+                    <label for="{{::nIngRecCtrl.strengthData2Id}}" class="required">
+                        <span class="field-name">{{'RANGE_UPPER_LIMIT'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="number" id="{{::nIngRecCtrl.strengthData2Id}}" data-ng-model="nIngRecCtrl.ingModel.strength.data2"
+                               ng-model-options="{ debounce: '$inherit'}"
+                               class="form-control full-width" name="{{::nIngRecCtrl.strengthData2Id}}" ng-min="nIngRecCtrl.ingModel.strength.data1" ng-required="true"/>
+                        <cmp-error-message field-name="nIngRecCtrl.strengthData2Id"
+                                           form-ref="nIngRecCtrl.nonMedIngForm"
+                                           show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData2Id])"
+                                           error-types="nIngRecCtrl.numberMinLowerError"></cmp-error-message>
                     </label>
                 </div>
             </div>

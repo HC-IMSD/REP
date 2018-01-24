@@ -129,9 +129,9 @@
         vm.missingAppendixModel="none";
 
         vm.$onInit = function () {
-            vm.showSummary=false;
-            vm.drugUseList=DossierLists.getDrugUseList();
-            vm.scheduleList=DossierLists.getScheduleList();
+            vm.showSummary = false;
+            vm.drugUseList = DossierLists.getDrugUseList();
+            vm.scheduleList = DossierLists.getScheduleList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -241,23 +241,18 @@
 
         /**
          * @ngdoc Used to determine if the form is incomplete
-         *
+         * Todo: check if this works
          * @private
          * @return true if the form is incomplete
          */
         function _setComplete() {
-            vm.isIncomplete = !vm.activityRoot.dossierID;
+            vm.isIncomplete = !vm.model.dossierID;
         }
 
         $scope.$watch("drugProdCtrl.drugProdForm.$error", function () {
 
             vm.updateErrorSummaryState();
         }, true);
-
-
-        function _setComplete() {
-            vm.isIncomplete = !vm.model.dossierID;
-        }
 
         /**
          * @ngdoc - determines if the form is the internal or the external version

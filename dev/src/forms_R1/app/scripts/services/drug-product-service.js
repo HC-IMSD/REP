@@ -116,7 +116,7 @@
                         appendixFourList: getAppendix4IngredientList(info.appendix4_group)
 
 
-                    },
+                    }
                     //contactList: getContactList(info.contact_record)
 
                 };
@@ -283,40 +283,6 @@
 
         //###############INTERNAL FUNCTIONS start here##################################
 
-      /*  function getContactList(contacts) {
-
-            var list = [];
-
-            if (angular.isDefined(contacts)) {
-
-                if (!(contacts instanceof Array)) {
-                    contacts = [contacts];
-                }
-
-                for (var i = 0; i < contacts.length; i++) {
-                    var contact = {};
-                    contact.amend = contacts[i].amend_record === 'Y';
-                    contact.repRole = contacts[i].rep_contact_role;
-                    contact.salutation = contacts[i].rep_contact_details.salutation;
-                    contact.givenName = contacts[i].rep_contact_details.given_name;
-                    contact.surname = contacts[i].rep_contact_details.surname;
-                    contact.initials = contacts[i].rep_contact_details.initials;
-                    contact.title = contacts[i].rep_contact_details.job_title;
-                    contact.phone = contacts[i].rep_contact_details.phone_num;
-                    contact.phoneExt = contacts[i].rep_contact_details.phone_ext;
-                    contact.fax = contacts[i].rep_contact_details.fax_num;
-                    contact.email = contacts[i].rep_contact_details.email;
-                    contact.language = contacts[i].rep_contact_details.language_correspondance;
-
-                    list.push(contact);
-
-                }
-
-            }
-
-            return list;
-        }*/
-
         /**
          * Get diseaseDisorderList from the xml fiel
          * @param info
@@ -334,85 +300,6 @@
 
             return diseaseListModel;
         }
-
-
-       /* function getTherapeuticList(input) {
-            var list = "";
-            if (!(input instanceof Array)) {
-                input = [input];
-            }
-            if (input) {
-                list = [];
-                for (var i = 0; i < input.length; i++) {
-                    if (angular.isString(input[i])&&input[i].length>0) {
-                        var item = {
-                            "id": ( i + 1),
-                            "name": input[i]
-                        };
-                        list.push(item);
-                    }
-                }
-            }
-            return list;
-        }*/
-
-
-        //formulations section
-
-      /*  function getCanRefProductList(info) {
-            var list = [];
-
-            if (angular.isString(info)&& info.length>0) {
-                if (!(info instanceof Array)) {
-                    //make it an array, case there is only one
-                    info = [info]
-                }
-
-                for (var i = 0; i < info.length; i++) {
-                    var product = {};
-                    product.brandName = info[i].brand_name;
-                    product.ingId = info[i].ingredient_id;
-                    product.ingLabel = info[i].ingredient_name;
-                    product.autoIngred = YES;
-
-                    if (!product.ingId) {
-                        product.autoIngred = NO;
-                    }
-
-                    product.dosageForm = "";
-                    if (info[i].dosage_form) {
-
-                        var dosageValue = DossierLists.getDosageFormPrefix() + info[i].dosage_form.__text; //add the prefix
-                        //if other revert the value. OTHER value never has a prefix
-                        if (info[i].dosage_form.__text === OTHER) {
-                            dosageValue = info[i].dosage_form.__text;
-                        }
-                        product.dosageForm = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: dosageValue});
-                    }
-                    product.dosageFormOther = info[i].dosage_form_other;
-                    product.strengths = Number(info[i].strengths);
-                    product.units = "";
-                    if (info[i].units) {
-                        var unitsValue = DossierLists.getUnitsPrefix() + info[i].units.__text; //add the prefix
-                        //if other revert the value. OTHER value never has a prefix
-                        if (info[i].units.__text === OTHER) {
-                            unitsValue = info[i].units.__text;
-                        }
-                        product.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
-                    }
-                    product.otherUnits = info[i].units_other;
-                    product.per = info[i].per;
-                    product.companyName = info[i].company_name;
-
-                    list.push(product);
-                }
-            }
-
-
-            return list;
-
-
-        }*/
 
         /**
          * Loads all the external appendix 4 information into the internal data model
@@ -591,7 +478,7 @@
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
-                    "strength": Number(item.strength),
+                    "strength": item.strength,
                     "per": item.per,
                     "units": "",
                     "otherUnits": item.units_other,
@@ -646,7 +533,7 @@
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
-                    "strength": Number(item.strength),
+                    "strength": item.strength,
                     "per": item.per,
                     "units": "",
                     "otherUnits": item.units_other,

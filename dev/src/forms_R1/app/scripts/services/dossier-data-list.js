@@ -46,6 +46,8 @@
             getDosageFormList: getDosageFormsArray,
             getDrugUseList:_getDrugUseArray,
             getScheduleList:_getScheduleArray,
+            getPerList:_getPerArray,
+            getStrengthList:_getStrengthArray,
             getUnitsList:_getUnitsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
@@ -192,6 +194,30 @@
                     {"id":"AA","en":"Thrombotic and Embolic Disorder","fr":"fr_Thrombotic and Embolic Disorder"},
                     {"id":"BB","en":"Thyroid disease","fr":"fr_Thyroid disease"},
                     {"id":"CC","en":"Ulcer of gastro-intestinal tract","fr":"fr_Ulcer of gastro-intestinal tract"}
+
+                ]
+            )
+        }
+
+        function _getPerArray(){
+
+            return(
+                [
+                    {"id":"UP","en":"Unit of Presentation","fr":"fr_Unit of Presentation"},
+                    {"id":"UM","en":"Unit of Measure","fr":"fr_Unit of Measure"}
+
+                ]
+            )
+        }
+
+        function _getStrengthArray(){
+
+            return(
+                [
+                    {"id":"EQ","en":"Equals","fr":"fr_Equals"},
+                    {"id":"NGT","en":"Not greater than","fr":"fr_Not_greater_than"},
+                    {"id":"NLT","en":"Not less than","fr":"fr_Not_less_than"},
+                    {"id":"RA","en":"Range","fr":"fr_Range"}
 
                 ]
             )
