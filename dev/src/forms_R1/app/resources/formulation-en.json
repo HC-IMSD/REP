@@ -10,6 +10,8 @@
   "RANGE_LOWER_LIMIT": "Range (lower limit)",
   "RANGE_UPPER_LIMIT": "Range (upper limit)",
   "UNITS": "Units",
+  "UNIT_PRESENTATION": "Unit of Presentation",
+  "UNIT_MEASURE": "Unit of Measure",
   "PER_STRENGTH": "Per",
   "ISBASE": "Calculated as Base?",
   "NANO_MATERIAL": "Nanomaterial?",

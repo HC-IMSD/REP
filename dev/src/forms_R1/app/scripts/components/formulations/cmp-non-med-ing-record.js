@@ -48,6 +48,7 @@
         vm.unitsList=DossierLists.getUnitsList();
         vm.strengthList = DossierLists.getStrengthList();
         vm.perList = DossierLists.getPerList();
+        vm.presentationList = DossierLists.getDosageFormList();
        // vm.savePressed=false;
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
@@ -72,6 +73,7 @@
                        data2: null },
             units: "",
             otherUnits:"",
+            unitPresentation: "",
             per: "",
             nanoMaterial: "",
             nanoMaterialOther: "",
@@ -82,6 +84,8 @@
         vm.strengthData1Title="";
         vm.isStrengthSet=false;
         vm.isRange=false;
+        vm.isPerPresentation=false;
+        vm.isPerMeasure=false;
 
         vm.exclusions={
         };
@@ -237,6 +241,7 @@
             vm.unitsId="units"+scopeId;
             vm.otherUnitsId="other_units"+scopeId;
             vm.perId="per"+scopeId;
+            vm.presentationId="presentation"+scopeId;
             vm.nanoId="nano_material"+scopeId;
             vm.nanoOtherId="nano_material_other"+scopeId;
             vm.asBaseId="calculated_as_base"+scopeId;
@@ -272,6 +277,27 @@
             }else {
                 vm.isStrengthSet=false;
                 vm.isRange=false;
+            }
+        };
+
+        /**
+         * Fires on selection OR when the value has changed
+         */
+        vm.perSelectionUpdated = function () {
+            switch (vm.ingModel.per.id)
+            {
+                case "UP":
+                    vm.isPerPresentation=true;
+                    vm.isPerMeasure=false;
+                    break;
+                case "UM":
+                    vm.isPerMeasure=true;
+                    vm.isPerPresentation=false;
+                    break;
+                default:
+                    vm.isPerPresentation=false;
+                    vm.isPerMeasure=false;
+                    break;
             }
         };
 
