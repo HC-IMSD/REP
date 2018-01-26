@@ -45,25 +45,24 @@
                     <fieldset>
                         <legend>{{'SHELF_LIFE'| translate}}</legend>
                         <div class="form-group col-md-6">
-                            <label for="{{::ctrCtrl.shelfLifeYearsId}}">
-                                <span class="field-name">{{'SHELF_LIFE_YEARS'|translate}}</span></label>
-                            <input type="number" id="{{::ctrCtrl.shelfLifeYearsId}}" data-ng-model="ctrCtrl.ctModel.shelfLifeYears"
-                                   ng-model-options="{ debounce: $inherit}"
-                                   only-digits only-max="4" size="4" class="form-control" name="{{::ctrCtrl.shelfLifeYearsId}}"/>
-                            <cmp-error-message field-name="ctrCtrl.shelfLifeYearsId"
-                                               form-ref="ctrCtrl.containerTypeForm"
-                                               show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.shelfLifeYearsId])"
-                                               error-types="ctrCtrl.numberError"></cmp-error-message>
+                            <label for="{{::ctrCtrl.shelfLifeUnitId}}">
+                                <span class="field-name">{{'UNITS'|translate}}</span></label>
+                            <select id="{{::ctrCtrl.shelfLifeUnitId}}" ng-model="ctrCtrl.ctModel.shelfLifeUnit"
+                                    ng-model-options="{ debounce: '$inherit'}"
+                                    class="form-control full-width" name="{{::ctrCtrl.shelfLifeUnitId}}" required
+                                    ng-options="unit[ctrCtrl.lang] for unit in  ctrCtrl.selfLifeUnitsList track by unit.id">
+                            </select>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="{{::ctrCtrl.shelfLifeMonthsId}}"><span
-                                    class="field-name">{{'SHELF_LIFE_MONTHS'|translate}}</span></label>
-                            <input type="number" id="{{::ctrCtrl.shelfLifeMonthsId}}" data-ng-model="ctrCtrl.ctModel.shelfLifeMonths"
+                        <div class="form-group col-md-6" ng-if="ctrCtrl.ctModel.shelfLifeUnit.id !== undefined">
+                            <label for="{{::ctrCtrl.shelfLifeNumberId}}">
+                                <span class="field-name">{{'SHELF_LIFE_NUMBERS'|translate}}{{ctrCtrl.ctModel.shelfLifeUnit[ctrCtrl.lang]}}</span>
+                            </label>
+                            <input type="number" id="{{::ctrCtrl.shelfLifeNumberId}}" data-ng-model="ctrCtrl.ctModel.shelfLifeNumber"
                                    ng-model-options="{ debounce: $inherit}" only-digits only-max="4"
-                                   class="form-control " name="{{::ctrCtrl.shelfLifeMonthsId}}" size="2"/>
-                            <cmp-error-message field-name="ctrCtrl.shelfLifeMonthsId"
+                                   class="form-control " name="{{::ctrCtrl.shelfLifeNumberId}}" size="2"/>
+                            <cmp-error-message field-name="ctrCtrl.shelfLifeNumberId"
                                                form-ref="ctrCtrl.containerTypeForm"
-                                               show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.shelfLifeMonthsId])"
+                                               show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.shelfLifeNumberId])"
                                                error-types="ctrCtrl.numberError"></cmp-error-message>
                         </div>
                     </fieldset>

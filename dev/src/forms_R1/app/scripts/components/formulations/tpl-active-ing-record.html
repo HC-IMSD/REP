@@ -174,36 +174,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nanoId].$invalid}">
-                    <label for="{{::ingRecCtrl.nanoId}}" class="required">
-                        <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <select id="{{::ingRecCtrl.nanoId}}" ng-model="ingRecCtrl.ingModel.nanoMaterial"
-                            ng-model-options="{ debounce: '$inherit'}"
-                            class="form-control full-width" name="{{::ingRecCtrl.nanoId}}" required
-                            ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id">
-
-                    </select>
-                    <cmp-error-message field-name="ingRecCtrl.nanoId"
-                                       form-ref="ingRecCtrl.activeIngForm"
-                                       show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.nanoId])"
-                                       error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
-                </div>
-                <div class="form-group col-md-5" ng-if="ingRecCtrl.isNanoOther()"
-                     ng-class="{'has-error':ingRecCtrl.activeIngForm.[ingRecCtrl.nanoOtherId].$invalid}">
-                    <label for="{{::ingRecCtrl.nanoOtherId}}" class="required">
-                        <span class="field-name">{{'NANO_MATERIAL_OTHER'|translate}}</span>
-                        <strong class="required">{{"REQUIRED" |translate}}</strong></label>
-                    <input type="text" id="{{::ingRecCtrl.nanoOtherId}}"
-                           data-ng-model="ingRecCtrl.ingModel.nanoMaterialOther"
-                           ng-model-options="{ debounce: '$inherit'}"
-                           class="form-control full-width" name="{{::ingRecCtrl.nanoOtherId}}" ng-required="true" maxlength="40"/>
-                    <cmp-error-message field-name="ingRecCtrl.nanoOtherId"
-                                       form-ref="ingRecCtrl.activeIngForm"
-                                       show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.nanoOtherId])"
-                                       error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
-
-                </div>
                 <div class="form-group  col-sm-4 col-xs-12"
                      ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.asBaseId].$invalid}">
                     <label for="{{::ingRecCtrl.asBaseId}}" class="required">
@@ -218,6 +188,55 @@
                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.asBaseId])"
                                            error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group  col-sm-4 col-xs-12"
+                     ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.isNanoMaterialId].$invalid}">
+                    <label for="{{::ingRecCtrl.isNanoMaterialId}}" class="required">
+                        <span class="field-name">{{'IS_NANO_MATERIAL'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <select id="{{::ingRecCtrl.isNanoMaterialId}}" ng-model="ingRecCtrl.ingModel.isNano" ng-required="true"
+                                class="form-control" name="{{::ingRecCtrl.isNanoMaterialId}}"
+                                ng-options="val |translate for val in  ingRecCtrl.yesNoList">
+                        </select>
+                        <cmp-error-message field-name="ingRecCtrl.isNanoMaterialId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.isNanoMaterialId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+                    </label>
+                </div>
+                <div ng-if="ingRecCtrl.isNanoMaterial()">
+                    <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nanoId].$invalid}">
+                        <label for="{{::ingRecCtrl.nanoId}}" class="required">
+                            <span class="field-name">{{'NANO_MATERIAL'|translate}}</span>
+                            <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                        <select id="{{::ingRecCtrl.nanoId}}" ng-model="ingRecCtrl.ingModel.nanoMaterial"
+                                ng-model-options="{ debounce: '$inherit'}"
+                                class="form-control full-width" name="{{::ingRecCtrl.nanoId}}" required
+                                ng-options="nano[ingRecCtrl.lang] for nano in  ingRecCtrl.nanoMaterialList track by nano.id">
+
+                        </select>
+                        <cmp-error-message field-name="ingRecCtrl.nanoId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.nanoId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+                    </div>
+                    <div class="form-group col-md-5" ng-if="ingRecCtrl.isNanoOther()"
+                         ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nanoOtherId].$invalid}">
+                        <label for="{{::ingRecCtrl.nanoOtherId}}" class="required">
+                            <span class="field-name">{{'NANO_MATERIAL_OTHER'|translate}}</span>
+                            <strong class="required">{{"REQUIRED" |translate}}</strong></label>
+                        <input type="text" id="{{::ingRecCtrl.nanoOtherId}}"
+                               data-ng-model="ingRecCtrl.ingModel.nanoMaterialOther"
+                               ng-model-options="{ debounce: '$inherit'}"
+                               class="form-control full-width" name="{{::ingRecCtrl.nanoOtherId}}" ng-required="true" maxlength="40"/>
+                        <cmp-error-message field-name="ingRecCtrl.nanoOtherId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.nanoOtherId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+
+                    </div>
                 </div>
             </div>
             <div class="row">

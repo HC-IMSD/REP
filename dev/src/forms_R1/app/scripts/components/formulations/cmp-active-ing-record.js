@@ -77,6 +77,7 @@
             otherUnits:"",
             unitPresentation: "",
             per: "",
+            isNano: "",
             nanoMaterial:"",
             nanoMaterialOther: "",
             calcAsBase: "",
@@ -223,6 +224,13 @@
             }
         };
 
+        /**
+         * Update when the value has changed
+         */
+        vm.isNanoMaterial = function () {
+            return (vm.ingModel.isNano === YES);
+        };
+
         vm.saveIng = function () {
             if (vm.activeIngForm.$valid) {
                 if (vm.record) {
@@ -330,6 +338,7 @@
             vm.otherUnitsId="other_units"+scopeId;
             vm.perId="per"+scopeId;
             vm.presentationId="presentation"+scopeId;
+            vm.isNanoMaterialId="is_nano_material"+scopeId;
             vm.nanoId="nano_material"+scopeId;
             vm.nanoOtherId="nano_material_other"+scopeId;
             vm.asBaseId="calculated_as_base"+scopeId;

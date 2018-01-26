@@ -75,9 +75,10 @@
             otherUnits:"",
             unitPresentation: "",
             per: "",
+            calcAsBase: "",
+            isNano: "",
             nanoMaterial: "",
             nanoMaterialOther: "",
-            calcAsBase: "",
             humanAnimalSourced: ""
         };
 
@@ -242,6 +243,7 @@
             vm.otherUnitsId="other_units"+scopeId;
             vm.perId="per"+scopeId;
             vm.presentationId="presentation"+scopeId;
+            vm.isNanoMaterialId="is_nano_material"+scopeId;
             vm.nanoId="nano_material"+scopeId;
             vm.nanoOtherId="nano_material_other"+scopeId;
             vm.asBaseId="calculated_as_base"+scopeId;
@@ -299,6 +301,13 @@
                     vm.isPerMeasure=false;
                     break;
             }
+        };
+
+        /**
+         * Update when the value has changed
+         */
+        vm.isNanoMaterial = function () {
+            return (vm.ingModel.isNano === YES);
         };
 
     }

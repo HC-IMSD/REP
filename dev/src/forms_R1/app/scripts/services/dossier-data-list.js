@@ -49,6 +49,7 @@
             getPerList:_getPerArray,
             getStrengthList:_getStrengthArray,
             getUnitsList:_getUnitsArray,
+            getShelfLifeUnitsList:_getShelfLifeUnitsArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
@@ -219,6 +220,18 @@
                     {"id":"NLT","en":"Not less than","fr":"fr_Not_less_than"},
                     {"id":"RA","en":"Range","fr":"fr_Range"}
 
+                ]
+            )
+        }
+
+        function _getShelfLifeUnitsArray(){
+            return(
+                [
+                    {"id":"YR","en":"Years","fr":"fr_Years"},
+                    {"id":"MO","en":"Months","fr":"fr_Months"},
+                    {"id":"DA","en":"Days","fr":"fr_Days"},
+                    {"id":"HR","en":"Hours","fr":"fr_Hours"},
+                    {"id":"MI","en":"Minutes","fr":"fr_Minutes"}
                 ]
             )
         }

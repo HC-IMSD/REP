@@ -7,6 +7,7 @@
 
     angular
         .module('containerTypeRecordModule', [
+            'dossierDataLists',
             'errorSummaryModule',
             'errorMessageModule'
         ])
@@ -36,16 +37,17 @@
             }
 
         });
-    containerTypeRecCtrl.$inject=['$scope'];
-    function containerTypeRecCtrl($scope) {
+    containerTypeRecCtrl.$inject=['DossierLists', '$scope'];
+    function containerTypeRecCtrl(DossierLists, $scope) {
 
         var vm = this;
-
+        vm.lang = "en";
+        vm.selfLifeUnitsList = DossierLists.getShelfLifeUnitsList();
         vm.ctModel = { //TODO move to service
             "containerType": "",
             "packageSize": "",
-            "shelfLifeYears": undefined,
-            "shelfLifeMonths": undefined,
+            "shelfLifeUnit": undefined,
+            "shelfLifeNumber": undefined,
             "tempMin": undefined,
             "tempMax": undefined
         };
@@ -72,8 +74,8 @@
         vm.$onChanges = function (changes) {
             if (changes.record && changes.record.currentValue) {
                 vm.ctModel = angular.copy(changes.record.currentValue);
-                vm.ctModel.shelfLifeYears = Number(changes.record.currentValue.shelfLifeYears);
-                vm.ctModel.shelfLifeMonths = Number(changes.record.currentValue.shelfLifeMonths);
+                vm.ctModel.shelfLifeUnit = angular.copy(changes.record.currentValue.shelfLifeUnit);
+                vm.ctModel.shelfLifeNumber = Number(changes.record.currentValue.shelfLifeNumber);
                 vm.ctModel.tempMin = Number(changes.record.currentValue.tempMin);
                 vm.ctModel.tempMax = Number(changes.record.currentValue.tempMax);
                 vm.backup = angular.copy(vm.ctModel);
@@ -147,8 +149,8 @@
             vm.containerFormId="containerRecordForm" + scopeId;
             vm.containerTypeId="container_type"+ scopeId;
             vm.packageSizeId="package_size" +scopeId;
-            vm.shelfLifeYearsId="shelf_life_years" +scopeId;
-            vm.shelfLifeMonthsId="shelf_life_months" +scopeId;
+            vm.shelfLifeUnitId="shelf_life_unit" +scopeId;
+            vm.shelfLifeNumberId="shelf_life_number" +scopeId;
             vm.tempMinId="min_temp" +scopeId;
             vm.tempMaxId="max_temp" +scopeId;
         }
