@@ -115,7 +115,7 @@
                         <span class="field-name">{{'UNIT_PRESENTATION'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                     </label>
-                    <select id="{{::nIngRecCtrl.presentationId}}" ng-model="nIngRecCtrl.ingModel.unitPresentation"
+                    <select id="{{::nIngRecCtrl.presentationId}}" ng-model="nIngRecCtrl.ingModel.unitsPresentation"
                             ng-model-options="{ debounce: '$inherit'}"
                             class="form-control full-width" name="{{::nIngRecCtrl.presentationId}}" required
                             ng-options="presentation[nIngRecCtrl.lang] for presentation in  nIngRecCtrl.presentationList track by presentation.id">

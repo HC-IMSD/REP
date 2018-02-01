@@ -101,6 +101,7 @@
                 activeIngList: [],
                 nMedIngList: [],
                 containerTypes: [],
+                "isAnimalHumanMaterial": "",
                 animalHumanMaterials: [],
                 routeAdmins: [],
                 countryList: []
@@ -159,7 +160,8 @@
             vm.selectRecord=-1;
             vm.selectRecord=value;
 
-        }
+        };
+
         function resetMe(){
             vm.resetToCollapsed = !vm.resetToCollapsed;
 

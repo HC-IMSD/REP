@@ -73,7 +73,7 @@
                        data2: null },
             units: "",
             otherUnits:"",
-            unitPresentation: "",
+            unitsPresentation: "",
             per: "",
             calcAsBase: "",
             isNano: "",

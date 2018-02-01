@@ -100,7 +100,24 @@
                     </div>
                 </section>
             </div>
-            <div>
+            <div class="row">
+                <div class="form-group  col-md-16 col-xs-12"
+                     ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId].$invalid}">
+                    <label for="{{::formulRecCtrl.isAnimalHumanMaterialId}}" class="required rep-required-offset full-width">
+                        <span class="field-name">{{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <select id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" ng-required="true"
+                                class="form-control" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}"
+                                ng-options="val |translate for val in  formulRecCtrl.yesNoList">
+                        </select>
+                        <cmp-error-message field-name="formulRecCtrl.isAnimalHumanMaterialId"
+                                           form-ref="formulRecCtrl.formulationForm"
+                                           show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
+                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
+                    </label>
+                </div>
+            </div>
+            <div ng-if="formulRecCtrl.frmModel.isAnimalHumanMaterial === 'Y'">
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">{{'ANIMAL_HUMAN_HDING'|translate}}</h3>
