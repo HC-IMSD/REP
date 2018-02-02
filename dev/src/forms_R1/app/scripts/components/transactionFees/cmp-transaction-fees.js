@@ -119,9 +119,11 @@
         vm.isDeferral = function () {
             if (!vm.model) return false;
 
-            if (vm.model.deferralRequest) {
+            if (vm.model.deferralRequest==YES) {
+
                 return true;
             }
+
             vm.model.requiredDocs.deferralStat = false;
             return false;
         };
@@ -231,6 +233,7 @@
             vm.otherId = "other" + scopeId;
             vm.otherDetailsId = "other_doc_details" + scopeId;
             vm.paymentFsId="fs_payment_methods" + scopeId;
+            vm.deferId = "fee_derferral" + scopeId;
 
         };
         /**
