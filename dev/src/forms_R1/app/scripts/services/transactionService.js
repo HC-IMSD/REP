@@ -361,7 +361,7 @@
             if (feeObj.submission_class && feeObj.submission_class.id) {
                 result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class.id});
             }
-            result.deferralRequest = feeObj.deferral_request === YES;
+            result.deferralRequest = feeObj.deferral_request;
             result.feeRemission = feeObj.fee_remission;
             result.grossRevenue = feeObj.gross_revenue;
             result.percentGross = feeObj.percent_gross;
@@ -689,7 +689,7 @@
         var feeObj = {
 
             submissionClass: null,
-            deferralRequest: false, //defer payment for two years
+            deferralRequest: '', //defer payment for two years
             feeRemission: "", //applying for fee remission
             grossRevenue: 0,
             percentGross: "",

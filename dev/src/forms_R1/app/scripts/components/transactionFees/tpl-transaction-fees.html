@@ -56,19 +56,28 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-xs-12">
-                    <div class="checkbox">
-                        <label for="fee-deferral">
-                            <input type="checkbox" ng-model="transFeeCtrl.model.deferralRequest"
-                                   name="fee-deferral" id="fee-deferral"/>
-                            {{::"DEFER_FEES"|translate}}
-                        </label>
-                        <button title="{{::'EXPAND'|translate}} {{::'DEFER_INSTRUCT'|translate}}"
-                                class="btn rep-help-button-primary btn-xs"
-                                ng-click="transFeeCtrl.addInstruct(1)"><span class="fa fa-question-circle fa-2x"></span>
-                        </button>
-                    </div>
+                <div class="form-group col-xs-7 ">
+                <div ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.deferId].$invalid}">
+                    <label for="{{::transFeeCtrl.deferId}}" class="required ">
+                        <span class="field-name">{{::"DEFER_FEES"|translate}}</span>
+                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                        <div style="display:inline">
+                            <button title="{{::'EXPAND'|translate}} {{::'DEFER_INSTRUCT'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    ng-click="transFeeCtrl.addInstruct(1)"><span class="fa fa-question-circle fa-2x"></span>
+                            </button>
+                        </div>
+                        <select class="form-control" ng-model="transFeeCtrl.model.deferralRequest"
+                            name="{{::transFeeCtrl.deferId}}" id="{{::transFeeCtrl.deferId}}" required
+                            ng-options="choice |translate for choice in transFeeCtrl.yesNoList">
+                        </select>
 
+                        <cmp-error-message field-name="transFeeCtrl.deferId" form-ref="transFeeCtrl.transFeeForm"
+                                           show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.deferId])"
+                                           error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
+
+                    </label>
+                </div>
                 </div>
             </div>
             <div class="row">
@@ -87,7 +96,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-xs-8 ">
+                <div class="form-group col-xs-7 ">
                     <div ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
                         <label for="{{::transFeeCtrl.remitId}}" class="required ">
                             <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
