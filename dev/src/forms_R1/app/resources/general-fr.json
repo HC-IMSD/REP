@@ -53,5 +53,6 @@
   "SAVE_RECORD":"fr_Save Record",
   "DELETE_RECORD":"fr_Delete Record",
   "CONTROL_NUM": "fr_Control Number",
-  "OTHER_DETAILS": "fr_Other Details - Specify"
+  "OTHER_DETAILS": "fr_Other Details - Specify",
+  "PROD_NAME":"Product Name"
 }

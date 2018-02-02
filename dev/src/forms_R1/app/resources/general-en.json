@@ -59,5 +59,6 @@
   "SAVE_RECORD":"Save Record",
   "DELETE_RECORD":"Delete Record",
   "CONTROL_NUM": "Control Number",
-  "OTHER_DETAILS": "Other - specify"
+  "OTHER_DETAILS": "Other - specify",
+  "PROD_NAME":"Product Name"
 }

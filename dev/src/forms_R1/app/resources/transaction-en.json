@@ -18,7 +18,7 @@
   "END_DATE": "End Date (YYYY-MM-DD)",
   "REG_ACTIVITY": "Regulatory Activity",
   "REG_ACTIVITY_TYPE": "Regulatory Activity Type",
-  "SEQUENCE_TYPE": "Sequence Description",
+  "SEQUENCE_TYPE": "Regulatory Transaction Description",
   "VERSION_NO": "Version No.",
   "BRIEF_DESC": "Brief Description",
   "ADMINISTRATIVE": "Administrative",
