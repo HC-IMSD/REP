@@ -87,8 +87,6 @@
         };
 
         vm.strengthData1Title="";
-        //vm.isPerPresentation=false;
-        //vm.isPerMeasure=false;
 
         vm.exclusions={
         };
@@ -168,30 +166,6 @@
             }else {
                 vm.ingModel.ingId = item.id;
                 vm.ingModel.autoIngred = YES;
-            }
-        };
-
-        /**
-         * Fires on selection OR when the value has changed
-         */
-        vm.strengthSelectionUpdated = function () {
-
-            if(vm.ingModel.strength.operator.id !== ""){
-                switch (vm.ingModel.strength.operator.id)
-                {
-                    case "EQ":
-                        vm.strengthData1Title = "EQUALS";
-                        break;
-                    case "NGT":
-                        vm.strengthData1Title = "NOT_GREAT_THAN";
-                        break;
-                    case "NLT":
-                        vm.strengthData1Title = "NOT_LESS_THAN";
-                        break;
-                    case "RA":
-                        vm.strengthData1Title = "RANGE_LOWER_LIMIT";
-                        break;
-                }
             }
         };
 

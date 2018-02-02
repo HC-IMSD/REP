@@ -92,6 +92,10 @@
                 if(info.schedule) {
                     scheduleValue = info.schedule.__text;
                 }
+                var prescrStatusValue ="";
+                if(info.prescription_status) {
+                    prescrStatusValue = info.prescription_status.__text;
+                }
                 var formModel = {
                     dossierID: info.dossier_id, //.substring(8,15),
                     companyID: info.company_id,
@@ -110,6 +114,7 @@
                        // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                         schedule: $filter('findListItemById')(DossierLists.getScheduleList(), {id: scheduleValue}),
+                        prescriptionStatus: $filter('findListItemById')(DossierLists.getPrescStatusList(), {id: prescrStatusValue}),
                         isScheduleA: info.is_sched_a === 'Y',
                        // therapeutic: [],
                        // canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
@@ -177,6 +182,16 @@
                 };
             }else{
                 baseModel.schedule="";
+            }
+
+            if(jsonObj.drugProduct.prescriptionStatus) {
+                baseModel.prescription_status = {
+                    _label_en: jsonObj.drugProduct.prescriptionStatus.en,
+                    _label_fr: jsonObj.drugProduct.prescriptionStatus.fr,
+                    __text: jsonObj.drugProduct.prescriptionStatus.id
+                };
+            }else{
+                baseModel.prescription_status="";
             }
             //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
             baseModel.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
@@ -553,13 +568,26 @@
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
                     "strength": item.strength,
-                    "per": item.per,
                     "units": "",
                     "otherUnits": item.units_other,
+                    "per": item.per,
+                    "unitsPresentation": item.units_presentation,
+                    "perMeasureUnits": "",
+                    "perMeasureOtherUnits": item.units_other_measure,
                     "calcAsBase": item.is_base_calc,
+                    "isNano": item.is_nanomaterial,
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
+                if (item.units_measure) {
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.units_measure.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.units_measure.__text === OTHER) {
+                        unitsValue = item.units_measure.__text;
+                    }
+                    obj.perMeasureUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                }
 
                 if (item.units) {
                     var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
@@ -569,11 +597,11 @@
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
-                if (item.is_nanomaterial) {
+                if (item.is_nanomaterial === YES) {
                     //prefixed so need to do things differently than units
-                    var nanoValue = DossierLists.getNanoPrefix() + item.is_nanomaterial.__text;
-                    if (item.is_nanomaterial.__text === OTHER) {
-                        nanoValue = item.is_nanomaterial.__text;
+                    var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial.__text;
+                    if (item.nanomaterial.__text === OTHER) {
+                        nanoValue = item.nanomaterial.__text;
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
@@ -957,15 +985,31 @@
                     "is_human_animal_src": item.humanAnimalSourced,
                     "variant_name": item.varId,
                     "strength": item.strength,
-                    "per": item.per,
                     "units": "",
                     "units_other": item.otherUnits,
+                    "per": item.per,
+                    "units_presentation": "",
+                    "units_measure": "",
+                    "units_other_measure": "",
                     "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial": "",
-                    "nanomaterial_details": item.nanoMaterialOther
+                    "is_nanomaterial": item.isNano,
+                    "nanomaterial": "",
+                    "nanomaterial_details": ""
                 };
+                if (item.strength && item.strength.operator.id !== 'RA') {
+                    obj.strength.data2 = "";
+                }
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
-                obj.is_nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                if (item.per.id === 'UP') {
+                    obj.units_presentation = item.unitsPresentation;
+                } else if (item.per.id === 'UM') {
+                    obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
+                    obj.units_other_measure = item.perMeasureOtherUnits;
+                }
+                if (item.isNano === YES) {
+                    obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                    obj.nanomaterial_details = item.nanoMaterialOther;
+                }
 
                 resultList.push(obj);
             });

@@ -161,11 +161,28 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.prescriptionStatusId].$invalid}">
+                        <label for="{{::drugProdCtrl.prescriptionStatusId}}" class="required">
+                            <span class="field-name">E.&nbsp;{{::'PRESCRIPTION_STATUS'|translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <select name="{{::drugProdCtrl.prescriptionStatusId}}" class="form-control"
+                                    ng-model="drugProdCtrl.model.drugProduct.prescriptionStatus" id="{{::drugProdCtrl.prescriptionStatusId}}"
+                                    ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.prescStatusList track by use.id"
+                                    required>
+                            </select>
+                            <cmp-error-message field-name="drugProdCtrl.prescriptionStatusId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.prescriptionStatusId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 checkbox">
                         <label for="is-schedule-case">
                             <input type="checkbox" name="isScheduleA"
                                    ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-case">
-                            <b>E.</b> {{::'ISSCHEDA'|translate}}
+                            <b>F.</b> {{::'ISSCHEDA'|translate}}
                         </label>
                     </div>
                 </div>
