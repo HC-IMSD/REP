@@ -60,13 +60,16 @@
         vm.noActiveValues="";
         vm.dosageFormList = DossierLists.getDosageFormList();
         vm.otherValue = DossierLists.getDosageOther();
+        vm.yesNoList = DossierLists.getYesNoList();
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
        // vm.formName="";
         vm.summaryName="";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.lang = $translate.proposedLanguage() || $translate.use();
-        vm.frmModel = {};
+        vm.frmModel = {
+            "isAnimalHumanMaterial": ""
+        };
         vm.exclusions={
             "ingRecCtrl.activeIngForm":"true",
             "nIngRecCtrl.nonMedIngForm":"true",
@@ -114,7 +117,7 @@
                 vm.updateErrorSummaryState();
             }
 
-        }
+        };
 
         vm.delete = function(){
             if (vm.record) {
@@ -282,6 +285,7 @@
             vm.noContainerId="no_container"+scopeId;
             vm.noRoaId="no_roa"+scopeId;
             vm.noCountryId="no_country"+scopeId;
+            vm.isAnimalHumanMaterialId="is_Animal_Human"+scopeId;
         }
 
         $scope.$watch('formulRecCtrl.formulationForm.$error', function () {

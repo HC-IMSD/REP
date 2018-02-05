@@ -55,6 +55,7 @@
                     //thirdPartySigned: "",
                     drugUse: "",
                     schedule: "",
+                    prescriptionStatus: "",
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
                    // therapeutic: [],
@@ -91,8 +92,12 @@
                 if(info.schedule) {
                     scheduleValue = info.schedule.__text;
                 }
+                var prescrStatusValue ="";
+                if(info.prescription_status) {
+                    prescrStatusValue = info.prescription_status.__text;
+                }
                 var formModel = {
-                    dossierID: info.dossier_id,
+                    dossierID: info.dossier_id, //.substring(8,15),
                     companyID: info.company_id,
                    // relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
@@ -109,6 +114,7 @@
                        // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                         schedule: $filter('findListItemById')(DossierLists.getScheduleList(), {id: scheduleValue}),
+                        prescriptionStatus: $filter('findListItemById')(DossierLists.getPrescStatusList(), {id: prescrStatusValue}),
                         isScheduleA: info.is_sched_a === 'Y',
                        // therapeutic: [],
                        // canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
@@ -149,7 +155,7 @@
             var baseModel = {};
             //order is important!!! Must match schema
             baseModel.company_id = jsonObj.companyID;
-            baseModel.dossier_id = jsonObj.dossierID;
+            baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
            // baseModel.related_dossier_id = jsonObj.relatedDossierID;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
@@ -176,6 +182,16 @@
                 };
             }else{
                 baseModel.schedule="";
+            }
+
+            if(jsonObj.drugProduct.prescriptionStatus) {
+                baseModel.prescription_status = {
+                    _label_en: jsonObj.drugProduct.prescriptionStatus.en,
+                    _label_fr: jsonObj.drugProduct.prescriptionStatus.fr,
+                    __text: jsonObj.drugProduct.prescriptionStatus.id
+                };
+            }else{
+                baseModel.prescription_status="";
             }
             //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
             baseModel.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
@@ -427,7 +443,7 @@
                 if (item.active_ingredient) {
                     obj.activeIngList = getActiveIngList(item.active_ingredient);
                 } else {
-                    obj.animalHumanMaterials = [];
+                    obj.activeIngList = [];
                 }
                 //container_group is static but do a check to be safe
                 if (item.container_group && item.container_group.container_details) {
@@ -435,7 +451,12 @@
                 } else {
                     obj.containerTypes = [];
                 }
-                if (item.material_ingredient) {
+                if (item.is_animal_human_material) {
+                    obj.isAnimalHumanMaterial = item.is_animal_human_material;
+                } else {
+                    obj.isAnimalHumanMaterial = "";
+                }
+                if (item.is_animal_human_material === YES && item.material_ingredient) {
                     obj.animalHumanMaterials = getMaterialList(item.material_ingredient);
                 } else {
                     obj.animalHumanMaterials = [];
@@ -479,13 +500,26 @@
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
                     "strength": item.strength,
-                    "per": item.per,
                     "units": "",
                     "otherUnits": item.units_other,
+                    "per": item.per,
+                    "unitsPresentation": item.units_presentation,
+                    "perMeasureUnits": "",
+                    "perMeasureOtherUnits": item.units_other_measure,
                     "calcAsBase": item.is_base_calc,
+                    "isNano": item.is_nanomaterial,
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
+                if (item.units_measure) {
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.units_measure.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.units_measure.__text === OTHER) {
+                        unitsValue = item.units_measure.__text;
+                    }
+                    obj.perMeasureUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                }
 
                 if (item.units) {
                     var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
@@ -495,11 +529,11 @@
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
-                if (item.is_nanomaterial) {
+                if (item.is_nanomaterial === YES) {
                     //prefixed so need to do things differently than units
-                    var nanoValue = DossierLists.getNanoPrefix() + item.is_nanomaterial.__text;
-                    if (item.is_nanomaterial.__text === OTHER) {
-                        nanoValue = item.is_nanomaterial.__text;
+                    var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial.__text;
+                    if (item.nanomaterial.__text === OTHER) {
+                        nanoValue = item.nanomaterial.__text;
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
@@ -534,13 +568,26 @@
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
                     "strength": item.strength,
-                    "per": item.per,
                     "units": "",
                     "otherUnits": item.units_other,
+                    "per": item.per,
+                    "unitsPresentation": item.units_presentation,
+                    "perMeasureUnits": "",
+                    "perMeasureOtherUnits": item.units_other_measure,
                     "calcAsBase": item.is_base_calc,
+                    "isNano": item.is_nanomaterial,
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
+                if (item.units_measure) {
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.units_measure.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.units_measure.__text === OTHER) {
+                        unitsValue = item.units_measure.__text;
+                    }
+                    obj.perMeasureUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                }
 
                 if (item.units) {
                     var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
@@ -550,11 +597,11 @@
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
-                if (item.is_nanomaterial) {
+                if (item.is_nanomaterial === YES) {
                     //prefixed so need to do things differently than units
-                    var nanoValue = DossierLists.getNanoPrefix() + item.is_nanomaterial.__text;
-                    if (item.is_nanomaterial.__text === OTHER) {
-                        nanoValue = item.is_nanomaterial.__text;
+                    var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial.__text;
+                    if (item.nanomaterial.__text === OTHER) {
+                        nanoValue = item.nanomaterial.__text;
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
@@ -578,8 +625,8 @@
                 var obj = {
                     "containerType": item.container_type,
                     "packageSize": item.package_size,
-                    "shelfLifeYears": Number(item.shelf_life_years),
-                    "shelfLifeMonths": Number(item.shelf_life_months),
+                    "shelfLifeUnit": item.shelf_life_unit,
+                    "shelfLifeNumber": Number(item.shelf_life_number),
                     "tempMin": Number(item.temperature_min),
                     "tempMax": Number(item.temperature_max)
                 };
@@ -684,51 +731,6 @@
             return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
             //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
         };
-
-     /*   function canRefProductListToOutput(info) {
-            var resultList = [];
-
-            if (angular.isDefined(info)) {
-                for (var i = 0; i < info.length; i++) {
-                    var product = {};
-                    product.brand_name = info[i].brandName;
-                    // product.medicinal_ingredient = info[i].medIngredient;
-
-                    //BUG Fix April 10, 2017
-                    // This fixes data issues where ingredient is not on the list
-                    //id should be empty in this case
-                    if (info[i].ingId && (info[i].ingId !== info[i].ingLabel)) {
-                        product.ingredient_id = "";
-                        product.ingredient_name = info[i].ingLabel;
-                    } else {
-                        product.ingredient_id = info[i].ingId;
-                        product.ingredient_name = info[i].ingLabel;
-                    }
-                    //make dosage form with both english and french labels
-                    if (info[i].dosageForm) {
-                        var splitArray = (info[i].dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                        var newDosage = splitArray[splitArray.length - 1];
-                        // product.dosage_form = info[i].dosageForm;
-                        product.dosage_form = {
-                            _label_en: info[i].dosageForm.en,
-                            _label_fr: info[i].dosageForm.fr,
-                            __text: newDosage
-                        };
-                    }
-
-                    product.dosage_form_other = info[i].dosageFormOther;
-                    product.strengths = info[i].strengths;
-                    product.units = _unitsFldToOutput(info[i].units, DossierLists.getUnitsPrefix());
-                    product.units_other = info[i].otherUnits;
-                    product.per = info[i].per;
-                    product.company_name = info[i].companyName;
-
-
-                    resultList.push(product);
-                }
-            }
-            return resultList;
-        }*/
 
         /**
          * Converts all the appendix 4 data to output
@@ -880,6 +882,9 @@
                 if (item.nMedIngList && item.nMedIngList.length > 0) {
                     obj.nonmedicinal_ingredient = nonMedIngListToOutput(item.nMedIngList);
                 }
+                if (item.isAnimalHumanMaterial) {
+                    obj.is_animal_human_material = item.isAnimalHumanMaterial;
+                }
                 if (item.animalHumanMaterials && item.animalHumanMaterials.length > 0) {
                     obj.material_ingredient = materialListToOutput(item.animalHumanMaterials);
                 }
@@ -904,16 +909,32 @@
                     "ingred_standard": item.standard,
                     "is_human_animal_src": item.humanAnimalSourced,
                     "strength": item.strength,
-                    "per": item.per,
                     "units": "",
                     "units_other": item.otherUnits,
+                    "per": item.per,
+                    "units_presentation": "",
+                    "units_measure": "",
+                    "units_other_measure": "",
                     "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial": "",
-                    "nanomaterial_details": item.nanoMaterialOther
+                    "is_nanomaterial": item.isNano,
+                    "nanomaterial": "",
+                    "nanomaterial_details": ""
                 };
+                if (item.strength && item.strength.operator.id !== 'RA') {
+                    obj.strength.data2 = "";
+                }
                 //item.units
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
-                obj.is_nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                if (item.per.id === 'UP') {
+                    obj.units_presentation = item.unitsPresentation;
+                } else if (item.per.id === 'UM') {
+                    obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
+                    obj.units_other_measure = item.perMeasureOtherUnits;
+                }
+                if (item.isNano === YES) {
+                    obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                    obj.nanomaterial_details = item.nanoMaterialOther;
+                }
 
                 resultList.push(obj);
             });
@@ -964,15 +985,31 @@
                     "is_human_animal_src": item.humanAnimalSourced,
                     "variant_name": item.varId,
                     "strength": item.strength,
-                    "per": item.per,
                     "units": "",
                     "units_other": item.otherUnits,
+                    "per": item.per,
+                    "units_presentation": "",
+                    "units_measure": "",
+                    "units_other_measure": "",
                     "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial": "",
-                    "nanomaterial_details": item.nanoMaterialOther
+                    "is_nanomaterial": item.isNano,
+                    "nanomaterial": "",
+                    "nanomaterial_details": ""
                 };
+                if (item.strength && item.strength.operator.id !== 'RA') {
+                    obj.strength.data2 = "";
+                }
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
-                obj.is_nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                if (item.per.id === 'UP') {
+                    obj.units_presentation = item.unitsPresentation;
+                } else if (item.per.id === 'UM') {
+                    obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
+                    obj.units_other_measure = item.perMeasureOtherUnits;
+                }
+                if (item.isNano === YES) {
+                    obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                    obj.nanomaterial_details = item.nanoMaterialOther;
+                }
 
                 resultList.push(obj);
             });
@@ -991,8 +1028,8 @@
                 var obj = {
                     "container_type": item.containerType,
                     "package_size": item.packageSize,
-                    "shelf_life_years": item.shelfLifeYears,
-                    "shelf_life_months": item.shelfLifeMonths,
+                    "shelf_life_unit": item.shelfLifeUnit,
+                    "shelf_life_number": item.shelfLifeNumber,
                     "temperature_min": item.tempMin,
                     "temperature_max": item.tempMax
                 };

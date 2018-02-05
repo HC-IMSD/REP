@@ -62,7 +62,7 @@
 
         vm.$onChanges=function(changes){
             if(changes.showErrorSummary){
-                console.log("active ingredient changes to show Error Summary")
+                //console.log("active ingredient changes to show Error Summary")
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
             }
@@ -103,7 +103,7 @@
 
         vm.makeFocused=function(){
             vm.focusSummary=vm.focusSummary+1;
-        }
+        };
 
         vm.discardChanges = function () {
             vm.mirModel = angular.copy(vm.backup);

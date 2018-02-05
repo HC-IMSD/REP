@@ -59,7 +59,6 @@
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="{{::ingRecCtrl.strengthId}}" ng-model="ingRecCtrl.ingModel.strength.operator"
                             ng-model-options="{ debounce: '$inherit'}"
-                            ng-change="ingRecCtrl.strengthSelectionUpdated()"
                             class="form-control full-width" name="{{::ingRecCtrl.strengthId}}" required
                             ng-options="op[ingRecCtrl.lang] for op in  ingRecCtrl.strengthList track by op.id">
                     </select>
@@ -69,7 +68,7 @@
                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
                 <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthData1Id].$invalid}"
-                     ng-if="ingRecCtrl.isStrengthSet">
+                     ng-if="ingRecCtrl.isStrengthSet()">
                     <label for="{{::ingRecCtrl.strengthData1Id}}" class="required">
                         <span class="field-name">{{ingRecCtrl.strengthData1Title|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -83,7 +82,7 @@
                     </label>
                 </div>
                 <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthData2Id].$invalid}"
-                    ng-if="ingRecCtrl.isRange">
+                    ng-if="ingRecCtrl.isRange()">
                     <label for="{{::ingRecCtrl.strengthData2Id}}" class="required">
                         <span class="field-name">{{'RANGE_UPPER_LIMIT'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -98,6 +97,48 @@
                 </div>
             </div>
             <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="{{::ingRecCtrl.unitsId}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <div class="rep-pad-top">
+                            <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.unitsId].$invalid}">
+                                <ui-select ng-model="ingRecCtrl.ingModel.units" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}"
+                                           ng-model-options="{ debounce: 0}"
+                                           class="rep-selectize-font full-width" required>
+                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
+                                                     class="rep-selectize-font form-control">
+                                        {{$select.selected[ingRecCtrl.lang]}}
+                                    </ui-select-match>
+                                    <ui-select-choices
+                                            repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
+                                            class="rep-selectize-font">
+                                        <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                        <cmp-error-message field-name="ingRecCtrl.unitsId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.unitsId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+                    </label>
+                </div>
+                <div class="form-group col-md-4" ng-show="ingRecCtrl.isUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId].$invalid}">
+                    <label for="{{::ingRecCtrl.otherUnitsId}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <input type="text" id="{{::ingRecCtrl.otherUnitsId}}" data-ng-model="ingRecCtrl.ingModel.otherUnits"
+                               ng-model-options="{ debounce: '$inherit'}"
+                               size="40" class="form-control" name="{{::ingRecCtrl.otherUnitsId}}"
+                               maxlength="40" ng-required="ingRecCtrl.isUnitsOther()"/>
+
+                        <cmp-error-message field-name="ingRecCtrl.otherUnitsId"
+                                           form-ref="ingRecCtrl.activeIngForm"
+                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId])"
+                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
                 <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perId].$invalid}">
                     <label for="{{::ingRecCtrl.perId}}">
                         <span class="field-name">{{'PER_STRENGTH'|translate}}</span>
@@ -105,7 +146,6 @@
                     </label>
                     <select id="{{::ingRecCtrl.perId}}" ng-model="ingRecCtrl.ingModel.per"
                             ng-model-options="{ debounce: '$inherit'}"
-                            ng-change="ingRecCtrl.perSelectionUpdated()"
                             class="form-control full-width" name="{{::ingRecCtrl.perId}}" required
                             ng-options="per[ingRecCtrl.lang] for per in  ingRecCtrl.perList track by per.id">
                     </select>
@@ -115,12 +155,12 @@
                            error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
                 <div class="form-group col-md-5" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.presentationId].$invalid}"
-                     ng-if="ingRecCtrl.isPerPresentation">
+                     ng-if="ingRecCtrl.isPerPresentation()">
                     <label for="{{::ingRecCtrl.presentationId}}">
                         <span class="field-name">{{'UNIT_PRESENTATION'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                     </label>
-                    <select id="{{::ingRecCtrl.presentationId}}" ng-model="ingRecCtrl.ingModel.unitPresentation"
+                    <select id="{{::ingRecCtrl.presentationId}}" ng-model="ingRecCtrl.ingModel.unitsPresentation"
                             ng-model-options="{ debounce: '$inherit'}"
                             class="form-control full-width" name="{{::ingRecCtrl.presentationId}}" required
                             ng-options="presentation[ingRecCtrl.lang] for presentation in  ingRecCtrl.presentationList track by presentation.id">
@@ -130,13 +170,13 @@
                                        show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.presentationId])"
                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
-                <div ng-if="ingRecCtrl.isPerMeasure">
-                    <div class="form-group col-md-3" ng-if="ingRecCtrl.isPerMeasure">
-                        <label for="{{::ingRecCtrl.unitsId}}" class="required full-width"><span class="field-name">{{'UNIT_MEASURE'|translate}}</span>
+                <div ng-if="ingRecCtrl.isPerMeasure()">
+                    <div class="form-group col-md-3">
+                        <label for="{{::ingRecCtrl.perMeasureUnitId}}" class="required full-width"><span class="field-name">{{'UNIT_MEASURE'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
                             <div class="rep-pad-top">
-                                <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.unitsId].$invalid}">
-                                    <ui-select ng-model="ingRecCtrl.ingModel.units" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}"
+                                <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId].$invalid}">
+                                    <ui-select ng-model="ingRecCtrl.ingModel.perMeasureUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
                                                ng-model-options="{ debounce: 0}"
                                                class="rep-selectize-font full-width" required>
                                         <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
@@ -151,23 +191,23 @@
                                     </ui-select>
                                 </div>
                             </div>
-                            <cmp-error-message field-name="ingRecCtrl.unitsId"
+                            <cmp-error-message field-name="ingRecCtrl.perMeasureUnitId"
                                                form-ref="ingRecCtrl.activeIngForm"
-                                               show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.unitsId])"
+                                               show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId])"
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                         </label>
                     </div>
-                    <div class="form-group col-md-4" ng-if="ingRecCtrl.isUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId].$invalid}">
-                        <label for="{{::ingRecCtrl.otherUnitsId}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
+                    <div class="form-group col-md-4" ng-if="ingRecCtrl.isMeasureUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId].$invalid}">
+                        <label for="{{::ingRecCtrl.perMeasureOtherUnitId}}" class="required"><span class="field-name">{{'OTHER_UNIT_MEASURE'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <input type="text" id="{{::ingRecCtrl.otherUnitsId}}" data-ng-model="ingRecCtrl.ingModel.otherUnits"
+                            <input type="text" id="{{::ingRecCtrl.perMeasureOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasureOtherUnits"
                                    ng-model-options="{ debounce: '$inherit'}"
-                                   size="40" class="form-control" name="{{::ingRecCtrl.otherUnitsId}}"
-                                   maxlength="40" ng-required="ingRecCtrl.isUnitsOther()"/>
+                                   size="40" class="form-control" name="{{::ingRecCtrl.perMeasureOtherUnitId}}"
+                                   maxlength="40" ng-required="ingRecCtrl.isMeasureUnitsOther()"/>
 
-                            <cmp-error-message field-name="ingRecCtrl.otherUnitsId"
+                            <cmp-error-message field-name="ingRecCtrl.perMeasureOtherUnitId"
                                        form-ref="ingRecCtrl.activeIngForm"
-                                       show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId])"
+                                       show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId])"
                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                         </label>
                     </div>

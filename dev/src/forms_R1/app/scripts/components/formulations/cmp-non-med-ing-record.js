@@ -73,8 +73,10 @@
                        data2: null },
             units: "",
             otherUnits:"",
-            unitPresentation: "",
             per: "",
+            unitsPresentation: "",
+            perMeasureUnits: "",
+            perMeasureOtherUnits:"",
             calcAsBase: "",
             isNano: "",
             nanoMaterial: "",
@@ -83,10 +85,6 @@
         };
 
         vm.strengthData1Title="";
-        vm.isStrengthSet=false;
-        vm.isRange=false;
-        vm.isPerPresentation=false;
-        vm.isPerMeasure=false;
 
         vm.exclusions={
         };
@@ -241,6 +239,8 @@
             vm.strengthData2Id="strength_data2_"+scopeId;
             vm.unitsId="units"+scopeId;
             vm.otherUnitsId="other_units"+scopeId;
+            vm.perMeasureUnitId="per_measure_units"+scopeId;
+            vm.perMeasureOtherUnitId="per_measure_other_units"+scopeId;
             vm.perId="per"+scopeId;
             vm.presentationId="presentation"+scopeId;
             vm.isNanoMaterialId="is_nano_material"+scopeId;
@@ -256,51 +256,85 @@
         vm.strengthSelectionUpdated = function () {
 
             if(vm.ingModel.strength.operator.id !== ""){
-                vm.isStrengthSet=true;
                 switch (vm.ingModel.strength.operator.id)
                 {
                     case "EQ":
                         vm.strengthData1Title = "EQUALS";
-                        vm.isRange=false;
                         break;
                     case "NGT":
                         vm.strengthData1Title = "NOT_GREAT_THAN";
-                        vm.isRange=false;
                         break;
                     case "NLT":
                         vm.strengthData1Title = "NOT_LESS_THAN";
-                        vm.isRange=false;
                         break;
                     case "RA":
                         vm.strengthData1Title = "RANGE_LOWER_LIMIT";
-                        vm.isRange=true;
                         break;
                 }
-            }else {
-                vm.isStrengthSet=false;
-                vm.isRange=false;
             }
         };
 
         /**
          * Fires on selection OR when the value has changed
          */
-        vm.perSelectionUpdated = function () {
-            switch (vm.ingModel.per.id)
-            {
-                case "UP":
-                    vm.isPerPresentation=true;
-                    vm.isPerMeasure=false;
-                    break;
-                case "UM":
-                    vm.isPerMeasure=true;
-                    vm.isPerPresentation=false;
-                    break;
-                default:
-                    vm.isPerPresentation=false;
-                    vm.isPerMeasure=false;
-                    break;
+        vm.isPerPresentation = function () {
+            return (vm.ingModel.per.id === 'UP');
+        };
+
+        /**
+         * Fires on selection OR when the value has changed
+         */
+        vm.isPerMeasure = function () {
+            return (vm.ingModel.per.id === 'UM');
+        };
+
+        /**
+         * check update when the value has changed
+         */
+        vm.isStrengthSet = function () {
+            var isSet = false;
+            if (vm.ingModel.strength.operator.id !== undefined
+                && vm.ingModel.strength.operator.id !== "") {
+                isSet = true;
+                switch (vm.ingModel.strength.operator.id)
+                {
+                    case "EQ":
+                        vm.strengthData1Title = "EQUALS";
+                        break;
+                    case "NGT":
+                        vm.strengthData1Title = "NOT_GREAT_THAN";
+                        break;
+                    case "NLT":
+                        vm.strengthData1Title = "NOT_LESS_THAN";
+                        break;
+                    case "RA":
+                        vm.strengthData1Title = "RANGE_LOWER_LIMIT";
+                        break;
+                }
             }
+            return isSet;
+        };
+
+        /**
+         * @ngDoc determines if units Other should be shown
+         * @returns {boolean}
+         */
+        vm.isMeasureUnitsOther = function () {
+
+            if (!vm.ingModel || !vm.ingModel.perMeasureUnits) return false;
+            if ((vm.ingModel.perMeasureUnits.id === OTHER)) {
+                return true;
+            } else {
+                vm.ingModel.perMeasureOtherUnits = "";
+                return false;
+            }
+        };
+
+        /**
+         * check update when the value has changed
+         */
+        vm.isRange = function () {
+            return (vm.ingModel.strength.operator.id === "RA");
         };
 
         /**

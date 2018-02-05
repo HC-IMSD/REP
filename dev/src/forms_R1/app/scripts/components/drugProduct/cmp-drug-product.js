@@ -125,6 +125,7 @@
         vm.rootTag="";
         vm.drugUseList=[];
         vm.scheduleList=[];
+        vm.prescStatusList=[];
         vm.extraAppendixModel="none";
         vm.missingAppendixModel="none";
 
@@ -132,6 +133,7 @@
             vm.showSummary = false;
             vm.drugUseList = DossierLists.getDrugUseList();
             vm.scheduleList = DossierLists.getScheduleList();
+            vm.prescStatusList = DossierLists.getPrescStatusList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -444,6 +446,7 @@
             vm.noTheraId="no_theraVal"+scopeId;
             vm.drugUseId="drug_use"+scopeId;
             vm.scheduleId="schedule"+scopeId;
+            vm.prescriptionStatusId="prescription_status"+scopeId;
         }
 
 

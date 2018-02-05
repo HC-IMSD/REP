@@ -46,6 +46,7 @@
             getDosageFormList: getDosageFormsArray,
             getDrugUseList:_getDrugUseArray,
             getScheduleList:_getScheduleArray,
+            getPrescStatusList:_getPrescStatusArray,
             getPerList:_getPerArray,
             getStrengthList:_getStrengthArray,
             getUnitsList:_getUnitsArray,
@@ -195,6 +196,17 @@
                     {"id":"AA","en":"Thrombotic and Embolic Disorder","fr":"fr_Thrombotic and Embolic Disorder"},
                     {"id":"BB","en":"Thyroid disease","fr":"fr_Thyroid disease"},
                     {"id":"CC","en":"Ulcer of gastro-intestinal tract","fr":"fr_Ulcer of gastro-intestinal tract"}
+
+                ]
+            )
+        }
+
+        function _getPrescStatusArray(){
+
+            return(
+                [
+                    {"id":"1","en":"PrescStatus 1","fr":"fr_PrescStatus 1"},
+                    {"id":"2","en":"PrescStatus 2","fr":"fr_PrescStatus 2"}
 
                 ]
             )
