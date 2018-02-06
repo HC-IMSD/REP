@@ -233,7 +233,7 @@
             vm.otherId = "other" + scopeId;
             vm.otherDetailsId = "other_doc_details" + scopeId;
             vm.paymentFsId="fs_payment_methods" + scopeId;
-            vm.deferId = "fee_derferral" + scopeId;
+            vm.deferId = "defer_fees" + scopeId;
 
         };
         /**
