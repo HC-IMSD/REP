@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- ****************************** -->
-<!-- Company Enrolment version 0.1 -->
+<!-- Dossier Enrolment version 0.1 -->
 <!-- ****************************** -->
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<hpfb:include schemaLocation="./common/data_types.xsd"/>
@@ -11,7 +11,7 @@
 	<!-- ****************************** -->
 	<!-- ELEMENT DECLARATIONS -->
 	<!-- ****************************** -->
-	<!-- COMPANY_ENROL is the root element-->
+	<!-- DOSSIER_ENROL is the root element-->
 	<!-- REP Dossier Level element definitions-->
 	<hpfb:element name="DOSSIER_ENROL" type="dossier_enrol_content"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
@@ -53,10 +53,16 @@
 	<hpfb:element name="strengths" type="char_1_256_content"/>
 	<hpfb:element name="brand_name" type="char_1_256_content"/>
 	<hpfb:element name="company_name" type="char_1_256_content"/>
-	<hpfb:element name="human_drug_use" type="required_yes_no_content"/>
-	<hpfb:element name="radiopharm_drug_use" type="required_yes_no_content"/>
-	<hpfb:element name="vet_drug_use" type="required_yes_no_content"/>
-	<hpfb:element name="disinfectant_drug_use" type="required_yes_no_content"/>
+	<hpfb:element name="drug_use">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
 	<!-- Schedule A definitions-->
 	<hpfb:element name="schedule_a_group" type="schedule_a_content"/>
@@ -308,10 +314,7 @@
 			<hpfb:element ref="third_party_signed"/>
 			<hpfb:element ref="is_ref_product"/>
 			<hpfb:element ref="cdn_ref_product"/>
-			<hpfb:element ref="human_drug_use"/>
-			<hpfb:element ref="radiopharm_drug_use"/>
-			<hpfb:element ref="vet_drug_use"/>
-			<hpfb:element ref="disinfectant_drug_use"/>
+			<hpfb:element ref="drug_use"/>
 			<hpfb:element ref="therapeutic_class_list"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
