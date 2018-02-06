@@ -110,7 +110,7 @@
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
-                console.log("Formulation show summary value is "+vm.showSummary)
+               // console.log("Formulation show summary value is "+vm.showSummary)
             }
             if(changes.errorSummaryUpdate){
 

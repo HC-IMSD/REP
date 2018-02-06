@@ -235,14 +235,14 @@
             vm.casId="cas"+scopeId;
             vm.standardId="standard"+scopeId;
             vm.strengthId="strength"+scopeId;
-            vm.strengthData1Id="strength_data1_"+scopeId;
-            vm.strengthData2Id="strength_data2_"+scopeId;
+            vm.strengthData1Id= scopeId;
+            vm.strengthData2Id="strength_data2"+scopeId;
             vm.unitsId="units"+scopeId;
             vm.otherUnitsId="other_units"+scopeId;
-            vm.perMeasureUnitId="per_measure_units"+scopeId;
-            vm.perMeasureOtherUnitId="per_measure_other_units"+scopeId;
-            vm.perId="per"+scopeId;
-            vm.presentationId="presentation"+scopeId;
+            vm.perMeasureUnitId="unit_measure"+scopeId;
+            vm.perMeasureOtherUnitId="other_unit_measure"+scopeId;
+            vm.perId="per_strength"+scopeId;
+            vm.presentationId="unit_presentation"+scopeId;
             vm.isNanoMaterialId="is_nano_material"+scopeId;
             vm.nanoId="nano_material"+scopeId;
             vm.nanoOtherId="nano_material_other"+scopeId;
@@ -311,6 +311,7 @@
                         vm.strengthData1Title = "RANGE_LOWER_LIMIT";
                         break;
                 }
+                vm.strengthData1Id = "strength_" + vm.strengthData1Title + "_" + $scope.$id;
             }
             return isSet;
         };
