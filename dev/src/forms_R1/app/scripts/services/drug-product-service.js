@@ -499,7 +499,9 @@
                     "cas": item.cas_number,
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
-                    "strength": item.strength,
+                    "strength": {operator: "",
+                        data1: null,
+                        data2: null },
                     "units": "",
                     "otherUnits": item.units_other,
                     "per": item.per,
@@ -511,6 +513,22 @@
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+                if (item.strength) {
+                    var opValue = item.strength.operator.__text;
+                    obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
+                    obj.strength.data1 = item.strength.data1;
+                    obj.strength.data2 = item.strength.data2;
+                }
+
+                if (item.per) {
+                    var perValue = item.per.__text;
+                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perValue});
+                }
+
+                if (item.units_presentation) {
+                    var upValue = item.units_presentation.__text;
+                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: upValue});
+                }
 
                 if (item.units_measure) {
                     var unitsValue = DossierLists.getUnitsPrefix() + item.units_measure.__text; //add the prefix
@@ -630,6 +648,11 @@
                     "tempMin": Number(item.temperature_min),
                     "tempMax": Number(item.temperature_max)
                 };
+
+                if (item.shelf_life_unit) {
+                    var slUnitValue = item.shelf_life_unit.__text;
+                    obj.shelfLifeUnit = $filter('findListItemById')(DossierLists.getShelfLifeUnitsList(), {id: slUnitValue});
+                }
 
                 resultList.push(obj);
 
@@ -908,10 +931,10 @@
                     "cas_number": item.cas,
                     "ingred_standard": item.standard,
                     "is_human_animal_src": item.humanAnimalSourced,
-                    "strength": item.strength,
+                    "strength": "",
                     "units": "",
                     "units_other": item.otherUnits,
-                    "per": item.per,
+                    "per": "",
                     "units_presentation": "",
                     "units_measure": "",
                     "units_other_measure": "",
@@ -920,13 +943,38 @@
                     "nanomaterial": "",
                     "nanomaterial_details": ""
                 };
-                if (item.strength && item.strength.operator.id !== 'RA') {
-                    obj.strength.data2 = "";
+
+                if(item.strength) {
+                    var data2Value = "";
+                    if (item.strength.operator.id === 'RA') {
+                        data2Value = item.strength.data2;
+                    }
+                    obj.strength = {
+                        operator: {
+                            _label_en: item.strength.operator.en,
+                            _label_fr: item.strength.operator.fr,
+                            __text: item.strength.operator.id
+                        },
+                        data1: item.strength.data1,
+                        data2: data2Value
+                    };
+                }
+
+                if(item.per) {
+                    obj.per = {
+                        _label_en: item.per.en,
+                        _label_fr: item.per.fr,
+                        __text: item.per.id
+                    };
                 }
                 //item.units
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
                 if (item.per.id === 'UP') {
-                    obj.units_presentation = item.unitsPresentation;
+                    obj.units_presentation = {
+                        _label_en: item.unitsPresentation.en,
+                        _label_fr: item.unitsPresentation.fr,
+                        __text: item.unitsPresentation.id
+                    };
                 } else if (item.per.id === 'UM') {
                     obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
                     obj.units_other_measure = item.perMeasureOtherUnits;
@@ -1028,11 +1076,19 @@
                 var obj = {
                     "container_type": item.containerType,
                     "package_size": item.packageSize,
-                    "shelf_life_unit": item.shelfLifeUnit,
+                    "shelf_life_unit": "",
                     "shelf_life_number": item.shelfLifeNumber,
                     "temperature_min": item.tempMin,
                     "temperature_max": item.tempMax
                 };
+
+                if(item.shelfLifeUnit) {
+                    obj.shelf_life_unit = {
+                        _label_en: item.shelfLifeUnit.en,
+                        _label_fr: item.shelfLifeUnit.fr,
+                        __text: item.shelfLifeUnit.id
+                    };
+                }
 
                 resultList.push(obj);
             });
