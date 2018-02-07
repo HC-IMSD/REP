@@ -353,8 +353,8 @@
          */
         function _createFilename() {
 
-            var draft_prefix = "DRAFTREPDO";
-            var final_prefix = "HCREPDO";
+            var draft_prefix = "DRAFTREPPI";
+            var final_prefix = "HCREPPI";
             var filename = "";
             var separator="-";
             vm.setVisibleTabIndex=-1;
