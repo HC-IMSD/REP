@@ -500,8 +500,8 @@
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
                     "strength": {operator: "",
-                        data1: null,
-                        data2: null },
+                        data1: Number(item.strength.data1),
+                        data2: Number(item.strength.data2) },
                     "units": "",
                     "otherUnits": item.units_other,
                     "per": item.per,
@@ -516,8 +516,6 @@
                 if (item.strength) {
                     var opValue = item.strength.operator.__text;
                     obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
-                    obj.strength.data1 = item.strength.data1;
-                    obj.strength.data2 = item.strength.data2;
                 }
 
                 if (item.per) {
@@ -586,8 +584,8 @@
                     "humanAnimalSourced": item.is_human_animal_src,
                     "standard": item.ingred_standard,
                     "strength": {operator: "",
-                        data1: null,
-                        data2: null },
+                        data1: Number(item.strength.data1),
+                        data2: Number(item.strength.data2) },
                     "units": "",
                     "otherUnits": item.units_other,
                     "per": item.per,
@@ -602,8 +600,6 @@
                 if (item.strength) {
                     var opValue = item.strength.operator.__text;
                     obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
-                    obj.strength.data1 = item.strength.data1;
-                    obj.strength.data2 = item.strength.data2;
                 }
 
                 if (item.per) {
