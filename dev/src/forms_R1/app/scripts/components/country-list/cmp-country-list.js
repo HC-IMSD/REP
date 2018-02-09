@@ -40,7 +40,7 @@
         vm.resetToCollapsed = true;
         vm.noCountries=""; //TODO deprecate
         vm.showDetailErrors=false;
-        vm.selectRecord = 0;
+        vm.selectRecord = -1;
         vm.columnDef = [
             {
                 label: vm.fieldLabel,
