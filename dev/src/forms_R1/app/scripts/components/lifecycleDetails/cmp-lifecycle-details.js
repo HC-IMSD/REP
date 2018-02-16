@@ -311,6 +311,7 @@
                 case(vm.descriptionObj.FORM_V):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.CONSENT_LTR):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.DATA_PROTECT_CORRESP):  /*FALLTHROUGH Jul 17,2017 added*/
+                case(vm.descriptionObj.SEQUENCE_CLEANUP):     //FALLTHROUGHT FEB 16,2018
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();

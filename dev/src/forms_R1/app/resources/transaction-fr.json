@@ -92,5 +92,6 @@
   "DATA_PROTECT_CORRESP":"fr_Correspondence - Data Protection",
   "CHOOSE_REQUEST":"fr_Choose a requester",
   "TRANSACT_INSTRUCT":"fr_Regulatory Transaction Instructions",
-  "LIST_DESCRIPT":"fr_List Description"
+  "LIST_DESCRIPT":"fr_List Description",
+  "SEQUENCE_CLEANUP":"fr_Sequence Clean-up"
 }
