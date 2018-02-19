@@ -20,6 +20,7 @@
 
     //version 1.1 bug fix?
     //version 1.2 added Submission package/rq to MPNC, MPDNS
+    //version 1.3 Chnage Lifecycle Rec associations of Sequence Clean-up and Notification of interruption of sale
 
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists) {
         function TransactionService() {
@@ -29,7 +30,7 @@
                 // enrolmentVersion: "0.0",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "1.2.0",
+                softwareVersion: "1.3.0",
                 isEctd: "Y",
                 ectd: {
                     companyId: "",
@@ -86,7 +87,7 @@
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
                         date_saved: today,
-                        software_version: "1.1.0",
+                        software_version: "1.3.0",
                         data_checksum: jsonObj.dataChecksum,
                         is_ectd: jsonObj.isEctd
                     }

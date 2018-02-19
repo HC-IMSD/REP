@@ -617,8 +617,7 @@
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RISK_COMMUN_DOC, //Risk communication document
-                vm.allActivities.SIGNAL_WORK_UP, //Signal Work up
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.SIGNAL_WORK_UP //Signal Work up
             ])
 
         }
