@@ -30,7 +30,6 @@
                 importerUpdated: '&',
                 deselectImporter: '&',
                 updateErrorSummary: '&',
-                isInternal:'<'
 
             }
         });
@@ -69,14 +68,6 @@
             }
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
-            }
-            if (changes.isInteral) {
-                if(changes.isInternal.currentValue === true){
-                    vm.inUser = true;
-                }
-                else if(changes.isInternal.currentValue === false){
-                    vm.inUser = false;
-                }
             }
         };
         /**

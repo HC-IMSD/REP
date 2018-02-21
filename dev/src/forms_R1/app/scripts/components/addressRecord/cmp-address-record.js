@@ -45,7 +45,7 @@
 
             }
         });
-    addressRecCtrl.$inject = ['$scope', 'CANADA', '$filter', 'getCountryAndProvinces'];
+    addressRecCtrl.$inject = ['$scope', 'CANADA', '$filter', 'getCountryAndProvinces','INTERNAL_TYPE', 'EXTERNAL_TYPE'];
 
     function addressRecCtrl($scope, CANADA,$filter, getCountryAndProvinces, INTERNAL_TYPE, EXTERNAL_TYPE) {
         var vm = this;
@@ -168,10 +168,13 @@
                 vm.updateErrorSummaryState();
             }
             if(changes.isIn){
-                    if(changes.isIn.crrentValue==INTERNAL_TYPE){
+                console.log(changes.isIn.currentValue)
+                    if(changes.isIn.currentValue===INTERNAL_TYPE){
+                    console.log("is ture")
                         vm.isInternal=true;
                     }
-                    else if(changes.isIn.currentValue==EXTERNAL_TYPE){
+                    else {
+                        console.log("is false")
                         vm.isInternal=false;
                     }
             }
