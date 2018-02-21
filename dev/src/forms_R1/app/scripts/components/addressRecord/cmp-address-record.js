@@ -64,6 +64,7 @@
         vm.addressModel = {
             addressID: 1,
             companyName: "",
+            importerID:"",
             amendRecord: false,
             addressRole: {
                 manufacturer: false,
@@ -221,6 +222,7 @@
                     "selectedProducts": "",
                     "dossierIdLislamt": []
                 };
+                vm.addressModel.importerID = "";
             } else if (vm.addressModel.importerProducts.dossierIdList.length === 0) {
                 vm.addressModel.importerProducts.dossierIdList.push({dossierId: ""})
             }
@@ -296,6 +298,7 @@
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;
             vm.companyNameId = "companyName" +scopeId;
+            vm.importerID = "importerID" + scopeId;
             vm.formNameId="company-address-record-form"+scopeId;
         }
 
