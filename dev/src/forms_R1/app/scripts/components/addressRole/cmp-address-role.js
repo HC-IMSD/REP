@@ -28,7 +28,9 @@
                 isAmend: '<',
                 legendText: '@',
                 importerUpdated: '&',
-                updateErrorSummary: '&'
+                deselectImporter: '&',
+                updateErrorSummary: '&',
+                isInternal:'<'
 
             }
         });
@@ -40,6 +42,7 @@
         vm.isReq = true;
         vm.isSelected = ""; //checkbox causes issues. Store in text
         vm.isEditable = true;
+        vm.inUser = false;
         vm.roleModel = {
             manufacturer: false,
             mailing: false,
@@ -67,6 +70,14 @@
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
             }
+            if (changes.isInteral) {
+                if(changes.isInternal.currentValue === true){
+                    vm.inUser = true;
+                }
+                else if(changes.isInternal.currentValue === false){
+                    vm.inUser = false;
+                }
+            }
         };
         /**
          * Checks all the controls and updates the error state
@@ -76,7 +87,6 @@
             if (!vm.roleForm) return;
             vm.checkForDuplicates(vm.roleForm.mailing, 'mailing');
             vm.checkForDuplicates(vm.roleForm.billing, 'billing');
-            vm.checkForDuplicates(vm.roleForm.importer, 'importer');
             vm.checkForDuplicates(vm.roleForm.repPrimary, 'repPrimary');
             vm.checkForDuplicates(vm.roleForm.repSecondary, 'repSecondary');
             vm.checkForDuplicates(vm.roleForm.manufacturer, 'manufacturer');
@@ -89,6 +99,12 @@
             vm.importerUpdated({state: vm.roleModel.importer})
         };
 
+        vm.updateOtherState = function (ctrl, toCheck) {
+            vm.oneSelected(ctrl, toCheck);
+            vm.deselectImporter({state: vm.roleModel.manufacturer || vm.roleModel.mailing || vm.roleModel.billing})
+        };
+
+
         /**
          *
          * @param ctrl the form control
@@ -97,7 +113,11 @@
          */
         vm.oneSelected = function (ctrl, toCheck) {
             var obj = vm.roleModel;
-            vm.checkForDuplicates(ctrl, toCheck);
+
+                if(toCheck !== 'importer') {
+                    vm.checkForDuplicates(ctrl, toCheck);
+                }
+
             for (var key in obj) {
                 var attrName = key;
                 var attrValue = obj[key];

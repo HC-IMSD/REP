@@ -13,7 +13,8 @@
             'importerProducts',
             'hpfbConstants',
             'errorSummaryModule',
-            'errorMessageModule'
+            'errorMessageModule',
+            'dataLists'
         ])
 })();
 
@@ -39,23 +40,26 @@
                 recordIndex: '<',
                 errorSummaryUpdate: '&', /* used to message that errorSummary needs updating */
                 showErrorSummary:'<',
-                updateErrorSummary:'&' //update the parent error summary
+                updateErrorSummary:'&', //update the parent error summary
+                isIn:'<'
 
             }
         });
-    addressRecCtrl.$inject = ['$scope', 'CANADA'];
+    addressRecCtrl.$inject = ['$scope', 'CANADA', '$filter', 'getCountryAndProvinces'];
 
-    function addressRecCtrl($scope, CANADA) {
+    function addressRecCtrl($scope, CANADA,$filter, getCountryAndProvinces, INTERNAL_TYPE, EXTERNAL_TYPE) {
         var vm = this;
-
+        vm.des = false;
         vm.isContact = false;
         vm.isEditable = true;
         vm.formAmend = false;
         vm.isImporter = false;
+        vm.updateCountry = 0;
         vm.updateSummary=0; //triggers and error summary update
         vm.setSummaryFocus=0; //sets the summary focus
         vm.addressRecForm = "";
         vm.showSummary=false;
+        vm.isInternal = false;
         //TODO get  model from a servide
         vm.addressModel = {
             addressID: 1,
@@ -163,7 +167,14 @@
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
             }
-
+            if(changes.isIn){
+                    if(changes.isIn.crrentValue==INTERNAL_TYPE){
+                        vm.isInternal=true;
+                    }
+                    else if(changes.isIn.currentValue==EXTERNAL_TYPE){
+                        vm.isInternal=false;
+                    }
+            }
         };
 
         /**
@@ -171,7 +182,7 @@
          */
         vm.delete = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
-            vm.updateErrorSummary();;
+            vm.updateErrorSummary();
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *
@@ -192,17 +203,35 @@
             vm.addressModel.addressRole = aRole;
             vm.updateAddressModel2();
         };
-
         vm.importerProductState = function (state) {
             vm.isImporter = state;
-            if (!vm.isImporter) {
+            if (vm.isImporter) {
+                vm.addressModel.addressRole.manufacturer = false;
+                vm.addressModel.addressRole.mailing = false;
+                vm.addressModel.addressRole.billing = false;
+                vm.addressModel.country=$filter('filter')(getCountryAndProvinces.getCountries(),{id: CANADA})[0];
+                vm.updateCountry++;
+
+            };
+            if (!vm.isImorter) {
                 vm.addressModel.importerProducts = {
                     "selectedProducts": "",
-                    "dossierIdList": []
+                    "dossierIdLislamt": []
                 };
             } else if (vm.addressModel.importerProducts.dossierIdList.length === 0) {
                 vm.addressModel.importerProducts.dossierIdList.push({dossierId: ""})
             }
+        };
+
+        vm.deselectImporter = function (state){
+          vm.des = state;
+          if(vm.des){
+              vm.addressModel.addressRole.importer = false;
+              vm.isImporter = false;
+
+          };
+
+
         };
 
         /**

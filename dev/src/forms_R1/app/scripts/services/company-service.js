@@ -29,12 +29,12 @@
                 companyId: "",
                 addressList: [],
                 contactList: []
-                /* ,
+                 ,
                 importerProducts: {
                     selectedProducts: "",
                     dossierIdList: []
                 }
-                */
+
             };
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
@@ -99,12 +99,12 @@
                     stateText: "",
                     country: "",
                     postalCode: ""
-                    /* ,
+                     ,
                     importerProducts: {
                         selectedProducts: "",
                         dossierIdList: []
                     }
-                    */
+
                 };
                 defaultAddress.addressID = this.getNextAddressID();
                 return (defaultAddress);

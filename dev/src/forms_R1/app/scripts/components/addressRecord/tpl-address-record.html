@@ -33,7 +33,8 @@
                 <cmp-address-details address-record="addressRec.addressModel" is-amend="addressRec.isEditable"
                                      on-update="addressRec.onUpdateAddressRecord(address)"
                                      update-error-summary="addressRec.updateErrorSummaryState()"
-                                     show-errors="addressRec.showErrors()"></cmp-address-details>
+                                     show-errors="addressRec.showErrors()" country-editable="!addressRec.isImporter"
+                                     update-country="addressRec.updateCountry"></cmp-address-details>
             </div>
             <div>
                 <cmp-address-role record="addressRec.addressModel" legend-text="ADDR_ROLE_LEGEND"
@@ -41,6 +42,7 @@
                                   on-update="addressRec.onAddressRoleUpdate($event.roles)"
                                   show-errors="addressRec.showErrors()"
                                   importer-updated="addressRec.importerProductState(state)"
+                                  deselect-importer="addressRec.deselectImporter(state)"
                                   update-error-summary="addressRec.updateErrorSummaryState()"
                                   already-selected="addressRec.isOneSelected(roleName)"></cmp-address-role>
 
@@ -52,6 +54,11 @@
                         <span>{{::'IMPORTER_NONCDN'|translate}}</span>
                     </div>
                 </div>
+            </div>
+            <div ng-if="addressRec.isImporter">
+                <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"
+                                       is-amend="addressRec.isEditable"
+                                       show-errors="addressRec.showErrors()"></cmp-importer-products>
             </div>
             <div class="row">
                 <div class="btn-group-sm col-xs-12 text-right">

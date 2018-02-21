@@ -16,7 +16,7 @@
                 <div class="checkbox">
                     <label for="chk-manufacturer_{{::$id}}">
                         <input type="checkbox" ng-model="ar.roleModel.manufacturer" name="manufacturer"
-                               ng-change="ar.oneSelected(ar.roleForm.manufacturer,'manufacturer')"
+                               ng-change="ar.updateOtherState(ar.roleForm.manufacturer,'manufacturer')"
                                ng-disabled="!ar.isEditable"
                                id="chk-manufacturer_{{::$id}}"/>
                         <span ng-if="!ar.isContact">{{::"MANUFACTURER"|translate}}</span>
@@ -34,7 +34,7 @@
                     <label for="chk-mailing_{{::$id}}">
                         <input type="checkbox" name="mailing" ng-model="ar.roleModel.mailing" name="mailing"
                                ng-disabled="!ar.isEditable"
-                               ng-change="ar.oneSelected(ar.roleForm.mailing,'mailing')" id="chk-mailing_{{::$id}}"/>
+                               ng-change="ar.updateOtherState(ar.roleForm.mailing,'mailing')" id="chk-mailing_{{::$id}}"/>
                         <span ng-if="!ar.isContact">{{::"MAILING"|translate}}</span>
                         <span ng-if="ar.isContact">{{::"CONTACT_MAILING"|translate}}</span>
                         <strong id="mailing-role-error" class="error" ng-if="ar.roleForm.mailing.$invalid">
@@ -52,7 +52,7 @@
                     <label for="chk-billing_{{::$id}}">
                         <input type="checkbox" name="billing" ng-model="ar.roleModel.billing"
                                ng-disabled="!ar.isEditable"
-                               ng-change="ar.oneSelected(ar.roleForm.billing,'billing')" id="chk-billing_{{::$id}}"/>
+                               ng-change="ar.updateOtherState(ar.roleForm.billing,'billing')" id="chk-billing_{{::$id}}"/>
                         <span ng-if="!ar.isContact">{{::"BILLING"|translate}}</span>
                         <span ng-if="ar.isContact">{{::"CONTACT_BILLING"|translate}}</span>
                         <strong id="billing-role-error" class="error" ng-if="ar.roleForm.billing.$invalid">
@@ -77,6 +77,7 @@
                         </span>
                         </strong>
                     </label>
+                    <span ng-if="ar.inUser">hello</span>
                 </div>
             </div>
         </div>
