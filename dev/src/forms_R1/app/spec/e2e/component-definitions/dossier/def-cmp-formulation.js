@@ -45,9 +45,10 @@ var Formulations = function () {
     };
 
 
-    this.getDosageFormSelect=function(parent){
+    this.getDosageFormSelect=function(){
 
-        return parent.element(by.model(dosageFormModelString)).getAttribute('value');
+        return element(by.model(dosageFormModelString))
+            .element(by.css('span.ng-binding.ng-scope')).getText();
     };
 
     this.getFormulationName=function(parent){

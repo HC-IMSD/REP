@@ -26,15 +26,15 @@ describe('Company External Main Test', function () {
         lang=browser.params.lang;
         formType=browser.params.formType;
         if(formType==='EXT' && lang==='en'){
-            company_url="company/companyEXT-en.html"
+            company_url="company/companyEnrolEXT-en.html"
         }else  if(formType==='INT' && lang==='en'){
-            company_url="company/companyINT-en.html"
+            company_url="company/companyEnrolINT-en.html"
         }
         else  if(formType==='INT' && lang==='fr'){
-            company_url="company/companyINT-fr.html"
+            company_url="company/companyEnrolINT-fr.html"
         }
         else  if(formType==='EXT' && lang==='fr'){
-            company_url="comapny/companyEXT-fr.html"
+            company_url="comapny/companyEnrolEXT-fr.html"
         }else{
             //error condition
             company_url="";
@@ -59,10 +59,10 @@ describe('Company External Main Test', function () {
             addressObj.setPostalCodeTextValue(rec,"k2m2r1");
            // addressObj.setMailingRole(rec);
             addressObj.setImporterRole(rec);
-            addressObj.setProductsImporterListValue(rec,'Some Products');
-            addressObj.setDossierId(rec,0,'A123456');
-            addressObj.addDossierIdRecord(rec);
-            addressObj.setDossierId(rec,1,'B123456');
+            //addressObj.setProductsImporterListValue(rec,'Some Products');
+            //addressObj.setDossierId(rec,0,'A123456');
+           // addressObj.addDossierIdRecord(rec);
+           // addressObj.setDossierId(rec,1,'B123456');
 
             addressObj.saveAddressRecord(rec);
             /*   expect(repContactObj.getSalutationValue(record)).toEqual('string:' + contactData.salutation.MRS.expect);

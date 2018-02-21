@@ -2,6 +2,7 @@
  * Created by dkilty on 20/02/2017.
  */
 var UiUtil = require('../../util/util-ui.js');
+var _ = require('lodash/core');
 
 var MedIngredient=function(){
     var uiUtil = new UiUtil();
@@ -120,46 +121,54 @@ var MedIngredient=function(){
     //getters
 
 
-    this.getActiveNameLookup= function (record) {
-        return record.element(By.model(_ingedNameModelString)).getAttribute('value');
+    this.getActiveNameLookup= function () {
+        var _element=element.all(by.model(_ingedNameModelString)).last();
+        return _element.getAttribute('value');
     };
 
-    this.getCasValue=function(record){
-       return record.element(by.model(_casModelString)).getAttribute('value');
+    this.getCasValue=function(){
+       return element(by.model(_casModelString)).getAttribute('value');
     };
-    this.getStandardValue=function(record){
-       return record.element(by.model(_standardModelString)).getAttribute('value');
-    };
-
-    this.getStrengthValue=function(record){
-        return record.element(by.model(_strengthModelString)).getAttribute('value');
-    };
-    this.getUnitsTextValue=function(record) {
-        return record.element(by.model(_unitsModelString)).getAttribute('value');
-    };
-    this.getUnitsOtherTextValue=function(record) {
-        return record.element(By.model(_unitsOtherModelString)).getAttribute('value');
+    this.getStandardValue=function(){
+       return element(by.model(_standardModelString)).getAttribute('value');
     };
 
-    this.getNanoTextValue=function(record) {
-        return record.element(By.model(_nanoModelString)).getAttribute('value');
+    this.getStrengthValue=function(){
+        return element(by.model(_strengthModelString)).getAttribute('value');
+    };
+    this.getUnitsTextValue=function() {
+        return element(by.model(_unitsModelString))
+            .element(by.css('span.ng-binding.ng-scope')).getText();
     };
 
-    this.getNanoOtherTextValue=function(record) {
-       return record.element(By.model(_nanoOtherModelString)).getAttribute('value');
+    this.getUnitsTextValue=function() {
+        return _.trim(element(by.model(_unitsModelString))
+            .element(by.css('span.ng-binding.ng-scope')).getAttribute('innerText'));
+        //Todo: to trim inner text
+    };
+    this.getUnitsOtherTextValue=function() {
+        return element(By.model(_unitsOtherModelString)).getAttribute('value');
     };
 
-    this.getPerTextValue=function(record) {
-        return record.element(By.model(_perModelString)).getAttribute('value');
+    this.getNanoTextValue=function() {
+        return element(By.model(_nanoModelString)).getAttribute('value');
     };
 
-    this.getBaseTextValue=function(record) {
+    this.getNanoOtherTextValue=function() {
+       return element(By.model(_nanoOtherModelString)).getAttribute('value');
+    };
+
+    this.getPerTextValue=function() {
+        return element(By.model(_perModelString)).getAttribute('value');
+    };
+
+    this.getBaseTextValue=function() {
         // var control=record.element(By.model(_unitsModelString));
-        return record.element(By.model(_baseModelString)).getAttribute('value');
+        return element(By.model(_baseModelString)).getAttribute('value');
     };
 
-    this.getAnimalSrcTextValue=function(record) {
-        return record.element(By.model(_animalSrcModelString)).getAttribute('value');
+    this.getAnimalSrcTextValue=function() {
+        return element(By.model(_animalSrcModelString)).getAttribute('value');
     };
 
 

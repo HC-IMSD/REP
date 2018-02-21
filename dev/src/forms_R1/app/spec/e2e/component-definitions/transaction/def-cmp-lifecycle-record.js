@@ -36,9 +36,9 @@ var LifecycleRecord = function () {
 
     this.addTransactionRecord = function (parent) {
         if(parent) {
-            parent.element(by.id(_addLifecycleButton_idString)).click();
+            parent.element(by.xpath("//button[@ng-click='lifeListCtrl.addTransaction()']")).click();
         }else{
-            element(by.id(_addLifecycleButton_idString)).click();
+            element(by.xpath("//button[@ng-click='lifeListCtrl.addTransaction()']")).click();
         }
     };
 

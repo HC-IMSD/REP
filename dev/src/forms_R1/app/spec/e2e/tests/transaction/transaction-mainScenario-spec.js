@@ -27,7 +27,7 @@ describe('Transaction External Main Test', function () {
         lang=browser.params.lang;
         formType=browser.params.formType;
         if(formType==='EXT' && lang==='en'){
-            transaction_url="transaction/transactionEXT-en.html"
+            transaction_url="transaction/transactionEnrol-en.html"
         }else  if(formType==='INT' && lang==='en'){
             transaction_url="transaction/transactionINT-en.html"
 
@@ -37,7 +37,7 @@ describe('Transaction External Main Test', function () {
 
         }
         else  if(formType==='EXT' && lang==='fr'){
-            transaction_url="transaction/transactionEXT-fr.html"
+            transaction_url="transaction/transactionEnrol-fr.html"
 
         }else{
             //error condition
@@ -81,7 +81,7 @@ describe('Transaction External Main Test', function () {
 
         it("Fill in the main Transaction Information",function(){
             var formRoot = transactionMain.getRoot();
-            transactionMain.setCompanyNameValue(formRoot,"Acme Chemical Company")
+            transactionMain.setCompanyNameValue(formRoot,"Acme Chemical Company");
             transactionMain.setCompanyIdValue(formRoot,"123456");
             transactionMain.setDossierIdValue(formRoot,"D123456");
             transactionMain.setDossierNameValue(formRoot,"This is the dossier value text");
@@ -102,12 +102,16 @@ describe('Transaction External Main Test', function () {
             lifecycleRecord.setDateFiledValue(record,'2007-05-22');
             lifecycleRecord.saveTransactionRecord(record);
 
+            expect(lifecycleRecord.getControlNumberValue(record)).toEqual('123456');
+            expect(lifecycleRecord.getActivityTypeSelectValue(record)).toEqual('B02-20160301-089');
+            expect(lifecycleRecord.getDescriptionSelectValue(record)).toEqual('string:CANCEL_LETTER');
+            expect(lifecycleRecord.getDateFiledValue(record)).toEqual('2007-05-22');
         });
 
 
     });
 
-    describe('Validate the form values that were completed', function () {
+   /* describe('Validate the form values that were completed', function () {
         it('Check if lifecycle record 1 is valid',function(){
             var formRoot = transactionMain.getRoot();
            var record=lifecycleRecord.getRecord(formRoot,0);
@@ -117,7 +121,7 @@ describe('Transaction External Main Test', function () {
             expect(lifecycleRecord.getDateFiledValue(record)).toEqual('2007-05-22');
         });
 
-    });
+    }); */
 
 
 
