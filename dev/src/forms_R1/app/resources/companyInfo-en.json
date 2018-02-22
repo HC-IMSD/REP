@@ -5,5 +5,6 @@
   "ADDRESS_INSTRUCT":"Company Address Record Instructions",
   "REPRESENT_INSTRUCT":"Company Representative Information",
   "SAVE_INSTRUCT": "Company File Save Instructions",
-  "FIELDID": "Company Id"
+  "FIELDID": "Company Id",
+  "IMPORTERID":"Importer ID"
 }

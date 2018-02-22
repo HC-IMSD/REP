@@ -36,7 +36,8 @@
                 isAmend: '<',
                 updateErrorSummary:'&',
                 fieldSuffix:'<',
-                countryEditable:'<'
+                countryEditable:'<',
+                updateCountry:'<'
             }
         });
     addressCtrl.$inject = ['getCountryAndProvinces','$translate','CANADA','USA','$scope'];
@@ -98,12 +99,17 @@
             if (changes.isAmend) {
                 vm.isEditable = changes.isAmend.currentValue;
             }
-            if(changes.fieldSuffix){
-                vm.fldId=changes.fieldSuffix.currentValue;
-                if(!vm.fldId){
-                    vm.fldId="";
+            if(changes.fieldSuffix) {
+                vm.fldId = changes.fieldSuffix.currentValue;
+                if (!vm.fldId) {
+                    vm.fldId = "";
                 }
             }
+             if(changes.updateCountry){
+                console.log("update countrty")
+                 vm.countryChanged();
+             }
+
             if(changes.countryEditable){
                 vm.countryIsEditable=changes.countryEditable.currentValue;
                 if(angular.isUndefined(vm.countryIsEditable)){

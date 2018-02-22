@@ -29,12 +29,12 @@
                 companyId: "",
                 addressList: [],
                 contactList: []
-                /* ,
+                 ,
                 importerProducts: {
                     selectedProducts: "",
                     dossierIdList: []
                 }
-                */
+
             };
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
@@ -86,6 +86,7 @@
                 var defaultAddress = {
                     addressID: 1,
                     companyName: "",
+                    importerID: "",
                     amendRecord: false,
                     addressRole: {
                         manufacturer: false,
@@ -99,12 +100,12 @@
                     stateText: "",
                     country: "",
                     postalCode: ""
-                    /* ,
+                     ,
                     importerProducts: {
                         selectedProducts: "",
                         dossierIdList: []
                     }
-                    */
+
                 };
                 defaultAddress.addressID = this.getNextAddressID();
                 return (defaultAddress);
@@ -243,6 +244,7 @@
                     var address = {};
                     address.addressID = adrList[i].address_id;
                     address.companyName = adrList[i].company_name;
+                    address.importerID = adrList[i].importer_id;
                     address.amendRecord = adrList[i].amend_record === 'Y';
                     address.addressRole = {};
                     address.addressRole.manufacturer = adrList[i].manufacturer === 'Y';
@@ -344,6 +346,7 @@
                 address.billing = adrList[i].addressRole.billing == true ? 'Y' : 'N';
                 address.importer = adrList[i].addressRole.importer == true ? 'Y' : 'N';
                 address.company_name = adrList[i].companyName;
+                address.importer_id = adrList[i].importerID;
                 address.company_address_details = {};
                 address.company_address_details.street_address = adrList[i].street;
                 address.company_address_details.city = adrList[i].city;

@@ -24,7 +24,8 @@
                 companyService: '<',
                 showErrorSummary:'<',
                 errorSummaryUpdate:'<',
-                updateErrorSummary:'&' //update the parent error summary
+                updateErrorSummary:'&', //update the parent error summary
+                userType:'<'
             },
             controller: addressListCtrl,
             controllerAs: 'addressListCtrl'
@@ -32,7 +33,7 @@
 
     addressListCtrl.$inject = ['$filter', 'CompanyService','CANADA'];
 
-    function addressListCtrl($filter, CompanyService, CANADA) {
+    function addressListCtrl($filter, CompanyService, CANADA, INTERNAL_TYPE, EXTERNAL_TYPE) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
@@ -42,6 +43,7 @@
         vm.updateSummary=0; //sends signal to update error summary object
         vm.showSummary=false;
         vm.addressList = [];
+        vm.isIn = "";
         vm.columnDef = [
             {
                 label: "COMPANY",
@@ -91,7 +93,9 @@
 
                 vm.updateErrorSummaryState();
             }
-
+            if(changes.userType){
+                    vm.isIn  = changes.userType.currentValue;
+            }
         };
 
         function updateRolesConcat() {
