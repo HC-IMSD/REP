@@ -20,12 +20,12 @@
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                         <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
                                ng-model="addressRec.addressModel.importerID"
-                               class="form-control full-width" maxlength="80" size="60"
+                               class="form-control full-width" minlength="5" maxlength="6"
                                ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isInternal"
                                ng-required="addressRec.isInternal && addressRec.isImporter">
                         <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
                                            show-error="addressRec.showErrors()"
-                                           error-types="addressRec.requiredOnly"></cmp-error-message>
+                                           error-types="addressRec.length5Error"></cmp-error-message>
 
                     </label>
                 </div>
