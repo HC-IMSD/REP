@@ -25,7 +25,7 @@
 	<hpfb:element name="rep_contact_details" type="contact_content"/>
 	<hpfb:element name="dossier_id" type="char_0_7_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
-	<hpfb:element name="related_dossier_id" type="char_0_256_content"/>
+	<hpfb:element name="related_information" type="char_0_256_content"/>
 	<!-- Drug Product element definitions-->
 	<hpfb:element name="product_name" type="char_1_200_content"/>
 	<hpfb:element name="common_name" type="char_1_256_content"/>
@@ -302,7 +302,7 @@
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
-			<hpfb:element ref="related_dossier_id"/>
+			<hpfb:element ref="related_information"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="application_type"/>
