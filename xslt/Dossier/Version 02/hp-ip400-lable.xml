@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE SimpleCodeList [
+
+<!ELEMENT SimpleCodeList (row)+>
+<!ATTLIST SimpleCodeList xmlns CDATA #FIXED "">
+
+
+<!ELEMENT row (code,eng,fra)>
+<!ATTLIST row xmlns CDATA #FIXED "">
+
+<!ELEMENT code (#PCDATA)>
+<!ATTLIST code xmlns CDATA #FIXED "">
+
+
+<!ELEMENT eng (#PCDATA)>
+<!ATTLIST eng xmlns CDATA #FIXED "">
+
+
+<!ELEMENT fra (#PCDATA)>
+<!ATTLIST fra xmlns CDATA #FIXED "">
+
+]>
+	<SimpleCodeList>
+		<row>
+			<code>HUMAN</code>
+			<eng>Human</eng>
+			<fra>fr_Human</fra>
+		</row>
+		<row>
+			<code>RADIO</code>
+			<eng>Radiopharmaceutical</eng>
+			<fra>fr_Radiopharmaceutical</fra>
+		</row>
+		<row>
+			<code>DISINFECT</code>
+			<eng>Disinfectant</eng>
+			<fra>fr_Disinfectant</fra>
+		</row>
+		<row>
+			<code>VET</code>
+			<eng>Veterinary</eng>
+			<fra>fr_Veterinary</fra>
+		</row>
+		<row>
+			<code>EnrolStatus</code>
+			<eng>Enrolment Status</eng>
+			<fra>Enrolment Status</fra>
+		</row>
+		<row>
+			<code>EnrolVersion</code>
+			<eng>Enrolment Version</eng>
+			<fra>Enrolment Version</fra>
+		</row>
+		<row>
+			<code>DateLastSaved</code>
+			<eng>Date Last Saved</eng>
+			<fra>Date Last Saved</fra>
+		</row>
+		<row>
+			<code>DossierID</code>
+			<eng>Dossier ID</eng>
+			<fra>Dossier ID</fra>
+		</row>
+		<row>
+			<code>A_DossierType</code>
+			<eng>A. Dossier Type</eng>
+			<fra>A. Dossier Type</fra>
+		</row>
+		<row>
+			<code>B_CompanyID</code>
+			<eng>B. Company ID</eng>
+			<fra>B. Company ID</fra>
+		</row>
+		<row>
+			<code>C_SubmissionSignThird</code>
+			<eng>C. The submission will be signed or filed by a third party on
+				behalf of the manufacturer or sponsor</eng>
+			<fra>C. The submission will be signed or filed by a third party on
+				behalf of the manufacturer or sponsor</fra>
+		</row>
+		<row>
+			<code>Yes</code>
+			<eng>Yes</eng>
+			<fra>Yes</fra>
+		</row>
+		<row>
+			<code>No</code>
+			<eng>No</eng>
+			<fra>No</fra>
+		</row>
+		<row>
+			<code>D_ProductName</code>
+			<eng>D. Product Name</eng>
+			<fra>D. Product Name</fra>
+		</row>
+		<row>
+			<code>E_ProperCommonNonProrietaryName</code>
+			<eng>E. Proper, Common or Non-Proprietary Name</eng>
+			<fra>E. Proper, Common or Non-Proprietary Name</fra>
+		</row>
+		<row>
+			<code>G_RelatedInfo</code>
+			<eng>G. Related Information [if applicable]</eng>
+			<fra>G. Related Information [if applicable]</fra>
+		</row>
+		<row>
+			<code>H_Therapeutic</code>
+			<eng>H. Therapeutic Classifications</eng>
+			<fra>H. Therapeutic Classifications</fra>
+		</row>
+		<row>
+			<code>I_IsCaRefProduct</code>
+			<eng>I. Is there a Canadian Reference Product?</eng>
+			<fra>I. Is there a Canadian Reference Product?</fra>
+		</row>
+		<row>
+			<code>CaRefProduct</code>
+			<eng>Canadian Reference Product</eng>
+			<fra>Canadian Reference Product</fra>
+		</row>
+		<row>
+			<code>I_BrandName</code>
+			<eng>I-1. Brand Name</eng>
+			<fra>I-1. Brand Name</fra>
+		</row>
+		<row>
+			<code>I_CompanyName</code>
+			<eng>I-2. Company Name (Full legal Name - no abbreviations)</eng>
+			<fra>I-2. Company Name (Full legal Name - no abbreviations)</fra>
+		</row>
+	</SimpleCodeList>
+</gc:CodeList>
