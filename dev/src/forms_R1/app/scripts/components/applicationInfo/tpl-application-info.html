@@ -74,7 +74,11 @@
                     <span>{{::'AMEND_MSG'|translate}}</span>
                 </div>
             </div>
-
+            <div ng-show="infoCtrl.isAmend" class="col-xs-12 form-group">
+                <label for="{{::infoCtrl.reasonAmend}}">{{::'REASON_AMEND'|translate}}</label>
+                <input type="text" class="form-control full-width" id="{{::infoCtrl.reasonAmend}}"
+                       maxlength="200" ng-model="infoCtrl.infoModel.reasonAmend"/>
+            </div>
         </div>
     </div>
 </ng-form>

@@ -27,6 +27,7 @@
                 applicationType: "NEW",
                 softwareVersion: "1.1.0",
                 companyId: "",
+                reasonAmend:"",
                 addressList: [],
                 contactList: []
                  ,
@@ -205,6 +206,7 @@
                         application_type: jsonObj.applicationType,
                         software_version: jsonObj.softwareVersion,
                         company_id: jsonObj.companyId,
+                        reason_amend: jsonObj.reasonAmend,
                         address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
                     }
@@ -225,6 +227,7 @@
                     applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     companyId: info.company_id,
+                    reasonAmend: info.reason_amend,
                     addressList: [],
                     contactList: []
                 }

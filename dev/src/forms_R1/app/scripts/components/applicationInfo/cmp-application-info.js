@@ -34,7 +34,8 @@
         vm.infoModel = {
             applicationType: "NEW",
             enrolmentVersion: "0.0",
-            dateSaved: ""
+            dateSaved: "",
+            reasonAmend:""
         };
         vm.fieldIdLabel = "";
         vm.minFieldLength = "";
@@ -46,7 +47,7 @@
         vm.maxErrorMsg = "";
         vm.isDossier = false;
         vm.isNumber=false;
-
+        vm.isAmend = false;
         vm.$onInit = function () {
             ///do init
             _setIdNames();
@@ -103,11 +104,13 @@
         vm.setAmendState = function () {
             //TODO hardcode should be service
             vm.setType({type: AMEND_TYPE});
+            vm.isAmend = true;
         }
 
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;
             vm.fieldId = "fieldId" +scopeId;
+            vm.reasonAmend = "reasonAmend" + scopeId;
         }
 
 

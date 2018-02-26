@@ -6,5 +6,5 @@
   "REPRESENT_INSTRUCT":"Company Representative Information",
   "SAVE_INSTRUCT": "Company File Save Instructions",
   "FIELDID": "Company Id",
-  "IMPORTERID":"Importer ID"
+  "IMPORTERID":"Importer Company ID"
 }
