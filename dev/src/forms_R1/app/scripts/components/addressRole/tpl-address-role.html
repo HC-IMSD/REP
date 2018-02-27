@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <div  ng-if="ar.!isContact" class="checkbox">
+                <div  ng-show="!ar.isContact" class="checkbox">
                     <label for="chk-importer_{{::$id}}">
                         <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
                                ng-disabled="!ar.isEditable"
