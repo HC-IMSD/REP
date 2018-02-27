@@ -10,7 +10,7 @@
             'addressModule',
             'addressRole',
             'filterLists',
-            'importerProducts',
+            //'importerProducts',
             'hpfbConstants',
             'errorSummaryModule',
             'errorMessageModule',
@@ -78,11 +78,11 @@
             stateList: "",
             stateText: "",
             country: "",
-            postalCode: "",
-            importerProducts: {
+            postalCode: ""
+            /**importerProducts: {
                 selectedProducts: "",
                 dossierIdList: []
-            }
+            }*/
         };
         vm.alias = {
             "roleMissing": {
@@ -222,14 +222,15 @@
 
             };
             if (!vm.isImorter) {
-                vm.addressModel.importerProducts = {
+                /**vm.addressModel.importerProducts = {
                     "selectedProducts": "",
                     "dossierIdLislamt": []
-                };
+                };*/
                 vm.addressModel.importerID = "";
-            } else if (vm.addressModel.importerProducts.dossierIdList.length === 0) {
-                vm.addressModel.importerProducts.dossierIdList.push({dossierId: ""})
             }
+            /**else if (vm.addressModel.importerProducts.dossierIdList.length === 0) {
+                vm.addressModel.importerProducts.dossierIdList.push({dossierId: ""})
+            }*/
         };
 
         vm.deselectImporter = function (state){

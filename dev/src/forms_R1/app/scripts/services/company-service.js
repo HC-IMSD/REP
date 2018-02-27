@@ -30,11 +30,11 @@
                 reasonAmend:"",
                 addressList: [],
                 contactList: []
-                 ,
-                importerProducts: {
+
+                /**importerProducts: {
                     selectedProducts: "",
                     dossierIdList: []
-                }
+                }*/
 
             };
             angular.extend(this._default, defaultCompanyData);
@@ -101,11 +101,11 @@
                     stateText: "",
                     country: "",
                     postalCode: ""
-                     ,
-                    importerProducts: {
+
+                    /**importerProducts: {
                         selectedProducts: "",
                         dossierIdList: []
-                    }
+                    }*/
 
                 };
                 defaultAddress.addressID = this.getNextAddressID();
@@ -136,13 +136,13 @@
                 defaultContact.contactId = this.getNextContactID();
                 return (defaultContact);
             },
-            createImporterProductRecord: function () {
+            /**createImporterProductRecord: function () {
                 var importerRecord = {
                     "selectedProducts": "",
                     "dossierIdList": []
                 };
                 return importerRecord;
-            },
+            },*/
 
             updateAddressID: function (value) {
                 if (isNaN(value)) return;
@@ -273,7 +273,7 @@
 
                 return list;
             },
-            getImporterInfo: function(jsonObj){
+            /**getImporterInfo: function(jsonObj){
                 var result=this.createImporterProductRecord();
 
                 if(!jsonObj) return result;
@@ -288,7 +288,7 @@
                     result.dossierIdList.push(newRec);
                 }
                 return result;
-            },
+            },*/
 
             //right side is original json left side is translation ;oading
             getContactList: function (contacts) {
@@ -414,7 +414,7 @@
      * @returns object
      * @private
      */
-    function _mapImporterInfoToOutput(jsonObj){
+    /**function _mapImporterInfoToOutput(jsonObj){
         var importerInfo={};
         if(!jsonObj) return importerInfo;
         importerInfo.selected_products=jsonObj.selectedProducts;
@@ -425,7 +425,7 @@
             }
         }
         return importerInfo;
-    }
+    }*/
 
 
 
