@@ -36,7 +36,7 @@
 	<hpfb:element name="selected_products" type="hpfb:string"/>
 	<hpfb:element name="dossier_id" type="char_7_content" />
 	<hpfb:element name="reason_amend" type="hpfb:string"/>
-	<hpfb:element name="importer_id" type="char_0_6_content">
+	<hpfb:element name="importer_id" type="char_0_6_content"/>
 	
 
 	<hpfb:complexType name="company_enrol_content" >
@@ -77,7 +77,7 @@
 			<hpfb:element ref="importer"/>
 			<hpfb:element ref="company_name"/>
 			<hpfb:element ref="company_address_details"/>
-			<hpfb:element ref="importer_id">
+			<hpfb:element ref="importer_id"/>
 		</hpfb:all>
 		</hpfb:complexType>	
 
