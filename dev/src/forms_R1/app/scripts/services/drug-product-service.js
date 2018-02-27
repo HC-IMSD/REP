@@ -435,11 +435,11 @@
                 }
 
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;
-                if (item.nonmedicinal_ingredient) {
+                /*if (item.nonmedicinal_ingredient) {
                     obj.nMedIngList = getNonMedIngList(item.nonmedicinal_ingredient);
                 } else {
                     obj.nMedIngList = [];
-                }
+                }*/
                 if (item.active_ingredient) {
                     obj.activeIngList = getActiveIngList(item.active_ingredient);
                 } else {
@@ -916,9 +916,9 @@
                 if (item.activeIngList && item.activeIngList.length > 0) {
                     obj.active_ingredient = activeListToOutput(item.activeIngList);
                 }
-                if (item.nMedIngList && item.nMedIngList.length > 0) {
+                /*if (item.nMedIngList && item.nMedIngList.length > 0) {
                     obj.nonmedicinal_ingredient = nonMedIngListToOutput(item.nMedIngList);
-                }
+                }*/
                 if (item.isAnimalHumanMaterial) {
                     obj.is_animal_human_material = item.isAnimalHumanMaterial;
                 }
