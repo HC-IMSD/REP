@@ -48,21 +48,26 @@
             {
                 label: "COMPANY",
                 binding: "companyName",
-                width: "30"
+                width: "20"
             },
             {
                 label: "CITY",
                 binding: "city",
-                width: "25"
+                width: "20"
             },
             {
                 label: "COUNTRY",
                 binding: "countryDisplay",
-                width: "25"
+                width: "20"
             },
             {
                 label: "ROLES",
                 binding: "roleConcat",
+                width: "20"
+            },
+            {
+                label: "IMPORTERID",
+                binding: "importerID",
                 width: "20"
             }
         ];

@@ -27,13 +27,14 @@
                 applicationType: "NEW",
                 softwareVersion: "1.1.0",
                 companyId: "",
+                reasonAmend:"",
                 addressList: [],
                 contactList: []
-                 ,
-                importerProducts: {
+
+                /**importerProducts: {
                     selectedProducts: "",
                     dossierIdList: []
-                }
+                }*/
 
             };
             angular.extend(this._default, defaultCompanyData);
@@ -100,11 +101,11 @@
                     stateText: "",
                     country: "",
                     postalCode: ""
-                     ,
-                    importerProducts: {
+
+                    /**importerProducts: {
                         selectedProducts: "",
                         dossierIdList: []
-                    }
+                    }*/
 
                 };
                 defaultAddress.addressID = this.getNextAddressID();
@@ -135,13 +136,13 @@
                 defaultContact.contactId = this.getNextContactID();
                 return (defaultContact);
             },
-            createImporterProductRecord: function () {
+            /**createImporterProductRecord: function () {
                 var importerRecord = {
                     "selectedProducts": "",
                     "dossierIdList": []
                 };
                 return importerRecord;
-            },
+            },*/
 
             updateAddressID: function (value) {
                 if (isNaN(value)) return;
@@ -205,6 +206,7 @@
                         application_type: jsonObj.applicationType,
                         software_version: jsonObj.softwareVersion,
                         company_id: jsonObj.companyId,
+                        reason_amend: jsonObj.reasonAmend,
                         address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
                     }
@@ -225,6 +227,7 @@
                     applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     companyId: info.company_id,
+                    reasonAmend: info.reason_amend,
                     addressList: [],
                     contactList: []
                 }
@@ -270,7 +273,7 @@
 
                 return list;
             },
-            getImporterInfo: function(jsonObj){
+            /**getImporterInfo: function(jsonObj){
                 var result=this.createImporterProductRecord();
 
                 if(!jsonObj) return result;
@@ -285,7 +288,7 @@
                     result.dossierIdList.push(newRec);
                 }
                 return result;
-            },
+            },*/
 
             //right side is original json left side is translation ;oading
             getContactList: function (contacts) {
@@ -411,7 +414,7 @@
      * @returns object
      * @private
      */
-    function _mapImporterInfoToOutput(jsonObj){
+    /**function _mapImporterInfoToOutput(jsonObj){
         var importerInfo={};
         if(!jsonObj) return importerInfo;
         importerInfo.selected_products=jsonObj.selectedProducts;
@@ -422,7 +425,7 @@
             }
         }
         return importerInfo;
-    }
+    }*/
 
 
 

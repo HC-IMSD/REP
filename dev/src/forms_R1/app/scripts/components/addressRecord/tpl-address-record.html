@@ -12,25 +12,6 @@
                 <h3>{{::'ADDR_DETAILS'|translate}}&nbsp;{{::addressRec.recordIndex+1}}</h3>
             </div>
             <div class="row">
-                <div class="form-group col-md-4"
-                     ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}"
-                    ng-show="addressRec.isImporter">
-                    <label for="{{::addressRec.importerID}}" class="required full-width">
-                        <span class="field-name">{{::"IMPORTERID" |translate}}</span>
-                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                        <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
-                               ng-model="addressRec.addressModel.importerID"
-                               class="form-control full-width" maxlength="80" size="60"
-                               ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isInternal"
-                               ng-required="addressRec.isInternal && addressRec.isImporter">
-                        <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
-                                           show-error="addressRec.showErrors()"
-                                           error-types="addressRec.requiredOnly"></cmp-error-message>
-
-                    </label>
-                </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-12"
                      ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}">
                     <label for="{{::addressRec.companyNameId}}" class="required full-width">
@@ -75,10 +56,29 @@
                     </div>
                 </div>
             </div>
-            <div ng-if="addressRec.isImporter">
+            <!--<div ng-if="addressRec.isImporter">
                 <cmp-importer-products importer-record="addressRec.addressModel.importerProducts"
                                        is-amend="addressRec.isEditable"
                                        show-errors="addressRec.showErrors()"></cmp-importer-products>
+            </div>-->
+            <div class="row">
+                <div class="form-group col-md-4"
+                     ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}"
+                     ng-show="addressRec.isImporter">
+                    <label for="{{::addressRec.importerID}}" class="required full-width">
+                        <span class="field-name">{{::"IMPORTERID" |translate}}</span>
+                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                        <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
+                               ng-model="addressRec.addressModel.importerID"
+                               class="form-control full-width" minlength="5" maxlength="6"
+                               ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isInternal"
+                               ng-required="addressRec.isInternal && addressRec.isImporter">
+                        <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
+                                           show-error="addressRec.showErrors()"
+                                           error-types="addressRec.length5Error"></cmp-error-message>
+
+                    </label>
+                </div>
             </div>
             <div class="row">
                 <div class="btn-group-sm col-xs-12 text-right">
