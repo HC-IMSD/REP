@@ -364,7 +364,7 @@
             }
             result.deferralRequest = feeObj.deferral_request;
             result.feeRemission = feeObj.fee_remission;
-            result.grossRevenue = feeObj.gross_revenue;
+            result.grossRevenue = Number(feeObj.gross_revenue);
             result.percentGross = feeObj.percent_gross;
             result.requiredDocs.deferralStat = feeObj.required_docs.deferral_statement === YES;
             result.requiredDocs.revStat = feeObj.required_docs.remission_certified === YES;
