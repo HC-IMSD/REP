@@ -1093,7 +1093,9 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
         templatesArray.push(folderPath + '.html');
     }
     //never add a date for templates
-    pipes.copyHtml(gulp.src(templatesArray, {read: true, base: './'}), "", destDir, isHtmlMin);
+    if(templatesArray.length > 0) {
+        pipes.copyHtml(gulp.src(templatesArray, {read: true, base: './'}), "", destDir, isHtmlMin);
+    }
 
     var copySourcesJs = gulp.src(jsArray, {read: true, base: './'});
     var copySourcesHtml = gulp.src(htmlArray, {read: true, base: './'});
@@ -1885,7 +1887,7 @@ gulp.task('dev-diffForm-copySrc', function () {
     //var copySourcesJs = gulp.src([paths.scripts + "/"+rootFileNames.repDiff+".js"], {read: true, base: './'});
     // copySourcesJs.pipe(gulp.dest(paths.buildDevDiff));
     return (
-        pipes.copySrcs(true, paths.buildDevDiff, compFolder, servFiles, [], false)
+        pipes.copySrcs(true, paths.buildDevDiff, compFolder, servFiles, [], [], false)
     );
 
 });
@@ -2616,10 +2618,126 @@ gulp.task('protractor-testEnv', function () {
         })
 });
 
-gulp.task('protractor-localDevEnv', function () {
+gulp.task('protractor-localDevEnv-activity', function (done) {
+    gulp.src([
+
+        'app/spec/e2e/tests/activity/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv-company', function (done) {
     gulp.src([
 
         /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/company/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv-csp', gulp.series('dev-csp-injectTest', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/csp/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+}));
+
+gulp.task('protractor-localDevEnv-dossier', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/dossier/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv-transaction', function (done) {
+    gulp.src([
+
+        /* 'app/spec/e2e/tests/csp/csp-main*.js'*/
+        'app/spec/e2e/tests/transaction/*.js'
+    ])
+        .pipe(protractor({
+            configFile: "./protractorconf.js",
+
+            args: [
+                '--baseUrl', 'http://localhost:2121/dev/',
+                '--params.lang', 'en',
+                '--params.formType', 'EXT'
+            ]
+        }))
+
+        .on('error', function (e) {
+            console.error(e);
+            //throw e;
+        });
+    done();
+});
+
+gulp.task('protractor-localDevEnv', function () {
+    gulp.src([
+        'app/spec/e2e/tests/transaction/*.js',
+        'app/spec/e2e/tests/dossier/*.js',
+        'app/spec/e2e/tests/company/*.js',
+        'app/spec/e2e/tests/activity/*.js',
         'app/spec/e2e/tests/csp/*.js'
     ])
         .pipe(protractor({

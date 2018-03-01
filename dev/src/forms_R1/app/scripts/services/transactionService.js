@@ -20,6 +20,7 @@
 
     //version 1.1 bug fix?
     //version 1.2 added Submission package/rq to MPNC, MPDNS
+    //version 1.3 Chnage Lifecycle Rec associations of Sequence Clean-up and Notification of interruption of sale
 
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO) {
         function TransactionService() {
@@ -30,7 +31,7 @@
                 // enrolmentVersion: "0.0",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "1.2.0",
+                softwareVersion: "1.3.0",
                 isEctd: "Y",
                 ectd: {
                     companyId: "",
@@ -88,7 +89,7 @@
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
                         date_saved: today,
-                        software_version: "1.1.0",
+                        software_version: "1.3.0",
                         data_checksum: jsonObj.dataChecksum,
                         is_ectd: jsonObj.isEctd
                     }
@@ -363,7 +364,7 @@
             }
             result.deferralRequest = feeObj.deferral_request;
             result.feeRemission = feeObj.fee_remission;
-            result.grossRevenue = feeObj.gross_revenue;
+            result.grossRevenue = Number(feeObj.gross_revenue);
             result.percentGross = feeObj.percent_gross;
             result.requiredDocs.deferralStat = feeObj.required_docs.deferral_statement === YES;
             result.requiredDocs.revStat = feeObj.required_docs.remission_certified === YES;

@@ -87,19 +87,6 @@
                     </div>
                 </section>
             </div>
-            <div>
-                <section class="panel panel-default">
-                    <header class="panel-heading">
-                        <h3 class="panel-title">{{'NONMEDICINAL_INGRED'|translate}}</h3>
-                    </header>
-                    <div class="panel-body">
-                        <cmp-non-med-ing-list ingredients="formulRecCtrl.frmModel.nMedIngList"
-                                              error-summary-update="formulRecCtrl.errorSummaryUpdate"
-                                              show-error-summary="formulRecCtrl.showSummary"
-                                              on-update="formulRecCtrl.updateNonMedIngList(list)"></cmp-non-med-ing-list>
-                    </div>
-                </section>
-            </div>
             <div class="row">
                 <div class="form-group  col-md-16 col-xs-12"
                      ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId].$invalid}">

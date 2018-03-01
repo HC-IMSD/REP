@@ -1,7 +1,7 @@
 <ng-form name="countryListCtrl.countryListForm">
       <input type="text" required ng-show="false" name="{{::countryListCtrl.noCountryId}}" id="{{::countryListCtrl.noCountryId}}"
                                aria-hidden="true" data-ng-model="countryListCtrl.noCountries"/>
-    <cmp-expanding-table title="" reset-to-collapsed="countryListCtrl.resetToCollapsed"
+    <cmp-expanding-table reset-to-collapsed="countryListCtrl.resetToCollapsed"
                          list-items="countryListCtrl.model.list"
                          column-def="countryListCtrl.columnDef" select-record="countryListCtrl.selectRecord"
                          disable-selection="countryListCtrl.disableAddButton()">

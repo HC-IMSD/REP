@@ -78,7 +78,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
         it('Test the file was sucessfully loaded, Check Salutation', function () {
 
             var root = mainObj.getRoot();
-            var contact = contactObj.getApplicantContact(root)
+            var contact = contactObj.getApplicantContact(root);
             expect(contactObj.getSalutation(root)).toEqual("string:" + "SALUT_DR");
 
         });
@@ -102,7 +102,7 @@ describe('Certificate of Supplementary Protection Main Test', function () {
             });
 
         });
-        var filename='C:/Users/hcuser/Downloads/hccsp-0-2.hcsc'
+        var filename='C:/Users/hcuser/Downloads/hccsp-0-2.hcsc';
         it('Test that the file was downloaded', function () {
 
             browser.driver.wait(function () {

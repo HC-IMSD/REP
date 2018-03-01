@@ -25,6 +25,7 @@
 	<hpfb:element name="dossier_id_concat" type="char_1_20_content"/>
 	<hpfb:element name="reg_activity_lead" type="hpfb:string"/>
 	<hpfb:element name="sponsor_name" type="char_1_80_content"/>
+	<hpfb:element name="reason_amend" type="hpfb:string"/>
 
 	<hpfb:element name="reg_activity_type">
 		<hpfb:complexType>
@@ -88,6 +89,7 @@
 
 			<hpfb:element ref="template_type"/>
 			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="reason_amend"/>
 			<hpfb:element ref="dsts_control_number"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>

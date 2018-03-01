@@ -53,7 +53,7 @@
                         <span class="field-name">{{'STRENGTH'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                     <select id="{{::nIngRecCtrl.strengthId}}" ng-model="nIngRecCtrl.ingModel.strength.operator"
-                            ng-model-options="{ debounce: '$inherit'}"
+                            ng-model-options="{ debounce: '$inherit'}" ng-change="nIngRecCtrl.isStrengthSet()"
                             class="form-control full-width" name="{{::nIngRecCtrl.strengthId}}" required
                             ng-options="op[nIngRecCtrl.lang] for op in  nIngRecCtrl.strengthList track by op.id">
                     </select>
@@ -62,14 +62,14 @@
                                        show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthId])"
                                        error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
                 </div>
-                <div class="form-group col-md-3" ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData1Id].$invalid}"
-                     ng-if="nIngRecCtrl.isStrengthSet()">
-                    <label for="{{::nIngRecCtrl.strengthData1Id}}" class="required">
+                <div class="form-group col-md-3" ng-if="nIngRecCtrl.isStrengthSet()">
+                    <label for="{{nIngRecCtrl.strengthData1Id}}" class="required"
+                           ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData1Id].$invalid}">
                         <span class="field-name">{{nIngRecCtrl.strengthData1Title|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="number" id="{{::nIngRecCtrl.strengthData1Id}}" data-ng-model="nIngRecCtrl.ingModel.strength.data1"
+                        <input type="number" id="{{nIngRecCtrl.strengthData1Id}}" data-ng-model="nIngRecCtrl.ingModel.strength.data1"
                                ng-model-options="{ debounce: '$inherit'}"
-                               class="form-control full-width" name="{{::nIngRecCtrl.strengthData1Id}}" ng-min="0" ng-required="true"/>
+                               class="form-control full-width" name="{{nIngRecCtrl.strengthData1Id}}" ng-min="0" ng-required="true"/>
                         <cmp-error-message field-name="nIngRecCtrl.strengthData1Id"
                                            form-ref="nIngRecCtrl.nonMedIngForm"
                                            show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.strengthData1Id])"

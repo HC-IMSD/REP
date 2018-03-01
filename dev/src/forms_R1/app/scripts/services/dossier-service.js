@@ -93,7 +93,7 @@
                 var dossierModel = {
                     dossierID: info.dossier_id,
                     companyID: info.company_id,
-                    relatedDossierID: info.related_dossier_id,
+                    relatedDossierID: info.related_information,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
                     applicationType: info.application_type,
@@ -109,10 +109,7 @@
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                        // isScheduleA: info.is_sched_a === 'Y',
                         therapeutic: [],
-                        canRefProduct: {
-                            brandName: info.cdn_ref_product.brand_name,
-                            companyName: info.cdn_ref_product.company_name
-                        }
+                        canRefProduct: ""
                         //canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                        // formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         //appendixFourList: getAppendix4IngredientList(info.appendix4_group)
@@ -120,6 +117,13 @@
                    // contactList: getContactList(info.contact_record)
 
                 };
+
+                if (info.is_ref_product === YES) {
+                    dossierModel.drugProduct.canRefProduct =  {
+                        brandName: info.cdn_ref_product.brand_name,
+                            companyName: info.cdn_ref_product.company_name
+                    };
+                }
                 if (info.therapeutic_class_list.therapeutic_class) {
                     dossierModel.drugProduct.therapeutic = getTherapeuticList(info.therapeutic_class_list.therapeutic_class)
                 }
@@ -149,7 +153,7 @@
             //order is important!!! Must match schema
             baseDossier.company_id = jsonObj.companyID;
             baseDossier.dossier_id = jsonObj.dossierID;
-            baseDossier.related_dossier_id = jsonObj.relatedDossierID;
+            baseDossier.related_information = jsonObj.relatedDossierID;
             baseDossier.enrolment_version = jsonObj.enrolmentVersion;
             baseDossier.date_saved = jsonObj.dateSaved;
             baseDossier.application_type = jsonObj.applicationType;

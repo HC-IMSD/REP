@@ -207,7 +207,7 @@
             vm.strengthId = "strength" + scopeId;
             vm.unitsId = "units" + scopeId;
             vm.otherId="other_units"+scopeId;
-            vm.perId="per"+scopeId;
+            vm.perId="per_strength"+scopeId;
             vm.dosageFormId="dosage_form"+scopeId;
             vm.dosageFormOtherId="dosage_form_other"+scopeId;
             vm.companyId="company_noabbrev"+scopeId;

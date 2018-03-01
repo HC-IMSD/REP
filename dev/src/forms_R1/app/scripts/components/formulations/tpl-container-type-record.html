@@ -61,7 +61,7 @@
                                 <span class="field-name">{{'UNIT'|translate}}</span></label>
                             <select id="{{::ctrCtrl.shelfLifeUnitId}}" ng-model="ctrCtrl.ctModel.shelfLifeUnit"
                                     ng-model-options="{ debounce: '$inherit'}"
-                                    class="form-control full-width" name="{{::ctrCtrl.shelfLifeUnitId}}" required
+                                    class="form-control full-width" name="{{::ctrCtrl.shelfLifeUnitId}}"
                                     ng-options="unit[ctrCtrl.lang] for unit in  ctrCtrl.selfLifeUnitsList track by unit.id">
                             </select>
                         </div>

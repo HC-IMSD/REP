@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- ****************************** -->
-<!-- Company Enrolment version 0.1 -->
+<!-- Drug Product Enrolment version 0.1 -->
 <!-- ****************************** -->
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<hpfb:include schemaLocation="./common/data_types.xsd"/>
@@ -11,7 +11,7 @@
 	<!-- ****************************** -->
 	<!-- ELEMENT DECLARATIONS -->
 	<!-- ****************************** -->
-	<!-- COMPANY_ENROL is the root element-->
+	<!-- DRUG_PRODUCT_ENROL is the root element-->
 	<!-- REP Dossier Level element definitions-->
 	<hpfb:element name="DRUG_PRODUCT_ENROL" type="drug_product_enrol_content"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
@@ -28,6 +28,28 @@
 
 	<hpfb:element name="drug_use">
 	<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
+	<hpfb:element name="schedule">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
+	<hpfb:element name="prescription_status">
+		<hpfb:complexType>
 			<hpfb:simpleContent>
 				<hpfb:extension base="hpfb:string">
 					<hpfb:attribute name="label_en" type="hpfb:string"/>
@@ -233,15 +255,34 @@
 	<hpfb:element name="container_details" type="container_details_content"/>
 	<hpfb:element name="container_type" type="char_1_256_content"/>
 	<hpfb:element name="package_size" type="char_1_256_content"/>
-	<hpfb:element name="shelf_life_years" type="optional_integer_0_9999_content"/>
-	<hpfb:element name="shelf_life_months" type="optional_integer_0_99_content"/>
+	<hpfb:element name="shelf_life_unit">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="shelf_life_number" type="optional_integer_0_99_content"/>
 	<hpfb:element name="temperature_min" type="temp_integer_content" />
 	<hpfb:element name="temperature_max" type="temp_integer_content" />
 	<hpfb:element name="active_ingredient" type="active_group_content"/>
-	<hpfb:element name="nonmedicinal_ingredient" type="nmi_group_content"/>
 	<hpfb:element name="material_ingredient" type="material_group_content"/>
-	<hpfb:element name="strength" type="char_1_15_content"/>
-	<hpfb:element name="per" type="char_0_40_content"/>
+	<hpfb:element name="strength" type="strength_content"/>
+	<hpfb:element name="operator">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="data1" type="optional_integer_0_9999_content"/>
+	<hpfb:element name="data2" type="optional_integer_0_9999_content"/>
 	<hpfb:element name="units">
 		<hpfb:complexType>
 			<hpfb:simpleContent>
@@ -253,9 +294,40 @@
 		</hpfb:complexType>
 	</hpfb:element>
 	<hpfb:element name="units_other" type="char_0_40_content"/>
-
+	<hpfb:element name="per">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="units_presentation">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="units_measure">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="units_other_measure" type="char_0_40_content"/>
 	<hpfb:element name="is_base_calc" type="required_yes_no_content"/>
-	<hpfb:element name="is_nanomaterial">
+	<hpfb:element name="is_nanomaterial" type="required_yes_no_content"/>
+	<hpfb:element name="nanomaterial">
 		<hpfb:complexType>
 			<hpfb:simpleContent>
 				<hpfb:extension base="hpfb:string">
@@ -266,6 +338,7 @@
 		</hpfb:complexType>
 	</hpfb:element>
 	<hpfb:element name="nanomaterial_details" type="char_0_40_content"/>
+	<hpfb:element name="is_animal_human_material" type="required_yes_no_content"/>
 	<hpfb:element name="variant_name" type="char_0_100_content"/>
 	<hpfb:element name="in_final_container" type="required_yes_no_content"/>
 
@@ -283,6 +356,8 @@
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="dossier_type"/>
 			<hpfb:element ref="drug_use"/>
+			<hpfb:element ref="schedule"/>
+			<hpfb:element ref="prescription_status"/>
 			<hpfb:element ref="is_sched_a"/>
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
@@ -393,7 +468,7 @@
 			<hpfb:element ref="container_group"/>
 			<hpfb:element ref="country_group"/>
 			<hpfb:element ref="active_ingredient" minOccurs="1" maxOccurs="unbounded"/>
-			<hpfb:element ref="nonmedicinal_ingredient" minOccurs="0" maxOccurs="unbounded"/>
+			<hpfb:element ref="is_animal_human_material"/>
 			<hpfb:element ref="material_ingredient" minOccurs="0" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -429,8 +504,8 @@
 		<hpfb:sequence>
 			<hpfb:element ref="container_type"/>
 			<hpfb:element ref="package_size"/>
-			<hpfb:element ref="shelf_life_years"/>
-			<hpfb:element ref="shelf_life_months"/>
+			<hpfb:element ref="shelf_life_unit"/>
+			<hpfb:element ref="shelf_life_number"/>
 			<hpfb:element ref="temperature_min"/>
 			<hpfb:element ref="temperature_max"/>
 		</hpfb:sequence>
@@ -443,11 +518,15 @@
 			<hpfb:element ref="ingred_standard"/>
 			<hpfb:element ref="is_human_animal_src"/>
 			<hpfb:element ref="strength"/>
-			<hpfb:element ref="per"/>
 			<hpfb:element ref="units"/>
 			<hpfb:element ref="units_other"/>
+			<hpfb:element ref="per"/>
+			<hpfb:element ref="units_presentation"/>
+			<hpfb:element ref="units_presentation"/>
+			<hpfb:element ref="units_other_measure"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
+			<hpfb:element ref="nanomaterial"/>
 			<hpfb:element ref="nanomaterial_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -460,11 +539,15 @@
 			<hpfb:element ref="is_human_animal_src"/>
 			<hpfb:element ref="variant_name"/>
 			<hpfb:element ref="strength"/>
-			<hpfb:element ref="per"/>
 			<hpfb:element ref="units"/>
 			<hpfb:element ref="units_other"/>
+			<hpfb:element ref="per"/>
+			<hpfb:element ref="units_presentation"/>
+			<hpfb:element ref="units_presentation"/>
+			<hpfb:element ref="units_other_measure"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
+			<hpfb:element ref="nanomaterial"/>
 			<hpfb:element ref="nanomaterial_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -614,6 +697,13 @@
 		</hpfb:complexType>
 	</hpfb:element>
 	<hpfb:element name="dosage_form_other" type="char_0_100_content"/>
-	
+
+	<hpfb:complexType name="strength_content">
+		<hpfb:sequence>
+			<hpfb:element ref="operator"/>
+			<hpfb:element ref="data1"/>
+			<hpfb:element ref="data2"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
 
 </hpfb:schema>

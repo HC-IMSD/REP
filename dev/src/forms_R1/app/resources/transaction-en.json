@@ -94,6 +94,7 @@
   "CHOOSE_REQUEST":"Choose a requester",
   "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
   "LIST_DESCRIPT":"List Description",
+  "SEQUENCE_CLEANUP":"Sequence Clean-up",
 
   "DEFER_FEES":" A deferral of payment is requested with this transaction.",
   "DEFER_STATEMENT":"The statement supporting the deferral request is included.",
