@@ -21,6 +21,7 @@
             //construction logic
             var defaultActivityData = {
                 "companyId": "",
+                "reasonAmend": "",
                 "dstsControlNumber": "",
                 "enrolmentVersion": "",
                 "dateSaved": "",
@@ -72,6 +73,7 @@
                 ACTIVITY_ENROL: {
                     template_type: "PHARMA",
                     company_id: jsonObj.companyId,
+                    reason_amend: jsonObj.reasonAmend,
                     dsts_control_number: jsonObj.dstsControlNumber,
                     enrolment_version: jsonObj.enrolmentVersion,
                     date_saved: jsonObj.dateSaved,
@@ -186,6 +188,7 @@
             }
             var model = {};
             model.companyId = jsonObj.company_id;
+            model.reasonAmend = jsonObj.reason_amend;
             model.dstsControlNumber = jsonObj.dsts_control_number;
             model.enrolmentVersion = jsonObj.enrolment_version;
             model.dateSaved = jsonObj.date_saved;
