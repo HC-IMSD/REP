@@ -111,6 +111,7 @@
         vm.$onInit = function () {
             _setIdNames();
             vm.updateErrorSummaryState();
+            vm.importerProductState(vm.addressModel.addressRole.importer);
         };
         //TODO move to service
         function _getRolesConcat() {
@@ -221,7 +222,7 @@
                 vm.updateCountry++;
 
             };
-            if (!vm.isImorter) {
+            if (!vm.isImporter) {
                 /**vm.addressModel.importerProducts = {
                     "selectedProducts": "",
                     "dossierIdLislamt": []
