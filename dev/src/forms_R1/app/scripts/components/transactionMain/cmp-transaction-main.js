@@ -162,7 +162,7 @@
                 vm.transaction.projectManager2 = "";
                 vm.transaction.isSolicited = "";
                 vm.transaction.solicitedRequester = "";
-                vm.transaction.sameContact = false;
+                vm.transaction.confirmContactValid = false;
 
             }
         }

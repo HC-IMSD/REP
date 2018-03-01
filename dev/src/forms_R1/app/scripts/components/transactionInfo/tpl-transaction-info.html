@@ -336,9 +336,9 @@
                             <div class="form-group col-xs-12">
                                 <div class="checkbox required">
                                     <label for="{{::transInfoCtrl.contactSameId}}">
-                                        <input type="checkbox" ng-model="transInfoCtrl.transactionModel.sameContact"
+                                        <input type="checkbox" ng-model="transInfoCtrl.transactionModel.confirmContactValid"
                                                name="{{::transInfoCtrl.contactSameId}}" id="{{::transInfoCtrl.contactSameId}}" required/>
-                                        {{::"CONTACT_SAME"|translate}}
+                                        {{::"CONFIRM_CONTACT_VALID"|translate}}
 
                                         <cmp-error-message field-name="transInfoCtrl.contactSameId"
                                                            form-ref="transInfoCtrl.transInfoForm"

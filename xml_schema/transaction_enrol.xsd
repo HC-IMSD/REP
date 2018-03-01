@@ -64,7 +64,7 @@
 	<hpfb:element name="company_name" type="char_0_80_content"/>
 	<!--<hpfb:element name="same_regulatory_address" type="required_yes_no_content"/>-->
 	<hpfb:element name="regulatory_activity_address" type="international_address_content"/>
-	<hpfb:element name="same_regulatory_contact" type="required_yes_no_content"/>
+	<hpfb:element name="confirm_regulatory_contact" type="required_yes_no_content"/>
 	<hpfb:element name="regulatory_activity_contact" type="contact_content"/>
 	<hpfb:element name="rep_submission_contact_role" type="rep_contact_role_list"/>
 	<hpfb:element name="rep_submission_contact" type="contact_content"/>
@@ -121,7 +121,7 @@
 			<!--<hpfb:element ref="same_regulatory_address"/>-->
 			<hpfb:element ref="regulatory_activity_address"/>
 			<hpfb:element ref="regulatory_activity_contact"/>
-			<hpfb:element ref="same_regulatory_contact"/>
+			<hpfb:element ref="confirm_regulatory_contact"/>
 			
 		</hpfb:sequence>
 	</hpfb:complexType>
