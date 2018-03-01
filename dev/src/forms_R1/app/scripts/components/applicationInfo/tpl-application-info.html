@@ -61,7 +61,7 @@
         </div>
         <div class="row">
             <div class="col-xs-2 form-group">
-                <div>
+                <div ng-if="infoCtrl.showAmendButton()">
                     <button class="btn btn-default form-control" name="amendSub" id="amendSub"
                             ng-click="infoCtrl.setAmendState()" ng-disabled="infoCtrl.setAsIncomplete">
                         {{::'AMEND_ENROL'|translate}}
