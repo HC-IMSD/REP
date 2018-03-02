@@ -5,7 +5,7 @@
                 <a class="" ng-if="node.nodes" class="rep-anchor"
                    ng-click="toggle(this)"><i class="glyphicon"
                                               ng-class="{'fa fa-caret-right fa-lg fa-fw': collapsed, 'fa fa-caret-down fa-lg fa-fw': !collapsed}"></i>
-                    {{node.recordName|translate}}&nbsp;-&nbsp;Record:&nbsp{{node.index+1}}
+                    {{node.recordName|translate}}&nbsp;-&nbsp;Record&nbsp{{node.index+1}}
                 </a>
             </div>
             <div ng-if="node.value && node.value.length>0 && !collapsed" class="col-xs-12">
