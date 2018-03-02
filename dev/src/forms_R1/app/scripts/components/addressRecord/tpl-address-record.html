@@ -63,11 +63,12 @@
             </div>-->
             <div class="row">
                 <div class="form-group col-md-4"
-                     ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}"
                      ng-show="addressRec.isImporter">
-                    <label for="{{::addressRec.importerID}}" class="required full-width">
+                    <div ng-class="{'has-error':addressRec.addressRecForm[addressRec.importerID].$invalid}">
+                    <label for="{{::addressRec.importerID}}" class=" full-width"
+                           ng-class="{'required':addressRec.isInternal}">
                         <span class="field-name">{{::"IMPORTERID" |translate}}</span>
-                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                        <strong class="required" ng-show ="addressRec.isInternal"> {{::"REQUIRED" |translate}}</strong>
                         <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
                                ng-model="addressRec.addressModel.importerID"
                                class="form-control full-width" minlength="5" maxlength="6"
@@ -78,6 +79,7 @@
                                            error-types="addressRec.length5Error"></cmp-error-message>
 
                     </label>
+                    </div>
                 </div>
             </div>
             <div class="row">

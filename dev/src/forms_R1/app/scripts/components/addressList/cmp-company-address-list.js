@@ -155,7 +155,7 @@
 
         vm.disableAddAddress = function () {
             //TODO don't hard code length
-            return (!(vm.addressList.length < 4 && vm.isDetailsValid))
+            return (!( vm.isDetailsValid))
 
         };
 
@@ -211,30 +211,30 @@
          */
             //TODO move to a service, can this be simplified?
         vm.isAllRolesSelected = function () {
-            var rolesSelected = 0;
             var importerSelected = false;
+            var manuSelected = false;
+            var mailSelected = false;
+            var billSelected = false;
 
             if (!vm.addressList) return false;
             var companyRole = vm.companyService.createAddressRole();
-            var numKeys = vm.companyService.getNumberKeys(companyRole);
             for (var i = 0; i < vm.addressList.length; i++) {
                 var obj = vm.addressList[i].addressRole;
                 for (var key in obj) {
                     var attrName = key;
                     var attrValue = obj[key];
-                    if (attrValue && companyRole.hasOwnProperty(attrName)) {
-                        rolesSelected++;
+                    if (attrValue) {
                         if (attrName === "importer") importerSelected = true;
+                        if (attrName === "manufacturer") manuSelected = true;
+                        if (attrName === "mailing") mailSelected = true;
+                        if (attrName === "billing") billSelected = true;
                     }
                 }
             }
-            if (rolesSelected === numKeys) {
-                return true;
-            }
-            else if ((rolesSelected === (numKeys - 1)) && (!importerSelected)) {
+            if (importerSelected &&  manuSelected && mailSelected && billSelected ) {
                 return true;
             } else {
-                return false
+                return false;
             }
         }
     }

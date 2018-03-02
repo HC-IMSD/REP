@@ -204,6 +204,7 @@
             vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
             vm.errorSummaryUpdate();
+            vm.importerProductState(vm.addressModel.addressRole.importer)
         };
         //TODO obsolete?
         vm.onAddressRoleUpdate = function (newRole) {

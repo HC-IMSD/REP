@@ -291,6 +291,7 @@
             for (var j = 0; j < vm.company.contactList.length; j++) {
                 vm.company.contactList[j].amendRecord = false;
             }
+            vm.company.reasonAmend="";
         }
 
         /**
