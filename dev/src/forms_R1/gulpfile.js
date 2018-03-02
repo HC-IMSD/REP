@@ -147,14 +147,14 @@ var dossierRootTitles_fr = {
 };
 
 var drugProductRootTitles_en = {
-    mainHeading: "Drug Product Template: Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Drug Product Template'
+    mainHeading: "Product Information Template: Regulatory Enrolment Process (REP)",
+    title: 'Health Canada Product Information Template'
 
 };
 
 var drugProductRootTitles_fr = {
-    mainHeading: "fr_Drug Product Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Drug Product Template'
+    mainHeading: "fr_Product Information Template: Regulatory Enrolment Process (REP)",
+    title: 'fr_Health Canada Product Information Template'
 
 };
 
