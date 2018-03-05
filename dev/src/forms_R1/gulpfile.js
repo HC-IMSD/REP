@@ -1919,10 +1919,7 @@ gulp.task('dev-diffForm-copySrc', function () {
 
 gulp.task('dev-diffForm-copyTranslate', function () {
 
-    var translationList = diffFormTranslationBaseList;
-
-    return (pipes.translateDev(translationList, paths.buildDevDiff));
-
+    return (pipes.translateDev(diffFormTranslationBaseList, paths.buildDevDiff))
 
 });
 
@@ -1943,11 +1940,17 @@ gulp.task('dev-diffForm-createResources', gulp.series('dev-diffForm-copyTranslat
     var srcPath = paths.buildDevDiff;
     var destPath = paths.buildDevDiff + paths.relScript;
     var filename = 'translations' + createSuffixDate();
-    return (pipes.compileTranslateFile(srcPath, destPath, filename, diffFormTranslationBaseList));
+
+
+    return (
+        pipes.compileTranslateFile(srcPath, destPath, filename, diffFormTranslationBaseList)
+
+    );
+
 }));
 
 
-gulp.task('dev-diffForm-htmlBuild', gulp.series('dev-diffForm-clean', 'dev-diffForm-copyData', 'dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources', function () {
+gulp.task('dev-diffForm-htmlBuild', gulp.series('dev-diffForm-clean', 'dev-global-create-src-template', 'dev-diffForm-copyData', 'dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources', function () {
 
     var deploy = deployType.dev;
     var ignoreDir = '/build/dev/repDiff';
@@ -1955,9 +1958,12 @@ gulp.task('dev-diffForm-htmlBuild', gulp.series('dev-diffForm-clean', 'dev-diffF
         paths.styles + styleFilesNames.repDiff,
         paths.styles + styleFilesNames.uiTree
     ];
-    return (
+    var htmlPartial = jsRootContent.partialDiffFormRoot;
+    var buildDir =  paths.buildDevDiff;
+    pipes.createRootHtml(paths.devEnglishTemplate, diffFormRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', htmlPartial,buildDir, ignoreDir, 'en', deploy, stylesList);
 
-        pipes.createRootHtml(paths.englishTemplate, diffFormRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', jsRootContent.partialDiffFormRoot, paths.buildDevDiff, ignoreDir, 'en', deploy, stylesList)
+    return (
+        pipes.cleanBuild(buildDir + paths.translations)
     );
 
 }));

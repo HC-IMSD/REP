@@ -84,9 +84,9 @@
             var existingRecord = null;
             var searchList = resultList;
 
-            console.log(node);
-            console.log(resultList);
-            console.log(currentNode);
+           // console.log(node);
+            //console.log(resultList);
+           // console.log(currentNode); asdsad
 
             if (angular.isUndefined(exclusionList)) {
                 exclusionList = {}; //easiest just to make this empty if there is none

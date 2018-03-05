@@ -170,5 +170,6 @@
 	"shelf_life_number":"Shelf Life: Value",
 	"shelf_life_unit":"Shelf Life: Units",
 	"units_measure": "Units of Measure",
-	"units_other_measure": "Ohter Units of Measure"
+	"units_other_measure": "Other Units of Measure",
+	"operator": "Strength operator"
 }
