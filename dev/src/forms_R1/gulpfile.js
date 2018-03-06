@@ -77,8 +77,8 @@ var homePath = {
     test_fr: "https://lam-dev.hres.ca/rep_test/index-fr.html",
     prod_en: "https://lam-dev.hres.ca/REP-Form/index.html",
     prod_fr: "https://lam-dev.hres.ca/REP-Form/index-fr.html",
-    prodInt_en:"https://lam-dev.hres.ca/REP-Form-Internal/index.html",
-    prodInt_fr:"https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
+    prodInt_en: "https://lam-dev.hres.ca/REP-Form-Internal/index.html",
+    prodInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
 
 };
 var deployType = {
@@ -147,14 +147,14 @@ var dossierRootTitles_fr = {
 };
 
 var drugProductRootTitles_en = {
-    mainHeading: "Drug Product Template: Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Drug Product Template'
+    mainHeading: "Product Information Template: Regulatory Enrolment Process (REP)",
+    title: 'Health Canada Product Information Template'
 
 };
 
 var drugProductRootTitles_fr = {
-    mainHeading: "fr_Drug Product Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Drug Product Template'
+    mainHeading: "fr_Product Information Template: Regulatory Enrolment Process (REP)",
+    title: 'fr_Health Canada Product Information Template'
 
 };
 
@@ -299,8 +299,8 @@ var componentFolders = {
     cspCert: 'cspCertification/',
     errorMsg: 'error-message/',
     cspApplicantList: 'cspContactList/',
-    alertComp:"alertComponent/",
-    transFees:'transactionFees/'
+    alertComp: "alertComponent/",
+    transFees: 'transactionFees/'
 };
 
 //exclude custom styles only lib
@@ -337,7 +337,7 @@ var libCsp = [
     paths.lib + libFileNames.fileSaverMin,
     paths.lib + libFileNames.selectMin,
     /* paths.lib + libFileNames.sha256,*/
-     paths.lib + libFileNames.uiBootStrapMin,
+    paths.lib + libFileNames.uiBootStrapMin,
     paths.lib + libFileNames.xml2Json,
     paths.lib + libFileNames.messagesMin,
     paths.lib + libFileNames.ariaMin,
@@ -464,6 +464,12 @@ var cspComponentFolders = [
     componentFolders.alertComp
 ];
 
+var repDiffComponentFolders = [
+    componentFolders.nodesRender,
+    componentFolders.diffFileIO,
+    componentFolders.diffMain
+];
+
 var noscriptObj = {
     en: "Javascript must be enabled to fill in this form",
     fr: "Javascript doit être activé pour remplir ce formulaire "
@@ -498,7 +504,7 @@ var serviceFileNames = {
     cspLoadService: 'csp-load-service',
     cspDataLists: 'csp-data-lists',
     diffService: 'diff-service',
-    drugProductService:'drug-product-service'
+    drugProductService: 'drug-product-service'
 };
 
 //Activity Form Service File names
@@ -580,6 +586,12 @@ var cspServiceFileNames =
         serviceFileNames.cspConstants,
         serviceFileNames.cspLoadService,
         serviceFileNames.cspDataLists
+    ];
+
+var difServiceFileNames =
+    [
+        serviceFileNames.diffService
+
     ];
 
 
@@ -666,7 +678,10 @@ var translationBaseFiles = {
     errorSummary: paths.translations + 'errorSummary',
     cspGeneral: paths.translations + 'csp',
     cspError: paths.translations + 'cspError',
-    drugProduct:paths.translations +'drugProduct'
+    drugProduct: paths.translations + 'drugProduct',
+    commonXml: paths.translations+'commonXML',
+    productInfoXml: paths.translations + 'drugProductXML',
+    companyXml: paths.translations + 'companyXML'
 };
 
 
@@ -677,7 +692,10 @@ var diffFormTranslationBaseList = [
     translationBaseFiles.contactXml,
     translationBaseFiles.defaultXml,
     translationBaseFiles.transactionXml,
-    translationBaseFiles.activityXml
+    translationBaseFiles.activityXml,
+    translationBaseFiles.commonXml,
+    translationBaseFiles.productInfoXml,
+    translationBaseFiles.companyXml
 ];
 
 
@@ -1093,7 +1111,7 @@ pipes.copySrcs = function (noDate, destDir, componentFolders, serviceFileNames, 
         templatesArray.push(folderPath + '.html');
     }
     //never add a date for templates
-    if(templatesArray.length > 0) {
+    if (templatesArray.length > 0) {
         pipes.copyHtml(gulp.src(templatesArray, {read: true, base: './'}), "", destDir, isHtmlMin);
     }
 
@@ -1257,43 +1275,43 @@ pipes.copyAndMinStyles = function (stylesArray, isTimeStamped, destPath) {
 
 pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartial, src, ignorePath, outName, destDir, lang, formType, htmlLangName) {
 
-    return(
-    pipes.insertDateStamp(templatePath, metaObj, lang, formType, htmlLangName)
-        .pipe(inject(gulp.src([htmlPartial]), {
-            starttag: placeholders.mainContent,
-            transform: function (filePath, file) {
-                // return file contents as string
-                return file.contents.toString('utf8')
-            }
-        }))
-        .pipe(inject(gulp.src([
-                srcPath + 'app/lib/**/*.js',
-                '!' + srcPath + 'app/lib/**/angular*.js'
-            ]),
-            {
-                name: 'thirdParty',
-                ignorePath: ignorePath,
-                addRootSlash: false
+    return (
+        pipes.insertDateStamp(templatePath, metaObj, lang, formType, htmlLangName)
+            .pipe(inject(gulp.src([htmlPartial]), {
+                starttag: placeholders.mainContent,
+                transform: function (filePath, file) {
+                    // return file contents as string
+                    return file.contents.toString('utf8')
+                }
             }))
-        .pipe(inject(gulp.src([
-                srcPath + paths.styles + "rep*.css",
-                srcPath + paths.styles + styleFilesNames.select,
-                srcPath + paths.styles + styleFilesNames.select2Style
-            ]),
-            {
-                ignorePath: ignorePath,
-                addRootSlash: false
-            }
-        ))
-        .pipe(inject(gulp.src(src)
-                .pipe(angularFilesort())
-            , {
-                ignorePath: ignorePath,
-                addRootSlash: false,
-                read: false
-            }))
-        .pipe(rename(outName))
-        .pipe(gulp.dest(destDir))
+            .pipe(inject(gulp.src([
+                    srcPath + 'app/lib/**/*.js',
+                    '!' + srcPath + 'app/lib/**/angular*.js'
+                ]),
+                {
+                    name: 'thirdParty',
+                    ignorePath: ignorePath,
+                    addRootSlash: false
+                }))
+            .pipe(inject(gulp.src([
+                    srcPath + paths.styles + "rep*.css",
+                    srcPath + paths.styles + styleFilesNames.select,
+                    srcPath + paths.styles + styleFilesNames.select2Style
+                ]),
+                {
+                    ignorePath: ignorePath,
+                    addRootSlash: false
+                }
+            ))
+            .pipe(inject(gulp.src(src)
+                    .pipe(angularFilesort())
+                , {
+                    ignorePath: ignorePath,
+                    addRootSlash: false,
+                    read: false
+                }))
+            .pipe(rename(outName))
+            .pipe(gulp.dest(destDir))
     )
 };
 
@@ -1394,7 +1412,16 @@ gulp.task('dev-copy-changedFiles', function (done) {
             compFolders: cspComponentFolders,
             serviceFiles: cspServiceFileNames,
             directiveFiles: cspDirectiveFolders
+        },
+        {
+            matches: false,
+            formName: "repDiff",
+            buildPath: paths.buildDevDiff,
+            compFolders: repDiffComponentFolders,
+            serviceFiles: difServiceFileNames,
+            directiveFiles: []
         }
+
     ];
 
     if (folders.length > 0) {
@@ -1815,8 +1842,6 @@ gulp.task('dev-dossier-htmlBuild', gulp.series('dev-dossier-clean', 'dev-global-
 }));
 
 
-
-
 /**
  * Generates the base Drug Product HTML file.
  * First copies the source files (copyDossierSrcDev),
@@ -1881,8 +1906,8 @@ gulp.task('dev-diffForm-copyLib', function () {
 });
 
 gulp.task('dev-diffForm-copySrc', function () {
-    var servFiles = [serviceFileNames.diffService];
-    var compFolder = [componentFolders.nodesRender, componentFolders.diffFileIO, componentFolders.diffMain];
+    var servFiles = difServiceFileNames;
+    var compFolder = repDiffComponentFolders;
     var rootFile = paths.scripts + "/" + rootFileNames.dossierRoot + '.js';
     //var copySourcesJs = gulp.src([paths.scripts + "/"+rootFileNames.repDiff+".js"], {read: true, base: './'});
     // copySourcesJs.pipe(gulp.dest(paths.buildDevDiff));
@@ -1894,10 +1919,7 @@ gulp.task('dev-diffForm-copySrc', function () {
 
 gulp.task('dev-diffForm-copyTranslate', function () {
 
-    var translationList = diffFormTranslationBaseList;
-
-    return (pipes.translateDev(translationList, paths.buildDevDiff));
-
+    return (pipes.translateDev(diffFormTranslationBaseList, paths.buildDevDiff))
 
 });
 
@@ -1918,11 +1940,17 @@ gulp.task('dev-diffForm-createResources', gulp.series('dev-diffForm-copyTranslat
     var srcPath = paths.buildDevDiff;
     var destPath = paths.buildDevDiff + paths.relScript;
     var filename = 'translations' + createSuffixDate();
-    return (pipes.compileTranslateFile(srcPath, destPath, filename, diffFormTranslationBaseList));
+
+
+    return (
+        pipes.compileTranslateFile(srcPath, destPath, filename, diffFormTranslationBaseList)
+
+    );
+
 }));
 
 
-gulp.task('dev-diffForm-htmlBuild', gulp.series('dev-diffForm-clean', 'dev-diffForm-copyData', 'dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources', function () {
+gulp.task('dev-diffForm-htmlBuild', gulp.series('dev-diffForm-clean', 'dev-global-create-src-template', 'dev-diffForm-copyData', 'dev-diffForm-copySrc', 'dev-diffForm-copyLib', 'dev-diffForm-createRootJS', 'dev-diffForm-createResources', function () {
 
     var deploy = deployType.dev;
     var ignoreDir = '/build/dev/repDiff';
@@ -1930,9 +1958,12 @@ gulp.task('dev-diffForm-htmlBuild', gulp.series('dev-diffForm-clean', 'dev-diffF
         paths.styles + styleFilesNames.repDiff,
         paths.styles + styleFilesNames.uiTree
     ];
-    return (
+    var htmlPartial = jsRootContent.partialDiffFormRoot;
+    var buildDir =  paths.buildDevDiff;
+    pipes.createRootHtml(paths.devEnglishTemplate, diffFormRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', htmlPartial,buildDir, ignoreDir, 'en', deploy, stylesList);
 
-        pipes.createRootHtml(paths.englishTemplate, diffFormRootTitles_en, 'diffForm-en.html', 'diffAppEXT-en.js', jsRootContent.partialDiffFormRoot, paths.buildDevDiff, ignoreDir, 'en', deploy, stylesList)
+    return (
+        pipes.cleanBuild(buildDir + paths.translations)
     );
 
 }));
@@ -2023,9 +2054,9 @@ gulp.task('dev-build-allForms', gulp.series(
     'dev-csp-htmlBuild',
     'dev-transaction-htmlBuild',
     'dev-dossier-htmlBuild',
-    'dev-drugProduct-htmlBuild', function(done) {
-    done();
-}));
+    'dev-drugProduct-htmlBuild', function (done) {
+        done();
+    }));
 
 
 /*******************PRODUCTIION SCRIPTS START HERE **********************/
@@ -2538,7 +2569,7 @@ gulp.task('prod-csp-compileSrcJs', gulp.series('prod-csp-compileTranslateFile', 
 
 gulp.task('prod-csp-compileHtml', gulp.series('prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-csp-compileSrcJs', 'prod-csp-copyLib', function () {
 
-    var ignorePath ='build/prod/csp-cps' ;
+    var ignorePath = 'build/prod/csp-cps';
     var basePath = paths.buildProdCsp;
     var destPath = paths.buildProdCsp;
     var htmlPartial = jsRootContent.partialCSPFormRoot;
@@ -2560,10 +2591,10 @@ gulp.task('prod-csp-compileHtml', gulp.series('prod-global-create-src-template',
         paths.buildProdCsp + 'app/lib/**/angular*.js'
     ];
     var srcPath = paths.buildProdCsp;
-    var englishHtmlName="certificate-supplementary-protection-form.html";
-    var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
-    var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
-    var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
+    var englishHtmlName = "certificate-supplementary-protection-form.html";
+    var frenchHtmlName = "formulaire-certificat-protection-supplementaire.html";
+    var englishInternalHtmlName = "certificate-supplementary-protection-form-internal.html";
+    var frenchInternalHtmlName = "formulaire-certificat-protection-supplementaire-internal.html";
     return (
         pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, englishInternalHtmlName, destPath, 'en', deployType.prod, frenchInternalHtmlName)
         &&
@@ -2577,7 +2608,7 @@ gulp.task('prod-csp-compileHtml', gulp.series('prod-global-create-src-template',
 
 gulp.task('prod-csp-allFormsCreate', gulp.series('prod-csp-clean', 'prod-csp-compileHtml', function () {
 
-    return  pipes.deleteResourcesNonMinFiles(paths.buildProdCsp);
+    return pipes.deleteResourcesNonMinFiles(paths.buildProdCsp);
 
 }));
 
@@ -2878,8 +2909,8 @@ gulp.task('prod-build-allForms', gulp.series(
     'prod-csp-allFormsCreate',
     'prod-transaction-allFormsCreate',
     'prod-dossier-allFormsCreate',
-    'prod-drugProduct-allFormsCreate', function(done) {
+    'prod-drugProduct-allFormsCreate', function (done) {
         done();
-}));
+    }));
 
 /******END DRUG-PRODUCT PROD SCRIPTS******/

@@ -61,7 +61,7 @@
         </div>
         <div class="row">
             <div class="col-xs-2 form-group">
-                <div>
+                <div ng-if="infoCtrl.showAmendButton()">
                     <button class="btn btn-default form-control" name="amendSub" id="amendSub"
                             ng-click="infoCtrl.setAmendState()" ng-disabled="infoCtrl.setAsIncomplete">
                         {{::'AMEND_ENROL'|translate}}
@@ -74,7 +74,11 @@
                     <span>{{::'AMEND_MSG'|translate}}</span>
                 </div>
             </div>
-
+            <div ng-show="infoCtrl.isAmend" class="col-xs-12 form-group">
+                <label for="{{::infoCtrl.reasonAmend}}">{{::'REASON_AMEND'|translate}}</label>
+                <input type="text" class="form-control full-width" id="{{::infoCtrl.reasonAmend}}"
+                       maxlength="200" ng-model="infoCtrl.infoModel.reasonAmend"/>
+            </div>
         </div>
     </div>
 </ng-form>

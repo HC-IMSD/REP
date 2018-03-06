@@ -35,7 +35,8 @@
 	<hpfb:element name="contact_id" type="hpfb:string"/>
 	<hpfb:element name="selected_products" type="hpfb:string"/>
 	<hpfb:element name="dossier_id" type="char_7_content" />
-	<hpfb:element name="importer_products" type="importer_record_content" />
+	<hpfb:element name="reason_amend" type="hpfb:string"/>
+	<hpfb:element name="importer_id" type="char_0_6_content"/>
 	
 
 	<hpfb:complexType name="company_enrol_content" >
@@ -47,6 +48,7 @@
 		<hpfb:element ref="application_type"/>
 		<hpfb:element ref="software_version"/>
 		<hpfb:element ref="company_id"/>
+		<hpfb:element ref="reason_amend"/>
 		<hpfb:element ref="address_record" minOccurs="1" maxOccurs="4"/>
 		<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="6"/>
 		</hpfb:sequence>
@@ -75,17 +77,10 @@
 			<hpfb:element ref="importer"/>
 			<hpfb:element ref="company_name"/>
 			<hpfb:element ref="company_address_details"/>
-			<hpfb:element ref="importer_products" minOccurs="0" maxOccurs="1"/>
-			
+			<hpfb:element ref="importer_id"/>
 		</hpfb:all>
 		</hpfb:complexType>	
 
-		<hpfb:complexType name="importer_record_content">
-		<hpfb:sequence>
-			<hpfb:element ref="selected_products"/>
-			<hpfb:element ref="dossier_id" minOccurs="0" maxOccurs="unbounded"/>
-		</hpfb:sequence>
-		</hpfb:complexType>	
 </hpfb:schema>
 
 

@@ -3,5 +3,6 @@
   "ENROL_VERSION": "Enrolment Version",
   "DATE_SAVED": "Date Last Saved",
   "AMEND_ENROL":  "Amend Enrolment",
-  "AMEND_MSG":"Edit records to be amended below."
+  "AMEND_MSG":"Edit records to be amended below.",
+  "REASON_AMEND":"Reason for amendment"
 }

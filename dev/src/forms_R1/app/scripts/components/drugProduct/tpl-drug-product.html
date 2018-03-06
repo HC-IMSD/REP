@@ -27,7 +27,7 @@
                                   root-elem="{{::drugProdCtrl.rootTag}}"></hpfb-file-select>
             </div>
         </section>
-        <section class="panel panel-primary mrgn-tp-lg">
+        <!-- section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
                     <button title="{{::'HELP_DOSSIER'|translate}}" class="btn-xs rep-help-button"
@@ -37,23 +37,32 @@
                 </div>
                 <h2 class="panel-title">{{::'INFO_DRUGPROD'|translate}}</h2>
             </header>
-            <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[1]"
-                     class="alert-info" close="drugProdCtrl.closeAlert(1)">
-                    <section aria-live="assertive">
-                        <div ng-if="!drugProdCtrl.isFrench()"
-                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-en.html'">
-                        </div>
-                        <div ng-if="drugProdCtrl.isFrench()"
-                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-fr.html'">
-                        </div>
-                    </section>
+        </section -->
+        <section class="panel panel-primary mrgn-tp-lg">
+            <header class="panel-heading clearfix">
+                <div class="btn-group pull-right">
+                    <button title="{{::'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
+                            id="drugProduct-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUG_PRODUCT'|translate}}"</span>
+                    </button>
                 </div>
-                <div>
-              <!--      <cmp-application-info record="drugProdCtrl.model" user-type="drugProdCtrl.userType"
-                                          set-type="drugProdCtrl.setApplicationType(type)"
-                                          configure-id-field="drugProdCtrl.configField"
-                                          is-incomplete="drugProdCtrl.isIncomplete"></cmp-application-info>-->
+                <h2 class="panel-title">{{::'DRUG_PRODUCT'|translate}}</h2>
+            </header>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[4]"
+                             class="alert-info" close="drugProdCtrl.closeAlert(4)">
+                            <section aria-live="assertive">
+                                <div ng-if="!drugProdCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-en.html'">
+                                </div>
+                                <div ng-if="drugProdCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-fr.html'">
+                                </div>
+                            </section>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <cmp-error-summary form-ref="drugProdCtrl.drugProdForm" select-tab="drugProdCtrl.selectTab(index)"
@@ -96,38 +105,25 @@
                         </label>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="panel panel-primary mrgn-tp-lg">
-            <header class="panel-heading clearfix">
-                <div class="btn-group pull-right">
-                    <button title="{{::'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
-                            id="drugProduct-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUG_PRODUCT'|translate}}"</span>
-                    </button>
-                </div>
-                <h2 class="panel-title">{{::'DRUG_PRODUCT'|translate}}</h2>
-            </header>
-            <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[4]"
-                             class="alert-info" close="drugProdCtrl.closeAlert(4)">
-                            <section aria-live="assertive">
-                                <div ng-if="!drugProdCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-en.html'">
-                                </div>
-                                <div ng-if="drugProdCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-fr.html'">
-                                </div>
-                            </section>
-                        </div>
+                    <div class="col-xs-4 form-group">
+                        <label>
+                            <span class="field-name">C.&nbsp;{{::'IMPORTER_COMPANY_ID_IF' |translate}}</span>
+                            <input type="text" class="form-control full-width"
+                                   ng-model="drugProdCtrl.model.importerID"/>
+                        </label>
+                    </div>
+                    <div class="col-xs-4 form-group">
+                        <label>
+                            <span class="field-name">D.&nbsp;{{::'IMPORTER_COMPANY_NAME_IF' |translate}}</span>
+                            <input type="text" class="form-control full-width"  ng-model="drugProdCtrl.model.importerName"/>
+                        </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
-                            <span class="field-name">C.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <span class="field-name">E.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
                                     ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
@@ -138,51 +134,73 @@
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
-                      <!--  <cmp-drug-use list-items="drugProdCtrl.model.drugProduct.drugUseList"
-                                      show-list-errors="drugProdCtrl.showErrors()"
-                                      parent-dirty="drugProdCtrl.drugProdForm.$dirty"></cmp-drug-use>-->
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.scheduleId].$invalid}">
-                        <label for="{{::drugProdCtrl.scheduleId}}" class="required">
-                            <span class="field-name">D.&nbsp;{{::'SCHEDULE'|translate}}</span>
-                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <select name="{{::drugProdCtrl.scheduleId}}" class="form-control"
-                                    ng-model="drugProdCtrl.model.drugProduct.schedule" id="{{::drugProdCtrl.scheduleId}}"
-                                    ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.scheduleList track by use.id"
-                                    required>
-                            </select>
-                            <cmp-error-message field-name="drugProdCtrl.scheduleId"
-                                               form-ref="drugProdCtrl.drugProdForm"
-                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.scheduleId])"
-                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.prescriptionStatusId].$invalid}">
-                        <label for="{{::drugProdCtrl.prescriptionStatusId}}" class="required">
-                            <span class="field-name">E.&nbsp;{{::'PRESCRIPTION_STATUS'|translate}}</span>
-                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <select name="{{::drugProdCtrl.prescriptionStatusId}}" class="form-control"
-                                    ng-model="drugProdCtrl.model.drugProduct.prescriptionStatus" id="{{::drugProdCtrl.prescriptionStatusId}}"
-                                    ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.prescStatusList track by use.id"
-                                    required>
-                            </select>
-                            <cmp-error-message field-name="drugProdCtrl.prescriptionStatusId"
-                                               form-ref="drugProdCtrl.drugProdForm"
-                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.prescriptionStatusId])"
-                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                    <div class="col-xs-12 form-group">
+                        <label>
+                            <span class="field-name">F.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 checkbox">
+                        <label for="{{::drugProdCtrl.scheduleCId}}">
+                            <input type="checkbox" name="{{::drugProdCtrl.scheduleCId}}"
+                                   id="{{::drugProdCtrl.scheduleCId}}"
+                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
+                            {{::'SCHEDULE_C'|translate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 checkbox">
+                        <label for="{{::drugProdCtrl.scheduleDId}}">
+                            <input type="checkbox" name="{{::drugProdCtrl.scheduleDId}}"
+                                   id="{{::drugProdCtrl.scheduleDId}}"
+                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
+                            {{::'SCHEDULE_D'|translate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 checkbox">
+                        <label for="{{::drugProdCtrl.scheduleFId}}">
+                            <input type="checkbox" name="{{::drugProdCtrl.scheduleFId}}"
+                                   id="{{::drugProdCtrl.scheduleFId}}"
+                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleF"/>
+                            {{::'SCHEDULE_F'|translate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 checkbox">
+                        <label for="{{::drugProdCtrl.regulatedCDSAId}}">
+                            <input type="checkbox" name="{{::drugProdCtrl.regulatedCDSAId}}"
+                                   id="{{::drugProdCtrl.regulatedCDSAId}}"
+                                   ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
+                            {{::'REGULATED_CDSA'|translate}}
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 checkbox">
+                        <label for="{{::drugProdCtrl.prescriptionDrugId}}">
+                            <input type="checkbox" name="{{::drugProdCtrl.prescriptionDrugId}}"
+                                   id="{{::drugProdCtrl.prescriptionDrugId}}"
+                                   ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrug"/>
+                            {{::'PRESCRIPTION_DRUG'|translate}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 checkbox">
                         <label for="is-schedule-case">
                             <input type="checkbox" name="isScheduleA"
                                    ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-case">
-                            <b>F.</b> {{::'ISSCHEDA'|translate}}
+                            {{::'NON_PRESC_SCHEDULE_A'|translate}}
                         </label>
                     </div>
                 </div>
@@ -220,6 +238,31 @@
                         </details>
                     </section>
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12"
+                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
+                        <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
+                            <span class="field-name">G. {{::'PROP_INDICATION'|translate}}</span>
+                            <strong class="required">{{::'REQUIRED' |translate}}</strong>
+                            <cmp-error-message field-name="drugProdCtrl.propIndicationId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                        <textarea id="{{::drugProdCtrl.propIndicationId}}" data-ng-model="drugProdCtrl.model.propIndication" maxlength="1024" rows="3"
+                                  ng-model-options="{ debounce: $inherit}"
+                                  class="form-control full-width" name="{{::drugProdCtrl.propIndicationId}}" required></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-4 form-group">
+                        <label for="is-schedule-case">
+                            <span class="field-name">H. {{::'FORMULATION'|translate}}</span>
+                        </label>
+                    </div>
+                </div>
                 <div>
                     <cmp-tabs formulation-list="drugProdCtrl.model.drugProduct.formulations"
                               record-changed="drugProdCtrl.recordsChanged()" service="drugProdCtrl.drugProductService"
@@ -229,41 +272,6 @@
                 </div>
             </div>
         </section>
-     <!--   <div>
-            <section class="panel panel-primary mrgn-tp-lg">
-                <header class="panel-heading clearfix">
-                    <div class="btn-group pull-right">
-                        <button title="{{::'HELP_REP_CONTACT'|translate}}" class="btn-xs rep-help-button"
-                                id="repContact-instructions-toggle" ng-click="drugProdCtrl.addInstruct(5)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_REP_CONTACT'|translate}}"</span>
-                        </button>
-                    </div>
-                    <h2 class="panel-title">{{::'REP_CONTACT_INFO'|translate}}</h2>
-                </header>
-                <div class="panel-body">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[5]"
-                         class="alert-info" close="drugProdCtrl.closeAlert(5)">
-                        <section aria-live="assertive">
-                            <div ng-if="!drugProdCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-en.html'">
-                            </div>
-                            <div ng-if="drugProdCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-fr.html'">
-                            </div>
-                        </section>
-                    </div>
-
-                    <div class="container-fluid">
-                        <cmp-rep-contact-list contacts="drugProdCtrl.model.contactList" on-update=""
-                                              parent-dirty="drugProdCtrl.drugProdForm.$dirty"
-                                              show-error-summary="drugProdCtrl.showSummary"
-                                              show-list-errors="drugProdCtrl.showErrors()" is-amend="drugProdCtrl.formAmend">
-
-                        </cmp-rep-contact-list>
-                    </div>
-                </div>
-            </section>
-        </div>-->
         <div class="row">
             <div class="form-group col-md-3">
                 <button class="btn btn-default btn-lg active" ng-click="drugProdCtrl.saveJson()"

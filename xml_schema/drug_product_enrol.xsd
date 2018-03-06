@@ -269,7 +269,6 @@
 	<hpfb:element name="temperature_min" type="temp_integer_content" />
 	<hpfb:element name="temperature_max" type="temp_integer_content" />
 	<hpfb:element name="active_ingredient" type="active_group_content"/>
-	<hpfb:element name="nonmedicinal_ingredient" type="nmi_group_content"/>
 	<hpfb:element name="material_ingredient" type="material_group_content"/>
 	<hpfb:element name="strength" type="strength_content"/>
 	<hpfb:element name="operator">
@@ -469,7 +468,6 @@
 			<hpfb:element ref="container_group"/>
 			<hpfb:element ref="country_group"/>
 			<hpfb:element ref="active_ingredient" minOccurs="1" maxOccurs="unbounded"/>
-			<hpfb:element ref="nonmedicinal_ingredient" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="is_animal_human_material"/>
 			<hpfb:element ref="material_ingredient" minOccurs="0" maxOccurs="unbounded"/>
 		</hpfb:sequence>

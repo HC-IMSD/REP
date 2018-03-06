@@ -64,13 +64,12 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="checkbox">
+                <div  ng-show="!ar.isContact" class="checkbox">
                     <label for="chk-importer_{{::$id}}">
                         <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
                                ng-disabled="!ar.isEditable"
                                ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="chk-importer_{{::$id}}"/>
                         <span ng-if="!ar.isContact">{{::"IMPORTER"|translate}}</span>
-                        <span ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
                         <strong id="importer-rolec-error" class="error" ng-if="ar.roleForm.importer.$invalid">
                  <span class="label label-danger" ng-messages="ar.roleForm.importer.$error">
                             <span ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
