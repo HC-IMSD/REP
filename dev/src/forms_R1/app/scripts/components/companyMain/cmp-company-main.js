@@ -122,7 +122,10 @@
          */
         vm.setAmend = function () {
 
-            vm.formAmendType = (vm.company.applicationType === AMEND_TYPE)
+            vm.formAmendType = (vm.company.applicationType === AMEND_TYPE);
+            if(vm.company.applicationType === APPROVED_TYPE && vm.userType === EXTERNAL_TYPE){
+                vm.company.reasonAmend="";
+            }
         };
 
         /**
@@ -186,7 +189,6 @@
                 if(!vm.companyEnrolForm.$pristine) {
                     vm.company.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.company.enrolmentVersion);
                     vm.company.applicationType = ApplicationInfoService.prototype.getApprovedType();
-                    updateModelOnApproval();
                 }
             } else {
                 vm.company.enrolmentVersion = vm.applicationInfoService.incrementMinorVersion(vm.company.enrolmentVersion)
@@ -289,16 +291,7 @@
          * @ngdoc method when a form gets approved
          * remove any amendment checkboxes
          */
-        function updateModelOnApproval() {
-            //reset any amend selections
-            for (var i = 0; i < vm.company.addressList.length; i++) {
-                vm.company.addressList[i].amendRecord = false;
-            }
-            for (var j = 0; j < vm.company.contactList.length; j++) {
-                vm.company.contactList[j].amendRecord = false;
-            }
-            vm.company.reasonAmend="";
-        }
+
 
         /**
          * Closes the instruction alerts

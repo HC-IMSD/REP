@@ -60,7 +60,11 @@
                 vm.infoModel = changes.record.currentValue;
                 if(vm.infoModel.applicationType===AMEND_TYPE) {
                     vm.isAmend = true;
-                }else{
+                }
+                else if(vm.infoModel.applicationType===APPROVED_TYPE && vm.formType !== EXTERNAL_TYPE){
+                    vm.isAmend = true;
+                }
+                else{
                     vm.isAmend = false;
                 }
             }
