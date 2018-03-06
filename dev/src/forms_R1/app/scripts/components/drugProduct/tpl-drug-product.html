@@ -145,50 +145,50 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="{{::drugProdCtrl.scheduleCId}}">
-                            <input type="checkbox" name="{{::drugProdCtrl.scheduleCId}}"
-                                   id="{{::drugProdCtrl.scheduleCId}}"
+                    <div class="col-xs-12 checkbox checkbox-pi">
+                        <label for="is-schedule-c">
+                            <input type="checkbox" name="isScheduleC"
+                                   id="is-schedule-c"
                                    ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
                             {{::'SCHEDULE_C'|translate}}
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="{{::drugProdCtrl.scheduleDId}}">
-                            <input type="checkbox" name="{{::drugProdCtrl.scheduleDId}}"
-                                   id="{{::drugProdCtrl.scheduleDId}}"
+                    <div class="col-xs-12 checkbox checkbox-pi">
+                        <label for="is-schedule-d">
+                            <input type="checkbox" name="isScheduleD"
+                                   id="is-schedule-d"
                                    ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
                             {{::'SCHEDULE_D'|translate}}
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="{{::drugProdCtrl.scheduleFId}}">
-                            <input type="checkbox" name="{{::drugProdCtrl.scheduleFId}}"
-                                   id="{{::drugProdCtrl.scheduleFId}}"
+                    <div class="col-xs-12 checkbox checkbox-pi">
+                        <label for="is-schedule-f">
+                            <input type="checkbox" name="isScheduleF"
+                                   id="is-schedule-f"
                                    ng-model="drugProdCtrl.model.drugProduct.isScheduleF"/>
                             {{::'SCHEDULE_F'|translate}}
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="{{::drugProdCtrl.regulatedCDSAId}}">
-                            <input type="checkbox" name="{{::drugProdCtrl.regulatedCDSAId}}"
-                                   id="{{::drugProdCtrl.regulatedCDSAId}}"
+                    <div class="col-xs-12 checkbox checkbox-pi">
+                        <label for="is-regulated-cdsa">
+                            <input type="checkbox" name="isRegulatedCDSA"
+                                   id="is-regulated-cdsa"
                                    ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
                             {{::'REGULATED_CDSA'|translate}}
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="{{::drugProdCtrl.prescriptionDrugId}}">
-                            <input type="checkbox" name="{{::drugProdCtrl.prescriptionDrugId}}"
-                                   id="{{::drugProdCtrl.prescriptionDrugId}}"
+                    <div class="col-xs-12 checkbox checkbox-pi">
+                        <label for="is-prescription-drug">
+                            <input type="checkbox" name="isPrescriptionDrug"
+                                   id="is-prescription-drug"
                                    ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrug"/>
                             {{::'PRESCRIPTION_DRUG'|translate}}
                         </label>
@@ -196,10 +196,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="is-schedule-case">
+                    <div class="col-xs-12 checkbox checkbox-pi">
+                        <label for="is-schedule-a">
                             <input type="checkbox" name="isScheduleA"
-                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-case">
+                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a">
                             {{::'NON_PRESC_SCHEDULE_A'|translate}}
                         </label>
                     </div>
@@ -250,15 +250,16 @@
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
-                        <textarea id="{{::drugProdCtrl.propIndicationId}}" data-ng-model="drugProdCtrl.model.propIndication" maxlength="1024" rows="3"
+                        <textarea id="{{::drugProdCtrl.propIndicationId}}"
+                                  data-ng-model="drugProdCtrl.model.drugProduct.propIndication" maxlength="1024" rows="3"
                                   ng-model-options="{ debounce: $inherit}"
-                                  class="form-control full-width" name="{{::drugProdCtrl.propIndicationId}}" required></textarea>
+                                  class="form-control full-width" name="{{::drugProdCtrl.propIndicationId}}" required/>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-4 form-group">
-                        <label for="is-schedule-case">
+                        <label>
                             <span class="field-name">H. {{::'FORMULATION'|translate}}</span>
                         </label>
                     </div>
