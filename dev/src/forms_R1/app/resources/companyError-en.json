@@ -7,5 +7,6 @@
   "ADDRESSREC.ADDRESSRECFORM":"in the Address details",
   "COMPANY_FORM":"Company Enrolment Form",
   "ROLEMISSING": "Record Role",
+  "IMPORTERIDVALID": "Please input importer ID for each importer"
 
 }

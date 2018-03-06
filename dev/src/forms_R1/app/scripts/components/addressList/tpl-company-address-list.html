@@ -9,8 +9,10 @@
         </div>
         <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}" ng-show="false"
                ng-model="addressListCtrl.allRolesSelected" required/>
+
+        <input type="text" id="importerIdValid_{{::$id}}" name="importerIdValid_{{::$id}}"  ng-model="addressListCtrl.importerhasID" hidden ng-required="addressListCtrl.isInternal"/>
        <!-- <label>
-            <strong id=" addressNum-role-error" class="error" ng-show="addressListCtrl.showError()">
+            <strong id=" addressNum-role-error" asdadsv class="error" ng-show="addressListCtrl.showError()">
                         <span class="label label-danger"
                               ng-messages="addressListCtrl.addressListForm.addressRolesValid_{{::$id}}.$error">
                             <span ng-message="required">{{"MSG_ERR_ADDRESSSROLE"|translate}}</span>

@@ -81,7 +81,12 @@
             "addressRolesValid": {
                 "type": "element",
                 "target": "addAddressBtn"
+            },
+            "importerIdValid": {
+                "type": "element",
+                "target": "addAddressBtn"
             }
+
         };
 
         vm.initUser = function (id) {
@@ -102,6 +107,7 @@
         vm.$onChanges = function (changes) {
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
+                console.log("user"+vm.userType)
                 if (vm.userType == INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
