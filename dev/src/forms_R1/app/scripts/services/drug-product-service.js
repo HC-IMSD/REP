@@ -433,8 +433,8 @@
                 } else {
                     obj.nMedIngList = [];
                 }*/
-                if (item.active_ingredient) {
-                    obj.activeIngList = getActiveIngList(item.active_ingredient);
+                if (item.formulation_ingredient) {
+                    obj.activeIngList = getActiveIngList(item.formulation_ingredient);
                 } else {
                     obj.activeIngList = [];
                 }
@@ -520,7 +520,7 @@
 
                 if (item.units_presentation) {
                     var upValue = item.units_presentation.__text;
-                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: upValue});
+                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
                 }
 
                 if (item.units_measure) {
@@ -909,7 +909,7 @@
                     obj.country_group.country_manufacturer = formulationCountryListToOutput(item.countryList);
                 }
                 if (item.activeIngList && item.activeIngList.length > 0) {
-                    obj.active_ingredient = activeListToOutput(item.activeIngList);
+                    obj.formulation_ingredient = activeListToOutput(item.activeIngList);
                 }
                 /*if (item.nMedIngList && item.nMedIngList.length > 0) {
                     obj.nonmedicinal_ingredient = nonMedIngListToOutput(item.nMedIngList);
