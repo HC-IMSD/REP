@@ -107,7 +107,6 @@
         vm.$onChanges = function (changes) {
             if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
-                console.log("user"+vm.userType)
                 if (vm.userType == INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
                 } else {
@@ -148,7 +147,7 @@
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
-                vm.showErrorSummary=true;
+                vm.showErrorSummary=false;
                 vm.companyEnrolForm.$setPristine();
                 vm.savePressed=false;
             }

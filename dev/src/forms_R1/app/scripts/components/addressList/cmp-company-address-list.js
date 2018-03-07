@@ -85,7 +85,6 @@
         };
 
         vm.$onChanges = function (changes) {
-            console.log(changes);
             if (changes.addresses && changes.addresses.currentValue) {
                 vm.addressList = changes.addresses.currentValue;
                 vm.allRolesSelected = vm.isAllRolesSelected();
@@ -106,14 +105,11 @@
             if (changes.userType) {
 
                 vm.isIn = changes.userType.currentValue;
-                console.log("in user type "+vm.isIn);
-                console.log("in conste type "+INTERNAL_TYPE);
                 if (vm.isIn === INTERNAL_TYPE) {
-                    console.log("internal");
                     vm.isInternal = true;
                 }
                 else {
-                    console.log("external");
+
                     vm.isInternal = false;
                 }
             }
@@ -242,14 +238,14 @@
                         var attrName = key;
                         var attrValue = obj[key];
                         if (attrValue) {
-                            if (attrName === "importer") importerSelected = true;
+                           // if (attrName === "importer") importerSelected = true;
                             if (attrName === "manufacturer") manuSelected = true;
                             if (attrName === "mailing") mailSelected = true;
                             if (attrName === "billing") billSelected = true;
                         }
                     }
                 }
-                if (importerSelected && manuSelected && mailSelected && billSelected) {
+                if ( manuSelected && mailSelected && billSelected) {
                     return true;
                 } else {
                     return false;
@@ -262,7 +258,6 @@
             for (var i = 0; i < vm.addressList.length; i++) {
                 if (vm.addressList[i].addressRole.importer) {
                     if (!vm.addressList[i].importerID) {
-                        console.log("is error");
                         vm.importerhasID="";
                         return "";
                     }
@@ -283,7 +278,6 @@
                         }
                     }
                 }*/
-            console.log("no error");
             vm.importerhasID=true;
           return true;
         }
