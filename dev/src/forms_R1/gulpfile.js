@@ -358,7 +358,6 @@ var activityComponentFolders = [
     componentFolders.fileIOComponentAndDep,
     componentFolders.repContactList,
     componentFolders.repContactRecord,
-    componentFolders.adminSubmissionPath,
     componentFolders.alertComp,
     componentFolders.errorMsg,
     componentFolders.errorSummary
