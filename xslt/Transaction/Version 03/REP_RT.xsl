@@ -12,7 +12,7 @@
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 				<script type="text/javascript">
 					function addSelectBox(){
-						$(".container span").each(function(item){
+						$("span").each(function(item){
 							$(this).mouseenter(function(){$(this).css("border", "1px solid black")}).mouseleave(function(){$(this).css("border", "0px")});
 						});
 					}
@@ -59,25 +59,25 @@
 								<div class="panel-body" >
 									<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
 										<TR>
-											<TD style="text-align: center;" width="10%"> <span style="font-weight:bold;"> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SEQUENCE_NUM'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </span> </TD>
-											<TD style="text-align: center;" width="10%"> <span style="font-weight:bold;"> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DATE_SUBMITTED'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </span> </TD>
-											<TD style="text-align: center;" width="10%"> <span style="font-weight:bold;"> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTROL_NUM'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </span> </TD>
-											<TD style="text-align: center;" width="30%"> <span style="font-weight:bold;"> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'REG_ACTIVITY'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </span> </TD>
-											<TD style="text-align: center;" width="40%"> <span style="font-weight:bold;"> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SEQUENCE_DESCRIPT'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </span> </TD>
+											<TD style="text-align: center;" width="10%"> <label> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SEQUENCE_NUM'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </label> </TD>
+											<TD style="text-align: center;" width="10%"> <label> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DATE_SUBMITTED'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </label> </TD>
+											<TD style="text-align: center;" width="10%"> <label> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTROL_NUM'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </label> </TD>
+											<TD style="text-align: center;" width="30%"> <label> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'REG_ACTIVITY'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </label> </TD>
+											<TD style="text-align: center;" width="40%"> <label> <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SEQUENCE_DESCRIPT'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </label> </TD>
 										</TR>
 										
 										<xsl:for-each select="ectd/lifecycle_record">
 											<TR>
-											<TD style="text-align: center;"> <xsl:apply-templates select="sequence_number" /> </TD>
-											<TD style="text-align: center;"> <xsl:apply-templates select="date_submitted" /> </TD>
-											<TD > <xsl:apply-templates select="control_number" /> </TD>
-											<TD> 
+											<TD style="text-align: center;"><span> <xsl:apply-templates select="sequence_number" /></span> </TD>
+											<TD style="text-align: center;"><span> <xsl:apply-templates select="date_submitted" /></span> </TD>
+											<TD ><span> <xsl:apply-templates select="control_number" /></span> </TD>
+											<TD> <span>
 												<xsl:call-template name="hp-label">
 													<xsl:with-param name="code" select="sequence_activity_type"/>
 													<xsl:with-param name="language" select="$language"/>
-												</xsl:call-template>
+												</xsl:call-template></span>
 											</TD>
-											<TD> <xsl:apply-templates select="sequence_concat" /> </TD>
+											<TD><span><xsl:apply-templates select="sequence_concat" /></span> </TD>
 											</TR>
 										</xsl:for-each>
 									</TABLE>
@@ -510,7 +510,7 @@
 							<div class="col-xs-12">
 								<label class="col-xs-2"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PHONENUMBER'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> </label>
 								<span class="transaction_enrol"> <xsl:apply-templates select="regulatory_activity_contact/phone_num" /> </span>
-								<label>&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PHONE_EXT'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> &#160;</label>
+								<label>&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'EXTENSION'"/><xsl:with-param name="language" select="$language"/></xsl:call-template> &#160;</label>
 								<span class="transaction_enrol"> <xsl:apply-templates select="regulatory_activity_contact/phone_ext" /> </span>
 							</div>
 							<div class="col-xs-12">
