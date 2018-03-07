@@ -41,10 +41,11 @@
         vm.noActiveValues=""; //used for error handling Business Rule: must be at least one active
 
         vm.colNames = [
-            {label: "MEDICINAL_INGREDIENT", binding: "ingLabel", width: "65"},
+            {label: "ROLE", binding: "ingRole", width: "20"},
+            {label: "INGREDIENT", binding: "ingLabel", width: "55"},
             {label: "IN_LIST", binding: "autoIngred", width: "7"},
-            {label: "CAS_NUM", "binding": "cas", width: "13"},
-            {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "15"}
+            {label: "CAS_NUM", "binding": "cas", width: "12"},
+            {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "7"}
         ];
         vm.ingList = [];
         vm.$onInit = function () {

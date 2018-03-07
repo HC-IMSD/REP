@@ -23,33 +23,19 @@
 	<hpfb:element name="dossier_type" type="form_types_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="related_dossier_id" type="char_0_256_content"/>
+	<hpfb:element name="importer_id" type="char_1_6_content"/>
+	<hpfb:element name="importer_name" type="char_0_256_content"/>
+	<hpfb:element name="is_sched_c" type="required_yes_no_content"/>
+	<hpfb:element name="is_sched_d" type="required_yes_no_content"/>
+	<hpfb:element name="is_sched_f" type="required_yes_no_content"/>
+	<hpfb:element name="is_regulated_cdsa" type="required_yes_no_content"/>
+	<hpfb:element name="is_prescription_drug" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
+	<hpfb:element name="proposed_indication" type="char_0_256_content"/>
 	<!-- Drug Product element definitions-->
 
 	<hpfb:element name="drug_use">
 	<hpfb:complexType>
-			<hpfb:simpleContent>
-				<hpfb:extension base="hpfb:string">
-					<hpfb:attribute name="label_en" type="hpfb:string"/>
-					<hpfb:attribute name="label_fr" type="hpfb:string"/>
-				</hpfb:extension>
-			</hpfb:simpleContent>
-		</hpfb:complexType>
-	</hpfb:element>
-
-	<hpfb:element name="schedule">
-		<hpfb:complexType>
-			<hpfb:simpleContent>
-				<hpfb:extension base="hpfb:string">
-					<hpfb:attribute name="label_en" type="hpfb:string"/>
-					<hpfb:attribute name="label_fr" type="hpfb:string"/>
-				</hpfb:extension>
-			</hpfb:simpleContent>
-		</hpfb:complexType>
-	</hpfb:element>
-
-	<hpfb:element name="prescription_status">
-		<hpfb:complexType>
 			<hpfb:simpleContent>
 				<hpfb:extension base="hpfb:string">
 					<hpfb:attribute name="label_en" type="hpfb:string"/>
@@ -95,6 +81,7 @@
 	<!-- ingredients-->
 	<hpfb:element name="appendix4_group" type="appendix4_content"/>
 	<!--<hpfb:element name="drug_ingredient" type="ingredient_content"/>-->
+	<hpfb:element name="ingredient_role" type="char_1_100_content"/>
 	<hpfb:element name="ingredient_id" type="char_0_40_content" nillable="true"/>
 	<hpfb:element name="ingredient_name" type="char_1_100_content"/>
 	<hpfb:element name="cas_number" type="cas_content" nillable="true"/>
@@ -348,6 +335,8 @@
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="importer_id"/>
+			<hpfb:element ref="importer_name"/>
 			<hpfb:element ref="related_dossier_id"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
@@ -356,9 +345,13 @@
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="dossier_type"/>
 			<hpfb:element ref="drug_use"/>
-			<hpfb:element ref="schedule"/>
-			<hpfb:element ref="prescription_status"/>
+			<hpfb:element ref="is_sched_c"/>
+			<hpfb:element ref="is_sched_d"/>
+			<hpfb:element ref="is_sched_f"/>
+			<hpfb:element ref="is_regulated_cdsa"/>
+			<hpfb:element ref="is_prescription_drug"/>
 			<hpfb:element ref="is_sched_a"/>
+			<hpfb:element ref="proposed_indication"/>
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="formulation_group"/>
@@ -512,6 +505,7 @@
 	</hpfb:complexType>
 	<hpfb:complexType name="active_group_content">
 		<hpfb:sequence>
+			<hpfb:element ref="ingredient_role"/>
 			<hpfb:element ref="ingredient_id"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="cas_number"/>

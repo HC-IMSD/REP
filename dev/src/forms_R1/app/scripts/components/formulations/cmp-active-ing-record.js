@@ -44,13 +44,14 @@
     function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES,NO) {
 
         var vm = this;
+        vm.ingRoleList = DossierLists.getIngRoleList();
         vm.nanoMaterialList = DossierLists.getNanoMaterials();
         vm.yesNoList = DossierLists.getYesNoList();
         vm.activeList = DossierLists.getActiveList();
         vm.UnitsList=DossierLists.getUnitsList();
         vm.strengthList = DossierLists.getStrengthList();
         vm.perList = DossierLists.getPerList();
-        vm.presentationList = DossierLists.getDosageFormList();
+        vm.presentationList = DossierLists.getUnitsPresentationList();
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.numberMinError = [
@@ -66,6 +67,7 @@
 
         vm.ingModel = {
             autoIngred: NO,
+            ingRole: "",
             ingId: "",
             ingLabel: "",
             cas: "",
@@ -167,6 +169,20 @@
                 vm.ingModel.ingId = item.id;
                 vm.ingModel.autoIngred = YES;
             }
+        };
+
+        /**
+         * Fires on selection OR when the value has changed
+         */
+        vm.isRoleChosen = function () {
+            return (vm.ingModel.ingRole === 'MED' || vm.ingModel.ingRole === 'NONMED');
+        };
+
+        /**
+         * Fires on selection OR when the value has changed
+         */
+        vm.isMedIng = function () {
+            return (vm.ingModel.ingRole === 'MED');
         };
 
         /**
@@ -334,7 +350,9 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.activeFormId="activeRecordForm" + scopeId;
+            vm.ingredRoleId="ing_role"+scopeId;
             vm.ingredName="ing_name"+scopeId;
+            vm.nIngredName="n_ing_name"+scopeId;
             vm.casId="cas"+scopeId;
             vm.standardId="standard"+scopeId;
             vm.strengthId="strength"+scopeId;

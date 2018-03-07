@@ -124,16 +124,12 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
         vm.drugUseList=[];
-        vm.scheduleList=[];
-        vm.prescStatusList=[];
         vm.extraAppendixModel="none";
         vm.missingAppendixModel="none";
 
         vm.$onInit = function () {
             vm.showSummary = false;
             vm.drugUseList = DossierLists.getDrugUseList();
-            vm.scheduleList = DossierLists.getScheduleList();
-            vm.prescStatusList = DossierLists.getPrescStatusList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -229,7 +225,7 @@
 
         vm.disableJSONSave=function() {
 
-            return(vm.model.applicationType === APPROVED_TYPE&& vm.isExtern());
+            return(!vm.isExtern());
 
         };
 
@@ -336,7 +332,7 @@
             if (!vm.isExtern()) {
                 if(!vm.drugProdForm.$pristine) {
                     vm.model.enrolmentVersion = vm.applicationInfoService.incrementMajorVersion(vm.model.enrolmentVersion);
-                    vm.model.applicationType = ApplicationInfoService.prototype.getApprovedType();
+                    //vm.model.applicationType = ApplicationInfoService.prototype.getApprovedType();
                 }
                 // updateModelOnApproval(); //updates all the amend
             } else {
@@ -445,8 +441,7 @@
             vm.isRefId="is_cdn_ref"+ scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
             vm.drugUseId="drug_use"+scopeId;
-            vm.scheduleId="schedule"+scopeId;
-            vm.prescriptionStatusId="prescription_status"+scopeId;
+            vm.propIndicationId="prop_Indication"+scopeId;
         }
 
 

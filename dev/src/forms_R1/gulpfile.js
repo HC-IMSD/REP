@@ -504,7 +504,8 @@ var serviceFileNames = {
     cspLoadService: 'csp-load-service',
     cspDataLists: 'csp-data-lists',
     diffService: 'diff-service',
-    drugProductService: 'drug-product-service'
+    drugProductService: 'drug-product-service',
+    commonRepService:'rep-util-common'
 };
 
 //Activity Form Service File names
@@ -590,7 +591,9 @@ var cspServiceFileNames =
 
 var difServiceFileNames =
     [
-        serviceFileNames.diffService
+        serviceFileNames.diffService,
+        serviceFileNames.commonRepService,
+        serviceFileNames.hpfbConstants
 
     ];
 
