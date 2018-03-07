@@ -41,6 +41,8 @@
             _default: {
                 dossierID: "",
                 companyID: "",
+                importerID: "",
+                importerName: "",
                 //relatedDossierID: "",
                 enrolmentVersion: "0.00",
                 dateSaved: "",
@@ -54,12 +56,16 @@
                 drugProduct: {
                     //thirdPartySigned: "",
                     drugUse: "",
-                    schedule: "",
-                    prescriptionStatus: "",
+                    isScheduleC: false,
+                    isScheduleD: false,
+                    isScheduleF: false,
+                    isRegulatedCDSA: false,
+                    isPrescriptionDrug: false,
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
                    // therapeutic: [],
                   //  canRefProducts: [],//grid
+                    propIndication: "",
                     formulations: [],//tab + grid +
                     appendixFourList: []/*{
                      ingredientList:[]
@@ -88,17 +94,11 @@
                 if(info.drug_use) {
                     drugUseValue = info.drug_use.__text;
                 }
-                var scheduleValue ="";
-                if(info.schedule) {
-                    scheduleValue = info.schedule.__text;
-                }
-                var prescrStatusValue ="";
-                if(info.prescription_status) {
-                    prescrStatusValue = info.prescription_status.__text;
-                }
                 var formModel = {
                     dossierID: info.dossier_id, //.substring(8,15),
                     companyID: info.company_id,
+                    importerID: info.importer_id,
+                    importerName: info.importer_name,
                    // relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
@@ -113,11 +113,15 @@
                        // thirdPartySigned: info.third_party_signed,
                        // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
-                        schedule: $filter('findListItemById')(DossierLists.getScheduleList(), {id: scheduleValue}),
-                        prescriptionStatus: $filter('findListItemById')(DossierLists.getPrescStatusList(), {id: prescrStatusValue}),
+                        isScheduleC: info.is_sched_c === 'Y',
+                        isScheduleD: info.is_sched_d === 'Y',
+                        isScheduleF: info.is_sched_f === 'Y',
+                        isRegulatedCDSA: info.is_regulated_cdsa === 'Y',
+                        isPrescriptionDrug: info.is_prescription_drug === 'Y',
                         isScheduleA: info.is_sched_a === 'Y',
                        // therapeutic: [],
                        // canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
+                        propIndication: info.proposed_indication,
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         appendixFourList: getAppendix4IngredientList(info.appendix4_group)
 
@@ -156,11 +160,12 @@
             //order is important!!! Must match schema
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
-           // baseModel.related_dossier_id = jsonObj.relatedDossierID;
+            baseModel.importer_id = jsonObj.importerID;
+            baseModel.importer_name = jsonObj.importerName;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
             baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "1.0.0"; //TODO: hard code or make a function, should be centrally available
+            baseModel.software_version = "1.1.0"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
             //baseModel.dossier_type = jsonObj.dossierType;
@@ -174,27 +179,15 @@
                 baseModel.drug_use="";
             }
 
-            if(jsonObj.drugProduct.schedule) {
-                baseModel.schedule = {
-                    _label_en: jsonObj.drugProduct.schedule.en,
-                    _label_fr: jsonObj.drugProduct.schedule.fr,
-                    __text: jsonObj.drugProduct.schedule.id
-                };
-            }else{
-                baseModel.schedule="";
-            }
-
-            if(jsonObj.drugProduct.prescriptionStatus) {
-                baseModel.prescription_status = {
-                    _label_en: jsonObj.drugProduct.prescriptionStatus.en,
-                    _label_fr: jsonObj.drugProduct.prescriptionStatus.fr,
-                    __text: jsonObj.drugProduct.prescriptionStatus.id
-                };
-            }else{
-                baseModel.prescription_status="";
-            }
             //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
+            baseModel.is_sched_c = jsonObj.drugProduct.isScheduleC === true ? 'Y' : 'N';
+            baseModel.is_sched_d = jsonObj.drugProduct.isScheduleD === true ? 'Y' : 'N';
+            baseModel.is_sched_f = jsonObj.drugProduct.isScheduleF === true ? 'Y' : 'N';
+            baseModel.is_regulated_cdsa = jsonObj.drugProduct.isRegulatedCDSA === true ? 'Y' : 'N';
+            baseModel.is_prescription_drug = jsonObj.drugProduct.isPrescriptionDrug === true ? 'Y' : 'N';
             baseModel.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
+
+            baseModel.proposed_indication = jsonObj.drugProduct.propIndication;
 
             if (jsonObj.drugProduct.isScheduleA) {
                 baseModel.schedule_a_group = scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
@@ -493,6 +486,7 @@
             angular.forEach(list, function (item) {
 
                 var obj = {
+                    "ingRole": item.ingredient_role,
                     "ingId": item.ingredient_id,
                     "ingLabel": item.ingredient_name,
                     "autoIngred": YES,
@@ -513,6 +507,7 @@
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
                 if (item.strength) {
                     var opValue = item.strength.operator.__text;
                     obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
@@ -940,6 +935,7 @@
             angular.forEach(activeList, function (item) {
 
                 var obj = {
+                    "ingredient_role": item.ingRole,
                     "ingredient_id": item.ingId,
                     "ingredient_name": item.ingLabel,
                     "cas_number": item.cas,

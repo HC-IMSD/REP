@@ -12,7 +12,7 @@
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 				<script type="text/javascript">
 					function addSelectBox(){
-						$(".container span").each(function(item){
+						$("span").each(function(item){
 							$(this).mouseenter(function(){$(this).css("border", "1px solid black")}).mouseleave(function(){$(this).css("border", "0px")});
 						});
 					}
@@ -64,10 +64,10 @@
 								</TR>
 								<xsl:for-each select="address_record">
 									<tr>
-									<td><xsl:value-of select="./company_name"/></td>
+									<td><span><xsl:value-of select="./company_name"/></span></td>
 									<td><xsl:call-template name="address"/></td>
-									<td><xsl:value-of select="./importer_id"/></td>
-									<td><xsl:call-template name="addressRoles"/></td>
+									<td><span><xsl:value-of select="./importer_id"/></span></td>
+									<td><span><xsl:call-template name="addressRoles"/></span></td>
 									</tr>
 								</xsl:for-each>
 							</TABLE>
@@ -88,9 +88,9 @@
 								<xsl:for-each select="contact_record">
 									<tr>
 <!--										<td><span class="fa fa-lg fa-fw fa-caret-right"></span></td>-->
-										<td><xsl:call-template name="representative"/></td>
-										<td><xsl:call-template name="contactBy"/></td>
-										<td><xsl:call-template name="contactRoles"/></td>
+										<td><span><xsl:call-template name="representative"/></span></td>
+										<td><span><xsl:call-template name="contactBy"/></span></td>
+										<td><span><xsl:call-template name="contactRoles"/></span></td>
 									</tr>
 								</xsl:for-each>
 							</TABLE>
@@ -191,8 +191,8 @@
 				</span>
 			</div>
 			<div class="address" style="white-space:nowrap;">
+				<span class="value"><xsl:value-of select="./company_address_details/city"/></span>, &#xA0;
 				<span class="value">
-					<xsl:value-of select="./company_address_details/city"/>, &#xA0;
 					<xsl:choose>
 					<xsl:when test="(./company_address_details/country = 'CAN') or (./company_address_details/country = 'USA')">
 						<xsl:call-template name="hp-label"><xsl:with-param name="code" select="./company_address_details/province_lov"/><xsl:with-param name="language" select="$language"/></xsl:call-template>
@@ -201,8 +201,8 @@
 						<xsl:value-of select="./company_address_details/province_lov"/>
 					</xsl:otherwise>
 					</xsl:choose>
-				</span>
-				<span class="value">&#xA0;
+				</span>&#xA0;
+				<span class="value">
 					<xsl:choose><xsl:when test="$language = 'fra'">
 						<xsl:value-of select="./company_address_details/country/@label_fr"/>
 					</xsl:when>
@@ -210,9 +210,9 @@
 						<xsl:value-of select="./company_address_details/country/@label_en"/>
 					</xsl:otherwise>
 					</xsl:choose>
-				</span>
+				</span>&#xA0;
 				<span class="value">
-					&#xA0;<xsl:value-of select="./company_address_details/postal_code"/>
+					<xsl:value-of select="./company_address_details/postal_code"/>
 				</span>
 			</div>
 		</div>
