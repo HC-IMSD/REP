@@ -109,14 +109,15 @@
                     <div class="col-xs-4 form-group">
                         <label>
                             <span class="field-name">C.&nbsp;{{::'IMPORTER_COMPANY_ID_IF' |translate}}</span>
-                            <input type="text" class="form-control full-width"
+                            <input type="text" class="form-control full-width" maxlength="6"
                                    ng-model="drugProdCtrl.model.importerID"/>
                         </label>
                     </div>
                     <div class="col-xs-4 form-group">
                         <label>
                             <span class="field-name">D.&nbsp;{{::'IMPORTER_COMPANY_NAME_IF' |translate}}</span>
-                            <input type="text" class="form-control full-width"  ng-model="drugProdCtrl.model.importerName"/>
+                            <input type="text" class="form-control full-width" maxlength="80"
+                                   ng-model="drugProdCtrl.model.importerName"/>
                         </label>
                     </div>
                 </div>
