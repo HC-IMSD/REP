@@ -2,6 +2,22 @@
  * Created by dkilty on 10/03/2017.
  */
 
+/**
+
+ Deep diff - decode of what the json issue
+
+ kind - indicates the kind of change; will be one of the following:
+ N - indicates a newly added property/element
+ D - indicates a property/element was deleted
+ E - indicates a property/element was edited
+ A - indicates a change occurred within an array
+ path - the property path (from the left-hand-side root)
+ lhs - the value on the left-hand-side of the comparison (undefined if kind === 'N')
+ rhs - the value on the right-hand-side of the comparison (undefined if kind === 'D')
+ index - when kind === 'A', indicates the array index where the change occurred
+ item - when kind === 'A', contains a nested change record indicating the change that occurred at the array index
+ */
+
 (function () {
     'use strict';
     angular
@@ -54,11 +70,23 @@
             return (resultList);
         }
 
+        /**
+         *
+         * @param node - the starting node to walk the path
+         * @param resultList- the array list to place the results
+         * @param exclusionList - values to exclude?
+         * @param currentNode -
+         * @private
+         */
         function _processNode(node, resultList, exclusionList, currentNode) {
 
             var _index = 0;
             var existingRecord = null;
             var searchList = resultList;
+
+           // console.log(node);
+            //console.log(resultList);
+           // console.log(currentNode); asdsad
 
             if (angular.isUndefined(exclusionList)) {
                 exclusionList = {}; //easiest just to make this empty if there is none

@@ -35,6 +35,8 @@
   "DELETE_CONTACT":"Delete Contact",
   "COMPANY_ID": "Company ID",
   "DOSSIER_ID": "Dossier ID",
+  "IMPORTER_COMPANY_ID_IF": "Importer Company ID (if applicable)",
+  "IMPORTER_COMPANY_NAME_IF": "Importer Company Name (if applicable)",
   "ERRORS":"Errors",
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",

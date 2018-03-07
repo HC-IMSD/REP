@@ -20,6 +20,7 @@
                 record: '<',
                 userType: '<',
                 isIncomplete: '<',
+                isHide: '<',
                 configureIdField: '<',
                 setType: '&'
             }
@@ -105,6 +106,10 @@
                 return false;
             }
             return vm.record.applicationType===AMEND_TYPE;
+        };
+
+        vm.showAmendButton = function(){
+            return !vm.isHide;
         };
 
         vm.isExtern = function () {

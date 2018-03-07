@@ -53,7 +53,11 @@
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(), options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         DossierLists.createDosageFormList(newList); //for display
-                        angular.extend(resultTranslateList, translateList);
+                        angular.extend(resultTranslateList, translateList);//PROCESSING: DOSAGE FORM list
+                        var newList2 = _createNewSortedArrayWithOther(response.data, "", options.key);
+                        var translateList2 = _createTranslateList(newList2, options.key);
+                        DossierLists.createUnitsPresentationList(newList2); //for display
+                        angular.extend(resultTranslateList, translateList2);
                         return $http.get(activeUrl); //active ingredient list load
                     }).then(function (response) {
                     DossierLists.setActiveList(response.data);

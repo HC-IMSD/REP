@@ -1,9 +1,10 @@
 <div>
-    <ng-form  name="main.activityEnrolForm" id="{{::main.formId}}" novalidate="novalidate">
+    <ng-form name="main.activityEnrolForm" id="{{::main.formId}}" novalidate="novalidate">
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
+                            class="btn-xs rep-help-button"
                             id="enrol-instructions-toggle" ng-click="main.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
@@ -12,7 +13,8 @@
             </header>
             <div class="panel-body">
                 <div>
-                    <cmp-alert  ui-state="main.alerts[0]" msg="HELP_FILE_LOAD" update-state="main.closeAlert(0)" type="alert-info">
+                    <cmp-alert ui-state="main.alerts[0]" msg="HELP_FILE_LOAD" update-state="main.closeAlert(0)"
+                               type="alert-info">
                         <section>
                             <div ng-if="!main.isFrench()"
                                  ng-include="'app/scripts/templates/activity/tpl-activity-file-en.html'">
@@ -35,7 +37,8 @@
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
                     <div class="btn-group pull-right">
-                        <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_MAIN'|translate}}" class="btn-xs rep-help-button"
+                        <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_MAIN'|translate}}"
+                                class="btn-xs rep-help-button"
                                 id="main-instructions-toggle" ng-click="main.addInstruct(1)"><span
                                 class="fa fa-question-circle fa-2x"></span>
                         </button>
@@ -44,7 +47,8 @@
                 </header>
                 <div class="panel-body">
                     <div>
-                        <cmp-alert  ui-state="main.alerts[1]" msg="HELP_ACTIVITY_MAIN" update-state="main.closeAlert(1)" type="alert-info">
+                        <cmp-alert ui-state="main.alerts[1]" msg="HELP_ACTIVITY_MAIN" update-state="main.closeAlert(1)"
+                                   type="alert-info">
                             <section>
                                 <div ng-if="!main.isFrench()"
                                      ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-en.html'">
@@ -62,8 +66,10 @@
                     <div>
                         <cmp-error-summary form-ref="main.activityEnrolForm"
                                            form-preamble="REG_TRANSACT" exclusion-list=main.exclusions
-                                           name-suffix="main.activityEnrolForm" set-heading-level="h2" form-id="main.formId"
-                                           make-focused="main.focusSummary" alias-list="main.alias" show-errors="main.savePressed"
+                                           name-suffix="main.activityEnrolForm" set-heading-level="h2"
+                                           form-id="main.formId"
+                                           make-focused="main.focusSummary" alias-list="main.alias"
+                                           show-errors="main.savePressed"
                                            update-errors="main.updateSummary"></cmp-error-summary>
                     </div>
                     <div class="row">
@@ -103,7 +109,8 @@
                                                    error-types="main.length7Error"></cmp-error-message>
                             </label>
                         </div>
-                        <div class="col-xs-4" ng-class="{'has-error':main.activityEnrolForm[main.activityLeadId].$invalid}">
+                        <div class="col-xs-4"
+                             ng-class="{'has-error':main.activityEnrolForm[main.activityLeadId].$invalid}">
                             <div class="form-group">
                                 <label for="{{::main.activityLeadId}}" class="required">
                                     <span class="field-name"> {{::'ACTIVITY_LEAD' |translate}}</span>
@@ -129,7 +136,8 @@
                                     <div class="rep-pad-top">
                                         <div class="rep-error"
                                              ng-class="{'has-error':main.activityEnrolForm[main.activityTypeId].$invalid}">
-                                            <ui-select ng-model="main.activityRoot.regActivityType" id="{{::main.activityTypeId}}"
+                                            <ui-select ng-model="main.activityRoot.regActivityType"
+                                                       id="{{::main.activityTypeId}}"
                                                        name="{{::main.activityTypeId}}"
                                                        class="rep-selectize-font full-width"
                                                        on-select="main.updateActivityType()" required>
@@ -161,20 +169,21 @@
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <select class="form-control" id="{{::main.feeClassId}}"
                                                 name="{{::main.feeClassId}}" ng-model="main.activityRoot.feeClass"
-                                                required ng-options="fee[main.lang] for fee in main.feeClassList track by fee.id">
+                                                required
+                                                ng-options="fee[main.lang] for fee in main.feeClassList track by fee.id">
                                         </select>
 
                                         <cmp-error-message field-name="main.feeClassId"
                                                            form-ref="main.activityEnrolForm"
                                                            show-error="main.showError(main.activityEnrolForm[main.feeClassId])"
                                                            error-types="main.requiredOnly"></cmp-error-message>
-                                     <!--   <strong id="feeClass-error" class="error">
-                        <span class="label label-danger"
-                              ng-if="main.showError(main.activityEnrolForm.feeClass.$touched,main.activityEnrolForm.feeClass.$invalid)"
-                              ng-messages="main.activityEnrolForm.feeClass.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                        </span>
-                                        </strong>-->
+                                        <!--   <strong id="feeClass-error" class="error">
+                           <span class="label label-danger"
+                                 ng-if="main.showError(main.activityEnrolForm.feeClass.$touched,main.activityEnrolForm.feeClass.$invalid)"
+                                 ng-messages="main.activityEnrolForm.feeClass.$error">
+                               <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                           </span>
+                                           </strong>-->
                                     </label>
                                 </div>
                             </div>
@@ -225,7 +234,8 @@
                                                    error-types="main.requiredOnly"></cmp-error-message>
                             </label>
                         </div>
-                        <div class="col-xs-2" ng-class="{'has-error':main.activityEnrolForm[main.thirdPartyId].$invalid}">
+                        <div class="col-xs-2 form-group"
+                             ng-class="{'has-error':main.activityEnrolForm[main.thirdPartyId].$invalid}">
                             <select id="{{::main.thirdPartyId}}" name="{{::main.thirdPartyId}}"
                                     ng-model="main.activityRoot.isThirdParty"
                                     class="form-control" ng-change="main.setThirdParty()"
@@ -235,12 +245,11 @@
                     </div>
                     <div class="row">
                         <div ng-show="main.thirdPartyState" class="alert alert-info" role="alert" aria-live="polite">
-                           <p> {{::'AUT_LETTER'|translate}}</p>
+                            <p> {{::'AUT_LETTER'|translate}}</p>
                         </div>
                     </div>
                     <div class="row">
-                        <!--<div class="col-xs-12 form-group">-->
-                        <div class="col-xs-6 form-group">
+                        <div class="col-xs-10 form-group">
                             <label for="{{::main.isAdminSubId}}" class="required">
                                 <span class="field-name">{{::"IS_ADMIN_SUB" |translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -250,16 +259,16 @@
                                                    error-types="main.requiredOnly"></cmp-error-message>
                             </label>
                         </div>
-                        <div class="col-xs-2" ng-class="{'has-error':main.activityEnrolForm.isAdminSub.$invalid}">
+                        <div class="col-xs-2 form-group"
+                             ng-class="{'has-error':main.activityEnrolForm.isAdminSub.$invalid}">
                             <select id="{{::main.isAdminSubId}}" name="{{::main.isAdminSubId}}"
                                     ng-model="main.activityRoot.isAdminSub" class="form-control"
                                     ng-change="main.setAdminSubmission()"
                                     ng-options="choice |translate for choice in main.yesNoList" required></select>
                         </div>
-                        <!--  </div>-->
                     </div>
                     <div ng-if="main.showActivity">
-                        <section class="panel  panel-default">
+                       <!--<section class="panel  panel-default">
                             <header class="panel-heading">
                                 <h3 class="panel-title">{{'RELATED_ACTIVITIES'|translate}}</h3>
                             </header>
@@ -271,16 +280,16 @@
 
                                 </cmp-admin-sub>
                             </div>
-                        </section>
+                        </section>-->
                     </div>
-                    <!--  <pre>overall: {{main.activityRoot.relatedActivity | json : spacing}}</pre>-->
                 </div>
             </section>
             <div>
                 <section class="panel panel-primary mrgn-tp-lg">
                     <header class="panel-heading clearfix">
                         <div class="btn-group pull-right">
-                            <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}" class="btn-xs rep-help-button"
+                            <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}"
+                                    class="btn-xs rep-help-button"
                                     id="rep-instructions-toggle" ng-click="main.addInstruct(2)"><span
                                     class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}"</span>
                             </button>
@@ -289,7 +298,8 @@
                     </header>
                     <div class="panel-body">
                         <div>
-                            <cmp-alert  ui-state="main.alerts[2]" msg="HELP_ACTIVITY_REP" update-state="main.closeAlert(2)" type="alert-info">
+                            <cmp-alert ui-state="main.alerts[2]" msg="HELP_ACTIVITY_REP"
+                                       update-state="main.closeAlert(2)" type="alert-info">
                                 <section>
                                     <div ng-if="!main.isFrench()"
                                          ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-en.html'">
@@ -324,7 +334,8 @@
                     <button class="btn btn-primary  btn-lg active" id="btn_xmlSave"
                             ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
                     </button>
-                    <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                    <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
+                            class="btn rep-help-button-primary btn-xs"
                             id="save-instructions-toggle" ng-click="main.addInstruct(3)"><span
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
@@ -333,7 +344,8 @@
             <div class="row">
                 <div class="col-md-10">
 
-                    <cmp-alert  ui-state="main.alerts[3]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(3)" type="alert-info">
+                    <cmp-alert ui-state="main.alerts[3]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(3)"
+                               type="alert-info">
                         <div ng-if="!main.isFrench()"
                              ng-include="'app/scripts/templates/activity/tpl-activity-save-en.html'">
                         </div>
@@ -344,7 +356,21 @@
                     </cmp-alert>
                 </div>
             </div>
+
+            <div>
+                <!--<div> TEMPORARY!!!!</div>-->
+                <select
+                        ng-model="main.activityRoot.fff" class="form-control"
+                        ng-options="choice[main.lang] for choice in main.adminSubTypeList track by choice.id"
+                        required></select>
+                <h3>Administrative Submission Type Description</h3>
+                <div ng-switch="main.activityRoot.fff.id">
+                <div ng-switch-when="MANUFACT_NAME_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-save-fr.html'"></div></div>
+
+                </div>
+            </div>
             <!-- <pre>overall: {{main.activityRoot | json : spacing}}</pre>-->
+            <!--  <pre>{{main.adminSubTypeList}}</pre>-->
         </div>
     </ng-form>
 </div>

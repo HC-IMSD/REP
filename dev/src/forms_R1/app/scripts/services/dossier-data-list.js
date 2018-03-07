@@ -33,6 +33,7 @@
         vm.roaList = [];
         vm.nanoList = [];
         vm.dosageFormList = [];
+        vm.unitsPresentationList = [];
         vm.activeList = [];
         vm.unitsList = [];
         //TODO create getters/setters? safer as is
@@ -43,10 +44,11 @@
             createUnitsList: _createUnitsArray,
             createNanomaterialList: _createNanoArray,
             createDosageFormList: _createDosageFormArray,
-            getDosageFormList: getDosageFormsArray,
+            getDosageFormList: _getDosageFormsArray,
+            createUnitsPresentationList: _createUnitsPresentationArray,
+            getUnitsPresentationList: _getUnitsPresentationArray,
             getDrugUseList:_getDrugUseArray,
-            getScheduleList:_getScheduleArray,
-            getPrescStatusList:_getPrescStatusArray,
+            getIngRoleList:_getIngRoleArray,
             getPerList:_getPerArray,
             getStrengthList:_getStrengthArray,
             getUnitsList:_getUnitsArray,
@@ -121,6 +123,10 @@
             vm.dosageFormList = (translateJson);
         }
 
+        function _createUnitsPresentationArray(translateJson) {
+            vm.unitsPresentationList = (translateJson);
+        }
+
         function _createRoaArray(translateJson) {
             vm.roaList = (translateJson);
 
@@ -163,50 +169,12 @@
             )
         }
 
-        function _getScheduleArray(){
+        function _getIngRoleArray(){
 
             return(
                 [
-                    {"id":"A","en":"Acute Alcholisum","fr":"fr_Acute Alcholisum"},
-                    {"id":"B","en":"Acute anxiety state","fr":"fr_Acute anxiety state"},
-                    {"id":"C","en":"Acute infectious respiratory syndromes","fr":"fr_Acute infectious respiratory syndromes"},
-                    {"id":"D","en":"Acute inflammatory and debilitating arthiritis","fr":"fr_Acute inflammatory and debilitating arthiritis"},
-                    {"id":"E","en":"Acute psychotic conditions","fr":"fr_Acute psychotic conditions"},
-                    {"id":"F","en":"Addiction (except nicotine addiction)","fr":"fr_Addiction (except nicotine addiction)"},
-                    {"id":"G","en":"Ateriosclerosis","fr":"fr_Ateriosclerosis"},
-                    {"id":"H","en":"Appendicitis","fr":"fr_Appendicitis"},
-                    {"id":"I","en":"Asthma","fr":"fr_Asthma"},
-                    {"id":"J","en":"Cancer","fr":"fr_Cancer"},
-                    {"id":"K","en":"Congestive heart failure","fr":"fr_Congestive heart failure"},
-                    {"id":"L","en":"Convulsions","fr":"fr_Convulsions"},
-                    {"id":"M","en":"Dementia","fr":"fr_Dementia"},
-                    {"id":"N","en":"Depresssion","fr":"fr_Depresssion"},
-                    {"id":"O","en":"Diabetes","fr":"fr_Diabetes"},
-                    {"id":"P","en":"Gangrene","fr":"fr_Gangrene"},
-                    {"id":"Q","en":"Glaucoma","fr":"fr_Glaucoma"},
-                    {"id":"R","en":"Haematologic bleeding disorders","fr":"fr_Haematologic bleeding disorders"},
-                    {"id":"S","en":"Hepatitis","fr":"fr_Hepatitis"},
-                    {"id":"T","en":"Hypertension","fr":"fr_Hypertension"},
-                    {"id":"U","en":"Nausea and vomiting of pregnancy","fr":"fr_Nausea and vomiting of pregnancy"},
-                    {"id":"V","en":"Obesity","fr":"fr_Obesity"},
-                    {"id":"W","en":"Rheumatic fever","fr":"fr_Rheumatic fever"},
-                    {"id":"X","en":"Septicemia","fr":"fr_Septicemia"},
-                    {"id":"Y","en":"Sexually transmitted disease","fr":"fr_Sexually transmitted disease"},
-                    {"id":"Z","en":"Strangulated hernia","fr":"fr_Strangulated hernia"},
-                    {"id":"AA","en":"Thrombotic and Embolic Disorder","fr":"fr_Thrombotic and Embolic Disorder"},
-                    {"id":"BB","en":"Thyroid disease","fr":"fr_Thyroid disease"},
-                    {"id":"CC","en":"Ulcer of gastro-intestinal tract","fr":"fr_Ulcer of gastro-intestinal tract"}
-
-                ]
-            )
-        }
-
-        function _getPrescStatusArray(){
-
-            return(
-                [
-                    {"id":"1","en":"PrescStatus 1","fr":"fr_PrescStatus 1"},
-                    {"id":"2","en":"PrescStatus 2","fr":"fr_PrescStatus 2"}
+                    {"id":"MED","en":"Medicincal Ingredient","fr":"fr_Medicincal Ingredient"},
+                    {"id":"NONMED","en":"Non-medicinal Ingredient","fr":"fr_Non-medicinal Ingredient"}
 
                 ]
             )
@@ -268,8 +236,12 @@
             return result;
         }
 
-        function getDosageFormsArray() {
+        function _getDosageFormsArray() {
             return vm.dosageFormList;
+        }
+
+        function _getUnitsPresentationArray() {
+            return vm.unitsPresentationList;
         }
 
         function getNanoMaterialArray() {

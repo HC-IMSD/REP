@@ -215,9 +215,9 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
-            console.log( vm.uniqueErrorList)
+            //console.log( vm.uniqueErrorList)
             var newErrors = _sortErrorsByDomOrder();
-            console.log(newErrors);
+           //console.log(newErrors);
             if (!angular.equals(vm.errorArray, newErrors)) {
                 vm.errorArray = newErrors;
             }

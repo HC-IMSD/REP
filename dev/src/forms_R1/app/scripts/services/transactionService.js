@@ -49,7 +49,7 @@
                 companyName: "",
                 // sameAddress: "N", //this may no longer be needed
                 activityAddress: _createAddressModel(),
-                sameContact: false,
+                confirmContactValid: false,
                 activityContact: _createContactModel()
                 // regulatorySubmissionContact: [],
             };*/
@@ -115,7 +115,7 @@
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
                 resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
                 resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput(jsonObj.activityContact);
-                resultJson.TRANSACTION_ENROL.same_regulatory_contact = jsonObj.sameContact === true ? 'Y' : 'N'; //this may no longer be needed
+                resultJson.TRANSACTION_ENROL.confirm_regulatory_contact = jsonObj.confirmContactValid === true ? 'Y' : 'N'; //this may no longer be needed
                 return (resultJson);
             },
 
@@ -180,7 +180,7 @@
                 //model.sameAddress = jsonObj.same_regulatory_address === 'Y';
                 //reg address
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
-                model.sameContact = jsonObj.same_regulatory_contact === 'Y';
+                model.confirmContactValid = jsonObj.confirm_regulatory_contact === 'Y';
                 model.activityAddress = _transformAddressFromFileObj($filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
@@ -674,7 +674,7 @@
             isActivityChanges: "Y", //deprecated
             companyName: "",
             activityAddress: _createAddressModel(),
-            sameContact: false,
+            confirmContactValid: false,
             activityContact: _createContactModel()
         };
 

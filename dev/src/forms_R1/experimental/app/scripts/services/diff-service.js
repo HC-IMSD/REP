@@ -1,9 +1,10 @@
+"use strict";
 /**
  * Created by dkilty on 10/03/2017.
  */
 
 (function () {
-    'use strict';
+
     angular
         .module('diffModule', []);
 
@@ -11,8 +12,6 @@
 
 //  https://www.npmjs.com/package/deep-diff
 (function () {
-    'use strict';
-
     angular
         .module('diffModule')
         .factory('diffEngine', differenceEngine);

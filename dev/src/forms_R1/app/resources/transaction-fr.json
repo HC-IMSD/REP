@@ -75,7 +75,7 @@
   "TRANSACTION_HDING": "fr_Regulatory Transaction Enrolment",
   "LOAD_TRANSACTION": "fr_Load a Regulatory Transaction Enrolment File",
   "GENERATE_FINAL": "fr_Generate Final XML",
-  "CONTACT_SAME": "fr_I confirm that the above regulatory activity contact information is  valid.",
+  "CONFIRM_CONTACT_VALID": "fr_I confirm that the above regulatory activity contact information is valid.",
   "YEAR_CHANGE": "fr_Year of the change, List Description",
   "COMPANY_INFO": "A. Company Information",
   "ADDRESS_INFO": "B. Address Information",

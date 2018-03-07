@@ -1,7 +1,7 @@
 <ng-form name="ailCtrl.activeIngListForm">
      <input type="text" required ng-show="false" name="{{::ailCtrl.noActiveId}}" id="{{::ailCtrl.noActiveId}}"
                               aria-hidden="true" data-ng-model="ailCtrl.noActiveValues"/>
-    <cmp-expanding-table title="{{'ACTIVE_LIST'|translate}}" list-items="ailCtrl.ingList"
+    <cmp-expanding-table title="{{'INGREDIENT_LIST'|translate}}" list-items="ailCtrl.ingList"
                          reset-to-collapsed="ailCtrl.resetToCollapsed"
                          column-def="ailCtrl.colNames" select-record="ailCtrl.selectRecord"
                          disable-selection="!ailCtrl.isDetailValid">

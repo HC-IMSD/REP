@@ -23,7 +23,6 @@
             'contactModule26',
             'contactModule',
             'contactModule25',
-            'adminSubmission',
             'activityLists',
             'ui.select',
             'hpfbConstants',
@@ -76,6 +75,7 @@
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
         vm.leadList = ActivityListFactory.getActivityLeadList();
+
         vm.alerts = [];
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -136,14 +136,23 @@
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
-            loadActivityData();
+            //loadActivityData();
             loadFeeData();
+            loadAdminSubData();
+
         };
 
         function loadActivityData() {
             ActivityListFactory.getRaTypeList()
                 .then(function (data) {
                     vm.activityTypeList = data;
+                    return true;
+                });
+        }
+        function loadAdminSubData() {
+            ActivityListFactory.getAdminSubType()
+                .then(function (data) {
+                    vm.adminSubTypeList = data;
                     return true;
                 });
         }
@@ -357,7 +366,7 @@
             //disableXMLSave();
             vm.setThirdParty();
             vm.updateActivityType();
-            vm.setAdminSubmission();
+            //vm.setAdminSubmission();
         }
 
         /**
@@ -438,7 +447,6 @@
             vm.thirdPartyId = "is_solicited" + scopeId;
             vm.isAdminSubId = "is_admin_sub" + scopeId;
         }
-
     }
 })();
 
