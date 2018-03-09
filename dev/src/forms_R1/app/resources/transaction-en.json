@@ -2,7 +2,7 @@
   "ADD_TRANSACTION": "Add Record",
   "SEQUENCE_NUM": "Sequence Number",
   "DATE_SUBMITTED": "Date Submitted (YYYY-MM-DD)",
-  "SEQUENCE_DESCRIPT": "Sequence Description",
+  "SEQUENCE_DESCRIPT": "Regulatory Transaction Description",
   "IS_ACTCHANGES": "Same as Regulatory Activity Contact for this Submission?",
   "COMPANY_ID": "Company ID",
   "DOSSIER_ID": "Dossier ID",

@@ -75,7 +75,7 @@
                 width: "30"
             },
             {
-                label: "SEQUENCE_DESCRIPT",
+                label: "SEQUENCE_TYPE",
                 binding: "sequenceConcat",
                 width: "48"
             }

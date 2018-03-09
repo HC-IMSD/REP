@@ -260,7 +260,7 @@
             vm.solictedRqId="solicited_rq"+scopeId;
             vm.solicitedOtherId="solicited_rq_other"+scopeId;
             vm.companyNameId="company_noabbrev"+scopeId;
-            vm.contactSameId="contact_same"+scopeId;
+            vm.contactSameId="confirm_contact_valid"+scopeId;
             vm.isFeesId="is_fee_transaction"+scopeId;
         };
 

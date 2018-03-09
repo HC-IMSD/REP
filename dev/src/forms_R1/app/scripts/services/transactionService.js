@@ -16,13 +16,13 @@
         .module('transactionService')
         .factory('TransactionService', TransactionService);
 
-    TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists', 'YES', 'NO'];
+    TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists', 'YES', 'NO', 'HCSC'];
 
     //version 1.1 bug fix?
     //version 1.2 added Submission package/rq to MPNC, MPDNS
     //version 1.3 Chnage Lifecycle Rec associations of Sequence Clean-up and Notification of interruption of sale
 
-    function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO) {
+    function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO, HCSC) {
         function TransactionService() {
             //construction logic
             var defaultTransactionData = _getEmptyTransactionModel();
@@ -160,19 +160,29 @@
 
                 model.dataChecksum = jsonObj.data_checksum;
                 model.isEctd = jsonObj.is_ectd;
-                model.isSolicited = jsonObj.is_solicited;
-                model.solicitedRequester = "";
-                if (jsonObj.solicited_requester) {
-                    getContactLists.getInternalContacts().then(function (data) {
-                        model.solicitedRequester = $filter('filter')(data, {id: jsonObj.solicited_requester.__text})[0];
-                    })
-                }
-                model.projectManager1 = jsonObj.regulatory_project_manager1;
-                model.projectManager2 = jsonObj.regulatory_project_manager2;
-                model.isFees=jsonObj.is_fees;
-                model.feeDetails=null;
-                if(model.isFees){
-                    model.feeDetails=  this._mapFeeDetailsFromOutput(jsonObj.fee_details);
+
+                if(jsonObj.importFileType === HCSC ) {
+                    model.isSolicited = jsonObj.is_solicited;
+                    model.solicitedRequester = "";
+                    if (jsonObj.solicited_requester) {
+                        getContactLists.getInternalContacts().then(function (data) {
+                            model.solicitedRequester = $filter('filter')(data, {id: jsonObj.solicited_requester.__text})[0];
+                        })
+                    }
+                    model.projectManager1 = jsonObj.regulatory_project_manager1;
+                    model.projectManager2 = jsonObj.regulatory_project_manager2;
+                    model.isFees = jsonObj.is_fees;
+                    model.feeDetails = null;
+                    if (model.isFees) {
+                        model.feeDetails = this._mapFeeDetailsFromOutput(jsonObj.fee_details);
+                    }
+                } else {
+                    model.isSolicited = "";
+                    model.solicitedRequester = "";
+                    model.projectManager1 = "";
+                    model.projectManager2 = "";
+                    model.isFees = "";
+                    model.feeDetails = null;
                 }
                 model.isActivityChanges = jsonObj.is_activity_changes;
                 //model.sameCompany = jsonObj.same_regulatory_company === 'Y';
@@ -180,7 +190,8 @@
                 //model.sameAddress = jsonObj.same_regulatory_address === 'Y';
                 //reg address
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
-                model.confirmContactValid = jsonObj.confirm_regulatory_contact === 'Y';
+                //model.confirmContactValid = jsonObj.confirm_regulatory_contact === 'Y';
+                model.confirmContactValid = false; //reset
                 model.activityAddress = _transformAddressFromFileObj($filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
