@@ -67,8 +67,8 @@
                    //  ingredientList:[]
                   //   }//tab + grid +*/
 
-                }
-                //contactList: []
+                },
+                contactList: []
 
             },
 
@@ -113,8 +113,8 @@
                         //canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
                        // formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         //appendixFourList: getAppendix4IngredientList(info.appendix4_group)
-                    }
-                   // contactList: getContactList(info.contact_record)
+                    },
+                   contactList: getContactList(info.contact_record)
 
                 };
 
@@ -159,9 +159,9 @@
             baseDossier.application_type = jsonObj.applicationType;
             baseDossier.software_version = SOFTWARE_VERSION;
             baseDossier.data_checksum = "";
-            /* if (jsonObj.contactList) {
+            if (jsonObj.contactList) {
                 baseDossier.contact_record = repContactToOutput(jsonObj.contactList);
-            } */
+            }
             baseDossier.dossier_type = jsonObj.dossierType;
             baseDossier.product_name = jsonObj.productName;
             baseDossier.common_name = jsonObj.properName;
@@ -293,7 +293,7 @@
 
 
         //###############INTERNAL FUNCTIONS start here##################################
-        /*
+
         function getContactList(contacts) {
 
             var list = [];
@@ -327,7 +327,7 @@
 
             return list;
         }
-        */
+
         /**
          * Get diseaseDisorderList from the xml fiel
          * @param info
