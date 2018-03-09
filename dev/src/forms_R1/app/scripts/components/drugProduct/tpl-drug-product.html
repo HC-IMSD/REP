@@ -211,6 +211,26 @@
                         <cmp-schedule-a schedule-group="drugProdCtrl.model.drugProduct.scheduleAGroup" show-errors="drugProdCtrl.showSummary"></cmp-schedule-a>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group col-md-12"
+                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
+                        <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
+                            <span class="field-name">G. {{::'PROP_INDICATION'|translate}}</span>
+                            <strong class="required">{{::'REQUIRED' |translate}}</strong>
+                            <cmp-error-message field-name="drugProdCtrl.propIndicationId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                        <textarea id="{{::drugProdCtrl.propIndicationId}}"
+                                  data-ng-model="drugProdCtrl.model.drugProduct.propIndication" maxlength="1024" rows="3"
+                                  ng-model-options="{ debounce: $inherit}"
+                                  class="form-control full-width" name="{{::drugProdCtrl.propIndicationId}}" required>
+                        </textarea>
+                    </div>
+                </div>
+
                 <div>
                     <section ng-if="drugProdCtrl.appendixMissingError()">
                         <input type="text" required ng-model="drugProdCtrl.missingAppendixModel"
@@ -238,25 +258,6 @@
                             </ul>
                         </details>
                     </section>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-md-12"
-                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
-                        <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
-                            <span class="field-name">G. {{::'PROP_INDICATION'|translate}}</span>
-                            <strong class="required">{{::'REQUIRED' |translate}}</strong>
-                            <cmp-error-message field-name="drugProdCtrl.propIndicationId"
-                                               form-ref="drugProdCtrl.drugProdForm"
-                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId])"
-                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
-                        </label>
-                        <textarea id="{{::drugProdCtrl.propIndicationId}}"
-                                  data-ng-model="drugProdCtrl.model.drugProduct.propIndication" maxlength="1024" rows="3"
-                                  ng-model-options="{ debounce: $inherit}"
-                                  class="form-control full-width" name="{{::drugProdCtrl.propIndicationId}}" required>
-                        </textarea>
-                    </div>
                 </div>
 
                 <div class="row">
