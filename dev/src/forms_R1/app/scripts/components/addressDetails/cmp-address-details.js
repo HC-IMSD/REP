@@ -106,7 +106,6 @@
                 }
             }
              if(changes.updateCountry){
-                console.log("update countrty")
                  vm.countryChanged();
              }
 
