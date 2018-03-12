@@ -88,7 +88,6 @@
                     addressID: 1,
                     companyName: "",
                     importerID: "",
-                    amendRecord: false,
                     addressRole: {
                         manufacturer: false,
                         mailing: false,
@@ -115,7 +114,6 @@
 
                 var defaultContact = {
                     contactId: "",
-                    amendRecord: false,
                     addressRole: {
                         manufacturer: false,
                         mailing: false,
@@ -248,7 +246,6 @@
                     address.addressID = adrList[i].address_id;
                     address.companyName = adrList[i].company_name;
                     address.importerID = adrList[i].importer_id;
-                    address.amendRecord = adrList[i].amend_record === 'Y';
                     address.addressRole = {};
                     address.addressRole.manufacturer = adrList[i].manufacturer === 'Y';
                     address.addressRole.mailing = adrList[i].mailing === 'Y';
@@ -304,7 +301,6 @@
                     var contact_rec_index = contacts[i].contact_id;
                     contact.contactId = contact_rec_index;
                     this.updateContactID(contact_rec_index);
-                    contact.amendRecord = contacts[i].amend_record === 'Y';
                     contact.addressRole = {};
                     contact.addressRole.manufacturer = contacts[i].manufacturer === 'Y';
                     contact.addressRole.mailing = contacts[i].mailing === 'Y';
@@ -343,7 +339,6 @@
             for (var i = 0; i < adrList.length; i++) {
                 var address = {};
                 address.address_id = adrList[i].addressID;
-                address.amend_record = adrList[i].amendRecord == true ? 'Y' : 'N';
                 address.manufacturer = adrList[i].addressRole.manufacturer == true ? 'Y' : 'N';
                 address.mailing = adrList[i].addressRole.mailing == true ? 'Y' : 'N';
                 address.billing = adrList[i].addressRole.billing == true ? 'Y' : 'N';
@@ -383,7 +378,6 @@
             for (var i = 0; i < contacts.length; i++) {
                 var contact = {};
                 contact.contact_id = contacts[i].contactId;
-                contact.amend_record = contacts[i].amendRecord === true ? 'Y' : 'N';
                 contact.manufacturer = contacts[i].addressRole.manufacturer === true ? 'Y' : 'N';
                 contact.mailing = contacts[i].addressRole.mailing === true ? 'Y' : 'N';
                 contact.billing = contacts[i].addressRole.billing === true ? 'Y' : 'N';
