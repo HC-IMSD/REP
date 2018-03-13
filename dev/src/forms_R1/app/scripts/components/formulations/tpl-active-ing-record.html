@@ -329,30 +329,6 @@
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                         </label>
                     </div>
-                    <div class="btn-group-sm col-xs-8 text-right align-bottom">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <span>&nbsp;</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="btn btn-primary" ng-click="ingRecCtrl.saveIng()" id="medSave_{{::$id}}"
-                                        name="saveMI">{{'SAVE'|translate}}
-                                </button>
-                                <button ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-danger" id="medDelete_{{::$id}}"
-                                        name="deleteMI" ng-click="ingRecCtrl.delete()">{{'DELETE'|translate}}
-                                </button>
-                                <button ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-default"
-                                        ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
-                                    {{'COPY'|translate}}
-                                </button>
-                                <button class="btn btn-default" name="discardMI" ng-click="ingRecCtrl.discardChanges()">
-                                    {{'DISCARD_CHANGES'|translate}}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-10">
@@ -361,6 +337,24 @@
                             {{'SOURCED_INFO'|translate}}
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 btn-group-sm text-right align-bottom">
+                    <button class="btn btn-primary" ng-click="ingRecCtrl.saveIng()" id="medSave_{{::$id}}"
+                            name="saveMI">{{'SAVE'|translate}}
+                    </button>
+                    <button ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-danger" id="medDelete_{{::$id}}"
+                            name="deleteMI" ng-click="ingRecCtrl.delete()">{{'DELETE'|translate}}
+                    </button>
+                    <button ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-default"
+                            ng-click="ingRecCtrl.copy()" ng-disabled="ingRecCtrl.activeIngForm.$dirty">
+                        {{'COPY'|translate}}
+                    </button>
+                    <button class="btn btn-default" name="discardMI" ng-click="ingRecCtrl.discardChanges()">
+                        {{'DISCARD_CHANGES'|translate}}
+                    </button>
                 </div>
             </div>
         </fieldset>

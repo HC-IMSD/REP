@@ -63,8 +63,8 @@
             vm.formulationListId="formulation-list-form";
 
             vm.colNames = [
-                {label: "FORM_ID", binding: "formulationId", width: "15"},
-                {label: "FORMULATION_NAME", binding: "formulationName", width: "85"}
+                {label: "FORM_ID", binding: "formulationId", width: "15", isHtml: "true"},
+                {label: "FORMULATION_NAME", binding: "formulationName", width: "85", isHtml: "true"}
             ];
             vm.formulationList = [];
 
@@ -119,7 +119,7 @@
                 formulation.formulationId=(getMaxFormulationId() + 1);
                 vm.formulationList.push(formulation);
                 vm.setRecord(- 1);
-                vm.resetToCollapsed = !vm.resetToCollapsed;
+                //vm.resetToCollapsed = !vm.resetToCollapsed;
             }
         };
 

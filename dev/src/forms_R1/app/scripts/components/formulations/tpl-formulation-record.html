@@ -74,7 +74,7 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading">
-                        <h3 class="panel-title">{{'MEDICINAL_INGRED'|translate}}</h3>
+                        <h3 class="panel-title">A. {{'INGREDIENTS'|translate}}</h3>
                     </header>
                     <div class="panel-body">
                         <!-- <input type="text" required ng-show="false" name="{{::formulRecCtrl.noActiveId}}" id="{{::formulRecCtrl.noActiveId}}"
@@ -164,8 +164,8 @@
                          </strong>-->
                     </header>
                     <div class="panel-body">
-                        <!--  <input type="text" required ng-show="false" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
-                                 aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>-->
+                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
+                                 aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
                                           on-update="formulRecCtrl.updateCountryList(list)"
                                           show-errors="formulRecCtrl.showSummary"
