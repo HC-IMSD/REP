@@ -15,7 +15,6 @@
 <!ELEMENT fra (#PCDATA)>
 <!ATTLIST fra 
 	xmlns CDATA #FIXED "">
-<!UNIQUE code />
 ]>
 <SimpleCodeList>
 	<row>
