@@ -131,7 +131,7 @@
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="dossier_name"/>
-			<hpfb:element ref="lifecycle_record" minOccurs="1"/>
+			<hpfb:element ref="lifecycle_record" minOccurs="1" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
