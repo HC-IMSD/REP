@@ -27,12 +27,6 @@
 	<!-- Transaction Enrolment -->
 	<xsl:template match="TRANSACTION_ENROL">
 		<h1>Regulatory Transaction Template: Regulatory Enrolment Process (REP)</h1>
-		<section>
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h2 class="panel-title">Transaction Information</h2>
-				</div>
-				<div class="panel-body">										
 					<div class="well well-sm" >
 						<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
 							<TR>
@@ -49,6 +43,12 @@
 							</TR>
 						</TABLE>
 					</div>
+		<section>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h2 class="panel-title">Transaction Information</h2>
+				</div>
+				<div class="panel-body">										
 					<xsl:if test="is_ectd = 'Y'">
 						<div class="well well-sm" >
 							<div class="row">
