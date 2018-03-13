@@ -515,5 +515,5 @@
 <row><code>MATERIAL_DETAILS</code><eng>Animal and / or Human Sourced Materials Details</eng><fra>fr_Animal and / or Human Sourced Materials Details</fra></row>
 <row><code>IMPORTER_COMPANY_NAME_IF</code><eng>Importer Company Name</eng><fra>fr_Importer Company Name</fra></row>
 <row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
-<row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
+<row><code>DOSSIER_TEMP</code><eng>Dossier Template: Regulatory Enrolment Process (REP)</eng><fra></fra></row>
 </SimpleCodeList>
