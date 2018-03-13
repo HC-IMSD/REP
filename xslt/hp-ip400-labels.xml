@@ -15,6 +15,7 @@
 <!ELEMENT fra (#PCDATA)>
 <!ATTLIST fra 
 	xmlns CDATA #FIXED "">
+<!UNIQUE code />
 ]>
 <SimpleCodeList>
 	<row>
@@ -435,7 +436,6 @@
 <row><code>PROVINCE</code><eng>Province</eng><fra>fr_Province</fra></row>
 <row><code>COUNTRY</code><eng>Country</eng><fra>fr_Country</fra></row>
 <row><code>POSTAL_ZIP</code><eng>Postal / ZIP Code</eng><fra>fr_Postal / ZIP Code</fra></row>
-<row><code>SALUTATION</code><eng>Salutation</eng><fra>Titre de civilité</fra></row>
 <row><code>JOBTITLE</code><eng>Job Title</eng><fra>Titre de poste</fra></row>
 <row><code>PHONENUMBER</code><eng>Phone Number</eng><fra>Numéro de téléphone</fra></row>
 <row><code>PHONE_EXT</code><eng>Phone Extension</eng><fra>Poste</fra></row>
@@ -472,4 +472,48 @@
 <row><code>FAX</code><eng>Fax</eng><fra>fr_Fax</fra></row>
 <row><code>EMAIL</code><eng>Email</eng><fra>fr_Email</fra></row>
 <row><code>EXTENSION</code><eng>ext</eng><fra>fr_ext</fra></row>
+<row><code>DRUG_PRODUCT</code><eng>Product Information</eng><fra>fr_Product Information</fra></row>
+<row><code>DRUG_USE</code><eng>Drug Use</eng><fra>fr_Drug Use</fra></row>
+<row><code>SCHEDULE_PRESC_STATUS</code><eng>Schedule and Prescription status (check all that applies): The product is</eng><fra>fr_Schedule and Prescription status (check all that applies): The product is</fra></row>
+<row><code>SCHEDULE_C</code><eng>included in Schedule C (radiopharmacurticals) to the Food and Drugs Act</eng><fra>fr_included in Schedule C (radiopharmacurticals) to the Food and Drugs Act</fra></row>
+<row><code>SCHEDULE_D</code><eng>included in Schedule D (biologicals) to the Food and Drugs Act</eng><fra>fr_included in Schedule D (biologicals) to the Food and Drugs Act</fra></row>
+<row><code>SCHEDULE_F</code><eng>included in Schedule F (prescription drugs) to the Food and Drug Regulations</eng><fra>fr_included in Schedule F (prescription drugs) to the Food and Drug Regulations</fra></row>
+<row><code>PROP_INDICATION</code><eng>Proposed Indication</eng><fra>fr_Proposed Indication</fra></row>
+<row><code>FORMULATION</code><eng>Formulation</eng><fra>fr_Formulation</fra></row>
+<row><code>FORMULATIONS</code><eng>Formulations</eng><fra>fr_Formulations</fra></row>
+<row><code>FORMULATION_NAME</code><eng>Formulation Name</eng><fra>fr_Formulation Name</fra></row>
+<row><code>FORMULATION_DETAILS</code><eng>Formulation Record</eng><fra>fr_Formulation Record</fra></row>
+<row><code>FORM_ID</code><eng>ID</eng><fra>fr_ID</fra></row>
+<row><code>DOSAGE_FORM</code><eng>Dosage Form</eng><fra>fr_Dosage Form</fra></row>
+<row><code>MEDICINAL_INGRED</code><eng>A. Medicinal (Active) Ingredients</eng><fra>fr_A. Medicinal (Active) Ingredients</fra></row>
+<row><code>INGREDIENT</code><eng>Ingredient</eng><fra>fr_Ingredient</fra></row>
+<row><code>IN_LIST</code><eng>In list</eng><fra>In list</fra></row>
+<row><code>CAS_NUM</code><eng>CAS</eng><fra>fr_CAS</fra></row>
+<row><code>ING_NAME</code><eng>Ingredient Name</eng><fra>fr_Ingredient Name</fra></row>
+<row><code>STANDARD</code><eng>Standard</eng><fra>fr_Standard</fra></row>
+<row><code>STRENGTH</code><eng>Strength</eng><fra>fr_Strength</fra></row>
+<row><code>NOT_GREAT_THAN</code><eng>Not Great Than</eng><fra>fr_Not Great Than</fra></row>
+<row><code>UNITS</code><eng>Units</eng><fra>fr_Units</fra></row>
+<row><code>UNIT</code><eng>Unit</eng><fra>fr_Unit</fra></row>
+<row><code>EQUALS</code><eng>Equals</eng><fra>fr_Equals</fra></row>
+<row><code>NOT_LESS_THAN</code><eng>Not Less Than</eng><fra>fr_Not Less Than</fra></row>
+<row><code>RANGE_LOWER_LIMIT</code><eng>Range (lower limit)</eng><fra>fr_Range (lower limit)</fra></row>
+<row><code>RANGE_UPPER_LIMIT</code><eng>Range (upper limit)</eng><fra>fr_Range (upper limit)</fra></row>
+<row><code>OTHER_UNIT_MEASURE</code><eng>Unit of Measure Other Details</eng><fra>fr_Unit of Measure Other Details</fra></row>
+<row><code>PER_STRENGTH</code><eng>Per</eng><fra>fr_Per</fra></row>
+<row><code>UNIT_PRESENTATION</code><eng>Unit of Presentation</eng><fra>fr_Unit of Presentation</fra></row>
+<row><code>ISBASE</code><eng>Calculated as Base?</eng><fra>fr_Calculated as Base?</fra></row>
+<row><code>IS_NANO_MATERIAL</code><eng>Is this a nanomaterial?</eng><fra>fr_Is this a nanomaterial?</fra></row>
+<row><code>NANO_MATERIAL</code><eng>Nanomaterial</eng><fra>fr_Nanomaterial</fra></row>
+<row><code>NANO_MATERIAL_OTHER</code><eng>Indicate the type of nanomaterial</eng><fra>fr_Indicate the type of nanomaterial</fra></row>
+<row><code>ANIMAL_HUMAN_SOURCED</code><eng>Animal or Human Sourced?</eng><fra>fr_Animal or Human Sourced?</fra></row>
+<row><code>IS_ANIMAL_HUMAN_MATERIAL</code><eng>B.  Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</eng><fra>fr_B.  Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</fra></row>
+<row><code>ANIMAL_HUMAN_HDING</code><eng>Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug</eng><fra>fr_Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug</fra></row>
+<row><code>CONTAINER_TYPES</code><eng>C. Container Types</eng><fra>fr_C. Container Types</fra></row>
+<row><code>MATERIAL_NAME</code><eng>Material Name</eng><fra>fr_Material Name</fra></row>
+<row><code>PRESENT_IN_FINAL</code><eng>Present in final Container</eng><fra>fr_Present in final Container</fra></row>
+<row><code>MATERIAL_DETAILS</code><eng>Animal and / or Human Sourced Materials Details</eng><fra>fr_Animal and / or Human Sourced Materials Details</fra></row>
+<row><code>IMPORTER_COMPANY_NAME_IF</code><eng>Importer Company Name</eng><fra>fr_Importer Company Name</fra></row>
+<row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
+<row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
 </SimpleCodeList>
