@@ -27,6 +27,22 @@
 	<!-- Company Enrolment -->
 	<xsl:template match="COMPANY_ENROL">
 		<h1><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COMPANY_TEMPLATE'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h1>
+		<div class="well well-sm" >
+			<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
+				<TR>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'APPL_STATUS'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ENROL_VERSION'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DATE_SAVED'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COMPANY_ID'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
+				</TR>
+				<TR>
+					<TD style="text-align: center;"> <xsl:apply-templates select="application_type" /> </TD>
+					<TD style="text-align: center;"> <xsl:apply-templates select="enrolment_version" /> </TD>
+					<TD style="text-align: center;"> <xsl:apply-templates select="date_saved" /> </TD>
+					<TD style="text-align: center;"> <xsl:apply-templates select="company_id" /> </TD>
+				</TR>
+			</TABLE>
+		</div>
 		<section>
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -34,22 +50,6 @@
 				</div>
 				
 				<div class="panel-body">
-					<div class="well well-sm" >
-						<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
-							<TR>
-								<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'APPL_STATUS'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-								<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ENROL_VERSION'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-								<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DATE_SAVED'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-								<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COMPANY_ID'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-							</TR>
-							<TR>
-								<TD style="text-align: center;"> <xsl:apply-templates select="application_type" /> </TD>
-								<TD style="text-align: center;"> <xsl:apply-templates select="enrolment_version" /> </TD>
-								<TD style="text-align: center;"> <xsl:apply-templates select="date_saved" /> </TD>
-								<TD style="text-align: center;"> <xsl:apply-templates select="company_id" /> </TD>
-							</TR>
-						</TABLE>
-					</div>
 					<section class="panel panel-default" >
 							<div class="panel-heading">
 								<h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ADDR_RECO'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h2>
