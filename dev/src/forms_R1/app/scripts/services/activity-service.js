@@ -32,16 +32,24 @@
                 "dossierId": "",
                 "regActivityLead": "",
                 "regActivityType": "",
-                "feeClass": "",
+                //"feeClass": "",
+                "subType": "",
                 "reasonFiling": "",
                 "isThirdParty": "",
                 "isAdminSub": "",
-                "relatedActivity": {},
-                "contactRecord": []
+                "isPriority": "",
+                "isNoc": "",
+                //"relatedActivity": {},
+                "contactRecord": [],
+                "manu": false,
+                "mailling": false,
+                "billing": false,
+                "importer": false,
+                "importerId": ""
             };
             defaultActivityData.rationaleTypes = _createRationalTypes();
             defaultActivityData.notifiableChangeTypes = _createNotifiableChangeTypes();
-            defaultActivityData.relatedActivity = _getEmptyActivity();
+            //defaultActivityData.relatedActivity = _getEmptyActivity();
             angular.extend(this._default, defaultActivityData);
             this.rootTag = "ACTIVITY_ENROL";
             this.activityId = 0;
@@ -85,21 +93,29 @@
                     dossier_id_concat: "",
                     reg_activity_lead: jsonObj.regActivityLead,
                     reg_activity_type: "",
-                    fee_class:"",
+                    sub_type:"",
+                    //fee_class:"",
                     reason_filing: jsonObj.reasonFiling,
                     is_third_party: jsonObj.isThirdParty,
                     is_admin_submission: jsonObj.isAdminSub,
+                    is_priority: jsonObj.isPriority,
+                    is_noc: jsonObj.isNoc,
                     notifiable_change_types: {},
-                    rationale_types: {}
+                    rationale_types: {},
+                    manu: jsonObj.manu === true ? 'Y' : 'N',
+                    mailling: jsonObj.mailling === true ? 'Y' : 'N',
+                    billing: jsonObj.billing === true ? 'Y' : 'N',
+                    importer: jsonObj.importer === true ? 'Y' : 'N',
+                    importer_id: jsonObj.importerId,
                 }
             };
-           if(jsonObj.feeClass) {
+           /*if(jsonObj.feeClass) {
                 activity[this.rootTag].fee_class={
                     _label_en: jsonObj.feeClass.en,
                     _label_fr: jsonObj.feeClass.fr,
                     __text:  jsonObj.feeClass.id
                 }
-            }
+            }*/
             if(jsonObj.regActivityType) {
                 activity[this.rootTag].reg_activity_type = {
                     _label_en: jsonObj.regActivityType.en,
@@ -107,9 +123,16 @@
                     __text: jsonObj.regActivityType.id
                 };
             }
+            if(jsonObj.subType) {
+                activity[this.rootTag].sub_type = {
+                    _label_en: jsonObj.subType.en,
+                    _label_fr: jsonObj.subType.fr,
+                    __text: jsonObj.subType.id
+                };
+            }
             activity[this.rootTag].notifiable_change_types = _mapNotifiableChangeTypesToOutput(jsonObj.notifiableChangeTypes);
             activity[this.rootTag].rationale_types = _mapRationaleTypeToOutput(jsonObj.rationaleTypes);
-            if (jsonObj.isAdminSub === YES) {
+           /* if (jsonObj.isAdminSub === YES) {
                 activity[this.rootTag].related_activity = this.tranformRelatedActivityToFileObj(jsonObj.relatedActivity);
             }
             /* if (relatedActList && relatedActList.length > 0) {
@@ -140,7 +163,7 @@
         };
 
         //TODO obsolete?
-        ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
+        /*ActivityService.prototype.tranformRelatedActivityToFileObj = function (jsonObj) {
 
             var activity = {};
             activity.sponsor_name = jsonObj.sponsorName;
@@ -175,7 +198,7 @@
             activity.not_lasa = jsonObj.notLasa === true ? YES : NO;
             return activity;
 
-        };
+        };*/
         ActivityService.prototype.getModelInfo = function () {
             return this._default;
         };
@@ -193,6 +216,7 @@
             model.enrolmentVersion = jsonObj.enrolment_version;
             model.dateSaved = jsonObj.date_saved;
             model.applicationType = jsonObj.application_type;
+            console.log(jsonObj.application_type)
             model.softwareVersion = jsonObj.software_version;
             model.dataChecksum = jsonObj.software_version;
             model.dossierIdPrefix = jsonObj.dossier_id_prefix;
@@ -200,21 +224,30 @@
             model.regActivityLead = jsonObj.reg_activity_lead;
             model.regActivityType = $filter('filter')(ActivityListFactory.getRaTypeList(), {id:  jsonObj.reg_activity_type.__text})[0];
            //TODO replace with a custom filter
-            var feeClassList= $filter('filter')(ActivityListFactory.getFeeClassList(), {id:  jsonObj.fee_class.__text});
-            model.feeClass =  _getFilterJsonMatch(feeClassList,jsonObj.fee_class.__text,"id");
+            var subTypeList = $filter('filter')(ActivityListFactory.getAdminSubType(),{id: jsonObj.sub_type.__text});
+            model.subType =  _getFilterJsonMatch(subTypeList,jsonObj.sub_type.__text,"id");
+            //var feeClassList= $filter('filter')(ActivityListFactory.getFeeClassList(), {id:  jsonObj.fee_class.__text});
+            //model.feeClass =  _getFilterJsonMatch(feeClassList,jsonObj.fee_class.__text,"id");
             model.reasonFiling = jsonObj.reason_filing;
             model.isThirdParty = jsonObj.is_third_party;
             model.isAdminSub = jsonObj.is_admin_submission;
-
+            model.isPriority = jsonObj.is_priority;
+            model.isNoc = jsonObj.is_noc;
             model.notifiableChangeTypes = _transformNotifiableChangeTypeFromFileObj(jsonObj.notifiable_change_types);
             model.rationaleTypes = _transformRationaleTypeFromFileObj(jsonObj.rationale_types);
-            model.relatedActivity = {};
+            model.manu = jsonObj.manu === 'Y';
+            model.mailling = jsonObj.mailling === 'Y';
+            model.billing = jsonObj.billing === 'Y';
+            model.importer = jsonObj.importer === 'Y';
+            model.importerId = jsonObj.importer_id;
+
+            //model.relatedActivity = {};
 
             var repContacts = {contactRecord: []};
 
-            if (jsonObj.related_activity) {
+            /*if (jsonObj.related_activity) {
                 model.relatedActivity = this.transformRelatedRegActivityFromFileObj(jsonObj.related_activity);
-            }
+            }*/
 
             if (jsonObj.contact_record) {
                 repContacts.contactRecord = this.mapContactList(jsonObj.contact_record)
@@ -328,7 +361,7 @@
          * @param jsonObj
          */
         //TODO deprecated
-        ActivityService.prototype.transformRelatedRegActivityFromFileObj = function (jsonObj) {
+        /**ActivityService.prototype.transformRelatedRegActivityFromFileObj = function (jsonObj) {
             var relatedActivity = this.getEmptyRelatedActivity();
             relatedActivity.sponsorName = jsonObj.sponsor_name;
             relatedActivity.dateCleared = "";
@@ -343,7 +376,7 @@
             relatedActivity.dinTransfer = jsonObj.din_transfer === YES;
             relatedActivity.notLasa = jsonObj.not_lasa === YES;
             return relatedActivity;
-        };
+        };*/
 
         // Return a reference to the object
         return ActivityService;

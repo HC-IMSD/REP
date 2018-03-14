@@ -45,7 +45,8 @@
             controller: activityMainCtrl,
             controllerAs: 'main',
             bindings: {
-                formType: '@'
+                formType: '@',
+                legendText: '@'
             }
         });
 
@@ -75,7 +76,7 @@
         vm.rootTag = vm.activityService.getRootTag();
         vm.activityRoot = vm.activityService.getModelInfo();
         vm.leadList = ActivityListFactory.getActivityLeadList();
-
+        vm.check = "";
         vm.alerts = [];
         vm.configField = {
             "label": "CONTROL_NUMBER",
@@ -136,10 +137,10 @@
             vm.setThirdParty();
             vm.updateActivityType();
             vm.setAdminSubmission();
-            //loadActivityData();
+            loadActivityData();
             loadFeeData();
             loadAdminSubData();
-
+            vm.check = vm.rolechecked();
         };
 
         function loadActivityData() {
@@ -249,6 +250,10 @@
             vm.activityRoot.applicationType = value;
             vm.formAmend = vm.activityRoot.applicationType === AMEND_TYPE;
             //disableXMLSave();
+            if(vm.activityRoot.applicationType === APPROVED_TYPE && vm.activityRoot.userType === EXTERNAL_TYPE){
+                console.log("amend!!!");
+                vm.activityRoot.reasonAmend="";
+            }
         };
         /**
          * Sets the visibility and state of the related activities
@@ -366,7 +371,11 @@
             //disableXMLSave();
             vm.setThirdParty();
             vm.updateActivityType();
-            //vm.setAdminSubmission();
+            vm.check = vm.rolechecked();
+            vm.clearReasonAmend();
+          //  vm.setApplicationType();
+            vm.setAdminSubmission();
+            vm.clearSub();
         }
 
         /**
@@ -374,7 +383,6 @@
          * @private
          */
         function _setApplTypeToAmend() {
-
             vm.activityRoot.applicationType = AMEND_TYPE;
             //disableXMLSave();
         }
@@ -412,6 +420,12 @@
             }
         }
 
+        vm.clearReasonAmend = function () {
+            if(vm.activityRoot.applicationType === APPROVED_TYPE && vm.userType === EXTERNAL_TYPE){
+                vm.activityRoot.reasonAmend="";
+            }
+        }
+
         vm.addInstruct = function (value) {
 
             if (angular.isUndefined(value)) return;
@@ -431,6 +445,37 @@
                 vm.alerts[value] = false;
             }
         };
+        vm.rolechecked = function (){
+            console.log("cccccccccc");
+            if(vm.activityRoot.importer===false){
+                console.log("false");
+                vm.activityRoot.importerId = "";
+            }
+            if(vm.activityRoot.manu || vm.activityRoot.mailling || vm.activityRoot.billing || vm.activityRoot.importer){
+                vm.check = true;
+                return true;
+            }
+            if(vm.activityRoot.manu===false && vm.activityRoot.mailling===false && vm.activityRoot.billing===false && vm.activityRoot.importer===false){
+                vm.check = "";
+                return "";
+            }
+        };
+
+        vm.clearSub = function (){
+            if(vm.showActivity === false){
+                vm.activityRoot.subType = "";
+            }
+        };
+
+        vm.showErrorMissing = function () {
+            console.log(vm.activityEnrolForm.$dirty);
+            console.log(vm.activityEnrolForm)
+            console.log("Check called"+vm.check);
+            if ((vm.activityEnrolForm.$dirty && !vm.check) || (vm.showErrors() && !vm.check)) {
+                return true
+            }
+            return false
+        };
         /**
          * Sets the ids and names for fields
          * @private
@@ -445,7 +490,10 @@
             vm.feeClassId = "fee_class" + scopeId;
             vm.reasonId = "reason_file" + scopeId;
             vm.thirdPartyId = "is_solicited" + scopeId;
-            vm.isAdminSubId = "is_admin_sub" + scopeId;
+            vm.isAdminSubId = "is_admin_submission" + scopeId;
+            vm.importerIden = "importer_id" + scopeId;
+            vm.isPriorityId = "is_priority" + scopeId;
+            vm.isNocId = "is_noc" + scopeId;
         }
     }
 })();

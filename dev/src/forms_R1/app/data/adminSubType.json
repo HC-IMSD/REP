@@ -25,6 +25,11 @@
     "fr": "fr_Mergers and Buyouts"
   },
   {
+    "id": "LICENGSING",
+    "en": "Licensing Agreements",
+    "fr": "fr_Licensing Agreements"
+  },
+  {
     "id": "POSTAUTH_LABEL_CHGE",
     "en": "Post-Authorization Labelling Changes",
     "fr": "fr_Post-Authorization Labelling Changes"
