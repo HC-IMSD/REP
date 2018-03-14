@@ -442,6 +442,7 @@
             vm.noTheraId="no_theraVal"+scopeId;
             vm.drugUseId="drug_use"+scopeId;
             vm.propIndicationId="prop_Indication"+scopeId;
+            vm.fsType = "fs_type" + scopeId;
         }
 
 

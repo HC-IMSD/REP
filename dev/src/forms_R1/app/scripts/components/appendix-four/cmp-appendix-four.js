@@ -125,8 +125,9 @@
             //console.debug('frmList delete: ' + idx);
             if (vm.ingredientList.splice(idx, 1))
                 vm.resetToCollapsed = true;
+            vm.recordChanged();
 
-        }
+        };
 
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;

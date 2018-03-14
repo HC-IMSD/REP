@@ -100,13 +100,14 @@
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.oneAnimalId="msg_err_one_animal"+scopeId;
+            vm.oneAnimalId="no_animal"+scopeId;
             vm.animalSectionRecordId = "anSectForm" + scopeId;
             vm.cellLineId="cellLine" + scopeId;
             vm.controlledPopId="controlledPop"+scopeId;
             vm.ageAnimalsId="ageAnimals"+scopeId;
             vm.isBiotechId="biotechderived"+scopeId;
-            vm.noCountryId="msg_err_one_cntry_origin"+scopeId;
+            //vm.noCountryId="msg_err_one_cntry_origin"+scopeId;
+            vm.noCountryId="no_country_origin"+scopeId;
         }
         $scope.$watch('animalSectCtrl.anSectForm.$error', function () {
             vm.updateErrorSummary();

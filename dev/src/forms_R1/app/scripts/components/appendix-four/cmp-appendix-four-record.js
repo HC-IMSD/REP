@@ -64,6 +64,14 @@
             vm.transcludeList = {};
 
             vm.alias = {
+                "no_country_origin": {
+                    "type": "buttonSearch",
+                    "buttonName": "addCountry"
+                },
+                "no_animal": {
+                    "type": "buttonSearch",
+                    "buttonName": "addAnimalSrc"
+                },
                 "msg_app4_type": {
                     "type": "fieldset",
                     "parent": "fs_type"

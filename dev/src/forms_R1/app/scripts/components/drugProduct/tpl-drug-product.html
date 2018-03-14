@@ -113,10 +113,10 @@
                                    ng-model="drugProdCtrl.model.importerID"/>
                         </label>
                     </div>
-                    <div class="col-xs-4 form-group">
+                    <div class="col-xs-12 form-group">
                         <label>
                             <span class="field-name">D.&nbsp;{{::'IMPORTER_COMPANY_NAME_IF' |translate}}</span>
-                            <input type="text" class="form-control full-width" maxlength="80"
+                            <input type="text" class="form-control full-width" maxlength="80" size="80"
                                    ng-model="drugProdCtrl.model.importerName"/>
                         </label>
                     </div>
@@ -138,73 +138,73 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-12 form-group">
+                <fieldset id="{{::drugProdCtrl.fsType}}">
+                    <legend>
                         <label>
-                            <span class="field-name">F.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
+                            <span class="label-pi">F.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </label>
+                    </legend>
+                    <div class="row">
+                        <div class="col-xs-12 checkbox checkbox-pi">
+                            <label for="is-schedule-c">
+                                <input type="checkbox" name="isScheduleC"
+                                       id="is-schedule-c"
+                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
+                                {{::'SCHEDULE_C'|translate}}
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 checkbox checkbox-pi">
-                        <label for="is-schedule-c">
-                            <input type="checkbox" name="isScheduleC"
-                                   id="is-schedule-c"
-                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
-                            {{::'SCHEDULE_C'|translate}}
-                        </label>
+                    <div class="row">
+                        <div class="col-xs-12 checkbox checkbox-pi">
+                            <label for="is-schedule-d">
+                                <input type="checkbox" name="isScheduleD"
+                                       id="is-schedule-d"
+                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
+                                {{::'SCHEDULE_D'|translate}}
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 checkbox checkbox-pi">
-                        <label for="is-schedule-d">
-                            <input type="checkbox" name="isScheduleD"
-                                   id="is-schedule-d"
-                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
-                            {{::'SCHEDULE_D'|translate}}
-                        </label>
+                    <div class="row">
+                        <div class="col-xs-12 checkbox checkbox-pi">
+                            <label for="is-schedule-f">
+                                <input type="checkbox" name="isScheduleF"
+                                       id="is-schedule-f"
+                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleF"/>
+                                {{::'SCHEDULE_F'|translate}}
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 checkbox checkbox-pi">
-                        <label for="is-schedule-f">
-                            <input type="checkbox" name="isScheduleF"
-                                   id="is-schedule-f"
-                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleF"/>
-                            {{::'SCHEDULE_F'|translate}}
-                        </label>
+                    <div class="row">
+                        <div class="col-xs-12 checkbox checkbox-pi">
+                            <label for="is-regulated-cdsa">
+                                <input type="checkbox" name="isRegulatedCDSA"
+                                       id="is-regulated-cdsa"
+                                       ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
+                                {{::'REGULATED_CDSA'|translate}}
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 checkbox checkbox-pi">
-                        <label for="is-regulated-cdsa">
-                            <input type="checkbox" name="isRegulatedCDSA"
-                                   id="is-regulated-cdsa"
-                                   ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
-                            {{::'REGULATED_CDSA'|translate}}
-                        </label>
+                    <div class="row">
+                        <div class="col-xs-12 checkbox checkbox-pi">
+                            <label for="is-prescription-drug">
+                                <input type="checkbox" name="isPrescriptionDrug"
+                                       id="is-prescription-drug"
+                                       ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrug"/>
+                                {{::'PRESCRIPTION_DRUG'|translate}}
+                            </label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 checkbox checkbox-pi">
-                        <label for="is-prescription-drug">
-                            <input type="checkbox" name="isPrescriptionDrug"
-                                   id="is-prescription-drug"
-                                   ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrug"/>
-                            {{::'PRESCRIPTION_DRUG'|translate}}
-                        </label>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-xs-12 checkbox checkbox-pi">
-                        <label for="is-schedule-a">
-                            <input type="checkbox" name="isScheduleA"
-                                   ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a">
-                            {{::'NON_PRESC_SCHEDULE_A'|translate}}
-                        </label>
+                    <div class="row">
+                        <div class="col-xs-12 checkbox checkbox-pi">
+                            <label for="is-schedule-a">
+                                <input type="checkbox" name="isScheduleA"
+                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a">
+                                {{::'NON_PRESC_SCHEDULE_A'|translate}}
+                            </label>
+                        </div>
                     </div>
-                </div>
+                </fieldset>
 
                 <div class="row" ng-if="drugProdCtrl.isSchedA()">
                     <div class="col-xs-12 form-group">
@@ -299,10 +299,10 @@
                      class="alert-info" close="drugProdCtrl.closeAlert(6)">
                     <section aria-live="assertive">
                         <div ng-if="!drugProdCtrl.isFrench()"
-                             ng-include="'app/scripts/templates/drugProduct/tpl-drug-save-en.html'">
+                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-save-en.html'">
                         </div>
                         <div ng-if="drugProdCtrl.isFrench()"
-                             ng-include="'app/scripts/templates/drug/tpl-dossier-save-fr.html'">
+                             ng-include="'app/scripts/templates/drug/tpl-drugProduct-save-fr.html'">
                         </div>
                     </section>
                 </div>
