@@ -515,4 +515,8 @@
 <row><code>IMPORTER_COMPANY_NAME_IF</code><eng>Importer Company Name</eng><fra>fr_Importer Company Name</fra></row>
 <row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
 <row><code>DOSSIER_TEMP</code><eng>Dossier Template: Regulatory Enrolment Process (REP)</eng><fra></fra></row>
+<row><code>REGULATED_CDSA</code><eng>regulated under the Controlled Drugs and Substances Act</eng><fra>fr_regulated under the Controlled Drugs and Substances Act</fra></row>
+<row><code>PRESCRIPTION_DRUG</code><eng>a Prescription Drug</eng><fra>fr_a Prescription Drug</fra></row>
+<row><code>NON_PRESC_SCHEDULE_A</code><eng>a non-prescription drug to which one or more Schedule A claims apply</eng><fra>fr_a non-prescription drug to which one or more Schedule A claims apply</fra></row>
+<row><code>PROP_INDICATION</code><eng>Proposed Indication</eng><fra>fr_Proposed Indication</fra></row>
 </SimpleCodeList>
