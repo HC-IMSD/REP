@@ -248,6 +248,7 @@
             if(!list) return;
 
             vm.frmModel.countryList = list;
+            vm.noCountry();
         };
         /**
          * @ngDoc determines if dosage Other should be shown
