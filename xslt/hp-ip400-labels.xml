@@ -519,4 +519,38 @@
 <row><code>PRESCRIPTION_DRUG</code><eng>a Prescription Drug</eng><fra>fr_a Prescription Drug</fra></row>
 <row><code>NON_PRESC_SCHEDULE_A</code><eng>a non-prescription drug to which one or more Schedule A claims apply</eng><fra>fr_a non-prescription drug to which one or more Schedule A claims apply</fra></row>
 <row><code>PROP_INDICATION</code><eng>Proposed Indication</eng><fra>fr_Proposed Indication</fra></row>
+<row><code>SCHEDA_DESCRIPTION</code><eng>Provide information below for non prescription products that have associated Schedule A claims only.</eng><fra>fr_Provide information below for non prescription products that have associated Schedule A claims only.</fra></row>
+<row><code>SCHEDA_DETAILS</code><eng>Schedule A Claim Details</eng><fra>fr_Schedule A Claim Details</fra></row>
+<row><code>SCHEDA_DISEASE</code><eng>Please check the diseases and disorders that apply to the claims made (select at least one)</eng><fra>fr_Please check the diseases and disorders that apply to the claims made (select at least one)</fra></row>
+<row><code>DIN_FULL</code><eng>Drug Identification Number (DIN), if issued</eng><fra>fr_Drug Identification Number (DIN), if issued</fra></row>
+<row><code>ACUTEALCOHOL</code><eng>Acute Alcoholism</eng><fra>fr_Acute Alcoholism</fra></row>
+<row><code>ACUTEANXIETY</code><eng>Acute anxiety state</eng><fra>fr_Acute anxiety state</fra></row>
+<row><code>ACUTERESP</code><eng>Acute infectious respiratory syndromes</eng><fra>fr_Acute infectious respiratory syndromes</fra></row>
+<row><code>ACUTEINFLAM</code><eng>Acute inflammatory and debilitating arthiritis</eng><fra>fr_Acute inflammatory and debilitating arthiritis</fra></row>
+<row><code>ACUTEPSYCHOTIC</code><eng>Acute psychotic conditions</eng><fra>fr_Acute psychotic conditions</fra></row>
+<row><code>ADDICTION</code><eng>Addiction (except nicotine addiction)</eng><fra>fr_Addiction (except nicotine addiction)</fra></row>
+<row><code>ATERIOSCLEROSIS</code><eng>Ateriosclerosis</eng><fra>fr_Ateriosclerosis</fra></row>
+<row><code>APPENDICITIS</code><eng>Appendicitis</eng><fra>fr_Appendicitis</fra></row>
+<row><code>ASTHMA</code><eng>Asthma</eng><fra>fr_Asthma</fra></row>
+<row><code>CANCER</code><eng>Cancer</eng><fra>fr_Cancer</fra></row>
+<row><code>HEARTCONGEST</code><eng>Congestive heart failure</eng><fra>fr_Congestive heart failure</fra></row>
+<row><code>CONVULSIONS</code><eng>Convulsions</eng><fra>fr_Convulsions</fra></row>
+<row><code>DEMENTIA</code><eng>Dementia</eng><fra>fr_Dementia</fra></row>
+<row><code>DEPRESSION</code><eng>Depresssion</eng><fra>fr_Depresssion</fra></row>
+<row><code>DIABETES</code><eng>Diabetes</eng><fra>fr_Diabetes</fra></row>
+<row><code>GANGRENE</code><eng>Gangrene</eng><fra>fr_Gangrene</fra></row>
+<row><code>GLAUCOMA</code><eng>Glaucoma</eng><fra>fr_Glaucoma</fra></row>
+<row><code>BLEEDINGDISORDERS</code><eng>Haematologic bleeding disorders</eng><fra>fr_Haematologic bleeding disorders</fra></row>
+<row><code>HEPATITIS</code><eng>Hepatitis</eng><fra>fr_Hepatitis</fra></row>
+<row><code>HYPERTENSION</code><eng>Hypertension</eng><fra>fr_Hypertension</fra></row>
+<row><code>NAUSEAPREG</code><eng>Nausea and vomiting of pregnancy</eng><fra>fr_Nausea and vomiting of pregnancy</fra></row>
+<row><code>OBESITY</code><eng>Obesity</eng><fra>fr_Obesity</fra></row>
+<row><code>RHEUMATICFEVER</code><eng>Rheumatic fever</eng><fra>fr_Rheumatic fever</fra></row>
+<row><code>SEPTICEMIA</code><eng>Septicemia</eng><fra>fr_Septicemia</fra></row>
+<row><code>SEXDISEASE</code><eng>Sexually transmitted disease</eng><fra>fr_Sexually transmitted disease</fra></row>
+<row><code>STRANGHERNIA</code><eng>Strangulated hernia</eng><fra>fr_Strangulated hernia</fra></row>
+<row><code>THROMBOTICDISORDER</code><eng>Thrombotic and Embolic Disorder</eng><fra>fr_Thrombotic and Embolic Disorder</fra></row>
+<row><code>THYROIDDISEASE</code><eng>Thyroid disease</eng><fra>fr_Thyroid disease</fra></row>
+<row><code>UCLERGASTRO</code><eng>Ulcer of gastro-intestinal tract</eng><fra>fr_Ulcer of gastro-intestinal tract</fra></row>
+<row><code>SCHEDA_CLAIMS</code><eng>Please list the schedule A Claims and Indications associated with this product</eng><fra>fr_Please list the schedule A Claims and Indications associated with this product</fra></row>
 </SimpleCodeList>
