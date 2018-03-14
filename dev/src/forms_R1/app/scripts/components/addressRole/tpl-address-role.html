@@ -22,7 +22,7 @@
                         <span ng-if="!ar.isContact">{{::"MANUFACTURER"|translate}}</span>
                         <span ng-if="ar.isContact">{{::"CONTACT_MANUFACTURER"|translate}}</span>
                         <strong id="manufacturer-role-error" class="error" ng-if="ar.roleForm.manufacturer.$invalid">
-                 <span class="label label-danger" ng-messages="ar.roleForm.manufacturer.$error">
+                        <span class="label label-danger" ng-messages="ar.roleForm.manufacturer.$error">
                             <span ng-message="duplicateRole">{{::"MANUFACT_SEL"|translate}}</span>
                         </span>
                         </strong>
@@ -37,81 +37,79 @@
                                ng-change="ar.updateOtherState(ar.roleForm.mailing,'mailing')" id="chk-mailing_{{::$id}}"/>
                         <span ng-if="!ar.isContact">{{::"MAILING"|translate}}</span>
                         <span ng-if="ar.isContact">{{::"CONTACT_MAILING"|translate}}</span>
-<strong id="mailing-role-error" class="error" ng-if="ar.roleForm.mailing.$invalid">
-                 <span class="label label-danger" ng-messages="ar.roleForm.mailing.$error">
+                        <strong id="mailing-role-error" class="error" ng-if="ar.roleForm.mailing.$invalid">
+                        <span class="label label-danger" ng-messages="ar.roleForm.mailing.$error">
                             <span ng-message="duplicateRole">{{::"MAIL_SEL"|translate}}</span>
                         </span>
-</strong>
-</label>
-</div>
-</div>
-</div>
-<div class="row">
-    <div class="col-sm-4">
-        <div class="checkbox">
-            <label for="chk-billing_{{::$id}}">
-                <input type="checkbox" name="billing" ng-model="ar.roleModel.billing"
-                       ng-disabled="!ar.isEditable"
-                       ng-change="ar.updateOtherState(ar.roleForm.billing,'billing')" id="chk-billing_{{::$id}}"/>
-                <span ng-if="!ar.isContact">{{::"BILLING"|translate}}</span>
-                <span ng-if="ar.isContact">{{::"CONTACT_BILLING"|translate}}</span>
-                <strong id="billing-role-error" class="error" ng-if="ar.roleForm.billing.$invalid">
-                 <span class="label label-danger" ng-messages="ar.roleForm.billing.$error">
-                            <span ng-message="duplicateRole">{{::"BILLING_SEL"|translate}}</span>
-                        </span>
-                </strong>
-            </label>
+                        </strong>
+                    </label>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-sm-4">
-        <div  ng-show="!ar.isContact" class="checkbox">
-            <label for="chk-importer_{{::$id}}">
-                <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
-                       ng-disabled="!ar.isEditable"
-                       ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="chk-importer_{{::$id}}"/>
-                <span ng-if="!ar.isContact">{{::"IMPORTER"|translate}}</span>
-                <strong id="importer-rolec-error" class="error" ng-if="ar.roleForm.importer.$invalid">
-                 <span class="label label-danger" ng-messages="ar.roleForm.importer.$error">
-                            <span ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
-                        </span>
-                </strong>
-            </label>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="checkbox">
+                    <label for="chk-billing_{{::$id}}">
+                        <input type="checkbox" name="billing" ng-model="ar.roleModel.billing"
+                               ng-disabled="!ar.isEditable"
+                               ng-change="ar.updateOtherState(ar.roleForm.billing,'billing')" id="chk-billing_{{::$id}}"/>
+                        <span ng-if="!ar.isContact">{{::"BILLING"|translate}}</span>
+                        <span ng-if="ar.isContact">{{::"CONTACT_BILLING"|translate}}</span>
+                        <strong id="billing-role-error" class="error" ng-if="ar.roleForm.billing.$invalid">
+                         <span class="label label-danger" ng-messages="ar.roleForm.billing.$error">
+                                    <span ng-message="duplicateRole">{{::"BILLING_SEL"|translate}}</span>
+                                </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div  ng-show="!ar.isContact" class="checkbox">
+                    <label for="chk-importer_{{::$id}}">
+                        <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
+                               ng-disabled="!ar.isEditable"
+                               ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="chk-importer_{{::$id}}"/>
+                        <span ng-if="!ar.isContact">{{::"IMPORTER"|translate}}</span>
+                        <strong id="importer-rolec-error" class="error" ng-if="ar.roleForm.importer.$invalid">
+                         <span class="label label-danger" ng-messages="ar.roleForm.importer.$error">
+                                    <span ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
+                                </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-4">
-        <div ng-show="ar.isContact" class="checkbox">
-            <label for="chk-rep-primary_{{::$id}}">
-                <input type="checkbox" name="repPrimary" ng-model="ar.roleModel.repPrimary"
-                       ng-disabled="!ar.isEditable"
-                       ng-change="ar.oneSelected(ar.roleForm.repPrimary,'repPrimary')"
-                       id="chk-rep-primary_{{::$id}}"/> {{::'REPPRIMARY'|translate}}
-                <strong id="repPrimmary-role-error" class="error" ng-if="ar.roleForm.repPrimary.$invalid">
-                 <span class="label label-danger" ng-messages="ar.roleForm.repPrimary.$error">
-                            <span ng-message="duplicateRole">{{::"REPPRIM_SEL"|translate}}</span>
-                        </span>
-                </strong>
-            </label>
+        <div class="row">
+            <div class="col-sm-4">
+                <div ng-show="ar.isContact" class="checkbox">
+                    <label for="chk-rep-primary_{{::$id}}">
+                        <input type="checkbox" name="repPrimary" ng-model="ar.roleModel.repPrimary"
+                               ng-disabled="!ar.isEditable"
+                               ng-change="ar.oneSelected(ar.roleForm.repPrimary,'repPrimary')"
+                               id="chk-rep-primary_{{::$id}}"/> {{::'REPPRIMARY'|translate}}
+                        <strong id="repPrimmary-role-error" class="error" ng-if="ar.roleForm.repPrimary.$invalid">
+                         <span class="label label-danger" ng-messages="ar.roleForm.repPrimary.$error">
+                                    <span ng-message="duplicateRole">{{::"REPPRIM_SEL"|translate}}</span>
+                                </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div ng-show="ar.isContact" class="checkbox">
+                    <label for="chk-rep-secondary_{{::$id}}">
+                        <input type="checkbox" name="repSecondary" ng-model="ar.roleModel.repSecondary"
+                               ng-disabled="!ar.isEditable"
+                               ng-change="ar.oneSelected(ar.roleForm.repSecondary,'repSecondary')"
+                               id="chk-rep-secondary_{{::$id}}"/> {{'REPSECONDARY'|translate}}
+                        <strong id="repSecondary-role-error" class="error" ng-if="ar.roleForm.repSecondary.$invalid">
+                         <span class="label label-danger" ng-messages="ar.roleForm.repSecondary.$error">
+                                    <span ng-message="duplicateRole">{{::"REPALT_SEL"|translate}}</span>
+                                </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-sm-4">
-        <div ng-show="ar.isContact" class="checkbox">
-            <label for="chk-rep-secondary_{{::$id}}">
-                <input type="checkbox" name="repSecondary" ng-model="ar.roleModel.repSecondary"
-                       ng-disabled="!ar.isEditable"
-                       ng-change="ar.oneSelected(ar.roleForm.repSecondary,'repSecondary')"
-                       id="chk-rep-secondary_{{::$id}}"/> {{'REPSECONDARY'|translate}}
-                <strong id="repSecondary-role-error" class="error" ng-if="ar.roleForm.repSecondary.$invalid">
-                 <span class="label label-danger" ng-messages="ar.roleForm.repSecondary.$error">
-                            <span ng-message="duplicateRole">{{::"REPALT_SEL"|translate}}</span>
-                        </span>
-                </strong>
-            </label>
-        </div>
-        </label>
-    </div>
-</div>
-</div>
-</fieldset>
+    </fieldset>
 </ng-form>
