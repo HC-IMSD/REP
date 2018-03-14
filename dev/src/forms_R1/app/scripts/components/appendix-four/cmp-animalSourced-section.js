@@ -68,7 +68,7 @@
         vm.updateCountryList = function (list) {
 
             vm.model.countryList = list;
-            console.log("updating country list")
+            //console.log("updating country list")
             vm.noCountrySrc();
 
         };
@@ -90,13 +90,13 @@
         };
         vm.noCountrySrc = function () {
             if (vm.model.countryList.length > 0) {
-                console.log("found a country")
+                //console.log("found a country")
                 vm.oneCountry = "selected";
                 return false;
             }
             vm.oneCountry = "";
             return true;
-        }
+        };
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;

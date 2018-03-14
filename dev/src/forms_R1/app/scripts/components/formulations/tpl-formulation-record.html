@@ -164,7 +164,7 @@
                          </strong>-->
                     </header>
                     <div class="panel-body">
-                        <input type="text" required ng-show="false" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
+                        <input type="hidden" required name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
                                  aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
                                           on-update="formulRecCtrl.updateCountryList(list)"
