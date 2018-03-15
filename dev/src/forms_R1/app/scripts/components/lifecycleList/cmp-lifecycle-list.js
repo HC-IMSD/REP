@@ -169,10 +169,14 @@
             if (!vm.lifecycleList || vm.lifecycleList.length === 0) {
                 vm.oneRecord = "";
             } else {
-                vm.oneRecord = "is value";
-
+                for (var i = 0; i < vm.lifecycleList.length; i++ ) {
+                    if (vm.lifecycleList[i].isSaved) {
+                        vm.oneRecord = "is value";
+                        return;
+                    }
+                }
+                vm.oneRecord = "";
             }
-
         };
 
         vm.addTransaction = function () {
@@ -185,7 +189,7 @@
             vm.updateErrorState();
         };
         vm.setStartingSequence=function(){
-            if(isNaN(vm.startingSequence) ||vm.startingSequence==null){
+            if(isNaN(vm.startingSequence) ||vm.startingSequence === null){
                 vm.startingSequence=0;
             }
             vm.setSequenceValue({start:vm.startingSequence});
@@ -207,11 +211,13 @@
             record.dateFiled = convertDate(record.dateFiled);
             record.startDate = convertDate(record.startDate);
             record.endDate = convertDate(record.endDate);
+            record.isSaved = true;
             vm.lifecycleList[idx] = angular.copy(record);
             vm.setValid(true);
             vm.selectRecord = -1;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = true;
+            vm.updateErrorState();
         };
         /**
          * @ngdoc method determines the state of the list errors

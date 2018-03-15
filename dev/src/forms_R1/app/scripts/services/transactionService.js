@@ -607,7 +607,8 @@
             "endDate": "",
             "details": "",
             "sequenceVersion": "",
-            "sequenceConcat": ""
+            "sequenceConcat": "",
+            "isSaved": false
         };
         //TODO get next sequence number
         return defaultRecord;

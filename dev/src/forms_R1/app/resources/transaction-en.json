@@ -137,7 +137,7 @@
   "PREFEERED_OPTION":"Bill Payment Service Option (preferred method)",
   "REG_TRANSACT":"Regulatory Transaction",
   "LIFE_REC":"Lifecycle Record",
-  "ONELIFEREC": "One lifecycle record is required.",
+  "ONELIFEREC": "At least one lifecycle record is required to save.",
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"with a Lifecycle Record",
   "OTHER_DOC_DETAILS": "Other Documentation Details"
 }
