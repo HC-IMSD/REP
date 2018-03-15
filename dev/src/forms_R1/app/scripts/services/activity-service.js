@@ -216,7 +216,6 @@
             model.enrolmentVersion = jsonObj.enrolment_version;
             model.dateSaved = jsonObj.date_saved;
             model.applicationType = jsonObj.application_type;
-            console.log(jsonObj.application_type)
             model.softwareVersion = jsonObj.software_version;
             model.dataChecksum = jsonObj.software_version;
             model.dossierIdPrefix = jsonObj.dossier_id_prefix;
@@ -439,7 +438,6 @@
     function _transformContactFromFileObj(contactObj) {
         var contact = {};
         if (!contactObj) {
-            console.error("There is no contact object");
             return contact;
         }
         contact.salutation = contactObj.salutation;

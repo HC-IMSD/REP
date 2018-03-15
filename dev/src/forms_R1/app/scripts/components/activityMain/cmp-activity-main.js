@@ -251,7 +251,6 @@
             vm.formAmend = vm.activityRoot.applicationType === AMEND_TYPE;
             //disableXMLSave();
             if(vm.activityRoot.applicationType === APPROVED_TYPE && vm.activityRoot.userType === EXTERNAL_TYPE){
-                console.log("amend!!!");
                 vm.activityRoot.reasonAmend="";
             }
         };
@@ -446,9 +445,7 @@
             }
         };
         vm.rolechecked = function (){
-            console.log("cccccccccc");
             if(vm.activityRoot.importer===false){
-                console.log("false");
                 vm.activityRoot.importerId = "";
             }
             if(vm.activityRoot.manu || vm.activityRoot.mailling || vm.activityRoot.billing || vm.activityRoot.importer){
@@ -468,9 +465,6 @@
         };
 
         vm.showErrorMissing = function () {
-            console.log(vm.activityEnrolForm.$dirty);
-            console.log(vm.activityEnrolForm)
-            console.log("Check called"+vm.check);
             if ((vm.activityEnrolForm.$dirty && !vm.check) || (vm.showErrors() && !vm.check)) {
                 return true
             }
