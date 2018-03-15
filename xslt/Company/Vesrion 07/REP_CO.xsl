@@ -55,7 +55,7 @@
 								<h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ADDR_RECO'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h2>
 							</div>
 							<div class="panel-body">
-							<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
+							<TABLE border="1" cellspacing="2" cellpadding="2" style="width: 100%;word-wrap: break-word;">
 								<TR>
 									<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COMPANY'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
 									<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ADDR_INFO'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
@@ -64,10 +64,10 @@
 								</TR>
 								<xsl:for-each select="address_record">
 									<tr>
-									<td><span><xsl:value-of select="./company_name"/></span></td>
-									<td><xsl:call-template name="address"/></td>
-									<td><span><xsl:value-of select="./importer_id"/></span></td>
-									<td><span><xsl:call-template name="addressRoles"/></span></td>
+									<td style="padding-left:2px;"><span><xsl:value-of select="./company_name"/></span></td>
+									<td style="padding-left:2px;"><xsl:call-template name="address"/></td>
+									<td style="padding-left:2px;"><span><xsl:value-of select="./importer_id"/></span></td>
+									<td style="padding-left:2px;"><span><xsl:call-template name="addressRoles"/></span></td>
 									</tr>
 								</xsl:for-each>
 							</TABLE>
@@ -78,7 +78,7 @@
 								<h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTACT_INFO'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h2>
 							</div>
 							<div class="panel-body">
-							<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
+							<TABLE border="1" cellspacing="2" cellpadding="2" style="width: 100%;word-wrap: break-word;">
 								<tr>
 <!--									<td width="2%" aria-selected="false"></td>-->
 									<td style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'REPRES'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
@@ -88,9 +88,9 @@
 								<xsl:for-each select="contact_record">
 									<tr>
 <!--										<td><span class="fa fa-lg fa-fw fa-caret-right"></span></td>-->
-										<td><span><xsl:call-template name="representative"/></span></td>
-										<td><span><xsl:call-template name="contactBy"/></span></td>
-										<td><span><xsl:call-template name="contactRoles"/></span></td>
+										<td style="padding-left:2px;"><span><xsl:call-template name="representative"/></span></td>
+										<td style="padding-left:2px;"><span><xsl:call-template name="contactBy"/></span></td>
+										<td style="padding-left:2px;"><span><xsl:call-template name="contactRoles"/></span></td>
 									</tr>
 								</xsl:for-each>
 							</TABLE>
@@ -211,14 +211,14 @@
 					</xsl:otherwise>
 					</xsl:choose>
 				</span>&#xA0;
-				<span class="value">
-					<xsl:value-of select="./company_address_details/postal_code"/>
-				</span>
+			</div>
+			<div class="address">
+				<xsl:value-of select="./company_address_details/postal_code"/>
 			</div>
 		</div>
 	</xsl:template>
 	<xsl:template name="addressRoles">
-		<div class="address">
+		<div class="address" style="white-space:nowrap;">
 			<xsl:element name="input">
                 <xsl:attribute name="type">checkbox</xsl:attribute>
                 <xsl:if test=" manufacturer = 'Y'">
@@ -231,7 +231,7 @@
 				<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MANUFACT_SEL'"/><xsl:with-param name="language" select="$language"/></xsl:call-template>
 			</span>
 		</div>
-		<div class="address">
+		<div class="address" style="white-space:nowrap;">
 			<xsl:element name="input">
                 <xsl:attribute name="type">checkbox</xsl:attribute>
                 <xsl:if test=" manufacturer = 'Y'">
@@ -244,7 +244,7 @@
 				<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MAIL_SEL'"/><xsl:with-param name="language" select="$language"/></xsl:call-template>
 			</span>
 		</div>
-		<div class="address">
+		<div class="address" style="white-space:nowrap;">
 			<xsl:element name="input">
                 <xsl:attribute name="type">checkbox</xsl:attribute>
                 <xsl:if test=" manufacturer = 'Y'">
@@ -257,10 +257,10 @@
 				<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'BILLING_SEL'"/><xsl:with-param name="language" select="$language"/></xsl:call-template>
 			</span>
 		</div>
-		<div class="address">
+		<div class="address" style="white-space:nowrap;">
 			<xsl:element name="input">
                 <xsl:attribute name="type">checkbox</xsl:attribute>
-                <xsl:if test=" manufacturer = 'Y'">
+                <xsl:if test=" importer = 'Y'">
                     <xsl:attribute name="checked"></xsl:attribute>
                 </xsl:if>
                 <xsl:attribute name="disabled">disabled</xsl:attribute>
@@ -282,9 +282,9 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///c:/Users/hcuser/Downloads/draftrepco-0-1.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/company.html" processortype="saxon8" useresolver="yes"
-		          profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
-		          validateoutput="no" validator="internal" customvalidator="">
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcrepco-12345-1-0.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/company.html" processortype="saxon8" useresolver="yes" profilemode="0"
+		          profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no"
+		          validator="internal" customvalidator="">
 			<advancedProp name="sInitialMode" value=""/>
 			<advancedProp name="schemaCache" value="||"/>
 			<advancedProp name="bXsltOneIsOkay" value="true"/>
