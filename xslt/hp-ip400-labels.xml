@@ -553,4 +553,5 @@
 <row><code>THYROIDDISEASE</code><eng>Thyroid disease</eng><fra>fr_Thyroid disease</fra></row>
 <row><code>UCLERGASTRO</code><eng>Ulcer of gastro-intestinal tract</eng><fra>fr_Ulcer of gastro-intestinal tract</fra></row>
 <row><code>SCHEDA_CLAIMS</code><eng>Please list the schedule A Claims and Indications associated with this product</eng><fra>fr_Please list the schedule A Claims and Indications associated with this product</fra></row>
+<row><code>INGREDIENTS</code><eng>Ingredients</eng><fra>fr_Ingredients</fra></row>
 </SimpleCodeList>
