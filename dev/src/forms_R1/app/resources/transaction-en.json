@@ -2,7 +2,7 @@
   "ADD_TRANSACTION": "Add Record",
   "SEQUENCE_NUM": "Sequence Number",
   "DATE_SUBMITTED": "Date Submitted (YYYY-MM-DD)",
-  "SEQUENCE_DESCRIPT": "Sequence Description",
+  "SEQUENCE_DESCRIPT": "Regulatory Transaction Description",
   "IS_ACTCHANGES": "Same as Regulatory Activity Contact for this Submission?",
   "COMPANY_ID": "Company ID",
   "DOSSIER_ID": "Dossier ID",
@@ -137,7 +137,7 @@
   "PREFEERED_OPTION":"Bill Payment Service Option (preferred method)",
   "REG_TRANSACT":"Regulatory Transaction",
   "LIFE_REC":"Lifecycle Record",
-  "ONELIFEREC": "One lifecycle record is required.",
+  "ONELIFEREC": "At least one lifecycle record is required to save.",
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"with a Lifecycle Record",
   "OTHER_DOC_DETAILS": "Other Documentation Details"
 }

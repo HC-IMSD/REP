@@ -9,7 +9,7 @@
             <div>
                 <fieldset>
                     <legend>{{contactRec.contactModel.repRole |translate}} &nbsp;{{::'REP_CONTACT' |translate}}</legend>
-                    <div class="row" ng-show="contactRec.formAmend">
+                  <!--  <div class="row" ng-show="contactRec.formAmend">
                         <div class="col-sm-12 form-group">
                             <div class="checkbox">
                                 <label for="chkAmend_{{$id}}">
@@ -19,7 +19,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="row">
                         <cmp-contact-details contact-record="contactRec.contactModel"
                                              is-amend="contactRec.editState" update-error-summary="contactRec.updateErrorSummaryState()"

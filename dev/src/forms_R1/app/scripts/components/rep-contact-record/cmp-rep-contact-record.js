@@ -77,11 +77,11 @@
             //how this is currently wired, this will never fire!
             if (changes.contactRecord) {
                 vm.contactModel = angular.copy(changes.contactRecord.currentValue);
-                vm.setEditableState();
+              //  vm.setEditableState();
             }
             if (changes.isAmend) {
                 vm.formAmend = changes.isAmend.currentValue;
-                vm.setEditableState();
+               // vm.setEditableState();
             }
 
             /** Messaging for Showing the error summary **/
@@ -104,7 +104,7 @@
             if (vm.contactRecForm.$pristine) return;
             var currRecord = vm.contactRecord;
             vm.contactModel = angular.copy(currRecord);
-            vm.setEditableState();
+            //vm.setEditableState();
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
             vm.isDetailValid({state: vm.contactRecForm.$valid});

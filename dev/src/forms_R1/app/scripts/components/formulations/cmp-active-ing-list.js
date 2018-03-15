@@ -38,7 +38,7 @@
         vm.newIngFormShown = false;
         vm.isDetailValid = true;
         vm.selectRecord = -1;
-        vm.noActiveValues=""; //used for error handling Business Rule: must be at least one active
+        vm.noActiveValues=""; //used for error handling Business Rule: must be at least one medicinal
 
         vm.colNames = [
             {label: "ROLE", binding: "ingRole", width: "20"},
@@ -78,6 +78,7 @@
             vm.ingList[idx] = angular.copy(ing);
             vm.onUpdate({list:vm.ingList});
             vm.setValid(true);
+            vm.noActives();
         };
 
         vm.deleteIng = function (idx) {
@@ -136,12 +137,19 @@
 
         vm.noActives=function(){
 
-            if(!vm.ingList ||vm.ingList.length===0){
-                vm.noActiveValues="";
+            if (vm.ingList && vm.ingList.length !== 0) {
+                for (var i = 0; i < vm.ingList.length; i++) {
+                    if(vm.ingList[i].ingRole === 'MED') {
+                        vm.noActiveValues="values";
+                        return false;
+                    }
+                }
+                vm.noActiveValues = "";
+                return true;
+            } else {
+                vm.noActiveValues = "";
                 return true;
             }
-            vm.noActiveValues="values";
-            return false;
         };
 
         /**

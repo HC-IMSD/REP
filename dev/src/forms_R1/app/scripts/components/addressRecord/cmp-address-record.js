@@ -174,13 +174,10 @@
                 vm.updateErrorSummaryState();
             }
             if(changes.isIn){
-                console.log(changes.isIn.currentValue)
                     if(changes.isIn.currentValue===INTERNAL_TYPE){
-                    console.log("is ture")
                         vm.isInternal=true;
                     }
                     else {
-                        console.log("is false")
                         vm.isInternal=false;
                     }
             }

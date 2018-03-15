@@ -68,7 +68,7 @@
         vm.updateCountryList = function (list) {
 
             vm.model.countryList = list;
-            console.log("updating country list")
+            //console.log("updating country list")
             vm.noCountrySrc();
 
         };
@@ -90,23 +90,24 @@
         };
         vm.noCountrySrc = function () {
             if (vm.model.countryList.length > 0) {
-                console.log("found a country")
+                //console.log("found a country")
                 vm.oneCountry = "selected";
                 return false;
             }
             vm.oneCountry = "";
             return true;
-        }
+        };
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.oneAnimalId="msg_err_one_animal"+scopeId;
+            vm.oneAnimalId="no_animal"+scopeId;
             vm.animalSectionRecordId = "anSectForm" + scopeId;
             vm.cellLineId="cellLine" + scopeId;
             vm.controlledPopId="controlledPop"+scopeId;
             vm.ageAnimalsId="ageAnimals"+scopeId;
             vm.isBiotechId="biotechderived"+scopeId;
-            vm.noCountryId="msg_err_one_cntry_origin"+scopeId;
+            //vm.noCountryId="msg_err_one_cntry_origin"+scopeId;
+            vm.noCountryId="no_country_origin"+scopeId;
         }
         $scope.$watch('animalSectCtrl.anSectForm.$error', function () {
             vm.updateErrorSummary();

@@ -19,7 +19,6 @@
 	<hpfb:element name="software_version" type="char_0_40_content"/>
 	<hpfb:element name="company_id" type="char_0_6_content" />
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
-	<hpfb:element name="amend_record" type="required_yes_no_content"/>
 	<hpfb:element name="manufacturer" type="required_yes_no_content"/>
 	<hpfb:element name="mailing" type="required_yes_no_content"/>
 	<hpfb:element name="billing" type="required_yes_no_content"/>
@@ -57,7 +56,6 @@
 	<hpfb:complexType name="contact_record_content">
 		<hpfb:all>
 			<hpfb:element ref="contact_id"/>
-			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>
 			<hpfb:element ref="billing"/>
@@ -70,7 +68,6 @@
 	<hpfb:complexType name="address_record_content">
 		<hpfb:all>
 			<hpfb:element ref="address_id" />
-			<hpfb:element ref="amend_record"/>
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>
 			<hpfb:element ref="billing"/>

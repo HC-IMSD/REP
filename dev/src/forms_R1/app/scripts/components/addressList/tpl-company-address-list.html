@@ -7,8 +7,8 @@
                                update-errors="addressListCtrl.updateSummary" form-preamble="ADDR_INFO"
                                set-heading-level="h4"></cmp-error-summary>-->
         </div>
-        <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}" ng-show="false"
-               ng-model="addressListCtrl.allRolesSelected" required/>
+        <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}"
+               ng-model="addressListCtrl.allRolesSelected" hidden required/>
 
         <input type="text" id="importerIdValid_{{::$id}}" name="importerIdValid_{{::$id}}"  ng-model="addressListCtrl.importerhasID" hidden ng-required="addressListCtrl.isInternal"/>
        <!-- <label>

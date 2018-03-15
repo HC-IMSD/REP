@@ -47,7 +47,7 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "1.2.0",
+                softwareVersion: "2.0.0",
                 dataChecksum: "",
                 //dossierType: "",
                // productName: "",
@@ -165,7 +165,7 @@
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
             baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "1.1.0"; //TODO: hard code or make a function, should be centrally available
+            baseModel.software_version = "2.0.0"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
             //baseModel.dossier_type = jsonObj.dossierType;
@@ -433,8 +433,8 @@
                 } else {
                     obj.nMedIngList = [];
                 }*/
-                if (item.active_ingredient) {
-                    obj.activeIngList = getActiveIngList(item.active_ingredient);
+                if (item.formulation_ingredient) {
+                    obj.activeIngList = getActiveIngList(item.formulation_ingredient);
                 } else {
                     obj.activeIngList = [];
                 }
@@ -520,7 +520,7 @@
 
                 if (item.units_presentation) {
                     var upValue = item.units_presentation.__text;
-                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: upValue});
+                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
                 }
 
                 if (item.units_measure) {
@@ -909,7 +909,7 @@
                     obj.country_group.country_manufacturer = formulationCountryListToOutput(item.countryList);
                 }
                 if (item.activeIngList && item.activeIngList.length > 0) {
-                    obj.active_ingredient = activeListToOutput(item.activeIngList);
+                    obj.formulation_ingredient = activeListToOutput(item.activeIngList);
                 }
                 /*if (item.nMedIngList && item.nMedIngList.length > 0) {
                     obj.nonmedicinal_ingredient = nonMedIngListToOutput(item.nMedIngList);

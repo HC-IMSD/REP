@@ -16,14 +16,11 @@
 	<hpfb:element name="DRUG_PRODUCT_ENROL" type="drug_product_enrol_content"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
-	<hpfb:element name="application_type" type="rep_type"/>
 	<hpfb:element name="software_version" type="hpfb:string"/>
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="dossier_id" type="char_0_7_content"/>
-	<hpfb:element name="dossier_type" type="form_types_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
-	<hpfb:element name="related_dossier_id" type="char_0_256_content"/>
-	<hpfb:element name="importer_id" type="char_1_6_content"/>
+	<hpfb:element name="importer_id" type="char_0_6_content"/>
 	<hpfb:element name="importer_name" type="char_0_256_content"/>
 	<hpfb:element name="is_sched_c" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_d" type="required_yes_no_content"/>
@@ -80,7 +77,6 @@
 	<hpfb:element name="sched_a_claims_ind_details" type="char_1_256_content"/>
 	<!-- ingredients-->
 	<hpfb:element name="appendix4_group" type="appendix4_content"/>
-	<!--<hpfb:element name="drug_ingredient" type="ingredient_content"/>-->
 	<hpfb:element name="ingredient_role" type="char_1_100_content"/>
 	<hpfb:element name="ingredient_id" type="char_0_40_content" nillable="true"/>
 	<hpfb:element name="ingredient_name" type="char_1_100_content"/>
@@ -255,7 +251,7 @@
 	<hpfb:element name="shelf_life_number" type="optional_integer_0_99_content"/>
 	<hpfb:element name="temperature_min" type="temp_integer_content" />
 	<hpfb:element name="temperature_max" type="temp_integer_content" />
-	<hpfb:element name="active_ingredient" type="active_group_content"/>
+	<hpfb:element name="formulation_ingredient" type="ingredient_content"/>
 	<hpfb:element name="material_ingredient" type="material_group_content"/>
 	<hpfb:element name="strength" type="strength_content"/>
 	<hpfb:element name="operator">
@@ -337,13 +333,10 @@
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="importer_id"/>
 			<hpfb:element ref="importer_name"/>
-			<hpfb:element ref="related_dossier_id"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
-			<hpfb:element ref="application_type"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
-			<hpfb:element ref="dossier_type"/>
 			<hpfb:element ref="drug_use"/>
 			<hpfb:element ref="is_sched_c"/>
 			<hpfb:element ref="is_sched_d"/>
@@ -460,7 +453,7 @@
 			<hpfb:element ref="roa_group"/>
 			<hpfb:element ref="container_group"/>
 			<hpfb:element ref="country_group"/>
-			<hpfb:element ref="active_ingredient" minOccurs="1" maxOccurs="unbounded"/>
+			<hpfb:element ref="formulation_ingredient" minOccurs="1" maxOccurs="unbounded"/>
 			<hpfb:element ref="is_animal_human_material"/>
 			<hpfb:element ref="material_ingredient" minOccurs="0" maxOccurs="unbounded"/>
 		</hpfb:sequence>
@@ -503,7 +496,7 @@
 			<hpfb:element ref="temperature_max"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-	<hpfb:complexType name="active_group_content">
+	<hpfb:complexType name="ingredient_content">
 		<hpfb:sequence>
 			<hpfb:element ref="ingredient_role"/>
 			<hpfb:element ref="ingredient_id"/>
@@ -516,7 +509,7 @@
 			<hpfb:element ref="units_other"/>
 			<hpfb:element ref="per"/>
 			<hpfb:element ref="units_presentation"/>
-			<hpfb:element ref="units_presentation"/>
+			<hpfb:element ref="units_measure"/>
 			<hpfb:element ref="units_other_measure"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
@@ -537,7 +530,7 @@
 			<hpfb:element ref="units_other"/>
 			<hpfb:element ref="per"/>
 			<hpfb:element ref="units_presentation"/>
-			<hpfb:element ref="units_presentation"/>
+			<hpfb:element ref="units_measure"/>
 			<hpfb:element ref="units_other_measure"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>

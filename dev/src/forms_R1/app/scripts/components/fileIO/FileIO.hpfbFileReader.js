@@ -183,14 +183,14 @@
                         var splitFile = file.name.split('.');
                         var fileType = splitFile[splitFile.length - 1];
                         if ((fileType.toLowerCase()) == draft_file_type) {
-                            convertToJSONObjects(reader);
+                            convertToJSONObjects(reader, scope);
                             checkRootTagMatch(reader, scope);
                             /* As per meeting of oct 21
                             if (reader.parseResult.jsonResult) {
                                 compareHashInJson(reader, scope.rootTag);
                             }*/
                         } else if ((fileType.toLowerCase() === "xml")) {
-                            convertXMLToJSONObjects(reader);
+                            convertXMLToJSONObjects(reader, scope);
                             checkRootTagMatch(reader, scope);
                             /* As per meeting of oct 21
                             if (reader.parseResult.jsonResult) {
@@ -241,10 +241,11 @@
             return deferred.promise;
         }
 
-        function convertToJSONObjects(reader) {
+        function convertToJSONObjects(reader, scope) {
 
             try {
                 convertResult.jsonResult = JSON.parse(reader.result);
+                convertResult.jsonResult[scope.rootTag].importFileType = draft_file_type;
                 convertResult.messages = msg_success;
                 reader.parseResult = convertResult;
             } catch (e) {
@@ -259,7 +260,7 @@
          * @param reader- the extended file reader object
          * @returns null
          */
-        function convertXMLToJSONObjects(reader) {
+        function convertXMLToJSONObjects(reader, scope) {
             var xmlConfig = {
                 escapeMode: true,
                 emptyNodeForm: "text",
@@ -273,6 +274,8 @@
                 convertResult.messages = msg_err_xmlparse;
             } else {
                 convertResult.messages = msg_success;
+                convertResult.jsonResult[scope.rootTag].importFileType = "xml";
+
             }
             reader.parseResult = convertResult;
         }

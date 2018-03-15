@@ -248,6 +248,7 @@
             if(!list) return;
 
             vm.frmModel.countryList = list;
+            vm.noCountry();
         };
         /**
          * @ngDoc determines if dosage Other should be shown
@@ -281,7 +282,7 @@
             vm.formulationFormRecordId="formulationRecord" + scopeId;
             vm.dosageId = "dosage_form" + scopeId;
             vm.dosageOtherId = "dosage_form_other" + scopeId;
-            vm.noActiveId="no_active"+scopeId;
+            vm.noActiveId="no_active"+scopeId; //Todo: can remove?
             vm.noContainerId="no_container"+scopeId;
             vm.noRoaId="no_roa"+scopeId;
             vm.noCountryId="no_country"+scopeId;
