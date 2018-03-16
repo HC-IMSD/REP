@@ -101,6 +101,7 @@
         vm.$onInit = function () {
 
             _setIdNames();
+            vm.noCountry();
         };
         vm.$onChanges=function(changes){
             if(changes.record){
