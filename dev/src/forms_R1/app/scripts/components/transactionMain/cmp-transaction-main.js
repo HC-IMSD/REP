@@ -58,9 +58,13 @@
         };
         vm.transcludeList = {}; //specific to expanding table to tag records
         vm.alias = { // do something other than a simple hyperlink
+            "saveLifeRec": {
+                "type": "buttonSearch",
+                "buttonName": "saveLifecycleRec"
+            },
             "oneLifeRec": {
-                "type": "element",
-                "target": "addTransactionRec"
+                "type": "buttonSearch",
+                "buttonName": "addTransactionRec"
             },
             "one_payment_method": {
                 "type": "fieldset",

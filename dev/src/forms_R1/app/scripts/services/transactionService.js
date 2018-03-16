@@ -448,6 +448,7 @@
         lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.sequence_concat;
+        lifecycleRec.isSaved = true;
         return (lifecycleRec);
     }
 

@@ -219,7 +219,7 @@
                     <div class="row">
                         <div class="btn-group-sm col-xs-12 text-right">
                             <button class="btn btn-primary"
-                                    name="saveContact" id="saveContact" ng-click="lifecycleCtrl.updateLivecycleModel()"
+                                    name="saveLifecycleRec_{{::$id}}" id="saveLifecycleRec_{{::$id}}" ng-click="lifecycleCtrl.updateLivecycleModel()"
                                     ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}
                             </button>
                             <button class="btn btn-danger" ng-click="lifecycleCtrl.delete()"

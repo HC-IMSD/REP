@@ -195,6 +195,11 @@
             vm.setSequenceValue({start:vm.startingSequence});
         };
 
+        vm.isSelectedRecord = function () {
+            return (vm.selectRecord === 0 );
+
+        };
+
         vm.isAddDisabled = function () {
             return (!vm.isDetailsValid || (!vm.ectdValue && vm.lifecycleList.length > 0) || (vm.lifecycleListForm.$invalid && vm.lifecycleList.length > 0))
 

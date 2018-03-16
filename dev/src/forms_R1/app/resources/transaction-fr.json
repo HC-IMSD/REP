@@ -112,7 +112,8 @@
   "SUPPORTING_DOC":"fr_Please include the required signed statement AND at least one of the support documentation to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period.",
   "REG_TRANSACT":"fr_Regulatory Transaction",
   "LIFE_REC":"fr_Lifecycle Record",
-  "ONELIFEREC": "fr_At least one lifecycle record is required to save.",
+  "ONELIFEREC": "fr_At least one lifecycle record is required.",
+  "SAVELIFEREC": "fr_At least one lifecycle record is required to save.",
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"fr_with a Lifecycle Record",
   "OTHER_DOC_DETAILS": "fr_Other Documentation Details"
 

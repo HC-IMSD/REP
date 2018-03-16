@@ -1,5 +1,7 @@
 <ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
-    <input type="hidden" id="oneLifeRec_{{$id}}" name="oneLifeRec_{{$id}}"
+    <input ng-if="!lifeListCtrl.isSelectedRecord()" type="hidden" id="oneLifeRec_{{$id}}" name="oneLifeRec_{{$id}}"
+           ng-model="lifeListCtrl.oneRecord" required/>
+    <input ng-if="lifeListCtrl.isSelectedRecord()" type="hidden" id="saveLifeRec_{{$id}}" name="saveLifeRec_{{$id}}"
            ng-model="lifeListCtrl.oneRecord" required/>
     <div class="row" ng-if="lifeListCtrl.ectdValue">
         <div class="col-xs-4 form-group">
@@ -37,7 +39,7 @@
         <div class="row mrgn-tp-md mrgn-bttm-lg">
             <div class="btn-group-sm col-md-12 text-right">
                 <button class="btn btn-primary"
-                        ng-click="lifeListCtrl.addTransaction()" name="lifeListCtrl.lifecycleListForm.addRec"
+                        ng-click="lifeListCtrl.addTransaction()" name="addTransactionRec_{{::$id}}"
                         id="addTransactionRec_{{::$id}}"
                         ng-disabled="lifeListCtrl.isAddDisabled()">{{'ADD_TRANSACTION'|translate}}
                 </button>
