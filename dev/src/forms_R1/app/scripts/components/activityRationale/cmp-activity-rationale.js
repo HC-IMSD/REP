@@ -25,11 +25,20 @@
                 showErrors: "&"
             }
         });
-    function activityRationaleCtrl() {
+    activityRationaleCtrl.$inject=['$scope'];
+
+    function activityRationaleCtrl($scope) {
         var vm = this;
         vm.record = {};
         vm.requiredState = false;
         vm.rationaleSelected = ""; //sets error handling
+
+
+       vm.$onInit=function(){
+           _setIdNames();
+
+       };
+
         /**
          *
          * @param changes
@@ -79,6 +88,10 @@
             }
         }
 
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.ratMissingId="rationale_missing"+scopeId;
 
+        }
     }
 })();

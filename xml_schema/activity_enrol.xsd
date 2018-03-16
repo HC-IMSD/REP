@@ -35,6 +35,16 @@
 			</hpfb:simpleContent>
 		</hpfb:complexType>
 	</hpfb:element>
+	<hpfb:element name="sub_type">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="is_admin_submission" type="yes_no_content"/>
 	<hpfb:element name="license_agreement" type="required_yes_no_content"/>
 	<hpfb:element name="reason_filing" type="char_1_1024_content"/>
@@ -62,11 +72,11 @@
 	<hpfb:element name="notifiable_change_types" type="change_types_content"/>
 	<hpfb:element name="rationale_types" type="rationale_content"/>
 	<hpfb:element name="contact_record" type="contact_record_content"/>
-	<hpfb:element name="rep_contact_role" type="required_yes_no_content"/>
+	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"/>
 	<hpfb:element name="rep_contact_details" type="contact_content"/>
 
-	<hpfb:element name="is_priority_review" type="required_yes_no_content"/>
-	<hpfb:element name="is_noc_review" type="required_yes_no_content"/>
+	<hpfb:element name="is_priority" type="required_yes_no_content"/>
+	<hpfb:element name="is_noc" type="required_yes_no_content"/>
 	<hpfb:element name="manufacturer" type="required_yes_no_content"/>
 	<hpfb:element name="mailing" type="required_yes_no_content"/>
 	<hpfb:element name="billing" type="required_yes_no_content"/>
@@ -93,13 +103,14 @@
 			<hpfb:element ref="dossier_id_concat"/>
 			<hpfb:element ref="reg_activity_lead"/>
 			<hpfb:element ref="reg_activity_type"/>
+			<hpfb:element ref="sub_type"/>
 			<hpfb:element ref="reason_filing"/>
 			<hpfb:element ref="is_third_party"/>
 			<hpfb:element ref="is_admin_submission"/>
+			<hpfb:element ref="is_priority"/>
+			<hpfb:element ref="is_noc"/>
 			<hpfb:element ref="notifiable_change_types"/>
 			<hpfb:element ref="rationale_types"/>
-			<hpfb:element ref="is_priority_review"/>
-			<hpfb:element ref="is_noc_review"/>
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>
 			<hpfb:element ref="billing"/>
@@ -145,5 +156,7 @@
 			<hpfb:element ref="other_rationale_details"/>
 		</hpfb:all>
 	</hpfb:complexType>
+
+
 
 </hpfb:schema>
