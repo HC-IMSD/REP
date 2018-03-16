@@ -26,8 +26,13 @@
         vm.feeClassArray = [];
         vm.raTypeArray = [];
         vm.adminSubTypeArray = [];
-
+        /** Lead values. Hard coded as different lists need to be   **/
         vm.BIOLOGICAL = "B14-20160301-02"; //biological
+        vm.MDF="B14-20160301-07"; //master drug file
+        vm.PHARMA="B14-20160301-09"; //pharmaceutical
+        vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
+
+
         vm.NC_raType = "B02-20160301-050";
         vm.SANDS_raType = "B02-20160301-082";
         vm.SNDS_raType = "B02-20160301-084";
@@ -39,12 +44,15 @@
             //createRaTypeList:_createRaTypeArray,
             getActivityLeadList: _getActivityLeadArray,
             getBiologicalLeadValue: _getBiologicalLead,
+            getPharmaLeadValue: _getPharmaLead,
+            getPostMarketLeadValue: _getPostMarketLead,
             getSANDSRaTypeValue: _getSANDS_raType,
             getSNDSTypeValue: _getSNDS_raType,
             getNCTypeValue: _getNC_raType,
-            getDINTypeValue: _getDIN_raType,
+           // getDINTypeValue: _getDIN_raType,
             createAdminSubType: _createAdminSubType,
             getAdminSubType: _getAdminSubType
+
         };
         return service;
 
@@ -143,10 +151,10 @@
         function _getActivityLeadArray() {
             return (
                 [
-                    "B14-20160301-09", //Pharmaceutical
+                    vm.PHARMA, //Pharmaceutical
                     vm.BIOLOGICAL, //Biological
-                    "B14-20160301-10", //Post-Market Pharmacovigilance
-                    "B14-20160301-07" //Drug Master File
+                    vm.POSTMARKET //Post-Market Pharmacovigilance
+                    //not in scope for pilot (March 8,2018 email "B14-20160301-07" //Drug Master File
                 ]
             );
         }
@@ -159,6 +167,14 @@
         function _getBiologicalLead() {
             return vm.BIOLOGICAL;
         }
+        function _getPharmaLead(){
+
+            return vm.PHARMA;
+        }
+        function _getPostMarketLead(){
+            return vm.POSTMARKET;
+        }
+
 
         /**
          * Returns
@@ -177,9 +193,11 @@
             return vm.SNDS_raType;
         }
 
+       /*
+        DIN values was decrprecated on Jan 23,2017
         function _getDIN_raType() {
             return vm.DIN_raType;
-        }
+        }*/
 
         function _createSortedArray(jsonList, lang) {
             var result = [];

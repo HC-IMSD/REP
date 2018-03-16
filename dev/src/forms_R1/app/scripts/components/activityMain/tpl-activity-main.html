@@ -26,7 +26,7 @@
                     </cmp-alert>
                 </div>
                 <div class="col-md-12">
-                    <hpfb-file-select update-model-root="main.showContent(fileContent) "
+                    <hpfb-file-select update-model-root="main.showContent(fileContent)"
                                       root-elem="{{main.rootTag}}"/>
                 </div>
             </div>
@@ -80,12 +80,12 @@
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <input type="text" class="form-control" id="{{::main.companyId}}"
                                            minlength="5" maxlength="6" name="{{::main.companyId}}"
-                                           ng-model="main.activityRoot.companyId" required/>
+                                           ng-model="main.activityRoot.companyId"
+                                           ng-change="main.updateErrorSummaryState()" required/>
                                     <cmp-error-message field-name="main.companyId"
                                                        form-ref="main.activityEnrolForm"
                                                        show-error="main.showError(main.activityEnrolForm[main.companyId])"
                                                        error-types="main.length5Error"></cmp-error-message>
-
                                 </label>
                             </div>
                         </div>
@@ -99,6 +99,7 @@
                                     <div ng-class="{'has-error':main.activityEnrolForm[main.dossierId].$invalid}">
                                         <input type="text" class="form-control full-width" id="{{::main.dossierId}}"
                                                size="7" maxlength="7" id="{{::main.dossierId}}" ng-minlength="7"
+                                               ng-change="main.updateErrorSummaryState()"
                                                name="{{::main.dossierId}}" ng-model="main.activityRoot.dossierId"
                                                required/>
                                     </div>
@@ -117,7 +118,7 @@
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <select class="form-control" id="{{::main.activityLeadId}}"
                                             ng-options="lead |translate for lead in main.leadList | orderByTranslated"
-                                            name="{{::main.activityLeadId}}" ng-change="main.updateActivityType()"
+                                            name="{{::main.activityLeadId}}" ng-change="main.selectActivityList()"
                                             ng-model="main.activityRoot.regActivityLead" required></select>
                                     <cmp-error-message field-name="main.activityLeadId"
                                                        form-ref="main.activityEnrolForm"
@@ -128,7 +129,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-7">
                             <div class="form-group">
                                 <label for="{{::main.activityTypeId}}" class="required full-width">
                                     <span class="field-name">{{::'ACTIVITY_TYPE' |translate}}</span>
@@ -160,33 +161,6 @@
                                 </label>
                             </div>
                         </div>
-                        <!--<div>
-                            <div class="col-xs-6"
-                                 ng-class="{'has-error':main.activityEnrolForm[main.feeClassId].$invalid}">
-                                <div class="form-group">
-                                    <label for="{{::main.feeClassId}}" class="required">
-                                        <span class="field-name">{{::'FEE_CLASS' |translate}}</span>
-                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <select class="form-control" id="{{::main.feeClassId}}"
-                                                name="{{::main.feeClassId}}" ng-model="main.activityRoot.feeClass"
-                                                ng-options="fee[main.lang] for fee in main.feeClassList track by fee.id">
-                                        </select>
-
-                                        <cmp-error-message field-name="main.feeClassId"
-                                                           form-ref="main.activityEnrolForm"
-                                                           show-error="main.showError(main.activityEnrolForm[main.feeClassId])"
-                                                           error-types="main.requiredOnly"></cmp-error-message>
-                                          <strong id="feeClass-error" class="error">
-                           <span class="label label-danger"
-                                 ng-if="main.showError(main.activityEnrolForm.feeClass.$touched,main.activityEnrolForm.feeClass.$invalid)"
-                                 ng-messages="main.activityEnrolForm.feeClass.$error">
-                               <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                           </span>
-                                           </strong>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                     <div class="row">
                         <div class="brdr-tp brdr-rght brdr-bttm brdr-lft">
@@ -219,6 +193,7 @@
                         <div class="form-group col-xs-12">
                                 <textarea ng-model="main.activityRoot.reasonFiling" name="{{::main.reasonId}}"
                                           id="{{::main.reasonId}}" ng-required="true" maxlength="1024"
+                                          ng-change="main.updateErrorSummaryState()"
                                           class="form-control full-width" rows="8"></textarea>
                         </div>
                     </div>
@@ -247,7 +222,6 @@
                             <p> {{::'AUT_LETTER'|translate}}</p>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-xs-10 form-group">
                             <label for="{{::main.isPriorityId}}" class="required">
@@ -263,10 +237,10 @@
                              ng-class="{'has-error':main.activityEnrolForm[main.isPriorityId].$invalid}">
                             <select id="{{::main.isPriorityId}}" name="{{::main.isPriorityId}}"
                                     ng-model="main.activityRoot.isPriority" class="form-control"
+                                    ng-change="main.updateErrorSummaryState()"
                                     ng-options="choice |translate for choice in main.yesNoList" required></select>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-xs-10 form-group">
                             <label for="{{::main.isNocId}}" class="required">
@@ -282,10 +256,10 @@
                              ng-class="{'has-error':main.activityEnrolForm[main.isNocId].$invalid}">
                             <select id="{{::main.isNocId}}" name="{{::main.isNocId}}"
                                     ng-model="main.activityRoot.isNoc" class="form-control"
+                                    ng-change="main.updateErrorSummaryState()"
                                     ng-options="choice |translate for choice in main.yesNoList" required></select>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-xs-10 form-group">
                             <label for="{{::main.isAdminSubId}}" class="required">
@@ -301,124 +275,189 @@
                              ng-class="{'has-error':main.activityEnrolForm[main.isAdminSubId].$invalid}">
                             <select id="{{::main.isAdminSubId}}" name="{{::main.isAdminSubId}}"
                                     ng-model="main.activityRoot.isAdminSub" class="form-control"
-                                    ng-change="main.setAdminSubmission();main.clearSub();"
+                                    ng-change="main.setAdminSubmission()"
                                     ng-options="choice |translate for choice in main.yesNoList" required></select>
                         </div>
                     </div>
                     <div ng-show="main.showActivity">
-                        <div>
-                            <!--<div> TEMPORARY!!!!</div>-->
-                            <select id="subtype" name="subtype"
-                                    ng-model="main.activityRoot.subType" class="form-control"
-                                    ng-options="choice[main.lang] for choice in main.adminSubTypeList track by choice.id"
-                                    ng-required="main.showActivity"></select>
-                            <h3>Administrative Submission Type Description</h3>
-                            <div ng-switch="main.activityRoot.subType.id">
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
+                                <label for="{{::main.adminSubTypeId}}" class="required">
+                                    <span class="field-name">{{::"ADMIN_SUB_TYPE" |translate}}</span>
+                                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <select id="{{::main.adminSubTypeId}}" name="{{::main.adminSubTypeId}}"
+                                            ng-model="main.activityRoot.subType" class="form-control"
+                                            ng-change="main.updateErrorSummaryState()"
+                                            ng-options="choice[main.lang] for choice in main.adminSubTypeList track by choice.id"
+                                            ng-required="main.showActivity"></select>
+                                    <cmp-error-message field-name="main.adminSubTypeId"
+                                                       form-ref="main.activityEnrolForm"
+                                                       show-error="main.showError(main.activityEnrolForm[main.adminSubTypeId])"
+                                                       error-types="main.requiredOnly"></cmp-error-message>
+                                </label>
 
-                                <div ng-switch-when="MANUFACT_NAME_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-en.html'"></div></div>
-                                <div ng-switch-when="PRODUCT_NAME_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-en.html'"></div></div>
-                                <div ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-en.html'"></div></div>
-                                <div ng-switch-when="OWNERSHIP_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-en.html'"></div></div>
-                                <div ng-switch-when="MERGER"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-mab-en.html'"></div></div>
-                                <div ng-switch-when="LICENGSING"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-licensing-en.html'"></div></div>
-                                <div ng-switch-when="POSTAUTH_LABEL_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-en.html'"></div></div>
-                                <div ng-switch-when="POSTAUTH_CHEMISTRY_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-update-en.html'"></div></div>
-                                <div ng-switch-when="ADDITIONAL_PRODUCT_CHGE"><div  aria-live="assertive"  ng-include="'app/scripts/templates/activity/tpl-activity-additional-en.html'"></div></div>
-
-
-
-
-
+                                <h3 ng-if="main.activityRoot.subType">{{::'ADMIN_DESCRIPT'|translate}}</h3>
+                                <div ng-if="!main.isFrench()" ng-switch="main.activityRoot.subType.id">
+                                    <div ng-switch-when="MANUFACT_NAME_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="PRODUCT_NAME_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="OWNERSHIP_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="MERGER">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-mab-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="LICENGSING">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-licensing-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="POSTAUTH_LABEL_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-update-en.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="ADDITIONAL_PRODUCT_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-additional-en.html'"></div>
+                                    </div>
+                                </div>
+                                <div ng-if="main.isFrench()" ng-switch="main.activityRoot.subType.id">
+                                    <div ng-switch-when="MANUFACT_NAME_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="PRODUCT_NAME_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="OWNERSHIP_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="MERGER">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-mab-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="LICENGSING">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-licensing-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="POSTAUTH_LABEL_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-update-fr.html'"></div>
+                                    </div>
+                                    <div ng-switch-when="ADDITIONAL_PRODUCT_CHGE">
+                                        <div aria-live="assertive"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-additional-fr.html'"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                       <!--<section class="panel  panel-default">
-                            <header class="panel-heading">
-                                <h3 class="panel-title">{{'RELATED_ACTIVITIES'|translate}}</h3>
-                            </header>
-                            <div class="panel-body">
-                                <cmp-admin-sub record="main.activityRoot.relatedActivity"
-                                               show-errors="main.showAllErrors"
-                                               yes-no-types="main.CommonLists.getYesNoList()"
-                                               activity-types="main.activityTypeList">
-
-                                </cmp-admin-sub>
-                            </div>
-                        </section>-->
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-8">
-                    <legend class="required">
-                    <span class="field-name">Please select at leasest one role from below</span>
-                    <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <input type="text" id="checkid_{{::$id}}" name="checkid_{{::$id}}" hidden ng-model="main.check" required/>
-                    <strong id=" address-role-error" class="error" ng-show="main.showErrorMissing()">
+                        <fieldset id="fs_addrMissing_{{::$id}}">
+                            <div>
+                                <div class="">
+                                    <legend class="required">
+                                        <span class="field-name">{{::'ADDRESS_NOC'|translate}}</span>
+                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                        <input type="text" id="checkid_{{::$id}}" name="checkid_{{::$id}}" hidden
+                                               ng-model="main.check" ng-required="main.showActivity"/>
+                                        <strong id=" address-role-error" class="error"
+                                                ng-show="main.showErrorMissing()">
                         <span class="label label-danger" ng-messages="main.activityEnrolForm.checkid_{{::$id}}.$error">
-                            <span ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
+                            <span ng-message="required">{{::"MSG_ERR_ADDRESS"|translate}}</span>
                         </span>
-                    </strong>
-                    </legend>
-                    </div>
-                    </div>
+                                        </strong>
+                                    </legend>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="checkbox">
+                                            <label for="manuid">
+                                                <input type="checkbox" id="manuid" name="manuid"
+                                                       ng-model="main.activityRoot.manu"
+                                                       ng-change="main.rolechecked()"/>
+                                                <span>{{::"MANUFACTURER"|translate}}</span>
 
-                    <div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                            <div class="checkbox">
-                                <label for="manuid">
-                                    <input type="checkbox" id="manuid" name="manuid" ng-model="main.activityRoot.manu"
-                                           ng-change="main.rolechecked()"/>
-                                    <span>{{::"MANUFACTURER"|translate}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="checkbox">
+                                            <label for="maillingid">
+                                                <input type="checkbox" id="maillingid" name="maillingid"
+                                                       ng-model="main.activityRoot.mailling"
+                                                       ng-change="main.rolechecked()"/>
+                                                <span>{{::"MAILING"|translate}}</span>
 
-                                </label>
-                            </div>
-                            </div>
-                            <div class="col-sm-4">
-                            <div class="checkbox">
-                                <label for="maillingid">
-                                    <input type="checkbox" id="maillingid" name="maillingid" ng-model="main.activityRoot.mailling"
-                                           ng-change="main.rolechecked()"/>
-                                    <span>{{::"MAILING"|translate}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="checkbox">
+                                            <label for="billingid">
+                                                <input type="checkbox" id="billingid" name="billingid"
+                                                       ng-model="main.activityRoot.billing"
+                                                       ng-change="main.rolechecked()"/>
+                                                <span>{{::"BILLING"|translate}}</span>
 
-                                </label>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                            <div class="checkbox">
-                                <label for="billingid">
-                                    <input type="checkbox" id="billingid" name="billingid" ng-model="main.activityRoot.billing"
-                                           ng-change="main.rolechecked()"/>
-                                    <span>{{::"BILLING"|translate}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="checkbox">
+                                            <label for="importername">
+                                                <input type="checkbox" id="importername" name="importername"
+                                                       ng-model="main.activityRoot.importer"
+                                                       ng-change="main.rolechecked()"/>
+                                                <span>{{::"IMPORTER"|translate}}</span>
 
-                                </label>
-                            </div>
-                            </div>
-                            <div class="col-sm-4">
-                            <div class="checkbox">
-                                <label for="importername">
-                                    <input type="checkbox" id="importername" name="importername" ng-model="main.activityRoot.importer"
-                                           ng-change="main.rolechecked()"/>
-                                    <span>{{::"IMPORTER"|translate}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
 
-                                </label>
-                            </div>
-                            </div>
-                        </div>
+                                </div>
+                        </fieldset>
                         <div class="form-group col-md-4"
                              ng-show="main.activityRoot.importer">
                             <div ng-class="{'has-error':main.activityEnrolForm[main.importerIden].$invalid}">
                                 <label for="{{::main.importerIden}}" class="required">
-                                    <span class="field-name">{{::"IMPORTERID" |translate}}</span>
+                                    <span class="field-name">{{::"IMPORTER_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <input type="text" id="{{::main.importerIden}}" name="{{::main.importerIden}}"
                                            ng-model="main.activityRoot.importerId"
-                                           class="form-control full-width" minlength="5" maxlength="6" ng-required="main.activityRoot.importer"/>
+                                           ng-change="main.updateErrorSummaryState()"
+                                           class="form-control full-width" minlength="6" maxlength="6"
+                                           ng-required="main.activityRoot.importer"/>
                                     <cmp-error-message field-name="main.importerIden"
                                                        form-ref="main.activityEnrolForm"
                                                        show-error="main.showError(main.activityEnrolForm[main.importerIden])"
-                                                       error-types="main.length5Error"></cmp-error-message>
+                                                       error-types="main.length6Error"></cmp-error-message>
                                 </label>
                             </div>
                         </div>

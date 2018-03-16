@@ -50,6 +50,13 @@
   "NOTIF_MISSING":"fr_A least one type of Notifiable Change is required",
   "CONTACTREC.CONTACTRECFORM":"fr_in the REP contact record",
   "REG_TRANSACT":"fr_Regulatory Activity Form",
-  "FIELDID":"fr_Control Number"
+  "FIELDID":"fr_Control Number",
+  "IMPORTER_ID": "fr_Importer company ID",
+  "ADDRESS_NOC":"fr_Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent",
+  "ADMIN_DESCRIPT":"fr_Administrative Submission Type Description",
+  "ADMIN_SUB_TYPE":"fr_Administrative submission type",
+  "CHECKID":"fr_Select one or more addresses to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent",
+  "IS_PRIORITY":"fr_Was this regulatory activity approved for priority review?",
+  "IS_NOC":"fr_Was this regulatory activity approved for NOC/C review?",
 
 }

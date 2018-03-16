@@ -244,6 +244,11 @@
 			<hpfb:pattern value=".{1,200}"/>
 		</hpfb:restriction>
 	</hpfb:simpleType>
+	<hpfb:simpleType name="char_0_200_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{0,200}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
 
 
 		<hpfb:simpleType name="char_0_256_content">
