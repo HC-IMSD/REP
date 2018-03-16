@@ -4,14 +4,14 @@
             <legend class="required">
                 <span class="field-name">{{::"RATIONALE_SNDS" |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                <input  type="hidden"id="rationale_missing_{{::$id}}" name="rationale_missing_{{::$id}}"  aria-hidden="true" ;
+                <input  type="hidden"id="{{::actRatCtrl.ratMissingId}}" name="{{::actRatCtrl.ratMissingId}}"  aria-hidden="true" ;
                        ng-model="actRatCtrl.rationaleSelected" ng-required="actRatCtrl.requiredState"/>
-               <!-- <strong id="rationaleMissing" class="error" ng-if="actRatCtrl.showErrorMissing()">
+                <strong id="rationaleMissing" class="error" ng-if="actRatCtrl.showErrorMissing()">
                         <span class="label label-danger"
-                              ng-messages="actRatCtrl.activityTypeForm.rationaleMissing.$error">
-                            <span ng-message="required">{{"MSG_ERR_RATIONALE_SEL"|translate}}</span>
+                              ng-messages="actRatCtrl.activityTypeForm[actRatCtrl.ratMissingId].$error">
+                            <span ng-message="required">{{"RATIONALE_MISSING"|translate}}</span>
                         </span>
-                </strong>-->
+                </strong>
             </legend>
 
             <div class="row">

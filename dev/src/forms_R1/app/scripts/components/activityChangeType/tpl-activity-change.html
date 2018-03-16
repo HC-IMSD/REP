@@ -4,16 +4,15 @@
             <legend class="required">
                 <span class="field-name">{{::"TYPE_VNC" |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                <input id="notif_missing_{{::$id}}" name="notif_missing_{{::$id}}" type="hidden"
+                <input id="{{::actChangeCtrl.notifMissingId}}" name="{{::actChangeCtrl.notifMissingId}}" type="hidden"
                        ng-model="actChangeCtrl.rationaleSelected" ng-required="actChangeCtrl.requiredState"/>
-
-            </legend><!--     <strong id=" address-role-error" class="error" ng-if="actChangeCtrl.showErrorMissing()">
+                <strong id=" address-role-error" class="error" ng-if="actChangeCtrl.showErrorMissing()">
                         <span class="label label-danger"
-                              ng-messages="actChangeCtrl.notifChangeForm.notifMissing.$error">
+                              ng-messages="actChangeCtrl.notifChangeForm[actChangeCtrl.notifMissingId].$error">
                             <span ng-message="required">{{::"MSG_ERR_NOTIF_SEL"|translate}}</span>
                         </span>
-                </strong>-->
-
+                </strong>
+            </legend>
             <div class="row">
                 <div class="col-sm-6">
                     <div class="checkbox">

@@ -102,11 +102,11 @@
                     is_noc: jsonObj.isNoc,
                     notifiable_change_types: {},
                     rationale_types: {},
-                    manu: jsonObj.manu === true ? 'Y' : 'N',
-                    mailling: jsonObj.mailling === true ? 'Y' : 'N',
+                    manufacturer: jsonObj.manu === true ? 'Y' : 'N',
+                    mailing: jsonObj.mailling === true ? 'Y' : 'N',
                     billing: jsonObj.billing === true ? 'Y' : 'N',
                     importer: jsonObj.importer === true ? 'Y' : 'N',
-                    importer_id: jsonObj.importerId,
+                    importer_id: jsonObj.importerId
                 }
             };
            /*if(jsonObj.feeClass) {
@@ -234,8 +234,8 @@
             model.isNoc = jsonObj.is_noc;
             model.notifiableChangeTypes = _transformNotifiableChangeTypeFromFileObj(jsonObj.notifiable_change_types);
             model.rationaleTypes = _transformRationaleTypeFromFileObj(jsonObj.rationale_types);
-            model.manu = jsonObj.manu === 'Y';
-            model.mailling = jsonObj.mailling === 'Y';
+            model.manu = jsonObj.manufacturer === 'Y';
+            model.mailling = jsonObj.mailing === 'Y';
             model.billing = jsonObj.billing === 'Y';
             model.importer = jsonObj.importer === 'Y';
             model.importerId = jsonObj.importer_id;
@@ -398,14 +398,12 @@
 
         var repContact = _transformContactFromFileObj(repObj.rep_contact_details);
         repContact.repRole = repObj.rep_contact_role;
-        repContact.amend = repObj.amend_record === 'Y';
         return (repContact);
     }
 
     function _mapRepContactToOutput(repObj) {
         var repContact = {};
         repContact.rep_contact_role = repObj.repRole;
-        repContact.amend_record = repObj.amend === true ? 'Y' : 'N';
         //deflatten the object
         repContact.rep_contact_details = _mapContactToOutput(repObj);
         return repContact;
