@@ -504,7 +504,8 @@ var serviceFileNames = {
     cspDataLists: 'csp-data-lists',
     diffService: 'diff-service',
     drugProductService: 'drug-product-service',
-    commonRepService:'rep-util-common'
+    commonRepService:'rep-util-common',
+    activityFormFilterService: 'activity-form-filter-service'
 };
 
 //Activity Form Service File names
@@ -516,7 +517,8 @@ var activityServiceFileNames = [
     serviceFileNames.repContactService,
     serviceFileNames.filterLists,
     serviceFileNames.dataLists,
-    serviceFileNames.commonLists
+    serviceFileNames.commonLists,
+    serviceFileNames.activityFormFilterService
 ];
 
 //Company Form Service Files

@@ -1,10 +1,9 @@
+"use strict";
 /**
  * Created by dkilty on 9/8/2016.
  */
 
 (function () {
-    'use strict';
-
     angular
         .module('activityMain', [
             'pascalprecht.translate',
@@ -27,12 +26,12 @@
             'ui.select',
             'hpfbConstants',
             'alertModule',
-            'errorMessageModule'
+            'errorMessageModule',
+            'activityFormFilterModule'
         ])
 })();
 
 (function () {
-    'use strict';
 
     angular
         .module('activityMain')
@@ -50,11 +49,11 @@
             }
         });
 
-    activityMainCtrl.$inject = ['ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope',
-        '$translate', 'CommonLists', 'ActivityListFactory', 'NEW_TYPE', 'AMEND_TYPE', 'APPROVED_TYPE', 'INTERNAL_TYPE',
+    activityMainCtrl.$inject = ['ActivityFormFilterService','ActivityService', 'ApplicationInfoService', 'hpfbFileProcessing', '$scope',
+        '$translate','$filter', 'CommonLists', 'ActivityListFactory', 'NEW_TYPE', 'AMEND_TYPE', 'APPROVED_TYPE', 'INTERNAL_TYPE',
         'EXTERNAL_TYPE', 'ENGLISH'];
-    function activityMainCtrl(ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate,
-                              CommonLists, ActivityListFactory, NEW_TYPE, AMEND_TYPE, APPROVED_TYPE, INTERNAL_TYPE,
+    function activityMainCtrl(ActivityFormFilterService,ActivityService, ApplicationInfoService, hpfbFileProcessing, $scope, $translate,
+                              $filter,CommonLists, ActivityListFactory, NEW_TYPE, AMEND_TYPE, APPROVED_TYPE, INTERNAL_TYPE,
                               EXTERNAL_TYPE, ENGLISH) {
 
         var vm = this;
@@ -105,6 +104,10 @@
             "one_rep": {
                 "type": "element",
                 "target": "addRepContactBtn"
+            },
+            "checkid": {
+                "type": "fieldset",
+                "parent": "fs_addrMissing"
             }
         };
 
@@ -115,22 +118,15 @@
             type: "minlength",
             displayAlias: "MSG_LENGTH_MIN5"
         }];
-        vm.length7Error = [{type: "required", displayAlias: "MSG_ERR_MAND"}, {
-            type: "minlength",
-            displayAlias: "MSG_LENGTH_7"
-        }];
+        vm.length6Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_6"}
+            ];
+        vm.length7Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_7"}
+            ];
 
-        //TODO remove?
-        vm.initUser = function (id) {
-            /* if (!id) id = 'EXT';
-             vm.userType = id;
-             if (id == 'INT') {
-             vm.saveXMLLabel = "APPROVE_FINAL"
-             } else {
-             vm.saveXMLLabel = "SAVE_DRAFT"
-             }*/
-
-        };
 
         vm.$onInit = function () {
             _setIdNames();
@@ -146,7 +142,10 @@
         function loadActivityData() {
             ActivityListFactory.getRaTypeList()
                 .then(function (data) {
-                    vm.activityTypeList = data;
+                    vm.activityTypeList = [];
+                    vm.pharmaList=ActivityFormFilterService.getPharmaRAList(data);
+                    vm.biolList=ActivityFormFilterService.getBiolRAList(data);
+                    vm.postMarketList=ActivityFormFilterService.getPostMarketRAList(data);
                     return true;
                 });
         }
@@ -244,6 +243,7 @@
         };
         vm.setThirdParty = function () {
             vm.thirdPartyState = (vm.activityRoot.isThirdParty === "Y")
+            vm.updateErrorSummaryState();
         };
 
         vm.setApplicationType = function (value) {
@@ -263,8 +263,10 @@
             } else {
                 vm.activityRoot.relatedActivity = vm.activityService.getEmptyRelatedActivity();
                 vm.showActivity = false;
-            }
+                vm.clearSub();
 
+            }
+            vm.updateErrorSummaryState(); //change in behavior for error summray
         };
 
         /**
@@ -313,12 +315,15 @@
         }
 
         vm.updateActivityType = function () {
-            //vm.activityRoot.regActivityType
-            if (vm.activityService.isNotifiableChange(vm.activityRoot.regActivityType.id)) {
+            var id="";
+            if(vm.activityRoot.regActivityType){
+                id=vm.activityRoot.regActivityType.id
+            }
+            if (vm.activityService.isNotifiableChange(id)) {
                 vm.activityService.resetRationale();
                 vm.isNotifiable = true;
                 vm.isRationale = false;
-            } else if (vm.activityService.isRationale(vm.activityRoot.regActivityType.id, vm.activityRoot.regActivityLead)) {
+            } else if (vm.activityService.isRationale(id, vm.activityRoot.regActivityLead)) {
                 vm.isRationale = true;
                 vm.activityService.resetNotifiableChanges();
                 vm.isNotifiable = false;
@@ -330,16 +335,47 @@
                 vm.isNotifiable = false;
                 vm.isRationale = false;
             }
+            vm.updateErrorSummaryState();
+        };
+
+        /**
+         * Selects the appropriate activity list based on the activity lead selection
+         * The activity lead  question calls this function
+         */
+        vm.selectActivityList=function(){
+            if(!vm.activityRoot.regActivityLead){
+                vm.activityTypeList=[];
+                return;
+            }
+            switch(vm.activityRoot.regActivityLead){
+                case  ActivityListFactory.getBiologicalLeadValue():
+                   vm.activityTypeList= vm.biolList;
+                    break;
+                case ActivityListFactory.getPharmaLeadValue():
+                    vm.activityTypeList= vm.pharmaList;
+                    break;
+                case ActivityListFactory.getPostMarketLeadValue():
+                    vm.activityTypeList= vm.postMarketList;
+                    break;
+                 default:
+                    if(vm.activityRoot.regActivityLead) console.warn("Not a valid lead choice");
+                     vm.activityTypeList=[];
+                 break;
+
+            }
+            //if the value exists in the list set it to the value
+            if(vm.activityRoot.regActivityType) {
+                var temp = $filter('filter')(vm.activityTypeList, {id: vm.activityRoot.regActivityType.id})[0];
+                vm.activityRoot.regActivityType = temp;
+                vm.updateActivityType();
+            }
+            vm.updateErrorSummaryState(); // if error summary is visible update it
         };
 
         function _updateInfoValues() {
             vm.updateValues++;
         }
 
-        /* $scope.$watch("main.activityEnrolForm.$valid", function () {
-         disableXMLSave()
-         }, true);
-         */
         function disableXMLSave() {
 
             // vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
@@ -355,6 +391,11 @@
             vm.isIncomplete = !vm.activityRoot.dstsControlNumber;
         }
 
+        /**
+         * Callback for file load of XML or json data
+         * @param fileContent - a json object that contains the file content and messages
+         * @private
+         */
         function _loadFileContent(fileContent) {
             if (!fileContent)return;
             vm.activityService = new ActivityService();
@@ -365,6 +406,7 @@
                 vm.activityRoot = vm.activityService.getModelInfo();
                 _setComplete();
                 vm.activityEnrolForm.$setDirty();
+                vm.savePressed = false;
             }
             //vm.showAllErrors = true;
             //disableXMLSave();
@@ -372,9 +414,9 @@
             vm.updateActivityType();
             vm.check = vm.rolechecked();
             vm.clearReasonAmend();
-          //  vm.setApplicationType();
             vm.setAdminSubmission();
-            vm.clearSub();
+            vm.selectActivityList();
+
         }
 
         /**
@@ -450,10 +492,12 @@
             }
             if(vm.activityRoot.manu || vm.activityRoot.mailling || vm.activityRoot.billing || vm.activityRoot.importer){
                 vm.check = true;
+                vm.updateErrorSummaryState();
                 return true;
             }
             if(vm.activityRoot.manu===false && vm.activityRoot.mailling===false && vm.activityRoot.billing===false && vm.activityRoot.importer===false){
                 vm.check = "";
+                vm.updateErrorSummaryState();
                 return "";
             }
         };
@@ -461,11 +505,12 @@
         vm.clearSub = function (){
             if(vm.showActivity === false){
                 vm.activityRoot.subType = "";
+                vm.check="";
             }
         };
 
         vm.showErrorMissing = function () {
-            if ((vm.activityEnrolForm.$dirty && !vm.check) || (vm.showErrors() && !vm.check)) {
+            if ((vm.showErrors() && !vm.check)) {
                 return true
             }
             return false
@@ -485,6 +530,7 @@
             vm.reasonId = "reason_file" + scopeId;
             vm.thirdPartyId = "is_solicited" + scopeId;
             vm.isAdminSubId = "is_admin_submission" + scopeId;
+            vm.adminSubTypeId = "admin_sub_type" + scopeId;
             vm.importerIden = "importer_id" + scopeId;
             vm.isPriorityId = "is_priority" + scopeId;
             vm.isNocId = "is_noc" + scopeId;

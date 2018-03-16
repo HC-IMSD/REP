@@ -26,7 +26,7 @@
                 "enrolmentVersion": "",
                 "dateSaved": "",
                 "applicationType": "NEW",
-                "softwareVersion": "1.1.0",
+                "softwareVersion": "2.0.0",
                 "dataChecksum": "",
                 "dossierIdPrefix": "HC6-024-",
                 "dossierId": "",
@@ -61,8 +61,8 @@
             SNDS: ActivityListFactory.getSNDSTypeValue(),
             NC:  ActivityListFactory.getNCTypeValue(),
             VNC: "VNC",
-            BIOLOGIC: ActivityListFactory.getBiologicalLeadValue(),
-            DIN: ActivityListFactory.getDINTypeValue()
+            BIOLOGIC: ActivityListFactory.getBiologicalLeadValue()
+            /*DIN: ActivityListFactory.getDINTypeValue() Deprecacted value with checkin on Jan 23, 2017 */
 
         };
 
@@ -299,40 +299,16 @@
             if (activity === this.SANDS || activity === this.SNDS) {
                 return true;
             }
+          /*
+           DIN value was deprecated On Jav 23 2017 checkin
             if (activity === this.DIN && lead === this.BIOLOGIC) {
                 return true;
-            }
+            } */
             return false;
         };
 
-      /*  ActivityService.prototype.getActivityTypeList = function (isPilot) {
-
-            var activityList = [
-                "CTA",
-                "CTAA",
-                "NDS",
-                this.SNDS,
-                "ANDS",
-                this.SANDS,
-                this.NC,
-                this.DIN,
-                "PDC",
-                "ADMIN"
-            ];
 
 
-            if (!isPilot) {
-                activityList.push(
-                    "VIND",
-                    "VINDAM",
-                    "VNDS",
-                    "VANDS",
-                    "VSANDS",
-                    this.VNC,
-                    "VDIN")
-            }
-            return activityList;
-        };*/
 
         ActivityService.prototype.updateActivityId = function (value) {
             if (isNaN(value)) return;
@@ -600,75 +576,6 @@
         };
     }
 
-    //TODO delete
-    /*  function _mapRelatedRegActivityToOutput(jsonObj) {
-        if (!jsonObj) return null;
-        var regActivityType = {
-            "activity_id": jsonObj.activityId,
-            "amend_record": jsonObj.amendRecord === true ? 'Y' : 'N',
-            "reg_activity_type": jsonObj.regActivityType,
-            "date_cleared": "",
-
-            "control_number": jsonObj.dstsControlNumber,
-            "dossier_id": jsonObj.dossierId,
-            "manufacturer_name": jsonObj.manufacturerName,
-            "reason_filing": jsonObj.reasonFiling,
-            "assoc_dins": []
-        };
-        var dateCleared = jsonObj.dateCleared;
-        var month = "";
-        var day = "";
-        if (dateCleared) {
-     month = dateCleared.getMonth() + 1;
-     day = dateCleared.getDate();
-            if (month < 10) {
-                //todo hack
-                month = "0" + month;
-            }
-            if (day < 10) {
-                day = "0" + day;
-            }
-     regActivityType.date_cleared = dateCleared.getFullYear() + '-' + (month) + '-' + day;
-        }
-        var dins = _mapRelatedDinsToOutput(jsonObj.assocDins);
-        if (dins && dins.length > 0) {
-            regActivityType.assoc_dins = dins;
-        } else {
-            regActivityType.assoc_dins = "";
-        }
-        return regActivityType;
-     }*/
-
-
-    /* function _transformRelatedDinsListFromFileObj(jsonObj) {
-        var result = [];
-        if (!jsonObj) return result;
-
-        if (!(jsonObj instanceof Array)) {
-            //make it an array, case there is only one
-            jsonObj = [jsonObj]
-        }
-        result = [];
-        for (var i = 0; i < jsonObj.length; i++) {
-            result.push({"dinNumber": jsonObj[i].din_number});
-        }
-        return result;
-     }*/
-
-    /* function _mapRelatedDinsToOutput(jsonObj) {
-        var result = "";
-        if (!jsonObj) return result;
-        if (!(jsonObj instanceof Array)) {
-            //make it an array, case there is only one
-            jsonObj = [jsonObj]
-        }
-        result = [];
-        for (var i = 0; i < jsonObj.length; i++) {
-            result.push({"din_number": jsonObj[i].dinNumber});
-        }
-
-        return result;
-     }*/
 
     function _parseDate(value) {
         var dateArray = value.split('-');

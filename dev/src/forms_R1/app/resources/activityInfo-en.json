@@ -50,10 +50,11 @@
   "CONTACTREC.CONTACTRECFORM":"in the REP contact record",
   "REG_TRANSACT":"Regulatory Activity Form",
   "FIELDID":"Control Number",
-  "SUBTYPE":"Please select one option from Administrative Submission Type Description list",
-  "CHECKID":"Select one or more roles for this company",
-  "IMPORTERID":"Please input the importer id",
+  "CHECKID":"Select one or more addresses to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent",
   "IS_PRIORITY":"Was this regulatory activity approved for priority review?",
-  "IS_NOC":"Was this regulatory activity approved for NOC/C review?"
-
+  "IS_NOC":"Was this regulatory activity approved for NOC/C review?",
+  "IMPORTER_ID": "Importer company ID",
+  "ADDRESS_NOC":"Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent",
+  "ADMIN_DESCRIPT":"Administrative Submission Type Description",
+  "ADMIN_SUB_TYPE":"Administrative submission type"
 }
