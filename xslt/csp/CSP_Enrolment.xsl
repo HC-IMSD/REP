@@ -336,10 +336,12 @@
 								<div class="col-sm-099">
 										<div class="well well-sm" >
 												<div class="row">
-														<div class="col-sm-027">
+														<div class="col-sm-099">
 																<span class="labels"> Applicant name </span>
 																	<span class="company_enrol"> <xsl:call-template name="Dropdown_Label"><xsl:with-param name="input" select="(applicant/applicant_name)[1]"/></xsl:call-template></span>
 														</div>
+												</div>
+												<div class="row">
 														<div class="col-sm-008">
 																<span class="labels"> Salutation </span>
 																<span class="company_enrol"> <xsl:call-template name="Dropdown_Label"><xsl:with-param name="input" select="(applicant/contact/salutation)[1]"/></xsl:call-template></span>
@@ -587,7 +589,7 @@
 		<div class="panel-warning panel-body">
 											<span class="labels"> Applicant is applying
 													<xsl:choose>
-														<xsl:when test="application_info/time_application = 'NOC'">
+														<xsl:when test="application_info/time_application = 'GRANT'">
 															<p style="font-family:Arial;font-weight:normal;">on the basis of a patent granted after the day on which the Notice of Compliance (NOC) for the above noted NDS is issued (before the end of the 120-day period that begins on the day on which the patent is granted)
 															</p>
 														</xsl:when>
@@ -641,7 +643,7 @@
 																					</xsl:choose>
 																			<span class="labels"> Attestation as to Timely Submission: </span>
 																					<xsl:choose>
-																						<xsl:when test="timely_submission_info/timely_submission_statement = 'APPLICATION'">
+																						<xsl:when test="timely_submission_info/timely_submission_statement = 'NO_APPLICATION'">
 																							<p style="font-family:Arial;">When the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health, no application for a marketing approval, equivalent to an authorization for sale, with respect to the medicinal ingredient or combination of medicinal ingredients, as the case may be, set out in this CSP application had been submitted in the European Union or any country that is a member of the European Union, the United States of America, Australia, Switzerland or Japan. </p>
                                               </xsl:when>
 																							<xsl:otherwise>
@@ -1834,3 +1836,35 @@
 		</xsl:choose>
 	</xsl:template>
 </xsl:stylesheet>
+<!-- Stylus Studio meta-information - (c) 2004-2009. Progress Software Corporation. All rights reserved.
+
+<metaInformation>
+	<scenarios>
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hccsp-0-2.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/csp.html" processortype="saxon8" useresolver="yes" profilemode="0" profiledepth=""
+		          profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no" validator="internal"
+		          customvalidator="">
+			<advancedProp name="sInitialMode" value=""/>
+			<advancedProp name="schemaCache" value="||"/>
+			<advancedProp name="bXsltOneIsOkay" value="true"/>
+			<advancedProp name="bSchemaAware" value="true"/>
+			<advancedProp name="bGenerateByteCode" value="true"/>
+			<advancedProp name="bXml11" value="false"/>
+			<advancedProp name="iValidation" value="0"/>
+			<advancedProp name="bExtensions" value="true"/>
+			<advancedProp name="iWhitespace" value="0"/>
+			<advancedProp name="sInitialTemplate" value=""/>
+			<advancedProp name="bTinyTree" value="true"/>
+			<advancedProp name="xsltVersion" value="2.0"/>
+			<advancedProp name="bWarnings" value="true"/>
+			<advancedProp name="bUseDTD" value="false"/>
+			<advancedProp name="iErrorHandling" value="fatal"/>
+		</scenario>
+	</scenarios>
+	<MapperMetaTag>
+		<MapperInfo srcSchemaPathIsRelative="yes" srcSchemaInterpretAsXML="no" destSchemaPath="" destSchemaRoot="" destSchemaPathIsRelative="yes" destSchemaInterpretAsXML="no"/>
+		<MapperBlockPosition></MapperBlockPosition>
+		<TemplateContext></TemplateContext>
+		<MapperFilter side="source"></MapperFilter>
+	</MapperMetaTag>
+</metaInformation>
+-->
