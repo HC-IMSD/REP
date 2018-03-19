@@ -44,7 +44,7 @@
             {label: "ROLE", binding: "ingRole", width: "20"},
             {label: "INGREDIENT", binding: "ingLabel", width: "55"},
             {label: "IN_LIST", binding: "autoIngred", width: "7"},
-            {label: "CAS_NUM", "binding": "cas", width: "12"},
+            {label: "CAS_NUM", "binding": "cas", width: "12", isHtml: "true"},
             {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "7"}
         ];
         vm.ingList = [];
@@ -62,7 +62,7 @@
                 vm.noActives();
             }
 
-        }
+        };
 
         vm.addIng = function (ing) {
             vm.setValid(true);
