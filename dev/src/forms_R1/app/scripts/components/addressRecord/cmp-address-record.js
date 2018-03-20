@@ -237,6 +237,7 @@
           if(vm.des){
               vm.addressModel.addressRole.importer = false;
               vm.isImporter = false;
+              vm.addressModel.importerID = "";
 
           };
 
