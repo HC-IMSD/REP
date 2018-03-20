@@ -19,6 +19,7 @@
         .constant("FRENCH","fr")
         .constant("NEW_TYPE","NEW")
         .constant("APPROVED_TYPE","FINAL")
+        .constant("DEPRECATED_APPROVED_TYPE","APPROVED") //change from the pilot March 20,2018. Needed for backwards compat.
         .constant("AMEND_TYPE","AMEND")
         .constant("INTERNAL_TYPE","INT")
         .constant("EXTERNAL_TYPE","EXT")

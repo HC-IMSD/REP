@@ -14,8 +14,8 @@
     angular
         .module('activityService')
         .factory('ActivityService', ActivityService);
-    ActivityService.$inject = ['YES', 'NO','ActivityListFactory','$filter','$translate'];
-    function ActivityService(YES, NO,ActivityListFactory, $filter,$translate) {
+    ActivityService.$inject = ['APPROVED_TYPE','DEPRECATED_APPROVED_TYPE','NEW_TYPE','YES', 'NO','ActivityListFactory','$filter','$translate'];
+    function ActivityService(APPROVED_TYPE,DEPRECATED_APPROVED_TYPE,NEW_TYPE,  YES, NO,ActivityListFactory, $filter,$translate) {
 
         function ActivityService() {
             //construction logic
@@ -25,7 +25,7 @@
                 "dstsControlNumber": "",
                 "enrolmentVersion": "",
                 "dateSaved": "",
-                "applicationType": "NEW",
+                "applicationType": NEW_TYPE,
                 "softwareVersion": "2.0.0",
                 "dataChecksum": "",
                 "dossierIdPrefix": "HC6-024-",
@@ -215,7 +215,11 @@
             model.dstsControlNumber = jsonObj.dsts_control_number;
             model.enrolmentVersion = jsonObj.enrolment_version;
             model.dateSaved = jsonObj.date_saved;
-            model.applicationType = jsonObj.application_type;
+            if(DEPRECATED_APPROVED_TYPE== jsonObj.application_type) {
+                model.applicationType=APPROVED_TYPE;
+            }else{
+                model.applicationType = jsonObj.application_type;
+            }
             model.softwareVersion = jsonObj.software_version;
             model.dataChecksum = jsonObj.software_version;
             model.dossierIdPrefix = jsonObj.dossier_id_prefix;
