@@ -87,7 +87,8 @@
 
         vm.updateImporterState = function (ctrl, toCheck) {
             vm.oneSelected(ctrl, toCheck);
-            vm.importerUpdated({state: vm.roleModel.importer})
+            vm.importerUpdated({state: vm.roleModel.importer});
+            checkAllControlsForDuplicates();
         };
 
         vm.updateOtherState = function (ctrl, toCheck) {
