@@ -223,8 +223,10 @@
             model.regActivityLead = jsonObj.reg_activity_lead;
             model.regActivityType = $filter('filter')(ActivityListFactory.getRaTypeList(), {id:  jsonObj.reg_activity_type.__text})[0];
            //TODO replace with a custom filter
-            var subTypeList = $filter('filter')(ActivityListFactory.getAdminSubType(),{id: jsonObj.sub_type.__text});
-            model.subType =  _getFilterJsonMatch(subTypeList,jsonObj.sub_type.__text,"id");
+            if(jsonObj.sub_type) {
+                var subTypeList = $filter('filter')(ActivityListFactory.getAdminSubType(), {id: jsonObj.sub_type.__text});
+                model.subType = _getFilterJsonMatch(subTypeList, jsonObj.sub_type.__text, "id");
+            }
             //var feeClassList= $filter('filter')(ActivityListFactory.getFeeClassList(), {id:  jsonObj.fee_class.__text});
             //model.feeClass =  _getFilterJsonMatch(feeClassList,jsonObj.fee_class.__text,"id");
             model.reasonFiling = jsonObj.reason_filing;
