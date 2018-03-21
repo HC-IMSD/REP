@@ -47,7 +47,8 @@
             {
                 label: "ANIMAL_TYPE_DETAILS",
                 binding: "animalDetail",
-                width: "60"
+                width: "60",
+                isHtml: "true"
             }
         ];
 

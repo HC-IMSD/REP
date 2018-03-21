@@ -93,7 +93,8 @@
                     {
                         label: "UNKNOWN_COUNTRY_DETAILS",
                         binding: "unknownCountryDetails",
-                        width: "50"
+                        width: "50",
+                        isHtml: "true"
                     },
                 ]
             } else {

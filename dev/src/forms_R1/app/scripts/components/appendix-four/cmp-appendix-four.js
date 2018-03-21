@@ -40,7 +40,7 @@
         vm.selectRecord = -1; //the record to select, initially select non
         //vm.resetToCollapsed = true;
         vm.colNames = [
-            {label: "INGRED_NAME", binding: "ingredientName", width: "98"}
+            {label: "INGRED_NAME", binding: "ingredientName", width: "98", isHtml: "true"}
         ];
         vm.ingredientList = [];
         vm.updateSummary = 0; //increment to send message to error summaries

@@ -46,7 +46,8 @@
             {
                 label: "OTHER_ROA_DETAILS",
                 binding: "otherRoaDetails",
-                width: "60"
+                width: "60",
+                isHtml: "true"
             }
         ];
 

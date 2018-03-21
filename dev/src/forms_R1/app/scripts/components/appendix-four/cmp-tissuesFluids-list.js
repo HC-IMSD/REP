@@ -56,12 +56,13 @@
                 label: "SYSTEM_DETAILS",
                 binding: "detailsConcat",
                 width: "40",
-                isHtml: true
+                isHtml: "true"
             },
             {
                 label: "SYSTEM_OTHER",
                 binding: "otherDetails",
-                width: "40"
+                width: "40",
+                isHtml: "true"
             }
         ];
         //error asummary setup

@@ -46,8 +46,8 @@
             vm.newIngFormShown = false;
             _setIdNames();
             vm.colNames = [
-                {label: "CONTAINER_TYPE", binding: "containerType", width: "50"},
-                {label: "PACKAGE_SIZE", binding: "packageSize", width: "50"}
+                {label: "CONTAINER_TYPE", binding: "containerType", width: "50", isHtml: "true"},
+                {label: "PACKAGE_SIZE", binding: "packageSize", width: "50", isHtml: "true"}
             ];
 
             vm.containerList = [];
