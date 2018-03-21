@@ -34,8 +34,8 @@
         self.resetToCollapsed = false;
         self.newIngFormShown = false;
         self.colNames = [
-            {label: "MATERIAL_NAME", binding: "ingredientName", width: "70"},
-            {label: "CAS_NUM", binding: "cas", width: "15"},
+            {label: "MATERIAL_NAME", binding: "ingredientName", width: "70", isHtml: "true"},
+            {label: "CAS_NUM", binding: "cas", width: "15", isHtml: "true"},
             {label: "PRESENT_IN_FINAL", binding: "inFinalContainer", width: "15"}
         ];
 
