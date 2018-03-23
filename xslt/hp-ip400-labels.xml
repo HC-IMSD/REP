@@ -554,4 +554,158 @@
 <row><code>UCLERGASTRO</code><eng>Ulcer of gastro-intestinal tract</eng><fra>fr_Ulcer of gastro-intestinal tract</fra></row>
 <row><code>SCHEDA_CLAIMS</code><eng>Please list the schedule A Claims and Indications associated with this product</eng><fra>fr_Please list the schedule A Claims and Indications associated with this product</fra></row>
 <row><code>INGREDIENTS</code><eng>Ingredients</eng><fra>fr_Ingredients</fra></row>
+<row><code>INGRED_DETAILS</code><eng>Ingredient Details</eng><fra>fr_Ingredient Details</fra></row>
+<row><code>OTHER_UNITS</code><eng>Units other details</eng><fra>fr_Units other details</fra></row>
+<row><code>CONTAINER_TYPE_DETAILS</code><eng>Container Type Details</eng><fra>fr_Container Type Details</fra></row>
+<row><code>CONTAINER_TYPE</code><eng>Container Type</eng><fra>fr_Container Type</fra></row>
+<row><code>PACKAGE_SIZE</code><eng>Package Size</eng><fra>fr_Package Size</fra></row>
+<row><code>SHELF_LIFE_NUMBERS</code><eng>Number of Units</eng><fra>fr_Number of Units</fra></row>
+<row><code>CELSIUS</code><eng>Celsius</eng><fra>fr_Maximum, Celsius</fra></row>
+<row><code>TO</code><eng>To</eng><fra>fr_To</fra></row>
+<row><code>TEMP_RANGE</code><eng>Temperature Range From</eng><fra>fr_Temperature Range From</fra></row>
+<row><code>SHELF_LIFE</code><eng>Shelf Life</eng><fra>fr_Shelf Life</fra></row>
+<row><code>ROA_TITLE</code><eng>D. Routes of Administration</eng><fra>fr_D. Routes of Administration</fra></row>
+<row><code>ROA_LBL</code><eng>Route of Administration</eng><fra>fr_Route of Administration</fra></row>
+<row><code>OTHER_ROA_DETAILS</code><eng>Other Route of Administration Details</eng><fra>fr_Other Route of Administration Details</fra></row>
+<row><code>COUNTRIES_MANUFACT</code><eng>E. Countries of manufacture for this drug product</eng><fra>fr_E. Countries of manufacture for this drug product</fra></row>
+<row><code>COUNTRY_NAME</code><eng>Country Name</eng><fra>fr_Country Name</fra></row>
+<row><code>COUNTRY_MAN</code><eng>Country of Manufacture</eng><fra>fr_Country of Manufacture</fra></row>
+<row><code>APPENDIX4</code><eng>Animal / Human Sourced</eng><fra>fr_Animal / Human Sourced</fra></row>
+<row><code>ANIMAL_TYPE_LBL</code><eng>Animal Type Details</eng><fra>fr_Animal Type Details</fra></row>
+<row><code>ANIMAL_TYPE_LBL</code><eng>Animal Type Details</eng><fra>fr_Animal Type Details</fra></row>
+<row><code>ING_DETAILS</code><eng>Human / Animal Sourced Record</eng><fra>fr_Human / Animal Sourced Record</fra></row>
+<row><code>SOURCED</code><eng>Source From</eng><fra>fr_Source From</fra></row>
+<row><code>HUMAN</code><eng>Human</eng><fra>fr_Human</fra></row>
+<row><code>ANIMAL</code><eng>Animal</eng><fra>fr_Animal</fra></row>
+<row><code>TISSUES_FLUIDS_SRCS</code><eng>Tissues or Fluids sources</eng><fra>fr_Tissues or Fluids sources</fra></row>
+<row><code>SYSTEM_TYPE</code><eng>System</eng><fra>fr_System</fra></row>
+<row><code>SYSTEM_DETAILS</code><eng>System Details</eng><fra>fr_System Details</fra></row>
+<row><code>SYSTEM_OTHER</code><eng>Other Details</eng><fra>fr_Other Details</fra></row>
+<row><code>ANIMAL_SOURCE</code><eng>Animal Source</eng><fra>fr_Animal Source</fra></row>
+<row><code>ANIMAL_TYPE_DETAILS</code><eng>Animal Type Details</eng><fra>fr_Animal Type Details</fra></row>
+<row><code>APPENDIX</code><eng>appendix</eng><fra>fr_appendix</fra></row>
+<row><code>BILE</code><eng>bile</eng><fra>fr_bile</fra></row>
+<row><code>DISTAL_ILEUM</code><eng>distal ileum</eng><fra>fr_distal ileum</fra></row>
+<row><code>LARGE_INTESTINE</code><eng>large intestine</eng><fra>fr_large intestine</fra></row>
+<row><code>SALIVA_SALIVARY</code><eng>saliva or salivary gland</eng><fra>fr_saliva or salivary gland</fra></row>
+<row><code>SMALL_INTESTINE</code><eng>small intestine other than distal ileum</eng><fra>fr_small intestine other than distal ileum</fra></row>
+<row><code>STOMACH</code><eng>stomach</eng><fra>fr_stomach</fra></row>
+<row><code>OTHER_DIGESTIVE</code><eng>other digestive system</eng><fra>fr_other digestive system</fra></row>
+<row><code>BRAIN</code><eng>brain</eng><fra>fr_brain</fra></row>
+<row><code>BRAIN_STEM</code><eng>brain stem</eng><fra>fr_brain stem</fra></row>
+<row><code>CEREBELLUM</code><eng>cerebellum</eng><fra>fr_cerebellum</fra></row>
+<row><code>CEREBROSPINAL_FLUID</code><eng>cerebrospinal fluid</eng><fra>fr_cerebrospinal fluid</fra></row>
+<row><code>DORSAL_ROOT_GANGLIA</code><eng>dorsal root ganglia</eng><fra>fr_dorsal root ganglia</fra></row>
+<row><code>DURA_MATER</code><eng>dura mater</eng><fra>fr_dura mater</fra></row>
+<row><code>HYPOTHALAMUS</code><eng>hypothalamus</eng><fra>fr_hypothalamus</fra></row>
+<row><code>RETINA_OPTIC</code><eng>retina or optic nerve</eng><fra>fr_retina or optic nerve</fra></row>
+<row><code>SPINAL_CORD</code><eng>spinal cord</eng><fra>fr_spinal cord</fra></row>
+<row><code>TRIGERMINAL_GANGLIA</code><eng>trigerminal ganglia</eng><fra>fr_trigerminal ganglia</fra></row>
+<row><code>OTHER_NERVOUS</code><eng>other nervous system</eng><fra>fr_other nervous system</fra></row>
+<row><code>LYMPH_NODES</code><eng>lymph nodes</eng><fra>fr_lymph nodes</fra></row>
+<row><code>SPLEEN</code><eng>spleen</eng><fra>fr_spleen</fra></row>
+<row><code>THYMUS</code><eng>thymus</eng><fra>fr_thymus</fra></row>
+<row><code>TONSILS</code><eng>tonsils</eng><fra>fr_tonsils</fra></row>
+<row><code>OTHER_IMMUNE</code><eng>other immune system</eng><fra>fr_other immune system</fra></row>
+<row><code>ABDOMEN</code><eng>abdomen</eng><fra>fr_abdomen</fra></row>
+<row><code>SKULL</code><eng>skull</eng><fra>fr_skull</fra></row>
+<row><code>BONES</code><eng>bones other than vertebral column or skull</eng><fra>fr_bones other than vertebral column or skull</fra></row>
+<row><code>COLLAGEN</code><eng>collagen</eng><fra>fr_collagen</fra></row>
+<row><code>TENDONS_LIGAMENTS</code><eng>tendons or ligaments</eng><fra>fr_tendons or ligaments</fra></row>
+<row><code>VERTEBRAL_COLUMN</code><eng>vertebral column</eng><fra>fr_vertebral column</fra></row>
+<row><code>MUSCLE</code><eng>muscle</eng><fra>fr_muscle</fra></row>
+<row><code>OTHER_MUSCULO_SKELETAL</code><eng>other musculo-skeletal system</eng><fra>fr_other musculo-skeletal system</fra></row>
+<row><code>ADIPOSE</code><eng>adipose or omentum</eng><fra>fr_adipose or omentum</fra></row>
+<row><code>ASCITES</code><eng>acscites</eng><fra>fr_acscites</fra></row>
+<row><code>ANTLER_VELVET</code><eng>antler velvet</eng><fra>fr_antler velvet</fra></row>
+<row><code>SERUM</code><eng>serum</eng><fra>fr_serum</fra></row>
+<row><code>WHOLE_BLOOD</code><eng>whole blood</eng><fra>fr_whole blood</fra></row>
+<row><code>PLASMA</code><eng>plasma</eng><fra>fr_plasma</fra></row>
+<row><code>EMBRYONIC_TISSUE</code><eng>embryonic tissue</eng><fra>fr_embryonic tissue</fra></row>
+<row><code>FETAL_TISSUE</code><eng>fetal tissue</eng><fra>fr_fetal tissue</fra></row>
+<row><code>BONE_MARROW</code><eng>bone marrow</eng><fra>fr_bone marrow</fra></row>
+<row><code>EYES_CORNEA</code><eng>eyes or cornea</eng><fra>fr_eyes or cornea</fra></row>
+<row><code>GALL_BLADDER</code><eng>gall bladder</eng><fra>fr_gall bladder</fra></row>
+<row><code>OTHER_FLUIDS_TISSUES</code><eng>other types of tissues or fluids</eng><fra>fr_other types of tissues or fluids</fra></row>
+<row><code>MILK_PRODUCTS</code><eng>milk or milk products</eng><fra>fr_milk or milk products</fra></row>
+<row><code>KIDNEY</code><eng>kidney</eng><fra>fr_kidney</fra></row>
+<row><code>COLOSTRUM</code><eng>colostrum</eng><fra>fr_colostrum</fra></row>
+<row><code>MAMMARY_GLANDS</code><eng>mammary glands</eng><fra>fr_mammary glands</fra></row>
+<row><code>OVARIES</code><eng>ovaries</eng><fra>fr_ovaries</fra></row>
+<row><code>PLACENTA</code><eng>placenta</eng><fra>fr_placenta</fra></row>
+<row><code>PLACENTAL_FLUID</code><eng>placental fluid</eng><fra>fr_placental fluid</fra></row>
+<row><code>SEMEN</code><eng>semen</eng><fra>fr_semen</fra></row>
+<row><code>TESTES</code><eng>testes</eng><fra>fr_testes</fra></row>
+<row><code>URINE</code><eng>urine</eng><fra>fr_urine</fra></row>
+<row><code>OTHER_REPRODUCTIVE</code><eng>other reproductive system</eng><fra>fr_other reproductive system</fra></row>
+<row><code>ADRENAL_GLAND</code><eng>adrenal gland or tissue</eng><fra>fr_adrenal gland or tissue</fra></row>
+<row><code>HAIR_HOOVES_FEATHERS</code><eng>hair, feathers, hooves</eng><fra>fr_hair, feathers, hooves</fra></row>
+<row><code>LIVER</code><eng>liver</eng><fra>fr_liver</fra></row>
+<row><code>PANCREAS</code><eng>pancreas</eng><fra>fr_pancreas</fra></row>
+<row><code>PITUITARY</code><eng>pituitary gland</eng><fra>fr_pituitary gland</fra></row>
+<row><code>SKIN_HIDES</code><eng>skin or hides</eng><fra>fr_skin or hides</fra></row>
+<row><code>THYROID_PARATHYROID</code><eng>thyroid or parathyroid</eng><fra>fr_thyroid or parathyroid</fra></row>
+<row><code>OTHER_SKIN_GLANDULAR</code><eng>other skin or glandular system</eng><fra>fr_other skin or glandular system</fra></row>
+<row><code>HEART_PERICARDIUM</code><eng>Heart or pericardium</eng><fra>fr_Heart or pericardium</fra></row>
+<row><code>LUNG</code><eng>lung</eng><fra>fr_lung</fra></row>
+<row><code>NASAL_FLUID</code><eng>nasal fluid</eng><fra>fr_nasal fluid</fra></row>
+<row><code>TRACHEA</code><eng>trachea</eng><fra>fr_trachea</fra></row>
+<row><code>PLACENTALFLUID</code><eng>placental fluid</eng><fra>fr_placental fluid</fra></row>
+<row><code>OTHER_CARDIO_RESPIRATORY</code><eng>other cardio-respiratory system</eng><fra>fr_other cardio-respiratory system</fra></row>
+<row><code>NERVOUS_SYSTEM</code><eng>Nervous System</eng><fra>fr_Nervous System</fra></row>
+<row><code>DIGESTIVE_SYSTEM</code><eng>Digestive</eng><fra>fr_Digestive</fra></row>
+<row><code>IMMUNE_SYSTEM</code><eng>Immune</eng><fra>fr_Immune</fra></row>
+<row><code>SKINGLAND_SYSTEM</code><eng>Skin and Glandular</eng><fra>fr_Skin and Glandular</fra></row>
+<row><code>MUSCULO_SYSTEM</code><eng>Musculo-Skeletal</eng><fra>fr_Musculo-Skeletal</fra></row>
+<row><code>OTHERTISSUE_SYSTEM</code><eng>Other Tissues or Fluids</eng><fra>fr_Other Tissues or Fluids</fra></row>
+<row><code>REPRODUCT_SYSTEM</code><eng>Reproductive</eng><fra>fr_Reproductive</fra></row>
+<row><code>CARDIO_SYSTEM</code><eng>Cardio-Respiratory</eng><fra>fr_Cardio-Respiratory</fra></row>
+<row><code>INGRED_MAT_NAME</code><eng>Ingredient or Material Name</eng><fra>fr_Ingredient or Material Name</fra></row>
+<row><code>AGEANIMALS</code><eng>Age of animals in months</eng><fra>fr_Age of animals in months</fra></row>
+<row><code>ANIMAL_CTRIES_ORIGIN</code><eng>Animal Countries of Origin</eng><fra>fr_Animal Countries of Origin</fra></row>
+<row><code>CONTROLLEDPOP</code><eng>Controlled Population</eng><fra>fr_Controlled Population</fra></row>
+<row><code>CELLLINE</code><eng>Cell line</eng><fra>fr_Cell line</fra></row>
+<row><code>BIOTECHDERIVED</code><eng>Biotechnology Derived Animal</eng><fra>fr_Biotechnology Derived Animal</fra></row>
+<row><code>ANIMAL_CTRY_ORIGIN</code><eng>Country of Origin of the Animals</eng><fra>fr_Country of Origin of the Animals</fra></row>
+<row><code>UNKNOWN_COUNTRY_DETAILS</code><eng>Unknown Country Details</eng><fra>fr_Unknown Country Details</fra></row>
+<row><code>ANIMAL_SRCS</code><eng>Animal Sources</eng><fra>fr_Animal Sources</fra></row>
+<row><code>ANIMAL_TYPE</code><eng>Animal Type</eng><fra>fr_Animal Type</fra></row>
+<row><code>ANIMAL_TYPE_LBL</code><eng>Animal Type Details</eng><fra>fr_Animal Type Details</fra></row>
+<row><code>UNKNOWN</code><eng>Unknown</eng><fra>fr_Unknown</fra></row>
+<row><code>ACTIVITY_TEMPLATE</code><eng>Regulatory Activity Template: Regulatory Enrolment Process (REP)</eng><fra>fr_Regulatory Activity Template: Regulatory Enrolment Process (REP)</fra></row>
+<row><code>ACTIVE_ENROL</code><eng>Regulatory Activity Enrolment</eng><fra>fr_Regulatory Activity Enrolment</fra></row>
+<row><code>ACTIVITY_LEAD</code><eng>Activity Lead</eng><fra>fr_Activity Lead</fra></row>
+<row><code>ACTIVITY_TYPE</code><eng>Regulatory Activity Type</eng><fra>fr_Regulatory Activity Type</fra></row>
+<row><code>REASON_FILE</code><eng>Reason for filing this Regulatory Activity</eng><fra>fr_Reason for filing this Regulatory Activity</fra></row>
+<row><code>IS_SOLICITED_ACT</code><eng>Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?</eng><fra>fr_Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?</fra></row>
+<row><code>IS_PRIORITY</code><eng>Was this regulatory activity approved for priority review?</eng><fra>fr_Was this regulatory activity approved for priority review?</fra></row>
+<row><code>IS_NOC</code><eng>Was this regulatory activity approved for NOC/C review?</eng><fra>fr_Was this regulatory activity approved for NOC/C review?</fra></row>
+<row><code>IS_ADMIN_SUBMISSION</code><eng>Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?</eng><fra>fr_Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?</fra></row>
+<row><code>ADMIN_SUB_TYPE</code><eng>Administrative submission type</eng><fra>fr_Administrative submission type</fra></row>
+<row><code>B14-20160301-09</code><eng>Pharmaceutical</eng><fra>fr_Pharmaceutical</fra></row>
+<row><code>B14-20160301-02</code><eng>Biological</eng><fra>fr_Biological</fra></row>
+<row><code>B14-20160301-10</code><eng>Post-Market Pharmacovigilance</eng><fra>fr_Post-Market Pharmacovigilance</fra></row>
+<row><code>B14-20160301-07</code><eng>Drug Master File</eng><fra>fr_Drug Master File</fra></row>
+<row><code>ADDRESS_NOC</code><eng>Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent</eng><fra>FR_Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent</fra></row>
+<row><code>TYPE_VNC</code><eng>Type of Notifiable Change (NC) or Veterinary Notifiable Change (VNC) submission</eng><fra>fr_Type of Notifiable Change (NC) or Veterinary Notifiable Change (VNC) submission</fra></row>
+<row><code>text_label_change</code><eng>Change in text of labelling</eng><fra>fr_Change in text of labelling</fra></row>
+<row><code>drug_substance_change</code><eng>Change in drug substance (source, synthesis)</eng><fra>fr_Change in drug substance (source, synthesis)</fra></row>
+<row><code>formulation_change</code><eng>Change in formulation or method of manufacturing with clinical / bio data</eng><fra>fr_Change in formulation or method of manufacturing with clinical / bio data</fra></row>
+<row><code>specification_change</code><eng>Change in specifications (medicinal or non-medicinal ingredient, pharmaceutical form, analytical method)</eng><fra>fr_Change in specifications (medicinal or non-medicinal ingredient, pharmaceutical form, analytical method)</fra></row>
+<row><code>expiry_storage_change</code><eng>Change in expiry period/storage conditions</eng><fra>fr_Change in expiry period/storage conditions</fra></row>
+<row><code>manufact_method_change</code><eng>Change in manufacturing method</eng><fra>fr_Change in manufacturing method</fra></row>
+<row><code>manufact_site_change</code><eng>Change in manufacturing site</eng><fra>fr_Change in manufacturing site</fra></row>
+<row><code>container_size_change</code><eng>Change in container size for parenteral drug</eng><fra>fr_Change in container size for parenteral drug</fra></row>
+<row><code>packaging_spec_change</code><eng>Change in packaging specifications for parenteral / inhalation drug</eng><fra>fr_Change in packaging specifications for parenteral / inhalation drug</fra></row>
+<row><code>packaging_materials_change</code><eng>Change in packaging material composition</eng><fra>fr_Change in packaging material composition</fra></row>
+<row><code>other_change_details</code><eng>Other - specify</eng><fra>fr_Other - specify</fra></row>
+<row><code>other_rationale_details</code><eng>Other - specify</eng><fra>fr_Other - specify</fra></row>
+<row><code>RATIONALE_SNDS</code><eng>Rationale for all SNDS, SANDS, (all human drug types); Veterinary Supplemental New Drug Submission (VSNDS), Veterinary Supplemental Abbreviated New Drug Submission( VSANDS) (All veterinary drug types); or for biological drug DIN submissions</eng><fra>fr_Rationale for all SNDS, SANDS, (all human drug types); Veterinary Supplemental New Drug Submission (VSNDS), Veterinary Supplemental Abbreviated New Drug Submission( VSANDS) (All veterinary drug types); or for biological drug DIN submissions</fra></row>
+<row><code>new_roa</code><eng>New route of administration, dosage form and / or strength</eng><fra>fr_New route of administration, dosage form and / or strength</fra></row>
+<row><code>new_claims</code><eng>New claims / use, indications, recommended administration or dosage regime</eng><fra>fr_New claims / use, indications, recommended administration or dosage regime</fra></row>
+<row><code>change_formulation</code><eng>Change in formulation or method of manufacturing with clinical / bio data</eng><fra>fr_Change in formulation or method of manufacturing with clinical / bio data</fra></row>
+<row><code>replace_sterility</code><eng>Replace sterility test with process parametric release</eng><fra>fr_Replace sterility test with process parametric release</fra></row>
+<row><code>other_rationale</code><eng></eng><fra></fra></row>
+<row><code>change_drug_substance</code><eng>Change in drug substance (source, synthesis)</eng><fra>fr_Change in drug substance (source, synthesis)</fra></row>
+<row><code>confirmitory_studies</code><eng>Confirmatory studies</eng><fra>fr_Confirmatory studies</fra></row>
 </SimpleCodeList>
