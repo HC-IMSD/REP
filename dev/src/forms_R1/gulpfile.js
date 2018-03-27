@@ -1259,6 +1259,26 @@ pipes.createBaseTemplates = function (destDir) {
     );
     //paths.buildDev + /temp/
 };
+pipes.createHelpTemplates = function (destDir) {
+    var copySources = gulp.src(['./app/instructions/*.*'], {read: true, base: './app/'});
+    var replacement = '..';
+    return (
+        copySources
+            .pipe(replace({
+                patterns: [
+                    {
+                        match: 'formpath',
+                        replacement: replacement
+                    }
+
+                ]
+            }))
+            .pipe(gulp.dest(destDir))
+    );
+    //paths.buildDev + /temp/
+};
+
+
 
 pipes.copyAndMinStyles = function (stylesArray, isTimeStamped, destPath) {
 
@@ -2918,3 +2938,16 @@ gulp.task('prod-build-allForms', gulp.series(
     }));
 
 /******END DRUG-PRODUCT PROD SCRIPTS******/
+
+
+/****** Copy help text to the dev or prod folder ******/
+gulp.task('dev-global-helpText-compile', gulp.series( function () {
+
+    return(pipes.createHelpTemplates((paths.buildDev)));
+
+}));
+gulp.task('prod-global-helpText-compile', gulp.series( function () {
+
+    return(pipes.createHelpTemplates((paths.buildProd)));
+
+}));
