@@ -62,7 +62,7 @@
                 if(vm.infoModel.applicationType===AMEND_TYPE) {
                     vm.isAmend = true;
                 }
-                else if(vm.infoModel.applicationType===APPROVED_TYPE && vm.formType !== EXTERNAL_TYPE){
+                else if(vm.infoModel.applicationType===APPROVED_TYPE && !vm.isEmpty(vm.infoModel.reasonAmend)){
                     vm.isAmend = true;
                 }
                 else{
@@ -113,19 +113,27 @@
         };
 
         vm.isExtern = function () {
-            return vm.formType == EXTERNAL_TYPE;
+            return vm.formType === EXTERNAL_TYPE;
         };
         vm.setAmendState = function () {
             //TODO hardcode should be service
             vm.setType({type: AMEND_TYPE});
             vm.isAmend = true;
-        }
+        };
 
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;
             vm.fieldId = "fieldId" +scopeId;
             vm.reasonAmend = "reasonAmend" + scopeId;
         }
+
+        vm.isEmpty = function(aValue){
+            return (typeof aValue === 'undefined' || aValue === null || aValue === "");
+        };
+
+        vm.isAmendBtnDisable = function () {
+            return !(vm.formType !== EXTERNAL_TYPE && !vm.setAsIncomplete);
+        };
 
 
     }

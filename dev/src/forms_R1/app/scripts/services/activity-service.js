@@ -43,7 +43,7 @@
                 "contactRecord": [],
                 "manu": false,
                 "mailling": false,
-                "billing": false,
+                "thisActivity": false,
                 "importer": false,
                 "importerId": ""
             };
@@ -61,8 +61,8 @@
             SNDS: ActivityListFactory.getSNDSTypeValue(),
             NC:  ActivityListFactory.getNCTypeValue(),
             VNC: "VNC",
-            BIOLOGIC: ActivityListFactory.getBiologicalLeadValue()
-            /*DIN: ActivityListFactory.getDINTypeValue() Deprecacted value with checkin on Jan 23, 2017 */
+            BIOLOGIC: ActivityListFactory.getBiologicalLeadValue(),
+            DINB: ActivityListFactory.getDINBTypeValue() //DINB values was added on Mar 26,2018
 
         };
 
@@ -104,7 +104,7 @@
                     rationale_types: {},
                     manufacturer: jsonObj.manu === true ? 'Y' : 'N',
                     mailing: jsonObj.mailling === true ? 'Y' : 'N',
-                    billing: jsonObj.billing === true ? 'Y' : 'N',
+                    this_activity: jsonObj.thisActivity === true ? 'Y' : 'N',
                     importer: jsonObj.importer === true ? 'Y' : 'N',
                     importer_id: jsonObj.importerId
                 }
@@ -242,7 +242,7 @@
             model.rationaleTypes = _transformRationaleTypeFromFileObj(jsonObj.rationale_types);
             model.manu = jsonObj.manufacturer === 'Y';
             model.mailling = jsonObj.mailing === 'Y';
-            model.billing = jsonObj.billing === 'Y';
+            model.thisActivity = jsonObj.this_activity === 'Y';
             model.importer = jsonObj.importer === 'Y';
             model.importerId = jsonObj.importer_id;
 
@@ -302,7 +302,7 @@
         ActivityService.prototype.isRationale = function (activity, lead) {
 
             if (!activity) return false;
-            if (activity === this.SANDS || activity === this.SNDS) {
+            if (activity === this.SANDS || activity === this.SNDS || activity === this.DINB) {
                 return true;
             }
           /*

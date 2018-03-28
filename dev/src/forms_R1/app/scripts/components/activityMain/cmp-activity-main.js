@@ -413,7 +413,7 @@
             vm.setThirdParty();
             vm.updateActivityType();
             vm.check = vm.rolechecked();
-            vm.clearReasonAmend();
+            //vm.clearReasonAmend();
             vm.setAdminSubmission();
             vm.selectActivityList();
 
@@ -442,7 +442,7 @@
          * @returns {boolean}
          */
         vm.isExtern = function () {
-            return vm.userType == EXTERNAL_TYPE;
+            return vm.userType === EXTERNAL_TYPE;
 
         };
 
@@ -460,20 +460,20 @@
                 }
             }
         }
-
+        /*
         vm.clearReasonAmend = function () {
             if(vm.activityRoot.applicationType === APPROVED_TYPE && vm.userType === EXTERNAL_TYPE){
                 vm.activityRoot.reasonAmend="";
             }
-        }
-
+        };
+        */
         vm.addInstruct = function (value) {
 
             if (angular.isUndefined(value)) return;
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
-        }
+        };
 
 
         /**
@@ -490,16 +490,9 @@
             if(vm.activityRoot.importer===false){
                 vm.activityRoot.importerId = "";
             }
-            if(vm.activityRoot.manu || vm.activityRoot.mailling || vm.activityRoot.billing || vm.activityRoot.importer){
-                vm.check = true;
-                vm.updateErrorSummaryState();
-                return true;
-            }
-            if(vm.activityRoot.manu===false && vm.activityRoot.mailling===false && vm.activityRoot.billing===false && vm.activityRoot.importer===false){
-                vm.check = "";
-                vm.updateErrorSummaryState();
-                return "";
-            }
+            vm.check = true;
+            vm.updateErrorSummaryState();
+            return true;
         };
 
         vm.clearSub = function (){
@@ -510,10 +503,7 @@
         };
 
         vm.showErrorMissing = function () {
-            if ((vm.showErrors() && !vm.check)) {
-                return true
-            }
-            return false
+            return (vm.showErrors() && !vm.check);
         };
         /**
          * Sets the ids and names for fields
