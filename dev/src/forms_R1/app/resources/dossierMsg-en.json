@@ -24,4 +24,5 @@
   "MSG_ERR_INVALID_NUM_MIN0": "The value must be greater than 0",
   "MSG_ERR_INVALID_NUM_MIN_LOWER": "The value must be equal to or greater than Lower Limit",
   "MSG_TISSUE_SYS_USED": "This system has been already been selected, please select another.",
+  "RELATED_INFORMATION": "Related Information"
 }

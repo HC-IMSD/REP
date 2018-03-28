@@ -30,7 +30,7 @@
 	"DRUG_PRODUCT": "fr_Product Information",
 	"SIGNED_THIRD": "fr_The submission will be signed or filed by a third party on behalf of the manufacturer or sponsor",
 	"INCLUDE_AUTH": "fr_Please include the Third Party Authorization letter in the REP folder when submitting via the  Common Electonic Submissions Gateway (CESG)",
-	"RELATED_DOSSIER": "fr_Related Dossier ID [if applicable]",
+	"RELATED_DOSSIER": "fr_Related Dossier ID",
 	"PROPER_NAME": "fr_Proper, Common or Non-Proprietary Name",
 	"DRUG_USE": "fr_Drug Use",
 	"SCHEDA_DESCRIPTION": "fr_",

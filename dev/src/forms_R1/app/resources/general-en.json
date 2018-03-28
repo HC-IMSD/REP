@@ -61,5 +61,8 @@
   "DELETE_RECORD":"Delete Record",
   "CONTROL_NUM": "Control Number",
   "OTHER_DETAILS": "Other - specify",
-  "PROD_NAME":"Product Name"
+  "PROD_NAME":"Product Name",
+  "PROD_NAME_HELP":"Product Name Instructions",
+  "PROP_NAME_HELP":"Proper, Common or Non-proprietary Name Instructions",
+  "RELATED_INFO_HELP":"Related Information Instructions"
 }
