@@ -23,7 +23,7 @@
   "CONTACT_MAILING": "Regulatory Mailing / Annual Contact",
   "CONTACT_BILLING": "Billing Contact",
   "CONTACT_MANUFACTURER": "Manufacturer / Sponsor Contact",
-  "APPROVE_FINAL": "Approve Final XML",
+  "APPROVE_FINAL": "Generate Final XML",
   "SAVE_DRAFT": "Save Draft for Filing",
   "PRIMARY": "Primary",
   "SECONDARY": "Alternate",

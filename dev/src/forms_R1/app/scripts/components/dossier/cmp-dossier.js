@@ -429,6 +429,7 @@
             vm.drugUseId="drug_use"+scopeId;
             vm.brandId="brand"+scopeId;
             vm.companyId="company"+scopeId;
+            vm.relatedInfoId="related_info"+scopeId;
         }
 
 
