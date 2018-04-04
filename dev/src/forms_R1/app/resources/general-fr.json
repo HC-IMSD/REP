@@ -56,5 +56,8 @@
   "DELETE_RECORD":"fr_Delete Record",
   "CONTROL_NUM": "fr_Control Number",
   "OTHER_DETAILS": "fr_Other Details - Specify",
-  "PROD_NAME":"Product Name"
+  "PROD_NAME":"fr_Product Name",
+  "PROD_NAME_HELP":"fr_Product Name Instructions",
+  "PROP_NAME_HELP":"fr_Proper, Common or Non-proprietary Name Instructions",
+  "RELATED_INFO_HELP":"fr_Related Information Instructions"
 }

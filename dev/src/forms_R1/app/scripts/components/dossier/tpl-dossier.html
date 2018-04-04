@@ -207,9 +207,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm[dos.relatedInformation].$invalid}">
-                        <label for="{{::dos.relatedInformation}}" class="required">
-                            <span class="field-name">G.&nbsp;{{::'RELATED_DOSSIER'|translate}}</span>
+                    <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm[dos.relatedInfoId].$invalid}">
+                        <label for="{{::dos.relatedInfoId}}" class="required">
+                            <span class="field-name">G.&nbsp;{{::'RELATED_INFO'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         </label>
                         <button title="{{::'RELATED_INFO_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
@@ -229,11 +229,11 @@
                                 </section>
                             </div>
                         </div>
-                        <textarea class="form-control full-width" id="{{::dos.relatedInformation}}" name="{{::dos.relatedInformation}}"
-                                  ng-model="dos.dossierModel.relatedDossierID" maxlength="256" rows="3" required></textarea>
-                        <cmp-error-message field-name="dos.relatedInformation"
+                        <textarea class="form-control full-width" id="{{::dos.relatedInfoId}}" name="{{::dos.relatedInfoId}}"
+                                  ng-model="dos.dossierModel.relatedInfo" maxlength="256" rows="3" required></textarea>
+                        <cmp-error-message field-name="dos.relatedInfoId"
                                            form-ref="dos.dossierForm"
-                                           show-error="dos.showError(dos.dossierForm[dos.relatedInformation])"
+                                           show-error="dos.showError(dos.dossierForm[dos.relatedInfoId])"
                                            error-types="dos.requiredOnly"></cmp-error-message>
                     </div>
                 </div>

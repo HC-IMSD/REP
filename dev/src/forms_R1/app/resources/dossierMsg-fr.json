@@ -16,7 +16,7 @@
   "NO_ROA": "fr_At least one Route of Administation is required",
   "NO_THERAVAL": "fr_At least one therapeutic classification is required",
   "MSG_ERR_ONE_COUNTRY": "fr_At least one country of origin is required",
-  "MSG_ERR_ONE_TISSUE": "fr_At lease one Tissues of Fluids source is required",
+  "MSG_ERR_ONE_TISSUE": "fr_Require at least one Tissue or fluid source",
   "MSG_ERR_ONE_CNTRY_ORIGIN": "fr_At least one Country of origin is required",
   "MSG_ERR_ONE_CDN_REF": "fr_At least one Canadian Reference product is required",
   "MSG_ERR_INVALID_NUM_MIN": "fr_The value must be greater than -273",

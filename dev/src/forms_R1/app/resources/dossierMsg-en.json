@@ -16,13 +16,12 @@
   "NO_ROA": "At least one Route of Administation is required",
   "NO_THERAVAL": "At least one therapeutic classification record must be provided",
   "MSG_ERR_ONE_COUNTRY": "At least one country of origin is required",
-  "MSG_ERR_ONE_TISSUE": "At lease one Tissues of Fluids source is required",
+  "MSG_ERR_ONE_TISSUE": "Require at least one Tissue or fluid source",
   "MSG_ERR_ONE_CNTRY_ORIGIN": "At least one Country of origin is required",
   "MSG_ERR_ONE_CDN_REF": "At least one Canadian Reference product is required",
   "MSG_ERR_INVALID_NUM_MIN": "The value must be greater than -273",
   "MSG_ERR_INVALID_NUM_MAX": "The value must be less than 999",
   "MSG_ERR_INVALID_NUM_MIN0": "The value must be greater than 0",
   "MSG_ERR_INVALID_NUM_MIN_LOWER": "The value must be equal to or greater than Lower Limit",
-  "MSG_TISSUE_SYS_USED": "This system has been already been selected, please select another.",
-  "RELATED_INFORMATION": "Related Information"
+  "MSG_TISSUE_SYS_USED": "This system has been already been selected, please select another."
 }

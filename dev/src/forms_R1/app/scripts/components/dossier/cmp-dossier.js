@@ -103,8 +103,7 @@
             "msg_err_one_cdn_ref": {
                 "type": "elementNoId",
                 "target": "addRefProductBtn"
-            },
-
+            }
 
 
         };
@@ -114,7 +113,7 @@
             {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
         ];
 
-        vm.alerts = [false, false, false, false,false,false,false,false,false,false]; //for help boxes
+        vm.alerts = [false, false, false, false, false, false, false, false, false, false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
 
@@ -430,7 +429,7 @@
             vm.drugUseId="drug_use"+scopeId;
             vm.brandId="brand"+scopeId;
             vm.companyId="company"+scopeId;
-            vm.relatedInformation="related_information"+scopeId;
+            vm.relatedInfoId="related_info"+scopeId;
         }
 
 
