@@ -122,9 +122,10 @@
         vm.setAmend = function () {
 
             vm.formAmendType = (vm.company.applicationType === AMEND_TYPE);
+            /**
             if(vm.company.applicationType === APPROVED_TYPE && vm.userType === EXTERNAL_TYPE){
                 vm.company.reasonAmend="";
-            }
+            }*/
         };
 
         /**
