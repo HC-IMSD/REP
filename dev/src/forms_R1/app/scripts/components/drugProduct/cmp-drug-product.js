@@ -57,7 +57,7 @@
         vm.showContent = _loadFileContent; //binds the component to the function
         vm.applicationInfoService = new ApplicationInfoService();
         vm.userType = EXTERNAL_TYPE;
-        vm.saveXMLLabel = "SAVE_DRAFT";
+        vm.saveXMLLabel = "APPROVE_FINAL";
         vm.yesNoList = DossierLists.getYesNoList();
         vm.yesValue = YES; //is this needed?
         vm.formTypeList = getRoleLists.getFormTypes();
@@ -142,7 +142,7 @@
          */
         vm.$onChanges = function (changes) {
 
-            if (changes.formType) {
+          /*  if (changes.formType) {
                 vm.userType = changes.formType.currentValue;
                 if (vm.userType === INTERNAL_TYPE) {
                     vm.saveXMLLabel = "APPROVE_FINAL"
@@ -150,7 +150,7 @@
                     vm.saveXMLLabel = "SAVE_DRAFT"
                 }
             }
-
+           */
         };
 
 
@@ -349,25 +349,29 @@
          */
         function _createFilename() {
 
-            var draft_prefix = "DRAFTREPPI";
-            var final_prefix = "HCREPPI";
-            var filename = "";
-            var separator="-";
-            vm.setVisibleTabIndex=-1;
-            if (vm.userType === INTERNAL_TYPE) {
+            var date = new Date();
+            var filename = "HCREPPI";
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var separator = "-";
 
-                filename = final_prefix;
-            } else {
-                filename = draft_prefix;
+            if (month < 10) {
+                month = "0" + month;
             }
-            if (vm.model && vm.model.dossierID) {
-                filename = filename + separator + vm.model.dossierID;
+            if (day < 10) {
+                day = "0" + day;
             }
-            if (vm.model.enrolmentVersion) {
-                filename = filename + separator + vm.model.enrolmentVersion;
+            if (hours < 10) {
+                hours = "0" + hours;
             }
-            filename= filename.replace(".",separator);
-            return filename.toLowerCase();
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+
+            filename = filename + separator + date.getFullYear() + separator + month + separator + day + separator + hours + minutes;
+            return (filename.toLowerCase());
         }
 
         /**
@@ -443,6 +447,7 @@
             vm.drugUseId="drug_use"+scopeId;
             vm.propIndicationId="prop_Indication"+scopeId;
             vm.fsType = "fs_type" + scopeId;
+            vm.properNameId="proper_name"+ scopeId;
         }
 
 

@@ -106,16 +106,33 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-xs-12 form-group"
+                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.properNameId].$invalid}">
+                        <label for="{{::drugProdCtrl.properNameId}}" class="required">
+                            <span class="field-name">C.&nbsp;{{::'PROPER_NAME' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="drugProdCtrl.properNameId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.properNameId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                        <textarea type="text" class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
+                              required ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3"
+                              data-ng-change="drugProdCtrl.model.properName=drugProdCtrl.model.properName.toUpperCase()">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-4 form-group">
                         <label>
-                            <span class="field-name">C.&nbsp;{{::'IMPORTER_COMPANY_ID_IF' |translate}}</span>
+                            <span class="field-name">D.&nbsp;{{::'IMPORTER_COMPANY_ID_IF' |translate}}</span>
                             <input type="text" class="form-control full-width" maxlength="6"
                                    ng-model="drugProdCtrl.model.importerID"/>
                         </label>
                     </div>
                     <div class="col-xs-12 form-group">
                         <label>
-                            <span class="field-name">D.&nbsp;{{::'IMPORTER_COMPANY_NAME_IF' |translate}}</span>
+                            <span class="field-name">E.&nbsp;{{::'IMPORTER_COMPANY_NAME_IF' |translate}}</span>
                             <input type="text" class="form-control full-width" maxlength="80" size="80"
                                    ng-model="drugProdCtrl.model.importerName"/>
                         </label>
@@ -124,7 +141,7 @@
                 <div class="row">
                     <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
-                            <span class="field-name">E.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <span class="field-name">F.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
                                     ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
@@ -141,7 +158,7 @@
                 <fieldset id="{{::drugProdCtrl.fsType}}">
                     <legend>
                         <label>
-                            <span class="label-pi">F.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
+                            <span class="label-pi">G.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </label>
                     </legend>
                     <div class="row">
@@ -216,7 +233,7 @@
                     <div class="form-group col-md-12"
                          ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
                         <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
-                            <span class="field-name">G. {{::'PROP_INDICATION'|translate}}</span>
+                            <span class="field-name">H. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
                             <cmp-error-message field-name="drugProdCtrl.propIndicationId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -263,7 +280,7 @@
                 <div class="row">
                     <div class="col-xs-4 form-group">
                         <label>
-                            <span class="field-name">H. {{::'FORMULATION'|translate}}</span>
+                            <span class="field-name">I. {{::'FORMULATION'|translate}}</span>
                         </label>
                     </div>
                 </div>

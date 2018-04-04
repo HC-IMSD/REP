@@ -41,6 +41,7 @@
             _default: {
                 dossierID: "",
                 companyID: "",
+                properName: "",
                 importerID: "",
                 importerName: "",
                 //relatedDossierID: "",
@@ -95,8 +96,9 @@
                     drugUseValue = info.drug_use.__text;
                 }
                 var formModel = {
-                    dossierID: info.dossier_id, //.substring(8,15),
                     companyID: info.company_id,
+                    dossierID: info.dossier_id, //.substring(8,15),
+                    properName: info.proper_name,
                     importerID: info.importer_id,
                     importerName: info.importer_name,
                    // relatedDossierID: info.related_dossier_id,
@@ -160,6 +162,7 @@
             //order is important!!! Must match schema
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
+            baseModel.proper_name = jsonObj.properName;
             baseModel.importer_id = jsonObj.importerID;
             baseModel.importer_name = jsonObj.importerName;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;

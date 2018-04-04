@@ -270,7 +270,7 @@
             //converts XML as a string to a json
             convertResult.jsonResult = xmlConverter.xml_str2json(reader.result);
 
-            if (convertResult.jsonResult === null) {
+            if (!convertResult.jsonResult || !convertResult.jsonResult[scope.rootTag]) {
                 convertResult.messages = msg_err_xmlparse;
             } else {
                 convertResult.messages = msg_success;

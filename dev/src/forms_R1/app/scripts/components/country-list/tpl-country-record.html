@@ -34,15 +34,17 @@
                     <label for="{{::countryRecCtrl.unknownCountryId}}" class="required">
                         <span class="field-name">{{::'UNKNOWN_COUNTRY_DETAILS'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                        <input type="text" id="{{::countryRecCtrl.unknownCountryId}}" class="form-control" name="{{::countryRecCtrl.unknownCountryId}}"
-                               required ng-model-options="{ debounce: '$inherit'}"
-                               maxlength="100" size="100" ng-model="countryRecCtrl.model.unknownCountryDetails"/>
                         <cmp-error-message field-name="countryRecCtrl.unknownCountryId"
                                            form-ref="countryRecCtrl.countryForm"
                                            show-error="countryRecCtrl.showError(countryRecCtrl.countryForm[countryRecCtrl.unknownCountryId])"
                                            error-types="countryRecCtrl.requiredOnly"></cmp-error-message>
 
                     </label>
+                    <textarea id="{{::countryRecCtrl.unknownCountryId}}"
+                          data-ng-model="countryRecCtrl.model.unknownCountryDetails" maxlength="1024" rows="3"
+                          ng-model-options="{ debounce: $inherit}"
+                          class="form-control full-width" name="{{::countryRecCtrl.unknownCountryId}}" required>
+                    </textarea>
                 </div>
             </div>
             <div class="row">

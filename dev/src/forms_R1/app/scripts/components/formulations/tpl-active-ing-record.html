@@ -87,9 +87,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    <label>
+                        <span class="field-name">{{'STRENGTH'|translate}}</span>
+                    </label>
+                </div>
+                <div class="row">
                     <div class="form-group col-md-3" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthId].$invalid}">
                         <label for="{{::ingRecCtrl.strengthId}}" class="required">
-                            <span class="field-name">{{'STRENGTH'|translate}}</span>
+                            <span class="field-name">{{'OPERATOR'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong></label>
                         <select id="{{::ingRecCtrl.strengthId}}" ng-model="ingRecCtrl.ingModel.strength.operator"
                                 ng-model-options="{ debounce: '$inherit'}"

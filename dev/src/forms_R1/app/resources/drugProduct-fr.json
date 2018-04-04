@@ -5,7 +5,7 @@
   "DRUGPROD":"fr_Drug Product",
   "TYPE_DRUGPROD":"fr_Drug Product Type",
   "SCHED_DIN":"fr_Schedule A DIN Number",
-  "PROP_INDICATION":"fr_Proposed Indication",
+  "PROP_INDICATION":"fr_Proposed Indication/Use/Dosage (including maximum daily dose)",
   "SCHEDULE_PRESC_STATUS": "fr_Schedule and Prescription status (check all that applies): The product is",
   "SCHEDULE_C":"fr_included in Schedule C (radiopharmacurticals) to the Food and Drugs Act",
   "SCHEDULE_D":"fr_included in Schedule D (biologicals) to the Food and Drugs Act",

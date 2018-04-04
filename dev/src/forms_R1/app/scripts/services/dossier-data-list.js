@@ -196,7 +196,7 @@
             return(
                 [
                     {"id":"EQ","en":"Equals","fr":"fr_Equals"},
-                    {"id":"NGT","en":"Not greater than","fr":"fr_Not_greater_than"},
+                    {"id":"NGT","en":"Not more than","fr":"fr_Not_greater_than"},
                     {"id":"NLT","en":"Not less than","fr":"fr_Not_less_than"},
                     {"id":"RA","en":"Range","fr":"fr_Range"}
 

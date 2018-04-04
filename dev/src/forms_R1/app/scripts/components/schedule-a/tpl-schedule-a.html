@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-xs-12 form-group">
                                 <fieldset id="{{::schedACtrl.fsId}}">
-                                    <legend class="required">
+                                    <label class="required">
                                         <span class=" field-name">{{::'SCHEDA_DISEASE'|translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <span>
@@ -37,7 +37,7 @@
                                                                form-ref="schedACtrl.schedAForm"
                                                                show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.oneSchedId])"
                                                                error-types="schedACtrl.oneRequired"></cmp-error-message>
-                    </span></legend>
+                    </span></label>
                                     <div class="row checkbox">
                                         <div class="col-md-4">
                                             <label for="{{::schedACtrl.acuteAlcoholId}}">

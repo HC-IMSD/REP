@@ -18,8 +18,9 @@
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="software_version" type="hpfb:string"/>
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
-	<hpfb:element name="dossier_id" type="char_0_7_content"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="dossier_id" type="char_0_7_content"/>
+	<hpfb:element name="proper_name" type="char_1_256_content"/>
 	<hpfb:element name="importer_id" type="char_0_6_content"/>
 	<hpfb:element name="importer_name" type="char_0_256_content"/>
 	<hpfb:element name="is_sched_c" type="required_yes_no_content"/>
@@ -28,7 +29,7 @@
 	<hpfb:element name="is_regulated_cdsa" type="required_yes_no_content"/>
 	<hpfb:element name="is_prescription_drug" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
-	<hpfb:element name="proposed_indication" type="char_0_256_content"/>
+	<hpfb:element name="proposed_indication" type="char_1_1024_content"/>
 	<!-- Drug Product element definitions-->
 
 	<hpfb:element name="drug_use">
@@ -331,6 +332,7 @@
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="proper_name"/>
 			<hpfb:element ref="importer_id"/>
 			<hpfb:element ref="importer_name"/>
 			<hpfb:element ref="enrolment_version"/>

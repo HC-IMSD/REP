@@ -207,20 +207,11 @@
             if (vm.ingModel.strength.operator.id !== undefined
                 && vm.ingModel.strength.operator.id !== "") {
                 isSet = true;
-                switch (vm.ingModel.strength.operator.id)
+                if (vm.ingModel.strength.operator.id === "RA")
                 {
-                    case "EQ":
-                        vm.strengthData1Title = "EQUALS";
-                        break;
-                    case "NGT":
-                        vm.strengthData1Title = "NOT_GREAT_THAN";
-                        break;
-                    case "NLT":
-                        vm.strengthData1Title = "NOT_LESS_THAN";
-                        break;
-                    case "RA":
-                        vm.strengthData1Title = "RANGE_LOWER_LIMIT";
-                        break;
+                    vm.strengthData1Title = "RANGE_LOWER_LIMIT";
+                } else {
+                    vm.strengthData1Title = "VALUE";
                 }
                 vm.strengthData1Id = "strength_" + vm.strengthData1Title + "_" + $scope.$id;
             }
@@ -355,7 +346,7 @@
             vm.nIngredName="n_ing_name"+scopeId;
             vm.casId="cas"+scopeId;
             vm.standardId="standard"+scopeId;
-            vm.strengthId="strength"+scopeId;
+            vm.strengthId="strength_operator"+scopeId;
             vm.strengthData1Id=scopeId;
             vm.strengthData2Id="strength_data2"+scopeId;
             vm.unitsId="units"+scopeId;
