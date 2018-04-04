@@ -15,7 +15,7 @@ var MainDossier=function(){
     var _thirdPartySelect= element(by.model(_thirdPartyModelString));
     var  _productNameText= element(by.model("dos.dossierModel.productName"));
     var  _commonNameText= element(by.model("dos.dossierModel.properName"));
-    var  _relatedDossierIdText= element(by.model("dos.dossierModel.relatedDossierID"));
+    var  _relatedInfoText= element(by.model("dos.dossierModel.relatedInfo"));
     var _isRefProductsModelString="dos.dossierModel.isRefProducts";
     var _isRefProductsSelect= element(by.model(_isRefProductsModelString));
 
@@ -81,11 +81,11 @@ var MainDossier=function(){
         return _commonNameText.getAttribute('value');
     };
 
-    this.setRelatedDossierIdValue = function (value) {
-        _relatedDossierIdText.sendKeys(value);
+    this.setRelatedInfoValue = function (value) {
+        _relatedInfoText.sendKeys(value);
     };
-    this.getRelatedDossierIdValue = function () {
-        return _relatedDossierIdText.getAttribute('value');
+    this.getRelatedInfoValue = function () {
+        return _relatedInfoText.getAttribute('value');
     };
     this.setIsRefProductByText = function (value) {
         _isRefProductsSelect.element(by.cssContainingText('option', value)).click();

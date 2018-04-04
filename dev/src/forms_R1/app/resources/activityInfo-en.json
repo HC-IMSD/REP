@@ -56,5 +56,9 @@
   "IMPORTER_ID": "Importer company ID",
   "ADDRESS_NOC":"Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent",
   "ADMIN_DESCRIPT":"Administrative Submission Type Description",
-  "ADMIN_SUB_TYPE":"Administrative submission type"
+  "ADMIN_SUB_TYPE":"Administrative submission type",
+  "MANU_SPON":"Manufacturer/Sponsor",
+  "REGU_ANNU":"Regulatory Mailing/Annual Contact",
+  "CAN_IMP":"Canadian Importer",
+  "THIS_ACTIVITY": "Contact for This Regulatory Activity"
 }

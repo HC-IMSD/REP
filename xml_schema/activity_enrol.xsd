@@ -56,7 +56,6 @@
 	<hpfb:element name="change_drug_substance" type="required_yes_no_content"/>
 	<hpfb:element name="replace_sterility" type="required_yes_no_content"/>
 	<hpfb:element name="confirmitory_studies" type="required_yes_no_content"/>
-	<hpfb:element name="other_rationale" type="required_yes_no_content"/>
 	<hpfb:element name="other_rationale_details" type="char_0_80_content"/>
 	<hpfb:element name="text_label_change" type="required_yes_no_content"/>
 	<hpfb:element name="drug_substance_change" type="required_yes_no_content"/>
@@ -79,7 +78,7 @@
 	<hpfb:element name="is_noc" type="required_yes_no_content"/>
 	<hpfb:element name="manufacturer" type="required_yes_no_content"/>
 	<hpfb:element name="mailing" type="required_yes_no_content"/>
-	<hpfb:element name="billing" type="required_yes_no_content"/>
+	<hpfb:element name="this_activity" type="required_yes_no_content"/>
 	<hpfb:element name="importer" type="required_yes_no_content"/>
 	<hpfb:element name="importer_id" type="char_0_6_content"/>	
 
@@ -113,7 +112,7 @@
 			<hpfb:element ref="rationale_types"/>
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>
-			<hpfb:element ref="billing"/>
+			<hpfb:element ref="this_activity"/>
 			<hpfb:element ref="importer"/>
 			<hpfb:element ref="importer_id"/>	
 			<hpfb:element ref="contact_record" minOccurs="1" maxOccurs="2"/>
@@ -152,7 +151,6 @@
 			<hpfb:element ref="change_drug_substance"/>
 			<hpfb:element ref="replace_sterility"/>
 			<hpfb:element ref="confirmitory_studies"/>
-			<hpfb:element ref="other_rationale"/>
 			<hpfb:element ref="other_rationale_details"/>
 		</hpfb:all>
 	</hpfb:complexType>

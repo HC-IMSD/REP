@@ -58,5 +58,9 @@
   "CHECKID":"fr_Select one or more addresses to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent",
   "IS_PRIORITY":"fr_Was this regulatory activity approved for priority review?",
   "IS_NOC":"fr_Was this regulatory activity approved for NOC/C review?",
+  "MANU_SPON":"fr_Manufacturer/Sponsor",
+  "REGU_ANNU":"fr_Regulatory Mailing/Annual Contact",
+  "CAN_IMP":"fr_Canadian Importer",
+  "THIS_ACTIVITY": "fr_Contact for This Regulatory Activity"
 
 }

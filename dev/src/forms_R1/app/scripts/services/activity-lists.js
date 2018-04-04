@@ -36,7 +36,7 @@
         vm.NC_raType = "B02-20160301-050";
         vm.SANDS_raType = "B02-20160301-082";
         vm.SNDS_raType = "B02-20160301-084";
-        vm.DIN_raType = "no used- deprecated?";
+        vm.DINB_raType = "B02-20160301-019";
         var service = {
             getFeeClassList: _getfeeClassArray,
             //createFeeClassList:_createfeeClassArray,
@@ -49,7 +49,7 @@
             getSANDSRaTypeValue: _getSANDS_raType,
             getSNDSTypeValue: _getSNDS_raType,
             getNCTypeValue: _getNC_raType,
-           // getDINTypeValue: _getDIN_raType,
+            getDINBTypeValue: _getDINB_raType,
             createAdminSubType: _createAdminSubType,
             getAdminSubType: _getAdminSubType
 
@@ -193,11 +193,11 @@
             return vm.SNDS_raType;
         }
 
-       /*
-        DIN values was decrprecated on Jan 23,2017
-        function _getDIN_raType() {
-            return vm.DIN_raType;
-        }*/
+
+        //DINB values was added on Mar 26,2018
+        function _getDINB_raType() {
+            return vm.DINB_raType;
+        }
 
         function _createSortedArray(jsonList, lang) {
             var result = [];

@@ -41,7 +41,7 @@
             _default: {
                 dossierID: "",
                 companyID: "",
-                relatedDossierID: "",
+                relatedInfo: "",
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 applicationType: "NEW",
@@ -93,7 +93,7 @@
                 var dossierModel = {
                     dossierID: info.dossier_id,
                     companyID: info.company_id,
-                    relatedDossierID: info.related_information,
+                    relatedInfo: info.related_information,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
                     applicationType: info.application_type,
@@ -153,7 +153,7 @@
             //order is important!!! Must match schema
             baseDossier.company_id = jsonObj.companyID;
             baseDossier.dossier_id = jsonObj.dossierID;
-            baseDossier.related_information = jsonObj.relatedDossierID;
+            baseDossier.related_information = jsonObj.relatedInfo;
             baseDossier.enrolment_version = jsonObj.enrolmentVersion;
             baseDossier.date_saved = jsonObj.dateSaved;
             baseDossier.application_type = jsonObj.applicationType;

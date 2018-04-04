@@ -708,4 +708,5 @@
 <row><code>other_rationale</code><eng></eng><fra></fra></row>
 <row><code>change_drug_substance</code><eng>Change in drug substance (source, synthesis)</eng><fra>fr_Change in drug substance (source, synthesis)</fra></row>
 <row><code>confirmitory_studies</code><eng>Confirmatory studies</eng><fra>fr_Confirmatory studies</fra></row>
+<row><code>THIS_ACTIVITY</code><eng>Contact for This Regulatory Activity</eng><fra>fr_Contact for This Regulatory Activity</fra></row>
 </SimpleCodeList>

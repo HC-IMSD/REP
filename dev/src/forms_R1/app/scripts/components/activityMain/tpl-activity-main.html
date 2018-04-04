@@ -375,93 +375,81 @@
                                 </div>
                             </div>
                         </div>
-                        <fieldset id="fs_addrMissing_{{::$id}}">
-                            <div>
-                                <div class="">
-                                    <legend class="required">
-                                        <span class="field-name">{{::'ADDRESS_NOC'|translate}}</span>
-                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <input type="text" id="checkid_{{::$id}}" name="checkid_{{::$id}}" hidden
-                                               ng-model="main.check" ng-required="main.showActivity"/>
-                                        <strong id=" address-role-error" class="error"
-                                                ng-show="main.showErrorMissing()">
-                        <span class="label label-danger" ng-messages="main.activityEnrolForm.checkid_{{::$id}}.$error">
-                            <span ng-message="required">{{::"MSG_ERR_ADDRESS"|translate}}</span>
-                        </span>
-                                        </strong>
-                                    </legend>
+                    </div>
+                    <!--  <pre>{{main.adminSubTypeList}}</pre>-->
+                    <fieldset id="fs_addrMissing_{{::$id}}">
+                        <label>
+                            <span class="field-name">{{::'ADDRESS_NOC'|translate}}</span>
+                        </label>
+                        <div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="checkbox">
+                                        <label for="manuid">
+                                            <input type="checkbox" id="manuid" name="manuid"
+                                                   ng-model="main.activityRoot.manu"
+                                                   ng-change="main.rolechecked()"/>
+                                            <span>{{::"MANU_SPON"|translate}}</span>
+
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="checkbox">
+                                        <label for="maillingid">
+                                            <input type="checkbox" id="maillingid" name="maillingid"
+                                                   ng-model="main.activityRoot.mailling"
+                                                   ng-change="main.rolechecked()"/>
+                                            <span>{{::"REGU_ANNU"|translate}}</span>
+
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="checkbox">
-                                            <label for="manuid">
-                                                <input type="checkbox" id="manuid" name="manuid"
-                                                       ng-model="main.activityRoot.manu"
-                                                       ng-change="main.rolechecked()"/>
-                                                <span>{{::"MANUFACTURER"|translate}}</span>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="checkbox">
+                                        <label for="thisActivity">
+                                            <input type="checkbox" id="thisActivity" name="thisActivity"
+                                                   ng-model="main.activityRoot.thisActivity"
+                                                   ng-change="main.rolechecked()"/>
+                                            <span>{{::"THIS_ACTIVITY"|translate}}</span>
 
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="checkbox">
-                                            <label for="maillingid">
-                                                <input type="checkbox" id="maillingid" name="maillingid"
-                                                       ng-model="main.activityRoot.mailling"
-                                                       ng-change="main.rolechecked()"/>
-                                                <span>{{::"MAILING"|translate}}</span>
-
-                                            </label>
-                                        </div>
+                                        </label>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="checkbox">
-                                            <label for="billingid">
-                                                <input type="checkbox" id="billingid" name="billingid"
-                                                       ng-model="main.activityRoot.billing"
-                                                       ng-change="main.rolechecked()"/>
-                                                <span>{{::"BILLING"|translate}}</span>
+                                <div class="col-sm-4">
+                                    <div class="checkbox">
+                                        <label for="importername">
+                                            <input type="checkbox" id="importername" name="importername"
+                                                   ng-model="main.activityRoot.importer"
+                                                   ng-change="main.rolechecked()"/>
+                                            <span>{{::"CAN_IMP"|translate}}</span>
 
-                                            </label>
-                                        </div>
+                                        </label>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="checkbox">
-                                            <label for="importername">
-                                                <input type="checkbox" id="importername" name="importername"
-                                                       ng-model="main.activityRoot.importer"
-                                                       ng-change="main.rolechecked()"/>
-                                                <span>{{::"IMPORTER"|translate}}</span>
-
-                                            </label>
-                                        </div>
-                                    </div>
-
                                 </div>
-                        </fieldset>
-                        <div class="form-group col-md-4"
-                             ng-show="main.activityRoot.importer">
-                            <div ng-class="{'has-error':main.activityEnrolForm[main.importerIden].$invalid}">
-                                <label for="{{::main.importerIden}}" class="required">
-                                    <span class="field-name">{{::"IMPORTER_ID" |translate}}</span>
-                                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <input type="text" id="{{::main.importerIden}}" name="{{::main.importerIden}}"
-                                           ng-model="main.activityRoot.importerId"
-                                           ng-change="main.updateErrorSummaryState()"
-                                           class="form-control full-width" minlength="6" maxlength="6"
-                                           ng-required="main.activityRoot.importer"/>
-                                    <cmp-error-message field-name="main.importerIden"
-                                                       form-ref="main.activityEnrolForm"
-                                                       show-error="main.showError(main.activityEnrolForm[main.importerIden])"
-                                                       error-types="main.length6Error"></cmp-error-message>
-                                </label>
+
                             </div>
                         </div>
-                        <!--  <pre>{{main.adminSubTypeList}}</pre>-->
+                    </fieldset>
+                    <div class="form-group col-md-4"
+                         ng-show="main.activityRoot.importer">
+                        <div ng-class="{'has-error':main.activityEnrolForm[main.importerIden].$invalid}">
+                            <label for="{{::main.importerIden}}" class="required">
+                                <span class="field-name">{{::"IMPORTER_ID" |translate}}</span>
+                                <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                <input type="text" id="{{::main.importerIden}}" name="{{::main.importerIden}}"
+                                       ng-model="main.activityRoot.importerId"
+                                       ng-change="main.updateErrorSummaryState()"
+                                       class="form-control full-width" minlength="6" maxlength="6"
+                                       ng-required="main.activityRoot.importer"/>
+                                <cmp-error-message field-name="main.importerIden"
+                                                   form-ref="main.activityEnrolForm"
+                                                   show-error="main.showError(main.activityEnrolForm[main.importerIden])"
+                                                   error-types="main.length6Error"></cmp-error-message>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </section>
