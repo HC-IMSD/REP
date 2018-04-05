@@ -131,10 +131,5 @@
             return (typeof aValue === 'undefined' || aValue === null || aValue === "");
         };
 
-        vm.isAmendBtnDisable = function () {
-            return !(vm.formType !== EXTERNAL_TYPE && !vm.setAsIncomplete);
-        };
-
-
     }
 })();
