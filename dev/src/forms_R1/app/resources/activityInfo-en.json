@@ -3,7 +3,7 @@
   "REG_ACTIVITY_INSTRUCT": "Regulatory Activity Instructions",
   "ACTIVE_ENROL":"Regulatory Activity Enrolment",
   "IS_SOLICITED": "Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
-  "RATIONALE_SNDS":"Rationale for all SNDS, SANDS, (all human drug types); Veterinary Supplemental New Drug Submission (VSNDS), Veterinary Supplemental Abbreviated New Drug Submission( VSANDS) (All veterinary drug types); or for biological drug DIN submissions",
+  "RATIONALE_SNDS":"Rationale for all SNDS, SANDS, (all human drug types); Veterinary Supplemental New Drug Submission (VSNDS), Veterinary Supplemental Abbreviated New Drug Submission(VSANDS) (All veterinary drug types); or for biological drug DIN submissions",
   "NEW_ROA":"New route of administration, dosage form and / or strength",
   "REPLACE_STERIL":"Replace sterility test with process parametric release",
   "NEW_CLAIMS":"New claims / use, indications, recommended administration or dosage regime",
@@ -60,5 +60,5 @@
   "MANU_SPON":"Manufacturer/Sponsor",
   "REGU_ANNU":"Regulatory Mailing/Annual Contact",
   "CAN_IMP":"Canadian Importer",
-  "THIS_ACTIVITY": "Contact for This Regulatory Activity"
+  "THIS_ACTIVITY": "Contact for this Regulatory Activity"
 }

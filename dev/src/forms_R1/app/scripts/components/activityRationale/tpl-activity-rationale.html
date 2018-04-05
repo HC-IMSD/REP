@@ -1,7 +1,7 @@
 <ng-form name="actRatCtrl.activityTypeForm">
     <div class="container-fluid">
         <fieldset id="fs_rationale_missing_{{::$id}}">
-            <legend class="required">
+            <label class="required">
                 <span class="field-name">{{::"RATIONALE_SNDS" |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                 <input  type="hidden"id="{{::actRatCtrl.ratMissingId}}" name="{{::actRatCtrl.ratMissingId}}"  aria-hidden="true" ;
@@ -12,7 +12,7 @@
                             <span ng-message="required">{{"RATIONALE_MISSING"|translate}}</span>
                         </span>
                 </strong>
-            </legend>
+            </label>
 
             <div class="row">
                 <div class="col-sm-7">
