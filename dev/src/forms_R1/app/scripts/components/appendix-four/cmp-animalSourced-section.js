@@ -31,6 +31,7 @@
 
         var vm = this;
         vm.yesNoUnknownList=DossierLists.getYesNoUnknownList();
+        vm.yesNoList=DossierLists.getYesNoList();
         vm.model={};
         vm.model.animalSrcSection=[];
         vm.oneAnimal = "";
@@ -97,6 +98,13 @@
             vm.oneCountry = "";
             return true;
         };
+        vm.isAnimalAgeKnown = function () {
+            if (vm.model.isAgeKnown === 'Y') {
+                return true;
+            }
+            vm.model.ageAnimals = null;
+            return false;
+        };
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
@@ -104,6 +112,7 @@
             vm.animalSectionRecordId = "anSectForm" + scopeId;
             vm.cellLineId="cellLine" + scopeId;
             vm.controlledPopId="controlledPop"+scopeId;
+            vm.ageKnownId="is_age_known"+scopeId;
             vm.ageAnimalsId="ageAnimals"+scopeId;
             vm.isBiotechId="biotechderived"+scopeId;
             //vm.noCountryId="msg_err_one_cntry_origin"+scopeId;

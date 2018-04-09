@@ -371,6 +371,7 @@
                         ing.sourceAnimalDetails.isCellLine = info[i].animal_sourced_section.is_cell_line;
                         ing.sourceAnimalDetails.isBiotechDerived = info[i].animal_sourced_section.is_biotech_derived;
                         ing.sourceAnimalDetails.isControlledPop = info[i].animal_sourced_section.is_controlled_pop;
+                        ing.sourceAnimalDetails.isAgeKnown = info[i].animal_sourced_section.is_animal_age_known;
                         ing.sourceAnimalDetails.ageAnimals = Number(info[i].animal_sourced_section.animal_age);
                         var animalTypeList = info[i].animal_sourced_section.animal_src_record;
                         if (!(animalTypeList instanceof Array)) {
@@ -402,6 +403,7 @@
             emptyAnimalSource.isCellLine = "";
             emptyAnimalSource.isBiotechDerived = "";
             emptyAnimalSource.isControlledPop = "";
+            emptyAnimalSource.isAgeKnown = "";
             emptyAnimalSource.ageAnimals = "";
             emptyAnimalSource.countryList = [];
             return emptyAnimalSource;
@@ -502,7 +504,9 @@
                     "units": "",
                     "otherUnits": item.units_other,
                     "per": item.per,
-                    "unitsPresentation": item.units_presentation,
+                    "perPresentationValue": null,
+                    "unitsPresentation": "",
+                    "perMeasureValue": null,
                     "perMeasureUnits": "",
                     "perMeasureOtherUnits": item.units_other_measure,
                     "calcAsBase": item.is_base_calc,
@@ -517,13 +521,14 @@
                 }
 
                 if (item.per) {
-                    var perValue = item.per.__text;
-                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perValue});
+                    var perId = item.per.__text;
+                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
                 }
 
                 if (item.units_presentation) {
                     var upValue = item.units_presentation.__text;
                     obj.unitsPresentation = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
+                    obj.perPresentationValue = Number(item.per_value);
                 }
 
                 if (item.units_measure) {
@@ -533,6 +538,7 @@
                         unitsValue = item.units_measure.__text;
                     }
                     obj.perMeasureUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                    obj.perMeasureValue = Number(item.per_value);
                 }
 
                 if (item.units) {
@@ -601,8 +607,8 @@
                 }
 
                 if (item.per) {
-                    var perValue = item.per.__text;
-                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perValue});
+                    var perId = item.per.__text;
+                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
                 }
 
                 if (item.units_presentation) {
@@ -834,6 +840,7 @@
                     ing.animal_sourced_section.is_cell_line = info[i].sourceAnimalDetails.isCellLine;
                     ing.animal_sourced_section.is_biotech_derived = info[i].sourceAnimalDetails.isBiotechDerived;
                     ing.animal_sourced_section.is_controlled_pop = info[i].sourceAnimalDetails.isControlledPop;
+                    ing.animal_sourced_section.is_animal_age_known = info[i].sourceAnimalDetails.isAgeKnown;
                     ing.animal_sourced_section.animal_age = info[i].sourceAnimalDetails.ageAnimals;
                     //step 2 get all the animal sourcees
                     var animalSrcObj = info[i].sourceAnimalDetails;
@@ -948,6 +955,7 @@
                     "units": "",
                     "units_other": item.otherUnits,
                     "per": "",
+                    "per_value": "",
                     "units_presentation": "",
                     "units_measure": "",
                     "units_other_measure": "",
@@ -983,12 +991,14 @@
                 //item.units
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
                 if (item.per.id === 'UP') {
+                    obj.per_value = item.perPresentationValue;
                     obj.units_presentation = {
                         _label_en: item.unitsPresentation.en,
                         _label_fr: item.unitsPresentation.fr,
                         __text: item.unitsPresentation.id
                     };
                 } else if (item.per.id === 'UM') {
+                    obj.per_value = item.perMeasureValue;
                     obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
                     obj.units_other_measure = item.perMeasureOtherUnits;
                 }
@@ -1450,7 +1460,8 @@
             record.is_controlled_pop = "";
             record.is_biotech_derived = "";
             record.is_cell_line = "";
-            record.animal_age = ""; //TODO number is this a problem?
+            record.is_animal_age_known = "";
+            record.animal_age = "";
             record.country_origin_list = {};
             record.country_origin_list.country_origin = [];
             return record;
@@ -1462,6 +1473,7 @@
             record.isCellLine = "";
             record.isBiotechDerived = "";
             record.isControlledPop = "";
+            record.isAgeKnown = "";
             record.ageAnimals = "";
             record.countryList = [];
             return record;

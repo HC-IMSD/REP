@@ -23,6 +23,7 @@
   "UNIT_MEASURE": "Unit of Measure",
   "OTHER_UNIT_MEASURE": "Unit of Measure Other Details",
   "PER_STRENGTH": "Per",
+  "PER_VALUE": "Per - Value",
   "ISBASE": "Calculated as Base?",
   "IS_NANO_MATERIAL": "Is this a nanomaterial?",
   "NANO_MATERIAL": "Nanomaterial",

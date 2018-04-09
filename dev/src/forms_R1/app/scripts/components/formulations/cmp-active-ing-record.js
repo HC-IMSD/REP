@@ -78,7 +78,9 @@
             units: "",
             otherUnits:"",
             per: "",
+            perPresentationValue: 1,
             unitsPresentation: "",
+            perMeasureValue: null,
             perMeasureUnits: "",
             perMeasureOtherUnits:"",
             isNano: "",
@@ -354,6 +356,8 @@
             vm.perMeasureUnitId="unit_measure"+scopeId;
             vm.perMeasureOtherUnitId="other_unit_measure"+scopeId;
             vm.perId="per_strength"+scopeId;
+            vm.perPreValueId="per_value"+scopeId;
+            vm.perMeaValueId="per_value"+scopeId;
             vm.presentationId="unit_presentation"+scopeId;
             vm.isNanoMaterialId="is_nano_material"+scopeId;
             vm.nanoId="nano_material"+scopeId;

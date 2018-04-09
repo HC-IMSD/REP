@@ -91,6 +91,7 @@
   "CONTROLLEDPOP": "fr_Controlled Population",
   "BIOTECHDERIVED": "fr_Biotechnology Derived Animal",
   "CELLLINE": "fr_Cell line",
+  "IS_AGE_KNOWN": "fr_Is age of animals known?",
   "AGEANIMALS": "fr_Age of animals in months",
   "COUNTRYORIGIN": "fr_Country of origin",
   "SPECIFY_THE": "Spécifiez l'autre",

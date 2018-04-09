@@ -189,6 +189,7 @@
 	<hpfb:element name="is_controlled_pop" type="required_yes_no_unknown_content"/>
 	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
 	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
+	<hpfb:element name="is_animal_age_known" type="required_yes_no_content"/>
 	<hpfb:element name="animal_age" type="integer_0_999_content"/>
 	<hpfb:element name="country_with_unknown">
 		<hpfb:complexType>
@@ -288,6 +289,7 @@
 			</hpfb:simpleContent>
 		</hpfb:complexType>
 	</hpfb:element>
+	<hpfb:element name="per_value" type="integer_0_999_content"/>
 	<hpfb:element name="units_presentation">
 		<hpfb:complexType>
 			<hpfb:simpleContent>
@@ -413,6 +415,7 @@
 			<hpfb:element ref="is_controlled_pop"/>
 			<hpfb:element ref="is_biotech_derived"/>
 			<hpfb:element ref="is_cell_line"/>
+			<hpfb:element ref="is_animal_age_known"/>
 			<hpfb:element ref="animal_age"/>
 			<hpfb:element ref="country_origin_list"/>
 		</hpfb:sequence>
@@ -510,27 +513,7 @@
 			<hpfb:element ref="units"/>
 			<hpfb:element ref="units_other"/>
 			<hpfb:element ref="per"/>
-			<hpfb:element ref="units_presentation"/>
-			<hpfb:element ref="units_measure"/>
-			<hpfb:element ref="units_other_measure"/>
-			<hpfb:element ref="is_base_calc"/>
-			<hpfb:element ref="is_nanomaterial"/>
-			<hpfb:element ref="nanomaterial"/>
-			<hpfb:element ref="nanomaterial_details"/>
-		</hpfb:sequence>
-	</hpfb:complexType>
-	<hpfb:complexType name="nmi_group_content">
-		<hpfb:sequence>
-			<hpfb:element ref="ingredient_id"/>
-			<hpfb:element ref="ingredient_name"/>
-			<hpfb:element ref="cas_number"/>
-			<hpfb:element ref="ingred_standard"/>
-			<hpfb:element ref="is_human_animal_src"/>
-			<hpfb:element ref="variant_name"/>
-			<hpfb:element ref="strength"/>
-			<hpfb:element ref="units"/>
-			<hpfb:element ref="units_other"/>
-			<hpfb:element ref="per"/>
+			<hpfb:element ref="per_value"/>
 			<hpfb:element ref="units_presentation"/>
 			<hpfb:element ref="units_measure"/>
 			<hpfb:element ref="units_other_measure"/>
