@@ -21,6 +21,7 @@
   "UNIT": "fr_Unit",
   "UNIT_PRESENTATION": "fr_Unit of Presentation",
   "UNIT_MEASURE": "fr_Unit of Measure",
+  "OTHER_UNIT_PRESENTATION": "fr_Unit of Presentation Other Details",
   "OTHER_UNIT_MEASURE": "fr_Unit of Measure Other Details",
   "PER_STRENGTH": "Par",
   "PER_VALUE": "fr_Per - Value",

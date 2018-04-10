@@ -505,10 +505,9 @@
                     "otherUnits": item.units_other,
                     "per": item.per,
                     "perPresentationValue": null,
-                    "unitsPresentation": "",
                     "perMeasureValue": null,
-                    "perMeasureUnits": "",
-                    "perMeasureOtherUnits": item.units_other_measure,
+                    "perUnits": "",
+                    "perOtherUnits": item.per_units_other_details,
                     "calcAsBase": item.is_base_calc,
                     "isNano": item.is_nanomaterial,
                     "nanoMaterial": "",
@@ -520,27 +519,6 @@
                     obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
                 }
 
-                if (item.per) {
-                    var perId = item.per.__text;
-                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
-                }
-
-                if (item.units_presentation) {
-                    var upValue = item.units_presentation.__text;
-                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
-                    obj.perPresentationValue = Number(item.per_value);
-                }
-
-                if (item.units_measure) {
-                    var unitsValue = DossierLists.getUnitsPrefix() + item.units_measure.__text; //add the prefix
-                    //if other revert the value. OTHER value never has a prefix
-                    if (item.units_measure.__text === OTHER) {
-                        unitsValue = item.units_measure.__text;
-                    }
-                    obj.perMeasureUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
-                    obj.perMeasureValue = Number(item.per_value);
-                }
-
                 if (item.units) {
                     var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
@@ -549,6 +527,28 @@
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                 }
+
+                if (item.per) {
+                    var perId = item.per.__text;
+                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
+                }
+
+                if (item.per.__text === 'UP') {
+                    var upValue = item.per_units.__text;
+                    obj.perUnits = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
+                    obj.perPresentationValue = Number(item.per_value);
+                }
+
+                if (item.per.__text === 'UM') {
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.per_units.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.per_units.__text === OTHER) {
+                        unitsValue = item.per_units.__text;
+                    }
+                    obj.perUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                    obj.perMeasureValue = Number(item.per_value);
+                }
+
                 if (item.is_nanomaterial === YES) {
                     //prefixed so need to do things differently than units
                     var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial.__text;
@@ -571,7 +571,7 @@
 
         }
 
-
+/* merged to active medIng list
         function getNonMedIngList(list) {
 
             var resultList = [];
@@ -647,7 +647,7 @@
             return resultList;
         }
 
-
+*/
         function getContainerTypeList(list) {
 
             var resultList = [];
@@ -956,9 +956,8 @@
                     "units_other": item.otherUnits,
                     "per": "",
                     "per_value": "",
-                    "units_presentation": "",
-                    "units_measure": "",
-                    "units_other_measure": "",
+                    "per_units": "",
+                    "per_units_other_details": item.perOtherUnits,
                     "is_base_calc": item.calcAsBase,
                     "is_nanomaterial": item.isNano,
                     "nanomaterial": "",
@@ -992,15 +991,14 @@
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
                 if (item.per.id === 'UP') {
                     obj.per_value = item.perPresentationValue;
-                    obj.units_presentation = {
-                        _label_en: item.unitsPresentation.en,
-                        _label_fr: item.unitsPresentation.fr,
-                        __text: item.unitsPresentation.id
+                    obj.per_units = {
+                        _label_en: item.perUnits.en,
+                        _label_fr: item.perUnits.fr,
+                        __text: item.perUnits.id
                     };
                 } else if (item.per.id === 'UM') {
                     obj.per_value = item.perMeasureValue;
-                    obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
-                    obj.units_other_measure = item.perMeasureOtherUnits;
+                    obj.per_units = _unitsFldToOutput(item.perUnits, DossierLists.getUnitsPrefix());
                 }
                 if (item.isNano === YES) {
                     obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
@@ -1041,7 +1039,7 @@
          * Converts nonMedicinal Ingredient to a the output json object
          * @param nonMedList
          * @returns {Array}
-         */
+         * -- depreciated
         function nonMedIngListToOutput(nonMedList) {
 
             var resultList = [];
@@ -1111,6 +1109,7 @@
             });
             return resultList;
         }
+         */
 
         /**
          * Converts container type to output json

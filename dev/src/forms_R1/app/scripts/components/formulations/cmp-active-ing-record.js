@@ -79,10 +79,9 @@
             otherUnits:"",
             per: "",
             perPresentationValue: 1,
-            unitsPresentation: "",
             perMeasureValue: null,
-            perMeasureUnits: "",
-            perMeasureOtherUnits:"",
+            perUnits: "",
+            perOtherUnits:"",
             isNano: "",
             nanoMaterial:"",
             nanoMaterialOther: "",
@@ -317,16 +316,16 @@
         };
 
         /**
-         * @ngDoc determines if units Other should be shown
+         * @ngDoc determines if per units Other should be shown
          * @returns {boolean}
          */
-        vm.isMeasureUnitsOther = function () {
+        vm.isPerUnitsOther = function () {
 
-            if (!vm.ingModel || !vm.ingModel.perMeasureUnits) return false;
-            if ((vm.ingModel.perMeasureUnits.id === OTHER)) {
+            if (!vm.ingModel || !vm.ingModel.perUnits) return false;
+            if ((vm.ingModel.perUnits.id === OTHER)) {
                 return true;
             } else {
-                vm.ingModel.perMeasureOtherUnits = "";
+                vm.ingModel.perOtherUnits = "";
                 return false;
             }
         };
@@ -354,6 +353,7 @@
             vm.unitsId="units"+scopeId;
             vm.otherUnitsId="other_units"+scopeId;
             vm.perMeasureUnitId="unit_measure"+scopeId;
+            vm.perPresOtherUnitId="other_unit_presentation"+scopeId;
             vm.perMeasureOtherUnitId="other_unit_measure"+scopeId;
             vm.perId="per_strength"+scopeId;
             vm.perPreValueId="per_value"+scopeId;
