@@ -477,7 +477,7 @@
 <row><code>SCHEDULE_C</code><eng>included in Schedule C (radiopharmacurticals) to the Food and Drugs Act</eng><fra>fr_included in Schedule C (radiopharmacurticals) to the Food and Drugs Act</fra></row>
 <row><code>SCHEDULE_D</code><eng>included in Schedule D (biologicals) to the Food and Drugs Act</eng><fra>fr_included in Schedule D (biologicals) to the Food and Drugs Act</fra></row>
 <row><code>SCHEDULE_F</code><eng>included in Schedule F (prescription drugs) to the Food and Drug Regulations</eng><fra>fr_included in Schedule F (prescription drugs) to the Food and Drug Regulations</fra></row>
-<row><code>PROP_INDICATION</code><eng>Proposed Indication</eng><fra>fr_Proposed Indication</fra></row>
+<row><code>PROP_INDICATION</code><eng>Proposed Indication/Use/Dosage (including maximum daily dose)</eng><fra>fr_Proposed Indication/Use/Dosage (including maximum daily dose)</fra></row>
 <row><code>FORMULATION</code><eng>Formulation</eng><fra>fr_Formulation</fra></row>
 <row><code>FORMULATIONS</code><eng>Formulations</eng><fra>fr_Formulations</fra></row>
 <row><code>FORMULATION_NAME</code><eng>Formulation Name</eng><fra>fr_Formulation Name</fra></row>
@@ -496,8 +496,9 @@
 <row><code>UNIT</code><eng>Unit</eng><fra>fr_Unit</fra></row>
 <row><code>EQUALS</code><eng>Equals</eng><fra>fr_Equals</fra></row>
 <row><code>NOT_LESS_THAN</code><eng>Not Less Than</eng><fra>fr_Not Less Than</fra></row>
-<row><code>RANGE_LOWER_LIMIT</code><eng>Range (lower limit)</eng><fra>fr_Range (lower limit)</fra></row>
-<row><code>RANGE_UPPER_LIMIT</code><eng>Range (upper limit)</eng><fra>fr_Range (upper limit)</fra></row>
+<row><code>RANGE</code><eng>Range</eng><fra>fr_Range</fra></row>
+<row><code>RANGE_LOWER_LIMIT</code><eng>Lower Limit</eng><fra>fr_Lower Limit</fra></row>
+<row><code>RANGE_UPPER_LIMIT</code><eng>Upper Limit</eng><fra>fr_Upper Limit</fra></row>
 <row><code>OTHER_UNIT_MEASURE</code><eng>Unit of Measure Other Details</eng><fra>fr_Unit of Measure Other Details</fra></row>
 <row><code>PER_STRENGTH</code><eng>Per</eng><fra>fr_Per</fra></row>
 <row><code>UNIT_PRESENTATION</code><eng>Unit of Presentation</eng><fra>fr_Unit of Presentation</fra></row>
@@ -708,5 +709,8 @@
 <row><code>other_rationale</code><eng></eng><fra></fra></row>
 <row><code>change_drug_substance</code><eng>Change in drug substance (source, synthesis)</eng><fra>fr_Change in drug substance (source, synthesis)</fra></row>
 <row><code>confirmitory_studies</code><eng>Confirmatory studies</eng><fra>fr_Confirmatory studies</fra></row>
-<row><code>THIS_ACTIVITY</code><eng>Contact for This Regulatory Activity</eng><fra>fr_Contact for this Regulatory Activity</fra></row>
+<row><code>THIS_ACTIVITY</code><eng>Contact for this Regulatory Activity</eng><fra>fr_Contact for this Regulatory Activity</fra></row>
+<row><code>PROPER_NAME</code><eng>Proper, Common or Non-Proprietary Name</eng><fra>fr_Proper, Common or Non-Proprietary Name</fra></row>
+<row><code>VALUE</code><eng>Value</eng><fra>fr_Value</fra></row>
+<row><code>IS_AGE_KNOWN</code><eng>Is age of animals known?</eng><fra>fr_Is age of animals known?</fra></row>
 </SimpleCodeList>
