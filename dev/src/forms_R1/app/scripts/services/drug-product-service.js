@@ -504,10 +504,12 @@
                     "units": "",
                     "otherUnits": item.units_other,
                     "per": item.per,
-                    "perPresentationValue": null,
+                    "perPresentationValue": Number(1),
                     "perMeasureValue": null,
-                    "perUnits": "",
-                    "perOtherUnits": item.per_units_other_details,
+                    "perPresUnits": "",
+                    "perPresOtherUnits": "",
+                    "perMeasUnits": "",
+                    "perMeasOtherUnits": "",
                     "calcAsBase": item.is_base_calc,
                     "isNano": item.is_nanomaterial,
                     "nanoMaterial": "",
@@ -534,19 +536,21 @@
                 }
 
                 if (item.per.__text === 'UP') {
-                    var upValue = item.per_units.__text;
-                    obj.perUnits = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
                     obj.perPresentationValue = Number(item.per_value);
+                    var upValue = item.per_units.__text;
+                    obj.perPresUnits = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
+                    obj.perPresOtherUnits = item.per_units_other_details;
                 }
 
                 if (item.per.__text === 'UM') {
+                    obj.perMeasureValue = Number(item.per_value);
                     var unitsValue = DossierLists.getUnitsPrefix() + item.per_units.__text; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
                     if (item.per_units.__text === OTHER) {
                         unitsValue = item.per_units.__text;
                     }
-                    obj.perUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
-                    obj.perMeasureValue = Number(item.per_value);
+                    obj.perMeasUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                    obj.perMeasOtherUnits = item.per_units_other_details;
                 }
 
                 if (item.is_nanomaterial === YES) {
@@ -957,7 +961,7 @@
                     "per": "",
                     "per_value": "",
                     "per_units": "",
-                    "per_units_other_details": item.perOtherUnits,
+                    "per_units_other_details": "",
                     "is_base_calc": item.calcAsBase,
                     "is_nanomaterial": item.isNano,
                     "nanomaterial": "",
@@ -992,13 +996,15 @@
                 if (item.per.id === 'UP') {
                     obj.per_value = item.perPresentationValue;
                     obj.per_units = {
-                        _label_en: item.perUnits.en,
-                        _label_fr: item.perUnits.fr,
-                        __text: item.perUnits.id
+                        _label_en: item.perPresUnits.en,
+                        _label_fr: item.perPresUnits.fr,
+                        __text: item.perPresUnits.id
                     };
+                    obj.per_units_other_details = item.perPresOtherUnits;
                 } else if (item.per.id === 'UM') {
                     obj.per_value = item.perMeasureValue;
-                    obj.per_units = _unitsFldToOutput(item.perUnits, DossierLists.getUnitsPrefix());
+                    obj.per_units = _unitsFldToOutput(item.perMeasUnits, DossierLists.getUnitsPrefix());
+                    obj.per_units_other_details = item.perMeasOtherUnits;
                 }
                 if (item.isNano === YES) {
                     obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());

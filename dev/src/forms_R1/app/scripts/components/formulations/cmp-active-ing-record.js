@@ -80,8 +80,10 @@
             per: "",
             perPresentationValue: 1,
             perMeasureValue: null,
-            perUnits: "",
-            perOtherUnits:"",
+            perPresUnits: "",
+            perPresOtherUnits:"",
+            perMeasUnits: "",
+            perMeasOtherUnits:"",
             isNano: "",
             nanoMaterial:"",
             nanoMaterialOther: "",
@@ -319,13 +321,28 @@
          * @ngDoc determines if per units Other should be shown
          * @returns {boolean}
          */
-        vm.isPerUnitsOther = function () {
+        vm.isPerPresUnitsOther = function () {
 
-            if (!vm.ingModel || !vm.ingModel.perUnits) return false;
-            if ((vm.ingModel.perUnits.id === OTHER)) {
+            if (!vm.ingModel || !vm.ingModel.perPresUnits) return false;
+            if ((vm.ingModel.perPresUnits.id === OTHER)) {
                 return true;
             } else {
-                vm.ingModel.perOtherUnits = "";
+                vm.ingModel.perPresOtherUnits = "";
+                return false;
+            }
+        };
+
+        /**
+         * @ngDoc determines if per units Other should be shown
+         * @returns {boolean}
+         */
+        vm.isPerMeasUnitsOther = function () {
+
+            if (!vm.ingModel || !vm.ingModel.perMeasUnits) return false;
+            if ((vm.ingModel.perMeasUnits.id === OTHER)) {
+                return true;
+            } else {
+                vm.ingModel.perMeasOtherUnits = "";
                 return false;
             }
         };
