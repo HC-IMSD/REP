@@ -105,7 +105,8 @@
             }else {
 
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _getFileName(), vm.rootTag);
+                hpfbFileProcessing.writeAsXml(writeResult, _getFileName(), vm.rootTag,
+                    vm.transactionService.getXSLFileName());
                 vm.savePressed = false;
             }
         };

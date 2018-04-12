@@ -56,6 +56,7 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
+            this.xslFileName = "REP_RT_2_0.xsl";
         }
 
         TransactionService.prototype = {
@@ -65,6 +66,9 @@
             getRootTag: function () {
 
                 return ("TRANSACTION_ENROL")
+            },
+            getXSLFileName: function () {
+                return this.xslFileName;
             },
             /**
              * ngDoc method- mapping from the transaction file json object to the internal representation
@@ -89,7 +93,7 @@
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
                         date_saved: today,
-                        software_version: "1.3.0",
+                        software_version: "2.0.0",
                         data_checksum: jsonObj.dataChecksum,
                         is_ectd: jsonObj.isEctd
                     }

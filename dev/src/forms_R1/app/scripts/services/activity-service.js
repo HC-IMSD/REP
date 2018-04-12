@@ -53,6 +53,7 @@
             angular.extend(this._default, defaultActivityData);
             this.rootTag = "ACTIVITY_ENROL";
             this.activityId = 0;
+            this.xslFileName = "REP_RA_2_0.xsl";
         }
 
         ActivityService.prototype = {
@@ -69,6 +70,10 @@
 
         ActivityService.prototype.getRootTag = function () {
             return (this.rootTag)
+        };
+
+        ActivityService.prototype.getXSLFileName = function () {
+            return this.xslFileName;
         };
 
         /**

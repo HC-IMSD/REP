@@ -46,6 +46,7 @@
                 dateSaved: "",
                 applicationType: "NEW",
                 softwareVersion: SOFTWARE_VERSION,
+                xslFileName: "REP_DO_2_0.xsl",
                 dataChecksum: "",
                 dossierType: "",
                 productName: "",
@@ -76,6 +77,9 @@
 
                 return this._default;
 
+            },
+            getXSLFileName: function () {
+                return this._default.xslFileName;
             },
             loadFromFile: function (info) {
                 var rootTag=this.getRootTagName();

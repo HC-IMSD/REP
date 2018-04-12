@@ -314,7 +314,8 @@
                 vm.updateErrorSummaryState();
             }else {
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.drugProductService.getRootTagName());
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.drugProductService.getRootTagName(),
+                    vm.drugProductService.getXSLFileName());
                // vm.showAllErrors = false;
                 vm.drugProdForm.$setPristine();
                 vm.showSummary=false;

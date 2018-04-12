@@ -147,7 +147,8 @@
                 vm.focusSummary++;
             }else {
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,
+                    vm.companyService.getXSLFileName());
                 vm.showErrorSummary=false;
                 vm.companyEnrolForm.$setPristine();
                 vm.savePressed=false;
@@ -243,6 +244,7 @@
             vm.company.applicationType = type;
             disableXMLSave();
             vm.setAmend();
+            vm.company.reasonAmend="";
         };
 
         //used on update

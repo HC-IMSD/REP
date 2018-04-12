@@ -219,7 +219,8 @@
             } else {
 
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,
+                    vm.activityService.getXSLFileName());
                 _setComplete();
                 vm.activityEnrolForm.$setPristine();
                 vm.savePressed = false;

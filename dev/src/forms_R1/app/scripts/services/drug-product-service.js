@@ -49,6 +49,7 @@
                 dateSaved: "",
                 //applicationType: "NEW",
                 softwareVersion: "2.0.0",
+                xslFileName: "REP_PI_2_0.xsl",
                 dataChecksum: "",
                 //dossierType: "",
                // productName: "",
@@ -81,6 +82,9 @@
 
                 return this._default;
 
+            },
+            getXSLFileName: function () {
+                return this._default.xslFileName;
             },
             loadFromFile: function (info) {
                 var rootTag=this.getRootTagName();

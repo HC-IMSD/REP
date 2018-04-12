@@ -40,6 +40,7 @@
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
             this.contactId = 0;
+            this.xslFileName = "REP_CO_2_0.xsl";
         }
         //TODO rewrite this object to proper prototype syntax
         CompanyService.prototype = {
@@ -63,6 +64,9 @@
             },
             getAmendType: function () {
                 return "AMEND";
+            },
+            getXSLFileName: function () {
+                return this.xslFileName;
             },
             createAddressRole: function () {
                 var defaultAddressRole = {
