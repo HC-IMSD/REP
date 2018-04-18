@@ -416,7 +416,7 @@
 <row><code>IS_SOLICITED</code><eng>Is this solicited information?</eng><fra>fr_Is this solicited information?</fra></row>
 <row><code>SOLICITED_RQ</code><eng>Requester of Solicited Information</eng><fra>fr_Requester of Solicited Information</fra></row>
 <row><code>PROJ_MANAGER_NAME</code><eng>Name of Regulatory Project Manager, if known</eng><fra>fr_Name of Regulatory Project Manager, if known</fra></row>
-<row><code>IS_FEE_TRANSACTION</code><eng>Are new fees or revised fees associated with this transaction?</eng><fra>fr_Are new fees or revised fees associated with this transaction?</fra></row>
+<row><code>IS_FEE_TRANSACTION</code><eng>Are new or revised fees associated with this transaction?</eng><fra>fr_Are new or revised fees associated with this transaction?</fra></row>
 <row><code>SUB_CLASS</code><eng>Submission Class</eng><fra>fr_Submission Class</fra></row>
 <row><code>FEE_DESCRIPTION</code><eng>Submisssion Description</eng><fra>fr_Submisssion Description</fra></row>
 <row><code>DEFER_FEES</code><eng>A deferral of payment is requested with this transaction</eng><fra>fr_A deferral of payment is requested with this transaction</fra></row>
