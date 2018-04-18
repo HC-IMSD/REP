@@ -219,7 +219,8 @@
             } else {
 
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag);
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,
+                    vm.activityService.getXSLFileName());
                 _setComplete();
                 vm.activityEnrolForm.$setPristine();
                 vm.savePressed = false;
@@ -250,7 +251,7 @@
             vm.activityRoot.applicationType = value;
             vm.formAmend = vm.activityRoot.applicationType === AMEND_TYPE;
             //disableXMLSave();
-            if(vm.activityRoot.applicationType === APPROVED_TYPE && vm.activityRoot.userType === EXTERNAL_TYPE){
+            if(vm.formAmend){
                 vm.activityRoot.reasonAmend="";
             }
         };

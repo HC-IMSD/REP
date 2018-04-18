@@ -109,6 +109,8 @@
                                                    show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.strengthId])"
                                                    error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                             </div>
+                        </div>
+                        <div class="row col-md-12">
                             <div class="form-group col-md-3" ng-if="ingRecCtrl.isStrengthSet()">
                                 <label for="{{ingRecCtrl.strengthData1Id}}" class="required"
                                        ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthData1Id].$invalid}">
@@ -137,9 +139,7 @@
                                                        error-types="ingRecCtrl.numberMinLowerError"></cmp-error-message>
                                 </label>
                             </div>
-                        </div>
-                        <div class="row col-md-12">
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-2">
                                 <label for="{{::ingRecCtrl.unitsId}}" class="required full-width"><span class="field-name">{{'UNITS'|translate}}</span>
                                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                                     <div class="rep-pad-top">
@@ -213,13 +213,13 @@
                                                            error-types="ingRecCtrl.numberMinError"></cmp-error-message>
                                     </label>
                                 </div>
-                                <div class="form-group col-md-5" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.presentationId].$invalid}"
+                                <div class="form-group col-md-4" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.presentationId].$invalid}"
                                      ng-if="ingRecCtrl.isPerPresentation()">
                                     <label for="{{::ingRecCtrl.presentationId}}">
                                         <span class="field-name">{{'UNIT_PRESENTATION'|translate}}</span>
                                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                                     </label>
-                                    <select id="{{::ingRecCtrl.presentationId}}" ng-model="ingRecCtrl.ingModel.unitsPresentation"
+                                    <select id="{{::ingRecCtrl.presentationId}}" ng-model="ingRecCtrl.ingModel.perPresUnits"
                                             ng-model-options="{ debounce: '$inherit'}"
                                             class="form-control full-width" name="{{::ingRecCtrl.presentationId}}" required
                                             ng-options="presentation[ingRecCtrl.lang] for presentation in  ingRecCtrl.presentationList track by presentation.id">
@@ -228,6 +228,20 @@
                                                        form-ref="ingRecCtrl.activeIngForm"
                                                        show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.presentationId])"
                                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+                                </div>
+                                <div class="form-group col-md-5" ng-if="ingRecCtrl.isPerPresUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perPresOtherUnitId].$invalid}">
+                                    <label for="{{::ingRecCtrl.perPresOtherUnitId}}" class="required"><span class="field-name">{{'OTHER_UNIT_PRESENTATION'|translate}}</span>
+                                        <strong class="required">{{"REQUIRED" |translate}}</strong>
+                                        <input type="text" id="{{::ingRecCtrl.perPresOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perPresOtherUnits"
+                                               ng-model-options="{ debounce: '$inherit'}"
+                                               size="40" class="form-control" name="{{::ingRecCtrl.perPresOtherUnitId}}"
+                                               maxlength="40" ng-required="ingRecCtrl.isPerUnitsOther()"/>
+
+                                        <cmp-error-message field-name="ingRecCtrl.perPresOtherUnitId"
+                                                           form-ref="ingRecCtrl.activeIngForm"
+                                                           show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perPresOtherUnitId])"
+                                                           error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
+                                    </label>
                                 </div>
                             </div>
                             <div ng-if="ingRecCtrl.isPerMeasure()">
@@ -245,12 +259,12 @@
                                                            error-types="ingRecCtrl.numberMinError"></cmp-error-message>
                                     </label>
                                 </div>
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <label for="{{::ingRecCtrl.perMeasureUnitId}}" class="required full-width"><span class="field-name">{{'UNIT_MEASURE'|translate}}</span>
                                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                                         <div class="rep-pad-top">
                                             <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId].$invalid}">
-                                                <ui-select ng-model="ingRecCtrl.ingModel.perMeasureUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
+                                                <ui-select ng-model="ingRecCtrl.ingModel.perMeasUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
                                                            ng-model-options="{ debounce: 0}"
                                                            class="rep-selectize-font full-width" required>
                                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
@@ -271,13 +285,13 @@
                                                            error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                                     </label>
                                 </div>
-                                <div class="form-group col-md-5" ng-if="ingRecCtrl.isMeasureUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId].$invalid}">
+                                <div class="form-group col-md-5" ng-if="ingRecCtrl.isPerMeasUnitsOther()" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId].$invalid}">
                                     <label for="{{::ingRecCtrl.perMeasureOtherUnitId}}" class="required"><span class="field-name">{{'OTHER_UNIT_MEASURE'|translate}}</span>
                                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                                        <input type="text" id="{{::ingRecCtrl.perMeasureOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasureOtherUnits"
+                                        <input type="text" id="{{::ingRecCtrl.perMeasureOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasOtherUnits"
                                                ng-model-options="{ debounce: '$inherit'}"
                                                size="40" class="form-control" name="{{::ingRecCtrl.perMeasureOtherUnitId}}"
-                                               maxlength="40" ng-required="ingRecCtrl.isMeasureUnitsOther()"/>
+                                               maxlength="40" ng-required="ingRecCtrl.isPerUnitsOther()"/>
 
                                         <cmp-error-message field-name="ingRecCtrl.perMeasureOtherUnitId"
                                                            form-ref="ingRecCtrl.activeIngForm"

@@ -3,6 +3,7 @@
   "LOAD_COMPANY_FILE": "fr_Load a Company Enrolment File",
   "ENROL_INSTRUCT": "fr_Company Regulatory Enrolment Instructions",
   "ADDRESS_INSTRUCT":"fr_Company Address Record Instructions",
+  "ADDRESS_ROLE_INSTRUCT":"fr_Company Address Role Instructions",
   "REPRESENT_INSTRUCT":"fr_Company Representative Information",
   "SAVE_INSTRUCT": "fr_Company File Save Instructions",
   "FIELDID": "fr_Company Id",

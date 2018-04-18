@@ -22,5 +22,9 @@
   "ONE_ROLE": "fr_Role",
   "CONTACT_DETAILS": "fr_Company Representative Details",
   "ADD_CONTACT": "fr_Add REP Contact",
-  "CONTACT_ROLE_LEGEND": "fr_Select one or more roles for this company representative"
+  "CONTACT_ROLE_LEGEND": "fr_Select one or more roles for this company representative",
+  "CONTACT_ROLE_INSTRUCT":"fr_Company Representative Role Instructions",
+  "ADD_REPRES": "fr_Add Company Representative",
+  "DELETE_REPRES": "fr_Delete Company Rep.",
+  "SAVE_REPRES": "fr_Save Company Rep."
 }

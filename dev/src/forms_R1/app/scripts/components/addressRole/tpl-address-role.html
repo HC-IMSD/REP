@@ -3,6 +3,16 @@
         <legend class="required">
             <span class="field-name">{{::ar.legendText |translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
+            <button ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
+                    class="btn-xs rep-help-button-primary"
+                    id="address-roles-instructions-toggle" ng-click="ar.addInstruct(0)"><span
+                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"</span>
+            </button>
+            <button ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
+                    class="btn-xs rep-help-button-primary"
+                    id="contact-roles-instructions-toggle" ng-click="ar.addInstruct(0)"><span
+                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
+            </button>
             <input id="roleMissing_{{::$id}}" type="text" name="roleMissing_{{::$id}}" ng-show="false"
                    ng-model="ar.isSelected" required/>
             <strong id=" address-role-error" class="error" ng-show="ar.showErrorMissing()">
@@ -11,6 +21,32 @@
                         </span>
             </strong>
         </legend>
+        <div ng-if="!ar.isContact" class="row col-md-12">
+            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ar.alerts[0]"
+                 class="alert-info" close="ar.closeAlert(0)">
+                <section aria-live="assertive">
+                    <div ng-if="!ar.isFrench()"
+                         ng-include="'app/scripts/templates/company/tpl-company-address-roles-en.html'">
+                    </div>
+                    <div ng-if="ar.isFrench()"
+                         ng-include="'app/scripts/templates/company/tpl-company-address-roles-fr.html'">
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div ng-if="ar.isContact" class="row col-md-12">
+            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ar.alerts[0]"
+                 class="alert-info" close="ar.closeAlert(0)">
+                <section aria-live="assertive">
+                    <div ng-if="!ar.isFrench()"
+                         ng-include="'app/scripts/templates/company/tpl-company-contact-roles-en.html'">
+                    </div>
+                    <div ng-if="ar.isFrench()"
+                         ng-include="'app/scripts/templates/company/tpl-company-contact-roles-fr.html'">
+                    </div>
+                </section>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-4">
                 <div class="checkbox">
@@ -29,7 +65,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="checkbox">
                     <label for="chk-mailing_{{::$id}}">
                         <input type="checkbox" name="mailing" ng-model="ar.roleModel.mailing"

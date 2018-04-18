@@ -372,7 +372,7 @@
          * @param rootTag
          * @param xslName - (optional). The stylesheet name. For backwards compatibility defaults to REP_Combined
          */
-        function xmlToFile(jsonObj, fileName, rootTag,xslName) {
+        function xmlToFile(jsonObj, fileName, rootTag, xslName) {
             if (!jsonObj) return;
             //As per meeting of Oct 21, ignore checksum
             //clear out any previous value if it exists

@@ -271,33 +271,29 @@
                     </section>
                 </div>
                 <div class="row">
-                    <div class="col-md-5 form-group">
+                    <div class="col-md-5 form-group" ng-class="{'has-error':dos.dossierForm[{{::dos.isRefId}}].$invalid}">
                         <label for="{{::dos.isRefId}}" class="required">
                             <span class="field-name">I.&nbsp;{{::'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <button title="{{::'HELP_REFPRODUCTS'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span
+                                    class="wb-inv">"{{::'HELP_REFPRODUCTS'|translate}}"</span></button>
+                            <select class="form-control" required name="{{::dos.isRefId}}" id="{{::dos.isRefId}}"
+                                    ng-model="dos.dossierModel.isRefProduct"
+                                    ng-options="val |translate for val in  dos.yesNoList">
+                            </select>
+
                             <cmp-error-message field-name="dos.isRefId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.isRefId])"
                                                error-types="dos.requiredOnly"></cmp-error-message>
+
                         </label>
                     </div>
-                    <div class="col-md-4 form-group form-inline"
-                         ng-class="{'has-error':dos.dossierForm[{{::dos.isRefId}}].$invalid}">
-                        <select class="form-control" required name="{{::dos.isRefId}}" id="{{::dos.isRefId}}"
-                                ng-model="dos.dossierModel.isRefProduct"
-                                ng-options="val |translate for val in  dos.yesNoList">
-                        </select>
-                        <button title="{{::'HELP_REFPRODUCTS'|translate}}"
-                                class="btn rep-help-button-primary btn-xs"
-                                id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
-                                class="fa fa-question-circle fa-2x"></span><span
-                                class="wb-inv">"{{::'HELP_REFPRODUCTS'|translate}}"</span></button>
-                    </div>
-
-                    <div class="col-md-2 form-group pull-left">
-                        <div class="btn-group">
-                        </div>
-                    </div>
+                </div>
+                <div class="row">
                 </div>
                 <div class="row">
                     <div class="col-md-12">

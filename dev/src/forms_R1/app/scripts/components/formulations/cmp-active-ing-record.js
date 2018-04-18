@@ -79,10 +79,11 @@
             otherUnits:"",
             per: "",
             perPresentationValue: 1,
-            unitsPresentation: "",
             perMeasureValue: null,
-            perMeasureUnits: "",
-            perMeasureOtherUnits:"",
+            perPresUnits: "",
+            perPresOtherUnits:"",
+            perMeasUnits: "",
+            perMeasOtherUnits:"",
             isNano: "",
             nanoMaterial:"",
             nanoMaterialOther: "",
@@ -317,16 +318,31 @@
         };
 
         /**
-         * @ngDoc determines if units Other should be shown
+         * @ngDoc determines if per units Other should be shown
          * @returns {boolean}
          */
-        vm.isMeasureUnitsOther = function () {
+        vm.isPerPresUnitsOther = function () {
 
-            if (!vm.ingModel || !vm.ingModel.perMeasureUnits) return false;
-            if ((vm.ingModel.perMeasureUnits.id === OTHER)) {
+            if (!vm.ingModel || !vm.ingModel.perPresUnits) return false;
+            if ((vm.ingModel.perPresUnits.id === OTHER)) {
                 return true;
             } else {
-                vm.ingModel.perMeasureOtherUnits = "";
+                vm.ingModel.perPresOtherUnits = "";
+                return false;
+            }
+        };
+
+        /**
+         * @ngDoc determines if per units Other should be shown
+         * @returns {boolean}
+         */
+        vm.isPerMeasUnitsOther = function () {
+
+            if (!vm.ingModel || !vm.ingModel.perMeasUnits) return false;
+            if ((vm.ingModel.perMeasUnits.id === OTHER)) {
+                return true;
+            } else {
+                vm.ingModel.perMeasOtherUnits = "";
                 return false;
             }
         };
@@ -354,6 +370,7 @@
             vm.unitsId="units"+scopeId;
             vm.otherUnitsId="other_units"+scopeId;
             vm.perMeasureUnitId="unit_measure"+scopeId;
+            vm.perPresOtherUnitId="other_unit_presentation"+scopeId;
             vm.perMeasureOtherUnitId="other_unit_measure"+scopeId;
             vm.perId="per_strength"+scopeId;
             vm.perPreValueId="per_value"+scopeId;

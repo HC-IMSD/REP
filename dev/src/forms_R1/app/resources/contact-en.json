@@ -23,6 +23,7 @@
   "CONTACT_DETAILS": "Company Representative Details",
   "ADD_CONTACT": "Add REP Contact",
   "CONTACT_ROLE_LEGEND": "Select one or more roles for this company representative",
+  "CONTACT_ROLE_INSTRUCT":"Company Representative Role Instructions",
   "ADD_REPRES": "Add Company Representative",
   "DELETE_REPRES": "Delete Company Rep.",
   "SAVE_REPRES": "Save Company Rep."

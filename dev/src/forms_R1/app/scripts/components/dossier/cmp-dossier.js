@@ -301,7 +301,8 @@
                 vm.updateErrorSummaryState();
             }else {
                 var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName());
+                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName(),
+                    vm.dossierService.getXSLFileName());
                // vm.showAllErrors = false;
                 vm.dossierForm.$setPristine();
                 vm.showSummary=false;

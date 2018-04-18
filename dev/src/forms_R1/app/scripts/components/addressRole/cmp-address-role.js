@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRole', [])
+        .module('addressRole', ['hpfbConstants'])
 })();
 
 (function () {
@@ -29,19 +29,22 @@
                 legendText: '@',
                 importerUpdated: '&',
                 deselectImporter: '&',
-                updateErrorSummary: '&',
+                updateErrorSummary: '&'
 
             }
         });
 
-    addressRoleCtrl.$inject = ['$scope'];
-    function addressRoleCtrl($scope) {
+    addressRoleCtrl.$inject = ['ENGLISH','$scope','$translate'];
+    function addressRoleCtrl(ENGLISH,$scope, $translate) {
 
         var vm = this;
         vm.isReq = true;
         vm.isSelected = ""; //checkbox causes issues. Store in text
         vm.isEditable = true;
         vm.inUser = false;
+        vm.alerts = [false];
+        vm.lang = $translate.proposedLanguage() || $translate.use();
+
         vm.roleModel = {
             manufacturer: false,
             mailing: false,
@@ -162,6 +165,38 @@
             }
             return false
         };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        /*
+        Makes an instruction visible baseed on an index passed in
+        Index sets the UI state in the alerts array
+         */
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Determines if the current language is french
+         * @returns {boolean}
+         */
+        vm.isFrench=function(){
+            return(vm.lang!== ENGLISH);
+        };
+
 
     }//end controller
 

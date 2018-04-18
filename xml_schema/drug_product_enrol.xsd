@@ -290,7 +290,7 @@
 		</hpfb:complexType>
 	</hpfb:element>
 	<hpfb:element name="per_value" type="integer_0_999_content"/>
-	<hpfb:element name="units_presentation">
+	<hpfb:element name="per_units">
 		<hpfb:complexType>
 			<hpfb:simpleContent>
 				<hpfb:extension base="hpfb:string">
@@ -300,17 +300,7 @@
 			</hpfb:simpleContent>
 		</hpfb:complexType>
 	</hpfb:element>
-	<hpfb:element name="units_measure">
-		<hpfb:complexType>
-			<hpfb:simpleContent>
-				<hpfb:extension base="hpfb:string">
-					<hpfb:attribute name="label_en" type="hpfb:string"/>
-					<hpfb:attribute name="label_fr" type="hpfb:string"/>
-				</hpfb:extension>
-			</hpfb:simpleContent>
-		</hpfb:complexType>
-	</hpfb:element>
-	<hpfb:element name="units_other_measure" type="char_0_40_content"/>
+	<hpfb:element name="per_units_other_details" type="char_0_40_content"/>
 	<hpfb:element name="is_base_calc" type="required_yes_no_content"/>
 	<hpfb:element name="is_nanomaterial" type="required_yes_no_content"/>
 	<hpfb:element name="nanomaterial">
@@ -514,9 +504,8 @@
 			<hpfb:element ref="units_other"/>
 			<hpfb:element ref="per"/>
 			<hpfb:element ref="per_value"/>
-			<hpfb:element ref="units_presentation"/>
-			<hpfb:element ref="units_measure"/>
-			<hpfb:element ref="units_other_measure"/>
+			<hpfb:element ref="per_units"/>
+			<hpfb:element ref="per_units_other_details"/>
 			<hpfb:element ref="is_base_calc"/>
 			<hpfb:element ref="is_nanomaterial"/>
 			<hpfb:element ref="nanomaterial"/>
