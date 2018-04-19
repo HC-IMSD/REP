@@ -99,7 +99,11 @@
   "DEFER_INSTRUCT":"fr_Deferral of payment Instructions",
   "REMISSION_INSTRUCT":"fr_Fee remission Instructions",
   "CLASS_INSTRUCT":"fr_Submission Class Instructions",
-
+  "PRODUCT_INSTRUCT":"fr_Product Name Instructions",
+  "LIFECYCLE_INSTRUCT":"fr_Lifecycle Management Table Instructions",
+  "SEQUENCE_INSTRUCT":"fr_Sequence Number Instructions",
+  "CONTROL_INSTRUCT":"fr_Control Number Instructions",
+  "COMPANY_INSTRUCT":"fr_Company Name Instructions",
   "PLEASE_REMIT":"fr_Please include the remission processing fee of $566.",
   "APPLY_DEFER":"fr_You are applying for a deferral. Please send no payment with this form.",
   "BANK_DRAFT":"fr_International Bank Draft",
@@ -115,6 +119,7 @@
   "ONELIFEREC": "fr_At least one lifecycle record is required.",
   "SAVELIFEREC": "fr_At least one lifecycle record is required to save.",
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"fr_with a Lifecycle Record",
+  "IS_FEE_TRANSACTION":"fr_Are new or revised fees associated with this transaction?",
   "OTHER_DOC_DETAILS": "fr_Other Documentation Details"
 
 }

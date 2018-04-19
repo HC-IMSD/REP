@@ -13,6 +13,11 @@
                         <div class="form-group col-md-4">
                             <label for="sequenceNumber_{{::$id}}">
                                 <span class="field-name">{{"SEQUENCE_NUM" |translate}}</span>
+                                <button title="{{::'EXPAND'|translate}} {{::'SEQUENCE_INSTRUCT'|translate}}"
+                                        class="btn rep-help-button-primary btn-xs"
+                                        id="sequenceNumber-instructions-toggle" ng-click="lifecycleCtrl.addInstruct(0)"><span
+                                        class="fa fa-question-circle fa-2x"></span>
+                                </button>
                                 <input type="text" id="sequenceNumber_{{::$id}}" name="sequenceNumber_{{::$id}}"
                                        ng-model="lifecycleCtrl.lifecycleModel.sequence"
                                        class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
@@ -51,6 +56,11 @@
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
                                 <span class="field-name">{{::"CONTROL_NUM" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                <button title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
+                                        class="btn rep-help-button-primary btn-xs"
+                                        id="controlNum-instructions-toggle" ng-click="lifecycleCtrl.addInstruct(1)"><span
+                                        class="fa fa-question-circle fa-2x"></span>
+                                </button>
                                 <input type="text" id="{{::lifecycleCtrl.controlNumId}}" name="{{::lifecycleCtrl.controlNumId}}" only-digits=""
                                        ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
                                        class="form-control full-width" maxlength="6" minlength="6" size="6"
@@ -60,7 +70,35 @@
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId])"
                                                    error-types="lifecycleCtrl.minLength6Error"></cmp-error-message>
                             </label>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <cmp-alert ui-state="lifecycleCtrl.alerts[0]" msg="SEQUENCE_INSTRUCT"
+                                       update-state="lifecycleCtrl.closeAlert(0)" type="alert-info">
+                                <section aria-live="assertive">
+                                    <div ng-if="!lifecycleCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-en.html'">
+                                    </div>
+                                    <div ng-if="lifecycleCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-fr.html'">
+                                    </div>
+                                </section>
+                            </cmp-alert>
                         </div>
+                        <div class="form-group col-md-12">
+                            <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
+                                       update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
+                                <section aria-live="assertive">
+                                    <div ng-if="!lifecycleCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
+                                    </div>
+                                    <div ng-if="lifecycleCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
+                                    </div>
+                                </section>
+                            </cmp-alert>
+                        </div>
+                    </div>
                     </div>
                     <div class="row">
                         <div class="form-group  col-md-7"

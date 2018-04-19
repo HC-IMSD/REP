@@ -16,10 +16,10 @@
                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.submClassId])"
                                            error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
                     </label>
-                    <button title="{{::'EXPAND'|translate}} {{::'CLASS_INSTRUCT'|translate}}"
+                    <!--button title="{{::'EXPAND'|translate}} {{::'CLASS_INSTRUCT'|translate}}"
                             class="btn rep-help-button-primary btn-xs"
                             ng-click="transFeeCtrl.addInstruct(0)"><span class="fa fa-question-circle fa-2x"></span>
-                    </button>
+                    </button-->
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="{{::transFeeCtrl.feeId}}">
@@ -30,7 +30,7 @@
                            value="{{transFeeCtrl.model.submissionClass.fee  | currency}}"/>
                 </div>
             </div>
-            <div class="row">
+            <!--div class="row">
                 <div class="col-xs-12">
                     <cmp-alert ui-state="transFeeCtrl.alerts[0]" msg="CLASS_INSTRUCT"
                                update-state="transFeeCtrl.closeAlert(0)" type="alert-info">
@@ -44,7 +44,7 @@
                         </section>
                     </cmp-alert>
                 </div>
-            </div>
+            </div-->
             <div class="row">
                 <div class="col-xs-12 form-group">
                     <label for="{{::transFeeCtrl.descriptId}}">
@@ -178,7 +178,7 @@
             </div>
             <div ng-if="transFeeCtrl.showDocumentationSection()">
                 <div class="row">
-                    <h3>{{::'REQUIRED_DOC'|translate}}</h3>
+                    <label>{{::'REQUIRED_DOC'|translate}}</label>
                 </div>
                 <div class="row" ng-if="transFeeCtrl.isDeferral()">
                     <div class="form-group col-xs-12">
@@ -217,7 +217,7 @@
                 </div>-->
                 <div ng-if="transFeeCtrl.isEligible()">
                     <fieldset>
-                        <legend class="legend-rep-h3">{{::'SUPPORTING_DOC'|translate}}</legend>
+                        <label>{{::'SUPPORTING_DOC'|translate}}</label>
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <div class="checkbox">
@@ -365,14 +365,14 @@
                 <div ng-if="transFeeCtrl.showPaymentMethods()">
 
                     <fieldset id="{{::transFeeCtrl.paymentFsId}}">
-                        <legend class="required">
+                        <label class="required">
                             <span class="field-name">{{::'PAYMENT_METHODS' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="transFeeCtrl.paymentSelectedId"
                                                form-ref="transFeeCtrl.transFeeForm"
                                                show-error="!transFeeCtrl.isPaymentSelected() && transFeeCtrl.showSummary"
                                                error-types="transFeeCtrl.onePaymentError"></cmp-error-message>
-                        </legend>
+                        </label>
                         <input type="checkbox" name="{{::transFeeCtrl.paymentSelectedId}}"
                                id="{{::transFeeCtrl.paymentSelectedId}}" required ng-model="transFeeCtrl.onePaymentSelected"
                                hidden/>

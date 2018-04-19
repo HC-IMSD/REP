@@ -64,7 +64,7 @@
         vm.activityEditable = true;
         vm.isEctd = false;
         vm.requesterList = [];
-        vm.alerts = [false,false];
+        vm.alerts = [false, false, false, false, false];
         vm.requesterList = [];
         vm.lang=ENGLISH;
         vm.sequenceChange=false;
@@ -214,18 +214,20 @@
             vm.activityEditable = isActivityChangesValue();
         };
 
-        //deprecated
+        /**
+         * Open the instruction alerts
+         * @param value
+         */
         vm.addInstruct = function (value) {
 
             if (angular.isUndefined(value)) return;
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
-        }
-
+        };
 
         /**
-         * Closes the instruction alerts
+         * Close the instruction alerts
          * @param value
          */
         vm.closeAlert = function (value) {
@@ -234,8 +236,6 @@
                 vm.alerts[value] = false;
             }
         };
-
-
 
         /***
          * used to determine the form language
@@ -254,7 +254,7 @@
             var scopeId = "_" + $scope.$id;
             vm.companyId="company_id"+scopeId;
             vm.dossierId="dossier_id"+scopeId;
-            vm.dossierNameId="dossier_name"+scopeId;
+            vm.productNameId="product_name"+scopeId;
             vm.isEctdId="is_ectd"+scopeId;
             vm.isSolicitedId="is_solicited"+scopeId;
             vm.solictedRqId="solicited_rq"+scopeId;

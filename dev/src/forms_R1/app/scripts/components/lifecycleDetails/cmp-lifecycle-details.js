@@ -56,6 +56,7 @@
         vm.versionVisible = false;
         vm.ectd = false;
         vm.popOpened = false;
+        vm.alerts = [false, false];
         vm.dateOptions = {
             showWeeks: false
         };
@@ -650,6 +651,30 @@
             }
             return (result);
         }
+
+        /**
+         * Open the instruction alerts
+         * @param value
+         */
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Close the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
         function _setIdNames(){
             var scopeId = "_" + $scope.$id;
             vm.lifecycleDetailsFormId="life_detail_form" + scopeId;
