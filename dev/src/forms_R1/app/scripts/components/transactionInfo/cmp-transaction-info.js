@@ -52,8 +52,8 @@
             }
         });
 
-    transactionInfoCtrl.$inject = ['$scope','TransactionService', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
-    function transactionInfoCtrl($scope, TransactionService, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
+    transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
+    function transactionInfoCtrl($scope, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {};
@@ -107,7 +107,7 @@
 
         vm.isFeesIndicated=function() {
             return vm.transactionModel.isFees === YES;
-        }
+        };
 
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
@@ -115,7 +115,7 @@
 
         vm.setSequence=function(start){
 
-            if(isNaN(start) ||start==null){
+            if(isNaN(start) ||start === null){
                 start=0;
             }
             vm.setStartingSequence({startVal:start});
@@ -254,7 +254,7 @@
             var scopeId = "_" + $scope.$id;
             vm.companyId="company_id"+scopeId;
             vm.dossierId="dossier_id"+scopeId;
-            vm.productNameId="product_name"+scopeId;
+            vm.productNameId="prod_name"+scopeId;
             vm.isEctdId="is_ectd"+scopeId;
             vm.isSolicitedId="is_solicited"+scopeId;
             vm.solictedRqId="solicited_rq"+scopeId;
@@ -262,7 +262,7 @@
             vm.companyNameId="company_noabbrev"+scopeId;
             vm.contactSameId="confirm_contact_valid"+scopeId;
             vm.isFeesId="is_fee_transaction"+scopeId;
-        };
+        }
 
 
 }
