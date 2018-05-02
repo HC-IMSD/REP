@@ -179,14 +179,32 @@
                     <div class="row">
                         <div class="col-xs-12 form-group"
                              ng-class="{'has-error':main.activityEnrolForm.reasonFiling.$invalid}">
-                            <label for="{{::main.reasonId}}" class="required">
+                            <label for="{{::main.reasonId}}" class="rep-margin-top required">
                                 <span class="field-name">{{::"REASON_FILE"|translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                <button title="{{::'EXPAND'|translate}} {{::'REASON_INSTRUCT'|translate}}"
+                                        class="btn rep-help-button-primary btn-xs"
+                                        id="reason-instructions-toggle" ng-click="main.addInstruct(2)"><span
+                                        class="fa fa-question-circle fa-2x"></span>
+                                </button>
                                 <cmp-error-message field-name="main.reasonId"
                                                    form-ref="main.activityEnrolForm"
                                                    show-error="main.showError(main.activityEnrolForm[main.reasonId])"
                                                    error-types="main.requiredOnly"></cmp-error-message>
                             </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <cmp-alert ui-state="main.alerts[2]" msg="REASON_INSTRUCT" update-state="main.closeAlert(2)"
+                                       type="alert-info">
+                                <div ng-if="!main.isFrench()"
+                                     ng-include="'app/scripts/templates/activity/tpl-activity-reason-filing-en.html'">
+                                </div>
+                                <div ng-if="main.isFrench()"
+                                     ng-include="'app/scripts/templates/activity/tpl-activity-reason-filing-fr.html'">
+                                </div>
+                            </cmp-alert>
                         </div>
                     </div>
                     <div class="row">
@@ -265,6 +283,11 @@
                             <label for="{{::main.isAdminSubId}}" class="required">
                                 <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                <button title="{{::'EXPAND'|translate}} {{::'ADMIN_COMP_INSTRUCT'|translate}}"
+                                        class="btn rep-help-button-primary btn-xs"
+                                        id="is-admin-instructions-toggle" ng-click="main.addInstruct(3)"><span
+                                        class="fa fa-question-circle fa-2x"></span>
+                                </button>
                                 <cmp-error-message field-name="main.isAdminSubId"
                                                    form-ref="main.activityEnrolForm"
                                                    show-error="main.showError(main.activityEnrolForm[main.isAdminSubId])"
@@ -279,6 +302,23 @@
                                     ng-options="choice |translate for choice in main.yesNoList" required></select>
                         </div>
                     </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <cmp-alert ui-state="main.alerts[3]" msg="ADMIN_COMP_INSTRUCT" update-state="main.closeAlert(3)"
+                                       type="alert-info">
+                                <div ng-if="!main.isFrench()"
+                                     ng-include="'app/scripts/templates/activity/tpl-activity-admin-comp-en.html'">
+                                </div>
+                                <div ng-if="main.isFrench()"
+                                     ng-include="'app/scripts/templates/activity/tpl-activity-admin-comp-fr.html'">
+                                </div>
+                            </cmp-alert>
+                        </div>
+                    </div>
+
+
                     <div ng-show="main.showActivity">
                         <div class="row">
                             <div class="col-xs-12 form-group">
@@ -380,8 +420,26 @@
                     <fieldset id="fs_addrMissing_{{::$id}}">
                         <label>
                             <span class="field-name">{{::'ADDRESS_NOC'|translate}}</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'ADDR_INSTRUCT'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="address-instructions-toggle" ng-click="main.addInstruct(4)"><span
+                                    class="fa fa-question-circle fa-2x"></span>
+                            </button>
                         </label>
                         <div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <cmp-alert ui-state="main.alerts[4]" msg="ADDR_INSTRUCT" update-state="main.closeAlert(4)"
+                                               type="alert-info">
+                                        <div ng-if="!main.isFrench()"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-address-sent-en.html'">
+                                        </div>
+                                        <div ng-if="main.isFrench()"
+                                             ng-include="'app/scripts/templates/activity/tpl-activity-address-sent-fr.html'">
+                                        </div>
+                                    </cmp-alert>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="checkbox">
@@ -459,7 +517,7 @@
                         <div class="btn-group pull-right">
                             <button title="{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}"
                                     class="btn-xs rep-help-button"
-                                    id="rep-instructions-toggle" ng-click="main.addInstruct(2)"><span
+                                    id="rep-instructions-toggle" ng-click="main.addInstruct(5)"><span
                                     class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'EXPAND'|translate}} {{::'HELP_ACTIVITY_REP'|translate}}"</span>
                             </button>
                         </div>
@@ -467,8 +525,8 @@
                     </header>
                     <div class="panel-body">
                         <div>
-                            <cmp-alert ui-state="main.alerts[2]" msg="HELP_ACTIVITY_REP"
-                                       update-state="main.closeAlert(2)" type="alert-info">
+                            <cmp-alert ui-state="main.alerts[5]" msg="HELP_ACTIVITY_REP"
+                                       update-state="main.closeAlert(5)" type="alert-info">
                                 <section>
                                     <div ng-if="!main.isFrench()"
                                          ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-en.html'">
@@ -501,11 +559,12 @@
                 </div>
                 <div class="form-group col-md-3">
                     <button class="btn btn-primary  btn-lg active" id="btn_xmlSave"
-                            ng-click="main.saveXML()">{{main.saveXMLLabel |translate}}
+                            ng-click="main.saveXML()" ng-disabled="main.disableXML">
+                        {{main.saveXMLLabel |translate}}
                     </button>
                     <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
                             class="btn rep-help-button-primary btn-xs"
-                            id="save-instructions-toggle" ng-click="main.addInstruct(3)"><span
+                            id="save-instructions-toggle" ng-click="main.addInstruct(6)"><span
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
@@ -513,7 +572,7 @@
             <div class="row">
                 <div class="col-md-10">
 
-                    <cmp-alert ui-state="main.alerts[3]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(3)"
+                    <cmp-alert ui-state="main.alerts[6]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(6)"
                                type="alert-info">
                         <div ng-if="!main.isFrench()"
                              ng-include="'app/scripts/templates/activity/tpl-activity-save-en.html'">

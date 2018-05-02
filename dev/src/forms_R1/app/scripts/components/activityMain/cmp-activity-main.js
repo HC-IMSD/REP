@@ -86,7 +86,7 @@
         };
         vm.CommonLists = CommonLists;
         vm.yesNoList = vm.CommonLists.getYesNoList();
-        vm.alerts = [false, false, false, false];
+        vm.alerts = [false, false, false, false, false, false, false];
 
         vm.exclusions = {
             "contactRec.contactRecForm":"true"
@@ -179,6 +179,10 @@
             }
         };
 
+        $scope.$watch("main.companyEnrolForm.$valid", function () {
+            disableXMLSave();
+        }, true);
+
         vm.isFrench = function () {
             return (vm.lang !== ENGLISH);
         };
@@ -250,7 +254,7 @@
         vm.setApplicationType = function (value) {
             vm.activityRoot.applicationType = value;
             vm.formAmend = vm.activityRoot.applicationType === AMEND_TYPE;
-            //disableXMLSave();
+            disableXMLSave();
             if(vm.formAmend){
                 vm.activityRoot.reasonAmend="";
             }
@@ -379,14 +383,14 @@
 
         function disableXMLSave() {
 
-            // vm.disableXML = vm.activityEnrolForm.$invalid || (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
+            vm.disableXML = vm.activityRoot.applicationType === APPROVED_TYPE && vm.isExtern();
         }
 
         vm.disableJSONSave = function () {
 
-            return (vm.activityRoot.applicationType == APPROVED_TYPE && vm.isExtern());
+            return (vm.activityRoot.applicationType === APPROVED_TYPE && vm.isExtern());
 
-        }
+        };
 
         function _setComplete() {
             vm.isIncomplete = !vm.activityRoot.dstsControlNumber;
@@ -410,7 +414,7 @@
                 vm.savePressed = false;
             }
             //vm.showAllErrors = true;
-            //disableXMLSave();
+            disableXMLSave();
             vm.setThirdParty();
             vm.updateActivityType();
             vm.check = vm.rolechecked();
@@ -426,7 +430,7 @@
          */
         function _setApplTypeToAmend() {
             vm.activityRoot.applicationType = AMEND_TYPE;
-            //disableXMLSave();
+            disableXMLSave();
         }
 
         /**

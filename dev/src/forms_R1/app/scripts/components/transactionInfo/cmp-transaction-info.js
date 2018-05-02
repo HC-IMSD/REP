@@ -264,7 +264,6 @@
             vm.isFeesId="is_fee_transaction"+scopeId;
         }
 
-
 }
 
 })

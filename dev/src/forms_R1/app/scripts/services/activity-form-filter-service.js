@@ -94,9 +94,9 @@
                     case 'B02-20160301-088': //UDRA
                         newList.push(raList[i]);
                         break;
-                    case 'B02-20160301-089': //YBPR
+                   /* case 'B02-20160301-089': //YBPR
                         newList.push(raList[i]);
-                        break;
+                        break; */
                     case 'B02-20160301-028': //DSUR
                         newList.push(raList[i]);
                         break;
@@ -130,9 +130,9 @@
             var newList=[];
             for(var i=0; i<raList.length;i++) {
                 switch(raList[i].id) {
-                    case 'B02-20160301-001': //ANDS
+                  /*  case 'B02-20160301-001': //ANDS
                         newList.push(raList[i]);
-                        break;
+                        break; */
                     case 'B02-20160301-031': //EU NDS
                         newList.push(raList[i]);
                         break;
@@ -172,9 +172,9 @@
                     case 'B02-20160301-078': //PSUR-C
                         newList.push(raList[i]);
                         break;
-                    case 'B02-20160301-082': //SANDS
+                 /*   case 'B02-20160301-082': //SANDS
                         newList.push(raList[i]);
-                        break;
+                        break; */
                     case 'B02-20160301-084': //SNDS
                         newList.push(raList[i]);
                         break;

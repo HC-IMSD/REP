@@ -1,6 +1,6 @@
 <ng-form name="ar.roleForm">
     <fieldset id="fs_roleMissing_{{::$id}}">
-        <legend class="required">
+        <label class="required">
             <span class="field-name">{{::ar.legendText |translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
             <button ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
@@ -20,7 +20,7 @@
                             <span ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
                         </span>
             </strong>
-        </legend>
+        </label>
         <div ng-if="!ar.isContact" class="row col-md-12">
             <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ar.alerts[0]"
                  class="alert-info" close="ar.closeAlert(0)">
