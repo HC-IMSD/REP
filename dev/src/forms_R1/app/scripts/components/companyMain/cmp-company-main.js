@@ -202,16 +202,16 @@
         }, true);
 
         function disableXMLSave() {
-            var isApprovedExternal = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern());
+            var isApprovedExternal = (vm.company.applicationType === vm.companyService.getApprovedType() && vm.isExtern());
             vm.disableDraftButton = isApprovedExternal;
             vm.disableXML = vm.companyEnrolForm.$invalid || isApprovedExternal; //used to disable the generate xml button
             //vm.showErrorSummary=true;
 
-        };
+        }
 
         function disableJSONSave() {
 
-            vm.disableJson = (vm.company.applicationType == vm.companyService.getApprovedType() && vm.isExtern())
+            vm.disableJson = (vm.company.applicationType === vm.companyService.getApprovedType() && vm.isExtern())
         }
 
         function _setComplete() {
@@ -287,7 +287,7 @@
         }
 
         vm.isExtern = function () {
-            return vm.userType == EXTERNAL_TYPE;
+            return vm.userType === EXTERNAL_TYPE;
         };
         /**
          * @ngdoc method when a form gets approved
@@ -316,7 +316,7 @@
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
-        }
+        };
 
         /**
          * Increments the conunter to send a signal to update the error summary module
@@ -324,7 +324,7 @@
         vm.updateErrorSummary=function(){
             vm.updateSummary= vm.updateSummary+1;
 
-        }
+        };
         /**
          * Determines if the current language is french
          * @returns {boolean}
@@ -335,7 +335,7 @@
 
         vm.temp=function(){
             console.log($scope)
-        }
+        };
 
 
 
