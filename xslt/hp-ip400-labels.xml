@@ -418,7 +418,7 @@
 <row><code>PROJ_MANAGER_NAME</code><eng>Name of Regulatory Project Manager, if known</eng><fra>fr_Name of Regulatory Project Manager, if known</fra></row>
 <row><code>IS_FEE_TRANSACTION</code><eng>Are new or revised fees associated with this transaction?</eng><fra>fr_Are new or revised fees associated with this transaction?</fra></row>
 <row><code>SUB_CLASS</code><eng>Submission Class</eng><fra>fr_Submission Class</fra></row>
-<row><code>FEE_DESCRIPTION</code><eng>Submisssion Description</eng><fra>fr_Submisssion Description</fra></row>
+<row><code>FEE_DESCRIPTION</code><eng>Submission Description</eng><fra>fr_Submission Description</fra></row>
 <row><code>DEFER_FEES</code><eng>A deferral of payment is requested with this transaction</eng><fra>fr_A deferral of payment is requested with this transaction</fra></row>
 <row><code>FEE_REMISSION</code><eng>Fee Remission is requested with this transaction</eng><fra>fr_Fee Remission is requested with this transaction</fra></row>
 <row><code>GROSS_REVENUE</code><eng>Anticipated gross revenue for this drug product during the fee verification period</eng><fra>fr_Anticipated gross revenue for this drug product during the fee verification period</fra></row>
@@ -568,7 +568,7 @@
 <row><code>ROA_TITLE</code><eng>D. Routes of Administration</eng><fra>fr_D. Routes of Administration</fra></row>
 <row><code>ROA_LBL</code><eng>Route of Administration</eng><fra>fr_Route of Administration</fra></row>
 <row><code>OTHER_ROA_DETAILS</code><eng>Other Route of Administration Details</eng><fra>fr_Other Route of Administration Details</fra></row>
-<row><code>COUNTRIES_MANUFACT</code><eng>E. Countries of manufacture for this drug product</eng><fra>fr_E. Countries of manufacture for this drug product</fra></row>
+<row><code>COUNTRIES_MANUFACT</code><eng>E. Countries of manufacture for this product</eng><fra>fr_E. Countries of manufacture for this product</fra></row>
 <row><code>COUNTRY_NAME</code><eng>Country Name</eng><fra>fr_Country Name</fra></row>
 <row><code>COUNTRY_MAN</code><eng>Country of Manufacture</eng><fra>fr_Country of Manufacture</fra></row>
 <row><code>APPENDIX4</code><eng>Animal / Human Sourced</eng><fra>fr_Animal / Human Sourced</fra></row>

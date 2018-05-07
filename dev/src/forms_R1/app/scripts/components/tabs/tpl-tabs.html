@@ -7,8 +7,28 @@
             <a role="tab">{{tab.label |translate}}
                 <strong ng-if="tabsCtrl.tabs[$index].form.$invalid" class="required">({{'ERRORS' |translate}})</strong>
             </a>
+            <button ng-if="$index === 1"
+                    title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                    id="ah-sourced-instructions-toggle" ng-click="tabsCtrl.addInstruct(0)"><span
+                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'AH_SOURCED_INSTRUCT'|translate}}"</span>
+            </button>
         </li>
     </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="tabsCtrl.alerts[0]"
+                 class="alert-info" close="tabsCtrl.closeAlert(0)">
+                <section aria-live="assertive">
+                    <div ng-if="!tabsCtrl.isFrench()"
+                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-add-sourced-en.html'">
+                    </div>
+                    <div ng-if="tabsCtrl.isFrench()"
+                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-add-sourced-fr.html'">
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
     <div class="tabpanels">
         <ng-form name="tabsCtrl.tabs[0].form">
             <div id="formulations-panel" role="tabpanel" class="out">

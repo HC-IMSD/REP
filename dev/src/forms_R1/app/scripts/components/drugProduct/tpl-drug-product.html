@@ -3,7 +3,7 @@
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
                             id="instructions-toggle" ng-click="drugProdCtrl.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span><span
                             class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span></button>
@@ -27,23 +27,12 @@
                                   root-elem="{{::drugProdCtrl.rootTag}}"></hpfb-file-select>
             </div>
         </section>
-        <!-- section class="panel panel-primary mrgn-tp-lg">
-            <header class="panel-heading clearfix">
-                <div class="btn-group pull-right">
-                    <button title="{{::'HELP_DOSSIER'|translate}}" class="btn-xs rep-help-button"
-                            id="dossier-instructions-toggle" ng-click="drugProdCtrl.addInstruct(1)"><span
-                            class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">"{{::'HELP_DOSSIER'|translate}}"</span></button>
-                </div>
-                <h2 class="panel-title">{{::'INFO_DRUGPROD'|translate}}</h2>
-            </header>
-        </section -->
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <div class="btn-group pull-right">
-                    <button title="{{::'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
-                            id="drugProduct-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUG_PRODUCT'|translate}}"</span>
+                    <button title="{{::'EXPAND'|translate}} {{::'PRODUCT_INFO_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
+                            id="drugProduct-instructions-toggle" ng-click="drugProdCtrl.addInstruct(1)"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'PRODUCT_INFO_INSTRUCT'|translate}}"</span>
                     </button>
                 </div>
                 <h2 class="panel-title">{{::'DRUG_PRODUCT'|translate}}</h2>
@@ -51,14 +40,14 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[4]"
-                             class="alert-info" close="drugProdCtrl.closeAlert(4)">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[1]"
+                             class="alert-info" close="drugProdCtrl.closeAlert(1)">
                             <section aria-live="assertive">
                                 <div ng-if="!drugProdCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-en.html'">
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-en.html'">
                                 </div>
                                 <div ng-if="drugProdCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-fr.html'">
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-fr.html'">
                                 </div>
                             </section>
                         </div>
@@ -123,6 +112,8 @@
                     </div>
                 </div>
                 <div class="row">
+                    <!--todo: add importer part -
+                        helptext importer: index: 2-->
                     <div class="col-xs-4 form-group">
                         <label>
                             <span class="field-name">D.&nbsp;{{::'IMPORTER_COMPANY_ID_IF' |translate}}</span>
@@ -143,6 +134,10 @@
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
                             <span class="field-name">F.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="drug-use-instructions-toggle" ng-click="drugProdCtrl.addInstruct(3)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'DRUG_USE_INSTRUCT'|translate}}"</span>
+                            </button>
                             <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
                                     ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
                                     ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.drugUseList track by use.id"
@@ -152,6 +147,21 @@
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[3]"
+                             class="alert-info" close="drugProdCtrl.closeAlert(3)">
+                            <section aria-live="assertive">
+                                <div ng-if="!drugProdCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-drug-use-en.html'">
+                                </div>
+                                <div ng-if="drugProdCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-drug-use-fr.html'">
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
 
@@ -235,11 +245,30 @@
                         <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
                             <span class="field-name">H. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="prop-indication-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'PROP_INDI_INSTRUCT'|translate}}"</span>
+                            </button>
                             <cmp-error-message field-name="drugProdCtrl.propIndicationId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[4]"
+                                     class="alert-info" close="drugProdCtrl.closeAlert(4)">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-indication-en.html'">
+                                        </div>
+                                        <div ng-if="drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drug/tpl-drugProduct-indication-fr.html'">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
                         <textarea id="{{::drugProdCtrl.propIndicationId}}"
                                   data-ng-model="drugProdCtrl.model.drugProduct.propIndication" maxlength="1024" rows="3"
                                   ng-model-options="{ debounce: $inherit}"
@@ -281,7 +310,26 @@
                     <div class="col-xs-4 form-group">
                         <label>
                             <span class="field-name">I. {{::'FORMULATION'|translate}}</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'FORMULATION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="formulation-instructions-toggle" ng-click="drugProdCtrl.addInstruct(5)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORMULATION_INSTRUCT'|translate}}"</span>
+                            </button>
                         </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[5]"
+                             class="alert-info" close="drugProdCtrl.closeAlert(5)">
+                            <section aria-live="assertive">
+                                <div ng-if="!drugProdCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-en.html'">
+                                </div>
+                                <div ng-if="drugProdCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-formulation-fr.html'">
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -304,7 +352,7 @@
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave"
                         ng-click="drugProdCtrl.saveXML()">{{drugProdCtrl.saveXMLLabel |translate}}
                 </button>
-                <button title="{{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                         id="save-instructions-toggle" ng-click="drugProdCtrl.addInstruct(6)"><span
                         class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SAVE_INSTRUCT'|translate}}"</span>
                 </button>

@@ -14,11 +14,30 @@
                     <label for="{{::ctrCtrl.containerTypeId}}" class="required">
                         <span class="field-name">{{'CONTAINER_TYPE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
+                        <button title="{{::'EXPAND'|translate}} {{::'CONTAINER_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                id="container-instructions-toggle" ng-click="ctrCtrl.addInstruct(0)"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'CONTAINER_INSTRUCT'|translate}}"</span>
+                        </button>
                         <cmp-error-message field-name="ctrCtrl.containerTypeId"
                                            form-ref="ctrCtrl.containerTypeForm"
                                            show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.containerTypeId])"
                                            error-types="ctrCtrl.requiredOnly"></cmp-error-message>
                     </label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ctrCtrl.alerts[0]"
+                                 class="alert-info" close="ctrCtrl.closeAlert(0)">
+                                <section aria-live="assertive">
+                                    <div ng-if="!ctrCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-container-type-en.html'">
+                                    </div>
+                                    <div ng-if="ctrCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-container-type-fr.html'">
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
                     <textarea id="{{::ctrCtrl.containerTypeId}}" data-ng-model="ctrCtrl.ctModel.containerType" maxlength="256" rows="3"
                               ng-model-options="{ debounce: $inherit}"
                               class="form-control full-width" name="{{::ctrCtrl.containerTypeId}}" required></textarea>
@@ -30,11 +49,30 @@
                     <label for="{{::ctrCtrl.packageSizeId}}" class="required">
                         <span class="field-name">{{'PACKAGE_SIZE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
+                        <button title="{{::'EXPAND'|translate}} {{::'PACKAGE_SIZE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                id="package-instructions-toggle" ng-click="ctrCtrl.addInstruct(1)"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'PACKAGE_SIZE_INSTRUCT'|translate}}"</span>
+                        </button>
                         <cmp-error-message field-name="ctrCtrl.packageSizeId"
                                            form-ref="ctrCtrl.containerTypeForm"
                                            show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.packageSizeId])"
                                            error-types="ctrCtrl.requiredOnly"></cmp-error-message>
                     </label>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ctrCtrl.alerts[1]"
+                                 class="alert-info" close="ctrCtrl.closeAlert(1)">
+                                <section aria-live="assertive">
+                                    <div ng-if="!ctrCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-package-size-en.html'">
+                                    </div>
+                                    <div ng-if="ctrCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-package-size-fr.html'">
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
                     <textarea id="{{::ctrCtrl.packageSizeId}}" data-ng-model="ctrCtrl.ctModel.packageSize" maxlength="256" rows="3"
                               ng-model-options="{ debounce: $inherit}"
                               class="form-control full-width" name="{{::ctrCtrl.packageSizeId}}" required></textarea>
@@ -44,6 +82,23 @@
                 <div class="col-md-6 form-group">
                     <fieldset>
                         <legend>{{'SHELF_LIFE'| translate}}</legend>
+                        <button title="{{::'EXPAND'|translate}} {{::'SHELF_LIFE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                id="shelf-life-instructions-toggle" ng-click="ctrCtrl.addInstruct(2)"><span
+                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SHELF_LIFE_INSTRUCT'|translate}}"</span>
+                        </button>
+                        <div class="col-md-6">
+                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ctrCtrl.alerts[2]"
+                                 class="alert-info" close="ctrCtrl.closeAlert(2)">
+                                <section aria-live="assertive">
+                                    <div ng-if="!ctrCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-shelf-life-en.html'">
+                                    </div>
+                                    <div ng-if="ctrCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-shelf-life-fr.html'">
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
                         <div class="form-group col-md-6">
                             <label for="{{::ctrCtrl.shelfLifeNumberId}}">
                                 <span class="field-name">{{'SHELF_LIFE_NUMBERS'|translate}}</span>

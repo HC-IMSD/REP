@@ -38,6 +38,7 @@
         vm.newIngFormShown = false;
         vm.isDetailValid = true;
         vm.selectRecord = -1;
+        vm.alerts = [false]; //for help boxes
         vm.noActiveValues=""; //used for error handling Business Rule: must be at least one medicinal
 
         vm.colNames = [
@@ -150,6 +151,33 @@
                 vm.noActiveValues = "";
                 return true;
             }
+        };
+
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        /**
+         * Determines if form is in french
+         * @returns {boolean}
+         */
+        vm.isFrench = function(){
+            return(vm.lang===FRENCH);
         };
 
         /**

@@ -173,7 +173,7 @@
 
             return(
                 [
-                    {"id":"MED","en":"Medicincal Ingredient","fr":"fr_Medicincal Ingredient"},
+                    {"id":"MED","en":"Medicinal Ingredient","fr":"fr_Medicinal Ingredient"},
                     {"id":"NONMED","en":"Non-medicinal Ingredient","fr":"fr_Non-medicinal Ingredient"}
 
                 ]

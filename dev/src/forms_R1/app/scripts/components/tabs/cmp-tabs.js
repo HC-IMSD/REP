@@ -35,6 +35,7 @@
         var vm = this;
         vm.showSummary=false;
         vm.updateSummary=0;
+        vm.alerts = [false]; //for help boxes
         vm.tabs = [
             {
                 label: "FORMULATIONS",
@@ -72,7 +73,8 @@
                 }
             }
 
-        }
+        };
+
         /***
          * Selects the visible tab based on a zero based index
          * @param idx
@@ -80,7 +82,7 @@
         vm.selectTab = function (idx) {
 
             if(idx>vm.tabs.length){
-                console.warn("Invalid tab index "+idx)
+                console.warn("Invalid tab index "+idx);
                 return;
             }
 
@@ -92,6 +94,33 @@
             }
                 vm.tabs[idx].selected = true;
             //vm.tabs[idx].errors= vm.tabs[idx].form.$invalid
+        };
+
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        /**
+         * Determines if form is in french
+         * @returns {boolean}
+         */
+        vm.isFrench = function(){
+            return(vm.lang===FRENCH);
         };
     }
 

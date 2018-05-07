@@ -1,5 +1,8 @@
 {
-
+  "PRODUCT_INFO_INSTRUCT": "fr_Product Information Instructions",
+  "DRUG_USE_INSTRUCT": "fr_Drug Use Instructions",
+  "PROP_INDI_INSTRUCT": "fr_Proposed Indication Instructions",
+  "FORMULATION_INSTRUCT": "fr_Formulation Instructions",
   "LOAD_DRUGPROD":"fr_Load a Drug Product File",
   "INFO_DRUGPROD":"fr_Drug Product Information",
   "DRUGPROD":"fr_Drug Product",
@@ -15,6 +18,4 @@
   "NON_PRESC_SCHEDULE_A":"fr_a non-prescription drug to which one or more Schedule A claims apply",
   "FAKE.APPENDIX_MISSING_ERROR":"fr_with the Human /Animal Sourced Records, missing source",
   "FAKE.APPENDIX_EXTRA_ERROR":"fr_with the Human /Animal Sourced Records, extra source"
-
-
 }

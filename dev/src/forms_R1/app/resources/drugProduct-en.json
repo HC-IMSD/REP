@@ -1,6 +1,8 @@
-
 {
-
+  "PRODUCT_INFO_INSTRUCT": "Product Information Instructions",
+  "DRUG_USE_INSTRUCT": "Drug Use Instructions",
+  "PROP_INDI_INSTRUCT": "Proposed Indication Instructions",
+  "FORMULATION_INSTRUCT": "Formulation Instructions",
   "LOAD_DRUGPROD":"Load a Drug Product File",
   "INFO_DRUGPROD":"Drug Product Information",
   "DRUGPROD":"Drug Product",

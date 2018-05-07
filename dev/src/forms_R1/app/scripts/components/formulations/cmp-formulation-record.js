@@ -63,6 +63,7 @@
         vm.yesNoList = DossierLists.getYesNoList();
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
+        vm.alerts = [false, false, false]; //for help boxes
        // vm.formName="";
         vm.summaryName="";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
@@ -270,10 +271,33 @@
             vm.updateSummary = vm.updateSummary + 1;
         };
 
-       /* vm.getFormName=function(){
+        vm.addInstruct = function (value) {
 
-            return vm.formName;
-        }*/
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        /**
+         * Determines if form is in french
+         * @returns {boolean}
+         */
+        vm.isFrench=function(){
+            return(vm.lang===FRENCH);
+        };
+
         /**
          * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
          * @private

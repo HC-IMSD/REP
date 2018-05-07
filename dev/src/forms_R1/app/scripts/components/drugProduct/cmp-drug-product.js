@@ -120,7 +120,7 @@
             {type: "minlength", displayAlias: "MSG_LENGTH_7"}
         ];
 
-        vm.alerts = [false, false, false, false,false,false,false]; //for help boxes
+        vm.alerts = [false, false, false, false, false, false, false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
         vm.drugUseList=[];

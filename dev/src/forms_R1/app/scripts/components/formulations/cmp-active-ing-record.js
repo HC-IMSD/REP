@@ -54,6 +54,7 @@
         vm.presentationList = DossierLists.getUnitsPresentationList();
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.alerts = [false, false, false, false]; //for help boxes
         vm.numberMinError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
@@ -347,6 +348,32 @@
             }
         };
 
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        /**
+         * Determines if form is in french
+         * @returns {boolean}
+         */
+        vm.isFrench = function(){
+            return(vm.lang===FRENCH);
+        };
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {
             vm.isDetailValid({state: !vm.activeIngForm.$dirty});

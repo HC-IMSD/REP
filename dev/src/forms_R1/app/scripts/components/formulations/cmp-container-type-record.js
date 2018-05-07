@@ -66,6 +66,7 @@
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the error summary object
         vm.focusSummary=0;
+        vm.alerts = [false, false, false]; //for help boxes
         
         vm.$onInit = function () {
             _setIdNames();
@@ -133,9 +134,36 @@
         vm.showError=function(ctrl){
 
             if(!ctrl){
-                return false
+                return false;
             }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid &&  vm.showSummary) /* TODO add showErrors||(isInvalid && vm.showErrors())*/)
+        };
+
+        vm.addInstruct = function (value) {
+
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = true;
+            }
+        };
+
+        /**
+         * Closes the instruction alerts
+         * @param value
+         */
+        vm.closeAlert = function (value) {
+            if (angular.isUndefined(value)) return;
+            if (value < vm.alerts.length) {
+                vm.alerts[value] = false;
+            }
+        };
+
+        /**
+         * Determines if form is in french
+         * @returns {boolean}
+         */
+        vm.isFrench = function(){
+            return(vm.lang===FRENCH);
         };
 
         $scope.$watch('ctrCtrl.containerTypeForm.$dirty', function () {
