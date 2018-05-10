@@ -7,10 +7,11 @@
             <a role="tab">{{tab.label |translate}}
                 <strong ng-if="tabsCtrl.tabs[$index].form.$invalid" class="required">({{'ERRORS' |translate}})</strong>
             </a>
-            <button ng-if="$index === 1"
-                    title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+        </li>
+        <li>
+            <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                     id="ah-sourced-instructions-toggle" ng-click="tabsCtrl.addInstruct(0)"><span
-                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'AH_SOURCED_INSTRUCT'|translate}}"</span>
+                    class="fa fa-question-circle fa-2x rep-pad-top-10"></span><span class="wb-inv">"{{::'AH_SOURCED_INSTRUCT'|translate}}"</span>
             </button>
         </li>
     </ul>

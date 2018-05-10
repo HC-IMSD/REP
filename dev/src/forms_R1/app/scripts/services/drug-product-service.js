@@ -497,6 +497,8 @@
                 var obj = {
                     "ingRole": item.ingredient_role,
                     "ingId": item.ingredient_id,
+                    "variant": item.variant_name,
+                    "purpose": item.purpose,
                     "ingLabel": item.ingredient_name,
                     "autoIngred": YES,
                     "cas": item.cas_number,
@@ -955,6 +957,8 @@
                 var obj = {
                     "ingredient_role": item.ingRole,
                     "ingredient_id": item.ingId,
+                    "variant_name": item.variant,
+                    "purpose": item.purpose,
                     "ingredient_name": item.ingLabel,
                     "cas_number": item.cas,
                     "ingred_standard": item.standard,

@@ -50,7 +50,7 @@
   "DELETE":"fr_Delete",
   "SAVE_WORKING":"Enregistrer une copie de travail",
   "COMPANY_NOABBREV": "fr_Company Name (Full legal Name - no abbreviations)",
-  "CLOSE":"Minimiser les instructions",
+  "CLOSE_ALERT":"Minimiser les instructions",
   "COLLAPSE":"Minimiser les",
   "SAVE_RECORD":"fr_Save Record",
   "DELETE_RECORD":"fr_Delete Record",

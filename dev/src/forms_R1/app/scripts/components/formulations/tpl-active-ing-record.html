@@ -52,6 +52,41 @@
                     </div>
                 </div>
                 <div class="row" ng-if="!ingRecCtrl.isMedIng()">
+                    <div class="form-group col-md-12">
+                        <label for="variant_{{::$id}}">
+                            <span class="field-name">{{'VARIANT_NAME'|translate}}</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'VARIANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="variant-instructions-toggle" ng-click="ingRecCtrl.addInstruct(0)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'VARIANT_INSTRUCT'|translate}}"</span>
+                            </button>
+                            <input type="text" id="variant_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.variant" maxlength="60"
+                                   ng-model-options="{ debounce: '$inherit'}" size="60"
+                                   class="form-control full-width" name="variant"/>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ingRecCtrl.alerts[0]"
+                                 class="alert-info" close="ingRecCtrl.closeAlert(0)">
+                                <section aria-live="assertive">
+                                    <div ng-if="!ingRecCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-variant-en.html'">
+                                    </div>
+                                    <div ng-if="ingRecCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-variant-fr.html'">
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="purpose_{{::$id}}">
+                            <span class="field-name">{{'PURPOSE'|translate}}</span>
+                            <input type="text" id="purpose_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.purpose" maxlength="60"
+                                   ng-model-options="{ debounce: '$inherit'}" size="60"
+                                   class="form-control full-width" name="purpose"/>
+                        </label>
+                    </div>
                     <div class="form-group col-md-12"
                          ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nIngredName].$invalid}">
                         <label for="{{::ingRecCtrl.nIngredName}}" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
@@ -80,10 +115,29 @@
                     <div class="form-group col-md-3">
                         <label for="{{::ingRecCtrl.standardId}}">
                             <span class="field-name">{{'STANDARD'|translate}}</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'STANDARD_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="standard-instructions-toggle" ng-click="ingRecCtrl.addInstruct(1)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'STANDARD_INSTRUCT'|translate}}"</span>
+                            </button>
                             <input type="text" id="{{::ingRecCtrl.standardId}}" data-ng-model="ingRecCtrl.ingModel.standard"
                                    ng-model-options="{ debounce: '$inherit'}"
                                    class="form-control full-width" name="standardVal" size="40" maxlength="40"/>
                         </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ingRecCtrl.alerts[1]"
+                             class="alert-info" close="ingRecCtrl.closeAlert(1)">
+                            <section aria-live="assertive">
+                                <div ng-if="!ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-standard-en.html'">
+                                </div>
+                                <div ng-if="ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-standard-fr.html'">
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
 
@@ -328,6 +382,10 @@
                         <label for="{{::ingRecCtrl.isNanoMaterialId}}" class="required">
                             <span class="field-name">{{'IS_NANO_MATERIAL'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'IS_NANO_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="is-nano-instructions-toggle" ng-click="ingRecCtrl.addInstruct(2)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'IS_NANO_INSTRUCT'|translate}}"</span>
+                            </button>
                             <select id="{{::ingRecCtrl.isNanoMaterialId}}" ng-model="ingRecCtrl.ingModel.isNano" ng-required="true"
                                     class="form-control" name="{{::ingRecCtrl.isNanoMaterialId}}"
                                     ng-options="val |translate for val in  ingRecCtrl.yesNoList">
@@ -372,20 +430,55 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group  col-sm-4 col-xs-12"
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ingRecCtrl.alerts[2]"
+                             class="alert-info" close="ingRecCtrl.closeAlert(2)">
+                            <section aria-live="assertive">
+                                <div ng-if="!ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-nanomaterial-en.html'">
+                                </div>
+                                <div ng-if="ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-nanomaterial-fr.html'">
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xs-12"
                          ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.animalHumanSrcId].$invalid}">
                         <label for="{{::ingRecCtrl.animalHumanSrcId}}" class="required">
                             <span class="field-name">{{'ANIMAL_HUMAN_SOURCED'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <select id="{{::ingRecCtrl.animalHumanSrcId}}" ng-model="ingRecCtrl.ingModel.humanAnimalSourced"
-                                    ng-required="true" class="form-control" name="{{::ingRecCtrl.animalHumanSrcId}}"
-                                    ng-options="val |translate for val in  ingRecCtrl.yesNoList">
-                            </select>
-                            <cmp-error-message field-name="ingRecCtrl.animalHumanSrcId"
+                            <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="is-sourced-instructions-toggle" ng-click="ingRecCtrl.addInstruct(3)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'AH_SOURCED_INSTRUCT'|translate}}"</span>
+                            </button>
+                        </label>
+                        <select id="{{::ingRecCtrl.animalHumanSrcId}}" ng-model="ingRecCtrl.ingModel.humanAnimalSourced"
+                                ng-required="true" class="form-control" name="{{::ingRecCtrl.animalHumanSrcId}}"
+                                ng-options="val |translate for val in  ingRecCtrl.yesNoList">
+                        </select>
+                        <cmp-error-message field-name="ingRecCtrl.animalHumanSrcId"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.animalHumanSrcId])"
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
-                        </label>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ingRecCtrl.alerts[3]"
+                             class="alert-info" close="ingRecCtrl.closeAlert(3)">
+                            <section aria-live="assertive">
+                                <div ng-if="!ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-sourced-en.html'">
+                                </div>
+                                <div ng-if="ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-sourced-fr.html'">
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
                 <div class="row">

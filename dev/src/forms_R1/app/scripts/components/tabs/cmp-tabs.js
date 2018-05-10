@@ -6,7 +6,8 @@
 
 
     //TODO: Lazy load modules
-    angular.module('tabsModule', ['formulationsModule', 'appendixFourModule']);
+    angular.module('tabsModule', ['formulationsModule',
+        'hpfbConstants', 'appendixFourModule']);
 })();
 
 (function () {
@@ -27,10 +28,10 @@
         }
     });
 
-    tabsCtrl.$inject = ['$scope'];
+    tabsCtrl.$inject = ['$scope', 'FRENCH'];
 
 
-    function tabsCtrl($scope) {
+    function tabsCtrl($scope, FRENCH) {
 
         var vm = this;
         vm.showSummary=false;

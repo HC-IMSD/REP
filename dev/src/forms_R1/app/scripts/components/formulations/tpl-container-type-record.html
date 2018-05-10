@@ -81,12 +81,13 @@
             <div class="row">
                 <div class="col-md-6 form-group">
                     <fieldset>
-                        <legend>{{'SHELF_LIFE'| translate}}</legend>
-                        <button title="{{::'EXPAND'|translate}} {{::'SHELF_LIFE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                id="shelf-life-instructions-toggle" ng-click="ctrCtrl.addInstruct(2)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SHELF_LIFE_INSTRUCT'|translate}}"</span>
-                        </button>
-                        <div class="col-md-6">
+                        <legend><span>{{'SHELF_LIFE'| translate}}</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'SHELF_LIFE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="shelf-life-instructions-toggle" ng-click="ctrCtrl.addInstruct(2)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SHELF_LIFE_INSTRUCT'|translate}}"</span>
+                            </button>
+                        </legend>
+                        <div class="row col-md-12">
                             <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ctrCtrl.alerts[2]"
                                  class="alert-info" close="ctrCtrl.closeAlert(2)">
                                 <section aria-live="assertive">

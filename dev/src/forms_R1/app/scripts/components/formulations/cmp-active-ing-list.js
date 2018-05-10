@@ -6,7 +6,8 @@
     'use strict';
 
     angular
-        .module('activeIngListModule', ['expandingTable', 'activeIngRecordModule'])
+        .module('activeIngListModule', ['expandingTable',
+            'hpfbConstants', 'activeIngRecordModule'])
 })();
 
 (function () {
@@ -27,9 +28,9 @@
             }
         });
 
-    activeIngListCtrl.$inject = ['$scope'];
+    activeIngListCtrl.$inject = ['$scope', 'FRENCH'];
 
-    function activeIngListCtrl($scope) {
+    function activeIngListCtrl($scope, FRENCH) {
 
         var vm = this;
         vm.selectRecord = -1;
@@ -42,11 +43,12 @@
         vm.noActiveValues=""; //used for error handling Business Rule: must be at least one medicinal
 
         vm.colNames = [
-            {label: "ROLE", binding: "ingRole", width: "20"},
-            {label: "INGREDIENT", binding: "ingLabel", width: "55"},
-            {label: "IN_LIST", binding: "autoIngred", width: "7"},
-            {label: "CAS_NUM", "binding": "cas", width: "12", isHtml: "true"},
-            {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "7"}
+            {label: "ROLE", binding: "ingRole", width: "19"},
+            {label: "INGREDIENT", binding: "ingLabel", width: "40"},
+            {label: "VARIANT_NAME", binding: "variant", width: "25"},
+            {label: "IN_LIST", binding: "autoIngred", width: "4"},
+            {label: "CAS_NUM", "binding": "cas", width: "9", isHtml: "true"},
+            {label: "HUMAN_ANIMAL_SOURCE", binding: "humanAnimalSourced", width: "4"}
         ];
         vm.ingList = [];
         vm.$onInit = function () {

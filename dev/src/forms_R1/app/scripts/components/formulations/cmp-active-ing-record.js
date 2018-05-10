@@ -40,8 +40,8 @@
             }
 
         });
-    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER','YES','NO'];
-    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES,NO) {
+    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER','YES','NO', 'FRENCH'];
+    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES,NO,FRENCH) {
 
         var vm = this;
         vm.ingRoleList = DossierLists.getIngRoleList();
@@ -70,6 +70,8 @@
             autoIngred: NO,
             ingRole: "",
             ingId: "",
+            variant: "",
+            purpose: "",
             ingLabel: "",
             cas: "",
             standard: "",
@@ -372,7 +374,7 @@
          * @returns {boolean}
          */
         vm.isFrench = function(){
-            return(vm.lang===FRENCH);
+            return(vm.lang === FRENCH);
         };
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {

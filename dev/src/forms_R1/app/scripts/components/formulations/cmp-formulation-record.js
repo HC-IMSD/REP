@@ -14,6 +14,7 @@
                 'materialIngListModule',
                 'roaListModule',
                 'dossierDataLists',
+                'hpfbConstants',
                 'ui.select',
                 'errorSummaryModule',
                 'errorMessageModule'
@@ -51,8 +52,8 @@
 
         });
 
-    formulationRecCtrl.$inject = ['DossierLists','$translate','$scope'];
-    function formulationRecCtrl(DossierLists, $translate,$scope) {
+    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH'];
+    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH) {
 
         var vm = this;
         vm.noCountries="";

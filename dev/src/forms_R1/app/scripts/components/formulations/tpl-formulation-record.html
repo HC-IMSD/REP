@@ -10,11 +10,13 @@
                            make-focused="" alias-list="formulRecCtrl.alias" show-errors="formulRecCtrl.showSummary"
                            update-errors="formulRecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
-            <legend>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</legend>
-            <button title="{{::'EXPAND'|translate}} {{::'FORM_REC_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                    id="form-id-instructions-toggle" ng-click="formulRecCtrl.addInstruct(0)"><span
-                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORM_REC_INSTRUCT'|translate}}"</span>
-            </button>
+            <legend>
+                <span>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</span>
+                <button title="{{::'EXPAND'|translate}} {{::'FORM_REC_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                        id="form-id-instructions-toggle" ng-click="formulRecCtrl.addInstruct(0)"><span
+                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORM_REC_INSTRUCT'|translate}}"</span>
+                </button>
+            </legend>
             <div class="row">
                 <div class="col-md-12">
                     <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="formulRecCtrl.alerts[0]"
@@ -116,6 +118,7 @@
                                 id="is-ah-instructions-toggle" ng-click="formulRecCtrl.addInstruct(1)"><span
                                 class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'MATERIALS_INSTRUCT'|translate}}"</span>
                         </button>
+                    </label>
                         <div class="row">
                             <div class="col-md-12">
                                 <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="formulRecCtrl.alerts[1]"
@@ -139,7 +142,6 @@
                                            form-ref="formulRecCtrl.formulationForm"
                                            show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-                    </label>
                 </div>
             </div>
             <div ng-if="formulRecCtrl.frmModel.isAnimalHumanMaterial === 'Y'">
@@ -194,11 +196,13 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading">
+                        <div class="btn-group pull-right rep-bottom">
+                            <button title="{{::'EXPAND'|translate}} {{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="countries-manu-instructions-toggle" ng-click="formulRecCtrl.addInstruct(2)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}"</span>
+                            </button>
+                        </div>
                         <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
-                        <button title="{{::'EXPAND'|translate}} {{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                id="countries-manu-instructions-toggle" ng-click="formulRecCtrl.addInstruct(2)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}"</span>
-                        </button>
                     </header>
                     <div class="row">
                         <div class="col-md-12">

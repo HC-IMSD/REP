@@ -8,6 +8,7 @@
     angular
         .module('containerTypeRecordModule', [
             'dossierDataLists',
+            'hpfbConstants',
             'errorSummaryModule',
             'errorMessageModule'
         ])
@@ -37,8 +38,8 @@
             }
 
         });
-    containerTypeRecCtrl.$inject=['DossierLists', '$scope'];
-    function containerTypeRecCtrl(DossierLists, $scope) {
+    containerTypeRecCtrl.$inject=['DossierLists', '$scope', 'FRENCH'];
+    function containerTypeRecCtrl(DossierLists, $scope, FRENCH) {
 
         var vm = this;
         vm.lang = "en";
