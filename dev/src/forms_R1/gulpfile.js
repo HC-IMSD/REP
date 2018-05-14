@@ -2223,11 +2223,11 @@ gulp.task('prod-activity-compileHtml', gulp.series('prod-global-create-src-templ
 
     var srcPath = paths.buildProdActivity;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'activityEXT-en.html', destPath, 'en', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'activityEXT-fr.html', destPath, 'fr', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'activityINT-fr.html', destPath, 'fr', deployType.prodInt);
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'activityEXT-en.html', destPath, 'en', deployType.prod, 'activityEXT-fr.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'activityEXT-fr.html', destPath, 'fr', deployType.prod, 'activityEXT-en.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, activityRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'activityINT-fr.html', destPath, 'fr', deployType.prodInt, 'activityINT-en.html');
 
-    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'activityINT-en.html', destPath, 'en', deployType.prodInt);
+    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, activityRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'activityINT-en.html', destPath, 'en', deployType.prodInt, 'activityINT-fr.html');
 
 }));
 
@@ -2320,10 +2320,10 @@ gulp.task('prod-company-compileHtml', gulp.series('prod-global-create-src-templa
     ];
     var srcPath = paths.buildProdCompany;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'companyEXT-en.html', destPath, 'en', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'companyEXT-fr.html', destPath, 'fr', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'companyINT-fr.html', destPath, 'fr', deployType.prodInt);
-    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'companyINT-en.html', destPath, 'en', deployType.prodInt);
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'companyEXT-en.html', destPath, 'en', deployType.prod, 'companyEXT-fr.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'companyEXT-fr.html', destPath, 'fr', deployType.prod, 'companyEXT-en.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'companyINT-fr.html', destPath, 'fr', deployType.prodInt, 'companyINT-en.html');
+    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'companyINT-en.html', destPath, 'en', deployType.prodInt, 'companyINT-fr.html');
 
 }));
 
@@ -2425,11 +2425,11 @@ gulp.task('prod-dossier-compileHtml', gulp.series('prod-global-create-src-templa
 
     var srcPath = paths.buildProdDossier;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'dossierEXT-en.html', destPath, 'en', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'dossierEXT-fr.html', destPath, 'fr', deployType.prod);
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'dossierINT-fr.html', destPath, 'fr', deployType.prodInt);
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, dossierRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'dossierEXT-en.html', destPath, 'en', deployType.prod, 'dossierEXT-fr.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'dossierEXT-fr.html', destPath, 'fr', deployType.prod, 'dossierEXT-en.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, dossierRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'dossierINT-fr.html', destPath, 'fr', deployType.prodInt, 'dossierINT-en.html');
 
-    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'dossierINT-en.html', destPath, 'en', deployType.prodInt);
+    return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'dossierINT-en.html', destPath, 'en', deployType.prodInt, 'dossierINT-fr.html');
 
 }));
 

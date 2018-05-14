@@ -26,8 +26,9 @@
                     ng-click="ailCtrl.addNewIngredientState()" id="addAI_{{::$id}}" name="addAI_{{::$id}}">{{'ADD_INGREDIENT'|translate}}
             </button>
             <button title="{{::'EXPAND'|translate}} {{::'ADD_INGREDIENT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                    id=add-ingredient-instructions-toggle" ng-click="ailCtrl.addInstruct(0)"><span
-                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'ADD_INGREDIENT_INSTRUCT'|translate}}"</span>
+                    id="add-ingredient-instructions-toggle" ng-click="ailCtrl.addInstruct(0)">
+                <span class="fa fa-question-circle fa-2x"></span>
+                <span class="wb-inv">"{{::'ADD_INGREDIENT_INSTRUCT'|translate}}"</span>
             </button>
         </div>
     </div>
