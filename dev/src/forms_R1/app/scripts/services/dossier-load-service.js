@@ -22,6 +22,8 @@
                 var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
                 var nanoUrl = RELATIVE_FOLDER_DATA+"nanomaterials.json";
                 var unitsUrl = RELATIVE_FOLDER_DATA + "units.json";
+                var presentationUnitsUrl = RELATIVE_FOLDER_DATA + "presentationUnits.json";
+                var measureUnitsUrl = RELATIVE_FOLDER_DATA + "measureUnits.json";
                 var dosageFormUrl = RELATIVE_FOLDER_DATA + "dosageForm.json";
                 var activeUrl= RELATIVE_FOLDER_DATA +"activeIngred.json";
                 var resultTranslateList = {};
@@ -30,6 +32,20 @@
                         //PROCESS units list. Not creating translate list
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
                         DossierLists.createUnitsList(newList);
+                        //not adding units to translation
+                        return $http.get(presentationUnitsUrl); //presentation Units list load
+                    })
+                    .then(function (response) {
+                        //PROCESS units list. Not creating translate list
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
+                        DossierLists.createUnitsPresentationList(newList);
+                        //not adding units to translation
+                        return $http.get(measureUnitsUrl); //measure Units list load
+                    })
+                    .then(function (response) {
+                        //PROCESS units list. Not creating translate list
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
+                        DossierLists.createUnitsMeasureList(newList);
                         //not adding units to translation
                         return $http.get(countryUrl); //country list load
                     })
@@ -56,7 +72,6 @@
                         angular.extend(resultTranslateList, translateList);//PROCESSING: DOSAGE FORM list
                         var newList2 = _createNewSortedArrayWithOther(response.data, "", options.key);
                         var translateList2 = _createTranslateList(newList2, options.key);
-                        DossierLists.createUnitsPresentationList(newList2); //for display
                         angular.extend(resultTranslateList, translateList2);
                         return $http.get(activeUrl); //active ingredient list load
                     }).then(function (response) {

@@ -52,6 +52,7 @@
         vm.strengthList = DossierLists.getStrengthList();
         vm.perList = DossierLists.getPerList();
         vm.presentationList = DossierLists.getUnitsPresentationList();
+        vm.measureList = DossierLists.getUnitsMeasureList();
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.alerts = [false, false, false, false]; //for help boxes

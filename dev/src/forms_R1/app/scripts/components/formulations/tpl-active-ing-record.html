@@ -318,7 +318,7 @@
                                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                                         <div class="rep-pad-top">
                                             <div class="rep-error" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId].$invalid}">
-                                                <ui-select ng-model="ingRecCtrl.ingModel.perMeasUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
+                                                <!--ui-select ng-model="ingRecCtrl.ingModel.perMeasUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
                                                            ng-model-options="{ debounce: 0}"
                                                            class="rep-selectize-font full-width" required>
                                                     <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
@@ -330,7 +330,13 @@
                                                             class="rep-selectize-font">
                                                         <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
                                                     </ui-select-choices>
-                                                </ui-select>
+                                                </ui-select-->
+
+                                                <select id="{{::ingRecCtrl.perMeasureUnitId}}" ng-model="ingRecCtrl.ingModel.perMeasUnits"
+                                                        ng-model-options="{ debounce: '$inherit'}"
+                                                        class="form-control full-width" name="{{::ingRecCtrl.perMeasureUnitId}}" required
+                                                        ng-options="measure[ingRecCtrl.lang] for measure in  ingRecCtrl.measureList track by measure.id">
+                                                </select>
                                             </div>
                                         </div>
                                         <cmp-error-message field-name="ingRecCtrl.perMeasureUnitId"

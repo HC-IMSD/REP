@@ -34,6 +34,7 @@
         vm.nanoList = [];
         vm.dosageFormList = [];
         vm.unitsPresentationList = [];
+        vm.unitsMeasureList = [];
         vm.activeList = [];
         vm.unitsList = [];
         //TODO create getters/setters? safer as is
@@ -42,11 +43,13 @@
             getActiveList: _getActiveArray,
             createRoaList: _createRoaArray,
             createUnitsList: _createUnitsArray,
+            createUnitsPresentationList: _createUnitsPresentationArray,
+            createUnitsMeasureList: _createUnitsMeasureArray,
             createNanomaterialList: _createNanoArray,
             createDosageFormList: _createDosageFormArray,
             getDosageFormList: _getDosageFormsArray,
-            createUnitsPresentationList: _createUnitsPresentationArray,
             getUnitsPresentationList: _getUnitsPresentationArray,
+            getUnitsMeasureList: _getUnitsMeasureArray,
             getDrugUseList:_getDrugUseArray,
             getIngRoleList:_getIngRoleArray,
             getPerList:_getPerArray,
@@ -125,6 +128,10 @@
 
         function _createUnitsPresentationArray(translateJson) {
             vm.unitsPresentationList = (translateJson);
+        }
+
+        function _createUnitsMeasureArray(translateJson) {
+            vm.unitsMeasureList = (translateJson);
         }
 
         function _createRoaArray(translateJson) {
@@ -242,6 +249,10 @@
 
         function _getUnitsPresentationArray() {
             return vm.unitsPresentationList;
+        }
+
+        function _getUnitsMeasureArray() {
+            return vm.unitsMeasureList;
         }
 
         function getNanoMaterialArray() {

@@ -555,7 +555,7 @@
                     if (item.per_units.__text === OTHER) {
                         unitsValue = item.per_units.__text;
                     }
-                    obj.perMeasUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                    obj.perMeasUnits = $filter('findListItemById')(DossierLists.getUnitsMeasureList(), {id: unitsValue});
                     obj.perMeasOtherUnits = item.per_units_other_details;
                 }
 
