@@ -1,6 +1,7 @@
 {
   "Y": "Yes",
   "N": "No",
+  "ADD": "Add",
   "DELETEROW": "Delete Row",
   "SELECTEDROW": "Selected Row",
   "REQUIRED": "(required)",

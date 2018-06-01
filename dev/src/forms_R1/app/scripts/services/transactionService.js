@@ -101,14 +101,9 @@
                 var ectd = this._transformEctdToFile(jsonObj.ectd);
                 resultJson.TRANSACTION_ENROL.ectd = ectd;
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                resultJson.TRANSACTION_ENROL.solicited_requester = "";
-                if (jsonObj.solicitedRequester) {
-                    resultJson.TRANSACTION_ENROL.solicited_requester = {
-                        _label_en: jsonObj.solicitedRequester.en,
-                        _label_fr: jsonObj.solicitedRequester.en,
-                        __text: jsonObj.solicitedRequester.id
-                    }
-                }
+                //todo - update ???
+                resultJson.TRANSACTION_ENROL.solicited_requesters = this._transformReqToFile(jsonObj.requesterList);
+
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_fees = jsonObj.isFees;
@@ -123,6 +118,37 @@
                 return (resultJson);
             },
 
+
+            /**
+             *
+             * @param jsonObj the json object to convert
+             * @returns {{}}
+             * @private
+             */
+            _transformReqToFile: function (jsonObj) {
+
+                var requesters = [];
+                if (!jsonObj) return requesters;
+                if (!(jsonObj instanceof Array)) {
+                    //make it an array, case there is only one record
+                    jsonObj = [jsonObj]
+                }
+
+                for (var i = 0; i < jsonObj.length; i++) {
+                    var record = _mapRequesterRecToOutput(jsonObj[i]);
+                    if (jsonObj.length == 1) {
+                        return (record);
+                    }
+                    requesters.push(record);
+                }
+                return (requesters);
+            },
+            _transformReqFromFile: function (model, jsonObj) {
+                model.ectd = _getEmptyEctdSection();
+                if (model.isEctd) {
+                    model.requesterList = this._mapLifecycleList(jsonObj.lifecycle_record);
+                }
+            },
 
             /**
              *
@@ -148,7 +174,6 @@
                     model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
                 }
             },
-
             getModelInfo: function () {
                 return this._default;
             },
@@ -477,6 +502,18 @@
         return (lifecycleRec);
     }
 
+    function _mapRequesterRecToOutput(requesterObj) {
+        var requesterRec = {};
+        if (requesterObj) {
+            requesterRec = {
+                _label_en: requesterObj.solicitedRequester.en,
+                _label_fr: requesterObj.solicitedRequester.en,
+                __text: requesterObj.solicitedRequester.id
+            }
+        }
+        return (requesterRec);
+    }
+
     /**
      * Truncates the label for activity type based on feedback of Jul 18, 2017
      * Removes the full name
@@ -683,6 +720,7 @@
                 lifecycleRecord: []
             },
             isSolicited: "",
+            requesterList: [],
             solicitedRequester: "",
             projectManager1: "",
             projectManager2: "",

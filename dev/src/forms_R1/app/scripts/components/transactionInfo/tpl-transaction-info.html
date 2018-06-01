@@ -172,62 +172,18 @@
                         </label>
                     </div>
                 </div>
-                <div class="row" ng-if="transInfoCtrl.showSolicitedDetail">
-                    <div class="form-group col-md-4">
-                        <label for="{{::transInfoCtrl.solictedRqId}}" class="required full-width">
-                            <span class="field-name">{{::"SOLICITED_RQ" |translate}}</span>
-                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                            <div class="rep-pad-top">
-                                <div class="rep-error" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.solictedRqId].$invalid}">
-                                    <ui-select ng-model="transInfoCtrl.transactionModel.solicitedRequester"
-                                               id="{{::transInfoCtrl.solictedRqId}}" name="{{::transInfoCtrl.solictedRqId}}"
-                                               on-select="transInfoCtrl.setOtherSolicitor()" required
-                                               ng-disabled="false" title="{{::'CHOOSE_REQUEST|translate'}}"
-                                               class="rep-selectize-font full-width">
-                                        <ui-select-match placeholder="Select or Search for requester"
-                                                         class="rep-selectize-font rep-selectize-dropdown form-control">
-                                            {{$select.selected['en']}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                                repeat="contact in transInfoCtrl.requesterList  | filter:{['en']: $select.search}"
-                                                class="rep-selectize-font">
-                                            <span ng-bind-html="contact.en | highlight: $select.search"></span>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                </div>
-                            </div>
-                            <cmp-error-message field-name="transInfoCtrl.solictedRqId"
-                                               form-ref="transInfoCtrl.transInfoForm"
-                                               show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.solictedRqId])"
-                                               error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                        </label>
-                    </div>
-                    <div class="form-group col-md-6"
-                         ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.solicitedOtherId].$invalid}"
-                         ng-show="transInfoCtrl.showOtherSolicitedDetail">
-                        <label for="{{::transInfoCtrl.solicitedOtherId}}" class="required full-width">
-                            <span class="field-name">{{::"SOLICITED_RQ_OTHER" |translate}}</span>
-                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                            <textarea maxlength="256" size="256" id="{{::transInfoCtrl.solicitedOtherId}}"
-                                      name="{{::transInfoCtrl.solicitedOtherId}}"
-                                      ng-model="transInfoCtrl.transactionModel.otherSolicitedRequester"
-                                      class="form-control full-width rep-margin-top" rows="2"
-                                      ng-required="transInfoCtrl.showOtherSolicitedDetail"></textarea>
-                            <cmp-error-message field-name="transInfoCtrl.solicitedOtherId"
-                                               form-ref="transInfoCtrl.transInfoForm"
-                                               show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.solicitedOtherId])"
-                                               error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                        </label>
-
-                    </div>
-                    <div class="form-group col-md-2">
-                        <div class="btn-group-sm text-right">
-                            <button class="btn btn-primary"
-                                    ng-click="transInfoCtrl.addRequester()" name="addRequester_{{::$id}}"
-                                    id="addRequester_{{::$id}}">{{'ADD_ANOTHER_REQUESTER'|translate}}
-                            </button>
+                <div ng-if="transInfoCtrl.showSolicitedDetail">
+                    <section class="panel panel-default">
+                        <header class="panel-heading">
+                            <h5 class="panel-title">{{'SOLICITED_RQ'|translate}}</h5>
+                        </header>
+                        <div class="panel-body">
+                            <cmp-requester-list requesters="transInfoCtrl.transactionModel.requesterList"
+                                                 error-summary-update="transInfoCtrl.updateErrorSummary()"
+                                                 show-error-summary="transInfoCtrl.showSummary"
+                                                 on-update="transInfoCtrl.updateRequesterList(list)"></cmp-requester-list>
                         </div>
-                    </div>
+                    </section>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">

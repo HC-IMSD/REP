@@ -8,6 +8,7 @@
     angular
         .module('transactionInfo',
             ['lifecycleList',
+                'requesterListModule',
                 'filterLists',
                 'hpfbConstants',
                 'ui.bootstrap',
@@ -56,7 +57,8 @@
     function transactionInfoCtrl($scope, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
-        vm.transactionModel = {};
+        vm.transactionModel = {
+        };
         vm.yesNoList = [YES, NO];
         vm.showEctdSection = true;
         vm.showSolicitedDetail = false;
@@ -80,7 +82,6 @@
         vm.showSummary=false;
         vm.$onInit = function () {
             _setIdNames();
-            loadContactData(); //asynch load of contact data
             vm.updateEctdState();
             vm.setSolicitedState();
         };
@@ -197,21 +198,18 @@
                 vm.showSolicitedDetail = true;
             } else {
                 vm.showSolicitedDetail = false;
-                vm.transactionModel.solicitedRequester = "";
-            }
-            vm.setOtherSolicitor();
-        };
-        vm.setOtherSolicitor = function () {
-            if (vm.transactionModel.solicitedRequester.id === OTHER) {
-                vm.showOtherSolicitedDetail = true;
-            } else {
-                vm.showOtherSolicitedDetail = false;
-                vm.transactionModel.otherSolicitedRequester = "";
             }
         };
 
         vm.updateActivityChanges = function () {
             vm.activityEditable = isActivityChangesValue();
+        };
+
+        vm.updateRequesterList = function(list){
+            if(!list) return;
+
+            vm.transactionModel.requesterList = list;
+            //vm.$onChanges(); //todo - do we need it????
         };
 
         /**

@@ -1,6 +1,7 @@
 {
   "Y": "Oui",
   "N": "Non",
+  "ADD": "fr_Add",
   "DELETEROW": "fr_Delete Row",
   "SELECTEDROW": "Selected Row",
   "REQUIRED": "(requis)",
