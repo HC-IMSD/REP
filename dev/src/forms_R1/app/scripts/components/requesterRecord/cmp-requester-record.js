@@ -8,6 +8,7 @@
     angular
         .module('requesterRecordModule',
             [   'ui.select',
+                'hpfbConstants',
                 'errorMessageModule'
             ])
 })();
@@ -33,12 +34,11 @@
             }
         });
 
-    requesterRecordController.$inject = ['$scope','$filter','$translate'];
-    function requesterRecordController($scope, $filter, $translate) {
+    requesterRecordController.$inject = ['$scope','$filter','OTHER','$translate'];
+    function requesterRecordController($scope, $filter, OTHER, $translate) {
         var vm = this;
 
-        vm.model = {"id": "", "en": "", "otherRequesterDetails":""};
-        vm.countries=[];
+        vm.model = {"sequenceNumber": "", "solicitedRequester": "", "otherRequesterDetails":"", display: ""};
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.showDetailErrors=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
@@ -52,15 +52,15 @@
          * Updates the display value for the object for summary display
          */
         vm.requesterChanged = function($item, $model){
-            vm.model.display=$model.id; //todo????
+            vm.model.display=$item.en;
             vm.setOtherSolicitor();
         };
 
 
         vm.$onChanges = function (changes) {
-            if(changes.countryList){  //todo ????
-                vm.countries=changes.countryList.currentValue;
-            }
+          /*  if(changes.requesterList){
+                vm.requesters = changes.requesterList.currentValue;
+           } */
             if (changes.record && changes.record.currentValue) {
                 vm.model = changes.record.currentValue;
             }
@@ -71,7 +71,7 @@
         };
 
         vm.deleteRecord = function()  {
-            vm.onDelete({id: vm.model.id})
+            vm.onDelete({id: vm.model.sequenceNumber})
         };
 
         vm.showError = function (ctrl) {
@@ -80,7 +80,7 @@
         };
 
         vm.setOtherSolicitor = function () {
-            if (vm.model.solicitedRequester.en === OTHER) { //todo ???? or vm.model.en
+            if (vm.model.solicitedRequester.id === OTHER) {
                 vm.showOtherSolicitedDetail = true;
             } else {
                 vm.showOtherSolicitedDetail = false;

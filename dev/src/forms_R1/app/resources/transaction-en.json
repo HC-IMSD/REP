@@ -131,6 +131,8 @@
   "SEQUENCE_INSTRUCT":"Sequence Number Instructions",
   "CONTROL_INSTRUCT":"Control Number Instructions",
   "COMPANY_INSTRUCT":"Company Name Instructions",
+  "COMPANY_ID_INSTRUCT":"Company ID Instructions",
+  "DOSSIER_ID_INSTRUCT":"Dossier ID Instructions",
   "PLEASE_REMIT":"Please include the remission processing fee of $578.",
   "APPLY_DEFER":"You are applying for a deferral. Please send no payment with this form.",
   "BANK_DRAFT":"International Bank Draft",

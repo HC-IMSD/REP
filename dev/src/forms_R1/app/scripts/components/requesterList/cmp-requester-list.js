@@ -39,12 +39,12 @@
         vm.columnDef = [
             {
                 label: "Requester Name",
-                binding: "name",
+                binding: "display",
                 width: "100"
             }
         ];
 
-        vm.emptyModel = {"id": "", "en": "", "otherRequesterDetails":""};
+        vm.emptyModel = {"sequenceNumber": "", "solicitedRequester": "", "otherRequesterDetails":"", display: ""};
 
 
         vm.$onInit = function () {
@@ -70,7 +70,7 @@
         vm.addNew = function () {
             var maxID = getListMaxID();
             var item = angular.copy(vm.emptyModel);
-            item.id = (getListMaxID() + 1);
+            item.sequenceNumber = (getListMaxID() + 1);
             (vm.model.list).push(item);
             setRecord(-1);
             vm.resetToCollapsed = !vm.resetToCollapsed;
@@ -89,7 +89,7 @@
 
 
             var idx = vm.model.list.indexOf(
-                $filter('filter')(vm.model.list, {id: _id}, true)[0]
+                $filter('filter')(vm.model.list, {sequenceNumber: _id}, true)[0]
             );
             if (idx < 0) return;
 
@@ -111,8 +111,8 @@
             var list = vm.model.list;
             if (list) {
                 for (var i = 0; i < list.length; i++) {
-                    if (list[i].id > out) {
-                        out = list[i].id;
+                    if (list[i].sequenceNumber > out) {
+                        out = list[i].sequenceNumber;
                     }
                 }
             }

@@ -66,7 +66,7 @@
         vm.activityEditable = true;
         vm.isEctd = false;
         vm.requesterList = [];
-        vm.alerts = [false, false, false, false, false];
+        vm.alerts = [false, false, false, false, false, false, false];
         vm.requesterList = [];
         vm.lang=ENGLISH;
         vm.sequenceChange=false;
@@ -208,7 +208,7 @@
         vm.updateRequesterList = function(list){
             if(!list) return;
 
-            vm.transactionModel.requesterList = list;
+            vm.transactionModel.solicitedRequesterReord = list;
             //vm.$onChanges(); //todo - do we need it????
         };
 

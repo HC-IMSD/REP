@@ -32,6 +32,11 @@
                                 <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
                                     <span class="field-name">{{::"COMPANY_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <button title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
+                                            class="btn rep-help-button-primary btn-xs"
+                                            id="comp-id-instructions-toggle" ng-click="transInfoCtrl.addInstruct(5)"><span
+                                            class="fa fa-question-circle fa-2x"></span>
+                                    </button>
                                     <input type="text" id="{{::transInfoCtrl.companyId}}" name="{{::transInfoCtrl.companyId}}"
                                            ng-model="transInfoCtrl.transactionModel.ectd.companyId"
                                            class="form-control" maxlength="6" size="6" required ng-minlength="5"/>
@@ -45,6 +50,11 @@
                                 <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                     <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <button title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
+                                            class="btn rep-help-button-primary btn-xs"
+                                            id="dossier-id-instructions-toggle" ng-click="transInfoCtrl.addInstruct(6)"><span
+                                            class="fa fa-question-circle fa-2x"></span>
+                                    </button>
                                     <div class="rep-input-group">
                                         <span class="input-group-addon">HC6-024-</span>
                                         <div ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
@@ -58,6 +68,35 @@
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.dossierId])"
                                                        error-types="transInfoCtrl.min7Error"></cmp-error-message>
                                 </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <cmp-alert ui-state="transInfoCtrl.alerts[5]" msg="COMPANY_ID_INSTRUCT"
+                                           update-state="transInfoCtrl.closeAlert(5)" type="alert-info">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!transInfoCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-en.html'">
+                                        </div>
+                                        <div ng-if="transInfoCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-fr.html'">
+                                        </div>
+                                    </section>
+                                </cmp-alert>
+                            </div>
+
+                            <div>
+                                <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="PRODUCT_INSTRUCT"
+                                           update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!transInfoCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-en.html'">
+                                        </div>
+                                        <div ng-if="transInfoCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-fr.html'">
+                                        </div>
+                                    </section>
+                                </cmp-alert>
                             </div>
                         </div>
                         <div class="row">
@@ -272,7 +311,7 @@
                                 class="fa fa-question-circle fa-2x"></span>
                         </button>
                     </div>
-                    <h2 class="panel-title">{{::'REG_ACT_CONTACT' |translate}}</h2>
+                    <h2 class="panel-title">{{::'REG_CONTACT_THIS' |translate}}</h2>
                 </header>
                 <div class="panel-body">
                     <div>
@@ -290,7 +329,6 @@
                     </div>
                     <div>
                         <fieldset>
-                            <label>{{::'REG_CONTACT_THIS'|translate}}</label>
                             <div class="row">
                                 <div class="col-md-12">
                                     <h5>{{::'COMPANY_INFO'|translate}}</h5>

@@ -104,6 +104,8 @@
   "SEQUENCE_INSTRUCT":"fr_Sequence Number Instructions",
   "CONTROL_INSTRUCT":"fr_Control Number Instructions",
   "COMPANY_INSTRUCT":"fr_Company Name Instructions",
+  "COMPANY_ID_INSTRUCT":"fr_Company ID Instructions",
+  "DOSSIER_ID_INSTRUCT":"fr_Dossier ID Instructions",
   "PLEASE_REMIT":"fr_Please include the remission processing fee of $578.",
   "APPLY_DEFER":"fr_You are applying for a deferral. Please send no payment with this form.",
   "BANK_DRAFT":"fr_International Bank Draft",

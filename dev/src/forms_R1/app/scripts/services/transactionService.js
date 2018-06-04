@@ -57,6 +57,7 @@
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
             this.xslFileName = "REP_RT_2_0.xsl";
+            this.requesterList = getContactLists.getInternalContacts();
         }
 
         TransactionService.prototype = {
@@ -101,9 +102,8 @@
                 var ectd = this._transformEctdToFile(jsonObj.ectd);
                 resultJson.TRANSACTION_ENROL.ectd = ectd;
                 resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                //todo - update ???
-                resultJson.TRANSACTION_ENROL.solicited_requesters = this._transformReqToFile(jsonObj.requesterList);
-
+                resultJson.TRANSACTION_ENROL.solicited_requester_record =
+                    this._transformReqToFile(jsonObj.solicitedRequesterReord);
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_fees = jsonObj.isFees;
@@ -117,7 +117,6 @@
                 resultJson.TRANSACTION_ENROL.confirm_regulatory_contact = jsonObj.confirmContactValid === true ? 'Y' : 'N'; //this may no longer be needed
                 return (resultJson);
             },
-
 
             /**
              *
@@ -144,9 +143,27 @@
                 return (requesters);
             },
             _transformReqFromFile: function (model, jsonObj) {
-                model.ectd = _getEmptyEctdSection();
-                if (model.isEctd) {
-                    model.requesterList = this._mapLifecycleList(jsonObj.lifecycle_record);
+                model.solicitedRequesterReord = [];
+                if (model.isSolicited) {
+                    if (!jsonObj) return model.solicitedRequesterReord;
+                    if (!(jsonObj instanceof Array)) {
+                        //make it an array, case there is only one record
+                        jsonObj = [jsonObj];
+                    }
+                    for (var i = 0; i < jsonObj.length; i++) {
+                        var record = {};
+                        record.sequenceNumber = Number(jsonObj[i].sequence_number);
+                        record.otherRequesterDetails = jsonObj[i].other_details;
+                        if (jsonObj[i].solicited_requester) {
+                            getContactLists.getInternalContacts().then(function (data) {
+                                record.solicitedRequester =
+                                    $filter('findListItemById')(data,
+                                        {id: jsonObj[i].solicited_requester.__text})[0];
+                            });
+                            record.display = jsonObj[i].solicited_requester.__text;
+                        }
+                        model.solicitedRequesterReord.push(record);
+                    }
                 }
             },
 
@@ -192,12 +209,7 @@
 
                 if(jsonObj.importFileType === HCSC ) {
                     model.isSolicited = jsonObj.is_solicited;
-                    model.solicitedRequester = "";
-                    if (jsonObj.solicited_requester) {
-                        getContactLists.getInternalContacts().then(function (data) {
-                            model.solicitedRequester = $filter('filter')(data, {id: jsonObj.solicited_requester.__text})[0];
-                        })
-                    }
+                    this._transformReqFromFile(model, jsonObj.solicited_requester_record);
                     model.projectManager1 = jsonObj.regulatory_project_manager1;
                     model.projectManager2 = jsonObj.regulatory_project_manager2;
                     model.isFees = jsonObj.is_fees;
@@ -506,9 +518,13 @@
         var requesterRec = {};
         if (requesterObj) {
             requesterRec = {
-                _label_en: requesterObj.solicitedRequester.en,
-                _label_fr: requesterObj.solicitedRequester.en,
-                __text: requesterObj.solicitedRequester.id
+                sequence_number: requesterObj.sequenceNumber,
+                solicited_requester: {
+                    _label_en: requesterObj.solicitedRequester.en,
+                    _label_fr: requesterObj.solicitedRequester.en,
+                    __text: requesterObj.solicitedRequester.id
+                },
+                other_details: requesterObj.otherRequesterDetails
             }
         }
         return (requesterRec);
@@ -720,8 +736,7 @@
                 lifecycleRecord: []
             },
             isSolicited: "",
-            requesterList: [],
-            solicitedRequester: "",
+            solicitedRequesterReord: [],
             projectManager1: "",
             projectManager2: "",
             isFees: "",
