@@ -10,7 +10,7 @@
                 <fieldset>
                     <legend>{{::'LIFE_REC' | translate}}&nbsp;</legend>
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label for="sequenceNumber_{{::$id}}">
                                 <span class="field-name">{{"SEQUENCE_NUM" |translate}}</span>
                                 <button title="{{::'EXPAND'|translate}} {{::'SEQUENCE_INSTRUCT'|translate}}"
@@ -28,7 +28,7 @@
                             <label for="{{::lifecycleCtrl.dateSubId}}" class="required">
                                 <span class="field-name">{{::"DATE_SUBMITTED" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <div class="input-group rep-input-group">
+                                <div class="input-group rep-input-group rep-margin-top-12">
                                     <input id="{{::lifecycleCtrl.dateSubId}}" type="text" class="form-control rep-normal-font"
                                            uib-datepicker-popup
                                            show-button-bar="false" datepicker-options="lifecycleCtrl.dateOptions"
@@ -70,35 +70,54 @@
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId])"
                                                    error-types="lifecycleCtrl.minLength6Error"></cmp-error-message>
                             </label>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <cmp-alert ui-state="lifecycleCtrl.alerts[0]" msg="SEQUENCE_INSTRUCT"
+                                           update-state="lifecycleCtrl.closeAlert(0)" type="alert-info">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!lifecycleCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-en.html'">
+                                        </div>
+                                        <div ng-if="lifecycleCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-fr.html'">
+                                        </div>
+                                    </section>
+                                </cmp-alert>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
+                                           update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!lifecycleCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
+                                        </div>
+                                        <div ng-if="lifecycleCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
+                                        </div>
+                                    </section>
+                                </cmp-alert>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-12">
-                            <cmp-alert ui-state="lifecycleCtrl.alerts[0]" msg="SEQUENCE_INSTRUCT"
-                                       update-state="lifecycleCtrl.closeAlert(0)" type="alert-info">
-                                <section aria-live="assertive">
-                                    <div ng-if="!lifecycleCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-en.html'">
-                                    </div>
-                                    <div ng-if="lifecycleCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-fr.html'">
-                                    </div>
-                                </section>
-                            </cmp-alert>
+                        <div class="col-xs-4"
+                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId].$invalid}">
+                            <div class="form-group">
+                                <label for="{{::lifecycleCtrl.activityLeadId}}" class="required">
+                                    <span class="field-name"> {{::'ACTIVITY_LEAD' |translate}}</span>
+                                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <select class="form-control" id="{{::lifecycleCtrl.activityLeadId}}"
+                                            ng-options="lead |translate for lead in lifecycleCtrl.leadList | orderByTranslated"
+                                            name="{{::lifecycleCtrl.activityLeadId}}" ng-change="lifecycleCtrl.selectActivityList()"
+                                            ng-model="lifecycleCtrl.activityRoot.regActivityLead" required></select>
+                                    <cmp-error-message field-name="lifecycleCtrl.activityLeadId"
+                                                       form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                       show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId])"
+                                                       error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
+                                </label>
+                            </div>
                         </div>
-                        <div class="form-group col-md-12">
-                            <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
-                                       update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
-                                <section aria-live="assertive">
-                                    <div ng-if="!lifecycleCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
-                                    </div>
-                                    <div ng-if="lifecycleCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
-                                    </div>
-                                </section>
-                            </cmp-alert>
-                        </div>
-                    </div>
                     </div>
                     <div class="row">
                         <div class="form-group  col-md-7"

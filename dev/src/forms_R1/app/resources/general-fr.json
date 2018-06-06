@@ -60,5 +60,6 @@
   "PROD_NAME":"fr_Product Name",
   "PROD_NAME_HELP":"fr_Product Name Instructions",
   "PROP_NAME_HELP":"fr_Proper, Common or Non-proprietary Name Instructions",
-  "RELATED_INFO_HELP":"fr_Related Information Instructions"
+  "RELATED_INFO_HELP":"fr_Related Information Instructions",
+  "DOSSIER_TYPE": "fr_Dossier Type"
 }

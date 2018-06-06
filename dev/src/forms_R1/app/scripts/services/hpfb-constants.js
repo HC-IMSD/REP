@@ -15,6 +15,8 @@
         .constant('NO', 'N')
         .constant('USA','USA')
         .constant("UNKNOWN","UNKNOWN")
+        .constant("NEW","New")
+        .constant("EXISTING","Existing")
         .constant("ENGLISH","en")
         .constant("FRENCH","fr")
         .constant("NEW_TYPE","NEW")

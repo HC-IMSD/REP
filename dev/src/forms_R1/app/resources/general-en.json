@@ -64,5 +64,6 @@
   "PROD_NAME":"Product Name",
   "PROD_NAME_HELP":"Product Name Instructions",
   "PROP_NAME_HELP":"Proper, Common or Non-proprietary Name Instructions",
-  "RELATED_INFO_HELP":"Related Information Instructions"
+  "RELATED_INFO_HELP":"Related Information Instructions",
+  "DOSSIER_TYPE": "Dossier Type"
 }

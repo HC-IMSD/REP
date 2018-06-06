@@ -53,21 +53,25 @@
             }
         });
 
-    transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES','NO' ,'getContactLists','ENGLISH','FRENCH'];
-    function transactionInfoCtrl($scope, OTHER, YES,NO, getContactLists,ENGLISH,FRENCH) {
+    transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES', 'NO', 'NEW', 'EXISTING', 'getContactLists', 'getRoleLists', 'ENGLISH', 'FRENCH'];
+    function transactionInfoCtrl($scope,OTHER,YES,NO,NEW,EXISTING,getContactLists,getRoleLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {
         };
         vm.yesNoList = [YES, NO];
+        vm.newExistingList = [NEW, EXISTING];
+        vm.showNewActivityFields = false;
+        vm.showThirdPartyNote = false;
+        vm.showAdminSub = false;
         vm.showEctdSection = true;
         vm.showSolicitedDetail = false;
         vm.showOtherSolicitedDetail = false;
         vm.activityEditable = true;
         vm.isEctd = false;
+        vm.alerts = [false, false, false, false, false, false, false, false];
         vm.requesterList = [];
-        vm.alerts = [false, false, false, false, false, false, false];
-        vm.requesterList = [];
+        vm.formTypeList = getRoleLists.getFormTypes();
         vm.lang=ENGLISH;
         vm.sequenceChange=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
@@ -84,6 +88,7 @@
             _setIdNames();
             vm.updateEctdState();
             vm.setSolicitedState();
+            loadAdminSubData();
         };
 
 
@@ -151,6 +156,15 @@
             }
             return false;
         };
+
+        vm.updateActivityType = function () {
+            vm.showNewActivityFields = isNewActivity();
+        };
+
+        vm.setThirdParty = function () {
+            vm.showThirdPartyNote = (vm.transactionModel.isThirdParty === YES);
+        };
+
         vm.updateEctdState = function () {
             if (isEctdValue()) {
                 vm.isEctd = true;
@@ -159,12 +173,12 @@
             }
         };
         vm.updateFeeState=function(){
-          if(vm.transactionModel.isFees===YES){
-              vm.transactionModel.feeDetails=vm.getFee();
+          if(vm.transactionModel.isFees === YES){
+              vm.transactionModel.feeDetails = vm.getFee();
 
           }else{
               //clear out all the fee details
-              vm.transactionModel.feeDetails=null;
+              vm.transactionModel.feeDetails = null;
           }
 
         };
@@ -180,6 +194,17 @@
             return vm.transactionModel.isActivityChanges === YES;
         }
 
+        function isNewActivity() {
+            return vm.transactionModel.activityType === NEW;
+        }
+
+        function loadAdminSubData() {
+            getContactLists.getAdminSubType()
+                .then(function (data) {
+                    vm.adminSubTypeList = data;
+                    return true;
+                });
+        }
 
         function loadContactData() {
             getContactLists.getInternalContacts()
@@ -210,6 +235,18 @@
 
             vm.transactionModel.solicitedRequesterReord = list;
             //vm.$onChanges(); //todo - do we need it????
+        };
+
+        /**
+         * Sets the visibility and state of the related activities
+         */
+        vm.setAdminSubmission = function () {
+            if (vm.transactionModel.isAdminSub === YES) {
+                vm.showAdminSub = true;
+            } else {
+                vm.showAdminSub = false;
+                vm.transactionModel.subType = "";
+            }
         };
 
         /**
@@ -260,6 +297,13 @@
             vm.companyNameId="company_noabbrev"+scopeId;
             vm.contactSameId="confirm_contact_valid"+scopeId;
             vm.isFeesId="is_fee_transaction"+scopeId;
+            vm.typeId="dossier_type"+ scopeId;
+            vm.isNewActivityId="is_new_activity"+ scopeId;
+            vm.thirdPartyId = "is_signed_3rd_party" + scopeId;
+            vm.isAdminSubId = "is_admin_submission" + scopeId;
+            vm.adminSubTypeId = "admin_sub_type" + scopeId;
+            vm.isPriorityId = "is_priority" + scopeId;
+            vm.isNocId = "is_noc" + scopeId;
         }
 
 }

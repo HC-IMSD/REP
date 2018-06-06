@@ -63,6 +63,7 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.yearList = _createYearList();
         vm.descriptionObj=TransactionLists.getTransactionDescriptions();
+        vm.leadList = TransactionLists.getActivityLeadList();
 
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
@@ -687,6 +688,7 @@
             vm.yearId="year_change"+scopeId;
             vm.descriptId="brief_desc"+scopeId;
             vm.versionId="version_no"+scopeId;
+            vm.activityLeadId = "activity_lead" + scopeId;
         }
 
 

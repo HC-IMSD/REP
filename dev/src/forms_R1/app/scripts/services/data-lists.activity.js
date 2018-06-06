@@ -25,6 +25,13 @@
         var vm = this;
         vm.raTypeArray = [];
         vm.feeTypeArray = [];
+
+        /** Lead values. Hard coded as different lists need to be   **/
+        vm.BIOLOGICAL = "B14-20160301-02"; //biological
+        vm.CONSUMERHEALTH="B14-20160301-11"; //Consumer Health Products
+        vm.PHARMA="B14-20160301-09"; //pharmaceutical
+        vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
+
         vm.allActivities = {
             ADMINISTRATIVE: "ADMINISTRATIVE", //administrative
             BENEFIT_RISK_ASSESS: "BENEFIT_RISK_ASSESS", //benefit risk assessment
@@ -84,7 +91,7 @@
             DATA_PROTECT_CORRESP: "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
             NONCLIN_CLARIF_RESPONSE: "NONCLIN_CLARIF_RESPONSE", //response to Nonclinical clarification request
             SEQUENCE_CLEANUP:"SEQUENCE_CLEANUP"
-        }
+        };
 
 
         var service = {
@@ -127,7 +134,8 @@
             getPRSNDSType: _getPRSNDSArray,
             getYesNoList: yesNoArray,
             getFeeList: _getfeeTypeArray,
-            createFeeTypes: _createFeeArray
+            createFeeTypes: _createFeeArray,
+            getActivityLeadList: _getActivityLeadArray
         };
         return service;
 
@@ -996,6 +1004,21 @@
             ]);
         }
 
+        /**
+         * Gets the activity lead array. Hard coded as the biological entry has business logic
+         * @returns {string[]}
+         * @private
+         */
+        function _getActivityLeadArray() {
+            return (
+                [
+                    vm.PHARMA, //Pharmaceutical
+                    vm.BIOLOGICAL, //Biological
+                    vm.POSTMARKET, //Post-Market Pharmacovigilance
+                    vm.CONSUMERHEALTH //Consumer Health Products
+                ]
+            );
+        }
 
     }
 })();

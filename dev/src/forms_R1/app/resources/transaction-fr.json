@@ -73,7 +73,7 @@
   "REG_CONTACT_THIS": "fr_Regulatory Activity Contact for THIS transaction",
   "REG_ACT_CONTACT": "fr_Regulatory Activity Contact",
   "TRANSACTION_HDING": "fr_Regulatory Transaction Enrolment",
-  "LOAD_TRANSACTION": "fr_Load a Regulatory Transaction Enrolment File",
+  "LOAD_TRANSACTION": "fr_Load a Regulatory Transaction File",
   "GENERATE_FINAL": "fr_Generate Final XML",
   "CONFIRM_CONTACT_VALID": "fr_I confirm that the above regulatory activity contact information is valid.",
   "YEAR_CHANGE": "fr_Year of the change, List Description",
@@ -106,6 +106,7 @@
   "COMPANY_INSTRUCT":"fr_Company Name Instructions",
   "COMPANY_ID_INSTRUCT":"fr_Company ID Instructions",
   "DOSSIER_ID_INSTRUCT":"fr_Dossier ID Instructions",
+  "ADMIN_COMP_INSTRUCT": "fr_Administrative Submission or Component Instructions",
   "PLEASE_REMIT":"fr_Please include the remission processing fee of $578.",
   "APPLY_DEFER":"fr_You are applying for a deferral. Please send no payment with this form.",
   "BANK_DRAFT":"fr_International Bank Draft",
@@ -122,6 +123,18 @@
   "SAVELIFEREC": "fr_At least one lifecycle record is required to save.",
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"fr_with a Lifecycle Record",
   "IS_FEE_TRANSACTION":"fr_Are new or revised fees associated with this transaction?",
-  "OTHER_DOC_DETAILS": "fr_Other Documentation Details"
-
+  "IS_NEW_ACTIVITY":"fr_Is this transaction for a new or existing regulatory activity?",
+  "IS_SIGNED_3RD_PARTY": "fr_Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
+  "AUT_LETTER_NOTE": "fr_Please ensure a letter of authorization signed by the manufacturer/sponsor company must be provided in folder 1.2.6 of the eCTD sequence for each regulatory activity.",
+  "IS_PRIORITY":"fr_Was this regulatory activity approved for priority review?",
+  "IS_NOC":"fr_Was this regulatory activity approved for NOC/C review?",
+  "IS_ADMIN_SUBMISSION": "fr_Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?",
+  "ADMIN_DESCRIPT":"fr_Administrative Submission Type Description",
+  "ADMIN_SUB_TYPE":"fr_Administrative submission type",
+  "ACTIVITY_LEAD": "fr_Regulatory Activity Lead",
+  "OTHER_DOC_DETAILS": "fr_Other Documentation Details",
+  "B14-20160301-09":	"Pharmaceutical",
+  "B14-20160301-02":	"Biological",
+  "B14-20160301-10":	"Post-Market Pharmacovigilance",
+  "B14-20160301-11":	"Consumer Health Products"
 }

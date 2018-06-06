@@ -156,12 +156,13 @@
     function getSalService($filter, $q, $http,$translate, OTHER, FRENCH,RELATIVE_FOLDER_DATA) {
         var vm = this;
         vm.internalContacts = [];
+        vm.adminSubTypeArray = [];
         var service = {
             getSalutationList: getSalValuesArray,
             getLanguages: getLanguagesValuesArray, //TODO make constants
             createInternalContacts: _createInternalContacts,
-            getInternalContacts: _getInternalContacts
-
+            getInternalContacts: _getInternalContacts,
+            getAdminSubType: _getAdminSubType
         };
         return service;
 
@@ -225,6 +226,29 @@
                 result.push(sortedObject);
             });
             return result;
+        }
+
+        function _getAdminSubType() {
+
+            if (!vm.adminSubTypeArray || vm.adminSubTypeArray.length === 0) {
+                return _loadAdminType()
+            } else {
+                return (vm.adminSubTypeArray);
+            }
+        }
+
+        function _loadAdminType() {
+            var deferred = $q.defer();
+            var url = RELATIVE_FOLDER_DATA+"adminSubType.json";
+            $http.get(url).success(function (data, status, headers, config) {
+                var lang = $translate.proposedLanguage() || $translate.use();
+                var newList = _createSortedArray(data, lang);
+                vm.adminSubTypeArray = newList;
+                deferred.resolve(newList);
+            }).error(function (data, status, headers, config) {
+                deferred.reject(status);
+            });
+            return deferred.promise;
         }
 
     }

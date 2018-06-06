@@ -23,6 +23,12 @@
     //version 1.3 Chnage Lifecycle Rec associations of Sequence Clean-up and Notification of interruption of sale
 
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO, HCSC) {
+        //var vm = this;
+        this.baseRequesters = [];
+        this.$onInit = function () {
+            loadContactData();
+        };
+
         function TransactionService() {
             //construction logic
             var defaultTransactionData = _getEmptyTransactionModel();
@@ -57,7 +63,14 @@
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
             this.xslFileName = "REP_RT_2_0.xsl";
-            this.requesterList = getContactLists.getInternalContacts();
+        }
+
+        function loadContactData() {
+            getContactLists.getInternalContacts()
+                .then(function (data) {
+                    this.baseRequesters = data;
+                    return true;
+                });
         }
 
         TransactionService.prototype = {
@@ -155,12 +168,8 @@
                         record.sequenceNumber = Number(jsonObj[i].sequence_number);
                         record.otherRequesterDetails = jsonObj[i].other_details;
                         if (jsonObj[i].solicited_requester) {
-                            getContactLists.getInternalContacts().then(function (data) {
-                                record.solicitedRequester =
-                                    $filter('findListItemById')(data,
-                                        {id: jsonObj[i].solicited_requester.__text})[0];
-                            });
-                            record.display = jsonObj[i].solicited_requester.__text;
+                            record.solicitedRequester = jsonObj[i].solicited_requester;
+                            record.display = jsonObj[i].solicited_requester._label_en;
                         }
                         model.solicitedRequesterReord.push(record);
                     }
@@ -219,7 +228,7 @@
                     }
                 } else {
                     model.isSolicited = "";
-                    model.solicitedRequester = "";
+                    model.solicitedRequesterReord = [];
                     model.projectManager1 = "";
                     model.projectManager2 = "";
                     model.isFees = "";
@@ -727,7 +736,13 @@
         var defaultTransactionData = {
             dataChecksum: "",
             dateSaved: "",
-            softwareVersion: "1.0.0",
+            softwareVersion: "2.0.0",
+            activityType: "",
+            isThirdParty: "",
+            isPriority: "",
+            isNoc: "",
+            isAdminSub: "",
+            subType: "",
             isEctd: "Y",
             ectd: {
                 companyId: "",
