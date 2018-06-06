@@ -28,8 +28,8 @@
 
         /** Lead values. Hard coded as different lists need to be   **/
         vm.BIOLOGICAL = "B14-20160301-02"; //biological
-        vm.CONSUMERHEALTH="B14-20160301-11"; //Consumer Health Products
-        vm.PHARMA="B14-20160301-09"; //pharmaceutical
+        vm.CONSUMERHEALTH = "B14-20160301-06"; //Consumer Health Products
+        vm.PHARMA = "B14-20160301-09"; //pharmaceutical
         vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
 
         vm.allActivities = {

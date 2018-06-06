@@ -133,8 +133,8 @@
   "ADMIN_SUB_TYPE":"fr_Administrative submission type",
   "ACTIVITY_LEAD": "fr_Regulatory Activity Lead",
   "OTHER_DOC_DETAILS": "fr_Other Documentation Details",
-  "B14-20160301-09":	"Pharmaceutical",
-  "B14-20160301-02":	"Biological",
-  "B14-20160301-10":	"Post-Market Pharmacovigilance",
-  "B14-20160301-11":	"Consumer Health Products"
+  "B14-20160301-09":	"fr_Pharmaceutical",
+  "B14-20160301-02":	"fr_Biological",
+  "B14-20160301-10":	"fr_Post-Market Pharmacovigilance",
+  "B14-20160301-06":	"fr_Consumer Health Products"
 }
