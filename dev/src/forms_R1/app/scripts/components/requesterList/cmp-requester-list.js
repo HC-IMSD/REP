@@ -39,7 +39,7 @@
         vm.columnDef = [
             {
                 label: "Requester Name",
-                binding: "display",
+                binding: "solicitedRequester",
                 width: "100"
             }
         ];

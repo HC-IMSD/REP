@@ -570,7 +570,8 @@ var transactionServiceFileNames = [
     serviceFileNames.dataLists,
     serviceFileNames.dataListsActivity,
     serviceFileNames.filterLists,
-    serviceFileNames.hpfbConstants
+    serviceFileNames.hpfbConstants,
+    serviceFileNames.activityFormFilterService
 
 ];
 // Template folders

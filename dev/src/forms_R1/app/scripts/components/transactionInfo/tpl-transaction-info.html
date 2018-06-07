@@ -157,7 +157,7 @@
                                 <span class="field-name">{{::"IS_NEW_ACTIVITY" |translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                 <select id="{{::transInfoCtrl.isNewActivityId}}" name="{{::transInfoCtrl.isNewActivityId}}"
-                                        ng-model="transInfoCtrl.transactionModel.activityType"
+                                        ng-model="transInfoCtrl.transactionModel.transactionType"
                                         class="form-control" ng-change="transInfoCtrl.updateActivityType()"
                                         ng-options="choice |translate for choice in transInfoCtrl.newExistingList"
                                         required></select>

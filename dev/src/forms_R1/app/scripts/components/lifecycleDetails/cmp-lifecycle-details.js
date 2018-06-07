@@ -9,6 +9,7 @@
     angular
         .module('lcDetailsModule', [
             'ui.bootstrap',
+            'activityFormFilterModule',
             'errorSummaryModule',
             'errorMessageModule'
         ])
@@ -38,13 +39,18 @@
                 updateErrorSummary:'&' //update the parent error summary
             }
         });
-    lifecycleRecCtrl.$inject = ['TransactionLists', '$translate','$scope'];
+    lifecycleRecCtrl.$inject = ['ActivityFormFilterService', 'TransactionLists', '$filter', '$translate','$scope'];
 
-    function lifecycleRecCtrl(TransactionLists, $translate,$scope) {
+    function lifecycleRecCtrl(ActivityFormFilterService, TransactionLists, $filter, $translate, $scope) {
         var vm = this;
        //s vm.savePressed = false;
 
         vm.activityList=[];
+        vm.activityTypeList=[];
+        vm.pharmaList =[];
+        vm.biolList = [];
+        vm.postMarketList = [];
+        vm.consumHealthList = [];
         vm.sequenceList = [];
         vm.descriptionList = [];
 
@@ -88,7 +94,7 @@
             if (!vm.yearList || vm.yearList.length === 0) {
                 vm.yearList = _createYearList();
             }
-            vm.descriptionObj=TransactionLists.getTransactionDescriptions();
+            //vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         };
 
         /**
@@ -104,6 +110,12 @@
             }
             if(changes.activityTypes){
                 vm.activityList=changes.activityTypes.currentValue;
+                if(vm.activityList) {
+                    vm.pharmaList = ActivityFormFilterService.getPharmaRAList(vm.activityList);
+                    vm.biolList = ActivityFormFilterService.getBiolRAList(vm.activityList);
+                    vm.postMarketList = ActivityFormFilterService.getPostMarketRAList(vm.activityList);
+                    vm.consumHealthList = ActivityFormFilterService.getConsumHealthList(vm.activityList);
+                }
             }
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
@@ -173,8 +185,45 @@
             return true;
         };
 
-
         //TODO move this logic to a service.
+
+        /**
+         * Selects the appropriate activity list based on the activity lead selection
+         * The activity lead  question calls this function
+         */
+        vm.selectActivityList = function(){
+            if(!vm.lifecycleModel.activityLead){
+                vm.activityTypeList=[];
+                return;
+            }
+            switch(vm.lifecycleModel.activityLead){
+                case  TransactionLists.getBiologicalLeadValue():
+                    vm.activityTypeList= vm.biolList;
+                    break;
+                case  TransactionLists.getPharmaLeadValue():
+                    vm.activityTypeList= vm.pharmaList;
+                    break;
+                case  TransactionLists.getPostMarketLeadValue():
+                    vm.activityTypeList= vm.postMarketList;
+                    break;
+                case  TransactionLists.getConsumHealthLeadValue():
+                    vm.activityTypeList= vm.consumHealthList;
+                    break;
+                default:
+                    if(vm.lifecycleModel.activityLead) console.warn("Not a valid lead choice");
+                    vm.activityTypeList=[];
+                    break;
+
+            }
+            //if the value exists in the list set it to the value
+            if(vm.lifecycleModel.activityType) {
+                var temp = $filter('filter')(vm.activityTypeList, {id: vm.lifecycleModel.activityType.id})[0];
+                vm.lifecycleModel.activityType = temp;
+                //vm.updateActivityType(); no need???
+            }
+            vm.updateErrorSummaryState(); // if error summary is visible update it
+        };
+
         /**
          * @ngdoc Method -sets the lifecycle Sequence DescriptionValie
          * @param value
@@ -690,8 +739,6 @@
             vm.versionId="version_no"+scopeId;
             vm.activityLeadId = "activity_lead" + scopeId;
         }
-
-
 
     }
 })();

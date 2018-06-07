@@ -98,6 +98,10 @@
             getTransactionDescriptions: getTransactionDescriptionsArray,
             getActivityTypes: getActivityArray,
             createRaTypes: _createRaArray,
+            getBiologicalLeadValue: _getBiologicalLead,
+            getPharmaLeadValue: _getPharmaLead,
+            getPostMarketLeadValue: _getPostMarketLead,
+            getConsumHealthLeadValue: _getConsumHealthLead,
             getPresubTypes: getPresubArray,
             getAndsType: getANDSArray,
             getDinaType: getDINAArray,
@@ -1018,6 +1022,25 @@
                     vm.CONSUMERHEALTH //Consumer Health Products
                 ]
             );
+        }
+
+        /**
+         * Returns the biological Activity Lead value
+         * @returns {string}
+         * @private
+         */
+        function _getBiologicalLead() {
+            return vm.BIOLOGICAL;
+        }
+        function _getPharmaLead(){
+
+            return vm.PHARMA;
+        }
+        function _getPostMarketLead(){
+            return vm.POSTMARKET;
+        }
+        function _getConsumHealthLead(){
+            return vm.CONSUMERHEALTH;
         }
 
     }

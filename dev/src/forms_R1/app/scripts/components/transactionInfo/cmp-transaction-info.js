@@ -195,7 +195,7 @@
         }
 
         function isNewActivity() {
-            return vm.transactionModel.activityType === NEW;
+            return vm.transactionModel.transactionType === NEW;
         }
 
         function loadAdminSubData() {

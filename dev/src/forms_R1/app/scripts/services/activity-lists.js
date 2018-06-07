@@ -28,7 +28,7 @@
         vm.adminSubTypeArray = [];
         /** Lead values. Hard coded as different lists need to be   **/
         vm.BIOLOGICAL = "B14-20160301-02"; //biological
-        vm.MDF="B14-20160301-07"; //master drug file
+        vm.CONSUMHEALTH="B14-20160301-06"; //consumer health products
         vm.PHARMA="B14-20160301-09"; //pharmaceutical
         vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
 
@@ -46,6 +46,7 @@
             getBiologicalLeadValue: _getBiologicalLead,
             getPharmaLeadValue: _getPharmaLead,
             getPostMarketLeadValue: _getPostMarketLead,
+            getConsumHealthLeadValue: _getConsumHealthLead,
             getSANDSRaTypeValue: _getSANDS_raType,
             getSNDSTypeValue: _getSNDS_raType,
             getNCTypeValue: _getNC_raType,
@@ -174,6 +175,10 @@
         function _getPostMarketLead(){
             return vm.POSTMARKET;
         }
+        function _getConsumHealthLead(){
+            return vm.CONSUMHEALTH;
+        }
+
 
 
         /**

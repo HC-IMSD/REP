@@ -110,7 +110,7 @@
                                     <select class="form-control" id="{{::lifecycleCtrl.activityLeadId}}"
                                             ng-options="lead |translate for lead in lifecycleCtrl.leadList | orderByTranslated"
                                             name="{{::lifecycleCtrl.activityLeadId}}" ng-change="lifecycleCtrl.selectActivityList()"
-                                            ng-model="lifecycleCtrl.activityRoot.regActivityLead" required></select>
+                                            ng-model="lifecycleCtrl.lifecycleModel.activityLead" required></select>
                                     <cmp-error-message field-name="lifecycleCtrl.activityLeadId"
                                                        form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                        show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId])"
@@ -129,7 +129,7 @@
                                         ng-model="lifecycleCtrl.lifecycleModel.activityType"
                                         data-ng-change="lifecycleCtrl.setSequenceList()"
                                         class="form-control full-width" required
-                                        ng-options="activity[lifecycleCtrl.lang] for activity in lifecycleCtrl.activityList track by activity.id">
+                                        ng-options="activity[lifecycleCtrl.lang] for activity in lifecycleCtrl.activityTypeList track by activity.id">
                                 </select>
                                 <cmp-error-message field-name="lifecycleCtrl.regActivityId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"

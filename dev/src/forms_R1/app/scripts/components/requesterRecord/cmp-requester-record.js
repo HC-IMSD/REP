@@ -93,5 +93,27 @@
             vm.solictedRqId="solicited_rq"+scopeId;
             vm.solicitedOtherId="solicited_rq_other"+scopeId;
         }
+
+        /**
+         * Fires on selection OR when the value has changed
+         * A bit of overkill, but avoids using a watch and worksaround the case where autocomplete is considered
+         * In the list but not selected.
+         * @param item
+         * @param model
+         * @param label
+         * @param event
+         */
+        vm.reqSelectionUpdated = function (item, model, label, event) {
+
+            //if no item this means fired from the change event
+
+            if(!item){
+                vm.model.ingId="";
+                vm.model.autoReq = "NO";
+            }else {
+                vm.model.ingId = item.id;
+                vm.model.autoReq = "YES";
+            }
+        };
     }
 })();
