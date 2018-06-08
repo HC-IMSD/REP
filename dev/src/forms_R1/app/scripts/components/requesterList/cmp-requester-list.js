@@ -14,7 +14,7 @@
     angular
         .module('requesterListModule')
         .component('cmpRequesterList', {
-            templateUrl: 'app/scripts/components/requesterlist/tpl-requester-list.html',
+            templateUrl: 'app/scripts/components/requesterList/tpl-requester-list.html',
             controller: requesterListController,
             controllerAs: 'requesterListCtrl',
             bindings: {
