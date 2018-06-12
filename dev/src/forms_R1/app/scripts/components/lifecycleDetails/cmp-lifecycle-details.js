@@ -94,6 +94,7 @@
             if (!vm.yearList || vm.yearList.length === 0) {
                 vm.yearList = _createYearList();
             }
+            vm.selectActivityList();
             //vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         };
 
@@ -102,12 +103,6 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            if (changes.lifecycleRecord) {
-                _updateLocalModel(changes.lifecycleRecord.currentValue);
-            }
-            if (changes.isEctd) {
-                vm.ectd = changes.isEctd.currentValue;
-            }
             if(changes.activityTypes){
                 vm.activityList=changes.activityTypes.currentValue;
                 if(vm.activityList) {
@@ -116,6 +111,12 @@
                     vm.postMarketList = ActivityFormFilterService.getPostMarketRAList(vm.activityList);
                     vm.consumHealthList = ActivityFormFilterService.getConsumHealthList(vm.activityList);
                 }
+            }
+            if (changes.lifecycleRecord) {
+                _updateLocalModel(changes.lifecycleRecord.currentValue);
+            }
+            if (changes.isEctd) {
+                vm.ectd = changes.isEctd.currentValue;
             }
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
@@ -171,6 +172,7 @@
             convertToDate();
             vm.setSequenceList();
             vm.setDetailsState();
+            vm.selectActivityList();
         }
 
         vm.disableDeleteState = function () {

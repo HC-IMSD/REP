@@ -86,6 +86,9 @@
         vm.showSummary=false;
         vm.$onInit = function () {
             _setIdNames();
+            vm.updateActivityType();
+            vm.setThirdParty();
+            vm.setAdminSubmission();
             vm.updateEctdState();
             vm.setSolicitedState();
             loadAdminSubData();
@@ -95,6 +98,9 @@
         vm.$onChanges = function (changes) {
             if (changes.transactionRoot) {
                 vm.transactionModel = changes.transactionRoot.currentValue;
+                vm.updateActivityType();
+                vm.setThirdParty();
+                vm.setAdminSubmission();
                 vm.updateEctdState();
                 vm.setSolicitedState();
             }
@@ -108,7 +114,6 @@
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
             }
-
         };
 
         vm.isFeesIndicated=function() {

@@ -34,8 +34,8 @@
             }
         });
 
-    requesterRecordController.$inject = ['$scope','$filter','OTHER','$translate'];
-    function requesterRecordController($scope, $filter, OTHER, $translate) {
+    requesterRecordController.$inject = ['$scope', '$translate'];
+    function requesterRecordController($scope, $translate) {
         var vm = this;
 
         vm.model = {"sequenceNumber": "", "solicitedRequester": "", "otherRequesterDetails":"", display: ""};
@@ -47,15 +47,6 @@
             vm.showDetailErrors=false;
             _setIdNames();
         };
-
-        /**
-         * Updates the display value for the object for summary display
-         */
-        vm.requesterChanged = function($item, $model){
-            vm.model.display=$item.en;
-            vm.setOtherSolicitor();
-        };
-
 
         vm.$onChanges = function (changes) {
           /*  if(changes.requesterList){
@@ -79,41 +70,9 @@
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
 
-        vm.setOtherSolicitor = function () {
-            if (vm.model.solicitedRequester.id === OTHER) {
-                vm.showOtherSolicitedDetail = true;
-            } else {
-                vm.showOtherSolicitedDetail = false;
-                vm.model.otherRequesterDetails = "";
-            }
-        };
-
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.solictedRqId="solicited_rq"+scopeId;
-            vm.solicitedOtherId="solicited_rq_other"+scopeId;
         }
-
-        /**
-         * Fires on selection OR when the value has changed
-         * A bit of overkill, but avoids using a watch and worksaround the case where autocomplete is considered
-         * In the list but not selected.
-         * @param item
-         * @param model
-         * @param label
-         * @param event
-         */
-        vm.reqSelectionUpdated = function (item, model, label, event) {
-
-            //if no item this means fired from the change event
-
-            if(!item){
-                vm.model.ingId="";
-                vm.model.autoReq = "NO";
-            }else {
-                vm.model.ingId = item.id;
-                vm.model.autoReq = "YES";
-            }
-        };
     }
 })();

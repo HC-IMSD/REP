@@ -109,6 +109,12 @@
                         date_saved: today,
                         software_version: "2.0.0",
                         data_checksum: jsonObj.dataChecksum,
+                        transaction_type: jsonObj.transactionType,
+                        is_third_party: jsonObj.isThirdParty,
+                        is_priority: jsonObj.isPriority,
+                        is_noc: jsonObj.isNoc,
+                        is_admin_sub: jsonObj.isAdminSub,
+                        sub_type: jsonObj.subType,
                         is_ectd: jsonObj.isEctd
                     }
                 };
@@ -166,11 +172,7 @@
                     for (var i = 0; i < jsonObj.length; i++) {
                         var record = {};
                         record.sequenceNumber = Number(jsonObj[i].sequence_number);
-                        record.otherRequesterDetails = jsonObj[i].other_details;
-                        if (jsonObj[i].solicited_requester) {
-                            record.solicitedRequester = jsonObj[i].solicited_requester;
-                            record.display = jsonObj[i].solicited_requester._label_en;
-                        }
+                        record.solicitedRequester = jsonObj[i].solicited_requester;
                         model.solicitedRequesterReord.push(record);
                     }
                 }
@@ -187,6 +189,7 @@
                 var ectd = {};
                 ectd.company_id = jsonObj.companyId;
                 ectd.dossier_id = jsonObj.dossierId;
+                ectd.dossier_type = jsonObj.dossierType;
                 ectd.dossier_name = jsonObj.dossierName;
                 ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
                 return (ectd);
@@ -196,6 +199,7 @@
                 if (model.isEctd) {
                     model.ectd.companyId = jsonObj.company_id;
                     model.ectd.dossierId = jsonObj.dossier_id;
+                    model.ectd.dossierType = jsonObj.dossier_type;
                     model.ectd.dossierName = jsonObj.dossier_name;
                     model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
                 }
@@ -217,6 +221,12 @@
                 model.isEctd = jsonObj.is_ectd;
 
                 if(jsonObj.importFileType === HCSC ) {
+                    model.transactionType = jsonObj.transaction_type;
+                    model.isThirdParty = jsonObj.is_third_party;
+                    model.isPriority = jsonObj.is_priority;
+                    model.isNoc = jsonObj.is_noc;
+                    model.isAdminSub = jsonObj.is_admin_sub;
+                    model.subType = jsonObj.sub_type;
                     model.isSolicited = jsonObj.is_solicited;
                     this._transformReqFromFile(model, jsonObj.solicited_requester_record);
                     model.projectManager1 = jsonObj.regulatory_project_manager1;
@@ -227,6 +237,12 @@
                         model.feeDetails = this._mapFeeDetailsFromOutput(jsonObj.fee_details);
                     }
                 } else {
+                    model.transactionType = "";
+                    model.isThirdParty = "";
+                    model.isPriority = "";
+                    model.isNoc = "";
+                    model.isAdminSub = "";
+                    model.subType = "";
                     model.isSolicited = "";
                     model.solicitedRequesterReord = [];
                     model.projectManager1 = "";
@@ -336,14 +352,13 @@
 
                 for (var i = 0; i < jsonObj.length; i++) {
                     var record = _mapLifecycleRecToOutput(jsonObj[i]);
-                    if (jsonObj.length == 1) {
+                    if (jsonObj.length === 1) {
                         return (record);
                     }
                     result.push(record);
                 }
                 return result
-            }
-            ,
+            },
 
             resetEctdSection: function () {
 
@@ -351,6 +366,7 @@
 
                     this._default.ectd.companyId = "";
                     this._default.ectd.dossierId = "";
+                    this._default.ectd.dossierType = "";
                     this._default.ectd.dossierName = "";
 
                     if (this._default.ectd.lifecycleRecord && this._default.ectd.lifecycleRecord > 0) {
@@ -485,6 +501,7 @@
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
+        lifecycleRec.activityLead = lifecycleObj.activity_lead;
 
         lifecycleRec.activityType = "";
         if (lifecycleObj.sequence_activity_type) {
@@ -508,6 +525,7 @@
         lifecycleRec.sequence_number = lifecycleObj.sequence;
         lifecycleRec.date_filed = lifecycleObj.dateFiled;
         lifecycleRec.control_number = lifecycleObj.controlNumber;
+        lifecycleRec.activity_lead = lifecycleObj.activityLead;
         lifecycleRec.sequence_activity_type = "";
         if (lifecycleObj.activityType) {
             lifecycleRec.sequence_activity_type = {};
@@ -528,12 +546,7 @@
         if (requesterObj) {
             requesterRec = {
                 sequence_number: requesterObj.sequenceNumber,
-                solicited_requester: {
-                    _label_en: requesterObj.solicitedRequester.en,
-                    _label_fr: requesterObj.solicitedRequester.en,
-                    __text: requesterObj.solicitedRequester.id
-                },
-                other_details: requesterObj.otherRequesterDetails
+                solicited_requester: requesterObj.solicitedRequester
             }
         }
         return (requesterRec);
@@ -569,6 +582,7 @@
         var ectd = {};
         ectd.companyId = "";
         ectd.dossierId = "";
+        ectd.dossierType = "";
         ectd.dossierName = "";
         ectd.lifecycleRecord = [];
         return ectd;
@@ -748,6 +762,7 @@
             ectd: {
                 companyId: "",
                 dossierId: "",
+                dossierType: "",
                 dossierName: "",
                 lifecycleRecord: []
             },
@@ -801,7 +816,7 @@
                 billPayment: false
             }
 
-        }
+        };
         return feeObj;
     }
 

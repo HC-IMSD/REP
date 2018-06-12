@@ -75,7 +75,7 @@
                                     <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                     <select class="form-control full-width rep-margin-top-12" id="{{::transInfoCtrl.typeId}}"
-                                            name="{{::transInfoCtrl.typeId}}" required ng-model="transInfoCtrl.transactionModel.dossierType"
+                                            name="{{::transInfoCtrl.typeId}}" required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
                                             ng-options="val |translate for val in  transInfoCtrl.formTypeList">
                                     </select>
                                     <cmp-error-message field-name="transInfoCtrl.typeId"
@@ -455,7 +455,7 @@
                             <h5 class="panel-title">{{'SOLICITED_RQ'|translate}}</h5>
                         </header>
                         <div class="panel-body"> <!--todo:????? requesters="transInfoCtrl.transactionModel.requesterList" -->
-                            <cmp-requester-list requesters="transInfoCtrl.transactionModel.requesterList"
+                            <cmp-requester-list requesters="transInfoCtrl.transactionModel.solicitedRequesterReord"
                                                  error-summary-update="transInfoCtrl.updateErrorSummary()"
                                                  show-error-summary="transInfoCtrl.showSummary"
                                                  on-update="transInfoCtrl.updateRequesterList(list)"></cmp-requester-list>
