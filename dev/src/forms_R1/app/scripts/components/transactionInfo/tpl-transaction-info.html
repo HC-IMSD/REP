@@ -131,7 +131,7 @@
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                 </label>
                                 <textarea id="{{::transInfoCtrl.productNameId}}" name="{{::transInfoCtrl.productNameId}}"
-                                          ng-model="transInfoCtrl.transactionModel.ectd.dossierName"
+                                          ng-model="transInfoCtrl.transactionModel.ectd.productName"
                                           class="full-width" maxlength="256" size="256" required></textarea>
 
                                 <div>
@@ -454,8 +454,8 @@
                         <header class="panel-heading">
                             <h5 class="panel-title">{{'SOLICITED_RQ'|translate}}</h5>
                         </header>
-                        <div class="panel-body"> <!--todo:????? requesters="transInfoCtrl.transactionModel.requesterList" -->
-                            <cmp-requester-list requesters="transInfoCtrl.transactionModel.solicitedRequesterReord"
+                        <div class="panel-body">
+                            <cmp-requester-list list-items="transInfoCtrl.transactionModel.solicitedRequesterReord"
                                                  error-summary-update="transInfoCtrl.updateErrorSummary()"
                                                  show-error-summary="transInfoCtrl.showSummary"
                                                  on-update="transInfoCtrl.updateRequesterList(list)"></cmp-requester-list>

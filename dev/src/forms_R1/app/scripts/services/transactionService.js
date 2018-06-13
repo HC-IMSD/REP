@@ -42,7 +42,7 @@
                 ectd: {
                     companyId: "",
                     dossierId: "",
-                    dossierName: "",
+                    productName: "",
                     lifecycleRecord: []
                 },
                 isSolicited: "",
@@ -190,7 +190,7 @@
                 ectd.company_id = jsonObj.companyId;
                 ectd.dossier_id = jsonObj.dossierId;
                 ectd.dossier_type = jsonObj.dossierType;
-                ectd.dossier_name = jsonObj.dossierName;
+                ectd.product_name = jsonObj.productName;
                 ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
                 return (ectd);
             },
@@ -200,7 +200,7 @@
                     model.ectd.companyId = jsonObj.company_id;
                     model.ectd.dossierId = jsonObj.dossier_id;
                     model.ectd.dossierType = jsonObj.dossier_type;
-                    model.ectd.dossierName = jsonObj.dossier_name;
+                    model.ectd.productName = jsonObj.product_name;
                     model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
                 }
             },
@@ -367,7 +367,7 @@
                     this._default.ectd.companyId = "";
                     this._default.ectd.dossierId = "";
                     this._default.ectd.dossierType = "";
-                    this._default.ectd.dossierName = "";
+                    this._default.ectd.productName = "";
 
                     if (this._default.ectd.lifecycleRecord && this._default.ectd.lifecycleRecord > 0) {
                         this._default.ectd.lifecycleRecord = [this._default.ectd.lifecycleRecord[0]];
@@ -583,7 +583,7 @@
         ectd.companyId = "";
         ectd.dossierId = "";
         ectd.dossierType = "";
-        ectd.dossierName = "";
+        ectd.productName = "";
         ectd.lifecycleRecord = [];
         return ectd;
     }
@@ -763,7 +763,7 @@
                 companyId: "",
                 dossierId: "",
                 dossierType: "",
-                dossierName: "",
+                productName: "",
                 lifecycleRecord: []
             },
             isSolicited: "",
