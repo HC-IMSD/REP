@@ -171,7 +171,7 @@
                     }
                     for (var i = 0; i < jsonObj.length; i++) {
                         var record = {};
-                        record.sequenceNumber = Number(jsonObj[i].sequence_number);
+                        record.sequenceNumber = Number(jsonObj[i].solicited_requester_sequence);
                         record.solicitedRequester = jsonObj[i].solicited_requester;
                         model.solicitedRequesterReord.push(record);
                     }
@@ -501,7 +501,7 @@
         lifecycleRec.sequence = lifecycleObj.sequence_number;
         lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
-        lifecycleRec.activityLead = lifecycleObj.activity_lead;
+        lifecycleRec.activityLead = lifecycleObj.sequence_activity_lead;
 
         lifecycleRec.activityType = "";
         if (lifecycleObj.sequence_activity_type) {
@@ -525,7 +525,7 @@
         lifecycleRec.sequence_number = lifecycleObj.sequence;
         lifecycleRec.date_filed = lifecycleObj.dateFiled;
         lifecycleRec.control_number = lifecycleObj.controlNumber;
-        lifecycleRec.activity_lead = lifecycleObj.activityLead;
+        lifecycleRec.sequence_activity_lead = lifecycleObj.activityLead;
         lifecycleRec.sequence_activity_type = "";
         if (lifecycleObj.activityType) {
             lifecycleRec.sequence_activity_type = {};
@@ -545,7 +545,7 @@
         var requesterRec = {};
         if (requesterObj) {
             requesterRec = {
-                sequence_number: requesterObj.sequenceNumber,
+                solicited_requester_sequence: requesterObj.sequenceNumber,
                 solicited_requester: requesterObj.solicitedRequester
             }
         }

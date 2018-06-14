@@ -16,14 +16,22 @@
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="software_version" type="hpfb:string"/>
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
+	<hpfb:element name="transaction_type" type="hpfb:string"/>
+	<hpfb:element name="is_third_party" type="required_yes_no_content"/>
+	<hpfb:element name="is_priority" type="required_yes_no_content"/>
+	<hpfb:element name="is_noc" type="required_yes_no_content"/>
+	<hpfb:element name="is_admin_sub" type="required_yes_no_content"/>
+	<hpfb:element name="sub_type" type="sub_type_content"/>
 	<hpfb:element name="is_ectd" type="required_yes_no_content"/>
 	<hpfb:element name="ectd" type="ectd_content"/>
 	<hpfb:element name="company_id" type="char_0_6_content"/>
 	<hpfb:element name="dossier_id" type="char_0_20_content"/>
-	<hpfb:element name="dossier_name" type="char_0_256_content"/>
+	<hpfb:element name="dossier_type" type="char_0_20_content"/>
+	<hpfb:element name="product_name" type="char_0_256_content"/>
 	<hpfb:element name="sequence_number" type="sequence_content"/>
 	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
+	<hpfb:element name="sequence_activity_lead" type="char_0_20_content"/>
 	<hpfb:element name="sequence_activity_type">
 	<hpfb:complexType>
 			<hpfb:simpleContent>
@@ -44,16 +52,9 @@
 
 	<hpfb:element name="lifecycle_record" type="lifecycle_record_content"/>
 	<hpfb:element name="is_solicited" type="required_yes_no_content"/>
-	<hpfb:element name="solicited_requester">
-	<hpfb:complexType>
-			<hpfb:simpleContent>
-				<hpfb:extension base="hpfb:string">
-					<hpfb:attribute name="label_en" type="hpfb:string"/>
-					<hpfb:attribute name="label_fr" type="hpfb:string"/>
-				</hpfb:extension>
-			</hpfb:simpleContent>
-		</hpfb:complexType>
-	</hpfb:element>
+    <hpfb:element name="solicited_requester_sequence" type="sequence_content"/>
+    <hpfb:element name="solicited_requester" type="char_0_256_content"/>
+	<hpfb:element name="solicited_requester_record" type="solicited_requester_record_content"/>
 	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
 	<hpfb:element name="regulatory_project_manager2" type="char_0_256_content"/>
 	<hpfb:element name="is_fees" type="required_yes_no_content"/>
@@ -107,6 +108,12 @@
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="transaction_type"/>
+			<hpfb:element ref="is_third_party"/>
+			<hpfb:element ref="is_priority"/>
+			<hpfb:element ref="is_noc"/>
+			<hpfb:element ref="is_admin_sub"/>
+			<hpfb:element ref="sub_type"/>
 			<hpfb:element ref="is_ectd"/>
 			<hpfb:element ref="ectd"/>
 			<hpfb:element ref="is_solicited"/>
@@ -126,11 +133,20 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
+	<hpfb:complexType name="sub_type_content">
+		<hpfb:sequence>
+			<hpfb:element ref="id"/>
+			<hpfb:element ref="en"/>
+			<hpfb:element ref="fr"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
 	<hpfb:complexType name="ectd_content">
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
-			<hpfb:element ref="dossier_name"/>
+			<hpfb:element ref="dossier_type"/>
+			<hpfb:element ref="product_name"/>
 			<hpfb:element ref="lifecycle_record" minOccurs="1" maxOccurs="unbounded"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
@@ -140,6 +156,7 @@
 			<hpfb:element ref="sequence_number"/>
 			<hpfb:element ref="date_filed"/>
 			<hpfb:element ref="control_number"/>
+			<hpfb:element ref="sequence_activity_lead"/>
 			<hpfb:element ref="sequence_activity_type"/>
 			<hpfb:element ref="sequence_description_value"/>
 			<hpfb:element ref="sequence_from_date"/>
@@ -148,6 +165,13 @@
 			<hpfb:element ref="sequence_version"/>
 			<hpfb:element ref="sequence_year"/>
 			<hpfb:element ref="sequence_concat"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="solicited_requester_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="solicited_requester_sequence"/>
+			<hpfb:element ref="solicited_requester"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 

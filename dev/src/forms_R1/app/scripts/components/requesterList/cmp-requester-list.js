@@ -50,7 +50,7 @@
         vm.$onInit = function () {
             _setIdNames();
             vm.showDetailErrors=false;
-            if (angular.isUndefined(vm.model.list)) { //TODO should be comimg from parent
+            if (angular.isUndefined(vm.model.list)) {
                 vm.model.list = [];
             }
 
@@ -98,7 +98,7 @@
         };
 
         function loadContactData() {
-            getContactLists.getInternalContacts()
+            getContactLists.getInternalContactsWithoutOther()
                 .then(function (data) {
                     vm.baseRequesters = data;
                     return true;
