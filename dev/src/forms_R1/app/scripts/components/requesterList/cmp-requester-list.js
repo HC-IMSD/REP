@@ -128,6 +128,7 @@
         }
 
         vm.disableAddButton=function(){
+            if(vm.model.list.length === 0) return false;
             return(vm.requesterListForm.$invalid);
         };
 
