@@ -144,7 +144,7 @@
                 [
                     "B14-20160301-09", //Pharmaceutical
                     vm.BIOLOGICAL, //Biological
-                    "B14-20160301-10", //Post-Market Pharmacovigilance
+                    "B14-20160301-10", //Post-Market Vigilance
                     "B14-20160301-07" //Drug Master File
                 ]
             );
