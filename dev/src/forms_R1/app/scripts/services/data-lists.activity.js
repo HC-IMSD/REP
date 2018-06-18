@@ -1018,7 +1018,7 @@
                 [
                     vm.PHARMA, //Pharmaceutical
                     vm.BIOLOGICAL, //Biological
-                    vm.POSTMARKET, //Post-Market Pharmacovigilance
+                    vm.POSTMARKET, //Post-Market Vigilance
                     vm.CONSUMERHEALTH //Consumer Health Products
                 ]
             );

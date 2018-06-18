@@ -154,7 +154,7 @@
                 [
                     vm.PHARMA, //Pharmaceutical
                     vm.BIOLOGICAL, //Biological
-                    vm.POSTMARKET //Post-Market Pharmacovigilance
+                    vm.POSTMARKET //Post-Market Vigilance
                     //not in scope for pilot (March 8,2018 email "B14-20160301-07" //Drug Master File
                 ]
             );
