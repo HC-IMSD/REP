@@ -111,6 +111,82 @@
                         </textarea>
                     </div>
                 </div>
+                <fieldset id="fs_addrMissing_{{::$id}}">
+                    <label>
+                        <span class="field-name">D. {{::'ADDRESS_NOC'|translate}}</span>
+                        <button title="{{::'EXPAND'|translate}} {{::'ADDR_INSTRUCT'|translate}}"
+                                class="btn rep-help-button-primary btn-xs"
+                                id="address-instructions-toggle" ng-click="drugProdCtrl.addInstruct(7)"><span
+                                class="fa fa-question-circle fa-2x"></span>
+                        </button>
+                    </label>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[7]"
+                                     class="alert-info" close="drugProdCtrl.closeAlert(7)">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-activity-address-sent-en.html'">
+                                        </div>
+                                        <div ng-if="drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drug/tpl-activity-address-sent-fr.html'">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="checkbox checkbox-pi">
+                                    <label for="manuid">
+                                        <input type="checkbox" id="manuid" name="manuid"
+                                               ng-model="drugProdCtrl.model.manu"
+                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                        <span>{{::"MANU_SPON"|translate}}</span>
+
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox">
+                                    <label for="maillingid">
+                                        <input type="checkbox" id="maillingid" name="maillingid"
+                                               ng-model="drugProdCtrl.model.mailling"
+                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                        <span>{{::"REGU_ANNU"|translate}}</span>
+
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="checkbox checkbox-pi">
+                                    <label for="thisActivity">
+                                        <input type="checkbox" id="thisActivity" name="thisActivity"
+                                               ng-model="drugProdCtrl.model.thisActivity"
+                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                        <span>{{::"THIS_ACTIVITY"|translate}}</span>
+
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="checkbox">
+                                    <label for="importeraddr">
+                                        <input type="checkbox" id="importeraddr" name="importeraddr"
+                                               ng-model="drugProdCtrl.model.importer"
+                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                        <span>{{::"CAN_IMP"|translate}}</span>
+
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="row">
                     <!--todo: add importer part -
                         helptext importer: index: 2-->
@@ -193,11 +269,11 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 checkbox checkbox-pi">
-                            <label for="is-schedule-f">
-                                <input type="checkbox" name="isScheduleF"
-                                       id="is-schedule-f"
-                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleF"/>
-                                {{::'SCHEDULE_F'|translate}}
+                            <label for="is-prescription-drug">
+                                <input type="checkbox" name="isPrescriptionDrugList"
+                                       id="is-prescription-drug"
+                                       ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrugList"/>
+                                {{::'PRESC_DRUG_LIST'|translate}}
                             </label>
                         </div>
                     </div>
@@ -213,11 +289,11 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 checkbox checkbox-pi">
-                            <label for="is-prescription-drug">
-                                <input type="checkbox" name="isPrescriptionDrug"
-                                       id="is-prescription-drug"
-                                       ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrug"/>
-                                {{::'PRESCRIPTION_DRUG'|translate}}
+                            <label for="is-nonprescription-drug">
+                                <input type="checkbox" name="isNonPrescriptionDrug"
+                                       id="is-nonprescription-drug"
+                                       ng-model="drugProdCtrl.model.drugProduct.isNonPrescriptionDrug"/>
+                                {{::'NON_PRESC_DRUG'|translate}}
                             </label>
                         </div>
                     </div>

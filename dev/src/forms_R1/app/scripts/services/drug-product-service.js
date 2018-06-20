@@ -42,6 +42,10 @@
                 dossierID: "",
                 companyID: "",
                 properName: "",
+                manu: false,
+                mailling: false,
+                thisActivity: false,
+                importer: false,
                 importerID: "",
                 importerName: "",
                 //relatedDossierID: "",
@@ -60,9 +64,9 @@
                     drugUse: "",
                     isScheduleC: false,
                     isScheduleD: false,
-                    isScheduleF: false,
+                    isPrescriptionDrugList: false,
                     isRegulatedCDSA: false,
-                    isPrescriptionDrug: false,
+                    isNonPrescriptionDrug: false,
                     isScheduleA: false,
                     scheduleAGroup: getDefaultSchedA(),
                    // therapeutic: [],
@@ -103,6 +107,10 @@
                     companyID: info.company_id,
                     dossierID: info.dossier_id, //.substring(8,15),
                     properName: info.proper_name,
+                    manu: info.manufacturer === 'Y',
+                    mailling: info.mailing === 'Y',
+                    thisActivity: info.this_activity === 'Y',
+                    importer: info.importer === 'Y',
                     importerID: info.importer_id,
                     importerName: info.importer_name,
                    // relatedDossierID: info.related_dossier_id,
@@ -121,9 +129,9 @@
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                         isScheduleC: info.is_sched_c === 'Y',
                         isScheduleD: info.is_sched_d === 'Y',
-                        isScheduleF: info.is_sched_f === 'Y',
+                        isPrescriptionDrugList: info.is_prescription_drug_list === 'Y',
                         isRegulatedCDSA: info.is_regulated_cdsa === 'Y',
-                        isPrescriptionDrug: info.is_prescription_drug === 'Y',
+                        isNonPrescriptionDrug: info.is_non_prescription_drug === 'Y',
                         isScheduleA: info.is_sched_a === 'Y',
                        // therapeutic: [],
                        // canRefProducts: getCanRefProductList(info.ref_product_list.cdn_ref_product),//grid
@@ -167,6 +175,10 @@
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
             baseModel.proper_name = jsonObj.properName;
+            baseModel.manufacturer = jsonObj.manu === true ? 'Y' : 'N';
+            baseModel.mailing = jsonObj.mailling === true ? 'Y' : 'N';
+            baseModel.this_activity = jsonObj.thisActivity === true ? 'Y' : 'N';
+            baseModel.importer = jsonObj.importer === true ? 'Y' : 'N';
             baseModel.importer_id = jsonObj.importerID;
             baseModel.importer_name = jsonObj.importerName;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
@@ -189,9 +201,9 @@
             //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
             baseModel.is_sched_c = jsonObj.drugProduct.isScheduleC === true ? 'Y' : 'N';
             baseModel.is_sched_d = jsonObj.drugProduct.isScheduleD === true ? 'Y' : 'N';
-            baseModel.is_sched_f = jsonObj.drugProduct.isScheduleF === true ? 'Y' : 'N';
+            baseModel.is_prescription_drug_list = jsonObj.drugProduct.isPrescriptionDrugList === true ? 'Y' : 'N';
             baseModel.is_regulated_cdsa = jsonObj.drugProduct.isRegulatedCDSA === true ? 'Y' : 'N';
-            baseModel.is_prescription_drug = jsonObj.drugProduct.isPrescriptionDrug === true ? 'Y' : 'N';
+            baseModel.is_non_prescription_drug = jsonObj.drugProduct.isNonPrescriptionDrug === true ? 'Y' : 'N';
             baseModel.is_sched_a = jsonObj.drugProduct.isScheduleA === true ? 'Y' : 'N';
 
             baseModel.proposed_indication = jsonObj.drugProduct.propIndication;

@@ -169,9 +169,9 @@
                 [
                     {"id":"HUMAN","en":"Human","fr":"fr_Human"},
                     {"id":"RADIO","en":"Radiopharmaceutical","fr":"fr_Radiopharmaceutical"},
+                    {"id":"VET","en":"Veterinary","fr":"fr_Veterinary"},
                     {"id":"DISINFECT","en":"Disinfectant","fr":"fr_Disinfectant"},
-                    {"id":"VET","en":"Veterinary","fr":"fr_Veterinary"}
-
+                    {"id":"DM","en":"Drug and Medical Device","fr":"fr_Drug and Medical Device"}
                 ]
             )
         }
