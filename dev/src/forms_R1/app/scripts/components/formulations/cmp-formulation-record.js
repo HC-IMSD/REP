@@ -13,6 +13,7 @@
                 'containerTypeListModule',
                 'materialIngListModule',
                 'roaListModule',
+                'countryListModule',
                 'dossierDataLists',
                 'hpfbConstants',
                 'ui.select',

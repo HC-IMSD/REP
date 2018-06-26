@@ -555,7 +555,11 @@
 
                 if (item.per.__text === 'UP') {
                     obj.perPresentationValue = Number(item.per_value);
-                    var upValue = item.per_units.__text;
+                    var upValue = DossierLists.getUnitsPrefix() + item.per_units.__text; //add the prefix
+                    //if other revert the value. OTHER value never has a prefix
+                    if (item.per_units.__text === OTHER) {
+                        upValue = item.per_units.__text;
+                    }
                     obj.perPresUnits = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
                     obj.perPresOtherUnits = item.per_units_other_details;
                 }
@@ -1015,11 +1019,7 @@
                 obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
                 if (item.per.id === 'UP') {
                     obj.per_value = item.perPresentationValue;
-                    obj.per_units = {
-                        _label_en: item.perPresUnits.en,
-                        _label_fr: item.perPresUnits.fr,
-                        __text: item.perPresUnits.id
-                    };
+                    obj.per_units = _unitsFldToOutput(item.perPresUnits, DossierLists.getUnitsPrefix());
                     obj.per_units_other_details = item.perPresOtherUnits;
                 } else if (item.per.id === 'UM') {
                     obj.per_value = item.perMeasureValue;
