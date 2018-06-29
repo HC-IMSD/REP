@@ -46,8 +46,7 @@
                 mailling: false,
                 thisActivity: false,
                 importer: false,
-                importerID: "",
-                importerName: "",
+                importerRecord: [],
                 //relatedDossierID: "",
                 enrolmentVersion: "0.00",
                 dateSaved: "",
@@ -62,6 +61,7 @@
                 drugProduct: {
                     //thirdPartySigned: "",
                     drugUse: "",
+                    disinfectantType: "",
                     isScheduleC: false,
                     isScheduleD: false,
                     isPrescriptionDrugList: false,
@@ -103,6 +103,10 @@
                 if(info.drug_use) {
                     drugUseValue = info.drug_use.__text;
                 }
+                var disinfectantTypeValue ="";
+                if(info.disinfectant_type) {
+                    disinfectantTypeValue = info.disinfectant_type.__text;
+                }
                 var formModel = {
                     companyID: info.company_id,
                     dossierID: info.dossier_id, //.substring(8,15),
@@ -111,8 +115,7 @@
                     mailling: info.mailing === 'Y',
                     thisActivity: info.this_activity === 'Y',
                     importer: info.importer === 'Y',
-                    importerID: info.importer_id,
-                    importerName: info.importer_name,
+                    importerRecord: transformImpFromFile(info.importer_record),
                    // relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
@@ -127,6 +130,7 @@
                        // thirdPartySigned: info.third_party_signed,
                        // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
+                        disinfectantType: $filter('findListItemById')(DossierLists.getDisinfectantTypeList(), {id: disinfectantTypeValue}),
                         isScheduleC: info.is_sched_c === 'Y',
                         isScheduleD: info.is_sched_d === 'Y',
                         isPrescriptionDrugList: info.is_prescription_drug_list === 'Y',
@@ -179,6 +183,8 @@
             baseModel.mailing = jsonObj.mailling === true ? 'Y' : 'N';
             baseModel.this_activity = jsonObj.thisActivity === true ? 'Y' : 'N';
             baseModel.importer = jsonObj.importer === true ? 'Y' : 'N';
+            baseModel.importer_record =
+                transformImpToFile(jsonObj.importerRecord);
             baseModel.importer_id = jsonObj.importerID;
             baseModel.importer_name = jsonObj.importerName;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
@@ -187,7 +193,6 @@
             baseModel.software_version = "2.0.0"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
-            //baseModel.dossier_type = jsonObj.dossierType;
             if(jsonObj.drugProduct.drugUse) {
                 baseModel.drug_use = {
                     _label_en: jsonObj.drugProduct.drugUse.en,
@@ -197,8 +202,15 @@
             }else{
                 baseModel.drug_use="";
             }
-
-            //drugUseValuesToOutput(jsonObj.drugProduct.drugUseList, baseModel);
+            if(jsonObj.drugProduct.disinfectantType) {
+                baseModel.disinfectant_type = {
+                    _label_en: jsonObj.drugProduct.disinfectantType.en,
+                    _label_fr: jsonObj.drugProduct.disinfectantType.fr,
+                    __text: jsonObj.drugProduct.disinfectantType.id
+                };
+            }else{
+                baseModel.disinfectant_type="";
+            }
             baseModel.is_sched_c = jsonObj.drugProduct.isScheduleC === true ? 'Y' : 'N';
             baseModel.is_sched_d = jsonObj.drugProduct.isScheduleD === true ? 'Y' : 'N';
             baseModel.is_prescription_drug_list = jsonObj.drugProduct.isPrescriptionDrugList === true ? 'Y' : 'N';
@@ -800,6 +812,58 @@
         };
 
         /**
+         *
+         * @param jsonObj the json object to convert
+         * @returns {Array}
+         * @private
+         */
+        function transformImpToFile(jsonObj) {
+            var importers = [];
+            if (!jsonObj) return importers;
+            if (!(jsonObj instanceof Array)) {
+                //make it an array, case there is only one record
+                jsonObj = [jsonObj]
+            }
+
+            for (var i = 0; i < jsonObj.length; i++) {
+                var record = _mapImporterRecToOutput(jsonObj[i]);
+                if (jsonObj.length === 1) {
+                    return (record);
+                }
+                importers.push(record);
+            }
+            return (importers);
+        }
+
+        function transformImpFromFile(jsonObj) {
+            var importerRecord = [];
+            if (!jsonObj) return importerRecord;
+            if (!(jsonObj instanceof Array)) {
+                //make it an array, case there is only one record
+                jsonObj = [jsonObj];
+            }
+            for (var i = 0; i < jsonObj.length; i++) {
+                var record = {};
+                record.importerId = jsonObj[i].importer_company_id;
+                record.importerName = jsonObj[i].importer_company_name;
+                importerRecord.push(record);
+            }
+            return importerRecord;
+        }
+
+        function _mapImporterRecToOutput(importerObj) {
+            var importerRec = {};
+            if (importerObj) {
+                importerRec = {
+                    importer_company_id: importerObj.importerId,
+                    importer_company_name: importerObj.importerName
+                }
+            }
+            return (importerRec);
+        }
+
+
+        /**
          * Converts all the appendix 4 data to output
          * @param info
          * @returns {*}
@@ -854,10 +918,7 @@
                                 ing.tissues_fluids_section.cardio_system = _cardioSystemToOutput(info[i].tissuesFluidsOrigin.tissuesList[b].system);
                                 break;
                         }
-
                     }
-
-
                 }
 
                 if (info[i].sourceAnimalDetails) {
@@ -898,10 +959,7 @@
                 }
                 appendices.push(ing);
             }
-
-
             return appendices;
-
         }
 
         /**

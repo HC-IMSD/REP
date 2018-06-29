@@ -80,7 +80,6 @@
             vm.onDelete({id: vm.model.id})
         };
 
-
         vm.showError = function (ctrl) {
             if(!ctrl) return false;
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )

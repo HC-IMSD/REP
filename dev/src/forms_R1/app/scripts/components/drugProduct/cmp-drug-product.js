@@ -10,6 +10,7 @@
         'tabsModule',
          'drugUseModule',
         'scheduleAModule',
+        'importerListModule',
         'dossierDataLists',
         'dataLists',
         'filterLists',
@@ -124,12 +125,14 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
         vm.drugUseList=[];
+        vm.disinfectantTypeList=[];
         vm.extraAppendixModel="none";
         vm.missingAppendixModel="none";
 
         vm.$onInit = function () {
             vm.showSummary = false;
             vm.drugUseList = DossierLists.getDrugUseList();
+            vm.disinfectantTypeList = DossierLists.getDisinfectantTypeList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -191,6 +194,7 @@
                 vm.model = vm.drugProductService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
+                vm.drugUseUpdate();
                 vm.drugProdForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
@@ -293,6 +297,31 @@
                 vm.model.drugProduct.scheduleAGroup = vm.drugProductService.getDefaultScheduleA();
             }
             return false;
+        };
+
+        /***
+         * determin to display Disinfectant Type field
+         */
+        vm.isDisinfectant = function () {
+            if (!vm.model || !vm.model.drugProduct || !vm.model.drugProduct.drugUse) return false;
+            return (vm.model.drugProduct.drugUse.id === "DISINFECT");
+        };
+
+        /***
+         * reset Disinfectant Type field
+         */
+        vm.drugUseUpdate = function () {
+            if (!vm.isDisinfectant()) {
+                vm.model.drugProduct.disinfectantType = "";
+            }
+        };
+
+        /***
+         * reset Disinfectant Type field
+         */
+        vm.updateImporterList = function(list){
+            if(!list) return;
+            vm.model.importerRecord = list;
         };
 
         /**
@@ -449,6 +478,7 @@
             vm.propIndicationId="prop_Indication"+scopeId;
             vm.fsType = "fs_type" + scopeId;
             vm.properNameId="proper_name"+ scopeId;
+            vm.disiTypeId = "disinfectant_type" + scopeId;
         }
 
 
