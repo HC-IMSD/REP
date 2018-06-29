@@ -55,7 +55,7 @@
         vm.measureList = DossierLists.getUnitsMeasureList();
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.alerts = [false, false, false, false]; //for help boxes
+        vm.alerts = [false, false, false, false, false]; //for help boxes
         vm.numberMinError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
@@ -411,6 +411,7 @@
             vm.nanoOtherId="nano_material_other"+scopeId;
             vm.asBaseId="calculated_as_base"+scopeId;
             vm.animalHumanSrcId="animal_human_sourced"+scopeId;
+            vm.purposeId="purpose"+scopeId;
         }
 
         /**

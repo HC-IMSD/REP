@@ -5,18 +5,18 @@
     'use strict';
 
     angular
-        .module('countryListModule', ['dataLists', 'countryRecordModule', 'ui.select', 'hpfbConstants'])
+        .module('srcCountryListModule', ['dataLists', 'countryRecordModule', 'ui.select', 'hpfbConstants'])
 })();
 
 (function () {
     'use strict';
 
     angular
-        .module('countryListModule')
-        .component('cmpCountryList', {
-            templateUrl: 'app/scripts/components/country-list/tpl-country-list.html',
-            controller: countryListController,
-            controllerAs: 'countryListCtrl',
+        .module('srcCountryListModule')
+        .component('cmpSrcCountryList', {
+            templateUrl: 'app/scripts/components/source-country-list/tpl-src-country-list.html',
+            controller: srcCountryListController,
+            controllerAs: 'srcCountryListCtrl',
             bindings: {
                 withUnknown: '<',
                 listItems: '<',
@@ -28,12 +28,15 @@
             }
         });
 
-    countryListController.$inject = ['$filter', 'getCountryAndProvinces','UNKNOWN','$scope'];
+    srcCountryListController.$inject = ['$filter', 'getCountryAndProvinces','UNKNOWN','$scope'];
 
 
-    function countryListController($filter, getCountryAndProvinces,UNKNOWN,$scope) {
+    function srcCountryListController($filter, getCountryAndProvinces,UNKNOWN,$scope) {
         var vm = this;
-        vm.baseCountries = getCountryAndProvinces.getCountries();
+        var countries = getCountryAndProvinces.getCountries();
+        var unknownRec=getCountryAndProvinces.getUnknownCountryRecord();
+        countries.unshift(unknownRec);
+        vm.baseCountries = countries;
         vm.countryList = "";
         vm.model = {};
         vm.isDetailValid = true;
@@ -61,7 +64,7 @@
             }
             //should never happen,fallback...
             if (angular.isUndefined(vm.countryList)) {
-                setUnknownCountryState(vm.withUnknown)
+                setUnknownCountryState(vm.withUnknown);
             }
             vm.updateCountryList();
         };
@@ -80,11 +83,8 @@
             }
         };
         function setUnknownCountryState(isUnknown) {
-            var countries = angular.copy(vm.baseCountries);
             if (isUnknown) {
-                var unknownRec=getCountryAndProvinces.getUnknownCountryRecord();
-                countries.unshift(unknownRec);
-                vm.countryList =countries;
+                vm.countryList =vm.baseCountries;
                 vm.hasUnknown = true;
                 vm.columnDef = [
                     {
@@ -135,7 +135,7 @@
 
         vm.deleteRecord = function (_id) {
             var aList = vm.deleteRecFromList(vm.model.list, _id);
-            vm.updateCountryList();
+           vm.updateCountryList();
             vm.onUpdate({list:aList});
         };
 
@@ -153,7 +153,7 @@
             if(vm.model.list && vm.model.list.length > 0) {
                 var idx;
                 for (var j = 0; j < vm.model.list.length; j++) {
-                    if(vm.model.list[j].country.id)
+                    if(vm.model.list[j].country.id && vm.model.list[j].country.id !== UNKNOWN)
                     {
                         idx = base.indexOf(
                             $filter('filter')(base, {id: vm.model.list[j].country.id}, true)[0]

@@ -145,8 +145,20 @@
          */
         vm.showPaymentMethods = function () {
             if (!vm.model) return false;
-            return !vm.isDeferral() && (!vm.isEligible() && vm.isLess10K()) || (vm.isEligible() );
-        }
+            var showPM = !vm.isDeferral() && (!vm.isEligible() && vm.isLess10K()) || (vm.isEligible() );
+            if (!showPM) {
+                vm.model.paymentMethod = {
+                    creditCard: false,
+                    cheque: false,
+                    moneyOrder: false,
+                    bankDraft: false,
+                    existingCredit: false,
+                    bankWire: false,
+                    billPayment: false
+                };
+            }
+            return showPM;
+        };
 
         /**
          * Determines if no fees should be sent
@@ -155,7 +167,7 @@
         vm.isSendNoFees = function () {
             return (!vm.isLess10K() && !vm.isEligible() && !vm.isDeferral())
 
-        }
+        };
 
         /**
          * Returns if the fees are elgible for remissions

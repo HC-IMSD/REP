@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('countryRecordModule',
+        .module('srcCountryRecordModule',
             [   'ui.select',
                 'hpfbConstants',
                 'errorMessageModule'
@@ -17,15 +17,15 @@
     'use strict';
 
     angular
-        .module('countryRecordModule')
+        .module('srcCountryRecordModule')
         .config(function (uiSelectConfig) {
             //choices: select2, bootstrap, selectize
             uiSelectConfig.theme = 'select2';
         })
-        .component('cmpCountryRecord', {
-            templateUrl: 'app/scripts/components/country-list/tpl-country-record.html',
-            controller: countryRecordController,
-            controllerAs:'countryRecCtrl',
+        .component('cmpSrcCountryRecord', {
+            templateUrl: 'app/scripts/components/source-country-list/tpl-src-country-record.html',
+            controller: srcCountryRecordController,
+            controllerAs:'srcCountryRecCtrl',
             bindings: {
                 record: '<',
                 onDelete: '&',
@@ -36,8 +36,8 @@
             }
         });
 
-    countryRecordController.$inject = ['$scope','$filter','$translate','UNKNOWN'];
-    function countryRecordController($scope,$filter, $translate, UNKNOWN) {
+    srcCountryRecordController.$inject = ['$scope','$filter','$translate','UNKNOWN'];
+    function srcCountryRecordController($scope,$filter, $translate, UNKNOWN) {
         var vm = this;
 
         vm.model = {"id": "", "country": "","unknownCountryDetails":"","display":""};

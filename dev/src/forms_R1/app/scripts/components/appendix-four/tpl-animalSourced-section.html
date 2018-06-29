@@ -98,9 +98,9 @@
                 <input type="hidden"  required aria-hidden="true" name="{{::animalSectCtrl.noCountryId}}"
                        ng-model="animalSectCtrl.oneCountry"/>
                 <div class="panel-body">
-                    <cmp-country-list field-label="ANIMAL_CTRY_ORIGIN" with-unknown="true"
+                    <cmp-src-country-list field-label="ANIMAL_CTRY_ORIGIN" with-unknown="true"
                                       list-items="animalSectCtrl.model.countryList"
-                                      on-update="animalSectCtrl.updateCountryList(list)"></cmp-country-list>
+                                      on-update="animalSectCtrl.updateCountryList(list)"></cmp-src-country-list>
                 </div>
             </section>
         </div>

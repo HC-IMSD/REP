@@ -164,6 +164,16 @@
 
         vm.updateActivityType = function () {
             vm.showNewActivityFields = isNewActivity();
+            if(!vm.showNewActivityFields){
+                vm.transactionModel.isThirdParty = "";
+                vm.transactionModel.isPriority = "";
+                vm.transactionModel.isNoc = "";
+                vm.transactionModel.isAdminSub = "";
+                vm.transactionModel.subType = "";
+                vm.showThirdPartyNote = false;
+                vm.showAdminSub = false;
+
+            }
         };
 
         vm.setThirdParty = function () {
@@ -228,6 +238,7 @@
                 vm.showSolicitedDetail = true;
             } else {
                 vm.showSolicitedDetail = false;
+                vm.transactionModel.solicitedRequesterReord = [];
             }
         };
 

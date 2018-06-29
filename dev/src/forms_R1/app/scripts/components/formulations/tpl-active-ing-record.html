@@ -32,6 +32,11 @@
                         <label for="{{::ingRecCtrl.ingredName}}" class="required full-width"><span
                                 class="field-name">{{'ING_NAME'|translate}}</span>
                             <strong class="required">{{'REQUIRED' |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_NAME_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="ingredient-name-instructions-toggle" ng-click="ingRecCtrl.addInstruct(4)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">"{{::'INGREDIENT_NAME_INSTRUCT'|translate}}"</span>
+                            </button>
                             <div class="rep-margin-top">
                                 <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="{{::ingRecCtrl.ingredName}}"
                                        ng-model-options="{ debounce: $inherit}"
@@ -49,6 +54,21 @@
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.ingredName])"
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                         </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ingRecCtrl.alerts[4]"
+                             class="alert-info" close="ingRecCtrl.closeAlert(4)">
+                            <section aria-live="assertive">
+                                <div ng-if="!ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredient-en.html'">
+                                </div>
+                                <div ng-if="ingRecCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-ingredient-fr.html'">
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
                 <div class="row" ng-if="!ingRecCtrl.isMedIng()">
@@ -79,12 +99,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
-                        <label for="purpose_{{::$id}}">
+                    <div class="form-group col-md-12"
+                         ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.purposeId].$invalid}">
+                        <label for="{{::ingRecCtrl.purposeId}}" class="required">
                             <span class="field-name">{{'PURPOSE'|translate}}</span>
-                            <input type="text" id="purpose_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.purpose" maxlength="60"
-                                   ng-model-options="{ debounce: '$inherit'}" size="60"
-                                   class="form-control full-width" name="purpose"/>
+                            <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <input type="text" id="{{::ingRecCtrl.purposeId}}" data-ng-model="ingRecCtrl.ingModel.purpose" maxlength="60"
+                                   ng-model-options="{ debounce: '$inherit'}" size="60" name="{{::ingRecCtrl.purposeId}}"
+                                   class="form-control full-width" ng-required="true"/>
+                            <cmp-error-message field-name="ingRecCtrl.purposeId"
+                                               form-ref="ingRecCtrl.activeIngForm"
+                                               show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.purposeId])"
+                                               error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                         </label>
                     </div>
                     <div class="form-group col-md-12"

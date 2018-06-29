@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('animalSourcedSection',['animalSourcedList','countryListModule','numberFormat','errorMessageModule'])
+        .module('animalSourcedSection',['animalSourcedList','srcCountryListModule','numberFormat','errorMessageModule'])
 })();
 
 (function () {

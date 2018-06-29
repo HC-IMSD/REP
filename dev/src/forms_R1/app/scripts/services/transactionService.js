@@ -771,7 +771,7 @@
             projectManager1: "",
             projectManager2: "",
             isFees: "",
-            feesDetails: null,
+            feeDetails: null,
             isActivityChanges: "Y", //deprecated
             companyName: "",
             activityAddress: _createAddressModel(),
