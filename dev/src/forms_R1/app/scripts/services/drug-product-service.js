@@ -61,7 +61,15 @@
                 drugProduct: {
                     //thirdPartySigned: "",
                     drugUse: "",
-                    disinfectantType: "",
+                    disinfectantType: {
+                        hospital: false,
+                        foodProcessing: false,
+                        medicalInstruments: false,
+                        domestic: false,
+                        barn: false,
+                        institutionalIndustrial: false,
+                        contactLens: false
+                    },
                     isScheduleC: false,
                     isScheduleD: false,
                     isPrescriptionDrugList: false,
@@ -103,10 +111,6 @@
                 if(info.drug_use) {
                     drugUseValue = info.drug_use.__text;
                 }
-                var disinfectantTypeValue ="";
-                if(info.disinfectant_type) {
-                    disinfectantTypeValue = info.disinfectant_type.__text;
-                }
                 var formModel = {
                     companyID: info.company_id,
                     dossierID: info.dossier_id, //.substring(8,15),
@@ -130,7 +134,15 @@
                        // thirdPartySigned: info.third_party_signed,
                        // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
-                        disinfectantType: $filter('findListItemById')(DossierLists.getDisinfectantTypeList(), {id: disinfectantTypeValue}),
+                        disinfectantType: {
+                            hospital: info.disinfectant_type.hospital === 'Y',
+                            foodProcessing: info.disinfectant_type.food_processing === 'Y',
+                            medicalInstruments: info.disinfectant_type.medical_instruments === 'Y',
+                            domestic: info.disinfectant_type.domestic === 'Y',
+                            barn: info.disinfectant_type.barn === 'Y',
+                            institutionalIndustrial: info.disinfectant_type.institutional_industrial === 'Y',
+                            contactLens: info.disinfectant_type.contact_lens === 'Y'
+                        },
                         isScheduleC: info.is_sched_c === 'Y',
                         isScheduleD: info.is_sched_d === 'Y',
                         isPrescriptionDrugList: info.is_prescription_drug_list === 'Y',
@@ -202,15 +214,15 @@
             }else{
                 baseModel.drug_use="";
             }
-            if(jsonObj.drugProduct.disinfectantType) {
-                baseModel.disinfectant_type = {
-                    _label_en: jsonObj.drugProduct.disinfectantType.en,
-                    _label_fr: jsonObj.drugProduct.disinfectantType.fr,
-                    __text: jsonObj.drugProduct.disinfectantType.id
-                };
-            }else{
-                baseModel.disinfectant_type="";
-            }
+            baseModel.disinfectant_type = {
+                hospital: jsonObj.drugProduct.disinfectantType.hospital === true ? 'Y' : 'N',
+                food_processing: jsonObj.drugProduct.disinfectantType.foodProcessing === true ? 'Y' : 'N',
+                medical_instruments: jsonObj.drugProduct.disinfectantType.medicalInstruments === true ? 'Y' : 'N',
+                domestic: jsonObj.drugProduct.disinfectantType.domestic === true ? 'Y' : 'N',
+                barn: jsonObj.drugProduct.disinfectantType.barn === true ? 'Y' : 'N',
+                institutional_industrial: jsonObj.drugProduct.disinfectantType.institutionalIndustrial === true ? 'Y' : 'N',
+                contact_lens: jsonObj.drugProduct.disinfectantType.contactLens === true ? 'Y' : 'N'
+            };
             baseModel.is_sched_c = jsonObj.drugProduct.isScheduleC === true ? 'Y' : 'N';
             baseModel.is_sched_d = jsonObj.drugProduct.isScheduleD === true ? 'Y' : 'N';
             baseModel.is_prescription_drug_list = jsonObj.drugProduct.isPrescriptionDrugList === true ? 'Y' : 'N';

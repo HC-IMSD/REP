@@ -11,6 +11,7 @@
          'drugUseModule',
         'scheduleAModule',
         'importerListModule',
+        'disinfectantTypeModule',
         'dossierDataLists',
         'dataLists',
         'filterLists',
@@ -107,9 +108,11 @@
             "msg_one_scheda":{
                 "type":"fieldset",
                 "parent": "fs_schedAMissing"
+            },
+            "disi_type_missing": {
+                "type": "fieldset",
+                "parent": "fs_disi_type_missing"
             }
-
-
         };
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.min5Error = [
@@ -312,7 +315,34 @@
          */
         vm.drugUseUpdate = function () {
             if (!vm.isDisinfectant()) {
-                vm.model.drugProduct.disinfectantType = "";
+                vm.model.drugProduct.disinfectantType = {
+                    hospital: false,
+                    foodProcessing: false,
+                    medicalInstruments: false,
+                    domestic: false,
+                    barn: false,
+                    institutionalIndustrial: false,
+                    contactLens: false
+                };
+            }
+        };
+
+        //????
+        vm.onDisiTypeUpdate = function (newRole) {
+            var aRole = {};
+            angular.extend(aRole, newRole);
+            vm.addressModel.addressRole = aRole;
+
+            if (vm.addressRecForm.$valid) {
+                vm.isDetailValid({state: true});
+                vm.addressRecForm.$setPristine();
+                vm.onUpdate({rec: vm.addressModel});
+                vm.showSummary=false;
+                vm.errorSummaryUpdate(); //updating parent
+            } else {
+                vm.showSummary = true;
+                vm.updateErrorSummaryState(); //updating current
+                vm.focusOnSummary()
             }
         };
 

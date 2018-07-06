@@ -34,6 +34,7 @@
     function countryListController($filter, getCountryAndProvinces,UNKNOWN,$scope) {
         var vm = this;
         vm.baseCountries = getCountryAndProvinces.getCountries();
+        vm.countries = angular.copy(vm.baseCountries);
         vm.countryList = "";
         vm.model = {};
         vm.isDetailValid = true;
@@ -61,14 +62,14 @@
             }
             //should never happen,fallback...
             if (angular.isUndefined(vm.countryList)) {
-                setUnknownCountryState(vm.withUnknown)
+                setUnknownCountryState(vm.withUnknown);
             }
             vm.updateCountryList();
         };
 
         vm.$onChanges = function (changes) {
             if (changes.withUnknown) {
-                setUnknownCountryState(changes.withUnknown.currentValue);
+                //setUnknownCountryState(changes.withUnknown.currentValue);
             }
             if (changes.listItems) {
                 vm.model.list = changes.listItems.currentValue;
@@ -80,11 +81,10 @@
             }
         };
         function setUnknownCountryState(isUnknown) {
-            var countries = angular.copy(vm.baseCountries);
             if (isUnknown) {
                 var unknownRec=getCountryAndProvinces.getUnknownCountryRecord();
-                countries.unshift(unknownRec);
-                vm.countryList =countries;
+                vm.countries.unshift(unknownRec);
+                vm.countryList =vm.countries;
                 vm.hasUnknown = true;
                 vm.columnDef = [
                     {
@@ -100,7 +100,7 @@
                     }
                 ]
             } else {
-                vm.countryList = countries;
+                vm.countryList = vm.countries;
                 vm.hasUnknown = false;
                 vm.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
                 vm.columnDef = [

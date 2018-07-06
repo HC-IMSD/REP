@@ -6,9 +6,9 @@
                          column-def="srcCountryListCtrl.columnDef" select-record="srcCountryListCtrl.selectRecord"
                          disable-selection="srcCountryListCtrl.disableAddButton()">
 
-        <cmp-country-record record="$parent.record" fieldset-label="{{srcCountryListCtrl.fieldLabel}}"
+        <cmp-src-country-record record="$parent.record" fieldset-label="{{srcCountryListCtrl.fieldLabel}}"
                             on-delete="srcCountryListCtrl.deleteRecord(id)" show-errors="srcCountryListCtrl.showDetailErrors"
-                            country-list="srcCountryListCtrl.countryList" update-country-list="srcCountryListCtrl.updateCountryList"></cmp-country-record>
+                            country-list="srcCountryListCtrl.countryList" update-country-list="srcCountryListCtrl.updateCountryList"></cmp-src-country-record>
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">

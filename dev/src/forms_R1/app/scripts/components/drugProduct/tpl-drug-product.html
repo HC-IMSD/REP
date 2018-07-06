@@ -220,24 +220,30 @@
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
                     </div>
-
-                    <div class="col-xs-4" ng-if="drugProdCtrl.isDisinfectant()">
-                        <div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.disiTypeId].$invalid}">
-                            <label for="{{::drugProdCtrl.disiTypeId}}" class="required">
-                                <span class="field-name">{{::'DISINFECTANT_TYPE'|translate}}</span>
-                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <select name="{{::drugProdCtrl.disiTypeId}}" class="form-control rep-margin-top-12"
-                                        ng-model="drugProdCtrl.model.drugProduct.disinfectantType" id="{{::drugProdCtrl.disiTypeId}}"
-                                        ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.disinfectantTypeList track by use.id"
-                                        required></select>
-                                <cmp-error-message field-name="drugProdCtrl.disiTypeId"
-                                                   form-ref="drugProdCtrl.drugProdForm"
-                                                   show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.disiTypeId])"
-                                                   error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
-                            </label>
-                        </div>
-                    </div>
                 </div>
+
+                <div ng-if="drugProdCtrl.isDisinfectant()">
+                    <!--div class="col-xs-12 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.disiTypeId].$invalid}">
+                        <label for="{{::drugProdCtrl.disiTypeId}}" class="required">
+                            <span class="field-name">{{::'DISINFECTANT_TYPE'|translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <select name="{{::drugProdCtrl.disiTypeId}}" class="form-control rep-margin-top-12"
+                                    ng-model="drugProdCtrl.model.drugProduct.disinfectantType" id="{{::drugProdCtrl.disiTypeId}}"
+                                    ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.disinfectantTypeList track by use.id"
+                                    required></select>
+                            <cmp-error-message field-name="drugProdCtrl.disiTypeId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.disiTypeId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                    </div-->
+                    <cmp-disinfectant-type record="drugProdCtrl.model.drugProduct.disinfectantType"
+                                      on-update="drugProdCtrl.onDisiTypeUpdate($event.roles)"
+                                      show-errors="drugProdCtrl.showErrors()"
+                                      update-error-summary="drugProdCtrl.updateErrorSummaryState()"
+                    </cmp-disinfectant-type>
+                </div>
+
                 <div class="row">
                     <div class="col-md-12">
                         <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[3]"
