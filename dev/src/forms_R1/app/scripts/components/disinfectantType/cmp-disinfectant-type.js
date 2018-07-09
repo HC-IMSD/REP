@@ -53,6 +53,7 @@
         vm.$onChanges = function (changes) {
             if (changes.record) {
                 vm.model = (changes.record.currentValue);
+                vm.updateState();
                 vm.updateErrorSummary();
             }
         };
@@ -60,11 +61,9 @@
 
         /**
          *
-         * @param ctrl the form control
-         * @param toCheck the json name of the property to check
          * @returns {boolean}
          */
-        vm.updateState = function (ctrl, toCheck) {
+        vm.updateState = function () {
             var obj = vm.model;
 
             for (var key in obj) {
