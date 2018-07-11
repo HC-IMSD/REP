@@ -197,8 +197,6 @@
             baseModel.importer = jsonObj.importer === true ? 'Y' : 'N';
             baseModel.importer_record =
                 transformImpToFile(jsonObj.importerRecord);
-            baseModel.importer_id = jsonObj.importerID;
-            baseModel.importer_name = jsonObj.importerName;
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
             baseModel.application_type = jsonObj.applicationType;
