@@ -708,7 +708,7 @@
 																							<td><xsl:value-of select="ingredient_name"/></td>
 																							<td><xsl:choose><xsl:when test="ingredient_id"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'Yes'"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'No'"/></xsl:call-template></xsl:otherwise></xsl:choose></td>
 																							<td><xsl:value-of select="cas_number"/></td>
-																							<td><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_human_animal_src"/></xsl:call-template></td>
+																							<td><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_human_animal_src"/></xsl:call-template></td>
 																						</tr>
 																						<tr class="out">
 																							<td colspan="6">
@@ -731,70 +731,57 @@
 																	<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language = 'eng'"><xsl:value-of select="./strength/operator/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="./strength/operator/@label_en"/></xsl:otherwise></xsl:choose></span>&#160;
 																	<xsl:if test="strength/operator = 'RA'">
 																		<span style="font-weight: normal;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'RANGE_LOWER_LIMIT'"/></xsl:call-template></span>:&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="strength/data1"/></span>&#160;&#160;
-																		<span style="font-weight: normal;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'RANGE_UPPER_LIMIT'"/></xsl:call-template></span>:&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="strength/data2"/></span>
 																	</xsl:if>
-																	<xsl:if test="not(strength/operator = 'RA')">
-																		<span><xsl:value-of select="strength/data1"/></span>
+																	<span style="font-weight: normal;"><xsl:value-of select="strength/data1"/></span>&#160;/&#160;
+																	<xsl:choose>
+																	<xsl:when test="units_other != 'null' and units_other != ''">
+																		<span style="font-weight: normal;"><xsl:value-of select="units_other"/></span>&#160;
+																	</xsl:when>
+																	<xsl:otherwise>
+																		<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="units/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="units/@label_fr"/></xsl:otherwise></xsl:choose></span>
+																	</xsl:otherwise>
+																	</xsl:choose>
+																	<xsl:if test="strength/operator = 'RA'">&#160;&#160;
+																		<span style="font-weight: normal;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'RANGE_UPPER_LIMIT'"/></xsl:call-template></span>:&#160;
+																		<span style="font-weight: normal;"><xsl:value-of select="strength/data2"/></span>&#160;/&#160;
+																		<xsl:choose>
+																		<xsl:when test="per_units_other_details != 'null' and per_units_other_details != ''">
+																			<span style="font-weight: normal;"><xsl:value-of select="units_other"/></span>&#160;
+																		</xsl:when>
+																		<xsl:otherwise>
+																			<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="per_units/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="per_units/@label_fr"/></xsl:otherwise></xsl:choose></span>
+																		</xsl:otherwise>
+																		</xsl:choose>
 																	</xsl:if>
 																	</label>
 																	</div>
-																	<div class="col-md-6"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'UNITS'"/></xsl:call-template></label>:&#160;
-																		<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="units/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="units/@label_fr"/></xsl:otherwise></xsl:choose></span>
-																		<xsl:if test="units_other != 'null' and units_other != ''">&#160;&#160;
-																			<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'OTHER_UNITS'"/></xsl:call-template></label>:&#160;
-																			<span style="font-weight: normal;"><xsl:value-of select="units_other"/></span>
-																		</xsl:if>
-																		
-																	</div>
-																</div>
-																<div class="row">
 																		<xsl:variable name="perUnit">
 																			<xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="per/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="per/@label_fr"/></xsl:otherwise></xsl:choose>
 																		</xsl:variable>
-																	<div class="col-md-6">
+																	<div class="col-md-3">
 																		<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PER_STRENGTH'"/></xsl:call-template></label>&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="$perUnit"/></span>&#160;
-																		<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'VALUE'"/></xsl:call-template></label>:&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="per_value"/></span>&#160;
-																		<xsl:if  test="units_other_measure != 'null' and units_other_measure != ''">
-																			<label><xsl:value-of select="$perUnit"/></label>&#160;
-																			<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="units_measure/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="units_measure/@label_fr"/></xsl:otherwise></xsl:choose></span>
-																		</xsl:if>
-																		
+																		<xsl:choose>
+																		<xsl:when test="per_units_other_details != 'null' and per_units_other_details != ''">
+																				<span style="font-weight: normal;"><xsl:value-of select="per_units_other_details"/></span>
+																		</xsl:when>
+																		<xsl:otherwise>
+																				<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="per_units/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="per_units/@label_fr"/></xsl:otherwise></xsl:choose></span>
+																		</xsl:otherwise>
+																		</xsl:choose>
+																		&#160;<span style="font-weight: normal;"><xsl:value-of select="per_value"/></span>
 																	</div>
-																	<div class="col-md-6">
-																	<xsl:choose>
-																	<xsl:when test="units_other_measure != 'null' and units_other_measure != ''">
-																		<label>
-																			<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'OTHER_UNIT_MEASURE'"/></xsl:call-template>:&#160;
-																			<span style="font-weight: normal;"><xsl:value-of select="units_other_measure"/></span>
-																		</label>
-																	</xsl:when>
-																	<xsl:otherwise>
-																		<label><xsl:value-of select="$perUnit"/></label>&#160;
-																		<xsl:if test="units_presentation != 'null' and units_presentation != ''">
-																			<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="units_presentation/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="units_presentation/@label_fr"/></xsl:otherwise></xsl:choose></span>
-																		</xsl:if>
-																		<xsl:if test="units_measure != 'null' and units_measure != ''">
-																			<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="units_measure/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="units_measure/@label_fr"/></xsl:otherwise></xsl:choose></span>
-																		</xsl:if>
-																	</xsl:otherwise>
-																	</xsl:choose>
-																	</div>
-
+																	<div class="col-md-3"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ISBASE'"/></xsl:call-template>&#160;
+																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_base_calc"/></xsl:call-template></span>
+																	</label></div>
 																</div>
 																<div class="row">
-																	<div class="col-md-3"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ISBASE'"/></xsl:call-template>&#160;
-																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_base_calc"/></xsl:call-template></span>
-																	</label></div>
 																	<div class="col-md-3"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_NANO_MATERIAL'"/></xsl:call-template>&#160;
-																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_nanomaterial"/></xsl:call-template></span>
+																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_nanomaterial"/></xsl:call-template></span>
 																	</label></div>
 																	<div class="col-md-3"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_HUMAN_SOURCED'"/></xsl:call-template>&#160;
-																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_human_animal_src"/></xsl:call-template></span>
+																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_human_animal_src"/></xsl:call-template></span>
 																	</label></div>
+																	<xsl:if test="is_nanomaterial = 'Y'">
 																	<div class="col-md-3"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NANO_MATERIAL'"/></xsl:call-template>:&#160;
 																		<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="nanomaterial/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="nanomaterial/@label_fr"/></xsl:otherwise></xsl:choose></span>
 																		<xsl:if test="nanomaterial_details != 'null' and nanomaterial_details != ''">&#160;&#160;
@@ -803,6 +790,7 @@
 																		</xsl:if>
 
 																	</label></div>
+																	</xsl:if>
 																</div>
 															</fieldset>
 
@@ -817,13 +805,13 @@
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_ANIMAL_HUMAN_MATERIAL'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_ANIMAL_HUMAN_MATERIAL'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
 																		<div class="panel-body">
+																			<xsl:if test="is_animal_human_material = 'Y'">
 																			<div class="panel-heading">
 																				<h3 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_HUMAN_HDING'"/></xsl:call-template></h3>
 																			</div>
 																			<div>
-																				<xsl:if test="is_animal_human_material = 'Y'">
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
 																				<thead>
 																					<tr>
@@ -839,7 +827,7 @@
 																							<td class="fa fa-caret-right fa-lg fa-fw"></td>
 																							<td><xsl:value-of select="./ingredient_name"/></td>
 																							<td><xsl:value-of select="./cas_number"/></td>
-																							<td><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="in_final_container"/></xsl:call-template></td>
+																							<td><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="in_final_container"/></xsl:call-template></td>
 																						</tr>
 																						<tr class="out">
 																							<td colspan="4">
@@ -859,7 +847,7 @@
 																	</div>
 																	<div class="col-md-3">
 																		<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PRESENT_IN_FINAL'"/></xsl:call-template>?&#160;
-																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="in_final_container"/></xsl:call-template></span></label>
+																		<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="in_final_container"/></xsl:call-template></span></label>
 																	</div>
 																</div>
 
@@ -869,14 +857,14 @@
 																					</xsl:for-each>
 																				</tbody>
 																				</table>
-																				</xsl:if>
 																			</div>
+																			</xsl:if>
 																		</div>
 																	</section>
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPES'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPES'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -945,75 +933,7 @@
 
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPES'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
-																		<div class="panel-body">
-																			<div>
-																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
-																				<thead>
-																					<tr>
-																						<th style="width:2%"></th>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE'"/></xsl:call-template></th>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PACKAGE_SIZE'"/></xsl:call-template></th>
-																					</tr>
-																				</thead>
-																				<tbody>
-																					<xsl:for-each select="container_group">
-																						<tr onclick="showDetail(this);">
-																							<td class="fa fa-caret-right fa-lg fa-fw"></td>
-																							<td><xsl:value-of select="./container_details/container_type"/></td>
-																							<td><xsl:value-of select="./container_details/package_size"/></td>
-																						</tr>
-																						<tr class="out">
-																							<td colspan="4">
-															<fieldset>
-																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE_DETAILS'"/></xsl:call-template></legend>
-																<div class="row">
-																	<div class="col-md-6">
-																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE'"/></xsl:call-template>:&#160;</label>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6"><xsl:value-of select="./container_details/container_type"/></div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PACKAGE_SIZE'"/></xsl:call-template>:&#160;</label>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6"><xsl:value-of select="./container_details/package_size"/></div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																		<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SHELF_LIFE'"/></xsl:call-template>:&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="./container_details/shelf_life_number"/></span>&#160;
-																		<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language = 'fra'"><xsl:apply-templates select="./container_details/shelf_life_unit/@label_fr" /></xsl:when><xsl:otherwise><xsl:apply-templates select="./container_details/shelf_life_unit/@label_en" /></xsl:otherwise></xsl:choose></span>
-																		</label>
-																	</div>
-																</div>
-																<div class="row">
-																	<div class="col-md-6">
-																		<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'TEMP_RANGE'"/></xsl:call-template>:&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="./container_details/temperature_min"/></span>&#160;&#160;
-																		<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'TO'"/></xsl:call-template>:&#160;
-																		<span style="font-weight: normal;"><xsl:value-of select="./container_details/temperature_max"/></span>&#160;
-																		<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CELSIUS'"/></xsl:call-template>
-																		</label>
-																	</div>
-																</div>
-															</fieldset>
-																							</td>
-																						</tr>
-																					</xsl:for-each>
-																				</tbody>
-																				</table>
-																			</div>
-																		</div>
-																	</section>
-																</div>
-																<div>
-																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_TITLE'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_TITLE'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -1038,7 +958,7 @@
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRIES_MANUFACT'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="code" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRIES_MANUFACT'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -1244,7 +1164,7 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcreppi-2018-04-10-1239.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcreppi-2018-04-11-1421.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
 		          profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no"
 		          validator="internal" customvalidator="">
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>

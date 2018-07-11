@@ -363,7 +363,7 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/draftrepra-0-4.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/activity.html" processortype="saxon8" useresolver="yes" profilemode="0"
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/ip400Demo/draftrepra-0-2.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/activity.html" processortype="saxon8" useresolver="yes" profilemode="0"
 		          profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no"
 		          validator="internal" customvalidator="">
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
