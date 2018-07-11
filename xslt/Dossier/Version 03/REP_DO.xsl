@@ -26,14 +26,14 @@
     <!-- Dossier Enrolment -->
     <xsl:template match="DOSSIER_ENROL">
 		<div class="container">
-        <h1><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOSSIER_TEMP'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h1>
+        <h1><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOSSIER_TEMP'"/></xsl:call-template></h1>
 		<div class="well well-sm" >
 			<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
 				<TR>
-					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'EnrolStatus'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ENROL_VERSION'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DATE_SAVED'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
-					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DossierID'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'EnrolStatus'"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ENROL_VERSION'"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DATE_SAVED'"/></xsl:call-template></TD>
+					<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DossierID'"/></xsl:call-template></TD>
 				</TR>
 				<TR>
 					<TD style="text-align: center;"> <xsl:apply-templates select="application_type" /> </TD>
@@ -45,7 +45,7 @@
 		</div>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-               <h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DossierInfo'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h2>
+               <h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DossierInfo'"/></xsl:call-template></h2>
 			</header>
             <div class="panel-body">
 
@@ -54,14 +54,12 @@
 						<div class="col-xs-4">
 							<label class="required"><xsl:call-template name="hp-label">
 								<xsl:with-param name="code" select="'A_DossierType'"/>
-								<xsl:with-param name="language" select="$language"/>
 							</xsl:call-template>:&#160;</label>
 							<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="dossier_type"/></span>
 						</div>
 						<div class="col-xs-4">
 							<label class="required"><xsl:call-template name="hp-label">
 								<xsl:with-param name="code" select="'B_CompanyID'"/>
-								<xsl:with-param name="language" select="$language"/>
 							</xsl:call-template>:</label>
 							<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="company_id"/></span>
 						</div>
@@ -70,20 +68,17 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 								<xsl:with-param name="code" select="'C_SubmissionSignThird'"/>
-								<xsl:with-param name="language" select="$language"/>
 							</xsl:call-template>:&#160;</label>
 							<span style="padding-left:3px;white-space:nowrap;">
 							<xsl:choose>
 							<xsl:when test=" third_party_signed = 'Y'">
 								<xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'Yes'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'No'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>
 							</xsl:otherwise>
 							</xsl:choose>
@@ -94,7 +89,6 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'D_ProductName'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 							<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="product_name"/></span>
 						</div>
@@ -103,7 +97,6 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'E_ProperCommonNonProrietaryName'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 							<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="common_name"/></span>
 						</div>
@@ -112,35 +105,11 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'F_DrugUse'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 							<span style="padding-left:3px;white-space:nowrap;">
 								<xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="drug_use"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>
-<!--								<xsl:choose>
-								<xsl:when test="drug_use = 'HUMAN'"><xsl:call-template name="hp-label">
-									<xsl:with-param name="code" select="drug_use"/>
-									<xsl:with-param name="language" select="$language"/>
-								</xsl:call-template>
-								</xsl:when>
-								<xsl:when test="drug_use = 'RADIO'"><xsl:call-template name="hp-label">
-									<xsl:with-param name="code" select="'RADIO'"/>
-									<xsl:with-param name="language" select="$language"/>
-								</xsl:call-template>
-								</xsl:when>
-								<xsl:when test="drug_use = 'VET'"><xsl:call-template name="hp-label">
-									<xsl:with-param name="code" select="'No'"/>
-									<xsl:with-param name="language" select="$language"/>
-								</xsl:call-template>Veterinary
-								</xsl:when>
-								<xsl:when test="drug_use = 'DISINFECT'"><xsl:call-template name="hp-label">
-									<xsl:with-param name="code" select="'No'"/>
-									<xsl:with-param name="language" select="$language"/>
-								</xsl:call-template>Disinfectant
-								</xsl:when>
-								</xsl:choose>-->
 							</span>
 						</div>
 					</div>
@@ -148,7 +117,6 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'G_RelatedInfo'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 							<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="related_information"/></span>
 						</div>
@@ -157,14 +125,25 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'H_Therapeutic'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 							<div style="padding-left:3px;white-space:nowrap;">
-								<ul style="list-style:none;">
-		                        <xsl:for-each select="therapeutic_class_list/therapeutic_class">
-									<li><span><xsl:value-of select="."/></span></li>
-								</xsl:for-each>
-								</ul>
+								<table border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
+								<thead>
+								<tr><th>
+									<label class="required"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'THERAPEUTIC_CLASSIFICATION_NAME'"/></xsl:call-template></label>
+								</th></tr>
+								</thead>
+								<tbody>
+				                        <xsl:for-each select="therapeutic_class_list/therapeutic_class">
+											<tr>
+												<xsl:if test="position() mod 2 = 0">
+													<xsl:attribute name="style">background-color:#b0bed9;</xsl:attribute>
+												</xsl:if>
+												<td><span><xsl:value-of select="."/></span></td>
+											</tr>
+										</xsl:for-each>
+								</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -172,20 +151,17 @@
 						<div class="col-xs-12">
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'I_IsCaRefProduct'"/>
-									<xsl:with-param name="language" select="$language"/>
-								</xsl:call-template>?</label>
+								</xsl:call-template></label>
 							<span style="padding-left:3px;white-space:nowrap;">
 							<xsl:choose>
 							<xsl:when test=" is_ref_product = 'Y'">
 								<xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'Yes'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>
 							</xsl:when>
 							<xsl:otherwise>
 								<xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'No'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>
 							</xsl:otherwise>
 							</xsl:choose>
@@ -199,7 +175,6 @@
 							<li>
 							<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'CaRefProduct'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template></label>
 							</li>
 							<li>
@@ -207,14 +182,12 @@
 									<li>
 									<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'I_BrandName'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 									<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="cdn_ref_product/brand_name"/></span>
 									</li>
 									<li>
 									<label class="required"><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'I_CompanyName'"/>
-									<xsl:with-param name="language" select="$language"/>
 								</xsl:call-template>:&#160;</label>
 									<span style="padding-left:3px;white-space:nowrap;"><xsl:value-of select="cdn_ref_product/company_name"/></span>
 									</li>
@@ -230,7 +203,7 @@
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-               <h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'REP_CONTACT_INFO'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></h2>
+               <h2 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'REP_CONTACT_INFO'"/></xsl:call-template></h2>
 			</header>
             <div class="panel-body">
 				<div class="well well-sm" >
@@ -238,34 +211,44 @@
 						<tbody>
 							<xsl:for-each select="contact_record">
 								<tr>
-									<xsl:if test="position() mod 2 = 0">
-										<xsl:attribute name="style">background-color:#b0bed9;</xsl:attribute>
-									</xsl:if>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SALUTATION'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
-									<td style="padding-left:2px;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="./rep_contact_details/salutation"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'JOBTITLE'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
-									<td style="padding-left:2px;"><xsl:value-of select="rep_contact_details/job_title"/></td>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'LANGCORRESPOND'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
-									<td style="padding-left:2px;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="rep_contact_details/language_correspondance"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
+									<xsl:choose>
+									<xsl:when test="position() mod 2 = 1">
+										<td colspan="6" style="background-color:grey;color:white;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROLE_PRIMARY'"/></xsl:call-template></td>
+									</xsl:when>
+									<xsl:otherwise>
+										<td colspan="6" style="background-color:grey;color:white;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROLE_SECONDARY'"/></xsl:call-template></td>
+									</xsl:otherwise>
+									</xsl:choose>
 								</tr>
 								<tr>
 									<xsl:if test="position() mod 2 = 0">
 										<xsl:attribute name="style">background-color:#b0bed9;</xsl:attribute>
 									</xsl:if>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FIRSTNAME'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SALUTATION'"/></xsl:call-template></td>
+									<td style="padding-left:2px;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="./rep_contact_details/salutation"/></xsl:call-template></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'JOBTITLE'"/></xsl:call-template></td>
+									<td style="padding-left:2px;"><xsl:value-of select="rep_contact_details/job_title"/></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'LANGCORRESPOND'"/></xsl:call-template></td>
+									<td style="padding-left:2px;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="rep_contact_details/language_correspondance"/></xsl:call-template></td>
+								</tr>
+								<tr>
+									<xsl:if test="position() mod 2 = 0">
+										<xsl:attribute name="style">background-color:#b0bed9;</xsl:attribute>
+									</xsl:if>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FIRSTNAME'"/></xsl:call-template></td>
 									<td style="padding-left:2px;"><xsl:value-of select="rep_contact_details/given_name"/></td>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INITIALS'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INITIALS'"/></xsl:call-template></td>
 									<td style="padding-left:2px;"><xsl:value-of select="rep_contact_details/initials"/></td>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'LASTNAME'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'LASTNAME'"/></xsl:call-template></td>
 									<td style="padding-left:2px;"><xsl:value-of select="rep_contact_details/surname"/></td>
 								</tr>
 								<tr>
 									<xsl:if test="position() mod 2 = 0">
 										<xsl:attribute name="style">background-color:#b0bed9;</xsl:attribute>
 									</xsl:if>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
-									<td style="padding-left:2px;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="concat('ROLE_', rep_contact_role)"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
-									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'EMAIL'"/><xsl:with-param name="language" select="$language"/></xsl:call-template></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE'"/></xsl:call-template></td>
+									<td style="padding-left:2px;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="concat('ROLE_', rep_contact_role)"/></xsl:call-template></td>
+									<td style="padding-left:2px; font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'EMAIL'"/></xsl:call-template></td>
 									<td colspan="3" style="padding-left:2px;"><xsl:value-of select="rep_contact_details/email"/></td>
 								</tr>
 							</xsl:for-each>
@@ -277,7 +260,6 @@
 		</div>
     </xsl:template>
 	<xsl:template name="hp-label">
-		<xsl:param name="language" select="/.."/>
 		<xsl:param name="code" select="/.."/>
 		<xsl:variable name="value" select="$labelLookup/SimpleCodeList/row[code=$code]/*[name()=$language]"/>
 		<xsl:if test="$value"><xsl:value-of select="$value"/></xsl:if>
@@ -287,9 +269,10 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="..\..\..\..\..\..\Downloads\draftrepdo-1234567-1-1.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\dossier.html" processortype="saxon8"
+		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="..\..\..\..\..\..\Downloads\draftrepdo-0-5.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\dossier.html" processortype="saxon8"
 		          useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath=""
 		          postprocessgeneratedext="" validateoutput="no" validator="internal" customvalidator="">
+			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
 			<parameterValue name="language" value="'eng'"/>
 			<advancedProp name="sInitialMode" value=""/>
 			<advancedProp name="schemaCache" value="||"/>
