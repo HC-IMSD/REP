@@ -10,6 +10,8 @@
         'tabsModule',
          'drugUseModule',
         'scheduleAModule',
+        'importerListModule',
+        'disinfectantTypeModule',
         'dossierDataLists',
         'dataLists',
         'filterLists',
@@ -106,9 +108,11 @@
             "msg_one_scheda":{
                 "type":"fieldset",
                 "parent": "fs_schedAMissing"
+            },
+            "disi_type_missing": {
+                "type": "fieldset",
+                "parent": "fs_disi_type_missing"
             }
-
-
         };
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.min5Error = [
@@ -124,12 +128,14 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
         vm.drugUseList=[];
+        vm.disinfectantTypeList=[];
         vm.extraAppendixModel="none";
         vm.missingAppendixModel="none";
 
         vm.$onInit = function () {
             vm.showSummary = false;
             vm.drugUseList = DossierLists.getDrugUseList();
+            vm.disinfectantTypeList = DossierLists.getDisinfectantTypeList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -191,6 +197,7 @@
                 vm.model = vm.drugProductService.loadFromFile(resultJson);
                 //process file load results
                 //load into data model as result json is not null
+                vm.drugUseUpdate();
                 vm.drugProdForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
@@ -293,6 +300,58 @@
                 vm.model.drugProduct.scheduleAGroup = vm.drugProductService.getDefaultScheduleA();
             }
             return false;
+        };
+
+        /***
+         * determin to display Disinfectant Type field
+         */
+        vm.isDisinfectant = function () {
+            if (!vm.model || !vm.model.drugProduct || !vm.model.drugProduct.drugUse) return false;
+            return (vm.model.drugProduct.drugUse.id === "DISINFECT");
+        };
+
+        /***
+         * reset Disinfectant Type field
+         */
+        vm.drugUseUpdate = function () {
+            if (!vm.isDisinfectant()) {
+                vm.model.drugProduct.disinfectantType = {
+                    hospital: false,
+                    foodProcessing: false,
+                    medicalInstruments: false,
+                    domestic: false,
+                    barn: false,
+                    institutionalIndustrial: false,
+                    contactLens: false
+                };
+            }
+        };
+
+        //????
+        vm.onDisiTypeUpdate = function (newRole) {
+            var aRole = {};
+            angular.extend(aRole, newRole);
+            vm.addressModel.addressRole = aRole;
+
+            if (vm.addressRecForm.$valid) {
+                vm.isDetailValid({state: true});
+                vm.addressRecForm.$setPristine();
+                vm.onUpdate({rec: vm.addressModel});
+                vm.showSummary=false;
+                vm.errorSummaryUpdate(); //updating parent
+            } else {
+                vm.showSummary = true;
+                vm.updateErrorSummaryState(); //updating current
+                vm.focusOnSummary()
+            }
+        };
+
+        /***
+         * reset Disinfectant Type field
+         */
+        vm.updateImporterList = function(list){
+            if(!list) return;
+            vm.model.importerRecord = list;
         };
 
         /**
@@ -449,6 +508,7 @@
             vm.propIndicationId="prop_Indication"+scopeId;
             vm.fsType = "fs_type" + scopeId;
             vm.properNameId="proper_name"+ scopeId;
+            vm.disiTypeId = "disinfectant_type" + scopeId;
         }
 
 

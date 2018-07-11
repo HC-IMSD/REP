@@ -7,6 +7,8 @@
   "INFO_DRUGPROD":"Drug Product Information",
   "DRUGPROD":"Drug Product",
   "TYPE_DRUGPROD":"Drug Product Type",
+  "DISINFECTANT_TYPE": "Disinfectant Type",
+  "DISI_TYPE_MISSING": "Record Disinfectant Type",
   "SCHED_DIN":"Schedule A DIN Number",
   "PROP_INDICATION":"Proposed Indication/Use/Dosage (including maximum daily dose)",
   "SCHEDULE_PRESC_STATUS": "Schedule and Prescription status (check all that applies): The product is",

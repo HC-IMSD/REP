@@ -222,7 +222,7 @@
                     <div class="panel-body">
                         <input type="hidden" required name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
                                  aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
-                        <cmp-country-list list-items="formulRecCtrl.frmModel.countryList"
+                        <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" with-unknown="false"
                                           on-update="formulRecCtrl.updateCountryList(list)"
                                           show-errors="formulRecCtrl.showSummary"
                                           field-label="COUNTRY_MAN"></cmp-country-list>

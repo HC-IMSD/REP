@@ -21,8 +21,9 @@
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="dossier_id" type="char_0_7_content"/>
 	<hpfb:element name="proper_name" type="char_1_256_content"/>
-	<hpfb:element name="importer_id" type="char_0_6_content"/>
-	<hpfb:element name="importer_name" type="char_0_256_content"/>
+	<hpfb:element name="importer_record" type="importer_record_content"/>
+	<hpfb:element name="importer_company_id" type="char_0_6_content"/>
+	<hpfb:element name="importer_company_name" type="char_0_256_content"/>
 	<hpfb:element name="is_sched_c" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_d" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_f" type="required_yes_no_content"/>
@@ -42,6 +43,15 @@
 			</hpfb:simpleContent>
 		</hpfb:complexType>
 	</hpfb:element>
+
+	<hpfb:element name="disinfectant_type" type="disinfectant_type_content"/>
+	<hpfb:element name="hospital" type="required_yes_no_content"/>
+	<hpfb:element name="food_processing" type="required_yes_no_content"/>
+	<hpfb:element name="medical_instruments" type="required_yes_no_content"/>
+	<hpfb:element name="domestic" type="required_yes_no_content"/>
+	<hpfb:element name="barn" type="required_yes_no_content"/>
+	<hpfb:element name="institutional_industrial" type="required_yes_no_content"/>
+	<hpfb:element name="contact_lens" type="required_yes_no_content"/>
 
 	<!-- Schedule A definitions-->
 	<hpfb:element name="schedule_a_group" type="schedule_a_content"/>
@@ -325,13 +335,13 @@
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="proper_name"/>
-			<hpfb:element ref="importer_id"/>
-			<hpfb:element ref="importer_name"/>
+			<hpfb:element ref="importer_record" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
 			<hpfb:element ref="drug_use"/>
+			<hpfb:element ref="disinfectant_type"/>
 			<hpfb:element ref="is_sched_c"/>
 			<hpfb:element ref="is_sched_d"/>
 			<hpfb:element ref="is_sched_f"/>
@@ -342,6 +352,25 @@
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="formulation_group"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="importer_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="importer_company_id"/>
+			<hpfb:element ref="importer_company_name"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="disinfectant_type_content">
+		<hpfb:sequence>
+			<hpfb:element ref="hospital"/>
+			<hpfb:element ref="food_processing"/>
+			<hpfb:element ref="medical_instruments"/>
+			<hpfb:element ref="domestic"/>
+			<hpfb:element ref="barn"/>
+			<hpfb:element ref="institutional_industrial"/>
+			<hpfb:element ref="contact_lens"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 

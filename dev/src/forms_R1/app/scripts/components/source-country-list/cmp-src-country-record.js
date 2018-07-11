@@ -55,6 +55,9 @@
          * Updates the display value for the object for summary display
          */
         vm.countryChanged=function($item,$model){
+            if(vm.model.country.id !== UNKNOWN) {
+                vm.model.unknownCountryDetails = "";
+            }
             vm.model.display=$model.id;
         };
 
@@ -80,7 +83,6 @@
             vm.onDelete({id: vm.model.id})
         };
 
-
         vm.showError = function (ctrl) {
             if(!ctrl) return false;
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
@@ -90,10 +92,7 @@
             if(!vm.model || !vm.model.country){
                 return false;
             }
-            if(vm.model.country.id===UNKNOWN){
-                return true;
-            }
-            return false;
+            return (vm.model.country.id === UNKNOWN);
         };
 
         function _setIdNames() {

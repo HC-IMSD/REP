@@ -51,6 +51,7 @@
             getUnitsPresentationList: _getUnitsPresentationArray,
             getUnitsMeasureList: _getUnitsMeasureArray,
             getDrugUseList:_getDrugUseArray,
+            getDisinfectantTypeList:_getDisinfectantTypeArray,
             getIngRoleList:_getIngRoleArray,
             getPerList:_getPerArray,
             getStrengthList:_getStrengthArray,
@@ -174,6 +175,20 @@
                     {"id":"DM","en":"Drug and Medical Device","fr":"fr_Drug and Medical Device"}
                 ]
             )
+        }
+
+        function _getDisinfectantTypeArray(){
+            return(
+                [
+                    {"id":"HOSPITAL","en":"Hospital","fr":"fr_Hospital"},
+                    {"id":"FP","en":"Food Processing","fr":"fr_Food Processing"},
+                    {"id":"MI","en":"Medical Instruments","fr":"fr_Medical Instruments"},
+                    {"id":"DOMESTIC","en":"Domestic","fr":"fr_Domestic"},
+                    {"id":"BARN","en":"Barn","fr":"fr_Barn"},
+                    {"id":"II","en":"Institutional/Industrial","fr":"fr_Institutional/Industrial"},
+                    {"id":"CL","en":"Contact Lens","fr":"fr_Contact Lens"}
+                ]
+            );
         }
 
         function _getIngRoleArray(){

@@ -248,9 +248,7 @@
 
         vm.updateRequesterList = function(list){
             if(!list) return;
-
             vm.transactionModel.solicitedRequesterReord = list;
-            //vm.$onChanges(); //todo - do we need it????
         };
 
         /**

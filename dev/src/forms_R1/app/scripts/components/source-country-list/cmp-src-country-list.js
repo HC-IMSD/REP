@@ -5,7 +5,7 @@
     'use strict';
 
     angular
-        .module('srcCountryListModule', ['dataLists', 'countryRecordModule', 'ui.select', 'hpfbConstants'])
+        .module('srcCountryListModule', ['dataLists', 'srcCountryRecordModule', 'ui.select', 'hpfbConstants'])
 })();
 
 (function () {
@@ -35,8 +35,8 @@
         var vm = this;
         var countries = getCountryAndProvinces.getCountries();
         var unknownRec=getCountryAndProvinces.getUnknownCountryRecord();
-        countries.unshift(unknownRec);
-        vm.baseCountries = countries;
+        vm.baseCountries = angular.copy(countries);
+        vm.baseCountries.unshift(unknownRec);
         vm.countryList = "";
         vm.model = {};
         vm.isDetailValid = true;
