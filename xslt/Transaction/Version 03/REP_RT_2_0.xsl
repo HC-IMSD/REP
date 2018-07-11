@@ -694,7 +694,7 @@
 							<div class="col-xs-12">
 								<label><xsl:element name="input">
                                     <xsl:attribute name="type">checkbox</xsl:attribute>
-                                    <xsl:if test=" confirm_regulatory_contact = 'Y'">
+                                    <xsl:if test=" same_regulatory_contact = 'Y'">
                                         <xsl:attribute name="checked"></xsl:attribute>
                                     </xsl:if>
                                     <xsl:attribute name="disabled">disabled</xsl:attribute>
@@ -737,9 +737,9 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="file:///e:/hcreprt-2018-06-20-0944.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\transaction.html" processortype="saxon8" useresolver="yes"
-		          profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
-		          validateoutput="no" validator="internal" customvalidator="">
+		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="file:///e:/ip400Demo/hcreprt-2018-07-10-0800.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\transaction.html" processortype="saxon8"
+		          useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath=""
+		          postprocessgeneratedext="" validateoutput="no" validator="internal" customvalidator="">
 			<parameterValue name="labelFile" value="'file:///C:/Users/hcuser/git/HC-IMSD/REP/xslt/hp-ip400-labels.xml'"/>
 			<advancedProp name="sInitialMode" value=""/>
 			<advancedProp name="schemaCache" value="||"/>
