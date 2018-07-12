@@ -188,6 +188,12 @@
             var rootTag=this.getRootTagName();
             var baseModel = {};
             //order is important!!! Must match schema
+            baseModel.enrolment_version = jsonObj.enrolmentVersion;
+            baseModel.date_saved = jsonObj.dateSaved;
+            baseModel.application_type = jsonObj.applicationType;
+            baseModel.software_version = "2.0.0"; //TODO: hard code or make a function, should be centrally available
+            baseModel.data_checksum = "";
+
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
             baseModel.proper_name = jsonObj.properName;
@@ -197,11 +203,6 @@
             baseModel.importer = jsonObj.importer === true ? 'Y' : 'N';
             baseModel.importer_record =
                 transformImpToFile(jsonObj.importerRecord);
-            baseModel.enrolment_version = jsonObj.enrolmentVersion;
-            baseModel.date_saved = jsonObj.dateSaved;
-            baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "2.0.0"; //TODO: hard code or make a function, should be centrally available
-            baseModel.data_checksum = "";
 
             if(jsonObj.drugProduct.drugUse) {
                 baseModel.drug_use = {
