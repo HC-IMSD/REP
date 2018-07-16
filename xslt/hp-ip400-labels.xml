@@ -105,9 +105,9 @@
 		<fra>fr_E. Proper, Common or Non-Proprietary Name</fra>
 	</row>
 	<row>
-		<code>F_DrugUse</code>
-		<eng>F. Drug Use</eng>
-		<fra>fr_F. Drug Use</fra>
+		<code>DrugUse</code>
+		<eng>Drug Use</eng>
+		<fra>fr_Drug Use</fra>
 	</row>
 	<row>
 		<code>G_RelatedInfo</code>
@@ -379,6 +379,8 @@
 <row><code>AMEND</code><eng>Amend</eng><fra>fr_Amend</fra></row>
 <row><code>REP_CONTACT</code><eng>REP Contact</eng><fra>fr_REP Contact</fra></row>
 <row><code>ONE_ROLE</code><eng>Role</eng><fra>fr_Role</fra></row>
+<row><code>ONE_ROLE_MED</code><eng>Medicinal Ingredient</eng><fra>fr_Medicinal Ingredient</fra></row>
+<row><code>ONE_ROLE_NON_MED</code><eng>Non-medicinal Ingredient</eng><fra>fr_Non-medicinal Ingredient</fra></row>
 <row><code>CONTACT_DETAILS</code><eng>Company Representative Details</eng><fra>fr_Company Representative Details</fra></row>
 <row><code>ADD_CONTACT</code><eng>Add REP Contact</eng><fra>fr_Add REP Contact</fra></row>
 <row><code>CONTACT_ROLE_LEGEND</code><eng>Select one or more roles for this company representative</eng><fra>fr_Select one or more roles for this company representative</fra></row>
@@ -501,9 +503,9 @@
 <row><code>NANO_MATERIAL</code><eng>Nanomaterial</eng><fra>fr_Nanomaterial</fra></row>
 <row><code>NANO_MATERIAL_OTHER</code><eng>Indicate the type of nanomaterial</eng><fra>fr_Indicate the type of nanomaterial</fra></row>
 <row><code>ANIMAL_HUMAN_SOURCED</code><eng>Animal or Human Sourced?</eng><fra>fr_Animal or Human Sourced?</fra></row>
-<row><code>IS_ANIMAL_HUMAN_MATERIAL</code><eng>B.  Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</eng><fra>fr_B.  Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</fra></row>
+<row><code>IS_ANIMAL_HUMAN_MATERIAL</code><eng>Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</eng><fra>fr_B.  Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</fra></row>
 <row><code>ANIMAL_HUMAN_HDING</code><eng>Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug</eng><fra>fr_Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug</fra></row>
-<row><code>CONTAINER_TYPES</code><eng>C. Container Types</eng><fra>fr_C. Container Types</fra></row>
+<row><code>CONTAINER_TYPES</code><eng>Container Types, Package Size and shelf Life</eng><fra>fr_C. Container Types</fra></row>
 <row><code>MATERIAL_NAME</code><eng>Material Name</eng><fra>fr_Material Name</fra></row>
 <row><code>PRESENT_IN_FINAL</code><eng>Present in final Container</eng><fra>fr_Present in final Container</fra></row>
 <row><code>MATERIAL_DETAILS</code><eng>Animal and / or Human Sourced Materials Details</eng><fra>fr_Animal and / or Human Sourced Materials Details</fra></row>
@@ -511,7 +513,8 @@
 <row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
 <row><code>DOSSIER_TEMP</code><eng>Dossier Template: Regulatory Enrolment Process (REP)</eng><fra></fra></row>
 <row><code>REGULATED_CDSA</code><eng>regulated under the Controlled Drugs and Substances Act</eng><fra>fr_regulated under the Controlled Drugs and Substances Act</fra></row>
-<row><code>PRESCRIPTION_DRUG</code><eng>a Prescription Drug</eng><fra>fr_a Prescription Drug</fra></row>
+<row><code>PRESCRIPTION_DRUG</code><eng>the Prescription Drug List</eng><fra>fr_the Prescription Drug List</fra></row>
+<row><code>IS_NON_PRESCRIPTION_DRUG</code><eng>a non-prescription drug</eng><fra>fr_a non-prescription drug</fra></row>
 <row><code>NON_PRESC_SCHEDULE_A</code><eng>a non-prescription drug to which one or more Schedule A claims apply</eng><fra>fr_a non-prescription drug to which one or more Schedule A claims apply</fra></row>
 <row><code>PROP_INDICATION</code><eng>Proposed Indication</eng><fra>fr_Proposed Indication</fra></row>
 <row><code>SCHEDA_DESCRIPTION</code><eng>Provide information below for non prescription products that have associated Schedule A claims only.</eng><fra>fr_Provide information below for non prescription products that have associated Schedule A claims only.</fra></row>
@@ -559,10 +562,10 @@
 <row><code>TO</code><eng>To</eng><fra>fr_To</fra></row>
 <row><code>TEMP_RANGE</code><eng>Temperature Range From</eng><fra>fr_Temperature Range From</fra></row>
 <row><code>SHELF_LIFE</code><eng>Shelf Life</eng><fra>fr_Shelf Life</fra></row>
-<row><code>ROA_TITLE</code><eng>D. Routes of Administration</eng><fra>fr_D. Routes of Administration</fra></row>
+<row><code>ROA_TITLE</code><eng>Routes of Administration</eng><fra>fr_D. Routes of Administration</fra></row>
 <row><code>ROA_LBL</code><eng>Route of Administration</eng><fra>fr_Route of Administration</fra></row>
 <row><code>OTHER_ROA_DETAILS</code><eng>Other Route of Administration Details</eng><fra>fr_Other Route of Administration Details</fra></row>
-<row><code>COUNTRIES_MANUFACT</code><eng>E. Countries of manufacture for this product</eng><fra>fr_E. Countries of manufacture for this product</fra></row>
+<row><code>COUNTRIES_MANUFACT</code><eng>Countries of manufacture for this product</eng><fra>fr_E. Countries of manufacture for this product</fra></row>
 <row><code>COUNTRY_NAME</code><eng>Country Name</eng><fra>fr_Country Name</fra></row>
 <row><code>COUNTRY_MAN</code><eng>Country of Manufacture</eng><fra>fr_Country of Manufacture</fra></row>
 <row><code>APPENDIX4</code><eng>Animal / Human Sourced</eng><fra>fr_Animal / Human Sourced</fra></row>
@@ -681,7 +684,7 @@
 <row><code>B14-20160301-02</code><eng>Biological</eng><fra>fr_Biological</fra></row>
 <row><code>B14-20160301-10</code><eng>Post-Market Vigilance</eng><fra>fr_Post-Market Vigilance</fra></row>
 <row><code>B14-20160301-07</code><eng>Drug Master File</eng><fra>fr_Drug Master File</fra></row>
-<row><code>ADDRESS_NOC</code><eng>Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent</eng><fra>FR_Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent</fra></row>
+<row><code>ADDRESS_NOC</code><eng>Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent(when required)</eng><fra>FR_Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent</fra></row>
 <row><code>TYPE_VNC</code><eng>Type of Notifiable Change (NC) or Veterinary Notifiable Change (VNC) submission</eng><fra>fr_Type of Notifiable Change (NC) or Veterinary Notifiable Change (VNC) submission</fra></row>
 <row><code>text_label_change</code><eng>Change in text of labelling</eng><fra>fr_Change in text of labelling</fra></row>
 <row><code>drug_substance_change</code><eng>Change in drug substance (source, synthesis)</eng><fra>fr_Change in drug substance (source, synthesis)</fra></row>
@@ -813,5 +816,16 @@
 <row><code>NOTE_5</code><eng>You are not eligible to apply for fee remission. The submission fee is less than 10% of anticipated gross revenues.</eng><fra>fr_You are not eligible to apply for fee remission. The submission fee is less than 10% of anticipated gross revenues.</fra></row>
 <row><code>NOTE_6</code><eng>Review fees must not be included with the submission, supplement or application. Sponsors will be invoiced for fees of more than $10,000.</eng><fra>fr_Review fees must not be included with the submission, supplement or application. Sponsors will be invoiced for fees of more than $10,000.</fra></row>
 <row><code>THERAPEUTIC_CLASSIFICATION_NAME</code><eng>Therapeutic Classification Name</eng><fra>fr_Therapeutic Classification Name</fra></row>
+<row><code>MANUFACTURER_SPONSOR</code><eng>Manufacturer/Sponsor</eng><fra>fr_Manufacturer/Sponsor</fra></row>
+<row><code>CANADIAN_IMPORTER</code><eng>Canadian Importer</eng><fra>fr_Canadian Importer</fra></row>
+<row><code>IMPORTER</code><eng>Importer</eng><fra>fr_Canadian Importer</fra></row>
+<row><code>HOSPITAL</code><eng>Hospital</eng><fra>fr_Hospital</fra></row>
+<row><code>DOMESTIC</code><eng>Domestic</eng><fra>fr_Domestic</fra></row>
+<row><code>CONTACT_LENS</code><eng>Contact Lens</eng><fra>fr_Contact Lens</fra></row>
+<row><code>FOOD_PROCESSING</code><eng>Food Processing</eng><fra>fr_Food Processing</fra></row>
+<row><code>BARN</code><eng>Barn</eng><fra>fr_Barn</fra></row>
+<row><code>MEDICAL_INSTRUMENTS</code><eng>Medical Instruments</eng><fra>fr_Medical Instruments</fra></row>
+<row><code>INSTITUTIONAL_INDUSTRIAL</code><eng>Institutional/Industrial</eng><fra>fr_Institutional/Industrial</fra></row>
+<row><code>DISINFECTANT_TYPE</code><eng>Disinfectant Type</eng><fra>fr_Disinfectant Type</fra></row>
 
 </SimpleCodeList>
