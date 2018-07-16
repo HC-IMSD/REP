@@ -332,6 +332,7 @@
                                  ng-class="{'has-error':schedACtrl.schedAForm[schedACtrl.schedIndId].$invalid}">
                                 <label for="{{::schedACtrl.schedIndId}}" class="required">
                                     <span class="field-name">{{::'SCHEDA_CLAIMS'|translate}}</span>
+                                    <strong class="required">{{::'REQUIRED' |translate}}</strong>
                                     <cmp-error-message field-name="schedACtrl.schedIndId"
                                                        form-ref="schedACtrl.schedAForm"
                                                        show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.schedIndId])"
