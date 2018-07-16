@@ -86,20 +86,208 @@
 								<div class="col-xs-12"><span style="font-weight:normal;"><xsl:value-of select="proper_name"/></span></div>
 							</div>
 						</div>
-						<TABLE border="1" cellspacing="2" cellpadding="2" style="table-layout: fixed; width: 100%;word-wrap: break-word;">
-							<TR>
-								<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IMP_COMP_ID'"/></xsl:call-template></TD>
-								<TD style="text-align: center;font-weight:bold;" colspan="2"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IMPORTER_COMPANY_NAME_IF'"/></xsl:call-template></TD>
-								<TD style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DRUG_USE'"/></xsl:call-template></TD>
-							</TR>
-							<TR>
-								<TD style="text-align: center;"> <span><xsl:apply-templates select="importer_id" /></span> </TD>
-								<TD style="text-align: center;" colspan="2"> <span><xsl:apply-templates select="importer_name" /></span> </TD>
-								<TD style="text-align: center;"><span><xsl:choose><xsl:when test="$language = 'fra'"><xsl:apply-templates select="drug_use/@label_fr" /></xsl:when><xsl:otherwise><xsl:apply-templates select="drug_use/@label_en" /></xsl:otherwise></xsl:choose></span> </TD>
-							</TR>
-						</TABLE>
+						<div class="row">
+							<div class="col-xs-12">
+								<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ADDRESS_NOC'"/></xsl:call-template>:</label>
+								<table>
+									<tr>
+										<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" manufacturer = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MANUFACTURER_SPONSOR'"/></xsl:call-template>
+										</span>
+										</td>
+										<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" mailing = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTACT_MAILING'"/></xsl:call-template>
+										</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" manufacturer = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'THIS_ACTIVITY'"/></xsl:call-template>
+										</span>
+										</td>
+										<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" manufacturer = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CANADIAN_IMPORTER'"/></xsl:call-template>
+										</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
 						<div class="row"><br/>
 						</div>
+						<div class="row">
+						<div class="col-sm-12 form-group">
+							<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IMPORTER'"/></xsl:call-template></label>
+							<TABLE class="table dataTable table-bordered">
+								<thead>
+								<tr>
+									<th style="text-align: center;font-weight:bold;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IMP_COMP_ID'"/></xsl:call-template></th>
+									<th style="text-align: center;font-weight:bold;" colspan="2"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IMPORTER_COMPANY_NAME_IF'"/></xsl:call-template></th>
+								</tr>
+								</thead>
+								<xsl:for-each select="importer_record">
+								<TR>
+									<TD><span><xsl:apply-templates select="./importer_company_id" /></span> </TD>
+									<TD colspan="2"> <span><xsl:apply-templates select="./importer_company_name" /></span> </TD>
+								</TR>
+								</xsl:for-each>
+							</TABLE>
+						</div>
+						</div>
+						<div class="row"><br/>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 form-group">
+								<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DrugUse'"/></xsl:call-template>:&#160;
+								<span style="font-weight:normal;"><xsl:choose><xsl:when test="$language = 'eng'"><xsl:value-of select="drug_use/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="drug_use/@label_fr"/></xsl:otherwise></xsl:choose></span>
+								</label>
+							</div>
+						</div>
+						<xsl:if test="drug_use = 'DISINFECT'">
+							<div class="row">
+							<div class="col-xs-12 form-group">
+							<table>
+							<tbody>
+								<tr><td colspan="3"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DISINFECTANT_TYPE'"/></xsl:call-template></label></td></tr>
+								<tr>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/hospital = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'HOSPITAL'"/></xsl:call-template>
+										</span>
+									</td>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/food_processing = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FOOD_PROCESSING'"/></xsl:call-template>
+										</span>
+									</td>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/medical_instruments = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MEDICAL_INSTRUMENTS'"/></xsl:call-template>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/domestic = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOMESTIC'"/></xsl:call-template>
+										</span>
+									</td>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/barn = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'BARN'"/></xsl:call-template>
+										</span>
+									</td>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/institutional_industrial = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INSTITUTIONAL_INDUSTRIAL'"/></xsl:call-template>
+										</span>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<xsl:element name="input">
+							                <xsl:attribute name="type">checkbox</xsl:attribute>
+							                <xsl:if test=" disinfectant_type/contact_lens = 'Y'">
+							                    <xsl:attribute name="checked"></xsl:attribute>
+							                </xsl:if>
+							                <xsl:attribute name="disabled">disabled</xsl:attribute>
+											<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
+							            </xsl:element>
+										<span style="font-weight:normal;padding-left:15px;">
+											<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTACT_LENS'"/></xsl:call-template>
+										</span>
+									</td>
+									<td></td><td></td>
+								</tr>
+							</tbody>
+							</table>
+							</div>
+							</div>
+						</xsl:if>
 						<div class="row">
 							<div class="col-xs-12 form-group">
 								<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SCHEDULE_PRESC_STATUS'"/></xsl:call-template></label>
@@ -132,14 +320,14 @@
 								<div class="col-xs-12 checkbox checkbox-pi">
 									<xsl:element name="input">
 						                <xsl:attribute name="type">checkbox</xsl:attribute>
-						                <xsl:if test=" is_sched_f = 'Y'">
+						                <xsl:if test=" is_prescription_drug_list = 'Y'">
 						                    <xsl:attribute name="checked"></xsl:attribute>
 						                </xsl:if>
 						                <xsl:attribute name="disabled">disabled</xsl:attribute>
 										<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
 						            </xsl:element>
 									<span style="font-weight:normal;padding-left:15px;">
-										<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SCHEDULE_F'"/></xsl:call-template>
+										<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PRESCRIPTION_DRUG'"/></xsl:call-template>
 									</span>
 								</div>
 								<div class="col-xs-12 checkbox checkbox-pi">
@@ -158,14 +346,14 @@
 								<div class="col-xs-12 checkbox checkbox-pi">
 									<xsl:element name="input">
 						                <xsl:attribute name="type">checkbox</xsl:attribute>
-						                <xsl:if test=" is_prescription_drug = 'Y'">
+						                <xsl:if test=" is_non_prescription_drug = 'Y'">
 						                    <xsl:attribute name="checked"></xsl:attribute>
 						                </xsl:if>
 						                <xsl:attribute name="disabled">disabled</xsl:attribute>
 										<xsl:attribute name="style">float:left;width:40px;</xsl:attribute>
 						            </xsl:element>
 									<span style="font-weight:normal;padding-left:15px;">
-										<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PRESCRIPTION_DRUG'"/></xsl:call-template>
+										<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_NON_PRESCRIPTION_DRUG'"/></xsl:call-template>
 									</span>
 								</div>
 								<div class="col-xs-12 checkbox checkbox-pi">
@@ -676,17 +864,17 @@
 																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION_DETAILS'"/></xsl:call-template>&#160;<xsl:value-of select="formulation_id"/></legend>
 																<div class="row">
 																	<div class="form-group col-md-12">
-																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION_NAME'"/></xsl:call-template>:&#160;<span style="font-weight: normal;"><xsl:value-of select="formulation_name"/></span></label>
+																	<label>A. <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION_NAME'"/></xsl:call-template>:&#160;<span style="font-weight: normal;"><xsl:value-of select="formulation_name"/></span></label>
 																	</div>
 																</div>
 																<div class="row">
 																	<div class="form-group col-md-12">
-																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOSAGE_FORM'"/></xsl:call-template>:&#160;<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language = 'eng'"><xsl:value-of select="dosage_form_group/dosage_form/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="dosage_form_group/dosage_form/@label_fr"/></xsl:otherwise></xsl:choose></span>&#160;<span><xsl:value-of select="dosage_form_group/dosage_form_other"/></span></label>
+																	<label>B. <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOSAGE_FORM'"/></xsl:call-template>:&#160;<span style="font-weight: normal;"><xsl:choose><xsl:when test="$language = 'eng'"><xsl:value-of select="dosage_form_group/dosage_form/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="dosage_form_group/dosage_form/@label_fr"/></xsl:otherwise></xsl:choose></span>&#160;<span><xsl:value-of select="dosage_form_group/dosage_form_other"/></span></label>
 																	</div>
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding">A.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INGREDIENTS'"/></xsl:call-template></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding">C.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INGREDIENTS'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -704,7 +892,16 @@
 																					<xsl:for-each select="formulation_ingredient">
 																						<tr onclick="showDetail(this);">
 																							<td class="fa fa-caret-right fa-lg fa-fw"></td>
-																							<td><xsl:value-of select="ingredient_role"/></td>
+																							<td>
+																								<xsl:choose>
+																								<xsl:when test="ingredient_role = 'MED'">
+																									<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_MED'"/></xsl:call-template>
+																								</xsl:when>
+																								<xsl:otherwise>
+																									<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_NON_MED'"/></xsl:call-template>
+																								</xsl:otherwise>
+																								</xsl:choose>
+																							</td>
 																							<td><xsl:value-of select="ingredient_name"/></td>
 																							<td><xsl:choose><xsl:when test="ingredient_id"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'Yes'"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'No'"/></xsl:call-template></xsl:otherwise></xsl:choose></td>
 																							<td><xsl:value-of select="cas_number"/></td>
@@ -716,7 +913,17 @@
 																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INGRED_DETAILS'"/></xsl:call-template></legend>
 																<div class="row">
 																	<div class="col-md-6">
-																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE'"/></xsl:call-template>:&#160;<span style="font-weight: normal;"><xsl:value-of select="ingredient_role"/></span></label>
+																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE'"/></xsl:call-template>:&#160;
+																	<span style="font-weight: normal;">
+																	<xsl:choose>
+																	<xsl:when test="ingredient_role = 'MED'">
+																		<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_MED'"/></xsl:call-template>
+																	</xsl:when>
+																	<xsl:otherwise>
+																		<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_NON_MED'"/></xsl:call-template>
+																	</xsl:otherwise>
+																	</xsl:choose>
+																	</span></label>
 																	</div>
 																	<div class="col-md-6">
 																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ING_NAME'"/></xsl:call-template>:&#160;<span style="font-weight: normal;"><xsl:value-of select="ingredient_name"/></span></label>
@@ -805,7 +1012,7 @@
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_ANIMAL_HUMAN_MATERIAL'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding">D.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_ANIMAL_HUMAN_MATERIAL'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
 																		<div class="panel-body">
 																			<xsl:if test="is_animal_human_material = 'Y'">
 																			<div class="panel-heading">
@@ -864,7 +1071,7 @@
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPES'"/></xsl:call-template></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding">E.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPES'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -933,7 +1140,7 @@
 
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title ng-binding"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_TITLE'"/></xsl:call-template></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title ng-binding">F.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_TITLE'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -958,7 +1165,7 @@
 																</div>
 																<div>
 																	<section class="panel panel-default">
-																		<header class="panel-heading"><h3 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRIES_MANUFACT'"/></xsl:call-template></h3></header>
+																		<header class="panel-heading"><h3 class="panel-title">G.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRIES_MANUFACT'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
@@ -1164,7 +1371,7 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcreppi-2018-04-11-1421.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcreppi-2018-07-12-0905.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
 		          profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no"
 		          validator="internal" customvalidator="">
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
