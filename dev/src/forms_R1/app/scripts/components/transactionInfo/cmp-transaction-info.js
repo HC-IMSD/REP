@@ -39,6 +39,7 @@
                 transactionRoot: '<',
                 //onUpdate: '&',
                 isAmend: '<',
+                isFinal: '<',
                 getTransaction: '&',
                 setStartingSequence:'&',
                 getRepContact: '&',
@@ -92,6 +93,7 @@
             vm.updateEctdState();
             vm.setSolicitedState();
             loadAdminSubData();
+            vm.finalState=false;
         };
 
 
@@ -113,6 +115,9 @@
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
+            }
+            if(changes.isFinal){
+                vm.finalState=changes.isFinal;
             }
         };
 

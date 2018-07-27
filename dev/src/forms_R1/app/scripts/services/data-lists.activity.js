@@ -228,7 +228,7 @@
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -253,7 +253,9 @@
                 vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
 
@@ -280,7 +282,9 @@
                 vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE, //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -326,7 +330,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -373,7 +377,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -419,7 +423,7 @@
                 vm.allActivities.SDN_RESPONSE, //response to SDN
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -464,7 +468,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ])
         }
 
@@ -479,6 +483,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE//Response to telephone Request
             ]);
         }
@@ -492,6 +497,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -504,6 +510,7 @@
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.RMP_VERSION_DATE //RMP verison
             ]);
         }
@@ -547,7 +554,7 @@
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -593,7 +600,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -627,8 +634,9 @@
                 vm.allActivities.FORM_IV, //Form IV
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -648,6 +656,7 @@
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RISK_COMMUN_DOC, //Risk communication document
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.SIGNAL_WORK_UP //Signal Work up
             ])
 
@@ -667,6 +676,8 @@
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.NOTIFICATION_INTERRUPT_SALE, //Notification of interruputions of sale,
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ])
 
@@ -753,7 +764,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -767,6 +778,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -779,6 +791,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -794,6 +807,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
                 vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.RECON_DECIS_OTHER_INFO// Reconsideration of Decision - Other Information
             ]);
         }
@@ -809,6 +823,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
                 vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.RECON_DECIS_OTHER_INFO// Reconsideration of Decision - Other Information
             ]);
         }
@@ -820,6 +835,8 @@
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -833,6 +850,7 @@
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -867,7 +885,9 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -901,7 +921,9 @@
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
                 vm.allActivities.YEAR_LIST_OF_CHANGE,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE, //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -926,7 +948,9 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE, //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -951,7 +975,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -969,6 +993,7 @@
 
         function getPDCArray() {
             return ([
+                vm.allActivities.ADMINISTRATIVE, //administrative
                 vm.allActivities.CANCEL_LETTER,
                 vm.allActivities.MEETING_MINUTES,
                 vm.allActivities.POST_AUTH_DIV1_CHANGE,
@@ -983,12 +1008,18 @@
                 vm.allActivities.QUAL_CLARIF_RESPONSE,
                 vm.allActivities.SCREENING_CLARIF_RESPONSE,
                 vm.allActivities.PHONE_RQ_RESPONSE,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
+                vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.RECON_DECIS_OTHER_INFO,// Reconsideration of Decision - Other Information
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
         function getPDCBArray() {
             return ([
+                vm.allActivities.ADMINISTRATIVE, //administrative
                 vm.allActivities.CANCEL_LETTER,
                 vm.allActivities.MEETING_MINUTES,
                 vm.allActivities.POST_AUTH_DIV1_CHANGE,
@@ -1004,7 +1035,12 @@
                 vm.allActivities.SCREENING_ACCEPT_RESPONSE,
                 vm.allActivities.SCREENING_CLARIF_RESPONSE,
                 vm.allActivities.PHONE_RQ_RESPONSE,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
+                vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.RECON_DECIS_OTHER_INFO,// Reconsideration of Decision - Other Information
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 

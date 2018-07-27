@@ -94,7 +94,7 @@
   "CHOOSE_REQUEST":"Choose a requester",
   "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
   "LIST_DESCRIPT":"List Description",
-  "SEQUENCE_CLEANUP":"Sequence Clean-up",
+  "SEQUENCE_CLEANUP":"eCTD Dossier Clean-up",
 
   "DEFER_FEES":" A deferral of payment is requested with this transaction.",
   "DEFER_STATEMENT":"The statement supporting the deferral request is included.",
@@ -150,16 +150,16 @@
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"with a Lifecycle Record",
   "IS_NEW_ACTIVITY":"Is this transaction for a new or existing regulatory activity?",
   "IS_SIGNED_3RD_PARTY": "Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
-  "AUT_LETTER_NOTE": "Please ensure a letter of authorization signed by the manufacturer/sponsor company must be provided in folder 1.2.6 of the eCTD sequence for each regulatory activity.",
+  "AUT_LETTER_NOTE": "A letter of authorization signed by the manufacturer/sponsor company must be provided in folder 1.2.6 of regulatory transaction.",
   "IS_PRIORITY":"Was this regulatory activity approved for priority review?",
   "IS_NOC":"Was this regulatory activity approved for NOC/C review?",
   "IS_ADMIN_SUBMISSION": "Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?",
-  "ADMIN_DESCRIPT":"Administrative Submission Type Description",
-  "ADMIN_SUB_TYPE":"Administrative submission type",
+  "ADMIN_DESCRIPT":"Administrative Submission or administrative component description",
+  "ADMIN_SUB_TYPE":"Reason for Administrative Submission or administrative component",
   "ACTIVITY_LEAD": "Regulatory Activity Lead",
   "OTHER_DOC_DETAILS": "Other Documentation Details",
   "B14-20160301-09":	"Pharmaceutical",
   "B14-20160301-02":	"Biological",
   "B14-20160301-10":	"Post-Market Vigilance",
-  "B14-20160301-06":	"Consumer Health Products"
+  "B14-20160301-06":	"Consumer Health Product"
 }
