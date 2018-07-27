@@ -24,6 +24,14 @@
     function getTransactionSeq($http, $q) {
         var vm = this;
         vm.raTypeArray = [];
+        vm.feeTypeArray = [];
+
+        /** Lead values. Hard coded as different lists need to be   **/
+        vm.BIOLOGICAL = "B14-20160301-02"; //biological
+        vm.CONSUMERHEALTH = "B14-20160301-06"; //Consumer Health Products
+        vm.PHARMA = "B14-20160301-09"; //pharmaceutical
+        vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
+
         vm.allActivities = {
             ADMINISTRATIVE: "ADMINISTRATIVE", //administrative
             BENEFIT_RISK_ASSESS: "BENEFIT_RISK_ASSESS", //benefit risk assessment
@@ -81,15 +89,19 @@
             FORM_V: "FORM_V", //Form V
             CONSENT_LTR: "CONSENT_LTR", //Consent Letter
             DATA_PROTECT_CORRESP: "DATA_PROTECT_CORRESP", //Correspondence - Data Protection
-            NONCLIN_CLARIF_RESPONSE: "NONCLIN_CLARIF_RESPONSE", //response to Nonclinical clarification request,
+            NONCLIN_CLARIF_RESPONSE: "NONCLIN_CLARIF_RESPONSE", //response to Nonclinical clarification request
             SEQUENCE_CLEANUP:"SEQUENCE_CLEANUP"
-        }
+        };
 
 
         var service = {
             getTransactionDescriptions: getTransactionDescriptionsArray,
             getActivityTypes: getActivityArray,
             createRaTypes: _createRaArray,
+            getBiologicalLeadValue: _getBiologicalLead,
+            getPharmaLeadValue: _getPharmaLead,
+            getPostMarketLeadValue: _getPostMarketLead,
+            getConsumHealthLeadValue: _getConsumHealthLead,
             getPresubTypes: getPresubArray,
             getAndsType: getANDSArray,
             getDinaType: getDINAArray,
@@ -100,7 +112,7 @@
             getEundsType: getEUNDSArray,
             getEusndsType: getEUSNDSArray,
             getLevel3Type: getLevel3Array,
-            getMPDINType:getMPDINArray,
+            getMPDINType: getMPDINArray,
             getNcType: getNCArray,
             getNdsType: getNDSArray,
             getPdcType: getPDCArray,
@@ -124,7 +136,10 @@
             getPBRERPVType: _getPBRERPVArray,
             getPRNDSType: _getPRNDSArray,
             getPRSNDSType: _getPRSNDSArray,
-            getYesNoList: yesNoArray
+            getYesNoList: yesNoArray,
+            getFeeList: _getfeeTypeArray,
+            createFeeTypes: _createFeeArray,
+            getActivityLeadList: _getActivityLeadArray
         };
         return service;
 
@@ -144,6 +159,9 @@
             vm.raTypeArray = value;
         }
 
+        function _createFeeArray(value) {
+            vm.feeTypeArray = value;
+        }
 
         //returns a list of all the unique description values
         function getTransactionDescriptionsArray() {
@@ -154,6 +172,12 @@
 
             return (vm.raTypeArray);
         }
+
+        function _getfeeTypeArray() {
+
+            return (vm.feeTypeArray);
+        }
+
 
         function getPresubArray() {
             return ([
@@ -184,6 +208,7 @@
                 vm.allActivities.NOC_RESPONSE, //response to NOC/ c-Qn
                 vm.allActivities.NOD_RESPONSE, //Response to NOD
                 vm.allActivities.NON_RESPONSE, //Response to NON
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.PRESUB_MEETING_PKG, //submission/presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing  Clarification Request
@@ -202,8 +227,8 @@
                 vm.allActivities.FORM_IV, //Form IV
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
-                vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -228,7 +253,9 @@
                 vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
 
@@ -255,7 +282,9 @@
                 vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE, //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -280,6 +309,7 @@
                 vm.allActivities.NOC_RESPONSE, //response to NOC/ c-Qn
                 vm.allActivities.NOD_RESPONSE, //Response to NOD
                 vm.allActivities.NON_RESPONSE, //Response to NON
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.PRESUB_MEETING_PKG, //submission/presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
@@ -300,7 +330,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -325,6 +355,7 @@
                 vm.allActivities.NOC_RESPONSE, //response to NOC/ c-Qn
                 vm.allActivities.NOD_RESPONSE, //Response to NOD
                 vm.allActivities.NON_RESPONSE, //Response to NON
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.PRESUB_MEETING_PKG, //submission/presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
@@ -346,7 +377,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -380,6 +411,7 @@
                 vm.allActivities.LABEL_CLARIF_RESPONSE, //Response to labelling clarification request
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
                 vm.allActivities.NOL_RESPONSE, //Response to NOL dated
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE, //Response to quality and Clinical clarification REquest
                 vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
@@ -391,7 +423,7 @@
                 vm.allActivities.SDN_RESPONSE, //response to SDN
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -404,6 +436,7 @@
                 vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
                 vm.allActivities.INITIAL, //Initial
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
+               // vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 vm.allActivities.PRESUB_MEETING_PKG, // presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
@@ -435,7 +468,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ])
         }
 
@@ -450,6 +483,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE//Response to telephone Request
             ]);
         }
@@ -463,6 +497,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -475,6 +510,7 @@
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.RMP_VERSION_DATE //RMP verison
             ]);
         }
@@ -498,6 +534,7 @@
                 vm.allActivities.NOC_RESPONSE, //response to NOC/ c-Qn
                 vm.allActivities.NOD_RESPONSE, //Response to NOD
                 vm.allActivities.NON_RESPONSE, //Response to NON
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.PRESUB_MEETING_PKG, //submission/presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
@@ -517,7 +554,7 @@
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -544,6 +581,7 @@
                 vm.allActivities.NOC_RESPONSE, //response to NOC/ c-Qn
                 vm.allActivities.NOD_RESPONSE, //Response to NOD
                 vm.allActivities.NON_RESPONSE, //Response to NON
+               // vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE, //Response to quality and Clinical clarification REquest
                 vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
@@ -562,7 +600,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -596,8 +634,9 @@
                 vm.allActivities.FORM_IV, //Form IV
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
 
         }
@@ -617,6 +656,7 @@
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RISK_COMMUN_DOC, //Risk communication document
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.SIGNAL_WORK_UP //Signal Work up
             ])
 
@@ -634,8 +674,10 @@
                 vm.allActivities.PRESUB_MEETING_PKG, //submission/presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
-                vm.allActivities.PHONE_RQ_RESPONSE ,//Response to telephone Request
+                vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.NOTIFICATION_INTERRUPT_SALE, //Notification of interruputions of sale,
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ])
 
@@ -696,6 +738,7 @@
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
                 vm.allActivities.LABEL_CLARIF_RESPONSE, //Response to labelling clarification request
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,//Notification Interruption of Sale
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PANDEMIC_APPL, //Pandemic application
@@ -721,7 +764,7 @@
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
                 vm.allActivities.NONCLIN_CLARIF_RESPONSE, //response to Nonclinical clarification request
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -735,6 +778,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -747,6 +791,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -762,6 +807,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
                 vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.RECON_DECIS_OTHER_INFO// Reconsideration of Decision - Other Information
             ]);
         }
@@ -777,6 +823,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
                 vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.RECON_DECIS_OTHER_INFO// Reconsideration of Decision - Other Information
             ]);
         }
@@ -788,6 +835,8 @@
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -801,6 +850,7 @@
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
             ]);
         }
@@ -813,6 +863,7 @@
                 vm.allActivities.DRUG_NOTIF_FORM,
                 vm.allActivities.INITIAL,
                 vm.allActivities.MEETING_MINUTES,
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,
                 vm.allActivities.POST_CLEARANCE_DATA,
                 vm.allActivities.PRESUB_MEETING_PKG,
                 vm.allActivities.PRESUB_MEETING_RQ,
@@ -834,9 +885,12 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
+
         function getDINBArray() {
             return ([
                 vm.allActivities.ADMINISTRATIVE,
@@ -845,6 +899,7 @@
                 vm.allActivities.DRUG_NOTIF_FORM,
                 vm.allActivities.INITIAL,
                 vm.allActivities.MEETING_MINUTES,
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,
                 vm.allActivities.POST_CLEARANCE_DATA,
                 vm.allActivities.PRESUB_MEETING_PKG,
                 vm.allActivities.PRESUB_MEETING_RQ,
@@ -866,9 +921,12 @@
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
                 vm.allActivities.YEAR_LIST_OF_CHANGE,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE, //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
+
         function getDINDArray() {
             return ([
                 vm.allActivities.ADMINISTRATIVE,
@@ -877,6 +935,7 @@
                 vm.allActivities.DRUG_NOTIF_FORM,
                 vm.allActivities.INITIAL,
                 vm.allActivities.MEETING_MINUTES,
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,
                 vm.allActivities.POST_CLEARANCE_DATA,
                 vm.allActivities.RECON_DECIS_LTR_INTENT,
                 vm.allActivities.RECON_DECIS_RQ_RECON,
@@ -889,7 +948,9 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.NON_RESPONSE, //Response to NON
+                vm.allActivities.NOD_RESPONSE, //Response to NOD
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -901,6 +962,7 @@
                 vm.allActivities.DRUG_NOTIF_FORM,
                 vm.allActivities.INITIAL,
                 vm.allActivities.MEETING_MINUTES,
+                //vm.allActivities.NOTIFICATION_INTERRUPT_SALE,
                 vm.allActivities.POST_CLEARANCE_DATA,
                 vm.allActivities.RECON_DECIS_LTR_INTENT,
                 vm.allActivities.RECON_DECIS_RQ_RECON,
@@ -913,7 +975,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
@@ -928,8 +990,10 @@
                 vm.allActivities.PHONE_RQ_RESPONSE
             ]);
         }
+
         function getPDCArray() {
             return ([
+                vm.allActivities.ADMINISTRATIVE, //administrative
                 vm.allActivities.CANCEL_LETTER,
                 vm.allActivities.MEETING_MINUTES,
                 vm.allActivities.POST_AUTH_DIV1_CHANGE,
@@ -944,11 +1008,18 @@
                 vm.allActivities.QUAL_CLARIF_RESPONSE,
                 vm.allActivities.SCREENING_CLARIF_RESPONSE,
                 vm.allActivities.PHONE_RQ_RESPONSE,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
+                vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.RECON_DECIS_OTHER_INFO,// Reconsideration of Decision - Other Information
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
+
         function getPDCBArray() {
             return ([
+                vm.allActivities.ADMINISTRATIVE, //administrative
                 vm.allActivities.CANCEL_LETTER,
                 vm.allActivities.MEETING_MINUTES,
                 vm.allActivities.POST_AUTH_DIV1_CHANGE,
@@ -964,12 +1035,49 @@
                 vm.allActivities.SCREENING_ACCEPT_RESPONSE,
                 vm.allActivities.SCREENING_CLARIF_RESPONSE,
                 vm.allActivities.PHONE_RQ_RESPONSE,
-                vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
+                vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
+                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
+                vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
+                vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
+                vm.allActivities.RECON_DECIS_OTHER_INFO,// Reconsideration of Decision - Other Information
+                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ]);
         }
 
+        /**
+         * Gets the activity lead array. Hard coded as the biological entry has business logic
+         * @returns {string[]}
+         * @private
+         */
+        function _getActivityLeadArray() {
+            return (
+                [
+                    vm.PHARMA, //Pharmaceutical
+                    vm.BIOLOGICAL, //Biological
+                    vm.POSTMARKET, //Post-Market Vigilance
+                    vm.CONSUMERHEALTH //Consumer Health Products
+                ]
+            );
+        }
 
+        /**
+         * Returns the biological Activity Lead value
+         * @returns {string}
+         * @private
+         */
+        function _getBiologicalLead() {
+            return vm.BIOLOGICAL;
+        }
+        function _getPharmaLead(){
 
+            return vm.PHARMA;
+        }
+        function _getPostMarketLead(){
+            return vm.POSTMARKET;
+        }
+        function _getConsumHealthLead(){
+            return vm.CONSUMERHEALTH;
+        }
 
     }
 })();
