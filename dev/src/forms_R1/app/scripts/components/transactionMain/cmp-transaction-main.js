@@ -162,7 +162,7 @@
                 vm.transaction = {};
                 // angular.extend(vm.transaction, vm.transactionService.getModelInfo())
                 vm.transaction = vm.transactionService.getModelInfo();
-                vm.isFinal = true;
+                vm.isFinal = vm.transactionService.isFinal;
                 //doing this as model won't update otherwise. Business wanted these values cleared on load
                 //this process moved to service
                 //vm.transaction.projectManager1 = "";

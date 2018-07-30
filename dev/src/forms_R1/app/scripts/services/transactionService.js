@@ -25,6 +25,7 @@
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO, HCSC) {
         //var vm = this;
         this.baseRequesters = [];
+        this.isFinal = false;
         this.$onInit = function () {
             loadContactData();
         };
@@ -75,6 +76,7 @@
 
         TransactionService.prototype = {
             _default: {},
+            isFinal: false,
             //TODO update
 
             getRootTag: function () {
@@ -237,6 +239,7 @@
                         model.feeDetails = this._mapFeeDetailsFromOutput(jsonObj.fee_details);
                     }
                 } else {
+                    this.isFinal = true;
                     model.transactionType = "";
                     model.isThirdParty = "";
                     model.isPriority = "";
