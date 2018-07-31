@@ -9,6 +9,7 @@ var CspPatent = function () {
     var _filingDate_modelString="cspPatentCtrl.model.filingDate";
     var _grantedDate_modelString="cspPatentCtrl.model.grantedDate";
     var _expiryDate_modelString="cspPatentCtrl.model.expiryDate";
+    var _NOCDate_modelString="cspPatentCtrl.model.NOCDate";
     var uiUtil = new UiUtil();
 
 

@@ -80,7 +80,7 @@
         vm.$onInit = function () {
             //after on changes called
             if (vm.model && vm.model.role && (!vm.model.role.applicant)) {
-                vm.applicantTextAlias = "COMPANY_NOABBREV";
+                vm.applicantTextAlias = "ORGANIZATION_NOABBREV";
                 vm.type = "_bill";
                 vm.isCountryEditable=true;
             } else {

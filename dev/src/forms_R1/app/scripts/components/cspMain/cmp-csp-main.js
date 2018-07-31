@@ -71,7 +71,7 @@
                 "type": "pattern",
                 "errorType": "MSG_ERR_PHONE_FORMAT"
             },
-            "faxNumber_appl": {
+            "faxnumber_appl": {
                 "type": "pattern",
                 "errorType": "MSG_ERR_FAX_FORMAT"
             },

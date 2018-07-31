@@ -3,7 +3,7 @@
         <ng-form name="cspApplCtrl.applForm">
             <div>
                 <div ng-if="cspApplCtrl.model.role.billing && !cspApplCtrl.model.role.applicant">
-                    <div class="col-xs-12">
+                    <div class="col-xs-10">
                         <legend> {{::'BILLING_TITLE' |translate}}
                             <button title="{{::'BILLING_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     ng-click="cspApplCtrl.addInstruct(1)"><span
@@ -26,8 +26,28 @@
                             </section>
                         </cmp-alert>
                     </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                        <label for="{{::cspApplCtrl.organizationId}}" >
+                            <span class="field-name">{{cspApplCtrl.applicantTextAlias |translate}}</span>
+                            <!--strong class="required"> {{::"REQUIRED" |translate}} </strong-->
+                            <input type="text" id="{{::cspApplCtrl.organizationId}}" name="{{::cspApplCtrl.organizationId}}"
+                                   data-ng-model="cspApplCtrl.model.applicantName" class="form-control" maxlength="80"
+                                   size="80"
+                            />
+
+                            <cmp-error-message field-name="cspApplCtrl.applicantId" form-ref="cspApplCtrl.applForm"
+                                               show-error="cspApplCtrl.showErrors()"
+                                               error-types="cspApplCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                    </div>
+                    </div>
                 </div>
-                <div class="form-group col-md-12"
+
+
+
+                <div ng-if="cspApplCtrl.model.role.applicant">
+                    <div class="form-group col-xs-12"
                      ng-class="{'has-error':cspApplCtrl.applForm[cspApplCtrl.applicantId].$invalid}">
                     <label for="{{::cspApplCtrl.applicantId}}" class="required">
                         <span class="field-name">{{cspApplCtrl.applicantTextAlias |translate}}</span>
@@ -41,9 +61,23 @@
                                            show-error="cspApplCtrl.showErrors()"
                                            error-types="cspApplCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                </div>
-
-                <div ng-if="cspApplCtrl.model.role.applicant">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-xs-12"
+                             ng-class="{'has-error':cspApplCtrl.applForm[cspApplCtrl.agentNameId].$invalid}">
+                            <label for="{{::cspApplCtrl.agentNameId}}" >
+                                <span class="field-name">{{'AGENTNAME'|translate}}</span>
+                                <!--strong-- class="required">{{"REQUIRED" |translate}}</strong-->
+                                <input type="text" id="{{::cspApplCtrl.agentNameId}}"
+                                       data-ng-model="cspApplCtrl.model.agentName"
+                                       class="form-control full-width" name="{{::cspApplCtrl.agentNameId}}" maxlength="80"
+                                       size="80" ng-readonly="cspApplCtrl.isEditable"/>
+                                <!--cmp-error-message field-name="contCtrl.agentName" form-ref="contCtrl.contactForm"
+                                                   show-error="contCtrl.showErrors()"
+                                                   error-types="contCtrl.requiredOnly"></cmp-error-message-->
+                            </label>
+                        </div>
+                    </div>
                     <div class="col-xs-12">
                         <legend>{{::'CONTACT_TITLE'|translate}}
                             <button title="{{::'APPLICANT_INSTRUCT'|translate}}"
@@ -59,7 +93,6 @@
 
             <div  class="row" ng-if="cspApplCtrl.model.role.applicant" >
                 <div class="col-xs-12">
-
                 <cmp-alert  ui-state="cspApplCtrl.alerts[0]" msg="APPLICANT_CLOSE" update-state="cspApplCtrl.toggleAlert(0)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspApplCtrl.isFrench()"
@@ -71,6 +104,7 @@
                     </section>
                 </cmp-alert>
                 </div>
+
             </div>
 
             <cmp-contact-details is-amend="true" contact-record="cspApplCtrl.model.contact" fax-mandatory="true"
@@ -92,6 +126,7 @@
                     </label>
                 </div>
             </div>
+
         </ng-form>
     </fieldset>
 </div>

@@ -41,18 +41,54 @@
             </div>
         </div>
         <div class="row">
-            <div>
-                <h3>4.&nbsp;{{::'DRUGUSE_TITLE'|translate}}
-                    <button title="{{::'HELP_DRUGUSE'|translate}}"  class="btn rep-help-button-primary btn-xs"
+                <h3>4.&nbsp;{{::'NOC_TITLE'|translate}}
+                    <button title="{{::'HELP_NOC'|translate}}"  class="btn rep-help-button-primary btn-xs"
                             ng-click="cspMainApplCtrl.addInstruct(1)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUGUSE'|translate}}"</span>
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_NOC'|translate}}"</span>
                     </button>
                 </h3>
-            </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[1]" msg="DRUGUSE_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(1)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[1]" msg="NOC_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(1)" type="alert-info">
+                    <section aria-live="assertive">
+                        <div ng-if="!cspMainApplCtrl.isFrench()"
+                             ng-include="'app/scripts/templates/csp/tpl-csp-noc-en.html'">
+                        </div>
+                        <div ng-if="cspMainApplCtrl.isFrench()"
+                             ng-include="'app/scripts/templates/csp/tpl-csp-noc-fr.html'">
+                        </div>
+                    </section>
+                </cmp-alert>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4"
+             ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.dateNOCId].$invalid}">
+            <label for="{{::cspMainApplCtrl.dateNOCId}}" class="required">
+                <span class="field-name">{{::"DATE_NOC" |translate}}</span>
+                <span ng-if="!cspMainApplCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                <span ng-if="cspMainApplCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
+                <strong class="required"> {{::"REQUIRED" |translate}} </strong>
+                <input type="date" id="{{::cspMainApplCtrl.dateNOCId}}" name="{{::cspMainApplCtrl.dateNOCId}}"
+                       data-ng-model="cspMainApplCtrl.model.nocDate" class="form-control" required/>
+                <cmp-error-message field-name="cspMainApplCtrl.dateNOCId" form-ref="cspMainApplCtrl.mainApplForm"
+                                   show-error="cspMainApplCtrl.showErrors()"
+                                   error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
+            </label>
+        </div>
+        </div>
+        <div class="row">
+                <h3>5.&nbsp;{{::'DRUGUSE_TITLE'|translate}}
+                    <button title="{{::'HELP_DRUGUSE'|translate}}"  class="btn rep-help-button-primary btn-xs"
+                            ng-click="cspMainApplCtrl.addInstruct(2)"><span
+                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUGUSE'|translate}}"</span>
+                    </button>
+                </h3>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[2]" msg="DRUGUSE_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(2)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-drugUse-en.html'">
@@ -82,7 +118,7 @@
         </div>
         <div class="row">
             <div>
-                <h3>5.&nbsp;{{::'TIMEAPP_TITLE'|translate}}</h3>
+                <h3>6.&nbsp;{{::'TIMEAPP_TITLE'|translate}}</h3>
             </div>
         </div>
         <div class="row">
@@ -120,9 +156,9 @@
 
         <div class="row">
             <div>
-                <h3>6.&nbsp;{{::'MEDINGRED_TITLE'|translate}}
+                <h3>7.&nbsp;{{::'MEDINGRED_TITLE'|translate}}
                     <button title="{{::'HELP_MI'|translate}}"  class="btn rep-help-button-primary btn-xs"
-                            ng-click="cspMainApplCtrl.addInstruct(2)"><span
+                            ng-click="cspMainApplCtrl.addInstruct(3)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_MI'|translate}}"</span>
                     </button>
                 </h3>
@@ -130,7 +166,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[2]" msg="MI_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(2)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[3]" msg="MI_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(3)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-mi-en.html'">
@@ -159,10 +195,26 @@
             </div>
         </div>
         <div class="row">
+            <div class="form-group col-md-12"
+                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.prodNameId].$invalid}">
+                <label for="{{::cspMainApplCtrl.prodNameId}}" class="required">
+                    <span class="field-name">{{::'PROD_NAME' |translate}}</span>
+                    <strong class="required"> {{::"REQUIRED" |translate}} </strong>
+                    <cmp-error-message field-name="cspMainApplCtrl.prodNameId"
+                                       form-ref="cspMainApplCtrl.mainApplForm"
+                                       show-error="cspMainApplCtrl.showErrors()"
+                                       error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
+                </label>
+                <textarea id="{{::cspMainApplCtrl.prodNameId}}" name="{{::cspMainApplCtrl.prodNameId}}"
+                          data-ng-model="cspMainApplCtrl.model.productName"
+                          class="form-control full-width" maxlength="300" rows="4" size="7" required></textarea>
+            </div>
+        </div>
+        <div class="row">
             <div>
-                <h3>7.&nbsp;{{::'STATEMENT_TITLE' | translate}}
+                <h3>8.&nbsp;{{::'STATEMENT_TITLE' | translate}}
                     <button title="{{::'HELP_ATTEST'|translate}}"  class="btn rep-help-button-primary btn-xs"
-                            ng-click="cspMainApplCtrl.addInstruct(3)"><span
+                            ng-click="cspMainApplCtrl.addInstruct(4)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_ATTEST'|translate}}"</span>
                     </button>
                 </h3>
@@ -170,7 +222,7 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <cmp-alert  ui-state="cspMainApplCtrl.alerts[3]" msg="ATTEST_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(3)" type="alert-info">
+                <cmp-alert  ui-state="cspMainApplCtrl.alerts[4]" msg="ATTEST_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(4)" type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-attest-en.html'">

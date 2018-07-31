@@ -49,6 +49,7 @@
   "DELETE":"fr_Delete",
   "SAVE_WORKING":"Enregistrer une copie de travail",
   "COMPANY_NOABBREV": "fr_Company Name (Full legal Name - no abbreviations)",
+  "ORGANIZATION_NOABBREV": "Nom de l'organisme (dénomination sociale complète – ne pas utiliser d’abréviations)",
   "CLOSE":"Minimiser les instructions",
   "COLLAPSE":"Minimiser les",
   "SAVE_RECORD":"fr_Save Record",

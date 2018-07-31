@@ -12,12 +12,12 @@
                 <h3>{{'ADDR_DETAILS'|translate}}&nbsp;{{addressRec.recordIndex+1}}</h3>
             </div>
             <div class="row">
-                <div class="form-group col-md-12"
+                <!--div class="form-group col-md-12"
                      ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}">
                     <label for="{{::addressRec.companyNameId}}" class="required full-width">
                         <span class="field-name">{{"COMPANYNAME" |translate}}</span>
-                        <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
+                        <!--strong class="required"> {{"REQUIRED" |translate}}</strong-->
+                        <!--input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
                                ng-model="addressRec.addressModel.companyName"
                                class="form-control full-width" maxlength="80" size="60"
                                ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isEditable"
@@ -25,6 +25,21 @@
                         <cmp-error-message field-name="addressRec.companyNameId" form-ref="addressRec.addressRecForm"
                                            show-error="addressRec.showErrors()"
                                            error-types="addressRec.requiredOnly"></cmp-error-message>
+
+                    </label>
+                </div-->
+                <div class="form-group col-md-12">
+                    <label for="{{::addressRec.companyNameId}}">
+                        <span class="field-name">{{"ORGANIZATIONNAME" |translate}}</span>
+                        <!--strong class="required"> {{"REQUIRED" |translate}}</strong-->
+                        <input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
+                               ng-model="addressRec.addressModel.companyName"
+                               class="form-control full-width" maxlength="80" size="60"
+                               ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isEditable"
+                               />
+                        <!--cmp-error-message field-name="addressRec.companyNameId" form-ref="addressRec.addressRecForm"
+                                           show-error="addressRec.showErrors()"
+                                           error-types="addressRec.requiredOnly"></cmp-error-message-->
 
                     </label>
                 </div>

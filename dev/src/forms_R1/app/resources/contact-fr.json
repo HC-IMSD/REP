@@ -2,6 +2,7 @@
   "FIRSTNAME": "Prénom",
   "LASTNAME": "Nom",
   "INITIALS": "Initiales",
+  "AGENTNAME": "Nom de l’agent (dénomination sociale complète – ne pas utiliser d’abréviations) ",
   "LANGCORRESPOND": "Langue de correspondance",
   "JOBTITLE": "Titre de poste",
   "SALUTATION": "Titre de civilité",

@@ -48,7 +48,7 @@
         vm.numberError = [{type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "minlength", displayAlias: "MSG_LENGTH_6NUM"}
         ]; //used for control number
-        vm.alerts = [false, false, false, false];
+        vm.alerts = [false, false, false, false, false];
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
         /**
@@ -56,7 +56,7 @@
          */
         vm.$onInit=function(){
             _setIDNames();
-            vm.alerts = [false, false, false, false];
+            vm.alerts = [false, false, false, false, false, false];
         };
 
         /**
@@ -80,10 +80,12 @@
         function _setIDNames() {
             var scopeId = "_" + $scope.$id;
             vm.controlNumberId = "controlNumber" + scopeId;
+            vm.dateNOCId = "dateNOC" + scopeId;
             vm.drugUseId = "drugUse" + scopeId;
             vm.applApplyId = "time120" + scopeId; //timely submission radio question
             vm.applStateId = "applicantApply" + scopeId; //Statements as to applicant
-            vm.medIngedId = "medicinalIngredient" + scopeId
+            vm.medIngedId = "medicinalIngredient" + scopeId;
+            vm.prodNameId = "prod_name" + scopeId;
         }
 
         $scope.$watch('cspMainApplCtrl.mainApplForm.$error', function () {

@@ -49,7 +49,8 @@ describe("cmp-csp-applicant: Unit Test", function () {
         var ctrl = $componentController('cmpCspApplicant', null, bindings);
         ctrl.$onChanges(recordBind);
         ctrl.$onInit();
-        expect(ctrl.applicantTextAlias).toEqual("COMPANY_NOABBREV");
+        //expect(ctrl.applicantTextAlias).toEqual("COMPANY_NOABBREV");
+        expect(ctrl.applicantTextAlias).toEqual("ORGANIZATION_NOABBREV");
         expect(ctrl.type).toEqual("_bill");
         recordBind.record.currentValue.role.applicant=true;
         bindings={record:recordBind};

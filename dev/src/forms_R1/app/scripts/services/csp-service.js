@@ -76,6 +76,10 @@
             if (intInfo.controlNumber) {
                 extInfo.control_number = intInfo.controlNumber;
             }
+            date = $filter('date')(intInfo.nocDate, "yyyy-MM-dd");
+            if (date) {
+                extInfo.noc_date = date;
+            }
             if (intInfo.drugUse) {
                 extInfo.drug_use = intInfo.drugUse;
             }
@@ -84,6 +88,9 @@
             }
             if (intInfo.medicinalIngredient) {
                 extInfo.medicinal_ingredient = intInfo.medicinalIngredient;
+            }
+            if (intInfo.productName) {
+                extInfo.product_name = intInfo.productName;
             }
             if (intInfo.applicantStatement) {
                 extInfo.applicant_statement = intInfo.applicantStatement;
@@ -175,9 +182,11 @@
             resultJson.patent.grantedDate = _parseDate(jsonObj.application_info.patent_info.granted_date);
             resultJson.patent.expiryDate = _parseDate(jsonObj.application_info.patent_info.expiry_date);
             resultJson.applicationInfo.controlNumber = jsonObj.application_info.control_number;
+            resultJson.applicationInfo.nocDate = _parseDate(jsonObj.application_info.noc_date);
             resultJson.applicationInfo.drugUse = jsonObj.application_info.drug_use;
             resultJson.applicationInfo.timeApplication = jsonObj.application_info.time_application;
             resultJson.applicationInfo.medicinalIngredient = jsonObj.application_info.medicinal_ingredient;
+            resultJson.applicationInfo.productName = jsonObj.application_info.product_name;
             resultJson.applicationInfo.applicantStatement = jsonObj.application_info.applicant_statement;
             resultJson.timelySubmission.submissionStatement = jsonObj.timely_submission_info.timely_submission_statement;
             resultJson.timelySubmission.approvalDate = _parseDate(jsonObj.timely_submission_info.marketing_application_date);
@@ -205,6 +214,7 @@
         CspService.prototype.createApplicantRecord = function (isApplicant) {
             var record = this.createContactRecord();
             record.applicantName = "";
+            record.agentName = "";
             record.isBillingDifferent = false;
             if (!isApplicant) {
                 record.role.applicant = false;
@@ -250,7 +260,7 @@
         };
         /**
          * Adds an applicant to the model. Determines if it should be a billing applicant
-         * and updates the roles as appropiate
+         * and updates the roles as appropriate
          */
         CspService.prototype.addApplicantToModel = function () {
             if (!this._default.applicant) {
@@ -337,6 +347,7 @@
             defaultCSPData.applicationInfo = {};
             defaultCSPData.applicationInfo.controlNumber = "";
             defaultCSPData.applicationInfo.drugUse = "";
+            defaultCSPData.applicationInfo.nocDate = "";
             defaultCSPData.applicationInfo.timeApplication = "";
             defaultCSPData.applicationInfo.medicinalIngredient = "";
             defaultCSPData.applicationInfo.applicantStatement = "";
@@ -382,6 +393,7 @@
             var info = defaultCSPData.application_info;
             info.control_number = "";
             info.drug_use = "";
+            info.noc_date = "";
             info.time_application = "";
             info.medicinal_ingredient = "";
             info.applicant_statement = "";
@@ -415,6 +427,7 @@
             record.billing_role = NO;
             record.applicant_role = NO;
             record.applicant_name = "";
+            record.agent_name = "";
             record.contact = {};
             record.contact.given_name = "";
             record.contact.initials = "";
@@ -453,6 +466,9 @@
                 record.applicant_role = inputJson[i].role.applicant === true ? YES : NO;
                 if (inputJson[i].applicantName) {
                     record.applicant_name = inputJson[i].applicantName;
+                }
+                if (inputJson[i].agentName) {
+                    record.agent_name = inputJson[i].agentName;
                 }
                 if (inputJson[i].contact.salutation) {
                     record.contact.salutation = inputJson[i].contact.salutation;
@@ -546,6 +562,7 @@
                     record.address.country = {id: "", en: "", fr: ""}
                 }
                 record.applicantName = externalRecord.applicant_name;
+                record.agentName = externalRecord.agent_name;
                 record.contact.salutation = externalRecord.contact.salutation;
                 record.contact.givenName = externalRecord.contact.given_name;
                 record.contact.surname = externalRecord.contact.surname;

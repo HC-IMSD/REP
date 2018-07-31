@@ -43,6 +43,7 @@
         vm.faxRequired=false; //default to false for backwards compatibility
         vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.contactModel = {
+            //agentName: "",
             salutation: "",
             givenName: "",
             surname: "",
@@ -91,6 +92,7 @@
 
         function _setIdNames() {
             var scopeId = vm.fldId+ "_" + $scope.$id;
+            vm.agentNameId = "agentName" + scopeId;
             vm.salutationId = "salutation" + scopeId;
             vm.firstNameId="firstName" + scopeId;
             vm.lastNameId="lastName" + scopeId;

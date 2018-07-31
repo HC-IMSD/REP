@@ -54,6 +54,7 @@
   "DELETE":"Delete",
   "SAVE_WORKING":"Save Working Copy",
   "COMPANY_NOABBREV": "Company Name (Full legal Name - no abbreviations)",
+  "ORGANIZATION_NOABBREV": "Organization Name (Full legal Name - no abbreviations)",
   "CLOSE_ALERT":"Collapse instructions",
   "COLLAPSE":"Collapse",
   "SAVE_RECORD":"Save Record",
