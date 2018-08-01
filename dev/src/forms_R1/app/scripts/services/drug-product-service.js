@@ -41,6 +41,7 @@
             _default: {
                 dossierID: "",
                 companyID: "",
+                productName: "",
                 properName: "",
                 manu: false,
                 mailling: false,
@@ -55,7 +56,6 @@
                 xslFileName: "REP_PI_2_0.xsl",
                 dataChecksum: "",
                 //dossierType: "",
-               // productName: "",
                // properName: "",
                // isRefProducts: "",
                 drugProduct: {
@@ -67,8 +67,7 @@
                         medicalInstruments: false,
                         domestic: false,
                         barn: false,
-                        institutionalIndustrial: false,
-                        contactLens: false
+                        institutionalIndustrial: false
                     },
                     isScheduleC: false,
                     isScheduleD: false,
@@ -114,6 +113,7 @@
                 var formModel = {
                     companyID: info.company_id,
                     dossierID: info.dossier_id, //.substring(8,15),
+                    productName: info.product_name,
                     properName: info.proper_name,
                     manu: info.manufacturer === 'Y',
                     mailling: info.mailing === 'Y',
@@ -127,7 +127,6 @@
                     softwareVersion: info.software_version,
                     dataChecksum: info.data_checksum,
                     //dossierType: info.dossier_type,
-                   // productName: info.brand_name,
                    // properName: info.common_name,
                    // isRefProducts: info.is_ref_products,
                     drugProduct: {
@@ -140,8 +139,7 @@
                             medicalInstruments: info.disinfectant_type.medical_instruments === 'Y',
                             domestic: info.disinfectant_type.domestic === 'Y',
                             barn: info.disinfectant_type.barn === 'Y',
-                            institutionalIndustrial: info.disinfectant_type.institutional_industrial === 'Y',
-                            contactLens: info.disinfectant_type.contact_lens === 'Y'
+                            institutionalIndustrial: info.disinfectant_type.institutional_industrial === 'Y'
                         },
                         isScheduleC: info.is_sched_c === 'Y',
                         isScheduleD: info.is_sched_d === 'Y',
@@ -196,6 +194,7 @@
 
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
+            baseModel.product_name = jsonObj.productName;
             baseModel.proper_name = jsonObj.properName;
             baseModel.manufacturer = jsonObj.manu === true ? 'Y' : 'N';
             baseModel.mailing = jsonObj.mailling === true ? 'Y' : 'N';
@@ -219,8 +218,7 @@
                 medical_instruments: jsonObj.drugProduct.disinfectantType.medicalInstruments === true ? 'Y' : 'N',
                 domestic: jsonObj.drugProduct.disinfectantType.domestic === true ? 'Y' : 'N',
                 barn: jsonObj.drugProduct.disinfectantType.barn === true ? 'Y' : 'N',
-                institutional_industrial: jsonObj.drugProduct.disinfectantType.institutionalIndustrial === true ? 'Y' : 'N',
-                contact_lens: jsonObj.drugProduct.disinfectantType.contactLens === true ? 'Y' : 'N'
+                institutional_industrial: jsonObj.drugProduct.disinfectantType.institutionalIndustrial === true ? 'Y' : 'N'
             };
             baseModel.is_sched_c = jsonObj.drugProduct.isScheduleC === true ? 'Y' : 'N';
             baseModel.is_sched_d = jsonObj.drugProduct.isScheduleD === true ? 'Y' : 'N';

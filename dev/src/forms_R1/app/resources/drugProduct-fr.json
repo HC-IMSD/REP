@@ -1,5 +1,6 @@
 {
   "PRODUCT_INFO_INSTRUCT": "fr_Product Information Instructions",
+  "PROPER_NAME_INSTRUCT": "fr_Proper, Common or Non-Proprietary Name Instructions",
   "DRUG_USE_INSTRUCT": "fr_Drug Use Instructions",
   "PROP_INDI_INSTRUCT": "fr_Proposed Indication Instructions",
   "FORMULATION_INSTRUCT": "fr_Formulation Instructions",
@@ -14,9 +15,9 @@
   "SCHEDULE_PRESC_STATUS": "fr_Schedule and Prescription status (check all that applies): The product is",
   "SCHEDULE_C":"fr_included in Schedule C ((radiopharmaceuticals)) to the Food and Drugs Act",
   "SCHEDULE_D":"fr_included in Schedule D (biologics) to the Food and Drugs Act",
-  "PRESC_DRUG_LIST":"fr_the Prescription Drug List",
+  "PRESC_DRUG_LIST":"fr_on the Prescription Drug List",
   "REGULATED_CDSA":"fr_regulated under the Controlled Drugs and Substances Act",
-  "NON_PRESC_DRUG":"fr_a Non-prescription drug",
+  "NON_PRESC_DRUG":"fr_a non-prescription drug",
   "NON_PRESC_SCHEDULE_A":"fr_a non-prescription drug to which one or more Schedule A claims apply",
   "ADDRESS_NOC":"fr_Address to which the Drug Notification Form (DNF)/Notice of Compliance (NOC) are to be sent (when required):",
   "ADDR_INSTRUCT": "fr_Activity Address Instructions",

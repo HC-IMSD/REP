@@ -185,8 +185,8 @@
                     {"id":"MI","en":"Medical Instruments","fr":"fr_Medical Instruments"},
                     {"id":"DOMESTIC","en":"Domestic","fr":"fr_Domestic"},
                     {"id":"BARN","en":"Barn","fr":"fr_Barn"},
-                    {"id":"II","en":"Institutional/Industrial","fr":"fr_Institutional/Industrial"},
-                    {"id":"CL","en":"Contact Lens","fr":"fr_Contact Lens"}
+                    {"id":"II","en":"Institutional/Industrial","fr":"fr_Institutional/Industrial"}
+                    // {"id":"CL","en":"Contact Lens","fr":"fr_Contact Lens"}
                 ]
             );
         }

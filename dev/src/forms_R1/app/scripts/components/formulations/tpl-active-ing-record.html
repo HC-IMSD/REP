@@ -285,12 +285,12 @@
                                         <span class="field-name">{{"VALUE"|translate}}</span>
                                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                                         <input type="number" id="{{ingRecCtrl.perPreValueId}}" data-ng-model="ingRecCtrl.ingModel.perPresentationValue"
-                                               ng-model-options="{ debounce: '$inherit'}"
+                                               ng-model-options="{ debounce: '$inherit'}" ng-readonly="true"
                                                class="form-control full-width" name="{{ingRecCtrl.perPreValueId}}" ng-min="0" ng-required="true"/>
-                                        <cmp-error-message field-name="ingRecCtrl.perPreValueId"
+                                        <!--cmp-error-message field-name="ingRecCtrl.perPreValueId"
                                                            form-ref="ingRecCtrl.activeIngForm"
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perPreValueId])"
-                                                           error-types="ingRecCtrl.numberMinError"></cmp-error-message>
+                                                           error-types="ingRecCtrl.numberMinError"></cmp-error-message-->
                                     </label>
                                 </div>
                                 <div class="form-group col-md-4" ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.presentationId].$invalid}"

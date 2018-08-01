@@ -42,8 +42,7 @@
             medicalInstruments: false,
             domestic: false,
             barn: false,
-            institutionalIndustrial: false,
-            contactLens: false
+            institutionalIndustrial: false
         };
         vm.$onInit = function () {
             if (vm.record) {

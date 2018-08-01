@@ -96,15 +96,71 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group"
+                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId].$invalid}">
+                        <label for="{{::drugProdCtrl.prodNameId}}" class="required">
+                            <span class="field-name">C.&nbsp;{{::'PROD_NAME' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="productName-instructions-toggle" ng-click="drugProdCtrl.addInstruct(8)"><span
+                                    class="fa fa-question-circle fa-2x"></span>
+                            </button>
+                            <cmp-error-message field-name="drugProdCtrl.prodNameId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[8]"
+                                     class="alert-info" close="drugProdCtrl.closeAlert(8)">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-product-name-en.html'">
+                                        </div>
+                                        <div ng-if="drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-product-name-fr.html'">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea type="text" class="form-control full-width" id="{{::drugProdCtrl.prodNameId}}" name="{{::drugProdCtrl.prodNameId}}"
+                                  required ng-model="drugProdCtrl.model.productName" maxlength="256" rows="3">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 form-group"
                          ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.properNameId].$invalid}">
                         <label for="{{::drugProdCtrl.properNameId}}" class="required">
-                            <span class="field-name">C.&nbsp;{{::'PROPER_NAME' |translate}}</span>
+                            <span class="field-name">D.&nbsp;{{::'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'PROPER_NAME_INSTRUCT'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="properName-instructions-toggle" ng-click="drugProdCtrl.addInstruct(9)"><span
+                                    class="fa fa-question-circle fa-2x"></span>
+                            </button>
                             <cmp-error-message field-name="drugProdCtrl.properNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.properNameId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[9]"
+                                     class="alert-info" close="drugProdCtrl.closeAlert(9)">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-proper-name-en.html'">
+                                        </div>
+                                        <div ng-if="drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-proper-name-fr.html'">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
                         <textarea type="text" class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
                               required ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3"
                               data-ng-change="drugProdCtrl.model.properName=drugProdCtrl.model.properName.toUpperCase()">
@@ -113,7 +169,7 @@
                 </div>
                 <fieldset id="fs_addrMissing_{{::$id}}">
                     <label>
-                        <span class="field-name">D. {{::'ADDRESS_NOC'|translate}}</span>
+                        <span class="field-name">E. {{::'ADDRESS_NOC'|translate}}</span>
                         <button title="{{::'EXPAND'|translate}} {{::'ADDR_INSTRUCT'|translate}}"
                                 class="btn rep-help-button-primary btn-xs"
                                 id="address-instructions-toggle" ng-click="drugProdCtrl.addInstruct(7)"><span
@@ -187,23 +243,45 @@
                         </div>
                     </div>
                 </fieldset>
-                <div class="row">
-                    <section class="panel panel-default">
-                        <header class="panel-heading">
-                            <h5 class="panel-title">E. {{'IMPORTER'|translate}}</h5>
-                        </header>
-                        <div class="panel-body">
-                            <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
-                                                error-summary-update="drugProdCtrl.updateErrorSummary()"
-                                                show-error-summary="drugProdCtrl.showSummary"
-                                                on-update="drugProdCtrl.updateImporterList(list)"></cmp-importer-list>
+                <section class="panel panel-default">
+                    <header class="panel-heading clearfix">
+                        <div class="btn-group pull-right">
+                            <button title="{{::'EXPAND'|translate}} {{::'IMPORTER_INSTRUCT'|translate}}"
+                                    class="btn-xs rep-help-button-primary btn-xs"
+                                    id="importer-instructions-toggle" ng-click="drugProdCtrl.addInstruct(10)"><span
+                                    class="fa fa-question-circle fa-2x"></span>
+                            </button>
                         </div>
-                    </section>
-                </div>
+                        <h3 class="panel-title">F. {{'IMPORTER'|translate}}</h3>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[10]"
+                                     class="alert-info" close="drugProdCtrl.closeAlert(10)">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-importer-en.html'">
+                                        </div>
+                                        <div ng-if="drugProdCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drug/tpl-drugProduct-importer-fr.html'">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
+                                            error-summary-update="drugProdCtrl.updateErrorSummary()"
+                                            show-error-summary="drugProdCtrl.showSummary"
+                                            on-update="drugProdCtrl.updateImporterList(list)"></cmp-importer-list>
+                        </div>
+                    </div>
+                </section>
                 <div class="row">
                     <div class="col-xs-4 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
-                            <span class="field-name">F.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <span class="field-name">G.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <button title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="drug-use-instructions-toggle" ng-click="drugProdCtrl.addInstruct(3)"><span
@@ -249,7 +327,7 @@
                 <fieldset id="{{::drugProdCtrl.fsType}}">
                     <legend>
                         <label>
-                            <span class="label-pi">G.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
+                            <span class="label-pi">H.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </label>
                     </legend>
                     <div class="row">
@@ -324,7 +402,7 @@
                     <div class="form-group col-md-12"
                          ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
                         <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
-                            <span class="field-name">H. {{::'PROP_INDICATION'|translate}}</span>
+                            <span class="field-name">I. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
                             <button title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="prop-indication-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
@@ -390,7 +468,7 @@
                 <div class="row">
                     <div class="col-xs-4 form-group">
                         <label>
-                            <span class="field-name">I. {{::'FORMULATION'|translate}}</span>
+                            <span class="field-name">J. {{::'FORMULATION'|translate}}</span>
                             <button title="{{::'EXPAND'|translate}} {{::'FORMULATION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="formulation-instructions-toggle" ng-click="drugProdCtrl.addInstruct(5)"><span
                                     class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORMULATION_INSTRUCT'|translate}}"</span>
