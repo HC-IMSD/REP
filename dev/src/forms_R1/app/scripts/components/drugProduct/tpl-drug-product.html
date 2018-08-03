@@ -438,7 +438,7 @@
 
                 <div>
                     <section ng-if="drugProdCtrl.appendixMissingError()">
-                        <input type="text" required ng-model="drugProdCtrl.missingAppendixModel"
+                        <input type="hidden" required ng-model="drugProdCtrl.missingAppendixModel"
                                aria-hidden="true" name="fake.appendix_missing_error" id="fake.appendix_missing_error"/>
                         <details class="alert alert-danger" id="errors-summary-fake.appendix_missing_error" open="open">
                             <summary class="h3">

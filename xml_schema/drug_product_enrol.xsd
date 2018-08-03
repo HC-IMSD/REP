@@ -20,6 +20,7 @@
 	<hpfb:element name="data_checksum" type="hpfb:string"/>
 	<hpfb:element name="company_id" type="char_1_6_content"/>
 	<hpfb:element name="dossier_id" type="char_0_7_content"/>
+	<hpfb:element name="product_name" type="char_1_256_content"/>
 	<hpfb:element name="proper_name" type="char_1_256_content"/>
 	<hpfb:element name="importer_record" type="importer_record_content"/>
 	<hpfb:element name="importer_company_id" type="char_0_6_content"/>
@@ -334,6 +335,7 @@
 		<hpfb:sequence>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="product_name"/>
 			<hpfb:element ref="proper_name"/>
 			<hpfb:element ref="importer_record" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="enrolment_version"/>
