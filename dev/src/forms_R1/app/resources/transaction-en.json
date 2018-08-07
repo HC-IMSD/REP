@@ -94,5 +94,5 @@
   "CHOOSE_REQUEST":"Choose a requester",
   "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
   "LIST_DESCRIPT":"List Description",
-  "SEQUENCE_CLEANUP":"Sequence Clean-up"
+  "ECTD_DOSSIER_CLEANUP":"eCTD Dossier Clean-up"
 }
