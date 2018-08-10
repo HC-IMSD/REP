@@ -7,10 +7,7 @@
     'use strict';
 
     var dependencies = [
-        'tabsModule',
         'refProductListModule',
-         'drugUseModule',
-         'scheduleAModule',
         'dossierDataLists',
         'dataLists',
         'filterLists',
@@ -83,6 +80,7 @@
         //error summary fields
         vm.updateSummary=0; //increment to send message to error summaries
         vm.showSummary=false;
+        vm.disableXML = false;
         vm.focusSummary=0;
         vm.exclusions = {
             "formulCtrl.formulationsForm":"tab_0",
@@ -174,7 +172,7 @@
                 vm.dossierForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
-            getAppendix4Errors();
+            //getAppendix4Errors();
             _setComplete();
            // vm.showAllErrors = true;
             disableXMLSave();
@@ -233,11 +231,11 @@
          * @ngdoc disables the XML save button
          */
         function disableXMLSave() {
-            var formInvalid = true;
-            if (vm.dossierForm) {
-                formInvalid = vm.dossierForm.$invalid;
-            }
-            vm.disableXML = (formInvalid || (vm.dossierModel.applicationType === vm.applicationInfoService.getApprovedType() && vm.isExtern()));
+            // var formInvalid = true;
+            // if (vm.dossierForm) {
+            //     formInvalid = vm.dossierForm.$invalid;
+            // }
+            vm.disableXML = (vm.dossierModel.applicationType === vm.applicationInfoService.getApprovedType() && vm.isExtern());
 
         }
 

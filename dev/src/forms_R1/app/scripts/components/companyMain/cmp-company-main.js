@@ -46,7 +46,8 @@
         vm.showContent = _loadFileContent;
         vm.disableXML = true;
         vm.disableDraftButton = false;
-        vm.configCompany = {
+        vm.showAmendNote = false;
+            vm.configCompany = {
             "label": "COMPANY_ID",
             "minFieldLength": "5",
             "fieldLength": "6",
@@ -230,7 +231,7 @@
                 vm.setAmend();
                 vm.showErrorSummary=false;
                 vm.companyEnrolForm.$setDirty();
-
+                vm.showAmendNote = (vm.company.applicationType === vm.companyService.getApprovedType() && vm.isExtern());
             }
             disableXMLSave();
         }

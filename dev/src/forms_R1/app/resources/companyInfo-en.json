@@ -6,6 +6,7 @@
   "ADDRESS_ROLE_INSTRUCT":"Company Address Role Instructions",
   "REPRESENT_INSTRUCT":"Company Representative Information",
   "SAVE_INSTRUCT": "Company File Save Instructions",
+  "AMEND_NOTE": "The “Amend Enrolment” button must be selected when amending a Final Company XML.",
   "FIELDID": "Company Id",
   "IMPORTERID":"Importer Company ID"
 }

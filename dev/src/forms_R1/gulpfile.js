@@ -392,15 +392,11 @@ var companyComponentFolders =
 //Dossier Form Components
 var dossierComponentFolders =
     [
-        componentFolders.appendix4,
         componentFolders.canRefProducts,
         componentFolders.checkboxList,
         componentFolders.countryList,
         componentFolders.dossier,
-        componentFolders.drugUse,
         componentFolders.routeAdmin,
-        componentFolders.scheduleA,
-        componentFolders.tabs,
         componentFolders.theraClass,
         componentFolders.formulations,
         componentFolders.fileIOComponentAndDep,

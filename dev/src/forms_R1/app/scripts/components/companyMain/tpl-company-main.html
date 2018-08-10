@@ -26,8 +26,10 @@
                     </section>
                 </div>
                 <div class="col-md-12">
-
                     <hpfb-file-select update-model-root="main.showContent(fileContent)" root-elem="COMPANY_ENROL"/>
+                </div>
+                <div class="col-md-12 alert alert-info" ng-if="main.showAmendNote" >
+                        <p> {{::'AMEND_NOTE'|translate}}</p>
                 </div>
             </div>
             <div>
