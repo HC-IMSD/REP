@@ -82,6 +82,12 @@
 					<div class="well well-sm" >
 						<div class="row">
 							<div class="col-xs-12 form-group">
+								<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PRODUCT_NAME'"/></xsl:call-template></label>
+								<div class="col-xs-12"><span style="font-weight:normal;"><xsl:value-of select="product_name"/></span></div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 form-group">
 								<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PROPER_NAME'"/></xsl:call-template></label>
 								<div class="col-xs-12"><span style="font-weight:normal;"><xsl:value-of select="proper_name"/></span></div>
 							</div>
@@ -1371,7 +1377,7 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcreppi-2018-07-12-0905.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/hcreppi-2018-08-13-0951.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
 		          profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no"
 		          validator="internal" customvalidator="">
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
