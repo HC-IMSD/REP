@@ -404,7 +404,7 @@
 <row><code>EXISTING_CREDIT</code><eng>Existing credit</eng><fra>fr_Existing credit</fra></row>
 <row><code>BANK_WIRE</code><eng>Wire (include bank confirmation)</eng><fra>Wire (include bank confirmation)</fra></row>
 <row><code>CREDIT</code><eng>Mastercard / Visa / Amex / Visa Debit / JCB International</eng><fra>fr_Mastercard / Visa / Amex / Visa Debit / JCB International</fra></row>
-<row><code>CHEQUE</code><eng>Cheque</eng><fra>frCheque</fra></row>
+<row><code>CHEQUE</code><eng>Cheque</eng><fra>fr_Cheque</fra></row>
 <row><code>MONEY_ORDER</code><eng>Money Order</eng><fra>fr_Money Order</fra></row>
 <row><code>BANK_DRAFT</code><eng>International Bank Draft</eng><fra>fr_International Bank Draft</fra></row>
 <row><code>COMPANY_ID</code><eng>Company ID</eng><fra>fr_Company ID</fra></row>
@@ -513,7 +513,7 @@
 <row><code>REP_CONTACT_INFO</code><eng>REP Contact Information</eng><fra>fr_REP Contact Information</fra></row>
 <row><code>DOSSIER_TEMP</code><eng>Dossier Template: Regulatory Enrolment Process (REP)</eng><fra></fra></row>
 <row><code>REGULATED_CDSA</code><eng>regulated under the Controlled Drugs and Substances Act</eng><fra>fr_regulated under the Controlled Drugs and Substances Act</fra></row>
-<row><code>PRESCRIPTION_DRUG</code><eng>the Prescription Drug List</eng><fra>fr_the Prescription Drug List</fra></row>
+<row><code>PRESCRIPTION_DRUG</code><eng>on the Prescription Drug List</eng><fra>fr_on the Prescription Drug List</fra></row>
 <row><code>IS_NON_PRESCRIPTION_DRUG</code><eng>a non-prescription drug</eng><fra>fr_a non-prescription drug</fra></row>
 <row><code>NON_PRESC_SCHEDULE_A</code><eng>a non-prescription drug to which one or more Schedule A claims apply</eng><fra>fr_a non-prescription drug to which one or more Schedule A claims apply</fra></row>
 <row><code>PROP_INDICATION</code><eng>Proposed Indication</eng><fra>fr_Proposed Indication</fra></row>
@@ -827,5 +827,54 @@
 <row><code>MEDICAL_INSTRUMENTS</code><eng>Medical Instruments</eng><fra>fr_Medical Instruments</fra></row>
 <row><code>INSTITUTIONAL_INDUSTRIAL</code><eng>Institutional/Industrial</eng><fra>fr_Institutional/Industrial</fra></row>
 <row><code>DISINFECTANT_TYPE</code><eng>Disinfectant Type</eng><fra>fr_Disinfectant Type</fra></row>
+<row><code>DateReceived</code><eng>Date Received</eng><fra>fr_Date Received</fra></row>
+<row><code>Application_Number</code><eng>Application Number</eng><fra>fr_Application Number</fra></row>
+<row><code>NOTES</code><eng>Notes</eng><fra>fr_Notes</fra></row>
+<row><code>HC_NOTES</code><eng>Health Canada Notes</eng><fra>fr_Health Canada Notes</fra></row>
+<row><code>CSP_INFO</code><eng>Certificate of Supplementary Protection (CSP) Information</eng><fra>fr_Certificate of Supplementary Protection (CSP) Information</fra></row>
+<row><code>APPLICATION_INFO</code><eng>Application Information</eng><fra>fr_Application Information</fra></row>
+<row><code>APPLICATION_NAME</code><eng>Application Name</eng><fra>fr_Application Name</fra></row>
+<row><code>AGENT_NAME</code><eng>Agent Name</eng><fra>fr_Agent Name</fra></row>
+<row><code>APPLICANT_CONTACT_INFO</code><eng>Application Contact Information</eng><fra>fr_Application Contact Information</fra></row>
+<row><code>PATENT_INFO</code><eng>Patent Information</eng><fra>fr_Patent Information</fra></row>
+<row><code>CANADIAN_PATENT_NUMBER</code><eng>Canadian Patent Number</eng><fra>fr_Canadian Patent Numbers</fra></row>
+<row><code>PATENT_FILLING_DATE</code><eng>Patent Filling Date</eng><fra>fr_Patent Filling Date</fra></row>
+<row><code>PATENT_DATE_GRANTED</code><eng>Patent Date Granted</eng><fra>fr_Patent Date Granted</fra></row>
+<row><code>PATENT_EXPIREATION_DATE</code><eng>Patent Expiration Date</eng><fra>fr_Patent Expiration Date</fra></row>
+<row><code>NDS_INFO</code><eng>New Drug Submission(NDS) Information</eng><fra>fr_New Drug Submission(NDS) Information</fra></row>
+<row><code>NDS_NUMBER</code><eng>NDS Number</eng><fra>fr_NDS Number</fra></row>
+<row><code>NOTICE_OF_COMPLIANCE_DATE</code><eng>Notice of Compliance Date</eng><fra>fr_Notice of Compliance Date</fra></row>
+<row><code>NOC_DATE</code><eng>NOC Date</eng><fra>fr_NOC Date</fra></row>
+<row><code>DRUG_USE</code><eng>Drug Use</eng><fra>fr_Drug Use</fra></row>
+<row><code>TIMING_OF_APPLICATION</code><eng>Timing of Application</eng><fra>fr_Timing of Application</fra></row>
+<row><code>APPLICANT_APPLYING</code><eng>Applicant is applying</eng><fra>fr_Applicant is applying</fra></row>
+<row><code>APPLICANT_APPLYING_NOC</code><eng>on the basis of a patent granted on or before the day on which the Notice of Compliance (NOC) for the above noted NDS is issued (before the end of the 120-day period that begins on the day on which the NOC is issued)</eng><fra>fr_on the basis of a patent granted on or before the day on which the Notice of Compliance (NOC) for the above noted NDS is issued (before the end of the 120-day period that begins on the day on which the NOC is issued)</fra></row>
+<row><code>APPLICANT_APPLYING_GRANT</code><eng>on the basis of a patent granted after the day on which the Notice of Compliance (NOC) for the above noted NDS is issued (before the end of the 120-day period that begins on the day on which the patent is granted)</eng><fra>fr_on the basis of a patent granted after the day on which the Notice of Compliance (NOC) for the above noted NDS is issued (before the end of the 120-day period that begins on the day on which the patent is granted)</fra></row>
+<row><code>MEDICINAL_INGREDIENTS</code><eng>Notes</eng><fra>fr_Notes</fra></row>
+<row><code>MEDICINAL_INGREDIENTS_DESC</code><eng>Medicinal Ingredient(s) (as provided on the NOC for the NDS provided in Section 3)</eng><fra>fr_Medicinal Ingredient(s) (as provided on the NOC for the NDS provided in Section 3)</fra></row>
+<row><code>MEDICINAL_INGREDIENTS_PROD</code><eng>Product Name (as provided on the NOC for the NDS provided in Section 3)</eng><fra>fr_Product Name (as provided on the NOC for the NDS provided in Section 3)</fra></row>
+<row><code>ATTESTATIONS</code><eng>Attestations</eng><fra>fr_Attestations</fra></row>
+<row><code>ATTESTATIONS_APPLICANT</code><eng>Attestation as to Applicant</eng><fra>fr_Attestation as to Applicant</fra></row>
+<row><code>ATTESTATIONS_APPLICANT_OWNER</code><eng>The Applicant is the patentee and is recorded as an owner of the above noted Canadian Patent at the Canadian Intellectual Property Office</eng><fra>fr_The Applicant is the patentee and is recorded as an owner of the above noted Canadian Patent at the Canadian Intellectual Property Office</fra></row>
+<row><code>ATTESTATIONS_APPLICANT_APP</code><eng>The Applicant is a manufacturer who is authorized by the person recorded in the Canadian Intellectual Property Office as the owner of the above noted Canadian Patent to file this application on their behalf and the above noted NDS was issued to the Applicant.</eng><fra>fr_The Applicant is a manufacturer who is authorized by the person recorded in the Canadian Intellectual Property Office as the owner of the above noted Canadian Patent to file this application on their behalf and the above noted NDS was issued to the Applicant.</fra></row>
+<row><code>ATTESTATIONS_SUBMISSION</code><eng>Attestation as to Timely Submission</eng><fra>fr_Attestation as to Timely Submission</fra></row>
+<row><code>ATTESTATIONS_SUBMISSION_NOC</code><eng>When the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health, no application for a marketing approval, equivalent to an authorization for sale, with respect to the medicinal ingredient or combination of medicinal ingredients, as the case may be, set out in this CSP application had been submitted in the European Union or any country that is a member of the European Union, the United States of America, Australia, Switzerland or Japan</eng><fra>fr_When the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health, no application for a marketing approval, equivalent to an authorization for sale, with respect to the medicinal ingredient or combination of medicinal ingredients, as the case may be, set out in this CSP application had been submitted in the European Union or any country that is a member of the European Union, the United States of America, Australia, Switzerland or Japan</fra></row>
+<row><code>ATTESTATIONS_SUBMISSION_APP</code><eng>if one or more applications for a marketing approval, equivalent to an authorization for sale, with respect to the medicinal ingredient or combination of medicinal ingredients, as the case may be, set out in this CSP application had been submitted in one or more of the European Union or any country that is a member of the European Union, the United States of America, Australia, Switzerland or Japan, the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health before the end of the 12 month period that begins on the date of submission of the first of those marketing approval applications. Details of the first of those marketing approval applications are as follows:</eng><fra>fr_if one or more applications for a marketing approval, equivalent to an authorization for sale, with respect to the medicinal ingredient or combination of medicinal ingredients, as the case may be, set out in this CSP application had been submitted in one or more of the European Union or any country that is a member of the European Union, the United States of America, Australia, Switzerland or Japan, the application for the authorization for sale referred to in paragraph 106(1)(c) of the Patent Act (above noted NDS) was filed with the Minister of Health before the end of the 12 month period that begins on the date of submission of the first of those marketing approval applications. Details of the first of those marketing approval applications are as follows:</fra></row>
+<row><code>DATE_FIRST_MARKETING</code><eng>Date of first marketing approval application</eng><fra>fr_Date of first marketing approval application</fra></row>
+<row><code>COUNTRY_FIRST_MARKETING</code><eng>Country of first marketing approval application</eng><fra>fr_Country of first marketing approval application</fra></row>
+<row><code>FEE_PAYMENT</code><eng>Fee Payment</eng><fra>fr_Fee Payment</fra></row>
+<row><code>FEE_PAYMENT_DESC</code><eng>The Advance Payment Details form is being submitted separately by fax or mail</eng><fra>fr_The Advance Payment Details form is being submitted separately by fax or mail </fra></row>
+<row><code>FEE_BEING_PAID</code><eng>The fee is being paid or the fee has been prepaid in the amount of (please enter the fee amount)</eng><fra>fr_The fee is being paid or the fee has been prepaid in the amount of (please enter the fee amount)</fra></row>
+<row><code>METHOD_PAYMENT</code><eng>Method of Payment </eng><fra>fr_Method of Payment </fra></row>
+<row><code>DATE</code><eng>Date</eng><fra>fr_Date</fra></row>
+<row><code>NAME_AUTHORIZED</code><eng>Name of Authorized Offical</eng><fra>fr_Name of Authorized Offical</fra></row>
+<row><code>CERTIFICATION</code><eng>Certification</eng><fra>fr_Certification</fra></row>
+<row><code>ORGANIZATION_NAME</code><eng>Organization Name</eng><fra>fr_Organization Name</fra></row>
+<row><code>CSP_FINANCIAL</code><eng>Payment through a Canadian Financial Institutio</eng><fra>fr_Payment through a Canadian Financial Institutio</fra></row>
+<row><code>CSP_CHEQUE</code><eng>Cheque / Bank Draft / Money Orde</eng><fra>fr_Cheque / Bank Draft / Money Orde</fra></row>
+<row><code>CSP_CREDIT_CARD</code><eng>MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</eng><fra>fr_MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</fra></row>
+<row><code>CSP_CREDIT</code><eng>Payment Using Existing Credit</eng><fra>fr_Payment Using Existing Credit</fra></row>
+<row><code>CSP_WIRE</code><eng>Wire</eng><fra>fr_Wire</fra></row>
+
 
 </SimpleCodeList>
