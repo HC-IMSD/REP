@@ -46,7 +46,7 @@
 	"COUNTRY_MAN": "Country of Manufacture",
 	"DELETE_COUNTRY": "Delete Country",
 	"ADD_CRP": "Add Canadian Reference Product",
-	"IS_CDN_REF": "Is there a Canadian Reference Product?",
+	"IS_CDN_REF": "Is there a Canadian Reference Product or Canadian Reference Biologic Drug for Biosimilars?",
 	"INGRED_MAT_NAME": "Ingredient or Material Name",
 	"HELP_DOSSIER": "Dossier Instructions",
 	"HELP_thera": "Therapeutic Classification Instructions",
