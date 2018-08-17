@@ -36,13 +36,13 @@
   },
   {
     "id": "POSTAUTH_CHEMISTRY_CHGE",
-    "en": "Post-Authorization Chemistry and Manufacturing Updates [Only for Schedules C and D drug products]",
-    "fr": "fr_Post-Authorization Chemistry and Manufacturing Updates [Only for Schedules C and D drug products]"
+    "en": "Post-Authorization Chemistry and Manufacturing Updates (only for Schedules C and D drug products)",
+    "fr": "fr_Post-Authorization Chemistry and Manufacturing Updates (only for Schedules C and D drug products)"
   },
   {
     "id": "ADDITIONAL_PRODUCT_CHGE",
-    "en": "Additional product name",
-    "fr": "fr_Additional product name"
+    "en": "Additional Product Name",
+    "fr": "fr_Additional Product Name"
   }
 
 ]
