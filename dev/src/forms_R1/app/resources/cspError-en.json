@@ -5,7 +5,7 @@
   "LASTNAME_APPL": "Applicant Last Name",
   "LANGCORRESPOND_APPL": "Applicant Language of Correspondence",
   "JOBTITLE_APPL": "Applicant Job Title",
-  "FAXNUMBER_APPL": "Applicant Fax Number",
+  "FAX_NUMBER_APPL": "Applicant Fax Number",
   "PHONENUMBER_APPL": "Applicant Phone Number",
   "CONTACTEMAIL_APPL": "Applicant Email",
   "CITY_APPL": "Applicant City",
@@ -44,6 +44,6 @@
   "FEE":"Advanced Payment Fee",
   "FEETYPE":"Method of Advanced Payment",
   "TYPE_ZERO_MIN":"Must be greater than zero",
-  "MSG_ERR_MAX":"Must be less than 1000000000"
+  "MSG_ERR_MAX":"Must be less than 1000000"
 
 }

@@ -42,35 +42,38 @@
                             <span ng-if="!timelySubCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
                             <span ng-if="timelySubCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                             <strong class="required"> {{::"REQUIRED" |translate}} </strong>
-                            <cmp-error-message field-name="timelySubCtrl.dateId" form-ref="timelySubCtrl.timelySubForm"
-                                               show-error="timelySubCtrl.showErrors()"
-                                               error-types="timelySubCtrl.dateError"></cmp-error-message>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <cmp-alert  ui-state="timelySubCtrl.alerts[0]" msg="MARKETDATE_INSTRUCT" update-state="timelySubCtrl.closeAlert(0)" type="alert-info">
+                                        <section aria-live="assertive">
+                                            <div ng-if="!timelySubCtrl.isFrench()"
+                                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-en.html'">
+                                            </div>
+                                            <div ng-if="timelySubCtrl.isFrench()"
+                                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-fr.html'">
+                                            </div>
+                                        </section>
+                                    </cmp-alert>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="rep-vertical-align">
+                                    <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
+                                           data-ng-model="timelySubCtrl.model.approvalDate" class="form-control"
+                                           ng-required="timelySubCtrl.isApplicationMarketing()" required/>
+                                    <cmp-error-message field-name="timelySubCtrl.dateId" form-ref="timelySubCtrl.timelySubForm"
+                                                       show-error="timelySubCtrl.showErrors()"
+                                                       error-types="timelySubCtrl.dateError"
+                                                       error-types="timelySubCtrl.requiredOnly">
+                                    </cmp-error-message>
+                                </div>
+                            </div>
                         </label>
-                    </div>
-                    <div class="rep-vertical-align">
-                        <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
-                               data-ng-model="timelySubCtrl.model.approvalDate" class="form-control"
-                               ng-required="timelySubCtrl.isApplicationMarketing()"/>
                     </div>
                     <button title="{{::'HELP_MARKETDATE'|translate}}"  class="btn rep-help-button-primary btn-xs rep-vertical-align"
                             ng-click="timelySubCtrl.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_MARKETDATE'|translate}}"</span>
                     </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="timelySubCtrl.alerts[0]"
-                         class="alert-info" close="timelySubCtrl.closeAlert(0)">
-                        <section aria-live="assertive">
-                            <div ng-if="!timelySubCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-en.html'">
-                            </div>
-                            <div ng-if="timelySubCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-fr.html'">
-                            </div>
-                        </section>
-                    </div>
                 </div>
             </div>
             <div class="row rep-margin-top">
@@ -85,16 +88,16 @@
                                            name="{{::timelySubCtrl.countryId}}"
                                            on-select="timelySubCtrl.countryChanged()"
                                            ng-required="timelySubCtrl.isApplicationMarketing()"
-                                           title="{{::'COUNTRY_CHOOSE'|translate}}"
+                                           title="{{::'COUNTRY_CHOOSE'|translate}}" required
                                            class="rep-selectize-font full-width">
                                     <ui-select-match placeholder="{{::'COUNTRY_CHOOSE'|translate}}"
-                                                     id="country_match{{::$id}}"
+                                                     id="country_match{{::$id}}" required
                                                      class="rep-selectize-font rep-selectize-dropdown form-control">
                                         {{$select.selected[timelySubCtrl.lang]}}
                                     </ui-select-match>
                                     <ui-select-choices
                                             repeat="countryRecord in  timelySubCtrl.countries | filter:{[timelySubCtrl.lang]: $select.search}"
-                                            class="rep-selectize-font">
+                                            class="rep-selectize-font" required>
                                         <span ng-bind-html="countryRecord[timelySubCtrl.lang] | highlight: $select.search"></span>
                                     </ui-select-choices>
                                 </ui-select>
@@ -103,7 +106,6 @@
                         <cmp-error-message field-name="timelySubCtrl.countryId" form-ref="timelySubCtrl.timelySubForm"
                                            show-error="timelySubCtrl.showErrors()"
                                            error-types="timelySubCtrl.requiredOnly"></cmp-error-message>
-
                     </label>
                 </div>
             </div>

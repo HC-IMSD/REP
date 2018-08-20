@@ -29,10 +29,10 @@
                     </label>
                 </div-->
                 <div class="form-group col-md-12">
-                    <label for="{{::addressRec.companyNameId}}">
+                    <label>
                         <span class="field-name">{{"ORGANIZATIONNAME" |translate}}</span>
                         <!--strong class="required"> {{"REQUIRED" |translate}}</strong-->
-                        <input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
+                        <input type="text"  name="{{::addressRec.companyNameId}}"
                                ng-model="addressRec.addressModel.companyName"
                                class="form-control full-width" maxlength="80" size="60"
                                ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isEditable"

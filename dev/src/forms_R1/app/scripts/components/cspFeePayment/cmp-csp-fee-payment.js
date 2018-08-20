@@ -69,6 +69,14 @@
             //vm.urlTitle = $translate.instant("FEE_URLTITLE");
         };
 
+        vm.showError = function (ctrl) {
+            if (!ctrl) return;
+
+            if ((ctrl.$invalid && ctrl.$touched) || (vm.showErrors() && ctrl.$invalid )) {
+                return true;
+            }
+            return false;
+        };
         /**
          * Called on binding changes
          */

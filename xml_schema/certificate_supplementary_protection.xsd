@@ -24,6 +24,7 @@
 	<hpfb:element name="applicant_role" type="yes_no_content"/>
 
 	<hpfb:element name="applicant" type="applicant_content"/>
+	<hpfb:element name="agent" type="applicant_content"/>
 	<!--<hpfb:element name="billing" type="billing_content"/>-->
 	<hpfb:element name="address" type="international_address_content"/>
 	<hpfb:element name="contact" type="contact_content"/>
@@ -40,10 +41,12 @@
 	<hpfb:element name="filing_date" type="yyyymmdd_date_content"/>
 	<hpfb:element name="granted_date" type="yyyymmdd_date_content"/>
 	<hpfb:element name="expiry_date" type="yyyymmdd_date_content"/>
+	<hpfb:element name="noc_date" type="yyyymmdd_date_content"/>
 	<hpfb:element name="control_number" type="control_number_content"/>
 	<hpfb:element name="drug_use" type="drug_use_type"/>
 	<hpfb:element name="time_application" type="issuance_type"/>
 	<hpfb:element name="medicinal_ingredient" type="char_1_256_content"/>
+	<hpfb:element name="product_name" type="char_1_256_content"/>
 	<hpfb:element name="applicant_statement" type="applicant_type"/>
 	<!--timely information section-->
 	<hpfb:element name="timely_submission_info" type="timely_content"/>
@@ -101,6 +104,7 @@
 			<hpfb:element ref="billing_role"/>
 			<hpfb:element ref="applicant_role"/>
 			<hpfb:element ref="applicant_name"/>
+			<hpfb:element ref="agent"/>
 			<hpfb:element ref="contact"/>
 			<hpfb:element ref="address"/>
 			
@@ -128,9 +132,11 @@
 		<hpfb:all>
 			<hpfb:element ref="patent_info"/>
 			<hpfb:element ref="control_number"/>
+			<hpfb:element ref="noc_date"/>
 			<hpfb:element ref="drug_use"/>
 			<hpfb:element ref="time_application"/>
 			<hpfb:element ref="medicinal_ingredient"/>
+			<hpfb:element ref="product_name"/>
 			<hpfb:element ref="applicant_statement"/>
 		</hpfb:all>
 	</hpfb:complexType>

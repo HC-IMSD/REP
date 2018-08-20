@@ -9064,7 +9064,7 @@ legend.required:before,
 .checkbox.required:before,
 input[type="checkbox"].required:before {
     content: "* ";
-    margin-left: -0.665em;
+    margin-left: 0.665em;
 }
 
 [dir=rtl] label.required:before,

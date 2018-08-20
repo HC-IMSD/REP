@@ -182,8 +182,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="main.alerts[4]"
-                             class="alert-info" close="main.closeAlert(4)">
+                        <cmp-alert  ui-state="main.alerts[4]" msg="CERT_INSTRUCT" update-state="main.closeAlert(4)" type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!main.isFrench()"
                                      ng-include="'app/scripts/templates/csp/tpl-csp-cert-en.html'">
@@ -192,7 +191,7 @@
                                      ng-include="'app/scripts/templates/csp/tpl-csp-cert-fr.html'">
                                 </div>
                             </section>
-                        </div>
+                        </cmp-alert>
                     </div>
                 </div>
                 <div class="row">

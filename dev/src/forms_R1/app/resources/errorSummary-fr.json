@@ -11,6 +11,7 @@
 "TYPE_MINLENGTH": "Moins de longueur minimale.",
 "POSTAL_FORMAT": "Entrez un format valide.",
 "TYPE_MIN": "Doit être supérieur au minimum.",
-"TYPE_DATE":"Veuillez fournir une une date valide.",
+  "TYPE_MAX": "Doit être inférieur au 10000000.",
+"TYPE_DATE":"Veuillez fournir une date valide.",
   "TYPE_NUMBER":"Veuillez fournir un numéro valide."
 }
