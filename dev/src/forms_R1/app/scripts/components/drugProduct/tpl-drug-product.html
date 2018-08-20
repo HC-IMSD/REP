@@ -220,7 +220,7 @@
                             <div class="col-sm-4">
                                 <div class="checkbox checkbox-pi">
                                     <label for="thisActivity">
-                                        <input type="checkbox" id="thisActivity" name="thisActivity"
+                                            <input type="checkbox" id="thisActivity" name="thisActivity"
                                                ng-model="drugProdCtrl.model.thisActivity"
                                                ng-change="drugProdCtrl.rolechecked()"/>
                                         <span>{{::"THIS_ACTIVITY"|translate}}</span>
@@ -243,7 +243,7 @@
                         </div>
                     </div>
                 </fieldset>
-                <section class="panel panel-default">
+                <section class="panel panel-default" ng-if="drugProdCtrl.model.importer">
                     <header class="panel-heading clearfix">
                         <div class="btn-group pull-right">
                             <button title="{{::'EXPAND'|translate}} {{::'IMPORTER_INSTRUCT'|translate}}"
@@ -252,7 +252,7 @@
                                     class="fa fa-question-circle fa-2x"></span>
                             </button>
                         </div>
-                        <h3 class="panel-title">F. {{'IMPORTER'|translate}}</h3>
+                        <h3 class="panel-title">{{'IMPORTER'|translate}}</h3>
                     </header>
                     <div class="panel-body">
                         <div class="row">
@@ -281,7 +281,7 @@
                 <div class="row">
                     <div class="col-xs-4 form-group" ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
-                            <span class="field-name">G.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <span class="field-name">F.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <button title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="drug-use-instructions-toggle" ng-click="drugProdCtrl.addInstruct(3)"><span
@@ -327,7 +327,7 @@
                 <fieldset id="{{::drugProdCtrl.fsType}}">
                     <legend>
                         <label>
-                            <span class="label-pi">H.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
+                            <span class="label-pi">G.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </label>
                     </legend>
                     <div class="row">
@@ -402,7 +402,7 @@
                     <div class="form-group col-md-12"
                          ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
                         <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
-                            <span class="field-name">I. {{::'PROP_INDICATION'|translate}}</span>
+                            <span class="field-name">H. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
                             <button title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="prop-indication-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
@@ -468,7 +468,7 @@
                 <div class="row">
                     <div class="col-xs-4 form-group">
                         <label>
-                            <span class="field-name">J. {{::'FORMULATION'|translate}}</span>
+                            <span class="field-name">I. {{::'FORMULATION'|translate}}</span>
                             <button title="{{::'EXPAND'|translate}} {{::'FORMULATION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="formulation-instructions-toggle" ng-click="drugProdCtrl.addInstruct(5)"><span
                                     class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORMULATION_INSTRUCT'|translate}}"</span>
