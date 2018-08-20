@@ -74,7 +74,7 @@
   "HELP_NDS":"Expand New Drug Submission Instructions",
   "HELP_NOC":"Expand Notice of Compliance Date Instructions",
   "HELP_MARKETDATE":"Expand Market Date Instructions",
-  "MARKETDATE_CLOSE":"Collapse Market Date Instructions",
+  "MARKETDATE_CLOSE":"Market Date Instructions",
   "APPLICANT_INSTRUCT":"Expand Applicant Information Instructions",
   "BILLING_INSTRUCT":"Expand Billing Address Instructions",
   "VERSION_INSTRUCT_CLOSE":"Version Number Instructions",
@@ -86,10 +86,10 @@
   "MI_INSTRUCT":"Medicinal Ingredient Instructions",
   "NDS_INSTRUCT":"New Drug Submission Instructions",
   "NOC_INSTRUCT":"Notice of Compliance Instructions",
-  "NOC_CLOSE":"Collapse Notice of Compliance Instructions",
+  "NOC_CLOSE":"Notice of Compliance Instructions",
   "MARKETDATE_INSTRUCT":"Market Date Instructions",
   "APPLICANT_CLOSE":"Applicant Information Instructions",
-  "BILLING_CLOSE":"Collapse Billing Address Instructions",
+  "BILLING_CLOSE":"Billing Address Instructions",
   "ADVANCE_DETAILS":"(Advance Payment Details form)."
 
 }

@@ -12,9 +12,17 @@
     </script>
 
     <noscript>
-        <!-- /ROOT/cdts/static/top-en.html-->
+        <!--Write closure fall-back static file -->
+        <!-- /ROOT/cdts/static/top-fr.html-->
+        <!-- /ROOT/etc/designs/canada/cdts/gcweb/v4_0_27/cdts/static/transactTop-fr.html-->
+        <!-- #include virtual="/etc/designs/canada/cdts/gcweb/v4_0_27/cdts/static/transactTop-fr.html"-->
         <!-- #include virtual="/cdts/static/top-fr.html"-->
     </noscript>
+    <!--Write closure template -->
+    <script type="text/javascript">
+        document.write(wet.builder.splashTop({
+        }));
+    </script>
 
     <meta charset="utf-8">
     <!--No cache-->
@@ -110,13 +118,13 @@
         defPreFooter.outerHTML=wet.builder.preFooter({
             cdnEnv:"prod",
             dateModified:"<!--build:dateToday--><!--endbuild-->",
-            showShare:false,
-            showFeedback:false
+            showShare:true,
+            showFeedback:true
         })
     </script>
 </main>
-<div id="def-footer">
-
+<div id="def-footer">   <!--Write closure fall-back static file -->
+    <!-- #include virtual="/cdts/static/footer-fr.html"-->
 </div>
 <script type="text/javascript">
     var defFooter=document.getElementById("def-footer");
