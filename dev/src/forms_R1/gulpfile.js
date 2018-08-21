@@ -900,7 +900,7 @@ pipes.mergeJsonFiles = function (srcFolder, destFolder, destName, lang) {
  *  @param lang - the language to generate. For angular translate
  *  @param formType - the type of form to generate, either external (EXT) or internal (INT)
  * */
-pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType, stylesList) {
+pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRootJs, partialRoot, buildDir, ignorePath, lang, formType, stylesList, langHtmlName) {
 
     var stylesArray = [
         paths.styles + styleFilesNames.rep,
@@ -910,10 +910,12 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
     ];
 
     if (stylesList) stylesArray = stylesList;
+    var langHtml = "";
+    if (langHtmlName) langHtml = langHtmlName;
 
     //inserts date stamp into base content page
     return (
-        pipes.insertDateStamp(templatePath, valsObj, lang, formType)
+        pipes.insertDateStamp(templatePath, valsObj, lang, formType, langHtml)
             .pipe(inject(gulp.src([partialRoot]), {
                 starttag: placeholders.mainContent,
                 transform: function (filePath, file) {
@@ -1816,10 +1818,14 @@ gulp.task('dev-csp-htmlBuild', gulp.series('dev-csp-clean', 'dev-global-create-s
     var today = createSuffixDate();
     today = ""; //remove if you want the timestamp!
     var deploy = deployType.dev;
-    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, 'cspINT-fr.html', 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
-    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, 'cspEXT-fr.html', 'cspAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy);
-    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, 'cspEXT-en.html', 'cspAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
-    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, 'cspINT-en.html', 'cspAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy);
+    var englishHtmlName="certificate-supplementary-protection-form.html";
+    var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
+    var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
+    var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
+    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchInternalHtmlName, 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy, null, englishInternalHtmlName);
+    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchHtmlName, 'cspAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy, null, englishHtmlName);
+    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, englishHtmlName, 'cspAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy, null, frenchHtmlName);
+    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, englishInternalHtmlName, 'cspAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy, null, frenchInternalHtmlName);
     return (
         pipes.cleanBuild(buildDir + paths.translations)
     );
