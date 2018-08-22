@@ -171,6 +171,19 @@
         };
 
         /**
+         * Determines if show Payment title
+         * @returns {boolean}
+         */
+        vm.showPaymentSection = function () {
+            return ((!vm.isDeferral() && vm.isFeeRemit()) ||
+                (vm.isEligible() && vm.isLess10K()) ||
+                (vm.isEligible() && !vm.isLess10K()) ||
+                (vm.isDeferral() && !vm.isEligible())
+            );
+
+        };
+
+        /**
          * Returns if the fees are elgible for remissions
          * @returns {boolean}
          */
