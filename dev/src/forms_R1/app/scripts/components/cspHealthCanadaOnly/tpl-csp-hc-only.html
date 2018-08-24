@@ -8,7 +8,7 @@
                     <span ng-if="!hcOnlyCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
                     <span ng-if="hcOnlyCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                     <input type="date" id="{{::hcOnlyCtrl.dateReceivedId}}" name="{{::hcOnlyCtrl.dateReceivedId}}"
-                           data-ng-model="hcOnlyCtrl.model.dateReceived" class="form-control"/>
+                           data-ng-model="hcOnlyCtrl.model.dateReceived" class="form-control" title="{{::'DATE_APPL_REC'|translate}}"/>
                    <!-- <cmp-error-message field-name="hcOnlyCtrl.dateReceivedId" form-ref="hcOnlyCtrl.hcOnlyForm"
                                        show-error="hcOnlyCtrl.showErrors()"
                                        error-types="hcOnlyCtrl.requiredOnlyError"></cmp-error-message>-->
@@ -19,7 +19,7 @@
                 <label for="{{::hcOnlyCtrl.companyCodeId}}">
                     <span class="field-name">{{::"CSP_COMPANY_CODE" |translate}}</span>
                     <input type="text" id="{{::hcOnlyCtrl.companyCodeId}}" name="{{::hcOnlyCtrl.companyCodeId}}"
-                           data-ng-model="hcOnlyCtrl.model.companyId" class="form-control"
+                           data-ng-model="hcOnlyCtrl.model.companyId" class="form-control" title="{{::'CSP_COMPANY_CODE'|translate}}"
                             maxlength="5" size="5"/>
                    <!-- <cmp-error-message field-name="hcOnlyCtrl.companyCodeId" form-ref="hcOnlyCtrl.hcOnlyForm"
                                        show-error="hcOnlyCtrl.showErrors()"
@@ -31,7 +31,7 @@
                 <label for="{{::hcOnlyCtrl.applicationCodeId}}" >
                     <span class="field-name">{{::"CSP_APPLICATION_CODE" |translate}}</span>
                     <input type="text" id="{{::hcOnlyCtrl.applicationCodeId}}" name="{{::hcOnlyCtrl.applicationCodeId}}"
-                           data-ng-model="hcOnlyCtrl.model.applicationId" class="form-control"
+                           data-ng-model="hcOnlyCtrl.model.applicationId" class="form-control" title="{{::'CSP_APPLICATION_CODE'|translate}}"
                            maxlength="6" size="6"/>
                   <!--  <cmp-error-message field-name="hcOnlyCtrl.applicationCodeId" form-ref="hcOnlyCtrl.hcOnlyForm"
                                        show-error="hcOnlyCtrl.showErrors()"
@@ -49,7 +49,7 @@
                                        error-types="hcOnlyCtrl.requiredOnlyError"></cmp-error-message>-->
                 </label>
                 <textarea id="{{::hcOnlyCtrl.notesId}}" name="{{::hcOnlyCtrl.notesId}}" class="form-control full-width"
-                          data-ng-model="hcOnlyCtrl.model.hcNotes"
+                          data-ng-model="hcOnlyCtrl.model.hcNotes" title="{{::'NOTES'|translate}}"
                           maxlength="256" rows="4"></textarea>
             </div>
         </div>

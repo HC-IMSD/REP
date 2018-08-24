@@ -33,7 +33,7 @@
                     <input type="text" id="{{::cspMainApplCtrl.controlNumberId}}"
                            name="{{::cspMainApplCtrl.controlNumberId}}" only-digits=""
                            data-ng-model="cspMainApplCtrl.model.controlNumber" class="form-control" minlength="6"
-                           maxlength="6" size="6" required/>
+                           maxlength="6" size="6" title="{{::'NDS_NUMBER'|translate}}" required/>
                     <cmp-error-message field-name="cspMainApplCtrl.controlNumberId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
                                        error-types="cspMainApplCtrl.numberError"></cmp-error-message>
@@ -71,7 +71,7 @@
                 <span ng-if="cspMainApplCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                 <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                 <input type="date" id="{{::cspMainApplCtrl.dateNOCId}}" name="{{::cspMainApplCtrl.dateNOCId}}"
-                       data-ng-model="cspMainApplCtrl.model.nocDate" class="form-control"  title="{{::'CALENDAR'|translate}}" required/>
+                       data-ng-model="cspMainApplCtrl.model.nocDate" class="form-control"  title="{{::'CALENDAR'|translate}}{{::'DATE_NOC'|translate}}" required/>
                 <cmp-error-message field-name="cspMainApplCtrl.dateNOCId" form-ref="cspMainApplCtrl.mainApplForm"
                                    show-error="cspMainApplCtrl.showErrors()"
                                    error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>
@@ -108,7 +108,7 @@
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <select id="{{::cspMainApplCtrl.drugUseId}}" name="{{::cspMainApplCtrl.drugUseId}}"
                             data-ng-model="cspMainApplCtrl.model.drugUse" class="form-control"
-                            ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList"
+                            ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList" title="{{::'DRUGUSE'|translate}}"
                              required></select>
                     <cmp-error-message field-name="cspMainApplCtrl.drugUseId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
@@ -191,7 +191,7 @@
                 </label>
                 <textarea id="{{::cspMainApplCtrl.medIngedId}}" name="{{::cspMainApplCtrl.medIngedId}}"
                           data-ng-model="cspMainApplCtrl.model.medicinalIngredient"
-                          class="form-control full-width" maxlength="300" rows="4" size="7" required></textarea>
+                          class="form-control full-width" maxlength="300" rows="4" size="7" title="{{::'MED_INGRED'|translate}}" required></textarea>
             </div>
         </div>
         <div class="row">
@@ -207,7 +207,7 @@
                 </label>
                 <textarea id="{{::cspMainApplCtrl.prodNameId}}" name="{{::cspMainApplCtrl.prodNameId}}"
                           data-ng-model="cspMainApplCtrl.model.productName"
-                          class="form-control full-width" maxlength="300" rows="4" size="7" required></textarea>
+                          class="form-control full-width" maxlength="300" rows="4" size="7" title="{{::'PROD_NAME'|translate}}" required></textarea>
             </div>
         </div>
         <div class="row">

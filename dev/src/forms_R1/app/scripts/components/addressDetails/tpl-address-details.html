@@ -7,7 +7,7 @@
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
                     <input type="text" class="form-control full-width" maxlength="120" id="{{::adr.streetId}}"
                            name="{{::adr.streetId}}" ng-readonly="!adr.isEditable"
-                           data-ng-model="adr.addressModel.street" required/>
+                           data-ng-model="adr.addressModel.street" title="{{::'STREET'|translate}}" required/>
                     <cmp-error-message field-name="adr.streetId" form-ref="adr.addressForm"
                                        show-error="adr.showErrors()" error-types="adr.requiredOnly">
                     </cmp-error-message>
@@ -19,7 +19,7 @@
                 <label for="{{::adr.cityId}}" class="required full-width">
                     <span class="field-name">{{"CITY_TOWN" |translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}} </strong>
-                    <input type="text" id="{{::adr.cityId}}" name="{{::adr.cityId}}"
+                    <input type="text" id="{{::adr.cityId}}" name="{{::adr.cityId}} "title="{{::'CITY_TOWN'|translate}}"
                            data-ng-model="adr.addressModel.city"
                            class="form-control  full-width" maxlength="60"
                            ng-readonly="!adr.isEditable" required/>
@@ -79,7 +79,7 @@
                 <div class="form-group " ng-show="adr.hideProvinceDdl"
                      ng-class="{'has-error':adr.addressForm[adr.stateTextId].$invalid}">
                     <label for="{{::adr.stateTextId}}">{{"PROVSTATE" |translate}}</label>
-                    <input type="text" id="{{::adr.stateTextId}}" name="{{::adr.stateTextId}}"
+                    <input type="text" id="{{::adr.stateTextId}}" name="{{::adr.stateTextId}}" title="{{::'PROVSTATE'|translate}}"
                            data-ng-model="adr.addressModel.stateText" class="form-control full-width" maxlength="40"
                            size="40" ng-readonly="!adr.isEditable"/>
                 </div>
@@ -88,7 +88,7 @@
                 <label for="{{::adr.postalId}}" ng-class="{required:adr.isPostalRequired}">
                     <span class="field-name">{{adr.postalLabel |translate}}</span>
                     <strong ng-show="adr.isPostalRequired" class="required">{{"REQUIRED" |translate}} </strong>
-                    <input type="text" id="{{::adr.postalId}}" name="{{::adr.postalId}}"
+                    <input type="text" id="{{::adr.postalId}}" name="{{::adr.postalId}}" title="{{adr.postalLabel|translate}}"
                            data-ng-model="adr.addressModel.postalCode"
                            class="form-control" ng-maxlength="7" ng-required="adr.isPostalRequired"
                            ng-change="adr.postalCodeChanged()"
