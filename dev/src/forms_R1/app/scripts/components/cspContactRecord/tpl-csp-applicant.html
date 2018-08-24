@@ -33,7 +33,7 @@
                             <!--strong class="required"> {{::"REQUIRED" |translate}} </strong-->
                             <input type="text" id="{{::cspApplCtrl.organizationId}}" name="{{::cspApplCtrl.organizationId}}"
                                    data-ng-model="cspApplCtrl.model.applicantName" class="form-control" maxlength="80"
-                                   size="80"
+                                   size="80" title="{{cspApplCtrl.applicantTextAlias|translate}}"
                             />
 
                             <cmp-error-message field-name="cspApplCtrl.applicantId" form-ref="cspApplCtrl.applForm"
@@ -54,7 +54,7 @@
                         <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                         <input type="text" id="{{::cspApplCtrl.applicantId}}" name="{{::cspApplCtrl.applicantId}}"
                                data-ng-model="cspApplCtrl.model.applicantName" class="form-control" maxlength="80"
-                               size="80"
+                               size="80" title="{{cspApplCtrl.applicantTextAlias|translate}}"
                                required/>
 
                         <cmp-error-message field-name="cspApplCtrl.applicantId" form-ref="cspApplCtrl.applForm"
@@ -70,8 +70,8 @@
                                 <!--strong-- class="required">{{"REQUIRED" |translate}}</strong-->
                                 <input type="text" id="{{::cspApplCtrl.agentNameId}}"
                                        data-ng-model="cspApplCtrl.model.agentName"
-                                       class="form-control full-width" name="{{::cspApplCtrl.agentNameId}}" maxlength="80"
-                                       size="80" ng-readonly="cspApplCtrl.isEditable"/>
+                                       class="form-control full-width" name="{{::cspApplCtrl.agentNameId}}" maxlength="80" title="{{cspApplCtrl.agentNameId|translate}}"
+                                       size="80" ng-readonly="cspApplCtrl.isEditable" />
                                 <!--cmp-error-message field-name="contCtrl.agentName" form-ref="contCtrl.contactForm"
                                                    show-error="contCtrl.showErrors()"
                                                    error-types="contCtrl.requiredOnly"></cmp-error-message-->

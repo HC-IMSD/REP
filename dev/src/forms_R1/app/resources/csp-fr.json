@@ -94,6 +94,6 @@
   "MARKETDATE_INSTRUCT":"instructions de date de première demande pour une autorisation de vente",
   "APPLICANT_CLOSE":"instructions de renseignements sur le demandeur",
   "BILLING_CLOSE":"instructions de adresse de facturation",
-  "ADVANCE_DETAILS":"(formulaire Détails du paiement en avance)."
-
+  "ADVANCE_DETAILS":"(formulaire Détails du paiement en avance).",
+  "DISCLAIMER":"Le contenu de ce formulaire peut être communiqué publiquement."
 }

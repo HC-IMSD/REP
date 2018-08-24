@@ -71,7 +71,7 @@
                 <span ng-if="cspMainApplCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                 <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                 <input type="date" id="{{::cspMainApplCtrl.dateNOCId}}" name="{{::cspMainApplCtrl.dateNOCId}}"
-                       data-ng-model="cspMainApplCtrl.model.nocDate" class="form-control" required/>
+                       data-ng-model="cspMainApplCtrl.model.nocDate" class="form-control"  title="{{::'CALENDAR'|translate}}" required/>
                 <cmp-error-message field-name="cspMainApplCtrl.dateNOCId" form-ref="cspMainApplCtrl.mainApplForm"
                                    show-error="cspMainApplCtrl.showErrors()"
                                    error-types="cspMainApplCtrl.requiredOnlyError"></cmp-error-message>

@@ -90,7 +90,7 @@
   "MARKETDATE_INSTRUCT":"Market Date Instructions",
   "APPLICANT_CLOSE":"Applicant Information Instructions",
   "BILLING_CLOSE":"Billing Address Instructions",
-  "ADVANCE_DETAILS":"(Advance Payment Details form)."
-
+  "ADVANCE_DETAILS":"(Advance Payment Details form).",
+  "DISCLAIMER":"The contents of this form may be publicly disclosed."
 }
 

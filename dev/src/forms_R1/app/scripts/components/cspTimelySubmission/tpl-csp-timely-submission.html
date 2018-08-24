@@ -60,7 +60,7 @@
                                 <div class="rep-vertical-align">
                                     <input type="date" id="{{::timelySubCtrl.dateId}}" name="{{::timelySubCtrl.dateId}}"
                                            data-ng-model="timelySubCtrl.model.approvalDate" class="form-control"
-                                           ng-required="timelySubCtrl.isApplicationMarketing()" required/>
+                                           ng-required="timelySubCtrl.isApplicationMarketing()"   title="{{::'CALENDAR'|translate}}" required/>
                                     <cmp-error-message field-name="timelySubCtrl.dateId" form-ref="timelySubCtrl.timelySubForm"
                                                        show-error="timelySubCtrl.showErrors()"
                                                        error-types="timelySubCtrl.dateError"
