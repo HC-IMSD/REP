@@ -12,7 +12,8 @@
                         <ui-select ng-model="countryRecCtrl.model.country" id="country_{{::$id}}" name="countryName"
                                    ng-model-options="{ debounce: 0}"
                                    class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required
-                                   ng-disabled="false" title="Choose a country" class="rep-selectize-font">
+                                   ng-disabled="false" title="Choose a country" class="rep-selectize-font"
+                                   ng-options="val |translate for val in  countryRecCtrl.model.country  | orderByTranslated">
                             <ui-select-match placeholder="Select or Search for country" name="countryMatch"
                                              class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[countryRecCtrl.lang]}}
                             </ui-select-match>

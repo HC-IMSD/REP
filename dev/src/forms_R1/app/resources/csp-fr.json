@@ -63,8 +63,8 @@
   "HELP_CSPFILE_LOAD":"Élargir les instructions de chargement du fichier",
   "CSPFILE_LOAD":"Chargement du fichier",
   "VERSION_INSTRUCT":"Élargir les instructions de version",
-  "HELP_PATENT":"Élargir les instructions de brevet",
-  "HELP_FEE":"Élargir les instructions frais",
+  "HELP_PATENT":"Élargir les instructions de renseignement du brevet",
+  "HELP_FEE":"Élargir les instructions de paiement des frais",
   "HELP_CERT":"Élargir les instructions de attestation",
   "NOC_INSTRUCT":"Élargir les instructions de renseignements sur la Date de l'AC",
   "NOC_CLOSE":"instructions de renseignements sur la Date de l'AC",
@@ -79,8 +79,8 @@
 
 
   "VERSION_INSTRUCT_CLOSE":"instructions de version",
-  "PATENT_INSTRUCT":"instructions de brevet",
-  "FEE_INSTRUCT":"instructions frais",
+  "PATENT_INSTRUCT":"instructions de renseignement sur le brevet",
+  "FEE_INSTRUCT":"instructions de paiement des frais",
   "CERT_INSTRUCT":"instructions de attestation",
   "CERT_CLOSE":"instructions de attestation",
 

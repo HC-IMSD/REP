@@ -68,7 +68,7 @@
                         <strong class="required"> {{"REQUIRED" |translate}} </strong>
                         <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
                                 id="{{::adr.stateListId}}" name="{{::adr.stateListId}}"
-                                data-ng-options="province |translate for province in adr.provinces"
+                                data-ng-options="province |translate for province in adr.provinces | orderByTranslated"
                                 ng-disabled="!adr.isEditable" ng-required="adr.hideProvinceText"></select>
 
                         <cmp-error-message field-name="adr.stateListId" form-ref="adr.addressForm"
