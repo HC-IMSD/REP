@@ -48,7 +48,7 @@ var paths = {
     buildProdCompany: buildProd + '/company/',
     buildProdTransaction: buildProd + '/transaction/',
     buildProdDossier: buildProd + '/dossier/',
-    buildProdCsp: buildProd + '/csp-cps/',
+    buildProdCsp: buildProd + '/certificate/',
     englishTemplate: wetBase + '/' + templateFileEn, //this is the wet template before path injection
     frenchTemplate: wetBase + '/' + templateFileFr, //this is the wet template before path injection
     devEnglishTemplate: buildDev + '/templates/' + templateFileEn,
@@ -2370,7 +2370,7 @@ gulp.task('prod-csp-compileSrcJs', gulp.series('prod-csp-compileTranslateFile', 
 
 gulp.task('prod-csp-compileHtml', gulp.series('prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-csp-compileSrcJs', 'prod-csp-copyLib', function () {
 
-    var ignorePath ='build/prod/csp-cps' ;
+    var ignorePath ='build/prod/certificate' ;
     var basePath = paths.buildProdCsp;
     var destPath = paths.buildProdCsp;
     var htmlPartial = jsRootContent.partialCSPFormRoot;
