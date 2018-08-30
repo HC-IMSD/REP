@@ -71,7 +71,7 @@
             vm.dateFiledId = "dateFiled" + scopeId;
             vm.dateGrantedId = "dateGranted" + scopeId;
             vm.dateExpiryId = "dateExpiry" + scopeId;
-            vm.dateNOCId = "dateNOC" + scopeId;
+            //vm.dateNOCId = "dateNOC" + scopeId;
         }
 
         $scope.$watch('cspPatentCtrl.patentForm.$error', function () {

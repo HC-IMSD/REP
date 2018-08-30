@@ -8,8 +8,8 @@
   "FAX_NUMBER_APPL": "Applicant Fax Number",
   "PHONENUMBER_APPL": "Applicant Phone Number",
   "CONTACTEMAIL_APPL": "Applicant Email",
-  "CITY_APPL": "Applicant City",
-  "STREET_APPL": "Applicant Street",
+  "CITY_APPL": "Applicant City or Town",
+  "STREET_APPL": "Applicant Street Address",
   "COUNTRY_APPL": "Applicant Country",
   "PROVINCELIST_APPL": "Applicant Province or State",
   "POSTAL_APPL": "Applicant postal or zip code",
@@ -28,15 +28,15 @@
   "COUNTRY_BILL": "Billing Country",
   "PROVINCELIST_BILL": "Billing Province or State",
   "POSTAL_BILL": "Billing postal or zip code",
-  "CERTFIRSTNAME":"Authorized Official First Name",
-  "CERTLASTNAME":"Authorized Official Last Name",
+  "CERTFIRSTNAME":"Certification Name of Authorized Official First Name",
+  "CERTLASTNAME":"Certification Name of Authorized Official Last Name",
   "CERTJOBTITLE":"Authorized Official Job Title",
   "CERTDATESIGNED":"Authorized Official Date Signed",
   "DATEFILED":"Patent Filing Date",
   "DATEGRANTED":"Patent Date Granted",
   "DATEEXPIRY":"Patent Expiration Date",
   "DATENOC":"Notice of Compliance Date",
-  "CONTROLNUMBER":"NDS Control Number",
+  "CONTROLNUMBER":"NDS Number",
   "TIME120":"Applicant is applying",
   "MEDICINALINGREDIENT":"Medicinal Ingredient",
   "PRODUCTNAME":"Product Name",
@@ -44,6 +44,6 @@
   "FEE":"Advanced Payment Fee",
   "FEETYPE":"Method of Advanced Payment",
   "TYPE_ZERO_MIN":"Must be greater than zero",
-  "MSG_ERR_MAX":"Must be less than 1000000"
+  "MSG_ERR_MAX":"Must be less than 10,000,000"
 
 }

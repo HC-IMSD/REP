@@ -69,7 +69,7 @@
   "NOC_INSTRUCT":"Élargir les instructions de renseignements sur la Date de l'AC",
   "NOC_CLOSE":"instructions de renseignements sur la Date de l'AC",
   "HELP_ATTEST":"Élargir les instructions de attestations",
-  "HELP_DRUGUSE":"Élargir les instructions d'utilisation de drogues",
+  "HELP_DRUGUSE":"Élargir les instructions d'usage de drogues",
   "HELP_MI":"Élargir les instructions de ingrédient médicinal",
   "HELP_NDS":"Élargir les instructions de renseignements sur la présentation de drogue nouvelle",
   "HELP_NOC":"Élargir les instructions de renseignements sur la Date de l'AC",
@@ -86,7 +86,7 @@
 
   "ATTEST_INSTRUCT":"instructions de attestations",
   "ATTEST_CLOSE":"instructions de attestations",
-  "DRUGUSE_INSTRUCT":"instructions d'utilisation de drogues",
+  "DRUGUSE_INSTRUCT":"instructions d'usage de drogues",
   "MI_INSTRUCT":"instructions de ingrédient médicinal",
   "NDS_INSTRUCT":"instructions de renseignements sur la présentation de drogue nouvelle",
   "MARKETDATE_CLOSE":"instructions de date de première demande pour une autorisation de vente",

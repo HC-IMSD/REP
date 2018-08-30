@@ -9,8 +9,8 @@
   "TYPE_MINLENGTH": "Less than minimum length",
   "POSTAL_FORMAT": "Please enter a valid zip code",
   "TYPE_MIN": "Must be greater than the minimum",
-  "TYPE_PATTERN":"Enter a valid fax number",
-  "TYPE_MAX": "Must be less than 10000000",
+  "TYPE_PATTERN":"Please enter a valid fax number",
+  "TYPE_MAX": "Must be less than 10,000,000",
   "TYPE_DATE":"Please enter a valid date",
   "TYPE_NUMBER":"Please enter a valid number"
 }

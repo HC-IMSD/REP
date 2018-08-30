@@ -9,10 +9,10 @@
 "TYPE_EMAIL":"Veuillez fournir une adresse électronique valide.",
 "TYPE_DUPLICATEROLE": "Ce rôle a déjà été sélectionné.",
 "TYPE_MINLENGTH": "Moins de longueur minimale.",
-"POSTAL_FORMAT": "Entrez un code postale valide.",
-  "TYPE_PATTERN":"Veuillez fournir un numéro de telecopieur valide.",
+"POSTAL_FORMAT": "Veuillez fournir un code postale valide.",
+  "TYPE_PATTERN":"Veuillez fournir un numéro de télécopieur valide.",
 "TYPE_MIN": "Doit être supérieur au minimum.",
-  "TYPE_MAX": "Doit être inférieur au 10000000.",
+  "TYPE_MAX": "Doit être inférieur au 10 000 000.",
 "TYPE_DATE":"Veuillez fournir une date valide.",
   "TYPE_NUMBER":"Veuillez fournir un numéro valide."
 }

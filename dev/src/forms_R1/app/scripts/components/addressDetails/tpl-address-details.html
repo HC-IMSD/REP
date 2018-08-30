@@ -32,7 +32,6 @@
                 <label for="{{::adr.countryId}}" class="required full-width">
                     <span class="field-name">{{"COUNTRY" |translate}}</span>
                     <strong class="required">{{"REQUIRED" |translate}}</strong>
-
                     <div class="rep-pad-top">
                         <div class="rep-error" ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
                             <ui-select ng-model="adr.addressModel.country" id="{{::adr.countryId}}"
@@ -54,7 +53,9 @@
                         </div>
                     </div>
                     <cmp-error-message field-name="adr.countryId" form-ref="adr.addressForm"
-                                       show-error="adr.showErrors()" error-types="adr.requiredOnly">
+                                       show-error="adr.showErrors()" error-types="adr.requiredOnly"
+                                       update-error-summary="adr.updateErrorSummary()"
+                                       show-error-summary="adr.showSummary">
                     </cmp-error-message>
                 </label>
             </div>
@@ -70,7 +71,6 @@
                                 id="{{::adr.stateListId}}" name="{{::adr.stateListId}}"
                                 data-ng-options="province |translate for province in adr.provinces | orderByTranslated"
                                 ng-disabled="!adr.isEditable" ng-required="adr.hideProvinceText"></select>
-
                         <cmp-error-message field-name="adr.stateListId" form-ref="adr.addressForm"
                                            show-error="adr.showErrors()" error-types="adr.requiredOnly">
                         </cmp-error-message>

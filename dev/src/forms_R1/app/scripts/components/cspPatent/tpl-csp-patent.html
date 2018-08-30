@@ -25,8 +25,7 @@
                     <span ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateFiledId}}" name="{{::cspPatentCtrl.dateFiledId}}"
-                           data-ng-model="cspPatentCtrl.model.dateFiled" class="form-control"  title="{{::'CALENDAR'|translate}}{{::'DATE_FILED'|translate}}" required/>
-
+                           data-ng-model="cspPatentCtrl.model.filingDate" class="form-control"  title="{{::'CALENDAR'|translate}}{{::'DATE_FILED'|translate}}" required/>
                     <cmp-error-message field-name="cspPatentCtrl.dateFiledId" form-ref="cspPatentCtrl.patentForm"
                                        show-error="cspPatentCtrl.showErrors()"
                                        error-types="cspPatentCtrl.dateError"></cmp-error-message>
