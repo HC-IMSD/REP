@@ -1,11 +1,14 @@
 <ng-form name="importerListCtrl.importerListForm">
     <cmp-expanding-table reset-to-collapsed="importerListCtrl.resetToCollapsed"
                          list-items="importerListCtrl.model.list"
-                         column-def="importerListCtrl.columnDef" select-record="importerListCtrl.selectRecord"
+                         column-def="importerListCtrl.columnDef"
+                         select-record="importerListCtrl.selectRecord"
                          disable-selection="false">
 
-        <cmp-importer-record record="$parent.record" fieldset-label="{{importerListCtrl.fieldLabel}}"
-                            on-delete="importerListCtrl.deleteRecord(id)" show-errors="importerListCtrl.showDetailErrors">
+        <cmp-importer-record record="$parent.record"
+                             fieldset-label="{{importerListCtrl.fieldLabel}}"
+                             on-delete="importerListCtrl.deleteRecord(id)"
+                             show-errors="importerListCtrl.showDetailErrors">
         </cmp-importer-record>
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
