@@ -85,6 +85,7 @@
             {type: "minlength", displayAlias: "MSG_LENGTH_7"}
         ];
         vm.showSummary=false;
+
         vm.$onInit = function () {
             _setIdNames();
             vm.updateActivityType();
@@ -94,6 +95,7 @@
             vm.setSolicitedState();
             loadAdminSubData();
             vm.finalState=false;
+            vm.isEmptyDossierType = true;
         };
 
 
@@ -105,7 +107,18 @@
                 vm.setAdminSubmission();
                 vm.updateEctdState();
                 vm.setSolicitedState();
+
+                //This is onChange - False to true VS true to false;
+                if (vm.transactionModel.ectd.dossierType.length == 0) {
+                    vm.isEmptyDossierType= true;
+                }
+                else
+                {
+                    vm.isEmptyDossierType= false;
+                }
+
             }
+
             if(changes.language){
 
                 vm.lang=changes.language.currentValue;
@@ -124,6 +137,8 @@
         vm.isFeesIndicated=function() {
             return vm.transactionModel.isFees === YES;
         };
+
+
 
         vm.getNewTransaction = function () {
             return (vm.getTransaction());
@@ -297,6 +312,42 @@
          */
         vm.isFrench=function(){
             return(vm.lang===FRENCH);
+        };
+
+        /**
+        vm.isEmptyDossierType = function(){
+            return (vm.transactionModel.ectd.dossierType === null)
+        }**/
+
+        /***
+         * JY added : Disable :  xml is Final state and Dossier_type is not empty(length > 1)
+         * @returns {boolean}
+         *
+
+        vm.isFinalStateWithDossierType=function(){
+            if( vm.finalState )
+            {
+                console.log("Step2: " + vm.isEmptyDossierType );
+                if(vm.isEmptyDossierType )
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        };
+         */
+        vm.isFinalStateWithDossierType=function() {
+            if (vm.finalState && !vm.isEmptyDossierType) {
+                return true;
+            }
+            return false;
         };
 
         $scope.$watch('transInfoCtrl.transInfoForm.$error', function () {

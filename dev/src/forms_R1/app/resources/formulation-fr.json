@@ -68,7 +68,7 @@
   "MEDICINAL_INGRED": "A. fr_Medicinal (Active) Ingredients",
   "NONMEDICINAL_INGRED": "B. fr_Non-Medicinal Ingredients",
   "IS_ANIMAL_HUMAN_MATERIAL": "D. fr_Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?",
-  "CONTAINER_TYPES": "E. fr_Container Types, Package Size and shelf Life",
+  "CONTAINER_TYPES": "E. fr_Container Types, Package Size and Shelf Life",
   "ANIMAL_HUMAN_HDING": "fr_Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug",
   "ROA_TITLE": "F. fr_Routes of Administration",
   "COUNTRIES_MANUFACT": "G. fr_Countries of manufacture for this product",

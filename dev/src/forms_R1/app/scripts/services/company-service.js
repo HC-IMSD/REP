@@ -118,7 +118,7 @@
             createContactRecord: function () {
 
                 var defaultContact = {
-                    contactId: "",
+                    contactId: 1,
                     addressRole: {
                         manufacturer: false,
                         mailing: false,

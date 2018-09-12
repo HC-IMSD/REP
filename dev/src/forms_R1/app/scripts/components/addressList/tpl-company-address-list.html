@@ -22,7 +22,8 @@
 
         <cmp-expanding-table list-items="addressListCtrl.addressList"
                              reset-to-collapsed="addressListCtrl.resetCollapsed"
-                             column-def="addressListCtrl.columnDef" select-record="addressListCtrl.selectRecord"
+                             column-def="addressListCtrl.columnDef"
+                             select-record="addressListCtrl.selectRecord"
                              disable-selection="!addressListCtrl.isDetailsValid">
 
             <cmp-address-record on-delete="addressListCtrl.deleteAddress(addressId)"
