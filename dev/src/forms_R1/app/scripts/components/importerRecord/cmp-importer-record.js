@@ -57,7 +57,7 @@
         };
 
         vm.deleteRecord = function()  {
-            vm.onDelete({id: vm.model.sequenceNumber})
+            vm.onDelete({id: vm.model.importerId})
         };
 
         vm.showError = function (ctrl) {

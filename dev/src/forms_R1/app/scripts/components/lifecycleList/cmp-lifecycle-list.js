@@ -20,6 +20,7 @@
                 records: '<',
                 onUpdate: '&',
                 isAmend: '&',
+                isFinal: '<',
                 getNewTransaction: '&',
                 setSequenceValue:'&',
                 deprecateSequence: '&', //bit of a hack
@@ -49,11 +50,13 @@
         vm.addFocused = false;
         vm.resetCollapsed = false;
         vm.activityTypes = [];
-        vm.startingSequence=0;
-        vm.seqUpdated=false;
-        vm.showSummary=false;
+        vm.startingSequence = 0;
+        vm.seqUpdated = false;
+        vm.showSummary = false;
+        vm.finalState = false;
+        vm.finalRecNum = 0;
 
-        vm.columnDef = [
+            vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
                 binding: "sequence",
@@ -113,6 +116,10 @@
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
+            }
+            if(changes.isFinal){
+                vm.finalState = changes.isFinal.currentValue;
+                vm.finalRecNum = 0;
             }
         };
 
@@ -184,6 +191,9 @@
             vm.lifecycleList.unshift(defaultTransaction); //add to top
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.selectRecord = 0; //need to generate a change
+            if(vm.finalState) {
+                vm.finalRecNum++;
+            }
             vm.addFocused = false;
             vm.setValid(false);
             vm.updateErrorState();
@@ -201,8 +211,9 @@
         };
 
         vm.isAddDisabled = function () {
-            return (!vm.isDetailsValid || (!vm.ectdValue && vm.lifecycleList.length > 0) || (vm.lifecycleListForm.$invalid && vm.lifecycleList.length > 0))
-
+            return (!vm.isDetailsValid ||
+                (!vm.ectdValue && vm.lifecycleList.length > 0) ||
+                (vm.finalState && vm.finalRecNum > 0));
         };
 
         vm.setValid = function (detailValid) {

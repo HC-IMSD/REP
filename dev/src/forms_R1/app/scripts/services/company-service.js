@@ -82,6 +82,7 @@
                     manufacturer: false,
                     mailing: false,
                     billing: false,
+                    importer: false,
                     repPrimary: false,
                     repSecondary: false
                 };
@@ -122,6 +123,7 @@
                         manufacturer: false,
                         mailing: false,
                         billing: false,
+                        importer: false,
                         repPrimary: false,
                         repSecondary: false
                     },
@@ -385,7 +387,7 @@
                 contact.manufacturer = contacts[i].addressRole.manufacturer === true ? 'Y' : 'N';
                 contact.mailing = contacts[i].addressRole.mailing === true ? 'Y' : 'N';
                 contact.billing = contacts[i].addressRole.billing === true ? 'Y' : 'N';
-                //contact.importer = contacts[i].importer === true ? 'Y' : 'N';
+                contact.importer = contacts[i].addressRole.importer === true ? 'Y' : 'N';
                 contact.rep_primary = contacts[i].addressRole.repPrimary === true ? 'Y' : 'N';
                 contact.rep_secondary = contacts[i].addressRole.repSecondary === true ? 'Y' : 'N';
                 //contact.rep_contact_role = contacts[i].addressRole.contactRole === true ? 'Y' : 'N';

@@ -87,7 +87,7 @@
 
         vm.deleteRecord = function (_id) {
             var idx = vm.model.list.indexOf(
-                $filter('filter')(vm.model.list, {sequenceNumber: _id}, true)[0]
+                $filter('filter')(vm.model.list, {importerId: _id}, true)[0]
             );
             if (idx < 0) return;
 

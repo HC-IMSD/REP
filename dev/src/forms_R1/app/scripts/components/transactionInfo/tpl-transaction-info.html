@@ -103,7 +103,7 @@
                             </div>
 
                             <div>
-                                <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="PRODUCT_INSTRUCT"
+                                <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
                                            update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!transInfoCtrl.isFrench()"
@@ -422,6 +422,7 @@
                             <div>
                                 <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
                                                     is-ectd="transInfoCtrl.isEctd"
+                                                    is-final="transInfoCtrl.isFinal"
                                                     deprecate-sequence="transInfoCtrl.subtractSequence()"
                                                     show-error-summary="transInfoCtrl.showSummary"
                                                     parent-dirty="transInfoCtrl.$dirty"

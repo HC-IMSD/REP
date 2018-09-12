@@ -50,7 +50,7 @@
 
         vm.errorsTemp = function () {
             return true;
-        }
+        };
         /**
          * Called on binding changes
          */
@@ -86,7 +86,7 @@
                     break;
                 }
             }
-            vm.onePaymentSelected = ""
+            vm.onePaymentSelected = "";
 
             if (methodSelected) {
                 vm.onePaymentSelected = true;
@@ -96,7 +96,8 @@
                 return false
             }
 
-        }
+        };
+
         vm.isFeeRemit = function () {
             if (vm.model.feeRemission === YES) {
                 return true;
@@ -119,7 +120,7 @@
         vm.isDeferral = function () {
             if (!vm.model) return false;
 
-            if (vm.model.deferralRequest==YES) {
+            if (vm.model.deferralRequest === YES) {
 
                 return true;
             }
@@ -170,6 +171,19 @@
         };
 
         /**
+         * Determines if show Payment title
+         * @returns {boolean}
+         */
+        vm.showPaymentSection = function () {
+            return ((!vm.isDeferral() && vm.isFeeRemit()) ||
+                (vm.isEligible() && vm.isLess10K()) ||
+                (vm.isEligible() && !vm.isLess10K()) ||
+                (vm.isDeferral() && !vm.isEligible())
+            );
+
+        };
+
+        /**
          * Returns if the fees are elgible for remissions
          * @returns {boolean}
          */
@@ -197,13 +211,13 @@
         vm.openPaymentForm = function () {
             var feelink=ADVANCE_FEE_PAYMENT_EN;
             console.log(vm.lang);
-            if(vm.lang==FRENCH){
+            if(vm.lang === FRENCH){
 
                 feelink=ADVANCE_FEE_PAYMENT_FR;
             }
 
             $window.open(feelink, '_blank');
-        }
+        };
 
         vm.setDocOther = function () {
             if (!vm.model) return false;
@@ -247,7 +261,7 @@
             vm.paymentFsId="fs_payment_methods" + scopeId;
             vm.deferId = "defer_fees" + scopeId;
 
-        };
+        }
         /**
          * Closes the instruction alerts
          * @param value

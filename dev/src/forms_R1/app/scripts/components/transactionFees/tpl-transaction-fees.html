@@ -347,21 +347,21 @@
                  </span>
                 </div>
             </div>
-            <div>
-                <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
-                    <div class="col-xs-12 form-group alert alert-info" role="alert">
+            <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
+                <div class="col-xs-12 form-group alert alert-info" role="alert">
                        <span>
                         <p aria-live="polite">{{::'SPONSOR_INVOICE'|translate}}</p>
                            </span>
-                    </div>
                 </div>
-                <div class="row" ng-if="transFeeCtrl.isDeferral() &&!transFeeCtrl.isEligible()">
-                    <div class="col-xs-12 form-group alert alert-info" role="alert">
+            </div>
+            <div class="row" ng-if="transFeeCtrl.isDeferral() &&!transFeeCtrl.isEligible()">
+                <div class="col-xs-12 form-group alert alert-info" role="alert">
                        <span>
                         <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
                            </span>
-                    </div>
                 </div>
+            </div>
+            <div>
                 <div ng-if="transFeeCtrl.showPaymentMethods()">
 
                     <fieldset id="{{::transFeeCtrl.paymentFsId}}">

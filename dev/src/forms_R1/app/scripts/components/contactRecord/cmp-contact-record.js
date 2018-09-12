@@ -53,6 +53,7 @@
                 manufacturer: false,
                 mailing: false,
                 billing: false,
+                importer: false,
                 repPrimary: false,
                 repSecondary: false
             },
@@ -131,13 +132,16 @@
             if (addressRoles.mailing) {
                 result = result + " MAIL"
             }
+            if (addressRoles.importer) {
+                result = result + " IMP"
+            }
             if (addressRoles.repPrimary) {
                 result = result + " REP1"
             }
             if (addressRoles.repSecondary) {
                 result = result + " REP2"
             }
-            return result
+            return result;
         }
 
 
