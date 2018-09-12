@@ -75,10 +75,12 @@
                                 <label for="{{::transInfoCtrl.typeId}}" class="required">
                                     <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                    <select class="form-control full-width rep-margin-top-12" id="{{::transInfoCtrl.typeId}}"
-                                            name="{{::transInfoCtrl.typeId}}" required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
+                                    <select class="form-control full-width rep-margin-top-12"
+                                            id="{{::transInfoCtrl.typeId}}"
+                                            name="{{::transInfoCtrl.typeId}}"
+                                            required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
                                             ng-options="val |translate for val in  transInfoCtrl.formTypeList"
-                                            ng-disabled="transInfoCtrl.finalState">
+                                            ng-disabled="transInfoCtrl.isFinalStateWithDossierType()">
                                     </select>
                                     <cmp-error-message field-name="transInfoCtrl.typeId"
                                                        form-ref="transInfoCtrl.transInfoForm"

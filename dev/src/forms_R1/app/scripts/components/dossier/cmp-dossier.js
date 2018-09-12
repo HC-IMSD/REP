@@ -111,7 +111,7 @@
             {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
         ];
 
-        vm.alerts = [false, false, false, false, false, false, false, false, false, false]; //for help boxes
+        vm.alerts = [false, false, false, false, false, false, false, false, false, false, false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
 
