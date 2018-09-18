@@ -322,27 +322,7 @@
         /***
          * JY added : Disable :  xml is Final state and Dossier_type is not empty(length > 1)
          * @returns {boolean}
-         *
-
-        vm.isFinalStateWithDossierType=function(){
-            if( vm.finalState )
-            {
-                console.log("Step2: " + vm.isEmptyDossierType );
-                if(vm.isEmptyDossierType )
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                return false;
-            }
-        };
-         */
+         **/
         vm.isFinalStateWithDossierType=function() {
             if (vm.finalState && !vm.isEmptyDossierType) {
                 return true;

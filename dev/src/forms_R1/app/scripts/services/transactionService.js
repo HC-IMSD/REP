@@ -39,7 +39,7 @@
                 dateSaved: "",
                 //applicationType: "NEW",
                 softwareVersion: "1.3.0",
-                isEctd: "Y",
+                isEctd: "N",
                 ectd: {
                     companyId: "",
                     dossierId: "",
@@ -116,8 +116,8 @@
                         is_priority: jsonObj.isPriority,
                         is_noc: jsonObj.isNoc,
                         is_admin_sub: jsonObj.isAdminSub,
-                        sub_type: jsonObj.subType,
-                        is_ectd: jsonObj.isEctd
+                        sub_type: jsonObj.subType
+                       // is_ectd: jsonObj.isEctd
                     }
                 };
                 var ectd = this._transformEctdToFile(jsonObj.ectd);
@@ -198,13 +198,13 @@
             },
             _transformEctdFromFile: function (model, jsonObj) {
                 model.ectd = _getEmptyEctdSection();
-                if (model.isEctd) {
+               // if (model.isEctd) {
                     model.ectd.companyId = jsonObj.company_id;
                     model.ectd.dossierId = jsonObj.dossier_id;
                     model.ectd.dossierType = jsonObj.dossier_type;
                     model.ectd.productName = jsonObj.product_name;
                     model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
-                }
+              //  }
             },
             getModelInfo: function () {
                 return this._default;
@@ -220,7 +220,7 @@
                 model.dateSaved = jsonObj.date_saved;
 
                 model.dataChecksum = jsonObj.data_checksum;
-                model.isEctd = jsonObj.is_ectd;
+              //  model.isEctd = jsonObj.is_ectd;
 
                 if(jsonObj.importFileType === HCSC ) {
                     model.transactionType = jsonObj.transaction_type;
@@ -501,8 +501,8 @@
      */
     function _transformLifecycleRecFromFileObj(lifecycleObj, $filter, TransactionLists) {
         var lifecycleRec = _createLifeCycleModel();
-        lifecycleRec.sequence = lifecycleObj.sequence_number;
-        lifecycleRec.dateFiled = lifecycleObj.date_filed;
+        // lifecycleRec.sequence = lifecycleObj.sequence_number;
+        // lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
         lifecycleRec.activityLead = lifecycleObj.sequence_activity_lead;
 
@@ -525,8 +525,9 @@
 
     function _mapLifecycleRecToOutput(lifecycleObj) {
         var lifecycleRec = {};
+       /**
         lifecycleRec.sequence_number = lifecycleObj.sequence;
-        lifecycleRec.date_filed = lifecycleObj.dateFiled;
+        lifecycleRec.date_filed = lifecycleObj.dateFiled; **/
         lifecycleRec.control_number = lifecycleObj.controlNumber;
         lifecycleRec.sequence_activity_lead = lifecycleObj.activityLead;
         lifecycleRec.sequence_activity_type = "";
@@ -681,8 +682,8 @@
 
     function _createLifeCycleModel() {
         var defaultRecord = {
-            "sequence": "0000",
-            "dateFiled": "",
+            // "sequence": "0000",
+            // "dateFiled": "",
             "controlNumber": "",
             "activityLead": "",
             "activityType": "",
@@ -761,7 +762,7 @@
             isNoc: "",
             isAdminSub: "",
             subType: "",
-            isEctd: "Y",
+          //  isEctd: "N",
             ectd: {
                 companyId: "",
                 dossierId: "",

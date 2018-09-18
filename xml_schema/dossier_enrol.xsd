@@ -30,7 +30,7 @@
 	<hpfb:element name="product_name" type="char_1_200_content"/>
 	<hpfb:element name="common_name" type="char_1_256_content"/>
 	<hpfb:element name="dossier_type" type="form_types_content"/>
-	<hpfb:element name="third_party_signed" type="required_yes_no_content"/>
+	<!--<hpfb:element name="third_party_signed" type="required_yes_no_content"/> -->
 	<hpfb:element name="therapeutic_class_list" type="therapeutic_class_content"/>
 	<hpfb:element name="therapeutic_class" type="char_1_256_content"/>
 	<hpfb:element name="is_ref_product" type="required_yes_no_content"/>
@@ -63,7 +63,7 @@
 			<hpfb:element ref="dossier_type"/>
 			<hpfb:element ref="product_name"/>
 			<hpfb:element ref="common_name"/>
-			<hpfb:element ref="third_party_signed"/>
+			<!-- <hpfb:element ref="third_party_signed"/> -->
 			<hpfb:element ref="is_ref_product"/>
 			<hpfb:element ref="cdn_ref_product"/>
 			<hpfb:element ref="drug_use"/>

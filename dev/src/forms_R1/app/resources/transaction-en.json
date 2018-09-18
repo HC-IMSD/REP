@@ -1,5 +1,5 @@
 {
-  "ADD_TRANSACTION": "Add Record",
+  "ADD_TRANSACTION": "New Record",
   "SEQUENCE_NUM": "Sequence Number",
   "DATE_SUBMITTED": "Date Submitted (YYYY-MM-DD)",
   "SEQUENCE_DESCRIPT": "Regulatory Transaction Description",
@@ -71,7 +71,7 @@
   "RECON_DECIS_RQ_RECON":  "Reconsideration of Decision - Request for Reconsideration",
   "RECON_DECIS_OTHER_INFO": "Reconsideration of Decision - Other Information",
   "LABEL_PREAPPROVAL_2LANG":"Second Language Label - Pre-Approval",
-  "LIFECYCLE_TITLE": "Lifecycle Management Table",
+  "LIFECYCLE_TITLE": "Transaction Details",
   "REG_CONTACT_THIS": "Regulatory Activity Contact for THIS transaction",
   "REG_ACT_CONTACT": "Regulatory Activity Contact",
   "TRANSACTION_HDING": "Regulatory Transaction Enrolment",

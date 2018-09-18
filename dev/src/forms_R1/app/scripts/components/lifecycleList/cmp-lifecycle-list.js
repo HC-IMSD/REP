@@ -55,7 +55,29 @@
         vm.showSummary = false;
         vm.finalState = false;
         vm.finalRecNum = 0;
-
+        vm.columnDef = [
+            {
+                label: "CONTROL_NUMBER",
+                binding: "controlNumber",
+                width: "8"
+            },
+            {
+                label: "ACTIVITY_LEAD",
+                binding: "activityLead",
+                width: "12"
+            },
+            {
+                label: "REG_ACTIVITY",
+                binding: "activityTypeDisplay",
+                width: "30"
+            },
+            {
+                label: "SEQUENCE_TYPE",
+                binding: "sequenceConcat",
+                width: "48"
+            }
+        ];
+/**
             vm.columnDef = [
             {
                 label: "SEQUENCE_NUM",
@@ -83,7 +105,7 @@
                 width: "48"
             }
         ];
-
+**/
         vm.$onInit = function () {
             //local var from binding
             vm.activityTypes= TransactionLists.getActivityTypes();
@@ -211,9 +233,15 @@
         };
 
         vm.isAddDisabled = function () {
-            return (!vm.isDetailsValid ||
+           if( vm.lifecycleList.length > 0 )
+           {
+               return true;
+           }
+           return false;
+
+           /** return (!vm.isDetailsValid ||
                 (!vm.ectdValue && vm.lifecycleList.length > 0) ||
-                (vm.finalState && vm.finalRecNum > 0));
+                (vm.finalState && vm.finalRecNum > 0)); **/
         };
 
         vm.setValid = function (detailValid) {
@@ -234,6 +262,7 @@
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = true;
             vm.updateErrorState();
+
         };
         /**
          * @ngdoc method determines the state of the list errors

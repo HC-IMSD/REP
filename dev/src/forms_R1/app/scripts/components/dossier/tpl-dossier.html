@@ -67,7 +67,7 @@
                         <div class="col-xs-4 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.typeId].$invalid}">
                         <label for="{{::dos.typeId}}" class="required">
-                            <span class="field-name">A.&nbsp;{{::'DOSSIER_TYPE' |translate}}</span>
+                            <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <button title="{{::'DOSSIER_TYPE_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="type-instructions-toggle" ng-click="dos.addInstruct(10)"><span
@@ -87,7 +87,7 @@
                         <div class="col-xs-4 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.compId].$invalid}">
                         <label for="{{::dos.compId}}" class="required">
-                            <span class="field-name">B.&nbsp;{{::'COMPANY_ID' |translate}}</span>
+                            <span class="field-name">{{::'COMPANY_ID' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <input type="text" class="form-control full-width" id="{{::dos.compId}}"
                                    name="{{::dos.compId}}" required maxlength="6" minlength="5"
@@ -113,11 +113,12 @@
                     </div>
                 </div>
                 </div>
+                <!--Matrix v2.2
                 <div class="row margin-bottom-small">
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.thirdId].$invalid}">
                         <label for="{{::dos.thirdId}}" class="required">
-                            <span class="field-name">C.&nbsp;{{::'SIGNED_THIRD'|translate}}</span>
+                            <span class="field-name">{{::'SIGNED_THIRD'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <select name="{{::dos.thirdId}}" class="form-control"
                                     ng-model="dos.dossierModel.drugProduct.thirdPartySigned"
@@ -137,11 +138,12 @@
                         {{::"INCLUDE_AUTH"|translate}}
                     </div>
                 </div>
+                -->
                 <div class="row">
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.prodNameId].$invalid}">
                             <label for="{{::dos.prodNameId}}" class="required">
-                                <span class="field-name">D.&nbsp;{{::'PROD_NAME' |translate}}</span>
+                                <span class="field-name">{{::'PROD_NAME' |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             </label>
                         <button title="{{::'PROD_NAME_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
@@ -175,7 +177,7 @@
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.properNameId].$invalid}">
                         <label for="{{::dos.properNameId}}" class="required">
-                            <span class="field-name">E.&nbsp;{{::'PROPER_NAME' |translate}}</span>
+                            <span class="field-name">{{::'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         </label>
                         <button title="{{::'PROP_NAME_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
@@ -209,7 +211,7 @@
 
                     <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm[dos.drugUseId].$invalid}">
                         <label for="{{::dos.drugUseId}}" class="required">
-                            <span class="field-name">F.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <span class="field-name">{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <select name="{{::dos.drugUseId}}" class="form-control"
                                     ng-model="dos.dossierModel.drugProduct.drugUse" id="{{::dos.drugUseId}}"
@@ -229,7 +231,7 @@
                 <div class="row">
                     <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm[dos.relatedInfoId].$invalid}">
                         <label for="{{::dos.relatedInfoId}}" class="required">
-                            <span class="field-name">G.&nbsp;{{::'RELATED_INFO'|translate}}</span>
+                            <span class="field-name">{{::'RELATED_INFO'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         </label>
                         <button title="{{::'RELATED_INFO_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
@@ -268,7 +270,7 @@
                                         class="fa fa-question-circle fa-2x"></span><span
                                         class="wb-inv">"{{::'HELP_THERA'|translate}}"</span></button>
                             </div>
-                            <h3 class="panel-title">H.&nbsp{{::'THERA_CLASS'|translate}}</h3>
+                            <h3 class="panel-title">{{::'THERA_CLASS'|translate}}</h3>
                         </header>
                         <div class="panel-body">
                             <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[2]"
@@ -293,7 +295,7 @@
                 <div class="row">
                     <div class="col-md-12 form-group" ng-class="{'has-error':dos.dossierForm[{{::dos.isRefId}}].$invalid}">
                         <label for="{{::dos.isRefId}}" class="required">
-                            <span class="field-name">I.&nbsp;{{::'IS_CDN_REF'|translate}}</span>
+                            <span class="field-name">{{::'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <button title="{{::'HELP_REFPRODUCTS'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
@@ -341,7 +343,7 @@
                             <div class="row">
                                 <div class="col-md-4 form-group" ng-class="{'has-error':dos.dossierForm[dos.brandId].$invalid}">
                                     <label for="{{::dos.brandId}}" class="required"><span
-                                            class="field-name">I-1.&nbsp{{::'BRAND_NAME'|translate}}</span>
+                                            class="field-name">{{::'BRAND_NAME'|translate}}</span>
                                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                         <input type="text" id="{{::dos.brandId}}" data-ng-model="dos.dossierModel.drugProduct.canRefProduct.brandName"
                                                class="form-control full-width" name="{{::dos.brandId}}" required maxlength="60"
@@ -357,7 +359,7 @@
                                 <div class="col-md-12 form-group"
                                  ng-class="{'has-error':dos.dossierForm[dos.companyId].$invalid}">
                                 <label for="{{::dos.companyId}}" class="required"><span
-                                        class="field-name">I-2.&nbsp{{::'COMPANY_NOABBREV'|translate}}</span>
+                                        class="field-name">{{::'COMPANY_NOABBREV'|translate}}</span>
                                     <strong class="required">{{::"REQUIRED" |translate}}</strong></label>
                                 <input type="text" id="{{::dos.companyId}}" data-ng-model="dos.dossierModel.drugProduct.canRefProduct.companyName"
                                        class="form-control" name="{{::dos.companyId}}" required maxlength="80"
