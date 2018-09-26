@@ -204,7 +204,7 @@
                     model.ectd.dossierType = jsonObj.dossier_type;
                     model.ectd.productName = jsonObj.product_name;
                     model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
-              //  }
+                  //  }
             },
             getModelInfo: function () {
                 return this._default;
@@ -238,6 +238,7 @@
                     if (model.isFees) {
                         model.feeDetails = this._mapFeeDetailsFromOutput(jsonObj.fee_details);
                     }
+                    this.isFinal = false;
                 } else {
                     this.isFinal = true;
                     model.transactionType = "";

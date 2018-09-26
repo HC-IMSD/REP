@@ -77,35 +77,7 @@
                 width: "48"
             }
         ];
-/**
-            vm.columnDef = [
-            {
-                label: "SEQUENCE_NUM",
-                binding: "sequence",
-                width: "8"
-            },
-            {
-                label: "CONTROL_NUMBER",
-                binding: "controlNumber",
-                width: "8"
-            },
-            {
-                label: "DATE_SUBMITTED",
-                binding: "dateFiled",
-                width: "12"
-            },
-            {
-                label: "REG_ACTIVITY",
-                binding: "activityTypeDisplay",
-                width: "30"
-            },
-            {
-                label: "SEQUENCE_TYPE",
-                binding: "sequenceConcat",
-                width: "48"
-            }
-        ];
-**/
+
         vm.$onInit = function () {
             //local var from binding
             vm.activityTypes= TransactionLists.getActivityTypes();
@@ -164,7 +136,8 @@
          * @private
          */
         function _checkFirstRecord() {
-            if (!vm.lifecycleList || vm.lifecycleList.length === 0 || vm.lifecycleList.length > 1) {
+            if (!vm.lifecycleList || vm.lifecycleList.length === 0
+                || vm.lifecycleList.length > 1) {
                 return;
             }
             var record = angular.copy(vm.lifecycleList[0]);
@@ -214,7 +187,7 @@
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.selectRecord = 0; //need to generate a change
             if(vm.finalState) {
-                vm.finalRecNum++;
+               vm.finalRecNum++;
             }
             vm.addFocused = false;
             vm.setValid(false);
@@ -233,15 +206,28 @@
         };
 
         vm.isAddDisabled = function () {
-           if( vm.lifecycleList.length > 0 )
+
+            if( vm.lifecycleList.length > 0 )
+            {
+                return true;
+            }
+            return false;
+        /**    console.log( vm.finalState );
+           if( vm.finalState)
            {
-               return true;
+               vm.lifecycleList = [];
+               vm.lifecycleList.length = 0;
+               return false;
+           }
+           else
+           {
+               if( vm.lifecycleList.length > 0 )
+               {
+                   return true;
+               }
            }
            return false;
-
-           /** return (!vm.isDetailsValid ||
-                (!vm.ectdValue && vm.lifecycleList.length > 0) ||
-                (vm.finalState && vm.finalRecNum > 0)); **/
+         **/
         };
 
         vm.setValid = function (detailValid) {

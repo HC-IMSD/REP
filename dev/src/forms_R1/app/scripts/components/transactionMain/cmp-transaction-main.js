@@ -170,7 +170,10 @@
                 //vm.transaction.isSolicited = "";
                 //vm.transaction.solicitedRequester = "";
                 //vm.transaction.confirmContactValid = false;
-
+                //console.log( "vm.isFinal_main " + vm.isFinal);
+                if (vm.isFinal) {
+                    vm.transaction.ectd.lifecycleRecord =[];
+                }
             }
         }
 

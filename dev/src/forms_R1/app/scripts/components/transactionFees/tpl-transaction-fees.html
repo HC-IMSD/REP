@@ -347,6 +347,14 @@
                  </span>
                 </div>
             </div>
+            <div class="row" ng-if="transFeeCtrl.isFeeRemit()">
+                <div class="col-xs-12 form-group alert alert-info" role="alert"
+                     aria-live="polite">
+                    <span>
+                        &nbsp;{{'PLEASE_REMIT'|translate}}
+                 </span>
+                </div>
+            </div>
             <div>
                 <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
                     <div class="col-xs-12 form-group alert alert-info" role="alert">

@@ -72,7 +72,7 @@
   "LIFECYCLE_TITLE": "fr_Transaction Details",
   "REG_CONTACT_THIS": "fr_Regulatory Activity Contact for THIS transaction",
   "REG_ACT_CONTACT": "fr_Regulatory Activity Contact",
-  "TRANSACTION_HDING": "fr_Regulatory Transaction Enrolment",
+  "TRANSACTION_HDING": "fr_Regulatory Information",
   "LOAD_TRANSACTION": "fr_Load a Regulatory Transaction File",
   "GENERATE_FINAL": "fr_Generate Final XML",
   "CONFIRM_CONTACT_VALID": "fr_I confirm that the above regulatory activity contact information is valid.",
