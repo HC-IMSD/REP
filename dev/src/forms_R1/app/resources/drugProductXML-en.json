@@ -170,5 +170,7 @@
 	"shelf_life_unit":"Shelf Life: Units",
 	"units_measure": "Units of Measure",
 	"units_other_measure": "Other Units of Measure",
-	"operator": "Strength operator"
+	"operator": "Strength operator",
+	"proper_name" : "Proper Name",
+	"is_prescription_drug_list" : "Is Prescription Drug List"
 }

@@ -27,6 +27,23 @@
                     </div>
                     <div>
                         <div class="row">
+                            <div class="form-group col-md-4"
+                                 ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
+                                <label for="{{::transInfoCtrl.typeId}}" class="required">
+                                    <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <select class="form-control full-width rep-margin-top-12"
+                                            id="{{::transInfoCtrl.typeId}}"
+                                            name="{{::transInfoCtrl.typeId}}"
+                                            required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
+                                            ng-options="val |translate for val in  transInfoCtrl.formTypeList">
+                                    </select>
+                                    <cmp-error-message field-name="transInfoCtrl.typeId"
+                                                       form-ref="transInfoCtrl.transInfoForm"
+                                                       show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[dos.typeId])"
+                                                       error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
+                                </label>
+                            </div>
                             <div class="form-group col-md-3"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                 <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
@@ -46,13 +63,14 @@
                                                        error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 rep-margin-left">
                                 <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                     <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <button title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
                                             class="btn rep-help-button-primary btn-xs"
-                                            id="dossier-id-instructions-toggle" ng-click="transInfoCtrl.addInstruct(6)"><span
+                                            id="dossier-id-instructions-toggle"
+                                            ng-click="transInfoCtrl.addInstruct(6)"><span
                                             class="fa fa-question-circle fa-2x"></span>
                                     </button>
                                     <div class="rep-input-group">
@@ -60,8 +78,7 @@
                                         <div ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
                                             <input type="text" class="form-control full-width" id="{{::transInfoCtrl.dossierId}}"
                                                    size="6" maxlength="7"ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
-                                                   ng-model="transInfoCtrl.transactionModel.ectd.dossierId"
-                                                   ng-disabled="transInfoCtrl.finalState"/>
+                                                   ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                                         </div>
                                     </div>
                                     <cmp-error-message field-name="transInfoCtrl.dossierId"
@@ -70,24 +87,7 @@
                                                        error-types="transInfoCtrl.min7Error"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="col-md-4 form-group rep-margin-left"
-                                 ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
-                                <label for="{{::transInfoCtrl.typeId}}" class="required">
-                                    <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
-                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                    <select class="form-control full-width rep-margin-top-12"
-                                            id="{{::transInfoCtrl.typeId}}"
-                                            name="{{::transInfoCtrl.typeId}}"
-                                            required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
-                                            ng-options="val |translate for val in  transInfoCtrl.formTypeList"
-                                            ng-disabled="transInfoCtrl.isFinalStateWithDossierType()">
-                                    </select>
-                                    <cmp-error-message field-name="transInfoCtrl.typeId"
-                                                       form-ref="transInfoCtrl.transInfoForm"
-                                                       show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[dos.typeId])"
-                                                       error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                                </label>
-                            </div>
+
                         </div>
                         <div class="row">
                             <div>
