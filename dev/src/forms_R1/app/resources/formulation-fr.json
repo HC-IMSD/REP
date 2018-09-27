@@ -37,6 +37,7 @@
   "MED": "fr_Medicinal Ingredient",
   "NONMED": " fr_NonMedicinal Ingredient",
   "VARIANT_NAME": "fr_Variant Name",
+  "PURPOSE_INSTRUCT":"Purpose Instructions",
   "PURPOSE": "fr_Purpose",
   "CONTAINER_TYPE": "fr_Container Type",
   "PACKAGE_SIZE": "fr_Package Size",

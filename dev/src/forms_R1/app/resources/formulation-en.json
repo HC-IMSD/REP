@@ -92,6 +92,7 @@
   "STANDARD_INSTRUCT":"Standard Instructions",
   "IS_NANO_INSTRUCT":"Is Nanomaterial Instructions",
   "VARIANT_INSTRUCT":"Variant Name Instructions",
+  "PURPOSE_INSTRUCT":"Purpose Instructions",
   "IMPORTER_INSTRUCT":"Importer Instructions",
   "CMP-FORMULATION-RECORD":"in formulation record",
   "INGRECCTRL.ACTIVEINGFORM":"in the active ingredient details",

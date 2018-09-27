@@ -55,7 +55,7 @@
         vm.measureList = DossierLists.getUnitsMeasureList();
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.alerts = [false, false, false, false, false]; //for help boxes
+        vm.alerts = [false, false, false, false, false, false]; //for help boxes
         vm.numberMinError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
