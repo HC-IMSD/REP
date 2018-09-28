@@ -187,5 +187,7 @@
 	"formulation_ingredient": "Formulation Ingredient",
 	"per_units": "Per Units",
 	"nanomaterial": "Nanomaterial",
-	"contact_lens":"Contact Lens"
+	"contact_lens":"Contact Lens",
+	"importer_name": "Importer Name",
+	"institutional_industrial": "Institutional Industrial"
 }
