@@ -37,7 +37,7 @@
             BENEFIT_RISK_ASSESS: "BENEFIT_RISK_ASSESS", //benefit risk assessment
             CANCEL_LETTER: "CANCEL_LETTER", //cancellation letter
             CHANGE_TO_DIN: "CHANGE_TO_DIN", //changes to din
-            CLARIF_RESPONSE: "CLARIF_RESPONSE", //Response to clarification request
+            //CLARIF_RESPONSE: "CLARIF_RESPONSE", //Response to clarification request
             COMMENTS_NOC: "COMMENTS_NOC", // comments on notice of decision
             COMMENTS_SUMMARY_BASIS: "COMMENTS_SUMMARY_BASIS", //commments on summary basis of decision (SBD)
             DIN_DISCONTINUED: "DIN_DISCONTINUED", // Notification of Discontinued Sale (DIN Cancellation)
@@ -381,7 +381,7 @@
             ]);
 
         }
-
+        //Level 3-  Notice of Change
         function getLevel3Array() {
 
             return ([
@@ -389,7 +389,9 @@
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.YEAR_LIST_OF_CHANGE, //Year, list of change number,
-                vm.allActivities.CLARIF_RESPONSE //Response to clarification request
+                vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarification request
+                vm.allActivities.QUAL_CLARIF_RESPONSE //Response to Quality Clarification request
+               // vm.allActivities.CLARIF_RESPONSE //Response to clarification request
             ]);
         }
 
@@ -498,7 +500,8 @@
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
+                vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
+                vm.allActivities.CLIN_CLARIF_RESPONSE //Response to clinical clarification request
             ]);
         }
 
@@ -511,7 +514,8 @@
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.RMP_VERSION_DATE //RMP verison
+                vm.allActivities.RMP_VERSION_DATE, //RMP verison
+                vm.allActivities.CLIN_CLARIF_RESPONSE //Response to clinical clarification request
             ]);
         }
 
@@ -666,7 +670,7 @@
 
             return ([
                 vm.allActivities.CANCEL_LETTER, //cancellation letter
-                vm.allActivities.CLARIF_RESPONSE, //Response to clarification request
+                //vm.allActivities.CLARIF_RESPONSE, //Response to clarification request
                 vm.allActivities.DIN_DISCONTINUED, // din discontinued
                 vm.allActivities.ADVISEMENT_LETTER_RESPONSE, //REspose to Advisement Letter dated
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
@@ -791,7 +795,8 @@
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.PHONE_RQ_RESPONSE //Response to telephone Request
+                vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
+                vm.allActivities.CLIN_CLARIF_RESPONSE //Response to clinical clarification request
             ]);
         }
 

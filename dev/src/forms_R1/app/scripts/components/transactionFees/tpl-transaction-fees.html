@@ -304,11 +304,9 @@
                     </fieldset>
                 </div>
             </div>
-            <div class="row">
-                <h3>Payment</h3>
-            </div>
-            <div class="row"
-                 ng-if="transFeeCtrl.showPaymentPanel()">
+
+            <div class="row" ng-if="transFeeCtrl.showPaymentPanel()">
+                <div>  <span class="field-name"><strong> Payment</strong></span></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -319,6 +317,7 @@
                 </div>
             </div>
             <div class="row" ng-if="transFeeCtrl.isEligible()">
+                <div>  <span class="field-name"><strong> Payment</strong></span></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -330,6 +329,7 @@
                 </div>
             </div>
             <div class="row" ng-if="transFeeCtrl.isFeeRemit()">
+                <div>  <span class="field-name"><strong> Payment</strong></span></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -338,6 +338,7 @@
                 </div>
             </div>
             <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
+                <div>  <span class="field-name"><strong> Payment</strong></span></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
                     <p aria-live="polite">{{::'SPONSOR_INVOICE'|translate}}</p>
@@ -345,6 +346,7 @@
                 </div>
             </div>
             <div class="row" ng-if="transFeeCtrl.isDeferral() &&!transFeeCtrl.isEligible()">
+                <div>  <span class="field-name"><strong> Payment</strong></span></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
                     <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
