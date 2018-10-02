@@ -166,7 +166,11 @@
          * @returns {boolean}
          */
         vm.isSendNoFees = function () {
-            return (!vm.isLess10K() && !vm.isEligible() && !vm.isDeferral())
+            if (!vm.model || !vm.model.submissionClass || !vm.model.submissionClass.fee)
+            {
+                return false;
+            }
+            return (!vm.isLess10K() && !vm.isEligible() && !vm.isDeferral() && !vm.isFeeRemit());
 
         };
 
@@ -180,8 +184,21 @@
                 (vm.isEligible() && !vm.isLess10K()) ||
                 (vm.isDeferral() && !vm.isEligible())
             );
-
         };
+
+        vm.showPaymentPanel = function () {
+            if (!vm.model || !vm.model.submissionClass || !vm.model.submissionClass.fee)
+            {
+                return false;
+            }
+            // isSendNoFees -more than 10K, isDeferral - yes, isFeeRemit - yes
+            if(vm.isSendNoFees() || vm.isDeferral() || vm.isFeeRemit())
+            {
+                return false;
+            }
+
+            return true;
+         };
 
         /**
          * Returns if the fees are elgible for remissions
