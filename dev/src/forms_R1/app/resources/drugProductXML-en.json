@@ -6,7 +6,7 @@
 	"formulation_id": "Formulation ID",
 	"dosage_form": "Dosage Form",
 	"roa_details": "Route of Administration record",
-	"roa": "Route of Administration Details",
+	"roa": "Route of Administration details",
 	"roa_other": "Other route of administration",
 	"container_details": "Container Record",
 	"container_type": "Container Type",
@@ -30,7 +30,7 @@
 	"is_nanomaterial": "Nanomaterial type",
 	"nanomaterial_details": "Other Nanomaterial",
 	"variant_name": "Variant Name",
-	"in_final_container": "In final Container?",
+	"in_final_container": "In final container?",
 	"nonmedicinal_ingredient": "Non-medicinal Ingredient",
 	"material_ingredient": "Material",
 	"cdn_ref_product": "Canadian Reference Product",
@@ -189,5 +189,17 @@
 	"nanomaterial": "Nanomaterial",
 	"contact_lens":"Contact Lens",
 	"importer_name": "Importer Name",
-	"institutional_industrial": "Institutional Industrial"
+	"institutional_industrial": "Institutional Industrial",
+	"this_activity": "This activity",
+	"is_sched_c": "Is Schedule C",
+	"is_sched_d": "Is Schedule D",
+	"is_regulated_cdsa": "Is regulated cdsa",
+	"medical_instruments": "Medical instruments",
+	"is_animal_age_known": "Is animal age known",
+	"is_animal_human_material": "Is animal human material",
+	"ingredient_role": "Ingredient Role"
+
+
+
+
 }
