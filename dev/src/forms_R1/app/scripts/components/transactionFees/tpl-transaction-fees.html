@@ -345,7 +345,7 @@
                        </span>
                 </div>
             </div>
-            <div class="row" ng-if="transFeeCtrl.isDeferral() &&!transFeeCtrl.isEligible()">
+            <div class="row" ng-if="transFeeCtrl.isDeferral() && !transFeeCtrl.isEligible() && !transFeeCtrl.isFeeRemit()">
                 <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
