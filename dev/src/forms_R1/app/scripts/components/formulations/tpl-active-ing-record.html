@@ -104,6 +104,10 @@
                         <label for="{{::ingRecCtrl.purposeId}}" class="required">
                             <span class="field-name">{{'PURPOSE'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
+                            <button title="{{::'EXPAND'|translate}} {{::'PURPOSE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                                    id="purpose-instructions-toggle" ng-click="ingRecCtrl.addInstruct(5)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'PURPOSE_INSTRUCT'|translate}}"</span>
+                            </button>
                             <input type="text" id="{{::ingRecCtrl.purposeId}}" data-ng-model="ingRecCtrl.ingModel.purpose" maxlength="60"
                                    ng-model-options="{ debounce: '$inherit'}" size="60" name="{{::ingRecCtrl.purposeId}}"
                                    class="form-control full-width" ng-required="true"/>
@@ -112,6 +116,21 @@
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.purposeId])"
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                         </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ingRecCtrl.alerts[5]"
+                                 class="alert-info" close="ingRecCtrl.closeAlert(5)">
+                                <section aria-live="assertive">
+                                    <div ng-if="!ingRecCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-purpose-en.html'">
+                                    </div>
+                                    <div ng-if="ingRecCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-purpose-fr.html'">
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-md-12"
                          ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nIngredName].$invalid}">

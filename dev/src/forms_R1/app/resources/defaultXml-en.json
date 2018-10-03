@@ -19,5 +19,11 @@
   "amend_record": "Amend Record",
   "template_type": "Template Type",
   "Y": "Yes",
-  "N": "No"
+  "N": "No",
+  "address_id" : "Address ID",
+  "rep_primary" : "REP Primary",
+  "rep_secondary" : "REP Secondary",
+  "contact_id" : "Contact ID",
+  "reason_amend" : "Reason Amend",
+  "importer_id" : "Importer ID"
 }

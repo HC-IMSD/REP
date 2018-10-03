@@ -27,6 +27,23 @@
                     </div>
                     <div>
                         <div class="row">
+                            <div class="form-group col-md-4"
+                                 ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
+                                <label for="{{::transInfoCtrl.typeId}}" class="required">
+                                    <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <select class="form-control full-width rep-margin-top-12"
+                                            id="{{::transInfoCtrl.typeId}}"
+                                            name="{{::transInfoCtrl.typeId}}"
+                                            required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
+                                            ng-options="val |translate for val in  transInfoCtrl.formTypeList">
+                                    </select>
+                                    <cmp-error-message field-name="transInfoCtrl.typeId"
+                                                       form-ref="transInfoCtrl.transInfoForm"
+                                                       show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[dos.typeId])"
+                                                       error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
+                                </label>
+                            </div>
                             <div class="form-group col-md-3"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                 <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
@@ -46,13 +63,14 @@
                                                        error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 rep-margin-left">
                                 <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                     <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <button title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
                                             class="btn rep-help-button-primary btn-xs"
-                                            id="dossier-id-instructions-toggle" ng-click="transInfoCtrl.addInstruct(6)"><span
+                                            id="dossier-id-instructions-toggle"
+                                            ng-click="transInfoCtrl.addInstruct(6)"><span
                                             class="fa fa-question-circle fa-2x"></span>
                                     </button>
                                     <div class="rep-input-group">
@@ -60,8 +78,7 @@
                                         <div ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
                                             <input type="text" class="form-control full-width" id="{{::transInfoCtrl.dossierId}}"
                                                    size="6" maxlength="7"ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
-                                                   ng-model="transInfoCtrl.transactionModel.ectd.dossierId"
-                                                   ng-disabled="transInfoCtrl.finalState"/>
+                                                   ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                                         </div>
                                     </div>
                                     <cmp-error-message field-name="transInfoCtrl.dossierId"
@@ -70,24 +87,7 @@
                                                        error-types="transInfoCtrl.min7Error"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="col-md-4 form-group rep-margin-left"
-                                 ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
-                                <label for="{{::transInfoCtrl.typeId}}" class="required">
-                                    <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
-                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                    <select class="form-control full-width rep-margin-top-12"
-                                            id="{{::transInfoCtrl.typeId}}"
-                                            name="{{::transInfoCtrl.typeId}}"
-                                            required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
-                                            ng-options="val |translate for val in  transInfoCtrl.formTypeList"
-                                            ng-disabled="transInfoCtrl.isFinalStateWithDossierType()">
-                                    </select>
-                                    <cmp-error-message field-name="transInfoCtrl.typeId"
-                                                       form-ref="transInfoCtrl.transInfoForm"
-                                                       show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[dos.typeId])"
-                                                       error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                                </label>
-                            </div>
+
                         </div>
                         <div class="row">
                             <div>
@@ -126,7 +126,8 @@
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <button title="{{::'EXPAND'|translate}} {{::'PRODUCT_INSTRUCT'|translate}}"
                                             class="btn rep-help-button-primary btn-xs"
-                                            id="product-instructions-toggle" ng-click="transInfoCtrl.addInstruct(1)"><span
+                                            id="product-instructions-toggle"
+                                            ng-click="transInfoCtrl.addInstruct(1)"><span
                                             class="fa fa-question-circle fa-2x"></span>
                                     </button>
                                     <cmp-error-message field-name="transInfoCtrl.productNameId"
@@ -378,6 +379,7 @@
                     <!--  <pre>{{transInfoCtrl.adminSubTypeList}}</pre>-->
                     <!-- end of activity content moved in -->
 
+                    <!--
                     <div class="row">
                         <div class="form-group col-md-4"
                              ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isEctdId].$invalid}">
@@ -395,19 +397,21 @@
                                                    error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     <section class="panel  panel-default">
                         <header class="panel-heading clearfix">
+                            <!--
                             <div class="btn-group pull-right">
                                 <button title="{{::'EXPAND'|translate}} {{::'LIFECYCLE_INSTRUCT'|translate}}"
                                         class="btn-xs rep-help-button-primary btn-xs"
                                         id="lifecycle-instructions-toggle" ng-click="transInfoCtrl.addInstruct(2)"><span
                                         class="fa fa-question-circle fa-2x"></span>
                                 </button>
-                            </div>
+                            </div> -->
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
                         <div class="panel-body">
+                            <!--
                             <div>
                                 <cmp-alert ui-state="transInfoCtrl.alerts[2]" msg="LIFECYCLE_INSTRUCT"
                                            update-state="transInfoCtrl.closeAlert(2)" type="alert-info">
@@ -420,7 +424,7 @@
                                         </div>
                                     </section>
                                 </cmp-alert>
-                            </div>
+                            </div> -->
                             <div>
                                 <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
                                                     is-ectd="transInfoCtrl.isEctd"
@@ -431,7 +435,8 @@
                                                     set-sequence-value="transInfoCtrl.setSequence(start)"
                                                     sequence-updated="transInfoCtrl.sequenceChange"
                                                     get-current-sequence="transInfoCtrl.getCurrentSequence()"
-                                                    get-new-transaction="transInfoCtrl.getNewTransaction()"></cmp-lifecycle-list>
+                                                    get-new-transaction="transInfoCtrl.getNewTransaction()">
+                                </cmp-lifecycle-list>
 
                             </div>
                         </div>

@@ -197,24 +197,6 @@
                         </div>
                     </div>
                 </div>
-               <!-- <div class="row" ng-if="transFeeCtrl.isEligible()">
-                    <div class="form-group col-xs-12">
-                        <div class="checkbox">
-                            <label for="{{::transFeeCtrl.statement10Id}}">
-                                <input type="checkbox" ng-model="transFeeCtrl.model.requiredDocs.revStat"
-                                       class="required"
-                                       name="{{::transFeeCtrl.statement10Id}}" id="{{::transFeeCtrl.statement10Id}}"
-                                       required/>
-                                {{::'STATEMENT_REVENUE'|translate}}
-                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <cmp-error-message field-name="transFeeCtrl.statement10Id"
-                                                   form-ref="transFeeCtrl.transFeeForm"
-                                                   show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.statement10Id])"
-                                                   error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
-                            </label>
-                        </div>
-                    </div>
-                </div>-->
                 <div ng-if="transFeeCtrl.isEligible()">
                     <fieldset>
                         <label>{{::'SUPPORTING_DOC'|translate}}</label>
@@ -322,11 +304,9 @@
                     </fieldset>
                 </div>
             </div>
-            <div class="row">
-                <h3>Payment</h3>
-            </div>
-            <div class="row"
-                 ng-if="(!transFeeCtrl.isSendNoFees() && !transFeeCtrl.isDeferral() && !transFeeCtrl.isEligible())">
+
+            <div class="row" ng-if="transFeeCtrl.showPaymentPanel()">
+                <div>  <span class="field-name"><strong> Payment</strong></span><p></p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -336,7 +316,8 @@
                     </span>
                 </div>
             </div>
-            <div class="row" ng-if="transFeeCtrl.isEligible()">
+            <!--div class="row" ng-if="transFeeCtrl.isEligible()">
+                <div>  <span class="field-name"><strong> Payment</strong></span></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -346,19 +327,30 @@
                     </p>
                  </span>
                 </div>
-            </div>
-            <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
-                <div class="col-xs-12 form-group alert alert-info" role="alert">
-                       <span>
-                        <p aria-live="polite">{{::'SPONSOR_INVOICE'|translate}}</p>
-                           </span>
+            </div-->
+            <div class="row" ng-if="transFeeCtrl.isFeeRemit()">
+                <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
+                <div class="col-xs-12 form-group alert alert-info" role="alert"
+                     aria-live="polite">
+                    <span>
+                        &nbsp;{{'PLEASE_REMIT'|translate}}
+                 </span>
                 </div>
             </div>
-            <div class="row" ng-if="transFeeCtrl.isDeferral() &&!transFeeCtrl.isEligible()">
+            <div class="row" ng-if="transFeeCtrl.isSendNoFees()">
+                <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
-                       <span>
-                        <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
-                           </span>
+                   <span>
+                    <p aria-live="polite">{{::'SPONSOR_INVOICE'|translate}}</p>
+                       </span>
+                </div>
+            </div>
+            <div class="row" ng-if="transFeeCtrl.isDeferral() && !transFeeCtrl.isEligible() && !transFeeCtrl.isFeeRemit()">
+                <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
+                <div class="col-xs-12 form-group alert alert-info" role="alert">
+                   <span>
+                    <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
+                       </span>
                 </div>
             </div>
             <div>

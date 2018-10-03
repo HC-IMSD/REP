@@ -3,6 +3,7 @@
            ng-model="lifeListCtrl.oneRecord" required/>
     <input ng-if="lifeListCtrl.isSelectedRecord()" type="hidden" id="saveLifeRec_{{$id}}" name="saveLifeRec_{{$id}}"
            ng-model="lifeListCtrl.oneRecord" required/>
+    <!--
     <div class="row" ng-if="!lifeListCtrl.finalState && lifeListCtrl.ectdValue">
         <div class="col-xs-4 form-group">
             <label for="startSeq"> Starting sequence number
@@ -14,17 +15,20 @@
             <button class="btn btn-default btn-sm" ng-click="lifeListCtrl.setStartingSequence()">Update Sequence
             </button>
         </div>
-    </div>
+    </div> -->
+
     <div>
         <cmp-expanding-table list-items="lifeListCtrl.lifecycleList"
                              reset-to-collapsed="lifeListCtrl.resetCollapsed"
-                             column-def="lifeListCtrl.columnDef" select-record="lifeListCtrl.selectRecord"
+                             column-def="lifeListCtrl.columnDef"
+                             select-record="lifeListCtrl.selectRecord"
                              disable-selection="!lifeListCtrl.isDetailsValid">
 
             <cmp-lifecycle-details lifecycle-record="$parent.record"
                                    is-detail-valid="lifeListCtrl.setValid(state)"
                                    activity-types="lifeListCtrl.activityTypes"
-                                   on-delete="lifeListCtrl.deleteRecord(id)" is-ectd="lifeListCtrl.ectdValue"
+                                   on-delete="lifeListCtrl.deleteRecord(id)"
+                                   is-ectd="lifeListCtrl.ectdValue"
                                    enable-delete-index="lifeListCtrl.lastRecordSequence()"
                                    sequence-updated="lifeListCtrl.seqUpdated"
                                    on-update="lifeListCtrl.onUpdateLifecycleRecord(record)"

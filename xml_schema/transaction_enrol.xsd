@@ -22,14 +22,14 @@
 	<hpfb:element name="is_noc" type="required_yes_no_content"/>
 	<hpfb:element name="is_admin_sub" type="required_yes_no_content"/>
 	<hpfb:element name="sub_type" type="sub_type_content"/>
-	<hpfb:element name="is_ectd" type="required_yes_no_content"/>
+	<!--<hpfb:element name="is_ectd" type="required_yes_no_content"/>-->
 	<hpfb:element name="ectd" type="ectd_content"/>
 	<hpfb:element name="company_id" type="char_0_6_content"/>
 	<hpfb:element name="dossier_id" type="char_0_20_content"/>
 	<hpfb:element name="dossier_type" type="char_0_20_content"/>
 	<hpfb:element name="product_name" type="char_0_256_content"/>
-	<hpfb:element name="sequence_number" type="sequence_content"/>
-	<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>
+	<!--<hpfb:element name="sequence_number" type="sequence_content"/>-->
+	<!--<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>-->
 	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
 	<hpfb:element name="sequence_activity_lead" type="char_0_20_content"/>
 	<hpfb:element name="sequence_activity_type">
@@ -114,7 +114,7 @@
 			<hpfb:element ref="is_noc"/>
 			<hpfb:element ref="is_admin_sub"/>
 			<hpfb:element ref="sub_type"/>
-			<hpfb:element ref="is_ectd"/>
+			<!--<hpfb:element ref="is_ectd"/> -->
 			<hpfb:element ref="ectd"/>
 			<hpfb:element ref="is_solicited"/>
 			<hpfb:element ref="solicited_requester"/>
@@ -153,8 +153,8 @@
 
 	<hpfb:complexType name="lifecycle_record_content">
 		<hpfb:sequence>
-			<hpfb:element ref="sequence_number"/>
-			<hpfb:element ref="date_filed"/>
+			<!--<hpfb:element ref="sequence_number"/>
+			<hpfb:element ref="date_filed"/> -->
 			<hpfb:element ref="control_number"/>
 			<hpfb:element ref="sequence_activity_lead"/>
 			<hpfb:element ref="sequence_activity_type"/>

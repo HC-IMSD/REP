@@ -53,7 +53,7 @@
                 properName: "",
                 isRefProduct: "",
                 drugProduct: {
-                    thirdPartySigned: "",
+                    //thirdPartySigned: "",
                     //drugUseList: getDefaultDrugUseList(),
                     drugUse: "",
                    // isScheduleA: false,
@@ -108,7 +108,7 @@
                     properName: info.common_name,
                     isRefProduct: info.is_ref_product,
                     drugProduct: {
-                        thirdPartySigned: info.third_party_signed,
+                       // thirdPartySigned: info.third_party_signed,
                        // drugUseList: loadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                        // isScheduleA: info.is_sched_a === 'Y',
@@ -169,7 +169,7 @@
             baseDossier.dossier_type = jsonObj.dossierType;
             baseDossier.product_name = jsonObj.productName;
             baseDossier.common_name = jsonObj.properName;
-            baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
+           // baseDossier.third_party_signed = jsonObj.drugProduct.thirdPartySigned;
             baseDossier.is_ref_product = jsonObj.isRefProduct;
             if (jsonObj.isRefProduct === 'Y' && jsonObj.drugProduct.canRefProduct) {
                 baseDossier.cdn_ref_product = canRefProductToOutput(jsonObj.drugProduct.canRefProduct)
