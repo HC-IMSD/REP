@@ -48,6 +48,11 @@
 		<fra>fr_Veterinary</fra>
 	</row>
 	<row>
+		<code>VETERINARY</code>
+		<eng>Veterinary</eng>
+		<fra>fr_Veterinary</fra>
+	</row>
+	<row>
 		<code>EnrolStatus</code>
 		<eng>Enrolment Status</eng>
 		<fra>fr_Enrolment Status</fra>
@@ -69,13 +74,13 @@
 	</row>
 	<row>
 		<code>A_DossierType</code>
-		<eng>A. Dossier Type</eng>
-		<fra>fr_A. Dossier Type</fra>
+		<eng>Dossier Type</eng>
+		<fra>fr_Dossier Type</fra>
 	</row>
 	<row>
 		<code>B_CompanyID</code>
-		<eng>B. Company ID</eng>
-		<fra>fr_B. Company ID</fra>
+		<eng>Company ID</eng>
+		<fra>fr_Company ID</fra>
 	</row>
 	<row>
 		<code>C_SubmissionSignThird</code>
@@ -96,13 +101,13 @@
 	</row>
 	<row>
 		<code>D_ProductName</code>
-		<eng>D. Product Name</eng>
-		<fra>fr_D. Product Name</fra>
+		<eng>Product Name</eng>
+		<fra>fr_Product Name</fra>
 	</row>
 	<row>
 		<code>E_ProperCommonNonProrietaryName</code>
-		<eng>E. Proper, Common or Non-Proprietary Name</eng>
-		<fra>fr_E. Proper, Common or Non-Proprietary Name</fra>
+		<eng>Proper, Common or Non-Proprietary Name</eng>
+		<fra>fr_Proper, Common or Non-Proprietary Name</fra>
 	</row>
 	<row>
 		<code>DrugUse</code>
@@ -111,18 +116,18 @@
 	</row>
 	<row>
 		<code>G_RelatedInfo</code>
-		<eng>G. Related Information [if applicable]</eng>
-		<fra>fr_G. Related Information [if applicable]</fra>
+		<eng>Related Information</eng>
+		<fra>fr_Related Information</fra>
 	</row>
 	<row>
 		<code>H_Therapeutic</code>
-		<eng>H. Therapeutic Classifications</eng>
-		<fra>fr_H. Therapeutic Classifications</fra>
+		<eng>Therapeutic Classifications</eng>
+		<fra>fr_Therapeutic Classifications</fra>
 	</row>
 	<row>
 		<code>I_IsCaRefProduct</code>
-		<eng>I. Is there a Canadian Reference Product?</eng>
-		<fra>fr_I. Is there a Canadian Reference Product?</fra>
+		<eng>Is there a Canadian Reference Product or Canadian Reference Biologic Drug for Biosimilars?</eng>
+		<fra>fr_Is there a Canadian Reference Product or Canadian Reference Biologic Drug for Biosimilars?</fra>
 	</row>
 	<row>
 		<code>CaRefProduct</code>
@@ -131,13 +136,13 @@
 	</row>
 	<row>
 		<code>I_BrandName</code>
-		<eng>I-1. Brand Name</eng>
-		<fra>fr_I-1. Brand Name</fra>
+		<eng>Brand Name</eng>
+		<fra>fr_Brand Name</fra>
 	</row>
 	<row>
 		<code>I_CompanyName</code>
-		<eng>I-2. Company Name (Full legal Name - no abbreviations)</eng>
-		<fra>fr_I-2. Company Name (Full legal Name - no abbreviations)</fra>
+		<eng>Company Name (Full legal Name - no abbreviations)</eng>
+		<fra>fr_Company Name (Full legal Name - no abbreviations)</fra>
 	</row>
 	<row>
 		<code>B02-20160301-001</code>
@@ -442,7 +447,7 @@
 <row><code>PHONE_EXT</code><eng>Phone Extension</eng><fra>Poste</fra></row>
 <row><code>en</code><eng>English</eng><fra>fr_English</fra></row>
 <row><code>fr</code><eng>French</eng><fra>fr_French</fra></row>
-<row><code>LIFECYCLE_TITLE</code><eng>Lifecycle Management Table</eng><fra>fr_Lifecycle Management Table</fra></row>
+<row><code>LIFECYCLE_TITLE</code><eng>Transaction Details</eng><fra>fr_Transaction Details</fra></row>
 <row><code>COMPANY_TEMPLATE</code><eng>Company Template: Regulatory Enrolment Process (REP)</eng><fra>FR_Company Template: Regulatory Enrolment Process (REP)</fra></row>
 <row><code>REG_COMPANY_ENROL</code><eng>Regulatory Company Enrolment</eng><fra>fr_Regulatory Company Enrolment</fra></row>
 <row><code>APPL_STATUS</code><eng>Enrolment Status</eng><fra>fr_Enrolment Status</fra></row>
@@ -469,7 +474,7 @@
 <row><code>EXTENSION</code><eng>ext</eng><fra>fr_ext</fra></row>
 <row><code>DRUG_PRODUCT</code><eng>Product Information</eng><fra>fr_Product Information</fra></row>
 <row><code>DRUG_USE</code><eng>Drug Use</eng><fra>fr_Drug Use</fra></row>
-<row><code>SCHEDULE_PRESC_STATUS</code><eng>Schedule and Prescription status (check all that applies): The product is</eng><fra>fr_Schedule and Prescription status (check all that applies): The product is</fra></row>
+<row><code>SCHEDULE_PRESC_STATUS</code><eng>Schedule and Prescription status (check all that apply): The product is</eng><fra>fr_Schedule and Prescription status (check all that applies): The product is</fra></row>
 <row><code>SCHEDULE_C</code><eng>included in Schedule C (radiopharmacurticals) to the Food and Drugs Act</eng><fra>fr_included in Schedule C (radiopharmacurticals) to the Food and Drugs Act</fra></row>
 <row><code>SCHEDULE_D</code><eng>included in Schedule D (biologicals) to the Food and Drugs Act</eng><fra>fr_included in Schedule D (biologicals) to the Food and Drugs Act</fra></row>
 <row><code>SCHEDULE_F</code><eng>included in Schedule F (prescription drugs) to the Food and Drug Regulations</eng><fra>fr_included in Schedule F (prescription drugs) to the Food and Drug Regulations</fra></row>
@@ -505,7 +510,7 @@
 <row><code>ANIMAL_HUMAN_SOURCED</code><eng>Animal or Human Sourced?</eng><fra>fr_Animal or Human Sourced?</fra></row>
 <row><code>IS_ANIMAL_HUMAN_MATERIAL</code><eng>Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</eng><fra>fr_B.  Was Animal and/or Human Sourced Material used at any stage in the manufacturing of the drug?</fra></row>
 <row><code>ANIMAL_HUMAN_HDING</code><eng>Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug</eng><fra>fr_Animal and / or Human Sourced Materials used at any stage in the manufacture of the drug</fra></row>
-<row><code>CONTAINER_TYPES</code><eng>Container Types, Package Size and shelf Life</eng><fra>fr_C. Container Types</fra></row>
+<row><code>CONTAINER_TYPES</code><eng>Container Types, Package Size and Shelf Life</eng><fra>fr_C. Container Types</fra></row>
 <row><code>MATERIAL_NAME</code><eng>Material Name</eng><fra>fr_Material Name</fra></row>
 <row><code>PRESENT_IN_FINAL</code><eng>Present in final Container</eng><fra>fr_Present in final Container</fra></row>
 <row><code>MATERIAL_DETAILS</code><eng>Animal and / or Human Sourced Materials Details</eng><fra>fr_Animal and / or Human Sourced Materials Details</fra></row>
@@ -802,9 +807,9 @@
 <row><code>MANUFACT_NAME_CHGE_li</code><eng>A change to the manufacturer’s name.</eng><fra>fr_A change to the manufacturer’s name.</fra></row>
 <row><code>MANUFACT_NAME_CHGE_note</code><eng>Note: An amended CO XML is required. A new company ID will be issued for the substantive name change.</eng><fra>fr_Note: An amended CO XML is required. A new company ID will be issued for the substantive name change.</fra></row>
 <row><code>MANUFACT_NAME_CHGE_note</code><eng>On the RA template: Use new company ID (associated with new manufacturer’s name) and existing dossier ID.</eng><fra>fr_On the RA template: Use new company ID (associated with new manufacturer’s name) and existing dossier ID.</fra></row>
-<row><code>MERGER_li</code><eng>The combining of two or more manufacturers into one, through a purchase, acquisition or a pooling of interests or purchase of controlling interest in one manufacturer by another manufacturer, in order to take over assets and/or operations.</eng><fra>fr_The combining of two or more manufacturers into one, through a purchase, acquisition or a pooling of interests or purchase of controlling interest in one manufacturer by another manufacturer, in order to take over assets and/or operations.</fra></row>
-<row><code>MERGER_note</code><eng>Note: If merger/buyout resulted in a change in company name, an amended CO XML is required. A new company ID will be issued. Dossier ID will remain the same as the DO will be transferred from the previous owner to the new owner.</eng><fra>fr_Note: If merger/buyout resulted in a change in company name, an amended CO XML is required. A new company ID will be issued. Dossier ID will remain the same as the DO will be transferred from the previous owner to the new owner.</fra></row>
-<row><code>MERGER_note</code><eng>On the RA template: Use company ID for new owner and existing dossier ID.</eng><fra>fr_On the RA template: Use company ID for new owner and existing dossier ID.</fra></row>
+<row><code>MERGER_li</code><eng>The combining of two or more manufacturers into one, through a purchase, acquisition, a pooling of interests, or purchase of controlling interest in one manufacturer by another manufacturer, in order to take over assets and/or operations.</eng><fra>fr_The combining of two or more manufacturers into one, through a purchase, acquisition or a pooling of interests or purchase of controlling interest in one manufacturer by another manufacturer, in order to take over assets and/or operations.</fra></row>
+<row><code>MERGER_note</code><eng>Note: If merger/buyout resulted in a change in company name, an amended company enrolment is required. A new company ID will be issued. Dossier ID will remain the same as the dossier will be transferred from the previous owner to the new owner.</eng><fra>fr_Note: If merger/buyout resulted in a change in company name, an amended CO XML is required. A new company ID will be issued. Dossier ID will remain the same as the DO will be transferred from the previous owner to the new owner.</fra></row>
+<row><code>MERGER_note</code><eng>On this form: Use company ID for new owner and existing dossier ID.</eng><fra>fr_On the RA template: Use company ID for new owner and existing dossier ID.</fra></row>
 <row><code>POSTAUTH_CHEMISTRY_CHGE_li</code><eng>For schedule C and D products. Chemistry and Manufacturing information updates to match the Chemistry updates of the licensor.</eng><fra>fr_For schedule C and D products. Chemistry and Manufacturing information updates to match the Chemistry updates of the licensor.</fra></row>
 <row><code>POSTAUTH_CHEMISTRY_CHGE_note</code><eng>On the RA template: Use existing company ID and dossier ID.</eng><fra>fr_On the RA template: Use existing company ID and dossier ID.</fra></row>
 <row><code>POSTAUTH_LABEL_CHGE_li</code><eng>Label update (including but not limited to Product Monograph update, inner and outer label update) to match label updates of the licensor.</eng><fra>fr_Label update (including but not limited to Product Monograph update, inner and outer label update) to match label updates of the licensor.</fra></row>
@@ -812,6 +817,7 @@
 <row><code>NOTE_1</code><eng>You are eligible to apply for fee remission. The submission fee is greater than 10% of anticipated gross revenues.</eng><fra>fr_You are eligible to apply for fee remission. The submission fee is greater than 10% of anticipated gross revenues.</fra></row>
 <row><code>NOTE_2</code><eng>Please include the required signed statement AND at least one of the support documentation to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period.</eng><fra>fr_Please include the required signed statement AND at least one of the support documentation to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period.</fra></row>
 <row><code>NOTE_3</code><eng>Fees of $10,000 or less must be paid at the time of filing of the submission, supplement or application. Please complete the Advance Payment Details for Drug Submissions and Master Files.  Please include the remission processing fee of $578.</eng><fra>fr_Fees of $10,000 or less must be paid at the time of filing of the submission, supplement or application. Please complete the Advance Payment Details for Drug Submissions and Master Files.  Please include the remission processing fee of $578.</fra></row>
+<row><code>NOTE_3</code><eng>Please pay the remission processing fee of $578 using the Advance Payment Details for Drug Submissions and Master Files. </eng><fra>fra_Please pay the remission processing fee of $578 using the Advance Payment Details for Drug Submissions and Master Files. </fra></row>
 <row><code>NOTE_4</code><eng>You are applying for a deferral. Please send no payment with this form.</eng><fra>fr_You are applying for a deferral. Please send no payment with this form.</fra></row>
 <row><code>NOTE_5</code><eng>You are not eligible to apply for fee remission. The submission fee is less than 10% of anticipated gross revenues.</eng><fra>fr_You are not eligible to apply for fee remission. The submission fee is less than 10% of anticipated gross revenues.</fra></row>
 <row><code>NOTE_6</code><eng>Review fees must not be included with the submission, supplement or application. Sponsors will be invoiced for fees of more than $10,000.</eng><fra>fr_Review fees must not be included with the submission, supplement or application. Sponsors will be invoiced for fees of more than $10,000.</fra></row>
@@ -875,6 +881,21 @@
 <row><code>CSP_CREDIT_CARD</code><eng>MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</eng><fra>fr_MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</fra></row>
 <row><code>CSP_CREDIT</code><eng>Payment Using Existing Credit</eng><fra>fr_Payment Using Existing Credit</fra></row>
 <row><code>CSP_WIRE</code><eng>Wire</eng><fra>fr_Wire</fra></row>
+<row><code>CONTACT_ID</code><eng>Contact ID</eng><fra>fr_Contact ID</fra></row>
+<row><code>STATUS</code><eng>Status</eng><fra>fr_Status</fra></row>
+<row><code>ANIMAL_NONHUMANPRIMATE_TYPE</code><eng>Non-human primate type</eng><fra>fr_Non-human primate type</fra></row>
+<row><code>ANIMAL_AQUATIC_TYPE</code><eng>Aquatic species such as fish, molluscs and crustacean</eng><fra>fr_Aquatic species such as fish, molluscs and crustacean</fra></row>
+<row><code>ANIMAL_AVIAN_TYPE</code><eng>Avian such as chicken, turkey and duck</eng><fra>fr_Avian such as chicken, turkey and duck</fra></row>
+<row><code>ANIMAL_BOVINE_TYPE</code><eng>Bovine such as cattle, bison type</eng><fra>fr_Bovine such as cattle, bison type</fra></row>
+<row><code>ANIMAL_CANINE_TYPE</code><eng>Canine type</eng><fra>fr_Canine type</fra></row>
+<row><code>ANIMAL_CAPRINE_TYPE</code><eng>Caprine such as goat type</eng><fra>fr_Caprine such as goat type</fra></row>
+<row><code>ANIMAL_CERVIDAE_TYPE</code><eng>Cervidae such as deer, elk(wapiti) and moose type</eng><fra>fr_Cervidae such as deer, elk(wapiti) and moose type</fra></row>
+<row><code>ANIMAL_EQUINE_TYPE</code><eng>Equine such as horse type</eng><fra>fr_Equine such as horse type</fra></row>
+<row><code>ANIMAL_FELINE_TYPE</code><eng>Feline such as cat type</eng><fra>fr_Feline such as cat type</fra></row>
+<row><code>ANIMAL_OVINE_TYPE</code><eng>Ovine type</eng><fra>fr_Ovine type</fra></row>
+<row><code>ANIMAL_PORCINE_TYPE</code><eng>Porcine such as pig type</eng><fra>fr_Porcine such as pig type</fra></row>
+<row><code>ANIMAL_RODENT_TYPE</code><eng>Rodents such as mouse, hamster, rat and rabbit type</eng><fra>fr_Rodents such as mouse, hamster, rat and rabbit type</fra></row>
+<row><code>ANIMAL_OTHERANIMAL_TYPE</code><eng>Other animal type</eng><fra>fr_Other animal type</fra></row>
 
 
 </SimpleCodeList>
