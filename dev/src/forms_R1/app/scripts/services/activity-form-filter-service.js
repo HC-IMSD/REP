@@ -50,8 +50,8 @@
                     case 'B02-20160301-032': //EU SNDS
                         newList.push(raList[i]);
                         break;
-                    case 'B02-20160301-038': //Level III
-                        newList.push(raList[i]);
+                   case 'B02-20160301-038': //Level III
+                       newList.push(raList[i]);
                         break;
                     case 'B02-20160301-046': //MPNC
                         newList.push(raList[i]);
@@ -154,7 +154,7 @@
                         break;
                     case 'B02-20160301-050': //NC
                         newList.push(raList[i]);
-                        break;
+                       break;
                     case 'B02-20160301-051': //NDS
                         newList.push(raList[i]);
                         break;
