@@ -8,9 +8,10 @@
 	<xsl:template match="/">
 		<html>
 			<head>
-<style type="text/css">
-	<xsl:value-of select="$cssLookup/css"/>
-</style>
+				<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+				<style type="text/css">
+					<xsl:value-of select="$cssLookup/css"/>
+				</style>
 			</head>
             <body>
 				<xsl:if test="count(COMPANY_ENROL) &gt; 0"> <xsl:apply-templates select="COMPANY_ENROL"></xsl:apply-templates> </xsl:if>

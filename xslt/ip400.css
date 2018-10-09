@@ -20,6 +20,21 @@
  *//*!
  * GLYPHICONS Halflings for Twitter Bootstrap by GLYPHICONS.com | Licensed under http://www.apache.org/licenses/LICENSE-2.0
  *//*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+
+span.mouseHover:hover {
+	border: 1px solid black;
+}
+span.normalWeight {
+	font-weight: 100;
+}
+.padLeft3 {
+	padding-left: 3px;
+}
+.nowrap {
+	white-space: nowrap;
+}
+
+
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -13235,18 +13250,6 @@ a.shr-opn, a.shr-opn:hover {
 }
 .fa-caret-down:before {
     content: "\f0d7";
-}
-span.mouseHover:hover {
-	border: 1px solid black;
-}
-span.normalWeight {
-	font-weight: 100;
-}
-.padLeft3 {
-	padding-left: 3px;
-}
-.nowrap {
-	white-space: nowrap;
 }
 </style>
 
