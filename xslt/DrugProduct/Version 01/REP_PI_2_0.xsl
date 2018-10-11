@@ -8,6 +8,7 @@
 	<xsl:template match="/">
 		<html>
 			<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 				<style type="text/css">
 					<xsl:value-of select="$cssLookup/css"/>
 				</style>
@@ -802,7 +803,7 @@
 						</div>
 
 						<div class="row">
-							<div class="col-xs-12 form-group">
+							<div class="col-xs-12">
 								<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION'"/></xsl:call-template></label>
 								<div class="form-group">
 									<ul class="nav nav-tabs">
@@ -828,15 +829,28 @@
 														<td colspan="3"> 
 															<fieldset>
 																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION_DETAILS'"/></xsl:call-template>&#160;<xsl:value-of select="formulation_id"/></legend>
-																<div class="row">
-																	<div class="form-group col-md-12">
-																	<label>A. <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION_NAME'"/></xsl:call-template>:&#160;<span style="font-weight: normal;" class="mouseHover"><xsl:value-of select="formulation_name"/></span></label>
-																	</div>
+																<div>
+																	<section class="panel panel-default">
+																		<div class="panel-body">
+																			<div class="row well well-sm">
+																				<div class="form-group col-md-12">
+																				<label>A. <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'FORMULATION_NAME'"/></xsl:call-template>:&#160;<span style="font-weight: normal;" class="mouseHover"><xsl:value-of select="formulation_name"/></span></label>
+																				</div>
+																			</div>
+																		</div>
+																	</section>
 																</div>
-																<div class="row">
-																	<div class="form-group col-md-12">
-																	<label>B. <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOSAGE_FORM'"/></xsl:call-template>:&#160;<span style="font-weight: normal;" class="mouseHover"><xsl:choose><xsl:when test="$language = 'eng'"><xsl:value-of select="dosage_form_group/dosage_form/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="dosage_form_group/dosage_form/@label_fr"/></xsl:otherwise></xsl:choose></span>&#160;<span><xsl:value-of select="dosage_form_group/dosage_form_other"/></span></label>
-																	</div>
+
+																<div>
+																	<section class="panel panel-default">
+																		<div class="panel-body">
+																			<div class="row well well-sm">
+																				<div class="form-group col-md-12">
+																				<label>B. <xsl:call-template name="hp-label"><xsl:with-param name="code" select="'DOSAGE_FORM'"/></xsl:call-template>:&#160;<span style="font-weight: normal;" class="mouseHover"><xsl:choose><xsl:when test="$language = 'eng'"><xsl:value-of select="dosage_form_group/dosage_form/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="dosage_form_group/dosage_form/@label_fr"/></xsl:otherwise></xsl:choose></span>&#160;<span><xsl:value-of select="dosage_form_group/dosage_form_other"/></span></label>
+																				</div>
+																			</div>
+																		</div>
+																	</section>
 																</div>
 																<div>
 																	<section class="panel panel-default">
@@ -844,39 +858,39 @@
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
-																				<thead>
+<!--																				<thead>
 																					<tr>
-<!--																						<th style="width:2%"></th>-->
+																						<th style="width:2%"></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INGREDIENT'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IN_LIST'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CAS_NUM'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_HUMAN_SOURCED'"/></xsl:call-template></th>
 																					</tr>
-																				</thead>
+																				</thead>-->
 																				<tbody>
 																					<xsl:for-each select="formulation_ingredient">
-																						<tr>
-<!--																							<td class="fa fa-caret-right fa-lg fa-fw"></td>-->
+<!--																						<tr>
+																							<td class="fa fa-caret-right fa-lg fa-fw"></td>
 																							<td>
 																								<xsl:choose>
 																								<xsl:when test="ingredient_role = 'MED'">
-																									<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_MED'"/></xsl:call-template>
+																									<span class="mouseHover"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_MED'"/></xsl:call-template></span>
 																								</xsl:when>
 																								<xsl:otherwise>
-																									<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_NON_MED'"/></xsl:call-template>
+																									<span class="mouseHover"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE_NON_MED'"/></xsl:call-template></span>
 																								</xsl:otherwise>
 																								</xsl:choose>
 																							</td>
-																							<td><xsl:value-of select="ingredient_name"/></td>
-																							<td><xsl:choose><xsl:when test="ingredient_id"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'Yes'"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'No'"/></xsl:call-template></xsl:otherwise></xsl:choose></td>
-																							<td><xsl:value-of select="cas_number"/></td>
-																							<td><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_human_animal_src"/></xsl:call-template></td>
-																						</tr>
+																							<td><span class="mouseHover"><xsl:value-of select="ingredient_name"/></span></td>
+																							<td><span class="mouseHover"><xsl:choose><xsl:when test="ingredient_id"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'Yes'"/></xsl:call-template></xsl:when><xsl:otherwise><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'No'"/></xsl:call-template></xsl:otherwise></xsl:choose></span></td>
+																							<td><span class="mouseHover"><xsl:value-of select="cas_number"/></span></td>
+																							<td><span class="mouseHover"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_human_animal_src"/></xsl:call-template></span></td>
+																						</tr>-->
 																						<tr>
 																							<td colspan="6">
 															<fieldset>
-																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INGRED_DETAILS'"/></xsl:call-template></legend>
+																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'INGRED_DETAILS'"/></xsl:call-template>&#160;<xsl:value-of select="position()"/></legend>
 																<div class="row">
 																	<div class="col-md-6">
 																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ONE_ROLE'"/></xsl:call-template>:&#160;
@@ -982,31 +996,31 @@
 																		<header class="panel-heading"><h3 class="panel-title ng-binding">D.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'IS_ANIMAL_HUMAN_MATERIAL'"/></xsl:call-template>&#160;<span style="font-weight: normal;"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="is_animal_human_material"/></xsl:call-template></span></h3></header>
 																		<div class="panel-body">
 																			<xsl:if test="is_animal_human_material = 'Y'">
-																			<div class="panel-heading">
+<!--																			<div class="panel-heading">
 																				<h3 class="panel-title"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_HUMAN_HDING'"/></xsl:call-template></h3>
-																			</div>
+																			</div>-->
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
-																				<thead>
+<!--																				<thead>
 																					<tr>
-<!--																						<th style="width:2%"></th>-->
+																						<th style="width:2%"></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MATERIAL_NAME'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CAS_NUM'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PRESENT_IN_FINAL'"/></xsl:call-template></th>
 																					</tr>
-																				</thead>
+																				</thead>-->
 																				<tbody>
 																					<xsl:for-each select="material_ingredient">
-																						<tr >
-<!--																							<td class="fa fa-caret-right fa-lg fa-fw"></td>-->
-																							<td><xsl:value-of select="./ingredient_name"/></td>
-																							<td><xsl:value-of select="./cas_number"/></td>
-																							<td><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="in_final_container"/></xsl:call-template></td>
-																						</tr>
+<!--																						<tr >
+																							<td class="fa fa-caret-right fa-lg fa-fw"></td>
+																							<td><span class="mouseHover"><xsl:value-of select="./ingredient_name"/></span></td>
+																							<td><span class="mouseHover"><xsl:value-of select="./cas_number"/></span></td>
+																							<td><span class="mouseHover"><xsl:call-template name="YesNoUnknow"><xsl:with-param name="value" select="in_final_container"/></xsl:call-template></span></td>
+																						</tr>-->
 																						<tr>
 																							<td colspan="4">
 															<fieldset>
-																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MATERIAL_DETAILS'"/></xsl:call-template></legend>
+																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MATERIAL_DETAILS'"/></xsl:call-template>&#160;<xsl:value-of select="position()"/></legend>
 																<div class="row">
 																	<div class="col-md-6">
 																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'MATERIAL_NAME'"/></xsl:call-template>:&#160;<span class="normalWeight mouseHover"><xsl:value-of select="./ingredient_name"/></span></label>
@@ -1042,24 +1056,24 @@
 																		<div class="panel-body">
 																			<div>
 																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
-																				<thead>
+<!--																				<thead>
 																					<tr>
-<!--																						<th style="width:2%"></th>-->
+																						<th style="width:2%"></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE'"/></xsl:call-template></th>
 																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'PACKAGE_SIZE'"/></xsl:call-template></th>
 																					</tr>
-																				</thead>
+																				</thead>-->
 																				<tbody>
 																					<xsl:for-each select="container_group">
-																						<tr>
-<!--																							<td class="fa fa-caret-right fa-lg fa-fw"></td>-->
+<!--																						<tr>
+																							<td class="fa fa-caret-right fa-lg fa-fw"></td>
 																							<td><xsl:value-of select="./container_details/container_type"/></td>
 																							<td><xsl:value-of select="./container_details/package_size"/></td>
-																						</tr>
+																						</tr>-->
 																						<tr>
 																							<td colspan="4">
 															<fieldset>
-																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE_DETAILS'"/></xsl:call-template></legend>
+																<legend><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE_DETAILS'"/></xsl:call-template>&#160;<xsl:value-of select="position()"/></legend>
 																<div class="row">
 																	<div class="col-md-12">
 																	<label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'CONTAINER_TYPE'"/></xsl:call-template>:&#160;<span class="normalWeight mouseHover"><xsl:value-of select="./container_details/container_type"/></span></label>
@@ -1115,7 +1129,7 @@
 																					<xsl:for-each select="roa_group">
 																						<tr>
 																							<td><span class="mouseHover"><xsl:choose><xsl:when test="$language = 'fra'"><xsl:apply-templates select="./roa_details/roa/@label_fr" /></xsl:when><xsl:otherwise><xsl:apply-templates select="./roa_details/roa/@label_en" /></xsl:otherwise></xsl:choose></span></td>
-																							<td><span class="mouseHover"><xsl:value-of select="./roa_details/roa_other"/></span></td>
+																							<td><span class="mouseHover"><xsl:value-of select="./roa_details/roa_other"/>&#160;</span></td>
 																						</tr>
 																					</xsl:for-each>
 																				</tbody>
@@ -1155,11 +1169,12 @@
 											</tbody>
 											</table>
 										</div>
+<div class="row"><br /></div>		
 									<ul class="nav nav-tabs">
-										<li tabindex="1" id="tab1"><a href="#tabpanel1"><strong><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'APPENDIX4'"/></xsl:call-template></strong></a>
+										<li tabindex="1" class="active" id="tab1"><a href="#tabpanel1"><strong><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'APPENDIX4'"/></xsl:call-template></strong></a>
 										</li>
 									</ul>
-										<div id="tabpanel1">
+										<div class="active" id="tabpanel1">
 											<table class="table dataTable table-bordered table-hover table-condensed table-striped">
 <!--												<tr>
 													<th style="width:2%"></th>

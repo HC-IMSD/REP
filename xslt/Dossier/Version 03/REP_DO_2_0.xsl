@@ -8,6 +8,7 @@
     <xsl:template match="/">
         <html>
 			<head>
+				<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 				<style type="text/css">
 					<xsl:value-of select="$cssLookup/css"/>
 				</style>
