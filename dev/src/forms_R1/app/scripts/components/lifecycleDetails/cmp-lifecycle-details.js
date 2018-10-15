@@ -416,6 +416,7 @@
 
                 case(vm.descriptionObj.COMMENTS_NOC):             /*FALLTHROUGH*/
                 case(vm.descriptionObj.COMMENTS_SUMMARY_BASIS):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.COMMENTS_REGULARTORY_DECISION):   /*FALLTHROUGH*/
                 case(vm.descriptionObj.MEETING_MINUTES):            /*FALLTHROUGH*/
                 case(vm.descriptionObj.ADVISEMENT_LETTER_RESPONSE):   /*FALLTHROUGH*/
                 case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):         /*FALLTHROUGH*/

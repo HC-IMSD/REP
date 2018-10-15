@@ -94,17 +94,42 @@
             </div>
             <div>
                 <section class="panel panel-default">
-                    <header class="panel-heading">
+                    <header class="panel-heading clearfix">
+                        <div class="btn-group pull-right">
+                            <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_INSTRUCT'|translate}}"
+                                    class="btn-xs rep-help-button-primary btn-xs"
+                                    id="ingredient-instructions-toggle" ng-click="formulRecCtrl.addInstruct(3)"><span
+                                    class="fa fa-question-circle fa-2x"></span>
+                            </button>
+                        </div>
                         <h3 class="panel-title">C. {{'INGREDIENTS'|translate}}</h3>
                     </header>
                     <div class="panel-body">
                         <!-- <input type="text" required ng-show="false" name="{{::formulRecCtrl.noActiveId}}" id="{{::formulRecCtrl.noActiveId}}"
                                 aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>-->
-                        <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div uib-alert template-url="./app/lib/uib-templates/alert.html"
+                                     ng-if="formulRecCtrl.alerts[3]"
+                                     class="alert-info" close="formulRecCtrl.closeAlert(3)">
+                                    <section aria-live="assertive">
+                                        <div ng-if="!formulRecCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredientTable-en.html'">
+                                        </div>
+                                        <div ng-if="formulRecCtrl.isFrench()"
+                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredientTable-fr.html'">
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
                                              error-summary-update="formulRecCtrl.errorSummaryUpdate"
                                              show-error-summary="formulRecCtrl.showSummary"
                                              error-summary-update="formulRecCtrl.errorSummaryUpdate()"
                                              on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
+                        </div>
                     </div>
                 </section>
             </div>

@@ -98,5 +98,6 @@
   "INGRECCTRL.ACTIVEINGFORM":"in the active ingredient details",
   "NINGRECCTRL.NONMEDINGFORM":"in the non-medicinal ingredient details",
   "CTRCTRL.CONTAINERTYPEFORM":"in the container type details",
-  "FORMULCTRL.FORMULATIONSFORM":"in the formulations tab"
+  "FORMULCTRL.FORMULATIONSFORM":"in the formulations tab",
+  "INGREDIENT_INSTRUCT":"Ingredient Instructions"
 }
