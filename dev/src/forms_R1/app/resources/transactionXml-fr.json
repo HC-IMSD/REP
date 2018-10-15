@@ -3,7 +3,7 @@
   "is_ectd": "Is ECTD?",
   "ectd": "ECTD Record",
   "dossier_name": "Dossier Name",
-  "lifecycle_record": "Lifecycle Record",
+  "lifecycle_record": "Transaction Details Record",
   "date_filed": "Data Filed",
   "control_number": "Control Number",
   "sequence_activity_type": "Activity Type",
