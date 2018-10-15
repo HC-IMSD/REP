@@ -39,7 +39,8 @@
             CHANGE_TO_DIN: "CHANGE_TO_DIN", //changes to din
             //CLARIF_RESPONSE: "CLARIF_RESPONSE", //Response to clarification request
             COMMENTS_NOC: "COMMENTS_NOC", // comments on notice of decision
-            COMMENTS_SUMMARY_BASIS: "COMMENTS_SUMMARY_BASIS", //commments on summary basis of decision (SBD)
+            COMMENTS_SUMMARY_BASIS: "COMMENTS_SUMMARY_BASIS", //commments on summary basis of decision (SBD),
+            COMMENTS_REGULARTORY_DECISION: "COMMENTS_REGULARTORY_DECISION", //Comments on Regulatory Decision Summary,
             DIN_DISCONTINUED: "DIN_DISCONTINUED", // Notification of Discontinued Sale (DIN Cancellation)
             DRUG_NOTIF_FORM: "DRUG_NOTIF_FORM", // drug notification form
             FOR_PERIOD: "FOR_PERIOD", //for period of ....
@@ -295,7 +296,7 @@
                 vm.allActivities.BE_CLARIF_RESPONSE, //Response to BE clarification request dated..
                 vm.allActivities.CANCEL_LETTER, //cancellation letter
                 vm.allActivities.COMMENTS_NOC, // comments on notice of decision
-                vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis
+                vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis,
                 vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
                 vm.allActivities.INITIAL, //Initial
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
@@ -434,7 +435,8 @@
                 vm.allActivities.ADMINISTRATIVE, //administrative
                 vm.allActivities.CANCEL_LETTER, //cancellation letter
                 vm.allActivities.COMMENTS_NOC, // comments on notice of decision
-                vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis
+                vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis,
+                vm.allActivities.COMMENTS_REGULARTORY_DECISION, //commments on COMMENTS_REGULARTORY_DECISION basis
                 vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
                 vm.allActivities.INITIAL, //Initial
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
@@ -567,7 +569,8 @@
                 vm.allActivities.ADMINISTRATIVE, //administrative
                 vm.allActivities.CANCEL_LETTER, //cancellation letter
                 vm.allActivities.COMMENTS_NOC, // comments on notice of decision
-                vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis
+                vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis,
+                vm.allActivities.COMMENTS_REGULARTORY_DECISION, //commments on COMMENTS_REGULARTORY_DECISION
                 vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.PANDEMIC_APPL, //Pandemic application

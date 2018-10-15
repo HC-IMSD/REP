@@ -65,7 +65,7 @@
         vm.yesNoList = DossierLists.getYesNoList();
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
-        vm.alerts = [false, false, false]; //for help boxes
+        vm.alerts = [false, false, false,false]; //for help boxes
        // vm.formName="";
         vm.summaryName="";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
