@@ -403,7 +403,7 @@
                 //gets rid of any hashkey serialize then deseriailize,
                 result.submission_class = (angular.fromJson(angular.toJson(feeObj.submissionClass)))
             }
-            result.deferral_request = feeObj.deferralRequest=== true ? YES : NO;
+            result.deferral_request = feeObj.deferralRequest;
             result.fee_remission = feeObj.feeRemission;
             result.gross_revenue = feeObj.grossRevenue;
             result.percent_gross = feeObj.percentGross;
