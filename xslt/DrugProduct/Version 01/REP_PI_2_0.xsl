@@ -236,7 +236,7 @@
 										</span>
 									</td>
 								</tr>
-								<tr>
+<!--								<tr>
 									<td>
 										<xsl:element name="input">
 							                <xsl:attribute name="type">checkbox</xsl:attribute>
@@ -251,7 +251,7 @@
 										</span>
 									</td>
 									<td></td><td></td>
-								</tr>
+								</tr>-->
 							</tbody>
 							</table>
 							</div>
@@ -936,7 +936,7 @@
 																			<span style="font-weight: normal;" class="mouseHover"><xsl:value-of select="units_other"/></span>&#160;
 																		</xsl:when>
 																		<xsl:otherwise>
-																			<span style="font-weight: normal;" class="mouseHover"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="per_units/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="per_units/@label_fr"/></xsl:otherwise></xsl:choose></span>
+																			<span style="font-weight: normal;" class="mouseHover"><xsl:choose><xsl:when test="$language ='eng'"><xsl:value-of select="units/@label_en"/></xsl:when><xsl:otherwise><xsl:value-of select="units/@label_fr"/></xsl:otherwise></xsl:choose></span>
 																		</xsl:otherwise>
 																		</xsl:choose>
 																	</xsl:if>
@@ -1118,11 +1118,11 @@
 																		<header class="panel-heading"><h3 class="panel-title ng-binding">F.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_TITLE'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
-																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
+																				<table class="table dataTable table-bordered" id="expand-table-141">
 																				<thead>
 																					<tr>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_LBL'"/></xsl:call-template></th>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'OTHER_ROA_DETAILS'"/></xsl:call-template></th>
+																						<th style="background-color:white !important;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ROA_LBL'"/></xsl:call-template></th>
+																						<th style="background-color:white !important;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'OTHER_ROA_DETAILS'"/></xsl:call-template></th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -1143,10 +1143,10 @@
 																		<header class="panel-heading"><h3 class="panel-title">G.&#160;<xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRIES_MANUFACT'"/></xsl:call-template></h3></header>
 																		<div class="panel-body">
 																			<div>
-																				<table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-141">
+																				<table class="table dataTable table-bordered" id="expand-table-141">
 																				<thead>
 																					<tr>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRY_MAN'"/></xsl:call-template></th>
+																						<th style="background-color:white !important;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'COUNTRY_MAN'"/></xsl:call-template></th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -1217,9 +1217,9 @@
 																			<table class="table dataTable table-bordered table-hover table-condensed table-striped">
 																				<thead>
 																					<tr>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SYSTEM_TYPE'"/></xsl:call-template></th>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SYSTEM_DETAILS'"/></xsl:call-template></th>
-																						<th><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SYSTEM_OTHER'"/></xsl:call-template></th>
+																						<th style="background-color:white !important;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SYSTEM_TYPE'"/></xsl:call-template></th>
+																						<th style="background-color:white !important;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SYSTEM_DETAILS'"/></xsl:call-template></th>
+																						<th style="background-color:white !important;"><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'SYSTEM_OTHER'"/></xsl:call-template></th>
 																					</tr>
 																				</thead>
 																				<tbody>
@@ -1252,8 +1252,8 @@
 																			<div class="panel-body">
 																			<table class="table dataTable table-bordered table-hover table-condensed table-striped">
 																			<thead>
-																					<th><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_TYPE'"/></xsl:call-template></label></th>
-																					<th><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_TYPE_LBL'"/></xsl:call-template></label></th>
+																					<th style="background-color:white !important;"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_TYPE'"/></xsl:call-template></label></th>
+																					<th style="background-color:white !important;"><label><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'ANIMAL_TYPE_LBL'"/></xsl:call-template></label></th>
 																			</thead>
 																			<tbody>
 																				<xsl:for-each select="animal_sourced_section/animal_src_record">
@@ -1353,9 +1353,9 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="no" url="file:///e:/hcreppi-2018-08-07-1010.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes" profilemode="0"
-		          profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext="" validateoutput="no"
-		          validator="internal" customvalidator="">
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/ip400Demo/tmp/hcreppi-2018-08-13-0951.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes"
+		          profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
+		          validateoutput="no" validator="internal" customvalidator="">
 			<parameterValue name="cssFile" value="'file:///C:/Users/hcuser/git/HC-IMSD/REP/xslt/ip400.css'"/>
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
 			<advancedProp name="sInitialMode" value=""/>

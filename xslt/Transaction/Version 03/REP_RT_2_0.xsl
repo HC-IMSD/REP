@@ -121,7 +121,7 @@
 									</xsl:when>
 									<xsl:otherwise>
 										<xsl:call-template name="hp-label">
-											<xsl:with-param name="code" select="'EXSITING'"/>
+											<xsl:with-param name="code" select="'EXISTING'"/>
 										</xsl:call-template>
 									</xsl:otherwise>
 									</xsl:choose>
@@ -450,14 +450,24 @@
 						<div class="row">
 							<div class="col-xs-12 form-group alert alert-info">
 							<xsl:choose>
-							<xsl:when test="fee_details/fee_remission = 'N' and fee_details/deferral_request = 'N' and fee_details/submission_class/fee &gt; 10000">
+							<xsl:when test="fee_details/deferral_request = 'N' and fee_details/fee_remission = 'N'">
+								<xsl:choose>
+								<xsl:when test="fee_details/submission_class/fee &lt; 10000">
+								<p><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NOTE_3'"/></xsl:call-template></p>
+								</xsl:when>
+								<xsl:otherwise>
 								<p><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NOTE_6'"/></xsl:call-template></p>
+								</xsl:otherwise>
+								</xsl:choose>
 							</xsl:when>
-							<xsl:when test="fee_details/fee_remission = 'N' and fee_details/deferral_request = 'Y' and fee_details/submission_class/fee &lt; 10000">
+							<xsl:when test="fee_details/fee_remission = 'N' and fee_details/deferral_request = 'Y'">
 								<p><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NOTE_4'"/></xsl:call-template></p>
 							</xsl:when>
+							<xsl:when test="fee_details/fee_remission = 'Y' and fee_details/deferral_request = 'N'">
+								<p><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NOTE_7'"/></xsl:call-template></p>
+							</xsl:when>
 							<xsl:otherwise>
-								<p><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NOTE_3'"/></xsl:call-template></p>
+								<p><xsl:call-template name="hp-label"><xsl:with-param name="code" select="'NOTE_7'"/></xsl:call-template></p>
 							</xsl:otherwise>
 							</xsl:choose>
 							</div>
@@ -686,9 +696,9 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="file:///e:/hcreprt-2018-09-28-1002.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\transaction.html" processortype="saxon8" useresolver="yes"
-		          profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
-		          validateoutput="no" validator="internal" customvalidator="">
+		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="file:///e:/ip400Demo/tmp/hcreprt-2018-10-24-1405.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\transaction.html" processortype="saxon8"
+		          useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath=""
+		          postprocessgeneratedext="" validateoutput="no" validator="internal" customvalidator="">
 			<parameterValue name="cssFile" value="'file:///C:/Users/hcuser/git/HC-IMSD/REP/xslt/ip400.css'"/>
 			<parameterValue name="labelFile" value="'file:///C:/Users/hcuser/git/HC-IMSD/REP/xslt/hp-ip400-labels.xml'"/>
 			<advancedProp name="sInitialMode" value=""/>
