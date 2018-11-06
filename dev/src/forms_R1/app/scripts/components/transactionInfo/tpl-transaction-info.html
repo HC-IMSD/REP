@@ -63,7 +63,7 @@
                                                        error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3 rep-margin-left">
+                            <div class="form-group col-md-3">
                                 <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                     <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -295,7 +295,7 @@
                                                            error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                     </label>
 
-                                    <h5 ng-if="transInfoCtrl.transactionModel.subType">{{::'ADMIN_DESCRIPT'|translate}}</h5>
+                                    <h3 ng-if="transInfoCtrl.transactionModel.subType">{{::'ADMIN_DESCRIPT'|translate}}</h3>
                                     <div ng-if="!transInfoCtrl.isFrench()" ng-switch="transInfoCtrl.transactionModel.subType.id">
                                         <div ng-switch-when="MANUFACT_NAME_CHGE">
                                             <div aria-live="assertive"
@@ -411,20 +411,6 @@
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
                         <div class="panel-body">
-                            <!--
-                            <div>
-                                <cmp-alert ui-state="transInfoCtrl.alerts[2]" msg="LIFECYCLE_INSTRUCT"
-                                           update-state="transInfoCtrl.closeAlert(2)" type="alert-info">
-                                    <section aria-live="assertive">
-                                        <div ng-if="!transInfoCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-lifecycle-table-en.html'">
-                                        </div>
-                                        <div ng-if="transInfoCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-lifecycle-table-fr.html'">
-                                        </div>
-                                    </section>
-                                </cmp-alert>
-                            </div> -->
                             <div>
                                 <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
                                                     is-ectd="transInfoCtrl.isEctd"
@@ -463,7 +449,7 @@
                 <div ng-if="transInfoCtrl.showSolicitedDetail">
                     <section class="panel panel-default">
                         <header class="panel-heading">
-                            <h5 class="panel-title">{{'SOLICITED_RQ'|translate}}</h5>
+                            <h3 class="panel-title">{{'SOLICITED_RQ'|translate}}</h3>
                         </header>
                         <div class="panel-body">
                             <cmp-requester-list list-items="transInfoCtrl.transactionModel.solicitedRequesterReord"
@@ -530,19 +516,6 @@
                     <h2 class="panel-title">{{::'REGULATORY_FEES' |translate}}</h2>
                 </header>
                 <div class="panel-body">
-                    <!--div>
-                        <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="FEE_INSTRUCT"
-                                   update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
-                            <section aria-live="assertive">
-                                <div ng-if="!transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
-                                </div>
-                                <div ng-if="transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
-                    </div-->
                     <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"
                                           show-error-summary="transInfoCtrl.showSummary"
                                           update-error-summary="transInfoCtrl.updateErrorSummary()"
@@ -577,12 +550,7 @@
                         </cmp-alert>
                     </div>
                     <div>
-                        <fieldset>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5>{{::'COMPANY_INFO'|translate}}</h5>
-                                </div>
-                            </div>
+                           <h3>{{::'COMPANY_INFO'|translate}}</h3>
                             <div class="row">
                                 <div class="form-group col-md-12"
                                      ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId].$invalid}">
@@ -618,21 +586,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h5>{{::'ADDRESS_INFO'|translate}}</h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
-                                                     is-amend="true" show-errors="transInfoCtrl.showErrors()"
-                                                     update-error-summary="transInfoCtrl.updateErrorSummary()">
-                                </cmp-address-details>
-                            </div>
-                        </fieldset>
+
+                     </div>
+                    <div>
+                        <h3>{{::'ADDRESS_INFO'|translate}}</h3>
+                        <div class="row">
+                            <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
+                                                 is-amend="true" show-errors="transInfoCtrl.showErrors()"
+                                                 update-error-summary="transInfoCtrl.updateErrorSummary()">
+                            </cmp-address-details>
+                        </div>
                     </div>
                     <div>
-                        <h5>{{::'COMPANY_REP_THIS'|translate}}</h5>
+                        <h3>{{::'COMPANY_REP_THIS'|translate}}</h3>
                         <div class="row">
                             <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
                                                  update-error-summary="transInfoCtrl.updateErrorSummary()"

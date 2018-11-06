@@ -149,7 +149,7 @@
          * @ngdcc method updates data and increments version before creating json
          */
         function _transformFile() {
-            return vm.transactionService.transformToFileObj(vm.transaction);
+           return vm.transactionService.transformToFileObj(vm.transaction);
         }
 
         function _loadFileContent(fileContent) {
