@@ -92,8 +92,10 @@
 						<div class="col-xs-12">
 							<label><xsl:call-template name="hp-label">
 									<xsl:with-param name="code" select="'G_RelatedInfo'"/>
-								</xsl:call-template>:&#160;
-							<span class="padLeft3 nowrap normalWeight mouseHover" style="font-weight:100;"><xsl:value-of select="related_information"/></span></label>
+								</xsl:call-template>:&#160;</label>
+						</div>
+						<div class="col-xs-12">
+							<span class="padLeft3 normalWeight mouseHover" style="font-weight:100;"><xsl:call-template name="break"><xsl:with-param name="text" select="related_information"/></xsl:call-template></span>
 						</div>
 					</div>
                     <div class="row">
@@ -234,6 +236,21 @@
 		</section>
 		</div>
     </xsl:template>
+	<xsl:template name="break">
+	  <xsl:param name="text" select="string(.)"/>
+	  <xsl:choose>
+	    <xsl:when test="contains($text, '&#xa;')">
+	      <xsl:value-of select="substring-before($text, '&#xa;')"/>
+	      <br/>
+	      <xsl:call-template name="break">
+	        <xsl:with-param name="text" select="substring-after($text, '&#xa;')"/>
+	      </xsl:call-template>
+	    </xsl:when>
+	    <xsl:otherwise>
+	      <xsl:value-of select="$text"/>
+	    </xsl:otherwise>
+	  </xsl:choose>
+	</xsl:template>
 	<xsl:template name="hp-label">
 		<xsl:param name="code" select="/.."/>
 		<xsl:variable name="value" select="$labelLookup/SimpleCodeList/row[code=$code]/*[name()=$language]"/>
@@ -244,9 +261,9 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="file:///e:/hcrepdo-4545rtr-1-0.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\dossier.html" processortype="saxon8" useresolver="yes"
-		          profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
-		          validateoutput="no" validator="internal" customvalidator="">
+		<scenario default="yes" name="Scenario1" userelativepaths="yes" externalpreview="yes" url="file:///e:/ip400Demo/tmp/hcrepdo-e123456-1-0.xml" htmlbaseurl="" outputurl="..\..\..\..\..\..\..\..\SPM\test\dossier.html" processortype="saxon8"
+		          useresolver="yes" profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath=""
+		          postprocessgeneratedext="" validateoutput="no" validator="internal" customvalidator="">
 			<parameterValue name="cssFile" value="'file:///C:/Users/hcuser/git/HC-IMSD/REP/xslt/ip400.css'"/>
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
 			<parameterValue name="language" value="'eng'"/>
