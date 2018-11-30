@@ -19,7 +19,7 @@
   "REG_ACTIVITY": "Regulatory Activity",
   "REG_ACTIVITY_TYPE": "Regulatory Activity Type",
   "SEQUENCE_TYPE": "Regulatory Transaction Description",
-  "VERSION_NO": "Version No.",
+  "VERSION_NO": "Version Number",
   "BRIEF_DESC": "Brief Description",
   "ADMINISTRATIVE": "Administrative",
   "BENEFIT_RISK_ASSESS": "Benefit Risk Assessment",
@@ -93,7 +93,7 @@
   "CONSENT_LTR":"Consent Letter",
   "DATA_PROTECT_CORRESP":"Correspondence - Data Protection",
   "CHOOSE_REQUEST":"Choose a requester",
-  "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
+  "TRANSACT_INSTRUCT":"Regulatory Instructions",
   "LIST_DESCRIPT":"List Description",
   "SEQUENCE_CLEANUP":"eCTD Dossier Clean-up",
 

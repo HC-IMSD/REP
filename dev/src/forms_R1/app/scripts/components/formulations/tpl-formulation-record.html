@@ -13,14 +13,18 @@
             <legend>
                 <span>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</span>
                 <button title="{{::'EXPAND'|translate}} {{::'FORM_REC_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                        id="form-id-instructions-toggle" ng-click="formulRecCtrl.addInstruct(0)"><span
-                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORM_REC_INSTRUCT'|translate}}"</span>
+                        id="form-id-instructions-toggle" ng-click="formulRecCtrl.addInstruct(0)">
+                    <span class="fa fa-question-circle fa-2x"></span>
+                    <span class="wb-inv">{{::'FORM_REC_INSTRUCT'|translate}}</span>
                 </button>
             </legend>
             <div class="row">
                 <div class="col-md-12">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="formulRecCtrl.alerts[0]"
-                         class="alert-info" close="formulRecCtrl.closeAlert(0)">
+                    <div>
+                        <cmp-alert  ui-state="formulRecCtrl.alerts[0]"
+                                    msg="FORM_REC_INSTRUCT"
+                                    update-state="formulRecCtrl.closeAlert(0)"
+                                    type="alert-info">
                         <section aria-live="assertive">
                             <div ng-if="!formulRecCtrl.isFrench()"
                                  ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-rec-en.html'">
@@ -29,6 +33,7 @@
                                  ng-include="'app/scripts/templates/drug/tpl-drugProduct-formulation-rec-fr.html'">
                             </div>
                         </section>
+                        </cmp-alert>
                     </div>
                 </div>
             </div>
@@ -43,9 +48,13 @@
             </div>
             <div class="row">
                 <div class="col-md-5 form-group">
-                    <label for="{{::formulRecCtrl.dosageId}}" class="required rep-required-offset full-width"><span
-                            class="field-name">B. {{'DOSAGE_FORM'|translate}}</span>
+                    <label for="{{::formulRecCtrl.dosageId}}" class="required rep-required-offset full-width">
+                        <span class="field-name">B. {{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <cmp-error-message field-name="formulRecCtrl.dosageId"
+                                           form-ref="formulRecCtrl.formulationForm"
+                                           show-error="formulRecCtrl.showErrors()"
+                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                         <div class="rep-pad-top">
                             <div class="rep-error"
                                  ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}">
@@ -68,10 +77,7 @@
                                 </ui-select>
                             </div>
                         </div>
-                        <cmp-error-message field-name="formulRecCtrl.dosageId"
-                                           form-ref="formulRecCtrl.formulationForm"
-                                           show-error="formulRecCtrl.showErrors()"
-                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
+
                     </label>
                 </div>
                 <div class="col-md-6 form-group"
@@ -80,15 +86,16 @@
                     <label for="{{::formulRecCtrl.dosageOtherId}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <cmp-error-message field-name="formulRecCtrl.dosageOtherId"
+                                           form-ref="formulRecCtrl.formulationForm"
+                                           show-error="formulRecCtrl.showErrors()"
+                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::formulRecCtrl.dosageOtherId}}"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
                                class="form-control full-width" name="{{::formulRecCtrl.dosageOtherId}}"
                                ng-model-options="{ debounce: '$inherit'}"
                                ng-required="formulRecCtrl.isDosageOther()" maxlength="60" size="60"/>
-                        <cmp-error-message field-name="formulRecCtrl.dosageOtherId"
-                                           form-ref="formulRecCtrl.formulationForm"
-                                           show-error="formulRecCtrl.showErrors()"
-                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
+
                     </label>
                 </div>
             </div>
@@ -98,20 +105,21 @@
                         <div class="btn-group pull-right">
                             <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_INSTRUCT'|translate}}"
                                     class="btn-xs rep-help-button-primary btn-xs"
-                                    id="ingredient-instructions-toggle" ng-click="formulRecCtrl.addInstruct(3)"><span
-                                    class="fa fa-question-circle fa-2x"></span>
+                                    id="ingredient-instructions-toggle" ng-click="formulRecCtrl.addInstruct(3)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'INGREDIENT_INSTRUCT'|translate}}</span>
                             </button>
                         </div>
                         <h3 class="panel-title">C. {{'INGREDIENTS'|translate}}</h3>
                     </header>
                     <div class="panel-body">
-                        <!-- <input type="text" required ng-show="false" name="{{::formulRecCtrl.noActiveId}}" id="{{::formulRecCtrl.noActiveId}}"
-                                aria-hidden="true" data-ng-model="formulRecCtrl.noActiveValues"/>-->
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html"
-                                     ng-if="formulRecCtrl.alerts[3]"
-                                     class="alert-info" close="formulRecCtrl.closeAlert(3)">
+                                <div>
+                                    <cmp-alert  ui-state="formulRecCtrl.alerts[3]"
+                                                msg="INGREDIENT_INSTRUCT"
+                                                update-state="formulRecCtrl.closeAlert(3)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!formulRecCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredientTable-en.html'">
@@ -120,6 +128,7 @@
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredientTable-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
@@ -140,14 +149,18 @@
                         <span class="field-name">{{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <button title="{{::'EXPAND'|translate}} {{::'MATERIALS_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                id="is-ah-instructions-toggle" ng-click="formulRecCtrl.addInstruct(1)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'MATERIALS_INSTRUCT'|translate}}"</span>
+                                id="is-ah-instructions-toggle" ng-click="formulRecCtrl.addInstruct(1)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'MATERIALS_INSTRUCT'|translate}}</span>
                         </button>
                     </label>
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="formulRecCtrl.alerts[1]"
-                                     class="alert-info" close="formulRecCtrl.closeAlert(1)">
+                                <div>
+                                    <cmp-alert  ui-state="formulRecCtrl.alerts[1]"
+                                                msg="MATERIALS_INSTRUCT"
+                                                update-state="formulRecCtrl.closeAlert(1)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!formulRecCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-material-used-en.html'">
@@ -156,17 +169,19 @@
                                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-material-used-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
+                    <cmp-error-message field-name="formulRecCtrl.isAnimalHumanMaterialId"
+                                       form-ref="formulRecCtrl.formulationForm"
+                                       show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
+                                       error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                         <select id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" ng-required="true"
                                 class="form-control" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}"
                                 ng-options="val |translate for val in  formulRecCtrl.yesNoList">
                         </select>
-                        <cmp-error-message field-name="formulRecCtrl.isAnimalHumanMaterialId"
-                                           form-ref="formulRecCtrl.formulationForm"
-                                           show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
-                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
+
                 </div>
             </div>
             <div ng-if="formulRecCtrl.frmModel.isAnimalHumanMaterial === 'Y'">
@@ -223,16 +238,20 @@
                     <header class="panel-heading">
                         <div class="btn-group pull-right rep-bottom">
                             <button title="{{::'EXPAND'|translate}} {{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="countries-manu-instructions-toggle" ng-click="formulRecCtrl.addInstruct(2)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}"</span>
+                                    id="countries-manu-instructions-toggle" ng-click="formulRecCtrl.addInstruct(2)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}</span>
                             </button>
                         </div>
                         <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
                     </header>
                     <div class="row">
                         <div class="col-md-12">
-                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="formulRecCtrl.alerts[2]"
-                                 class="alert-info" close="formulRecCtrl.closeAlert(2)">
+                            <div>
+                                <cmp-alert  ui-state="formulRecCtrl.alerts[2]"
+                                            msg="COUNTRIES_MANUFACT_INSTRUCT"
+                                            update-state="formulRecCtrl.closeAlert(2)"
+                                            type="alert-info">
                                 <section aria-live="assertive">
                                     <div ng-if="!formulRecCtrl.isFrench()"
                                          ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-manu-country-en.html'">
@@ -241,6 +260,7 @@
                                          ng-include="'app/scripts/templates/drug/tpl-drugProduct-manu-country-fr.html'">
                                     </div>
                                 </section>
+                                </cmp-alert>
                             </div>
                         </div>
                     </div>
@@ -255,7 +275,7 @@
                 </section>
             </div>
             <div class="row">
-                <div class="btn-group-sm col-xs-12 text-right">
+                <div class="btn-group-sm col-xs-12">
                     <input type="submit" ng-if="formulRecCtrl.deleteBtn === true"
                            value="{{'DELETE_FORMULATION'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}} "
                            class="btn btn-danger" ng-click="formulRecCtrl.delete()"/>

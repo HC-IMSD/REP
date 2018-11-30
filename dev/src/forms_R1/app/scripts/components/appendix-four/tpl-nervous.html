@@ -4,12 +4,12 @@
             <legend class="required">
                 <span class="field-name">{{::'NERVOUS_LEGEND' |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}" type="hidden"
-                       ng-model="sysCtrl.isSelected" required/>
                 <cmp-error-message field-name="sysCtrl.roleMissingId"
                                    form-ref="sysCtrl.nervForm"
                                    show-error="sysCtrl.showErrors()"
                                    error-types="sysCtrl.requiredOnly"></cmp-error-message>
+                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}" type="hidden"
+                       ng-model="sysCtrl.isSelected" required/>
             </legend>
             <div class="row">
                 <div class="col-md-3">
@@ -133,13 +133,14 @@
                         <label class="required" for="{{::sysCtrl.otherDetailsId}}">
                             {{::'NERVOUS_DETAILS'|translate}}
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <input type="text" size="40" maxlength="40" name="{{::sysCtrl.otherDetailsId}}" id="{{::sysCtrl.otherDetailsId}}"
-                                   ng-required="{{sysCtrl.model.otherNervous}}" ng-model-options="{ debounce: '$inherit'}"
-                                   ng-model="sysCtrl.model.otherDetails"/>
                             <cmp-error-message field-name="sysCtrl.otherDetailsId"
                                                form-ref="sysCtrl.nervForm"
                                                show-error="sysCtrl.showErrors()"
                                                error-types="sysCtrl.requiredOnly"></cmp-error-message>
+                            <input type="text" size="40" maxlength="40" name="{{::sysCtrl.otherDetailsId}}" id="{{::sysCtrl.otherDetailsId}}"
+                                   ng-required="{{sysCtrl.model.otherNervous}}" ng-model-options="{ debounce: '$inherit'}"
+                                   ng-model="sysCtrl.model.otherDetails"/>
+
                         </label>
                     </div>
                 </div>

@@ -14,13 +14,13 @@
                     <label for="{{::ap4RecCtrl.ingredNameId}}" class="required">
                         {{'INGRED_MAT_NAME'|translate}}
                         <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                        <input type="text" class="form-control full-width" id="{{::ap4RecCtrl.ingredNameId}}" ng-change="ap4RecCtrl.recordChanged()"
-                               ng-model="ap4RecCtrl.model.ingredientName" name="{{::ap4RecCtrl.ingredNameId}}" required
-                               ng-model-options="{updateOn: 'blur'}" maxlength="100" size="100"/>
                         <cmp-error-message field-name="ap4RecCtrl.ingredNameId"
                                            form-ref="ap4RecCtrl.appendix4RecForm"
                                            show-error="ap4RecCtrl.showErrors()"
                                            error-types="ap4RecCtrl.requiredOnly"></cmp-error-message>
+                        <input type="text" class="form-control full-width" id="{{::ap4RecCtrl.ingredNameId}}" ng-change="ap4RecCtrl.recordChanged()"
+                               ng-model="ap4RecCtrl.model.ingredientName" name="{{::ap4RecCtrl.ingredNameId}}" required
+                               ng-model-options="{updateOn: 'blur'}" maxlength="100" size="100"/>
 
                     </label>
                 </div>
@@ -70,7 +70,7 @@
 
             <div class="row">
 
-                <div class="btn-group-sm col-xs-12 text-right">
+                <div class="btn-group-sm col-xs-12">
                    <!-- <input type="submit" value="{{'SAVE_SOURCED'|translate}}" class="btn btn-primary" ng-if="!ap4RecCtrl.record"
                            ng-click="ap4RecCtrl.save()"/>-->
                     <input type="submit" ng-if="ap4RecCtrl.deleteBtn === true" value="{{'DELETE_SOURCED'|translate}}"

@@ -6,7 +6,8 @@
   "CONTACTREC.CONTACTRECFORM":"in the Company Representative details",
   "ADDRESSREC.ADDRESSRECFORM":"in the Address details",
   "COMPANY_FORM":"Company Enrolment Form",
-  "ROLEMISSING": "Record Role",
+  "ROLEMISSING": "Roles for this company",
+  "ROLEREPMISSING": "Roles for this company representative ",
   "IMPORTERIDVALID": "Please input importer ID for each importer"
 
 }

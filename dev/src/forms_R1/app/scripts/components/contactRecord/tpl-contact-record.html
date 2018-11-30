@@ -11,7 +11,6 @@
         <div>
             <div>
                 <h4>{{::'CONTACT_DETAILS'|translate}}&nbsp;{{::contactRec.recordIndex+1}}</h4>
-
             </div>
             <div class="row">
                 <cmp-contact-details contact-record="contactRec.contactModel" is-amend="contactRec.isEditable"
@@ -24,16 +23,18 @@
                 <cmp-address-role record="contactRec.contactModel" legend-text="CONTACT_ROLE_LEGEND"
                                   is-contact="contactRec.isContact" is-amend="contactRec.isEditable"
                                   on-update="contactRec.onContactRoleUpdate($event.roles)"
-                                  show-errors="contactRec.showErrors()"  update-error-summary="contactRec.updateErrorSummaryState()"
-                                  already-selected="contactRec.isOneSelected(roleName)"></cmp-address-role>
+                                  show-errors="contactRec.showErrors()"
+                                  update-error-summary="contactRec.updateErrorSummaryState()"
+                                  already-selected="contactRec.isOneSelected(roleName)">
+                </cmp-address-role>
 
             </div>
-            <div>
-                <div class="btn-group-sm col-xs-12 text-right">
-                    <button class="btn btn-primary" name="saveContact" id="saveContact"
+            <div  class="row">
+                <div class="btn-group-sm col-md-12">
+                    <button class="btn btn-primary mrgn-rght-sm" name="saveContact" id="saveContact"
                             ng-click="contactRec.updateContactModel2()">{{::'SAVE_REPRES' |translate}}
                     </button>
-                    <button class="btn btn-danger" name="deleteContact"
+                    <button class="btn btn-danger mrgn-rght-sm" name="deleteContact"
                             ng-click="contactRec.delete()">{{::'DELETE_REPRES'|translate}}
                     </button>
                     <button name="discardContact" class="btn btn-default"

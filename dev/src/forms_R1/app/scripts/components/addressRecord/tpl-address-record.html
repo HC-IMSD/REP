@@ -9,7 +9,7 @@
                                update-errors="addressRec.updateSummary"></cmp-error-summary>
 
             <div>
-                <h3>{{::'ADDR_DETAILS'|translate}}&nbsp;{{::addressRec.recordIndex+1}}</h3>
+                <h4>{{::'ADDR_DETAILS'|translate}}&nbsp;{{::addressRec.recordIndex+1}}</h4>
             </div>
             <div class="row">
                 <div class="form-group col-md-12"
@@ -17,14 +17,15 @@
                     <label for="{{::addressRec.companyNameId}}" class="required full-width">
                         <span class="field-name">{{::"COMPANYNAME" |translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                        <cmp-error-message field-name="addressRec.companyNameId" form-ref="addressRec.addressRecForm"
+                                           show-error="addressRec.showErrors()"
+                                           error-types="addressRec.requiredOnly">
+                        </cmp-error-message>
                         <input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
                                ng-model="addressRec.addressModel.companyName"
                                class="form-control full-width" maxlength="80" size="60"
                                ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isEditable"
                                required/>
-                        <cmp-error-message field-name="addressRec.companyNameId" form-ref="addressRec.addressRecForm"
-                                           show-error="addressRec.showErrors()"
-                                           error-types="addressRec.requiredOnly"></cmp-error-message>
 
                     </label>
                 </div>
@@ -69,25 +70,26 @@
                            ng-class="{'required':addressRec.isInternal}">
                         <span class="field-name">{{::"IMPORTERID" |translate}}</span>
                         <strong class="required" ng-show ="addressRec.isInternal"> {{::"REQUIRED" |translate}}</strong>
+                        <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
+                                           show-error="addressRec.showErrors()"
+                                           error-types="addressRec.length5Error"></cmp-error-message>
                         <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
                                ng-model="addressRec.addressModel.importerID"
                                class="form-control full-width" minlength="5" maxlength="6"
                                ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isInternal"
                                ng-required="addressRec.isInternal && addressRec.isImporter">
-                        <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
-                                           show-error="addressRec.showErrors()"
-                                           error-types="addressRec.length5Error"></cmp-error-message>
+
 
                     </label>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="btn-group-sm col-xs-12 text-right">
-                    <button class="btn btn-primary" name="saveAddress"
+                <div class="btn-group-sm col-md-12">
+                    <button class="btn btn-primary mrgn-rght-sm" name="saveAddress"
                             id="saveAddress" ng-click="addressRec.updateAddressModel2()">{{::'SAVE_ADDR'|translate}}
                     </button>
-                    <button class="btn btn-danger" name="deleteAddress" ng-click="addressRec.delete()">
+                    <button class="btn btn-danger mrgn-rght-sm" name="deleteAddress" ng-click="addressRec.delete()">
                         {{::'DELETE_ADDR'|translate}}
                     </button>
                     <button class="btn btn-default" name="discardAddressChanges"

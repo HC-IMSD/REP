@@ -2,7 +2,7 @@
     <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
         <thead>
         <tr>
-            <th aria-label="Expanded State" scope="col" style="color:transparent">e</th>
+            <th aria-label="Expanded State" scope="col" style="color:transparent"></th>
             <th scope="col" ng-repeat="heading in expandTblCtrl.columnDefinitions">{{::heading.label |translate}}</th>
             <!-- <th scope="col" ng-if="!expandTblCtrl.disableErrorCol">{{::'ERRORS'|translate}}</th>-->
         </tr>
@@ -23,9 +23,7 @@
                 <span ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
                 <span ng-if="def.isHtml" ng-bind-html="record[def.binding]"></span>
             </td>
-            <!--  <td ng-if="!expandTblCtrl.disableErrorCol" width="5%">
-
-              </td>-->
+            <!--  <td ng-if="!expandTblCtrl.disableErrorCol" width="5%"></td>-->
         </tr>
         <tr data-ng-show="!expandTblCtrl.dayDataCollapse[$index]" data-ng-repeat-end>
             <td colspan="{{::expandTblCtrl.numberCols}}">

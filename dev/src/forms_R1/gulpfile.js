@@ -114,47 +114,47 @@ var activityRootTitles_fr = {
 
 var companyRootTitles_en = {
     mainHeading: "Company Template: Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Company Template'
+    title: 'Company Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 var companyRootTitles_fr = {
     mainHeading: "fr_Company Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Company Template'
+    title: 'fr_Company Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 
 var transactionRootTitles_en = {
     mainHeading: "Regulatory Transaction Template: Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Transaction template'
+    title: 'Regulatory Transaction Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 var transactionRootTitles_fr = {
     mainHeading: "fr_Regulatory Transaction Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Transaction Template'
+    title: 'fr_Regulatory Transaction Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 
 var dossierRootTitles_en = {
     mainHeading: "Dossier Template: Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Dossier Template'
+    title: 'Dossier Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 
 var dossierRootTitles_fr = {
     mainHeading: "fr_Dossier Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Dossier Template'
+    title: 'fr_Dossier Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 
 var drugProductRootTitles_en = {
     mainHeading: "Product Information Template: Regulatory Enrolment Process (REP)",
-    title: 'Health Canada Product Information Template'
+    title: 'Product Information Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 
 var drugProductRootTitles_fr = {
     mainHeading: "fr_Product Information Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Health Canada Product Information Template'
+    title: 'fr_Product Information Template: Regulatory Enrolment Process - Canada.ca'
 
 };
 
@@ -386,7 +386,8 @@ var companyComponentFolders =
         componentFolders.importerProducts,
         componentFolders.dossierIdDetails,
         componentFolders.errorSummary,
-        componentFolders.errorMsg
+        componentFolders.errorMsg,
+        componentFolders.alertComp
     ];
 
 //Dossier Form Components
@@ -406,7 +407,8 @@ var dossierComponentFolders =
         componentFolders.applicationInfo,
         componentFolders.expandingTable,
         componentFolders.errorMsg,
-        componentFolders.errorSummary
+        componentFolders.errorSummary,
+        componentFolders.alertComp
     ];
 
 var drugProductComponentFolders =
@@ -428,7 +430,8 @@ var drugProductComponentFolders =
         componentFolders.fileIOComponentAndDep,
         componentFolders.expandingTable,
         componentFolders.errorMsg,
-        componentFolders.errorSummary
+        componentFolders.errorSummary,
+        componentFolders.alertComp
     ];
 
 

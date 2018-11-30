@@ -11,7 +11,7 @@
                             country-list="countryListCtrl.countryList" update-country-list="countryListCtrl.updateCountryList"></cmp-country-record>
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
-        <div class="btn-group-sm col-md-12 text-right">
+        <div class="btn-group-sm col-md-12">
             <button class="btn btn-primary" ng-click="countryListCtrl.addNew()" name="addCountry_{{::$id}}" id="addCountry_{{::$id}}"
                     ng-disabled="countryListCtrl.disableAddButton()">{{'ADD_A'|translate}}&nbsp;{{countryListCtrl.fieldLabel|translate}}
             </button>

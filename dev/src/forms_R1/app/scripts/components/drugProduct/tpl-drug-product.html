@@ -2,17 +2,22 @@
     <div translate-cloak="cloak-class">
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
+                <h2 class="panel-title col-md-8">{{::'LOAD_DRUGPROD'|translate}}</h2>
                 <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
-                            id="instructions-toggle" ng-click="drugProdCtrl.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span></button>
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
+                            class="btn-xs rep-help-button"
+                            id="instructions-toggle" ng-click="drugProdCtrl.addInstruct(0)">
+                        <span class="fa fa-question-circle fa-2x"></span>
+                        <span class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span>
+                    </button>
                 </div>
-                <h2 class="panel-title">{{::'LOAD_DRUGPROD'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[0]"
-                     class="alert-info" close="drugProdCtrl.closeAlert(0)">
+                <div>
+                    <cmp-alert  ui-state="drugProdCtrl.alerts[0]"
+                                msg="HELP_FILE_LOAD"
+                                update-state="drugProdCtrl.closeAlert(0)"
+                                type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!drugProdCtrl.isFrench()"
                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-file-en.html'">
@@ -21,6 +26,7 @@
                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-file-fr.html'">
                         </div>
                     </section>
+                    </cmp-alert>
                 </div>
 
                 <hpfb-file-select update-model-root="drugProdCtrl.showContent(fileContent)"
@@ -29,19 +35,25 @@
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
+                <h2 class="panel-title col-md-8">{{::'DRUG_PRODUCT'|translate}}</h2>
                 <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'PRODUCT_INFO_INSTRUCT'|translate}}" class="btn-xs rep-help-button"
-                            id="drugProduct-instructions-toggle" ng-click="drugProdCtrl.addInstruct(1)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'PRODUCT_INFO_INSTRUCT'|translate}}"</span>
+                    <button title="{{::'EXPAND'|translate}} {{::'PRODUCT_INFO_INSTRUCT'|translate}}"
+                            class="btn-xs rep-help-button"
+                            id="drugProduct-instructions-toggle"
+                            ng-click="drugProdCtrl.addInstruct(1)">
+                        <span class="fa fa-question-circle fa-2x"></span>
+                        <span class="wb-inv">{{::'PRODUCT_INFO_INSTRUCT'|translate}}</span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{::'DRUG_PRODUCT'|translate}}</h2>
             </header>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[1]"
-                             class="alert-info" close="drugProdCtrl.closeAlert(1)">
+                        <div>
+                            <cmp-alert  ui-state="drugProdCtrl.alerts[1]"
+                                        msg="PRODUCT_INFO_INSTRUCT"
+                                        update-state="drugProdCtrl.closeAlert(1)"
+                                        type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-en.html'">
@@ -50,6 +62,7 @@
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-fr.html'">
                                 </div>
                             </section>
+                                </cmp-alert>
                         </div>
                     </div>
                 </div>
@@ -66,19 +79,25 @@
                         <label for="{{::drugProdCtrl.compId}}" class="required">
                             <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <input type="text" class="form-control full-width" id="{{::drugProdCtrl.compId}}"
-                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5"
-                                   ng-model="drugProdCtrl.model.companyID"/>
                             <cmp-error-message field-name="drugProdCtrl.compId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.compId])"
-                                               error-types="drugProdCtrl.min5Error"></cmp-error-message>
+                                               error-types="drugProdCtrl.min5Error">
+                            </cmp-error-message>
+                            <input type="text" class="form-control full-width" id="{{::drugProdCtrl.compId}}"
+                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5"
+                                   ng-model="drugProdCtrl.model.companyID"/>
+
                         </label>
                     </div>
                     <div class="col-xs-4 form-group">
                         <label for="{{::drugProdCtrl.dossierId}}" class="required">
                             <span class="field-name">2.&nbsp;{{::'DOSSIER_ID' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="drugProdCtrl.dossierId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.dossierId])"
+                                               error-types="drugProdCtrl.min7Error"></cmp-error-message>
                             <div class="rep-input-group">
                                 <span class="input-group-addon">HC6-024-</span>
                                 <div ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
@@ -87,10 +106,7 @@
                                            size="6" ng-model="drugProdCtrl.model.dossierID" required/>
                                 </div>
                             </div>
-                            <cmp-error-message field-name="drugProdCtrl.dossierId"
-                                               form-ref="drugProdCtrl.drugProdForm"
-                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.dossierId])"
-                                               error-types="drugProdCtrl.min7Error"></cmp-error-message>
+
                         </label>
                     </div>
                 </div>
@@ -102,8 +118,10 @@
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <button title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
-                                    id="productName-instructions-toggle" ng-click="drugProdCtrl.addInstruct(8)"><span
-                                    class="fa fa-question-circle fa-2x"></span>
+                                    id="productName-instructions-toggle"
+                                    ng-click="drugProdCtrl.addInstruct(8)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'PROD_NAME_HELP'|translate}}</span>
                             </button>
                             <cmp-error-message field-name="drugProdCtrl.prodNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -112,8 +130,11 @@
                         </label>
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[8]"
-                                     class="alert-info" close="drugProdCtrl.closeAlert(8)">
+                                <div>
+                                    <cmp-alert  ui-state="drugProdCtrl.alerts[8]"
+                                                msg="PROD_NAME_HELP"
+                                                update-state="drugProdCtrl.closeAlert(8)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-product-name-en.html'">
@@ -122,6 +143,7 @@
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-product-name-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
@@ -138,8 +160,9 @@
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <button title="{{::'EXPAND'|translate}} {{::'PROPER_NAME_INSTRUCT'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
-                                    id="properName-instructions-toggle" ng-click="drugProdCtrl.addInstruct(9)"><span
-                                    class="fa fa-question-circle fa-2x"></span>
+                                    id="properName-instructions-toggle" ng-click="drugProdCtrl.addInstruct(9)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'PROPER_NAME_INSTRUCT'|translate}}</span>
                             </button>
                             <cmp-error-message field-name="drugProdCtrl.properNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -148,8 +171,11 @@
                         </label>
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[9]"
-                                     class="alert-info" close="drugProdCtrl.closeAlert(9)">
+                                <div>
+                                    <cmp-alert  ui-state="drugProdCtrl.alerts[9]"
+                                                msg="PROPER_NAME_INSTRUCT"
+                                                update-state="drugProdCtrl.closeAlert(9)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-proper-name-en.html'">
@@ -158,6 +184,7 @@
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-proper-name-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
@@ -172,15 +199,19 @@
                         <span class="field-name">5. {{::'ADDRESS_NOC'|translate}}</span>
                         <button title="{{::'EXPAND'|translate}} {{::'ADDR_INSTRUCT'|translate}}"
                                 class="btn rep-help-button-primary btn-xs"
-                                id="address-instructions-toggle" ng-click="drugProdCtrl.addInstruct(7)"><span
-                                class="fa fa-question-circle fa-2x"></span>
+                                id="address-instructions-toggle" ng-click="drugProdCtrl.addInstruct(7)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'ADDR_INSTRUCT'|translate}}</span>
                         </button>
                     </label>
                     <div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[7]"
-                                     class="alert-info" close="drugProdCtrl.closeAlert(7)">
+                                <div>
+                                    <cmp-alert  ui-state="drugProdCtrl.alerts[7]"
+                                                msg="ADDR_INSTRUCT"
+                                                update-state="drugProdCtrl.closeAlert(7)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-activity-address-sent-en.html'">
@@ -189,6 +220,7 @@
                                              ng-include="'app/scripts/templates/drug/tpl-activity-address-sent-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
@@ -224,7 +256,6 @@
                                                ng-model="drugProdCtrl.model.thisActivity"
                                                ng-change="drugProdCtrl.rolechecked()"/>
                                         <span>{{::"THIS_ACTIVITY"|translate}}</span>
-
                                     </label>
                                 </div>
                             </div>
@@ -245,20 +276,24 @@
                 </fieldset>
                 <section class="panel panel-default">
                     <header class="panel-heading clearfix">
+                        <h3 class="panel-title col-md-8">6. {{'IMPORTER'|translate}}</h3>
                         <div class="btn-group pull-right">
                             <button title="{{::'EXPAND'|translate}} {{::'IMPORTER_INSTRUCT'|translate}}"
                                     class="btn-xs rep-help-button-primary btn-xs"
-                                    id="importer-instructions-toggle" ng-click="drugProdCtrl.addInstruct(10)"><span
-                                    class="fa fa-question-circle fa-2x"></span>
+                                    id="importer-instructions-toggle" ng-click="drugProdCtrl.addInstruct(10)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'IMPORTER_INSTRUCT'|translate}}</span>
                             </button>
                         </div>
-                        <h3 class="panel-title">6. {{'IMPORTER'|translate}}</h3>
                     </header>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[10]"
-                                     class="alert-info" close="drugProdCtrl.closeAlert(10)">
+                                <div>
+                                    <cmp-alert  ui-state="drugProdCtrl.alerts[10]"
+                                                msg="IMPORTER_INSTRUCT"
+                                                update-state="drugProdCtrl.closeAlert(10)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-importer-en.html'">
@@ -267,6 +302,7 @@
                                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-importer-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
@@ -274,7 +310,9 @@
                             <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
                                             error-summary-update="drugProdCtrl.updateErrorSummary()"
                                             show-error-summary="drugProdCtrl.showSummary"
-                                            on-update="drugProdCtrl.updateImporterList(list)"></cmp-importer-list>
+                                            on-update="drugProdCtrl.updateImporterList(list)">
+
+                            </cmp-importer-list>
                         </div>
                     </div>
                 </section>
@@ -284,19 +322,22 @@
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
                             <span class="field-name">7.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="drug-use-instructions-toggle" ng-click="drugProdCtrl.addInstruct(3)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'DRUG_USE_INSTRUCT'|translate}}"</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="drug-use-instructions-toggle" ng-click="drugProdCtrl.addInstruct(3)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'DRUG_USE_INSTRUCT'|translate}}</span>
                             </button>
+                            <cmp-error-message field-name="drugProdCtrl.drugUseId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId])"
+                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                             <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
                                     ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
                                     ng-change="drugProdCtrl.drugUseUpdate()"
                                     ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.drugUseList track by use.id"
                                     required></select>
-                            <cmp-error-message field-name="drugProdCtrl.drugUseId"
-                                               form-ref="drugProdCtrl.drugProdForm"
-                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId])"
-                                               error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+
                         </label>
                     </div>
                 </div>
@@ -311,8 +352,13 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[3]"
-                             class="alert-info" close="drugProdCtrl.closeAlert(3)">
+                        <div>
+                            <cmp-alert  ui-state="drugProdCtrl.alerts[3]"
+                                        msg="DRUG_USE_INSTRUCT"
+                                        update-state="drugProdCtrl.closeAlert(3)"
+                                        type="alert-info">
+
+
                             <section aria-live="assertive">
                                 <div ng-if="!drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-drug-use-en.html'">
@@ -321,6 +367,7 @@
                                      ng-include="'app/scripts/templates/drug/tpl-drugProduct-drug-use-fr.html'">
                                 </div>
                             </section>
+                            </cmp-alert>
                         </div>
                     </div>
                 </div>
@@ -405,9 +452,12 @@
                         <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
                             <span class="field-name">9. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="prop-indication-instructions-toggle" ng-click="drugProdCtrl.addInstruct(4)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'PROP_INDI_INSTRUCT'|translate}}"</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="prop-indication-instructions-toggle"
+                                    ng-click="drugProdCtrl.addInstruct(4)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'PROP_INDI_INSTRUCT'|translate}}</span>
                             </button>
                             <cmp-error-message field-name="drugProdCtrl.propIndicationId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -416,8 +466,11 @@
                         </label>
                         <div class="row">
                             <div class="col-md-12">
-                                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[4]"
-                                     class="alert-info" close="drugProdCtrl.closeAlert(4)">
+                                <div>
+                                    <cmp-alert  ui-state="drugProdCtrl.alerts[4]"
+                                                msg="PROP_INDI_INSTRUCT"
+                                                update-state="drugProdCtrl.closeAlert(4)"
+                                                type="alert-info">
                                     <section aria-live="assertive">
                                         <div ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-indication-en.html'">
@@ -426,6 +479,7 @@
                                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-indication-fr.html'">
                                         </div>
                                     </section>
+                                    </cmp-alert>
                                 </div>
                             </div>
                         </div>
@@ -470,17 +524,23 @@
                     <div class="col-xs-4 form-group">
                         <label>
                             <span class="field-name">10. {{::'FORMULATION'|translate}}</span>
-                            <button title="{{::'EXPAND'|translate}} {{::'FORMULATION_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="formulation-instructions-toggle" ng-click="drugProdCtrl.addInstruct(5)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'FORMULATION_INSTRUCT'|translate}}"</span>
+                            <button title="{{::'EXPAND'|translate}} {{::'FORMULATION_INSTRUCT'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
+                                    id="formulation-instructions-toggle"
+                                    ng-click="drugProdCtrl.addInstruct(5)">
+                                <span class="fa fa-question-circle fa-2x"></span>
+                                <span class="wb-inv">{{::'FORMULATION_INSTRUCT'|translate}}</span>
                             </button>
                         </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[5]"
-                             class="alert-info" close="drugProdCtrl.closeAlert(5)">
+                        <div>
+                            <cmp-alert  ui-state="drugProdCtrl.alerts[5]"
+                                        msg="FORMULATION_INSTRUCT"
+                                        update-state="drugProdCtrl.closeAlert(5)"
+                                        type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-en.html'">
@@ -489,6 +549,7 @@
                                      ng-include="'app/scripts/templates/drug/tpl-drugProduct-formulation-fr.html'">
                                 </div>
                             </section>
+                            </cmp-alert>
                         </div>
                     </div>
                 </div>
@@ -503,27 +564,30 @@
             </div>
         </section>
         <div class="row">
-            <div class="form-group col-md-3">
-                <button class="btn btn-default btn-lg active" ng-click="drugProdCtrl.saveJson()"
+            <div class="form-group col-md-12">
+                <button class="btn btn-default btn-lg active mrgn-rght-sm" ng-click="drugProdCtrl.saveJson()"
                         ng-disabled="drugProdCtrl.disableJSONSave()">
                     {{::'SAVE_WORKING'|translate}}
                 </button>
-            </div>
-            <div class="form-group col-md-3">
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave"
                         ng-click="drugProdCtrl.saveXML()">{{drugProdCtrl.saveXMLLabel |translate}}
                 </button>
-                <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                        id="save-instructions-toggle" ng-click="drugProdCtrl.addInstruct(6)"><span
-                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SAVE_INSTRUCT'|translate}}"</span>
+                <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
+                        class="btn rep-help-button-primary btn-xs"
+                        id="save-instructions-toggle" ng-click="drugProdCtrl.addInstruct(6)">
+                        <span class="fa fa-question-circle fa-2x"></span>
+                        <span class="wb-inv">{{::'SAVE_INSTRUCT'|translate}}</span>
                 </button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-10">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="drugProdCtrl.alerts[6]"
-                     class="alert-info" close="drugProdCtrl.closeAlert(6)">
-                    <section aria-live="assertive">
+                <div>
+                    <cmp-alert  ui-state="drugProdCtrl.alerts[6]"
+                                msg="SAVE_INSTRUCT"
+                                update-state="drugProdCtrl.closeAlert(6)"
+                                type="alert-info">
+                        <section aria-live="assertive">
                         <div ng-if="!drugProdCtrl.isFrench()"
                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-save-en.html'">
                         </div>
@@ -531,6 +595,7 @@
                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-save-fr.html'">
                         </div>
                     </section>
+                    </cmp-alert>
                 </div>
             </div>
         </div>

@@ -5,13 +5,15 @@
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
             <button ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
                     class="btn-xs rep-help-button-primary"
-                    id="address-roles-instructions-toggle" ng-click="ar.addInstruct(0)"><span
-                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"</span>
+                    id="address-roles-instructions-toggle" ng-click="ar.addInstruct(0)">
+                <span class="fa fa-question-circle fa-2x"></span>
+                <span class="wb-inv">"{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"</span>
             </button>
             <button ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
                     class="btn-xs rep-help-button-primary"
-                    id="contact-roles-instructions-toggle" ng-click="ar.addInstruct(0)"><span
-                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
+                    id="contact-roles-instructions-toggle" ng-click="ar.addInstruct(0)">
+                <span class="fa fa-question-circle fa-2x"></span>
+                <span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
             </button>
             <input id="roleMissing_{{::$id}}" type="text" name="roleMissing_{{::$id}}" ng-show="false"
                    ng-model="ar.isSelected" required/>
@@ -22,8 +24,11 @@
             </strong>
         </label>
         <div ng-if="!ar.isContact" class="row col-md-12">
-            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ar.alerts[0]"
-                 class="alert-info" close="ar.closeAlert(0)">
+            <div>
+                <cmp-alert  ui-state="ar.alerts[0]"
+                            msg="ADDRESS_ROLE_INSTRUCT"
+                            update-state="ar.closeAlert(0)"
+                            type="alert-info">
                 <section aria-live="assertive">
                     <div ng-if="!ar.isFrench()"
                          ng-include="'app/scripts/templates/company/tpl-company-address-roles-en.html'">
@@ -32,11 +37,16 @@
                          ng-include="'app/scripts/templates/company/tpl-company-address-roles-fr.html'">
                     </div>
                 </section>
+                </cmp-alert>
+
             </div>
         </div>
         <div ng-if="ar.isContact" class="row col-md-12">
-            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="ar.alerts[0]"
-                 class="alert-info" close="ar.closeAlert(0)">
+            <div>
+                <cmp-alert  ui-state="ar.alerts[0]"
+                            msg="CONTACT_ROLE_INSTRUCT"
+                            update-state="ar.closeAlert(0)"
+                            type="alert-info">
                 <section aria-live="assertive">
                     <div ng-if="!ar.isFrench()"
                          ng-include="'app/scripts/templates/company/tpl-company-contact-roles-en.html'">
@@ -45,6 +55,7 @@
                          ng-include="'app/scripts/templates/company/tpl-company-contact-roles-fr.html'">
                     </div>
                 </section>
+                </cmp-alert>
             </div>
         </div>
         <div class="row">

@@ -13,13 +13,14 @@
                             <div class="col-xs-12 form-group">
                                 <label for="{{::schedACtrl.dinId}}">
                                     <span class="field-name">{{::'DIN_FULL'|translate}}</span>
-                                    <input type="text" class="form-control" id="{{::schedACtrl.dinId}}" name="{{::schedACtrl.dinId}}"
-                                           maxlength="8" size="8" only-digits ng-minlength="8"
-                                           ng-model="schedACtrl.model.drugIdNumber"/>
                                     <cmp-error-message field-name="schedACtrl.dinId"
                                                        form-ref="schedACtrl.schedAForm"
                                                        show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.dinId])"
                                                        error-types="schedACtrl.errorMinLength"></cmp-error-message>
+                                    <input type="text" class="form-control" id="{{::schedACtrl.dinId}}" name="{{::schedACtrl.dinId}}"
+                                           maxlength="8" size="8" only-digits ng-minlength="8"
+                                           ng-model="schedACtrl.model.drugIdNumber"/>
+
                                 </label>
                             </div>
                         </div>
@@ -31,12 +32,14 @@
                                         <span class=" field-name">{{::'SCHEDA_DISEASE'|translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <span>
-                 <input type="hidden" class="form-control" id="{{::schedACtrl.oneSchedId}}" name="{{::schedACtrl.oneSchedId}}"
-                        ng-model="schedACtrl.isClaim" aria-hidden="true" required/>
                                             <cmp-error-message field-name="schedACtrl.oneSchedId"
                                                                form-ref="schedACtrl.schedAForm"
                                                                show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.oneSchedId])"
                                                                error-types="schedACtrl.oneRequired"></cmp-error-message>
+                 <input type="hidden" class="form-control" id="{{::schedACtrl.oneSchedId}}"
+                        name="{{::schedACtrl.oneSchedId}}"
+                        ng-model="schedACtrl.isClaim" aria-hidden="true" required/>
+
                     </span></label>
                                     <div class="row checkbox">
                                         <div class="col-md-4">

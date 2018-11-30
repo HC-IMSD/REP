@@ -9,6 +9,10 @@
                     <label for="{{::roaRecCtrl.roaId}}" class="required">
                         <span class="field-name">{{'ROA_LBL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
+                        <cmp-error-message field-name="roaRecCtrl.roaId"
+                                           form-ref="roaRecCtrl.roaRecForm"
+                                           show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.roaId])"
+                                           error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
                         <ui-select ng-model="roaRecCtrl.model.roa" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"
                                    on-select="roaRecCtrl.roaChanged($item, $model)" ng-model-options="{ debounce: '0'}"
                                    class="rep-selectize-dropdown rep-selectize-font"
@@ -23,10 +27,7 @@
                                 <span ng-bind-html="roaValue[roaRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <cmp-error-message field-name="roaRecCtrl.roaId"
-                                           form-ref="roaRecCtrl.roaRecForm"
-                                           show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.roaId])"
-                                           error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
+
                     </label>
                 </div>
                 <div class="col-md-5" ng-if="roaRecCtrl.isRoaOther()"
@@ -34,13 +35,14 @@
                     <label for="{{::roaRecCtrl.unknownRoaId}}" class="required">
                         <span class="field-name">{{::'OTHER_ROA_DETAILS'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                        <input type="text" id="{{::roaRecCtrl.unknownRoaId}}" class="form-control"
-                               name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40"
-                               ng-model="roaRecCtrl.model.otherRoaDetails" required/>
                         <cmp-error-message field-name="roaRecCtrl.unknownRoaId"
                                            form-ref="roaRecCtrl.roaRecForm"
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.unknownRoaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
+                        <input type="text" id="{{::roaRecCtrl.unknownRoaId}}" class="form-control"
+                               name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40"
+                               ng-model="roaRecCtrl.model.otherRoaDetails" required/>
+
 
                     </label>
                 </div>

@@ -25,7 +25,8 @@
         'drugProductService',
         'ngSanitize',
         'errorSummaryModule',
-        'errorMessageModule'
+        'errorMessageModule',
+        'alertModule'
     ];
 
     angular

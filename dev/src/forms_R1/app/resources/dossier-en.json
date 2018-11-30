@@ -48,14 +48,14 @@
 	"ADD_CRP": "Add Canadian Reference Product",
 	"IS_CDN_REF": "Is there a Canadian Reference Product or Canadian Reference Biologic Drug for Biosimilars?",
 	"INGRED_MAT_NAME": "Ingredient or Material Name",
-	"HELP_DOSSIER": "Dossier Instructions",
+	"HELP_DOSSIER": "Dossier Information Instructions",
 	"HELP_thera": "Therapeutic Classification Instructions",
 	"HELP_REFPRODUCTS": "Reference Product Instructions",
 	"ADD_FORMULATION": "Add Formulation",
 	"SAVE_INSTRUCT": "Dossier File Save Instructions",
 	"DOSSIER_TYPE_HELP":"Dossier Type Instructions",
 	"REFPRODCTRL.PRODUCTDETAILSFORM": "in the Canadian Reference Product Record",
-	"CONTACTREC.CONTACTRECFORM": "in the REP contact record",
+	"CONTACTREC.CONTACTRECFORM": "in the regulatory enrolment process contact record",
 	"DOSSIER": "Dossier",
 	"FIELDID": "Dossier Id"
 }

@@ -9,6 +9,11 @@
                     <label for="{{::srcCountryRecCtrl.countryId}}" class="required">
                         <span class="field-name"> {{::'COUNTRY_NAME'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                        <cmp-error-message field-name="srcCountryRecCtrl.countryId"
+                                           form-ref="srcCountryRecCtrl.countryForm"
+                                           show-error="srcCountryRecCtrl.showError(srcCountryRecCtrl.countryForm[srcCountryRecCtrl.countryId])"
+                                           error-types="srcCountryRecCtrl.requiredOnly"></cmp-error-message>
+                    </label>
                         <ui-select ng-model="srcCountryRecCtrl.model.country" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}"
                                    ng-model-options="{ debounce: 0}"
                                    class="rep-selectize-dropdown" on-select="srcCountryRecCtrl.countryChanged($item, $model)" required
@@ -21,11 +26,7 @@
                                 <span ng-bind-html="countryRecord[srcCountryRecCtrl.lang] | highlight: $select.search"></span>
                             </ui-select-choices>
                         </ui-select>
-                        <cmp-error-message field-name="srcCountryRecCtrl.countryId"
-                                           form-ref="srcCountryRecCtrl.countryForm"
-                                           show-error="srcCountryRecCtrl.showError(srcCountryRecCtrl.countryForm[srcCountryRecCtrl.countryId])"
-                                           error-types="srcCountryRecCtrl.requiredOnly"></cmp-error-message>
-                    </label>
+
                 </div>
             </div>
             <div class="row">

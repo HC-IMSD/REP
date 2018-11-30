@@ -1,7 +1,9 @@
 {
-  "FOR_THE":"For the ",
+  "FOR_THE":"The ",
   "THERE_ARE_ERRORS":"There are errors",
-  "ERRORS_FOUND":"errors were found.",
+  "FORM_NOT_SAVED":"The form could not be saved because ",
+  "NOT_SAVED":" could not be saved because ",
+  "ERRORS_FOUND":" errors were found.",
   "ERROR_FOUND":"error was found.",
   "TYPE_REQUIRED":"This field is required.",
   "TYPE_EMAIL":"Please enter a valid email address.",

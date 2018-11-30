@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('addressRole', ['hpfbConstants'])
+        .module('addressRole', ['hpfbConstants',  'alertModule'])
 })();
 
 (function () {
@@ -42,7 +42,7 @@
         vm.isSelected = ""; //checkbox causes issues. Store in text
         vm.isEditable = true;
         vm.inUser = false;
-        vm.alerts = [false];
+        vm.alerts = [false, false];
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
         vm.roleModel = {

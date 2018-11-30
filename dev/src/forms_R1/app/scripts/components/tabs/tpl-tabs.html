@@ -10,15 +10,19 @@
         </li>
         <li>
             <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                    id="ah-sourced-instructions-toggle" ng-click="tabsCtrl.addInstruct(0)"><span
-                    class="fa fa-question-circle fa-2x rep-pad-top-10"></span><span class="wb-inv">"{{::'AH_SOURCED_INSTRUCT'|translate}}"</span>
+                    id="ah-sourced-instructions-toggle" ng-click="tabsCtrl.addInstruct(0)">
+                <span class="fa fa-question-circle fa-2x rep-pad-top-10"></span>
+                <span class="wb-inv">{{::'AH_SOURCED_INSTRUCT'|translate}}</span>
             </button>
         </li>
     </ul>
     <div class="row">
         <div class="col-md-12">
-            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="tabsCtrl.alerts[0]"
-                 class="alert-info" close="tabsCtrl.closeAlert(0)">
+            <div>
+                <cmp-alert  ui-state="tabsCtrl.alerts[0]"
+                            msg="AH_SOURCED_INSTRUCT"
+                            update-state="tabsCtrl.closeAlert(0)"
+                            type="alert-info">
                 <section aria-live="assertive">
                     <div ng-if="!tabsCtrl.isFrench()"
                          ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-add-sourced-en.html'">
@@ -27,6 +31,7 @@
                          ng-include="'app/scripts/templates/drug/tpl-drugProduct-add-sourced-fr.html'">
                     </div>
                 </section>
+                </cmp-alert>
             </div>
         </div>
     </div>

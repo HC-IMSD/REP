@@ -78,14 +78,16 @@
                                 <label for="{{::main.companyId}}" class="required">
                                     <span class="field-name">{{::'COMPANY_ID' |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="main.companyId"
+                                                       form-ref="main.activityEnrolForm"
+                                                       show-error="main.showError(main.activityEnrolForm[main.companyId])"
+                                                       error-types="main.length5Error">
+                                    </cmp-error-message>
                                     <input type="text" class="form-control" id="{{::main.companyId}}"
                                            minlength="5" maxlength="6" name="{{::main.companyId}}"
                                            ng-model="main.activityRoot.companyId"
                                            ng-change="main.updateErrorSummaryState()" required/>
-                                    <cmp-error-message field-name="main.companyId"
-                                                       form-ref="main.activityEnrolForm"
-                                                       show-error="main.showError(main.activityEnrolForm[main.companyId])"
-                                                       error-types="main.length5Error"></cmp-error-message>
+
                                 </label>
                             </div>
                         </div>
@@ -93,7 +95,11 @@
                             <label for="{{::main.dossierId}}" class="required">
                                 <span class="field-name">{{::'DOSSIER_ID'|translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-
+                                <cmp-error-message field-name="main.dossierId"
+                                                   form-ref="main.activityEnrolForm"
+                                                   show-error="main.showError(main.activityEnrolForm[main.dossierId])"
+                                                   error-types="main.length7Error">
+                                </cmp-error-message>
                                 <div class="rep-input-group">
                                     <span class="input-group-addon">HC6-024-</span>
                                     <div ng-class="{'has-error':main.activityEnrolForm[main.dossierId].$invalid}">
@@ -104,10 +110,7 @@
                                                required/>
                                     </div>
                                 </div>
-                                <cmp-error-message field-name="main.dossierId"
-                                                   form-ref="main.activityEnrolForm"
-                                                   show-error="main.showError(main.activityEnrolForm[main.dossierId])"
-                                                   error-types="main.length7Error"></cmp-error-message>
+
                             </label>
                         </div>
                         <div class="col-xs-4"
@@ -116,14 +119,15 @@
                                 <label for="{{::main.activityLeadId}}" class="required">
                                     <span class="field-name"> {{::'ACTIVITY_LEAD' |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="main.activityLeadId"
+                                                       form-ref="main.activityEnrolForm"
+                                                       show-error="main.showError(main.activityEnrolForm[main.activityLeadId])"
+                                                       error-types="main.requiredOnly">
+                                    </cmp-error-message>
                                     <select class="form-control" id="{{::main.activityLeadId}}"
                                             ng-options="lead |translate for lead in main.leadList | orderByTranslated"
                                             name="{{::main.activityLeadId}}" ng-change="main.selectActivityList()"
                                             ng-model="main.activityRoot.regActivityLead" required></select>
-                                    <cmp-error-message field-name="main.activityLeadId"
-                                                       form-ref="main.activityEnrolForm"
-                                                       show-error="main.showError(main.activityEnrolForm[main.activityLeadId])"
-                                                       error-types="main.requiredOnly"></cmp-error-message>
                                 </label>
                             </div>
                         </div>
@@ -134,6 +138,10 @@
                                 <label for="{{::main.activityTypeId}}" class="required full-width">
                                     <span class="field-name">{{::'ACTIVITY_TYPE' |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="main.activityTypeId"
+                                                       form-ref="main.activityEnrolForm"
+                                                       show-error="main.showError(main.activityEnrolForm[main.activityTypeId])"
+                                                       error-types="main.requiredOnly"></cmp-error-message>
                                     <div class="rep-pad-top">
                                         <div class="rep-error"
                                              ng-class="{'has-error':main.activityEnrolForm[main.activityTypeId].$invalid}">
@@ -154,10 +162,7 @@
                                             </ui-select>
                                         </div>
                                     </div>
-                                    <cmp-error-message field-name="main.activityTypeId"
-                                                       form-ref="main.activityEnrolForm"
-                                                       show-error="main.showError(main.activityEnrolForm[main.activityTypeId])"
-                                                       error-types="main.requiredOnly"></cmp-error-message>
+
                                 </label>
                             </div>
                         </div>
@@ -182,15 +187,16 @@
                             <label for="{{::main.reasonId}}" class="rep-margin-top required">
                                 <span class="field-name">{{::"REASON_FILE"|translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                <cmp-error-message field-name="main.reasonId"
+                                                   form-ref="main.activityEnrolForm"
+                                                   show-error="main.showError(main.activityEnrolForm[main.reasonId])"
+                                                   error-types="main.requiredOnly"></cmp-error-message>
                                 <button title="{{::'EXPAND'|translate}} {{::'REASON_INSTRUCT'|translate}}"
                                         class="btn rep-help-button-primary btn-xs"
                                         id="reason-instructions-toggle" ng-click="main.addInstruct(2)"><span
                                         class="fa fa-question-circle fa-2x"></span>
                                 </button>
-                                <cmp-error-message field-name="main.reasonId"
-                                                   form-ref="main.activityEnrolForm"
-                                                   show-error="main.showError(main.activityEnrolForm[main.reasonId])"
-                                                   error-types="main.requiredOnly"></cmp-error-message>
+
                             </label>
                         </div>
                     </div>
@@ -497,15 +503,16 @@
                             <label for="{{::main.importerIden}}" class="required">
                                 <span class="field-name">{{::"IMPORTER_ID" |translate}}</span>
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                <cmp-error-message field-name="main.importerIden"
+                                                   form-ref="main.activityEnrolForm"
+                                                   show-error="main.showError(main.activityEnrolForm[main.importerIden])"
+                                                   error-types="main.length6Error"></cmp-error-message>
                                 <input type="text" id="{{::main.importerIden}}" name="{{::main.importerIden}}"
                                        ng-model="main.activityRoot.importerId"
                                        ng-change="main.updateErrorSummaryState()"
                                        class="form-control full-width" minlength="6" maxlength="6"
                                        ng-required="main.activityRoot.importer"/>
-                                <cmp-error-message field-name="main.importerIden"
-                                                   form-ref="main.activityEnrolForm"
-                                                   show-error="main.showError(main.activityEnrolForm[main.importerIden])"
-                                                   error-types="main.length6Error"></cmp-error-message>
+
                             </label>
                         </div>
                     </div>

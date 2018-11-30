@@ -15,6 +15,7 @@
             'hpfbConstants',
             'ui.bootstrap',
             'errorSummaryModule',
+            'alertModule',
             'focus-if'
         ])
 })();

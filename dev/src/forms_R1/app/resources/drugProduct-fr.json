@@ -26,5 +26,13 @@
   "MANU_SPON":"fr_Manufacturer/Sponsor",
   "REGU_ANNU":"fr_Regulatory Mailing/Annual Contact",
   "CAN_IMP":"fr_Canadian Importer",
-  "THIS_ACTIVITY": "fr_Contact for this Regulatory Activity"
+  "THIS_ACTIVITY": "fr_Contact for this Regulatory Activity",
+  "HOSPITAL":"Hospital",
+  "FOOD_PROC":"Food Processing",
+  "MEDICAL_INST":"Medical Instruments",
+  "DOMESTIC":"Domestic",
+  "BARN":"Barn",
+  "INS_INDUS":"Institutional/Industrial",
+  "CONTACT_LENS":"Contact Lens",
+  "SAVE_INSTRUCT": "Product Information File Save Instructions"
 }

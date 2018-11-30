@@ -2,17 +2,23 @@
     <div translate-cloak="cloak-class">
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
+                <h2 class="panel-title col-md-8">{{::'LOAD_DOSSIER'|translate}}</h2>
                 <div class="btn-group pull-right">
-                    <button title="{{::'HELP_FILE_LOAD'|translate}}" class="btn-xs rep-help-button"
-                            id="instructions-toggle" ng-click="dos.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span></button>
+                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
+                            class="btn-xs rep-help-button"
+                            id="instructions-toggle" ng-click="dos.addInstruct(0)">
+                           <span class="fa fa-question-circle fa-2x"></span>
+                           <span class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span>
+                    </button>
                 </div>
-                <h2 class="panel-title">{{::'LOAD_DOSSIER'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[0]"
-                     class="alert-info" close="dos.closeAlert(0)">
+                <div>
+                    <cmp-alert  ui-state="dos.alerts[0]"
+                                msg="HELP_FILE_LOAD"
+                                update-state="dos.closeAlert(0)"
+                                type="alert-info">
+
                     <section aria-live="assertive">
                         <div ng-if="!dos.isFrench()"
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-file-en.html'">
@@ -21,6 +27,7 @@
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-file-fr.html'">
                         </div>
                     </section>
+                        </cmp-alert>
                 </div>
 
                 <hpfb-file-select update-model-root="dos.showContent(fileContent)"
@@ -29,17 +36,22 @@
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
+                <h2 class="panel-title col-md-8">{{::'Dossier Information'|translate}}</h2>
                 <div class="btn-group pull-right">
-                    <button title="{{::'HELP_DOSSIER'|translate}}" class="btn-xs rep-help-button"
-                            id="dossier-instructions-toggle" ng-click="dos.addInstruct(1)"><span
-                            class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">"{{::'HELP_DOSSIER'|translate}}"</span></button>
+                    <button title="{{::'EXPAND'|translate}}  {{::'HELP_DOSSIER'|translate}}"
+                            class="btn-xs rep-help-button"
+                            id="dossier-instructions-toggle" ng-click="dos.addInstruct(1)">
+                        <span class="fa fa-question-circle fa-2x"></span>
+                        <span class="wb-inv">{{::'HELP_DOSSIER'|translate}}</span>
+                    </button>
                 </div>
-                <h2 class="panel-title">{{::'Dossier Information'|translate}}</h2>
             </header>
             <div class="panel-body">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[1]"
-                     class="alert-info" close="dos.closeAlert(1)">
+                <div>
+                    <cmp-alert  ui-state="dos.alerts[1]"
+                                msg="HELP_DOSSIER"
+                                update-state="dos.closeAlert(1)"
+                                type="alert-info">
                     <section aria-live="assertive">
                         <div ng-if="!dos.isFrench()"
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-enrolment-en.html'">
@@ -48,6 +60,7 @@
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-enrolment-fr.html'">
                         </div>
                     </section>
+                    </cmp-alert>
                 </div>
                 <div>
                     <cmp-application-info record="dos.dossierModel" user-type="dos.userType"
@@ -69,39 +82,46 @@
                         <label for="{{::dos.typeId}}" class="required">
                             <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <button title="{{::'DOSSIER_TYPE_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <button title="{{::'EXPAND'|translate}} {{::'DOSSIER_TYPE_HELP'|translate}}"
+                                    class="btn rep-help-button-primary btn-xs"
                                     id="type-instructions-toggle" ng-click="dos.addInstruct(10)"><span
                                     class="fa fa-question-circle fa-2x"></span><span
                                     class="wb-inv">{{::'DOSSIER_TYPE_HELP'|translate}}</span>
                             </button>
-                            <select class="form-control full-width" id="{{::dos.typeId}}"
-                                    name="{{::dos.typeId}}" required ng-model="dos.dossierModel.dossierType"
-                                    ng-options="val |translate for val in  dos.formTypeList">
-                            </select>
                             <cmp-error-message field-name="dos.typeId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.typeId])"
                                                error-types="dos.requiredOnly"></cmp-error-message>
+                            <select class="form-control full-width" id="{{::dos.typeId}}"
+                                    name="{{::dos.typeId}}" required ng-model="dos.dossierModel.dossierType"
+                                    ng-options="val |translate for val in  dos.formTypeList">
+                            </select>
+
                         </label>
                     </div>
-                        <div class="col-xs-4 form-group"
+                    <div class="col-xs-4 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.compId].$invalid}">
                         <label for="{{::dos.compId}}" class="required">
                             <span class="field-name">{{::'COMPANY_ID' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <input type="text" class="form-control full-width" id="{{::dos.compId}}"
-                                   name="{{::dos.compId}}" required maxlength="6" minlength="5"
-                                   ng-model="dos.dossierModel.companyID"/>
                             <cmp-error-message field-name="dos.compId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.compId])"
                                                error-types="dos.min5Error"></cmp-error-message>
+                            <input type="text" class="form-control full-width" id="{{::dos.compId}}"
+                                   name="{{::dos.compId}}" required maxlength="6" minlength="5"
+                                   ng-model="dos.dossierModel.companyID"/>
+
                         </label>
                     </div>
                     </div>
                     <div class="row">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[10]"
-                         class="alert-info" close="dos.closeAlert(10)">
+                    <div>
+                        <cmp-alert  ui-state="dos.alerts[10]"
+                                    msg="DOSSIER_TYPE_HELP"
+                                    update-state="dos.closeAlert(10)"
+                                    type="alert-info">
+
                         <section aria-live="assertive">
                             <div ng-if="!dos.isFrench()"
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-type-en.html'">
@@ -110,35 +130,10 @@
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-type-fr.html'">
                             </div>
                         </section>
+                        </cmp-alert>
                     </div>
                 </div>
                 </div>
-                <!--Matrix v2.2
-                <div class="row margin-bottom-small">
-                    <div class="col-xs-12 form-group"
-                         ng-class="{'has-error':dos.dossierForm[dos.thirdId].$invalid}">
-                        <label for="{{::dos.thirdId}}" class="required">
-                            <span class="field-name">{{::'SIGNED_THIRD'|translate}}</span>
-                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <select name="{{::dos.thirdId}}" class="form-control"
-                                    ng-model="dos.dossierModel.drugProduct.thirdPartySigned"
-                                    id="{{::dos.thirdId}}" ng-options="val |translate for val in  dos.yesNoList"
-                                    required></select>
-                            <cmp-error-message field-name="dos.thirdId"
-                                               form-ref="dos.dossierForm"
-                                               show-error="dos.showError(dos.dossierForm[dos.thirdId])"
-                                               error-types="dos.requiredOnly"></cmp-error-message>
-                        </label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div ng-if="dos.thirdPartySignedChanged()" class="alert alert-info"
-                         role="alert"
-                         aria-live="polite">
-                        {{::"INCLUDE_AUTH"|translate}}
-                    </div>
-                </div>
-                -->
                 <div class="row">
                     <div class="col-xs-12 form-group"
                          ng-class="{'has-error':dos.dossierForm[dos.prodNameId].$invalid}">
@@ -146,23 +141,29 @@
                                 <span class="field-name">{{::'PROD_NAME' |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             </label>
-                        <button title="{{::'PROD_NAME_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
+                        <button title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
+                                class="btn rep-help-button-primary btn-xs"
                                 id="name-instructions-toggle" ng-click="dos.addInstruct(7)"><span
                                 class="fa fa-question-circle fa-2x"></span><span
                                 class="wb-inv">{{::'PROD_NAME_HELP'|translate}}</span></button>
-                        <textarea type="text" class="form-control full-width" id="{{::dos.prodNameId}}" rows="2"
-                                  name="{{::dos.prodNameId}}" required="true"
-                                  data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase()"
-                                  maxlength="200" ng-model="dos.dossierModel.productName"></textarea>
                         <cmp-error-message field-name="dos.prodNameId"
                                            form-ref="dos.dossierForm"
                                            show-error="dos.showError(dos.dossierForm[dos.prodNameId])"
                                            error-types="dos.requiredOnly"></cmp-error-message>
+                        <textarea type="text" class="form-control full-width" id="{{::dos.prodNameId}}" rows="2"
+                                  name="{{::dos.prodNameId}}" required="true"
+                                  data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase()"
+                                  maxlength="200" ng-model="dos.dossierModel.productName"></textarea>
+
                     </div>
                 </div>
                 <div class="row">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[7]"
-                         class="alert-info" close="dos.closeAlert(7)">
+                    <div>
+                        <cmp-alert  ui-state="dos.alerts[7]"
+                                    msg="PROD_NAME_HELP"
+                                    update-state="dos.closeAlert(7)"
+                                    type="alert-info">
+
                         <section aria-live="assertive">
                             <div ng-if="!dos.isFrench()"
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-productName-en.html'">
@@ -171,6 +172,7 @@
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-productName-fr.html'">
                             </div>
                         </section>
+                        </cmp-alert>
                     </div>
                 </div>
                 <div class="row">
@@ -180,23 +182,30 @@
                             <span class="field-name">{{::'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         </label>
-                        <button title="{{::'PROP_NAME_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                id="pname-instructions-toggle" ng-click="dos.addInstruct(8)"><span
-                                class="fa fa-question-circle fa-2x"></span><span
-                                class="wb-inv">{{::'PROP_NAME_HELP'|translate}}</span></button>
-                        <textarea type="text" class="form-control full-width" id="{{::dos.properNameId}}" name="{{::dos.properNameId}}"
-                                  required ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
-                                  data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase()">
-                            </textarea>
+                        <button title="{{::'EXPAND'|translate}} {{::'PROP_NAME_HELP'|translate}}"
+                                class="btn rep-help-button-primary btn-xs"
+                                id="pname-instructions-toggle" ng-click="dos.addInstruct(8)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'PROP_NAME_HELP'|translate}}</span>
+                        </button>
                         <cmp-error-message field-name="dos.properNameId"
                                            form-ref="dos.dossierForm"
                                            show-error="dos.showError(dos.dossierForm[dos.properNameId])"
                                            error-types="dos.requiredOnly"></cmp-error-message>
+                        <textarea type="text" class="form-control full-width" id="{{::dos.properNameId}}" name="{{::dos.properNameId}}"
+                                  required ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
+                                  data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase()">
+                            </textarea>
+
                     </div>
                 </div>
                 <div class="row">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[8]"
-                         class="alert-info" close="dos.closeAlert(8)">
+                    <div>
+                        <cmp-alert  ui-state="dos.alerts[8]"
+                                    msg="PROP_NAME_HELP"
+                                    update-state="dos.closeAlert(8)"
+                                    type="alert-info">
+
                         <section aria-live="assertive">
                             <div ng-if="!dos.isFrench()"
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-properName-en.html'">
@@ -205,27 +214,24 @@
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-properName-fr.html'">
                             </div>
                         </section>
+                        </cmp-alert>
                     </div>
                 </div>
                 <div class="row">
-
                     <div class="col-xs-12 form-group" ng-class="{'has-error':dos.dossierForm[dos.drugUseId].$invalid}">
                         <label for="{{::dos.drugUseId}}" class="required">
                             <span class="field-name">{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <select name="{{::dos.drugUseId}}" class="form-control"
-                                    ng-model="dos.dossierModel.drugProduct.drugUse" id="{{::dos.drugUseId}}"
-                                    ng-options="use[dos.lang] for use in  dos.drugUseList track by use.id"
-                                    required></select>
                             <cmp-error-message field-name="dos.drugUseId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.drugUseId])"
                                                error-types="dos.requiredOnly"></cmp-error-message>
-                        </label>
+                            <select name="{{::dos.drugUseId}}" class="form-control"
+                                    ng-model="dos.dossierModel.drugProduct.drugUse" id="{{::dos.drugUseId}}"
+                                    ng-options="use[dos.lang] for use in  dos.drugUseList track by use.id"
+                                    required></select>
 
-                        <!-- <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
-                                       show-list-errors="dos.showErrors()"
-                                       parent-dirty="dos.dossierForm.$dirty"></cmp-drug-use>-->
+                        </label>
                     </div>
                 </div>
                 <div class="row">
@@ -234,21 +240,27 @@
                             <span class="field-name">{{::'RELATED_INFO'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         </label>
-                        <button title="{{::'RELATED_INFO_HELP'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                        id="related-instructions-toggle" ng-click="dos.addInstruct(9)"><span
-                            class="fa fa-question-circle fa-2x"></span><span
-                            class="wb-inv">{{::'RELATED_INFO_HELP'|translate}}</span></button>
-                        <textarea class="form-control full-width" id="{{::dos.relatedInfoId}}" name="{{::dos.relatedInfoId}}"
-                                  ng-model="dos.dossierModel.relatedInfo" maxlength="256" rows="3" required></textarea>
+                        <button title="{{::'EXPAND'|translate}} {{::'RELATED_INFO_HELP'|translate}}"
+                                class="btn rep-help-button-primary btn-xs"
+                                id="related-instructions-toggle" ng-click="dos.addInstruct(9)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'RELATED_INFO_HELP'|translate}}</span></button>
                         <cmp-error-message field-name="dos.relatedInfoId"
                                            form-ref="dos.dossierForm"
                                            show-error="dos.showError(dos.dossierForm[dos.relatedInfoId])"
                                            error-types="dos.requiredOnly"></cmp-error-message>
+                        <textarea class="form-control full-width" id="{{::dos.relatedInfoId}}" name="{{::dos.relatedInfoId}}"
+                                  ng-model="dos.dossierModel.relatedInfo" maxlength="256" rows="3" required></textarea>
+
                     </div>
                 </div>
                 <div class="row">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[9]"
-                         class="alert-info" close="dos.closeAlert(9)">
+                    <div>
+                        <cmp-alert  ui-state="dos.alerts[9]"
+                                    msg="RELATED_INFO_HELP"
+                                    update-state="dos.closeAlert(9)"
+                                    type="alert-info">
+
                         <section aria-live="assertive">
                             <div ng-if="!dos.isFrench()"
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-relatedInformation-en.html'">
@@ -257,24 +269,29 @@
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-properName-fr.html'">
                             </div>
                         </section>
+                        </cmp-alert>
                     </div>
                 </div>
-
-                <div class="row">
+                <div>
                     <section class="panel panel-default">
                         <header class="panel-heading clearfix">
+                            <h3 class="panel-title col-md-8">{{::'THERA_CLASS'|translate}}</h3>
                             <div class="btn-group pull-right">
-                                <button title="{{::'HELP_thera'|translate}}"
-                                        class="btn rep-help-button-primary btn-xs"
-                                        id="thera-instructions-toggle" ng-click="dos.addInstruct(2)"><span
-                                        class="fa fa-question-circle fa-2x"></span><span
-                                        class="wb-inv">"{{::'HELP_THERA'|translate}}"</span></button>
+                                <button title="{{::'EXPAND'|translate}} {{::'HELP_thera'|translate}}"
+                                        class="btn-xs rep-help-button-primary"
+                                        id="thera-instructions-toggle" ng-click="dos.addInstruct(2)">
+                                        <span class="fa fa-question-circle fa-2x"></span>
+                                        <span class="wb-inv">{{::'HELP_thera'|translate}}</span>
+                                </button>
                             </div>
-                            <h3 class="panel-title">{{::'THERA_CLASS'|translate}}</h3>
                         </header>
                         <div class="panel-body">
-                            <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[2]"
-                                 class="alert-info" close="dos.closeAlert(2)">
+                            <div>
+                                <cmp-alert  ui-state="dos.alerts[2]"
+                                            msg="HELP_thera"
+                                            update-state="dos.closeAlert(2)"
+                                            type="alert-info">
+
                                 <section aria-live="assertive">
                                     <div ng-if="!dos.isFrench()"
                                          ng-include="'app/scripts/templates/dossier/tpl-dossier-thera-en.html'">
@@ -283,44 +300,47 @@
                                          ng-include="'app/scripts/templates/dossier/tpl-dossier-thera-fr.html'">
                                     </div>
                                 </section>
+                                </cmp-alert>
+
                             </div>
-                         <!--   <input type="text" required ng-show="false" name="{{::dos.noTheraId}}" id="{{::dos.noTheraId}}"
-                                   aria-hidden="true"
-                                   data-ng-model="dos.noThera"/>-->
                             <cmp-thera-list records="dos.dossierModel.drugProduct.therapeutic"
                                             show-errors="dos.showErrors()"></cmp-thera-list>
                         </div>
                     </section>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 form-group" ng-class="{'has-error':dos.dossierForm[{{::dos.isRefId}}].$invalid}">
-                        <label for="{{::dos.isRefId}}" class="required">
+                    <div class="form-group col-md-12" ng-class="{'has-error':dos.dossierForm[dos.isRefId].$invalid}">
+                        <label for="{{::dos.isRefId}}" class="required full-width">
                             <span class="field-name">{{::'IS_CDN_REF'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <button title="{{::'HELP_REFPRODUCTS'|translate}}"
+                            <button title="{{::'EXPAND'|translate}} {{::'HELP_REFPRODUCTS'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
-                                    id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)"><span
-                                    class="fa fa-question-circle fa-2x"></span><span
-                                    class="wb-inv">"{{::'HELP_REFPRODUCTS'|translate}}"</span></button>
-                            <select class="form-control" required name="{{::dos.isRefId}}" id="{{::dos.isRefId}}"
-                                    ng-model="dos.dossierModel.isRefProduct"
-                                    ng-options="val |translate for val in  dos.yesNoList">
-                            </select>
-
+                                    id="repProducts-instructions-toggle" ng-click="dos.addInstruct(3)">
+                                    <span class="fa fa-question-circle fa-2x"></span>
+                                    <span class="wb-inv">{{::'HELP_REFPRODUCTS'|translate}}</span>
+                            </button>
                             <cmp-error-message field-name="dos.isRefId"
                                                form-ref="dos.dossierForm"
                                                show-error="dos.showError(dos.dossierForm[dos.isRefId])"
-                                               error-types="dos.requiredOnly"></cmp-error-message>
+                                               error-types="dos.requiredOnly">
+                            </cmp-error-message>
+                            <select name="{{::dos.isRefId}}" id="{{::dos.isRefId}}"
+                                    ng-model="dos.dossierModel.isRefProduct"
+                                    class="form-control"
+                                    ng-options="choice |translate for choice in dos.yesNoList"
+                                    required>
+                            </select>
 
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                </div>
-                <div class="row">
                     <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[3]"
-                             class="alert-info" close="dos.closeAlert(3)">
+                        <div>
+                            <cmp-alert  ui-state="dos.alerts[3]"
+                                        msg="HELP_REFPRODUCTS"
+                                        update-state="dos.closeAlert(3)"
+                                        type="alert-info">
                             <section aria-live="assertive">
                                 <div ng-if="!dos.isFrench()"
                                      ng-include="'app/scripts/templates/dossier/tpl-dossier-ref-product-en.html'">
@@ -329,12 +349,11 @@
                                      ng-include="'app/scripts/templates/dossier/tpl-dossier-ref-product-fr.html'">
                                 </div>
                             </section>
+                            </cmp-alert>
                         </div>
                     </div>
                 </div>
                 <div class="row" ng-if="dos.isRefProduct()" name="refProductRoot">
-                  <!--  <input type="hidden"  name="{{::dos.oneCdnRefId}}" id="{{::dos.oneCdnRefId}}"
-                           ng-model="dos.oneRefSelected" required/>-->
                     <section class="panel panel-default">
                         <header class="panel-heading">
                             <h3 class="panel-title">{{::'CAN_REF_PRODUCT'|translate}}</h3>
@@ -345,12 +364,13 @@
                                     <label for="{{::dos.brandId}}" class="required"><span
                                             class="field-name">{{::'BRAND_NAME'|translate}}</span>
                                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                        <cmp-error-message field-name="dos.brandId" form-ref="dos.dossierForm"
+                                                           show-error="dos.showError(dos.dossierForm[dos.brandId])"
+                                                           error-types="dos.requiredOnly">
+                                        </cmp-error-message>
                                         <input type="text" id="{{::dos.brandId}}" data-ng-model="dos.dossierModel.drugProduct.canRefProduct.brandName"
                                                class="form-control full-width" name="{{::dos.brandId}}" required maxlength="60"
                                                size="60"/>
-                                        <cmp-error-message field-name="dos.brandId" form-ref="dos.dossierForm"
-                                                           show-error="dos.showError(dos.dossierForm[dos.brandId])"
-                                                           error-types="dos.requiredOnly"></cmp-error-message>
                                     </label>
                                 </div>
                             </div>
@@ -361,12 +381,14 @@
                                 <label for="{{::dos.companyId}}" class="required"><span
                                         class="field-name">{{::'COMPANY_NOABBREV'|translate}}</span>
                                     <strong class="required">{{::"REQUIRED" |translate}}</strong></label>
-                                <input type="text" id="{{::dos.companyId}}" data-ng-model="dos.dossierModel.drugProduct.canRefProduct.companyName"
+                                    <cmp-error-message field-name="dos.companyId" form-ref="dos.dossierForm"
+                                                       show-error="dos.showError(dos.dossierForm[dos.companyId])"
+                                                       error-types="dos.requiredOnly">
+                                    </cmp-error-message>
+                                    <input type="text" id="{{::dos.companyId}}" data-ng-model="dos.dossierModel.drugProduct.canRefProduct.companyName"
                                        class="form-control" name="{{::dos.companyId}}" required maxlength="80"
                                        size="80"/>
-                                <cmp-error-message field-name="dos.companyId" form-ref="dos.dossierForm"
-                                                   show-error="dos.showError(dos.dossierForm[dos.companyId])"
-                                                   error-types="dos.requiredOnly"></cmp-error-message>
+
                                 </div>
                             </div>
                         </div>
@@ -374,119 +396,26 @@
                 </div>
             </div>
         </section>
-     <!--   <section class="panel panel-primary mrgn-tp-lg">
-            <header class="panel-heading clearfix">
-                <div class="btn-group pull-right">
-                    <button title="{{::'HELP_DRUG_PRODUCT'|translate}}" class="btn-xs rep-help-button"
-                            id="drugProduct-instructions-toggle" ng-click="dos.addInstruct(4)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUG_PRODUCT'|translate}}"</span>
-                    </button>
-                </div>
-                <h2 class="panel-title">{{::'DRUG_PRODUCT'|translate}}</h2>
-            </header>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[4]"
-                             class="alert-info" close="dos.closeAlert(4)">
-                            <section aria-live="assertive">
-                                <div ng-if="!dos.isFrench()"
-                                     ng-include="'app/scripts/templates/dossier/tpl-dossier-product-en.html'">
-                                </div>
-                                <div ng-if="dos.isFrench()"
-                                     ng-include="'app/scripts/templates/dossier/tpl-dossier-product-fr.html'">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            &lt;!&ndash;    <div class="row">
-
-                            <div class="col-xs-12 form-group" ng-class="{'has-error':dos.drugProdForm[dos.drugUseId].$invalid}">
-                                <label for="{{::dos.drugUseId}}" class="required">
-                                    <span class="field-name">C.&nbsp;{{::'DRUG_USE'|translate}}</span>
-                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                    <select name="{{::dos.drugUseId}}" class="form-control"
-                                            ng-model="dos.model.drugProduct.drugUse" id="{{::dos.drugUseId}}"
-                                            ng-options="use[dos.lang] for use in  dos.drugUseList track by use.id"
-                                            required></select>
-                                    <cmp-error-message field-name="dos.drugUseId"
-                                                       form-ref="dos.drugProdForm"
-                                                       show-error="dos.showError(dos.drugProdForm[dos.drugUseId])"
-                                                       error-types="dos.requiredOnly"></cmp-error-message>
-                                </label>
-
-                       &lt;!&ndash; <cmp-drug-use list-items="dos.dossierModel.drugProduct.drugUseList"
-                                      show-list-errors="dos.showErrors()"
-                                      parent-dirty="dos.dossierForm.$dirty"></cmp-drug-use>&ndash;&gt;
-                    </div>
-                </div>&ndash;&gt;
-               &lt;!&ndash; <div class="row">
-                    <div class="col-xs-12 checkbox">
-                        <label for="is-schedule-case">
-                            <input type="checkbox" name="isScheduleA"
-                                   ng-model="dos.dossierModel.drugProduct.isScheduleA" id="is-schedule-case">
-                            {{::'ISSCHEDA'|translate}}
-                        </label>
-                    </div>
-                </div>&ndash;&gt;
-
-              &lt;!&ndash;  <div class="row" ng-if="dos.isSchedA()">
-                    <div class="col-xs-12 form-group">
-                        <cmp-schedule-a schedule-group="dos.dossierModel.drugProduct.scheduleAGroup"></cmp-schedule-a>
-                    </div>
-                </div>&ndash;&gt;
-               &lt;!&ndash; <div>
-                    <section ng-if="dos.appendixMissingError()">
-                        <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixMissingError()"
-                               aria-hidden="true"/>
-                        <details class="alert alert-danger" id="alert-appendix" open="open">
-                            <summary class="h3">
-                                <h2>{{::'MISSING_APPENDIX'|translate}}</h2>
-                            </summary>
-                            <ul>
-                                <li ng-repeat="ingred in dos.errorAppendix">{{ingred}}</li>
-                            </ul>
-                        </details>
-                    </section>
-                </div>
-                <div>
-                    <section ng-if="dos.appendixExtraError()">
-                        <input type="checkbox" ng-show="false" required="true" ng-checked="dos.appendixExtraError()"
-                               aria-hidden="true"/>
-                        <details class="alert alert-danger" id="alert-extra-appendix" open="open">
-                            <summary class="h3">
-                                <h2>{{::'EXTRA_APPENDIX'|translate}}</h2>
-                            </summary>
-                            <ul>
-                                <li ng-repeat="ingred in dos.extraAppendix">{{ingred}}</li>
-                            </ul>
-                        </details>
-                    </section>
-                </div> &ndash;&gt;
-                &lt;!&ndash;<div>
-                    <cmp-tabs formulation-list="dos.dossierModel.drugProduct.formulations"
-                              record-changed="dos.recordsChanged()" service="dos.dossierService"
-                              error-summary-update="dos.updateSummary" show-error-summary="dos.showSummary"
-                              update-error-summary="dos.updateErrorSummaryState()" set-selected-tab="dos.setVisibleTabIndex"
-                              appendix4-list="dos.dossierModel.drugProduct.appendixFourList"></cmp-tabs>
-                </div>&ndash;&gt;
-            </div>
-        </section>-->
         <div>
             <section class="panel panel-primary mrgn-tp-lg">
                 <header class="panel-heading clearfix">
+                    <h2 class="panel-title col-md-8">{{::'REP_CONTACT_INFO'|translate}}</h2>
                     <div class="btn-group pull-right">
-                        <button title="{{::'HELP_REP_CONTACT'|translate}}" class="btn-xs rep-help-button"
-                                id="repContact-instructions-toggle" ng-click="dos.addInstruct(5)"><span
-                                class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_REP_CONTACT'|translate}}"</span>
+                        <button title="{{::'EXPAND'|translate}} {{::'HELP_REP_CONTACT'|translate}}"
+                                class="btn-xs rep-help-button"
+                                id="repContact-instructions-toggle" ng-click="dos.addInstruct(5)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'HELP_REP_CONTACT'|translate}}</span>
                         </button>
                     </div>
-                    <h2 class="panel-title">{{::'REP_CONTACT_INFO'|translate}}</h2>
                 </header>
                 <div class="panel-body">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[5]"
-                         class="alert-info" close="dos.closeAlert(5)">
+                    <div>
+                        <cmp-alert  ui-state="dos.alerts[5]"
+                                    msg="HELP_REP_CONTACT"
+                                    update-state="dos.closeAlert(5)"
+                                    type="alert-info">
+
                         <section aria-live="assertive">
                             <div ng-if="!dos.isFrench()"
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-en.html'">
@@ -495,6 +424,7 @@
                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-fr.html'">
                             </div>
                         </section>
+                        </cmp-alert>
                     </div>
 
                     <div class="container-fluid">
@@ -509,26 +439,30 @@
             </section>
         </div>
         <div class="row">
-            <div class="form-group col-md-3">
-                <button class="btn btn-default btn-lg active" ng-click="dos.saveJson()"
+            <div class="form-group col-md-12">
+                <button class="btn btn-default btn-lg active mrgn-rght-sm" ng-click="dos.saveJson()"
                         ng-disabled="dos.disableJSONSave()">
                     {{::'SAVE_WORKING'|translate}}
                 </button>
-            </div>
-            <div class="form-group col-md-3">
-                <button class="btn btn-primary btn-lg active" id="btn_xmlSave" ng-disabled="dos.disableXML"
+                <button class="btn btn-primary btn-lg active mrgn-rght-sm" id="btn_xmlSave" ng-disabled="dos.disableXML"
                         ng-click="dos.saveXML()">{{dos.saveXMLLabel |translate}}
                 </button>
-                <button title="{{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                        id="save-instructions-toggle" ng-click="dos.addInstruct(6)"><span
-                        class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'SAVE_INSTRUCT'|translate}}"</span>
+                <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
+                        class="btn rep-help-button-primary btn-xs"
+                        id="save-instructions-toggle" ng-click="dos.addInstruct(6)">
+                    <span class="fa fa-question-circle fa-2x"></span>
+                    <span class="wb-inv">{{::'SAVE_INSTRUCT'|translate}}</span>
                 </button>
             </div>
         </div>
         <div class="row">
             <div class="col-md-10">
-                <div uib-alert template-url="./app/lib/uib-templates/alert.html" ng-if="dos.alerts[6]"
-                     class="alert-info" close="dos.closeAlert(6)">
+                <div>
+                    <cmp-alert  ui-state="dos.alerts[6]"
+                                msg="SAVE_INSTRUCT"
+                                update-state="dos.closeAlert(6)"
+                                type="alert-info">
+
                     <section aria-live="assertive">
                         <div ng-if="!dos.isFrench()"
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-save-en.html'">
@@ -537,6 +471,7 @@
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-save-en.html'">
                         </div>
                     </section>
+                    </cmp-alert>
                 </div>
             </div>
         </div>

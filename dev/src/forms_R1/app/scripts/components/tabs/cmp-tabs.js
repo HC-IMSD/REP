@@ -6,8 +6,11 @@
 
 
     //TODO: Lazy load modules
-    angular.module('tabsModule', ['formulationsModule',
-        'hpfbConstants', 'appendixFourModule']);
+    angular.module('tabsModule',
+        ['formulationsModule',
+         'hpfbConstants',
+         'appendixFourModule',
+         'alertModule']);
 })();
 
 (function () {

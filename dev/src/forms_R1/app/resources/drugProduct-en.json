@@ -33,5 +33,6 @@
   "DOMESTIC":"Domestic",
   "BARN":"Barn",
   "INS_INDUS":"Institutional/Industrial",
-  "CONTACT_LENS":"Contact Lens"
+  "CONTACT_LENS":"Contact Lens",
+  "SAVE_INSTRUCT": "Product Information File Save Instructions"
 }

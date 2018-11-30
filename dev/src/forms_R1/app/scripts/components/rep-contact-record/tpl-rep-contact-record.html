@@ -2,13 +2,13 @@
     <ng-form name="contactRec.contactRecForm" id="{{::contactRec.repContactFormId}}" novalidate="novalidate">
         <div>
             <cmp-error-summary form-ref="contactRec.contactRecForm" show-errors="contactRec.showErrors()"
-                               form-preamble="{{contactRec.contactModel.repRole |translate}} &nbsp;{{::'REP_CONTACT' |translate}}"
+                               form-preamble="{{contactRec.contactModel.repRole |translate}} {{::'REP_CONTACT' |translate}}"
                                name-suffix="contactRec.contactRecForm" set-heading-level="h3" form-id="contactRec.repContactFormId"
                                make-focused="contactRec.setSummaryFocus" alias-list="contactRec.alias"
                                update-errors="contactRec.updateSummary"></cmp-error-summary>
             <div>
                 <fieldset>
-                    <legend>{{contactRec.contactModel.repRole |translate}} &nbsp;{{::'REP_CONTACT' |translate}}</legend>
+                    <legend>{{contactRec.contactModel.repRole |translate}} {{::'REP_CONTACT' |translate}}</legend>
                   <!--  <div class="row" ng-show="contactRec.formAmend">
                         <div class="col-sm-12 form-group">
                             <div class="checkbox">
@@ -30,10 +30,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="btn-group-sm col-xs-12 text-right">
-                <input type="submit" value="{{::'SAVE_CONTACT' |translate}}" class="btn btn-primary" name="saveContact"
+            <div class="btn-group-sm col-md-12">
+                <input type="submit" value="{{::'SAVE_CONTACT' |translate}}" class="btn btn-primary mrgn-rght-sm" name="saveContact"
                        id="saveContact" ng-click="contactRec.updateContactModel()"/>
-                <input type="submit" value="{{::'DELETE_CONTACT' |translate}}" class="btn btn-danger"
+                <input type="submit" value="{{::'DELETE_CONTACT' |translate}}" class="btn btn-danger mrgn-rght-sm"
                        ng-click="contactRec.delete()"/>
                 <input type="submit" value="{{::'DISCARD_CHANGES'|translate}}" class="btn btn-default"
                        ng-click="contactRec.discardChanges()"/>

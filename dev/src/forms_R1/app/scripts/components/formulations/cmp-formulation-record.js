@@ -18,7 +18,8 @@
                 'hpfbConstants',
                 'ui.select',
                 'errorSummaryModule',
-                'errorMessageModule'
+                'errorMessageModule',
+                'alertModule'
             ])
 })();
 

@@ -13,13 +13,14 @@
                     <label for="{{::mirCtrl.nameId}}" class="required">
                         <span class="field-name">{{'MATERIAL_NAME'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <input type="text" id="{{::mirCtrl.nameId}}" data-ng-model="mirCtrl.mirModel.ingredientName"
-                               ng-model-options="{ debounce: $inherit}" maxlength="100" size="100" required
-                               class="form-control" name="{{::mirCtrl.nameId}}"/>
                         <cmp-error-message field-name="mirCtrl.nameId"
                                            form-ref="mirCtrl.materialIngRecordForm"
                                            show-error="mirCtrl.showError(mirCtrl.materialIngRecordForm[mirCtrl.nameId])"
                                            error-types="mirCtrl.requiredOnly"></cmp-error-message>
+                        <input type="text" id="{{::mirCtrl.nameId}}" data-ng-model="mirCtrl.mirModel.ingredientName"
+                               ng-model-options="{ debounce: $inherit}" maxlength="100" size="100" required
+                               class="form-control" name="{{::mirCtrl.nameId}}"/>
+
                     </label>
                 </div>
             </div>
@@ -41,14 +42,15 @@
                     <label for="{{::mirCtrl.inFinalId}}" class="required">
                         <span class="field-name">{{'IN_FINAL_CONTAINER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <select id="{{::mirCtrl.inFinalId}}" ng-model="mirCtrl.mirModel.inFinalContainer"
-                                ng-required="true" class="form-control" name="{{::mirCtrl.inFinalId}}"
-                                ng-options="val |translate for val in  mirCtrl.yesNoList">
-                        </select>
                         <cmp-error-message field-name="mirCtrl.inFinalId"
                                            form-ref="mirCtrl.materialIngRecordForm"
                                            show-error="mirCtrl.showError(mirCtrl.materialIngRecordForm[mirCtrl.inFinalId])"
                                            error-types="mirCtrl.requiredOnly"></cmp-error-message>
+                        <select id="{{::mirCtrl.inFinalId}}" ng-model="mirCtrl.mirModel.inFinalContainer"
+                                ng-required="true" class="form-control" name="{{::mirCtrl.inFinalId}}"
+                                ng-options="val |translate for val in  mirCtrl.yesNoList">
+                        </select>
+
                     </label>
                 </div>
             </div>
@@ -59,7 +61,7 @@
             </div>
             <div class="row">
 
-                <div class="btn-group-sm col-xs-12 text-right">
+                <div class="btn-group-sm col-xs-12">
                     <button class="btn btn-primary" name="saveMaterial"
                             ng-click="mirCtrl.save()">{{'SAVE'|translate}}
                     </button>

@@ -21,10 +21,6 @@
             </div>
             <div class="col-xs-3 form-group">
                 <label ng-if="!infoCtrl.isDossier" for="{{::infoCtrl.fieldId}}">{{infoCtrl.fieldIdLabel |translate}}
-                    <input type="text" class="form-control" id="{{::infoCtrl.fieldId}}"
-                           ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="{{::infoCtrl.fieldId}}"
-                           ng-minlength="{{infoCtrl.minFieldLength}}" only-digits="{{infoCtrl.isNumber}}"
-                           ng-model="infoCtrl.record[infoCtrl.tagName]" ng-required="!infoCtrl.isExtern()"/>
                     <strong id="code-error" class="error">
                         <span class="label label-danger" ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
                               ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
@@ -33,11 +29,23 @@
                             <span ng-message="maxlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
                         </span>
                     </strong>
+                    <input type="text" class="form-control" id="{{::infoCtrl.fieldId}}"
+                           ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="{{::infoCtrl.fieldId}}"
+                           ng-minlength="{{infoCtrl.minFieldLength}}" only-digits="{{infoCtrl.isNumber}}"
+                           ng-model="infoCtrl.record[infoCtrl.tagName]" ng-required="!infoCtrl.isExtern()"/>
+
                 </label>
                 <label for="{{::infoCtrl.fieldId}}" class="full-width" ng-class="{'required':!infoCtrl.isExtern()}"
                        ng-if="infoCtrl.isDossier">
                     <span class="field-name ">{{infoCtrl.fieldIdLabel |translate}}</span>
                     <strong ng-if="!infoCtrl.isExtern()" class="required"> {{"REQUIRED" |translate}}</strong>
+                    <strong id="idType-error" class="error">
+                        <span class="label label-danger" ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
+                              ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
+                            <span ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
+                              <span ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
+                        </span>
+                    </strong>
                     <div class="rep-input-group">
                         <span class="input-group-addon">HC6-024-</span>
                         <div ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid}">
@@ -47,17 +55,8 @@
                                    ng-model="infoCtrl.record[infoCtrl.tagName]" ng-required="!infoCtrl.isExtern()"/>
                         </div>
                     </div>
-                    <strong id="idType-error" class="error">
-                        <span class="label label-danger" ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
-                              ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
-                            <span ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
-                        </span>
-                    </strong>
                 </label>
-
             </div>
-
         </div>
         <div class="row">
             <div class="col-xs-2 form-group">

@@ -18,20 +18,8 @@
     <script type="text/javascript" src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/cdts/compiled/wet-en.js"></script>
     <noscript>
         <!-- Write closure fall-back static file -->
-        <!--[if gte IE 9 | !IE ]><!-->
-        <link href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/assets/favicon.ico" rel="icon" type="image/x-icon">
-        <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/css/theme.min.css">
-        <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/cdts/cdtsfixes.css">
-        <!-- Are you using the application templates? If so add the following CSS file -->
-        <!-- <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/cdts/cdtsapps.css">-->
-        <!--<![endif]-->
-        <!--[if lt IE 9]>
-        <link href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/assets/favicon.ico" rel="shortcut icon" />
-        <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/css/ie8-theme.min.css" />
-        <![endif]-->
-        <!--[if lte IE 9]><![endif]-->
-        <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/css/noscript.min.css" />
-        <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_27/cdts/cdtsnoscript.css" />
+        <!-- ./wet_4_0_27/static/repTop.html-->
+        <!-- #include virtual="/cdts/static/repTop.html"-->
     </noscript>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <!--<link rel="stylesheet" href="./app/styles/rep.css ">-->
@@ -49,6 +37,8 @@
 <body vocab="http://schema.org/" typeof="WebPage">
 <div id="def-top">
     <!-- Write closure fall-back static file -->
+    <!-- ./wet_4_0_27/cdts/static/top-en.html-->
+    <!-- #include virtual="/cdts/static/top-en.html"-->
 </div>
 <!-- Write closure template -->
 <script type="text/javascript">
@@ -61,8 +51,9 @@
             href: "<!--build:langHtml--><!--endbuild-->",
             text: "Français"
         }],
-        showPreContent: true,
-        breadcrumbs: [{title: "Home", href: "<!--build:homeAnchor--><!--endbuild-->"}]
+        showPreContent: false,
+        breadcrumbs: [{title: "Home", href: "<!--build:homeAnchor--><!--endbuild-->"},
+            {title: "Health Canada", href: "https://www.canada.ca/en/health-canada.html"}]
     });
 </script>
 
@@ -83,9 +74,10 @@
     <!-- end main content -->
 
     <!--content ends here -->
-
     <div id="def-preFooter">
         <!-- Write closure fall-back static file -->
+        <!-- ./wet_4_0_27/cdts/static/preFooter-en.html-->
+        <!-- #include virtual="/cdts/static/preFooter-en.html"-->
     </div>
 
     <!-- Write closure template -->
@@ -102,6 +94,8 @@
 </main>
 <div id="def-footer">
     <!-- Write closure fall-back static file -->
+    <!-- ./wet_4_0_27/cdts/static/footer-en.html-->
+    <!-- #include virtual="/cdts/static/footer-en.html"-->
 </div>
 <!-- Write closure template -->
 <script type="text/javascript">

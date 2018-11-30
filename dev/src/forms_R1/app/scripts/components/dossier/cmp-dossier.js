@@ -23,6 +23,7 @@
         'dossierService',
         'ngSanitize',
         'errorSummaryModule',
+        'alertModule',
         'errorMessageModule'
     ];
 

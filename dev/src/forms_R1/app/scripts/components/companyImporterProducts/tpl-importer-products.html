@@ -8,15 +8,16 @@
             <label for="{{::impProdCtrl.prodTypesId}}" class="required">
                 <span class="field-name">{{::'PRODUCT_TYPES'|translate}}</span>
                 <strong class="required">{{::"REQUIRED" |translate}}</strong></label>
+            <cmp-error-message field-name="impProdCtrl.prodTypesId"
+                               form-ref="impProdCtrl.importProdForm"
+                               show-error="impProdCtrl.showError(impProdCtrl.importProdForm[impProdCtrl.prodTypesId])"
+                               error-types="impProdCtrl.requiredOnly"></cmp-error-message>
             <select id="{{::impProdCtrl.prodTypesId}}" ng-model="impProdCtrl.model.selectedProducts"
                     class="form-control" name="{{::impProdCtrl.prodTypesId}}" required ng-disabled="!impProdCtrl.isEditable"
                     ng-change="impProdCtrl.productTypeChanged()"
                     ng-options="rec |translate for rec in  impProdCtrl.productTypeList">
             </select>
-            <cmp-error-message field-name="impProdCtrl.prodTypesId"
-                               form-ref="impProdCtrl.importProdForm"
-                               show-error="impProdCtrl.showError(impProdCtrl.importProdForm[impProdCtrl.prodTypesId])"
-                               error-types="impProdCtrl.requiredOnly"></cmp-error-message>
+
         </div>
     </div>
     <div ng-if="impProdCtrl.someProducts">

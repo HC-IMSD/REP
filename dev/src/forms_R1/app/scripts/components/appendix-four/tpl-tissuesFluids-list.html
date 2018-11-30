@@ -35,13 +35,12 @@
                                                    system-used="tissuesListSrcCtrl.systemAlreadyUsed(value)"
                                                    on-delete="tissuesListSrcCtrl.deleteRecord(id)"
                                                    update-error-summary="tissuesListSrcCtrl.updateErrorSummary()"
-                                                   error-summary-update="tissuesListSrcCtrl.updateSummary" show-error-summary="tissuesListSrcCtrl.showSummary"
-                        ></cmp-tissues-fluids-record>
-
+                                                   error-summary-update="tissuesListSrcCtrl.updateSummary" show-error-summary="tissuesListSrcCtrl.showSummary">
+                        </cmp-tissues-fluids-record>
                     </cmp-expanding-table>
 
                     <div class="mrgn-tp-md mrgn-bttm-lg">
-                        <div class="btn-group-sm col-md-12 text-right">
+                        <div class="btn-group-sm col-md-12">
                             <button class="btn btn-primary" ng-click="tissuesListSrcCtrl.addNew()" name="{{::tissuesListSrcCtrl.addTissuesRecId}}"
                                     id="{{::tissuesListSrcCtrl.addTissuesRecId}}"
                                     ng-disabled="tissuesListSrcCtrl.disableAdd()">
