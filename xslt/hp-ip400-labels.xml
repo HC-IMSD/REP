@@ -906,5 +906,54 @@
 <row><code>ADDITIONAL_FLD_CONTXT</code><eng>Additional field for context</eng><fra>fr_Additional field for context</fra></row>
 <row><code>DOSSIER_ENROL</code><eng>Dossier Template: Regulatory Enrolment Process (REP)</eng><fra>fr_Dossier Template: Regulatory Enrolment Process (REP)</fra></row>
 <row><code>CSP_TITLE</code><eng>Certificate of Supplementary Protection (CSP) Application Form</eng><fra>fr_Certificate of Supplementary Protection (CSP) Application Form</fra></row>
+<row><code>QMSC_NO</code><eng>Quality Management System Certificate Number</eng><fra>fr_Quality Management System Certificate Number</fra></row>
+<row><code>PLACE_OF_USE</code><eng>Place of use</eng><fra>fr_Place of use</fra></row>
+<row><code>DEVICE_HISTORY</code><eng>Device History</eng><fra>fr_Device History</fra></row>
+<row><code>DOSSIER_ID</code><eng>Dossier ID</eng><fra>fr_Dossier ID</fra></row>
+<row><code>IS_IVDD</code><eng>Is this device an IVDD?</eng><fra>fr_Is this device an IVDD?</fra></row>
+<row><code>APPLICATION_INFO_TMPL</code><eng>Application Information Template</eng><fra>fr_Application Information Template</fra></row>
+<row><code>IS_FOR_HOME</code><eng>Is this sold for home use?</eng><fra>fr_Is this sold for home use?</fra></row>
+<row><code>IS_FOR_CARE</code><eng>Is this device used at a point of care, such as pharmacy, bedside, or healthcare professional's office?</eng><fra>fr_Is this device used at a point of care, such as pharmacy, bedside, or healthcare professional's office?</fra></row>
+<row><code>ANY_RADIATION</code><eng>Do any of the devices contained in this application emit radiation?</eng><fra>fr_Do any of the devices contained in this application emit radiation?</fra></row>
+<row><code>CONTAIN_DRUG</code><eng>Does this device contain a drug?</eng><fra>fr_Does this device contain a drug?</fra></row>
+<row><code>DRUG_NUMBER_TYPE</code><eng>Does the drug have a Drug Identification Number (DIN) or the Natural Product Number (NPN)</eng><fra>fr_Does the drug have a Drug Identification Number (DIN) or the Natural Product Number (NPN)</fra></row>
+<row><code>DRUG_DIN</code><eng>DIN</eng><fra>fr_DIN</fra></row>
+<row><code>DRUG_NPN</code><eng>NPN</eng><fra>fr_NPN</fra></row>
+<row><code>DRUG_OTHER_INFO</code><eng>For combination products, please complete the information listed below with respect to the drug or drug substance. </eng><fra>fr_For combination products, please complete the information listed below with respect to the drug or drug substance. </fra></row>
+<row><code>DRUG_BRD_NAME</code><eng>Brand/Trade Name of Drug</eng><fra>fr_Brand/Trade Name of Drug</fra></row>
+<row><code>DRUG_ACT_INGREDIENT</code><eng>Active Ingredient(s)</eng><fra>fr_Active Ingredient(s)</fra></row>
+<row><code>DRUG_MANUFACTURER</code><eng>Manufacturer</eng><fra>fr_Manufacturer</fra></row>
+<row><code>DRUG_COMPLIANCE</code><eng>Compliance</eng><fra>fr_Compliance</fra></row>
+<row><code>DRUG_SPECIFY</code><eng>Specify other pharmacopeia</eng><fra>fr_Specify other pharmacopeia</fra></row>
+<row><code>DRUG_USP</code><eng>USP</eng><fra>fr_USP</fra></row>
+<row><code>DRUG_GMP</code><eng>GMP</eng><fra>fr_GMP</fra></row>
+<row><code>DRUG_OTHER</code><eng>Other Pharmcopeia</eng><fra>fr_Other Pharmcopeia</fra></row>
+<row><code>HAS_PRE_AUTH_IN_CA</code><eng>Has this device been previously authorized for sale in Canada under the following provisions of the Medical Devices Regulations: </eng><fra>fr_Has this device been previously authorized for sale in Canada under the following provisions of the Medical Devices Regulations</fra></row>
+<row><code>INVST_TST</code><eng>Investigational Testing</eng><fra>fr_Investigational Testing</fra></row>
+<row><code>SPL_ACC</code><eng>Special Access</eng><fra>fr_Special Access</fra></row>
+<row><code>AUTH_NO</code><eng>Authorization number</eng><fra>fr_Authorization number</fra></row>
+<row><code>DEVICE_ID</code><eng>The device identification number</eng><fra>fr_The device identification number</fra></row>
+<row><code>COMPATIBLE_DEVICE</code><eng>Compatibility of interdependent devices</eng><fra>fr_Compatibility of interdependent devices</fra></row>
+<row><code>INTERDEPENDENT_DEVICE</code><eng>Interdependent Device</eng><fra>fr_Interdependent Device</fra></row>
+<row><code>COMPATIBLE_DEV_NM</code><eng>Name of Compatible Device</eng><fra>fr_Name of Compatible Device</fra></row>
+<row><code>DEVICE_LICENCE</code><eng>Licence number</eng><fra>fr_Licence number</fra></row>
+<row><code>LIST_MANUFACTURE_STANDARDS</code><eng>List of Recognized Standards Complied with in the manufacture of the Device</eng><fra>fr_List of Recognized Standards Complied with in the manufacture of the Device</fra></row>
+<row><code>DECLARATION_COMFORMITY</code><eng>Declaration of Conformity form (available on the Health Canada website) confirms that the medical device(s) comply with Recognized Standards or equivalent or better standards</eng><fra>fr_Declaration of Conformity form (available on the Health Canada website) confirms that the medical device(s) comply with Recognized Standards or equivalent or better standards</fra></row>
+<row><code>DECLARATION_COMFORMITY_NO</code><eng>Health Canada can not process your medical Device Licence Application without the "Declaration of Conformity"</eng><fra>fr_Health Canada can not process your medical Device Licence Application without the "Declaration of Conformity"</fra></row>
+<row><code>BIO_MATERIAL_CONTAIN</code><eng>Devices containing Biological Material</eng><fra>fr_Devices containing Biological Material</fra></row>
+<row><code>BIO_DEVICE_RECOMBINANT</code><eng>Does this device consist of recombinant material?</eng><fra>fr_Does this device consist of recombinant material?</fra></row>
+<row><code>BIO_DEVICE_HUMAN_ANIMAL</code><eng>Does this device contain, or is it produced using, any animal or human sourced material?</eng><fra>fr_Does this device contain, or is it produced using, any animal or human sourced material?</fra></row>
+<row><code>BIO_IS_DEHP_BPA</code><eng>Is the Biological Material the same for All Devices Listed in "Identifier of Devices - DEHP/BPA" Table?</eng><fra>fr_Is the Biological Material the same for All Devices Listed in "Identifier of Devices - DEHP/BPA" Table?</fra></row>
+<row><code>BIO_MATERIAL_ATT_TAB</code><eng>Biological Material Attribute Table</eng><fra>fr_Biological Material Attribute Table</fra></row>
+<row><code>BIO_MATERIAL</code><eng>Biological Material</eng><fra>fr_Biological Material</fra></row>
+<row><code>NAME_OF_MATERIAL</code><eng>Name of Material</eng><fra>fr_Name of Material</fra></row>
+<row><code>NAME_OF_COMPATIBLE</code><eng>Name of Compatible Device</eng><fra>fr_Name of Compatible Device</fra></row>
+<row><code>ORIGIN_COUNTRY</code><eng>Country of Origin (for animals only)</eng><fra>fr_Country of Origin (for animals only)</fra></row>
+<row><code>SPECIES_FAMILY</code><eng>Family of Species</eng><fra>fr_Family of Species</fra></row>
+<row><code>TISSUE_TYPE</code><eng>Tissue/Substance Type</eng><fra>fr_Tissue/Substance Type</fra></row>
+<row><code>TISSUE_TYPE_OTHER</code><eng>Tissue Type Other details</eng><fra>fr_Tissue Type Other details</fra></row>
+<row><code>DERIVATIVE</code><eng>Derivative</eng><fra>fr_Derivative</fra></row>
+<row><code>DERIVATIVE_OTHER</code><eng>Derivative Other Details</eng><fra>fr_Derivative Other Details</fra></row>
+
 
 </SimpleCodeList>
