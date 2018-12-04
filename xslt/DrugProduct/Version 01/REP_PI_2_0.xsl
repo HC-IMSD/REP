@@ -1235,7 +1235,7 @@
 																									<xsl:variable name="temp" select="name(.)"/>
 																									<xsl:if test="$temp != 'other_nervous_details' and $temp != 'other_digestive_details' and $temp != 'other_musculo_skeletal_details' and $temp != 'other_reproductive_details' and $temp != 'other_cardio_respiratory_details' and $temp != 'other_immune_details' and $temp != 'other_skin_glandular_details' and $temp != 'other_fluids_tissues_details'">
 																									<xsl:variable name="UpperTEMP"><xsl:call-template name="upperCase"><xsl:with-param name="string" select="$temp"/></xsl:call-template></xsl:variable>
-																									<xsl:call-template name="hp-label"><xsl:with-param name="code" select="$UpperTEMP"/></xsl:call-template><xsl:text disable-output-escaping="yes">&lt;br/&gt;</xsl:text>
+																									<xsl:call-template name="hp-label"><xsl:with-param name="code" select="$UpperTEMP"/></xsl:call-template><br/>
 																									</xsl:if>
 																									</xsl:if>
 																									</span>
@@ -1353,10 +1353,10 @@
 
 <metaInformation>
 	<scenarios>
-		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/ip400Demo/tmp/hcreppi-2018-08-13-0951.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes"
+		<scenario default="yes" name="Scenario1" userelativepaths="no" externalpreview="yes" url="file:///e:/ip400Demo/tmp/hcreppi-2018-11-21-0841.xml" htmlbaseurl="" outputurl="file:///c:/SPM/test/product.html" processortype="saxon8" useresolver="yes"
 		          profilemode="0" profiledepth="" profilelength="" urlprofilexml="" commandline="" additionalpath="" additionalclasspath="" postprocessortype="none" postprocesscommandline="" postprocessadditionalpath="" postprocessgeneratedext=""
 		          validateoutput="no" validator="internal" customvalidator="">
-			<parameterValue name="cssFile" value="'file:///C:/Users/hcuser/git/HC-IMSD/REP/xslt/ip400.css'"/>
+			<parameterValue name="cssFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\ip400.css'"/>
 			<parameterValue name="labelFile" value="'C:\Users\hcuser\git\HC-IMSD\REP\xslt\hp-ip400-labels.xml'"/>
 			<advancedProp name="sInitialMode" value=""/>
 			<advancedProp name="schemaCache" value="||"/>
