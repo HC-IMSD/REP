@@ -9,7 +9,14 @@
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{::'TRANSACTION_HDING'|translate}}</h2>
+                <div>
+                    <h2 class="panel-title  col-sm-3">{{::'TRANSACTION_HDING'|translate}}</h2>
+                    <button class="btn  btn-primary btn-sm active"
+                            id="btn_reset"
+                            ng-show ="transInfoCtrl.finalState"
+                            ng-click="transInfoCtrl.resetSpecificValues()">{{::'RESET'|translate}}
+                    </button>
+                </div>
             </header>
             <div class="panel-body">
                 <div>
@@ -118,7 +125,7 @@
                                 </cmp-alert>
                             </div>
                         </div>
-                        <div class="row" ng-if="!transInfoCtrl.finalState">
+                        <div class="row">
                             <div class="form-group col-md-12"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                 <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">

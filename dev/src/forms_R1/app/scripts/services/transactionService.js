@@ -78,7 +78,6 @@
             _default: {},
             isFinal: false,
             //TODO update
-
             getRootTag: function () {
 
                 return ("TRANSACTION_ENROL")
@@ -222,26 +221,29 @@
                 model.dataChecksum = jsonObj.data_checksum;
               //  model.isEctd = jsonObj.is_ectd;
 
+                model.transactionType = jsonObj.transaction_type;
+                model.isThirdParty = jsonObj.is_third_party;
+                model.isPriority = jsonObj.is_priority;
+                model.isNoc = jsonObj.is_noc;
+                model.isAdminSub = jsonObj.is_admin_sub;
+                model.subType = jsonObj.sub_type;
+                model.isSolicited = jsonObj.is_solicited;
+                this._transformReqFromFile(model, jsonObj.solicited_requester_record);
+                model.projectManager1 = jsonObj.regulatory_project_manager1;
+                model.projectManager2 = jsonObj.regulatory_project_manager2;
+                model.isFees = jsonObj.is_fees;
+                model.feeDetails = null;
+                if (model.isFees) {
+                    model.feeDetails = this._mapFeeDetailsFromOutput(jsonObj.fee_details);
+                }
+
                 if(jsonObj.importFileType === HCSC ) {
-                    model.transactionType = jsonObj.transaction_type;
-                    model.isThirdParty = jsonObj.is_third_party;
-                    model.isPriority = jsonObj.is_priority;
-                    model.isNoc = jsonObj.is_noc;
-                    model.isAdminSub = jsonObj.is_admin_sub;
-                    model.subType = jsonObj.sub_type;
-                    model.isSolicited = jsonObj.is_solicited;
-                    this._transformReqFromFile(model, jsonObj.solicited_requester_record);
-                    model.projectManager1 = jsonObj.regulatory_project_manager1;
-                    model.projectManager2 = jsonObj.regulatory_project_manager2;
-                    model.isFees = jsonObj.is_fees;
-                    model.feeDetails = null;
-                    if (model.isFees) {
-                        model.feeDetails = this._mapFeeDetailsFromOutput(jsonObj.fee_details);
-                    }
                     this.isFinal = false;
+                    model.confirmContactValid = false; //
                 } else {
                     this.isFinal = true;
-                    model.transactionType = "";
+                    model.confirmContactValid = true;
+                   /** model.transactionType = "";
                     model.isThirdParty = "";
                     model.isPriority = "";
                     model.isNoc = "";
@@ -253,6 +255,7 @@
                     model.projectManager2 = "";
                     model.isFees = "";
                     model.feeDetails = null;
+                    */
                 }
                 model.isActivityChanges = jsonObj.is_activity_changes;
                 //model.sameCompany = jsonObj.same_regulatory_company === 'Y';
@@ -261,7 +264,7 @@
                 //reg address
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 //model.confirmContactValid = jsonObj.confirm_regulatory_contact === 'Y';
-                model.confirmContactValid = false; //reset
+
                 model.activityAddress = _transformAddressFromFileObj($filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
@@ -776,12 +779,13 @@
             projectManager1: "",
             projectManager2: "",
             isFees: "",
+            resetBtnClicked : false,
             feeDetails: null,
             isActivityChanges: "Y", //deprecated
             companyName: "",
             activityAddress: _createAddressModel(),
             confirmContactValid: false,
-            activityContact: _createContactModel()
+            activityContact: _createContactModel(),
         };
 
         return defaultTransactionData;

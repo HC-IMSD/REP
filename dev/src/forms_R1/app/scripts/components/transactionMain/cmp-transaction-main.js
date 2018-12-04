@@ -112,6 +112,7 @@
             }
         };
 
+
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
         };
@@ -163,19 +164,30 @@
                 // angular.extend(vm.transaction, vm.transactionService.getModelInfo())
                 vm.transaction = vm.transactionService.getModelInfo();
                 vm.isFinal = vm.transactionService.isFinal;
-                //doing this as model won't update otherwise. Business wanted these values cleared on load
+                //doing this as model won't update otherwise.
                 //this process moved to service
                 //vm.transaction.projectManager1 = "";
                 //vm.transaction.projectManager2 = "";
                 //vm.transaction.isSolicited = "";
                 //vm.transaction.solicitedRequester = "";
                 //vm.transaction.confirmContactValid = false;
-                //console.log( "vm.isFinal_main " + vm.isFinal);
-                if (vm.isFinal) {
-                    vm.transaction.ectd.lifecycleRecord =[];
-                }
             }
         }
+
+        vm.disableFinalXmlBtn = function () {
+            if(vm.isFinal)
+            {
+                if( vm.transaction.resetBtnClicked)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return false;
+        };
 
         vm.getNewRepContact = function () {
             return vm.transactionService.createRepContact();
