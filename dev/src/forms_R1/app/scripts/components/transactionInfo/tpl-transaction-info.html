@@ -9,7 +9,14 @@
                             class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
-                <h2 class="panel-title">{{::'TRANSACTION_HDING'|translate}}</h2>
+                <div>
+                    <h2 class="panel-title  col-sm-3">{{::'TRANSACTION_HDING'|translate}}</h2>
+                    <button class="btn  btn-primary btn-sm active"
+                            id="btn_reset"
+                            ng-show ="transInfoCtrl.finalState"
+                            ng-click="transInfoCtrl.resetSpecificValues()">{{::'RESET'|translate}}
+                    </button>
+                </div>
             </header>
             <div class="panel-body">
                 <div>
@@ -118,7 +125,7 @@
                                 </cmp-alert>
                             </div>
                         </div>
-                        <div class="row" ng-if="!transInfoCtrl.finalState">
+                        <div class="row">
                             <div class="form-group col-md-12"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                 <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
@@ -411,20 +418,6 @@
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
                         <div class="panel-body">
-                            <!--
-                            <div>
-                                <cmp-alert ui-state="transInfoCtrl.alerts[2]" msg="LIFECYCLE_INSTRUCT"
-                                           update-state="transInfoCtrl.closeAlert(2)" type="alert-info">
-                                    <section aria-live="assertive">
-                                        <div ng-if="!transInfoCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-lifecycle-table-en.html'">
-                                        </div>
-                                        <div ng-if="transInfoCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-lifecycle-table-fr.html'">
-                                        </div>
-                                    </section>
-                                </cmp-alert>
-                            </div> -->
                             <div>
                                 <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
                                                     is-ectd="transInfoCtrl.isEctd"
@@ -530,19 +523,6 @@
                     <h2 class="panel-title">{{::'REGULATORY_FEES' |translate}}</h2>
                 </header>
                 <div class="panel-body">
-                    <!--div>
-                        <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="FEE_INSTRUCT"
-                                   update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
-                            <section aria-live="assertive">
-                                <div ng-if="!transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
-                                </div>
-                                <div ng-if="transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
-                    </div-->
                     <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"
                                           show-error-summary="transInfoCtrl.showSummary"
                                           update-error-summary="transInfoCtrl.updateErrorSummary()"

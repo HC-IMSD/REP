@@ -125,7 +125,7 @@
   "IS_FEE_TRANSACTION":"fr_Are new or revised fees associated with this transaction?",
   "IS_NEW_ACTIVITY":"fr_Is this transaction for a new or existing regulatory activity?",
   "IS_SIGNED_3RD_PARTY": "fr_Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
-  "AUT_LETTER_NOTE": "fr_A letter of authorization signed by the manufacturer/sponsor company must be provided in folder 1.2.6 of the regulatory transaction.",
+  "AUT_LETTER_NOTE": "fr_A letter of authorization signed by the manufacturer/sponsor company must be provided in section 1.2.6 of the regulatory transaction.",
   "IS_PRIORITY":"fr_Was this regulatory activity approved for priority review?",
   "IS_NOC":"fr_Was this regulatory activity approved for NOC/C review?",
   "IS_ADMIN_SUBMISSION": "fr_Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?",

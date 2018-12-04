@@ -95,7 +95,7 @@
             vm.setSolicitedState();
             loadAdminSubData();
             vm.finalState=false;
-           // vm.isEmptyDossierType = true;
+            vm.displayResetBtn = false;
         };
 
 
@@ -107,16 +107,6 @@
                 vm.setAdminSubmission();
                 vm.updateEctdState();
                 vm.setSolicitedState();
-
-                /** This is onChange - False to true VS true to false;
-                if (vm.transactionModel.ectd.dossierType.length == 0) {
-                    vm.isEmptyDossierType= true;
-                }
-                else
-                {
-                    vm.isEmptyDossierType= false;
-                } **/
-
             }
 
             if(changes.language){
@@ -130,10 +120,23 @@
                 vm.showSummary=changes.showErrorSummary.currentValue;
             }
             if(changes.isFinal){
-                vm.finalState=changes.isFinal;
+                vm.finalState = changes.isFinal.currentValue;
             }
-        };
 
+           // if(changes.disableFinalXmlBtn){
+              //  vm.disableFinalXml = changes.disableFinalXmlBtn.currentValue;
+
+           // }
+        };
+/**
+        vm.displayReset = function() {
+            vm.displayResetBtn = vm.finalState;
+            console.log( "info_disableFinalXml" + vm.disableFinalXml);
+            console.log( "info_displayResetBtn" + vm.displayResetBtn);
+            return vyRem.displasetBtn;
+
+        };
+*/
         vm.isFeesIndicated=function() {
             return vm.transactionModel.isFees === YES;
         };
@@ -314,17 +317,32 @@
             return(vm.lang===FRENCH);
         };
 
-
-
         /**
-          vm.isFinalStateWithDossierType=function() {
-            if (vm.finalState && !vm.isEmptyDossierType) {
-                return true;
-            }
-            return false;
-        };
-         **/
+         * @Clear specific Values - Business wanted these values cleared on Reset
+         * Changes to row 11, 12, 13, 15, 16, 17, 22, 37, 41, 43, 44, 46, 93
+         */
+        vm.resetSpecificValues = function () {
+             if( vm.finalState )
+            {
+                vm.transactionModel.ectd.productName= ""; //11 - product name
+                vm.transactionModel.transactionType = ""; //12 - new or exsiting
+                vm.transactionModel.isThirdParty = ""; //13- third party;
+                vm.transactionModel.isPriority = ""; //15 - priority
+                vm.transactionModel.isNoc = ""; // 16 - NOC
+                vm.transactionModel.isAdminSub = ""; //17 - Admin
+                //vm.transactionModel.subType = "";
+                vm.transactionModel.ectd.lifecycleRecord =[]; //22 - Transaction Details Record
+                vm.transactionModel.isSolicited = ""; //37 - solicited information
+                vm.transactionModel.solicitedRequesterReord = []; //41 solicited information
 
+                vm.transactionModel.projectManager1 = ""; //43 - projectManager1
+                vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
+                vm.transactionModel.isFees = ""; // 46 - fee
+                vm.transactionModel.feeDetails = null;
+                vm.transactionModel.confirmContactValid = false; //93 confirmation
+                vm.transactionModel.resetBtnClicked = true;
+             }
+        };
         $scope.$watch('transInfoCtrl.transInfoForm.$error', function () {
             //vm.updateErrorSummaryState();
             vm.updateErrorSummary();
