@@ -21,8 +21,8 @@
             </div>
             <div class="col-xs-3 form-group">
                 <label ng-if="!infoCtrl.isDossier" for="{{::infoCtrl.fieldId}}">{{infoCtrl.fieldIdLabel |translate}}
-                    <strong id="code-error" class="error">
-                        <span class="label label-danger" ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
+                    <strong id="code-error" class="error" ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid">
+                        <span class="label label-danger"
                               ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
                             <span ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
                               <span ng-message="minlength"><span translate="{{infoCtrl.minErrorMsg}}"></span></span>
@@ -75,7 +75,7 @@
             </div>
             <div ng-show="infoCtrl.isAmend" class="col-xs-12 form-group">
                 <label for="{{::infoCtrl.reasonAmend}}">{{::'REASON_AMEND'|translate}}</label>
-                <textarea type="text" class="form-control full-width" id="{{::infoCtrl.reasonAmend}}"
+                <textarea class="form-control full-width" id="{{::infoCtrl.reasonAmend}}"
                        maxlength="200" ng-model="infoCtrl.infoModel.reasonAmend"/>
             </div>
         </div>

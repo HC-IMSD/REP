@@ -20,6 +20,7 @@
             transclude:true,
             bindings: {
                 title: '@', /*deprecated*/
+                preId: '@',
                 listItems: '<',
                 columnDef:'<',
                 disableSelection:'<',
