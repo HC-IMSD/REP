@@ -124,9 +124,7 @@
 
                 return true;
             }
-            else {
-                return false;
-            }
+
             vm.model.requiredDocs.deferralStat = false;
             return false;
         };
@@ -229,7 +227,7 @@
 
         vm.openPaymentForm = function () {
             var feelink=ADVANCE_FEE_PAYMENT_EN;
-
+            console.log(vm.lang);
             if(vm.lang === FRENCH){
 
                 feelink=ADVANCE_FEE_PAYMENT_FR;

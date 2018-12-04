@@ -21,7 +21,7 @@ var protractor = require("gulp-protractor").protractor;
 
 // == PATH STRINGS ========
 var baseScript = './app/scripts';
-var wetBase = './wet_4_0_27';
+var wetBase = './wet_4_0_22_base';
 var buildDev = './build/dev';
 var buildProd = './build/prod/';
 var buildProdAbs = '/build/prod/';

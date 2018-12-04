@@ -177,7 +177,9 @@
 
             </div>
             <div ng-if="transFeeCtrl.showDocumentationSection()">
-                <h3>{{::'REQUIRED_DOC'|translate}}</h3>
+                <div class="row">
+                    <label>{{::'REQUIRED_DOC'|translate}}</label>
+                </div>
                 <div class="row" ng-if="transFeeCtrl.isDeferral()">
                     <div class="form-group col-xs-12">
                         <div class="checkbox">
@@ -197,7 +199,7 @@
                 </div>
                 <div ng-if="transFeeCtrl.isEligible()">
                     <fieldset>
-                        <legend class="h5">{{::'SUPPORTING_DOC'|translate}}</legend>
+                        <label>{{::'SUPPORTING_DOC'|translate}}</label>
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <div class="checkbox">
@@ -355,14 +357,14 @@
                 <div ng-if="transFeeCtrl.showPaymentMethods()">
 
                     <fieldset id="{{::transFeeCtrl.paymentFsId}}">
-                        <legend class="required h5">
+                        <label class="required">
                             <span class="field-name">{{::'PAYMENT_METHODS' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="transFeeCtrl.paymentSelectedId"
                                                form-ref="transFeeCtrl.transFeeForm"
                                                show-error="!transFeeCtrl.isPaymentSelected() && transFeeCtrl.showSummary"
                                                error-types="transFeeCtrl.onePaymentError"></cmp-error-message>
-                        </legend>
+                        </label>
                         <input type="checkbox" name="{{::transFeeCtrl.paymentSelectedId}}"
                                id="{{::transFeeCtrl.paymentSelectedId}}" required ng-model="transFeeCtrl.onePaymentSelected"
                                hidden/>

@@ -70,7 +70,7 @@
                                                        error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3">
+                            <div class="form-group col-md-3 rep-margin-left">
                                 <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                     <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -302,7 +302,7 @@
                                                            error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                     </label>
 
-                                    <h3 ng-if="transInfoCtrl.transactionModel.subType">{{::'ADMIN_DESCRIPT'|translate}}</h3>
+                                    <h5 ng-if="transInfoCtrl.transactionModel.subType">{{::'ADMIN_DESCRIPT'|translate}}</h5>
                                     <div ng-if="!transInfoCtrl.isFrench()" ng-switch="transInfoCtrl.transactionModel.subType.id">
                                         <div ng-switch-when="MANUFACT_NAME_CHGE">
                                             <div aria-live="assertive"
@@ -456,7 +456,7 @@
                 <div ng-if="transInfoCtrl.showSolicitedDetail">
                     <section class="panel panel-default">
                         <header class="panel-heading">
-                            <h3 class="panel-title">{{'SOLICITED_RQ'|translate}}</h3>
+                            <h5 class="panel-title">{{'SOLICITED_RQ'|translate}}</h5>
                         </header>
                         <div class="panel-body">
                             <cmp-requester-list list-items="transInfoCtrl.transactionModel.solicitedRequesterReord"
@@ -557,7 +557,12 @@
                         </cmp-alert>
                     </div>
                     <div>
-                           <h3>{{::'COMPANY_INFO'|translate}}</h3>
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>{{::'COMPANY_INFO'|translate}}</h5>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="form-group col-md-12"
                                      ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId].$invalid}">
@@ -593,19 +598,21 @@
                                     </div>
                                 </div>
                             </div>
-
-                     </div>
-                    <div>
-                        <h3>{{::'ADDRESS_INFO'|translate}}</h3>
-                        <div class="row">
-                            <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
-                                                 is-amend="true" show-errors="transInfoCtrl.showErrors()"
-                                                 update-error-summary="transInfoCtrl.updateErrorSummary()">
-                            </cmp-address-details>
-                        </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>{{::'ADDRESS_INFO'|translate}}</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <cmp-address-details address-record="transInfoCtrl.transactionModel.activityAddress"
+                                                     is-amend="true" show-errors="transInfoCtrl.showErrors()"
+                                                     update-error-summary="transInfoCtrl.updateErrorSummary()">
+                                </cmp-address-details>
+                            </div>
+                        </fieldset>
                     </div>
                     <div>
-                        <h3>{{::'COMPANY_REP_THIS'|translate}}</h3>
+                        <h5>{{::'COMPANY_REP_THIS'|translate}}</h5>
                         <div class="row">
                             <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
                                                  update-error-summary="transInfoCtrl.updateErrorSummary()"
