@@ -351,19 +351,19 @@
          * Hide - productName,
          */
 
-        vm.showProductName = function(){
+        vm.disableProductName = function(){
             if(vm.finalState)
             {
                 if( vm.transactionModel.resetBtnClicked)
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
-                    return true;
+                    return false;
                 }
             }
-            return true;
+            return false;
         };
 
         $scope.$watch('transInfoCtrl.transInfoForm.$error', function () {
