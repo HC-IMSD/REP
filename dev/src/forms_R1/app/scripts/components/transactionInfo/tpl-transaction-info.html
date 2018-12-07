@@ -125,7 +125,7 @@
                                 </cmp-alert>
                             </div>
                         </div>
-                        <div class="row" ng-if="transInfoCtrl.showProductName()">
+                        <div class="row">
                             <div class="form-group col-md-12"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                 <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
@@ -145,7 +145,8 @@
 
                                 <textarea id="{{::transInfoCtrl.productNameId}}" name="{{::transInfoCtrl.productNameId}}"
                                           ng-model="transInfoCtrl.transactionModel.ectd.productName"
-                                          class="full-width" maxlength="256" size="256" required></textarea>
+                                          class="full-width" maxlength="256" size="256"
+                                          ng-disabled="transInfoCtrl.disableProductName()" required></textarea>
 
                                 <div>
                                     <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="PRODUCT_INSTRUCT"
