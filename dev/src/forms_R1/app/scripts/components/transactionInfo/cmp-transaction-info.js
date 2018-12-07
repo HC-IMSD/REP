@@ -352,18 +352,7 @@
          */
 
         vm.disableProductName = function(){
-            if(vm.finalState)
-            {
-                if( vm.transactionModel.resetBtnClicked)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return false;
+            return (vm.finalState);
         };
 
         $scope.$watch('transInfoCtrl.transInfoForm.$error', function () {
