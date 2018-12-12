@@ -1,5 +1,5 @@
 <ng-form name="nmilCtrl.nonMedListForm">
-    <cmp-expanding-table title="Non Medicinal Ingredient List" list-items="nmilCtrl.ingList"
+    <cmp-expanding-table pre-id="non_medicinal_list_" title="Non Medicinal Ingredient List" list-items="nmilCtrl.ingList"
                          column-def="nmilCtrl.colNames" select-record="nmilCtrl.selectRecord"
                          reset-to-collapsed="nmilCtrl.resetToCollapsed"
                          disable-selection="!nmilCtrl.isDetailValid">
@@ -12,7 +12,7 @@
 
     </cmp-expanding-table>
     <div name="new-nmi-record">
-        <cmp-non-med-ing-record ng-if="nmilCtrl.newIngFormShown === true" on-add-ing="nmilCtrl.addIng(ing)"
+        <cmp-non-med-ing-record data-ng-if="nmilCtrl.newIngFormShown === true" on-add-ing="nmilCtrl.addIng(ing)"
                                 record-index="nmilCtrl.ingList.length"
                                 error-summary-update="nmilCtrl.errorSummaryUpdate" show-error-summary="nmilCtrl.showErrorSummary"
                                 on-cancel="nmilCtrl.onNewCancel()" delete-btn="false"></cmp-non-med-ing-record>
@@ -21,7 +21,7 @@
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
             <button class="btn btn-primary" data-ng-disabled="nmilCtrl.addNewDisabled()" name="addNMI"
-                    ng-click="nmilCtrl.addNewIngredientState()">Add Ingredient
+                    data-ng-click="nmilCtrl.addNewIngredientState()">Add Ingredient
             </button>
         </div>
     </div>

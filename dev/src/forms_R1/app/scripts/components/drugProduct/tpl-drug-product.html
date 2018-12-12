@@ -1,12 +1,12 @@
 <ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm">
-    <div translate-cloak="cloak-class">
+    <div data-translate-cloak="cloak-class">
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-8">{{::'LOAD_DRUGPROD'|translate}}</h2>
                 <div class="btn-group pull-right">
                     <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
                             class="btn-xs rep-help-button"
-                            id="instructions-toggle" ng-click="drugProdCtrl.addInstruct(0)">
+                            id="instructions-toggle" data-ng-click="drugProdCtrl.addInstruct(0)">
                         <span class="fa fa-question-circle fa-2x"></span>
                         <span class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span>
                     </button>
@@ -19,10 +19,10 @@
                                 update-state="drugProdCtrl.closeAlert(0)"
                                 type="alert-info">
                     <section aria-live="assertive">
-                        <div ng-if="!drugProdCtrl.isFrench()"
+                        <div data-ng-if="!drugProdCtrl.isFrench()"
                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-file-en.html'">
                         </div>
-                        <div ng-if="drugProdCtrl.isFrench()"
+                        <div data-ng-if="drugProdCtrl.isFrench()"
                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-file-fr.html'">
                         </div>
                     </section>
@@ -40,7 +40,7 @@
                     <button title="{{::'EXPAND'|translate}} {{::'PRODUCT_INFO_INSTRUCT'|translate}}"
                             class="btn-xs rep-help-button"
                             id="drugProduct-instructions-toggle"
-                            ng-click="drugProdCtrl.addInstruct(1)">
+                            data-ng-click="drugProdCtrl.addInstruct(1)">
                         <span class="fa fa-question-circle fa-2x"></span>
                         <span class="wb-inv">{{::'PRODUCT_INFO_INSTRUCT'|translate}}</span>
                     </button>
@@ -55,10 +55,10 @@
                                         update-state="drugProdCtrl.closeAlert(1)"
                                         type="alert-info">
                             <section aria-live="assertive">
-                                <div ng-if="!drugProdCtrl.isFrench()"
+                                <div data-ng-if="!drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-en.html'">
                                 </div>
-                                <div ng-if="drugProdCtrl.isFrench()"
+                                <div data-ng-if="drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-enrolment-fr.html'">
                                 </div>
                             </section>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-4 form-group"
-                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
+                         data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
                         <label for="{{::drugProdCtrl.compId}}" class="required">
                             <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -86,7 +86,7 @@
                             </cmp-error-message>
                             <input type="text" class="form-control full-width" id="{{::drugProdCtrl.compId}}"
                                    name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5"
-                                   ng-model="drugProdCtrl.model.companyID"/>
+                                   data-ng-model="drugProdCtrl.model.companyID"/>
 
                         </label>
                     </div>
@@ -98,31 +98,31 @@
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.dossierId])"
                                                error-types="drugProdCtrl.min7Error"></cmp-error-message>
+                        </label>
                             <div class="rep-input-group">
                                 <span class="input-group-addon">HC6-024-</span>
-                                <div ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
+                                <div data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
                                     <input type="text" class="form-control full-width" id="{{::drugProdCtrl.dossierId}}"
                                            maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}"
-                                           size="6" ng-model="drugProdCtrl.model.dossierID" required/>
+                                           size="6" data-ng-model="drugProdCtrl.model.dossierID" required/>
                                 </div>
                             </div>
 
-                        </label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group"
-                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId].$invalid}">
+                         data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId].$invalid}">
                         <label for="{{::drugProdCtrl.prodNameId}}" class="required">
                             <span class="field-name">3.&nbsp;{{::'PROD_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
+                            <span title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
                                     id="productName-instructions-toggle"
-                                    ng-click="drugProdCtrl.addInstruct(8)">
+                                    data-ng-click="drugProdCtrl.addInstruct(8)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'PROD_NAME_HELP'|translate}}</span>
-                            </button>
+                            </span>
                             <cmp-error-message field-name="drugProdCtrl.prodNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId])"
@@ -136,10 +136,10 @@
                                                 update-state="drugProdCtrl.closeAlert(8)"
                                                 type="alert-info">
                                     <section aria-live="assertive">
-                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                        <div data-ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-product-name-en.html'">
                                         </div>
-                                        <div ng-if="drugProdCtrl.isFrench()"
+                                        <div data-ng-if="drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-product-name-fr.html'">
                                         </div>
                                     </section>
@@ -147,23 +147,23 @@
                                 </div>
                             </div>
                         </div>
-                        <textarea type="text" class="form-control full-width" id="{{::drugProdCtrl.prodNameId}}" name="{{::drugProdCtrl.prodNameId}}"
-                                  required ng-model="drugProdCtrl.model.productName" maxlength="256" rows="3">
+                        <textarea class="form-control full-width" id="{{::drugProdCtrl.prodNameId}}" name="{{::drugProdCtrl.prodNameId}}"
+                                  required data-ng-model="drugProdCtrl.model.productName" maxlength="256" rows="3">
                         </textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 form-group"
-                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.properNameId].$invalid}">
+                         data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.properNameId].$invalid}">
                         <label for="{{::drugProdCtrl.properNameId}}" class="required">
                             <span class="field-name">4.&nbsp;{{::'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'PROPER_NAME_INSTRUCT'|translate}}"
+                            <span title="{{::'EXPAND'|translate}} {{::'PROPER_NAME_INSTRUCT'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
-                                    id="properName-instructions-toggle" ng-click="drugProdCtrl.addInstruct(9)">
+                                    id="properName-instructions-toggle" data-ng-click="drugProdCtrl.addInstruct(9)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'PROPER_NAME_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                             <cmp-error-message field-name="drugProdCtrl.properNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.properNameId])"
@@ -177,10 +177,10 @@
                                                 update-state="drugProdCtrl.closeAlert(9)"
                                                 type="alert-info">
                                     <section aria-live="assertive">
-                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                        <div data-ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-proper-name-en.html'">
                                         </div>
-                                        <div ng-if="drugProdCtrl.isFrench()"
+                                        <div data-ng-if="drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-proper-name-fr.html'">
                                         </div>
                                     </section>
@@ -188,8 +188,8 @@
                                 </div>
                             </div>
                         </div>
-                        <textarea type="text" class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
-                              required ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3"
+                        <textarea class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
+                              required data-ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3"
                               data-ng-change="drugProdCtrl.model.properName=drugProdCtrl.model.properName.toUpperCase()">
                         </textarea>
                     </div>
@@ -197,12 +197,12 @@
                 <fieldset id="fs_addrMissing_{{::$id}}">
                     <label>
                         <span class="field-name">5. {{::'ADDRESS_NOC'|translate}}</span>
-                        <button title="{{::'EXPAND'|translate}} {{::'ADDR_INSTRUCT'|translate}}"
+                        <span title="{{::'EXPAND'|translate}} {{::'ADDR_INSTRUCT'|translate}}"
                                 class="btn rep-help-button-primary btn-xs"
-                                id="address-instructions-toggle" ng-click="drugProdCtrl.addInstruct(7)">
+                                id="address-instructions-toggle" data-ng-click="drugProdCtrl.addInstruct(7)">
                             <span class="fa fa-question-circle fa-2x"></span>
                             <span class="wb-inv">{{::'ADDR_INSTRUCT'|translate}}</span>
-                        </button>
+                        </span>
                     </label>
                     <div>
                         <div class="row">
@@ -213,10 +213,10 @@
                                                 update-state="drugProdCtrl.closeAlert(7)"
                                                 type="alert-info">
                                     <section aria-live="assertive">
-                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                        <div data-ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-activity-address-sent-en.html'">
                                         </div>
-                                        <div ng-if="drugProdCtrl.isFrench()"
+                                        <div data-ng-if="drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drug/tpl-activity-address-sent-fr.html'">
                                         </div>
                                     </section>
@@ -229,8 +229,8 @@
                                 <div class="checkbox checkbox-pi">
                                     <label for="manuid">
                                         <input type="checkbox" id="manuid" name="manuid"
-                                               ng-model="drugProdCtrl.model.manu"
-                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                               data-ng-model="drugProdCtrl.model.manu"
+                                               data-ng-change="drugProdCtrl.rolechecked()"/>
                                         <span>{{::"MANU_SPON"|translate}}</span>
 
                                     </label>
@@ -240,8 +240,8 @@
                                 <div class="checkbox">
                                     <label for="maillingid">
                                         <input type="checkbox" id="maillingid" name="maillingid"
-                                               ng-model="drugProdCtrl.model.mailling"
-                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                               data-ng-model="drugProdCtrl.model.mailling"
+                                               data-ng-change="drugProdCtrl.rolechecked()"/>
                                         <span>{{::"REGU_ANNU"|translate}}</span>
 
                                     </label>
@@ -253,8 +253,8 @@
                                 <div class="checkbox checkbox-pi">
                                     <label for="thisActivity">
                                             <input type="checkbox" id="thisActivity" name="thisActivity"
-                                               ng-model="drugProdCtrl.model.thisActivity"
-                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                                   data-ng-model="drugProdCtrl.model.thisActivity"
+                                                   data-ng-change="drugProdCtrl.rolechecked()"/>
                                         <span>{{::"THIS_ACTIVITY"|translate}}</span>
                                     </label>
                                 </div>
@@ -263,8 +263,8 @@
                                 <div class="checkbox">
                                     <label for="importeraddr">
                                         <input type="checkbox" id="importeraddr" name="importeraddr"
-                                               ng-model="drugProdCtrl.model.importer"
-                                               ng-change="drugProdCtrl.rolechecked()"/>
+                                               data-ng-model="drugProdCtrl.model.importer"
+                                               data-ng-change="drugProdCtrl.rolechecked()"/>
                                         <span>{{::"CAN_IMP"|translate}}</span>
 
                                     </label>
@@ -278,12 +278,12 @@
                     <header class="panel-heading clearfix">
                         <h3 class="panel-title col-md-8">6. {{'IMPORTER'|translate}}</h3>
                         <div class="btn-group pull-right">
-                            <button title="{{::'EXPAND'|translate}} {{::'IMPORTER_INSTRUCT'|translate}}"
+                            <span title="{{::'EXPAND'|translate}} {{::'IMPORTER_INSTRUCT'|translate}}"
                                     class="btn-xs rep-help-button-primary btn-xs"
-                                    id="importer-instructions-toggle" ng-click="drugProdCtrl.addInstruct(10)">
+                                    id="importer-instructions-toggle" data-ng-click="drugProdCtrl.addInstruct(10)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'IMPORTER_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                         </div>
                     </header>
                     <div class="panel-body">
@@ -295,10 +295,10 @@
                                                 update-state="drugProdCtrl.closeAlert(10)"
                                                 type="alert-info">
                                     <section aria-live="assertive">
-                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                        <div data-ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-importer-en.html'">
                                         </div>
-                                        <div ng-if="drugProdCtrl.isFrench()"
+                                        <div data-ng-if="drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-importer-fr.html'">
                                         </div>
                                     </section>
@@ -318,31 +318,34 @@
                 </section>
                 <div class="row">
                     <div class="col-xs-4 form-group"
-                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
+                         data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
                             <span class="field-name">7.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}"
+                            <span title="{{::'EXPAND'|translate}} {{::'DRUG_USE_INSTRUCT'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
-                                    id="drug-use-instructions-toggle" ng-click="drugProdCtrl.addInstruct(3)">
+                                    id="drug-use-instructions-toggle" data-ng-click="drugProdCtrl.addInstruct(3)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'DRUG_USE_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                             <cmp-error-message field-name="drugProdCtrl.drugUseId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
-                            <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
-                                    ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
-                                    ng-change="drugProdCtrl.drugUseUpdate()"
-                                    ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.drugUseList track by use.id"
-                                    required></select>
-
                         </label>
+                            <select name="{{::drugProdCtrl.drugUseId}}" class="form-control"
+                                    data-ng-model="drugProdCtrl.model.drugProduct.drugUse" id="{{::drugProdCtrl.drugUseId}}"
+                                    data-ng-change="drugProdCtrl.drugUseUpdate()"
+                                    data-ng-options="use[drugProdCtrl.lang] for use in  drugProdCtrl.drugUseList track by use.id"
+                                    required>
+                                <option value="" label=" "></option>
+                            </select>
+
+
                     </div>
                 </div>
 
-                <div ng-if="drugProdCtrl.isDisinfectant()">
+                <div data-ng-if="drugProdCtrl.isDisinfectant()">
                     <cmp-disinfectant-type record="drugProdCtrl.model.drugProduct.disinfectantType"
                                       on-update="drugProdCtrl.onDisiTypeUpdate($event.roles)"
                                       show-errors="drugProdCtrl.showErrors()"
@@ -360,10 +363,10 @@
 
 
                             <section aria-live="assertive">
-                                <div ng-if="!drugProdCtrl.isFrench()"
+                                <div data-ng-if="!drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-drug-use-en.html'">
                                 </div>
-                                <div ng-if="drugProdCtrl.isFrench()"
+                                <div data-ng-if="drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drug/tpl-drugProduct-drug-use-fr.html'">
                                 </div>
                             </section>
@@ -383,7 +386,7 @@
                             <label for="is-schedule-c">
                                 <input type="checkbox" name="isScheduleC"
                                        id="is-schedule-c"
-                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
                                 {{::'SCHEDULE_C'|translate}}
                             </label>
                         </div>
@@ -393,7 +396,7 @@
                             <label for="is-schedule-d">
                                 <input type="checkbox" name="isScheduleD"
                                        id="is-schedule-d"
-                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
                                 {{::'SCHEDULE_D'|translate}}
                             </label>
                         </div>
@@ -403,7 +406,7 @@
                             <label for="is-prescription-drug">
                                 <input type="checkbox" name="isPrescriptionDrugList"
                                        id="is-prescription-drug"
-                                       ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrugList"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrugList"/>
                                 {{::'PRESC_DRUG_LIST'|translate}}
                             </label>
                         </div>
@@ -413,7 +416,7 @@
                             <label for="is-regulated-cdsa">
                                 <input type="checkbox" name="isRegulatedCDSA"
                                        id="is-regulated-cdsa"
-                                       ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
                                 {{::'REGULATED_CDSA'|translate}}
                             </label>
                         </div>
@@ -423,7 +426,7 @@
                             <label for="is-nonprescription-drug">
                                 <input type="checkbox" name="isNonPrescriptionDrug"
                                        id="is-nonprescription-drug"
-                                       ng-model="drugProdCtrl.model.drugProduct.isNonPrescriptionDrug"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isNonPrescriptionDrug"/>
                                 {{::'NON_PRESC_DRUG'|translate}}
                             </label>
                         </div>
@@ -433,14 +436,14 @@
                         <div class="col-xs-12 checkbox checkbox-pi">
                             <label for="is-schedule-a">
                                 <input type="checkbox" name="isScheduleA"
-                                       ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a">
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a">
                                 {{::'NON_PRESC_SCHEDULE_A'|translate}}
                             </label>
                         </div>
                     </div>
                 </fieldset>
 
-                <div class="row" ng-if="drugProdCtrl.isSchedA()">
+                <div class="row" data-ng-if="drugProdCtrl.isSchedA()">
                     <div class="col-xs-12 form-group">
                         <cmp-schedule-a schedule-group="drugProdCtrl.model.drugProduct.scheduleAGroup" show-errors="drugProdCtrl.showSummary"></cmp-schedule-a>
                     </div>
@@ -448,17 +451,17 @@
 
                 <div class="row">
                     <div class="form-group col-md-12"
-                         ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
-                        <label for="{{::drugProdCtrl.propIndicationId}}" class="required">
+                         data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
+                        <label class="required">
                             <span class="field-name">9. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}"
+                            <span title="{{::'EXPAND'|translate}} {{::'PROP_INDI_INSTRUCT'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
                                     id="prop-indication-instructions-toggle"
-                                    ng-click="drugProdCtrl.addInstruct(4)">
+                                    data-ng-click="drugProdCtrl.addInstruct(4)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'PROP_INDI_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                             <cmp-error-message field-name="drugProdCtrl.propIndicationId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId])"
@@ -472,10 +475,10 @@
                                                 update-state="drugProdCtrl.closeAlert(4)"
                                                 type="alert-info">
                                     <section aria-live="assertive">
-                                        <div ng-if="!drugProdCtrl.isFrench()"
+                                        <div data-ng-if="!drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-indication-en.html'">
                                         </div>
-                                        <div ng-if="drugProdCtrl.isFrench()"
+                                        <div data-ng-if="drugProdCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-indication-fr.html'">
                                         </div>
                                     </section>
@@ -485,36 +488,36 @@
                         </div>
                         <textarea id="{{::drugProdCtrl.propIndicationId}}"
                                   data-ng-model="drugProdCtrl.model.drugProduct.propIndication" maxlength="1024" rows="3"
-                                  ng-model-options="{ debounce: $inherit}"
+                                  data-ng-model-options="{ debounce: $inherit}"
                                   class="form-control full-width" name="{{::drugProdCtrl.propIndicationId}}" required>
                         </textarea>
                     </div>
                 </div>
 
                 <div>
-                    <section ng-if="drugProdCtrl.appendixMissingError()">
-                        <input type="hidden" required ng-model="drugProdCtrl.missingAppendixModel"
+                    <section data-ng-if="drugProdCtrl.appendixMissingError()">
+                        <input type="hidden" required data-ng-model="drugProdCtrl.missingAppendixModel"
                                aria-hidden="true" name="fake.appendix_missing_error" id="fake.appendix_missing_error"/>
                         <details class="alert alert-danger" id="errors-summary-fake.appendix_missing_error" open="open">
                             <summary class="h3">
                                 <h2>{{::'MISSING_APPENDIX'|translate}}</h2>
                             </summary>
                             <ul>
-                                <li ng-repeat="ingred in drugProdCtrl.errorAppendix">{{ingred}}</li>
+                                <li data-ng-repeat="ingred in drugProdCtrl.errorAppendix">{{ingred}}</li>
                             </ul>
                         </details>
                     </section>
                 </div>
                 <div>
                     <section ng-if="drugProdCtrl.appendixExtraError()">
-                        <input type="hidden"  required ng-model="drugProdCtrl.extraAppendixModel"
+                        <input type="hidden"  data-ng-model="drugProdCtrl.extraAppendixModel"
                                aria-hidden="true" id="fake.appendix_extra_error" name="fake.appendix_extra_error"/>
                         <details class="alert alert-danger" id="errors-summary-fake.appendix_extra_error" open="open">
                             <summary class="h3">
                                 <h2>{{::'EXTRA_APPENDIX'|translate}}</h2>
                             </summary>
                             <ul>
-                                <li ng-repeat="ingred in drugProdCtrl.extraAppendix">{{ingred}}</li>
+                                <li data-ng-repeat="ingred in drugProdCtrl.extraAppendix">{{ingred}}</li>
                             </ul>
                         </details>
                     </section>
@@ -527,7 +530,7 @@
                             <button title="{{::'EXPAND'|translate}} {{::'FORMULATION_INSTRUCT'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
                                     id="formulation-instructions-toggle"
-                                    ng-click="drugProdCtrl.addInstruct(5)">
+                                    data-ng-click="drugProdCtrl.addInstruct(5)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'FORMULATION_INSTRUCT'|translate}}</span>
                             </button>
@@ -542,10 +545,10 @@
                                         update-state="drugProdCtrl.closeAlert(5)"
                                         type="alert-info">
                             <section aria-live="assertive">
-                                <div ng-if="!drugProdCtrl.isFrench()"
+                                <div data-ng-if="!drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-formulation-en.html'">
                                 </div>
-                                <div ng-if="drugProdCtrl.isFrench()"
+                                <div data-ng-if="drugProdCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/drug/tpl-drugProduct-formulation-fr.html'">
                                 </div>
                             </section>
@@ -565,16 +568,16 @@
         </section>
         <div class="row">
             <div class="form-group col-md-12">
-                <button class="btn btn-default btn-lg active mrgn-rght-sm" ng-click="drugProdCtrl.saveJson()"
-                        ng-disabled="drugProdCtrl.disableJSONSave()">
+                <button class="btn btn-default btn-lg active mrgn-rght-sm" data-ng-click="drugProdCtrl.saveJson()"
+                        data-ng-disabled="drugProdCtrl.disableJSONSave()">
                     {{::'SAVE_WORKING'|translate}}
                 </button>
                 <button class="btn btn-primary btn-lg active" id="btn_xmlSave"
-                        ng-click="drugProdCtrl.saveXML()">{{drugProdCtrl.saveXMLLabel |translate}}
+                        data-ng-click="drugProdCtrl.saveXML()">{{drugProdCtrl.saveXMLLabel |translate}}
                 </button>
                 <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
                         class="btn rep-help-button-primary btn-xs"
-                        id="save-instructions-toggle" ng-click="drugProdCtrl.addInstruct(6)">
+                        id="save-instructions-toggle" data-ng-click="drugProdCtrl.addInstruct(6)">
                         <span class="fa fa-question-circle fa-2x"></span>
                         <span class="wb-inv">{{::'SAVE_INSTRUCT'|translate}}</span>
                 </button>
@@ -588,10 +591,10 @@
                                 update-state="drugProdCtrl.closeAlert(6)"
                                 type="alert-info">
                         <section aria-live="assertive">
-                        <div ng-if="!drugProdCtrl.isFrench()"
+                        <div data-ng-if="!drugProdCtrl.isFrench()"
                              ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-save-en.html'">
                         </div>
-                        <div ng-if="drugProdCtrl.isFrench()"
+                        <div data-ng-if="drugProdCtrl.isFrench()"
                              ng-include="'app/scripts/templates/drug/tpl-drugProduct-save-fr.html'">
                         </div>
                     </section>

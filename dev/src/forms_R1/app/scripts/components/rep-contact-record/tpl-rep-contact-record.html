@@ -32,11 +32,11 @@
         <div class="row">
             <div class="btn-group-sm col-md-12">
                 <input type="submit" value="{{::'SAVE_CONTACT' |translate}}" class="btn btn-primary mrgn-rght-sm" name="saveContact"
-                       id="saveContact" ng-click="contactRec.updateContactModel()"/>
+                       id="saveContact" data-ng-click="contactRec.updateContactModel()"/>
                 <input type="submit" value="{{::'DELETE_CONTACT' |translate}}" class="btn btn-danger mrgn-rght-sm"
-                       ng-click="contactRec.delete()"/>
+                       data-ng-click="contactRec.delete()"/>
                 <input type="submit" value="{{::'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                       ng-click="contactRec.discardChanges()"/>
+                       data-ng-click="contactRec.discardChanges()"/>
             </div>
         </div>
 </div>

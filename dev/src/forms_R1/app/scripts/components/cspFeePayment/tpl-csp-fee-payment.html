@@ -2,17 +2,17 @@
     <ng-form name="cspFeePayCtrl.paymentForm">
         <div>
             <p>
-                <ng-bind-html ng-bind-html="cspFeePayCtrl.preamble">
+                <ng-bind-html data-ng-bind-html="cspFeePayCtrl.preamble">
                 </ng-bind-html>
                 <a ng-href="{{::cspFeePayCtrl.url}}" target="_blank">
-                    <ng-bind-html ng-bind-html="cspFeePayCtrl.urlTitle"></ng-bind-html>
+                    <ng-bind-html data-ng-bind-html="cspFeePayCtrl.urlTitle"></ng-bind-html>
                 </a>&nbsp;{{::'ADVANCE_DETAILS'|translate}}
             </p>
         </div>
         <div class="row mrgn-bttm-md">
             <div class=" col-xs-12 checkbox ">
                 <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}" class="required">
-                    <input type="checkbox" ng-model="cspFeePayCtrl.model.ackPaymentSubmit"
+                    <input type="checkbox" data-ng-model="cspFeePayCtrl.model.ackPaymentSubmit"
                            name="{{::cspFeePayCtrl.ackFeeSubmitId}}" id="{{::cspFeePayCtrl.ackFeeSubmitId}}" required/>
                     {{::"ACK_FEE_SUBMIT"|translate}} <strong class="required">{{"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="cspFeePayCtrl.ackFeeSubmitId"
@@ -37,7 +37,7 @@
                 <div class="col-xs-12 col-sm-3 rep-vertical-align">
                     <div class="rep-input-group">
                         <span class="input-group-addon">$</span>
-                        <div  ng-class="{'has-error':cspFeePayCtrl.paymentForm[cspFeePayCtrl.feeId].$invalid}">
+                        <div  data-ng-class="{'has-error':cspFeePayCtrl.paymentForm[cspFeePayCtrl.feeId].$invalid}">
                             <input type="number" step='0.01' id="{{::cspFeePayCtrl.feeId}}" name="{{::cspFeePayCtrl.feeId}}"
                                    data-ng-model="cspFeePayCtrl.model.advancedPaymentFee" class="form-control"
                                    min="0.01" max="99999999.99" required/>
@@ -55,7 +55,7 @@
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         <select type="text" id="{{::cspFeePayCtrl.feeTypeId}}" name="{{::cspFeePayCtrl.feeTypeId}}"
                                 data-ng-model="cspFeePayCtrl.model.advancedPaymentType" class="form-control"
-                                ng-options="payMethod |translate for payMethod in cspFeePayCtrl.paymentList"
+                                data-ng-options="payMethod |translate for payMethod in cspFeePayCtrl.paymentList"
                                 required></select>
                         <cmp-error-message field-name="cspFeePayCtrl.feeTypeId"
                                            form-ref="cspFeePayCtrl.paymentForm"

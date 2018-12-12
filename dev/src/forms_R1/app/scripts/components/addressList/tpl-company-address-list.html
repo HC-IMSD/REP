@@ -8,11 +8,11 @@
                                set-heading-level="h4"></cmp-error-summary>-->
         </div>
         <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}"
-               ng-model="addressListCtrl.allRolesSelected" hidden required/>
+               data-ng-model="addressListCtrl.allRolesSelected" hidden required/>
 
-        <input type="text" id="importerIdValid_{{::$id}}" name="importerIdValid_{{::$id}}"  ng-model="addressListCtrl.importerhasID" hidden ng-required="addressListCtrl.isInternal"/>
+        <input type="text" id="importerIdValid_{{::$id}}" name="importerIdValid_{{::$id}}"  data-ng-model="addressListCtrl.importerhasID" hidden data-ng-required="addressListCtrl.isInternal"/>
        <!-- <label>
-            <strong id=" addressNum-role-error" asdadsv class="error" ng-show="addressListCtrl.showError()">
+            <strong id=" addressNum-role-error" asdadsv class="error" data-ng-show="addressListCtrl.showError()">
                         <span class="label label-danger"
                               ng-messages="addressListCtrl.addressListForm.addressRolesValid_{{::$id}}.$error">
                             <span ng-message="required">{{"MSG_ERR_ADDRESSSROLE"|translate}}</span>
@@ -41,8 +41,8 @@
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" ng-click="addressListCtrl.addAddress()" name="addAddressBtn_{{::$id}}" id="addAddressBtn_{{::$id}}"
-                    ng-disabled="addressListCtrl.disableAddAddress()">{{::'ADD_ADDRESS'|translate}}</button>
+            <button class="btn btn-primary" data-ng-click="addressListCtrl.addAddress()" name="addAddressBtn_{{::$id}}" id="addAddressBtn_{{::$id}}"
+                    data-ng-disabled="addressListCtrl.disableAddAddress()">{{::'ADD_ADDRESS'|translate}}</button>
         </div>
     </div>
 </ng-form>

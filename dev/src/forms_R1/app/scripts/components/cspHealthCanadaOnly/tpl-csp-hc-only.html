@@ -2,11 +2,11 @@
     <ng-form name="hcOnlyCtrl.hcOnlyForm">
         <div class="row">
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.dateReceivedId].$invalid}">
+                 data-ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.dateReceivedId].$invalid}">
                 <label for="{{::hcOnlyCtrl.dateReceivedId}}">
                     <span class="field-name">{{::"DATE_APPL_REC" |translate}}</span>
-                    <span ng-if="!hcOnlyCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
-                    <span ng-if="hcOnlyCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
+                    <span data-ng-if="!hcOnlyCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                    <span data-ng-if="hcOnlyCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                     <input type="date" id="{{::hcOnlyCtrl.dateReceivedId}}" name="{{::hcOnlyCtrl.dateReceivedId}}"
                            data-ng-model="hcOnlyCtrl.model.dateReceived" class="form-control"/>
                    <!-- <cmp-error-message field-name="hcOnlyCtrl.dateReceivedId" form-ref="hcOnlyCtrl.hcOnlyForm"
@@ -15,7 +15,7 @@
                 </label>
             </div>
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.companyCodeId].$invalid}">
+                 data-ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.companyCodeId].$invalid}">
                 <label for="{{::hcOnlyCtrl.companyCodeId}}">
                     <span class="field-name">{{::"CSP_COMPANY_CODE" |translate}}</span>
                     <input type="text" id="{{::hcOnlyCtrl.companyCodeId}}" name="{{::hcOnlyCtrl.companyCodeId}}"
@@ -27,7 +27,7 @@
                 </label>
             </div>
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.applicationCodeId].$invalid}">
+                 data-ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.applicationCodeId].$invalid}">
                 <label for="{{::hcOnlyCtrl.applicationCodeId}}" >
                     <span class="field-name">{{::"CSP_APPLICATION_CODE" |translate}}</span>
                     <input type="text" id="{{::hcOnlyCtrl.applicationCodeId}}" name="{{::hcOnlyCtrl.applicationCodeId}}"
@@ -41,7 +41,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.notesId].$invalid}">
+                 data-ng-class="{'has-error':hcOnlyCtrl.hcOnlyForm[hcOnlyCtrl.notesId].$invalid}">
                 <label for="{{::hcOnlyCtrl.notesId}}">
                     <span class="field-name">{{::"NOTES" |translate}}</span>
                   <!--  <cmp-error-message field-name="hcOnlyCtrl.notesId" form-ref="hcOnlyCtrl.hcOnlyForm"

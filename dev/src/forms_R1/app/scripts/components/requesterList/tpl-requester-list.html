@@ -1,5 +1,5 @@
 <ng-form name="requesterListCtrl.requesterListForm">
-    <cmp-expanding-table reset-to-collapsed="requesterListCtrl.resetToCollapsed"
+    <cmp-expanding-table pre-id="requester_list_" reset-to-collapsed="requesterListCtrl.resetToCollapsed"
                          list-items="requesterListCtrl.model.list"
                          column-def="requesterListCtrl.columnDef" select-record="requesterListCtrl.selectRecord"
                          disable-selection="false">
@@ -10,8 +10,8 @@
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
-            <button class="btn btn-primary" ng-click="requesterListCtrl.addNew()" name="addRequester_{{::$id}}" id="addRequester_{{::$id}}"
-                    ng-disabled="requesterListCtrl.disableAddButton()">{{'ADD'|translate}}&nbsp;{{'SOLICITED_RQ'|translate}}
+            <button class="btn btn-primary" data-ng-click="requesterListCtrl.addNew()" name="addRequester_{{::$id}}" id="addRequester_{{::$id}}"
+                    data-ng-disabled="requesterListCtrl.disableAddButton()">{{'ADD'|translate}}&nbsp;{{'SOLICITED_RQ'|translate}}
             </button>
         </div>
     </div>

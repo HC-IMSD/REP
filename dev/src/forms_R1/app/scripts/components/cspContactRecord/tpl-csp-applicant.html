@@ -2,25 +2,25 @@
     <fieldset>
         <ng-form name="cspApplCtrl.applForm">
             <div>
-                <div ng-if="cspApplCtrl.model.role.billing && !cspApplCtrl.model.role.applicant">
+                <div data-ng-if="cspApplCtrl.model.role.billing && !cspApplCtrl.model.role.applicant">
                     <div class="col-xs-12">
                         <legend> {{::'BILLING_TITLE' |translate}}
                             <button title="{{::'BILLING_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    ng-click="cspApplCtrl.addInstruct(1)"><span
+                                    data-ng-click="cspApplCtrl.addInstruct(1)"><span
                                     class="fa fa-question-circle fa-2x"></span><span
                                     class="wb-inv">"{{::'BILLING_INSTRUCT'|translate}}"</span>
                             </button>
                         </legend>
                     </div>
                 </div>
-                <div class="row" ng-if=" !cspApplCtrl.model.role.applicant">
+                <div class="row" data-ng-if=" !cspApplCtrl.model.role.applicant">
                     <div class="col-xs-12">
                         <cmp-alert  ui-state="cspApplCtrl.alerts[1]" msg="APPLICANT_CLOSE" update-state="cspApplCtrl.toggleAlert(1)" type="alert-info">
                             <section aria-live="assertive">
-                                <div ng-if="!cspApplCtrl.isFrench()"
+                                <div data-ng-if="!cspApplCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/csp/tpl-csp-billing-en.html'">
                                 </div>
-                                <div ng-if="cspApplCtrl.isFrench()"
+                                <div data-ng-if="cspApplCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/csp/tpl-csp-billing-fr.html'">
                                 </div>
                             </section>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-12"
-                     ng-class="{'has-error':cspApplCtrl.applForm[cspApplCtrl.applicantId].$invalid}">
+                     data-ng-class="{'has-error':cspApplCtrl.applForm[cspApplCtrl.applicantId].$invalid}">
                     <label for="{{::cspApplCtrl.applicantId}}" class="required">
                         <span class="field-name">{{cspApplCtrl.applicantTextAlias |translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}} </strong>
@@ -43,12 +43,12 @@
                     </label>
                 </div>
 
-                <div ng-if="cspApplCtrl.model.role.applicant">
+                <div data-ng-if="cspApplCtrl.model.role.applicant">
                     <div class="col-xs-12">
                         <legend>{{::'CONTACT_TITLE'|translate}}
                             <button title="{{::'APPLICANT_INSTRUCT'|translate}}"
                                     class="btn rep-help-button-primary btn-xs"
-                                    ng-click="cspApplCtrl.addInstruct(0)"><span
+                                    data-ng-click="cspApplCtrl.addInstruct(0)"><span
                                     class="fa fa-question-circle fa-2x"></span><span
                                     class="wb-inv">"{{::'APPLICANT_INSTRUCT'|translate}}"</span>
                             </button>
@@ -62,10 +62,10 @@
 
                 <cmp-alert  ui-state="cspApplCtrl.alerts[0]" msg="APPLICANT_CLOSE" update-state="cspApplCtrl.toggleAlert(0)" type="alert-info">
                     <section aria-live="assertive">
-                        <div ng-if="!cspApplCtrl.isFrench()"
+                        <div data-ng-if="!cspApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-applicant-en.html'">
                         </div>
-                        <div ng-if="cspApplCtrl.isFrench()"
+                        <div data-ng-if="cspApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-applicant-fr.html'">
                         </div>
                     </section>
@@ -83,11 +83,11 @@
                                  update-error-summary="cspApplCtrl.updateErrorSummary()"
                                  field-suffix="cspApplCtrl.type"></cmp-address-details>
             <div class=" col-md-12">
-                <div class="checkbox" ng-if="cspApplCtrl.model.role.applicant">
+                <div class="checkbox" data-ng-if="cspApplCtrl.model.role.applicant">
                     <label for="billingDifferent">
-                        <input type="checkbox" ng-model="cspApplCtrl.model.isBillingDifferent"
+                        <input type="checkbox" data-ng-model="cspApplCtrl.model.isBillingDifferent"
                                name="billingDifferent"
-                               ng-change="cspApplCtrl.setBilling()"
+                               data-ng-change="cspApplCtrl.setBilling()"
                                id="billingDifferent"/>{{::"BILLING_DIFFERENT"|translate}}
                     </label>
                 </div>

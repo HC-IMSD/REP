@@ -1,5 +1,5 @@
 <ng-form name="importerListCtrl.importerListForm">
-    <cmp-expanding-table reset-to-collapsed="importerListCtrl.resetToCollapsed"
+    <cmp-expanding-table pre-id="import_expnd_" reset-to-collapsed="importerListCtrl.resetToCollapsed"
                          list-items="importerListCtrl.model.list"
                          column-def="importerListCtrl.columnDef"
                          select-record="importerListCtrl.selectRecord"
@@ -13,9 +13,9 @@
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" ng-click="importerListCtrl.addNew()" name="addRequester_{{::$id}}"
+            <button class="btn btn-primary" data-ng-click="importerListCtrl.addNew()" name="addRequester_{{::$id}}"
                     id="addRequester_{{::$id}}"
-                    ng-disabled="importerListCtrl.disableAddButton()">{{'ADD'|translate}}&nbsp;{{'IMPORTER'|translate}}
+                    data-ng-disabled="importerListCtrl.disableAddButton()">{{'ADD'|translate}}&nbsp;{{'IMPORTER'|translate}}
             </button>
         </div>
     </div>

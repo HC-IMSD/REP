@@ -1,7 +1,7 @@
 <ng-form name="roaCtrl.roaListForm">
-    <input type="text" required ng-show="false" name="{{::roaCtrl.noRoaId}}" id="{{::roaCtrl.noRoaId}}"
+    <input type="text" required data-ng-show="false" name="{{::roaCtrl.noRoaId}}" id="{{::roaCtrl.noRoaId}}"
            aria-hidden="true" data-ng-model="roaCtrl.noROAValues"/>
-    <cmp-expanding-table  reset-to-collapsed="roaCtrl.resetToCollapsed"
+    <cmp-expanding-table  pre-id="roa_list_" reset-to-collapsed="roaCtrl.resetToCollapsed"
                          list-items="roaCtrl.model.roaList" expand-record="roaCtrl.setRecord(index)"
                          column-def="roaCtrl.columnDef" select-record="roaCtrl.selectRecord"
                          disable-selection="roaCtrl.disableAddButton()">
@@ -14,8 +14,8 @@
 
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" ng-click="roaCtrl.addNew()" name="addRoaRec_{{::$id}}"
-                    id="addRoaRec_{{::$id}}" ng-disabled="roaCtrl.disableAddButton()">
+            <button class="btn btn-primary" data-ng-click="roaCtrl.addNew()" name="addRoaRec_{{::$id}}"
+                    id="addRoaRec_{{::$id}}" data-ng-disabled="roaCtrl.disableAddButton()">
                 {{::'ADD_ROA'|translate}}
             </button>
         </div>

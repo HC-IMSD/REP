@@ -4,7 +4,7 @@
             <div>
                 <h3>3.&nbsp;{{::'NDS_TITLE'|translate}}
                     <button title="{{::'HELP_NDS'|translate}}"  class="btn rep-help-button-primary btn-xs"
-                            ng-click="cspMainApplCtrl.addInstruct(0)"><span
+                            data-ng-click="cspMainApplCtrl.addInstruct(0)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_NDS'|translate}}"</span>
                     </button>
                 </h3>
@@ -14,10 +14,10 @@
             <div class="col-xs-12">
                 <cmp-alert  ui-state="cspMainApplCtrl.alerts[0]" msg="NDS_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(0)" type="alert-info">
                     <section aria-live="assertive">
-                        <div ng-if="!cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-nds-en.html'">
                         </div>
-                        <div ng-if="cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-nds-fr.html'">
                         </div>
                     </section>
@@ -26,12 +26,12 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.controlNumberId].$invalid}">
+                 data-ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.controlNumberId].$invalid}">
                 <label for="{{::cspMainApplCtrl.controlNumberId}}" class="required">
                     <span class="field-name">{{::'NDS_NUMBER' |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspMainApplCtrl.controlNumberId}}"
-                           name="{{::cspMainApplCtrl.controlNumberId}}" only-digits=""
+                           name="{{::cspMainApplCtrl.controlNumberId}}" data-only-digits=""
                            data-ng-model="cspMainApplCtrl.model.controlNumber" class="form-control" minlength="6"
                            maxlength="6" size="6" required/>
                     <cmp-error-message field-name="cspMainApplCtrl.controlNumberId"
@@ -44,7 +44,7 @@
             <div>
                 <h3>4.&nbsp;{{::'DRUGUSE_TITLE'|translate}}
                     <button title="{{::'HELP_DRUGUSE'|translate}}"  class="btn rep-help-button-primary btn-xs"
-                            ng-click="cspMainApplCtrl.addInstruct(1)"><span
+                            data-ng-click="cspMainApplCtrl.addInstruct(1)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_DRUGUSE'|translate}}"</span>
                     </button>
                 </h3>
@@ -54,10 +54,10 @@
             <div class="col-xs-12">
                 <cmp-alert  ui-state="cspMainApplCtrl.alerts[1]" msg="DRUGUSE_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(1)" type="alert-info">
                     <section aria-live="assertive">
-                        <div ng-if="!cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-drugUse-en.html'">
                         </div>
-                        <div ng-if="cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-drugUse-fr.html'">
                         </div>
                     </section>
@@ -66,13 +66,13 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.drugUseId].$invalid}">
+                 data-ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.drugUseId].$invalid}">
                 <label for="{{::cspMainApplCtrl.drugUseId}}" class="required">
                     <span class="field-name">{{::'DRUGUSE' |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <select id="{{::cspMainApplCtrl.drugUseId}}" name="{{::cspMainApplCtrl.drugUseId}}"
                             data-ng-model="cspMainApplCtrl.model.drugUse" class="form-control"
-                            ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList"
+                            data-ng-options="drugUse |translate for drugUse in cspMainApplCtrl.drugUseList"
                              required></select>
                     <cmp-error-message field-name="cspMainApplCtrl.drugUseId"
                                        form-ref="cspMainApplCtrl.mainApplForm" show-error="cspMainApplCtrl.showErrors()"
@@ -99,9 +99,9 @@
                         <label for="{{::cspMainApplCtrl.applApplyId}}">
                             <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
                                    id="{{::cspMainApplCtrl.applApplyId}}"
-                                   ng-model="cspMainApplCtrl.model.timeApplication"
-                                   ng-value="cspMainApplCtrl.nocValue"
-                                   ng-required="!cspMainApplCtrl.model.timeApplication"/>
+                                   data-ng-model="cspMainApplCtrl.model.timeApplication"
+                                   data-ng-value="cspMainApplCtrl.nocValue"
+                                   data-ng-required="!cspMainApplCtrl.model.timeApplication"/>
                             {{::'NOC_120'|translate}}
                         </label>
                     </div>
@@ -109,9 +109,9 @@
                     <div class="radio">
                         <label for="within120">
                             <input type="radio" name="{{::cspMainApplCtrl.applApplyId}}"
-                                   ng-model="cspMainApplCtrl.model.timeApplication"
-                                   ng-required="!cspMainApplCtrl.model.timeApplication"
-                                   ng-value="cspMainApplCtrl.grantValue" id="within120"/>
+                                   data-ng-model="cspMainApplCtrl.model.timeApplication"
+                                   data-ng-required="!cspMainApplCtrl.model.timeApplication"
+                                   data-ng-value="cspMainApplCtrl.grantValue" id="within120"/>
                             {{::'GRANT_120'|translate}}</label>
                     </div>
                 </fieldset>
@@ -122,7 +122,7 @@
             <div>
                 <h3>6.&nbsp;{{::'MEDINGRED_TITLE'|translate}}
                     <button title="{{::'HELP_MI'|translate}}"  class="btn rep-help-button-primary btn-xs"
-                            ng-click="cspMainApplCtrl.addInstruct(2)"><span
+                            data-ng-click="cspMainApplCtrl.addInstruct(2)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_MI'|translate}}"</span>
                     </button>
                 </h3>
@@ -132,10 +132,10 @@
             <div class="col-xs-12">
                 <cmp-alert  ui-state="cspMainApplCtrl.alerts[2]" msg="MI_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(2)" type="alert-info">
                     <section aria-live="assertive">
-                        <div ng-if="!cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-mi-en.html'">
                         </div>
-                        <div ng-if="cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-mi-fr.html'">
                         </div>
                     </section>
@@ -144,7 +144,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.medIngedId].$invalid}">
+                 data-ng-class="{'has-error':cspMainApplCtrl.mainApplForm[cspMainApplCtrl.medIngedId].$invalid}">
                 <label for="{{::cspMainApplCtrl.medIngedId}}" class="required">
                     <span class="field-name">{{::'MED_INGRED' |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
@@ -162,7 +162,7 @@
             <div>
                 <h3>7.&nbsp;{{::'STATEMENT_TITLE' | translate}}
                     <button title="{{::'HELP_ATTEST'|translate}}"  class="btn rep-help-button-primary btn-xs"
-                            ng-click="cspMainApplCtrl.addInstruct(3)"><span
+                            data-ng-click="cspMainApplCtrl.addInstruct(3)"><span
                             class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_ATTEST'|translate}}"</span>
                     </button>
                 </h3>
@@ -172,10 +172,10 @@
             <div class="col-xs-12">
                 <cmp-alert  ui-state="cspMainApplCtrl.alerts[3]" msg="ATTEST_INSTRUCT" update-state="cspMainApplCtrl.closeAlert(3)" type="alert-info">
                     <section aria-live="assertive">
-                        <div ng-if="!cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="!cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-attest-en.html'">
                         </div>
-                        <div ng-if="cspMainApplCtrl.isFrench()"
+                        <div data-ng-if="cspMainApplCtrl.isFrench()"
                              ng-include="'app/scripts/templates/csp/tpl-csp-attest-fr.html'">
                         </div>
                     </section>
@@ -196,9 +196,9 @@
                         <label for="{{::cspMainApplCtrl.applStateId}}">
                             <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
                                    id="{{::cspMainApplCtrl.applStateId}}"
-                                   ng-model="cspMainApplCtrl.model.applicantStatement"
-                                   ng-value="cspMainApplCtrl.ownerValue"
-                                   ng-required="!cspMainApplCtrl.model.applicantStatement"/>
+                                   data-ng-model="cspMainApplCtrl.model.applicantStatement"
+                                   data-ng-value="cspMainApplCtrl.ownerValue"
+                                   data-ng-required="!cspMainApplCtrl.model.applicantStatement"/>
                             {{::'APPLICANT_OWNER'|translate}}
                         </label>
                     </div>
@@ -206,9 +206,9 @@
                     <div class="radio">
                         <label for="applicant-consent">
                             <input type="radio" name="{{::cspMainApplCtrl.applStateId}}"
-                                   ng-model="cspMainApplCtrl.model.applicantStatement"
-                                   ng-value="cspMainApplCtrl.ownerBehalfValue"
-                                   ng-required="!cspMainApplCtrl.model.applicantStatement" id="applicant-consent"/>
+                                   data-ng-model="cspMainApplCtrl.model.applicantStatement"
+                                   data-ng-value="cspMainApplCtrl.ownerBehalfValue"
+                                   data-ng-required="!cspMainApplCtrl.model.applicantStatement" id="applicant-consent"/>
                             {{::'APPLICANT_BEHALF'|translate}}
                         </label>
                     </div>

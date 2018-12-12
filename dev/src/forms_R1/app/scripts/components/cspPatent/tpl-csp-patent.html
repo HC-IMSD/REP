@@ -2,13 +2,13 @@
     <ng-form name="cspPatentCtrl.patentForm">
         <div class="row">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.patentNumId].$invalid}">
+                 data-ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.patentNumId].$invalid}">
                 <label for="{{::cspPatentCtrl.patentNumId}}" class="required">
                     <span class="field-name">{{::'PATENTNUM' |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <input type="text" id="{{::cspPatentCtrl.patentNumId}}" name="{{::cspPatentCtrl.patentNumId}}"
                            data-ng-model="cspPatentCtrl.model.patentNumber" class="form-control" maxlength="7"
-                           size="7" minlength="7" only-digits="" required/>
+                           size="7" minlength="7" data-only-digits="" required/>
 
                     <cmp-error-message field-name="cspPatentCtrl.patentNumId" form-ref="cspPatentCtrl.patentForm"
                                        show-error="cspPatentCtrl.showErrors()"
@@ -18,11 +18,11 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.dateFiledId].$invalid}">
+                 data-ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.dateFiledId].$invalid}">
                 <label for="{{::cspPatentCtrl.dateFiledId}}" class="required">
                     <span class="field-name">{{::"DATE_FILED" |translate}}</span>
-                    <span ng-if="!cspPatentCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
-                    <span ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
+                    <span data-ng-if="!cspPatentCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                    <span data-ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateFiledId}}" name="{{::cspPatentCtrl.dateFiledId}}"
                            data-ng-model="cspPatentCtrl.model.filingDate" class="form-control" required/>
@@ -33,11 +33,11 @@
                 </label>
             </div>
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.dateGrantedId].$invalid}">
+                 data-ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.dateGrantedId].$invalid}">
                 <label for="{{::cspPatentCtrl.dateGrantedId}}" class="required">
                     <span class="field-name">{{::"DATE_GRANTED" |translate}}</span>
-                    <span ng-if="!cspPatentCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
-                    <span ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
+                    <span data-ng-if="!cspPatentCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                    <span data-ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateGrantedId}}" name="{{::cspPatentCtrl.dateGrantedId}}"
                            data-ng-model="cspPatentCtrl.model.grantedDate" class="form-control" required/>
@@ -47,11 +47,11 @@
                 </label>
             </div>
             <div class="form-group col-md-4"
-                 ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.dateExpiryId].$invalid}">
+                 data-ng-class="{'has-error':cspPatentCtrl.patentForm[cspPatentCtrl.dateExpiryId].$invalid}">
                 <label for="{{::cspPatentCtrl.dateExpiryId}}" class="required">
                     <span class="field-name">{{::"DATE_EXPIRY" |translate}}</span>
-                    <span ng-if="!cspPatentCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
-                    <span ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
+                    <span data-ng-if="!cspPatentCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
+                    <span data-ng-if="cspPatentCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <input type="date" id="{{::cspPatentCtrl.dateExpiryId}}" name="{{::cspPatentCtrl.dateExpiryId}}"
                            data-ng-model="cspPatentCtrl.model.expiryDate" class="form-control" required/>

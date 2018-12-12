@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <ng-form name="adr.addressForm" novalidate>
         <div class="row">
-            <div class="form-group col-md-12" ng-class="{'has-error':adr.addressForm[adr.streetId].$invalid}">
+            <div class="form-group col-md-12" data-ng-class="{'has-error':adr.addressForm[adr.streetId].$invalid}">
                 <label for="{{::adr.streetId}}" class="required full-width">
                     <span class="field-name">{{::"STREET" |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -9,14 +9,14 @@
                                        show-error="adr.showError(adr.addressForm[adr.streetId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
                     <input type="text" class="form-control full-width" maxlength="120" id="{{::adr.streetId}}"
-                           name="{{::adr.streetId}}" ng-readonly="!adr.isEditable"
+                           name="{{::adr.streetId}}" data-ng-readonly="!adr.isEditable"
                            data-ng-model="adr.addressModel.street" required/>
 
                 </label>
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6" ng-class="{'has-error':adr.addressForm[adr.cityId].$invalid}">
+            <div class="form-group col-md-6" data-ng-class="{'has-error':adr.addressForm[adr.cityId].$invalid}">
                 <label for="{{::adr.cityId}}" class="required full-width">
                     <span class="field-name">{{::"CITY_TOWN" |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
@@ -26,22 +26,22 @@
                     <input type="text" id="{{::adr.cityId}}" name="{{::adr.cityId}}"
                            data-ng-model="adr.addressModel.city"
                            class="form-control  full-width" maxlength="60"
-                           ng-readonly="!adr.isEditable" required/>
+                           data-ng-readonly="!adr.isEditable" required/>
                 </label>
             </div>
             <div class="col-md-5 form-group">
-                <label for="{{::adr.countryId}}" class="required full-width">
+                <label class="required full-width"> <!-- for="{{::adr.countryId}}"  -->
                     <span class="field-name">{{::"COUNTRY" |translate}}</span>
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="adr.countryId" form-ref="adr.addressForm"
                                        show-error="adr.showError(adr.addressForm[adr.countryId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
+                </label>
                     <div class="rep-pad-top">
-                        <div class="rep-error" ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
-                            <ui-select ng-model="adr.addressModel.country" id="{{::adr.countryId}}"
-                                       name="{{::adr.countryId}}"
-                                       on-select="adr.countryChanged()" ng-required="adr.isCountryEditable()"
-                                       ng-disabled="!adr.isCountryEditable()" title="{{'COUNTRY_CHOOSE'|translate}}"
+                        <div class="rep-error" data-ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
+                            <ui-select data-ng-model="adr.addressModel.country" data-id="{{::adr.countryId}}"
+                                       data-on-select="adr.countryChanged()" data-ng-required="adr.isCountryEditable()"
+                                       data-ng-disabled="!adr.isCountryEditable()" title="{{'COUNTRY_CHOOSE'|translate}}"
                                        class="rep-selectize-font full-width">
                                 <ui-select-match placeholder="{{::'COUNTRY_CHOOSE'|translate}}"
                                                  id="country_match{{::$id}}"
@@ -51,18 +51,17 @@
                                 <ui-select-choices
                                         repeat="countryRecord in adr.countryList | filter:{[adr.lang]: $select.search}"
                                         class="rep-selectize-font">
-                                    <span ng-bind-html="countryRecord[adr.lang] | highlight: $select.search"></span>
+                                    <span data-ng-bind-html="countryRecord[adr.lang] | highlight: $select.search"></span>
                                 </ui-select-choices>
                             </ui-select>
                         </div>
                     </div>
-                </label>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group" ng-show="adr.hideProvinceText"
-                     ng-class="{'has-error':adr.addressForm[adr.stateListId].$invalid}">
+                <div class="form-group" data-ng-show="adr.hideProvinceText"
+                     data-ng-class="{'has-error':adr.addressForm[adr.stateListId].$invalid}">
                     <label for="{{::adr.stateListId}}" class="required">
                         <span class="field-name">{{adr.provListLabel |translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}} </strong>
@@ -72,30 +71,31 @@
                         <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
                                 id="{{::adr.stateListId}}" name="{{::adr.stateListId}}"
                                 data-ng-options="province |translate for province in adr.provinces"
-                                ng-disabled="!adr.isEditable" ng-required="adr.hideProvinceText">
+                                data-ng-disabled="!adr.isEditable" data-ng-required="adr.hideProvinceText">
+                            <option label=" " value="" />
                         </select>
                     </label>
                 </div>
-                <div class="form-group " ng-show="adr.hideProvinceDdl"
-                     ng-class="{'has-error':adr.addressForm[adr.stateTextId].$invalid}">
+                <div class="form-group " data-ng-show="adr.hideProvinceDdl"
+                     data-ng-class="{'has-error':adr.addressForm[adr.stateTextId].$invalid}">
                     <label for="{{::adr.stateTextId}}">{{::"PROVSTATE" |translate}}</label>
                     <input type="text" id="{{::adr.stateTextId}}" name="{{::adr.stateTextId}}"
                            data-ng-model="adr.addressModel.stateText" class="form-control full-width" maxlength="40"
-                           size="40" ng-readonly="!adr.isEditable"/>
+                           size="40" data-ng-readonly="!adr.isEditable"/>
                 </div>
             </div>
-            <div class="form-group col-md-6" ng-class="{'has-error':adr.addressForm[adr.postalId].$invalid}">
-                <label for="{{::adr.postalId}}" ng-class="{required:adr.isPostalRequired}">
+            <div class="form-group col-md-6" data-ng-class="{'has-error':adr.addressForm[adr.postalId].$invalid}">
+                <label for="{{::adr.postalId}}" data-ng-class="{required:adr.isPostalRequired}">
                     <span class="field-name">{{adr.postalLabel |translate}}</span>
-                    <strong ng-show="adr.isPostalRequired" class="required">{{::"REQUIRED" |translate}} </strong>
+                    <strong data-ng-show="adr.isPostalRequired" class="required">{{::"REQUIRED" |translate}} </strong>
                     <cmp-error-message field-name="adr.postalId" form-ref="adr.addressForm"
                                        show-error="adr.showError(adr.addressForm[adr.postalId])" error-types="adr.postalErrorList">
                     </cmp-error-message>
                     <input type="text" id="{{::adr.postalId}}" name="{{::adr.postalId}}"
                            data-ng-model="adr.addressModel.postalCode"
-                           class="form-control" ng-maxlength="7" ng-required="adr.isPostalRequired"
-                           ng-change="adr.postalCodeChanged()"
-                           maxlength="7" ng-pattern="adr.postalPattern" ng-readonly="!adr.isEditable"/>
+                           class="form-control" ng-maxlength="7" data-ng-required="adr.isPostalRequired"
+                           data-ng-change="adr.postalCodeChanged()"
+                           maxlength="7" data-ng-pattern="adr.postalPattern" data-ng-readonly="!adr.isEditable"/>
                 </label>
             </div>
         </div>

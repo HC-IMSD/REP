@@ -16,7 +16,7 @@
                                 <span class="field-name">{{"SEQUENCE_NUM" |translate}}</span>
                                 <button title="{{::'EXPAND'|translate}} {{::'SEQUENCE_INSTRUCT'|translate}}"
                                         class="btn rep-help-button-primary btn-xs"
-                                        id="sequenceNumber-instructions-toggle" ng-click="lifecycleCtrl.addInstruct(0)"><span
+                                        id="sequenceNumber-instructions-toggle" data-ng-click="lifecycleCtrl.addInstruct(0)"><span
                                         class="fa fa-question-circle fa-2x"></span>
                                 </button>
                                 <input type="text" id="sequenceNumber_{{::$id}}" name="sequenceNumber_{{::$id}}"
@@ -39,7 +39,7 @@
                                             <button title="{{::'CALENDAR'|translate}}" class="btn btn-default"
                                                     aria-haspopup="true"
                                                     id="filed-picker-toggle"
-                                                    ng-click="lifecycleCtrl.openFiledDate()"><span
+                                                    data-ng-click="lifecycleCtrl.openFiledDate()"><span
                                                     class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>
                                             </button>
                                       </span>
@@ -52,21 +52,21 @@
                         </div> -->
 
                         <div class="form-group col-md-7"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId].$invalid}">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId].$invalid}">
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
                                 <span class="field-name">{{::"CONTROL_NUM" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <button title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
+                                <span title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
                                         class="btn rep-help-button-primary btn-xs"
-                                        id="controlNum-instructions-toggle" ng-click="lifecycleCtrl.addInstruct(1)"><span
+                                        id="controlNum-instructions-toggle" data-ng-click="lifecycleCtrl.addInstruct(1)"><span
                                         class="fa fa-question-circle fa-2x"></span>
-                                </button>
+                                </span>
                                 <cmp-error-message field-name="lifecycleCtrl.controlNumId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId])"
                                                    error-types="lifecycleCtrl.minLength6Error"></cmp-error-message>
-                                <input type="text" id="{{::lifecycleCtrl.controlNumId}}" name="{{::lifecycleCtrl.controlNumId}}" only-digits=""
-                                       ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
+                                <input type="text" id="{{::lifecycleCtrl.controlNumId}}" name="{{::lifecycleCtrl.controlNumId}}" data-only-digits=""
+                                       data-ng-model="lifecycleCtrl.lifecycleModel.controlNumber"
                                        class="form-control full-width" maxlength="6" minlength="6" size="6"
                                        required/>
 
@@ -74,7 +74,7 @@
                         </div>
 
                         <div class="form-group col-md-5"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId].$invalid}">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId].$invalid}">
                             <div class="form-group">
                                 <label for="{{::lifecycleCtrl.activityLeadId}}" class="required">
                                     <span class="field-name"> {{::'ACTIVITY_LEAD' |translate}}</span>
@@ -84,9 +84,11 @@
                                                        show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId])"
                                                        error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                                     <select class="form-control" id="{{::lifecycleCtrl.activityLeadId}}"
-                                            ng-options="lead |translate for lead in lifecycleCtrl.leadList | orderByTranslated"
-                                            name="{{::lifecycleCtrl.activityLeadId}}" ng-change="lifecycleCtrl.selectActivityList()"
-                                            ng-model="lifecycleCtrl.lifecycleModel.activityLead" required></select>
+                                            data-ng-options="lead |translate for lead in lifecycleCtrl.leadList | orderByTranslated"
+                                            name="{{::lifecycleCtrl.activityLeadId}}" data-ng-change="lifecycleCtrl.selectActivityList()"
+                                            data-ng-model="lifecycleCtrl.lifecycleModel.activityLead" required>
+                                        <option value="" label=" " data-ng-empty="lifecycleCtrl.lifecycleModel.activityLead" />
+                                    </select>
 
                                 </label>
                             </div>
@@ -111,10 +113,10 @@
                                 <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
                                            update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
                                     <section aria-live="assertive">
-                                        <div ng-if="!lifecycleCtrl.isFrench()"
+                                        <div data-ng-if="!lifecycleCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
                                         </div>
-                                        <div ng-if="lifecycleCtrl.isFrench()"
+                                        <div data-ng-if="lifecycleCtrl.isFrench()"
                                              ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
                                         </div>
                                     </section>
@@ -124,7 +126,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group  col-md-7"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.regActivityId].$invalid}">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.regActivityId].$invalid}">
                             <label for="{{::lifecycleCtrl.regActivityId}}" class="required">
                                 <span class="field-name">{{::"REG_ACTIVITY_TYPE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -133,16 +135,17 @@
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.regActivityId])"
                                                    error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                                 <select id="{{::lifecycleCtrl.regActivityId}}" name="{{::lifecycleCtrl.regActivityId}}"
-                                        ng-model="lifecycleCtrl.lifecycleModel.activityType"
+                                        data-ng-model="lifecycleCtrl.lifecycleModel.activityType"
                                         data-ng-change="lifecycleCtrl.setSequenceList()"
                                         class="form-control full-width" required
-                                        ng-options="activity[lifecycleCtrl.lang] for activity in lifecycleCtrl.activityTypeList track by activity.id">
+                                        data-ng-options="activity[lifecycleCtrl.lang] for activity in lifecycleCtrl.activityTypeList track by activity.id">
+                                    <option value="" label=" " data-ng-empty="lifecycleCtrl.lifecycleModel.activityType" />
                                 </select>
 
                             </label>
                         </div>
                         <div class="form-group col-md-5"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.seqDescriptId].$invalid}">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.seqDescriptId].$invalid}">
                             <label for="{{::lifecycleCtrl.seqDescriptId}}" class="required">
                                 <span class="field-name">{{::"SEQUENCE_TYPE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -151,18 +154,20 @@
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.seqDescriptId])"
                                                    error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                                 <select id="{{::lifecycleCtrl.seqDescriptId}}" name="{{::lifecycleCtrl.seqDescriptId}}"
-                                        ng-model="lifecycleCtrl.lifecycleModel.descriptionValue"
-                                        ng-options="descript |translate for descript in  lifecycleCtrl.descriptionList| orderByTranslated"
+                                        data-ng-model="lifecycleCtrl.lifecycleModel.descriptionValue"
+                                        data-ng-options="descript |translate for descript in  lifecycleCtrl.descriptionList| orderByTranslated"
                                         data-ng-change="lifecycleCtrl.setDetailsState()" required
-                                        class="form-control full-width"></select>
+                                        class="form-control full-width">
+                                    <option label=" " value="" data-ng-empty="lifecycleCtrl.lifecycleModel.descriptionValue" /> 
+                                </select>
 
                             </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId].$invalid}"
-                             ng-show="lifecycleCtrl.startDateVisible">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId].$invalid}"
+                             data-ng-show="lifecycleCtrl.startDateVisible">
                             <label for="{{::lifecycleCtrl.startDateId}}" class="required">
                                 <span class="field-name">{{lifecycleCtrl.startDateLabel |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -170,28 +175,28 @@
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId])"
                                                    error-types="lifecycleCtrl.dateFormatError"></cmp-error-message>
+                            </label>
                                 <!--  <span class="date-picker-format"></span>-->
                                 <div class="input-group rep-input-group">
                                     <input id="{{::lifecycleCtrl.startDateId}}" type="text" class="form-control rep-normal-font"
-                                           uib-datepicker-popup
-                                           show-button-bar="false" datepicker-options="lifecycleCtrl.dateOptions"
-                                           name="{{::lifecycleCtrl.startDateId}}" ng-model="lifecycleCtrl.lifecycleModel.startDate"
-                                           is-open="lifecycleCtrl.startDateOpen"
-                                           ng-required="lifecycleCtrl.startDateVisible"
+                                           data-uib-datepicker-popup
+                                           data-show-button-bar="false" data-datepicker-options="lifecycleCtrl.dateOptions"
+                                           name="{{::lifecycleCtrl.startDateId}}" data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
+                                           data-is-open="lifecycleCtrl.startDateOpen"
+                                           data-ng-required="lifecycleCtrl.startDateVisible"
                                            data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                                     <span class="input-group-btn">
                                             <button title="{{::'CALENDAR'|translate}}" class="btn btn-default"
                                                     aria-haspopup="true" id="activity-picker-toggle"
-                                                    ng-click="lifecycleCtrl.openStartDate()"><span
+                                                    data-ng-click="lifecycleCtrl.openStartDate()"><span
                                                     class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>
                                             </button>
                                       </span>
                                 </div>
-                            </label>
                         </div>
                         <div class="form-group col-md-4"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId].$invalid}"
-                             ng-show="lifecycleCtrl.endDateVisible">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId].$invalid}"
+                             data-ng-show="lifecycleCtrl.endDateVisible">
                             <label for="{{::lifecycleCtrl.endDateId}}" class="required">
                                 <span class="field-name">{{::"END_DATE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -199,32 +204,32 @@
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId])"
                                                    error-types="lifecycleCtrl.dateFormatError"></cmp-error-message>
+                            </label>
                                 <div class="input-group rep-input-group">
                                     <input id="{{::lifecycleCtrl.endDateId}}" type="text" class="form-control rep-normal-font"
-                                           uib-datepicker-popup
-                                           show-button-bar="false" datepicker-options="lifecycleCtrl.dateOptions"
-                                           name="{{::lifecycleCtrl.endDateId}}" ng-model="lifecycleCtrl.lifecycleModel.endDate"
-                                           is-open="lifecycleCtrl.endDateOpen"
-                                           ng-required="lifecycleCtrl.endDateVisible"
+                                           data-uib-datepicker-popup
+                                           data-show-button-bar="false" data-datepicker-options="lifecycleCtrl.dateOptions"
+                                           name="{{::lifecycleCtrl.endDateId}}" data-ng-model="lifecycleCtrl.lifecycleModel.endDate"
+                                           data-is-open="lifecycleCtrl.endDateOpen"
+                                           data-ng-required="lifecycleCtrl.endDateVisible"
                                            data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                                     <span class="input-group-btn">
                                             <button title="{{::'CALENDAR'|translate}}" class="btn btn-default"
                                                     aria-haspopup="true"
                                                     id="dateEnd-picker-toggle"
-                                                    ng-click="lifecycleCtrl.openEndDate()"><span
+                                                    data-ng-click="lifecycleCtrl.openEndDate()"><span
                                                     class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>
                                             </button>
                                       </span>
                                 </div>
 
-                            </label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col-md-4"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId].$invalid}"
-                             ng-show="lifecycleCtrl.yearVisible">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId].$invalid}"
+                             data-ng-show="lifecycleCtrl.yearVisible">
                             <label for="{{::lifecycleCtrl.yearId}}" class="required">
                                 <span class="field-name">{{::"YEAR_CHANGE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -232,10 +237,11 @@
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId])"
                                                    error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
-                                <select name="{{::lifecycleCtrl.yearId}}" id="{{::lifecycleCtrl.yearId}}" ng-model="lifecycleCtrl.lifecycleModel.year"
-                                        class="form-control" ng-required="lifecycleCtrl.yearVisible"
-                                        ng-change="lifecycleCtrl.setConcatDetails()"
-                                        ng-options=" val for val in lifecycleCtrl.yearList">
+                                <select name="{{::lifecycleCtrl.yearId}}" id="{{::lifecycleCtrl.yearId}}" data-ng-model="lifecycleCtrl.lifecycleModel.year"
+                                        class="form-control" data-ng-required="lifecycleCtrl.yearVisible"
+                                        data-ng-change="lifecycleCtrl.setConcatDetails()"
+                                        data-ng-options=" val for val in lifecycleCtrl.yearList">
+                                    <option label=" " value="" data-ng-empty="lifecycleCtrl.lifecycleModel.year" />
                                 </select>
 
                             </label>
@@ -243,8 +249,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.descriptId].$invalid}"
-                             ng-show="lifecycleCtrl.descriptionVisible">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.descriptId].$invalid}"
+                             data-ng-show="lifecycleCtrl.descriptionVisible">
                             <label for="{{::lifecycleCtrl.descriptId}}" class="required full-width">
                                 <span class="field-name">{{lifecycleCtrl.descriptionLabel |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -255,17 +261,17 @@
                                                    error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                             </label>
                             <textarea id="{{::lifecycleCtrl.descriptId}}" name="{{::lifecycleCtrl.descriptId}}"
-                                      ng-model="lifecycleCtrl.lifecycleModel.details"
-                                      ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200" size="256"
-                                      ng-required="lifecycleCtrl.descriptionVisible"
+                                      data-ng-model="lifecycleCtrl.lifecycleModel.details"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
+                                      data-ng-required="lifecycleCtrl.descriptionVisible"
                                       class="form-control full-width">
                                 </textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.version.$invalid}"
-                             ng-if="lifecycleCtrl.versionVisible">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.version.$invalid}"
+                             data-ng-if="lifecycleCtrl.versionVisible">
                             <label for="version_{{::$id}}" class="required">
                                 <span class="field-name">{{::"VERSION_NO" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -274,9 +280,9 @@
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.versionId])"
                                                    error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                                 <input type="text" id="version_{{::$id}}" name="version"
-                                       ng-model="lifecycleCtrl.lifecycleModel.sequenceVersion"
-                                       ng-change="lifecycleCtrl.setConcatDetails()"
-                                       ng-required="lifecycleCtrl.versionVisible" class="form-control"/>
+                                       data-ng-model="lifecycleCtrl.lifecycleModel.sequenceVersion"
+                                       data-ng-change="lifecycleCtrl.setConcatDetails()"
+                                       data-ng-required="lifecycleCtrl.versionVisible" class="form-control"/>
 
                             </label>
                         </div>
@@ -286,14 +292,14 @@
                             <button class="btn btn-primary"
                                     name="saveLifecycleRec_{{::$id}}"
                                     id="saveLifecycleRec_{{::$id}}"
-                                    ng-click="lifecycleCtrl.updateLivecycleModel()"
-                                    ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}
+                                    data-ng-click="lifecycleCtrl.updateLivecycleModel()"
+                                    data-ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}
                             </button>
                             <!--
-                            <button class="btn btn-danger" ng-click="lifecycleCtrl.delete()">{{::'Delete Record'|translate}}
+                            <button class="btn btn-danger" data-ng-click="lifecycleCtrl.delete()">{{::'Delete Record'|translate}}
                             </button>
                             <button class="btn btn-default"
-                                    ng-click="lifecycleCtrl.discardChanges()">{{::'DISCARD_CHANGES'| translate }}
+                                    data-ng-click="lifecycleCtrl.discardChanges()">{{::'DISCARD_CHANGES'| translate }}
                             </button> -->
                         </div>
                     </div>

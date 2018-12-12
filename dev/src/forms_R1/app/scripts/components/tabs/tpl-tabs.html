@@ -2,15 +2,15 @@
     <!--<pre>tabs {{tabsCtrl.appendix4List | json}}</pre>-->
 
     <ul class="nav nav-tabs">
-        <li ng-repeat="tab in tabsCtrl.tabs" role="presentation" ng-click="tabsCtrl.selectTab($index)"
-            ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">
+        <li data-ng-repeat="tab in tabsCtrl.tabs" role="presentation" data-ng-click="tabsCtrl.selectTab($index)"
+            data-ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">
             <a role="tab">{{tab.label |translate}}
-                <strong ng-if="tabsCtrl.tabs[$index].form.$invalid" class="required">({{'ERRORS' |translate}})</strong>
+                <strong data-ng-if="tabsCtrl.tabs[$index].form.$invalid" class="required">({{'ERRORS' |translate}})</strong>
             </a>
         </li>
         <li>
             <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                    id="ah-sourced-instructions-toggle" ng-click="tabsCtrl.addInstruct(0)">
+                    id="ah-sourced-instructions-toggle" data-ng-click="tabsCtrl.addInstruct(0)">
                 <span class="fa fa-question-circle fa-2x rep-pad-top-10"></span>
                 <span class="wb-inv">{{::'AH_SOURCED_INSTRUCT'|translate}}</span>
             </button>
@@ -24,10 +24,10 @@
                             update-state="tabsCtrl.closeAlert(0)"
                             type="alert-info">
                 <section aria-live="assertive">
-                    <div ng-if="!tabsCtrl.isFrench()"
+                    <div data-ng-if="!tabsCtrl.isFrench()"
                          ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-add-sourced-en.html'">
                     </div>
-                    <div ng-if="tabsCtrl.isFrench()"
+                    <div data-ng-if="tabsCtrl.isFrench()"
                          ng-include="'app/scripts/templates/drug/tpl-drugProduct-add-sourced-fr.html'">
                     </div>
                 </section>
@@ -38,7 +38,7 @@
     <div class="tabpanels">
         <ng-form name="tabsCtrl.tabs[0].form">
             <div id="formulations-panel" role="tabpanel" class="out">
-                <div ng-show="tabsCtrl.tabs[0].selected">
+                <div data-ng-show="tabsCtrl.tabs[0].selected">
                     <cmp-formulations formulations="tabsCtrl.formulationList"  error-summary-update="tabsCtrl.updateSummary"
                     show-error-summary="tabsCtrl.showSummary" update-error-summary="tabsCtrl.updateErrorSummary()"
                                       record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
@@ -47,7 +47,7 @@
         </ng-form>
         <ng-form name="tabsCtrl.tabs[1].form">
             <div id="appendix4-panel" role="tabpanel" class="out">
-                <div  ng-show="tabsCtrl.tabs[1].selected">
+                <div  data-ng-show="tabsCtrl.tabs[1].selected">
                     <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service" update-error-summary="tabsCtrl.updateErrorSummary()"
                                        error-summary-update="tabsCtrl.updateSummary"
                                        show-error-summary="tabsCtrl.showSummary" record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>

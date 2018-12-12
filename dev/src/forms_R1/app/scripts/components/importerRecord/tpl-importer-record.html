@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':importerRecCtrl.importerForm[importerRecCtrl.impId].$invalid}">
+                 data-ng-class="{'has-error':importerRecCtrl.importerForm[importerRecCtrl.impId].$invalid}">
                 <label for="{{::importerRecCtrl.impId}}" class="required full-width">
                     <span class="field-name">{{'IMPORTERID'|translate}}</span>
                     <strong class="required">{{'REQUIRED' |translate}}</strong>
@@ -10,19 +10,19 @@
                                        form-ref="importerRecCtrl.importerForm"
                                        show-error="importerRecCtrl.showError(importerRecCtrl.importerForm[importerRecCtrl.impId])"
                                        error-types="importerRecCtrl.min5Error"></cmp-error-message>
+                </label>
                     <div class="rep-margin-top">
-                        <input type="text" ng-model="importerRecCtrl.model.importerId" name="{{::importerRecCtrl.impId}}"
-                               ng-model-options="{ debounce: $inherit}" size="10"
+                        <input type="text" data-ng-model="importerRecCtrl.model.importerId" name="{{::importerRecCtrl.impId}}"
+                               data-ng-model-options="{ debounce: $inherit}" size="10"
                                id="{{::importerRecCtrl.impId}}" required maxlength="6" minlength="5"
                                class="form-control"/>
                     </div>
 
-                </label>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-12"
-                 ng-class="{'has-error':importerRecCtrl.importerForm[importerRecCtrl.importerNameId].$invalid}">
+                 data-ng-class="{'has-error':importerRecCtrl.importerForm[importerRecCtrl.importerNameId].$invalid}">
                 <label for="{{::importerRecCtrl.importerNameId}}" class="required full-width">
                     <span class="field-name">{{'IMPORTER_COMPANY_NAME'|translate}}</span>
                     <strong class="required">{{'REQUIRED' |translate}}</strong>
@@ -31,11 +31,11 @@
                                        show-error="importerRecCtrl.showError(importerRecCtrl.importerForm[importerRecCtrl.importerNameId])"
                                        error-types="importerRecCtrl.requiredOnly"></cmp-error-message>
                     <div class="rep-margin-top">
-                        <input type="text" ng-model="importerRecCtrl.model.importerName" name="{{::importerRecCtrl.importerNameId}}"
-                               ng-model-options="{ debounce: $inherit}"
+                        <input type="text" data-ng-model="importerRecCtrl.model.importerName" name="{{::importerRecCtrl.importerNameId}}"
+                               data-ng-model-options="{ debounce: $inherit}"
                                id="{{::importerRecCtrl.importerNameId}}" size="100" maxlength="100"
                                class="form-control rep-normal-font"
-                               ng-required="true"/>
+                               data-ng-required="true"/>
                     </div>
 
                 </label>
@@ -43,7 +43,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-12">
-                    <button ng-click="importerRecCtrl.deleteRecord()" name="deleteImporter"
+                    <button data-ng-click="importerRecCtrl.deleteRecord()" name="deleteImporter"
                             class="btn btn-danger btn-md">{{'DELETE'|translate}}
                     </button>
 

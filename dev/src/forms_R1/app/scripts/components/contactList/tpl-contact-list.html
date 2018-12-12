@@ -7,8 +7,8 @@
                            set-heading-level="h4"></cmp-error-summary>-->
     </div>
     <div>
-        <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" ng-show="false"
-               ng-model="contactListCtrl.allRolesSelected" required/>
+        <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" data-ng-show="false"
+               data-ng-model="contactListCtrl.allRolesSelected" required/>
         <label>
             <!-- <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
                          <span class="label label-danger"
@@ -38,12 +38,12 @@
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
             <button name="addContact" class="btn btn-primary" id="addContact_{{::$id}}"
-                    ng-click="contactListCtrl.addContact()" ng-disabled="contactListCtrl.disableAddContact()">
+                    data-ng-click="contactListCtrl.addContact()" data-ng-disabled="contactListCtrl.disableAddContact()">
                 {{::'ADD_REPRES'|translate}}
             </button>
             <button class="btn btn-default"
                     data-ng-show="contactListCtrl.newContactFormShow"
-                    ng-click="contactListCtrl.newAdrFormShow=false">
+                    data-ng-click="contactListCtrl.newAdrFormShow=false">
                 {{::'CANCEL'|translate}}
             </button>
         </div>
