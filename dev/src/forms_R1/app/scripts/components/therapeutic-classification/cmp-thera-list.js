@@ -124,6 +124,7 @@
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
+            vm.theraListId="thera_list"+scopeId;
             vm.noTheraId="no_theraVal"+scopeId;
             vm.addTheraId="addTheraClass"+scopeId;
         }

@@ -2,7 +2,7 @@
     <input type="text" required ng-show="false" name="{{::ctlCtrl.noContainerId}}" id="{{::ctlCtrl.noContainerId}}"
            aria-hidden="true" data-ng-model="ctlCtrl.noContainerValues"/>
     <cmp-expanding-table  reset-to-collapsed="ctlCtrl.resetToCollapsed"
-                         list-items="ctlCtrl.containerList"
+                         list-items="ctlCtrl.containerList" id="containerList_{{::$id}}"
                          column-def="ctlCtrl.colNames" select-record="ctlCtrl.selectRecord"
                          disable-selection="!ctlCtrl.isDetailValid">
 
