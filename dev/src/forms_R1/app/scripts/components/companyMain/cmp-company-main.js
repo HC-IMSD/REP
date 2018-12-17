@@ -78,16 +78,17 @@
 
             "contactRolesValid": {
                 "type": "element",
-                "target": "addContact"
+                "target": "contactList"
             },
             "addressRolesValid": {
                 "type": "element",
-                "target": "addAddressBtn"
+                "target": "addressList"
             },
             "importerIdValid": {
                 "type": "element",
                 "target": "addAddressBtn"
             }
+
 
         };
 

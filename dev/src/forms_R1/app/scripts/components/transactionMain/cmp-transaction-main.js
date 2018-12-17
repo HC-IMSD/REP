@@ -64,8 +64,8 @@
                 "buttonName": "saveLifecycleRec"
             },
             "oneLifeRec": {
-                "type": "buttonSearch",
-                "buttonName": "addTransactionRec"
+                "type": "elementnoid",
+                "target": "transactionList"
             },
             "one_payment_method": {
                 "type": "fieldset",

@@ -82,20 +82,20 @@
         };
         vm.alias={
             "no_country": {
-                "type": "buttonSearch",
-                "buttonName": "addCountry"
+                "type": "elementnoid",
+                "target": "countryList"
             },
             "no_roa": {
-                "type": "buttonSearch",
-                "buttonName": "addRoaRec"
+                "type": "element",
+                "target": "roaList"
             },
             "no_active": {
-                "type": "buttonSearch",
-                "buttonName": "addAI"
+                "type": "element",
+                "target": "ingList"
             },
             "no_container": {
-                "type": "buttonSearch",
-                "buttonName": "addContainer"
+                "type": "element",
+                "target": "containerList"
             }
         };
         vm.transcludeList={

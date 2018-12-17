@@ -10,7 +10,7 @@
     <input type="text" required data-ng-show="false" name="no_formulation_{{::$id}}" id="no_formulation_{{::$id}}"
            data-ng-model="formulCtrl.noFormulations"/>
     <!--<pre>formulationList: {{formulCtrl.formulationList|json}}</pre>-->
-    <cmp-expanding-table  pre-id="formulation_list_" tname="cmp-formulation-record"
+    <cmp-expanding-table  pre-id="formulation_list_" tname="cmp-formulation-record" id="formulationList_{{::$id}}"
                          reset-to-collapsed="formulCtrl.resetToCollapsed" list-items="formulCtrl.formulationList"
                          column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord" disable-err-column="true"
                          disable-selection="!formulCtrl.isDetailValid">

@@ -65,12 +65,12 @@
 
             vm.alias = {
                 "no_country_origin": {
-                    "type": "buttonSearch",
-                    "buttonName": "addCountry"
+                    "type": "elementnoid",
+                    "target": "srcCountryList"
                 },
                 "no_animal": {
-                    "type": "buttonSearch",
-                    "buttonName": "addAnimalSrc"
+                    "type": "elementnoid",
+                    "target": "animalSrcList"
                 },
                 "msg_app4_type": {
                     "type": "fieldset",
@@ -81,8 +81,8 @@
                     "parent": "system_role"
                 },
                 "msg_err_one_tissue": {
-                    "type": "element",
-                    "target": "addTissuesRec"
+                    "type": "elementnoid",
+                    "target": "tissueList"
                 }
 
             };

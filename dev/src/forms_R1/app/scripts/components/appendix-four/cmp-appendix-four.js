@@ -54,8 +54,8 @@
         };
         vm.alias = {
             "oneselected": {
-                "type": "element",
-                "target": "addSrcIngred"
+                "type": "elementnoid",
+                "target": "srcIngredList"
             }
         }
 

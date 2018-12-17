@@ -93,11 +93,11 @@
         vm.alias = {
             "no_theraVal": {
                 "type": "element",
-                "target": "addTheraClass"
+                "target": "thera_list"
             },
             "one_rep": {
                 "type": "element",
-                "target": "addRepContactBtn"
+                "target": "rep_contact_list"
             },
             "msg_err_one_cdn_ref": {
                 "type": "elementNoId",

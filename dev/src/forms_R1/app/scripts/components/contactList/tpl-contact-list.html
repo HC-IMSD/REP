@@ -6,7 +6,7 @@
                            update-errors="contactListCtrl.updateSummary" form-preamble="CONTACT_INFO"
                            set-heading-level="h4"></cmp-error-summary>-->
     </div>
-    <div>
+    <div id="contactList_{{::$id}}">
         <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" data-ng-show="false"
                data-ng-model="contactListCtrl.allRolesSelected" required/>
         <label>
