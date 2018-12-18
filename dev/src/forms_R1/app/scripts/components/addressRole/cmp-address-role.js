@@ -61,6 +61,7 @@
                 vm.roleModel = vm.record.addressRole;
                 vm.oneSelected();
             }
+            _setIdNames();
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
@@ -196,6 +197,19 @@
         vm.isFrench=function(){
             return(vm.lang!== ENGLISH);
         };
+
+        function _setIdNames() {
+            var scopeId="_"+  $scope.$id;
+            vm.fieldsetId = "fs_roleMissing" +scopeId;
+            vm.roleMissingId = "roleMissing" +scopeId;
+            vm.contactRoleMissingId = "contactRoleMissing" +scopeId;
+            vm.chkManuId = "chk-manufacturer" +scopeId;
+            vm.chkMailId = "chk-mailing" +scopeId;
+            vm.chkBillId = "chk-billing" +scopeId;
+            vm.chkImpId = "chk-importer" +scopeId;
+            vm.chkRePrimId = "chk-rep-primary" +scopeId;
+            vm.chkRepSecId = "chk-rep-secondary" +scopeId;
+        }
 
 
     }//end controller

@@ -215,9 +215,11 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
-            //console.log( vm.uniqueErrorList)
+            console.log( 'vm.uniqueErrorList');
+            console.log( vm.uniqueErrorList);
             var newErrors = _sortErrorsByDomOrder();
-           //console.log(newErrors);
+            console.log('newErrors');
+           console.log(newErrors);
             if (!angular.equals(vm.errorArray, newErrors)) {
                 vm.errorArray = newErrors;
             }
@@ -399,7 +401,7 @@
             var domFieldList = {};
             //TODO make angular friendly
             //get all the inputs and assign order index
-            $.each($('input, select ,textarea', '#' + vm.startFormId), function (k) {
+            $.each($('input, select ,textarea'), function (k) {
                 var temp_attr = $(this).attr('id');
                 if (temp_attr) {
                     domFieldList[temp_attr] = k;

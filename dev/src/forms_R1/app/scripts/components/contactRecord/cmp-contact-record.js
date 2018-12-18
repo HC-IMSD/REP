@@ -68,7 +68,7 @@
             fax: ""
         };
         vm.alias={
-            "roleMissing": {
+            "contactRoleMissing": {
                 "type": "fieldset",
                 "parent": "fs_roleMissing"
             },
