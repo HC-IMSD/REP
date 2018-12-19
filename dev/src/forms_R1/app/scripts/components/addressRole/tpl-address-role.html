@@ -9,39 +9,31 @@
                 <span class="fa fa-question-circle fa-2x"></span>
                 <span class="wb-inv">"{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"</span>
             </span>
-            <span ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
+            <span data-ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
                     class="btn-xs rep-help-button-primary"
                     id="contact-roles-instructions-toggle" data-ng-click="ar.addInstruct(0)">
                 <span class="fa fa-question-circle fa-2x"></span>
                 <span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
             </button>
         </label>
-        <div ng-if="!ar.isContact">
+        <div data-ng-if="!ar.isContact">
             <input id="{{::ar.roleMissingId}}" type="hidden" name="{{::ar.roleMissingId}}"
-                   ng-model="ar.isSelected" required/>
-            <strong id="address-role-error" class="error" ng-show="ar.showErrorMissing()">
-                        <span class="label label-danger" ng-messages="ar.roleForm.{{::ar.roleMissingId}}.$error">
-                            <span ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
-            </span>
-            <input id="roleMissing_{{::$id}}" type="text" name="roleMissing_{{::$id}}" data-ng-show="false"
                    data-ng-model="ar.isSelected" required/>
-            <strong id="address-role-error_{{::$id}}" class="error" data-ng-show="ar.showErrorMissing()">
-                        <span class="label label-danger" data-ng-messages="ar.roleForm.roleMissing_{{::$id}}.$error">
+            <strong id="address-role-error" class="error" data-ng-show="ar.showErrorMissing()">
+                        <span class="label label-danger" data-ng-messages="ar.roleForm.{{::ar.roleMissingId}}.$error">
                             <span data-ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
                         </span>
             </strong>
         </div>
-        <div ng-if="ar.isContact">
+        <div data-ng-if="ar.isContact">
             <input id="{{::ar.contactRoleMissingId}}" type="hidden" name="{{::ar.contactRoleMissingId}}"
-                   ng-model="ar.isSelected" required/>
-            <strong id="contact-role-error" class="error" ng-show="ar.showErrorMissing()">
-                        <span class="label label-danger" ng-messages="ar.roleForm.{{::ar.contactRoleMissingId}}.$error">
-                            <span ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
+                   data-ng-model="ar.isSelected" required/>
+            <strong id="contact-role-error" class="error" data-ng-show="ar.showErrorMissing()">
+                        <span class="label label-danger" data-ng-messages="ar.roleForm.{{::ar.contactRoleMissingId}}.$error">
+                            <span data-ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
                         </span>
             </strong>
         </div>
-        <div ng-if="!ar.isContact" class="row col-md-12">
-        </label>
         <div data-ng-if="!ar.isContact" class="row col-md-12">
             <div>
                 <cmp-alert  ui-state="ar.alerts[0]"
@@ -50,10 +42,10 @@
                             type="alert-info">
                 <section aria-live="assertive">
                     <div data-ng-if="!ar.isFrench()"
-                         ng-include="'app/scripts/templates/company/tpl-company-address-roles-en.html'">
+                         data-ng-include="'app/scripts/templates/company/tpl-company-address-roles-en.html'">
                     </div>
                     <div data-ng-if="ar.isFrench()"
-                         ng-include="'app/scripts/templates/company/tpl-company-address-roles-fr.html'">
+                         data-ng-include="'app/scripts/templates/company/tpl-company-address-roles-fr.html'">
                     </div>
                 </section>
                 </cmp-alert>
@@ -67,11 +59,11 @@
                             update-state="ar.closeAlert(0)"
                             type="alert-info">
                 <section aria-live="assertive">
-                    <div ng-if="!ar.isFrench()"
-                         ng-include="'app/scripts/templates/company/tpl-company-contact-roles-en.html'">
+                    <div data-ng-if="!ar.isFrench()"
+                         data-ng-include="'app/scripts/templates/company/tpl-company-contact-roles-en.html'">
                     </div>
-                    <div ng-if="ar.isFrench()"
-                         ng-include="'app/scripts/templates/company/tpl-company-contact-roles-fr.html'">
+                    <div data-ng-if="ar.isFrench()"
+                         data-ng-include="'app/scripts/templates/company/tpl-company-contact-roles-fr.html'">
                     </div>
                 </section>
                 </cmp-alert>
@@ -81,15 +73,15 @@
             <div class="col-sm-4">
                 <div class="checkbox" id="chk-manufacturer">
                     <label for="{{::ar.chkManuId}}">
-                        <input type="checkbox" ng-model="ar.roleModel.manufacturer" name="manufacturer"
-                               ng-change="ar.updateOtherState(ar.roleForm.manufacturer,'manufacturer')"
-                               ng-disabled="!ar.isEditable"
+                        <input type="checkbox" data-ng-model="ar.roleModel.manufacturer" name="manufacturer"
+                               data-ng-change="ar.updateOtherState(ar.roleForm.manufacturer,'manufacturer')"
+                               data-ng-disabled="!ar.isEditable"
                                id="{{::ar.chkManuId}}"/>
-                        <span ng-if="!ar.isContact">{{::"MANUFACTURER"|translate}}</span>
-                        <span ng-if="ar.isContact">{{::"CONTACT_MANUFACTURER"|translate}}</span>
-                        <strong id="manufacturer-role-error" class="error" ng-if="ar.roleForm.manufacturer.$invalid">
-                        <span class="label label-danger" ng-messages="ar.roleForm.manufacturer.$error">
-                            <span ng-message="duplicateRole">{{::"MANUFACT_SEL"|translate}}</span>
+                        <span data-ng-if="!ar.isContact">{{::"MANUFACTURER"|translate}}</span>
+                        <span data-ng-if="ar.isContact">{{::"CONTACT_MANUFACTURER"|translate}}</span>
+                        <strong id="manufacturer-role-error" class="error" data-ng-if="ar.roleForm.manufacturer.$invalid">
+                        <span class="label label-danger" data-ng-messages="ar.roleForm.manufacturer.$error">
+                            <span data-ng-message="duplicateRole">{{::"MANUFACT_SEL"|translate}}</span>
                         </span>
                         </strong>
                     </label>
@@ -98,14 +90,14 @@
             <div class="col-sm-5">
                 <div class="checkbox">
                     <label for="{{::ar.chkMailId}}">
-                        <input type="checkbox" name="mailing" ng-model="ar.roleModel.mailing"
-                               ng-disabled="!ar.isEditable"
-                               ng-change="ar.updateOtherState(ar.roleForm.mailing,'mailing')" id="{{::ar.chkMailId}}"/>
-                        <span ng-if="!ar.isContact">{{::"MAILING"|translate}}</span>
-                        <span ng-if="ar.isContact">{{::"CONTACT_MAILING"|translate}}</span>
-                        <strong id="mailing-role-error" class="error" ng-if="ar.roleForm.mailing.$invalid">
-                        <span class="label label-danger" ng-messages="ar.roleForm.mailing.$error">
-                            <span ng-message="duplicateRole">{{::"MAIL_SEL"|translate}}</span>
+                        <input type="checkbox" name="mailing" data-ng-model="ar.roleModel.mailing"
+                               data-ng-disabled="!ar.isEditable"
+                               data-ng-change="ar.updateOtherState(ar.roleForm.mailing,'mailing')" id="{{::ar.chkMailId}}"/>
+                        <span data-ng-if="!ar.isContact">{{::"MAILING"|translate}}</span>
+                        <span data-ng-if="ar.isContact">{{::"CONTACT_MAILING"|translate}}</span>
+                        <strong id="mailing-role-error" class="error" data-ng-if="ar.roleForm.mailing.$invalid">
+                        <span class="label label-danger" data-ng-messages="ar.roleForm.mailing.$error">
+                            <span data-ng-message="duplicateRole">{{::"MAIL_SEL"|translate}}</span>
                         </span>
                         </strong>
                     </label>
@@ -116,14 +108,14 @@
             <div class="col-sm-4">
                 <div class="checkbox">
                     <label for="{{::ar.chkBillId}}">
-                        <input type="checkbox" name="billing" ng-model="ar.roleModel.billing"
-                               ng-disabled="!ar.isEditable"
-                               ng-change="ar.updateOtherState(ar.roleForm.billing,'billing')" id="{{::ar.chkBillId}}"/>
-                        <span ng-if="!ar.isContact">{{::"BILLING"|translate}}</span>
-                        <span ng-if="ar.isContact">{{::"CONTACT_BILLING"|translate}}</span>
-                        <strong id="billing-role-error" class="error" ng-if="ar.roleForm.billing.$invalid">
-                         <span class="label label-danger" ng-messages="ar.roleForm.billing.$error">
-                                    <span ng-message="duplicateRole">{{::"BILLING_SEL"|translate}}</span>
+                        <input type="checkbox" name="billing" data-ng-model="ar.roleModel.billing"
+                               data-ng-disabled="!ar.isEditable"
+                               data-ng-change="ar.updateOtherState(ar.roleForm.billing,'billing')" id="{{::ar.chkBillId}}"/>
+                        <span data-ng-if="!ar.isContact">{{::"BILLING"|translate}}</span>
+                        <span data-ng-if="ar.isContact">{{::"CONTACT_BILLING"|translate}}</span>
+                        <strong id="billing-role-error" class="error" data-ng-if="ar.roleForm.billing.$invalid">
+                         <span class="label label-danger" data-ng-messages="ar.roleForm.billing.$error">
+                                    <span data-ng-message="duplicateRole">{{::"BILLING_SEL"|translate}}</span>
                                 </span>
                         </strong>
                     </label>
@@ -132,14 +124,14 @@
             <div class="col-sm-4">
                 <div class="checkbox">
                     <label for="{{::ar.chkImpId}}">
-                        <input type="checkbox" name="importer" ng-model="ar.roleModel.importer"
-                               ng-disabled="!ar.isEditable"
-                               ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="{{::ar.chkImpId}}"/>
-                        <span ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
-                        <span ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
-                        <strong id="importer-rolec-error" class="error" ng-if="ar.roleForm.importer.$invalid">
-                         <span class="label label-danger" ng-messages="ar.roleForm.importer.$error">
-                                    <span ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
+                        <input type="checkbox" name="importer" data-ng-model="ar.roleModel.importer"
+                               data-ng-disabled="!ar.isEditable"
+                               data-ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="{{::ar.chkImpId}}"/>
+                        <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
+                        <span data-ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
+                        <strong id="importer-rolec-error" class="error" data-ng-if="ar.roleForm.importer.$invalid">
+                         <span class="label label-danger" data-ng-messages="ar.roleForm.importer.$error">
+                                    <span data-ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
                                 </span>
                         </strong>
                     </label>
@@ -148,30 +140,30 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <div ng-show="ar.isContact" class="checkbox">
+                <div data-ng-show="ar.isContact" class="checkbox">
                     <label for="{{::ar.chkRePrimId}}">
-                        <input type="checkbox" name="repPrimary" ng-model="ar.roleModel.repPrimary"
-                               ng-disabled="!ar.isEditable"
-                               ng-change="ar.oneSelected(ar.roleForm.repPrimary,'repPrimary')"
+                        <input type="checkbox" name="repPrimary" data-ng-model="ar.roleModel.repPrimary"
+                               data-ng-disabled="!ar.isEditable"
+                               data-ng-change="ar.oneSelected(ar.roleForm.repPrimary,'repPrimary')"
                                id="{{::ar.chkRePrimId}}"/> {{::'REPPRIMARY'|translate}}
-                        <strong id="repPrimmary-role-error" class="error" ng-if="ar.roleForm.repPrimary.$invalid">
-                         <span class="label label-danger" ng-messages="ar.roleForm.repPrimary.$error">
-                                    <span ng-message="duplicateRole">{{::"REPPRIM_SEL"|translate}}</span>
+                        <strong id="repPrimmary-role-error" class="error" data-ng-if="ar.roleForm.repPrimary.$invalid">
+                         <span class="label label-danger" data-ng-messages="ar.roleForm.repPrimary.$error">
+                                    <span data-ng-message="duplicateRole">{{::"REPPRIM_SEL"|translate}}</span>
                                 </span>
                         </strong>
                     </label>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div ng-show="ar.isContact" class="checkbox">
+                <div data-ng-show="ar.isContact" class="checkbox">
                     <label for="{{::ar.chkRepSecId}}">
-                        <input type="checkbox" name="repSecondary" ng-model="ar.roleModel.repSecondary"
-                               ng-disabled="!ar.isEditable"
-                               ng-change="ar.oneSelected(ar.roleForm.repSecondary,'repSecondary')"
+                        <input type="checkbox" name="repSecondary" data-ng-model="ar.roleModel.repSecondary"
+                               data-ng-disabled="!ar.isEditable"
+                               data-ng-change="ar.oneSelected(ar.roleForm.repSecondary,'repSecondary')"
                                id="{{::ar.chkRepSecId}}"/> {{'REPSECONDARY'|translate}}
-                        <strong id="repSecondary-role-error" class="error" ng-if="ar.roleForm.repSecondary.$invalid">
-                         <span class="label label-danger" ng-messages="ar.roleForm.repSecondary.$error">
-                                    <span ng-message="duplicateRole">{{::"REPALT_SEL"|translate}}</span>
+                        <strong id="repSecondary-role-error" class="error" data-ng-if="ar.roleForm.repSecondary.$invalid">
+                         <span class="label label-danger" data-ng-messages="ar.roleForm.repSecondary.$error">
+                                    <span data-ng-message="duplicateRole">{{::"REPALT_SEL"|translate}}</span>
                                 </span>
                         </strong>
                     </label>

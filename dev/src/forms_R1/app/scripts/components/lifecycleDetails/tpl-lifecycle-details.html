@@ -170,7 +170,7 @@
                              data-ng-show="lifecycleCtrl.startDateVisible">
                             <label for="{{::lifecycleCtrl.startDateId}}">
                                 {{lifecycleCtrl.startDateLabel |translate}}
-                                <span class="datepicker-format">(<abbr title="Four digits year, dash, two digits month, dash, two digits day">yyyy-mm-dd</abbr>)</span>
+                                <!--<span class="datepicker-format">(<abbr title="Four digits year, dash, two digits month, dash, two digits day">yyyy-mm-dd</abbr>)</span>-->
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                 <cmp-error-message field-name="lifecycleCtrl.startDateId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
@@ -196,10 +196,6 @@
                                             <!--</button>-->
                                       <!--</span>-->
                             <!--</div>-->
-                            <div class="form-group">
-                                <label for="startdate">Start date<span class="datepicker-format"> (<abbr title="Four digits year, dash, two digits month, dash, two digits day">YYYY-MM-DD</abbr>)</span></label>
-                                <input class="form-control" type="date" id="startdate" name="startdate" min="2013-03-27" max="2013-05-07" />
-                            </div>
                         </div>
                         <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId].$invalid}"
