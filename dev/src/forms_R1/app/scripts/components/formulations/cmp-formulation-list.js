@@ -97,6 +97,7 @@
                 "formulationId": (getMaxFormulationId() + 1),
                 "formulationName": "",
                 "dosageForm": "",
+                "dosageFormHtml": "",
                 "dosageFormOther": "",
                 activeIngList: [],
                 nMedIngList: [],

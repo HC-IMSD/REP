@@ -60,7 +60,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <div uib-alert template-url="./app/lib/uib-templates/alert.html" data-ng-if="timelySubCtrl.alerts[0]"
+                    <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="timelySubCtrl.alerts[0]"
                          class="alert-info" close="timelySubCtrl.closeAlert(0)">
                         <section aria-live="assertive">
                             <div data-ng-if="!timelySubCtrl.isFrench()"

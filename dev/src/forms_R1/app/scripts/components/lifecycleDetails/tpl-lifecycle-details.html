@@ -168,8 +168,9 @@
                         <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId].$invalid}"
                              data-ng-show="lifecycleCtrl.startDateVisible">
-                            <label for="{{::lifecycleCtrl.startDateId}}" class="required">
-                                <span class="field-name">{{lifecycleCtrl.startDateLabel |translate}}</span>
+                            <label for="{{::lifecycleCtrl.startDateId}}">
+                                {{lifecycleCtrl.startDateLabel |translate}}
+                                <span class="datepicker-format">(<abbr title="Four digits year, dash, two digits month, dash, two digits day">yyyy-mm-dd</abbr>)</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
                                 <cmp-error-message field-name="lifecycleCtrl.startDateId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
@@ -177,22 +178,24 @@
                                                    error-types="lifecycleCtrl.dateFormatError"></cmp-error-message>
                             </label>
                                 <!--  <span class="date-picker-format"></span>-->
-                                <div class="input-group rep-input-group">
-                                    <input id="{{::lifecycleCtrl.startDateId}}" type="text" class="form-control rep-normal-font"
-                                           data-uib-datepicker-popup
-                                           data-show-button-bar="false" data-datepicker-options="lifecycleCtrl.dateOptions"
-                                           name="{{::lifecycleCtrl.startDateId}}" data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
-                                           data-is-open="lifecycleCtrl.startDateOpen"
-                                           data-ng-required="lifecycleCtrl.startDateVisible"
-                                           data-ng-change="lifecycleCtrl.setConcatDetails()"/>
-                                    <span class="input-group-btn">
-                                            <button title="{{::'CALENDAR'|translate}}" class="btn btn-default"
-                                                    aria-haspopup="true" id="activity-picker-toggle"
-                                                    data-ng-click="lifecycleCtrl.openStartDate()"><span
-                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>
-                                            </button>
-                                      </span>
-                                </div>
+                                <!--<div class="input-group rep-input-group">-->
+                                    <input id="{{::lifecycleCtrl.startDateId}}" type="date" name="startDate" data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
+                                            class="form-control" required>
+                                    <!--<input id="{{::lifecycleCtrl.startDateId}}" type="text" class="form-control rep-normal-font"-->
+                                           <!--data-uib-datepicker-popup-->
+                                           <!--data-show-button-bar="false" data-datepicker-options="lifecycleCtrl.dateOptions"-->
+                                           <!--name="{{::lifecycleCtrl.startDateId}}" data-ng-model="lifecycleCtrl.lifecycleModel.startDate"-->
+                                           <!--data-is-open="lifecycleCtrl.startDateOpen"-->
+                                           <!--data-ng-required="lifecycleCtrl.startDateVisible"-->
+                                           <!--data-ng-change="lifecycleCtrl.setConcatDetails()"/>-->
+                                    <!--<span class="input-group-btn">-->
+                                            <!--<button title="{{::'CALENDAR'|translate}}" class="btn btn-default"-->
+                                                    <!--aria-haspopup="true" id="activity-picker-toggle"-->
+                                                    <!--data-ng-click="lifecycleCtrl.openStartDate()"><span-->
+                                                    <!--class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>-->
+                                            <!--</button>-->
+                                      <!--</span>-->
+                            <!--</div>-->
                         </div>
                         <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId].$invalid}"
@@ -205,23 +208,25 @@
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId])"
                                                    error-types="lifecycleCtrl.dateFormatError"></cmp-error-message>
                             </label>
-                                <div class="input-group rep-input-group">
-                                    <input id="{{::lifecycleCtrl.endDateId}}" type="text" class="form-control rep-normal-font"
-                                           data-uib-datepicker-popup
-                                           data-show-button-bar="false" data-datepicker-options="lifecycleCtrl.dateOptions"
-                                           name="{{::lifecycleCtrl.endDateId}}" data-ng-model="lifecycleCtrl.lifecycleModel.endDate"
-                                           data-is-open="lifecycleCtrl.endDateOpen"
-                                           data-ng-required="lifecycleCtrl.endDateVisible"
-                                           data-ng-change="lifecycleCtrl.setConcatDetails()"/>
-                                    <span class="input-group-btn">
-                                            <button title="{{::'CALENDAR'|translate}}" class="btn btn-default"
-                                                    aria-haspopup="true"
-                                                    id="dateEnd-picker-toggle"
-                                                    data-ng-click="lifecycleCtrl.openEndDate()"><span
-                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>
-                                            </button>
-                                      </span>
-                                </div>
+                            <input id="{{::lifecycleCtrl.endDateId}}" type="date" name="endDate" data-ng-model="lifecycleCtrl.lifecycleModel.endDate"
+                                   class="form-control" required>
+                                <!--<div class="input-group rep-input-group">-->
+                                    <!--<input id="{{::lifecycleCtrl.endDateId}}" type="text" class="form-control rep-normal-font"-->
+                                           <!--data-uib-datepicker-popup-->
+                                           <!--data-show-button-bar="false" data-datepicker-options="lifecycleCtrl.dateOptions"-->
+                                           <!--name="{{::lifecycleCtrl.endDateId}}" data-ng-model="lifecycleCtrl.lifecycleModel.endDate"-->
+                                           <!--data-is-open="lifecycleCtrl.endDateOpen"-->
+                                           <!--data-ng-required="lifecycleCtrl.endDateVisible"-->
+                                           <!--data-ng-change="lifecycleCtrl.setConcatDetails()"/>-->
+                                    <!--<span class="input-group-btn">-->
+                                            <!--<button title="{{::'CALENDAR'|translate}}" class="btn btn-default"-->
+                                                    <!--aria-haspopup="true"-->
+                                                    <!--id="dateEnd-picker-toggle"-->
+                                                    <!--data-ng-click="lifecycleCtrl.openEndDate()"><span-->
+                                                    <!--class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>-->
+                                            <!--</button>-->
+                                      <!--</span>-->
+                                <!--</div>-->
 
                         </div>
                     </div>

@@ -5,7 +5,7 @@
         <li data-ng-repeat="tab in tabsCtrl.tabs" role="presentation" data-ng-click="tabsCtrl.selectTab($index)"
             data-ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">
             <a role="tab">{{tab.label |translate}}
-                <strong data-ng-if="tabsCtrl.tabs[$index].form.$invalid" class="required">({{'ERRORS' |translate}})</strong>
+                <strong class="required">{{::"REQUIRED" |translate}}</strong>
             </a>
         </li>
         <li>

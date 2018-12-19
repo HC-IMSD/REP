@@ -55,6 +55,7 @@
             street: "",
             city: "",
             country: "",
+            countryHtml: "",
             countryDisplay:"",
             stateLov: "",
             stateText: "",
@@ -246,7 +247,26 @@
             vm.stateListId = "provinceList" + scopeId;
             vm.postalId = "postal" + scopeId;
         }
-
+        function countryChange() {
+            var found = false;
+            for(var i = 0; i < vm.countryList.length; i++) {
+                var option =vm.countryList[i];
+                if(option[vm.lang] === vm.addressModel.countryHtml) {
+                    vm.addressModel.country = option['id'];
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.countryList.length; i++) {
+                    var option =vm.countryList[i];
+                    if(option['id'] === vm.addressModel.country) {
+                        vm.addressModel.countryHtml = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+        }
         // component only has one field, just watch this field for changes to update error summary
         $scope.$watch('adr.addressForm.$error', function () {
             vm.updateErrorSummary();

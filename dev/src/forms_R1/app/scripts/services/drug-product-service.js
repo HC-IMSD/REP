@@ -467,6 +467,7 @@
                 } else {
                     var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form.__text});
                     obj.dosageForm = dosageFormObj;
+                    obj.dosageFormHtml = dosageFormObj[$translate.proposedLanguage() || $translate.use()];
                 }
 
                 obj.dosageFormOther = item.dosage_form_group.dosage_form_other;

@@ -47,7 +47,7 @@
                         </span>
                     </strong>
                 </label>
-                    <div class="rep-input-group">
+                    <div class="rep-input-group" data-ng-if="infoCtrl.isDossier">
                         <span class="input-group-addon">HC6-024-</span>
                         <div data-ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid}">
                             <input type="text" class="form-control full-width" id="{{::infoCtrl.fieldId}}"

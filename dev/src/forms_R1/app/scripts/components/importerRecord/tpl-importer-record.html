@@ -30,6 +30,8 @@
                                        form-ref="importerRecCtrl.importerForm"
                                        show-error="importerRecCtrl.showError(importerRecCtrl.importerForm[importerRecCtrl.importerNameId])"
                                        error-types="importerRecCtrl.requiredOnly"></cmp-error-message>
+
+                </label>
                     <div class="rep-margin-top">
                         <input type="text" data-ng-model="importerRecCtrl.model.importerName" name="{{::importerRecCtrl.importerNameId}}"
                                data-ng-model-options="{ debounce: $inherit}"
@@ -38,7 +40,6 @@
                                data-ng-required="true"/>
                     </div>
 
-                </label>
             </div>
         </div>
         <div class="row">

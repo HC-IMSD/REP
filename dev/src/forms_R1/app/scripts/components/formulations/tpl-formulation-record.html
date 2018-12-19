@@ -48,7 +48,7 @@
             </div>
             <div class="row">
                 <div class="col-md-5 form-group">
-                    <label for="{{::formulRecCtrl.dosageId}}" class="required rep-required-offset full-width">
+                    <label for="{{::formulRecCtrl.dosageId}}">
                         <span class="field-name">B. {{'DOSAGE_FORM'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <cmp-error-message field-name="formulRecCtrl.dosageId"
@@ -56,28 +56,32 @@
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                        <div class="rep-pad-top">
-                            <div class="rep-error"
-                                 data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}">
-                                <ui-select ng-model="formulRecCtrl.frmModel.dosageForm"
-                                           id="{{::formulRecCtrl.dosageId}}"
-                                           name="{{::formulRecCtrl.dosageId}}" data-ng-model-options="{debounce: 0}"
-                                           class="rep-selectize-dropdown rep-selectize-font" required
-                                           data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}"
-                                           title="{{'SELECT_DOSAGE'|translate}}">
-                                    <ui-select-match placeholder="{{'SELECT_DOSAGE'|translate}}"
-                                                     class="rep-selectize-font rep-selectize-dropdown">
-                                        {{$select.selected[formulRecCtrl.lang]}}
-                                    </ui-select-match>
-                                    <ui-select-choices
-                                            repeat="formType in formulRecCtrl.dosageFormList | filter:{[formulRecCtrl.lang]:$select.search}"
-                                            class="rep-selectize-font full-width">
-                                <span class="full-width"
-                                      data-ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
-                        </div>
+                    <input type="text" id="{{::formulRecCtrl.dosageId}}" data-ng-model="formulRecCtrl.frmModel.dosageFormHtml" value="formulRecCtrl.frmModel.dosageFormHtml" data-ng-change="formulRecCtrl.dosageFormChange()" list="dosageFormList" required="required" class="form-control full-width"/>
+                    <datalist id="dosageFormList" class="rep-selectize-dropdown rep-selectize-font">
+                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}" label="{{formType[formulRecCtrl.lang]}}"/>
+                    </datalist>
+                        <!--<div class="rep-pad-top">-->
+                            <!--<div class="rep-error"-->
+                                 <!--data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}">-->
+                                <!--<ui-select ng-model="formulRecCtrl.frmModel.dosageForm"-->
+                                           <!--id="{{::formulRecCtrl.dosageId}}"-->
+                                           <!--name="{{::formulRecCtrl.dosageId}}" data-ng-model-options="{debounce: 0}"-->
+                                           <!--class="rep-selectize-dropdown rep-selectize-font" required-->
+                                           <!--data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}"-->
+                                           <!--title="{{'SELECT_DOSAGE'|translate}}">-->
+                                    <!--<ui-select-match placeholder="{{'SELECT_DOSAGE'|translate}}"-->
+                                                     <!--class="rep-selectize-font rep-selectize-dropdown">-->
+                                        <!--{{$select.selected[formulRecCtrl.lang]}}-->
+                                    <!--</ui-select-match>-->
+                                    <!--<ui-select-choices-->
+                                            <!--repeat="formType in formulRecCtrl.dosageFormList | filter:{[formulRecCtrl.lang]:$select.search}"-->
+                                            <!--class="rep-selectize-font full-width">-->
+                                <!--<span class="full-width"-->
+                                      <!--data-ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>-->
+                                    <!--</ui-select-choices>-->
+                                <!--</ui-select>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
                 </div>
                 <div class="col-md-6 form-group"

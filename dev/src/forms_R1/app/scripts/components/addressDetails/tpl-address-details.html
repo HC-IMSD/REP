@@ -30,32 +30,36 @@
                 </label>
             </div>
             <div class="col-md-5 form-group">
-                <label class="required full-width"> <!-- for="{{::adr.countryId}}"  -->
+                <label class="required full-width" for="{{::adr.countryId}}" >
                     <span class="field-name">{{::"COUNTRY" |translate}}</span>
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="adr.countryId" form-ref="adr.addressForm"
                                        show-error="adr.showError(adr.addressForm[adr.countryId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
                 </label>
-                    <div class="rep-pad-top">
-                        <div class="rep-error" data-ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
-                            <ui-select data-ng-model="adr.addressModel.country" data-id="{{::adr.countryId}}"
-                                       data-on-select="adr.countryChanged()" data-ng-required="adr.isCountryEditable()"
-                                       data-ng-disabled="!adr.isCountryEditable()" title="{{'COUNTRY_CHOOSE'|translate}}"
-                                       class="rep-selectize-font full-width">
-                                <ui-select-match placeholder="{{::'COUNTRY_CHOOSE'|translate}}"
-                                                 id="country_match{{::$id}}"
-                                                 class="rep-selectize-font rep-selectize-dropdown form-control">
-                                    {{$select.selected[adr.lang]}}
-                                </ui-select-match>
-                                <ui-select-choices
-                                        repeat="countryRecord in adr.countryList | filter:{[adr.lang]: $select.search}"
-                                        class="rep-selectize-font">
-                                    <span data-ng-bind-html="countryRecord[adr.lang] | highlight: $select.search"></span>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-                    </div>
+                <input type="text" id="{{::adr.countryId}}" data-ng-model="adr.addressModel.countryHtml" value="adr.addressModel.countryHtml" data-ng-change="adr.countryChange()" list="countryList" required class="rep-selectize-font full-width"/>
+                <datalist id="countryList" class="rep-selectize-dropdown rep-selectize-font">
+                    <option data-ng-repeat="countryRecord in adr.countryList" value="{{countryRecord[adr.lang]}}" label="{{countryRecord[adr.lang]}}"/>
+                </datalist>
+                    <!--<div class="rep-pad-top">-->
+                        <!--<div class="rep-error" data-ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">-->
+                            <!--<ui-select data-ng-model="adr.addressModel.country" data-id="{{::adr.countryId}}"-->
+                                       <!--data-on-select="adr.countryChanged()" data-ng-required="adr.isCountryEditable()"-->
+                                       <!--data-ng-disabled="!adr.isCountryEditable()" title="{{'COUNTRY_CHOOSE'|translate}}"-->
+                                       <!--class="rep-selectize-font full-width">-->
+                                <!--<ui-select-match placeholder="{{::'COUNTRY_CHOOSE'|translate}}"-->
+                                                 <!--id="country_match{{::$id}}"-->
+                                                 <!--class="rep-selectize-font rep-selectize-dropdown form-control">-->
+                                    <!--{{$select.selected[adr.lang]}}-->
+                                <!--</ui-select-match>-->
+                                <!--<ui-select-choices-->
+                                        <!--repeat="countryRecord in adr.countryList | filter:{[adr.lang]: $select.search}"-->
+                                        <!--class="rep-selectize-font">-->
+                                    <!--<span data-ng-bind-html="countryRecord[adr.lang] | highlight: $select.search"></span>-->
+                                <!--</ui-select-choices>-->
+                            <!--</ui-select>-->
+                        <!--</div>-->
+                    <!--</div>-->
             </div>
         </div>
         <div class="row">

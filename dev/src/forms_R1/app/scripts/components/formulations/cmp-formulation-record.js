@@ -300,6 +300,26 @@
         vm.isFrench=function(){
             return(vm.lang===FRENCH);
         };
+        vm.dosageFormChange = function() {
+            var found = false;
+            for(var i = 0; i < vm.dosageFormList.length; i++) {
+                var option =vm.dosageFormList[i];
+                if(option[vm.lang] === vm.frmModel.dosageFormHtml) {
+                    vm.frmModel.dosageForm = option;
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.dosageFormList.length; i++) {
+                    var option =vm.dosageFormList[i];
+                    if(option['id'] === vm.frmModel.dosageForm) {
+                        vm.frmModel.dosageFormHtml = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+        }
 
         /**
          * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
