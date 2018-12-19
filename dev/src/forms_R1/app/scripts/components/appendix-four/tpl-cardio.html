@@ -9,7 +9,7 @@
                                    show-error="sysCtrl.showErrors()"
                                    error-types="sysCtrl.requiredOnly"></cmp-error-message>
                 <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}" required type="hidden"
-                       ng-model="sysCtrl.isSelected"/>
+                       data-ng-model="sysCtrl.isSelected"/>
             </legend>
 
             <div class="row">
@@ -17,8 +17,8 @@
                     <div class="checkbox">
                         <label for="heartPericardium_{{::$id}}">
                             <input type="checkbox" name="heartPericardium" id="heartPericardium_{{::$id}}"
-                                   ng-model="sysCtrl.model.heartPericardium"
-                                   ng-change="sysCtrl.detailsChanged('HEART',sysCtrl.model.heartPericardium)"/>
+                                   data-ng-model="sysCtrl.model.heartPericardium"
+                                   data-ng-change="sysCtrl.detailsChanged('HEART',sysCtrl.model.heartPericardium)"/>
                             {{::'HEART'|translate}}
                         </label>
 
@@ -28,8 +28,8 @@
                     <div class="checkbox">
                         <label for="lung_{{::$id}}">
                             <input type="checkbox" name="lung" id="lung_{{::$id}}"
-                                   ng-model="sysCtrl.model.lung"
-                                   ng-change="sysCtrl.detailsChanged('LUNG',sysCtrl.model.lung)"/>
+                                   data-ng-model="sysCtrl.model.lung"
+                                   data-ng-change="sysCtrl.detailsChanged('LUNG',sysCtrl.model.lung)"/>
                             {{::'LUNG'|translate}}
                         </label>
                     </div>
@@ -38,8 +38,8 @@
                     <div class="checkbox">
                         <label for="nasalFluid_{{::$id}}">
                             <input type="checkbox" name="nasalFluid" id="nasalFluid_{{::$id}}"
-                                   ng-change="sysCtrl.detailsChanged('NASALFLUID',sysCtrl.model.nasalFluid)"
-                                   ng-model="sysCtrl.model.nasalFluid"/>
+                                   data-ng-change="sysCtrl.detailsChanged('NASALFLUID',sysCtrl.model.nasalFluid)"
+                                   data-ng-model="sysCtrl.model.nasalFluid"/>
                             {{::'NASALFLUID'|translate}}
                         </label>
                     </div>
@@ -48,8 +48,8 @@
                     <div class="checkbox">
                         <label for="trachea_{{::$id}}">
                             <input type="checkbox" name="trachea" id="trachea_{{::$id}}"
-                                   ng-change="sysCtrl.detailsChanged('TRACHEA',sysCtrl.model.trachea)"
-                                   ng-model="sysCtrl.model.trachea"/>
+                                   data-ng-change="sysCtrl.detailsChanged('TRACHEA',sysCtrl.model.trachea)"
+                                   data-ng-model="sysCtrl.model.trachea"/>
                             {{::'TRACHEA'|translate}}
                         </label>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="checkbox">
                         <label for="otherCardio_{{::$id}}">
                             <input type="checkbox" name="otherCardio" id="otherCardio_{{::$id}}"
-                                   ng-model="sysCtrl.model.otherCardio"/>
+                                   data-ng-model="sysCtrl.model.otherCardio"/>
                             {{::'CARDIO_OTHER'|translate}}
                         </label>
                     </div>
@@ -75,8 +75,8 @@
                                                error-types="sysCtrl.requiredOnly">
                             </cmp-error-message>
                             <input type="text" size="40" maxlength="40" name="{{::sysCtrl.otherDetailsId}}" id="{{::sysCtrl.otherDetailsId}}"
-                                  ng-required="{{sysCtrl.model.otherCardio}}"  ng-model-options="{ debounce: '$inherit'}"
-                                   ng-model="sysCtrl.model.otherDetails"/>
+                                   data-ng-required="{{sysCtrl.model.otherCardio}}"  data-ng-model-options="{ debounce: '$inherit'}"
+                                   data-ng-model="sysCtrl.model.otherDetails"/>
                         </label>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 <ng-form name="dinForm">
     <div class="form-group"
-         ng-class="{'has-error':dinForm.dinValue.$invalid}">
+         data-ng-class="{'has-error':dinForm.dinValue.$invalid}">
         <div class="col-xs-3">
             <label for="dinValue_{{$id}}" class="required">
                 <span class="field-name">{{'DIN_ABRREV'|translate}}&nbsp;{{dinCtrl.detailsIndex+1}}</span>
@@ -9,12 +9,12 @@
                 <div class="row">
                     <div>
                         <div class="input-group">
-                            <input type="text" size="14 " maxlength="8" only-digits="" ng-model="dinCtrl.record.dinNumber"
-                                   class="form-control" ng-minlength="8" ng-readonly="dinCtrl.setReadonly()"
-                                   name="dinValue" id="dinValue_{{$id}}" ng-required="true"/>
+                            <input type="text" size="14 " maxlength="8" data-only-digits="" data-ng-model="dinCtrl.record.dinNumber"
+                                   class="form-control" data-ng-minlength="8" data-ng-readonly="dinCtrl.setReadonly()"
+                                   name="dinValue" id="dinValue_{{$id}}" data-ng-required="true"/>
 
                       <span class="input-group-btn">
-                        <button class="btn btn-danger" ng-click="dinCtrl.delete()" ng-disabled="dinCtrl.setReadonly()">
+                        <button class="btn btn-danger" data-ng-click="dinCtrl.delete()" data-ng-disabled="dinCtrl.setReadonly()">
                             <span aria-label="{{'DELETE_DIN'|translate }} {{dinCtrl.detailsIndex+1}}"></span>
                             {{'DELETE'|translate}}
                         </button>
@@ -22,10 +22,10 @@
                         </div>
                     </div>
                     <strong id="dinValue-error" class="error"
-                            ng-show="dinCtrl.showError(dinForm.dinValue.$touched,dinForm.dinValue.$invalid)">
+                            data-ng-show="dinCtrl.showError(dinForm.dinValue.$touched,dinForm.dinValue.$invalid)">
                         <span class="label label-danger" ng-messages="dinForm.dinValue.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                              <span ng-message="minlength"><span translate="MSG_LENGTH_8NUM"></span></span>
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                              <span data-ng-message="minlength"><span translate="MSG_LENGTH_8NUM"></span></span>
                         </span>
                     </strong>
                 </div>

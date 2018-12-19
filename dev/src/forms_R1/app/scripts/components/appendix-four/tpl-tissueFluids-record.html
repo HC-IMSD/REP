@@ -6,7 +6,7 @@
               </legend>
         <div class="row">
             <div class="col-md-3 form-group"
-                 ng-class="{'has-error':tissuesSrcCtrl.tissuesRecForm[tissuesSrcCtrl.systemTypeId].$invalid}">
+                 data-ng-class="{'has-error':tissuesSrcCtrl.tissuesRecForm[tissuesSrcCtrl.systemTypeId].$invalid}">
                 <label for="{{::tissuesSrcCtrl.systemTypeId}}" class="required">
                     <span class="field-name">{{::'SYSTEM_TYPE'|translate}}</span>
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -14,10 +14,10 @@
                                        form-ref="tissuesSrcCtrl.tissuesRecForm"
                                        show-error="tissuesSrcCtrl.showErrors()"
                                        error-types="tissuesSrcCtrl.requiredOnly"></cmp-error-message>
-                    <select ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="{{::tissuesSrcCtrl.systemTypeId}}"
+                    <select data-ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="{{::tissuesSrcCtrl.systemTypeId}}"
                             name="{{::tissuesSrcCtrl.systemTypeId}}" required
-                            ng-change="tissuesSrcCtrl.systemChanged(tissuesSrcCtrl.tissuesRecForm[tissuesSrcCtrl.systemTypeId])"
-                            ng-options="val |translate for val in  tissuesSrcCtrl.systemList  | orderByTranslated">
+                            data-ng-change="tissuesSrcCtrl.systemChanged(tissuesSrcCtrl.tissuesRecForm[tissuesSrcCtrl.systemTypeId])"
+                            data-ng-options="val |translate for val in  tissuesSrcCtrl.systemList  | orderByTranslated">
                     </select>
                 </label>
             </div>
@@ -25,47 +25,47 @@
         <div>
             <cmp-nervous-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                 concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                                ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getNervousSystemValue() && !tissuesSrcCtrl.isUsed">
+                                data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getNervousSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-nervous-system>
 
             <cmp-digestive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                   concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                                  ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getDigestiveSystemValue() && !tissuesSrcCtrl.isUsed">
+                                  data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getDigestiveSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-digestive-system>
 
             <cmp-cardio-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                               ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getCardioSystemValue() && !tissuesSrcCtrl.isUsed">
+                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getCardioSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-cardio-system>
 
             <cmp-immune-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                               ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getImmuneSystemValue() && !tissuesSrcCtrl.isUsed">
+                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getImmuneSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-immune-system>
 
             <cmp-muscle-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                               ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getMuscleSystemValue() && !tissuesSrcCtrl.isUsed">
+                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getMuscleSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-muscle-system>
 
             <cmp-other-tissues-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                       concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                                      ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getOtherTissuesSystemValue() && !tissuesSrcCtrl.isUsed">
+                                      data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getOtherTissuesSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-other-tissues-system>
 
             <cmp-reproductive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                                      concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                                     ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getReproductiveSystemValue() && !tissuesSrcCtrl.isUsed">
+                                     data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getReproductiveSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-reproductive-system>
 
             <cmp-skin-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
                              concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
-                             ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getSkinSystemValue() && !tissuesSrcCtrl.isUsed">
+                             data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getSkinSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-skin-system>
         </div>
         <div class="row">
             <div class="btn-group-sm col-xs-12">
-                <button ng-click="tissuesSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm">
+                <button data-ng-click="tissuesSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm">
                     {{::'DELETE'|translate}}&nbsp;{{::'TISSUE_FLUID'|translate}}
                 </button>
             </div>

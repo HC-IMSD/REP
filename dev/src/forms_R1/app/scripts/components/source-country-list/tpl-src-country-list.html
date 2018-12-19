@@ -1,7 +1,7 @@
 <ng-form name="srcCountryListCtrl.countryListForm">
-      <!--input type="text" required ng-show="false" name="{{::srcCountryListCtrl.noCountryId}}" id="{{::srcCountryListCtrl.noCountryId}}"
+      <!--input type="text" required data-ng-show="false" name="{{::srcCountryListCtrl.noCountryId}}" id="{{::srcCountryListCtrl.noCountryId}}"
                                aria-hidden="true" data-ng-model="srcCountryListCtrl.noCountries"/-->
-    <cmp-expanding-table reset-to-collapsed="srcCountryListCtrl.resetToCollapsed"
+    <cmp-expanding-table pre-id="country_list_" reset-to-collapsed="srcCountryListCtrl.resetToCollapsed"
                          list-items="srcCountryListCtrl.model.list" id="srcCountryList"
                          column-def="srcCountryListCtrl.columnDef" select-record="srcCountryListCtrl.selectRecord"
                          disable-selection="srcCountryListCtrl.disableAddButton()">
@@ -12,8 +12,8 @@
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" ng-click="srcCountryListCtrl.addNew()" name="addCountry_{{::$id}}" id="addCountry_{{::$id}}"
-                    ng-disabled="srcCountryListCtrl.disableAddButton()">{{'ADD_A'|translate}}&nbsp;{{srcCountryListCtrl.fieldLabel|translate}}
+            <button class="btn btn-primary" data-ng-click="srcCountryListCtrl.addNew()" name="addCountry_{{::$id}}" id="addCountry_{{::$id}}"
+                    data-ng-disabled="srcCountryListCtrl.disableAddButton()">{{'ADD_A'|translate}}&nbsp;{{srcCountryListCtrl.fieldLabel|translate}}
             </button>
         </div>
     </div>

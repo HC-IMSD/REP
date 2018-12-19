@@ -20,10 +20,10 @@
                                    update-errors="tissuesListSrcCtrl.updateSummary"></cmp-error-summary>-->
 
                 <input type="hidden" required aria-hidden="true" name="{{::tissuesListSrcCtrl.oneTissueId}}" id="{{::tissuesListSrcCtrl.oneTissueId}}"
-                       ng-model="tissuesListSrcCtrl.oneRecord"/>
+                       data-ng-model="tissuesListSrcCtrl.oneRecord"/>
 
                 <div class="panel-body">
-                    <cmp-expanding-table title="" id="tissueList"
+                    <cmp-expanding-table pre-id="tissues_fluids_list_" title="" id="tissueList"
                                          reset-to-collapsed="tissuesListSrcCtrl.resetToCollapsed"
                                          list-items="tissuesListSrcCtrl.model.tissuesFluidsList"
                                          column-def="tissuesListSrcCtrl.columnDef"
@@ -41,9 +41,9 @@
 
                     <div class="mrgn-tp-md mrgn-bttm-lg">
                         <div class="btn-group-sm col-md-12">
-                            <button class="btn btn-primary" ng-click="tissuesListSrcCtrl.addNew()" name="{{::tissuesListSrcCtrl.addTissuesRecId}}"
+                            <button class="btn btn-primary" data-ng-click="tissuesListSrcCtrl.addNew()" name="{{::tissuesListSrcCtrl.addTissuesRecId}}"
                                     id="{{::tissuesListSrcCtrl.addTissuesRecId}}"
-                                    ng-disabled="tissuesListSrcCtrl.disableAdd()">
+                                    data-ng-disabled="tissuesListSrcCtrl.disableAdd()">
                                 {{'TISSUES_FLUIDS_ADD'|translate}}
                             </button>
                         </div>

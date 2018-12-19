@@ -3,25 +3,25 @@
         <thead>
         <tr>
             <th aria-label="Expanded State" scope="col" style="color:transparent;width:2%;"></th>
-            <th scope="col" ng-repeat="heading in expandTblCtrl.columnDefinitions" style="{{::heading.width}}%">{{::heading.label |translate}}</th>
+            <th scope="col" data-ng-repeat="heading in expandTblCtrl.columnDefinitions" style="{{::heading.width}}%">{{::heading.label |translate}}</th>
             <!-- <th scope="col" ng-if="!expandTblCtrl.disableErrorCol">{{::'ERRORS'|translate}}</th>-->
         </tr>
         </thead>
         <tbody>
         <tr id="{{expandTblCtrl.preId}}{{$index}}" class="clickableRow"
             data-ng-class="{'selected':$index == expandTblCtrl.tableRowIndexCurrExpanded}"
-            aria-expanded="expandTblCtrl.getExpandedState($index)"
+            data-aria-expanded="expandTblCtrl.getExpandedState($index)"
             data-ng-repeat-start="record in expandTblCtrl.listItems"
             title="{{::'TOGGLE_EXPAND' |translate}} {{$index+1}}"
             data-ng-click="expandTblCtrl.selectTableRow($index)">
-            <td aria-selected="{{!expandTblCtrl.dayDataCollapse[$index]}}">
-                            <span ng-class="{'fa fa-caret-down fa-lg fa-fw':expandTblCtrl.getExpandedState($index) ,'fa fa-caret-right fa-lg fa-fw':!expandTblCtrl.getExpandedState($index)} "
-                                  ng-class="{open:expandTblCtrl.getExpandedState($index)}"
+            <td data-aria-selected="{{!expandTblCtrl.dayDataCollapse[$index]}}">
+                            <span data-ng-class="{'fa fa-caret-down fa-lg fa-fw':expandTblCtrl.getExpandedState($index) ,'fa fa-caret-right fa-lg fa-fw':!expandTblCtrl.getExpandedState($index)} "
+                                  data-ng-class="{open:expandTblCtrl.getExpandedState($index)}"
                             ></span>
             </td>
-            <td ng-repeat="def in expandTblCtrl.columnDefinitions">
-                <span ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
-                <span ng-if="def.isHtml" ng-bind-html="record[def.binding]"></span>
+            <td data-ng-repeat="def in expandTblCtrl.columnDefinitions">
+                <span data-ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
+                <span data-ng-if="def.isHtml" data-ng-bind-html="record[def.binding]"></span>
             </td>
             <!--  <td ng-if="!expandTblCtrl.disableErrorCol" width="5%"></td>-->
         </tr>
@@ -29,8 +29,8 @@
             <td colspan="{{::expandTblCtrl.numberCols}}">
                 <ng-form name="{{::expandTblCtrl.formName}}_{{::$index}}">
                     <ng-form name="expandTblCtrl.transcludeForm[$index]">
-                        <div ng-if="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid)">
-                            <div ng-transclude>
+                        <div data-ng-if="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid)">
+                            <div data-ng-transclude>
                             </div>
                         </div>
                     </ng-form>

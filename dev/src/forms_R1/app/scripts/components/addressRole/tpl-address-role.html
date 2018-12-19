@@ -3,15 +3,15 @@
         <label class="required">
             <span class="field-name">{{::ar.legendText |translate}}</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
-            <button ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
+            <span data-ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
                     class="btn-xs rep-help-button-primary"
-                    id="address-roles-instructions-toggle" ng-click="ar.addInstruct(0)">
+                    id="address-roles-instructions-toggle" data-ng-click="ar.addInstruct(0)">
                 <span class="fa fa-question-circle fa-2x"></span>
                 <span class="wb-inv">"{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"</span>
-            </button>
-            <button ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
+            </span>
+            <span ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
                     class="btn-xs rep-help-button-primary"
-                    id="contact-roles-instructions-toggle" ng-click="ar.addInstruct(0)">
+                    id="contact-roles-instructions-toggle" data-ng-click="ar.addInstruct(0)">
                 <span class="fa fa-question-circle fa-2x"></span>
                 <span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
             </button>
@@ -22,6 +22,12 @@
             <strong id="address-role-error" class="error" ng-show="ar.showErrorMissing()">
                         <span class="label label-danger" ng-messages="ar.roleForm.{{::ar.roleMissingId}}.$error">
                             <span ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
+            </span>
+            <input id="roleMissing_{{::$id}}" type="text" name="roleMissing_{{::$id}}" data-ng-show="false"
+                   data-ng-model="ar.isSelected" required/>
+            <strong id="address-role-error_{{::$id}}" class="error" data-ng-show="ar.showErrorMissing()">
+                        <span class="label label-danger" data-ng-messages="ar.roleForm.roleMissing_{{::$id}}.$error">
+                            <span data-ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
                         </span>
             </strong>
         </div>
@@ -35,16 +41,18 @@
             </strong>
         </div>
         <div ng-if="!ar.isContact" class="row col-md-12">
+        </label>
+        <div data-ng-if="!ar.isContact" class="row col-md-12">
             <div>
                 <cmp-alert  ui-state="ar.alerts[0]"
                             msg="ADDRESS_ROLE_INSTRUCT"
                             update-state="ar.closeAlert(0)"
                             type="alert-info">
                 <section aria-live="assertive">
-                    <div ng-if="!ar.isFrench()"
+                    <div data-ng-if="!ar.isFrench()"
                          ng-include="'app/scripts/templates/company/tpl-company-address-roles-en.html'">
                     </div>
-                    <div ng-if="ar.isFrench()"
+                    <div data-ng-if="ar.isFrench()"
                          ng-include="'app/scripts/templates/company/tpl-company-address-roles-fr.html'">
                     </div>
                 </section>
@@ -52,7 +60,7 @@
 
             </div>
         </div>
-        <div ng-if="ar.isContact" class="row col-md-12">
+        <div data-ng-if="ar.isContact" class="row col-md-12">
             <div>
                 <cmp-alert  ui-state="ar.alerts[0]"
                             msg="CONTACT_ROLE_INSTRUCT"

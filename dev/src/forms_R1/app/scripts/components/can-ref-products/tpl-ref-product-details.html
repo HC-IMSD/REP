@@ -10,7 +10,7 @@
         <fieldset>
             <legend>{{::'CDN_REF_PRODUCT'|translate}}&nbsp{{refProdCtrl.recordIndex+1}}</legend>
             <div class="row">
-                <div class="col-md-4 form-group" ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.brandId].$invalid}">
+                <div class="col-md-4 form-group" data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.brandId].$invalid}">
                     <label for="{{::refProdCtrl.brandId}}" class="required"><span
                             class="field-name">{{::'BRAND_NAME'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="col-md-9 form-group"
-                     ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.ingredNameId].$invalid}">
+                     data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.ingredNameId].$invalid}">
                     <label for="{{::refProdCtrl.ingredNameId}}" class="required"><span class="field-name">{{::'MEDICINAL_INGREDIENT'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         <div class="rep-margin-top">
@@ -43,7 +43,7 @@
                                            error-types="refProdCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
-                <div class="col-md-3 form-group" ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.strengthId].$invalid}">
+                <div class="col-md-3 form-group" data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.strengthId].$invalid}">
                     <label for="{{::refProdCtrl.strengthId}}" class="required"><span
                             class="field-name">{{::'STRENGTH'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -64,7 +64,7 @@
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
 
                         <div class="rep-pad-top">
-                            <div class="rep-error" ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.unitsId].$invalid}">
+                            <div class="rep-error" data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.unitsId].$invalid}">
                                 <ui-select ng-model="refProdCtrl.productModel.units" id="{{::refProdCtrl.unitsId}}" name="{{::refProdCtrl.unitsId}}"
                                            class="rep-selectize-font full-width" required>
                                     <ui-select-match placeholder="{{::'UNITS_SRCH' |translate}}"
@@ -74,7 +74,7 @@
                                     <ui-select-choices
                                             repeat="unitValue in refProdCtrl.unitsList | filter: {[refProdCtrl.lang]:$select.search}"
                                             class="rep-selectize-font">
-                                        <span ng-bind-html="unitValue[refProdCtrl.lang] | highlight: $select.search"></span>
+                                        <span data-ng-bind-html="unitValue[refProdCtrl.lang] | highlight: $select.search"></span>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
@@ -84,8 +84,8 @@
                                            error-types="refProdCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
-                <div class="form-group col-md-4" ng-show="refProdCtrl.isUnitsOther()"
-                     ng-class="{'has-error':refProdCtrl.productDetailsFormref[refProdCtrl.otherId].$invalid}">
+                <div class="form-group col-md-4" data-ng-show="refProdCtrl.isUnitsOther()"
+                     data-ng-class="{'has-error':refProdCtrl.productDetailsFormref[refProdCtrl.otherId].$invalid}">
                     <label for="{{::refProdCtrl.otherId}}" class="required"><span class="field-name">{{::'OTHER_UNITS'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         <input type="text" id="{{::refProdCtrl.otherId}}" data-ng-model="refProdCtrl.productModel.otherUnits"
@@ -110,8 +110,8 @@
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
                         <div class="rep-margin-top">
                             <div class="rep-error"
-                                 ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.dosageFormId].$invalid}">
-                                <ui-select ng-model="refProdCtrl.productModel.dosageForm" id="{{::refProdCtrl.dosageFormId}}"
+                                 data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.dosageFormId].$invalid}">
+                                <ui-select data-ng-model="refProdCtrl.productModel.dosageForm" id="{{::refProdCtrl.dosageFormId}}"
                                            name="{{::refProdCtrl.dosageFormId}}" class="rep-selectize-font full-width"
                                            title="Choose a dosage form" required>
                                     <ui-select-match placeholder="Select or Search for a dosage form"
@@ -121,7 +121,7 @@
                                     <ui-select-choices
                                             repeat="formType in refProdCtrl.dosageFormList | filter: {[refProdCtrl.lang]:$select.search}"
                                             class="rep-selectize-font">
-                                        <span ng-bind-html="formType[refProdCtrl.lang] | highlight: $select.search"></span>
+                                        <span data-ng-bind-html="formType[refProdCtrl.lang] | highlight: $select.search"></span>
                                     </ui-select-choices>
                                 </ui-select>
                             </div>
@@ -131,8 +131,8 @@
                                            error-types="refProdCtrl.requiredOnly"></cmp-error-message>
                     </label>
                 </div>
-                <div class="col-md-5 form-group" ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.dosageFormOtherId].$invalid}"
-                     ng-show="refProdCtrl.isDosageOther()">
+                <div class="col-md-5 form-group" data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.dosageFormOtherId].$invalid}"
+                     data-ng-show="refProdCtrl.isDosageOther()">
                     <label for="{{::refProdCtrl.dosageFormOtherId}}" class="required">
                         <span class="field-name">{{::'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -147,7 +147,7 @@
                 </div>
 
                 <div class="col-md-12 form-group"
-                     ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.companyId].$invalid}">
+                     data-ng-class="{'has-error':refProdCtrl.productDetailsForm[refProdCtrl.companyId].$invalid}">
                     <label for="{{::refProdCtrl.companyId}}" class="required"><span
                             class="field-name">{{::'COMPANY_NOABBREV'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong></label>
@@ -166,13 +166,13 @@
 
             <div class="btn-group-sm col-xs-12 text-right">
                 <button class="btn btn-primary"
-                        ng-click="refProdCtrl.saveProduct()" name="saveRef" id="saveRef">{{::'SAVE'|translate}}
+                        data-ng-click="refProdCtrl.saveProduct()" name="saveRef" id="saveRef">{{::'SAVE'|translate}}
                 </button>
-                <button ng-if="refProdCtrl.deleteBtn === true" class="btn btn-danger" ng-click="refProdCtrl.delete()" name="deleteRef" id="deleteRef">
+                <button data-ng-if="refProdCtrl.deleteBtn === true" class="btn btn-danger" data-ng-click="refProdCtrl.delete()" name="deleteRef" id="deleteRef">
                     {{::'DELETE'|translate}}
                 </button>
                 <button class="btn btn-default" id="discardRef" name="discrardRef"
-                       ng-click="refProdCtrl.discardChanges()"> {{::'DISCARD_CHANGES'|translate}}
+                        data-ng-click="refProdCtrl.discardChanges()"> {{::'DISCARD_CHANGES'|translate}}
                 </button>
             </div>
         </div>

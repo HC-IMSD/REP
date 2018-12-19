@@ -674,6 +674,7 @@
         address.country = "";
         if (addressObj.country.__text) {
             address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: addressObj.country.__text})[0];
+            address.countryHtml = address.country.en;
             address.countryDisplay = addressObj.country.id;
         }
 

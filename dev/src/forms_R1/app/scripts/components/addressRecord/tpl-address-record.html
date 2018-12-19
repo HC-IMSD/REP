@@ -1,4 +1,4 @@
-<div class="container-fluid">
+      <div class="container-fluid">
     <ng-form name="addressRec.addressRecForm" id="{{::addressRec.formNameId}}">
         <div>
 
@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-12"
-                     ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}">
+                     data-ng-class="{'has-error':addressRec.addressRecForm[addressRec.companyNameId].$invalid}">
                     <label for="{{::addressRec.companyNameId}}" class="required full-width">
                         <span class="field-name">{{::"COMPANYNAME" |translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -22,9 +22,9 @@
                                            error-types="addressRec.requiredOnly">
                         </cmp-error-message>
                         <input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
-                               ng-model="addressRec.addressModel.companyName"
+                               data-ng-model="addressRec.addressModel.companyName"
                                class="form-control full-width" maxlength="80" size="60"
-                               ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isEditable"
+                               data-ng-blur="addressRec.updateErrorSummaryState()" data-ng-readonly="!addressRec.isEditable"
                                required/>
 
                     </label>
@@ -51,7 +51,7 @@
 
             <div class="row">
                 <div class="col-xs-7">
-                    <div ng-if="addressRec.notCanadianManufact()" class="alert alert-info" role="alert"
+                    <div data-ng-if="addressRec.notCanadianManufact()" class="alert alert-info" role="alert"
                          aria-live="polite">
                         <span>{{::'IMPORTER_NONCDN'|translate}}</span>
                     </div>
@@ -64,20 +64,20 @@
             </div>-->
             <div class="row">
                 <div class="form-group col-md-4"
-                     ng-show="addressRec.isImporter">
-                    <div ng-class="{'has-error':addressRec.addressRecForm[addressRec.importerID].$invalid}">
+                     data-ng-show="addressRec.isImporter">
+                    <div data-ng-class="{'has-error':addressRec.addressRecForm[addressRec.importerID].$invalid}">
                     <label for="{{::addressRec.importerID}}" class=" full-width"
-                           ng-class="{'required':addressRec.isInternal}">
+                           data-ng-class="{'required':addressRec.isInternal}">
                         <span class="field-name">{{::"IMPORTERID" |translate}}</span>
-                        <strong class="required" ng-show ="addressRec.isInternal"> {{::"REQUIRED" |translate}}</strong>
+                        <strong class="required" data-ng-show ="addressRec.isInternal"> {{::"REQUIRED" |translate}}</strong>
                         <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
                                            show-error="addressRec.showErrors()"
                                            error-types="addressRec.length5Error"></cmp-error-message>
                         <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
-                               ng-model="addressRec.addressModel.importerID"
+                               data-ng-model="addressRec.addressModel.importerID"
                                class="form-control full-width" minlength="5" maxlength="6"
-                               ng-blur="addressRec.updateErrorSummaryState()" ng-readonly="!addressRec.isInternal"
-                               ng-required="addressRec.isInternal && addressRec.isImporter">
+                               data-ng-blur="addressRec.updateErrorSummaryState()" data-ng-readonly="!addressRec.isInternal"
+                               data-ng-required="addressRec.isInternal && addressRec.isImporter">
 
 
                     </label>
@@ -87,13 +87,13 @@
             <div class="row">
                 <div class="btn-group-sm col-md-12">
                     <button class="btn btn-primary mrgn-rght-sm" name="saveAddress"
-                            id="saveAddress" ng-click="addressRec.updateAddressModel2()">{{::'SAVE_ADDR'|translate}}
+                            id="saveAddress" data-ng-click="addressRec.updateAddressModel2()">{{::'SAVE_ADDR'|translate}}
                     </button>
-                    <button class="btn btn-danger mrgn-rght-sm" name="deleteAddress" ng-click="addressRec.delete()">
+                    <button class="btn btn-danger mrgn-rght-sm" name="deleteAddress" data-ng-click="addressRec.delete()">
                         {{::'DELETE_ADDR'|translate}}
                     </button>
                     <button class="btn btn-default" name="discardAddressChanges"
-                            ng-click="addressRec.discardChanges()">{{::'DISCARD_CHANGES'|translate}}
+                            data-ng-click="addressRec.discardChanges()">{{::'DISCARD_CHANGES'|translate}}
                     </button>
                 </div>
             </div>

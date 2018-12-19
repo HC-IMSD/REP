@@ -4,7 +4,7 @@
             <div>
                 <fieldset>
                     <legend>{{'RELATED_ACTIVITY' |translate}}</legend>
-                    <div class="row" ng-show="activityCtrl.formAmend">
+                    <div class="row" data-ng-show="activityCtrl.formAmend">
                         <div class="col-sm-12 form-group">
                             <div class="checkbox">
                                 <label for="chk-amend-rec_{{$id}}">
@@ -18,19 +18,19 @@
 
                     <div class="row">
                         <div class="form-group col-md-12"
-                             ng-class="{'has-error':activityCtrl.activityRecForm.activityType.$invalid}">
+                             data-ng-class="{'has-error':activityCtrl.activityRecForm.activityType.$invalid}">
                             <label for="activityType_{{$id}}" class="required full-width">
                                 <span class="field-name">{{"ACTIVITY_TYPE" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <select id="activityType_{{$id}}" name="activityType"
-                                        ng-model="activityCtrl.activityModel.regActivityType"
-                                        ng-options="activity |translate for activity in activityCtrl.activityTypesArray | orderByTranslated"
-                                        class="form-control full-width" ng-required="true"
-                                        ng-disabled="activityCtrl.setNotEditable()"></select>
+                                        data-ng-model="activityCtrl.activityModel.regActivityType"
+                                        data-ng-options="activity |translate for activity in activityCtrl.activityTypesArray | orderByTranslated"
+                                        class="form-control full-width" data-ng-required="true"
+                                        data-ng-disabled="activityCtrl.setNotEditable()"></select>
                                 <strong id="activityType-error" class="error"
-                                        ng-if="activityCtrl.showError(activityCtrl.activityRecForm.activityType.$touched,activityCtrl.activityRecForm.activityType.$invalid)">
-                        <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.activityType.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                        data-ng-if="activityCtrl.showError(activityCtrl.activityRecForm.activityType.$touched,activityCtrl.activityRecForm.activityType.$invalid)">
+                        <span class="label label-danger" data-ng-messages="activityCtrl.activityRecForm.activityType.$error">
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                                 </strong>
                             </label>
@@ -38,58 +38,58 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-3"
-                             ng-class="{'has-error':activityCtrl.activityRecForm.dateCleared.$invalid}">
+                             data-ng-class="{'has-error':activityCtrl.activityRecForm.dateCleared.$invalid}">
                             <label for="dossierId_{{$id}}" class="required full-width">
                                 <span class="field-name">{{"DATE_CLEARED" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <span class="date-picker-format"></span>
                                 <input type="date" id="dateCleared_{{$id}}" name="dateCleared"
-                                       ng-model="activityCtrl.activityModel.dateCleared"
-                                       ng-pattern="datePattern" ng-readonly="activityCtrl.setNotEditable()"
-                                       class="form-control full-width" ng-required="true"/>
+                                       data-ng-model="activityCtrl.activityModel.dateCleared"
+                                       data-ng-pattern="datePattern" data-ng-readonly="activityCtrl.setNotEditable()"
+                                       class="form-control full-width" data-ng-required="true"/>
                                 <strong id="dateCleared-error" class="error"
-                                        ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dateCleared.$touched,activityCtrl.activityRecForm.dateCleared.$invalid)">
-                        <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.dateCleared.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                               <span ng-message="date"><span translate="MSG_ERR_DATE_FORMAT"></span></span>
+                                        data-ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dateCleared.$touched,activityCtrl.activityRecForm.dateCleared.$invalid)">
+                        <span class="label label-danger" data-ng-messages="activityCtrl.activityRecForm.dateCleared.$error">
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                               <span data-ng-message="date"><span translate="MSG_ERR_DATE_FORMAT"></span></span>
                         </span>
                                 </strong>
                             </label>
                         </div>
 
                         <div class="form-group col-xs-3"
-                             ng-class="{'has-error':activityCtrl.activityRecForm.controlNum.$invalid}">
+                             data-ng-class="{'has-error':activityCtrl.activityRecForm.controlNum.$invalid}">
                             <label for="controlNum_{{$id}}" class="required full-width">
                                 <span class="field-name">{{"CONTROL_NUM" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="controlNum_{{$id}}" name="controlNum"
-                                       ng-model="activityCtrl.activityModel.dstsControlNumber"
-                                       maxlength="6" size="6" ng-minlength="6" only-digits=""
-                                       ng-readonly="activityCtrl.setNotEditable()"
-                                       class="form-control full-width" ng-required="true"/>
+                                       data-ng-model="activityCtrl.activityModel.dstsControlNumber"
+                                       maxlength="6" size="6" data-ng-minlength="6" data-only-digits=""
+                                       data-ng-readonly="activityCtrl.setNotEditable()"
+                                       class="form-control full-width" data-ng-required="true"/>
                                 <strong id="controlNum-error" class="error"
-                                        ng-if="activityCtrl.showError(activityCtrl.activityRecForm.controlNum.$touched,activityCtrl.activityRecForm.controlNum.$invalid)">
-                        <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.controlNum.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
-                            <span ng-message="minlength"><span translate="MSG_LENGTH_6NUM"></span></span>
+                                        data-ng-if="activityCtrl.showError(activityCtrl.activityRecForm.controlNum.$touched,activityCtrl.activityRecForm.controlNum.$invalid)">
+                        <span class="label label-danger" data-ng-messages="activityCtrl.activityRecForm.controlNum.$error">
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                            <span data-ng-message="minlength"><span translate="MSG_LENGTH_6NUM"></span></span>
 
                         </span>
                                 </strong>
                             </label>
                         </div>
                         <div class="form-group col-xs-6"
-                             ng-class="{'has-error':activityCtrl.activityRecForm.dossierId.$invalid}">
+                             data-ng-class="{'has-error':activityCtrl.activityRecForm.dossierId.$invalid}">
                             <label for="dossierId_{{$id}}" class="required">
                                 <span class="field-name">{{"DOSSIER_ID_PREV" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="dossierId_{{$id}}" name="dossierId"
-                                       ng-model="activityCtrl.activityModel.dossierId"
-                                       maxlength="18" size="18" ng-readonly="activityCtrl.setNotEditable()"
-                                       class="form-control" ng-required="true"/>
+                                       data-ng-model="activityCtrl.activityModel.dossierId"
+                                       maxlength="18" size="18" data-ng-readonly="activityCtrl.setNotEditable()"
+                                       class="form-control" data-ng-required="true"/>
                                 <strong id="dossierId-error" class="error"
-                                        ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dossierId.$touched,activityCtrl.activityRecForm.dossierId.$invalid)">
-                        <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.dossierId.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                        data-ng-if="activityCtrl.showError(activityCtrl.activityRecForm.dossierId.$touched,activityCtrl.activityRecForm.dossierId.$invalid)">
+                        <span class="label label-danger" data-ng-messages="activityCtrl.activityRecForm.dossierId.$error">
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                                 </strong>
                             </label>
@@ -97,18 +97,18 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12"
-                             ng-class="{'has-error':activityCtrl.activityRecForm.manufactName.$invalid}">
+                             data-ng-class="{'has-error':activityCtrl.activityRecForm.manufactName.$invalid}">
                             <label for="manufactName_{{$id}}" class="required ">
                                 <span class="field-name">{{"MANUFACT_NAME" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <input type="text" id="manufactName_{{$id}}" name="manufactName"
-                                       ng-model="activityCtrl.activityModel.manufacturerName"
-                                       maxlength="80" size="80" ng-readonly="activityCtrl.setNotEditable()"
-                                       class="form-control full-width" ng-required="true"/>
+                                       data-ng-model="activityCtrl.activityModel.manufacturerName"
+                                       maxlength="80" size="80" data-ng-readonly="activityCtrl.setNotEditable()"
+                                       class="form-control full-width" required/>
                                 <strong id="manufactName-error" class="error"
-                                        ng-if="activityCtrl.showError(activityCtrl.activityRecForm.manufactName.$touched,activityCtrl.activityRecForm.manufactName.$invalid)">
-                        <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.manufactName.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                        data-ng-if="activityCtrl.showError(activityCtrl.activityRecForm.manufactName.$touched,activityCtrl.activityRecForm.manufactName.$invalid)">
+                        <span class="label label-danger" data-ng-messages="activityCtrl.activityRecForm.manufactName.$error">
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                                 </strong>
                             </label>
@@ -120,9 +120,9 @@
                                 <span class="field-name">{{"REASON_FILING" |translate}}</span>
                                 <strong class="required"> {{"REQUIRED" |translate}}</strong>
                                 <strong id="reasonFiling-error" class="error"
-                                        ng-if="activityCtrl.showError(activityCtrl.activityRecForm.reasonFiling.$touched,activityCtrl.activityRecForm.reasonFiling.$invalid)">
-                        <span class="label label-danger" ng-messages="activityCtrl.activityRecForm.reasonFiling.$error">
-                            <span ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
+                                        data-ng-if="activityCtrl.showError(activityCtrl.activityRecForm.reasonFiling.$touched,activityCtrl.activityRecForm.reasonFiling.$invalid)">
+                        <span class="label label-danger" data-ng-messages="activityCtrl.activityRecForm.reasonFiling.$error">
+                            <span data-ng-message="required">{{'MSG_ERR_MAND'|translate}}</span>
                         </span>
                                 </strong>
                             </label>
@@ -130,11 +130,11 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-xs-12"
-                             ng-class="{'has-error':activityCtrl.activityRecForm.reasonFiling.$invalid}">
+                             data-ng-class="{'has-error':activityCtrl.activityRecForm.reasonFiling.$invalid}">
                         <textarea id="reasonFiling_{{$id}}" name="reasonFiling" class="form-control full-width"
-                                  ng-model="activityCtrl.activityModel.reasonFiling"
-                                  ng-readonly="activityCtrl.setNotEditable()"
-                                  maxlength="1024" rows="8" ng-required="true"></textarea>
+                                  data-ng-model="activityCtrl.activityModel.reasonFiling"
+                                  data-ng-readonly="activityCtrl.setNotEditable()"
+                                  maxlength="1024" rows="8" data-ng-required="true"></textarea>
                         </div>
                     </div>
 
@@ -143,7 +143,7 @@
                         <div>
                             <h3>{{"ASSOC_DINS" |translate}}</h3>
 
-                            <div ng-repeat="record in activityCtrl.activityModel.assocDins">
+                            <div data-ng-repeat="record in activityCtrl.activityModel.assocDins">
                                 <cmp-din-details din-record="record" din-index="$index"
                                                  show-errors="activityCtrl.showErrors()"
                                                  set-readonly="activityCtrl.setNotEditable()"
@@ -152,8 +152,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <button class="btn btn-primary" ng-click="activityCtrl.addDin()"
-                                ng-disabled="activityCtrl.setNotEditable()">
+                        <button class="btn btn-primary" data-ng-click="activityCtrl.addDin()"
+                                data-ng-disabled="activityCtrl.setNotEditable()">
                             {{'ADD_DIN'|translate}}
                         </button>
                     </div>
@@ -162,12 +162,12 @@
                             <input type="submit" value="{{'SAVE_ACTIVITY'|translate}}" class="btn btn-primary"
                                    name="saveAddress"
                                    id="saveAddress"
-                                   ng-click="activityCtrl.updateActivityModel()"
-                                   ng-disabled="activityCtrl.setNotEditable()">
+                                   data-ng-click="activityCtrl.updateActivityModel()"
+                                   data-ng-disabled="activityCtrl.setNotEditable()">
                             <input type="submit" value="{{'DELETE_ACTIVITY'|translate}}" class="btn btn-danger"
-                                   ng-click="activityCtrl.delete()" ng-disabled="activityCtrl.setNotEditable()">
+                                   data-ng-click="activityCtrl.delete()" data-ng-disabled="activityCtrl.setNotEditable()">
                             <input type="submit" value="{{'DISCARD_CHANGES'|translate}}" class="btn btn-default"
-                                   ng-click="activityCtrl.discardChanges(activityCtrl.activityRecForm)">
+                                   data-ng-click="activityCtrl.discardChanges(activityCtrl.activityRecForm)">
                         </div>
                     </div>
                 </fieldset>

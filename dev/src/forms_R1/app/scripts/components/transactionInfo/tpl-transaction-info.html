@@ -6,7 +6,7 @@
                 <div class="btn-group pull-right">
                     <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
                             class="btn-xs rep-help-button"
-                            id="transact-instruct-toggle" ng-click="transInfoCtrl.addInstruct(0)">
+                            id="transact-instruct-toggle" data-ng-click="transInfoCtrl.addInstruct(0)">
                         <span class="fa fa-question-circle fa-2x"></span>
                         <span class="wb-inv">{{::'TRANSACT_INSTRUCT'|translate}}</span>
                     </button>
@@ -21,10 +21,10 @@
                                     update-state="transInfoCtrl.closeAlert(0)"
                                     type="alert-info">
                             <section aria-live="assertive">
-                                <div ng-if="!transInfoCtrl.isFrench()"
+                                <div data-ng-if="!transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-en.html'">
                                 </div>
-                                <div ng-if="transInfoCtrl.isFrench()"
+                                <div data-ng-if="transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-fr.html'">
                                 </div>
                             </section>
@@ -33,7 +33,7 @@
                     <div>
                         <div class="row">
                                 <div class="form-group col-md-4"
-                                     ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
+                                     data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
                                     <label for="{{::transInfoCtrl.typeId}}" class="required">
                                         <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -44,30 +44,31 @@
                                         </cmp-error-message>
                                         <select class="form-control full-width rep-margin-top-12"
                                                 id="{{::transInfoCtrl.typeId}}"
-                                                name="{{::transInfoCtrl.typeId}}"
-                                                required ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
-                                                ng-options="val |translate for val in  transInfoCtrl.formTypeList">
+                                                name="{{::transInfoCtrl.typeId}}" data-required="true"
+                                                data-ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
+                                                data-ng-options="val |translate for val in  transInfoCtrl.formTypeList">
+                                            <option value="" label=" " data-ng-if="! transInfoCtrl.transactionModel.ectd.dossierType" />
                                         </select>
                                     </label>
                                 </div>
                                 <div class="form-group col-md-3"
-                                     ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
+                                     data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
                                         <span class="field-name">{{::"COMPANY_ID" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <button title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
+                                        <span title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
-                                                id="comp-id-instructions-toggle" ng-click="transInfoCtrl.addInstruct(5)">
+                                                id="comp-id-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(5)">
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'COMPANY_ID_INSTRUCT'|translate}}</span>
-                                        </button>
+                                        </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.companyId])"
                                                            error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                         <input type="text" id="{{::transInfoCtrl.companyId}}" name="{{::transInfoCtrl.companyId}}"
-                                               ng-model="transInfoCtrl.transactionModel.ectd.companyId"
-                                               class="form-control" maxlength="6" size="6" required ng-minlength="5"/>
+                                               data-ng-model="transInfoCtrl.transactionModel.ectd.companyId"
+                                               class="form-control" maxlength="6" size="6" required data-ng-minlength="5"/>
 
                                     </label>
                                 </div>
@@ -75,27 +76,27 @@
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <button title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
+                                        <span title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
                                                 id="dossier-id-instructions-toggle"
-                                                ng-click="transInfoCtrl.addInstruct(6)">
+                                                data-ng-click="transInfoCtrl.addInstruct(6)">
                                              <span class="fa fa-question-circle fa-2x"></span>
                                              <span class="wb-inv">{{::'DOSSIER_ID_INSTRUCT'|translate}}</span>
-                                        </button>
+                                        </span>
                                         <cmp-error-message field-name="transInfoCtrl.dossierId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.dossierId])"
                                                            error-types="transInfoCtrl.min7Error"></cmp-error-message>
+                                    </label>
                                         <div class="rep-input-group">
                                             <span class="input-group-addon">HC6-024-</span>
-                                            <div ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
+                                            <div data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
                                                 <input type="text" class="form-control full-width" id="{{::transInfoCtrl.dossierId}}"
-                                                       size="6" maxlength="7"ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
-                                                       ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
+                                                       size="6" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
+                                                       data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                                             </div>
                                         </div>
 
-                                    </label>
                                 </div>
 
                             </div>
@@ -104,10 +105,10 @@
                                     <cmp-alert ui-state="transInfoCtrl.alerts[5]" msg="COMPANY_ID_INSTRUCT"
                                                update-state="transInfoCtrl.closeAlert(5)" type="alert-info">
                                         <section aria-live="assertive">
-                                            <div ng-if="!transInfoCtrl.isFrench()"
+                                            <div data-ng-if="!transInfoCtrl.isFrench()"
                                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-en.html'">
                                             </div>
-                                            <div ng-if="transInfoCtrl.isFrench()"
+                                            <div data-ng-if="transInfoCtrl.isFrench()"
                                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-fr.html'">
                                             </div>
                                         </section>
@@ -118,28 +119,28 @@
                                     <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
                                                update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
                                         <section aria-live="assertive">
-                                            <div ng-if="!transInfoCtrl.isFrench()"
+                                            <div data-ng-if="!transInfoCtrl.isFrench()"
                                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-en.html'">
                                             </div>
-                                            <div ng-if="transInfoCtrl.isFrench()"
+                                            <div data-ng-if="transInfoCtrl.isFrench()"
                                                  ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-fr.html'">
                                             </div>
                                         </section>
                                     </cmp-alert>
                                 </div>
                             </div>
-                        <div class="row" ng-if="!transInfoCtrl.finalState">
-                               <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
+                        <div class="row" data-ng-if="!transInfoCtrl.finalState">
+                               <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                     <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
                                         <span class="field-name">{{::"PROD_NAME" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <button title="{{::'EXPAND'|translate}} {{::'PRODUCT_INSTRUCT'|translate}}"
+                                        <span title="{{::'EXPAND'|translate}} {{::'PRODUCT_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
                                                 id="product-instructions-toggle"
-                                                ng-click="transInfoCtrl.addInstruct(1)">
+                                                data-ng-click="transInfoCtrl.addInstruct(1)">
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'PRODUCT_INSTRUCT'|translate}}</span>
-                                        </button>
+                                        </span>
                                         <cmp-error-message field-name="transInfoCtrl.productNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.productNameId])"
@@ -148,8 +149,8 @@
                                     </label>
                                    <textarea id="{{::transInfoCtrl.productNameId}}"
                                              name="{{::transInfoCtrl.productNameId}}"
-                                             ng-model="transInfoCtrl.transactionModel.ectd.productName"
-                                             class="form-control full-width" maxlength="256" size="256" required >
+                                             data-ng-model="transInfoCtrl.transactionModel.ectd.productName"
+                                             class="form-control full-width" maxlength="256" required >
                                         </textarea>
                                 </div>
                         </div>
@@ -157,10 +158,10 @@
                             <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="PRODUCT_INSTRUCT"
                                        update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
                                 <section aria-live="assertive">
-                                    <div ng-if="!transInfoCtrl.isFrench()"
+                                    <div data-ng-if="!transInfoCtrl.isFrench()"
                                          ng-include="'app/scripts/templates/transaction/tpl-transaction-product-en.html'">
                                     </div>
-                                    <div ng-if="transInfoCtrl.isFrench()"
+                                    <div data-ng-if="transInfoCtrl.isFrench()"
                                          ng-include="'app/scripts/templates/transaction/tpl-transaction-product-fr.html'">
                                     </div>
                                 </section>
@@ -168,7 +169,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12"
-                                 ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">
+                                 data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">
                                 <label for="{{::transInfoCtrl.isNewActivityId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_NEW_ACTIVITY" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -177,19 +178,21 @@
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId])"
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                     <select id="{{::transInfoCtrl.isNewActivityId}}" name="{{::transInfoCtrl.isNewActivityId}}"
-                                            ng-model="transInfoCtrl.transactionModel.transactionType"
-                                            class="form-control" ng-change="transInfoCtrl.updateActivityType()"
-                                            ng-options="choice |translate for choice in transInfoCtrl.newExistingList"
-                                            required></select>
+                                            data-ng-model="transInfoCtrl.transactionModel.transactionType"
+                                            class="form-control" data-ng-change="transInfoCtrl.updateActivityType()"
+                                            data-ng-options="choice |translate for choice in transInfoCtrl.newExistingList"
+                                            required>
+                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.transactionType" />
+                                    </select>
 
                                 </label>
                             </div>
                         </div>
                     </div>
                     <!-- activity content moved in -->
-                    <div ng-if="transInfoCtrl.showNewActivityFields">
+                    <div data-ng-if="transInfoCtrl.showNewActivityFields">
                         <div class="row">
-                            <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.thirdPartyId].$invalid}" >
+                            <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.thirdPartyId].$invalid}" >
                                 <label for="{{::transInfoCtrl.thirdPartyId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_SIGNED_3RD_PARTY" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -199,22 +202,23 @@
                                                        error-types="transInfoCtrl.requiredOnly">
                                     </cmp-error-message>
                                     <select id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}"
-                                            ng-model="transInfoCtrl.transactionModel.isThirdParty"
-                                            class="form-control" ng-change="transInfoCtrl.setThirdParty()"
-                                            ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
+                                            data-ng-model="transInfoCtrl.transactionModel.isThirdParty"
+                                            class="form-control" data-ng-change="transInfoCtrl.setThirdParty()"
+                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
                                             required>
+                                        <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isThirdParty" />
                                     </select>
 
                                 </label>
                             </div>
                         </div>
                         <div class="row">
-                            <div ng-show="transInfoCtrl.showThirdPartyNote" class="alert alert-info" role="alert" aria-live="polite">
+                            <div data-ng-show="transInfoCtrl.showThirdPartyNote" class="alert alert-info" role="alert" aria-live="polite">
                                 <p> {{::'AUT_LETTER_NOTE'|translate}}</p>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isPriorityId].$invalid}">
+                            <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isPriorityId].$invalid}">
                                 <label for="{{::transInfoCtrl.isPriorityId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_PRIORITY" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -223,15 +227,16 @@
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isPriorityId])"
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                     <select id="{{::transInfoCtrl.isPriorityId}}" name="{{::transInfoCtrl.isPriorityId}}"
-                                            ng-model="transInfoCtrl.transactionModel.isPriority" class="form-control"
-                                            ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
+                                            data-ng-model="transInfoCtrl.transactionModel.isPriority" class="form-control"
+                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
+                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isPriority">
                                     </select>
 
                                 </label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNocId].$invalid}">
+                            <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNocId].$invalid}">
                                 <label for="{{::transInfoCtrl.isNocId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_NOC" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -241,33 +246,35 @@
                                                        error-types="transInfoCtrl.requiredOnly">
                                     </cmp-error-message>
                                     <select id="{{::transInfoCtrl.isNocId}}" name="{{::transInfoCtrl.isNocId}}"
-                                            ng-model="transInfoCtrl.transactionModel.isNoc" class="form-control"
-                                            ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
+                                            data-ng-model="transInfoCtrl.transactionModel.isNoc" class="form-control"
+                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
+                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isNoc">
                                     </select>
 
                                 </label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isAdminSubId].$invalid}">
+                            <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isAdminSubId].$invalid}">
                                 <label for="{{::transInfoCtrl.isAdminSubId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <button title="{{::'EXPAND'|translate}} {{::'ADMIN_COMP_INSTRUCT'|translate}}"
+                                    <span title="{{::'EXPAND'|translate}} {{::'ADMIN_COMP_INSTRUCT'|translate}}"
                                             class="btn rep-help-button-primary btn-xs"
-                                            id="is-admin-instructions-toggle" ng-click="transInfoCtrl.addInstruct(7)">
+                                            id="is-admin-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(7)">
                                         <span class="fa fa-question-circle fa-2x"></span>
                                         <span class="wb-inv">{{::'ADMIN_COMP_INSTRUCT'|translate}}</span>
-                                    </button>
+                                    </span>
                                     <cmp-error-message field-name="transInfoCtrl.isAdminSubId"
                                                        form-ref="transInfoCtrl.transInfoForm"
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isAdminSubId])"
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                     <select id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}"
-                                            ng-model="transInfoCtrl.transactionModel.isAdminSub" class="form-control"
-                                            ng-change="transInfoCtrl.setAdminSubmission()"
-                                            ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required></select>
-
+                                            data-ng-model="transInfoCtrl.transactionModel.isAdminSub" class="form-control"
+                                            data-ng-change="transInfoCtrl.setAdminSubmission()"
+                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
+                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isAdminSub">
+                                    </select>
                                 </label>
                             </div>
                         </div>
@@ -276,10 +283,10 @@
                             <div class="col-md-12">
                                 <cmp-alert ui-state="transInfoCtrl.alerts[7]" msg="ADMIN_COMP_INSTRUCT" update-state="transInfoCtrl.closeAlert(7)"
                                            type="alert-info">
-                                    <div ng-if="!transInfoCtrl.isFrench()"
+                                    <div data-ng-if="!transInfoCtrl.isFrench()"
                                          ng-include="'app/scripts/templates/transaction/tpl-activity-admin-comp-en.html'">
                                     </div>
-                                    <div ng-if="transInfoCtrl.isFrench()"
+                                    <div data-ng-if="transInfoCtrl.isFrench()"
                                          ng-include="'app/scripts/templates/transaction/tpl-activity-admin-comp-fr.html'">
                                     </div>
                                 </cmp-alert>
@@ -287,7 +294,7 @@
                         </div>
 
 
-                        <div ng-show="transInfoCtrl.showAdminSub">
+                        <div data-ng-show="transInfoCtrl.showAdminSub">
                             <div class="row">
                                 <div class="col-xs-12 form-group">
                                     <label for="{{::transInfoCtrl.adminSubTypeId}}" class="required">
@@ -298,43 +305,45 @@
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.adminSubTypeId])"
                                                            error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                         <select id="{{::transInfoCtrl.adminSubTypeId}}" name="{{::transInfoCtrl.adminSubTypeId}}"
-                                                ng-model="transInfoCtrl.transactionModel.subType" class="form-control"
-                                                ng-options="choice[transInfoCtrl.lang] for choice in transInfoCtrl.adminSubTypeList track by choice.id"
-                                                ng-required="transInfoCtrl.showAdminSub"></select>
+                                                data-ng-model="transInfoCtrl.transactionModel.subType" class="form-control"
+                                                data-ng-options="choice[transInfoCtrl.lang] for choice in transInfoCtrl.adminSubTypeList track by choice.id"
+                                                data-ng-required="transInfoCtrl.showAdminSub">
+                                            <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.subType"/>
+                                        </select>
 
                                     </label>
 
-                                    <h3 ng-if="transInfoCtrl.transactionModel.subType">{{::'ADMIN_DESCRIPT'|translate}}</h3>
-                                    <div ng-if="!transInfoCtrl.isFrench()" ng-switch="transInfoCtrl.transactionModel.subType.id">
+                                    <h3 data-ng-if="transInfoCtrl.transactionModel.subType">{{::'ADMIN_DESCRIPT'|translate}}</h3>
+                                    <div data-ng-if="!transInfoCtrl.isFrench()" data-ng-switch="transInfoCtrl.transactionModel.subType.id">
                                         <div ng-switch-when="MANUFACT_NAME_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-manu-name-change-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="PRODUCT_NAME_CHGE">
+                                        <div data-ng-switch-when="PRODUCT_NAME_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-product-name-change-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
+                                        <div data-ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-manuorname-change-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="OWNERSHIP_CHGE">
+                                        <div data-ng-switch-when="OWNERSHIP_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-ownership-change-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="MERGER">
+                                        <div data-ng-switch-when="MERGER">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-mab-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="LICENGSING">
+                                        <div data-ng-switch-when="LICENGSING">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-licensing-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="POSTAUTH_LABEL_CHGE">
+                                        <div data-ng-switch-when="POSTAUTH_LABEL_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-labelling-change-en.html'"></div>
                                         </div>
-                                        <div ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
+                                        <div data-ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-update-en.html'"></div>
                                         </div>
@@ -343,40 +352,40 @@
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-additional-en.html'"></div>
                                         </div>
                                     </div>
-                                    <div ng-if="transInfoCtrl.isFrench()" ng-switch="transInfoCtrl.transactionModel.subType.id">
-                                        <div ng-switch-when="MANUFACT_NAME_CHGE">
+                                    <div data-ng-if="transInfoCtrl.isFrench()" ng-switch="transInfoCtrl.transactionModel.subType.id">
+                                        <div data-ng-switch-when="MANUFACT_NAME_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-manu-name-change-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="PRODUCT_NAME_CHGE">
+                                        <div data-ng-switch-when="PRODUCT_NAME_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-product-name-change-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
+                                        <div data-ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-manuorname-change-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="OWNERSHIP_CHGE">
+                                        <div data-ng-switch-when="OWNERSHIP_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-ownership-change-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="MERGER">
+                                        <div data-ng-switch-when="MERGER">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-mab-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="LICENGSING">
+                                        <div data-ng-switch-when="LICENGSING">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-licensing-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="POSTAUTH_LABEL_CHGE">
+                                        <div data-ng-switch-when="POSTAUTH_LABEL_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-labelling-change-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
+                                        <div data-ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-update-fr.html'"></div>
                                         </div>
-                                        <div ng-switch-when="ADDITIONAL_PRODUCT_CHGE">
+                                        <div data-ng-switch-when="ADDITIONAL_PRODUCT_CHGE">
                                             <div aria-live="assertive"
                                                  ng-include="'app/scripts/templates/transaction/tpl-activity-additional-fr.html'"></div>
                                         </div>
@@ -409,7 +418,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4"
-                         ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId].$invalid}">
+                         data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId].$invalid}">
                         <label for="{{::transInfoCtrl.isSolicitedId}}" class="required full-width">
                             <span class="field-name">{{::"IS_SOLICITED" |translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -418,15 +427,17 @@
                                                show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId])"
                                                error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                             <select id="{{::transInfoCtrl.isSolicitedId}}" name="{{::transInfoCtrl.isSolicitedId}}"
-                                    ng-model="transInfoCtrl.transactionModel.isSolicited"
+                                    data-ng-model="transInfoCtrl.transactionModel.isSolicited"
                                     class="form-control"
-                                    ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
-                                    ng-change="transInfoCtrl.setSolicitedState()" required></select>
+                                    data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
+                                    data-ng-change="transInfoCtrl.setSolicitedState()" required>
+                                <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isSolicited"/>
+                            </select>
 
                         </label>
                     </div>
                 </div>
-                <div ng-if="transInfoCtrl.showSolicitedDetail">
+                <div data-ng-if="transInfoCtrl.showSolicitedDetail">
                     <section class="panel panel-default">
                         <header class="panel-heading">
                             <h3 class="panel-title">{{'SOLICITED_RQ'|translate}}</h3>
@@ -445,7 +456,7 @@
                             <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
                         <textarea id="projectManager1" name="projectManager1"
-                                  ng-model="transInfoCtrl.transactionModel.projectManager1"
+                                  data-ng-model="transInfoCtrl.transactionModel.projectManager1"
                                   class="form-control full-width" maxlength="256" rows="2"></textarea>
                     </div>
                     <div class="form-group col-md-6">
@@ -453,28 +464,29 @@
                             <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
                         <textarea id="projectManager2" name="projectManager2"
-                                  ng-model="transInfoCtrl.transactionModel.projectManager2"
+                                  data-ng-model="transInfoCtrl.transactionModel.projectManager2"
                                   class="form-control full-width" maxlength="256" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-8 form-group"
-                         ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
+                         data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
                         <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
                             <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <strong id="isfee-error" class="error"
-                                    ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId])">
+                                    data-ng-if="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId])">
                                              <span class="label label-danger"
-                                                   ng-messages="transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$error">
-                                                 <span ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
+                                                   data-ng-messages="transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$error">
+                                                 <span data-ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                              </span>
                             </strong>
                             <select class="form-control" id="{{::transInfoCtrl.isFeesId}}"
-                                    ng-change="transInfoCtrl.updateFeeState()"
+                                    data-ng-change="transInfoCtrl.updateFeeState()"
                                     name="{{::transInfoCtrl.isFeesId}}" required
-                                    ng-model="transInfoCtrl.transactionModel.isFees"
-                                    ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
+                                    data-ng-model="transInfoCtrl.transactionModel.isFees"
+                                    data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
+                                <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isFees" />
                             </select>
 
                         </label>
@@ -482,7 +494,7 @@
                 </div>
             </div>
         </section>
-        <div ng-if="transInfoCtrl.isFeesIndicated()">
+        <div data-ng-if="transInfoCtrl.isFeesIndicated()">
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}</h2>
@@ -512,7 +524,7 @@
                     <div class="btn-group pull-right">
                         <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
                                 class="btn-xs rep-help-button"
-                                id="activity-picker-toggle" ng-click="transInfoCtrl.addInstruct(3)">
+                                id="start-date-picker-toggle" data-ng-click="transInfoCtrl.addInstruct(3)">
                             <span class="fa fa-question-circle fa-2x"></span>
                             <span class="wb-inv">{{::'REG_ACTIVITY_INSTRUCT'|translate}}</span>
                         </button>
@@ -523,10 +535,10 @@
                         <cmp-alert ui-state="transInfoCtrl.alerts[3]" msg="REG_ACTIVITY_INSTRUCT"
                                    update-state="transInfoCtrl.closeAlert(3)" type="alert-info">
                             <section aria-live="assertive">
-                                <div ng-if="!transInfoCtrl.isFrench()"
+                                <div data-ng-if="!transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
                                 </div>
-                                <div ng-if="transInfoCtrl.isFrench()"
+                                <div data-ng-if="transInfoCtrl.isFrench()"
                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
                                 </div>
                             </section>
@@ -536,23 +548,23 @@
                            <h3 class="mrgn-tp-sm">{{::'COMPANY_INFO'|translate}}</h3>
                             <div class="row">
                                 <div class="form-group col-md-12"
-                                     ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId].$invalid}">
+                                     data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyNameId}}" class="required full-width">
                                         <span class="field-name">{{::"COMPANY_NOABBREV" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <button title="{{::'EXPAND'|translate}} {{::'COMPANY_INSTRUCT'|translate}}"
+                                        <span title="{{::'EXPAND'|translate}} {{::'COMPANY_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
-                                                id="company-instructions-toggle" ng-click="transInfoCtrl.addInstruct(4)">
+                                                id="company-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(4)">
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'COMPANY_INSTRUCT'|translate}}</span>
-                                        </button>
+                                        </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId])"
                                                            error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                         <input type="text" maxlength="80" id="{{::transInfoCtrl.companyNameId}}"
                                                name="{{::transInfoCtrl.companyNameId}}"
-                                               ng-model="transInfoCtrl.transactionModel.companyName"
+                                               data-ng-model="transInfoCtrl.transactionModel.companyName"
                                                class="form-control full-width" required/>
 
                                     </label>
@@ -560,10 +572,10 @@
                                         <cmp-alert ui-state="transInfoCtrl.alerts[4]" msg="COMPANY_INSTRUCT"
                                                    update-state="transInfoCtrl.closeAlert(4)" type="alert-info">
                                             <section aria-live="assertive">
-                                                <div ng-if="!transInfoCtrl.isFrench()"
+                                                <div data-ng-if="!transInfoCtrl.isFrench()"
                                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-company-en.html'">
                                                 </div>
-                                                <div ng-if="transInfoCtrl.isFrench()"
+                                                <div data-ng-if="transInfoCtrl.isFrench()"
                                                      ng-include="'app/scripts/templates/transaction/tpl-transaction-company-fr.html'">
                                                 </div>
                                             </section>
@@ -595,7 +607,7 @@
                             <div class="form-group col-xs-12">
                                 <div class="checkbox required">
                                     <label for="{{::transInfoCtrl.contactSameId}}">
-                                        <input type="checkbox" ng-model="transInfoCtrl.transactionModel.confirmContactValid"
+                                        <input type="checkbox" data-ng-model="transInfoCtrl.transactionModel.confirmContactValid"
                                                name="{{::transInfoCtrl.contactSameId}}" id="{{::transInfoCtrl.contactSameId}}" required/>
                                         {{::"CONFIRM_CONTACT_VALID"|translate}}
                                     </label>

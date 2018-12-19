@@ -6,10 +6,10 @@
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                 <input id="{{::actChangeCtrl.notifMissingId}}" name="{{::actChangeCtrl.notifMissingId}}" type="hidden"
                        ng-model="actChangeCtrl.rationaleSelected" ng-required="actChangeCtrl.requiredState"/>
-                <strong id=" address-role-error" class="error" ng-if="actChangeCtrl.showErrorMissing()">
+                <strong id="active-role-error" class="error" data-ng-if="actChangeCtrl.showErrorMissing()">
                         <span class="label label-danger"
-                              ng-messages="actChangeCtrl.notifChangeForm[actChangeCtrl.notifMissingId].$error">
-                            <span ng-message="required">{{::"MSG_ERR_NOTIF_SEL"|translate}}</span>
+                              data-ng-messages="actChangeCtrl.notifChangeForm[actChangeCtrl.notifMissingId].$error">
+                            <span data-ng-message="required">{{::"MSG_ERR_NOTIF_SEL"|translate}}</span>
                         </span>
                 </strong>
             </legend>
@@ -18,7 +18,7 @@
                     <div class="checkbox">
                         <label for="chk-chgelabel_{{::$id}}">
                             <input type="checkbox" ng-model="actChangeCtrl.record.textLabelChange" name="chge-label"
-                                   id="chk-chgelabel_{{::$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chgelabel_{{::$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_LABEL"|translate}}
                         </label>
                     </div>
@@ -26,9 +26,9 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgeman_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.manufactMethodChange"
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.manufactMethodChange"
                                    name="chge-manmethod"
-                                   id="chk-chgeman_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chgeman_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_MANMETHOD"|translate}}
                         </label>
                     </div>
@@ -38,9 +38,9 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chge-drug-sub_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.drugSubstanceChange"
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.drugSubstanceChange"
                                    name="chge-drugsub"
-                                   id="chk-chge-drug-sub_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chge-drug-sub_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_DRUGSUB"|translate}}
                         </label>
                     </div>
@@ -48,9 +48,9 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgemansite_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.manufactSiteChange"
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.manufactSiteChange"
                                    name="chge-mansite"
-                                   id="chk-chgemansite_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chgemansite_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_MANSITE"|translate}}
                         </label>
                     </div>
@@ -60,8 +60,8 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgeform_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.formulationChange" name="chge-form"
-                                   id="chk-chgeform_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.formulationChange" name="chge-form"
+                                   id="chk-chgeform_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_FORM"|translate}}
                         </label>
                     </div>
@@ -69,9 +69,9 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgecontain_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.containerSizeChange"
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.containerSizeChange"
                                    name="chge-contain"
-                                   id="chk-chgecontain_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chgecontain_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_CONTAIN"|translate}}
                         </label>
                     </div>
@@ -81,8 +81,8 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgespec_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.specificationChange" name="chge-form"
-                                   id="chk-chgespec_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.specificationChange" name="chge-form"
+                                   id="chk-chgespec_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_SPEC"|translate}}
                         </label>
                     </div>
@@ -90,8 +90,8 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgepackage_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.packagingSpecChange" name="chge-form"
-                                   id="chk-chgepackage_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.packagingSpecChange" name="chge-form"
+                                   id="chk-chgepackage_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_PACKAGE"|translate}}
                         </label>
                     </div>
@@ -101,9 +101,9 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgeexpiry_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.expiryStorageChange"
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.expiryStorageChange"
                                    name="chge-expiry"
-                                   id="chk-chgeexpiry_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chgeexpiry_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_EXPIRY"|translate}}
                         </label>
                     </div>
@@ -111,9 +111,9 @@
                 <div class="col-sm-6">
                     <div class="checkbox">
                         <label for="chk-chgemat_{{$id}}">
-                            <input type="checkbox" ng-model="actChangeCtrl.record.packagingMaterialsChange"
+                            <input type="checkbox" data-ng-model="actChangeCtrl.record.packagingMaterialsChange"
                                    name="chge-mat"
-                                   id="chk-chgemat_{{$id}}" ng-change="actChangeCtrl.updateErrorState()"/>
+                                   id="chk-chgemat_{{$id}}" data-ng-change="actChangeCtrl.updateErrorState()"/>
                             {{::"CHANGE_MATERIAL"|translate}}
                         </label>
                     </div>
@@ -132,9 +132,9 @@
                     <div class="form-group">
                         <label for="chgeotherdet_{{$id}}">
                             {{::"OTHER_DETAILS"|translate}}
-                            <input type="text" ng-model="actChangeCtrl.record.otherChangeDetails" name="otherDetails"
+                            <input type="text" data-ng-model="actChangeCtrl.record.otherChangeDetails" name="otherDetails"
                                    id="chgeotherdet_{{$id}}" maxlength="80" size="80"
-                                   ng-change="actChangeCtrl.updateErrorState()"/>
+                                   data-ng-change="actChangeCtrl.updateErrorState()"/>
                         </label>
                     </div>
                 </div>

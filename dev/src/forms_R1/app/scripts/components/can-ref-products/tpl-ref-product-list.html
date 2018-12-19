@@ -1,7 +1,7 @@
 <ng-form name="crpl.cdn_ref_list_form">
     <input type="hidden"  name="{{::crpl.oneCdnRefId}}" id="{{::crpl.oneCdnRefId}}"
-           ng-model="crpl.oneRefSelected" required/>
-    <cmp-expanding-table title="{{::'REF_PRODUCTS'|translate}}" list-items="crpl.productList"
+           data-ng-model="crpl.oneRefSelected" required/>
+    <cmp-expanding-table pre-id="ref_prd_list_" title="{{::'REF_PRODUCTS'|translate}}" list-items="crpl.productList"
                          column-def="crpl.colNames" select-record="crpl.selectRecord"
                          reset-to-collapsed="crpl.resetToCollapsed"
                          disable-selection="!crpl.isDetailValid">
@@ -13,7 +13,7 @@
 
     </cmp-expanding-table>
     <div name="new-cdnRef-record">
-        <cmp-ref-product-details ng-if="crpl.newProductFormShown===true" on-add-product="crpl.addProduct(product)"
+        <cmp-ref-product-details data-ng-if="crpl.newProductFormShown===true" on-add-product="crpl.addProduct(product)"
                                  record-index="crpl.productList.length" on-cancel="crpl.onNewCancel()"
                                  show-error-summary="crpl.showSummmary"
                                  delete-btn="false"></cmp-ref-product-details>
@@ -22,7 +22,7 @@
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12 text-right">
             <button class="btn btn-primary" data-ng-disabled="crpl.addNewDisabled()" id="addRefProductBtn"
-                    ng-click="crpl.addNewProductState()">{{::'ADD_CRP'|translate}}
+                    data-ng-click="crpl.addNewProductState()">{{::'ADD_CRP'|translate}}
             </button>
         </div>
     </div>

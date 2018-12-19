@@ -1,7 +1,7 @@
 <ng-form name="ctlCtrl.ctrTypeListForm">
-    <input type="text" required ng-show="false" name="{{::ctlCtrl.noContainerId}}" id="{{::ctlCtrl.noContainerId}}"
+    <input type="text" required data-ng-show="false" name="{{::ctlCtrl.noContainerId}}" id="{{::ctlCtrl.noContainerId}}"
            aria-hidden="true" data-ng-model="ctlCtrl.noContainerValues"/>
-    <cmp-expanding-table  reset-to-collapsed="ctlCtrl.resetToCollapsed"
+    <cmp-expanding-table  pre-id="container_type_list_" reset-to-collapsed="ctlCtrl.resetToCollapsed"
                          list-items="ctlCtrl.containerList" id="containerList_{{::$id}}"
                          column-def="ctlCtrl.colNames" select-record="ctlCtrl.selectRecord"
                          disable-selection="!ctlCtrl.isDetailValid">
@@ -13,7 +13,7 @@
                                    delete-btn="true"></cmp-container-type-record>
 
     </cmp-expanding-table>
-    <div name="new-container-record">
+    <div id="new-container-record">
         <cmp-container-type-record ng-if="ctlCtrl.newIngFormShown === true" on-add-ing="ctlCtrl.addNew(cType)"
                                    on-cancel="ctlCtrl.onNewCancel()" delete-btn="false"
                                    error-summary-update="ctlCtrl.errorSummaryUpdate" show-error-summary="ctlCtrl.showErrorSummary"
@@ -24,7 +24,7 @@
         <div class="btn-group-sm col-md-12">
             <button  class="btn btn-primary" name="addContainer_{{::$id}}" id="addContainer_{{::$id}}"
                    data-ng-disabled="ctlCtrl.addNewDisabled()"
-                    ng-click="ctlCtrl.addNewIngredientState()">{{'ADD_CONTAINER'|translate}}</button>
+                     data-ng-click="ctlCtrl.addNewIngredientState()">{{'ADD_CONTAINER'|translate}}</button>
         </div>
     </div>
 

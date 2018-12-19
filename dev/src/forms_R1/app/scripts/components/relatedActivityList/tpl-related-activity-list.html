@@ -5,7 +5,7 @@
         </header>
         <div class="panel-body">
             <div class="row">
-                <cmp-expanding-table list-items="activityListCtrl.activityList"
+                <cmp-expanding-table pre-id="rel_activity_list_" list-items="activityListCtrl.activityList"
                                      column-def="activityListCtrl.columnDef"
                                      reset-to-collapsed="activityListCtrl.resetCollapsed"
                                      select-record="activityListCtrl.selectRecord"
@@ -24,11 +24,11 @@
             <div class="row mrgn-tp-md mrgn-bttm-lg">
                 <div class="btn-group-sm col-md-12 text-right">
                     <button class="btn btn-primary"
-                           ng-click="activityListCtrl.addActivity()" name="addRelatedActivityBtn" id="addRelatedActivityBtn"
-                            ng-disabled="!activityListCtrl.isDetailsValid">{{'ADD_ACTIVITY'|translate}}</button>
+                            data-ng-click="activityListCtrl.addActivity()" name="addRelatedActivityBtn" id="addRelatedActivityBtn"
+                            data-ng-disabled="!activityListCtrl.isDetailsValid">{{'ADD_ACTIVITY'|translate}}</button>
                     <button type="submit" class="btn btn-default"
                            data-ng-show="activityListCtrl.newAdrFormShow"
-                            ng-click="activityListCtrl.newAdrFormShow = false">Cancel</button>
+                            data-ng-click="activityListCtrl.newAdrFormShow = false">Cancel</button>
                 </div>
             </div>
         </div>

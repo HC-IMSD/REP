@@ -7,10 +7,10 @@
                        transclude-list="formulCtrl.transcludeList"
                        update-errors="formulCtrl.updateSummary"></cmp-error-summary>
 
-    <input type="textbox" required="true" ng-show="false" name="no_formulation_{{::$id}}" id="no_formulation_{{::$id}}"
+    <input type="text" required data-ng-show="false" name="no_formulation_{{::$id}}" id="no_formulation_{{::$id}}"
            data-ng-model="formulCtrl.noFormulations"/>
     <!--<pre>formulationList: {{formulCtrl.formulationList|json}}</pre>-->
-    <cmp-expanding-table  tname="cmp-formulation-record" id="formulationList_{{::$id}}"
+    <cmp-expanding-table  pre-id="formulation_list_" tname="cmp-formulation-record" id="formulationList_{{::$id}}"
                          reset-to-collapsed="formulCtrl.resetToCollapsed" list-items="formulCtrl.formulationList"
                          column-def="formulCtrl.colNames" select-record="formulCtrl.selectRecord" disable-err-column="true"
                          disable-selection="!formulCtrl.isDetailValid">
@@ -25,7 +25,7 @@
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
             <button name="addFormulation_{{::$id}}" id="addFormulation_{{::$id}}" class="btn btn-primary"
-                    ng-click="formulCtrl.addNew()">{{'ADD_FORMULATION'|translate}}
+                    data-ng-click="formulCtrl.addNew()">{{'ADD_FORMULATION'|translate}}
             </button>
         </div>
     </div>

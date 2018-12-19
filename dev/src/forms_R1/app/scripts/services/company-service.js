@@ -264,6 +264,7 @@
                     address.country = "";
                     if (adrList[i].company_address_details.country.__text) {
                         address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: adrList[i].company_address_details.country.__text})[0];
+                        address.countryHtml = address.country.en;
                         address.countryDisplay = address.country.id;
                     }
                     address.postalCode = adrList[i].company_address_details.postal_code;
