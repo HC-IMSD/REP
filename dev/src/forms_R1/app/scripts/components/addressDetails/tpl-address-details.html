@@ -37,7 +37,9 @@
                                        show-error="adr.showError(adr.addressForm[adr.countryId])" error-types="adr.requiredOnly">
                     </cmp-error-message>
                 </label>
-                <input type="text" id="{{::adr.countryId}}" data-ng-model="adr.addressModel.countryHtml" value="adr.addressModel.countryHtml" data-ng-change="adr.countryChange()" list="countryList" required class="rep-selectize-font full-width"/>
+                <input type="text" id="{{::adr.countryId}}" name="{{::adr.countryId}}"
+                       data-ng-model="adr.addressModel.countryHtml" value="adr.addressModel.countryHtml"
+                       data-ng-change="adr.countryChange()" list="countryList" required class="rep-selectize-font full-width"/>
                 <datalist id="countryList" class="rep-selectize-dropdown rep-selectize-font">
                     <option data-ng-repeat="countryRecord in adr.countryList" value="{{countryRecord[adr.lang]}}" label="{{countryRecord[adr.lang]}}"/>
                 </datalist>
