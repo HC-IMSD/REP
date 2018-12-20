@@ -377,6 +377,46 @@
         vm.isFrench = function(){
             return(vm.lang === FRENCH);
         };
+        vm.unitsChange = function() {
+            var found = false;
+            for(var i = 0; i < vm.UnitsList.length; i++) {
+                var option =vm.UnitsList[i];
+                if(option[vm.lang] === vm.ingModel.unitsHtml) {
+                    vm.ingModel.units = option;
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.UnitsList.length; i++) {
+                    var option =vm.UnitsList[i];
+                    if(option['id'] === vm.ingModel.perMeasUnits['id']) {
+                        vm.ingModel.unitsHtml = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+        }
+        vm.perMeasUnitsChange = function() {
+            var found = false;
+            for(var i = 0; i < vm.UnitsList.length; i++) {
+                var option =vm.UnitsList[i];
+                if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
+                    vm.ingModel.perMeasUnits = option;
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.UnitsList.length; i++) {
+                    var option =vm.UnitsList[i];
+                    if(option['id'] === vm.ingModel.perMeasUnits['id']) {
+                        vm.ingModel.perMeasUnitsHtml = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+        }
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {
             vm.isDetailValid({state: !vm.activeIngForm.$dirty});

@@ -85,6 +85,8 @@
         vm.addNewIngredientState=function(){
             vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.newIngFormShown = true;
+            vm.unitsHtml = '';
+            vm.perMeasureUnitsHtml = '';
             vm.setValid(false);
             return(vm.newIngFormShown);
         };

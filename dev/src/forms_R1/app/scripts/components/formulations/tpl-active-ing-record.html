@@ -77,11 +77,11 @@
                     <div class="form-group col-md-12">
                         <label for="variant_{{::$id}}">
                             <span class="field-name">{{'VARIANT_NAME'|translate}}</span>
-                            <button title="{{::'EXPAND'|translate}} {{::'VARIANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <span title="{{::'EXPAND'|translate}} {{::'VARIANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="variant-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(0)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'VARIANT_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                             <input type="text" id="variant_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.variant" maxlength="60"
                                    data-ng-model-options="{ debounce: '$inherit'}" size="60"
                                    class="form-control full-width" name="variant"/>
@@ -107,11 +107,11 @@
                         <label for="{{::ingRecCtrl.purposeId}}" class="required">
                             <span class="field-name">{{'PURPOSE'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'PURPOSE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <span title="{{::'EXPAND'|translate}} {{::'PURPOSE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="purpose-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(5)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'PURPOSE_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                             <cmp-error-message field-name="ingRecCtrl.purposeId"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.purposeId])"
@@ -166,11 +166,11 @@
                     <div class="form-group col-md-3">
                         <label for="{{::ingRecCtrl.standardId}}">
                             <span class="field-name">{{'STANDARD'|translate}}</span>
-                            <button title="{{::'EXPAND'|translate}} {{::'STANDARD_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <span title="{{::'EXPAND'|translate}} {{::'STANDARD_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="standard-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(1)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'STANDARD_INSTRUCT'|translate}}</span>
-                            </button>
+                            </span>
                             <input type="text" id="{{::ingRecCtrl.standardId}}" data-ng-model="ingRecCtrl.ingModel.standard"
                                    data-ng-model-options="{ debounce: '$inherit'}"
                                    class="form-control full-width" name="standardVal" size="40" maxlength="40"/>
@@ -256,23 +256,27 @@
                                                        form-ref="ingRecCtrl.activeIngForm"
                                                        show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.unitsId])"
                                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
-                                    <div class="rep-pad-top">
-                                        <div class="rep-error" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.unitsId].$invalid}">
-                                            <ui-select data-ng-model="ingRecCtrl.ingModel.units" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}"
-                                                       data-ng-model-options="{ debounce: 0}"
-                                                       class="rep-selectize-font full-width" required>
-                                                <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                                                 class="rep-selectize-font form-control">
-                                                    {{$select.selected[ingRecCtrl.lang]}}
-                                                </ui-select-match>
-                                                <ui-select-choices
-                                                        repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
-                                                        class="rep-selectize-font">
-                                                    <span data-ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
-                                                </ui-select-choices>
-                                            </ui-select>
-                                        </div>
-                                    </div>
+                                    <!--<div class="rep-pad-top">-->
+                                        <!--<div class="rep-error" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.unitsId].$invalid}">-->
+                                            <!--<ui-select data-ng-model="ingRecCtrl.ingModel.units" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}"-->
+                                                       <!--data-ng-model-options="{ debounce: 0}"-->
+                                                       <!--class="rep-selectize-font full-width" required>-->
+                                                <!--<ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"-->
+                                                                 <!--class="rep-selectize-font form-control">-->
+                                                    <!--{{$select.selected[ingRecCtrl.lang]}}-->
+                                                <!--</ui-select-match>-->
+                                                <!--<ui-select-choices-->
+                                                        <!--repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"-->
+                                                        <!--class="rep-selectize-font">-->
+                                                    <!--<span data-ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>-->
+                                                <!--</ui-select-choices>-->
+                                            <!--</ui-select>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <input type="text" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.unitsHtml" value="ingRecCtrl.ingModel.unitsHtml" data-ng-change="ingRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control full-width"/>
+                                    <datalist id="unitsList" class="rep-selectize-dropdown rep-selectize-font">
+                                        <option data-ng-repeat="unit in ingRecCtrl.UnitsList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
+                                    </datalist>
 
                                 </label>
                             </div>
@@ -384,8 +388,8 @@
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId])"
                                                            error-types="ingRecCtrl.requiredOnly">
                                         </cmp-error-message>
-                                        <div class="rep-pad-top">
-                                            <div class="rep-error" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId].$invalid}">
+                                        <!--<div class="rep-pad-top">-->
+                                            <!--<div class="rep-error" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId].$invalid}">-->
                                                 <!--ui-select ng-model="ingRecCtrl.ingModel.perMeasUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
                                                            ng-model-options="{ debounce: 0}"
                                                            class="rep-selectize-font full-width" required>
@@ -399,14 +403,14 @@
                                                         <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
                                                     </ui-select-choices>
                                                 </ui-select-->
-
-                                                <select id="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnits"
-                                                        data-ng-model-options="{ debounce: '$inherit'}"
-                                                        class="form-control full-width" name="{{::ingRecCtrl.perMeasureUnitId}}" required
-                                                        data-ng-options="measure[ingRecCtrl.lang] for measure in  ingRecCtrl.measureList track by measure.id">
                                                 </select>
-                                            </div>
-                                        </div>
+                                            <!--</div>-->
+                                        <!--</div>-->
+
+                                        <input type="text" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnitsHtml" value="ingRecCtrl.ingModel.perMeasUnitsHtml" data-ng-change="ingRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
+                                        <datalist id="unitsList2" class="rep-selectize-dropdown rep-selectize-font">
+                                            <option data-ng-repeat="unit in ingRecCtrl.UnitsList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
+                                        </datalist>
 
                                     </label>
                                 </div>

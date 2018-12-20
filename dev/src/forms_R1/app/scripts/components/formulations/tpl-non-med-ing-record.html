@@ -104,23 +104,27 @@
                                            form-ref="nIngRecCtrl.nonMedIngForm"
                                            show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.unitsId])"
                                            error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
-                        <div class="rep-pad-top">
-                            <div class="rep-error" data-ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.unitsId].$invalid}">
-                                <ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="{{::nIngRecCtrl.unitsId}}"
-                                           data-ng-model-options="{debounce: 0}" name="{{::nIngRecCtrl.unitsId}}"
-                                           class="rep-selectize-font full-width" required>
-                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                                     class="rep-selectize-font rep-selectize-dropdown form-control">
-                                        {{$select.selected[nIngRecCtrl.lang]}}
-                                    </ui-select-match>
-                                    <ui-select-choices
-                                            data-repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"
-                                            class="rep-selectize-font">
-                                        <span data-ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
-                        </div>
+                        <!--<div class="rep-pad-top">-->
+                            <!--<div class="rep-error" data-ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.unitsId].$invalid}">-->
+                                <!--<ui-select data-ng-model="nIngRecCtrl.ingModel.units" id="{{::nIngRecCtrl.unitsId}}"-->
+                                           <!--data-ng-model-options="{debounce: 0}" name="{{::nIngRecCtrl.unitsId}}"-->
+                                           <!--class="rep-selectize-font full-width" required>-->
+                                    <!--<ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"-->
+                                                     <!--class="rep-selectize-font rep-selectize-dropdown form-control">-->
+                                        <!--{{$select.selected[nIngRecCtrl.lang]}}-->
+                                    <!--</ui-select-match>-->
+                                    <!--<ui-select-choices-->
+                                            <!--data-repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"-->
+                                            <!--class="rep-selectize-font">-->
+                                        <!--<span data-ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>-->
+                                    <!--</ui-select-choices>-->
+                                <!--</ui-select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <input type="text" id="{{::nIngRecCtrl.unitId}}" name="{{::nIngRecCtrl.unitId}}" data-ng-model="nIngRecCtrl.ingModel.unitsHtml" value="nIngRecCtrl.ingModel.unitsHtml" data-ng-change="nIngRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control full-width"/>
+                        <datalist id="unitsList" class="rep-selectize-dropdown rep-selectize-font">
+                            <option data-ng-repeat="unit in nIngRecCtrl.unitsList" value="{{unit[nIngRecCtrl.lang]}}" label="{{unit[nIngRecCtrl.lang]}}"/>
+                        </datalist>
 
                     </label>
                 </div>
@@ -182,23 +186,27 @@
                                                form-ref="nIngRecCtrl.nonMedIngForm"
                                                show-error="nIngRecCtrl.showError(nIngRecCtrl.nonMedIngForm[nIngRecCtrl.perMeasureUnitId])"
                                                error-types="nIngRecCtrl.requiredOnly"></cmp-error-message>
-                            <div class="rep-pad-top">
-                                <div class="rep-error" data-ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.perMeasureUnitId].$invalid}">
-                                    <ui-select data-ng-model="nIngRecCtrl.ingModel.perMeasureUnits" id="{{::nIngRecCtrl.perMeasureUnitId}}"
-                                               data-ng-model-options="{debounce: 0}" name="{{::nIngRecCtrl.perMeasureUnitId}}"
-                                               class="rep-selectize-font full-width" required>
-                                        <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                                         class="rep-selectize-font rep-selectize-dropdown form-control">
-                                            {{$select.selected[nIngRecCtrl.lang]}}
-                                        </ui-select-match>
-                                        <ui-select-choices
-                                                repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"
-                                                class="rep-selectize-font">
-                                            <span data-ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                </div>
-                            </div>
+                            <!--<div class="rep-pad-top">-->
+                                <!--<div class="rep-error" data-ng-class="{'has-error':nIngRecCtrl.nonMedIngForm[nIngRecCtrl.perMeasureUnitId].$invalid}">-->
+                                    <!--<ui-select data-ng-model="nIngRecCtrl.ingModel.perMeasureUnits" id="{{::nIngRecCtrl.perMeasureUnitId}}"-->
+                                               <!--data-ng-model-options="{debounce: 0}" name="{{::nIngRecCtrl.perMeasureUnitId}}"-->
+                                               <!--class="rep-selectize-font full-width" required>-->
+                                        <!--<ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"-->
+                                                         <!--class="rep-selectize-font rep-selectize-dropdown form-control">-->
+                                            <!--{{$select.selected[nIngRecCtrl.lang]}}-->
+                                        <!--</ui-select-match>-->
+                                        <!--<ui-select-choices-->
+                                                <!--repeat="unit in nIngRecCtrl.unitsList |filter:{[nIngRecCtrl.lang]:$select.search}"-->
+                                                <!--class="rep-selectize-font">-->
+                                            <!--<span data-ng-bind-html="unit[nIngRecCtrl.lang] | highlight: $select.search"></span>-->
+                                        <!--</ui-select-choices>-->
+                                    <!--</ui-select>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <input type="text" id="{{::nIngRecCtrl.perMeasureUnitId}}" name="{{::nIngRecCtrl.perMeasureUnitId}}" data-ng-model="nIngRecCtrl.ingModel.perMeasureUnitsHtml" value="nIngRecCtrl.ingModel.perMeasureUnitsHtml" data-ng-change="nIngRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
+                            <datalist id="unitsList2" class="rep-selectize-dropdown rep-selectize-font">
+                                <option data-ng-repeat="unit in nIngRecCtrl.unitsList" value="{{unit[nIngRecCtrl.lang]}}" label="{{unit[nIngRecCtrl.lang]}}"/>
+                            </datalist>
 
                         </label>
                     </div>

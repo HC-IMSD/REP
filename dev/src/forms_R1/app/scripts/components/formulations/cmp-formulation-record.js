@@ -313,7 +313,7 @@
             if( ! found ){
                 for(var i = 0; i < vm.dosageFormList.length; i++) {
                     var option =vm.dosageFormList[i];
-                    if(option['id'] === vm.frmModel.dosageForm) {
+                    if(option['id'] === vm.frmModel.dosageForm['id']) {
                         vm.frmModel.dosageFormHtml = option[vm.lang];
                         break;
                     }

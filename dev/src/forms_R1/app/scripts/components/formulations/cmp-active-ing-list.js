@@ -122,6 +122,8 @@
             vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.newIngFormShown = true;
             vm.setValid(false);
+            vm.perMeasUnitsHtml = '';
+            vm.unitsHtml = '';
             return(vm.newIngFormShown);
         };
         /**

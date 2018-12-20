@@ -344,6 +344,46 @@
         vm.isNanoMaterial = function () {
             return (vm.ingModel.isNano === YES);
         };
+        vm.unitsChange = function() {
+            var found = false;
+            for(var i = 0; i < vm.unitsList.length; i++) {
+                var option =vm.unitsList[i];
+                if(option[vm.lang] === vm.ingModel.unitsHtml) {
+                    vm.ingModel.units = option;
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.unitsList.length; i++) {
+                    var option =vm.unitList[i];
+                    if(option['id'] === vm.ingModel.units['id']) {
+                        vm.ingModel.unitsHtml = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+        }
+        vm.perMeasUnitsChange = function() {
+            var found = false;
+            for(var i = 0; i < vm.unitsList.length; i++) {
+                var option =vm.unitsList[i];
+                if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
+                    vm.ingModel.perMeasUnits = option;
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.unitsList.length; i++) {
+                    var option =vm.unitsList[i];
+                    if(option['id'] === vm.ingModel.perMeasUnits['id']) {
+                        vm.ingModel.perMeasUnitsHtml = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+        }
 
     }
 

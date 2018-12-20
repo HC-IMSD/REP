@@ -260,7 +260,7 @@
             if( ! found ){
                 for(var i = 0; i < vm.countryList.length; i++) {
                     var option =vm.countryList[i];
-                    if(option['id'] === vm.addressModel.country) {
+                    if(option['id'] === vm.addressModel.country['id']) {
                         vm.addressModel.countryHtml = option[vm.lang];
                         break;
                     }
