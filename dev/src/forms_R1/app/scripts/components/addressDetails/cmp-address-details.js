@@ -247,12 +247,12 @@
             vm.stateListId = "provinceList" + scopeId;
             vm.postalId = "postal" + scopeId;
         }
-        function countryChange() {
+        vm.countryChange = function() {
             var found = false;
             for(var i = 0; i < vm.countryList.length; i++) {
                 var option =vm.countryList[i];
                 if(option[vm.lang] === vm.addressModel.countryHtml) {
-                    vm.addressModel.country = option['id'];
+                    vm.addressModel.country = option;
                     found = true;
                     break;
                 }
@@ -266,6 +266,7 @@
                     }
                 }
             }
+            vm.countryChanged();
         }
         // component only has one field, just watch this field for changes to update error summary
         $scope.$watch('adr.addressForm.$error', function () {
