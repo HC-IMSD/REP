@@ -32,7 +32,7 @@
                     </div>
                     <div>
                         <div class="row">
-                                <div class="form-group col-md-4"
+                                <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
                                     <label for="{{::transInfoCtrl.typeId}}" class="required">
                                         <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
@@ -51,10 +51,10 @@
                                         </select>
                                     </label>
                                 </div>
-                                <div class="form-group col-md-3"
+                                <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
-                                        <span class="field-name">{{::"COMPANY_ID" |translate}}</span>
+                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_5_CHAR" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <span title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
@@ -72,9 +72,23 @@
 
                                     </label>
                                 </div>
-                                <div class="form-group col-md-3">
+                        </div>
+                        <div>
+                            <cmp-alert ui-state="transInfoCtrl.alerts[5]" msg="COMPANY_ID_INSTRUCT"
+                                       update-state="transInfoCtrl.closeAlert(5)" type="alert-info">
+                                <section aria-live="assertive">
+                                    <div ng-if="!transInfoCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-en.html'">
+                                    </div>
+                                    <div ng-if="transInfoCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-fr.html'">
+                                    </div>
+                                </section>
+                            </cmp-alert>
+                        </div>
+                        <div class="form-group">
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
-                                        <span class="field-name">{{::"DOSSIER_ID" |translate}}</span>
+                                        <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <span title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
@@ -87,50 +101,34 @@
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.dossierId])"
                                                            error-types="transInfoCtrl.min7Error"></cmp-error-message>
-                                    </label>
                                         <div class="rep-input-group">
                                             <span class="input-group-addon">HC6-024-</span>
                                             <div data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
-                                                <input type="text" class="form-control full-width" id="{{::transInfoCtrl.dossierId}}"
-                                                       size="6" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
+                                                <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
+                                                       size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
                                                        data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                                             </div>
                                         </div>
 
+                                    </label>
                                 </div>
 
                             </div>
-                        <div class="row">
-                                <div>
-                                    <cmp-alert ui-state="transInfoCtrl.alerts[5]" msg="COMPANY_ID_INSTRUCT"
-                                               update-state="transInfoCtrl.closeAlert(5)" type="alert-info">
-                                        <section aria-live="assertive">
-                                            <div data-ng-if="!transInfoCtrl.isFrench()"
-                                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-en.html'">
-                                            </div>
-                                            <div data-ng-if="transInfoCtrl.isFrench()"
-                                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-fr.html'">
-                                            </div>
-                                        </section>
-                                    </cmp-alert>
-                                </div>
-
-                                <div>
-                                    <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
-                                               update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
-                                        <section aria-live="assertive">
-                                            <div data-ng-if="!transInfoCtrl.isFrench()"
-                                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-en.html'">
-                                            </div>
-                                            <div data-ng-if="transInfoCtrl.isFrench()"
-                                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-fr.html'">
-                                            </div>
-                                        </section>
-                                    </cmp-alert>
-                                </div>
-                            </div>
-                        <div class="row" data-ng-if="!transInfoCtrl.finalState">
-                               <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
+                        <div>
+                            <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
+                                       update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
+                                <section aria-live="assertive">
+                                    <div ng-if="!transInfoCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-en.html'">
+                                    </div>
+                                    <div ng-if="transInfoCtrl.isFrench()"
+                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-fr.html'">
+                                    </div>
+                                </section>
+                            </cmp-alert>
+                        </div>
+                        <div class="row" ng-if="!transInfoCtrl.finalState">
+                               <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                     <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
                                         <span class="field-name">{{::"PROD_NAME" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>

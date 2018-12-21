@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-xs-4 form-group">
                         <label for="{{::drugProdCtrl.dossierId}}" class="required">
-                            <span class="field-name">2.&nbsp;{{::'DOSSIER_ID' |translate}}</span>
+                            <span class="field-name">2.&nbsp;{{::'DOSSIER_ID' |translate}}{{::'LEAST_7_CHAR' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="drugProdCtrl.dossierId"
                                                form-ref="drugProdCtrl.drugProdForm"

@@ -103,7 +103,7 @@
                     <div class="col-xs-4 form-group"
                          data-ng-class="{'has-error':dos.dossierForm[dos.compId].$invalid}">
                         <label for="{{::dos.compId}}" class="required">
-                            <span class="field-name">{{::'COMPANY_ID' |translate}}</span>
+                            <span class="field-name">{{::'COMPANY_ID' |translate}}{{::'LEAST_5_CHAR' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="dos.compId"
                                                form-ref="dos.dossierForm"

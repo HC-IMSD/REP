@@ -1,12 +1,12 @@
 {
-  "CITY": "City",
+  "CITY": "City or Town",
   "COUNTRY": "Country",
-  "PROVINCE": "Province",
-  "POSTAL": "Postal Code",
+  "PROVINCE": "Province or State",
+  "POSTAL": "Postal Code or Zip code",
   "PROVSTATE": "Province or State",
-  "STATE": "State",
+  "STATE": "Province or State",
   "STREET": "Street Address",
-  "ZIP": "Zip Code",
+  "ZIP": "Postal Code or Zip code",
   "COMPANY": "Company",
   "ADD_ADDRESS": "Add Address",
   "CITY_TOWN": "City or Town",
@@ -15,6 +15,7 @@
   "ADDR_INFO": "Address Information",
   "ADDR_DETAILS": "Address Details",
   "ADDR_ROLE_LEGEND": "Select one or more roles for this company",
+  "ADDR_REP_ROLE_LEGEND": "Select one or more roles for this company representative",
   "PRODUCTS_IMPORTED": "Imported Products",
   "PRODUCT_TYPES":"Products imported by this Company",
   "ALL_PRODUCTS": "All Products",
@@ -24,5 +25,5 @@
   "IMPORTER_NONCDN":"Please ensure you indicate a Canadian Importer on your Product Information REP XML",
   "COUNTRY_CHOOSE":"Choose a country",
   "COUNTRY_SEARCH":"Select or Search for country",
-  "PROVINCELIST":"Province"
+  "PROVINCELIST":"Province or State"
 }

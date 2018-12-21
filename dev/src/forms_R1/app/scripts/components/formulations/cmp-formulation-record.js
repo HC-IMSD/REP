@@ -334,7 +334,7 @@
             vm.noContainerId="no_container"+scopeId;
             vm.noRoaId="no_roa"+scopeId;
             vm.noCountryId="no_country"+scopeId;
-            vm.isAnimalHumanMaterialId="is_Animal_Human"+scopeId;
+            vm.isAnimalHumanMaterialId="is_animal_human_material"+scopeId;
         }
 
         $scope.$watch('formulRecCtrl.formulationForm.$error', function () {

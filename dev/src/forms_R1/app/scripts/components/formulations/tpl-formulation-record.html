@@ -106,6 +106,7 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading clearfix">
+                        <h3 class="panel-title  col-md-8">C. {{'INGREDIENTS'|translate}}</h3>
                         <div class="btn-group pull-right">
                             <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_INSTRUCT'|translate}}"
                                     class="btn-xs rep-help-button-primary btn-xs"
@@ -114,7 +115,6 @@
                                 <span class="wb-inv">{{::'INGREDIENT_INSTRUCT'|translate}}</span>
                             </button>
                         </div>
-                        <h3 class="panel-title">C. {{'INGREDIENTS'|translate}}</h3>
                     </header>
                     <div class="panel-body">
                         <div class="row">
@@ -150,7 +150,7 @@
                 <div class="form-group  col-md-16 col-xs-12"
                      data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId].$invalid}">
                     <label for="{{::formulRecCtrl.isAnimalHumanMaterialId}}" class="required rep-required-offset full-width">
-                        <span class="field-name">{{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
+                        <span class="field-name">D. {{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <span title="{{::'EXPAND'|translate}} {{::'MATERIALS_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                 id="is-ah-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(1)">
@@ -177,6 +177,7 @@
                                 </div>
                             </div>
                         </div>
+                    <div  class="col-md-12">
                     <cmp-error-message field-name="formulRecCtrl.isAnimalHumanMaterialId"
                                        form-ref="formulRecCtrl.formulationForm"
                                        show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
@@ -186,7 +187,7 @@
                                 data-ng-options="val |translate for val in  formulRecCtrl.yesNoList">
                             <option value="" label=" " />
                         </select>
-
+                    </div>
                 </div>
             </div>
             <div data-ng-if="formulRecCtrl.frmModel.isAnimalHumanMaterial === 'Y'">
@@ -205,7 +206,7 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading">
-                        <h3 class="panel-title">{{'CONTAINER_TYPES'|translate}}</h3>
+                        <h3 class="panel-title">E. {{'CONTAINER_TYPES'|translate}}</h3>
                         <!-- <strong id="nocontainer-error" class="error" ng-if="formulRecCtrl.noContainers()">
                                  <span class="label label-danger" ng-messages="formulationRecForm.noContainerFld.$error">
                                      <span ng-message="required"><span translate="MSG_ERR_ONE_CONTAINER"></span></span>
@@ -223,7 +224,7 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading">
-                        <h3 class="panel-title">{{'ROA_TITLE'|translate}}</h3>
+                        <h3 class="panel-title">F. {{'ROA_TITLE'|translate}}</h3>
                         <!-- <strong id="noroa-error" class="error" ng-if="formulRecCtrl.noROA()">
                                  <span class="label label-danger" ng-messages="formulationRecForm.noROAFld.$error">
                                      <span ng-message="required"><span translate="MSG_ERR_ONE_ROA"></span></span>
@@ -241,6 +242,7 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading">
+                        <h3 class="panel-title col-md-8">G. {{'COUNTRIES_MANUFACT'|translate}}</h3>
                         <div class="btn-group pull-right rep-bottom">
                             <button title="{{::'EXPAND'|translate}} {{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="countries-manu-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(2)">
@@ -248,7 +250,6 @@
                                 <span class="wb-inv">{{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}</span>
                             </button>
                         </div>
-                        <h3 class="panel-title">{{'COUNTRIES_MANUFACT'|translate}}</h3>
                     </header>
                     <div class="row">
                         <div class="col-md-12">

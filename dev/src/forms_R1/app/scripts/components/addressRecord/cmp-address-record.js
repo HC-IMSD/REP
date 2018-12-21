@@ -302,7 +302,7 @@
 
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;
-            vm.companyNameId = "companyName" +scopeId;
+            vm.companyNameId = "COMPANYNAME" +scopeId;
             vm.importerID = "importerID" + scopeId;
             vm.formNameId="company-address-record-form"+scopeId;
         }

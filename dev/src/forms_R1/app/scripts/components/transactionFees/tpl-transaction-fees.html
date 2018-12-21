@@ -185,14 +185,17 @@
                         <div class="checkbox">
                             <label for="{{::transFeeCtrl.deferralStateId}}">
                                 <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.deferralStat"
-                                       name="{{::transFeeCtrl.deferralStateId}}" id="{{::transFeeCtrl.deferralStateId}}"
-                                       class="required" />
+                                       class="required"
+                                       name="{{::transFeeCtrl.deferralStateId}}"
+                                       id="{{::transFeeCtrl.deferralStateId}}"
+                                       required />
                                 {{::"DEFER_STATEMENT"|translate}}
                                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                 <cmp-error-message field-name="transFeeCtrl.deferralStateId"
                                                    form-ref="transFeeCtrl.transFeeForm"
                                                    show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.deferralStateId])"
-                                                   error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
+                                                   error-types="transFeeCtrl.requiredOnlyError">
+                                </cmp-error-message>
                             </label>
                         </div>
                     </div>
@@ -214,7 +217,8 @@
                                         <cmp-error-message field-name="transFeeCtrl.statement10Id"
                                                            form-ref="transFeeCtrl.transFeeForm"
                                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.statement10Id])"
-                                                           error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
+                                                           error-types="transFeeCtrl.requiredOnlyError">
+                                        </cmp-error-message>
                                     </label>
                                 </div>
                             </div>

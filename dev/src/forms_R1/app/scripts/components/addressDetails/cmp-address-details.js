@@ -240,9 +240,9 @@
 
         function _setIdNames() {
             var scopeId = vm.fldId+ "_" + $scope.$id;
-            vm.streetId = "street" + scopeId;
-            vm.cityId = "city" + scopeId;
-            vm.countryId = "country" + scopeId;
+            vm.streetId = "STREET" + scopeId;
+            vm.cityId = "CITY" + scopeId;
+            vm.countryId = "COUNTRY" + scopeId;
             vm.stateTextId = "proveState" + scopeId;
             vm.stateListId = "provinceList" + scopeId;
             vm.postalId = "postal" + scopeId;

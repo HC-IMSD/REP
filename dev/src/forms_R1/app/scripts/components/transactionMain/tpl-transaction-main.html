@@ -12,11 +12,9 @@
                         <span class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span>
                     </button>
                 </div>
-
             </header>
             <div class="panel-body">
-                <div>
-                    <cmp-alert  ui-state="main.alerts[0]"
+                     <cmp-alert  ui-state="main.alerts[0]"
                                 msg="HELP_FILE_LOAD"
                                 update-state="main.closeAlert(0)"
                                 type="alert-info">
@@ -29,10 +27,8 @@
                             </div>
                         </section>
                     </cmp-alert>
-
-                </div>
                 <div class="col-md-12">
-                    <hpfb-file-select update-model-root="main.showContent(fileContent) "
+                    <hpfb-file-select update-model-root="main.showContent(fileContent)"
                                       root-elem="{{main.rootTag}}"></hpfb-file-select>
                 </div>
             </div>

@@ -57,7 +57,7 @@
         vm.lifecycleModel = {};
         vm.endDateVisible = false;
         vm.yearVisible = false;
-        vm.startDateVisible = false;
+       // vm.startDateVisible = false;
         vm.descriptionVisible = false;
         vm.versionVisible = false;
         vm.ectd = false;
@@ -517,7 +517,7 @@
         function setAsStartDate() {
             vm.endDateVisible = false;
             vm.startDateVisible = true;
-            vm.startDateLabel = "DATED";
+            //vm.startDateLabel = "DATED";
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
@@ -530,9 +530,10 @@
         function setVersionAndDate() {
             vm.endDateVisible = false;
             vm.startDateVisible = true;
-            vm.startDateLabel = "DATED";
+           // vm.startDateLabel = "DATED";
             vm.descriptionVisible = false;
             vm.versionVisible = true;
+            vm.versionLabel = "VERSION_NO";
             vm.yearVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
@@ -543,7 +544,7 @@
 
             vm.endDateVisible = true;
             vm.startDateVisible = true;
-            vm.startDateLabel = "START_DATE";
+            //vm.startDateLabel = "START_DATE";
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
@@ -557,6 +558,7 @@
             vm.startDateVisible = false;
             vm.descriptionVisible = true;
             vm.versionVisible = true;
+            vm.versionLabel = "VERSION_NO";
             vm.yearVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
@@ -577,8 +579,8 @@
                     concatText = enDescription + " dated " + startDate;
                 }
             }
-            if (vm.endDateVisible) {
 
+            if (vm.endDateVisible) {
                 endDate = convertDate(vm.lifecycleModel.endDate);
                 concatText = enDescription + " of " + startDate + " to " + endDate;
             }
@@ -735,7 +737,8 @@
             vm.controlNumId="control_num"+scopeId;
             vm.regActivityId="reg_activity_type"+scopeId;
             vm.seqDescriptId="sequence_type"+scopeId;
-            vm.startDateId="start_date"+scopeId;
+            vm.startDateId="start_date" + scopeId;
+            vm.dateId= "dated" + scopeId;
             vm.endDateId="end_date"+scopeId;
             vm.yearId="year_change"+scopeId;
             vm.descriptId="brief_desc"+scopeId;

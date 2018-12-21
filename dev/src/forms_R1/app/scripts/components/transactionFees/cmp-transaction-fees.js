@@ -36,7 +36,7 @@
         vm.onePaymentSelected = "";
         vm.yesNoList = [YES, NO];
         vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.onePaymentError = [{type: "required", displayAlias: "ONE_PAYMENT_METHOD"}];
+        vm.onePaymentError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.alerts = [false, false, false];
         vm.lang=ENGLISH;
         /**
@@ -270,11 +270,13 @@
             vm.descriptId = "fee_description" + scopeId;
             vm.feeId = "fee_amount" + scopeId;
             vm.remitId = "fee_remission" + scopeId;
-            vm.paymentSelectedId = "one_payment_method" + scopeId;
-            vm.revenueId = "grossRevenue" + scopeId;
+            vm.paymentSelectedId = "one_payment_method" + scopeId; //PAYMENT_METHODS
+           // vm.paymentSelectedId = "PAYMENT_METHODS" + scopeId;
+            vm.revenueId = "GROSS_REVENUE" + scopeId;
             vm.percentId = "calcPercent" + scopeId;
-            vm.deferralStateId = "deferralState" + scopeId; //statement supporting deferral
-            vm.statement10Id = "required_doc" + scopeId;
+            vm.deferralStateId = "DEFER_STATEMENT" + scopeId; //statement supporting deferral
+            vm.statement10Id = "STATEMENT_REVENUE" + scopeId;
+           // vm.statement10Id = "required_doc" + scopeId;
             vm.otherId = "other" + scopeId;
             vm.otherDetailsId = "other_doc_details" + scopeId;
             vm.paymentFsId="fs_payment_methods" + scopeId;

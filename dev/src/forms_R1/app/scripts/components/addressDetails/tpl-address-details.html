@@ -6,7 +6,8 @@
                     <span class="field-name">{{::"STREET" |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="adr.streetId" form-ref="adr.addressForm"
-                                       show-error="adr.showError(adr.addressForm[adr.streetId])" error-types="adr.requiredOnly">
+                                       show-error="adr.showError(adr.addressForm[adr.streetId])"
+                                       error-types="adr.requiredOnly">
                     </cmp-error-message>
                     <input type="text" class="form-control full-width" maxlength="120" id="{{::adr.streetId}}"
                            name="{{::adr.streetId}}" data-ng-readonly="!adr.isEditable"
@@ -18,7 +19,7 @@
         <div class="row">
             <div class="form-group col-md-6" data-ng-class="{'has-error':adr.addressForm[adr.cityId].$invalid}">
                 <label for="{{::adr.cityId}}" class="required full-width">
-                    <span class="field-name">{{::"CITY_TOWN" |translate}}</span>
+                    <span class="field-name">{{::"CITY" |translate}}</span>
                     <strong class="required"> {{::"REQUIRED" |translate}} </strong>
                     <cmp-error-message field-name="adr.cityId" form-ref="adr.addressForm"
                                        show-error="adr.showError(adr.addressForm[adr.cityId])" error-types="adr.requiredOnly">

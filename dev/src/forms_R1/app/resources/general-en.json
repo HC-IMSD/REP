@@ -55,6 +55,7 @@
   "HELP_REP_CONTACT": "Regulatory Enrolment Process Contact Instructions",
   "OTHER_UNITS": "Units other details",
   "COMPANYNAME":"Company Name (Full legal name - no abbreviations)",
+  "ACOMPANYNAME":"Company Name (Full legal name - no abbreviations)",
   "COPY":"Copy",
   "DELETE":"Delete",
   "SAVE_WORKING":"Save Working Copy",
@@ -69,5 +70,9 @@
   "PROD_NAME_HELP":"Product Name Instructions",
   "PROP_NAME_HELP":"Proper, Common or Non-proprietary Name Instructions",
   "RELATED_INFO_HELP":"Related Information Instructions",
-  "DOSSIER_TYPE": "Dossier Type"
+  "DOSSIER_TYPE": "Dossier Type",
+  "LEAST_5_CHAR":" (at least 5 characters)",
+  "LEAST_7_CHAR":" (at least 7 characters)",
+  "INCLUDE_AREA_CODE":" (including area code)",
+  "LEAST_6_DIGIT":" (6 digits only)"
 }
