@@ -121,7 +121,7 @@
                                 <!--</ui-select>-->
                             <!--</div>-->
                         <!--</div>-->
-                        <input type="text" id="{{::nIngRecCtrl.unitId}}" name="{{::nIngRecCtrl.unitId}}" data-ng-model="nIngRecCtrl.ingModel.unitsHtml" value="nIngRecCtrl.ingModel.unitsHtml" data-ng-change="nIngRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control full-width"/>
+                        <input type="text" id="{{::nIngRecCtrl.unitId}}" name="{{::nIngRecCtrl.unitId}}" data-ng-model="nIngRecCtrl.ingModel.unitsHtml" value="nIngRecCtrl.ingModel.unitsHtml" data-ng-blur="nIngRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control full-width"/>
                         <datalist id="unitsList" class="rep-selectize-dropdown rep-selectize-font">
                             <option data-ng-repeat="unit in nIngRecCtrl.unitsList" value="{{unit[nIngRecCtrl.lang]}}" label="{{unit[nIngRecCtrl.lang]}}"/>
                         </datalist>
@@ -203,7 +203,7 @@
                                     <!--</ui-select>-->
                                 <!--</div>-->
                             <!--</div>-->
-                            <input type="text" id="{{::nIngRecCtrl.perMeasureUnitId}}" name="{{::nIngRecCtrl.perMeasureUnitId}}" data-ng-model="nIngRecCtrl.ingModel.perMeasureUnitsHtml" value="nIngRecCtrl.ingModel.perMeasureUnitsHtml" data-ng-change="nIngRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
+                            <input type="text" id="{{::nIngRecCtrl.perMeasureUnitId}}" name="{{::nIngRecCtrl.perMeasureUnitId}}" data-ng-model="nIngRecCtrl.ingModel.perMeasureUnitsHtml" value="nIngRecCtrl.ingModel.perMeasureUnitsHtml" data-ng-blur="nIngRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
                             <datalist id="unitsList2" class="rep-selectize-dropdown rep-selectize-font">
                                 <option data-ng-repeat="unit in nIngRecCtrl.unitsList" value="{{unit[nIngRecCtrl.lang]}}" label="{{unit[nIngRecCtrl.lang]}}"/>
                             </datalist>
