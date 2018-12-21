@@ -83,19 +83,19 @@
         vm.alias={
             "no_country": {
                 "type": "elementnoid",
-                "target": "countryList"
+                "target": "list_country"
             },
             "no_roa": {
                 "type": "element",
-                "target": "roaList"
+                "target": "list_roa"
             },
             "no_active": {
                 "type": "element",
-                "target": "ingList"
+                "target": "list_active"
             },
             "no_container": {
                 "type": "element",
-                "target": "containerList"
+                "target": "list_container"
             }
         };
         vm.transcludeList={

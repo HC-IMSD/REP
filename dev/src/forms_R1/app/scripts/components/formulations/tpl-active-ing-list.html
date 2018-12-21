@@ -2,7 +2,7 @@
      <input type="text" required data-ng-show="false" name="{{::ailCtrl.noActiveId}}" id="{{::ailCtrl.noActiveId}}"
                               aria-hidden="true" data-ng-model="ailCtrl.noActiveValues"/>
     <cmp-expanding-table pre-id="active_ing_list_" title="{{'INGREDIENT_LIST'|translate}}" list-items="ailCtrl.ingList"
-                         reset-to-collapsed="ailCtrl.resetToCollapsed" id="ingList_{{::$id}}"
+                         reset-to-collapsed="ailCtrl.resetToCollapsed" id="list_active_{{::$id}}"
                          column-def="ailCtrl.colNames" select-record="ailCtrl.selectRecord"
                          disable-selection="!ailCtrl.isDetailValid">
 

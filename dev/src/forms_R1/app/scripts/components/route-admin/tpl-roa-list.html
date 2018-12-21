@@ -1,7 +1,7 @@
 <ng-form name="roaCtrl.roaListForm">
     <input type="text" required data-ng-show="false" name="{{::roaCtrl.noRoaId}}" id="{{::roaCtrl.noRoaId}}"
            aria-hidden="true" data-ng-model="roaCtrl.noROAValues"/>
-    <cmp-expanding-table  pre-id="roa_list_" reset-to-collapsed="roaCtrl.resetToCollapsed" id="roaList_{{::$id}}"
+    <cmp-expanding-table  pre-id="roa_list_" reset-to-collapsed="roaCtrl.resetToCollapsed" id="list_roa_{{::$id}}"
                          list-items="roaCtrl.model.roaList" expand-record="roaCtrl.setRecord(index)"
                          column-def="roaCtrl.columnDef" select-record="roaCtrl.selectRecord"
                          disable-selection="roaCtrl.disableAddButton()">

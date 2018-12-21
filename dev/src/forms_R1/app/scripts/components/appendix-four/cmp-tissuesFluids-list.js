@@ -71,9 +71,9 @@
             "cmp-tissues-fluids-record": "true"
         };
         vm.alias = {
-            "msg_err_one_tissue": {
-                "type": "element",
-                "target": "addTissuesRec"
+            "no_tissue": {
+                "type": "elementnoid",
+                "target": "list_tissue"
             }
 
         };
@@ -184,7 +184,7 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.tissuesListFormRecordId = "tissueListForm" + scopeId;
-            vm.oneTissueId = "msg_err_one_tissue" + scopeId;
+            vm.oneTissueId = "no_tissue" + scopeId;
             vm.addTissuesRecId="addTissuesRec" + scopeId;
         }
 

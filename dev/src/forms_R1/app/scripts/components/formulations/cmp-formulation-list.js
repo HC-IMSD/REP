@@ -52,7 +52,7 @@
         vm.alias = {
             "no_formulation": {
                 "type": "element",
-                "target": "formulationList"
+                "target": "list_formulation"
             }
         };
 

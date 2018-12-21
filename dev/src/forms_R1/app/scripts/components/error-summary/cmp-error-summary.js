@@ -244,7 +244,7 @@
                     //parse for a transclude name. Used for comparison below
                     if(numIndex>0) {
                         transcludeName = record[j].$name.substring(0, numIndex);
-                    };
+                    }
                     //case this is a form- assumes format <controlller>.<formName>
                     if (record[j].$invalid === true && record[j].$name.indexOf('.') > 0) {
                         //it is assumed that if it is in the exclusion list it is a summary
@@ -428,6 +428,10 @@
             //create a json where the key is the name, and the value is the index (ie the position it should be
             //this allows lookup by name and gets the index
             for (var v = 0; v < keyList.length; v++) {
+                //specifically handled no item errors
+                if(keyList[v].startsWith("no_")){
+                    keyList[v]=keyList[v].replace("no_", "list_");
+                }
                 sortedDomJsonList[keyList[v]] = v;
             }
 

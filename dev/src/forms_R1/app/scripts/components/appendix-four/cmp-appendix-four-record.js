@@ -66,11 +66,11 @@
             vm.alias = {
                 "no_country_origin": {
                     "type": "elementnoid",
-                    "target": "srcCountryList"
+                    "target": "list_country_origin"
                 },
                 "no_animal": {
                     "type": "elementnoid",
-                    "target": "animalSrcList"
+                    "target": "list_animal"
                 },
                 "msg_app4_type": {
                     "type": "fieldset",
@@ -80,9 +80,9 @@
                     "type": "fieldset",
                     "parent": "system_role"
                 },
-                "msg_err_one_tissue": {
+                "no_tissue": {
                     "type": "elementnoid",
-                    "target": "tissueList"
+                    "target": "list_tissue"
                 }
 
             };

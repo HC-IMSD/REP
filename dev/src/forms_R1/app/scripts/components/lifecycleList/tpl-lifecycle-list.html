@@ -1,8 +1,8 @@
 <ng-form name="lifeListCtrl.lifecycleListForm" novalidate="novalidate">
     <input data-ng-if="!lifeListCtrl.isSelectedRecord()" type="hidden" id="oneLifeRec_{{$id}}" name="oneLifeRec_{{$id}}"
-           data-ng-model="lifeListCtrl.oneRecord" />
+           data-ng-model="lifeListCtrl.oneRecord" required/>
     <input data-ng-if="lifeListCtrl.isSelectedRecord()" type="hidden" id="saveLifeRec_{{$id}}" name="saveLifeRec_{{$id}}"
-           data-ng-model="lifeListCtrl.oneRecord" />
+           data-ng-model="lifeListCtrl.oneRecord" required/>
     <!--
     <div class="row" ng-if="!lifeListCtrl.finalState && lifeListCtrl.ectdValue">
         <div class="col-xs-4 form-group">

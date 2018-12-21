@@ -15,6 +15,7 @@
   "NO_COUNTRY_ORIGIN": "fr_At least one Country of Origin is required",
   "NO_ROA": "fr_At least one Route of Administation is required",
   "NO_THERAVAL": "fr_At least one therapeutic classification is required",
+  "NO_TISSUE": "fr_Require at least one Tissue or fluid source",
   "MSG_ERR_ONE_COUNTRY": "fr_At least one country of origin is required",
   "MSG_ERR_ONE_TISSUE": "fr_Require at least one Tissue or fluid source",
   "MSG_ERR_ONE_CNTRY_ORIGIN": "fr_At least one Country of origin is required",
