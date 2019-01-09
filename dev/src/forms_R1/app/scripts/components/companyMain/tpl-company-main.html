@@ -44,7 +44,8 @@
                                form-preamble="COMPANY_FORM" exclusion-list="main.exclusions"
                                alias-list="main.alias" form-id="main.formId"
                                update-errors="main.updateSummary" make-focused="main.focusSummary"
-                               name-suffix="main.companyEnrolForm" set-heading-level="h2"></cmp-error-summary>
+                               name-suffix="main.companyEnrolForm" set-heading-level="h2">
+            </cmp-error-summary>
         </div>
         <div>
             <section class="panel panel-primary mrgn-tp-lg">
@@ -152,12 +153,58 @@
                                                           error-summary-update="main.updateSummary"
                                                           show-error-summary="main.showErrorSummary"
                                                           update-error-summary="main.updateErrorSummary()"
-                                                          company-service="main.companyService"></cmp-company-contact-list>
+                                                          company-service="main.companyService">
+                                </cmp-company-contact-list>
                             </div>
                         </section>
                     </div>
                 </div>
             </section>
+            <div class="row form-group  col-md-12">
+                    <div class="checkbox col-md-10">
+                        <label for="{{::main.privacyStatementID |translate}}">
+                            <input type="checkbox"
+                                   data-ng-model="main.privacyStat"
+                                   class="required"
+                                   name="{{::main.privacyStatementID |translate}}"
+                                   id="{{::main.privacyStatementID |translate}}"
+                                   required />
+                            {{::"PRIVACY_STATEMENT"|translate}}
+                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="main.privacyStatementID"
+                                               form-ref="main.companyEnrolForm"
+                                               show-error="main.showError(main.companyEnrolForm[main.privacyStatementID])"
+                                               error-types="main.requiredOnlyError">
+                            </cmp-error-message>
+                        </label>
+                    </div>
+                    <div class="btn-group pull-right">
+                        <button title="{{::'EXPAND'|translate}} {{::'PRIVACY_STATEMENT_HELP'|translate}}"
+                                class="btn rep-help-button-primary btn-xs"
+                                id="statement-instructions-toggle"
+                                data-ng-click="main.addInstruct(5)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'PRIVACY_STATEMENT_HELP'|translate}}</span>
+                        </button>
+                    </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row col-md-12">
+                <cmp-alert  ui-state="main.alerts[5]"
+                            msg="PRIVACY_STATEMENT_HELP"
+                            update-state="main.closeAlert(5)"
+                            type="alert-info">
+
+                    <section aria-live="assertive">
+                        <div data-ng-if="!main.isFrench()"
+                             ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'">
+                        </div>
+                        <div data-ng-if="main.isFrench()"
+                             ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'">
+                        </div>
+                    </section>
+                </cmp-alert>
+            </div>
             <div class="row btn-group-sm">
                 <div class="form-group  col-md-12">
                     <button class="btn btn-default btn-lg active mrgn-rght-sm" data-ng-click="main.saveJson()"
@@ -173,7 +220,6 @@
                         <span class="wb-inv">{{::'SAVE_INSTRUCT'|translate}}</span>
                     </button>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-md-10">

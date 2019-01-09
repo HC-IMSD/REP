@@ -70,7 +70,7 @@
         vm.showOtherSolicitedDetail = false;
         vm.activityEditable = true;
         vm.isEctd = false;
-        vm.alerts = [false, false, false, false, false, false, false, false];
+        vm.alerts = [false, false, false, false, false, false, false, false, false];
         vm.requesterList = [];
         vm.formTypeList = getRoleLists.getFormTypes();
         vm.lang=ENGLISH;

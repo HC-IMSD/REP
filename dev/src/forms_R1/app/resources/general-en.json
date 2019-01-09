@@ -74,5 +74,8 @@
   "LEAST_5_CHAR":" (at least 5 characters)",
   "LEAST_7_CHAR":" (at least 7 characters)",
   "INCLUDE_AREA_CODE":" (including area code)",
-  "LEAST_6_DIGIT":" (6 digits only)"
+  "LEAST_6_DIGIT":" (6 digits only)",
+  "PRIVACY_STATEMENT_HELP":"View Privacy Notice Statement",
+  "PRIVACY_STATEMENT":"By submitting your personal information, you are consenting to its collection, use and disclosure in accordance with the Privacy Notice Statement."
+
 }

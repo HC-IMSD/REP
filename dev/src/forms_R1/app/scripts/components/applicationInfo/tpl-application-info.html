@@ -5,8 +5,9 @@
                 <label for="application-type_{{$id}}" >{{::"APPL_STATUS"| translate}}</label>
                 <select id="application-type_{{$id}}"
                         data-ng-options="type |translate for type in infoCtrl.applTypes"
-                        data-ng-model="infoCtrl.record.applicationType" data-ng-disabled="true"
-                        data-ng-class="{'rep-success':infoCtrl.showAmendMsg()}" class="form-control full-width"></select>
+                        data-ng-model="infoCtrl.record.applicationType" data-ng-readonly="true"
+                        data-ng-class="{'rep-success':infoCtrl.showAmendMsg()}" class="form-control full-width">
+                </select>
             </div>
             <div class="col-xs-3 form-group">
                 <label for="enr-version-text_{{$id}}">{{::"ENROL_VERSION"| translate}}</label>
@@ -33,21 +34,11 @@
                            data-ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="{{::infoCtrl.fieldId}}"
                            data-ng-minlength="{{infoCtrl.minFieldLength}}" data-only-digits="{{infoCtrl.isNumber}}"
                            data-ng-model="infoCtrl.record[infoCtrl.tagName]" data-ng-required="!infoCtrl.isExtern()"/>
-
                 </label>
-                <label for="{{::infoCtrl.fieldId}}" class="full-width" data-ng-class="{'required':!infoCtrl.isExtern()}"
-                       data-ng-if="infoCtrl.isDossier">
-                    <span class="field-name ">{{infoCtrl.fieldIdLabel |translate}}</span>
+                <label for="{{::infoCtrl.fieldId}}" class="full-width" data-ng-if="infoCtrl.isDossier" data-ng-class="{'required':!infoCtrl.isExtern()}">{{infoCtrl.fieldIdLabel |translate}}
                     <strong data-ng-if="!infoCtrl.isExtern()" class="required"> {{"REQUIRED" |translate}}</strong>
-                    <strong id="idType-error" class="error">
-                        <span class="label label-danger" data-ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
-                              data-ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
-                            <span data-ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
-                              <span data-ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
-                        </span>
-                    </strong>
                 </label>
-                    <div class="rep-input-group" data-ng-if="infoCtrl.isDossier">
+                <div class="rep-input-group mrgn-tp-0" data-ng-if="infoCtrl.isDossier">
                         <span class="input-group-addon">HC6-024-</span>
                         <div data-ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid}">
                             <input type="text" class="form-control full-width" id="{{::infoCtrl.fieldId}}"
@@ -55,7 +46,14 @@
                                    data-ng-minlength="{{infoCtrl.fieldLength}}" size="{{infoCtrl.fieldLength}}"
                                    data-ng-model="infoCtrl.record[infoCtrl.tagName]" data-ng-required="!infoCtrl.isExtern()"/>
                         </div>
-                    </div>
+                </div>
+                <strong id="idType-error" class="error">
+                        <span class="label label-danger" data-ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
+                              data-ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
+                            <span data-ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
+                            <span data-ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
+                        </span>
+                </strong>
             </div>
         </div>
         <div class="row">

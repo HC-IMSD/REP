@@ -2,16 +2,16 @@
     <section  class="alert alert-danger" data-focus-if="errSummaryCtrl.isFocusInput"
              data-focus-delay="200" data-ng-switch data-on="errSummaryCtrl.headerLevel">
 
-        <h1 data-ng-switch-when="h1">{{'FOR_THE'|translate}}&nbsp;{{errSummaryCtrl.formPreamble
+        <h1 data-ng-switch-when="h1">{{'FOR_THE'|translate}}{{errSummaryCtrl.formPreamble
             |translate}}{{'NOT_SAVED'|translate}}{{errSummaryCtrl.errorArray.length}}
             <span data-ng-if="errSummaryCtrl.errorArray.length>1">{{'ERRORS_FOUND'|translate}}</span>
             <span data-ng-if="errSummaryCtrl.errorArray.length==1">{{'ERROR_FOUND'|translate}}</span>
         </h1>
-        <h2 data-ng-switch-when="h2">{{'FORM_NOT_SAVED'|translate}}&nbsp;{{errSummaryCtrl.errorArray.length}}
+        <h2 data-ng-switch-when="h2">{{'FORM_NOT_SAVED'|translate}}{{errSummaryCtrl.errorArray.length}}
             <span data-ng-if="errSummaryCtrl.errorArray.length>1">{{'ERRORS_FOUND'|translate}}</span>
             <span data-ng-if="errSummaryCtrl.errorArray.length==1">{{'ERROR_FOUND'|translate}}</span>
         </h2>
-        <h3 data-ng-switch-when="h3">{{'FOR_THE'|translate}} {{errSummaryCtrl.formPreamble
+        <h3 data-ng-switch-when="h3">{{'FOR_THE'|translate}}{{errSummaryCtrl.formPreamble
             |translate}}{{'NOT_SAVED'|translate}}{{errSummaryCtrl.errorArray.length}}
             <span data-ng-if="errSummaryCtrl.errorArray.length>1">{{'ERRORS_FOUND'|translate}}</span>
             <span data-ng-if="errSummaryCtrl.errorArray.length==1">{{'ERROR_FOUND'|translate}}</span>

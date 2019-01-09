@@ -55,6 +55,11 @@
                 <label for="{{::requesterRecCtrl.solictedRqId}}" class="required full-width"><span
                         class="field-name">{{'SOLICITED_RQ'|translate}}</span>
                     <strong class="required">{{'REQUIRED' |translate}}</strong>
+                    <cmp-error-message field-name="requesterRecCtrl.solictedRqId"
+                                       form-ref="requesterRecCtrl.requesterForm"
+                                       show-error="requesterRecCtrl.showError(requesterRecCtrl.requesterForm[requesterRecCtrl.solictedRqId])"
+                                       error-types="requesterRecCtrl.requiredOnly">
+                    </cmp-error-message>
                     <span class="rep-margin-top">
                         <input type="text" data-ng-model="requesterRecCtrl.model.solicitedRequester" name="{{::requesterRecCtrl.solictedRqId}}"
                                data-ng-model-options="{ debounce: $inherit}"
@@ -66,10 +71,6 @@
                                data-ng-required="true"
                                data-typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
                     </span>
-                    <cmp-error-message field-name="requesterRecCtrl.solictedRqId"
-                                       form-ref="requesterRecCtrl.requesterForm"
-                                       show-error="requesterRecCtrl.showError(requesterRecCtrl.requesterForm[requesterRecCtrl.solictedRqId])"
-                                       error-types="requesterRecCtrl.requiredOnly"></cmp-error-message>
                 </label>
             </div>
         </div>

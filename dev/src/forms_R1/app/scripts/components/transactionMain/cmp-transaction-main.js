@@ -46,7 +46,7 @@
         vm.rootTag = vm.transactionService.getRootTag();
         vm.transaction = vm.transactionService.getModelInfo();
         vm.showContent = _loadFileContent;
-        vm.alerts = [false, false];
+        vm.alerts = [false, false,false];
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.sequenceUpdated = false;
         vm.isFinal = false;
@@ -74,6 +74,7 @@
 
         };
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.privacyStat = false;
 
         vm.$onInit = function () {
             vm.updateSummary=vm.updateSummary+1;
@@ -215,7 +216,7 @@
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
-        }
+        };
 
 
         /**
@@ -240,8 +241,24 @@
         function _setIdNames(){
             var scopeId = "_" + $scope.$id;
             vm.formId="transaction_form"+scopeId;
-
+            vm.privacyStatementID = "privacy_statement" + scopeId;
         }
+
+        /**
+         * For individual controls, whether to show the error for a fiedl
+         * @param ctrl.isInvalid - control $invalid flag
+         * @param ctrl.isTouched -control $touched flag
+         * @returns {*|dossierCtrl.showErrors}
+         */
+        vm.showError = function (ctrl) {
+            if (vm.savePressed) {
+                return true;
+            }
+            if(!ctrl || ctrl.$untouched){
+                return false;
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (vm.savePressed && ctrl.$invalid));
+        };
 
     }
 })();

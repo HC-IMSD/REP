@@ -18,20 +18,21 @@
                                 msg="HELP_FILE_LOAD"
                                 update-state="dos.closeAlert(0)"
                                 type="alert-info">
-
-                    <section aria-live="assertive">
-                        <div data-ng-if="!dos.isFrench()"
+                        <section aria-live="assertive">
+                            <div data-ng-if="!dos.isFrench()"
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-file-en.html'">
-                        </div>
-                        <div data-ng-if="dos.isFrench()"
+                            </div>
+                            <div data-ng-if="dos.isFrench()"
                              ng-include="'app/scripts/templates/dossier/tpl-dossier-file-fr.html'">
-                        </div>
-                    </section>
-                        </cmp-alert>
+                            </div>
+                        </section>
+                    </cmp-alert>
                 </div>
-
+                <div class="col-md-12">
                 <hpfb-file-select update-model-root="dos.showContent(fileContent)"
-                                  root-elem="DOSSIER_ENROL"></hpfb-file-select>
+                                  root-elem="DOSSIER_ENROL">
+                </hpfb-file-select>
+                </div>
             </div>
         </section>
         <section class="panel panel-primary mrgn-tp-lg">
@@ -66,14 +67,16 @@
                     <cmp-application-info record="dos.dossierModel" user-type="dos.userType"
                                           set-type="dos.setApplicationType(type)"
                                           configure-id-field="dos.configField" is-hide="true"
-                                          is-incomplete="dos.isIncomplete"></cmp-application-info>
+                                          is-incomplete="dos.isIncomplete">
+                    </cmp-application-info>
                 </div>
                 <div>
                     <cmp-error-summary form-ref="dos.dossierForm" select-tab="dos.selectTab(index)"
                                        form-preamble="DOSSIER" exclusion-list=dos.exclusions
                                        name-suffix="dos.dossierForm" set-heading-level="h2" form-id="dos.dossierFormId"
                                        make-focused="dos.focusSummary" alias-list="dos.alias" show-errors="dos.showSummary"
-                                       update-errors="dos.updateSummary"></cmp-error-summary>
+                                       update-errors="dos.updateSummary">
+                    </cmp-error-summary>
                 </div>
                 <div>
                     <div class="row">
@@ -433,12 +436,55 @@
                         <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
                                               parent-dirty="dos.dossierForm.$dirty"
                                               show-error-summary="dos.showSummary"
-                                              show-list-errors="dos.showErrors()" is-amend="dos.formAmend">
-
-                        </cmp-rep-contact-list>
+                                              show-list-errors="dos.showErrors()" is-amend="dos.formAmend"></cmp-rep-contact-list>
                     </div>
                 </div>
             </section>
+        </div>
+        <div class="row form-group  col-md-12">
+            <div class="checkbox col-md-10">
+                <label for="{{::dos.privacyStatementID |translate}}">
+                    <input type="checkbox"
+                           data-ng-model="dos.dossierModel.privacyStat"
+                           class="required"
+                           name="{{::dos.privacyStatementID |translate}}"
+                           id="{{::dos.privacyStatementID |translate}}"
+                           required />
+                    {{::"PRIVACY_STATEMENT"|translate}}
+                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                    <cmp-error-message field-name="dos.privacyStatementID"
+                                       form-ref="dos.dossierForm"
+                                       show-error="dos.showError(dos.dossierForm[dos.privacyStatementID])"
+                                       error-types="dos.requiredOnly">
+                    </cmp-error-message>
+
+                </label>
+            </div>
+            <div class="btn-group pull-right">
+                <button title="{{::'EXPAND'|translate}} {{::'PRIVACY_STATEMENT_HELP'|translate}}"
+                        class="btn rep-help-button-primary btn-xs"
+                        id="statement-instructions-toggle"
+                        data-ng-click="dos.addInstruct(11)">
+                    <span class="fa fa-question-circle fa-2x"></span>
+                    <span class="wb-inv">{{::'PRIVACY_STATEMENT_HELP'|translate}}</span>
+                </button>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <cmp-alert  ui-state="dos.alerts[11]"
+                        msg="PRIVACY_STATEMENT_HELP"
+                        update-state="dos.closeAlert(11)"
+                        type="alert-info">
+
+                <section aria-live="assertive">
+                    <div data-ng-if="!dos.isFrench()"
+                         ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'">
+                    </div>
+                    <div data-ng-if="dos.isFrench()"
+                         ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'">
+                    </div>
+                </section>
+            </cmp-alert>
         </div>
         <div class="row">
             <div class="form-group col-md-12">

@@ -55,6 +55,7 @@
                 softwareVersion: "2.0.0",
                 xslFileName: "REP_PI_2_0.xsl",
                 dataChecksum: "",
+                privacyStat:"",
                 //dossierType: "",
                // properName: "",
                // isRefProducts: "",

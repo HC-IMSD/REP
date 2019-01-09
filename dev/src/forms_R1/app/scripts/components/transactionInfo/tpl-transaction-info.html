@@ -11,10 +11,8 @@
                         <span class="wb-inv">{{::'TRANSACT_INSTRUCT'|translate}}</span>
                     </button>
                 </div>
-
             </header>
             <div class="panel-body">
-                <div>
                     <div>
                         <cmp-alert  ui-state="transInfoCtrl.alerts[0]"
                                     msg="TRANSACT_INSTRUCT"
@@ -112,9 +110,8 @@
 
                                     </label>
                                 </div>
-
-                            </div>
-                        <div>
+                    </div>
+                    <div>
                             <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
                                        update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
                                 <section aria-live="assertive">
@@ -126,8 +123,8 @@
                                     </div>
                                 </section>
                             </cmp-alert>
-                        </div>
-                        <div class="row" ng-if="!transInfoCtrl.finalState">
+                    </div>
+                    <div class="row" ng-if="!transInfoCtrl.finalState">
                                <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                     <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
                                         <span class="field-name">{{::"PROD_NAME" |translate}}</span>
@@ -151,8 +148,8 @@
                                              class="form-control full-width" maxlength="256" required >
                                         </textarea>
                                 </div>
-                        </div>
-                        <div>
+                    </div>
+                    <div>
                             <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="PRODUCT_INSTRUCT"
                                        update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
                                 <section aria-live="assertive">
@@ -165,7 +162,7 @@
                                 </section>
                             </cmp-alert>
                         </div>
-                        <div class="row">
+                    <div class="row">
                             <div class="form-group col-md-12"
                                  data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">
                                 <label for="{{::transInfoCtrl.isNewActivityId}}" class="required full-width">
@@ -185,8 +182,7 @@
 
                                 </label>
                             </div>
-                        </div>
-                    </div>
+                     </div>
                     <!-- activity content moved in -->
                     <div data-ng-if="transInfoCtrl.showNewActivityFields">
                         <div class="row">
@@ -413,7 +409,6 @@
                             </div>
                         </div>
                     </section>
-                </div>
                 <div class="row">
                     <div class="form-group col-md-4"
                          data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId].$invalid}">
@@ -467,7 +462,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-8 form-group"
+                    <div class="col-md-8 form-group"
                          data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
                         <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
                             <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
@@ -496,6 +491,7 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}</h2>
+                   <!--
                     <div class="btn-group pull-right">
                         <button title="{{::'EXPAND'|translate}} {{::'REGULATORY_FEES'|translate}}"
                                 class="btn-xs rep-help-button"
@@ -504,10 +500,32 @@
                             <span class="fa fa-question-circle fa-2x"></span>
                             <span class="wb-inv">{{::'REGULATORY_FEES'|translate}}</span>
                         </button>
+                    </div> -->
+                    <div class="btn-group pull-right">
+                        <button title="{{::'EXPAND'|translate}} {{::'REGULATORY_FEES'|translate}}"
+                                class="btn-xs rep-help-button"
+                                id="fee-instruct-toggle" data-ng-click="transInfoCtrl.addInstruct(8)">
+                            <span class="fa fa-question-circle fa-2x"></span>
+                            <span class="wb-inv">{{::'REGULATORY_FEES'|translate}}</span>
+                        </button>
                     </div>
-
                 </header>
                 <div class="panel-body">
+                    <div>
+                        <cmp-alert  ui-state="transInfoCtrl.alerts[8]"
+                                    msg="REGULATORY_FEES"
+                                    update-state="transInfoCtrl.closeAlert(8)"
+                                    type="alert-info">
+                            <section aria-live="assertive">
+                                <div data-ng-if="!transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-fee-en.html'">
+                                </div>
+                                <div data-ng-if="transInfoCtrl.isFrench()"
+                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-fees-fr.html'">
+                                </div>
+                            </section>
+                        </cmp-alert>
+                    </div>
                     <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"
                                           show-error-summary="transInfoCtrl.showSummary"
                                           update-error-summary="transInfoCtrl.updateErrorSummary()"

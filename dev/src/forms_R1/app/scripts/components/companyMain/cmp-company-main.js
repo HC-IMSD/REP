@@ -63,13 +63,14 @@
         }
         vm.applTypes = vm.companyService.getApplicationTypes();
         vm.company = vm.companyService.getModelInfo();
-        vm.alerts = [false, false, false, false, false];
+        vm.alerts = [false, false, false, false, false, false];
         vm.updateSummary=false;
         vm.showErrorSummary=false;
+        vm.privacyStat=false;
         vm.savePressed=false; //used for focus
         vm.focusSummary = 0; //messaging to set focus on the error summary
         vm.lang = $translate.proposedLanguage() || $translate.use();
-
+        vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.exclusions = {
             "contactRec.contactRecForm": "true",
             "addressRec.addressRecForm": "true"
@@ -101,7 +102,7 @@
             //reset instructions
             _setIdNames();
 
-            vm.alerts = [false, false, false, false, false];
+            vm.alerts = [false, false, false, false, false, false];
             vm.updateSummary=false;
             vm.showErrorSummary=false;
             vm.savePressed=false;
@@ -345,7 +346,24 @@
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;
             vm.formId = "company_form" +scopeId;
+            vm.privacyStatementID = "privacy_statement" +scopeId;
         }
+
+        /**
+         * For individual controls, whether to show the error for a fiedl
+         * @param ctrl.isInvalid - control $invalid flag
+         * @param ctrl.isTouched -control $touched flag
+         * @returns {*|dossierCtrl.showErrors}
+         */
+        vm.showError = function (ctrl) {
+            if (vm.showErrorSummary) {
+                return true;
+            }
+            if(!ctrl || ctrl.$untouched){
+                return false;
+            }
+            return ((ctrl.$invalid && ctrl.$touched) || (vm.showErrorSummary && ctrl.$invalid));
+        };
 
     }
 

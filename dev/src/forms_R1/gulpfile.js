@@ -582,11 +582,11 @@ var transactionServiceFileNames = [
 
 ];
 // Template folders
-var activityTemplates = ["activity/"];
-var transactionTemplates = ["transaction/"];
-var companyTemplates = ["company/"];
-var dossierTemplates = ["dossier/"];
-var drugProductTemplates = ["drugProduct/"];
+var activityTemplates = ["activity/", "common/"];
+var transactionTemplates = ["transaction/", "common/"];
+var companyTemplates = ["company/", "common/"];
+var dossierTemplates = ["dossier/", "common/"];
+var drugProductTemplates = ["drugProduct/", "common/"];
 var cspTemplates = ["csp/"];
 
 // Complementary Supplementary Protection Application Form

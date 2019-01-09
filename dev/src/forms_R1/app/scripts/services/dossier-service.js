@@ -52,6 +52,7 @@
                 productName: "",
                 properName: "",
                 isRefProduct: "",
+                privacyStat:"",
                 drugProduct: {
                     //thirdPartySigned: "",
                     //drugUseList: getDefaultDrugUseList(),

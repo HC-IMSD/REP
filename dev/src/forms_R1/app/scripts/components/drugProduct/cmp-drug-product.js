@@ -125,7 +125,7 @@
             {type: "minlength", displayAlias: "MSG_LENGTH_7"}
         ];
 
-        vm.alerts = [false, false, false, false, false, false, false, false, false, false, false]; //for help boxes
+        vm.alerts = [false, false, false, false, false, false, false, false, false, false, false, false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
         vm.drugUseList=[];
@@ -509,6 +509,7 @@
             vm.propIndicationId="prop_Indication"+scopeId;
             vm.fsType = "fs_type" + scopeId;
             vm.disiTypeId = "disinfectant_type" + scopeId;
+            vm.privacyStatementID = "privacy_statement" + scopeId;
         }
 
 
