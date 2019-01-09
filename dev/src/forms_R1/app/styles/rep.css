@@ -88,11 +88,17 @@ label > select {
     background-color: transparent;
     border: none;
 }
+.rep-help-button:focus {
+    outline: 2px dotted white;
+}
 
 .rep-help-button-primary {
     color: #1c578a;
     background-color: transparent;
     border: none;
+}
+.rep-help-button-primary:focus {
+    outline: 2px dotted darkblue;
 }
 
 .rep-normal-font {
