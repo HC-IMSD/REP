@@ -875,6 +875,35 @@
 <row><code>CSP_CREDIT_CARD</code><eng>MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</eng><fra>fr_MasterCard / Visa / American Express (AMEX) / Visa Debit / JCB International</fra></row>
 <row><code>CSP_CREDIT</code><eng>Payment Using Existing Credit</eng><fra>fr_Payment Using Existing Credit</fra></row>
 <row><code>CSP_WIRE</code><eng>Wire</eng><fra>fr_Wire</fra></row>
-
+<row><code>CONTACT_ID</code><eng>Contact ID</eng><fra>fr_Contact ID</fra></row>
+<row><code>REG_TRANS_INFO</code><eng>Regulatory Transaction Information</eng><fra>fr_Regulatory Transaction Information</fra></row>
+<row><code>MANUFACTURING_COMPANY_ID</code><eng>Manufacturing Company ID</eng><fra>fr_Manufacturing Company ID</fra></row>
+<row><code>MANUFACTURING_CONTACT_ID</code><eng>Manufacturing Contact ID</eng><fra>fr_Manufacturing Contact ID</fra></row>
+<row><code>Activity_Lead</code><eng>Activity Lead</eng><fra>fr_Activity Lead</fra></row>
+<row><code>Reg_Activity_Type</code><eng>Regulatory Activity Type</eng><fra>fr_Regulatory Activity Type</fra></row>
+<row><code>Transaction_Desc</code><eng>Transaction Description</eng><fra>fr_Transaction Description</fra></row>
+<row><code>Date_of_Request</code><eng>Date of Request</eng><fra>fr_Date of Request</fra></row>
+<row><code>Device_details_table</code><eng>Device details table included</eng><fra>fr_Device details table included</fra></row>
+<row><code>App_Info_XML_Include</code><eng>Application information XML included in transaction</eng><fra>fr_Application information XML included in transaction</fra></row>
+<row><code>Transaction_Req_Info</code><eng>Transaction Requester Information</eng><fra>fr_Transaction Requester Information</fra></row>
+<row><code>Transaction_Req_Detail</code><eng>Transaction Requester Detail</eng><fra>fr_Transaction Requester Detail</fra></row>
+<row><code>Device_Class</code><eng>Device Class</eng><fra>fr_Device Class</fra></row>
+<row><code>Reason_for_Amendment</code><eng>Reason for filing this Amendment</eng><fra>fr_Reason for filing this Amendment</fra></row>
+<row><code>Chg_to_classification</code><eng>Change to the classification of a device</eng><fra>fr_Change to the classification of a device</fra></row>
+<row><code>Chg_in_licence_name</code><eng>Change in the licence and/or device name</eng><fra>fr_Change in the licence and/or device name</fra></row>
+<row><code>Chg_to_purpose_indication</code><eng>Change to the purpose/indication of a device</eng><fra>fr_Change to the purpose/indication of a device</fra></row>
+<row><code>Add_Del_Chg</code><eng>Addition/Deletion/Change</eng><fra>fr_Addition/Deletion/Change</fra></row>
+<row><code>Licence_Number</code><eng>Licence Number</eng><fra>fr_Licence Number</fra></row>
+<row><code>Chg_to_classification</code><eng>Change to the classification of a device</eng><fra>fr_Change to the classification of a device</fra></row>
+<row><code>Chg_in_licence_name</code><eng>Change in the licence and/or device name</eng><fra>fr_Change in the licence and/or device name</fra></row>
+<row><code>chg_in_manufacturing_process</code><eng>Significant change in manufacturing process, facility of equipment</eng><fra>fr_Significant change in manufacturing process, facility of equipment</fra></row>
+<row><code>chg_in_manufacturing_QA</code><eng>Significant change in manufacturing quality control procedures</eng><fra>fr_Significant change in manufacturing quality control procedures</fra></row>
+<row><code>chg_in_manufacturing_design</code><eng>Significant change in design or performance</eng><fra>fr_Significant change in design or performance</fra></row>
+<row><code>chg_in_materials</code><eng>Significant change in materials</eng><fra>fr_Significant change in materials</fra></row>
+<row><code>chg_in_label</code><eng>Significant change in the labelling of the device</eng><fra>fr_Significant change in the labelling of the device</fra></row>
+<row><code>chg_other</code><eng>Any change which could affect the safety and effectiveness of the device</eng><fra>fr_Any change which could affect the safety and effectiveness of the device</fra></row>
+<row><code>Chg_to_purpose_indication</code><eng>Change to the purpose/indication of a device</eng><fra>fr_Change to the purpose/indication of a device</fra></row>
+<row><code>Add_Del_Chg</code><eng>Addition/Deletion/Change</eng><fra>fr_Addition/Deletion/Change</fra></row>
+<row><code>TRANSACTION_INFO_TMPL</code><eng>Transaction Template: Regulatory Enrolment Process (REP)</eng><fra>fr_Transaction Template: Regulatory Enrolment Process (REP)</fra></row>
 
 </SimpleCodeList>
