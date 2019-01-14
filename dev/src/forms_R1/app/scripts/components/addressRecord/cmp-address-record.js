@@ -189,6 +189,9 @@
         vm.delete = function () {
             vm.onDelete({addressId: vm.addressModel.addressID});
             vm.updateErrorSummary();
+            var ele = document.getElementById("addAddressBtn");
+            console.log("tab element: " + ele);
+            if( ele !== null ) ele.focus();
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *

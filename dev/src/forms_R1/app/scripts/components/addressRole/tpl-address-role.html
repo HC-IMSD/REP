@@ -1,7 +1,16 @@
 <ng-form name="ar.roleForm">
     <fieldset id="{{::ar.fieldsetId}}">
-        <label class="required">
-            <span class="field-name">{{::ar.legendText |translate}}</span>
+        <legend class="h5">
+            <span class="field-name">{{::ar.legendText |translate}}</span></span>
+            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+            <sup id="ro1_ref" data-ng-if="!ar.isContact">
+                <a class="fn-lnk" href="#ro1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>A1</a>
+            </sup>
+            <sup id="ro2_ref" data-ng-if="ar.isContact">
+                <a class="fn-lnk" href="#ro2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>A2</a>
+            </sup>
+        </legend>
+        <!-- <label class="required">
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
             <span data-ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
                     class="btn-xs rep-help-button-primary"
@@ -14,8 +23,7 @@
                     id="contact-roles-instructions-toggle" data-ng-click="ar.addInstruct(0)">
                 <span class="fa fa-question-circle fa-2x"></span>
                 <span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
-            </button>
-        </label>
+        </label> -->
         <div data-ng-if="!ar.isContact">
             <input id="{{::ar.roleMissingId}}" type="hidden" name="{{::ar.roleMissingId}}"
                    data-ng-model="ar.isSelected" required/>
@@ -34,8 +42,8 @@
                         </span>
             </strong>
         </div>
-        <div data-ng-if="!ar.isContact" class="row col-md-12">
-            <div>
+        <!--  <div data-ng-if="!ar.isContact" class="row col-md-12">
+          <div>
                 <cmp-alert  ui-state="ar.alerts[0]"
                             msg="ADDRESS_ROLE_INSTRUCT"
                             update-state="ar.closeAlert(0)"
@@ -49,7 +57,6 @@
                     </div>
                 </section>
                 </cmp-alert>
-
             </div>
         </div>
         <div data-ng-if="ar.isContact" class="row col-md-12">
@@ -68,7 +75,7 @@
                 </section>
                 </cmp-alert>
             </div>
-        </div>
+        </div>-->
         <div class="row">
             <div class="col-sm-4">
                 <div class="checkbox" id="chk-manufacturer">

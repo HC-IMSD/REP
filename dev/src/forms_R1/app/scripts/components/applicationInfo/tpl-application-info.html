@@ -3,11 +3,15 @@
         <div class="row">
             <div class="col-xs-3 form-group ">
                 <label for="application-type_{{$id}}" >{{::"APPL_STATUS"| translate}}</label>
-                <select id="application-type_{{$id}}"
+                <!--<select id="application-type_{{$id}}"
                         data-ng-options="type |translate for type in infoCtrl.applTypes"
-                        data-ng-model="infoCtrl.record.applicationType" data-ng-readonly="true"
+                        data-ng-model="infoCtrl.record.applicationType" data-ng-disabled="true"
                         data-ng-class="{'rep-success':infoCtrl.showAmendMsg()}" class="form-control full-width">
-                </select>
+                </select> -->
+                <input type="text" class="form-control full-width" id="application-type_{{$id}}"
+                       data-ng-model="infoCtrl.record.applicationType"
+                       data-ng-class="{'rep-success':infoCtrl.showAmendMsg()}"
+                       data-ng-readonly="true"/>
             </div>
             <div class="col-xs-3 form-group">
                 <label for="enr-version-text_{{$id}}">{{::"ENROL_VERSION"| translate}}</label>

@@ -2,18 +2,22 @@
     <ng-form name="transInfoCtrl.transInfoForm" novalidate="novalidate">
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-                <h2 class="panel-title col-md-8">{{::'TRANSACTION_HDING'|translate}}</h2>
-                <div class="btn-group pull-right">
+                <h2 class="panel-title col-md-8">{{::'TRANSACTION_HDING'|translate}}
+                    <sup id="tr2_ref">
+                        <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                    </sup>
+                </h2>
+               <!-- <div class="btn-group pull-right">
                     <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
                             class="btn-xs rep-help-button"
                             id="transact-instruct-toggle" data-ng-click="transInfoCtrl.addInstruct(0)">
                         <span class="fa fa-question-circle fa-2x"></span>
                         <span class="wb-inv">{{::'TRANSACT_INSTRUCT'|translate}}</span>
                     </button>
-                </div>
+                </div> -->
             </header>
             <div class="panel-body">
-                    <div>
+                  <!--  <div>
                         <cmp-alert  ui-state="transInfoCtrl.alerts[0]"
                                     msg="TRANSACT_INSTRUCT"
                                     update-state="transInfoCtrl.closeAlert(0)"
@@ -27,7 +31,7 @@
                                 </div>
                             </section>
                         </cmp-alert>
-                    </div>
+                    </div> -->
                     <div>
                         <div class="row">
                                 <div class="form-group col-md-6"
@@ -52,13 +56,17 @@
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
-                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_5_CHAR" |translate}}</span>
+                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_5_CHAR" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <span title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
+                                        <!--<span title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
                                                 id="comp-id-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(5)">
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'COMPANY_ID_INSTRUCT'|translate}}</span>
+                                        </span> -->
+                                        <sup id="tr3_ref">
+                                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                        </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyId"
                                                            form-ref="transInfoCtrl.transInfoForm"
@@ -71,7 +79,7 @@
                                     </label>
                                 </div>
                         </div>
-                        <div>
+                       <!-- <div>
                             <cmp-alert ui-state="transInfoCtrl.alerts[5]" msg="COMPANY_ID_INSTRUCT"
                                        update-state="transInfoCtrl.closeAlert(5)" type="alert-info">
                                 <section aria-live="assertive">
@@ -83,17 +91,21 @@
                                     </div>
                                 </section>
                             </cmp-alert>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
-                                        <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}</span>
-                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <span title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
+                                        <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
+                                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                        <!--<span title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
                                                 id="dossier-id-instructions-toggle"
                                                 data-ng-click="transInfoCtrl.addInstruct(6)">
                                              <span class="fa fa-question-circle fa-2x"></span>
                                              <span class="wb-inv">{{::'DOSSIER_ID_INSTRUCT'|translate}}</span>
+                                        </span> -->
+                                            <sup id="tr4_ref">
+                                                <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                            </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.dossierId"
                                                            form-ref="transInfoCtrl.transInfoForm"
@@ -111,7 +123,7 @@
                                     </label>
                                 </div>
                     </div>
-                    <div>
+                    <!--<div>
                             <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
                                        update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
                                 <section aria-live="assertive">
@@ -123,18 +135,22 @@
                                     </div>
                                 </section>
                             </cmp-alert>
-                    </div>
+                    </div>-->
                     <div class="row" ng-if="!transInfoCtrl.finalState">
                                <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                     <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
-                                        <span class="field-name">{{::"PROD_NAME" |translate}}</span>
+                                        <span class="field-name">{{::"PROD_NAME" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <span title="{{::'EXPAND'|translate}} {{::'PRODUCT_INSTRUCT'|translate}}"
+                                       <!-- <span title="{{::'EXPAND'|translate}} {{::'PRODUCT_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
                                                 id="product-instructions-toggle"
                                                 data-ng-click="transInfoCtrl.addInstruct(1)">
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'PRODUCT_INSTRUCT'|translate}}</span>
+                                        </span> -->
+                                         <sup id="tr5_ref">
+                    <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.productNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"
@@ -146,10 +162,10 @@
                                              name="{{::transInfoCtrl.productNameId}}"
                                              data-ng-model="transInfoCtrl.transactionModel.ectd.productName"
                                              class="form-control full-width" maxlength="256" required >
-                                        </textarea>
+                                   </textarea>
                                 </div>
                     </div>
-                    <div>
+                    <!--<div>
                             <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="PRODUCT_INSTRUCT"
                                        update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
                                 <section aria-live="assertive">
@@ -161,7 +177,7 @@
                                     </div>
                                 </section>
                             </cmp-alert>
-                        </div>
+                        </div> -->
                     <div class="row">
                             <div class="form-group col-md-12"
                                  data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">
@@ -171,7 +187,8 @@
                                     <cmp-error-message field-name="transInfoCtrl.isNewActivityId"
                                                        form-ref="transInfoCtrl.transInfoForm"
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId])"
-                                                       error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
+                                                       error-types="transInfoCtrl.requiredOnly">
+                                    </cmp-error-message>
                                     <select id="{{::transInfoCtrl.isNewActivityId}}" name="{{::transInfoCtrl.isNewActivityId}}"
                                             data-ng-model="transInfoCtrl.transactionModel.transactionType"
                                             class="form-control" data-ng-change="transInfoCtrl.updateActivityType()"
@@ -251,13 +268,17 @@
                         <div class="row">
                             <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isAdminSubId].$invalid}">
                                 <label for="{{::transInfoCtrl.isAdminSubId}}" class="required full-width">
-                                    <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}</span>
+                                    <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <span title="{{::'EXPAND'|translate}} {{::'ADMIN_COMP_INSTRUCT'|translate}}"
+                                    <!--<span title="{{::'EXPAND'|translate}} {{::'ADMIN_COMP_INSTRUCT'|translate}}"
                                             class="btn rep-help-button-primary btn-xs"
                                             id="is-admin-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(7)">
                                         <span class="fa fa-question-circle fa-2x"></span>
                                         <span class="wb-inv">{{::'ADMIN_COMP_INSTRUCT'|translate}}</span>
+                                    </span> -->
+                                    <sup id="tr6_ref">
+                                    <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                    </sup>
                                     </span>
                                     <cmp-error-message field-name="transInfoCtrl.isAdminSubId"
                                                        form-ref="transInfoCtrl.transInfoForm"
@@ -273,7 +294,7 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!--<div class="row">
                             <div class="col-md-12">
                                 <cmp-alert ui-state="transInfoCtrl.alerts[7]" msg="ADMIN_COMP_INSTRUCT" update-state="transInfoCtrl.closeAlert(7)"
                                            type="alert-info">
@@ -285,9 +306,7 @@
                                     </div>
                                 </cmp-alert>
                             </div>
-                        </div>
-
-
+                        </div> -->
                         <div data-ng-show="transInfoCtrl.showAdminSub">
                             <div class="row">
                                 <div class="col-xs-12 form-group">

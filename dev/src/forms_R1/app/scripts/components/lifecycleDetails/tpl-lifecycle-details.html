@@ -54,12 +54,16 @@
                         <div class="form-group col-md-7"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId].$invalid}">
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
-                                <span class="field-name">{{::"CONTROL_NUM" |translate}}{{::"LEAST_6_DIGIT" |translate}}</span>
+                                <span class="field-name">{{::"CONTROL_NUM" |translate}}{{::"LEAST_6_DIGIT" |translate}}
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <span title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
+                                <!--<span title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
                                         class="btn rep-help-button-primary btn-xs"
                                         id="controlNum-instructions-toggle" data-ng-click="lifecycleCtrl.addInstruct(1)"><span
                                         class="fa fa-question-circle fa-2x"></span>
+                                </span> -->
+                                <sup id="tr7_ref">
+                                    <a class="fn-lnk" href="#tr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                </sup>
                                 </span>
                                 <cmp-error-message field-name="lifecycleCtrl.controlNumId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
@@ -94,36 +98,35 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <!--
-                            <div class="form-group col-md-12">
-                                <cmp-alert ui-state="lifecycleCtrl.alerts[0]" msg="SEQUENCE_INSTRUCT"
-                                           update-state="lifecycleCtrl.closeAlert(0)" type="alert-info">
-                                    <section aria-live="assertive">
-                                        <div ng-if="!lifecycleCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-en.html'">
-                                        </div>
-                                        <div ng-if="lifecycleCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-fr.html'">
-                                        </div>
-                                    </section>
-                                </cmp-alert>
-                            </div> -->
-                            <div class="form-group col-md-12">
-                                <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
-                                           update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
-                                    <section aria-live="assertive">
-                                        <div data-ng-if="!lifecycleCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
-                                        </div>
-                                        <div data-ng-if="lifecycleCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
-                                        </div>
-                                    </section>
-                                </cmp-alert>
-                            </div>
-                        </div>
-                    </div>
+                        <!--<div class="row">
+                           <div class="form-group col-md-12">
+                               <cmp-alert ui-state="lifecycleCtrl.alerts[0]" msg="SEQUENCE_INSTRUCT"
+                                          update-state="lifecycleCtrl.closeAlert(0)" type="alert-info">
+                                   <section aria-live="assertive">
+                                       <div ng-if="!lifecycleCtrl.isFrench()"
+                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-en.html'">
+                                       </div>
+                                       <div ng-if="lifecycleCtrl.isFrench()"
+                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-fr.html'">
+                                       </div>
+                                   </section>
+                               </cmp-alert>
+                           </div>
+                           <div class="form-group col-md-12">
+                               <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
+                                          update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
+                                   <section aria-live="assertive">
+                                       <div data-ng-if="!lifecycleCtrl.isFrench()"
+                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
+                                       </div>
+                                       <div data-ng-if="lifecycleCtrl.isFrench()"
+                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
+                                       </div>
+                                   </section>
+                               </cmp-alert>
+                           </div>
+                       </div>
+                   </div> -->
                     <div class="row">
                         <div class="form-group  col-md-7"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.regActivityId].$invalid}">

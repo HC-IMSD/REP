@@ -80,7 +80,10 @@ label > select {
 
 .rep-center {
     margin: 10px auto;
+}
 
+.rep-info-help:before {
+    content: "" !important;
 }
 
 .rep-help-button {
@@ -88,15 +91,13 @@ label > select {
     background-color: transparent;
     border: none;
 }
-.rep-help-button:focus {
-    outline: 2px dotted white;
-}
 
 .rep-help-button-primary {
     color: #1c578a;
     background-color: transparent;
     border: none;
 }
+
 .rep-help-button-primary:focus {
     outline: 2px dotted darkblue;
 }
@@ -233,4 +234,30 @@ input[type="date"] {
 ul.no-bullets li
 {
     list-style-type: none;
+}
+
+div .module-attention {
+    background-color: #fffcee;
+    outline: 1px solid #ffe75d;
+    background-position: 0 0;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+.rep-info-button {
+    background-color: transparent !important;
+    border: none !important;
+    margin-top: 5px;
+}
+
+
+.rep-info-button:focus {
+    outline: 2px dotted white
+
+}
+.ref-info-link {
+    width: auto !important;
+}
+.fa-info-circle:before {
+    color: white;
 }

@@ -64,6 +64,12 @@
         vm.applTypes = vm.companyService.getApplicationTypes();
         vm.company = vm.companyService.getModelInfo();
         vm.alerts = [false, false, false, false, false, false];
+        /**vm.alertAnchors = ["load-instructions-toggle",
+            "load-instructions-toggle",
+            "load-instructions-toggle",
+            "load-instructions-toggle",
+            "load-instructions-toggle",
+            "load-instructions-toggle"]; **/
         vm.updateSummary=false;
         vm.showErrorSummary=false;
         vm.privacyStat=false;
