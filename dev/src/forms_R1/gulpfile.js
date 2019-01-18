@@ -75,10 +75,14 @@ var homePath = {
     devInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html",
     test_en: "https://lam-dev.hres.ca/rep_test/index.html",
     test_fr: "https://lam-dev.hres.ca/rep_test/index-fr.html",
-    prod_en: "https://lam-dev.hres.ca/REP-Form/index.html",
-    prod_fr: "https://lam-dev.hres.ca/REP-Form/index-fr.html",
-    prodInt_en:"https://lam-dev.hres.ca/REP-Form-Internal/index.html",
-    prodInt_fr:"https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
+    prod_en: "https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/register-certificates.html",
+    prod_fr: "https://www.canada.ca/fr/sante-canada/services/medicaments-produits-sante/medicaments/demandes-presentations/lignes-directrices/registre-certificats.html",
+    prodInt_en: "https://lam-dev.hres.ca/REP-Form-Internal/index.html",
+    prodInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
+    // prod_en: "https://lam-dev.hres.ca/REP-Form/index.html",
+    // prod_fr: "https://lam-dev.hres.ca/REP-Form/index-fr.html",
+    // prodInt_en:"https://lam-dev.hres.ca/REP-Form-Internal/index.html",
+    // prodInt_fr:"https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
 
 };
 var deployType = {
@@ -2404,13 +2408,13 @@ gulp.task('prod-csp-compileHtml', gulp.series('prod-global-create-src-template',
     var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
     var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
     return (
-        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, englishInternalHtmlName, destPath, 'en', deployType.prod, frenchInternalHtmlName)
+        pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, englishInternalHtmlName, destPath, 'en', deployType.prodInt, frenchInternalHtmlName)
         &&
         pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, cspRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, englishHtmlName, destPath, 'en', deployType.prod, frenchHtmlName)
         &&
         pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, frenchHtmlName, destPath, 'fr', deployType.prod, englishHtmlName)
         &&
-        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, frenchInternalHtmlName, destPath, 'fr', deployType.prod, englishInternalHtmlName)
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, cspRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, frenchInternalHtmlName, destPath, 'fr', deployType.prodInt, englishInternalHtmlName)
     )
 }));
 
