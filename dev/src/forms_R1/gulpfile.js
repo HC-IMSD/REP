@@ -69,8 +69,10 @@ var paths = {
 };
 
 var homePath = {
-    dev_en: "https://lam-dev.hres.ca/rep-dev/index.html",
-    dev_fr: "https://lam-dev.hres.ca/rep-dev/index-fr.html",
+    dev_en: "https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/register-certificates.html",
+    dev_fr: "https://www.canada.ca/fr/sante-canada/services/medicaments-produits-sante/medicaments/demandes-presentations/lignes-directrices/registre-certificats.html",
+    devInt_en: "https://lam-dev.hres.ca/REP-Form-Internal/index.html",
+    devInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html",
     test_en: "https://lam-dev.hres.ca/rep_test/index.html",
     test_fr: "https://lam-dev.hres.ca/rep_test/index-fr.html",
     prod_en: "https://lam-dev.hres.ca/REP-Form/index.html",
@@ -83,7 +85,8 @@ var deployType = {
     dev: "DEV",
     test: "TEST",
     prod: "PROD",
-    prodInt: "PROD_INT"
+    prodInt: "PROD_INT",
+    devInt: "DEV_INT"
 }
 
 
@@ -805,6 +808,10 @@ pipes.getHomeAnchor = function (type, lang) {
     if (type === deployType.prod) {
         var homeEn = homePath.prod_en;
         var homeFr = homePath.prod_fr;
+    }
+    if (type === deployType.devInt) {
+        var homeEn = homePath.devInt_en;
+        var homeFr = homePath.devInt_fr;
     }
     if (type === deployType.prodInt) {
         var homeEn = homePath.prodInt_en;
@@ -1822,10 +1829,10 @@ gulp.task('dev-csp-htmlBuild', gulp.series('dev-csp-clean', 'dev-global-create-s
     var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
     var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
     var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
-    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchInternalHtmlName, 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy, null, englishInternalHtmlName);
+    pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchInternalHtmlName, 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deployType.devInt, null, englishInternalHtmlName);
     pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchHtmlName, 'cspAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy, null, englishHtmlName);
     pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, englishHtmlName, 'cspAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy, null, frenchHtmlName);
-    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, englishInternalHtmlName, 'cspAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy, null, frenchInternalHtmlName);
+    pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, englishInternalHtmlName, 'cspAppINT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deployType.devInt, null, frenchInternalHtmlName);
     return (
         pipes.cleanBuild(buildDir + paths.translations)
     );
