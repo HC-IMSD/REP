@@ -4,7 +4,7 @@
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-8">{{::'TRANSACTION_HDING'|translate}}
                     <sup id="tr2_ref">
-                        <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                        <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
                     </sup>
                 </h2>
                <!-- <div class="btn-group pull-right">
@@ -65,7 +65,7 @@
                                             <span class="wb-inv">{{::'COMPANY_ID_INSTRUCT'|translate}}</span>
                                         </span> -->
                                         <sup id="tr3_ref">
-                                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                                         </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyId"
@@ -104,7 +104,7 @@
                                              <span class="wb-inv">{{::'DOSSIER_ID_INSTRUCT'|translate}}</span>
                                         </span> -->
                                             <sup id="tr4_ref">
-                                                <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                                <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                             </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.dossierId"
@@ -149,7 +149,7 @@
                                             <span class="wb-inv">{{::'PRODUCT_INSTRUCT'|translate}}</span>
                                         </span> -->
                                          <sup id="tr5_ref">
-                    <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                    <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                 </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.productNameId"
@@ -261,7 +261,6 @@
                                             data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
                                         <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isNoc">
                                     </select>
-
                                 </label>
                             </div>
                         </div>
@@ -276,8 +275,8 @@
                                         <span class="fa fa-question-circle fa-2x"></span>
                                         <span class="wb-inv">{{::'ADMIN_COMP_INSTRUCT'|translate}}</span>
                                     </span> -->
-                                    <sup id="tr6_ref">
-                                    <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>*</a>
+                                    <sup id="tr2a_ref">
+                                    <a class="fn-lnk" href="#tr2a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.a</a>
                                     </sup>
                                     </span>
                                     <cmp-error-message field-name="transInfoCtrl.isAdminSubId"
@@ -509,7 +508,11 @@
         <div data-ng-if="transInfoCtrl.isFeesIndicated()">
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
-                    <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}</h2>
+                    <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}
+                        <sup id="tr2c_ref">
+                            <a class="fn-lnk" href="#tr2c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.c</a>
+                        </sup>
+                    </h2>
                    <!--
                     <div class="btn-group pull-right">
                         <button title="{{::'EXPAND'|translate}} {{::'REGULATORY_FEES'|translate}}"
@@ -520,17 +523,17 @@
                             <span class="wb-inv">{{::'REGULATORY_FEES'|translate}}</span>
                         </button>
                     </div> -->
-                    <div class="btn-group pull-right">
+                    <!-- <div class="btn-group pull-right">
                         <button title="{{::'EXPAND'|translate}} {{::'REGULATORY_FEES'|translate}}"
                                 class="btn-xs rep-help-button"
                                 id="fee-instruct-toggle" data-ng-click="transInfoCtrl.addInstruct(8)">
                             <span class="fa fa-question-circle fa-2x"></span>
                             <span class="wb-inv">{{::'REGULATORY_FEES'|translate}}</span>
                         </button>
-                    </div>
+                    </div> -->
                 </header>
                 <div class="panel-body">
-                    <div>
+                   <!-- <div>
                         <cmp-alert  ui-state="transInfoCtrl.alerts[8]"
                                     msg="REGULATORY_FEES"
                                     update-state="transInfoCtrl.closeAlert(8)"
@@ -544,7 +547,7 @@
                                 </div>
                             </section>
                         </cmp-alert>
-                    </div>
+                    </div> -->
                     <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"
                                           show-error-summary="transInfoCtrl.showSummary"
                                           update-error-summary="transInfoCtrl.updateErrorSummary()"
@@ -555,18 +558,22 @@
         <div>
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
-                    <h2 class="panel-title col-md-8">{{::'REG_CONTACT_THIS' |translate}}</h2>
-                    <div class="btn-group pull-right">
+                    <h2 class="panel-title col-md-8">{{::'REG_CONTACT_THIS' |translate}}
+                        <sup id="tr6_ref">
+                            <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
+                        </sup>
+                    </h2>
+                    <!--<div class="btn-group pull-right">
                         <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
                                 class="btn-xs rep-help-button"
                                 id="start-date-picker-toggle" data-ng-click="transInfoCtrl.addInstruct(3)">
                             <span class="fa fa-question-circle fa-2x"></span>
                             <span class="wb-inv">{{::'REG_ACTIVITY_INSTRUCT'|translate}}</span>
                         </button>
-                    </div>
+                    </div> -->
                 </header>
                 <div class="panel-body">
-                    <div>
+                   <!-- <div>
                         <cmp-alert ui-state="transInfoCtrl.alerts[3]" msg="REG_ACTIVITY_INSTRUCT"
                                    update-state="transInfoCtrl.closeAlert(3)" type="alert-info">
                             <section aria-live="assertive">
@@ -578,7 +585,7 @@
                                 </div>
                             </section>
                         </cmp-alert>
-                    </div>
+                    </div> -->
                     <div>
                            <h3 class="mrgn-tp-sm">{{::'COMPANY_INFO'|translate}}</h3>
                             <div class="row">
@@ -587,12 +594,15 @@
                                     <label for="{{::transInfoCtrl.companyNameId}}" class="required full-width">
                                         <span class="field-name">{{::"COMPANY_NOABBREV" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <span title="{{::'EXPAND'|translate}} {{::'COMPANY_INSTRUCT'|translate}}"
+                                        <sup id="tr7_ref">
+                                            <a class="fn-lnk" href="#tr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>7</a>
+                                        </sup>
+                                        <!--<span title="{{::'EXPAND'|translate}} {{::'COMPANY_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"
                                                 id="company-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(4)">
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'COMPANY_INSTRUCT'|translate}}</span>
-                                        </span>
+                                        </span> -->
                                         <cmp-error-message field-name="transInfoCtrl.companyNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId])"
@@ -603,7 +613,7 @@
                                                class="form-control full-width" required/>
 
                                     </label>
-                                    <div>
+                                   <!-- <div>
                                         <cmp-alert ui-state="transInfoCtrl.alerts[4]" msg="COMPANY_INSTRUCT"
                                                    update-state="transInfoCtrl.closeAlert(4)" type="alert-info">
                                             <section aria-live="assertive">
@@ -615,7 +625,7 @@
                                                 </div>
                                             </section>
                                         </cmp-alert>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 

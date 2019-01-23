@@ -1,9 +1,7 @@
 <ng-form name="roaRecCtrl.roaRecForm">
     <div class="container-fluid">
         <fieldset>
-            <legend>
-                {{'ROA_LBL' | translate}}&nbsp;{{roaRecCtrl.model.id}}
-            </legend>
+            <legend class="legend-rep">{{'ROA_LBL' | translate}}&nbsp;{{roaRecCtrl.model.id}}</legend>
             <div class="row" data-ng-class="{'has-error':roaRecCtrl.roaRecForm[roaRecCtrl.roaId].$invalid}">
                 <div class="col-md-6 form-group">
                     <label for="{{::roaRecCtrl.roaId}}" class="required">

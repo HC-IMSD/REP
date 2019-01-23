@@ -7,7 +7,7 @@
                            make-focused="ingRecCtrl.focusSummary" alias-list="ingRecCtrl.alias" show-errors="ingRecCtrl.showSummary"
                            update-errors="ingRecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
-            <legend>{{'INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}</legend>
+            <legend class="legend-rep">{{'INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-3" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.ingredRoleId].$invalid}">
                     <label for="{{::ingRecCtrl.ingredRoleId}}">
@@ -33,11 +33,14 @@
                         <label for="{{::ingRecCtrl.ingredName}}" class="required full-width"><span
                                 class="field-name">{{'ING_NAME'|translate}}</span>
                             <strong class="required">{{'REQUIRED' |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_NAME_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <sup id="dr9b1_ref">
+                                <a class="fn-lnk" href="#dr9b1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.1</a>
+                            </sup>
+                            <!--<button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_NAME_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="ingredient-name-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(4)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'INGREDIENT_NAME_INSTRUCT'|translate}}</span>
-                            </button>
+                            </button> -->
                             <cmp-error-message field-name="ingRecCtrl.ingredName"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.ingredName])"
@@ -54,11 +57,10 @@
                                        typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
                                        typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
                             </div>
-
                         </label>
                     </div>
                 </div>
-                <div class="row">
+               <!-- <div class="row">
                     <div class="col-md-12">
                         <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[4]"
                              class="alert-info" close="ingRecCtrl.closeAlert(4)">
@@ -72,22 +74,25 @@
                             </section>
                         </div>
                     </div>
-                </div>
+                </div>  -->
                 <div class="row" data-ng-if="!ingRecCtrl.isMedIng()">
                     <div class="form-group col-md-12">
                         <label for="variant_{{::$id}}">
                             <span class="field-name">{{'VARIANT_NAME'|translate}}</span>
-                            <span title="{{::'EXPAND'|translate}} {{::'VARIANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <sup id="dr9b2_ref">
+                                <a class="fn-lnk" href="#dr9b2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.2</a>
+                            </sup>
+                            <!--<span title="{{::'EXPAND'|translate}} {{::'VARIANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="variant-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(0)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'VARIANT_INSTRUCT'|translate}}</span>
-                            </span>
+                            </span> -->
                             <input type="text" id="variant_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.variant" maxlength="60"
                                    data-ng-model-options="{ debounce: '$inherit'}" size="60"
                                    class="form-control full-width" name="variant"/>
                         </label>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-12">
                             <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[0]"
                                  class="alert-info" close="ingRecCtrl.closeAlert(0)">
@@ -101,17 +106,20 @@
                                 </section>
                             </div>
                         </div>
-                    </div>
+                    </div>  -->
                     <div class="form-group col-md-12"
                          data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.purposeId].$invalid}">
                         <label for="{{::ingRecCtrl.purposeId}}" class="required">
                             <span class="field-name">{{'PURPOSE'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <span title="{{::'EXPAND'|translate}} {{::'PURPOSE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <sup id="dr9b3_ref">
+                                <a class="fn-lnk" href="#dr9b3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.3</a>
+                            </sup>
+                            <!--<span title="{{::'EXPAND'|translate}} {{::'PURPOSE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="purpose-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(5)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'PURPOSE_INSTRUCT'|translate}}</span>
-                            </span>
+                            </span> -->
                             <cmp-error-message field-name="ingRecCtrl.purposeId"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.purposeId])"
@@ -122,7 +130,7 @@
 
                         </label>
                     </div>
-                    <div class="row">
+                   <!-- <div class="row">
                         <div class="col-md-12">
                             <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[5]"
                                  class="alert-info" close="ingRecCtrl.closeAlert(5)">
@@ -136,7 +144,7 @@
                                 </section>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="form-group col-md-12"
                          data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nIngredName].$invalid}">
                         <label for="{{::ingRecCtrl.nIngredName}}" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
@@ -149,12 +157,11 @@
                                    data-ng-model-options="{ debounce: $inherit}"  name="{{::ingRecCtrl.nIngredName}}"
                                    class="form-control full-width" name="nonmedName" data-ng-required="true" maxlength="100"
                                    size="100"/>
-
                         </label>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="{{::ingRecCtrl.casId}}">
                             <span class="field-name">{{'CAS_NUM'|translate}}</span>
                             <input type="text" id="{{::ingRecCtrl.casId}}" data-ng-model="ingRecCtrl.ingModel.cas" maxlength="12"
@@ -163,21 +170,24 @@
                         </label>
 
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-4">
                         <label for="{{::ingRecCtrl.standardId}}">
                             <span class="field-name">{{'STANDARD'|translate}}</span>
-                            <span title="{{::'EXPAND'|translate}} {{::'STANDARD_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <sup id="dr9b4_ref">
+                                <a class="fn-lnk" href="#dr9b4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.4</a>
+                            </sup>
+                           <!-- <span title="{{::'EXPAND'|translate}} {{::'STANDARD_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="standard-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(1)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'STANDARD_INSTRUCT'|translate}}</span>
-                            </span>
+                            </span>  -->
                             <input type="text" id="{{::ingRecCtrl.standardId}}" data-ng-model="ingRecCtrl.ingModel.standard"
                                    data-ng-model-options="{ debounce: '$inherit'}"
                                    class="form-control full-width" name="standardVal" size="40" maxlength="40"/>
                         </label>
                     </div>
                 </div>
-                <div class="row">
+               <!-- <div class="row">
                     <div class="col-md-12">
                         <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[1]"
                              class="alert-info" close="ingRecCtrl.closeAlert(1)">
@@ -191,12 +201,11 @@
                             </section>
                         </div>
                     </div>
-                </div>
-
+                </div> -->
                 <div class="row">
                     <div class="col-md-12 form-group">
                     <fieldset>
-                        <legend>
+                        <legend class="legend-rep">
                             <span class="field-name">{{'STRENGTH'|translate}}</span>
                         </legend>
 
@@ -388,25 +397,6 @@
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId])"
                                                            error-types="ingRecCtrl.requiredOnly">
                                         </cmp-error-message>
-                                        <!--<div class="rep-pad-top">-->
-                                            <!--<div class="rep-error" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId].$invalid}">-->
-                                                <!--ui-select ng-model="ingRecCtrl.ingModel.perMeasUnits" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}"
-                                                           ng-model-options="{ debounce: 0}"
-                                                           class="rep-selectize-font full-width" required>
-                                                    <ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"
-                                                                     class="rep-selectize-font form-control">
-                                                        {{$select.selected[ingRecCtrl.lang]}}
-                                                    </ui-select-match>
-                                                    <ui-select-choices
-                                                            repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"
-                                                            class="rep-selectize-font">
-                                                        <span ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>
-                                                    </ui-select-choices>
-                                                </ui-select-->
-                                                </select>
-                                            <!--</div>-->
-                                        <!--</div>-->
-
                                         <input type="text" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnitsHtml" value="ingRecCtrl.ingModel.perMeasUnitsHtml" data-ng-blur="ingRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
                                         <datalist id="unitsList2" class="rep-selectize-dropdown rep-selectize-font">
                                             <option data-ng-repeat="unit in ingRecCtrl.UnitsList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
@@ -459,11 +449,15 @@
                         <label for="{{::ingRecCtrl.isNanoMaterialId}}" class="required">
                             <span class="field-name">{{'IS_NANO_MATERIAL'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'IS_NANO_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <sup id="dr9b5_ref">
+                                <a class="fn-lnk" href="#dr9b5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.5</a>
+                            </sup>
+
+                           <!-- <button title="{{::'EXPAND'|translate}} {{::'IS_NANO_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="is-nano-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(2)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'IS_NANO_INSTRUCT'|translate}}</span>
-                            </button>
+                            </button> -->
                             <cmp-error-message field-name="ingRecCtrl.isNanoMaterialId"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.isNanoMaterialId])"
@@ -509,7 +503,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-md-12">
                         <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[2]"
                              class="alert-info" close="ingRecCtrl.closeAlert(2)">
@@ -523,18 +517,21 @@
                             </section>
                         </div>
                     </div>
-                </div>
+                </div>  -->
                 <div class="row">
                     <div class="form-group col-xs-12"
                          data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.animalHumanSrcId].$invalid}">
                         <label for="{{::ingRecCtrl.animalHumanSrcId}}" class="required">
                             <span class="field-name">{{'ANIMAL_HUMAN_SOURCED'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                            <sup id="dr9b6_ref">
+                                <a class="fn-lnk" href="#dr9b6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.6</a>
+                            </sup>
+                           <!-- <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                                     id="is-sourced-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(3)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'AH_SOURCED_INSTRUCT'|translate}}</span>
-                            </button>
+                            </button> -->
                         </label>
                         <cmp-error-message field-name="ingRecCtrl.animalHumanSrcId"
                                            form-ref="ingRecCtrl.activeIngForm"
@@ -544,11 +541,9 @@
                                 data-ng-required="true" class="form-control" name="{{::ingRecCtrl.animalHumanSrcId}}"
                                 data-ng-options="val |translate for val in  ingRecCtrl.yesNoList">
                         </select>
-
-
                     </div>
                 </div>
-                <div class="row">
+               <!-- <div class="row">
                     <div class="col-md-12">
                         <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[3]"
                              class="alert-info" close="ingRecCtrl.closeAlert(3)">
@@ -562,7 +557,7 @@
                             </section>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="row">
                     <div class="col-xs-10">
                         <div data-ng-if="ingRecCtrl.isAnimalHumanSourced()" class="alert alert-info"

@@ -10,15 +10,18 @@
                            make-focused="" alias-list="formulRecCtrl.alias" show-errors="formulRecCtrl.showSummary"
                            update-errors="formulRecCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
-            <legend>
+            <legend class="legend-rep">
                 <span>{{'FORMULATION_DETAILS'|translate}}&nbsp;{{formulRecCtrl.frmModel.formulationId}}</span>
-                <button title="{{::'EXPAND'|translate}} {{::'FORM_REC_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
+                <sup id="dr91_ref">
+                    <a class="fn-lnk" href="#dr91"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9a</a>
+                </sup>
+                <!--<button title="{{::'EXPAND'|translate}} {{::'FORM_REC_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                         id="form-id-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(0)">
                     <span class="fa fa-question-circle fa-2x"></span>
                     <span class="wb-inv">{{::'FORM_REC_INSTRUCT'|translate}}</span>
-                </button>
+                </button> -->
             </legend>
-            <div class="row">
+           <!-- <div class="row">
                 <div class="col-md-12">
                     <div>
                         <cmp-alert  ui-state="formulRecCtrl.alerts[0]"
@@ -36,7 +39,7 @@
                         </cmp-alert>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row">
                 <div class="form-group col-md-12">
@@ -106,18 +109,22 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading clearfix">
-                        <h3 class="panel-title  col-md-8">C. {{'INGREDIENTS'|translate}}</h3>
-                        <div class="btn-group pull-right">
+                        <h3 class="panel-title  col-md-8">C. {{'INGREDIENTS'|translate}}
+                            <sup id="dr92_ref">
+                                <a class="fn-lnk" href="#dr92"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b</a>
+                            </sup>
+                        </h3>
+                        <!-- <div class="btn-group pull-right">
                             <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_INSTRUCT'|translate}}"
                                     class="btn-xs rep-help-button-primary btn-xs"
                                     id="ingredient-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(3)">
                                 <span class="fa fa-question-circle fa-2x"></span>
                                 <span class="wb-inv">{{::'INGREDIENT_INSTRUCT'|translate}}</span>
                             </button>
-                        </div>
+                        </div> -->
                     </header>
                     <div class="panel-body">
-                        <div class="row">
+                       <!--  <div class="row">
                             <div class="col-md-12">
                                 <div>
                                     <cmp-alert  ui-state="formulRecCtrl.alerts[3]"
@@ -135,7 +142,7 @@
                                     </cmp-alert>
                                 </div>
                             </div>
-                        </div>
+                        </div>  -->
                         <div>
                             <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
                                              error-summary-update="formulRecCtrl.errorSummaryUpdate"
@@ -152,31 +159,11 @@
                     <label for="{{::formulRecCtrl.isAnimalHumanMaterialId}}" class="required rep-required-offset full-width">
                         <span class="field-name">D. {{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
-                        <span title="{{::'EXPAND'|translate}} {{::'MATERIALS_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                id="is-ah-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(1)">
-                            <span class="fa fa-question-circle fa-2x"></span>
-                            <span class="wb-inv">{{::'MATERIALS_INSTRUCT'|translate}}</span>
-                        </span>
+                        <sup id="dr93_ref">
+                            <a class="fn-lnk" href="#dr93"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9c</a>
+                        </sup>
                     </label>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div>
-                                    <cmp-alert  ui-state="formulRecCtrl.alerts[1]"
-                                                msg="MATERIALS_INSTRUCT"
-                                                update-state="formulRecCtrl.closeAlert(1)"
-                                                type="alert-info">
-                                    <section aria-live="assertive">
-                                        <div data-ng-if="!formulRecCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-material-used-en.html'">
-                                        </div>
-                                        <div data-ng-if="formulRecCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/drug/tpl-drugProduct-material-used-fr.html'">
-                                        </div>
-                                    </section>
-                                    </cmp-alert>
-                                </div>
-                            </div>
-                        </div>
+
                     <div  class="col-md-12">
                     <cmp-error-message field-name="formulRecCtrl.isAnimalHumanMaterialId"
                                        form-ref="formulRecCtrl.formulationForm"
@@ -207,17 +194,13 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">E. {{'CONTAINER_TYPES'|translate}}</h3>
-                        <!-- <strong id="nocontainer-error" class="error" ng-if="formulRecCtrl.noContainers()">
-                                 <span class="label label-danger" ng-messages="formulationRecForm.noContainerFld.$error">
-                                     <span ng-message="required"><span translate="MSG_ERR_ONE_CONTAINER"></span></span>
-                                 </span>
-                         </strong>-->
                     </header>
                     <div class="panel-body">
                         <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
                                                  error-summary-update="formulRecCtrl.errorSummaryUpdate"
                                                  show-error-summary="formulRecCtrl.showSummary"
-                                                 on-update="formulRecCtrl.updateContainerTypeList(list)"></cmp-container-type-list>
+                                                 on-update="formulRecCtrl.updateContainerTypeList(list)">
+                        </cmp-container-type-list>
                     </div>
                 </section>
             </div>
@@ -225,58 +208,31 @@
                 <section class="panel panel-default">
                     <header class="panel-heading">
                         <h3 class="panel-title">F. {{'ROA_TITLE'|translate}}</h3>
-                        <!-- <strong id="noroa-error" class="error" ng-if="formulRecCtrl.noROA()">
-                                 <span class="label label-danger" ng-messages="formulationRecForm.noROAFld.$error">
-                                     <span ng-message="required"><span translate="MSG_ERR_ONE_ROA"></span></span>
-                                 </span>
-                         </strong>-->
                     </header>
                     <div class="panel-body">
-                        <!--   <input type="text" required ng-show="false" name="{{::formulRecCtrl.noRoaId}}" id="{{::formulRecCtrl.noRoaId}}"
-                                  aria-hidden="true" data-ng-model="formulRecCtrl.noROAValues"/>-->
                         <cmp-roa-list records="formulRecCtrl.frmModel.routeAdmins"
-                                      show-errors="formulRecCtrl.showSummary"></cmp-roa-list>
+                                      show-errors="formulRecCtrl.showSummary">
+                        </cmp-roa-list>
                     </div>
                 </section>
             </div>
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading">
-                        <h3 class="panel-title col-md-8">G. {{'COUNTRIES_MANUFACT'|translate}}</h3>
-                        <div class="btn-group pull-right rep-bottom">
-                            <button title="{{::'EXPAND'|translate}} {{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="countries-manu-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(2)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'COUNTRIES_MANUFACT_INSTRUCT'|translate}}</span>
-                            </button>
-                        </div>
+                        <h3 class="panel-title">G. {{'COUNTRIES_MANUFACT'|translate}}
+                            <sup id="dr94_ref">
+                                <a class="fn-lnk" href="#dr94"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9d</a>
+                            </sup>
+                        </h3>
                     </header>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div>
-                                <cmp-alert  ui-state="formulRecCtrl.alerts[2]"
-                                            msg="COUNTRIES_MANUFACT_INSTRUCT"
-                                            update-state="formulRecCtrl.closeAlert(2)"
-                                            type="alert-info">
-                                <section aria-live="assertive">
-                                    <div data-ng-if="!formulRecCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-manu-country-en.html'">
-                                    </div>
-                                    <div data-ng-if="formulRecCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-manu-country-fr.html'">
-                                    </div>
-                                </section>
-                                </cmp-alert>
-                            </div>
-                        </div>
-                    </div>
                     <div class="panel-body">
                         <input type="hidden" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
                                  aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" with-unknown="false"
                                           on-update="formulRecCtrl.updateCountryList(list)"
                                           show-errors="formulRecCtrl.showSummary"
-                                          field-label="COUNTRY_MAN"></cmp-country-list>
+                                          field-label="COUNTRY_MAN">
+                        </cmp-country-list>
                     </div>
                 </section>
             </div>

@@ -6,7 +6,7 @@
                            make-focused="mirCtrl.focusSummary" alias-list="mirCtrl.alias" show-errors="mirCtrl.showSummary"
                            update-errors="mirCtrl.updateSummary"></cmp-error-summary>
         <fieldset>
-            <legend>{{'MATERIAL_DETAILS'|translate}}&nbsp;{{mirCtrl.recordIndex+1}}</legend>
+            <legend class="legend-rep">{{'MATERIAL_DETAILS'|translate}}&nbsp;{{mirCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-12"
                      data-ng-class="{'has-error':mirCtrl.materialIngRecordForm[mirCtrl.nameId].$invalid}">
@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-2">
+                <div class="form-group col-md-3">
                     <label for="{{::mirCtrl.casId}}"><span class="field-name">{{'CAS_NUM'|translate}}</span></label>
                     <input type="text" id="{{::mirCtrl.casId}}" data-ng-model="mirCtrl.mirModel.cas"
                            data-ng-model-options="{ debounce: $inherit}"

@@ -1,13 +1,13 @@
 <ng-form name="ar.roleForm">
     <fieldset id="{{::ar.fieldsetId}}">
-        <legend class="h5">
+        <legend class="legend-rep">
             <span class="field-name">{{::ar.legendText |translate}}</span></span>
             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-            <sup id="ro1_ref" data-ng-if="!ar.isContact">
-                <a class="fn-lnk" href="#ro1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>A1</a>
+            <sup id="3a_ref" data-ng-if="!ar.isContact">
+                <a class="fn-lnk" href="#3a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3.a</a>
             </sup>
-            <sup id="ro2_ref" data-ng-if="ar.isContact">
-                <a class="fn-lnk" href="#ro2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>A2</a>
+            <sup id="4a_ref" data-ng-if="ar.isContact">
+                <a class="fn-lnk" href="#4a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.a</a>
             </sup>
         </legend>
         <!-- <label class="required">

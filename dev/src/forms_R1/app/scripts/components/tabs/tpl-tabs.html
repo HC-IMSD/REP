@@ -8,15 +8,18 @@
                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
             </a>
         </li>
-        <li>
+        <sup id="dr10_ref">
+            <a class="fn-lnk" href="#dr10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>10</a>
+        </sup>
+        <!--<li>
             <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                     id="ah-sourced-instructions-toggle" data-ng-click="tabsCtrl.addInstruct(0)">
                 <span class="fa fa-question-circle fa-2x rep-pad-top-10"></span>
                 <span class="wb-inv">{{::'AH_SOURCED_INSTRUCT'|translate}}</span>
             </button>
-        </li>
+        </li> -->
     </ul>
-    <div class="row">
+    <!--<div class="row">
         <div class="col-md-12">
             <div>
                 <cmp-alert  ui-state="tabsCtrl.alerts[0]"
@@ -34,7 +37,7 @@
                 </cmp-alert>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="tabpanels">
         <ng-form name="tabsCtrl.tabs[0].form">
             <div id="formulations-panel" role="tabpanel" class="out">
