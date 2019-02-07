@@ -15,12 +15,12 @@
   "PROJ_MANAGER_NAME": "Name of Regulatory Project Manager, if known",
   "DATED": "Dated (DD/MM/YYYY)",
   "START_DATE": "Start Date (DD/MM/YYYY)",
-  "END_DATE": "End Date (YYYY-MM-DD)",
+  "END_DATE": "End Date (DD/MM/YYYY)",
   "REG_ACTIVITY": "Regulatory Activity",
   "REG_ACTIVITY_TYPE": "Regulatory Activity Type",
   "SEQUENCE_TYPE": "Regulatory Transaction Description",
   "VERSION_NO": "Version Number",
-  "BRIEF_DESC": "Description",
+  "BRIEF_DESC": "Brief Description",
   "ADMINISTRATIVE": "Administrative",
   "BENEFIT_RISK_ASSESS": "Benefit Risk Assessment",
   "CANCEL_LETTER": "Cancellation Letter",
@@ -93,7 +93,7 @@
   "CONSENT_LTR":"Consent Letter",
   "DATA_PROTECT_CORRESP":"Correspondence - Data Protection",
   "CHOOSE_REQUEST":"Choose a requester",
-  "TRANSACT_INSTRUCT":"Regulatory Instructions",
+  "TRANSACT_INSTRUCT":"Regulatory Transaction Instructions",
   "LIST_DESCRIPT":"List Description",
   "SEQUENCE_CLEANUP":"eCTD Dossier Clean-up",
 
@@ -149,7 +149,7 @@
   "LIFECYCLECTRL.LIFECYCLEDETAILSFORM":"with a Transaction Details Record",
   "IS_NEW_ACTIVITY":"Is this transaction for a new or existing regulatory activity?",
   "IS_SIGNED_3RD_PARTY": "Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
-  "AUT_LETTER_NOTE": "A letter of authorization signed by the manufacturer/sponsor company must be provided in folder 1.2.6 of the regulatory transaction.",
+  "AUT_LETTER_NOTE": "A letter of authorization signed by the manufacturer/sponsor company must be provided in section 1.2.6 of the regulatory transaction.",
   "IS_PRIORITY":"Was this regulatory activity approved for priority review?",
   "IS_NOC":"Was this regulatory activity approved for NOC/C review?",
   "IS_ADMIN_SUBMISSION": "Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?",
@@ -160,5 +160,6 @@
   "B14-20160301-09":	"Pharmaceutical",
   "B14-20160301-02":	"Biological",
   "B14-20160301-10":	"Post-Market Vigilance",
-  "B14-20160301-06":	"Consumer Health Product"
+  "B14-20160301-06":	"Consumer Health Product",
+  "RESET": "RESET"
 }

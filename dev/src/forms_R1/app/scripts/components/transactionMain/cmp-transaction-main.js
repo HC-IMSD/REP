@@ -171,12 +171,23 @@
                 //vm.transaction.isSolicited = "";
                 //vm.transaction.solicitedRequester = "";
                 //vm.transaction.confirmContactValid = false;
-                //console.log( "vm.isFinal_main " + vm.isFinal);
-                if (vm.isFinal) {
-                    vm.transaction.ectd.lifecycleRecord =[];
-                }
             }
         }
+
+        vm.disableFinalXmlBtn = function () {
+            if(vm.isFinal)
+            {
+                if( vm.transaction.resetBtnClicked)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            return false;
+        };
 
         vm.getNewRepContact = function () {
             return vm.transactionService.createRepContact();

@@ -117,7 +117,8 @@
                         {{::'SAVE_WORKING'|translate}}
                     </button>
                     <button class="btn  btn-primary btn-lg active" formnovalidate id="btn_xmlSave"
-                            data-ng-click="main.saveXML()">{{::'GENERATE_FINAL'|translate}}
+                            data-ng-click="main.saveXML()"
+                            data-ng-disabled="main.disableFinalXmlBtn()">{{::'GENERATE_FINAL'|translate}}
                     </button>
                     <sup id="tr8_ref">
                         <a class="fn-lnk" href="#tr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>8</a>

@@ -14,6 +14,7 @@
 	<!-- DOSSIER_ENROL is the root element-->
 	<!-- REP Dossier Level element definitions-->
 	<hpfb:element name="DOSSIER_ENROL" type="dossier_enrol_content"/>
+	<hpfb:element name="template_type" type="hpfb:string"/>
 	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
 	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
 	<hpfb:element name="application_type" type="rep_type"/>
@@ -51,6 +52,7 @@
 	<!-- Main references-->
 	<hpfb:complexType name="dossier_enrol_content">
 		<hpfb:sequence>
+			<hpfb:element ref="template_type"/>
 			<hpfb:element ref="company_id"/>
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="related_information"/>

@@ -156,6 +156,7 @@
             if (!jsonObj) return null;
             var baseDossier = {};
             //order is important!!! Must match schema
+            baseDossier.template_type = "PHARMA";
             baseDossier.company_id = jsonObj.companyID;
             baseDossier.dossier_id = jsonObj.dossierID;
             baseDossier.related_information = jsonObj.relatedInfo;

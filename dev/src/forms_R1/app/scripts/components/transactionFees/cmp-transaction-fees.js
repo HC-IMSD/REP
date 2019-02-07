@@ -124,9 +124,7 @@
 
                 return true;
             }
-            else {
-                return false;
-            }
+
             vm.model.requiredDocs.deferralStat = false;
             return false;
         };

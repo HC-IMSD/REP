@@ -97,7 +97,8 @@
 
         vm.updateOtherState = function (ctrl, toCheck) {
             vm.oneSelected(ctrl, toCheck);
-            vm.deselectImporter({state: vm.roleModel.manufacturer || vm.roleModel.mailing || vm.roleModel.billing})
+            vm.deselectImporter({state: vm.roleModel.manufacturer})
+            //vm.deselectImporter({state: vm.roleModel.manufacturer || vm.roleModel.mailing || vm.roleModel.billing})
         };
 
 
