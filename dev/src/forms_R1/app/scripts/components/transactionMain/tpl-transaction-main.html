@@ -59,17 +59,18 @@
                 </div>
                 <div class="form-group col-md-6">
                     <button class="btn  btn-primary btn-lg active" formnovalidate id="btn_xmlSave"
-                            ng-click="main.saveXML()">{{::'GENERATE_FINAL'|translate}}
+                            ng-click="main.saveXML()"
+                            ng-disabled="main.disableFinalXmlBtn()">{{::'GENERATE_FINAL'|translate}}
                     </button>
-                    <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                            id="save-instructions-toggle" ng-click="main.addInstruct(1)"><span
-                            class="fa fa-question-circle fa-2x"></span>
+                    <button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
+                            class="btn rep-help-button-primary btn-xs"
+                            id="save-instructions-toggle" ng-click="main.addInstruct(1)">
+                        <span class="fa fa-question-circle fa-2x"></span>
                     </button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-10">
-
                 <cmp-alert ui-state="main.alerts[1]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(1)"
                            type="alert-info">
                     <section aria-live="assertive">
