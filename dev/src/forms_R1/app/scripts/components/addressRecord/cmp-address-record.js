@@ -45,11 +45,12 @@
 
             }
         });
-    addressRecCtrl.$inject = ['$scope', 'CANADA', '$filter', 'getCountryAndProvinces','INTERNAL_TYPE', 'EXTERNAL_TYPE'];
+    addressRecCtrl.$inject = ['$scope', 'CANADA', '$filter', 'getCountryAndProvinces','$translate', 'INTERNAL_TYPE', 'EXTERNAL_TYPE'];
 
-    function addressRecCtrl($scope, CANADA,$filter, getCountryAndProvinces, INTERNAL_TYPE, EXTERNAL_TYPE) {
+    function addressRecCtrl($scope, CANADA,$filter, getCountryAndProvinces, $translate, INTERNAL_TYPE, EXTERNAL_TYPE) {
         var vm = this;
         vm.des = false;
+        vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.isContact = false;
         vm.isEditable = true;
         vm.formAmend = false;
@@ -78,6 +79,7 @@
             stateList: "",
             stateText: "",
             country: "",
+            countryHtml: "",
             postalCode: ""
             /**importerProducts: {
                 selectedProducts: "",
@@ -220,6 +222,7 @@
                 // vm.addressModel.addressRole.mailing = false;
                 // vm.addressModel.addressRole.billing = false;
                 vm.addressModel.country=$filter('filter')(getCountryAndProvinces.getCountries(),{id: CANADA})[0];
+                vm.addressModel.countryHtml = vm.addressModel.country[vm.lang];
                 vm.updateCountry++;
 
             };

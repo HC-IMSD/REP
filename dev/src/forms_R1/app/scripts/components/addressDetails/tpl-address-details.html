@@ -39,7 +39,7 @@
                     </cmp-error-message>
                 </label>
                 <input type="text" id="{{::adr.countryId}}" name="{{::adr.countryId}}"
-                       data-ng-model="adr.addressModel.countryHtml" value="adr.addressModel.countryHtml"
+                       data-ng-model="adr.addressModel.countryHtml" value="adr.addressModel.countryHtml" data-ng-disabled="!adr.isCountryEditable()"
                        data-ng-blur="adr.countryChange()" list="countryList" required class="rep-selectize-font rep-selectize-dropdown form-control"/>
                 <datalist id="countryList" class="rep-selectize-dropdown rep-selectize-font">
                     <option data-ng-repeat="countryRecord in adr.countryList" value="{{countryRecord[adr.lang]}}" label="{{countryRecord[adr.lang]}}"/>
