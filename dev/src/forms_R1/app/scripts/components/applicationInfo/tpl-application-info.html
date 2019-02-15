@@ -41,14 +41,14 @@
                 </label>
                 <label for="{{::infoCtrl.fieldId}}" class="full-width" data-ng-if="infoCtrl.isDossier" data-ng-class="{'required':!infoCtrl.isExtern()}">{{infoCtrl.fieldIdLabel |translate}}
                     <strong data-ng-if="!infoCtrl.isExtern()" class="required"> {{"REQUIRED" |translate}}</strong>
-                    <strong id="idType-error" class="error">
-                        <span class="label label-danger" data-ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid"
+                    <strong id="idType-error" class="error" data-ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid">
+                        <span class="label label-danger"
                               data-ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
                             <span data-ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
                             <span data-ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
                         </span>
                     </strong>
-                    <div class="rep-input-group mrgn-tp-0" data-ng-if="infoCtrl.isDossier">
+                    <div class="rep-input-group mrgn-tp-0" data-ng-if="infoCtrl.isDossier" style="margin-top:5px;">
                         <span class="input-group-addon">HC6-024-</span>
                         <div data-ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid}">
                             <input type="text" class="form-control full-width" id="{{::infoCtrl.fieldId}}"
