@@ -17,8 +17,9 @@
             return function (options) {
                 var deferred = $q.defer();
                 var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
-                var raTypeUrl=RELATIVE_FOLDER_DATA + "raType.json";
-                var feeUrl=RELATIVE_FOLDER_DATA + "feeClass.json";
+                var raTypeUrl= RELATIVE_FOLDER_DATA + "raType.json";
+                var feeUrl= RELATIVE_FOLDER_DATA + "feeClass.json";
+                var mitigationUrl = RELATIVE_FOLDER_DATA + "mitigationType.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
                     .then(function (response) {
@@ -28,8 +29,6 @@
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
                         return $http.get(raTypeUrl);
-                        //return $http.get(contactsUrl);
-
                     })
                   .then(function (response) {
                         //PROCESS raType list data
@@ -40,10 +39,18 @@
                       return $http.get(feeUrl);
                     })
                     .then(function (response) {
-                        //PROCESS fee url list data
+                        //PROCESS fee  list data
                         var newList = _createSortedArray(response.data, options.key);
+                        var translateList = _createTranslateList(newList, options.key);
                         TransactionLists.createFeeTypes(newList);
-                       // angular.extend(resultTranslateList, translateList);
+                        angular.extend(resultTranslateList, translateList);
+                        return $http.get(mitigationUrl);
+                    })
+                    .then(function (response) {
+                        //PROCESS mitigation url list data
+                        var newList = _createSortedArray(response.data, options.key);
+                        TransactionLists.createMitigationList(newList);
+                        //angular.extend(resultTranslateList, translateList);
                         return response.data;
                     })
 

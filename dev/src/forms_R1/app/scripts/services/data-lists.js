@@ -270,7 +270,6 @@
             });
             return deferred.promise;
         }
-
     }
 
 

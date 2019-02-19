@@ -3,20 +3,6 @@
            ng-model="lifeListCtrl.oneRecord" required/>
     <input ng-if="lifeListCtrl.isSelectedRecord()" type="hidden" id="saveLifeRec_{{$id}}" name="saveLifeRec_{{$id}}"
            ng-model="lifeListCtrl.oneRecord" required/>
-    <!--
-    <div class="row" ng-if="!lifeListCtrl.finalState && lifeListCtrl.ectdValue">
-        <div class="col-xs-4 form-group">
-            <label for="startSeq"> Starting sequence number
-                <input id="startSeq" type="number" step="1" style="width: 6em"
-                       ng-model="lifeListCtrl.startingSequence" min="0"/>
-            </label>
-        </div>
-        <div class="col-xs-4">
-            <button class="btn btn-default btn-sm" ng-click="lifeListCtrl.setStartingSequence()">Update Sequence
-            </button>
-        </div>
-    </div> -->
-
     <div>
         <cmp-expanding-table list-items="lifeListCtrl.lifecycleList"
                              reset-to-collapsed="lifeListCtrl.resetCollapsed"

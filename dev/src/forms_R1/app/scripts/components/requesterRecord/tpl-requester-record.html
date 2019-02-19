@@ -1,54 +1,5 @@
 <ng-form name="requesterRecCtrl.requesterForm">
     <div class="container-fluid">
-        <!--div class="row">
-            <div class="form-group col-md-6">
-                <label for="{{::requesterRecCtrl.solictedRqId}}" class="required full-width">
-                    <span class="field-name">{{::"SOLICITED_RQ" |translate}}</span>
-                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                    <div class="rep-pad-top">
-                        <div class="rep-error" ng-class="{'has-error':requesterRecCtrl.requesterForm[requesterRecCtrl.solictedRqId].$invalid}">
-                            <ui-select ng-model="requesterRecCtrl.model.solicitedRequester"
-                                       id="{{::requesterRecCtrl.solictedRqId}}" name="{{::requesterRecCtrl.solictedRqId}}"
-                                       on-select="requesterRecCtrl.requesterChanged($item, $model)" required
-                                       ng-disabled="false" title="{{::'CHOOSE_REQUEST|translate'}}"
-                                       class="rep-selectize-font full-width">
-                                <ui-select-match placeholder="Select or Search for requester"
-                                                 class="rep-selectize-font rep-selectize-dropdown form-control">
-                                    {{$select.selected['en']}}
-                                </ui-select-match>
-                                <ui-select-choices
-                                        repeat="contact in requesterRecCtrl.requesterList  | filter:{['en']: $select.search}"
-                                        class="rep-selectize-font">
-                                    <span ng-bind-html="contact.en | highlight: $select.search"></span>
-                                </ui-select-choices>
-                            </ui-select>
-                        </div>
-                    </div>
-                    <cmp-error-message field-name="requesterRecCtrl.solictedRqId"
-                                       form-ref="requesterRecCtrl.requesterForm"
-                                       show-error="requesterRecCtrl.showError(requesterRecCtrl.requesterForm[requesterRecCtrl.solictedRqId])"
-                                       error-types="requesterRecCtrl.requiredOnly"></cmp-error-message>
-                </label>
-            </div>
-            <div class="form-group col-md-6"
-             ng-class="{'has-error':requesterRecCtrl.requesterForm[requesterRecCtrl.solicitedOtherId].$invalid}"
-             ng-show="requesterRecCtrl.model.solicitedRequester.id === 'OTHER'">
-                <label for="{{::requesterRecCtrl.solicitedOtherId}}" class="required full-width">
-                    <span class="field-name">{{::"SOLICITED_RQ_OTHER" |translate}}</span>
-                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                    <textarea maxlength="640" size="640" id="{{::requesterRecCtrl.solicitedOtherId}}"
-                              name="{{::requesterRecCtrl.solicitedOtherId}}"
-                              ng-model="requesterRecCtrl.model.otherRequesterDetails"
-                              class="form-control full-width rep-margin-top" rows="2"
-                              ng-required="requesterRecCtrl.showOtherSolicitedDetail"></textarea>
-                    <cmp-error-message field-name="requesterRecCtrl.solicitedOtherId"
-                                       form-ref="requesterRecCtrl.requesterForm"
-                                       show-error="requesterRecCtrl.showError(requesterRecCtrl.requesterForm[requesterRecCtrl.solicitedOtherId])"
-                                       error-types="requesterRecCtrl.requiredOnly"></cmp-error-message>
-                </label>
-
-            </div>
-        </div-->
         <div class="row">
             <div class="form-group col-md-12 typeahead-demo"
                  ng-class="{'has-error':requesterRecCtrl.requesterForm[requesterRecCtrl.solictedRqId].$invalid}">
