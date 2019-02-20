@@ -40,10 +40,6 @@
         //vm.onePaymentError = [{type: "required", displayAlias: "ONE_PAYMENT_METHOD"}];
         vm.alerts = [false, false, false];
         vm.lang=ENGLISH;
-        vm.smallBusinessSelected = false;
-        vm.urgentHealthNeedSelected = false;
-        vm.fundedInstitutionSelected = false;
-        vm.govermentSelected = false;
         /**
          * Called after onChanges evnet, initializes
          */
@@ -67,8 +63,8 @@
             }
             if (changes.feeRecord) {
                 vm.model = changes.feeRecord.currentValue;
-                console.log( vm.model.mitigation.mitigationType.id );
-                vm.updateMitigationType(vm.model.mitigation.mitigationType.id);
+                // console.log( vm.model.mitigation.mitigationType.id );
+                // vm.updateMitigationType(vm.model.mitigation.mitigationType.id);
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
@@ -81,7 +77,7 @@
             if (!ctrl) return false;
 
             if ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid )) {
-                return true
+                return true;
             }
         };
 
@@ -116,45 +112,45 @@
             if (value < vm.alerts.length) {
                 vm.alerts[value] = true;
             }
-        }
-
-        vm.selectMitigationType = function () {
-            vm.updateMitigationType(vm.model.mitigation.mitigationType.id);
         };
 
-        vm.updateMitigationType = function (value) {
-            if (!value) {
-                vm.model.mitigation.mitigationType = "";
-                return;
+        vm.isSmallBusiness = function () {
+            if (vm.model.mitigation.mitigationType.id === 'SMALL_BUSINESS') {
+                return true;
+            } else {
+                vm.model.mitigation.certifyOrganization = false;
+                vm.model.mitigation.smallBusinessFeeApplication = false;
+                vm.model.mitigation.firstSubmission = null;
+                return false;
             }
+        };
 
-            switch (value) {
-                case("SMALL_BUSINESS"):
-                    vm.smallBusinessSelected = true;
-                    vm.urgentHealthNeedSelected = false;
-                    vm.fundedInstitutionSelected = false;
-                    vm.govermentSelected = false;
-                    break;
-                case("URGENT_HEALTH_NEED"):
-                    vm.smallBusinessSelected = false;
-                    vm.urgentHealthNeedSelected = true;
-                    vm.fundedInstitutionSelected = false;
-                    vm.govermentSelected = false;
-                    break;
-                case("FUNDED_INSTITUTION"):
-                    vm.smallBusinessSelected = false;
-                    vm.urgentHealthNeedSelected = false;
-                    vm.fundedInstitutionSelected = true;
-                    vm.govermentSelected = false;
-                    break;
-                case("GOVERMENT_ORGANIZATION"):
-                    vm.smallBusinessSelected = false;
-                    vm.urgentHealthNeedSelected = false;
-                    vm.fundedInstitutionSelected = false;
-                    vm.govermentSelected = true;
-                    break;
+        vm.isUrgentHealthNeed = function () {
+           if (vm.model.mitigation.mitigationType.id === 'URGENT_HEALTH_NEED') {
+               return true;
+           } else {
+               vm.model.mitigation.certifyUrgentHealthNeed = false;
+               return false;
+           }
+        };
+
+        vm.isFundedHealthInstitution = function () {
+            if (vm.model.mitigation.mitigationType.id === 'FUNDED_INSTITUTION') {
+                return true;
+            } else {
+                vm.model.mitigation.certifyFundedHealthInstitution = false;
+                return false;
             }
-        }
+        };
+
+        vm.isGovermentOrganization = function () {
+            if (vm.model.mitigation.mitigationType.id === 'GOVERMENT_ORGANIZATION') {
+                return true;
+            } else {
+                vm.model.mitigation.certifyGovermentOrganization = false;
+                return false;
+            }
+        };
 
     }
 })();

@@ -38,7 +38,7 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
-            this.xslFileName = "REP_RT_2_0.xsl";
+            this.xslFileName = "REP_RT_2_1.xsl";
         }
 
         function loadContactData() {
@@ -387,7 +387,7 @@
            // result.mitigation.mitigation_type = feeObj.mitigation.mitigationType;
             result.mitigation.certify_organization = feeObj.mitigation.certifyOrganization   === true ? 'Y' : 'N';
             result.mitigation.small_business_fee_application = feeObj.mitigation.smallBusinessFeeApplication === true ? 'Y' : 'N';
-            result.mitigation.first_submission = feeObj.mitigation.firstSubmission   === true ? YES : NO;
+            result.mitigation.first_submission = feeObj.mitigation.firstSubmission;
             result.mitigation.certify_goverment_organization = feeObj.mitigation.certifyGovermentOrganization  === true ? 'Y' : 'N';
             result.mitigation.certify_urgent_health_need = feeObj.mitigation.certifyUrgentHealthNeed   === true ? 'Y' : 'N';
             result.mitigation.certify_funded_health_institution = feeObj.mitigation.certifyFundedHealthInstitution   === true ? 'Y' : 'N';
@@ -415,7 +415,7 @@
             }
             result.mitigation.certifyOrganization = feeObj.mitigation.certify_organization === YES;
             result.mitigation.smallBusinessFeeApplication = feeObj.mitigation.small_business_fee_application === YES;
-            result.mitigation.firstSubmission = feeObj.mitigation.first_submission === YES;
+            result.mitigation.firstSubmission = feeObj.mitigation.first_submission;
             result.mitigation.certifyGovermentOrganization = feeObj.mitigation.certify_goverment_organization === YES;
             result.mitigation.certifyUrgentHealthNeed = feeObj.mitigation.certify_urgent_health_need === YES;
             result.mitigation.certifyFundedHealthInstitution  = feeObj.mitigation.certify_funded_health_institution ===  YES;
@@ -755,7 +755,7 @@
                 mitigationType: "", //statement supporting the deferral request
                 certifyOrganization: false,
                 smallBusinessFeeApplication: false,
-                firstSubmission: false,
+                firstSubmission: null,
                 certifyGovermentOrganization:false,
                 certifyUrgentHealthNeed: false,
                 certifyFundedHealthInstitution: false
