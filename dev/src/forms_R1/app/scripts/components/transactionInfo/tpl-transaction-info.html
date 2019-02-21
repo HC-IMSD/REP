@@ -3,15 +3,15 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-4">{{::'TRANSACTION_HDING'|translate}}
-                    <sup id="tr2_ref">
-                        <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
-                    </sup>
                 </h2>
                 <button class="btn  btn-primary btn-sm active"
                         id="btn_reset"
                         data-ng-show ="transInfoCtrl.finalState"
                         data-ng-click="transInfoCtrl.resetSpecificValues()">{{::'RESET'|translate}}
                 </button>
+                <sup id="tr1a_ref" data-ng-show="transInfoCtrl.finalState">
+                    <a class="fn-lnk" href="#tr1a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.a</a>
+                </sup>
                <!-- <div class="btn-group pull-right">
                     <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
                             class="btn-xs rep-help-button"
@@ -69,8 +69,8 @@
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'COMPANY_ID_INSTRUCT'|translate}}</span>
                                         </span> -->
-                                        <sup id="tr3_ref">
-                                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
+                                        <sup id="tr2_ref">
+                                            <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
                                         </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyId"
@@ -108,8 +108,8 @@
                                              <span class="fa fa-question-circle fa-2x"></span>
                                              <span class="wb-inv">{{::'DOSSIER_ID_INSTRUCT'|translate}}</span>
                                         </span> -->
-                                            <sup id="tr4_ref">
-                                                <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
+                                            <sup id="tr3_ref">
+                                                <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                                             </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.dossierId"
@@ -153,8 +153,8 @@
                                             <span class="fa fa-question-circle fa-2x"></span>
                                             <span class="wb-inv">{{::'PRODUCT_INSTRUCT'|translate}}</span>
                                         </span> -->
-                                         <sup id="tr5_ref">
-                    <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
+                                         <sup id="tr4_ref">
+                    <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                 </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.productNameId"
@@ -281,8 +281,8 @@
                                         <span class="fa fa-question-circle fa-2x"></span>
                                         <span class="wb-inv">{{::'ADMIN_COMP_INSTRUCT'|translate}}</span>
                                     </span> -->
-                                    <sup id="tr2a_ref">
-                                    <a class="fn-lnk" href="#tr2a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.a</a>
+                                    <sup id="tr1b_ref">
+                                    <a class="fn-lnk" href="#tr1b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.b</a>
                                     </sup>
                                     </span>
                                     <cmp-error-message field-name="transInfoCtrl.isAdminSubId"
@@ -467,22 +467,64 @@
                         </div>
                     </section>
                 </div>
+                <!--<div class="row">-->
+                    <!--<div class="form-group col-md-6">-->
+                        <!--<label for="projectManager1" class="full-width">-->
+                            <!--<span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>-->
+                        <!--</label>-->
+                        <!--<textarea id="projectManager1" name="projectManager1"-->
+                                  <!--data-ng-model="transInfoCtrl.transactionModel.projectManager1"-->
+                                  <!--class="form-control full-width" maxlength="256" rows="2"></textarea>-->
+                    <!--</div>-->
+                    <!--<div class="form-group col-md-6">-->
+                        <!--<label for="projectManager2" class="full-width">-->
+                            <!--<span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>-->
+                        <!--</label>-->
+                        <!--<textarea id="projectManager2" name="projectManager2"-->
+                                  <!--data-ng-model="transInfoCtrl.transactionModel.projectManager2"-->
+                                  <!--class="form-control full-width" maxlength="256" rows="2"></textarea>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 typeahead-demo">
                         <label for="projectManager1" class="full-width">
                             <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
+                            <div class="rep-margin-top">
+                                <input type="text"
+                                       data-ng-model="transInfoCtrl.transactionModel.projectManager1"
+                                       name="projectManager1"
+                                       data-ng-model-options="{ debounce: $inherit}"
+                                       id="projectManager1"
+                                       size="100"
+                                       maxlength="100"
+                                       data-uib-typeahead=" contact.en for contact in transInfoCtrl.userList | filter:{en:$viewValue} | limitTo:15"
+                                       class="form-control rep-normal-font"
+                                       data-typeahead-show-hint="false"
+                                       data-typeahead-focus-first="false"
+                                       data-ng-change="transInfoCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                       data-typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                            </div>
                         </label>
-                        <textarea id="projectManager1" name="projectManager1"
-                                  data-ng-model="transInfoCtrl.transactionModel.projectManager1"
-                                  class="form-control full-width" maxlength="256" rows="2"></textarea>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 typeahead-demo">
                         <label for="projectManager2" class="full-width">
                             <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
+                            <div class="rep-margin-top">
+                                <input type="text"
+                                       data-ng-model="transInfoCtrl.transactionModel.projectManager2"
+                                       name="projectManager2"
+                                       data-ng-model-options="{ debounce: $inherit}"
+                                       id="projectManager2"
+                                       size="100"
+                                       maxlength="100"
+                                       data-uib-typeahead=" contact.en for contact in transInfoCtrl.userList | filter:{en:$viewValue} | limitTo:15"
+                                       class="form-control rep-normal-font"
+                                       data-typeahead-show-hint="false"
+                                       data-typeahead-focus-first="false"
+                                       data-ng-change="transInfoCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                       data-typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                            </div>
                         </label>
-                        <textarea id="projectManager2" name="projectManager2"
-                                  data-ng-model="transInfoCtrl.transactionModel.projectManager2"
-                                  class="form-control full-width" maxlength="256" rows="2"></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -515,8 +557,8 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}
-                        <sup id="tr2c_ref">
-                            <a class="fn-lnk" href="#tr2c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.c</a>
+                        <sup id="tr1d_ref">
+                            <a class="fn-lnk" href="#tr1d"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.d</a>
                         </sup>
                     </h2>
                    <!--
@@ -565,8 +607,8 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REG_CONTACT_THIS' |translate}}
-                        <sup id="tr6_ref">
-                            <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
+                        <sup id="tr5_ref">
+                            <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                         </sup>
                     </h2>
                     <!--<div class="btn-group pull-right">
@@ -600,8 +642,8 @@
                                     <label for="{{::transInfoCtrl.companyNameId}}" class="required full-width">
                                         <span class="field-name">{{::"COMPANY_NOABBREV" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <sup id="tr7_ref">
-                                            <a class="fn-lnk" href="#tr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>7</a>
+                                        <sup id="tr6_ref">
+                                            <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                                         </sup>
                                         <!--<span title="{{::'EXPAND'|translate}} {{::'COMPANY_INSTRUCT'|translate}}"
                                                 class="btn rep-help-button-primary btn-xs"

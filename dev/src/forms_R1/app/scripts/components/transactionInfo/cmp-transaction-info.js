@@ -72,6 +72,7 @@
         vm.isEctd = false;
         vm.alerts = [false, false, false, false, false, false, false, false, false];
         vm.requesterList = [];
+        vm.userList = [];
         vm.formTypeList = getRoleLists.getFormTypes();
         vm.lang=ENGLISH;
         vm.sequenceChange=false;
@@ -94,6 +95,8 @@
             vm.updateEctdState();
             vm.setSolicitedState();
             loadAdminSubData();
+           // loadContactData();
+            loadUserListData();
             vm.finalState=false;
             vm.displayResetBtn = false;
         };
@@ -231,13 +234,23 @@
                 });
         }
 
-        function loadContactData() {
+        /**
+         * function loadContactData() {
             getContactLists.getInternalContacts()
                 .then(function (data) {
                     vm.requesterList = data;
                     return true;
                 });
         }
+         **/
+        function loadUserListData() {
+            getContactLists.getInternalContactsWithoutOther()
+                .then(function (data) {
+                    vm.userList = data;
+                    return true;
+                });
+        }
+
 
         /**
          * @ngdoc method sets the visibilty of the solicited requester field. Clears
@@ -320,17 +333,6 @@
                 vm.setAdminSubmission();
                 vm.transactionModel.isSolicited = "";
                 vm.setSolicitedState();
-                /**
-                vm.transactionModel.isThirdParty = "";
-                vm.transactionModel.isPriority = "";
-                vm.transactionModel.isNoc = "";
-                vm.transactionModel.isAdminSub = "";
-                vm.transactionModel.subType = "";
-                vm.showThirdPartyNote = false;
-                vm.showAdminSub = false;
-                 vm.transactionModel.isSolicited = ""; //37 - solicited information
-                 vm.transactionModel.solicitedRequesterReord = []; //41 solicited information
- */
                 vm.transactionModel.ectd.lifecycleRecord =[]; //22 - Transaction Details Record
                 vm.transactionModel.projectManager1 = ""; //43 - projectManager1
                 vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
@@ -375,8 +377,7 @@
             vm.isPriorityId = "is_priority" + scopeId;
             vm.isNocId = "is_noc" + scopeId;
         }
-
-}
+    }
 
 })
 ();
