@@ -25,6 +25,7 @@
         var vm = this;
         vm.raTypeArray = [];
         vm.feeTypeArray = [];
+        vm.mitigationTypeArray = [];
 
         /** Lead values. Hard coded as different lists need to be   **/
         vm.BIOLOGICAL = "B14-20160301-02"; //biological
@@ -140,6 +141,8 @@
             getYesNoList: yesNoArray,
             getFeeList: _getfeeTypeArray,
             createFeeTypes: _createFeeArray,
+            getMitigationList: _getMitigationTypeArray,
+            createMitigationList: _createMitigationArray,
             getActivityLeadList: _getActivityLeadArray
         };
         return service;
@@ -164,19 +167,25 @@
             vm.feeTypeArray = value;
         }
 
+        function _createMitigationArray(value) {
+            vm.mitigationTypeArray = value;
+        }
+
         //returns a list of all the unique description values
         function getTransactionDescriptionsArray() {
             return (vm.allActivities);
         }
 
         function getActivityArray() {
-
             return (vm.raTypeArray);
         }
 
         function _getfeeTypeArray() {
-
             return (vm.feeTypeArray);
+        }
+
+        function _getMitigationTypeArray() {
+            return (vm.mitigationTypeArray);
         }
 
 

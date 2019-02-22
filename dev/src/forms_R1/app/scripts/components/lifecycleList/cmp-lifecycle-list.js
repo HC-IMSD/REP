@@ -67,7 +67,7 @@
                 width: "12"
             },
             {
-                label: "REG_ACTIVITY",
+                label: "REG_ACTIVITY_TYPE",
                 binding: "activityTypeDisplay",
                 width: "30"
             },
