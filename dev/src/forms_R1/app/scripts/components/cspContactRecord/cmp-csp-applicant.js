@@ -65,7 +65,7 @@
                         "city": "",
                         "stateList": "",
                         "stateText": "",
-                        "country": "",
+                    "country": "",
                         "postalCode": ""
                     },
                     "applicantName": "",

@@ -1,13 +1,8 @@
 <ng-form name="infoCtrl.applInfoForm">
     <div>
         <div class="row">
-            <div class="col-xs-3 form-group ">
+            <div class="col-xs-2 form-group ">
                 <label for="application-type_{{$id}}" >{{::"APPL_STATUS"| translate}}</label>
-                <!--<select id="application-type_{{$id}}"
-                        data-ng-options="type |translate for type in infoCtrl.applTypes"
-                        data-ng-model="infoCtrl.record.applicationType" data-ng-disabled="true"
-                        data-ng-class="{'rep-success':infoCtrl.showAmendMsg()}" class="form-control full-width">
-                </select> -->
                 <input type="text" class="form-control full-width" id="application-type_{{$id}}"
                        data-ng-model="infoCtrl.record.applicationType"
                        data-ng-class="{'rep-success':infoCtrl.showAmendMsg()}"
@@ -24,40 +19,74 @@
                        data-ng-model="infoCtrl.infoModel.dateSaved"
                        data-ng-readonly="true"/>
             </div>
-            <div class="col-xs-3 form-group">
-                <label data-ng-if="!infoCtrl.isDossier" for="{{::infoCtrl.fieldId}}">{{infoCtrl.fieldIdLabel |translate}}
-                    <strong id="code-error" class="error" data-ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid">
-                        <span class="label label-danger"
-                              data-ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
-                            <span data-ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
-                              <span data-ng-message="minlength"><span translate="{{infoCtrl.minErrorMsg}}"></span></span>
-                            <span data-ng-message="maxlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
-                        </span>
-                    </strong>
-                    <input type="text" class="form-control" id="{{::infoCtrl.fieldId}}"
-                           data-ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="{{::infoCtrl.fieldId}}"
-                           data-ng-minlength="{{infoCtrl.minFieldLength}}" data-only-digits="{{infoCtrl.isNumber}}"
-                           data-ng-model="infoCtrl.record[infoCtrl.tagName]" data-ng-required="!infoCtrl.isExtern()"/>
-                </label>
-                <label for="{{::infoCtrl.fieldId}}" class="full-width" data-ng-if="infoCtrl.isDossier" data-ng-class="{'required':!infoCtrl.isExtern()}">{{infoCtrl.fieldIdLabel |translate}}
-                    <strong data-ng-if="!infoCtrl.isExtern()" class="required"> {{"REQUIRED" |translate}}</strong>
-                    <strong id="idType-error" class="error" data-ng-if="infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid">
-                        <span class="label label-danger"
-                              data-ng-messages="infoCtrl.applInfoForm[infoCtrl.fieldId].$error">
-                            <span data-ng-message="required">{{::'MSG_ERR_MAND'|translate}}</span>
-                            <span data-ng-message="minlength"><span translate="{{infoCtrl.errorMsg}}"></span></span>
-                        </span>
-                    </strong>
-                    <div class="rep-input-group mrgn-tp-0" data-ng-if="infoCtrl.isDossier" style="margin-top:5px;">
-                        <span class="input-group-addon">HC6-024-</span>
-                        <div data-ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.fieldId].$invalid}">
-                            <input type="text" class="form-control full-width" id="{{::infoCtrl.fieldId}}"
-                                   data-ng-readonly="infoCtrl.isExtern()" maxlength="{{infoCtrl.fieldLength}}" name="{{::infoCtrl.fieldId}}"
-                                   data-ng-minlength="{{infoCtrl.fieldLength}}" size="{{infoCtrl.fieldLength}}"
-                                   data-ng-model="infoCtrl.record[infoCtrl.tagName]" data-ng-required="!infoCtrl.isExtern()"/>
+
+            <!--Company ID -->
+            <div data-ng-if="!infoCtrl.isDossier">
+                <!-- internal -->
+                <div data-ng-if="!infoCtrl.isExtern()">
+                    <div class="col-xs-4 form-group" data-ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.compId].$invalid}">
+                        <label for="{{::infoCtrl.compId}}" class="required">
+                            <span class="field-name">{{::'COMPANY_ID' |translate}}{{::'LEAST_6_CHAR' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="infoCtrl.compId"
+                                               form-ref="infoCtrl.applInfoForm"
+                                               show-error="infoCtrl.showError(infoCtrl.applInfoForm[infoCtrl.compId])"
+                                               error-types="infoCtrl.min5Error">
+                            </cmp-error-message>
+                            <input type="text" class="form-control" id="{{::infoCtrl.compId}}"
+                                   name="{{::infoCtrl.compId}}" required  maxlength="6" minlength="6"
+                                   data-ng-model="infoCtrl.record[infoCtrl.tagName]"/>
+                        </label>
+                    </div>
+                </div>
+                <!-- External -->
+                <div class="col-xs-4 form-group" data-ng-if="infoCtrl.isExtern()">
+                    <label for="{{::infoCtrl.compId}}">{{::'COMPANY_ID' |translate}}</label>
+                    <input type="text" class="form-control" id="{{::infoCtrl.compId}}"
+                               data-ng-readonly="true" name="{{::infoCtrl.compId}}"
+                               data-ng-model="infoCtrl.record[infoCtrl.tagName]"/>
+                </div>
+            </div>
+
+            <!-- Dossier ID -->
+            <div data-ng-if="infoCtrl.isDossier">
+                <!--Interlanl -->
+                <div data-ng-if="!infoCtrl.isExtern()" data-ng-class="{'has-error':infoCtrl.applInfoForm[infoCtrl.dossierId].$invalid}">
+                    <div class="col-xs-4 form-group">
+                            <label for="{{::infoCtrl.dossierId}}" class="required">
+                                <span class="field-name">{{::'DOSSIER_ID' |translate}}{{::'LEAST_7_CHAR' |translate}}</span>
+                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                <cmp-error-message field-name="infoCtrl.dossierId"
+                                                   form-ref="infoCtrl.applInfoForm"
+                                                   show-error="infoCtrl.showError(infoCtrl.applInfoForm[infoCtrl.dossierId])"
+                                                   error-types="infoCtrl.min5Error">
+                                </cmp-error-message>
+                            </label>
+                            <div class="rep-input-group mrgn-tp-0">
+                                <span class="input-group-addon">HC6-024-</span>
+                                <input type="text" class="form-control full-width" id="{{::infoCtrl.dossierId}}"
+                                       maxlength="7" name="{{::infoCtrl.dossierId}}"
+                                       minlength="7" size="7"
+                                       data-ng-model="infoCtrl.record[infoCtrl.tagName]" required />
+                            </div>
+                    </div>
+                </div>
+                <!-- External -->
+                <div data-ng-if="infoCtrl.isExtern()">
+                    <div class="col-xs-4 form-group" >
+                        <div class="rep-input-group mrgn-tp-0">
+                            <label for="{{::infoCtrl.dossierId}}">
+                                <span class="field-name">{{::'DOSSIER_ID' |translate}}{{::'LEAST_7_CHAR' |translate}}</span>
+                            </label>
+                            <div class="rep-input-group mrgn-tp-0">
+                            <span class="input-group-addon">HC6-024-</span>
+                            <input type="text" class="form-control full-width" id="{{::infoCtrl.dossierId}}"
+                                       data-ng-readonly="true" name="{{::infoCtrl.dossierId}}"
+                                       data-ng-model="infoCtrl.record[infoCtrl.tagName]" />
+                            </div>
                         </div>
                     </div>
-                </label>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -70,8 +99,7 @@
                 </div>
             </div>
             <div class="col-xs-7">
-                <div data-ng-if="infoCtrl.showAmendMsg()" class="alert alert-info" role="alert"
-                     aria-live="polite">
+                <div data-ng-if="infoCtrl.showAmendMsg()" class="alert alert-info" role="alert"  aria-live="polite">
                     <span>{{::'AMEND_MSG'|translate}}</span>
                 </div>
             </div>

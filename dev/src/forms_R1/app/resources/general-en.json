@@ -72,6 +72,7 @@
   "RELATED_INFO_HELP":"Related Information Instructions",
   "DOSSIER_TYPE": "Dossier Type",
   "LEAST_5_CHAR":" (5 characters)",
+  "LEAST_6_CHAR":" (6 characters)",
   "LEAST_7_CHAR":" (7 characters)",
   "INCLUDE_AREA_CODE":" (including area code)",
   "LEAST_6_DIGIT":" (6 digits only)",
