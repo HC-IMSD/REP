@@ -54,24 +54,14 @@
                 isRefProduct: "",
                 privacyStat:"",
                 drugProduct: {
-                    //thirdPartySigned: "",
-                    //drugUseList: getDefaultDrugUseList(),
                     drugUse: "",
-                   // isScheduleA: false,
-                    //scheduleAGroup: getDefaultSchedA(),
                     therapeutic: [],
                     canRefProduct: {
                         brandName: "",
                         companyName: ""
-                    }//grid
-                   // formulations: [],//tab + grid +
-                   // appendixFourList: []/*{
-                   //  ingredientList:[]
-                  //   }//tab + grid +*/
-
+                    }
                 },
                 contactList: []
-
             },
 
             getDefaultObject: function () {
@@ -120,7 +110,6 @@
                         //appendixFourList: getAppendix4IngredientList(info.appendix4_group)
                     },
                    contactList: getContactList(info.contact_record)
-
                 };
 
                 if (info.is_ref_product === YES) {
@@ -301,15 +290,17 @@
         //###############INTERNAL FUNCTIONS start here##################################
 
         function getContactList(contacts) {
+           // console.log("contacts.length :" + contacts.length);
 
             var list = [];
+            if( contacts.length == 0 ) {
+                return list;
+            }
 
             if (angular.isDefined(contacts)) {
-
                 if (!(contacts instanceof Array)) {
                     contacts = [contacts];
                 }
-
                 for (var i = 0; i < contacts.length; i++) {
                     var contact = {};
                     contact.amend = contacts[i].amend_record === 'Y';
@@ -326,11 +317,8 @@
                     contact.language = contacts[i].rep_contact_details.language_correspondance;
 
                     list.push(contact);
-
                 }
-
             }
-
             return list;
         }
 

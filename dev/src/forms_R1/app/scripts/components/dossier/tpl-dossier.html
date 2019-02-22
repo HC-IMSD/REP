@@ -17,31 +17,8 @@
                     <sup id="do1-rf">
                         <a class="fn-lnk" href="#do1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1</a>
                     </sup></h2>
-                <!-- <div class="btn-group pull-right">
-                     <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
-                             class="btn-xs rep-help-button"
-                             id="instructions-toggle" data-ng-click="dos.addInstruct(0)">
-                            <span class="fa fa-question-circle fa-2x"></span>
-                            <span class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span>
-                     </button>
-                 </div>-->
              </header>
              <div class="panel-body">
-                 <!--<div>
-                     <cmp-alert  ui-state="dos.alerts[0]"
-                                 msg="HELP_FILE_LOAD"
-                                 update-state="dos.closeAlert(0)"
-                                 type="alert-info">
-                         <section aria-live="assertive">
-                             <div data-ng-if="!dos.isFrench()"
-                              ng-include="'app/scripts/templates/dossier/tpl-dossier-file-en.html'">
-                             </div>
-                             <div data-ng-if="dos.isFrench()"
-                              ng-include="'app/scripts/templates/dossier/tpl-dossier-file-fr.html'">
-                             </div>
-                         </section>
-                     </cmp-alert>
-                 </div> -->
                  <div class="col-md-12">
                  <hpfb-file-select update-model-root="dos.showContent(fileContent)"
                                    root-elem="DOSSIER_ENROL">
@@ -56,31 +33,8 @@
                          <a class="fn-lnk" href="#do2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
                      </sup>
                  </h2>
-                <!-- <div class="btn-group pull-right">
-                     <button title="{{::'EXPAND'|translate}}  {{::'HELP_DOSSIER'|translate}}"
-                             class="btn-xs rep-help-button"
-                             id="dossier-instructions-toggle" data-ng-click="dos.addInstruct(1)">
-                         <span class="fa fa-question-circle fa-2x"></span>
-                         <span class="wb-inv">{{::'HELP_DOSSIER'|translate}}</span>
-                     </button>
-                 </div> -->
              </header>
              <div class="panel-body">
-               <!--  <div>
-                     <cmp-alert  ui-state="dos.alerts[1]"
-                                 msg="HELP_DOSSIER"
-                                 update-state="dos.closeAlert(1)"
-                                 type="alert-info">
-                     <section aria-live="assertive">
-                         <div data-ng-if="!dos.isFrench()"
-                              ng-include="'app/scripts/templates/dossier/tpl-dossier-enrolment-en.html'">
-                         </div>
-                         <div data-ng-if="dos.isFrench()"
-                              ng-include="'app/scripts/templates/dossier/tpl-dossier-enrolment-fr.html'">
-                         </div>
-                     </section>
-                     </cmp-alert>
-                 </div> -->
                  <div>
                      <cmp-application-info record="dos.dossierModel" user-type="dos.userType"
                                            set-type="dos.setApplicationType(type)"
@@ -106,12 +60,6 @@
                              <sup id="do3-rf">
                                  <a class="fn-lnk" href="#do3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                              </sup>
-                            <!-- <span title="{{::'EXPAND'|translate}} {{::'DOSSIER_TYPE_HELP'|translate}}"
-                                     class="btn rep-help-button-primary btn-xs"
-                                     id="type-instructions-toggle" data-ng-click="dos.addInstruct(10)"><span
-                                     class="fa fa-question-circle fa-2x"></span><span
-                                     class="wb-inv">{{::'DOSSIER_TYPE_HELP'|translate}}</span>
-                             </span> -->
                              <cmp-error-message field-name="dos.typeId"
                                                 form-ref="dos.dossierForm"
                                                 show-error="dos.showError(dos.dossierForm[dos.typeId])"
@@ -126,38 +74,19 @@
                      <div class="col-xs-4 form-group"
                           data-ng-class="{'has-error':dos.dossierForm[dos.compId].$invalid}">
                          <label for="{{::dos.compId}}" class="required">
-                             <span class="field-name">{{::'COMPANY_ID' |translate}}{{::'LEAST_5_CHAR' |translate}}</span>
+                             <span class="field-name">{{::'COMPANY_ID' |translate}}{{::'LEAST_6_CHAR' |translate}}</span>
                              <strong class="required">{{::"REQUIRED" |translate}}</strong>
                              <cmp-error-message field-name="dos.compId"
                                                 form-ref="dos.dossierForm"
                                                 show-error="dos.showError(dos.dossierForm[dos.compId])"
                                                 error-types="dos.min5Error"></cmp-error-message>
                              <input type="text" class="form-control full-width" id="{{::dos.compId}}"
-                                    name="{{::dos.compId}}" required maxlength="6" minlength="5"
+                                    name="{{::dos.compId}}" required maxlength="6" minlength="6"
                                     data-ng-model="dos.dossierModel.companyID"/>
 
                          </label>
                      </div>
-                     </div>
-                    <!-- <div class="row">
-                     <div>
-                         <cmp-alert  ui-state="dos.alerts[10]"
-                                     msg="DOSSIER_TYPE_HELP"
-                                     update-state="dos.closeAlert(10)"
-                                     type="alert-info">
-
-                         <section aria-live="assertive">
-                             <div data-ng-if="!dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-type-en.html'">
-                             </div>
-                             <div data-ng-if="dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-type-fr.html'">
-                             </div>
-                         </section>
-                         </cmp-alert>
-                     </div>
                  </div>
-                 </div> -->
                  <div class="row">
                      <div class="col-xs-12 form-group"
                           data-ng-class="{'has-error':dos.dossierForm[dos.prodNameId].$invalid}">
@@ -167,11 +96,7 @@
                                  <sup id="do4-rf">
                                      <a class="fn-lnk" href="#do4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                  </sup>
-                             </label><!--<button title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
-                                 class="btn rep-help-button-primary btn-xs"
-                                 id="name-instructions-toggle" data-ng-click="dos.addInstruct(7)"><span
-                                 class="fa fa-question-circle fa-2x"></span><span
-                                 class="wb-inv">{{::'PROD_NAME_HELP'|translate}}</span></button> -->
+                             </label>
                          <cmp-error-message field-name="dos.prodNameId"
                                             form-ref="dos.dossierForm"
                                             show-error="dos.showError(dos.dossierForm[dos.prodNameId])"
@@ -183,24 +108,6 @@
 
                      </div>
                  </div>
-                <!-- <div class="row">
-                     <div>
-                         <cmp-alert  ui-state="dos.alerts[7]"
-                                     msg="PROD_NAME_HELP"
-                                     update-state="dos.closeAlert(7)"
-                                     type="alert-info">
-
-                         <section aria-live="assertive">
-                             <div data-ng-if="!dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-productName-en.html'">
-                             </div>
-                             <div data-ng-if="dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-productName-fr.html'">
-                             </div>
-                         </section>
-                         </cmp-alert>
-                     </div>
-                 </div> -->
                  <div class="row">
                      <div class="col-xs-12 form-group"
                           data-ng-class="{'has-error':dos.dossierForm[dos.properNameId].$invalid}">
@@ -211,12 +118,6 @@
                                  <a class="fn-lnk" href="#do5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                              </sup>
                          </label>
-                         <!--<button title="{{::'EXPAND'|translate}} {{::'PROP_NAME_HELP'|translate}}"
-                                 class="btn rep-help-button-primary btn-xs"
-                                 id="pname-instructions-toggle" data-ng-click="dos.addInstruct(8)">
-                             <span class="fa fa-question-circle fa-2x"></span>
-                             <span class="wb-inv">{{::'PROP_NAME_HELP'|translate}}</span>
-                         </button> -->
                          <cmp-error-message field-name="dos.properNameId"
                                             form-ref="dos.dossierForm"
                                             show-error="dos.showError(dos.dossierForm[dos.properNameId])"
@@ -228,24 +129,6 @@
 
                      </div>
                  </div>
-                 <!-- <div class="row">
-                     <div>
-                         <cmp-alert  ui-state="dos.alerts[8]"
-                                     msg="PROP_NAME_HELP"
-                                     update-state="dos.closeAlert(8)"
-                                     type="alert-info">
-
-                         <section aria-live="assertive">
-                             <div data-ng-if="!dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-properName-en.html'">
-                             </div>
-                             <div data-ng-if="dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-properName-fr.html'">
-                             </div>
-                         </section>
-                         </cmp-alert>
-                     </div>
-                 </div> -->
                  <div class="row">
                      <div class="col-xs-12 form-group" data-ng-class="{'has-error':dos.dossierForm[dos.drugUseId].$invalid}">
                          <label for="{{::dos.drugUseId}}" class="required">
@@ -272,11 +155,6 @@
                                  <a class="fn-lnk" href="#do6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                              </sup>
                          </label>
-                         <!-- <button title="{{::'EXPAND'|translate}} {{::'RELATED_INFO_HELP'|translate}}"
-                                 class="btn rep-help-button-primary btn-xs"
-                                 id="related-instructions-toggle" data-ng-click="dos.addInstruct(9)">
-                             <span class="fa fa-question-circle fa-2x"></span>
-                             <span class="wb-inv">{{::'RELATED_INFO_HELP'|translate}}</span></button> -->
                          <cmp-error-message field-name="dos.relatedInfoId"
                                             form-ref="dos.dossierForm"
                                             show-error="dos.showError(dos.dossierForm[dos.relatedInfoId])"
@@ -286,24 +164,6 @@
 
                      </div>
                  </div>
-                 <!--<div class="row">
-                     <div>
-                         <cmp-alert  ui-state="dos.alerts[9]"
-                                     msg="RELATED_INFO_HELP"
-                                     update-state="dos.closeAlert(9)"
-                                     type="alert-info">
-
-                         <section aria-live="assertive">
-                             <div data-ng-if="!dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-relatedInformation-en.html'">
-                             </div>
-                             <div data-ng-if="dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-properName-fr.html'">
-                             </div>
-                         </section>
-                         </cmp-alert>
-                     </div>
-                 </div> -->
                  <div>
                      <section class="panel panel-default">
                          <header class="panel-heading clearfix">
@@ -312,33 +172,8 @@
                                      <a class="fn-lnk" href="#do7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>7</a>
                                  </sup>
                              </h3>
-                            <!-- <div class="btn-group pull-right">
-                                 <button title="{{::'EXPAND'|translate}} {{::'HELP_thera'|translate}}"
-                                         class="btn-xs rep-help-button-primary"
-                                         id="thera-instructions-toggle" data-ng-click="dos.addInstruct(2)">
-                                         <span class="fa fa-question-circle fa-2x"></span>
-                                         <span class="wb-inv">{{::'HELP_thera'|translate}}</span>
-                                 </button>
-                             </div> -->
                          </header>
                          <div class="panel-body">
-                             <!--<div>
-                                 <cmp-alert  ui-state="dos.alerts[2]"
-                                             msg="HELP_thera"
-                                             update-state="dos.closeAlert(2)"
-                                             type="alert-info">
-
-                                 <section aria-live="assertive">
-                                     <div data-ng-if="!dos.isFrench()"
-                                          ng-include="'app/scripts/templates/dossier/tpl-dossier-thera-en.html'">
-                                     </div>
-                                     <div data-ng-if="dos.isFrench()"
-                                          ng-include="'app/scripts/templates/dossier/tpl-dossier-thera-fr.html'">
-                                     </div>
-                                 </section>
-                                 </cmp-alert>
-
-                             </div>-->
                              <cmp-thera-list records="dos.dossierModel.drugProduct.therapeutic"
                                              show-errors="dos.showErrors()"></cmp-thera-list>
                          </div>
@@ -352,12 +187,6 @@
                              <sup id="do8-rf">
                                  <a class="fn-lnk" href="#do8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>8</a>
                              </sup>
-                             <!--<span title="{{::'EXPAND'|translate}} {{::'HELP_REFPRODUCTS'|translate}}"
-                                     class="btn rep-help-button-primary btn-xs"
-                                     id="repProducts-instructions-toggle" data-ng-click="dos.addInstruct(3)">
-                                     <span class="fa fa-question-circle fa-2x"></span>
-                                     <span class="wb-inv">{{::'HELP_REFPRODUCTS'|translate}}</span>
-                             </span> -->
                              <cmp-error-message field-name="dos.isRefId"
                                                 form-ref="dos.dossierForm"
                                                 show-error="dos.showError(dos.dossierForm[dos.isRefId])"
@@ -373,25 +202,6 @@
                          </label>
                      </div>
                  </div>
-                 <!-- <div class="row">
-                     <div class="col-md-12">
-                         <div>
-                             <cmp-alert  ui-state="dos.alerts[3]"
-                                         msg="HELP_REFPRODUCTS"
-                                         update-state="dos.closeAlert(3)"
-                                         type="alert-info">
-                             <section aria-live="assertive">
-                                 <div data-ng-if="!dos.isFrench()"
-                                      ng-include="'app/scripts/templates/dossier/tpl-dossier-ref-product-en.html'">
-                                 </div>
-                                 <div data-ng-if="dos.isFrench()"
-                                      ng-include="'app/scripts/templates/dossier/tpl-dossier-ref-product-fr.html'">
-                                 </div>
-                             </section>
-                             </cmp-alert>
-                         </div>
-                     </div>
-                 </div> -->
                  <div class="row" data-ng-if="dos.isRefProduct()" id="refProductRoot">
                      <section class="panel panel-default">
                          <header class="panel-heading">
@@ -443,33 +253,8 @@
                              <a class="fn-lnk" href="#do9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9</a>
                          </sup>
                      </h2>
-                     <!--<div class="btn-group pull-right">
-                         <button title="{{::'EXPAND'|translate}} {{::'HELP_REP_CONTACT'|translate}}"
-                                 class="btn-xs rep-help-button"
-                                 id="repContact-instructions-toggle" data-ng-click="dos.addInstruct(5)">
-                             <span class="fa fa-question-circle fa-2x"></span>
-                             <span class="wb-inv">{{::'HELP_REP_CONTACT'|translate}}</span>
-                         </button>
-                     </div> -->
                  </header>
                  <div class="panel-body">
-                     <!-- <div>
-                         <cmp-alert  ui-state="dos.alerts[5]"
-                                     msg="HELP_REP_CONTACT"
-                                     update-state="dos.closeAlert(5)"
-                                     type="alert-info">
-
-                         <section aria-live="assertive">
-                             <div data-ng-if="!dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-en.html'">
-                             </div>
-                             <div data-ng-if="dos.isFrench()"
-                                  ng-include="'app/scripts/templates/dossier/tpl-dossier-contact-fr.html'">
-                             </div>
-                         </section>
-                         </cmp-alert>
-                     </div> -->
-
                      <div class="container-fluid">
                          <cmp-rep-contact-list contacts="dos.dossierModel.contactList" on-update=""
                                                parent-dirty="dos.dossierForm.$dirty"
@@ -498,32 +283,7 @@
 
                  </label>
              </div>
-             <!-- <div class="btn-group pull-right">
-                 <button title="{{::'EXPAND'|translate}} {{::'PRIVACY_STATEMENT_HELP'|translate}}"
-                         class="btn rep-help-button-primary btn-xs"
-                         id="statement-instructions-toggle"
-                         data-ng-click="dos.addInstruct(11)">
-                     <span class="fa fa-question-circle fa-2x"></span>
-                     <span class="wb-inv">{{::'PRIVACY_STATEMENT_HELP'|translate}}</span>
-                 </button>
-             </div> -->
          </div>
-         <!-- <div class="row col-md-12">
-             <cmp-alert  ui-state="dos.alerts[11]"
-                         msg="PRIVACY_STATEMENT_HELP"
-                         update-state="dos.closeAlert(11)"
-                         type="alert-info">
-
-                 <section aria-live="assertive">
-                     <div data-ng-if="!dos.isFrench()"
-                          ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'">
-                     </div>
-                     <div data-ng-if="dos.isFrench()"
-                          ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'">
-                     </div>
-                 </section>
-             </cmp-alert>
-         </div> -->
          <div class="row">
              <div class="form-group col-md-12">
                  <button class="btn btn-default btn-lg active mrgn-rght-sm" data-ng-click="dos.saveJson()"
@@ -536,34 +296,8 @@
                  <sup id="do10-rf">
                      <a class="fn-lnk" href="#do10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>10</a>
                  </sup>
-                 <!--<button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
-                         class="btn rep-help-button-primary btn-xs"
-                         id="save-instructions-toggle" data-ng-click="dos.addInstruct(6)">
-                     <span class="fa fa-question-circle fa-2x"></span>
-                     <span class="wb-inv">{{::'SAVE_INSTRUCT'|translate}}</span>
-                 </button> -->
              </div>
          </div>
-         <!--<div class="row">
-             <div class="col-md-10">
-                 <div>
-                     <cmp-alert  ui-state="dos.alerts[6]"
-                                 msg="SAVE_INSTRUCT"
-                                 update-state="dos.closeAlert(6)"
-                                 type="alert-info">
-
-                     <section aria-live="assertive">
-                         <div data-ng-if="!dos.isFrench()"
-                              ng-include="'app/scripts/templates/dossier/tpl-dossier-save-en.html'">
-                         </div>
-                         <div data-ng-if="dos.isFrench()"
-                              ng-include="'app/scripts/templates/dossier/tpl-dossier-save-en.html'">
-                         </div>
-                     </section>
-                     </cmp-alert>
-                 </div>
-             </div>
-         </div> -->
   <!--      <pre>{{dos.dossierModel | json }}</pre>-->
     </div>
         </div>
