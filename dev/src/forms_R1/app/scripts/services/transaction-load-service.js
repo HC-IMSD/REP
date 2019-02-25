@@ -18,7 +18,7 @@
                 var deferred = $q.defer();
                 var countryUrl = RELATIVE_FOLDER_DATA + "countries.json";
                 var raTypeUrl= RELATIVE_FOLDER_DATA + "raType.json";
-                var feeUrl= RELATIVE_FOLDER_DATA + "feeClass.json";
+                var feeUrl= RELATIVE_FOLDER_DATA + "feeClass_CR.json"; // note: rename feeclass json file to distinct from old version feeClass json file
                 var mitigationUrl = RELATIVE_FOLDER_DATA + "mitigationType.json";
                 var resultTranslateList = {};
                 $http.get(countryUrl)
