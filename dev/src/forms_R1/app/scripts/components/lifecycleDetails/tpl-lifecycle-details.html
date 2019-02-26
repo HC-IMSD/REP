@@ -10,57 +10,12 @@
                 <fieldset>
                     <legend class="legend-rep">{{::'LIFE_REC' | translate}}&nbsp;</legend>
                     <div class="row">
-                        <!--
-                        <div class="form-group col-md-3">
-                            <label for="sequenceNumber_{{::$id}}">
-                                <span class="field-name">{{"SEQUENCE_NUM" |translate}}</span>
-                                <button title="{{::'EXPAND'|translate}} {{::'SEQUENCE_INSTRUCT'|translate}}"
-                                        class="btn rep-help-button-primary btn-xs"
-                                        id="sequenceNumber-instructions-toggle" data-ng-click="lifecycleCtrl.addInstruct(0)"><span
-                                        class="fa fa-question-circle fa-2x"></span>
-                                </button>
-                                <input type="text" id="sequenceNumber_{{::$id}}" name="sequenceNumber_{{::$id}}"
-                                       ng-model="lifecycleCtrl.lifecycleModel.sequence"
-                                       class="form-control full-width" maxlength="8" size="8" ng-readonly="true"/>
-                            </label>
-                        </div>
-                        <div class="form-group col-md-4"
-                             ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.dateSubId].$invalid}">
-                            <label for="{{::lifecycleCtrl.dateSubId}}" class="required">
-                                <span class="field-name">{{::"DATE_SUBMITTED" |translate}}</span>
-                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <div class="input-group rep-input-group rep-margin-top-12">
-                                    <input id="{{::lifecycleCtrl.dateSubId}}" type="text" class="form-control rep-normal-font"
-                                           uib-datepicker-popup
-                                           show-button-bar="false" datepicker-options="lifecycleCtrl.dateOptions"
-                                           name="{{::lifecycleCtrl.dateSubId}}" ng-model="lifecycleCtrl.lifecycleModel.dateFiled"
-                                           is-open="lifecycleCtrl.filedDateOpen" required/>
-                                    <span class="input-group-btn">
-                                            <button title="{{::'CALENDAR'|translate}}" class="btn btn-default"
-                                                    aria-haspopup="true"
-                                                    id="filed-picker-toggle"
-                                                    data-ng-click="lifecycleCtrl.openFiledDate()"><span
-                                                    class="glyphicon glyphicon-calendar"></span><span class="wb-inv">{{::'CALENDAR'|translate}}</span>
-                                            </button>
-                                      </span>
-                                </div>
-                                <cmp-error-message field-name="lifecycleCtrl.dateSubId"
-                                                   form-ref="lifecycleCtrl.lifecycleDetailsForm"
-                                                   show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.dateSubId])"
-                                                   error-types="lifecycleCtrl.dateFormatError"></cmp-error-message>
-                            </label>
-                        </div> -->
 
                         <div class="form-group col-md-7"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId].$invalid}">
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
                                 <span class="field-name">{{::"CONTROL_NUM" |translate}}{{::"LEAST_6_DIGIT" |translate}}
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <!--<span title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
-                                        class="btn rep-help-button-primary btn-xs"
-                                        id="controlNum-instructions-toggle" data-ng-click="lifecycleCtrl.addInstruct(1)"><span
-                                        class="fa fa-question-circle fa-2x"></span>
-                                </span> -->
                                 <sup id="tr1c_ref">
                                     <a class="fn-lnk" href="#tr1c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.c</a>
                                 </sup>
@@ -97,36 +52,6 @@
                                 </label>
                             </div>
                         </div>
-
-                        <!--<div class="row">
-                           <div class="form-group col-md-12">
-                               <cmp-alert ui-state="lifecycleCtrl.alerts[0]" msg="SEQUENCE_INSTRUCT"
-                                          update-state="lifecycleCtrl.closeAlert(0)" type="alert-info">
-                                   <section aria-live="assertive">
-                                       <div ng-if="!lifecycleCtrl.isFrench()"
-                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-en.html'">
-                                       </div>
-                                       <div ng-if="lifecycleCtrl.isFrench()"
-                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-sequence-fr.html'">
-                                       </div>
-                                   </section>
-                               </cmp-alert>
-                           </div>
-                           <div class="form-group col-md-12">
-                               <cmp-alert ui-state="lifecycleCtrl.alerts[1]" msg="CONTROL_INSTRUCT"
-                                          update-state="lifecycleCtrl.closeAlert(1)" type="alert-info">
-                                   <section aria-live="assertive">
-                                       <div data-ng-if="!lifecycleCtrl.isFrench()"
-                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-control-en.html'">
-                                       </div>
-                                       <div data-ng-if="lifecycleCtrl.isFrench()"
-                                            ng-include="'app/scripts/templates/transaction/tpl-transaction-control-fr.html'">
-                                       </div>
-                                   </section>
-                               </cmp-alert>
-                           </div>
-                       </div>
-                   </div> -->
                     <div class="row">
                         <div class="form-group  col-md-7"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.regActivityId].$invalid}">
@@ -291,12 +216,6 @@
                                     data-ng-click="lifecycleCtrl.updateLivecycleModel()"
                                     data-ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}
                             </button>
-                            <!--
-                            <button class="btn btn-danger" data-ng-click="lifecycleCtrl.delete()">{{::'Delete Record'|translate}}
-                            </button>
-                            <button class="btn btn-default"
-                                    data-ng-click="lifecycleCtrl.discardChanges()">{{::'DISCARD_CHANGES'| translate }}
-                            </button> -->
                         </div>
                     </div>
                 </fieldset>

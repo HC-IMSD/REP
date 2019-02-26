@@ -10,20 +10,7 @@
                 <a class="fn-lnk" href="#4a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.a</a>
             </sup>
         </legend>
-        <!-- <label class="required">
-            <strong class="required"> {{"REQUIRED" |translate}}</strong>
-            <span data-ng-if="!ar.isContact" title="{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"
-                    class="btn-xs rep-help-button-primary"
-                    id="address-roles-instructions-toggle" data-ng-click="ar.addInstruct(0)">
-                <span class="fa fa-question-circle fa-2x"></span>
-                <span class="wb-inv">"{{::'ADDRESS_ROLE_INSTRUCT'|translate}}"</span>
-            </span>
-            <span data-ng-if="ar.isContact" title="{{::'CONTACT_ROLE_INSTRUCT'|translate}}"
-                    class="btn-xs rep-help-button-primary"
-                    id="contact-roles-instructions-toggle" data-ng-click="ar.addInstruct(0)">
-                <span class="fa fa-question-circle fa-2x"></span>
-                <span class="wb-inv">"{{::'CONTACT_ROLE_INSTRUCT'|translate}}"</span>
-        </label> -->
+
         <div data-ng-if="!ar.isContact">
             <input id="{{::ar.roleMissingId}}" type="hidden" name="{{::ar.roleMissingId}}"
                    data-ng-model="ar.isSelected" required/>
@@ -42,40 +29,6 @@
                         </span>
             </strong>
         </div>
-        <!--  <div data-ng-if="!ar.isContact" class="row col-md-12">
-          <div>
-                <cmp-alert  ui-state="ar.alerts[0]"
-                            msg="ADDRESS_ROLE_INSTRUCT"
-                            update-state="ar.closeAlert(0)"
-                            type="alert-info">
-                <section aria-live="assertive">
-                    <div data-ng-if="!ar.isFrench()"
-                         data-ng-include="'app/scripts/templates/company/tpl-company-address-roles-en.html'">
-                    </div>
-                    <div data-ng-if="ar.isFrench()"
-                         data-ng-include="'app/scripts/templates/company/tpl-company-address-roles-fr.html'">
-                    </div>
-                </section>
-                </cmp-alert>
-            </div>
-        </div>
-        <div data-ng-if="ar.isContact" class="row col-md-12">
-            <div>
-                <cmp-alert  ui-state="ar.alerts[0]"
-                            msg="CONTACT_ROLE_INSTRUCT"
-                            update-state="ar.closeAlert(0)"
-                            type="alert-info">
-                <section aria-live="assertive">
-                    <div data-ng-if="!ar.isFrench()"
-                         data-ng-include="'app/scripts/templates/company/tpl-company-contact-roles-en.html'">
-                    </div>
-                    <div data-ng-if="ar.isFrench()"
-                         data-ng-include="'app/scripts/templates/company/tpl-company-contact-roles-fr.html'">
-                    </div>
-                </section>
-                </cmp-alert>
-            </div>
-        </div>-->
         <div class="row">
             <div class="col-sm-4">
                 <div class="checkbox" id="chk-manufacturer">

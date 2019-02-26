@@ -135,9 +135,12 @@
   "OTHERTISS_DETAILS": "Other tissue or fluids details",
   "REPRODUCTIVE_DETAILS": "Other reproductive system details",
   "SKIN_DETAILS": "Other skin and glandular system details",
-  "ADD_SOURCED":"Add Sourced Ingredient",
-  "DELETE_SOURCED":"Delete Sourced Ingredient",
+  "ADD_SOURCED":"Add Animal / Human Sourced",
+  "DELETE_SOURCED":"Delete Animal / Human Sourced",
   "AP4CTRL.APPENDIXFORM":"in the appendix tab",
-  "CMP-APPENDIX-FOUR-RECORD":"Human / Animal Sourced Record"
+  "CMP-APPENDIX-FOUR-RECORD":"Human / Animal Sourced Record",
+  "ADD_TISSUES_FLUIDS": "Add Tissues or Fluids",
+  "ADD_ANIMAL_SOURCES": "Add Animal Sources",
+  "ADD_COUNTRY_ORIGIN": "Add Animal Countries"
 
 }

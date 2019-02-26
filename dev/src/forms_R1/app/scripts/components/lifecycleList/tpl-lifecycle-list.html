@@ -3,20 +3,6 @@
            data-ng-model="lifeListCtrl.oneRecord" required/>
     <input data-ng-if="lifeListCtrl.isSelectedRecord()" type="hidden" id="saveLifeRec_{{$id}}" name="saveLifeRec_{{$id}}"
            data-ng-model="lifeListCtrl.oneRecord" required/>
-    <!--
-    <div class="row" ng-if="!lifeListCtrl.finalState && lifeListCtrl.ectdValue">
-        <div class="col-xs-4 form-group">
-            <label for="startSeq"> Starting sequence number
-                <input id="startSeq" type="number" step="1" style="width: 6em"
-                       ng-model="lifeListCtrl.startingSequence" min="0"/>
-            </label>
-        </div>
-        <div class="col-xs-4">
-            <button class="btn btn-default btn-sm" data-ng-click="lifeListCtrl.setStartingSequence()">Update Sequence
-            </button>
-        </div>
-    </div> -->
-
     <div>
         <cmp-expanding-table pre-id="life_cycle_list_" list-items="lifeListCtrl.lifecycleList" id="transactionList"
                              reset-to-collapsed="lifeListCtrl.resetCollapsed"
@@ -45,7 +31,7 @@
             <button class="btn btn-primary"
                     data-ng-click="lifeListCtrl.addTransaction()" name="addTransactionRec_{{::$id}}"
                     id="addTransactionRec_{{::$id}}"
-                    data-ng-disabled="lifeListCtrl.isAddDisabled()">{{'ADD_TRANSACTION'|translate}}
+                    data-ng-disabled="lifeListCtrl.isAddDisabled()">{{'ADD_RECORD'|translate}}
             </button>
             <input type="submit" value="Cancel" class="btn btn-default"
                    data-ng-show="lifeListCtrl.newAdrFormShow"
