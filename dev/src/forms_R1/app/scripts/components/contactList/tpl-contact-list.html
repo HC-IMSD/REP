@@ -1,22 +1,7 @@
 <ng-form name="contactListCtrl.contactListForm">
-    <div class="row">
-       <!-- <cmp-error-summary form-ref="contactListCtrl.contactListForm" show-errors="contactListCtrl.showSummary"
-                           name-suffix="contactListCtrl.contactListForm" alias-list="contactListCtrl.alias"
-                           exclusion-list="contactListCtrl.exclusions"
-                           update-errors="contactListCtrl.updateSummary" form-preamble="CONTACT_INFO"
-                           set-heading-level="h4"></cmp-error-summary>-->
-    </div>
     <div id="contactList_{{::$id}}">
         <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" data-ng-show="false"
                data-ng-model="contactListCtrl.allRolesSelected" required/>
-        <label>
-            <!-- <strong id=" contactNum-role-error" class="error" ng-if="contactListCtrl.showError()">
-                         <span class="label label-danger"
-                               ng-messages="contactListCtrl.contactListForm.contactRolesValid.$error">
-                             <span ng-message="required">{{"MSG_ERR_ALLROLE"|translate}}</span>
-                         </span>
-             </strong>-->
-        </label>
         <cmp-expanding-table pre-id="contact_expnd_" list-items="contactListCtrl.contactList" transclude-name="companyContact"
                              reset-to-collapsed="contactListCtrl.resetCollapsed"
                              column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
@@ -39,7 +24,7 @@
         <div class="btn-group-sm col-md-12">
             <button name="addContact" class="btn btn-primary" id="addContact_{{::$id}}"
                     data-ng-click="contactListCtrl.addContact()" data-ng-disabled="contactListCtrl.disableAddContact()">
-                {{::'ADD_REPRES'|translate}}
+                {{::'ADD_RECORD'|translate}}
             </button>
             <button class="btn btn-default"
                     data-ng-show="contactListCtrl.newContactFormShow"

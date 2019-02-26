@@ -18,29 +18,8 @@
                         <a class="fn-lnk" href="#tr1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1</a>
                     </sup>
                 </h2>
-                <!--<div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'HELP_FILE_LOAD'|translate}}"
-                            class="btn-xs rep-help-button"
-                            id="startdate-picker-toggle" data-ng-click="main.addInstruct(0)">
-                        <span class="fa fa-question-circle fa-2x"></span>
-                        <span class="wb-inv">{{::'HELP_FILE_LOAD'|translate}}</span>
-                    </button>
-                </div> -->
             </header>
             <div class="panel-body">
-                    <!-- <cmp-alert  ui-state="main.alerts[0]"
-                                msg="HELP_FILE_LOAD"
-                                update-state="main.closeAlert(0)"
-                                type="alert-info">
-                        <section aria-live="assertive">
-                            <div data-ng-if="!main.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-file-en.html'">
-                            </div>
-                            <div data-ng-if="main.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-file-fr.html'">
-                            </div>
-                        </section>
-                    </cmp-alert> -->
                 <div class="col-md-12">
                     <hpfb-file-select update-model-root="main.showContent(fileContent)"
                                       root-elem="{{main.rootTag}}"></hpfb-file-select>
@@ -85,32 +64,7 @@
 
                     </label>
                 </div>
-               <!-- <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'PRIVACY_STATEMENT_HELP'|translate}}"
-                            class="btn rep-help-button-primary btn-xs"
-                            id="statement-instructions-toggle"
-                            data-ng-click="main.addInstruct(2)">
-                        <span class="fa fa-question-circle fa-2x"></span>
-                        <span class="wb-inv">{{::'PRIVACY_STATEMENT_HELP'|translate}}</span>
-                    </button>
-                </div> -->
             </div>
-            <!--<div class="row col-md-12">
-                <cmp-alert  ui-state="main.alerts[2]"
-                            msg="PRIVACY_STATEMENT_HELP"
-                            update-state="main.closeAlert(2)"
-                            type="alert-info">
-
-                    <section aria-live="assertive">
-                        <div data-ng-if="!main.isFrench()"
-                             ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'">
-                        </div>
-                        <div data-ng-if="main.isFrench()"
-                             ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'">
-                        </div>
-                    </section>
-                </cmp-alert>
-            </div> -->
             <div class="row">
                 <div class="form-group col-md-12">
                     <button class="btn btn-default btn-lg active mrgn-rght-sm" formnovalidate data-ng-click="main.saveJson()">
@@ -123,30 +77,9 @@
                     <sup id="tr8_ref">
                         <a class="fn-lnk" href="#tr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>8</a>
                     </sup>
-                    <!--<button title="{{::'EXPAND'|translate}} {{::'SAVE_INSTRUCT'|translate}}"
-                            class="btn rep-help-button-primary btn-xs"
-                            id="save-instructions-toggle" data-ng-click="main.addInstruct(1)">
-                        <span class="fa fa-question-circle fa-2x"></span>
-                        <span class="wb-inv">{{::'SAVE_INSTRUCT'|translate}}</span>
-                    </button>-->
+
                 </div>
             </div>
-           <!-- <div class="row">
-                <div class="col-md-10">
-                <cmp-alert ui-state="main.alerts[1]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(1)"
-                           type="alert-info">
-                    <section aria-live="assertive">
-                        <div data-ng-if="!main.isFrench()"
-                             ng-include="'app/scripts/templates/transaction/tpl-transaction-save-en.html'">
-                        </div>
-                        <div data-ng-if="main.isFrench()"
-                             ng-include="'app/scripts/templates/transaction/tpl-transaction-save-fr.html'">
-                        </div>
-                    </section>
-                </cmp-alert>
-            </div>
-        </div> -->
-
     </ng-form>
     <!--<pre>{{main.transaction|json}}</pre>-->
 </div>

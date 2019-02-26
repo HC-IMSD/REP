@@ -36,11 +36,6 @@
                             <sup id="dr9b1_ref">
                                 <a class="fn-lnk" href="#dr9b1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.1</a>
                             </sup>
-                            <!--<button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_NAME_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="ingredient-name-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(4)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'INGREDIENT_NAME_INSTRUCT'|translate}}</span>
-                            </button> -->
                             <cmp-error-message field-name="ingRecCtrl.ingredName"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.ingredName])"
@@ -60,21 +55,6 @@
                         </label>
                     </div>
                 </div>
-               <!-- <div class="row">
-                    <div class="col-md-12">
-                        <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[4]"
-                             class="alert-info" close="ingRecCtrl.closeAlert(4)">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredient-en.html'">
-                                </div>
-                                <div data-ng-if="ingRecCtrl.isFrench()"
-                                     data-ng-include="'app/scripts/templates/drug/tpl-drugProduct-ingredient-fr.html'">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>  -->
                 <div class="row" data-ng-if="!ingRecCtrl.isMedIng()">
                     <div class="form-group col-md-12">
                         <label for="variant_{{::$id}}">
@@ -82,31 +62,11 @@
                             <sup id="dr9b2_ref">
                                 <a class="fn-lnk" href="#dr9b2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.2</a>
                             </sup>
-                            <!--<span title="{{::'EXPAND'|translate}} {{::'VARIANT_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="variant-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(0)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'VARIANT_INSTRUCT'|translate}}</span>
-                            </span> -->
                             <input type="text" id="variant_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.variant" maxlength="60"
                                    data-ng-model-options="{ debounce: '$inherit'}" size="60"
                                    class="form-control full-width" name="variant"/>
                         </label>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-md-12">
-                            <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[0]"
-                                 class="alert-info" close="ingRecCtrl.closeAlert(0)">
-                                <section aria-live="assertive">
-                                    <div data-ng-if="!ingRecCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-variant-en.html'">
-                                    </div>
-                                    <div data-ng-if="ingRecCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/drug/tpl-drugProduct-variant-fr.html'">
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-                    </div>  -->
                     <div class="form-group col-md-12"
                          data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.purposeId].$invalid}">
                         <label for="{{::ingRecCtrl.purposeId}}" class="required">
@@ -115,11 +75,6 @@
                             <sup id="dr9b3_ref">
                                 <a class="fn-lnk" href="#dr9b3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.3</a>
                             </sup>
-                            <!--<span title="{{::'EXPAND'|translate}} {{::'PURPOSE_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="purpose-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(5)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'PURPOSE_INSTRUCT'|translate}}</span>
-                            </span> -->
                             <cmp-error-message field-name="ingRecCtrl.purposeId"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.purposeId])"
@@ -130,21 +85,6 @@
 
                         </label>
                     </div>
-                   <!-- <div class="row">
-                        <div class="col-md-12">
-                            <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[5]"
-                                 class="alert-info" close="ingRecCtrl.closeAlert(5)">
-                                <section aria-live="assertive">
-                                    <div data-ng-if="!ingRecCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-purpose-en.html'">
-                                    </div>
-                                    <div data-ng-if="ingRecCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-purpose-fr.html'">
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="form-group col-md-12"
                          data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.nIngredName].$invalid}">
                         <label for="{{::ingRecCtrl.nIngredName}}" class="required"><span class="field-name">{{'ING_NAME'|translate}}</span>
@@ -176,32 +116,12 @@
                             <sup id="dr9b4_ref">
                                 <a class="fn-lnk" href="#dr9b4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.4</a>
                             </sup>
-                           <!-- <span title="{{::'EXPAND'|translate}} {{::'STANDARD_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="standard-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(1)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'STANDARD_INSTRUCT'|translate}}</span>
-                            </span>  -->
                             <input type="text" id="{{::ingRecCtrl.standardId}}" data-ng-model="ingRecCtrl.ingModel.standard"
                                    data-ng-model-options="{ debounce: '$inherit'}"
                                    class="form-control full-width" name="standardVal" size="40" maxlength="40"/>
                         </label>
                     </div>
                 </div>
-               <!-- <div class="row">
-                    <div class="col-md-12">
-                        <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[1]"
-                             class="alert-info" close="ingRecCtrl.closeAlert(1)">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-standard-en.html'">
-                                </div>
-                                <div data-ng-if="ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-standard-fr.html'">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-md-12 form-group">
                     <fieldset>
@@ -453,11 +373,6 @@
                                 <a class="fn-lnk" href="#dr9b5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.5</a>
                             </sup>
 
-                           <!-- <button title="{{::'EXPAND'|translate}} {{::'IS_NANO_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="is-nano-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(2)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'IS_NANO_INSTRUCT'|translate}}</span>
-                            </button> -->
                             <cmp-error-message field-name="ingRecCtrl.isNanoMaterialId"
                                                form-ref="ingRecCtrl.activeIngForm"
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.isNanoMaterialId])"
@@ -527,11 +442,7 @@
                             <sup id="dr9b6_ref">
                                 <a class="fn-lnk" href="#dr9b6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.6</a>
                             </sup>
-                           <!-- <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
-                                    id="is-sourced-instructions-toggle" data-ng-click="ingRecCtrl.addInstruct(3)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'AH_SOURCED_INSTRUCT'|translate}}</span>
-                            </button> -->
+
                         </label>
                         <cmp-error-message field-name="ingRecCtrl.animalHumanSrcId"
                                            form-ref="ingRecCtrl.activeIngForm"
@@ -543,21 +454,6 @@
                         </select>
                     </div>
                 </div>
-               <!-- <div class="row">
-                    <div class="col-md-12">
-                        <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[3]"
-                             class="alert-info" close="ingRecCtrl.closeAlert(3)">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-sourced-en.html'">
-                                </div>
-                                <div data-ng-if="ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-sourced-fr.html'">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="col-xs-10">
                         <div data-ng-if="ingRecCtrl.isAnimalHumanSourced()" class="alert alert-info"
@@ -571,14 +467,14 @@
             <div class="row">
                 <div class="col-xs-12 btn-group-sm align-bottom">
                     <button class="btn btn-primary" data-ng-click="ingRecCtrl.saveIng()" id="medSave_{{::$id}}"
-                            name="saveMI">{{'SAVE'|translate}}
+                            name="saveMI">{{'SAVE_RECORD'|translate}}
                     </button>
                     <button data-ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-danger" id="medDelete_{{::$id}}"
-                            name="deleteMI" data-ng-click="ingRecCtrl.delete()">{{'DELETE'|translate}}
+                            name="deleteMI" data-ng-click="ingRecCtrl.delete()">{{'DELETE_RECORD'|translate}}
                     </button>
                     <button data-ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-default"
                             data-ng-click="ingRecCtrl.copy()" data-ng-disabled="ingRecCtrl.activeIngForm.$dirty">
-                        {{'COPY'|translate}}
+                        {{'COPY_RECORD'|translate}}
                     </button>
                     <button class="btn btn-default" name="discardMI" data-ng-click="ingRecCtrl.discardChanges()">
                         {{'DISCARD_CHANGES'|translate}}

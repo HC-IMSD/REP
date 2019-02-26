@@ -63,28 +63,6 @@
                     <datalist id="dosageFormList" class="rep-selectize-dropdown rep-selectize-font">
                         <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}" label="{{formType[formulRecCtrl.lang]}}"/>
                     </datalist>
-                        <!--<div class="rep-pad-top">-->
-                            <!--<div class="rep-error"-->
-                                 <!--data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}">-->
-                                <!--<ui-select ng-model="formulRecCtrl.frmModel.dosageForm"-->
-                                           <!--id="{{::formulRecCtrl.dosageId}}"-->
-                                           <!--name="{{::formulRecCtrl.dosageId}}" data-ng-model-options="{debounce: 0}"-->
-                                           <!--class="rep-selectize-dropdown rep-selectize-font" required-->
-                                           <!--data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageId].$invalid}"-->
-                                           <!--title="{{'SELECT_DOSAGE'|translate}}">-->
-                                    <!--<ui-select-match placeholder="{{'SELECT_DOSAGE'|translate}}"-->
-                                                     <!--class="rep-selectize-font rep-selectize-dropdown">-->
-                                        <!--{{$select.selected[formulRecCtrl.lang]}}-->
-                                    <!--</ui-select-match>-->
-                                    <!--<ui-select-choices-->
-                                            <!--repeat="formType in formulRecCtrl.dosageFormList | filter:{[formulRecCtrl.lang]:$select.search}"-->
-                                            <!--class="rep-selectize-font full-width">-->
-                                <!--<span class="full-width"-->
-                                      <!--data-ng-bind-html="formType[formulRecCtrl.lang] | highlight: $select.search"></span>-->
-                                    <!--</ui-select-choices>-->
-                                <!--</ui-select>-->
-                            <!--</div>-->
-                        <!--</div>-->
 
                 </div>
                 <div class="col-md-6 form-group"
@@ -109,40 +87,13 @@
             <div>
                 <section class="panel panel-default">
                     <header class="panel-heading clearfix">
-                        <h3 class="panel-title  col-md-8">C. {{'INGREDIENTS'|translate}}
+                        <h3 class="panel-title">C. {{'INGREDIENTS'|translate}}
                             <sup id="dr92_ref">
                                 <a class="fn-lnk" href="#dr92"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b</a>
                             </sup>
                         </h3>
-                        <!-- <div class="btn-group pull-right">
-                            <button title="{{::'EXPAND'|translate}} {{::'INGREDIENT_INSTRUCT'|translate}}"
-                                    class="btn-xs rep-help-button-primary btn-xs"
-                                    id="ingredient-instructions-toggle" data-ng-click="formulRecCtrl.addInstruct(3)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'INGREDIENT_INSTRUCT'|translate}}</span>
-                            </button>
-                        </div> -->
                     </header>
                     <div class="panel-body">
-                       <!--  <div class="row">
-                            <div class="col-md-12">
-                                <div>
-                                    <cmp-alert  ui-state="formulRecCtrl.alerts[3]"
-                                                msg="INGREDIENT_INSTRUCT"
-                                                update-state="formulRecCtrl.closeAlert(3)"
-                                                type="alert-info">
-                                    <section aria-live="assertive">
-                                        <div data-ng-if="!formulRecCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredientTable-en.html'">
-                                        </div>
-                                        <div data-ng-if="formulRecCtrl.isFrench()"
-                                             ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-ingredientTable-fr.html'">
-                                        </div>
-                                    </section>
-                                    </cmp-alert>
-                                </div>
-                            </div>
-                        </div>  -->
                         <div>
                             <cmp-active-ing-list ingredients="formulRecCtrl.frmModel.activeIngList"
                                              error-summary-update="formulRecCtrl.errorSummaryUpdate"
