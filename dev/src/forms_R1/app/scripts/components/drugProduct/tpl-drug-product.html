@@ -1,15 +1,18 @@
 <ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm">
     <div data-translate-cloak="cloak-class">
+        <span id="privacy"></span>
         <div class="module-attention">
             <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
             <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
             <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
         </div>
+        <span id="instructions"></span>
         <aside class="wb-fnote" role="note">
             <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
             <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-footnote-en.html'"></section>
             <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-footnote-fr.html'"></section>
         </aside>
+        <span id="main"></span>
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-8">{{::'LOAD_DRUGPROD'|translate}}

@@ -1,15 +1,17 @@
 <ng-form id="{{::dos.dossierFormId}}" name="dos.dossierForm">
-
+    <span id="privacy"></span>
     <div class="module-attention">
         <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
         <section data-ng-if="!main.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
         <section data-ng-if="main.isFrench()" ng-include="'app/scripts/templates/company/tpl-privacy-statement-fr.html'"></section>
     </div>
+    <span id="instructions"></span>
     <aside class="wb-fnote" role="note">
         <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
         <section data-ng-if="!dos.isFrench()" ng-include="'app/scripts/templates/dossier/tpl-dossier-footnote-en.html'"></section>
         <section data-ng-if="dos.isFrench()" ng-include="'app/scripts/templates/dossier/tpl-dossier-footnote-fr.html'"></section>
     </aside>
+    <span id="main"></span>
     <div data-translate-cloak="cloak-class">
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
