@@ -12,7 +12,8 @@
         <div class="row">
             <div class="form-group col-xs-12">
                 <div class="checkbox required">
-                <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}" >
+                <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}">
+                    <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}" >
                     <input type="checkbox" ng-model="cspFeePayCtrl.model.ackPaymentSubmit"
                            name="{{::cspFeePayCtrl.ackFeeSubmitId}}" id="{{::cspFeePayCtrl.ackFeeSubmitId}}" required/>
                     {{::"ACK_FEE_SUBMIT"|translate}}
@@ -28,6 +29,7 @@
                                        form-ref="cspFeePayCtrl.paymentForm"
                                        show-error="cspFeePayCtrl.showErrors()"
                                        error-types="cspFeePayCtrl.requiredOnly"></cmp-error-message>
+                </label>
                 </div>
             </div>
         </div>
@@ -65,7 +67,7 @@
 
             </div>
         </div>
-        <div class="row">
+        <!--div class="row">
             <div class="form-group col-sm-12"
                  ng-class="{'has-error':cspFeePayCtrl.paymentForm[cspFeePayCtrl.feeTypeId].$invalid}">
                 <div class="col-sm-9">
@@ -83,6 +85,6 @@
                     </label>
                 </div>
             </div>
-        </div>
+        </div-->
     </ng-form>
 </div>
