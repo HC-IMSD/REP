@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-xs-4 form-group" data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
                         <label for="{{::drugProdCtrl.compId}}" class="required">
-                            <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}</span>
+                            <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}{{::'LEAST_6_CHAR' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="drugProdCtrl.compId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -55,7 +55,7 @@
                                                error-types="drugProdCtrl.min5Error">
                             </cmp-error-message>
                             <input type="text" class="form-control full-width" id="{{::drugProdCtrl.compId}}"
-                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5"
+                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="6"
                                    data-ng-model="drugProdCtrl.model.companyID"/>
 
                         </label>
@@ -125,7 +125,9 @@
                         </textarea>
                     </div>
                 </div>
-                <fieldset id="fs_addrMissing_{{::$id}}">
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <fieldset id="fs_addrMissing_{{::$id}}">
                     <label>
                         <span class="field-name">5. {{::'ADDRESS_NOC'|translate}}</span>
                         <sup id="dr5_ref">
@@ -183,7 +185,11 @@
                         </div>
                     </div>
                 </fieldset>
-                <section class="panel panel-default">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 form-group">
+                        <section class="panel panel-default">
                     <header class="panel-heading clearfix">
                         <h3 class="panel-title">6. {{'IMPORTER'|translate}}
                             <sup id="dr6_ref">
@@ -201,8 +207,11 @@
                         </div>
                     </div>
                 </section>
+                    </div>
+                </div>
+
                 <div class="row">
-                    <div class="col-xs-4 form-group"
+                    <div class="col-xs-12 form-group"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
                             <span class="field-name">7.&nbsp;{{::'DRUG_USE'|translate}}</span>
@@ -222,17 +231,18 @@
                                     required>
                                 <option value="" label=" "></option>
                             </select>
+                        <div data-ng-if="drugProdCtrl.isDisinfectant()">
+                            <cmp-disinfectant-type record="drugProdCtrl.model.drugProduct.disinfectantType"
+                                                   on-update="drugProdCtrl.onDisiTypeUpdate($event.roles)"
+                                                   show-errors="drugProdCtrl.showErrors()"
+                                                   update-error-summary="drugProdCtrl.updateErrorSummaryState()">
+                            </cmp-disinfectant-type>
+                        </div>
                     </div>
                 </div>
-
-                <div data-ng-if="drugProdCtrl.isDisinfectant()">
-                    <cmp-disinfectant-type record="drugProdCtrl.model.drugProduct.disinfectantType"
-                                      on-update="drugProdCtrl.onDisiTypeUpdate($event.roles)"
-                                      show-errors="drugProdCtrl.showErrors()"
-                                      update-error-summary="drugProdCtrl.updateErrorSummaryState()">
-                    </cmp-disinfectant-type>
-                </div>
-                <fieldset id="{{::drugProdCtrl.fsType}}">
+                <div class="row">
+                <div class="form-group col-xs-12">
+                    <fieldset id="{{::drugProdCtrl.fsType}}">
                     <legend>
                         <label>
                             <span class="label-pi">8.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
@@ -299,15 +309,15 @@
                         </div>
                     </div>
                 </fieldset>
-
+                    </div>
+                </div>
                 <div class="row" data-ng-if="drugProdCtrl.isSchedA()">
                     <div class="col-xs-12 form-group">
                         <cmp-schedule-a schedule-group="drugProdCtrl.model.drugProduct.scheduleAGroup" show-errors="drugProdCtrl.showSummary"></cmp-schedule-a>
                     </div>
                 </div>
-
                 <div class="row">
-                    <div class="form-group col-md-12"
+                    <div class="form-group col-xs-12"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
                         <label class="required">
                             <span class="field-name">9. {{::'PROP_INDICATION'|translate}}</span>
@@ -358,7 +368,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-4 form-group">
+                    <div class="col-xs-12 form-group">
                         <label>
                             <span class="field-name">10. {{::'FORMULATION'|translate}}</span>
                             <sup id="dr9_ref">
@@ -378,7 +388,7 @@
                 </div>
             </div>
         </section>
-        <div class="row form-group  col-md-12">
+        <div class="row form-group  col-xs-12">
             <div class="checkbox col-md-10">
                 <label for="{{::drugProdCtrl.privacyStatementID |translate}}">
                     <input type="checkbox"
@@ -399,7 +409,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-xs-12">
                 <button class="btn btn-default btn-lg active mrgn-rght-sm" data-ng-click="drugProdCtrl.saveJson()"
                         data-ng-disabled="drugProdCtrl.disableJSONSave()">
                     {{::'SAVE_WORKING'|translate}}

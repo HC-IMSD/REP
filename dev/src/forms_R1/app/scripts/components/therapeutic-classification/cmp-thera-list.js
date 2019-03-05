@@ -44,7 +44,6 @@
 
         vm.$onInit = function () {
             _setIdNames();
-            vm.noTheraRecs();
         };
 
 
@@ -72,7 +71,7 @@
 
         vm.addNew = function () {
             var maxID = getMaxID();
-            maxID=maxID+1;
+            maxID = maxID+1;
             var item = {"id": maxID , "name": ""};
             vm.model.theraList.push(item);
             vm.resetToCollapsed = !vm.resetToCollapsed;
@@ -80,6 +79,7 @@
             vm.selectRecord = (vm.model.theraList.length - 1);
             vm.noTheraRecs();
         };
+
         vm.deleteRecord = function (recId) {
 
             var idx = vm.model.theraList.indexOf(
@@ -122,13 +122,12 @@
             return false;
         };
 
+
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
-            vm.theraListId="thera_list"+scopeId;
-            vm.noTheraId="no_theraVal"+scopeId;
-            vm.addTheraId="addTheraClass"+scopeId;
+            vm.theraListId="thera_list" + scopeId;
+            vm.noTheraId="no_theraVal" + scopeId;
+            vm.addTheraId="addTheraClass" + scopeId;
         }
-
-
     }
 })();
