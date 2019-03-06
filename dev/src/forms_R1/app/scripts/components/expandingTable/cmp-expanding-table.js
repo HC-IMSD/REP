@@ -24,6 +24,7 @@
                 listItems: '<',
                 columnDef:'<',
                 disableSelection:'<',
+                isInitial:'<',
                 selectRecord: '<',
                 resetToCollapsed: '<',
                 disableErrColumn:'@',
@@ -251,6 +252,14 @@
                 }
             }
         }
+
+        vm.isInitialSet = function () {
+            if (vm.isInitial) {
+                vm.isInitial = false;
+                return true;
+            }
+            return false;
+        };
 
 
     }

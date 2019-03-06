@@ -46,6 +46,7 @@
         vm.addressList = [];
         vm.isIn = "";
         vm.isInternal = false;
+        vm.initFlag = false;
         vm.columnDef = [
             {
                 label: "COMPANY",
@@ -113,6 +114,11 @@
                     vm.isInternal = false;
                 }
             }
+        };
+
+        vm.$postLink = function () {
+            vm.initFlag = true;
+            vm.addAddress();
         };
 
             function updateRolesConcat() {
