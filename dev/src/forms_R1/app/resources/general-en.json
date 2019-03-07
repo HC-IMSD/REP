@@ -45,6 +45,8 @@
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",
   "PHARMACEUTICAL": "Pharmaceutical",
+  "CLINICAL_TRIAL": "Clinical Trial",
+  "VETERINARY":"Veterinary",
   "HELP_FILE_LOAD": "file load instructions",
   "EXPAND": "Expand",
   "HELP_ACTIVITY_MAIN": "Activity Instructions",
