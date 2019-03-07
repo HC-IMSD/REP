@@ -74,7 +74,7 @@
                                            error-types="addressRec.length6Error"></cmp-error-message>
                         <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
                                data-ng-model="addressRec.addressModel.importerID"
-                               class="form-control full-width" minlength="6" maxlength="6"  data-ng-pattern="/^[0-9]{6}$/"
+                               class="form-control full-width" minlength="6" maxlength="6"
                                data-ng-blur="addressRec.updateErrorSummaryState()" data-ng-readonly="!addressRec.isInternal"
                                data-ng-required="addressRec.isInternal && addressRec.isImporter">
 

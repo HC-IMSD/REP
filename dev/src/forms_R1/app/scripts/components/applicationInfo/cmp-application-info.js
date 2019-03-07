@@ -51,8 +51,7 @@
         vm.isAmend = false;
         vm.min6Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"},
-            {type: "pattern", displayAlias: "MSG_FORMAT_6DIGITS"}
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
         ];
         vm.min7Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
