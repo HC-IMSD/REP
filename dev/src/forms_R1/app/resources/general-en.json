@@ -49,6 +49,8 @@
   "UNKNOWN": "Unknown",
   "BIOLOGIC": "Biologic",
   "PHARMACEUTICAL": "Pharmaceutical",
+  "VETERINARY":"Veterinary",
+  "CLINICAL_TRIAL":"Clinical Trial",
   "HELP_FILE_LOAD": "file load instructions",
   "EXPAND": "Expand",
   "HELP_ACTIVITY_MAIN": "Activity Instructions",
@@ -83,5 +85,7 @@
   "PRIVACY_NOTICE_STATEMENT":"Privacy Notice Statement",
   "PRIVACY_STATEMENT":"By submitting your personal information, you are consenting to its collection, use and disclosure in accordance with the Privacy Notice Statement.",
   "FOOTNOTE_INSTRUCTION":"Instructions for completing sections on form",
-  "SECTION_IS_NOT_VISIBLE": "[ This section may not be visible. ]"
+  "SECTION_IS_NOT_VISIBLE": "[ This section may not be visible. ]",
+  "FAX_NOT_AVAILABLE":" (Use 0000000000 if not available)",
+  "NOT_APPLICABLE": "Not applicable"
 }

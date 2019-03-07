@@ -33,9 +33,9 @@
             }
         });
 
-    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE','ENGLISH','$translate'];
+    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE','ENGLISH','getRoleLists','$translate'];
 
-    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE, ENGLISH, $translate) {
+    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE, ENGLISH, getRoleLists, $translate) {
 
         var vm = this;
         vm.userType = EXTERNAL_TYPE;
@@ -62,6 +62,7 @@
             vm.rootTag = vm.companyService.getRootTag();
         }
         vm.applTypes = vm.companyService.getApplicationTypes();
+        vm.formTypeList = getRoleLists.getFormTypes();
         vm.company = vm.companyService.getModelInfo();
         vm.alerts = [false, false, false, false, false, false];
         /**vm.alertAnchors = ["load-instructions-toggle",
@@ -354,6 +355,7 @@
             var scopeId="_"+  $scope.$id;
             vm.formId = "company_form" +scopeId;
             vm.privacyStatementID = "privacy_statement" +scopeId;
+            vm.typeId="dossier_type"+ scopeId;
         }
 
         /**
