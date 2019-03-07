@@ -39,6 +39,12 @@
                                update-errors="main.updateSummary" make-focused="main.focusSummary"
                                name-suffix="main.companyEnrolForm" set-heading-level="h2">
             </cmp-error-summary>
+            <cmp-error-summary form-ref="dos.dossierForm" select-tab="dos.selectTab(index)"
+                               form-preamble="DOSSIER" exclusion-list=dos.exclusions
+                               name-suffix="dos.dossierForm" set-heading-level="h2" form-id="dos.dossierFormId"
+                               make-focused="dos.focusSummary" alias-list="dos.alias" show-errors="dos.showSummary"
+                               update-errors="dos.updateSummary">
+            </cmp-error-summary>
         </div>
         <div>
             <section class="panel panel-primary mrgn-tp-lg">
@@ -95,7 +101,7 @@
                     </div>
                 </div>
             </section>
-            <div class="row form-group  col-md-12">
+            <div class="row form-group  col-md-12" data-ng-if="infoCtrl.isExtern()">
                     <div class="checkbox col-md-10">
                         <label for="{{::main.privacyStatementID |translate}}">
                             <input type="checkbox"

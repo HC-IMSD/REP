@@ -1,4 +1,4 @@
-<ng-form id="{{::dos.dossierFormId}}" name="dos.dossierForm">
+<ng-form id="{{::dos.dossierFormId}}" name="dos.dossierForm" data-translate-cloak="cloak-class">
     <span id="privacy"></span>
     <div class="module-attention">
         <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
@@ -83,7 +83,7 @@
                                                 show-error="dos.showError(dos.dossierForm[dos.compId])"
                                                 error-types="dos.min5Error"></cmp-error-message>
                              <input type="text" class="form-control full-width" id="{{::dos.compId}}"
-                                    name="{{::dos.compId}}" required maxlength="6" minlength="6"
+                                    name="{{::dos.compId}}" required maxlength="6" minlength="6" data-ng-pattern="/^[0-9]{6}$/"
                                     data-ng-model="dos.dossierModel.companyID"/>
 
                          </label>
@@ -267,7 +267,7 @@
                  </div>
              </section>
          </div>
-         <div class="row form-group  col-md-12">
+         <div class="row form-group  col-md-12" data-ng-if="infoCtrl.isExtern()">
              <div class="checkbox col-md-10">
                  <label for="{{::dos.privacyStatementID |translate}}">
                      <input type="checkbox"

@@ -93,7 +93,7 @@
             },
             "importerIdValid": {
                 "type": "element",
-                "target": "addAddressBtn"
+                "target": "address_expnd"
             }
 
 
@@ -207,8 +207,9 @@
             return vm.companyService.transformToFileObj(vm.company);
         }
 
-        $scope.$watch("main.companyEnrolForm.$valid", function () {
-            disableXMLSave()
+        $scope.$watch("main.companyEnrolForm.$error", function () {
+            //disableXMLSave()
+            vm.updateErrorSummary();
         }, true);
 
         function disableXMLSave() {

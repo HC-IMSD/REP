@@ -79,11 +79,13 @@
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.min5Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"},
+            {type: "pattern", displayAlias: "MSG_FORMAT_6DIGITS"}
         ];
         vm.min7Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "minlength", displayAlias: "MSG_LENGTH_7"}
+            {type: "minlength", displayAlias: "MSG_LENGTH_7"},
+            {type: "pattern", displayAlias: "MSG_FORMAT_CHAR_6DIGITS"}
         ];
         vm.showSummary=false;
 

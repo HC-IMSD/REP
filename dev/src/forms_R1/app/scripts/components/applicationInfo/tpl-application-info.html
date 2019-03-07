@@ -31,10 +31,10 @@
                             <cmp-error-message field-name="infoCtrl.compId"
                                                form-ref="infoCtrl.applInfoForm"
                                                show-error="infoCtrl.showError(infoCtrl.applInfoForm[infoCtrl.compId])"
-                                               error-types="infoCtrl.min5Error">
+                                               error-types="infoCtrl.min6Error">
                             </cmp-error-message>
                             <input type="text" class="form-control" id="{{::infoCtrl.compId}}"
-                                   name="{{::infoCtrl.compId}}" required  maxlength="6" minlength="6"
+                                   name="{{::infoCtrl.compId}}" required  maxlength="6" minlength="6" size="6" data-ng-pattern="/^[0-9]{6}$/"
                                    data-ng-model="infoCtrl.record[infoCtrl.tagName]"/>
                         </label>
                     </div>
@@ -59,14 +59,14 @@
                                 <cmp-error-message field-name="infoCtrl.dossierId"
                                                    form-ref="infoCtrl.applInfoForm"
                                                    show-error="infoCtrl.showError(infoCtrl.applInfoForm[infoCtrl.dossierId])"
-                                                   error-types="infoCtrl.min5Error">
+                                                   error-types="infoCtrl.min7Error">
                                 </cmp-error-message>
                             </label>
                             <div class="rep-input-group mrgn-tp-0">
                                 <span class="input-group-addon">HC6-024-</span>
                                 <input type="text" class="form-control full-width" id="{{::infoCtrl.dossierId}}"
                                        maxlength="7" name="{{::infoCtrl.dossierId}}"
-                                       minlength="7" size="7"
+                                       minlength="7" size="7"  data-ng-pattern="/^[A-Z,a-z][0-9]{6}$/"
                                        data-ng-model="infoCtrl.record[infoCtrl.tagName]" required />
                             </div>
                     </div>
