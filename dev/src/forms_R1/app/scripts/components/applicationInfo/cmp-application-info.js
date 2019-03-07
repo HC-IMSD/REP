@@ -36,7 +36,8 @@
             applicationType: "NEW",
             enrolmentVersion: "0.0",
             dateSaved: "",
-            reasonAmend:""
+            reasonAmend:"",
+            dossierType:""
         };
         vm.fieldIdLabel = "";
         vm.minFieldLength = "";

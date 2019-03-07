@@ -34,7 +34,7 @@
 
                 </label>
             </div>
-            <div class="col-md-4 form-group">
+            <div class="col-md-2 form-group">
                 <label for="initials_{{::$id}}">
                     <span class="field-name">{{::'INITIALS'|translate}}</span>
                     <input type="text" id="initials_{{::$id}}" data-ng-model="contCtrl.contactModel.initials"
@@ -42,7 +42,7 @@
                            data-ng-readonly="!contCtrl.isEditable"/>
                 </label>
             </div>
-            <div class="col-md-4 form-group"
+            <div class="col-md-6 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.lastNameId].$invalid}">
                 <label for="{{::contCtrl.lastNameId}}" class="required">
                     <span class="field-name">{{::'LASTNAME'|translate}}</span>
@@ -55,12 +55,11 @@
                            data-ng-readonly="!contCtrl.isEditable"
                            class="form-control full-width" name="{{::contCtrl.lastNameId}}" required
                            maxlength="60" size="60"/>
-
                 </label>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 form-group"
+            <div class="col-md-6 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.langCorrespondId].$invalid}">
                 <label for="{{::contCtrl.langCorrespondId}}" class="required">
                     <span class="field-name">{{::'LANGCORRESPOND'|translate}}</span>
@@ -77,7 +76,7 @@
 
                 </label>
             </div>
-            <div class="col-md-4 form-group"
+            <div class="col-md-6 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.jobTitleId].$invalid}">
                 <label for="{{::contCtrl.jobTitleId}}" class="required">
                     <span class="field-name">{{::'JOBTITLE'|translate}}</span>
@@ -92,25 +91,9 @@
 
                 </label>
             </div>
-            <div class="col-md-4 form-group"
-                 data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.faxId].$invalid}">
-                <label for="{{::contCtrl.faxId}}" data-ng-class="{'required':contCtrl.faxMandatory}">
-                    <span class="field-name">{{::'FAX_NUMBER'|translate}}{{::'INCLUDE_AREA_CODE'|translate}}</span>
-                    <strong data-ng-if="contCtrl.faxMandatory" class="required">{{::'REQUIRED'|translate}}</strong>
-                    <cmp-error-message ng-if="contCtrl.faxMandatory" field-name="contCtrl.faxId"
-                                       form-ref="contCtrl.contactForm"
-                                       show-error="contCtrl.showErrors()"
-                                       error-types="contCtrl.faxError"></cmp-error-message>
-                    <input type="text" id="{{::contCtrl.faxId}}"
-                           data-ng-model="contCtrl.contactModel.fax" data-ng-readonly="!contCtrl.isEditable"
-                           data-ng-required="contCtrl.faxMandatory" class="form-control" data-ng-pattern="contCtrl.phoneReg"
-                           name="{{::contCtrl.faxId}}" maxlength="25" size="25"/>
-
-                </label>
-            </div>
         </div>
         <div class="row">
-            <div class="col-md-5 form-group"
+            <div class="col-md-6 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.phoneNumberId].$invalid}">
                 <label for="{{::contCtrl.phoneNumberId}}" class="required">
                     <span class="field-name">{{::'PHONENUMBER'|translate}}{{::'INCLUDE_AREA_CODE'|translate}}</span>
@@ -126,13 +109,35 @@
 
                 </label>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-6 form-group">
                 <label for="{{::contCtrl.phoneExtId}}"><span class="field-name">{{::'PHONE_EXT'|translate}}</span>
                     <input type="text" id="{{::contCtrl.phoneExtId}}" data-ng-model="contCtrl.contactModel.phoneExt"
                            data-ng-readonly="!contCtrl.isEditable" class="form-control" name="{{::contCtrl.phoneExtId}}" maxlength="10"/>
                 </label>
             </div>
-            <div class="col-md-4 form-group"
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group"
+                 data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.faxId].$invalid}">
+                <label for="{{::contCtrl.faxId}}" data-ng-class="{'required':contCtrl.faxMandatory}">
+                    <span class="field-name">{{::'FAX_NUMBER'|translate}}{{::'INCLUDE_AREA_CODE'|translate}}</span>
+                    <strong data-ng-if="contCtrl.faxMandatory" class="required">{{::'REQUIRED'|translate}}</strong>
+                    <sup id="5a_ref" data-ng-if="contCtrl.faxMandatory">
+                         <a class="fn-lnk" href="#5a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5.a</a>
+                    </sup>
+
+                    <cmp-error-message ng-if="contCtrl.faxMandatory" field-name="contCtrl.faxId"
+                                       form-ref="contCtrl.contactForm"
+                                       show-error="contCtrl.showErrors()"
+                                       error-types="contCtrl.faxError">
+                    </cmp-error-message>
+                    <input type="text" id="{{::contCtrl.faxId}}"
+                           data-ng-model="contCtrl.contactModel.fax" data-ng-readonly="!contCtrl.isEditable"
+                           data-ng-required="contCtrl.faxMandatory" class="form-control full-width" data-ng-pattern="contCtrl.phoneReg"
+                           name="{{::contCtrl.faxId}}" maxlength="25" size="25"/>
+                </label>
+            </div>
+            <div class="col-md-6 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.contactEmailId].$invalid}">
                 <label for="{{::contCtrl.contactEmailId}}" class="required">
                     <span class="field-name">{{::'CONTACTEMAIL'|translate}}</span>
@@ -150,5 +155,4 @@
         </div>
         <!--<pre>contact model: {{contCtrl.contactRecord | json : spacing}}</pre>-->
     </ng-form>
-
 </div>

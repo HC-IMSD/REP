@@ -190,6 +190,13 @@
             vm.dossierModel.drugProduct.canRefProduct = {};
             return false;
         };
+        vm.isPharmaBioType = function () {
+            if (vm.dossierModel.dossierType === 'BIOLOGIC' || vm.dossierModel.dossierType === 'PHARMACEUTICAL') {
+                return true;
+            }
+            vm.dossierModel.drugProduct.canRefProduct = {};
+            return false;
+        };
 
         vm.setApplicationType = function (value) {
             vm.dossierModel.applicationType = value;

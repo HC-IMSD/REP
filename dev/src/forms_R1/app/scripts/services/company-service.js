@@ -59,6 +59,7 @@
             getApplicationTypes: function () {
                 return (["NEW", "AMEND", "FINAL"])
             },
+
             getApprovedType: function () {
                 return "FINAL";
             },
