@@ -43,6 +43,7 @@
         vm.resetToCollapsed = true;
         vm.noCountries=""; //TODO deprecate
         vm.showDetailErrors=false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.selectRecord = -1;
         vm.columnDef = [
             {
@@ -82,6 +83,11 @@
                 vm.showDetailErrors=changes.showErrors.currentValue;
             }
         };
+
+        vm.$postLink = function () {
+            vm.addNew();
+        };
+
         function setUnknownCountryState(isUnknown) {
             if (isUnknown) {
                 vm.countryList =vm.baseCountries;

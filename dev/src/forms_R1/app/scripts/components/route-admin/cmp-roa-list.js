@@ -35,6 +35,7 @@
         vm.resetToCollapsed = true;
         vm.noROAValues=""; //used to track if no ROA recorad have been seleected
         vm.showDetailErrors=false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.model={};
         vm.model.roaList=[];
         vm.columnDef = [
@@ -68,6 +69,10 @@
 
                 vm.showDetailErrors=changes.showErrors.currentValue;
             }
+        };
+
+        vm.$postLink = function () {
+            vm.addNew();
         };
 
 

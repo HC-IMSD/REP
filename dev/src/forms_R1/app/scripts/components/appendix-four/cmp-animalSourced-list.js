@@ -34,6 +34,7 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.oneRecord="";
         //define empty model
         vm.model={};
@@ -65,6 +66,10 @@
             if (changes.records) {
                 vm.model.animalSrcList=changes.records.currentValue;
             }
+        };
+
+        vm.$postLink = function () {
+            vm.addNew();
         };
 
         /**

@@ -51,6 +51,10 @@
 
         };
 
+        self.$postLink = function () {
+            self.addNewIngredientState();
+        };
+
         self.$onChanges = function (changes) {
 
             if (changes.ingredients) {

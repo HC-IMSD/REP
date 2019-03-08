@@ -66,6 +66,10 @@
             }
         };
 
+        vm.$postLink = function () {
+            vm.addNewIngredientState();
+        };
+
         vm.addNew = function (ing) {
             vm.setValid(true);
             vm.containerList.push(ing);

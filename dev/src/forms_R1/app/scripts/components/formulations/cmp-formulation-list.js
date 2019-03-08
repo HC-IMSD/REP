@@ -43,6 +43,7 @@
         vm.noFormulations = "";
         vm.updateSummary=0;
         vm.showSummary=false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.exclusions = {
 
         };
@@ -89,6 +90,10 @@
             if(changes.errorSummaryUpdate){
                 vm.updateErrorSummaryState();
             }
+        };
+
+        vm.$postLink = function () {
+            vm.addNew();
         };
 
         vm.addNew = function () {
