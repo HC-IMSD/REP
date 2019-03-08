@@ -24,7 +24,7 @@
                 listItems: '<',
                 columnDef:'<',
                 disableSelection:'<',
-                isInitial:'<',
+                isRequiredRecord:'<',
                 selectRecord: '<',
                 resetToCollapsed: '<',
                 disableErrColumn:'@',
@@ -253,9 +253,9 @@
             }
         }
 
-        vm.isInitialSet = function () {
-            if (vm.isInitial) {
-                vm.isInitial = false;
+        vm.isRequiredRecordSet = function () {
+            if (vm.isRequiredRecord) {
+                vm.isRequiredRecord = false;
                 return true;
             }
             return false;

@@ -33,6 +33,7 @@
         vm.resetToCollapsed = true;
         vm.noThera = ""; //used for validation, need at least one therapeutic classification
         vm.model = {};
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.model.theraList = [];
         vm.columnDef = [
             {
@@ -53,6 +54,10 @@
                 vm.model.theraList = changes.records.currentValue;
                 vm.noTheraRecs();
             }
+        };
+
+        vm.$postLink = function () {
+            vm.addNew();
         };
 
         /**

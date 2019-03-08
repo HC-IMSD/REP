@@ -37,6 +37,7 @@
         vm.allRolesSelected=false;
         vm.contactList = [];
         vm.formAmend = false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.resetCollapsed = false;//used to signal expanding table collapse
         vm.updateSummary=0; //sends signal to update error summary object
       //  vm.showSummary=false; //flag to control error summary visibility
@@ -106,6 +107,10 @@
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 //vm.updateErrorSummaryState()
             }
+        };
+
+        vm.$postLink = function () {
+            vm.addContact();
         };
 
         vm.updateErrorSummaryState=function(){

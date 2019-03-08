@@ -54,6 +54,7 @@
         vm.seqUpdated = false;
         vm.showSummary = false;
         vm.finalState = false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.finalRecNum = 0;
         vm.columnDef = [
             {
@@ -117,6 +118,9 @@
             }
         };
 
+        vm.$postLink = function () {
+            vm.addTransaction();
+        };
 
         vm.deleteRecord = function (aID) {
             var idx = vm.lifecycleList.indexOf(

@@ -46,7 +46,7 @@
         vm.addressList = [];
         vm.isIn = "";
         vm.isInternal = false;
-        vm.initFlag = false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.columnDef = [
             {
                 label: "COMPANY",
@@ -117,7 +117,6 @@
         };
 
         vm.$postLink = function () {
-            vm.initFlag = true;
             vm.addAddress();
         };
 

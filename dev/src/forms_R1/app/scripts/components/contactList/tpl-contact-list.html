@@ -3,7 +3,7 @@
         <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" data-ng-show="false"
                data-ng-model="contactListCtrl.allRolesSelected" required/>
         <cmp-expanding-table pre-id="contact_expnd_" list-items="contactListCtrl.contactList" transclude-name="companyContact"
-                             reset-to-collapsed="contactListCtrl.resetCollapsed"
+                             reset-to-collapsed="contactListCtrl.resetCollapsed" is-required-record="contactListCtrl.requiredFlag"
                              column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
                              disable-selection="!contactListCtrl.isDetailValid">
 
