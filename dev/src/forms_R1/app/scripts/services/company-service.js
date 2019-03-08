@@ -27,6 +27,7 @@
                 applicationType: "NEW",
                 softwareVersion: "2.0.0",
                 companyId: "",
+                dossierType: "",
                 reasonAmend:"",
                 addressList: [],
                 contactList: []
@@ -211,6 +212,7 @@
                         application_type: jsonObj.applicationType,
                         software_version: jsonObj.softwareVersion,
                         company_id: jsonObj.companyId,
+                        dossier_type: jsonObj.dossierType,
                         reason_amend: jsonObj.reasonAmend,
                         address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
                         contact_record: _mapContactListToOutput(jsonObj.contactList)
@@ -233,6 +235,7 @@
                     softwareVersion: info.software_version,
                     companyId: info.company_id,
                     reasonAmend: info.reason_amend,
+                    dossierType: info.dossier_type,
                     addressList: [],
                     contactList: []
                 }
