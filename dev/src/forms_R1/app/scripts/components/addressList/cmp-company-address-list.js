@@ -117,7 +117,9 @@
         };
 
         vm.$postLink = function () {
-            vm.addAddress();
+            if(!vm.isInternal) {
+                vm.addAddress();
+            }
         };
 
             function updateRolesConcat() {

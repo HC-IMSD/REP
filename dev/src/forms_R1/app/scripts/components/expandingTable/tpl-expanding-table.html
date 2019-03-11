@@ -30,7 +30,10 @@
             <td colspan="{{::expandTblCtrl.numberCols}}">
                 <ng-form name="{{::expandTblCtrl.formName}}_{{::$index}}">
                     <ng-form name="expandTblCtrl.transcludeForm[$index]">
-                        <div data-ng-transclude>
+                        <div data-ng-if="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid) ||
+                                expandTblCtrl.isRequiredRecordSet() || !expandTblCtrl.isInternal">
+                            <div data-ng-transclude>
+                            </div>
                         </div>
                     </ng-form>
                 </ng-form>

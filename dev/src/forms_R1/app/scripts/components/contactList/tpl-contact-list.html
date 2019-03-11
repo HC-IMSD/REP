@@ -5,7 +5,7 @@
         <cmp-expanding-table pre-id="contact_expnd_" list-items="contactListCtrl.contactList" transclude-name="companyContact"
                              reset-to-collapsed="contactListCtrl.resetCollapsed" is-required-record="contactListCtrl.requiredFlag"
                              column-def="contactListCtrl.columnDef" select-record="contactListCtrl.selectRecord"
-                             disable-selection="!contactListCtrl.isDetailValid">
+                             disable-selection="!contactListCtrl.isDetailValid" is-internal="contactListCtrl.isInternal">
 
             <cmp-contact-record on-delete="contactListCtrl.deleteContact(contactId)"
                                 on-update="contactListCtrl.onUpdateContactRecord(contact)"

@@ -25,6 +25,7 @@
                 columnDef:'<',
                 disableSelection:'<',
                 isRequiredRecord:'<',
+                isInternal:'<',
                 selectRecord: '<',
                 resetToCollapsed: '<',
                 disableErrColumn:'@',
@@ -251,10 +252,10 @@
                     }
                 }
             }
-        }
+        };
 
         vm.isRequiredRecordSet = function () {
-            if (vm.isRequiredRecord) {
+            if (vm.isRequiredRecord && !vm.isInternal) {
                 vm.isRequiredRecord = false;
                 return true;
             }
