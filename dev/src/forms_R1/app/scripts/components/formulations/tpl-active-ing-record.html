@@ -1,6 +1,6 @@
 <ng-form name="ingRecCtrl.activeIngForm" id="{{::ingRecCtrl.activeFormId}}">
     <!--  <pre>ingRecCtrl.ingModel: {{ingRecCtrl.ingModel|json}}</pre>-->
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-bottom:8px; border-width: thin; border-style: solid;">
         <cmp-error-summary form-ref="ingRecCtrl.activeIngForm"
                            form-preamble="{{'INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}" exclusion-list=ingRecCtrl.exclusions
                            name-suffix="ingRecCtrl.activeIngForm" set-heading-level="h3" form-id="ingRecCtrl.activeFormId"
