@@ -10,7 +10,7 @@
             <legend class="legend-rep">{{'INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-3" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.ingredRoleId].$invalid}">
-                    <label for="{{::ingRecCtrl.ingredRoleId}}">
+                    <label for="{{::ingRecCtrl.ingredRoleId}}" class="required">
                         <span class="field-name">{{'ING_ROLE'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                     </label>

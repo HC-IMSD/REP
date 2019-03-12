@@ -49,9 +49,11 @@
                 </div>
             </div>
             <div class="row">
-                <button data-ng-click="countryRecCtrl.deleteRecord(countryRecCtrl.model.id)" name="deleteCountry"
-                        class="btn btn-danger btn-sm">{{'DELETE_RECORD'|translate}}
-                </button>
+                <div class="btn-group-sm col-sm-3">
+                    <button data-ng-click="countryRecCtrl.deleteRecord(countryRecCtrl.model.id)" name="deleteCountry"
+                            class="btn btn-danger btn-sm">{{'DELETE_RECORD'|translate}}
+                    </button>
+                </div>
             </div>
         </fieldset>
        <!-- <pre>{{countryRecCtrl.model|json}}</pre>-->
