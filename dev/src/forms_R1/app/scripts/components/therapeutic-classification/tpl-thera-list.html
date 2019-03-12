@@ -10,6 +10,7 @@
 
         <cmp-thera-record record="$parent.record"
                           show-errors="thera.showErrors()"
+                          on-update="theraCtrl.recordUpdated()"
                           on-delete="theraCtrl.deleteRecord(id)"
                           data-ng-init>
         </cmp-thera-record>

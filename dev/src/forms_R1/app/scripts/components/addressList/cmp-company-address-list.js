@@ -21,6 +21,7 @@
                 onUpdate: '&',
                 getNewAddress: '&',
                 isAmend: '<',
+                isFileLoaded: '<',
                 companyService: '<',
                 showErrorSummary:'<',
                 errorSummaryUpdate:'<',
@@ -114,6 +115,11 @@
                     vm.isInternal = false;
                 }
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
@@ -161,6 +167,7 @@
                 vm.isDetailsValid = true; //case that incomplete record is deleted
                 vm.allRolesSelected = vm.isAllRolesSelected();
                 vm.importerhasID = vm.isImporterHasID();
+                vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
                 vm.updateErrorSummaryState();
             };
@@ -190,6 +197,7 @@
                 vm.allRolesSelected = vm.isAllRolesSelected();
                 vm.importerhasID = vm.isImporterHasID();
                 vm.isDetailsValid = true;
+                vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
             };
 

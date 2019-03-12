@@ -21,6 +21,7 @@
                 onUpdate: '&',
                 isAmend: '&',
                 isFinal: '<',
+                isFileLoaded: '<',
                 getNewTransaction: '&',
                 setSequenceValue:'&',
                 deprecateSequence: '&', //bit of a hack
@@ -116,6 +117,11 @@
                 vm.finalState = changes.isFinal.currentValue;
                 vm.finalRecNum = 0;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
@@ -131,6 +137,7 @@
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.deprecateSequence();
             vm.updateErrorState();
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = false;
         };
@@ -249,6 +256,7 @@
             vm.lifecycleList[idx] = angular.copy(record);
             vm.setValid(true);
             vm.selectRecord = -1;
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = true;
             vm.updateErrorState();

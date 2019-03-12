@@ -23,6 +23,7 @@
                 onUpdate: '&',
                 getNewContact: '&',
                 isAmend: '<',
+                isFileLoaded: '<',
                 companyService:'<',
                 showErrorSummary:'<',
                 errorSummaryUpdate:'<',
@@ -120,6 +121,11 @@
                     vm.isInternal = false;
                 }
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
@@ -192,6 +198,7 @@
              ); //TODO fix filter
              vm.contactList[idx] = angular.copy(record);
             vm.allRolesSelected= vm.isAllContactRolesSelected();
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
 
         };
@@ -204,6 +211,7 @@
             vm.onUpdate({newList: vm.contactList});
             vm.isDetailValid = true; //case that incomplete record
             vm.allRolesSelected= vm.isAllContactRolesSelected();
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.updateErrorSummaryState();
 

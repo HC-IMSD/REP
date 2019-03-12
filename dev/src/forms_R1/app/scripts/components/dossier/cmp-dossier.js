@@ -82,6 +82,7 @@
         vm.updateSummary=0; //increment to send message to error summaries
         vm.showSummary=false;
         vm.disableXML = false;
+        vm.isFileLoaded=false;
         vm.focusSummary=0;
         vm.exclusions = {
             "formulCtrl.formulationsForm":"tab_0",
@@ -175,6 +176,7 @@
             //if content is attempted to be loaded show all the errors
             //getAppendix4Errors();
             _setComplete();
+            vm.isFileLoaded = true;
            // vm.showAllErrors = true;
             disableXMLSave();
         }

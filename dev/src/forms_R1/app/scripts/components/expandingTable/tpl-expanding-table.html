@@ -25,13 +25,11 @@
             </td>
             <!--  <td ng-if="!expandTblCtrl.disableErrorCol" width="5%"></td>-->
         </tr>
-        <tr data-ng-show="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid) ||
-                expandTblCtrl.isRequiredRecordSet()" data-ng-repeat-end>
+        <tr data-ng-show="expandTblCtrl.isRecordShowsOutside($index)" data-ng-repeat-end>
             <td colspan="{{::expandTblCtrl.numberCols}}">
                 <ng-form name="{{::expandTblCtrl.formName}}_{{::$index}}">
                     <ng-form name="expandTblCtrl.transcludeForm[$index]">
-                        <div data-ng-if="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid) ||
-                                expandTblCtrl.isRequiredRecordSet() || !expandTblCtrl.isInternal">
+                        <div data-ng-if="expandTblCtrl.isRecordShowsInside($index)">
                             <div data-ng-transclude>
                             </div>
                         </div>

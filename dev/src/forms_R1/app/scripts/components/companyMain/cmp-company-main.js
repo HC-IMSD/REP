@@ -73,6 +73,7 @@
         vm.updateSummary=false;
         vm.showErrorSummary=false;
         vm.privacyStat=false;
+        vm.isFileLoaded=false;
         vm.savePressed=false; //used for focus
         vm.focusSummary = 0; //messaging to set focus on the error summary
         vm.lang = $translate.proposedLanguage() || $translate.use();
@@ -238,6 +239,7 @@
                 angular.extend(vm.company, vm.companyService.getModelInfo());
                 _setComplete();
                 vm.setAmend();
+                vm.isFileLoaded = true;
                 vm.showErrorSummary=false;
                 vm.companyEnrolForm.$setDirty();
                 vm.showAmendNote = (vm.company.applicationType === vm.companyService.getApprovedType() && vm.isExtern());

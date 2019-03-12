@@ -256,10 +256,26 @@
 
         vm.isRequiredRecordSet = function () {
             if (vm.isRequiredRecord && !vm.isInternal) {
-                vm.isRequiredRecord = false;
                 return true;
             }
             return false;
+        };
+
+        vm.isRecordShowsOutside = function (row) {
+            if (vm.isInternal) {
+                return !vm.dayDataCollapse[row];
+            } else {
+                return (!(vm.dayDataCollapse[row] && vm.transcludeForm[row].$valid) ||
+                    vm.isRequiredRecordSet());
+            }
+        };
+
+        vm.isRecordShowsInside = function (row) {
+            if (!vm.isInternal) {
+                return true;
+            } else {
+                return !(vm.dayDataCollapse[row] && vm.transcludeForm[row].$valid);
+            }
         };
 
 
