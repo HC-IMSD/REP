@@ -24,6 +24,7 @@
                 containers: '<',
                 onUpdate: '&',
                 errorSummaryUpdate:'<',
+                isFileLoaded: '<',
                 showErrorSummary:'<'
             }
         });
@@ -64,10 +65,17 @@
                 vm.containerList = changes.containers.currentValue;
                 vm.noContainers();
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.newIngFormShown = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
-            vm.addNewIngredientState();
+            if(!vm.isFileLoaded) {
+                vm.addNewIngredientState();
+            }
         };
 
         vm.addNew = function (ing) {

@@ -28,6 +28,7 @@
                 recordChanged: '&',
                 errorSummaryUpdate:'<',
                 showErrorSummary:'<',
+                isFileLoaded: '<',
                 updateErrorSummary:'&'
             }
         });
@@ -90,6 +91,11 @@
             if(changes.errorSummaryUpdate){
                 vm.updateErrorSummaryState();
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
@@ -124,6 +130,7 @@
             if(formulation) {
                 formulation.formulationId=(getMaxFormulationId() + 1);
                 vm.formulationList.push(formulation);
+                vm.requiredFlag = false;
                 vm.setRecord(- 1);
                 //vm.resetToCollapsed = !vm.resetToCollapsed;
             }
@@ -133,11 +140,17 @@
             vm.formulationList[idx] = angular.copy(frm);
         };
 
+        vm.updateFormulationRecord = function () {
+            vm.recordChanged();
+            vm.requiredFlag = false;
+        };
+
         vm.delete = function (idx) {
             if (vm.formulationList.splice(idx, 1))
                 vm.setRecord(-1);
                 vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.updateFormulationsError();
+            vm.requiredFlag = false;
         };
 
 

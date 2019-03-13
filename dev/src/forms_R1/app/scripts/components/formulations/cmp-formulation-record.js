@@ -48,6 +48,7 @@
                 recordChanged:'&',
                 addCopy:'&',
                 errorSummaryUpdate:'<',
+                isFileLoaded: '<',
                 showErrorSummary:'<',
                 updateErrorSummary:'&'
             }

@@ -22,92 +22,100 @@
                 ingredients: '<',
                 onUpdate: '&',
                 errorSummaryUpdate:'<',
+                isFileLoaded: '<',
                 showErrorSummary:'<'
             }
         });
 
     function materialIngListCtrl() {
 
-        var self = this;
-        self.isDetailValid = true;
-        self.selectRecord = -1;
-        self.resetToCollapsed = false;
-        self.newIngFormShown = false;
-        self.colNames = [
+        var vm = this;
+        vm.isDetailValid = true;
+        vm.selectRecord = -1;
+        vm.resetToCollapsed = false;
+        vm.newIngFormShown = false;
+        vm.colNames = [
             {label: "MATERIAL_NAME", binding: "ingredientName", width: "70", isHtml: "true"},
             {label: "CAS_NUM", binding: "cas", width: "15", isHtml: "true"},
             {label: "PRESENT_IN_FINAL", binding: "inFinalContainer", width: "15"}
         ];
 
-        self.$onInit = function () {
-            self.newIngFormShown = false;
-            self.isDetailValid = true;
-            self.selectRecord = -1;
-            self.ingList = [];
+        vm.$onInit = function () {
+            vm.newIngFormShown = false;
+            vm.isDetailValid = true;
+            vm.selectRecord = -1;
+            vm.ingList = [];
 
-            if (self.ingredients) {
-                self.ingList = self.ingredients;
+            if (vm.ingredients) {
+                vm.ingList = vm.ingredients;
             }
 
         };
 
-        self.$postLink = function () {
-            self.addNewIngredientState();
-        };
-
-        self.$onChanges = function (changes) {
+        vm.$onChanges = function (changes) {
 
             if (changes.ingredients) {
-                self.ingList = changes.ingredients.currentValue;
+                vm.ingList = changes.ingredients.currentValue;
+            }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.newIngFormShown = false;
+                }
             }
         };
 
-        self.addNew = function (ing) {
-            self.setValid(true);
-            self.ingList.push(ing);
-            self.newIngFormShown = false;
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.onUpdate({list:self.ingList});
+        vm.$postLink = function () {
+            if(!vm.isFileLoaded) {
+                vm.addNewIngredientState();
+            }
+        };
+
+        vm.addNew = function (ing) {
+            vm.setValid(true);
+            vm.ingList.push(ing);
+            vm.newIngFormShown = false;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.onUpdate({list:vm.ingList});
             setRecord(-1);
         };
 
-        self.updateIng = function (idx, ing) {
-            self.ingList[idx] = angular.copy(ing);
-            self.onUpdate({list:self.ingList});
-            self.setValid(true);
+        vm.updateIng = function (idx, ing) {
+            vm.ingList[idx] = angular.copy(ing);
+            vm.onUpdate({list:vm.ingList});
+            vm.setValid(true);
         };
 
-        self.deleteIng = function (idx) {
+        vm.deleteIng = function (idx) {
             // console.debug('containerList deleteIng: ' + idx);
-            self.ingList.splice(idx, 1);
-            self.onUpdate({list:self.ingList});
-            self.setValid(true);
+            vm.ingList.splice(idx, 1);
+            vm.onUpdate({list:vm.ingList});
+            vm.setValid(true);
             setRecord(-1);
-            self.resetToCollapsed = !self.resetToCollapsed;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
         };
 
         function setRecord(value){
-            self.selectRecord = value;
+            vm.selectRecord = value;
         }
 
         /**
          * Sets the UI state for the add new template
          */
-        self.addNewIngredientState=function(){
-            self.resetToCollapsed = !self.resetToCollapsed;
-            self.newIngFormShown = true;
-            self.setValid(false);
-            return(self.newIngFormShown);
+        vm.addNewIngredientState=function(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.newIngFormShown = true;
+            vm.setValid(false);
+            return(vm.newIngFormShown);
         };
-        self.addNewDisabled=function(){
-            return ( self.newIngFormShown || !self.isDetailValid);
+        vm.addNewDisabled=function(){
+            return ( vm.newIngFormShown || !vm.isDetailValid);
         };
-        self.setValid=function(value){
-            self.isDetailValid=value;
+        vm.setValid=function(value){
+            vm.isDetailValid=value;
         };
-        self.onNewCancel=function(){
-            self.setValid(true);
-            self.newIngFormShown = false
+        vm.onNewCancel=function(){
+            vm.setValid(true);
+            vm.newIngFormShown = false
         }
 
 

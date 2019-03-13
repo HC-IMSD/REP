@@ -26,6 +26,7 @@
             service: '<',
             errorSummaryUpdate:'<',
             showErrorSummary:'<',
+            isFileLoaded:'<',
             updateErrorSummary:'&',
             setSelectedTab:'<'
         }

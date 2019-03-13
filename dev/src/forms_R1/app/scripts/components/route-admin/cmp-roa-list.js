@@ -19,6 +19,7 @@
             bindings: {
                 records: '<',
                 showErrors: '<',
+                isFileLoaded: '<',
                 updateErrorSummary:'&'
             },
             controller: roaListCtrl,
@@ -69,10 +70,17 @@
 
                 vm.showDetailErrors=changes.showErrors.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
-            vm.addNew();
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
         };
 
 
@@ -105,6 +113,7 @@
                 $filter('filter')(vm.model.roaList, {id: recId}, true)[0]);
             vm.model.roaList.splice(idx, 1);
             vm.noROA();
+            vm.requiredFlag = false;
         };
 
         vm.disableAddButton=function(){
@@ -138,6 +147,7 @@
 
         }
         function resetMe(){
+            vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
         }
 

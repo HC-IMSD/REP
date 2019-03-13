@@ -24,6 +24,7 @@
                 onDelete: '&',
                 showErrors:'<',
                 fieldLabel: '@',
+                isFileLoaded: '<',
                 updateErrorSummary:'&'
             }
         });
@@ -80,10 +81,17 @@
 
                 vm.showDetailErrors=changes.showErrors.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
-            vm.addNew();
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
         };
 
         function setUnknownCountryState(isUnknown) {
@@ -143,6 +151,7 @@
             var aList = vm.deleteRecFromList(vm.model.list, _id);
             vm.updateCountryList();
             vm.onUpdate({list:aList});
+            vm.requiredFlag = false;
         };
 
         vm.deleteRecFromList = function (_list, _id) {
