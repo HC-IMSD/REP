@@ -291,13 +291,21 @@
     function getRolesService() {
         var _biologic = 'BIOLOGIC';
         var _pharma = 'PHARMACEUTICAL';
+        var _veterinary = 'VETERINARY';
+        var _clinical = 'CLINICAL_TRIAL';
+        // var _veterinary = 'Veterinary';
+        // var _clinical = 'Clinical Trial';
+
+
         /*'DRUG_MASTER_FILE',
          'MEDICAL_DEVICE'*/
         var service = {
             getContactRoles: getRoleValuesArray,
             getFormTypes: _getFormTypes,
             getBiologicType: _getBiologic,
-            getPharmaType: _getPharmaceutical
+            getPharmaType: _getPharmaceutical,
+            getVeterinaryType: _getVeterinary,
+            getClinicalType: _getClinicalTrial,
         };
         return service;
 
@@ -316,7 +324,9 @@
             return (
                 [
                     _biologic,
-                    _pharma
+                    _pharma,
+                    _veterinary,
+                    _clinical
                 ]);
         }
 
@@ -329,6 +339,15 @@
             return _pharma;
         }
 
+        function _getVeterinary() {
+
+            return _veterinary;
+        }
+
+        function _getClinicalTrial() {
+
+            return _clinical;
+        }
     }
 
 })();

@@ -16,7 +16,7 @@
     </dd>
     <dt>1a</dt>
     <dd id="tr1a">
-        <p>{{::'RESET'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'RESET'|translate}}</p>
         <p>To enable the "generate final XML" button, select the "reset" button to clear transaction specific fields.</p>
         <p class="fn-rtn">
             <a href="#tr1a_ref">
@@ -27,7 +27,7 @@
     </dd>
     <dt>1b</dt>
     <dd id="tr1b">
-        <p>{{::"IS_ADMIN_SUBMISSION" |translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::"IS_ADMIN_SUBMISSION" |translate}}</p>
         <div class="ng-scope">
             <p>Refer to the
                 <a target="_blank" href="https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/guidance-administrative-processing-human-disinfectant-drugs.html">
@@ -45,7 +45,7 @@
 
     <dt>1c</dt>
     <dd id="tr1c">
-        <p>{{::"CONTROL_NUM" |translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::"CONTROL_NUM" |translate}}</p>
         <ul>
             <li> Enter the 6 digit control number associated with this regulatory activity (if known).</li>
             <li> Enter “000000” for regulatory transactions that Do Not require a control number (e.g. Level III - Post-NOC Changes, UDRA – DIN cancellations, UDRA - Notification Interruption of sale, UDRA -  eCTD Dossier Clean-up). </li>
@@ -61,7 +61,7 @@
         </p>
     </dd>
     <dd id="tr1d">
-        <p>{{::'REGULATORY_FEES' |translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{::'REGULATORY_FEES' |translate}}</p>
         <p>For more information related to fees, refer to the
             <a target="_blank" href="https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/fees/fees-review-drug-submissions-applications.html">
                 Guidance Document - Fees for the Review of Drug Submissions and Applications
@@ -76,8 +76,13 @@
     </dd>
     <dt>2</dt>
     <dd id="tr2">
-        <P>{{::"COMPANY_ID" |translate}}</P>
-        <p> The “Company ID” must be obtained from the final company XML file, issued by Health Canada.</p>
+        <p>{{::'DOSSIER_TYPE'|translate}}</p>
+        <ul>
+            <li>Biologic dossier applies to all biologic products and radiopharmaceuticals</li>
+            <li>Pharmaceutical dossier applies to all pharmaceutical products, non-prescription products, disinfectants</li>
+            <li>Veterinary dossier applies to all veterinary products?</li>
+
+        </ul>
         <p class="fn-rtn">
             <a href="#tr2_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2
@@ -87,10 +92,8 @@
     </dd>
     <dt>3</dt>
     <dd id="tr3">
-        <P>{{::"DOSSIER_ID" |translate}}</P>
-        <p> The “Dossier ID” can be obtained from the final dossier XML file or other Health Canada issued document
-            if the dossier ID was assigned prior to REP. The format of a Dossier ID is a letter followed by six digits.
-            (e.g. HC6-024-x######). </p>
+        <P>{{::"COMPANY_ID" |translate}}</P>
+        <p> The “Company ID” must be obtained from the final company XML file, issued by Health Canada.</p>
         <p class="fn-rtn">
             <a href="#tr3_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>3
@@ -100,14 +103,10 @@
     </dd>
     <dt>4</dt>
     <dd id="tr4">
-        <p>{{::"PROD_NAME" |translate}}</p>
-        <p> The product name (also known as the brand name or proprietary name) is the name assigned by
-                the manufacturer or sponsor to the dossier (product), and under which the product is to be sold and advertised.
-                The product name is also the name used to identify the product in all submission correspondence,
-                Product Label(s) and Product Monograph/Package Insert, if applicable.
-                If the product name has not yet been determined, the following may be used:
-                “TBD” (short for To Be Determined), the proper or common name of the drug, or the research code.
-        </p>
+        <P>{{::"DOSSIER_ID" |translate}}</P>
+        <p> The “Dossier ID” can be obtained from the final dossier XML file or other Health Canada issued document
+            if the dossier ID was assigned prior to REP. The format of a Dossier ID is a letter followed by six digits.
+            (e.g. HC6-024-x######). </p>
         <p class="fn-rtn">
             <a href="#tr4_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4
@@ -117,6 +116,34 @@
     </dd>
     <dt>5</dt>
     <dd id="tr5">
+        <p>{{::"PROD_NAME" |translate}}</p>
+        <p> The product name (also known as the brand name or proprietary name) is the name assigned by
+                the manufacturer or sponsor to the dossier (product), and under which the product is to be sold and advertised.
+                The product name is also the name used to identify the product in all submission correspondence,
+                Product Label(s) and Product Monograph/Package Insert, if applicable.
+                If the product name has not yet been determined, the following may be used:
+                “TBD” (short for To Be Determined), the proper or common name of the drug, or the research code.
+        </p>
+        <p class="fn-rtn">
+            <a href="#tr5_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>5a</dt>
+    <dd id="5a">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'FAX_NUMBER'|translate}}</p>
+        <p>Use 0000000000 if not available</p>
+        <p class="fn-rtn">
+            <a href="#5a_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5.a
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>6</dt>
+    <dd id="tr6">
         <p>{{::'REG_CONTACT_THIS' |translate}}</p>
         <ul>
             <li>Information provided here pertains to <b>the contact specific to the subject regulatory activity,</b> i.e.,
@@ -134,17 +161,6 @@
             </li>
         </ul>
         <p class="fn-rtn">
-            <a href="#tr5_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
-                <span class="wb-inv"> referrer</span>
-            </a>
-        </p>
-    </dd>
-    <dt>6</dt>
-    <dd id="tr6">
-        <p>{{::"COMPANY_NOABBREV" |translate}}</p>
-        <p>If the company differs from the sponsor, a letter of authorization signed by the manufacturer/sponsor must be provided in section 1.2.6 of the regulatory transaction.</p>
-        <p class="fn-rtn">
             <a href="#tr6_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>6
                 <span class="wb-inv"> referrer</span>
@@ -153,11 +169,8 @@
     </dd>
     <dt>7</dt>
     <dd id="tr7">
-        <p>{{::'GENERATE_FINAL'|translate}}</p>
-        <ul>
-            <li>A final regulatory transaction XML file must be included in section 1.2.1 for each of your REP transactions.</li>
-            <li>Refer to the REP guidance document for detailed information.</li>
-        </ul>
+        <p>{{::"COMPANY_NOABBREV" |translate}}</p>
+        <p>If the company differs from the sponsor, a letter of authorization signed by the manufacturer/sponsor must be provided in section 1.2.6 of the regulatory transaction.</p>
         <p class="fn-rtn">
             <a href="#tr7_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>7
@@ -166,6 +179,17 @@
         </p>
     </dd>
     <dt>8</dt>
-
-
+    <dd id="tr8">
+        <p>{{::'GENERATE_FINAL'|translate}}</p>
+        <ul>
+            <li>A final regulatory transaction XML file must be included in section 1.2.1 for each of your REP transactions.</li>
+            <li>Refer to the REP guidance document for detailed information.</li>
+        </ul>
+        <p class="fn-rtn">
+            <a href="#tr8_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>8
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
 </dl>

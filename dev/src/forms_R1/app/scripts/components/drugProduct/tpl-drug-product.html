@@ -1,11 +1,11 @@
 <ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm">
+    <span id="privacy"></span>
+    <div class="module-attention">
+        <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
+        <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
+        <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
+    </div>
     <div data-translate-cloak="cloak-class">
-        <span id="privacy"></span>
-        <div class="module-attention">
-            <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
-            <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
-            <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
-        </div>
         <span id="instructions"></span>
         <aside class="wb-fnote" role="note">
             <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
@@ -73,7 +73,7 @@
                                 <span class="input-group-addon">HC6-024-</span>
                                 <div data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
                                     <input type="text" class="form-control full-width" id="{{::drugProdCtrl.dossierId}}"
-                                           maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}"
+                                           maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}" data-ng-pattern="/^[A-Z,a-z][0-9]{6}$/"
                                            size="6" data-ng-model="drugProdCtrl.model.dossierID" required/>
                                 </div>
                         </div>

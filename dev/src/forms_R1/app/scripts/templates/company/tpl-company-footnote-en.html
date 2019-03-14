@@ -31,6 +31,22 @@
     </dd>
     <dt>3</dt>
     <dd id="co3">
+        <p>{{::'DOSSIER_TYPE'|translate}}</p>
+        <ul>
+            <li>Biologic dossier applies to all biologic products and radiopharmaceuticals</li>
+            <li>Pharmaceutical dossier applies to all pharmaceutical products, non-prescription products, disinfectants</li>
+            <li>Veterinary dossier applies to all veterinary products?</li>
+
+        </ul>
+        <p class="fn-rtn">
+            <a href="#co3_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>3
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>4</dt>
+    <dd id="co4">
         <p>{{::'ADDR_INFO'|translate}}</p>
         <ul>
             <li>A minimum of one address is required for the company template.</li>
@@ -45,13 +61,13 @@
 
         </ul>
         <p class="fn-rtn">
-            <a href="#co3_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>3
+            <a href="#co4_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dt>3a</dt>
+    <dt>4a</dt>
     <dd id="3a">
         <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'ROLEMISSING'|translate}}</p>
         <ul>
@@ -61,14 +77,14 @@
             <li>“Canadian Importer mailing address”: is responsible for the sale of products in Canada when the sponsor/manufacturer identified is NOT located in Canada. Although it does not need to be provided at the time of initial company enrolment, the Canadian Importer responsible for sale must be identified prior to the product entering the market. Add a Canadian Importer Mailing Address to the Company XML file by using the “amend enrolment” button. The Importer Company ID issued by Health Canada should also be referred to in the Product Information XML file, where appropriate.</li>
         </ul>
         <p class="fn-rtn">
-            <a href="#3a_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>3.a
+            <a href="#4a_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4.a
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dt>4</dt>
-    <dd id="co4">
+    <dt>5</dt>
+    <dd id="co5">
         <p>{{::'CONTACT_INFO'|translate}}</p>
         <ul>
             <li>A minimum of one company representative is required for the company template.</li>
@@ -81,35 +97,46 @@
             <li>“Billing Address” – To whom the invoice is to be sent.</li>
         </ul>
         <p class="fn-rtn">
-            <a href="#co4_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4
+            <a href="#co5_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dt>4a</dt>
-    <dd id="4a">
+    <dt>5a</dt>
+    <dd id="5a">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'FAX_NUMBER'|translate}}</p>
+        <p>Use 0000000000 if not available</p>
+        <p class="fn-rtn">
+            <a href="#5a_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5.a
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>5b</dt>
+    <dd id="5b">
         <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'CONTACTROLEMISSING'|translate}}</p>
         <ul>
             <li>The Primary Regulatory Enrolment Process (REP) contact is the person to be contacted by Health Canada if there are any issues or clarifications required for this template when it is submitted for enrolment or amendment.</li>
             <li>Sponsors may choose to provide an Alternate Regulatory Enrolment Process (REP) contact, however this is not a requirement.</li>
         </ul>
         <p class="fn-rtn">
-            <a href="#4a_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4.a
+            <a href="#5b_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5.b
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dt>5</dt>
-    <dd id="co5">
+    <dt>6</dt>
+    <dd id="co6">
         <ul>
             <li>Submit the draft XML file to Health Canada using the Common Electronic Submission Gateway (CESG).</li>
             <li>Refer to the Regulatory Enrolment Process (REP) guidance document for detailed information.</li>
         </ul>
         <p class="fn-rtn">
-            <a href="#co5_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
+            <a href="#co6_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>6
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>

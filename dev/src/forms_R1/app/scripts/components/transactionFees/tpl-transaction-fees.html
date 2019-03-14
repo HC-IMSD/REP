@@ -13,11 +13,12 @@
                         <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
                                 name="{{::transFeeCtrl.submClassId}}" required
                                 data-ng-model="transFeeCtrl.model.submissionClass"
-                                data-ng-options="val.en  for val in  transFeeCtrl.submissionType">
+                               data-ng-options="choice[transFeeCtrl.lang] for choice in transFeeCtrl.submissionType | orderBy:'id' track by choice.id">
                             <option value="" label=" " data-ng-empty="transFeeCtrl.model.submissionClass" />
                         </select>
 
                     </label>
+                    <!-- data-ng-options="val.en  for val in  transFeeCtrl.submissionType"> -->
                 </div>
                 <div class="col-md-2 form-group">
                     <label for="{{::transFeeCtrl.feeId}}">
@@ -59,6 +60,7 @@
                                             data-ng-model="transFeeCtrl.model.mitigation.mitigationType"
                                             class="form-control"
                                             data-ng-options="choice[transFeeCtrl.lang] for choice in transFeeCtrl.mitigationList track by choice.id">
+                                        <option value="" label="" data-ng-empty="transFeeCtrl.model.submissionClass" />
                                     </select>
                                 </label>
                             </div>
@@ -73,13 +75,14 @@
                                                id="{{::transFeeCtrl.certifyOrganizationId}}"
                                                class="required" required />
                                         {{::'CERTIFY_ORGANIZATION'|translate}}
-                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    </label>
+                                        <p class="mrgn-lft-md">{{::'CERTIFY_ORGANIZATION_A'|translate}}</p>
+                                        <p class="mrgn-lft-md"><span>{{::'CERTIFY_ORGANIZATION_B'|translate}}</span><strong class="required"> {{::"REQUIRED" |translate}}</strong></p>
                                         <cmp-error-message field-name="transFeeCtrl.certifyOrganizationId"
                                                            form-ref="transFeeCtrl.transFeeForm"
                                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.certifyOrganizationId])"
                                                            error-types="transFeeCtrl.requiredOnlyError">
                                         </cmp-error-message>
-                                    </label>
                                 </div>
                             </div>
                             <div class="form-group col-xs-12">
@@ -150,11 +153,10 @@
                                                id="{{::transFeeCtrl.certifyUrgentHealthNeedId}}"
                                                class="required" required />
                                         {{::'CERTIFY_URGENT_HEALTH_NEED'|translate}}
-                                        <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     </label>
-                                    <span>{{::"DRUG_THE_SAME_INGREDIENT"|translate}}</span><br/>
-                                    <span>{{::"NO_DRUG_IDENTIFICATION_NUMBER"|translate}}</span><br/>
-                                    <span>{{::"NO_NOTICE_COMPLIANCE"|translate}}</span>
+                                    <p class="mrgn-lft-md">{{::"DRUG_THE_SAME_INGREDIENT"|translate}}</p>
+                                    <p class="mrgn-lft-md">{{::"NO_DRUG_IDENTIFICATION_NUMBER"|translate}}</p>
+                                    <p class="mrgn-lft-md"><span>{{::"NO_NOTICE_COMPLIANCE"|translate}}</span><strong class="required"> {{::"REQUIRED" |translate}}</strong></p>
                                     <cmp-error-message field-name="transFeeCtrl.certifyUrgentHealthNeedId"
                                                        form-ref="transFeeCtrl.transFeeForm"
                                                        show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.certifyUrgentHealthNeedId])"
@@ -173,13 +175,17 @@
                                                id="{{::transFeeCtrl.certifyFundedHealthInstitutionId}}"
                                                class="required" required />
                                         {{::'CERTIFY_FUNDED_HEALTH_INSTITUTION'|translate}}
+                                    </label>
+                                    <p class="mrgn-lft-md">{{::'CERTIFY_FUNDED_HEALTH_INSTITUTION_A'|translate}}</p>
+                                    <p class="mrgn-lft-md">
+                                        <span>{{::'CERTIFY_FUNDED_HEALTH_INSTITUTION_B'|translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    </p>
                                         <cmp-error-message field-name="transFeeCtrl.certifyFundedHealthInstitutionId"
                                                            form-ref="transFeeCtrl.transFeeForm"
                                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.certifyFundedHealthInstitutionId])"
                                                            error-types="transFeeCtrl.requiredOnlyError">
                                         </cmp-error-message>
-                                    </label>
                                 </div>
                             </div>
                         </div>

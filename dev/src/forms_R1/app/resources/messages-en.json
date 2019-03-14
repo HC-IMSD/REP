@@ -28,6 +28,6 @@
   "ONE_REP": "At least one contact is required.",
   "MSG_ERR_NOTIF_SEL": "Please select at least one notifiable change.",
   "MSG_ERR_MIN_POS": "Must be a positive number",
-  "MSG_ERR_MAX": "Exceeds the maximum"
-
+  "MSG_ERR_MAX": "Exceeds the maximum",
+  "MSG_FORMAT_CHAR_6DIGITS": "ID should be a letter plus 6 digits."
 }

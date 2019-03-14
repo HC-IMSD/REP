@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     angular
-        .module('applicationInfo', ['numberFormat','hpfbConstants'])
+        .module('applicationInfo', ['numberFormat','hpfbConstants','errorSummaryModule','errorMessageModule'])
 })();
 
 (function () {
@@ -26,7 +26,7 @@
             }
         });
 
-    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
+    ApplInfoCtrl.$inject=[$scope,'NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
 
     function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE, $scope) {
         var vm = this;
@@ -36,7 +36,8 @@
             applicationType: "NEW",
             enrolmentVersion: "0.0",
             dateSaved: "",
-            reasonAmend:""
+            reasonAmend:"",
+            dossierType:""
         };
         vm.fieldIdLabel = "";
         vm.minFieldLength = "";
@@ -49,9 +50,14 @@
         vm.isDossier = false;
         vm.isNumber=false;
         vm.isAmend = false;
-        vm.min5Error = [
+        vm.min6Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
+        ];
+        vm.min7Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"},
+            {type: "pattern", displayAlias: "MSG_FORMAT_CHAR_6DIGITS"}
         ];
         vm.$onInit = function () {
             ///do init
@@ -78,6 +84,10 @@
             }
             if (changes.configureIdField) {
                 _setConfigItems(changes.configureIdField.currentValue);
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
             }
         };
         function _setConfigItems(configJson) {
@@ -141,8 +151,16 @@
             if(!ctrl){
                 return false;
             }
+//            vm.updateErrorSummaryState();
             return ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid));
         };
+        // vm.updateErrorSummaryState=function(){
+        //     vm.updateSummary= vm.updateSummary+1;
+        // };
+        // $scope.$watch('infoCtrl.applInfoForm.$error', function () {
+        //     vm.updateErrorSummaryState();
+        //     vm.updateErrorSummary();
+        // }, true);
 
     }
 })();
