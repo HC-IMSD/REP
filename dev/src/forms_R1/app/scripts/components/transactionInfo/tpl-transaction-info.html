@@ -53,7 +53,7 @@
                             </cmp-error-message>
                             <input type="text" id="{{::transInfoCtrl.companyId}}" name="{{::transInfoCtrl.companyId}}"
                                    data-ng-model="transInfoCtrl.transactionModel.ectd.companyId"
-                                   class="form-control" maxlength="6" size="6" required data-ng-minlength="6"/>
+                                   class="form-control" maxlength="6" minlength="6" required/>
 
                         </label>
                     </div>
@@ -74,7 +74,7 @@
                         <div class="rep-input-group">
                             <span class="input-group-addon">HC6-024-</span>
                             <div data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
-                                <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
+                                <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}" data-ng-pattern="/^[A-Z,a-z][0-9]{6}$/"
                                        size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
                                        data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                             </div>
@@ -314,7 +314,7 @@
                         </div>
                     </div>
                     <section class="panel  panel-default">
-                        <header class="panel-heading clearfix">
+                        <header class="panel-heading clearfix" style="padding-left: 0px;">
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
                         <div class="panel-body">
