@@ -99,6 +99,7 @@
                                              error-summary-update="formulRecCtrl.errorSummaryUpdate"
                                              show-error-summary="formulRecCtrl.showSummary"
                                              error-summary-update="formulRecCtrl.errorSummaryUpdate()"
+                                             is-file-loaded="formulRecCtrl.isFileLoaded"
                                              on-update="formulRecCtrl.updateActiveIngList(list)"></cmp-active-ing-list>
                         </div>
                     </div>
@@ -137,6 +138,7 @@
                         <cmp-material-ing-list ingredients="formulRecCtrl.frmModel.animalHumanMaterials"
                                                error-summary-update="formulRecCtrl.errorSummaryUpdate"
                                                show-error-summary="formulRecCtrl.showSummary"
+                                               is-file-loaded="formulRecCtrl.isFileLoaded"
                                                on-update="formulRecCtrl.updateMaterialList(list)"></cmp-material-ing-list>
                     </div>
                 </section>
@@ -150,6 +152,7 @@
                         <cmp-container-type-list containers="formulRecCtrl.frmModel.containerTypes"
                                                  error-summary-update="formulRecCtrl.errorSummaryUpdate"
                                                  show-error-summary="formulRecCtrl.showSummary"
+                                                 is-file-loaded="formulRecCtrl.isFileLoaded"
                                                  on-update="formulRecCtrl.updateContainerTypeList(list)">
                         </cmp-container-type-list>
                     </div>
@@ -162,6 +165,7 @@
                     </header>
                     <div class="panel-body">
                         <cmp-roa-list records="formulRecCtrl.frmModel.routeAdmins"
+                                      is-file-loaded="formulRecCtrl.isFileLoaded"
                                       show-errors="formulRecCtrl.showSummary">
                         </cmp-roa-list>
                     </div>
@@ -182,6 +186,7 @@
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" with-unknown="false"
                                           on-update="formulRecCtrl.updateCountryList(list)"
                                           show-errors="formulRecCtrl.showSummary"
+                                          is-file-loaded="formulRecCtrl.isFileLoaded"
                                           field-label="COUNTRY_MAN">
                         </cmp-country-list>
                     </div>

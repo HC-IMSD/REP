@@ -23,6 +23,7 @@
                 ingredients: '<',
                 onUpdate: '&',
                 errorSummaryUpdate:'<',
+                isFileLoaded: '<',
                 showErrorSummary:'<',
                 updateErrorSummary:'&'
             }
@@ -64,11 +65,18 @@
                 vm.isDetailValid = true;
                 vm.noActives();
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.newIngFormShown = false;
+                }
+            }
 
         };
 
         vm.$postLink = function () {
-            vm.addNewIngredientState();
+            if(!vm.isFileLoaded) {
+                vm.addNewIngredientState();
+            }
         };
 
         vm.addIng = function (ing) {
