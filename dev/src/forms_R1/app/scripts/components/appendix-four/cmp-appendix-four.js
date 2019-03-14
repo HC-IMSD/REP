@@ -27,8 +27,9 @@
                 ingredients: '<',
                 recordChanged: '&',
                 service: '<',
-               errorSummaryUpdate:'<',
+                errorSummaryUpdate:'<',
                 showErrorSummary:'<',
+                isFileLoaded: '<',
                 updateErrorSummary:'&'
             }
         });

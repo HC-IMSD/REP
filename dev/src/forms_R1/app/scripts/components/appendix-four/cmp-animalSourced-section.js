@@ -18,6 +18,7 @@
             templateUrl: 'app/scripts/components/appendix-four/tpl-animalSourced-section.html',
             bindings: {
                 records: '<',
+                isFileLoaded: '<',
                 showErrors: '&',
                 updateErrorSummary:'&'
             },

@@ -25,6 +25,7 @@
                 records: '<',
                 showErrors: '&',
                 service: '<',
+                isFileLoaded: '<',
                // errorSummaryUpdate:'<', //sending a signal that the error summary should be updated
                // showErrorSummary:'<', //flag to show or hide the error summary
                 updateErrorSummary:'&' //function to update the list of error summmaries
@@ -97,6 +98,11 @@
             if (changes.records) {
                 vm.model.tissuesFluidsList = changes.records.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
             /*if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
@@ -108,7 +114,9 @@
         };
 
         vm.$postLink = function () {
-            vm.addNew();
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
         };
 
         vm.showErrors=function(){
@@ -127,10 +135,10 @@
             vm.setRecord(vm.model.tissuesFluidsList.length - 1);
         };
         vm.deleteRecord = function (recId) {
-
             var idx = vm.model.tissuesFluidsList.indexOf(
                 $filter('filter')(vm.model.tissuesFluidsList, {id: recId}, true)[0]);
             vm.model.tissuesFluidsList.splice(idx, 1);
+            vm.requiredFlag = false;
         };
        /* vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
@@ -143,6 +151,7 @@
 
         };
         function resetMe() {
+            vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
 
         }

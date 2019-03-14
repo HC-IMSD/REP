@@ -19,6 +19,7 @@
             templateUrl: 'app/scripts/components/appendix-four/tpl-animalSourced-list.html',
             bindings: {
                 records: '<',
+                isFileLoaded: '<',
                 showErrors: '&',
                 onUpdate: '&' //seems redundant, but used as a messaging mech. when something changes
             },
@@ -66,10 +67,17 @@
             if (changes.records) {
                 vm.model.animalSrcList=changes.records.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
         vm.$postLink = function () {
-            vm.addNew();
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
         };
 
         /**
@@ -102,6 +110,7 @@
                 $filter('filter')(vm.model.animalSrcList, {id: recId}, true)[0]);
             vm.model.animalSrcList.splice(idx, 1);
             vm.onUpdate({list: vm.model.animalSrcList});
+            vm.requiredFlag = false;
         };
 
 
