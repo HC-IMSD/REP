@@ -390,7 +390,7 @@
             if( ! found ){
                 for(var i = 0; i < vm.UnitsList.length; i++) {
                     var option =vm.UnitsList[i];
-                    if(option['id'] === vm.ingModel.perMeasUnits['id']) {
+                    if(option['id'] === vm.ingModel.units['id']) {
                         vm.ingModel.unitsHtml = option[vm.lang];
                         break;
                     }
