@@ -33,33 +33,6 @@
         function TransactionService() {
             //construction logic
             var defaultTransactionData = _getEmptyTransactionModel();
-            /*{
-                dataChecksum: "",
-                // enrolmentVersion: "0.0",
-                dateSaved: "",
-                //applicationType: "NEW",
-                softwareVersion: "1.3.0",
-                isEctd: "N",
-                ectd: {
-                    companyId: "",
-                    dossierId: "",
-                    productName: "",
-                    lifecycleRecord: []
-                },
-                isSolicited: "",
-                solicitedRequester: "",
-                projectManager1: "",
-                projectManager2: "",
-                isFees:"",
-                isActivityChanges: "Y",
-                // sameCompany: "N",
-                companyName: "",
-                // sameAddress: "N", //this may no longer be needed
-                activityAddress: _createAddressModel(),
-                confirmContactValid: false,
-                activityContact: _createContactModel()
-                // regulatorySubmissionContact: [],
-            };*/
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
@@ -198,13 +171,11 @@
             },
             _transformEctdFromFile: function (model, jsonObj) {
                 model.ectd = _getEmptyEctdSection();
-               // if (model.isEctd) {
-                    model.ectd.companyId = jsonObj.company_id;
-                    model.ectd.dossierId = jsonObj.dossier_id;
-                    model.ectd.dossierType = jsonObj.dossier_type;
-                    model.ectd.productName = jsonObj.product_name;
-                    model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
-                  //  }
+                model.ectd.companyId = jsonObj.company_id;
+                model.ectd.dossierId = jsonObj.dossier_id;
+                model.ectd.dossierType = jsonObj.dossier_type;
+                model.ectd.productName = jsonObj.product_name;
+                model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
             },
             getModelInfo: function () {
                 return this._default;
@@ -244,19 +215,6 @@
                 } else {
                     this.isFinal = true;
                     model.confirmContactValid = true;
-                   /** model.transactionType = "";
-                    model.isThirdParty = "";
-                    model.isPriority = "";
-                    model.isNoc = "";
-                    model.isAdminSub = "";
-                    model.subType = "";
-                    model.isSolicited = "";
-                    model.solicitedRequesterReord = [];
-                    model.projectManager1 = "";
-                    model.projectManager2 = "";
-                    model.isFees = "";
-                    model.feeDetails = null;
-                    */
                 }
                 model.isActivityChanges = jsonObj.is_activity_changes;
                 //model.sameCompany = jsonObj.same_regulatory_company === 'Y';
@@ -270,6 +228,7 @@
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
             },
+
             getNewTransaction: function (isEctd) {
                 var model = _createLifeCycleModel();
                 var sequenceNum = this.getNextSequenceNumber(); //always get it
@@ -280,6 +239,7 @@
                 }
                 return model;
             },
+
             getCurrentSequence:function(){
 
               return(this.currSequence);
@@ -400,7 +360,6 @@
                 ///function _mapFeeDetailsToOutput(feeObj, YES, NO,$filter) {
             var result = _createEmptyFeeDetailsForOutput(NO);
             if (angular.isUndefined(feeObj)) return null;
-            // result.submission_class = feeObj.submissionClass;
             result.submission_class = "";
 
             if (feeObj.submissionClass && feeObj.submissionClass.id) {
@@ -429,7 +388,6 @@
             result.payment_method.bill_payment = feeObj.paymentMethod.billPayment === true ? YES : NO;
 
             return result;
-            //}
         };
         TransactionService.prototype._mapFeeDetailsFromOutput = function (feeObj) {
             /**
@@ -688,12 +646,10 @@
 
     function _createLifeCycleModel() {
         var defaultRecord = {
-            // "sequence": "0000",
-            // "dateFiled": "",
             "controlNumber": "",
             "activityLead": "",
             "activityType": "",
-            activityTypeDisplay: "",
+            "activityTypeDisplay": "",
             "descriptionValue": "",
             "startDate": "",
             "endDate": "",
@@ -716,7 +672,7 @@
                 stateText: "",
                 country: "",
                 countryDisplay: "",
-                "postalCode": ""
+                postalCode: ""
             }
         )
     }
@@ -768,7 +724,6 @@
             isNoc: "",
             isAdminSub: "",
             subType: "",
-          //  isEctd: "N",
             ectd: {
                 companyId: "",
                 dossierId: "",
@@ -826,7 +781,6 @@
                 bankWire: false,
                 billPayment: false
             }
-
         };
         return feeObj;
     }

@@ -14,25 +14,20 @@
             </a>
         </p>
     </dd>
-    <dt>2</dt>
-    <dd id="tr2">
-        <p>{{::'TRANSACTION_HDING'|translate}}</p>
-        <ul>
-            <li>The “Company ID” must be obtained from the final company XML file, issued by Health Canada.
-            </li>
-            <li>The “Dossier ID” can be obtained from the final dossier XML file or other Health Canada issued document. (e.g. HC6-024-x######, i.e. HC6-024-e172345).
-            </li>
-        </ul>
+    <dt>1a</dt>
+    <dd id="tr1a">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'RESET'|translate}}</p>
+        <p>To enable the "generate final XML" button, select the "reset" button to clear transaction specific fields.</p>
         <p class="fn-rtn">
-            <a href="#tr2_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2
+            <a href="#tr1a_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1.a
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dt>2a</dt>
-    <dd id="tr2a">
-        <p>{{::"IS_ADMIN_SUBMISSION" |translate}}</p>
+    <dt>1b</dt>
+    <dd id="tr1b">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::"IS_ADMIN_SUBMISSION" |translate}}</p>
         <div class="ng-scope">
             <p>Refer to the
                 <a target="_blank" href="https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/guidance-administrative-processing-human-disinfectant-drugs.html">
@@ -41,44 +36,45 @@
             </p>
         </div>
         <p class="fn-rtn">
-            <a href="#tr2a_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2.a
+            <a href="#tr1b_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1.b
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
 
-    <dt>2b</dt>
-    <dd id="tr2b">
-        <p>{{::"CONTROL_NUM" |translate}}</p>
+    <dt>1c</dt>
+    <dd id="tr1c">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::"CONTROL_NUM" |translate}}</p>
         <ul>
             <li> Enter the 6 digit control number associated with this regulatory activity (if known).</li>
             <li> Enter “000000” for regulatory transactions that Do Not require a control number (e.g. Level III - Post-NOC Changes, UDRA – DIN cancellations, UDRA - Notification Interruption of sale, UDRA -  eCTD Dossier Clean-up). </li>
             <li> Enter “000000” for the first transaction of a NEW regulatory activity, where a control number has not yet been assigned.</li>
             <li> Enter the pre-assigned control number for the first transaction of a new regulatory activity that was communicated by Health Canada (e.g. via an Advisement Letter).</li>
+            <li> Drug Notification Form(s) (DNF) should be filed under the same control number it has been issued for the product(s) that are now being sold on the market.</li>
         </ul>
         <p class="fn-rtn">
-            <a href="#tr2b_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2.b
+            <a href="#tr1c_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1.c
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dd id="tr2c">
-        <p>{{::'REGULATORY_FEES' |translate}}</p>
+    <dd id="tr1d">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{::'REGULATORY_FEES' |translate}}</p>
         <p>For more information related to fees, refer to the
             <a target="_blank" href="https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/fees/fees-review-drug-submissions-applications.html">
                 Guidance Document - Fees for the Review of Drug Submissions and Applications
             </a>
         </p>
         <p class="fn-rtn">
-            <a href="#tr2c_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2.c
+            <a href="#tr1d_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1.d
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dd id="tr2d">
+    <dd id="tr1e">
         <p>{{::"DEFER_FEES"|translate}}</p>
         <p> If a sponsor has not completed its first full fiscal year on the day that the drug submission, supplement or
             application is filed, the sponsor is eligible for a two-year deferral of payment from the date of filing. In order to qualify for the deferral period, a statement signed
@@ -87,16 +83,16 @@
             sponsor must pay all of the applicable fees.
         </p>
         <p class="fn-rtn">
-            <a href="#tr2d_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2.d
+            <a href="#tr1e_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1.e
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dd id="tr2e">
+    <dd id="tr1f">
         <p>{{::'FEE_REMISSION'|translate}}</p>
         <ul>
-            <li>When applying for a fee remission, the necessary documentation and the remission processing fee of $578 must
+            <li>When applying for a fee remission, the necessary documentation and the remission processing fee of $590 must
                 accompany the submission, supplement or application. Failing to do so will result in the rejection of the
                 fee remission application.
             </li>
@@ -114,16 +110,29 @@
             </li>
         </ul>
         <p class="fn-rtn">
-            <a href="#tr2e_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2.e
+            <a href="#tr1f_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1.f
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>2</dt>
+    <dd id="tr2">
+        <P>{{::"COMPANY_ID" |translate}}</P>
+        <p> The “Company ID” must be obtained from the final company XML file, issued by Health Canada.</p>
+        <p class="fn-rtn">
+            <a href="#tr2_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
     <dt>3</dt>
     <dd id="tr3">
-        <P>{{::"COMPANY_ID" |translate}}</P>
-        <p> The “Company ID” must be obtained from the final company XML file, issued by Health Canada.</p>
+        <P>{{::"DOSSIER_ID" |translate}}</P>
+        <p> The “Dossier ID” can be obtained from the final dossier XML file or other Health Canada issued document
+            if the dossier ID was assigned prior to REP. The format of a Dossier ID is a letter followed by six digits.
+            (e.g. HC6-024-x######). </p>
         <p class="fn-rtn">
             <a href="#tr3_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>3
@@ -133,19 +142,6 @@
     </dd>
     <dt>4</dt>
     <dd id="tr4">
-        <P>{{::"DOSSIER_ID" |translate}}</P>
-        <p> The “Dossier ID” can be obtained from the final dossier XML file or other Health Canada issued document
-            if the dossier ID was assigned prior to REP. The format of a Dossier ID is a letter followed by six digits.
-            (e.g. HC6-024-x######). </p>
-        <p class="fn-rtn">
-            <a href="#tr4_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4
-                <span class="wb-inv"> referrer</span>
-            </a>
-        </p>
-    </dd>
-    <dt>5</dt>
-    <dd id="tr5">
         <p>{{::"PROD_NAME" |translate}}</p>
         <p> The product name (also known as the brand name or proprietary name) is the name assigned by
                 the manufacturer or sponsor to the dossier (product), and under which the product is to be sold and advertised.
@@ -155,14 +151,14 @@
                 “TBD” (short for To Be Determined), the proper or common name of the drug, or the research code.
         </p>
         <p class="fn-rtn">
-            <a href="#tr5_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
+            <a href="#tr4_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4
                 <span class="wb-inv"> referrer</span>
             </a>
         </p>
     </dd>
-    <dt>6</dt>
-    <dd id="tr6">
+    <dt>5</dt>
+    <dd id="tr5">
         <p>{{::'REG_CONTACT_THIS' |translate}}</p>
         <ul>
             <li>Information provided here pertains to <b>the contact specific to the subject regulatory activity,</b> i.e.,
@@ -180,6 +176,17 @@
             </li>
         </ul>
         <p class="fn-rtn">
+            <a href="#tr5_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>6</dt>
+    <dd id="tr6">
+        <p>{{::"COMPANY_NOABBREV" |translate}}</p>
+        <p>If the company differs from the sponsor, a letter of authorization signed by the manufacturer/sponsor must be provided in section 1.2.6 of the regulatory transaction.</p>
+        <p class="fn-rtn">
             <a href="#tr6_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>6
                 <span class="wb-inv"> referrer</span>
@@ -188,8 +195,11 @@
     </dd>
     <dt>7</dt>
     <dd id="tr7">
-        <p>{{::"COMPANY_NOABBREV" |translate}}</p>
-        <p>If the company differs from the sponsor, a letter of authorization signed by the manufacturer/sponsor must be provided in section 1.2.6 of the regulatory transaction.</p>
+        <p>{{::'GENERATE_FINAL'|translate}}</p>
+        <ul>
+            <li>A final regulatory transaction XML file must be included in section 1.2.1 for each of your REP transactions.</li>
+            <li>Refer to the REP guidance document for detailed information.</li>
+        </ul>
         <p class="fn-rtn">
             <a href="#tr7_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>7
@@ -197,21 +207,4 @@
             </a>
         </p>
     </dd>
-    <dt>8</dt>
-    <dd id="tr8">
-        <p>{{::'GENERATE_FINAL'|translate}}</p>
-        <ul>
-            <li>A final regulatory transaction XML file must be included in section 1.2.1 for each of your REP transactions.</li>
-            <li>Refer to the REP guidance document for detailed information.</li>
-        </ul>
-        <p class="fn-rtn">
-            <a href="#tr8_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>8
-                <span class="wb-inv"> referrer</span>
-            </a>
-        </p>
-    </dd>
-    <dt>8</dt>
-
-
 </dl>

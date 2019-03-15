@@ -28,8 +28,6 @@
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
                         return $http.get(raTypeUrl);
-                        //return $http.get(contactsUrl);
-
                     })
                   .then(function (response) {
                         //PROCESS raType list data

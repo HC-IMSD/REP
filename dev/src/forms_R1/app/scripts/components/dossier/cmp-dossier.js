@@ -112,7 +112,7 @@
             {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
         ];
 
-        vm.alerts = [false, false, false, false, false, false, false, false, false, false, false, false]; //for help boxes
+      //  vm.alerts = [false, false, false, false, false, false, false, false, false, false, false, false]; //for help boxes
         vm.lang = $translate.proposedLanguage() || $translate.use();
 
 
@@ -185,6 +185,13 @@
 
         vm.isRefProduct = function () {
             if (vm.dossierModel.isRefProduct === YES) {
+                return true;
+            }
+            vm.dossierModel.drugProduct.canRefProduct = {};
+            return false;
+        };
+        vm.isPharmaBioType = function () {
+            if (vm.dossierModel.dossierType === 'BIOLOGIC' || vm.dossierModel.dossierType === 'PHARMACEUTICAL') {
                 return true;
             }
             vm.dossierModel.drugProduct.canRefProduct = {};

@@ -197,9 +197,6 @@
 	"medical_instruments": "Medical instruments",
 	"is_animal_age_known": "Is animal age known",
 	"is_animal_human_material": "Is animal human material",
-	"ingredient_role": "Ingredient Role"
-
-
-
-
+	"ingredient_role": "Ingredient Role",
+	"add_importer" : "Add Importer"
 }

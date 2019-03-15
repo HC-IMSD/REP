@@ -97,10 +97,9 @@
             }
         };
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.length5Error = [{type: "required", displayAlias: "MSG_ERR_MAND"}, {
-            type: "minlength",
-            displayAlias: "MSG_LENGTH_MIN5"
-        }];
+        vm.length6Error = [{type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
+            ];
 
 
         /*

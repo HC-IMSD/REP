@@ -161,5 +161,21 @@
   "B14-20160301-02":	"Biological",
   "B14-20160301-10":	"Post-Market Vigilance",
   "B14-20160301-06":	"Consumer Health Product",
-  "RESET": "RESET"
+  "RESET": "RESET",
+  "RESET_INFO" : "To enable the 'generate final XML' button, select the 'RESET' button to clear transaction specific fields.",
+  "FEE_REMIT_NO_PAYMENT" :"Please remit no payment with this transaction. Payment of the fees will be required upon issuance of an invoice",
+  "MITIGATION_TYPE" : "The following mitigation measures are available (select one). Sponsors must certify that they meet the criteria as outlined in the Food and Drug Regulations.",
+  "CERTIFY_ORGANIZATION" : "We certify that our organization, including its affiliates, has",
+  "CERTIFY_ORGANIZATION_A" : "a) a total number of employees less than 100 people, or",
+  "CERTIFY_ORGANIZATION_B" : "b) a total annual gross revenue between $30,000 and $5 million.",
+  "SMALL_BUSINESS_FEE_APPLICATION":"We have completed the Small Business Fee Mitigation Application and attached it with our submission/application.",
+  "FIRST_SUBMISSION" : "This is my first submission/application",
+  "CERTIFY_GOVERMENT_ORGANIZATION" : "We certify that our organization is a branch or agency of the Government of Canada or of a province or territory",
+  "CERTIFY_URGENT_HEALTH_NEED":"We certify that the drug in our submission/application is on the List of Drugs for an Urgent Public Health Need as per the Access to Drugs in Exceptional Circumstances Regulations AND",
+  "DRUG_THE_SAME_INGREDIENT":"a) the drug has the same medicinal ingredient, strength and route of administration, and is in a comparable dosage form, as a drug that may be imported under subsection C.10.001(2) of those Regulations;",
+  "NO_DRUG_IDENTIFICATION_NUMBER":"b) no drug identification number has been assigned under section C.01.014.2 of those Regulations for the drug or for another drug that has the same medicinal ingredient, strength and route of administration and is in a comparable dosage form; and",
+  "NO_NOTICE_COMPLIANCE":"c) no notice of compliance has been issued under section C.08.004 of those Regulations in respect of the drug or another drug that has the same medicinal ingredient, strength and route of administration and is in a comparable dosage form.",
+  "CERTIFY_FUNDED_HEALTH_INSTITUTION":"We certify that our institution is funded by the Government of Canada or the government of a province or territory and that it is",
+  "CERTIFY_FUNDED_HEALTH_INSTITUTION_A":"a) licensed, approved or designated by a province in accordance with the laws of the province to provide care or treatment to persons or animals suffering from any form of disease or illness; or",
+  "CERTIFY_FUNDED_HEALTH_INSTITUTION_B":"b) owned or operated by the Government of Canada or the government of a province and that provides health services."
 }

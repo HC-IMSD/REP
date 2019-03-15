@@ -5,7 +5,7 @@
 (function () {
     'use strict';
     angular
-        .module('applicationInfo', ['numberFormat','hpfbConstants'])
+        .module('applicationInfo', ['numberFormat','hpfbConstants','errorSummaryModule','errorMessageModule'])
 })();
 
 (function () {
@@ -49,9 +49,14 @@
         vm.isDossier = false;
         vm.isNumber=false;
         vm.isAmend = false;
-        vm.min5Error = [
+        vm.min6Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"}
+        ];
+        vm.min7Error = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "minlength", displayAlias: "MSG_LENGTH_MIN5"},
+            {type: "pattern", displayAlias: "MSG_FORMAT_CHAR_6DIGITS"}
         ];
         vm.$onInit = function () {
             ///do init
@@ -78,6 +83,10 @@
             }
             if (changes.configureIdField) {
                 _setConfigItems(changes.configureIdField.currentValue);
+            }
+            if(changes.showErrorSummary){
+                vm.showSummary=changes.showErrorSummary.currentValue;
+                vm.updateErrorSummaryState();
             }
         };
         function _setConfigItems(configJson) {

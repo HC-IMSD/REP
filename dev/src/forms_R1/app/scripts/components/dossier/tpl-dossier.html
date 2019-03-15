@@ -1,15 +1,17 @@
 <ng-form id="{{::dos.dossierFormId}}" name="dos.dossierForm">
-
+    <span id="privacy"></span>
     <div class="module-attention">
         <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
         <section data-ng-if="!main.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
         <section data-ng-if="main.isFrench()" ng-include="'app/scripts/templates/company/tpl-privacy-statement-fr.html'"></section>
     </div>
+    <span id="instructions"></span>
     <aside class="wb-fnote" role="note">
         <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
         <section data-ng-if="!dos.isFrench()" ng-include="'app/scripts/templates/dossier/tpl-dossier-footnote-en.html'"></section>
         <section data-ng-if="dos.isFrench()" ng-include="'app/scripts/templates/dossier/tpl-dossier-footnote-fr.html'"></section>
     </aside>
+    <span id="main"></span>
     <div data-translate-cloak="cloak-class">
         <section class="panel  panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
@@ -50,10 +52,8 @@
                                         update-errors="dos.updateSummary">
                      </cmp-error-summary>
                  </div>
-                 <div>
-                     <div class="row">
-                         <div class="col-xs-4 form-group"
-                              data-ng-class="{'has-error':dos.dossierForm[dos.typeId].$invalid}">
+                 <div class="row">
+                     <div class="col-xs-4 form-group" data-ng-class="{'has-error':dos.dossierForm[dos.typeId].$invalid}">
                          <label for="{{::dos.typeId}}" class="required">
                              <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                              <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -96,11 +96,12 @@
                                  <sup id="do4-rf">
                                      <a class="fn-lnk" href="#do4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                  </sup>
-                             </label>
                          <cmp-error-message field-name="dos.prodNameId"
                                             form-ref="dos.dossierForm"
                                             show-error="dos.showError(dos.dossierForm[dos.prodNameId])"
-                                            error-types="dos.requiredOnly"></cmp-error-message>
+                                            error-types="dos.requiredOnly">
+                         </cmp-error-message>
+                             </label>
                          <textarea class="form-control full-width" id="{{::dos.prodNameId}}" rows="2"
                                    name="{{::dos.prodNameId}}" required
                                    data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase()"
@@ -117,11 +118,12 @@
                              <sup id="do5-rf">
                                  <a class="fn-lnk" href="#do5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                              </sup>
-                         </label>
                          <cmp-error-message field-name="dos.properNameId"
                                             form-ref="dos.dossierForm"
                                             show-error="dos.showError(dos.dossierForm[dos.properNameId])"
-                                            error-types="dos.requiredOnly"></cmp-error-message>
+                                            error-types="dos.requiredOnly">
+                         </cmp-error-message>
+                         </label>
                          <textarea class="form-control full-width" id="{{::dos.properNameId}}" name="{{::dos.properNameId}}"
                                    required data-ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
                                    data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase()">
@@ -154,17 +156,17 @@
                              <sup id="do6-rf">
                                  <a class="fn-lnk" href="#do6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                              </sup>
-                         </label>
                          <cmp-error-message field-name="dos.relatedInfoId"
                                             form-ref="dos.dossierForm"
                                             show-error="dos.showError(dos.dossierForm[dos.relatedInfoId])"
                                             error-types="dos.requiredOnly"></cmp-error-message>
+                         </label>
                          <textarea class="form-control full-width" id="{{::dos.relatedInfoId}}" name="{{::dos.relatedInfoId}}"
                                    data-ng-model="dos.dossierModel.relatedInfo" rows="4" required></textarea>
 
                      </div>
                  </div>
-                 <div>
+                 <div class="row">
                      <section class="panel panel-default">
                          <header class="panel-heading clearfix">
                              <h3 class="panel-title col-md-8">{{::'THERA_CLASS'|translate}}
@@ -175,7 +177,8 @@
                          </header>
                          <div class="panel-body">
                              <cmp-thera-list records="dos.dossierModel.drugProduct.therapeutic"
-                                             show-errors="dos.showErrors()"></cmp-thera-list>
+                                             show-errors="dos.showErrors()">
+                             </cmp-thera-list>
                          </div>
                      </section>
                  </div>
@@ -245,8 +248,7 @@
                  </div>
              </div>
          </section>
-         <div>
-             <section class="panel panel-primary mrgn-tp-lg">
+         <section class="panel panel-primary mrgn-tp-lg">
                  <header class="panel-heading clearfix">
                      <h2 class="panel-title col-md-8">{{::'REP_CONTACT_INFO'|translate}}
                          <sup id="do9-rf">
@@ -262,8 +264,7 @@
                                                show-list-errors="dos.showErrors()" is-amend="dos.formAmend"></cmp-rep-contact-list>
                      </div>
                  </div>
-             </section>
-         </div>
+         </section>
          <div class="row form-group  col-md-12">
              <div class="checkbox col-md-10">
                  <label for="{{::dos.privacyStatementID |translate}}">
@@ -300,7 +301,4 @@
          </div>
   <!--      <pre>{{dos.dossierModel | json }}</pre>-->
     </div>
-        </div>
-
-
 </ng-form>

@@ -82,7 +82,8 @@
         ];
         vm.min7Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "minlength", displayAlias: "MSG_LENGTH_7"}
+            {type: "minlength", displayAlias: "MSG_LENGTH_7"},
+            {type: "pattern", displayAlias: "MSG_FORMAT_CHAR_6DIGITS"}
         ];
         vm.showSummary=false;
 
@@ -320,17 +321,6 @@
                 vm.setAdminSubmission();
                 vm.transactionModel.isSolicited = "";
                 vm.setSolicitedState();
-                /**
-                vm.transactionModel.isThirdParty = "";
-                vm.transactionModel.isPriority = "";
-                vm.transactionModel.isNoc = "";
-                vm.transactionModel.isAdminSub = "";
-                vm.transactionModel.subType = "";
-                vm.showThirdPartyNote = false;
-                vm.showAdminSub = false;
-                 vm.transactionModel.isSolicited = ""; //37 - solicited information
-                 vm.transactionModel.solicitedRequesterReord = []; //41 solicited information
- */
                 vm.transactionModel.ectd.lifecycleRecord =[]; //22 - Transaction Details Record
                 vm.transactionModel.projectManager1 = ""; //43 - projectManager1
                 vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
@@ -375,8 +365,7 @@
             vm.isPriorityId = "is_priority" + scopeId;
             vm.isNocId = "is_noc" + scopeId;
         }
-
-}
+    }
 
 })
 ();
