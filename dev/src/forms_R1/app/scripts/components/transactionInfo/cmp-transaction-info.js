@@ -40,6 +40,7 @@
                 //onUpdate: '&',
                 isAmend: '<',
                 isFinal: '<',
+                isFileLoaded: '<',
                 getTransaction: '&',
                 setStartingSequence:'&',
                 getRepContact: '&',
@@ -72,6 +73,7 @@
         vm.isEctd = false;
         vm.alerts = [false, false, false, false, false, false, false, false, false];
         vm.requesterList = [];
+        vm.userList = [];
         vm.formTypeList = getRoleLists.getFormTypes();
         vm.lang=ENGLISH;
         vm.sequenceChange=false;
@@ -95,6 +97,8 @@
             vm.updateEctdState();
             vm.setSolicitedState();
             loadAdminSubData();
+           // loadContactData();
+            loadUserListData();
             vm.finalState=false;
             vm.displayResetBtn = false;
         };
@@ -232,13 +236,23 @@
                 });
         }
 
-        function loadContactData() {
+        /**
+         * function loadContactData() {
             getContactLists.getInternalContacts()
                 .then(function (data) {
                     vm.requesterList = data;
                     return true;
                 });
         }
+         **/
+        function loadUserListData() {
+            getContactLists.getInternalContactsWithoutOther()
+                .then(function (data) {
+                    vm.userList = data;
+                    return true;
+                });
+        }
+
 
         /**
          * @ngdoc method sets the visibilty of the solicited requester field. Clears

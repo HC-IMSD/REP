@@ -523,9 +523,9 @@
         function getActiveIngList(list) {
 
             var resultList = [];
-            if (!(list instanceof Array)) {
+            if (list && !(list instanceof Array)) {
                 //make it an array, case there is only one
-                list = [list]
+                list = [list];
             }
             angular.forEach(list, function (item) {
 
@@ -543,6 +543,7 @@
                         data1: Number(item.strength.data1),
                         data2: Number(item.strength.data2) },
                     "units": "",
+                    "unitsHtml": "",
                     "otherUnits": item.units_other,
                     "per": item.per,
                     "perPresentationValue": Number(1),
@@ -550,6 +551,7 @@
                     "perPresUnits": "",
                     "perPresOtherUnits": "",
                     "perMeasUnits": "",
+                    "perMeasUnitsHtml": "",
                     "perMeasOtherUnits": "",
                     "calcAsBase": item.is_base_calc,
                     "isNano": item.is_nanomaterial,
@@ -569,6 +571,7 @@
                         unitsValue = item.units.__text;
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
+                    obj.unitsHtml = obj.units[$translate.proposedLanguage() || $translate.use()];
                 }
 
                 if (item.per) {
@@ -595,6 +598,7 @@
                         unitsValue = item.per_units.__text;
                     }
                     obj.perMeasUnits = $filter('findListItemById')(DossierLists.getUnitsMeasureList(), {id: unitsValue});
+                    obj.perMeasUnitsHtml = obj.perMeasUnits[$translate.proposedLanguage() || $translate.use()];
                     obj.perMeasOtherUnits = item.per_units_other_details;
                 }
 
@@ -1424,7 +1428,7 @@
                 if (oneFormulation.activeIngList) {
                     for (var j = 0; j < (oneFormulation.activeIngList.length); j++) {
                         var oneActive = oneFormulation.activeIngList[j];
-                        if (oneActive.humanAnimalSourced === yesValue) {
+                        if (oneActive && oneActive.humanAnimalSourced === yesValue) {
                             allAnimalSourcedNames.push(oneActive.ingLabel);
                         }
                     }

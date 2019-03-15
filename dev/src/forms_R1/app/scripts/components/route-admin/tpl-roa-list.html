@@ -4,6 +4,7 @@
     <cmp-expanding-table  pre-id="roa_list_" reset-to-collapsed="roaCtrl.resetToCollapsed" id="list_roa_{{::$id}}"
                          list-items="roaCtrl.model.roaList" expand-record="roaCtrl.setRecord(index)"
                          column-def="roaCtrl.columnDef" select-record="roaCtrl.selectRecord"
+                         is-required-record="roaCtrl.requiredFlag"
                          disable-selection="roaCtrl.disableAddButton()">
 
         <cmp-roa-record record="$parent.record" show-errors="roaCtrl.showDetailErrors"

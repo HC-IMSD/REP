@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('theraClass', ['theraClassRecord'])
+        .module('theraClass', ['theraClassRecord','hpfbConstants'])
 })();
 
 (function () {
@@ -18,21 +18,24 @@
             templateUrl: 'app/scripts/components/therapeutic-classification/tpl-thera-list.html',
             bindings: {
                 records: '<',
-                showErrors: '&'
+                isFileLoaded: '<',
+                showErrors: '&',
+                userType:'<'
             },
             controller: theraListCtrl,
             controllerAs: 'theraCtrl'
         });
 
-    theraListCtrl.$inject = ["$filter","$scope"];
+    theraListCtrl.$inject = ["$filter","$scope", 'EXTERNAL_TYPE'];
 
-    function theraListCtrl($filter,$scope) {
+    function theraListCtrl($filter,$scope, EXTERNAL_TYPE) {
 
         var vm = this;
         vm.selectRecord = -1; //the record to select, initially select non
         vm.resetToCollapsed = true;
         vm.noThera = ""; //used for validation, need at least one therapeutic classification
         vm.model = {};
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.model.theraList = [];
         vm.columnDef = [
             {
@@ -48,10 +51,20 @@
 
 
         vm.$onChanges = function (changes) {
-
             if (changes.records) {
                 vm.model.theraList = changes.records.currentValue;
                 vm.noTheraRecs();
+            }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
+        };
+
+        vm.$postLink = function () {
+            if (vm.userType === EXTERNAL_TYPE) {
+                vm.addNew();
             }
         };
 
@@ -80,12 +93,18 @@
             vm.noTheraRecs();
         };
 
+        vm.recordUpdated=function(){
+            vm.requiredFlag = false;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+        };
+
         vm.deleteRecord = function (recId) {
 
             var idx = vm.model.theraList.indexOf(
                 $filter('filter')(vm.model.theraList, {id: recId}, true)[0]);
             vm.model.theraList.splice(idx, 1);
             vm.noTheraRecs();
+            vm.requiredFlag = false;
         };
 
         vm.disableAddButton=function(){
@@ -128,7 +147,5 @@
             vm.noTheraId="no_theraVal" + scopeId;
             vm.addTheraId="addTheraClass" + scopeId;
         }
-
-
     }
 })();

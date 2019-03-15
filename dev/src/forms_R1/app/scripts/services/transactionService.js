@@ -25,9 +25,11 @@
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO, HCSC) {
         //var vm = this;
         this.baseRequesters = [];
+        this.userList =[];
         this.isFinal = false;
         this.$onInit = function () {
             loadContactData();
+            loadUserListData();
         };
 
         function TransactionService() {
@@ -36,7 +38,7 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
-            this.xslFileName = "REP_RT_2_0.xsl";
+            this.xslFileName = "REP_RT_2_1.xsl";
         }
 
         function loadContactData() {
@@ -47,11 +49,18 @@
                 });
         }
 
+        function loadUserListData() {
+            getContactLists.getInternalContactsWithoutOther()
+                .then(function (data) {
+                    this.userList = data;
+                    return true;
+                });
+        }
+
         TransactionService.prototype = {
             _default: {},
             isFinal: false,
             //TODO update
-
             getRootTag: function () {
 
                 return ("TRANSACTION_ENROL")
@@ -169,6 +178,7 @@
                 ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
                 return (ectd);
             },
+
             _transformEctdFromFile: function (model, jsonObj) {
                 model.ectd = _getEmptyEctdSection();
                 model.ectd.companyId = jsonObj.company_id;
@@ -177,6 +187,8 @@
                 model.ectd.productName = jsonObj.product_name;
                 model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
             },
+
+
             getModelInfo: function () {
                 return this._default;
             },
@@ -366,27 +378,18 @@
                 //gets rid of any hashkey serialize then deseriailize,
                 result.submission_class = (angular.fromJson(angular.toJson(feeObj.submissionClass)))
             }
-            result.deferral_request = feeObj.deferralRequest;
-            result.fee_remission = feeObj.feeRemission;
-            result.gross_revenue = feeObj.grossRevenue;
-            result.percent_gross = feeObj.percentGross;
-            result.required_docs.deferral_statement = feeObj.requiredDocs.deferralStat === true ? YES : NO;
-            result.required_docs.remission_certified = feeObj.requiredDocs.revStat === true ? YES : NO;
-            result.required_docs.sales_history = feeObj.requiredDocs.salesHistory === true ? YES : NO;
-            result.required_docs.avg_sale_price = feeObj.requiredDocs.avgSalePrice === true ? YES : NO;
-            result.required_docs.est_market_share = feeObj.requiredDocs.estMarketShare === true ? YES : NO;
-            result.required_docs.comparison_products = feeObj.requiredDocs.comparison === true ? YES : NO;
-            result.required_docs.market_plan = feeObj.requiredDocs.marketPlan === true ? YES : NO;
-            result.required_docs.other = feeObj.requiredDocs.other === true ? YES : NO;
-            result.required_docs.other_details = feeObj.requiredDocs.otherDetails;
-            result.payment_method.credit_card = feeObj.paymentMethod.creditCard === true ? YES : NO;
-            result.payment_method.cheque = feeObj.paymentMethod.cheque === true ? YES : NO;
-            result.payment_method.money_order = feeObj.paymentMethod.moneyOrder === true ? YES : NO;
-            result.payment_method.bank_draft = feeObj.paymentMethod.bankDraft === true ? YES : NO;
-            result.payment_method.existing_credit = feeObj.paymentMethod.existingCredit === true ? YES : NO;
-            result.payment_method.bank_wire = feeObj.paymentMethod.bankWire === true ? YES : NO;
-            result.payment_method.bill_payment = feeObj.paymentMethod.billPayment === true ? YES : NO;
-
+            //mitigation
+            result.mitigation.mitigation_type = "";
+            if (feeObj.mitigation.mitigationType && feeObj.mitigation.mitigationType.id) {
+                result.mitigation.mitigation_type =  (angular.fromJson(angular.toJson(feeObj.mitigation.mitigationType)))
+            }
+           // result.mitigation.mitigation_type = feeObj.mitigation.mitigationType;
+            result.mitigation.certify_organization = feeObj.mitigation.certifyOrganization   === true ? 'Y' : 'N';
+            result.mitigation.small_business_fee_application = feeObj.mitigation.smallBusinessFeeApplication === true ? 'Y' : 'N';
+            result.mitigation.first_submission = feeObj.mitigation.firstSubmission;
+            result.mitigation.certify_goverment_organization = feeObj.mitigation.certifyGovermentOrganization  === true ? 'Y' : 'N';
+            result.mitigation.certify_urgent_health_need = feeObj.mitigation.certifyUrgentHealthNeed   === true ? 'Y' : 'N';
+            result.mitigation.certify_funded_health_institution = feeObj.mitigation.certifyFundedHealthInstitution   === true ? 'Y' : 'N';
             return result;
         };
         TransactionService.prototype._mapFeeDetailsFromOutput = function (feeObj) {
@@ -405,27 +408,16 @@
             if (feeObj.submission_class && feeObj.submission_class.id) {
                 result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class.id});
             }
-            result.deferralRequest = feeObj.deferral_request;
-            result.feeRemission = feeObj.fee_remission;
-            result.grossRevenue = Number(feeObj.gross_revenue);
-            result.percentGross = feeObj.percent_gross;
-            result.requiredDocs.deferralStat = feeObj.required_docs.deferral_statement === YES;
-            result.requiredDocs.revStat = feeObj.required_docs.remission_certified === YES;
-            result.requiredDocs.salesHistory = feeObj.required_docs.sales_history === YES;
-            result.requiredDocs.avgSalePrice = feeObj.required_docs.avg_sale_price === YES;
-            result.requiredDocs.estMarketShare = feeObj.required_docs.est_market_share === YES;
-            result.requiredDocs.comparison = feeObj.required_docs.comparison_products === YES;
-            result.requiredDocs.marketPlan = feeObj.required_docs.market_plan === YES;
-            result.requiredDocs.other = feeObj.required_docs.other === YES;
-            result.requiredDocs.otherDetails = feeObj.required_docs.other_details;
-            result.paymentMethod.creditCard = feeObj.payment_method.credit_card === YES;
-            result.paymentMethod.cheque = feeObj.payment_method.cheque === YES;
-            result.paymentMethod.moneyOrder = feeObj.payment_method.money_order === YES;
-            result.paymentMethod.bankDraft = feeObj.payment_method.bank_draft === YES;
-            result.paymentMethod.existingCredit = feeObj.payment_method.existing_credit === YES;
-            result.paymentMethod.bankWire = feeObj.payment_method.bank_wire === YES;
-            result.paymentMethod.billPayment = feeObj.payment_method.bill_payment === YES;
 
+            if (feeObj.mitigation.mitigation_type && feeObj.mitigation.mitigation_type.id) {
+                result.mitigation.mitigationType = $filter('findListItemById')(TransactionLists.getMitigationList(), {id: feeObj.mitigation.mitigation_type.id});
+            }
+            result.mitigation.certifyOrganization = feeObj.mitigation.certify_organization === YES;
+            result.mitigation.smallBusinessFeeApplication = feeObj.mitigation.small_business_fee_application === YES;
+            result.mitigation.firstSubmission = feeObj.mitigation.first_submission;
+            result.mitigation.certifyGovermentOrganization = feeObj.mitigation.certify_goverment_organization === YES;
+            result.mitigation.certifyUrgentHealthNeed = feeObj.mitigation.certify_urgent_health_need === YES;
+            result.mitigation.certifyFundedHealthInstitution  = feeObj.mitigation.certify_funded_health_institution ===  YES;
             return result;
             //}
         };
@@ -757,29 +749,15 @@
         var feeObj = {
 
             submissionClass: null,
-            deferralRequest: '', //defer payment for two years
-            feeRemission: "", //applying for fee remission
-            grossRevenue: 0,
-            percentGross: "",
-            requiredDocs: {
-                deferralStat: false, //statement supporting the deferral request
-                revStat: false,
-                salesHistory: false, //sales history
-                avgSalePrice: false, //average sales price and demand
-                estMarketShare: false, //estimated market share
-                comparison: false, ///compariosn to similar products
-                marketPlan: false, //marketing palne for the drug product
-                other: false,   //other
-                otherDetails: ""
-            },
-            paymentMethod: {
-                creditCard: false,
-                cheque: false,
-                moneyOrder: false,
-                bankDraft: false,
-                existingCredit: false,
-                bankWire: false,
-                billPayment: false
+            feeRemitNoPayment: null,
+            mitigation: {
+                mitigationType: "", //statement supporting the deferral request
+                certifyOrganization: false,
+                smallBusinessFeeApplication: false,
+                firstSubmission: null,
+                certifyGovermentOrganization:false,
+                certifyUrgentHealthNeed: false,
+                certifyFundedHealthInstitution: false
             }
         };
         return feeObj;
@@ -789,29 +767,14 @@
         var feeObj = {
 
             submission_class: null,
-            deferral_request: NO, //defer payment for two years
-            fee_remission: "", //applying for fee remission
-            gross_revenue: 0,
-            percent_gross: "",
-            required_docs: {
-                deferral_statement: NO, //statement supporting the deferral request
-                remission_certified: NO,
-                sales_history: NO, //sales history
-                avg_sale_price: NO, //average sales price and demand
-                est_market_share: NO, //estimated market share
-                comparison_products: NO, ///compariosn to similar products
-                market_plan: NO, //marketing palne for the drug product
-                other: NO,   //other
-                other_details: ""
-            },
-            payment_method: {
-                credit_card: NO,
-                cheque: NO,
-                money_order: NO,
-                bank_draft: NO,
-                existing_credit: NO,
-                bank_wire: NO,
-                bill_payment: NO
+            mitigation: {
+                mitigation_type : "",// mitigation measures
+                certify_organization : NO, //number of employees less than 100 people
+                small_business_fee_application : NO, //completed the Small Business Fee Mitigation Application and attached it
+                first_submission : NO, //This is my first submission/application
+                certify_goverment_organization : NO, // certify that our organization is a branch or agency of the Government of Canada or of a province or territory.
+                certify_urgent_health_need: NO,
+                certify_funded_health_institution: NO
             }
         };
         return feeObj;

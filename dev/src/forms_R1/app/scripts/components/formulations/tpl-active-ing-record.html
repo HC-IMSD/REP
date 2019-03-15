@@ -1,6 +1,6 @@
 <ng-form name="ingRecCtrl.activeIngForm" id="{{::ingRecCtrl.activeFormId}}">
     <!--  <pre>ingRecCtrl.ingModel: {{ingRecCtrl.ingModel|json}}</pre>-->
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding-bottom:8px; border-width: thin; border-style: solid;">
         <cmp-error-summary form-ref="ingRecCtrl.activeIngForm"
                            form-preamble="{{'INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}" exclusion-list=ingRecCtrl.exclusions
                            name-suffix="ingRecCtrl.activeIngForm" set-heading-level="h3" form-id="ingRecCtrl.activeFormId"
@@ -10,7 +10,7 @@
             <legend class="legend-rep">{{'INGRED_DETAILS'|translate}}&nbsp{{ingRecCtrl.recordIndex+1}}</legend>
             <div class="row">
                 <div class="form-group col-md-3" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.ingredRoleId].$invalid}">
-                    <label for="{{::ingRecCtrl.ingredRoleId}}">
+                    <label for="{{::ingRecCtrl.ingredRoleId}}" class="required">
                         <span class="field-name">{{'ING_ROLE'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                     </label>

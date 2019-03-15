@@ -8,8 +8,8 @@
         <input type="text" id="importerIdValid_{{::$id}}" name="importerIdValid_{{::$id}}"  data-ng-model="addressListCtrl.importerhasID" hidden data-ng-required="addressListCtrl.isInternal"/>
              <cmp-expanding-table pre-id="address_expnd_" list-items="addressListCtrl.addressList"
                              reset-to-collapsed="addressListCtrl.resetCollapsed"
-                             column-def="addressListCtrl.columnDef"
-                             select-record="addressListCtrl.selectRecord"
+                             column-def="addressListCtrl.columnDef" is-required-record="addressListCtrl.requiredFlag"
+                             select-record="addressListCtrl.selectRecord" is-internal="addressListCtrl.isInternal"
                              disable-selection="!addressListCtrl.isDetailsValid">
 
             <cmp-address-record on-delete="addressListCtrl.deleteAddress(addressId)"
