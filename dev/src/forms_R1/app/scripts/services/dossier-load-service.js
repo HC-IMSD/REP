@@ -25,6 +25,7 @@
                 var presentationUnitsUrl = RELATIVE_FOLDER_DATA + "presentationUnits.json";
                 var measureUnitsUrl = RELATIVE_FOLDER_DATA + "measureUnits.json";
                 var dosageFormUrl = RELATIVE_FOLDER_DATA + "dosageForm.json";
+                var speciesSubspeciesUrl = RELATIVE_FOLDER_DATA + "speciesSubspecies.json";
                 var activeUrl= RELATIVE_FOLDER_DATA +"activeIngred.json";
                 var resultTranslateList = {};
                 $http.get(unitsUrl)
@@ -56,14 +57,21 @@
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
                         return $http.get(nanoUrl); //nanomaterial load
-
-                    }).then(function (response) {
-                    var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getNanoPrefix(), options.key);
-                    var translateList = _createTranslateList(newList, options.key);
-                    DossierLists.createNanomaterialList(newList);
-                    angular.extend(resultTranslateList, translateList);
-                    return $http.get(dosageFormUrl); //dosage form list Load contains both languages
-                })
+                    })
+                    .then(function (response) {
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getNanoPrefix(), options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        DossierLists.createNanomaterialList(newList);
+                        angular.extend(resultTranslateList, translateList);
+                        return $http.get(speciesSubspeciesUrl); //speciesSubspeciesUrl list Load contains both languages
+                    })
+                    .then(function (response) {
+                        var newList = _createSortedArray(response.data, options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        DossierLists.createSpeciesSubspeciesList(newList);
+                        angular.extend(resultTranslateList, translateList);
+                        return $http.get(dosageFormUrl); //dosage form list Load contains both languages
+                    })
                     .then(function (response) {
                         //PROCESSING: DOSAGE FORM list
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(), options.key);
@@ -74,16 +82,17 @@
                         var translateList2 = _createTranslateList(newList2, options.key);
                         angular.extend(resultTranslateList, translateList2);
                         return $http.get(activeUrl); //active ingredient list load
+                    })
+                    .then(function (response) {
+                        DossierLists.setActiveList(response.data);
+                        return $http.get(roaUrl); //roa load
                     }).then(function (response) {
-                    DossierLists.setActiveList(response.data);
-                    return $http.get(roaUrl); //roa load
-                }).then(function (response) {
-                    var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(), options.key);
-                    var translateList = _createTranslateList(newList, options.key);
-                    DossierLists.createRoaList(newList); //for display
-                    angular.extend(resultTranslateList, translateList);
-                    return response.data;
-                })
+                        var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(), options.key);
+                        var translateList = _createTranslateList(newList, options.key);
+                        DossierLists.createRoaList(newList); //for display
+                        angular.extend(resultTranslateList, translateList);
+                        return response.data;
+                    })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
                         console.warn("An error occurred with Dossier List Load: " + error);

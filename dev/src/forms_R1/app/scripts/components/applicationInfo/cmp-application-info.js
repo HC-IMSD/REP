@@ -26,7 +26,7 @@
             }
         });
 
-    ApplInfoCtrl.$inject=[$scope,'NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
+    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
 
     function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE, $scope) {
         var vm = this;

@@ -33,6 +33,7 @@
         vm.roaList = [];
         vm.nanoList = [];
         vm.dosageFormList = [];
+        vm.speciesSubspeciesList = [];
         vm.unitsPresentationList = [];
         vm.unitsMeasureList = [];
         vm.activeList = [];
@@ -47,7 +48,9 @@
             createUnitsMeasureList: _createUnitsMeasureArray,
             createNanomaterialList: _createNanoArray,
             createDosageFormList: _createDosageFormArray,
+            createSpeciesSubspeciesList: _createSpeciesSubspeciesList,
             getDosageFormList: _getDosageFormsArray,
+            getSpeciesSubspeciesList:_getSpeciesSubspeciesList,
             getUnitsPresentationList: _getUnitsPresentationArray,
             getUnitsMeasureList: _getUnitsMeasureArray,
             getDrugUseList:_getDrugUseArray,
@@ -127,6 +130,10 @@
             vm.dosageFormList = (translateJson);
         }
 
+        function _createSpeciesSubspeciesList(translateJson) {
+            vm.speciesSubspeciesList = (translateJson);
+        }
+
         function _createUnitsPresentationArray(translateJson) {
             vm.unitsPresentationList = (translateJson);
         }
@@ -163,6 +170,7 @@
         function _getNanoPrefix(){
             return "NANOMAT_"
         }
+
 
         function _getDrugUseArray(){
 
@@ -238,6 +246,7 @@
             )
         }
 
+
         /**
          * gets the keys for a list If there is a prefix,add it
          * @param translateJson
@@ -261,6 +270,10 @@
         function _getDosageFormsArray() {
             return vm.dosageFormList;
         }
+        function _getSpeciesSubspeciesList() {
+            return vm.speciesSubspeciesList;
+        }
+
 
         function _getUnitsPresentationArray() {
             return vm.unitsPresentationList;

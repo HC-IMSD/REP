@@ -35,5 +35,16 @@
   "INS_INDUS":"Institutional/Industrial",
   "CONTACT_LENS":"Contact Lens",
   "SAVE_INSTRUCT": "Product Information File Save Instructions",
-  "ADD_IMPORTER" : "Add Importer"
+  "ADD_IMPORTER" : "Add Importer",
+  "SPECIES_SUBTYPES_USE": "Species and subtypes recommended for use",
+  "ADD_SPECIES_SUBTYPES":"Add Species and subtypes ",
+  "SPECIES_SUBTYPES":"Species and subtypes",
+  "FOOD_PRODUCING_ANIMAL":"Food producing-animal",
+  "WITHDRAWAL_TIME":"Withdrawal time",
+  "FOOD_PRODUCING_ANIMAL_USE":"Is this used for the treatment of food-producing animals?",
+  "NO_VETERIANRY":"At least one Species and subtypes recommended for use is required.",
+  "SPECIES_SUBTYPE_DETAILS": "Species and subtypes Details",
+  "DAYS":"Days",
+  "HOURS":"Hours"
+
 }

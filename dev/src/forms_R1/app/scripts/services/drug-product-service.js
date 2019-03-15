@@ -41,6 +41,7 @@
             _default: {
                 dossierID: "",
                 companyID: "",
+                dossierType:"",
                 productName: "",
                 properName: "",
                 manu: false,
@@ -70,6 +71,7 @@
                         barn: false,
                         institutionalIndustrial: false
                     },
+                    veterinaryRecord:[],
                     isScheduleC: false,
                     isScheduleD: false,
                     isPrescriptionDrugList: false,
@@ -89,7 +91,22 @@
                 //contactList: []
 
             },
-
+            createVeterinaryRecord: function () {
+                var defaultVeterinary = {
+                    veterinaryID: 1,
+                    speciesSubtypeUse: "",
+                    foodProcessingAnimaluse: "",
+                    withdrawalTime: "",
+                    days: "",
+                    hours: ""
+                };
+                defaultVeterinary.veterinaryID = this.getNextVeterinaryID();
+                return (defaultVeterinary);
+            },
+            getNextVeterinaryID: function () {
+                this.veterinaryID = this.veterinaryID + 1;
+                return (this.veterinaryID);
+            },
             getDefaultObject: function () {
 
                 return this._default;
@@ -114,6 +131,7 @@
                 var formModel = {
                     companyID: info.company_id,
                     dossierID: info.dossier_id, //.substring(8,15),
+                    dossierType: info.dossier_type,
                     productName: info.product_name,
                     properName: info.proper_name,
                     manu: info.manufacturer === 'Y',
@@ -142,6 +160,7 @@
                             barn: info.disinfectant_type.barn === 'Y',
                             institutionalIndustrial: info.disinfectant_type.institutional_industrial === 'Y'
                         },
+                        veterinaryRecord: transformVeterinaryFromFile(info.veterinary_list.veterinary_record),
                         isScheduleC: info.is_sched_c === 'Y',
                         isScheduleD: info.is_sched_d === 'Y',
                         isPrescriptionDrugList: info.is_prescription_drug_list === 'Y',
@@ -195,6 +214,7 @@
 
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
+            baseModel.dossier_type = jsonObj.dossierType;
             baseModel.product_name = jsonObj.productName;
             baseModel.proper_name = jsonObj.properName;
             baseModel.manufacturer = jsonObj.manu === true ? 'Y' : 'N';
@@ -221,6 +241,12 @@
                 barn: jsonObj.drugProduct.disinfectantType.barn === true ? 'Y' : 'N',
                 institutional_industrial: jsonObj.drugProduct.disinfectantType.institutionalIndustrial === true ? 'Y' : 'N'
             };
+
+            var veterinaryItems = transformVeterinaryToFile(jsonObj.drugProduct.veterinaryRecord);
+            baseModel.veterinary_record = {};
+            if (veterinaryItems) {
+                baseModel.veterinary_list.veterinary_record = veterinaryItems;
+            }
             baseModel.is_sched_c = jsonObj.drugProduct.isScheduleC === true ? 'Y' : 'N';
             baseModel.is_sched_d = jsonObj.drugProduct.isScheduleD === true ? 'Y' : 'N';
             baseModel.is_prescription_drug_list = jsonObj.drugProduct.isPrescriptionDrugList === true ? 'Y' : 'N';
@@ -232,7 +258,7 @@
 
             if (jsonObj.drugProduct.isScheduleA) {
                 baseModel.schedule_a_group = scheduleAToOutput(jsonObj.drugProduct.scheduleAGroup);
-                console.log( baseModel.schedule_a_group)
+                //console.log( baseModel.schedule_a_group)
             }
             if (jsonObj.drugProduct) {
                 var appendix4 = appendix4IngredientListToOutput(jsonObj.drugProduct.appendixFourList);
@@ -873,6 +899,55 @@
             return (importerRec);
         }
 
+        function transformVeterinaryToFile(jsonObj) {
+            var veterinaryItem = [];
+            if (!jsonObj) return veterinaryItem;
+            if (!(jsonObj instanceof Array)) {
+                //make it an array, case there is only one record
+                jsonObj = [jsonObj]
+            }
+
+            for (var i = 0; i < jsonObj.length; i++) {
+                var record = _mapVeterinaryRecToOutput(jsonObj[i]);
+                if (jsonObj.length === 1) {
+                    return (record);
+                }
+                veterinaryItem.push(record);
+            }
+            return (veterinaryItem);
+        }
+
+        function _mapVeterinaryRecToOutput(veterinaryObj) {
+            var veterinaryRec = {};
+            if (veterinaryObj) {
+                veterinaryRec = {
+                    species_subtype_use: veterinaryObj.speciesSubtypeUse,
+                    food_processing_animal_use: veterinaryObj.foodProcessingAnimaluse,
+                    withdrawal_time: veterinaryObj.withdrawalTime
+                }
+            }
+            return (veterinaryRec);
+        }
+
+
+        function transformVeterinaryFromFile(jsonObj) {
+            var veterinaryRecord = [];
+            if (!jsonObj) return veterinaryRecord;
+            if (!(jsonObj instanceof Array)) {
+                //make it an array, case there is only one record
+                jsonObj = [jsonObj];
+            }
+            for (var i = 0; i < jsonObj.length; i++) {
+                var record = {};
+                record.speciesSubtypeUse = jsonObj[i].species_subtype_use;
+                record.foodProcessingAnimaluse = jsonObj[i].food_processing_animal_use;
+                record.withdrawalTime = jsonObj[i].withdrawal_time;
+                record.days = jsonObj[i].days;
+                record.hours = jsonObj[i].hours;
+                veterinaryRecord.push(record);
+            }
+            return veterinaryRecord;
+        }
 
         /**
          * Converts all the appendix 4 data to output

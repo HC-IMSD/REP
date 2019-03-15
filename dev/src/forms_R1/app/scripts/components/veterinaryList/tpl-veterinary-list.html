@@ -1,0 +1,36 @@
+<ng-form name="vetCtrl.veterinaryListForm" novalidate="novalidate">
+    <input type="text" required data-ng-show="false"
+           name="{{::vetCtrl.noVeterianryId}}"
+           id="{{::vetCtrl.noVeterianryId}}"
+           aria-hidden="true" data-ng-model="vetCtrl.noVeterinaryValues"/>
+    <div>
+    <cmp-expanding-table pre-id="veterinary_list_"
+                         list-items="vetCtrl.veterinaryList"
+                         id ="veterinaryList"
+                         reset-to-collapsed="vetCtrl.resetToCollapsed"
+                         column-def="vetCtrl.columnDef"
+                         select-record="vetCtrl.selectRecord"
+                         disable-selection="!vetCtrl.isDetailValid">
+        <cmp-veterianry-record record="$parent.record"
+                               is-detail-valid="vetCtrl.setValid(state)"
+                               on-update="vetCtrl.onUpdateVeterinaryRecord(record)"
+                               error-summary-update="vetCtrl.errorSummaryUpdate"
+                               show-error-summary="vetCtrl.showErrorSummary"
+                               on-delete="vetCtrl.deleteRec($parent.$index)"
+                               record-index="$parent.$index"
+                               delete-btn="true">
+        </cmp-veterianry-record>
+    </cmp-expanding-table>
+    </div>
+    <div class="mrgn-tp-md mrgn-bttm-lg">
+        <div class="btn-group-sm col-md-12">
+            <button  class="btn btn-primary"
+                     name="addVeterinaryRec_{{::$id}}"
+                     id="addVeterinaryRec_{{::$id}}"
+                     data-ng-disabled="vetCtrl.addNewDisabled()"
+                     data-ng-click="vetCtrl.addNew()">
+                {{'ADD_SPECIES_SUBTYPES'|translate}}
+            </button>
+        </div>
+    </div>
+</ng-form>

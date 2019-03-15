@@ -12,6 +12,7 @@
         'scheduleAModule',
         'importerListModule',
         'disinfectantTypeModule',
+        'veterinaryListModule',
         'dossierDataLists',
         'dataLists',
         'filterLists',
@@ -138,6 +139,7 @@
             vm.showSummary = false;
             vm.drugUseList = DossierLists.getDrugUseList();
             vm.disinfectantTypeList = DossierLists.getDisinfectantTypeList();
+            vm.speciesSubspeciesList =  DossierLists.getSpeciesSubspeciesList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
             vm.model = vm.drugProductService.getDefaultObject();
@@ -312,6 +314,11 @@
             return (vm.model.drugProduct.drugUse.id === "DISINFECT");
         };
 
+        vm.isVeterinary = function () {
+            if (!vm.model || !vm.model.drugProduct || !vm.model.drugProduct.drugUse) return false;
+            return (vm.model.drugProduct.drugUse.id === "VET");
+        };
+
         /***
          * reset Disinfectant Type field
          */
@@ -325,6 +332,12 @@
                     barn: false,
                     institutionalIndustrial: false,
                     contactLens: false
+                };
+            }
+
+            if (!vm.isVeterinary()) {
+                vm.model.drugProduct.veterinaryType = {
+                    veterinaryRecord : []
                 };
             }
         };
@@ -356,6 +369,10 @@
             vm.model.importerRecord = list;
         };
 
+        vm.updateVeterinaryList = function(list){
+            if(!list) return;
+            vm.model.drugProduct.veterinaryType.veterinaryRecord = list;
+        };
         /**
          * Save as a json file. Convert interal model to external model for output
          */
@@ -403,6 +420,7 @@
             }
             return vm.drugProductService.formDataToOutput(vm.model);
         }
+
 
         /**
          * @ngdoc -creates a filename for dossier file. If it exists,adds control number
@@ -495,6 +513,21 @@
             vm.setVisibleTabIndex=temp;
         };
 
+        vm.isPharmaBioVetType = function () {
+            if (vm.model.dossierType === 'BIOLOGIC'
+                || vm.model.dossierType === 'PHARMACEUTICAL'
+                || vm.model.dossierType === 'VETERINARY') {
+                return true;
+            }
+            return false;
+        };
+
+        vm.isVetType = function () {
+            if (vm.model.dossierType === 'VETERINARY') {
+                return true;
+            }
+            return false;
+        };
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
@@ -511,7 +544,15 @@
             vm.fsType = "fs_type" + scopeId;
             vm.disiTypeId = "disinfectant_type" + scopeId;
             vm.privacyStatementID = "privacy_statement" + scopeId;
+            vm.typeId="dossier_type"+ scopeId;
         }
+
+        vm.getNewVeterinary = function () {
+            var newVeterianyItem =  vm.drugProductService.createVeterinaryRecord();
+            //console.log("newVeterianyItem" + newVeterianyItem);
+            return newVeterianyItem;
+        };
+
 
 
     }//endcontroller
