@@ -1,11 +1,11 @@
 <ng-form name="addressListCtrl.addressListForm">
-    <div id="addressList_{{::$id}}">
+    <div id="importerIdValid_{{::$id}}">
         <div class="row">
         </div>
         <input type="checkbox" id="addressValid_{{::$id}}" name="addressRolesValid_{{::$id}}"
                data-ng-model="addressListCtrl.allRolesSelected" hidden required/>
 
-        <input type="text" id="importerIdValid_{{::$id}}" name="importerIdValid_{{::$id}}"  data-ng-model="addressListCtrl.importerhasID" hidden data-ng-required="addressListCtrl.isInternal"/>
+        <input type="text" id="importerIdValidHidden_{{::$id}}" name="importerIdValid_{{::$id}}"  data-ng-model="addressListCtrl.importerhasID" hidden data-ng-required="addressListCtrl.isInternal && ! addressListCtrl.importerhasID"/>
              <cmp-expanding-table pre-id="address_expnd_" list-items="addressListCtrl.addressList"
                              reset-to-collapsed="addressListCtrl.resetCollapsed"
                              column-def="addressListCtrl.columnDef" is-initial="addressListCtrl.initFlag"

@@ -94,7 +94,7 @@
             },
             "importerIdValid": {
                 "type": "element",
-                "target": "address_expnd"
+                "target": "importerIdValid"
             }
 
 

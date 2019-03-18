@@ -50,10 +50,13 @@
                     </h2>
                 </header>
                 <div class="panel-body">
+
                     <cmp-application-info record="main.company" user-type="main.userType"
                                           is-incomplete="main.isIncomplete" set-type="main.setApplType(type)"
                                           configure-id-field="main.configCompany">
                     </cmp-application-info>
+
+                   <!--
                     <div class="row">
                         <div class="col-xs-12 form-group"
                              data-ng-class="{'has-error':main.companyEnrolForm[main.typeId].$invalid}">
@@ -76,13 +79,13 @@
                                 </select>
                             </label>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <section class="panel  panel-default">
                             <header class="panel-heading clearfix">
                                 <h3 class="panel-title col-md-12">{{::'ADDR_INFO'|translate}}
                                     <sup id="co4_ref">
-                                        <a class="fn-lnk" href="#co4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
+                                        <a class="fn-lnk" href="#co4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                                     </sup>
                                 </h3>
                             </header>
@@ -101,7 +104,7 @@
                             <header class="panel-heading clearfix">
                                 <h3 class="panel-title col-md-8">{{::'CONTACT_INFO'|translate}}
                                     <sup id="co5_ref">
-                                        <a class="fn-lnk" href="#co5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
+                                        <a class="fn-lnk" href="#co5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                     </sup>
                                 </h3>
                             </header>
@@ -148,7 +151,7 @@
                             data-ng-click="main.saveXML()">{{::main.saveXMLLabel |translate}}
                     </button>
                         <sup id="co6_ref">
-                        <a class="fn-lnk" href="#co6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
+                        <a class="fn-lnk" href="#co6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                         </sup>
                 </div>
             </div>
