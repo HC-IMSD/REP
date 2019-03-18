@@ -23,6 +23,7 @@
                 onUpdate: '&', //seems redundant, but used as a messaging mech. when something changes
                 onDelete: '&',
                 showErrors:'<',
+                isFileLoaded: '<',
                 fieldLabel: '@',
                 updateErrorSummary:'&'
             }
@@ -43,6 +44,7 @@
         vm.resetToCollapsed = true;
         vm.noCountries=""; //TODO deprecate
         vm.showDetailErrors=false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.selectRecord = -1;
         vm.columnDef = [
             {
@@ -81,7 +83,19 @@
 
                 vm.showDetailErrors=changes.showErrors.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
+
+        vm.$postLink = function () {
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
+        };
+
         function setUnknownCountryState(isUnknown) {
             if (isUnknown) {
                 vm.countryList =vm.baseCountries;
@@ -137,6 +151,7 @@
             var aList = vm.deleteRecFromList(vm.model.list, _id);
            vm.updateCountryList();
             vm.onUpdate({list:aList});
+            vm.requiredFlag = false;
         };
 
         vm.deleteRecFromList = function (_list, _id) {

@@ -21,6 +21,7 @@
                 onUpdate: '&',
                 isAmend: '&',
                 isFinal: '<',
+                isFileLoaded: '<',
                 getNewTransaction: '&',
                 setSequenceValue:'&',
                 deprecateSequence: '&', //bit of a hack
@@ -54,6 +55,7 @@
         vm.seqUpdated = false;
         vm.showSummary = false;
         vm.finalState = false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.finalRecNum = 0;
         vm.columnDef = [
             {
@@ -115,8 +117,16 @@
                 vm.finalState = changes.isFinal.currentValue;
                 vm.finalRecNum = 0;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
         };
 
+        vm.$postLink = function () {
+            vm.addTransaction();
+        };
 
         vm.deleteRecord = function (aID) {
             var idx = vm.lifecycleList.indexOf(
@@ -127,6 +137,7 @@
             vm.isDetailsValid = true; //case that incomplete record is deleted
             vm.deprecateSequence();
             vm.updateErrorState();
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = false;
         };
@@ -245,6 +256,7 @@
             vm.lifecycleList[idx] = angular.copy(record);
             vm.setValid(true);
             vm.selectRecord = -1;
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.addFocused = true;
             vm.updateErrorState();

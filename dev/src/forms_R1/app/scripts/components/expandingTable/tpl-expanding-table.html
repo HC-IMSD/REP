@@ -16,8 +16,8 @@
             data-ng-click="expandTblCtrl.selectTableRow($index)">
             <td data-aria-selected="{{!expandTblCtrl.dayDataCollapse[$index]}}">
                             <span data-ng-class="{'fa fa-caret-down fa-lg fa-fw':expandTblCtrl.getExpandedState($index) ,'fa fa-caret-right fa-lg fa-fw':!expandTblCtrl.getExpandedState($index)} "
-                                  data-ng-class="{open:expandTblCtrl.getExpandedState($index)}"
-                            ></span>
+                                  data-ng-class="{open:expandTblCtrl.getExpandedState($index)}">
+                            </span>
             </td>
             <td data-ng-repeat="def in expandTblCtrl.columnDefinitions">
                 <span data-ng-if="!def.isHtml"> {{record[def.binding]|translate}}</span>
@@ -25,12 +25,13 @@
             </td>
             <!--  <td ng-if="!expandTblCtrl.disableErrorCol" width="5%"></td>-->
         </tr>
-        <tr data-ng-show="!(expandTblCtrl.dayDataCollapse[$index] && expandTblCtrl.transcludeForm[$index].$valid) ||
-                expandTblCtrl.isInitialSet()" data-ng-repeat-end>
+        <tr data-ng-show="expandTblCtrl.isRecordShowsOutside($index)" data-ng-repeat-end>
             <td colspan="{{::expandTblCtrl.numberCols}}">
                 <ng-form name="{{::expandTblCtrl.formName}}_{{::$index}}">
                     <ng-form name="expandTblCtrl.transcludeForm[$index]">
-                        <div data-ng-transclude>
+                        <div data-ng-if="expandTblCtrl.isRecordShowsInside($index)">
+                            <div data-ng-transclude>
+                            </div>
                         </div>
                     </ng-form>
                 </ng-form>

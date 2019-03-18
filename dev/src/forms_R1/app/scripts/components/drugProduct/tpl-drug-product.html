@@ -1,11 +1,11 @@
 <ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm">
-    <span id="privacy"></span>
-    <div class="module-attention">
-        <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
-        <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
-        <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
-    </div>
     <div data-translate-cloak="cloak-class">
+        <span id="privacy"></span>
+        <div class="module-attention">
+            <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
+            <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
+            <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
+        </div>
         <span id="instructions"></span>
         <aside class="wb-fnote" role="note">
             <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
@@ -74,7 +74,7 @@
                                 <div data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
                                     <input type="text" class="form-control full-width" id="{{::drugProdCtrl.dossierId}}"
                                            maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}" data-ng-pattern="/^[A-Z,a-z][0-9]{6}$/"
-                                           size="6" data-ng-model="drugProdCtrl.model.dossierID" required/>
+                                           size="7" data-ng-model="drugProdCtrl.model.dossierID" required/>
                                 </div>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                 <div class="row">
                     <div class="col-xs-12 form-group">
                         <section class="panel panel-default">
-                    <header class="panel-heading clearfix" style="padding-left:0px;">
+                    <header class="panel-heading clearfix" style="padding-left: 0px;">
                         <h3 class="panel-title">6. {{'IMPORTER'|translate}}
                             <sup id="dr6_ref">
                                 <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
@@ -383,6 +383,7 @@
                               error-summary-update="drugProdCtrl.updateSummary" show-error-summary="drugProdCtrl.showSummary"
                               update-error-summary="drugProdCtrl.updateErrorSummaryState()"
                               set-selected-tab="drugProdCtrl.setVisibleTabIndex"
+                              is-file-loaded="drugProdCtrl.isFileLoaded"
                               appendix4-list="drugProdCtrl.model.drugProduct.appendixFourList">
                     </cmp-tabs>
                 </div>

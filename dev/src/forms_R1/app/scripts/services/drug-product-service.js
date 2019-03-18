@@ -523,9 +523,9 @@
         function getActiveIngList(list) {
 
             var resultList = [];
-            if (!(list instanceof Array)) {
+            if (list && !(list instanceof Array)) {
                 //make it an array, case there is only one
-                list = [list]
+                list = [list];
             }
             angular.forEach(list, function (item) {
 
@@ -1428,7 +1428,7 @@
                 if (oneFormulation.activeIngList) {
                     for (var j = 0; j < (oneFormulation.activeIngList.length); j++) {
                         var oneActive = oneFormulation.activeIngList[j];
-                        if (oneActive.humanAnimalSourced === yesValue) {
+                        if (oneActive && oneActive.humanAnimalSourced === yesValue) {
                             allAnimalSourcedNames.push(oneActive.ingLabel);
                         }
                     }

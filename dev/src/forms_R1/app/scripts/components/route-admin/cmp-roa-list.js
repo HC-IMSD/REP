@@ -19,6 +19,7 @@
             bindings: {
                 records: '<',
                 showErrors: '<',
+                isFileLoaded: '<',
                 updateErrorSummary:'&'
             },
             controller: roaListCtrl,
@@ -35,6 +36,7 @@
         vm.resetToCollapsed = true;
         vm.noROAValues=""; //used to track if no ROA recorad have been seleected
         vm.showDetailErrors=false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.model={};
         vm.model.roaList=[];
         vm.columnDef = [
@@ -68,6 +70,17 @@
 
                 vm.showDetailErrors=changes.showErrors.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
+        };
+
+        vm.$postLink = function () {
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
         };
 
 
@@ -100,6 +113,7 @@
                 $filter('filter')(vm.model.roaList, {id: recId}, true)[0]);
             vm.model.roaList.splice(idx, 1);
             vm.noROA();
+            vm.requiredFlag = false;
         };
 
         vm.disableAddButton=function(){
@@ -133,6 +147,7 @@
 
         }
         function resetMe(){
+            vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
         }
 

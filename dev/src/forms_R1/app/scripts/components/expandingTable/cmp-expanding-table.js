@@ -24,7 +24,8 @@
                 listItems: '<',
                 columnDef:'<',
                 disableSelection:'<',
-                isInitial:'<',
+                isRequiredRecord:'<',
+                isInternal:'<',
                 selectRecord: '<',
                 resetToCollapsed: '<',
                 disableErrColumn:'@',
@@ -251,14 +252,30 @@
                     }
                 }
             }
-        }
+        };
 
-        vm.isInitialSet = function () {
-            if (vm.isInitial) {
-                vm.isInitial = false;
+        vm.isRequiredRecordSet = function () {
+            if (vm.isRequiredRecord && !vm.isInternal) {
                 return true;
             }
             return false;
+        };
+
+        vm.isRecordShowsOutside = function (row) {
+            if (vm.isInternal) {
+                return !vm.dayDataCollapse[row];
+            } else {
+                return (!(vm.dayDataCollapse[row] && vm.transcludeForm[row].$valid) ||
+                    vm.isRequiredRecordSet());
+            }
+        };
+
+        vm.isRecordShowsInside = function (row) {
+            if (!vm.isInternal) {
+                return true;
+            } else {
+                return !(vm.dayDataCollapse[row] && vm.transcludeForm[row].$valid);
+            }
         };
 
 
