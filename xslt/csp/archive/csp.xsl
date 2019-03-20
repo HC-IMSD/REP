@@ -228,7 +228,7 @@
 					<xsl:apply-templates select="advanced_payment/advanced_payment_type"/>
 				</p>
 				<p>
-					<b>The fee is being paid or the fee has been prepaid in the amount of $&#xA0;</b>
+					The fee is being paid or the fee has been prepaid in the amount of $&#xA0;
 					<xsl:value-of select="advanced_payment/advanced_payment_fee"/>
 				</p>
 				<hr></hr>

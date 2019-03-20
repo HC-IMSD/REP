@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
     <ng-form name="cspFeePayCtrl.paymentForm">
         <div>
             <p>
@@ -10,35 +10,36 @@
             </p>
         </div>
         <div class="row">
-            <div class="form-group col-xs-12">
-                <div class="checkbox required">
-                <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}">
-                    <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}" >
+            <div class="form-group col-xs-8">
+                <div>
+                    <label for="{{::cspFeePayCtrl.ackFeeSubmitId}}" class="required rep-selectize-font">
                     <input type="checkbox" ng-model="cspFeePayCtrl.model.ackPaymentSubmit"
-                           name="{{::cspFeePayCtrl.ackFeeSubmitId}}" id="{{::cspFeePayCtrl.ackFeeSubmitId}}" required/>
-                    {{::"ACK_FEE_SUBMIT"|translate}}
-                    <strong class="required">{{"REQUIRED" |translate}}</strong>
+                           name="{{::cspFeePayCtrl.ackFeeSubmitId}}" required id="{{::cspFeePayCtrl.ackFeeSubmitId}}" /> {{::"ACK_FEE_SUBMIT"|translate}}
+
+                    <strong class="required rep-selectize-font bold">{{::"ADV_PAYM"|translate}}</strong>
+                    <strong class="required rep-selectize-font">{{"REQUIRED"|translate}}</strong>
                     <strong id="notlasa1-error" class="error"
                             ng-if="cspFeePayCtrl.showError(cspFeePayCtrl.ackFeeSubmitId)">
                                         <span class="label label-danger">
                                          <span ng-if="!cspFeePayCtrl.model.ackPaymentSubmit">{{::'MSG_ERR_MAND'|translate}}</span>
                                          </span>
                     </strong>
-                </label>
+                    </label>
                     <cmp-error-message field-name="cspFeePayCtrl.ackFeeSubmitId"
                                        form-ref="cspFeePayCtrl.paymentForm"
                                        show-error="cspFeePayCtrl.showErrors()"
                                        error-types="cspFeePayCtrl.requiredOnly"></cmp-error-message>
-                </label>
+
                 </div>
             </div>
         </div>
         <div class="row mrgn-bttm-md">
             <div class="form-group col-xs-12 rep-vertical-align">
                 <div class="col-xs-12  col-sm-7 rep-vertical-align">
-                    <label for="{{::cspFeePayCtrl.feeId}}" class="required">
-                        <span class="field-name">{{::'ADVANCE_FEE_PAYMENT' |translate}}</span>
+                    <label for="{{::cspFeePayCtrl.feeId}}" class="required rep-selectize-font" >
+                        <span class="field-name">{{::"ADVANCE_FEE_PAYMENT" |translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
+
                         <cmp-error-message field-name="cspFeePayCtrl.feeId"
                                            form-ref="cspFeePayCtrl.paymentForm"
                                            show-error="cspFeePayCtrl.showErrors()"
@@ -51,6 +52,7 @@
                               <span ng-message="type_max"><span translate="MSG_ERR_MAX"></span></span>
                         </span>
                         </strong>
+                    </label>
                         <div class="col-xs-12 rep-vertical-align">
                             <div class="rep-input-group">
                                 <span class="input-group-addon">$</span>
@@ -62,9 +64,8 @@
                                 </div>
                             </div>
                         </div>
-                    </label>
                 </div>
-
+                <!--/label-->
             </div>
         </div>
         <!--div class="row">
