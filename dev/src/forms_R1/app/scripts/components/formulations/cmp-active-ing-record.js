@@ -133,9 +133,6 @@
 
                 vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex.currentValue);
             }
-            if(!vm.activeList || vm.activeList.length <= 0){
-                vm.activeList = DossierLists.getActiveList();
-            }
         };
 
         /**
@@ -391,8 +388,8 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.UnitsList.length; i++) {
-                    var option =vm.UnitsList[i];
+                for(var i = 0; i < vm.unitsList.length; i++) {
+                    var option =vm.unitsList[i];
                     if(option['id'] === vm.ingModel.units['id']) {
                         vm.ingModel.unitsHtml = option[vm.lang];
                         break;
@@ -464,7 +461,6 @@
             vm.updateSummary = vm.updateSummary + 1;
 
         };
-
         $scope.$watch('ingRecCtrl.activeIngForm.$error', function () {
             vm.updateErrorSummaryState();
             vm.updateErrorSummary();
