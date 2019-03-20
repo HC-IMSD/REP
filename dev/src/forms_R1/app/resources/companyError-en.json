@@ -4,7 +4,7 @@
   "CONTACTROLESVALID": "For Company Representative, selection of  all roles: manufacturer, mailing, billing, and primary REP ",
   "ADDRESSROLESVALID": "For the Address Information, selection of all roles: manufacturer, mailing, and billing",
   "CONTACTREC.CONTACTRECFORM":"in the Company Representative details",
-  "":"in the Address details",
+  "ADDRESSREC.ADDRESSRECFORM":"in the Address details",
   "COMPANY_FORM":"Company Enrolment Form",
   "ROLEMISSING": "Select one or more roles for this company",
   "CONTACTROLEMISSING": "Select one or more roles for this company representative",

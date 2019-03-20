@@ -133,6 +133,9 @@
 
                 vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex.currentValue);
             }
+            if(!vm.activeList || vm.activeList.length <= 0){
+                vm.activeList = DossierLists.getActiveList();
+            }
         };
 
         /**
@@ -461,6 +464,7 @@
             vm.updateSummary = vm.updateSummary + 1;
 
         };
+
         $scope.$watch('ingRecCtrl.activeIngForm.$error', function () {
             vm.updateErrorSummaryState();
             vm.updateErrorSummary();
