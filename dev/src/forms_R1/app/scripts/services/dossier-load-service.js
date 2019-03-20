@@ -33,38 +33,39 @@
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
                         DossierLists.createUnitsList(newList);
                         //not adding units to translation
-                        return $http.get(presentationUnitsUrl); //presentation Units list load
-                    })
-                    .then(function (response) {
+                       // return $http.get(presentationUnitsUrl); //presentation Units list load
+                    });
+                $http.get(presentationUnitsUrl).then(function (response) {
                         //PROCESS units list. Not creating translate list
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
                         DossierLists.createUnitsPresentationList(newList);
                         //not adding units to translation
-                        return $http.get(measureUnitsUrl); //measure Units list load
-                    })
-                    .then(function (response) {
+                        //return $http.get(measureUnitsUrl); //measure Units list load
+                    });
+                $http.get(measureUnitsUrl).then(function (response) {
                         //PROCESS units list. Not creating translate list
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getUnitsPrefix(), options.key);
                         DossierLists.createUnitsMeasureList(newList);
                         //not adding units to translation
-                        return $http.get(countryUrl); //country list load
-                    })
-                    .then(function (response) {
+                     //   return $http.get(countryUrl); //country list load
+                    });
+                $http.get(countryUrl).then(function (response) {
                         //PROCESS country list data
                         var newList = _createSortedArray(response.data, options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
-                        return $http.get(nanoUrl); //nanomaterial load
+                        //return $http.get(nanoUrl); //nanomaterial load
 
-                    }).then(function (response) {
+                    });
+                $http.get(nanoUrl).then(function (response) {
                     var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getNanoPrefix(), options.key);
                     var translateList = _createTranslateList(newList, options.key);
                     DossierLists.createNanomaterialList(newList);
                     angular.extend(resultTranslateList, translateList);
-                    return $http.get(dosageFormUrl); //dosage form list Load contains both languages
-                })
-                    .then(function (response) {
+                    //return $http.get(dosageFormUrl); //dosage form list Load contains both languages
+                });
+                $http.get(dosageFormUrl).then(function (response) {
                         //PROCESSING: DOSAGE FORM list
                         var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getDosageFormPrefix(), options.key);
                         var translateList = _createTranslateList(newList, options.key);
@@ -73,16 +74,18 @@
                         var newList2 = _createNewSortedArrayWithOther(response.data, "", options.key);
                         var translateList2 = _createTranslateList(newList2, options.key);
                         angular.extend(resultTranslateList, translateList2);
-                        return $http.get(activeUrl); //active ingredient list load
-                    }).then(function (response) {
+                       // return $http.get(activeUrl); //active ingredient list load
+                    });
+                $http.get(activeUrl).then(function (response) {
                     DossierLists.setActiveList(response.data);
-                    return $http.get(roaUrl); //roa load
-                }).then(function (response) {
+                   // return $http.get(roaUrl); //roa load
+                });
+                $http.get(roaUrl).then(function (response) {
                     var newList = _createNewSortedArrayWithOther(response.data, DossierLists.getRoaPrefix(), options.key);
                     var translateList = _createTranslateList(newList, options.key);
                     DossierLists.createRoaList(newList); //for display
                     angular.extend(resultTranslateList, translateList);
-                    return response.data;
+                   // return response.data;
                 })
                     .catch(function (error) {
                         // this catches errors from the $http calls as well as from the explicit throw
