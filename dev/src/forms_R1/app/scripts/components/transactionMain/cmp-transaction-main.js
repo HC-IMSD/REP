@@ -50,6 +50,7 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.sequenceUpdated = false;
         vm.isFinal = false;
+        vm.isFileLoaded=false;
 
         vm.updateSummary = 0; //increment to send message to error summaries
 
@@ -164,6 +165,7 @@
                 // angular.extend(vm.transaction, vm.transactionService.getModelInfo())
                 vm.transaction = vm.transactionService.getModelInfo();
                 vm.isFinal = vm.transactionService.isFinal;
+                vm.isFileLoaded=true;
                 //doing this as model won't update otherwise. Business wanted these values cleared on load
                 //this process moved to service
                 //vm.transaction.projectManager1 = "";

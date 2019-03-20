@@ -25,6 +25,7 @@
                 records: '<',
                 showErrors: '&',
                 service: '<',
+                isFileLoaded: '<',
                // errorSummaryUpdate:'<', //sending a signal that the error summary should be updated
                // showErrorSummary:'<', //flag to show or hide the error summary
                 updateErrorSummary:'&' //function to update the list of error summmaries
@@ -41,6 +42,7 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         //vm.dosService="";
         vm.oneRecord = "";
         //define empty model
@@ -96,6 +98,11 @@
             if (changes.records) {
                 vm.model.tissuesFluidsList = changes.records.currentValue;
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
             /*if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
@@ -105,9 +112,16 @@
                 vm.updateErrorSummaryState();
             }*/
         };
+
+        vm.$postLink = function () {
+            if(!vm.isFileLoaded) {
+                vm.addNew();
+            }
+        };
+
         vm.showErrors=function(){
             return vm.showSummary;
-        }
+        };
 
         vm.setValid = function (value) {
             vm.isDetailValid = value;
@@ -121,10 +135,10 @@
             vm.setRecord(vm.model.tissuesFluidsList.length - 1);
         };
         vm.deleteRecord = function (recId) {
-
             var idx = vm.model.tissuesFluidsList.indexOf(
                 $filter('filter')(vm.model.tissuesFluidsList, {id: recId}, true)[0]);
             vm.model.tissuesFluidsList.splice(idx, 1);
+            vm.requiredFlag = false;
         };
        /* vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
@@ -137,6 +151,7 @@
 
         };
         function resetMe() {
+            vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
 
         }

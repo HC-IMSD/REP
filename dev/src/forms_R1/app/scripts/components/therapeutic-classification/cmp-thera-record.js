@@ -21,6 +21,7 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
+                onUpdate: '&',
                 showErrors: '&'
             }
         });
@@ -42,6 +43,9 @@
             }
         };
 
+        vm.updateState = function()  {
+            vm.onUpdate()
+        };
 
         vm.deleteRecord = function()  {
             vm.onDelete({id: vm.model.id})

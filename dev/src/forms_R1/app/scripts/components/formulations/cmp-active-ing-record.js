@@ -48,7 +48,7 @@
         vm.nanoMaterialList = DossierLists.getNanoMaterials();
         vm.yesNoList = DossierLists.getYesNoList();
         vm.activeList = DossierLists.getActiveList();
-        vm.UnitsList=DossierLists.getUnitsList();
+        vm.unitsList=DossierLists.getUnitsList();
         vm.strengthList = DossierLists.getStrengthList();
         vm.perList = DossierLists.getPerList();
         vm.presentationList = DossierLists.getUnitsPresentationList();
@@ -132,6 +132,9 @@
             if(changes.recordIndex){
 
                 vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex.currentValue);
+            }
+            if(!vm.activeList || vm.activeList.length <= 0){
+                vm.activeList = DossierLists.getActiveList();
             }
         };
 
@@ -379,8 +382,8 @@
         };
         vm.unitsChange = function() {
             var found = false;
-            for(var i = 0; i < vm.UnitsList.length; i++) {
-                var option =vm.UnitsList[i];
+            for(var i = 0; i < vm.unitsList.length; i++) {
+                var option =vm.unitsList[i];
                 if(option[vm.lang] === vm.ingModel.unitsHtml) {
                     vm.ingModel.units = option;
                     found = true;
@@ -399,8 +402,8 @@
         }
         vm.perMeasUnitsChange = function() {
             var found = false;
-            for(var i = 0; i < vm.UnitsList.length; i++) {
-                var option =vm.UnitsList[i];
+            for(var i = 0; i < vm.unitsList.length; i++) {
+                var option =vm.unitsList[i];
                 if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
                     vm.ingModel.perMeasUnits = option;
                     found = true;
@@ -408,8 +411,8 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.UnitsList.length; i++) {
-                    var option =vm.UnitsList[i];
+                for(var i = 0; i < vm.unitsList.length; i++) {
+                    var option =vm.unitsList[i];
                     if(option['id'] === vm.ingModel.perMeasUnits['id']) {
                         vm.ingModel.perMeasUnitsHtml = option[vm.lang];
                         break;

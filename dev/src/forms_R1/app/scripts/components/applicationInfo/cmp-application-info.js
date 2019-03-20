@@ -26,9 +26,9 @@
             }
         });
 
-    ApplInfoCtrl.$inject=[$scope,'NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
+    ApplInfoCtrl.$inject=['$scope', 'NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE'];
 
-    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE, $scope) {
+    function ApplInfoCtrl($scope, NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE) {
         var vm = this;
         vm.applTypes = [NEW_TYPE, AMEND_TYPE, APPROVED_TYPE];
         vm.formType = EXTERNAL_TYPE;

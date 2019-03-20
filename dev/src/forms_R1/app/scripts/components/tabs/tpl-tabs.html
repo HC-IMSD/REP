@@ -42,18 +42,24 @@
         <ng-form name="tabsCtrl.tabs[0].form">
             <div id="formulations-panel" role="tabpanel" class="out">
                 <div data-ng-show="tabsCtrl.tabs[0].selected">
-                    <cmp-formulations formulations="tabsCtrl.formulationList"  error-summary-update="tabsCtrl.updateSummary"
-                    show-error-summary="tabsCtrl.showSummary" update-error-summary="tabsCtrl.updateErrorSummary()"
-                                      record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
+                    <cmp-formulations formulations="tabsCtrl.formulationList"
+                         error-summary-update="tabsCtrl.updateSummary"
+                         show-error-summary="tabsCtrl.showSummary"
+                         update-error-summary="tabsCtrl.updateErrorSummary()"
+                         is-file-loaded="tabsCtrl.isFileLoaded"
+                         record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
                 </div>
             </div>
         </ng-form>
         <ng-form name="tabsCtrl.tabs[1].form">
             <div id="appendix4-panel" role="tabpanel" class="out">
                 <div  data-ng-show="tabsCtrl.tabs[1].selected">
-                    <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service" update-error-summary="tabsCtrl.updateErrorSummary()"
+                    <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service"
+                                       update-error-summary="tabsCtrl.updateErrorSummary()"
                                        error-summary-update="tabsCtrl.updateSummary"
-                                       show-error-summary="tabsCtrl.showSummary" record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
+                                       show-error-summary="tabsCtrl.showSummary"
+                                       is-file-loaded="tabsCtrl.isFileLoaded"
+                                       record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
                 </div>
             </div>
         </ng-form>

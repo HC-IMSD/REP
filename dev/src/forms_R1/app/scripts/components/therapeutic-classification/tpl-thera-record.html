@@ -10,7 +10,7 @@
                                    error-types="theraRecCtrl.requiredOnly"></cmp-error-message>
             </label>
             <textarea name="{{::theraRecCtrl.theraNameId}}" id="{{::theraRecCtrl.theraNameId}}"
-                      class="form-control full-width"
+                      class="form-control full-width" data-ng-blur="theraRecCtrl.updateState()"
                       required rows="2" maxlength="256" data-ng-model="theraRecCtrl.record.name">
             </textarea>
         </div>

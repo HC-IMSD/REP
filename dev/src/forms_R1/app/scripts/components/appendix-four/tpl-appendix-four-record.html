@@ -57,6 +57,7 @@
             <section class="section">
                 <cmp-tissues-fluids-list data-ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"
                                          service="ap4RecCtrl.service"
+                                         is-file-loaded="ap4RecCtrl.isFileLoaded"
                                          records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList">
                 </cmp-tissues-fluids-list>
             </section>
@@ -64,8 +65,9 @@
             <section class="section">
                 <cmp-animal-sourced-section data-ng-if="ap4RecCtrl.model.animalSourced"  records="ap4RecCtrl.model.sourceAnimalDetails"
                                             on-update="ap4RecCtrl.updateAnimalSourced(model)" show-errors="ap4RecCtrl.showErrors()"
-
-                update-error-summary="ap4RecCtrl.updateErrorSummaryState()"></cmp-animal-sourced-section>
+                                            is-file-loaded="ap4RecCtrl.isFileLoaded"
+                                            update-error-summary="ap4RecCtrl.updateErrorSummaryState()">
+                </cmp-animal-sourced-section>
             </section>
 
             <div class="row">

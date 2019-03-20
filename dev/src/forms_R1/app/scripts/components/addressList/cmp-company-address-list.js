@@ -21,6 +21,7 @@
                 onUpdate: '&',
                 getNewAddress: '&',
                 isAmend: '<',
+                isFileLoaded: '<',
                 companyService: '<',
                 showErrorSummary:'<',
                 errorSummaryUpdate:'<',
@@ -46,6 +47,7 @@
         vm.addressList = [];
         vm.isIn = "";
         vm.isInternal = false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.columnDef = [
             {
                 label: "COMPANY",
@@ -113,6 +115,17 @@
                     vm.isInternal = false;
                 }
             }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
+        };
+
+        vm.$postLink = function () {
+            if(!vm.isInternal) {
+                vm.addAddress();
+            }
         };
 
             function updateRolesConcat() {
@@ -154,6 +167,7 @@
                 vm.isDetailsValid = true; //case that incomplete record is deleted
                 vm.allRolesSelected = vm.isAllRolesSelected();
                 vm.importerhasID = vm.isImporterHasID();
+                vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
                 vm.updateErrorSummaryState();
             };
@@ -183,6 +197,7 @@
                 vm.allRolesSelected = vm.isAllRolesSelected();
                 vm.importerhasID = vm.isImporterHasID();
                 vm.isDetailsValid = true;
+                vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
             };
 

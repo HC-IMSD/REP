@@ -40,6 +40,7 @@
                 //onUpdate: '&',
                 isAmend: '<',
                 isFinal: '<',
+                isFileLoaded: '<',
                 getTransaction: '&',
                 setStartingSequence:'&',
                 getRepContact: '&',

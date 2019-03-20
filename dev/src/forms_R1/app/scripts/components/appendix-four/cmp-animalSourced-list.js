@@ -19,6 +19,7 @@
             templateUrl: 'app/scripts/components/appendix-four/tpl-animalSourced-list.html',
             bindings: {
                 records: '<',
+                isFileLoaded: '<',
                 showErrors: '&',
                 onUpdate: '&' //seems redundant, but used as a messaging mech. when something changes
             },
@@ -34,6 +35,7 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.oneRecord="";
         //define empty model
         vm.model={};
@@ -64,6 +66,17 @@
 
             if (changes.records) {
                 vm.model.animalSrcList=changes.records.currentValue;
+            }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
+        };
+
+        vm.$postLink = function () {
+            if(!vm.isFileLoaded) {
+                vm.addNew();
             }
         };
 
@@ -97,6 +110,7 @@
                 $filter('filter')(vm.model.animalSrcList, {id: recId}, true)[0]);
             vm.model.animalSrcList.splice(idx, 1);
             vm.onUpdate({list: vm.model.animalSrcList});
+            vm.requiredFlag = false;
         };
 
 

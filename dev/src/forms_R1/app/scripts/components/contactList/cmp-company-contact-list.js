@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('contactList2', ['contactRecord','expandingTable','errorSummaryModule'])
+        .module('contactList2', ['contactRecord','expandingTable','hpfbConstants','errorSummaryModule'])
 })();
 
 (function () {
@@ -23,20 +23,24 @@
                 onUpdate: '&',
                 getNewContact: '&',
                 isAmend: '<',
+                isFileLoaded: '<',
                 companyService:'<',
                 showErrorSummary:'<',
                 errorSummaryUpdate:'<',
-                updateErrorSummary:'&' //update the parent error summary
+                updateErrorSummary:'&', //update the parent error summary
+                userType:'<'
             }
         });
-    contactListCtrl.$inject = ['$filter','CompanyService'];
-    function contactListCtrl($filter,CompanyService) {
+    contactListCtrl.$inject = ['$filter','CompanyService', 'INTERNAL_TYPE'];
+    function contactListCtrl($filter,CompanyService, INTERNAL_TYPE) {
         var vm = this;
         vm.selectRecord = -1; //the record to select
         vm.isDetailValid=true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.allRolesSelected=false;
         vm.contactList = [];
         vm.formAmend = false;
+        vm.isInternal = false;
+        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.resetCollapsed = false;//used to signal expanding table collapse
         vm.updateSummary=0; //sends signal to update error summary object
       //  vm.showSummary=false; //flag to control error summary visibility
@@ -106,6 +110,28 @@
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 //vm.updateErrorSummaryState()
             }
+            if (changes.userType) {
+
+                var isIn = changes.userType.currentValue;
+                if (isIn === INTERNAL_TYPE) {
+                    vm.isInternal = true;
+                }
+                else {
+
+                    vm.isInternal = false;
+                }
+            }
+            if (changes.isFileLoaded) {
+                if (changes.isFileLoaded.currentValue) {
+                    vm.requiredFlag = false;
+                }
+            }
+        };
+
+        vm.$postLink = function () {
+            if(!vm.isInternal) {
+                vm.addContact();
+            }
         };
 
         vm.updateErrorSummaryState=function(){
@@ -172,6 +198,7 @@
              ); //TODO fix filter
              vm.contactList[idx] = angular.copy(record);
             vm.allRolesSelected= vm.isAllContactRolesSelected();
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
 
         };
@@ -184,6 +211,7 @@
             vm.onUpdate({newList: vm.contactList});
             vm.isDetailValid = true; //case that incomplete record
             vm.allRolesSelected= vm.isAllContactRolesSelected();
+            vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.updateErrorSummaryState();
 
