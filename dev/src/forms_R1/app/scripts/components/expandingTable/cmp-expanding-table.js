@@ -265,7 +265,7 @@
             if (vm.isInternal) {
                 return !vm.dayDataCollapse[row];
             } else {
-                return (!(vm.dayDataCollapse[row] && vm.transcludeForm[row].$valid) ||
+                return (!(vm.dayDataCollapse[row] && (! vm.transcludeForm[row] || vm.transcludeForm[row].$valid)) ||
                     vm.isRequiredRecordSet());
             }
         };

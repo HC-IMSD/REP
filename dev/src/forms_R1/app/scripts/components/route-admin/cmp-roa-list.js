@@ -150,6 +150,11 @@
             vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
         }
+        vm.updateRecord = function(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.requiredFlag = false;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+        }
 
       /*  $scope.$watch('roaCtrl.roaListForm.$error', function () {
             vm.updateErrorSummary();

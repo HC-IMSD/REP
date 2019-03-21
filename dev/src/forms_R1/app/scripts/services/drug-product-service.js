@@ -775,7 +775,7 @@
                     "id": _id,
                     "roa": roaObj,
                     "otherRoaDetails": item.roa_other,
-                    "display": roaObj.id
+                    "display": roaObj[$translate.proposedLanguage() || $translate.use()]
                 };
 
                 resultList.push(obj);
@@ -812,7 +812,7 @@
                     obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: item.__text})[0];
                 }
                 if (obj.country) {
-                    obj.display = obj.country.id
+                    obj.display = obj.country[$translate.proposedLanguage() || $translate.use()]
                 }
                 resultList.push(obj);
             });

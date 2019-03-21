@@ -31,6 +31,7 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
+                updateRecord: '&',
                 showErrors: '<'
             }
         });
@@ -71,12 +72,30 @@
          * @param model
          */
         vm.roaChanged=function(item, model){
-            vm.model.display=vm.model.roa.id;
+            var found = false;
+            for(var i = 0; i < vm.roaList.length; i++) {
+                var option =vm.roaList[i];
+                if(option[vm.lang] === vm.display) {
+                    vm.roa = option;
+                    found = true;
+                    break;
+                }
+            }
+            if( ! found ){
+                for(var i = 0; i < vm.roaList.length; i++) {
+                    var option =vm.roaList[i];
+                    if(option['id'] === vm.display) {
+                        vm.display = option[vm.lang];
+                        break;
+                    }
+                }
+            }
+            vm.updateRecord();
         };
 
 
         vm.deleteRecord = function()  {
-            vm.onDelete({id: vm.model.id})
+            vm.onDelete({id: vm.model.id});
         };
 
         vm.showError = function (ctrl) {
