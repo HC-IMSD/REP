@@ -59,6 +59,7 @@
 
             if (changes.record) {
                 vm.model=changes.record.currentValue;
+                vm.updateRecord();
             }
             if(changes.showErrors){
 
