@@ -16,11 +16,6 @@
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
                                 <span class="field-name">{{::"CONTROL_NUM" |translate}}{{::"LEAST_6_DIGIT" |translate}}
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <!--<span title="{{::'EXPAND'|translate}} {{::'CONTROL_INSTRUCT'|translate}}"
-                                        class="btn rep-help-button-primary btn-xs"
-                                        id="controlNum-instructions-toggle" data-ng-click="lifecycleCtrl.addInstruct(1)"><span
-                                        class="fa fa-question-circle fa-2x"></span>
-                                </span> -->
                                 <sup id="tr1c_ref">
                                     <a class="fn-lnk" href="#tr1c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.c</a>
                                 </sup>
@@ -57,6 +52,7 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
                     <div class="row">
                         <div class="form-group  col-md-7"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.regActivityId].$invalid}">

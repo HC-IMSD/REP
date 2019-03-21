@@ -199,6 +199,9 @@
                 vm.isDetailsValid = true;
                 vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
+                if(vm.importerhasID || vm.importerhasID == ""){
+                    vm.importerhasID = "";
+                }
             };
 
             //TODO move to the service
@@ -225,7 +228,6 @@
              * @returns {boolean}
              */
             vm.showError = function () {
-
                 // Could show on not pristine&&!vm.addressListForm.$pristine
                 return (!vm.isAllRolesSelected());
             };
@@ -273,7 +275,9 @@
             for (var i = 0; i < vm.addressList.length; i++) {
                 if (vm.addressList[i].addressRole.importer) {
                     if (!vm.addressList[i].importerID) {
-                        vm.importerhasID="";
+                        vm.importerhasID=" ";
+                        vm.selectRecord = i;
+                        vm.isDetailsValid = false;
                         return "";
                     }
                 }

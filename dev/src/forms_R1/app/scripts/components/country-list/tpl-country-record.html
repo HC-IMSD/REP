@@ -13,18 +13,22 @@
                                            form-ref="countryRecCtrl.countryForm"
                                            show-error="countryRecCtrl.showError(countryRecCtrl.countryForm[countryRecCtrl.countryId])"
                                            error-types="countryRecCtrl.requiredOnly"></cmp-error-message>
-                        <ui-select data-ng-model="countryRecCtrl.model.country" id="{{::countryRecCtrl.countryId}}" name="{{::countryRecCtrl.countryId}}"
-                                   data-ng-model-options="{ debounce: 0}"
-                                   class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required
-                                    title="Choose a country" class="rep-selectize-font">
-                            <ui-select-match placeholder="Select or Search for country" name="countryMatch"
-                                             class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[countryRecCtrl.lang]}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="countryRecord in countryRecCtrl.countryList | filter:{[countryRecCtrl.lang]: $select.search} track by countryRecord.id"
-                                               class="rep-selectize-font">
-                                <span data-ng-bind-html="countryRecord[countryRecCtrl.lang] | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                        <!--<ui-select data-ng-model="countryRecCtrl.model.country" id="{{::countryRecCtrl.countryId}}" name="{{::countryRecCtrl.countryId}}"-->
+                                   <!--data-ng-model-options="{ debounce: 0}"-->
+                                   <!--class="rep-selectize-dropdown" on-select="countryRecCtrl.countryChanged($item, $model)" required-->
+                                    <!--title="Choose a country" class="rep-selectize-font">-->
+                            <!--<ui-select-match placeholder="Select or Search for country" name="countryMatch"-->
+                                             <!--class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[countryRecCtrl.lang]}}-->
+                            <!--</ui-select-match>-->
+                            <!--<ui-select-choices repeat="countryRecord in countryRecCtrl.countryList | filter:{[countryRecCtrl.lang]: $select.search} track by countryRecord.id"-->
+                                               <!--class="rep-selectize-font">-->
+                                <!--<span data-ng-bind-html="countryRecord[countryRecCtrl.lang] | highlight: $select.search"></span>-->
+                            <!--</ui-select-choices>-->
+                        <!--</ui-select>-->
+                        <input type="text" id="{{::countryRecCtrl.countryId}}" name="{{::countryRecCtrl.countryId}}" data-ng-model="countryRecCtrl.model.display" value="countryRecCtrl.model.display" data-ng-blur="countryRecCtrl.countryChanged($item, $model)" list="countryList" required="required" class="form-control full-width" />
+                        <datalist id="countryList" class="rep-selectize-dropdown rep-selectize-font">
+                            <option data-ng-repeat="countryRecord in countryRecCtrl.countryList | filter:{[countryRecCtrl.lang]: $select.search} track by countryRecord.id" value="{{countryRecord[countryRecCtrl.lang]}}" label="{{countryRecord[countryRecCtrl.lang]}}"/>
+                        </datalist>
 
                     </label>
                 </div>
@@ -49,9 +53,11 @@
                 </div>
             </div>
             <div class="row">
-                <button data-ng-click="countryRecCtrl.deleteRecord(countryRecCtrl.model.id)" name="deleteCountry"
+                <div class="col-xs-12 btn-group-sm align-bottom">
+                    <button data-ng-click="countryRecCtrl.deleteRecord(countryRecCtrl.model.id)" name="deleteCountry"
                         class="btn btn-danger btn-sm">{{'DELETE_RECORD'|translate}}
-                </button>
+                    </button>
+                </div>
             </div>
         </fieldset>
        <!-- <pre>{{countryRecCtrl.model|json}}</pre>-->

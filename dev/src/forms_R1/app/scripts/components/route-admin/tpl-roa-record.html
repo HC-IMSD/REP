@@ -11,20 +11,25 @@
                                            form-ref="roaRecCtrl.roaRecForm"
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.roaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
-                        <ui-select data-ng-model="roaRecCtrl.model.roa" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"
-                                   on-select="roaRecCtrl.roaChanged($item, $model)" data-ng-model-options="{ debounce: '0'}"
-                                   class="rep-selectize-dropdown rep-selectize-font"
-                                   title="{{'SELECT_ROA'|translate}}" required>
-                            <ui-select-match placeholder="{{::'SELECT_ROA'|translate}}"
-                                             name="roaMatch" class="rep-selectize-font rep-selectize-dropdown">
-                                {{$select.selected[roaRecCtrl.lang]}}
-                            </ui-select-match>
-                            <ui-select-choices
-                                    repeat="roaValue in  roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:$select.search} track by roaValue.id "
-                                    class="rep-selectize-font full-width">
-                                <span data-ng-bind-html="roaValue[roaRecCtrl.lang] | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                        <input type="text" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}" data-ng-model="roaRecCtrl.model.display" value="roaRecCtrl.model.display" data-ng-blur="roaRecCtrl.roaChanged($item, $model);" list="roaFormList" required="required" class="form-control full-width"/>
+                        <datalist id="roaFormList" class="rep-selectize-dropdown rep-selectize-font">
+                            <option data-ng-repeat="roa in roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:$select.search}" value="{{roa[roaRecCtrl.lang]}}" label="{{roa[roaRecCtrl.lang]}}"/>
+                        </datalist>
+
+                        <!--<ui-select data-ng-model="roaRecCtrl.model.roa" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"-->
+                                   <!--on-select="roaRecCtrl.roaChanged($item, $model)" data-ng-model-options="{ debounce: '0'}"-->
+                                   <!--class="rep-selectize-dropdown rep-selectize-font"-->
+                                   <!--title="{{'SELECT_ROA'|translate}}" required>-->
+                            <!--<ui-select-match placeholder="{{::'SELECT_ROA'|translate}}"-->
+                                             <!--name="roaMatch" class="rep-selectize-font rep-selectize-dropdown">-->
+                                <!--{{$select.selected[roaRecCtrl.lang]}}-->
+                            <!--</ui-select-match>-->
+                            <!--<ui-select-choices-->
+                                    <!--repeat="roaValue in  roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:$select.search} track by roaValue.id "-->
+                                    <!--class="rep-selectize-font full-width">-->
+                                <!--<span data-ng-bind-html="roaValue[roaRecCtrl.lang] | highlight: $select.search"></span>-->
+                            <!--</ui-select-choices>-->
+                        <!--</ui-select>-->
 
                     </label>
                 </div>

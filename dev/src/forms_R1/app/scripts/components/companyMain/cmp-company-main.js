@@ -95,7 +95,7 @@
             },
             "importerIdValid": {
                 "type": "element",
-                "target": "address_expnd"
+                "target": "importerIdValid"
             }
 
 
@@ -357,6 +357,7 @@
             var scopeId="_"+  $scope.$id;
             vm.formId = "company_form" +scopeId;
             vm.privacyStatementID = "privacy_statement" +scopeId;
+            vm.typeId="dossier_type"+ scopeId;
         }
 
         /**

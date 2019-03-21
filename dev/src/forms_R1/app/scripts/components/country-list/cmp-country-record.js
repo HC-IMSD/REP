@@ -55,7 +55,15 @@
          * Updates the display value for the object for summary display
          */
         vm.countryChanged=function($item,$model){
-            vm.model.display=$model.id;
+            // vm.model.id = vm.record.id;
+            // vm.model.display = vm.record.country;
+            for(var i = 0; vm.countries.length; i++){
+                if(vm.countries[i][vm.lang] === vm.model.display){
+                    vm.model.country = vm.countries[i];
+                    break;
+                }
+            }
+            vm.updateCountryList();
         };
 
 
