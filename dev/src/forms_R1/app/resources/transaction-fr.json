@@ -138,5 +138,7 @@
   "B14-20160301-02":	"fr_Biological",
   "B14-20160301-10":	"fr_Post-Market Vigilance",
   "B14-20160301-06":	"fr_Consumer Health Product",
-  "COMMENTS_REGULARTORY_DECISION": "Comments on Regulatory Decision Summary"
+  "COMMENTS_REGULARTORY_DECISION": "fr_Comments on Regulatory Decision Summary",
+  "RESET": "fr_RESET",
+  "RESET_INFO" : "fr_To enable the 'generate final XML' button, select the 'RESET' button to clear transaction specific fields."
 }

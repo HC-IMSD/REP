@@ -25,9 +25,11 @@
     function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO, HCSC) {
         //var vm = this;
         this.baseRequesters = [];
+        this.userList =[];
         this.isFinal = false;
         this.$onInit = function () {
             loadContactData();
+            loadUserListData();
         };
 
         function TransactionService() {
@@ -70,6 +72,14 @@
             getContactLists.getInternalContacts()
                 .then(function (data) {
                     this.baseRequesters = data;
+                    return true;
+                });
+        }
+
+        function loadUserListData() {
+            getContactLists.getInternalContactsWithoutOther()
+                .then(function (data) {
+                    this.userList = data;
                     return true;
                 });
         }
@@ -691,7 +701,7 @@
             "controlNumber": "",
             "activityLead": "",
             "activityType": "",
-            activityTypeDisplay: "",
+            "activityTypeDisplay": "",
             "descriptionValue": "",
             "startDate": "",
             "endDate": "",
@@ -714,7 +724,7 @@
                 stateText: "",
                 country: "",
                 countryDisplay: "",
-                "postalCode": ""
+                postalCode: ""
             }
         )
     }

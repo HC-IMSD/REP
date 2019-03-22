@@ -163,5 +163,6 @@
   "B14-20160301-02":	"Biological",
   "B14-20160301-10":	"Post-Market Vigilance",
   "B14-20160301-06":	"Consumer Health Product",
-  "RESET": "RESET"
+  "RESET": "RESET",
+  "RESET_INFO" : "To enable the 'generate final XML' button, select the 'RESET' button to clear transaction specific fields."
 }

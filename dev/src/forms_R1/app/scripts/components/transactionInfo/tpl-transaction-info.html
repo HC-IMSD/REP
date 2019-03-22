@@ -2,13 +2,6 @@
     <ng-form name="transInfoCtrl.transInfoForm" novalidate="novalidate">
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
-                <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
-                            class="btn-xs rep-help-button"
-                            id="transact-instruct-toggle" ng-click="transInfoCtrl.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span>
-                    </button>
-                </div>
                 <div>
                     <h2 class="panel-title  col-sm-3">{{::'TRANSACTION_HDING'|translate}}</h2>
                     <button class="btn  btn-primary btn-sm active"
@@ -19,21 +12,11 @@
                 </div>
             </header>
             <div class="panel-body">
-                <div>
-                    <div>
-                        <cmp-alert  ui-state="transInfoCtrl.alerts[0]" msg="TRANSACT_INSTRUCT" update-state="transInfoCtrl.closeAlert(0)" type="alert-info">
-                            <section aria-live="assertive">
-                                <div ng-if="!transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-en.html'">
-                                </div>
-                                <div ng-if="transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
-                    </div>
-                    <div>
-                        <div class="row">
+               <div  ng-show ="transInfoCtrl.finalState" class="col-xs-12 form-group alert alert-info" role="alert" aria-live="polite">
+                    <span>{{'RESET_INFO'|translate}}</span>
+               </div>
+               <div>
+                    <div class="row">
                             <div class="form-group col-md-4"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
                                 <label for="{{::transInfoCtrl.typeId}}" class="required">
@@ -52,7 +35,7 @@
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                 </label>
                             </div>
-                            <div class="form-group col-md-3"
+                            <div class="form-group col-md-4"
                                  ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                 <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
                                     <span class="field-name">{{::"COMPANY_ID" |translate}}</span>
@@ -436,8 +419,7 @@
                             </div>
                         </div>
                     </section>
-                </div>
-                <div class="row">
+                    <div class="row">
                     <div class="form-group col-md-4"
                          ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId].$invalid}">
                         <label for="{{::transInfoCtrl.isSolicitedId}}" class="required full-width">
@@ -468,27 +450,51 @@
                         </div>
                     </section>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="projectManager1" class="full-width">
-                            <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
-                        </label>
-                        <textarea id="projectManager1" name="projectManager1"
-                                  ng-model="transInfoCtrl.transactionModel.projectManager1"
-                                  class="form-control full-width" maxlength="256" rows="2"></textarea>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="projectManager2" class="full-width">
-                            <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
-                        </label>
-                        <textarea id="projectManager2" name="projectManager2"
-                                  ng-model="transInfoCtrl.transactionModel.projectManager2"
-                                  class="form-control full-width" maxlength="256" rows="2"></textarea>
-                    </div>
-                </div>
-                <div class="row">
 
-                    <div class="col-xs-8 form-group"
+                   <div class="row">
+                            <div class="form-group col-md-6 typeahead-demo">
+                                <label for="projectManager1" class="full-width">
+                                    <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
+                                    <div class="rep-margin-top">
+                                        <input type="text"
+                                               ng-model="transInfoCtrl.transactionModel.projectManager1"
+                                               name="projectManager1"
+                                               ng-model-options="{ debounce: $inherit}"
+                                               id="projectManager1"
+                                               size="100"
+                                               maxlength="100"
+                                               uib-typeahead=" contact.en for contact in transInfoCtrl.userList | filter:{en:$viewValue} | limitTo:15"
+                                               class="form-control rep-normal-font"
+                                               typeahead-show-hint="false"
+                                               typeahead-focus-first="false"
+                                               ng-change="transInfoCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-group col-md-6 typeahead-demo">
+                                <label for="projectManager2" class="full-width">
+                                    <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
+                                    <div class="rep-margin-top">
+                                        <input type="text"
+                                               ng-model="transInfoCtrl.transactionModel.projectManager2"
+                                               name="projectManager2"
+                                               ng-model-options="{ debounce: $inherit}"
+                                               id="projectManager2"
+                                               size="100"
+                                               maxlength="100"
+                                               uib-typeahead=" contact.en for contact in transInfoCtrl.userList | filter:{en:$viewValue} | limitTo:15"
+                                               class="form-control rep-normal-font"
+                                               typeahead-show-hint="false"
+                                               typeahead-focus-first="false"
+                                               ng-change="transInfoCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                                    </div>
+                                </label>
+                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8 form-group"
                          ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
                         <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
                             <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
@@ -508,8 +514,9 @@
                              </strong>
                         </label>
                     </div>
-                </div>
-            </div>
+                    </div>
+               </div>
+           </div>
         </section>
         <div ng-if="transInfoCtrl.isFeesIndicated()">
             <section class="panel  panel-primary">
