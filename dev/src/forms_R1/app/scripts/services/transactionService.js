@@ -65,7 +65,7 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
-            this.xslFileName = "REP_RT_2_0.xsl";
+            this.xslFileName = "REP_RT_2_0_1.xsl";
         }
 
         function loadContactData() {
