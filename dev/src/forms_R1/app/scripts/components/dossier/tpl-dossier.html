@@ -79,8 +79,8 @@
                                                 form-ref="dos.dossierForm"
                                                 show-error="dos.showError(dos.dossierForm[dos.compId])"
                                                 error-types="dos.min5Error"></cmp-error-message>
-                             <input type="text" class="form-control full-width" id="{{::dos.compId}}"
-                                    name="{{::dos.compId}}" required maxlength="6" minlength="6"
+                             <input type="text" class="form-control" id="{{::dos.compId}}"
+                                    name="{{::dos.compId}}" required maxlength="6" minlength="5" size="6"
                                     data-ng-model="dos.dossierModel.companyID"/>
 
                          </label>
@@ -95,16 +95,17 @@
                                  <sup id="do4-rf">
                                      <a class="fn-lnk" href="#do4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                  </sup>
-                         <cmp-error-message field-name="dos.prodNameId"
-                                            form-ref="dos.dossierForm"
-                                            show-error="dos.showError(dos.dossierForm[dos.prodNameId])"
-                                            error-types="dos.requiredOnly">
-                         </cmp-error-message>
-                             </label>
-                         <textarea class="form-control full-width" id="{{::dos.prodNameId}}" rows="2"
-                                   name="{{::dos.prodNameId}}" required
-                                   data-ng-change="dos.dossierModel.productName=dos.dossierModel.productName.toUpperCase()"
-                                   maxlength="200" data-ng-model="dos.dossierModel.productName"></textarea>
+                                     <cmp-error-message field-name="dos.prodNameId"
+                                                        form-ref="dos.dossierForm"
+                                                        show-error="dos.showError(dos.dossierForm[dos.prodNameId])"
+                                                        error-types="dos.requiredOnly">
+                                     </cmp-error-message>
+                         </label>
+                         <textarea id="{{::dos.prodNameId}}"
+                                   name="{{::dos.prodNameId}}"
+                                   data-ng-model="dos.dossierModel.productName"
+                                   class="form-control full-width" maxlength="256" size="256"
+                                   required></textarea>
 
                      </div>
                  </div>
@@ -117,17 +118,17 @@
                              <sup id="do5-rf">
                                  <a class="fn-lnk" href="#do5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                              </sup>
-                         <cmp-error-message field-name="dos.properNameId"
-                                            form-ref="dos.dossierForm"
-                                            show-error="dos.showError(dos.dossierForm[dos.properNameId])"
-                                            error-types="dos.requiredOnly">
-                         </cmp-error-message>
+                                 <cmp-error-message field-name="dos.properNameId"
+                                                    form-ref="dos.dossierForm"
+                                                    show-error="dos.showError(dos.dossierForm[dos.properNameId])"
+                                                    error-types="dos.requiredOnly">
+                                 </cmp-error-message>
                          </label>
-                         <textarea class="form-control full-width" id="{{::dos.properNameId}}" name="{{::dos.properNameId}}"
-                                   required data-ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
-                                   data-ng-change="dos.dossierModel.properName=dos.dossierModel.properName.toUpperCase()">
+                         <textarea class="form-control full-width"
+                                   id="{{::dos.properNameId}}" name="{{::dos.properNameId}}"
+                                   data-ng-model="dos.dossierModel.properName" maxlength="256" rows="3"
+                                   required >
                              </textarea>
-
                      </div>
                  </div>
                  <div class="row">

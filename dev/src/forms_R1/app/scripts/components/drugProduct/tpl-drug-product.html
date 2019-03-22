@@ -54,8 +54,8 @@
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.compId])"
                                                error-types="drugProdCtrl.min5Error">
                             </cmp-error-message>
-                            <input type="text" class="form-control full-width" id="{{::drugProdCtrl.compId}}"
-                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="6"
+                            <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}"
+                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5" size="6"
                                    data-ng-model="drugProdCtrl.model.companyID"/>
 
                         </label>
@@ -88,19 +88,13 @@
                             <sup id="dr3_ref">
                                 <a class="fn-lnk" href="#dr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                             </sup>
-                            <!--<span title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
-                                    class="btn rep-help-button-primary btn-xs"
-                                    id="productName-instructions-toggle"
-                                    data-ng-click="drugProdCtrl.addInstruct(8)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'PROD_NAME_HELP'|translate}}</span>
-                            </span> -->
                             <cmp-error-message field-name="drugProdCtrl.prodNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId])"
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
-                        <textarea class="form-control full-width" id="{{::drugProdCtrl.prodNameId}}" name="{{::drugProdCtrl.prodNameId}}"
+                        <textarea class="form-control full-width" id="{{::drugProdCtrl.prodNameId}}"
+                                  name="{{::drugProdCtrl.prodNameId}}"
                                   required data-ng-model="drugProdCtrl.model.productName" maxlength="256" rows="3">
                         </textarea>
                     </div>
@@ -120,9 +114,7 @@
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
                         <textarea class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
-                              required data-ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3"
-                              data-ng-change="drugProdCtrl.model.properName=drugProdCtrl.model.properName.toUpperCase()">
-                        </textarea>
+                              required data-ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3">                        </textarea>
                     </div>
                 </div>
                 <div class="row">
