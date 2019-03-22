@@ -33,6 +33,7 @@
             //construction logic
 
             angular.extend(this._default, formData);
+            this.veterinaryID = 0;
         }
 
 
@@ -243,6 +244,9 @@
             };
 
             var veterinaryItems = transformVeterinaryToFile(jsonObj.drugProduct.veterinaryRecord);
+
+            // todo: change name to species_subtypes ???
+
             baseModel.veterinary_record = {};
             if (veterinaryItems) {
                 baseModel.veterinary_list.veterinary_record = veterinaryItems;

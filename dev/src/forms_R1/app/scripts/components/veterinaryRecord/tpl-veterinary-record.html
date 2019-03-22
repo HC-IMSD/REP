@@ -1,30 +1,30 @@
-<ng-form name="vetCtrl.veterinaryForm" id="{{::vetCtrl.veterinaryFormId}}">
+<ng-form name="vetRecCtrl.veterinaryForm" id="{{::vetRecCtrl.veterinaryFormId}}">
     <div class="container-fluid">
-        <cmp-error-summary form-ref="vetCtrl.veterinaryForm"
-                           form-preamble="{{'SPECIES_SUBTYPE_DETAILS'|translate}}&nbsp;{{vetCtrl.recordIndex+1}}"
-                           exclusion-list=vetCtrl.exclusions
-                           name-suffix="vetCtrl.veterinaryForm" set-heading-level="h3" form-id="vetCtrl.veterinaryFormId"
-                           make-focused="vetCtrl.focusSummary" alias-list="vetCtrl.alias" show-errors="vetCtrl.showSummary"
-                           update-errors="vetCtrl.updateSummary">
+        <cmp-error-summary form-ref="vetRecCtrl.veterinaryForm"
+                           form-preamble="{{'SPECIES_SUBTYPE_DETAILS'|translate}}&nbsp;{{vetRecCtrl.recordIndex+1}}"
+                           exclusion-list=vetRecCtrl.exclusions
+                           name-suffix="vetRecCtrl.veterinaryForm" set-heading-level="h3" form-id="vetRecCtrl.veterinaryFormId"
+                           make-focused="vetRecCtrl.focusSummary" alias-list="vetRecCtrl.alias" show-errors="vetRecCtrl.showSummary"
+                           update-errors="vetRecCtrl.updateSummary">
         </cmp-error-summary>
 
         <fieldset>
-            <legend class="legend-rep"><span>{{'SPECIES_SUBTYPE_DETAILS'|translate}}&nbsp;{{vetCtrl.recordIndex+1}}</span></legend>
+            <legend class="legend-rep"><span>{{'SPECIES_SUBTYPE_DETAILS'|translate}}&nbsp;{{vetRecCtrl.recordIndex+1}}</span></legend>
             <div class="row">
                 <div class="form-group col-md-12"
-                     data-ng-class="{'has-error':vetCtrl.veterinaryForm[vetCtrl.speciesSubtypeUseId].$invalid}">
-                    <label for="{{::vetCtrl.speciesSubtypeUseId}}" class="required">
+                     data-ng-class="{'has-error':vetRecCtrl.veterinaryForm[vetRecCtrl.speciesSubtypeUseId].$invalid}">
+                    <label for="{{::vetRecCtrl.speciesSubtypeUseId}}" class="required">
                         <span class="field-name">{{'SPECIES_SUBTYPES_USE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <cmp-error-message field-name="vetCtrl.speciesSubtypeUseId"
-                                           form-ref="vetCtrl.veterinaryForm"
-                                           show-error="vetCtrl.showError(vetCtrl.veterinaryForm[vetCtrl.speciesSubtypeUseId])"
-                                           error-types="vetCtrl.requiredOnly">
+                        <cmp-error-message field-name="vetRecCtrl.speciesSubtypeUseId"
+                                           form-ref="vetRecCtrl.veterinaryForm"
+                                           show-error="vetRecCtrl.showError(vetRecCtrl.veterinaryForm[vetRecCtrl.speciesSubtypeUseId])"
+                                           error-types="vetRecCtrl.requiredOnly">
                         </cmp-error-message>
-                        <select name="{{::vetCtrl.speciesSubtypeUseId}}" id="{{::vetCtrl.speciesSubtypeUseId}}"
-                                data-ng-model="vetCtrl.vetModel.speciesSubtypeUse"
+                        <select name="{{::vetRecCtrl.speciesSubtypeUseId}}" id="{{::vetRecCtrl.speciesSubtypeUseId}}"
+                                data-ng-model="vetRecCtrl.vetModel.speciesSubtypeUse"
                                 class="form-control"
-                                data-ng-options="choice[vetCtrl.lang] for choice in vetCtrl.speciesSubspeciesList track by choice.id"
+                                data-ng-options="choice[vetRecCtrl.lang] for choice in vetRecCtrl.speciesSubspeciesList track by choice.id"
                                 required>
                             <option label=" " value="" />
                         </select>
@@ -33,69 +33,69 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-12"
-                     data-ng-class="{'has-error':vetCtrl.veterinaryForm[vetCtrl.foodProducingAnimalUseId].$invalid}">
-                    <label for="{{::vetCtrl.foodProducingAnimalUseId}}" class="required">
+                     data-ng-class="{'has-error':vetRecCtrl.veterinaryForm[vetRecCtrl.foodProducingAnimalUseId].$invalid}">
+                    <label for="{{::vetRecCtrl.foodProducingAnimalUseId}}" class="required">
                         <span class="field-name">{{'FOOD_PRODUCING_ANIMAL_USE'|translate}}</span>
                         <strong class="required">{{'REQUIRED' |translate}}</strong>
-                        <cmp-error-message field-name="vetCtrl.foodProducingAnimalUseId"
-                                           form-ref="vetCtrl.veterinaryForm"
-                                           show-error="vetCtrl.showError(vetCtrl.veterinaryForm[vetCtrl.foodProducingAnimalUseId])"
-                                           error-types="vetCtrl.requiredOnly">
+                        <cmp-error-message field-name="vetRecCtrl.foodProducingAnimalUseId"
+                                           form-ref="vetRecCtrl.veterinaryForm"
+                                           show-error="vetRecCtrl.showError(vetRecCtrl.veterinaryForm[vetRecCtrl.foodProducingAnimalUseId])"
+                                           error-types="vetRecCtrl.requiredOnly">
                         </cmp-error-message>
-                        <select name="{{::vetCtrl.foodProducingAnimalUseId}}"
-                                id="{{::vetCtrl.foodProducingAnimalUseId}}"
-                                data-ng-model="vetCtrl.vetModel.foodProducingAnimalUse"
+                        <select name="{{::vetRecCtrl.foodProducingAnimalUseId}}"
+                                id="{{::vetRecCtrl.foodProducingAnimalUseId}}"
+                                data-ng-model="vetRecCtrl.vetModel.foodProducingAnimalUse"
                                 class="form-control"
-                                data-ng-options="choice |translate for choice in vetCtrl.yesNoList"
+                                data-ng-options="choice |translate for choice in vetRecCtrl.yesNoList"
                                 required>
                             <option label=" " value="" />
                         </select>
                     </label>
                 </div>
             </div>
-            <div class="row" data-ng-if="vetCtrl.isFoodroducingAnimal()">
+            <div class="row" data-ng-if="vetRecCtrl.isFoodroducingAnimal()">
                 <div class="form-group col-md-4"
-                     data-ng-class="{'has-error':vetCtrl.veterinaryForm[vetCtrl.withdrawalTimeId].$invalid}">
-                    <label for="{{::vetCtrl.withdrawalTimeId}}">
+                     data-ng-class="{'has-error':vetRecCtrl.veterinaryForm[vetRecCtrl.withdrawalTimeId].$invalid}">
+                    <label for="{{::vetRecCtrl.withdrawalTimeId}}">
                         <span class="field-name">{{'WITHDRAWAL_TIME'|translate}}</span>
-                        <cmp-error-message field-name="vetCtrl.withdrawalTimeId"
-                                           form-ref="vetCtrl.veterinaryForm"
-                                           show-error="vetCtrl.showError(vetCtrl.veterinaryForm[vetCtrl.withdrawalTimeId])"
-                                           error-types="vetCtrl.dateFormatError">
+                        <cmp-error-message field-name="vetRecCtrl.withdrawalTimeId"
+                                           form-ref="vetRecCtrl.veterinaryForm"
+                                           show-error="vetRecCtrl.showError(vetRecCtrl.veterinaryForm[vetRecCtrl.withdrawalTimeId])"
+                                           error-types="vetRecCtrl.dateFormatError">
                         </cmp-error-message>
                     </label>
-                    <input id="{{::vetCtrl.withdrawalTimeId}}" type="date" name="{{::vetCtrl.withdrawalTimeId}}"
-                           data-ng-model="vetCtrl.vetModel.withdrawalTime"
+                    <input id="{{::vetRecCtrl.withdrawalTimeId}}" type="date" name="{{::vetRecCtrl.withdrawalTimeId}}"
+                           data-ng-model="vetRecCtrl.vetModel.withdrawalTime"
                            class="form-control"/>
                 </div>
                 <div class="form-group col-md-4"
-                     data-ng-class="{'has-error':vetCtrl.veterinaryForm[vetCtrl.daysId].$invalid}">
-                    <label for="{{::vetCtrl.daysId}}" class="required">
+                     data-ng-class="{'has-error':vetRecCtrl.veterinaryForm[vetRecCtrl.daysId].$invalid}">
+                    <label for="{{::vetRecCtrl.daysId}}" class="required">
                         <span class="field-name">{{'DAYS'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                        <cmp-error-message field-name="vetCtrl.daysId"
-                                           form-ref="vetCtrl.veterinaryForm"
-                                           show-error="vetCtrl.showError(vetCtrl.veterinaryForm[vetCtrl.daysId])"
-                                           error-types="vetCtrl.requiredOnly">
+                        <cmp-error-message field-name="vetRecCtrl.daysId"
+                                           form-ref="vetRecCtrl.veterinaryForm"
+                                           show-error="vetRecCtrl.showError(vetRecCtrl.veterinaryForm[vetRecCtrl.daysId])"
+                                           error-types="vetRecCtrl.requiredOnly">
                         </cmp-error-message>
                     </label>
-                    <input id="{{::vetCtrl.daysId}}" type="text" name="{{::vetCtrl.daysId}}"
-                           data-ng-model="vetCtrl.vetModel.days"
+                    <input id="{{::vetRecCtrl.daysId}}" type="text" name="{{::vetRecCtrl.daysId}}"
+                           data-ng-model="vetRecCtrl.vetModel.days"
                            class="form-control" required />
                 </div>
                 <div class="form-group col-md-4"
-                     data-ng-class="{'has-error':vetCtrl.veterinaryForm[vetCtrl.hoursId].$invalid}">
-                    <label for="{{::vetCtrl.hoursId}}" class="required">
+                     data-ng-class="{'has-error':vetRecCtrl.veterinaryForm[vetRecCtrl.hoursId].$invalid}">
+                    <label for="{{::vetRecCtrl.hoursId}}" class="required">
                         <span class="field-name">{{'HOURS'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                        <cmp-error-message field-name="vetCtrl.hoursId"
-                                           form-ref="vetCtrl.veterinaryForm"
-                                           show-error="vetCtrl.showError(vetCtrl.veterinaryForm[vetCtrl.hoursId])"
-                                           error-types="vetCtrl.requiredOnly">
+                        <cmp-error-message field-name="vetRecCtrl.hoursId"
+                                           form-ref="vetRecCtrl.veterinaryForm"
+                                           show-error="vetRecCtrl.showError(vetRecCtrl.veterinaryForm[vetRecCtrl.hoursId])"
+                                           error-types="vetRecCtrl.requiredOnly">
                         </cmp-error-message>
                     </label>
-                    <input id="{{::vetCtrl.hoursId}}" type="text" name="{{::vetCtrl.hoursId}}"
-                           data-ng-model="vetCtrl.vetModel.hours"
+                    <input id="{{::vetRecCtrl.hoursId}}" type="text" name="{{::vetRecCtrl.hoursId}}"
+                           data-ng-model="vetRecCtrl.vetModel.hours"
                            class="form-control" required/>
                 </div>
             </div>
@@ -106,13 +106,13 @@
                 <button  class="btn btn-primary"
                          name="saveVeterinaryRec_{{::$id}}"
                          id ="saveVeterinaryRec_{{::$id}}"
-                         data-ng-click="vetCtrl.updateVeterinaryModel()">{{'SAVE_RECORD'|translate}}
+                         data-ng-click="vetRecCtrl.updateVeterinaryModel()">{{'SAVE_RECORD'|translate}}
                 </button>
-                <button data-ng-if="vetCtrl.deleteBtn === true" class="btn btn-danger" name="deleteVeterinary"
-                        data-ng-click="vetCtrl.delete()">{{'DELETE_RECORD'|translate}}
+                <button data-ng-if="vetRecCtrl.deleteBtn === true" class="btn btn-danger" name="deleteVeterinary"
+                        data-ng-click="vetRecCtrl.delete()">{{'DELETE_RECORD'|translate}}
                 </button>
                 <button  class="btn btn-default" name="discardVeterinary"
-                         data-ng-click="vetCtrl.discardChanges()">{{'DISCARD_CHANGES'|translate}}
+                         data-ng-click="vetRecCtrl.discardChanges()">{{'DISCARD_CHANGES'|translate}}
                 </button>
             </div>
         </div>

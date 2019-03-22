@@ -336,9 +336,7 @@
             }
 
             if (!vm.isVeterinary()) {
-                vm.model.drugProduct.veterinaryType = {
-                    veterinaryRecord : []
-                };
+                vm.model.drugProduct.veterinaryRecord = [];
             }
         };
 
@@ -371,7 +369,7 @@
 
         vm.updateVeterinaryList = function(list){
             if(!list) return;
-            vm.model.drugProduct.veterinaryType.veterinaryRecord = list;
+            vm.model.drugProduct.veterinaryRecord = list;
         };
         /**
          * Save as a json file. Convert interal model to external model for output

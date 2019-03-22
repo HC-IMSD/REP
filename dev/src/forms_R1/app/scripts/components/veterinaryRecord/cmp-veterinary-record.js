@@ -21,7 +21,7 @@
         .module('veterinaryRecordModule')
         .component('cmpVeterinaryRecord', {
             templateUrl: 'app/scripts/components/veterinaryRecord/tpl-veterinary-record.html',
-            controllerAs: 'vetCtrl',
+            controllerAs: 'vetRecCtrl',
             controller: veterinaryRecCtrl,
             bindings: {
                 deleteBtn: '<',
@@ -158,11 +158,11 @@
             return(vm.lang===FRENCH);
         };
 
-        $scope.$watch('vetCtrl.veterinaryForm.$dirty', function () {
+        $scope.$watch('vetRecCtrl.veterinaryForm.$dirty', function () {
             vm.isDetailValid({state: !vm.veterinaryForm.$dirty});
         }, true);
 
-        $scope.$watch('vetCtrl.veterinaryForm.$error', function () {
+        $scope.$watch('vetRecCtrl.veterinaryForm.$error', function () {
             vm.updateErrorSummaryState();
         }, true);
 

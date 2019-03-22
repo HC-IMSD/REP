@@ -11,7 +11,7 @@
                          column-def="vetCtrl.columnDef"
                          select-record="vetCtrl.selectRecord"
                          disable-selection="!vetCtrl.isDetailValid">
-        <cmp-veterianry-record record="$parent.record"
+        <cmp-veterinary-record record="$parent.record"
                                is-detail-valid="vetCtrl.setValid(state)"
                                on-update="vetCtrl.onUpdateVeterinaryRecord(record)"
                                error-summary-update="vetCtrl.errorSummaryUpdate"
@@ -19,7 +19,7 @@
                                on-delete="vetCtrl.deleteRec($parent.$index)"
                                record-index="$parent.$index"
                                delete-btn="true">
-        </cmp-veterianry-record>
+        </cmp-veterinary-record>
     </cmp-expanding-table>
     </div>
     <div class="mrgn-tp-md mrgn-bttm-lg">

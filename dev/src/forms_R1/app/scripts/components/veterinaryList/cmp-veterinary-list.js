@@ -7,7 +7,7 @@
     'use strict';
 
     angular
-        .module('veterinaryListModule', ['expandingTable', 'veterinaryRecordModule','dataLists', 'ui.select', 'hpfbConstants'])
+        .module('veterinaryListModule', ['expandingTable', 'veterinaryRecordModule', 'dataLists', 'ui.select', 'hpfbConstants'])
 })();
 
 
@@ -28,9 +28,9 @@
                 showErrorSummary:'<'
             }
         });
-    veterinaryListCtrl.$inject = ['$scope'];
+    veterinaryListCtrl.$inject = ['$filter', '$scope'];
 
-    function veterinaryListCtrl($scope) {
+    function veterinaryListCtrl($filter, $scope) {
 
         var vm = this;
         vm.isDetailValid = true;
@@ -82,6 +82,9 @@
 
 
         vm.onUpdateVeterinaryRecord = function (record) {
+            var idx = vm.veterinaryList.indexOf(
+                $filter('filter')(vm.veterinaryList, {veterinaryID: record.veterinaryID}, true)[0]
+            );
             vm.veterinaryList[idx] = angular.copy(record);
             vm.onUpdate({list:vm.veterinaryList});
             vm.setValid(true);
@@ -138,11 +141,11 @@
          */
         vm.noVeterinaryItem=function(){
 
-            if(!vm.veterinaryList ||   vm.veterinaryList.length===0){
-                vm.noVeterinaryValues="";
+            if(!vm.veterinaryList || vm.veterinaryList.length === 0){
+                vm.noVeterinaryValues = "";
                 return true;
             }
-            vm.noVeterinaryValues="values";
+            vm.noVeterinaryValues = "values";
             return false;
         };
 
