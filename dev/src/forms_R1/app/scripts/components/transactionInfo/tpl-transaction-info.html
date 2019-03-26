@@ -22,23 +22,7 @@
                 </div> -->
             </header>
             <div class="panel-body">
-                  <!--  <div>
-                        <cmp-alert  ui-state="transInfoCtrl.alerts[0]"
-                                    msg="TRANSACT_INSTRUCT"
-                                    update-state="transInfoCtrl.closeAlert(0)"
-                                    type="alert-info">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-en.html'">
-                                </div>
-                                <div data-ng-if="transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-enrolment-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
-                    </div> -->
-                    <div>
-                        <div class="row">
+                   <div class="row">
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
                                     <label for="{{::transInfoCtrl.typeId}}" class="required">
@@ -61,14 +45,8 @@
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
-                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_5_CHAR" |translate}}
+                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_6_CHAR" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <!--<span title="{{::'EXPAND'|translate}} {{::'COMPANY_ID_INSTRUCT'|translate}}"
-                                                class="btn rep-help-button-primary btn-xs"
-                                                id="comp-id-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(5)">
-                                            <span class="fa fa-question-circle fa-2x"></span>
-                                            <span class="wb-inv">{{::'COMPANY_ID_INSTRUCT'|translate}}</span>
-                                        </span> -->
                                         <sup id="tr2_ref">
                                             <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
                                         </sup>
@@ -83,31 +61,12 @@
 
                                     </label>
                                 </div>
-                        </div>
-                       <!-- <div>
-                            <cmp-alert ui-state="transInfoCtrl.alerts[5]" msg="COMPANY_ID_INSTRUCT"
-                                       update-state="transInfoCtrl.closeAlert(5)" type="alert-info">
-                                <section aria-live="assertive">
-                                    <div ng-if="!transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-en.html'">
-                                    </div>
-                                    <div ng-if="transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-comp-id-fr.html'">
-                                    </div>
-                                </section>
-                            </cmp-alert>
-                        </div> -->
-                        <div class="form-group">
+                   </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
                                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <!--<span title="{{::'EXPAND'|translate}} {{::'DOSSIER_ID_INSTRUCT'|translate}}"
-                                                class="btn rep-help-button-primary btn-xs"
-                                                id="dossier-id-instructions-toggle"
-                                                data-ng-click="transInfoCtrl.addInstruct(6)">
-                                             <span class="fa fa-question-circle fa-2x"></span>
-                                             <span class="wb-inv">{{::'DOSSIER_ID_INSTRUCT'|translate}}</span>
-                                        </span> -->
                                             <sup id="tr3_ref">
                                                 <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                                             </sup>
@@ -124,35 +83,14 @@
                                                        data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                                             </div>
                                         </div>
-
                                     </label>
-                                </div>
+                        </div>
                     </div>
-                    <!--<div>
-                            <cmp-alert ui-state="transInfoCtrl.alerts[6]" msg="DOSSIER_ID_INSTRUCT"
-                                       update-state="transInfoCtrl.closeAlert(6)" type="alert-info">
-                                <section aria-live="assertive">
-                                    <div ng-if="!transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-en.html'">
-                                    </div>
-                                    <div ng-if="transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-dossier-id-fr.html'">
-                                    </div>
-                                </section>
-                            </cmp-alert>
-                    </div>-->
                     <div class="row">
                                <div class="form-group col-md-12" ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.productNameId].$invalid}">
                                     <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
                                         <span class="field-name">{{::"PROD_NAME" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                       <!-- <span title="{{::'EXPAND'|translate}} {{::'PRODUCT_INSTRUCT'|translate}}"
-                                                class="btn rep-help-button-primary btn-xs"
-                                                id="product-instructions-toggle"
-                                                data-ng-click="transInfoCtrl.addInstruct(1)">
-                                            <span class="fa fa-question-circle fa-2x"></span>
-                                            <span class="wb-inv">{{::'PRODUCT_INSTRUCT'|translate}}</span>
-                                        </span> -->
                                          <sup id="tr4_ref">
                                             <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                          </sup>
@@ -171,19 +109,6 @@
                                    </textarea>
                                 </div>
                     </div>
-                    <!--<div>
-                            <cmp-alert ui-state="transInfoCtrl.alerts[1]" msg="PRODUCT_INSTRUCT"
-                                       update-state="transInfoCtrl.closeAlert(1)" type="alert-info">
-                                <section aria-live="assertive">
-                                    <div data-ng-if="!transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-product-en.html'">
-                                    </div>
-                                    <div data-ng-if="transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-transaction-product-fr.html'">
-                                    </div>
-                                </section>
-                            </cmp-alert>
-                        </div> -->
                     <div class="row">
                             <div class="form-group col-md-12"
                                  data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">
@@ -202,7 +127,6 @@
                                             required>
                                         <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.transactionType" />
                                     </select>
-
                                 </label>
                             </div>
                      </div>
@@ -275,12 +199,6 @@
                                 <label for="{{::transInfoCtrl.isAdminSubId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <!--<span title="{{::'EXPAND'|translate}} {{::'ADMIN_COMP_INSTRUCT'|translate}}"
-                                            class="btn rep-help-button-primary btn-xs"
-                                            id="is-admin-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(7)">
-                                        <span class="fa fa-question-circle fa-2x"></span>
-                                        <span class="wb-inv">{{::'ADMIN_COMP_INSTRUCT'|translate}}</span>
-                                    </span> -->
                                     <sup id="tr1b_ref">
                                     <a class="fn-lnk" href="#tr1b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.b</a>
                                     </sup>
@@ -298,20 +216,6 @@
                                 </label>
                             </div>
                         </div>
-
-                        <!--<div class="row">
-                            <div class="col-md-12">
-                                <cmp-alert ui-state="transInfoCtrl.alerts[7]" msg="ADMIN_COMP_INSTRUCT" update-state="transInfoCtrl.closeAlert(7)"
-                                           type="alert-info">
-                                    <div data-ng-if="!transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-activity-admin-comp-en.html'">
-                                    </div>
-                                    <div data-ng-if="transInfoCtrl.isFrench()"
-                                         ng-include="'app/scripts/templates/transaction/tpl-activity-admin-comp-fr.html'">
-                                    </div>
-                                </cmp-alert>
-                            </div>
-                        </div> -->
                         <div data-ng-show="transInfoCtrl.showAdminSub">
                             <div class="row">
                                 <div class="col-xs-12 form-group">
@@ -430,7 +334,6 @@
                                                     get-current-sequence="transInfoCtrl.getCurrentSequence()"
                                                     get-new-transaction="transInfoCtrl.getNewTransaction()">
                                 </cmp-lifecycle-list>
-
                             </div>
                         </div>
                     </section>
@@ -506,7 +409,6 @@
                                     data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
                                 <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isFees" />
                             </select>
-
                         </label>
                     </div>
                 </div>
@@ -520,41 +422,8 @@
                             <a class="fn-lnk" href="#tr1d"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.d</a>
                         </sup>
                     </h2>
-                   <!--
-                    <div class="btn-group pull-right">
-                        <button title="{{::'EXPAND'|translate}} {{::'REGULATORY_FEES'|translate}}"
-                                class="btn-xs rep-help-button"
-                                onclick="window.open('https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/fees/fees-review-drug-submissions-applications.html')"
-                                id="fee-toggle">
-                            <span class="fa fa-question-circle fa-2x"></span>
-                            <span class="wb-inv">{{::'REGULATORY_FEES'|translate}}</span>
-                        </button>
-                    </div> -->
-                    <!-- <div class="btn-group pull-right">
-                        <button title="{{::'EXPAND'|translate}} {{::'REGULATORY_FEES'|translate}}"
-                                class="btn-xs rep-help-button"
-                                id="fee-instruct-toggle" data-ng-click="transInfoCtrl.addInstruct(8)">
-                            <span class="fa fa-question-circle fa-2x"></span>
-                            <span class="wb-inv">{{::'REGULATORY_FEES'|translate}}</span>
-                        </button>
-                    </div> -->
                 </header>
                 <div class="panel-body">
-                   <!-- <div>
-                        <cmp-alert  ui-state="transInfoCtrl.alerts[8]"
-                                    msg="REGULATORY_FEES"
-                                    update-state="transInfoCtrl.closeAlert(8)"
-                                    type="alert-info">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-fee-en.html'">
-                                </div>
-                                <div data-ng-if="transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-fees-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
-                    </div> -->
                     <cmp-transaction-fees fee-record="transInfoCtrl.transactionModel.feeDetails"
                                           show-error-summary="transInfoCtrl.showSummary"
                                           update-error-summary="transInfoCtrl.updateErrorSummary()"
@@ -570,29 +439,8 @@
                             <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                         </sup>
                     </h2>
-                    <!--<div class="btn-group pull-right">
-                        <button title="{{::'EXPAND'|translate}} {{::'REG_ACTIVITY_INSTRUCT'|translate}}"
-                                class="btn-xs rep-help-button"
-                                id="start-date-picker-toggle" data-ng-click="transInfoCtrl.addInstruct(3)">
-                            <span class="fa fa-question-circle fa-2x"></span>
-                            <span class="wb-inv">{{::'REG_ACTIVITY_INSTRUCT'|translate}}</span>
-                        </button>
-                    </div> -->
                 </header>
                 <div class="panel-body">
-                   <!-- <div>
-                        <cmp-alert ui-state="transInfoCtrl.alerts[3]" msg="REG_ACTIVITY_INSTRUCT"
-                                   update-state="transInfoCtrl.closeAlert(3)" type="alert-info">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-en.html'">
-                                </div>
-                                <div data-ng-if="transInfoCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-activity-contact-fr.html'">
-                                </div>
-                            </section>
-                        </cmp-alert>
-                    </div> -->
                     <div>
                            <h3 class="mrgn-tp-sm">{{::'COMPANY_INFO'|translate}}</h3>
                             <div class="row">
@@ -604,12 +452,6 @@
                                         <sup id="tr6_ref">
                                             <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                                         </sup>
-                                        <!--<span title="{{::'EXPAND'|translate}} {{::'COMPANY_INSTRUCT'|translate}}"
-                                                class="btn rep-help-button-primary btn-xs"
-                                                id="company-instructions-toggle" data-ng-click="transInfoCtrl.addInstruct(4)">
-                                            <span class="fa fa-question-circle fa-2x"></span>
-                                            <span class="wb-inv">{{::'COMPANY_INSTRUCT'|translate}}</span>
-                                        </span> -->
                                         <cmp-error-message field-name="transInfoCtrl.companyNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.companyNameId])"
@@ -618,21 +460,7 @@
                                                name="{{::transInfoCtrl.companyNameId}}"
                                                data-ng-model="transInfoCtrl.transactionModel.companyName"
                                                class="form-control full-width" required/>
-
                                     </label>
-                                   <!-- <div>
-                                        <cmp-alert ui-state="transInfoCtrl.alerts[4]" msg="COMPANY_INSTRUCT"
-                                                   update-state="transInfoCtrl.closeAlert(4)" type="alert-info">
-                                            <section aria-live="assertive">
-                                                <div data-ng-if="!transInfoCtrl.isFrench()"
-                                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-company-en.html'">
-                                                </div>
-                                                <div data-ng-if="transInfoCtrl.isFrench()"
-                                                     ng-include="'app/scripts/templates/transaction/tpl-transaction-company-fr.html'">
-                                                </div>
-                                            </section>
-                                        </cmp-alert>
-                                    </div> -->
                                 </div>
                             </div>
 

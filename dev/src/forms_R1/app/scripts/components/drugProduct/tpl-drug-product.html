@@ -54,8 +54,8 @@
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.compId])"
                                                error-types="drugProdCtrl.min5Error">
                             </cmp-error-message>
-                            <input type="text" class="form-control full-width" id="{{::drugProdCtrl.compId}}"
-                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="6"
+                            <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}"
+                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5" size="5"
                                    data-ng-model="drugProdCtrl.model.companyID"/>
 
                         </label>
@@ -120,8 +120,7 @@
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
                         <textarea class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
-                              required data-ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3"
-                              data-ng-change="drugProdCtrl.model.properName=drugProdCtrl.model.properName.toUpperCase()">
+                              required data-ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3">
                         </textarea>
                     </div>
                 </div>

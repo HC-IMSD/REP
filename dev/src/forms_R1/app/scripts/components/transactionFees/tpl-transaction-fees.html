@@ -28,21 +28,6 @@
                            value="{{transFeeCtrl.model.submissionClass.fee  | currency}}"/>
                 </div>
             </div>
-            <!--div class="row">
-                <div class="col-xs-12">
-                    <cmp-alert ui-state="transFeeCtrl.alerts[0]" msg="CLASS_INSTRUCT"
-                               update-state="transFeeCtrl.closeAlert(0)" type="alert-info">
-                        <section aria-live="assertive">
-                            <div ng-if="!transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-class-en.html'">
-                            </div>
-                            <div ng-if="transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-class-fr.html'">
-                            </div>
-                        </section>
-                    </cmp-alert>
-                </div>
-            </div-->
             <div class="row">
                 <div class="col-xs-12 form-group">
                     <label for="{{::transFeeCtrl.descriptId}}">
@@ -59,14 +44,6 @@
                     <label for="{{::transFeeCtrl.deferId}}" class="required ">
                         <span class="field-name">{{::"DEFER_FEES"|translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                        <!--<span style="display:inline">
-                            <span title="{{::'EXPAND'|translate}} {{::'DEFER_INSTRUCT'|translate}}"
-                                    class="btn rep-help-button-primary btn-xs"
-                                    data-ng-click="transFeeCtrl.addInstruct(1)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'DEFER_INSTRUCT'|translate}}</span>
-                            </span>
-                        </span> -->
                         <sup id="tr1e_ref">
                             <a class="fn-lnk" href="#tr1e"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.e</a>
                         </sup>
@@ -127,24 +104,6 @@
 
                     </div>
                 </div>
-                <div class="form-group col-xs-4 ">
-
-                </div>
-            </div>
-            <div class="row">
-                <!-- <div class="col-xs-12">
-                    <cmp-alert ui-state="transFeeCtrl.alerts[2]" msg="REMISSION_INSTRUCT"
-                               update-state="transFeeCtrl.closeAlert(2)" type="alert-info">
-                        <section aria-live="assertive">
-                            <div data-ng-if="!transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-remission-en.html'">
-                            </div>
-                            <div data-ng-if="transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-remission-fr.html'">
-                            </div>
-                        </section>
-                    </cmp-alert>
-                </div> -->
             </div>
             <div data-ng-if="transFeeCtrl.isFeeRemit()">
                 <div class="row">
@@ -326,18 +285,6 @@
                     </span>
                 </div>
             </div>
-            <!--div class="row" ng-if="transFeeCtrl.isEligible()">
-                <div>  <span class="field-name"><strong> Payment</strong></span></div>
-                <div class="col-xs-12 form-group alert alert-info" role="alert"
-                     aria-live="polite">
-                    <span>
-                    <p>{{::'FEES_LESS10K'|translate}}
-                        <a href="" data-ng-click="transFeeCtrl.openPaymentForm()">{{::'ADVANCE_PAYMENT'|translate}}</a>
-                        &nbsp;{{'PLEASE_REMIT'|translate}}
-                    </p>
-                 </span>
-                </div>
-            </div-->
             <div class="row" data-ng-if="transFeeCtrl.isFeeRemit()">
                 <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
