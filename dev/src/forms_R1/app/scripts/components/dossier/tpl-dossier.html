@@ -28,6 +28,14 @@
                  </div>
              </div>
          </section>
+        <div id="master-error">
+            <cmp-error-summary form-ref="dos.dossierForm" select-tab="dos.selectTab(index)"
+                               form-preamble="DOSSIER" exclusion-list=dos.exclusions
+                               name-suffix="dos.dossierForm" set-heading-level="h2" form-id="dos.dossierFormId"
+                               make-focused="dos.focusSummary" alias-list="dos.alias" show-errors="dos.showSummary"
+                               update-errors="dos.updateSummary">
+            </cmp-error-summary>
+        </div>
          <section class="panel panel-primary mrgn-tp-lg">
              <header class="panel-heading clearfix">
                  <h2 class="panel-title col-md-8">{{::'Dossier Information'|translate}}
@@ -44,14 +52,7 @@
                                            is-incomplete="dos.isIncomplete">
                      </cmp-application-info>
                  </div>
-                 <div>
-                     <cmp-error-summary form-ref="dos.dossierForm" select-tab="dos.selectTab(index)"
-                                        form-preamble="DOSSIER" exclusion-list=dos.exclusions
-                                        name-suffix="dos.dossierForm" set-heading-level="h2" form-id="dos.dossierFormId"
-                                        make-focused="dos.focusSummary" alias-list="dos.alias" show-errors="dos.showSummary"
-                                        update-errors="dos.updateSummary">
-                     </cmp-error-summary>
-                 </div>
+
                  <div class="row">
                      <div class="col-xs-4 form-group" data-ng-class="{'has-error':dos.dossierForm[dos.typeId].$invalid}">
                          <label for="{{::dos.typeId}}" class="required">

@@ -44,8 +44,8 @@
                     <label for="{{::transFeeCtrl.deferId}}" class="required ">
                         <span class="field-name">{{::"DEFER_FEES"|translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                        <sup id="tr1e_ref">
-                            <a class="fn-lnk" href="#tr1e"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.e</a>
+                        <sup id="tr3a_ref">
+                            <a class="fn-lnk" href="#tr3a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3.a</a>
                         </sup>
                         <cmp-error-message field-name="transFeeCtrl.deferId" form-ref="transFeeCtrl.transFeeForm"
                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.deferId])"
@@ -80,16 +80,8 @@
                         <label for="{{::transFeeCtrl.remitId}}" class="required ">
                             <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                            <!-- <span style="display:inline">
-                                <span title="{{::'EXPAND'|translate}} {{::'REMISSION_INSTRUCT'|translate}}"
-                                        class="btn rep-help-button-primary btn-xs"
-                                        data-ng-click="transFeeCtrl.addInstruct(2)">
-                                    <span class="fa fa-question-circle fa-2x"></span>
-                                    <span class="wb-inv">{{::'REMISSION_INSTRUCT'|translate}}</span>
-                                </span>
-                            </span> -->
-                            <sup id="tr1f_ref">
-                                <a class="fn-lnk" href="#tr1f"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.f</a>
+                            <sup id="tr3b_ref">
+                                <a class="fn-lnk" href="#tr3b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3.b</a>
                             </sup>
                             <cmp-error-message field-name="transFeeCtrl.remitId" form-ref="transFeeCtrl.transFeeForm"
                                                show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.remitId])"
@@ -99,9 +91,7 @@
                                     data-ng-options="choice |translate for choice in transFeeCtrl.yesNoList">
                                 <option label=" " value="" data-ng-empty="transFeeCtrl.model.feeRemission"/>
                             </select>
-
                         </label>
-
                     </div>
                 </div>
             </div>

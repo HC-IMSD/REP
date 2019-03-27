@@ -29,12 +29,13 @@
                 </div>
             </div>
         </section>
-            <div>
+            <div class="master-error">
                 <cmp-error-summary form-ref="main.transactionEnrolForm"
                                    form-preamble="REG_TRANSACT" exclusion-list=main.exclusions
                                    name-suffix="main.transactionEnrolForm" set-heading-level="h2" form-id="main.formId"
                                    make-focused="main.focusSummary" alias-list="main.alias" show-errors="main.savePressed"
-                                   update-errors="main.updateSummary"></cmp-error-summary>
+                                   update-errors="main.updateSummary">
+                </cmp-error-summary>
             </div>
             <cmp-transaction-info transaction-root="main.transaction" show-error-summary="main.savePressed"
                                   deprecate-sequence="main.transactionService.deprecateSequenceNumber()"
@@ -78,8 +79,8 @@
                             data-ng-click="main.saveXML()"
                             data-ng-disabled="main.disableFinalXmlBtn()">{{::'GENERATE_FINAL'|translate}}
                     </button>
-                    <sup id="tr7_ref">
-                        <a class="fn-lnk" href="#tr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>7</a>
+                    <sup id="tr5_ref">
+                        <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                     </sup>
 
                 </div>

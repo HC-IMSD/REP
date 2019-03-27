@@ -33,8 +33,8 @@
                         <label for="{{::ingRecCtrl.ingredName}}" class="required full-width"><span
                                 class="field-name">{{'ING_NAME'|translate}}</span>
                             <strong class="required">{{'REQUIRED' |translate}}</strong>
-                            <sup id="dr9b1_ref">
-                                <a class="fn-lnk" href="#dr9b1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.1</a>
+                            <sup id="dr9c1_ref">
+                                <a class="fn-lnk" href="#dr9c1"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9.c.1</a>
                             </sup>
                             <cmp-error-message field-name="ingRecCtrl.ingredName"
                                                form-ref="ingRecCtrl.activeIngForm"
@@ -59,8 +59,8 @@
                     <div class="form-group col-md-12">
                         <label for="variant_{{::$id}}">
                             <span class="field-name">{{'VARIANT_NAME'|translate}}</span>
-                            <sup id="dr9b2_ref">
-                                <a class="fn-lnk" href="#dr9b2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.2</a>
+                            <sup id="dr9c2_ref">
+                                <a class="fn-lnk" href="#dr9c2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9.c.2</a>
                             </sup>
                             <input type="text" id="variant_{{::$id}}" data-ng-model="ingRecCtrl.ingModel.variant" maxlength="60"
                                    data-ng-model-options="{ debounce: '$inherit'}" size="60"
@@ -72,8 +72,8 @@
                         <label for="{{::ingRecCtrl.purposeId}}" class="required">
                             <span class="field-name">{{'PURPOSE'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <sup id="dr9b3_ref">
-                                <a class="fn-lnk" href="#dr9b3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.3</a>
+                            <sup id="dr9c3_ref">
+                                <a class="fn-lnk" href="#dr9c3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9.c.3</a>
                             </sup>
                             <cmp-error-message field-name="ingRecCtrl.purposeId"
                                                form-ref="ingRecCtrl.activeIngForm"
@@ -113,8 +113,8 @@
                     <div class="form-group col-md-4">
                         <label for="{{::ingRecCtrl.standardId}}">
                             <span class="field-name">{{'STANDARD'|translate}}</span>
-                            <sup id="dr9b4_ref">
-                                <a class="fn-lnk" href="#dr9b4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.4</a>
+                            <sup id="dr9c4_ref">
+                                <a class="fn-lnk" href="#dr9c4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9.c.4</a>
                             </sup>
                             <input type="text" id="{{::ingRecCtrl.standardId}}" data-ng-model="ingRecCtrl.ingModel.standard"
                                    data-ng-model-options="{ debounce: '$inherit'}"
@@ -369,8 +369,8 @@
                         <label for="{{::ingRecCtrl.isNanoMaterialId}}" class="required">
                             <span class="field-name">{{'IS_NANO_MATERIAL'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <sup id="dr9b5_ref">
-                                <a class="fn-lnk" href="#dr9b5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.5</a>
+                            <sup id="dr9c5_ref">
+                                <a class="fn-lnk" href="#dr9c5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9.c.5</a>
                             </sup>
 
                             <cmp-error-message field-name="ingRecCtrl.isNanoMaterialId"
@@ -418,29 +418,14 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="row">
-                    <div class="col-md-12">
-                        <div uib-alert data-template-url="./app/lib/uib-templates/alert.html" data-ng-if="ingRecCtrl.alerts[2]"
-                             class="alert-info" close="ingRecCtrl.closeAlert(2)">
-                            <section aria-live="assertive">
-                                <div data-ng-if="!ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-nanomaterial-en.html'">
-                                </div>
-                                <div data-ng-if="ingRecCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/drug/tpl-drugProduct-nanomaterial-fr.html'">
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>  -->
                 <div class="row">
                     <div class="form-group col-xs-12"
                          data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.animalHumanSrcId].$invalid}">
                         <label for="{{::ingRecCtrl.animalHumanSrcId}}" class="required">
                             <span class="field-name">{{'ANIMAL_HUMAN_SOURCED'|translate}}</span>
                             <strong class="required">{{"REQUIRED" |translate}}</strong>
-                            <sup id="dr9b6_ref">
-                                <a class="fn-lnk" href="#dr9b6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9b.6</a>
+                            <sup id="dr9c6_ref">
+                                <a class="fn-lnk" href="#dr9c6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9.c.6</a>
                             </sup>
 
                         </label>

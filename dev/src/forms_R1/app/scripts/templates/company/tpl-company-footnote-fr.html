@@ -31,6 +31,7 @@
     </dd>
     <dt>3</dt>
     <dd id="co3">
+        <p>{{::'ADDR_INFO'|translate}}</p>
         <ul>
             <li>A minimum of one address is required for the company template.</li>
             <li>There must be an address associated with each of the following three
@@ -50,27 +51,14 @@
             </a>
         </p>
     </dd>
-    <dt>3a</dt>
-    <dd id="3a">
+    <dt>4</dt>
+    <dd id="co4">
+        <p>{{::'ROLEMISSING'|translate}}</p>
         <ul>
             <li>“Manufacturer / Sponsor Information”: Refers to the name under which the drug submission is filed, where a Drug Identification Number (DIN) / Notice of Compliance (NOC) is to be issued, the company in whose name the DIN / NOC will be registered, (i.e., the DIN / NOC owner), and the name to be included on the product label and Product Monograph / Package Insert.</li>
             <li>“Regulatory Mailing / Annual Contact Address”: Pertains to where and to whom Health Canada should direct regulatory mail other than correspondence specific to the subject drug submission, e.g. annual notification, regulatory / policy amendment notices as they apply to DINs registered to the manufacturer/sponsor. Operational and system requirements dictate that the regulatory mailing name/address must be the same for all DINs registered to the manufacturer / sponsor identified where more than one DIN is held by that company.</li>
             <li>“Billing Address” – To whom the invoice is to be sent.</li>
             <li>“Canadian Importer mailing address”: is responsible for the sale of products in Canada when the sponsor/manufacturer identified is NOT located in Canada. Although it does not need to be provided at the time of initial company enrolment, the Canadian Importer responsible for sale must be identified prior to the product entering the market. Add a Canadian Importer Mailing Address to the Company XML file by using the “amend enrolment” button. The Importer Company ID issued by Health Canada should also be referred to in the Product Information XML file, where appropriate.</li>
-        </ul>
-        <p class="fn-rtn">
-            <a href="#3a_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>3.a
-                <span class="wb-inv"> referrer</span>
-            </a>
-        </p>
-    </dd>
-    <dt>4</dt>
-    <dd id="co4">
-        <ul>
-            <li> A file should not be loaded if this is the first time enrolling the Company.</li>
-            <li> When continuing with a working copy, the format of the file to load should be (.hcsc).</li>
-            <li> When viewing/updating a draft or final XML file, the format of the file to load should be (.xml).</li>
         </ul>
         <p class="fn-rtn">
             <a href="#co4_ref">
@@ -79,24 +67,18 @@
             </a>
         </p>
     </dd>
-    <dt>4a</dt>
-    <dd id="4a">
-        <ul>
-            <li>The Primary REP contact is the person to be contacted by Health Canada if there are any issues or clarifications required for this template when it is submitted for enrolment or amendment.</li>
-            <li>Sponsors may choose to provide an Alternate REP contact, however this is not a requirement.</li>
-        </ul>
-        <p class="fn-rtn">
-            <a href="#4a_ref">
-                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4.a
-                <span class="wb-inv"> referrer</span>
-            </a>
-        </p>
-    </dd>
     <dt>5</dt>
     <dd id="co5">
+        <p>{{::'CONTACT_INFO'|translate}}</p>
         <ul>
-            <li>Submit the draft XML file to Health Canada using the Common Electronic Submission Gateway (CESG).</li>
-            <li>Refer to the REP guidance document for detailed information.</li>
+            <li>A minimum of one company representative is required for the company template.</li>
+            <li>There must be a company representative associated with each of the following roles: “Manufacturer / Sponsor Contact”, “Billing Contact”, “Regulatory Mailing / Annual Contact” and “Primary REP Contact”.</li>
+            <li>A single contact may be associated with multiple roles, however, each role may only have one contact.</li>
+            <li>The Primary REP contact is the person to be contacted by Health Canada if there are any issues or clarifications required for this template when it is submitted for approval.</li><li>Sponsors may choose to provide an Alternate REP contact, however this is not a requirement.</li>
+            <br>Description of Roles<br>
+            <li>“Manufacturer / Sponsor Information”: Refers to the name to which the drug submission is filed and, where a Drug Identification Number (DIN) / Notice of Compliance (NOC) is to be issued, the company in whose name the DIN / NOC will be registered, (i.e., the DIN / NOC owner) and the name to be included on the product label and Product Monograph / Package Insert.</li>
+            <li>“Regulatory Mailing / Annual Contact”: pertains to where and to whom Health Canada should direct regulatory mail other than correspondence specific to the subject drug submission, e.g. annual notification, regulatory / policy amendment notices as they apply to DINs registered to the manufacturer/sponsor. Operational and system requirements dictate that the regulatory mailing name/address must be the same for all DINs registered to the manufacturer / sponsor identified where more than one DIN is held by that company.</li>
+            <li>“Billing Address” – To whom the invoice is to be sent.</li>
         </ul>
         <p class="fn-rtn">
             <a href="#co5_ref">
@@ -105,5 +87,42 @@
             </a>
         </p>
     </dd>
-
+    <!--  <dt>4a</dt>
+      <dd id="5a">
+          <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'FAX_NUMBER'|translate}}</p>
+          <p>Use 0000000000 if not available</p>
+          <p class="fn-rtn">
+              <a href="#5a_ref">
+                  <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4.a
+                  <span class="wb-inv"> referrer</span>
+              </a>
+          </p>
+      </dd> -->
+    <dt>6</dt>
+    <dd id="co6">
+        <p>{{::'CONTACTROLEMISSING'|translate}}</p>
+        <ul>
+            <li>The Primary Regulatory Enrolment Process (REP) contact is the person to be contacted by Health Canada if there are any issues or clarifications required for this template when it is submitted for enrolment or amendment.</li>
+            <li>Sponsors may choose to provide an Alternate Regulatory Enrolment Process (REP) contact, however this is not a requirement.</li>
+        </ul>
+        <p class="fn-rtn">
+            <a href="#co6_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>6
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
+    <dt>7</dt>
+    <dd id="co7">
+        <ul>
+            <li>Submit the draft XML file to Health Canada using the Common Electronic Submission Gateway (CESG).</li>
+            <li>Refer to the Regulatory Enrolment Process (REP) guidance document for detailed information.</li>
+        </ul>
+        <p class="fn-rtn">
+            <a href="#co7_ref">
+                <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>7
+                <span class="wb-inv"> referrer</span>
+            </a>
+        </p>
+    </dd>
 </dl>
