@@ -19,11 +19,14 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces',
+            'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_2_0_PREFIX'];
 
-    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO) {
+    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces,
+                            SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO, XSL_2_0_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
+        var xslName = XSL_2_0_PREFIX + "REP_DO_2_0.xsl";
 
         // Define the DossierService objecy
         function DossierService() {
@@ -31,7 +34,6 @@
 
         function DossierService(dossierData) {
             //construction logic
-
             angular.extend(this._default, dossierData);
         }
 
@@ -46,7 +48,7 @@
                 dateSaved: "",
                 applicationType: "NEW",
                 softwareVersion: SOFTWARE_VERSION,
-                xslFileName: "REP_DO_2_0.xsl",
+                xslFileName: xslName,
                 dataChecksum: "",
                 dossierType: "",
                 productName: "",
@@ -303,7 +305,7 @@
 
             var list = [];
 
-            if (angular.isDefined(contacts)) {
+            if (contacts && angular.isDefined(contacts)) {
 
                 if (!(contacts instanceof Array)) {
                     contacts = [contacts];

@@ -8,7 +8,7 @@
         .module('hpfbConstants', []);
 
     angular.module('hpfbConstants')
-        .constant('SOFTWARE_VERSION','1.3.0')
+        .constant('SOFTWARE_VERSION','2.0.0')
         .constant('CANADA','CAN')
         .constant('OTHER', 'OTHER')
         .constant('YES', 'Y')
@@ -30,6 +30,7 @@
         .constant("CSP_XSL","CSP_Enrolment.xsl")
         .constant("HCSC","hcsc")
         .constant("XML","xml")
+        .constant("XSL_2_0_PREFIX","https://raw.githubusercontent.com/HealthCanada/HPFB/master/Regulatory-Enrolment-Process-REP/v_2_0/Style-Sheets/")
         .constant("ADVANCE_FEE_PAYMENT_EN","https://www.canada.ca/content/dam/hc-sc/migration/hc-sc/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av2-eng.pdf")
         .constant("ADVANCE_FEE_PAYMENT_FR","https://www.canada.ca/content/dam/hc-sc/migration/hc-sc/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av2-fra.pdf");
 })();

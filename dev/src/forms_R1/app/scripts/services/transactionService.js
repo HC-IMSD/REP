@@ -16,13 +16,15 @@
         .module('transactionService')
         .factory('TransactionService', TransactionService);
 
-    TransactionService.$inject = ['$filter', 'getCountryAndProvinces', 'getContactLists', 'TransactionLists', 'YES', 'NO', 'HCSC'];
+    TransactionService.$inject = ['$filter', '$translate', 'getCountryAndProvinces', 'getContactLists',
+        'TransactionLists', 'YES', 'NO', 'HCSC', 'ENGLISH', 'FRENCH', 'XSL_2_0_PREFIX'];
 
     //version 1.1 bug fix?
     //version 1.2 added Submission package/rq to MPNC, MPDNS
     //version 1.3 Chnage Lifecycle Rec associations of Sequence Clean-up and Notification of interruption of sale
 
-    function TransactionService($filter, getCountryAndProvinces, getContactLists, TransactionLists, YES, NO, HCSC) {
+    function TransactionService($filter, $translate, getCountryAndProvinces, getContactLists, TransactionLists,
+                                YES, NO, HCSC, ENGLISH, FRENCH, XSL_2_0_PREFIX) {
         //var vm = this;
         this.baseRequesters = [];
         this.userList =[];
@@ -65,7 +67,7 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
-            this.xslFileName = "REP_RT_2_0_1.xsl";
+            this.xslFileName = XSL_2_0_PREFIX + "REP_RT_2_0_1.xsl";
         }
 
         function loadContactData() {
@@ -183,7 +185,7 @@
                     for (var i = 0; i < jsonObj.length; i++) {
                         var record = {};
                         record.sequenceNumber = Number(jsonObj[i].solicited_requester_sequence);
-                        record.solicitedRequester = jsonObj[i].solicited_requester;
+                        record.solicitedRequester = jsonObj[i].requester_of_solicited_information;
                         model.solicitedRequesterReord.push(record);
                     }
                 }
@@ -200,7 +202,12 @@
                 var ectd = {};
                 ectd.company_id = jsonObj.companyId;
                 ectd.dossier_id = jsonObj.dossierId;
-                ectd.dossier_type = jsonObj.dossierType;
+                var currentLang = $translate.proposedLanguage() || $translate.use();
+                var dt_text =  $translate.instant(jsonObj.dossierType, "", '', currentLang);
+                ectd.dossier_type = {
+                    _id: jsonObj.dossierType,
+                    __text: dt_text
+                };
                 ectd.product_name = jsonObj.productName;
                 ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
                 return (ectd);
@@ -210,7 +217,7 @@
                // if (model.isEctd) {
                     model.ectd.companyId = jsonObj.company_id;
                     model.ectd.dossierId = jsonObj.dossier_id;
-                    model.ectd.dossierType = jsonObj.dossier_type;
+                    model.ectd.dossierType = jsonObj.dossier_type._id;
                     model.ectd.productName = jsonObj.product_name;
                     model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
                   //  }
@@ -368,7 +375,7 @@
 
 
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _mapLifecycleRecToOutput(jsonObj[i]);
+                    var record = _mapLifecycleRecToOutput($translate, jsonObj[i], ENGLISH, FRENCH);
                     if (jsonObj.length === 1) {
                         return (record);
                     }
@@ -518,11 +525,11 @@
         // lifecycleRec.sequence = lifecycleObj.sequence_number;
         // lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
-        lifecycleRec.activityLead = lifecycleObj.sequence_activity_lead;
+        lifecycleRec.activityLead = lifecycleObj.regulatory_activity_lead._id;
 
         lifecycleRec.activityType = "";
-        if (lifecycleObj.sequence_activity_type) {
-            lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.sequence_activity_type.__text})[0];
+        if (lifecycleObj.regulatory_activity_type) {
+            lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.regulatory_activity_type._id})[0];
             lifecycleRec.activityTypeDisplay = lifecycleRec.activityType.id;
         }
         lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
@@ -531,23 +538,29 @@
         lifecycleRec.details = lifecycleObj.sequence_details;
         lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
-        lifecycleRec.sequenceConcat = lifecycleObj.sequence_concat;
+        lifecycleRec.sequenceConcat = lifecycleObj.transaction_description;
         lifecycleRec.isSaved = true;
         return (lifecycleRec);
     }
 
 
-    function _mapLifecycleRecToOutput(lifecycleObj) {
+    function _mapLifecycleRecToOutput($translate, lifecycleObj, ENGLISH, FRENCH) {
         var lifecycleRec = {};
        /**
         lifecycleRec.sequence_number = lifecycleObj.sequence;
         lifecycleRec.date_filed = lifecycleObj.dateFiled; **/
         lifecycleRec.control_number = lifecycleObj.controlNumber;
-        lifecycleRec.sequence_activity_lead = lifecycleObj.activityLead;
-        lifecycleRec.sequence_activity_type = "";
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        var ral_text =  $translate.instant(lifecycleObj.activityLead, "", '', currentLang);
+        lifecycleRec.regulatory_activity_lead = {
+            _id: lifecycleObj.activityLead,
+            __text: ral_text
+        };
+        lifecycleRec.regulatory_activity_type = "";
         if (lifecycleObj.activityType) {
-            lifecycleRec.sequence_activity_type = {};
-            _setActivityTypeValuesForOutput(lifecycleObj.activityType, lifecycleRec.sequence_activity_type);
+            lifecycleRec.regulatory_activity_type = {};
+            _setActivityTypeValuesForOutput(lifecycleObj.activityType, lifecycleRec.regulatory_activity_type,
+                currentLang, ENGLISH, FRENCH);
         }
         lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
@@ -555,7 +568,7 @@
         lifecycleRec.sequence_details = lifecycleObj.details;
         lifecycleRec.sequence_version = lifecycleObj.sequenceVersion;
         lifecycleRec.sequence_year = lifecycleObj.year;
-        lifecycleRec.sequence_concat = lifecycleObj.sequenceConcat;
+        lifecycleRec.transaction_description = lifecycleObj.sequenceConcat;
         return (lifecycleRec);
     }
 
@@ -564,7 +577,7 @@
         if (requesterObj) {
             requesterRec = {
                 solicited_requester_sequence: requesterObj.sequenceNumber,
-                solicited_requester: requesterObj.solicitedRequester
+                requester_of_solicited_information: requesterObj.solicitedRequester
             }
         }
         return (requesterRec);
@@ -577,9 +590,9 @@
      * @param destActivityTypeRec
      * @private
      */
-    function _setActivityTypeValuesForOutput(srcActivityTypeRec, destActivityTypeRec) {
+    function _setActivityTypeValuesForOutput(srcActivityTypeRec, destActivityTypeRec, currentLang, ENGLISH, FRENCH) {
         var stringIndex = srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
-        destActivityTypeRec.__text = srcActivityTypeRec.id;
+        destActivityTypeRec._id = srcActivityTypeRec.id;
 
         if (stringIndex > -1) {
             destActivityTypeRec._label_en = srcActivityTypeRec.en.substring(0, stringIndex)
@@ -592,9 +605,14 @@
         } else {
             destActivityTypeRec._label_fr = srcActivityTypeRec.fr;
         }
+        if (currentLang === ENGLISH) {
+            destActivityTypeRec.__text = destActivityTypeRec._label_en;
+        } else if (currentLang === FRENCH) {
+            destActivityTypeRec.__text = destActivityTypeRec._label_fr;
+        }
+        destActivityTypeRec._id = srcActivityTypeRec.id;
 
     }
-
 
     function _getEmptyEctdSection() {
         var ectd = {};
@@ -605,7 +623,6 @@
         ectd.lifecycleRecord = [];
         return ectd;
     }
-
 
     function _transformRepContactFromFileObj(repObj) {
 
@@ -640,7 +657,6 @@
         contact.email = contactObj.email;
         return contact;
     }
-
 
     function _mapContactToOutput(contactObj) {
 
@@ -753,7 +769,7 @@
         return (isoDate);
 
         function pad(n) {
-            return n < 10 ? '0' + n : n
+            return n < 10 ? '0' + n : n;
         }
     }
 
@@ -762,7 +778,7 @@
 
         var contact = _createContactModel();
         contact.repRole = "";
-        return contact
+        return contact;
     }
 
     function _getEmptyTransactionModel() {
@@ -795,7 +811,7 @@
             companyName: "",
             activityAddress: _createAddressModel(),
             confirmContactValid: false,
-            activityContact: _createContactModel(),
+            activityContact: _createContactModel()
         };
 
         return defaultTransactionData;
@@ -867,7 +883,7 @@
                 bank_wire: NO,
                 bill_payment: NO
             }
-        }
+        };
         return feeObj;
     }
 

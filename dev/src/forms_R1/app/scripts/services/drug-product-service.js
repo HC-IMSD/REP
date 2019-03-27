@@ -19,11 +19,12 @@
     angular
         .module('drugProductService')
         .factory('DrugProductService', DrugProductService);
-    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_2_0_PREFIX'];
 
-    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
+    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_2_0_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
+        var xslName = XSL_2_0_PREFIX + "REP_PI_2_0.xsl";
 
         // Define the DrugProductService object
         function DrugProductService() {
@@ -53,7 +54,7 @@
                 dateSaved: "",
                 //applicationType: "NEW",
                 softwareVersion: "2.0.0",
-                xslFileName: "REP_PI_2_0.xsl",
+                xslFileName: xslName,
                 dataChecksum: "",
                 //dossierType: "",
                // properName: "",

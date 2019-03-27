@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('companyService', ['dataLists']);
+        .module('companyService', ['dataLists', 'hpfbConstants']);
 })();
 
 (function () {
@@ -15,8 +15,8 @@
         .module('companyService')
         .factory('CompanyService', CompanyService);
 
-    CompanyService.$inject = ['$filter', 'getCountryAndProvinces'];
-    function CompanyService($filter, getCountryAndProvinces) {
+    CompanyService.$inject = ['$filter', 'getCountryAndProvinces', 'XSL_2_0_PREFIX'];
+    function CompanyService($filter, getCountryAndProvinces, XSL_2_0_PREFIX) {
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
@@ -40,7 +40,7 @@
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
             this.contactId = 0;
-            this.xslFileName = "REP_CO_2_0.xsl";
+            this.xslFileName = XSL_2_0_PREFIX + "REP_CO_2_0.xsl";
         }
         //TODO rewrite this object to proper prototype syntax
         CompanyService.prototype = {
