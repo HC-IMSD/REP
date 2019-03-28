@@ -140,8 +140,8 @@
                              <select name="{{::dos.drugUseId}}" class="form-control"
                                      data-ng-model="dos.dossierModel.drugProduct.drugUse" id="{{::dos.drugUseId}}"
                                      data-ng-options="use[dos.lang] for use in  dos.drugUseList track by use.id"
-                                     required><option label=" " value="" /></select>
-
+                                     required><option label=" " value="" />
+                             </select>
                          </label>
                      </div>
                  </div>
@@ -159,8 +159,8 @@
                                             error-types="dos.requiredOnly"></cmp-error-message>
                          </label>
                          <textarea class="form-control full-width" id="{{::dos.relatedInfoId}}" name="{{::dos.relatedInfoId}}"
-                                   data-ng-model="dos.dossierModel.relatedInfo" rows="4" required></textarea>
-
+                                   data-ng-model="dos.dossierModel.relatedInfo" rows="4" required>
+                         </textarea>
                      </div>
                  </div>
                  <div class="row">

@@ -428,8 +428,9 @@
             //create a json where the key is the name, and the value is the index (ie the position it should be
             //this allows lookup by name and gets the index
             for (var v = 0; v < keyList.length; v++) {
-                //specifically handled no item errors
-                if(keyList[v].startsWith("no_")){
+                //specifically handled no item errors (!String.prototype.startsWith does not support IE)
+                // if(keyList[v].startsWith("no_")){
+                if(keyList[v].indexOf("no_") == 0) {
                     keyList[v]=keyList[v].replace("no_", "list_");
                 }
                 sortedDomJsonList[keyList[v]] = v;
