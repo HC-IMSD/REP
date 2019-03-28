@@ -93,6 +93,9 @@
                     }
                 //}
             }
+            if(changes.disableSelection){
+                vm.disableExpand=changes.disableSelection.currentValue;
+            }
             if(changes.selectRecord){
                 var selectIndex=parseInt(changes.selectRecord.currentValue);
                 if(selectIndex>=0) {
@@ -100,9 +103,6 @@
                 }else{
                     vm.resetTableRow();
                 }
-            }
-            if(changes.disableSelection){
-                vm.disableExpand=changes.disableSelection.currentValue;
             }
 
             if(changes.columnDef) {
@@ -256,6 +256,7 @@
 
         vm.isRequiredRecordSet = function () {
             if (vm.isRequiredRecord && !vm.isInternal) {
+                vm.isRequiredRecord = false;
                 return true;
             }
             return false;
