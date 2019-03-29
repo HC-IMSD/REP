@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!-- ****************************** -->
+<!-- Dossier Enrolment version 0.1 -->
+<!-- ****************************** -->
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<hpfb:include schemaLocation="common/data_types.xsd"/>
+	<hpfb:include schemaLocation="common/contact.xsd"/>
+	<hpfb:include schemaLocation="common/address.xsd"/>
+	<hpfb:include schemaLocation="common/country_province.xsd"/>
+	<hpfb:include schemaLocation="common/drug_data_lists.xsd"/>
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<!-- DOSSIER_ENROL is the root element-->
+	<!-- REP Dossier Level element definitions-->
+	<hpfb:element name="DOSSIER_ENROL" type="dossier_enrol_content"/>
+	<hpfb:element name="template_type" type="hpfb:string"/>
+	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
+	<hpfb:element name="application_type" type="rep_type"/>
+	<hpfb:element name="software_version" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
+	<hpfb:element name="contact_record" type="contact_record_content"/>
+	<hpfb:element name="amend_record" type="required_yes_no_content"/>
+	<hpfb:element name="rep_contact_role" type="rep_contact_role_list"/>
+	<hpfb:element name="rep_contact_details" type="contact_content"/>
+	<hpfb:element name="dossier_id" type="char_0_7_content"/>
+	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="related_information" type="char_1_256_content"/>
+	<!-- Drug Product element definitions-->
+	<hpfb:element name="product_name" type="char_1_200_content"/>
+	<hpfb:element name="common_name" type="char_1_256_content"/>
+	<hpfb:element name="dossier_type" type="form_types_content"/>
+	<!--<hpfb:element name="third_party_signed" type="required_yes_no_content"/> -->
+	<hpfb:element name="therapeutic_class_list" type="therapeutic_class_content"/>
+	<hpfb:element name="therapeutic_class" type="char_1_256_content"/>
+	<hpfb:element name="is_ref_product" type="required_yes_no_content"/>
+	<hpfb:element name="cdn_ref_product" type="cdn_ref_product_content"/>
+	<hpfb:element name="brand_name" type="char_1_256_content"/>
+	<hpfb:element name="company_name" type="char_1_256_content"/>
+	<hpfb:element name="drug_use">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
+	<!-- Main references-->
+	<hpfb:complexType name="dossier_enrol_content">
+		<hpfb:sequence>
+			<hpfb:element ref="template_type"/>
+			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="related_information"/>
+			<hpfb:element ref="enrolment_version"/>
+			<hpfb:element ref="date_saved"/>
+			<hpfb:element ref="application_type"/>
+			<hpfb:element ref="software_version"/>
+			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="contact_record"/>
+			<hpfb:element ref="dossier_type"/>
+			<hpfb:element ref="product_name"/>
+			<hpfb:element ref="common_name"/>
+			<!-- <hpfb:element ref="third_party_signed"/> -->
+			<hpfb:element ref="is_ref_product"/>
+			<hpfb:element ref="cdn_ref_product"/>
+			<hpfb:element ref="drug_use"/>
+			<hpfb:element ref="therapeutic_class_list"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="contact_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="amend_record"/>
+			<hpfb:element ref="rep_contact_role"/>
+			<hpfb:element ref="rep_contact_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="therapeutic_class_content">
+		<hpfb:sequence>
+			<hpfb:element ref="therapeutic_class" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="cdn_ref_product_content">
+		<hpfb:sequence>
+			<hpfb:element ref="brand_name"/>
+			<hpfb:element ref="company_name"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+</hpfb:schema>

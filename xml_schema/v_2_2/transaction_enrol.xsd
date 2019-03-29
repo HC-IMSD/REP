@@ -3,10 +3,10 @@
 <!-- Company Enrolment version 0.1 -->
 <!-- ****************************** -->
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
-	<hpfb:include schemaLocation="./common/data_types.xsd"/>
-	<hpfb:include schemaLocation="./common/contact.xsd"/>
-	<hpfb:include schemaLocation="./common/address.xsd"/>
-	<hpfb:include schemaLocation="./common/sequence_descriptions.xsd"/>
+	<hpfb:include schemaLocation="common/data_types.xsd"/>
+	<hpfb:include schemaLocation="common/contact.xsd"/>
+	<hpfb:include schemaLocation="common/address.xsd"/>
+	<hpfb:include schemaLocation="common/sequence_descriptions.xsd"/>
 	<!-- ****************************** -->
 	<!-- ELEMENT DECLARATIONS -->
 	<!-- ****************************** -->
@@ -26,16 +26,33 @@
 	<hpfb:element name="ectd" type="ectd_content"/>
 	<hpfb:element name="company_id" type="char_0_6_content"/>
 	<hpfb:element name="dossier_id" type="char_0_20_content"/>
-	<hpfb:element name="dossier_type" type="char_0_20_content"/>
+	<hpfb:element name="dossier_type">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="id" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
 	<hpfb:element name="product_name" type="char_0_256_content"/>
 	<!--<hpfb:element name="sequence_number" type="sequence_content"/>-->
 	<!--<hpfb:element name="date_filed" type="yyyymmdd_date_content"/>-->
 	<hpfb:element name="control_number" type="control_number_content" nillable="true"/>
-	<hpfb:element name="sequence_activity_lead" type="char_0_20_content"/>
-	<hpfb:element name="sequence_activity_type">
-	<hpfb:complexType>
+	<hpfb:element name="regulatory_activity_lead">
+		<hpfb:complexType>
 			<hpfb:simpleContent>
 				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="id" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="regulatory_activity_type">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="id" type="hpfb:string"/>
 					<hpfb:attribute name="label_en" type="hpfb:string"/>
 					<hpfb:attribute name="label_fr" type="hpfb:string"/>
 				</hpfb:extension>
@@ -47,13 +64,13 @@
 	<hpfb:element name="sequence_to_date" type="optional_yyyymmdd_date_content"/>
 	<hpfb:element name="sequence_version" type="number_0_5_content"/>
 	<hpfb:element name="sequence_details" type="char_0_50_content"/>
-	<hpfb:element name="sequence_concat" type="hpfb:string"/>
+	<hpfb:element name="transaction_description" type="hpfb:string"/>
 	<hpfb:element name="sequence_year" type="char_0_6_content"/>
 
 	<hpfb:element name="lifecycle_record" type="lifecycle_record_content"/>
 	<hpfb:element name="is_solicited" type="required_yes_no_content"/>
     <hpfb:element name="solicited_requester_sequence" type="sequence_content"/>
-    <hpfb:element name="solicited_requester" type="char_0_256_content"/>
+    <hpfb:element name="requester_of_solicited_information" type="char_0_256_content"/>
 	<hpfb:element name="solicited_requester_record" type="solicited_requester_record_content"/>
 	<hpfb:element name="regulatory_project_manager1" type="char_0_256_content"/>
 	<hpfb:element name="regulatory_project_manager2" type="char_0_256_content"/>
@@ -113,11 +130,11 @@
 			<hpfb:element ref="is_priority"/>
 			<hpfb:element ref="is_noc"/>
 			<hpfb:element ref="is_admin_sub"/>
-			<hpfb:element ref="sub_type"/>
+			<hpfb:element ref="sub_type" minOccurs="0" maxOccurs="1"/>
 			<!--<hpfb:element ref="is_ectd"/> -->
 			<hpfb:element ref="ectd"/>
 			<hpfb:element ref="is_solicited"/>
-			<hpfb:element ref="solicited_requester"/>
+			<hpfb:element ref="solicited_requester_record" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="regulatory_project_manager1"/>
 			<hpfb:element ref="regulatory_project_manager2"/>
 			<hpfb:element ref="is_fees"/>
@@ -135,9 +152,9 @@
 
 	<hpfb:complexType name="sub_type_content">
 		<hpfb:sequence>
-			<hpfb:element ref="id"/>
-			<hpfb:element ref="en"/>
-			<hpfb:element ref="fr"/>
+			<hpfb:element ref="id" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="en" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="fr" minOccurs="0" maxOccurs="1"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -147,7 +164,7 @@
 			<hpfb:element ref="dossier_id"/>
 			<hpfb:element ref="dossier_type"/>
 			<hpfb:element ref="product_name"/>
-			<hpfb:element ref="lifecycle_record" minOccurs="1" maxOccurs="unbounded"/>
+			<hpfb:element ref="lifecycle_record" minOccurs="1" maxOccurs="1"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -156,22 +173,22 @@
 			<!--<hpfb:element ref="sequence_number"/>
 			<hpfb:element ref="date_filed"/> -->
 			<hpfb:element ref="control_number"/>
-			<hpfb:element ref="sequence_activity_lead"/>
-			<hpfb:element ref="sequence_activity_type"/>
+			<hpfb:element ref="regulatory_activity_lead"/>
+			<hpfb:element ref="regulatory_activity_type"/>
 			<hpfb:element ref="sequence_description_value"/>
 			<hpfb:element ref="sequence_from_date"/>
 			<hpfb:element ref="sequence_to_date"/>
 			<hpfb:element ref="sequence_details"/>
 			<hpfb:element ref="sequence_version"/>
 			<hpfb:element ref="sequence_year"/>
-			<hpfb:element ref="sequence_concat"/>
+			<hpfb:element ref="transaction_description"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
 	<hpfb:complexType name="solicited_requester_record_content">
 		<hpfb:sequence>
 			<hpfb:element ref="solicited_requester_sequence"/>
-			<hpfb:element ref="solicited_requester"/>
+			<hpfb:element ref="requester_of_solicited_information"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -193,8 +210,7 @@
 			
 		</hpfb:sequence>
 	</hpfb:complexType>
-	
-	
+
 	<hpfb:complexType name="submission_class_content">
 		<hpfb:sequence>
 			<hpfb:element ref="id"/>
@@ -220,7 +236,6 @@
 		</hpfb:sequence>
 	</hpfb:complexType>
 
-
 	<hpfb:complexType name="payment_method_content">
 		<hpfb:sequence>
 			<hpfb:element ref="credit_card"/>
@@ -232,8 +247,5 @@
 			<hpfb:element ref="bill_payment"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-
-
-
 
 </hpfb:schema>

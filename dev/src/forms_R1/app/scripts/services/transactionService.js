@@ -17,14 +17,14 @@
         .factory('TransactionService', TransactionService);
 
     TransactionService.$inject = ['$filter', '$translate', 'getCountryAndProvinces', 'getContactLists',
-        'TransactionLists', 'YES', 'NO', 'HCSC', 'ENGLISH', 'FRENCH', 'XSL_2_0_PREFIX'];
+        'TransactionLists', 'YES', 'NO', 'HCSC', 'ENGLISH', 'FRENCH', 'XSL_PREFIX'];
 
     //version 1.1 bug fix?
     //version 1.2 added Submission package/rq to MPNC, MPDNS
     //version 1.3 Chnage Lifecycle Rec associations of Sequence Clean-up and Notification of interruption of sale
 
     function TransactionService($filter, $translate, getCountryAndProvinces, getContactLists, TransactionLists,
-                                YES, NO, HCSC, ENGLISH, FRENCH, XSL_2_0_PREFIX) {
+                                YES, NO, HCSC, ENGLISH, FRENCH, XSL_PREFIX) {
         //var vm = this;
         this.baseRequesters = [];
         this.userList =[];
@@ -67,7 +67,7 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
-            this.xslFileName = XSL_2_0_PREFIX + "REP_RT_2_0_1.xsl";
+            this.xslFileName = XSL_PREFIX + "REP_RT_2_2.xsl";
         }
 
         function loadContactData() {
@@ -591,9 +591,11 @@
      * @private
      */
     function _setActivityTypeValuesForOutput(srcActivityTypeRec, destActivityTypeRec, currentLang, ENGLISH, FRENCH) {
-        var stringIndex = srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
+        // var stringIndex = srcActivityTypeRec.en.indexOf(" ("); //finc space and open bracket
         destActivityTypeRec._id = srcActivityTypeRec.id;
-
+        destActivityTypeRec._label_en = srcActivityTypeRec.en;
+        destActivityTypeRec._label_fr = srcActivityTypeRec.fr;
+        /*
         if (stringIndex > -1) {
             destActivityTypeRec._label_en = srcActivityTypeRec.en.substring(0, stringIndex)
         } else {
@@ -605,6 +607,7 @@
         } else {
             destActivityTypeRec._label_fr = srcActivityTypeRec.fr;
         }
+        */
         if (currentLang === ENGLISH) {
             destActivityTypeRec.__text = destActivityTypeRec._label_en;
         } else if (currentLang === FRENCH) {

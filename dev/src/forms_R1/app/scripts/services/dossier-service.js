@@ -20,13 +20,13 @@
         .module('dossierService')
         .factory('DossierService', DossierService);
     DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces',
-            'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_2_0_PREFIX'];
+            'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_PREFIX'];
 
     function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces,
-                            SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO, XSL_2_0_PREFIX) {
+                            SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO, XSL_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
-        var xslName = XSL_2_0_PREFIX + "REP_DO_2_0.xsl";
+        var xslName = XSL_PREFIX + "REP_DO_2_2.xsl";
 
         // Define the DossierService objecy
         function DossierService() {

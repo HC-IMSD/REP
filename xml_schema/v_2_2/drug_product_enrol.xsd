@@ -1,0 +1,701 @@
+<?xml version="1.0"?>
+<!-- ****************************** -->
+<!-- Drug Product Enrolment version 0.1 -->
+<!-- ****************************** -->
+<hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<hpfb:include schemaLocation="common/data_types.xsd"/>
+	<hpfb:include schemaLocation="common/contact.xsd"/>
+	<hpfb:include schemaLocation="common/address.xsd"/>
+	<hpfb:include schemaLocation="common/country_province.xsd"/>
+	<hpfb:include schemaLocation="common/drug_data_lists.xsd"/>
+	<!-- ****************************** -->
+	<!-- ELEMENT DECLARATIONS -->
+	<!-- ****************************** -->
+	<!-- DRUG_PRODUCT_ENROL is the root element-->
+	<!-- REP Dossier Level element definitions-->
+	<hpfb:element name="DRUG_PRODUCT_ENROL" type="drug_product_enrol_content"/>
+	<hpfb:element name="enrolment_version" type="hpfb:decimal"/>
+	<hpfb:element name="date_saved" type="yyyymmdd_date_content"/>
+	<hpfb:element name="software_version" type="hpfb:string"/>
+	<hpfb:element name="data_checksum" type="hpfb:string"/>
+	<hpfb:element name="company_id" type="char_1_6_content"/>
+	<hpfb:element name="dossier_id" type="char_0_7_content"/>
+	<hpfb:element name="product_name" type="char_1_256_content"/>
+	<hpfb:element name="proper_name" type="char_1_256_content"/>
+	<hpfb:element name="importer_record" type="importer_record_content"/>
+	<hpfb:element name="importer_company_id" type="char_0_6_content"/>
+	<hpfb:element name="importer_company_name" type="char_0_256_content"/>
+	<hpfb:element name="is_sched_c" type="required_yes_no_content"/>
+	<hpfb:element name="is_sched_d" type="required_yes_no_content"/>
+	<hpfb:element name="is_sched_f" type="required_yes_no_content"/>
+	<hpfb:element name="is_regulated_cdsa" type="required_yes_no_content"/>
+	<hpfb:element name="is_prescription_drug" type="required_yes_no_content"/>
+	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
+	<hpfb:element name="proposed_indication" type="char_1_1024_content"/>
+	<!-- Drug Product element definitions-->
+
+	<hpfb:element name="drug_use">
+	<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
+	<hpfb:element name="disinfectant_type" type="disinfectant_type_content"/>
+	<hpfb:element name="hospital" type="required_yes_no_content"/>
+	<hpfb:element name="food_processing" type="required_yes_no_content"/>
+	<hpfb:element name="medical_instruments" type="required_yes_no_content"/>
+	<hpfb:element name="domestic" type="required_yes_no_content"/>
+	<hpfb:element name="barn" type="required_yes_no_content"/>
+	<hpfb:element name="institutional_industrial" type="required_yes_no_content"/>
+	<hpfb:element name="contact_lens" type="required_yes_no_content"/>
+
+	<!-- Schedule A definitions-->
+	<hpfb:element name="schedule_a_group" type="schedule_a_content"/>
+	<hpfb:element name="din_number" type="din_content"/>
+	<hpfb:element name="acute_alcohol" type="required_yes_no_content"/>
+	<hpfb:element name="acute_anxiety" type="required_yes_no_content"/>
+	<hpfb:element name="acute_infectious" type="required_yes_no_content"/>
+	<hpfb:element name="acute_inflammatory" type="required_yes_no_content"/>
+	<hpfb:element name="acute_psychotic" type="required_yes_no_content"/>
+	<hpfb:element name="addiction" type="required_yes_no_content"/>
+	<hpfb:element name="ateriosclerosis" type="required_yes_no_content"/>
+	<hpfb:element name="appendicitis" type="required_yes_no_content"/>
+	<hpfb:element name="asthma" type="required_yes_no_content"/>
+	<hpfb:element name="cancer" type="required_yes_no_content"/>
+	<hpfb:element name="congest_heart_fail" type="required_yes_no_content"/>
+	<hpfb:element name="convulsions" type="required_yes_no_content"/>
+	<hpfb:element name="dementia" type="required_yes_no_content"/>
+	<hpfb:element name="depression" type="required_yes_no_content"/>
+	<hpfb:element name="diabetes" type="required_yes_no_content"/>
+	<hpfb:element name="gangrene" type="required_yes_no_content"/>
+	<hpfb:element name="glaucoma" type="required_yes_no_content"/>
+	<hpfb:element name="haematologic_bleeding" type="required_yes_no_content"/>
+	<hpfb:element name="hepatitis" type="required_yes_no_content"/>
+	<hpfb:element name="hypertension" type="required_yes_no_content"/>
+	<hpfb:element name="nausea_pregnancy" type="required_yes_no_content"/>
+	<hpfb:element name="obesity" type="required_yes_no_content"/>
+	<hpfb:element name="rheumatic_fever" type="required_yes_no_content"/>
+	<hpfb:element name="septicemia" type="required_yes_no_content"/>
+	<hpfb:element name="sex_transmit_disease" type="required_yes_no_content"/>
+	<hpfb:element name="strangulated_hernia" type="required_yes_no_content"/>
+	<hpfb:element name="thrombotic_embolic_disorder" type="required_yes_no_content"/>
+	<hpfb:element name="thyroid_disease" type="required_yes_no_content"/>
+	<hpfb:element name="ulcer_gastro" type="required_yes_no_content"/>
+	<hpfb:element name="sched_a_claims_ind_details" type="char_1_256_content"/>
+	<!-- ingredients-->
+	<hpfb:element name="appendix4_group" type="appendix4_content"/>
+	<hpfb:element name="ingredient_role" type="char_1_100_content"/>
+	<hpfb:element name="ingredient_id" type="char_0_40_content" nillable="true"/>
+	<hpfb:element name="ingredient_name" type="char_1_100_content"/>
+	<hpfb:element name="cas_number" type="cas_content" nillable="true"/>
+	<hpfb:element name="ingred_standard" type="char_0_40_content"/>
+	<hpfb:element name="is_human_animal_src" type="required_yes_no_content"/>
+	<hpfb:element name="animal_sourced" type="required_yes_no_content"/>
+	<hpfb:element name="human_sourced" type="required_yes_no_content"/>
+	<hpfb:element name="tissues_fluids_section" type="tissues_fluids_content"/>
+	<hpfb:element name="animal_sourced_section" type="animal_sourced_content"/>
+	<!-- tissues fluids-->
+	<!-- Start nervous system-->
+	<hpfb:element name="nervous_system" type="nervous_system_content"/>
+	<hpfb:element name="brain" type="required_yes_no_content"/>
+	<hpfb:element name="brain_stem" type="required_yes_no_content"/>
+	<hpfb:element name="cerebellum" type="required_yes_no_content"/>
+	<hpfb:element name="cerebrospinal_fluid" type="required_yes_no_content"/>
+	<hpfb:element name="dorsal_root_ganglia" type="required_yes_no_content"/>
+	<hpfb:element name="dura_mater" type="required_yes_no_content"/>
+	<hpfb:element name="hypothalmus" type="required_yes_no_content"/>
+	<hpfb:element name="retina_optic" type="required_yes_no_content"/>
+	<hpfb:element name="spinal_cord" type="required_yes_no_content"/>
+	<hpfb:element name="trigerminal_ganglia" type="required_yes_no_content"/>
+	<hpfb:element name="other_nervous" type="required_yes_no_content"/>
+	<hpfb:element name="other_nervous_details" type="char_0_40_content"/>
+	<!-- Start digestive system-->
+	<hpfb:element name="digestive_system" type="digestive_system_content"/>
+	<hpfb:element name="appendix" type="required_yes_no_content"/>
+	<hpfb:element name="bile" type="required_yes_no_content"/>
+	<hpfb:element name="distal_ileum" type="required_yes_no_content"/>
+	<hpfb:element name="large_intestine" type="required_yes_no_content"/>
+	<hpfb:element name="saliva_salivary" type="required_yes_no_content"/>
+	<hpfb:element name="small_intestine" type="required_yes_no_content"/>
+	<hpfb:element name="stomach" type="required_yes_no_content"/>
+	<hpfb:element name="other_digestive" type="required_yes_no_content"/>
+	<hpfb:element name="other_digestive_details" type="char_0_40_content"/>
+	<!-- Start reproductive system-->
+	<hpfb:element name="reproductive_system" type="reproductive_system_content"/>
+	<hpfb:element name="milk_products" type="required_yes_no_content"/>
+	<hpfb:element name="kidney" type="required_yes_no_content"/>
+	<hpfb:element name="colostrum" type="required_yes_no_content"/>
+	<hpfb:element name="mammary_glands" type="required_yes_no_content"/>
+	<hpfb:element name="ovaries" type="required_yes_no_content"/>
+	<hpfb:element name="placenta" type="required_yes_no_content"/>
+	<hpfb:element name="placental_fluid" type="required_yes_no_content"/>
+	<hpfb:element name="semen" type="required_yes_no_content"/>
+	<hpfb:element name="testes" type="required_yes_no_content"/>
+	<hpfb:element name="urine" type="required_yes_no_content"/>
+	<hpfb:element name="other_reproductive" type="required_yes_no_content"/>
+	<hpfb:element name="other_reproductive_details" type="char_0_40_content"/>
+	<!-- Start cardio respiratory system-->
+	<hpfb:element name="cardio_system" type="cardio_system_content"/>
+	<hpfb:element name="heart_pericardium" type="required_yes_no_content"/>
+	<hpfb:element name="lung" type="required_yes_no_content"/>
+	<hpfb:element name="nasal_fluid" type="required_yes_no_content"/>
+	<hpfb:element name="trachea" type="required_yes_no_content"/>
+	<hpfb:element name="other_cardio_respiratory" type="required_yes_no_content"/>
+	<hpfb:element name="other_cardio_respiratory_details" type="char_0_40_content"/>
+	<!-- Start immune system-->
+	<hpfb:element name="immune_system" type="immune_system_content"/>
+	<hpfb:element name="lymph_nodes" type="required_yes_no_content"/>
+	<hpfb:element name="spleen" type="required_yes_no_content"/>
+	<hpfb:element name="thymus" type="required_yes_no_content"/>
+	<hpfb:element name="tonsils" type="required_yes_no_content"/>
+	<hpfb:element name="other_immune" type="required_yes_no_content"/>
+	<hpfb:element name="other_immune_details" type="char_0_40_content"/>
+	<!-- Start skin glandular system-->
+	<hpfb:element name="skin_system" type="skin_system_content"/>
+	<hpfb:element name="adrenal_gland" type="required_yes_no_content"/>
+	<hpfb:element name="hair_hooves_feathers" type="required_yes_no_content"/>
+	<hpfb:element name="liver" type="required_yes_no_content"/>
+	<hpfb:element name="pancreas" type="required_yes_no_content"/>
+	<hpfb:element name="pituitary" type="required_yes_no_content"/>
+	<hpfb:element name="skin_hides" type="required_yes_no_content"/>
+	<hpfb:element name="thyroid_parathyroid" type="required_yes_no_content"/>
+	<hpfb:element name="other_skin_glandular" type="required_yes_no_content"/>
+	<hpfb:element name="other_skin_glandular_details" type="char_0_40_content"/>
+	<!-- Start musculo-Skeletal system-->
+	<hpfb:element name="musclo_system" type="musclo_system_content"/>
+	<hpfb:element name="abdomen" type="required_yes_no_content"/>
+	<hpfb:element name="skull" type="required_yes_no_content"/>
+	<hpfb:element name="bones" type="required_yes_no_content"/>
+	<hpfb:element name="collagen" type="required_yes_no_content"/>
+	<hpfb:element name="tendons_ligaments" type="required_yes_no_content"/>
+	<hpfb:element name="vertebral_column" type="required_yes_no_content"/>
+	<hpfb:element name="muscle" type="required_yes_no_content"/>
+	<hpfb:element name="other_musculo_skeletal" type="required_yes_no_content"/>
+	<hpfb:element name="other_musculo_skeletal_details" type="char_0_40_content"/>
+	<!-- Start other system-->
+	<hpfb:element name="other_system" type="other_system_content"/>
+	<hpfb:element name="adipose" type="required_yes_no_content"/>
+	<hpfb:element name="ascites" type="required_yes_no_content"/>
+	<hpfb:element name="antler_velvet" type="required_yes_no_content"/>
+	<hpfb:element name="serum" type="required_yes_no_content"/>
+	<hpfb:element name="whole_blood" type="required_yes_no_content"/>
+	<hpfb:element name="plasma" type="required_yes_no_content"/>
+	<hpfb:element name="embryonic_tissue" type="required_yes_no_content"/>
+	<hpfb:element name="fetal_tissue" type="required_yes_no_content"/>
+	<hpfb:element name="bone_marrow" type="required_yes_no_content"/>
+	<hpfb:element name="eyes_cornea" type="required_yes_no_content"/>
+	<hpfb:element name="gall_bladder" type="required_yes_no_content"/>
+	<hpfb:element name="other_fluids_tissues" type="required_yes_no_content"/>
+	<hpfb:element name="other_fluids_tissues_details" type="char_0_40_content"/>
+	<!-- Animal Sourced content-->
+
+	<hpfb:element name="animal_src_record" type="animal_source_record"/>
+	<hpfb:element name="animal_type"/>
+	<hpfb:element name="animal_detail" type="char_1_40_content"/>
+	<hpfb:element name="is_controlled_pop" type="required_yes_no_unknown_content"/>
+	<hpfb:element name="is_biotech_derived" type="required_yes_no_content"/>
+	<hpfb:element name="is_cell_line" type="required_yes_no_content"/>
+	<hpfb:element name="is_animal_age_known" type="required_yes_no_content"/>
+	<hpfb:element name="animal_age" type="integer_0_999_content"/>
+	<hpfb:element name="country_with_unknown">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
+	<hpfb:element name="country_origin_list" type="country_origin_list_content"/>
+	<hpfb:element name="unknown_country_details" type="char_0_100_content"/>
+	<hpfb:element name="country_origin" type="country_origin_content"/>
+
+	<!-- Formulation Information-->
+	<hpfb:element name="formulation_group" type="formulations_content"/>
+	<hpfb:element name="formulation_name" type="char_0_100_content"/>
+	<hpfb:element name="formulation_id" type="char_0_100_content"/>
+	<hpfb:element name="formulation_details" type="formulation_content"/>
+	<hpfb:element name="roa_group" type="roa_content"/>
+	<hpfb:element name="roa_details" type="roa_details_content"/>
+	<hpfb:element name="roa">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="roa_other" type="char_0_40_content"/>
+	<hpfb:element name="country_group" type="country_group_content"/>
+	<hpfb:element name="country_manufacturer">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+
+	<hpfb:element name="container_group" type="container_group_content"/>
+	<hpfb:element name="container_details" type="container_details_content"/>
+	<hpfb:element name="container_type" type="char_1_256_content"/>
+	<hpfb:element name="package_size" type="char_1_256_content"/>
+	<hpfb:element name="shelf_life_unit">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="shelf_life_number" type="optional_integer_0_99_content"/>
+	<hpfb:element name="temperature_min" type="temp_integer_content" />
+	<hpfb:element name="temperature_max" type="temp_integer_content" />
+	<hpfb:element name="formulation_ingredient" type="ingredient_content"/>
+	<hpfb:element name="material_ingredient" type="material_group_content"/>
+	<hpfb:element name="strength" type="strength_content"/>
+	<hpfb:element name="operator">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="data1" type="optional_integer_0_9999_content"/>
+	<hpfb:element name="data2" type="optional_integer_0_9999_content"/>
+	<hpfb:element name="units">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="units_other" type="char_0_40_content"/>
+	<hpfb:element name="per">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="per_value" type="integer_0_999_content"/>
+	<hpfb:element name="per_units">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="per_units_other_details" type="char_0_40_content"/>
+	<hpfb:element name="is_base_calc" type="required_yes_no_content"/>
+	<hpfb:element name="is_nanomaterial" type="required_yes_no_content"/>
+	<hpfb:element name="nanomaterial">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="nanomaterial_details" type="char_0_40_content"/>
+	<hpfb:element name="is_animal_human_material" type="required_yes_no_content"/>
+	<hpfb:element name="variant_name" type="char_0_100_content"/>
+	<hpfb:element name="in_final_container" type="required_yes_no_content"/>
+
+	
+	<!-- Main references-->
+	<hpfb:complexType name="drug_product_enrol_content">
+		<hpfb:sequence>
+			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="product_name"/>
+			<hpfb:element ref="proper_name"/>
+			<hpfb:element ref="importer_record" minOccurs="0" maxOccurs="unbounded"/>
+			<hpfb:element ref="enrolment_version"/>
+			<hpfb:element ref="date_saved"/>
+			<hpfb:element ref="software_version"/>
+			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="drug_use"/>
+			<hpfb:element ref="disinfectant_type"/>
+			<hpfb:element ref="is_sched_c"/>
+			<hpfb:element ref="is_sched_d"/>
+			<hpfb:element ref="is_sched_f"/>
+			<hpfb:element ref="is_regulated_cdsa"/>
+			<hpfb:element ref="is_prescription_drug"/>
+			<hpfb:element ref="is_sched_a"/>
+			<hpfb:element ref="proposed_indication"/>
+			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="appendix4_group" minOccurs="0" maxOccurs="unbounded"/>
+			<hpfb:element ref="formulation_group"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="importer_record_content">
+		<hpfb:sequence>
+			<hpfb:element ref="importer_company_id"/>
+			<hpfb:element ref="importer_company_name"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="disinfectant_type_content">
+		<hpfb:sequence>
+			<hpfb:element ref="hospital"/>
+			<hpfb:element ref="food_processing"/>
+			<hpfb:element ref="medical_instruments"/>
+			<hpfb:element ref="domestic"/>
+			<hpfb:element ref="barn"/>
+			<hpfb:element ref="institutional_industrial"/>
+			<hpfb:element ref="contact_lens"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="schedule_a_content">
+		<hpfb:sequence>
+			<hpfb:element ref="din_number"/>
+			<hpfb:element ref="acute_alcohol"/>
+			<hpfb:element ref="acute_anxiety"/>
+			<hpfb:element ref="acute_infectious"/>
+			<hpfb:element ref="acute_inflammatory"/>
+			<hpfb:element ref="acute_psychotic"/>
+			<hpfb:element ref="addiction"/>
+			<hpfb:element ref="ateriosclerosis"/>
+			<hpfb:element ref="appendicitis"/>
+			<hpfb:element ref="asthma"/>
+			<hpfb:element ref="cancer"/>
+			<hpfb:element ref="congest_heart_fail"/>
+			<hpfb:element ref="convulsions"/>
+			<hpfb:element ref="dementia"/>
+			<hpfb:element ref="depression"/>
+			<hpfb:element ref="diabetes"/>
+			<hpfb:element ref="gangrene"/>
+			<hpfb:element ref="glaucoma"/>
+			<hpfb:element ref="haematologic_bleeding"/>
+			<hpfb:element ref="hepatitis"/>
+			<hpfb:element ref="hypertension"/>
+			<hpfb:element ref="nausea_pregnancy"/>
+			<hpfb:element ref="obesity"/>
+			<hpfb:element ref="rheumatic_fever"/>
+			<hpfb:element ref="septicemia"/>
+			<hpfb:element ref="sex_transmit_disease"/>
+			<hpfb:element ref="strangulated_hernia"/>
+			<hpfb:element ref="thrombotic_embolic_disorder"/>
+			<hpfb:element ref="thyroid_disease"/>
+			<hpfb:element ref="ulcer_gastro"/>
+			<hpfb:element ref="sched_a_claims_ind_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="country_group_content">
+		<hpfb:sequence>
+			<hpfb:element ref="country_manufacturer" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="appendix4_content">
+		<hpfb:sequence>
+			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
+			<hpfb:element ref="animal_sourced"/>
+			<hpfb:element ref="human_sourced"/>
+			<hpfb:element ref="tissues_fluids_section" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="animal_sourced_section" minOccurs="0" maxOccurs="1"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="animal_sourced_content">
+		<hpfb:sequence>
+			<hpfb:element ref="animal_src_record" minOccurs="1" maxOccurs="unbounded"/>
+			<hpfb:element ref="is_controlled_pop"/>
+			<hpfb:element ref="is_biotech_derived"/>
+			<hpfb:element ref="is_cell_line"/>
+			<hpfb:element ref="is_animal_age_known"/>
+			<hpfb:element ref="animal_age"/>
+			<hpfb:element ref="country_origin_list"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="country_origin_content">
+		<hpfb:sequence>
+			<hpfb:element ref="country_with_unknown"/>
+			<hpfb:element ref="unknown_country_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="animal_source_record">
+		<hpfb:sequence>
+			<hpfb:element ref="animal_type"/>
+			<hpfb:element ref="animal_detail"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+
+	<hpfb:complexType name="country_origin_list_content">
+		<hpfb:sequence>
+			<hpfb:element ref="country_origin" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="formulations_content">
+		<hpfb:sequence>
+			<hpfb:element ref="formulation_details" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="formulation_content">
+		<hpfb:sequence>
+			<hpfb:element ref="formulation_name"/>
+			<hpfb:element ref="formulation_id"/>
+			<hpfb:element ref="dosage_form_group"/>
+			<hpfb:element ref="roa_group"/>
+			<hpfb:element ref="container_group"/>
+			<hpfb:element ref="country_group"/>
+			<hpfb:element ref="formulation_ingredient" minOccurs="1" maxOccurs="unbounded"/>
+			<hpfb:element ref="is_animal_human_material"/>
+			<hpfb:element ref="material_ingredient" minOccurs="0" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="dosage_form_group_content">
+		<hpfb:sequence>
+			<hpfb:element ref="dosage_form"/>
+			<hpfb:element ref="dosage_form_other"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="roa_content">
+		<hpfb:sequence>
+			<hpfb:element ref="roa_details" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="roa_details_content">
+		<hpfb:sequence>
+			<hpfb:element ref="roa"/>
+			<hpfb:element ref="roa_other"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="container_group_content">
+		<hpfb:sequence>
+			<hpfb:element ref="container_details" minOccurs="1" maxOccurs="unbounded"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="container_details_content">
+		<hpfb:sequence>
+			<hpfb:element ref="container_type"/>
+			<hpfb:element ref="package_size"/>
+			<hpfb:element ref="shelf_life_unit"/>
+			<hpfb:element ref="shelf_life_number"/>
+			<hpfb:element ref="temperature_min"/>
+			<hpfb:element ref="temperature_max"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="ingredient_content">
+		<hpfb:sequence>
+			<hpfb:element ref="ingredient_role"/>
+			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
+			<hpfb:element ref="cas_number"/>
+			<hpfb:element ref="ingred_standard"/>
+			<hpfb:element ref="is_human_animal_src"/>
+			<hpfb:element ref="strength"/>
+			<hpfb:element ref="units"/>
+			<hpfb:element ref="units_other"/>
+			<hpfb:element ref="per"/>
+			<hpfb:element ref="per_value"/>
+			<hpfb:element ref="per_units"/>
+			<hpfb:element ref="per_units_other_details"/>
+			<hpfb:element ref="is_base_calc"/>
+			<hpfb:element ref="is_nanomaterial"/>
+			<hpfb:element ref="nanomaterial"/>
+			<hpfb:element ref="nanomaterial_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="material_group_content">
+		<hpfb:sequence>
+			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="ingredient_name"/>
+			<hpfb:element ref="cas_number"/>
+			<hpfb:element ref="ingred_standard"/>
+			<hpfb:element ref="in_final_container"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="tissues_fluids_content">
+		<hpfb:all>
+			<hpfb:element ref="nervous_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="digestive_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="musclo_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="reproductive_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="cardio_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="immune_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="skin_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="other_system" minOccurs="0" maxOccurs="1"/>
+		</hpfb:all>
+	</hpfb:complexType>
+
+
+	<hpfb:complexType name="nervous_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="brain"/>
+			<hpfb:element ref="brain_stem"/>
+			<hpfb:element ref="cerebellum"/>
+			<hpfb:element ref="cerebrospinal_fluid"/>
+			<hpfb:element ref="dorsal_root_ganglia"/>
+			<hpfb:element ref="dura_mater"/>
+			<hpfb:element ref="hypothalmus"/>
+			<hpfb:element ref="retina_optic"/>
+			<hpfb:element ref="spinal_cord"/>
+			<hpfb:element ref="trigerminal_ganglia"/>
+			<hpfb:element ref="other_nervous"/>
+			<hpfb:element ref="other_nervous_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="digestive_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="appendix"/>
+			<hpfb:element ref="bile"/>
+			<hpfb:element ref="distal_ileum"/>
+			<hpfb:element ref="large_intestine"/>
+			<hpfb:element ref="saliva_salivary"/>
+			<hpfb:element ref="small_intestine"/>
+			<hpfb:element ref="stomach"/>
+			<hpfb:element ref="other_digestive"/>
+			<hpfb:element ref="other_digestive_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="reproductive_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="milk_products"/>
+			<hpfb:element ref="kidney"/>
+			<hpfb:element ref="colostrum"/>
+			<hpfb:element ref="mammary_glands"/>
+			<hpfb:element ref="ovaries"/>
+			<hpfb:element ref="placenta"/>
+			<hpfb:element ref="placental_fluid"/>
+			<hpfb:element ref="semen"/>
+			<hpfb:element ref="testes"/>
+			<hpfb:element ref="urine"/>
+			<hpfb:element ref="other_reproductive"/>
+			<hpfb:element ref="other_reproductive_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="immune_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="lymph_nodes"/>
+			<hpfb:element ref="spleen"/>
+			<hpfb:element ref="thymus"/>
+			<hpfb:element ref="tonsils"/>
+			<hpfb:element ref="other_immune"/>
+			<hpfb:element ref="other_immune_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="skin_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="adrenal_gland"/>
+			<hpfb:element ref="hair_hooves_feathers"/>
+			<hpfb:element ref="liver"/>
+			<hpfb:element ref="pancreas"/>
+			<hpfb:element ref="pituitary"/>
+			<hpfb:element ref="skin_hides"/>
+			<hpfb:element ref="thyroid_parathyroid"/>
+			<hpfb:element ref="other_skin_glandular"/>
+			<hpfb:element ref="other_skin_glandular_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="musclo_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="abdomen"/>
+			<hpfb:element ref="skull"/>
+			<hpfb:element ref="bones"/>
+			<hpfb:element ref="collagen"/>
+			<hpfb:element ref="tendons_ligaments"/>
+			<hpfb:element ref="vertebral_column"/>
+			<hpfb:element ref="muscle"/>
+			<hpfb:element ref="other_musculo_skeletal"/>
+			<hpfb:element ref="other_musculo_skeletal_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+	<hpfb:complexType name="cardio_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="heart_pericardium"/>
+			<hpfb:element ref="lung"/>
+			<hpfb:element ref="nasal_fluid"/>
+			<hpfb:element ref="trachea"/>
+			<hpfb:element ref="other_cardio_respiratory"/>
+			<hpfb:element ref="other_cardio_respiratory_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:complexType name="other_system_content">
+		<hpfb:sequence>
+			<hpfb:element ref="adipose"/>
+			<hpfb:element ref="ascites"/>
+			<hpfb:element ref="antler_velvet"/>
+			<hpfb:element ref="serum"/>
+			<hpfb:element ref="whole_blood"/>
+			<hpfb:element ref="plasma"/>
+			<hpfb:element ref="embryonic_tissue"/>
+			<hpfb:element ref="fetal_tissue"/>
+			<hpfb:element ref="bone_marrow"/>
+			<hpfb:element ref="eyes_cornea"/>
+			<hpfb:element ref="gall_bladder"/>
+			<hpfb:element ref="other_fluids_tissues"/>
+			<hpfb:element ref="other_fluids_tissues_details"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+	<hpfb:element name="dosage_form_group" type="dosage_form_group_content"/>
+	<hpfb:element name="dosage_form">
+		<hpfb:complexType>
+			<hpfb:simpleContent>
+				<hpfb:extension base="hpfb:string">
+					<hpfb:attribute name="label_en" type="hpfb:string"/>
+					<hpfb:attribute name="label_fr" type="hpfb:string"/>
+				</hpfb:extension>
+			</hpfb:simpleContent>
+		</hpfb:complexType>
+	</hpfb:element>
+	<hpfb:element name="dosage_form_other" type="char_0_100_content"/>
+
+	<hpfb:complexType name="strength_content">
+		<hpfb:sequence>
+			<hpfb:element ref="operator"/>
+			<hpfb:element ref="data1"/>
+			<hpfb:element ref="data2"/>
+		</hpfb:sequence>
+	</hpfb:complexType>
+
+</hpfb:schema>

@@ -30,7 +30,7 @@
         .constant("CSP_XSL","CSP_Enrolment.xsl")
         .constant("HCSC","hcsc")
         .constant("XML","xml")
-        .constant("XSL_2_0_PREFIX","https://raw.githubusercontent.com/HealthCanada/HPFB/master/Regulatory-Enrolment-Process-REP/v_2_0/Style-Sheets/")
+        .constant("XSL_PREFIX","https://raw.githubusercontent.com/HealthCanada/HPFB/master/Regulatory-Enrolment-Process-REP/v_2_2/Style-Sheets/")
         .constant("ADVANCE_FEE_PAYMENT_EN","https://www.canada.ca/content/dam/hc-sc/migration/hc-sc/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av2-eng.pdf")
         .constant("ADVANCE_FEE_PAYMENT_FR","https://www.canada.ca/content/dam/hc-sc/migration/hc-sc/dhp-mps/alt_formats/pdf/prodpharma/applic-demande/form/adv-pa-av2-fra.pdf");
 })();

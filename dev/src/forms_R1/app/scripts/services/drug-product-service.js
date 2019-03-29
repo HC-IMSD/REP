@@ -19,12 +19,12 @@
     angular
         .module('drugProductService')
         .factory('DrugProductService', DrugProductService);
-    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_2_0_PREFIX'];
+    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_PREFIX'];
 
-    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_2_0_PREFIX) {
+    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
-        var xslName = XSL_2_0_PREFIX + "REP_PI_2_0.xsl";
+        var xslName = XSL_PREFIX + "REP_PI_2_2.xsl";
 
         // Define the DrugProductService object
         function DrugProductService() {
