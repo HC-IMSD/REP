@@ -157,7 +157,7 @@ var cspRootTitles_en = {
 };
 
 var cspRootTitles_fr = {
-    mainHeading: "Formulaire de la demande de certificat de protection supplémentaire (CPS)",
+    mainHeading: "Formulaire de demande de certificat de protection supplémentaire (CPS)",
     title: 'Formulaire de la demande de certificat de protection supplémentaire de Santé Canada'
 
 };
