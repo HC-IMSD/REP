@@ -49,10 +49,10 @@
             }
         });
 
-    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate'];
+    dossierCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DossierService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate','$anchorScroll','$location'];
 
 
-    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate) {
+    function dossierCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DossierService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate, $anchorScroll,$location) {
 
         var vm = this;
         vm.showContent = _loadFileContent; //binds the component to the function
@@ -307,6 +307,8 @@
                 vm.focusSummary++;
                // vm.showErrorSummary = vm.showErrorSummary + 1;
                 vm.updateErrorSummaryState();
+                goToErrorSummary();
+
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.dossierService.getRootTagName(),
@@ -316,8 +318,6 @@
                 vm.showSummary=false;
             }
         };
-
-
         /**
          * Takes the internal model and transforms to a json object compatible with the output
          * @returns {*}
@@ -424,6 +424,13 @@
             vm.setVisibleTabIndex = {id:index};
         };
 
+        function goToErrorSummary() {
+            var masterError = angular.element(document.querySelector('#master-error'));
+            if (masterError) {
+                $location.hash('master-error');
+                $anchorScroll();
+            }
+        }
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
@@ -441,6 +448,8 @@
             vm.relatedInfoId="related_info"+scopeId;
             vm.privacyStatementID = "privacy_statement" + scopeId;
         }
+
+
 
 
     }//endcontroller

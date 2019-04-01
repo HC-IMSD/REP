@@ -35,9 +35,10 @@
         '$scope',
         'ENGLISH',
         'EXTERNAL_TYPE'
-        ];
+        ,'$anchorScroll',
+        '$location'];
 
-    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, $scope, ENGLISH, EXTERNAL_TYPE) {
+    function TransactionMainCtrl(TransactionService, hpfbFileProcessing, $filter, $translate, $scope, ENGLISH, EXTERNAL_TYPE, $anchorScroll,$location) {
 
         var vm = this;
         vm.savePressed = false;
@@ -105,6 +106,7 @@
                 vm.focusSummary++;
                 vm.updateErrorSummaryState();
                 vm.savePressed = true;
+                goToErrorSummary();
             }else {
 
                 var writeResult = _transformFile();
@@ -272,6 +274,14 @@
             }
             return ((ctrl.$invalid && ctrl.$touched) || (vm.savePressed && ctrl.$invalid));
         };
+
+        function goToErrorSummary() {
+            var masterError = angular.element(document.querySelector('#master-error'));
+            if (masterError) {
+                $location.hash('master-error');
+                $anchorScroll();
+            }
+        }
 
     }
 })();

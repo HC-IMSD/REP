@@ -1,11 +1,10 @@
-<ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm">
+<ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm" data-translate-cloak="cloak-class">
     <span id="privacy"></span>
     <div class="module-attention">
         <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h2>
         <section data-ng-if="!drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
         <section data-ng-if="drugProdCtrl.isFrench()" ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
     </div>
-    <div data-translate-cloak="cloak-class">
         <span id="instructions"></span>
         <aside class="wb-fnote" role="note">
             <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
@@ -28,6 +27,14 @@
                 </div>
             </div>
         </section>
+        <div id="master-error">
+            <cmp-error-summary form-ref="drugProdCtrl.drugProdForm" select-tab="drugProdCtrl.selectTab(index)"
+                               form-preamble="DRUGPROD" exclusion-list=drugProdCtrl.exclusions
+                               name-suffix="drugProdCtrl.drugProdForm" set-heading-level="h2" form-id="drugProdCtrl.drugProdFormId"
+                               make-focused="drugProdCtrl.focusSummary" alias-list="drugProdCtrl.alias" show-errors="drugProdCtrl.showSummary"
+                               update-errors="drugProdCtrl.updateSummary"></cmp-error-summary>
+        </div>
+
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-8">{{::'DRUG_PRODUCT'|translate}}
@@ -37,13 +44,6 @@
                 </h2>
             </header>
             <div class="panel-body">
-                <div>
-                    <cmp-error-summary form-ref="drugProdCtrl.drugProdForm" select-tab="drugProdCtrl.selectTab(index)"
-                                       form-preamble="DRUGPROD" exclusion-list=drugProdCtrl.exclusions
-                                       name-suffix="drugProdCtrl.drugProdForm" set-heading-level="h2" form-id="drugProdCtrl.drugProdFormId"
-                                       make-focused="drugProdCtrl.focusSummary" alias-list="drugProdCtrl.alias" show-errors="drugProdCtrl.showSummary"
-                                       update-errors="drugProdCtrl.updateSummary"></cmp-error-summary>
-                </div>
                 <div class="row">
                     <div class="col-xs-4 form-group" data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
                         <label for="{{::drugProdCtrl.compId}}" class="required">
@@ -88,13 +88,6 @@
                             <sup id="dr3_ref">
                                 <a class="fn-lnk" href="#dr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                             </sup>
-                            <!--<span title="{{::'EXPAND'|translate}} {{::'PROD_NAME_HELP'|translate}}"
-                                    class="btn rep-help-button-primary btn-xs"
-                                    id="productName-instructions-toggle"
-                                    data-ng-click="drugProdCtrl.addInstruct(8)">
-                                <span class="fa fa-question-circle fa-2x"></span>
-                                <span class="wb-inv">{{::'PROD_NAME_HELP'|translate}}</span>
-                            </span> -->
                             <cmp-error-message field-name="drugProdCtrl.prodNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId])"
@@ -424,5 +417,4 @@
         </div>
 
 <!-- <pre>{{drugProdCtrl.model | json }}</pre>-->
-    </div>
 </ng-form>

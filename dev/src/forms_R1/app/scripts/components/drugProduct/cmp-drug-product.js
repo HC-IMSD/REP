@@ -51,10 +51,10 @@
             }
         });
 
-    drugProductCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DrugProductService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate'];
+    drugProductCtrl.$inject = ['$scope', 'hpfbFileProcessing', 'ApplicationInfoService', 'DrugProductService', 'DossierLists', 'getRoleLists', 'YES','INTERNAL_TYPE','EXTERNAL_TYPE','APPROVED_TYPE','FRENCH','$translate','$anchorScroll','$location'];
 
 
-    function drugProductCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DrugProductService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate) {
+    function drugProductCtrl($scope, hpfbFileProcessing, ApplicationInfoService, DrugProductService, DossierLists, getRoleLists, YES,INTERNAL_TYPE,EXTERNAL_TYPE,APPROVED_TYPE,FRENCH,$translate, $anchorScroll,$location) {
 
         var vm = this;
         vm.showContent = _loadFileContent; //binds the component to the function
@@ -375,6 +375,7 @@
                 vm.focusSummary++;
                // vm.showErrorSummary = vm.showErrorSummary + 1;
                 vm.updateErrorSummaryState();
+                goToErrorSummary();
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.drugProductService.getRootTagName(),
@@ -513,6 +514,14 @@
             vm.fsType = "fs_type" + scopeId;
             vm.disiTypeId = "disinfectant_type" + scopeId;
             vm.privacyStatementID = "privacy_statement" + scopeId;
+        }
+
+        function goToErrorSummary() {
+            var masterError = angular.element(document.querySelector('#master-error'));
+            if (masterError) {
+                $location.hash('master-error');
+                $anchorScroll();
+            }
         }
 
 

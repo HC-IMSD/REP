@@ -33,9 +33,9 @@
             }
         });
 
-    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE','ENGLISH','getRoleLists','$translate'];
+    companyMainCtrl.$inject = ['CompanyService', 'ApplicationInfoService', 'hpfbFileProcessing', '$filter', '$scope', 'INTERNAL_TYPE', 'EXTERNAL_TYPE', 'APPROVED_TYPE', 'AMEND_TYPE','ENGLISH','getRoleLists','$translate','$anchorScroll','$location'];
 
-    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE, ENGLISH, getRoleLists, $translate) {
+    function companyMainCtrl(CompanyService, ApplicationInfoService, hpfbFileProcessing, $filter, $scope, INTERNAL_TYPE, EXTERNAL_TYPE, APPROVED_TYPE, AMEND_TYPE, ENGLISH, getRoleLists, $translate, $anchorScroll, $location) {
 
         var vm = this;
         vm.userType = EXTERNAL_TYPE;
@@ -157,6 +157,7 @@
                 vm.updateErrorSummary();
                 vm.savePressed=true;
                 vm.focusSummary++;
+                goToErrorSummary();
             }else {
                 var writeResult = _transformFile();
                 hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,
@@ -166,6 +167,14 @@
                 vm.savePressed=false;
             }
         };
+
+        function goToErrorSummary() {
+            var masterError = angular.element(document.querySelector('#master-error'));
+            if (masterError) {
+                $location.hash('master-error');
+                $anchorScroll();
+            }
+        }
 
         /**
          * Creates a filename based on HC specifications

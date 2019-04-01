@@ -127,6 +127,8 @@
 
             }
         };
+
+
         /***
          * Determines if the summary is visible
          * @returns {boolean|*|Array}
@@ -148,11 +150,12 @@
             var hashId="";
             if(!errorRecord) return;
             if(errorRecord.isSummary){
-                hashId='errors-summary-'+errorRecord.name;
+                hashId='errors-summary-' + errorRecord.name;
             }else{
                 hashId=errorRecord.name;
             }
             vm.expandRecord({index: errorRecord.exIndex});
+            console.log("jangyoung:" + hashId );
             $location.hash(hashId);
             $anchorScroll();
         };
@@ -215,11 +218,11 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
-            console.log( 'vm.uniqueErrorList');
-            console.log( vm.uniqueErrorList);
+           // console.log( 'vm.uniqueErrorList');
+           // console.log( vm.uniqueErrorList);
             var newErrors = _sortErrorsByDomOrder();
-            console.log('newErrors');
-           console.log(newErrors);
+          //  console.log('newErrors');
+          // console.log(newErrors);
             if (!angular.equals(vm.errorArray, newErrors)) {
                 vm.errorArray = newErrors;
             }
