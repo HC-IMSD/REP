@@ -22,14 +22,18 @@
 	<hpfb:element name="dossier_id" type="char_0_7_content"/>
 	<hpfb:element name="product_name" type="char_1_256_content"/>
 	<hpfb:element name="proper_name" type="char_1_256_content"/>
+	<hpfb:element name="manufacturer" type="required_yes_no_content"/>
+	<hpfb:element name="mailing" type="required_yes_no_content"/>
+	<hpfb:element name="this_activity" type="required_yes_no_content"/>
+	<hpfb:element name="importer" type="required_yes_no_content"/>
 	<hpfb:element name="importer_record" type="importer_record_content"/>
 	<hpfb:element name="importer_company_id" type="char_0_6_content"/>
 	<hpfb:element name="importer_company_name" type="char_0_256_content"/>
 	<hpfb:element name="is_sched_c" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_d" type="required_yes_no_content"/>
-	<hpfb:element name="is_sched_f" type="required_yes_no_content"/>
+	<hpfb:element name="is_prescription_drug_list" type="required_yes_no_content"/>
 	<hpfb:element name="is_regulated_cdsa" type="required_yes_no_content"/>
-	<hpfb:element name="is_prescription_drug" type="required_yes_no_content"/>
+	<hpfb:element name="is_non_prescription_drug" type="required_yes_no_content"/>
 	<hpfb:element name="is_sched_a" type="required_yes_no_content"/>
 	<hpfb:element name="proposed_indication" type="char_1_1024_content"/>
 	<!-- Drug Product element definitions-->
@@ -52,7 +56,6 @@
 	<hpfb:element name="domestic" type="required_yes_no_content"/>
 	<hpfb:element name="barn" type="required_yes_no_content"/>
 	<hpfb:element name="institutional_industrial" type="required_yes_no_content"/>
-	<hpfb:element name="contact_lens" type="required_yes_no_content"/>
 
 	<!-- Schedule A definitions-->
 	<hpfb:element name="schedule_a_group" type="schedule_a_content"/>
@@ -167,7 +170,7 @@
 	<hpfb:element name="other_skin_glandular" type="required_yes_no_content"/>
 	<hpfb:element name="other_skin_glandular_details" type="char_0_40_content"/>
 	<!-- Start musculo-Skeletal system-->
-	<hpfb:element name="musclo_system" type="musclo_system_content"/>
+	<hpfb:element name="musculo_system" type="musculo_system_content"/>
 	<hpfb:element name="abdomen" type="required_yes_no_content"/>
 	<hpfb:element name="skull" type="required_yes_no_content"/>
 	<hpfb:element name="bones" type="required_yes_no_content"/>
@@ -326,29 +329,34 @@
 	</hpfb:element>
 	<hpfb:element name="nanomaterial_details" type="char_0_40_content"/>
 	<hpfb:element name="is_animal_human_material" type="required_yes_no_content"/>
-	<hpfb:element name="variant_name" type="char_0_100_content"/>
+	<hpfb:element name="variant_name" type="char_0_60_content"/>
+	<hpfb:element name="purpose" type="char_0_60_content"/>
 	<hpfb:element name="in_final_container" type="required_yes_no_content"/>
 
 	
 	<!-- Main references-->
 	<hpfb:complexType name="drug_product_enrol_content">
 		<hpfb:sequence>
-			<hpfb:element ref="company_id"/>
-			<hpfb:element ref="dossier_id"/>
-			<hpfb:element ref="product_name"/>
-			<hpfb:element ref="proper_name"/>
-			<hpfb:element ref="importer_record" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="enrolment_version"/>
 			<hpfb:element ref="date_saved"/>
 			<hpfb:element ref="software_version"/>
 			<hpfb:element ref="data_checksum"/>
+			<hpfb:element ref="company_id"/>
+			<hpfb:element ref="dossier_id"/>
+			<hpfb:element ref="product_name"/>
+			<hpfb:element ref="proper_name"/>
+			<hpfb:element ref="manufacturer"/>
+			<hpfb:element ref="mailing"/>
+			<hpfb:element ref="this_activity"/>
+			<hpfb:element ref="importer"/>
+			<hpfb:element ref="importer_record" minOccurs="0" maxOccurs="unbounded"/>
 			<hpfb:element ref="drug_use"/>
 			<hpfb:element ref="disinfectant_type"/>
 			<hpfb:element ref="is_sched_c"/>
 			<hpfb:element ref="is_sched_d"/>
-			<hpfb:element ref="is_sched_f"/>
+			<hpfb:element ref="is_prescription_drug_list"/>
 			<hpfb:element ref="is_regulated_cdsa"/>
-			<hpfb:element ref="is_prescription_drug"/>
+			<hpfb:element ref="is_non_prescription_drug"/>
 			<hpfb:element ref="is_sched_a"/>
 			<hpfb:element ref="proposed_indication"/>
 			<hpfb:element ref="schedule_a_group" minOccurs="0" maxOccurs="1"/>
@@ -372,7 +380,6 @@
 			<hpfb:element ref="domestic"/>
 			<hpfb:element ref="barn"/>
 			<hpfb:element ref="institutional_industrial"/>
-			<hpfb:element ref="contact_lens"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
 
@@ -526,6 +533,8 @@
 		<hpfb:sequence>
 			<hpfb:element ref="ingredient_role"/>
 			<hpfb:element ref="ingredient_id"/>
+			<hpfb:element ref="variant_name"/>
+			<hpfb:element ref="purpose"/>
 			<hpfb:element ref="ingredient_name"/>
 			<hpfb:element ref="cas_number"/>
 			<hpfb:element ref="ingred_standard"/>
@@ -557,7 +566,7 @@
 		<hpfb:all>
 			<hpfb:element ref="nervous_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="digestive_system" minOccurs="0" maxOccurs="1"/>
-			<hpfb:element ref="musclo_system" minOccurs="0" maxOccurs="1"/>
+			<hpfb:element ref="musculo_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="reproductive_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="cardio_system" minOccurs="0" maxOccurs="1"/>
 			<hpfb:element ref="immune_system" minOccurs="0" maxOccurs="1"/>
@@ -635,7 +644,7 @@
 			<hpfb:element ref="other_skin_glandular_details"/>
 		</hpfb:sequence>
 	</hpfb:complexType>
-	<hpfb:complexType name="musclo_system_content">
+	<hpfb:complexType name="musculo_system_content">
 		<hpfb:sequence>
 			<hpfb:element ref="abdomen"/>
 			<hpfb:element ref="skull"/>

@@ -57,6 +57,7 @@
 			<hpfb:element ref="manufacturer"/>
 			<hpfb:element ref="mailing"/>
 			<hpfb:element ref="billing"/>
+			<hpfb:element ref="importer"/>
 			<hpfb:element ref="rep_primary"/>
 			<hpfb:element ref="rep_secondary"/>
 			<hpfb:element ref="company_contact_details"/>

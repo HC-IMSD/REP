@@ -189,7 +189,7 @@
             //order is important!!! Must match schema
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
-            baseModel.application_type = jsonObj.applicationType;
+            // baseModel.application_type = jsonObj.applicationType;
             baseModel.software_version = "2.0.0"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 

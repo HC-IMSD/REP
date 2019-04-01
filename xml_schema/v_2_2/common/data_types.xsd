@@ -209,6 +209,12 @@
 		</hpfb:restriction>
 	</hpfb:simpleType>
 
+	<hpfb:simpleType name="char_0_60_content">
+		<hpfb:restriction base="hpfb:string">
+			<hpfb:pattern value=".{0,60}"/>
+		</hpfb:restriction>
+	</hpfb:simpleType>
+
 	<hpfb:simpleType name="char_1_60_content">
 		<hpfb:restriction base="hpfb:string">
 			<hpfb:pattern value=".{1,60}"/>
