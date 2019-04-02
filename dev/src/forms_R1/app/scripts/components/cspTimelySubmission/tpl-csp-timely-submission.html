@@ -42,6 +42,10 @@
                             <span ng-if="!timelySubCtrl.isFrench()" class="datepicker-format">(YYYY-MM-DD)</span>
                             <span ng-if="timelySubCtrl.isFrench()" class="datepicker-format">(AAAA-MM-JJ)</span>
                             <strong class="required"> {{::"REQUIRED" |translate}} </strong>
+                            <button title="{{::'HELP_MARKETDATE'|translate}}"  class="btn rep-help-button-primary btn-xs rep-vertical-align"
+                                    ng-click="timelySubCtrl.addInstruct(0)"><span
+                                    class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_MARKETDATE'|translate}}"</span>
+                            </button>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <cmp-alert  ui-state="timelySubCtrl.alerts[0]" msg="MARKETDATE_INSTRUCT" update-state="timelySubCtrl.closeAlert(0)" type="alert-info">
@@ -70,10 +74,6 @@
                             </div>
                         </label>
                     </div>
-                    <button title="{{::'HELP_MARKETDATE'|translate}}"  class="btn rep-help-button-primary btn-xs rep-vertical-align"
-                            ng-click="timelySubCtrl.addInstruct(0)"><span
-                            class="fa fa-question-circle fa-2x"></span><span class="wb-inv">"{{::'HELP_MARKETDATE'|translate}}"</span>
-                    </button>
                 </div>
             </div>
             <div class="row rep-margin-top">
