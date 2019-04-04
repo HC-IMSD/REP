@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- ****************************** -->
-<!-- Drug Product Enrolment version 0.1 -->
+<!-- Drug Product Enrolment version 2.2 -->
 <!-- ****************************** -->
 <hpfb:schema xmlns:hpfb="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 	<hpfb:include schemaLocation="common/data_types.xsd"/>

@@ -788,7 +788,7 @@
         var defaultTransactionData = {
             dataChecksum: "",
             dateSaved: "",
-            softwareVersion: "2.0.0",
+            softwareVersion: "2.2.0",
             transactionType: "",
             isThirdParty: "",
             isPriority: "",

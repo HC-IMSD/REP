@@ -25,7 +25,7 @@
                 enrolmentVersion: "0.0",
                 dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "2.0.0",
+                softwareVersion: "2.2.0",
                 companyId: "",
                 reasonAmend:"",
                 addressList: [],

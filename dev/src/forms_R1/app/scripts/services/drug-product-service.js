@@ -53,7 +53,7 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "2.0.0",
+                softwareVersion: "2.2.0",
                 xslFileName: xslName,
                 dataChecksum: "",
                 //dossierType: "",
