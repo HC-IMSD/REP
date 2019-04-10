@@ -134,7 +134,7 @@
             var item = angular.copy(vm.emptyModel);
             item.id = (getListMaxID() + 1);
             (vm.model.list).push(item);
-            setRecord(-1);
+            // setRecord(-1);
             vm.resetToCollapsed = !vm.resetToCollapsed;
             setRecord(vm.model.list.length - 1);
             //vm.editRecord(item);
@@ -202,7 +202,7 @@
             vm.noCountryId="no_country"+scopeId;
         }
         vm.noCountry=function(){
-            if(! vm.model.list || vm.model.list.length===0){
+            if(! vm.model.list || vm.model.list.length===0 || vm.model.list[0].country == ""){
                 vm.noCountries="";
                 return true;
             }
@@ -214,6 +214,16 @@
             return(vm.countryListForm.$invalid);
         };
 
+        vm.updateRecord = function(){
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.requiredFlag = false;
+            vm.resetToCollapsed = !vm.resetToCollapsed;
+        }
+        vm.onError = function(){
+            if(vm.model.list[0].country == ""){
+                vm.resetToCollapsed = true;
+            }
+        }
 
         /*  $scope.$watch('countryListCtrl.countryListForm.$error', function () {
                     vm.updateErrorSummary();

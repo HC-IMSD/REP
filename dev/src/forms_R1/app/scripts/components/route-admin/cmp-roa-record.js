@@ -32,6 +32,7 @@
                 record: '<',
                 onDelete: '&',
                 updateRecord: '&',
+                resetMe: '&',
                 showErrors: '<'
             }
         });
@@ -45,7 +46,7 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.showDetailErrors=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-
+        vm.roaFilter = "roaRecCtrl.model.display";
         vm.$onInit = function(){
             vm.lang = $translate.proposedLanguage() || $translate.use();
             if(!vm.lang){
@@ -76,8 +77,8 @@
             var found = false;
             for(var i = 0; i < vm.roaList.length; i++) {
                 var option =vm.roaList[i];
-                if(option[vm.lang] === vm.display) {
-                    vm.roa = option;
+                if(option[vm.lang] === vm.model.display) {
+                    vm.model.roa = option;
                     found = true;
                     break;
                 }
@@ -85,13 +86,19 @@
             if( ! found ){
                 for(var i = 0; i < vm.roaList.length; i++) {
                     var option =vm.roaList[i];
-                    if(option['id'] === vm.display) {
-                        vm.display = option[vm.lang];
+                    if(option['id'] === vm.model.display) {
+                        vm.model.display = option[vm.lang];
+                        found = true;
                         break;
                     }
                 }
             }
-            vm.updateRecord();
+            if(found){
+                vm.clearFilter($scope);
+                vm.resetMe();
+            // } else {
+            //     vm.onError();
+            }
         };
 
 
@@ -100,7 +107,11 @@
         };
 
         vm.showError = function (ctrl) {
-            if(!ctrl) return false;
+            if(!ctrl || vm.model.display == "") return false;
+            if(vm.model.roa == ""){
+                ctrl.$invalid = false;
+                return true;
+            }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
         vm.isRoaOther = function () {
@@ -112,7 +123,9 @@
            }
         };
 
-
+        vm.clearFilter = function($scope){
+            $scope.roaFilter = "";
+        }
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.roaId="roa_lbl" + scopeId;

@@ -378,7 +378,7 @@
                         obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: input[i].country_with_unknown.__text})[0];
                     }
                     if (obj.country) {
-                        obj.display = obj.country.id
+                        obj.display = obj.country[$translate.proposedLanguage() || $translate.use()]
                     }
                     obj.unknownCountryDetails = input[i].unknown_country_details;
                     list.push(obj);

@@ -14,18 +14,22 @@
                                            show-error="srcCountryRecCtrl.showError(srcCountryRecCtrl.countryForm[srcCountryRecCtrl.countryId])"
                                            error-types="srcCountryRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                        <ui-select data-ng-model="srcCountryRecCtrl.model.country" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}"
-                                   data-ng-model-options="{ debounce: 0}"
-                                   class="rep-selectize-dropdown" on-select="srcCountryRecCtrl.countryChanged($item, $model)" data-required="true"
-                                    title="Choose a country" class="rep-selectize-font">
-                            <ui-select-match data-placeholder="Select or Search for country" name="countryMatch"
-                                             class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[srcCountryRecCtrl.lang]}}
-                            </ui-select-match>
-                            <ui-select-choices data-repeat="countryRecord in srcCountryRecCtrl.countryList | filter:{[srcCountryRecCtrl.lang]: $select.search} track by countryRecord.id"
-                                               class="rep-selectize-font">
-                                <span data-ng-bind-html="countryRecord[srcCountryRecCtrl.lang] | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                        <!--<ui-select data-ng-model="srcCountryRecCtrl.model.country" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}"-->
+                                   <!--data-ng-model-options="{ debounce: 0}"-->
+                                   <!--class="rep-selectize-dropdown" on-select="srcCountryRecCtrl.countryChanged($item, $model)" data-required="true"-->
+                                    <!--title="Choose a country" class="rep-selectize-font">-->
+                            <!--<ui-select-match data-placeholder="Select or Search for country" name="countryMatch"-->
+                                             <!--class="rep-selectize-font rep-selectize-dropdown"> {{$select.selected[srcCountryRecCtrl.lang]}}-->
+                            <!--</ui-select-match>-->
+                            <!--<ui-select-choices data-repeat="countryRecord in srcCountryRecCtrl.countryList | filter:{[srcCountryRecCtrl.lang]: $select.search} track by countryRecord.id"-->
+                                               <!--class="rep-selectize-font">-->
+                                <!--<span data-ng-bind-html="countryRecord[srcCountryRecCtrl.lang] | highlight: $select.search"></span>-->
+                            <!--</ui-select-choices>-->
+                        <!--</ui-select>-->
+                    <input type="text" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}" data-ng-model="srcCountryRecCtrl.model.display" value="srcCountryRecCtrl.model.display" data-ng-change="srcCountryRecCtrl.countryChanged($item, $model)" list="srcCountryList" required="required" class="form-control full-width" />
+                    <datalist id="srcCountryList" class="rep-selectize-dropdown rep-selectize-font">
+                        <option data-ng-repeat="countryRecord in srcCountryRecCtrl.countryList | filter:{[srcCountryRecCtrl.lang]: srcCountryFilter} track by countryRecord.id" value="{{countryRecord[srcCountryRecCtrl.lang]}}" label="{{countryRecord[srcCountryRecCtrl.lang]}}"/>
+                    </datalist>
 
                 </div>
             </div>

@@ -32,6 +32,8 @@
                 showErrors: '<',
                 countryList:'<',
                 updateCountryList:'<',
+                updateRecord: '&',
+                onError: '&',
                 fieldsetLabel:'@'
             }
         });
@@ -46,34 +48,49 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.showDetailErrors=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.countryFilter = "countryRecCtrl.model.display";
 
         vm.$onInit = function(){
             vm.showDetailErrors=false;
+            vm.updateCountryList();
             _setIdNames();
         };
         /**
          * Updates the display value for the object for summary display
          */
         vm.countryChanged=function($item,$model){
-            // vm.model.id = vm.record.id;
-            // vm.model.display = vm.record.country;
-            for(var i = 0; vm.countries.length; i++){
+            var found = false;
+            for(var i = 0; i < vm.countries.length; i++){
                 if(vm.countries[i][vm.lang] === vm.model.display){
                     vm.model.country = vm.countries[i];
+                    found = true;
                     break;
                 }
             }
-            vm.updateCountryList();
+            if( ! found ){
+                for(var i = 0; i < vm.countries.length; i++) {
+                    var option =vm.countries[i];
+                    if(option['id'] === vm.model.display) {
+                        vm.model.display = option[vm.lang];
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if(found){
+                vm.updateCountryList();
+                vm.updateRecord();
+                vm.clearFilter($scope);
+            } else {
+                vm.onError();
+            }
+
         };
 
 
         vm.$onChanges = function (changes) {
-            if(changes.countryList && vm.onChangeCount < 2){
-                vm.updateCountryList();
+            if(changes.countryList){
                 vm.countries=changes.countryList.currentValue;
-                vm.onChangeCount++;
-            } else {
-                vm.onChangeCount = 0;
             }
             if (changes.record && changes.record.currentValue) {
                 vm.model = changes.record.currentValue;
@@ -90,7 +107,10 @@
 
 
         vm.showError = function (ctrl) {
-            if(!ctrl) return false;
+            if(!ctrl ) return false;
+            if(vm.model.country == "" && vm.model.display != ""){
+                return true;
+            }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
 
@@ -103,6 +123,17 @@
             }
             return false;
         };
+        vm.clearFilter = function($scope){
+            $scope.countryFilter = "";
+        }
+        vm.isRequired = function(){
+            if(vm.model.country == ""){
+                return "";
+            }
+            else {
+                return vm.model.display;
+            }
+        }
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;

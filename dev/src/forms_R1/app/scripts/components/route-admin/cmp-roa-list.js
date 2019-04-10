@@ -93,7 +93,7 @@
             var item = {"id": maxID + 1, "roa": "", 'otherRoaDetails': "",display:""};
             vm.model.roaList.push(item);
             vm.resetToCollapsed= !vm.resetToCollapsed;
-            vm.selectRecord=(0);
+            // vm.selectRecord=(0);
             vm.selectRecord=(vm.model.roaList.length-1);
             vm.noROA();
         };
@@ -118,7 +118,9 @@
 
         vm.disableAddButton=function(){
             if(vm.noROA()) return false;
+            vm.resetToCollapsed= !vm.resetToCollapsed;
             return(vm.roaListForm.$invalid);
+            vm.resetToCollapsed= !vm.resetToCollapsed;
         };
 
         function getMaxID(){
@@ -146,14 +148,17 @@
             vm.selectRecord=value;
 
         }
-        function resetMe(){
+        vm.resetMe = function(){
             vm.requiredFlag = false;
-            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.resetToCollapsed = false;
         }
         vm.updateRecord = function(){
             vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
+        }
+        vm.onError = function(){
+            vm.resetToCollapsed = true;
         }
 
       /*  $scope.$watch('roaCtrl.roaListForm.$error', function () {

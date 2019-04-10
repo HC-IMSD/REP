@@ -8,7 +8,7 @@
                          disable-selection="roaCtrl.disableAddButton()">
 
         <cmp-roa-record record="$parent.record" show-errors="roaCtrl.showDetailErrors"
-                        on-delete="roaCtrl.deleteRecord(id)" update-record="roaCtrl.updateRecord()"></cmp-roa-record>
+                        on-delete="roaCtrl.deleteRecord(id)" update-record="roaCtrl.onError()" reset-me="roaCtrl.resetMe()"></cmp-roa-record>
 
     </cmp-expanding-table>
 
