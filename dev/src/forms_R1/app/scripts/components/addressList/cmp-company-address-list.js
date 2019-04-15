@@ -120,6 +120,7 @@
             if (changes.isFileLoaded) {
                 if (changes.isFileLoaded.currentValue) {
                     vm.requiredFlag = false;
+                    vm.isDetailsValid = true;
                 }
             }
         };
