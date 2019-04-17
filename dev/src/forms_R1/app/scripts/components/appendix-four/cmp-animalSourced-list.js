@@ -100,9 +100,12 @@
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "animalType": "",animalDetail:""}; //TODO call a service for this
             vm.model.animalSrcList.push(item);
-            vm.resetToCollapsed= !vm.resetToCollapsed;
-            vm.selectRecord=(0);
+            // vm.resetToCollapsed= !vm.resetToCollapsed;
+            // vm.selectRecord=(0);
             vm.selectRecord=(vm.model.animalSrcList.length-1);
+            if(vm.model.animalSrcList.length > 1){
+                vm.requiredFlag = false;
+            }
             vm.onUpdate({list: vm.model.animalSrcList});
         };
         vm.deleteRecord=function(recId){

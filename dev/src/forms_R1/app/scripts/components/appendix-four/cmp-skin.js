@@ -21,9 +21,11 @@
             controller: skinSystemController,
             bindings: {
                 record: '<',
+                isFileLoaded: '<',
                 otherUpdate: '&',
                 concatUpdate: '&',
-                showErrors:'&'
+                showErrors:'&',
+                addBtn: '<'
             }
 
         });
@@ -36,12 +38,16 @@
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
+            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
             _setIdNames();
         };
         vm.$onChanges = function (changes) {
             if (changes.record) {
                 vm.model = (changes.record.currentValue);
-                vm.updateErrorState();
+                // vm.updateErrorState();
+            }
+            if (changes.addBtn && changes.addBtn.currentValue > 1){
+                vm.isSelected = 'selected';
             }
         };
 
@@ -69,7 +75,7 @@
         vm.detailsChanged = function (alias, value) {
 
             vm.concatUpdate({'alias': alias, 'value': value});
-            vm.updateErrorState();
+            // vm.updateErrorState();
         };
 
         vm.otherChanged = function () {
@@ -81,7 +87,7 @@
                 vm.model.otherDetails = "";
             }
             vm.otherUpdate();
-            vm.updateErrorState();
+            // vm.updateErrorState();
             return state;
         };
 

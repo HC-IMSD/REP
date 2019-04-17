@@ -42,9 +42,9 @@
         vm.selectRecord = -1; //the record to select, initially select non
         vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
         vm.resetToCollapsed = true;
-        vm.requiredFlag = true; //use to signal expanding table extend an empty record
         //vm.dosService="";
         vm.oneRecord = "";
+        vm.addBtn = 0;
         //define empty model
         vm.model = {};
         vm.model.tissuesFluidsList = [];
@@ -91,7 +91,13 @@
                 "cmp-tissues-fluids-record": "true"
             };
         };
-
+        vm.getRequiredFlag = function(){
+            if(vm.model.tissuesFluidsList.length < 1){
+                return true;
+            }
+            return false;
+        }
+        vm.requiredFlag = vm.getRequiredFlag(); //true; //use to signal expanding table extend an empty record
 
         vm.$onChanges = function (changes) {
 
@@ -101,6 +107,7 @@
             if (changes.isFileLoaded) {
                 if (changes.isFileLoaded.currentValue) {
                     vm.requiredFlag = false;
+                    vm.oneRecord = "selected";
                 }
             }
             /*if(changes.showErrorSummary){
@@ -129,16 +136,17 @@
         vm.addNew = function () {
             var maxID = getMaxID();
             var item = {"id": maxID + 1, "systemType": "", detailsConcat: "", system: {}, otherDetails: ""}; //TODO call a service for this
-
+            vm.addBtn++;
             vm.model.tissuesFluidsList.push(item);
-            vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.setRecord(vm.model.tissuesFluidsList.length - 1);
+            vm.resetToCollapsed = !vm.resetToCollapsed;
         };
         vm.deleteRecord = function (recId) {
             var idx = vm.model.tissuesFluidsList.indexOf(
                 $filter('filter')(vm.model.tissuesFluidsList, {id: recId}, true)[0]);
             vm.model.tissuesFluidsList.splice(idx, 1);
             vm.requiredFlag = false;
+            vm.selectRecord = 0;
         };
        /* vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
@@ -181,6 +189,14 @@
 
             if (vm.noTissueRecs()) {
                 return false;
+            }
+            if(vm.model.tissuesFluidsList){
+                var keys = Object.keys(vm.model.tissuesFluidsList[vm.selectRecord < 0 ? 0 : vm.selectRecord].system);
+                for (var i = 0; i < keys.length; i++) {
+                    if(vm.model.tissuesFluidsList[vm.selectRecord < 0 ? 0 : vm.selectRecord].system[keys[i]]){
+                        return false;
+                    };
+                }
             }
             return (vm.tissuesListForm.$invalid)
         };

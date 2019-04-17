@@ -598,7 +598,7 @@
                         unitsValue = item.per_units.__text;
                     }
                     obj.perMeasUnits = $filter('findListItemById')(DossierLists.getUnitsMeasureList(), {id: unitsValue});
-                    obj.perMeasUnitsHtml = obj.perMeasUnits[$translate.proposedLanguage() || $translate.use()];
+                    obj.perMeasUnitsHtml = obj.perMeasUnits == null ? "" : obj.perMeasUnits[$translate.proposedLanguage() || $translate.use()];
                     obj.perMeasOtherUnits = item.per_units_other_details;
                 }
 

@@ -405,7 +405,7 @@
             for(var i = 0; i < vm.unitsList.length; i++) {
                 var option =vm.unitsList[i];
                 if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
-                    vm.ingModel.perMeasUnits = option;
+                    vm.ingModel.units = option;
                     found = true;
                     break;
                 }

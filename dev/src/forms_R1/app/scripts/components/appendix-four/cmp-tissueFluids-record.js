@@ -33,8 +33,10 @@
                 record: '<',
                 onDelete: '&',
                 showErrors: '&',
+                isFileLoaded: '<',
                 service: '<',
-                systemUsed: '&'
+                systemUsed: '&',
+                addBtn: '<'
             }
         });
 
@@ -56,7 +58,9 @@
          vm.muscleList = DossierLists.getMuscleSystem();*/
         vm.selectedSystemList = [];
         vm.model = {};
-        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"},
+                            {type: "duplicateRole", displayAlias: "MSG_ERR_DUPLICATED_SYSTEM"}];
+
 
 
         vm.$onInit = function () {
@@ -71,6 +75,9 @@
             }
             if (changes.service) {
                 vm.dosService = changes.service.currentValue;
+            }
+            if(changes.addBtn){
+                vm.resetToCollapsed = true;
             }
         };
 

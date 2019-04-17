@@ -23,43 +23,43 @@
             </div>
         </div>
         <div>
-            <cmp-nervous-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-nervous-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                 data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getNervousSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-nervous-system>
 
-            <cmp-digestive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                                  concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-digestive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                                  concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                   data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getDigestiveSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-digestive-system>
 
-            <cmp-cardio-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-cardio-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getCardioSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-cardio-system>
 
-            <cmp-immune-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-immune-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getImmuneSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-immune-system>
 
-            <cmp-muscle-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-muscle-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                               concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getMuscleSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-muscle-system>
 
-            <cmp-other-tissues-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                                      concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-other-tissues-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                                      concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                       data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getOtherTissuesSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-other-tissues-system>
 
-            <cmp-reproductive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                                     concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-reproductive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                                     concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                                      data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getReproductiveSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-reproductive-system>
 
-            <cmp-skin-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()"
-                             concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()"
+            <cmp-skin-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
+                             concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
                              data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getSkinSystemValue() && !tissuesSrcCtrl.isUsed">
             </cmp-skin-system>
         </div>
