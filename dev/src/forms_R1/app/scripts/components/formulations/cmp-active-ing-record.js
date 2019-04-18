@@ -402,17 +402,17 @@
         }
         vm.perMeasUnitsChange = function() {
             var found = false;
-            for(var i = 0; i < vm.unitsList.length; i++) {
-                var option =vm.unitsList[i];
+            for(var i = 0; i < vm.measureList.length; i++) {
+                var option =vm.measureList[i];
                 if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
-                    vm.ingModel.units = option;
+                    vm.ingModel.perMeasUnits = option;
                     found = true;
                     break;
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.unitsList.length; i++) {
-                    var option =vm.unitsList[i];
+                for(var i = 0; i < vm.measureList.length; i++) {
+                    var option =vm.measureList[i];
                     if(option['id'] === vm.ingModel.perMeasUnits['id']) {
                         vm.ingModel.perMeasUnitsHtml = option[vm.lang];
                         break;

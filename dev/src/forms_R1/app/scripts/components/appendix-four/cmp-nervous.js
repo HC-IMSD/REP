@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('nervousModule', ['errorMessageModule'])
+        .module('nervousModule', ['errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -30,14 +30,15 @@
 
         });
 
-    nervousSystemController.$inject=['$scope']
-    function nervousSystemController($scope) {
+    nervousSystemController.$inject=['$scope', 'DrugProductService']
+    function nervousSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
-            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
+            vm.drugProductService = new DrugProductService();
+            vm.isSelected = vm.isFileLoaded == true && vm.drugProductService.checkSelectedValues(vm.model, 'Nervous') ? "selected" : "";
             _setIdNames();
         };
         vm.$onChanges = function (changes) {

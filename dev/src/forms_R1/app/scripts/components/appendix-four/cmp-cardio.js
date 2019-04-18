@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('cardioModule', [ 'errorMessageModule'])
+        .module('cardioModule', [ 'errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -30,14 +30,15 @@
 
         });
 
-     cardioSystemController.$inject=['$scope'];
-    function cardioSystemController($scope) {
+     cardioSystemController.$inject=['$scope', DrugProductService];
+    function cardioSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.$onInit = function () {
-            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
+            vm.drugProductService = new DrugProductService();
+            vm.isSelected = vm.isFileLoaded == true && vm.drugProductService.checkSelectedValues(vm.model, 'Cardio') ? "selected" : "";
             _setIdNames()
         };
         vm.$onChanges = function (changes) {

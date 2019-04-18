@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('otherTissuesModule', ['errorMessageModule'])
+        .module('otherTissuesModule', ['errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -29,14 +29,15 @@
             }
 
         });
-    otherTissueSystemController.$inject=['$scope']
-    function otherTissueSystemController($scope) {
+    otherTissueSystemController.$inject=['$scope', 'DrugProductService']
+    function otherTissueSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.$onInit = function () {
-            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
+            vm.drugProductService = new DrugProductService();
+            vm.isSelected = vm.isFileLoaded == true && vm.drugProductService.checkSelectedValues(vm.model, 'Fluids') ? "selected" : "";
             _setIdNames();
         };
         vm.$onChanges = function (changes) {

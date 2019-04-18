@@ -1,15 +1,15 @@
 <ng-form name="sysCtrl.digestForm">
     <div>
-        <fieldset id="{{::sysCtrl.systemRoleId}}">
+        <fieldset id="sysCtrl.systemRoleId">
             <legend class="required legend-rep">
-                <span class="field-name">{{::'DIGESTIVE_LEGEND' |translate}}</span>
+                <span id="DIGESTIVE_LEGEND_{{::$id}}" class="field-name">{{::'DIGESTIVE_LEGEND' |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                 <cmp-error-message field-name="sysCtrl.roleMissingId"
                                    form-ref="sysCtrl.digestForm"
                                    show-error="sysCtrl.showErrors()"
                                    error-types="sysCtrl.requiredOnly">
                 </cmp-error-message>
-                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}"  type="hidden"
+                <input id="{{::sysCtrl.roleMissingId}}" name="DIGESTIVE_LEGEND_{{::$id}}"  type="hidden"
                        data-ng-model="sysCtrl.isSelected" required/>
             </legend>
             <div class="row">

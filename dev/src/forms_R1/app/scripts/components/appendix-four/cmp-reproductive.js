@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('reprodModule', ['errorMessageModule'])
+        .module('reprodModule', ['errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -30,15 +30,16 @@
 
         });
 
-    reproductiveSystemController.$inject=['$scope']
-    function reproductiveSystemController($scope) {
+    reproductiveSystemController.$inject=['$scope', 'DrugProductService']
+    function reproductiveSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
-            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
+            vm.drugProductService = new DrugProductService();
+            vm.isSelected = vm.isFileLoaded == true && vm.drugProductService.checkSelectedValues(vm.model, 'Reproductive') ? "selected" : "";
             _setIdNames();
         };
         vm.$onChanges = function (changes) {

@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('digestiveModule', ['errorMessageModule'])
+        .module('digestiveModule', ['errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -29,15 +29,16 @@
             }
         });
 
-    digestiveSystemController.$inject=['$scope']
-    function digestiveSystemController($scope) {
+    digestiveSystemController.$inject=['$scope', 'DrugProductService']
+    function digestiveSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
-            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
+            vm.drugProductService = new DrugProductService();
+            vm.isSelected = vm.isFileLoaded == true && vm.drugProductService.checkSelectedValues(vm.model, 'Digestive') ? "selected" : "";
             _setIdNames()
         };
         vm.$onChanges = function (changes) {
@@ -90,6 +91,19 @@
             return state;
         }
 
+        vm.checkSelectedValues = function() {
+            var keys = Object.keys(vm.model);
+            for( var i = 0; i < keys.length; i++){
+                if(startsWith(keys[i], "other") && keys[i] != "otherDigestiveDetails"){
+                    if(vm.model[keys[i]] == true && vm.model["otherDigestiveDetails"] != ""){
+                        return true;
+                    } else if(vm.model[keys[i]] == true) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
        /* vm.showErrorMissing=function(){
 
             return (vm.digestForm.$dirty && vm.digestForm.$invalid);
@@ -101,7 +115,5 @@
             vm.systemRoleId = "system_role" + scopeId;
             vm.otherDetailsId = "digestive_details" + scopeId;
         }
-
-
     }
 })();

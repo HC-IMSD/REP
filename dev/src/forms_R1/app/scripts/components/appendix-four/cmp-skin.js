@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('skinModule', ['errorMessageModule'])
+        .module('skinModule', ['errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -30,15 +30,16 @@
 
         });
 
-    skinSystemController.$inject=['$scope']
-    function skinSystemController($scope) {
+    skinSystemController.$inject=['$scope', 'DrugProductService']
+    function skinSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
         vm.isSelected = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
-            vm.isSelected = vm.isFileLoaded == true ? "selected" : "";
+            vm.drugProductService = new DrugProductService();
+            vm.isSelected = vm.isFileLoaded == true && vm.drugProductService.checkSelectedValues(vm.model, 'Skin') ? "selected" : "";
             _setIdNames();
         };
         vm.$onChanges = function (changes) {

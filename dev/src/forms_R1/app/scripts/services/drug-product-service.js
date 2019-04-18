@@ -173,6 +173,20 @@
 
                 return formModel;
 
+            },
+            checkSelectedValues: function(obj, systemRole) {
+                var keys = Object.keys(obj);
+                var other = 'other' + systemRole;
+                var otherDetails = 'otherDetailes';
+                if(obj[other] == true && obj[otherDetails] == ""){
+                    return false;
+                }
+                for( var i = 0; i < keys.length; i++){
+                    if(obj[keys[i]] == true){
+                        return true;
+                    }
+                }
+                return false;
             }
 
         };
