@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('cardioModule', [ 'errorMessageModule', 'drugProductService'])
+        .module('cardioModule', ['errorMessageModule', 'drugProductService'])
 })();
 
 
@@ -30,7 +30,7 @@
 
         });
 
-     cardioSystemController.$inject=['$scope', DrugProductService];
+     cardioSystemController.$inject=['$scope', 'DrugProductService'];
     function cardioSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};

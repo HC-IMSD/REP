@@ -74,14 +74,14 @@
                      </div>
                      <div class="col-xs-4 form-group" data-ng-class="{'has-error':dos.dossierForm[dos.compId].$invalid}">
                          <label for="{{::dos.compId}}" class="required">
-                             <span class="field-name">{{::'COMPANY_ID' |translate}}{{::'LEAST_6_CHAR' |translate}}</span>
+                             <span class="field-name">{{::'COMPANY_ID' |translate}}{{::'5_OR_6_CHAR' |translate}}</span>
                              <strong class="required">{{::"REQUIRED" |translate}}</strong>
                              <cmp-error-message field-name="dos.compId"
                                                 form-ref="dos.dossierForm"
                                                 show-error="dos.showError(dos.dossierForm[dos.compId])"
                                                 error-types="dos.min5Error"></cmp-error-message>
                              <input type="text" class="form-control" id="{{::dos.compId}}"
-                                    name="{{::dos.compId}}" required maxlength="6" minlength="5" size="5"
+                                    name="{{::dos.compId}}" required maxlength="6" minlength="5" size="10"
                                     data-ng-model="dos.dossierModel.companyID"/>
                          </label>
                      </div>

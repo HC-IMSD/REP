@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col-xs-4 form-group" data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
                         <label for="{{::drugProdCtrl.compId}}" class="required">
-                            <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}{{::'LEAST_6_CHAR' |translate}}</span>
+                            <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}{{::'5_OR_6_CHAR' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="drugProdCtrl.compId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -55,7 +55,7 @@
                                                error-types="drugProdCtrl.min5Error">
                             </cmp-error-message>
                             <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}"
-                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5" size="5"
+                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5" size="10"
                                    data-ng-model="drugProdCtrl.model.companyID"/>
 
                         </label>

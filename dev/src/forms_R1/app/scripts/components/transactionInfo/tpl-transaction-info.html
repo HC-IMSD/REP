@@ -45,7 +45,7 @@
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
-                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_6_CHAR" |translate}}
+                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"5_OR_6_CHAR" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <sup id="tr2a_ref">
                                             <a class="fn-lnk" href="#tr2a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.a</a>
@@ -57,7 +57,7 @@
                                                            error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                         <input type="text" id="{{::transInfoCtrl.companyId}}" name="{{::transInfoCtrl.companyId}}"
                                                data-ng-model="transInfoCtrl.transactionModel.ectd.companyId"
-                                               class="form-control" maxlength="6" size="6" required data-ng-minlength="5"/>
+                                               class="form-control" maxlength="6" size="10" required data-ng-minlength="5"/>
 
                                     </label>
                                 </div>
