@@ -87,5 +87,7 @@
   "FOOTNOTE_INSTRUCTION":"Instructions for completing sections on form",
   "SECTION_IS_NOT_VISIBLE": "[ This section may not be visible. ]",
   "FAX_NOT_AVAILABLE":" (Use 0000000000 if not available)",
-  "NOT_APPLICABLE": "Not applicable"
+  "NOT_APPLICABLE": "Not applicable",
+  "D21": "Biologic",
+  "D22": "Pharmaceutical"
 }

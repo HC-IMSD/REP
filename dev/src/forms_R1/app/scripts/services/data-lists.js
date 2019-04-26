@@ -289,8 +289,10 @@
 
     /* @ngInject */
     function getRolesService() {
-        var _biologic = 'BIOLOGIC';
-        var _pharma = 'PHARMACEUTICAL';
+        var _biologic = 'D21'; // 'BIOLOGIC';
+        var _pharma = 'D22';  //'PHARMACEUTICAL';
+      //  var _veterinary = 'VETERINARY';
+     //   var _clinical = 'CLINICAL_TRIAL';
         /*'DRUG_MASTER_FILE',
          'MEDICAL_DEVICE'*/
         var service = {
@@ -317,6 +319,8 @@
                 [
                     _biologic,
                     _pharma
+                   // _veterinary,
+                   // _clinical
                 ]);
         }
 
@@ -328,6 +332,17 @@
 
             return _pharma;
         }
+/**
+        function _getVeterinary() {
+
+            return _veterinary;
+        }
+
+        function _getClinicalTrial() {
+
+            return _clinical;
+        }
+ **/
 
     }
 

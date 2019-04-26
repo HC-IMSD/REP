@@ -19,11 +19,14 @@
     angular
         .module('dossierService')
         .factory('DossierService', DossierService);
-    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+    DossierService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces',
+            'SOFTWARE_VERSION', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_PREFIX'];
 
-    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces, SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO) {
+    function DossierService(DossierLists, $translate, $filter, getCountryAndProvinces,
+                            SOFTWARE_VERSION, OTHER, UNKNOWN, YES, NO, XSL_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
+        var xslName = XSL_PREFIX + "REP_DO_2_2.xsl";
 
         // Define the DossierService objecy
         function DossierService() {
@@ -46,7 +49,7 @@
                 dateSaved: "",
                 applicationType: "NEW",
                 softwareVersion: SOFTWARE_VERSION,
-                xslFileName: "REP_DO_2_0.xsl",
+                xslFileName: xslName,
                 dataChecksum: "",
                 dossierType: "",
                 productName: "",
@@ -297,7 +300,8 @@
                 return list;
             }
 
-            if (angular.isDefined(contacts)) {
+            if (contacts && angular.isDefined(contacts)) {
+
                 if (!(contacts instanceof Array)) {
                     contacts = [contacts];
                 }

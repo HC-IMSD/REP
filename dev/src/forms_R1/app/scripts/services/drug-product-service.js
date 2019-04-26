@@ -19,11 +19,12 @@
     angular
         .module('drugProductService')
         .factory('DrugProductService', DrugProductService);
-    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO'];
+    DrugProductService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_PREFIX'];
 
-    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO) {
+    function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
+        var xslName = XSL_PREFIX + "REP_PI_2_2.xsl";
 
         // Define the DrugProductService object
         function DrugProductService() {
@@ -52,8 +53,8 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "2.0.0",
-                xslFileName: "REP_PI_2_0.xsl",
+                softwareVersion: "2.2.1",
+                xslFileName: xslName,
                 dataChecksum: "",
                 privacyStat:"",
                 //dossierType: "",
@@ -203,8 +204,8 @@
             //order is important!!! Must match schema
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
-            baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "2.0.0"; //TODO: hard code or make a function, should be centrally available
+            // baseModel.application_type = jsonObj.applicationType;
+            baseModel.software_version = "2.2.1"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
             baseModel.company_id = jsonObj.companyID;

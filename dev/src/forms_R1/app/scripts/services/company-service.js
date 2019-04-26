@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-        .module('companyService', ['dataLists']);
+        .module('companyService', ['dataLists', 'hpfbConstants']);
 })();
 
 (function () {
@@ -15,8 +15,8 @@
         .module('companyService')
         .factory('CompanyService', CompanyService);
 
-    CompanyService.$inject = ['$filter', 'getCountryAndProvinces'];
-    function CompanyService($filter, getCountryAndProvinces) {
+    CompanyService.$inject = ['$filter', 'getCountryAndProvinces', 'XSL_PREFIX'];
+    function CompanyService($filter, getCountryAndProvinces, XSL_PREFIX) {
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
@@ -25,7 +25,7 @@
                 enrolmentVersion: "0.0",
                 dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "2.0.0",
+                softwareVersion: "2.2.1",
                 companyId: "",
                 reasonAmend:"",
                 addressList: [],
@@ -40,7 +40,7 @@
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
             this.contactId = 0;
-            this.xslFileName = "REP_CO_2_0.xsl";
+            this.xslFileName = XSL_PREFIX + "REP_CO_2_2.xsl";
         }
         //TODO rewrite this object to proper prototype syntax
         CompanyService.prototype = {
@@ -346,10 +346,10 @@
             for (var i = 0; i < adrList.length; i++) {
                 var address = {};
                 address.address_id = adrList[i].addressID;
-                address.manufacturer = adrList[i].addressRole.manufacturer == true ? 'Y' : 'N';
-                address.mailing = adrList[i].addressRole.mailing == true ? 'Y' : 'N';
-                address.billing = adrList[i].addressRole.billing == true ? 'Y' : 'N';
-                address.importer = adrList[i].addressRole.importer == true ? 'Y' : 'N';
+                address.manufacturer = adrList[i].addressRole.manufacturer === true ? 'Y' : 'N';
+                address.mailing = adrList[i].addressRole.mailing === true ? 'Y' : 'N';
+                address.billing = adrList[i].addressRole.billing === true ? 'Y' : 'N';
+                address.importer = adrList[i].addressRole.importer === true ? 'Y' : 'N';
                 address.company_name = adrList[i].companyName;
                 address.importer_id = adrList[i].importerID;
                 address.company_address_details = {};

@@ -89,7 +89,7 @@
             vm.otherUpdate();
             // vm.updateErrorState();
             return state;
-        }
+        };
 
         vm.checkSelectedValues = function() {
             var keys = Object.keys(vm.model);
@@ -103,7 +103,7 @@
                 }
             }
             return false;
-        }
+        };
        /* vm.showErrorMissing=function(){
 
             return (vm.digestForm.$dirty && vm.digestForm.$invalid);
