@@ -3,15 +3,15 @@
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-4">{{::'TRANSACTION_HDING'|translate}}
-                    <sup id="tr2_ref">
-                        <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
-                    </sup>
                 </h2>
                 <button class="btn  btn-primary btn-sm active"
                         id="btn_reset"
                         data-ng-show ="transInfoCtrl.finalState"
                         data-ng-click="transInfoCtrl.resetSpecificValues()">{{::'RESET'|translate}}
                 </button>
+                <sup id="tr2_ref" data-ng-show ="transInfoCtrl.finalState">
+                    <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.1</a>
+                </sup>
                <!-- <div class="btn-group pull-right">
                     <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
                             class="btn-xs rep-help-button"
@@ -22,9 +22,9 @@
                 </div> -->
             </header>
             <div class="panel-body">
-                    <div  data-ng-show ="transInfoCtrl.finalState" class="col-xs-12 form-group alert alert-info" role="alert" aria-live="polite">
-                        <span>{{'RESET_INFO'|translate}}</span>
-                    </div>
+                    <!--<div  data-ng-show ="transInfoCtrl.finalState" class="col-xs-12 form-group alert alert-info" role="alert" aria-live="polite">-->
+                        <!--<span>{{'RESET_INFO'|translate}}</span>-->
+                    <!--</div>-->
                    <div class="row">
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
@@ -51,7 +51,7 @@
                                         <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"5_OR_6_CHAR" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <sup id="tr2a_ref">
-                                            <a class="fn-lnk" href="#tr2a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.a</a>
+                                            <a class="fn-lnk" href="#tr2a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
                                         </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyId"
@@ -71,7 +71,7 @@
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
                                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                             <sup id="tr2b_ref">
-                                                <a class="fn-lnk" href="#tr2b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.b</a>
+                                                <a class="fn-lnk" href="#tr2b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
                                             </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.dossierId"
@@ -95,7 +95,7 @@
                                         <span class="field-name">{{::"PROD_NAME" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                          <sup id="tr2c_ref">
-                                            <a class="fn-lnk" href="#tr2c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.c</a>
+                                            <a class="fn-lnk" href="#tr2c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                          </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.productNameId"
@@ -204,7 +204,7 @@
                                     <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                     <sup id="tr2d_ref">
-                                    <a class="fn-lnk" href="#tr2d"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2.d</a>
+                                    <a class="fn-lnk" href="#tr2d"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.1</a>
                                     </sup>
                                     </span>
                                     <cmp-error-message field-name="transInfoCtrl.isAdminSubId"
@@ -443,7 +443,7 @@
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}
                         <sup id="tr3_ref">
-                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
+                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.3</a>
                         </sup>
                     </h2>
                 </header>
@@ -460,7 +460,7 @@
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REG_CONTACT_THIS' |translate}}
                         <sup id="tr4_ref">
-                            <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
+                            <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                         </sup>
                     </h2>
                 </header>
@@ -474,7 +474,7 @@
                                         <span class="field-name">{{::"COMPANY_NOABBREV" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <sup id="tr4a_ref">
-                                            <a class="fn-lnk" href="#tr4a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.a</a>
+                                            <a class="fn-lnk" href="#tr4a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                                         </sup>
                                         <cmp-error-message field-name="transInfoCtrl.companyNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"
