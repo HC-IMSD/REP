@@ -4,9 +4,9 @@
       "CERTIFICATE_SUPPLEMENTARY_PROTECTION": {
         "template_type": "PHARMA",
         "data_checksum": "",
-        "enrolment_version": "0.1",
+        "enrolment_version": "0.0",
         "date_saved": "2017-04-27",
-        "software_version": "1.0.0",
+        "software_version": "1.0.1",
         "applicant": [
           {
             "billing_role": "Y",

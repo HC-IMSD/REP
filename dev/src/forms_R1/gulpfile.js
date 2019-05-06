@@ -1829,10 +1829,10 @@ gulp.task('dev-csp-htmlBuild', gulp.series('dev-csp-clean', 'dev-global-create-s
     var today = createSuffixDate();
     today = ""; //remove if you want the timestamp!
     var deploy = deployType.dev;
-    var englishHtmlName="certificate-supplementary-protection-form.html";
-    var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
-    var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
-    var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
+    var englishHtmlName="certificate-supplementary-protection-form-2019-2020.html";
+    var frenchHtmlName="formulaire-certificat-protection-supplementaire-2019-2020.html";
+    var englishInternalHtmlName="certificate-supplementary-protection-form-internal-2019-2020.html";
+    var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal-2019-2020.html";
     pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchInternalHtmlName, 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deployType.devInt, null, englishInternalHtmlName);
     pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchHtmlName, 'cspAppEXT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deploy, null, englishHtmlName);
     pipes.createRootHtml(paths.devEnglishTemplate, cspRootTitles_en, englishHtmlName, 'cspAppEXT-en' + today + '.js', htmlPartial, buildDir, ignoreDir, 'en', deploy, null, frenchHtmlName);
