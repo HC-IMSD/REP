@@ -1829,8 +1829,8 @@ gulp.task('dev-csp-htmlBuild', gulp.series('dev-csp-clean', 'dev-global-create-s
     var today = createSuffixDate();
     today = ""; //remove if you want the timestamp!
     var deploy = deployType.dev;
-    var englishHtmlName="certificate-supplementary-protection-form.html";
-    var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
+    var englishHtmlName="certificate-supplementary-protection-form-2019-2020.html";
+    var frenchHtmlName="formulaire-certificat-protection-supplementaire-2019-2020.html";
     var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
     var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
     pipes.createRootHtml(paths.devFrenchTemplate, cspRootTitles_fr, frenchInternalHtmlName, 'cspAppINT-fr' + today + '.js', htmlPartial, buildDir, ignoreDir, 'fr', deployType.devInt, null, englishInternalHtmlName);
@@ -2403,8 +2403,8 @@ gulp.task('prod-csp-compileHtml', gulp.series('prod-global-create-src-template',
         paths.buildProdCsp + 'app/lib/**/angular*.js'
     ];
     var srcPath = paths.buildProdCsp;
-    var englishHtmlName="certificate-supplementary-protection-form.html";
-    var frenchHtmlName="formulaire-certificat-protection-supplementaire.html";
+    var englishHtmlName="certificate-supplementary-protection-form-2019-2020.html";
+    var frenchHtmlName="formulaire-certificat-protection-supplementaire-2019-2020.html";
     var englishInternalHtmlName="certificate-supplementary-protection-form-internal.html";
     var frenchInternalHtmlName="formulaire-certificat-protection-supplementaire-internal.html";
     return (
