@@ -26,5 +26,7 @@
   "CONTACT_ROLE_INSTRUCT":"fr_Company Representative Role Instructions",
   "ADD_REPRES": "fr_Add Company Representative",
   "DELETE_REPRES": "fr_Delete Company Rep.",
-  "SAVE_REPRES": "fr_Save Company Rep."
+  "SAVE_REPRES": "fr_Save Company Rep.",
+  "ROLES": "fr_Roles"
+
 }

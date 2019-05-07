@@ -1,6 +1,8 @@
 {
   "ADD_TRANSACTION": "New Record",
   "SEQUENCE_NUM": "Sequence Number",
+  "NEW":"NEW",
+  "EXISTING":"EXISTING",
   "DATE_SUBMITTED": "Date Submitted (YYYY-MM-DD)",
   "SEQUENCE_DESCRIPT": "Regulatory Transaction Description",
   "IS_ACTCHANGES": "Same as Regulatory Activity Contact for this Submission?",

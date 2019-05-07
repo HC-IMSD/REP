@@ -125,5 +125,19 @@
   "REPRODUCTIVE_DETAILS": "Other reproductive system details",
   "SKIN_DETAILS": "fr_Other skin and glandular system details",
   "ADD_SOURCED":"fr_Add Sourced Ingredient",
-  "DELETE_SOURCED":"fr_Delete Sourced Ingredient"
+  "DELETE_SOURCED":"fr_Delete Sourced Ingredient",
+  "HUMAN_ANIMAL_SOURCE": "Human / Animal Sourced?",
+  "ADD_TISSUES_FLUIDS": "Add Tissues or Fluids",
+  "ADD_ANIMAL_SOURCES": "Add Animal Sources",
+  "ADD_COUNTRY_ORIGIN": "Add Animal Countries",
+  "CARDIO_LEGEND": "Select one or more Cardio-Respiratory System selections",
+  "NERVOUS_LEGEND": "Select one or more Nervous System selections",
+  "OTHER_LEGEND": "Select one or more Other System selections",
+  "IMMUNE_LEGEND": "Select one or more Immune System selections",
+  "DIGESTIVE_LEGEND": "Select one or more Digestive System selections",
+  "REPRODUCTIVE_LEGEND": "Select one or more Reproductive System selections",
+  "MUSCLE_LEGEND": "Select one or more Musculo-Skeletal System selections",
+  "SKIN_LEGEND": "Select one or more Skin and Glandular System selections",
+  "AP4CTRL.APPENDIXFORM":"in the appendix tab",
+  "CMP-APPENDIX-FOUR-RECORD":"Human / Animal Sourced Record"
 }

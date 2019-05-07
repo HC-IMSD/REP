@@ -15,9 +15,15 @@
   "ADDR_INFO": "Informations d'adresses",
   "ADDR_DETAILS": "Détails de l'adresse",
   "ADDR_ROLE_LEGEND": "fr_Select one or more roles for this company",
+  "ADDR_REP_ROLE_LEGEND": "fr_Select one or more roles for this company representative",
+  "PRODUCTS_IMPORTED": "fr_Imported Products",
+  "PRODUCT_TYPES":"fr_Products imported by this Company",
+  "ALL_PRODUCTS": "fr_All Products",
+  "SELECTED_PRODUCTS":"fr_Some Products",
+  "IDENTIFY_PRODUCTS": "fr_Provide the Dossier Identifiers for the products that are imported by this Company",
+  "ADD_DOSSIER_ID":"fr_Add Dossier ID",
   "IMPORTER_NONCDN":"fr_There should be a Canadian Importer when the Manufacturer / Sponsor is not a Canadian Address",
   "COUNTRY_CHOOSE":"Choisir un pays",
   "COUNTRY_SEARCH":"fr_Select or Search for country",
-  "PROVINCELIST":"Province"
-
+  "PROVINCELIST":"Province or State"
 }

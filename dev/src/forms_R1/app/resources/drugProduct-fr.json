@@ -34,5 +34,6 @@
   "BARN":"Barn",
   "INS_INDUS":"Institutional/Industrial",
   "CONTACT_LENS":"Contact Lens",
-  "SAVE_INSTRUCT": "Product Information File Save Instructions"
+  "SAVE_INSTRUCT": "Product Information File Save Instructions",
+  "ADD_IMPORTER" : "Add Importer"
 }

@@ -1,10 +1,10 @@
 {
   "COMPANY_ENROL": "fr_REP Company Form",
-  "manufacturer": "Manufacturer",
-  "mailing": "Mailing",
-  "billing": "Billing",
-  "importer": "Importer",
-  "company_name": "Company Name",
-  "address_record": "Address Record",
-  "contact_record": "Contact Record"
+  "manufacturer": "fr_Manufacturer",
+  "mailing": "fr_Mailing",
+  "billing": "fr_Billing",
+  "importer": "fr_Importer",
+  "company_name": "fr_Company Name",
+  "address_record": "fr_Address Record",
+  "contact_record": "fr_Contact Record"
 }
