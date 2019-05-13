@@ -1,15 +1,14 @@
 {
   "ADDRESSLISTCTRL.ADDRESSLISTFORM": "fr_in the Address Information section.",
   "CONTACTLISTCTRL.CONTACTLISTFORM": "fr_in the Company Representative Information section.",
-  "CONTACTROLESVALID": "fr_For Company Representative, selection of  all roles: manufacturer, mailing, billing, and primary REP ",
-  "ADDRESSROLESVALID": "fr_For the Address Information, selection of all roles: manufacturer, mailing, and billing",
-  "CONTACTREC.CONTACTRECFORM":"fr_in the Company Representative details",
-  "ADDRESSREC.ADDRESSRECFORM":"fr_in the Address details",
-  "COMPANY_FORM":"fr_Company Enrolment Form",
-  "ROLEMISSING": "fr_Select one or more roles for this company",
-  "CONTACTROLEMISSING": "fr_Select one or more roles for this company representative",
+  "CONTACTROLESVALID": "Pour le représentant de l'entreprise, sélection de toutes les rôles: fabricant, de l'envoi, de la facturation et principale du PIR ",
+  "ADDRESSROLESVALID": "Pour l'information d'adresse, sélection de toutes les rôles: fabricant, de l'envoi et de la facturation ",
+  "CONTACTREC.CONTACTRECFORM":"dans les détails du représentant de l'entreprise",
+  "ADDRESSREC.ADDRESSRECFORM":"dans les détails de l'adresse",
+  "COMPANY_FORM":"Inscription D'une Entreprise Réglementaire",
+  "ROLEMISSING": "Sélectionner un ou plusieurs rôles pour ce représentant de l'entreprise",
+  "CONTACTROLEMISSING": "Sélectionner un ou plusieurs rôles pour ce représentant de l'entreprise",
   "ROLEREPMISSING": "fr_Roles for this company representative ",
-  "IMPORTERIDVALID": "fr_Please input importer ID for each importer",
-  "ADDRESS_EXPND": "fr_Please input importer ID for each importer"
+  "IMPORTERIDVALID": "SVP entrez l’ID de l’importateur pour chaque produit",
+  "ADDRESS_EXPND": "SVP entrez l’ID de l’importateur pour chaque produit"
 }
-

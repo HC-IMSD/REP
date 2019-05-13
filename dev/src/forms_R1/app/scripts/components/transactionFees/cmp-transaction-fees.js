@@ -26,9 +26,9 @@
             }
         });
 
-    transactionFeesController.$inject = ['$scope', '$window', 'TransactionLists', 'YES', 'NO','ENGLISH','FRENCH','ADVANCE_FEE_PAYMENT_EN','ADVANCE_FEE_PAYMENT_FR'];
+    transactionFeesController.$inject = ['$scope', '$window', '$translate', 'TransactionLists', 'YES', 'NO','ENGLISH','FRENCH','ADVANCE_FEE_PAYMENT_EN','ADVANCE_FEE_PAYMENT_FR'];
 
-    function transactionFeesController($scope, $window, TransactionLists, YES, NO,ENGLISH,FRENCH, ADVANCE_FEE_PAYMENT_EN,ADVANCE_FEE_PAYMENT_FR) {
+    function transactionFeesController($scope, $window, $translate, TransactionLists, YES, NO,ENGLISH,FRENCH, ADVANCE_FEE_PAYMENT_EN,ADVANCE_FEE_PAYMENT_FR) {
 
         var vm = this;
         vm.model = {};
@@ -46,6 +46,9 @@
             _setIdNames();
             vm.submissionType = TransactionLists.getFeeList();
             vm.alerts = [false, false, false];
+            for(var i=0; i < vm.submissionType.length; i++){
+                vm.submissionType[i]['text'] = vm.submissionType[i][$translate.use()];
+            }
         };
 
         vm.errorsTemp = function () {

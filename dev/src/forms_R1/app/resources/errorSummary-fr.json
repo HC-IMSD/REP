@@ -1,8 +1,8 @@
-
-
 {
 "FOR_THE":"Pour le ",
 "THERE_ARE_ERRORS":"Il y a des erreurs",
+"FORM_NOT_SAVED":"Le formulaire n’a pas pu être enregistré car ",
+"NOT_SAVED":" n’a pas pu être enregistré car ",
 "ERRORS_FOUND":"erreurs ont été trouvées.",
 "ERROR_FOUND":"erreur a été trouvée.",
 "TYPE_REQUIRED":"Ce champ est obligatoire.",
@@ -12,6 +12,6 @@
 "POSTAL_FORMAT": "Entrez un format valide.",
 "TYPE_MIN": "Doit être supérieur au minimum.",
 "TYPE_DATE":"Veuillez fournir une une date valide.",
-  "TYPE_NUMBER":"Veuillez fournir un numéro valide.",
-  "TYPE_PATTERN": "fr_The format is not valid"
+"TYPE_NUMBER":"Veuillez fournir un numéro valide.",
+"TYPE_PATTERN": "Le format n’est pas valide"
 }

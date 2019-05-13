@@ -1,8 +1,8 @@
 {
-  "APPL_STATUS": "fr_Enrolment Status",
-  "ENROL_VERSION": "Version d’inscription",
-  "DATE_SAVED": "Date du dernier enregistrement",
-  "AMEND_ENROL": "fr_Amend Enrolment",
+  "APPL_STATUS": "Statut de l'insciption",
+  "ENROL_VERSION": "Version de l'inscription",
+  "DATE_SAVED": "Date de la dernière enregistrement",
+  "AMEND_ENROL": "Modifier l'inscription",
   "AMEND_MSG":"fr_Edit records to be amended below.",
-  "REASON_AMEND":"fr_Reason for amendment"
+  "REASON_AMEND":"Raison pour la modification"
 }

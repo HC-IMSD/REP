@@ -42,7 +42,7 @@
                 width: "20"
             },
             {
-                label: "Importer Company Name",
+                label: "IMPORTER_COMPANY_NAME",
                 binding: "importerName",
                 width: "80"
             }

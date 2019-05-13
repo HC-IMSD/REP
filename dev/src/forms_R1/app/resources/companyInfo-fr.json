@@ -1,12 +1,12 @@
 {
-  "REG_COMPANY_ENROL": "fr_Regulatory Company Enrolment",
-  "LOAD_COMPANY_FILE": "fr_Load a Company Enrolment File",
+  "REG_COMPANY_ENROL": "Inscription d'une entreprise réglementaire",
+  "LOAD_COMPANY_FILE": "Charger un fichier d'inscipriton d'entreprise",
   "ENROL_INSTRUCT": "fr_Company Regulatory Enrolment Instructions",
   "ADDRESS_INSTRUCT":"fr_Company Address Record Instructions",
   "ADDRESS_ROLE_INSTRUCT":"fr_Company Address Role Instructions",
-  "REPRESENT_INSTRUCT":"fr_Company Representative Information",
+  "REPRESENT_INSTRUCT":"Information représentative de l'entrepise",
   "SAVE_INSTRUCT": "fr_Company File Save Instructions",
   "AMEND_NOTE": "fr_The “Amend Enrolment” button must be selected when amending a Final Company XML.",
-  "FIELDID": "fr_Company Id",
-  "IMPORTERID":"fr_Importer Company ID"
+  "FIELDID": "ID d'entreprise",
+  "IMPORTERID":"ID d'entreprise de l'importateur"
 }
