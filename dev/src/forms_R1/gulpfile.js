@@ -118,8 +118,8 @@ var companyRootTitles_en = {
 
 };
 var companyRootTitles_fr = {
-    mainHeading: "fr_Company Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Company Template: Regulatory Enrolment Process - Canada.ca'
+    mainHeading: "Modèle de l'entreprise: Processus d'Inscription Réglementaire",
+    title: "Modèle de l'entreprise: Processus d'Inscription Réglementaire - Canada.ca"
 
 };
 
