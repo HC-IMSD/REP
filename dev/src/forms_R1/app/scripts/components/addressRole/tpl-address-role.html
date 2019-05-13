@@ -16,7 +16,7 @@
                    data-ng-model="ar.isSelected" required/>
             <strong id="address-role-error" class="error" data-ng-show="ar.showErrorMissing()">
                         <span class="label label-danger" data-ng-messages="ar.roleForm.{{::ar.roleMissingId}}.$error">
-                            <span data-ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
+                            <span data-ng-message="required">{{::"MSG_ERR_MAND"|translate}}</span>
                         </span>
             </strong>
         </div>
@@ -25,7 +25,7 @@
                    data-ng-model="ar.isSelected" required/>
             <strong id="contact-role-error" class="error" data-ng-show="ar.showErrorMissing()">
                         <span class="label label-danger" data-ng-messages="ar.roleForm.{{::ar.contactRoleMissingId}}.$error">
-                            <span data-ng-message="required">{{::"MSG_ERR_ROLE"|translate}}</span>
+                            <span data-ng-message="required">{{::"MSG_ERR_MAND"|translate}}</span>
                         </span>
             </strong>
         </div>
@@ -47,7 +47,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <div class="checkbox">
                     <label for="{{::ar.chkMailId}}">
                         <input type="checkbox" name="mailing" data-ng-model="ar.roleModel.mailing"
@@ -81,7 +81,7 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-7" data-ng-show="! ar.isContact">
                 <div class="checkbox">
                     <label for="{{::ar.chkImpId}}">
                         <input type="checkbox" name="importer" data-ng-model="ar.roleModel.importer"
@@ -97,9 +97,7 @@
                     </label>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <div data-ng-show="ar.isContact" class="checkbox">
                     <label for="{{::ar.chkRePrimId}}">
                         <input type="checkbox" name="repPrimary" data-ng-model="ar.roleModel.repPrimary"
@@ -114,7 +112,25 @@
                     </label>
                 </div>
             </div>
-            <div class="col-sm-4">
+        </div>
+        <div class="row">
+            <div class="col-sm-4" data-ng-show="ar.isContact">
+                <div class="checkbox">
+                    <label for="{{::ar.chkImpId}}">
+                        <input type="checkbox" name="importer" data-ng-model="ar.roleModel.importer"
+                               data-ng-disabled="!ar.isEditable"
+                               data-ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="{{::ar.chkImpId}}"/>
+                        <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
+                        <span data-ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
+                        <strong id="importer-rolec-error" class="error" data-ng-if="ar.roleForm.importer.$invalid">
+                         <span class="label label-danger" data-ng-messages="ar.roleForm.importer.$error">
+                                    <span data-ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
+                                </span>
+                        </strong>
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-7">
                 <div data-ng-show="ar.isContact" class="checkbox">
                     <label for="{{::ar.chkRepSecId}}">
                         <input type="checkbox" name="repSecondary" data-ng-model="ar.roleModel.repSecondary"
