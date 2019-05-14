@@ -26,14 +26,15 @@
             }
         });
 
-    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope'];
+    ApplInfoCtrl.$inject=['NEW_TYPE','AMEND_TYPE','APPROVED_TYPE','EXTERNAL_TYPE','$scope', '$translate'];
 
-    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE, $scope) {
+    function ApplInfoCtrl(NEW_TYPE,AMEND_TYPE,APPROVED_TYPE,EXTERNAL_TYPE, $scope, $translate) {
         var vm = this;
         vm.applTypes = [NEW_TYPE, AMEND_TYPE, APPROVED_TYPE];
         vm.formType = EXTERNAL_TYPE;
         vm.infoModel = {
             applicationType: "NEW",
+            applicationTypeText:"",
             enrolmentVersion: "0.0",
             dateSaved: "",
             reasonAmend:""
@@ -60,6 +61,7 @@
         ];
         vm.$onInit = function () {
             ///do init
+            vm.infoModel.applicationTypeText = $translate.instant(vm.infoModel.applicationType);
             _setIdNames();
         };
         vm.$onChanges = function (changes) {
