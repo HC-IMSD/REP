@@ -13,7 +13,7 @@
                 <input type="text" class="form-control full-width" id="enr-version-text_{{$id}}" data-ng-readonly="true"
                        data-ng-model="infoCtrl.infoModel.enrolmentVersion"/>
             </div>
-            <div class="col-xs-3 form-group">
+            <div class="col-xs-4 form-group">
                 <label for="date-saved-text_{{$id}}">{{::"DATE_SAVED"| translate}}</label>
                 <input type="text" class="form-control full-width" id="date-saved-text_{{$id}}"
                        data-ng-model="infoCtrl.infoModel.dateSaved"
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <!-- External -->
-                <div class="col-xs-4 form-group" data-ng-if="infoCtrl.isExtern()">
+                <div class="col-xs-3 form-group" data-ng-if="infoCtrl.isExtern()">
                     <label for="{{::infoCtrl.compId}}">{{::'COMPANY_ID' |translate}}</label>
                     <input type="text" class="form-control" id="{{::infoCtrl.compId}}"
                                data-ng-readonly="true" name="{{::infoCtrl.compId}}"
