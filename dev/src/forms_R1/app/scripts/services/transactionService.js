@@ -89,6 +89,13 @@
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
                 var today = _getToday();
+                var subt = "";
+                var currentLang = $translate.proposedLanguage() || $translate.use();
+                if (jsonObj.isAdminSub) {
+                    subt = {};
+                    _setAdminSubTypeForOutput(jsonObj.subType, subt,
+                        currentLang, ENGLISH, FRENCH);
+                }
                 var resultJson = {
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
@@ -100,7 +107,7 @@
                         is_priority: jsonObj.isPriority,
                         is_noc: jsonObj.isNoc,
                         is_admin_sub: jsonObj.isAdminSub,
-                        sub_type: jsonObj.subType
+                        sub_type: subt
                        // is_ectd: jsonObj.isEctd
                     }
                 };
@@ -217,7 +224,10 @@
                 model.isPriority = jsonObj.is_priority;
                 model.isNoc = jsonObj.is_noc;
                 model.isAdminSub = jsonObj.is_admin_sub;
-                model.subType = jsonObj.sub_type;
+                model.subType = '';
+                if (jsonObj.sub_type) {
+                    model.subType = $filter('filter')(TransactionLists.getAdminSubType(), {id: jsonObj.sub_type._id})[0];
+                }
                 model.isSolicited = jsonObj.is_solicited;
                 this._transformReqFromFile(model, jsonObj.solicited_requester_record);
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
@@ -382,8 +392,10 @@
             result.submission_class = "";
 
             if (feeObj.submissionClass && feeObj.submissionClass.id) {
-                //gets rid of any hashkey serialize then deseriailize,
-                result.submission_class = (angular.fromJson(angular.toJson(feeObj.submissionClass)))
+                var currentLang = $translate.proposedLanguage() || $translate.use();
+                result.submission_class = _getSubmissionClassForOutput(feeObj.submissionClass, currentLang, ENGLISH, FRENCH);
+                result.submission_description = _getSubDescription(feeObj.submissionClass, currentLang, ENGLISH, FRENCH);
+                result.fee = feeObj.submissionClass.fee;
             }
             result.deferral_request = feeObj.deferralRequest;
             result.fee_remission = feeObj.feeRemission;
@@ -422,7 +434,7 @@
             // result.submission_class = feeObj.submissionClass;
 
             if (feeObj.submission_class && feeObj.submission_class.id) {
-                result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class.id});
+                result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class._id});
             }
             result.deferralRequest = feeObj.deferral_request;
             result.feeRemission = feeObj.fee_remission;
@@ -452,6 +464,32 @@
 
         // Return a reference to the object
         return TransactionService;
+    }
+
+    function _getSubmissionClassForOutput(subTypeRec, currentLang, ENGLISH, FRENCH) {
+        var result = {};
+        result._id = subTypeRec.id;
+        result._label_en = subTypeRec.en;
+        result._label_fr = subTypeRec.fr;
+        if (currentLang === ENGLISH) {
+            result.__text = subTypeRec.en;
+        } else if (currentLang === FRENCH) {
+            result.__text = subTypeRec.fr;
+        }
+        return result;
+    }
+
+    function _getSubDescription(subDescrRec, currentLang, ENGLISH, FRENCH) {
+        var result = {};
+        result._label_en = subDescrRec.description_en;
+        result._label_fr = subDescrRec.description_fr;
+        if (currentLang === ENGLISH) {
+            result.__text = subDescrRec.en;
+        } else if (currentLang === FRENCH) {
+            result.__text = subDescrRec.fr;
+        }
+        return result;
+
     }
 
     /**
@@ -486,14 +524,18 @@
         // lifecycleRec.sequence = lifecycleObj.sequence_number;
         // lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
-        lifecycleRec.activityLead = lifecycleObj.regulatory_activity_lead._id;
+        if (lifecycleObj.regulatory_activity_lead) {
+            lifecycleRec.activityLead = lifecycleObj.regulatory_activity_lead._id;
+        }
 
         lifecycleRec.activityType = "";
         if (lifecycleObj.regulatory_activity_type) {
             lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.regulatory_activity_type._id})[0];
             lifecycleRec.activityTypeDisplay = lifecycleRec.activityType.id;
         }
-        lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
+        if (lifecycleObj.sequence_description_value) {
+            lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value._id;
+        }
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
         lifecycleRec.endDate = lifecycleObj.sequence_to_date;
         lifecycleRec.details = lifecycleObj.sequence_details;
@@ -512,18 +554,28 @@
         lifecycleRec.date_filed = lifecycleObj.dateFiled; **/
         lifecycleRec.control_number = lifecycleObj.controlNumber;
         var currentLang = $translate.proposedLanguage() || $translate.use();
-        var ral_text =  $translate.instant(lifecycleObj.activityLead, "", '', currentLang);
-        lifecycleRec.regulatory_activity_lead = {
-            _id: lifecycleObj.activityLead,
-            __text: ral_text
-        };
+        lifecycleRec.regulatory_activity_lead = "";
+        if (lifecycleObj.activityLead) {
+            var ral_text = $translate.instant(lifecycleObj.activityLead, "", '', currentLang);
+            lifecycleRec.regulatory_activity_lead = {
+                _id: lifecycleObj.activityLead,
+                __text: ral_text
+            };
+        }
         lifecycleRec.regulatory_activity_type = "";
         if (lifecycleObj.activityType) {
             lifecycleRec.regulatory_activity_type = {};
             _setActivityTypeValuesForOutput(lifecycleObj.activityType, lifecycleRec.regulatory_activity_type,
                 currentLang, ENGLISH, FRENCH);
         }
-        lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
+        lifecycleRec.sequence_description_value = '';
+        if (lifecycleObj.descriptionValue) {
+            var sdv_text = $translate.instant(lifecycleObj.descriptionValue, "", '', currentLang);
+            lifecycleRec.sequence_description_value = {
+                _id: lifecycleObj.descriptionValue,
+                __text: sdv_text
+            };
+        }
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
         lifecycleRec.sequence_to_date = lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
@@ -575,6 +627,29 @@
             destActivityTypeRec.__text = destActivityTypeRec._label_fr;
         }
         destActivityTypeRec._id = srcActivityTypeRec.id;
+
+    }
+
+    /**
+     * Format the value of Reason for Administrative Submission
+     *
+     * @param srcAdminSubTypeRec
+     * @param destAdminSubTypeRec
+     * @param currentLang
+     * @param ENGLISH
+     * @param FRENCH
+     * @private
+     */
+    function _setAdminSubTypeForOutput(srcAdminSubTypeRec, destAdminSubTypeRec, currentLang, ENGLISH, FRENCH) {
+        destAdminSubTypeRec._id = srcAdminSubTypeRec.id;
+        destAdminSubTypeRec._label_en = srcAdminSubTypeRec.en;
+        destAdminSubTypeRec._label_fr = srcAdminSubTypeRec.fr;
+        if (currentLang === ENGLISH) {
+            destAdminSubTypeRec.__text = destAdminSubTypeRec._label_en;
+        } else if (currentLang === FRENCH) {
+            destAdminSubTypeRec.__text = destAdminSubTypeRec._label_fr;
+        }
+        destAdminSubTypeRec._id = srcAdminSubTypeRec.id;
 
     }
 
@@ -818,8 +893,9 @@
 
     function _createEmptyFeeDetailsForOutput(NO) {
         var feeObj = {
-
             submission_class: null,
+            submission_description: null,
+            fee: "",
             deferral_request: NO, //defer payment for two years
             fee_remission: "", //applying for fee remission
             gross_revenue: 0,
