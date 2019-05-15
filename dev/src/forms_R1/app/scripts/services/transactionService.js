@@ -124,8 +124,8 @@
                 }
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
-                resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
-                resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput(jsonObj.activityContact);
+                resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput($translate, jsonObj.activityAddress);
+                resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput($translate, jsonObj.activityContact);
                 resultJson.TRANSACTION_ENROL.confirm_regulatory_contact = jsonObj.confirmContactValid === true ? 'Y' : 'N'; //this may no longer be needed
                 return (resultJson);
             },
@@ -253,7 +253,7 @@
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 //model.confirmContactValid = jsonObj.confirm_regulatory_contact === 'Y';
 
-                model.activityAddress = _transformAddressFromFileObj($filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
+                model.activityAddress = _transformAddressFromFileObj($translate, $filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
             },
@@ -670,11 +670,11 @@
     }
 
     //TODO deprecated
-    function _mapRepContactToOutput(repObj) {
+    function _mapRepContactToOutput($translate, repObj) {
         var repContact = {};
         repContact.rep_submission_contact_role = repObj.repRole;
         //deflatten the object
-        repContact.rep_submission_contact = _mapContactToOutput(repObj);
+        repContact.rep_submission_contact = _mapContactToOutput($translate, repObj);
         return repContact;
     }
 
@@ -684,12 +684,12 @@
             console.error("There is no contact object");
             return contact;
         }
-        contact.salutation = contactObj.salutation;
+        contact.salutation = contactObj.salutation._id;
         contact.givenName = contactObj.given_name;
         contact.initials = contactObj.initials;
         contact.surname = contactObj.surname;
         contact.title = contactObj.job_title;
-        contact.language = contactObj.language_correspondance;
+        contact.language = contactObj.language_correspondance._id;
         contact.phone = contactObj.phone_num;
         contact.phoneExt = contactObj.phone_ext;
         contact.fax = contactObj.fax_num;
@@ -697,15 +697,22 @@
         return contact;
     }
 
-    function _mapContactToOutput(contactObj) {
+    function _mapContactToOutput($translate, contactObj) {
 
         var contact = {};
-        contact.salutation = contactObj.salutation;
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        contact.salutation = {
+            _id: contactObj.salutation,
+            __text: $translate.instant(contactObj.salutation, "", '', currentLang)
+        };
         contact.given_name = contactObj.givenName;
         contact.initials = contactObj.initials;
         contact.surname = contactObj.surname;
         contact.job_title = contactObj.title;
-        contact.language_correspondance = contactObj.language;
+        contact.language_correspondance = {
+            _id: contactObj.language,
+            __text: $translate.instant(contactObj.language, "", '', currentLang)
+        };
         contact.phone_num = contactObj.phone;
         contact.phone_ext = contactObj.phoneExt;
         contact.fax_num = contactObj.fax;
@@ -713,37 +720,51 @@
         return contact;
     }
 
-    function _mapAddressToOutput(addressObj) {
+    function _mapAddressToOutput($translate, addressObj) {
 
         var address = {};
         address.street_address = addressObj.street;
         address.city = addressObj.city;
-        address.province_lov = addressObj.stateList;
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        if (addressObj.stateList) {
+            address.province_lov = {
+                _id: addressObj.stateList,
+                __text: $translate.instant(addressObj.stateList, "", '', currentLang)
+            };
+        } else {
+            address.province_lov = "";
+        }
         address.province_text = addressObj.stateText;
         address.country = "";
         if (addressObj.country) {
             address.country =
                 {
+                    _id: addressObj.country.id,
                     _label_en: addressObj.country.en,
                     _label_fr: addressObj.country.fr,
-                    __text: addressObj.country.id
+                    __text: $translate.instant(addressObj.country.id, "", '', currentLang)
                 }
         }
         address.postal_code = addressObj.postalCode;
         return (address);
     }
 
-    function _transformAddressFromFileObj($filter, getCountryAndProvinces, addressObj) {
+    function _transformAddressFromFileObj($translate, $filter, getCountryAndProvinces, addressObj) {
         var address = {};
         address.street = addressObj.street_address;
         address.city = addressObj.city;
-        address.stateList = addressObj.province_lov;
+        if (addressObj.province_lov) {
+            address.stateList = addressObj.province_lov._id;
+        } else {
+            address.stateList = "";
+        }
         address.stateText = addressObj.province_text;
         address.country = "";
-        if (addressObj.country.__text) {
-            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: addressObj.country.__text})[0];
-            address.countryHtml = address.country.en;
-            address.countryDisplay = addressObj.country.id;
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        if (addressObj.country._id) {
+            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: addressObj.country._id})[0];
+            address.countryHtml = $translate.instant(address.country.id, "", '', currentLang);
+            address.countryDisplay = address.country.id;
         }
 
         address.postalCode = addressObj.postal_code;
