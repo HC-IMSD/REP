@@ -226,7 +226,7 @@
                 model.isAdminSub = jsonObj.is_admin_sub;
                 model.subType = '';
                 if (jsonObj.sub_type) {
-                    model.subType = $filter('filter')(TransactionLists.getAdminSubType(), {id: jsonObj.sub_type._id})[0];
+                    model.subType = $filter('filter')(getContactLists.getAdminSubType(), {id: jsonObj.sub_type._id})[0];
                 }
                 model.isSolicited = jsonObj.is_solicited;
                 this._transformReqFromFile(model, jsonObj.solicited_requester_record);
@@ -433,7 +433,7 @@
             if (angular.isUndefined(feeObj)) return null;
             // result.submission_class = feeObj.submissionClass;
 
-            if (feeObj.submission_class && feeObj.submission_class.id) {
+            if (feeObj.submission_class && feeObj.submission_class._id) {
                 result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class._id});
             }
             result.deferralRequest = feeObj.deferral_request;
