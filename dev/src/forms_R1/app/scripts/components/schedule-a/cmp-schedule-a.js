@@ -33,7 +33,7 @@
         var vm = this;
         vm.isClaim="";
         vm.expanderOpenState=false;
-       vm.disableExpander=false;
+        vm.disableExpander=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.oneRequired = [{type: "required", displayAlias: "MSG_ONE_SCHEDA"}];
         vm.errorMinLength = [{type: "minlength", displayAlias: "MSG_LENGTH_8NUM"}];
