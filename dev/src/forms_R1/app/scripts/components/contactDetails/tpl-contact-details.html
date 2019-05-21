@@ -101,11 +101,11 @@
                     <cmp-error-message field-name="contCtrl.phoneNumberId" form-ref="contCtrl.contactForm"
                                        show-error="contCtrl.showErrors()"
                                        error-types="contCtrl.phoneError"></cmp-error-message>
-                    <input type="text" id="{{::contCtrl.phoneNumberId}}"
+                    <input type="tel" id="{{::contCtrl.phoneNumberId}}"
                            data-ng-model="contCtrl.contactModel.phone"
                            class="form-control full-width" name="{{::contCtrl.phoneNumberId}}"
-                           maxlength="25" size="25" data-ng-readonly="!contCtrl.isEditable" data-ng-pattern="contCtrl.phoneReg"
-                           required/>
+                           data-ng-readonly="!contCtrl.isEditable" data-ng-pattern="contCtrl.phoneReg"
+                           required data-ng-maxlength="12" data-ng-minlength="10"  />
 
                 </label>
             </div>
@@ -130,10 +130,10 @@
                                        show-error="contCtrl.showErrors()"
                                        error-types="contCtrl.faxError">
                     </cmp-error-message>
-                    <input type="text" id="{{::contCtrl.faxId}}"
+                    <input type="tel" id="{{::contCtrl.faxId}}"
                            data-ng-model="contCtrl.contactModel.fax" data-ng-readonly="!contCtrl.isEditable"
                            data-ng-required="contCtrl.faxMandatory" class="form-control full-width" data-ng-pattern="contCtrl.phoneReg"
-                           name="{{::contCtrl.faxId}}" maxlength="25" size="25"/>
+                           name="{{::contCtrl.faxId}}" data-ng-maxlength="12" data-ng-minlength="10" />
                     <span data-ng-if="contCtrl.faxMandatory">{{::'FAX_NOT_AVAILABLE'|translate}} </span>
                 </label>
             </div>

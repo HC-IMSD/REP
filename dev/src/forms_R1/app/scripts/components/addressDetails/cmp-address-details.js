@@ -121,15 +121,22 @@
          * Updates the display value for the object for summary display
          */
         vm.countryChanged=function(){
-            vm.addressModel.countryDisplay=vm.addressModel.country.id;
-            vm.provListLabel = getProvinceListLabel();
-            vm.postalLabel = getPostalLabel();
-            vm.isPostalRequired = isPostalRequiredFn();
-            vm.provinces = getProvinceStateList();
-            vm.hideProvinceText = getProvinceTextState();
-            vm.postalPattern = getPostalPattern();
-            vm.hideProvinceDdl = !vm.hideProvinceText;
-            vm.isCountryCanada();
+            console.log("jang test:" + vm.addressModel.country.id);
+            if( vm.addressModel.country.id !== undefined ) {
+                vm.addressModel.countryDisplay = vm.addressModel.country.id;
+                vm.provListLabel = getProvinceListLabel();
+                vm.postalLabel = getPostalLabel();
+                vm.isPostalRequired = isPostalRequiredFn();
+                vm.provinces = getProvinceStateList();
+                vm.hideProvinceText = getProvinceTextState();
+                vm.postalPattern = getPostalPattern();
+                vm.hideProvinceDdl = !vm.hideProvinceText;
+                vm.isCountryCanada();
+            }
+            else {
+                vm.addressModel.countryHtml = "";
+                vm.addressModel.countryDisplay = "";
+            }
             vm.updateErrorSummary();
         };
 
