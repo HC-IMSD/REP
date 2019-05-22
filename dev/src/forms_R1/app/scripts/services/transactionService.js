@@ -89,6 +89,13 @@
             transformToFileObj: function (jsonObj) {
                 //transform back to needed
                 var today = _getToday();
+                var subt = "";
+                var currentLang = $translate.proposedLanguage() || $translate.use();
+                if (jsonObj.isAdminSub) {
+                    subt = {};
+                    _setAdminSubTypeForOutput(jsonObj.subType, subt,
+                        currentLang, ENGLISH, FRENCH);
+                }
                 var resultJson = {
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
@@ -100,7 +107,7 @@
                         is_priority: jsonObj.isPriority,
                         is_noc: jsonObj.isNoc,
                         is_admin_sub: jsonObj.isAdminSub,
-                        sub_type: jsonObj.subType
+                        sub_type: subt
                        // is_ectd: jsonObj.isEctd
                     }
                 };
@@ -117,8 +124,8 @@
                 }
                 resultJson.TRANSACTION_ENROL.is_activity_changes = jsonObj.isActivityChanges;
                 resultJson.TRANSACTION_ENROL.company_name = jsonObj.companyName;
-                resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput(jsonObj.activityAddress);
-                resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput(jsonObj.activityContact);
+                resultJson.TRANSACTION_ENROL.regulatory_activity_address = _mapAddressToOutput($translate, jsonObj.activityAddress);
+                resultJson.TRANSACTION_ENROL.regulatory_activity_contact = _mapContactToOutput($translate, jsonObj.activityContact);
                 resultJson.TRANSACTION_ENROL.confirm_regulatory_contact = jsonObj.confirmContactValid === true ? 'Y' : 'N'; //this may no longer be needed
                 return (resultJson);
             },
@@ -217,7 +224,10 @@
                 model.isPriority = jsonObj.is_priority;
                 model.isNoc = jsonObj.is_noc;
                 model.isAdminSub = jsonObj.is_admin_sub;
-                model.subType = jsonObj.sub_type;
+                model.subType = '';
+                if (jsonObj.sub_type) {
+                    model.subType = $filter('filter')(getContactLists.getAdminSubType(), {id: jsonObj.sub_type._id})[0];
+                }
                 model.isSolicited = jsonObj.is_solicited;
                 this._transformReqFromFile(model, jsonObj.solicited_requester_record);
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
@@ -243,7 +253,7 @@
                 model.activityContact = _transformContactFromFileObj(jsonObj.regulatory_activity_contact);
                 //model.confirmContactValid = jsonObj.confirm_regulatory_contact === 'Y';
 
-                model.activityAddress = _transformAddressFromFileObj($filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
+                model.activityAddress = _transformAddressFromFileObj($translate, $filter, getCountryAndProvinces, jsonObj.regulatory_activity_address);
                 this._transformEctdFromFile(model, jsonObj.ectd);
                 return model;
             },
@@ -382,8 +392,10 @@
             result.submission_class = "";
 
             if (feeObj.submissionClass && feeObj.submissionClass.id) {
-                //gets rid of any hashkey serialize then deseriailize,
-                result.submission_class = (angular.fromJson(angular.toJson(feeObj.submissionClass)))
+                var currentLang = $translate.proposedLanguage() || $translate.use();
+                result.submission_class = _getSubmissionClassForOutput(feeObj.submissionClass, currentLang, ENGLISH, FRENCH);
+                result.submission_description = _getSubDescription(feeObj.submissionClass, currentLang, ENGLISH, FRENCH);
+                result.fee = feeObj.submissionClass.fee;
             }
             result.deferral_request = feeObj.deferralRequest;
             result.fee_remission = feeObj.feeRemission;
@@ -421,8 +433,8 @@
             if (angular.isUndefined(feeObj)) return null;
             // result.submission_class = feeObj.submissionClass;
 
-            if (feeObj.submission_class && feeObj.submission_class.id) {
-                result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class.id});
+            if (feeObj.submission_class && feeObj.submission_class._id) {
+                result.submissionClass = $filter('findListItemById')(TransactionLists.getFeeList(), {id: feeObj.submission_class._id});
             }
             result.deferralRequest = feeObj.deferral_request;
             result.feeRemission = feeObj.fee_remission;
@@ -452,6 +464,32 @@
 
         // Return a reference to the object
         return TransactionService;
+    }
+
+    function _getSubmissionClassForOutput(subTypeRec, currentLang, ENGLISH, FRENCH) {
+        var result = {};
+        result._id = subTypeRec.id;
+        result._label_en = subTypeRec.en;
+        result._label_fr = subTypeRec.fr;
+        if (currentLang === ENGLISH) {
+            result.__text = subTypeRec.en;
+        } else if (currentLang === FRENCH) {
+            result.__text = subTypeRec.fr;
+        }
+        return result;
+    }
+
+    function _getSubDescription(subDescrRec, currentLang, ENGLISH, FRENCH) {
+        var result = {};
+        result._label_en = subDescrRec.description_en;
+        result._label_fr = subDescrRec.description_fr;
+        if (currentLang === ENGLISH) {
+            result.__text = subDescrRec.en;
+        } else if (currentLang === FRENCH) {
+            result.__text = subDescrRec.fr;
+        }
+        return result;
+
     }
 
     /**
@@ -486,14 +524,18 @@
         // lifecycleRec.sequence = lifecycleObj.sequence_number;
         // lifecycleRec.dateFiled = lifecycleObj.date_filed;
         lifecycleRec.controlNumber = lifecycleObj.control_number;
-        lifecycleRec.activityLead = lifecycleObj.regulatory_activity_lead._id;
+        if (lifecycleObj.regulatory_activity_lead) {
+            lifecycleRec.activityLead = lifecycleObj.regulatory_activity_lead._id;
+        }
 
         lifecycleRec.activityType = "";
         if (lifecycleObj.regulatory_activity_type) {
             lifecycleRec.activityType = $filter('filter')(TransactionLists.getActivityTypes(), {id: lifecycleObj.regulatory_activity_type._id})[0];
             lifecycleRec.activityTypeDisplay = lifecycleRec.activityType.id;
         }
-        lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value;
+        if (lifecycleObj.sequence_description_value) {
+            lifecycleRec.descriptionValue = lifecycleObj.sequence_description_value._id;
+        }
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
         lifecycleRec.endDate = lifecycleObj.sequence_to_date;
         lifecycleRec.details = lifecycleObj.sequence_details;
@@ -512,18 +554,28 @@
         lifecycleRec.date_filed = lifecycleObj.dateFiled; **/
         lifecycleRec.control_number = lifecycleObj.controlNumber;
         var currentLang = $translate.proposedLanguage() || $translate.use();
-        var ral_text =  $translate.instant(lifecycleObj.activityLead, "", '', currentLang);
-        lifecycleRec.regulatory_activity_lead = {
-            _id: lifecycleObj.activityLead,
-            __text: ral_text
-        };
+        lifecycleRec.regulatory_activity_lead = "";
+        if (lifecycleObj.activityLead) {
+            var ral_text = $translate.instant(lifecycleObj.activityLead, "", '', currentLang);
+            lifecycleRec.regulatory_activity_lead = {
+                _id: lifecycleObj.activityLead,
+                __text: ral_text
+            };
+        }
         lifecycleRec.regulatory_activity_type = "";
         if (lifecycleObj.activityType) {
             lifecycleRec.regulatory_activity_type = {};
             _setActivityTypeValuesForOutput(lifecycleObj.activityType, lifecycleRec.regulatory_activity_type,
                 currentLang, ENGLISH, FRENCH);
         }
-        lifecycleRec.sequence_description_value = lifecycleObj.descriptionValue;
+        lifecycleRec.sequence_description_value = '';
+        if (lifecycleObj.descriptionValue) {
+            var sdv_text = $translate.instant(lifecycleObj.descriptionValue, "", '', currentLang);
+            lifecycleRec.sequence_description_value = {
+                _id: lifecycleObj.descriptionValue,
+                __text: sdv_text
+            };
+        }
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
         lifecycleRec.sequence_to_date = lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
@@ -578,6 +630,29 @@
 
     }
 
+    /**
+     * Format the value of Reason for Administrative Submission
+     *
+     * @param srcAdminSubTypeRec
+     * @param destAdminSubTypeRec
+     * @param currentLang
+     * @param ENGLISH
+     * @param FRENCH
+     * @private
+     */
+    function _setAdminSubTypeForOutput(srcAdminSubTypeRec, destAdminSubTypeRec, currentLang, ENGLISH, FRENCH) {
+        destAdminSubTypeRec._id = srcAdminSubTypeRec.id;
+        destAdminSubTypeRec._label_en = srcAdminSubTypeRec.en;
+        destAdminSubTypeRec._label_fr = srcAdminSubTypeRec.fr;
+        if (currentLang === ENGLISH) {
+            destAdminSubTypeRec.__text = destAdminSubTypeRec._label_en;
+        } else if (currentLang === FRENCH) {
+            destAdminSubTypeRec.__text = destAdminSubTypeRec._label_fr;
+        }
+        destAdminSubTypeRec._id = srcAdminSubTypeRec.id;
+
+    }
+
     function _getEmptyEctdSection() {
         var ectd = {};
         ectd.companyId = "";
@@ -595,11 +670,11 @@
     }
 
     //TODO deprecated
-    function _mapRepContactToOutput(repObj) {
+    function _mapRepContactToOutput($translate, repObj) {
         var repContact = {};
         repContact.rep_submission_contact_role = repObj.repRole;
         //deflatten the object
-        repContact.rep_submission_contact = _mapContactToOutput(repObj);
+        repContact.rep_submission_contact = _mapContactToOutput($translate, repObj);
         return repContact;
     }
 
@@ -609,12 +684,12 @@
             console.error("There is no contact object");
             return contact;
         }
-        contact.salutation = contactObj.salutation;
+        contact.salutation = contactObj.salutation._id;
         contact.givenName = contactObj.given_name;
         contact.initials = contactObj.initials;
         contact.surname = contactObj.surname;
         contact.title = contactObj.job_title;
-        contact.language = contactObj.language_correspondance;
+        contact.language = contactObj.language_correspondance._id;
         contact.phone = contactObj.phone_num;
         contact.phoneExt = contactObj.phone_ext;
         contact.fax = contactObj.fax_num;
@@ -622,15 +697,22 @@
         return contact;
     }
 
-    function _mapContactToOutput(contactObj) {
+    function _mapContactToOutput($translate, contactObj) {
 
         var contact = {};
-        contact.salutation = contactObj.salutation;
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        contact.salutation = {
+            _id: contactObj.salutation,
+            __text: $translate.instant(contactObj.salutation, "", '', currentLang)
+        };
         contact.given_name = contactObj.givenName;
         contact.initials = contactObj.initials;
         contact.surname = contactObj.surname;
         contact.job_title = contactObj.title;
-        contact.language_correspondance = contactObj.language;
+        contact.language_correspondance = {
+            _id: contactObj.language,
+            __text: $translate.instant(contactObj.language, "", '', currentLang)
+        };
         contact.phone_num = contactObj.phone;
         contact.phone_ext = contactObj.phoneExt;
         contact.fax_num = contactObj.fax;
@@ -638,37 +720,51 @@
         return contact;
     }
 
-    function _mapAddressToOutput(addressObj) {
+    function _mapAddressToOutput($translate, addressObj) {
 
         var address = {};
         address.street_address = addressObj.street;
         address.city = addressObj.city;
-        address.province_lov = addressObj.stateList;
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        if (addressObj.stateList) {
+            address.province_lov = {
+                _id: addressObj.stateList,
+                __text: $translate.instant(addressObj.stateList, "", '', currentLang)
+            };
+        } else {
+            address.province_lov = "";
+        }
         address.province_text = addressObj.stateText;
         address.country = "";
         if (addressObj.country) {
             address.country =
                 {
+                    _id: addressObj.country.id,
                     _label_en: addressObj.country.en,
                     _label_fr: addressObj.country.fr,
-                    __text: addressObj.country.id
+                    __text: $translate.instant(addressObj.country.id, "", '', currentLang)
                 }
         }
         address.postal_code = addressObj.postalCode;
         return (address);
     }
 
-    function _transformAddressFromFileObj($filter, getCountryAndProvinces, addressObj) {
+    function _transformAddressFromFileObj($translate, $filter, getCountryAndProvinces, addressObj) {
         var address = {};
         address.street = addressObj.street_address;
         address.city = addressObj.city;
-        address.stateList = addressObj.province_lov;
+        if (addressObj.province_lov) {
+            address.stateList = addressObj.province_lov._id;
+        } else {
+            address.stateList = "";
+        }
         address.stateText = addressObj.province_text;
         address.country = "";
-        if (addressObj.country.__text) {
-            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: addressObj.country.__text})[0];
-            address.countryHtml = address.country.en;
-            address.countryDisplay = addressObj.country.id;
+        var currentLang = $translate.proposedLanguage() || $translate.use();
+        if (addressObj.country._id) {
+            address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: addressObj.country._id})[0];
+            address.countryHtml = $translate.instant(address.country.id, "", '', currentLang);
+            address.countryDisplay = address.country.id;
         }
 
         address.postalCode = addressObj.postal_code;
@@ -818,8 +914,9 @@
 
     function _createEmptyFeeDetailsForOutput(NO) {
         var feeObj = {
-
             submission_class: null,
+            submission_description: null,
+            fee: "",
             deferral_request: NO, //defer payment for two years
             fee_remission: "", //applying for fee remission
             gross_revenue: 0,
