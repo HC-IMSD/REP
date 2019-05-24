@@ -141,6 +141,11 @@
             vm.setRecord(vm.model.tissuesFluidsList.length - 1);
             vm.resetToCollapsed = !vm.resetToCollapsed;
         };
+        vm.onUpdatesRecord = function () {
+            vm.selectRecord = -1;
+            vm.requiredFlag = false;
+            vm.resetCollapsed = !vm.resetCollapsed;
+        };
         vm.deleteRecord = function (recId) {
             var idx = vm.model.tissuesFluidsList.indexOf(
                 $filter('filter')(vm.model.tissuesFluidsList, {id: recId}, true)[0]);

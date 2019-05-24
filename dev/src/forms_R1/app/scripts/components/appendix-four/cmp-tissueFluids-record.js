@@ -31,6 +31,7 @@
             controllerAs: 'tissuesSrcCtrl',
             bindings: {
                 record: '<',
+                onUpdate: '&',
                 onDelete: '&',
                 showErrors: '&',
                 isFileLoaded: '<',
@@ -44,6 +45,7 @@
 
     function tissuesFluidsController(DossierLists, $translate, $filter,$scope) {
         var vm = this;
+        vm.updateRecord = 0; //triggers and error update
         vm.systemList = DossierLists.getTissuesSystem();
         vm.fluidsLists = DossierLists;
         vm.dosService = "";
@@ -79,6 +81,11 @@
             if(changes.addBtn){
                 vm.resetToCollapsed = true;
             }
+        };
+
+        vm.saveRecord = function () {
+            vm.updateRecord = vm.updateRecord + 1;
+            vm.onUpdate({rec: vm.model});
         };
 
         vm.deleteRecord = function () {

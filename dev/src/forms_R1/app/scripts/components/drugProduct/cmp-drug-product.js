@@ -504,6 +504,7 @@
             vm.formId="drug_product_form" + scopeId;
             vm.dossierId="dossier_id"+ scopeId;
             vm.compId="company_id"+ scopeId;
+            vm.typeId="dossier_type"+ scopeId;
             vm.thirdId="signed_third"+ scopeId;
             vm.prodNameId="prod_name"+ scopeId;
             vm.properNameId="proper_name"+ scopeId;

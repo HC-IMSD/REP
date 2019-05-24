@@ -42,6 +42,7 @@
             _default: {
                 dossierID: "",
                 companyID: "",
+                dossierType: "",
                 productName: "",
                 properName: "",
                 manu: false,
@@ -115,6 +116,7 @@
                 var formModel = {
                     companyID: info.company_id,
                     dossierID: info.dossier_id, //.substring(8,15),
+                    dossierType: info.dossier_type._id,
                     productName: info.product_name,
                     properName: info.proper_name,
                     manu: info.manufacturer === 'Y',
@@ -210,6 +212,12 @@
 
             baseModel.company_id = jsonObj.companyID;
             baseModel.dossier_id = jsonObj.dossierID; //"HC6-024-" + jsonObj.dossierID;
+            var currentLang = $translate.proposedLanguage() || $translate.use();
+            var dt_text =  $translate.instant(jsonObj.dossierType, "", '', currentLang);
+            baseModel.dossier_type = {
+                _id: jsonObj.dossierType,
+                __text: dt_text
+            };
             baseModel.product_name = jsonObj.productName;
             baseModel.proper_name = jsonObj.properName;
             baseModel.manufacturer = jsonObj.manu === true ? 'Y' : 'N';
@@ -568,7 +576,7 @@
                     "perMeasUnits": "",
                     "perMeasUnitsHtml": "",
                     "perMeasOtherUnits": "",
-                    "calcAsBase": item.is_base_calc,
+                    "calcAsBase": item.is_base_calc._id,
                     "isNano": item.is_nanomaterial,
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
@@ -732,7 +740,8 @@
                     "shelfLifeUnit": item.shelf_life_unit,
                     "shelfLifeNumber": Number(item.shelf_life_number),
                     "tempMin": Number(item.temperature_min),
-                    "tempMax": Number(item.temperature_max)
+                    "tempMax": Number(item.temperature_max),
+                    "otherShelflifeConsider": item.other_shelf_life_considerations
                 };
 
                 if (item.shelf_life_unit) {
@@ -876,6 +885,17 @@
                 var record = {};
                 record.importerId = jsonObj[i].importer_company_id;
                 record.importerName = jsonObj[i].importer_company_name;
+                record.street = jsonObj[i].street_address;
+                record.city = jsonObj[i].city;
+                record.stateList = jsonObj[i].province_lov;
+                record.stateText = jsonObj[i].province_text;
+                record.country = "";
+                if (jsonObj[i].country._id) {
+                    record.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: jsonObj[i].country._id})[0];
+                    record.countryHtml = record.country.en;
+                    record.countryDisplay = record.country.id;
+                }
+                record.postalCode = jsonObj[i].postal_code;
                 importerRecord.push(record);
             }
             return importerRecord;
@@ -884,10 +904,22 @@
         function _mapImporterRecToOutput(importerObj) {
             var importerRec = {};
             if (importerObj) {
-                importerRec = {
-                    importer_company_id: importerObj.importerId,
-                    importer_company_name: importerObj.importerName
+                importerRec.importer_company_id = importerObj.importerId;
+                importerRec.importer_company_name = importerObj.importerName;
+                importerRec.street_address = importerObj.street;
+                importerRec.city = importerObj.city;
+                importerRec.province_lov = importerObj.stateList;
+                importerRec.province_text = importerObj.stateText;
+                importerRec.country = "";
+                if (importerObj.country) {
+                    importerRec.country = {
+                        _label_en: importerObj.country.en,
+                        _label_fr: importerObj.country.fr,
+                        _id: importerObj.country.id,
+                        __text: importerObj.country.text   //todo: ????
+                    };
                 }
+                importerRec.postal_code = importerObj.postalCode;
             }
             return (importerRec);
         }
@@ -1055,8 +1087,10 @@
          */
         function activeListToOutput(activeList) {
             var resultList = [];
+            var currentLang = $translate.proposedLanguage() || $translate.use();
 
             angular.forEach(activeList, function (item) {
+                var ibcText = $translate.instant(item.calcAsBase, "", '', currentLang);
 
                 var obj = {
                     "ingredient_role": item.ingRole,
@@ -1074,7 +1108,10 @@
                     "per_value": "",
                     "per_units": "",
                     "per_units_other_details": "",
-                    "is_base_calc": item.calcAsBase,
+                    "is_base_calc": {
+                        _id: item.calcAsBase,
+                        __text: ibcText
+                    },
                     "is_nanomaterial": item.isNano,
                     "nanomaterial": "",
                     "nanomaterial_details": ""
@@ -1240,7 +1277,8 @@
                     "shelf_life_unit": "",
                     "shelf_life_number": item.shelfLifeNumber,
                     "temperature_min": item.tempMin,
-                    "temperature_max": item.tempMax
+                    "temperature_max": item.tempMax,
+                    "other_shelf_life_considerations": item.otherShelflifeConsider
                 };
 
                 if(item.shelfLifeUnit) {

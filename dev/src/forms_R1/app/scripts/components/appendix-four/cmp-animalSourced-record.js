@@ -62,8 +62,8 @@
             var scopeId = "_" + $scope.$id;
             vm.roleMissingId = "roleMissing" + scopeId;
             vm.systemRoleId = "system_role" + scopeId;
-            vm.otherDetailsId = "animal_details" + scopeId;
             vm.animalTypeId="animal_type"+scopeId;
+            vm.animalTypeDetailId="animal_details"+scopeId;
         }
 
 

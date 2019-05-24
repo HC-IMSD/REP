@@ -341,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row col-md-12">
+                        <div class="row col-md-12" data-ng-if="ingRecCtrl.isMedIng()">
                             <div class="form-group  col-sm-4 col-xs-12"
                                  data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.asBaseId].$invalid}">
                                 <label for="{{::ingRecCtrl.asBaseId}}" class="required">
@@ -353,7 +353,7 @@
                                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                                     <select id="{{::ingRecCtrl.asBaseId}}" data-ng-model="ingRecCtrl.ingModel.calcAsBase" data-ng-required="true"
                                             class="form-control" name="{{::ingRecCtrl.asBaseId}}"
-                                            data-ng-options="val |translate for val in  ingRecCtrl.yesNoList">
+                                            data-ng-options="val |translate for val in  ingRecCtrl.calAsBaseYesNoList">
                                     </select>
 
                                 </label>

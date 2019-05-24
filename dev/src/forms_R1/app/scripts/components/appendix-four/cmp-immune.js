@@ -22,6 +22,7 @@
             bindings: {
                 record: '<',
                 isFileLoaded: '<',
+                updateRecord: '<',
                 otherUpdate: '&',
                 concatUpdate: '&',
                 showErrors:'&',
@@ -45,10 +46,13 @@
         vm.$onChanges = function (changes) {
             if (changes.record) {
                 vm.model = (changes.record.currentValue);
-                // vm.updateErrorState();
+                vm.updateErrorState();
             }
             if (changes.addBtn && changes.addBtn.currentValue > 1){
                 vm.isSelected = 'selected';
+            }
+            if(changes.updateRecord){
+                vm.updateErrorState();
             }
         };
         vm.detailsChanged = function (alias, value) {
@@ -95,7 +99,7 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.roleMissingId = "roleMissing" + scopeId;
-            vm.systemRoleId = "system_role" + scopeId;
+            vm.systemRoleId = "immune_legend" + scopeId;
             vm.otherDetailsId = "immune_details" + scopeId;
         }
 

@@ -22,6 +22,7 @@
             bindings: {
                 record: '<',
                 isFileLoaded: '<',
+                updateRecord: '<',
                 otherUpdate: '&',
                 concatUpdate: '&',
                 showErrors:'&',
@@ -44,14 +45,14 @@
         vm.$onChanges = function (changes) {
             if (changes.record) {
                 vm.model = (changes.record.currentValue);
-                // vm.updateErrorState();
+                vm.updateErrorState();
             }
             if (changes.addBtn && changes.addBtn.currentValue > 1){
                 vm.isSelected = 'selected';
             }
-           /* if(changes.showErrors){
-                vm.showSummary=changes.showErrors.currentValue;
-            }*/
+            if(changes.updateRecord){
+                vm.updateErrorState();
+            }
         };
 
         vm.detailsChanged = function (alias, value) {
@@ -61,23 +62,23 @@
         };
 
         vm.updateErrorState = function () {
-            // var keys = Object.keys(vm.model);
-            // for (var i = 0; i < keys.length; i++) {
-            //     var val = vm.model[keys[i]];
-            //     if (val) {
-            //         if (keys[i] === 'otherCardio') {
-            //             if (!vm.model.otherDetails) {
-                            // vm.isSelected = "";
-                            // return
-                        // }
-                    //     vm.isSelected = "selected";
-                    //     return;
-                    // } else {
-                    //     vm.isSelected = "selected";
-                    //     return;
-            //         }
-            //     }
-            // }
+            var keys = Object.keys(vm.model);
+            for (var i = 0; i < keys.length; i++) {
+                var val = vm.model[keys[i]];
+                if (val) {
+                    if (keys[i] === 'otherCardio') {
+                        if (!vm.model.otherDetails) {
+                            vm.isSelected = "";
+                            return
+                        }
+                        vm.isSelected = "selected";
+                        return;
+                    } else {
+                        vm.isSelected = "selected";
+                        return;
+                    }
+                }
+            }
             vm.isSelected = ""
         };
 
@@ -102,7 +103,7 @@
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.roleMissingId = "roleMissing" + scopeId;
-            vm.systemRoleId = "system_role" + scopeId;
+            vm.systemRoleId = "cardio_legend" + scopeId;
             vm.otherDetailsId = "cardio_other_details" + scopeId;
         }
 

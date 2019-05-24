@@ -25,46 +25,57 @@
         <div>
             <cmp-nervous-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                 concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                                data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getNervousSystemValue() && !tissuesSrcCtrl.isUsed">
+                                data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getNervousSystemValue() && !tissuesSrcCtrl.isUsed"
+                                update-record="tissuesSrcCtrl.updateRecord">
             </cmp-nervous-system>
 
             <cmp-digestive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                   concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                                  data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getDigestiveSystemValue() && !tissuesSrcCtrl.isUsed">
+                                  data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getDigestiveSystemValue() && !tissuesSrcCtrl.isUsed"
+                                  update-record="tissuesSrcCtrl.updateRecord">
             </cmp-digestive-system>
 
             <cmp-cardio-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getCardioSystemValue() && !tissuesSrcCtrl.isUsed">
+                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getCardioSystemValue() && !tissuesSrcCtrl.isUsed"
+                               update-record="tissuesSrcCtrl.updateRecord">
             </cmp-cardio-system>
 
             <cmp-immune-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getImmuneSystemValue() && !tissuesSrcCtrl.isUsed">
+                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getImmuneSystemValue() && !tissuesSrcCtrl.isUsed"
+                               update-record="tissuesSrcCtrl.updateRecord">
             </cmp-immune-system>
 
             <cmp-muscle-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getMuscleSystemValue() && !tissuesSrcCtrl.isUsed">
+                               data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getMuscleSystemValue() && !tissuesSrcCtrl.isUsed"
+                               update-record="tissuesSrcCtrl.updateRecord">
             </cmp-muscle-system>
 
             <cmp-other-tissues-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                       concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                                      data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getOtherTissuesSystemValue() && !tissuesSrcCtrl.isUsed">
+                                      data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getOtherTissuesSystemValue() && !tissuesSrcCtrl.isUsed"
+                                      update-record="tissuesSrcCtrl.updateRecord">
             </cmp-other-tissues-system>
 
             <cmp-reproductive-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                                      concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                                     data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getReproductiveSystemValue() && !tissuesSrcCtrl.isUsed">
+                                     data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getReproductiveSystemValue() && !tissuesSrcCtrl.isUsed"
+                                     update-record="tissuesSrcCtrl.updateRecord">
             </cmp-reproductive-system>
 
             <cmp-skin-system record="tissuesSrcCtrl.model.system" other-update="tissuesSrcCtrl.otherChanged()" is-file-loaded="tissuesSrcCtrl.isFileLoaded"
                              concat-update="tissuesSrcCtrl.updateConcat(alias,value)" show-errors="tissuesSrcCtrl.showErrors()" add-btn="tissuesSrcCtrl.addBtn"
-                             data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getSkinSystemValue() && !tissuesSrcCtrl.isUsed">
+                             data-ng-if="tissuesSrcCtrl.model.systemType===tissuesSrcCtrl.fluidsLists.getSkinSystemValue() && !tissuesSrcCtrl.isUsed"
+                             update-record="tissuesSrcCtrl.updateRecord">
             </cmp-skin-system>
         </div>
         <div class="row">
             <div class="btn-group-sm col-xs-12">
+                <button data-ng-click="tissuesSrcCtrl.saveRecord()" class="btn btn-primary btn-sm">
+                    {{::'SAVE_RECORD'|translate}}
+                </button>
                 <button data-ng-click="tissuesSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm">
                     {{::'DELETE_RECORD'|translate}}
                 </button>

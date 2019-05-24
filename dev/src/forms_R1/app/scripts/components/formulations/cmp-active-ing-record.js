@@ -47,6 +47,7 @@
         vm.ingRoleList = DossierLists.getIngRoleList();
         vm.nanoMaterialList = DossierLists.getNanoMaterials();
         vm.yesNoList = DossierLists.getYesNoList();
+        vm.calAsBaseYesNoList = DossierLists.getCalAsBaseYesNoList();
         vm.activeList = DossierLists.getActiveList();
         vm.unitsList=DossierLists.getUnitsList();
         vm.strengthList = DossierLists.getStrengthList();
