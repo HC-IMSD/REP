@@ -289,12 +289,9 @@
 
     /* @ngInject */
     function getRolesService() {
-        var _biologic = 'D21'; // 'BIOLOGIC';
-        var _pharma = 'D22';  //'PHARMACEUTICAL';
-      //  var _veterinary = 'VETERINARY';
-     //   var _clinical = 'CLINICAL_TRIAL';
-        /*'DRUG_MASTER_FILE',
-         'MEDICAL_DEVICE'*/
+        var _biologic = 'D22'; // 'BIOLOGIC';
+        var _pharma = 'D21';  //'PHARMACEUTICAL';
+
         var service = {
             getContactRoles: getRoleValuesArray,
             getFormTypes: _getFormTypes,

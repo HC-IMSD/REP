@@ -27,6 +27,7 @@
                 deprecateSequence: '&', //bit of a hack
                 showErrorSummary: '<',
                 isEctd: '<',
+                getDossierType: '<',
                 parentDirty: '<',
                 sequenceUpdated:'<',
                 getCurrentSequence:'&'

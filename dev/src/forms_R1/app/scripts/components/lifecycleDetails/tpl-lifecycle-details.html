@@ -10,14 +10,13 @@
                 <fieldset>
                     <legend class="legend-rep">{{::'LIFE_REC' | translate}}&nbsp;</legend>
                     <div class="row">
-
                         <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.controlNumId].$invalid}">
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
                                 <span class="field-name">{{::"CONTROL_NUM" |translate}}{{::"LEAST_6_DIGIT" |translate}}
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <sup id="tr2e_ref">
-                                    <a class="fn-lnk" href="#tr2e"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.2</a>
+                                <sup id="tr8_ref">
+                                    <a class="fn-lnk" href="#tr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>8</a>
                                 </sup>
                                 </span>
                                 <cmp-error-message field-name="lifecycleCtrl.controlNumId"
@@ -38,6 +37,9 @@
                                 <label for="{{::lifecycleCtrl.activityLeadId}}" class="required">
                                     <span class="field-name"> {{::'ACTIVITY_LEAD' |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                                    <sup id="tr9_ref">
+                                        <a class="fn-lnk" href="#tr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9</a>
+                                    </sup>
                                     <cmp-error-message field-name="lifecycleCtrl.activityLeadId"
                                                        form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                        show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.activityLeadId])"
@@ -152,24 +154,27 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-4"
+                        <div class="form-group col-md-12"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId].$invalid}"
                              data-ng-show="lifecycleCtrl.yearVisible">
                             <label for="{{::lifecycleCtrl.yearId}}" class="required">
                                 <span class="field-name">{{::"YEAR_CHANGE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                <sup id="tr10_ref">
+                                    <a class="fn-lnk" href="#tr10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>10</a>
+                                </sup>
                                 <cmp-error-message field-name="lifecycleCtrl.yearId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId])"
-                                                   error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
-                                <select name="{{::lifecycleCtrl.yearId}}" id="{{::lifecycleCtrl.yearId}}" data-ng-model="lifecycleCtrl.lifecycleModel.year"
-                                        class="form-control" data-ng-required="lifecycleCtrl.yearVisible"
-                                        data-ng-change="lifecycleCtrl.setConcatDetails()"
-                                        data-ng-options=" val for val in lifecycleCtrl.yearList">
-                                    <option label=" " value="" data-ng-empty="lifecycleCtrl.lifecycleModel.year" />
-                                </select>
-
+                                                   error-types="lifecycleCtrl.requiredOnly">
+                                </cmp-error-message>
                             </label>
+                            <textarea id="{{::lifecycleCtrl.yearId}}" name="{{::lifecycleCtrl.yearId}}"
+                                          data-ng-model="lifecycleCtrl.lifecycleModel.year"
+                                          data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="800"
+                                          data-ng-required="lifecycleCtrl.yearVisible"
+                                          class="form-control full-width">
+                            </textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -179,7 +184,6 @@
                             <label for="{{::lifecycleCtrl.descriptId}}" class="required full-width">
                                 <span class="field-name">{{::"BRIEF_DESC" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-
                                 <cmp-error-message field-name="lifecycleCtrl.descriptId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.descriptId])"
@@ -190,7 +194,31 @@
                                       data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
                                       data-ng-required="lifecycleCtrl.descriptionVisible"
                                       class="form-control full-width">
-                                </textarea>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12"
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.descriptChangeId].$invalid}"
+                             data-ng-show="lifecycleCtrl.descriptionChangeVisible">
+                            <label for="{{::lifecycleCtrl.descriptChangeId}}" class="required full-width">
+                                <span class="field-name">{{::"BRIEF_DESC_CHANGE" |translate}}</span>
+                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                <sup id="tr11_ref">
+                                    <a class="fn-lnk" href="#tr11"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>11</a>
+                                </sup>
+                                <cmp-error-message field-name="lifecycleCtrl.descriptChangeId"
+                                                   form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                   show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.descriptChangeId])"
+                                                   error-types="lifecycleCtrl.requiredOnly">
+                                </cmp-error-message>
+                            </label>
+                            <textarea id="{{::lifecycleCtrl.descriptChangeId}}" name="{{::lifecycleCtrl.descriptChangeId}}"
+                                      data-ng-model="lifecycleCtrl.lifecycleModel.detailsChange"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
+                                      data-ng-required="lifecycleCtrl.descriptionChangeVisible"
+                                      class="form-control full-width">
+                            </textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -209,6 +237,68 @@
                                        data-ng-change="lifecycleCtrl.setConcatDetails()"
                                        data-ng-required="lifecycleCtrl.versionVisible" class="form-control"/>
 
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row" data-ng-if="lifecycleCtrl.requesterVisible">
+                        <p class="mrgn-lft-md mrgn-tp-sm legend-rep">{{::'SOLICITED_RQ'|translate}}
+                        <sup id="tr12_ref">
+                            <a class="fn-lnk" href="#tr12"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>12</a>
+                        </sup>
+                        </p>
+                        <div class="form-group col-md-4 typeahead-demo"
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForml[lifecycleCtr.requesterNameId].$invalid}">
+                            <label for="{{::lifecycleCtrl.requesterNameId}}" class="required full-width">
+                                <span class="field-name">1. {{'REQUESTER_NAME'|translate}}</span>
+                                <strong class="required">{{'REQUIRED' |translate}}</strong>
+                                <span class="rep-margin-top">
+                                    <input type="text" data-ng-model="lifecycleCtrl.lifecycleModel.requesterName"
+                                       name="{{::lifecycleCtrl.requesterNameId}}"
+                                       data-ng-model-options="{ debounce: $inherit}"
+                                       id="{{::lifecycleCtrl.requesterNameId}}" size="30" maxlength="30"
+                                       data-uib-typeahead="contact as contact.en for contact in lifecycleCtrl.requesterList | filter:{en:$viewValue} | limitTo:15"
+                                       class="form-control rep-normal-font"
+                                       data-typeahead-show-hint="false"
+                                       data-typeahead-focus-first="false"
+                                       data-ng-change="lifecycleCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                       data-ng-required="true"  data-typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                             </span>
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4 typeahead-demo">
+                            <label for="{{::lifecycleCtrl.requesterNameId2}}" class="required full-width">
+                                <span class="field-name">2. {{'REQUESTER_NAME'|translate}}</span>
+                                <span class="rep-margin-top">
+                                    <input type="text" data-ng-model="lifecycleCtrl.lifecycleModel.requesterName2"
+                                           name="{{::lifecycleCtrl.requesterNameId2}}"
+                                           data-ng-model-options="{ debounce: $inherit}"
+                                           id="{{::lifecycleCtrl.requesterNameId2}}" size="30" maxlength="30"
+                                           data-uib-typeahead="contact as contact.en for contact in lifecycleCtrl.requesterList | filter:{en:$viewValue} | limitTo:15"
+                                           class="form-control rep-normal-font"
+                                           data-typeahead-show-hint="false"
+                                           data-typeahead-focus-first="false"
+                                           data-ng-change="lifecycleCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                           data-ng-required="true"
+                                           data-typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                             </span>
+                            </label>
+                        </div>
+                        <div class="form-group col-md-4 typeahead-demo">
+                            <label for="{{::lifecycleCtrl.requesterNameId3}}" class="required full-width">
+                                <span class="field-name">3. {{'REQUESTER_NAME'|translate}}</span>
+                                <span class="rep-margin-top">
+                                    <input type="text" data-ng-model="lifecycleCtrl.lifecycleModel.requesterName3"
+                                           name="{{::lifecycleCtrl.requesterNameId3}}"
+                                           data-ng-model-options="{ debounce: $inherit}"
+                                           id="{{::lifecycleCtrl.requesterNameId3}}" size="30" maxlength="30"
+                                           data-uib-typeahead="contact as contact.en for contact in lifecycleCtrl.requesterList | filter:{en:$viewValue} | limitTo:15"
+                                           class="form-control rep-normal-font"
+                                           data-typeahead-show-hint="false"
+                                           data-typeahead-focus-first="false"
+                                           data-ng-change="lifecycleCtrl.reqSelectionUpdated($item, $model, $label, $event)"
+                                           data-ng-required="true"
+                                           data-typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                             </span>
                             </label>
                         </div>
                     </div>

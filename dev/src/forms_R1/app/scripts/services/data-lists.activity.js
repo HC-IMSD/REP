@@ -28,6 +28,8 @@
         vm.mitigationTypeArray = [];
 
         /** Lead values. Hard coded as different lists need to be   **/
+        vm.D21 = 'D21';
+        vm.D22 = 'D22';
         vm.BIOLOGICAL = "B14-20160301-02"; //biological
         vm.CONSUMERHEALTH = "B14-20160301-06"; //Consumer Health Products
         vm.PHARMA = "B14-20160301-09"; //pharmaceutical
@@ -100,6 +102,8 @@
             getTransactionDescriptions: getTransactionDescriptionsArray,
             getActivityTypes: getActivityArray,
             createRaTypes: _createRaArray,
+            getPharmaceuticalValue: _getPharmaceutical,
+            getBiologicValue: _getBiologic,
             getBiologicalLeadValue: _getBiologicalLead,
             getPharmaLeadValue: _getPharmaLead,
             getPostMarketLeadValue: _getPostMarketLead,
@@ -143,7 +147,9 @@
             createFeeTypes: _createFeeArray,
             getMitigationList: _getMitigationTypeArray,
             createMitigationList: _createMitigationArray,
-            getActivityLeadList: _getActivityLeadArray
+            getActivityLeadList: _getActivityLeadArray,
+            getActivityLeadListByD22: _getActivityLeadD22Array,
+            getActivityLeadListByD21: _getActivityLeadD21Array
         };
         return service;
 
@@ -187,7 +193,6 @@
         function _getMitigationTypeArray() {
             return (vm.mitigationTypeArray);
         }
-
 
         function getPresubArray() {
             return ([
@@ -457,7 +462,7 @@
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.BE_CLARIF_RESPONSE, //Response to BE clarification request dated..
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
-                vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
+                vm.allActivities.EMAIL_RQ_RESPONSE,// Response to E-mail Request
                 vm.allActivities.LABEL_CLARIF_RESPONSE, //Response to labelling clarification request
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG, //Second Language Label - Pre-Approval
                 vm.allActivities.NOC_RESPONSE, //response to NOC/ c-Qn
@@ -480,7 +485,7 @@
                 vm.allActivities.FORM_V, //Form V
                 vm.allActivities.CONSENT_LTR, //Consent Letter
                 vm.allActivities.DATA_PROTECT_CORRESP, //Correspondence - Data Protection
-                vm.allActivities.NONCLIN_CLARIF_RESPONSE //response to Nonclinical clarification request
+                vm.allActivities.NONCLIN_CLARIF_RESPONSE //response to Non-clinical clarification request
                 //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
             ])
         }
@@ -553,7 +558,7 @@
                 vm.allActivities.PRESUB_MEETING_PKG, //submission/presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
-                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE, //Response to quality and Clinical clarification REquest
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE, //Response to Quality & Clinical Clarification Request
                 vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
                 vm.allActivities.RECON_DECIS_RQ_RECON, //Reconsideration of Decision - Request for Reconsideration
@@ -1076,11 +1081,39 @@
             );
         }
 
+        function _getActivityLeadD22Array() {
+            return (
+                [
+                    vm.PHARMA, //Pharmaceutical
+                    vm.POSTMARKET, //Post-Market Vigilance
+                    vm.CONSUMERHEALTH //Consumer Health Products
+                ]
+            );
+        }
+
+        function _getActivityLeadD21Array() {
+            return (
+                [
+                    vm.BIOLOGICAL, //Biological
+                    vm.POSTMARKET  //Post-Market Vigilance
+                ]
+            );
+        }
+
         /**
          * Returns the biological Activity Lead value
          * @returns {string}
          * @private
          */
+
+        function _getPharmaceutical(){
+            return vm.D21; //D21 - Pharmaceutical
+        }
+
+        function _getBiologic(){
+            return vm.D22; // D22 - Biologic
+        }
+
         function _getBiologicalLead() {
             return vm.BIOLOGICAL;
         }

@@ -55,15 +55,15 @@
             }
         });
 
-    transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES', 'NO', 'NEW', 'EXISTING', 'getContactLists', 'getRoleLists', 'ENGLISH', 'FRENCH'];
-    function transactionInfoCtrl($scope,OTHER,YES,NO,NEW,EXISTING,getContactLists,getRoleLists,ENGLISH,FRENCH) {
+    transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES', 'NO', 'getContactLists', 'getRoleLists', 'ENGLISH', 'FRENCH'];
+    function transactionInfoCtrl($scope,OTHER,YES,NO,getContactLists,getRoleLists,ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {
         };
         vm.yesNoList = [YES, NO];
-        vm.newExistingList = [NEW, EXISTING];
-        vm.showNewActivityFields = false;
+       // vm.newExistingList = [NEW, EXISTING];
+       // vm.showNewActivityFields = false;
         vm.showThirdPartyNote = false;
         vm.showAdminSub = false;
         vm.showEctdSection = true;
@@ -71,8 +71,9 @@
         vm.showOtherSolicitedDetail = false;
         vm.activityEditable = true;
         vm.isEctd = false;
+        vm.selectedDossierType = '';
         vm.alerts = [false, false, false, false, false, false, false, false, false];
-        vm.requesterList = [];
+       // vm.requesterList = [];
         vm.userList = [];
         vm.formTypeList = getRoleLists.getFormTypes();
         vm.lang=ENGLISH;
@@ -91,13 +92,13 @@
 
         vm.$onInit = function () {
             _setIdNames();
-            vm.updateActivityType();
+           // vm.updateActivityType();
             vm.setThirdParty();
             vm.setAdminSubmission();
             vm.updateEctdState();
-            vm.setSolicitedState();
+            vm.updateDossierTypeState();
+           // vm.setSolicitedState();
             loadAdminSubData();
-           // loadContactData();
             loadUserListData();
             vm.finalState=false;
             vm.displayResetBtn = false;
@@ -107,11 +108,11 @@
         vm.$onChanges = function (changes) {
             if (changes.transactionRoot) {
                 vm.transactionModel = changes.transactionRoot.currentValue;
-                vm.updateActivityType();
+             //   vm.updateActivityType();
                 vm.setThirdParty();
                 vm.setAdminSubmission();
                 vm.updateEctdState();
-                vm.setSolicitedState();
+             //   vm.setSolicitedState();
             }
 
             if(changes.language){
@@ -178,8 +179,8 @@
         };
 
         vm.updateActivityType = function () {
-            vm.showNewActivityFields = isNewActivity();
-            if(!vm.showNewActivityFields){
+          //  vm.showNewActivityFields = isNewActivity();
+            //if(!vm.showNewActivityFields){
                 vm.transactionModel.isThirdParty = "";
                 vm.transactionModel.isPriority = "";
                 vm.transactionModel.isNoc = "";
@@ -188,7 +189,7 @@
                 vm.showThirdPartyNote = false;
                 vm.showAdminSub = false;
 
-            }
+           // }
         };
 
         vm.setThirdParty = function () {
@@ -202,6 +203,19 @@
                 vm.isEctd = false;
             }
         };
+
+        vm.updateDossierTypeState = function () {
+               vm.selectedDossierType = vm.transactionModel.ectd.dossierType ;
+        }
+
+        function pharmaceuticalDossierType() {
+            return vm.transactionModel.ectd.dossierType === 'D21';
+        }
+
+        function biologicDossierType() {
+            return vm.transactionModel.ectd.dossierType === 'D22';
+        }
+
         vm.updateFeeState=function(){
           if(vm.transactionModel.isFees === YES){
               vm.transactionModel.feeDetails = vm.getFee();
@@ -212,21 +226,22 @@
           }
 
         };
+
         function isEctdValue() {
             return vm.transactionModel.isEctd === YES;
         }
 
-        function isSolicitedValue() {
-            return vm.transactionModel.isSolicited === YES;
-        }
+       // function isSolicitedValue() {
+        //    return true; //vm.transactionModel.isSolicited === YES;
+      //  }
 
         function isActivityChangesValue() {
             return vm.transactionModel.isActivityChanges === YES;
         }
 
-        function isNewActivity() {
-            return vm.transactionModel.transactionType === NEW;
-        }
+     //   function isNewActivity() {
+    //        return vm.transactionModel.transactionType === NEW;
+    //    }
 
         function loadAdminSubData() {
             getContactLists.getAdminSubType()
@@ -256,7 +271,7 @@
         /**
          * @ngdoc method sets the visibilty of the solicited requester field. Clears
          * the data if the field is hidden
-         */
+
         vm.setSolicitedState = function () {
             if (isSolicitedValue()) {
                 vm.showSolicitedDetail = true;
@@ -265,6 +280,7 @@
                 vm.transactionModel.solicitedRequesterReord = [];
             }
         };
+         */
 
         vm.updateActivityChanges = function () {
             vm.activityEditable = isActivityChangesValue();
@@ -328,12 +344,13 @@
              if( vm.finalState )
             {
                // vm.transactionModel.ectd.productName= ""; //11 - product name- just hidden
-                vm.transactionModel.transactionType = ""; //12 - new or exsiting
+               // vm.transactionModel.transactionType = ""; //12 - new or exsiting
+               // vm.updateDossierTypeState();
                 vm.updateActivityType();
                 vm.setThirdParty();
                 vm.setAdminSubmission();
-                vm.transactionModel.isSolicited = "";
-                vm.setSolicitedState();
+               // vm.transactionModel.isSolicited = "";
+               // vm.setSolicitedState();
                 vm.transactionModel.ectd.lifecycleRecord =[]; //22 - Transaction Details Record
                 vm.transactionModel.projectManager1 = ""; //43 - projectManager1
                 vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
@@ -364,14 +381,14 @@
             vm.dossierId="dossier_id"+scopeId;
             vm.productNameId="prod_name"+scopeId;
             vm.isEctdId="is_ectd"+scopeId;
-            vm.isSolicitedId="is_solicited"+scopeId;
+          //  vm.isSolicitedId="is_solicited"+scopeId;
             vm.solictedRqId="solicited_rq"+scopeId;
             vm.solicitedOtherId="solicited_rq_other"+scopeId;
             vm.companyNameId="company_noabbrev"+scopeId;
             vm.contactSameId="confirm_contact_valid"+scopeId;
             vm.isFeesId="is_fee_transaction"+scopeId;
             vm.typeId="dossier_type"+ scopeId;
-            vm.isNewActivityId="is_new_activity"+ scopeId;
+           // vm.isNewActivityId="is_new_activity"+ scopeId;
             vm.thirdPartyId = "is_signed_3rd_party" + scopeId;
             vm.isAdminSubId = "is_admin_submission" + scopeId;
             vm.adminSubTypeId = "admin_sub_type" + scopeId;

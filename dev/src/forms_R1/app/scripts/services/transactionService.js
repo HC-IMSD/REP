@@ -64,7 +64,6 @@
             isFinal: false,
             //TODO update
             getRootTag: function () {
-
                 return ("TRANSACTION_ENROL")
             },
             getXSLFileName: function () {
@@ -102,7 +101,7 @@
                         date_saved: today,
                         software_version: "2.2.1",
                         data_checksum: jsonObj.dataChecksum,
-                        transaction_type: jsonObj.transactionType,
+                       // transaction_type: jsonObj.transactionType,
                         is_third_party: jsonObj.isThirdParty,
                         is_priority: jsonObj.isPriority,
                         is_noc: jsonObj.isNoc,
@@ -113,9 +112,9 @@
                 };
                 var ectd = this._transformEctdToFile(jsonObj.ectd);
                 resultJson.TRANSACTION_ENROL.ectd = ectd;
-                resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
-                resultJson.TRANSACTION_ENROL.solicited_requester_record =
-                    this._transformReqToFile(jsonObj.solicitedRequesterReord);
+                //resultJson.TRANSACTION_ENROL.is_solicited = jsonObj.isSolicited;
+              //  resultJson.TRANSACTION_ENROL.solicited_requester_record =
+               //     this._transformReqToFile(jsonObj.solicitedRequesterReord);
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager1 = jsonObj.projectManager1;
                 resultJson.TRANSACTION_ENROL.regulatory_project_manager2 = jsonObj.projectManager2;
                 resultJson.TRANSACTION_ENROL.is_fees = jsonObj.isFees;
@@ -136,6 +135,7 @@
              * @returns {{}}
              * @private
              */
+         /*
             _transformReqToFile: function (jsonObj) {
 
                 var requesters = [];
@@ -170,6 +170,7 @@
                     }
                 }
             },
+           */
 
             /**
              *
@@ -219,7 +220,7 @@
                 model.dataChecksum = jsonObj.data_checksum;
               //  model.isEctd = jsonObj.is_ectd;
 
-                model.transactionType = jsonObj.transaction_type;
+              //  model.transactionType = jsonObj.transaction_type;
                 model.isThirdParty = jsonObj.is_third_party;
                 model.isPriority = jsonObj.is_priority;
                 model.isNoc = jsonObj.is_noc;
@@ -228,8 +229,8 @@
                 if (jsonObj.sub_type) {
                     model.subType = $filter('filter')(getContactLists.getAdminSubType(), {id: jsonObj.sub_type._id})[0];
                 }
-                model.isSolicited = jsonObj.is_solicited;
-                this._transformReqFromFile(model, jsonObj.solicited_requester_record);
+               // model.isSolicited = jsonObj.is_solicited;
+               // this._transformReqFromFile(model, jsonObj.solicited_requester_record);
                 model.projectManager1 = jsonObj.regulatory_project_manager1;
                 model.projectManager2 = jsonObj.regulatory_project_manager2;
                 model.isFees = jsonObj.is_fees;
@@ -539,9 +540,14 @@
         lifecycleRec.startDate = lifecycleObj.sequence_from_date;
         lifecycleRec.endDate = lifecycleObj.sequence_to_date;
         lifecycleRec.details = lifecycleObj.sequence_details;
+        lifecycleRec.detailsChange = lifecycleObj.sequence_details_change;
         lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.transaction_description;
+        lifecycleRec.requesterName = lifecycleObj.requester_name;
+        lifecycleRec.requesterName2 = lifecycleObj.requester_name2;
+        lifecycleRec.requesterName3 = lifecycleObj.requester_name3;
+       // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
         return (lifecycleRec);
     }
@@ -579,12 +585,62 @@
         lifecycleRec.sequence_from_date = lifecycleObj.startDate;
         lifecycleRec.sequence_to_date = lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
+        lifecycleRec.sequence_details_change = lifecycleObj.detailsChange;
         lifecycleRec.sequence_version = lifecycleObj.sequenceVersion;
         lifecycleRec.sequence_year = lifecycleObj.year;
         lifecycleRec.transaction_description = lifecycleObj.sequenceConcat;
+      /*
+        console.log( "id :" +   lifecycleObj.requesterName.id);
+        console.log( "name :" +   lifecycleObj.requesterName);
+        console.log( "eng :" +   lifecycleObj.requesterName.en);
+        lifecycleRec.requester_name = lifecycleObj.requesterName;
+        lifecycleRec.requester_name2 = lifecycleObj.requesterName2;
+        lifecycleRec.requester_name3 = lifecycleObj.requesterName3;
+        if (lifecycleObj.requesterName) {
+            lifecycleRec.requester_of_solicited_information = {
+               _id: lifecycleObj.requesterName.id,
+                __text: lifecycleObj.requesterName
+            };
+        } */
+        lifecycleRec.requester_of_solicited_information = '';
+        var tempRequesterName = '';
+        if (lifecycleObj.requesterName.id && lifecycleObj.requesterName) {
+            tempRequesterName =  lifecycleObj.requesterName.id;
+            lifecycleRec.requester_name = lifecycleObj.requesterName.en;
+        }
+        else
+        {
+            tempRequesterName =  lifecycleObj.requesterName;
+            lifecycleRec.requester_name = lifecycleObj.requesterName;
+        }
+        if (lifecycleObj.requesterName2.id && lifecycleObj.requesterName2) {
+            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
+            lifecycleRec.requester_name2 = lifecycleObj.requesterName2.en;
+        }
+        else
+        {
+            tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
+            lifecycleRec.requester_name2 = lifecycleObj.requesterName2;
+        }
+
+        if (lifecycleObj.requesterName3.id && lifecycleObj.requesterName3) {
+            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3.id;
+            lifecycleRec.requester_name3 = lifecycleObj.requesterName3.en;
+        }
+        else
+        {
+            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
+            lifecycleRec.requester_name3 = lifecycleObj.requesterName3;
+        }
+
+        if( tempRequesterName && (!lifecycleObj.requesterName || !lifecycleObj.requesterName || !lifecycleObj.requesterName3) )
+        {
+            lifecycleRec.requester_of_solicited_information = tempRequesterName;
+        }
+
         return (lifecycleRec);
     }
-
+/*
     function _mapRequesterRecToOutput(requesterObj) {
         var requesterRec = {};
         if (requesterObj) {
@@ -594,7 +650,7 @@
             }
         }
         return (requesterRec);
-    }
+    } */
 
     /**
      * Truncates the label for activity type based on feedback of Jul 18, 2017
@@ -684,7 +740,6 @@
             console.error("There is no contact object");
             return contact;
         }
-        contact.salutation = contactObj.salutation._id;
         contact.givenName = contactObj.given_name;
         contact.initials = contactObj.initials;
         contact.surname = contactObj.surname;
@@ -701,10 +756,6 @@
 
         var contact = {};
         var currentLang = $translate.proposedLanguage() || $translate.use();
-        contact.salutation = {
-            _id: contactObj.salutation,
-            __text: $translate.instant(contactObj.salutation, "", '', currentLang)
-        };
         contact.given_name = contactObj.givenName;
         contact.initials = contactObj.initials;
         contact.surname = contactObj.surname;
@@ -781,8 +832,13 @@
             "startDate": "",
             "endDate": "",
             "details": "",
+            "detailsChange":"",
             "sequenceVersion": "",
             "sequenceConcat": "",
+            "year":"",
+            "requesterName":"",
+            "requesterName2":"",
+            "requesterName3":"",
             "isSaved": false
         };
         //TODO get next sequence number
@@ -807,7 +863,7 @@
     function _createContactModel() {
         var contact = {};
 
-        contact.salutation = "";
+       // contact.salutation = "";
         contact.givenName = "";
         contact.initials = "";
         contact.surname = "";
@@ -845,7 +901,7 @@
             dataChecksum: "",
             dateSaved: "",
             softwareVersion: "2.2.1",
-            transactionType: "",
+           // transactionType: "",
             isThirdParty: "",
             isPriority: "",
             isNoc: "",
@@ -858,8 +914,8 @@
                 productName: "",
                 lifecycleRecord: []
             },
-            isSolicited: "",
-            solicitedRequesterReord: [],
+          //  isSolicited: "",
+          //  solicitedRequesterReord: [],
             projectManager1: "",
             projectManager2: "",
             isFees: "",

@@ -13,7 +13,7 @@
                         <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
                                 name="{{::transFeeCtrl.submClassId}}" required
                                 data-ng-model="transFeeCtrl.model.submissionClass"
-                                data-ng-options="val.text  for val in  transFeeCtrl.submissionType">
+                                data-ng-options="choice[transFeeCtrl.lang] for choice in transFeeCtrl.submissionType | orderBy:'sortBy' track by choice.id">
                             <option value="" label=" " data-ng-empty="transFeeCtrl.model.submissionClass" />
                         </select>
 
@@ -44,8 +44,8 @@
                     <label for="{{::transFeeCtrl.deferId}}" class="required ">
                         <span class="field-name">{{::"DEFER_FEES"|translate}}</span>
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                        <sup id="tr3a_ref">
-                            <a class="fn-lnk" href="#tr3a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.4</a>
+                        <sup id="tr14_ref">
+                            <a class="fn-lnk" href="#tr14"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>14</a>
                         </sup>
                         <cmp-error-message field-name="transFeeCtrl.deferId" form-ref="transFeeCtrl.transFeeForm"
                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.deferId])"
@@ -60,28 +60,13 @@
                 </div>
             </div>
             <div class="row">
-                <!-- <div class="col-xs-12">
-                    <cmp-alert ui-state="transFeeCtrl.alerts[1]" msg="DEFER_INSTRUCT"
-                               update-state="transFeeCtrl.closeAlert(1)" type="alert-info">
-                        <section aria-live="assertive">
-                            <div data-ng-if="!transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-defer-en.html'">
-                            </div>
-                            <div data-ng-if="transFeeCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/transaction/tpl-transaction-defer-fr.html'">
-                            </div>
-                        </section>
-                    </cmp-alert>
-                </div> -->
-            </div>
-            <div class="row">
                 <div class="form-group col-xs-7 ">
                     <div data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
                         <label for="{{::transFeeCtrl.remitId}}" class="required ">
                             <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                            <sup id="tr3b_ref">
-                                <a class="fn-lnk" href="#tr3b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.5</a>
+                            <sup id="tr15_ref">
+                                <a class="fn-lnk" href="#tr15"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>15</a>
                             </sup>
                             <cmp-error-message field-name="transFeeCtrl.remitId" form-ref="transFeeCtrl.transFeeForm"
                                                show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.remitId])"

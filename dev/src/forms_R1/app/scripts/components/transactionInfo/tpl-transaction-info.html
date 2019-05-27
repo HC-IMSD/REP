@@ -10,27 +10,19 @@
                         data-ng-click="transInfoCtrl.resetSpecificValues()">{{::'RESET'|translate}}
                 </button>
                 <sup id="tr2_ref" data-ng-show ="transInfoCtrl.finalState">
-                    <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>1.1</a>
+                    <a class="fn-lnk" href="#tr2"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
                 </sup>
-               <!-- <div class="btn-group pull-right">
-                    <button title="{{::'EXPAND'|translate}} {{::'TRANSACT_INSTRUCT'|translate}}"
-                            class="btn-xs rep-help-button"
-                            id="transact-instruct-toggle" data-ng-click="transInfoCtrl.addInstruct(0)">
-                        <span class="fa fa-question-circle fa-2x"></span>
-                        <span class="wb-inv">{{::'TRANSACT_INSTRUCT'|translate}}</span>
-                    </button>
-                </div> -->
             </header>
             <div class="panel-body">
-                    <!--<div  data-ng-show ="transInfoCtrl.finalState" class="col-xs-12 form-group alert alert-info" role="alert" aria-live="polite">-->
-                        <!--<span>{{'RESET_INFO'|translate}}</span>-->
-                    <!--</div>-->
                    <div class="row">
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.typeId].$invalid}">
                                     <label for="{{::transInfoCtrl.typeId}}" class="required">
                                         <span class="field-name">{{::'DOSSIER_TYPE' |translate}}</span>
                                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                        <sup id="tr3_ref">
+                                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
+                                        </sup>
                                         <cmp-error-message field-name="transInfoCtrl.typeId"
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[dos.typeId])"
@@ -40,7 +32,8 @@
                                                 id="{{::transInfoCtrl.typeId}}"
                                                 name="{{::transInfoCtrl.typeId}}" data-required="true"
                                                 data-ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
-                                                data-ng-options="val |translate for val in  transInfoCtrl.formTypeList">
+                                                data-ng-options="val |translate for val in  transInfoCtrl.formTypeList"
+                                                data-ng-change="transInfoCtrl.updateDossierTypeState()">
                                             <option value="" label=" " data-ng-if="! transInfoCtrl.transactionModel.ectd.dossierType" />
                                         </select>
                                     </label>
@@ -48,10 +41,10 @@
                                 <div class="form-group col-md-6"
                                      data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.companyId].$invalid}">
                                     <label for="{{::transInfoCtrl.companyId}}" class="required full-width">
-                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"5_OR_6_CHAR" |translate}}
+                                        <span class="field-name">{{::"COMPANY_ID" |translate}}{{::"LEAST_5_DIGIT" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <sup id="tr2a_ref">
-                                            <a class="fn-lnk" href="#tr2a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>2</a>
+                                        <sup id="tr4_ref">
+                                            <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
                                         </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.companyId"
@@ -60,7 +53,7 @@
                                                            error-types="transInfoCtrl.min5Error"></cmp-error-message>
                                         <input type="text" id="{{::transInfoCtrl.companyId}}" name="{{::transInfoCtrl.companyId}}"
                                                data-ng-model="transInfoCtrl.transactionModel.ectd.companyId"
-                                               class="form-control" maxlength="6" size="10" required data-ng-minlength="5"/>
+                                               class="form-control" maxlength="5" minlength="5" size="6" data-only-digits="" required>
 
                                     </label>
                                 </div>
@@ -70,8 +63,8 @@
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
                                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                            <sup id="tr2b_ref">
-                                                <a class="fn-lnk" href="#tr2b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
+                                            <sup id="tr5_ref">
+                                                <a class="fn-lnk" href="#tr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                                             </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.dossierId"
@@ -94,8 +87,8 @@
                                     <label for="{{::transInfoCtrl.productNameId}}" class="required full-width">
                                         <span class="field-name">{{::"PROD_NAME" |translate}}
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                         <sup id="tr2c_ref">
-                                            <a class="fn-lnk" href="#tr2c"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
+                                         <sup id="tr6_ref">
+                                            <a class="fn-lnk" href="#tr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                                          </sup>
                                         </span>
                                         <cmp-error-message field-name="transInfoCtrl.productNameId"
@@ -113,30 +106,7 @@
                                    </textarea>
                                 </div>
                     </div>
-                    <!--<div class="row">-->
-                            <!--<div class="form-group col-md-12"-->
-                                 <!--data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">-->
-                                <!--<label for="{{::transInfoCtrl.isNewActivityId}}" class="required full-width">-->
-                                    <!--<span class="field-name">{{::"IS_NEW_ACTIVITY" |translate}}</span>-->
-                                    <!--<strong class="required"> {{::"REQUIRED" |translate}}</strong>-->
-                                    <!--<cmp-error-message field-name="transInfoCtrl.isNewActivityId"-->
-                                                       <!--form-ref="transInfoCtrl.transInfoForm"-->
-                                                       <!--show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId])"-->
-                                                       <!--error-types="transInfoCtrl.requiredOnly">-->
-                                    <!--</cmp-error-message>-->
-                                    <!--<select id="{{::transInfoCtrl.isNewActivityId}}" name="{{::transInfoCtrl.isNewActivityId}}"-->
-                                            <!--data-ng-model="transInfoCtrl.transactionModel.transactionType"-->
-                                            <!--class="form-control" data-ng-change="transInfoCtrl.updateActivityType()"-->
-                                            <!--data-ng-options="choice |translate for choice in transInfoCtrl.newExistingList"-->
-                                            <!--required>-->
-                                        <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.transactionType" />-->
-                                    <!--</select>-->
-                                <!--</label>-->
-                            <!--</div>-->
-                     <!--</div>-->
-                    <!-- activity content moved in -->
-                    <!--<div data-ng-if="transInfoCtrl.showNewActivityFields">-->
-                        <div class="row">
+                    <div class="row">
                             <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.thirdPartyId].$invalid}" >
                                 <label for="{{::transInfoCtrl.thirdPartyId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_SIGNED_3RD_PARTY" |translate}}</span>
@@ -203,8 +173,8 @@
                                 <label for="{{::transInfoCtrl.isAdminSubId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_ADMIN_SUBMISSION" |translate}}
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <sup id="tr2d_ref">
-                                    <a class="fn-lnk" href="#tr2d"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.1</a>
+                                    <sup id="tr7_ref">
+                                    <a class="fn-lnk" href="#tr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>7</a>
                                     </sup>
                                     </span>
                                     <cmp-error-message field-name="transInfoCtrl.isAdminSubId"
@@ -319,7 +289,6 @@
                                 </div>
                             </div>
                         </div>
-                    <!--</div>-->
                     <section class="panel  panel-default">
                         <header class="panel-heading clearfix">
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
@@ -329,6 +298,7 @@
                                 <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
                                                     is-ectd="transInfoCtrl.isEctd"
                                                     is-final="transInfoCtrl.isFinal"
+                                                    get-dossier-type ="transInfoCtrl.selectedDossierType"
                                                     deprecate-sequence="transInfoCtrl.subtractSequence()"
                                                     show-error-summary="transInfoCtrl.showSummary"
                                                     parent-dirty="transInfoCtrl.$dirty"
@@ -341,40 +311,6 @@
                             </div>
                         </div>
                     </section>
-                <div class="row">
-                    <div class="form-group col-md-4"
-                         data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId].$invalid}">
-                        <label for="{{::transInfoCtrl.isSolicitedId}}" class="required full-width">
-                            <span class="field-name">{{::"IS_SOLICITED" |translate}}</span>
-                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                            <cmp-error-message field-name="transInfoCtrl.isSolicitedId"
-                                               form-ref="transInfoCtrl.transInfoForm"
-                                               show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isSolicitedId])"
-                                               error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                            <select id="{{::transInfoCtrl.isSolicitedId}}" name="{{::transInfoCtrl.isSolicitedId}}"
-                                    data-ng-model="transInfoCtrl.transactionModel.isSolicited"
-                                    class="form-control"
-                                    data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
-                                    data-ng-change="transInfoCtrl.setSolicitedState()" required>
-                                <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isSolicited"/>
-                            </select>
-
-                        </label>
-                    </div>
-                </div>
-                <div data-ng-if="transInfoCtrl.showSolicitedDetail">
-                    <section class="panel panel-default">
-                        <header class="panel-heading">
-                            <h3 class="panel-title">{{'SOLICITED_RQ'|translate}}</h3>
-                        </header>
-                        <div class="panel-body">
-                            <cmp-requester-list list-items="transInfoCtrl.transactionModel.solicitedRequesterReord"
-                                                 error-summary-update="transInfoCtrl.updateErrorSummary()"
-                                                 show-error-summary="transInfoCtrl.showSummary"
-                                                 on-update="transInfoCtrl.updateRequesterList(list)"></cmp-requester-list>
-                        </div>
-                    </section>
-                </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="projectManager1" class="full-width">
@@ -442,8 +378,8 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}
-                        <sup id="tr3_ref">
-                            <a class="fn-lnk" href="#tr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4.3</a>
+                        <sup id="tr13_ref">
+                            <a class="fn-lnk" href="#tr13"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>13</a>
                         </sup>
                     </h2>
                 </header>
@@ -459,8 +395,8 @@
             <section class="panel  panel-primary">
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REG_CONTACT_THIS' |translate}}
-                        <sup id="tr4_ref">
-                            <a class="fn-lnk" href="#tr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
+                        <sup id="tr16_ref">
+                            <a class="fn-lnk" href="#tr16"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>16</a>
                         </sup>
                     </h2>
                 </header>
@@ -473,8 +409,8 @@
                                     <label for="{{::transInfoCtrl.companyNameId}}" class="required full-width">
                                         <span class="field-name">{{::"COMPANY_NOABBREV" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                        <sup id="tr4a_ref">
-                                            <a class="fn-lnk" href="#tr4a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
+                                        <sup id="tr17_ref">
+                                            <a class="fn-lnk" href="#tr17"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>17</a>
                                         </sup>
                                         <cmp-error-message field-name="transInfoCtrl.companyNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"

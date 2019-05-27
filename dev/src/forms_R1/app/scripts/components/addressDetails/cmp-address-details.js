@@ -121,7 +121,7 @@
          * Updates the display value for the object for summary display
          */
         vm.countryChanged=function(){
-            console.log("jang test:" + vm.addressModel.country.id);
+           // console.log("jang test:" + vm.addressModel.country.id);
             if( vm.addressModel.country.id !== undefined ) {
                 vm.addressModel.countryDisplay = vm.addressModel.country.id;
                 vm.provListLabel = getProvinceListLabel();

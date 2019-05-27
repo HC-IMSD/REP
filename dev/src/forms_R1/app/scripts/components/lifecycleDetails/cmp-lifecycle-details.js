@@ -32,19 +32,18 @@
                 onDelete: '&',
                 enableDeleteIndex: '&',
                 isEctd: '<',
+                getDossierType: '<',
                 activityTypes:'<', //list of activity types
                 sequenceUpdated:'<',
                 errorSummaryUpdate:'<', //update the component error summary
-               showErrorSummary:'<', //show the component error summary
+                showErrorSummary:'<', //show the component error summary
                 updateErrorSummary:'&' //update the parent error summary
             }
         });
-    lifecycleRecCtrl.$inject = ['ActivityFormFilterService', 'TransactionLists', '$filter', '$translate','$scope'];
+    lifecycleRecCtrl.$inject = ['ActivityFormFilterService', 'TransactionLists', 'getContactLists','$filter', '$translate','$scope'];
 
-    function lifecycleRecCtrl(ActivityFormFilterService, TransactionLists, $filter, $translate, $scope) {
+    function lifecycleRecCtrl(ActivityFormFilterService, TransactionLists, getContactLists, $filter, $translate, $scope) {
         var vm = this;
-       //s vm.savePressed = false;
-
         vm.activityList=[];
         vm.activityTypeList=[];
         vm.pharmaList =[];
@@ -53,23 +52,26 @@
         vm.consumHealthList = [];
         vm.sequenceList = [];
         vm.descriptionList = [];
-
+        vm.requesterList =[];
         vm.lifecycleModel = {};
         vm.endDateVisible = false;
         vm.yearVisible = false;
+        vm.requesterVisible = false;
        // vm.startDateVisible = false;
         vm.descriptionVisible = false;
+        vm.descriptionChangeVisible = false;
         vm.versionVisible = false;
         vm.ectd = false;
+        vm.dossierType = '';
         vm.popOpened = false;
         vm.alerts = [false, false];
         vm.dateOptions = {
             showWeeks: false
         };
         vm.lang = $translate.proposedLanguage() || $translate.use();
-        vm.yearList = _createYearList();
+       // vm.yearList = _createYearList();
         vm.descriptionObj=TransactionLists.getTransactionDescriptions();
-        vm.leadList = TransactionLists.getActivityLeadList();
+        vm.leadList = [] ;
 
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object
@@ -89,11 +91,14 @@
 
         //
         vm.$onInit = function () {
-            _setIdNames();
+
             //lazy load of year lust
-            if (!vm.yearList || vm.yearList.length === 0) {
-                vm.yearList = _createYearList();
-            }
+          //  if (!vm.yearList || vm.yearList.length === 0) {
+          //      vm.yearList = _createYearList();
+          //  }
+            _setIdNames();
+            loadContactData();
+            vm.selectActivityLeadList();
             vm.selectActivityList();
             //vm.descriptionObj=TransactionLists.getTransactionDescriptions();
         };
@@ -117,6 +122,11 @@
             }
             if (changes.isEctd) {
                 vm.ectd = changes.isEctd.currentValue;
+            }
+
+            if (changes.getDossierType) {
+                vm.dossierType = changes.getDossierType.currentValue;
+                vm.selectActivityLeadList();
             }
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
@@ -156,6 +166,16 @@
 
         };
 
+        function loadContactData() {
+            getContactLists.getInternalContacts()
+                .then(function (data) {
+                    vm.requesterList = data;
+                    return true;
+                });
+        }
+
+
+
         //sets the start date calendar state
         vm.openStartDate = function () {
             vm.startDateOpen = true;
@@ -175,6 +195,8 @@
             vm.selectActivityList();
         }
 
+
+
         vm.disableDeleteState = function () {
             //this is noEctd case
             if (!vm.ectd) {
@@ -193,6 +215,22 @@
          * Selects the appropriate activity list based on the activity lead selection
          * The activity lead  question calls this function
          */
+
+        vm.selectActivityLeadList = function() {
+           switch( vm.dossierType ) {
+               case  TransactionLists.getPharmaceuticalValue():
+                   vm.leadList = TransactionLists.getActivityLeadListByD21();
+                   break;
+               case  TransactionLists.getBiologicValue():
+                   vm.leadList = TransactionLists.getActivityLeadListByD22();
+                   break;
+               default:
+                   vm.leadList = [];
+                   break;
+           }
+        };
+
+
         vm.selectActivityList = function(){
             if(!vm.lifecycleModel.activityLead){
                 vm.activityTypeList=[];
@@ -389,7 +427,7 @@
                 case(vm.descriptionObj.PANDEMIC_APPL):          /*FALLTHROUGH*/
                 case(vm.descriptionObj.POST_CLEARANCE_DATA):    /*FALLTHROUGH*/
                 case(vm.descriptionObj.POST_MARKET_SURV):       /*FALLTHROUGH*/
-                case(vm.descriptionObj.POST_NOC_CHANGE):        /*FALLTHROUGH*/
+               // case(vm.descriptionObj.POST_NOC_CHANGE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.POST_AUTH_DIV1_CHANGE):  /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRESUB_MEETING_PKG):     /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRIORITY_REVIEW_RQ):     /*FALLTHROUGH*/
@@ -419,25 +457,24 @@
                 case(vm.descriptionObj.COMMENTS_REGULARTORY_DECISION):   /*FALLTHROUGH*/
                 case(vm.descriptionObj.MEETING_MINUTES):            /*FALLTHROUGH*/
                 case(vm.descriptionObj.ADVISEMENT_LETTER_RESPONSE):   /*FALLTHROUGH*/
-                case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):         /*FALLTHROUGH*/
-                case(vm.descriptionObj.EMAIL_RQ_RESPONSE):            /*FALLTHROUGH*/
-                case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+              //  case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):         /*FALLTHROUGH*/
+             //   case(vm.descriptionObj.EMAIL_RQ_RESPONSE):            /*FALLTHROUGH*/
+               // case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.MHPD_RQ_RESPONSE):             /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOC_RESPONSE):                  /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOD_RESPONSE):                  /*FALLTHROUGH*/
                 case(vm.descriptionObj.NON_RESPONSE):                 /*FALLTHROUGH*/
-                case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):   /*FALLTHROUGH*/
-                case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):   /*FALLTHROUGH*/
-                case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):         /*FALLTHROUGH*/
+              //  case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+              //  case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+              //  case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):         /*FALLTHROUGH*/
                 case(vm.descriptionObj.SDN_RESPONSE):                 /*FALLTHROUGH*/
-                case(vm.descriptionObj.PHONE_RQ_RESPONSE):         /*FALLTHROUGH*/
-                case(vm.descriptionObj.BE_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+              //  case(vm.descriptionObj.PHONE_RQ_RESPONSE):         /*FALLTHROUGH*/
+               // case(vm.descriptionObj.BE_CLARIF_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.SCREENING_ACCEPT_RESPONSE):        /*FALLTHROUGH*/
-                case(vm.descriptionObj.SCREENING_CLARIF_RESPONSE):        /*FALLTHROUGH*/
+               // case(vm.descriptionObj.SCREENING_CLARIF_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOL_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
-                case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
-
+              //  case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
                     setAsStartDate();
                     vm.setConcatDetails();
                     break;
@@ -452,7 +489,6 @@
                     break;
 
                 case(vm.descriptionObj.UNSOLICITED_DATA):
-
                     setAsDescription();
                     vm.setConcatDetails();
                     break;
@@ -461,7 +497,23 @@
                     setAsDescriptionYear();
                     vm.setConcatDetails();
                     break;
-
+                case(vm.descriptionObj.BE_CLARIF_RESPONSE):
+                case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):
+                case(vm.descriptionObj.EMAIL_RQ_RESPONSE):
+                case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):
+                case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):
+                case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):
+                case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):
+                case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):
+                case(vm.descriptionObj.SCREENING_CLARIF_RESPONSE):
+                case(vm.descriptionObj.PHONE_RQ_RESPONSE):
+                    setAsRequesterwithDate();
+                    vm.setConcatDetails();
+                    break;
+                case(vm.descriptionObj.POST_NOC_CHANGE):
+                    setAsDescriptionChange();
+                    vm.setConcatDetails();
+                    break;
                 default:
                     console.warn("Lifecycle Details activity not found: " + value);
                     break;
@@ -477,13 +529,14 @@
         function setAsDescriptionYear() {
             vm.endDateVisible = false;
             vm.startDateVisible = false;
-            vm.descriptionVisible = true;
+            vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = true;
+            vm.requesterVisible = false;
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.sequenceVersion = "";
-            vm.descriptionLabel = "LIST_DESCRIPT";
         }
 
         function setDetailsAsNone() {
@@ -491,8 +544,10 @@
             vm.endDateVisible = false;
             vm.startDateVisible = false;
             vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
@@ -504,8 +559,10 @@
             vm.endDateVisible = false;
             vm.startDateVisible = false;
             vm.descriptionVisible = true;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.requesterVisible = false;
             vm.descriptionLabel = "BRIEF_DESC";
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
@@ -521,6 +578,7 @@
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
@@ -532,9 +590,11 @@
             vm.startDateVisible = true;
            // vm.startDateLabel = "DATED";
             vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = true;
             vm.versionLabel = "VERSION_NO";
             vm.yearVisible = false;
+            vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
@@ -546,8 +606,10 @@
             vm.startDateVisible = true;
             //vm.startDateLabel = "START_DATE";
             vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
@@ -557,12 +619,43 @@
             vm.endDateVisible = false;
             vm.startDateVisible = false;
             vm.descriptionVisible = true;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = true;
             vm.versionLabel = "VERSION_NO";
             vm.yearVisible = false;
+            vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
+        }
+
+        function setAsRequesterwithDate() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = true;
+            vm.descriptionVisible = false; //
+            vm.descriptionChangeVisible = false;
+            vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.requesterVisible = true;
+            vm.lifecycleModel.year = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.sequenceVersion = "";
+        }
+
+        function setAsDescriptionChange() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = false; //
+            vm.descriptionChangeVisible = true;
+            vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.requesterVisible = false;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.year = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.sequenceVersion = "";
         }
 
         vm.setConcatDetails = function () {
@@ -593,6 +686,9 @@
             }
             if (vm.yearVisible) {
                 concatText = vm.lifecycleModel.year + ", " + vm.lifecycleModel.details;
+            }
+            if (vm.descriptionChangeVisible) {
+                concatText = enDescription +  "\n" + vm.lifecycleModel.detailsChange;
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;
@@ -696,7 +792,7 @@
             }
             return (false);
         };
-
+/*
         function _createYearList() {
             var start = 1980;
             var end = (new Date()).getFullYear();
@@ -705,7 +801,7 @@
                 result.push("" + i)
             }
             return (result);
-        }
+        } *
 
         /**
          * Open the instruction alerts
@@ -744,7 +840,10 @@
             vm.descriptId="brief_desc"+scopeId;
             vm.versionId="version_no"+scopeId;
             vm.activityLeadId = "activity_lead" + scopeId;
+            vm.requesterNameId = "requester_name" + scopeId;
+            vm.requesterNameId2 = "requester_name" + scopeId;
+            vm.requesterNameId3 = "requester_name" + scopeId;
+            vm.descriptChangeId = "brief_desc_change" +  scopeId;
         }
-
     }
 })();
