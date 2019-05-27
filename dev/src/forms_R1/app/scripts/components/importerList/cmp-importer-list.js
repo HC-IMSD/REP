@@ -37,7 +37,7 @@
         vm.selectRecord = -1;
         vm.columnDef = [
             {
-                label: "Importer Company ID",
+                label: "IMPORTERID",
                 binding: "importerId",
                 width: "20"
             },

@@ -168,11 +168,11 @@
 
             return(
                 [
-                    {"id":"HUMAN","en":"Human","fr":"fr_Human"},
-                    {"id":"RADIO","en":"Radiopharmaceutical","fr":"fr_Radiopharmaceutical"},
-                    {"id":"VET","en":"Veterinary","fr":"fr_Veterinary"},
-                    {"id":"DISINFECT","en":"Disinfectant","fr":"fr_Disinfectant"},
-                    {"id":"DM","en":"Drug and Medical Device","fr":"fr_Drug and Medical Device"}
+                    {"id":"HUMAN","en":"Human","fr":"Humain"},
+                    {"id":"RADIO","en":"Radiopharmaceutical","fr":"Radiopharmaceutique"},
+                    {"id":"VET","en":"Veterinary","fr":"Vétérinaire"},
+                    {"id":"DISINFECT","en":"Disinfectant","fr":"Désinfectant"},
+                    {"id":"DM","en":"Drug and Medical Device","fr":"Drogue et instrument médicale"}
                 ]
             )
         }
@@ -195,8 +195,8 @@
 
             return(
                 [
-                    {"id":"MED","en":"Medicinal Ingredient","fr":"fr_Medicinal Ingredient"},
-                    {"id":"NONMED","en":"Non-medicinal Ingredient","fr":"fr_Non-medicinal Ingredient"}
+                    {"id":"MED","en":"Medicinal Ingredient","fr":"Ingrédient médicinal actif"},
+                    {"id":"NONMED","en":"Non-medicinal Ingredient","fr":"Ingrédient non-médicinal actif"}
 
                 ]
             )
@@ -217,10 +217,10 @@
 
             return(
                 [
-                    {"id":"EQ","en":"Equals","fr":"fr_Equals"},
-                    {"id":"NGT","en":"Not more than","fr":"fr_Not_greater_than"},
-                    {"id":"NLT","en":"Not less than","fr":"fr_Not_less_than"},
-                    {"id":"RA","en":"Range","fr":"fr_Range"}
+                    {"id":"EQ","en":"Equals","fr":"Egale"},
+                    {"id":"NGT","en":"Not more than","fr":"Pas plus de"},
+                    {"id":"NLT","en":"Not less than","fr":"Pas moins de"},
+                    {"id":"RA","en":"Range","fr":"Gamme"}
 
                 ]
             )

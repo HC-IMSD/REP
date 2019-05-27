@@ -89,5 +89,6 @@
   "FAX_NOT_AVAILABLE":" (Use 0000000000 if not available)",
   "NOT_APPLICABLE": "Not applicable",
   "D21": "Biologic",
-  "D22": "Pharmaceutical"
+  "D22": "Pharmaceutical",
+  "BROWSER": "Browser"
 }

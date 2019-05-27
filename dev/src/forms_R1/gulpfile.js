@@ -129,8 +129,8 @@ var transactionRootTitles_en = {
 
 };
 var transactionRootTitles_fr = {
-    mainHeading: "fr_Regulatory Transaction Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Regulatory Transaction Template: Regulatory Enrolment Process - Canada.ca'
+    mainHeading: "Modèle de transaction réglementaire: Processus d'inscription réglementaire",
+    title: 'Modèle de transaction réglementaire: Processus d\'inscription réglementaire - Canada.ca'
 
 };
 
@@ -227,7 +227,8 @@ var libFileNames = {
     deepDiffMin: "deep-diff-0.3.4.min.js",
     uiTreeMin: "angular-ui-tree.min.js",
     uibTemplates: "uib-templates/*.*",
-    ngIf: "focusIf.min.js"
+    ngIf: "focusIf.min.js",
+    bsCustomFileInput: "bs-custom-file-input.js"
 }
 
 

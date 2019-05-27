@@ -75,9 +75,9 @@
   "DOSSIER_TYPE": "Type de dossier",
   "LEAST_5_CHAR":" fr_(at least 5 characters)",
   "5_OR_6_CHAR":" (5 ou 6 caractères)",
-  "LEAST_7_CHAR":" fr_(7 characters)",
+  "LEAST_7_CHAR":" (7 caractères)",
   "INCLUDE_AREA_CODE":" (y compris indicatif régional)",
-  "LEAST_6_DIGIT":" fr_(6 digits only)",
+  "LEAST_6_DIGIT":" (6 chiffres seulement)",
   "INSTRUCTION":"fr_Instruction",
   "RETURN_INSTRUCTION":"fr_Return to instruction",
   "PRIVACY_STATEMENT_HELP":"fr_View Privacy Notice Statement",
@@ -88,5 +88,6 @@
   "FAX_NOT_AVAILABLE":" (Si pas disponible, utilizer 0000000000)",
   "NOT_APPLICABLE": "fr_Not applicable",
   "D21": "Biologique",
-  "D22": "Pharmaceutique"
+  "D22": "Pharmaceutique",
+  "BROWSER": "Navigateur"
 }

@@ -113,29 +113,29 @@
                                    </textarea>
                                 </div>
                     </div>
-                    <div class="row">
-                            <div class="form-group col-md-12"
-                                 data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">
-                                <label for="{{::transInfoCtrl.isNewActivityId}}" class="required full-width">
-                                    <span class="field-name">{{::"IS_NEW_ACTIVITY" |translate}}</span>
-                                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <cmp-error-message field-name="transInfoCtrl.isNewActivityId"
-                                                       form-ref="transInfoCtrl.transInfoForm"
-                                                       show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId])"
-                                                       error-types="transInfoCtrl.requiredOnly">
-                                    </cmp-error-message>
-                                    <select id="{{::transInfoCtrl.isNewActivityId}}" name="{{::transInfoCtrl.isNewActivityId}}"
-                                            data-ng-model="transInfoCtrl.transactionModel.transactionType"
-                                            class="form-control" data-ng-change="transInfoCtrl.updateActivityType()"
-                                            data-ng-options="choice |translate for choice in transInfoCtrl.newExistingList"
-                                            required>
-                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.transactionType" />
-                                    </select>
-                                </label>
-                            </div>
-                     </div>
+                    <!--<div class="row">-->
+                            <!--<div class="form-group col-md-12"-->
+                                 <!--data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId].$invalid}">-->
+                                <!--<label for="{{::transInfoCtrl.isNewActivityId}}" class="required full-width">-->
+                                    <!--<span class="field-name">{{::"IS_NEW_ACTIVITY" |translate}}</span>-->
+                                    <!--<strong class="required"> {{::"REQUIRED" |translate}}</strong>-->
+                                    <!--<cmp-error-message field-name="transInfoCtrl.isNewActivityId"-->
+                                                       <!--form-ref="transInfoCtrl.transInfoForm"-->
+                                                       <!--show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isNewActivityId])"-->
+                                                       <!--error-types="transInfoCtrl.requiredOnly">-->
+                                    <!--</cmp-error-message>-->
+                                    <!--<select id="{{::transInfoCtrl.isNewActivityId}}" name="{{::transInfoCtrl.isNewActivityId}}"-->
+                                            <!--data-ng-model="transInfoCtrl.transactionModel.transactionType"-->
+                                            <!--class="form-control" data-ng-change="transInfoCtrl.updateActivityType()"-->
+                                            <!--data-ng-options="choice |translate for choice in transInfoCtrl.newExistingList"-->
+                                            <!--required>-->
+                                        <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.transactionType" />-->
+                                    <!--</select>-->
+                                <!--</label>-->
+                            <!--</div>-->
+                     <!--</div>-->
                     <!-- activity content moved in -->
-                    <div data-ng-if="transInfoCtrl.showNewActivityFields">
+                    <!--<div data-ng-if="transInfoCtrl.showNewActivityFields">-->
                         <div class="row">
                             <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.thirdPartyId].$invalid}" >
                                 <label for="{{::transInfoCtrl.thirdPartyId}}" class="required full-width">
@@ -319,7 +319,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    <!--</div>-->
                     <section class="panel  panel-default">
                         <header class="panel-heading clearfix">
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>

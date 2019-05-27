@@ -265,6 +265,7 @@
                 }
             }
             if( ! found ){
+                vm.addressModel.countryHtml = "";
                 for(var i = 0; i < vm.countryList.length; i++) {
                     var option =vm.countryList[i];
                     if(option['id'] === vm.addressModel.country['id']) {
