@@ -485,9 +485,9 @@
         result._label_en = subDescrRec.description_en;
         result._label_fr = subDescrRec.description_fr;
         if (currentLang === ENGLISH) {
-            result.__text = subDescrRec.en;
+            result.__text = subDescrRec.description_en;
         } else if (currentLang === FRENCH) {
-            result.__text = subDescrRec.fr;
+            result.__text = subDescrRec.description_fr;
         }
         return result;
 
