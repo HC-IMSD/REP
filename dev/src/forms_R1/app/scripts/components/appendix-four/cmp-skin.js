@@ -35,6 +35,7 @@
     function skinSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
+        vm.showError = false;
         vm.isSelected = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
@@ -52,6 +53,9 @@
                 vm.isSelected = 'selected';
             }
             if(changes.updateRecord){
+                if (changes.updateRecord.currentValue > 0) {
+                    vm.showError = true;
+                }
                 vm.updateErrorState();
             }
         };
@@ -64,7 +68,7 @@
                     if (keys[i] === 'otherSkin') {
                         if (!vm.model.otherDetails) {
                             vm.isSelected = "";
-                            return
+                            return;
                         }
                         vm.isSelected = "selected";
                         return;
@@ -74,12 +78,15 @@
                     }
                 }
             }
-            vm.isSelected = ""
+            vm.isSelected = "";
         };
 
         vm.detailsChanged = function (alias, value) {
 
             vm.concatUpdate({'alias': alias, 'value': value});
+            if(value) {
+                vm.showError = false;
+            }
             // vm.updateErrorState();
         };
 
@@ -96,7 +103,12 @@
             return state;
         };
 
-
+        vm.showErrorMessage = function(isInvalid){
+            if ((isInvalid && vm.showError) || (vm.showErrors() && isInvalid )) {
+                return true;
+            }
+            return false;
+        };
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;

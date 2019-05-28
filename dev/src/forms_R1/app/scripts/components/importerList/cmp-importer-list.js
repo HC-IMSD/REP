@@ -102,6 +102,9 @@
             );
             if (idx < 0) return;
 
+            vm.selectRecord = -1;
+            vm.requiredFlag = false;
+            vm.resetCollapsed = !vm.resetCollapsed;
             vm.model.list[idx] = importer;
             vm.onUpdate({list:vm.model.list});
         };

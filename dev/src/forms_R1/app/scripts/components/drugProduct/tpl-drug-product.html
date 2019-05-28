@@ -54,7 +54,7 @@
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.compId])"
                                                error-types="drugProdCtrl.min5Error">
                             </cmp-error-message>
-                            <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}"
+                            <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}" data-only-digits
                                    name="{{::drugProdCtrl.compId}}" required maxlength="5" minlength="5" size="10"
                                    data-ng-model="drugProdCtrl.model.companyID"/>
 

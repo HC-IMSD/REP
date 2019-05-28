@@ -35,6 +35,7 @@
     function muscleSystemController($scope, DrugProductService) {
         var vm = this;
         vm.model = {};
+        vm.showError = false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.$onInit = function () {
@@ -51,6 +52,9 @@
                 vm.isSelected = 'selected';
             }
             if(changes.updateRecord){
+                if (changes.updateRecord.currentValue > 0) {
+                    vm.showError = true;
+                }
                 vm.updateErrorState();
             }
         };
@@ -58,6 +62,9 @@
         vm.detailsChanged = function (alias, value) {
 
             vm.concatUpdate({'alias': alias, 'value': value});
+            if(value) {
+                vm.showError = false;
+            }
             // vm.updateErrorState();
         };
 
@@ -69,7 +76,7 @@
                     if (keys[i] === 'otherMuscle') {
                         if (!vm.model.otherDetails) {
                             vm.isSelected = "";
-                            return
+                            return;
                         }
                         vm.isSelected = "selected";
                         return;
@@ -79,8 +86,16 @@
                     }
                 }
             }
-            vm.isSelected = ""
+            vm.isSelected = "";
         };
+
+        vm.showErrorMessage = function(isInvalid){
+            if ((isInvalid && vm.showError) || (vm.showErrors() && isInvalid )) {
+                return true;
+            }
+            return false;
+        };
+
         vm.otherChanged = function () {
             var state = false;
             if (vm.model.otherMuscle) {

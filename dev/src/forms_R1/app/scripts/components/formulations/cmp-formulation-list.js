@@ -131,6 +131,7 @@
                 formulation.formulationId=(getMaxFormulationId() + 1);
                 vm.formulationList.push(formulation);
                 vm.requiredFlag = false;
+                vm.isFileLoaded = true;
                 vm.setRecord(- 1);
                 //vm.resetToCollapsed = !vm.resetToCollapsed;
             }

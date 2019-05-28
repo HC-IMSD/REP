@@ -892,7 +892,7 @@
                 record.country = "";
                 if (jsonObj[i].country._id) {
                     record.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: jsonObj[i].country._id})[0];
-                    record.countryHtml = record.country.en;
+                    record.countryHtml = record.country[$translate.proposedLanguage() || $translate.use()];
                     record.countryDisplay = record.country.id;
                 }
                 record.postalCode = jsonObj[i].postal_code;
@@ -916,7 +916,7 @@
                         _label_en: importerObj.country.en,
                         _label_fr: importerObj.country.fr,
                         _id: importerObj.country.id,
-                        __text: importerObj.country.text   //todo: ????
+                        __text: importerObj.country[$translate.proposedLanguage() || $translate.use()]
                     };
                 }
                 importerRec.postal_code = importerObj.postalCode;
