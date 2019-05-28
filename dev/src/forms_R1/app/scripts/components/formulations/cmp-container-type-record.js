@@ -38,11 +38,11 @@
             }
 
         });
-    containerTypeRecCtrl.$inject=['DossierLists', '$scope', 'FRENCH'];
-    function containerTypeRecCtrl(DossierLists, $scope, FRENCH) {
+    containerTypeRecCtrl.$inject=['DossierLists', '$scope', '$translate', 'FRENCH'];
+    function containerTypeRecCtrl(DossierLists, $scope, $translate, FRENCH) {
 
         var vm = this;
-        vm.lang = "en";
+        vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.selfLifeUnitsList = DossierLists.getShelfLifeUnitsList();
         vm.ctModel = { //TODO move to service
             "containerType": "",

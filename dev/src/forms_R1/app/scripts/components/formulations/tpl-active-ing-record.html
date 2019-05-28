@@ -41,10 +41,20 @@
                                                show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.ingredName])"
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                             <div class="rep-margin-top">
-                                <input type="text" ng-model="ingRecCtrl.ingModel.ingLabel" name="{{::ingRecCtrl.ingredName}}"
-                                       ng-model-options="{ debounce: $inherit}"
+                                <input type="text" data-ng-model="ingRecCtrl.ingModel.ingLabel" name="{{::ingRecCtrl.ingredName}}" data-ng-show=" ingRecCtrl.lang === 'en'"
+                                       data-ng-model-options="{ debounce: $inherit}"
                                        id="{{::ingRecCtrl.ingredName}}" size="100" maxlength="100"
-                                       uib-typeahead=" rec.label for rec in ingRecCtrl.activeList | filter:{label:$viewValue} | limitTo:15"
+                                       uib-typeahead=" rec.en for rec in ingRecCtrl.activeList | filter:{en:$viewValue} | limitTo:15"
+                                       class="form-control rep-normal-font" typeahead-show-hint="false"
+                                       typeahead-focus-first="false"
+                                       data-ng-change="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                                       data-ng-required="true"
+                                       typeahead-on-select="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"
+                                       typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                                <input type="text" data-ng-model="ingRecCtrl.ingModel.ingLabel" name="{{::ingRecCtrl.ingredName}}" data-ng-show=" ingRecCtrl.lang === 'fr'"
+                                       data-ng-model-options="{ debounce: $inherit}"
+                                       id="{{::ingRecCtrl.ingredName}}" size="100" maxlength="100"
+                                       uib-typeahead=" rec.fr for rec in ingRecCtrl.activeList | filter:{fr:$viewValue} | limitTo:15"
                                        class="form-control rep-normal-font" typeahead-show-hint="false"
                                        typeahead-focus-first="false"
                                        data-ng-change="ingRecCtrl.ingredSelectionUpdated($item, $model, $label, $event)"

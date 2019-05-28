@@ -180,12 +180,12 @@
         function _getDisinfectantTypeArray(){
             return(
                 [
-                    {"id":"HOSPITAL","en":"Hospital","fr":"fr_Hospital"},
-                    {"id":"FP","en":"Food Processing","fr":"fr_Food Processing"},
-                    {"id":"MI","en":"Medical Instruments","fr":"fr_Medical Instruments"},
-                    {"id":"DOMESTIC","en":"Domestic","fr":"fr_Domestic"},
-                    {"id":"BARN","en":"Barn","fr":"fr_Barn"},
-                    {"id":"II","en":"Institutional/Industrial","fr":"fr_Institutional/Industrial"}
+                    {"id":"HOSPITAL","en":"Hospital","fr":"Hôpital"},
+                    {"id":"FP","en":"Food Processing","fr":"Préparation des aliments"},
+                    {"id":"MI","en":"Medical Instruments","fr":"Instruments médicaux"},
+                    {"id":"DOMESTIC","en":"Domestic","fr":"Domestique"},
+                    {"id":"BARN","en":"Barn","fr":"Grange"},
+                    {"id":"II","en":"Institutional/Industrial","fr":"institutionnel ou industriel"}
                     // {"id":"CL","en":"Contact Lens","fr":"fr_Contact Lens"}
                 ]
             );
@@ -206,8 +206,8 @@
 
             return(
                 [
-                    {"id":"UP","en":"Unit of Presentation","fr":"fr_Unit of Presentation"},
-                    {"id":"UM","en":"Unit of Measure","fr":"fr_Unit of Measure"}
+                    {"id":"UP","en":"Unit of Presentation","fr":"Ingrédient médicinal actif"},
+                    {"id":"UM","en":"Unit of Measure","fr":"Ingrédient non-médicinal actif"}
 
                 ]
             )
@@ -229,11 +229,11 @@
         function _getShelfLifeUnitsArray(){
             return(
                 [
-                    {"id":"YR","en":"Years","fr":"fr_Years"},
-                    {"id":"MO","en":"Months","fr":"fr_Months"},
-                    {"id":"DA","en":"Days","fr":"fr_Days"},
-                    {"id":"HR","en":"Hours","fr":"fr_Hours"},
-                    {"id":"MI","en":"Minutes","fr":"fr_Minutes"}
+                    {"id":"YR","en":"Years","fr":"Années"},
+                    {"id":"MO","en":"Months","fr":"Mois"},
+                    {"id":"DA","en":"Days","fr":"Jours"},
+                    {"id":"HR","en":"Hours","fr":"Heures"},
+                    {"id":"MI","en":"Minutes","fr":"Minutes"}
                 ]
             )
         }

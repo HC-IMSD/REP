@@ -153,8 +153,8 @@ var drugProductRootTitles_en = {
 };
 
 var drugProductRootTitles_fr = {
-    mainHeading: "fr_Product Information Template: Regulatory Enrolment Process (REP)",
-    title: 'fr_Product Information Template: Regulatory Enrolment Process - Canada.ca'
+    mainHeading: "Modèle d'information sur le produit: Processus d'inscription réglementaire",
+    title: "Modèle d'information sur le produit: Processus d'inscription réglementaire - Canada.ca"
 
 };
 
