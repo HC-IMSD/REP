@@ -1,23 +1,5 @@
 <div class="container-fluid">
     <ng-form name="contCtrl.contactForm">
-     <!--   <div class="row">
-            <div class="col-md-4 form-group"
-                 ng-class="{'has-error':contCtrl.contactForm[contCtrl.salutationId].$invalid}">
-                <label for="{{::contCtrl.salutationId}}" class="required">
-                    <span class="field-name">{{::"SALUTATION"|translate}}</span>
-                    <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                    <cmp-error-message field-name="contCtrl.salutationId" form-ref="contCtrl.contactForm"
-                                       show-error="contCtrl.showErrors()"
-                                       error-types="contCtrl.requiredOnly"></cmp-error-message>
-                    <select id="{{::contCtrl.salutationId}}" name="{{::contCtrl.salutationId}}" class="form-control"
-                            data-ng-model="contCtrl.contactModel.salutation" data-ng-disabled="!contCtrl.isEditable"
-                            data-ng-options="salut |translate for salut in contCtrl.salutationList" required>
-                        <option value="" label=" " />
-                    </select>
-
-                </label>
-            </div>
-        </div> -->
         <div class="row">
             <div class="col-md-4 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.firstNameId].$invalid}">

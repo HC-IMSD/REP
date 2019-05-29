@@ -164,9 +164,9 @@
             if (roles.mailing) {
                 result = result + " MAIL"
             }
-            if (roles.importer) {
-                result = result + " IMP"
-            }
+           // if (roles.importer) {
+           //     result = result + " IMP"
+           // }
             if (roles.repPrimary) {
                 result = result + " REP1"
             }
@@ -270,7 +270,7 @@
             var rolesSelected = 0;
             var repPrimarySelected=false;
             var repSecondarySelected=false;
-            var importerSelected=false;
+          //  var importerSelected=false;
 
             if (!vm.contactList) return false;
           var companyRole= vm.companyService.createContactRole();
@@ -284,7 +284,7 @@
                        rolesSelected++;
                        if(key==="repPrimary") repPrimarySelected=true;
                        if(key==="repSecondary") repSecondarySelected=true;
-                       if(key==="importer") importerSelected=true;
+                      // if(key==="importer") importerSelected=true;
                    }
                }
            }
@@ -292,7 +292,8 @@
                 return true;
             }
             //primary has to be selected at least
-            if ((rolesSelected === (numKeys - 1) || rolesSelected === (numKeys - 2)) && (repPrimarySelected && (!repSecondarySelected || !importerSelected))) {
+           // if ((rolesSelected === (numKeys - 1) || rolesSelected === (numKeys - 2)) && (repPrimarySelected && (!repSecondarySelected || !importerSelected))) {
+            if ((rolesSelected === (numKeys - 1) || rolesSelected === (numKeys - 2)) && (repPrimarySelected && (!repSecondarySelected))) {
                 return true;
             }
 

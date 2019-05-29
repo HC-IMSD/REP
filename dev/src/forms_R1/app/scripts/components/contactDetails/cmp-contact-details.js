@@ -44,7 +44,6 @@
        // vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
         vm.phoneReg=/^\+?\d{3}[- ]?\d{3}[- ]?\d{4}$/;
         vm.contactModel = {
-         //   salutation: "",
             givenName: "",
             surname: "",
             initials: "",
@@ -95,7 +94,6 @@
 
         function _setIdNames() {
             var scopeId = vm.fldId+ "_" + $scope.$id;
-           // vm.salutationId = "salutation" + scopeId;
             vm.firstNameId="firstName" + scopeId;
             vm.lastNameId="lastName" + scopeId;
             vm.langCorrespondId="langCorrespond" + scopeId;

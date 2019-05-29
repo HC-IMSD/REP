@@ -87,8 +87,9 @@
                         <input type="checkbox" name="importer" data-ng-model="ar.roleModel.importer"
                                data-ng-disabled="!ar.isEditable"
                                data-ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="{{::ar.chkImpId}}"/>
-                        <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
-                        <span data-ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
+                      <!--  <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
+                        <span data-ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span> -->
+                        <span>{{::"IMPORTER_ADDRESS"|translate}}</span>
                         <strong id="importer-rolec-error" class="error" data-ng-if="ar.roleForm.importer.$invalid">
                          <span class="label label-danger" data-ng-messages="ar.roleForm.importer.$error">
                                     <span data-ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
@@ -114,14 +115,15 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4" data-ng-show="ar.isContact">
+         <!--   <div class="col-sm-4" data-ng-show="ar.isContact">
                 <div class="checkbox">
                     <label for="{{::ar.chkImpId}}">
                         <input type="checkbox" name="importer" data-ng-model="ar.roleModel.importer"
                                data-ng-disabled="!ar.isEditable"
                                data-ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="{{::ar.chkImpId}}"/>
-                        <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
+                       <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
                         <span data-ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
+                        <span>{{::"IMPORTER_ADDRESS"|translate}}</span>
                         <strong id="importer-rolec-error" class="error" data-ng-if="ar.roleForm.importer.$invalid">
                          <span class="label label-danger" data-ng-messages="ar.roleForm.importer.$error">
                                     <span data-ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
@@ -129,7 +131,7 @@
                         </strong>
                     </label>
                 </div>
-            </div>
+            </div>  -->
             <div class="col-sm-7">
                 <div data-ng-show="ar.isContact" class="checkbox">
                     <label for="{{::ar.chkRepSecId}}">

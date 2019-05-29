@@ -132,9 +132,9 @@
             if (addressRoles.mailing) {
                 result = result + " MAIL"
             }
-            if (addressRoles.importer) {
-                result = result + " IMP"
-            }
+          //  if (addressRoles.importer) {
+          //   result = result + " IMP"
+         //   }
             if (addressRoles.repPrimary) {
                 result = result + " REP1"
             }

@@ -82,7 +82,7 @@
                     manufacturer: false,
                     mailing: false,
                     billing: false,
-                    importer: false,
+                   // importer: false,
                     repPrimary: false,
                     repSecondary: false
                 };
@@ -123,12 +123,12 @@
                         manufacturer: false,
                         mailing: false,
                         billing: false,
-                        importer: false,
+                       // importer: false,
                         repPrimary: false,
                         repSecondary: false
                     },
                     contactRole: "",
-                    salutation: "",
+                   // salutation: "",
                     givenName: "",
                     surname: "",
                     initials: "",
@@ -312,11 +312,11 @@
                     contact.addressRole.manufacturer = contacts[i].manufacturer === 'Y';
                     contact.addressRole.mailing = contacts[i].mailing === 'Y';
                     contact.addressRole.billing = contacts[i].billing === 'Y';
-                    contact.addressRole.importer = contacts[i].importer === 'Y';
+                    //contact.addressRole.importer = contacts[i].importer === 'Y';
                     contact.addressRole.repPrimary = contacts[i].rep_primary === 'Y';
                     contact.addressRole.repSecondary = contacts[i].rep_secondary === 'Y';
                     //contact.contactRole = contacts[i].company_contact_details.rep_contact_role;
-                    contact.salutation = contacts[i].company_contact_details.salutation;
+                   // contact.salutation = contacts[i].company_contact_details.salutation;
                     contact.givenName = contacts[i].company_contact_details.given_name;
                     contact.initials = contacts[i].company_contact_details.initials;
                     contact.surname = contacts[i].company_contact_details.surname;
@@ -388,12 +388,12 @@
                 contact.manufacturer = contacts[i].addressRole.manufacturer === true ? 'Y' : 'N';
                 contact.mailing = contacts[i].addressRole.mailing === true ? 'Y' : 'N';
                 contact.billing = contacts[i].addressRole.billing === true ? 'Y' : 'N';
-                contact.importer = contacts[i].addressRole.importer === true ? 'Y' : 'N';
+               // contact.importer = contacts[i].addressRole.importer === true ? 'Y' : 'N';
                 contact.rep_primary = contacts[i].addressRole.repPrimary === true ? 'Y' : 'N';
                 contact.rep_secondary = contacts[i].addressRole.repSecondary === true ? 'Y' : 'N';
                 //contact.rep_contact_role = contacts[i].addressRole.contactRole === true ? 'Y' : 'N';
                 contact.company_contact_details = {};
-                contact.company_contact_details.salutation = contacts[i].salutation;
+               // contact.company_contact_details.salutation = contacts[i].salutation;
                 contact.company_contact_details.given_name = contacts[i].givenName;
                 contact.company_contact_details.initials = contacts[i].initials;
                 contact.company_contact_details.surname = contacts[i].surname;

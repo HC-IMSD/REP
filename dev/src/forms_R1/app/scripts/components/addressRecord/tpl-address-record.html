@@ -67,18 +67,16 @@
                     <div data-ng-class="{'has-error':addressRec.addressRecForm[addressRec.importerID].$invalid}">
                     <label for="{{::addressRec.importerID}}" class=" full-width"
                            data-ng-class="{'required':addressRec.isInternal}">
-                        <span class="field-name">{{::"IMPORTERID" |translate}}</span>
+                        <span class="field-name">{{::"IMPORTERID" |translate}} {{::'LEAST_5_DIGIT' |translate}}</span>
                         <strong class="required" data-ng-show ="addressRec.isInternal"> {{::"REQUIRED" |translate}}</strong>
                         <cmp-error-message field-name="addressRec.importerID" form-ref="addressRec.addressRecForm"
                                            show-error="addressRec.showErrors()"
                                            error-types="addressRec.length6Error"></cmp-error-message>
                         <input type="text" id="{{::addressRec.importerID}}" name="{{::addressRec.importerID}}"
                                data-ng-model="addressRec.addressModel.importerID"
-                               class="form-control full-width" minlength="5" maxlength="6"
+                               class="form-control" maxlength="5" minlength="5" size="6" data-only-digits=""
                                data-ng-blur="addressRec.updateErrorSummaryState()" data-ng-readonly="!addressRec.isInternal"
-                               data-ng-required="addressRec.isInternal && addressRec.isImporter">
-
-
+                               data-ng-required="addressRec.isInternal && addressRec.isImporter" />
                     </label>
                     </div>
                 </div>
