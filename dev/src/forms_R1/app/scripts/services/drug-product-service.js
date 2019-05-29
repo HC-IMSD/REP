@@ -54,7 +54,7 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "2.2.1",
+                softwareVersion: "3.0.1",
                 xslFileName: xslName,
                 dataChecksum: "",
                 privacyStat:"",
