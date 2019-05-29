@@ -3,6 +3,6 @@
   "ENROL_VERSION": "Version de l'inscription",
   "DATE_SAVED": "Date de la dernière enregistrement",
   "AMEND_ENROL": "Modifier l'inscription",
-  "AMEND_MSG":"fr_Edit records to be amended below.",
+  "AMEND_MSG":"Changer les enregistrements à modifier ci-dessous.",
   "REASON_AMEND":"Raison pour la modification"
 }
