@@ -15,8 +15,8 @@
         .module('companyService')
         .factory('CompanyService', CompanyService);
 
-    CompanyService.$inject = ['$filter', 'getCountryAndProvinces', 'XSL_PREFIX'];
-    function CompanyService($filter, getCountryAndProvinces, XSL_PREFIX) {
+    CompanyService.$inject = ['$filter', '$translate', 'getCountryAndProvinces', 'XSL_PREFIX'];
+    function CompanyService($filter, $translate, getCountryAndProvinces, XSL_PREFIX) {
         // Define the CompanyService function
         function CompanyService() {
             //construction logic
@@ -25,7 +25,7 @@
                 enrolmentVersion: "0.0",
                 dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "2.2.1",
+                softwareVersion: "3.0.1",
                 companyId: "",
                 reasonAmend:"",
                 addressList: [],
@@ -211,8 +211,8 @@
                         software_version: jsonObj.softwareVersion,
                         company_id: jsonObj.companyId,
                         reason_amend: jsonObj.reasonAmend,
-                        address_record: _mapAddressListToOutput(jsonObj.addressList), //TODOremoved zero index
-                        contact_record: _mapContactListToOutput(jsonObj.contactList)
+                        address_record: _mapAddressListToOutput(jsonObj.addressList, $translate), //TODOremoved zero index
+                        contact_record: _mapContactListToOutput(jsonObj.contactList, $translate)
                     }
                 }
                 return (resultJson);
@@ -259,12 +259,18 @@
                     address.addressRole.importer = adrList[i].importer === 'Y';
                     address.street = adrList[i].company_address_details.street_address;
                     address.city = adrList[i].company_address_details.city;
-                    address.stateList = adrList[i].company_address_details.province_lov;
+                    // address.stateList = adrList[i].company_address_details.province_lov;
+                    if (adrList[i].company_address_details.province_lov) {
+                        address.stateList = adrList[i].company_address_details.province_lov._id;
+                    } else {
+                        address.stateList = "";
+                    }
                     address.stateText = adrList[i].company_address_details.province_text;
                     address.country = "";
-                    if (adrList[i].company_address_details.country.__text) {
-                        address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: adrList[i].company_address_details.country.__text})[0];
-                        address.countryHtml = address.country.en;
+                    var currentLang = $translate.proposedLanguage() || $translate.use();
+                    if (adrList[i].company_address_details.country._id) {
+                        address.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: adrList[i].company_address_details.country._id})[0];
+                        address.countryHtml = $translate.instant(address.country.id, "", '', currentLang);
                         address.countryDisplay = address.country.id;
                     }
                     address.postalCode = adrList[i].company_address_details.postal_code;
@@ -321,7 +327,7 @@
                     contact.initials = contacts[i].company_contact_details.initials;
                     contact.surname = contacts[i].company_contact_details.surname;
                     contact.title = contacts[i].company_contact_details.job_title;
-                    contact.language = contacts[i].company_contact_details.language_correspondance;
+                    contact.language = contacts[i].company_contact_details.language_correspondance._id;
                     contact.phone = contacts[i].company_contact_details.phone_num;
                     contact.phoneExt = contacts[i].company_contact_details.phone_ext;
                     contact.fax = contacts[i].company_contact_details.fax_num;
@@ -340,8 +346,9 @@
         return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
     };
 
-    function _mapAddressListToOutput(adrList) {
+    function _mapAddressListToOutput(adrList, $translate) {
         var addressList = [];
+        var currentLang = $translate.proposedLanguage() || $translate.use();
         if (adrList) {
             for (var i = 0; i < adrList.length; i++) {
                 var address = {};
@@ -355,14 +362,23 @@
                 address.company_address_details = {};
                 address.company_address_details.street_address = adrList[i].street;
                 address.company_address_details.city = adrList[i].city;
-                address.company_address_details.province_lov = adrList[i].stateList;
+                // address.company_address_details.province_lov = adrList[i].stateList;
+                if (adrList[i].stateList) {
+                    address.company_address_details.province_lov = {
+                        _id: adrList[i].stateList,
+                        __text: $translate.instant(adrList[i].stateList, "", '', currentLang)
+                    };
+                } else {
+                    address.company_address_details.province_lov = "";
+                }
                 address.company_address_details.province_text = adrList[i].stateText;
                 address.company_address_details.country = "";
                 if (adrList[i].country) {
                     address.company_address_details.country = {
+                        _id: adrList[i].country.id,
                         _label_en: adrList[i].country.en,
                         _label_fr: adrList[i].country.fr,
-                        __text: adrList[i].country.id
+                        __text: $translate.instant(adrList[i].country.id, "", '', currentLang)
                     };
                 }
                 // address.company_address_details.country = adrList[i].country;
@@ -379,8 +395,9 @@
         return addressList;
     }
 
-    function _mapContactListToOutput(contacts) {
+    function _mapContactListToOutput(contacts, $translate) {
         var contactList = [];
+        var currentLang = $translate.proposedLanguage() || $translate.use();
         if (contacts) {
             for (var i = 0; i < contacts.length; i++) {
                 var contact = {};
@@ -398,7 +415,10 @@
                 contact.company_contact_details.initials = contacts[i].initials;
                 contact.company_contact_details.surname = contacts[i].surname;
                 contact.company_contact_details.job_title = contacts[i].title;
-                contact.company_contact_details.language_correspondance = contacts[i].language;
+                contact.company_contact_details.language_correspondance = {
+                    _id: contacts[i].language,
+                    __text: $translate.instant(contacts[i].language, "", '', currentLang)
+                };
                 contact.company_contact_details.phone_num = contacts[i].phone;
                 contact.company_contact_details.phone_ext = contacts[i].phoneExt;
                 contact.company_contact_details.fax_num = contacts[i].fax;
