@@ -29,7 +29,7 @@
 	"is_base_calc": "Is calculated as base?",
 	"is_nanomaterial": "Nanomaterial type",
 	"nanomaterial_details": "Other Nanomaterial",
-	"variant_name": "Variant Name",
+	"variant_name": "Formulation Variant Name (if applicable)",
 	"in_final_container": "In final container?",
 	"nonmedicinal_ingredient": "Non-medicinal Ingredient",
 	"material_ingredient": "Material",

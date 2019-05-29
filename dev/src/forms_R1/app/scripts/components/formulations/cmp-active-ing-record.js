@@ -40,13 +40,14 @@
             }
 
         });
-    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER','YES','NO', 'FRENCH'];
-    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES,NO,FRENCH) {
+    activeIngRecCtrl.$inject = ['DossierLists', '$scope','$translate', 'OTHER','YES','NO', 'ENGLISH', 'FRENCH'];
+    function activeIngRecCtrl(DossierLists, $scope, $translate,OTHER,YES,NO,ENGLISH,FRENCH) {
 
         var vm = this;
         vm.ingRoleList = DossierLists.getIngRoleList();
         vm.nanoMaterialList = DossierLists.getNanoMaterials();
         vm.yesNoList = DossierLists.getYesNoList();
+        vm.calAsBaseYesNoList = DossierLists.getCalAsBaseYesNoList();
         vm.activeList = DossierLists.getActiveList();
         vm.unitsList=DossierLists.getUnitsList();
         vm.strengthList = DossierLists.getStrengthList();
@@ -109,6 +110,7 @@
             vm.backup = angular.copy(vm.ingModel);
             _setIdNames();
            // vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex);
+            vm.activeList = vm.translateLabels(DossierLists.getActiveList());
         };
 
         vm.$onChanges = function (changes) {
@@ -134,8 +136,19 @@
                 vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex.currentValue);
             }
             if(!vm.activeList || vm.activeList.length <= 0){
-                vm.activeList = DossierLists.getActiveList();
+                vm.activeList = vm.translateLabels(DossierLists.getActiveList());
             }
+        };
+
+        vm.translateLabels = function (jsonObj) {
+            var result = [];
+            if (!jsonObj) { return result; }
+
+            for (var i = 0; i < jsonObj.length; i++) {
+                jsonObj[i].label = jsonObj[i][$translate.proposedLanguage() || $translate.use()];
+                result.push(jsonObj[i]);
+            }
+            return result;
         };
 
         /**

@@ -79,6 +79,7 @@
   "5_OR_6_CHAR":" ( 5 or 6 characters)",
   "LEAST_7_CHAR":" (7 characters)",
   "INCLUDE_AREA_CODE":" (including area code)",
+  "LEAST_5_DIGIT":" (5 digits only)",
   "LEAST_6_DIGIT":" (6 digits only)",
   "LEAST_5_DIGIT":" (5 digits only)",
   "INSTRUCTION":"Instruction",

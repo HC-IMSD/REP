@@ -64,6 +64,7 @@
             getUnknownValue: getUnknownValue, //TODO make a constant instead
             getYesNoList: yesNoArray,
             getYesNoUnknownList: yesNoUnknownArray,
+            getCalAsBaseYesNoList: calAsBaseYesNoArray,
             getAnimalSources: animalSourcesArray,
             getTissuesSystem: tissuesSystemArray,
             getNervousSystem: nervousSystemArray,
@@ -295,6 +296,14 @@
             ]);
         }
 
+        function calAsBaseYesNoArray() {
+
+            return ([
+                "CAB_YES1",
+                "CAB_YES2",
+                "CAB_NO"
+            ]);
+        }
         function animalSourcesArray() {
 
             return ([

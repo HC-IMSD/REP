@@ -763,6 +763,8 @@ var dossierTranslationFilesBaseList =
 
 var drugProductTranslationFilesBaseList =
     [
+        translationBaseFiles.address,
+        translationBaseFiles.stateProvinces,
         translationBaseFiles.dosageForm,
         translationBaseFiles.dossier,
         translationBaseFiles.dossierGeneral,

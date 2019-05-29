@@ -22,19 +22,17 @@
             </div>
             <div class="row form-group">
                 <div class="col-md-12"
-                     data-ng-class="{'has-error':animalSrcCtrl.animalRecForm.typeDetail.$invalid}">
-                    <label for="animal-details{{::$id}}" class="required">
+                     data-ng-class="{'has-error':animalSrcCtrl.animalRecForm[animalSrcCtrl.animalDetail].$invalid}">
+                    <label for="{{::animalSrcCtrl.animalTypeDetailId}}" class="required">
                         <span class="field-name">{{::'ANIMAL_DETAILS'|translate}}</span>
                         <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                        <strong id="animalDetail-error" class="error"
-                                data-ng-if="animalSrcCtrl.showError(animalSrcCtrl.animalRecForm.typeDetail)">
-                         <span class="label label-danger"
-                               data-ng-messages="animalSrcCtrl.animalRecForm.typeDetail.$error">
-                             <span data-ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
-                         </span>
-                        </strong>
-                        <input type="text" id="animal-details{{::$id}}" class="form-control"
-                               name="typeDetail" size="100" maxlength="100"
+                        <cmp-error-message field-name="animalSrcCtrl.animalTypeDetailId"
+                                           form-ref="animalSrcCtrl.animalRecForm"
+                                           show-error="animalSrcCtrl.showErrors()"
+                                           error-types="animalSrcCtrl.requiredOnly">
+                        </cmp-error-message>
+                        <input type="text" id="{{::animalSrcCtrl.animalTypeDetailId}}" class="form-control"
+                               name="{{::animalSrcCtrl.animalTypeDetailId}}" size="100" maxlength="100"
                                data-ng-model="animalSrcCtrl.model.animalDetail" data-ng-model-options="{ debounce: '$inherit'}" required/>
 
                     </label>

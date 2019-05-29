@@ -113,6 +113,17 @@
                     </fieldset>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="{{::ctrCtrl.otherShelflifeConsiderId}}">
+                        <span class="field-name">{{'OTHER_SHELF_LIFE_CONSIDER'|translate}}</span>
+                    </label>
+                    <textarea id="{{::ctrCtrl.otherShelflifeConsiderId}}" data-ng-model="ctrCtrl.ctModel.otherShelflifeConsider" maxlength="256" rows="3"
+                              data-ng-model-options="{ debounce: $inherit}"
+                              class="form-control full-width" name="{{::ctrCtrl.otherShelflifeConsiderId}}">
+                    </textarea>
+                </div>
+            </div>
         </fieldset>
 
         <div class="row">

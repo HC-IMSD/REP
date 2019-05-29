@@ -48,7 +48,18 @@
             }
         ];
 
-        vm.emptyModel = {"importerId": "", "importerName": ""};
+        vm.emptyModel = {
+            importerId: "",
+            importerName: "",
+            street: "",
+            city: "",
+            country: "",
+            countryHtml: "",
+            countryDisplay:"",
+            stateLov: "",
+            stateText: "",
+            postalCode: ""
+        };
 
 
         vm.$onInit = function () {
@@ -84,6 +95,19 @@
             vm.selectRecord = value;
 
         }
+
+        vm.saveRecord = function (importer) {
+            var idx = vm.model.list.indexOf(
+                $filter('filter')(vm.model.list, {importerId: importer.importerId}, true)[0]
+            );
+            if (idx < 0) return;
+
+            vm.selectRecord = -1;
+            vm.requiredFlag = false;
+            vm.resetCollapsed = !vm.resetCollapsed;
+            vm.model.list[idx] = importer;
+            vm.onUpdate({list:vm.model.list});
+        };
 
         vm.deleteRecord = function (_id) {
             var idx = vm.model.list.indexOf(

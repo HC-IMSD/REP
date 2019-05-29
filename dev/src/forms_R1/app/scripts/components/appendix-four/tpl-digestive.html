@@ -4,12 +4,12 @@
             <legend class="required legend-rep">
                 <span id="DIGESTIVE_LEGEND_{{::$id}}" class="field-name">{{::'DIGESTIVE_LEGEND' |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                <cmp-error-message field-name="sysCtrl.roleMissingId"
+                <cmp-error-message field-name="sysCtrl.systemRoleId"
                                    form-ref="sysCtrl.digestForm"
-                                   show-error="sysCtrl.showErrors()"
+                                   show-error="sysCtrl.showErrorMessage(sysCtrl.digestForm.$invalid)"
                                    error-types="sysCtrl.requiredOnly">
                 </cmp-error-message>
-                <input id="{{::sysCtrl.roleMissingId}}" name="DIGESTIVE_LEGEND_{{::$id}}"  type="hidden"
+                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.systemRoleId}}"  type="hidden"
                        data-ng-model="sysCtrl.isSelected" required/>
             </legend>
             <div class="row">

@@ -4,11 +4,11 @@
             <legend class="required legend-rep">
                 <span class="field-name">{{::'SKIN_LEGEND' |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}" type="hidden"
+                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.systemRoleId}}" type="hidden"
                        data-ng-model="sysCtrl.isSelected" required/>
-                <cmp-error-message field-name="sysCtrl.roleMissingId"
+                <cmp-error-message field-name="sysCtrl.systemRoleId"
                                    form-ref="sysCtrl.skinForm"
-                                   show-error="sysCtrl.showErrors()"
+                                   show-error="sysCtrl.showErrorMessage(sysCtrl.skinForm.$invalid)"
                                    error-types="sysCtrl.requiredOnly"></cmp-error-message>
             </legend>
             <div class="row">

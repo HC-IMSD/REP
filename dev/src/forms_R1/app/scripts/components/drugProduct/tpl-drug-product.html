@@ -47,15 +47,15 @@
                 <div class="row">
                     <div class="col-xs-4 form-group" data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
                         <label for="{{::drugProdCtrl.compId}}" class="required">
-                            <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}{{::'5_OR_6_CHAR' |translate}}</span>
+                            <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}{{::'LEAST_5_DIGIT' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="drugProdCtrl.compId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.compId])"
                                                error-types="drugProdCtrl.min5Error">
                             </cmp-error-message>
-                            <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}"
-                                   name="{{::drugProdCtrl.compId}}" required maxlength="6" minlength="5" size="10"
+                            <input type="text" class="form-control" id="{{::drugProdCtrl.compId}}" data-only-digits
+                                   name="{{::drugProdCtrl.compId}}" required maxlength="5" minlength="5" size="10"
                                    data-ng-model="drugProdCtrl.model.companyID"/>
 
                         </label>
@@ -80,10 +80,31 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col-xs-12"
+                         data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.typeId].$invalid}">
+                        <label for="{{::drugProdCtrl.typeId}}" class="required">
+                            <span class="field-name">3. {{::'DOSSIER_TYPE' |translate}}</span>
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="drugProdCtrl.typeId"
+                                               form-ref="drugProdCtrl.drugProdForm"
+                                               show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[dos.typeId])"
+                                               error-types="drugProdCtrl.requiredOnly">
+                            </cmp-error-message>
+                            <select class="form-control full-width rep-margin-top-12"
+                                    id="{{::drugProdCtrl.typeId}}"
+                                    name="{{::drugProdCtrl.typeId}}" data-required="true"
+                                    data-ng-model="drugProdCtrl.model.dossierType"
+                                    data-ng-options="val |translate for val in  drugProdCtrl.formTypeList">
+                                <option value="" label=" " data-ng-if="! drugProdCtrl.model.dossierType" />
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12 form-group"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.prodNameId].$invalid}">
                         <label for="{{::drugProdCtrl.prodNameId}}" class="required">
-                            <span class="field-name">3.&nbsp;{{::'PROD_NAME' |translate}}</span>
+                            <span class="field-name">4.&nbsp;{{::'PROD_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <sup id="dr3_ref">
                                 <a class="fn-lnk" href="#dr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>3</a>
@@ -94,6 +115,7 @@
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
                         <textarea class="form-control full-width" id="{{::drugProdCtrl.prodNameId}}" name="{{::drugProdCtrl.prodNameId}}"
+                                  data-ng-change="drugProdCtrl.model.productName=drugProdCtrl.model.productName.toUpperCase()"
                                   required data-ng-model="drugProdCtrl.model.productName" maxlength="256" rows="3">
                         </textarea>
                     </div>
@@ -102,7 +124,7 @@
                     <div class="col-xs-12 form-group"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.properNameId].$invalid}">
                         <label for="{{::drugProdCtrl.properNameId}}" class="required">
-                            <span class="field-name">4.&nbsp;{{::'PROPER_NAME' |translate}}</span>
+                            <span class="field-name">5.&nbsp;{{::'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <sup id="dr4_ref">
                                 <a class="fn-lnk" href="#dr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>4</a>
@@ -113,6 +135,7 @@
                                                error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                         </label>
                         <textarea class="form-control full-width" id="{{::drugProdCtrl.properNameId}}" name="{{::drugProdCtrl.properNameId}}"
+                                  data-ng-change="drugProdCtrl.model.properName=drugProdCtrl.model.properName.toUpperCase()"
                               required data-ng-model="drugProdCtrl.model.properName" maxlength="256" rows="3">
                         </textarea>
                     </div>
@@ -121,7 +144,7 @@
                     <div class="col-xs-12 form-group">
                         <fieldset id="fs_addrMissing_{{::$id}}">
                     <label>
-                        <span class="field-name">5. {{::'ADDRESS_NOC'|translate}}</span>
+                        <span class="field-name">6. {{::'ADDRESS_NOC'|translate}}</span>
                         <sup id="dr5_ref">
                             <a class="fn-lnk" href="#dr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>5</a>
                         </sup>
@@ -183,7 +206,7 @@
                     <div class="col-xs-12 form-group">
                         <section class="panel panel-default">
                     <header class="panel-heading clearfix">
-                        <h3 class="panel-title">6. {{'IMPORTER'|translate}}
+                        <h3 class="panel-title">7. {{'IMPORTER'|translate}}
                             <sup id="dr6_ref">
                                 <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>6</a>
                             </sup>
@@ -206,7 +229,7 @@
                     <div class="col-xs-12 form-group"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.drugUseId].$invalid}">
                         <label for="{{::drugProdCtrl.drugUseId}}" class="required">
-                            <span class="field-name">7.&nbsp;{{::'DRUG_USE'|translate}}</span>
+                            <span class="field-name">8.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <sup id="dr7_ref">
                                 <a class="fn-lnk" href="#dr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>7</a>
@@ -237,7 +260,7 @@
                     <fieldset id="{{::drugProdCtrl.fsType}}">
                     <legend>
                         <label>
-                            <span class="label-pi">8.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
+                            <span class="label-pi">9.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </label>
                     </legend>
                     <div class="row">
@@ -312,7 +335,7 @@
                     <div class="form-group col-xs-12"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
                         <label class="required">
-                            <span class="field-name">9. {{::'PROP_INDICATION'|translate}}</span>
+                            <span class="field-name">10. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
                             <sup id="dr8_ref">
                                 <a class="fn-lnk" href="#dr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>8</a>
@@ -362,7 +385,7 @@
                 <div class="row">
                     <div class="col-xs-12 form-group">
                         <label>
-                            <span class="field-name">10. {{::'FORMULATION'|translate}}</span>
+                            <span class="field-name">11. {{::'FORMULATION'|translate}}</span>
                             <sup id="dr9_ref">
                                 <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>9</a>
                             </sup>

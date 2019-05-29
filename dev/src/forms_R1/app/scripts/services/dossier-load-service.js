@@ -13,7 +13,7 @@
     'use strict';
     angular
         .module('dossierLoadModule')
-        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'DossierLists', 'OTHER', 'RELATIVE_FOLDER_DATA', function ($http, $q, $filter, getCountryAndProvinces, DossierLists, OTHER, RELATIVE_FOLDER_DATA) {
+        .factory('customLoad', ['$http', '$q', '$filter', 'getCountryAndProvinces', 'DossierLists', 'OTHER', 'RELATIVE_FOLDER_DATA', 'CANADA', 'USA', function ($http, $q, $filter, getCountryAndProvinces, DossierLists, OTHER, RELATIVE_FOLDER_DATA, CANADA, USA) {
 
             return function (options) {
                 var deferred = $q.defer();
@@ -51,7 +51,7 @@
                     });
                 $http.get(countryUrl).then(function (response) {
                         //PROCESS country list data
-                        var newList = _createSortedArray(response.data, options.key);
+                        var newList = _createSortedArrayNAFirst(response.data, options.key);
                         var translateList = _createTranslateList(newList, options.key);
                         getCountryAndProvinces.createCountryList(newList);
                         angular.extend(resultTranslateList, translateList);
@@ -191,6 +191,25 @@
                     newList.push(newRec);
                 }
                 return newList;
+            }
+
+            function _createSortedArrayNAFirst(jsonList,lang){
+                var result = [];
+                var canadaRecord = null;
+                var usaRecord = null;
+                angular.forEach($filter('orderByLocale')(jsonList,lang), function (sortedObject) {
+                    if (sortedObject.id === USA) {
+                        usaRecord = sortedObject;
+                    } else if (sortedObject.id === CANADA) {
+                        canadaRecord = sortedObject;
+                    }
+                    else {
+                        result.push(sortedObject);
+                    }
+                });
+                if (usaRecord) result.unshift(usaRecord);
+                if (canadaRecord) result.unshift(canadaRecord);
+                return result;
             }
 
 

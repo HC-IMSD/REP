@@ -50,7 +50,8 @@
             "shelfLifeUnit": undefined,
             "shelfLifeNumber": undefined,
             "tempMin": undefined,
-            "tempMax": undefined
+            "tempMax": undefined,
+            "otherShelflifeConsider": ""
         };
         vm.backup = angular.copy(vm.ctModel);
 
@@ -182,6 +183,7 @@
             vm.shelfLifeNumberId="shelf_life_number" +scopeId;
             vm.tempMinId="min_temp" +scopeId;
             vm.tempMaxId="max_temp" +scopeId;
+            vm.otherShelflifeConsiderId="other_shelf_life_considerations" + scopeId;
         }
 
         /**

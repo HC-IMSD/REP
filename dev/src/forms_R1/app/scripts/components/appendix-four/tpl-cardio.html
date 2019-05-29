@@ -4,11 +4,11 @@
             <legend class="required legend-rep">
                 <span class="field-name">{{'CARDIO_LEGEND' |translate}}</span>
                 <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                <cmp-error-message field-name="sysCtrl.roleMissingId"
+                <cmp-error-message field-name="sysCtrl.systemRoleId"
                                    form-ref="sysCtrl.cardioForm"
-                                   show-error="sysCtrl.showErrors()"
+                                   show-error="sysCtrl.showErrorMessage(sysCtrl.cardioForm.$invalid)"
                                    error-types="sysCtrl.requiredOnly"></cmp-error-message>
-                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.roleMissingId}}" required type="hidden"
+                <input id="{{::sysCtrl.roleMissingId}}" name="{{::sysCtrl.systemRoleId}}" required type="hidden"
                        data-ng-model="sysCtrl.isSelected"/>
             </legend>
 

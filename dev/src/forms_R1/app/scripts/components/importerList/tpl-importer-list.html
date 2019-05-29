@@ -7,6 +7,7 @@
 
         <cmp-importer-record record="$parent.record"
                              fieldset-label="{{importerListCtrl.fieldLabel}}"
+                             on-update="importerListCtrl.saveRecord(importer)"
                              on-delete="importerListCtrl.deleteRecord(id)"
                              show-errors="importerListCtrl.showDetailErrors">
         </cmp-importer-record>
