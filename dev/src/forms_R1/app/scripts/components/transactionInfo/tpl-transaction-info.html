@@ -76,6 +76,7 @@
                                             <div data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
                                                 <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
                                                        size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
+                                                       data-ng-pattern="/^[a-zA-Z0-9]{7}$/"
                                                        data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
                                             </div>
                                         </div>

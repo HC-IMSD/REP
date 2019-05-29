@@ -602,10 +602,9 @@
                 __text: lifecycleObj.requesterName
             };
         } */
-        lifecycleRec.requester_of_solicited_information = '';
         var tempRequesterName = '';
-        if (lifecycleObj.requesterName.id) {
-            tempRequesterName =  lifecycleObj.requesterName.en;
+        if (lifecycleObj.requesterName.id && lifecycleObj.requesterName) {
+            tempRequesterName =  lifecycleObj.requesterName.id;
             lifecycleRec.requester_name = lifecycleObj.requesterName.en;
         }
         else
@@ -613,8 +612,8 @@
             tempRequesterName =  lifecycleObj.requesterName;
             lifecycleRec.requester_name = lifecycleObj.requesterName;
         }
-        if (lifecycleObj.requesterName2.id ) {
-            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.en;
+        if (lifecycleObj.requesterName2.id && lifecycleObj.requesterName2) {
+            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
             lifecycleRec.requester_name2 = lifecycleObj.requesterName2.en;
         }
         else
@@ -623,8 +622,8 @@
             lifecycleRec.requester_name2 = lifecycleObj.requesterName2;
         }
 
-        if (lifecycleObj.requesterName3.id) {
-            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3.en;
+        if (lifecycleObj.requesterName3.id && lifecycleObj.requesterName3) {
+            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3.id;
             lifecycleRec.requester_name3 = lifecycleObj.requesterName3.en;
         }
         else
@@ -632,11 +631,7 @@
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
             lifecycleRec.requester_name3 = lifecycleObj.requesterName3;
         }
-
-        if( tempRequesterName != '' )
-        {
-            lifecycleRec.requester_of_solicited_information = tempRequesterName;
-        }
+        lifecycleRec.requester_of_solicited_information = tempRequesterName;
 
         return (lifecycleRec);
     }

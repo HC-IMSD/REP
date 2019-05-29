@@ -29,5 +29,6 @@
   "MSG_ERR_MIN_POS": "Doit être un nombre positif",
   "MSG_ERR_MAX": "Dépasse le maximum.",
   "MSG_FORMAT_CHAR_6DIGITS": "fr_ID should be a letter plus 6 digits.",
-  "MSG_ERR_DUPLICATED_SYSTEM": "fr_Duplicated System."
+  "MSG_ERR_DUPLICATED_SYSTEM": "fr_Duplicated System.",
+  "MSG_FORMAT_ALPHA_NUMBERIC": "Alphanumérique seulement"
 }

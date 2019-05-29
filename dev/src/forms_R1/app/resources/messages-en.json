@@ -30,5 +30,6 @@
   "MSG_ERR_MIN_POS": "Must be a positive number",
   "MSG_ERR_MAX": "Exceeds the maximum",
   "MSG_FORMAT_CHAR_6DIGITS": "ID should be a letter plus 6 digits.",
-  "MSG_ERR_DUPLICATED_SYSTEM": "Duplicated System."
+  "MSG_ERR_DUPLICATED_SYSTEM": "Duplicated System.",
+  "MSG_FORMAT_ALPHA_NUMBERIC": "Alpha numeric"
 }
