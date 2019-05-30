@@ -544,9 +544,9 @@
         lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.transaction_description;
-        lifecycleRec.requesterName = lifecycleObj.requester_name;
-        lifecycleRec.requesterName2 = lifecycleObj.requester_name2;
-        lifecycleRec.requesterName3 = lifecycleObj.requester_name3;
+        lifecycleRec.requesterName = lifecycleObj.requester_name.__text;
+        lifecycleRec.requesterName2 = lifecycleObj.requester_name2.__text;
+        lifecycleRec.requesterName3 = lifecycleObj.requester_name3.__text;
        // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
         return (lifecycleRec);
@@ -589,47 +589,49 @@
         lifecycleRec.sequence_version = lifecycleObj.sequenceVersion;
         lifecycleRec.sequence_year = lifecycleObj.year;
         lifecycleRec.transaction_description = lifecycleObj.sequenceConcat;
-      /*
-        console.log( "id :" +   lifecycleObj.requesterName.id);
-        console.log( "name :" +   lifecycleObj.requesterName);
-        console.log( "eng :" +   lifecycleObj.requesterName.en);
-        lifecycleRec.requester_name = lifecycleObj.requesterName;
-        lifecycleRec.requester_name2 = lifecycleObj.requesterName2;
-        lifecycleRec.requester_name3 = lifecycleObj.requesterName3;
-        if (lifecycleObj.requesterName) {
-            lifecycleRec.requester_of_solicited_information = {
-               _id: lifecycleObj.requesterName.id,
+        var tempRequesterName = '';
+        if (lifecycleObj.requesterName && lifecycleObj.requesterName.id) {
+            tempRequesterName =  lifecycleObj.requesterName.id;
+            lifecycleRec.requester_name = {
+                _id: lifecycleObj.requesterName.id,
+                __text: lifecycleObj.requesterName[currentLang]
+            };
+        }
+        else {
+            tempRequesterName =  lifecycleObj.requesterName;
+            lifecycleRec.requester_name = {
+                _id: '',
                 __text: lifecycleObj.requesterName
             };
-        } */
-        var tempRequesterName = '';
-        if (lifecycleObj.requesterName.id && lifecycleObj.requesterName) {
-            tempRequesterName =  lifecycleObj.requesterName.id;
-            lifecycleRec.requester_name = lifecycleObj.requesterName.en;
         }
-        else
-        {
-            tempRequesterName =  lifecycleObj.requesterName;
-            lifecycleRec.requester_name = lifecycleObj.requesterName;
-        }
-        if (lifecycleObj.requesterName2.id && lifecycleObj.requesterName2) {
+        if (lifecycleObj.requesterName2 && lifecycleObj.requesterName2.id) {
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
-            lifecycleRec.requester_name2 = lifecycleObj.requesterName2.en;
+            lifecycleRec.requester_name2 = {
+                _id: lifecycleObj.requesterName2.id,
+                __text: lifecycleObj.requesterName2[currentLang]
+            };
         }
-        else
-        {
+        else {
             tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
-            lifecycleRec.requester_name2 = lifecycleObj.requesterName2;
+            lifecycleRec.requester_name2 = {
+                _id: '',
+                __text: lifecycleObj.requesterName2
+            };
         }
 
-        if (lifecycleObj.requesterName3.id && lifecycleObj.requesterName3) {
+        if (lifecycleObj.requesterName3 && lifecycleObj.requesterName3.id) {
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3.id;
-            lifecycleRec.requester_name3 = lifecycleObj.requesterName3.en;
+            lifecycleRec.requester_name3 =  {
+                _id: lifecycleObj.requesterName3.id,
+                __text: lifecycleObj.requesterName3[currentLang]
+            };
         }
-        else
-        {
+        else {
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
-            lifecycleRec.requester_name3 = lifecycleObj.requesterName3;
+            lifecycleRec.requester_name3 = {
+                _id: '',
+                __text: lifecycleObj.requesterName3
+            };
         }
         lifecycleRec.requester_of_solicited_information = tempRequesterName;
 
