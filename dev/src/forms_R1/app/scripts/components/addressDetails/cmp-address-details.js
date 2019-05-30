@@ -120,9 +120,9 @@
         /**
          * Updates the display value for the object for summary display
          */
-        vm.countryChanged=function(){
+        vm.countryChanged=function(v){
            // console.log("jang test:" + vm.addressModel.country.id);
-            if( vm.addressModel.country.id !== undefined ) {
+            if( vm.addressModel.country.id !== undefined && (vm.addressModel.country.en === vm.addressModel.countryHtml || vm.addressModel.country.fr === vm.addressModel.countryHtml)) {
                 vm.addressModel.countryDisplay = vm.addressModel.country.id;
                 vm.provListLabel = getProvinceListLabel();
                 vm.postalLabel = getPostalLabel();
@@ -254,7 +254,7 @@
             vm.stateListId = "provinceList" + scopeId;
             vm.postalId = "postal" + scopeId;
         }
-        vm.countryChange = function() {
+        vm.countryChange = function(v) {
             var found = false;
             for(var i = 0; i < vm.countryList.length; i++) {
                 var option =vm.countryList[i];
@@ -266,15 +266,19 @@
             }
             if( ! found ){
                 vm.addressModel.countryHtml = "";
-                for(var i = 0; i < vm.countryList.length; i++) {
-                    var option =vm.countryList[i];
-                    if(option['id'] === vm.addressModel.country['id']) {
-                        vm.addressModel.countryHtml = option[vm.lang];
-                        break;
-                    }
-                }
+                vm.addressModel.country.id = "";
+                vm.addressModel.country.en = "";
+                vm.addressModel.country.fr = "";
+                vm.addressModel.countryDisplay = "";
+                // for(var i = 0; i < vm.countryList.length; i++) {
+                //     var option =vm.countryList[i];
+                //     if(option['id'] === vm.addressModel.country['id']) {
+                //         vm.addressModel.countryHtml = option[vm.lang];
+                //         break;
+                //     }
+                // }
             }
-            vm.countryChanged();
+            vm.countryChanged(v);
         }
         // component only has one field, just watch this field for changes to update error summary
         $scope.$watch('adr.addressForm.$error', function () {

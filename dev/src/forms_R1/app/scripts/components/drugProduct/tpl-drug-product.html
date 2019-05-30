@@ -73,8 +73,8 @@
                                 <span class="input-group-addon">HC6-024-</span>
                                 <div data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
                                     <input type="text" class="form-control full-width" id="{{::drugProdCtrl.dossierId}}"
-                                           maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}" data-ng-pattern="/^[A-Z,a-z][0-9]{6}$/"
-                                           size="6" data-ng-model="drugProdCtrl.model.dossierID" required/>
+                                           maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}" data-ng-pattern="/^[A-Za-z0-9]{7}$/"
+                                           size="7" data-ng-model="drugProdCtrl.model.dossierID" required/>
                                 </div>
                         </div>
                     </div>
