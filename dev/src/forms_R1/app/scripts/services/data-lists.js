@@ -289,8 +289,8 @@
 
     /* @ngInject */
     function getRolesService() {
-        var _biologic = 'D22'; // 'BIOLOGIC';
-        var _pharma = 'D21';  //'PHARMACEUTICAL';
+        var _biologic = 'D21'; // 'BIOLOGIC';
+        var _pharma = 'D22';  //'PHARMACEUTICAL';
 
         var service = {
             getContactRoles: getRoleValuesArray,

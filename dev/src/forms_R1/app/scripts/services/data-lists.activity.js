@@ -1084,9 +1084,9 @@
         function _getActivityLeadD22Array() {
             return (
                 [
-                    vm.PHARMA, //Pharmaceutical
-                    vm.POSTMARKET, //Post-Market Vigilance
-                    vm.CONSUMERHEALTH //Consumer Health Products
+                    vm.PHARMA, //Pharmaceutical - B14-20160301-09
+                    vm.POSTMARKET, //Post-Market Vigilance - B14-20160301-10
+                    vm.CONSUMERHEALTH //Consumer Health Products -	B14-20160301-06
                 ]
             );
         }
@@ -1094,8 +1094,8 @@
         function _getActivityLeadD21Array() {
             return (
                 [
-                    vm.BIOLOGICAL, //Biological
-                    vm.POSTMARKET  //Post-Market Vigilance
+                    vm.BIOLOGICAL, //Biological - B14-20160301-02
+                    vm.POSTMARKET  //Post-Market Vigilance - B14-20160301-10
                 ]
             );
         }
@@ -1107,11 +1107,11 @@
          */
 
         function _getPharmaceutical(){
-            return vm.D21; //D21 - Pharmaceutical
+            return vm.D22; //D21 - Pharmaceutical
         }
 
         function _getBiologic(){
-            return vm.D22; // D22 - Biologic
+            return vm.D21; // D22 - Biologic
         }
 
         function _getBiologicalLead() {

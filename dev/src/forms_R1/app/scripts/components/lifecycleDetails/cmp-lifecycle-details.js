@@ -91,16 +91,10 @@
 
         //
         vm.$onInit = function () {
-
-            //lazy load of year lust
-          //  if (!vm.yearList || vm.yearList.length === 0) {
-          //      vm.yearList = _createYearList();
-          //  }
             _setIdNames();
             loadContactData();
-            vm.selectActivityLeadList();
-            vm.selectActivityList();
-            //vm.descriptionObj=TransactionLists.getTransactionDescriptions();
+           // vm.selectActivityLeadList();
+           // vm.selectActivityList();
         };
 
         /**
@@ -126,16 +120,21 @@
 
             if (changes.getDossierType) {
                 vm.dossierType = changes.getDossierType.currentValue;
-                vm.selectActivityLeadList();
+                if( vm.dossierType == TransactionLists.getPharmaceuticalValue()) {
+                    vm.leadList = TransactionLists.getActivityLeadListByD22();
+                } else if (vm.dossierType == TransactionLists.getBiologicValue()) {
+                    vm.leadList = TransactionLists.getActivityLeadListByD21();
+                }else {
+                    vm.leadList = [];
+                }
             }
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
-                    vm.lifecycleModel.sequence=vm.lifecycleRecord.sequence;
+                    vm.lifecycleModel.sequence = vm.lifecycleRecord.sequence;
                     //_updateLocalModel(vm.lifecycleRecord);
                 }
             }
             if(changes.showErrorSummary){
-
                 vm.showSummary=changes.showErrorSummary.currentValue;
                 vm.updateErrorSummaryState();
             }
@@ -190,6 +189,7 @@
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
             convertToDate();
+            vm.selectActivityLeadList()
             vm.setSequenceList();
             vm.setDetailsState();
             vm.selectActivityList();
@@ -217,22 +217,31 @@
          */
 
         vm.selectActivityLeadList = function() {
-           switch( vm.dossierType ) {
-               case  TransactionLists.getPharmaceuticalValue():
-                   vm.leadList = TransactionLists.getActivityLeadListByD21();
-                   break;
-               case  TransactionLists.getBiologicValue():
-                   vm.leadList = TransactionLists.getActivityLeadListByD22();
-                   break;
-               default:
-                   vm.leadList = [];
-                   break;
-           }
+            if(!vm.dossierType ){
+                vm.leadList = [];
+                return;
+            }
+
+            switch( vm.dossierType ) {
+                case  TransactionLists.getPharmaceuticalValue():
+                    vm.leadList = TransactionLists.getActivityLeadListByD22();
+                    break;
+                case  TransactionLists.getBiologicValue():
+                    vm.leadList = TransactionLists.getActivityLeadListByD21();
+                    break;
+                default:
+                    vm.leadList = [];
+                    break;
+            }
+            if( vm.lifecycleModel.activityLead) {
+                var temp = $filter('filter')(vm.leadList, {id: vm.lifecycleModel.activityLead.id})[0];
+                vm.lifecycleModel.activityLead = temp;
+            }
         };
 
 
         vm.selectActivityList = function(){
-            if(!vm.lifecycleModel.activityLead){
+            if(!vm.lifecycleModel.activityLead ){
                 vm.activityTypeList=[];
                 return;
             }

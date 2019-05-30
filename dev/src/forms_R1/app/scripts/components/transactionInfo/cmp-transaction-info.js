@@ -113,6 +113,7 @@
                 vm.setAdminSubmission();
                 vm.updateEctdState();
              //   vm.setSolicitedState();
+                vm.selectedDossierType = vm.transactionModel.ectd.dossierType;
             }
 
             if(changes.language){
@@ -364,11 +365,12 @@
         /**
          * Once Reset button clicked
          * Hide - productName,
-         */
+
 
         vm.disableProductName = function(){
             return (vm.finalState);
         };
+         */
 
         $scope.$watch('transInfoCtrl.transInfoForm.$error', function () {
             //vm.updateErrorSummaryState();
