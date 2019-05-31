@@ -141,6 +141,7 @@
   "BANK_DRAFT":"International Bank Draft",
   "MONEY_ORDER":"Money Order",
   "CHEQUE":"Cheque",
+  "PAYMENT":"Payment",
   "CREDIT":"MasterCard/Visa/American Express (AMEX)",
   "BANK_WIRE":"Wire (include bank confirmation)",
   "EXISTING_CREDIT":"Existing credit",
