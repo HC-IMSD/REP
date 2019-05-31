@@ -33,9 +33,16 @@
                     <label for="{{::transFeeCtrl.descriptId}}">
                         <span class="field-name">{{::'FEE_DESCRIPTION' |translate}}</span>
                     </label>
+                    <div data-ng-if="!transFeeCtrl.isFrench()">
                     <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}" readonly rows="3"
                               name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.submissionClass.description_en}}
                     </textarea>
+                    </div>
+                    <div data-ng-if="transFeeCtrl.isFrench()">
+                    <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}" readonly rows="3"
+                              name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.submissionClass.description_fr}}
+                    </textarea>
+                    </div>
                 </div>
             </div>
             <div class="row">

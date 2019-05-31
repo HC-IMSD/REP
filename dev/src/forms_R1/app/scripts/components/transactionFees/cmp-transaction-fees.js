@@ -176,6 +176,9 @@
             return (!vm.isLess10K() && !vm.isEligible() && !vm.isDeferral() && !vm.isFeeRemit());
 
         };
+        vm.isFrench = function () {
+            return (vm.lang !== ENGLISH);
+        };
 
         /**
          * Determines if show Payment title
