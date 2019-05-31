@@ -54,6 +54,7 @@
   "MAX_TEMP": "Maximum, Celsius",
   "TEMP_RANGE": "Écart de température",
   "SHELF_LIFE": "Durée de conservation",
+  "OTHER_SHELF_LIFE_CONSIDER":" Autres considérations relatives à la durée de conservation",
   "IN_FINAL_CONTAINER": "Présence dans le récipient final?",
   "OTHER_ROA_DETAILS": "fr_Other Route of Administration Details",
   "ROA_LBL": "De la voie d'administration",

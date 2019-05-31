@@ -53,6 +53,7 @@
   "MAX_TEMP": "Maximum, Celsius",
   "TEMP_RANGE": "Temperature Range",
   "SHELF_LIFE": "Shelf Life",
+  "OTHER_SHELF_LIFE_CONSIDER":"Other Shelf Life Considerations",
   "IN_FINAL_CONTAINER": "Present in Final Container?",
   "OTHER_ROA_DETAILS": "Other Route of Administration Details",
   "ROA_LBL": "Route of Administration",
