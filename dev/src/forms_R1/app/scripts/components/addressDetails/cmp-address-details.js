@@ -120,7 +120,7 @@
         /**
          * Updates the display value for the object for summary display
          */
-        vm.countryChanged=function(v){
+        vm.countryChanged=function(){
            // console.log("jang test:" + vm.addressModel.country.id);
             if( vm.addressModel.country.id !== undefined && (vm.addressModel.country.en === vm.addressModel.countryHtml || vm.addressModel.country.fr === vm.addressModel.countryHtml)) {
                 vm.addressModel.countryDisplay = vm.addressModel.country.id;
@@ -254,7 +254,7 @@
             vm.stateListId = "provinceList" + scopeId;
             vm.postalId = "postal" + scopeId;
         }
-        vm.countryChange = function(v) {
+        vm.countryChange = function() {
             var found = false;
             for(var i = 0; i < vm.countryList.length; i++) {
                 var option =vm.countryList[i];
@@ -278,7 +278,7 @@
                 //     }
                 // }
             }
-            vm.countryChanged(v);
+            vm.countryChanged();
         }
         // component only has one field, just watch this field for changes to update error summary
         $scope.$watch('adr.addressForm.$error', function () {
