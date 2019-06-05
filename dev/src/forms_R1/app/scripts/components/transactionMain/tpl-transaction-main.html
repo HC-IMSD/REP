@@ -9,7 +9,7 @@
         </div>
         <span id="instructions"></span>
         <aside class="wb-fnote" role="note">
-            <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
+            <h2>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h2>
             <section data-ng-if="!main.isFrench()" ng-include="'app/scripts/templates/transaction/tpl-transaction-footnote-en.html'"></section>
             <section data-ng-if="main.isFrench()" ng-include="'app/scripts/templates/transaction/tpl-transaction-footnote-fr.html'"></section>
         </aside>
@@ -66,7 +66,6 @@
                                            show-error="main.showError(main.transactionEnrolForm[main.privacyStatementID])"
                                            error-types="main.requiredOnly">
                         </cmp-error-message>
-
                     </label>
                 </div>
             </div>
