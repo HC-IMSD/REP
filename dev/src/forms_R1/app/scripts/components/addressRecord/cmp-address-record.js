@@ -230,7 +230,8 @@
                     "selectedProducts": "",
                     "dossierIdLislamt": []
                 };*/
-                vm.addressModel.importerID = "";
+                // vm.addressModel.importerID = "";
+                vm.deselectImporter(!vm.isImporter);
             }
             /**else if (vm.addressModel.importerProducts.dossierIdList.length === 0) {
                 vm.addressModel.importerProducts.dossierIdList.push({dossierId: ""})
@@ -243,7 +244,9 @@
               vm.addressModel.addressRole.importer = false;
               vm.isImporter = false;
               vm.addressModel.importerID = "";
-
+              vm.addressModel.country = '';
+              vm.addressModel.countryHtml = '';
+              vm.updateCountry++;
           };
 
 
