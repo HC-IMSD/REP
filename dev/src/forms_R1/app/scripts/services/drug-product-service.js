@@ -58,9 +58,6 @@
                 xslFileName: xslName,
                 dataChecksum: "",
                 privacyStat:"",
-                //dossierType: "",
-               // properName: "",
-               // isRefProducts: "",
                 drugProduct: {
                     //thirdPartySigned: "",
                     drugUse: "",
@@ -111,7 +108,7 @@
                 info = info[rootTag];
                 var drugUseValue ="";
                 if(info.drug_use) {
-                    drugUseValue = info.drug_use.__text;
+                    drugUseValue = info.drug_use._id;
                 }
                 var formModel = {
                     companyID: info.company_id,
@@ -124,18 +121,11 @@
                     thisActivity: info.this_activity === 'Y',
                     importer: info.importer === 'Y',
                     importerRecord: transformImpFromFile(info.importer_record),
-                   // relatedDossierID: info.related_dossier_id,
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
-                    //applicationType: info.application_type,
                     softwareVersion: info.software_version,
                     dataChecksum: info.data_checksum,
-                    //dossierType: info.dossier_type,
-                   // properName: info.common_name,
-                   // isRefProducts: info.is_ref_products,
                     drugProduct: {
-                       // thirdPartySigned: info.third_party_signed,
-                       // drugUseList: loadDrugUseValuesloadDrugUseValues(info),
                         drugUse: $filter('findListItemById')(DossierLists.getDrugUseList(), {id: drugUseValue}),
                         disinfectantType: {
                             hospital: info.disinfectant_type.hospital === 'Y',
@@ -229,9 +219,10 @@
 
             if(jsonObj.drugProduct.drugUse) {
                 baseModel.drug_use = {
+                    _id: jsonObj.drugProduct.drugUse.id,
                     _label_en: jsonObj.drugProduct.drugUse.en,
                     _label_fr: jsonObj.drugProduct.drugUse.fr,
-                    __text: jsonObj.drugProduct.drugUse.id
+                    __text: jsonObj.drugProduct.drugUse[currentLang]
                 };
             }else{
                 baseModel.drug_use="";
@@ -489,7 +480,7 @@
                 if (!item.dosage_form_group.dosage_form) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
                 } else {
-                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form.__text});
+                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form._id});
                     obj.dosageForm = dosageFormObj;
                     obj.dosageFormHtml = dosageFormObj[$translate.proposedLanguage() || $translate.use()];
                 }
@@ -553,7 +544,7 @@
             angular.forEach(list, function (item) {
 
                 var obj = {
-                    "ingRole": item.ingredient_role,
+                    "ingRole": "",
                     "ingId": item.ingredient_id,
                     "variant": item.variant_name,
                     "purpose": item.purpose,
@@ -581,6 +572,11 @@
                     "nanoMaterial": "",
                     "nanoMaterialOther": item.nanomaterial_details
                 };
+
+                if (item.ingredient_role) {
+                    var opValue = item.strength.operator._id;
+                    obj.ingRole = $filter('findListItemById')(DossierLists.getIngRoleList(), {id: opValue});
+                }
 
                 if (item.strength) {
                     var opValue = item.strength.operator.__text;
@@ -887,7 +883,12 @@
                 record.importerName = jsonObj[i].importer_company_name;
                 record.street = jsonObj[i].street_address;
                 record.city = jsonObj[i].city;
-                record.stateList = jsonObj[i].province_lov;
+                // record.stateList = jsonObj[i].province_lov;
+                if (jsonObj[i].province_lov) {
+                    record.stateList = jsonObj[i].province_lov._id;
+                } else {
+                    record.stateList = "";
+                }
                 record.stateText = jsonObj[i].province_text;
                 record.country = "";
                 if (jsonObj[i].country._id) {
@@ -903,12 +904,21 @@
 
         function _mapImporterRecToOutput(importerObj) {
             var importerRec = {};
+            var currentLang = $translate.proposedLanguage() || $translate.use();
             if (importerObj) {
                 importerRec.importer_company_id = importerObj.importerId;
                 importerRec.importer_company_name = importerObj.importerName;
                 importerRec.street_address = importerObj.street;
                 importerRec.city = importerObj.city;
-                importerRec.province_lov = importerObj.stateList;
+                // importerRec.province_lov = importerObj.stateList;
+                if (importerObj.stateList) {
+                    importerRec.province_lov = {
+                        _id: importerObj.stateList,
+                        __text: $translate.instant(importerObj.stateList, "", '', currentLang)
+                    };
+                } else {
+                    importerRec.province_lov = "";
+                }
                 importerRec.province_text = importerObj.stateText;
                 importerRec.country = "";
                 if (importerObj.country) {
@@ -916,7 +926,7 @@
                         _label_en: importerObj.country.en,
                         _label_fr: importerObj.country.fr,
                         _id: importerObj.country.id,
-                        __text: importerObj.country[$translate.proposedLanguage() || $translate.use()]
+                        __text: importerObj.country[currentLang]
                     };
                 }
                 importerRec.postal_code = importerObj.postalCode;
@@ -1031,6 +1041,7 @@
          */
         function formulationListToOutput(list) {
             var formulationList = [];
+            var currentLang = $translate.proposedLanguage() || $translate.use();
             //Order is important for the XML
             angular.forEach(list, function (item) {
                 var obj = {
@@ -1043,10 +1054,13 @@
                     var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
                     var newDosage = splitArray[splitArray.length - 1];
                     obj.dosage_form_group.dosage_form = {
+                        _id: newDosage,
                         _label_en: item.dosageForm.en,
                         _label_fr: item.dosageForm.fr,
-                        __text: newDosage
+                        __text: item.dosageForm[currentLang]
                     };
+                } else {
+                    obj.dosage_form_group.dosage_form = "";
                 }
                 // var splitArray = (item.dosageForm).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
                 // var newDosage = splitArray[splitArray.length - 1];
@@ -1093,7 +1107,7 @@
                 var ibcText = $translate.instant(item.calcAsBase, "", '', currentLang);
 
                 var obj = {
-                    "ingredient_role": item.ingRole,
+                    "ingredient_role": "",
                     "ingredient_id": item.ingId,
                     "variant_name": item.variant,
                     "purpose": item.purpose,
@@ -1116,6 +1130,14 @@
                     "nanomaterial": "",
                     "nanomaterial_details": ""
                 };
+
+                if(item.ingRole) {
+                    var ingRoleValue = $filter('findListItemById')(DossierLists.getIngRoleList(), {id: item.ingRole});
+                    obj.ingredient_role = {
+                        _id: ingRoleValue.id,
+                        __text: ingRoleValue[currentLang]
+                    };
+                }
 
                 if(item.strength) {
                     var data2Value = "";

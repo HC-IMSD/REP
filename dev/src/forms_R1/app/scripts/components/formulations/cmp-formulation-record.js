@@ -112,6 +112,7 @@
             if(changes.record){
                 vm.frmModel = changes.record.currentValue;
                 vm.summaryName="cmp-formulation-record_"+(vm.frmModel.formulationId-1);
+                vm.updateDosageForm();
             }
             if(changes.showErrorSummary){
                 vm.showSummary=changes.showErrorSummary.currentValue;
@@ -301,6 +302,7 @@
         vm.isFrench=function(){
             return(vm.lang===FRENCH);
         };
+
         vm.dosageFormChange = function() {
             var found = false;
             for(var i = 0; i < vm.dosageFormList.length; i++) {
@@ -312,15 +314,22 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.dosageFormList.length; i++) {
-                    var option =vm.dosageFormList[i];
-                    if(option['id'] === vm.frmModel.dosageForm['id']) {
+                vm.frmModel.dosageForm = "";
+                vm.frmModel.dosageFormHtml = "";
+            }
+        };
+
+        vm.updateDosageForm = function() {
+            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id) {
+                for (var i = 0; i < vm.dosageFormList.length; i++) {
+                    var option = vm.dosageFormList[i];
+                    if (option['id'] === vm.frmModel.dosageForm['id']) {
                         vm.frmModel.dosageFormHtml = option[vm.lang];
                         break;
                     }
                 }
             }
-        }
+        };
 
         /**
          * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
