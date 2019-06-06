@@ -215,6 +215,7 @@
             vm.updateAddressModel2();
         };
         vm.importerProductState = function (state) {
+            var isImporterPre = vm.isImporter;
             vm.isImporter = state;
             if (vm.isImporter) {
                 vm.addressModel.addressRole.manufacturer = false;
@@ -230,7 +231,9 @@
                     "selectedProducts": "",
                     "dossierIdLislamt": []
                 };*/
-                // vm.addressModel.importerID = "";
+                vm.addressModel.importerID = "";
+            }
+            if(isImporterPre && ! vm.isImporter){
                 vm.deselectImporter(!vm.isImporter);
             }
             /**else if (vm.addressModel.importerProducts.dossierIdList.length === 0) {
@@ -242,12 +245,14 @@
           vm.des = state;
           if(vm.des){
               vm.addressModel.addressRole.importer = false;
-              vm.isImporter = false;
               vm.addressModel.importerID = "";
+          };
+          if(vm.isImporter && vm.des){
+              vm.isImporter = false;
               vm.addressModel.country = '';
               vm.addressModel.countryHtml = '';
               vm.updateCountry++;
-          };
+          }
 
 
         };
