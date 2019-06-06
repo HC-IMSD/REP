@@ -100,6 +100,7 @@
   "LIST_DESCRIPT":"List Description",
   "SEQUENCE_CLEANUP":"eCTD Dossier Clean-up",
   "REQUESTER_NAME":"Nom du demandeur",
+  "REQUESTER_NAME2":"Nom du demandeur",
   "DEFER_FEES":" Un paiement différé est demandé avec cette transaction",
   "DEFER_STATEMENT":"La déclaration à l’appui de la demande de report de paiement est jointe.",
   "FEE_REMISSION":"Une remise de frais est demandé avec cette transaction",

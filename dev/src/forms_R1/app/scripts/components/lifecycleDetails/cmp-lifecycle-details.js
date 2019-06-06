@@ -870,8 +870,8 @@
             vm.versionId="version_no"+scopeId;
             vm.activityLeadId = "activity_lead" + scopeId;
             vm.requesterNameId = "requester_name" + scopeId;
-            vm.requesterNameId2 = "requester_name" + scopeId;
-            vm.requesterNameId3 = "requester_name" + scopeId;
+            vm.requesterNameId2 = "requester_name2" + scopeId;
+            vm.requesterNameId3 = "requester_name2" + scopeId;
             vm.descriptChangeId = "brief_desc_change" +  scopeId;
         }
     }
