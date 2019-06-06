@@ -24,7 +24,8 @@
     function DrugProductService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_PREFIX) {
         var yesValue = YES;
         var noValue = NO;
-        var xslName = XSL_PREFIX + "REP_PI_2_2.xsl";
+        // var xslName = XSL_PREFIX + "REP_PI_2_2.xsl";
+        var xslName = "REP_PI_3_0.xsl";
 
         // Define the DrugProductService object
         function DrugProductService() {
@@ -197,7 +198,7 @@
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
             // baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "2.2.1"; //TODO: hard code or make a function, should be centrally available
+            baseModel.software_version = "3.0.1"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
             baseModel.company_id = jsonObj.companyID;
@@ -386,10 +387,10 @@
                         "display": "",
                         "unknownCountryDetails": ""
                     };
-                    if (input[i].country_with_unknown.__text === UNKNOWN) {
+                    if (input[i].country_with_unknown._id === UNKNOWN) {
                         obj.country = getCountryAndProvinces.getUnknownCountryRecord();
                     } else {
-                        obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: input[i].country_with_unknown.__text})[0];
+                        obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: input[i].country_with_unknown._id})[0];
                     }
                     if (obj.country) {
                         obj.display = obj.country[$translate.proposedLanguage() || $translate.use()]
@@ -432,7 +433,11 @@
                         for (var srcCount = 0; srcCount < animalTypeList.length; srcCount++) { //TODO function?
                             var oneRec = animalTypeList[srcCount];
                             var animalRecord = {};
-                            animalRecord.animalType = oneRec.animal_type;
+                            if (oneRec.animal_type) {
+                                animalRecord.animalType = oneRec.animal_type._id;
+                            } else {
+                                animalRecord.animalType = "";
+                            }
                             animalRecord.animalDetail = oneRec.animal_detail;
                             ing.sourceAnimalDetails.animalSrcList.push(animalRecord);
                         }
@@ -559,7 +564,7 @@
                     "units": "",
                     "unitsHtml": "",
                     "otherUnits": item.units_other,
-                    "per": item.per,
+                    "per": "",
                     "perPresentationValue": Number(1),
                     "perMeasureValue": null,
                     "perPresUnits": "",
@@ -574,36 +579,35 @@
                 };
 
                 if (item.ingredient_role) {
-                    var opValue = item.strength.operator._id;
-                    obj.ingRole = $filter('findListItemById')(DossierLists.getIngRoleList(), {id: opValue});
+                    obj.ingRole = item.ingredient_role._id;
                 }
 
                 if (item.strength) {
-                    var opValue = item.strength.operator.__text;
+                    var opValue = item.strength.operator._id;
                     obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
                 }
 
                 if (item.units) {
-                    var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.units._id; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
-                    if (item.units.__text === OTHER) {
-                        unitsValue = item.units.__text;
+                    if (item.units._id === OTHER) {
+                        unitsValue = item.units._id;
                     }
                     obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
                     obj.unitsHtml = obj.units[$translate.proposedLanguage() || $translate.use()];
                 }
 
                 if (item.per) {
-                    var perId = item.per.__text;
+                    var perId = item.per._id;
                     obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
                 }
 
                 if (item.per.__text === 'UP') {
                     obj.perPresentationValue = Number(item.per_value);
-                    var upValue = DossierLists.getUnitsPrefix() + item.per_units.__text; //add the prefix
+                    var upValue = DossierLists.getUnitsPrefix() + item.per_units._id; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
-                    if (item.per_units.__text === OTHER) {
-                        upValue = item.per_units.__text;
+                    if (item.per_units._id === OTHER) {
+                        upValue = item.per_units._id;
                     }
                     obj.perPresUnits = $filter('findListItemById')(DossierLists.getUnitsPresentationList(), {id: upValue});
                     obj.perPresOtherUnits = item.per_units_other_details;
@@ -611,10 +615,10 @@
 
                 if (item.per.__text === 'UM') {
                     obj.perMeasureValue = Number(item.per_value);
-                    var unitsValue = DossierLists.getUnitsPrefix() + item.per_units.__text; //add the prefix
+                    var unitsValue = DossierLists.getUnitsPrefix() + item.per_units._id; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
-                    if (item.per_units.__text === OTHER) {
-                        unitsValue = item.per_units.__text;
+                    if (item.per_units._id === OTHER) {
+                        unitsValue = item.per_units._id;
                     }
                     obj.perMeasUnits = $filter('findListItemById')(DossierLists.getUnitsMeasureList(), {id: unitsValue});
                     obj.perMeasUnitsHtml = obj.perMeasUnits == null ? "" : obj.perMeasUnits[$translate.proposedLanguage() || $translate.use()];
@@ -623,9 +627,9 @@
 
                 if (item.is_nanomaterial === YES) {
                     //prefixed so need to do things differently than units
-                    var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial.__text;
-                    if (item.nanomaterial.__text === OTHER) {
-                        nanoValue = item.nanomaterial.__text;
+                    var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial._id;
+                    if (item.nanomaterial._id === OTHER) {
+                        nanoValue = item.nanomaterial._id;
                     }
                     obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
                 }
@@ -733,7 +737,7 @@
                 var obj = {
                     "containerType": item.container_type,
                     "packageSize": item.package_size,
-                    "shelfLifeUnit": item.shelf_life_unit,
+                    "shelfLifeUnit": "",
                     "shelfLifeNumber": Number(item.shelf_life_number),
                     "tempMin": Number(item.temperature_min),
                     "tempMax": Number(item.temperature_max),
@@ -741,7 +745,7 @@
                 };
 
                 if (item.shelf_life_unit) {
-                    var slUnitValue = item.shelf_life_unit.__text;
+                    var slUnitValue = item.shelf_life_unit._id;
                     obj.shelfLifeUnit = $filter('findListItemById')(DossierLists.getShelfLifeUnitsList(), {id: slUnitValue});
                 }
 
@@ -785,9 +789,9 @@
             var _id = 0;
 
             angular.forEach(list, function (item) {
-                var roaValue = DossierLists.getRoaPrefix() + item.roa.__text;
+                var roaValue = DossierLists.getRoaPrefix() + item.roa._id;
                 if (item.roa.__text === OTHER) {
-                    roaValue = item.roa.__text;
+                    roaValue = item.roa._id;
                 }
                 var roaObj = $filter('findListItemById')(DossierLists.getRoa(), {id: roaValue});
                 _id = _id + 1;
@@ -829,7 +833,7 @@
                 if (item.__text === UNKNOWN) {
                     obj.country = getCountryAndProvinces.getUnknownCountryRecord();
                 } else {
-                    obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: item.__text})[0];
+                    obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: item._id})[0];
                 }
                 if (obj.country) {
                     obj.display = obj.country[$translate.proposedLanguage() || $translate.use()]
@@ -943,6 +947,7 @@
         function appendix4IngredientListToOutput(info) {
             var appendices = []; //TODO may need better error checking
             //Note order of elements must match schema for validation
+            var currentLang = $translate.proposedLanguage() || $translate.use();
             if (!angular.isDefined(info)) {
                 return null;
             }
@@ -1006,7 +1011,14 @@
                     for (var srcCount = 0; srcCount < animalSrcObj.animalSrcList.length; srcCount++) {
                         var oneRec = animalSrcObj.animalSrcList[srcCount];
                         var srcRecordOut = {};
-                        srcRecordOut.animal_type = oneRec.animalType;
+                        if (oneRec.animalType) {
+                            srcRecordOut.animal_type = {
+                                _id: oneRec.animalType,
+                                __text: $translate.instant(oneRec.animalType, "", '', currentLang)
+                            };
+                        } else {
+                            srcRecordOut.animal_type = "";
+                        }
                         srcRecordOut.animal_detail = oneRec.animalDetail;
                         ing.animal_sourced_section.animal_src_record.push(srcRecordOut);
                     }
@@ -1015,14 +1027,16 @@
                     for (var v = 0; v < countries.length; v++) {
                         var countryRecord = {};
                         countryRecord.country_with_unknown = {
+                            _id: "",
                             _label_en: "",
                             _label_fr: "",
                             __text: ""
                         };
                         if (countries[v].country) {
+                            countryRecord.country_with_unknown._id = countries[v].country.id;
                             countryRecord.country_with_unknown._label_en = countries[v].country.en;
                             countryRecord.country_with_unknown._label_fr = countries[v].country.fr;
-                            countryRecord.country_with_unknown.__text = countries[v].country.id;
+                            countryRecord.country_with_unknown.__text = countries[v].country[currentLang];
                         }
 
                         countryRecord.unknown_country_details = countries[v].unknownCountryDetails;
@@ -1076,7 +1090,7 @@
                 }
                 obj.country_group = {};
                 if (item.countryList && item.countryList.length > 0) {
-                    obj.country_group.country_manufacturer = formulationCountryListToOutput(item.countryList);
+                    obj.country_group.country_manufacturer = formulationCountryListToOutput(item.countryList, currentLang);
                 }
                 if (item.activeIngList && item.activeIngList.length > 0) {
                     obj.formulation_ingredient = activeListToOutput(item.activeIngList);
@@ -1131,12 +1145,14 @@
                     "nanomaterial_details": ""
                 };
 
-                if(item.ingRole) {
-                    var ingRoleValue = $filter('findListItemById')(DossierLists.getIngRoleList(), {id: item.ingRole});
-                    obj.ingredient_role = {
-                        _id: ingRoleValue.id,
-                        __text: ingRoleValue[currentLang]
-                    };
+                if (item.ingRole) {
+                    var ingr = $filter('findListItemById')(DossierLists.getIngRoleList(), {id: item.ingRole});
+                    if (ingr) {
+                        obj.ingredient_role = {
+                            _id: ingr.id,
+                            __text: ingr[currentLang]
+                        };
+                    }
                 }
 
                 if(item.strength) {
@@ -1146,9 +1162,10 @@
                     }
                     obj.strength = {
                         operator: {
+                            _id: item.strength.operator.id,
                             _label_en: item.strength.operator.en,
                             _label_fr: item.strength.operator.fr,
-                            __text: item.strength.operator.id
+                            __text: item.strength.operator[currentLang]
                         },
                         data1: item.strength.data1,
                         data2: data2Value
@@ -1157,24 +1174,25 @@
 
                 if(item.per) {
                     obj.per = {
+                        _id: item.per.id,
                         _label_en: item.per.en,
                         _label_fr: item.per.fr,
-                        __text: item.per.id
+                        __text: item.per[currentLang]
                     };
                 }
                 //item.units
-                obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
+                obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix(), currentLang);
                 if (item.per.id === 'UP') {
                     obj.per_value = item.perPresentationValue;
-                    obj.per_units = _unitsFldToOutput(item.perPresUnits, DossierLists.getUnitsPrefix());
+                    obj.per_units = _unitsFldToOutput(item.perPresUnits, DossierLists.getUnitsPrefix(), currentLang);
                     obj.per_units_other_details = item.perPresOtherUnits;
                 } else if (item.per.id === 'UM') {
                     obj.per_value = item.perMeasureValue;
-                    obj.per_units = _unitsFldToOutput(item.perMeasUnits, DossierLists.getUnitsPrefix());
+                    obj.per_units = _unitsFldToOutput(item.perMeasUnits, DossierLists.getUnitsPrefix(), currentLang);
                     obj.per_units_other_details = item.perMeasOtherUnits;
                 }
                 if (item.isNano === YES) {
-                    obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
+                    obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix(), currentLang);
                     obj.nanomaterial_details = item.nanoMaterialOther;
                 }
 
@@ -1190,8 +1208,9 @@
          * @returns {{_label_en: string, _label_fr: string, __text: string}}
          * @private
          */
-        function _unitsFldToOutput(unitsObj, prefix) {
+        function _unitsFldToOutput(unitsObj, prefix, lang) {
             var newObj = {
+                "_id": "",
                 "_label_en": "",
                 "_label_fr": "",
                 "__text": ""
@@ -1201,9 +1220,10 @@
             }
             var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
             var newUnits = splitArray[splitArray.length - 1];
+            newObj._id = newUnits;
             newObj._label_en = unitsObj.en;
             newObj._label_fr = unitsObj.fr;
-            newObj.__text = newUnits;
+            newObj.__text = unitsObj[lang];
             return newObj;
         }
 
@@ -1291,6 +1311,7 @@
          */
         function containerTypeListToOutput(containerList) {
             var resultList = [];
+            var currentLang = $translate.proposedLanguage() || $translate.use();
             angular.forEach(containerList, function (item) {
 
                 var obj = {
@@ -1305,9 +1326,10 @@
 
                 if(item.shelfLifeUnit) {
                     obj.shelf_life_unit = {
+                        _id: item.shelfLifeUnit.id,
                         _label_en: item.shelfLifeUnit.en,
                         _label_fr: item.shelfLifeUnit.fr,
-                        __text: item.shelfLifeUnit.id
+                        __text: item.shelfLifeUnit[currentLang]
                     };
                 }
 
@@ -1343,6 +1365,7 @@
          */
         function routeAdminToOutput(list) {
             var resultList = [];
+            var currentLang = $translate.proposedLanguage() || $translate.use();
             angular.forEach(list, function (item) {
                 //check to see if this is an object. If not it was empty
                 if (angular.isObject(item.roa)) {
@@ -1351,9 +1374,10 @@
                     //roa is a field with 2 attributes
                     var obj = {
                         "roa": {
+                            _id: newRoa,
                             _label_en: item.roa.en,
                             _label_fr: item.roa.fr,
-                            __text: newRoa
+                            __text: item.roa[currentLang]
                         },
                         "roa_other": item.otherRoaDetails
                     };
@@ -1368,14 +1392,15 @@
          * @param list
          * @returns {Array}
          */
-        function formulationCountryListToOutput(list) {
+        function formulationCountryListToOutput(list, lang) {
 
             var resultList = [];
             angular.forEach(list, function (item) {
                 var country = {
+                    _id: item.country.id,
                     _label_en: item.country.en,
                     _label_fr: item.country.fr,
-                    __text: item.country.id
+                    __text: item.country[lang]
                 };
                 resultList.push(country);
             });
@@ -1621,7 +1646,7 @@
                 "ulcer_gastro": false
             }
             );
-        };
+        }
 
         /**
          * Creates an animal sourced emptt json record for file write
