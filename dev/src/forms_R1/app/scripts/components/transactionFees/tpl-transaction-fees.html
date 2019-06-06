@@ -112,12 +112,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 form-group alert alert-success" data-ng-if="transFeeCtrl.isEligible()" role="alert"
+                    <div class="col-xs-12 form-group alert alert-success"
+                         data-ng-if="transFeeCtrl.isEligible()" role="alert"
                          aria-live="polite">
                         <span>{{::'REMISSION_ELIGIBLE'|translate}}</span>
                     </div>
                     <div class="col-xs-12 form-group alert alert-warning"
-                         data-ng-if="!transFeeCtrl.isEligible() && transFeeCtrl.model.percentGross>0" role="alert"
+                         data-ng-if="!transFeeCtrl.isEligible() && transFeeCtrl.model.percentGross > 0" role="alert"
                          aria-live="polite">
                         <span>{{::'REMISSION_INELIGIBLE'|translate}}</span>
                     </div>

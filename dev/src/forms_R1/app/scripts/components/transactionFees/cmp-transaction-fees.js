@@ -218,7 +218,9 @@
                 return false;
             }
 
-            if (vm.isFeeRemit() && (vm.model.percentGross < vm.model.submissionClass.fee)) {
+          //  console.log("percentGross :" +  parseInt(vm.model.percentGross) );
+         //   console.log("percentGross :" +  parseInt(vm.model.submissionClass.fee) );
+            if (vm.isFeeRemit() && ( parseInt(vm.model.percentGross) < parseInt(vm.model.submissionClass.fee))) {
                 return true;
             }
             clearRemitRequiredDocs();
