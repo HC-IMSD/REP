@@ -291,6 +291,10 @@
                             </div>
                         </div>
                     <section class="panel  panel-default">
+                        <datalist id="contactsList" class="rep-selectize-dropdown rep-selectize-font">
+                            <option data-ng-repeat="contact in transInfoCtrl.userList" value="{{contact.en}}" label="{{contact.en}}"/>
+                        </datalist>
+
                         <header class="panel-heading clearfix">
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
@@ -317,37 +321,13 @@
                         <label for="projectManager1" class="full-width">
                             <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
-                        <input type="text"
-                               data-ng-model="transInfoCtrl.transactionModel.projectManager1"
-                               name="projectManager1"
-                               data-ng-model-options="{ debounce: $inherit}"
-                               id="projectManager1"
-                               size="100"
-                               maxlength="100"
-                               uib-typeahead=" contact.en for contact in transInfoCtrl.userList | filter:{en:$viewValue} | limitTo:15"
-                               class="form-control rep-normal-font"
-                               typeahead-show-hint="false"
-                               typeahead-focus-first="false"
-                               data-ng-change="transInfoCtrl.reqSelectionUpdated($item, $model, $label, $event)"
-                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                        <input type="text" id="projectManager1" name="projectManager1" data-ng-model="transInfoCtrl.transactionModel.projectManager1" value="transInfoCtrl.transactionModel.projectManager1" list="contactsList" class="form-control full-width" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="projectManager2" class="full-width">
                             <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
-                        <input type="text"
-                               data-ng-model="transInfoCtrl.transactionModel.projectManager2"
-                               name="projectManager2"
-                               data-ng-model-options="{ debounce: $inherit}"
-                               id="projectManager2"
-                               size="100"
-                               maxlength="100"
-                               uib-typeahead=" contact.en for contact in transInfoCtrl.userList | filter:{en:$viewValue} | limitTo:15"
-                               class="form-control rep-normal-font"
-                               typeahead-show-hint="false"
-                               typeahead-focus-first="false"
-                               data-ng-change="transInfoCtrl.reqSelectionUpdated($item, $model, $label, $event)"
-                               typeahead-popup-template-url="app/lib/uib-templates/customPopupTemplate.html"/>
+                        <input type="text" id="projectManager2" name="projectManager2" data-ng-model="transInfoCtrl.transactionModel.projectManager2" value="transInfoCtrl.transactionModel.projectManager1" list="contactsList" class="form-control full-width" />
                     </div>
                 </div>
                 <div class="row">
@@ -455,7 +435,8 @@
                                     <cmp-error-message field-name="transInfoCtrl.contactSameId"
                                                        form-ref="transInfoCtrl.transInfoForm"
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.contactSameId])"
-                                                       error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
+                                                       error-types="transInfoCtrl.requiredOnly">
+                                    </cmp-error-message>
                                 </div>
                             </div>
                         </div>

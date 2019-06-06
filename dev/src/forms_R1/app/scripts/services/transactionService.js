@@ -40,7 +40,8 @@
             angular.extend(this._default, defaultTransactionData);
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
-            this.xslFileName = XSL_PREFIX + "REP_RT_2_2.xsl";
+            // this.xslFileName = XSL_PREFIX + "REP_RT_2_2.xsl";
+            this.xslFileName = "REP_RT_3_0.xsl";
         }
 
         function loadContactData() {
@@ -544,9 +545,9 @@
         lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.transaction_description;
-        lifecycleRec.requesterName = lifecycleObj.requester_name.__text;
-        lifecycleRec.requesterName2 = lifecycleObj.requester_name2.__text;
-        lifecycleRec.requesterName3 = lifecycleObj.requester_name3.__text;
+        lifecycleRec.requesterNameTxt = lifecycleObj.requester_name.__text;
+        lifecycleRec.requesterName2Txt = lifecycleObj.requester_name2.__text;
+        lifecycleRec.requesterName3Txt = lifecycleObj.requester_name3.__text;
        // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
         return (lifecycleRec);
@@ -836,6 +837,9 @@
             "requesterName":"",
             "requesterName2":"",
             "requesterName3":"",
+            "requesterNameTxt":"",
+            "requesterName2Txt":"",
+            "requesterName3Txt":"",
             "isSaved": false
         };
         //TODO get next sequence number

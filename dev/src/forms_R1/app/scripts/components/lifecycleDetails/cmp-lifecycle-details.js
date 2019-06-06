@@ -40,9 +40,9 @@
                 updateErrorSummary:'&' //update the parent error summary
             }
         });
-    lifecycleRecCtrl.$inject = ['ActivityFormFilterService', 'TransactionLists', 'getContactLists','$filter', '$translate','$scope'];
+    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', 'getContactLists','$filter', '$translate','$scope'];
 
-    function lifecycleRecCtrl(ActivityFormFilterService, TransactionLists, getContactLists, $filter, $translate, $scope) {
+    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, getContactLists, $filter, $translate, $scope) {
         var vm = this;
         vm.activityList=[];
         vm.activityTypeList=[];
@@ -157,6 +157,17 @@
             vm.updateErrorSummary();
         }, true);
 
+        vm.userChanged = function(e) {
+            if('requesterName' == e){
+                vm.lifecycleModel.requesterName = vm.retrieveUser(vm.lifecycleModel.requesterNameTxt);
+            } else if('requesterName2' == e){
+                vm.lifecycleModel.requesterName2 = vm.retrieveUser(vm.lifecycleModel.requesterName2Txt);
+            } else if('requesterName3' == e){
+                vm.lifecycleModel.requesterName3 = vm.retrieveUser(vm.lifecycleModel.requesterName3Txt);
+            }
+
+        }
+
         /**
          * Used as messaging to get the error summary to update itself
          */
@@ -171,6 +182,15 @@
                     vm.requesterList = data;
                     return true;
                 });
+        }
+        vm.retrieveUser = function(userName){
+            for(var i=0; i< vm.requesterList.length; i++){
+                var user = vm.requesterList[i];
+                if(user['en'] == userName){
+                    return user;
+                }
+            }
+            return userName;
         }
 
 
@@ -850,8 +870,8 @@
             vm.versionId="version_no"+scopeId;
             vm.activityLeadId = "activity_lead" + scopeId;
             vm.requesterNameId = "requester_name" + scopeId;
-            vm.requesterNameId2 = "requester_name" + scopeId;
-            vm.requesterNameId3 = "requester_name" + scopeId;
+            vm.requesterNameId2 = "requester_name2" + scopeId;
+            vm.requesterNameId3 = "requester_name2" + scopeId;
             vm.descriptChangeId = "brief_desc_change" +  scopeId;
         }
     }

@@ -33,9 +33,16 @@
                     <label for="{{::transFeeCtrl.descriptId}}">
                         <span class="field-name">{{::'FEE_DESCRIPTION' |translate}}</span>
                     </label>
+                    <div data-ng-if="!transFeeCtrl.isFrench()">
                     <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}" readonly rows="3"
                               name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.submissionClass.description_en}}
                     </textarea>
+                    </div>
+                    <div data-ng-if="transFeeCtrl.isFrench()">
+                    <textarea class="form-control full-width" id="{{::transFeeCtrl.descriptId}}" readonly rows="3"
+                              name="{{::transFeeCtrl.descriptId}}">{{transFeeCtrl.model.submissionClass.description_fr}}
+                    </textarea>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -105,12 +112,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 form-group alert alert-success" data-ng-if="transFeeCtrl.isEligible()" role="alert"
+                    <div class="col-xs-12 form-group alert alert-success"
+                         data-ng-if="transFeeCtrl.isEligible()" role="alert"
                          aria-live="polite">
                         <span>{{::'REMISSION_ELIGIBLE'|translate}}</span>
                     </div>
                     <div class="col-xs-12 form-group alert alert-warning"
-                         data-ng-if="!transFeeCtrl.isEligible() && transFeeCtrl.model.percentGross>0" role="alert"
+                         data-ng-if="!transFeeCtrl.isEligible() && transFeeCtrl.model.percentGross > 0" role="alert"
                          aria-live="polite">
                         <span>{{::'REMISSION_INELIGIBLE'|translate}}</span>
                     </div>
@@ -250,7 +258,7 @@
             </div>
 
             <div class="row" data-ng-if="transFeeCtrl.showPaymentPanel()">
-                <div>  <span class="field-name"><strong> Payment</strong></span><p></p></div>
+                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -261,7 +269,7 @@
                 </div>
             </div>
             <div class="row" data-ng-if="transFeeCtrl.isFeeRemit()">
-                <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
+                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -270,7 +278,7 @@
                 </div>
             </div>
             <div class="row" data-ng-if="transFeeCtrl.isSendNoFees()">
-                <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
+                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
                     <p aria-live="polite">{{::'SPONSOR_INVOICE'|translate}}</p>
@@ -278,7 +286,7 @@
                 </div>
             </div>
             <div class="row" data-ng-if="transFeeCtrl.isDeferral() && !transFeeCtrl.isEligible() && !transFeeCtrl.isFeeRemit()">
-                <div>  <span class="field-name"><strong> Payment</strong></span><p></div>
+                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></div>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
                     <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
