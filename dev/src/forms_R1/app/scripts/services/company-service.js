@@ -40,7 +40,8 @@
             angular.extend(this._default, defaultCompanyData);
             this.addressID = 0;
             this.contactId = 0;
-            this.xslFileName = XSL_PREFIX + "REP_CO_2_2.xsl";
+            // this.xslFileName = XSL_PREFIX + "REP_CO_2_2.xsl";
+            this.xslFileName = "REP_CO_3_0.xsl";
         }
         //TODO rewrite this object to proper prototype syntax
         CompanyService.prototype = {
