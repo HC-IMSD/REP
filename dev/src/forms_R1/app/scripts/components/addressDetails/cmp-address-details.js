@@ -266,9 +266,11 @@
             }
             if( ! found ){
                 vm.addressModel.countryHtml = "";
-                vm.addressModel.country.id = "";
-                vm.addressModel.country.en = "";
-                vm.addressModel.country.fr = "";
+                if(vm.addressModel.country != "" && vm.addressModel.country.id != ""){
+                    vm.addressModel.country.id = "";
+                    vm.addressModel.country.en = "";
+                    vm.addressModel.country.fr = "";
+                }
                 vm.addressModel.countryDisplay = "";
                 // for(var i = 0; i < vm.countryList.length; i++) {
                 //     var option =vm.countryList[i];
