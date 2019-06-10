@@ -157,7 +157,7 @@
                             </div>
                         </div>
                         <div class="row col-md-12">
-                            <div class="form-group col-md-3" data-ng-if="ingRecCtrl.isStrengthSet()">
+                            <div class="form-group col-md-5" data-ng-if="ingRecCtrl.isStrengthSet()">
                                 <label for="{{ingRecCtrl.strengthData1Id}}" class="required"
                                        data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthData1Id].$invalid}">
                                     <span class="field-name">{{ingRecCtrl.strengthData1Title|translate}}</span>
@@ -172,7 +172,7 @@
 
                                 </label>
                             </div>
-                            <div class="form-group col-md-3" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthData2Id].$invalid}"
+                            <div class="form-group col-md-5" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.strengthData2Id].$invalid}"
                                  data-ng-if="ingRecCtrl.isRange()">
                                 <label for="{{::ingRecCtrl.strengthData2Id}}" class="required">
                                     <span class="field-name">{{'RANGE_UPPER_LIMIT'|translate}}</span>
@@ -187,7 +187,9 @@
 
                                 </label>
                             </div>
-                            <div class="form-group col-md-2">
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="form-group col-md-4">
                                 <label for="{{::ingRecCtrl.unitsId}}" class="required full-width">
                                     <span class="field-name">{{'UNITS'|translate}}</span>
                                     <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -219,7 +221,7 @@
 
                                 </label>
                             </div>
-                            <div class="form-group col-md-4" data-ng-show="ingRecCtrl.isUnitsOther()" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId].$invalid}">
+                            <div class="form-group col-md-5" data-ng-show="ingRecCtrl.isUnitsOther()" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId].$invalid}">
                                 <label for="{{::ingRecCtrl.otherUnitsId}}" class="required"><span class="field-name">{{'OTHER_UNITS'|translate}}</span>
                                     <strong class="required">{{"REQUIRED" |translate}}</strong>
                                     <cmp-error-message field-name="ingRecCtrl.otherUnitsId"
@@ -230,7 +232,6 @@
                                            data-ng-model-options="{ debounce: '$inherit'}"
                                            size="60" class="form-control" name="{{::ingRecCtrl.otherUnitsId}}"
                                            maxlength="60" data-ng-required="ingRecCtrl.isUnitsOther()"/>
-
 
                                 </label>
                             </div>
@@ -297,13 +298,13 @@
                                         <input type="text" id="{{::ingRecCtrl.perPresOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perPresOtherUnits"
                                                data-ng-model-options="{ debounce: '$inherit'}"
                                                size="40" class="form-control" name="{{::ingRecCtrl.perPresOtherUnitId}}"
-                                               maxlength="40" data-ng-required="ingRecCtrl.isPerUnitsOther()"/>
+                                               maxlength="40" data-ng-required="ingRecCtrl.isPerPresUnitsOther()"/>
 
                                     </label>
                                 </div>
                             </div>
                             <div data-ng-if="ingRecCtrl.isPerMeasure()">
-                                <div class="form-group col-md-3">
+                                <div class="form-group col-md-4">
                                     <label for="{{ingRecCtrl.perMeaValueId}}" class="required"
                                            data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeaValueId].$invalid}">
                                         <span class="field-name">{{"VALUE"|translate}}</span>
@@ -334,7 +335,7 @@
 
                                     </label>
                                 </div>
-                                <div class="form-group col-md-5" data-ng-if="ingRecCtrl.isPerMeasUnitsOther()" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId].$invalid}">
+                                <div class="form-group col-md-4" data-ng-if="ingRecCtrl.isPerMeasUnitsOther()" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId].$invalid}">
                                     <label for="{{::ingRecCtrl.perMeasureOtherUnitId}}" class="required">
                                         <span class="field-name">{{'OTHER_UNIT_MEASURE'|translate}}</span>
                                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -345,7 +346,7 @@
                                         <input type="text" id="{{::ingRecCtrl.perMeasureOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasOtherUnits"
                                                data-ng-model-options="{ debounce: '$inherit'}"
                                                size="40" class="form-control" name="{{::ingRecCtrl.perMeasureOtherUnitId}}"
-                                               maxlength="40" data-ng-required="ingRecCtrl.isPerUnitsOther()"/>
+                                               maxlength="40" data-ng-required="ingRecCtrl.isPerMeasUnitsOther()"/>
 
                                     </label>
                                 </div>

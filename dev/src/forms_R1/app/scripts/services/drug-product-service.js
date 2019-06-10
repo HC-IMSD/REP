@@ -602,7 +602,7 @@
                     obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
                 }
 
-                if (item.per.__text === 'UP') {
+                if (item.per._id=== 'UP') {
                     obj.perPresentationValue = Number(item.per_value);
                     var upValue = DossierLists.getUnitsPrefix() + item.per_units._id; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
@@ -613,7 +613,7 @@
                     obj.perPresOtherUnits = item.per_units_other_details;
                 }
 
-                if (item.per.__text === 'UM') {
+                if (item.per._id === 'UM') {
                     obj.perMeasureValue = Number(item.per_value);
                     var unitsValue = DossierLists.getUnitsPrefix() + item.per_units._id; //add the prefix
                     //if other revert the value. OTHER value never has a prefix
@@ -647,83 +647,6 @@
 
         }
 
-/* merged to active medIng list
-        function getNonMedIngList(list) {
-
-            var resultList = [];
-            if (!(list instanceof Array)) {
-                //make it an array, case there is only one
-                list = [list]
-            }
-            angular.forEach(list, function (item) {
-                var obj = {
-                    "ingId": item.ingredient_id,
-                    "varId": item.variant_name,
-                    "ingName": item.ingredient_name,
-                    "cas": item.cas_number,
-                    "humanAnimalSourced": item.is_human_animal_src,
-                    "standard": item.ingred_standard,
-                    "strength": {operator: "",
-                        data1: Number(item.strength.data1),
-                        data2: Number(item.strength.data2) },
-                    "units": "",
-                    "otherUnits": item.units_other,
-                    "per": item.per,
-                    "unitsPresentation": item.units_presentation,
-                    "perMeasureUnits": "",
-                    "perMeasureOtherUnits": item.units_other_measure,
-                    "calcAsBase": item.is_base_calc,
-                    "isNano": item.is_nanomaterial,
-                    "nanoMaterial": "",
-                    "nanoMaterialOther": item.nanomaterial_details
-                };
-                if (item.strength) {
-                    var opValue = item.strength.operator.__text;
-                    obj.strength.operator = $filter('findListItemById')(DossierLists.getStrengthList(), {id: opValue});
-                }
-
-                if (item.per) {
-                    var perId = item.per.__text;
-                    obj.per = $filter('findListItemById')(DossierLists.getPerList(), {id: perId});
-                }
-
-                if (item.units_presentation) {
-                    var upValue = item.units_presentation.__text;
-                    obj.unitsPresentation = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: upValue});
-                }
-
-                if (item.units_measure) {
-                    var unitsValue = DossierLists.getUnitsPrefix() + item.units_measure.__text; //add the prefix
-                    //if other revert the value. OTHER value never has a prefix
-                    if (item.units_measure.__text === OTHER) {
-                        unitsValue = item.units_measure.__text;
-                    }
-                    obj.perMeasureUnits = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
-                }
-
-                if (item.units) {
-                    var unitsValue = DossierLists.getUnitsPrefix() + item.units.__text; //add the prefix
-                    //if other revert the value. OTHER value never has a prefix
-                    if (item.units.__text === OTHER) {
-                        unitsValue = item.units.__text;
-                    }
-                    obj.units = $filter('findListItemById')(DossierLists.getUnitsList(), {id: unitsValue});
-                }
-                if (item.is_nanomaterial === YES) {
-                    //prefixed so need to do things differently than units
-                    var nanoValue = DossierLists.getNanoPrefix() + item.nanomaterial.__text;
-                    if (item.nanomaterial.__text === OTHER) {
-                        nanoValue = item.nanomaterial.__text;
-                    }
-                    obj.nanoMaterial = $filter('findListItemById')(DossierLists.getNanoMaterials(), {id: nanoValue});
-                }
-                resultList.push(obj);
-            });
-
-            return resultList;
-        }
-
-*/
         function getContainerTypeList(list) {
 
             var resultList = [];
@@ -790,7 +713,7 @@
 
             angular.forEach(list, function (item) {
                 var roaValue = DossierLists.getRoaPrefix() + item.roa._id;
-                if (item.roa.__text === OTHER) {
+                if (item.roa._id === OTHER) {
                     roaValue = item.roa._id;
                 }
                 var roaObj = $filter('findListItemById')(DossierLists.getRoa(), {id: roaValue});
@@ -830,7 +753,7 @@
                     "display": "",
                     "unknownCountryDetails": ""
                 };
-                if (item.__text === UNKNOWN) {
+                if (item._id === UNKNOWN) {
                     obj.country = getCountryAndProvinces.getUnknownCountryRecord();
                 } else {
                     obj.country = $filter('filter')(getCountryAndProvinces.getCountries(), {id: item._id})[0];
@@ -1205,7 +1128,7 @@
          * Creates the standard json object for units of measure
          * @param unitsObj
          * @param prefix
-         * @returns {{_label_en: string, _label_fr: string, __text: string}}
+         * @returns {{_id: string, _label_en: string, _label_fr: string, __text: string}}
          * @private
          */
         function _unitsFldToOutput(unitsObj, prefix, lang) {
@@ -1226,83 +1149,6 @@
             newObj.__text = unitsObj[lang];
             return newObj;
         }
-
-
-        /**
-         * Converts nonMedicinal Ingredient to a the output json object
-         * @param nonMedList
-         * @returns {Array}
-         * -- depreciated
-        function nonMedIngListToOutput(nonMedList) {
-
-            var resultList = [];
-
-            angular.forEach(nonMedList, function (item) {
-
-                var obj = {
-                    "ingredient_id": item.ingId,
-                    "ingredient_name": item.ingName,
-                    "cas_number": item.cas,
-                    "ingred_standard": item.standard,
-                    "is_human_animal_src": item.humanAnimalSourced,
-                    "variant_name": item.varId,
-                    "strength": "",
-                    "units": "",
-                    "units_other": item.otherUnits,
-                    "per": "",
-                    "units_presentation": "",
-                    "units_measure": "",
-                    "units_other_measure": "",
-                    "is_base_calc": item.calcAsBase,
-                    "is_nanomaterial": item.isNano,
-                    "nanomaterial": "",
-                    "nanomaterial_details": ""
-                };
-
-                if(item.strength) {
-                    var data2Value = "";
-                    if (item.strength.operator.id === 'RA') {
-                        data2Value = item.strength.data2;
-                    }
-                    obj.strength = {
-                        operator: {
-                            _label_en: item.strength.operator.en,
-                            _label_fr: item.strength.operator.fr,
-                            __text: item.strength.operator.id
-                        },
-                        data1: item.strength.data1,
-                        data2: data2Value
-                    };
-                }
-
-                if(item.per) {
-                    obj.per = {
-                        _label_en: item.per.en,
-                        _label_fr: item.per.fr,
-                        __text: item.per.id
-                    };
-                }
-                obj.units = _unitsFldToOutput(item.units, DossierLists.getUnitsPrefix());
-                if (item.per.id === 'UP') {
-                    obj.units_presentation = {
-                        _label_en: item.unitsPresentation.en,
-                        _label_fr: item.unitsPresentation.fr,
-                        __text: item.unitsPresentation.id
-                    };
-                } else if (item.per.id === 'UM') {
-                    obj.units_measure = _unitsFldToOutput(item.perMeasureUnits, DossierLists.getUnitsPrefix());
-                    obj.units_other_measure = item.perMeasureOtherUnits;
-                }
-                if (item.isNano === YES) {
-                    obj.nanomaterial = _unitsFldToOutput(item.nanoMaterial, DossierLists.getNanoPrefix());
-                    obj.nanomaterial_details = item.nanoMaterialOther;
-                }
-
-                resultList.push(obj);
-            });
-            return resultList;
-        }
-         */
 
         /**
          * Converts container type to output json

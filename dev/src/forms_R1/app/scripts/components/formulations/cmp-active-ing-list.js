@@ -93,6 +93,8 @@
             vm.ingList[idx] = angular.copy(ing);
             vm.onUpdate({list:vm.ingList});
             vm.setValid(true);
+            setRecord(-1);
+            vm.resetToCollapsed = !vm.resetToCollapsed;
             vm.noActives();
         };
 
@@ -204,8 +206,6 @@
             var scopeId = "_" + $scope.$id;
             vm.noActiveId="no_active"+scopeId;
         }
-
-
 
     }
 })();

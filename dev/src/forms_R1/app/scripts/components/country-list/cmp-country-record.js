@@ -83,9 +83,11 @@
                 vm.clearFilter($scope);
             } else {
                 vm.model.display = "";
-                vm.model.country.id = "";
-                vm.model.country.en = "";
-                vm.model.country.fr = "";
+                if (vm.model.country) {
+                    vm.model.country.id = "";
+                    vm.model.country.en = "";
+                    vm.model.country.fr = "";
+                }
                 vm.onError();
             }
 
