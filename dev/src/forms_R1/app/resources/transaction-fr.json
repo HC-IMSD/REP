@@ -138,7 +138,7 @@
   "DOSSIER_ID_INSTRUCT":"fr_Dossier ID Instructions",
   "ADMIN_COMP_INSTRUCT": "fr_Administrative Submission or Component Instructions",
   "PLEASE_REMIT":"Veuillez payer les frais de traitement de la remise de 590$ en utilisant les détails du paiement en avance pour présentations de drogues et fiches maîtresses.",
-  "APPLY_DEFER":"fr_You are applying for a deferral. Please send no payment with this form.",
+  "APPLY_DEFER":"Vous demandez le report du paiement. Veuillez envoyer le présent formulaire sans aucun paiement.",
   "BANK_DRAFT":"Traite bancaire internationale",
   "MONEY_ORDER":"Mandat",
   "CHEQUE":"Chèque",

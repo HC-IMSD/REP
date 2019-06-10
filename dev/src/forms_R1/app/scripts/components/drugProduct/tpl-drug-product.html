@@ -45,7 +45,7 @@
             </header>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-4 form-group" data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
+                    <div class="col-xs-12 form-group" data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.compId].$invalid}">
                         <label for="{{::drugProdCtrl.compId}}" class="required">
                             <span class="field-name">1.&nbsp;{{::'COMPANY_ID' |translate}}{{::'LEAST_5_DIGIT' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -60,7 +60,9 @@
 
                         </label>
                     </div>
-                    <div class="col-xs-4 form-group">
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 form-group">
                         <label for="{{::drugProdCtrl.dossierId}}" class="required">
                             <span class="field-name">2.&nbsp;{{::'DOSSIER_ID' |translate}}{{::'LEAST_7_CHAR' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -70,12 +72,12 @@
                                                error-types="drugProdCtrl.min7Error"></cmp-error-message>
                         </label>
                         <div class="rep-input-group  mrgn-tp-0">
-                                <span class="input-group-addon">HC6-024-</span>
-                                <div data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
-                                    <input type="text" class="form-control full-width" id="{{::drugProdCtrl.dossierId}}"
-                                           maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}" data-ng-pattern="/^[A-Za-z0-9]{7}$/"
-                                           size="7" data-ng-model="drugProdCtrl.model.dossierID" required/>
-                                </div>
+                            <span class="input-group-addon">HC6-024-</span>
+                            <div data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.dossierId].$invalid}">
+                                <input type="text" class="form-control" id="{{::drugProdCtrl.dossierId}}"
+                                       maxlength="7"  minlength="7" name="{{::drugProdCtrl.dossierId}}" data-ng-pattern="/^[A-Za-z0-9]{7}$/"
+                                       size="7" data-ng-model="drugProdCtrl.model.dossierID" required/>
+                            </div>
                         </div>
                     </div>
                 </div>
