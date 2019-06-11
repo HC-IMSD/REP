@@ -95,7 +95,7 @@
             },
             "importerIdValid": {
                 "type": "element",
-                "target": "importerIdValid"
+                "target": "addressList"
             }
 
 
