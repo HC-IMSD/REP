@@ -22,6 +22,6 @@
   "MSG_ERR_ONE_CDN_REF": "fr_At least one Canadian Reference product is required",
   "MSG_ERR_INVALID_NUM_MIN": "La valeur doit être supérieure à -273",
   "MSG_ERR_INVALID_NUM_MAX": "La valeur doit être inférieure à 999",
-  "MSG_ERR_INVALID_NUM_MIN0": "La valeur doit être supérieure à 0",
+  "MSG_ERR_INVALID_NUM_MIN0": "La valeur doit être supérieure ou égale à 0",
   "MSG_TISSUE_SYS_USED": "Ce système a déjà été sélectionné, veuillez en sélectionner un autre."
 }
