@@ -84,9 +84,7 @@
             } else {
                 vm.model.display = "";
                 if (vm.model.country) {
-                    vm.model.country.id = "";
-                    vm.model.country.en = "";
-                    vm.model.country.fr = "";
+                    vm.model.country = {};
                 }
                 vm.onError();
             }

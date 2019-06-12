@@ -69,17 +69,7 @@
             }
             if( ! found ){
                 vm.model.display = "";
-                vm.model.country.id = "";
-                vm.model.country.en = "";
-                vm.model.country.fr = "";
-                // for(var i = 0; i < vm.countries.length; i++) {
-                //     var option =vm.countries[i];
-                //     if(option['id'] === vm.model.display) {
-                //         vm.model.display = option[vm.lang];
-                //         found = true;
-                //         break;
-                //     }
-                // }
+                vm.model.country = {};
             }
             if(found){
                 vm.updateCountryList();
