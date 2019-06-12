@@ -267,18 +267,9 @@
             if( ! found ){
                 vm.addressModel.countryHtml = "";
                 if(vm.addressModel.country != "" && vm.addressModel.country.id != ""){
-                    vm.addressModel.country.id = "";
-                    vm.addressModel.country.en = "";
-                    vm.addressModel.country.fr = "";
+                    vm.addressModel.country = {};
                 }
                 vm.addressModel.countryDisplay = "";
-                // for(var i = 0; i < vm.countryList.length; i++) {
-                //     var option =vm.countryList[i];
-                //     if(option['id'] === vm.addressModel.country['id']) {
-                //         vm.addressModel.countryHtml = option[vm.lang];
-                //         break;
-                //     }
-                // }
             }
             vm.countryChanged();
         }
