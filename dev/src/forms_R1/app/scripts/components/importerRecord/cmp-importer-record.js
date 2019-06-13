@@ -112,6 +112,9 @@
             else {
                 vm.model.countryHtml = "";
                 vm.model.countryDisplay = "";
+                vm.isPostalRequired = false;
+                vm.hideProvinceText = false;
+                vm.hideProvinceDdl = !vm.hideProvinceText;
             }
             vm.updateErrorSummaryState();
         };
@@ -206,13 +209,11 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.countryList.length; i++) {
-                    var option =vm.countryList[i];
-                    if(option['id'] === vm.model.country['id']) {
-                        vm.model.countryHtml = option[vm.lang];
-                        break;
-                    }
+                vm.model.countryHtml = "";
+                if(vm.model.country != "" && vm.model.country.id != ""){
+                    vm.model.country = {};
                 }
+                vm.model.countryDisplay = "";
             }
             vm.countryChanged();
         };
