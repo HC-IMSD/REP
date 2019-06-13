@@ -136,6 +136,9 @@
             else {
                 vm.addressModel.countryHtml = "";
                 vm.addressModel.countryDisplay = "";
+                vm.isPostalRequired = false;
+                vm.hideProvinceText = false;
+                vm.hideProvinceDdl = !vm.hideProvinceText;
             }
             vm.updateErrorSummary();
         };
