@@ -2335,8 +2335,8 @@ gulp.task('prod-company-compileHtml', gulp.series('prod-global-create-src-templa
     ];
     var srcPath = paths.buildProdCompany;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'companyEXT-en.html', destPath, 'en', deployType.prod, 'companyEXT-fr.html');
-    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'companyEXT-fr.html', destPath, 'fr', deployType.prod, 'companyEXT-en.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'company.html', destPath, 'en', deployType.prod, 'entreprise.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'entreprise.html', destPath, 'fr', deployType.prod, 'company.html');
     pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, companyRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'companyINT-fr.html', destPath, 'fr', deployType.prodInt, 'companyINT-en.html');
     return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, companyRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'companyINT-en.html', destPath, 'en', deployType.prodInt, 'companyINT-fr.html');
 
@@ -2537,9 +2537,9 @@ gulp.task('prod-transaction-compileHtml', gulp.series('prod-global-create-src-te
 
     var srcPath = paths.buildProdTransaction;
     var deploy = deployType.prod;
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'transactionEXT-en.html', destPath, 'en', deploy, 'transactionEXT-fr.html')
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, transactionRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'regulatory-transaction.html', destPath, 'en', deploy, 'réglementaire-transaction.html')
     return (
-        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, transactionRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'transactionEXT-fr.html', destPath, 'fr', deploy, 'transactionEXT-en.html')
+        pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, transactionRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'réglementaire-transaction.html', destPath, 'fr', deploy, 'regulatory-transaction.html')
     )
 }));
 
@@ -2928,8 +2928,8 @@ gulp.task('prod-drugProduct-compileHtml', gulp.series('prod-global-create-src-te
 
     var srcPath = paths.buildProdDrugProduct;
 
-    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, drugProductRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'drugProductEXT-en.html', destPath, 'en', deployType.prod, 'drugProductEXT-fr.html');
-    return pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, drugProductRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'drugProductEXT-fr.html', destPath, 'fr', deployType.prod, 'drugProductEXT-en.html');
+    pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, drugProductRootTitles_en, htmlPartial, srcJsExtEn, ignorePath, 'product.html', destPath, 'en', deployType.prod, 'produit.html');
+    return pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, drugProductRootTitles_fr, htmlPartial, srcJsExtFr, ignorePath, 'produit.html', destPath, 'fr', deployType.prod, 'product.html');
     //pipes.createProdRootHtml2(srcPath, paths.prodFrenchTemplate, drugProductRootTitles_fr, htmlPartial, srcJsIntFr, ignorePath, 'dossierINT-fr.html', destPath, 'fr', deployType.prodInt);
     // return pipes.createProdRootHtml2(srcPath, paths.prodEnglishTemplate, dossierRootTitles_en, htmlPartial, srcJsIntEn, ignorePath, 'dossierINT-en.html', destPath, 'en', deployType.prodInt);
 }));

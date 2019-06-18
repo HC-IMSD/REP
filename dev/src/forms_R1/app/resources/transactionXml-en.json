@@ -22,7 +22,6 @@
   "is_third_party":"Will the submission be signed / filed by a third party on behalf of the manufacturer / sponsor?",
   "is_priority":"Was this regulatory activity approved for priority review?",
   "is_admin_sub":"Is this regulatory activity an Administrative Submission or does this regulatory activity contain an administrative component?",
-  "_id":"ID",
   "transaction_description":"Regulatory Transaction Description",
   "requester_of_solicited_information":"Requester of Solicited Information",
   "regulatory_activity_lead":"Regulatory Activity Lead",
