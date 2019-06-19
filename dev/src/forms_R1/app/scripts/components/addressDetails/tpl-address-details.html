@@ -87,7 +87,7 @@
                     </cmp-error-message>
                     <input type="text" id="{{::adr.postalId}}" name="{{::adr.postalId}}"
                            data-ng-model="adr.addressModel.postalCode"
-                           class="form-control" ng-maxlength="7" data-ng-required="adr.isPostalRequired"
+                           class="form-control" data-ng-maxlength="7" data-ng-required="adr.isPostalRequired"
                            data-ng-change="adr.postalCodeChanged()"
                            maxlength="7" data-ng-pattern="adr.postalPattern" data-ng-readonly="!adr.isEditable"/>
                 </label>
