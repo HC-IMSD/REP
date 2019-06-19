@@ -103,7 +103,7 @@
   "PURPOSE_INSTRUCT":"Purpose Instructions",
   "IMPORTER_INSTRUCT":"Importer Instructions",
   "CMP-FORMULATION-RECORD":"in formulation record",
-  "INGRECCTRL.ACTIVEINGFORM":"in the active ingredient details",
+  "INGRECCTRL.ACTIVEINGFORM":"in the medicinal ingredient details",
   "NINGRECCTRL.NONMEDINGFORM":"in the non-medicinal ingredient details",
   "CTRCTRL.CONTAINERTYPEFORM":"in the container type details",
   "FORMULCTRL.FORMULATIONSFORM":"in the formulations tab",

@@ -218,6 +218,7 @@
             vm.errorArray = [];
             vm.uniqueErrorList = {};
             _getErr(myformErrors, vm.uniqueErrorList, name);
+            _hideRequiredRecordErrors(vm.uniqueErrorList);
            // console.log( 'vm.uniqueErrorList');
            // console.log( vm.uniqueErrorList);
             var newErrors = _sortErrorsByDomOrder();
@@ -227,6 +228,38 @@
                 vm.errorArray = newErrors;
             }
         };
+
+        //hide record required error if there are errors in the record
+        function _hideRequiredRecordErrors(errors) {
+            var keys = Object.keys(errors);
+            if (!(keys instanceof Array)) {
+                keys = [keys];
+            }
+            if (keys.indexOf("lifecycleCtrl.lifecycleDetailsForm") > -1) {
+                for (var i = 0; i < keys.length; i++) {
+                    if (keys[i].indexOf("saveLifeRec") > -1) {
+                        delete errors[keys[i]];
+                        break;
+                    }
+                }
+            }
+            if (keys.indexOf("ingRecCtrl.activeIngForm") > -1) {
+                for (var i = 0; i < keys.length; i++) {
+                    if (keys[i].indexOf("no_active") > -1) {
+                        delete errors[keys[i]];
+                        break;
+                    }
+                }
+            }
+            if (keys.indexOf("ctrCtrl.containerTypeForm") > -1) {
+                for (var i = 0; i < keys.length; i++) {
+                    if (keys[i].indexOf("no_container") > -1) {
+                        delete errors[keys[i]];
+                        break;
+                    }
+                }
+            }
+        }
 
 
         //gets all the errors from error objects
