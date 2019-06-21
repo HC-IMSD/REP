@@ -41,8 +41,8 @@
      //   vm.salutationList = getContactLists.getSalutationList();
         vm.langCorresppond=[ENGLISH,FRENCH];
         vm.faxRequired=false; //default to false for backwards compatibility
-       // vm.phoneReg=/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-        vm.phoneReg=/^\+?\d{3}[- ]?\d{3}[- ]?\d{4}$/;
+       vm.phoneReg=/^([0-9]*$)/;
+        //vm.phoneReg=/^\+?\d{*}$/;
         vm.contactModel = {
             givenName: "",
             surname: "",

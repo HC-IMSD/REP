@@ -89,18 +89,22 @@
             </div>
             <div data-ng-if="transFeeCtrl.isFeeRemit()">
                 <div class="row">
-                    <div class="col-md-8 col-sm-12 form-group">
-                        <label for="{{::transFeeCtrl.revenueId}}">
+                    <div class="col-md-8 col-sm-12 form-group" data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
+                        <label for="{{::transFeeCtrl.revenueId}}" class="required">
                             <span class="field-name">{{::'GROSS_REVENUE'|translate}}</span>
-                        </label>
+                            <strong class="required"> {{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="transFeeCtrl.revenueId" form-ref="transFeeCtrl.transFeeForm"
+                                           show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.revenueId])"
+                                           error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
                             <div class="rep-input-group">
                                 <span class="input-group-addon">$</span>
-                            <input class="form-control" id="{{::transFeeCtrl.revenueId}}"
+                                <input class="form-control" id="{{::transFeeCtrl.revenueId}}"
                                    type="number" data-ng-model="transFeeCtrl.model.grossRevenue"
-                                   step="0.01"
+                                   step="0.01" required
                                    data-ng-change="transFeeCtrl.calcValue()"
                                    name="{{::transFeeCtrl.revenueId}}"/>
                             </div>
+                        </label>
                     </div>
                     <div class="col-md-4 col-sm-12 form-group">
                         <label for="{{::transFeeCtrl.percentId}}">
@@ -148,8 +152,17 @@
                     </div>
                 </div>
                 <div data-ng-if="transFeeCtrl.isEligible()">
-                    <fieldset>
-                        <legend class="legend-rep">{{::'SUPPORTING_DOC'|translate}}</legend>
+                    <fieldset id="{{::transFeeCtrl.feeDocFsId}}">
+                        <legend class="legend-rep">{{::'SUPPORTING_DOC'|translate}}
+                            <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <cmp-error-message field-name="transFeeCtrl.feeDocSelectedId"
+                                           form-ref="transFeeCtrl.transFeeForm"
+                                           show-error="!transFeeCtrl.isFeeDocSelected() && transFeeCtrl.showSummary"
+                                           error-types="transFeeCtrl.oneFeeDocError"></cmp-error-message>
+                        </legend>
+                        <input type="checkbox" name="{{::transFeeCtrl.feeDocSelectedId}}"
+                               id="{{::transFeeCtrl.feeDocSelectedId}}" required data-ng-model="transFeeCtrl.oneFeeDocSelected"
+                               hidden />
                         <div class="row">
                             <div class="form-group col-xs-12">
                                 <div class="checkbox">

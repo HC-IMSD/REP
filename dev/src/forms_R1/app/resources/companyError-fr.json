@@ -1,8 +1,8 @@
 {
   "ADDRESSLISTCTRL.ADDRESSLISTFORM": "fr_in the Address Information section.",
   "CONTACTLISTCTRL.CONTACTLISTFORM": "fr_in the Company Representative Information section.",
-  "CONTACTROLESVALID": "Pour le représentant de l'entreprise, sélection de toutes les rôles: fabricant, de l'envoi, de la facturation et principale du PIR ",
-  "ADDRESSROLESVALID": "Pour l'information d'adresse, sélection de toutes les rôles: fabricant, de l'envoi et de la facturation ",
+  "CONTACTROLESVALID": "Pour le représentant de l'entreprise, sélection des rôles: fabricant, de l'envoi, de la facturation et principale du PIR ",
+  "ADDRESSROLESVALID": "Pour l'information d'adresse, sélection des rôles: fabricant, de l'envoi et de la facturation ",
   "CONTACTREC.CONTACTRECFORM":"dans les détails du représentant de l'entreprise",
   "ADDRESSREC.ADDRESSRECFORM":"dans les détails de l'adresse",
   "COMPANY_FORM":"Inscription D'une Entreprise Réglementaire",

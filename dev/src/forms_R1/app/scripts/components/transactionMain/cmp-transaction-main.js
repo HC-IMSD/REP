@@ -72,6 +72,10 @@
             "one_payment_method": {
                 "type": "fieldset",
                 "parent": "fs_payment_methods"
+            },
+            "one_fee_doc": {
+                "type": "element",
+                "target": "fs_fee_docs"
             }
 
         };

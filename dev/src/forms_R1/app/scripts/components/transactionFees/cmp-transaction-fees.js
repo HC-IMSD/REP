@@ -34,9 +34,12 @@
         vm.model = {};
         vm.submissionType = {};
         vm.onePaymentSelected = "";
+        vm.oneFeeDocSelected = "";
         vm.yesNoList = [YES, NO];
+        vm.feeDocKeys = ['estMarketShare', 'comparison', 'salesHistory', 'marketPlan', 'avgSalePrice', 'other'];
         vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.onePaymentError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.oneFeeDocError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.alerts = [false, false, false];
         vm.lang=ENGLISH;
         /**
@@ -80,6 +83,7 @@
                 return true
             }
         };
+
         vm.isPaymentSelected = function () {
             var methodSelected = false;
             var keys = Object.keys(vm.model.paymentMethod);
@@ -97,6 +101,26 @@
             } else {
                 vm.onePaymentSelected = false;
                 return false
+            }
+
+        };
+
+        vm.isFeeDocSelected = function () {
+            var feeDocSelected = false;
+            for (var i = 0; i < vm.feeDocKeys.length; i++) {
+                if (vm.model.requiredDocs[vm.feeDocKeys[i]] === true) {
+                    feeDocSelected = true;
+                    break;
+                }
+            }
+            vm.oneFeeDocSelected = "";
+
+            if (feeDocSelected) {
+                vm.oneFeeDocSelected = true;
+                return true;
+            } else {
+                vm.oneFeeDocSelected = false;
+                return false;
             }
 
         };
@@ -277,7 +301,7 @@
             vm.feeId = "fee_amount" + scopeId;
             vm.remitId = "fee_remission" + scopeId;
             vm.paymentSelectedId = "one_payment_method" + scopeId; //PAYMENT_METHODS
-           // vm.paymentSelectedId = "PAYMENT_METHODS" + scopeId;
+            vm.feeDocSelectedId = "one_fee_doc" + scopeId;
             vm.revenueId = "GROSS_REVENUE" + scopeId;
             vm.percentId = "calcPercent" + scopeId;
             vm.deferralStateId = "DEFER_STATEMENT" + scopeId; //statement supporting deferral
@@ -286,6 +310,7 @@
             vm.otherId = "other" + scopeId;
             vm.otherDetailsId = "other_doc_details" + scopeId;
             vm.paymentFsId="fs_payment_methods" + scopeId;
+            vm.feeDocFsId="fs_fee_docs" + scopeId;
             vm.deferId = "defer_fees" + scopeId;
 
         }

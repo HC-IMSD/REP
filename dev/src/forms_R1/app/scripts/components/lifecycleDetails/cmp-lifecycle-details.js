@@ -566,6 +566,12 @@
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         function setDetailsAsNone() {
@@ -582,6 +588,12 @@
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         function setAsDescription() {
@@ -597,6 +609,12 @@
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
 
         }
 
@@ -612,6 +630,12 @@
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         function setVersionAndDate() {
@@ -627,6 +651,12 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.details = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         function setAsDatePeriod() {
@@ -642,6 +672,12 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         function setAsVersionDescription() {
@@ -656,6 +692,12 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         function setAsRequesterwithDate() {
@@ -685,6 +727,12 @@
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
         }
 
         vm.setConcatDetails = function () {

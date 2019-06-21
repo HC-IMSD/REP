@@ -87,7 +87,7 @@
                            data-ng-model="contCtrl.contactModel.phone"
                            class="form-control full-width" name="{{::contCtrl.phoneNumberId}}"
                            data-ng-readonly="!contCtrl.isEditable" data-ng-pattern="contCtrl.phoneReg"
-                           required data-ng-maxlength="12" data-ng-minlength="10"  />
+                           required data-only-digits/>
 
                 </label>
             </div>
@@ -115,7 +115,7 @@
                     <input type="tel" id="{{::contCtrl.faxId}}"
                            data-ng-model="contCtrl.contactModel.fax" data-ng-readonly="!contCtrl.isEditable"
                            data-ng-required="contCtrl.faxMandatory" class="form-control full-width" data-ng-pattern="contCtrl.phoneReg"
-                           name="{{::contCtrl.faxId}}" data-ng-maxlength="12" data-ng-minlength="10" />
+                           name="{{::contCtrl.faxId}}" data-only-digits/>
                     <span data-ng-if="contCtrl.faxMandatory">{{::'FAX_NOT_AVAILABLE'|translate}} </span>
                 </label>
             </div>

@@ -126,6 +126,7 @@
   "SPONSOR_INVOICE":"Les frais d’examen ne doivent pas être inclus dans la présentation, le supplément à une présentation ou la demande de drogue. Les factures de plus de 10 000 $ seront envoyées aux promoteurs.",
   "PAYMENT_METHODS":"Veuillez sélectionner tous les modes de paiement que vous avez l’intention d’utiliser.",
   "ONE_PAYMENT_METHOD":"Veuillez sélectionner tous les modes de paiement que vous avez l’intention d’utiliser.",
+  "ONE_FEE_DOC":"fr_At least one of the support documentation to establish that the applicable fee payable is greater than 10% of the anticipated gross revenue from sales of the drug product in Canada during the fee verification period",
   "DEFER_INSTRUCT":"fr_Deferral of payment Instructions",
   "REMISSION_INSTRUCT":"fr_Fee remission Instructions",
   "CLASS_INSTRUCT":"fr_Submission Class Instructions",

@@ -139,6 +139,7 @@
                 vm.isPostalRequired = false;
                 vm.hideProvinceText = false;
                 vm.hideProvinceDdl = !vm.hideProvinceText;
+                vm.postalLabel = getPostalLabel();
             }
             vm.updateErrorSummary();
         };

@@ -107,7 +107,7 @@
                                                    error-types="lifecycleCtrl.dateFormatError">
                                 </cmp-error-message>
                             </label>
-                            <input id="{{::lifecycleCtrl.dateId}}" type="date"
+                            <input id="{{::lifecycleCtrl.dateId}}" type="date" max='9999-12-31'
                                    name="{{::lifecycleCtrl.dateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
                                    data-ng-required="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible"
@@ -127,7 +127,7 @@
                                                    error-types="lifecycleCtrl.dateFormatError"></cmp-error-message>
                             </label>
                              <input id="{{::lifecycleCtrl.startDateId}}"
-                                   type="date"
+                                   type="date" max='9999-12-31'
                                    name="{{::lifecycleCtrl.startDateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
                                    data-ng-required="lifecycleCtrl.startDateVisible"
@@ -148,7 +148,7 @@
                             <input id="{{::lifecycleCtrl.endDateId}}" type="date" name="{{::lifecycleCtrl.endDateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.endDate"
                                    data-ng-required="lifecycleCtrl.endDateVisible"
-                                   class="form-control" required
+                                   class="form-control" required max='9999-12-31'
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
                     </div>
