@@ -19,7 +19,7 @@
   "REGULATED_CDSA":"réglementé en vertu de la Loi réglementant certaines drogues et autres substances",
   "NON_PRESC_DRUG":"un médicament sans ordonnance",
   "NON_PRESC_SCHEDULE_A":"Fournissez les informations ci-dessous pour les produits sans ordonnance qui ont associé des revendications de l’annexe A seulement.",
-  "ADDRESS_NOC":"Adresse où doivent être envoyés le formulaire de déclaration de médicament (FDM)/l’avis de conformité (AC) (lorsque nécessaire):",
+  "ADDRESS_NOC":"Adresse où le formulaire de déclaration de médicament (FDM)/l’avis de conformité (AC) (lorsque nécessaire):",
   "ADDR_INSTRUCT": "fr_Activity Address Instructions",
   "FAKE.APPENDIX_MISSING_ERROR":"fr_with the Human /Animal Sourced Records, missing source",
   "FAKE.APPENDIX_EXTRA_ERROR":"fr_with the Human /Animal Sourced Records, extra source",
