@@ -64,10 +64,10 @@
                          class="alert-info" close="timelySubCtrl.closeAlert(0)">
                         <section aria-live="assertive">
                             <div data-ng-if="!timelySubCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-en.html'">
+                                 data-ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-en.html'">
                             </div>
                             <div data-ng-if="timelySubCtrl.isFrench()"
-                                 ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-fr.html'">
+                                 data-ng-include="'app/scripts/templates/csp/tpl-csp-marketDate-fr.html'">
                             </div>
                         </section>
                     </div>

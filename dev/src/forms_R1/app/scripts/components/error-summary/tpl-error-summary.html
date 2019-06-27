@@ -1,5 +1,5 @@
 <div data-ng-show="errSummaryCtrl.calcIsVisible()" id="errors-summary{{::errSummaryCtrl.nameAddendum}}">
-    <section  class="alert alert-danger" focus-if="errSummaryCtrl.isFocusInput"
+    <section  class="alert alert-danger" data-focus-if="errSummaryCtrl.isFocusInput"
              data-focus-delay="200" data-ng-switch data-on="errSummaryCtrl.headerLevel">
 
         <h1 data-ng-switch-when="h1">{{'FOR_THE'|translate}}{{errSummaryCtrl.formPreamble

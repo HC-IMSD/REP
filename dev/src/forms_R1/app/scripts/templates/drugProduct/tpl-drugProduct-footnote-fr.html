@@ -4,7 +4,7 @@
         <p>{{::'LOAD_DRUGPROD'|translate}}</p>
         <ul>
             <li>Lors de la production d’une copie de travail, le fichier doit être chargé en format .hcsc.</li>
-            <li>Lors de la consultation ou de la mise à jour d’une version définitive du fichier XML, le fichier doit être chargé en format .xml.</li>
+            <li>Lors de la consultation ou de la mise à jour d’une version finale du fichier XML, le fichier doit être chargé en format .xml.</li>
         </ul>
         <p class="fn-rtn"><a href="#dr1_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>1
             <span class="wb-inv"> referrer</span></a>
@@ -15,8 +15,8 @@
         <p>{{::'DRUG_PRODUCT'|translate}}</p>
         <ul>
             <li> Veuillez inclure seulement les renseignements pertinents à cette activité de réglementation (c.-à-d., si le dossier comporte cinq formes posologiques, mais que cette activité de réglementation ne s’applique qu’à l’une d’entre elles, indiquez seulement la formulation correspondante à cette forme posologique dans cette version du fichier d’information sur le produit en format XML).</li>
-            <li>Pour "<b>obtenir l’ID d’entreprise</b>", consultez la version définitive du fichier d’entreprise (en format XML) délivré par Santé Canada.</li>
-            <li>Pour "<b>obtenir l’ID du dossier</b>", consultez la version définitive du fichier XML ou tout autre document délivré par Santé Canada. L’ID du dossier est composé d’une lettre suivie de six chiffres. (p. ex., HC6-024-x######).</li>
+            <li>Pour "<b>obtenir l’ID d’entreprise</b>", consultez la version finale du fichier d’entreprise (en format XML) délivré par Santé Canada.</li>
+            <li>Pour "<b>obtenir l’ID du dossier</b>", consultez la version finale du fichier XML ou tout autre document délivré par Santé Canada. L’ID du dossier est composé d’une lettre suivie de six chiffres. (p. ex., HC6-024-x######).</li>
             <li>Remarque : Toute section comportant un bouton « Enregistrer » doit être sauvegardée individuellement. Autrement, l’information incomplète sera perdue.</li>
         </ul>
         <p class="fn-rtn"><a href="#dr2_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>2
@@ -51,7 +51,7 @@
     <dd id="dr5">
         <p>{{::'ADDRESS_NOC'|translate}}</p>
         <ul>
-            <li>Si les FDM et les AC doivent être envoyés au fabricant, au promoteur ou à l’importateur, il faut s’assurer que les renseignements fournis dans la version définitive du fichier d’entreprise (en format XML) sont à jour. </li>
+            <li>Si les FDM et les AC doivent être envoyés au fabricant, au promoteur ou à l’importateur, il faut s’assurer que les renseignements fournis dans la version finale du fichier d’entreprise (en format XML) sont à jour. </li>
             <li>De plus, il faut s’assurer que les importateurs concernés sont nommés à la section 6 ci-dessous.</li>
             <li>Si les FDM et les AC doivent être envoyés à la personne-ressource associée à cette activité de réglementation, le nom indiqué dans le dernier fichier de transaction réglementaire (en format XML) pour cette activité sera utilisé. </li>
         </ul>
@@ -64,8 +64,8 @@
         <p>{{'IMPORTER'|translate}}</p>
         <ul>
             <li>Lorsque le fabricant ou le promoteur n’est pas situé au Canada, un importateur canadien doit être nommé. </li>
-            <li>Pour obtenir l’ID d’entreprise de l’importateur, consultez la version définitive du fichier d’entreprise délivré par Santé Canada.</li>
-            <li>Indiquez seulement les importateurs associés aux DIN indiqués dans la section ci-dessous.</li>
+            <li>Pour obtenir l’ID d’entreprise de l’importateur, consultez la version finale du fichier d’entreprise délivré par Santé Canada.</li>
+            <li>L’ID d’entreprise doit être composé de 5 chiffres -  ajouter un zéro à la place, si nécessaire.</li>
         </ul>
         <p class="fn-rtn"><a href="#dr6_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>6
             <span class="wb-inv"> referrer</span></a>
@@ -163,7 +163,7 @@
     <dt>9c4</dt>
     <dd id="dr9c4">
         <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'STANDARD'|translate}}</p>
-        <p>Lorsque la norme de fabrication d’un ingrédient est conforme à une norme officinale mentionnée à l’annexe B, utilisez l’abréviation de cette pharmacopée; p. ex., United States Pharmacopeia (USP), British Pharmacopoeia (BP). Lorsque les spécifications régissant la fabrication de l’ingrédient s’écartent de la norme officinale, l’excèdent ou sont équivalentes à la même, la norme du fabricant (Mfr Std) peut être indiquée. Veuillez inscrire S.O. si aucune norme officinale n’existe pour l’ingrédient actif.
+        <p>Lorsque la norme de fabrication d’un ingrédient est conforme à une norme officinale mentionnée à l’annexe B, utilisez l’abréviation de cette pharmacopée; p. ex., United States Pharmacopeia (USP), British Pharmacopoeia (BP). Lorsque les spécifications régissant la fabrication de l’ingrédient s’écartent de la norme officinale, et l’excèdent ou sont équivalentes à la même, la norme du fabricant (Mfr Std) peut être indiquée. Veuillez inscrire S.O. si aucune norme officinale n’existe pour l’ingrédient actif.
         </p>
         <p class="fn-rtn"><a href="#dr9c4_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9.2.4
             <span class="wb-inv"> referrer</span></a>
@@ -211,7 +211,7 @@
         <ul>
             <li>Indiquez le Chemical Abstracts Service (CAS) (le cas échéant), le nom du matériel et la norme pour le matériel d’origine humaine ou animale (autre que l’ingrédient figurant dans la formulation ci-dessus) utilisé dans la fabrication du produit.
             </li>
-            <li>Sélectionnez l’option « Oui » pour la question « Présence dans le récipient final » si l’ingrédient est présent dans le récipient final (selon la norme de qualité applicable au produit).</li>
+            <li>Sélectionnez l’option « Oui » pour la question « Présence dans le contenant final » si l’ingrédient est présent dans le récipient final (selon la norme de qualité applicable au produit).</li>
         </ul>
         <p class="fn-rtn"><a href="#dr9d_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9.3
             <span class="wb-inv"> referrer</span></a>
@@ -234,7 +234,7 @@
     <dt>9e2</dt>
     <dd id="dr9e2">
         <p>{{'PACKAGE_SIZE'|translate}}</p>
-        <p>Les différents formats pour le type de récipient peuvent être indiqués comme suit: </p>
+        <p>Les différents formats pour le type de contenant peuvent être indiqués comme suit: </p>
         <ul>
             <li>FLACON – 30</li>
             <li>CARTONS – 30, 100</li>
@@ -246,7 +246,7 @@
     <dt>9e3</dt>
     <dd id="dr9e3">
         <p>{{'SHELF_LIFE'| translate}}</p>
-        <p> La date de péremption ou la durée de conservation recommandée correspond à la période, en années et en mois, pendant laquelle le produit pharmaceutique conserve son activité, sa pureté et ses caractéristiques physiques indiquées sur l’étiquette.
+        <p> La date de péremption ou la durée de vie recommandée correspond à la période, en années et en mois, pendant laquelle le produit pharmaceutique conserve son activité, sa pureté et ses caractéristiques physiques indiquées sur l’étiquette.
         </p>
         <p class="fn-rtn"><a href="#dr9e3_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9.4.3
             <span class="wb-inv"> referrer</span></a>
@@ -283,7 +283,7 @@
     <dd id="dr11">
         <p>{{::'APPROVE_FINAL' |translate}}</p>
         <ul>
-            <li>Vous pouvez inclure une version définitive du fichier d’information sur le produit (en format XML) dans le dossier 1.2.1 de votre transaction du PIR.
+            <li>Vous pouvez inclure une version finale du fichier d’information sur le produit (en format XML) dans le dossier 1.2.1 de votre transaction du PIR.
             </li>
             <li>Consultez les lignes directrices du PIR pour obtenir des renseignements détaillés sur son implantation.</li>
         </ul>

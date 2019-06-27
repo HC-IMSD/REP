@@ -17,10 +17,10 @@
                                type="alert-info">
                         <section>
                             <div data-ng-if="!main.isFrench()"
-                                 ng-include="'app/scripts/templates/activity/tpl-activity-file-en.html'">
+                                 data-ng-include="'app/scripts/templates/activity/tpl-activity-file-en.html'">
                             </div>
                             <div data-ng-if="main.isFrench()"
-                                 ng-include="'app/scripts/templates/activity/tpl-activity-file-fr.html'">
+                                 data-ng-include="'app/scripts/templates/activity/tpl-activity-file-fr.html'">
                             </div>
                         </section>
                     </cmp-alert>
@@ -51,10 +51,10 @@
                                    type="alert-info">
                             <section>
                                 <div data-ng-if="!main.isFrench()"
-                                     ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-en.html'">
+                                     data-ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-en.html'">
                                 </div>
                                 <div data-ng-if="main.isFrench()"
-                                     ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-fr.html'">
+                                     data-ng-include="'app/scripts/templates/activity/tpl-activity-enrolment-fr.html'">
                                 </div>
                             </section>
                         </cmp-alert>
@@ -205,10 +205,10 @@
                             <cmp-alert ui-state="main.alerts[2]" msg="REASON_INSTRUCT" update-state="main.closeAlert(2)"
                                        type="alert-info">
                                 <div data-ng-if="!main.isFrench()"
-                                     ng-include="'app/scripts/templates/activity/tpl-activity-reason-filing-en.html'">
+                                     data-ng-include="'app/scripts/templates/activity/tpl-activity-reason-filing-en.html'">
                                 </div>
                                 <div data-ng-if="main.isFrench()"
-                                     ng-include="'app/scripts/templates/activity/tpl-activity-reason-filing-fr.html'">
+                                     data-ng-include="'app/scripts/templates/activity/tpl-activity-reason-filing-fr.html'">
                                 </div>
                             </cmp-alert>
                         </div>
@@ -315,10 +315,10 @@
                             <cmp-alert ui-state="main.alerts[3]" msg="ADMIN_COMP_INSTRUCT" update-state="main.closeAlert(3)"
                                        type="alert-info">
                                 <div data-ng-if="!main.isFrench()"
-                                     ng-include="'app/scripts/templates/activity/tpl-activity-admin-comp-en.html'">
+                                     data-ng-include="'app/scripts/templates/activity/tpl-activity-admin-comp-en.html'">
                                 </div>
                                 <div data-ng-if="main.isFrench()"
-                                     ng-include="'app/scripts/templates/activity/tpl-activity-admin-comp-fr.html'">
+                                     data-ng-include="'app/scripts/templates/activity/tpl-activity-admin-comp-fr.html'">
                                 </div>
                             </cmp-alert>
                         </div>
@@ -346,77 +346,77 @@
                                 <div data-ng-if="!main.isFrench()" data-ng-switch="main.activityRoot.subType.id">
                                     <div data-ng-switch-when="MANUFACT_NAME_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-en.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="PRODUCT_NAME_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-en.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-en.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="OWNERSHIP_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-en.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="MERGER">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-mab-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-mab-en.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="LICENGSING">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-licensing-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-licensing-en.html'"></div>
                                     </div>
                                     <div ng-switch-when="POSTAUTH_LABEL_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-en.html'"></div>
                                     </div>
                                     <div ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-update-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-update-en.html'"></div>
                                     </div>
                                     <div ng-switch-when="ADDITIONAL_PRODUCT_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-additional-en.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-additional-en.html'"></div>
                                     </div>
                                 </div>
                                 <div data-ng-if="main.isFrench()" ng-switch="main.activityRoot.subType.id">
                                     <div data-ng-switch-when="MANUFACT_NAME_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-manu-name-change-fr.html'"></div>
                                     </div>
                                     <div ng-switch-when="PRODUCT_NAME_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-product-name-change-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="PRODUCT_MANUFACT_NAME_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-manuorname-change-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="OWNERSHIP_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-ownership-change-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="MERGER">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-mab-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-mab-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="LICENGSING">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-licensing-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-licensing-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="POSTAUTH_LABEL_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-labelling-change-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="POSTAUTH_CHEMISTRY_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-update-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-update-fr.html'"></div>
                                     </div>
                                     <div data-ng-switch-when="ADDITIONAL_PRODUCT_CHGE">
                                         <div aria-live="assertive"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-additional-fr.html'"></div>
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-additional-fr.html'"></div>
                                     </div>
                                 </div>
                             </div>
@@ -438,10 +438,10 @@
                                     <cmp-alert ui-state="main.alerts[4]" msg="ADDR_INSTRUCT" update-state="main.closeAlert(4)"
                                                type="alert-info">
                                         <div data-ng-if="!main.isFrench()"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-address-sent-en.html'">
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-address-sent-en.html'">
                                         </div>
                                         <div data-ng-if="main.isFrench()"
-                                             ng-include="'app/scripts/templates/activity/tpl-activity-address-sent-fr.html'">
+                                             data-ng-include="'app/scripts/templates/activity/tpl-activity-address-sent-fr.html'">
                                         </div>
                                     </cmp-alert>
                                 </div>
@@ -536,10 +536,10 @@
                                        update-state="main.closeAlert(5)" type="alert-info">
                                 <section>
                                     <div data-ng-if="!main.isFrench()"
-                                         ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-en.html'">
+                                         data-ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-en.html'">
                                     </div>
                                     <div data-ng-if="main.isFrench()"
-                                         ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-fr.html'">
+                                         data-ng-include="'app/scripts/templates/activity/tpl-activity-rep-contact-fr.html'">
                                     </div>
                                 </section>
                             </cmp-alert>
@@ -582,10 +582,10 @@
                     <cmp-alert ui-state="main.alerts[6]" msg="SAVE_INSTRUCT" update-state="main.closeAlert(6)"
                                type="alert-info">
                         <div data-ng-if="!main.isFrench()"
-                             ng-include="'app/scripts/templates/activity/tpl-activity-save-en.html'">
+                             data-ng-include="'app/scripts/templates/activity/tpl-activity-save-en.html'">
                         </div>
                         <div data-ng-if="main.isFrench()"
-                             ng-include="'app/scripts/templates/activity/tpl-activity-save-fr.html'">
+                             data-ng-include="'app/scripts/templates/activity/tpl-activity-save-fr.html'">
                         </div>
                         </section>
                     </cmp-alert>

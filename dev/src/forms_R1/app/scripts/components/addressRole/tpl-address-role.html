@@ -13,7 +13,7 @@
 
         <div data-ng-if="!ar.isContact">
             <input id="{{::ar.roleMissingId}}" type="hidden" name="{{::ar.roleMissingId}}"
-                   data-ng-model="ar.isSelected" required/>
+                   data-ng-model="ar.isSelected" data-ng-required="true"/>
             <strong id="address-role-error" class="error" data-ng-show="ar.showErrorMissing()">
                         <span class="label label-danger" data-ng-messages="ar.roleForm.{{::ar.roleMissingId}}.$error">
                             <span data-ng-message="required">{{::"MSG_ERR_MAND"|translate}}</span>
@@ -22,7 +22,7 @@
         </div>
         <div data-ng-if="ar.isContact">
             <input id="{{::ar.contactRoleMissingId}}" type="hidden" name="{{::ar.contactRoleMissingId}}"
-                   data-ng-model="ar.isSelected" required/>
+                   data-ng-model="ar.isSelected" data-ng-required="true"/>
             <strong id="contact-role-error" class="error" data-ng-show="ar.showErrorMissing()">
                         <span class="label label-danger" data-ng-messages="ar.roleForm.{{::ar.contactRoleMissingId}}.$error">
                             <span data-ng-message="required">{{::"MSG_ERR_MAND"|translate}}</span>
@@ -30,8 +30,8 @@
             </strong>
         </div>
         <div class="row">
-            <div class="col-sm-4">
-                <div class="checkbox" id="chk-manufacturer">
+            <div class="col-sm-5">
+                <div class="checkbox">
                     <label for="{{::ar.chkManuId}}">
                         <input type="checkbox" data-ng-model="ar.roleModel.manufacturer" name="manufacturer"
                                data-ng-change="ar.updateOtherState(ar.roleForm.manufacturer,'manufacturer')"
@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-5">
                 <div class="checkbox">
                     <label for="{{::ar.chkBillId}}">
                         <input type="checkbox" name="billing" data-ng-model="ar.roleModel.billing"

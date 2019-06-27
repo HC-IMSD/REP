@@ -1,8 +1,8 @@
 <div>
-    <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="expand-table-{{::$id}}">
+    <table class="table dataTable table-bordered table-hover table-condensed table-striped" id="{{::expandTblCtrl.preId}}{{::$id}}">
         <thead>
         <tr>
-            <td aria-label="Expanded State" scope="col" style="color:transparent;width:2%;"></td>
+            <th aria-label="Expanded State" data-scope="col" style="color:transparent;width:2%;"></th>
             <th scope="col" data-ng-repeat="heading in expandTblCtrl.columnDefinitions" style="{{::heading.width}}%">{{::heading.label |translate}}</th>
             <!-- <th scope="col" ng-if="!expandTblCtrl.disableErrorCol">{{::'ERRORS'|translate}}</th>-->
         </tr>

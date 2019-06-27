@@ -18,10 +18,10 @@
                         <cmp-alert  ui-state="cspApplCtrl.alerts[1]" msg="APPLICANT_CLOSE" update-state="cspApplCtrl.toggleAlert(1)" type="alert-info">
                             <section aria-live="assertive">
                                 <div data-ng-if="!cspApplCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/csp/tpl-csp-billing-en.html'">
+                                     data-ng-include="'app/scripts/templates/csp/tpl-csp-billing-en.html'">
                                 </div>
                                 <div data-ng-if="cspApplCtrl.isFrench()"
-                                     ng-include="'app/scripts/templates/csp/tpl-csp-billing-fr.html'">
+                                     data-ng-include="'app/scripts/templates/csp/tpl-csp-billing-fr.html'">
                                 </div>
                             </section>
                         </cmp-alert>
@@ -63,10 +63,10 @@
                 <cmp-alert  ui-state="cspApplCtrl.alerts[0]" msg="APPLICANT_CLOSE" update-state="cspApplCtrl.toggleAlert(0)" type="alert-info">
                     <section aria-live="assertive">
                         <div data-ng-if="!cspApplCtrl.isFrench()"
-                             ng-include="'app/scripts/templates/csp/tpl-csp-applicant-en.html'">
+                             data-ng-include="'app/scripts/templates/csp/tpl-csp-applicant-en.html'">
                         </div>
                         <div data-ng-if="cspApplCtrl.isFrench()"
-                             ng-include="'app/scripts/templates/csp/tpl-csp-applicant-fr.html'">
+                             data-ng-include="'app/scripts/templates/csp/tpl-csp-applicant-fr.html'">
                         </div>
                     </section>
                 </cmp-alert>
