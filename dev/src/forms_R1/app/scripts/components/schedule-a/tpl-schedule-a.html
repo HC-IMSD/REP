@@ -35,10 +35,10 @@
                                             <cmp-error-message field-name="schedACtrl.oneSchedId"
                                                                form-ref="schedACtrl.schedAForm"
                                                                show-error="schedACtrl.showError(schedACtrl.schedAForm[schedACtrl.oneSchedId])"
-                                                               error-types="schedACtrl.oneRequired"></cmp-error-message>
+                                                               error-types="schedACtrl.requiredOnly"></cmp-error-message>
                  <input type="hidden" class="form-control" id="{{::schedACtrl.oneSchedId}}"
                         name="{{::schedACtrl.oneSchedId}}"
-                        data-ng-model="schedACtrl.isClaim" aria-hidden="true" />
+                        data-ng-model="schedACtrl.isClaim" aria-hidden="true" required/>
 
                     </span></label>
                                     <div class="row checkbox">

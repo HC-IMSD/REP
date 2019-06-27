@@ -17,7 +17,7 @@
   "ADD_RECORD" : "Ajouter un enregistrement",
   "SAVE_RECORD":"Enregistrer",
   "DELETE_RECORD":"Supprimer l'enregistrement",
-  "COPY_RECORD" :"fr_Copy Record",
+  "COPY_RECORD" :"Copier",
   "DISCARD_CHANGES": "Éliminer les modifications",
   "REPSECONDARY": "Personne-resource supplémentaire pour le processus d'inscription réglemetaire",
   "REPPRIMARY": "Personne-resource principale pour le processus d'inscription réglemetaire",

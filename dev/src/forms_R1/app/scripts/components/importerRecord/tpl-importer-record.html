@@ -83,13 +83,8 @@
                 <input type="text" id="{{::importerRecCtrl.countryId}}" name="{{::importerRecCtrl.countryId}}"
                        data-ng-model="importerRecCtrl.model.countryHtml"
                        value="importerRecCtrl.model.countryHtml"
-                       data-ng-blur="importerRecCtrl.countryChange()" list="countryList" required
+                       data-ng-readonly="true" required
                        class="rep-selectize-font rep-selectize-dropdown form-control"/>
-                <datalist id="countryList" class="rep-selectize-dropdown rep-selectize-font">
-                    <option data-ng-repeat="countryRecord in importerRecCtrl.countryList"
-                            value="{{countryRecord[importerRecCtrl.lang]}}"
-                            label="{{countryRecord[importerRecCtrl.lang]}}"/>
-                </datalist>
             </div>
         </div>
         <div class="row">

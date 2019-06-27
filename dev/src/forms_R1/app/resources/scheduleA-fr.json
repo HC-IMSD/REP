@@ -31,6 +31,6 @@
   "SCHEDA_CLAIMS":"Indiquer les allégations et indications de l’annexe A associées avec ce produit",
   "SCHEDA_DISEASE": "Cochez la maladie ou le trouble visé par les allégations (au moins une)",
   "ISSCHEDA": "Ce médicament en vente libre auquel une ou plusieurs allégations de l’annexe A s’appliquent",
-  "SCHEDA_DETAILS":"fr_Schedule A Claim Details"
+  "SCHEDA_DETAILS":"Annexe A détails des allégations"
 
 }

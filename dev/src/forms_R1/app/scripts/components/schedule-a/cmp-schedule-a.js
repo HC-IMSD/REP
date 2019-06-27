@@ -182,8 +182,8 @@
             vm.thyroidId="thyroid_disease"+ scopeId;
             vm.ulcerGssId="ulcer_gastro"+ scopeId;
             vm.schedIndId="scheda_claims"+ scopeId;
-            vm.oneSchedId="msg_one_scheda"+ scopeId;
-            vm.fsId="fs_schedAMissing"+scopeId;
+            vm.oneSchedId="scheda_disease"+ scopeId;
+            vm.fsId="scheda_disease"+scopeId;
             vm.dinId="sched_din"+scopeId;
         }
     }

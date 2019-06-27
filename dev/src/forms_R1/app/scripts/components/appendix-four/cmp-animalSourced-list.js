@@ -97,7 +97,7 @@
             vm.isDetailValid = value;
         };
         vm.addNew = function() {
-            var maxID = getMaxID();
+            var maxID = Number(getMaxID());
             var item = {"id": maxID + 1, "animalType": "",animalDetail:""}; //TODO call a service for this
             vm.model.animalSrcList.push(item);
             // vm.resetToCollapsed= !vm.resetToCollapsed;

@@ -29,8 +29,12 @@
                 <legend class="required legend-rep">
                     <span class="field-name">{{'SOURCED'|translate}}</span>
                     <strong class="required"> {{"REQUIRED" |translate}}</strong>
-                    <input id="{{::ap4RecCtrl.oneTypeId}}" name="{{::ap4RecCtrl.oneTypeId}}" type="hidden"
-                           data-ng-model="ap4RecCtrl.isSourced"/>
+                    <cmp-error-message field-name="ap4RecCtrl.fsType"
+                                       form-ref="ap4RecCtrl.appendix4RecForm"
+                                       show-error="ap4RecCtrl.showErrors()"
+                                       error-types="ap4RecCtrl.requiredOnly"></cmp-error-message>
+                    <input id="{{::ap4RecCtrl.oneTypeId}}" name="{{::ap4RecCtrl.fsType}}" type="hidden"
+                           data-ng-model="ap4RecCtrl.isSourced" required/>
                 </legend>
                 <div class="row">
                     <div class="col-xs-2">

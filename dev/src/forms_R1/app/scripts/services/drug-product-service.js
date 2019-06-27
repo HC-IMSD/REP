@@ -522,7 +522,7 @@
                 } else {
                     obj.routeAdmins = [];
                 }
-                if (item.country_group && item.country_group.country_manufacturer) {
+                if (item.country_group && item.country_group.country_manufacturer && item.country_group.country_manufacturer[0] && item.country_group.country_manufacturer[0]._id) {
                     obj.countryList = getFormulationCountryList(item.country_group.country_manufacturer);
                 } else {
                     obj.countryList = [];

@@ -42,9 +42,13 @@
             importerName: "",
             street: "",
             city: "",
-            country: "",
-            countryHtml: "",
-            countryDisplay:"",
+            country: {
+                "id": "CAN",
+                "en": "Canada",
+                "fr": "Canada"
+            },
+            countryHtml: "Canada",
+            countryDisplay:"CAN",
             stateLov: "",
             stateText: "",
             postalCode: ""
@@ -52,7 +56,7 @@
 
         vm.canadianPostalCodePattern = '^(?!.*[DFIOQU])[A-VXYa-vxy][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
-        vm.hideProvinceText = false;
+        vm.hideProvinceText = true;
         vm.updateSummary=0; //triggers and error summary update
         vm.countryList= getCountryAndProvinces.getCountries();
         vm.fdId="";
@@ -73,7 +77,7 @@
                 vm.postalLabel = getPostalLabel();
                 vm.isPostalRequired = isPostalRequiredFn();
                 vm.provinces = getProvinceStateList();
-                vm.hideProvinceText = getProvinceTextState();
+                // vm.hideProvinceText = getProvinceTextState();
                 vm.postalPattern = getPostalPattern();
                 vm.hideProvinceDdl = !vm.hideProvinceText;
             }

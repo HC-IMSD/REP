@@ -113,7 +113,7 @@
             var scopeId = "_" + $scope.$id;
             vm.roleMissingId = "roleMissing" + scopeId;
             vm.systemRoleId = "cardio_legend" + scopeId;
-            vm.otherDetailsId = "cardio_other_details" + scopeId;
+            vm.otherDetailsId = "cardio_details" + scopeId;
         }
 
     }

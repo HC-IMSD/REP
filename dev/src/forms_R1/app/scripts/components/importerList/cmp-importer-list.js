@@ -39,12 +39,17 @@
             {
                 label: "IMPORTERID",
                 binding: "importerId",
-                width: "20"
+                width: "10"
             },
             {
                 label: "IMPORTER_COMPANY_NAME",
                 binding: "importerName",
-                width: "80"
+                width: "40"
+            },
+            {
+                label: "STREET",
+                binding: "street",
+                width: "50"
             }
         ];
 
@@ -53,9 +58,13 @@
             importerName: "",
             street: "",
             city: "",
-            country: "",
-            countryHtml: "",
-            countryDisplay:"",
+            country: {
+                "id": "CAN",
+                "en": "Canada",
+                "fr": "Canada"
+            },
+            countryHtml: "Canada",
+            countryDisplay:"CAN",
             stateLov: "",
             stateText: "",
             postalCode: ""
