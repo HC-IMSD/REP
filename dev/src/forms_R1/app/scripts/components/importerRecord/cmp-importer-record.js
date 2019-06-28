@@ -228,11 +228,11 @@
                     vm.onUpdate({importer: vm.model});
                 }
                 vm.importerForm.$setPristine();
-                vm.showSummary=false;
+                vm.showDetailErrors=false;
                 vm.updateErrorSummaryState();
 
             } else {
-                vm.showSummary=true;
+                vm.showDetailErrors=true;
                 //vm.makeFocused();
                 vm.updateErrorSummaryState();
             }
