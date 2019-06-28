@@ -17,7 +17,7 @@
   "NO_THERAVAL": "Au moins une classification thérapeutique est requise",
   "NO_TISSUE": "Au moins une source de tissu ou de fluide est requise",
   "MSG_ERR_ONE_COUNTRY": "fr_At least one country of origin is required",
-  "MSG_ERR_ONE_TISSUE": "fr_Require at least one Tissue or fluid source",
+  "MSG_ERR_ONE_TISSUE": "Au moins une source de tissu ou de fluide est requise",
   "MSG_ERR_ONE_CNTRY_ORIGIN": "fr_At least one Country of origin is required",
   "MSG_ERR_ONE_CDN_REF": "fr_At least one Canadian Reference product is required",
   "MSG_ERR_INVALID_NUM_MIN": "La valeur doit être supérieure à -273",

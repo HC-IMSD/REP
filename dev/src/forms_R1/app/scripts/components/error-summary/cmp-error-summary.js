@@ -178,6 +178,16 @@
         };
 
         /**
+         * Checks if an error points to a list
+         *
+         * @param errorRecord
+         * @returns {boolean|*}
+         */
+        vm.isList=function(errorRecord){
+            return(errorRecord.name.indexOf('list_') >= 0);
+        }
+
+        /**
          * Checks if an error reoord is a summary in a tab. If true, need to click the tab first before focussing on the summary
          * @param errorRecord
          * @returns {boolean|*}
@@ -307,7 +317,7 @@
                         angular.merge(resultsList,_createExpanderRecord(record[j].$name,transcludeName,keys[i],parent,expandIndex));
                     }
                     else if (record[j].$invalid === true && !resultsList.hasOwnProperty(record[j].$name)) {
-                        var result = _processRecord(record[j].$name, keys[i], parent)
+                        var result = _processRecord(record[j].$name, keys[i], parent);
                         angular.merge(resultsList, result);
                     }
                 }
