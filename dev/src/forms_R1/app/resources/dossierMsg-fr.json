@@ -6,14 +6,14 @@
   "MSG_ERR_DRUG_USE": "fr_At least one drug use must be selected",
   "MSG_ONE_SCHEDA": "fr_At least one disease or disorder must be selected",
   "MSG_IS_REQUIRED": "fr_is a required field.",
-  "MSG_ERR_INVALID_NUM": "Il ne s’agit pas d’un numéro valide.",
+  "MSG_ERR_INVALID_NUM": "Il ne s’agit pas d’un numéro valide",
   "NO_ANIMAL": "At moins une source animale doit être sélectionnée",
-  "NO_ACTIVE": "Au moins un ingrédient médicinal actif est nécessaire.",
-  "NO_CONTAINER":"Au moins un type de récipient est requis.",
+  "NO_ACTIVE": "Au moins un ingrédient médicinal actif est nécessaire",
+  "NO_CONTAINER":"Au moins un type de contenant est requis",
   "NO_FORMULATION": "fr_At least one formulation is required.",
-  "NO_COUNTRY": "Au moins un enregistrement de pays de fabrication est requis",
+  "NO_COUNTRY": "Au moins un pays de fabrication est requis",
   "NO_COUNTRY_ORIGIN": "Au moins un pays d’origine est requis",
-  "NO_ROA": "fr_At least one Route of Administation is required",
+  "NO_ROA": "Au moins une voie d'administration est requise",
   "NO_THERAVAL": "Au moins une classification thérapeutique est requise",
   "NO_TISSUE": "Au moins une source de tissu ou de fluide est requise",
   "MSG_ERR_ONE_COUNTRY": "fr_At least one country of origin is required",
@@ -23,5 +23,6 @@
   "MSG_ERR_INVALID_NUM_MIN": "La valeur doit être supérieure à -273",
   "MSG_ERR_INVALID_NUM_MAX": "La valeur doit être inférieure à 999",
   "MSG_ERR_INVALID_NUM_MIN0": "La valeur doit être supérieure ou égale à 0",
-  "MSG_TISSUE_SYS_USED": "Ce système a déjà été sélectionné, veuillez en sélectionner un autre."
+  "MSG_ERR_INVALID_NUM_MIN_LOWER": "La valeur doit être égale ou supérieure à la limite inférieure",
+  "MSG_TISSUE_SYS_USED": "Ce système a déjà été sélectionné, veuillez en sélectionner un autre"
 }

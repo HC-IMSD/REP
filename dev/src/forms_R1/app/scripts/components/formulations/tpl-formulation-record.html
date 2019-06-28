@@ -121,7 +121,7 @@
                                        form-ref="formulRecCtrl.formulationForm"
                                        show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
                                        error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-                        <select id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" data-ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" ng-required="true"
+                        <select id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" data-ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" data-ng-required="true"
                                 class="form-control" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}"
                                 data-ng-options="val |translate for val in  formulRecCtrl.yesNoList">
                             <option value="" label=" " />
@@ -182,7 +182,7 @@
                     </header>
                     <div class="panel-body">
                         <input type="hidden" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
-                                 aria-hidden="true" data-ng-model="formulRecCtrl.noCountries"/>
+                                 aria-hidden="true" data-ng-model="formulRecCtrl.noCountries" required/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" with-unknown="false"
                                           on-update="formulRecCtrl.updateCountryList(list)"
                                           show-errors="formulRecCtrl.showSummary"
