@@ -96,8 +96,9 @@
             if(found){
                 vm.clearFilter($scope);
                 vm.resetMe();
-            // } else {
-            //     vm.onError();
+            } else {
+                vm.model.display = "";
+                vm.model.roa = "";
             }
         };
 
@@ -107,11 +108,11 @@
         };
 
         vm.showError = function (ctrl) {
-            if(!ctrl || vm.model.display == "") return false;
-            if(vm.model.roa == ""){
-                ctrl.$invalid = false;
-                return true;
-            }
+            if(!ctrl) return false;
+            // if(vm.model.roa == ""){
+            //     ctrl.$invalid = false;
+            //     return true;
+            // }
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
         vm.isRoaOther = function () {
