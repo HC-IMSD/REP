@@ -116,6 +116,18 @@
                     case 'B02-20160301-070': //PDC
                         newList.push(raList[i]);
                         break;
+                    case 'B02-20190627-07': //EUANDS
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-08': //EUSANDS
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20160819-01': //Post-DIN
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-06': //SANDS-C
+                        newList.push(raList[i]);
+                        break;
                 }
             }//for
             return newList;
@@ -200,6 +212,15 @@
                     case 'B02-20160301-071': //PDC-B
                         newList.push(raList[i]);
                         break;
+                    case 'B02-20190627-07': //EUANDS
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-08': //EUSANDS
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-06': //SANDS-C
+                        newList.push(raList[i]);
+                        break;
                 }
             }//for
             return newList;
@@ -225,7 +246,19 @@
                     case 'B02-20160301-080': //RMP-PV
                         newList.push(raList[i]);
                         break;
-                    case 'B02-20160301-087': //UD-PV
+                    case 'B02-20190627-01': //IRSRPV
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-02': //PA-PV
+                        newList.push(raList[i]);
+                        break;
+                    case '02-20190627-03': //PSA-PV
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-04': //RC-PV
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-05': //REG-PV
                         newList.push(raList[i]);
                         break;
                 }
@@ -315,6 +348,18 @@
                         newList.push(raList[i]);
                         break;
                     case 'B02-20160301-070': //PDC
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-07': //EUANDS
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-08': //EUSANDS
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20160819-01': //Post-DIN
+                        newList.push(raList[i]);
+                        break;
+                    case 'B02-20190627-06': //SANDS-C
                         newList.push(raList[i]);
                         break;
                 }

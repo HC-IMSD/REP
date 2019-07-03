@@ -154,26 +154,45 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-md-12"
+                        <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId].$invalid}"
-                             data-ng-show="lifecycleCtrl.yearVisible">
+                             data-ng-if="lifecycleCtrl.yearVisible">
                             <label for="{{::lifecycleCtrl.yearId}}" class="required">
-                                <span class="field-name">{{::"YEAR_CHANGE" |translate}}</span>
+                                <span class="field-name">{{::"YEARS" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <sup id="tr10_ref">
-                                    <a class="fn-lnk" href="#tr10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>10</a>
-                                </sup>
                                 <cmp-error-message field-name="lifecycleCtrl.yearId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
                                                    show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearId])"
                                                    error-types="lifecycleCtrl.requiredOnly">
                                 </cmp-error-message>
                             </label>
-                            <textarea id="{{::lifecycleCtrl.yearId}}" name="{{::lifecycleCtrl.yearId}}"
+                            <input type="text" id="{{::lifecycleCtrl.yearId}}" name="{{::lifecycleCtrl.yearId}}"
                                           data-ng-model="lifecycleCtrl.lifecycleModel.year"
-                                          data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="800"
-                                          data-ng-required="lifecycleCtrl.yearVisible"
-                                          class="form-control full-width">
+                                          data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="4"
+                                          data-ng-required="lifecycleCtrl.yearVisible" data-only-digits
+                                          class="form-control">
+                            </input>
+                        </div>
+                        <div class="form-group col-md-12"
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearChangeId].$invalid}"
+                             data-ng-if="lifecycleCtrl.yearChangeVisible">
+                            <label for="{{::lifecycleCtrl.yearChangeId}}" class="required">
+                                <span class="field-name">{{::"YEAR_CHANGE" |translate}}</span>
+                                <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                <sup id="tr10_ref">
+                                    <a class="fn-lnk" href="#tr10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span>10</a>
+                                </sup>
+                                <cmp-error-message field-name="lifecycleCtrl.yearChangeId"
+                                                   form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                   show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.yearChangeId])"
+                                                   error-types="lifecycleCtrl.requiredOnly">
+                                </cmp-error-message>
+                            </label>
+                            <textarea id="{{::lifecycleCtrl.yearChangeId}}" name="{{::lifecycleCtrl.yearChangeId}}"
+                                      data-ng-model="lifecycleCtrl.lifecycleModel.year"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="800"
+                                      data-ng-required="lifecycleCtrl.yearChangeVisible"
+                                      class="form-control full-width">
                             </textarea>
                         </div>
                     </div>
