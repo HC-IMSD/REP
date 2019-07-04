@@ -103,7 +103,7 @@
   "ADV_COMP_REQ": "Advertising Complaint Request for Information",
   "CSOtRMP": "CSOtRMP (Canadian Specific Opioid RMP)",
   "DISSEM_LIST": "Dissemination List",
-  "FFOREIGN_SAFETY_NOTIFICATION": "Foreign Safety Action Notification",
+  "FOREIGN_SAFETY_NOTIFICATION": "Foreign Safety Action Notification",
   "ISSUE_SAFETY_REQUEST": "Issue Related Safety Request",
   "PATIENT_SAFETY_INFO": "Patient Safety Information (Medication error)",
   "PUB_RELEASE_INFO": "Public Release of Clinical Information",
