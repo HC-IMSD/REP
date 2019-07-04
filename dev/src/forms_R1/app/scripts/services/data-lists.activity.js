@@ -271,63 +271,6 @@
             ]);
         }
 
-        function getDINAArray() {
-
-            return ([
-                vm.allActivities.ADMINISTRATIVE, //administrative
-                vm.allActivities.CANCEL_LETTER, //cancellation letter
-                vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
-                vm.allActivities.INITIAL, //Initial
-                vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
-                vm.allActivities.PRESUB_MEETING_PKG, // presubmission meeting package
-                vm.allActivities.PRISTINE_PM, // Pris vm.allActivities.ine PM
-                vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
-                vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
-                vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
-                vm.allActivities.LABEL_CLARIF_RESPONSE, //Response to labelling clarification request
-                vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
-                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE, //Response to quality and Clinical clarification REquest
-                vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
-                vm.allActivities.SCREENING_ACCEPT_RESPONSE, //response to screening acceptance letter
-                vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
-                vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
-                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.NON_RESPONSE, //Response to NON
-                vm.allActivities.NOD_RESPONSE //Response to NOD
-                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
-            ]);
-
-
-        }
-
-        //note DINB is the same as DINA
-        function getDINBArray() {
-            return ([
-                vm.allActivities.ADMINISTRATIVE, //administrative
-                vm.allActivities.CANCEL_LETTER, //cancellation letter
-                vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
-                vm.allActivities.INITIAL, //Initial
-                vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
-                vm.allActivities.PRESUB_MEETING_PKG, // presubmission meeting package
-                // vm.allActivities.PRISTINE_PM, // Pristine PM
-                vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
-                vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
-                vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
-                vm.allActivities.LABEL_CLARIF_RESPONSE, //Response to labelling clarification request
-                vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
-                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE, //Response to quality and Clinical clarification REquest
-                vm.allActivities.QUAL_CLARIF_RESPONSE, //Response to Quality Clarification request
-                vm.allActivities.SCREENING_ACCEPT_RESPONSE, //response to screening acceptance letter
-                vm.allActivities.SCREENING_CLARIF_RESPONSE, // response to screening clarification request
-                vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
-                vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
-                vm.allActivities.NON_RESPONSE, //Response to NON
-                vm.allActivities.NOD_RESPONSE //Response to NOD
-                //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
-            ]);
-
-        }
-
         function getEUNDSArray() {
             return ([
                 vm.allActivities.ADMINISTRATIVE, //administrative
@@ -923,7 +866,7 @@
                 vm.allActivities.POST_CLEARANCE_DATA,
                 vm.allActivities.PRESUB_MEETING_PKG,
                 vm.allActivities.PRESUB_MEETING_RQ,
-                vm.allActivities.PRISTINE_PM,
+                // vm.allActivities.PRISTINE_PM,
                 vm.allActivities.PRISTINE_PM_2LANG,
                 vm.allActivities.RECON_DECIS_LTR_INTENT,
                 vm.allActivities.RECON_DECIS_RQ_RECON,
@@ -959,7 +902,7 @@
                 vm.allActivities.POST_CLEARANCE_DATA,
                 vm.allActivities.PRESUB_MEETING_PKG,
                 vm.allActivities.PRESUB_MEETING_RQ,
-                vm.allActivities.PRISTINE_PM,
+                // vm.allActivities.PRISTINE_PM,
                 vm.allActivities.PRISTINE_PM_2LANG,
                 vm.allActivities.RECON_DECIS_LTR_INTENT,
                 vm.allActivities.RECON_DECIS_RQ_RECON,
@@ -976,7 +919,7 @@
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA,
                 vm.allActivities.LABEL_PREAPPROVAL_2LANG,
-                vm.allActivities.YEAR_LIST_OF_CHANGE,
+                // vm.allActivities.YEAR_LIST_OF_CHANGE,
                 vm.allActivities.NON_RESPONSE, //Response to NON
                 vm.allActivities.NOD_RESPONSE //Response to NOD
                 //vm.allActivities.SEQUENCE_CLEANUP // Sequence cleanup as per email FEb 16, 2018
@@ -1055,7 +998,7 @@
                 vm.allActivities.MEETING_MINUTES,
                 vm.allActivities.POST_AUTH_DIV1_CHANGE,
                 vm.allActivities.POST_CLEARANCE_DATA,
-                vm.allActivities.PRISTINE_PM,
+                // vm.allActivities.PRISTINE_PM,
                 vm.allActivities.PRISTINE_PM_2LANG,
                 vm.allActivities.EMAIL_RQ_RESPONSE,
                 vm.allActivities.LABEL_CLARIF_RESPONSE,
@@ -1081,7 +1024,7 @@
                 vm.allActivities.MEETING_MINUTES,
                 vm.allActivities.POST_AUTH_DIV1_CHANGE,
                 vm.allActivities.POST_CLEARANCE_DATA,
-                vm.allActivities.PRISTINE_PM,
+                // vm.allActivities.PRISTINE_PM,
                 vm.allActivities.PRISTINE_PM_2LANG,
                 vm.allActivities.EMAIL_RQ_RESPONSE,
                 vm.allActivities.LABEL_CLARIF_RESPONSE,
@@ -1238,7 +1181,7 @@
                 vm.allActivities.COMMENTS_NOC, // comments on notice of decision
                 vm.allActivities.COMMENTS_SUMMARY_BASIS, //commments on summary basis,
                 vm.allActivities.DRUG_NOTIF_FORM, // drug notification form
-                vm.allActivities.INITIAL, //Initial
+                // vm.allActivities.INITIAL, //Initial
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
