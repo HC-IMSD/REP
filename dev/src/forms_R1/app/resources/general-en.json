@@ -82,7 +82,7 @@
   "LEAST_6_DIGIT":" (6 digits only)",
   "LEAST_5_DIGIT":" (5 digits only)",
   "INSTRUCTION":"Instruction",
-  "RETURN_INSTRUCTION":"Return to instruction",
+  "RETURN_INSTRUCTION":"Return to instruction ",
   "PRIVACY_NOTICE_STATEMENT":"Privacy Notice Statement",
   "PRIVACY_STATEMENT":"By submitting your personal information, you are consenting to its collection, use and disclosure in accordance with the Privacy Notice Statement.",
   "FOOTNOTE_INSTRUCTION":"Instructions for completing sections on form",
