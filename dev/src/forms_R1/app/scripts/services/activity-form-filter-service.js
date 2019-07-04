@@ -252,7 +252,7 @@
                     case 'B02-20190627-02': //PA-PV
                         newList.push(raList[i]);
                         break;
-                    case '02-20190627-03': //PSA-PV
+                    case 'B02-20190627-03': //PSA-PV
                         newList.push(raList[i]);
                         break;
                     case 'B02-20190627-04': //RC-PV
