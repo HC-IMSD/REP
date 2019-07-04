@@ -1,7 +1,7 @@
 {
   "APPL_STATUS": "Statut de l'insciption",
   "ENROL_VERSION": "Version de l'inscription",
-  "DATE_SAVED": "Date de la dernière enregistrement",
+  "DATE_SAVED": " Date du dernier enregistrement",
   "AMEND_ENROL": "Modifier l'inscription",
   "AMEND_MSG":"Changer les enregistrements à modifier ci-dessous.",
   "REASON_AMEND":"Raison pour la modification"

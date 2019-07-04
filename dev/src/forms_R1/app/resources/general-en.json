@@ -91,5 +91,6 @@
   "NOT_APPLICABLE": "Not applicable",
   "D21": "Biologic",
   "D22": "Pharmaceutical",
-  "BROWSER": "Browser"
+  "BROWSER": "Browser",
+  "TABLE_EXPANDED_STATE": "Expanded State"
 }

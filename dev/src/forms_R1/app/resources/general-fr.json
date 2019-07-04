@@ -4,7 +4,7 @@
   "ADD": "fr_Add",
   "DELETEROW": "fr_Delete Row",
   "SELECTEDROW": "fr_Selected Row",
-  "REQUIRED": "(requis)",
+  "REQUIRED": "(obligatoire)",
   "ROLES_SELECT": "fr_Select one or more roles for this record",
   "NEW": "Nouvelle",
   "AMEND": "Modification",
@@ -79,8 +79,8 @@
   "INCLUDE_AREA_CODE":" (y compris indicatif régional)",
   "LEAST_6_DIGIT":" (6 chiffres seulement)",
   "LEAST_5_DIGIT":" (5 chiffres seulement)",
-  "INSTRUCTION":"fr_Instruction",
-  "RETURN_INSTRUCTION":"fr_Return to instruction ",
+  "INSTRUCTION":"Instructions",
+  "RETURN_INSTRUCTION":"Retourne aux instructions ",
   "PRIVACY_STATEMENT_HELP":"fr_View Privacy Notice Statement",
   "PRIVACY_NOTICE_STATEMENT":"Énoncé de confidentialité",
   "PRIVACY_STATEMENT":"En soumettant vos renseignements personnels, vous consentez à sa collecte, à son utilisation et à sa divulgation conformément à l'énoncé de confidentialité.",
@@ -90,5 +90,7 @@
   "NOT_APPLICABLE": "fr_Not applicable",
   "D21": "Biologique",
   "D22": "Pharmaceutique",
-  "BROWSER": "Navigateur"
+  "BROWSER": "Navigateur",
+  "TABLE_EXPANDED_STATE": "État ouvert
+  "
 }

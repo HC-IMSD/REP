@@ -101,11 +101,11 @@
                 </div>
             </section>
             <div class="row form-group  col-md-12" data-ng-if="main.isExtern()">
-                    <div class="checkbox col-md-10">
+                    <div class="col-md-12">
                         <label for="{{::main.privacyStatementID |translate}}">
+                            <span style="color:red;">*&nbsp;</span>
                             <input type="checkbox"
                                    data-ng-model="main.privacyStat"
-                                   class="required"
                                    name="{{::main.privacyStatementID |translate}}"
                                    id="{{::main.privacyStatementID |translate}}"
                                    required />
