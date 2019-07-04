@@ -56,6 +56,7 @@
         vm.lifecycleModel = {};
         vm.endDateVisible = false;
         vm.yearVisible = false;
+        vm.yearChangeVisible = false;
         vm.requesterVisible = false;
        // vm.startDateVisible = false;
         vm.descriptionVisible = false;
@@ -166,7 +167,7 @@
                 vm.lifecycleModel.requesterName3 = vm.retrieveUser(vm.lifecycleModel.requesterName3Txt);
             }
 
-        }
+        };
 
         /**
          * Used as messaging to get the error summary to update itself
@@ -191,7 +192,7 @@
                 }
             }
             return userName;
-        }
+        };
 
 
 
@@ -209,7 +210,7 @@
         function _updateLocalModel(record) {
             vm.lifecycleModel = angular.copy(record);
             convertToDate();
-            vm.selectActivityLeadList()
+            vm.selectActivityLeadList();
             vm.setSequenceList();
             vm.setDetailsState();
             vm.selectActivityList();
@@ -345,10 +346,10 @@
                 case ("B02-20160301-051"): //NDS (New Drug Submission)
                     vm.descriptionList = TransactionLists.getNdsType();
                     break;
-               case ("B02-20160301-070"):
+                case ("B02-20160301-070"):
                     vm.descriptionList = TransactionLists.getPdcType();
                     break;
-             case ("B02-20160301-071"):
+                case ("B02-20160301-071"):
                     vm.descriptionList = TransactionLists.getPdcBType();
                     break;
                 case ("B02-20160301-067"): //PAND (Pandemic Application)
@@ -387,9 +388,6 @@
                 case ("B02-20160301-085"): //SNDS-C (Supplement to a New Drug Submission - Conditional)
                     vm.descriptionList = TransactionLists.getSndsCArray();
                     break;
-                case ("B02-20160301-087"): //UD-PV (Undefined Data Pharmacovigilance)
-                    vm.descriptionList = TransactionLists.getUdpvType();
-                    break;
                 case ("B02-20160301-088"): //UDRA (Undefined Regulatory Activity)
                     vm.descriptionList = TransactionLists.getUdraType();
                     break;
@@ -417,7 +415,33 @@
                 case ("B02-20160301-021"):
                     vm.descriptionList = TransactionLists.getDinfType();
                     break;
-
+                case ("B02-20190627-01"): //IRSRPV
+                    vm.descriptionList = TransactionLists.getIRSRPVType();
+                    break;
+                case ("B02-20190627-02"): //PA-PV
+                    vm.descriptionList = TransactionLists.getPAPVType();
+                    break;
+                case ("B02-20190627-03"): //PSA-PV
+                    vm.descriptionList = TransactionLists.getPSAPVType();
+                    break;
+                case ("B02-20190627-04"): //RC-PV
+                    vm.descriptionList = TransactionLists.getRCPVType();
+                    break;
+                case ("B02-20190627-05"): //REG-PV
+                    vm.descriptionList = TransactionLists.getREGPVType();
+                    break;
+                case ("B02-20190627-06"): //SANDS-C
+                    vm.descriptionList = TransactionLists.getSANDSCType();
+                    break;
+                case ("B02-20160819-01"): //Post-DIN
+                    vm.descriptionList = TransactionLists.getPostDINType();
+                    break;
+                case ("B02-20190627-07"): //EUANDS
+                    vm.descriptionList = TransactionLists.getEUANDSType();
+                    break;
+                case ("B02-20190627-08"): //EUSANDS
+                    vm.descriptionList = TransactionLists.getEUSANDSType();
+                    break;
 
                 default:
                     vm.descriptionList = "";
@@ -450,18 +474,21 @@
                 case(vm.descriptionObj.CHANGE_TO_DIN):          /*FALLTHROUGH*/
                 case(vm.descriptionObj.DIN_DISCONTINUED):       /*FALLTHROUGH*/
                 case(vm.descriptionObj.DRUG_NOTIF_FORM):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.FOREIGN_SAFETY_NOTIFICATION):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.INITIAL):                /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOTIFICATION_CHANGE):    /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOTIFICATION_INTERRUPT_SALE): /*FALLTHROUGH July 17,2017 added*/
                 case(vm.descriptionObj.PANDEMIC_APPL):          /*FALLTHROUGH*/
                 case(vm.descriptionObj.POST_CLEARANCE_DATA):    /*FALLTHROUGH*/
                 case(vm.descriptionObj.POST_MARKET_SURV):       /*FALLTHROUGH*/
-               // case(vm.descriptionObj.POST_NOC_CHANGE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.POST_AUTH_DIV1_CHANGE):  /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRESUB_MEETING_PKG):     /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRIORITY_REVIEW_RQ):     /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRISTINE_PM):            /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRISTINE_PM_2LANG):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.PUB_RELEASE_INFO):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.RESSESS_ORDER):      /*FALLTHROUGH*/
+                case(vm.descriptionObj.WRITTEN_CONSULT_REQ):      /*FALLTHROUGH*/
                 case(vm.descriptionObj.RECON_DECIS_LTR_INTENT):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.RECON_DECIS_RQ_RECON):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.RECON_DECIS_OTHER_INFO):  /*FALLTHROUGH Jul 17,2017 added*/
@@ -476,6 +503,8 @@
                 case(vm.descriptionObj.CONSENT_LTR):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.DATA_PROTECT_CORRESP):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.SEQUENCE_CLEANUP):     //FALLTHROUGHT FEB 16,2018
+                case(vm.descriptionObj.TEST_STUDIES_ORDER):     //FALLTHROUGHT
+                case(vm.descriptionObj.TERM_COND_COMM):     //FALLTHROUGHT
                     //nothing visible
                     setDetailsAsNone();
                     vm.setConcatDetails();
@@ -486,14 +515,14 @@
                 case(vm.descriptionObj.COMMENTS_REGULARTORY_DECISION):   /*FALLTHROUGH*/
                 case(vm.descriptionObj.MEETING_MINUTES):            /*FALLTHROUGH*/
                 case(vm.descriptionObj.ADVISEMENT_LETTER_RESPONSE):   /*FALLTHROUGH*/
-              //  case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):         /*FALLTHROUGH*/
-             //   case(vm.descriptionObj.EMAIL_RQ_RESPONSE):            /*FALLTHROUGH*/
+                case(vm.descriptionObj.ADV_COMP_REQ):           /*FALLTHROUGH*/
+                case(vm.descriptionObj.ISSUE_SAFETY_REQUEST):            /*FALLTHROUGH*/
                // case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.MHPD_RQ_RESPONSE):             /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOC_RESPONSE):                  /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOD_RESPONSE):                  /*FALLTHROUGH*/
                 case(vm.descriptionObj.NON_RESPONSE):                 /*FALLTHROUGH*/
-              //  case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):   /*FALLTHROUGH*/
+                case(vm.descriptionObj.PATIENT_SAFETY_INFO):   /*FALLTHROUGH*/
               //  case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):   /*FALLTHROUGH*/
               //  case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):         /*FALLTHROUGH*/
                 case(vm.descriptionObj.SDN_RESPONSE):                 /*FALLTHROUGH*/
@@ -508,6 +537,8 @@
                     vm.setConcatDetails();
                     break;
                 case(vm.descriptionObj.RMP_VERSION_DATE):
+                case(vm.descriptionObj.CSOtRMP):
+                case(vm.descriptionObj.DISSEM_LIST):
                     setVersionAndDate();
                     vm.setConcatDetails();
                     break;
@@ -542,6 +573,9 @@
                 case(vm.descriptionObj.POST_NOC_CHANGE):
                     setAsDescriptionChange();
                     vm.setConcatDetails();
+                case(vm.descriptionObj.YEAR):
+                    setAsYearOnly();
+                    vm.setConcatDetails();
                     break;
                 default:
                     console.warn("Lifecycle Details activity not found: " + value);
@@ -550,6 +584,28 @@
 
         };
 
+        /**
+         * @ngdoc method -sets the details fields to all hidden
+         */
+        function setAsYearOnly() {
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
+            vm.versionVisible = false;
+            vm.yearVisible = true;
+            vm.yearChangeVisible = false;
+            vm.requesterVisible = false;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
+        }
 
 
         /**
@@ -561,7 +617,8 @@
             vm.descriptionVisible = false;
             vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
-            vm.yearVisible = true;
+            vm.yearVisible = false;
+            vm.yearChangeVisible = true;
             vm.requesterVisible = false;
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
@@ -582,6 +639,7 @@
             vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
@@ -603,6 +661,7 @@
             vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.descriptionLabel = "BRIEF_DESC";
             vm.lifecycleModel.year = "";
@@ -625,6 +684,7 @@
             vm.descriptionVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
@@ -647,6 +707,7 @@
             vm.versionVisible = true;
             vm.versionLabel = "VERSION_NO";
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
@@ -668,6 +729,7 @@
             vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.details = "";
@@ -688,6 +750,7 @@
             vm.versionVisible = true;
             vm.versionLabel = "VERSION_NO";
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.startDate = "";
@@ -707,6 +770,7 @@
             vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = true;
             vm.lifecycleModel.year = "";
             vm.lifecycleModel.endDate = "";
@@ -721,6 +785,7 @@
             vm.descriptionChangeVisible = true;
             vm.versionVisible = false;
             vm.yearVisible = false;
+            vm.yearChangeVisible = false;
             vm.requesterVisible = false;
             vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
@@ -754,15 +819,18 @@
                 endDate = convertDate(vm.lifecycleModel.endDate);
                 concatText = enDescription + " of " + startDate + " to " + endDate;
             }
-            if (vm.descriptionVisible && !vm.yearVisible) {
+            if (vm.descriptionVisible && !vm.yearChangeVisible) {
 
                 concatText = enDescription + "\n" + vm.lifecycleModel.details;
             }
             if (vm.versionVisible) {
                 concatText = enDescription +" "+ vm.lifecycleModel.sequenceVersion + concatText;
             }
-            if (vm.yearVisible) {
+            if (vm.yearChangeVisible) {
                 concatText = vm.lifecycleModel.year + ", " + vm.lifecycleModel.details;
+            }
+            if (vm.yearVisible) {
+                concatText = vm.lifecycleModel.year;
             }
             if (vm.descriptionChangeVisible) {
                 concatText = enDescription +  "\n" + vm.lifecycleModel.detailsChange;
@@ -785,8 +853,9 @@
                 "Apr", "May", "Jun", "Jul", "Aug", "Sep",
                 "Oct", "Nov", "Dec"];
             var result = "";
-            result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
-            return result
+            result = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+            // result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
+            return result;
         }
         /**
          *  calls the delete function on the parent
@@ -850,7 +919,7 @@
 
         function _parseDate(value) {
             var dateArray = value.split('-');
-            if (dateArray.length != 3) {
+            if (dateArray.length !== 3) {
                 console.error(("_parseDate error not 3 parts"))
             }
             var aDate = new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);

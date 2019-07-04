@@ -5,7 +5,7 @@
         <ul>
             <li> Il n’est pas nécessaire de charger un fichier de transaction s’il s’agit de la première transaction du PIR pour ce dossier.</li>
             <li> Lors de la production d’une copie de travail, le fichier doit être chargé en format .hcsc.</li>
-            <li> Lors de la consultation ou de la mise à jour d’une version définitive du fichier XML, le fichier doit être chargé en format .xml.</li>
+            <li> Lors de la consultation ou de la mise à jour d’une version finale du fichier XML, le fichier doit être chargé en format .xml.</li>
         </ul>
         <p class="fn-rtn ">
             <a href="#tr1_ref">
@@ -30,7 +30,7 @@
         <p>{{::'DOSSIER_TYPE'|translate}}</p>
         <ul>
             <li>Le dossier biologique s’applique à tous les produits biologiques et radiopharmaceutiques.</li>
-            <li>Le dossier pharmaceutique s’applique à tous les produits pharmaceutiques, en vente libre et désinfectants.</li>
+            <li>Le dossier pharmaceutique s’applique à tous les produits pharmaceutiques, en sans ordonnance et désinfectants.</li>
         </ul>
         <p class="fn-rtn">
             <a href="#tr3_ref">
@@ -42,7 +42,7 @@
     <dt>4</dt>
     <dd id="tr4">
         <P>{{::"COMPANY_ID" |translate}}</P>
-        <p> Pour obtenir l’ID d’entreprise, consultez la version définitive du fichier d’entreprise (en format XML) délivré par Santé Canada.</p>
+        <p> Pour obtenir l’ID d’entreprise, consultez la version finale du fichier d’entreprise (en format XML) délivré par Santé Canada.</p>
         <p class="fn-rtn">
             <a href="#tr4_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>4
@@ -53,7 +53,7 @@
     <dt>5</dt>
     <dd id="tr5">
         <P>{{::"DOSSIER_ID" |translate}}</P>
-        <p> Si l’ID du dossier a été attribué avant le PIR, il doit figurer dans la version définitive du fichier d’entreprise (en format XML) ou dans tout autre document délivré par Santé Canada. L’ID du dossier est composé d’une lettre suivie de six chiffres. (p. ex., HC6-024-x######). </p>
+        <p> Si l’ID du dossier a été attribué avant le PIR, il doit figurer dans la version finale du fichier d’entreprise (en format XML) ou dans tout autre document délivré par Santé Canada. L’ID du dossier est composé d’une lettre suivie de six chiffres. (p. ex., HC6-024-x######). </p>
         <p class="fn-rtn">
             <a href="#tr5_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
@@ -116,10 +116,10 @@
     <dd id="tr9">
         <p>{{::'ACTIVITY_LEAD' |translate}}</p>
         <ul>
-            <li> Pharmaceutique : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques qui relèvent du mandat de la DPT. </li>
-            <li> Biologique : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques qui relèvent du mandat de la DPBTG (produits biologiques et radiopharmaceutiques). </li>
-            <li> Vigilance après la mise en marché : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques qui relèvent du mandat de la Direction des produits de santé commercialisés (DPSC). </li>
-            <li> Produits de santé grand public : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques en vente libre qui relèvent du mandat de la Direction des produits de santé naturels et en vente libre (DPSNSO). </li>
+            <li> Pharmaceutique : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques qui relèvent du mandat de la direction des produits thérapeutiques (DPT).</li>
+            <li> Biologique : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques qui relèvent du mandat de la direction des produits biologiques et des thérapies génétiques (DPBTG). </li>
+            <li> Vigilance après commercialisation : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques qui relèvent du mandat de la Direction des produits de santé commercialisés (DPSC). </li>
+            <li> Produits de santé destinés aux consommateurs : Comprend toutes les transactions et les activités réglementaires pour les produits pharmaceutiques en vente libre qui relèvent du mandat de la Direction des produits de santé naturels et sans ordonnance (DPSNSO). </li>
         </ul>
         <p class="fn-rtn">
             <a href="#tr9_ref">
@@ -147,7 +147,7 @@
     <dd id="tr11">
         <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'BRIEF_DESC_CHANGE' |translate}}</p>
         <p>
-            Consultez les sections pertinentes des annexes des lignes directrices sur les changements survenus après l’AC et déterminez les changements : <br>
+            Consultez les sections pertinentes des annexes des lignes directrices changements survenus après l'avis de conformité (AC) pour identifier les changements nécessaires et déterminez les changements : <br>
             c. à d., Document sur la qualité - 3.2.S Substance médicamenteuse no 1, 2d, 9b, 17; <br>
             c.-à-d., Document sur la qualité - 3.2.S Substance médicamenteuse (Trousses/Produits radiopharmaceutiques contenant des substances d’origine chimique) - no 3, 9, 10c; <br>
             c. à d., Document sur l’innocuité et l’efficacité - Suppléments - a, d.
@@ -162,7 +162,7 @@
     <dt>12</dt>
     <dd id="tr12">
         <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{::'SOLICITED_RQ' |translate}}</p>
-        <p> Si le nom du demandeur est inconnu, entrez le courriel générique à partir duquel la demande a été envoyée.</p>
+        <p> Si le nom du demandeur est inconnu, entrez l'adresse courriel générique à partir duquel la demande a été envoyée.</p>
         <p class="fn-rtn">
             <a href="#tr12_ref">
                 <span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>12
@@ -231,7 +231,7 @@
             <li> Les renseignements fournis ici concernent la personne à contacter spécifiquement pour l’activité de réglementation à traiter; c.-à-d.,
                 la personne ou l’entreprise à qui Santé Canada doit adresser toute correspondance ayant trait à l’activité de réglementation en question.</li>
             <li> Veuillez noter que le choix du mode de correspondance revient à Santé Canada.</li>
-            <li> Si vous ajoutez un dossier à la version définitive du fichier de transaction réglementaire (en format XML) déjà soumise,
+            <li> Si vous ajoutez un dossier à la version finale du fichier de transaction réglementaire (en format XML) déjà soumise,
                 les champs seront préremplis avec les renseignements fournis pour la transaction précédente (numéro de séquence).</li>
             <li> Les promoteurs doivent mettre à jour ces renseignements au besoin; ou confirmer que l’information est toujours valide. </li>
             <li> Entrez le nom de l’entreprise à laquelle appartient la personne-ressource associée à l’activité de réglementation. Si la personne-ressource n’appartient à aucune entreprise, entrez son nom.</li>
@@ -258,8 +258,9 @@
     <dd id="tr18">
         <p>{{::'GENERATE_FINAL'|translate}}</p>
         <ul>
-            <li> Chaque transaction du PIR doit contenir une version définitive du fichier de transaction réglementaire (en format XML) à la section 1.2.1.</li>
+            <li> Chaque transaction du PIR doit contenir une version finale du fichier de transaction réglementaire (en format XML) à la section 1.2.1.</li>
             <li>Consultez les lignes directrices du PIR pour obtenir des renseignements détaillés.</li>
+            <li>Si vous souhaitez activer le bouton « Générer le XML finale », cliquez sur le bouton « Réinitialiser » pour effacer les renseignements spécifiques à la transaction.</li>
         </ul>
         <p class="fn-rtn">
             <a href="#tr18_ref">
