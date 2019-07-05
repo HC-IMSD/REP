@@ -49,7 +49,7 @@ var paths = {
     buildProdCompany: buildProd + '/company/',
     buildProdTransaction: buildProd + '/transaction/',
     buildProdDossier: buildProd + '/dossier/',
-    buildProdDrugProduct: buildProd + '/drugProduct/',
+    buildProdDrugProduct: buildProd + '/product/',
     buildProdCsp: buildProd + '/csp-cps/',
     englishTemplate: wetBase + '/' + templateFileEn, //this is the wet template before path injection
     frenchTemplate: wetBase + '/' + templateFileFr, //this is the wet template before path injection
@@ -2904,7 +2904,7 @@ gulp.task('prod-drugProduct-compileSrcJs', gulp.series('prod-drugProduct-compile
 
 gulp.task('prod-drugProduct-compileHtml', gulp.series('prod-global-create-src-template', 'prod-global-copyDataFolder', 'prod-drugProduct-compileSrcJs', 'prod-drugProduct-copyLib', function () {
 
-    var ignorePath = '/build/prod/drugProduct';
+    var ignorePath = '/build/prod/product';
     var basePath = paths.buildProdDrugProduct;
     var destPath = paths.buildProdDrugProduct;
     var htmlPartial = jsRootContent.partialDrugProductRoot;
