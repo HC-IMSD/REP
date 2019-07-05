@@ -291,6 +291,15 @@
                 vm.lifecycleModel.activityType = temp;
                 //vm.updateActivityType(); no need???
             }
+            if(vm.lifecycleModel.activityType) {
+                vm.setSequenceList();
+            } else {
+                vm.lifecycleModel.activityTypeDisplay="";
+                vm.lifecycleModel.descriptionValue = "";
+                vm.descriptionList = "";
+                setDetailsAsNone();
+                vm.setConcatDetails();
+            }
             vm.updateErrorSummaryState(); // if error summary is visible update it
         };
 
@@ -299,6 +308,14 @@
          * @param value
          */
         vm.setSequenceList = function () {
+            if(!vm.lifecycleModel.activityType) {
+                vm.lifecycleModel.activityTypeDisplay="";
+                vm.lifecycleModel.descriptionValue = "";
+                vm.descriptionList = "";
+                setDetailsAsNone();
+                vm.setConcatDetails();
+                return;
+            }
 
             var value = vm.lifecycleModel.activityType.id;
             var temp = vm.lifecycleModel.descriptionValue;

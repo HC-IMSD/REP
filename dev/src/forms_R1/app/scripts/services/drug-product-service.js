@@ -485,7 +485,12 @@
                 if (!item.dosage_form_group.dosage_form) {
                     obj.dosageForm = item.dosage_form_group.dosage_form;
                 } else {
-                    var dosageFormObj = $filter('findListItemById')(DossierLists.getDosageFormList(), {id: DossierLists.getDosageFormPrefix() + item.dosage_form_group.dosage_form._id});
+                    var dflist = DossierLists.getDosageFormList();
+                    var dfid = item.dosage_form_group.dosage_form._id;
+                    if (dfid !== 'OTHER') {
+                        dfid = DossierLists.getDosageFormPrefix() + dfid;
+                    }
+                    var dosageFormObj = $filter('findListItemById')(dflist, {id: dfid});
                     obj.dosageForm = dosageFormObj;
                     obj.dosageFormHtml = dosageFormObj[$translate.proposedLanguage() || $translate.use()];
                 }
