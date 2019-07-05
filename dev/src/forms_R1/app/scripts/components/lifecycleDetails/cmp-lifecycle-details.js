@@ -590,6 +590,7 @@
                 case(vm.descriptionObj.POST_NOC_CHANGE):
                     setAsDescriptionChange();
                     vm.setConcatDetails();
+                    break;
                 case(vm.descriptionObj.YEAR):
                     setAsYearOnly();
                     vm.setConcatDetails();
@@ -699,6 +700,7 @@
             vm.startDateVisible = true;
             //vm.startDateLabel = "DATED";
             vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
             vm.versionVisible = false;
             vm.yearVisible = false;
             vm.yearChangeVisible = false;
@@ -798,7 +800,7 @@
         function setAsDescriptionChange() {
             vm.endDateVisible = false;
             vm.startDateVisible = false;
-            vm.descriptionVisible = false; //
+            vm.descriptionVisible = false;
             vm.descriptionChangeVisible = true;
             vm.versionVisible = false;
             vm.yearVisible = false;
@@ -999,7 +1001,8 @@
             vm.startDateId="start_date" + scopeId;
             vm.dateId= "dated" + scopeId;
             vm.endDateId="end_date"+scopeId;
-            vm.yearId="year_change"+scopeId;
+            vm.yearId="year"+scopeId;
+            vm.yearChangeId="year_change"+scopeId;
             vm.descriptId="brief_desc"+scopeId;
             vm.versionId="version_no"+scopeId;
             vm.activityLeadId = "activity_lead" + scopeId;
