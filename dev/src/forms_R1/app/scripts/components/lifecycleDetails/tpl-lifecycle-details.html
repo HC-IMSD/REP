@@ -271,6 +271,9 @@
                                 <span class="field-name">1. {{'REQUESTER_NAME'|translate}}</span>
                                 <strong class="required">{{'REQUIRED' |translate}}</strong>
                                 <span class="rep-margin-top">
+                                <cmp-error-message field-name="lifecycleCtrl.requesterNameId" form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                   show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.requesterNameId])"
+                                                   error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::lifecycleCtrl.requesterNameId}}"
                                name="{{::lifecycleCtrl.requesterNameId}}"
                                size="30" maxlength="30" data-ng-required="true"

@@ -89,7 +89,7 @@
             </div>
             <div data-ng-if="transFeeCtrl.isFeeRemit()">
                 <div class="row">
-                    <div class="col-md-8 col-sm-12 form-group" data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
+                    <div class="col-sm-12 form-group" data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
                         <label for="{{::transFeeCtrl.revenueId}}" class="required">
                             <span class="field-name">{{::'GROSS_REVENUE'|translate}}</span>
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -106,7 +106,7 @@
                             </div>
                         </label>
                     </div>
-                    <div class="col-md-4 col-sm-12 form-group">
+                    <div class="col-sm-12 form-group">
                         <label for="{{::transFeeCtrl.percentId}}">
                             <span class="field-name">{{::'TEN_PERCENT_REVENUE'|translate}}</span>
                         </label>
@@ -132,9 +132,8 @@
             <div data-ng-if="transFeeCtrl.showDocumentationSection()">
                 <h3>{{::'REQUIRED_DOC'|translate}}</h3>
                 <div class="row" data-ng-if="transFeeCtrl.isDeferral()">
-                    <div class="form-group col-xs-12">
-                        <div class="checkbox">
-                            <label for="{{::transFeeCtrl.deferralStateId}}">
+                    <div class="col-xs-12 form-group">
+                            <label for="{{::transFeeCtrl.deferralStateId}}" class="required">
                                 <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.deferralStat"
                                        class="required"
                                        name="{{::transFeeCtrl.deferralStateId}}"
@@ -148,7 +147,6 @@
                                                    error-types="transFeeCtrl.requiredOnlyError">
                                 </cmp-error-message>
                             </label>
-                        </div>
                     </div>
                 </div>
                 <div data-ng-if="transFeeCtrl.isEligible()">
@@ -164,9 +162,8 @@
                                id="{{::transFeeCtrl.feeDocSelectedId}}" required data-ng-model="transFeeCtrl.oneFeeDocSelected"
                                hidden />
                         <div class="row">
-                            <div class="form-group col-xs-12">
-                                <div class="checkbox">
-                                    <label for="{{::transFeeCtrl.statement10Id}}">
+                            <div class="col-xs-12 form-group">
+                                    <label for="{{::transFeeCtrl.statement10Id}}" class="required">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.revStat"
                                                class="required"
                                                name="{{::transFeeCtrl.statement10Id}}"
@@ -180,76 +177,63 @@
                                                            error-types="transFeeCtrl.requiredOnlyError">
                                         </cmp-error-message>
                                     </label>
-                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-xs-12">
-                                <div class="checkbox">
+                            <div class="col-xs-12 form-group">
                                     <label for="market-potential">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.estMarketShare"
                                                name="market-potential"
                                                id="market-potential"/>
                                         {{::'EST_MARKET_SHARE'|translate}}
                                     </label>
-                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <div class="checkbox">
                                     <label for="similar-product">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.comparison"
                                                name="similar-product" id="similar-product"/>
                                         {{::'SIMILAR_PRODUCT' |translate}}
                                     </label>
-                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-7 col-xs-12">
-                                <div class="checkbox">
+                            <div class="col-xs-12 form-group">
                                     <label for="sales-history">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.salesHistory"
                                                name="sales-history" id="sales-history"/>
                                         {{::'SALES_HISTORY'|translate}}
                                     </label>
-                                </div>
                             </div>
-                            <div class="form-group col-md-5 col-sm-12">
-                                <div class="checkbox">
+                            <div class="col-sm-12 form-group">
                                     <label for="marketing-plan">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.marketPlan"
                                                name="marketing-plan" id="marketing-plan"/>
                                         {{::'MARKETING_PLAN'|translate}}
                                     </label>
-                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-4 col-sm-12">
-                                <div class="checkbox">
+                            <div class="col-sm-12 form-group">
                                     <label for="avg-sale">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.avgSalePrice"
                                                name="avg-sale"
                                                id="avg-sale"/>
                                         {{::'AVG_SALES'|translate}}
                                     </label>
-                                </div>
                             </div>
-                            <div class="form-group col-md-1 col-sm-12">
-                                <div class="checkbox">
+                            <div class="col-sm-12 form-group">
                                     <label for="{{::transFeeCtrl.otherId}}">
                                         <input type="checkbox" data-ng-model="transFeeCtrl.model.requiredDocs.other"
                                                name="{{::transFeeCtrl.otherId}}" data-ng-change="transFeeCtrl.setDocOther()"
                                                id="{{::transFeeCtrl.otherId}}"/>
                                         {{::'OTHER'|translate}}
                                     </label>
-                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-10 form-group" data-ng-if="transFeeCtrl.model.requiredDocs.other">
+                            <div class="col-xs-10" data-ng-if="transFeeCtrl.model.requiredDocs.other">
                                 <div data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.otherDetailsId].$invalid}">
                                     <label for="{{::transFeeCtrl.otherDetailsId}}" class="required">
                                         <span class="field-name">{{::'OTHER_DOC_DETAILS'|translate}}</span>
@@ -270,8 +254,8 @@
                 </div>
             </div>
 
-            <div class="row" data-ng-if="transFeeCtrl.showPaymentPanel()">
-                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></p></div>
+            <div data-ng-if="transFeeCtrl.showPaymentPanel()" class="row">
+                <h3>{{::'PAYMENT' |translate}}</h3>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -281,8 +265,8 @@
                     </span>
                 </div>
             </div>
-            <div class="row" data-ng-if="transFeeCtrl.isFeeRemit()">
-                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></div>
+            <div data-ng-if="transFeeCtrl.isFeeRemit()" class="row">
+                <h3>{{::'PAYMENT' |translate}}</h3>
                 <div class="col-xs-12 form-group alert alert-info" role="alert"
                      aria-live="polite">
                     <span>
@@ -290,25 +274,24 @@
                  </span>
                 </div>
             </div>
-            <div class="row" data-ng-if="transFeeCtrl.isSendNoFees()">
-                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></div>
+            <div data-ng-if="transFeeCtrl.isSendNoFees()" class="row">
+                <h3>{{::'PAYMENT' |translate}}</h3>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
                     <p aria-live="polite">{{::'SPONSOR_INVOICE'|translate}}</p>
                        </span>
                 </div>
             </div>
-            <div class="row" data-ng-if="transFeeCtrl.isDeferral() && !transFeeCtrl.isEligible() && !transFeeCtrl.isFeeRemit()">
-                <div>  <span class="field-name"><strong>{{::'PAYMENT' |translate}}</strong></span><p></div>
+            <div data-ng-if="transFeeCtrl.isDeferral() && !transFeeCtrl.isEligible() && !transFeeCtrl.isFeeRemit()" class="row">
+                <h3>{{::'PAYMENT' |translate}}</h3>
                 <div class="col-xs-12 form-group alert alert-info" role="alert">
                    <span>
                     <p aria-live="polite">{{::'APPLY_DEFER'|translate}}</p>
                        </span>
                 </div>
             </div>
-            <div>
-                <div data-ng-if="transFeeCtrl.showPaymentMethods()">
-
+            <div class="row">
+                <div data-ng-if="transFeeCtrl.showPaymentMethods()" class="col-xs-12">
                     <fieldset id="{{::transFeeCtrl.paymentFsId}}">
                         <legend class="required legend-rep">
                             <span class="field-name">{{::'PAYMENT_METHODS' |translate}}</span>
