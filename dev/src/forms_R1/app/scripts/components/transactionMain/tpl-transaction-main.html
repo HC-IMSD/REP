@@ -50,9 +50,10 @@
                                   is-file-loaded="main.isFileLoaded"
                                   is-final="main.isFinal">
             </cmp-transaction-info>
-            <div class="row form-group  col-md-12">
-                <div class="checkbox col-md-10">
-                    <label for="{{::main.privacyStatementID |translate}}">
+            <div class="row">
+                <div class="col-md-12">
+                <div class="col-md-12">
+                    <label for="{{::main.privacyStatementID |translate}}" class="required">
                         <input type="checkbox"
                                data-ng-model="main.privacyStat"
                                class="required"
@@ -67,6 +68,7 @@
                                            error-types="main.requiredOnly">
                         </cmp-error-message>
                     </label>
+                </div>
                 </div>
             </div>
             <div class="row">

@@ -406,9 +406,10 @@
                 </div>
             </div>
         </section>
-        <div class="row form-group  col-xs-12">
-            <div class="checkbox col-md-10">
-                <label for="{{::drugProdCtrl.privacyStatementID |translate}}">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                <label for="{{::drugProdCtrl.privacyStatementID |translate}}" class="required">
                     <input type="checkbox"
                            data-ng-model="drugProdCtrl.model.privacyStat"
                            class="required"
@@ -424,6 +425,7 @@
                     </cmp-error-message>
 
                 </label>
+                </div>
             </div>
         </div>
         <div class="row">

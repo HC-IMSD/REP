@@ -423,19 +423,17 @@
                             </cmp-contact-details>
                         </div>
                         <div class="row">
-                            <div class="form-group col-xs-12">
-                                <div class="checkbox required">
-                                    <label for="{{::transInfoCtrl.contactSameId}}">
-                                        <input type="checkbox" data-ng-model="transInfoCtrl.transactionModel.confirmContactValid"
-                                               name="{{::transInfoCtrl.contactSameId}}" id="{{::transInfoCtrl.contactSameId}}" required/>
-                                        {{::"CONFIRM_CONTACT_VALID"|translate}}
-                                    </label>
-                                    <cmp-error-message field-name="transInfoCtrl.contactSameId"
-                                                       form-ref="transInfoCtrl.transInfoForm"
-                                                       show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.contactSameId])"
-                                                       error-types="transInfoCtrl.requiredOnly">
-                                    </cmp-error-message>
-                                </div>
+                            <div class="col-xs-12">
+                                <label for="{{::transInfoCtrl.contactSameId}}" class="required">
+                                    <input type="checkbox" data-ng-model="transInfoCtrl.transactionModel.confirmContactValid"
+                                           name="{{::transInfoCtrl.contactSameId}}" id="{{::transInfoCtrl.contactSameId}}" required/>
+                                    {{::"CONFIRM_CONTACT_VALID"|translate}}
+                                </label>
+                                <cmp-error-message field-name="transInfoCtrl.contactSameId"
+                                                   form-ref="transInfoCtrl.transInfoForm"
+                                                   show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.contactSameId])"
+                                                   error-types="transInfoCtrl.requiredOnly">
+                                </cmp-error-message>
                             </div>
                         </div>
                     </div>
