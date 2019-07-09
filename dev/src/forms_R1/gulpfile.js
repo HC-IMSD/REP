@@ -900,6 +900,7 @@ pipes.insertDateStamp = function (template, valsObj, lang, type, langHtmlName) {
     var now = new Date();
     var utc = dateFormat(now, "isoDate");
     var anchor = pipes.getHomeAnchor(type, lang);
+    valsObj['manifest'] = 'manifest' + createSuffixDate() + '.appcache';
     var langSwitch = "";
     if (langHtmlName) langSwitch = langHtmlName;
     return (gulp.src(template)
@@ -908,7 +909,8 @@ pipes.insertDateStamp = function (template, valsObj, lang, type, langHtmlName) {
                 mainHeading: valsObj.mainHeading,
                 formTitle: valsObj.title,
                 homeAnchor: anchor,
-                langHtml: langSwitch
+                langHtml: langSwitch,
+                manifest: valsObj.manifest
             }))
     );
 };
@@ -1646,7 +1648,12 @@ gulp.task('dev-company-createResources', gulp.series('dev-company-copyTranslate'
 
     var srcPath = paths.buildDevCompany;
     var destPath = paths.buildDevCompany + paths.relScript;
-    var filename = 'translations' + createSuffixDate();
+    var timeSuf = createSuffixDate();
+    del([srcPath + '/*.appcache']);
+    gulp.src('app/scripts/components/' + companyComponentFolders[0] + '/manifest.appcache')
+        .pipe(rename('manifest' + timeSuf + '.appcache'))
+        .pipe(gulp.dest(srcPath));
+    var filename = 'translations' + timeSuf;
     return (pipes.compileTranslateFile(srcPath, destPath, filename, companyTranslationFilesBaseList));
 }));
 
@@ -1713,9 +1720,14 @@ gulp.task('dev-transaction-copyTranslate', function () {
 
 gulp.task('dev-transaction-createResources', gulp.series('dev-transaction-copyTranslate', function () {
     var devPath = paths.buildDevTransaction;
+    var timeSuf = createSuffixDate();
+    del([devPath + '/*.appcache']);
+    gulp.src('app/data/manifest.appcache')
+        .pipe(rename('manifest' + timeSuf + '.appcache'))
+        .pipe(gulp.dest(devPath));
     return (
         gulp.src(devPath + paths.translations + '*.json')
-            .pipe(angularTranslate('translations' + createSuffixDate() + '.js'))
+            .pipe(angularTranslate('translations' + timeSuf + '.js'))
             .pipe(gulp.dest(devPath + paths.relScript))
     )
 }));
@@ -1801,7 +1813,12 @@ gulp.task('dev-dossier-createResources', gulp.series('dev-dossier-copyTranslate'
 
     var srcPath = paths.buildDevDossier;
     var destPath = paths.buildDevDossier + paths.relScript;
-    var filename = 'translations' + createSuffixDate();
+    var timeSuf = createSuffixDate();
+    del([srcPath + '/*.appcache']);
+    gulp.src('app/data/manifest.appcache')
+        .pipe(rename('manifest' + timeSuf + '.appcache'))
+        .pipe(gulp.dest(srcPath));
+    var filename = 'translations' + timeSuf;
     return (pipes.compileTranslateFile(srcPath, destPath, filename, dossierTranslationFilesBaseList));
 }));
 
@@ -1814,7 +1831,12 @@ gulp.task('dev-drugProduct-createResources', gulp.series('dev-drugProduct-copyTr
 
     var srcPath = paths.buildDevDrugProduct;
     var destPath = paths.buildDevDrugProduct + paths.relScript;
-    var filename = 'translations' + createSuffixDate();
+    var timeSuf = createSuffixDate();
+    del([srcPath + '/*.appcache']);
+    gulp.src('app/data/manifest.appcache')
+        .pipe(rename('manifest' + timeSuf + '.appcache'))
+        .pipe(gulp.dest(srcPath));
+    var filename = 'translations' + timeSuf;
     return (pipes.compileTranslateFile(srcPath, destPath, filename, drugProductTranslationFilesBaseList));
 }));
 

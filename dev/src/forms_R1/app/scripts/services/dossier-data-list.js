@@ -207,8 +207,8 @@
 
             return(
                 [
-                    {"id":"UP","en":"Unit of Presentation","fr":"Ingrédient médicinal actif"},
-                    {"id":"UM","en":"Unit of Measure","fr":"Ingrédient non-médicinal actif"}
+                    {"id":"UP","en":"Unit of Presentation","fr":"Unité de présentation"},
+                    {"id":"UM","en":"Unit of Measure","fr":"Unité de mesure"}
 
                 ]
             )

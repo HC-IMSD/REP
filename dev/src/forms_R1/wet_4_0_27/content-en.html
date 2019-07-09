@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--[if lt IE 9]><html class="no-js lt-ie9" dir="ltr"><![endif]-->
 <!--[if gt IE 8]><!-->
-<html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en" data-th-lang="#{lang}" dir="ltr">
+<html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en" manifest="<!--build:manifest--><!--endbuild-->" dir="ltr">
 <!--<![endif]-->
 <head>
     <!--No cache-->
     <meta charset="utf-8" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="-1"/>
+    <!--<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>-->
+    <!--<meta http-equiv="Pragma" content="no-cache"/>-->
+    <!--<meta http-equiv="Expires" content="-1"/>-->
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
     <meta name='description' content="Regulatory Enrolment Process Forms"/>
     <meta name="keywords" content="Health, Regulatory Enrolment Process, REP"/>
@@ -43,6 +43,25 @@
         document.write(wet.builder.refTop({
             cdnEnv: "prod" //jqueryEnv:false
         }));
+        function focusOnRow(e) {
+            var myTable = $(e).closest('table');
+            var firstTr = $(myTable).find('tr');
+            if (firstTr.length > 0) {
+                $(firstTr[0]).focus();
+            } else {
+                $(myTable).focus();
+            }
+        }
+        function focusOnTable(node, idStartWith){
+            var myTable = null;
+            if(node != null){
+                myTable = $(node).find('table[id^=' + e + ']')[0];
+            }
+            if(myTable != null){
+                alert($(myTable).attr('id'));
+                $(myTable).focus();
+            }
+        }
     </script>
 </head>
 
