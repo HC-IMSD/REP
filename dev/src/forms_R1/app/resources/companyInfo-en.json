@@ -8,5 +8,6 @@
   "SAVE_INSTRUCT": "Company File Save Instructions",
   "AMEND_NOTE": "The “Amend Enrolment” button must be selected when amending a Final Company XML.",
   "FIELDID": "Company Id",
-  "IMPORTERID":"Importer Company ID"
+  "IMPORTERID":"Importer Company ID",
+  "COMPANY_NAME": "Company Name"
 }
