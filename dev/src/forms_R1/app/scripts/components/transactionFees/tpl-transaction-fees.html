@@ -25,7 +25,7 @@
                     </label>
                     <input type="text" class="form-control full-width" id="{{::transFeeCtrl.feeId}}" readonly
                            name="{{::transFeeCtrl.feeId}}"
-                           value="{{transFeeCtrl.model.submissionClass.fee  | currency}}"/>
+                           data-ng-value="transFeeCtrl.getFee()"/>
                 </div>
             </div>
             <div class="row">
@@ -112,7 +112,7 @@
                         </label>
                         <input class="form-control" id="{{::transFeeCtrl.percentId}}"
                                readonly name="{{::transFeeCtrl.percentId}}"
-                               value="{{transFeeCtrl.model.percentGross  | currency}}"/>
+                               data-ng-value="transFeeCtrl.getPpercentGross()"/>
                     </div>
                 </div>
                 <div class="row">

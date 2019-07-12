@@ -31,6 +31,16 @@
     function transactionFeesController($scope, $window, $translate, TransactionLists, YES, NO,ENGLISH,FRENCH, ADVANCE_FEE_PAYMENT_EN,ADVANCE_FEE_PAYMENT_FR) {
 
         var vm = this;
+        vm.currencyFrench = new Intl.NumberFormat('fr-CA', {
+            style: 'currency',
+            currency: 'CAD',
+            minimumFractionDigits: 2
+        });
+        vm.currencyEnglish = new Intl.NumberFormat('en-CA', {
+            style: 'currency',
+            currency: 'CAD',
+            minimumFractionDigits: 2
+        });
         vm.model = {};
         vm.submissionType = {};
         vm.onePaymentSelected = "";
@@ -41,7 +51,7 @@
         vm.onePaymentError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.oneFeeDocError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.alerts = [false, false, false];
-        vm.lang=ENGLISH;
+        vm.lang=$translate.use();
         /**
          * Called after onChanges evnet, initializes
          */
@@ -276,7 +286,26 @@
             vm.model.requiredDocs.otherDetails = "";
             return false
         };
+        vm.getFee = function() {
+            if(! vm.model.submissionClass || ! vm.model.submissionClass.fee){
+                return '';
+            }
+            return vm.getCurrency(vm.model.submissionClass.fee);
+        }
+        vm.getPpercentGross = function() {
+            return vm.getCurrency(vm.model.percentGross)
+        }
+        vm.getCurrency = function(money){
+            if(! money){
+                return '';
+            }
+            if(vm.lang == ENGLISH){
+                return vm.currencyEnglish.format(money);
+            }else{
+                return vm.currencyFrench.format(money);
+            }
 
+        }
         /**
          * Clears the required data related to remit
          */
