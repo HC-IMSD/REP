@@ -18,11 +18,11 @@
                                            form-ref="ap4RecCtrl.appendix4RecForm"
                                            show-error="ap4RecCtrl.showErrors()"
                                            error-types="ap4RecCtrl.requiredOnly"></cmp-error-message>
+                    </label>
                         <input type="text" class="form-control full-width" id="{{::ap4RecCtrl.ingredNameId}}" ng-change="ap4RecCtrl.recordChanged()"
                                data-ng-model="ap4RecCtrl.model.ingredientName" name="{{::ap4RecCtrl.ingredNameId}}" required
-                               data-ng-model-options="{updateOn: 'blur'}" maxlength="100" size="100"/>
+                               data-ng-model-options="{updateOn: 'blur'}" maxlength="100"/>
 
-                    </label>
                 </div>
             </div>
             <fieldset id="{{::ap4RecCtrl.fsType}}">
