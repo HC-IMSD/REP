@@ -76,9 +76,9 @@ var homePath = {
     test_en: "https://lam-dev.hres.ca/rep_test/index.html",
     test_fr: "https://lam-dev.hres.ca/rep_test/index-fr.html",
     prod_en: "https://lam-dev.hres.ca/REP-Form/index.html",
-    prod_fr: "https://lam-dev.hres.ca/REP-Form/index-fr.html",
+    prod_fr: "https://lam-dev.hres.ca/REP-Form/index.html",
     prodInt_en: "https://lam-dev.hres.ca/REP-Form-Internal/index.html",
-    prodInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index-fr.html"
+    prodInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index.html"
 
 };
 var deployType = {
