@@ -527,8 +527,16 @@
                 } else {
                     obj.routeAdmins = [];
                 }
-                if (item.country_group && item.country_group.country_manufacturer && item.country_group.country_manufacturer[0] && item.country_group.country_manufacturer[0]._id) {
-                    obj.countryList = getFormulationCountryList(item.country_group.country_manufacturer);
+                if (item.country_group && item.country_group.country_manufacturer) {
+
+                    var countryArray = [];
+                    if (!(item.country_group.country_manufacturer instanceof Array)) {
+                        //make it an array, case there is only one
+                        countryArray = [item.country_group.country_manufacturer];
+                    } else {
+                        countryArray = item.country_group.country_manufacturer;
+                    }
+                    obj.countryList = getFormulationCountryList(countryArray);
                 } else {
                     obj.countryList = [];
                 }
