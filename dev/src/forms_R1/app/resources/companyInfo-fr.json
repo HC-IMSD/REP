@@ -7,7 +7,7 @@
   "REPRESENT_INSTRUCT":"Information représentative de l'entrepise",
   "SAVE_INSTRUCT": "fr_Company File Save Instructions",
   "AMEND_NOTE": "Le bouton «Modifier l'inscription» doit être sélectionné lors de la modification d'un XML d'entreprise final.",
-  "FIELDID": "ID d'entreprise",
-  "IMPORTERID":"ID d'entreprise de l'importateur",
+  "FIELDID": "Identification d'entreprise",
+  "IMPORTERID":"Identification d'entreprise de l'importateur",
   "COMPANY_NAME": "Nom d’entreprise"
 }
