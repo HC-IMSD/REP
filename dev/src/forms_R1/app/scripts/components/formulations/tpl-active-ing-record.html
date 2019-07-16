@@ -214,7 +214,7 @@
                                             <!--</ui-select>-->
                                         <!--</div>-->
                                     <!--</div>-->
-                                    <input type="text" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.unitsHtml" value="ingRecCtrl.ingModel.unitsHtml" data-ng-blur="ingRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control"/>
+                                    <input type="text" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.unitsHtml" value="ingRecCtrl.ingModel.unitsHtml" data-ng-change="ingRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control"/>
                                     <datalist id="unitsList" class="rep-selectize-dropdown rep-selectize-font">
                                         <option data-ng-repeat="unit in ingRecCtrl.unitsList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
                                     </datalist>
@@ -229,7 +229,7 @@
                                                        show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.otherUnitsId])"
                                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                                     <input type="text" id="{{::ingRecCtrl.otherUnitsId}}" data-ng-model="ingRecCtrl.ingModel.otherUnits"
-                                           data-ng-model-options="{ debounce: '$inherit'}"
+                                           data-ng-model-options="{ debounce: '$inherit'}" data-focus-if="ingRecCtrl.isUnitsOther()"
                                            size="60" class="form-control" name="{{::ingRecCtrl.otherUnitsId}}"
                                            maxlength="60" data-ng-required="ingRecCtrl.isUnitsOther()"/>
 
@@ -296,7 +296,7 @@
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perPresOtherUnitId])"
                                                            error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                                         <input type="text" id="{{::ingRecCtrl.perPresOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perPresOtherUnits"
-                                               data-ng-model-options="{ debounce: '$inherit'}"
+                                               data-ng-model-options="{ debounce: '$inherit'}" data-focus-if="ingRecCtrl.isPerPresUnitsOther()"
                                                size="40" class="form-control" name="{{::ingRecCtrl.perPresOtherUnitId}}"
                                                maxlength="40" data-ng-required="ingRecCtrl.isPerPresUnitsOther()"/>
 
@@ -328,7 +328,7 @@
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId])"
                                                            error-types="ingRecCtrl.requiredOnly">
                                         </cmp-error-message>
-                                        <input type="text" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnitsHtml" value="ingRecCtrl.ingModel.perMeasUnitsHtml" data-ng-blur="ingRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
+                                        <input type="text" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnitsHtml" value="ingRecCtrl.ingModel.perMeasUnitsHtml" data-ng-change="ingRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
                                         <datalist id="unitsList2" class="rep-selectize-dropdown rep-selectize-font">
                                             <option data-ng-repeat="unit in ingRecCtrl.measureList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
                                         </datalist>
@@ -344,7 +344,7 @@
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureOtherUnitId])"
                                                            error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                                         <input type="text" id="{{::ingRecCtrl.perMeasureOtherUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasOtherUnits"
-                                               data-ng-model-options="{ debounce: '$inherit'}"
+                                               data-ng-model-options="{ debounce: '$inherit'}" data-focus-if="ingRecCtrl.isPerMeasUnitsOther()"
                                                size="40" class="form-control" name="{{::ingRecCtrl.perMeasureOtherUnitId}}"
                                                maxlength="40" data-ng-required="ingRecCtrl.isPerMeasUnitsOther()"/>
 
@@ -423,7 +423,7 @@
                                                error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                             <input type="text" id="{{::ingRecCtrl.nanoOtherId}}"
                                    data-ng-model="ingRecCtrl.ingModel.nanoMaterialOther"
-                                   data-ng-model-options="{ debounce: '$inherit'}"
+                                   data-ng-model-options="{ debounce: '$inherit'}" data-focus-if="ingRecCtrl.isNanoOther()"
                                    class="form-control full-width" name="{{::ingRecCtrl.nanoOtherId}}" data-ng-required="true" maxlength="40"/>
 
                         </div>
