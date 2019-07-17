@@ -67,14 +67,11 @@
 
         vm.usaZipCode = '^[0-9]{5}(?:-[0-9]{4})?$';
         vm.hideProvinceText = false;
-        vm.showProvince = false;
-        vm.showState = false;
         vm.countryList= getCountryAndProvinces.getCountries();
         vm.fdId="";
        // vm.postalError="MSG_ERR_POSTAL";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_POSTAL"}];
-        vm.provStateErrorName = "PROVSTATE";
 
         vm.$onInit = function () {
 
@@ -141,8 +138,6 @@
                 vm.addressModel.countryDisplay = "";
                 vm.isPostalRequired = false;
                 vm.hideProvinceText = false;
-                vm.showProvince = false;
-                vm.showState = false;
                 vm.hideProvinceDdl = !vm.hideProvinceText;
                 vm.postalLabel = getPostalLabel();
             }
@@ -222,18 +217,11 @@
         var getProvinceStateList = function () {
 
             if (vm.addressModel.country.id === CANADA) {
-                vm.showProvince = true;
-                vm.showState = false;
                 return getCountryAndProvinces.getProvinces();
 
             }
             else if (vm.addressModel.country.id === USA) {
-                vm.showProvince = false;
-                vm.showState = true;
                 return getCountryAndProvinces.getUSStates();
-            } else {
-                vm.showProvince = false;
-                vm.showState = false;
             }
         };
 
@@ -263,14 +251,13 @@
 
         function _setIdNames() {
             var scopeId = vm.fldId+ "_" + $scope.$id;
+            vm.addrScopeId = scopeId;
             vm.streetId = "STREET" + scopeId;
             vm.cityId = "CITY" + scopeId;
             vm.countryId = "COUNTRY" + scopeId;
             vm.stateTextId = "proveState" + scopeId;
-            vm.stateListId = "state" + scopeId;
-            vm.provinceListId = "province" + scopeId;
+            vm.stateListId = "provinceList" + scopeId;
             vm.postalId = "postal" + scopeId;
-            vm.zipId = "zip" + scopeId;
         }
         vm.countryChange = function() {
             var found = false;
