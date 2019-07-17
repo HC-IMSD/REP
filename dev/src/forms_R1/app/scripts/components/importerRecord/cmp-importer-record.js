@@ -255,7 +255,7 @@
             vm.cityId = "CITY" + scopeId;
             vm.countryId = "COUNTRY" + scopeId;
             vm.stateTextId = "proveState" + scopeId;
-            vm.stateListId = "provinceList" + scopeId;
+            vm.stateListId = "province" + scopeId;
             vm.postalId = "postal" + scopeId;
         }
     }

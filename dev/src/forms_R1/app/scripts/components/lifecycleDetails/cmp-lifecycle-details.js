@@ -510,7 +510,7 @@
                 case(vm.descriptionObj.RECON_DECIS_RQ_RECON):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.RECON_DECIS_OTHER_INFO):  /*FALLTHROUGH Jul 17,2017 added*/
                 case(vm.descriptionObj.LABEL_PREAPPROVAL_2LANG):  /*FALLTHROUGH Jul 17,2017 added*/
-                case(vm.descriptionObj.RISK_COMMUN_DOC):        /*FALLTHROUGH*/
+                // case(vm.descriptionObj.RISK_COMMUN_DOC):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.SIGNAL_WORK_UP):         /*FALLTHROUGH*/
                 case(vm.descriptionObj.PRESUB_MEETING_RQ):      /*FALLTHROUGH*/
                 case(vm.descriptionObj.CORR_PATENT_MED):  /*FALLTHROUGH Jul 17,2017 added*/
@@ -556,6 +556,7 @@
                 case(vm.descriptionObj.RMP_VERSION_DATE):
                 case(vm.descriptionObj.CSOtRMP):
                 case(vm.descriptionObj.DISSEM_LIST):
+                case(vm.descriptionObj.RISK_COMMUN_DOC):        /*FALLTHROUGH*/
                     setVersionAndDate();
                     vm.setConcatDetails();
                     break;
@@ -836,14 +837,14 @@
 
             if (vm.endDateVisible) {
                 endDate = convertDate(vm.lifecycleModel.endDate);
-                concatText = enDescription + " of " + startDate + " to " + endDate;
+                concatText = enDescription + " " + startDate + " to " + endDate;
             }
             if (vm.descriptionVisible && !vm.yearChangeVisible) {
 
                 concatText = enDescription + "\n" + vm.lifecycleModel.details;
             }
             if (vm.versionVisible) {
-                concatText = enDescription +" "+ vm.lifecycleModel.sequenceVersion + concatText;
+                concatText = enDescription +" version "+ vm.lifecycleModel.sequenceVersion + concatText;
             }
             if (vm.yearChangeVisible) {
                 concatText = vm.lifecycleModel.year + ", " + vm.lifecycleModel.details;
@@ -868,15 +869,21 @@
 
             if (!value) return "";
             var date = new Date(value);
-            var m_names = ["Jan", "Feb", "Mar",
-                "Apr", "May", "Jun", "Jul", "Aug", "Sep",
-                "Oct", "Nov", "Dec"];
+            var m_names = ["01", "02", "03",
+                "04", "05", "06", "07", "08", "09",
+                "10", "11", "12"];
+            var d_names = ["", "01", "02", "03",
+                "04", "05", "06", "07", "08", "09",
+                "10", "11", "12", "13", "14", "15",
+                "16", "17", "18", "19", "20", "21",
+                "22", "23", "24","25", "26", "27",
+                "28", "29", "30", "31"];
             var result = "";
-            result = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate();
+            result = date.getFullYear() + "-" + m_names[date.getMonth()] + "-" + d_names[date.getDate()];
             // result = m_names[date.getMonth()] + ". " + date.getDate() + ", " + date.getFullYear();
             return result;
         }
-        /**
+         /**
          *  calls the delete function on the parent
          */
         vm.delete = function () {
