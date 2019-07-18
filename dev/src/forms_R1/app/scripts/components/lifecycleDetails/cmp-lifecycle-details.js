@@ -80,7 +80,8 @@
 
         vm.dateFormatError=[
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "date", displayAlias: "MSG_ERR_DATE_FORMAT"}
+            {type: "date", displayAlias: "MSG_ERR_DATE_FORMAT"},
+            {type: "min", displayAlias: "MSG_ERR_INVALID_END_DATE"}
         ];
         vm.minLength6Error=[
             {type: "required", displayAlias: "MSG_ERR_MAND"},
@@ -89,7 +90,6 @@
         vm.requiredOnly=[
             {type: "required", displayAlias: "MSG_ERR_MAND"}
         ];
-
         //
         vm.$onInit = function () {
             _setIdNames();
