@@ -92,5 +92,6 @@
   "D21": "Biologique",
   "D22": "Pharmaceutique",
   "BROWSER": "Navigateur",
-  "TABLE_EXPANDED_STATE": "État ouvert"
+  "TABLE_EXPANDED_STATE": "État ouvert",
+  "PROTECTED_B": "Protected \"B\" when completed"
 }

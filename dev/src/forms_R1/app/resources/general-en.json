@@ -93,5 +93,6 @@
   "D21": "Biologic",
   "D22": "Pharmaceutical",
   "BROWSER": "Browser",
-  "TABLE_EXPANDED_STATE": "Expanded State"
+  "TABLE_EXPANDED_STATE": "Expanded State",
+  "PROTECTED_B": "Protected \"B\" when completed"
 }
