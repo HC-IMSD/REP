@@ -7,6 +7,12 @@
             <section data-ng-if="!main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
             <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
         </div>
+        <div><br></div>
+        <div class="module-attention">
+            <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'SECURITY_DISCLIAMER'|translate}}</h2><br>
+            <section data-ng-if="!main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-discliamer-en.html'"></section>
+            <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-discliamer-fr.html'"></section>
+        </div>
         <span id="instructions"></span>
         <aside class="wb-fnote" role="note">
             <h2>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h2>
@@ -14,6 +20,9 @@
             <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/transaction/tpl-transaction-footnote-fr.html'"></section>
         </aside>
         <span id="main"></span>
+        <div class="row col-md-12 text-right"><br>
+            <span id="securityInfo" class="fa fa-shield fa-sm">&nbsp;Protected "B" when completed</span>
+        </div>
         <section class="panel panel-primary mrgn-tp-lg">
             <header class="panel-heading clearfix">
                 <h2 class="panel-title col-md-8">{{'LOAD_TRANSACTION'|translate}}
