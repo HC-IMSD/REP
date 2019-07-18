@@ -66,14 +66,13 @@
             <div class="col-sm-5">
                 <div class="checkbox">
                     <label for="{{::ar.chkManuId}}">
-                        <input type="checkbox" data-ng-model="ar.roleModel.manufacturer" name="CONTACTMANUFACTURER"
-                               data-ng-change="ar.updateOtherState(ar.roleForm.CONTACTMANUFACTURER,'manufacturer')"
+                        <input type="checkbox" data-ng-model="ar.roleModel.manufacturer" name="contactmanufacturer"
+                               data-ng-change="ar.updateOtherState(ar.roleForm.contactmanufacturer,'manufacturer')"
                                data-ng-disabled="!ar.isEditable"
                                id="{{::ar.chkManuId}}"/>
-                        <span data-ng-if="!ar.isContact">{{::"MANUFACTURER"|translate}}</span>
-                        <span data-ng-if="ar.isContact">{{::"CONTACTMANUFACTURER"|translate}}</span>
-                        <strong id="manufacturer-role-error" class="error" data-ng-if="ar.roleForm.CONTACTMANUFACTURER.$invalid">
-                        <span class="label label-danger" data-ng-messages="ar.roleForm.CONTACTMANUFACTURER.$error">
+                        <span>{{::"CONTACTMANUFACTURER"|translate}}</span>
+                        <strong id="manufacturer-role-error" class="error" data-ng-if="ar.roleForm.contactmanufacturer.$invalid">
+                        <span class="label label-danger" data-ng-messages="ar.roleForm.contactmanufacturer.$error">
                             <span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>
                         </span>
                         </strong>
@@ -187,7 +186,7 @@
                                id="{{::ar.chkRepSecId}}"/> {{'REPSECONDARY'|translate}}
                         <strong id="repSecondary-role-error" class="error" data-ng-if="ar.roleForm.repSecondary.$invalid">
                          <span class="label label-danger" data-ng-messages="ar.roleForm.repSecondary.$error">
-                                    <span data-ng-message="duplicateRole">{{::"REPALT_SEL"|translate}}</span>
+                                    <span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>
                                 </span>
                         </strong>
                     </label>
