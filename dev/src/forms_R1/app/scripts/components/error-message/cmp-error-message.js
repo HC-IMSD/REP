@@ -24,7 +24,8 @@
                 fieldName: '<', //theName of the field
                 formRef: '<',
                 showError: '&',
-                errorTypes: '<'
+                errorTypes: '<',
+                resetFieldName: '&'
             }
         });
     // errorMessageController.$inject = [];
@@ -63,9 +64,15 @@
             }
             if (angular.isUndefined(vm.form_ref[vm.fieldName]))
             {
-                console.warn("lookup undefined " + vm.form_ref.$name + "." + vm.fieldName);
-                return false;
-            } 
+                if(vm.resetFieldName()){
+                    vm.fieldName = vm.resetFieldName();
+                    vm.field_name = vm.fieldName;
+                    return vm.form_ref[vm.fieldName].$invalid || (vm.form_ref[vm.fieldName].$touched && vm.form_ref[vm.fieldName].$invalid);
+                } else {
+                    console.warn("lookup undefined " + vm.form_ref.$name + "." + vm.fieldName);
+                    return false;
+                }
+            }
             return ((vm.showError() && vm.form_ref[vm.fieldName].$invalid) || (vm.form_ref[vm.fieldName].$touched && vm.form_ref[vm.fieldName].$invalid));
         }
         //errMessageCtrl.field_ref[errMessageCtrl.fieldName]
