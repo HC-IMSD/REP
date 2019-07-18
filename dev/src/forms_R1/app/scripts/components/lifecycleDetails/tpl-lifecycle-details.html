@@ -147,7 +147,7 @@
                             </label>
                             <input id="{{::lifecycleCtrl.endDateId}}" type="date" name="{{::lifecycleCtrl.endDateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.endDate"
-                                   data-ng-required="lifecycleCtrl.endDateVisible"
+                                   data-ng-required="lifecycleCtrl.endDateVisible" data-ng-min="lifecycleCtrl.lifecycleModel.startDate"
                                    class="form-control" required max='9999-12-31'
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>

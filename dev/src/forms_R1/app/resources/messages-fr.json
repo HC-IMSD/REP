@@ -30,5 +30,6 @@
   "MSG_ERR_MAX": "Dépasse le maximum.",
   "MSG_FORMAT_CHAR_6DIGITS": "fr_ID should be a letter plus 6 digits.",
   "MSG_ERR_DUPLICATED_SYSTEM": "fr_Duplicated System.",
-  "MSG_FORMAT_ALPHA_NUMBERIC": "Alphanumérique seulement"
+  "MSG_FORMAT_ALPHA_NUMBERIC": "Alphanumérique seulement",
+  "MSG_ERR_INVALID_END_DATE": "La date de fin ne doit pas être antérieure à la date de début"
 }
