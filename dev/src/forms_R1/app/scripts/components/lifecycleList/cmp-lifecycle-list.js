@@ -84,7 +84,7 @@
         vm.$onInit = function () {
             //local var from binding
             vm.activityTypes= TransactionLists.getActivityTypes();
-            vm.selectRecord = -1;
+            vm.selectRecord = 0;
             vm.addFocused = false;
             vm.startingSequence=0;
 
@@ -95,6 +95,9 @@
 
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
+                if(vm.lifecycleList.length < 1){
+                    vm.addTransaction();
+                }
                 vm.isDetailsValid = true;
                 vm.updateErrorState();
                 vm.startingSequence=0;
@@ -125,9 +128,9 @@
             }
         };
 
-        vm.$postLink = function () {
-            vm.addTransaction();
-        };
+        // vm.$postLink = function () {
+            // vm.addTransaction();
+        // };
 
         vm.deleteRecord = function (aID) {
             var idx = vm.lifecycleList.indexOf(
