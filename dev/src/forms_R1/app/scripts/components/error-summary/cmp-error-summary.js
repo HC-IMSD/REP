@@ -433,6 +433,7 @@
             }
             result[error_Name] = {
                 name: destId,
+                errorName: error_Name,
                 translateKey: scrubName.toUpperCase(),
                 type: errorKey,
                 parent: parent,
@@ -447,7 +448,7 @@
             var domFieldList = {};
             //TODO make angular friendly
             //get all the inputs and assign order index
-            $.each($('input, select ,textarea'), function (k) {
+            $.each($('input, select, textarea'), function (k) {
                 var temp_attr = $(this).attr('id');
                 if (temp_attr) {
                     domFieldList[temp_attr] = k;
@@ -492,7 +493,7 @@
                 var i = 0;
                 while (i < newErrors.length) {
                     var currRec = newErrors[i];
-                    var targetName = currRec.name;
+                    var targetName = currRec.errorName;
                     var destIndex = sortedDomJsonList[targetName];
                     if (angular.isDefined(destIndex) && destIndex !== i) {
                         var tempRec = angular.copy(newErrors[destIndex]);
