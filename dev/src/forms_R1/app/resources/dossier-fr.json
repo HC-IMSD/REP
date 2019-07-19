@@ -22,7 +22,7 @@
 	"CANCEL": "fr_Cancel",
 	"DELETE": "Supprimer",
 	"SCHED_A": "fr_Schedule A Claims",
-	"DIN_FULL": "Numéro d’identification du médicament (DIN), si existant",
+	"DIN_FULL": "Numéro d’ID du médicament (DIN), si existant",
 	"THERA_CLASS": "fr_Therapeutic Classification(s)",
 	"THERA_CLASS_ADD": "fr_Add Therapeutic Classification",
 	"THERA_CLASS_NAME": "fr_Therapeutic Classification Name",

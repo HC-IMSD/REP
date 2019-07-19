@@ -10,7 +10,7 @@
   "TYPE_DRUGPROD":"fr_Drug Product Type",
   "DISINFECTANT_TYPE": "Type de déinfectant",
   "DISI_TYPE_MISSING": "Type de déinfectant",
-  "SCHED_DIN":"Numéro d’identification du médicament (DIN)",
+  "SCHED_DIN":"Numéro d’ID du médicament (DIN)",
   "PROP_INDICATION":"Indication/emploi/posologie proposé (y compris la dose quotidienne maximale)",
   "SCHEDULE_PRESC_STATUS": "Statut sur l'annexe et prescription (sélectionner tout ce qui s’applique): le produit est",
   "SCHEDULE_C":"dans l'annexe C (produits radiopharmaceutiques) de la Loi sur les aliments et drogues",

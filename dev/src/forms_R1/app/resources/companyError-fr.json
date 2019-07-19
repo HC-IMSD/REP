@@ -9,6 +9,6 @@
   "ROLEMISSING": "Sélectionner un ou plusieurs rôles pour ce représentant de l'entreprise",
   "CONTACTROLEMISSING": "Sélectionner un ou plusieurs rôles pour ce représentant de l'entreprise",
   "ROLEREPMISSING": "fr_Roles for this company representative ",
-  "IMPORTERIDVALID": "SVP entrez l’Identification de l’importateur pour chaque produit",
+  "IMPORTERIDVALID": "SVP entrez l’ID de l’importateur pour chaque produit",
   "ADDRESS_EXPND": "SVP entrez l’ID de l’importateur pour chaque produit"
 }
