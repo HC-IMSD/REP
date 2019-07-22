@@ -83,7 +83,7 @@
   "RETURN_INSTRUCTION":"Retourne aux instructions ",
   "PRIVACY_STATEMENT_HELP":"fr_View Privacy Notice Statement",
   "PRIVACY_NOTICE_STATEMENT":"Énoncé de confidentialité",
-  "SECURITY_DISCLIAMER":"fr_Security Discliamer",
+  "SECURITY_DISCLIAMER":"Avis de non-responsabilité concernant la sécurité",
   "PRIVACY_STATEMENT":"En soumettant vos renseignements personnels, vous consentez à sa collecte, à son utilisation et à sa divulgation conformément à l'énoncé de confidentialité.",
   "FOOTNOTE_INSTRUCTION":"Instructions pour compléter les sections du formulaire",
   "SECTION_IS_NOT_VISIBLE": "[ Cette section peut ne pas être visible. ]",
@@ -93,5 +93,5 @@
   "D22": "Pharmaceutique",
   "BROWSER": "Navigateur",
   "TABLE_EXPANDED_STATE": "État ouvert",
-  "PROTECTED_B": "Protected \"B\" when completed"
+  "PROTECTED_B": "Protégé \"B\" une fois rempli"
 }

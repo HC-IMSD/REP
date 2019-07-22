@@ -350,13 +350,15 @@
 
 
                 for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _mapLifecycleRecToOutput($translate, jsonObj[i], ENGLISH, FRENCH);
-                    if (jsonObj.length === 1) {
-                        return (record);
+                    if (jsonObj[i].isSaved) {
+                        var record = _mapLifecycleRecToOutput($translate, jsonObj[i], ENGLISH, FRENCH);
+                        if (jsonObj.length === 1) {
+                            return (record);
+                        }
+                        result.push(record);
                     }
-                    result.push(record);
                 }
-                return result
+                return result;
             },
 
             resetEctdSection: function () {

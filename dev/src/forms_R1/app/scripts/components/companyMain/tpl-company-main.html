@@ -8,6 +8,7 @@
     <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
 </div>
 <div><br></div>
+<span id="security"></span>
 <div class="module-attention">
     <h2 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'SECURITY_DISCLIAMER'|translate}}</h2><br>
     <section data-ng-if="!main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-discliamer-en.html'"></section>
@@ -24,7 +25,7 @@
         <div class="row mrgn-tp-md">
             <div class="col-md-12">
                 <div class="text-right">
-                    <span id="securityInfo" class="fa fa-shield fa-sm"><strong>&nbsp;{{::'PROTECTED_B'|translate}}d</strong></span>
+                    <span id="securityInfo" class="fa fa-shield fa-sm"><strong>&nbsp;{{::'PROTECTED_B'|translate}}</strong></span>
                 </div>
             </div>
         </div>
