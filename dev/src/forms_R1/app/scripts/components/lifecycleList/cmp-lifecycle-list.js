@@ -95,8 +95,7 @@
 
             if (changes.records) {
                 vm.lifecycleList = changes.records.currentValue;
-                if(vm.lifecycleList.length < 1 || (vm.lifecycleList.length > 0 && vm.lifecycleList[0].controlNumber == "")){
-                    vm.lifecycleList = [];
+                if(vm.lifecycleList.length < 1){
                     vm.addTransaction();
                 }
                 vm.isDetailsValid = true;
