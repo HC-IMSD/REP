@@ -3,7 +3,7 @@
   "MSG_ERR_ROLE": "fr_Please select at least one role",
   "MSG_ERR_DISITYPE": "Veuillez sélectionner au moins un type de désinfectant",
   "MSG_ERR_ADDRESS": "fr_Please select at least one address",
-  "MSG_ERR_EMAIL_FORMAT": "Veuillez fournir une adresse courriel valide.",
+  "MSG_ERR_EMAIL_FORMAT": "Veuillez fournir une courriel valide.",
   "MSG_ERR_CONTACT_NUM": "fr_All the roles have to be used for the company contacts",
   "MSG_ERR_PHONE_FORMAT": "Veuillez fournir un numéro de téléphone valide.",
   "MSG_ERR_FAX_FORMAT":"Veuillez fournir un numéro de télécopieur valide.",

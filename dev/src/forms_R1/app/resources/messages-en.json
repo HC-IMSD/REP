@@ -1,6 +1,6 @@
 {
   "MSG_ERR_MAND": "This field is required",
-  "MSG_ERR_EMAIL_FORMAT": "Please enter a valid email address.",
+  "MSG_ERR_EMAIL_FORMAT": "Please enter a valid email.",
   "MSG_ERR_ROLE": "This field is required",
   "MSG_ERR_DISITYPE": "Please select at least one disinfectant type",
   "MSG_ERR_ADDRESS": "Please select at least one address",
