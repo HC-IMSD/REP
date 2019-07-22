@@ -318,6 +318,10 @@
                     }
                     else if (record[j].$invalid === true && !resultsList.hasOwnProperty(record[j].$name)) {
                         var result = _processRecord(record[j].$name, keys[i], parent);
+                        //don't display rewquired text for SAVELIFEREC error
+                        if (result[record[j].$name].translateKey === 'SAVELIFEREC') {
+                            result[record[j].$name].type = '';
+                        }
                         angular.merge(resultsList, result);
                     }
                 }
@@ -351,7 +355,7 @@
                 scopeId = "";
             }
             return scopeId;
-        };
+        }
 
         /**
          * Processes a non summary record. Checks for aliases and processes accordingly

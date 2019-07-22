@@ -32,8 +32,11 @@
             <span data-ng-if="errSummaryCtrl.errorArray.length==1">{{'ERROR_FOUND'|translate}}</span>
         </h6>
         <ul data-ng-repeat="errorRec in errSummaryCtrl.errorArray">
-                <li data-ng-if="!errSummaryCtrl.isList(errorRec) && !errorRec.isSummary">
+                <li data-ng-if="!errSummaryCtrl.isList(errorRec) && !errorRec.isSummary && errorRec.type">
                     <a  href="#{{errorRec.name}}" target="_self">{{errorRec.translateKey|translate}}&nbsp;&#8208;&nbsp;{{errorRec.type |translate}}</a>
+                </li>
+                <li data-ng-if="!errSummaryCtrl.isList(errorRec) && !errorRec.isSummary && !errorRec.type">
+                    <a  href="#{{errorRec.name}}" target="_self">{{errorRec.translateKey|translate}}</a>
                 </li>
                 <li data-ng-if="errSummaryCtrl.isList(errorRec) && !errorRec.isSummary">
                     <a  href="#{{errorRec.name}}" target="_self">{{errorRec.translateKey|translate}}</a>
