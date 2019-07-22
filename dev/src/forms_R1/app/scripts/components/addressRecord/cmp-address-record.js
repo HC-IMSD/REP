@@ -225,7 +225,7 @@
                 vm.addressModel.countryHtml = vm.addressModel.country[vm.lang];
                 vm.updateCountry++;
 
-            };
+            }
             if (!vm.isImporter) {
                 /**vm.addressModel.importerProducts = {
                     "selectedProducts": "",
@@ -246,7 +246,7 @@
           if(vm.des){
               vm.addressModel.addressRole.importer = false;
               vm.addressModel.importerID = "";
-          };
+          }
           if(vm.isImporter && vm.des){
               vm.isImporter = false;
               vm.addressModel.country = '';

@@ -24,8 +24,7 @@
                 fieldName: '<', //theName of the field
                 formRef: '<',
                 showError: '&',
-                errorTypes: '<',
-                resetFieldName: '&'
+                errorTypes: '<'
             }
         });
     // errorMessageController.$inject = [];
@@ -64,14 +63,8 @@
             }
             if (angular.isUndefined(vm.form_ref[vm.fieldName]))
             {
-                if(vm.resetFieldName()){
-                    vm.fieldName = vm.resetFieldName();
-                    vm.field_name = vm.fieldName;
-                    return vm.form_ref[vm.fieldName].$invalid || (vm.form_ref[vm.fieldName].$touched && vm.form_ref[vm.fieldName].$invalid);
-                } else {
-                    console.warn("lookup undefined " + vm.form_ref.$name + "." + vm.fieldName);
-                    return false;
-                }
+                console.warn("lookup undefined " + vm.form_ref.$name + "." + vm.fieldName);
+                return false;
             }
             return ((vm.showError() && vm.form_ref[vm.fieldName].$invalid) || (vm.form_ref[vm.fieldName].$touched && vm.form_ref[vm.fieldName].$invalid));
         }

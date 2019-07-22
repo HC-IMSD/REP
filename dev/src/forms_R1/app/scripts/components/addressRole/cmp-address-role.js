@@ -44,6 +44,10 @@
         vm.inUser = false;
         vm.alerts = [false, false];
         vm.lang = $translate.proposedLanguage() || $translate.use();
+        vm.showCMError = false;
+        vm.duplicateRole=[
+            {type: "duplicateRole", displayAlias: "TYPE_DUPLICATEROLE"}
+        ];
 
         vm.roleModel = {
             manufacturer: false,
@@ -76,7 +80,7 @@
         };
         /**
          * Checks all the controls and updates the error state
-         *
+         * todo: to update this method to use dynamic control name ??
          */
         function checkAllControlsForDuplicates() {
             if (!vm.roleForm) return;
@@ -92,12 +96,13 @@
         vm.updateImporterState = function (ctrl, toCheck) {
             vm.oneSelected(ctrl, toCheck);
             vm.importerUpdated({state: vm.roleModel.importer});
+            // todo: set manu role input untouch ??
             checkAllControlsForDuplicates();
         };
 
         vm.updateOtherState = function (ctrl, toCheck) {
-            vm.oneSelected(ctrl, toCheck);
-            vm.deselectImporter({state: vm.roleModel.manufacturer})
+            var result = vm.oneSelected(ctrl, toCheck);
+            vm.deselectImporter({state: vm.roleModel.manufacturer});
             //vm.deselectImporter({state: vm.roleModel.manufacturer || vm.roleModel.mailing || vm.roleModel.billing})
         };
 
@@ -204,12 +209,15 @@
             vm.fieldsetId = "fs_roleMissing" +scopeId;
             vm.roleMissingId = "roleMissing" +scopeId;
             vm.contactRoleMissingId = "contactRoleMissing" +scopeId;
-            vm.chkManuId = "chk-manufacturer" +scopeId;
-            vm.chkMailId = "chk-mailing" +scopeId;
-            vm.chkBillId = "chk-billing" +scopeId;
+            vm.chkManuId = "manufacturer" +scopeId;
+            vm.chkMailId = "mailing" +scopeId;
+            vm.chkBillId = "billing" +scopeId;
+            vm.chkManuContactId = "contactManufacturer" + scopeId;
+            vm.chkMailContactId = "contactMailing" + scopeId;
+            vm.chkBillContactId = "contactBilling" + scopeId;
             vm.chkImpId = "chk-importer" +scopeId;
-            vm.chkRePrimId = "chk-rep-primary" +scopeId;
-            vm.chkRepSecId = "chk-rep-secondary" +scopeId;
+            vm.chkRePrimId = "repPrimary" +scopeId;
+            vm.chkRepSecId = "repSecondary" +scopeId;
         }
 
 

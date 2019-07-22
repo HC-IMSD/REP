@@ -263,7 +263,6 @@
 
         function _setIdNames() {
             var scopeId = vm.fldId+ "_" + $scope.$id;
-            vm.addrScopeId = scopeId;
             vm.streetId = "STREET" + scopeId;
             vm.cityId = "CITY" + scopeId;
             vm.countryId = "COUNTRY" + scopeId;
@@ -272,12 +271,6 @@
             vm.provinceListId = "province" + scopeId;
             vm.postalId = "postal" + scopeId;
             vm.zipId = "zip" + scopeId;
-        }
-        vm.getProvinceStateId = function(){
-            return vm.provListLabel + vm.addrScopeId;
-        }
-        vm.getPostLabelId = function(){
-            return vm.postalLabel + vm.addrScopeId;
         }
         vm.countryChange = function() {
             var found = false;
