@@ -47,7 +47,9 @@
         vm.oneFeeDocSelected = "";
         vm.yesNoList = [YES, NO];
         vm.feeDocKeys = ['estMarketShare', 'comparison', 'salesHistory', 'marketPlan', 'avgSalePrice', 'other'];
-        vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
+        vm.requiredOnlyError = [{type: "required", displayAlias: "MSG_ERR_MAND"},
+                                {type: "number", displayAlias: "TYPE_NUMBER"}
+                                ];
         vm.onePaymentError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.oneFeeDocError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.alerts = [false, false, false];
