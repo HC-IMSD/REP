@@ -73,7 +73,7 @@
         <div class="row" data-ng-if="ar.isContact">
             <div class="col-sm-5">
                 <div class="checkbox">
-                    <label for="{{::ar.chkManuId}}">
+                    <label for="{{::ar.chkManuContactId}}">
                         <input type="checkbox" data-ng-model="ar.roleModel.manufacturer" name="{{::ar.chkManuContactId}}"
                                data-ng-change="ar.updateOtherState(ar.roleForm.{{::ar.chkManuContactId}},'manufacturer')"
                                data-ng-disabled="!ar.isEditable"
@@ -93,7 +93,7 @@
             </div>
             <div class="col-sm-7">
                 <div class="checkbox">
-                    <label for="{{::ar.chkMailId}}">
+                    <label for="{{::ar.chkMailContactId}}">
                         <input type="checkbox" name="{{::ar.chkMailContactId}}" data-ng-model="ar.roleModel.mailing"
                                data-ng-disabled="!ar.isEditable"
                                data-ng-change="ar.updateOtherState(ar.roleForm.{{::ar.chkMailContactId}},'mailing')" id="{{::ar.chkMailContactId}}"/>
@@ -133,7 +133,7 @@
             </div>
             <div class="col-sm-5" data-ng-if="ar.isContact">
                 <div class="checkbox">
-                    <label for="{{::ar.chkBillId}}">
+                    <label for="{{::ar.chkBillContactId}}">
                         <input type="checkbox" name="{{::ar.chkBillContactId}}" data-ng-model="ar.roleModel.billing"
                                data-ng-disabled="!ar.isEditable"
                                data-ng-change="ar.updateOtherState(ar.roleForm.{{::ar.chkBillContactId}},'billing')" id="{{::ar.chkBillContactId}}"/>
