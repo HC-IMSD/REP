@@ -44,12 +44,14 @@
             {
                 label: "IMPORTER_COMPANY_NAME",
                 binding: "importerName",
-                width: "40"
+                width: "40",
+                isHtml: "true"
             },
             {
                 label: "STREET",
                 binding: "street",
-                width: "50"
+                width: "50",
+                isHtml: "true"
             }
         ];
 
