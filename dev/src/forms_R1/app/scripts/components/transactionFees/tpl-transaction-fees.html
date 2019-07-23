@@ -13,7 +13,7 @@
                         <select class="form-control full-width" id="{{::transFeeCtrl.submClassId}}"
                                 name="{{::transFeeCtrl.submClassId}}" required
                                 data-ng-model="transFeeCtrl.model.submissionClass"
-                                data-ng-options="choice[transFeeCtrl.lang] for choice in transFeeCtrl.submissionType | orderBy:'sortBy' track by choice.id">
+                                data-ng-options="choice[transFeeCtrl.lang] for choice in transFeeCtrl.submissionType | orderBy:'sortBy'">
                             <option value="" label=" " data-ng-empty="transFeeCtrl.model.submissionClass" />
                         </select>
 

@@ -34,7 +34,7 @@
                                                 data-ng-model="transInfoCtrl.transactionModel.ectd.dossierType"
                                                 data-ng-options="val |translate for val in  transInfoCtrl.formTypeList"
                                                 data-ng-change="transInfoCtrl.updateDossierTypeState()">
-                                            <option value="" label=" " data-ng-if="! transInfoCtrl.transactionModel.ectd.dossierType" />
+                                            <option value="" label=" " data-ng-empty=" transInfoCtrl.transactionModel.ectd.dossierType" />
                                         </select>
                                     </label>
                                 </div>
