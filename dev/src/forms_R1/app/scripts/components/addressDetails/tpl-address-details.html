@@ -54,7 +54,7 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group" data-ng-show="adr.showProvince"
+                <div class="form-group" data-ng-if="adr.showProvince"
                      data-ng-class="{'has-error':adr.addressForm[adr.provinceListId].$invalid}">
                     <label for="{{::adr.provinceListId}}" class="required">
                         <span class="field-name">{{adr.provListLabel |translate}}</span>
@@ -70,7 +70,7 @@
                         </select>
                     </label>
                 </div>
-                <div class="form-group" data-ng-show="adr.showState"
+                <div class="form-group" data-ng-if="adr.showState"
                      data-ng-class="{'has-error':adr.addressForm[adr.stateListId].$invalid}">
                     <label for="{{::adr.stateListId}}" class="required">
                         <span class="field-name">{{adr.provListLabel |translate}}</span>
