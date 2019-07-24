@@ -29,7 +29,7 @@
                            data-ng-readonly="!adr.isEditable" required/>
                 </label>
             </div>
-            <div class="col-md-5 form-group">
+            <div class="col-md-5 form-group" data-ng-class="{'has-error':adr.addressForm[adr.countryId].$invalid}">
                 <label class="required full-width" for="{{::adr.countryId}}" >
                     <span class="field-name">{{::"COUNTRY" |translate}}</span>
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
