@@ -31,7 +31,7 @@
                 onDelete: '&',
                 showErrors: '<',
                 countryList:'<',
-                updateCountryList:'<',
+                updateCountryList:'&',
                 updateRecord:'&',
                 onError: '&',
                 fieldsetLabel:'@'
@@ -52,7 +52,7 @@
 
         vm.$onInit = function(){
             vm.showDetailErrors=false;
-            vm.updateCountryList();
+            vm.coutryList = vm.updateCountryList();
             _setIdNames();
         };
         /**
@@ -72,7 +72,7 @@
                 vm.model.country = {};
             }
             if(found){
-                vm.updateCountryList();
+                vm.countryList = vm.updateCountryList();
                 vm.updateRecord();
                 vm.clearFilter($scope);
             // } else {
@@ -120,6 +120,7 @@
             var scopeId = "_" + $scope.$id;
             vm.countryId="country_name" + scopeId;
             vm.unknownCountryId="unknown_country_details" + scopeId;
+            vm.countryListId = "srcCountryList" + scopeId;
         }
     }
 })();

@@ -49,11 +49,10 @@
         vm.showDetailErrors=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.countryFilter = "countryRecCtrl.model.display";
-
         vm.$onInit = function(){
             vm.showDetailErrors=false;
-            vm.updateCountryList();
             _setIdNames();
+            vm.countryList = vm.updateCountryList();
         };
         /**
          * Updates the display value for the object for summary display
@@ -78,7 +77,7 @@
                 }
             }
             if(found){
-                vm.updateCountryList();
+                vm.countryList = vm.updateCountryList();
                 vm.updateRecord();
                 vm.clearFilter($scope);
             } else {
@@ -143,6 +142,7 @@
             var scopeId = "_" + $scope.$id;
             vm.countryId="country_name" + scopeId;
             vm.unknownCountryId="unknown_country_details" + scopeId;
+            vm.countryListId = "countryListId" + scopeId;
         }
     }
 })();

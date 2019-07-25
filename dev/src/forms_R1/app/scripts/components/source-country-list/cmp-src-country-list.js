@@ -139,7 +139,7 @@
             setRecord(vm.model.list.length - 1);
             //vm.editRecord(item);
             vm.onUpdate({list: vm.model.list});
-
+            vm.countryList = vm.updateCountryList();
         };
 
         function setRecord(value) {
@@ -177,6 +177,7 @@
                     }
                 }
                 vm.countryList = base;
+                return base;
             }
         };
 
