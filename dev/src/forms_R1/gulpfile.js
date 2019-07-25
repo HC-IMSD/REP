@@ -75,8 +75,8 @@ var homePath = {
     dev_fr: "https://lam-dev.hres.ca/rep-dev/index-fr.html",
     test_en: "https://lam-dev.hres.ca/rep_test/index.html",
     test_fr: "https://lam-dev.hres.ca/rep_test/index-fr.html",
-    prod_en: "https://health-products.canada.ca/rep-pir/index.html",
-    prod_fr: "https://health-products.canada.ca/rep-pir/index.html",
+    prod_en: "https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/regulatory-enrolment-process.html",
+    prod_fr: "https://www.canada.ca/fr/sante-canada/services/medicaments-produits-sante/medicaments/demandes-presentations/lignes-directrices/processus-inscription-reglementaire.html",
     prodInt_en: "https://lam-dev.hres.ca/REP-Form-Internal/index.html",
     prodInt_fr: "https://lam-dev.hres.ca/REP-Form-Internal/index.html"
 

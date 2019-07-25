@@ -50,7 +50,7 @@
         vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.columnDef = [
             {
-                label: "COMPANY",
+                label: "COMPANY_NAME",
                 binding: "companyName",
                 width: "20"
             },
