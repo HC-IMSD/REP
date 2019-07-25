@@ -179,6 +179,7 @@
                 vm.countryList = base;
                 return base;
             }
+            return null;
         };
 
         function getListMaxID() {
