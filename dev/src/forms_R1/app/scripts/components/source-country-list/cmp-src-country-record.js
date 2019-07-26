@@ -31,7 +31,7 @@
                 onDelete: '&',
                 showErrors: '<',
                 countryList:'<',
-                updateCountryList:'&',
+                updateCountryList:'<',
                 updateRecord:'&',
                 onError: '&',
                 fieldsetLabel:'@'
@@ -48,11 +48,11 @@
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.showDetailErrors=false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.srcCountryFilter = "countryRecCtrl.model.display";
+        vm.srcCountryFilter = "srcCountryRecCtrl.model.display";
 
         vm.$onInit = function(){
             vm.showDetailErrors=false;
-            vm.coutryList = vm.updateCountryList();
+            vm.countryList = vm.updateCountryList();
             _setIdNames();
         };
         /**

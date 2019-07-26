@@ -68,7 +68,7 @@
             if (angular.isUndefined(vm.countryList)) {
                 setUnknownCountryState(vm.withUnknown);
             }
-            vm.updateCountryList();
+            vm.countryList = vm.updateCountryList();
         };
 
         vm.$onChanges = function (changes) {
@@ -114,7 +114,7 @@
                     }
                 ]
             } else {
-                vm.countryList = countries;
+                vm.countryList = vm.countries;
                 vm.hasUnknown = false;
                 vm.emptyModel = {"id": "", "country": "","unknownCountryDetails":"","display":""};
                 vm.columnDef = [
@@ -132,6 +132,7 @@
         vm.addNew = function () {
             var maxID = getListMaxID();
             var item = angular.copy(vm.emptyModel);
+            item.display = "";
             item.id = (getListMaxID() + 1);
             (vm.model.list).push(item);
             // setRecord(-1);
@@ -149,7 +150,7 @@
 
         vm.deleteRecord = function (_id) {
             var aList = vm.deleteRecFromList(vm.model.list, _id);
-           vm.updateCountryList();
+            vm.updateCountryList();
             vm.onUpdate({list:aList});
             vm.requiredFlag = false;
         };
