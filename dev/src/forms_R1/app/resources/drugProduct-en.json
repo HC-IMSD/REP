@@ -35,5 +35,6 @@
   "INS_INDUS":"Institutional/Industrial",
   "CONTACT_LENS":"Contact Lens",
   "SAVE_INSTRUCT": "Product Information File Save Instructions",
-  "ADD_IMPORTER" : "Add Importer"
+  "ADD_IMPORTER" : "Add Importer",
+  "TYPE_MIN": "Must be equal to or greater than Lower Limit"
 }
