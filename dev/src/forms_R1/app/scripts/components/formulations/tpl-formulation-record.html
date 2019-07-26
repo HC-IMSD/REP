@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-md-6 form-group"
                      data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageOtherId].$invalid}"
-                     data-ng-show="formulRecCtrl.isDosageOther()">
+                     data-ng-if="formulRecCtrl.isDosageOther()">
                     <label for="{{::formulRecCtrl.dosageOtherId}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -75,7 +75,7 @@
                                            form-ref="formulRecCtrl.formulationForm"
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}"
+                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}" data-focus-if="formulRecCtrl.isDosageOther()"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
                                class="form-control full-width" name="{{::formulRecCtrl.dosageOtherId}}"
                                data-ng-model-options="{ debounce: '$inherit'}"
