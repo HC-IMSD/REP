@@ -61,7 +61,7 @@
         vm.countryList= getCountryAndProvinces.getCountries();
         vm.fdId="";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "MSG_ERR_POSTAL"}];
+        vm.postalErrorList = [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "pattern", displayAlias: "TYPE_PATTERN"}];
 
         vm.showDetailErrors=false;
         vm.min5Error = [
@@ -230,7 +230,7 @@
                 vm.importerForm.$setPristine();
                 vm.showDetailErrors=false;
                 vm.updateErrorSummaryState();
-
+                vm.model.focusImporterId = false;
             } else {
                 vm.showDetailErrors=true;
                 //vm.makeFocused();
