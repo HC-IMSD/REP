@@ -36,5 +36,5 @@
   "CONTACT_LENS":"Contact Lens",
   "SAVE_INSTRUCT": "Product Information File Save Instructions",
   "ADD_IMPORTER" : "Ajouter un importateur",
-  "TYPE_MIN": "Doit être égale ou supérieure à la limite inférieure"
+  "TYPE_MIN": "Doit être supérieur au minimum"
 }
