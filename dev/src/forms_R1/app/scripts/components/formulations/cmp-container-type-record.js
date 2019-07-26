@@ -34,7 +34,9 @@
                 isDetailValid: '&',
                 recordIndex:'<',
                 errorSummaryUpdate:'<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                isFocus: '<',
+                cancelFocus: '&'
             }
 
         });
@@ -57,11 +59,12 @@
 
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.numberError = [
-            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+            {type: "minLength", displayAlias: "TYPE_MIN"},
+            {type: "number", displayAlias: "TYPE_NUMBER"}
         ];
         vm.numberInvalidMinMax=[
-            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN"},
+            {type: "number", displayAlias: "TYPE_NUMBER"},
             {type: "max", displayAlias: "MSG_ERR_INVALID_NUM_MAX"}
         ];
 
