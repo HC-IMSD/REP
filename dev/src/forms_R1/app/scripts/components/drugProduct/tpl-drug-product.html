@@ -353,7 +353,7 @@
                 <div class="row">
                     <div class="form-group col-xs-12"
                          data-ng-class="{'has-error':drugProdCtrl.drugProdForm[drugProdCtrl.propIndicationId].$invalid}">
-                        <label class="required">
+                        <label class="required" for="{{::drugProdCtrl.propIndicationId}}">
                             <span class="field-name">10. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
                             <sup id="dr8_ref">
@@ -403,12 +403,12 @@
 
                 <div class="row">
                     <div class="col-xs-12 form-group">
-                        <h5>
+                        <strong>
                             <span class="field-name">11. {{::'FORMULATION'|translate}}</span>
                             <sup id="dr9_ref">
                                 <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
                             </sup>
-                        </h5>
+                        </strong>
                     </div>
                 </div>
                 <div>
