@@ -109,5 +109,6 @@
   "NINGRECCTRL.NONMEDINGFORM":"in the non-medicinal ingredient details",
   "CTRCTRL.CONTAINERTYPEFORM":"in the container type details",
   "FORMULCTRL.FORMULATIONSFORM":"in the formulations tab",
-  "INGREDIENT_INSTRUCT":"Ingredient Instructions"
+  "INGREDIENT_INSTRUCT":"Ingredient Instructions",
+  "SHELF_LIFE_NUMBER": "Value"
 }

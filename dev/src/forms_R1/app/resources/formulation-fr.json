@@ -109,6 +109,6 @@
   "NINGRECCTRL.NONMEDINGFORM":"fr_in the nom-medicinal ingredient details",
   "FORMULCTRL.FORMULATIONSFORM":"dans l'onglet formulation",
   "INGREDIENT_INSTRUCT":"Ingredient Instructions",
-  "CTRCTRL.CONTAINERTYPEFORM":"dans les détails du type de conteneur"
-
+  "CTRCTRL.CONTAINERTYPEFORM":"dans les détails du type de conteneur",
+  "SHELF_LIFE_NUMBER": "Valeur"
 }
