@@ -361,7 +361,7 @@
 <row><code>FIRSTNAME</code><eng>First Name</eng><fra>Prénom</fra></row>
 <row><code>LASTNAME</code><eng>Last Name</eng><fra>Nom</fra></row>
 <row><code>INITIALS</code><eng>Initials</eng><fra>Initiales</fra></row>
-<row><code>LANGCORRESPOND</code><eng>Language of Correspondance</eng><fra>Langue de correspondance</fra></row>
+<row><code>LANGCORRESPOND</code><eng>Language of Correspondence</eng><fra>Langue de correspondance</fra></row>
 <row><code>JOBTITLE</code><eng>Job Title</eng><fra>Titre de poste</fra></row>
 <row><code>SALUTATION</code><eng>Salutation</eng><fra>Titre de civilité</fra></row>
 <row><code>SALUT_MR</code><eng>Mr.</eng><fra>M.</fra></row>
