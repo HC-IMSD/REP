@@ -43,29 +43,43 @@
         document.write(wet.builder.refTop({
             cdnEnv: "prod" //jqueryEnv:false
         }));
-        function focusOnRow(e) {
+        function focusOnRow(e, alter) {
             var myTable = $(e).closest('table');
-            var firstTr = $(myTable).find('tr');
-            if (firstTr.length > 0) {
-                $(firstTr[0]).focus();
-            } else {
-                $(myTable).focus();
-            }
+            window.setTimeout(function(){
+                $('html, body').animate({
+                    scrollTop: $(myTable).offset().top + 'px'
+                }, 'fast');
+                var td = $(e).closest('tr').prev().find(' > td ');
+                if($(td).length < 1){
+                    $(myTable).focus();
+                } else {
+                    $(td).focus();
+                }
+            }, 100);
         }
         function focusOnTable(node, idStartWith){
             var myTable = null;
             if(node != null){
-                myTable = $(node).find('table[id^=' + e + ']')[0];
+                myTable = $(node).closest('tr').find('table[id^=' + idStartWith + ']')[0];
             }
             if(myTable != null){
-                alert($(myTable).attr('id'));
-                $(myTable).focus();
+                console.log($(myTable).attr('id'));
+                $('html, body').animate({
+                    scrollTop: $(myTable).offset().top + 'px'
+                }, 'fast');
+                window.setTimeout(function() {
+                    var myTd = $(myTable).find('> tbody > tr > td').first();
+                    $(myTd).focus();
+                }, 100);
             }
         }
     </script>
 </head>
 
 <body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;">
+<div style="position:fixed; right:0px; top:10px;margin-right:45%;z-index:1;color:red;">
+    <span id="securityInfo" class="fa fa-shield fa-sm"><strong class="ng-binding">&nbsp;Protected "B" when completedd</strong></span>
+</div>
 <div id="def-top">
     <!-- Write closure fall-back static file -->
     <!-- ./wet_4_0_27/cdts/static/top-en.html-->

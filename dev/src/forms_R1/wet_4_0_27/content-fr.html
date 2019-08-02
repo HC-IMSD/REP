@@ -43,6 +43,36 @@
         document.write(wet.builder.refTop({
             cdnEnv: "prod" //jqueryEnv:false
         }));
+        function focusOnRow(e, alter) {
+            var myTable = $(e).closest('table');
+            window.setTimeout(function(){
+                $('html, body').animate({
+                    scrollTop: $(myTable).offset().top + 'px'
+                }, 'fast');
+                var td = $(e).closest('tr').prev().find(' > td ');
+                if($(td).length < 1){
+                    $(myTable).focus();
+                } else {
+                    $(td).focus();
+                }
+            }, 100);
+        }
+        function focusOnTable(node, idStartWith){
+            var myTable = null;
+            if(node != null){
+                myTable = $(node).closest('tr').find('table[id^=' + idStartWith + ']')[0];
+            }
+            if(myTable != null){
+                console.log($(myTable).attr('id'));
+                $('html, body').animate({
+                    scrollTop: $(myTable).offset().top + 'px'
+                }, 'fast');
+                window.setTimeout(function() {
+                    var myTd = $(myTable).find('> tbody > tr > td').first();
+                    $(myTd).focus();
+                }, 100);
+            }
+        }
     </script>
 </head>
 
