@@ -7,7 +7,7 @@
                          is-required-record="roaCtrl.requiredFlag"
                          disable-selection="roaCtrl.disableAddButton()">
 
-        <cmp-roa-record record="$parent.record" show-errors="roaCtrl.showDetailErrors"
+        <cmp-roa-record record="$parent.record" show-errors="roaCtrl.showDetailErrors" is-focus="roaCtrl.isFocus" cancel-focus="roaCtrl.cancelFocus();"
                         on-delete="roaCtrl.deleteRecord(id)" update-record="roaCtrl.onError()" reset-me="roaCtrl.resetMe()"></cmp-roa-record>
 
     </cmp-expanding-table>
@@ -15,7 +15,7 @@
 
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" data-ng-click="roaCtrl.addNew()" name="addRoaRec_{{::$id}}"
+            <button class="btn btn-primary" data-ng-click="roaCtrl.addNew();roaCtrl.setFocus();" name="addRoaRec_{{::$id}}"
                     id="addRoaRec_{{::$id}}" data-ng-disabled="roaCtrl.disableAddButton()">
                 {{::'ADD_ROUTES_ADMINISTRATION'|translate}}
             </button>

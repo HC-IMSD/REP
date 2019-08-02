@@ -47,6 +47,7 @@
         vm.updateSummary = 0; //increment to send message to error summaries
         vm.showSummary = false;
         vm.focusSummary = 0;
+        vm.isFocus = false;
         vm.exclusions = {
             "tissuesListSrcCtrl.tissuesListForm":"true"
         };
@@ -148,6 +149,14 @@
             vm.selectRecord=value;
 
         };
+
+        vm.setFocus = function () {
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function () {
+            vm.isFocus = false;
+        }
+
         function resetMe(){
             vm.resetToCollapsed = !vm.resetToCollapsed;
 

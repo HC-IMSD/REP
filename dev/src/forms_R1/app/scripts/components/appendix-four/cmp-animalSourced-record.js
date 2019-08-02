@@ -21,7 +21,9 @@
             bindings: {
                 record: '<',
                 onDelete: '&',
-                showErrors: '&'
+                showErrors: '&',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
 

@@ -44,6 +44,7 @@
         vm.showDetailErrors=false;
         vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.selectRecord = -1;
+        vm.isFocus = false;
         vm.columnDef = [
             {
                 label: vm.fieldLabel,
@@ -226,6 +227,12 @@
             if(vm.model.list[0].country == ""){
                 vm.resetToCollapsed = true;
             }
+        }
+        vm.setFocus = function () {
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function () {
+            vm.isFocus = false;
         }
 
         /*  $scope.$watch('countryListCtrl.countryListForm.$error', function () {

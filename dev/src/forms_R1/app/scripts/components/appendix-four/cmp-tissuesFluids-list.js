@@ -28,7 +28,9 @@
                 isFileLoaded: '<',
                // errorSummaryUpdate:'<', //sending a signal that the error summary should be updated
                // showErrorSummary:'<', //flag to show or hide the error summary
-                updateErrorSummary:'&' //function to update the list of error summmaries
+                updateErrorSummary:'&', //function to update the list of error summmaries
+                isFocus: '<',
+                cancelFocus: '&'
             },
             controller: tissuesFluidsListController,
             controllerAs: 'tissuesListSrcCtrl'

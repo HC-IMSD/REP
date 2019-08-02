@@ -22,9 +22,9 @@
                                            error-types="addressRec.requiredOnly">
                         </cmp-error-message>
                         <input type="text" id="{{::addressRec.companyNameId}}" name="{{::addressRec.companyNameId}}"
-                               data-ng-model="addressRec.addressModel.companyName"
+                               data-ng-model="addressRec.addressModel.companyName" data-focus-if= "addressRec.addressModel.focusCompanyName"
                                class="form-control full-width" maxlength="80" size="60"
-                               data-ng-blur="addressRec.updateErrorSummaryState()" data-ng-readonly="!addressRec.isEditable"
+                               data-ng-blur="addressRec.updateErrorSummaryState();addressRec.cancelFocus()" data-ng-readonly="!addressRec.isEditable"
                                required/>
                     </label>
                 </div>
@@ -83,10 +83,10 @@
             </div>
             <div class="row">
                 <div class="btn-group-sm col-md-12">
-                    <button class="btn btn-primary mrgn-rght-sm" name="saveAddress"
-                            id="saveAddress" data-ng-click="addressRec.updateAddressModel2()">{{::'SAVE_RECORD'|translate}}
+                    <button class="btn btn-primary mrgn-rght-sm" name="saveAddress" 
+                            id="saveAddress" data-ng-click="addressRec.updateAddressModel2();addressRec.cancelFocus(); " onclick="focusOnRow(this, 'addAddressBtn_');">{{::'SAVE_RECORD'|translate}}
                     </button>
-                    <button class="btn btn-danger mrgn-rght-sm" name="deleteAddress" data-ng-click="addressRec.delete()">
+                    <button class="btn btn-danger mrgn-rght-sm" name="deleteAddress" data-ng-click="addressRec.delete();addressRec.cancelFocus();" onclick="focusOnRow(this, 'addAddressBtn_');">
                         {{::'DELETE_RECORD'|translate}}
                     </button>
                     <button class="btn btn-default" name="discardAddressChanges"
@@ -98,3 +98,9 @@
     </ng-form>
     <!--<pre>address record model: {{addressRec.addressModel | json : spacing}}</pre>-->
 </div>
+      <script>
+          function focusRow(e){
+              alert('focus');
+              $(e).closest('tr').focus();
+          }
+      </script>

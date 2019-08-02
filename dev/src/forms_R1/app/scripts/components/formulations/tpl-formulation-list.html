@@ -20,7 +20,7 @@
                                 on-delete="formulCtrl.delete($parent.$index)" add-copy="formulCtrl.addCopy(record)"
                                 delete-btn="true" record-changed="formulCtrl.updateFormulationRecord()"
                                 update-error-summary="formulCtrl.updateErrorSummary()"
-                                is-file-loaded="formulCtrl.isFileLoaded"
+                                is-file-loaded="formulCtrl.isFileLoaded" is-focus="formulCtrl.isFocus" cancel-focus="formulCtrl.cancelFocus"
                                 error-summary-update="formulCtrl.updateSummary"
                                 show-error-summary="formulCtrl.showSummary">
         </cmp-formulation-record>
@@ -29,7 +29,7 @@
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
             <button name="addFormulation_{{::$id}}" id="addFormulation_{{::$id}}" class="btn btn-primary"
-                    data-ng-click="formulCtrl.addNew()">{{'ADD_FORMULATION'|translate}}
+                    data-ng-click="formulCtrl.addNew(); formulCtrl.setFocus();">{{'ADD_FORMULATION'|translate}}
             </button>
         </div>
     </div>

@@ -44,6 +44,7 @@
         vm.resetCollapsed = false;//used to signal expanding table collapse
         vm.updateSummary=0; //sends signal to update error summary object
       //  vm.showSummary=false; //flag to control error summary visibility
+        vm.isFocus = false;
         vm.columnDef = [
             {
                 label: "FIRSTNAME",
@@ -87,7 +88,6 @@
          * using to get contact list
          */
         vm.$onInit = function () {
-            vm.focused = false;
             //vm.contactList = vm.contacts; //HERE Is how it is bound
             //updateRolesConcat();
             //vm.allRolesSelected = vm.isAllContactRolesSelected();
@@ -222,13 +222,19 @@
          */
         vm.addContact = function () {
             var defaultContact = vm.getNewContact();
+            defaultContact.focusOnFirstName = vm.isFocus;
             vm.contactList.push(defaultContact);
             //select table row first then make invalid
             vm.selectRecord=(vm.contactList.length - 1);
             vm.isDetailValid= false;
            // vm.showSummary=false;
         };
-
+        vm.setFocus = function(){
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function(){
+            vm.isFocus = false;
+        }
         /**
          * @ngdoc method - checks if all the roles have been selected
          * @param roleToCheck (optional) returns if a role has been selected.

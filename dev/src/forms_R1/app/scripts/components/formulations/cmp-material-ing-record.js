@@ -34,7 +34,9 @@
                 isDetailValid: '&',
                 recordIndex:'<',
                 errorSummaryUpdate:'<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                isFocus: '<',
+                cancelFocus: '&'
             }
 
         });

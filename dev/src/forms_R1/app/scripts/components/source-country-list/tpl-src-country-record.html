@@ -26,7 +26,7 @@
                                 <!--<span data-ng-bind-html="countryRecord[srcCountryRecCtrl.lang] | highlight: $select.search"></span>-->
                             <!--</ui-select-choices>-->
                         <!--</ui-select>-->
-                    <input type="text" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}" data-ng-model="srcCountryRecCtrl.model.display" value="srcCountryRecCtrl.model.display" data-ng-blur="srcCountryRecCtrl.countryChanged($item, $model)" list="{{::srcCountryRecCtrl.countryListId}}" required="required" class="form-control full-width" />
+                    <input type="text" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}" data-ng-model="srcCountryRecCtrl.model.display" value="srcCountryRecCtrl.model.display" data-focus-if="srcCountryRecCtrl.isFocus" data-ng-blur="srcCountryRecCtrl.countryChanged($item, $model);srcCountryRecCtrl.cancelFocus();" list="{{::srcCountryRecCtrl.countryListId}}" required="required" class="form-control full-width" />
                     <datalist id="{{::srcCountryRecCtrl.countryListId}}" class="rep-selectize-dropdown rep-selectize-font">
                         <option data-ng-repeat="countryRecord in srcCountryRecCtrl.countryList | filter:{[srcCountryRecCtrl.lang]: srcCountryFilter} track by countryRecord.id" value="{{countryRecord[srcCountryRecCtrl.lang]}}" label="{{countryRecord[srcCountryRecCtrl.lang]}}"/>
                     </datalist>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="row">
-                <button data-ng-click="srcCountryRecCtrl.deleteRecord(srcCountryRecCtrl.model.id)" name="deleteCountry"
+                <button data-ng-click="srcCountryRecCtrl.deleteRecord(srcCountryRecCtrl.model.id)" name="deleteSrcCountry" id="deleteSrcCountry_{{::$id}}" onclick="focusOnRow(this, 'addSrcCountry_')"
                         class="btn btn-danger btn-md">{{'DELETE_RECORD'|translate}}
                 </button>
             </div>

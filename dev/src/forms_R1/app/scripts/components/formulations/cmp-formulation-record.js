@@ -50,7 +50,9 @@
                 errorSummaryUpdate:'<',
                 isFileLoaded: '<',
                 showErrorSummary:'<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                isFocus: '<',
+                cancelFocus: '&'
             }
 
         });

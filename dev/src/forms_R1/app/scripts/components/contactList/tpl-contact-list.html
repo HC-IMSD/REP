@@ -15,7 +15,9 @@
                                 is-role-selected="contactListCtrl.isREPRoleSelected(roleName,id)"
                                 show-error-summary="contactListCtrl.showSummary"
                                 update-error-summary="contactListCtrl.updateErrorSummary()"
-                                is-detail-valid="contactListCtrl.setValid(state)">
+                                is-detail-valid="contactListCtrl.setValid(state)"
+                                is-focus="contactListCtrl.isFocus"
+                                cancel-focus="contactListCtrl.cancelFocus">
             </cmp-contact-record>
 
         </cmp-expanding-table>
@@ -23,7 +25,7 @@
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
             <button name="addContact" class="btn btn-primary" id="addContact_{{::$id}}"
-                    data-ng-click="contactListCtrl.addContact()" data-ng-disabled="contactListCtrl.disableAddContact()">
+                    data-ng-click="contactListCtrl.setFocus(); contactListCtrl.addContact();" data-ng-disabled="contactListCtrl.disableAddContact()">
                 {{::'ADD_RECORD'|translate}}
             </button>
             <button class="btn btn-default"

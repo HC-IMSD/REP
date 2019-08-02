@@ -33,7 +33,9 @@
                 onDelete: '&',
                 updateRecord: '&',
                 resetMe: '&',
-                showErrors: '<'
+                showErrors: '<',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
 

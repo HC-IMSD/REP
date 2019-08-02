@@ -30,7 +30,9 @@
                 recordIndex: '<', /* used to obtain record index, controlled by list */
                 errorSummaryUpdate: '&', /* used to message that a parent errorSummary needs updating */
                 showErrorSummary: '<',
-                updateErrorSummary:'&' //update the parent error summary
+                updateErrorSummary:'&', //update the parent error summary
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
     contactRecCtrl.$inject = ['$scope'];
@@ -83,7 +85,7 @@
 
         vm.$onInit = function () {
             vm.updateErrorSummaryState();
-
+            vm.contactModel.focusOnFirstName = vm.isFocus;
         };
         /**
          * Due to binding with table expander this method does not get called
@@ -151,6 +153,7 @@
         vm.delete = function () {
             vm.onDelete({contactId: vm.contactModel.contactId});
             vm.updateErrorSummary();
+            vm.cancelFocus();
         };
         /* @ngdoc method -discards the changes and reverts to the model
          *
@@ -205,6 +208,7 @@
                 vm.contactRecForm.$setPristine();
                 vm.onUpdate({contact: vm.contactModel});
                 vm.showSummary = false;
+                vm.contactModel.focusOnFirstName = false;
                 vm.errorSummaryUpdate(); //updating parent
             } else {
                 vm.showSummary = true;

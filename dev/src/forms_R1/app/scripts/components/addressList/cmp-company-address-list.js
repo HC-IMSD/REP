@@ -48,6 +48,7 @@
         vm.isIn = "";
         vm.isInternal = false;
         vm.requiredFlag = true; //use to signal expanding table extend an empty record
+        vm.isFocus = false;
         vm.columnDef = [
             {
                 label: "COMPANY_NAME",
@@ -130,11 +131,9 @@
                 vm.addAddress();
             }
         };
-
             function updateRolesConcat() {
                 if (!vm.addressList) return;
                 for (var i = 0; i < vm.addressList.length; i++) {
-
                     _setRolesConcat(vm.addressList[i]);
                 }
             }
@@ -177,11 +176,18 @@
 
             vm.addAddress = function () {
                 var defaultAddress = vm.getNewAddress();
+                defaultAddress.focusCompanyName = vm.isFocus;
                 vm.addressList.push(defaultAddress);
                 vm.isDetailsValid = true; //set to true to exapnd?
                 vm.selectRecord = (vm.addressList.length - 1);
                 vm.isDetailsValid = false;
             };
+            vm.setFocus = function() {
+                vm.isFocus = true;
+            }
+            vm.cancelFocus = function(){
+                vm.isFocus = false;
+            }
 
             vm.disableAddAddress = function () {
                 //TODO don't hard code length

@@ -7,13 +7,13 @@
                          is-required-record="srcCountryListCtrl.requiredFlag"
                          disable-selection="srcCountryListCtrl.disableAddButton()">
 
-        <cmp-src-country-record record="$parent.record" fieldset-label="{{srcCountryListCtrl.fieldLabel}}"
+        <cmp-src-country-record record="$parent.record" fieldset-label="{{srcCountryListCtrl.fieldLabel}}" is-focus="srcCountryListCtrl.isFocus" cancel-focus="srcCountryListCtrl.cancelFocus"
                             on-delete="srcCountryListCtrl.deleteRecord(id)" show-errors="srcCountryListCtrl.showDetailErrors"
                             country-list="srcCountryListCtrl.countryList" update-record="srcCountryListCtrl.updateRecord()" update-country-list="srcCountryListCtrl.updateCountryList"></cmp-src-country-record>
     </cmp-expanding-table>
     <div class="mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" data-ng-click="srcCountryListCtrl.addNew()" name="addCountry_{{::$id}}" id="addCountry_{{::$id}}"
+            <button class="btn btn-primary" data-ng-click="srcCountryListCtrl.addNew();srcCountryListCtrl.setFocus();" name="addCountry_{{::$id}}" id="addSrcCountry_{{::$id}}"
                     data-ng-disabled="srcCountryListCtrl.disableAddButton()">{{'ADD_COUNTRY_ORIGIN'|translate}}
             </button>
         </div>

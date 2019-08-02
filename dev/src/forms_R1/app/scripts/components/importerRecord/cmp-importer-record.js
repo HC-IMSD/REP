@@ -28,7 +28,9 @@
                 record: '<',
                 onDelete: '&',
                 onUpdate: '&',
-                showErrors: '<'
+                showErrors: '<',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
 

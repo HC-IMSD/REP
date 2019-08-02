@@ -14,7 +14,7 @@
                                            show-error="animalSrcCtrl.showErrors()"
                                            error-types="animalSrcCtrl.requiredOnly"></cmp-error-message>
                         <select data-ng-model="animalSrcCtrl.model.animalType" class="form-control" id="{{::animalSrcCtrl.animalTypeId}}" name="{{::animalSrcCtrl.animalTypeId}}"
-                                data-ng-required="true"
+                                data-ng-required="true" data-focus-if="animalSrcCtrl.isFocus" data-ng-blur="animalSrcCtrl.cancelFocus()"
                                 data-ng-options="val |translate for val in  animalSrcCtrl.animalsList  | orderByTranslated">
                         </select>
                     </label>
@@ -40,7 +40,7 @@
             </div>
             <div class="row">
                 <div class="btn-group-sm col-xs-12">
-                    <button data-ng-click="animalSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm" name="deleteAnimalSrc">
+                    <button data-ng-click="animalSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm" name="deleteAnimalSrc" onclick="focusOnRow(this, 'addAnimalSrc_')">
                     {{::'DELETE_RECORD'|translate}}
                     </button>
                 </div>

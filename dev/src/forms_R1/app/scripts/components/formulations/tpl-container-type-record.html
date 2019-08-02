@@ -23,7 +23,7 @@
                                            error-types="ctrCtrl.requiredOnly"></cmp-error-message>
                     </label>
                     <textarea id="{{::ctrCtrl.containerTypeId}}" data-ng-model="ctrCtrl.ctModel.containerType" maxlength="256" rows="3"
-                              data-ng-model-options="{ debounce: $inherit}"
+                              data-ng-model-options="{ debounce: $inherit}" data-focus-if="ctrCtrl.isFocus" data-ng-blur="ctrCtrl.cancelFocus();"
                               class="form-control full-width" name="{{::ctrCtrl.containerTypeId}}" required>
                     </textarea>
                 </div>
@@ -128,12 +128,14 @@
 
         <div class="row">
             <div class="btn-group-sm col-xs-12">
-                <button  class="btn btn-primary" name="saveContainer"
-                         data-ng-click="ctrCtrl.save()">{{'SAVE_RECORD'|translate}}</button>
-                <button data-ng-if="ctrCtrl.deleteBtn === true" class="btn btn-danger" name="deleteContainer"
+                <button  class="btn btn-primary" name="saveContainer" data-ng-if="ctrCtrl.cancelFocus()"
+                         data-ng-click="ctrCtrl.save()" onclick="focusOnTable(this, 'container_type_list_')">{{'SAVE_RECORD'|translate}}</button>
+                <button  class="btn btn-primary" name="saveContainer" data-ng-if="! ctrCtrl.cancelFocus()"
+                         data-ng-click="ctrCtrl.save()" onclick="focusOnRow(this, 'addContainer_')">{{'SAVE_RECORD'|translate}}</button>
+                <button data-ng-if="ctrCtrl.deleteBtn === true" class="btn btn-danger" name="deleteContainer" onclick="focusOnRow(this, 'addContainer_')"
                         data-ng-click="ctrCtrl.delete()">{{'DELETE_RECORD'|translate}}</button>
                 <button  class="btn btn-default" name="discardContainer"
-                         data-ng-click="ctrCtrl.discardChanges()">{{'DISCARD_CHANGES'|translate}}</button>
+                         data-ng-click="ctrCtrl.discardChanges(); ctrCtrl.setFocus();">{{'DISCARD_CHANGES'|translate}}</button>
             </div>
         </div>
     </div>

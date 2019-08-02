@@ -37,7 +37,9 @@
                 isFileLoaded: '<',
                 service: '<',
                 systemUsed: '&',
-                addBtn: '<'
+                addBtn: '<',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
 

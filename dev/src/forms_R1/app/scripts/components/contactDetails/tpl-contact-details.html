@@ -10,7 +10,7 @@
                                        show-error="contCtrl.showErrors()"
                                        error-types="contCtrl.requiredOnly"></cmp-error-message>
                     <input type="text" id="{{::contCtrl.firstNameId}}"
-                           data-ng-model="contCtrl.contactModel.givenName"
+                           data-ng-model="contCtrl.contactModel.givenName" data-focus-if="contCtrl.contactModel.focusOnFirstName"
                            class="form-control full-width" name="{{::contCtrl.firstNameId}}" maxlength="60"
                            size="60" data-ng-readonly="!contCtrl.isEditable" required/>
 

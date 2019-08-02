@@ -35,6 +35,7 @@
         vm.resetToCollapsed = true;
         vm.showDetailErrors=false;
         vm.selectRecord = -1;
+        vm.isFocus = false;
         vm.columnDef = [
             {
                 label: "IMPORTERID",
@@ -142,6 +143,14 @@
             if(vm.model.list.length === 0) return false;
             return(vm.importerListForm.$invalid);
         };
+
+        vm.setFocus = function(){
+            vm.isFocus = true;
+        }
+
+        vm.cancelFocus = function(){
+            vm.isFocus = false;
+        }
 
 
         /*  $scope.$watch('countryListCtrl.countryListForm.$error', function () {

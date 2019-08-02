@@ -42,6 +42,7 @@
         vm.selectRecord = -1;
         vm.alerts = [false]; //for help boxes
         vm.noActiveValues=""; //used for error handling Business Rule: must be at least one medicinal
+        vm.isFocus = false;
 
         vm.colNames = [
             {label: "ROLE", binding: "ingRole", width: "19"},
@@ -147,7 +148,12 @@
             vm.setValid(true);
             vm.newIngFormShown = false
         };
-
+        vm.setFocus = function() {
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function() {
+            vm.isFocus = false;
+        }
         //this sends a signal to the error summary to update itself, when a value changes.
         //is $error is a nested json object, won't fire for any child form errors
         $scope.$watch('ailCtrl.activeIngListForm.$error', function () {

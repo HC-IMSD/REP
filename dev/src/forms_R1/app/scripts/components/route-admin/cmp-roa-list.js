@@ -39,6 +39,7 @@
         vm.requiredFlag = true; //use to signal expanding table extend an empty record
         vm.model={};
         vm.model.roaList=[];
+        vm.isFocus = false;
         vm.columnDef = [
             {
                 label: "ROA_LBL",
@@ -160,6 +161,13 @@
         vm.onError = function(){
             vm.resetToCollapsed = true;
         }
+        vm.setFocus = function () {
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function () {
+            vm.isFocus = false;
+        }
+
 
       /*  $scope.$watch('roaCtrl.roaListForm.$error', function () {
             vm.updateErrorSummary();

@@ -18,7 +18,7 @@
                                            show-error="mirCtrl.showError(mirCtrl.materialIngRecordForm[mirCtrl.nameId])"
                                            error-types="mirCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::mirCtrl.nameId}}" data-ng-model="mirCtrl.mirModel.ingredientName"
-                               data-ng-model-options="{ debounce: $inherit}" maxlength="100" size="100" required
+                               data-ng-model-options="{ debounce: $inherit}" maxlength="100" size="100" required data-focus-if="mirCtrl.isFocus" data-ng-blur="mirCtrl.cancelFocus()"
                                class="form-control" name="{{::mirCtrl.nameId}}"/>
 
                     </label>
@@ -62,10 +62,13 @@
             <div class="row">
 
                 <div class="btn-group-sm col-xs-12">
-                    <button class="btn btn-primary" name="saveMaterial"
+                    <button class="btn btn-primary" name="saveMaterial" onclick="focusOnTable(this, 'material_ing_list_')" data-ng-if="mirCtrl.cancelFocus()"
                             data-ng-click="mirCtrl.save()">{{'SAVE_RECORD'|translate}}
                     </button>
-                    <button ng-if="mirCtrl.deleteBtn === true" class="btn btn-danger" name="deleteMaterial"
+                    <button class="btn btn-primary" name="saveMaterial" onclick="focusOnRow(this, 'addMaterialButton_')" data-ng-if="! mirCtrl.cancelFocus()"
+                            data-ng-click="mirCtrl.save()">{{'SAVE_RECORD'|translate}}
+                    </button>
+                    <button ng-if="mirCtrl.deleteBtn === true" class="btn btn-danger" name="deleteMaterial" onclick="focusOnRow(this, 'addMaterialButton_')"
                             data-ng-click="mirCtrl.delete()">{{'DELETE_RECORD'|translate}}</button>
                     <button class="btn btn-default" name="discardMaterial" data-ng-click="mirCtrl.discardChanges()">
                         {{'DISCARD_CHANGES'|translate}}</button>

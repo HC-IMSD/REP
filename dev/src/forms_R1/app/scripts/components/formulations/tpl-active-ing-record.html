@@ -19,7 +19,7 @@
                                        show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.ingredRoleId])"
                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
                     <select id="{{::ingRecCtrl.ingredRoleId}}" data-ng-model="ingRecCtrl.ingModel.ingRole"
-                            data-ng-model-options="{ debounce: '$inherit'}"
+                            data-ng-model-options="{ debounce: '$inherit'}" data-focus-if="ingRecCtrl.isFocus" data-ng-blur="ingRecCtrl.cancelFocus();"
                             class="form-control full-width" name="{{::ingRecCtrl.ingredRoleId}}" required>
                         <option label=" " value="" /><option data-ng-repeat="role in ingRecCtrl.ingRoleList" value="{{role.id}}">{{role[ingRecCtrl.lang]}}</option>
                     </select>
@@ -462,17 +462,22 @@
 
             <div class="row">
                 <div class="col-xs-12 btn-group-sm align-bottom">
-                    <button class="btn btn-primary" data-ng-click="ingRecCtrl.saveIng()" id="medSave_{{::$id}}"
+                    <button class="btn btn-primary" data-ng-click="ingRecCtrl.saveIng()" data-ng-if="ctrCtrl.cancelFocus()"
+                            id="medSave_{{::$id}}" onclick="focusOnTable(this, 'active_ing_list_')"
                             name="saveMI">{{'SAVE_RECORD'|translate}}
                     </button>
-                    <button data-ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-danger" id="medDelete_{{::$id}}"
+                    <button class="btn btn-primary" data-ng-click="ingRecCtrl.saveIng()" data-ng-if="! ctrCtrl.cancelFocus()"
+                            id="medSave_{{::$id}}" onclick="focusOnRow(this, 'addAI_')"
+                            name="saveMI">{{'SAVE_RECORD'|translate}}
+                    </button>
+                    <button data-ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-danger" id="medDelete_{{::$id}}" onclick="focusOnRow(this, 'addAI_')"
                             name="deleteMI" data-ng-click="ingRecCtrl.delete()">{{'DELETE_RECORD'|translate}}
                     </button>
                     <button data-ng-if="ingRecCtrl.deleteBtn === true" class="btn btn-default"
                             data-ng-click="ingRecCtrl.copy()" data-ng-disabled="ingRecCtrl.activeIngForm.$dirty">
                         {{'COPY_RECORD'|translate}}
                     </button>
-                    <button class="btn btn-default" name="discardMI" data-ng-click="ingRecCtrl.discardChanges()">
+                    <button class="btn btn-default" name="discardMI" data-ng-click="ingRecCtrl.discardChanges(); ingRecCtrl.setFocus();">
                         {{'DISCARD_CHANGES'|translate}}
                     </button>
                 </div>

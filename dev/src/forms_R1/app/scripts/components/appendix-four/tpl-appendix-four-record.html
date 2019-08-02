@@ -20,7 +20,7 @@
                                            error-types="ap4RecCtrl.requiredOnly"></cmp-error-message>
                     </label>
                         <input type="text" class="form-control full-width" id="{{::ap4RecCtrl.ingredNameId}}" ng-change="ap4RecCtrl.recordChanged()"
-                               data-ng-model="ap4RecCtrl.model.ingredientName" name="{{::ap4RecCtrl.ingredNameId}}" required
+                               data-ng-model="ap4RecCtrl.model.ingredientName" name="{{::ap4RecCtrl.ingredNameId}}" required data-focus-if="ap4RecCtrl.isFocus"
                                data-ng-model-options="{updateOn: 'blur'}" maxlength="100"/>
 
                 </div>
@@ -60,7 +60,7 @@
 
             <section class="section">
                 <cmp-tissues-fluids-list data-ng-if="ap4RecCtrl.model.humanSourced || ap4RecCtrl.model.animalSourced"
-                                         service="ap4RecCtrl.service"
+                                         service="ap4RecCtrl.service" is-focus="ap4RecCtrl.isFocus" cancel-focus="ap4RecCtrl.cancelFocus"
                                          is-file-loaded="ap4RecCtrl.isFileLoaded"
                                          records="ap4RecCtrl.model.tissuesFluidsOrigin.tissuesList">
                 </cmp-tissues-fluids-list>
@@ -80,7 +80,7 @@
                    <!-- <input type="submit" value="{{'SAVE_SOURCED'|translate}}" class="btn btn-primary" ng-if="!ap4RecCtrl.record"
                            data-ng-click="ap4RecCtrl.save()"/>-->
                     <input type="submit" data-ng-if="ap4RecCtrl.deleteBtn === true" value="{{'DELETE_SOURCED'|translate}}"
-                           class="btn btn-danger" data-ng-click="ap4RecCtrl.delete()"/>
+                           class="btn btn-danger" data-ng-click="ap4RecCtrl.delete()" onclick="focusOnRow(this, 'addSrcIngred')"/>
                 </div>
             </div>
         </fieldset>

@@ -21,13 +21,15 @@
                                 update-error-summary="addressListCtrl.updateErrorSummary()"
                                 is-role-selected="addressListCtrl.isREPRoleSelected(roleName,id)"
                                 is-detail-valid="addressListCtrl.setValid(state)"
-                                is-in="addressListCtrl.isIn">
+                                is-in="addressListCtrl.isIn"
+                                is-focus="addressListCtrl.isFocus"
+                                cancel-focus="addressListCtrl.cancelFocus">
             </cmp-address-record>
         </cmp-expanding-table>
     </div>
     <div class="row mrgn-tp-md mrgn-bttm-lg">
         <div class="btn-group-sm col-md-12">
-            <button class="btn btn-primary" data-ng-click="addressListCtrl.addAddress()" name="addAddressBtn_{{::$id}}" id="addAddressBtn"
+            <button class="btn btn-primary" data-ng-click="addressListCtrl.setFocus(); addressListCtrl.addAddress();" name="addAddressBtn_{{::$id}}" id="addAddressBtn"
                     data-ng-disabled="addressListCtrl.disableAddAddress()" >{{::'ADD_RECORD'|translate}}</button>
         </div>
     </div>

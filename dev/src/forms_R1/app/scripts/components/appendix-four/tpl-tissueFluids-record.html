@@ -17,8 +17,8 @@
             </div>
             <div class="col-md-12">
                 <select data-ng-model="tissuesSrcCtrl.model.systemType" class="form-control" id="{{::tissuesSrcCtrl.systemTypeId}}"
-                        name="{{::tissuesSrcCtrl.systemTypeId}}" required
-                        data-ng-change="tissuesSrcCtrl.systemChanged(tissuesSrcCtrl.tissuesRecForm[tissuesSrcCtrl.systemTypeId])"
+                        name="{{::tissuesSrcCtrl.systemTypeId}}" required data-focus-if="tissuesSrcCtrl.isFocus"
+                        data-ng-change="tissuesSrcCtrl.systemChanged(tissuesSrcCtrl.tissuesRecForm[tissuesSrcCtrl.systemTypeId]);tissuesSrcCtrl.cancelFocus();"
                         data-ng-options="val |translate for val in  tissuesSrcCtrl.systemList  | orderByTranslated">
                 </select>
             </div>
@@ -75,10 +75,10 @@
             <div class="row"><br/></div>
         <div class="row">
             <div class="btn-group-sm col-xs-12">
-                <button data-ng-click="tissuesSrcCtrl.saveRecord()" class="btn btn-primary btn-sm">
+                <button data-ng-click="tissuesSrcCtrl.saveRecord()" class="btn btn-primary btn-sm" onclick="focusOnRow(this, 'addTissuesRec_');">
                     {{::'SAVE_RECORD'|translate}}
                 </button>
-                <button data-ng-click="tissuesSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm">
+                <button data-ng-click="tissuesSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm" onclick="focusOnRow(this, 'addTissuesRec_');>
                     {{::'DELETE_RECORD'|translate}}
                 </button>
             </div>

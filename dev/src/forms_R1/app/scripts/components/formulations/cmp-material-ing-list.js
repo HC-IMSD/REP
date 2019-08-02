@@ -23,7 +23,8 @@
                 onUpdate: '&',
                 errorSummaryUpdate:'<',
                 isFileLoaded: '<',
-                showErrorSummary:'<'
+                showErrorSummary:'<',
+                isFocus: '<'
             }
         });
 
@@ -117,8 +118,12 @@
             vm.setValid(true);
             vm.newIngFormShown = false
         }
-
-
+        vm.setFocus = function () {
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function () {
+            vm.isFocus = false;
+        }
 
 
     }

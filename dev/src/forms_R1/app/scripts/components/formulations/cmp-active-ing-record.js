@@ -36,7 +36,9 @@
                 recordIndex: '<',
                 errorSummaryUpdate:'<',
                 showErrorSummary:'<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                isFocus: '<',
+                cancelFocus: '&'
             }
 
         });
@@ -93,7 +95,8 @@
             nanoMaterial:"",
             nanoMaterialOther: "",
             calcAsBase: "",
-            humanAnimalSourced: ""
+            humanAnimalSourced: "",
+            focusOnIngRole: false,
         };
 
         vm.strengthData1Title="";
@@ -107,6 +110,7 @@
 
         vm.$onInit = function () {
             vm.showSummary=false;
+            vm.ingModel.focusOnIngRole = vm.isFocus;
             vm.backup = angular.copy(vm.ingModel);
             _setIdNames();
            // vm.summaryName="cmp-active-ing-record_"+(vm.recordIndex);
@@ -336,6 +340,16 @@
                 return false;
             }
         };
+        vm.isUnitsOtherDetail = function () {
+
+            if (!vm.ingModel || !vm.ingModel.units) return false;
+            if ((vm.ingModel.units.id === OTHER)) {
+                return vm.ingModel.otherUnits == '';
+            } else {
+                vm.ingModel.otherUnits = "";
+                return false;
+            }
+        };
 
         /**
          * @ngDoc determines if per units Other should be shown
@@ -404,13 +418,8 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.unitsList.length; i++) {
-                    var option =vm.unitsList[i];
-                    if(option['id'] === vm.ingModel.units['id']) {
-                        vm.ingModel.unitsHtml = option[vm.lang];
-                        break;
-                    }
-                }
+                vm.ingModel.unitsHtml = "";
+                vm.ingModel.units = {};
             }
         }
         vm.perMeasUnitsChange = function() {
@@ -424,13 +433,8 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.measureList.length; i++) {
-                    var option =vm.measureList[i];
-                    if(option['id'] === vm.ingModel.perMeasUnits['id']) {
-                        vm.ingModel.perMeasUnitsHtml = option[vm.lang];
-                        break;
-                    }
-                }
+                vm.ingModel.perMeasUnitsHtml = "";
+                vm.ingModel.perMeasUnits = {};
             }
         }
 

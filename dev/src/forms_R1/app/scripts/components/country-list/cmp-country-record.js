@@ -34,7 +34,9 @@
                 updateCountryList:'<',
                 updateRecord: '&',
                 onError: '&',
-                fieldsetLabel:'@'
+                fieldsetLabel:'@',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
 
@@ -67,25 +69,15 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.countries.length; i++) {
-                    var option =vm.countries[i];
-                    if(option['id'] === vm.model.display) {
-                        vm.model.display = option[vm.lang];
-                        found = true;
-                        break;
-                    }
-                }
+                vm.model.display = "";
+                vm.model.country = {};
             }
             if(found){
                 vm.countryList = vm.updateCountryList();
                 vm.updateRecord();
                 vm.clearFilter($scope);
-            } else {
-                vm.model.display = "";
-                if (vm.model.country) {
-                    vm.model.country = {};
-                }
-                vm.onError();
+            // } else {
+            //     vm.onError();
             }
 
         };

@@ -316,7 +316,8 @@
                             <button class="btn btn-primary"
                                     name="saveLifecycleRec_{{::$id}}"
                                     id="saveLifecycleRec_{{::$id}}"
-                                    data-ng-click="lifecycleCtrl.updateLivecycleModel()"
+                                    onclick="focusOnRow(this, '');"
+                                    data-ng-click="lifecycleCtrl.updateLivecycleModel();"
                                     data-ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}
                             </button>
                         </div>

@@ -34,7 +34,9 @@
                 updateCountryList:'<',
                 updateRecord:'&',
                 onError: '&',
-                fieldsetLabel:'@'
+                fieldsetLabel:'@',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
 

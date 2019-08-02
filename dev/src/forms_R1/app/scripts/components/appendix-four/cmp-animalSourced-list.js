@@ -40,6 +40,7 @@
         //define empty model
         vm.model={};
         vm.model.animalSrcList=[];
+        vm.isFocus = false;
         vm.columnDef = [
             {
                 label: "ANIMAL_TYPE",
@@ -59,6 +60,7 @@
             vm.isDetailValid = true; //used to track if details valid. If they are  not do not allow expander collapse
             vm.resetToCollapsed = true;
             vm.oneRecord="";
+            _setIdNames();
         };
 
 
@@ -116,6 +118,12 @@
             vm.requiredFlag = false;
         };
 
+        vm.setFocus = function () {
+            vm.isFocus = true;
+        }
+        vm.cancelFocus = function () {
+            vm.isFocus = false;
+        }
 
         function getMaxID(){
             var id=0;
@@ -126,6 +134,9 @@
             }
             return(id);
         }
-
+        function _setIdNames() {
+            var scopeId = "_" + $scope.$id;
+            vm.addAnimalSrcBtnId = "addAnimalSrc" + scopeId;
+        }
     }
 })();

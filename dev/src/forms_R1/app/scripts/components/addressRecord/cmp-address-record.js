@@ -1,7 +1,6 @@
 /**
  * Created by dkilty on 8/5/2016.
  */
-
 (function () {
     'use strict';
 
@@ -41,8 +40,9 @@
                 errorSummaryUpdate: '&', /* used to message that errorSummary needs updating */
                 showErrorSummary:'<',
                 updateErrorSummary:'&', //update the parent error summary
-                isIn:'<'
-
+                isIn:'<',
+                isFocus: '<',
+                cancelFocus: '&'
             }
         });
     addressRecCtrl.$inject = ['$scope', 'CANADA', '$filter', 'getCountryAndProvinces','$translate', 'INTERNAL_TYPE', 'EXTERNAL_TYPE'];
@@ -149,6 +149,8 @@
         };
         vm.updateErrorSummaryState=function(){
             vm.updateSummary= vm.updateSummary+1;
+            // vm.addressModel.focusCompanyName = false;
+            // vm.cancelFocus();
         };
 
 
@@ -285,17 +287,20 @@
             if (vm.addressRecForm.$valid) {
                 vm.isDetailValid({state: true});
                 vm.addressRecForm.$setPristine();
+                vm.addressModel.focusCompanyName = false;
                 vm.onUpdate({rec: vm.addressModel});
                 vm.showSummary=false;
                 vm.errorSummaryUpdate(); //updating parent
+                vm.cancelFocus();
             } else {
                 vm.showSummary = true;
                 vm.updateErrorSummaryState(); //updating current
                 vm.focusOnSummary()
             }
-
-
         };
+        vm.getInvalid = function(){
+            return vm.addressRecForm.$valid;
+        }
         /**
          * @ngdoc method toggles error state to make errors visible
          * @returns {boolean}
