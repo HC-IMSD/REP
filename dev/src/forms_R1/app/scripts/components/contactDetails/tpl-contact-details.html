@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <ng-form name="contCtrl.contactForm">
         <div class="row">
-            <div class="col-md-4 form-group"
+            <div class="col-md-6 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.firstNameId].$invalid}">
                 <label for="{{::contCtrl.firstNameId}}" class="required">
                     <span class="field-name">{{::'FIRSTNAME'|translate}}</span>
@@ -24,7 +24,7 @@
                            data-ng-readonly="!contCtrl.isEditable"/>
                 </label>
             </div>
-            <div class="col-md-6 form-group"
+            <div class="col-md-4 form-group"
                  data-ng-class="{'has-error':contCtrl.contactForm[contCtrl.lastNameId].$invalid}">
                 <label for="{{::contCtrl.lastNameId}}" class="required">
                     <span class="field-name">{{::'LASTNAME'|translate}}</span>
