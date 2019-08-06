@@ -45,7 +45,7 @@
                                            error-types="srcCountryRecCtrl.requiredOnly"></cmp-error-message>
 
                     </label>
-                    <textarea id="{{::srcCountryRecCtrl.unknownCountryId}}"
+                    <textarea id="{{::srcCountryRecCtrl.unknownCountryId}}" data-focus-if="srcCountryRecCtrl.isUnknown()"
                           data-ng-model="srcCountryRecCtrl.model.unknownCountryDetails" maxlength="1024" rows="3" data-ng-model-options="{ debounce: $inherit}"
                           class="form-control full-width" name="{{::srcCountryRecCtrl.unknownCountryId}}" required>
                     </textarea>
