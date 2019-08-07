@@ -106,7 +106,7 @@
                 </section>
             </div>
             <div class="row">
-                <div class="form-group  col-md-16 col-xs-12"
+                <div class="form-group col-xs-12"
                      data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId].$invalid}">
                     <label for="{{::formulRecCtrl.isAnimalHumanMaterialId}}" class="required rep-required-offset full-width">
                         <span class="field-name">&#160;D. {{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
@@ -121,12 +121,14 @@
                                        form-ref="formulRecCtrl.formulationForm"
                                        show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId])"
                                        error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-                        <select id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" data-ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" data-ng-required="true"
-                                class="form-control" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}"
-                                data-ng-options="val |translate for val in  formulRecCtrl.yesNoList">
-                            <option value="" label=" " />
-                        </select>
+                        <!--<select id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" data-ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" data-ng-required="true"-->
+                                <!--class="form-control" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}"-->
+                                <!--data-ng-options="val |translate for val in  formulRecCtrl.yesNoList">-->
+                            <!--<option value="" label=" " />-->
+                        <!--</select>-->
                     </div>
+                    <label class="col-xs-1" for="{{::formulRecCtrl.isAnimalHumanMaterialId}}"><input type="radio" id="{{::formulRecCtrl.isAnimalHumanMaterialId}}" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}" value="Y" data-ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" required/>&nbsp;{{::'Y'|translate}}</label>
+                    <label class="col-xs-1" for="{{::formulRecCtrl.isAnimalHumanMaterialId}}_1"><input type="radio" id="{{::formulRecCtrl.isAnimalHumanMaterialId}}_1" name="{{::formulRecCtrl.isAnimalHumanMaterialId}}" value="N" data-ng-model="formulRecCtrl.frmModel.isAnimalHumanMaterial" required/>&nbsp;{{::'N'|translate}}</label>
                 </div>
             </div>
             <div data-ng-if="formulRecCtrl.frmModel.isAnimalHumanMaterial === 'Y'">

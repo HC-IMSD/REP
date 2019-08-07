@@ -115,15 +115,16 @@
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.thirdPartyId])"
                                                        error-types="transInfoCtrl.requiredOnly">
                                     </cmp-error-message>
-                                    <select id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}"
-                                            data-ng-model="transInfoCtrl.transactionModel.isThirdParty"
-                                            class="form-control" data-ng-change="transInfoCtrl.setThirdParty()"
-                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList"
-                                            required>
-                                        <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isThirdParty" />
-                                    </select>
-
+                                    <!--<select id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}"-->
+                                            <!--data-ng-model="transInfoCtrl.transactionModel.isThirdParty"-->
+                                            <!--class="form-control" data-ng-change="transInfoCtrl.setThirdParty()"-->
+                                            <!--data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList"-->
+                                            <!--required>-->
+                                        <!--<option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isThirdParty" />-->
+                                    <!--</select>-->
                                 </label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required />&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}_1"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}_1" name="{{::transInfoCtrl.thirdPartyId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -140,13 +141,15 @@
                                                        form-ref="transInfoCtrl.transInfoForm"
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isPriorityId])"
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                                    <select id="{{::transInfoCtrl.isPriorityId}}" name="{{::transInfoCtrl.isPriorityId}}"
-                                            data-ng-model="transInfoCtrl.transactionModel.isPriority" class="form-control"
-                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
-                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isPriority">
-                                    </select>
+                                    <!--<select id="{{::transInfoCtrl.isPriorityId}}" name="{{::transInfoCtrl.isPriorityId}}"-->
+                                            <!--data-ng-model="transInfoCtrl.transactionModel.isPriority" class="form-control"-->
+                                            <!--data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>-->
+                                        <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isPriority">-->
+                                    <!--</select>-->
 
                                 </label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isPriorityId}}"><input type="radio" id="{{::transInfoCtrl.isPriorityId}}" name="{{::transInfoCtrl.isPriorityId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isPriority" required/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isPriorityId}}_1"><input type="radio" id="{{::transInfoCtrl.isPriorityId}}_1" name="{{::transInfoCtrl.isPriorityId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isPriority" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -159,12 +162,14 @@
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isNocId])"
                                                        error-types="transInfoCtrl.requiredOnly">
                                     </cmp-error-message>
-                                    <select id="{{::transInfoCtrl.isNocId}}" name="{{::transInfoCtrl.isNocId}}"
-                                            data-ng-model="transInfoCtrl.transactionModel.isNoc" class="form-control"
-                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
-                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isNoc">
-                                    </select>
+                                    <!--<select id="{{::transInfoCtrl.isNocId}}" name="{{::transInfoCtrl.isNocId}}"-->
+                                            <!--data-ng-model="transInfoCtrl.transactionModel.isNoc" class="form-control"-->
+                                            <!--data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>-->
+                                        <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isNoc">-->
+                                    <!--</select>-->
                                 </label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isNocId}}"><input type="radio" id="{{::transInfoCtrl.isNocId}}" name="{{::transInfoCtrl.isNocId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isNoc" required />&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isNocId}}_1"><input type="radio" id="{{::transInfoCtrl.isNocId}}_1" name="{{::transInfoCtrl.isNocId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isNoc" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -180,13 +185,15 @@
                                                        form-ref="transInfoCtrl.transInfoForm"
                                                        show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.isAdminSubId])"
                                                        error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
-                                    <select id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}"
-                                            data-ng-model="transInfoCtrl.transactionModel.isAdminSub" class="form-control"
-                                            data-ng-change="transInfoCtrl.setAdminSubmission()"
-                                            data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>
-                                        <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isAdminSub">
-                                    </select>
+                                    <!--<select id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}"-->
+                                            <!--data-ng-model="transInfoCtrl.transactionModel.isAdminSub" class="form-control"-->
+                                            <!--data-ng-change="transInfoCtrl.setAdminSubmission()"-->
+                                            <!--data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList" required>-->
+                                        <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isAdminSub">-->
+                                    <!--</select>-->
                                 </label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}_1"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}_1" name="{{::transInfoCtrl.isAdminSubId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
                         <div data-ng-show="transInfoCtrl.showAdminSub">
@@ -329,7 +336,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8 form-group"
+                    <div class="col-md-12 form-group"
                          data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId].$invalid}">
                         <label for="{{::transInfoCtrl.isFeesId}}" class="required full-width">
                             <span class="field-name">{{::'IS_FEE_TRANSACTION' |translate}}</span>
@@ -341,14 +348,16 @@
                                                  <span data-ng-message="required"><span translate="MSG_ERR_MAND"></span></span>
                                              </span>
                             </strong>
-                            <select class="form-control" id="{{::transInfoCtrl.isFeesId}}"
-                                    data-ng-change="transInfoCtrl.updateFeeState()"
-                                    name="{{::transInfoCtrl.isFeesId}}" required
-                                    data-ng-model="transInfoCtrl.transactionModel.isFees"
-                                    data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList">
-                                <option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isFees" />
-                            </select>
+                            <!--<select class="form-control" id="{{::transInfoCtrl.isFeesId}}"-->
+                                    <!--data-ng-change="transInfoCtrl.updateFeeState()"-->
+                                    <!--name="{{::transInfoCtrl.isFeesId}}" required-->
+                                    <!--data-ng-model="transInfoCtrl.transactionModel.isFees"-->
+                                    <!--data-ng-options="choice |translate for choice in transInfoCtrl.yesNoList">-->
+                                <!--<option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isFees" />-->
+                            <!--</select>-->
                         </label>
+                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}"><input type="radio" id="{{::transInfoCtrl.isFeesId}}" name="{{::transInfoCtrl.isFeesId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isFees" required/>&nbsp;{{::'Y'|translate}}</label>
+                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}_1"><input type="radio" id="{{::transInfoCtrl.isFeesId}}_1" name="{{::transInfoCtrl.isFeesId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isFees" required />&nbsp;{{::'N'|translate}}</label>
                     </div>
                 </div>
             </div>
