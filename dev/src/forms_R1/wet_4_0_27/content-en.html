@@ -43,6 +43,14 @@
         document.write(wet.builder.refTop({
             cdnEnv: "prod" //jqueryEnv:false
         }));
+        function addLeavingChk(){
+            window.addEventListener('beforeunload', function(event){
+                return 'The form has been updated, do you want to stay on the page?';
+            });
+            window.onbeforeunload = function(){
+                return 'The form has been updated, do you want to stay on the page?';
+            }
+        }
         function focusOnRow(e, alter) {
             var myTable = $(e).closest('table');
             window.setTimeout(function(){
@@ -94,7 +102,7 @@
     </script>
 </head>
 
-<body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;">
+<body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;" onload="addLeavingChk();">
 
 <div id="def-top">
     <!-- Write closure fall-back static file -->
