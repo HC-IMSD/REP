@@ -138,8 +138,8 @@
   "SKIN_DETAILS": "Other skin and glandular system details",
   "ADD_SOURCED":"Add Ingredient/Material",
   "DELETE_SOURCED":"Delete Ingredient/Material",
-  "AP4CTRL.APPENDIXFORM":"in the Human / Animal Sourced tab",
-  "CMP-APPENDIX-FOUR-RECORD":"in the Human / Animal Sourced",
+  "AP4CTRL.APPENDIXFORM":"in the Human/Animal Sourced Ingredient/Material tab",
+  "CMP-APPENDIX-FOUR-RECORD":"in the Ingredient/Material",
   "ADD_TISSUES_FLUIDS": "Add Tissues or Fluids",
   "ADD_ANIMAL_SOURCES": "Add Animal Sources",
   "ADD_COUNTRY_ORIGIN": "Add country of origin of the animals"

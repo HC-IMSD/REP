@@ -10,7 +10,7 @@
   "TYPE_DRUGPROD":"Drug Product Type",
   "DISINFECTANT_TYPE": "Disinfectant Type",
   "DISI_TYPE_MISSING": "Disinfectant Type",
-  "SCHED_DIN":"Schedule A DIN Number",
+  "SCHED_DIN":"Drug Identification Number (DIN)",
   "PROP_INDICATION":"Proposed Indication/Use/Dosage (including maximum daily dose)",
   "SCHEDULE_PRESC_STATUS": "Schedule and Prescription status (check all that apply): The product is",
   "SCHEDULE_C":"included in Schedule C (radiopharmaceuticals) to the Food and Drugs Act",
