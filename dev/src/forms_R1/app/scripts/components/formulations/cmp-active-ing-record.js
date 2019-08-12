@@ -61,13 +61,13 @@
         vm.alerts = [false, false, false, false, false, false]; //for help boxes
         vm.numberMinError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN0"},
-            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+            {type: "min", displayAlias: "TYPE_MIN"},
+            {type: "number", displayAlias: "TYPE_NUMBER"}
         ];
         vm.numberMinLowerError = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
             {type: "min", displayAlias: "MSG_ERR_INVALID_NUM_MIN_LOWER"},
-            {type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}
+            {type: "number", displayAlias: "TYPE_NUMBER"}
         ];
 
         vm.ingModel = {
