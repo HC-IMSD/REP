@@ -8,6 +8,8 @@
   "TYPE_REQUIRED":"This field is required.",
   "TYPE_EMAIL":"Please enter a valid email address.",
   "TYPE_DUPLICATEROLE": "This role has already been selected.",
+  "TYPE_DUPLICATESYS": "This system has already been selected.",
+  "TYPE_MIN": "Less than minimum value",
   "TYPE_MINLENGTH": "Less than minimum length",
   "POSTAL_FORMAT": "Please enter a valid format",
   "TYPE_DATE":"Please enter a valid date",
