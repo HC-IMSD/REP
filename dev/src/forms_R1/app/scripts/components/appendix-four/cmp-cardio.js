@@ -73,33 +73,33 @@
             for (var i = 0; i < keys.length; i++) {
                 var val = vm.model[keys[i]];
                 if (val) {
-                    if (keys[i] === 'otherCardio') {
-                        if (!vm.model.otherDetails) {
-                            vm.isSelected = "";
-                            return;
-                        }
-                        vm.isSelected = "selected";
-                        return;
-                    } else {
+                    // if (keys[i] === 'otherCardio') {
+                    //     if (!vm.model.otherDetails) {
+                    //         vm.isSelected = "";
+                    //         return;
+                    //     }
+                    //     vm.isSelected = "selected";
+                    //     return;
+                    // } else {
                         vm.isSelected = "selected";
                         return;
                     }
-                }
             }
             vm.isSelected = "";
         };
 
         vm.otherChanged = function () {
-            var state = false;
-            if (vm.model.otherCardio) {
-                state = true;
-            } else {
-                state = false;
-                vm.model.otherDetails = "";
-            }
+            vm.model.otherDetailsHidden = "right";
+            // var state = false;
+            // if (vm.model.otherCardio) {
+            //     state = true;
+            // } else {
+            //     state = false;
+            //     vm.model.otherDetails = "";
+            // }
             vm.otherUpdate();
             // vm.updateErrorState();
-            return state;
+            // return state;
         };
 
         vm.showErrorMessage = function(isInvalid){

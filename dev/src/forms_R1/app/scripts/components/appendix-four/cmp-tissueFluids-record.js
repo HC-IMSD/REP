@@ -63,7 +63,7 @@
         vm.selectedSystemList = [];
         vm.model = {};
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"},
-                            {type: "duplicateRole", displayAlias: "MSG_ERR_DUPLICATED_SYSTEM"}];
+                            {type: "duplicateSys", displayAlias: "TYPE_DUPLICATESYS"}];
 
 
 
@@ -110,7 +110,7 @@
             vm.model.detailsConcat = "";
 
             vm.isUsed = vm.systemUsed({value: vm.model.systemType});
-            ctrl.$setValidity("duplicateRole", !vm.isUsed);
+            ctrl.$setValidity("duplicateSys", !vm.isUsed);
             if (vm.isUsed) {
                 vm.model.system = {};
                 vm.otherDetails = "";

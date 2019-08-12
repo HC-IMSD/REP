@@ -65,18 +65,19 @@
                         </label>
                     </div>
                 </div>
-                <div ng-if="sysCtrl.otherChanged()" class="col-md-12">
+                <div ng-if="sysCtrl.model.otherCardio" class="col-md-12">
                     <div class="form-group ">
                         <label class="required" for="{{::sysCtrl.otherDetailsId}}">{{::'CARDIO_DETAILS'|translate}}
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="sysCtrl.otherDetailsId"
                                                form-ref="sysCtrl.cardioForm"
-                                               show-error="sysCtrl.showErrors()"
+                                               show-error="sysCtrl.showErrorMessage(sysCtrl.cardioForm[sysCtrl.otherDetailsId].$invalid)"
                                                error-types="sysCtrl.requiredOnly">
                             </cmp-error-message>
                             <input type="text" size="40" maxlength="40" name="{{::sysCtrl.otherDetailsId}}" id="{{::sysCtrl.otherDetailsId}}"
-                                   data-ng-required="{{sysCtrl.model.otherCardio}}"  data-ng-model-options="{ debounce: '$inherit'}"
+                                   required  data-ng-blur="sysCtrl.otherChanged()" data-ng-model-options="{ debounce: '$inherit'}"
                                    data-ng-model="sysCtrl.model.otherDetails"/>
+                            <input type="hidden" name="{{::sysCtrl.otherDetailsId}}_1" id="{{::sysCtrl.otherDetailsId}}_1" data-ng-model="sysCtrl.model.otherDetailsHidden" required>
                         </label>
                     </div>
                 </div>

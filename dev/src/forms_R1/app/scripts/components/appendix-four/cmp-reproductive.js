@@ -75,18 +75,17 @@
             for (var i = 0; i < keys.length; i++) {
                 var val = vm.model[keys[i]];
                 if (val) {
-                    if (keys[i] === 'otherReproductive') {
-                        if (!vm.model.otherDetails) {
-                            vm.isSelected = "";
-                            return;
-                        }
-                        vm.isSelected = "selected";
-                        return;
-                    } else {
+                    // if (keys[i] === 'otherReproductive') {
+                    //     if (!vm.model.otherDetails) {
+                    //         vm.isSelected = "";
+                    //         return;
+                    //     }
+                    //     vm.isSelected = "selected";
+                    //     return;
+                    // } else {
                         vm.isSelected = "selected";
                         return;
                     }
-                }
             }
             vm.isSelected = "";
         };
@@ -99,16 +98,17 @@
         };
 
         vm.otherChanged = function () {
-            var state = false;
-            if (vm.model.otherReproductive) {
-                state = true;
-            } else {
-                state = false;
-                vm.model.otherDetails = "";
-            }
+            vm.model.otherDetailsHidden = "right";
+            // var state = false;
+            // if (vm.model.otherReproductive) {
+            //     state = true;
+            // } else {
+            //     state = false;
+            //     vm.model.otherDetails = "";
+            // }
             vm.otherUpdate();
             // vm.updateErrorState();
-            return state;
+            // return state;
         };
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
