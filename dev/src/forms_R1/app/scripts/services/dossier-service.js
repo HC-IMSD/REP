@@ -1524,6 +1524,7 @@
             record.trigeminal = false;
             record.otherNervous = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1543,6 +1544,7 @@
             record.stomach = false;
             record.otherDigestive = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1554,6 +1556,7 @@
             record.tonsils = false;
             record.otherImmune = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
 
             return record;
         }
@@ -1569,6 +1572,7 @@
             record.muscle = false;
             record.otherMuscle = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1586,6 +1590,7 @@
             record.urine = false;
             record.otherReproductive = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
 
             return record;
         }
@@ -1601,6 +1606,7 @@
             record.thyroidParathyroid = false;
             record.otherSkin = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1619,6 +1625,7 @@
             record.gallBladder = false;
             record.otherFluids = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1630,6 +1637,7 @@
             record.trachea = false;
             record.otherCardio = false;
             record.otherDetails = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1647,6 +1655,7 @@
             record.trigerminal_ganglia = noValue;
             record.other_nervous = noValue;
             record.other_nervous_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1661,6 +1670,7 @@
             record.stomach = noValue;
             record.other_digestive = noValue;
             record.other_digestive_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1675,6 +1685,7 @@
             record.muscle = noValue;
             record.other_musculo_skeletal = noValue;
             record.other_musculo_skeletal_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1692,6 +1703,7 @@
             record.urine = noValue;
             record.other_reproductive = noValue;
             record.other_reproductive_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1703,6 +1715,7 @@
             record.trachea = noValue;
             record.other_cardio_respiratory = noValue;
             record.other_cardio_respiratory_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1714,6 +1727,7 @@
             record.tonsils = noValue;
             record.other_immune = noValue;
             record.other_immune_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1728,6 +1742,7 @@
             record.thyroid_parathyroid = noValue;
             record.other_skin_glandular = noValue;
             record.other_skin_glandular_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
@@ -1760,6 +1775,7 @@
             record.gall_bladder = noValue;
             record.other_fluids_tissues = noValue;
             record.other_fluids_tissues_details = "";
+            record.otherDetailsHidden = "";
             return record;
         }
 
