@@ -38,7 +38,7 @@
         vm.oneAnimal = "";
         vm.oneCountry = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.numberErrors= [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "number", displayAlias: "MSG_ERR_INVALID_NUM"}];
+        vm.numberErrors= [{type: "required", displayAlias: "MSG_ERR_MAND"},{type: "number", displayAlias: "TYPE_NUMBER"}];
 
 
         vm.$onInit = function () {
