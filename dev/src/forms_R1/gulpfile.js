@@ -170,13 +170,13 @@ var drugProductRootTitles_fr = {
 
 var piConverterRootTitles_en = {
     mainHeading: "Product Information Template Data Converter: Version 2 to Version 3",
-    title: 'Product Information Template Data Converter: Regulatory Enrolment Process - Canada.ca'
+    title: 'Product Information Template Data Converter: Version 2 to Version 3 - Canada.ca'
 
 };
 
 var piConverterRootTitles_fr = {
-    mainHeading: "Product Information Template Data Converter: Version 2 to Version 3",
-    title: 'Product Information Template Data Converter: Regulatory Enrolment Process - Canada.ca'
+    mainHeading: "Information produit Modèle Data Converter: Version 2 à Version 3",
+    title: 'Information produit Modèle Data Converter: Version 2 à Version 3 - Canada.ca'
 
 };
 
@@ -475,7 +475,8 @@ var transactionComponentFolders = [
     componentFolders.contactDetails,
     componentFolders.expandingTable,
     componentFolders.fileIOComponentAndDep,
-    componentFolders.requesterRecord,
+    // componentFolders.requesterList,
+    // componentFolders.requesterRecord,
     componentFolders.lifecycleList,
     componentFolders.lifecycleDetails,
     componentFolders.addressDetails,
@@ -687,10 +688,7 @@ var drugProductDirectiveFolders =
     [
         directiveFolders.numberOnly
     ];
-var piConverterDirectiveFolders =
-    [
-        directiveFolders.numberOnly
-    ];
+var piConverterDirectiveFolders = [];
 
 
 //Transaction Form directives
@@ -1618,9 +1616,9 @@ gulp.task('dev-global-watch', function () {
         });
 });
 
-gulp.task('dev-activity-clean', function () {
-    return pipes.cleanBuild(paths.buildDevActivity + 'app/');
-});
+// gulp.task('dev-activity-clean', function () {
+//     return pipes.cleanBuild(paths.buildDevActivity + 'app/');
+// });
 
 gulp.task('dev-company-clean', function () {
     return (pipes.cleanBuild(paths.buildDevCompany + 'app/'));
@@ -1630,10 +1628,10 @@ gulp.task('dev-transaction-clean', function () {
     return (pipes.cleanBuild(paths.buildDevTransaction + 'app/'));
 
 });
-gulp.task('dev-dossier-clean', function () {
-    return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
-
-});
+// gulp.task('dev-dossier-clean', function () {
+//     return (pipes.cleanBuild(paths.buildDevDossier + 'app/'));
+//
+// });
 
 gulp.task('dev-drugProduct-clean', function () {
     return (pipes.cleanBuild(paths.buildDevDrugProduct + 'app/'));

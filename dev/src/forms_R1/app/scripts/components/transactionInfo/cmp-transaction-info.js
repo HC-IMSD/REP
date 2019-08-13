@@ -8,7 +8,6 @@
     angular
         .module('transactionInfo',
             ['lifecycleList',
-                'requesterListModule',
                 'filterLists',
                 'hpfbConstants',
                 'ui.bootstrap',

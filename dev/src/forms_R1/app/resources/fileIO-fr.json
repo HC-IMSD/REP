@@ -6,5 +6,6 @@
   "MSG_ERR_FILE_LOAD": "Erreur: il y a eu un problème lors du chargement du fichier.",
   "MSG_ERR_FILE_TYPE": "Erreur: un type de fichier invalide a été sélectionné.",
   "MSG_ERR_FORM_TYPE": "Erreur: le type de formulaire incorrect a été sélectionné pour ce formulaire.",
-  "MSG_ERR_CHECKSUM_FAIL": "Erreur: La somme de contrôle dans le fichier ne correspond pas à la somme de contrôle calculée."
+  "MSG_ERR_CHECKSUM_FAIL": "Erreur: La somme de contrôle dans le fichier ne correspond pas à la somme de contrôle calculée.",
+  "MSG_ERR_FILE_VERSION": "Erreur: un version de fichier invalide a été sélectionné."
 }
