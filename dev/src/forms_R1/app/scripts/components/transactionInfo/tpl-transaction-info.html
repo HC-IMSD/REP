@@ -59,7 +59,8 @@
                                 </div>
                    </div>
                     <div class="row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-12"
+                             data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
                                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -123,8 +124,8 @@
                                         <!--<option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isThirdParty" />-->
                                     <!--</select>-->
                                 </label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required />&nbsp;{{::'Y'|translate}}</label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}_1"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}_1" name="{{::transInfoCtrl.thirdPartyId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required />&nbsp;{{::'N'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required data-ng-change="transInfoCtrl.setThirdParty()"/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}_1"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}_1" name="{{::transInfoCtrl.thirdPartyId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required data-ng-change="transInfoCtrl.setThirdParty()"/>&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
                         <div class="row">
@@ -192,13 +193,14 @@
                                         <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isAdminSub">-->
                                     <!--</select>-->
                                 </label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required/>&nbsp;{{::'Y'|translate}}</label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}_1"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}_1" name="{{::transInfoCtrl.isAdminSubId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required />&nbsp;{{::'N'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required data-ng-change="transInfoCtrl.setAdminSubmission()"/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}_1"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}_1" name="{{::transInfoCtrl.isAdminSubId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required data-ng-change="transInfoCtrl.setAdminSubmission()"/>&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
                         <div data-ng-show="transInfoCtrl.showAdminSub">
                             <div class="row">
-                                <div class="col-xs-12 form-group">
+                                <div class="col-xs-12 form-group"
+                                     data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.adminSubTypeId].$invalid}">
                                     <label for="{{::transInfoCtrl.adminSubTypeId}}" class="required">
                                         <span class="field-name">{{::"ADMIN_SUB_TYPE" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -356,8 +358,8 @@
                                 <!--<option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isFees" />-->
                             <!--</select>-->
                         </label>
-                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}"><input type="radio" id="{{::transInfoCtrl.isFeesId}}" name="{{::transInfoCtrl.isFeesId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isFees" required/>&nbsp;{{::'Y'|translate}}</label>
-                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}_1"><input type="radio" id="{{::transInfoCtrl.isFeesId}}_1" name="{{::transInfoCtrl.isFeesId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isFees" required />&nbsp;{{::'N'|translate}}</label>
+                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}"><input type="radio" id="{{::transInfoCtrl.isFeesId}}" name="{{::transInfoCtrl.isFeesId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isFees" required data-ng-change="transInfoCtrl.updateFeeState()"/>&nbsp;{{::'Y'|translate}}</label>
+                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}_1"><input type="radio" id="{{::transInfoCtrl.isFeesId}}_1" name="{{::transInfoCtrl.isFeesId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isFees" required data-ng-change="transInfoCtrl.updateFeeState()"/>&nbsp;{{::'N'|translate}}</label>
                     </div>
                 </div>
             </div>
