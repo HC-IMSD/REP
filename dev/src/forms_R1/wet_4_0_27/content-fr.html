@@ -99,6 +99,13 @@
                 }, 100);
             }
         }
+        function focusOnProvince(e){
+            var node = $(e).parent().parent().parent().next();
+            window.setTimeout(function() {
+                var id = $(node).find('[id^="province_"],[id^="state_"],[id^="proveState_"]').attr('id');
+                $('#' + id).focus();
+            }, 200);
+        }
     </script>
 </head>
 
