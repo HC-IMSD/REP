@@ -41,9 +41,9 @@
                 <input type="text" id="{{::adr.countryId}}" name="{{::adr.countryId}}"
                        data-ng-model="adr.addressModel.countryHtml"
                        value="adr.addressModel.countryHtml"
-                       data-ng-disabled="!adr.isCountryEditable()"
+                       data-ng-disabled="!adr.isCountryEditable()" onblur="focusOnProvince(this);"
                        data-ng-blur="adr.countryChange()" list="countryList" required
-                       class="form-control"/>
+                       class="form-control full-width"/>
                 <datalist id="countryList" >
                     <option data-ng-repeat="countryRecord in adr.countryList"
                             value="{{countryRecord[adr.lang]}}"
@@ -63,7 +63,7 @@
                                            show-error="adr.showError(adr.addressForm[adr.provinceListId])" error-types="adr.requiredOnly">
                         </cmp-error-message>
                         <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
-                                id="{{::adr.provinceListId}}" name="{{::adr.provinceListId}}"
+                                id="{{::adr.provinceListId}}" name="{{::adr.provinceListId}}" data-focus-if="true"
                                 data-ng-options="province |translate for province in adr.provinces"
                                 data-ng-disabled="!adr.isEditable" data-ng-required="adr.showProvince">
                             <option label=" " value="" />
@@ -86,7 +86,7 @@
                         </select>
                     </label>
                 </div>
-                <div class="form-group " data-ng-show="adr.hideProvinceDdl"
+                <div class="form-group " data-ng-if="adr.hideProvinceDdl"
                      data-ng-class="{'has-error':adr.addressForm[adr.stateTextId].$invalid}">
                     <label for="{{::adr.stateTextId}}">{{::"PROVSTATE" |translate}}</label>
                     <input type="text" id="{{::adr.stateTextId}}" name="{{::adr.stateTextId}}"
