@@ -27,8 +27,8 @@
             link: link,
             restrict: 'A',
             scope: {
-                hpfbFileSelect: "&",
-            },
+                hpfbFileSelect: "&"
+            }
         };
         return directive;
 
@@ -61,6 +61,7 @@
         bindings: {
             updateModelRoot: '&',
             rootElem: '@',
+            versionExpected: '@'
         }
     });
 
@@ -72,11 +73,16 @@
         vm.modelCallback = function (fileContent) {
             vm.status = "";
             if (fileContent) {
-                vm.status = fileContent.messages;
+                var versionArray = fileContent.jsonResult[vm.rootElem]['software_version'].split('.');
+                if (vm.versionExpected && vm.versionExpected !== versionArray[0]) {
+                    fileContent = null;
+                    vm.status = "MSG_ERR_FILE_VERSION";
+                } else {
+                    vm.status = fileContent.messages;
+                    vm.updateModelRoot({fileContent: fileContent});
+                }
             }
-            vm.updateModelRoot({fileContent: fileContent});
             angular.element(fileLoad).trigger('focus');
-
         };
     }
 })();

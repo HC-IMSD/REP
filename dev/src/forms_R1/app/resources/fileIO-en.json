@@ -6,5 +6,6 @@
   "MSG_ERR_FILE_LOAD": "Error: there was a problem loading the file.",
   "MSG_ERR_FILE_TYPE": "Error: An invalid file type was selected.",
   "MSG_ERR_FORM_TYPE": "Error: the wrong form type was selected for this form.",
-  "MSG_ERR_CHECKSUM_FAIL": "Error: the checksum in the file does not match the calculated checksum"
+  "MSG_ERR_CHECKSUM_FAIL": "Error: the checksum in the file does not match the calculated checksum",
+  "MSG_ERR_FILE_VERSION": "Error: An invalid file version was selected."
 }

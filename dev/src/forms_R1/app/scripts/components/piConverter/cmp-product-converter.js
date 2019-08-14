@@ -13,7 +13,6 @@
         'fileIO',
         'applicationInfoService',
         'ui.bootstrap',
-        'numberFormat',
         'ngMessages',
         'ngAria',
         'piConverterService',
@@ -69,6 +68,7 @@
         vm.transcludeList={};
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.rootTag="";
+        vm.versionToConvert="";
         vm.drugUseList=[];
         vm.disinfectantTypeList=[];
         vm.extraAppendixModel="none";
@@ -82,6 +82,7 @@
             vm.piConverterService = new PiConverterService();
             vm.model = vm.piConverterService.getDefaultObject();
             vm.rootTag= vm.piConverterService.getRootTagName();
+            vm.versionToConvert="2";
             vm.setVisibleTabIndex=-1;
         };
         /**
