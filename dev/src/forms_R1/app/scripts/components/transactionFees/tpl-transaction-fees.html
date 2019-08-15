@@ -155,7 +155,7 @@
                 </div>
                 <div data-ng-if="transFeeCtrl.isEligible()">
                     <fieldset id="{{::transFeeCtrl.feeDocFsId}}">
-                        <legend class="legend-rep">{{::'SUPPORTING_DOC'|translate}}
+                        <legend class="legend-rep required">{{::'SUPPORTING_DOC'|translate}}
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <cmp-error-message field-name="transFeeCtrl.feeDocSelectedId"
                                            form-ref="transFeeCtrl.transFeeForm"
