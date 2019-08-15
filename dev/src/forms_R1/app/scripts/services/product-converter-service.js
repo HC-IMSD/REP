@@ -19,9 +19,9 @@
     angular
         .module('piConverterService')
         .factory('PiConverterService', PiConverterService);
-    PiConverterService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_PREFIX'];
+    PiConverterService.$inject = ['DossierLists', '$translate', '$filter', 'getCountryAndProvinces', 'OTHER', 'UNKNOWN', 'YES', 'NO', 'XSL_PREFIX', 'CANADA'];
 
-    function PiConverterService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_PREFIX) {
+    function PiConverterService(DossierLists, $translate, $filter, getCountryAndProvinces, OTHER, UNKNOWN, YES, NO, XSL_PREFIX, CANADA) {
         var yesValue = YES;
         var noValue = NO;
         // var xslName = XSL_PREFIX + "REP_PI_2_2.xsl";
@@ -859,15 +859,13 @@
                     importerRec.province_lov = "";
                 }
                 importerRec.province_text = importerObj.stateText;
-                importerRec.country = "";
-                if (importerObj.country) {
-                    importerRec.country = {
-                        _label_en: importerObj.country.en,
-                        _label_fr: importerObj.country.fr,
-                        _id: importerObj.country.id,
-                        __text: importerObj.country[currentLang]
+                // importerRec.country = "";
+                importerRec.country = {
+                        _label_en: 'Canada',
+                        _label_fr: 'Canada',
+                        _id: CANADA,
+                        __text: 'Canada'
                     };
-                }
                 importerRec.postal_code = importerObj.postalCode;
             }
             return (importerRec);
