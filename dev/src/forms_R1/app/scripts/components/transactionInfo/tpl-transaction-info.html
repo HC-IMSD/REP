@@ -72,8 +72,8 @@
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.dossierId])"
                                                            error-types="transInfoCtrl.min7Error"></cmp-error-message>
+                                        <span class="input-group-addon">HC6-024-</span>
                                         <span class="rep-input-group">
-                                            <span class="input-group-addon" style="color:#555;background-color: #eee;">HC6-024-</span>
                                                 <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
                                                        size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
                                                        data-ng-pattern="/^[a-zA-Z0-9]{7}$/"
