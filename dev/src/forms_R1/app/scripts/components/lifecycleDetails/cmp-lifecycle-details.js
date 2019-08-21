@@ -32,7 +32,7 @@
                 onDelete: '&',
                 enableDeleteIndex: '&',
                 isEctd: '<',
-                getDossierType: '<',
+                dossierType: '<',
                 activityTypes:'<', //list of activity types
                 sequenceUpdated:'<',
                 errorSummaryUpdate:'<', //update the component error summary
@@ -44,7 +44,7 @@
 
     function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, getContactLists, $filter, $translate, $scope) {
         var vm = this;
-        vm.activityList=[];
+        vm.activityList= TransactionLists.getActivityTypes();
         vm.activityTypeList=[];
         vm.pharmaList =[];
         vm.biolList = [];
@@ -53,7 +53,7 @@
         vm.sequenceList = [];
         vm.descriptionList = [];
         vm.requesterList =[];
-        vm.lifecycleModel = {};
+        vm.lifecycleModel = vm.lifecycleRecord;
         vm.endDateVisible = false;
         vm.yearVisible = false;
         vm.yearChangeVisible = false;
@@ -63,7 +63,7 @@
         vm.descriptionChangeVisible = false;
         vm.versionVisible = false;
         vm.ectd = false;
-        vm.dossierType = '';
+        // vm.dossierType = '';
         vm.popOpened = false;
         vm.alerts = [false, false];
         vm.dateOptions = {
@@ -119,8 +119,8 @@
                 vm.ectd = changes.isEctd.currentValue;
             }
 
-            if (changes.getDossierType) {
-                vm.dossierType = changes.getDossierType.currentValue;
+            if (changes.dossierType) {
+                vm.dossierType = changes.dossierType.currentValue;
                 if( vm.dossierType == TransactionLists.getPharmaceuticalValue()) {
                     vm.leadList = TransactionLists.getActivityLeadListByD22();
                 } else if (vm.dossierType == TransactionLists.getBiologicValue()) {
@@ -132,7 +132,7 @@
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
                     vm.lifecycleModel.sequence = vm.lifecycleRecord.sequence;
-                    //_updateLocalModel(vm.lifecycleRecord);
+                    _updateLocalModel(vm.lifecycleRecord);
                 }
             }
             if(changes.showErrorSummary){
@@ -208,7 +208,7 @@
         };
 
         function _updateLocalModel(record) {
-            vm.lifecycleModel = angular.copy(record);
+            vm.lifecycleModel = record; //angular.copy(record);
             convertToDate();
             vm.selectActivityLeadList();
             vm.setSequenceList();
@@ -242,7 +242,9 @@
                 vm.leadList = [];
                 return;
             }
-
+            if(! vm.activityList || vm.activityList.length() < 1 ){
+                vm.activityList= TransactionLists.getActivityTypes();
+            }
             switch( vm.dossierType ) {
                 case  TransactionLists.getPharmaceuticalValue():
                     vm.leadList = TransactionLists.getActivityLeadListByD22();
@@ -254,10 +256,10 @@
                     vm.leadList = [];
                     break;
             }
-            if( vm.lifecycleModel.activityLead) {
-                var temp = $filter('filter')(vm.leadList, {id: vm.lifecycleModel.activityLead.id})[0];
-                vm.lifecycleModel.activityLead = temp;
-            }
+            // if( vm.lifecycleModel.activityLead) {
+            //     var temp = $filter('filter')(vm.leadList, vm.lifecycleModel.activityLead);
+            //     vm.lifecycleModel.activityLead = temp;
+            // }
         };
 
 
@@ -266,17 +268,33 @@
                 vm.activityTypeList=[];
                 return;
             }
+            if(! vm.activityList || vm.activityList.length < 1){
+                vm.activityList= TransactionLists.getActivityTypes();
+            }
             switch(vm.lifecycleModel.activityLead){
                 case  TransactionLists.getBiologicalLeadValue():
+
+                    if(vm.biolList.length == 0){
+                        vm.biolList = ActivityFormFilterService.getBiolRAList(vm.activityList);
+                    }
                     vm.activityTypeList= vm.biolList;
                     break;
                 case  TransactionLists.getPharmaLeadValue():
+                    if(vm.pharmaList.length == 0){
+                        vm.pharmaList = ActivityFormFilterService.getPharmaRAList(vm.activityList)
+                    }
                     vm.activityTypeList= vm.pharmaList;
                     break;
                 case  TransactionLists.getPostMarketLeadValue():
+                    if(vm.postMarketList.length == 0){
+                        vm.postMarketList = ActivityFormFilterService.getPostMarketRAList(vm.activityList);
+                    }
                     vm.activityTypeList= vm.postMarketList;
                     break;
                 case  TransactionLists.getConsumHealthLeadValue():
+                        if(vm.consumHealthList.length == 0){
+                            vm.consumHealthList = ActivityFormFilterService.getConsumHealthList(vm.activityList);
+                        }
                     vm.activityTypeList= vm.consumHealthList;
                     break;
                 default:
@@ -308,7 +326,7 @@
          * @param value
          */
         vm.setSequenceList = function () {
-            if(!vm.lifecycleModel.activityType) {
+             if(!vm.lifecycleModel.activityType) {
                 vm.lifecycleModel.activityTypeDisplay="";
                 vm.lifecycleModel.descriptionValue = "";
                 vm.descriptionList = "";
@@ -932,13 +950,13 @@
         };
         function convertToDate() {
             //TODO parse string and convert
-            if (vm.lifecycleModel.dateFiled) {
+            if (vm.lifecycleModel && vm.lifecycleModel.dateFiled) {
                 vm.lifecycleModel.dateFiled = _parseDate(vm.lifecycleModel.dateFiled)
             }
-            if (vm.lifecycleModel.startDate) {
+            if (vm.lifecycleModel && vm.lifecycleModel.startDate) {
                 vm.lifecycleModel.startDate = _parseDate(vm.lifecycleModel.startDate)
             }
-            if (vm.lifecycleModel.endDate) {
+            if (vm.lifecycleModel && vm.lifecycleModel.endDate) {
                 vm.lifecycleModel.endDate = _parseDate(vm.lifecycleModel.endDate);
             }
         }

@@ -319,9 +319,7 @@
             return (
                 [
                     _biologic,
-                    _pharma,
-                    _veterinary,
-                    _clinical
+                    _pharma
                 ]);
         }
 

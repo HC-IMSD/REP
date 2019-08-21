@@ -101,6 +101,7 @@
             loadUserListData();
             vm.finalState=false;
             vm.displayResetBtn = false;
+
         };
 
 
@@ -351,7 +352,7 @@
                 vm.setAdminSubmission();
                // vm.transactionModel.isSolicited = "";
                // vm.setSolicitedState();
-                vm.transactionModel.ectd.lifecycleRecord =[]; //22 - Transaction Details Record
+                vm.transactionModel.ectd.lifecycleModel ={}; //22 - Transaction Details Record
                 vm.transactionModel.projectManager1 = ""; //43 - projectManager1
                 vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
                 vm.transactionModel.isFees = ""; // 46 - fee
