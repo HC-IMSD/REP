@@ -59,8 +59,7 @@
                                 </div>
                    </div>
                     <div class="row">
-                        <div class="form-group col-md-12"
-                             data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
+                        <div class="form-group col-md-12">
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
                                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -72,12 +71,14 @@
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.dossierId])"
                                                            error-types="transInfoCtrl.min7Error"></cmp-error-message>
-                                        <span class="input-group-addon">HC6-024-</span>
                                         <span class="rep-input-group">
+                                            <span class="input-group-addon">HC6-024-</span>
+                                            <div data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
                                                 <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
                                                        size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
                                                        data-ng-pattern="/^[a-zA-Z0-9]{7}$/"
                                                        data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
+                                            </div>
                                         </span>
                                     </label>
                         </div>
