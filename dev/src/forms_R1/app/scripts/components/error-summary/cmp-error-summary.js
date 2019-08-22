@@ -245,14 +245,14 @@
             if (!(keys instanceof Array)) {
                 keys = [keys];
             }
-            if (keys.indexOf("lifecycleCtrl.lifecycleDetailsForm") > -1) {
-                for (var i = 0; i < keys.length; i++) {
-                    if (keys[i].indexOf("saveLifeRec") > -1) {
-                        delete errors[keys[i]];
-                        break;
-                    }
-                }
-            }
+            // if (keys.indexOf("lifecycleCtrl.lifecycleDetailsForm") > -1) {
+            //     for (var i = 0; i < keys.length; i++) {
+            //         if (keys[i].indexOf("saveLifeRec") > -1) {
+            //             delete errors[keys[i]];
+            //             break;
+            //         }
+            //     }
+            // }
             if (keys.indexOf("ingRecCtrl.activeIngForm") > -1) {
                 for (var i = 0; i < keys.length; i++) {
                     if (keys[i].indexOf("no_active") > -1) {
@@ -325,6 +325,7 @@
                         angular.merge(resultsList, result);
                     }
                 }
+                i++;
             }
         }
 
@@ -435,15 +436,17 @@
                         break;
                 }
             }
-            result[error_Name] = {
-                name: destId,
-                errorName: error_Name,
-                translateKey: scrubName.toUpperCase(),
-                type: errorKey,
-                parent: parent,
-                concat: parent + '.' + error_Name,
-                isSummary: false
-            };
+            if(! result[error_Name]){
+                result[error_Name] = {
+                    name: destId,
+                    errorName: error_Name,
+                    translateKey: scrubName.toUpperCase(),
+                    type: errorKey,
+                    parent: parent,
+                    concat: parent + '.' + error_Name,
+                    isSummary: false
+                };
+            }
             return result;
         }
 
