@@ -84,7 +84,7 @@
         ];
         vm.min7Error = [
             {type: "required", displayAlias: "MSG_ERR_MAND"},
-            {type: "minlength", displayAlias: "MSG_LENGTH_7"},
+            {type: "minlength", displayAlias: "TYPE_MINLENGTH"},
             {type: "pattern", displayAlias: "MSG_FORMAT_ALPHA_NUMBERIC"}
         ];
         vm.showSummary=false;
