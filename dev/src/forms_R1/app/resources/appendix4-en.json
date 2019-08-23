@@ -119,7 +119,7 @@
   "TISSUE_FLUID": "Tissue or Fluid",
   "ANIMAL_SRC": "Animal Source",
   "FS_TYPE": "Source From",
-  "EXTRA_APPENDIX": "Sourced Ingredients not Referenced in any Formulation",
+  "EXTRA_APPENDIX": "Human/Animal Sourced Ingredient/Material not Referenced in any Formulation",
   "CARDIO_LEGEND": "Select one or more Cardio-Respiratory system selections",
   "NERVOUS_LEGEND": "Select one or more Nervous system selections",
   "OTHER_LEGEND": "Select one or more Other Tissues or Fluids system Selections",

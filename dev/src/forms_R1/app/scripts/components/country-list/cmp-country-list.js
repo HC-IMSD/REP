@@ -91,6 +91,7 @@
 
         vm.$postLink = function () {
             if(!vm.isFileLoaded) {
+                vm.requiredFlag = true;
                 vm.addNew();
             }
         };
@@ -219,7 +220,7 @@
         };
 
         vm.updateRecord = function(){
-            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.selectRecord = -1;
             vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
         }

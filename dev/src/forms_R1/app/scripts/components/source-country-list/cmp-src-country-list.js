@@ -219,13 +219,13 @@
         };
 
         vm.updateRecord = function(){
-            vm.resetToCollapsed = !vm.resetToCollapsed;
+            vm.selectRecord = -1;
             vm.requiredFlag = false;
             vm.resetToCollapsed = !vm.resetToCollapsed;
-        }
+        };
         vm.setFocus = function () {
             vm.isFocus = true;
-        }
+        };
         vm.cancelFocus = function () {
             vm.isFocus = false;
         }
