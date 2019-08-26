@@ -59,8 +59,7 @@
                                 </div>
                    </div>
                     <div class="row">
-                        <div class="form-group col-md-12"
-                             data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
+                        <div class="form-group col-md-12">
                                     <label for="{{::transInfoCtrl.dossierId}}" class="required full-width">
                                         <span class="field-name">{{::"DOSSIER_ID" |translate}}{{::"LEAST_7_CHAR" |translate}}
                                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
@@ -72,14 +71,16 @@
                                                            form-ref="transInfoCtrl.transInfoForm"
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.dossierId])"
                                                            error-types="transInfoCtrl.min7Error"></cmp-error-message>
-                                        <span class="input-group-addon">HC6-024-</span>
-                                        <span class="rep-input-group">
-                                                <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
-                                                       size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
-                                                       data-ng-pattern="/^[a-zA-Z0-9]{7}$/"
-                                                       data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
-                                        </span>
                                     </label>
+                                    <span class="rep-input-group">
+                                        <span class="input-group-addon">HC6-024-</span>
+                                        <span data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.dossierId].$invalid}">
+                                            <input type="text" class="form-control" id="{{::transInfoCtrl.dossierId}}"
+                                                   size="7" maxlength="7" data-ng-minlength="7" name="{{::transInfoCtrl.dossierId}}" required
+                                                   data-ng-pattern="/^[a-zA-Z0-9]{7}$/"
+                                                   data-ng-model="transInfoCtrl.transactionModel.ectd.dossierId" />
+                                        </span>
+                                    </span>
                         </div>
                     </div>
                     <div class="row">
@@ -306,21 +307,14 @@
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
                         <div class="panel-body">
-                            <div>
-                                <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
-                                                    is-ectd="transInfoCtrl.isEctd"
-                                                    is-final="transInfoCtrl.isFinal"
-                                                    get-dossier-type ="transInfoCtrl.selectedDossierType"
-                                                    deprecate-sequence="transInfoCtrl.subtractSequence()"
-                                                    show-error-summary="transInfoCtrl.showSummary"
-                                                    parent-dirty="transInfoCtrl.$dirty"
-                                                    is-file-loaded="transInfoCtrl.isFileLoaded"
-                                                    set-sequence-value="transInfoCtrl.setSequence(start)"
-                                                    sequence-updated="transInfoCtrl.sequenceChange"
-                                                    get-current-sequence="transInfoCtrl.getCurrentSequence()"
-                                                    get-new-transaction="transInfoCtrl.getNewTransaction()">
-                                </cmp-lifecycle-list>
-                            </div>
+                            <cmp-lifecycle-details lifecycle-record="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
+                                                   is-detail-valid=""
+                                                   activity-types="lifeListCtrl.activityTypes"
+                                                   is-ectd="transInfoCtrl.transactionModel.ectd.ectdValue"
+                                                   dossier-type ="transInfoCtrl.transactionModel.ectd.dossierType"
+                                                   show-error-summary="transInfoCtrl.showSummary"
+                                        >
+                            </cmp-lifecycle-details>
                         </div>
                     </section>
                 <div class="row">

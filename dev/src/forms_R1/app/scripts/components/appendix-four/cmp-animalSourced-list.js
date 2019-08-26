@@ -109,6 +109,11 @@
             }
             vm.onUpdate({list: vm.model.animalSrcList});
         };
+        vm.onUpdatesRecord = function () {
+            vm.selectRecord = -1;
+            vm.requiredFlag = false;
+            vm.resetCollapsed = !vm.resetCollapsed;
+        };
         vm.deleteRecord=function(recId){
             var idx = vm.model.animalSrcList.indexOf(
                 $filter('filter')(vm.model.animalSrcList, {id: recId}, true)[0]);

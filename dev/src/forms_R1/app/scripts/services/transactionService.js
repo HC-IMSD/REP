@@ -312,21 +312,21 @@
                 this.currSequence--;
             },
             _mapLifecycleList: function (jsonObj) {
-                var result = [];
-                this.currSequence=0; //reset the starting
-                if (!jsonObj) return result;
+                // var result = [];
+                // this.currSequence=0; //reset the starting
+                if (!jsonObj) return {};
                 if (!(jsonObj instanceof Array)) {
                     //make it an array, case there is only one record
-                    jsonObj = [jsonObj]
+                    return _transformLifecycleRecFromFileObj(jsonObj, $filter, TransactionLists) ;
                 }
-                for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
+                // for (var i = 0; i < jsonObj.length; i++) {
+                //     var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
                     //update the start value;
-                    this._setNextSequenceOnLoad(parseInt(record.sequence));
-                    result.push(record);
-                }
+                    // this._setNextSequenceOnLoad(parseInt(record.sequence));
+                    // result.push(record);
+                // }
                 //this.setSequenceNumber(jsonObj.length);
-                return result
+                return _transformLifecycleRecFromFileObj(jsonObj[0], $filter, TransactionLists);
             },
             _setNextSequenceOnLoad: function (sequence) {
 
@@ -585,8 +585,8 @@
                 __text: sdv_text
             };
         }
-        lifecycleRec.sequence_from_date = lifecycleObj.startDate;
-        lifecycleRec.sequence_to_date = lifecycleObj.endDate;
+        lifecycleRec.sequence_from_date = angular.isDate(lifecycleObj.startDate)? lifecycleObj.startDate.toISOString().substr(0,10):lifecycleObj.startDate;
+        lifecycleRec.sequence_to_date = angular.isDate(lifecycleObj.endDate)? lifecycleObj.endDate.toISOString().substr(0,10):lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
         lifecycleRec.sequence_details_change = lifecycleObj.detailsChange;
         lifecycleRec.sequence_version = lifecycleObj.sequenceVersion;
@@ -842,7 +842,7 @@
             "requesterNameTxt":"",
             "requesterName2Txt":"",
             "requesterName3Txt":"",
-            "isSaved": false
+            "isSaved": true
         };
         //TODO get next sequence number
         return defaultRecord;
@@ -915,7 +915,7 @@
                 dossierId: "",
                 dossierType: "",
                 productName: "",
-                lifecycleRecord: []
+                lifecycleRecord: _createLifeCycleModel()
             },
           //  isSolicited: "",
           //  solicitedRequesterReord: [],

@@ -316,8 +316,6 @@
                 [
                     _biologic,
                     _pharma
-                   // _veterinary,
-                   // _clinical
                 ]);
         }
 

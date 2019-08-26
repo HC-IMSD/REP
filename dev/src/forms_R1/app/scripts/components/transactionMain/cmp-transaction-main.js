@@ -56,9 +56,9 @@
         vm.updateSummary = 0; //increment to send message to error summaries
 
         vm.focusSummary = 0; //messaging to set focus on the error summary
-        vm.exclusions = { // when error summary hit these, assumes there is a sub summary if type x.x
-            "lifecycleCtrl.lifecycleDetailsForm":"true"
-        };
+        // vm.exclusions = { // when error summary hit these, assumes there is a sub summary if type x.x
+        //     "lifecycleCtrl.lifecycleDetailsForm":"false"
+        // };
         vm.transcludeList = {}; //specific to expanding table to tag records
         vm.alias = { // do something other than a simple hyperlink
             "saveLifeRec": {

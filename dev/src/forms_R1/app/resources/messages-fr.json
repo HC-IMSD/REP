@@ -18,7 +18,7 @@
   "IMPORTER_SEL": "fr_Importer Role already Selected",
   "REPPRIM_SEL": "Rôle déjà sélectionné",
   "REPALT_SEL": "Rôle déjà sélectionné",
-  "MSG_LENGTH_MIN5": "Veuillez fournir au moins 5 chiffres.",
+  "MSG_LENGTH_MIN5": "Veuillez fournir 5 chiffres.",
   "MSG_LENGTH_6": "Veuillez fournir au moins 6 caractères.",
   "MSG_LENGTH_6NUM": "Veuillez fournir 6 chiffres.",
   "MSG_LENGTH_8NUM": "Veuillez fournir 8 chiffres.",

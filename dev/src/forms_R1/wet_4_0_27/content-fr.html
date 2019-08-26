@@ -50,6 +50,7 @@
             window.onbeforeunload = function(){
                 return 'fr_The form has been updated, do you want to stay on the page?';
             }
+            $('.modal-body').after('<div class="modal-footer"><button type="button" id="ftrClose" class="btn btn-sm btn-primary pull-left overlay-close" style="" title="Fermer (touche d&#39;échappement)">Fermer<span class="wb-inv">(touche d&#39;échappement)</span></button></div>');
         }
         function focusOnRow(e, alter) {
             var myTable = $(e).closest('table');

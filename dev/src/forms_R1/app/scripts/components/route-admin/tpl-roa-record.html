@@ -11,7 +11,10 @@
                                            form-ref="roaRecCtrl.roaRecForm"
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.roaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
-                        <input type="text" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}" data-ng-model="roaRecCtrl.model.display" value="roaRecCtrl.model.display" data-ng-change="roaRecCtrl.roaChanged($item, $model);" list="roaFormList" required class="form-control full-width" data-focus-if="roaRecCtrl.isFocus"/>
+                        <input type="text" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"
+                               data-ng-model="roaRecCtrl.model.display" value="roaRecCtrl.model.display"
+                               list="roaFormList"
+                               required class="form-control full-width" data-focus-if="roaRecCtrl.isFocus"/>
                         <datalist id="roaFormList" class="rep-selectize-dropdown rep-selectize-font">
                             <option data-ng-repeat="roa in roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:roaFilter}" value="{{roa[roaRecCtrl.lang]}}" label="{{roa[roaRecCtrl.lang]}}"/>
                         </datalist>
@@ -54,7 +57,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="btn-group-sm col-sm-3">
+                <div class="btn-group-sm col-sm-12">
+                    <button data-ng-click="roaRecCtrl.saveRecord();roaRecCtrl.cancelFocus();" class="btn btn-primary btn-sm" name="roaSave" onclick="focusOnRow(this, 'addRoaRec_')">
+                        {{::'SAVE_RECORD'|translate}}
+                    </button>
                     <button data-ng-click="roaRecCtrl.deleteRecord(item.id);roaRecCtrl.cancelFocus();" class="btn btn-danger btn-sm" name="roaDelete" onclick="focusOnRow(this, 'addRoaRec_')">
                         {{::'DELETE_RECORD'|translate}}
                     </button>
