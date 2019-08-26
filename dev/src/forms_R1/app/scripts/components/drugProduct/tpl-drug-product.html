@@ -222,26 +222,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <section class="panel panel-default">
-                    <header class="panel-heading clearfix">
-                        <h3 class="panel-title">7. {{'IMPORTER'|translate}}
+                    <details class="padding-bttm-lg">
+                        <summary ><strong>7. {{'IMPORTER'|translate}}
                             <sup id="dr6_ref">
                                 <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>7</a>
-                            </sup>
-                        </h3>
-                    </header>
-                    <div class="panel-body">
+                            </sup></strong>
+                        </summary>
+
                         <div>
                             <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
                                                update-error-summary="drugProdCtrl.updateErrorSummary()"
-                                            show-errors="drugProdCtrl.showSummary"
-                                            on-update="drugProdCtrl.updateImporterList(list)">
+                                               show-errors="drugProdCtrl.showSummary"
+                                               on-update="drugProdCtrl.updateImporterList(list)">
                             </cmp-importer-list>
                         </div>
-                    </div>
-                </section>
-                    </div>
+                    </details>
                 </div>
 
                 <div class="row">

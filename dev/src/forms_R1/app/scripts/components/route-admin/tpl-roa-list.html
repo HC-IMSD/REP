@@ -2,13 +2,13 @@
     <input type="text" required data-ng-show="false" name="{{::roaCtrl.noRoaId}}" id="{{::roaCtrl.noRoaId}}"
            aria-hidden="true" data-ng-model="roaCtrl.noROAValues"/>
     <cmp-expanding-table  pre-id="roa_list_" reset-to-collapsed="roaCtrl.resetToCollapsed" id="list_roa_{{::$id}}"
-                         list-items="roaCtrl.model.roaList" expand-record="roaCtrl.setRecord(index)"
+                         list-items="roaCtrl.model.roaList"
                          column-def="roaCtrl.columnDef" select-record="roaCtrl.selectRecord"
                          is-required-record="roaCtrl.requiredFlag"
                          disable-selection="roaCtrl.disableAddButton()">
 
         <cmp-roa-record record="$parent.record" show-errors="roaCtrl.showDetailErrors" is-focus="roaCtrl.isFocus" cancel-focus="roaCtrl.cancelFocus();"
-                        on-delete="roaCtrl.deleteRecord(id)" update-record="roaCtrl.onError()" reset-me="roaCtrl.resetMe()"></cmp-roa-record>
+                        on-delete="roaCtrl.deleteRecord(id)" update-record="roaCtrl.updateRecord()" reset-me="roaCtrl.resetMe()"></cmp-roa-record>
 
     </cmp-expanding-table>
 

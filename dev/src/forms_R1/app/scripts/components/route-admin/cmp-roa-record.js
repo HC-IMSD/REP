@@ -62,7 +62,7 @@
 
             if (changes.record) {
                 vm.model=changes.record.currentValue;
-                vm.updateRecord();
+                // vm.updateRecord();
             }
             if(changes.showErrors){
 
@@ -75,7 +75,7 @@
          * @param item
          * @param model
          */
-        vm.roaChanged=function(item, model){
+        vm.saveRecord = function(){
             var found = false;
             for(var i = 0; i < vm.roaList.length; i++) {
                 var option =vm.roaList[i];
@@ -97,13 +97,12 @@
             }
             if(found){
                 vm.clearFilter($scope);
-                vm.resetMe();
+                vm.updateRecord();
             } else {
                 vm.model.display = "";
                 vm.model.roa = "";
             }
         };
-
 
         vm.deleteRecord = function()  {
             vm.onDelete({id: vm.model.id});
@@ -118,7 +117,7 @@
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
         vm.isRoaOther = function () {
-           if(vm.model.roa.id==DossierLists.getOtherValue()){
+           if(vm.model.display === 'Other'){
                return true;
            }else{
                vm.model.otherRoaDetails="";

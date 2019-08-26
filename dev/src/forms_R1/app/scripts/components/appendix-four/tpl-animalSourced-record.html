@@ -40,6 +40,9 @@
             </div>
             <div class="row">
                 <div class="btn-group-sm col-xs-12">
+                    <button data-ng-click="animalSrcCtrl.saveRecord()" class="btn btn-primary btn-sm" name="saveAnimalSrc" onclick="focusOnRow(this, 'addAnimalSrc_')">
+                        {{::'SAVE_RECORD'|translate}}
+                    </button>
                     <button data-ng-click="animalSrcCtrl.deleteRecord(item.id)" class="btn btn-danger btn-sm" name="deleteAnimalSrc" onclick="focusOnRow(this, 'addAnimalSrc_')">
                     {{::'DELETE_RECORD'|translate}}
                     </button>
