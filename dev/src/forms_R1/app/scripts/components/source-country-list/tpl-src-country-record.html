@@ -56,12 +56,14 @@
                 </div>
             </div>
             <div class="row">
-                <button data-ng-click="srcCountryRecCtrl.saveRecord()" name="saveSrcCountry" id="saveSrcCountry_{{::$id}}" onclick="focusOnRow(this, 'addSrcCountry_')"
-                        class="btn btn-primary btn-md">{{'SAVE_RECORD'|translate}}
-                </button>
-                <button data-ng-click="srcCountryRecCtrl.deleteRecord(srcCountryRecCtrl.model.id)" name="deleteSrcCountry" id="deleteSrcCountry_{{::$id}}" onclick="focusOnRow(this, 'addSrcCountry_')"
-                        class="btn btn-danger btn-md">{{'DELETE_RECORD'|translate}}
-                </button>
+                <div class="btn-group-sm col-sm-12">
+                    <button data-ng-click="srcCountryRecCtrl.saveRecord()" name="saveSrcCountry" id="saveSrcCountry_{{::$id}}" onclick="focusOnRow(this, 'addSrcCountry_')"
+                            class="btn btn-primary btn-md">{{'SAVE_RECORD'|translate}}
+                    </button>
+                    <button data-ng-click="srcCountryRecCtrl.deleteRecord(srcCountryRecCtrl.model.id)" name="deleteSrcCountry" id="deleteSrcCountry_{{::$id}}" onclick="focusOnRow(this, 'addSrcCountry_')"
+                            class="btn btn-danger btn-md">{{'DELETE_RECORD'|translate}}
+                    </button>
+                </div>
             </div>
         </fieldset>
        <!-- <pre>{{srcCountryRecCtrl.model|json}}</pre>-->
