@@ -315,6 +315,22 @@
         };
 
         /***
+         * determin to display Address to sent fieldset
+         */
+        vm.isNotCTA = function () {
+            if (!vm.model || !vm.model.dossierType) return false;
+            return (vm.model.dossierType !== "D26");
+        };
+
+        /***
+         * determin to display schedule fieldset
+         */
+        vm.isVet = function () {
+            if (!vm.model || !vm.model.drugProduct || !vm.model.drugProduct.drugUse) return false;
+            return (vm.model.drugProduct.drugUse.id === "VET");
+        };
+
+        /***
          * reset Disinfectant Type field
          */
         vm.drugUseUpdate = function () {
@@ -351,11 +367,27 @@
         };
 
         /***
-         * reset Disinfectant Type field
+         * update importer list
          */
         vm.updateImporterList = function(list){
             if(!list) return;
             vm.model.importerRecord = list;
+        };
+
+        /***
+         * update sceduleSelected field
+         */
+        vm.updateSceduleFieldset = function(value){
+            if(value) {
+                vm.model.drugProduct.scheduleSelected = "scheduleSelected";
+            } else if(!vm.model.drugProduct.isScheduleC &&
+                    !vm.model.drugProduct.isScheduleD &&
+                    !vm.model.drugProduct.isPrescriptionDrugList &&
+                    !vm.model.drugProduct.isRegulatedCDSA &&
+                    !vm.model.drugProduct.isNonPrescriptionDrug &&
+                    !vm.model.drugProduct.isScheduleA) {
+                vm.model.drugProduct.scheduleSelected = "";
+            }
         };
 
         /**
@@ -513,6 +545,7 @@
             vm.drugUseId="drug_use"+scopeId;
             vm.propIndicationId="prop_Indication"+scopeId;
             vm.fsType = "fs_type" + scopeId;
+            vm.scheduleSelectedId = "schedule_presc_status" + scopeId;
             vm.disiTypeId = "disinfectant_type" + scopeId;
             vm.privacyStatementID = "privacy_statement" + scopeId;
         }

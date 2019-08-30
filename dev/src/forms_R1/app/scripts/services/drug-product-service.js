@@ -70,6 +70,7 @@
                         barn: false,
                         institutionalIndustrial: false
                     },
+                    scheduleSelected:"",
                     isScheduleC: false,
                     isScheduleD: false,
                     isPrescriptionDrugList: false,

@@ -455,7 +455,7 @@
             var domFieldList = {};
             //TODO make angular friendly
             //get all the inputs and assign order index
-            $.each($('input, select, textarea'), function (k) {
+            $.each($('input, select, textarea, fieldset'), function (k) {
                 var temp_attr = $(this).attr('id');
                 if (temp_attr) {
                     domFieldList[temp_attr] = k;

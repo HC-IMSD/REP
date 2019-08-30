@@ -104,6 +104,9 @@
                         <label for="{{::drugProdCtrl.typeId}}" class="required">
                             <span class="field-name">3. {{::'DOSSIER_TYPE' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                            <sup id="dr2b_ref">
+                                <a class="fn-lnk" href="#dr2b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>4</a>
+                            </sup>
                             <cmp-error-message field-name="drugProdCtrl.typeId"
                                                form-ref="drugProdCtrl.drugProdForm"
                                                show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[dos.typeId])"
@@ -126,7 +129,7 @@
                             <span class="field-name">4.&nbsp;{{::'PROD_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <sup id="dr3_ref">
-                                <a class="fn-lnk" href="#dr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>4</a>
+                                <a class="fn-lnk" href="#dr3"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>5</a>
                             </sup>
                             <cmp-error-message field-name="drugProdCtrl.prodNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -146,7 +149,7 @@
                             <span class="field-name">5.&nbsp;{{::'PROPER_NAME' |translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <sup id="dr4_ref">
-                                <a class="fn-lnk" href="#dr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>5</a>
+                                <a class="fn-lnk" href="#dr4"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>6</a>
                             </sup>
                             <cmp-error-message field-name="drugProdCtrl.properNameId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -159,13 +162,13 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" data-ng-if="drugProdCtrl.isNotCTA()">
                     <div class="col-xs-12 form-group">
                         <fieldset id="fs_addrMissing_{{::$id}}">
                     <legend><strong>
                         <span class="label-pi">6. {{::'ADDRESS_NOC'|translate}}
                         <sup id="dr5_ref">
-                            <a class="fn-lnk" href="#dr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>6</a>
+                            <a class="fn-lnk" href="#dr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
                         </sup></span></strong>
                     </legend>
                     <div>
@@ -174,8 +177,7 @@
                                 <div class="checkbox checkbox-pi">
                                     <label for="manuid">
                                         <input type="checkbox" id="manuid" name="manuid"
-                                               data-ng-model="drugProdCtrl.model.manu"
-                                               data-ng-change="drugProdCtrl.rolechecked()"/>
+                                               data-ng-model="drugProdCtrl.model.manu"/>
                                         <span>{{::"MANU_SPON"|translate}}</span>
 
                                     </label>
@@ -185,8 +187,7 @@
                                 <div class="checkbox">
                                     <label for="maillingid">
                                         <input type="checkbox" id="maillingid" name="maillingid"
-                                               data-ng-model="drugProdCtrl.model.mailling"
-                                               data-ng-change="drugProdCtrl.rolechecked()"/>
+                                               data-ng-model="drugProdCtrl.model.mailling"/>
                                         <span>{{::"REGU_ANNU"|translate}}</span>
 
                                     </label>
@@ -198,8 +199,7 @@
                                 <div class="checkbox checkbox-pi">
                                     <label for="thisActivity">
                                             <input type="checkbox" id="thisActivity" name="thisActivity"
-                                                   data-ng-model="drugProdCtrl.model.thisActivity"
-                                                   data-ng-change="drugProdCtrl.rolechecked()"/>
+                                                   data-ng-model="drugProdCtrl.model.thisActivity"/>
                                         <span>{{::"THIS_ACTIVITY"|translate}}</span>
                                     </label>
                                 </div>
@@ -208,8 +208,7 @@
                                 <div class="checkbox">
                                     <label for="importeraddr">
                                         <input type="checkbox" id="importeraddr" name="importeraddr"
-                                               data-ng-model="drugProdCtrl.model.importer"
-                                               data-ng-change="drugProdCtrl.rolechecked()"/>
+                                               data-ng-model="drugProdCtrl.model.importer"/>
                                         <span>{{::"CAN_IMP"|translate}}</span>
 
                                     </label>
@@ -218,20 +217,17 @@
 
                         </div>
                     </div>
-                </fieldset>
+                    </fieldset>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-12 form-group">
-                        <section class="panel panel-default">
-                    <header class="panel-heading clearfix">
-                        <h3 class="panel-title">7. {{'IMPORTER'|translate}}
+                    <details class="padding-bttm-lg">
+                        <summary ><strong>7. {{'IMPORTER'|translate}}
                             <sup id="dr6_ref">
-                                <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>7</a>
-                            </sup>
-                        </h3>
-                    </header>
-                    <div class="panel-body">
+                                <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>11</a>
+                            </sup></strong>
+                        </summary>
+
                         <div>
                             <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
                                                update-error-summary="drugProdCtrl.updateErrorSummary()"
@@ -239,9 +235,7 @@
                                                on-update="drugProdCtrl.updateImporterList(list)">
                             </cmp-importer-list>
                         </div>
-                    </div>
-                </section>
-                    </div>
+        </details>
                 </div>
 
                 <div class="row">
@@ -251,7 +245,7 @@
                             <span class="field-name">8.&nbsp;{{::'DRUG_USE'|translate}}</span>
                             <strong class="required">{{::"REQUIRED" |translate}}</strong>
                             <sup id="dr7_ref">
-                                <a class="fn-lnk" href="#dr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>8</a>
+                                <a class="fn-lnk" href="#dr7"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>12</a>
                             </sup>
                             <cmp-error-message field-name="drugProdCtrl.drugUseId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -276,18 +270,27 @@
                 </div>
                 <div class="row">
                 <div class="form-group col-xs-12">
-                    <fieldset id="{{::drugProdCtrl.fsType}}">
+                    <fieldset id="{{::drugProdCtrl.scheduleSelectedId}}">
                     <legend>
                         <strong>
                             <span class="label-pi">9.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                         </strong>
+                        <strong class="required label-pi" data-ng-if="drugProdCtrl.isVet()">{{::"REQUIRED" |translate}}
+                            <cmp-error-message field-name="drugProdCtrl.scheduleSelectedId"
+                                           form-ref="drugProdCtrl.drugProdForm"
+                                           show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.scheduleSelectedId])"
+                                           error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
+                        </strong>
+                            <input type="hidden" required data-ng-model="drugProdCtrl.model.drugProduct.scheduleSelected"
+                                   aria-hidden="true" id="scheduleSelected" name="{{::drugProdCtrl.scheduleSelectedId}}"/>
                     </legend>
                     <div class="row">
                         <div class="col-xs-12 checkbox checkbox-pi">
                             <label for="is-schedule-c">
                                 <input type="checkbox" name="isScheduleC"
                                        id="is-schedule-c"
-                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleC"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleC"
+                                       data-ng-change="drugProdCtrl.updateSceduleFieldset(drugProdCtrl.model.drugProduct.isScheduleC)"/>
                                 {{::'SCHEDULE_C'|translate}}
                             </label>
                         </div>
@@ -297,7 +300,8 @@
                             <label for="is-schedule-d">
                                 <input type="checkbox" name="isScheduleD"
                                        id="is-schedule-d"
-                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleD"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleD"
+                                       data-ng-change="drugProdCtrl.updateSceduleFieldset(drugProdCtrl.model.drugProduct.isScheduleD)"/>
                                 {{::'SCHEDULE_D'|translate}}
                             </label>
                         </div>
@@ -307,7 +311,8 @@
                             <label for="is-prescription-drug">
                                 <input type="checkbox" name="isPrescriptionDrugList"
                                        id="is-prescription-drug"
-                                       data-ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrugList"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isPrescriptionDrugList"
+                                       data-ng-change="drugProdCtrl.updateSceduleFieldset(drugProdCtrl.model.drugProduct.isPrescriptionDrugList)"/>
                                 {{::'PRESC_DRUG_LIST'|translate}}
                             </label>
                         </div>
@@ -317,7 +322,8 @@
                             <label for="is-regulated-cdsa">
                                 <input type="checkbox" name="isRegulatedCDSA"
                                        id="is-regulated-cdsa"
-                                       data-ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isRegulatedCDSA"
+                                       data-ng-change="drugProdCtrl.updateSceduleFieldset(drugProdCtrl.model.drugProduct.isRegulatedCDSA)"/>
                                 {{::'REGULATED_CDSA'|translate}}
                             </label>
                         </div>
@@ -327,7 +333,8 @@
                             <label for="is-nonprescription-drug">
                                 <input type="checkbox" name="isNonPrescriptionDrug"
                                        id="is-nonprescription-drug"
-                                       data-ng-model="drugProdCtrl.model.drugProduct.isNonPrescriptionDrug"/>
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isNonPrescriptionDrug"
+                                       data-ng-change="drugProdCtrl.updateSceduleFieldset(drugProdCtrl.model.drugProduct.isNonPrescriptionDrug)"/>
                                 {{::'NON_PRESC_DRUG'|translate}}
                             </label>
                         </div>
@@ -337,7 +344,8 @@
                         <div class="col-xs-12 checkbox checkbox-pi">
                             <label for="is-schedule-a">
                                 <input type="checkbox" name="isScheduleA"
-                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a">
+                                       data-ng-model="drugProdCtrl.model.drugProduct.isScheduleA" id="is-schedule-a"
+                                       data-ng-change="drugProdCtrl.updateSceduleFieldset(drugProdCtrl.model.drugProduct.isScheduleA)"/>
                                 {{::'NON_PRESC_SCHEDULE_A'|translate}}
                             </label>
                         </div>
@@ -357,7 +365,7 @@
                             <span class="field-name">10. {{::'PROP_INDICATION'|translate}}</span>
                             <strong class="required">{{::'REQUIRED' |translate}}</strong>
                             <sup id="dr8_ref">
-                                <a class="fn-lnk" href="#dr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>9</a>
+                                <a class="fn-lnk" href="#dr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>13</a>
                             </sup>
                             <cmp-error-message field-name="drugProdCtrl.propIndicationId"
                                                form-ref="drugProdCtrl.drugProdForm"
@@ -406,7 +414,7 @@
                         <strong>
                             <span class="field-name">11. {{::'FORMULATION'|translate}}</span>
                             <sup id="dr9_ref">
-                                <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
+                                <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>
                             </sup>
                         </strong>
                     </div>
@@ -455,7 +463,7 @@
                         data-ng-click="drugProdCtrl.saveXML()">{{drugProdCtrl.saveXMLLabel |translate}}
                 </button>
                 <sup id="dr11_ref">
-                    <a class="fn-lnk" href="#dr11"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>12</a>
+                    <a class="fn-lnk" href="#dr11"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>16</a>
                 </sup>
             </div>
         </div>
