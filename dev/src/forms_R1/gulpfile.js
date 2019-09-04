@@ -332,7 +332,9 @@ var componentFolders = {
     cspApplicantList: 'cspContactList/',
     alertComp: "alertComponent/",
     transFees: 'transactionFees/',
-    piConverter: 'piConverter'
+    piConverter: 'piConverter',
+    speciesList: 'speciesList/',
+    speciesRecord: 'speciesRecord/'
 };
 
 //exclude custom styles only lib
@@ -447,6 +449,8 @@ var drugProductComponentFolders =
         componentFolders.applicationInfo,
         componentFolders.importerList,
         componentFolders.importerRecord,
+        componentFolders.speciesList,
+        componentFolders.speciesRecord,
         componentFolders.drugUse,
         componentFolders.disinfectantType,
         componentFolders.routeAdmin,
@@ -861,6 +865,7 @@ var transactionTranslationFilesBaseList = [
     translationBaseFiles.general,
     translationBaseFiles.messages,
     translationBaseFiles.transaction,
+    translationBaseFiles.formulation,
     translationBaseFiles.errorSummary
 ];
 //complementary supplementary Forms
