@@ -169,7 +169,7 @@
             if(vm.model.list && vm.model.list.length > 0) {
                 var idx;
                 for (var j = 0; j < vm.model.list.length; j++) {
-                    if(vm.model.list[j].country.id && vm.model.list[j].country.id !== UNKNOWN)
+                    if(vm.model.list[j].country && vm.model.list[j].country.id && vm.model.list[j].country.id !== UNKNOWN)
                     {
                         idx = base.indexOf(
                             $filter('filter')(base, {id: vm.model.list[j].country.id}, true)[0]

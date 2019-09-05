@@ -38,7 +38,6 @@
         vm.resetToCollapsed = false;
         vm.isDetailValid = true;
         vm.newIngFormShown = false;
-        vm.isDetailValid = true;
         vm.selectRecord = -1;
         vm.alerts = [false]; //for help boxes
         vm.noActiveValues=""; //used for error handling Business Rule: must be at least one medicinal
