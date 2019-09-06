@@ -36,11 +36,17 @@
         vm.unitsPresentationList = [];
         vm.unitsMeasureList = [];
         vm.activeList = [];
+        vm.speciesList = [];
+        vm.subTypesList = [];
         vm.unitsList = [];
         //TODO create getters/setters? safer as is
         var service = {
             setActiveList: _setActiveArray,
+            setSpeciesList: _setSpeciesArray,
+            setSubTypesList: _setSubTypesArray,
             getActiveList: _getActiveArray,
+            getSpeciesList: _getSpeciesArray,
+            getSubTypesList: _getSubTypesArray,
             createRoaList: _createRoaArray,
             createUnitsList: _createUnitsArray,
             createUnitsPresentationList: _createUnitsPresentationArray,
@@ -57,6 +63,8 @@
             getStrengthList:_getStrengthArray,
             getUnitsList:_getUnitsArray,
             getShelfLifeUnitsList:_getShelfLifeUnitsArray,
+            getCTPhaseList:_getCTPhaseArray,
+            getCTCompositionList:_getCTCompositionArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
@@ -97,9 +105,24 @@
             vm.activeList = data;
         }
 
+        function _setSpeciesArray(data) {
+            vm.speciesList = data;
+        }
+
+        function _setSubTypesArray(data) {
+            vm.subTypesList = data;
+        }
+
         function _getActiveArray() {
             return (vm.activeList);
+        }
 
+        function _getSpeciesArray() {
+            return (vm.speciesList);
+        }
+
+        function _getSubTypesArray() {
+            return (vm.subTypesList);
         }
 
         ////////////////
@@ -235,6 +258,32 @@
                     {"id":"DA","en":"Days","fr":"Jours"},
                     {"id":"HR","en":"Hours","fr":"Heures"},
                     {"id":"MI","en":"Minutes","fr":"Minutes"}
+                ]
+            )
+        }
+
+        function _getCTPhaseArray(){
+
+            return(
+                [
+                    {"id":"CTPHASE1B","en":"Phase I - bioequivalence study (7-day administrative target)","fr":"fr_Phase I - bioequivalence study (7-day administrative target)"},
+                    {"id":"CTPHASE1S","en":"Phase I - study in healthy humans (30-day default)","fr":"fr_Phase I - study in healthy humans (30-day default)"},
+                    {"id":"CTPHASE1O","en":"Phase I - other (30-day default)","fr":"fr_Phase I - other (30-day default)"},
+                    {"id":"CTPHASE2","en":"Phase II (30-day default)","fr":"Phase II (30-day default)"},
+                    {"id":"CTPHASE3","en":"Phase III (30-day default)","fr":"fr_Phase III (30-day default)"},
+                    {"id":"CTPHASEOTHER","en":"Other","fr":"fr_Other"}
+                ]
+            )
+        }
+
+        function _getCTCompositionArray(){
+
+            return(
+                [
+                    {"id":"FMPP","en":"Female paediatric population (0-18 years of age)","fr":"fr_Female paediatric population (0-18 years of age)"},
+                    {"id":"MPP","en":"Male paediatric population (0-18 years of age)","fr":"fr_Male paediatric population (0-18 years of age)"},
+                    {"id":"FMAP","en":"Female adult population","fr":"fr_Female adult population"},
+                    {"id":"MAP","en":"Male adult population","fr":"fr_Male adult population"}
                 ]
             )
         }

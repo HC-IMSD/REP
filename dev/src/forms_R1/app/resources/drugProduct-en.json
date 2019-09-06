@@ -51,6 +51,8 @@
   "VET_SPECIES_REMM":"Species and subtypes recommended for use",
   "VET_SPECIES":"Species",
   "VET_SUBTYPES":"Subtypes",
+  "VET_SPECIES_SUBTYPES":"Species and Subtypes",
+  "ADD_SPECIES":"Add Species",
   "IS_TREAT_FP":"Is this used for the treatment of food-producing animals?",
   "WITHDRAWAL":"Withdrawal time",
   "VET_DAYS":"Days",

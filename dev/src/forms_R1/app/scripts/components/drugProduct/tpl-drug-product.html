@@ -268,6 +268,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="row" data-ng-if="drugProdCtrl.isVet()">
+                    <div class="col-xs-12 form-group">
+                        <section class="panel panel-default">
+                            <header class="panel-heading clearfix">
+                                <h3 class="panel-title">{{'VET_SPECIES_REMM'|translate}}
+                                </h3>
+                            </header>
+                            <div class="panel-body">
+                                <div>
+                                    <cmp-species-list list-items="drugProdCtrl.model.speciesRecord"
+                                                       update-error-summary="drugProdCtrl.updateErrorSummary()"
+                                                       show-errors="drugProdCtrl.showSummary"
+                                                       on-update="drugProdCtrl.updatespeciesList(list)">
+                                    </cmp-species-list>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
                 <div class="row">
                 <div class="form-group col-xs-12">
                     <fieldset id="{{::drugProdCtrl.scheduleSelectedId}}">

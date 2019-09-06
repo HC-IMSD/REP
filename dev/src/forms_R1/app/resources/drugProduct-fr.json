@@ -48,11 +48,13 @@
   "CTA_IS_MARKET": "fr_Is the investigational drug product obtained from the Canadian market",
   "CTA_COUNTRIES": "fr_List the country(ies) the investigational drug product was obtained from",
   "CTA_SRC_COUNTRY": "fr_Summary of Source Country for investigational drug product",
-  "VET_SPECIES_REMM":"fr_Species and subtypes recommended for use",
-  "VET_SPECIES":"fr_Species",
-  "VET_SUBTYPES":"fr_Subtypes",
-  "IS_TREAT_FP":"fr_Is this used for the treatment of food-producing animals?",
-  "WITHDRAWAL":"fr_Withdrawal time",
-  "VET_DAYS":"fr_Days",
-  "VET_HOURS":"fr_Hours"
+  "VET_SPECIES_REMM":"Espèces et sous-types pour lesquels l’usage est recommandé",
+  "VET_SPECIES":"Espèce",
+  "VET_SUBTYPES":"Sous-types",
+  "VET_SPECIES_SUBTYPES":"Espèces et sous-types",
+  "ADD_SPECIES":"Ajouter des espèces",
+  "IS_TREAT_FP":"Est-il utilisé pour le traitement d’animaux producteurs d’aliments??",
+  "WITHDRAWAL":"Délai d'attente",
+  "VET_DAYS":"Jours",
+  "VET_HOURS":"Heures"
 }

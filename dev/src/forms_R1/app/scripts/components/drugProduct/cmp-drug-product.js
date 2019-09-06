@@ -347,7 +347,7 @@
             }
         };
 
-        //????
+        //update Disinfectant Type
         vm.onDisiTypeUpdate = function (newRole) {
             var aRole = {};
             angular.extend(aRole, newRole);
