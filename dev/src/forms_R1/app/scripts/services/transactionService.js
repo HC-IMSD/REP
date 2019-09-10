@@ -608,10 +608,14 @@
         }
         else {
             tempRequesterName =  lifecycleObj.requesterName;
-            lifecycleRec.requester_name = {
-                _id: '',
-                __text: lifecycleObj.requesterName
-            };
+            if(lifecycleObj.requesterName != ""){
+                lifecycleRec.requester_name = {
+                    _id: '',
+                    __text: lifecycleObj.requesterName
+                };
+            } else {
+                lifecycleRec.requester_name = {};
+            }
         }
         if (lifecycleObj.requesterName2 && lifecycleObj.requesterName2.id) {
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
@@ -623,11 +627,13 @@
         else {
             if(lifecycleObj.requesterName2 != ""){
                 tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
+                lifecycleRec.requester_name2 = {
+                    _id: '',
+                    __text: lifecycleObj.requesterName2
+                };
+            } else {
+                lifecycleRec.requester_name2 = {};
             }
-            lifecycleRec.requester_name2 = {
-                _id: '',
-                __text: lifecycleObj.requesterName2
-            };
         }
 
         if (lifecycleObj.requesterName3 && lifecycleObj.requesterName3.id) {
@@ -640,11 +646,13 @@
         else {
             if(lifecycleObj.requesterName3 != "") {
                 tempRequesterName = tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
+                lifecycleRec.requester_name3 = {
+                    _id: '',
+                    __text: lifecycleObj.requesterName3
+                };
+            } else {
+                lifecycleRec.requester_name3 = {};
             }
-            lifecycleRec.requester_name3 = {
-                _id: '',
-                __text: lifecycleObj.requesterName3
-            };
         }
         lifecycleRec.requester_of_solicited_information = tempRequesterName;
         lifecycleRec.fromValue = lifecycleObj.fromValue;
@@ -655,8 +663,9 @@
         return (lifecycleRec);
     }
     function _toOutputObj(type,language, ENGLISH, FRENCH){
-        var result = {'_id':'','_en':'','_fr':'','__text':''};
-        if(type){
+        var result = {};
+        if(type && type.id){
+            result = {'_id':'','_en':'','_fr':'','__text':''};
             if(type.id) result._id = type.id;
             if(type.en) result._en = type.en;
             if(type.fr) result._fr = type.fr;
