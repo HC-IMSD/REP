@@ -258,9 +258,9 @@
                 vm.leadList = [];
                 return;
             }
-            if(! vm.activityList || vm.activityList.length() < 1 ){
-                vm.activityList= TransactionLists.getActivityTypes();
-            }
+            // if(! vm.activityList || vm.activityList.length() < 1 ){
+            //     vm.activityList= TransactionLists.getActivityTypes();
+            // }
             switch( vm.dossierType ) {
                 case  TransactionLists.getPharmaceuticalValue():
                     vm.leadList = TransactionLists.getActivityLeadListByD22();
@@ -589,7 +589,7 @@
          */
         vm.setDetailsState = function () {
             var value = vm.lifecycleModel.descriptionValue;
-            if (!value) {
+            if (!vm.lifecycleModel.activityType.id) {
                 vm.descriptionList = [];
                 return;
             }
