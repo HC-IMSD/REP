@@ -382,6 +382,7 @@
             vm.companyId="company_id"+scopeId;
             vm.dossierId="dossier_id"+scopeId;
             vm.productNameId="prod_name"+scopeId;
+            vm.productProtocolId="prod_protocol"+scopeId;
             vm.isEctdId="is_ectd"+scopeId;
           //  vm.isSolicitedId="is_solicited"+scopeId;
             vm.solictedRqId="solicited_rq"+scopeId;

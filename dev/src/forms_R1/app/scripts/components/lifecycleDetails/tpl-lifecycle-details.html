@@ -15,8 +15,8 @@
                             <label for="{{::lifecycleCtrl.controlNumId}}" class="required">
                                 <span class="field-name">{{::"CONTROL_NUM" |translate}}{{::"LEAST_6_DIGIT" |translate}}
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <sup id="tr8_ref">
-                                    <a class="fn-lnk" href="#tr8"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>8</a>
+                                <sup id="tr9_ref">
+                                    <a class="fn-lnk" href="#tr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>9</a>
                                 </sup>
                                 </span>
                                 <cmp-error-message field-name="lifecycleCtrl.controlNumId"
@@ -37,8 +37,8 @@
                                 <label for="{{::lifecycleCtrl.activityLeadId}}" class="required">
                                     <span class="field-name"> {{::'ACTIVITY_LEAD' |translate}}</span>
                                     <strong class="required"> {{::"REQUIRED" |translate}}</strong>
-                                    <sup id="tr9_ref">
-                                        <a class="fn-lnk" href="#tr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>9</a>
+                                    <sup id="tr10_ref">
+                                        <a class="fn-lnk" href="#tr10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
                                     </sup>
                                     <cmp-error-message field-name="lifecycleCtrl.activityLeadId"
                                                        form-ref="lifecycleCtrl.lifecycleDetailsForm"
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="row" data-ng-if="lifecycleCtrl.endDateVisible">
-                        <div class="form-group col-md-4"
+                        <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId].$invalid}">
                             <label for="{{::lifecycleCtrl.startDateId}}" class="required">
                                 <span class="field-name">{{::"START_DATE" |translate}}</span>
@@ -134,7 +134,7 @@
                                    class="form-control" required
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
-                        <div class="form-group col-md-4"
+                        <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId].$invalid}" >
                             <label for="{{::lifecycleCtrl.endDateId}}" class="required">
                                 <span class="field-name">{{::"END_DATE" |translate}}</span>
@@ -179,8 +179,8 @@
                             <label for="{{::lifecycleCtrl.yearChangeId}}" class="required">
                                 <span class="field-name">{{::"YEAR_CHANGE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <sup id="tr10_ref">
-                                    <a class="fn-lnk" href="#tr10"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
+                                <sup id="tr11_ref">
+                                    <a class="fn-lnk" href="#tr11"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>11</a>
                                 </sup>
                                 <cmp-error-message field-name="lifecycleCtrl.yearChangeId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
@@ -223,8 +223,8 @@
                             <label for="{{::lifecycleCtrl.descriptChangeId}}" class="required full-width">
                                 <span class="field-name">{{::"BRIEF_DESC_CHANGE" |translate}}</span>
                                 <strong class="required">{{::"REQUIRED" |translate}}</strong>
-                                <sup id="tr11_ref">
-                                    <a class="fn-lnk" href="#tr11"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>11</a>
+                                <sup id="tr12_ref">
+                                    <a class="fn-lnk" href="#tr12"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>12</a>
                                 </sup>
                                 <cmp-error-message field-name="lifecycleCtrl.descriptChangeId"
                                                    form-ref="lifecycleCtrl.lifecycleDetailsForm"
@@ -259,10 +259,79 @@
                             </label>
                         </div>
                     </div>
+                    <div class="row" data-ng-if="lifecycleCtrl.fromTo">
+                        <div class="form-group col-md-6"
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.fromValue.$invalid}">
+                            <p><strong>{{::"FROM" |translate}}</strong></p>
+                            <div class="col-md-6">
+                                <label for="{{::lifecycleCtrl.fromId}}" class="required full-width">
+                                    <span class="field-name">{{::"VALUE" |translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="lifecycleCtrl.fromValueId" form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                       show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.fromValueId])"
+                                                       error-types="lifecycleCtrl.numberError"></cmp-error-message>
+                                </label>
+                                <input type="number" id="{{::lifecycleCtrl.fromValueId}}" name="{{::lifecycleCtrl.fromValueId}}"
+                                       data-ng-model="lifecycleCtrl.lifecycleModel.fromValue" required data-only-digits data-only-max="4" min="0"
+                                       class="form-control full-width"/>
+
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{::lifecycleCtrl.fromUnitId}}" class="required full-width">
+                                    <span class="field-name">{{::"UNIT" |translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="lifecycleCtrl.fromUnitId" form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                       show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.fromUnitId])"
+                                                       error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
+                                </label>
+                                <select id="{{::lifecycleCtrl.fromUnitId}}" name="{{::lifecycleCtrl.fromUnitId}}"
+                                       data-ng-model="lifecycleCtrl.lifecycleModel.fromUnit" required
+                                       class="form-control full-width"
+                                       data-ng-options="unit[lifecycleCtrl.lang] for unit in  lifecycleCtrl.selfLifeUnitsList track by unit.id">
+                                    <option value="" label=" " />
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6"
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.to.$invalid}">
+                            <p><strong>{{::"TO" |translate}}</strong></p>
+                            <div class="col-md-6">
+                                <label for="{{::lifecycleCtrl.toValueId}}" class="required full-width">
+                                    <span class="field-name">{{::"VALUE" |translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="lifecycleCtrl.toValueId" form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                       show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.toValueId])"
+                                                       error-types="lifecycleCtrl.numberError"></cmp-error-message>
+                                    <input type="number" id="{{::lifecycleCtrl.toValueId}}" name="{{::lifecycleCtrl.toValueId}}"
+                                           data-ng-model="lifecycleCtrl.lifecycleModel.toValue"  required data-only-digits data-only-max="4" min="0"
+                                           class="form-control full-width"/>
+
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="{{::lifecycleCtrl.toUnitId}}" class="required full-width">
+                                    <span class="field-name">{{::"UNIT" |translate}}</span>
+                                    <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                                    <cmp-error-message field-name="lifecycleCtrl.toUnitId" form-ref="lifecycleCtrl.lifecycleDetailsForm"
+                                                       show-error="lifecycleCtrl.showError(lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.toUnitId])"
+                                                       error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
+                                    <select id="{{::lifecycleCtrl.toUnitId}}" name="{{::lifecycleCtrl.toUnitId}}"
+                                           data-ng-model="lifecycleCtrl.lifecycleModel.toUnit"
+                                           data-ng-blur="lifecycleCtrl.setConcatDetails()" required
+                                           class="form-control full-width"
+                                           data-ng-options="unit[lifecycleCtrl.lang] for unit in  lifecycleCtrl.selfLifeUnitsList track by unit.id">
+                                        <option value="" label=" " />
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row" data-ng-if="lifecycleCtrl.requesterVisible">
                         <p class="mrgn-lft-md mrgn-tp-sm legend-rep">{{::'SOLICITED_RQ'|translate}}
-                        <sup id="tr12_ref">
-                            <a class="fn-lnk" href="#tr12"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>12</a>
+                        <sup id="tr13_ref">
+                            <a class="fn-lnk" href="#tr13"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>13</a>
                         </sup>
                         </p>
                         <div class="form-group col-md-4 typeahead-demo"
@@ -311,17 +380,6 @@
                             </label>
                         </div>
                     </div>
-                    <!--<div class="row">-->
-                        <!--<div class="btn-group-sm col-xs-12">-->
-                            <!--<button class="btn btn-primary"-->
-                                    <!--name="saveLifecycleRec_{{::$id}}"-->
-                                    <!--id="saveLifecycleRec_{{::$id}}"-->
-                                    <!--onclick="focusOnRow(this, '');"-->
-                                    <!--data-ng-click="lifecycleCtrl.updateLivecycleModel();"-->
-                                    <!--data-ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}-->
-                            <!--</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </fieldset>
             </div>
         </div>

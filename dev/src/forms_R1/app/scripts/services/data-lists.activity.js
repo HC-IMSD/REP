@@ -30,10 +30,15 @@
         /** Lead values. Hard coded as different lists need to be   **/
         vm.D21 = 'D21';
         vm.D22 = 'D22';
+        vm.D24 = 'D24';
+        vm.D26 = 'D26';
         vm.BIOLOGICAL = "B14-20160301-02"; //biological
         vm.CONSUMERHEALTH = "B14-20160301-06"; //Consumer Health Products
         vm.PHARMA = "B14-20160301-09"; //pharmaceutical
         vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
+        vm.VETERINARY = "B14-20160301-11";
+        vm.CLINICAL_BIO = "B14-20160301-04";
+        vm.CLINICAL_PHA = "B14-20160301-05";
 
         vm.allActivities = {
             ADMINISTRATIVE: "ADMINISTRATIVE", //administrative
@@ -106,8 +111,47 @@
             WRITTEN_CONSULT_REQ: "WRITTEN_CONSULT_REQ", //Request for Written Consultation
             TEST_STUDIES_ORDER: "TEST_STUDIES_ORDER", //Test and Studies Order
             TERM_COND_COMM: "TERM_COND_COMM", //Terms and Conditions Commitment
-            YEAR: "YEAR" //Year
-        };
+            YEAR: "YEAR", //Year
+            CTN_ADMINISTRATIVE:"CTN_ADMINISTRATIVE",
+            CTN_APPENDIX:"CTN_APPENDIX",
+            CTN_CONTACT:"CTN_CONTACT",
+            CTN_CROSS:"CTN_CROSS",
+            CTN_DATA:"CTN_DATA",
+            CTN_DEAR:"CTN_DEAR",
+            CTN_DILUENT:"CTN_DILUENT",
+            CTN_DRUG_PROD:"CTN_DRUG_PROD",
+            CTN_DRUG_SUBS:"CTN_DRUG_SUBS",
+            CTN_ENROLLMENT:"CTN_ENROLLMENT",
+            CTN_ETHICS:"CTN_ETHICS",
+            CTN_EXCLUSION_INCLUSION:"CTN_EXCLUSION_INCLUSION",
+            CTN_INFORMED:"CTN_INFORMED",
+            CTN_INVESTIGATOR:"CTN_INVESTIGATOR",
+            CTN_NEW_MANUFACTURING:"CTN_NEW_MANUFACTURING",
+            CTN_NEW_PKG:"CTN_NEW_PKG",
+            CTN_NEW_QC:"CTN_NEW_QC",
+            CTN_NOL:"CTN_NOL",
+            CTN_PACKAGING_LABELLING:"CTN_PACKAGING_LABELLING",
+            CTN_PM:"CTN_PM",
+            CTN_PROTOCOL_INFO_UPDATE:"CTN_PROTOCOL_INFO_UPDATE",
+            CTN_PROTOCOL_UPDATE:"CTN_PROTOCOL_UPDATE",
+            CTN_QOS:"CTN_QOS",
+            CTN_REFUSALS:"CTN_REFUSALS",
+            CTN_REGULATORY:"CTN_REGULATORY",
+            CTN_RESPONSE:"CTN_RESPONSE",
+            CTN_SAFETY:"CTN_SAFETY",
+            CTN_SHELF_PD:"CTN_SHELF_PD",
+            CTN_SHELF_DS:"CTN_SHELF_DS",
+            CTN_SITE:"CTN_SITE",
+            CTN_SOURCE:"CTN_SOURCE",
+            CTN_STRAIN:"CTN_STRAIN",
+            CTN_STUDY_COMPLETION:"CTN_STUDY_COMPLETION",
+            CTN_STUDY_DISC:"CTN_STUDY_DISC",
+            CTN_STUDY_EXT:"CTN_STUDY_EXT",
+            CLINICAL:"CLINICAL",
+            CLINICAL_QUALITY:"CLINICAL_QUALITY",
+            QUALITY:"QUALITY"
+
+    };
 
 
         var service = {
@@ -116,12 +160,21 @@
             createRaTypes: _createRaArray,
             getPharmaceuticalValue: _getPharmaceutical,
             getBiologicValue: _getBiologic,
+            getVeterinaryValue: _getVeterinary,
+            getClinicalValue: _getClinical,
             getBiologicalLeadValue: _getBiologicalLead,
             getPharmaLeadValue: _getPharmaLead,
             getPostMarketLeadValue: _getPostMarketLead,
             getConsumHealthLeadValue: _getConsumHealthLead,
+            getVeterinaryLeadValue: _getVeterinaryLead,
+            getClinicalBioLeadValue: _getClinicalBioLead,
+            getClinicalPhaLeadValue: _getClinicalPhaLead,
             getPresubTypes: getPresubArray,
             getAndsType: getANDSArray,
+            getV_AndsType: getV_AndsArray,
+            getCtaType: getCtaArray,
+            getCta_aType: getCta_aArray,
+            getPreCtaType: getPreCtaArray,
             getDinaType: getDINAArray,
             getDinbType: getDINBArray,
             getDindType: getDINDArray,
@@ -130,25 +183,36 @@
             getEundsType: getEUNDSArray,
             getEusndsType: getEUSNDSArray,
             getLevel3Type: getLevel3Array,
+            getV_Level3Type: getV_Level3Array,
             getMPDINType: getMPDINArray,
+            getV_MpdinType: getV_MpdinArray,
             getNcType: getNCArray,
+            getV_NcType: getV_NcArray,
             getNdsType: getNDSArray,
+            getV_NdsType: getV_NdsArray,
             getPdcType: getPDCArray,
             getPdcBType: getPDCBArray,
             getPresubType: getPresubArray,
             getpSurCType: getPSURCArray,
             getpSurPvType: getPSURPVArray,
+            getV_PsurPvType: getV_PsurPvArray,
             getRmpPvType: getRMPPVArray,
             getSandsType: getSANDSArray,
+            getV_SandsType: getV_SandsArray,
             getSndsType: getSNDSArray,
+            getV_SndsType: getV_SndsArray,
             getSndsCArray: getSNDSCArray,
             getUdpvType: getUDPVArray,
             getUdraType: getUDRAArray,
+            getV_UdraType: getV_UdraArray,
             getYbprType: getYBPRArray,
             getConsultType: getConsultArray,
             getMPNCType: _getMPNCArray,
+            getV_MpncType: getV_MpncArray,
             getMPNDSType: _getMPNDSArray,
+            getV_MpndsType: getV_MpndsArray,
             getMPSNDSType: _getMPSNDSArray,
+            getV_MpsndsType: getV_MpsndsArray,
             getPANDType: _getPANDArray,
             getPBRERCType: _getPBRERCArray,
             getPBRERPVType: _getPBRERPVArray,
@@ -172,7 +236,10 @@
             createMitigationList: _createMitigationArray,
             getActivityLeadList: _getActivityLeadArray,
             getActivityLeadListByD22: _getActivityLeadD22Array,
-            getActivityLeadListByD21: _getActivityLeadD21Array
+            getActivityLeadListByD21: _getActivityLeadD21Array,
+            getActivityLeadListByD24: _getActivityLeadD24Array,
+            getActivityLeadListByD26: _getActivityLeadD26Array,
+            getShelfLifeUnitsList:_getShelfLifeUnitsArray
         };
         return service;
 
@@ -1218,6 +1285,81 @@
             ]);
         }
 
+        function getV_AndsArray() { //V-ANDS
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.INITIAL,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.CORR_PATENT_MED,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.NON_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.YEAR_LIST_OF_CHANGE
+            ]);
+        }
+        function getCtaArray() { //CTA
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.INITIAL,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.RECON_DECIS_LTR_INTENT,vm.allActivities.RECON_DECIS_OTHER_INFO,vm.allActivities.RECON_DECIS_RQ_RECON,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.NOL_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.CTN_ADMINISTRATIVE,vm.allActivities.CTN_APPENDIX,vm.allActivities.CTN_CONTACT,vm.allActivities.CTN_CROSS,vm.allActivities.CTN_DATA,vm.allActivities.CTN_DEAR,vm.allActivities.CTN_DILUENT,vm.allActivities.CTN_DRUG_PROD,vm.allActivities.CTN_DRUG_SUBS,vm.allActivities.CTN_ENROLLMENT,vm.allActivities.CTN_ETHICS,vm.allActivities.CTN_EXCLUSION_INCLUSION,vm.allActivities.CTN_INFORMED,vm.allActivities.CTN_INVESTIGATOR,vm.allActivities.CTN_NEW_MANUFACTURING,vm.allActivities.CTN_NEW_PKG,vm.allActivities.CTN_NEW_QC,vm.allActivities.CTN_NOL,vm.allActivities.CTN_PACKAGING_LABELLING,vm.allActivities.CTN_PM,vm.allActivities.CTN_PROTOCOL_INFO_UPDATE,vm.allActivities.CTN_PROTOCOL_UPDATE,vm.allActivities.CTN_QOS,vm.allActivities.CTN_REFUSALS,vm.allActivities.CTN_REGULATORY,vm.allActivities.CTN_RESPONSE,vm.allActivities.CTN_SAFETY,vm.allActivities.CTN_SHELF_PD,vm.allActivities.CTN_SHELF_DS,vm.allActivities.CTN_SITE,vm.allActivities.CTN_SOURCE,vm.allActivities.CTN_STRAIN,vm.allActivities.CTN_STUDY_COMPLETION,vm.allActivities.CTN_STUDY_DISC,vm.allActivities.CTN_STUDY_EXT
+            ]);
+        }
+        function getCta_aArray() {
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.RECON_DECIS_LTR_INTENT,vm.allActivities.RECON_DECIS_OTHER_INFO,vm.allActivities.RECON_DECIS_RQ_RECON,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.NOL_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.CLINICAL,vm.allActivities.CLINICAL_QUALITY,vm.allActivities.QUALITY
+            ]);
+        }
+        function getPreCtaArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ
+            ]);
+        }
+        function getV_Level3Array() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.YEAR_LIST_OF_CHANGE
+            ]);
+        }
+        function getV_MpdinArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_MpncArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_MpndsArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_MpsndsArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_NcArray() {
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.POST_NOC_CHANGE,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.CORR_PATENT_MED,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOL_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_NdsArray() {
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.INITIAL,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.CORR_PATENT_MED,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_PsurPvArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.FOR_PERIOD,vm.allActivities.MEETING_MINUTES,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.CORR_PATENT_MED,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_SandsArray() {
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.POST_NOC_CHANGE,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.CORR_PATENT_MED,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.NON_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_SndsArray() {
+            return ([
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.POST_NOC_CHANGE,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.CORR_PATENT_MED,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.NON_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
+        function getV_UdraArray() {
+            return ([
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.DIN_DISCONTINUED,vm.allActivities.NOTIFICATION_INTERRUPT_SALE,vm.allActivities.BE_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+            ]);
+        }
         /**
          * Gets the activity lead array. Hard coded as the biological entry has business logic
          * @returns {string[]}
@@ -1252,6 +1394,21 @@
                 ]
             );
         }
+        function _getActivityLeadD24Array() {
+            return (
+                [
+                    vm.VETERINARY
+                ]
+            );
+        }
+        function _getActivityLeadD26Array() {
+            return (
+                [
+                    vm.CLINICAL_BIO,
+                    vm.CLINICAL_PHA
+                ]
+            );
+        }
 
         /**
          * Returns the biological Activity Lead value
@@ -1266,12 +1423,16 @@
         function _getBiologic(){
             return vm.D21; // D22 - Biologic
         }
-
+        function _getVeterinary() {
+            return vm.D24;
+        }
+        function _getClinical() {
+            return vm.D26;
+        }
         function _getBiologicalLead() {
             return vm.BIOLOGICAL;
         }
         function _getPharmaLead(){
-
             return vm.PHARMA;
         }
         function _getPostMarketLead(){
@@ -1280,6 +1441,25 @@
         function _getConsumHealthLead(){
             return vm.CONSUMERHEALTH;
         }
-
+        function _getVeterinaryLead() {
+            return vm.VETERINARY;
+        }
+        function _getClinicalBioLead() {
+            return vm.CLINICAL_BIO;
+        }
+        function _getClinicalPhaLead() {
+            return vm.CLINICAL_PHA;
+        }
+        function _getShelfLifeUnitsArray(){
+            return(
+                [
+                    {"id":"YR","en":"Years","fr":"Années"},
+                    {"id":"MO","en":"Months","fr":"Mois"},
+                    {"id":"DA","en":"Days","fr":"Jours"},
+                    {"id":"HR","en":"Hours","fr":"Heures"},
+                    {"id":"MI","en":"Minutes","fr":"Minutes"}
+                ]
+            )
+        }
     }
 })();

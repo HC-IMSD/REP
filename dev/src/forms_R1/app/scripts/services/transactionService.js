@@ -191,6 +191,7 @@
                     __text: dt_text
                 };
                 ectd.product_name = jsonObj.productName;
+                ectd.product_protocol = jsonObj.productProtocol;
                 ectd.lifecycle_record = this._mapLifecycleListToOutput(jsonObj.lifecycleRecord);
                 return (ectd);
             },
@@ -201,6 +202,7 @@
                 model.ectd.dossierId = jsonObj.dossier_id;
                 model.ectd.dossierType = jsonObj.dossier_type._id;
                 model.ectd.productName = jsonObj.product_name;
+                model.ectd.productProtocol = jsonObj.product_protocol;
                 model.ectd.lifecycleRecord = this._mapLifecycleList(jsonObj.lifecycle_record);
             },
 
@@ -552,6 +554,10 @@
         lifecycleRec.requesterName3Txt = lifecycleObj.requester_name3.__text;
        // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
+        lifecycleRec.fromValue = parseInt(lifecycleObj.fromValue);
+        lifecycleRec.fromUnit = $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.fromUnit._id})[0];
+        lifecycleRec.toValue = parseInt(lifecycleObj.toValue);
+        lifecycleRec.toUnit = $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.toUnit._id})[0];
         return (lifecycleRec);
     }
 
@@ -615,7 +621,9 @@
             };
         }
         else {
-            tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
+            if(lifecycleObj.requesterName2 != ""){
+                tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
+            }
             lifecycleRec.requester_name2 = {
                 _id: '',
                 __text: lifecycleObj.requesterName2
@@ -630,15 +638,35 @@
             };
         }
         else {
-            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
+            if(lifecycleObj.requesterName3 != "") {
+                tempRequesterName = tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
+            }
             lifecycleRec.requester_name3 = {
                 _id: '',
                 __text: lifecycleObj.requesterName3
             };
         }
         lifecycleRec.requester_of_solicited_information = tempRequesterName;
+        lifecycleRec.fromValue = lifecycleObj.fromValue;
+        lifecycleRec.fromUnit = _toOutputObj(lifecycleObj.fromUnit,currentLang, ENGLISH, FRENCH);
+        lifecycleRec.toValue = lifecycleObj.toValue;
+        lifecycleRec.toUnit = _toOutputObj(lifecycleObj.toUnit,currentLang, ENGLISH, FRENCH);
 
         return (lifecycleRec);
+    }
+    function _toOutputObj(type,language, ENGLISH, FRENCH){
+        var result = {'_id':'','_en':'','_fr':'','__text':''};
+        if(type){
+            if(type.id) result._id = type.id;
+            if(type.en) result._en = type.en;
+            if(type.fr) result._fr = type.fr;
+            if(FRENCH === language){
+                result.__text = type.fr;
+            } else {
+                result.__text = type.en;
+            }
+        }
+        return result;
     }
 /*
     function _mapRequesterRecToOutput(requesterObj) {
@@ -842,7 +870,11 @@
             "requesterNameTxt":"",
             "requesterName2Txt":"",
             "requesterName3Txt":"",
-            "isSaved": true
+            "isSaved": true,
+            "fromValue":"",
+            "fromUnit":"",
+            "toValue":"",
+            "toUnit":""
         };
         //TODO get next sequence number
         return defaultRecord;
@@ -915,6 +947,7 @@
                 dossierId: "",
                 dossierType: "",
                 productName: "",
+                productProtocol: "",
                 lifecycleRecord: _createLifeCycleModel()
             },
           //  isSolicited: "",
