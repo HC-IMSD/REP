@@ -88,6 +88,11 @@
 
         vm.addNew = function () {
             var item = angular.copy(vm.emptyModel);
+            if (vm.model.list && vm.model.list.length > 0) {
+                item.speciesId = getNextSpeciesId();
+            } else {
+                item.speciesId = 1;
+            }
             (vm.model.list).push(item);
             setRecord(-1);
             vm.resetToCollapsed = !vm.resetToCollapsed;
@@ -100,6 +105,16 @@
         function setRecord(value) {
             vm.selectRecord = value;
 
+        }
+
+        function getNextSpeciesId() {
+            var nextId = 1;
+            for( var i = 0; i < vm.model.list.length; i++){
+                if(Number(vm.model.list[i].speciesId) >= nextId){
+                    nextId = Number(vm.model.list[i].speciesId) + 1;
+                }
+            }
+            return nextId;
         }
 
         vm.saveRecord = function (species) {
@@ -140,11 +155,11 @@
 
         vm.setFocus = function(){
             vm.isFocus = true;
-        }
+        };
 
         vm.cancelFocus = function(){
             vm.isFocus = false;
-        }
+        };
 
 
         /*  $scope.$watch('countryListCtrl.countryListForm.$error', function () {

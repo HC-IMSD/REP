@@ -11,7 +11,7 @@
                     </cmp-error-message>
                     <select class="form-control full-width" data-ng-model="speciesRecCtrl.model.species"
                             id="{{::speciesRecCtrl.speciesId}}" name="{{::speciesRecCtrl.speciesId}}"
-                            data-ng-options="species[speciesRecCtrl.lang] for species in speciesRecCtrl.speciesList"
+                            data-ng-options="species[speciesRecCtrl.lang] for species in speciesRecCtrl.speciesList track by species.id"
                             data-ng-required="true">
                         <option label=" " value="" />
                     </select>
@@ -27,7 +27,7 @@
                     </cmp-error-message>
                     <select class="form-control full-width" data-ng-model="speciesRecCtrl.model.subtypes"
                             id="{{::speciesRecCtrl.subtypesId}}" name="{{::speciesRecCtrl.subtypesId}}"
-                            data-ng-options="subtypes[speciesRecCtrl.lang] for subtypes in speciesRecCtrl.subtypesList"
+                            data-ng-options="subtypes[speciesRecCtrl.lang] for subtypes in speciesRecCtrl.subtypesList track by subtypes.id"
                             data-ng-required="true">
                         <option label=" " value="" />
                     </select>

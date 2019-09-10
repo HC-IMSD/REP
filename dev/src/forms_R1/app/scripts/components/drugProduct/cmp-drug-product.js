@@ -11,6 +11,7 @@
          'drugUseModule',
         'scheduleAModule',
         'importerListModule',
+        'speciesListModule',
         'disinfectantTypeModule',
         'dossierDataLists',
         'dataLists',
@@ -373,6 +374,15 @@
             if(!list) return;
             vm.model.importerRecord = list;
         };
+
+        /***
+         * update importer list
+         */
+        vm.updatespeciesList = function(list){
+            if(!list) return;
+            vm.model.drugProduct.speciesRecord = list;
+        };
+
 
         /***
          * update sceduleSelected field
