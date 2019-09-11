@@ -201,7 +201,7 @@
             getV_SandsType: getV_SandsArray,
             getSndsType: getSNDSArray,
             getV_SndsType: getV_SndsArray,
-            getSndsCArray: getSNDSCArray,
+            getSndsCType: getSNDSCArray,
             getUdpvType: getUDPVArray,
             getUdraType: getUDRAArray,
             getV_UdraType: getV_UdraArray,

@@ -352,14 +352,14 @@
 
 
                 for (var i = 0; i < jsonObj.length; i++) {
-                    if (jsonObj[i].isSaved) {
+                    // if (jsonObj[i].isSaved) {
                         var record = _mapLifecycleRecToOutput($translate, jsonObj[i], ENGLISH, FRENCH);
                         if (jsonObj.length === 1) {
                             return (record);
                         }
                         result.push(record);
                     }
-                }
+                // }
                 return result;
             },
 
@@ -380,8 +380,10 @@
             },
             createFeeDetails: function () {
                 return _createFeeDetails(NO);
+            },
+            getDefaultLifecycleRecord: function () {
+                return _createLifeCycleModel();
             }
-
         };
         TransactionService.prototype._mapFeeDetailsToOutput = function (feeObj) {
             /**

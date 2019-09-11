@@ -50,12 +50,13 @@
                 sequenceUpdated:'<',
                 getCurrentSequence:'&',
                 showErrorSummary: '<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                defaultLifecycleRecord: '&'
             }
         });
 
     transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES', 'NO', 'getContactLists', 'getRoleLists', 'ENGLISH', 'FRENCH'];
-    function transactionInfoCtrl($scope,OTHER,YES,NO,getContactLists,getRoleLists,ENGLISH,FRENCH) {
+    function transactionInfoCtrl($scope,OTHER,YES,NO,getContactLists,getRoleLists, ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {
@@ -207,6 +208,17 @@
 
         vm.updateDossierTypeState = function () {
                vm.selectedDossierType = vm.transactionModel.ectd.dossierType ;
+               if(vm.selectedDossierType == 'D26'){
+                   vm.transactionModel.isPriority = '';
+                   vm.transactionModel.isNoc = '';
+                   vm.transactionModel.isAdminSub = '';
+                   vm.transactionModel.isFees = '';
+               } else {
+                   vm.transactionModel.ectd.productProtocol = '';
+                   if(vm.selectedDossierType == 'D24') {
+                       vm.transactionModel.isFees = '';
+                   }
+               }
         }
 
         function pharmaceuticalDossierType() {
@@ -353,9 +365,10 @@
                // vm.transactionModel.isSolicited = "";
                // vm.setSolicitedState();
                 vm.transactionModel.ectd.lifecycleModel ={}; //22 - Transaction Details Record
-                vm.transactionModel.ectd.lifecycleRecord ={}; //22 - Transaction Details Record
+                vm.transactionModel.ectd.lifecycleRecord = angular.copy(vm.defaultLifecycleRecord());
                 vm.transactionModel.projectManager1 = ""; //43 - projectManager1
                 vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
+                vm.transactionModel.ectd.productProtocol="";
                 vm.transactionModel.isFees = ""; // 46 - fee
                 vm.transactionModel.feeDetails = null;
                 vm.transactionModel.confirmContactValid = false; //93 confirmation

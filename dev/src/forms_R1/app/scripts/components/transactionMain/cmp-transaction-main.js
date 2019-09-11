@@ -52,7 +52,6 @@
         vm.sequenceUpdated = false;
         vm.isFinal = false;
         vm.isFileLoaded=false;
-
         vm.updateSummary = 0; //increment to send message to error summaries
 
         vm.focusSummary = 0; //messaging to set focus on the error summary
@@ -123,7 +122,6 @@
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
         };
-
 
         function _getFileName() {
             var date = new Date();

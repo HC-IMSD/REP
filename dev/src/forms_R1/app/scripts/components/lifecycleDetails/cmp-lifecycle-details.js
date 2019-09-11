@@ -488,7 +488,7 @@
                     break;
                 case ("B02-20160301-082"): //SANDS (Supplement to an Abbreviated New Drug Submission)
                     if(vm.lifecycleModel.activityLead == "B14-20160301-11"){
-                        vm.descriptionList = TransactionLists.getV_SandsArray();
+                        vm.descriptionList = TransactionLists.getV_SandsType();
                     }else {
                         vm.descriptionList = TransactionLists.getSandsType();
                     }
@@ -501,7 +501,7 @@
                     }
                     break;
                 case ("B02-20160301-085"): //SNDS-C (Supplement to a New Drug Submission - Conditional)
-                    vm.descriptionList = TransactionLists.getSndsCArray();
+                    vm.descriptionList = TransactionLists.getSndsCType();
                     break;
                 case ("B02-20160301-088"): //UDRA (Undefined Regulatory Activity)
                     if(vm.lifecycleModel.activityLead == "B14-20160301-11") {
