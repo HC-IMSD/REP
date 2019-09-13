@@ -207,6 +207,15 @@
             getAppendix4Errors();
             _setComplete();
             vm.isFileLoaded = true;
+            angular.forEach(vm.model.drugProduct.formulations,function(item, key){
+               if(item['activeIngList']){
+                   angular.forEach(item['activeIngList'], function(item, key){
+                      if(item['units']){
+                          item['unitsHtml'] = item['units'][v.lang];
+                      }
+                   });
+               }
+            });
            // vm.showAllErrors = true;
            // disableXMLSave();
         }

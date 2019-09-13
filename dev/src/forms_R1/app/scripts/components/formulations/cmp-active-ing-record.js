@@ -403,15 +403,15 @@
                     break;
                 }
             }
-            if( ! found ){
-                for(var i = 0; i < vm.unitsList.length; i++) {
-                    var option =vm.unitsList[i];
-                    if(option['id'] === vm.ingModel.units['id']) {
-                        vm.ingModel.unitsHtml = option[vm.lang];
-                        break;
-                    }
-                }
-            }
+            // if( ! found ){
+            //     for(var i = 0; i < vm.unitsList.length; i++) {
+            //         var option =vm.unitsList[i];
+            //         if(option['id'] === vm.ingModel.units['id']) {
+            //             vm.ingModel.unitsHtml = option[vm.lang];
+            //             break;
+            //         }
+            //     }
+            // }
         }
         vm.perMeasUnitsChange = function() {
             var found = false;

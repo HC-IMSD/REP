@@ -59,7 +59,7 @@
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                    <input type="text" id="{{::formulRecCtrl.dosageId}}" name="{{::formulRecCtrl.dosageId}}" data-ng-model="formulRecCtrl.frmModel.dosageFormHtml" value="formulRecCtrl.frmModel.dosageFormHtml" data-ng-blur="formulRecCtrl.dosageFormChange()" list="dosageFormList" required="required" class="form-control full-width"/>
+                    <input type="text" id="{{::formulRecCtrl.dosageId}}" name="{{::formulRecCtrl.dosageId}}" data-ng-model="formulRecCtrl.frmModel.dosageFormHtml" value="formulRecCtrl.frmModel.dosageFormHtml" data-ng-change="formulRecCtrl.dosageFormChange()" list="dosageFormList" required="required" class="form-control full-width"/>
                     <datalist id="dosageFormList" class="rep-selectize-dropdown rep-selectize-font">
                         <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}" label="{{formType[formulRecCtrl.lang]}}"/>
                     </datalist>
@@ -75,7 +75,7 @@
                                            form-ref="formulRecCtrl.formulationForm"
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}" data-focus-if="formulRecCtrl.isDosageOther()"
+                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
                                class="form-control full-width" name="{{::formulRecCtrl.dosageOtherId}}"
                                data-ng-model-options="{ debounce: '$inherit'}"
