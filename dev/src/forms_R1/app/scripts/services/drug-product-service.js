@@ -87,6 +87,29 @@
                      ingredientList:[]
                      }//tab + grid +*/
 
+                },
+                clinicalTrial: {
+                    protocolNum: "",
+                    protocolTitle:"",
+                    composition: {
+                        fmpp: false,
+                        mpp: false,
+                        fmap: false,
+                        map: false
+                    },
+                    phase: {
+                         phase1Bio: false,
+                         phase1Study: false,
+                         phase1Other: false,
+                         phase2: false,
+                         phase3: false,
+                         phaseOther: false,
+                        ctaPhaseOtherDetails:""
+                    },
+                    isRefuseInfo:"",
+                    hasDinNoc:"",
+                    isCanMarket:"",
+                    ctaSrcCountryList: []
                 }
                 //contactList: []
 
@@ -344,6 +367,33 @@
 
         DrugProductService.prototype.getRootTagName = function () {
             return ("DRUG_PRODUCT_ENROL");
+        };
+
+        DrugProductService.prototype.getEmptyCtaModel = function () {
+            var emptyCtaModel = {
+                protocolNum: "",
+                protocolTitle:"",
+                composition: {
+                    fmpp: false,
+                    mpp: false,
+                    fmap: false,
+                    map: false
+                },
+                phase: {
+                    phase1Bio: false,
+                    phase1Study: false,
+                    phase1Other: false,
+                    phase2: false,
+                    phase3: false,
+                    phaseOther: false,
+                    ctaPhaseOtherDetails:""
+                },
+                isRefuseInfo:"",
+                hasDinNoc:"",
+                isCanMarket:"",
+                ctaSrcCountryList: []
+            };
+            return emptyCtaModel;
         };
 
         //return the Dossier Service object

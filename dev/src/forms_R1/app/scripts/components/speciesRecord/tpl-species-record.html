@@ -67,7 +67,7 @@
 
                 </label>
                     <div class="rep-margin-top">
-                        <input type="text" data-ng-model="speciesRecCtrl.model.withdrawalDays" name="{{::speciesRecCtrl.daysId}}"
+                        <input type="number" data-ng-model="speciesRecCtrl.model.withdrawalDays" name="{{::speciesRecCtrl.daysId}}"
                                data-ng-model-options="{ debounce: $inherit}"
                                id="{{::speciesRecCtrl.daysId}}" maxlength="3"
                                class="form-control  full-width" data-only-digits
@@ -83,7 +83,7 @@
                                        show-error="speciesRecCtrl.showError(speciesRecCtrl.speciesForm[speciesRecCtrl.hoursId])"
                                        error-types="speciesRecCtrl.requiredOnly">
                     </cmp-error-message>
-                    <input type="text" class="form-control full-width" maxlength="2" id="{{::speciesRecCtrl.hoursId}}"
+                    <input type="number" class="form-control full-width" maxlength="2" id="{{::speciesRecCtrl.hoursId}}"
                            name="{{::speciesRecCtrl.hoursId}}" data-only-digits
                            data-ng-model="speciesRecCtrl.model.withdrawalHours" required/>
                 </label>

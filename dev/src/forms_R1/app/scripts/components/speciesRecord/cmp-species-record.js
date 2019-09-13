@@ -52,7 +52,7 @@
         };
 
         vm.updateSummary=0; //triggers and error summary update
-        vm.fdId="";
+        // vm.fdId="";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
 
         vm.showDetailErrors=false;

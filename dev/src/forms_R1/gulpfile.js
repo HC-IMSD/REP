@@ -333,6 +333,7 @@ var componentFolders = {
     alertComp: "alertComponent/",
     transFees: 'transactionFees/',
     piConverter: 'piConverter',
+    clinicalTrial: 'clinicalTrial/',
     speciesList: 'speciesList/',
     speciesRecord: 'speciesRecord/'
 };
@@ -449,6 +450,7 @@ var drugProductComponentFolders =
         componentFolders.applicationInfo,
         componentFolders.importerList,
         componentFolders.importerRecord,
+        componentFolders.clinicalTrial,
         componentFolders.speciesList,
         componentFolders.speciesRecord,
         componentFolders.drugUse,
