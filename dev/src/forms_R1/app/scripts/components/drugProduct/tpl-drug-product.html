@@ -162,7 +162,27 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="row" data-ng-if="drugProdCtrl.isNotCTA()">
+                <div class="row" data-ng-if="drugProdCtrl.isCTA()">
+                    <div class="col-xs-12 form-group">
+                        <section class="panel panel-default">
+                            <header class="panel-heading clearfix">
+                                <h3 class="panel-title">6. {{'CLINICAL_TRIAL'|translate}}
+                                </h3>
+                            </header>
+                            <div class="panel-body">
+                                <div>
+                                    <cmp-clinical-trial record="drugProdCtrl.model.clinicalTrial"
+                                                      update-error-summary="drugProdCtrl.updateErrorSummary()"
+                                                      show-errors="drugProdCtrl.showSummary"
+                                                      is-file-loaded="drugProdCtrl.isFileLoaded"
+                                                      on-update="drugProdCtrl.updateCTAInfo(record)">
+                                    </cmp-clinical-trial>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="row" data-ng-if="!drugProdCtrl.isCTA()">
                     <div class="col-xs-12 form-group">
                         <fieldset id="fs_addrMissing_{{::$id}}">
                     <legend><strong>
@@ -280,7 +300,7 @@
                                     <cmp-species-list list-items="drugProdCtrl.model.speciesRecord"
                                                        update-error-summary="drugProdCtrl.updateErrorSummary()"
                                                        show-errors="drugProdCtrl.showSummary"
-                                                       on-update="drugProdCtrl.updatespeciesList(list)">
+                                                       on-update="drugProdCtrl.updateSpeciesList(list)">
                                     </cmp-species-list>
                                 </div>
                             </div>

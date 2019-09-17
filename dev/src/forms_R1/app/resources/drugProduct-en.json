@@ -48,6 +48,7 @@
   "CTA_IS_MARKET": "Is the investigational drug product obtained from the Canadian market",
   "CTA_COUNTRIES": "List the country(ies) the investigational drug product was obtained from",
   "CTA_SRC_COUNTRY": "Summary of Source Country for investigational drug product",
+  "CTA_COUNTRY_NAME": "Country Name",
   "VET_SPECIES_REMM":"Species and subtypes recommended for use",
   "VET_SPECIES":"Species",
   "VET_SUBTYPES":"Subtypes",
@@ -56,5 +57,15 @@
   "IS_TREAT_FP":"Is this used for the treatment of food-producing animals?",
   "WITHDRAWAL":"Withdrawal time",
   "VET_DAYS":"Days",
-  "VET_HOURS":"Hours"
+  "VET_HOURS":"Hours",
+  "CTPHASE1B":"Phase I - bioequivalence study (7-day administrative target)",
+  "CTPHASE1S":"Phase I - study in healthy humans (30-day default)",
+  "CTPHASE1O":"Phase I - other (30-day default)",
+  "CTPHASE2":"Phase II (30-day default)",
+  "CTPHASE3":"Phase III (30-day default)",
+  "CTPHASEOTHER":"Other",
+  "FMPP":"Female paediatric population (0-18 years of age)",
+  "MPP":"Male paediatric population (0-18 years of age)",
+  "FMAP":"Female adult population",
+  "MAP":"Male adult population"
 }

@@ -1053,7 +1053,7 @@
                 concatText = enDescription +  "\n" + vm.lifecycleModel.detailsChange;
             }
             if(vm.fromTo){
-                concatText = enDescription + "From : (" + vm.lifecycleModel.fromValue + " " + vm.lifecycleModel.fromUnit.en + ") To: (" +vm.lifecycleModel.toValue + " " + vm.lifecycleModel.toUnit.en + ")";
+                concatText = enDescription + " From: (" + vm.lifecycleModel.fromValue + " " + vm.lifecycleModel.fromUnit.en + ") To: (" +vm.lifecycleModel.toValue + " " + vm.lifecycleModel.toUnit.en + ")";
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;

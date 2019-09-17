@@ -29,6 +29,7 @@
   "CAB_YES1": "Yes, my ingredient is supplied as a salt, but calculated as a base",
   "CAB_YES2": "Yes, my ingredient is supplied as a base, and calculated as a base",
   "CAB_NO": "No, my ingredient is supplied as a salt, and calculated as a salt",
+  "CAB_NO2": "No, my product is a biologic",
   "IS_NANO_MATERIAL": "Is this a nanomaterial?",
   "NANO_MATERIAL": "Nanomaterial",
   "NANO_MATERIAL_OTHER": "Indicate the type of nanomaterial",

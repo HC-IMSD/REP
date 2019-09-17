@@ -63,8 +63,6 @@
             getStrengthList:_getStrengthArray,
             getUnitsList:_getUnitsArray,
             getShelfLifeUnitsList:_getShelfLifeUnitsArray,
-            getCTPhaseList:_getCTPhaseArray,
-            getCTCompositionList:_getCTCompositionArray,
             getDosageOther: getDoseOtherValue,
             getNanoMaterials: getNanoMaterialArray,
             getRoa: getRoaArray,
@@ -262,32 +260,6 @@
             )
         }
 
-        function _getCTPhaseArray(){
-
-            return(
-                [
-                    {"id":"CTPHASE1B","en":"Phase I - bioequivalence study (7-day administrative target)","fr":"fr_Phase I - bioequivalence study (7-day administrative target)"},
-                    {"id":"CTPHASE1S","en":"Phase I - study in healthy humans (30-day default)","fr":"fr_Phase I - study in healthy humans (30-day default)"},
-                    {"id":"CTPHASE1O","en":"Phase I - other (30-day default)","fr":"fr_Phase I - other (30-day default)"},
-                    {"id":"CTPHASE2","en":"Phase II (30-day default)","fr":"Phase II (30-day default)"},
-                    {"id":"CTPHASE3","en":"Phase III (30-day default)","fr":"fr_Phase III (30-day default)"},
-                    {"id":"CTPHASEOTHER","en":"Other","fr":"fr_Other"}
-                ]
-            )
-        }
-
-        function _getCTCompositionArray(){
-
-            return(
-                [
-                    {"id":"FMPP","en":"Female paediatric population (0-18 years of age)","fr":"fr_Female paediatric population (0-18 years of age)"},
-                    {"id":"MPP","en":"Male paediatric population (0-18 years of age)","fr":"fr_Male paediatric population (0-18 years of age)"},
-                    {"id":"FMAP","en":"Female adult population","fr":"fr_Female adult population"},
-                    {"id":"MAP","en":"Male adult population","fr":"fr_Male adult population"}
-                ]
-            )
-        }
-
         /**
          * gets the keys for a list If there is a prefix,add it
          * @param translateJson
@@ -350,7 +322,8 @@
             return ([
                 "CAB_YES1",
                 "CAB_YES2",
-                "CAB_NO"
+                "CAB_NO",
+                "CAB_NO2"
             ]);
         }
         function animalSourcesArray() {

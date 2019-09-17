@@ -12,6 +12,7 @@
         'scheduleAModule',
         'importerListModule',
         'speciesListModule',
+        'clinicalTrial',
         'disinfectantTypeModule',
         'dossierDataLists',
         'dataLists',
@@ -324,6 +325,18 @@
         };
 
         /***
+         * determin to display Address to sent fieldset
+         */
+        vm.isCTA = function () {
+            if (vm.model && vm.model.dossierType && vm.model.dossierType === "D26") {
+                return true;
+            } else {
+                vm.model.clinicalTrial = vm.drugProductService.getEmptyCtaModel();
+            }
+            return false;
+        };
+
+        /***
          * determin to display schedule fieldset
          */
         vm.isVet = function () {
@@ -376,11 +389,19 @@
         };
 
         /***
-         * update importer list
+         * update species list
          */
-        vm.updatespeciesList = function(list){
+        vm.updateSpeciesList = function(list){
             if(!list) return;
             vm.model.drugProduct.speciesRecord = list;
+        };
+
+        /***
+         * update Clinical Trial record
+         */
+        vm.updateCTAInfo = function(record){
+            if(!record) return;
+            vm.model.clinicalTrial = record;
         };
 
 

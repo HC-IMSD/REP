@@ -41,7 +41,8 @@
             this.rootTag = "TRANSACTION_ENROL";
             this.currSequence = 0;
             // this.xslFileName = XSL_PREFIX + "REP_RT_2_2.xsl";
-            this.xslFileName = "REP_RT_3_0.xsl";
+            // this.xslFileName = "REP_RT_3_0.xsl";
+            this.xslFileName = "REP_RT_4_0.xsl";
         }
 
         function loadContactData() {
@@ -100,7 +101,7 @@
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
                         date_saved: today,
-                        software_version: "3.0.1",
+                        software_version: "4.0.3",
                         data_checksum: jsonObj.dataChecksum,
                        // transaction_type: jsonObj.transactionType,
                         is_third_party: jsonObj.isThirdParty,
