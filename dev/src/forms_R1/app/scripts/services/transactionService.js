@@ -556,10 +556,10 @@
         lifecycleRec.requesterName3Txt = lifecycleObj.requester_name3.__text;
        // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
-        lifecycleRec.fromValue = parseInt(lifecycleObj.fromValue);
-        lifecycleRec.fromUnit = $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.fromUnit._id})[0];
-        lifecycleRec.toValue = parseInt(lifecycleObj.toValue);
-        lifecycleRec.toUnit = $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.toUnit._id})[0];
+        lifecycleRec.fromValue = lifecycleObj.fromValue ? parseInt(lifecycleObj.fromValue) : 0;
+        lifecycleRec.fromUnit = lifecycleObj.fromUnit ? $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.fromUnit._id})[0] : '';
+        lifecycleRec.toValue = lifecycleObj.toValue ? parseInt(lifecycleObj.toValue) : 0;
+        lifecycleRec.toUnit = lifecycleObj.toUnit ? $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.toUnit._id})[0] : '';
         return (lifecycleRec);
     }
 
