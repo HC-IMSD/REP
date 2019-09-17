@@ -25,7 +25,7 @@
                 enrolmentVersion: "0.0",
                 dateSaved: "",
                 applicationType: "NEW",
-                softwareVersion: "3.0.1",
+                softwareVersion: "4.0.1",
                 companyId: "",
                 reasonAmend:"",
                 addressList: [],
@@ -41,7 +41,8 @@
             this.addressID = 0;
             this.contactId = 0;
             // this.xslFileName = XSL_PREFIX + "REP_CO_2_2.xsl";
-            this.xslFileName = "REP_CO_3_0.xsl";
+            // this.xslFileName = "REP_CO_3_0.xsl";
+            this.xslFileName = "REP_CO_4_0.xsl";
         }
         //TODO rewrite this object to proper prototype syntax
         CompanyService.prototype = {
