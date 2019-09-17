@@ -101,7 +101,7 @@
                     TRANSACTION_ENROL: {
                         template_type: "PHARMA",
                         date_saved: today,
-                        software_version: "3.0.1",
+                        software_version: "4.0.3",
                         data_checksum: jsonObj.dataChecksum,
                        // transaction_type: jsonObj.transactionType,
                         is_third_party: jsonObj.isThirdParty,
