@@ -547,12 +547,12 @@
         lifecycleRec.sequenceVersion = lifecycleObj.sequence_version;
         lifecycleRec.year = lifecycleObj.sequence_year;
         lifecycleRec.sequenceConcat = lifecycleObj.transaction_description;
-        lifecycleRec.requesterName = lifecycleObj.requester_name._id ? {"id": lifecycleObj.requester_name._id, "text": lifecycleObj.requester_name.__text} : "";
-        lifecycleRec.requesterName2 = lifecycleObj.requester_name2._id ? {"id": lifecycleObj.requester_name2._id, "text": lifecycleObj.requester_name2.__text} : "";
-        lifecycleRec.requesterName3 = lifecycleObj.requester_name3._id ? {"id": lifecycleObj.requester_name3._id, "text": lifecycleObj.requester_name3.__text} : "";
-        lifecycleRec.requesterNameTxt = lifecycleObj.requester_name.__text;
-        lifecycleRec.requesterName2Txt = lifecycleObj.requester_name2.__text;
-        lifecycleRec.requesterName3Txt = lifecycleObj.requester_name3.__text;
+        lifecycleRec.requesterName = lifecycleObj.requester_name ? (lifecycleObj.requester_name._id == ''? lifecycleObj.requester_name.__text : {"id": lifecycleObj.requester_name._id, "text": lifecycleObj.requester_name.__text}) : '';
+        lifecycleRec.requesterName2 = lifecycleObj.requester_name2 ? (lifecycleObj.requester_name2._id == ''? lifecycleObj.requester_name2.__text : {"id": lifecycleObj.requester_name2._id, "text": lifecycleObj.requester_name2.__text}) : '';
+        lifecycleRec.requesterName3 = lifecycleObj.requester_name3 ? (lifecycleObj.requester_name3._id == ''? lifecycleObj.requester_name3.__text : {"id": lifecycleObj.requester_name3._id, "text": lifecycleObj.requester_name3.__text}) : '';
+        lifecycleRec.requesterNameTxt = lifecycleObj.requester_name ? lifecycleObj.requester_name.__text : '';
+        lifecycleRec.requesterName2Txt = lifecycleObj.requester_name2 ? lifecycleObj.requester_name2.__text : '';
+        lifecycleRec.requesterName3Txt = lifecycleObj.requester_name3 ? lifecycleObj.requester_name3.__text : '';
        // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
         return (lifecycleRec);
