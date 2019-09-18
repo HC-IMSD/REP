@@ -57,7 +57,7 @@
         /**
          * Updates the display value for the object for summary display
          */
-        vm.countryChanged=function($item,$model){
+        vm.countryChanged=function(value){
             var found = false;
             for(var i = 0; i < vm.countries.length; i++){
                 if(vm.countries[i][vm.lang] === vm.model.display){
@@ -81,7 +81,7 @@
                 vm.updateRecord();
                 vm.clearFilter($scope);
             } else {
-                vm.model.display = "";
+                // vm.model.display = "";
                 if (vm.model.country) {
                     vm.model.country = {};
                 }

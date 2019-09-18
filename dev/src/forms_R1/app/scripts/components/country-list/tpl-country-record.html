@@ -25,7 +25,7 @@
                                 <!--<span data-ng-bind-html="countryRecord[countryRecCtrl.lang] | highlight: $select.search"></span>-->
                             <!--</ui-select-choices>-->
                         <!--</ui-select>-->
-                        <input type="text" id="{{::countryRecCtrl.countryId}}" name="{{::countryRecCtrl.countryId}}" data-ng-model="countryRecCtrl.model.display" value="countryRecCtrl.model.display" data-ng-blur="countryRecCtrl.countryChanged($item, $model)" list="{{::countryRecCtrl.countryListId}}" required="required" class="form-control full-width" />
+                        <input type="text" id="{{::countryRecCtrl.countryId}}" name="{{::countryRecCtrl.countryId}}" data-ng-model="countryRecCtrl.model.display"  data-ng-change="countryRecCtrl.countryChanged(countryRecCtrl.model.display)" list="{{::countryRecCtrl.countryListId}}" required="required" class="form-control full-width" />
                         <datalist id="{{::countryRecCtrl.countryListId}}" class="rep-selectize-dropdown rep-selectize-font">
                             <option data-ng-repeat="countryRecord in countryRecCtrl.countryList | filter:{[countryRecCtrl.lang]: countryFilter} track by countryRecord.id" value="{{countryRecord[countryRecCtrl.lang]}}" label="{{countryRecord[countryRecCtrl.lang]}}"/>
                         </datalist>

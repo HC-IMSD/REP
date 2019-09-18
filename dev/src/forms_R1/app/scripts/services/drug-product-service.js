@@ -1001,8 +1001,9 @@
                 //dosage_form_group, static value
                 obj.dosage_form_group = {};
                 if (item.dosageForm) {
-                    var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                    var newDosage = splitArray[splitArray.length - 1];
+                    // var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                    // var newDosage = splitArray[splitArray.length - 1];
+                    var newDosage = item.dosageForm.id.substring(DossierLists.getDosageFormPrefix().length);
                     obj.dosage_form_group.dosage_form = {
                         _id: newDosage,
                         _label_en: item.dosageForm.en,
@@ -1154,8 +1155,9 @@
             if (!unitsObj || !prefix) {
                 return "";
             }
-            var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
-            var newUnits = splitArray[splitArray.length - 1];
+            // var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
+            // var newUnits = splitArray[splitArray.length - 1];
+            var newUnits = unitsObj.id.substring(prefix.length);
             newObj._id = newUnits;
             newObj._label_en = unitsObj.en;
             newObj._label_fr = unitsObj.fr;
@@ -1228,8 +1230,9 @@
             angular.forEach(list, function (item) {
                 //check to see if this is an object. If not it was empty
                 if (angular.isObject(item.roa)) {
-                    var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
-                    var newRoa = splitArray[splitArray.length - 1];
+                    // var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
+                    // var newRoa = splitArray[splitArray.length - 1];
+                    var newRoa = item.roa.id.substring(DossierLists.getRoaPrefix().length);
                     //roa is a field with 2 attributes
                     var obj = {
                         "roa": {
