@@ -1386,13 +1386,15 @@
 
             var resultList = [];
             angular.forEach(list, function (item) {
-                var country = {
-                    _id: item.country.id,
-                    _label_en: item.country.en,
-                    _label_fr: item.country.fr,
-                    __text: item.country[lang]
-                };
-                resultList.push(country);
+                if(item.country.id){
+                    var country = {
+                        _id: item.country.id,
+                        _label_en: item.country.en,
+                        _label_fr: item.country.fr,
+                        __text: item.country[lang]
+                    };
+                    resultList.push(country);
+                }
             });
             return resultList;
         }
