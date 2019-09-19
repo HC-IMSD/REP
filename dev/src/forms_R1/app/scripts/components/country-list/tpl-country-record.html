@@ -27,8 +27,8 @@
                         <!--</ui-select>-->
                         <input type="text" id="{{::countryRecCtrl.countryId}}" name="{{::countryRecCtrl.countryId}}"
                                data-ng-model="countryRecCtrl.model.display" value="countryRecCtrl.model.display"
-                               list="{{::countryRecCtrl.countryListId}}"
-                               data-ng-blur="countryRecCtrl.countryChanged();countryRecCtrl.cancelFocus();"
+                               list="{{::countryRecCtrl.countryListId}}"  data-ng-model-options="{ updateOn: 'blur', debounce:0 }"
+                               data-ng-change="countryRecCtrl.countryChanged();countryRecCtrl.cancelFocus();"
                                required="required" class="form-control full-width" data-focus-if="countryRecCtrl.isFocus"/>
                         <datalist id="{{::countryRecCtrl.countryListId}}" class="rep-selectize-dropdown rep-selectize-font">
                             <option data-ng-repeat="countryRecord in countryRecCtrl.countryList | filter:{[countryRecCtrl.lang]: countryFilter} track by countryRecord.id" value="{{countryRecord[countryRecCtrl.lang]}}" label="{{countryRecord[countryRecCtrl.lang]}}"/>
