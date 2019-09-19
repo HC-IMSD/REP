@@ -51,6 +51,7 @@
   "ADVISEMENT_LETTER_RESPONSE": "Response to Advisement Letter",
   "CLIN_CLARIF_RESPONSE": "Response to Clinical Clarification Request",
   "EMAIL_RQ_RESPONSE": "Response to e-mail Request ",
+  "HSC_RQ_RESPONSE": "Response to Human Safety Clarification Request ",
   "LABEL_CLARIF_RESPONSE": "Response to Labeling Clarification Request",
   "MHPD_RQ_RESPONSE": "Response to MHPD Request",
   "NOC_RESPONSE": "Response to NOC/c-QN",
