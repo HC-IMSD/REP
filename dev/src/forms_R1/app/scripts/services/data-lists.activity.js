@@ -1338,7 +1338,7 @@
         }
         function getV_NdsArray() {
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.INITIAL,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.INITIAL,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_PsurPvArray() {
@@ -1358,7 +1358,7 @@
         }
         function getV_UdraArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.DIN_DISCONTINUED,vm.allActivities.NOTIFICATION_INTERRUPT_SALE,vm.allActivities.BE_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.DIN_DISCONTINUED,vm.allActivities.NOTIFICATION_INTERRUPT_SALE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         /**
