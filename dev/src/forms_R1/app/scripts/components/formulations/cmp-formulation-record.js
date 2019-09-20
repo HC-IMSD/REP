@@ -70,6 +70,7 @@
         vm.alerts = [false, false, false,false]; //for help boxes
        // vm.formName="";
         vm.summaryName="";
+        vm.isDosageFormOther = false;
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.lang = $translate.proposedLanguage() || $translate.use();
         vm.frmModel = {
@@ -307,15 +308,18 @@
             var found = false;
             for(var i = 0; i < vm.dosageFormList.length; i++) {
                 var option =vm.dosageFormList[i];
-                if(option['id'] === vm.frmModel.dosageFormHtml) {
+                if(option[vm.lang] === vm.frmModel.dosageFormHtml) {
                     vm.frmModel.dosageForm = option;
                     found = true;
                     break;
                 }
             }
-            if( ! found ){
+            if( found ) {
+                vm.isDosageFormOther = vm.frmModel.dosageForm.id === vm.otherValue;
+            } else {
                 vm.frmModel.dosageForm = {};
                 vm.frmModel.dosageFormHtml = "";
+                vm.isDosageFormOther = false;
             }
         };
 
