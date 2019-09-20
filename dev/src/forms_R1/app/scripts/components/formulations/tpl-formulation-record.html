@@ -63,7 +63,7 @@
                            value="formulRecCtrl.frmModel.dosageFormHtml" data-ng-model-options="{ updateOn: 'blur', debounce:0 }"
                            data-ng-change="formulRecCtrl.dosageFormChange()" list="dosageFormList" required="required" class="form-control full-width"/>
                     <datalist id="dosageFormList" class="rep-selectize-dropdown rep-selectize-font">
-                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}" label="{{formType[formulRecCtrl.lang]}}"/>
+                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType['id']}}" label="{{formType[formulRecCtrl.lang]}}"/>
                     </datalist>
 
                 </div>

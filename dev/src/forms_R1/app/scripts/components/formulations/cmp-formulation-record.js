@@ -264,7 +264,7 @@
         vm.isDosageOther = function () {
 
             if(!vm.frmModel|| !vm.frmModel.dosageForm) return false;
-            if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
+            if (vm.frmModel.dosageForm.id === vm.otherValue) {
                 return true;
             } else {
                 vm.frmModel.dosageFormOther = "";
@@ -307,7 +307,7 @@
             var found = false;
             for(var i = 0; i < vm.dosageFormList.length; i++) {
                 var option =vm.dosageFormList[i];
-                if(option[vm.lang] === vm.frmModel.dosageFormHtml) {
+                if(option['id'] === vm.frmModel.dosageFormHtml) {
                     vm.frmModel.dosageForm = option;
                     found = true;
                     break;
@@ -320,7 +320,7 @@
         };
 
         vm.updateDosageForm = function() {
-            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id) {
+            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id != "") {
                 for (var i = 0; i < vm.dosageFormList.length; i++) {
                     var option = vm.dosageFormList[i];
                     if (option['id'] === vm.frmModel.dosageForm['id']) {
