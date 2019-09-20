@@ -314,7 +314,7 @@
                 }
             }
             if( ! found ){
-                vm.frmModel.dosageForm = "";
+                vm.frmModel.dosageForm = {};
                 vm.frmModel.dosageFormHtml = "";
             }
         };
