@@ -202,6 +202,11 @@
                                     <datalist id="unitsList" class="rep-selectize-dropdown rep-selectize-font">
                                         <option data-ng-repeat="unit in ingRecCtrl.unitsList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
                                     </datalist>
+                                    <!--<select id="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.units"-->
+                                            <!--data-ng-model-options="{ debounce: '$inherit'}"-->
+                                            <!--class="form-control full-width" name="{{::ingRecCtrl.unitsId}}" required-->
+                                            <!--data-ng-options="unit[ingRecCtrl.lang] for unit in  ingRecCtrl.unitsList track by unit.id">-->
+                                    <!--</select>-->
 
                                 </label>
                             </div>

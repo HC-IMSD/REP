@@ -403,6 +403,10 @@
                     break;
                 }
             }
+            if(!found){
+                vm.ingModel.units = {};
+                vm.ingModel.unitsHtml = "";
+            }
             // if( ! found ){
             //     for(var i = 0; i < vm.unitsList.length; i++) {
             //         var option =vm.unitsList[i];
@@ -424,14 +428,17 @@
                 }
             }
             if( ! found ){
-                for(var i = 0; i < vm.measureList.length; i++) {
-                    var option =vm.measureList[i];
-                    if(option['id'] === vm.ingModel.perMeasUnits['id']) {
-                        vm.ingModel.perMeasUnitsHtml = option[vm.lang];
-                        break;
-                    }
-                }
+                // for(var i = 0; i < vm.measureList.length; i++) {
+                //     var option =vm.measureList[i];
+                //     if(option['id'] === vm.ingModel.perMeasUnits['id']) {
+                //         vm.ingModel.perMeasUnitsHtml = option[vm.lang];
+                //         break;
+                //     }
+                // }
+                vm.ingModel.perMeasUnits = {};
+                vm.ingModel.perMeasUnitsHtml = "";
             }
+
         }
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {
