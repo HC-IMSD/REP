@@ -338,6 +338,11 @@
                     }
                 }
             }
+            if ((vm.frmModel.dosageForm && vm.frmModel.dosageForm.id === vm.otherValue)) {
+                vm.isDosageOther = true;
+            } else {
+                vm.isDosageOther = false;
+            }
         };
 
         /**
