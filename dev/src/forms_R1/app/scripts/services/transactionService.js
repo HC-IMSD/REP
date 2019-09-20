@@ -588,8 +588,8 @@
                 __text: sdv_text
             };
         }
-        lifecycleRec.sequence_from_date = lifecycleObj.startDate;
-        lifecycleRec.sequence_to_date = lifecycleObj.endDate;
+        lifecycleRec.sequence_from_date = angular.isDate(lifecycleObj.startDate)? lifecycleObj.startDate.toISOString().substr(0,10):lifecycleObj.startDate;
+        lifecycleRec.sequence_to_date = angular.isDate(lifecycleObj.endDate)? lifecycleObj.endDate.toISOString().substr(0,10):lifecycleObj.endDate;
         lifecycleRec.sequence_details = lifecycleObj.details;
         lifecycleRec.sequence_details_change = lifecycleObj.detailsChange;
         lifecycleRec.sequence_version = lifecycleObj.sequenceVersion;
@@ -605,10 +605,14 @@
         }
         else {
             tempRequesterName =  lifecycleObj.requesterName;
-            lifecycleRec.requester_name = {
-                _id: '',
-                __text: lifecycleObj.requesterName
-            };
+            if(lifecycleObj.requesterName != ""){
+                lifecycleRec.requester_name = {
+                    _id: '',
+                    __text: lifecycleObj.requesterName
+                };
+            } else {
+                lifecycleRec.requester_name = {};
+            }
         }
         if (lifecycleObj.requesterName2 && lifecycleObj.requesterName2.id) {
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
@@ -618,11 +622,15 @@
             };
         }
         else {
-            tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
-            lifecycleRec.requester_name2 = {
-                _id: '',
-                __text: lifecycleObj.requesterName2
-            };
+            if(lifecycleObj.requesterName2 != ""){
+                tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
+                lifecycleRec.requester_name2 = {
+                    _id: '',
+                    __text: lifecycleObj.requesterName2
+                };
+            } else {
+                lifecycleRec.requester_name2 = {};
+            }
         }
 
         if (lifecycleObj.requesterName3 && lifecycleObj.requesterName3.id) {
@@ -633,11 +641,15 @@
             };
         }
         else {
-            tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
-            lifecycleRec.requester_name3 = {
-                _id: '',
-                __text: lifecycleObj.requesterName3
-            };
+            if(lifecycleObj.requesterName3 != "") {
+                tempRequesterName = tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
+                lifecycleRec.requester_name3 = {
+                    _id: '',
+                    __text: lifecycleObj.requesterName3
+                };
+            } else {
+                lifecycleRec.requester_name3 = {};
+            }
         }
         lifecycleRec.requester_of_solicited_information = tempRequesterName;
 
