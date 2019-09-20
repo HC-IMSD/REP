@@ -197,32 +197,11 @@
                                                        form-ref="ingRecCtrl.activeIngForm"
                                                        show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.unitsId])"
                                                        error-types="ingRecCtrl.requiredOnly"></cmp-error-message>
-                                    <!--<div class="rep-pad-top">-->
-                                        <!--<div class="rep-error" data-ng-class="{'has-error':ingRecCtrl.activeIngForm[ingRecCtrl.unitsId].$invalid}">-->
-                                            <!--<ui-select data-ng-model="ingRecCtrl.ingModel.units" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}"-->
-                                                       <!--data-ng-model-options="{ debounce: 0}"-->
-                                                       <!--class="rep-selectize-font full-width" required>-->
-                                                <!--<ui-select-match placeholder="{{'UNITS_SRCH' |translate}}"-->
-                                                                 <!--class="rep-selectize-font form-control">-->
-                                                    <!--{{$select.selected[ingRecCtrl.lang]}}-->
-                                                <!--</ui-select-match>-->
-                                                <!--<ui-select-choices-->
-                                                        <!--repeat="unitValue in ingRecCtrl.UnitsList | filter: {[ingRecCtrl.lang]:$select.search}"-->
-                                                        <!--class="rep-selectize-font">-->
-                                                    <!--<span data-ng-bind-html="unitValue[ingRecCtrl.lang] | highlight: $select.search"></span>-->
-                                                <!--</ui-select-choices>-->
-                                            <!--</ui-select>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <input type="text" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.unitsHtml" value="ingRecCtrl.ingModel.unitsHtml" data-ng-change="ingRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control"/>
+                                    <input type="text" id="{{::ingRecCtrl.unitsId}}" name="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.unitsHtml" value="ingRecCtrl.ingModel.unitsHtml"
+                                           data-ng-model-options="{ updateOn: 'blur', debounce:0 }" data-ng-change="ingRecCtrl.unitsChange()" list="unitsList" required="required" class="form-control"/>
                                     <datalist id="unitsList" class="rep-selectize-dropdown rep-selectize-font">
                                         <option data-ng-repeat="unit in ingRecCtrl.unitsList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
                                     </datalist>
-                                    <!--<select id="{{::ingRecCtrl.unitsId}}" data-ng-model="ingRecCtrl.ingModel.units"-->
-                                            <!--data-ng-model-options="{ debounce: '$inherit'}"-->
-                                            <!--class="form-control full-width" name="{{::ingRecCtrl.unitsId}}" required-->
-                                            <!--data-ng-options="unit[ingRecCtrl.lang] for unit in  ingRecCtrl.unitsList track by unit.id">-->
-                                    <!--</select>-->
 
                                 </label>
                             </div>
@@ -333,7 +312,9 @@
                                                            show-error="ingRecCtrl.showError(ingRecCtrl.activeIngForm[ingRecCtrl.perMeasureUnitId])"
                                                            error-types="ingRecCtrl.requiredOnly">
                                         </cmp-error-message>
-                                        <input type="text" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnitsHtml" value="ingRecCtrl.ingModel.perMeasUnitsHtml" data-ng-change="ingRecCtrl.perMeasUnitsChange()" list="unitsList2" required="required" class="form-control full-width"/>
+                                        <input type="text" id="{{::ingRecCtrl.perMeasureUnitId}}" name="{{::ingRecCtrl.perMeasureUnitId}}" data-ng-model="ingRecCtrl.ingModel.perMeasUnitsHtml"
+                                               value="ingRecCtrl.ingModel.perMeasUnitsHtml" data-ng-model-options="{ updateOn: 'blur', debounce:0 }" data-ng-change="ingRecCtrl.perMeasUnitsChange()"
+                                               list="unitsList2" required="required" class="form-control full-width"/>
                                         <datalist id="unitsList2" class="rep-selectize-dropdown rep-selectize-font">
                                             <option data-ng-repeat="unit in ingRecCtrl.measureList" value="{{unit[ingRecCtrl.lang]}}" label="{{unit[ingRecCtrl.lang]}}"/>
                                         </datalist>
