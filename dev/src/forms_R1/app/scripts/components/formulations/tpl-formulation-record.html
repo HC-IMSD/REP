@@ -63,13 +63,13 @@
                            value="formulRecCtrl.frmModel.dosageFormHtml" data-ng-model-options="{ updateOn: 'blur', debounce:0 }"
                            data-ng-change="formulRecCtrl.dosageFormChange()" list="dosageFormList" required="required" class="form-control full-width"/>
                     <datalist id="dosageFormList" class="rep-selectize-dropdown rep-selectize-font">
-                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}">
+                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}"/>
                     </datalist>
 
                 </div>
                 <div class="col-md-6 form-group"
                      data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageOtherId].$invalid}"
-                     data-ng-if="formulRecCtrl.isDosageFormOther">
+                     data-ng-if="formulRecCtrl.isDosageOther">
                     <label for="{{::formulRecCtrl.dosageOtherId}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
