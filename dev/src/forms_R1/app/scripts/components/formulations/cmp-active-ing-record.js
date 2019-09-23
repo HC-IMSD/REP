@@ -397,6 +397,7 @@
         };
         vm.unitsChange = function() {
             var found = false;
+            vm.ingModel.units = {};
             for(var i = 0; i < vm.unitsList.length; i++) {
                 var option =vm.unitsList[i];
                 if(option[vm.lang] === vm.ingModel.unitsHtml) {
@@ -405,22 +406,14 @@
                     break;
                 }
             }
-            if(!found){
-                vm.ingModel.units = {};
+            if(! found ) {
                 vm.ingModel.unitsHtml = "";
+                vm.ingModel.otherUnits = "";
             }
-            // if( ! found ){
-            //     for(var i = 0; i < vm.unitsList.length; i++) {
-            //         var option =vm.unitsList[i];
-            //         if(option['id'] === vm.ingModel.units['id']) {
-            //             vm.ingModel.unitsHtml = option[vm.lang];
-            //             break;
-            //         }
-            //     }
-            // }
         }
         vm.perMeasUnitsChange = function() {
             var found = false;
+            vm.ingModel.perMeasUnits = {};
             for(var i = 0; i < vm.measureList.length; i++) {
                 var option =vm.measureList[i];
                 if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
@@ -429,18 +422,10 @@
                     break;
                 }
             }
-            if( ! found ){
-                // for(var i = 0; i < vm.measureList.length; i++) {
-                //     var option =vm.measureList[i];
-                //     if(option['id'] === vm.ingModel.perMeasUnits['id']) {
-                //         vm.ingModel.perMeasUnitsHtml = option[vm.lang];
-                //         break;
-                //     }
-                // }
-                vm.ingModel.perMeasUnits = {};
+            if(! found){
                 vm.ingModel.perMeasUnitsHtml = "";
+                vm.ingModel.perPresOtherUnits = {};
             }
-
         }
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {
