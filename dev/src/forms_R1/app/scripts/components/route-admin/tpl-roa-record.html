@@ -12,7 +12,7 @@
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.roaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}" data-ng-model="roaRecCtrl.model.display"
-                               data-ng-change="roaRecCtrl.roaChanged();" data-ng-blur="roaRecCtrl.roaBlur();" data-ng-model-options="{debounce:200}"
+                               data-ng-change="roaRecCtrl.roaChanged(roaRecCtrl.model.display);" data-ng-model-options="{updateOn:'blur'}"
                                list="roaFormList" required class="form-control full-width"/>
                         <datalist id="roaFormList" class="rep-selectize-dropdown rep-selectize-font">
                             <option data-ng-repeat="roa in roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:roaFilter}" value="{{roa[roaRecCtrl.lang]}}" label="{{roa[roaRecCtrl.lang]}}"/>
@@ -48,7 +48,7 @@
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.unknownRoaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::roaRecCtrl.unknownRoaId}}" class="form-control"
-                               name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40" data-ng-model-options="{debounce:3000}"
+                               name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40" data-ng-model-options="{updateOn:'blur'}"
                                data-ng-model="roaRecCtrl.model.otherRoaDetails" required/>
 
 
