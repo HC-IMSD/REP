@@ -73,7 +73,7 @@
          * @param item
          * @param model
          */
-        vm.roaChanged=function(){
+        vm.roaChanged=function(value){
             var found = false;
             vm.model.roa = "";
             for(var i = 0; i < vm.roaList.length; i++) {
@@ -87,10 +87,7 @@
             if(found){
                 vm.clearFilter($scope);
                 vm.resetMe();
-            }
-        };
-        vm.roaBlur=function(){
-            if(! vm.model.roa.id){
+            } else {
                 vm.model.display = "";
             }
         };
