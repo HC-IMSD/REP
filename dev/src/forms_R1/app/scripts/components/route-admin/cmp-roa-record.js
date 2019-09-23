@@ -73,8 +73,9 @@
          * @param item
          * @param model
          */
-        vm.roaChanged=function(item, model){
+        vm.roaChanged=function(){
             var found = false;
+            vm.model.roa = "";
             for(var i = 0; i < vm.roaList.length; i++) {
                 var option =vm.roaList[i];
                 if(option[vm.lang] === vm.model.display) {
@@ -83,24 +84,16 @@
                     break;
                 }
             }
-            if( ! found ){
-                for(var i = 0; i < vm.roaList.length; i++) {
-                    var option =vm.roaList[i];
-                    if(option['id'] === vm.model.display) {
-                        vm.model.display = option[vm.lang];
-                        found = true;
-                        break;
-                    }
-                }
-            }
             if(found){
                 vm.clearFilter($scope);
                 vm.resetMe();
-            } else {
-                vm.model.display = "";
-                vm.model.roa = "";
             }
         };
+        vm.roaBlur=function(){
+            if(! vm.model.roa.id){
+                vm.model.display = "";
+            }
+        }
 
 
         vm.deleteRecord = function()  {
@@ -116,7 +109,7 @@
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
         vm.isRoaOther = function () {
-           if(vm.model.roa.id==DossierLists.getOtherValue()){
+           if(DossierLists.getOtherValue() == vm.model.roa.id){
                return true;
            }else{
                vm.model.otherRoaDetails="";
