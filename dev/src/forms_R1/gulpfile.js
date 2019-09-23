@@ -2898,7 +2898,7 @@ gulp.task('prod-drugProduct-compileSrcJs', gulp.series('prod-drugProduct-compile
     var rootJsBaseName = "drugProductApp";
     var translateName = "drugProductTranslations"; //TODO make this a resuable variable
     return (
-        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, drugProductComponentFolders, drugProductServiceFileNames, drugProductDirectiveFolders, translateName, true)
+        pipes.compileSourceJsMinified(srcPath, dest, rootJsBaseName, drugProductComponentFolders, drugProductServiceFileNames, drugProductDirectiveFolders, translateName, false)
     )
 }));
 
