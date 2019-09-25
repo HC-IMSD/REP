@@ -113,6 +113,9 @@
                                    data-ng-required="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible"
                                    class="form-control" required
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
+                            <datepicker>
+                                <input ng-model="date" type="text"/>
+                            </datepicker>
                         </div>
                     </div>
                     <div class="row" data-ng-if="lifecycleCtrl.endDateVisible">
