@@ -255,7 +255,7 @@
                                                on-update="drugProdCtrl.updateImporterList(list)">
                             </cmp-importer-list>
                         </div>
-        </details>
+                    </details>
                 </div>
 
                 <div class="row">
@@ -297,7 +297,7 @@
                             </header>
                             <div class="panel-body">
                                 <div>
-                                    <cmp-species-list list-items="drugProdCtrl.model.speciesRecord"
+                                    <cmp-species-list list-items="drugProdCtrl.model.drugProduct.speciesRecord"
                                                        update-error-summary="drugProdCtrl.updateErrorSummary()"
                                                        show-errors="drugProdCtrl.showSummary"
                                                        on-update="drugProdCtrl.updateSpeciesList(list)">

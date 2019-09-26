@@ -41,9 +41,9 @@
         vm.oneComposError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.onePhaseError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.alias={
-            "no_country": {
-                "type": "elementnoid",
-                "target": "list_country"
+            "no_cta_country": {
+                "type": "element",
+                "target": "list_cta_country"
             }
         };
 
@@ -64,9 +64,9 @@
             if (changes.configureIdField) {
                 _setConfigItems(changes.configureIdField.currentValue);
             }
-            if(changes.showErrorSummary){
-                vm.showSummary=changes.showErrorSummary.currentValue;
-                vm.updateErrorSummaryState();
+            if(changes.showErrors){
+
+                vm.showDetailErrors=changes.showErrors.currentValue;
             }
         };
 
@@ -152,7 +152,7 @@
             vm.isInfoRebId = "info_reb" + scopeId;
             vm.hasDinId = "cta_has_din"+ scopeId;
             vm.isCanMarketId = "cta_is_market" + scopeId;
-            vm.noCountryId="no_country"+scopeId;
+            vm.noCountryId="no_cta_country"+scopeId;
         }
 
         vm.isEmpty = function(aValue){
@@ -163,7 +163,7 @@
             if(!ctrl){
                 return false;
             }
-            return ((ctrl.$invalid && ctrl.$touched) || (vm.showSummary && ctrl.$invalid));
+            return ((ctrl.$invalid && ctrl.$touched) || (vm.showDetailErrors && ctrl.$invalid));
         };
 
     }
