@@ -80,7 +80,7 @@
         vm.activityTypeMapping = {
             "B02-20160301-014": TransactionLists.getCtaType(),
             "B02-20160301-015": TransactionLists.getCta_aType(),
-            "B02-20160301-016": TransactionLists.getPreCtaType()
+            "B02-20160301-072": TransactionLists.getPreCtaType()
         };
         vm.updateSummary=0; //message to update the summary component
         vm.showSummary=false; //show the errror summary object

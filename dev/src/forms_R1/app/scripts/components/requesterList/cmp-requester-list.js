@@ -54,7 +54,7 @@
                 vm.model.list = [];
             }
 
-            loadContactData();
+            // loadContactData();
         };
 
         vm.$onChanges = function (changes) {
@@ -97,13 +97,13 @@
              vm.onUpdate({list:vm.model.list});
         };
 
-        function loadContactData() {
-            getContactLists.getInternalContactsWithoutOther()
-                .then(function (data) {
-                    vm.baseRequesters = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContactsWithoutOther()
+        //         .then(function (data) {
+        //             vm.baseRequesters = data;
+        //             return true;
+        //         });
+        // }
 
         function getListMaxID() {
 

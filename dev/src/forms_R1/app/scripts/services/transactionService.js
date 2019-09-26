@@ -30,7 +30,7 @@
         this.userList =[];
         this.isFinal = false;
         this.$onInit = function () {
-            loadContactData();
+            // loadContactData();
             loadUserListData();
         };
 
@@ -45,21 +45,21 @@
             this.xslFileName = "REP_RT_4_0.xsl";
         }
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    this.baseRequesters = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             this.baseRequesters = data;
+        //             return true;
+        //         });
+        // }
 
-        function loadUserListData() {
-            getContactLists.getInternalContactsWithoutOther()
-                .then(function (data) {
-                    this.userList = data;
-                    return true;
-                });
-        }
+        // function loadUserListData() {
+        //     getContactLists.getInternalContactsWithoutOther()
+        //         .then(function (data) {
+        //             this.userList = data;
+        //             return true;
+        //         });
+        // }
 
         TransactionService.prototype = {
             _default: {},
@@ -617,7 +617,7 @@
             if(lifecycleObj.requesterName != ""){
                 lifecycleRec.requester_name = {
                     _id: '',
-                    __text: lifecycleObj.requesterName
+                    __text: lifecycleObj.requesterName.text ? lifecycleObj.requesterName.text : lifecycleObj.requesterName
                 };
             } else {
                 lifecycleRec.requester_name = {};
@@ -635,7 +635,7 @@
                 tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
                 lifecycleRec.requester_name2 = {
                     _id: '',
-                    __text: lifecycleObj.requesterName2
+                    __text: lifecycleObj.requesterName2.text ? lifecycleObj.requesterName2.text : lifecycleObj.requesterName2
                 };
             } else {
                 lifecycleRec.requester_name2 = {};
@@ -654,7 +654,7 @@
                 tempRequesterName = tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
                 lifecycleRec.requester_name3 = {
                     _id: '',
-                    __text: lifecycleObj.requesterName3
+                    __text: lifecycleObj.requesterName3.text ? lifecycleObj.requesterName3.text : lifecycleObj.requesterName3
                 };
             } else {
                 lifecycleRec.requester_name3 = {};

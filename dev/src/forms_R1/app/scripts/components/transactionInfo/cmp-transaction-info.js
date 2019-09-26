@@ -99,7 +99,7 @@
             vm.updateDossierTypeState();
            // vm.setSolicitedState();
             loadAdminSubData();
-            loadUserListData();
+            // loadUserListData();
             vm.finalState=false;
             vm.displayResetBtn = false;
 
@@ -272,13 +272,13 @@
                 });
         }
 
-        function loadUserListData() {
-            getContactLists.getInternalContactsWithoutOther()
-                .then(function (data) {
-                    vm.userList = data;
-                    return true;
-                });
-        }
+        // function loadUserListData() {
+        //     getContactLists.getInternalContactsWithoutOther()
+        //         .then(function (data) {
+        //             vm.userList = data;
+        //             return true;
+        //         });
+        // }
 
 
         /**

@@ -234,6 +234,13 @@
                                                            show-error="transInfoCtrl.showError(transInfoCtrl.transInfoForm[transInfoCtrl.adminSubTypeId])"
                                                            error-types="transInfoCtrl.requiredOnly"></cmp-error-message>
                                         <select id="{{::transInfoCtrl.adminSubTypeId}}" name="{{::transInfoCtrl.adminSubTypeId}}"
+                                                data-ng-model="transInfoCtrl.transactionModel.subType" class="form-control" data-ng-if="transInfoCtrl.transactionModel.ectd.dossierType == 'D24'"
+                                                data-ng-options="choice[transInfoCtrl.lang] for choice in transInfoCtrl.adminSubTypeList | filter: {id:'!POSTAUTH_CHEMISTRY_CHGE'} track by choice.id"
+                                                data-ng-required="transInfoCtrl.showAdminSub">
+                                            <option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.subType"/>
+                                        </select>
+
+                                        <select id="{{::transInfoCtrl.adminSubTypeId}}" name="{{::transInfoCtrl.adminSubTypeId}}" data-ng-if="transInfoCtrl.transactionModel.ectd.dossierType != 'D24'"
                                                 data-ng-model="transInfoCtrl.transactionModel.subType" class="form-control"
                                                 data-ng-options="choice[transInfoCtrl.lang] for choice in transInfoCtrl.adminSubTypeList track by choice.id"
                                                 data-ng-required="transInfoCtrl.showAdminSub">
@@ -346,13 +353,16 @@
                         <label for="projectManager1" class="full-width">
                             <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
-                        <input type="text" id="projectManager1" name="projectManager1" data-ng-model="transInfoCtrl.transactionModel.projectManager1" value="transInfoCtrl.transactionModel.projectManager1" list="contactsList" class="form-control full-width" />
+                        <input type="text" id="projectManager1" name="projectManager1" data-ng-model="transInfoCtrl.transactionModel.projectManager1"
+                               value="transInfoCtrl.transactionModel.projectManager1"
+                               class="form-control full-width" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="projectManager2" class="full-width">
                             <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
-                        <input type="text" id="projectManager2" name="projectManager2" data-ng-model="transInfoCtrl.transactionModel.projectManager2" value="transInfoCtrl.transactionModel.projectManager1" list="contactsList" class="form-control full-width" />
+                        <input type="text" id="projectManager2" name="projectManager2" data-ng-model="transInfoCtrl.transactionModel.projectManager2" value="transInfoCtrl.transactionModel.projectManager1"
+                               class="form-control full-width" />
                     </div>
                 </div>
                 <div class="row" data-ng-if="transInfoCtrl.transactionModel.ectd.dossierType == 'D21' || transInfoCtrl.transactionModel.ectd.dossierType == 'D22'">

@@ -95,7 +95,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row" data-ng-if="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible">
+                    <div class="row" data-ng-show="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible">
                         <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.dateId].$invalid}">
                             <label for="{{::lifecycleCtrl.dateId}}" class="required">
@@ -115,7 +115,7 @@
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
                     </div>
-                    <div class="row" data-ng-if="lifecycleCtrl.endDateVisible">
+                    <div class="row" data-ng-show="lifecycleCtrl.endDateVisible">
                         <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId].$invalid}">
                             <label for="{{::lifecycleCtrl.startDateId}}" class="required">
@@ -210,7 +210,7 @@
                             </label>
                             <textarea id="{{::lifecycleCtrl.descriptId}}" name="{{::lifecycleCtrl.descriptId}}"
                                       data-ng-model="lifecycleCtrl.lifecycleModel.details"
-                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="494"
                                       data-ng-required="lifecycleCtrl.descriptionVisible"
                                       class="form-control full-width">
                             </textarea>
@@ -234,7 +234,7 @@
                             </label>
                             <textarea id="{{::lifecycleCtrl.descriptChangeId}}" name="{{::lifecycleCtrl.descriptChangeId}}"
                                       data-ng-model="lifecycleCtrl.lifecycleModel.detailsChange"
-                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="2000"
                                       data-ng-required="lifecycleCtrl.descriptionChangeVisible"
                                       class="form-control full-width">
                             </textarea>
@@ -349,7 +349,7 @@
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterNameTxt"
                                value="lifecycleCtrl.lifecycleModel.requesterNameTxt"
                                data-ng-blur="lifecycleCtrl.userChanged('requesterName')"
-                               list="contactsList" class="form-control full-width" />
+                               class="form-control full-width" />
                              </span>
                             </label>
                         </div>
@@ -361,7 +361,7 @@
                                name="{{::lifecycleCtrl.requesterNameId2}}" size="30" maxlength="30"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName2Txt"
                                value="lifecycleCtrl.lifecycleModel.requesterName2Txt" data-ng-blur="lifecycleCtrl.userChanged('requesterName2')"
-                               list="contactsList" class="form-control full-width" />
+                               class="form-control full-width" />
                              </span>
                             </label>
                         </div>
@@ -374,7 +374,6 @@
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName3Txt"
                                value="lifecycleCtrl.lifecycleModel.requesterName3Txt"
                                data-ng-blur="lifecycleCtrl.userChanged('requesterName3')"
-                               list="contactsList"
                                class="form-control full-width" />
                              </span>
                             </label>

@@ -390,7 +390,7 @@
         }
         function _getClinicalBioList(raList){
             var newList=[];
-            var veterinaryArray = ['B02-20160301-028','B02-20160301-014','B02-20160301-015','B02-20160301-016'];
+            var veterinaryArray = ['B02-20160301-028','B02-20160301-014','B02-20160301-015','B02-20160301-072'];
             for(var i=0; i<veterinaryArray.length; i++){
                 for(var j=0; j< raList.length; j++){
                     if(veterinaryArray[i] == raList[j].id){
@@ -403,7 +403,7 @@
         }
         function _getLinicalPhaList(raList){
             var newList=[];
-            var veterinaryArray = ['B02-20160301-028','B02-20160301-014','B02-20160301-015','B02-20160301-016'];
+            var veterinaryArray = ['B02-20160301-028','B02-20160301-014','B02-20160301-015','B02-20160301-072'];
             for(var i=0; i<veterinaryArray.length; i++){
                 for(var j=0; j< raList.length; j++){
                     if(veterinaryArray[i] == raList[j].id){
