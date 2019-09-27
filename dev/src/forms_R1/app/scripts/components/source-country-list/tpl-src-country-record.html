@@ -29,10 +29,11 @@
                     <input type="text" id="{{::srcCountryRecCtrl.countryId}}" name="{{::srcCountryRecCtrl.countryId}}"
                            data-ng-model="srcCountryRecCtrl.model.display" value="srcCountryRecCtrl.model.display"
                            data-focus-if="srcCountryRecCtrl.isFocus"
-                           data-ng-blur="srcCountryRecCtrl.countryChanged($item, $model);srcCountryRecCtrl.cancelFocus();"
+                           data-ng-model-options="{ updateOn: 'blur' }" data-ng-change="srcCountryRecCtrl.countryChanged(srcCountryRecCtrl.model.display);srcCountryRecCtrl.cancelFocus();"
                            list="{{::srcCountryRecCtrl.countryListId}}" required="required" class="form-control full-width" />
                     <datalist id="{{::srcCountryRecCtrl.countryListId}}" class="rep-selectize-dropdown rep-selectize-font">
-                        <option data-ng-repeat="countryRecord in srcCountryRecCtrl.countryList | filter:{[srcCountryRecCtrl.lang]: srcCountryFilter} track by countryRecord.id" value="{{countryRecord[srcCountryRecCtrl.lang]}}" label="{{countryRecord[srcCountryRecCtrl.lang]}}"/>
+                        <option data-ng-repeat="countryRecord in srcCountryRecCtrl.countryList | filter:{[srcCountryRecCtrl.lang]: srcCountryFilter}"
+                                value="{{countryRecord[srcCountryRecCtrl.lang]}}" label="{{countryRecord[srcCountryRecCtrl.lang]}}"/>
                     </datalist>
 
                 </div>
@@ -50,7 +51,7 @@
 
                     </label>
                     <textarea id="{{::srcCountryRecCtrl.unknownCountryId}}" data-focus-if="srcCountryRecCtrl.isUnknown()"
-                          data-ng-model="srcCountryRecCtrl.model.unknownCountryDetails" maxlength="1024" rows="3" data-ng-model-options="{ debounce: $inherit}"
+                          data-ng-model="srcCountryRecCtrl.model.unknownCountryDetails" maxlength="1024" rows="3" data-ng-model-options="{ updateOn: 'blur'}"
                           class="form-control full-width" name="{{::srcCountryRecCtrl.unknownCountryId}}" required>
                     </textarea>
                 </div>

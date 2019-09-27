@@ -83,6 +83,7 @@
                 data1: null,
                 data2: null },
             units: "",
+            unitsHtml: "",
             otherUnits:"",
             per: "",
             perPresentationValue: 1,
@@ -90,6 +91,7 @@
             perPresUnits: "",
             perPresOtherUnits:"",
             perMeasUnits: "",
+            perMeasUnitsHtml: "",
             perMeasOtherUnits:"",
             isNano: "",
             nanoMaterial:"",
@@ -409,6 +411,7 @@
         };
         vm.unitsChange = function() {
             var found = false;
+            vm.ingModel.units = {};
             for(var i = 0; i < vm.unitsList.length; i++) {
                 var option =vm.unitsList[i];
                 if(option[vm.lang] === vm.ingModel.unitsHtml) {
@@ -417,13 +420,14 @@
                     break;
                 }
             }
-            if( ! found ){
+            if(! found ) {
                 vm.ingModel.unitsHtml = "";
-                vm.ingModel.units = {};
+                vm.ingModel.otherUnits = "";
             }
         }
         vm.perMeasUnitsChange = function() {
             var found = false;
+            vm.ingModel.perMeasUnits = {};
             for(var i = 0; i < vm.measureList.length; i++) {
                 var option =vm.measureList[i];
                 if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
@@ -432,9 +436,9 @@
                     break;
                 }
             }
-            if( ! found ){
+            if(! found){
                 vm.ingModel.perMeasUnitsHtml = "";
-                vm.ingModel.perMeasUnits = {};
+                vm.ingModel.perPresOtherUnits = {};
             }
         }
 
