@@ -110,8 +110,7 @@
                             <input id="{{::lifecycleCtrl.dateId}}" type="date" max='9999-12-31'
                                    name="{{::lifecycleCtrl.dateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
-                                   data-ng-required="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible"
-                                   class="form-control" required
+                                   class="form-control" required data-rule-dateISO="true"
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
                     </div>
