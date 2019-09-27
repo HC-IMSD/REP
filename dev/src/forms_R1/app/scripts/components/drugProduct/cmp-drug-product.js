@@ -340,8 +340,12 @@
          * determin to display schedule fieldset
          */
         vm.isVet = function () {
-            if (!vm.model || !vm.model.drugProduct || !vm.model.drugProduct.drugUse) return false;
-            return (vm.model.drugProduct.drugUse.id === "VET");
+            if (vm.model && vm.model.drugProduct && vm.model.drugProduct.drugUse && vm.model.drugProduct.drugUse.id === "VET") {
+                return true;
+            } else {
+                vm.model.drugProduct.speciesRecord = [];
+            }
+            return false;
         };
 
         /***

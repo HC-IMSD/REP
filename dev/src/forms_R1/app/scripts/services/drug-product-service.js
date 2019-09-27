@@ -25,7 +25,8 @@
         var yesValue = YES;
         var noValue = NO;
         // var xslName = XSL_PREFIX + "REP_PI_2_2.xsl";
-        var xslName = "REP_PI_3_0.xsl";
+        // var xslName = "REP_PI_3_0.xsl";
+        var xslName = "REP_PI_4_0.xsl";
 
         // Define the DrugProductService object
         function DrugProductService() {
@@ -55,7 +56,7 @@
                 enrolmentVersion: "0.00",
                 dateSaved: "",
                 //applicationType: "NEW",
-                softwareVersion: "3.0.1",
+                softwareVersion: "4.0.1",
                 xslFileName: xslName,
                 dataChecksum: "",
                 privacyStat:"",
@@ -142,6 +143,29 @@
                     dossierType: info.dossier_type._id,
                     productName: info.product_name,
                     properName: info.proper_name,
+                    clinicalTrial: {
+                        protocolNum: info.protocol_number,
+                        protocolTitle:info.protocol_title,
+                        composition: {
+                            fmpp: info.composition ? info.composition.female_paediatric === 'Y' : false,
+                            mpp: info.composition ? info.composition.male_paediatric === 'Y' : false,
+                            fmap: info.composition ? info.composition.female_adult === 'Y' : false,
+                            map: info.composition ? info.composition.male_adult === 'Y' : false
+                        },
+                        phase: {
+                            phase1Bio: info.phase ? info.phase.phase_1_bioequivalence === 'Y' : false,
+                            phase1Study:  info.phase ? info.phase.phase_1_healthy === 'Y' : false,
+                            phase1Other: info.phase ? info.phase.phase_1_other === 'Y' : false,
+                            phase2: info.phase ? info.phase.phase_2 === 'Y' : false,
+                            phase3: info.phase ? info.phase.phase_3 === 'Y' : false,
+                            phaseOther: info.phase ? info.phase.other === 'Y' : false,
+                            ctaPhaseOtherDetails: info.phase ? info.phase.other_details : ''
+                        },
+                        isRefuseInfo: info.is_reb_info_refused,
+                        hasDinNoc: info.has_din_noc,
+                        isCanMarket: info.is_canadian_market,
+                        ctaSrcCountryList: transformCtaCountryFromFile(info.cta_source_countries)
+                    },
                     manu: info.manufacturer === 'Y',
                     mailling: info.mailing === 'Y',
                     thisActivity: info.this_activity === 'Y',
@@ -173,8 +197,6 @@
                         propIndication: info.proposed_indication,
                         formulations: getFormulationList(info.formulation_group.formulation_details),//tab + grid +
                         appendixFourList: getAppendix4IngredientList(info.appendix4_group)
-
-
                     }
                     //contactList: getContactList(info.contact_record)
 
@@ -224,7 +246,7 @@
             baseModel.enrolment_version = jsonObj.enrolmentVersion;
             baseModel.date_saved = jsonObj.dateSaved;
             // baseModel.application_type = jsonObj.applicationType;
-            baseModel.software_version = "3.0.1"; //TODO: hard code or make a function, should be centrally available
+            baseModel.software_version = "4.0.1"; //TODO: hard code or make a function, should be centrally available
             baseModel.data_checksum = "";
 
             baseModel.company_id = jsonObj.companyID;
@@ -237,6 +259,34 @@
             };
             baseModel.product_name = jsonObj.productName;
             baseModel.proper_name = jsonObj.properName;
+
+            if(jsonObj.dossierType && jsonObj.dossierType === 'D26') {
+                baseModel.protocol_number = jsonObj.clinicalTrial.protocolNum;
+                baseModel.protocol_title = jsonObj.clinicalTrial.protocolTitle;
+
+                baseModel.composition = {
+                    female_paediatric: jsonObj.clinicalTrial.composition.fmpp === true ? 'Y' : 'N',
+                    male_paediatric: jsonObj.clinicalTrial.composition.mpp === true ? 'Y' : 'N',
+                    female_adult: jsonObj.clinicalTrial.composition.fmap === true ? 'Y' : 'N',
+                    male_adult: jsonObj.clinicalTrial.composition.map === true ? 'Y' : 'N'
+                };
+                baseModel.phase = {
+                    phase_1_bioequivalence: jsonObj.clinicalTrial.phase.phase1Bio === true ? 'Y' : 'N',
+                    phase_1_healthy: jsonObj.clinicalTrial.phase.phase1Study === true ? 'Y' : 'N',
+                    phase_1_other: jsonObj.clinicalTrial.phase.phase1Other === true ? 'Y' : 'N',
+                    phase_2: jsonObj.clinicalTrial.phase.phase2 === true ? 'Y' : 'N',
+                    phase_3: jsonObj.clinicalTrial.phase.phase3 === true ? 'Y' : 'N',
+                    other: jsonObj.clinicalTrial.phase.phaseOther === true ? 'Y' : 'N',
+                    other_details: jsonObj.clinicalTrial.phase.ctaPhaseOtherDetails
+                };
+                baseModel.is_reb_info_refused = jsonObj.clinicalTrial.isRefuseInfo;
+                baseModel.has_din_noc = jsonObj.clinicalTrial.hasDinNoc;
+                baseModel.is_canadian_market = jsonObj.clinicalTrial.isCanMarket;
+                if (jsonObj.clinicalTrial.ctaSrcCountryList && jsonObj.clinicalTrial.ctaSrcCountryList.length > 0) {
+                    baseModel.cta_source_countries = countryListToOutput(jsonObj.clinicalTrial.ctaSrcCountryList, currentLang);
+                }
+            }
+
             baseModel.manufacturer = jsonObj.manu === true ? 'Y' : 'N';
             baseModel.mailing = jsonObj.mailling === true ? 'Y' : 'N';
             baseModel.this_activity = jsonObj.thisActivity === true ? 'Y' : 'N';
@@ -840,6 +890,22 @@
             //return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
         };
 
+        function transformCtaCountryFromFile(countries) {
+            if (countries) {
+
+                var countryArray = [];
+                if (!(countries instanceof Array)) {
+                    //make it an array, case there is only one
+                    countryArray = [countries];
+                } else {
+                    countryArray = countries;
+                }
+                return getFormulationCountryList(countryArray);
+            } else {
+                return [];
+            }
+        }
+
         /**
          *
          * @param jsonObj the json object to convert
@@ -950,8 +1016,8 @@
                     record.specSubt = '';
                 }
                 record.isTreatFPA = jsonObj[i].is_treat_food_prod_animal;
-                record.withdrawalDays = jsonObj[i].withdrawal_days;
-                record.withdrawalHours = jsonObj[i].withdrawal_hours;
+                record.withdrawalDays = Number(jsonObj[i].withdrawal_days);
+                record.withdrawalHours = Number(jsonObj[i].withdrawal_hours);
                 record.timeCombined = jsonObj[i].withdrawal_days + ' days and ' + jsonObj[i].withdrawal_hours + ' hours';
                 speciesRecords.push(record);
             }
@@ -1132,8 +1198,9 @@
                 //dosage_form_group, static value
                 obj.dosage_form_group = {};
                 if (item.dosageForm) {
-                    var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
-                    var newDosage = splitArray[splitArray.length - 1];
+                    // var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
+                    // var newDosage = splitArray[splitArray.length - 1];
+                    var newDosage = item.dosageForm.id.substring(DossierLists.getDosageFormPrefix().length);
                     obj.dosage_form_group.dosage_form = {
                         _id: newDosage,
                         _label_en: item.dosageForm.en,
@@ -1157,7 +1224,7 @@
                 }
                 obj.country_group = {};
                 if (item.countryList && item.countryList.length > 0) {
-                    obj.country_group.country_manufacturer = formulationCountryListToOutput(item.countryList, currentLang);
+                    obj.country_group.country_manufacturer = countryListToOutput(item.countryList, currentLang);
                 }
                 if (item.activeIngList && item.activeIngList.length > 0) {
                     obj.formulation_ingredient = activeListToOutput(item.activeIngList);
@@ -1285,8 +1352,9 @@
             if (!unitsObj || !prefix) {
                 return "";
             }
-            var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
-            var newUnits = splitArray[splitArray.length - 1];
+            // var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
+            // var newUnits = splitArray[splitArray.length - 1];
+            var newUnits = unitsObj.id.substring(prefix.length);
             newObj._id = newUnits;
             newObj._label_en = unitsObj.en;
             newObj._label_fr = unitsObj.fr;
@@ -1359,8 +1427,9 @@
             angular.forEach(list, function (item) {
                 //check to see if this is an object. If not it was empty
                 if (angular.isObject(item.roa)) {
-                    var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
-                    var newRoa = splitArray[splitArray.length - 1];
+                    // var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
+                    // var newRoa = splitArray[splitArray.length - 1];
+                    var newRoa = item.roa.id.substring(DossierLists.getRoaPrefix().length);
                     //roa is a field with 2 attributes
                     var obj = {
                         "roa": {
@@ -1382,7 +1451,7 @@
          * @param list
          * @returns {Array}
          */
-        function formulationCountryListToOutput(list, lang) {
+        function countryListToOutput(list, lang) {
 
             var resultList = [];
             angular.forEach(list, function (item) {

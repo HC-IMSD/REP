@@ -27,20 +27,19 @@
                                        error-types="ctaCtrl.requiredOnly">
                     </cmp-error-message>
                 </label>
-                <textarea type="text" class="form-control full-width" id="{{::ctaCtrl.protocolTitleId}}"
+                <textarea class="form-control full-width" id="{{::ctaCtrl.protocolTitleId}}"
                         name="{{::ctaCtrl.protocolTitleId}}" maxlength="1000" rows="3"
-                        data-ng-model-options="{ debounce: $inherit}"
                         data-ng-model="ctaCtrl.ctaModel.protocolTitle" required>
                 </textarea>
             </div>
         </div>
         <div class="row col-xs-12 form-group">
-            <fieldset id="fs_composMissing_{{::$id}}">
+            <fieldset id="cta_composition_{{::$id}}">
                 <legend class="legend-rep required">{{::'CTA_COMPOSITION'|translate}}
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="ctaCtrl.composId"
                                        form-ref="ctaCtrl.ctaForm"
-                                       show-error="!ctaCtrl.isCompositionSelected() && ctaCtrl.showSummary"
+                                       show-error="!ctaCtrl.isCompositionSelected() && ctaCtrl.showDetailErrors"
                                        error-types="ctaCtrl.oneComposError"></cmp-error-message>
                 </legend>
                 <input type="checkbox" name="{{::ctaCtrl.composId}}"
@@ -95,12 +94,12 @@
             </fieldset>
         </div>
         <div class="row col-xs-12 form-group">
-            <fieldset id="fs_phaseMissing_{{::$id}}">
+            <fieldset id="cta_phase_{{::$id}}">
                 <legend class="legend-rep required">{{::'CTA_PHASE'|translate}}
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
                     <cmp-error-message field-name="ctaCtrl.phaseId"
                                        form-ref="ctaCtrl.ctaForm"
-                                       show-error="!ctaCtrl.isPhaseSelected() && ctaCtrl.showSummary"
+                                       show-error="!ctaCtrl.isPhaseSelected() && ctaCtrl.showDetailErrors"
                                        error-types="ctaCtrl.onePhaseError"></cmp-error-message>
                 </legend>
                 <input type="checkbox" name="{{::ctaCtrl.phaseId}}"
@@ -175,7 +174,7 @@
             </fieldset>
         </div>
         <div class="row" data-ng-if="ctaCtrl.isPhaseOther()">
-            <div class="col-xs-12 form-group" data-ng-class="{'has-error':ctaCtrl.ctaForm[ctaCtrl.phaseOtherId].$invalid}">
+            <div class="col-xs-12 form-group rep-margin-left" data-ng-class="{'has-error':ctaCtrl.ctaForm[ctaCtrl.phaseOtherId].$invalid}">
                 <label for="{{::ctaCtrl.phaseOtherId}}" class="required">
                     <span class="field-name">{{::'CTA_OTHER' |translate}}</span>
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
@@ -240,7 +239,7 @@
                 <header class="panel-heading">
                     <h3 class="panel-title">{{'CTA_COUNTRIES'|translate}}</h3>
                 </header>
-                <div class="panel-body">
+                <div class="panel-body" id="no_cta_country_{{::$id}}">
                     <input type="hidden" name="{{::ctaCtrl.noCountryId}}" id="{{::ctaCtrl.noCountryId}}"
                            aria-hidden="true" data-ng-model="ctaCtrl.noCountries" required/>
                     <cmp-country-list list-items="ctaCtrl.ctaModel.ctaSrcCountryList" with-unknown="false"

@@ -85,7 +85,7 @@
         };
         vm.alias={
             "no_country": {
-                "type": "elementnoid",
+                "type": "element",
                 "target": "list_country"
             },
             "no_roa": {
