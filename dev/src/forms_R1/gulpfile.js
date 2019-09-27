@@ -226,7 +226,6 @@ var rootFileNames = {
 
 var styleFilesNames = {
     rep: 'rep.css',
-    datepicker: 'angular-datepicker.css',
     select: 'select.min.css',
     select2Style: 'select2.min.css',
     select2Image: 'select2.png',
@@ -240,7 +239,6 @@ var styleFilesNames = {
 var libFileNames = {
     angularMin: "angular.min.js",
     ariaMin: "angular-aria.min.js",
-    angularDate: "angular-datepicker.min.js",
     resourceMin: "angular-messages.min.js",
     messagesMin: "angular-resource.min.js",
     sanitizeMin: "angular-sanitize.min.js",
@@ -343,7 +341,6 @@ var componentFolders = {
 //exclude custom styles only lib
 var stylesProd = [
     paths.styles + styleFilesNames.rep,
-    paths.styles + styleFilesNames.datepicker,
     paths.styles + styleFilesNames.select,
     paths.styles + styleFilesNames.select2Style,
     paths.styles + styleFilesNames.select2Image,
@@ -353,7 +350,6 @@ var stylesProd = [
 
 var libProd = [
     paths.lib + libFileNames.angularMin,
-    paths.lib + libFileNames.angularDate,
     paths.lib + libFileNames.resourceMin,
     paths.lib + libFileNames.sanitizeMin,
     paths.lib + libFileNames.translateMin,
@@ -1103,7 +1099,6 @@ pipes.createRootHtml = function (templatePath, valsObj, templateName, injectRoot
 
     var stylesArray = [
         paths.styles + styleFilesNames.rep,
-        paths.styles + styleFilesNames.datepicker,
         paths.styles + styleFilesNames.select,
         paths.styles + styleFilesNames.select2Style,
         paths.styles + styleFilesNames.select2Image
@@ -1434,7 +1429,6 @@ pipes.createProdRootHtml2 = function (srcPath, templatePath, metaObj, htmlPartia
                 }))
             .pipe(inject(gulp.src([
                     srcPath + paths.styles + "rep*.css",
-                    srcPath + paths.styles + styleFilesNames.datepicker,
                     srcPath + paths.styles + styleFilesNames.select,
                     srcPath + paths.styles + styleFilesNames.select2Style
                 ]),
