@@ -279,7 +279,8 @@
                                size="30" maxlength="30" data-ng-required="true"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterNameTxt"
                                value="lifecycleCtrl.lifecycleModel.requesterNameTxt"
-                               data-ng-blur="lifecycleCtrl.userChanged('requesterName')"
+                               data-ng-model-options="{ updateOn: 'blur'}"
+                               data-ng-change="lifecycleCtrl.userChanged('requesterName')"
                                list="contactsList" class="form-control full-width" />
                              </span>
                             </label>
@@ -291,7 +292,8 @@
                         <input type="text" id="{{::lifecycleCtrl.requesterNameId2}}"
                                name="{{::lifecycleCtrl.requesterNameId2}}" size="30" maxlength="30"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName2Txt"
-                               value="lifecycleCtrl.lifecycleModel.requesterName2Txt" data-ng-blur="lifecycleCtrl.userChanged('requesterName2')"
+                               value="lifecycleCtrl.lifecycleModel.requesterName2Txt"
+                               data-ng-model-options="{ updateOn: 'blur'}" data-ng-change="lifecycleCtrl.userChanged('requesterName2')"
                                list="contactsList" class="form-control full-width" />
                              </span>
                             </label>
@@ -304,7 +306,8 @@
                                name="{{::lifecycleCtrl.requesterNameId3}}" size="30" maxlength="30"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName3Txt"
                                value="lifecycleCtrl.lifecycleModel.requesterName3Txt"
-                               data-ng-blur="lifecycleCtrl.userChanged('requesterName3')"
+                               data-ng-model-options="{ updateOn: 'blur'}"
+                               data-ng-change="lifecycleCtrl.userChanged('requesterName3')"
                                list="contactsList"
                                class="form-control full-width" />
                              </span>

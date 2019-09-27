@@ -600,7 +600,7 @@
             tempRequesterName =  lifecycleObj.requesterName.id;
             lifecycleRec.requester_name = {
                 _id: lifecycleObj.requesterName.id,
-                __text: lifecycleObj.requesterName.text
+                __text: lifecycleObj.requesterName.text ? lifecycleObj.requesterName.text : lifecycleObj.requesterName[currentLang]
             };
         }
         else {
@@ -618,7 +618,7 @@
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
             lifecycleRec.requester_name2 = {
                 _id: lifecycleObj.requesterName2.id,
-                __text: lifecycleObj.requesterName2.text
+                __text: lifecycleObj.requesterName2.text ? lifecycleObj.requesterName2.text : lifecycleObj.requesterName2[currentLang]
             };
         }
         else {
@@ -637,7 +637,7 @@
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3.id;
             lifecycleRec.requester_name3 =  {
                 _id: lifecycleObj.requesterName3.id,
-                __text: lifecycleObj.requesterName3.text
+                __text: lifecycleObj.requesterName3.text ? lifecycleObj.requesterName3.text : lifecycleObj.requesterName3[currentLang]
             };
         }
         else {
