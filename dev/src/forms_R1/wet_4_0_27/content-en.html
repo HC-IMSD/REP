@@ -50,8 +50,20 @@
             window.onbeforeunload = function(){
                 return 'The form has been updated, do you want to stay on the page?';
             }
-            $('.modal-body').after('<div class="modal-footer"><button type="button" id="ftrClose" class="btn btn-sm btn-primary pull-left overlay-close" style="" title="Close (escape key)">Close<span class="wb-inv">(escape key)</span></button></div>');
-            $( "input[type=date]" ).trigger( "wb-init.wb-date" );
+            $('.modal-body:first-child').after('<div class="modal-footer"><button type="button" id="ftrClose" class="btn btn-sm btn-primary pull-left overlay-close" style="" title="Close (escape key)">Close<span class="wb-inv">(escape key)</span></button></div>');
+            setTimeout(setupDateFields, 1000);
+        }
+        function setupDateFields(){
+            initialDateInput();
+        }
+        function initialDateInput(){
+            if($( "input[type=date]" ).length == 0) {
+                setTimeout(setupDateFields, 200);
+                console.log("continue...");
+            } else {
+                $( "input[type=date]" ).trigger( "wb-init.wb-date" );
+                console.log("initialed");
+            }
         }
         function focusOnRow(e, alter) {
             var myTable = $(e).closest('table');

@@ -161,8 +161,8 @@
             getSalutationList: getSalValuesArray,
             getLanguages: getLanguagesValuesArray, //TODO make constants
             createInternalContacts: _createInternalContacts,
-            getInternalContacts: _getInternalContacts,
-            getInternalContactsWithoutOther: _getInternalContactsWithoutOther,
+            // getInternalContacts: _getInternalContacts,
+            // getInternalContactsWithoutOther: _getInternalContactsWithoutOther,
             getAdminSubType: _getAdminSubType
         };
         return service;
@@ -221,24 +221,24 @@
                 return _createInternalContacts();
         }
 
-        function _getInternalContactsWithoutOther() {
-            var deferred = $q.defer();
-            var contactsUrl = RELATIVE_FOLDER_DATA+"internalContacts.json";
-            if (!vm.internalContacts || vm.internalContacts.length === 0) {
-                $http.get(contactsUrl)
-                    .success(function (data, status, headers, config) {
-                        var newList = _createSortedArray(data, 'en');
-                        vm.internalContacts = newList;
-                        deferred.resolve(newList);
-                    })
-                    .error(function (data, status, headers, config) {
-                        deferred.reject(status);
-                    });
-            }else{
-                deferred.resolve(vm.internalContacts);
-            }
-            return deferred.promise;
-        }
+        // function _getInternalContactsWithoutOther() {
+        //     var deferred = $q.defer();
+        //     var contactsUrl = RELATIVE_FOLDER_DATA+"internalContacts.json";
+        //     if (!vm.internalContacts || vm.internalContacts.length === 0) {
+        //         $http.get(contactsUrl)
+        //             .success(function (data, status, headers, config) {
+        //                 var newList = _createSortedArray(data, 'en');
+        //                 vm.internalContacts = newList;
+        //                 deferred.resolve(newList);
+        //             })
+        //             .error(function (data, status, headers, config) {
+        //                 deferred.reject(status);
+        //             });
+        //     }else{
+        //         deferred.resolve(vm.internalContacts);
+        //     }
+        //     return deferred.promise;
+        // }
 
         function _createSortedArray(jsonList, lang) {
             var result = [];

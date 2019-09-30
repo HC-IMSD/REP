@@ -106,7 +106,7 @@
         //
         vm.$onInit = function () {
             _setIdNames();
-            loadContactData();
+            // loadContactData();
            // vm.selectActivityLeadList();
            // vm.selectActivityList();
         };
@@ -194,13 +194,13 @@
 
         };
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    vm.requesterList = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             vm.requesterList = data;
+        //             return true;
+        //         });
+        // }
         vm.retrieveUser = function(userName){
             for(var i=0; i< vm.requesterList.length; i++){
                 var user = vm.requesterList[i];
