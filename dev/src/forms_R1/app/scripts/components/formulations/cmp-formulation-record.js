@@ -64,6 +64,7 @@
         vm.noCountries="";
         vm.noROAValues="";
         vm.noActiveValues="";
+        vm.isDosageOther = false;
         vm.dosageFormList = DossierLists.getDosageFormList();
         vm.otherValue = DossierLists.getDosageOther();
         vm.yesNoList = DossierLists.getYesNoList();
@@ -263,16 +264,16 @@
          * @ngDoc determines if dosage Other should be shown
          * @returns {boolean}
          */
-        vm.isDosageOther = function () {
-
-            if(!vm.frmModel|| !vm.frmModel.dosageForm) return false;
-            if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
-                return true;
-            } else {
-                vm.frmModel.dosageFormOther = "";
-                return false;
-            }
-        };
+        // vm.isDosageOther = function () {
+        //
+        //     if(!vm.frmModel|| !vm.frmModel.dosageForm) return false;
+        //     if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
+        //         return true;
+        //     } else {
+        //         vm.frmModel.dosageFormOther = "";
+        //         return false;
+        //     }
+        // };
 
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
@@ -307,22 +308,30 @@
 
         vm.dosageFormChange = function() {
             var found = false;
+            vm.frmModel.dosageForm = {};
             for(var i = 0; i < vm.dosageFormList.length; i++) {
                 var option =vm.dosageFormList[i];
                 if(option[vm.lang] === vm.frmModel.dosageFormHtml) {
                     vm.frmModel.dosageForm = option;
+                    if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
+                        vm.isDosageOther = true;
+                    } else {
+                        vm.frmModel.dosageFormOther = "";
+                        vm.isDosageOther = false;
+                    }
                     found = true;
                     break;
                 }
             }
-            if( ! found ){
-                vm.frmModel.dosageForm = "";
+            if( ! found ) {
                 vm.frmModel.dosageFormHtml = "";
+                vm.frmModel.dosageFormOther = "";
+                vm.isDosageOther = false;
             }
         };
 
-        vm.updateDosageForm = function() {
-            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id) {
+            vm.updateDosageForm = function() {
+            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id != "") {
                 for (var i = 0; i < vm.dosageFormList.length; i++) {
                     var option = vm.dosageFormList[i];
                     if (option['id'] === vm.frmModel.dosageForm['id']) {

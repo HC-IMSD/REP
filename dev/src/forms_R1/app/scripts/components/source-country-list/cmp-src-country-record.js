@@ -60,7 +60,7 @@
         /**
          * Updates the display value for the object for summary display
          */
-        vm.countryChanged = function(){
+        vm.countryChanged=function(value){
             var found = false;
             for(var i = 0; i < vm.countries.length; i++){
                 if(vm.countries[i][vm.lang] === vm.model.display){
@@ -69,18 +69,18 @@
                     break;
                 }
             }
-            if( ! found ){
+            if(found){
+                vm.countryList = vm.updateCountryList();
+                vm.updateRecord();
+                vm.clearFilter($scope);
+            } else {
                 vm.model.display = "";
-                vm.model.country = {};
+                if (vm.model.country) {
+                    vm.model.country = {};
+                }
+                vm.onError();
             }
-            return found;
-            // if(found){
-            //     vm.countryList = vm.updateCountryList();
-            //     vm.updateRecord();
-            //     vm.clearFilter($scope);
-            // } else {
-            //     vm.onError();
-            // }
+
         };
 
 
@@ -127,7 +127,7 @@
         };
         vm.clearFilter = function($scope){
             $scope.srcCountryFilter = "";
-        }
+        };
 
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
