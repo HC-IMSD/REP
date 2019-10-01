@@ -207,6 +207,17 @@
 
         vm.updateDossierTypeState = function () {
                vm.selectedDossierType = vm.transactionModel.ectd.dossierType ;
+               if(vm.selectedDossierType == 'D26'){
+                   vm.transactionModel.isPriority = '';
+                   vm.transactionModel.isNoc = '';
+                   vm.transactionModel.isAdminSub = '';
+                   vm.transactionModel.isFees = '';
+               } else {
+                   vm.transactionModel.ectd.productProtocol = '';
+                   if(vm.selectedDossierType == 'D24') {
+                       vm.transactionModel.isFees = '';
+                   }
+               }
         }
 
         function pharmaceuticalDossierType() {
@@ -252,13 +263,13 @@
                 });
         }
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    vm.requesterList = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             vm.requesterList = data;
+        //             return true;
+        //         });
+        // }
 
         // function loadUserListData() {
         //     getContactLists.getInternalContactsWithoutOther()

@@ -63,7 +63,7 @@
         vm.descriptionChangeVisible = false;
         vm.versionVisible = false;
         vm.ectd = false;
-        vm.dossierType = '';
+        // vm.dossierType = '';
         vm.popOpened = false;
         vm.alerts = [false, false];
         vm.dateOptions = {
@@ -93,7 +93,7 @@
         //
         vm.$onInit = function () {
             _setIdNames();
-            loadContactData();
+            // loadContactData();
            // vm.selectActivityLeadList();
            // vm.selectActivityList();
         };
@@ -266,17 +266,33 @@
                 vm.activityTypeList=[];
                 return;
             }
+            if(! vm.activityList || vm.activityList.length < 1){
+                vm.activityList= TransactionLists.getActivityTypes();
+            }
             switch(vm.lifecycleModel.activityLead){
                 case  TransactionLists.getBiologicalLeadValue():
+
+                    if(vm.biolList.length == 0){
+                        vm.biolList = ActivityFormFilterService.getBiolRAList(vm.activityList);
+                    }
                     vm.activityTypeList= vm.biolList;
                     break;
                 case  TransactionLists.getPharmaLeadValue():
+                    if(vm.pharmaList.length == 0){
+                        vm.pharmaList = ActivityFormFilterService.getPharmaRAList(vm.activityList)
+                    }
                     vm.activityTypeList= vm.pharmaList;
                     break;
                 case  TransactionLists.getPostMarketLeadValue():
+                    if(vm.postMarketList.length == 0){
+                        vm.postMarketList = ActivityFormFilterService.getPostMarketRAList(vm.activityList);
+                    }
                     vm.activityTypeList= vm.postMarketList;
                     break;
                 case  TransactionLists.getConsumHealthLeadValue():
+                        if(vm.consumHealthList.length == 0){
+                            vm.consumHealthList = ActivityFormFilterService.getConsumHealthList(vm.activityList);
+                        }
                     vm.activityTypeList= vm.consumHealthList;
                     break;
                 default:
@@ -461,7 +477,11 @@
                     break;
 
                 default:
-                    vm.descriptionList = "";
+                    try {
+                        vm.descriptionList = vm.activityTypeMapping[value];
+                    }catch(e) {
+                        vm.descriptionList = "";
+                    }
                     break;
 
             }
@@ -480,7 +500,7 @@
          */
         vm.setDetailsState = function () {
             var value = vm.lifecycleModel.descriptionValue;
-            if (!value) {
+            if (!vm.lifecycleModel.activityType.id) {
                 vm.descriptionList = [];
                 return;
             }
