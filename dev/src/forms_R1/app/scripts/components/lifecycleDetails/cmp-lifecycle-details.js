@@ -40,9 +40,9 @@
                 updateErrorSummary:'&' //update the parent error summary
             }
         });
-    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', 'getContactLists','$filter', '$translate','$scope'];
+    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', '$filter', '$translate','$scope'];
 
-    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, getContactLists, $filter, $translate, $scope) {
+    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, $filter, $translate, $scope) {
         var vm = this;
         vm.activityList=[];
         vm.activityTypeList=[];
@@ -53,7 +53,7 @@
         vm.sequenceList = [];
         vm.descriptionList = [];
         vm.requesterList =[];
-        vm.lifecycleModel = {};
+        vm.lifecycleModel = vm.lifecycleRecord;
         vm.endDateVisible = false;
         vm.yearVisible = false;
         vm.yearChangeVisible = false;
@@ -132,7 +132,7 @@
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
                     vm.lifecycleModel.sequence = vm.lifecycleRecord.sequence;
-                    //_updateLocalModel(vm.lifecycleRecord);
+                    _updateLocalModel(vm.lifecycleRecord);
                 }
             }
             if(changes.showErrorSummary){
@@ -177,13 +177,13 @@
 
         };
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    vm.requesterList = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             vm.requesterList = data;
+        //             return true;
+        //         });
+        // }
         vm.retrieveUser = function(userName){
             for(var i=0; i< vm.requesterList.length; i++){
                 var user = vm.requesterList[i];
@@ -208,7 +208,7 @@
         };
 
         function _updateLocalModel(record) {
-            vm.lifecycleModel = angular.copy(record);
+            vm.lifecycleModel = record; //angular.copy(record);
             convertToDate();
             vm.selectActivityLeadList();
             vm.setSequenceList();
