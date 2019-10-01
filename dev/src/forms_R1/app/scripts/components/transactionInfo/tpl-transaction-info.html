@@ -297,21 +297,14 @@
                             <h3 class="panel-title">{{::'LIFECYCLE_TITLE' |translate}}</h3>
                         </header>
                         <div class="panel-body">
-                            <div>
-                                <cmp-lifecycle-list records="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
-                                                    is-ectd="transInfoCtrl.isEctd"
-                                                    is-final="transInfoCtrl.isFinal"
-                                                    get-dossier-type ="transInfoCtrl.selectedDossierType"
-                                                    deprecate-sequence="transInfoCtrl.subtractSequence()"
-                                                    show-error-summary="transInfoCtrl.showSummary"
-                                                    parent-dirty="transInfoCtrl.$dirty"
-                                                    is-file-loaded="transInfoCtrl.isFileLoaded"
-                                                    set-sequence-value="transInfoCtrl.setSequence(start)"
-                                                    sequence-updated="transInfoCtrl.sequenceChange"
-                                                    get-current-sequence="transInfoCtrl.getCurrentSequence()"
-                                                    get-new-transaction="transInfoCtrl.getNewTransaction()">
-                                </cmp-lifecycle-list>
-                            </div>
+                            <cmp-lifecycle-details lifecycle-record="transInfoCtrl.transactionModel.ectd.lifecycleRecord"
+                                                   is-detail-valid=""
+                                                   activity-types="lifeListCtrl.activityTypes"
+                                                   is-ectd="transInfoCtrl.transactionModel.ectd.ectdValue"
+                                                   dossier-type ="transInfoCtrl.transactionModel.ectd.dossierType"
+                                                   show-error-summary="transInfoCtrl.showSummary"
+                                        >
+                            </cmp-lifecycle-details>
                         </div>
                     </section>
                 <div class="row">
@@ -319,13 +312,16 @@
                         <label for="projectManager1" class="full-width">
                             <span class="field-name">1.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
-                        <input type="text" id="projectManager1" name="projectManager1" data-ng-model="transInfoCtrl.transactionModel.projectManager1" value="transInfoCtrl.transactionModel.projectManager1" list="contactsList" class="form-control full-width" />
+                        <input type="text" id="projectManager1" name="projectManager1" data-ng-model="transInfoCtrl.transactionModel.projectManager1"
+                               value="transInfoCtrl.transactionModel.projectManager1"
+                               class="form-control full-width" />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="projectManager2" class="full-width">
                             <span class="field-name">2.&nbsp;{{::"PROJ_MANAGER_NAME" |translate}}</span>
                         </label>
-                        <input type="text" id="projectManager2" name="projectManager2" data-ng-model="transInfoCtrl.transactionModel.projectManager2" value="transInfoCtrl.transactionModel.projectManager1" list="contactsList" class="form-control full-width" />
+                        <input type="text" id="projectManager2" name="projectManager2" data-ng-model="transInfoCtrl.transactionModel.projectManager2" value="transInfoCtrl.transactionModel.projectManager1"
+                               class="form-control full-width" />
                     </div>
                 </div>
                 <div class="row">

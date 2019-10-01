@@ -30,7 +30,7 @@
         this.userList =[];
         this.isFinal = false;
         this.$onInit = function () {
-            loadContactData();
+            // loadContactData();
             loadUserListData();
         };
 
@@ -44,21 +44,21 @@
             this.xslFileName = "REP_RT_3_0.xsl";
         }
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    this.baseRequesters = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             this.baseRequesters = data;
+        //             return true;
+        //         });
+        // }
 
-        function loadUserListData() {
-            getContactLists.getInternalContactsWithoutOther()
-                .then(function (data) {
-                    this.userList = data;
-                    return true;
-                });
-        }
+        // function loadUserListData() {
+        //     getContactLists.getInternalContactsWithoutOther()
+        //         .then(function (data) {
+        //             this.userList = data;
+        //             return true;
+        //         });
+        // }
 
         TransactionService.prototype = {
             _default: {},
@@ -312,21 +312,21 @@
                 this.currSequence--;
             },
             _mapLifecycleList: function (jsonObj) {
-                var result = [];
-                this.currSequence=0; //reset the starting
-                if (!jsonObj) return result;
+                // var result = [];
+                // this.currSequence=0; //reset the starting
+                if (!jsonObj) return {};
                 if (!(jsonObj instanceof Array)) {
                     //make it an array, case there is only one record
-                    jsonObj = [jsonObj]
+                    return _transformLifecycleRecFromFileObj(jsonObj, $filter, TransactionLists) ;
                 }
-                for (var i = 0; i < jsonObj.length; i++) {
-                    var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
+                // for (var i = 0; i < jsonObj.length; i++) {
+                //     var record = _transformLifecycleRecFromFileObj(jsonObj[i], $filter, TransactionLists);
                     //update the start value;
-                    this._setNextSequenceOnLoad(parseInt(record.sequence));
-                    result.push(record);
-                }
+                    // this._setNextSequenceOnLoad(parseInt(record.sequence));
+                    // result.push(record);
+                // }
                 //this.setSequenceNumber(jsonObj.length);
-                return result
+                return _transformLifecycleRecFromFileObj(jsonObj[0], $filter, TransactionLists);
             },
             _setNextSequenceOnLoad: function (sequence) {
 
@@ -350,14 +350,14 @@
 
 
                 for (var i = 0; i < jsonObj.length; i++) {
-                    if (jsonObj[i].isSaved) {
+                    // if (jsonObj[i].isSaved) {
                         var record = _mapLifecycleRecToOutput($translate, jsonObj[i], ENGLISH, FRENCH);
                         if (jsonObj.length === 1) {
                             return (record);
                         }
                         result.push(record);
                     }
-                }
+                // }
                 return result;
             },
 
@@ -378,8 +378,10 @@
             },
             createFeeDetails: function () {
                 return _createFeeDetails(NO);
+            },
+            getDefaultLifecycleRecord: function () {
+                return _createLifeCycleModel();
             }
-
         };
         TransactionService.prototype._mapFeeDetailsToOutput = function (feeObj) {
             /**
@@ -600,7 +602,7 @@
             tempRequesterName =  lifecycleObj.requesterName.id;
             lifecycleRec.requester_name = {
                 _id: lifecycleObj.requesterName.id,
-                __text: lifecycleObj.requesterName.text ? lifecycleObj.requesterName.text : lifecycleObj.requesterName[currentLang]
+                __text: lifecycleObj.requesterName.text
             };
         }
         else {
@@ -608,7 +610,7 @@
             if(lifecycleObj.requesterName != ""){
                 lifecycleRec.requester_name = {
                     _id: '',
-                    __text: lifecycleObj.requesterName
+                    __text: lifecycleObj.requesterName.text ? lifecycleObj.requesterName.text : lifecycleObj.requesterName
                 };
             } else {
                 lifecycleRec.requester_name = {};
@@ -618,7 +620,7 @@
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName2.id;
             lifecycleRec.requester_name2 = {
                 _id: lifecycleObj.requesterName2.id,
-                __text: lifecycleObj.requesterName2.text ? lifecycleObj.requesterName2.text : lifecycleObj.requesterName2[currentLang]
+                __text: lifecycleObj.requesterName2.text
             };
         }
         else {
@@ -626,7 +628,7 @@
                 tempRequesterName =   tempRequesterName + '\r\n' + lifecycleObj.requesterName2;
                 lifecycleRec.requester_name2 = {
                     _id: '',
-                    __text: lifecycleObj.requesterName2
+                    __text: lifecycleObj.requesterName2.text ? lifecycleObj.requesterName2.text : lifecycleObj.requesterName2
                 };
             } else {
                 lifecycleRec.requester_name2 = {};
@@ -637,7 +639,7 @@
             tempRequesterName =  tempRequesterName + '\r\n' + lifecycleObj.requesterName3.id;
             lifecycleRec.requester_name3 =  {
                 _id: lifecycleObj.requesterName3.id,
-                __text: lifecycleObj.requesterName3.text ? lifecycleObj.requesterName3.text : lifecycleObj.requesterName3[currentLang]
+                __text: lifecycleObj.requesterName3.text
             };
         }
         else {
@@ -645,7 +647,7 @@
                 tempRequesterName = tempRequesterName + '\r\n' + lifecycleObj.requesterName3;
                 lifecycleRec.requester_name3 = {
                     _id: '',
-                    __text: lifecycleObj.requesterName3
+                    __text: lifecycleObj.requesterName3.text ? lifecycleObj.requesterName3.text : lifecycleObj.requesterName3
                 };
             } else {
                 lifecycleRec.requester_name3 = {};
@@ -857,7 +859,7 @@
             "requesterNameTxt":"",
             "requesterName2Txt":"",
             "requesterName3Txt":"",
-            "isSaved": false
+            "isSaved": true
         };
         //TODO get next sequence number
         return defaultRecord;
@@ -930,7 +932,7 @@
                 dossierId: "",
                 dossierType: "",
                 productName: "",
-                lifecycleRecord: []
+                lifecycleRecord: _createLifeCycleModel()
             },
           //  isSolicited: "",
           //  solicitedRequesterReord: [],

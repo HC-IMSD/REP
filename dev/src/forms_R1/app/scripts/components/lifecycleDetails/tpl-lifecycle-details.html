@@ -1,10 +1,10 @@
 <div class="container-fluid">
     <ng-form name="lifecycleCtrl.lifecycleDetailsForm" novalidate="novalidate" id="{{::lifecycleCtrl.lifecycleDetailsFormId}}">
-        <cmp-error-summary form-ref="lifecycleCtrl.lifecycleDetailsForm"
-                           form-preamble="LIFE_REC"
-                           name-suffix="lifecycleCtrl.lifecycleDetailsForm" set-heading-level="h3" form-id="lifecycleCtrl.lifecycleDetailsFormId"
-                           make-focused="lifecycleCtrl.focusSummary" show-errors="lifecycleCtrl.showSummary"
-                           update-errors="lifecycleCtrl.updateSummary"></cmp-error-summary>
+        <!--<cmp-error-summary form-ref="lifecycleCtrl.lifecycleDetailsForm"-->
+                           <!--form-preamble="LIFE_REC"-->
+                           <!--name-suffix="lifecycleCtrl.lifecycleDetailsForm" set-heading-level="h3" form-id="lifecycleCtrl.lifecycleDetailsFormId"-->
+                           <!--make-focused="lifecycleCtrl.focusSummary" show-errors="lifecycleCtrl.showSummary"-->
+                           <!--update-errors="lifecycleCtrl.updateSummary"></cmp-error-summary>-->
         <div>
             <div>
                 <fieldset>
@@ -266,7 +266,7 @@
                         </sup>
                         </p>
                         <div class="form-group col-md-4 typeahead-demo"
-                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForml[lifecycleCtr.requesterNameId].$invalid}">
+                             data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.requesterNameId].$invalid}">
                             <label for="{{::lifecycleCtrl.requesterNameId}}" class="required full-width">
                                 <span class="field-name">1. {{'REQUESTER_NAME'|translate}}</span>
                                 <strong class="required">{{'REQUIRED' |translate}}</strong>
@@ -279,9 +279,8 @@
                                size="30" maxlength="30" data-ng-required="true"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterNameTxt"
                                value="lifecycleCtrl.lifecycleModel.requesterNameTxt"
-                               data-ng-model-options="{ updateOn: 'blur'}"
-                               data-ng-change="lifecycleCtrl.userChanged('requesterName')"
-                               list="contactsList" class="form-control full-width" />
+                               data-ng-blur="lifecycleCtrl.userChanged('requesterName')"
+                               class="form-control full-width" />
                              </span>
                             </label>
                         </div>
@@ -292,9 +291,8 @@
                         <input type="text" id="{{::lifecycleCtrl.requesterNameId2}}"
                                name="{{::lifecycleCtrl.requesterNameId2}}" size="30" maxlength="30"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName2Txt"
-                               value="lifecycleCtrl.lifecycleModel.requesterName2Txt"
-                               data-ng-model-options="{ updateOn: 'blur'}" data-ng-change="lifecycleCtrl.userChanged('requesterName2')"
-                               list="contactsList" class="form-control full-width" />
+                               value="lifecycleCtrl.lifecycleModel.requesterName2Txt" data-ng-blur="lifecycleCtrl.userChanged('requesterName2')"
+                               class="form-control full-width" />
                              </span>
                             </label>
                         </div>
@@ -306,22 +304,10 @@
                                name="{{::lifecycleCtrl.requesterNameId3}}" size="30" maxlength="30"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName3Txt"
                                value="lifecycleCtrl.lifecycleModel.requesterName3Txt"
-                               data-ng-model-options="{ updateOn: 'blur'}"
-                               data-ng-change="lifecycleCtrl.userChanged('requesterName3')"
-                               list="contactsList"
+                               data-ng-blur="lifecycleCtrl.userChanged('requesterName3')"
                                class="form-control full-width" />
                              </span>
                             </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="btn-group-sm col-xs-12">
-                            <button class="btn btn-primary"
-                                    name="saveLifecycleRec_{{::$id}}"
-                                    id="saveLifecycleRec_{{::$id}}"
-                                    data-ng-click="lifecycleCtrl.updateLivecycleModel()"
-                                    data-ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}
-                            </button>
                         </div>
                     </div>
                 </fieldset>

@@ -8,7 +8,6 @@
     angular
         .module('transactionInfo',
             ['lifecycleList',
-                'requesterListModule',
                 'filterLists',
                 'hpfbConstants',
                 'ui.bootstrap',
@@ -51,12 +50,13 @@
                 sequenceUpdated:'<',
                 getCurrentSequence:'&',
                 showErrorSummary: '<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                defaultLifecycleRecord: '&'
             }
         });
 
     transactionInfoCtrl.$inject = ['$scope', 'OTHER', 'YES', 'NO', 'getContactLists', 'getRoleLists', 'ENGLISH', 'FRENCH'];
-    function transactionInfoCtrl($scope,OTHER,YES,NO,getContactLists,getRoleLists,ENGLISH,FRENCH) {
+    function transactionInfoCtrl($scope,OTHER,YES,NO,getContactLists,getRoleLists, ENGLISH,FRENCH) {
         var vm = this;
         vm.ngModelOptSetting = {updateOn: 'blur'};
         vm.transactionModel = {
@@ -99,7 +99,7 @@
             vm.updateDossierTypeState();
            // vm.setSolicitedState();
             loadAdminSubData();
-            loadUserListData();
+            // loadUserListData();
             vm.finalState=false;
             vm.displayResetBtn = false;
         };
@@ -260,13 +260,13 @@
                 });
         }
 
-        function loadUserListData() {
-            getContactLists.getInternalContactsWithoutOther()
-                .then(function (data) {
-                    vm.userList = data;
-                    return true;
-                });
-        }
+        // function loadUserListData() {
+        //     getContactLists.getInternalContactsWithoutOther()
+        //         .then(function (data) {
+        //             vm.userList = data;
+        //             return true;
+        //         });
+        // }
 
 
         /**
@@ -352,7 +352,8 @@
                 vm.setAdminSubmission();
                // vm.transactionModel.isSolicited = "";
                // vm.setSolicitedState();
-                vm.transactionModel.ectd.lifecycleRecord =[]; //22 - Transaction Details Record
+                vm.transactionModel.ectd.lifecycleModel ={}; //22 - Transaction Details Record
+                vm.transactionModel.ectd.lifecycleRecord = angular.copy(vm.defaultLifecycleRecord());
                 vm.transactionModel.projectManager1 = ""; //43 - projectManager1
                 vm.transactionModel.projectManager2 = ""; // 44 -projectManager2
                 vm.transactionModel.isFees = ""; // 46 - fee
