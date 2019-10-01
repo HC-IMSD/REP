@@ -252,13 +252,13 @@
                 });
         }
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    vm.requesterList = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             vm.requesterList = data;
+        //             return true;
+        //         });
+        // }
 
         // function loadUserListData() {
         //     getContactLists.getInternalContactsWithoutOther()
