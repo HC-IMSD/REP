@@ -53,13 +53,15 @@
             $('.modal-body:first-child').after('<div class="modal-footer"><button type="button" id="ftrClose" class="btn btn-sm btn-primary pull-left overlay-close" style="" title="Close (escape key)">Close<span class="wb-inv">(escape key)</span></button></div>');
             setTimeout(setupDateFields, 1000);
         }
+        var maxTimes = 5;
         function setupDateFields(){
             initialDateInput();
         }
         function initialDateInput(){
-            if($( "input[type=date]" ).length == 0) {
+            if($( "input[type=date]" ).length == 0 && maxTimes > 0) {
                 setTimeout(setupDateFields, 200);
                 console.log("continue...");
+                maxTimes --;
             } else {
                 $( "input[type=date]" ).trigger( "wb-init.wb-date" );
                 console.log("initialed");

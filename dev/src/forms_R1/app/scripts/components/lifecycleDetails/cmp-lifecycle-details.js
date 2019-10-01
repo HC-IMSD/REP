@@ -11,8 +11,7 @@
             'ui.bootstrap',
             'activityFormFilterModule',
             'errorSummaryModule',
-            'errorMessageModule',
-            '720kb.datepicker'
+            'errorMessageModule'
         ]);
 })();
 

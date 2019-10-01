@@ -457,7 +457,7 @@
                         <div class="row">
                             <cmp-contact-details contact-record="transInfoCtrl.transactionModel.activityContact"
                                                  update-error-summary="transInfoCtrl.updateErrorSummary()"
-                                                 fax-mandatory="transInfoCtrl.transactionModel.ectd.dossierType == 'D20' || transInfoCtrl.transactionModel.ectd.dossierType == 'D21'"
+                                                 fax-mandatory="transInfoCtrl.faxMandatory()"
                                                  is-amend="true" show-errors="transInfoCtrl.showErrors()">
                             </cmp-contact-details>
                         </div>
