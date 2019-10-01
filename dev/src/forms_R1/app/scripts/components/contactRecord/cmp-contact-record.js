@@ -206,6 +206,7 @@
                 // vm.contactModel.isDetailValid=true;
                 vm.isDetailValid({state: true});
                 vm.contactRecForm.$setPristine();
+                vm.contactRecForm.$submitted();
                 vm.onUpdate({contact: vm.contactModel});
                 vm.showSummary = false;
                 vm.contactModel.focusOnFirstName = false;

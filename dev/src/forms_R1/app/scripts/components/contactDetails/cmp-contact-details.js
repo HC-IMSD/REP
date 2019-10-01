@@ -27,7 +27,7 @@
                 onUpdate: '&', //should be removed not used, deprecated
                 isAmend: '<',
                 showErrors: '&',
-                faxMandatory:'@',
+                faxMandatory:'<',
                 updateErrorSummary:'&',
                 fieldSuffix:'<'
             }

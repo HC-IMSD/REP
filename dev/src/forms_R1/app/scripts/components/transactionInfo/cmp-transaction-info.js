@@ -220,6 +220,12 @@
                    }
                }
         }
+        vm.faxMandatory = function () {
+            if(vm.selectedDossierType == 'D21' || vm.selectedDossierType == 'D22'){
+                return true;
+            }
+            return false;
+        }
 
         function pharmaceuticalDossierType() {
             return vm.transactionModel.ectd.dossierType === 'D21';
