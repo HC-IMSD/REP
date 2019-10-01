@@ -40,12 +40,6 @@
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.oneComposError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
         vm.onePhaseError = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
-        vm.alias={
-            "no_cta_country": {
-                "type": "element",
-                "target": "list_cta_country"
-            }
-        };
 
         vm.$onInit = function () {
             ///do init

@@ -11,8 +11,7 @@
             'ui.bootstrap',
             'activityFormFilterModule',
             'errorSummaryModule',
-            'errorMessageModule',
-            '720kb.datepicker'
+            'errorMessageModule'
         ]);
 })();
 
@@ -41,9 +40,9 @@
                 updateErrorSummary:'&' //update the parent error summary
             }
         });
-    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', 'getContactLists','$filter', '$translate','$scope'];
+    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', '$filter', '$translate','$scope'];
 
-    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, getContactLists, $filter, $translate, $scope) {
+    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, $filter, $translate, $scope) {
         var vm = this;
         vm.activityList= TransactionLists.getActivityTypes();
         vm.selfLifeUnitsList = TransactionLists.getShelfLifeUnitsList();

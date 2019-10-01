@@ -184,7 +184,7 @@
                             </sup>
                         </h3>
                     </header>
-                    <div class="panel-body">
+                    <div class="panel-body" id="list_country_{{::$id}}">
                         <input type="hidden" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
                                  aria-hidden="true" data-ng-model="formulRecCtrl.noCountries" required/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" with-unknown="false"

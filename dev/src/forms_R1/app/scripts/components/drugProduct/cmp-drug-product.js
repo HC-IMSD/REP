@@ -116,6 +116,10 @@
             "disi_type_missing": {
                 "type": "fieldset",
                 "parent": "fs_disi_type_missing"
+            },
+            "no_cta_country": {
+                "type": "element",
+                "target": "list_cta_country"
             }
         };
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];

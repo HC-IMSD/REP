@@ -2,7 +2,7 @@
       <!--input type="text" required data-ng-show="false" name="{{::countryListCtrl.noCountryId}}" id="{{::countryListCtrl.noCountryId}}"
                                aria-hidden="true" data-ng-model="countryListCtrl.noCountries"/-->
     <cmp-expanding-table pre-id="country_list_" reset-to-collapsed="countryListCtrl.resetToCollapsed"
-                         list-items="countryListCtrl.model.list" id="list_country_{{::$id}}"
+                         list-items="countryListCtrl.model.list" id="country_table_{{::$id}}"
                          column-def="countryListCtrl.columnDef" select-record="countryListCtrl.selectRecord"
                          is-required-record="countryListCtrl.requiredFlag"
                          disable-selection="countryListCtrl.disableAddButton()">

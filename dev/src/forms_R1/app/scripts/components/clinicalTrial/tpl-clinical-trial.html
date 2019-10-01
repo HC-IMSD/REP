@@ -43,7 +43,7 @@
                                        error-types="ctaCtrl.oneComposError"></cmp-error-message>
                 </legend>
                 <input type="checkbox" name="{{::ctaCtrl.composId}}"
-                       id="{{::ctaCtrl.composId}}" required data-ng-model="ctaCtrl.oneComposSelected"
+                       id="composId" required data-ng-model="ctaCtrl.oneComposSelected"
                        hidden />
                 <div>
                     <div class="row">
@@ -103,7 +103,7 @@
                                        error-types="ctaCtrl.onePhaseError"></cmp-error-message>
                 </legend>
                 <input type="checkbox" name="{{::ctaCtrl.phaseId}}"
-                       id="{{::ctaCtrl.phaseId}}" required data-ng-model="ctaCtrl.onePhaseSelected"
+                       id="phaseId" required data-ng-model="ctaCtrl.onePhaseSelected"
                        hidden />
                 <div>
                     <div class="row">
@@ -239,7 +239,7 @@
                 <header class="panel-heading">
                     <h3 class="panel-title">{{'CTA_COUNTRIES'|translate}}</h3>
                 </header>
-                <div class="panel-body" id="no_cta_country_{{::$id}}">
+                <div class="panel-body" id="list_cta_country_{{::$id}}">
                     <input type="hidden" name="{{::ctaCtrl.noCountryId}}" id="{{::ctaCtrl.noCountryId}}"
                            aria-hidden="true" data-ng-model="ctaCtrl.noCountries" required/>
                     <cmp-country-list list-items="ctaCtrl.ctaModel.ctaSrcCountryList" with-unknown="false"
