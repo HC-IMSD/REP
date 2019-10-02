@@ -43,10 +43,34 @@
         document.write(wet.builder.refTop({
             cdnEnv: "prod" //jqueryEnv:false
         }));
+        function gotoForm(){
+            setTimeout(function(){
+                window.location.href = "#main";
+            }, 1000);
+        }
+        function focusOnRow(e) {
+            var myTable = $(e).closest('table');
+            var firstTr = $(myTable).find('tr');
+            if (firstTr.length > 0) {
+                $(firstTr[0]).focus();
+            } else {
+                $(myTable).focus();
+            }
+        }
+        function focusOnTable(node, idStartWith){
+            var myTable = null;
+            if(node != null){
+                myTable = $(node).find('table[id^=' + e + ']')[0];
+            }
+            if(myTable != null){
+                alert($(myTable).attr('id'));
+                $(myTable).focus();
+            }
+        }
     </script>
 </head>
 
-<body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;">
+<body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;" onload="gotoForm()">
 <div id="def-top">
     <!-- Write closure fall-back static file -->
     <!-- ./wet_4_0_27/cdts/static/top-fr.html-->

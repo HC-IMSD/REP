@@ -43,6 +43,11 @@
         document.write(wet.builder.refTop({
             cdnEnv: "prod" //jqueryEnv:false
         }));
+        function gotoForm(){
+            setTimeout(function(){
+                window.location.href = "#main";
+                }, 1000);
+        }
         function focusOnRow(e) {
             var myTable = $(e).closest('table');
             var firstTr = $(myTable).find('tr');
@@ -65,7 +70,7 @@
     </script>
 </head>
 
-<body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;">
+<body vocab="http://schema.org/" typeof="WebPage" style="min-width:543px;" onload="gotoForm()">
 <div id="def-top">
     <!-- Write closure fall-back static file -->
     <!-- ./wet_4_0_27/cdts/static/top-en.html-->
