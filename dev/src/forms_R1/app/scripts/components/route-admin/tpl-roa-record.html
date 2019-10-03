@@ -13,6 +13,7 @@
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"
                                data-ng-model="roaRecCtrl.model.display" value="roaRecCtrl.model.display"
+                               data-ng-model-options="{ updateOn: 'blur'}"
                                list="roaFormList"
                                required class="form-control full-width" data-focus-if="roaRecCtrl.isFocus"/>
                         <datalist id="roaFormList" class="rep-selectize-dropdown rep-selectize-font">
@@ -51,8 +52,6 @@
                         <input type="text" id="{{::roaRecCtrl.unknownRoaId}}" class="form-control"
                                name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40"
                                data-ng-model="roaRecCtrl.model.otherRoaDetails" required/>
-
-
                     </label>
                 </div>
             </div>

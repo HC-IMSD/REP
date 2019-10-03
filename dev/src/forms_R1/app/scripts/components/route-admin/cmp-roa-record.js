@@ -77,22 +77,13 @@
          */
         vm.saveRecord = function(){
             var found = false;
+            vm.model.roa = "";
             for(var i = 0; i < vm.roaList.length; i++) {
                 var option =vm.roaList[i];
                 if(option[vm.lang] === vm.model.display) {
                     vm.model.roa = option;
                     found = true;
                     break;
-                }
-            }
-            if( ! found ){
-                for(var i = 0; i < vm.roaList.length; i++) {
-                    var option =vm.roaList[i];
-                    if(option['id'] === vm.model.display) {
-                        vm.model.display = option[vm.lang];
-                        found = true;
-                        break;
-                    }
                 }
             }
             if(found){
@@ -127,7 +118,7 @@
 
         vm.clearFilter = function($scope){
             $scope.roaFilter = "";
-        }
+        };
         function _setIdNames() {
             var scopeId = "_" + $scope.$id;
             vm.roaId="roa_lbl" + scopeId;

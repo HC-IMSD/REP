@@ -60,11 +60,11 @@
         function initialDateInput(){
             if($( "input[type=date]" ).length == 0 && maxTimes > 0) {
                 setTimeout(setupDateFields, 200);
-                console.log("continue...");
+                // console.log("continue...");
                 maxTimes --;
             } else {
                 $( "input[type=date]" ).trigger( "wb-init.wb-date" );
-                console.log("initialed");
+                // console.log("initialed");
             }
         }
         function focusOnRow(e, alter) {
