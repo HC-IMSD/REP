@@ -207,6 +207,9 @@
                 //process file load results
                 //load into data model as result json is not null
                 vm.drugUseUpdate();
+                if (vm.model.drugProduct) {
+                    vm.setSceduleFieldset();
+                }
                 vm.drugProdForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
@@ -412,6 +415,21 @@
             vm.model.clinicalTrial = record;
         };
 
+        /***
+         * update sceduleSelected field when load data from file
+         */
+        vm.setSceduleFieldset = function(){
+            if(vm.model.drugProduct.isScheduleC ||
+                vm.model.drugProduct.isScheduleD ||
+                vm.model.drugProduct.isPrescriptionDrugList ||
+                vm.model.drugProduct.isRegulatedCDSA ||
+                vm.model.drugProduct.isNonPrescriptionDrug ||
+                vm.model.drugProduct.isScheduleA) {
+                vm.model.drugProduct.scheduleSelected = "scheduleSelected";
+            } else {
+                vm.model.drugProduct.scheduleSelected = "";
+            }
+        };
 
         /***
          * update sceduleSelected field
