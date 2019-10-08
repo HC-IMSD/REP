@@ -172,6 +172,7 @@
                 vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
                 vm.updateErrorSummaryState();
+                vm.addressListForm.$setPristine();
             };
 
             vm.addAddress = function () {
@@ -210,6 +211,7 @@
                 }
                 vm.requiredFlag = false;
                 vm.resetCollapsed = !vm.resetCollapsed;
+                vm.addressListForm.$setPristine();
             };
 
             //TODO move to the service

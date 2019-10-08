@@ -63,7 +63,9 @@
 
         vm.close=function(){
             vm.updateState();
-            document.getElementById(vm.anchor).focus();
+            if (vm.anchor) {
+                document.getElementById(vm.anchor).focus();
+            }
         };
 
         vm.isAlertVisible=function(){
