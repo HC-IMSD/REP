@@ -53,19 +53,35 @@
             $('.modal-body:first-child').after('<div class="modal-footer"><button type="button" id="ftrClose" class="btn btn-sm btn-primary pull-left overlay-close" style="" title="Close (escape key)">Close<span class="wb-inv">(escape key)</span></button></div>');
             setTimeout(setupDateFields, 1000);
         }
-        var maxTimes = 5;
+        var maxDateTimes = 5;
         function setupDateFields(){
             initialDateInput();
         }
         function initialDateInput(){
-            if($( "input[type=date]" ).length == 0 && maxTimes > 0) {
+            if($( "input[type=date]" ).length == 0 && maxDateTimes > 0) {
                 setTimeout(setupDateFields, 200);
                 // console.log("continue...");
-                maxTimes --;
+                maxDateTimes --;
             } else {
                 $( "input[type=date]" ).trigger( "wb-init.wb-date" );
+                window.location.href = "#main";
                 // console.log("initialed");
             }
+        }
+        var maxDataListTimes = 5;
+        function setupDataList(){
+            initialDataList();
+        }
+        function initialDataList(){
+            if($( "input[type=list]" ).length == 0 && maxDataListTimes > 0) {
+                setTimeout(setupDataList, 200);
+                maxDataListTimes --;
+            } else {
+                $( "input[type=list]" ).trigger( "wb-init.wb-datalist" );
+            }
+        }
+        function onchange(e) {
+            console.log(e);
         }
         function focusOnRow(e, alter) {
             var myTable = $(e).closest('table');
@@ -122,6 +138,12 @@
                 $('#' + id).focus();
             }, 200);
         }
+        function expandAll(theClass){
+            $('.' + theClass).filter(function(){return ! $(this).attr('open')}).attr('open','open');
+        }
+        function collapseAll(theClass){
+            $('.' + theClass).filter(function(){return $(this).attr('open')}).removeAttr('open');
+        }
     </script>
 </head>
 
@@ -159,6 +181,14 @@
             <p class="pagetag">
                 <strong>From <a href="https://www.canada.ca/en/health-canada.html">Health Canada</a></strong>
             </p>
+            <div class="pull-right btn-group-sm">
+                <button class="btn btn-info btn-sm active " id="btn_expandAll" onclick="expandAll('expandableForm')"
+                >&nbsp;+&nbsp;Expand All
+                </button>
+                <button class="btn btn-info btn-sm active " id="btn_collapseAll" onclick="collapseAll('expandableForm')"
+                >&nbsp;-&nbsp;Collapse All
+                </button>
+            </div>
         </div>
         <div class=" col-md-12 module-table-contents">
             <section class="panel panel-default">

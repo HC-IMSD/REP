@@ -11,32 +11,13 @@
                                            form-ref="roaRecCtrl.roaRecForm"
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.roaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
-                        <input type="text" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"
-                               data-ng-model="roaRecCtrl.model.display" value="roaRecCtrl.model.display"
-                               data-ng-model-options="{ updateOn: 'blur'}"
-                               list="roaFormList"
-                               required class="form-control full-width" data-focus-if="roaRecCtrl.isFocus"/>
+                        <input type="list" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"
+                               data-ng-model="roaRecCtrl.model.display"
+                               oninput="angular.element($(this)).scope().roaRecCtrl.roaChange(this.value)" autocomplete="off"
+                               list="roaFormList" required class="form-control full-width"/>
                         <datalist id="roaFormList" class="rep-selectize-dropdown rep-selectize-font">
-                            <option data-ng-repeat="roa in roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:roaFilter}" value="{{roa[roaRecCtrl.lang]}}" label="{{roa[roaRecCtrl.lang]}}"/>
+                            <option data-ng-repeat="roa in roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:roaFilter}" value="{{roa[roaRecCtrl.lang]}}"/>
                         </datalist>
-                        <!--<select id="{{::roaRecCtrl.roaId}}1" name="{{::roaRecCtrl.roaId}}" data-ng-model="roaRecCtrl.model.display" data-ng-select="roaRecCtrl.roaChanged($item, $model);" required="required" class="form-control full-width">-->
-                            <!--<option data-ng-repeat="roa in roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:$select.search}" value="{{roa[roaRecCtrl.lang]}}" label="{{roa[roaRecCtrl.lang]}}"/>-->
-                        <!--</select>-->
-
-                        <!--<ui-select data-ng-model="roaRecCtrl.model.roa" id="{{::roaRecCtrl.roaId}}" name="{{::roaRecCtrl.roaId}}"-->
-                                   <!--on-select="roaRecCtrl.roaChanged($item, $model)" data-ng-model-options="{ debounce: '0'}"-->
-                                   <!--class="rep-selectize-dropdown rep-selectize-font"-->
-                                   <!--title="{{'SELECT_ROA'|translate}}" required>-->
-                            <!--<ui-select-match placeholder="{{::'SELECT_ROA'|translate}}"-->
-                                             <!--name="roaMatch" class="rep-selectize-font rep-selectize-dropdown">-->
-                                <!--{{$select.selected[roaRecCtrl.lang]}}-->
-                            <!--</ui-select-match>-->
-                            <!--<ui-select-choices-->
-                                    <!--repeat="roaValue in  roaRecCtrl.roaList  | filter: {[roaRecCtrl.lang]:$select.search} track by roaValue.id "-->
-                                    <!--class="rep-selectize-font full-width">-->
-                                <!--<span data-ng-bind-html="roaValue[roaRecCtrl.lang] | highlight: $select.search"></span>-->
-                            <!--</ui-select-choices>-->
-                        <!--</ui-select>-->
 
                     </label>
                 </div>
@@ -50,7 +31,7 @@
                                            show-error="roaRecCtrl.showError(roaRecCtrl.roaRecForm[roaRecCtrl.unknownRoaId])"
                                            error-types="roaRecCtrl.requiredOnly"></cmp-error-message>
                         <input type="text" id="{{::roaRecCtrl.unknownRoaId}}" class="form-control"
-                               name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40"
+                               name="{{::roaRecCtrl.unknownRoaId}}" size="40" maxlength="40" data-focus-if="true"
                                data-ng-model="roaRecCtrl.model.otherRoaDetails" required/>
                     </label>
                 </div>

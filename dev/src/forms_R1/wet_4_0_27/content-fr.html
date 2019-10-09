@@ -108,6 +108,12 @@
                 $('#' + id).focus();
             }, 200);
         }
+        function expandAll(theClass){
+            $('.' + theClass).filter(function(){return ! $(this).attr('open')}).attr('open','open');
+        }
+        function collapseAll(theClass){
+            $('.' + theClass).filter(function(){return $(this).attr('open')}).removeAttr('open');
+        }
     </script>
 </head>
 
@@ -144,6 +150,14 @@
             <p class="pagetag">
                 <strong>De <a href="https://www.canada.ca/fr/sante-canada.html">Santé Canada</a></strong>
             </p>
+            <div class="pull-right btn-group-sm">
+                <button class="btn btn-info btn-sm active " id="btn_expandAll" onclick="expandAll('expandableForm')"
+                >&nbsp;+&nbsp;Expand All
+                </button>
+                <button class="btn btn-info btn-sm active " id="btn_collapseAll" onclick="collapseAll('expandableForm')"
+                >&nbsp;-&nbsp;Collapse All
+                </button>
+            </div>
         </div>
         <div class=" col-md-12 module-table-contents">
             <section class="panel panel-default">

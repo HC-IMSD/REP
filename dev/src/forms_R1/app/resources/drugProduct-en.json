@@ -67,5 +67,7 @@
   "FMPP":"Female paediatric population (0-18 years of age)",
   "MPP":"Male paediatric population (0-18 years of age)",
   "FMAP":"Female adult population",
-  "MAP":"Male adult population"
+  "MAP":"Male adult population",
+  "EXPAND_ALL": "Expand All",
+  "COLLAPSE_ALL": "Collapse All"
 }
