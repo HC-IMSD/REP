@@ -1,18 +1,18 @@
-<div class="form-group">
+<!--<div class="form-group">-->
     <!--<pre>tabs {{tabsCtrl.appendix4List | json}}</pre>-->
 
-    <ul class="nav nav-tabs">
-        <li data-ng-repeat="tab in tabsCtrl.tabs" role="presentation" data-ng-click="tabsCtrl.selectTab($index)"
-            data-ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">
-            <a role="tab">{{tab.label |translate}}
-                <strong class="required">{{::"REQUIRED" |translate}}</strong>
-            </a>
-        </li>
-        <li>
-            <sup id="dr10_ref">
-                <a class="fn-lnk" href="#dr10" style="color: #284162;text-decoration: underline;cursor: pointer;"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>15</a>
-            </sup>
-        </li>
+    <!--<ul class="nav nav-tabs">-->
+        <!--<li data-ng-repeat="tab in tabsCtrl.tabs" role="presentation" data-ng-click="tabsCtrl.selectTab($index)"-->
+            <!--data-ng-class="{'active':tabsCtrl.tabs[$index].selected === true}">-->
+            <!--<a role="tab">{{tab.label |translate}}-->
+                <!--<strong class="required">{{::"REQUIRED" |translate}}</strong>-->
+            <!--</a>-->
+        <!--</li>-->
+        <!--<li>-->
+            <!--<sup id="dr10_ref">-->
+                <!--<a class="fn-lnk" href="#dr10" style="color: #284162;text-decoration: underline;cursor: pointer;"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>15</a>-->
+            <!--</sup>-->
+        <!--</li>-->
         <!--<li>
             <button title="{{::'EXPAND'|translate}} {{::'AH_SOURCED_INSTRUCT'|translate}}" class="btn rep-help-button-primary btn-xs"
                     id="ah-sourced-instructions-toggle" data-ng-click="tabsCtrl.addInstruct(0)">
@@ -20,7 +20,7 @@
                 <span class="wb-inv">{{::'AH_SOURCED_INSTRUCT'|translate}}</span>
             </button>
         </li> -->
-    </ul>
+    <!--</ul>-->
     <!--<div class="row">
         <div class="col-md-12">
             <div>
@@ -40,31 +40,43 @@
             </div>
         </div>
     </div> -->
-    <div class="tabpanels">
-        <ng-form name="tabsCtrl.tabs[0].form">
-            <div id="formulations-panel" role="tabpanel" class="out">
-                <div data-ng-show="tabsCtrl.tabs[0].selected">
-                    <cmp-formulations formulations="tabsCtrl.formulationList"
-                         error-summary-update="tabsCtrl.updateSummary"
-                         show-error-summary="tabsCtrl.showSummary"
-                         update-error-summary="tabsCtrl.updateErrorSummary()"
-                         is-file-loaded="tabsCtrl.isFileLoaded"
-                         record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
-                </div>
-            </div>
-        </ng-form>
-        <ng-form name="tabsCtrl.tabs[1].form">
-            <div id="appendix4-panel" role="tabpanel" class="out">
-                <div  data-ng-show="tabsCtrl.tabs[1].selected">
-                    <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service"
-                                       update-error-summary="tabsCtrl.updateErrorSummary()"
-                                       error-summary-update="tabsCtrl.updateSummary"
-                                       show-error-summary="tabsCtrl.showSummary"
-                                       is-file-loaded="tabsCtrl.isFileLoaded"
-                                       record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
-                </div>
-            </div>
-        </ng-form>
-    </div>
+    <!--<div class="tabpanels">-->
+    <!--</div>-->
  <!--   <pre>{{tabsCtrl.tabs[0]}}</pre>-->
-</div>
+
+<ul class="list-unstyled col-xs-12">
+    <li>
+        <details open class=" expandableForm mrgn-bttm-lg">
+            <summary class="panel panel-primary panel-heading form-group"><strong style="padding-left:2%; width:98%;">{{::'FORMULATIONS'|translate}}</strong></summary>
+            <ng-form name="tabsCtrl.tabs[0].form">
+                        <cmp-formulations formulations="tabsCtrl.formulationList"
+                                          error-summary-update="tabsCtrl.updateSummary"
+                                          show-error-summary="tabsCtrl.showSummary"
+                                          update-error-summary="tabsCtrl.updateErrorSummary()"
+                                          is-file-loaded="tabsCtrl.isFileLoaded"
+                                          record-changed="tabsCtrl.recordChanged()"></cmp-formulations>
+            </ng-form>
+            <div class="row"><br/></div>
+        </details>
+    </li>
+</ul>
+<ul class="list-unstyled col-xs-12">
+    <li>
+        <details class="expandableForm mrgn-bttm-lg">
+            <summary class="panel panel-primary panel-heading form-group"><strong style="padding-left:2%; width:98%;">{{::'APPENDIX4'|translate}}</strong>
+                <sup id="dr10_ref">
+                <a class="fn-lnk" href="#dr10" style="color: #284162;text-decoration: underline;cursor: pointer;"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>15</a>
+                </sup>
+            </summary>
+            <ng-form name="tabsCtrl.tabs[1].form">
+                        <cmp-appendix-four ingredients="tabsCtrl.appendix4List" service="tabsCtrl.service"
+                                           update-error-summary="tabsCtrl.updateErrorSummary()"
+                                           error-summary-update="tabsCtrl.updateSummary"
+                                           show-error-summary="tabsCtrl.showSummary"
+                                           is-file-loaded="tabsCtrl.isFileLoaded"
+                                           record-changed="tabsCtrl.recordChanged()"></cmp-appendix-four>
+            </ng-form>
+            <div class="row"><br/></div>
+        </details>
+    </li>
+</ul>
