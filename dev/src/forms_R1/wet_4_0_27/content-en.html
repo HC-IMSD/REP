@@ -55,6 +55,7 @@
             setTimeout(setupDataList, 1000);
             if($("ng-form[name='drugProdCtrl.drugProdForm']").length > 0){
                 $('#expand_collapse_top_btns').removeClass('hide');
+                $('#content_table').addClass('hide');
             }
         }
         var maxDateTimes = 5;
@@ -194,21 +195,21 @@
                 </button>
             </div>
         </div>
-        <!--<div class=" col-md-12 module-table-contents">-->
-            <!--<section class="panel panel-default">-->
-                <!--<header class="panel-heading clearfix">-->
-                    <!--<h2  class="panel-title">Table of contents</h2>-->
-                <!--</header>-->
-                <!--<div class="panel-body">-->
-                    <!--<ul>-->
-                        <!--<li><a class="ui-link" href="#privacy">Privacy Notice Statement</a></li>-->
-                        <!--<li><a class="ui-link" href="#security">Security Disclaimer</a></li>-->
-                        <!--<li><a class="ui-link" href="#instructions">Instructions</a></li>-->
-                        <!--<li><a class="ui-link" href="#main">Form</a></li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</section>-->
-        <!--</div>-->
+        <div class=" col-md-12 module-table-contents" id="content_table">
+            <section class="panel panel-default">
+                <header class="panel-heading clearfix">
+                    <h2  class="panel-title">Table of contents</h2>
+                </header>
+                <div class="panel-body">
+                    <ul>
+                        <li><a class="ui-link" href="#privacy">Privacy Notice Statement</a></li>
+                        <li><a class="ui-link" href="#security">Security Disclaimer</a></li>
+                        <li><a class="ui-link" href="#instructions">Instructions</a></li>
+                        <li><a class="ui-link" href="#main">Form</a></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
 
     </div>
     <!-- the main content -->
