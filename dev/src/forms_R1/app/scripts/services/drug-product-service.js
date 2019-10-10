@@ -778,9 +778,9 @@
                     "containerType": item.container_type,
                     "packageSize": item.package_size,
                     "shelfLifeUnit": "",
-                    "shelfLifeNumber": Number(item.shelf_life_number),
-                    "tempMin": Number(item.temperature_min),
-                    "tempMax": Number(item.temperature_max),
+                    "shelfLifeNumber": item.shelf_life_number ? Number(item.shelf_life_number) : "",
+                    "tempMin": item.temperature_min ? Number(item.temperature_min) : "",
+                    "tempMax": item.temperature_max ? Number(item.temperature_max) : "",
                     "otherShelflifeConsider": item.other_shelf_life_considerations
                 };
 
