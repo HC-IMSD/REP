@@ -57,8 +57,8 @@
 
         });
 
-    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH'];
-    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH) {
+    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH', 'OTHER'];
+    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH, OTHER) {
 
         var vm = this;
         vm.noCountries="";
@@ -332,14 +332,8 @@
             $scope.$apply();
         };
         vm.updateDosageForm = function() {
-            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id != "") {
-                for (var i = 0; i < vm.dosageFormList.length; i++) {
-                    var option = vm.dosageFormList[i];
-                    if (option['id'] === vm.frmModel.dosageForm['id']) {
-                        vm.frmModel.dosageFormHtml = option[vm.lang];
-                        break;
-                    }
-                }
+            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id == OTHER) {
+                vm.isDosageOther = true;
             }
         };
 

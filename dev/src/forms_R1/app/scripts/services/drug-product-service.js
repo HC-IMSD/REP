@@ -1200,7 +1200,7 @@
                 if (item.dosageForm) {
                     // var splitArray = (item.dosageForm.id).split(DossierLists.getDosageFormPrefix()); //needed to remove the internal uniqueness
                     // var newDosage = splitArray[splitArray.length - 1];
-                    var newDosage = item.dosageForm.id.substring(DossierLists.getDosageFormPrefix().length);
+                    var newDosage = item.dosageForm.id == OTHER ? OTHER : item.dosageForm.id.substring(DossierLists.getDosageFormPrefix().length);
                     obj.dosage_form_group.dosage_form = {
                         _id: newDosage,
                         _label_en: item.dosageForm.en,
@@ -1354,7 +1354,7 @@
             }
             // var splitArray = (unitsObj.id).split(prefix); //needed to remove the internal uniqueness
             // var newUnits = splitArray[splitArray.length - 1];
-            var newUnits = unitsObj.id.substring(prefix.length);
+            var newUnits = unitsObj.id == OTHER ? OTHER : unitsObj.id.substring(prefix.length);
             newObj._id = newUnits;
             newObj._label_en = unitsObj.en;
             newObj._label_fr = unitsObj.fr;
@@ -1429,7 +1429,7 @@
                 if (angular.isObject(item.roa)) {
                     // var splitArray = (item.roa.id).split(DossierLists.getRoaPrefix()); //needed to remove the internal uniqueness
                     // var newRoa = splitArray[splitArray.length - 1];
-                    var newRoa = item.roa.id.substring(DossierLists.getRoaPrefix().length);
+                    var newRoa = item.roa.id == OTHER ? OTHER : item.roa.id.substring(DossierLists.getRoaPrefix().length);
                     //roa is a field with 2 attributes
                     var obj = {
                         "roa": {
