@@ -206,6 +206,9 @@
             vm.setEditable(); //case of amend
             vm.addressRecForm.$setPristine();
             vm.isDetailValid({state: vm.addressRecForm.$valid});
+            if (vm.addressModel) {
+                vm.onUpdate({rec: vm.addressModel});
+            }
             vm.errorSummaryUpdate();
             vm.importerProductState(vm.addressModel.addressRole.importer)
         };

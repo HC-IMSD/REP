@@ -44,10 +44,15 @@
     <!--</div>-->
  <!--   <pre>{{tabsCtrl.tabs[0]}}</pre>-->
 
-<ul class="list-unstyled col-xs-12">
-    <li>
+
         <details open class=" expandableForm mrgn-bttm-lg">
-            <summary class="panel panel-primary panel-heading form-group"><strong style="padding-left:2%; width:98%;">{{::'FORMULATIONS'|translate}}</strong></summary>
+            <summary class="panel panel-primary panel-heading form-group">
+                <strong>11. {{::'FORMULATIONS'|translate}}
+                    <sup id="dr9_ref">
+                        <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>
+                    </sup>
+                </strong>
+            </summary>
             <ng-form name="tabsCtrl.tabs[0].form">
                         <cmp-formulations formulations="tabsCtrl.formulationList"
                                           error-summary-update="tabsCtrl.updateSummary"
@@ -58,12 +63,8 @@
             </ng-form>
             <div class="row"><br/></div>
         </details>
-    </li>
-</ul>
-<ul class="list-unstyled col-xs-12">
-    <li>
         <details class="expandableForm mrgn-bttm-lg">
-            <summary class="panel panel-primary panel-heading form-group"><strong style="padding-left:2%; width:98%;">{{::'APPENDIX4'|translate}}</strong>
+            <summary class="panel panel-primary panel-heading form-group"><strong>12. {{::'APPENDIX4'|translate}}</strong>
                 <sup id="dr10_ref">
                 <a class="fn-lnk" href="#dr10" style="color: #284162;text-decoration: underline;cursor: pointer;"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>15</a>
                 </sup>
@@ -78,5 +79,3 @@
             </ng-form>
             <div class="row"><br/></div>
         </details>
-    </li>
-</ul>

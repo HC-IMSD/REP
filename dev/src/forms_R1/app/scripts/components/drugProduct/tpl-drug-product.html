@@ -1,14 +1,14 @@
 <ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm" data-translate-cloak="cloak-class">
     <span id="privacy"></span>
-    <div class="bg-warning">
-        <h3 class="mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h3>
+    <div class="module-attention">
+        <h3 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h3>
         <section data-ng-if="!drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
         <section data-ng-if="drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
     </div>
     <div><br></div>
     <span id="security"></span>
-    <div class="bg-warning">
-        <h3 class="mrgn-tp-sm mrgn-bttm-sm">{{::'SECURITY_DISCLAIMER'|translate}}</h3>
+    <div class="module-attention">
+        <h3 class="panel-title mrgn-tp-sm mrgn-bttm-sm">{{::'SECURITY_DISCLAIMER'|translate}}</h3><br>
         <section data-ng-if="!main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-disclaimer-en.html'"></section>
         <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-disclaimer-fr.html'"></section>
     </div>
@@ -49,7 +49,7 @@
                            update-errors="drugProdCtrl.updateSummary"></cmp-error-summary>
     </div>
 
-    <section class="panel panel-primary mrgn-tp-lg">
+    <section class="panel panel-primary mrgn-tp-lg rep-margin-bottom">
         <header class="panel-heading clearfix">
             <h2 class="panel-title col-md-8">{{::'DRUG_PRODUCT'|translate}}
                 <sup id="dr2_ref">
@@ -453,16 +453,16 @@
                 </section>
             </div>
 
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <strong>
-                        <span class="field-name">11. {{::'FORMULATION'|translate}}</span>
-                        <sup id="dr9_ref">
-                            <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>
-                        </sup>
-                    </strong>
-                </div>
-            </div>
+            <!--<div class="row">-->
+                <!--<div class="col-xs-12 form-group">-->
+                    <!--<strong>-->
+                        <!--<span class="field-name">11. {{::'FORMULATION'|translate}}</span>-->
+                        <!--<sup id="dr9_ref">-->
+                            <!--<a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>-->
+                        <!--</sup>-->
+                    <!--</strong>-->
+                <!--</div>-->
+            <!--</div>-->
             <cmp-tabs formulation-list="drugProdCtrl.model.drugProduct.formulations"
                       record-changed="drugProdCtrl.recordsChanged()" service="drugProdCtrl.drugProductService"
                       error-summary-update="drugProdCtrl.updateSummary" show-error-summary="drugProdCtrl.showSummary"
@@ -474,8 +474,17 @@
         </div>
     </section>
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-12">
+        <div class="pull-right btn-group-sm rep-margin-right">
+            <button class="btn btn-info btn-sm active " id="btn_expandAll" onclick="expandAll('expandableForm')"
+            >&nbsp;+&nbsp;{{::'EXPAND_ALL' |translate}}
+            </button>
+            <button class="btn btn-info btn-sm active " id="btn_collapseAll" onclick="collapseAll('expandableForm')"
+            >&nbsp;-&nbsp;{{::'COLLAPSE_ALL' |translate}}
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 rep-margin-top-bottom">
             <label for="{{::drugProdCtrl.privacyStatementID |translate}}" class="required">
                 <input type="checkbox"
                        data-ng-model="drugProdCtrl.model.privacyStat"
@@ -492,7 +501,6 @@
                 </cmp-error-message>
 
             </label>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -507,14 +515,6 @@
             <sup id="dr11_ref">
                 <a class="fn-lnk" href="#dr11"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>16</a>
             </sup>
-            <div class="pull-right btn-group-sm">
-                <button class="btn btn-info btn-sm active " id="btn_expandAll" onclick="expandAll('expandableForm')"
-                >&nbsp;+&nbsp;{{::'EXPAND_ALL' |translate}}
-                </button>
-                <button class="btn btn-info btn-sm active " id="btn_collapseAll" onclick="collapseAll('expandableForm')"
-                >&nbsp;-&nbsp;{{::'COLLAPSE_ALL' |translate}}
-                </button>
-            </div>
         </div>
     </div>
 
