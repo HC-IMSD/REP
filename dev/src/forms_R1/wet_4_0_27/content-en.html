@@ -53,10 +53,7 @@
             $('.modal-body:first-child').after('<div class="modal-footer"><button type="button" id="ftrClose" class="btn btn-sm btn-primary pull-left overlay-close" style="" title="Close (escape key)">Close<span class="wb-inv">(escape key)</span></button></div>');
             setTimeout(setupDateFields, 1000);
             setTimeout(setupDataList, 1000);
-            if($("ng-form[name='drugProdCtrl.drugProdForm']").length > 0){
-                $('#expand_collapse_top_btns').removeClass('hide');
-                $('#content_table').addClass('hide');
-            }
+            setTimeout(initialTopExpandCollapse, 1000);
         }
         var maxDateTimes = 5;
         function setupDateFields(){
@@ -83,6 +80,11 @@
                 maxDataListTimes --;
             } else {
                 $( "input[type=list]" ).trigger( "wb-init.wb-datalist" );
+            }
+        }
+        function initialTopExpandCollapse(){
+            if($("ng-form[name='drugProdCtrl.drugProdForm']").length > 0){
+                $('#expand_collapse_top_btns').removeClass('hide');
             }
         }
         function onchange(e) {

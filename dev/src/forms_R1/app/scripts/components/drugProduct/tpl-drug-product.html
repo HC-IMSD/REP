@@ -1,40 +1,22 @@
 <ng-form id="{{::drugProdCtrl.formId}}" name="drugProdCtrl.drugProdForm" data-translate-cloak="cloak-class">
     <span id="privacy"></span>
     <div class="bg-warning">
-        <ul class="list-unstyled">
-            <li>
-                <details>
-                    <summary><h3 class="mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h3></summary>
-                    <section data-ng-if="!drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
-                    <section data-ng-if="drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
-                </details>
-            </li>
-        </ul>
+        <h3 class="mrgn-tp-sm mrgn-bttm-sm">{{::'PRIVACY_NOTICE_STATEMENT'|translate}}</h3>
+        <section data-ng-if="!drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-en.html'"></section>
+        <section data-ng-if="drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-privacy-statement-fr.html'"></section>
     </div>
     <div><br></div>
     <span id="security"></span>
     <div class="bg-warning">
-        <ul class="list-unstyled">
-            <li>
-                <details>
-                    <summary><h3 class="mrgn-tp-sm mrgn-bttm-sm">{{::'SECURITY_DISCLAIMER'|translate}}</h3></summary>
-                        <section data-ng-if="!main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-disclaimer-en.html'"></section>
-                        <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-disclaimer-fr.html'"></section>
-                </details>
-            </li>
-        </ul>
+        <h3 class="mrgn-tp-sm mrgn-bttm-sm">{{::'SECURITY_DISCLAIMER'|translate}}</h3>
+        <section data-ng-if="!main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-disclaimer-en.html'"></section>
+        <section data-ng-if="main.isFrench()" data-ng-include="'app/scripts/templates/common/tpl-security-disclaimer-fr.html'"></section>
     </div>
     <span id="instructions"></span>
     <div class="wb-fnote" role="note">
-        <ul class="list-unstyled">
-            <li>
-                <details>
-                    <summary><h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3></summary>
-                    <section data-ng-if="!drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-footnote-en.html'"></section>
-                    <section data-ng-if="drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-footnote-fr.html'"></section>
-                </details>
-            </li>
-        </ul>
+        <h3>{{::'FOOTNOTE_INSTRUCTION'|translate}}</h3>
+        <section data-ng-if="!drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-footnote-en.html'"></section>
+        <section data-ng-if="drugProdCtrl.isFrench()" data-ng-include="'app/scripts/templates/drugProduct/tpl-drugProduct-footnote-fr.html'"></section>
     </div>
     <span id="main"></span>
     <div class="row mrgn-tp-md">
