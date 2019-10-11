@@ -57,8 +57,8 @@
 
         });
 
-    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH'];
-    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH) {
+    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH', 'OTHER'];
+    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH, OTHER) {
 
         var vm = this;
         vm.noCountries="";
@@ -306,39 +306,34 @@
             return(vm.lang===FRENCH);
         };
 
-        vm.dosageFormChange = function() {
-            var found = false;
+        vm.dosageFormBlur = function() {
+            if(! vm.frmModel.dosageForm.id ){
+                vm.frmModel.dosageFormHtml = "";
+                vm.frmModel.dosageFormOther = "";
+                vm.isDosageOther = false;
+            }
+        }
+
+        vm.dosageFormChange = function(e) {
             vm.frmModel.dosageForm = {};
+            vm.frmModel.dosageFormOther = "";
+            vm.isDosageOther = false;
+            vm.frmModel.dosageFormHtml = e;
             for(var i = 0; i < vm.dosageFormList.length; i++) {
                 var option =vm.dosageFormList[i];
                 if(option[vm.lang] === vm.frmModel.dosageFormHtml) {
                     vm.frmModel.dosageForm = option;
                     if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
                         vm.isDosageOther = true;
-                    } else {
-                        vm.frmModel.dosageFormOther = "";
-                        vm.isDosageOther = false;
                     }
-                    found = true;
                     break;
                 }
             }
-            if( ! found ) {
-                vm.frmModel.dosageFormHtml = "";
-                vm.frmModel.dosageFormOther = "";
-                vm.isDosageOther = false;
-            }
+            $scope.$apply();
         };
-
-            vm.updateDosageForm = function() {
-            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id != "") {
-                for (var i = 0; i < vm.dosageFormList.length; i++) {
-                    var option = vm.dosageFormList[i];
-                    if (option['id'] === vm.frmModel.dosageForm['id']) {
-                        vm.frmModel.dosageFormHtml = option[vm.lang];
-                        break;
-                    }
-                }
+        vm.updateDosageForm = function() {
+            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id == OTHER) {
+                vm.isDosageOther = true;
             }
         };
 

@@ -76,17 +76,7 @@
          * @param model
          */
         vm.saveRecord = function(){
-            var found = false;
-            vm.model.roa = "";
-            for(var i = 0; i < vm.roaList.length; i++) {
-                var option =vm.roaList[i];
-                if(option[vm.lang] === vm.model.display) {
-                    vm.model.roa = option;
-                    found = true;
-                    break;
-                }
-            }
-            if(found){
+            if(vm.model.roa.id){
                 vm.clearFilter($scope);
                 vm.updateRecord();
             } else {
@@ -108,6 +98,7 @@
             return ((ctrl.$invalid && ctrl.$touched) || (ctrl.$invalid && vm.showDetailErrors) )
         };
         vm.isRoaOther = function () {
+            vm.model.display = vm.roaRecForm[vm.roaId].$viewValue;
            if(vm.model.display === 'Other'){
                return true;
            }else{
@@ -115,6 +106,18 @@
                return false;
            }
         };
+        vm.roaChange = function (e) {
+            vm.model.roa = "";
+            vm.model.display = e;
+            for(var i = 0; i < vm.roaList.length; i++) {
+                var option =vm.roaList[i];
+                if(option[vm.lang] === vm.model.display) {
+                    vm.model.roa = option;
+                    break;
+                }
+            }
+            $scope.$apply();
+        }
 
         vm.clearFilter = function($scope){
             $scope.roaFilter = "";
