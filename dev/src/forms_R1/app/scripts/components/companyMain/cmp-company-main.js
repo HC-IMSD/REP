@@ -152,19 +152,27 @@
          * @ngdoc method - saves the data model as XML format
          */
         vm.saveXML = function () {
-            if(vm.companyEnrolForm.$invalid){
-                vm.showErrorSummary= true;
-                vm.updateErrorSummary();
-                vm.savePressed=true;
-                vm.focusSummary++;
-                goToErrorSummary();
-            }else {
-                var writeResult = _transformFile();
-                hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,
-                    vm.companyService.getXSLFileName());
-                vm.showErrorSummary=false;
-                vm.companyEnrolForm.$setPristine();
-                vm.savePressed=false;
+            if (vm.companyEnrolForm["addressListCtrl.addressListForm"].$pristine && vm.companyEnrolForm["contactListCtrl.contactListForm"].$pristine) {
+                if (vm.companyEnrolForm.$invalid) {
+                    vm.showErrorSummary = true;
+                    vm.updateErrorSummary();
+                    vm.savePressed = true;
+                    vm.focusSummary++;
+                    goToErrorSummary();
+                } else {
+                    var writeResult = _transformFile();
+                    hpfbFileProcessing.writeAsXml(writeResult, _createFilename(), vm.rootTag,
+                        vm.companyService.getXSLFileName());
+                    vm.showErrorSummary = false;
+                    vm.companyEnrolForm.$setPristine();
+                    vm.savePressed = false;
+                }
+            } else {
+                if (vm.lang === ENGLISH) {
+                    alert("Please save the unsaved input data before generating XML file.");
+                } else {
+                    alert("Veuillez sauvegarder les données d'entrée non enregistrées avant de générer le fichier XML.");
+                }
             }
         };
 

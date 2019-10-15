@@ -83,6 +83,7 @@
                 data1: null,
                 data2: null },
             units: "",
+            unitsHtml: "",
             otherUnits:"",
             per: "",
             perPresentationValue: 1,
@@ -90,6 +91,7 @@
             perPresUnits: "",
             perPresOtherUnits:"",
             perMeasUnits: "",
+            perMeasUnitsHtml: "",
             perMeasOtherUnits:"",
             isNano: "",
             nanoMaterial:"",
@@ -407,35 +409,42 @@
         vm.isFrench = function(){
             return(vm.lang === FRENCH);
         };
-        vm.unitsChange = function() {
-            var found = false;
+        vm.unitsBlur = function() {
+            if(! vm.ingModel.units.id ) {
+                vm.ingModel.unitsHtml = "";
+                vm.ingModel.otherUnits = "";
+            }
+        }
+        vm.unitsChange = function(e) {
+            console.log(e);
+            vm.ingModel.units = {};
+            vm.ingModel.unitsHtml = e;
             for(var i = 0; i < vm.unitsList.length; i++) {
                 var option =vm.unitsList[i];
                 if(option[vm.lang] === vm.ingModel.unitsHtml) {
                     vm.ingModel.units = option;
-                    found = true;
                     break;
                 }
             }
-            if( ! found ){
-                vm.ingModel.unitsHtml = "";
-                vm.ingModel.units = {};
+            $scope.$apply();
+        }
+        vm.perMeasUnitsBlur = function() {
+            if(!  vm.ingModel.perMeasUnits.id ){
+                vm.ingModel.perMeasUnitsHtml = "";
+                vm.ingModel.perPresOtherUnits = "";
             }
         }
-        vm.perMeasUnitsChange = function() {
-            var found = false;
+        vm.perMeasUnitsChange = function(e) {
+            vm.ingModel.perMeasUnits = {};
+            vm.ingModel.perMeasUnitsHtml = e;
             for(var i = 0; i < vm.measureList.length; i++) {
                 var option =vm.measureList[i];
                 if(option[vm.lang] === vm.ingModel.perMeasUnitsHtml) {
                     vm.ingModel.perMeasUnits = option;
-                    found = true;
                     break;
                 }
             }
-            if( ! found ){
-                vm.ingModel.perMeasUnitsHtml = "";
-                vm.ingModel.perMeasUnits = {};
-            }
+            $scope.$apply();
         }
 
         $scope.$watch('ingRecCtrl.activeIngForm.$dirty', function () {

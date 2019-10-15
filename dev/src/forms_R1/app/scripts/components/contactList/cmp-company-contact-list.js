@@ -200,6 +200,7 @@
             vm.allRolesSelected= vm.isAllContactRolesSelected();
             vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
+            vm.contactListForm.$setPristine();
 
         };
 
@@ -214,6 +215,7 @@
             vm.requiredFlag = false;
             vm.resetCollapsed = !vm.resetCollapsed;
             vm.updateErrorSummaryState();
+            vm.contactListForm.$setPristine();
 
         };
 

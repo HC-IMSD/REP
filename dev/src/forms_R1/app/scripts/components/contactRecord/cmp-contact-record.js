@@ -165,6 +165,9 @@
             vm.setEditable();
             //since we are reverting back to the last save should be pristine
             vm.contactRecForm.$setPristine();
+            if (vm.contactModel) {
+                vm.onUpdate({contact: vm.contactModel});
+            }
             vm.isDetailValid({state: vm.contactRecForm.$valid});
             vm.errorSummaryUpdate();
         };

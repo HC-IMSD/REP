@@ -65,7 +65,7 @@
                                                error-types="ctrCtrl.numberError"></cmp-error-message>
                             <input type="number" id="{{::ctrCtrl.shelfLifeNumberId}}" data-ng-model="ctrCtrl.ctModel.shelfLifeNumber"
                                    data-ng-model-options="{ debounce: $inherit}" data-only-digits data-only-max="4"
-                                   class="form-control " name="{{::ctrCtrl.shelfLifeNumberId}}" size="2"/>
+                                   class="form-control " name="{{::ctrCtrl.shelfLifeNumberId}}" />
 
                         </div>
                         <div class="form-group col-md-6">
@@ -93,7 +93,7 @@
                                                    error-types="ctrCtrl.numberInvalidMinMax"></cmp-error-message>
                                 <input type="number" id="{{::ctrCtrl.tempMinId}}" data-ng-model="ctrCtrl.ctModel.tempMin"
                                        data-ng-model-options="{ debounce: $inherit}" data-only-digits="intNeg" data-only-max="4"
-                                       size="4" min="-273" max="999" class="form-control" name="{{::ctrCtrl.tempMinId}}"/>
+                                       min="-273" max="999" class="form-control" name="{{::ctrCtrl.tempMinId}}"/>
 
                             </label>
                         </div>
@@ -104,7 +104,7 @@
                                                    form-ref="ctrCtrl.containerTypeForm"
                                                    show-error="ctrCtrl.showError(ctrCtrl.containerTypeForm[ctrCtrl.tempMaxId])"
                                                    error-types="ctrCtrl.numberInvalidMinMax"></cmp-error-message>
-                                <input type="number" id="{{::ctrCtrl.tempMaxId}}" size="4" min="-273" max="999"
+                                <input type="number" id="{{::ctrCtrl.tempMaxId}}" min="-273" max="999"
                                        data-ng-model="ctrCtrl.ctModel.tempMax" data-ng-model-options="{ debounce: $inherit}"
                                        data-only-digits="intNeg" data-only-max="4" class="form-control" name="{{::ctrCtrl.tempMaxId}}"/>
 

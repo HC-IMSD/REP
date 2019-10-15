@@ -59,15 +59,18 @@
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                     </label>
-                    <input type="text" id="{{::formulRecCtrl.dosageId}}" name="{{::formulRecCtrl.dosageId}}" data-ng-model="formulRecCtrl.frmModel.dosageFormHtml" value="formulRecCtrl.frmModel.dosageFormHtml" data-ng-blur="formulRecCtrl.dosageFormChange()" list="dosageFormList" required="required" class="form-control full-width"/>
+                    <input type="list" id="{{::formulRecCtrl.dosageId}}" name="{{::formulRecCtrl.dosageId}}" data-ng-model="formulRecCtrl.frmModel.dosageFormHtml"
+                           oninput="angular.element($(this)).scope().formulRecCtrl.dosageFormChange(this.value)" autocomplete="off"
+                           data-ng-blur="formulRecCtrl.dosageFormBlur()"
+                           list="dosageFormList" required="required" class="form-control full-width"/>
                     <datalist id="dosageFormList" class="rep-selectize-dropdown rep-selectize-font">
-                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}" label="{{formType[formulRecCtrl.lang]}}"/>
+                        <option data-ng-repeat="formType in formulRecCtrl.dosageFormList" value="{{formType[formulRecCtrl.lang]}}"/>
                     </datalist>
 
                 </div>
                 <div class="col-md-6 form-group"
                      data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.dosageOtherId].$invalid}"
-                     data-ng-if="formulRecCtrl.isDosageOther()">
+                     data-ng-if="formulRecCtrl.isDosageOther">
                     <label for="{{::formulRecCtrl.dosageOtherId}}" class="required">
                         <span class="field-name">{{'DOSAGE_FORM_OTHER'|translate}}</span>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
@@ -75,11 +78,11 @@
                                            form-ref="formulRecCtrl.formulationForm"
                                            show-error="formulRecCtrl.showErrors()"
                                            error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
-                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}" data-focus-if="formulRecCtrl.isDosageOther()"
+                        <input type="text" id="{{::formulRecCtrl.dosageOtherId}}"
                                data-ng-model="formulRecCtrl.frmModel.dosageFormOther"
                                class="form-control full-width" name="{{::formulRecCtrl.dosageOtherId}}"
-                               data-ng-model-options="{ debounce: '$inherit'}"
-                               data-ng-required="formulRecCtrl.isDosageOther()" maxlength="60" size="60"/>
+                               data-ng-model-options="{ updateOn: 'blur', debounce:0}"
+                               data-ng-required="formulRecCtrl.isDosageOther" maxlength="60" size="60"/>
 
                     </label>
                 </div>
@@ -182,7 +185,7 @@
                             </sup>
                         </h3>
                     </header>
-                    <div class="panel-body">
+                    <div class="panel-body" id="list_country_{{::$id}}">
                         <input type="hidden" name="{{::formulRecCtrl.noCountryId}}" id="{{::formulRecCtrl.noCountryId}}"
                                  aria-hidden="true" data-ng-model="formulRecCtrl.noCountries" required/>
                         <cmp-country-list list-items="formulRecCtrl.frmModel.countryList" with-unknown="false"

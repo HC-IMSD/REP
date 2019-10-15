@@ -95,7 +95,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row" data-ng-if="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible">
+                    <div class="row" data-ng-show="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible">
                         <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.dateId].$invalid}">
                             <label for="{{::lifecycleCtrl.dateId}}" class="required">
@@ -110,13 +110,12 @@
                             <input id="{{::lifecycleCtrl.dateId}}" type="date" max='9999-12-31'
                                    name="{{::lifecycleCtrl.dateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
-                                   data-ng-required="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible"
-                                   class="form-control" required
+                                   class="form-control" required data-rule-dateISO="true"
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
                     </div>
-                    <div class="row" data-ng-if="lifecycleCtrl.endDateVisible">
-                        <div class="form-group col-md-4"
+                    <div class="row" data-ng-show="lifecycleCtrl.endDateVisible">
+                        <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.startDateId].$invalid}">
                             <label for="{{::lifecycleCtrl.startDateId}}" class="required">
                                 <span class="field-name">{{::"START_DATE" |translate}}</span>
@@ -134,7 +133,7 @@
                                    class="form-control" required
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
-                        <div class="form-group col-md-4"
+                        <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.endDateId].$invalid}" >
                             <label for="{{::lifecycleCtrl.endDateId}}" class="required">
                                 <span class="field-name">{{::"END_DATE" |translate}}</span>
@@ -210,7 +209,7 @@
                             </label>
                             <textarea id="{{::lifecycleCtrl.descriptId}}" name="{{::lifecycleCtrl.descriptId}}"
                                       data-ng-model="lifecycleCtrl.lifecycleModel.details"
-                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="2000"
                                       data-ng-required="lifecycleCtrl.descriptionVisible"
                                       class="form-control full-width">
                             </textarea>
@@ -234,7 +233,7 @@
                             </label>
                             <textarea id="{{::lifecycleCtrl.descriptChangeId}}" name="{{::lifecycleCtrl.descriptChangeId}}"
                                       data-ng-model="lifecycleCtrl.lifecycleModel.detailsChange"
-                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="200"
+                                      data-ng-change="lifecycleCtrl.setConcatDetails()" maxlength="2000"
                                       data-ng-required="lifecycleCtrl.descriptionChangeVisible"
                                       class="form-control full-width">
                             </textarea>
@@ -280,7 +279,7 @@
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterNameTxt"
                                value="lifecycleCtrl.lifecycleModel.requesterNameTxt"
                                data-ng-blur="lifecycleCtrl.userChanged('requesterName')"
-                               list="contactsList" class="form-control full-width" />
+                               class="form-control full-width" />
                              </span>
                             </label>
                         </div>
@@ -292,7 +291,7 @@
                                name="{{::lifecycleCtrl.requesterNameId2}}" size="30" maxlength="30"
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName2Txt"
                                value="lifecycleCtrl.lifecycleModel.requesterName2Txt" data-ng-blur="lifecycleCtrl.userChanged('requesterName2')"
-                               list="contactsList" class="form-control full-width" />
+                               class="form-control full-width" />
                              </span>
                             </label>
                         </div>
@@ -305,23 +304,11 @@
                                data-ng-model="lifecycleCtrl.lifecycleModel.requesterName3Txt"
                                value="lifecycleCtrl.lifecycleModel.requesterName3Txt"
                                data-ng-blur="lifecycleCtrl.userChanged('requesterName3')"
-                               list="contactsList"
                                class="form-control full-width" />
                              </span>
                             </label>
                         </div>
                     </div>
-                    <!--<div class="row">-->
-                        <!--<div class="btn-group-sm col-xs-12">-->
-                            <!--<button class="btn btn-primary"-->
-                                    <!--name="saveLifecycleRec_{{::$id}}"-->
-                                    <!--id="saveLifecycleRec_{{::$id}}"-->
-                                    <!--onclick="focusOnRow(this, '');"-->
-                                    <!--data-ng-click="lifecycleCtrl.updateLivecycleModel();"-->
-                                    <!--data-ng-disabled="lifecycleCtrl.setNotEditable()">{{::'SAVE_RECORD'| translate}}-->
-                            <!--</button>-->
-                        <!--</div>-->
-                    <!--</div>-->
                 </fieldset>
             </div>
         </div>

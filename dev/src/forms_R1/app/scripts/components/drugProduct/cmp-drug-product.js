@@ -201,6 +201,9 @@
                 //process file load results
                 //load into data model as result json is not null
                 vm.drugUseUpdate();
+                if (vm.model.drugProduct) {
+                    vm.setSceduleFieldset();
+                }
                 vm.drugProdForm.$setDirty();
             }
             //if content is attempted to be loaded show all the errors
@@ -331,7 +334,7 @@
             }
         };
 
-        //????
+        //update Disinfectant Type
         vm.onDisiTypeUpdate = function (newRole) {
             var aRole = {};
             angular.extend(aRole, newRole);
@@ -351,11 +354,43 @@
         };
 
         /***
-         * reset Disinfectant Type field
+         * update importer list
          */
         vm.updateImporterList = function(list){
             if(!list) return;
             vm.model.importerRecord = list;
+        };
+
+        /***
+         * update sceduleSelected field when load data from file
+         */
+        vm.setSceduleFieldset = function(){
+            if(vm.model.drugProduct.isScheduleC ||
+                vm.model.drugProduct.isScheduleD ||
+                vm.model.drugProduct.isPrescriptionDrugList ||
+                vm.model.drugProduct.isRegulatedCDSA ||
+                vm.model.drugProduct.isNonPrescriptionDrug ||
+                vm.model.drugProduct.isScheduleA) {
+                vm.model.drugProduct.scheduleSelected = "scheduleSelected";
+            } else {
+                vm.model.drugProduct.scheduleSelected = "";
+            }
+        };
+
+        /***
+         * update sceduleSelected field
+         */
+        vm.updateSceduleFieldset = function(value){
+            if(value) {
+                vm.model.drugProduct.scheduleSelected = "scheduleSelected";
+            } else if(!vm.model.drugProduct.isScheduleC &&
+                    !vm.model.drugProduct.isScheduleD &&
+                    !vm.model.drugProduct.isPrescriptionDrugList &&
+                    !vm.model.drugProduct.isRegulatedCDSA &&
+                    !vm.model.drugProduct.isNonPrescriptionDrug &&
+                    !vm.model.drugProduct.isScheduleA) {
+                vm.model.drugProduct.scheduleSelected = "";
+            }
         };
 
         /**
@@ -513,6 +548,7 @@
             vm.drugUseId="drug_use"+scopeId;
             vm.propIndicationId="prop_Indication"+scopeId;
             vm.fsType = "fs_type" + scopeId;
+            vm.scheduleSelectedId = "schedule_presc_status" + scopeId;
             vm.disiTypeId = "disinfectant_type" + scopeId;
             vm.privacyStatementID = "privacy_statement" + scopeId;
         }

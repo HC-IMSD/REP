@@ -40,11 +40,12 @@
                 updateErrorSummary:'&' //update the parent error summary
             }
         });
-    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', 'getContactLists','$filter', '$translate','$scope'];
+    lifecycleRecCtrl.$inject = ['ActivityFormFilterService',  'TransactionLists', '$filter', '$translate','$scope'];
 
-    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, getContactLists, $filter, $translate, $scope) {
+    function lifecycleRecCtrl(ActivityFormFilterService,  TransactionLists, $filter, $translate, $scope) {
         var vm = this;
         vm.activityList= TransactionLists.getActivityTypes();
+        vm.selfLifeUnitsList = TransactionLists.getShelfLifeUnitsList();
         vm.activityTypeList=[];
         vm.pharmaList =[];
         vm.biolList = [];
@@ -90,10 +91,14 @@
         vm.requiredOnly=[
             {type: "required", displayAlias: "MSG_ERR_MAND"}
         ];
+        vm.numberError = [
+            {type: "required", displayAlias: "MSG_ERR_MAND"},
+            {type: "number", displayAlias: "TYPE_NUMBER"}
+        ];
         //
         vm.$onInit = function () {
             _setIdNames();
-            loadContactData();
+            // loadContactData();
            // vm.selectActivityLeadList();
            // vm.selectActivityList();
         };
@@ -177,13 +182,13 @@
 
         };
 
-        function loadContactData() {
-            getContactLists.getInternalContacts()
-                .then(function (data) {
-                    vm.requesterList = data;
-                    return true;
-                });
-        }
+        // function loadContactData() {
+        //     getContactLists.getInternalContacts()
+        //         .then(function (data) {
+        //             vm.requesterList = data;
+        //             return true;
+        //         });
+        // }
         vm.retrieveUser = function(userName){
             for(var i=0; i< vm.requesterList.length; i++){
                 var user = vm.requesterList[i];
@@ -242,9 +247,9 @@
                 vm.leadList = [];
                 return;
             }
-            if(! vm.activityList || vm.activityList.length() < 1 ){
-                vm.activityList= TransactionLists.getActivityTypes();
-            }
+            // if(! vm.activityList || vm.activityList.length() < 1 ){
+            //     vm.activityList= TransactionLists.getActivityTypes();
+            // }
             switch( vm.dossierType ) {
                 case  TransactionLists.getPharmaceuticalValue():
                     vm.leadList = TransactionLists.getActivityLeadListByD22();
@@ -479,9 +484,12 @@
                     break;
 
                 default:
-                    vm.descriptionList = "";
+                    try {
+                        vm.descriptionList = vm.activityTypeMapping[value];
+                    }catch(e) {
+                        vm.descriptionList = "";
+                    }
                     break;
-
             }
             ///find if the value is in the list
             if (temp && vm.descriptionList.indexOf(temp) !== -1) {
@@ -498,7 +506,7 @@
          */
         vm.setDetailsState = function () {
             var value = vm.lifecycleModel.descriptionValue;
-            if (!value) {
+            if (!vm.lifecycleModel.activityType.id) {
                 vm.descriptionList = [];
                 return;
             }
@@ -615,7 +623,10 @@
                     vm.setConcatDetails();
                     break;
                 default:
-                    console.warn("Lifecycle Details activity not found: " + value);
+                    //nothing visible
+                    setDetailsAsNone();
+                    vm.setConcatDetails();
+                    // console.warn("Lifecycle Details activity not found: " + value);
                     break;
             }
 

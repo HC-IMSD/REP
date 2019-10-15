@@ -57,13 +57,14 @@
 
         });
 
-    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH'];
-    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH) {
+    formulationRecCtrl.$inject = ['DossierLists', '$translate', '$scope', 'FRENCH', 'OTHER'];
+    function formulationRecCtrl(DossierLists, $translate ,$scope, FRENCH, OTHER) {
 
         var vm = this;
         vm.noCountries="";
         vm.noROAValues="";
         vm.noActiveValues="";
+        vm.isDosageOther = false;
         vm.dosageFormList = DossierLists.getDosageFormList();
         vm.otherValue = DossierLists.getDosageOther();
         vm.yesNoList = DossierLists.getYesNoList();
@@ -85,7 +86,7 @@
         };
         vm.alias={
             "no_country": {
-                "type": "elementnoid",
+                "type": "element",
                 "target": "list_country"
             },
             "no_roa": {
@@ -263,16 +264,16 @@
          * @ngDoc determines if dosage Other should be shown
          * @returns {boolean}
          */
-        vm.isDosageOther = function () {
-
-            if(!vm.frmModel|| !vm.frmModel.dosageForm) return false;
-            if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
-                return true;
-            } else {
-                vm.frmModel.dosageFormOther = "";
-                return false;
-            }
-        };
+        // vm.isDosageOther = function () {
+        //
+        //     if(!vm.frmModel|| !vm.frmModel.dosageForm) return false;
+        //     if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
+        //         return true;
+        //     } else {
+        //         vm.frmModel.dosageFormOther = "";
+        //         return false;
+        //     }
+        // };
 
         vm.updateErrorSummaryState = function () {
             vm.updateSummary = vm.updateSummary + 1;
@@ -305,31 +306,34 @@
             return(vm.lang===FRENCH);
         };
 
-        vm.dosageFormChange = function() {
-            var found = false;
+        vm.dosageFormBlur = function() {
+            if(! vm.frmModel.dosageForm.id ){
+                vm.frmModel.dosageFormHtml = "";
+                vm.frmModel.dosageFormOther = "";
+                vm.isDosageOther = false;
+            }
+        }
+
+        vm.dosageFormChange = function(e) {
+            vm.frmModel.dosageForm = {};
+            vm.frmModel.dosageFormOther = "";
+            vm.isDosageOther = false;
+            vm.frmModel.dosageFormHtml = e;
             for(var i = 0; i < vm.dosageFormList.length; i++) {
                 var option =vm.dosageFormList[i];
                 if(option[vm.lang] === vm.frmModel.dosageFormHtml) {
                     vm.frmModel.dosageForm = option;
-                    found = true;
+                    if ((vm.frmModel.dosageForm.id === vm.otherValue)) {
+                        vm.isDosageOther = true;
+                    }
                     break;
                 }
             }
-            if( ! found ){
-                vm.frmModel.dosageForm = "";
-                vm.frmModel.dosageFormHtml = "";
-            }
+            $scope.$apply();
         };
-
         vm.updateDosageForm = function() {
-            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id) {
-                for (var i = 0; i < vm.dosageFormList.length; i++) {
-                    var option = vm.dosageFormList[i];
-                    if (option['id'] === vm.frmModel.dosageForm['id']) {
-                        vm.frmModel.dosageFormHtml = option[vm.lang];
-                        break;
-                    }
-                }
+            if (vm.frmModel.dosageForm && vm.frmModel.dosageForm.id == OTHER) {
+                vm.isDosageOther = true;
             }
         };
 
