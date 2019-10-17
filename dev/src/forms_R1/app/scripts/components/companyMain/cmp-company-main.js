@@ -274,6 +274,7 @@
         vm.setApplType = function (type) {
 
             vm.company.applicationType = type;
+            vm.company.applicationTypeText = $translate.instant(vm.company.applicationType);
             disableXMLSave();
             vm.setAmend();
             vm.company.reasonAmend="";
