@@ -69,7 +69,10 @@
             ADVISEMENT_LETTER_RESPONSE: "ADVISEMENT_LETTER_RESPONSE", //REspose to Advisement Letter dated
             CLIN_CLARIF_RESPONSE: "CLIN_CLARIF_RESPONSE", //Response to clinical clarifiaction request
             EMAIL_RQ_RESPONSE: "EMAIL_RQ_RESPONSE",// response to email request
-            HSC_RQ_RESPONSE: "HSC_RQ_RESPONSE",
+            HSC_RQ_RESPONSE: "HSC_RQ_RESPONSE", //Response to Human Safety Clarification Request
+            QHSC_RQ_RESPONSE: "QHSC_RQ_RESPONSE", //Response to Quality & Human Safety Clarification Request
+            CHSC_RQ_RESPONSE: "CHSC_RQ_RESPONSE", //Response to Clinical & Human Safety Clarification Request
+            QCHSC_RQ_RESPONSE: "QCHSC_RQ_RESPONSE", //Response to Quality, Clinical and Human Safety Clarification Request
             LABEL_CLARIF_RESPONSE: "LABEL_CLARIF_RESPONSE", //Response to labelling clarification request
             MHPD_RQ_RESPONSE: "MHPD_RQ_RESPONSE", //Response to MHPD request
             NOC_RESPONSE: "NOC_RESPONSE", //response to NOC/ c-Qn
@@ -116,7 +119,7 @@
             CTN_ADMINISTRATIVE:"CTN_ADMINISTRATIVE",
             CTN_APPENDIX:"CTN_APPENDIX",
             CTN_CONTACT:"CTN_CONTACT",
-            CTN_CROSS:"CTN_CROSS",
+            // CTN_CROSS:"CTN_CROSS",
             CTN_DATA:"CTN_DATA",
             CTN_DEAR:"CTN_DEAR",
             CTN_DILUENT:"CTN_DILUENT",
@@ -130,9 +133,9 @@
             CTN_NEW_MANUFACTURING:"CTN_NEW_MANUFACTURING",
             CTN_NEW_PKG:"CTN_NEW_PKG",
             CTN_NEW_QC:"CTN_NEW_QC",
-            CTN_NOL:"CTN_NOL",
+            // CTN_NOL:"CTN_NOL",
             CTN_PACKAGING_LABELLING:"CTN_PACKAGING_LABELLING",
-            CTN_PM:"CTN_PM",
+            // CTN_PM:"CTN_PM",
             CTN_PROTOCOL_INFO_UPDATE:"CTN_PROTOCOL_INFO_UPDATE",
             CTN_PROTOCOL_UPDATE:"CTN_PROTOCOL_UPDATE",
             CTN_QOS:"CTN_QOS",
@@ -553,6 +556,9 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.CLIN_CLARIF_RESPONSE //Response to clinical clarification request
@@ -1288,77 +1294,340 @@
 
         function getV_AndsArray() { //V-ANDS
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.INITIAL,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.NON_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.CONSENT_LTR,
+                vm.allActivities.DATA_PROTECT_CORRESP,
+                vm.allActivities.CORR_PATENT_MED,
+                vm.allActivities.FORM_IV,
+                vm.allActivities.FORM_V,
+                vm.allActivities.INITIAL,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.ALLEGATION_NOTICE,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
+                vm.allActivities.LABEL_CLARIF_RESPONSE,
+                vm.allActivities.NOD_RESPONSE,
+                vm.allActivities.NON_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_ACCEPT_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.SDN_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getCtaArray() { //CTA
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.INITIAL,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.RECON_DECIS_LTR_INTENT,vm.allActivities.RECON_DECIS_OTHER_INFO,vm.allActivities.RECON_DECIS_RQ_RECON,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.NOL_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.CTN_ADMINISTRATIVE,vm.allActivities.CTN_APPENDIX,vm.allActivities.CTN_CONTACT,vm.allActivities.CTN_CROSS,vm.allActivities.CTN_DATA,vm.allActivities.CTN_DEAR,vm.allActivities.CTN_DILUENT,vm.allActivities.CTN_DRUG_PROD,vm.allActivities.CTN_DRUG_SUBS,vm.allActivities.CTN_ENROLLMENT,vm.allActivities.CTN_ETHICS,vm.allActivities.CTN_EXCLUSION_INCLUSION,vm.allActivities.CTN_INFORMED,vm.allActivities.CTN_INVESTIGATOR,vm.allActivities.CTN_NEW_MANUFACTURING,vm.allActivities.CTN_NEW_PKG,vm.allActivities.CTN_NEW_QC,vm.allActivities.CTN_NOL,vm.allActivities.CTN_PACKAGING_LABELLING,vm.allActivities.CTN_PM,vm.allActivities.CTN_PROTOCOL_INFO_UPDATE,vm.allActivities.CTN_PROTOCOL_UPDATE,vm.allActivities.CTN_QOS,vm.allActivities.CTN_REFUSALS,vm.allActivities.CTN_REGULATORY,vm.allActivities.CTN_RESPONSE,vm.allActivities.CTN_SAFETY,vm.allActivities.CTN_SHELF_PD,vm.allActivities.CTN_SHELF_DS,vm.allActivities.CTN_SITE,vm.allActivities.CTN_SOURCE,vm.allActivities.CTN_STRAIN,vm.allActivities.CTN_STUDY_COMPLETION,vm.allActivities.CTN_STUDY_DISC,vm.allActivities.CTN_STUDY_EXT
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.INITIAL,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.RECON_DECIS_LTR_INTENT,
+                vm.allActivities.RECON_DECIS_OTHER_INFO,
+                vm.allActivities.RECON_DECIS_RQ_RECON,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.NOL_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.UNSOLICITED_DATA,
+                vm.allActivities.CTN_ADMINISTRATIVE,
+                vm.allActivities.CTN_APPENDIX,
+                vm.allActivities.CTN_CONTACT,
+                vm.allActivities.CTN_DATA,
+                vm.allActivities.CTN_DEAR,
+                vm.allActivities.CTN_DILUENT,
+                vm.allActivities.CTN_DRUG_PROD,
+                vm.allActivities.CTN_DRUG_SUBS,
+                vm.allActivities.CTN_ENROLLMENT,
+                vm.allActivities.CTN_ETHICS,
+                vm.allActivities.CTN_EXCLUSION_INCLUSION,
+                vm.allActivities.CTN_INFORMED,
+                vm.allActivities.CTN_INVESTIGATOR,
+                vm.allActivities.CTN_NEW_MANUFACTURING,
+                vm.allActivities.CTN_NEW_PKG,
+                vm.allActivities.CTN_NEW_QC,
+                vm.allActivities.CTN_PACKAGING_LABELLING,
+                vm.allActivities.CTN_PROTOCOL_INFO_UPDATE,
+                vm.allActivities.CTN_PROTOCOL_UPDATE,
+                vm.allActivities.CTN_QOS,
+                vm.allActivities.CTN_REFUSALS,
+                vm.allActivities.CTN_REGULATORY,
+                vm.allActivities.CTN_RESPONSE,
+                vm.allActivities.CTN_SAFETY,
+                vm.allActivities.CTN_SHELF_PD,
+                vm.allActivities.CTN_SHELF_DS,
+                vm.allActivities.CTN_SITE,
+                vm.allActivities.CTN_SOURCE,
+                vm.allActivities.CTN_STRAIN,
+                vm.allActivities.CTN_STUDY_COMPLETION,
+                vm.allActivities.CTN_STUDY_DISC,
+                vm.allActivities.CTN_STUDY_EXT,
+                vm.allActivities.CTN_STUDY_SUS,
+                vm.allActivities.CTN_TRANS_OWN
             ]);
         }
         function getCta_aArray() {
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.RECON_DECIS_LTR_INTENT,vm.allActivities.RECON_DECIS_OTHER_INFO,vm.allActivities.RECON_DECIS_RQ_RECON,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.NOL_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.CLINICAL,vm.allActivities.CLINICAL_QUALITY,vm.allActivities.QUALITY
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.RECON_DECIS_LTR_INTENT,
+                vm.allActivities.RECON_DECIS_OTHER_INFO,
+                vm.allActivities.RECON_DECIS_RQ_RECON,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.NOL_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.UNSOLICITED_DATA,
+                vm.allActivities.CLINICAL,
+                vm.allActivities.CLINICAL_QUALITY,
+                vm.allActivities.QUALITY
             ]);
         }
         function getPreCtaArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ
             ]);
         }
         function getV_Level3Array() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA,vm.allActivities.YEAR_LIST_OF_CHANGE
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.UNSOLICITED_DATA,
+                vm.allActivities.YEAR_LIST_OF_CHANGE
             ]);
         }
         function getV_MpdinArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_MpncArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_MpndsArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_MpsndsArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_NcArray() {
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.POST_NOC_CHANGE,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOL_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.POST_NOC_CHANGE,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
+                vm.allActivities.LABEL_CLARIF_RESPONSE,
+                vm.allActivities.NOD_RESPONSE,
+                vm.allActivities.NOL_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_ACCEPT_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.SDN_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_NdsArray() {
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.INITIAL,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.CONSENT_LTR,
+                vm.allActivities.DATA_PROTECT_CORRESP,
+                vm.allActivities.FORM_IV,
+                vm.allActivities.FORM_V,
+                vm.allActivities.INITIAL,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.ALLEGATION_NOTICE,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
+                vm.allActivities.LABEL_CLARIF_RESPONSE,
+                vm.allActivities.NOD_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_ACCEPT_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.SDN_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_PsurPvArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.FOR_PERIOD,vm.allActivities.MEETING_MINUTES,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.FOR_PERIOD,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_SandsArray() {
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.POST_NOC_CHANGE,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.NON_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.CONSENT_LTR,
+                vm.allActivities.DATA_PROTECT_CORRESP,
+                vm.allActivities.CORR_PATENT_MED,
+                vm.allActivities.FORM_IV,
+                vm.allActivities.FORM_V,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.ALLEGATION_NOTICE,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.POST_NOC_CHANGE,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
+                vm.allActivities.LABEL_CLARIF_RESPONSE,
+                vm.allActivities.NOD_RESPONSE,
+                vm.allActivities.NON_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_ACCEPT_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.SDN_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_SndsArray() {
             return ([
-                vm.allActivities.ADMINISTRATIVE,vm.allActivities.CANCEL_LETTER,vm.allActivities.CONSENT_LTR,vm.allActivities.DATA_PROTECT_CORRESP,vm.allActivities.CORR_PATENT_MED,vm.allActivities.FORM_IV,vm.allActivities.FORM_V,vm.allActivities.MEETING_MINUTES,vm.allActivities.ALLEGATION_NOTICE,vm.allActivities.POST_CLEARANCE_DATA,vm.allActivities.POST_NOC_CHANGE,vm.allActivities.CLIN_CLARIF_RESPONSE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.HSC_RQ_RESPONSE,vm.allActivities.LABEL_CLARIF_RESPONSE,vm.allActivities.NOD_RESPONSE,vm.allActivities.NON_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,vm.allActivities.QUAL_CLARIF_RESPONSE,vm.allActivities.SCREENING_ACCEPT_RESPONSE,vm.allActivities.SCREENING_CLARIF_RESPONSE,vm.allActivities.SDN_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.ADMINISTRATIVE,
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.CONSENT_LTR,
+                vm.allActivities.DATA_PROTECT_CORRESP,
+                vm.allActivities.CORR_PATENT_MED,
+                vm.allActivities.FORM_IV,
+                vm.allActivities.FORM_V,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.ALLEGATION_NOTICE,
+                vm.allActivities.POST_CLEARANCE_DATA,
+                vm.allActivities.POST_NOC_CHANGE,
+                vm.allActivities.CLIN_CLARIF_RESPONSE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
+                vm.allActivities.LABEL_CLARIF_RESPONSE,
+                vm.allActivities.NOD_RESPONSE,
+                vm.allActivities.NON_RESPONSE,
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLIN_CLARIF_RESPONSE,
+                vm.allActivities.QUAL_CLARIF_RESPONSE,
+                vm.allActivities.SCREENING_ACCEPT_RESPONSE,
+                vm.allActivities.SCREENING_CLARIF_RESPONSE,
+                vm.allActivities.SDN_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         function getV_UdraArray() {
             return ([
-                vm.allActivities.CANCEL_LETTER,vm.allActivities.MEETING_MINUTES,vm.allActivities.DIN_DISCONTINUED,vm.allActivities.NOTIFICATION_INTERRUPT_SALE,vm.allActivities.EMAIL_RQ_RESPONSE,vm.allActivities.PROCESSING_CLARIF_RESPONSE,vm.allActivities.PHONE_RQ_RESPONSE,vm.allActivities.PRESUB_MEETING_PKG,vm.allActivities.PRESUB_MEETING_RQ,vm.allActivities.UNSOLICITED_DATA
+                vm.allActivities.CANCEL_LETTER,
+                vm.allActivities.MEETING_MINUTES,
+                vm.allActivities.DIN_DISCONTINUED,
+                vm.allActivities.NOTIFICATION_INTERRUPT_SALE,
+                vm.allActivities.EMAIL_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
+                vm.allActivities.PROCESSING_CLARIF_RESPONSE,
+                vm.allActivities.PHONE_RQ_RESPONSE,
+                vm.allActivities.PRESUB_MEETING_PKG,
+                vm.allActivities.PRESUB_MEETING_RQ,
+                vm.allActivities.UNSOLICITED_DATA
             ]);
         }
         /**

@@ -560,10 +560,10 @@
         lifecycleRec.requesterName3Txt = lifecycleObj.requester_name3 ? lifecycleObj.requester_name3.__text : '';
        // lifecycleRec.solicitedRequester = lifecycleObj.requester_of_solicited_information;
         lifecycleRec.isSaved = true;
-        lifecycleRec.fromValue = lifecycleObj.fromValue ? parseInt(lifecycleObj.fromValue) : 0;
-        lifecycleRec.fromUnit = lifecycleObj.fromUnit ? $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.fromUnit._id})[0] : '';
-        lifecycleRec.toValue = lifecycleObj.toValue ? parseInt(lifecycleObj.toValue) : 0;
-        lifecycleRec.toUnit = lifecycleObj.toUnit ? $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.toUnit._id})[0] : '';
+        lifecycleRec.fromValue = lifecycleObj.from_time;
+        // lifecycleRec.fromUnit = lifecycleObj.fromUnit ? $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.fromUnit._id})[0] : '';
+        lifecycleRec.toValue = lifecycleObj.to_time;
+        // lifecycleRec.toUnit = lifecycleObj.toUnit ? $filter('filter')(TransactionLists.getShelfLifeUnitsList(), {id: lifecycleObj.toUnit._id})[0] : '';
         return (lifecycleRec);
     }
 
@@ -661,39 +661,40 @@
             }
         }
         lifecycleRec.requester_of_solicited_information = tempRequesterName;
-        lifecycleRec.fromValue = lifecycleObj.fromValue;
-        lifecycleRec.fromUnit = _toOutputObj(lifecycleObj.fromUnit,currentLang, ENGLISH, FRENCH);
-        lifecycleRec.toValue = lifecycleObj.toValue;
-        lifecycleRec.toUnit = _toOutputObj(lifecycleObj.toUnit,currentLang, ENGLISH, FRENCH);
+        lifecycleRec.from_time = lifecycleObj.fromValue;
+        // lifecycleRec.fromUnit = _toOutputObj(lifecycleObj.fromUnit,currentLang, ENGLISH, FRENCH);
+        lifecycleRec.to_time = lifecycleObj.toValue;
+        // lifecycleRec.toUnit = _toOutputObj(lifecycleObj.toUnit,currentLang, ENGLISH, FRENCH);
 
         return (lifecycleRec);
     }
-    function _toOutputObj(type,language, ENGLISH, FRENCH){
-        var result = {};
-        if(type && type.id){
-            result = {'_id':'','_en':'','_fr':'','__text':''};
-            if(type.id) result._id = type.id;
-            if(type.en) result._en = type.en;
-            if(type.fr) result._fr = type.fr;
-            if(FRENCH === language){
-                result.__text = type.fr;
-            } else {
-                result.__text = type.en;
+    /*
+        function _toOutputObj(type,language, ENGLISH, FRENCH){
+            var result = {};
+            if(type && type.id){
+                result = {'_id':'','_en':'','_fr':'','__text':''};
+                if(type.id) result._id = type.id;
+                if(type.en) result._en = type.en;
+                if(type.fr) result._fr = type.fr;
+                if(FRENCH === language){
+                    result.__text = type.fr;
+                } else {
+                    result.__text = type.en;
+                }
             }
+            return result;
         }
-        return result;
-    }
-/*
-    function _mapRequesterRecToOutput(requesterObj) {
-        var requesterRec = {};
-        if (requesterObj) {
-            requesterRec = {
-                solicited_requester_sequence: requesterObj.sequenceNumber,
-                requester_of_solicited_information: requesterObj.solicitedRequester
+
+        function _mapRequesterRecToOutput(requesterObj) {
+            var requesterRec = {};
+            if (requesterObj) {
+                requesterRec = {
+                    solicited_requester_sequence: requesterObj.sequenceNumber,
+                    requester_of_solicited_information: requesterObj.solicitedRequester
+                }
             }
-        }
-        return (requesterRec);
-    } */
+            return (requesterRec);
+        } */
 
     /**
      * Truncates the label for activity type based on feedback of Jul 18, 2017
@@ -887,9 +888,9 @@
             "requesterName3Txt":"",
             "isSaved": true,
             "fromValue":"",
-            "fromUnit":"",
-            "toValue":"",
-            "toUnit":""
+            // "fromUnit":"",
+            "toValue":""
+            // "toUnit":""
         };
         //TODO get next sequence number
         return defaultRecord;
