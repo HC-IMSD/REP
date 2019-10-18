@@ -273,7 +273,8 @@
                                 </label>
                                 <input type="text" id="{{::lifecycleCtrl.fromValueId}}" name="{{::lifecycleCtrl.fromValueId}}"
                                        data-ng-model="lifecycleCtrl.lifecycleModel.fromValue" required
-                                       class="form-control full-width"/>
+                                       class="form-control full-width"
+                                       data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
                         <div class="form-group col-md-6"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm.to.$invalid}">
@@ -285,7 +286,8 @@
                                                        error-types="lifecycleCtrl.requiredOnly"></cmp-error-message>
                                     <input type="text" id="{{::lifecycleCtrl.toValueId}}" name="{{::lifecycleCtrl.toValueId}}"
                                            data-ng-model="lifecycleCtrl.lifecycleModel.toValue"  required
-                                           class="form-control full-width"/>
+                                           class="form-control full-width"
+                                           data-ng-change="lifecycleCtrl.setConcatDetails()"/>
 
                                 </label>
                         </div>
