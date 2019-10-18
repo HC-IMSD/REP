@@ -648,6 +648,9 @@
                 case(vm.descriptionObj.NOC_RESPONSE):                  /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOD_RESPONSE):                  /*FALLTHROUGH*/
                 case(vm.descriptionObj.NON_RESPONSE):                 /*FALLTHROUGH*/
+                case(vm.descriptionObj.QHSC_RQ_RESPONSE):                  /*FALLTHROUGH*/
+                case(vm.descriptionObj.CHSC_RQ_RESPONSE):                  /*FALLTHROUGH*/
+                case(vm.descriptionObj.QCHSC_RQ_RESPONSE):           /*FALLTHROUGH*/
                 case(vm.descriptionObj.PATIENT_SAFETY_INFO):   /*FALLTHROUGH*/
               //  case(vm.descriptionObj.QUAL_CLIN_CLARIF_RESPONSE):   /*FALLTHROUGH*/
               //  case(vm.descriptionObj.QUAL_CLARIF_RESPONSE):         /*FALLTHROUGH*/
@@ -658,9 +661,8 @@
                // case(vm.descriptionObj.SCREENING_CLARIF_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.NOL_RESPONSE):        /*FALLTHROUGH*/
                 case(vm.descriptionObj.CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
-              //  case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):        /*FALLTHROUGH July 17,2017*/
+                case(vm.descriptionObj.CTN_ETHICS):        /*FALLTHROUGH */
                 case(vm.descriptionObj.CTN_RESPONSE):
-                case(vm.descriptionObj.CTN_SAFETY):
                     setAsStartDate();
                     vm.setConcatDetails();
                     break;
@@ -668,7 +670,14 @@
                 case(vm.descriptionObj.CSOtRMP):
                 case(vm.descriptionObj.DISSEM_LIST):
                 case(vm.descriptionObj.RISK_COMMUN_DOC):        /*FALLTHROUGH*/
+                case(vm.descriptionObj.CTN_INVESTIGATOR):
                     setVersionAndDate();
+                    vm.setConcatDetails();
+                    break;
+                case(vm.descriptionObj.CTN_INFORMED):
+                case(vm.descriptionObj.CTN_PROTOCOL_INFO_UPDATE):
+                case(vm.descriptionObj.CTN_PROTOCOL_UPDATE):
+                    setVersion();
                     vm.setConcatDetails();
                     break;
 
@@ -681,7 +690,8 @@
                 case(vm.descriptionObj.CTN_ADMINISTRATIVE):
                 case(vm.descriptionObj.CTN_APPENDIX):
                 case(vm.descriptionObj.CTN_NEW_MANUFACTURING):
-                case(vm.descriptionObj.CTN_QOS):
+                // case(vm.descriptionObj.CTN_QOS):
+                case(vm.descriptionObj.CTN_SAFETY):
                 case(vm.descriptionObj.CTN_SOURCE):
                 case(vm.descriptionObj.CTN_STUDY_DISC):
                     setAsDescription();
@@ -695,6 +705,7 @@
                 case(vm.descriptionObj.BE_CLARIF_RESPONSE):
                 case(vm.descriptionObj.CLIN_CLARIF_RESPONSE):
                 case(vm.descriptionObj.EMAIL_RQ_RESPONSE):
+                case(vm.descriptionObj.HSC_RQ_RESPONSE):
                 case(vm.descriptionObj.LABEL_CLARIF_RESPONSE):
                 case(vm.descriptionObj.NONCLIN_CLARIF_RESPONSE):
                 case(vm.descriptionObj.PROCESSING_CLARIF_RESPONSE):
@@ -706,8 +717,11 @@
                     vm.setConcatDetails();
                     break;
                 case(vm.descriptionObj.POST_NOC_CHANGE):
-
                     setAsDescriptionChange();
+                    vm.setConcatDetails();
+                    break;
+                case(vm.descriptionObj.CTN_DATA):
+                    setAsDescriptionWithDate();
                     vm.setConcatDetails();
                     break;
                 case(vm.descriptionObj.YEAR):
@@ -752,9 +766,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
 
 
@@ -781,9 +793,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
 
         function setDetailsAsNone() {
@@ -809,9 +819,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
 
         function setAsDescription() {
@@ -836,9 +844,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
 
         }
 
@@ -864,9 +870,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
 
         function setVersionAndDate() {
@@ -891,9 +895,31 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
+        }
+
+        function setVersion() {
+            vm.fromTo = false;
+            vm.endDateVisible = false;
+            vm.startDateVisible = false;
+            vm.descriptionVisible = false;
+            vm.descriptionChangeVisible = false;
+            vm.versionVisible = true;
+            vm.versionLabel = "VERSION_NO";
+            vm.yearVisible = false;
+            vm.yearChangeVisible = false;
+            vm.requesterVisible = false;
+            vm.lifecycleModel.year = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
+            vm.lifecycleModel.fromValue = "";
+            vm.lifecycleModel.toValue = "";
         }
 
         function setAsDatePeriod() {
@@ -918,9 +944,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
         function setAsFromTo() {
             vm.fromTo = true;
@@ -965,9 +989,7 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
 
         function setAsRequesterwithDate() {
@@ -985,9 +1007,7 @@
             vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
         }
 
         function setAsDescriptionChange() {
@@ -1012,9 +1032,32 @@
             vm.lifecycleModel.requesterName2Txt = "";
             vm.lifecycleModel.requesterName3Txt = "";
             vm.lifecycleModel.fromValue = "";
-            vm.lifecycleModel.fromUnit = "";
             vm.lifecycleModel.toValue = "";
-            vm.lifecycleModel.toUnit = "";
+        }
+
+        function setAsDescriptionWithDate() {
+            vm.fromTo = false;
+            vm.endDateVisible = false;
+            vm.startDateVisible = true;
+            vm.descriptionVisible = true;
+            vm.descriptionChangeVisible = false;
+            vm.versionVisible = false;
+            vm.yearVisible = false;
+            vm.yearChangeVisible = false;
+            vm.requesterVisible = false;
+            vm.lifecycleModel.startDate = "";
+            vm.lifecycleModel.endDate = "";
+            vm.lifecycleModel.year = "";
+            vm.lifecycleModel.details = "";
+            vm.lifecycleModel.sequenceVersion = "";
+            vm.lifecycleModel.requesterName = "";
+            vm.lifecycleModel.requesterName2 = "";
+            vm.lifecycleModel.requesterName3 = "";
+            vm.lifecycleModel.requesterNameTxt = "";
+            vm.lifecycleModel.requesterName2Txt = "";
+            vm.lifecycleModel.requesterName3Txt = "";
+            vm.lifecycleModel.fromValue = "";
+            vm.lifecycleModel.toValue = "";
         }
 
         vm.setConcatDetails = function () {
@@ -1023,6 +1066,13 @@
             var concatText = "";
             //translate value to english
            var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
+            if (vm.descriptionVisible && !vm.yearChangeVisible) {
+                if (vm.startDateVisible) {
+                    concatText = enDescription + " - " + vm.lifecycleModel.details;
+                } else {
+                    concatText = enDescription + "\n" + vm.lifecycleModel.details;
+                }
+            }
             if (vm.startDateVisible) {
                 startDate = convertDate(vm.lifecycleModel.startDate);
                 if (vm.versionVisible){
@@ -1035,10 +1085,6 @@
             if (vm.endDateVisible) {
                 endDate = convertDate(vm.lifecycleModel.endDate);
                 concatText = enDescription + " " + startDate + " to " + endDate;
-            }
-            if (vm.descriptionVisible && !vm.yearChangeVisible) {
-
-                concatText = enDescription + "\n" + vm.lifecycleModel.details;
             }
             if (vm.versionVisible) {
                 concatText = enDescription +" version "+ vm.lifecycleModel.sequenceVersion + concatText;
@@ -1053,7 +1099,7 @@
                 concatText = enDescription +  "\n" + vm.lifecycleModel.detailsChange;
             }
             if(vm.fromTo){
-                concatText = enDescription + " From: (" + vm.lifecycleModel.fromValue + ") (" + vm.lifecycleModel.fromUnit.en + ") - To: (" +vm.lifecycleModel.toValue + ") (" + vm.lifecycleModel.toUnit.en + ")";
+                concatText = enDescription + " From " + vm.lifecycleModel.fromValue + " To " + vm.lifecycleModel.toValue;
             }
             if (!concatText) concatText = enDescription;
             vm.lifecycleModel.sequenceConcat = concatText;
@@ -1218,9 +1264,7 @@
             vm.requesterNameId3 = "requester_name3" + scopeId;
             vm.descriptChangeId = "brief_desc_change" +  scopeId;
             vm.fromValueId = "fromValue" + scopeId;
-            vm.fromUnitId = "fromUnit" + scopeId;
             vm.toValueId = "toValue" +scopeId;
-            vm.toUnitId = "toUnit" +scopeId;
         }
     }
 })();

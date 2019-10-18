@@ -125,7 +125,7 @@
                         <input type="text" id="{{::transInfoCtrl.productProtocolId}}"
                                   name="{{::transInfoCtrl.productProtocolId}}"
                                   data-ng-model="transInfoCtrl.transactionModel.ectd.productProtocol"
-                                  class="form-control full-width" maxlength="64"
+                                  class="form-control full-width" maxlength="30"
                                   data-ng-change="transInfoCtrl.transactionModel.ectd.productProtocol=transInfoCtrl.transactionModel.ectd.productProtocol.toUpperCase()"
                                   required>
                                    </input>
@@ -158,7 +158,7 @@
                                 <p> {{::'AUT_LETTER_NOTE'|translate}}</p>
                             </div>
                         </div>
-                        <div class="row" data-ng-if="transInfoCtrl.transactionModel.ectd.dossierType != 'D26'">
+                        <div class="row" data-ng-if="transInfoCtrl.isPB()">
                             <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isPriorityId].$invalid}">
                                 <label for="{{::transInfoCtrl.isPriorityId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_PRIORITY" |translate}}</span>
@@ -178,7 +178,7 @@
                                 <label class="col-xs-1" for="{{::transInfoCtrl.isPriorityId}}_1"><input type="radio" id="{{::transInfoCtrl.isPriorityId}}_1" name="{{::transInfoCtrl.isPriorityId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isPriority" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
-                        <div class="row" data-ng-if="transInfoCtrl.transactionModel.ectd.dossierType != 'D26'">
+                        <div class="row" data-ng-if="transInfoCtrl.isPB()">
                             <div class="form-group col-md-12" data-ng-class="{'has-error':transInfoCtrl.transInfoForm[transInfoCtrl.isNocId].$invalid}">
                                 <label for="{{::transInfoCtrl.isNocId}}" class="required full-width">
                                     <span class="field-name">{{::"IS_NOC" |translate}}</span>
@@ -397,7 +397,7 @@
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REGULATORY_FEES' |translate}}
                         <sup id="tr14_ref">
-                            <a class="fn-lnk" href="#tr14"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>
+                            <a class="fn-lnk" href="#tr14"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>15</a>
                         </sup>
                     </h2>
                 </header>
@@ -414,7 +414,7 @@
                 <header class="panel-heading clearfix">
                     <h2 class="panel-title col-md-8">{{::'REG_CONTACT_THIS' |translate}}
                         <sup id="tr17_ref">
-                            <a class="fn-lnk" href="#tr17"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>17</a>
+                            <a class="fn-lnk" href="#tr17"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>18</a>
                         </sup>
                     </h2>
                 </header>
@@ -428,7 +428,7 @@
                                         <span class="field-name">{{::"COMPANY_NOABBREV" |translate}}</span>
                                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                                         <sup id="tr18_ref">
-                                            <a class="fn-lnk" href="#tr18"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>18</a>
+                                            <a class="fn-lnk" href="#tr18"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>19</a>
                                         </sup>
                                         <cmp-error-message field-name="transInfoCtrl.companyNameId"
                                                            form-ref="transInfoCtrl.transInfoForm"

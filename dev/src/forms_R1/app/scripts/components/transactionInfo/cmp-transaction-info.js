@@ -132,6 +132,16 @@
             }
         };
 
+        vm.isPB = function() {
+            if (vm.transactionModel.ectd.dossierType === 'D21' || vm.transactionModel.ectd.dossierType === 'D22') {
+                return true;
+            } else {
+                vm.transactionModel.ectd.isPriority = "";
+                vm.transactionModel.ectd.isNoc = "";
+                return false;
+            }
+        };
+
         vm.isFeesIndicated=function() {
             return vm.transactionModel.isFees === YES;
         };
@@ -212,20 +222,23 @@
                    vm.transactionModel.isPriority = '';
                    vm.transactionModel.isNoc = '';
                    vm.transactionModel.isAdminSub = '';
+                   vm.showAdminSub = false;
                    vm.transactionModel.isFees = '';
                } else {
                    vm.transactionModel.ectd.productProtocol = '';
                    if(vm.selectedDossierType == 'D24') {
+                       vm.transactionModel.isPriority = '';
+                       vm.transactionModel.isNoc = '';
                        vm.transactionModel.isFees = '';
                    }
                }
-        }
+        };
         vm.faxMandatory = function () {
-            if(vm.selectedDossierType == 'D21' || vm.selectedDossierType == 'D22'){
+            if(vm.selectedDossierType === 'D21' || vm.selectedDossierType === 'D22'){
                 return true;
             }
             return false;
-        }
+        };
 
         function pharmaceuticalDossierType() {
             return vm.transactionModel.ectd.dossierType === 'D21';
