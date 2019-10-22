@@ -65,6 +65,7 @@
             PRESUB_MEETING_RQ: "PRESUB_MEETING_RQ",   //submission Meeting Request -used to be presub
             PRIORITY_REVIEW_RQ: "PRIORITY_REVIEW_RQ", // Priority rewiew request
             // PRISTINE_PM: "PRISTINE_PM", // Pristine PM
+            SECOND_LANG_PM: "SECOND_LANG_PM", // second language PM
             PRISTINE_PM_2LANG: "PRISTINE_PM_2LANG", // pristine PM second language
             ADVISEMENT_LETTER_RESPONSE: "ADVISEMENT_LETTER_RESPONSE", //REspose to Advisement Letter dated
             CLIN_CLARIF_RESPONSE: "CLIN_CLARIF_RESPONSE", //Response to clinical clarifiaction request
@@ -151,6 +152,8 @@
             CTN_STUDY_COMPLETION:"CTN_STUDY_COMPLETION",
             CTN_STUDY_DISC:"CTN_STUDY_DISC",
             CTN_STUDY_EXT:"CTN_STUDY_EXT",
+            CTN_STUDY_SUS:"CTN_STUDY_SUS",
+            CTN_TRANS_OWN:"CTN_TRANS_OWN",
             CLINICAL:"CLINICAL",
             CLINICAL_QUALITY:"CLINICAL_QUALITY",
             QUALITY:"QUALITY"
@@ -307,7 +310,7 @@
                 vm.allActivities.INITIAL, //Initial
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
-                // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.BE_CLARIF_RESPONSE,
@@ -354,6 +357,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
@@ -402,6 +406,7 @@
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 vm.allActivities.POST_NOC_CHANGE, //Post NOC change
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
@@ -462,6 +467,7 @@
                 vm.allActivities.PRESUB_MEETING_PKG, // presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
@@ -499,6 +505,7 @@
                 vm.allActivities.PRESUB_MEETING_PKG, // presubmission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.BE_CLARIF_RESPONSE, //Response to BE clarification request dated..
@@ -591,6 +598,7 @@
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 vm.allActivities.POST_NOC_CHANGE, //Post NOC change
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.BE_CLARIF_RESPONSE, //Response to BE clarification request dated..
@@ -640,6 +648,7 @@
                 vm.allActivities.PRESUB_MEETING_PKG, // submission meeting package
                 vm.allActivities.PRESUB_MEETING_RQ,   //submission Meeting Request -used to be presub
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.BE_CLARIF_RESPONSE, //Response to BE clarification request dated..
@@ -683,6 +692,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.POST_NOC_CHANGE, //Post NOC change
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
                 vm.allActivities.EMAIL_RQ_RESPONSE,// response to email request
@@ -815,6 +825,7 @@
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
                 vm.allActivities.PANDEMIC_APPL, //Pandemic application
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
@@ -1176,6 +1187,7 @@
                 vm.allActivities.ALLEGATION_NOTICE, //Notice of allegation
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 vm.allActivities.POST_NOC_CHANGE, //Post NOC change
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.RECON_DECIS_LTR_INTENT,// Reconsideration of Decision - Letter of Intent
                 vm.allActivities.RECON_DECIS_OTHER_INFO,// Reconsideration of Decision - Other Information
@@ -1213,6 +1225,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request
@@ -1259,6 +1272,7 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.POST_CLEARANCE_DATA, //post clearance data
                 // vm.allActivities.PRISTINE_PM, // Pristine PM
+                vm.allActivities.SECOND_LANG_PM, // Second Language PM
                 vm.allActivities.PRISTINE_PM_2LANG, // pristine PM second language
                 vm.allActivities.PUB_RELEASE_INFO, //Public Release of Clinical Information
                 vm.allActivities.CLIN_CLARIF_RESPONSE, //Response to clinical clarifiaction request

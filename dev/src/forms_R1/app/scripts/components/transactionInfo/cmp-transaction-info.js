@@ -218,15 +218,16 @@
 
         vm.updateDossierTypeState = function () {
                vm.selectedDossierType = vm.transactionModel.ectd.dossierType ;
-               if(vm.selectedDossierType == 'D26'){
+               if(vm.selectedDossierType === 'D26'){
                    vm.transactionModel.isPriority = '';
                    vm.transactionModel.isNoc = '';
                    vm.transactionModel.isAdminSub = '';
+                   vm.transactionModel.subType = '';
                    vm.showAdminSub = false;
                    vm.transactionModel.isFees = '';
                } else {
                    vm.transactionModel.ectd.productProtocol = '';
-                   if(vm.selectedDossierType == 'D24') {
+                   if(vm.selectedDossierType === 'D24') {
                        vm.transactionModel.isPriority = '';
                        vm.transactionModel.isNoc = '';
                        vm.transactionModel.isFees = '';
