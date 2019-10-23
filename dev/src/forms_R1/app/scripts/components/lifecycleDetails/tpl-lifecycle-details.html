@@ -95,7 +95,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row" data-ng-if="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible">
+                    <div class="row" data-ng-show="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible">
                         <div class="form-group col-md-4"
                              data-ng-class="{'has-error':lifecycleCtrl.lifecycleDetailsForm[lifecycleCtrl.dateId].$invalid}">
                             <label for="{{::lifecycleCtrl.dateId}}" class="required">
@@ -110,7 +110,7 @@
                             <input id="{{::lifecycleCtrl.dateId}}" type="date" max='9999-12-31'
                                    name="{{::lifecycleCtrl.dateId}}"
                                    data-ng-model="lifecycleCtrl.lifecycleModel.startDate"
-                                   class="form-control" required data-rule-dateISO="true"
+                                   class="form-control" data-ng-required="lifecycleCtrl.startDateVisible && !lifecycleCtrl.endDateVisible" data-rule-dateISO="true"
                                    data-ng-change="lifecycleCtrl.setConcatDetails()"/>
                         </div>
                     </div>

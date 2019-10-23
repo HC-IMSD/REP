@@ -1045,10 +1045,10 @@
             vm.yearVisible = false;
             vm.yearChangeVisible = false;
             vm.requesterVisible = false;
-            vm.lifecycleModel.startDate = "";
+            // vm.lifecycleModel.startDate = "";
             vm.lifecycleModel.endDate = "";
             vm.lifecycleModel.year = "";
-            vm.lifecycleModel.details = "";
+            // vm.lifecycleModel.details = "";
             vm.lifecycleModel.sequenceVersion = "";
             vm.lifecycleModel.requesterName = "";
             vm.lifecycleModel.requesterName2 = "";
@@ -1067,7 +1067,7 @@
             //translate value to english
            var enDescription = translateToEnglish(vm.lifecycleModel.descriptionValue);
             if (vm.descriptionVisible && !vm.yearChangeVisible) {
-                if (vm.startDateVisible) {
+                if (vm.startDateVisible ) {
                     concatText = enDescription + " - " + vm.lifecycleModel.details;
                 } else {
                     concatText = enDescription + "\n" + vm.lifecycleModel.details;
@@ -1078,7 +1078,7 @@
                 if (vm.versionVisible){
                     concatText = " dated " + startDate;
                 }else {
-                    concatText = enDescription + " dated " + startDate;
+                    concatText = (concatText ? concatText : enDescription) + " dated " + startDate;
                 }
             }
 
@@ -1087,7 +1087,14 @@
                 concatText = enDescription + " " + startDate + " to " + endDate;
             }
             if (vm.versionVisible) {
-                concatText = enDescription +" version "+ vm.lifecycleModel.sequenceVersion + concatText;
+                if (vm.lifecycleModel.descriptionValue === vm.descriptionObj.RMP_VERSION_DATE) {
+                    concatText = enDescription + " " + vm.lifecycleModel.sequenceVersion + concatText;
+                } else if (vm.lifecycleModel.descriptionValue === vm.descriptionObj.CTN_PROTOCOL_INFO_UPDATE) {
+                    concatText = "CTN-Protocol version " + vm.lifecycleModel.sequenceVersion +
+                        " and Informed Consent Form version " + vm.lifecycleModel.sequenceVersion + " Update ";
+                } else {
+                    concatText = enDescription + " version " + vm.lifecycleModel.sequenceVersion + concatText;
+                }
             }
             if (vm.yearChangeVisible) {
                 concatText = vm.lifecycleModel.year + ", " + vm.lifecycleModel.details;
