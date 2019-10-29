@@ -472,7 +472,7 @@
             </div>
             <div>
                 <section ng-if="drugProdCtrl.appendixExtraError()">
-                    <input type="hidden"  data-ng-model="drugProdCtrl.extraAppendixModel"
+                    <input type="hidden" required data-ng-model="drugProdCtrl.extraAppendixModel"
                            aria-hidden="true" id="fake.appendix_extra_error" name="fake.appendix_extra_error"/>
                     <details class="alert alert-danger" id="errors-summary-fake.appendix_extra_error" open="open">
                         <summary class="h3">
