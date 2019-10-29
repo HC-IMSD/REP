@@ -28,7 +28,8 @@
             showErrorSummary:'<',
             isFileLoaded:'<',
             updateErrorSummary:'&',
-            setSelectedTab:'<'
+            setSelectedTab:'<',
+            dossierType: '<'
         }
     });
 

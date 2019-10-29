@@ -25,7 +25,8 @@
                 showErrors:'<',
                 fieldLabel: '@',
                 isFileLoaded: '<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                addButtonLabel: '@'
             }
         });
 
@@ -154,7 +155,7 @@
             var aList = vm.deleteRecFromList(vm.model.list, _id);
             vm.updateCountryList();
             vm.onUpdate({list:aList});
-            vm.requiredFlag = false;
+            vm.updateRecord();
         };
 
         vm.deleteRecFromList = function (_list, _id) {

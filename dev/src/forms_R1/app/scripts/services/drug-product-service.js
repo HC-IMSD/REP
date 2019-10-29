@@ -641,8 +641,27 @@
                         countryArray = item.country_group.country_manufacturer;
                     }
                     obj.countryList = getFormulationCountryList(countryArray);
+                    obj.noCountries = obj.countryList.length;
                 } else {
                     obj.countryList = [];
+                }
+                if(item.drug_market){
+                    obj.drugMarket = item.drug_market;
+                    obj.din = "";
+                    obj.dinCountryList = [];
+                    if(item.din){
+                        obj.din = item.din;
+                    } else if(item.din_country_list && item.din_country_list.length >0) {
+                        var countryArray = [];
+                        if (!(item.din_country_list instanceof Array)) {
+                            countryArray = [item.din_country_list];
+                        } else {
+                            countryArray = item.din_country_list;
+                        }
+                        obj.dinCountryList = getFormulationCountryList(countryArray);
+                        obj.noDinCountries = obj.dinCountryList.length;
+                    }
+
                 }
                 formulationList.push(obj);
             });
@@ -1237,6 +1256,15 @@
                 }
                 if (item.animalHumanMaterials && item.animalHumanMaterials.length > 0) {
                     obj.material_ingredient = materialListToOutput(item.animalHumanMaterials);
+                }
+                if(item.drugMarket){
+                    obj.drug_market = item.drugMarket;
+                    if(item.din && item.din != ''){
+                        obj.din = item.din;
+                    }
+                    if(item.dinCountryList.length > 0){
+                        obj.din_country_list = countryListToOutput(item.dinCountryList, currentLang);;
+                    }
                 }
                 formulationList.push(obj);
             });

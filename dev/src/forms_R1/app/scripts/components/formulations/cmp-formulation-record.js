@@ -52,7 +52,8 @@
                 showErrorSummary:'<',
                 updateErrorSummary:'&',
                 isFocus: '<',
-                cancelFocus: '&'
+                cancelFocus: '&',
+                dossierType: '<'
             }
 
         });
@@ -100,11 +101,17 @@
             "no_container": {
                 "type": "element",
                 "target": "list_container"
+            },
+            "no_din_country": {
+                "type": "element",
+                "target": "list_din_country"
             }
         };
         vm.transcludeList={
 
         };
+        vm.orderString = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
         // "cmp-roa-record": "true"
         vm.$onInit = function () {
 
@@ -157,14 +164,26 @@
          */
         vm.noCountry=function(){
             if(!vm.frmModel){
-                vm.noCountries="";
+                vm.frmModel.noCountries="";
                 return false;
             }
             if(!vm.frmModel.countryList || vm.frmModel.countryList.length===0){
-                vm.noCountries="";
+                vm.frmModel.noCountries="";
                 return true;
             }
-            vm.noCountries=vm.frmModel.countryList.length;
+            vm.frmModel.noCountries=vm.frmModel.countryList.length;
+            return false;
+        };
+        vm.noDinCountry=function(){
+            if(!vm.frmModel){
+                vm.frmModel.noDinCountries="";
+                return false;
+            }
+            if(!vm.frmModel.dinCountryList || vm.frmModel.dinCountryList.length===0){
+                vm.frmModel.noDinCountries="";
+                return true;
+            }
+            vm.frmModel.noDinCountries=vm.frmModel.dinCountryList.length;
             return false;
         };
         /**
@@ -260,6 +279,12 @@
             vm.frmModel.countryList = list;
             vm.noCountry();
         };
+        vm.updateDinCountryList = function(list){
+            if(!list) return;
+
+            vm.frmModel.dinCountryList = list;
+            vm.noDinCountry();
+        };
         /**
          * @ngDoc determines if dosage Other should be shown
          * @returns {boolean}
@@ -336,21 +361,44 @@
                 vm.isDosageOther = true;
             }
         };
+        vm.getFirstOrder = function (v) {
+            return vm.orderString[v-1];
+        }
+        vm.getNextOrder = function (v) {
+            if(vm.dossierType == 'D26' && v > 3){
+                v++;
+            }
+            return vm.orderString[v-2];
+        }
+        vm.clickDrugMarket = function () {
+            if('CANADIAN' == vm.frmModel.drugMarket){
+                vm.frmModel.dinCountryList = [];
+            } else if('CANADIAN' == vm.frmModel.drugMarket){
+                vm.frmModel.din = '';
+            } else {
+                vm.frmModel.din = '';
+                vm.frmModel.dinCountryList = [];
+            }
+        }
 
         /**
          * sets the names of the fields. Use underscore as the separator for the scope id. Scope id must be at end
          * @private
          */
         function _setIdNames() {
-            var scopeId = "_" + $scope.$id;
-            vm.formulationFormRecordId="formulationRecord" + scopeId;
-            vm.dosageId = "dosage_form" + scopeId;
-            vm.dosageOtherId = "dosage_form_other" + scopeId;
-            vm.noActiveId="no_active"+scopeId; //Todo: can remove?
-            vm.noContainerId="no_container"+scopeId;
-            vm.noRoaId="no_roa"+scopeId;
-            vm.noCountryId="no_country"+scopeId;
-            vm.isAnimalHumanMaterialId="is_animal_human_material"+scopeId;
+            vm.scopeId = "_" + $scope.$id;
+            vm.formulationFormRecordId="formulationRecord" + vm.scopeId;
+            vm.dosageId = "dosage_form" + vm.scopeId;
+            vm.dosageOtherId = "dosage_form_other" + vm.scopeId;
+            vm.noActiveId="no_active"+vm.scopeId; //Todo: can remove?
+            vm.noContainerId="no_container"+vm.scopeId;
+            vm.noRoaId="no_roa"+vm.scopeId;
+            vm.noCountryId="no_country"+vm.scopeId;
+            vm.isAnimalHumanMaterialId="is_animal_human_material"+vm.scopeId;
+            vm.dinId = "dinId_" + vm.scopeId;
+            vm.dinCountryId = "dinCountryId_" + vm.scopeId;
+            vm.noDinCountryId = "no_din_country" + vm.scopeId;
+            vm.drugMarketId = 'drugMarketId_' + vm.scopeId;
         }
 
         $scope.$watch('formulRecCtrl.formulationForm.$error', function () {

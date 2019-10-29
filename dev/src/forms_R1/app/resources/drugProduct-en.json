@@ -69,5 +69,15 @@
   "FMAP":"Female adult population",
   "MAP":"Male adult population",
   "EXPAND_ALL": "Expand All",
-  "COLLAPSE_ALL": "Collapse All"
+  "COLLAPSE_ALL": "Collapse All",
+  "DRUGMARKETID_": "Which market(s) is the investigational drug product from?",
+  "LIST_DRUG_FROM":"List the country(ies) the investigational drug product was obtained from",
+  "COUNTRY_DIN":"Country",
+  "ADD_COUNTRY": "Add Country",
+  "CANADIAN": "Canadian",
+  "FOREIGN": "Foreign",
+  "NOT_MARKETED": "Not Marketed",
+  "DINID_": "Drug Identification Number (DIN)",
+  "NO_DIN_COUNTRY": "Require at least one country for investigation."
+
 }
