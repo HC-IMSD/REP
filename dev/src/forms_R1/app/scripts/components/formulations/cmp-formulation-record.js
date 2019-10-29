@@ -133,6 +133,13 @@
 
                 vm.updateErrorSummaryState();
             }
+            if(changes.dossierType){
+                if(changes.dossierType.currentValue != 'D26' && changes.dossierType.previousValue == 'D26'){
+                    vm.frmModel.drugMarket = "";
+                    vm.frmModel.din = "";
+                    vm.frmModel.dinCountryList = [];
+                }
+            }
 
         };
 
@@ -396,7 +403,6 @@
             vm.noCountryId="no_country"+vm.scopeId;
             vm.isAnimalHumanMaterialId="is_animal_human_material"+vm.scopeId;
             vm.dinId = "dinId_" + vm.scopeId;
-            vm.dinCountryId = "dinCountryId_" + vm.scopeId;
             vm.noDinCountryId = "no_din_country" + vm.scopeId;
             vm.drugMarketId = 'drugMarketId_' + vm.scopeId;
         }
