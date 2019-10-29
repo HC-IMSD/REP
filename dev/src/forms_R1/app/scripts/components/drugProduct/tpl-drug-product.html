@@ -349,7 +349,7 @@
                 <fieldset id="{{::drugProdCtrl.scheduleSelectedId}}">
                 <legend>
                     <strong>
-                        <span class="label-pi">9.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
+                        <span class="label-pi" data-ng-class="{required:drugProdCtrl.isVet()}">9.&nbsp;{{::'SCHEDULE_PRESC_STATUS'|translate}}</span>
                     </strong>
                     <strong class="required label-pi" data-ng-if="drugProdCtrl.isVet()">{{::"REQUIRED" |translate}}
                         <cmp-error-message field-name="drugProdCtrl.scheduleSelectedId"
@@ -357,7 +357,7 @@
                                        show-error="drugProdCtrl.showError(drugProdCtrl.drugProdForm[drugProdCtrl.scheduleSelectedId])"
                                        error-types="drugProdCtrl.requiredOnly"></cmp-error-message>
                     </strong>
-                        <input type="hidden" required data-ng-model="drugProdCtrl.model.drugProduct.scheduleSelected"
+                        <input type="hidden" data-ng-required="drugProdCtrl.isVet()" data-ng-model="drugProdCtrl.model.drugProduct.scheduleSelected"
                                aria-hidden="true" id="scheduleSelected" name="{{::drugProdCtrl.scheduleSelectedId}}"/>
                 </legend>
                 <div class="row">
@@ -500,21 +500,21 @@
                       error-summary-update="drugProdCtrl.updateSummary" show-error-summary="drugProdCtrl.showSummary"
                       update-error-summary="drugProdCtrl.updateErrorSummaryState()"
                       set-selected-tab="drugProdCtrl.setVisibleTabIndex"
-                      is-file-loaded="drugProdCtrl.isFileLoaded"
+                      is-file-loaded="drugProdCtrl.isFileLoaded" dossier-type="drugProdCtrl.model.dossierType"
                       appendix4-list="drugProdCtrl.model.drugProduct.appendixFourList">
             </cmp-tabs>
         </div>
     </section>
-    <div class="row">
-        <div class="pull-right btn-group-sm rep-margin-right">
-            <button class="btn btn-info btn-sm active " id="btn_expandAll" onclick="expandAll('expandableForm')"
-            >&nbsp;+&nbsp;{{::'EXPAND_ALL' |translate}}
-            </button>
-            <button class="btn btn-info btn-sm active " id="btn_collapseAll" onclick="collapseAll('expandableForm')"
-            >&nbsp;-&nbsp;{{::'COLLAPSE_ALL' |translate}}
-            </button>
-        </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="pull-right btn-group-sm rep-margin-right">-->
+            <!--<button class="btn btn-info btn-sm active " id="btn_expandAll" onclick="expandAll('expandableForm')"-->
+            <!--&gt;&nbsp;+&nbsp;{{::'EXPAND_ALL' |translate}}-->
+            <!--</button>-->
+            <!--<button class="btn btn-info btn-sm active " id="btn_collapseAll" onclick="collapseAll('expandableForm')"-->
+            <!--&gt;&nbsp;-&nbsp;{{::'COLLAPSE_ALL' |translate}}-->
+            <!--</button>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="row">
         <div class="col-md-12 rep-margin-top-bottom">
             <label for="{{::drugProdCtrl.privacyStatementID |translate}}" class="required">

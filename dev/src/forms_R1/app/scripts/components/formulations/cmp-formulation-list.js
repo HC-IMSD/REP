@@ -29,7 +29,8 @@
                 errorSummaryUpdate:'<',
                 showErrorSummary:'<',
                 isFileLoaded: '<',
-                updateErrorSummary:'&'
+                updateErrorSummary:'&',
+                dossierType: '<'
             }
         });
 

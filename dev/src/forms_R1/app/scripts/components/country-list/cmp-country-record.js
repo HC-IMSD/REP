@@ -68,9 +68,11 @@
                     break;
                 }
             }
-            if( ! found ){
-                vm.model.display = "";
-                vm.model.country = {};
+            if( ! found && vm.model.country[vm.lang] != vm.model.display){
+                    vm.model.display = "";
+                    vm.model.country = {};
+            } else {
+                found = true;
             }
             return found;
             // if(vm.countryChanged()){
@@ -108,7 +110,8 @@
         };
 
         vm.deleteRecord = function()  {
-            vm.onDelete({id: vm.model.id})
+            vm.clearFilter($scope);
+            vm.onDelete({id: vm.model.id});
         };
 
 
