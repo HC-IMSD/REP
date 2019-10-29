@@ -69,5 +69,17 @@
   "MPP":"fr_Male paediatric population (0-18 years of age)",
   "FMAP":"fr_Female adult population",
   "MAP":"fr_Male adult population",
-  "IMPORT_LETTER": "fr_A letter of authorization signed by the clinical trial sponsor must be provided in section 1.2.1 for a third party to import the new drug(s) described in this clinical trial application or amendment. If the importer has not changed when a clinical trial application amendment (CTA-A) is filed, a letter of authorization does not need to be submitted."
+  "IMPORT_LETTER": "fr_A letter of authorization signed by the clinical trial sponsor must be provided in section 1.2.1 for a third party to import the new drug(s) described in this clinical trial application or amendment. If the importer has not changed when a clinical trial application amendment (CTA-A) is filed, a letter of authorization does not need to be submitted.",
+  "EXPAND_ALL": "fr_Expand All",
+  "COLLAPSE_ALL": "fr_Collapse All",
+  "DRUGMARKETID_": "fr_Which market(s) is the investigational drug product from?",
+  "LIST_DRUG_FROM":"fr_List the country(ies) the investigational drug product was obtained from",
+  "COUNTRY_DIN":"fr_Country",
+  "ADD_COUNTRY": "fr_Add Country",
+  "CANADIAN": "fr_Canadian",
+  "FOREIGN": "fr_Foreign",
+  "NOT_MARKETED": "fr_Not Marketed",
+  "DINID_": "fr_Drug Identification Number (DIN)",
+  "NO_DIN_COUNTRY": "fr_Require at least one country for investigation."
+
 }

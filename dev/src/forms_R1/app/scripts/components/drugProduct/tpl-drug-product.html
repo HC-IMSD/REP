@@ -246,12 +246,12 @@
             </div>
             <div class="row" data-ng-if="drugProdCtrl.isCTA()">
                 <div class="col-md-12 form-group">
-                    <label class="required full-width">
+                    <strong class="required full-width">
                         <span class="field-name">7. {{::'ARE_CTA_IMPORTED' |translate}}</span>
                         <sup id="dr5a_ref">
                             <a class="fn-lnk" href="#dr5a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
                         </sup>
-                    </label>
+                    </strong>
                     <label class="col-xs-1" for="areDrugsImportedId">
                         <input type="radio" id="areDrugsImportedId" name="areDrugsImportedId"
                                value="Y" data-ng-model="drugProdCtrl.model.areDrugsImported"/>
@@ -485,16 +485,16 @@
                 </section>
             </div>
 
-            <!--<div class="row">-->
-                <!--<div class="col-xs-12 form-group">-->
-                    <!--<strong>-->
-                        <!--<span class="field-name">11. {{::'FORMULATION'|translate}}</span>-->
-                        <!--<sup id="dr9_ref">-->
-                            <!--<a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>-->
-                        <!--</sup>-->
-                    <!--</strong>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="row">
+                <div class="col-xs-12 form-group">
+                    <strong>
+                        <span class="field-name">11. {{::'FORMULATION'|translate}}</span>
+                        <sup id="dr9_ref">
+                            <a class="fn-lnk" href="#dr9"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>14</a>
+                        </sup>
+                    </strong>
+                </div>
+            </div>
             <cmp-tabs formulation-list="drugProdCtrl.model.drugProduct.formulations"
                       record-changed="drugProdCtrl.recordsChanged()" service="drugProdCtrl.drugProductService"
                       error-summary-update="drugProdCtrl.updateSummary" show-error-summary="drugProdCtrl.showSummary"

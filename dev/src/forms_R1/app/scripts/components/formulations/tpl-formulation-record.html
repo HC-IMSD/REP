@@ -112,9 +112,9 @@
 
                     <div class="panel-body" data-ng-if="formulRecCtrl.frmModel.drugMarket == 'FOREIGN'">
                         <div  class="col-md-12 form-group">
-                            <cmp-error-message field-name="formulRecCtrl.dinCountryId"
+                            <cmp-error-message field-name="formulRecCtrl.noDinCountryId"
                                                form-ref="formulRecCtrl.formulationForm"
-                                               show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.dinCountryId])"
+                                               show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.noDinCountryId])"
                                                error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                             <strong id="list_din_country{{::formulRecCtrl.scopeId}}">{{::'LIST_DRUG_FROM'|translate}}<strong class="required">{{::"REQUIRED" |translate}}</strong>
                             </strong>
@@ -133,13 +133,13 @@
             <div class="row">
                 <div class="form-group col-xs-12"
                      data-ng-class="{'has-error':formulRecCtrl.formulationForm[formulRecCtrl.isAnimalHumanMaterialId].$invalid}">
-                    <label for="{{formulRecCtrl.isAnimalHumanMaterialId}}" class="required rep-required-offset full-width">
-                        <span class="field-name">&#160;{{formulRecCtrl.getNextOrder(5)}}. {{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</span>
+                    <span class="rep-required-offset full-width">
+                        <strong class="field-name">&#160;{{formulRecCtrl.getNextOrder(5)}}. {{'IS_ANIMAL_HUMAN_MATERIAL'|translate}}</strong>
                         <strong class="required">{{"REQUIRED" |translate}}</strong>
                         <sup id="dr9d_ref">
                             <a class="fn-lnk" href="#dr9d"><span class="wb-inv">{{::'INSTRUCTION'|translate}}</span> 14.3</a>
                         </sup>
-                    </label>
+                    </span>
 
                     <div  class="col-md-12">
                     <cmp-error-message field-name="formulRecCtrl.isAnimalHumanMaterialId"
