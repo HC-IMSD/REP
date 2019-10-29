@@ -51,6 +51,7 @@
                 mailling: false,
                 thisActivity: false,
                 importer: false,
+                areDrugsImported: "",
                 importerRecord: [],
                 //relatedDossierID: "",
                 enrolmentVersion: "0.00",
@@ -107,10 +108,10 @@
                          phaseOther: false,
                         ctaPhaseOtherDetails:""
                     },
-                    isRefuseInfo:"",
-                    hasDinNoc:"",
-                    isCanMarket:"",
-                    ctaSrcCountryList: []
+                    isRefuseInfo:""
+                    // hasDinNoc:"",
+                    // isCanMarket:"",
+                    // ctaSrcCountryList: []
                 }
                 //contactList: []
 
@@ -170,6 +171,7 @@
                     mailling: info.mailing === 'Y',
                     thisActivity: info.this_activity === 'Y',
                     importer: info.importer === 'Y',
+                    areDrugsImported: info.are_drugs_imported,
                     importerRecord: transformImpFromFile(info.importer_record),
                     enrolmentVersion: info.enrolment_version,
                     dateSaved: info.date_saved,
@@ -291,6 +293,7 @@
             baseModel.mailing = jsonObj.mailling === true ? 'Y' : 'N';
             baseModel.this_activity = jsonObj.thisActivity === true ? 'Y' : 'N';
             baseModel.importer = jsonObj.importer === true ? 'Y' : 'N';
+            baseModel.are_drugs_imported = jsonObj.areDrugsImported;
             baseModel.importer_record =
                 transformImpToFile(jsonObj.importerRecord);
 

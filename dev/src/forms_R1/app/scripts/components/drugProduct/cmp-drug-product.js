@@ -143,7 +143,10 @@
 
         vm.$onInit = function () {
             vm.showSummary = false;
-            vm.drugUseList = DossierLists.getDrugUseList();
+            vm.defaultDrugUseList = DossierLists.getDrugUseList();
+            vm.vetDrugUseList = DossierLists.getVetDrugUseList();
+            vm.ctaDrugUseList = DossierLists.getCTADrugUseList();
+            vm.drugUseList = vm.defaultDrugUseList;
             vm.disinfectantTypeList = DossierLists.getDisinfectantTypeList();
             _setIdNames();
             vm.drugProductService = new DrugProductService();
@@ -337,7 +340,7 @@
         vm.isCTA = function () {
             if (vm.model && vm.model.dossierType && vm.model.dossierType === "D26") {
                 return true;
-            } else {
+            } else if (vm.drugProductService) {
                 vm.model.clinicalTrial = vm.drugProductService.getEmptyCtaModel();
             }
             return false;
@@ -349,7 +352,7 @@
         vm.isVet = function () {
             if (vm.model && vm.model.drugProduct && vm.model.drugProduct.drugUse && vm.model.drugProduct.drugUse.id === "VET") {
                 return true;
-            } else {
+            } else if (vm.model && vm.model.drugProduct) {
                 vm.model.drugProduct.speciesRecord = [];
             }
             return false;
@@ -369,6 +372,21 @@
                     institutionalIndustrial: false,
                     contactLens: false
                 };
+            }
+        };
+
+        /***
+         * dossier Type Changed
+         */
+        vm.dossierTypeChange = function () {
+            if (vm.model && vm.model.dossierType && vm.model.dossierType === "D26") {
+                vm.drugUseList = vm.ctaDrugUseList;
+            } else if (vm.model && vm.model.dossierType && vm.model.dossierType === "D24"){
+                vm.drugUseList = vm.vetDrugUseList;
+                vm.model.areDrugsImported ="";
+            } else {
+                vm.drugUseList = vm.defaultDrugUseList;
+                vm.model.areDrugsImported ="";
             }
         };
 

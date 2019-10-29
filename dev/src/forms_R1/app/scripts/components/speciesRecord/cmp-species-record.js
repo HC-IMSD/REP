@@ -85,7 +85,11 @@
         vm.saveRecord = function()  {
             if (vm.speciesForm.$valid) {
                 vm.model.specSubt = vm.model.species[vm.lang] + ', ' + vm.model.subtypes[vm.lang];
-                vm.model.timeCombined = vm.model.withdrawalDays + ' days and ' + vm.model.withdrawalHours + ' hours';
+                if (vm.model.withdrawalDays) {
+                    vm.model.timeCombined = vm.model.withdrawalDays + ' days and ' + vm.model.withdrawalHours + ' hours';
+                } else  {
+                    vm.model.timeCombined = "";
+                }
                 if (vm.record) {
                     vm.onUpdate({species: vm.model});
                 }

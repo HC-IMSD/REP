@@ -563,9 +563,6 @@
                 vm.allActivities.MEETING_MINUTES, //minutes of meeting dated
                 vm.allActivities.MHPD_RQ_RESPONSE, //Response to MHPD requests
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE, //Response to processing Clarification Request
-                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
-                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
-                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
                 vm.allActivities.UNSOLICITED_DATA, //Unsolicited Data
                 vm.allActivities.PHONE_RQ_RESPONSE, //Response to telephone Request
                 vm.allActivities.CLIN_CLARIF_RESPONSE //Response to clinical clarification request
@@ -1554,6 +1551,9 @@
                 vm.allActivities.CLIN_CLARIF_RESPONSE,
                 vm.allActivities.EMAIL_RQ_RESPONSE,
                 vm.allActivities.HSC_RQ_RESPONSE,
+                vm.allActivities.QHSC_RQ_RESPONSE, //Response to Quality & Human Safety Clarification Request
+                vm.allActivities.CHSC_RQ_RESPONSE, // Response to Clinical & Human Safety Clarification Request
+                vm.allActivities.QCHSC_RQ_RESPONSE, // Response to Quality, Clinical and Human Safety Clarification Request
                 vm.allActivities.PROCESSING_CLARIF_RESPONSE,
                 vm.allActivities.PHONE_RQ_RESPONSE,
                 vm.allActivities.UNSOLICITED_DATA

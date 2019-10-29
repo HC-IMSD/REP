@@ -57,6 +57,8 @@
             getUnitsPresentationList: _getUnitsPresentationArray,
             getUnitsMeasureList: _getUnitsMeasureArray,
             getDrugUseList:_getDrugUseArray,
+            getVetDrugUseList:_getVetDrugUseArray,
+            getCTADrugUseList:_getCTADrugUseArray,
             getDisinfectantTypeList:_getDisinfectantTypeArray,
             getIngRoleList:_getIngRoleArray,
             getPerList:_getPerArray,
@@ -187,12 +189,24 @@
         }
 
         function _getDrugUseArray(){
+            return(angular.merge(_getVetDrugUseArray(), _getCTADrugUseArray()));
+        }
+
+        function _getVetDrugUseArray(){
+
+            return(
+                [
+                    {"id":"VET","en":"Veterinary","fr":"Vétérinaire"}
+                ]
+            )
+        }
+
+        function _getCTADrugUseArray(){
 
             return(
                 [
                     {"id":"HUMAN","en":"Human","fr":"Humain"},
                     {"id":"RADIO","en":"Radiopharmaceutical","fr":"Radiopharmaceutique"},
-                    {"id":"VET","en":"Veterinary","fr":"Vétérinaire"},
                     {"id":"DISINFECT","en":"Disinfectant","fr":"Désinfectant"},
                     {"id":"DM","en":"Drug and Medical Device","fr":"Drogue et instrument médicale"}
                 ]
