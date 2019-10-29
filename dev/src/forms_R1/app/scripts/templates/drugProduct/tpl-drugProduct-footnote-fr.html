@@ -15,6 +15,7 @@
         <p>{{::'DRUG_PRODUCT'|translate}}</p>
         <ul>
             <li> Veuillez inclure seulement les renseignements pertinents à cette activité de réglementation (c.-à-d., si le dossier comporte cinq formes posologiques, mais que cette activité de réglementation ne s’applique qu’à l’une d’entre elles, indiquez seulement la formulation correspondante à cette forme posologique dans cette version du fichier d’information sur le produit en format XML).</li>
+            <li>Pour "<b>obtenir l’ID d’entreprise/b>", consultez la version finale du fichier d’entreprise (en format XML) délivré par Santé Canada.</li>
             <li>Pour "<b>obtenir l’ID du dossier</b>", consultez les documents délivré par Santé Canada. L’ID du dossier est composé d’une lettre suivie de six chiffres. (p. ex., HC6-024-x######).</li>
             <li>Remarque : Toute section comportant un bouton « Enregistrer » doit être sauvegardée individuellement. Autrement, l’information incomplète sera perdue.</li>
         </ul>
@@ -73,7 +74,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>7</dt>
     <dd id="dr4a">
-        <p>{{'CLINICAL_TRIAL'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{'CLINICAL_TRIAL'|translate}}</p>
         <p>Please do not include the Clinical Trial Site Information form in application. Update with CTSI instruction.</p>
         <p class="fn-rtn"><a href="#dr4a_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>7
             <span class="wb-inv"> referrer</span></a>
@@ -81,39 +82,40 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>8</dt>
     <dd id="dr4b">
-        <p>{{::'PROTOCOL_NUMBER'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{::'PROTOCOL_NUMBER'|translate}}</p>
         <p>The protocol number should remain the same for the duration of the trial. It is acceptable to indicate the version or amendment number of the protocol submitted at the time of application; however, the original protocol number must always be indicated.</p>
         <p class="fn-rtn"><a href="#dr4b_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>8
             <span class="wb-inv"> referrer</span></a>
         </p>
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>9</dt>
-    <dd id="dr4c">
-        <p>{{'CTA_HAS_DIN'|translate}}</p>
-        <p>Investigational is defined as: </p>
-        <ul>
-            <li value="1">Drug product does not have a DIN/NOC in Canada; or</li>
-            <li>Drug product has a DIN/NOC in Canada, but is used off-label</li>
-        </ul>
-        <p class="fn-rtn"><a href="#dr4c_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9
-            <span class="wb-inv"> referrer</span></a>
-        </p>
-    </dd>
-    <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>10</dt>
     <dd id="dr5">
-        <p>{{::'ADDRESS_NOC'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{::'ADDRESS_NOC'|translate}}</p>
         <ul>
             <li>Si les FDM et les AC doivent être envoyés au fabricant, au promoteur ou à l’importateur, il faut s’assurer que les renseignements fournis dans la version finale du fichier d’entreprise (en format XML) sont à jour. </li>
             <li>De plus, il faut s’assurer que les importateurs concernés sont nommés à la section 7 ci-dessous.</li>
             <li>Si les FDM et les AC doivent être envoyés à la personne-ressource associée à cette activité de réglementation, le nom indiqué dans le dernier fichier de transaction réglementaire (en format XML) pour cette activité sera utilisé. </li>
         </ul>
-        <p class="fn-rtn"><a href="#dr5_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>10
+        <p class="fn-rtn"><a href="#dr5_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9
+            <span class="wb-inv"> referrer</span></a>
+        </p>
+    </dd>
+    <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>10</dt>
+    <dd id="dr5a">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{'ARE_CTA_IMPORTED'|translate}}</p>
+        <p>For Clinical Trial Applications (CTA) and CTA-Amendments (CTA-A):</p>
+        <ul>
+            <li>If clinicial trial drugs are to be imported into Canada, importers should be authorized by the sponsor, regardless of the sponsor's location.</li>
+            <li>A third party authorization letter should be completed by the sponsor and submitted for each importer in Canada in section 1.2.1. List each applicable importer authorized to import the new drug for the purposes of the trial outlined in the application.  Canadian importer(s) must be located within Canada. Refer to the Guidance for Clinical Trial Sponsors: Clinical Trial Applications (hyperlink to: https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/clinical-trials/guidance-clinical-trial-sponsors-clinical-trial-applications.html) for further details.</li>
+            <li>As additional importers are identified, additional third party authorization letters should be provided to Health Canada in section 1.2.1. If the importer has not changed when a CTA-A is filed, third party authorization letter does not need to be re-submitted.</li>
+        </ul>
+        <p class="fn-rtn"><a href="#dr5a_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>10
             <span class="wb-inv"> referrer</span></a>
         </p>
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>11</dt>
     <dd id="dr6">
-        <p>{{'IMPORTER'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}{{'IMPORTER'|translate}}</p>
         <ul>
             <li>Lorsque le fabricant ou le promoteur n’est pas situé au Canada, un importateur canadien doit être nommé. </li>
             <li>Pour obtenir l’ID d’entreprise de l’importateur, consultez la version finale du fichier d’entreprise délivré par Santé Canada.</li>
@@ -184,7 +186,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.1</dt>
     <dd id="dr9c1">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ING_NAME'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ING_NAME'|translate}}</p>
         <p> Dans la mesure du possible, les promoteurs doivent choisir le nom de l’ingrédient médicinal dans la liste consultable. Si le nom de l’ingrédient médical ne se trouve pas dans la liste, entrez son nouveau nom dans le champ approprié en utilisant la dénomination commune internationale (DCI). Il s’agit de la norme utilisée par Santé Canada pour déterminer le nom qui est privilégié pour les ingrédients. Si aucune DCI n’existe pour l’ingrédient, vous devez utiliser d’autres dénominations normalisées reconnues, dans l’ordre suivant : L’United States Adopted Names, le code de Martindale, le Merck Index, le Hawle’s Condensed Chemical Dictionary, le Handbook of Pharmaceutical Excipient, l’International Cosmetics Ingredient Dictionary and Handbook, ainsi que de l’information disponible en ligne.
         </p>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c1_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.1
@@ -193,7 +195,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.2</dt>
     <dd id="dr9c2">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'VARIANT_NAME'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'VARIANT_NAME'|translate}}</p>
         <p>    Pour les variations de formulation relatives à un même DIN (p. ex., saveurs, couleurs et parfums différents), veuillez indiquer le nom de la variante associée à chaque ingrédient non-médical (INM).
             Exemple :
         </p>
@@ -208,7 +210,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.3</dt>
     <dd id="dr9c3">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'PURPOSE'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'PURPOSE'|translate}}</p>
         <p>Exemples : agents de conservation, agents colorants ou enveloppes des capsules, etc.</p>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c3_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.3
             <span class="wb-inv"> referrer</span></a>
@@ -216,7 +218,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.4</dt>
     <dd id="dr9c4">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'STANDARD'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'STANDARD'|translate}}</p>
         <p>Lorsque la norme de fabrication d’un ingrédient est conforme à une norme officinale mentionnée à l’annexe B, utilisez l’abréviation de cette pharmacopée; p. ex., United States Pharmacopeia (USP), British Pharmacopoeia (BP). Lorsque les spécifications régissant la fabrication de l’ingrédient s’écartent de la norme officinale, et l’excèdent ou sont équivalentes à la même, la norme du fabricant (Mfr Std) peut être indiquée. Veuillez inscrire S.O. si aucune norme officinale n’existe pour l’ingrédient actif.
         </p>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c4_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.4
@@ -225,7 +227,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.5</dt>
     <dd id="dr9c5">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'IS_NANO_MATERIAL'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'IS_NANO_MATERIAL'|translate}}</p>
         <p>Faites le choix approprié selon la définition pratique de nanomatériaux de Santé Canada:</p>
         <ul>
             <li type="a">Santé Canada estime que tout produit, matériel, substance, ingrédient, dispositif, système ou structure fabriqués constitue un nanomatériau:
@@ -251,7 +253,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.6</dt>
     <dd id="dr9c6">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ANIMAL_HUMAN_SOURCED'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ANIMAL_HUMAN_SOURCED'|translate}}</p>
         <p>Sélectionnez l’option « Oui » si l’ingrédient ou le matériel a été d’origine humaine ou animale à une étape ou une autre de la fabrication du produit, y compris l’excipient ou l’additif provenant de tissus d’origine humaine ou animale.
         </p>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c6_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.6

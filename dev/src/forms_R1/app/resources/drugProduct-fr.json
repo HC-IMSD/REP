@@ -13,13 +13,14 @@
   "SCHED_DIN":"Numéro d’ID du médicament (DIN)",
   "PROP_INDICATION":"Indication/emploi/posologie proposé (y compris la dose quotidienne maximale)",
   "SCHEDULE_PRESC_STATUS": "Statut sur l'annexe et prescription (sélectionner tout ce qui s’applique): le produit est",
-  "SCHEDULE_C":"dans l'annexe C (produits radiopharmaceutiques) de la Loi sur les aliments et drogues",
-  "SCHEDULE_D":"figurant à l'annexe D (produits biologiques) de la Loi sur les aliments et drogues",
+  "SCHEDULE_C":"dans l'annexe C (produits radiopharmaceutiques) de la Loi sur les aliments et drogues (applicable uniquement pour les produits pharmaceutiques pour usage humain)",
+  "SCHEDULE_D":"figurant à l'annexe D (produits biologiques) de la Loi sur les aliments et drogues (applicable uniquement pour les produits biologiques pour usage humain)",
   "PRESC_DRUG_LIST":"sur la liste des médicaments sur ordonnance",
   "REGULATED_CDSA":"réglementé en vertu de la Loi réglementant certaines drogues et autres substances",
   "NON_PRESC_DRUG":"un médicament sans ordonnance",
-  "NON_PRESC_SCHEDULE_A":"un médicament sans ordonnance auquel une ou plusieurs des réclamations de l'Annexe A s'appliquent.",
+  "NON_PRESC_SCHEDULE_A":"un médicament sans ordonnance auquel une ou plusieurs des réclamations de l'Annexe A s'appliquent (applicable uniquement pour les médicaments à usage humain) ",
   "ADDRESS_NOC":"Adresse où le formulaire de déclaration de médicament (FDM)/l’avis de conformité (AC) doivent être envoyés (lorsque nécessaire):",
+  "ARE_CTA_IMPORTED":"fr_Are clinical trial drugs imported into Canada?",
   "ADDR_INSTRUCT": "fr_Activity Address Instructions",
   "FAKE.APPENDIX_MISSING_ERROR":"fr_with the Human /Animal Sourced Records, missing source",
   "FAKE.APPENDIX_EXTRA_ERROR":"fr_with the Human /Animal Sourced Records, extra source",
@@ -67,5 +68,6 @@
   "FMPP":"fr_Female paediatric population (0-18 years of age)",
   "MPP":"fr_Male paediatric population (0-18 years of age)",
   "FMAP":"fr_Female adult population",
-  "MAP":"fr_Male adult population"
+  "MAP":"fr_Male adult population",
+  "IMPORT_LETTER": "fr_A letter of authorization signed by the clinical trial sponsor must be provided in section 1.2.1 for a third party to import the new drug(s) described in this clinical trial application or amendment. If the importer has not changed when a clinical trial application amendment (CTA-A) is filed, a letter of authorization does not need to be submitted."
 }

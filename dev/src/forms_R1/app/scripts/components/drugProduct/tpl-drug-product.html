@@ -116,6 +116,7 @@
                                 id="{{::drugProdCtrl.typeId}}"
                                 name="{{::drugProdCtrl.typeId}}" data-required="true"
                                 data-ng-model="drugProdCtrl.model.dossierType"
+                                data-ng-change="drugProdCtrl.dossierTypeChange()"
                                 data-ng-options="val |translate for val in  drugProdCtrl.formTypeList">
                             <option value="" label=" " data-ng-if="! drugProdCtrl.model.dossierType" />
                         </select>
@@ -166,8 +167,11 @@
                 <div class="col-xs-12 form-group">
                     <section class="panel panel-default">
                         <header class="panel-heading clearfix">
-                            <h3 class="panel-title">6. {{'CLINICAL_TRIAL'|translate}}
-                            </h3>
+                            <strong><span class="field-name">6. {{'CLINICAL_TRIAL'|translate}}
+                            </span>
+                            <sup id="dr4a_ref">
+                                <a class="fn-lnk" href="#dr4a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>7</a>
+                            </sup></strong>
                         </header>
                         <div class="panel-body">
                             <div>
@@ -188,7 +192,7 @@
                 <legend><strong>
                     <span class="label-pi">6. {{::'ADDRESS_NOC'|translate}}
                     <sup id="dr5_ref">
-                        <a class="fn-lnk" href="#dr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
+                        <a class="fn-lnk" href="#dr5"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>9</a>
                     </sup></span></strong>
                 </legend>
                 <div>
@@ -240,26 +244,54 @@
                 </fieldset>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12 form-group">
-                    <section class="panel panel-default">
-                <header class="panel-heading clearfix">
-                    <h3 class="panel-title">7. {{'IMPORTER'|translate}}
-                        <sup id="dr6_ref">
-                            <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>11</a>
+            <div class="row" data-ng-if="drugProdCtrl.isCTA()">
+                <div class="col-md-12 form-group">
+                    <label class="required full-width">
+                        <span class="field-name">7. {{::'ARE_CTA_IMPORTED' |translate}}</span>
+                        <sup id="dr5a_ref">
+                            <a class="fn-lnk" href="#dr5a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
                         </sup>
-                    </h3>
-                </header>
-                <div class="panel-body">
-                    <div>
-                        <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
-                                           update-error-summary="drugProdCtrl.updateErrorSummary()"
-                                           show-errors="drugProdCtrl.showSummary"
-                                           on-update="drugProdCtrl.updateImporterList(list)">
-                        </cmp-importer-list>
+                    </label>
+                    <label class="col-xs-1" for="areDrugsImportedId">
+                        <input type="radio" id="areDrugsImportedId" name="areDrugsImportedId"
+                               value="Y" data-ng-model="drugProdCtrl.model.areDrugsImported"/>
+                        &nbsp;{{::'Y'|translate}}
+                    </label>
+                    <label class="col-xs-1" for="areDrugsImportedId_1">
+                        <input type="radio" id="areDrugsImportedId_1" name="areDrugsImportedId"
+                               value="N" data-ng-model="drugProdCtrl.model.areDrugsImported"/>
+                        &nbsp;{{::'N'|translate}}
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div data-ng-if="drugProdCtrl.model.areDrugsImported && drugProdCtrl.model.areDrugsImported === 'Y'" class="alert alert-info"
+                         role="alert" aria-live="polite">
+                        {{'IMPORT_LETTER'|translate}}
                     </div>
                 </div>
-            </section>
+            </div>
+            <div class="row" data-ng-if="drugProdCtrl.isNotCTA()">
+                <div class="col-xs-12 form-group">
+                    <section class="panel panel-default">
+                        <header class="panel-heading clearfix">
+                            <h3 class="panel-title">7. {{'IMPORTER'|translate}}
+                                <sup id="dr6_ref">
+                                    <a class="fn-lnk" href="#dr6"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>11</a>
+                                </sup>
+                            </h3>
+                        </header>
+                        <div class="panel-body">
+                            <div>
+                                <cmp-importer-list list-items="drugProdCtrl.model.importerRecord"
+                                                   update-error-summary="drugProdCtrl.updateErrorSummary()"
+                                                   show-errors="drugProdCtrl.showSummary"
+                                                   on-update="drugProdCtrl.updateImporterList(list)">
+                                </cmp-importer-list>
+                            </div>
+                        </div>
+                    </section>
                 </div>
             </div>
 

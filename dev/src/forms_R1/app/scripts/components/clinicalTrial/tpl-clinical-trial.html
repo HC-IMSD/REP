@@ -4,13 +4,16 @@
                 <label for="{{::ctaCtrl.protocolNumId}}" class="required">
                     <span class="field-name">{{::'PROTOCOL_NUMBER' |translate}}</span>
                     <strong class="required">{{::"REQUIRED" |translate}}</strong>
+                    <sup id="dr4b_ref">
+                        <a class="fn-lnk" href="#dr4b"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>8</a>
+                    </sup>
                     <cmp-error-message field-name="ctaCtrl.protocolNumId"
                                        form-ref="ctaCtrl.ctaForm"
                                        show-error="ctaCtrl.showError(ctaCtrl.ctaForm[ctaCtrl.protocolNumId])"
                                        error-types="ctaCtrl.requiredOnly">
                     </cmp-error-message>
                     <input type="text" class="form-control" id="{{::ctaCtrl.protocolNumId}}"
-                           name="{{::ctaCtrl.protocolNumId}}" required  maxlength="64" size="30"
+                           name="{{::ctaCtrl.protocolNumId}}" required  maxlength="30" size="30"
                            data-ng-change="ctaCtrl.ctaModel.protocolNum=ctaCtrl.ctaModel.protocolNum.toUpperCase()"
                            data-ng-model="ctaCtrl.ctaModel.protocolNum"/>
                 </label>
@@ -203,52 +206,5 @@
                 <label class="col-xs-1" for="{{::ctaCtrl.isInfoRebId}}"><input type="radio" id="{{::ctaCtrl.isInfoRebId}}" name="{{::ctaCtrl.isInfoRebId}}" value="Y" data-ng-model="ctaCtrl.ctaModel.isRefuseInfo" required/>&nbsp;{{::'Y'|translate}}</label>
                 <label class="col-xs-1" for="{{::ctaCtrl.isInfoRebId}}_1"><input type="radio" id="{{::ctaCtrl.isInfoRebId}}_1" name="{{::ctaCtrl.isInfoRebId}}" value="N" data-ng-model="ctaCtrl.ctaModel.isRefuseInfo" required/>&nbsp;{{::'N'|translate}}</label>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-xs-12"
-                 data-ng-class="{'has-error':ctaCtrl.ctaForm[ctaCtrl.hasDinId].$invalid}">
-                <label for="{{::ctaCtrl.hasDinId}}" class="full-width required">
-                    <span class="field-name">{{'CTA_HAS_DIN'|translate}}</span>
-                    <strong class="required">{{"REQUIRED" |translate}}</strong>
-                </label>
-                <cmp-error-message field-name="ctaCtrl.hasDinId"
-                                   form-ref="ctaCtrl.ctaForm"
-                                   show-error="ctaCtrl.showError(ctaCtrl.ctaForm[ctaCtrl.hasDinId])"
-                                   error-types="ctaCtrl.requiredOnly"></cmp-error-message>
-                <label class="col-xs-1" for="{{::ctaCtrl.hasDinId}}"><input type="radio" id="{{::ctaCtrl.hasDinId}}" name="{{::ctaCtrl.hasDinId}}" value="Y" data-ng-model="ctaCtrl.ctaModel.hasDinNoc" required/>&nbsp;{{::'Y'|translate}}</label>
-                <label class="col-xs-1" for="{{::ctaCtrl.hasDinId}}_1"><input type="radio" id="{{::ctaCtrl.hasDinId}}_1" name="{{::ctaCtrl.hasDinId}}" value="N" data-ng-model="ctaCtrl.ctaModel.hasDinNoc" required/>&nbsp;{{::'N'|translate}}</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-xs-12"
-                 data-ng-class="{'has-error':ctaCtrl.ctaForm[ctaCtrl.isCanMarketId].$invalid}">
-                <label for="{{::ctaCtrl.isCanMarketId}}" class="full-width required">
-                    <span class="field-name">{{'CTA_IS_MARKET'|translate}}</span>
-                    <strong class="required">{{"REQUIRED" |translate}}</strong>
-                </label>
-                <cmp-error-message field-name="ctaCtrl.isCanMarketId"
-                                   form-ref="ctaCtrl.ctaForm"
-                                   show-error="ctaCtrl.showError(ctaCtrl.ctaForm[ctaCtrl.isCanMarketId])"
-                                   error-types="ctaCtrl.requiredOnly"></cmp-error-message>
-                <label class="col-xs-1" for="{{::ctaCtrl.isCanMarketId}}"><input type="radio" id="{{::ctaCtrl.isCanMarketId}}" name="{{::ctaCtrl.isCanMarketId}}" value="Y" data-ng-model="ctaCtrl.ctaModel.isCanMarket" required/>&nbsp;{{::'Y'|translate}}</label>
-                <label class="col-xs-1" for="{{::ctaCtrl.isCanMarketId}}_1"><input type="radio" id="{{::ctaCtrl.isCanMarketId}}_1" name="{{::ctaCtrl.isCanMarketId}}" value="N" data-ng-model="ctaCtrl.ctaModel.isCanMarket" required/>&nbsp;{{::'N'|translate}}</label>
-            </div>
-        </div>
-        <div>
-            <section class="panel panel-default">
-                <header class="panel-heading">
-                    <h3 class="panel-title">{{'CTA_COUNTRIES'|translate}}</h3>
-                </header>
-                <div class="panel-body" id="list_cta_country_{{::$id}}">
-                    <input type="hidden" name="{{::ctaCtrl.noCountryId}}" id="{{::ctaCtrl.noCountryId}}"
-                           aria-hidden="true" data-ng-model="ctaCtrl.noCountries" required/>
-                    <cmp-country-list list-items="ctaCtrl.ctaModel.ctaSrcCountryList" with-unknown="false"
-                                      on-update="ctaCtrl.updateCountryList(list)"
-                                      show-errors="ctaCtrl.showSummary"
-                                      is-file-loaded="ctaCtrl.isFileLoaded"
-                                      field-label="CTA_COUNTRY_NAME">
-                    </cmp-country-list>
-                </div>
-            </section>
         </div>
 </ng-form>

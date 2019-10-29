@@ -1,7 +1,7 @@
 <ng-form name="disiTypeCtrl.disiTypeForm">
     <fieldset id="fs_disi_type_missing_{{::$id}}" class="rep-margin-left">
         <legend class="required legend-rep">
-            <span class="field-name">{{::'DISINFECTANT_TYPE'|translate}}({{::'MSG_ERR_DISITYPE'|translate}})</span>
+            <span class="field-name">{{::'DISINFECTANT_TYPE'|translate}}&nbsp;({{::'MSG_ERR_DISITYPE'|translate}})</span>
             <strong class="required"> {{"REQUIRED" |translate}}</strong>
             <input id="disi_type_missing_{{::$id}}" type="text" name="disi_type_missing_{{::$id}}" data-ng-show="false"
                    data-ng-model="disiTypeCtrl.isSelected" required/>

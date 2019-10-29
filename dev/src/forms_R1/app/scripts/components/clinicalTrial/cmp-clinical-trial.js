@@ -34,7 +34,6 @@
         vm.phaseKeys = ['phase1Bio', 'phase1Study', 'phase1Other', 'phase2', 'phase3', 'phaseOther'];
         vm.oneComposSelected = "";
         vm.onePhaseSelected = "";
-        vm.noCountries="";
         vm.updateSummary=0; //triggers and error summary update
         vm.errorMsg = "";
         vm.requiredOnly = [{type: "required", displayAlias: "MSG_ERR_MAND"}];
@@ -111,31 +110,6 @@
 
         };
 
-        /***
-         * Shows the no country of manufacture errro
-         * TODO: Not show this until someone saves?
-         * @returns {boolean}
-         */
-        vm.noCountry=function(){
-            if(!vm.ctaModel){
-                vm.noCountries="";
-                return false;
-            }
-            if(!vm.ctaModel.ctaSrcCountryList || vm.ctaModel.ctaSrcCountryList.length===0){
-                vm.noCountries="";
-                return true;
-            }
-            vm.noCountries=vm.ctaModel.ctaSrcCountryList.length;
-            return false;
-        };
-
-        vm.updateCountryList = function(list){
-            if(!list) return;
-
-            vm.ctaModel.ctaSrcCountryList = list;
-            vm.noCountry();
-        };
-
         function _setIdNames() {
             var scopeId="_"+  $scope.$id;
             vm.protocolNumId = "protocol_number" +scopeId;
@@ -144,9 +118,6 @@
             vm.phaseId = "cta_phase" + scopeId;
             vm.phaseOtherId = "cta_other" +scopeId;
             vm.isInfoRebId = "info_reb" + scopeId;
-            vm.hasDinId = "cta_has_din"+ scopeId;
-            vm.isCanMarketId = "cta_is_market" + scopeId;
-            vm.noCountryId="no_cta_country"+scopeId;
         }
 
         vm.isEmpty = function(aValue){

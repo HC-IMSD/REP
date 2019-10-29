@@ -14,7 +14,8 @@
         <p>{{::'DRUG_PRODUCT'|translate}}</p>
         <ul>
             <li>Please only include information that is pertinent to this regulatory activity (i.e. if the dossier has 5 dosage forms, but this regulatory activity only applies to 1, only list the formulation for that 1 dosage form in this version of the product information XML file).</li>
-            <!--<li>The “<b>Company ID</b>” must be obtained from the final company XML file, issued by Health Canada. Company ID must be 5 digits, add leading zero when required.</li>-->
+            <li>For clinical trials, all investigational products should be listed in this regulatory activity. </li>
+            <li>The “<b>Company ID</b>” must be obtained from the final company XML file, issued by Health Canada. Company ID must be 5 digits, add leading zero when required.</li>
             <li>The “<b>Dossier ID</b>” can be obtained from Health Canada issued document. The format of a Dossier ID is a letter followed by six digits. (e.g. HC6-024-x######).</li>
             <li>Note: Each section with a SAVE button must be saved individually; otherwise incomplete information will be lost.</li>
         </ul>
@@ -36,9 +37,9 @@
         <p>{{::'DOSSIER_TYPE'|translate}}</p>
         <ul>
             <li>Biologic dossier applies to all biologic products and radiopharmaceuticals</li>
-            <li>Pharmaceutical dossier applies to all pharmaceutical products, non-prescription products, disinfectants </li>
-            <li>Veterinary dossier applies to all veterinary products</li>
-            <li>Clinical Trial dossier applies to all regulatory activities pursuant to Part C, Division 5 of the Food and Drug Regulations.</li>
+            <li>Clinical Trial dossier applies to all pharmaceutical products for human use, biologic products and radiopharmaceuticals, non-prescription and ethical products, and disinfectants</li>
+            <li>Pharmaceutical dossier applies to all pharmaceutical products, non-prescription and ethical products, and disinfectants</li>
+            <li>Veterinary dossier applies to all pharmaceuticals for veterinary use, non-prescription and ethical products</li>
         </ul>
         <p class="fn-rtn">
             <a href="#dr2b_ref">
@@ -51,8 +52,8 @@
     <dd id="dr3">
         <p>{{::'PROD_NAME' |translate}}</p>
         <ul>
-            <li>Only include the name of the products impacted by this regulatory activity.</li>
-            <li>The product name (also known as the brand name or proprietary name) is the name assigned by the manufacturer or sponsor to the dossier (product), and under which the product is to be sold and advertised. The product name is also the name used to identify the product in all submission correspondence, Product Label(s) and Product Monograph/Package Insert, if applicable. If the product name has not yet been determined, the following may be used: “TBD” (short for To Be Determined), the proper or common name of the drug, or the research code.</li>
+            <li>The product name is the name assigned by the manufacturer/sponsor to distinguish the drug (product) and under which the drug is to be sold/advertised. It is also the name used to identify the product in all correspondence related to the submission and on the product label(s) and Product Monograph and/or Package Insert, if applicable. If the brand name has not yet been determined, the proper or common name of the drug or the research code may be used.</li>
+            <li>For clinical trials: Please enter the name of the investigational product, and where there is more than one investigational product, all of them should be captured. An investigational product corresponds to a product involved in the conduct of a clinical trial. It could be a product not available in Canada, a product in development or a product already approved in Canada but used outside the approved indication.</li>
         </ul>
         <p class="fn-rtn"><a href="#dr3_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>5
             <span class="wb-inv"> referrer</span></a>
@@ -73,7 +74,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>7</dt>
     <dd id="dr4a">
-        <p>{{'CLINICAL_TRIAL'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}&nbsp;{{'CLINICAL_TRIAL'|translate}}</p>
         <p>Please do not include the Clinical Trial Site Information form in application. Update with CTSI instruction.</p>
         <p class="fn-rtn"><a href="#dr4a_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>7
             <span class="wb-inv"> referrer</span></a>
@@ -81,45 +82,48 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>8</dt>
     <dd id="dr4b">
-        <p>{{::'PROTOCOL_NUMBER'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}&nbsp;{{::'PROTOCOL_NUMBER'|translate}}</p>
         <p>The protocol number should remain the same for the duration of the trial. It is acceptable to indicate the version or amendment number of the protocol submitted at the time of application; however, the original protocol number must always be indicated.</p>
         <p class="fn-rtn"><a href="#dr4b_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>8
             <span class="wb-inv"> referrer</span></a>
         </p>
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>9</dt>
-    <dd id="dr4c">
-        <p>{{'CTA_HAS_DIN'|translate}}</p>
-        <p>Investigational is defined as: </p>
-        <ul>
-            <li value="1">Drug product does not have a DIN/NOC in Canada; or</li>
-            <li>Drug product has a DIN/NOC in Canada, but is used off-label</li>
-        </ul>
-        <p class="fn-rtn"><a href="#dr4c_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9
-            <span class="wb-inv"> referrer</span></a>
-        </p>
-    </dd>
-    <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>10</dt>
     <dd id="dr5">
-        <p>{{::'ADDRESS_NOC'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}&nbsp;{{::'ADDRESS_NOC'|translate}}</p>
         <ul>
             <li>If DNF/NOC are to be sent to the manufacturer/sponsor/importers, please ensure the information in your final company XML file is up to date.</li>
             <li>In addition for importers, please ensure the applicable importers are identified in section 7 below.</li>
             <li>If DNF/NOC are to be sent to the contact for this regulatory activity, the contact listed on the latest Regulatory Transaction XML file for this regulatory activity will used.</li>
         </ul>
-        <p class="fn-rtn"><a href="#dr5_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>10
+        <p class="fn-rtn"><a href="#dr5_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>9
+            <span class="wb-inv"> referrer</span></a>
+        </p>
+    </dd>
+    <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>10</dt>
+    <dd id="dr5a">
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}&nbsp;{{'ARE_CTA_IMPORTED'|translate}}</p>
+        <p>For Clinical Trial Applications (CTA) and CTA-Amendments (CTA-A):</p>
+        <ul>
+            <li>If clinicial trial drugs are to be imported into Canada, importers should be authorized by the sponsor, regardless of the sponsor's location.</li>
+            <li>A third party authorization letter should be completed by the sponsor and submitted for each importer in Canada in section 1.2.1.
+                List each applicable importer authorized to import the new drug for the purposes of the trial outlined in the application.
+                Canadian importer(s) must be located within Canada. Refer to the Guidance for Clinical Trial Sponsors:
+                <a target="_blank" href="https://www.canada.ca/en/health-canada/services/drugs-health-products/drug-products/applications-submissions/guidance-documents/clinical-trials/guidance-clinical-trial-sponsors-clinical-trial-applications.html">Clinical Trial Applications</a> for further details.</li>
+            <li>As additional importers are identified, additional third party authorization letters should be provided to Health Canada in section 1.2.1. If the importer has not changed when a CTA-A is filed, third party authorization letter does not need to be re-submitted.</li>
+        </ul>
+        <p class="fn-rtn"><a href="#dr5a_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>10
             <span class="wb-inv"> referrer</span></a>
         </p>
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>11</dt>
     <dd id="dr6">
-        <p>{{'IMPORTER'|translate}}</p>
+        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}}&nbsp;{{'IMPORTER'|translate}}</p>
         <ul>
             <li>When the manufacturer/sponsor is not located in Canada, a Canadian Importer must be identified.</li>
             <li>The Importer company ID must be obtained from the final company XML file, issued by Health Canada.</li>
             <li>Only list the Importers associated with DINs identified in the formulation section below.</li>
         </ul>
-        <p>For CTAs and CTA-As, if clincial trial drugs are to be imported into Canada, importers should be authorized by the sponsor, regardless of the sponsor's location. Third party authorization letter should be completed and submitted for each importer in Canada. List each applicable importer authorized to import the new drug for the purposes of the trial outlined in the application.  Canadian importer(s) must be located within Canada. Refer to the Guidance for Clinical Trial Sponsors" for further details. As additional importers are identified, additional third party authorization letters should be provided to Health Canada. If the importer has not changed when a Clinical Trial Application - Amendment is filed, third party authorization letter does not need to be re-submitted.</p>
         <p class="fn-rtn"><a href="#dr6_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>11
             <span class="wb-inv"> referrer</span></a>
         </p>
@@ -150,6 +154,8 @@
     <dd id="dr9">
         <p>{{::'FORMULATION'|translate}}</p>
         <ul>
+            <li>If the submission/application contains different formulations (e.g., multiple strengths), you should add a name to identify each formulation.</li>
+            <li>For clinical trials: If there are multiple investigational drug products, please include each as a stand-alone formulation.</li>
             <li>The formulation “ID” is auto generated by the template when you click on “Add Formulation”.</li>
             <li>Copy button: After saving ingredient / formulation details, you may choose to copy those details into a new ingredient / formulation record and change one or more fields as required. This will help minimize the amount of data entry for similar ingredients / formulations.</li>
             <li>When an ingredient/material is identified as Animal / Human sourced, you must provide additional details by selecting the “Human/Animal Sourced Ingredient/Material” tab next to the “Formulations” tab.</li>
@@ -162,7 +168,7 @@
     <dd id="dr91">
         <p>{{'FORMULATION_DETAILS'|translate}}&nbsp;#</p>
         <ul>
-            <li>Sponsors should add a formulation name for easier identification.
+            <li>The formulation “ID” is auto generated by the template when you click on “Add Formulation”.
             </li>
             <li>Copy button: After saving ingredient / formulation details,
                 sponsors may choose to copy those details into a new ingredient / formulation record
@@ -188,27 +194,28 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.1</dt>
     <dd id="dr9c1">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ING_NAME'|translate}}</p>
-        <p> Sponsors should always select the medicinal ingredient name from the searchable list where possible.
-            If the medicinal ingredient name is not found in the list, enter the new medicinal ingredient name in this field
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ING_NAME'|translate}}</p>
+        <p> Sponsors should always select the ingredient name from the searchable list where possible.
+            If the ingredient name is not found in the list, enter the new ingredient name in this field
             using the International Non Proprietary (INN) terminology, as it is the Health Canada’s standard to assign the preferred name to ingredients.
             If there is no existing INN terminology for the ingredient, you are required to use other recognized standards terminology in the following order:
             United States Adopted Names, Martindale, Merck Index, Hawley’s Condensed Chemical Dictionary,
-            the Handbook of Pharmaceutical Excipient, International Cosmetics Ingredient Dictionary and Handbook, information available online.
+            the Handbook of Pharmaceutical Excipient, International Cosmetics Ingredient Dictionary and Handbook, and information available online.
         </p>
+        <p>For clinical trials: For ingredient name of a drug in development where a standard terminology has not yet been established, the research code may be used.</p>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c1_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.1
             <span class="wb-inv"> referrer</span></a>
         </p>
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.2</dt>
     <dd id="dr9c2">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'VARIANT_NAME'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'VARIANT_NAME'|translate}}</p>
         <p>    For formulation variations pertaining to the same DIN (for example [e.g.] multiple flavourings, colours, fragrances), identify the variant name associated with each non-medicinal ingredient (NMI).
             Example:
         </p>
         <ul>
             <li> If a NMI is the same quantity in all variants, then it only needs to be listed once and the variant name field should indicate “All variants”. </li>
-            <li> If a NMI pertains to only one variant, then the variant name should be entered.</li>
+            <li> If a NMI pertains to only one variant, then the variant name should be entered (e.g., apple flavour).</li>
             <li> If the NMI is in various variants, at different quantities, the variant name field should be entered each time.</li>
         </ul>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c2_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.2
@@ -217,7 +224,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.3</dt>
     <dd id="dr9c3">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'PURPOSE'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'PURPOSE'|translate}}</p>
         <p>Examples: preservative, colouring agent or capsule shell, etc.</p>
         <p class="fn-rtn" style="width:4.5em;"><a href="#dr9c3_ref"><span class="wb-inv">{{::'RETURN_INSTRUCTION'|translate}}</span>14.2.3
             <span class="wb-inv"> referrer</span></a>
@@ -225,7 +232,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.4</dt>
     <dd id="dr9c4">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'STANDARD'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'STANDARD'|translate}}</p>
         <p>Where the standard of manufacture of an ingredient complies
             with a Schedule B compendial standard,
             use the applicable abbreviation for that compendium,
@@ -241,7 +248,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.5</dt>
     <dd id="dr9c5">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'IS_NANO_MATERIAL'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'IS_NANO_MATERIAL'|translate}}</p>
         <p>Select the appropriate option based on Health Canada's working definition of Nanomaterials:</p>
         <ul>
             <li style="list-style-type:lower-alpha;">Health Canada considers any manufactured product, material, substance,
@@ -273,7 +280,7 @@
     </dd>
     <dt><span class="wb-inv">{{::'INSTRUCTION'|translate}} </span>14.2.6</dt>
     <dd id="dr9c6">
-        <p>{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ANIMAL_HUMAN_SOURCED'|translate}}</p>
+        <p>&nbsp;&nbsp;{{'SECTION_IS_NOT_VISIBLE'|translate}} {{'ANIMAL_HUMAN_SOURCED'|translate}}</p>
         <p>Select yes if this ingredient/material was human or animal sourced
             at any stage in the manufacture of the drug product
             including excipient or processing aid source from human and/or animal tissue.
