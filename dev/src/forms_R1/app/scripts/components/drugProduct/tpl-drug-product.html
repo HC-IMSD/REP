@@ -246,12 +246,12 @@
             </div>
             <div class="row" data-ng-if="drugProdCtrl.isCTA()">
                 <div class="col-md-12 form-group">
-                    <strong class="required full-width">
+                    <label class="full-width">
                         <span class="field-name">7. {{::'ARE_CTA_IMPORTED' |translate}}</span>
                         <sup id="dr5a_ref">
                             <a class="fn-lnk" href="#dr5a"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>10</a>
                         </sup>
-                    </strong>
+                    </label>
                     <label class="col-xs-1" for="areDrugsImportedId">
                         <input type="radio" id="areDrugsImportedId" name="areDrugsImportedId"
                                value="Y" data-ng-model="drugProdCtrl.model.areDrugsImported"/>
