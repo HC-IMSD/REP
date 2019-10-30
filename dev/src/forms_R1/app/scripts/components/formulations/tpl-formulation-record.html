@@ -100,11 +100,12 @@
                     </header>
                     <div class="panel-body" data-ng-if="formulRecCtrl.frmModel.drugMarket == 'CANADIAN'">
                         <div  class="col-md-12 form-group">
-                            <cmp-error-message field-name="formulRecCtrl.dinId"
-                                               form-ref="formulRecCtrl.formulationForm"
-                                               show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.dinId])"
-                                               error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                             <label class="form-group required" for="{{::formulRecCtrl.dinId}}">{{::'SCHED_DIN'|translate}}<strong class="required">{{::"REQUIRED" |translate}}</strong>:
+                                <cmp-error-message field-name="formulRecCtrl.dinId"
+                                                   form-ref="formulRecCtrl.formulationForm"
+                                                   show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.dinId])"
+                                                   error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
+
                                 <input type="text" id="{{::formulRecCtrl.dinId}}" name="{{::formulRecCtrl.dinId}}" maxlength="8" data-ng-model="formulRecCtrl.frmModel.din" required/>
                             </label>
                         </div>
