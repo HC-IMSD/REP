@@ -1517,6 +1517,7 @@
                 vm.allActivities.CANCEL_LETTER,
                 vm.allActivities.CONSENT_LTR,
                 vm.allActivities.DATA_PROTECT_CORRESP,
+                vm.allActivities.CORR_PATENT_MED,
                 vm.allActivities.FORM_IV,
                 vm.allActivities.FORM_V,
                 vm.allActivities.INITIAL,
