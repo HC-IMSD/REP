@@ -91,8 +91,12 @@
             </div>
             <div data-ng-if="formulRecCtrl.dossierType == 'D26'">
                 <section class="panel panel-default">
-                    <header class="panel-heading">
+                    <header class="panel-heading" style="padding-bottom:1.5em;">
                         <h3 class="panel-title required">{{formulRecCtrl.getFirstOrder(4)}}. {{'DRUGMARKETID_'|translate}}<strong class="required">{{"REQUIRED" |translate}}</strong></h3>
+                        <cmp-error-message field-name="formulRecCtrl.drugMarketId"
+                                           form-ref="formulRecCtrl.formulationForm"
+                                           show-error="formulRecCtrl.showError(formulRecCtrl.formulationForm[formulRecCtrl.drugMarketId])"
+                                           error-types="formulRecCtrl.requiredOnly"></cmp-error-message>
                         <label class="col-xs-2" for="{{::formulRecCtrl.drugMarketId}}"><input type="radio" id="{{::formulRecCtrl.drugMarketId}}" name="{{::formulRecCtrl.drugMarketId}}" value="CANADIAN" data-ng-model="formulRecCtrl.frmModel.drugMarket" ng-required="!formulRecCtrl.frmModel.drugMarket" data-ng-click="formulRecCtrl.clickDrugMarket();"/>&nbsp;{{::'CANADIAN'|translate}}</label>
                         <label class="col-xs-2" for="{{::formulRecCtrl.drugMarketId}}_1"><input type="radio" id="{{::formulRecCtrl.drugMarketId}}_1" name="{{::formulRecCtrl.drugMarketId}}" value="FOREIGN" data-ng-model="formulRecCtrl.frmModel.drugMarket" ng-required="!formulRecCtrl.frmModel.drugMarket" data-ng-click="formulRecCtrl.clickDrugMarket();"/>&nbsp;{{::'FOREIGN'|translate}}</label>
                         <label class="col-xs-2" for="{{::formulRecCtrl.drugMarketId}}_2"><input type="radio" id="{{::formulRecCtrl.drugMarketId}}_2" name="{{::formulRecCtrl.drugMarketId}}" value="NOT_MARKETED" data-ng-model="formulRecCtrl.frmModel.drugMarket" ng-required="!formulRecCtrl.frmModel.drugMarket" data-ng-click="formulRecCtrl.clickDrugMarket();"/>&nbsp;{{::'NOT_MARKETED'|translate}}</label>
