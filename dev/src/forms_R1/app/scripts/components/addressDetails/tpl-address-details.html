@@ -25,7 +25,7 @@
                     </cmp-error-message>
                     <input type="text" id="{{::adr.cityId}}" name="{{::adr.cityId}}"
                            data-ng-model="adr.addressModel.city"
-                           class="form-control  full-width" maxlength="60"
+                           class="form-control  full-width" maxlength="60" tabindex="0"
                            data-ng-readonly="!adr.isEditable" required/>
                 </label>
             </div>
@@ -41,8 +41,8 @@
                 <input type="text" id="{{::adr.countryId}}" name="{{::adr.countryId}}"
                        data-ng-model="adr.addressModel.countryHtml"
                        value="adr.addressModel.countryHtml"
-                       data-ng-disabled="!adr.isCountryEditable()" onblur="focusOnProvince(this);"
-                       data-ng-blur="adr.countryChange()" list="countryList" required
+                       data-ng-disabled="!adr.isCountryEditable()"
+                       data-ng-change="adr.countryChange()" data-ng-model-options="{ updateOn: 'blur' }" list="countryList" required
                        class="form-control full-width"/>
                 <datalist id="countryList" >
                     <option data-ng-repeat="countryRecord in adr.countryList"
@@ -63,8 +63,8 @@
                                            show-error="adr.showError(adr.addressForm[adr.provinceListId])" error-types="adr.requiredOnly">
                         </cmp-error-message>
                         <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
-                                id="{{::adr.provinceListId}}" name="{{::adr.provinceListId}}" data-focus-if="true"
-                                data-ng-options="province |translate for province in adr.provinces"
+                                id="{{::adr.provinceListId}}" name="{{::adr.provinceListId}}"
+                                data-ng-options="province |translate for province in adr.provinces" tabindex="0" data-focus-if="true"
                                 data-ng-disabled="!adr.isEditable" data-ng-required="adr.showProvince">
                             <option label=" " value="" />
                         </select>
@@ -80,7 +80,7 @@
                         </cmp-error-message>
                         <select class="form-control full-width" data-ng-model="adr.addressModel.stateList"
                                 id="{{::adr.stateListId}}" name="{{::adr.stateListId}}"
-                                data-ng-options="province |translate for province in adr.provinces"
+                                data-ng-options="province |translate for province in adr.provinces" tabindex="0" data-focus-if="true"
                                 data-ng-disabled="!adr.isEditable" data-ng-required="adr.showState">
                             <option label=" " value="" />
                         </select>
@@ -89,8 +89,8 @@
                 <div class="form-group " data-ng-if="adr.hideProvinceDdl"
                      data-ng-class="{'has-error':adr.addressForm[adr.stateTextId].$invalid}">
                     <label for="{{::adr.stateTextId}}">{{::"PROVSTATE" |translate}}</label>
-                    <input type="text" id="{{::adr.stateTextId}}" name="{{::adr.stateTextId}}"
-                           data-ng-model="adr.addressModel.stateText" class="form-control full-width" maxlength="40"
+                    <input type="text" id="{{::adr.stateTextId}}" name="{{::adr.stateTextId}}" data-focus-if="true"
+                           data-ng-model="adr.addressModel.stateText" class="form-control full-width" maxlength="40" tabindex="0"
                            size="40" data-ng-readonly="!adr.isEditable"/>
                 </div>
             </div>
