@@ -37,8 +37,8 @@
         vm.PHARMA = "B14-20160301-09"; //pharmaceutical
         vm.POSTMARKET = "B14-20160301-10"; //postmarket covigilance
         vm.VETERINARY = "B14-20160301-11";
-        vm.CLINICAL_BIO = "B14-20160301-04";
-        vm.CLINICAL_PHA = "B14-20160301-05";
+        vm.CLINICAL_BIO = "B14-20160301-02";
+        vm.CLINICAL_PHA = "B14-20160301-09";
 
         vm.allActivities = {
             ADMINISTRATIVE: "ADMINISTRATIVE", //administrative
@@ -1517,6 +1517,7 @@
                 vm.allActivities.CANCEL_LETTER,
                 vm.allActivities.CONSENT_LTR,
                 vm.allActivities.DATA_PROTECT_CORRESP,
+                vm.allActivities.CORR_PATENT_MED,
                 vm.allActivities.FORM_IV,
                 vm.allActivities.FORM_V,
                 vm.allActivities.INITIAL,
