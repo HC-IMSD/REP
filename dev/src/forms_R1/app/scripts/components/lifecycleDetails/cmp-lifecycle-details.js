@@ -33,7 +33,7 @@
                 enableDeleteIndex: '&',
                 isEctd: '<',
                 dossierType: '<',
-                activityTypes:'<', //list of activity types
+                // activityTypes:'<', //list of activity types
                 sequenceUpdated:'<',
                 errorSummaryUpdate:'<', //update the component error summary
                 showErrorSummary:'<', //show the component error summary
@@ -52,7 +52,8 @@
         vm.postMarketList = [];
         vm.consumHealthList = [];
         vm.veterinaryList = [];
-        vm.clinicalList = [];
+        vm.clinicalBioList = [];
+        vm.clinicalPhaList = [];
         vm.sequenceList = [];
         vm.descriptionList = [];
         vm.requesterList =[];
@@ -115,35 +116,40 @@
          * @param changes
          */
         vm.$onChanges = function (changes) {
-            if(changes.activityTypes){
-                vm.activityList=changes.activityTypes.currentValue;
-                if(vm.activityList) {
-                    vm.pharmaList = ActivityFormFilterService.getPharmaRAList(vm.activityList);
-                    vm.biolList = ActivityFormFilterService.getBiolRAList(vm.activityList);
-                    vm.postMarketList = ActivityFormFilterService.getPostMarketRAList(vm.activityList);
-                    vm.consumHealthList = ActivityFormFilterService.getConsumHealthList(vm.activityList);
+            // if(changes.activityTypes){
+            //     vm.activityList=changes.activityTypes.currentValue;
+            //     if(vm.activityList) {
+            //         vm.pharmaList = ActivityFormFilterService.getPharmaRAList(vm.activityList);
+            //         vm.biolList = ActivityFormFilterService.getBiolRAList(vm.activityList);
+            //         vm.postMarketList = ActivityFormFilterService.getPostMarketRAList(vm.activityList);
+            //         vm.consumHealthList = ActivityFormFilterService.getConsumHealthList(vm.activityList);
+            //     }
+            // }
+
+            if (changes.dossierType) {
+                vm.dossierType = changes.dossierType.currentValue;
+                if( vm.dossierType === TransactionLists.getPharmaceuticalValue()) {
+                    vm.leadList = TransactionLists.getActivityLeadListByD22();
+                } else if (vm.dossierType === TransactionLists.getBiologicValue()) {
+                    vm.leadList = TransactionLists.getActivityLeadListByD21();
+                } else if(vm.dossierType === TransactionLists.getVeterinaryValue()){
+                    vm.leadList = TransactionLists.getActivityLeadListByD24();
+                } else if(vm.dossierType === TransactionLists.getClinicalValue()){
+                    vm.leadList = TransactionLists.getActivityLeadListByD26();
+                }else {
+                    vm.leadList = [];
                 }
+                // reset lead, ra type, and description
+                vm.lifecycleModel.activityLead = "";
+                vm.lifecycleModel.activityType = "";
+                vm.lifecycleModel.descriptionValue = "";
+                setDetailsAsNone();
             }
             if (changes.lifecycleRecord) {
                 _updateLocalModel(changes.lifecycleRecord.currentValue);
             }
             if (changes.isEctd) {
                 vm.ectd = changes.isEctd.currentValue;
-            }
-
-            if (changes.dossierType) {
-                vm.dossierType = changes.dossierType.currentValue;
-                if( vm.dossierType == TransactionLists.getPharmaceuticalValue()) {
-                    vm.leadList = TransactionLists.getActivityLeadListByD22();
-                } else if (vm.dossierType == TransactionLists.getBiologicValue()) {
-                    vm.leadList = TransactionLists.getActivityLeadListByD21();
-                } else if(vm.dossierType == TransactionLists.getVeterinaryValue()){
-                    vm.leadList = TransactionLists.getActivityLeadListByD24();
-                } else if(vm.dossierType == TransactionLists.getClinicalValue()){
-                    vm.leadList = TransactionLists.getActivityLeadListByD26();
-                }else {
-                    vm.leadList = [];
-                }
             }
             if(changes.sequenceUpdated){
                 if(!changes.lifecycleRecord && vm.lifecycleRecord) {
@@ -299,13 +305,27 @@
                     if(vm.biolList.length == 0){
                         vm.biolList = ActivityFormFilterService.getBiolRAList(vm.activityList);
                     }
-                    vm.activityTypeList= vm.biolList;
+                    if(vm.clinicalBioList.length == 0){
+                        vm.clinicalBioList = ActivityFormFilterService.getClinicalBioList(vm.activityList);
+                    }
+                    if (vm.dossierType === TransactionLists.getBiologicValue()) {
+                        vm.activityTypeList = vm.biolList;
+                    } else {
+                        vm.activityTypeList = vm.clinicalBioList;
+                    }
                     break;
                 case  TransactionLists.getPharmaLeadValue():
                     if(vm.pharmaList.length == 0){
                         vm.pharmaList = ActivityFormFilterService.getPharmaRAList(vm.activityList)
                     }
-                    vm.activityTypeList= vm.pharmaList;
+                    if(vm.clinicalPhaList.length == 0){
+                        vm.clinicalPhaList = ActivityFormFilterService.getClinicalPhaList(vm.activityList);
+                    }
+                    if (vm.dossierType === TransactionLists.getPharmaceuticalValue()) {
+                        vm.activityTypeList = vm.pharmaList;
+                    } else {
+                        vm.activityTypeList = vm.clinicalPhaList;
+                    }
                     break;
                 case  TransactionLists.getPostMarketLeadValue():
                     if(vm.postMarketList.length == 0){
@@ -325,18 +345,18 @@
                     }
                     vm.activityTypeList= vm.veterinaryList;
                     break;
-                case  TransactionLists.getClinicalBioLeadValue():
-                    if(vm.clinicalList.length == 0){
-                        vm.clinicalList = ActivityFormFilterService.getClinicalBioList(vm.activityList);
-                    }
-                    vm.activityTypeList= vm.clinicalList;
-                    break;
-                case  TransactionLists.getClinicalPhaLeadValue():
-                    if(vm.clinicalList.length == 0){
-                        vm.clinicalList = ActivityFormFilterService.getClinicalPhaList(vm.activityList);
-                    }
-                    vm.activityTypeList= vm.clinicalList;
-                    break;
+                // case  TransactionLists.getClinicalBioLeadValue():
+                //     if(vm.clinicalList.length == 0){
+                //         vm.clinicalList = ActivityFormFilterService.getClinicalBioList(vm.activityList);
+                //     }
+                //     vm.activityTypeList= vm.clinicalList;
+                //     break;
+                // case  TransactionLists.getClinicalPhaLeadValue():
+                //     if(vm.clinicalPhaList.length == 0){
+                //         vm.clinicalPhaList = ActivityFormFilterService.getClinicalPhaList(vm.activityList);
+                //     }
+                //     vm.activityTypeList= vm.clinicalList;
+                //     break;
                 default:
                     if(vm.lifecycleModel.activityLead) console.warn("Not a valid lead choice");
                     vm.activityTypeList=[];
