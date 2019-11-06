@@ -13,7 +13,7 @@
             data-aria-expanded="expandTblCtrl.getExpandedState($index)"
             data-ng-repeat-start="record in expandTblCtrl.listItems"
             title="{{::'TOGGLE_EXPAND' |translate}} {{$index+1}}" data-ng-mousedown="expandTblCtrl.selectTableRow($index); $('#{{::expandTblCtrl.preId}}{{::$index}}').find('> input').focus();"
-            data-ng-keypress="expandTblCtrl.selectTableRow($index);$('#{{::expandTblCtrl.preId}}{{::$index}}').find('> input').focus();">
+            data-ng-keypress="expandTblCtrl.selectTableRow($index);">
             <td data-aria-selected="{{!expandTblCtrl.dayDataCollapse[$index]}}" tabindex="0">
                             <span data-ng-class="{'fa fa-caret-down fa-lg fa-fw':expandTblCtrl.getExpandedState($index) ,'fa fa-caret-right fa-lg fa-fw':!expandTblCtrl.getExpandedState($index)} "
                                   data-ng-class="{open:expandTblCtrl.getExpandedState($index)}">
