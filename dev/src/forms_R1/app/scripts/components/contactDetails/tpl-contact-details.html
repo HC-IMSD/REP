@@ -12,7 +12,7 @@
                     <input type="text" id="{{::contCtrl.firstNameId}}"
                            data-ng-model="contCtrl.contactModel.givenName" data-focus-if="contCtrl.contactModel.focusOnFirstName"
                            class="form-control full-width" name="{{::contCtrl.firstNameId}}" maxlength="60"
-                           size="60" data-ng-readonly="!contCtrl.isEditable" required/>
+                           data-ng-readonly="!contCtrl.isEditable" required/>
 
                 </label>
             </div>
@@ -20,7 +20,7 @@
                 <label for="initials_{{::$id}}">
                     <span class="field-name">{{::'INITIALS'|translate}}</span>
                     <input type="text" id="initials_{{::$id}}" data-ng-model="contCtrl.contactModel.initials"
-                           class="form-control full-width" name="initials" maxlength="10" size="10"
+                           class="form-control full-width" name="initials" maxlength="10"
                            data-ng-readonly="!contCtrl.isEditable"/>
                 </label>
             </div>
@@ -36,7 +36,7 @@
                            data-ng-model="contCtrl.contactModel.surname"
                            data-ng-readonly="!contCtrl.isEditable"
                            class="form-control full-width" name="{{::contCtrl.lastNameId}}" required
-                           maxlength="60" size="60"/>
+                           maxlength="60"/>
                 </label>
             </div>
         </div>
@@ -68,7 +68,7 @@
                                        error-types="contCtrl.requiredOnly"></cmp-error-message>
                     <input type="text" id="{{::contCtrl.jobTitleId}}"
                            data-ng-model="contCtrl.contactModel.title" class="form-control"
-                           name="{{::contCtrl.jobTitleId}}" maxlength="100" size="100" data-ng-readonly="!contCtrl.isEditable"
+                           name="{{::contCtrl.jobTitleId}}" maxlength="100" data-ng-readonly="!contCtrl.isEditable"
                            required/>
 
                 </label>
@@ -129,7 +129,7 @@
                     </cmp-error-message>
                     <input type="email" id="{{::contCtrl.contactEmailId}}"
                            data-ng-model="contCtrl.contactModel.email"
-                           data-ng-readonly="!contCtrl.isEditable" maxlength="50" size="60"
+                           data-ng-readonly="!contCtrl.isEditable" maxlength="50"
                            class="form-control full-width" name="{{::contCtrl.contactEmailId}}" required/>
 
                 </label>
