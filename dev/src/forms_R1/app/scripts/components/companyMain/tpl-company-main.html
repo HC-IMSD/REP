@@ -134,6 +134,25 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                 <div class="col-md-12">
+                     <div>
+                         <cmp-alert  ui-state="main.alerts[0]"
+                                     msg="FORM_REC_INSTRUCT"
+                                     update-state="main.closeAlert(0)"
+                                     type="alert-info">
+                         <section aria-live="assertive">
+                             <div data-ng-if="!formulRecCtrl.isFrench()"
+                                  ng-include="'app/scripts/templates/company/tpl-company-saved-warning-en.html'">
+                             </div>
+                             <div data-ng-if="formulRecCtrl.isFrench()"
+                                  ng-include="'app/scripts/templates/company/tpl-company-saved-warning-fr.html'">
+                             </div>
+                         </section>
+                         </cmp-alert>
+                     </div>
+                 </div>
+             </div>
             <div class="clearfix"></div>
             <div class="row btn-group-sm">
                 <div class="form-group  col-md-12">
