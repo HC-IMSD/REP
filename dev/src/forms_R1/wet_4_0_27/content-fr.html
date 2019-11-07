@@ -62,20 +62,16 @@
         function initialDateInput(){
             if($( "input[type=date]" ).length == 0 && maxDateTimes > 0) {
                 setTimeout(setupDateFields, 300);
-//                console.log("times=" + maxDateTimes );
                 maxDateTimes --;
             } else {
                 try {
-//                    console.log("dates= " + $( "input[type=date]" ).length);
-                    $( "input[type=date]" ).trigger( "wb-init.wb-date" );
                     window.location.href = "#main";
+                    $( "input[type=date]" ).trigger( "wb-init.wb-date" );
                 } catch( err ) {
-                    console.log(err.message);
-                    console.log(err.stack);
                     if(maxDateTimes < 1){
                         maxDateTimes = 8;
                     }
-                    setTimeout(setupDateFields, 300);
+                    setTimeout(setupDateFields, 500);
                 }
             }
         }

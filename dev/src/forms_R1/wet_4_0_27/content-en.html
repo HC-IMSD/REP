@@ -55,22 +55,28 @@
             setTimeout(setupDataList, 1000);
             setTimeout(initialTopExpandCollapse, 1000);
         }
-        var maxDateTimes = 5;
+        var maxDateTimes = 8;
         function setupDateFields(){
             initialDateInput();
         }
         function initialDateInput(){
             if($( "input[type=date]" ).length == 0 && maxDateTimes > 0) {
-                setTimeout(setupDateFields, 200);
-                // console.log("continue...");
+                setTimeout(setupDateFields, 300);
                 maxDateTimes --;
             } else {
-                $( "input[type=date]" ).trigger( "wb-init.wb-date" );
-                window.location.href = "#main";
-                // console.log("initialed");
+                try {
+                    window.location.href = "#main";
+                    $( "input[type=date]" ).trigger( "wb-init.wb-date" );
+                } catch( err ) {
+                    console.log(err.message);
+                    if(maxDateTimes < 1){
+                        maxDateTimes = 8;
+                    }
+                    setTimeout(setupDateFields, 500);
+                }
             }
         }
-        var maxDataListTimes = 5;
+        var maxDataListTimes = 8;
         function setupDataList(){
             initialDataList();
         }
