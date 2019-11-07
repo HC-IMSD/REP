@@ -190,6 +190,11 @@
             return false;
         };
 
+        vm.setTouch = function (ctrl) {
+            if (!ctrl) return;
+            ctrl.$setTouched();
+        };
+
         vm.updateActivityType = function () {
           //  vm.showNewActivityFields = isNewActivity();
             //if(!vm.showNewActivityFields){

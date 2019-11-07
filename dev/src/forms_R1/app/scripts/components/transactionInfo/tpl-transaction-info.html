@@ -149,7 +149,13 @@
                                         <!--<option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isThirdParty" />-->
                                     <!--</select>-->
                                 </label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}" name="{{::transInfoCtrl.thirdPartyId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required data-ng-change="transInfoCtrl.setThirdParty()"/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}">
+                                    <input type="radio" id="{{::transInfoCtrl.thirdPartyId}}"
+                                           name="{{::transInfoCtrl.thirdPartyId}}" value="Y"
+                                           data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required
+                                           data-ng-change="transInfoCtrl.setThirdParty()"
+                                           data-ng-blur="transInfoCtrl.setTouch(transInfoCtrl.transInfoForm[transInfoCtrl.thirdPartyId])"/>
+                                    &nbsp;{{::'Y'|translate}}</label>
                                 <label class="col-xs-1" for="{{::transInfoCtrl.thirdPartyId}}_1"><input type="radio" id="{{::transInfoCtrl.thirdPartyId}}_1" name="{{::transInfoCtrl.thirdPartyId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isThirdParty" required data-ng-change="transInfoCtrl.setThirdParty()"/>&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
@@ -174,7 +180,12 @@
                                     <!--</select>-->
 
                                 </label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.isPriorityId}}"><input type="radio" id="{{::transInfoCtrl.isPriorityId}}" name="{{::transInfoCtrl.isPriorityId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isPriority" required/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isPriorityId}}">
+                                    <input type="radio" id="{{::transInfoCtrl.isPriorityId}}"
+                                           name="{{::transInfoCtrl.isPriorityId}}" value="Y"
+                                           data-ng-model="transInfoCtrl.transactionModel.isPriority" required
+                                           data-ng-blur="transInfoCtrl.setTouch(transInfoCtrl.transInfoForm[transInfoCtrl.isPriorityId])"/>
+                                    &nbsp;{{::'Y'|translate}}</label>
                                 <label class="col-xs-1" for="{{::transInfoCtrl.isPriorityId}}_1"><input type="radio" id="{{::transInfoCtrl.isPriorityId}}_1" name="{{::transInfoCtrl.isPriorityId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isPriority" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
@@ -194,7 +205,12 @@
                                         <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isNoc">-->
                                     <!--</select>-->
                                 </label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.isNocId}}"><input type="radio" id="{{::transInfoCtrl.isNocId}}" name="{{::transInfoCtrl.isNocId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isNoc" required />&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isNocId}}">
+                                    <input type="radio" id="{{::transInfoCtrl.isNocId}}"
+                                           name="{{::transInfoCtrl.isNocId}}" value="Y"
+                                           data-ng-model="transInfoCtrl.transactionModel.isNoc" required
+                                           data-ng-blur="transInfoCtrl.setTouch(transInfoCtrl.transInfoForm[transInfoCtrl.isNocId])"/>
+                                    &nbsp;{{::'Y'|translate}}</label>
                                 <label class="col-xs-1" for="{{::transInfoCtrl.isNocId}}_1"><input type="radio" id="{{::transInfoCtrl.isNocId}}_1" name="{{::transInfoCtrl.isNocId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isNoc" required />&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
@@ -218,7 +234,13 @@
                                         <!--<option label=" " value="" data-ng-empty="transInfoCtrl.transactionModel.isAdminSub">-->
                                     <!--</select>-->
                                 </label>
-                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}" name="{{::transInfoCtrl.isAdminSubId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required data-ng-change="transInfoCtrl.setAdminSubmission()"/>&nbsp;{{::'Y'|translate}}</label>
+                                <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}">
+                                    <input type="radio" id="{{::transInfoCtrl.isAdminSubId}}"
+                                           name="{{::transInfoCtrl.isAdminSubId}}" value="Y"
+                                           data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required
+                                           data-ng-change="transInfoCtrl.setAdminSubmission()"
+                                           data-ng-blur="transInfoCtrl.setTouch(transInfoCtrl.transInfoForm[transInfoCtrl.isAdminSubId])"/>
+                                    &nbsp;{{::'Y'|translate}}</label>
                                 <label class="col-xs-1" for="{{::transInfoCtrl.isAdminSubId}}_1"><input type="radio" id="{{::transInfoCtrl.isAdminSubId}}_1" name="{{::transInfoCtrl.isAdminSubId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isAdminSub" required data-ng-change="transInfoCtrl.setAdminSubmission()"/>&nbsp;{{::'N'|translate}}</label>
                             </div>
                         </div>
@@ -385,7 +407,14 @@
                                 <!--<option value="" label=" " data-ng-empty="transInfoCtrl.transactionModel.isFees" />-->
                             <!--</select>-->
                         </label>
-                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}"><input type="radio" id="{{::transInfoCtrl.isFeesId}}" name="{{::transInfoCtrl.isFeesId}}" value="Y" data-ng-model="transInfoCtrl.transactionModel.isFees" required data-ng-change="transInfoCtrl.updateFeeState()"/>&nbsp;{{::'Y'|translate}}</label>
+                        <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}">
+                            <input type="radio" id="{{::transInfoCtrl.isFeesId}}"
+                                   name="{{::transInfoCtrl.isFeesId}}" value="Y"
+                                   data-ng-model="transInfoCtrl.transactionModel.isFees"
+                                   required data-ng-change="transInfoCtrl.updateFeeState()"
+                                   data-ng-blur="transInfoCtrl.setTouch(transInfoCtrl.transInfoForm[transInfoCtrl.isFeesId])"
+                            />
+                            &nbsp;{{::'Y'|translate}}</label>
                         <label class="col-xs-1" for="{{::transInfoCtrl.isFeesId}}_1"><input type="radio" id="{{::transInfoCtrl.isFeesId}}_1" name="{{::transInfoCtrl.isFeesId}}" value="N" data-ng-model="transInfoCtrl.transactionModel.isFees" required data-ng-change="transInfoCtrl.updateFeeState()"/>&nbsp;{{::'N'|translate}}</label>
                     </div>
                 </div>
