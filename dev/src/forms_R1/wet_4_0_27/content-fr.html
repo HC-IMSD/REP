@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="-1"/>
-    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name='description' content="Formularies du processus d'inscription réglementaire"/>
     <meta name="keywords" content="Santé, Processus d'inscription réglementaire, PIR"/>
     <meta name="author" content="Santé Canada"/>
@@ -55,22 +55,31 @@
             setTimeout(setupDataList, 1000);
             setTimeout(initialTopExpandCollapse, 1000);
         }
-        var maxDateTimes = 5;
+        var maxDateTimes = 6;
         function setupDateFields(){
             initialDateInput();
         }
         function initialDateInput(){
             if($( "input[type=date]" ).length == 0 && maxDateTimes > 0) {
-                setTimeout(setupDateFields, 200);
-                // console.log("continue...");
+                setTimeout(setupDateFields, 300);
+//                console.log("times=" + maxDateTimes );
                 maxDateTimes --;
             } else {
-                $( "input[type=date]" ).trigger( "wb-init.wb-date" );
-                window.location.href = "#main";
-                // console.log("initialed");
+                try {
+//                    console.log("dates= " + $( "input[type=date]" ).length);
+                    $( "input[type=date]" ).trigger( "wb-init.wb-date" );
+                    window.location.href = "#main";
+                } catch( err ) {
+                    console.log(err.message);
+                    console.log(err.stack);
+                    if(maxDateTimes < 1){
+                        maxDateTimes = 8;
+                    }
+                    setTimeout(setupDateFields, 300);
+                }
             }
         }
-        var maxDataListTimes = 5;
+        var maxDataListTimes = 6;
         function setupDataList(){
             initialDataList();
         }
@@ -139,7 +148,7 @@
             }
         }
         function focusOnProvince(e){
-            var node = $(e).parent().parent().parent().next();
+                var node = $(e).parent().parent().parent().next();
             window.setTimeout(function() {
                 var id = $(node).find('[id^="province_"],[id^="state_"],[id^="proveState_"]').attr('id');
                 $('#' + id).focus();
