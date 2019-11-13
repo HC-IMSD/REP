@@ -46,10 +46,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-xs-12 ">
-                <div data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.deferId].$invalid}">
-                    <label for="{{::transFeeCtrl.deferId}}" class="required full-width">
-                        <span class="field-name">{{::"DEFER_FEES"|translate}}</span>
+                <fieldset class="col-md-12 chkbxrdio-grp" data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.deferId].$invalid}">
+                    <legend>
+                        {{::"DEFER_FEES"|translate}}
                         <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                         <sup id="tr15_ref">
                             <a class="fn-lnk" href="#tr15"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>16</a>
@@ -57,22 +56,15 @@
                         <cmp-error-message field-name="transFeeCtrl.deferId" form-ref="transFeeCtrl.transFeeForm"
                                            show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.deferId])"
                                            error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
-                        <!--<select class="form-control" data-ng-model="transFeeCtrl.model.deferralRequest"-->
-                            <!--name="{{::transFeeCtrl.deferId}}" id="{{::transFeeCtrl.deferId}}" required-->
-                                <!--data-ng-options="choice |translate for choice in transFeeCtrl.yesNoList">-->
-                            <!--<option value="" label=" " data-ng-empty="transFeeCtrl.model.deferralRequest"/>-->
-                        <!--</select>-->
-                    </label>
-                    <label class="col-xs-1" for="{{::transFeeCtrl.deferId}}"><input type="radio" id="{{::transFeeCtrl.deferId}}" name="{{::transFeeCtrl.deferId}}" value="Y" data-ng-model="transFeeCtrl.model.deferralRequest" required/>&nbsp;{{::'Y'|translate}}</label>
-                    <label class="col-xs-1" for="{{::transFeeCtrl.deferId}}_1"><input type="radio" id="{{::transFeeCtrl.deferId}}_1" name="{{::transFeeCtrl.deferId}}" value="N" data-ng-model="transFeeCtrl.model.deferralRequest" required/>&nbsp;{{::'N'|translate}}</label>
-                </div>
-                </div>
+                    </legend>
+                    <label class="col-xs-2" for="{{::transFeeCtrl.deferId}}"><input type="radio" id="{{::transFeeCtrl.deferId}}" name="{{::transFeeCtrl.deferId}}" value="Y" data-ng-model="transFeeCtrl.model.deferralRequest" data-ng-blur="transFeeCtrl.transFeeForm[transFeeCtrl.deferId].$setTouched()" required/>&nbsp;{{::'Y'|translate}}</label>
+                    <label class="col-xs-2" for="{{::transFeeCtrl.deferId}}_1"><input type="radio" id="{{::transFeeCtrl.deferId}}_1" name="{{::transFeeCtrl.deferId}}" value="N" data-ng-model="transFeeCtrl.model.deferralRequest" required/>&nbsp;{{::'N'|translate}}</label>
+                </fieldset>
             </div>
             <div class="row">
-                <div class="form-group col-xs-12 ">
-                    <div data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
-                        <label for="{{::transFeeCtrl.remitId}}" class="required full-width">
-                            <span class="field-name">{{::'FEE_REMISSION'|translate}}</span>
+                <fieldset class="col-md-12 chkbxrdio-grp" data-ng-class="{'has-error':transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$invalid}">
+                        <legend class="required">
+                            {{::'FEE_REMISSION'|translate}}
                             <strong class="required"> {{::"REQUIRED" |translate}}</strong>
                             <sup id="tr16_ref">
                                 <a class="fn-lnk" href="#tr16"><span class="wb-inv">{{::'INSTRUCTION'|translate}}&nbsp;</span>17</a>
@@ -80,16 +72,10 @@
                             <cmp-error-message field-name="transFeeCtrl.remitId" form-ref="transFeeCtrl.transFeeForm"
                                                show-error="transFeeCtrl.showError(transFeeCtrl.transFeeForm[transFeeCtrl.remitId])"
                                                error-types="transFeeCtrl.requiredOnlyError"></cmp-error-message>
-                            <!--<select class="form-control" data-ng-model="transFeeCtrl.model.feeRemission"-->
-                                    <!--name="{{::transFeeCtrl.remitId}}" id="{{::transFeeCtrl.remitId}}" required-->
-                                    <!--data-ng-options="choice |translate for choice in transFeeCtrl.yesNoList">-->
-                                <!--<option label=" " value="" data-ng-empty="transFeeCtrl.model.feeRemission"/>-->
-                            <!--</select>-->
-                        </label>
-                        <label class="col-xs-1" for="{{::transFeeCtrl.remitId}}"><input type="radio" id="{{::transFeeCtrl.remitId}}" name="{{::transFeeCtrl.remitId}}" value="Y" data-ng-model="transFeeCtrl.model.feeRemission" required/>&nbsp;{{::'Y'|translate}}</label>
-                        <label class="col-xs-1" for="{{::transFeeCtrl.remitId}}_1"><input type="radio" id="{{::transFeeCtrl.remitId}}_1" name="{{::transFeeCtrl.remitId}}" value="N" data-ng-model="transFeeCtrl.model.feeRemission" required/>&nbsp;{{::'N'|translate}}</label>
-                    </div>
-                </div>
+                        </legend>
+                        <label class="col-xs-2" for="{{::transFeeCtrl.remitId}}"><input type="radio" id="{{::transFeeCtrl.remitId}}" name="{{::transFeeCtrl.remitId}}" value="Y" data-ng-model="transFeeCtrl.model.feeRemission" data-ng-blur="transFeeCtrl.transFeeForm[transFeeCtrl.remitId].$setTouched();" required/>&nbsp;{{::'Y'|translate}}</label>
+                        <label class="col-xs-2" for="{{::transFeeCtrl.remitId}}_1"><input type="radio" id="{{::transFeeCtrl.remitId}}_1" name="{{::transFeeCtrl.remitId}}" value="N" data-ng-model="transFeeCtrl.model.feeRemission" required/>&nbsp;{{::'N'|translate}}</label>
+                    </fieldset>
             </div>
             <div data-ng-if="transFeeCtrl.isFeeRemit()">
                 <div class="row">
