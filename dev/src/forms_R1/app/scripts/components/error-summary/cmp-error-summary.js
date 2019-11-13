@@ -231,11 +231,25 @@
             _hideRequiredRecordErrors(vm.uniqueErrorList);
            // console.log( 'vm.uniqueErrorList');
            // console.log( vm.uniqueErrorList);
-            var newErrors = _sortErrorsByDomOrder();
-          //  console.log('newErrors');
-          // console.log(newErrors);
-            if (!angular.equals(vm.errorArray, newErrors)) {
-                vm.errorArray = newErrors;
+            if(vm.formPreamble == 'COMPANY_FORM'){
+                vm.errorArray = Object.keys(vm.uniqueErrorList).map(function (k) {
+                    return vm.uniqueErrorList[k]
+                });
+                var temp = vm.errorArray[0];
+                for(var i = 0; i< vm.errorArray.length - 1; i++){
+                    vm.errorArray[i] = vm.errorArray[i+1];
+                    if(vm.errorArray[i].type == "required"){
+                        vm.errorArray[i].type = "TYPE_REQUIRED";
+                    }
+                }
+                vm.errorArray[vm.errorArray.length - 1] = temp;
+            }else{
+                var newErrors = _sortErrorsByDomOrder();
+                //  console.log('newErrors');
+                // console.log(newErrors);
+                if (!angular.equals(vm.errorArray, newErrors)) {
+                    vm.errorArray = newErrors;
+                }
             }
         };
 
