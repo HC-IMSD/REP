@@ -133,7 +133,21 @@
             vm.updateErrorSummary();
             return false
         };
-
+        vm.roleBlur = function () {
+            var obj = vm.roleModel;
+            for (var key in obj) {
+                var attrName = key;
+                var attrValue = obj[key];
+                if (attrValue === true) {
+                    vm.isSelected = true;
+                    vm.updateErrorSummary();
+                    return true;
+                }
+            }
+            vm.isSelected = "";
+            vm.roleForm[vm.roleMissingId].$setTouched();
+            return false
+        }
         vm.checkForDuplicates = function (ctrl, toCheck) {
             if (ctrl) {
                 var isDup = isDuplicateSelected(toCheck);
@@ -167,10 +181,10 @@
          */
         vm.showErrorMissing = function () {
 
-            if ((vm.roleForm.$touched && !vm.isSelected) || (vm.showErrors() && !vm.isSelected)) {
-                return true
+            if ((((vm.isContact && vm.roleForm[vm.chkManuContactId].$touched) || (!vm.isContact && vm.roleForm[vm.chkManuId].$touched)) && !vm.isSelected) || (vm.showErrors() && !vm.isSelected)) {
+                return true;
             }
-            return false
+            return false;
         };
 
         /**

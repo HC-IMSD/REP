@@ -42,11 +42,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkManuId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="manufacturer-role-error" class="error" data-ng-if="ar.roleForm.manufacturer.$invalid">-->
-                        <!--<span class="label label-danger" data-ng-messages="ar.roleForm.manufacturer.$error">-->
-                            <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                        <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
@@ -61,11 +56,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkMailId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="mailing-role-error" class="error" data-ng-if="ar.roleForm.mailing.$invalid">-->
-                        <!--<span class="label label-danger" data-ng-messages="ar.roleForm.mailing.$error">-->
-                            <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                        <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
@@ -83,11 +73,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkManuContactId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="con-manufacturer-role-error" class="error" data-ng-if="ar.showCMError">-->
-                        <!--<span class="label label-danger">-->
-                            <!--<span>{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                        <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
@@ -102,11 +87,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkMailContactId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="mailing-cnt-role-error" class="error" data-ng-if="ar.roleForm.contactMailing.$invalid">-->
-                        <!--<span class="label label-danger" data-ng-messages="ar.roleForm.contactMailing.$error">-->
-                            <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                        <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
@@ -123,11 +103,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkBillId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="billing-role-error" class="error" data-ng-if="ar.roleForm.billing.$invalid">-->
-                         <!--<span class="label label-danger" data-ng-messages="ar.roleForm.billing.$error">-->
-                                    <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                                <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
@@ -142,11 +117,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkBillContactId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="billing-cnt-role-error" class="error" data-ng-if="ar.roleForm.contactBilling.$invalid">-->
-                         <!--<span class="label label-danger" data-ng-messages="ar.roleForm.contactBilling.$error">-->
-                                    <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                                <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
@@ -178,33 +148,11 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkRePrimId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="repPrimmary-role-error" class="error" data-ng-if="ar.roleForm.repPrimary.$invalid">-->
-                         <!--<span class="label label-danger" data-ng-messages="ar.roleForm.repPrimary.$error">-->
-                                    <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                                <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
         </div>
         <div class="row">
-            <!--   <div class="col-sm-4" data-ng-show="ar.isContact">
-                   <div class="checkbox">
-                       <label for="{{::ar.chkImpId}}">
-                           <input type="checkbox" name="importer" data-ng-model="ar.roleModel.importer"
-                                  data-ng-disabled="!ar.isEditable"
-                                  data-ng-change="ar.updateImporterState(ar.roleForm.importer,'importer')" id="{{::ar.chkImpId}}"/>
-                          <span data-ng-if="!ar.isContact">{{::"IMPORTER_ADDRESS"|translate}}</span>
-                           <span data-ng-if="ar.isContact">{{::"CONTACT_IMPORTER"|translate}}</span>
-                           <span>{{::"IMPORTER_ADDRESS"|translate}}</span>
-                           <strong id="importer-rolec-error" class="error" data-ng-if="ar.roleForm.importer.$invalid">
-                            <span class="label label-danger" data-ng-messages="ar.roleForm.importer.$error">
-                                       <span data-ng-message="duplicateRole">{{::"IMPORTER_SEL"|translate}}</span>
-                                   </span>
-                           </strong>
-                       </label>
-                   </div>
-               </div>  -->
             <div class="col-sm-7">
                 <div data-ng-show="ar.isContact" class="checkbox">
                     <label for="{{::ar.chkRepSecId}}">
@@ -216,11 +164,6 @@
                                            form-ref="ar.roleForm"
                                            show-error="ar.showError(ar.roleForm[ar.chkRepSecId])"
                                            error-types="ar.duplicateRole"></cmp-error-message>
-                        <!--<strong id="repSecondary-role-error" class="error" data-ng-if="ar.roleForm.repSecondary.$invalid">-->
-                         <!--<span class="label label-danger" data-ng-messages="ar.roleForm.repSecondary.$error">-->
-                                    <!--<span data-ng-message="duplicateRole">{{::"TYPE_DUPLICATEROLE"|translate}}</span>-->
-                                <!--</span>-->
-                        <!--</strong>-->
                     </label>
                 </div>
             </div>
