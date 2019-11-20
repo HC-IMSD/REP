@@ -1,6 +1,6 @@
 <ng-form name="contactListCtrl.contactListForm">
     <div id="contactList_{{::$id}}">
-        <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" data-ng-show="false"
+        <input type="checkbox" id="contactRolesValid_{{::$id}}" name="contactRolesValid_{{::$id}}" hidden
                data-ng-model="contactListCtrl.allRolesSelected" required/>
         <cmp-expanding-table pre-id="contact_expnd_" list-items="contactListCtrl.contactList" transclude-name="companyContact"
                              reset-to-collapsed="contactListCtrl.resetCollapsed" is-required-record="contactListCtrl.requiredFlag"
